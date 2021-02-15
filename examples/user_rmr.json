@@ -1,0 +1,22 @@
+{
+    "transformers": [
+            {
+                "name": "Transformer 1",
+                "type": "DRY_TYPE",
+                "phase": "SINGLE_PHASE",
+                "efficiency": 0.9,
+                "capacity": 500.0,
+                "peak_load": 500.0,
+                "capacity_ratio": 0.5
+            },
+            {
+                "name": "Transformer 2",
+                "type": "DRY_TYPE",
+                "phase": "SINGLE_PHASE",
+                "efficiency": 0.9,
+                "capacity": 500.0,
+                "peak_load": 500.0,
+                "capacity_ratio": 0.5
+            }
+    ]
+}
