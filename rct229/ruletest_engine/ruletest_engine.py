@@ -1,9 +1,8 @@
 import json
 import os
 from rct229.rules.section15 import *
-
-# TODO: Temporarily used to randomize pass/fail.
-import random
+from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
+from rct229.rule_engine.engine import evaluate_rule
 
 
 # Generates the RMR triplet dictionaries from a test_dictionary's "rmr_transformation" element.
@@ -13,10 +12,11 @@ def generate_test_rmrs(test_dict):
 
     Parameters
     ----------
-    test_dict : dictionary
+    test_dict : dict
 
-    Dictionary containing both the required RMR template and RMR transformation elements used to create the
-    RMR dictionary triplets. Includes elements 'rmr_transformations' and 'rmr_transformations/user,baseline,proposed'
+        Dictionary containing both the required RMR template and RMR transformation elements used to create the
+        RMR dictionary triplets. Includes elements 'rmr_transformations' and
+        'rmr_transformations/user,baseline,proposed'
 
     Returns
     -------
@@ -25,7 +25,7 @@ def generate_test_rmrs(test_dict):
         - baseline_rmr (dictionary): Baseline RMR dictionary built from RMR Transformation definition
         - proposed_rmr (dictionary): Proposed RMR dictionary built from RMR Transformation definition
 
-    Returns the three RMR triplets. Order is user, baseline, proposed
+        Returns the three RMR triplets. Order is user, baseline, proposed
     """
 
     # Read in transformations dictionary. This dictates how RMRs are built.
@@ -49,6 +49,87 @@ def generate_test_rmrs(test_dict):
         return user_rmr, baseline_rmr, proposed_rmr
 
 
+def evaluate_outcome(outcome):
+    """Returns a boolean for whether a rule passed/failed based on the outcome string enumeration
+
+        Parameters
+        ----------
+        outcome : str
+
+            String equal to a set of predetermined enumerations for rule outcomes. These enumerations describe things such
+            as whether a test passed, failed, required manual check, etc.
+
+        Returns
+        -------
+        test_result : bool
+
+            Boolean describing whether the rule should be treated as passing or failing. Pass = True, Fail = False
+    """
+
+    # Check result of rule evaluation against known string constants (TODO: write out these constants to new file)
+    if outcome == 'PASSED':
+        test_result = True
+    elif outcome == 'FAILED':
+        test_result = False
+    elif outcome == 'MANUAL_CHECK_REQUIRED':
+        test_result = False
+    elif outcome == 'MISSING_CONTEXT':
+        test_result = False
+    elif outcome == 'NA':
+        test_result = False
+    else:
+        test_result = 'TODO: Raise error'
+
+    return test_result
+
+
+def generate_test_result_string(test_result, test_dict, test_id):
+    """Returns a string describing whether or not a test resulted in its expected outcome
+
+        Parameters
+        ----------
+        test_result : bool
+
+            Boolean for whether or not a test passed. Passed = True, Failed = False
+
+        test_dict : dict
+
+            Python dictionary containing the a test's expected outcome and description
+
+        test_id: str
+
+            String describing the test's section, rule, and test case ID (e.g. rule-15-1a)
+
+        Returns
+        -------
+
+        outcome_text: str
+
+            String describing whether or not a test resulted in its expected outcome
+    """
+
+
+    # Get reporting parameters. Check if the test is expected to pass/fail and read in the description.
+    expected_outcome = (test_dict['expected_rule_outcome'] == 'pass')
+    description = test_dict['description']
+
+    # Check if the test results agree with the expected outcome. Write an appropriate response based on their agreement
+    if test_result == expected_outcome:
+
+        if test_result:
+            outcome_text = f'SUCCESS: Test {test_id} passed as expected. The following condition was identified: {description}'
+        else:
+            outcome_text = f'SUCCESS: Test {test_id} failed as expected. The following condition was identified: {description}'
+
+    else:
+
+        if test_result:
+            outcome_text = f'FAILURE: Test {test_id} passed unexpectedly. The following condition was not identified: {description}'
+        else:
+            outcome_text = f'FAILURE: Test {test_id} failed unexpectedly. The following condition was not identified: {description}'
+
+    return outcome_text
+
 def run_section_tests(test_json_name):
     """Runs all tests found in a given test JSON and prints results to console.
 
@@ -64,7 +145,7 @@ def run_section_tests(test_json_name):
     """
 
     # Create path to test JSON (e.g. 'transformer_tests.json')
-    test_json_path = os.path.join('test_jsons', test_json_name)
+    test_json_path = os.path.join('ruletest_jsons', test_json_name)
 
     title_text = f'TESTS RESULTS FOR: {test_json_name}'.center(50)
     test_result_strings = ['-----------------------------------------------------------------------------------------',
@@ -84,39 +165,48 @@ def run_section_tests(test_json_name):
 
         # Generate RMR dictionaries for testing
         user_rmr, baseline_rmr, proposed_rmr = generate_test_rmrs(test_dict)
+        rmr_trio = UserBaselineProposedVals(user_rmr, baseline_rmr, proposed_rmr)
 
         # Identify Section and rule
         section = test_dict['Section']
         rule = test_dict['Rule']
 
-        # Construction function name
+        # Construction function name for Section and rule
         function_name = f'Section{section}Rule{rule}'
 
+        # Pull in rule
         rule = globals()[function_name]()
 
-        # TODO: Temporarily using random pass/fail for testing purposes.
-        test_result = random.choice(['pass', 'fail'])
+        # Evaluate rule
+        outcome_result = evaluate_rule(rule, rmr_trio)['outcomes'][0]['result']
 
-        # Get reporting paramaters
-        expected_outcome = test_dict['expected_rule_outcome']
-        description = test_dict['description']
+        # If outcome result is a list of results (i.e. many elements get tested), check each against expected result
+        if isinstance(outcome_result, list):
 
-        if test_result == expected_outcome:
+            # Create list for collecting results of every test in list
+            test_results = []
 
-            if expected_outcome == 'pass':
-                outcome_text = f' SUCCESS: Test {test_id} passed as expected. The following condition was identified: {description}'
-            else:
-                outcome_text = f' SUCCESS: Test {test_id} failed as expected. The following condition was identified: {description}'
+            # Iterate through each outcome in outcome results
+            for outcome in outcome_result:
 
+                # Append test result for this outcome
+                test_results.append(evaluate_outcome(outcome['result']))
+
+            # Checks that ALL tests pass in test_results. If any fail, the test fails
+            test_result = all(result for result in test_results)
+
+            # Write outcome text based on overall pass/fail string based on set of test results
+            outcome_text = generate_test_result_string(test_result, test_dict, test_id)
+            test_result_strings.append(outcome_text)
+
+        # If a single result, check the result
         else:
 
-            if expected_outcome == 'pass':
-                outcome_text = f' FAILURE: Test {test_id} passed unexpectedly. The following condition was not identified: {description}'
-            else:
-                outcome_text = f' FAILURE: Test {test_id} failed unexpectedly. The following condition was not identified: {description}'
+            test_result = evaluate_outcome(outcome_result)
+            outcome_text = generate_test_result_string(test_result, test_dict, test_id)
+            test_result_strings.append(outcome_text)
 
-        test_result_strings.append(outcome_text)
-
+    # Print results to console (T
     for test_result in test_result_strings:
 
         print(test_result)

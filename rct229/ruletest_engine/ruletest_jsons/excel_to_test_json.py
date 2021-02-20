@@ -60,7 +60,7 @@ for (rule_name, columnData) in values_df.iteritems():
 
             # If the final key is DICT_LIST, parse the row value for the list of hashes
             if key_vector[-1] == 'DICT_LIST':
-                row_value =  parse_string_to_dictionary_list(row_value)
+                row_value = parse_string_to_dictionary_list(row_value)
 
                 # Remove the DICT_LIST from key_vector
                 key_vector.pop()

@@ -2,11 +2,17 @@ import json
 import jsonschema
 import os
 
-SCHEMA_PATH = os.path.join('rct229', 'schema', 'rmr_schema.json')
+file_dir = os.path.dirname(__file__)
+SCHEMA_PATH = os.path.join(file_dir, 'rmr_schema.json')
 
 
 def validate_rmr(rmr_obj):
     """Validate an RMR against the schema and other high-level checks"""
+
+    if rmr_obj is None:
+        # TODO: Maybe it makes sense to write out a function that returns this generalized pass dictionary
+        return {'passed': True, 'error': None}
+
     # Validate against the schema
     result = _schema_validate(SCHEMA_PATH, rmr_obj)
 
