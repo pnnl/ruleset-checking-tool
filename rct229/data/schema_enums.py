@@ -1,22 +1,48 @@
 from enum import Enum
-from jsonpath_ng import jsonpath, parse
+from jsonpath_ng import parse
 import json
 from os.path import dirname, join
 
 
+# Load the enumeration schema file
+_enum_schema_path = join(dirname(__file__), '..', 'schema', 'Enumerations2019ASHRAE901.schema.json')
+with open(_enum_schema_path) as json_file:
+    _enum_schema_obj = json.load(json_file)
 
-_rmr_schema_path = join(dirname(__file__), '..', 'schema', 'rmr_schema.json')
-with open(_rmr_schema_path) as schema_file:
-    schema_obj = json.load(schema_file)
+# Load the schema file
+schema_path = join(dirname(__file__), '..', 'schema', 'ashrae-229.schema.json')
+with open(schema_path) as json_file:
+    _schema_obj = json.load(json_file)
 
 # Query for all objects having an enum field
-_matches = parse('$..* where enum').find(schema_obj)
+# See jsonpath docs for parse syntax: https://pypi.org/project/jsonpath-ng/
+_enum_schema_matches = parse('$..* where enum').find(_enum_schema_obj)
+_schema_matches = parse('$..* where enum').find(_schema_obj)
+# Concatinate the two match lists using a list comprehension
+_match_list = [match for matches in [_enum_schema_matches, _schema_matches] for match in matches]
 
-_enum_objs = {
+# Create a dictionary of all the enumerations as dictionaries
+_enum_dicts = {
     str(match.full_path).split('.')[-1]:
-        dict((key, value) for key, value in zip(match.value['enum'], match.value['enum_text']))
-    for match in parse('$..* where enum').find(schema_obj)
+        dict((key, value) for key, value in zip(match.value['enum'], match.value['descriptions']))
+    for match in _match_list
 }
 
-# Export all the enumerations from the schema
-schema_enums = { key: Enum(key, enum_dict) for key, enum_dict in _enum_objs.items() }
+# Convert the enumerations as dictionaries to actual Enums
+schema_enums = { key: Enum(key, enum_dict) for key, enum_dict in _enum_dicts.items() }
+
+
+def print_schema_enums():
+    """ Print all the schema enumerations with their names and values
+
+    This is primarily useful for debuggin purposes, but may also be used to
+    provide
+    """
+    for key in schema_enums:
+        print(f"{key}:")
+        for e in schema_enums[key]:
+            print(f"    {e.name}: {e.value}")
+        print()
+
+# Uncomment this for debugging
+print_schema_enums()
