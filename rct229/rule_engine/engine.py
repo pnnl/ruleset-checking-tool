@@ -75,7 +75,8 @@ def evaluate_rules(rules_list, rmrs):
     dict
         A dictionary of the form:
         {
-            invalid_rmrs: [string] - The names of the RMRs that are invalid
+            invalid_rmrs: dict - The keys are the names of the invalid RMRs.
+                The values are the corresponding schema validation errors.
             outcomes: [dict] - A list of rule outcomes; each outcome is
                 a dictionary of the form:
                 {
