@@ -47,7 +47,8 @@ def evaluate_rule(rule, rmrs):
     dict
         A dictionary of the form:
         {
-            invalid_rmrs: [string] - The names of the RMRs that are invalid
+            invalid_rmrs: dict - The keys are the names of the invalid RMRs.
+                The values are the corresponding schema validation errors.
             outcomes: [dict] - A list containing a single rule outcome as
                 a dictionary of the form:
                 {
@@ -75,7 +76,8 @@ def evaluate_rules(rules_list, rmrs):
     dict
         A dictionary of the form:
         {
-            invalid_rmrs: [string] - The names of the RMRs that are invalid
+            invalid_rmrs: dict - The keys are the names of the invalid RMRs.
+                The values are the corresponding schema validation errors.
             outcomes: [dict] - A list of rule outcomes; each outcome is
                 a dictionary of the form:
                 {
@@ -90,18 +92,18 @@ def evaluate_rules(rules_list, rmrs):
 
     # Validate the rmrs against the schema and other high-level checks
     outcomes = []
-    invalid_rmrs = []
+    invalid_rmrs = {}
     user_validation = validate_rmr(rmrs.user)
     if user_validation["passed"] is not True:
-        invalid_rmrs.append('User')
+        invalid_rmrs['User'] = user_validation['error']
 
     baseline_validation = validate_rmr(rmrs.baseline)
     if baseline_validation["passed"] is not True:
-        invalid_rmrs.append('Baseline')
+        invalid_rmrs['Baseline'] = baseline_validation['error']
 
     proposed_validation = validate_rmr(rmrs.proposed)
     if proposed_validation["passed"] is not True:
-        invalid_rmrs.append('Proposed')
+        invalid_rmrs['Proposed'] = proposed_validation['error']
 
     if len(invalid_rmrs) == 0:
         # The RMRs are valid
