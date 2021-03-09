@@ -1,7 +1,9 @@
 # Transformers - Rule 15-4
+**Rule ID:** Rule 15-4  
 **Description:** User RMR transformer Name in Baseline RMR  
+**Appendix G Section:** Transformers  
+**Appendix G Section Reference:** None  
 **Applicability:** Number of U_RMR.transformers > 0  
-**Reference:**  
 **Manual Check:** None  
 **Evaluation Context:**  Each Data Element   
 **Data Lookup:** None  

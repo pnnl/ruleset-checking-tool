@@ -1,12 +1,14 @@
-# Envelope - Rule 5-7-1
-**Description:** Baseline WWR should be equal to User WWR or 40%, whichever is smaller.  
-**Reference:**
+# Envelope - Rule 5-7-1 
+**Rule ID:** 5-7-1  
+**Rule Description:** Baseline WWR should be equal to User WWR or 40%, whichever is smaller.  
+**Appendix G Section:** Envelope  
+**Appendix G Section Reference:**
 - Table G3.1, 5. Building Envelope, Baseline Building Performance, c. Vertical Fenestration Areas
-- Table G3.1.1-1  
+- Table G3.1.1-1
 
 **Applicability:** All required data elements exist for U_RMR and B_RMR  
 **Manual Check:** None  
-**Evaluation Context:**  Each Data Element
+**Evaluation Context:**  Each Data Element  
 **Data Lookup:** Table G3.1.1-1  
 **Determining Expected Value:**
 - Detrmine the WWR for each building segment in the User model: `For building_segment in U_RMR.building.building_segments:`

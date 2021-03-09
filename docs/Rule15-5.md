@@ -1,6 +1,8 @@
 # Transformers - Rule 15-5
+**Rule ID:** Rule 15-5  
 **Description:** Transformer efficiency reported in Baseline RMR equals Table 8.4.4  
-**Reference:**  Table G3.1 15. Distribution Transformers  
+**Appendix G Section:** Transformers  
+**Appendix G Section Reference:**  Table G3.1 15. Distribution Transformers  
 **Applicability:**
  - Rule 15-3 passes  
  - Transformer is DRY_TYPE

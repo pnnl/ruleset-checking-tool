@@ -1,7 +1,9 @@
 # Transformers - Rule 15-3
-**Description:** User RMR transformer Name in Proposed RMR  
+**Rule ID:** 15-3  
+**Rule Description:** User RMR transformer Name in Proposed RMR  
+**Appendix G Section:** Transformers  
+**Appendix G Section Reference:** None  
 **Applicability:** Number of U_RMR.transformers > 0  
-**Reference:**  
 **Manual Check:** None  
 **Evaluation Context:**  Each Data Element   
 **Data Lookup:** None  
