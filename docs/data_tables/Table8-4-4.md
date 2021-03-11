@@ -9,4 +9,4 @@
 - CFR10.431.196 requires linear interpolation of efficiency values for transformers that fall in between kVA ratings in Table 8.4.4.
 - The standard does not regulate the efficiency of transformers with capacity below the minimum listed kVA and above the maximum listed kVA value.
 
-**[Back](_toc.md)**
+**[Back](../_toc.md)**

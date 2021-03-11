@@ -14,4 +14,4 @@
 **Rule Assertion:**
 - Number of User and Baseline transformers are equal: `num_user_transformers == num_baseline_transformers`
 
-**[Back](_toc.md)**
+**[Back](../_toc.md)**

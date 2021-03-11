@@ -14,4 +14,4 @@
 **Rule Assertion:**  
 - Number of User and Proposed transformers are equal: `num_user_transformers == num_proposed_transformers`
 
-**[Back](_toc.md)**
+**[Back](../_toc.md)**
