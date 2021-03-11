@@ -13,6 +13,13 @@ MIN_KVA = 15
 MAX_SINGLE_PHASE_KVA = 333
 MAX_THREE_PHASE_KVA = 1000
 
+def table_8_4_4_in_range(phase, kVA):
+    return ((kVA >= MIN_KVA) and
+       ((phase == SINGLE_PHASE)
+        and (kVA <= MAX_SINGLE_PHASE_KVA)) or
+       ((phase == THREE_PHASE)
+        and (kVA <= MAX_THREE_PHASE_KVA)))
+
 def table_8_4_4_eff(phase, kVA):
     """Returns transformer efficiency required by ASHRAE 90.1 Table 8.4.4
 

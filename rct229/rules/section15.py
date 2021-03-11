@@ -1,10 +1,10 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase, RuleDefinitionListIndexedBase
 from rct229.rule_engine.utils import _assert_equal_rule, _select_equal_or_lesser
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
-from rct229.data_fns.table_8_4_4_eff import table_8_4_4_eff
+from rct229.data_fns.table_8_4_4_eff import table_8_4_4_eff, table_8_4_4_in_range
 from rct229.data.schema_enums import schema_enums
 
-_TransformerType = schema_enums['TransformerType']
+_DRY_TYPE = schema_enums['TransformerType'].DRY_TYPE.name
 
 # Rule Definitions for Section 15 of 90.1-2019 Appendix G
 
@@ -32,7 +32,7 @@ class Section15Rule1(RuleDefinitionBase):
         rmrs_used = UserBaselineProposedVals(True, True, False)
         super(Section15Rule1, self).__init__(id, description, rmr_context, rmrs_used)
 
-    def check_applicability(self, context):
+    def is_applicable(self, context):
         return len(context.user) > 0
 
     def rule_check(self, context):
@@ -59,7 +59,7 @@ class Section15Rule2(RuleDefinitionBase):
         rmrs_used = UserBaselineProposedVals(True, False, True)
         super(Section15Rule2, self).__init__(id, description, rmr_context, rmrs_used)
 
-    def check_applicability(self, context):
+    def is_applicable(self, context):
         return len(context.user) > 0
 
     def rule_check(self, context):
@@ -89,7 +89,7 @@ class Section15Rule3(RuleDefinitionListIndexedBase):
             index_rmr = 'user'
         )
 
-    def check_applicability(self, context):
+    def is_applicable(self, context):
         return len(context.user) > 0
 
 class _Section15Rule3_Each(RuleDefinitionBase):
@@ -127,7 +127,7 @@ class Section15Rule4(RuleDefinitionListIndexedBase):
             index_rmr = 'user'
         )
 
-    def check_applicability(self, context):
+    def is_applicable(self, context):
         return len(context.user) > 0
 
 
@@ -155,12 +155,11 @@ class Section15Rule5(RuleDefinitionListIndexedBase):
             rmr_context = 'transformers',
             rmrs_used = UserBaselineProposedVals(True, True, False),
             each_rule = _Section15Rule5_Each(),
-            index_rmr = 'baseline'
+            index_rmr = 'user'
         )
 
-    def check_applicability(self, context):
-        applicable = len(context.baseline) > 0
-        return applicable
+    def is_applicable(self, context):
+        return len(context.user) > 0
 
 
 
@@ -169,21 +168,34 @@ class _Section15Rule5_Each(RuleDefinitionBase):
         super(_Section15Rule5_Each, self).__init__(
             rmrs_used = UserBaselineProposedVals(True, True, False),
         )
-    # TODO: This is incomplete. We need more guidance as to the various cases
-    def check_applicability(self, context):
-        dry_type = _TransformerType.DRY_TYPE.name
+
+    def is_applicable(self, context):
         user_type = context.user['type']
         baseline_type = context.baseline['type']
-        user_efficiency = context.user['efficiency']
         user_phase = context.user['phase']
-        user_capacity = context.user['capacity']
+        baseline_phase = context.baseline['phase']
+        user_efficiency = context.user['efficiency']
+        # Provide conversion from VA to kVA
+        user_kVA = context.user['capacity'] / 1000
+        baseline_kVA = context.baseline['capacity'] / 1000
 
-        return False
-        # return baseline_type == dry_type and user_efficiency > table_8_4_4_eff(phase = user_phase, kVA = user_capacity)
+        return (
+            user_type == _DRY_TYPE and
+            table_8_4_4_in_range(phase = user_phase, kVA = user_kVA) and
+            user_efficiency >= table_8_4_4_eff(phase = user_phase, kVA = user_kVA) and
 
-    # TODO :We need more guidance regarding the possible cases
+            baseline_type == _DRY_TYPE and
+            table_8_4_4_in_range(phase = baseline_phase, kVA = baseline_kVA)
+        )
+
     def rule_check(self, context):
-        raise NotImplementedError
+        baseline_phase = context.baseline['phase']
+        baseline_efficiency = context.baseline['efficiency']
+        # Convert from VA to user_kVA
+        baseline_kVA = context.baseline['capacity'] / 1000
+
+        # TODO: Allow tolerance?
+        return baseline_efficiency == table_8_4_4_eff(phase = baseline_phase, kVA = baseline_kVA)
 
 #------------------------
 
@@ -200,7 +212,7 @@ class Section15Rule6(RuleDefinitionListIndexedBase):
             each_rule = _Section15Rule6_Each()
         )
 
-    def check_applicability(self, context):
+    def is_applicable(self, context):
         applicable = len(context.user) > 0
         return applicable
 
@@ -213,7 +225,7 @@ class _Section15Rule6_Each(RuleDefinitionBase):
         )
 
     # TODO: We need more guidance regarding the possible cases
-    def check_applicability(self, context):
+    def is_applicable(self, context):
         return False
 
     # Override get_context() to jump over the MISSING_CONTEXT check

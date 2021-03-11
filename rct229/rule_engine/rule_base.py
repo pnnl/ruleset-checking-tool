@@ -49,12 +49,10 @@ class RuleDefinitionBase:
         if context is not None:
 
             # Check if rule is applicable
-            applicable = self.check_applicability(context)
-            if applicable:
+            if self.is_applicable(context):
 
                 # Determine if manual check is required
-                manual_check_required = self.check_manual_check_required(context)
-                if manual_check_required:
+                if self.manual_check_required(context):
                     outcome['result'] = 'MANUAL_CHECK_REQUIRED'
                 else:
                     # Evaluate the actual rule check
@@ -132,7 +130,7 @@ class RuleDefinitionBase:
         )
 
 
-    def check_applicability(self, context):
+    def is_applicable(self, context):
         """Checks that the rule applies
 
         This will often be overridden. The base implementation always
@@ -151,7 +149,7 @@ class RuleDefinitionBase:
 
         return True
 
-    def check_manual_check_required(self, context):
+    def manual_check_required(self, context):
         """Checks whether the rule must be manually checked for the
         given context
 

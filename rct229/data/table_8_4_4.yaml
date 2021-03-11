@@ -26,7 +26,7 @@ THREE_PHASE:
   kVA: '30'
 - Efficiency: '98.4'
   kVA: '45'
-- Efficiency: '9.6'
+- Efficiency: '98.6'
   kVA: '75'
 - Efficiency: '98.74'
   kVA: '112.5'
