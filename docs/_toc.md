@@ -1,3 +1,14 @@
+# Rule Definition Development Strategy
+
+### Introduction
+The following documentation provides a technical description of ASHRAE 90.1-2019 Appendix G rules as defined in the ASHRAE 229P Test Case Descriptions (TCD) based on the construct of the Ruleset Checking Tool (RCT) Rule Definitions.  This document serves as a bridge between the ASHRAE 229 TCDs, which are in the form of the ruleset, and the RCT Rule Definitions, which are in the form of Python classes.  Each Rule Definition Development Strategy document seeks to describe a TCD Rule in pseudocode that can be understood by ASHRAE 90.1 professionals and Python developers alike.  The documents are organized based on 90.1 section and TCD Rule.  Front matter is included that describes any standard conventions, nomenclature or use of pseudocode functions.  The purpose of this document is not to provide direct Python code, rather to convey the logic necessary to develop code that meets the intent of the 229 TCDs.
+
+## Reference Material
+  * [Functions](_functions.md): A list of functions used within the Rule Definition Development Strategy documents.
+
+## Data Tables
+  * [8.4.4](Table8-4-4.md): Minimum Nominal Efficiency Levels for Low-Voltage Dry-Type Distribution Transformers  
+
 ## Section 5 - Envelope
   * [5-7-1](Rule5-7-1.md): Baseline WWR should be equal to User WWR or 40%, whichever is smaller.
 
