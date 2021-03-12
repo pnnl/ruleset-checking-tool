@@ -49,7 +49,6 @@ def strict_list_linear_interpolation(sorted_pts, x):
     float
         The interpolated value
     """
-
     if x < sorted_pts[0][0] or sorted_pts[-1][0] < x:
         raise ValueError('x out of range')
 

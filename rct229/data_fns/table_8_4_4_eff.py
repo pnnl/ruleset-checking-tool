@@ -14,11 +14,11 @@ MAX_SINGLE_PHASE_KVA = 333
 MAX_THREE_PHASE_KVA = 1000
 
 def table_8_4_4_in_range(phase, kVA):
-    return ((kVA >= MIN_KVA) and
-       ((phase == SINGLE_PHASE)
-        and (kVA <= MAX_SINGLE_PHASE_KVA)) or
-       ((phase == THREE_PHASE)
-        and (kVA <= MAX_THREE_PHASE_KVA)))
+    return (kVA >= MIN_KVA and
+       ((phase == SINGLE_PHASE
+        and kVA <= MAX_SINGLE_PHASE_KVA) or
+       (phase == THREE_PHASE
+        and kVA <= MAX_THREE_PHASE_KVA)))
 
 def table_8_4_4_eff(phase, kVA):
     """Returns transformer efficiency required by ASHRAE 90.1 Table 8.4.4
@@ -42,13 +42,11 @@ def table_8_4_4_eff(phase, kVA):
         The required transformer percentage efficiency
     """
     # Check that the capacity is in range
-    if ((kVA < MIN_KVA) or
-       ((phase == SINGLE_PHASE)
-        and (kVA > MAX_SINGLE_PHASE_KVA)) or
-       ((phase == THREE_PHASE)
-        and (kVA > MAX_THREE_PHASE_KVA))):
+    if (kVA < MIN_KVA or
+       (phase == SINGLE_PHASE and kVA > MAX_SINGLE_PHASE_KVA) or
+       (phase == THREE_PHASE and kVA > MAX_THREE_PHASE_KVA)):
         raise ValueError('kVA out of range')
-
+        
     # Create the lists to be used for linear interpolation
     table_lists = {
         SINGLE_PHASE: [
