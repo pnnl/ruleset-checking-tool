@@ -16,19 +16,21 @@
 **Manual Checks:** None  
 
 ## Rule Logic:
-- **Applicability Check 1:** `length( [ if space.status_type for space in U_RMR...spaces is in [NEW, ADDITION, ALTERATION] ] ) > 0:`  
-- For each building segment in the User model: `For building_segment in U_RMR.building.building_segments:`
-    - Get the building area type of the building segment: `building_area_type = building_segment.area_type_vertical_fenestration`
-    - If building area type exists in Table G3.1.1-1 then get the allowable WWR for the building segment: `if building_area_type in table_G3_1_1_1: allowable_baseline_wwr = data_lookup(table_G3_1_1_1, building_area_type) else: allowable_baseline_wwr = 0.40`
-    - Get thermal_block from building segment: `thermal_block in building_segment.thermal_blocks:`
-    - Get thermal_zone from thermal block: `thermal_zone in thermal_block.thermal_zones:`
-    - Get space from thermal zone: `space in thermal_zone.spaces:`
-        - Check that space is either [new, addition or alteration] and [heated and cooled, heated only, or semi-heated]: `if ( space.status_type in [NEW, ADDITION, ALTERATION] ) AND ( space.conditioning_type in [HEATED_AND_COOLED, HEATED_ONLY, SEMIHEATED] ):` 
-            - Get surface in space: `surface in space.surfaces:`
-                - Check that surface is exterior and vertical: `if ( surface.adjacent_to in [AMBIENT] ) AND ( 0 <= surface.tilt <= 90 ): exterior_vertical_surfaces.append(surface)`
-                - Calculate the total exterior surface area: `total_exterior_surface_area = sum(exterior_surface.area for exterior_surface in exterior_vertical_surfaces)`
-                - Calculate the total fenestration area: `total_fenestration_area = sum(fenestration.area for fenestration in exterior_surface.fenestration_subsurfaces)`
-                - Calculate WWR of the building_segment: `WWR_user = total_fenestration_area/total_exterior_surface_area`
-                - **Rule Assertion:** `WWR_baseline == min(WWR_user, allowable_baseline_wwr)`
+- **Applicability Check 1:** `length( [ if _space.status_type for _space in U_RMR...spaces is in [NEW, ADDITION, ALTERATION] ] ) > 0:`  
+- For each building segment in the Baseline model: `For _building_segment in B_RMR.building.building_segments:`
+    - Get the building area type of the building segment: `_building_area_type = _building_segment.area_type_vertical_fenestration`
+    - If building area type exists in Table G3.1.1-1 then get the allowable WWR for the building segment: `if _building_area_type in table_G3_1_1_1: _allowable_baseline_wwr = data_lookup(table_G3_1_1_1, _building_area_type) else: _allowable_baseline_wwr = 0.40`
+    - Get thermal_block from building segment: `_thermal_block in building_segment.thermal_blocks:`
+    - Get thermal_zone from thermal block: `_thermal_zone in _thermal_block.thermal_zones:`
+    - Get space from thermal zone: `_space in _thermal_zone.spaces:`
+        - Check that space is either [new, addition or alteration] and [heated and cooled, heated only, or semi-heated]: `if ( _space.status_type in [NEW, ADDITION, ALTERATION] ) AND ( _space.conditioning_type in [HEATED_AND_COOLED, HEATED_ONLY, SEMIHEATED] ):` 
+            - Get surface in space: `_surface in space.surfaces:`
+                - Check that surface is exterior and vertical: `if ( _surface.adjacent_to in [AMBIENT] ) AND ( 60 <= _surface.tilt <= 90 ): _exterior_vertical_surface = _surface`  
+                - Calculate the total fenestration area: `_fenestration_area = sum(_fenestration.area for _fenestration in _exterior_vertical_surface.fenestration_subsurfaces)`
+                - Calculate the total surface area: `_surface_area = _surface.area`  
+                - Calculate WWR of the building area type and space: `_WWR_baseline = _fenestration_area/_surface_area`
+                - Get matching space from User RMR: `_user_space = match_data_element(U_RMR, spaces, _space.name)`
+                - Repeat WWR calculation for User RMR space: `_WWR_user = _calculate_wwr(_user_space)`
+                - **Rule Assertion:** `_WWR_baseline == min(_WWR_user, _allowable_baseline_wwr)`
 
 **[Back](../_toc.md)**
