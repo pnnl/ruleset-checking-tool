@@ -1,17 +1,23 @@
 # Envelope - Rule 5-7-1 
 **Rule ID:** 5-7-1  
 **Rule Description:** Baseline WWR should be equal to User WWR or 40%, whichever is smaller.  
+**Rule Assertion:** Baseline RMR = expected value  
 **Appendix G Section:** Envelope  
 **Appendix G Section Reference:**
 - Table G3.1, 5. Building Envelope, Baseline Building Performance, c. Vertical Fenestration Areas
 - Table G3.1.1-1
 
-**Applicability:** All required data elements exist for U_RMR and B_RMR  
-**Manual Check:** None  
-**Evaluation Context:**  Each Data Element  
 **Data Lookup:** Table G3.1.1-1  
-**Determining Expected Value:**
-- Detrmine the WWR for each building segment in the User model: `For building_segment in U_RMR.building.building_segments:`
+**Evaluation Context:**  Each Data Element  
+
+**Applicability Checks:** 
+1. Building has spaces that are NEW, ADDITION or ALTERATION.
+
+**Manual Checks:** None  
+
+## Rule Logic:
+- **Applicability Check 1:** `length( [ if space.status_type for space in U_RMR...spaces is in [NEW, ADDITION, ALTERATION] ] ) > 0:`  
+- For each building segment in the User model: `For building_segment in U_RMR.building.building_segments:`
     - Get the building area type of the building segment: `building_area_type = building_segment.area_type_vertical_fenestration`
     - If building area type exists in Table G3.1.1-1 then get the allowable WWR for the building segment: `if building_area_type in table_G3_1_1_1: allowable_baseline_wwr = data_lookup(table_G3_1_1_1, building_area_type) else: allowable_baseline_wwr = 0.40`
     - Get thermal_block from building segment: `thermal_block in building_segment.thermal_blocks:`
@@ -23,7 +29,6 @@
                 - Calculate the total exterior surface area: `total_exterior_surface_area = sum(exterior_surface.area for exterior_surface in exterior_vertical_surfaces)`
                 - Calculate the total fenestration area: `total_fenestration_area = sum(fenestration.area for fenestration in exterior_surface.fenestration_subsurfaces)`
                 - Calculate WWR of the building_segment: `WWR_user = total_fenestration_area/total_exterior_surface_area`
-
-**Rule Assertion:**  For each User building_segment: `WWR_baseline == min(WWR_user, allowable_baseline_wwr)`
+                - **Rule Assertion:** `WWR_baseline == min(WWR_user, allowable_baseline_wwr)`
 
 **[Back](../_toc.md)**
