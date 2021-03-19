@@ -19,7 +19,9 @@ def nested_dict(dic, keys, value):
     """
     for key in keys[:-1]:
         dic = dic.setdefault(key, {})
+    value = clean_value(value)
     dic[keys[-1]] = value
+
 
 # Get a nested dictionary from a list of keys
 def nested_get(dic, keys):
@@ -128,8 +130,36 @@ def add_to_dictionary_list(json_dict, key_list, dict_string):
             dictionary_list.append({})
 
         # Set value for dictionary "i" and key "key"
-        dictionary_list[i][key] = value_list[i]
+        dictionary_list[i][key] = clean_value(value_list[i]) #value_list[i]
 
     nested_dict(json_dict, key_list, dictionary_list)
+
+
+def clean_value(value):
+    """ Used to change strings to numerics, if possible.
+
+        Parameters
+        ----------
+        value : str
+            String to be cleaned
+
+        """
+
+    # Set value directly if not convertible to a numeric
+    if isinstance(value, dict) or isinstance(value, list):
+        return value
+    else:
+        # Set value as integer or float if convertible
+        try:
+            value = int(value)
+            return value
+        except ValueError:
+            try:
+                value = float(value)
+                return value
+            except ValueError:
+                return value
+
+
 
 
