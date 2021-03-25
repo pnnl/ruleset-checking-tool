@@ -34,6 +34,17 @@ You can also package with pipenv to test the CLI tool.
 Run with example RMRs
 1. `pipenv run rct229 evaluate examples\user_rmr.json examples\baseline_rmr.json examples\proposed_rmr.json`
 
+## Developer Best Practices
+
+#### Unit Testing
+- Pytest is used for unit testing: https://docs.pytest.org/en/stable/contents.html
+- A test file should have the same name as the corresponding code file with "_test" appended before the extension.
+- Keep the test file in the same directory as the code file.
+- The above two bullets act to keep the code file and the test file next to each other in the directory listing.
+- Test function names are verbose to be descriptive and should follow the pattern `test__function_name__case_description()`.
+- To run all tests, execute the command `pipenv run pytest` from the project root folder.
+
+
 ## Disclaimer Notice      
 This material was prepared as an account of work sponsored by an agency of the United States Government.  Neither the United States Government nor the United States Department of Energy, nor Battelle, nor any of their employees, nor any jurisdiction or organization that has cooperated in the development of these materials, makes any warranty, express or implied, or assumes any legal liability or responsibility for the accuracy, completeness, or usefulness or any information, apparatus, product, software, or process disclosed, or represents that its use would not infringe privately owned rights.
 Reference herein to any specific commercial product, process, or service by trade name, trademark, manufacturer, or otherwise does not necessarily constitute or imply its endorsement, recommendation, or favoring by the United States Government or any agency thereof, or Battelle Memorial Institute. The views and opinions of authors expressed herein do not necessarily state or reflect those of the United States Government or any agency thereof.
