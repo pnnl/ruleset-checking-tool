@@ -4,7 +4,7 @@ import jsonschema
 # from jsonschema.validators import validator_for
 import os
 
-SCHEMA_PATH = os.path.join('rct229', 'schema', 'ashrae-229.schema.json')
+SCHEMA_PATH = os.path.join('rct229', 'schema', 'ASHRAE229.schema.json')
 SCHEMA_KEY = 'ASHRAE229.schema.json'
 SCHEMA_ENUM_PATH = os.path.join('rct229', 'schema', 'Enumerations2019ASHRAE901.schema.json')
 SCHEMA_ENUM_KEY = 'Enumerations2019ASHRAE901.schema.json'

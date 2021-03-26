@@ -10,7 +10,7 @@ with open(_enum_schema_path) as json_file:
     _enum_schema_obj = json.load(json_file)
 
 # Load the schema file
-schema_path = join(dirname(__file__), '..', 'schema', 'ashrae-229.schema.json')
+schema_path = join(dirname(__file__), '..', 'schema', 'ASHRAE229.schema.json')
 with open(schema_path) as json_file:
     _schema_obj = json.load(json_file)
 
