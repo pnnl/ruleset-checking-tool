@@ -7,6 +7,25 @@ class RuleDefinitionBase:
     """Baseclass for all Rule Definitions.
     """
     def __init__(self, id = None, description = None, rmr_context = '', rmrs_used = UserBaselineProposedVals(True, True, True)):
+        """Base class for all Rule definitions
+
+
+
+        Parameters
+        ----------
+        id : string
+            Unique id for the rule
+            Usually unspecified for nested rules
+        description : string
+            Rule description
+            Usually unspecified for nested rules
+        rmr_context : string
+            A json pointer into each RMR, or RMR fragment, provided to the rule.
+            For better human readability, the leading "/" may be ommitted.
+        rmrs_used : UserBaselineProposedVals
+            A trio of boolen values indicating which RMRs are required by the
+            rule
+        """
         self.id = id
         self.description = description
         # rmr_context is a jsonpointer string
@@ -19,6 +38,17 @@ class RuleDefinitionBase:
     def evaluate(self, rmrs):
         """ Generates the outcome dictionary for the rule
 
+        This method also orchestrates the high-level workflow for any rule.
+        Namely:
+            - Call get_context(rmrs); check for any missing RMR contexts
+            - Call is_applicable(context)
+            - Call manual_check_required()
+            - Call rule_check()
+            - Return an outcome dictionary based on the calls above
+
+        This method should NOT be overridden. Instead override get_context,
+        is_applicable, manual_check_required, or rule_check as needed.
+
         Parameters
         ----------
         rmrs : RMR trio or a context trio
@@ -28,11 +58,12 @@ class RuleDefinitionBase:
         dict
             A dictionary of the form:
             {
-                id: string - A unique identifier for the rule
-                description: string
-                rmr_context: string - a JSON pointer into the RMR
-                result: string or list - One of the strings "PASS", "FAIL", "NA", or "REQUIRES_MANUAL_CHECK" or a list
-                    of outcomes for a list-type rule
+                id: string - A unique identifier for the rule; ommitted if None
+                description: string - The rule description; ommitted if None
+                rmr_context: string - a JSON pointer into the RMR; omitted if empty
+                result: string or list - One of the strings "PASS", "FAIL", "NA",
+                    or "REQUIRES_MANUAL_CHECK" or a list of outcomes for
+                    a list-type rule
             }
         """
         # Initialize the outcome dictionary
@@ -74,7 +105,7 @@ class RuleDefinitionBase:
         return outcome
 
     def _get_context(self, rmrs):
-        """Gets the context for each RMR
+        """Get the context for each RMR
 
         Private method, not to be overridden
 
@@ -91,7 +122,13 @@ class RuleDefinitionBase:
             in self.rmrs_used is not set
         """
 
-        pointer = '' if self.rmr_context == '' else '/' + self.rmr_context
+        # Prepend the leading '/' as needed. It is optional in rmr_context for
+        # improved readability
+        if self.rmr_context == '' or self.rmr_context.startswith('/'):
+            pointer = self.rmr_context
+        else:
+            pointer = '/' + self.rmr_context
+
         # Note: if there is no match for pointer, resolve_pointer returns None
         return UserBaselineProposedVals(
             user = resolve_pointer(rmrs.user, pointer) if self.rmrs_used.user else None,
@@ -133,8 +170,8 @@ class RuleDefinitionBase:
     def is_applicable(self, context):
         """Checks that the rule applies
 
-        This will often be overridden. The base implementation always
-        returns True
+        This will often be overridden. This base implementation always
+        returns True, which allows the workflow to proceed.
 
         Parameters
         ----------
@@ -153,8 +190,8 @@ class RuleDefinitionBase:
         """Checks whether the rule must be manually checked for the
         given context
 
-        This will often be overridden. The base implementation always
-        returns False
+        This will often be overridden. This base implementation always
+        returns False, which allows the workflow to proceed.
 
         Parameters
         ----------

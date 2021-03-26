@@ -42,9 +42,7 @@ class Section15Rule1(RuleDefinitionBase):
         baseline_transformers = context.baseline
         num_baseline_transformers = len(baseline_transformers)
 
-        outcome = _assert_equal_rule(num_user_transformers, num_baseline_transformers)
-
-        return outcome
+        return num_user_transformers == num_baseline_transformers
 
 #------------------------
 
@@ -69,9 +67,7 @@ class Section15Rule2(RuleDefinitionBase):
         proposed_transformers = context.proposed
         num_proposed_transformers = len(proposed_transformers)
 
-        outcome = _assert_equal_rule(num_user_transformers, num_proposed_transformers)
-
-        return outcome
+        return num_user_transformers == num_proposed_transformers
 
 #------------------------
 
@@ -81,16 +77,13 @@ class Section15Rule3(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section15Rule3, self).__init__(
-            id = "15-3",
-            description = "User RMR transformer name is in the Proposed RMR",
+            id = '15-3',
+            description = 'User RMR transformer Name in Proposed RMR',
             rmr_context = 'transformers',
             rmrs_used = UserBaselineProposedVals(True, False, True),
             each_rule = _Section15Rule3_Each(),
             index_rmr = 'user'
         )
-
-    def is_applicable(self, context):
-        return len(context.user) > 0
 
 class _Section15Rule3_Each(RuleDefinitionBase):
     def __init__(self):
@@ -119,8 +112,8 @@ class Section15Rule4(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section15Rule4, self).__init__(
-            id = "15-4",
-            description = "User RMR transformer name is in the Baseline RMR",
+            id = '15-4',
+            description = 'User RMR transformer Name in Baseline RMR',
             rmr_context = 'transformers',
             rmrs_used = UserBaselineProposedVals(True, True, False),
             each_rule = _Section15Rule4_Each(),
