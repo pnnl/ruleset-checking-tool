@@ -6,7 +6,7 @@
 **Appendix G Section Reference:** None  
 **Data Lookup:** None  
 **Evaluation Context:**  Each Data Element   
-**Applicability Checks:** None
+**Applicability Checks:** None  
 **Manual Checks:** None  
 
 ## Rule Logic:
