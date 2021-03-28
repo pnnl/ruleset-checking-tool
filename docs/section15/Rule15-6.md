@@ -15,7 +15,7 @@
 ## Rule Logic:
 - For each transformer `_user_transformer` in `U_RMR.transformers`:
     - Get maximum regulated capacity: `if user_transformer.phase == SINGLE_PHASE: _max_capacity_limit = 333.0 else if user_transformer.phase == THREE_PHASE: _max_capacity_limit = 1000.0`  
-    - **Applicability Check 1:** `_user_transformer.type is DRY_TYPE`  
+    - **Applicability Check 1:** `_user_transformer.type == DRY_TYPE`  
     - **Applicability Check 2:** `_user_transformer.capacity >= 15.0 and _user_transformer.capacity <= _max_capacity_limit:`
     - Get required User transformer efficiency: `required_user_transformer_efficiency = data_lookup(table_8_4_4, _user_transformer.capacity, _user_transformer.phase)`
     - **Rule Assertion:** `user_transformer.efficiency == required_user_transformer_efficiency`
