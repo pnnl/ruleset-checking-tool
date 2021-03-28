@@ -6,14 +6,12 @@
 **Appendix G Section Reference:** None  
 **Data Lookup:** None  
 **Evaluation Context:**  Each Data Element   
-**Applicability Checks:** 
-1. Number of transformers in User RMR greater than 0  
-
+**Applicability Checks:** None
 **Manual Checks:** None  
 
 ## Rule Logic:
-- **Applicability Check 1:** `length(U_RMR.transformers) > 0:`  
-- Get list of Baseline transformer names: `for transformer in B_RMR.building.transformers: baseline_transformer_names = transformer.name`
-- **Rule Assertion:** `for transformer in U_RMR.transformers: transformer.name in baseline_transformer_names`
+- Get list of Baseline transformer names: `_baseline_transformer_names = [ _baseline_transformer.name for _baseline_transformer in B_RMR.transformers ]`
+- For each transformer `_user_transformer` in `U_RMR.transformers`:
+    - **Rule Assertion:** `_user_tranformer.name in _baseline_transformer_names`
 
 **[Back](../_toc.md)**
