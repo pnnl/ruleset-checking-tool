@@ -68,6 +68,7 @@ class RuleDefinitionBase:
                     a list-type rule
             }
         """
+
         # Initialize the outcome dictionary
         outcome = {}
         if self.id:
@@ -232,30 +233,18 @@ class RuleDefinitionBase:
         raise NotImplementedError
 
 
-# class RuleDefinitionSingleElementBase(RuleDefinitionBase):
-#     """
-#     Baseclass for Rule Definitions that are applied to an entire list of elements.
-#     """
-#     def __init__(self, id, description, rmr_context, rmrs_used):
-#         super(RuleDefinitionSingleElementBase, self).__init__(id, description, rmr_context, rmrs_used)
-#         print()
-#
-#     def rule_check(self, user, baseline, proposed):
-#         # Throw an exception if not overridden by inherited class
-#         #outcome = False # Boolean
-#         #<Calculation>
-#         #return outcome
-#
-#         raise NotImplementedError
-
-
 class RuleDefinitionListBase(RuleDefinitionBase):
     """
     Baseclass for Rule Definitions that apply to each element in a list context.
     """
     def __init__(self, id, description, rmr_context, rmrs_used, each_rule):
         self.each_rule = each_rule
-        super(RuleDefinitionListBase, self).__init__(id, description, rmr_context, rmrs_used)
+        super(RuleDefinitionListBase, self).__init__(
+            id = id,
+            description = description,
+            rmr_context = rmr_context,
+            rmrs_used = rmrs_used
+        )
 
     def create_context_list(self, context, data = None):
         """Generates a list of context trios from a context that is a trio of
@@ -303,6 +292,30 @@ class RuleDefinitionListBase(RuleDefinitionBase):
 
         return context_list
 
+    def create_data(self, context, data = None):
+        """Create the data object to be passed to each_rule
+
+        This is typically overridden to collect data available at this rule's
+        level that is needed by each_rule.
+
+        This default implementation simply returns the data that was passed in.
+
+        Parameters
+        ----------
+        context : UserBaselineProposedVals
+            Object containing the user, baseline, and proposed contexts
+        data : any
+            The data object that was passed into the rule.
+
+        Returns
+        -------
+        UserBaselineProposedVals
+            Object containing the contexts for the user, baseline, and proposed
+            RMRs; an RMR's context is set to None if the corresponding flag
+            in self.rmrs_used is not set
+        """
+        return data
+
     def rule_check(self, context, data = None):
         """Overrides the base implementation to apply a rule to each entry in
         a list
@@ -321,11 +334,13 @@ class RuleDefinitionListBase(RuleDefinitionBase):
             A list of rule outcomes. The each outcome in the list is augmented
             with a name field that is the name of the entry in the context list.
         """
+        # Create the data to be passed to each_rule
+        data = self.create_data(context, data)
         context_list = self.create_context_list(context)
         outcomes = []
 
         for ubp in context_list:
-            item_outcome = self.each_rule.evaluate(ubp)
+            item_outcome = self.each_rule.evaluate(ubp, data)
 
             # Set the name for item_outcome
             if ubp.user and ubp.user['name']:

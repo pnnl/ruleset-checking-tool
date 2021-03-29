@@ -3,6 +3,7 @@ from rct229.rule_engine.utils import _assert_equal_rule, _select_equal_or_lesser
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 from rct229.data_fns.table_8_4_4_eff import table_8_4_4_eff, table_8_4_4_in_range
 from rct229.data.schema_enums import schema_enums
+from rct229.utils.jsonpath_utils import find_all
 
 _DRY_TYPE = schema_enums['TransformerType'].DRY_TYPE.name
 
@@ -81,26 +82,23 @@ class Section15Rule3(RuleDefinitionListIndexedBase):
             description = 'User RMR transformer Name in Proposed RMR',
             rmr_context = 'transformers',
             rmrs_used = UserBaselineProposedVals(True, False, True),
-            each_rule = _Section15Rule3_Each(),
+            each_rule = _NameInProposed(),
             index_rmr = 'user'
         )
 
-class _Section15Rule3_Each(RuleDefinitionBase):
+    def create_data(self, context, data):
+        # Get the Proposed transformer names
+        return find_all('[*].name', context.proposed)
+
+class _NameInProposed(RuleDefinitionBase):
     def __init__(self):
-        super(_Section15Rule3_Each, self).__init__(
-            rmrs_used = UserBaselineProposedVals(True, False, True),
+        super(_NameInProposed, self).__init__(
+            rmrs_used = UserBaselineProposedVals(True, False, False)
         )
 
-    # Override get_context() to jump over the MISSING_CONTEXT check
-    def get_context(self, rmrs, data = None):
-        context = self._get_context(rmrs)
-        if context.user is None:
-            context = None
-
-        return context
-
-    def rule_check(self, context, data = None):
-        return context.proposed is not None and context.user['name'] == context.proposed['name']
+    def rule_check(self, context, data):
+        proposed_transformer_names = data
+        return context.user['name'] in proposed_transformer_names
 
 
 #------------------------
@@ -116,23 +114,25 @@ class Section15Rule4(RuleDefinitionListIndexedBase):
             description = 'User RMR transformer Name in Baseline RMR',
             rmr_context = 'transformers',
             rmrs_used = UserBaselineProposedVals(True, True, False),
-            each_rule = _Section15Rule4_Each(),
+            each_rule = _NameInBaseline(),
             index_rmr = 'user'
         )
 
-    def is_applicable(self, context, data = None):
-        return len(context.user) > 0
+    def create_data(self, context, data):
+        # Get the Baseline transformer names
+        return find_all('[*].name', context.baseline)
 
 
 
-class _Section15Rule4_Each(RuleDefinitionBase):
+class _NameInBaseline(RuleDefinitionBase):
     def __init__(self):
-        super(_Section15Rule4_Each, self).__init__(
+        super(_NameInBaseline, self).__init__(
             rmrs_used = UserBaselineProposedVals(True, True, False),
         )
 
     def rule_check(self, context, data = None):
-        return context.user['name'] == context.baseline['name']
+        baseline_transformer_names = data
+        return context.user['name'] in baseline_transformer_names
 
 #------------------------
 
