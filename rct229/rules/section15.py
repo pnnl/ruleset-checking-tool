@@ -32,10 +32,10 @@ class Section15Rule1(RuleDefinitionBase):
         rmrs_used = UserBaselineProposedVals(True, True, False)
         super(Section15Rule1, self).__init__(id, description, rmr_context, rmrs_used)
 
-    def is_applicable(self, context):
+    def is_applicable(self, context, data = None):
         return len(context.user) > 0
 
-    def rule_check(self, context):
+    def rule_check(self, context, data = None):
         user_transformers = context.user
         num_user_transformers = len(user_transformers)
 
@@ -57,10 +57,10 @@ class Section15Rule2(RuleDefinitionBase):
         rmrs_used = UserBaselineProposedVals(True, False, True)
         super(Section15Rule2, self).__init__(id, description, rmr_context, rmrs_used)
 
-    def is_applicable(self, context):
+    def is_applicable(self, context, data = None):
         return len(context.user) > 0
 
-    def rule_check(self, context):
+    def rule_check(self, context, data = None):
         user_transformers = context.user
         num_user_transformers = len(user_transformers)
 
@@ -92,14 +92,14 @@ class _Section15Rule3_Each(RuleDefinitionBase):
         )
 
     # Override get_context() to jump over the MISSING_CONTEXT check
-    def get_context(self, rmrs):
+    def get_context(self, rmrs, data = None):
         context = self._get_context(rmrs)
         if context.user is None:
             context = None
 
         return context
 
-    def rule_check(self, context):
+    def rule_check(self, context, data = None):
         return context.proposed is not None and context.user['name'] == context.proposed['name']
 
 
@@ -120,7 +120,7 @@ class Section15Rule4(RuleDefinitionListIndexedBase):
             index_rmr = 'user'
         )
 
-    def is_applicable(self, context):
+    def is_applicable(self, context, data = None):
         return len(context.user) > 0
 
 
@@ -131,7 +131,7 @@ class _Section15Rule4_Each(RuleDefinitionBase):
             rmrs_used = UserBaselineProposedVals(True, True, False),
         )
 
-    def rule_check(self, context):
+    def rule_check(self, context, data = None):
         return context.user['name'] == context.baseline['name']
 
 #------------------------
@@ -151,7 +151,7 @@ class Section15Rule5(RuleDefinitionListIndexedBase):
             index_rmr = 'user'
         )
 
-    def is_applicable(self, context):
+    def is_applicable(self, context, data = None):
         return len(context.user) > 0
 
 
@@ -162,7 +162,7 @@ class _Section15Rule5_Each(RuleDefinitionBase):
             rmrs_used = UserBaselineProposedVals(True, True, False),
         )
 
-    def is_applicable(self, context):
+    def is_applicable(self, context, data = None):
         user_type = context.user['type']
         baseline_type = context.baseline['type']
         user_phase = context.user['phase']
@@ -181,7 +181,7 @@ class _Section15Rule5_Each(RuleDefinitionBase):
             table_8_4_4_in_range(phase = baseline_phase, kVA = baseline_kVA)
         )
 
-    def rule_check(self, context):
+    def rule_check(self, context, data = None):
         baseline_phase = context.baseline['phase']
         baseline_efficiency = context.baseline['efficiency']
         # Convert from VA to user_kVA
@@ -205,7 +205,7 @@ class Section15Rule6(RuleDefinitionListIndexedBase):
             each_rule = _Section15Rule6_Each()
         )
 
-    def is_applicable(self, context):
+    def is_applicable(self, context, data = None):
         applicable = len(context.user) > 0
         return applicable
 
@@ -218,11 +218,11 @@ class _Section15Rule6_Each(RuleDefinitionBase):
         )
 
     # TODO: We need more guidance regarding the possible cases
-    def is_applicable(self, context):
+    def is_applicable(self, context, data = None):
         return False
 
     # Override get_context() to jump over the MISSING_CONTEXT check
-    def get_context(self, rmrs):
+    def get_context(self, rmrs, data = None):
         context = self._get_context(rmrs)
         if context.user is None:
             context = None
@@ -230,7 +230,7 @@ class _Section15Rule6_Each(RuleDefinitionBase):
         return context
 
     # TODO: We need more guidance regarding the possible cases
-    def rule_check(self, context):
+    def rule_check(self, context, data = None):
         raise NotImplementedError
 
 #------------------------

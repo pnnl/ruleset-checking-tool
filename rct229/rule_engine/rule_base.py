@@ -9,8 +9,6 @@ class RuleDefinitionBase:
     def __init__(self, id = None, description = None, rmr_context = '', rmrs_used = UserBaselineProposedVals(True, True, True)):
         """Base class for all Rule definitions
 
-
-
         Parameters
         ----------
         id : string
@@ -35,7 +33,7 @@ class RuleDefinitionBase:
         self.rmr_context = rmr_context
         self.rmrs_used = rmrs_used
 
-    def evaluate(self, rmrs):
+    def evaluate(self, rmrs, data = None):
         """ Generates the outcome dictionary for the rule
 
         This method also orchestrates the high-level workflow for any rule.
@@ -52,6 +50,10 @@ class RuleDefinitionBase:
         Parameters
         ----------
         rmrs : RMR trio or a context trio
+        data : Any data object (optional). This is designed as a way to pass in data
+            to nested rules. This data passed on to the workflow methods
+            get_context(), is_applicable(), manual_check_required(), and
+            rule_check().
 
         Returns
         -------
@@ -76,18 +78,18 @@ class RuleDefinitionBase:
             outcome['rmr_context'] = self.rmr_context
 
         # context will be None if the context does not exist for any of the RMR used
-        context = self.get_context(rmrs)
+        context = self.get_context(rmrs, data)
         if context is not None:
 
             # Check if rule is applicable
-            if self.is_applicable(context):
+            if self.is_applicable(context, data):
 
                 # Determine if manual check is required
-                if self.manual_check_required(context):
+                if self.manual_check_required(context, data):
                     outcome['result'] = 'MANUAL_CHECK_REQUIRED'
                 else:
                     # Evaluate the actual rule check
-                    result = self.rule_check(context)
+                    result = self.rule_check(context, data)
                     if isinstance(result, list):
                         # The result is a list of outcomes
                         outcome['result'] = result
@@ -136,7 +138,7 @@ class RuleDefinitionBase:
             proposed = resolve_pointer(rmrs.proposed, pointer) if self.rmrs_used.proposed else None
         )
 
-    def get_context(self, rmrs):
+    def get_context(self, rmrs, data = None):
         """Gets the context for each RMR
 
         May be be overridden for different behavior
@@ -147,6 +149,7 @@ class RuleDefinitionBase:
             Object containing the user, baseline, and proposed RMRs
             A return value of None indicates that the context
             does not exist in one or more of the RMRs used.
+        data : An optional data object. It is ignored by this base implementation.
 
         Returns
         -------
@@ -167,7 +170,7 @@ class RuleDefinitionBase:
         )
 
 
-    def is_applicable(self, context):
+    def is_applicable(self, context, data = None):
         """Checks that the rule applies
 
         This will often be overridden. This base implementation always
@@ -177,6 +180,7 @@ class RuleDefinitionBase:
         ----------
         context : UserBaselineProposedVals
             Object containing the contexts for the user, baseline, and proposed RMRs
+        data : An optional data object. It is ignored by this base implementation.
 
         Returns
         -------
@@ -186,7 +190,7 @@ class RuleDefinitionBase:
 
         return True
 
-    def manual_check_required(self, context):
+    def manual_check_required(self, context, data = None):
         """Checks whether the rule must be manually checked for the
         given context
 
@@ -197,6 +201,7 @@ class RuleDefinitionBase:
         ----------
         context : UserBaselineProposedVals
             Object containing the contexts for the user, baseline, and proposed RMRs
+        data : An optional data object. It is ignored by this base implementation.
 
         Returns
         -------
@@ -206,7 +211,7 @@ class RuleDefinitionBase:
 
         return False
 
-    def rule_check(self, context):
+    def rule_check(self, context, data = None):
         """This actually checks the rule for the given context
 
         This must be overridden. The base implementation
@@ -216,6 +221,7 @@ class RuleDefinitionBase:
         ----------
         context : UserBaselineProposedVals
             Object containing the contexts for the user, baseline, and proposed RMRs
+        data : An optional data object. It is ignored by this base implementation.
 
         Returns
         -------
@@ -251,7 +257,7 @@ class RuleDefinitionListBase(RuleDefinitionBase):
         self.each_rule = each_rule
         super(RuleDefinitionListBase, self).__init__(id, description, rmr_context, rmrs_used)
 
-    def create_context_list(self, context):
+    def create_context_list(self, context, data = None):
         """Generates a list of context trios from a context that is a trio of
         lists
 
@@ -269,6 +275,7 @@ class RuleDefinitionListBase(RuleDefinitionBase):
         ----------
         context : UserBaselineProposedVals
             Object containing the contexts for the user, baseline, and proposed RMRs
+        data : An optional data object. It is ignored by this base implementation.
 
         Returns
         -------
@@ -296,7 +303,7 @@ class RuleDefinitionListBase(RuleDefinitionBase):
 
         return context_list
 
-    def rule_check(self, context):
+    def rule_check(self, context, data = None):
         """Overrides the base implementation to apply a rule to each entry in
         a list
 
@@ -306,6 +313,7 @@ class RuleDefinitionListBase(RuleDefinitionBase):
         ----------
         context : UserBaselineProposedVals
             Object containing the contexts for the user, baseline, and proposed RMRs
+        data : An optional data object. It is ignored by this base implementation.
 
         Returns
         -------
@@ -341,7 +349,7 @@ class RuleDefinitionListIndexedBase(RuleDefinitionListBase):
         self.index_rmr = index_rmr
         super(RuleDefinitionListIndexedBase, self).__init__(id, description, rmr_context, rmrs_used, each_rule)
 
-    def create_context_list(self, context):
+    def create_context_list(self, context, data = None):
         """Overrides the base implementation to create a list that has an entry
         for each item in the index_rmr RMR, the other RMR entries are padded with
         None for non-matches.
@@ -350,6 +358,7 @@ class RuleDefinitionListIndexedBase(RuleDefinitionListBase):
         ----------
         context : UserBaselineProposedVals
             Object containing the contexts for the user, baseline, and proposed RMRs
+        data : An optional data object. It is ignored by this base implementation.
 
         Returns
         -------
