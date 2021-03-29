@@ -13,7 +13,7 @@
 **Manual Check:** None  
 **Evaluation Context:** Each Data Element  
 **Data Lookup:** Table G3.7 and Table G3.8  
-**Determining Expected Value:**  
+## Rule Logic: 
 
 - Get the building area lighting area type of the building segment in the Proposed model: ```building_light_area_type = building_segment.lighting_building_area_type``` (Note XC, assuming this field lists values from T-9.5.1 or T-G3.8, for "Building Area Method", or "None" if the building goes for "Space-by-Space Method")
 

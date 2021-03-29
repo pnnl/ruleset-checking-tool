@@ -29,15 +29,12 @@
 
       - Case 1: lighting_status is "Existing", ILP cannot be verified, raise caution: ```if lighting_status == "Existing", CAUTION```
       - Case 2: lighting_status is "Designed", ILP cannot be verified, raise caution: ```if lighting_status == "Designed", CAUTION```
-      - Case 3: lighting_status is "Not Designed", ILP should be based on Table 9.5.1, get space type: ```if lighting_status == "Not Designed", lighting_space_type = space.lighting_space_type``` (Note XC, no lighting_space_type in the schema right now.)
+      - Case 3: lighting_status is "Not Designed", ILP should be based on Table 9.5.1, get space type: ```if lighting_status == "Not Designed", lighting_space_type = space.lighting_space_type``` (Note XC, no lighitng_space_type in the schema right now.)
 
-        - Get the space floor area: ```floor_area_proposed = space.floor_area```
+        - Determine the allowable lighting power density for the space type as per Table 3.7: ```allowable_baseline_LPD = data_lookup(table_G3_7, lighting_space_type)```
 
-        - Determine the allowable lighting power density for the space type as per Table 9.5.1: ```allowable_baseline_LPD = data_lookup(table_G9_5_1, lighting_space_type)```
-
-        - Get the total lighting power modeled in the space: ```space_lighting_power_proposed = space.lighting_power``` (Note XC, does the RMR report total wattage or LPD, or fixtures in the space?)
-
-        **Rule Assertion:** ```space_lighting_power_proposed == floor_area_proposed * allowable_baseline_LPD```
+- For each interior lighting in the Proposed model: ```For interior_lighting in P_RMR.building.interior_lightings:```
+  - Get purpose_type from interior lighting: ```purpose_type =  interior_lighting.purpose_type:```  
 
 - Get the building segment in the Baseline model: ```For building_segment in B_RMR.building.building_segments:```  
 
@@ -55,4 +52,4 @@
 
     - Get the total lighting power modeled in the space: ```space_lighting_power_baseline = space.lighting_power``` (Note XC, does the RMR report total wattage or LPD, or fixtures in the space?)  
 
-    **Rule Assertion:** For each space in B_RMR: ```space_lighting_power_baseline == floor_area_baseline * allowable_baseline_LPD```  
+**Rule Assertion:** For each space in B_RMR: ```space_lighting_power_baseline == floor_area_baseline * allowable_baseline_LPD```  
