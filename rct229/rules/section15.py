@@ -98,7 +98,9 @@ class _NameInProposed(RuleDefinitionBase):
 
     def rule_check(self, context, data):
         proposed_transformer_names = data
-        return context.user['name'] in proposed_transformer_names
+        user_transformer_name = context.user['name']
+
+        return user_transformer_name in proposed_transformer_names
 
 
 #------------------------
@@ -132,7 +134,9 @@ class _NameInBaseline(RuleDefinitionBase):
 
     def rule_check(self, context, data = None):
         baseline_transformer_names = data
-        return context.user['name'] in baseline_transformer_names
+        user_transformer_name = context.user['name']
+
+        return user_transformer_name in baseline_transformer_names
 
 #------------------------
 
@@ -147,38 +151,38 @@ class Section15Rule5(RuleDefinitionListIndexedBase):
             description = "Transformer efficiency reported in Baseline RMR equals Table 8.4.4",
             rmr_context = 'transformers',
             rmrs_used = UserBaselineProposedVals(True, True, False),
-            each_rule = _Section15Rule5_Each(),
+            each_rule = _BaselineEffAsRequired(),
             index_rmr = 'user'
         )
 
-    def is_applicable(self, context, data = None):
-        return len(context.user) > 0
 
-
-
-class _Section15Rule5_Each(RuleDefinitionBase):
+class _BaselineEffAsRequired(RuleDefinitionBase):
     def __init__(self):
-        super(_Section15Rule5_Each, self).__init__(
+        super(_BaselineEffAsRequired, self).__init__(
             rmrs_used = UserBaselineProposedVals(True, True, False),
         )
 
     def is_applicable(self, context, data = None):
-        user_type = context.user['type']
-        baseline_type = context.baseline['type']
-        user_phase = context.user['phase']
-        baseline_phase = context.baseline['phase']
-        user_efficiency = context.user['efficiency']
         # Provide conversion from VA to kVA
         user_kVA = context.user['capacity'] / 1000
         baseline_kVA = context.baseline['capacity'] / 1000
 
+        user_type = context.user['type']
+        user_phase = context.user['phase']
+        user_efficiency = context.user['efficiency']
+        user_capacity_in_range = table_8_4_4_in_range(phase = user_phase, kVA = user_kVA)
+
+        baseline_type = context.baseline['type']
+        baseline_phase = context.baseline['phase']
+        baseline_capacity_in_range = table_8_4_4_in_range(phase = baseline_phase, kVA = baseline_kVA)
+
         return (
             user_type == _DRY_TYPE and
-            table_8_4_4_in_range(phase = user_phase, kVA = user_kVA) and
+            user_capacity_in_range and
             user_efficiency >= table_8_4_4_eff(phase = user_phase, kVA = user_kVA) and
 
             baseline_type == _DRY_TYPE and
-            table_8_4_4_in_range(phase = baseline_phase, kVA = baseline_kVA)
+            baseline_capacity_in_range
         )
 
     def rule_check(self, context, data = None):
@@ -186,9 +190,10 @@ class _Section15Rule5_Each(RuleDefinitionBase):
         baseline_efficiency = context.baseline['efficiency']
         # Convert from VA to user_kVA
         baseline_kVA = context.baseline['capacity'] / 1000
+        required_baseline_transformer_efficiency = table_8_4_4_eff(phase = baseline_phase, kVA = baseline_kVA)
 
         # TODO: Allow tolerance?
-        return baseline_efficiency == table_8_4_4_eff(phase = baseline_phase, kVA = baseline_kVA)
+        return baseline_efficiency == required_baseline_transformer_efficiency
 
 #------------------------
 
