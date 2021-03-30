@@ -13,11 +13,16 @@
 **Manual Checks:** None  
 
 ## Rule Logic:
-- For each transformer `_user_transformer` in `U_RMR.transformers`:
-    - Get maximum regulated capacity: `if user_transformer.phase == SINGLE_PHASE: _max_capacity_limit = 333.0 else if user_transformer.phase == THREE_PHASE: _max_capacity_limit = 1000.0`  
+- For each `_user_transformer` in `U_RMR.transformers`:
     - **Applicability Check 1:** `_user_transformer.type == DRY_TYPE`  
-    - **Applicability Check 2:** `_user_transformer.capacity >= 15.0 and _user_transformer.capacity <= _max_capacity_limit`  
+    - Get User transformer maximum regulated capacity: `if user_transformer.phase == SINGLE_PHASE: _user_max_capacity_limit = 333.0 else if _user_transformer.phase == THREE_PHASE: _user_max_capacity_limit = 1000.0`  
+    - **Applicability Check 2:** `_user_transformer.capacity >= 15.0 and _user_transformer.capacity <= _user_max_capacity_limit`
+    - Get required User transformer efficiency: `_required_user_transformer_efficiency = data_lookup(table_8_4_4, _user_transformer.capacity, _user_transformer.phase)`
+    - **Applicability Check 3:** `_user_transformer.efficiency >= _required_user_transformer_efficiency`
     - Find `_baseline_transformer` in `B_RMR.transformers` with `_baseline_transformer.name == _user_transformer.name` or report missing
+    - **Applicability Check 4:** `_baseline_transformer.type == DRY_TYPE`
+    - Get Baseline transformer maximum regulated capacity: `if _baseline_transformer.phase == SINGLE_PHASE: _baseline_max_capacity_limit = 333.0 else if _baseline_transformer.phase == THREE_PHASE: _baseline_max_capacity_limit = 1000.0`
+    - **Applicability Check 5:** `_baseline_transformer.capacity >= 15.0 and _baseline_transformer.capacity <= _baseline_max_capacity_limit`
     - Get required Baseline transformer efficiency: `_required_baseline_transformer_efficiency = data_lookup(table_8_4_4, _baseline_transformer.capacity, _baseline_transformer.phase)`
     - **Rule Assertion:** `_baseline_transformer.efficiency == _required_baseline_transformer_efficiency`
 
