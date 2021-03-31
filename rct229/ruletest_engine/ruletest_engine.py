@@ -83,7 +83,7 @@ def evaluate_outcome(outcome):
     return test_result
 
 
-def generate_test_result_string(test_result, test_dict, test_id):
+def process_test_result(test_result, test_dict, test_id):
     """Returns a string describing whether or not a test resulted in its expected outcome
 
         Parameters
@@ -106,6 +106,12 @@ def generate_test_result_string(test_result, test_dict, test_id):
         outcome_text: str
 
             String describing whether or not a test resulted in its expected outcome
+
+        received_expected_outcome: bool
+
+            Boolean describing if the ruletest resulted in the expected outcome (i.e., passed when expected to pass,
+            failed when expected to fail)
+
     """
 
 
@@ -114,7 +120,10 @@ def generate_test_result_string(test_result, test_dict, test_id):
     description = test_dict['description']
 
     # Check if the test results agree with the expected outcome. Write an appropriate response based on their agreement
-    if test_result == expected_outcome:
+    received_expected_outcome = (test_result == expected_outcome)
+
+    # Check if the test results agree with the expected outcome. Write an appropriate response based on their agreement
+    if received_expected_outcome:
 
         if test_result:
             outcome_text = f'SUCCESS: Test {test_id} passed as expected. The following condition was identified: {description}'
@@ -128,10 +137,11 @@ def generate_test_result_string(test_result, test_dict, test_id):
         else:
             outcome_text = f'FAILURE: Test {test_id} failed unexpectedly. The following condition was not identified: {description}'
 
-    return outcome_text
+    return outcome_text, received_expected_outcome
 
 def run_section_tests(test_json_name):
-    """Runs all tests found in a given test JSON and prints results to console.
+    """Runs all tests found in a given test JSON and prints results to console. Returns true/false describing whether
+    or not all tests in the JSON result in the expected outcome.
 
     Parameters
     ----------
@@ -141,7 +151,9 @@ def run_section_tests(test_json_name):
 
     Returns
     -------
-    None
+    all_tests_successful : bool
+
+        Boolean describing if all tests in the JSON result in the expected outcome.
     """
 
     # Create path to test JSON (e.g. 'transformer_tests.json')
@@ -152,6 +164,9 @@ def run_section_tests(test_json_name):
                            f'--------------------{title_text}-------------------',
                            '-----------------------------------------------------------------------------------------',
                            '']
+
+    # List capturing all outcomes of the test_json being passed in
+    test_results = []
 
     # Open
     with open(test_json_path) as f:
@@ -195,22 +210,31 @@ def run_section_tests(test_json_name):
             # Checks that ALL tests pass in test_results. If any fail, the test fails
             test_result = all(result for result in test_results)
 
-            # Write outcome text based on overall pass/fail string based on set of test results
-            outcome_text = generate_test_result_string(test_result, test_dict, test_id)
+            # Write outcome text based on overall pass/fail string based on set of test and determine if the ruletest
+            # behaved as expected
+            outcome_text, received_expected_outcome = process_test_result(test_result, test_dict, test_id)
+
+            # Append results
             test_result_strings.append(outcome_text)
+            test_results.append(received_expected_outcome)
 
         # If a single result, check the result
         else:
 
             test_result = evaluate_outcome(outcome_result)
-            outcome_text = generate_test_result_string(test_result, test_dict, test_id)
+            outcome_text, received_expected_outcome  = process_test_result(test_result, test_dict, test_id)
             test_result_strings.append(outcome_text)
+            test_results.append(received_expected_outcome)
 
     # Print results to console
     for test_result in test_result_strings:
 
         print(test_result)
 
+    # Return whether or not all tests received their expected outcome as a boolean
+    all_tests_successful = all(test_results)
+
+    return all_tests_successful
 
 def run_transformer_tests():
     """Runs all tests found in the transformer tests JSON.
@@ -224,5 +248,5 @@ def run_transformer_tests():
 
     transformer_rule_json = 'transformer_tests.json'
 
-    run_section_tests(transformer_rule_json)
+    return run_section_tests(transformer_rule_json)
 
