@@ -6,9 +6,10 @@ import os
 
 # TODO: Resolve how to handle relative paths better
 file_dir = os.path.dirname(__file__)
+
 SCHEMA_KEY = 'ASHRAE229.schema.json'
 SCHEMA_ENUM_KEY = 'Enumerations2019ASHRAE901.schema.json'
-SCHEMA_PATH = os.path.join(file_dir, 'ashrae-229.schema.json')
+SCHEMA_PATH = os.path.join(file_dir, SCHEMA_KEY)
 SCHEMA_ENUM_PATH = os.path.join(file_dir, SCHEMA_ENUM_KEY)
 
 # TODO: Charlies definition of schema path. not currently used
