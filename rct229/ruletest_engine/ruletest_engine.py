@@ -145,7 +145,7 @@ def run_section_tests(test_json_name):
     """
 
     # Create path to test JSON (e.g. 'transformer_tests.json')
-    test_json_path = os.path.join('ruletest_jsons', 'test_jsons', test_json_name)
+    test_json_path = os.path.join('ruletest_jsons', test_json_name)
 
     title_text = f'TESTS RESULTS FOR: {test_json_name}'.center(50)
     test_result_strings = ['-----------------------------------------------------------------------------------------',
@@ -206,7 +206,7 @@ def run_section_tests(test_json_name):
             outcome_text = generate_test_result_string(test_result, test_dict, test_id)
             test_result_strings.append(outcome_text)
 
-    # Print results to console (T
+    # Print results to console
     for test_result in test_result_strings:
 
         print(test_result)
@@ -226,5 +226,3 @@ def run_transformer_tests():
 
     run_section_tests(transformer_rule_json)
 
-
-run_transformer_tests()

@@ -4,9 +4,9 @@ from rct229.utils.interp import strict_list_linear_interpolation
 
 from rct229.data.schema_enums import schema_enums
 
-TransformerPhase = schema_enums['TransformerPhase']
-SINGLE_PHASE = TransformerPhase.SINGLE_PHASE.name
-THREE_PHASE = TransformerPhase.THREE_PHASE.name
+ElectricalPhase = schema_enums['ElectricalPhase']
+SINGLE_PHASE = ElectricalPhase.SINGLE_PHASE.name
+THREE_PHASE = ElectricalPhase.THREE_PHASE.name
 _table_8_4_4 = data["table_8_4_4"]
 
 MIN_KVA = 15
