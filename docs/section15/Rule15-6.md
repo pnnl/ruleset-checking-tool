@@ -7,22 +7,17 @@
 **Data Lookup:** Table 8.4.4  
 **Evaluation Context:**  Each Data Element   
 **Applicability Checks:**
-1. Number of transformers in User RMR greater than 0  
-2. Transformer name is in Baseline RMR (Rule 15-4)
-3. Transformer is DRY_TYPE
-4. U_RMR transformer capacity is within range of Table 8.4.4  
- 
+1. Transformer is DRY_TYPE
+2. U_RMR transformer capacity is within range of Table 8.4.4  
+
 **Manual Checks:** None  
- 
+
 ## Rule Logic:
-- **Applicability Check 1:** `length(U_RMR.transformers) > 0:`
-- For each transformer in User RMR: `For _user_transformer in U_RMR.transformers:`
-    - **Applicability Check 2:** `if rule_outcome(15_4, _user_transformer.name) is True:`  
-    - **Applicability Check 3:** `if _user_transformer.type is DRY_TYPE:`  
+- For each transformer `_user_transformer` in `U_RMR.transformers`:
     - Get maximum regulated capacity: `if user_transformer.phase == SINGLE_PHASE: _max_capacity_limit = 333.0 else if user_transformer.phase == THREE_PHASE: _max_capacity_limit = 1000.0`  
-    - **Applicability Check 4:** `if (user_transformer.capacity >= 15.0) and (_user_transformer.capacity <= _max_capacity_limit):` 
-    - Get User transformer matching name of user transformer: `user_transformer = match_data_element(U_RMR, transformers, user_transformer.name)` 
-    - Get minimum User efficiency requirement: `required_user_transformer_efficiency = data_lookup(table_8_4_4, user_transformer.capacity, user_transformer.phase)`
+    - **Applicability Check 1:** `_user_transformer.type == DRY_TYPE`  
+    - **Applicability Check 2:** `_user_transformer.capacity >= 15.0 and _user_transformer.capacity <= _max_capacity_limit:`
+    - Get required User transformer efficiency: `required_user_transformer_efficiency = data_lookup(table_8_4_4, _user_transformer.capacity, _user_transformer.phase)`
     - **Rule Assertion:** `user_transformer.efficiency == required_user_transformer_efficiency`
 
 **[Back](../_toc.md)**
