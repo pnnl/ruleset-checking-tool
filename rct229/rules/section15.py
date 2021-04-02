@@ -164,36 +164,36 @@ class _BaselineEffAsRequired(RuleDefinitionBase):
 
     def is_applicable(self, context, data = None):
         # Provide conversion from VA to kVA
-        user_kVA = context.user['capacity'] / 1000
-        baseline_kVA = context.baseline['capacity'] / 1000
+        user_transformer_kVA = context.user['capacity'] / 1000
+        baseline_transformer_kVA = context.baseline['capacity'] / 1000
 
-        user_type = context.user['type']
-        user_phase = context.user['phase']
-        user_efficiency = context.user['efficiency']
-        user_capacity_in_range = table_8_4_4_in_range(phase = user_phase, kVA = user_kVA)
+        user_transformer_type = context.user['type']
+        user_transformer_phase = context.user['phase']
+        user_transformer_efficiency = context.user['efficiency']
+        user_transformer_capacity_in_range = table_8_4_4_in_range(phase = user_transformer_phase, kVA = user_transformer_kVA)
 
-        baseline_type = context.baseline['type']
-        baseline_phase = context.baseline['phase']
-        baseline_capacity_in_range = table_8_4_4_in_range(phase = baseline_phase, kVA = baseline_kVA)
+        baseline_transformer_type = context.baseline['type']
+        baseline_transformer_phase = context.baseline['phase']
+        baseline_transformer_capacity_in_range = table_8_4_4_in_range(phase = baseline_transformer_phase, kVA = baseline_transformer_kVA)
 
         return (
-            user_type == _DRY_TYPE and
-            user_capacity_in_range and
-            user_efficiency >= table_8_4_4_eff(phase = user_phase, kVA = user_kVA) and
+            user_transformer_type == _DRY_TYPE and
+            user_transformer_capacity_in_range and
+            user_transformer_efficiency >= table_8_4_4_eff(phase = user_transformer_phase, kVA = user_transformer_kVA) and
 
-            baseline_type == _DRY_TYPE and
-            baseline_capacity_in_range
+            baseline_transformer_type == _DRY_TYPE and
+            baseline_transformer_capacity_in_range
         )
 
     def rule_check(self, context, data = None):
-        baseline_phase = context.baseline['phase']
-        baseline_efficiency = context.baseline['efficiency']
+        baseline_transformer_phase = context.baseline['phase']
+        baseline_transformer_efficiency = context.baseline['efficiency']
         # Convert from VA to user_kVA
-        baseline_kVA = context.baseline['capacity'] / 1000
+        baseline_transformer_kVA = context.baseline['capacity'] / 1000
         required_baseline_transformer_efficiency = table_8_4_4_eff(phase = baseline_phase, kVA = baseline_kVA)
 
         # TODO: Allow tolerance?
-        return baseline_efficiency == required_baseline_transformer_efficiency
+        return baseline_transformer_efficiency == required_baseline_transformer_efficiency
 
 #------------------------
 
@@ -207,35 +207,36 @@ class Section15Rule6(RuleDefinitionListIndexedBase):
             description = "Transformer efficiency reported in User RMR equals Table 8.4.4",
             rmr_context = 'transformers',
             rmrs_used = UserBaselineProposedVals(True, False, False),
-            each_rule = _Section15Rule6_Each()
+            each_rule = _UserEffAtLeastRequired()
         )
 
-    def is_applicable(self, context, data = None):
-        applicable = len(context.user) > 0
-        return applicable
 
-
-
-class _Section15Rule6_Each(RuleDefinitionBase):
+class _UserEffAtLeastRequired(RuleDefinitionBase):
     def __init__(self):
-        super(_Section15Rule6_Each, self).__init__(
-            rmrs_used = UserBaselineProposedVals(True, True, False),
+        super(_UserEffAtLeastRequired, self).__init__(
+            rmrs_used = UserBaselineProposedVals(True, False, False),
         )
 
-    # TODO: We need more guidance regarding the possible cases
     def is_applicable(self, context, data = None):
-        return False
+        # Provide conversion from VA to kVA
+        user_transformer_kVA = context.user['capacity'] / 1000
 
-    # Override get_context() to jump over the MISSING_CONTEXT check
-    def get_context(self, rmrs, data = None):
-        context = self._get_context(rmrs)
-        if context.user is None:
-            context = None
+        user_transformer_type = context.user['type']
+        user_transformer_phase = context.user['phase']
+        user_transformer_capacity_in_range = table_8_4_4_in_range(phase = user_transformer_phase, kVA = user_transformer_kVA)
 
-        return context
+        return user_transformer_type == _DRY_TYPE and user_transformer_capacity_in_range
 
-    # TODO: We need more guidance regarding the possible cases
     def rule_check(self, context, data = None):
-        raise NotImplementedError
+        # Provide conversion from VA to kVA
+        user_transformer_kVA = context.user['capacity'] / 1000
+
+        user_transformer_type = context.user['type']
+        user_transformer_phase = context.user['phase']
+        user_transformer_efficiency = context.user['efficiency']
+        required_user_transformer_min_efficiency = table_8_4_4_eff(phase = user_transformer_phase, kVA = user_transformer_kVA)
+
+        return user_transformer_efficiency >= required_user_transformer_min_efficiency
+
 
 #------------------------
