@@ -336,7 +336,7 @@ class RuleDefinitionListBase(RuleDefinitionBase):
         """
         # Create the data to be passed to each_rule
         data = self.create_data(context, data)
-        context_list = self.create_context_list(context)
+        context_list = self.create_context_list(context, data)
         outcomes = []
 
         for ubp in context_list:
