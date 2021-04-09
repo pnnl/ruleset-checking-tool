@@ -1,5 +1,5 @@
 
-# Lighting - Rule 12-2
+# Receptacle - Rule 12-2
 
 **Rule ID:** 12-2  
 **Rule Description:** Number of spaces modeled in User RMR and Proposed RMR are the same  
