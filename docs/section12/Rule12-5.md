@@ -1,5 +1,5 @@
 
-# Lighting - Rule 12-5
+# Receptacle - Rule 12-5
 
 **Rule ID:** 12-5  
 **Rule Description:** User RMR Receptacle Power in Proposed RMR?  
