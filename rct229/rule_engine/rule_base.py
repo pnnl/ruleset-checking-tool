@@ -250,47 +250,25 @@ class RuleDefinitionListBase(RuleDefinitionBase):
         """Generates a list of context trios from a context that is a trio of
         lists
 
-        For a list-type rule, we generaly need to match up the entries in the
-        RMR lists by name and then apply a rule to each trio of entries. This
-        method does this matching and returns a list of trios (the contexts
-        needed for a particular matching).
+        For a list-type rule, we need to create a list of contexts to pass on
+        to the sub-rule. Often, we need to match up the entries in the
+        RMR lists by name or id and then apply the sub-rule to each trio of entries.
+        This method is responsible for creating the list of trios.
 
-
-        This may be overridden for different matching strategies. The
-        base implementation sorts by the name field, matches by name to the
-        extent possible, and pads with None for non-mathes.
+        This method must be overridden.
 
         Parameters
         ----------
         context : UserBaselineProposedVals
             Object containing the contexts for the user, baseline, and proposed RMRs
-        data : An optional data object. It is ignored by this base implementation.
+        data : An optional data object.
 
         Returns
         -------
         list of UserBaselineProposedVals
             A list of context trios
         """
-        u_len = len(context.user) if isinstance(context.user, list) else 0
-        b_len = len(context.baseline) if isinstance(context.baseline, list) else 0
-        p_len = lem(context.proposed) if isinstance(context.proposed, list) else 0
-        context_list_len = max(u_len, b_len, p_len)
-        none_list = [None for i in range(context_list_len)]
-
-        def get_name(obj):
-            return obj['name']
-
-        # Create three sorted, equal-length lists, padding with None as needed
-        u_list = context.user.sort(key = get_name) if context.user is not None else none_list
-        u_list.extend([None for i in range(context_list_len - len(u_list))])
-        b_list = context.baseline.sort(key = get_name) if context.baseline is not None else none_list
-        b_list.extend([None for i in range(context_list_len - len(b_list))])
-        p_list = context.proposed.sort(key = get_name) if context.proposed is not None else none_list
-        p_list.extend([None for i in range(context_list_len - len(p_list))])
-
-        context_list = [UserBaselineProposedVals(u_list[i], b_list[i], p_list[i]) for i in range(context_list_len)]
-
-        return context_list
+        raise NotImplementedError
 
     def create_data(self, context, data = None):
         """Create the data object to be passed to each_rule
@@ -360,8 +338,9 @@ class RuleDefinitionListIndexedBase(RuleDefinitionListBase):
 
     Applicable rules typically have the form "for each ___ in the ??? RMR, ...".
     """
-    def __init__(self, id, description, rmr_context, rmrs_used, each_rule, index_rmr = 'user'):
+    def __init__(self, id, description, rmr_context, rmrs_used, each_rule, index_rmr = 'user', match_by = '/name'):
         self.index_rmr = index_rmr
+        self.match_by = match_by
         super(RuleDefinitionListIndexedBase, self).__init__(id, description, rmr_context, rmrs_used, each_rule)
 
     def create_context_list(self, context, data = None):
@@ -372,7 +351,8 @@ class RuleDefinitionListIndexedBase(RuleDefinitionListBase):
         Parameters
         ----------
         context : UserBaselineProposedVals
-            Object containing the contexts for the user, baseline, and proposed RMRs
+            Object containing the contexts for the user, baseline, and proposed RMRs.
+            The base implementation here assumes that each rmr context is a list.
         data : An optional data object. It is ignored by this base implementation.
 
         Returns
@@ -380,65 +360,79 @@ class RuleDefinitionListIndexedBase(RuleDefinitionListBase):
         list of UserBaselineProposedVals
             A list of context trios
         """
-        # This implimentation assumes at most two rmrs being used
-        if self.rmrs_used.user and self.rmrs_used.baseline and self.rmrs_used.proposed:
-            raise NotImplementedError
+        UNKNOWN_INDEX_RMR = 'Unknown index_rmr'
+        UNUSED_INDEX_RMR_MSG = 'index_rmr is not being used'
+        CONTEXT_NOT_LIST = 'The RMR contexts must be lists'
 
-        UNUSED_INDEX_RMR_MSG = 'Index RMR is not being used'
+        index_rmr = self.index_rmr
+        rmrs_used = self.rmrs_used
+        match_by = self.match_by
 
-        context_list = None
+        # The index RMR must be either user, baseline, or proposed
+        if index_rmr not in ['user', 'baseline', 'proposed']:
+            raise ValueError(UNKNOWN_INDEX_RMR)
+
+        # The index RMR must be used
+        if (
+            (index_rmr == 'user' and not self.rmrs_used.user ) or
+            (index_rmr == 'baseline' and not self.rmrs_used.baseline ) or
+            (index_rmr == 'proposed' and not self.rmrs_used.proposed )):
+            raise ValueError(CONTEXT_NOT_LIST)
+
+        # This implementation assumes the used contexts are lists
+        if (
+            (rmrs_used.user and not isinstance(context.user, list)) or
+            (rmrs_used.baseline and not isinstance(context.baseline, list)) or
+            (rmrs_used.proposed and not isinstance(context.proposed, list))):
+            raise ValueError(CONTEXT_NOT_LIST)
+
+        user_list = None
+        baseline_list = None
+        proposed_list = None
+
         # User indexed
-        if self.index_rmr == 'user':
-            if not self.rmrs_used.user:
-                raise ValueError(UNUSED_INDEX_RMR_MSG)
+        if index_rmr == 'user':
+            user_list = context.user
+            context_list_len = len(user_list)
+            if rmrs_used.baseline:
+                baseline_list = match_lists(context.user, context.baseline, match_by)
+            if rmrs_used.proposed:
+                matched_lists = match_lists(context.user, context.proposed, match_by)
 
-            index_range = range(len(context.user))
-            if self.rmrs_used.baseline:
-                # Match baseline to user
-                matched_lists = match_lists(context.user, context.baseline, '/name')
-                context_list = [UserBaselineProposedVals(matched_lists[0][index], matched_lists[1][index], None) for index in index_range]
-            elif self.rmrs_used.proposed:
-                # Match proposed to user
-                matched_lists = match_lists(context.user, context.proposed, '/name')
-                context_list = [UserBaselineProposedVals(matched_lists[0][index], None, matched_lists[1][index]) for index in index_range]
-            else:
-                # Only user
-                context_list = [UserBaselineProposedVals(context.user[index], None, None) for index in index_range]
         # Baseline indexed
-        elif self.index_rmr == 'baseline':
-            if not self.rmrs_used.baseline:
-                raise ValueError(UNUSED_INDEX_RMR_MSG)
+        elif index_rmr == 'baseline':
+            baseline_list = context.baseline
+            context_list_len = len(baseline_list)
+            if rmrs_used.user:
+                user_list = match_lists(context.baseline, context.user, match_by)
+            elif rmrs_used.proposed:
+                proposed_list = match_lists(context.baseline, context.proposed, match_by)
 
-            index_range = range(len(context.baseline))
-            if self.rmrs_used.user:
-                # Match user to baseline
-                matched_lists = match_lists(context.baseline, context.user, '/name')
-                context_list = [UserBaselineProposedVals(matched_lists[1][index], matched_lists[0][index], None) for index in index_range]
-            elif self.rmrs_used.proposed:
-                # Match proposed to baseline
-                matched_lists = match_lists(context.baseline, context.proposed, '/name')
-                context_list = [UserBaselineProposedVals(None, matched_lists[0][index], matched_lists[1][index]) for index in index_range]
-            else:
-                # Only baseline
-                context_list = [UserBaselineProposedVals(None, context.baseline[index], None) for index in index_range]
         # Proposed indexed
-        elif self.index_rmr == 'proposed':
-            if not self.rmrs_used.proposed:
-                raise ValueError(UNUSED_INDEX_RMR_MSG)
+        elif index_rmr == 'proposed':
+            proposed_list = context.proposed
+            context_list_len = len(proposed_list)
+            if rmrs_used.user:
+                user_list = match_lists(context.proposed, context.user, match_by)
+            elif rmrs_used.baseline:
+                baseline_list = match_lists(context.proposed, context.baseline, match_by)
 
-            index_range = range(len(context.proposed))
-            if self.rmrs_used.user:
-                # Match usr to proposed
-                matched_lists = match_lists(context.proposed, context.user, '/name')
-                context_list = [UserBaselineProposedVals(matched_lists[1][index], None, matched_lists[0][index]) for index in index_range]
-            elif self.rmrs_used.baseline:
-                # Match baseline to proposed
-                matched_lists = match_lists(context.proposed, context.baseline, '/name')
-                context_list = [UserBaselineProposedVals(None, matched_lists[1][index], matched_lists[0][index]) for index in index_range]
+        # Generate the context list
+        context_list = []
+        for index in range(context_list_len):
+            if user_list is None:
+                user_entry = None
             else:
-                # Only proposed
-                context_list = [UserBaselineProposedVals(None, None, context.proposed[index]) for index in index_range]
-        else:
-            raise ValueError('Unknown index_rmr')
+                user_entry = user_list[index]
+            if baseline_list is None:
+                baseline_entry = None
+            else:
+                baseline_entry = baseline_list[index]
+            if proposed_list is None:
+                proposed_entry = None
+            else:
+                proposed_entry = proposed_list[index]
+
+            context_list.append(UserBaselineProposedVals(user_entry, baseline_entry, proposed_entry))
 
         return context_list
