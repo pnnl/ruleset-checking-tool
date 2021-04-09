@@ -7,10 +7,11 @@
 **Appendix G Section Reference:** None
 
 **Applicability:** All required data elements exist for U_RMR and P_RMR  
+**Applicability Checks:** None
 **Manual Check:** None  
 **Evaluation Context:** Each Data Element  
 **Data Lookup:** None  
-**Determining Expected Value:**  
+## Rule Logic: 
 
 - Calculate the total lighting power for each space under each building segment in the User RMR: ```For building_segment in U_RMR.building.building_segments:``` (Note XC, right now in the schema, interior lighting is independent of the space it is in. It is only related to space type. Hard to calculate the lighting power for each space.)
 
@@ -32,4 +33,4 @@
 
   - Get the total lighting power for each space: ```space_lighting_power_proposed = space.lighting_power```
 
-**Rule Assertion:** The total lighting power in each space for U_RMR and P_RMR are the same: ```space_lighting_power_user = space_lighting_power_proposed```
+  **Rule Assertion:** The total lighting power in each space for U_RMR and P_RMR are the same: ```space_lighting_power_user = space_lighting_power_proposed```
