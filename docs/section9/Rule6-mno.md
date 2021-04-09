@@ -19,7 +19,7 @@
 
   - Get thermal_block from building segment: ```thermal_block in building_segment.thermal_blocks:```
 
-  - Get thermal_zone from thermal block: ```thermal_zone in thermal_block.thermal_zones:```
+  - Get thermal_zone from thermal block: ```thermal_zone in thermal_block.zones:```
 
   - Get space from thermal zone: ```space in thermal_zone.spaces:```  
 
@@ -43,7 +43,7 @@
 
   - Get thermal_block from building segment: ```thermal_block in building_segment.thermal_blocks:```  
 
-  - Get thermal_zone from thermal block: ```thermal_zone in thermal_block.thermal_zones:```  
+  - Get thermal_zone from thermal block: ```thermal_zone in thermal_block.zones:```  
 
   - Get space from thermal zone: ```space in thermal_zone.spaces:```  
 
