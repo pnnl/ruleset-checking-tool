@@ -27,7 +27,6 @@ def evaluate_all_rules(user_rmr, baseline_rmr, proposed_rmr):
 
     # Get reference to rule functions in rules model
     AvailableRuleDefinitions = rules.__getrules__()
-    print('len(AvailableRuleDefinitions):', len(AvailableRuleDefinitions))
 
     rules_list = [RuleDef[1]() for RuleDef in AvailableRuleDefinitions]
     rmrs = UserBaselineProposedVals(user_rmr, baseline_rmr, proposed_rmr)
