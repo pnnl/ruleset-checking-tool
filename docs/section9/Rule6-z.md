@@ -3,7 +3,7 @@
 
 **Rule ID:** 6-z  
 **Rule Description:** Other automatic lighting controls included in the proposed design shall be modeled directly in the building simulation by reducing the lighting schedule each hour by the occupancy sensor reduction factors in Table G3.7 for the applicable space type. This reduction shall be taken only for lighting controlled by the occupancy sensors.  In the baseline no additional automatic lighting controls for daylight utilization shall be modeled.  
-**Rule Assertion:** Proposed RMR = expected value
+**Rule Assertion:** Proposed RMR = expected value  
 **Appendix G Section:** Lighting  
 **Appendix G Section Reference:**  
 
