@@ -7,7 +7,7 @@
 **Appendix G Section Reference:** None
 
 **Applicability:** All required data elements exist for U_RMR and P_RMR  
-**Applicability Checks:** None
+**Applicability Checks:** None  
 **Manual Check:** None  
 **Evaluation Context:** Each Data Element  
 **Data Lookup:** None  
