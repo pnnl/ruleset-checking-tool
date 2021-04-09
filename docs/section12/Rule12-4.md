@@ -21,14 +21,14 @@
 - **Applicability Check 1:** ```length( for _space in U_RMR ) > 0:```
 - Get the name of each space in the building segment in the User model: ```For building_segment in U_RMR.building.building_segments:```  
   - Get thermal_block from building segment: ```thermal_block in building_segment.thermal_blocks:```
-  - Get thermal_zone from thermal block: ```thermal_zone in thermal_block.thermal_zones:```
+  - Get thermal_zone from thermal block: ```thermal_zone in thermal_block.zones:```
   - Get space from thermal zone: ```space in thermal_zone.spaces:```  
     - Get the name of the space: ```space_name = space.name```
     - Add to the list of space names in the User model: ```space_names_user.append(space_name)```
 
 - Get the name of each space in the building segment in the Baseline model: ```For building_segment in B_RMR.building.building_segments:```  
   - Get thermal_block from building segment: ```thermal_block in building_segment.thermal_blocks:```
-  - Get thermal_zone from thermal block: ```thermal_zone in thermal_block.thermal_zones:```
+  - Get thermal_zone from thermal block: ```thermal_zone in thermal_block.zones:```
   - Get space from thermal zone: ```space in thermal_zone.spaces:```  
     - Get the name of the space: ```space_name = space.name```
     - Add to the list of space names in the Baseline model: ```space_names_baseline.append(space_name)```
