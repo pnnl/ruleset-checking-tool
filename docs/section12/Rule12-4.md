@@ -1,5 +1,5 @@
 
-# Lighting - Rule 12-4
+# Receptacle - Rule 12-4
 
 **Rule ID:** 12-4  
 **Rule Description:** User RMR Space Name in Baseline RMR?  
