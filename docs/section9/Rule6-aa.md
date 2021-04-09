@@ -3,7 +3,7 @@
 
 **Rule ID:** 6-aa  
 **Rule Description:** Proposed building is modeled with other programmable lighting controls through a 10% schedule reduction.  
-**Rule Assertion:** Proposed RMR = expected value
+**Rule Assertion:** Proposed RMR = expected value  
 **Appendix G Section:** Lighting  
 **Appendix G Section Reference:**  
 
@@ -22,7 +22,7 @@
 
 - For each building_segment in the Proposed model: ```For building_segment in P_RMR.building.building_segments:```  
   - Get thermal_block from building segment: ```thermal_block in building_segment.thermal_blocks:```
-  - Get thermal_zone from thermal block: ```thermal_zone in thermal_block.thermal_zones:```
+  - Get thermal_zone from thermal block: ```thermal_zone in thermal_block.zones:```
   - Get space from thermal zone: ```space in thermal_zone.spaces:```
   - Get floor_area from space: ```space_floor_area = space.floor_area```
     - Get building total floor area: ```building_total_area_proposed = sum(space_floor_area)```
