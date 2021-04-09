@@ -1,5 +1,5 @@
 
-# Lighting - Rule 12-3
+# Receptacle - Rule 12-3
 
 **Rule ID:** 12-3  
 **Rule Description:** User RMR Space Name in Proposed RMR?  
