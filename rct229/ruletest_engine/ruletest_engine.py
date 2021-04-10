@@ -40,7 +40,8 @@ def generate_test_rmrs(test_dict):
         JsonPointer into rmr_template and setting the pointed to node to value1,
         which can be of any type; and then repeating the process for "ptr2" and
         value2. Note that the set method of JsonPointer will create any missing
-        fields along the path to the pointer.
+        fields along the path to the pointer, but will NOT add elements to a
+        list.
 
     Returns
     -------
@@ -49,12 +50,13 @@ def generate_test_rmrs(test_dict):
         - baseline_rmr (dictionary): Baseline RMR dictionary built from RMR Transformation definition
         - proposed_rmr (dictionary): Proposed RMR dictionary built from RMR Transformation definition
     """
-
+    
     # The rmr_transformations field is required
-    if 'rmr_transfomrations' not in test_dict:
+    if 'rmr_transformations' not in test_dict:
         raise ValueError('rmr_transformations field is required in rule test')
 
-    rmr_template = test_dict['rmr_template'] or {}
+    # Set rmr_templae to {} if it is not specified in test_dict
+    rmr_template = test_dict.get('rmr_template', {})
 
     # Each of these will remain None unless it is specified in
     # rmr_transformations. If its transfomration is set to {}, then it
