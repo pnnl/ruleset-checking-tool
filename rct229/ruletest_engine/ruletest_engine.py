@@ -1,5 +1,8 @@
+import copy
 import json
+from jsonpointer import JsonPointer
 import os
+from rct229.utils.json_utils import slash_prefix_guarantee
 from rct229.rules.section15 import *
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 from rct229.rule_engine.engine import evaluate_rule
@@ -13,40 +16,75 @@ def generate_test_rmrs(test_dict):
     Parameters
     ----------
     test_dict : dict
+        A dictionary including an optional rmr_template field and a
+        required rmr_transformations field.
 
-        Dictionary containing both the required RMR template and RMR transformation elements used to create the
-        RMR dictionary triplets. Includes elements 'rmr_transformations' and
-        'rmr_transformations/user,baseline,proposed'
+        If rmr_template is included, it is used as the starting point
+        for each RMR; if not included, the empty dictionary {} is used.
+
+        The rmr_transformations field has optional user, baseline,
+        and proposed fields. If any of these fields is present, its
+        corresponding RMR will be built by transforming the rmr_template. If
+        the user, baseline, or proposed fields are missing, then its
+        correponding RMR is set to None.
+
+        The transformations are made using jsonpointer and its set method.
+        For example, if rmr_transformations includes
+        {
+            "user": {
+                "ptr1": value1,
+                "ptr2": value2
+            }
+        }
+        then the user RMR will be produced by first treating "ptr1" as a
+        JsonPointer into rmr_template and setting the pointed to node to value1,
+        which can be of any type; and then repeating the process for "ptr2" and
+        value2. Note that the set method of JsonPointer will create any missing
+        fields along the path to the pointer.
 
     Returns
     -------
-    tuple : a tuple containing:
+    tuple : a triplet containing:
         - user_rmr (dictionary): User RMR dictionary built from RMR Transformation definition
         - baseline_rmr (dictionary): Baseline RMR dictionary built from RMR Transformation definition
         - proposed_rmr (dictionary): Proposed RMR dictionary built from RMR Transformation definition
-
-        Returns the three RMR triplets. Order is user, baseline, proposed
     """
 
-    # Read in transformations dictionary. This dictates how RMRs are built.
-    rmr_transformations_dict = test_dict['rmr_transformations']
+    # The rmr_transformations field is required
+    if 'rmr_transfomrations' not in test_dict:
+        raise ValueError('rmr_transformations field is required in rule test')
 
-    # If RMRs are based on a template
-    if 'rmr_template' in test_dict:
+    rmr_template = test_dict['rmr_template'] or {}
 
-        template = test_dict['rmr_template']
+    # Each of these will remain None unless it is specified in
+    # rmr_transformations. If its transfomration is set to {}, then it
+    # will simply be a copy of rmr_template
+    user_rmr = None
+    baseline_rmr = None
+    proposed_rmr = None
 
-        # TODO figure out how to handle templates, none needed yet
-        return None, None, None
+    # Apply any given transformations to rmr_template to produce the three RMRs
+    rmr_transformations = test_dict['rmr_transformations']
+    if 'user' in rmr_transformations:
+        user_rmr = copy.deepcopy(rmr_template)
+        user_trans = rmr_transformations['user']
+        for path in user_trans:
+            value = user_trans[path]
+            JsonPointer(slash_prefix_guarantee(path)).set(user_rmr, value)
+    if 'baseline' in rmr_transformations:
+        baseline_rmr = copy.deepcopy(rmr_template)
+        baseline_trans = rmr_transformations['baseline']
+        for path in baseline_trans:
+            value = baseline_trans[path]
+            JsonPointer(slash_prefix_guarantee(path)).set(baseline_rmr, value)
+    if 'proposed' in rmr_transformations:
+        proposed_rmr = copy.deepcopy(rmr_template)
+        proposed_trans = rmr_transformations['proposed']
+        for path in proposed_trans:
+            value = proposed_trans[path]
+            JsonPointer(slash_prefix_guarantee(path)).set(proposed_rmr, value)
 
-    else:
-
-        # If RMR template does not exist, then simply use the transformations to populate RMRs
-        user_rmr = rmr_transformations_dict['user'] if 'user' in rmr_transformations_dict else None
-        baseline_rmr = rmr_transformations_dict['baseline'] if 'baseline' in rmr_transformations_dict else None
-        proposed_rmr = rmr_transformations_dict['proposed'] if 'proposed' in rmr_transformations_dict else None
-
-        return user_rmr, baseline_rmr, proposed_rmr
+    return user_rmr, baseline_rmr, proposed_rmr
 
 
 def evaluate_outcome(outcome):
@@ -249,4 +287,3 @@ def run_transformer_tests():
     transformer_rule_json = 'transformer_tests.json'
 
     return run_section_tests(transformer_rule_json)
-
