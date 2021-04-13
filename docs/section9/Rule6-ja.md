@@ -32,9 +32,9 @@
 
     - Calculate the building total allowable lighting wattage: ```building_allowable_lighting_wattage = allowable_LPD * total_building_area```
 
-  - If building_light_area_type is "None", get space_lighting_type: (Note XC, there is currently no space lighting type for spaces as per Table G3.7. This is needed to determine the basis for the Baseline lighting power allowance) ```space_type_lighting = space.space_lighting_type```
+  - If building_light_area_type is "None", get lighting_space_type: ```lighting_space_type = space.lighting_space_type```
 
-    - If space_type_lighting exists in Table G3.7 then get the allowable lighting power density for this space type: ```if space_lighting_type in table_G3_7: allowable_LPD = data_lookup(table_G3_7, space_type_lighting) else raise_warning```
+    - If space_type_lighting exists in Table G3.7 then get the allowable lighting power density for this space type: ```if lighting_space_type in table_G3_7: allowable_LPD = data_lookup(table_G3_7, lighting_space_type) else raise_warning```
 
     - Calculate the building total allowable lighting wattage: ```building_allowable_lighting_wattage.append(allowable_LPD * space_floor_area)```
 
