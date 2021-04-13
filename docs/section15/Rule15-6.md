@@ -20,4 +20,7 @@
     - Get required User transformer efficiency: `required_user_transformer_efficiency = data_lookup(table_8_4_4, _user_transformer.capacity, _user_transformer.phase)`
     - **Rule Assertion:** `user_transformer.efficiency == required_user_transformer_efficiency`
 
+## Diagram
+<img src="../diagrams/Section15.png">
+
 **[Back](../_toc.md)**

@@ -14,4 +14,7 @@
 - For each transformer `_user_transformer` in `U_RMR.transformers`:
     - **Rule Assertion:** `_user_tranformer.name in _baseline_transformer_names`
 
+## TCD Diagram
+<img src="../diagrams/Section15.png">
+
 **[Back](../_toc.md)**

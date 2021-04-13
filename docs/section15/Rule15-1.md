@@ -15,6 +15,9 @@
 - **Applicability Check 1:** `length(U_RMR.transformers) > 0:`  
 - Calculate number of User RMR transformers `num_user_transformers = length(U_RMR.transformers)`
 - Calculate number of Baseline RMR transformers `num_baseline_transformers = length(B_RMR.transformers)`
-- **Rule Assertion:** `num_user_transformers == num_baseline_transformers`
+- **Rule Assertion:** `num_user_transformers == num_baseline_transformers`  
+
+## Diagram
+<img src="../diagrams/Section15.png">
 
 **[Back](../_toc.md)**

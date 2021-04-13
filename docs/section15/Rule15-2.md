@@ -17,4 +17,7 @@
 - Calculate number of Proposed RMR transformers `num_proposed_transformers = length(B_RMR.transformers)`
 - **Rule Assertion:** `num_user_transformers == num_proposed_transformers`
 
+## Diagram
+<img src="../diagrams/Section15.png">
+
 **[Back](../_toc.md)**

@@ -26,4 +26,7 @@
     - Get required Baseline transformer efficiency: `_required_baseline_transformer_efficiency = data_lookup(table_8_4_4, _baseline_transformer.capacity, _baseline_transformer.phase)`
     - **Rule Assertion:** `_baseline_transformer.efficiency == _required_baseline_transformer_efficiency`
 
+## Diagram
+<img src="../diagrams/Section15.png">
+
 **[Back](../_toc.md)**
