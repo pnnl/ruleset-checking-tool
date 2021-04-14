@@ -16,7 +16,6 @@ def __getattr__(name):
 
 def __getrules__():
     modules = [f for f in inspect.getmembers(rules, inspect.ismodule)]
-
     base_class_names = [f[0] for f in inspect.getmembers(base_classes, inspect.isclass)]
 
     available_rules = []
@@ -24,7 +23,6 @@ def __getrules__():
         available_rules += [
             f for f in inspect.getmembers(module[1], inspect.isclass) if (not f[0].startswith('_')) and (not f[0] in base_class_names)
             ]
-
     return available_rules
 
 def __dir__():
