@@ -68,6 +68,8 @@ def evaluate_rules(rules_list, rmrs):
 
     Parameters
     ----------
+    rules_list : list
+        list of rule definitions
     rmrs : UserBaselineProposedVals
         Object containing the user, baseline, and proposed RMRs
 
@@ -90,27 +92,37 @@ def evaluate_rules(rules_list, rmrs):
         }
     """
 
+    # Determine which rmrs are used by the rule definitions
+    rmrs_used = UserBaselineProposedVals(user = False, baseline = False, proposed = False)
+    for rule in rules_list:
+        if rule.rmrs_used.user:
+            rmrs_used.user = True
+        if rule.rmrs_used.baseline:
+            rmrs_used.baseline = True
+        if rule.rmrs_used.proposed:
+            rmrs_used.proposed = True
+
     # Validate the rmrs against the schema and other high-level checks
     outcomes = []
     invalid_rmrs = {}
 
-    if rmrs.user is not None:
+    if rmrs_used.user:
         user_validation = validate_rmr(rmrs.user)
         if user_validation["passed"] is not True:
             invalid_rmrs['User'] = user_validation['error']
 
-    if rmrs.baseline is not None:
+    if rmrs_used.baseline:
         baseline_validation = validate_rmr(rmrs.baseline)
         if baseline_validation["passed"] is not True:
             invalid_rmrs['Baseline'] = baseline_validation['error']
 
-    if rmrs.proposed is not None:
+    if rmrs_used.proposed:
         proposed_validation = validate_rmr(rmrs.proposed)
         if proposed_validation["passed"] is not True:
             invalid_rmrs['Proposed'] = proposed_validation['error']
 
+    # Evaluate the rules if all the used rmrs are valid
     if len(invalid_rmrs) == 0:
-        # The RMRs are valid
         for rule in rules_list:
             outcome = rule.evaluate(rmrs)
             outcomes.append(outcome)
