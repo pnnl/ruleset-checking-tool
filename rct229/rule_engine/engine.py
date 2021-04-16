@@ -61,7 +61,7 @@ def evaluate_rule(rule, rmrs):
         }
     """
 
-    return evalute_rules([rule], rmrs)
+    return evaluate_rules([rule], rmrs)
 
 def evaluate_rules(rules_list, rmrs):
     """ Evaluates a list of rules against an RMR trio

@@ -4,10 +4,13 @@ import jsonschema
 # from jsonschema.validators import validator_for
 import os
 
-SCHEMA_PATH = os.path.join('rct229', 'schema', 'ASHRAE229.schema.json')
+file_dir = os.path.dirname(__file__)
+
 SCHEMA_KEY = 'ASHRAE229.schema.json'
-SCHEMA_ENUM_PATH = os.path.join('rct229', 'schema', 'Enumerations2019ASHRAE901.schema.json')
 SCHEMA_ENUM_KEY = 'Enumerations2019ASHRAE901.schema.json'
+SCHEMA_PATH = os.path.join(file_dir, SCHEMA_KEY)
+SCHEMA_ENUM_PATH = os.path.join(file_dir, SCHEMA_ENUM_KEY)
+
 
 def _schema_validate(rmr_obj):
     """Validates an RMR against the schema
@@ -64,3 +67,5 @@ def validate_rmr(rmr_obj):
         result = _non_schema_validate(rmr_obj)
 
     return result
+
+

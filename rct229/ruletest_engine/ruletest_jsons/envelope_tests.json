@@ -1,0 +1,667 @@
+{
+    "rule-5-7a": {
+        "Section": 5,
+        "Rule": 7,
+        "Test": "a",
+        "description": "For building area types included in Table G3.1.1-1, vertical fenestration areas for new buildings and additions shall equal that in Table G3.1.1-1 based on the area of gross above-grade walls that separate conditioned spaces and semiheated spaces from the exterior. Where a building has multiple building area types, each type shall use the values in the table. The vertical fenestration shall be distributed on each face of the building in the same proportion as in the proposed design. ",
+        "expected_outcome": "pass",
+        "rmr_transformations": {
+            "user": {
+                "buildings": {
+                    "is_new": "true",
+                    "building_segments": {
+                        "area_type_vertical_fenestration": "SCHOOL_PRIMARY",
+                        "heating_ventilation_air_conditioning_systems": {
+                            "id": 1,
+                            "sensible_cool_output_capacity": 9000,
+                            "heat_output_capacity": 320000
+                        },
+                        "thermal_blocks": {
+                            "zones": {
+                                "spaces": {
+                                    "id": 1,
+                                    "floor_area": 1000,
+                                    "surfaces": [
+                                        {
+                                            "id": 1,
+                                            "tilt": 90,
+                                            "adjacent_to": "exterior",
+                                            "azimuth": 0,
+                                            "area": 500
+                                        },
+                                        {
+                                            "id": 2,
+                                            "tilt": 90,
+                                            "adjacent_to": "exterior",
+                                            "azimuth": 90,
+                                            "area": 1000
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "baseline": {
+                "buildings": {
+                    "is_new": "true",
+                    "building_segments": {
+                        "area_type_vertical_fenestration": "SCHOOL_PRIMARY",
+                        "heating_ventilation_air_conditioning_systems": {
+                            "id": 1,
+                            "sensible_cool_output_capacity": 9000,
+                            "heat_output_capacity": 320000
+                        },
+                        "thermal_blocks": {
+                            "zones": {
+                                "spaces": {
+                                    "id": 1,
+                                    "floor_area": 1000,
+                                    "surfaces": [
+                                        {
+                                            "id": 1,
+                                            "tilt": 90,
+                                            "adjacent_to": "exterior",
+                                            "azimuth": 0,
+                                            "area": 500
+                                        },
+                                        {
+                                            "id": 2,
+                                            "tilt": 90,
+                                            "adjacent_to": "exterior",
+                                            "azimuth": 90,
+                                            "area": 1000
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "rule-5-7b": {
+        "Section": 5,
+        "Rule": 7,
+        "Test": "b",
+        "description": "For building area types included in Table G3.1.1-1, vertical fenestration areas for new buildings and additions shall equal that in Table G3.1.1-1 based on the area of gross above-grade walls that separate conditioned spaces and semiheated spaces from the exterior. Where a building has multiple building area types, each type shall use the values in the table. ",
+        "expected_outcome": "fail",
+        "rmr_transformations": {
+            "user": {
+                "buildings": {
+                    "is_new": "true",
+                    "building_segments": {
+                        "area_type_vertical_fenestration": "SCHOOL_PRIMARY",
+                        "heating_ventilation_air_conditioning_systems": {
+                            "id": 1,
+                            "sensible_cool_output_capacity": 9000,
+                            "heat_output_capacity": 320000
+                        },
+                        "thermal_blocks": {
+                            "zones": {
+                                "spaces": {
+                                    "id": 1,
+                                    "floor_area": 1000,
+                                    "surfaces": [
+                                        {
+                                            "id": 1,
+                                            "tilt": 90,
+                                            "adjacent_to": "exterior",
+                                            "azimuth": 0,
+                                            "area": 500
+                                        },
+                                        {
+                                            "id": 2,
+                                            "tilt": 90,
+                                            "adjacent_to": "exterior",
+                                            "azimuth": 90,
+                                            "area": 1000
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "baseline": {
+                "buildings": {
+                    "is_new": "true",
+                    "building_segments": {
+                        "area_type_vertical_fenestration": "SCHOOL_PRIMARY",
+                        "heating_ventilation_air_conditioning_systems": {
+                            "id": 1,
+                            "sensible_cool_output_capacity": 9000,
+                            "heat_output_capacity": 320000
+                        },
+                        "thermal_blocks": {
+                            "zones": {
+                                "spaces": {
+                                    "id": 1,
+                                    "floor_area": 1000,
+                                    "surfaces": [
+                                        {
+                                            "id": 1,
+                                            "tilt": 90,
+                                            "adjacent_to": "exterior",
+                                            "azimuth": 0,
+                                            "area": 500
+                                        },
+                                        {
+                                            "id": 2,
+                                            "tilt": 90,
+                                            "adjacent_to": "exterior",
+                                            "azimuth": 90,
+                                            "area": 1000
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "rule-5-7c": {
+        "Section": 5,
+        "Rule": 7,
+        "Test": "c",
+        "description": "For building area types included in Table G3.1.1-1, vertical fenestration areas for new buildings and additions shall equal that in Table G3.1.1-1 based on the area of gross above-grade walls that separate conditioned spaces and semiheated spaces from the exterior. Where a building has multiple building area types, each type shall use the values in the table. ",
+        "expected_outcome": "fail",
+        "rmr_transformations": {
+            "user": {
+                "buildings": {
+                    "is_new": "true",
+                    "building_segments": {
+                        "area_type_vertical_fenestration": "SCHOOL_PRIMARY",
+                        "heating_ventilation_air_conditioning_systems": {
+                            "id": 1,
+                            "sensible_cool_output_capacity": 9000,
+                            "heat_output_capacity": 320000
+                        },
+                        "thermal_blocks": {
+                            "zones": {
+                                "spaces": {
+                                    "id": 1,
+                                    "floor_area": 1000,
+                                    "surfaces": [
+                                        {
+                                            "id": 1,
+                                            "tilt": 90,
+                                            "adjacent_to": "exterior",
+                                            "azimuth": 0,
+                                            "area": 500
+                                        },
+                                        {
+                                            "id": 2,
+                                            "tilt": 90,
+                                            "adjacent_to": "exterior",
+                                            "azimuth": 90,
+                                            "area": 1000
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "baseline": {
+                "buildings": {
+                    "is_new": "true",
+                    "building_segments": {
+                        "area_type_vertical_fenestration": "SCHOOL_PRIMARY",
+                        "heating_ventilation_air_conditioning_systems": {
+                            "id": 1,
+                            "sensible_cool_output_capacity": 9000,
+                            "heat_output_capacity": 320000
+                        },
+                        "thermal_blocks": {
+                            "zones": {
+                                "spaces": {
+                                    "id": 1,
+                                    "floor_area": 1000,
+                                    "surfaces": [
+                                        {
+                                            "id": 1,
+                                            "tilt": 90,
+                                            "adjacent_to": "exterior",
+                                            "azimuth": 0,
+                                            "area": 500
+                                        },
+                                        {
+                                            "id": 2,
+                                            "tilt": 90,
+                                            "adjacent_to": "exterior",
+                                            "azimuth": 90,
+                                            "area": 1000
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "rule-5-7d": {
+        "Section": 5,
+        "Rule": 7,
+        "Test": "d",
+        "description": "For building area types included in Table G3.1.1-1, vertical fenestration areas for new buildings and additions shall equal that in Table G3.1.1-1 based on the area of gross above-grade walls that separate conditioned spaces and semiheated spaces from the exterior. Where a building has multiple building area types, each type shall use the values in the table. ",
+        "expected_outcome": "pass",
+        "rmr_transformations": {
+            "user": {
+                "buildings": {
+                    "is_new": "true",
+                    "building_segments": {
+                        "area_type_vertical_fenestration": "SCHOOL_PRIMARY",
+                        "heating_ventilation_air_conditioning_systems": {
+                            "id": 1,
+                            "sensible_cool_output_capacity": 9000,
+                            "heat_output_capacity": 300000
+                        },
+                        "thermal_blocks": {
+                            "zones": {
+                                "spaces": {
+                                    "id": 1,
+                                    "floor_area": 1000,
+                                    "surfaces": [
+                                        {
+                                            "id": 1,
+                                            "tilt": 90,
+                                            "adjacent_to": "exterior",
+                                            "azimuth": 0,
+                                            "area": 500
+                                        },
+                                        {
+                                            "id": 2,
+                                            "tilt": 90,
+                                            "adjacent_to": "exterior",
+                                            "azimuth": 90,
+                                            "area": 1000
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "baseline": {
+                "buildings": {
+                    "is_new": "true",
+                    "building_segments": {
+                        "area_type_vertical_fenestration": "SCHOOL_PRIMARY",
+                        "heating_ventilation_air_conditioning_systems": {
+                            "id": 1,
+                            "sensible_cool_output_capacity": 9000,
+                            "heat_output_capacity": 30000
+                        },
+                        "thermal_blocks": {
+                            "zones": {
+                                "spaces": {
+                                    "id": 1,
+                                    "floor_area": 1000,
+                                    "surfaces": [
+                                        {
+                                            "id": 1,
+                                            "tilt": 90,
+                                            "adjacent_to": "exterior",
+                                            "azimuth": 0,
+                                            "area": 500
+                                        },
+                                        {
+                                            "id": 2,
+                                            "tilt": 90,
+                                            "adjacent_to": "exterior",
+                                            "azimuth": 90,
+                                            "area": 1000
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "rule-5-7e": {
+        "Section": 5,
+        "Rule": 7,
+        "Test": "e",
+        "description": "For building areas not shown in Table G3.1.1-1, vertical fenestration areas for new buildings and additions shall equal that in the proposed design or 40% of gross above-grade wall area, whichever is smaller, \n- The vertical fenestration shall be distributed on each face of the building in the same proportion as in the proposed design. ",
+        "expected_outcome": "pass",
+        "rmr_transformations": {
+            "user": {
+                "buildings": {
+                    "is_new": "true",
+                    "building_segments": {
+                        "area_type_vertical_fenestration": "MISSING_MULTIFAMILY_ENUM",
+                        "heating_ventilation_air_conditioning_systems": {
+                            "id": 1,
+                            "sensible_cool_output_capacity": 9000,
+                            "heat_output_capacity": 300000
+                        },
+                        "thermal_blocks": {
+                            "zones": {
+                                "spaces": {
+                                    "id": 1,
+                                    "floor_area": 1000,
+                                    "surfaces": [
+                                        {
+                                            "id": 1,
+                                            "tilt": 90,
+                                            "adjacent_to": "exterior",
+                                            "azimuth": 0,
+                                            "area": 500
+                                        },
+                                        {
+                                            "id": 2,
+                                            "tilt": 90,
+                                            "adjacent_to": "exterior",
+                                            "azimuth": 90,
+                                            "area": 1000
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "baseline": {
+                "buildings": {
+                    "is_new": "true",
+                    "building_segments": {
+                        "area_type_vertical_fenestration": "MISSING_MULTIFAMILY_ENUM",
+                        "heating_ventilation_air_conditioning_systems": {
+                            "id": 1,
+                            "sensible_cool_output_capacity": 9000,
+                            "heat_output_capacity": 320000
+                        },
+                        "thermal_blocks": {
+                            "zones": {
+                                "spaces": {
+                                    "id": 1,
+                                    "floor_area": 1000,
+                                    "surfaces": [
+                                        {
+                                            "id": 1,
+                                            "tilt": 90,
+                                            "adjacent_to": "exterior",
+                                            "azimuth": 0,
+                                            "area": 500
+                                        },
+                                        {
+                                            "id": 2,
+                                            "tilt": 90,
+                                            "adjacent_to": "exterior",
+                                            "azimuth": 90,
+                                            "area": 1000
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "rule-5-7f": {
+        "Section": 5,
+        "Rule": 7,
+        "Test": "f",
+        "description": "- For building areas not shown in Table G3.1.1-1, vertical fenestration areas for new buildings and additions shall equal that in the proposed design or 40% of gross above-grade wall area, whichever is smaller, \n- The vertical fenestration shall be distributed on each face of the building in the same proportion as in the proposed design. ",
+        "expected_outcome": "fail",
+        "rmr_transformations": {
+            "user": {
+                "buildings": {
+                    "is_new": "true",
+                    "building_segments": {
+                        "area_type_vertical_fenestration": "MISSING_MULTIFAMILY_ENUM",
+                        "heating_ventilation_air_conditioning_systems": {
+                            "id": 1,
+                            "sensible_cool_output_capacity": 9000,
+                            "heat_output_capacity": 300000
+                        },
+                        "thermal_blocks": {
+                            "zones": {
+                                "spaces": {
+                                    "id": 1,
+                                    "floor_area": 1000,
+                                    "surfaces": [
+                                        {
+                                            "id": 1,
+                                            "tilt": 90,
+                                            "adjacent_to": "exterior",
+                                            "azimuth": 0,
+                                            "area": 500
+                                        },
+                                        {
+                                            "id": 2,
+                                            "tilt": 90,
+                                            "adjacent_to": "exterior",
+                                            "azimuth": 90,
+                                            "area": 1000
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "baseline": {
+                "buildings": {
+                    "is_new": "true",
+                    "building_segments": {
+                        "area_type_vertical_fenestration": "MISSING_MULTIFAMILY_ENUM",
+                        "heating_ventilation_air_conditioning_systems": {
+                            "id": 1,
+                            "sensible_cool_output_capacity": 9000,
+                            "heat_output_capacity": 320000
+                        },
+                        "thermal_blocks": {
+                            "zones": {
+                                "spaces": {
+                                    "id": 1,
+                                    "floor_area": 1000,
+                                    "surfaces": [
+                                        {
+                                            "id": 1,
+                                            "tilt": 90,
+                                            "adjacent_to": "exterior",
+                                            "azimuth": 0,
+                                            "area": 500
+                                        },
+                                        {
+                                            "id": 2,
+                                            "tilt": 90,
+                                            "adjacent_to": "exterior",
+                                            "azimuth": 90,
+                                            "area": 1000
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "rule-5-7g": {
+        "Section": 5,
+        "Rule": 7,
+        "Test": "g",
+        "description": "- For building areas not shown in Table G3.1.1-1, vertical fenestration areas for new buildings and additions shall equal that in the proposed design or 40% of gross above-grade wall area, whichever is smaller, \n- The vertical fenestration shall be distributed on each face of the building in the same proportion as in the proposed design. ",
+        "expected_outcome": "pass",
+        "rmr_transformations": {
+            "user": {
+                "buildings": {
+                    "is_new": "true",
+                    "building_segments": {
+                        "area_type_vertical_fenestration": "MISSING_MULTIFAMILY_ENUM",
+                        "heating_ventilation_air_conditioning_systems": {
+                            "id": 1,
+                            "sensible_cool_output_capacity": 9000,
+                            "heat_output_capacity": 300000
+                        },
+                        "thermal_blocks": {
+                            "zones": {
+                                "spaces": {
+                                    "id": 1,
+                                    "floor_area": 1000,
+                                    "surfaces": [
+                                        {
+                                            "id": 1,
+                                            "tilt": 90,
+                                            "adjacent_to": "exterior",
+                                            "azimuth": 0,
+                                            "area": 500
+                                        },
+                                        {
+                                            "id": 2,
+                                            "tilt": 90,
+                                            "adjacent_to": "exterior",
+                                            "azimuth": 90,
+                                            "area": 1000
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "baseline": {
+                "buildings": {
+                    "is_new": "true",
+                    "building_segments": {
+                        "area_type_vertical_fenestration": "MISSING_MULTIFAMILY_ENUM",
+                        "heating_ventilation_air_conditioning_systems": {
+                            "id": 1,
+                            "sensible_cool_output_capacity": 9000,
+                            "heat_output_capacity": 320000
+                        },
+                        "thermal_blocks": {
+                            "zones": {
+                                "spaces": {
+                                    "id": 1,
+                                    "floor_area": 1000,
+                                    "surfaces": [
+                                        {
+                                            "id": 1,
+                                            "tilt": 90,
+                                            "adjacent_to": "exterior",
+                                            "azimuth": 0,
+                                            "area": 500
+                                        },
+                                        {
+                                            "id": 2,
+                                            "tilt": 90,
+                                            "adjacent_to": "exterior",
+                                            "azimuth": 90,
+                                            "area": 1000
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "rule-5-7h": {
+        "Section": 5,
+        "Rule": 7,
+        "Test": "h",
+        "description": "- The fenestration area for an existing building shall equal the existing fenestration area prior to the proposed work ",
+        "expected_outcome": "manual_check",
+        "rmr_transformations": {
+            "user": {
+                "buildings": {
+                    "is_new": "true"
+                }
+            }
+        }
+    },
+    "rule-5-7i": {
+        "Section": 5,
+        "Rule": 7,
+        "Test": "i",
+        "description": "vertical fenestration area in the proposed design must be as-designed",
+        "expected_outcome": "pass",
+        "rmr_transformations": {
+            "context": 100300,
+            "user": {
+                "buildings": {
+                    "building_segments": {
+                        "thermal_blocks": {
+                            "zones": {
+                                "spaces": {
+                                    "id": 1,
+                                    "floor_area": 1000,
+                                    "surfaces": [
+                                        {
+                                            "id": 1,
+                                            "tilt": 90,
+                                            "adjacent_to": "exterior",
+                                            "azimuth": 0,
+                                            "area": 500
+                                        },
+                                        {
+                                            "id": 2,
+                                            "tilt": 90,
+                                            "adjacent_to": "exterior",
+                                            "azimuth": 90,
+                                            "area": 1000
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "baseline": {
+                "buildings": {
+                    "building_segments": {
+                        "thermal_blocks": {
+                            "zones": {
+                                "spaces": {
+                                    "id": 1,
+                                    "floor_area": 1000,
+                                    "surfaces": [
+                                        {
+                                            "id": 1,
+                                            "tilt": 90,
+                                            "adjacent_to": "exterior",
+                                            "azimuth": 0,
+                                            "area": 500
+                                        },
+                                        {
+                                            "id": 2,
+                                            "tilt": 90,
+                                            "adjacent_to": "exterior",
+                                            "azimuth": 90,
+                                            "area": 1000
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
