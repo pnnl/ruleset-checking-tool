@@ -192,39 +192,57 @@ def run_section_tests(test_json_name):
         # Pull in rule
         rule = globals()[function_name]()
 
-        # Evaluate rule
-        outcome_result = evaluate_rule(rule, rmr_trio)['outcomes'][0]['result']
+        # Evaluate rule and check for invalid RMRs
+        evaluation_dict = evaluate_rule(rule, rmr_trio)
+        invalid_rmrs_dict = evaluation_dict['invalid_rmrs']
 
-        # If outcome result is a list of results (i.e. many elements get tested), check each against expected result
-        if isinstance(outcome_result, list):
+        # If invalid RMRs exist, fail this rule and append failed message
+        if len(invalid_rmrs_dict)!= 0:
 
-            # Create list for collecting results of every test in list
-            test_results = []
+            # Find which RMRs were invalid and add them to test_result_strings
+            for invalid_rmr, invalid_rmr_message in invalid_rmrs_dict.items():
 
-            # Iterate through each outcome in outcome results
-            for outcome in outcome_result:
+                outcome_text = f'INVALID SCHEMA: Test {test_id}: {invalid_rmr} RMR: {invalid_rmr_message}'
+                test_result_strings.append(outcome_text)
 
-                # Append test result for this outcome
-                test_results.append(evaluate_outcome(outcome['result']))
+            # Append failed message to rule
+            test_results.append(False)
 
-            # Checks that ALL tests pass in test_results. If any fail, the test fails
-            test_result = all(result for result in test_results)
-
-            # Write outcome text based on overall pass/fail string based on set of test and determine if the ruletest
-            # behaved as expected
-            outcome_text, received_expected_outcome = process_test_result(test_result, test_dict, test_id)
-
-            # Append results
-            test_result_strings.append(outcome_text)
-            test_results.append(received_expected_outcome)
-
-        # If a single result, check the result
+        # If RMRs are valid, check their outcomes
         else:
 
-            test_result = evaluate_outcome(outcome_result)
-            outcome_text, received_expected_outcome  = process_test_result(test_result, test_dict, test_id)
-            test_result_strings.append(outcome_text)
-            test_results.append(received_expected_outcome)
+            outcome_result = evaluation_dict['outcomes'][0]['result']
+
+            # If outcome result is a list of results (i.e. many elements get tested), check each against expected result
+            if isinstance(outcome_result, list):
+
+                # Create list for collecting results of every test in list
+                test_results = []
+
+                # Iterate through each outcome in outcome results
+                for outcome in outcome_result:
+                    # Append test result for this outcome
+                    test_results.append(evaluate_outcome(outcome['result']))
+
+                # Checks that ALL tests pass in test_results. If any fail, the test fails
+                test_result = all(result for result in test_results)
+
+                # Write outcome text based on overall pass/fail string based on set of test and determine if the ruletest
+                # behaved as expected
+                outcome_text, received_expected_outcome = process_test_result(test_result, test_dict, test_id)
+
+                # Append results
+                test_result_strings.append(outcome_text)
+                test_results.append(received_expected_outcome)
+
+            # If a single result, check the result
+            else:
+
+                test_result = evaluate_outcome(outcome_result)
+                outcome_text, received_expected_outcome = process_test_result(test_result, test_dict, test_id)
+                test_result_strings.append(outcome_text)
+                test_results.append(received_expected_outcome)
+
 
     # Print results to console
     for test_result in test_result_strings:
