@@ -4,7 +4,6 @@ from rct229.rules.section15 import *
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 from rct229.rule_engine.engine import evaluate_rule
 
-
 # Generates the RMR triplet dictionaries from a test_dictionary's "rmr_transformation" element.
 # -test_dict = Dictionary with elements 'rmr_transformations' and 'rmr_transformations/user,baseline,proposed'
 def generate_test_rmrs(test_dict):
@@ -157,7 +156,8 @@ def run_section_tests(test_json_name):
     """
 
     # Create path to test JSON (e.g. 'transformer_tests.json')
-    test_json_path = os.path.join('ruletest_jsons', test_json_name)
+    file_dir = os.path.dirname(__file__)
+    test_json_path = os.path.join(file_dir, 'ruletest_jsons', test_json_name)
 
     title_text = f'TESTS RESULTS FOR: {test_json_name}'.center(50)
     test_result_strings = ['-----------------------------------------------------------------------------------------',
@@ -216,19 +216,17 @@ def run_section_tests(test_json_name):
             # If outcome result is a list of results (i.e. many elements get tested), check each against expected result
             if isinstance(outcome_result, list):
 
-                # Create list for collecting results of every test in list
-                test_results = []
+                outcome_result_list = []
 
                 # Iterate through each outcome in outcome results
                 for outcome in outcome_result:
                     # Append test result for this outcome
-                    test_results.append(evaluate_outcome(outcome['result']))
+                    outcome_result_list.append(evaluate_outcome(outcome['result']))
 
                 # Checks that ALL tests pass in test_results. If any fail, the test fails
-                test_result = all(result for result in test_results)
+                test_result = all(outcome_result_list)
 
-                # Write outcome text based on overall pass/fail string based on set of test and determine if the ruletest
-                # behaved as expected
+                # Write outcome text based and "receive_expected_outcome" boolean based on the test result
                 outcome_text, received_expected_outcome = process_test_result(test_result, test_dict, test_id)
 
                 # Append results
@@ -245,9 +243,9 @@ def run_section_tests(test_json_name):
 
 
     # Print results to console
-    for test_result in test_result_strings:
+    for test_result_string in test_result_strings:
 
-        print(test_result)
+        print(test_result_string)
 
     # Return whether or not all tests received their expected outcome as a boolean
     all_tests_successful = all(test_results)
