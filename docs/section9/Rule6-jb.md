@@ -3,7 +3,7 @@
 
 **Rule ID:** 6-jb  
 **Rule Description:** For the proposed building, each space has the same lighting power as the corresponding space in the U-RMR  
-**Appendix G Section:** Lighting  
+**Appendix G Section:** Section G3.1-1(a) Modeling Requirements for the Proposed design  
 **Appendix G Section Reference:** None
 
 **Applicability:** All required data elements exist for U_RMR and P_RMR  
@@ -13,24 +13,36 @@
 **Data Lookup:** None  
 ## Rule Logic: 
 
-- Calculate the total lighting power for each space under each building segment in the User RMR: ```For building_segment in U_RMR.building.building_segments:``` (Note XC, right now in the schema, interior lighting is independent of the space it is in. It is only related to space type. Hard to calculate the lighting power for each space.)
+- Calculate the total lighting power for each space under each building segment in the User RMR: ```for building_segment_user in U_RMR.building.building_segments:```  
 
-  - Get thermal_block from building segment: ```thermal_block in building_segment.thermal_blocks:```
+  - For each thermal_block in building segment: ```thermal_block_user in building_segment_user.thermal_blocks:```
 
-  - Get thermal_zone from thermal block: ```thermal_zone in thermal_block.zones:```
+  - For each zone in thermal block: ```zone_user in thermal_block_user.zones:```
 
-  - Get space from thermal zone: ```space in thermal_zone.spaces:```
+  - For each space in thermal zone: ```space_user in zone_user.spaces:```  
 
-  - Get the total lighting power for each space: ```space_lighting_power_user = space.lighting_power``` (Note XC, depending on how rmr reports the lighting power for each space, e.g. report fixtures, or report total wattage, this needs to be adjusted.)
+    - Get floor_area from space: ```floor_area_user = space_user.floor_area```  
 
-- Calculate the total lighting power for each space under each building segment in the Proposed RMR: ```For building_segment in P_RMR.building.building_segments:```
+    - Get interior_lighting in space: ```interior_lighting_user = space_user.interior_lightings```  
 
-  - Get thermal_block from building segment: ```thermal_block in building_segment.thermal_blocks:```
+      - Get the total design power_per_area: ```space_lighting_power_per_area_proposed = sum( lighting.power_per_area for lighting in interior_lighting_user )```  
 
-  - Get thermal_zone from thermal block: ```thermal_zone in thermal_block.zones:```
+      - Calculate the total design lighting power in space: ```space_total_lighting_power_user = space_lighting_power_per_area_user * floor_area_user```
 
-  - Get space from thermal zone: ```space in thermal_zone.spaces:```
+- Calculate the total lighting power for each space under each building segment in the Proposed RMR: ```for building_segment_proposed in P_RMR.building.building_segments:```  
 
-  - Get the total lighting power for each space: ```space_lighting_power_proposed = space.lighting_power```
+  - For each thermal_block in building segment: ```thermal_block_proposed in building_segment_proposed.thermal_blocks:```
 
-  **Rule Assertion:** The total lighting power in each space for U_RMR and P_RMR are the same: ```space_lighting_power_user = space_lighting_power_proposed```
+  - For each zone in thermal block: ```zone_proposed in thermal_block_proposed.zones:```
+
+  - For each space in thermal zone: ```space_proposed in zone_proposed.spaces:```  
+
+    - Get floor_area from space: ```floor_area_proposed = space_proposed.floor_area```  
+
+    - Get interior_lighting in space: ```interior_lighting_proposed = space_proposed.interior_lightings```  
+
+      - Get the total design power_per_area: ```space_lighting_power_per_area_proposed = sum( lighting.power_per_area for lighting in interior_lighting_proposed )```  
+
+      - Calculate the total design lighting power in space: ```space_total_lighting_power_proposed = space_lighting_power_per_area_proposed * floor_area_proposed```  
+
+  **Rule Assertion:** The total lighting power in each space for U_RMR and P_RMR are the same: ```space_total_lighting_power_user = space_total_lighting_power_proposed```
