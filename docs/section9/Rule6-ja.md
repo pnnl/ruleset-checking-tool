@@ -42,7 +42,7 @@
 
     - Calculate the total allowable lighting wattage for the building segment: ```building_segment_allowable_lighting_wattage_proposed += allowable_LPD_proposed * floor_area_proposed```  
 
-  - For each interior_lighting in space: ```interior_lighting_proposed in space_proposed.interior_lightings```  
+  - Get interior_lighting in space: ```interior_lighting_proposed = space_proposed.interior_lightings```  
   
     - Get the total design power_per_area for the space: ```space_lighting_power_per_area_proposed = sum( lighting.power_per_area for lighting in interior_lighting_proposed )```  
 
