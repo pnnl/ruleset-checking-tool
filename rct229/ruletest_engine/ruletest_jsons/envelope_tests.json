@@ -7,78 +7,126 @@
         "expected_outcome": "pass",
         "rmr_transformations": {
             "user": {
-                "buildings": {
-                    "is_new": "true",
-                    "building_segments": {
-                        "area_type_vertical_fenestration": "SCHOOL_PRIMARY",
-                        "heating_ventilation_air_conditioning_systems": {
-                            "id": 1,
-                            "sensible_cool_output_capacity": 9000,
-                            "heat_output_capacity": 320000
-                        },
-                        "thermal_blocks": {
-                            "zones": {
-                                "spaces": {
-                                    "id": 1,
-                                    "floor_area": 1000,
-                                    "surfaces": [
-                                        {
-                                            "id": 1,
-                                            "tilt": 90,
-                                            "adjacent_to": "exterior",
-                                            "azimuth": 0,
-                                            "area": 500
-                                        },
-                                        {
-                                            "id": 2,
-                                            "tilt": 90,
-                                            "adjacent_to": "exterior",
-                                            "azimuth": 90,
-                                            "area": 1000
-                                        }
-                                    ]
-                                }
+                "buildings": [
+                    {
+                        "is_new": "true",
+                        "building_segments": [
+                            {
+                                "area_type_vertical_fenestration": "SCHOOL_PRIMARY",
+                                "heating_ventilation_air_conditioning_systems": [
+                                    {
+                                        "id": 1,
+                                        "sensible_cool_output_capacity": 9000,
+                                        "heat_output_capacity": 320000
+                                    }
+                                ],
+                                "thermal_blocks": [
+                                    {
+                                        "zones": [
+                                            {
+                                                "spaces": [
+                                                    {
+                                                        "id": 1,
+                                                        "floor_area": 1000,
+                                                        "surfaces": [
+                                                            {
+                                                                "id": 1,
+                                                                "tilt": 90,
+                                                                "adjacent_to": "exterior",
+                                                                "azimuth": 0,
+                                                                "area": 500,
+                                                                "fenestration_subsurfaces": [
+                                                                    {
+                                                                        "id": "1",
+                                                                        "area": "100"
+                                                                    }
+                                                                ]
+                                                            },
+                                                            {
+                                                                "id": 2,
+                                                                "tilt": 90,
+                                                                "adjacent_to": "exterior",
+                                                                "azimuth": 90,
+                                                                "area": 1000,
+                                                                "fenestration_subsurfaces": [
+                                                                    {
+                                                                        "id": "2",
+                                                                        "area": "300"
+                                                                    }
+                                                                ]
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
                             }
-                        }
+                        ]
                     }
-                }
+                ]
             },
             "baseline": {
-                "buildings": {
-                    "is_new": "true",
-                    "building_segments": {
-                        "area_type_vertical_fenestration": "SCHOOL_PRIMARY",
-                        "heating_ventilation_air_conditioning_systems": {
-                            "id": 1,
-                            "sensible_cool_output_capacity": 9000,
-                            "heat_output_capacity": 320000
-                        },
-                        "thermal_blocks": {
-                            "zones": {
-                                "spaces": {
-                                    "id": 1,
-                                    "floor_area": 1000,
-                                    "surfaces": [
-                                        {
-                                            "id": 1,
-                                            "tilt": 90,
-                                            "adjacent_to": "exterior",
-                                            "azimuth": 0,
-                                            "area": 500
-                                        },
-                                        {
-                                            "id": 2,
-                                            "tilt": 90,
-                                            "adjacent_to": "exterior",
-                                            "azimuth": 90,
-                                            "area": 1000
-                                        }
-                                    ]
-                                }
+                "buildings": [
+                    {
+                        "is_new": "true",
+                        "building_segments": [
+                            {
+                                "area_type_vertical_fenestration": "SCHOOL_PRIMARY",
+                                "heating_ventilation_air_conditioning_systems": [
+                                    {
+                                        "id": 1,
+                                        "sensible_cool_output_capacity": 9000,
+                                        "heat_output_capacity": 320000
+                                    }
+                                ],
+                                "thermal_blocks": [
+                                    {
+                                        "zones": [
+                                            {
+                                                "spaces": [
+                                                    {
+                                                        "id": 1,
+                                                        "floor_area": 1000,
+                                                        "surfaces": [
+                                                            {
+                                                                "id": 1,
+                                                                "tilt": 90,
+                                                                "adjacent_to": "exterior",
+                                                                "azimuth": 0,
+                                                                "area": 500,
+                                                                "fenestration_subsurfaces": [
+                                                                    {
+                                                                        "id": "1",
+                                                                        "area": 82.5
+                                                                    }
+                                                                ]
+                                                            },
+                                                            {
+                                                                "id": 2,
+                                                                "tilt": 90,
+                                                                "adjacent_to": "exterior",
+                                                                "azimuth": 90,
+                                                                "area": 1000,
+                                                                "fenestration_subsurfaces": [
+                                                                    {
+                                                                        "id": 2,
+                                                                        "area": 247.5
+                                                                    }
+                                                                ]
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
                             }
-                        }
+                        ]
                     }
-                }
+                ]
             }
         }
     },
@@ -90,78 +138,126 @@
         "expected_outcome": "fail",
         "rmr_transformations": {
             "user": {
-                "buildings": {
-                    "is_new": "true",
-                    "building_segments": {
-                        "area_type_vertical_fenestration": "SCHOOL_PRIMARY",
-                        "heating_ventilation_air_conditioning_systems": {
-                            "id": 1,
-                            "sensible_cool_output_capacity": 9000,
-                            "heat_output_capacity": 320000
-                        },
-                        "thermal_blocks": {
-                            "zones": {
-                                "spaces": {
-                                    "id": 1,
-                                    "floor_area": 1000,
-                                    "surfaces": [
-                                        {
-                                            "id": 1,
-                                            "tilt": 90,
-                                            "adjacent_to": "exterior",
-                                            "azimuth": 0,
-                                            "area": 500
-                                        },
-                                        {
-                                            "id": 2,
-                                            "tilt": 90,
-                                            "adjacent_to": "exterior",
-                                            "azimuth": 90,
-                                            "area": 1000
-                                        }
-                                    ]
-                                }
+                "buildings": [
+                    {
+                        "is_new": "true",
+                        "building_segments": [
+                            {
+                                "area_type_vertical_fenestration": "SCHOOL_PRIMARY",
+                                "heating_ventilation_air_conditioning_systems": [
+                                    {
+                                        "id": 1,
+                                        "sensible_cool_output_capacity": 9000,
+                                        "heat_output_capacity": 320000
+                                    }
+                                ],
+                                "thermal_blocks": [
+                                    {
+                                        "zones": [
+                                            {
+                                                "spaces": [
+                                                    {
+                                                        "id": 1,
+                                                        "floor_area": 1000,
+                                                        "surfaces": [
+                                                            {
+                                                                "id": 1,
+                                                                "tilt": 90,
+                                                                "adjacent_to": "exterior",
+                                                                "azimuth": 0,
+                                                                "area": 500,
+                                                                "fenestration_subsurfaces": [
+                                                                    {
+                                                                        "id": "1",
+                                                                        "area": "100"
+                                                                    }
+                                                                ]
+                                                            },
+                                                            {
+                                                                "id": 2,
+                                                                "tilt": 90,
+                                                                "adjacent_to": "exterior",
+                                                                "azimuth": 90,
+                                                                "area": 1000,
+                                                                "fenestration_subsurfaces": [
+                                                                    {
+                                                                        "id": "2",
+                                                                        "area": "300"
+                                                                    }
+                                                                ]
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
                             }
-                        }
+                        ]
                     }
-                }
+                ]
             },
             "baseline": {
-                "buildings": {
-                    "is_new": "true",
-                    "building_segments": {
-                        "area_type_vertical_fenestration": "SCHOOL_PRIMARY",
-                        "heating_ventilation_air_conditioning_systems": {
-                            "id": 1,
-                            "sensible_cool_output_capacity": 9000,
-                            "heat_output_capacity": 320000
-                        },
-                        "thermal_blocks": {
-                            "zones": {
-                                "spaces": {
-                                    "id": 1,
-                                    "floor_area": 1000,
-                                    "surfaces": [
-                                        {
-                                            "id": 1,
-                                            "tilt": 90,
-                                            "adjacent_to": "exterior",
-                                            "azimuth": 0,
-                                            "area": 500
-                                        },
-                                        {
-                                            "id": 2,
-                                            "tilt": 90,
-                                            "adjacent_to": "exterior",
-                                            "azimuth": 90,
-                                            "area": 1000
-                                        }
-                                    ]
-                                }
+                "buildings": [
+                    {
+                        "is_new": "true",
+                        "building_segments": [
+                            {
+                                "area_type_vertical_fenestration": "SCHOOL_PRIMARY",
+                                "heating_ventilation_air_conditioning_systems": [
+                                    {
+                                        "id": 1,
+                                        "sensible_cool_output_capacity": 9000,
+                                        "heat_output_capacity": 320000
+                                    }
+                                ],
+                                "thermal_blocks": [
+                                    {
+                                        "zones": [
+                                            {
+                                                "spaces": [
+                                                    {
+                                                        "id": 1,
+                                                        "floor_area": 1000,
+                                                        "surfaces": [
+                                                            {
+                                                                "id": 1,
+                                                                "tilt": 90,
+                                                                "adjacent_to": "exterior",
+                                                                "azimuth": 0,
+                                                                "area": 500,
+                                                                "fenestration_subsurfaces": [
+                                                                    {
+                                                                        "id": "1",
+                                                                        "area": 165
+                                                                    }
+                                                                ]
+                                                            },
+                                                            {
+                                                                "id": 2,
+                                                                "tilt": 90,
+                                                                "adjacent_to": "exterior",
+                                                                "azimuth": 90,
+                                                                "area": 1000,
+                                                                "fenestration_subsurfaces": [
+                                                                    {
+                                                                        "id": 2,
+                                                                        "area": 165
+                                                                    }
+                                                                ]
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
                             }
-                        }
+                        ]
                     }
-                }
+                ]
             }
         }
     },
@@ -173,78 +269,126 @@
         "expected_outcome": "fail",
         "rmr_transformations": {
             "user": {
-                "buildings": {
-                    "is_new": "true",
-                    "building_segments": {
-                        "area_type_vertical_fenestration": "SCHOOL_PRIMARY",
-                        "heating_ventilation_air_conditioning_systems": {
-                            "id": 1,
-                            "sensible_cool_output_capacity": 9000,
-                            "heat_output_capacity": 320000
-                        },
-                        "thermal_blocks": {
-                            "zones": {
-                                "spaces": {
-                                    "id": 1,
-                                    "floor_area": 1000,
-                                    "surfaces": [
-                                        {
-                                            "id": 1,
-                                            "tilt": 90,
-                                            "adjacent_to": "exterior",
-                                            "azimuth": 0,
-                                            "area": 500
-                                        },
-                                        {
-                                            "id": 2,
-                                            "tilt": 90,
-                                            "adjacent_to": "exterior",
-                                            "azimuth": 90,
-                                            "area": 1000
-                                        }
-                                    ]
-                                }
+                "buildings": [
+                    {
+                        "is_new": "true",
+                        "building_segments": [
+                            {
+                                "area_type_vertical_fenestration": "SCHOOL_PRIMARY",
+                                "heating_ventilation_air_conditioning_systems": [
+                                    {
+                                        "id": 1,
+                                        "sensible_cool_output_capacity": 9000,
+                                        "heat_output_capacity": 320000
+                                    }
+                                ],
+                                "thermal_blocks": [
+                                    {
+                                        "zones": [
+                                            {
+                                                "spaces": [
+                                                    {
+                                                        "id": 1,
+                                                        "floor_area": 1000,
+                                                        "surfaces": [
+                                                            {
+                                                                "id": 1,
+                                                                "tilt": 90,
+                                                                "adjacent_to": "exterior",
+                                                                "azimuth": 0,
+                                                                "area": 500,
+                                                                "fenestration_subsurfaces": [
+                                                                    {
+                                                                        "id": "1",
+                                                                        "area": "100"
+                                                                    }
+                                                                ]
+                                                            },
+                                                            {
+                                                                "id": 2,
+                                                                "tilt": 90,
+                                                                "adjacent_to": "exterior",
+                                                                "azimuth": 90,
+                                                                "area": 1000,
+                                                                "fenestration_subsurfaces": [
+                                                                    {
+                                                                        "id": "2",
+                                                                        "area": "300"
+                                                                    }
+                                                                ]
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
                             }
-                        }
+                        ]
                     }
-                }
+                ]
             },
             "baseline": {
-                "buildings": {
-                    "is_new": "true",
-                    "building_segments": {
-                        "area_type_vertical_fenestration": "SCHOOL_PRIMARY",
-                        "heating_ventilation_air_conditioning_systems": {
-                            "id": 1,
-                            "sensible_cool_output_capacity": 9000,
-                            "heat_output_capacity": 320000
-                        },
-                        "thermal_blocks": {
-                            "zones": {
-                                "spaces": {
-                                    "id": 1,
-                                    "floor_area": 1000,
-                                    "surfaces": [
-                                        {
-                                            "id": 1,
-                                            "tilt": 90,
-                                            "adjacent_to": "exterior",
-                                            "azimuth": 0,
-                                            "area": 500
-                                        },
-                                        {
-                                            "id": 2,
-                                            "tilt": 90,
-                                            "adjacent_to": "exterior",
-                                            "azimuth": 90,
-                                            "area": 1000
-                                        }
-                                    ]
-                                }
+                "buildings": [
+                    {
+                        "is_new": "true",
+                        "building_segments": [
+                            {
+                                "area_type_vertical_fenestration": "SCHOOL_PRIMARY",
+                                "heating_ventilation_air_conditioning_systems": [
+                                    {
+                                        "id": 1,
+                                        "sensible_cool_output_capacity": 9000,
+                                        "heat_output_capacity": 320000
+                                    }
+                                ],
+                                "thermal_blocks": [
+                                    {
+                                        "zones": [
+                                            {
+                                                "spaces": [
+                                                    {
+                                                        "id": 1,
+                                                        "floor_area": 1000,
+                                                        "surfaces": [
+                                                            {
+                                                                "id": 1,
+                                                                "tilt": 90,
+                                                                "adjacent_to": "exterior",
+                                                                "azimuth": 0,
+                                                                "area": 500,
+                                                                "fenestration_subsurfaces": [
+                                                                    {
+                                                                        "id": "1",
+                                                                        "area": 82.5
+                                                                    }
+                                                                ]
+                                                            },
+                                                            {
+                                                                "id": 2,
+                                                                "tilt": 90,
+                                                                "adjacent_to": "exterior",
+                                                                "azimuth": 90,
+                                                                "area": 1000,
+                                                                "fenestration_subsurfaces": [
+                                                                    {
+                                                                        "id": 2,
+                                                                        "area": 300
+                                                                    }
+                                                                ]
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
                             }
-                        }
+                        ]
                     }
-                }
+                ]
             }
         }
     },
@@ -256,78 +400,126 @@
         "expected_outcome": "pass",
         "rmr_transformations": {
             "user": {
-                "buildings": {
-                    "is_new": "true",
-                    "building_segments": {
-                        "area_type_vertical_fenestration": "SCHOOL_PRIMARY",
-                        "heating_ventilation_air_conditioning_systems": {
-                            "id": 1,
-                            "sensible_cool_output_capacity": 9000,
-                            "heat_output_capacity": 300000
-                        },
-                        "thermal_blocks": {
-                            "zones": {
-                                "spaces": {
-                                    "id": 1,
-                                    "floor_area": 1000,
-                                    "surfaces": [
-                                        {
-                                            "id": 1,
-                                            "tilt": 90,
-                                            "adjacent_to": "exterior",
-                                            "azimuth": 0,
-                                            "area": 500
-                                        },
-                                        {
-                                            "id": 2,
-                                            "tilt": 90,
-                                            "adjacent_to": "exterior",
-                                            "azimuth": 90,
-                                            "area": 1000
-                                        }
-                                    ]
-                                }
+                "buildings": [
+                    {
+                        "is_new": "true",
+                        "building_segments": [
+                            {
+                                "area_type_vertical_fenestration": "SCHOOL_PRIMARY",
+                                "heating_ventilation_air_conditioning_systems": [
+                                    {
+                                        "id": 1,
+                                        "sensible_cool_output_capacity": 9000,
+                                        "heat_output_capacity": 320000
+                                    }
+                                ],
+                                "thermal_blocks": [
+                                    {
+                                        "zones": [
+                                            {
+                                                "spaces": [
+                                                    {
+                                                        "id": 1,
+                                                        "floor_area": 1000,
+                                                        "surfaces": [
+                                                            {
+                                                                "id": 1,
+                                                                "tilt": 90,
+                                                                "adjacent_to": "exterior",
+                                                                "azimuth": 0,
+                                                                "area": 500,
+                                                                "fenestration_subsurfaces": [
+                                                                    {
+                                                                        "id": "1",
+                                                                        "area": "100"
+                                                                    }
+                                                                ]
+                                                            },
+                                                            {
+                                                                "id": 2,
+                                                                "tilt": 90,
+                                                                "adjacent_to": "exterior",
+                                                                "azimuth": 90,
+                                                                "area": 1000,
+                                                                "fenestration_subsurfaces": [
+                                                                    {
+                                                                        "id": "2",
+                                                                        "area": "300"
+                                                                    }
+                                                                ]
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
                             }
-                        }
+                        ]
                     }
-                }
+                ]
             },
             "baseline": {
-                "buildings": {
-                    "is_new": "true",
-                    "building_segments": {
-                        "area_type_vertical_fenestration": "SCHOOL_PRIMARY",
-                        "heating_ventilation_air_conditioning_systems": {
-                            "id": 1,
-                            "sensible_cool_output_capacity": 9000,
-                            "heat_output_capacity": 30000
-                        },
-                        "thermal_blocks": {
-                            "zones": {
-                                "spaces": {
-                                    "id": 1,
-                                    "floor_area": 1000,
-                                    "surfaces": [
-                                        {
-                                            "id": 1,
-                                            "tilt": 90,
-                                            "adjacent_to": "exterior",
-                                            "azimuth": 0,
-                                            "area": 500
-                                        },
-                                        {
-                                            "id": 2,
-                                            "tilt": 90,
-                                            "adjacent_to": "exterior",
-                                            "azimuth": 90,
-                                            "area": 1000
-                                        }
-                                    ]
-                                }
+                "buildings": [
+                    {
+                        "is_new": "true",
+                        "building_segments": [
+                            {
+                                "area_type_vertical_fenestration": "SCHOOL_PRIMARY",
+                                "heating_ventilation_air_conditioning_systems": [
+                                    {
+                                        "id": 1,
+                                        "sensible_cool_output_capacity": 9000,
+                                        "heat_output_capacity": 320000
+                                    }
+                                ],
+                                "thermal_blocks": [
+                                    {
+                                        "zones": [
+                                            {
+                                                "spaces": [
+                                                    {
+                                                        "id": 1,
+                                                        "floor_area": 1000,
+                                                        "surfaces": [
+                                                            {
+                                                                "id": 1,
+                                                                "tilt": 90,
+                                                                "adjacent_to": "exterior",
+                                                                "azimuth": 0,
+                                                                "area": 500,
+                                                                "fenestration_subsurfaces": [
+                                                                    {
+                                                                        "id": "1",
+                                                                        "area": 82.5
+                                                                    }
+                                                                ]
+                                                            },
+                                                            {
+                                                                "id": 2,
+                                                                "tilt": 90,
+                                                                "adjacent_to": "exterior",
+                                                                "azimuth": 90,
+                                                                "area": 1000,
+                                                                "fenestration_subsurfaces": [
+                                                                    {
+                                                                        "id": 2,
+                                                                        "area": 247.5
+                                                                    }
+                                                                ]
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
                             }
-                        }
+                        ]
                     }
-                }
+                ]
             }
         }
     },
@@ -336,332 +528,34 @@
         "Rule": 7,
         "Test": "e",
         "description": "For building areas not shown in Table G3.1.1-1, vertical fenestration areas for new buildings and additions shall equal that in the proposed design or 40% of gross above-grade wall area, whichever is smaller, \n- The vertical fenestration shall be distributed on each face of the building in the same proportion as in the proposed design. ",
-        "expected_outcome": "pass",
-        "rmr_transformations": {
-            "user": {
-                "buildings": {
-                    "is_new": "true",
-                    "building_segments": {
-                        "area_type_vertical_fenestration": "MISSING_MULTIFAMILY_ENUM",
-                        "heating_ventilation_air_conditioning_systems": {
-                            "id": 1,
-                            "sensible_cool_output_capacity": 9000,
-                            "heat_output_capacity": 300000
-                        },
-                        "thermal_blocks": {
-                            "zones": {
-                                "spaces": {
-                                    "id": 1,
-                                    "floor_area": 1000,
-                                    "surfaces": [
-                                        {
-                                            "id": 1,
-                                            "tilt": 90,
-                                            "adjacent_to": "exterior",
-                                            "azimuth": 0,
-                                            "area": 500
-                                        },
-                                        {
-                                            "id": 2,
-                                            "tilt": 90,
-                                            "adjacent_to": "exterior",
-                                            "azimuth": 90,
-                                            "area": 1000
-                                        }
-                                    ]
-                                }
-                            }
-                        }
-                    }
-                }
-            },
-            "baseline": {
-                "buildings": {
-                    "is_new": "true",
-                    "building_segments": {
-                        "area_type_vertical_fenestration": "MISSING_MULTIFAMILY_ENUM",
-                        "heating_ventilation_air_conditioning_systems": {
-                            "id": 1,
-                            "sensible_cool_output_capacity": 9000,
-                            "heat_output_capacity": 320000
-                        },
-                        "thermal_blocks": {
-                            "zones": {
-                                "spaces": {
-                                    "id": 1,
-                                    "floor_area": 1000,
-                                    "surfaces": [
-                                        {
-                                            "id": 1,
-                                            "tilt": 90,
-                                            "adjacent_to": "exterior",
-                                            "azimuth": 0,
-                                            "area": 500
-                                        },
-                                        {
-                                            "id": 2,
-                                            "tilt": 90,
-                                            "adjacent_to": "exterior",
-                                            "azimuth": 90,
-                                            "area": 1000
-                                        }
-                                    ]
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
+        "expected_outcome": "pass"
     },
     "rule-5-7f": {
         "Section": 5,
         "Rule": 7,
         "Test": "f",
         "description": "- For building areas not shown in Table G3.1.1-1, vertical fenestration areas for new buildings and additions shall equal that in the proposed design or 40% of gross above-grade wall area, whichever is smaller, \n- The vertical fenestration shall be distributed on each face of the building in the same proportion as in the proposed design. ",
-        "expected_outcome": "fail",
-        "rmr_transformations": {
-            "user": {
-                "buildings": {
-                    "is_new": "true",
-                    "building_segments": {
-                        "area_type_vertical_fenestration": "MISSING_MULTIFAMILY_ENUM",
-                        "heating_ventilation_air_conditioning_systems": {
-                            "id": 1,
-                            "sensible_cool_output_capacity": 9000,
-                            "heat_output_capacity": 300000
-                        },
-                        "thermal_blocks": {
-                            "zones": {
-                                "spaces": {
-                                    "id": 1,
-                                    "floor_area": 1000,
-                                    "surfaces": [
-                                        {
-                                            "id": 1,
-                                            "tilt": 90,
-                                            "adjacent_to": "exterior",
-                                            "azimuth": 0,
-                                            "area": 500
-                                        },
-                                        {
-                                            "id": 2,
-                                            "tilt": 90,
-                                            "adjacent_to": "exterior",
-                                            "azimuth": 90,
-                                            "area": 1000
-                                        }
-                                    ]
-                                }
-                            }
-                        }
-                    }
-                }
-            },
-            "baseline": {
-                "buildings": {
-                    "is_new": "true",
-                    "building_segments": {
-                        "area_type_vertical_fenestration": "MISSING_MULTIFAMILY_ENUM",
-                        "heating_ventilation_air_conditioning_systems": {
-                            "id": 1,
-                            "sensible_cool_output_capacity": 9000,
-                            "heat_output_capacity": 320000
-                        },
-                        "thermal_blocks": {
-                            "zones": {
-                                "spaces": {
-                                    "id": 1,
-                                    "floor_area": 1000,
-                                    "surfaces": [
-                                        {
-                                            "id": 1,
-                                            "tilt": 90,
-                                            "adjacent_to": "exterior",
-                                            "azimuth": 0,
-                                            "area": 500
-                                        },
-                                        {
-                                            "id": 2,
-                                            "tilt": 90,
-                                            "adjacent_to": "exterior",
-                                            "azimuth": 90,
-                                            "area": 1000
-                                        }
-                                    ]
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
+        "expected_outcome": "fail"
     },
     "rule-5-7g": {
         "Section": 5,
         "Rule": 7,
         "Test": "g",
         "description": "- For building areas not shown in Table G3.1.1-1, vertical fenestration areas for new buildings and additions shall equal that in the proposed design or 40% of gross above-grade wall area, whichever is smaller, \n- The vertical fenestration shall be distributed on each face of the building in the same proportion as in the proposed design. ",
-        "expected_outcome": "pass",
-        "rmr_transformations": {
-            "user": {
-                "buildings": {
-                    "is_new": "true",
-                    "building_segments": {
-                        "area_type_vertical_fenestration": "MISSING_MULTIFAMILY_ENUM",
-                        "heating_ventilation_air_conditioning_systems": {
-                            "id": 1,
-                            "sensible_cool_output_capacity": 9000,
-                            "heat_output_capacity": 300000
-                        },
-                        "thermal_blocks": {
-                            "zones": {
-                                "spaces": {
-                                    "id": 1,
-                                    "floor_area": 1000,
-                                    "surfaces": [
-                                        {
-                                            "id": 1,
-                                            "tilt": 90,
-                                            "adjacent_to": "exterior",
-                                            "azimuth": 0,
-                                            "area": 500
-                                        },
-                                        {
-                                            "id": 2,
-                                            "tilt": 90,
-                                            "adjacent_to": "exterior",
-                                            "azimuth": 90,
-                                            "area": 1000
-                                        }
-                                    ]
-                                }
-                            }
-                        }
-                    }
-                }
-            },
-            "baseline": {
-                "buildings": {
-                    "is_new": "true",
-                    "building_segments": {
-                        "area_type_vertical_fenestration": "MISSING_MULTIFAMILY_ENUM",
-                        "heating_ventilation_air_conditioning_systems": {
-                            "id": 1,
-                            "sensible_cool_output_capacity": 9000,
-                            "heat_output_capacity": 320000
-                        },
-                        "thermal_blocks": {
-                            "zones": {
-                                "spaces": {
-                                    "id": 1,
-                                    "floor_area": 1000,
-                                    "surfaces": [
-                                        {
-                                            "id": 1,
-                                            "tilt": 90,
-                                            "adjacent_to": "exterior",
-                                            "azimuth": 0,
-                                            "area": 500
-                                        },
-                                        {
-                                            "id": 2,
-                                            "tilt": 90,
-                                            "adjacent_to": "exterior",
-                                            "azimuth": 90,
-                                            "area": 1000
-                                        }
-                                    ]
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
+        "expected_outcome": "pass"
     },
     "rule-5-7h": {
         "Section": 5,
         "Rule": 7,
         "Test": "h",
         "description": "- The fenestration area for an existing building shall equal the existing fenestration area prior to the proposed work ",
-        "expected_outcome": "manual_check",
-        "rmr_transformations": {
-            "user": {
-                "buildings": {
-                    "is_new": "true"
-                }
-            }
-        }
+        "expected_outcome": "manual_check"
     },
     "rule-5-7i": {
         "Section": 5,
         "Rule": 7,
         "Test": "i",
         "description": "vertical fenestration area in the proposed design must be as-designed",
-        "expected_outcome": "pass",
-        "rmr_transformations": {
-            "context": 100300,
-            "user": {
-                "buildings": {
-                    "building_segments": {
-                        "thermal_blocks": {
-                            "zones": {
-                                "spaces": {
-                                    "id": 1,
-                                    "floor_area": 1000,
-                                    "surfaces": [
-                                        {
-                                            "id": 1,
-                                            "tilt": 90,
-                                            "adjacent_to": "exterior",
-                                            "azimuth": 0,
-                                            "area": 500
-                                        },
-                                        {
-                                            "id": 2,
-                                            "tilt": 90,
-                                            "adjacent_to": "exterior",
-                                            "azimuth": 90,
-                                            "area": 1000
-                                        }
-                                    ]
-                                }
-                            }
-                        }
-                    }
-                }
-            },
-            "baseline": {
-                "buildings": {
-                    "building_segments": {
-                        "thermal_blocks": {
-                            "zones": {
-                                "spaces": {
-                                    "id": 1,
-                                    "floor_area": 1000,
-                                    "surfaces": [
-                                        {
-                                            "id": 1,
-                                            "tilt": 90,
-                                            "adjacent_to": "exterior",
-                                            "azimuth": 0,
-                                            "area": 500
-                                        },
-                                        {
-                                            "id": 2,
-                                            "tilt": 90,
-                                            "adjacent_to": "exterior",
-                                            "azimuth": 90,
-                                            "area": 1000
-                                        }
-                                    ]
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
+        "expected_outcome": "pass"
     }
 }

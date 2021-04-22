@@ -89,7 +89,7 @@ for (rule_name, columnData) in rules_df.iteritems():
                 add_to_dictionary_list(json_dict, key_list, row_value)
             else:
                 # Set nested dictionary
-                nested_dict(json_dict, key_list, row_value)
+                set_nested_dict(json_dict, key_list, row_value)
 
 
 
