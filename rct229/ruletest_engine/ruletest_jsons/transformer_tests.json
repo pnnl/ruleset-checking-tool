@@ -1,0 +1,316 @@
+{
+    "rule-15-1a": {
+        "Section": 15,
+        "Rule": 1,
+        "Test": "a",
+        "description": "Number of transformers modeled in User RMR and Baseline RMR are the same",
+        "rmr_transformations": {
+            "user": {
+                "transformers": [
+                    {
+                        "name": "Transformer_1"
+                    },
+                    {
+                        "name": "Transformer_2"
+                    },
+                    {
+                        "name": " Transformer_3"
+                    }
+                ]
+            },
+            "baseline": {
+                "transformers": [
+                    {
+                        "name": "Transformer_1"
+                    },
+                    {
+                        "name": "Transformer_2"
+                    },
+                    {
+                        "name": " Transformer_3"
+                    }
+                ]
+            }
+        },
+        "expected_rule_outcome": "pass"
+    },
+    "rule-15-1b": {
+        "Section": 15,
+        "Rule": 1,
+        "Test": "b",
+        "description": "Number of transformers modeled in User RMR > Baseline RMR ",
+        "rmr_transformations": {
+            "user": {
+                "transformers": [
+                    {
+                        "name": "Transformer_1"
+                    },
+                    {
+                        "name": "Transformer_2"
+                    },
+                    {
+                        "name": " Transformer_3"
+                    }
+                ]
+            },
+            "baseline": {
+                "transformers": [
+                    {
+                        "name": "Transformer_1"
+                    },
+                    {
+                        "name": "Transformer_2"
+                    }
+                ]
+            }
+        },
+        "expected_rule_outcome": "fail"
+    },
+    "rule-15-1c": {
+        "Section": 15,
+        "Rule": 1,
+        "Test": "c",
+        "description": "Number of transformers modeled in User RMR < Baseline RMR",
+        "rmr_transformations": {
+            "user": {
+                "transformers": [
+                    {
+                        "name": "Transformer_1"
+                    },
+                    {
+                        "name": "Transformer_2"
+                    }
+                ]
+            },
+            "baseline": {
+                "transformers": [
+                    {
+                        "name": "Transformer_1"
+                    },
+                    {
+                        "name": "Transformer_2"
+                    },
+                    {
+                        "name": " Transformer_3"
+                    }
+                ]
+            }
+        },
+        "expected_rule_outcome": "fail"
+    },
+    "rule-15-2a": {
+        "Section": 15,
+        "Rule": 2,
+        "Test": "a",
+        "description": "Number of transformers modeled in User RMR and Proposed RMR are the same",
+        "rmr_transformations": {
+            "user": {
+                "transformers": [
+                    {
+                        "name": "Transformer_1"
+                    },
+                    {
+                        "name": "Transformer_2"
+                    },
+                    {
+                        "name": " Transformer_3"
+                    }
+                ]
+            },
+            "proposed": {
+                "transformers": [
+                    {
+                        "name": "Transformer_1"
+                    },
+                    {
+                        "name": "Transformer_2"
+                    },
+                    {
+                        "name": " Transformer_3"
+                    }
+                ]
+            }
+        },
+        "expected_rule_outcome": "pass"
+    },
+    "rule-15-2b": {
+        "Section": 15,
+        "Rule": 2,
+        "Test": "b",
+        "description": "Number of transformers modeled in User RMR > Proposed RMR ",
+        "rmr_transformations": {
+            "user": {
+                "transformers": [
+                    {
+                        "name": "Transformer_1"
+                    },
+                    {
+                        "name": "Transformer_2"
+                    },
+                    {
+                        "name": " Transformer_3"
+                    }
+                ]
+            },
+            "proposed": {
+                "transformers": [
+                    {
+                        "name": "Transformer_1"
+                    },
+                    {
+                        "name": "Transformer_2"
+                    }
+                ]
+            }
+        },
+        "expected_rule_outcome": "fail"
+    },
+    "rule-15-2c": {
+        "Section": 15,
+        "Rule": 2,
+        "Test": "c",
+        "description": "Number of transformers modeled in User RMR < Proposed RMR",
+        "rmr_transformations": {
+            "user": {
+                "transformers": [
+                    {
+                        "name": "Transformer_1"
+                    },
+                    {
+                        "name": "Transformer_2"
+                    }
+                ]
+            },
+            "proposed": {
+                "transformers": [
+                    {
+                        "name": "Transformer_1"
+                    },
+                    {
+                        "name": "Transformer_2"
+                    },
+                    {
+                        "name": " Transformer_3"
+                    }
+                ]
+            }
+        },
+        "expected_rule_outcome": "fail"
+    },
+    "rule-15-3a": {
+        "Section": 15,
+        "Rule": 3,
+        "Test": "a",
+        "description": "User RMR transformer name is in the Proposed RMR",
+        "rmr_transformations": {
+            "user": {
+                "transformers": [
+                    {
+                        "name": "Transformer_1"
+                    },
+                    {
+                        "name": "Transformer_2"
+                    }
+                ]
+            },
+            "proposed": {
+                "transformers": [
+                    {
+                        "name": "Transformer_1"
+                    },
+                    {
+                        "name": "Transformer_2"
+                    }
+                ]
+            }
+        },
+        "expected_rule_outcome": "pass"
+    },
+    "rule-15-3b": {
+        "Section": 15,
+        "Rule": 3,
+        "Test": "b",
+        "description": "User RMR transformer name is not in the Proposed RMR",
+        "rmr_transformations": {
+            "user": {
+                "transformers": [
+                    {
+                        "name": "Transformer_1"
+                    },
+                    {
+                        "name": "Transformer_2"
+                    }
+                ]
+            },
+            "proposed": {
+                "transformers": [
+                    {
+                        "name": "Transformer_1"
+                    },
+                    {
+                        "name": "Transformer_4"
+                    }
+                ]
+            }
+        },
+        "expected_rule_outcome": "fail"
+    },
+    "rule-15-4a": {
+        "Section": 15,
+        "Rule": 4,
+        "Test": "a",
+        "description": "User RMR transformer name is in the Baseline RMR",
+        "rmr_transformations": {
+            "user": {
+                "transformers": [
+                    {
+                        "name": "Transformer_1"
+                    },
+                    {
+                        "name": "Transformer_2"
+                    }
+                ]
+            },
+            "baseline": {
+                "transformers": [
+                    {
+                        "name": "Transformer_1"
+                    },
+                    {
+                        "name": "Transformer_2"
+                    }
+                ]
+            }
+        },
+        "expected_rule_outcome": "pass"
+    },
+    "rule-15-4b": {
+        "Section": 15,
+        "Rule": 4,
+        "Test": "b",
+        "description": "User RMR transformer name is not in the Baseline RMR",
+        "rmr_transformations": {
+            "user": {
+                "transformers": [
+                    {
+                        "name": "Transformer_1"
+                    },
+                    {
+                        "name": "Transformer_2"
+                    }
+                ]
+            },
+            "baseline": {
+                "transformers": [
+                    {
+                        "name": "Transformer_1"
+                    },
+                    {
+                        "name": "Transformer_4"
+                    }
+                ]
+            }
+        },
+        "expected_rule_outcome": "fail"
+    }
+}

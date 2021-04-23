@@ -1,0 +1,9 @@
+{
+
+	"building_segments": "buildings/building_segments",
+	"heating_ventilation_air_conditioning_systems": "buildings/building_segments/heating_ventilation_air_conditioning_systems",
+	"spaces": "buildings/building_segments/thermal_blocks/zones/spaces",
+	"surfaces": "buildings/building_segments/thermal_blocks/zones/spaces/surfaces",
+	"fenestration_subsurfaces": "buildings/building_segments/thermal_blocks/zones/spaces/surfaces/fenestration_subsurfaces"
+	
+}
