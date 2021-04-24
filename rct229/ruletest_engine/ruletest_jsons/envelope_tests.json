@@ -37,8 +37,8 @@
                                                                 "area": 500,
                                                                 "fenestration_subsurfaces": [
                                                                     {
-                                                                        "id": "1",
-                                                                        "area": "100"
+                                                                        "id": 1,
+                                                                        "area": 100
                                                                     }
                                                                 ]
                                                             },
@@ -50,8 +50,8 @@
                                                                 "area": 1000,
                                                                 "fenestration_subsurfaces": [
                                                                     {
-                                                                        "id": "2",
-                                                                        "area": "300"
+                                                                        "id": 2,
+                                                                        "area": 300
                                                                     }
                                                                 ]
                                                             }
@@ -98,8 +98,8 @@
                                                                 "area": 500,
                                                                 "fenestration_subsurfaces": [
                                                                     {
-                                                                        "id": "1",
-                                                                        "area": 82.5
+                                                                        "id": 1,
+                                                                        "area": 82
                                                                     }
                                                                 ]
                                                             },
@@ -112,7 +112,7 @@
                                                                 "fenestration_subsurfaces": [
                                                                     {
                                                                         "id": 2,
-                                                                        "area": 247.5
+                                                                        "area": 247
                                                                     }
                                                                 ]
                                                             }
@@ -168,8 +168,8 @@
                                                                 "area": 500,
                                                                 "fenestration_subsurfaces": [
                                                                     {
-                                                                        "id": "1",
-                                                                        "area": "100"
+                                                                        "id": 1,
+                                                                        "area": 100
                                                                     }
                                                                 ]
                                                             },
@@ -181,8 +181,8 @@
                                                                 "area": 1000,
                                                                 "fenestration_subsurfaces": [
                                                                     {
-                                                                        "id": "2",
-                                                                        "area": "300"
+                                                                        "id": 2,
+                                                                        "area": 300
                                                                     }
                                                                 ]
                                                             }
@@ -229,7 +229,7 @@
                                                                 "area": 500,
                                                                 "fenestration_subsurfaces": [
                                                                     {
-                                                                        "id": "1",
+                                                                        "id": 1,
                                                                         "area": 165
                                                                     }
                                                                 ]
@@ -299,8 +299,8 @@
                                                                 "area": 500,
                                                                 "fenestration_subsurfaces": [
                                                                     {
-                                                                        "id": "1",
-                                                                        "area": "100"
+                                                                        "id": 1,
+                                                                        "area": 100
                                                                     }
                                                                 ]
                                                             },
@@ -312,8 +312,8 @@
                                                                 "area": 1000,
                                                                 "fenestration_subsurfaces": [
                                                                     {
-                                                                        "id": "2",
-                                                                        "area": "300"
+                                                                        "id": 2,
+                                                                        "area": 300
                                                                     }
                                                                 ]
                                                             }
@@ -360,8 +360,8 @@
                                                                 "area": 500,
                                                                 "fenestration_subsurfaces": [
                                                                     {
-                                                                        "id": "1",
-                                                                        "area": 82.5
+                                                                        "id": 1,
+                                                                        "area": 82
                                                                     }
                                                                 ]
                                                             },
@@ -430,8 +430,8 @@
                                                                 "area": 500,
                                                                 "fenestration_subsurfaces": [
                                                                     {
-                                                                        "id": "1",
-                                                                        "area": "100"
+                                                                        "id": 1,
+                                                                        "area": 100
                                                                     }
                                                                 ]
                                                             },
@@ -443,8 +443,8 @@
                                                                 "area": 1000,
                                                                 "fenestration_subsurfaces": [
                                                                     {
-                                                                        "id": "2",
-                                                                        "area": "300"
+                                                                        "id": 2,
+                                                                        "area": 300
                                                                     }
                                                                 ]
                                                             }
@@ -491,8 +491,8 @@
                                                                 "area": 500,
                                                                 "fenestration_subsurfaces": [
                                                                     {
-                                                                        "id": "1",
-                                                                        "area": 82.5
+                                                                        "id": 1,
+                                                                        "area": 82
                                                                     }
                                                                 ]
                                                             },
@@ -505,7 +505,7 @@
                                                                 "fenestration_subsurfaces": [
                                                                     {
                                                                         "id": 2,
-                                                                        "area": 247.5
+                                                                        "area": 247
                                                                     }
                                                                 ]
                                                             }
@@ -522,40 +522,5 @@
                 ]
             }
         }
-    },
-    "rule-5-7e": {
-        "Section": 5,
-        "Rule": 7,
-        "Test": "e",
-        "description": "For building areas not shown in Table G3.1.1-1, vertical fenestration areas for new buildings and additions shall equal that in the proposed design or 40% of gross above-grade wall area, whichever is smaller, \n- The vertical fenestration shall be distributed on each face of the building in the same proportion as in the proposed design. ",
-        "expected_outcome": "pass"
-    },
-    "rule-5-7f": {
-        "Section": 5,
-        "Rule": 7,
-        "Test": "f",
-        "description": "- For building areas not shown in Table G3.1.1-1, vertical fenestration areas for new buildings and additions shall equal that in the proposed design or 40% of gross above-grade wall area, whichever is smaller, \n- The vertical fenestration shall be distributed on each face of the building in the same proportion as in the proposed design. ",
-        "expected_outcome": "fail"
-    },
-    "rule-5-7g": {
-        "Section": 5,
-        "Rule": 7,
-        "Test": "g",
-        "description": "- For building areas not shown in Table G3.1.1-1, vertical fenestration areas for new buildings and additions shall equal that in the proposed design or 40% of gross above-grade wall area, whichever is smaller, \n- The vertical fenestration shall be distributed on each face of the building in the same proportion as in the proposed design. ",
-        "expected_outcome": "pass"
-    },
-    "rule-5-7h": {
-        "Section": 5,
-        "Rule": 7,
-        "Test": "h",
-        "description": "- The fenestration area for an existing building shall equal the existing fenestration area prior to the proposed work ",
-        "expected_outcome": "manual_check"
-    },
-    "rule-5-7i": {
-        "Section": 5,
-        "Rule": 7,
-        "Test": "i",
-        "description": "vertical fenestration area in the proposed design must be as-designed",
-        "expected_outcome": "pass"
     }
 }

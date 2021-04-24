@@ -118,7 +118,7 @@ def set_nested_dict(dic, keys, value):
     nested_dict = get_nested_dict(dic, keys)
 
     # Set value
-    nested_dict[keys[-1]] = value
+    nested_dict[keys[-1]] = clean_value(value)
 
 
 def inject_json_path_from_enumeration(key_list, json_path_ref_string):

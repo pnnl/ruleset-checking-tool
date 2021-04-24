@@ -3,6 +3,7 @@ import os
 from rct229.rules.section15 import *
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 from rct229.rule_engine.engine import evaluate_rule
+from rct229.schema.validate import validate_rmr
 
 # Generates the RMR triplet dictionaries from a test_dictionary's "rmr_transformation" element.
 # -test_dict = Dictionary with elements 'rmr_transformations' and 'rmr_transformations/user,baseline,proposed'
@@ -251,6 +252,65 @@ def run_section_tests(test_json_name):
     all_tests_successful = all(test_results)
 
     return all_tests_successful
+
+
+def validate_test_json_schema(test_json_path):
+    """ Evaluates a test JSON against the JSON schema. Raises flags for any errors found in any rule tests. Results
+        are printed to console
+
+        Parameters
+        ----------
+        test_json_path : string
+
+            Path to the test JSON in 'test_jsons' directory. (e.g., transformer_tests.json)
+
+    """
+
+    # List capturing messages describing failed RMR schemas
+    failure_list = []
+
+    # Open
+    with open(test_json_path) as f:
+        test_list_dictionary = json.load(f)
+
+    # Cycle through tests in test JSON and run each individually
+    for test_id in test_list_dictionary:
+        # Load next test dictionary from test list
+        test_dict = test_list_dictionary[test_id]
+
+        # Generate RMR dictionaries for testing
+        user_rmr, baseline_rmr, proposed_rmr = generate_test_rmrs(test_dict)
+
+        # Evaluate RMRs against the schema
+        user_result = validate_rmr(user_rmr) if user_rmr!= None else None
+        baseline_result =  validate_rmr(baseline_rmr) if baseline_rmr!= None else None
+        proposed_result =  validate_rmr(proposed_rmr) if proposed_rmr!= None else None
+
+        results_list = [user_result, baseline_result, proposed_result]
+        rmr_type_list = ['User', 'Baseline', 'Proposed']
+
+        for result, rmr_type in zip(results_list, rmr_type_list):
+
+            # If result contains a dictionary with failure information, append failure to failure list
+            if isinstance(result, dict):
+
+                if result["passed"] is not True:
+
+                    error_message = result['error']
+                    failure_message = f'Schema validation in {test_id} for the {rmr_type} RMR: {error_message}'
+                    failure_list.append(failure_message)
+
+    if len(failure_list) == 0:
+
+        base_name = os.path.basename(test_json_path)
+        print(f'No schema errors found in {base_name}')
+
+    else:
+        for failure in failure_list:
+
+            print(failure)
+
+
 
 def run_transformer_tests():
     """Runs all tests found in the transformer tests JSON.
