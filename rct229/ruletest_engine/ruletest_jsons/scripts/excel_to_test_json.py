@@ -1,30 +1,30 @@
-import pandas as pd
 import json
 import math
 import os
 
+import pandas as pd
+
 from rct229.ruletest_engine.ruletest_jsons.scripts.json_generation_utilities import *
 
+# ---------------------------------------USER INPUTS---------------------------------------
 
-#---------------------------------------USER INPUTS---------------------------------------
+spreadsheet_name = "transformer_tests_draft.xlsx"
+json_name = "transformer_tests.json"
+sheet_name = "TCDs"
 
-spreadsheet_name = 'transformer_tests_draft.xlsx'
-json_name = 'transformer_tests.json'
-sheet_name = 'TCDs'
-
-#--------------------------------------SCRIPT STARTS--------------------------------------
+# --------------------------------------SCRIPT STARTS--------------------------------------
 
 file_dir = os.path.dirname(__file__)
 
 # Define test spreadsheet path
-spreadsheet_dir = 'ruletest_spreadsheets'
-spreadsheet_path = os.path.join(file_dir, '..', spreadsheet_dir, spreadsheet_name)
+spreadsheet_dir = "ruletest_spreadsheets"
+spreadsheet_path = os.path.join(file_dir, "..", spreadsheet_dir, spreadsheet_name)
 
 # Define output json file path
-json_file_path =  os.path.join(file_dir, '..', json_name)
+json_file_path = os.path.join(file_dir, "..", json_name)
 
 # Pull out TCDs from spreadsheet
-master_df = pd.read_excel(spreadsheet_path, sheet_name= sheet_name)
+master_df = pd.read_excel(spreadsheet_path, sheet_name=sheet_name)
 
 # Get headers to begin separating dictionary 'keys' from 'values'
 headers = master_df.columns
@@ -34,7 +34,7 @@ keys = []
 
 # If header has substring 'key', consider it a key
 for header in headers:
-    if 'key' in header:
+    if "key" in header:
         keys.append(header)
 
 # Copy columns from the spreadsheet that correspond to keys
@@ -75,7 +75,7 @@ for (rule_name, columnData) in rules_df.iteritems():
                 if isinstance(key_value, str):
 
                     # If the key includes a JSON_PATH, parse for the short hand enumeration name and adjust the key list
-                    if 'JSON_PATH' in key_value:
+                    if "JSON_PATH" in key_value:
                         # Inject elements to key_list based on shorthand JSON_PATH enumeration
                         # (e.g., JSON_PATH:spaces = ["buildings","building_segments","thermal_blocks","zones","spaces"])
                         inject_json_path_from_enumeration(key_list, key_value)
@@ -84,7 +84,7 @@ for (rule_name, columnData) in rules_df.iteritems():
                         key_list.append(key_value)
 
             # If the final key is DICT_LIST, add the row key:value_list pair to list of dictionaries at this value
-            if key_list[-1] == 'DICT_LIST':
+            if key_list[-1] == "DICT_LIST":
 
                 add_to_dictionary_list(json_dict, key_list, row_value)
             else:
@@ -92,15 +92,10 @@ for (rule_name, columnData) in rules_df.iteritems():
                 nested_dict(json_dict, key_list, row_value)
 
 
-
-
 # Dump JSON to string for writing
 json_string = json.dumps(json_dict, indent=4)
 
 # Write JSON string to file
-with open(json_file_path, 'w') as json_file:
+with open(json_file_path, "w") as json_file:
     json_file.write(json_string)
     print("JSON complete and written to file: " + json_name)
-
-
-

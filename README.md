@@ -24,7 +24,8 @@ Install `pipenv` using `pip`
 `pip install pipenv`
 
 Now tests can be run by first installing dependencies and then running pytest.
-1. `pipenv install --dev`
+1. `pipenv install --dev --skip-lock`
+2. `pipemv lock --pre`
 2. `pipenv run pytest`
 
 You can also package with pipenv to test the CLI tool.
@@ -33,6 +34,11 @@ You can also package with pipenv to test the CLI tool.
 
 Run with example RMRs
 1. `pipenv run rct229 evaluate examples\user_rmr.json examples\baseline_rmr.json examples\proposed_rmr.json`
+
+## Deveolper Notes
+The ensure all code conforms to the PEP8 Style Guide https://www.python.org/dev/peps/pep-0008/, run the following commands from the `ruleset-checking-tool` directory before committing code.
+1. `pipenv isort .`
+2. `pipenv run black .`
 
 ## Disclaimer Notice      
 This material was prepared as an account of work sponsored by an agency of the United States Government.  Neither the United States Government nor the United States Department of Energy, nor Battelle, nor any of their employees, nor any jurisdiction or organization that has cooperated in the development of these materials, makes any warranty, express or implied, or assumes any legal liability or responsibility for the accuracy, completeness, or usefulness or any information, apparatus, product, software, or process disclosed, or represents that its use would not infringe privately owned rights.
