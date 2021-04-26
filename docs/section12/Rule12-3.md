@@ -18,7 +18,7 @@
 
 ## Rule Logic:  
 
-- **Applicability Check 1:** ```sum(length(zone.spaces in U_RMR) > 0:```
+- **Applicability Check 1:** ```sum(length(zone.spaces in U_RMR)) > 0:```
 - Get the name of each space in the building segment in the User model: ```for building_segment_user in U_RMR.building.building_segments:```  
   - For each thermal_block in building segment: ```thermal_block_user in building_segment_user.thermal_blocks:```
   - For each zone in thermal block: ```zone_user in thermal_block_user.zones:```
