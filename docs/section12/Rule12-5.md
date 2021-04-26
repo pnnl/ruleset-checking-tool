@@ -29,7 +29,7 @@
 
   - Get the total miscellaneous_equipment in the space: ```space_total_misc_equipment_user = sum( equipment.peak_usage for equipment in space_user.miscellaneous_equipments )```  
 
-  - Get matching space from Proposed RMR: space_proposed = match_data_element(P_RMR, spaces, space_user.name)  
+  - Get matching space from Proposed RMR: ```space_proposed = match_data_element(P_RMR, spaces, space_user.name)```  
 
     - Get the total miscellaneous_equipment in the space: ```space_total_misc_equipment_proposed = sum( equipment.peak_usage for equipment in space_proposed.miscellaneous_equipments )```  
 
