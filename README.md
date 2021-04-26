@@ -36,7 +36,7 @@ Run with example RMRs
 1. `pipenv run rct229 evaluate examples\user_rmr.json examples\baseline_rmr.json examples\proposed_rmr.json`
 
 
-## Deveolper Notes
+## Developer Notes
 Before committing changes you should run the following commands from the `ruleset-checking-tool` directory.
 1. `pipenv run isort .` to sort imports according to PEP8 https://www.python.org/dev/peps/pep-0008/
 2. `pipenv run black .` to otherwise format code according to PEP8
