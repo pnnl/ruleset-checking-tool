@@ -25,5 +25,5 @@
   - For each space in thermal zone: ```space_user in zone_user.spaces:```  
     - For each miscellaneous equipment in the space, get the equipment schedule: ```for space_equipment_user in space_user.miscellaneous_equipments: equipment_sch_user_dict[space_equipment_user] = space_equipment_user.schedule_name```
     - Get matching space from Proposed RMR: ```space_proposed = match_data_element(P_RMR, spaces, space_user.name)```
-      - For each miscellaneous equipment in the space, get the equipment schedule: ```for space_equipment_proposed in space_proposed.miscellaneous_equipments: equipment_sch_proposed_dict[space_equipment_proposed] = space_equipment_proposed.schedule_name```
+      - For each miscellaneous equipment in the space, get the equipment schedule: ```for space_equipment_proposed in space_proposed.miscellaneous_equipments: equipment_sch_proposed_dict[space_equipment_proposed] = space_equipment_proposed.schedule_name```  
     **Rule Assertion:** ```equipment_sch_user_dict == equipment_sch_proposed_dict```  
