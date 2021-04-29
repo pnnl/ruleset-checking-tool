@@ -3,17 +3,18 @@ def aggregate_outcomes(outcomes):
         for outcome in outcomes:
             summary_dict["number_evaluations"] += 1
             result = outcome["result"]
-            if result == "FAILED":
-                summary_dict["number_failed"] += 1
-            elif result == "PASSED":
-                summary_dict["number_passed"] += 1
-            elif result == "MANUAL_CHECK_REQUIRED":
-                summary_dict["number_manual_check_required"] += 1
-            elif result == "MISSING_CONTEXT":
-                summary_dict["number_missing_context"] += 1
-            elif result == "NA":
-                summary_dict["number_not_applicable"] += 1
-            elif type(result) == list:
+            if type(result) is str:
+                if result == "FAILED":
+                    summary_dict["number_failed"] += 1
+                elif result == "PASSED":
+                    summary_dict["number_passed"] += 1
+                elif result == "MANUAL_CHECK_REQUIRED":
+                    summary_dict["number_manual_check_required"] += 1
+                elif result.startswith("MISSING_"):
+                    summary_dict["number_missing_context"] += 1
+                elif result == "NA":
+                    summary_dict["number_not_applicable"] += 1
+            elif type(result) is list:
                 summary_dict["number_evaluations"] -= 1
                 _count_results(result)
             else:
