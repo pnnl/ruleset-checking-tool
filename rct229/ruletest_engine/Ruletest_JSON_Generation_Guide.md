@@ -56,11 +56,66 @@ Note how the conventional approach requires a great deal of columns to express. 
 | ------ | ------ | ------ | ------ | ------ |
 | rmr_transformations | user | JSON_PATH: spaces | floor_area | 1000 |
 
-The `JSON_PATH` for `spaces` shortens this down substantially. These shorthand enumerations are described in the `\ruletest_engine\ruletest_jsons\scripts\resources\json_pointer_enumerations.json` JSON file. You'll note that the `spaces` path maps to *'buildings/building_segments/thermal_blocks/zones/spaces'*.
+The `JSON_PATH` for `spaces` shortens this down substantially. These shorthand enumerations are described in the `\ruletest_engine\ruletest_jsons\scripts\resources\json_pointer_enumerations.json` JSON file. You'll note that the `spaces` path maps to *'buildings[0]/building_segments[0]/thermal_blocks[0]/zones[0]/spaces'*. The square brackets are described in the following section.
+
+### Specifying Arrays/Lists: Using Square Brackets
+
+Many elements in the `ASHRAE229.schema.json` require embedding many arrays of dictionaries into each other. The JSON definitions prior to this section work well for fairly "flat" dictionaries but not well for lists of them. 
+
+Let's consider how we'd set names for Zones within two distinct ThermalBlocks. The JSON we hope to achieve looks as follows:
+
+``` json
+{
+    "rule-5-7a": {
+    	"rmr_transformations": {
+    		"user": {
+    			"buildings": [
+    				{
+    					"building_segments": [
+    						{
+    							"thermal_blocks": [
+    								{
+    									"zones": [
+    										{
+    											"name": "Zone 1"
+    										}
+    									]
+    								},
+    								{
+    									"zones": [
+    										{
+    											"name": "Zone 2"
+    										}
+    									]
+    								}
+    							]
+    						}
+    					]
+    				}
+    			]
+    		}
+    	}
+    }
+}
+```
+
+Note how there are two separate thermal blocks, each containing their own zone. This is a good example of when you'd need to specify specific array indices. You do this using square brackets:
+
+| key1 | key2 | key3 | key4 | rule-5-7a |
+| ------ | ------ | ------ | ------ | ------ |
+| rmr_transformations | user | JSON_PATH: zones[0] | name | Zone 1 |
+| rmr_transformations | user | JSON_PATH: zones[1] | name | Zone 2 |
+
+Breaking down the interesting parts-- 
+
+* `JSON_PATH:zones` - shorthand for *"buildings[0]/building_segments[0]/thermal_blocks[0]/zones"* Note how even the shorthand has many list indices appended. Those elements are type "array" according to `ASHRAE229.schema.json`
+* `[0]` and `[1]` appended after the `JSON_PATH:zones` specify the 1st and 2nd element in the `zones` array/list.
+* Lastly, `name` specifies the zone name for each Zone in `zones`. 
+
 
 ### The DICT_LIST Keyword
 
-At times a rule will require multiple of the same element in a test RMR. These require passing a list of dictionaries or a `DICT_LIST` to the Python code instead. This is best described by an example. 
+At times a rule will require multiple of the same element in a test RMR. These scenarios can be shortcut by passing a list of dictionaries or a `DICT_LIST` to the Python code instead. This is best described by an example. 
 
 Consider you want to generate the following JSON for transformer test case `rule-15-1a`:
 
@@ -86,16 +141,23 @@ Consider you want to generate the following JSON for transformer test case `rule
 }
 ```
 
-Note how at the how at the `transformers` element there exist three transformers with names `Transformer_1`, `Transformer_2`, and `Transformer_3`. The conventional, 1-to-1 assignments described above would not apply here as the JSON path *rule-15-1a/rmr_transformations/user/transformers/name* requires three separate entrees. This is where we want to use the `DICT_LIST` keyword. 
+Note how at the `transformers` element there exist three transformers with names `Transformer_1`, `Transformer_2`, and `Transformer_3`. The conventional, 1-to-1 assignments described above could apply here, but would require three separate entrees. This is where the `DICT_LIST` keyword could shorthand the definition within the spreadsheet. 
 
-To generate the above JSON, the key/value description in the test spreadsheet would appear as follows:
+To generate the above JSON with `DICT_LIST`, the key/value description in the test spreadsheet would appear as follows:
 
-| key1 | key2 | key3 | key4 | rule-5-7a |
+| key1 | key2 | key3 | key4 | rule-15-1a |
 | ------ | ------ | ------ | ------ | ------ |
 | rmr_transformations | user | transformers | DICT_LIST | name:Transformer_1,Transformer_2, Transformer_3 |
 
-The `DICT_LIST` keyword placed as the final key informs the Python code that the value corresponding to this row must be parsed as a list of elements. In this case, a list with `name` as the keyword. The format for the string describing a `DICT_LIST` is *KEY:value_1, value_2, value_3...value_n*
+The `DICT_LIST` keyword placed as the final key informs the Python code that the value corresponding to this row must be parsed as a list of elements in a dictionary. In this case, a list with `name` as the keyword. The format for the string describing a `DICT_LIST` is *KEY:value_1, value_2, value_3...value_n*
 
+NOTE: this `DICT_LIST` call is functionally equivalent to using square brackets as follows:
+
+| key1 | key2 | key3 | key4 | rule-15-1a |
+| ------ | ------ | ------ | ------ | ------ |
+| rmr_transformations | user | transformers[0] | name | Transformer_1|
+| rmr_transformations | user | transformers[1] | name | Transformer_2|
+| rmr_transformations | user | transformers[2] | name | Transformer_3|
 
 
 
