@@ -304,11 +304,14 @@ def validate_test_json_schema(test_json_path):
 
         base_name = os.path.basename(test_json_path)
         print(f'No schema errors found in {base_name}')
+        return True
 
     else:
         for failure in failure_list:
 
             print(failure)
+
+        return False
 
 
 

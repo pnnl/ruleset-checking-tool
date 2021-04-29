@@ -54,7 +54,7 @@ def get_nested_dict(dic, keys):
                 else:
                     reference_dict[key] = {}
 
-            # If this element in the key_list refernces a list, index the value defined in 'list_index', else reference
+            # If this element in the key_list references a list, index the value defined in 'list_index', else reference
             # the single value specified by the key.
             if is_list:
                 # If list isn't long enough, append a new dictionary to it to avoid index out of bounds
