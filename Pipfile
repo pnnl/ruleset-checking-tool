@@ -9,6 +9,8 @@ python_version = "3.7"
 [dev-packages]
 pylint = "*"
 pytest = "*"
+black = "*"
+isort = "*"
 
 [packages]
 rct229 = {editable = true, path = "."}

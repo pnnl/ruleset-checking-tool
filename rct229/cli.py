@@ -1,28 +1,34 @@
 import click
-from rct229.rule_engine.engine import evaluate_all_rules
+
 from rct229.reports.project_report import print_rule_report, print_summary_report
+from rct229.rule_engine.engine import evaluate_all_rules
 from rct229.schema.validate import validate_rmr
 from rct229.utils.file import deserialize_rmr_file
 
-CONTEXT_SETTINGS = dict(help_option_names=['-h', '--help'])
+CONTEXT_SETTINGS = dict(help_option_names=["-h", "--help"])
+
 
 def print_version():
-    click.echo(f'{__name__}, version {__version__}')
+    click.echo(f"{__name__}, version {__version__}")
+
 
 @click.group(context_settings=CONTEXT_SETTINGS)
-@click.version_option(None,'-v','--version')
+@click.version_option(None, "-v", "--version")
 def cli():
     """
     ASHRAE 229 - Ruleset Checking Tool
     """
 
+
 # Evaluate RMR Triplet
 short_help_text = "Test RMR triplet."
 help_text = short_help_text
-@cli.command('evaluate', short_help=short_help_text, help=help_text, hidden=True)
-@click.argument('user_rmr', type=click.File('rb'))
-@click.argument('baseline_rmr', type=click.File('rb'))
-@click.argument('proposed_rmr', type=click.File('rb'))
+
+
+@cli.command("evaluate", short_help=short_help_text, help=help_text, hidden=True)
+@click.argument("user_rmr", type=click.File("rb"))
+@click.argument("baseline_rmr", type=click.File("rb"))
+@click.argument("proposed_rmr", type=click.File("rb"))
 def evalute_rmr_triplet(user_rmr, baseline_rmr, proposed_rmr):
     print("Test implementation of rule engine for ASHRAE Std 229 RCT.")
     print("")
@@ -63,7 +69,6 @@ def evalute_rmr_triplet(user_rmr, baseline_rmr, proposed_rmr):
         print("Rules completed.")
         print("")
 
-
     # # Validate the rmrs against the schema and other high-level checks
     # user_validation = validate_rmr(user_rmr_obj)
     # if user_validation["passed"] is not True:
@@ -86,5 +91,6 @@ def evalute_rmr_triplet(user_rmr, baseline_rmr, proposed_rmr):
     #     print("Rules completed.")
     #     print("")
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     cli()
