@@ -41,14 +41,16 @@ class Section15Rule1(RuleDefinitionBase):
     def is_applicable(self, context, data=None):
         return len(context.user) > 0
 
-    def rule_check(self, context, data=None):
-        user_transformers = context.user
-        num_user_transformers = len(user_transformers)
+    def get_calc_vals(self, context, data=None):
+        return {
+            "num_user_transformers": len(context.user),
+            "num_baseline_transformers": len(context.baseline),
+        }
 
-        baseline_transformers = context.baseline
-        num_baseline_transformers = len(baseline_transformers)
-
-        return num_user_transformers == num_baseline_transformers
+    def rule_check(self, context, calc_vals=None, data=None):
+        return (
+            calc_vals["num_user_transformers"] == calc_vals["num_baseline_transformers"]
+        )
 
 
 # ------------------------
@@ -69,14 +71,16 @@ class Section15Rule2(RuleDefinitionBase):
     def is_applicable(self, context, data=None):
         return len(context.user) > 0
 
-    def rule_check(self, context, data=None):
-        user_transformers = context.user
-        num_user_transformers = len(user_transformers)
+    def get_calc_vals(self, context, data=None):
+        return {
+            "num_user_transformers": len(context.user),
+            "num_proposed_transformers": len(context.proposed),
+        }
 
-        proposed_transformers = context.proposed
-        num_proposed_transformers = len(proposed_transformers)
-
-        return num_user_transformers == num_proposed_transformers
+    def rule_check(self, context, calc_vals=None, data=None):
+        return (
+            calc_vals["num_user_transformers"] == calc_vals["num_proposed_transformers"]
+        )
 
 
 # ------------------------
@@ -106,11 +110,17 @@ class _NameInProposed(RuleDefinitionBase):
             rmrs_used=UserBaselineProposedVals(True, False, False)
         )
 
-    def rule_check(self, context, data):
-        proposed_transformer_names = data
-        user_transformer_name = context.user["name"]
+    def get_calc_vals(self, context, data=None):
+        return {
+            "user_transformer_name": context.user["name"],
+            "proposed_transformer_names": data,
+        }
 
-        return user_transformer_name in proposed_transformer_names
+    def rule_check(self, context, calc_vals=None, data=None):
+        return (
+            calc_vals["user_transformer_name"]
+            in calc_vals["proposed_transformer_names"]
+        )
 
 
 # ------------------------
@@ -140,11 +150,17 @@ class _NameInBaseline(RuleDefinitionBase):
             rmrs_used=UserBaselineProposedVals(True, True, False),
         )
 
-    def rule_check(self, context, data=None):
-        baseline_transformer_names = data
-        user_transformer_name = context.user["name"]
+    def get_calc_vals(self, context, data=None):
+        return {
+            "user_transformer_name": context.user["name"],
+            "baseline_transformer_names": data,
+        }
 
-        return user_transformer_name in baseline_transformer_names
+    def rule_check(self, context, calc_vals=None, data=None):
+        return (
+            calc_vals["user_transformer_name"]
+            in calc_vals["baseline_transformer_names"]
+        )
 
 
 # ------------------------
@@ -197,18 +213,24 @@ class _BaselineEffAsRequired(RuleDefinitionBase):
             and baseline_transformer_capacity_in_range
         )
 
-    def rule_check(self, context, data=None):
+    def get_calc_vals(self, context, data=None):
         baseline_transformer_phase = context.baseline["phase"]
-        baseline_transformer_efficiency = context.baseline["efficiency"]
         # Convert from VA to user_kVA
         baseline_transformer_kVA = context.baseline["capacity"] / 1000
-        required_baseline_transformer_efficiency = table_8_4_4_eff(
-            phase=baseline_phase, kVA=baseline_kVA
-        )
+
+        return {
+            "baseline_transformer_efficiency": context.baseline["efficiency"],
+            "required_baseline_transformer_efficiency": table_8_4_4_eff(
+                phase=baseline_phase, kVA=baseline_kVA
+            ),
+        }
+
+    def rule_check(self, context, calc_vals=None, data=None):
 
         # TODO: Allow tolerance?
         return (
-            baseline_transformer_efficiency == required_baseline_transformer_efficiency
+            calc_vals["baseline_transformer_efficiency"]
+            == calc_vals["required_baseline_transformer_efficiency"]
         )
 
 
@@ -246,18 +268,23 @@ class _UserEffAtLeastRequired(RuleDefinitionBase):
 
         return user_transformer_type == _DRY_TYPE and user_transformer_capacity_in_range
 
-    def rule_check(self, context, data=None):
+    def get_calc_vals(self, context, data=None):
+        user_transformer_phase = context.user["phase"]
         # Provide conversion from VA to kVA
         user_transformer_kVA = context.user["capacity"] / 1000
 
-        user_transformer_type = context.user["type"]
-        user_transformer_phase = context.user["phase"]
-        user_transformer_efficiency = context.user["efficiency"]
-        required_user_transformer_min_efficiency = table_8_4_4_eff(
-            phase=user_transformer_phase, kVA=user_transformer_kVA
-        )
+        return {
+            "user_transformer_efficiency": context.user["efficiency"],
+            "required_user_transformer_min_efficiency": table_8_4_4_eff(
+                phase=user_transformer_phase, kVA=user_transformer_kVA
+            ),
+        }
 
-        return user_transformer_efficiency >= required_user_transformer_min_efficiency
+    def rule_check(self, context, calc_vals=None, data=None):
+        return (
+            calc_vals["user_transformer_efficiency"]
+            >= calc_vals["required_user_transformer_min_efficiency"]
+        )
 
 
 # ------------------------

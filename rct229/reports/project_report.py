@@ -1,6 +1,11 @@
+import json
 import os
 
 from rct229.reports.utils import aggregate_outcomes
+
+
+def print_json_report(report):
+    print(json.dumps(report, indent=2))
 
 
 def print_rule_report(report):

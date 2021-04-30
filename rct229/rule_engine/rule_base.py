@@ -91,12 +91,17 @@ class RuleDefinitionBase:
             # Check if rule is applicable
             if self.is_applicable(context, data):
 
+                # Get calculated values
+                calc_vals = self.get_calc_vals(context, data)
+                if calc_vals is not None:
+                    outcome["calc_vals"] = calc_vals
+
                 # Determine if manual check is required
-                if self.manual_check_required(context, data):
+                if self.manual_check_required(context, calc_vals, data):
                     outcome["result"] = "MANUAL_CHECK_REQUIRED"
                 else:
                     # Evaluate the actual rule check
-                    result = self.rule_check(context, data)
+                    result = self.rule_check(context, calc_vals, data)
                     if isinstance(result, list):
                         # The result is a list of outcomes
                         outcome["result"] = result
@@ -212,7 +217,30 @@ class RuleDefinitionBase:
 
         return True
 
-    def manual_check_required(self, context, data=None):
+    def get_calc_vals(self, context, data=None):
+        """Calculates values for the rule and returns them in a dict.
+
+        If present, the calculated values become part of the report.
+
+        This method should be overridden if the rule involves calculated values.
+
+        Parameters
+        ----------
+        context : UserBaselineProposedVals
+            Object containing the contexts for the user, baseline, and proposed RMRs
+        data : An optional data object. It is ignored by this base implementation.
+
+        Returns
+        -------
+        dict or None
+            Any overriding method should return a dict of the calculated values.
+            This base implementation returns None to indicate that there are
+            no calculated values for this rule.
+        """
+
+        return None
+
+    def manual_check_required(self, context, calc_vals=None, data=None):
         """Checks whether the rule must be manually checked for the
         given context
 
@@ -223,6 +251,8 @@ class RuleDefinitionBase:
         ----------
         context : UserBaselineProposedVals
             Object containing the contexts for the user, baseline, and proposed RMRs
+        calc_vals : dict or None
+
         data : An optional data object. It is ignored by this base implementation.
 
         Returns
@@ -233,7 +263,7 @@ class RuleDefinitionBase:
 
         return False
 
-    def rule_check(self, context, data=None):
+    def rule_check(self, context, calc_vals=None, data=None):
         """This actually checks the rule for the given context
 
         This must be overridden. The base implementation
@@ -313,7 +343,7 @@ class RuleDefinitionListBase(RuleDefinitionBase):
         """
         return data
 
-    def rule_check(self, context, data=None):
+    def rule_check(self, context, calc_vals=None, data=None):
         """Overrides the base implementation to apply a rule to each entry in
         a list
 
