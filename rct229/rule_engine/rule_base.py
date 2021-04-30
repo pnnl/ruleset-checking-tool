@@ -1,5 +1,4 @@
 from jsonpointer import resolve_pointer
-
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 from rct229.utils.match_lists import match_lists
 
@@ -85,9 +84,9 @@ class RuleDefinitionBase:
         if self.rmr_context:
             outcome["rmr_context"] = self.rmr_context
 
-        # context will be None if the context does not exist for any of the RMR used
+        # context will be a string if the context does not exist for any of the RMR used
         context = self.get_context(rmrs, data)
-        if context is not None:
+        if isinstance(context, UserBaselineProposedVals):
 
             # Check if rule is applicable
             if self.is_applicable(context, data):
@@ -110,7 +109,9 @@ class RuleDefinitionBase:
             else:
                 outcome["result"] = "NA"
         else:
-            outcome["result"] = "MISSING_CONTEXT"
+            # context should be a string indicating the RMRs that are missing
+            # such as "MISSING_BASELINE"
+            outcome["result"] = context
 
         return outcome
 
@@ -141,11 +142,13 @@ class RuleDefinitionBase:
 
         # Note: if there is no match for pointer, resolve_pointer returns None
         return UserBaselineProposedVals(
-            user=resolve_pointer(rmrs.user, pointer) if self.rmrs_used.user else None,
-            baseline=resolve_pointer(rmrs.baseline, pointer)
+            user=resolve_pointer(rmrs.user, pointer, None)
+            if self.rmrs_used.user
+            else None,
+            baseline=resolve_pointer(rmrs.baseline, pointer, None)
             if self.rmrs_used.baseline
             else None,
-            proposed=resolve_pointer(rmrs.proposed, pointer)
+            proposed=resolve_pointer(rmrs.proposed, pointer, None)
             if self.rmrs_used.proposed
             else None,
         )
@@ -165,23 +168,29 @@ class RuleDefinitionBase:
 
         Returns
         -------
-        UserBaselineProposedVals
+        UserBaselineProposedVals or str
             The return value from self._get_context() when the context exists
             in each RMR for which the correponding self.rmrs_used flag is set;
-            otherwise None
+            otherwise retrns a string such as "MISSING_BASELINE" that indicates all
+            the RMRs that are missing.
         """
 
         context = self._get_context(rmrs)
 
-        return (
-            context
-            if (
-                (context.user is not None if self.rmrs_used.user else True)
-                and (context.baseline is not None if self.rmrs_used.baseline else True)
-                and (context.proposed is not None if self.rmrs_used.proposed else True)
-            )
-            else None
-        )
+        missing_contexts = []
+        if self.rmrs_used.user and context.user is None:
+            missing_contexts.append("USER")
+        if self.rmrs_used.baseline and context.baseline is None:
+            missing_contexts.append("BASELINE")
+        if self.rmrs_used.proposed and context.proposed is None:
+            missing_contexts.append("PROPOSED")
+
+        if len(missing_contexts) > 0:
+            retval = "MISSING_" + "_".join(missing_contexts)
+        else:
+            retval = context
+
+        return retval
 
     def is_applicable(self, context, data=None):
         """Checks that the rule applies
