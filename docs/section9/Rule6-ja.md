@@ -22,11 +22,11 @@
 
   - Determine if the building segment uses Building Area Method: ```if lighting_building_area_type_proposed is "None": bam_flag = FALSE else bam_flag = TRUE```  
 
-- For each thermal_block from building_segment: ```thermal_block_proposed in lighting_building_area_type_proposed.thermal_blocks:```  
+- For each thermal_block in building_segment: ```thermal_block_proposed in lighting_building_area_type_proposed.thermal_blocks:```  
 
-- For each thermal_zone from thermal_block: ```thermal_zone_proposed in thermal_block_proposed.zones:```  
+- For each thermal_zone in thermal_block: ```thermal_zone_proposed in thermal_block_proposed.zones:```  
 
-- For each space from thermal zone: ```space_proposed in thermal_zone_proposed.spaces:```  
+- For each space in thermal zone: ```space_proposed in thermal_zone_proposed.spaces:```  
 
   - Get floor_area from space: ```floor_area_proposed = space_proposed.floor_area```  
 
@@ -50,8 +50,8 @@
 
     - Calculate the total design lighting wattage for the building segment: ```building_segment_design_lighting_wattage_proposed += space_lighting_wattage_proposed```  
 
-- Calculate the total allowable lighting wattage for the whole building: ```building_allowable_lighting_wattage_proposed += building_segment_allowable_lighting_wattage_proposed```  
+- Calculate the total allowable lighting wattage for the whole building: ```for building_segment_proposed in P_RMR.building.building_segments: building_allowable_lighting_wattage_proposed += building_segment_allowable_lighting_wattage_proposed```  
 
-- Calculate the total design lighting power for for the whole buidling: ```building_design_lighting_wattage_proposed += building_segment_design_lighting_wattage_proposed```  
+- Calculate the total design lighting power for for the whole buidling: ```for building_segment_proposed in P_RMR.building.building_segments: building_design_lighting_wattage_proposed += building_segment_design_lighting_wattage_proposed```  
 
 **Rule Assertion:** For the Proposed model: ```building_design_lighting_wattage_proposed <= building_allowable_lighting_wattage_proposed```  
