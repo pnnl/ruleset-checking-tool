@@ -190,8 +190,16 @@ def run_section_tests(test_json_name):
         # Construction function name for Section and rule
         function_name = f'Section{section}Rule{rule}'
 
-        # Pull in rule
-        rule = globals()[function_name]()
+        # Pull in rule, if written. If not found, fail the test and log which Section and Rule could not be found.
+        try:
+            rule = globals()[function_name]()
+        except KeyError:
+            outcome_text = f'RULE NOT FOUND: {function_name}'
+            test_result_strings.append(outcome_text)
+
+            # Append failed message to rule
+            test_results.append(False)
+            continue
 
         # Evaluate rule and check for invalid RMRs
         evaluation_dict = evaluate_rule(rule, rmr_trio)
