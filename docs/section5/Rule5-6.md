@@ -36,7 +36,7 @@
 
     - For each surface in space: ```for surface_baseline in space_baseline.surfaces:```  
 
-      - Get the surface construction if the surface is slab-on-grade floor: ```if ( surface_baseline.classification == "FLOOR" AND surface_baseline.adjacent_to == "GROUND" ): surface_construction_baseline = surface_baseline.construction```  
+      - Get the surface construction if the surface is slab-on-grade floor: ```if ( surface_baseline.classification == "FLOOR" ) AND ( surface_baseline.adjacent_to == "GROUND" ): surface_construction_baseline = surface_baseline.construction```  
 
       - Get the performance values for the construction: ```surface_performance_value_baseline = surface_construction_baseline.f_factor```  (Note XC, assumes for slab on grade, RMR reports f-factor not u-factor)
 
