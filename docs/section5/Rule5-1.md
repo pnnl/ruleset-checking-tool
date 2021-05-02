@@ -32,7 +32,7 @@
 
     - For each surface in space: ```for surface_baseline in space_baseline.surfaces:```  
 
-      - Check that surface is exterior and vertical: ```if ( surface_baseline.adjacent_to == "AMBIENT" AND 60 <= _surface.tilt <= 90 ): exterior_vertical_surface = surface_baseline```  
+      - Check that surface is exterior and vertical: ```if ( surface_baseline.adjacent_to == "AMBIENT" ) AND ( 60 <= _surface.tilt <= 90 ): exterior_vertical_surface = surface_baseline```  
 
       - Get the surface azimuth: ```surface_azimuth_baseline = surface_baseline.azimuth```  
 
