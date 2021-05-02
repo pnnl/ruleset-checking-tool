@@ -42,11 +42,11 @@
 
       - Summarize the total fenestration area and the total surface area for each orientation for the building:  
 
-      ```if ( surface_azimuth_baseline > 315 OR surface_azimuth_baseline <= 45 ): total_fenestration_area_north += fenestration_area_baseline```  
+      ```if ( surface_azimuth_baseline > 315 ) OR ( surface_azimuth_baseline <= 45 ): total_fenestration_area_north += fenestration_area_baseline```  
 
-      ```elsif ( surface_azimuth_baseline > 45 AND surface_azimuth <= 135 ): total_fenestration_area_east += fenestration_area_baseline```  
+      ```elsif ( surface_azimuth_baseline > 45 ) AND ( surface_azimuth <= 135 ): total_fenestration_area_east += fenestration_area_baseline```  
 
-      ```elsif ( surface_azimuth > 135 AND surface_azimuth <= 225 ): total_fenestration_area_south += fenestration_area_baseline```  
+      ```elsif ( surface_azimuth > 135 ) AND ( surface_azimuth <= 225 ): total_fenestration_area_south += fenestration_area_baseline```  
 
       ```else total_fenestration_area_west += fenestration_area_baseline```  
 
