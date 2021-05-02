@@ -36,7 +36,7 @@
 
     - For each surface in space: ```for surface_baseline in space_baseline.surfaces:```  
 
-      - Get the surface construction if the surface is above-grade wall: ```if ( surface_baseline.classification == "WALL" AND surface_baseline.adjacent_to == "AMBIENT" ): surface_construction_baseline = surface_baseline.construction```  
+      - Get the surface construction if the surface is above-grade wall: ```if ( surface_baseline.classification == "WALL" ) AND ( surface_baseline.adjacent_to == "AMBIENT" ): surface_construction_baseline = surface_baseline.construction```  
 
       - Get the performance values for the construction: ```surface_performance_value_baseline = surface_construction_baseline.u_factor```  
 
