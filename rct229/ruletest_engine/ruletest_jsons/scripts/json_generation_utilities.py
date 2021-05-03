@@ -1,5 +1,6 @@
-import os
 import json
+import os
+
 
 def get_nested_dict(dic, keys):
     """ Used to get nested python dictionary strings
@@ -123,7 +124,7 @@ def set_nested_dict(dic, keys, value):
 
 def inject_json_path_from_enumeration(key_list, json_path_ref_string):
 
-    """ A few JSON paths are shorthanded with an enumeration. This function appends the key_list with the list of keys
+    """A few JSON paths are shorthanded with an enumeration. This function appends the key_list with the list of keys
     found in this shorthand enumeration. These are found in json_pointer_enumerations.json.
      Example: JSON_PATH:spaces = ["buildings","building_segments","thermal_blocks","zones","spaces"]
 
@@ -135,12 +136,13 @@ def inject_json_path_from_enumeration(key_list, json_path_ref_string):
      json_path_ref_string: str
 
         String describing which enumeration to use. E.g., "JSON_PATH:spaces"
-     """
-
+    """
 
     # JSON path enumerations. Used to simplify JSON path references in test spreadsheets
     file_dir = os.path.dirname(__file__)
-    json_path_enums_file_path = os.path.join(file_dir, 'resources', 'json_pointer_enumerations.json')
+    json_path_enums_file_path = os.path.join(
+        file_dir, "resources", "json_pointer_enumerations.json"
+    )
 
     with open(json_path_enums_file_path) as f:
         # Construct dictionary to map shorthand names for JSON Paths
@@ -148,7 +150,7 @@ def inject_json_path_from_enumeration(key_list, json_path_ref_string):
         path_enum_dict = json.load(f)
 
     # Pull out enumeration key from json_path_ref_string
-    json_path_enumeration = json_path_ref_string.split(':')[1].strip()
+    json_path_enumeration = json_path_ref_string.split(":")[1].strip()
 
     # Strip off any list references, will be added back on afterward
     json_path_enumeration, list_index = parse_key_string(json_path_enumeration)
@@ -156,7 +158,7 @@ def inject_json_path_from_enumeration(key_list, json_path_ref_string):
     # Split enumeration path into a list and append it to existing key_list
     # (e.g. 'buildings/building_segments/thermal_blocks/zones/spaces' ->
     #       ['buildings', 'building_segments', 'thermal_blocks', 'zones', 'spaces']
-    enumeration_list = path_enum_dict[json_path_enumeration].split('/')
+    enumeration_list = path_enum_dict[json_path_enumeration].split("/")
 
     # Append index back onto final key if JSON_PATH was defined as a list:
     if list_index!= None:
@@ -165,8 +167,9 @@ def inject_json_path_from_enumeration(key_list, json_path_ref_string):
     # Inject enumeration list into keylist
     key_list.extend(enumeration_list)
 
+
 def add_to_dictionary_list(json_dict, key_list, dict_string):
-    """ Used to add a list of dictionaries to a Python dictionary
+    """Used to add a list of dictionaries to a Python dictionary
 
     Parameters
     ----------
@@ -189,15 +192,15 @@ def add_to_dictionary_list(json_dict, key_list, dict_string):
     try:
         dictionary_list = get_nested_dict(json_dict, key_list)
     except TypeError:
-        print('TODO: Need to resolve how to do a list inside a list')
+        print("TODO: Need to resolve how to do a list inside a list")
 
     except KeyError:
         set_nested_dict(json_dict, key_list, {})
         dictionary_list = get_nested_dict(json_dict, key_list)
 
-    split_pair = dict_string.split(':')
+    split_pair = dict_string.split(":")
     key = split_pair[0]  # e.g., id
-    value_list = split_pair[1].split(',')  # e.g., 1,2,3
+    value_list = split_pair[1].split(",")  # e.g., 1,2,3
 
     # Check if a list of dictionaries has already been set at the list key in json_dict. If not, initialize it.
     if not isinstance(dictionary_list, list):
@@ -207,22 +210,22 @@ def add_to_dictionary_list(json_dict, key_list, dict_string):
     for i in range(len(value_list)):
 
         # If a dictionary doesn't exist at element "i", add one
-        if len(dictionary_list) < i+1:
+        if len(dictionary_list) < i + 1:
             dictionary_list.append({})
 
         # Set value for dictionary "i" and key "key"
-        dictionary_list[i][key] = clean_value(value_list[i]) #value_list[i]
+        dictionary_list[i][key] = clean_value(value_list[i])
 
     set_nested_dict(json_dict, key_list, dictionary_list)
 
 
 def clean_value(value):
-    """ Used to change strings to numerics, if possible.
+    """Used to change strings to numerics, if possible.
 
-        Parameters
-        ----------
-        value : str
-            String to be cleaned
+    Parameters
+    ----------
+    value : str
+        String to be cleaned
 
     """
 
@@ -240,6 +243,5 @@ def clean_value(value):
                 return value
             except ValueError:
                 return value
-
 
 

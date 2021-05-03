@@ -1,12 +1,18 @@
 from jsonpointer import resolve_pointer
-
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 from rct229.utils.match_lists import match_lists
 
+
 class RuleDefinitionBase:
-    """Baseclass for all Rule Definitions.
-    """
-    def __init__(self, id = None, description = None, rmr_context = '', rmrs_used = UserBaselineProposedVals(True, True, True)):
+    """Baseclass for all Rule Definitions."""
+
+    def __init__(
+        self,
+        id=None,
+        description=None,
+        rmr_context="",
+        rmrs_used=UserBaselineProposedVals(True, True, True),
+    ):
         """Base class for all Rule definitions
 
         Parameters
@@ -33,8 +39,8 @@ class RuleDefinitionBase:
         self.rmr_context = rmr_context
         self.rmrs_used = rmrs_used
 
-    def evaluate(self, rmrs, data = None):
-        """ Generates the outcome dictionary for the rule
+    def evaluate(self, rmrs, data=None):
+        """Generates the outcome dictionary for the rule
 
         This method also orchestrates the high-level workflow for any rule.
         Namely:
@@ -72,38 +78,40 @@ class RuleDefinitionBase:
         # Initialize the outcome dictionary
         outcome = {}
         if self.id:
-            outcome['id'] = self.id
+            outcome["id"] = self.id
         if self.description:
-            outcome['description'] = self.description
+            outcome["description"] = self.description
         if self.rmr_context:
-            outcome['rmr_context'] = self.rmr_context
+            outcome["rmr_context"] = self.rmr_context
 
-        # context will be None if the context does not exist for any of the RMR used
+        # context will be a string if the context does not exist for any of the RMR used
         context = self.get_context(rmrs, data)
-        if context is not None:
+        if isinstance(context, UserBaselineProposedVals):
 
             # Check if rule is applicable
             if self.is_applicable(context, data):
 
                 # Determine if manual check is required
                 if self.manual_check_required(context, data):
-                    outcome['result'] = 'MANUAL_CHECK_REQUIRED'
+                    outcome["result"] = "MANUAL_CHECK_REQUIRED"
                 else:
                     # Evaluate the actual rule check
                     result = self.rule_check(context, data)
                     if isinstance(result, list):
                         # The result is a list of outcomes
-                        outcome['result'] = result
+                        outcome["result"] = result
                     # Assume result type is bool
                     elif result:
-                        outcome['result'] = 'PASSED'
+                        outcome["result"] = "PASSED"
                     else:
-                        outcome['result'] = 'FAILED'
+                        outcome["result"] = "FAILED"
 
             else:
-                outcome['result'] = 'NA'
+                outcome["result"] = "NA"
         else:
-            outcome['result'] = 'MISSING_CONTEXT'
+            # context should be a string indicating the RMRs that are missing
+            # such as "MISSING_BASELINE"
+            outcome["result"] = context
 
         return outcome
 
@@ -127,19 +135,25 @@ class RuleDefinitionBase:
 
         # Prepend the leading '/' as needed. It is optional in rmr_context for
         # improved readability
-        if self.rmr_context == '' or self.rmr_context.startswith('/'):
+        if self.rmr_context == "" or self.rmr_context.startswith("/"):
             pointer = self.rmr_context
         else:
-            pointer = '/' + self.rmr_context
+            pointer = "/" + self.rmr_context
 
         # Note: if there is no match for pointer, resolve_pointer returns None
         return UserBaselineProposedVals(
-            user = resolve_pointer(rmrs.user, pointer) if self.rmrs_used.user else None,
-            baseline = resolve_pointer(rmrs.baseline, pointer) if self.rmrs_used.baseline else None,
-            proposed = resolve_pointer(rmrs.proposed, pointer) if self.rmrs_used.proposed else None
+            user=resolve_pointer(rmrs.user, pointer, None)
+            if self.rmrs_used.user
+            else None,
+            baseline=resolve_pointer(rmrs.baseline, pointer, None)
+            if self.rmrs_used.baseline
+            else None,
+            proposed=resolve_pointer(rmrs.proposed, pointer, None)
+            if self.rmrs_used.proposed
+            else None,
         )
 
-    def get_context(self, rmrs, data = None):
+    def get_context(self, rmrs, data=None):
         """Gets the context for each RMR
 
         May be be overridden for different behavior
@@ -154,24 +168,31 @@ class RuleDefinitionBase:
 
         Returns
         -------
-        UserBaselineProposedVals
+        UserBaselineProposedVals or str
             The return value from self._get_context() when the context exists
             in each RMR for which the correponding self.rmrs_used flag is set;
-            otherwise None
+            otherwise retrns a string such as "MISSING_BASELINE" that indicates all
+            the RMRs that are missing.
         """
 
         context = self._get_context(rmrs)
 
-        return (
-            context if (
-                (context.user is not None if self.rmrs_used.user else True)
-                and (context.baseline is not None if self.rmrs_used.baseline else True)
-                and (context.proposed is not None if self.rmrs_used.proposed else True))
-            else None
-        )
+        missing_contexts = []
+        if self.rmrs_used.user and context.user is None:
+            missing_contexts.append("USER")
+        if self.rmrs_used.baseline and context.baseline is None:
+            missing_contexts.append("BASELINE")
+        if self.rmrs_used.proposed and context.proposed is None:
+            missing_contexts.append("PROPOSED")
 
+        if len(missing_contexts) > 0:
+            retval = "MISSING_" + "_".join(missing_contexts)
+        else:
+            retval = context
 
-    def is_applicable(self, context, data = None):
+        return retval
+
+    def is_applicable(self, context, data=None):
         """Checks that the rule applies
 
         This will often be overridden. This base implementation always
@@ -191,7 +212,7 @@ class RuleDefinitionBase:
 
         return True
 
-    def manual_check_required(self, context, data = None):
+    def manual_check_required(self, context, data=None):
         """Checks whether the rule must be manually checked for the
         given context
 
@@ -212,7 +233,7 @@ class RuleDefinitionBase:
 
         return False
 
-    def rule_check(self, context, data = None):
+    def rule_check(self, context, data=None):
         """This actually checks the rule for the given context
 
         This must be overridden. The base implementation
@@ -237,16 +258,14 @@ class RuleDefinitionListBase(RuleDefinitionBase):
     """
     Baseclass for Rule Definitions that apply to each element in a list context.
     """
+
     def __init__(self, id, description, rmr_context, rmrs_used, each_rule):
         self.each_rule = each_rule
         super(RuleDefinitionListBase, self).__init__(
-            id = id,
-            description = description,
-            rmr_context = rmr_context,
-            rmrs_used = rmrs_used
+            id=id, description=description, rmr_context=rmr_context, rmrs_used=rmrs_used
         )
 
-    def create_context_list(self, context, data = None):
+    def create_context_list(self, context, data=None):
         """Generates a list of context trios from a context that is a trio of
         lists
 
@@ -270,7 +289,7 @@ class RuleDefinitionListBase(RuleDefinitionBase):
         """
         raise NotImplementedError
 
-    def create_data(self, context, data = None):
+    def create_data(self, context, data=None):
         """Create the data object to be passed to each_rule
 
         This is typically overridden to collect data available at this rule's
@@ -294,7 +313,7 @@ class RuleDefinitionListBase(RuleDefinitionBase):
         """
         return data
 
-    def rule_check(self, context, data = None):
+    def rule_check(self, context, data=None):
         """Overrides the base implementation to apply a rule to each entry in
         a list
 
@@ -321,12 +340,12 @@ class RuleDefinitionListBase(RuleDefinitionBase):
             item_outcome = self.each_rule.evaluate(ubp, data)
 
             # Set the name for item_outcome
-            if ubp.user and ubp.user['name']:
-                item_outcome['name'] = ubp.user['name']
-            elif ubp.baseline and ubp.baseline['name']:
-                item_outcome['name'] = ubp.baseline['name']
-            elif ubp.proposed and ubp.proposed['name']:
-                item_outcome['name'] = ubp.proposed['name']
+            if ubp.user and ubp.user["name"]:
+                item_outcome["name"] = ubp.user["name"]
+            elif ubp.baseline and ubp.baseline["name"]:
+                item_outcome["name"] = ubp.baseline["name"]
+            elif ubp.proposed and ubp.proposed["name"]:
+                item_outcome["name"] = ubp.proposed["name"]
 
             outcomes.append(item_outcome)
         return outcomes
@@ -338,12 +357,24 @@ class RuleDefinitionListIndexedBase(RuleDefinitionListBase):
 
     Applicable rules typically have the form "for each ___ in the ??? RMR, ...".
     """
-    def __init__(self, id, description, rmr_context, rmrs_used, each_rule, index_rmr = 'user', match_by = '/name'):
+
+    def __init__(
+        self,
+        id,
+        description,
+        rmr_context,
+        rmrs_used,
+        each_rule,
+        index_rmr="user",
+        match_by="/name",
+    ):
         self.index_rmr = index_rmr
         self.match_by = match_by
-        super(RuleDefinitionListIndexedBase, self).__init__(id, description, rmr_context, rmrs_used, each_rule)
+        super(RuleDefinitionListIndexedBase, self).__init__(
+            id, description, rmr_context, rmrs_used, each_rule
+        )
 
-    def create_context_list(self, context, data = None):
+    def create_context_list(self, context, data=None):
         """Overrides the base implementation to create a list that has an entry
         for each item in the index_rmr RMR, the other RMR entries are padded with
         None for non-matches.
@@ -360,30 +391,32 @@ class RuleDefinitionListIndexedBase(RuleDefinitionListBase):
         list of UserBaselineProposedVals
             A list of context trios
         """
-        UNKNOWN_INDEX_RMR = 'Unknown index_rmr'
-        UNUSED_INDEX_RMR_MSG = 'index_rmr is not being used'
-        CONTEXT_NOT_LIST = 'The RMR contexts must be lists'
+        UNKNOWN_INDEX_RMR = "Unknown index_rmr"
+        UNUSED_INDEX_RMR_MSG = "index_rmr is not being used"
+        CONTEXT_NOT_LIST = "The RMR contexts must be lists"
 
         index_rmr = self.index_rmr
         rmrs_used = self.rmrs_used
         match_by = self.match_by
 
         # The index RMR must be either user, baseline, or proposed
-        if index_rmr not in ['user', 'baseline', 'proposed']:
+        if index_rmr not in ["user", "baseline", "proposed"]:
             raise ValueError(UNKNOWN_INDEX_RMR)
 
         # The index RMR must be used
         if (
-            (index_rmr == 'user' and not self.rmrs_used.user ) or
-            (index_rmr == 'baseline' and not self.rmrs_used.baseline ) or
-            (index_rmr == 'proposed' and not self.rmrs_used.proposed )):
+            (index_rmr == "user" and not self.rmrs_used.user)
+            or (index_rmr == "baseline" and not self.rmrs_used.baseline)
+            or (index_rmr == "proposed" and not self.rmrs_used.proposed)
+        ):
             raise ValueError(CONTEXT_NOT_LIST)
 
         # This implementation assumes the used contexts are lists
         if (
-            (rmrs_used.user and not isinstance(context.user, list)) or
-            (rmrs_used.baseline and not isinstance(context.baseline, list)) or
-            (rmrs_used.proposed and not isinstance(context.proposed, list))):
+            (rmrs_used.user and not isinstance(context.user, list))
+            or (rmrs_used.baseline and not isinstance(context.baseline, list))
+            or (rmrs_used.proposed and not isinstance(context.proposed, list))
+        ):
             raise ValueError(CONTEXT_NOT_LIST)
 
         user_list = None
@@ -391,7 +424,7 @@ class RuleDefinitionListIndexedBase(RuleDefinitionListBase):
         proposed_list = None
 
         # User indexed
-        if index_rmr == 'user':
+        if index_rmr == "user":
             user_list = context.user
             context_list_len = len(user_list)
             if rmrs_used.baseline:
@@ -400,22 +433,26 @@ class RuleDefinitionListIndexedBase(RuleDefinitionListBase):
                 matched_lists = match_lists(context.user, context.proposed, match_by)
 
         # Baseline indexed
-        elif index_rmr == 'baseline':
+        elif index_rmr == "baseline":
             baseline_list = context.baseline
             context_list_len = len(baseline_list)
             if rmrs_used.user:
                 user_list = match_lists(context.baseline, context.user, match_by)
             elif rmrs_used.proposed:
-                proposed_list = match_lists(context.baseline, context.proposed, match_by)
+                proposed_list = match_lists(
+                    context.baseline, context.proposed, match_by
+                )
 
         # Proposed indexed
-        elif index_rmr == 'proposed':
+        elif index_rmr == "proposed":
             proposed_list = context.proposed
             context_list_len = len(proposed_list)
             if rmrs_used.user:
                 user_list = match_lists(context.proposed, context.user, match_by)
             elif rmrs_used.baseline:
-                baseline_list = match_lists(context.proposed, context.baseline, match_by)
+                baseline_list = match_lists(
+                    context.proposed, context.baseline, match_by
+                )
 
         # Generate the context list
         context_list = []
@@ -433,6 +470,8 @@ class RuleDefinitionListIndexedBase(RuleDefinitionListBase):
             else:
                 proposed_entry = proposed_list[index]
 
-            context_list.append(UserBaselineProposedVals(user_entry, baseline_entry, proposed_entry))
+            context_list.append(
+                UserBaselineProposedVals(user_entry, baseline_entry, proposed_entry)
+            )
 
         return context_list

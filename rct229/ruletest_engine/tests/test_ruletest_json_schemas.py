@@ -11,6 +11,6 @@ def test_run_transformer_json_schema():
     assert validate_test_json_schema(transformer_json_path)
 
 
-def test_run_envelope_json_schema():
-
-    assert validate_test_json_schema(envelope_json_path)
+# def test_run_envelope_json_schema():
+#
+#     assert validate_test_json_schema(envelope_json_path)
