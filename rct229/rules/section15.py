@@ -137,7 +137,7 @@ class Section15Rule4(RuleDefinitionListIndexedBase):
 class _NameInBaseline(RuleDefinitionBase):
     def __init__(self):
         super(_NameInBaseline, self).__init__(
-            rmrs_used=UserBaselineProposedVals(True, True, False),
+            rmrs_used=UserBaselineProposedVals(True, False, False),
         )
 
     def rule_check(self, context, data=None):

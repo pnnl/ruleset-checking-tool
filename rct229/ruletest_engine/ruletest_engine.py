@@ -2,9 +2,9 @@ import json
 import os
 
 from rct229.rule_engine.engine import evaluate_rule
+from rct229.schema.validate import validate_rmr
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 from rct229.rules.section15 import *
-
 
 # Generates the RMR triplet dictionaries from a test_dictionary's "rmr_transformation" element.
 # -test_dict = Dictionary with elements 'rmr_transformations' and 'rmr_transformations/user,baseline,proposed'
@@ -205,8 +205,16 @@ def run_section_tests(test_json_name):
         # Construction function name for Section and rule
         function_name = f"Section{section}Rule{rule}"
 
-        # Pull in rule
-        rule = globals()[function_name]()
+        # Pull in rule, if written. If not found, fail the test and log which Section and Rule could not be found.
+        try:
+            rule = globals()[function_name]()
+        except KeyError:
+            outcome_text = f'RULE NOT FOUND: {function_name}'
+            test_result_strings.append(outcome_text)
+
+            # Append failed message to rule
+            test_results.append(False)
+            continue
 
         # Evaluate rule and check for invalid RMRs
         evaluation_dict = evaluate_rule(rule, rmr_trio)
@@ -232,19 +240,17 @@ def run_section_tests(test_json_name):
             # If outcome result is a list of results (i.e. many elements get tested), check each against expected result
             if isinstance(outcome_result, list):
 
-                # Create list for collecting results of every test in list
-                test_results = []
+                outcome_result_list = []
 
                 # Iterate through each outcome in outcome results
                 for outcome in outcome_result:
                     # Append test result for this outcome
-                    test_results.append(evaluate_outcome(outcome["result"]))
+                    outcome_result_list.append(evaluate_outcome(outcome['result']))
 
                 # Checks that ALL tests pass in test_results. If any fail, the test fails
-                test_result = all(result for result in test_results)
+                test_result = all(outcome_result_list)
 
-                # Write outcome text based on overall pass/fail string based on set of test and determine if the ruletest
-                # behaved as expected
+                # Write outcome text based and "receive_expected_outcome" boolean based on the test result
                 outcome_text, received_expected_outcome = process_test_result(
                     test_result, test_dict, test_id
                 )
@@ -264,14 +270,75 @@ def run_section_tests(test_json_name):
                 test_results.append(received_expected_outcome)
 
     # Print results to console
-    for test_result in test_result_strings:
+    for test_result_string in test_result_strings:
 
-        print(test_result)
+        print(test_result_string)
 
     # Return whether or not all tests received their expected outcome as a boolean
     all_tests_successful = all(test_results)
 
     return all_tests_successful
+
+
+def validate_test_json_schema(test_json_path):
+    """ Evaluates a test JSON against the JSON schema. Raises flags for any errors found in any rule tests. Results
+        are printed to console
+
+        Parameters
+        ----------
+        test_json_path : string
+
+            Path to the test JSON in 'test_jsons' directory. (e.g., transformer_tests.json)
+
+    """
+
+    # List capturing messages describing failed RMR schemas
+    failure_list = []
+
+    # Open
+    with open(test_json_path) as f:
+        test_list_dictionary = json.load(f)
+
+    # Cycle through tests in test JSON and run each individually
+    for test_id in test_list_dictionary:
+        # Load next test dictionary from test list
+        test_dict = test_list_dictionary[test_id]
+
+        # Generate RMR dictionaries for testing
+        user_rmr, baseline_rmr, proposed_rmr = generate_test_rmrs(test_dict)
+
+        # Evaluate RMRs against the schema
+        user_result = validate_rmr(user_rmr) if user_rmr!= None else None
+        baseline_result =  validate_rmr(baseline_rmr) if baseline_rmr!= None else None
+        proposed_result =  validate_rmr(proposed_rmr) if proposed_rmr!= None else None
+
+        results_list = [user_result, baseline_result, proposed_result]
+        rmr_type_list = ['User', 'Baseline', 'Proposed']
+
+        for result, rmr_type in zip(results_list, rmr_type_list):
+
+            # If result contains a dictionary with failure information, append failure to failure list
+            if isinstance(result, dict):
+
+                if result["passed"] is not True:
+
+                    error_message = result['error']
+                    failure_message = f'Schema validation in {test_id} for the {rmr_type} RMR: {error_message}'
+                    failure_list.append(failure_message)
+
+    if len(failure_list) == 0:
+
+        base_name = os.path.basename(test_json_path)
+        print(f'No schema errors found in {base_name}')
+        return True
+
+    else:
+        for failure in failure_list:
+
+            print(failure)
+
+        return False
+
 
 
 def run_transformer_tests():

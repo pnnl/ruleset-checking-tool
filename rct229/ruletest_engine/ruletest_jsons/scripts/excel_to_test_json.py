@@ -8,8 +8,8 @@ from rct229.ruletest_engine.ruletest_jsons.scripts.json_generation_utilities imp
 
 # ---------------------------------------USER INPUTS---------------------------------------
 
-spreadsheet_name = "transformer_tests_draft.xlsx"
-json_name = "transformer_tests.json"
+spreadsheet_name = "envelope_tests_draft.xlsx"
+json_name = "envelope_tests.json"
 sheet_name = "TCDs"
 
 # --------------------------------------SCRIPT STARTS--------------------------------------
@@ -89,7 +89,7 @@ for (rule_name, columnData) in rules_df.iteritems():
                 add_to_dictionary_list(json_dict, key_list, row_value)
             else:
                 # Set nested dictionary
-                nested_dict(json_dict, key_list, row_value)
+                set_nested_dict(json_dict, key_list, row_value)
 
 
 # Dump JSON to string for writing
