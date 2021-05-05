@@ -1,52 +1,46 @@
-
-from jsonpointer import resolve_pointer
 import copy
 
-def match_lists(list0, list1, id_pointer):
-    """Returns new lists with the entries matched as much as possible
+from jsonpointer import resolve_pointer
+
+
+def match_lists(index_list, list2, id_pointer):
+    """Returns a new list of entries taken from list2 that match the
+    corresponding entries of index_list. An entry is set to None if there is no
+    match in list2.
 
     Parameters
     ----------
-    list0 : list
+    index_list : list
         The primary list
-    list1 : list
+    list2 : list
         The secondary list
     id_pointer : string
-        A json pointer
+        A json pointer to the field to be used to match the list entries,
+        usually 'name' or 'id'
 
     Returns
     -------
-    tuple of lists
-        The the new lists are sorted and match according to id_pointer where
-        possible. None is inserted to indicate non-matches.
+    list
+        A new list of entries taken from list2 that match the
+        corresponding entries of index_list. An entry is set to None if there is no
+        match in list2.
     """
 
-    def _id_key(obj):
+    def id_key(obj):
         """ Uses id_pointer as a json pointer to select an identifier from an object"""
         return resolve_pointer(obj, id_pointer)
 
-    # Make shallow copies of the lists
-    list0 = copy.copy(list0)
-    list1 = copy.copy(list1)
+    # Step through index_list, looking for matches in list2
+    match_list = list(
+        map(
+            lambda entry:
+            # Grabs the first entry in list2 that matches or None
+            next(
+                iter([entry2 for entry2 in list2 if id_key(entry) == id_key(entry2)]),
+                None,
+            ),
+            index_list,
+        )
+    )
 
-    # Sort the lists
-    list0.sort(key = _id_key)
-    list1.sort(key = _id_key)
-
-
-    # Step through list0, looking for matches in list1
-    list0_orig_len = len(list0)
-    for index in range(list0_orig_len):
-        if index >= len(list1):
-            list1.append(None)
-        elif _id_key(list0[index]) != _id_key(list1[index]):
-            # Insert None entries to indicate non-matches
-            list1.insert(index, None)
-
-
-    # Append extra None entries to list0 to match the length of list1
-    while len(list0) < len(list1):
-        list0.append(None)
-
-
-    return (list0, list1)
+    return match_list

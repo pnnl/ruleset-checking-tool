@@ -1,6 +1,7 @@
 import glob
-from os.path import basename, dirname, join
 import pprint
+from os.path import basename, dirname, join
+
 import yaml
 
 # A dictionary that will contain all the data in this folder

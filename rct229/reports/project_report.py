@@ -1,8 +1,10 @@
 import os
+
 from rct229.reports.utils import aggregate_outcomes
 
+
 def print_rule_report(report):
-    outcomes = report['outcomes']
+    outcomes = report["outcomes"]
     for outcome in outcomes:
         print("--------------------------------------------------------------------")
         print(f"Rule: {str(outcome['id'])}")
@@ -17,21 +19,24 @@ def print_rule_report(report):
 
 
 def print_summary_report(report):
-    invalid_rmrs = report['invalid_rmrs']
+    invalid_rmrs = report["invalid_rmrs"]
     if invalid_rmrs:
         print("----------------------------------")
         print(f"Invalid RMRs: {str(invalid_rmrs)}")
     else:
-        outcomes = report['outcomes']
+        outcomes = report["outcomes"]
         summary_dict = aggregate_outcomes(outcomes)
-
 
         print("----------------------------------")
         print("Summary")
-        print(f"{len(outcomes)} rules, {summary_dict['number_evaluations']} evaluations")
+        print(
+            f"{len(outcomes)} rules, {summary_dict['number_evaluations']} evaluations"
+        )
         print(f"{summary_dict['number_passed']} evaluations passed")
         print(f"{summary_dict['number_failed']} evaluations failed")
         print(f"{summary_dict['number_missing_context']} evaluations missing context")
         print(f"{summary_dict['number_not_applicable']} evaluations not applicable")
-        print(f"{summary_dict['number_manual_check_required']} evaluations requiring manual check")
+        print(
+            f"{summary_dict['number_manual_check_required']} evaluations requiring manual check"
+        )
         print("----------------------------------")
