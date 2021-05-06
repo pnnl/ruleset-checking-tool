@@ -27,7 +27,7 @@ def match_lists(index_list, list2, id_pointer):
     """
 
     def id_key(obj):
-        """ Uses id_pointer as a json pointer to select an identifier from an object"""
+        """Uses id_pointer as a json pointer to select an identifier from an object"""
         return resolve_pointer(obj, id_pointer)
 
     # Step through index_list, looking for matches in list2
