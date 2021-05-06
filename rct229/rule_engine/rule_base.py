@@ -1,4 +1,5 @@
 from jsonpointer import resolve_pointer
+
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 from rct229.utils.match_lists import match_lists
 
