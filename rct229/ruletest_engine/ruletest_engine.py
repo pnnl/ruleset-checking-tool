@@ -2,9 +2,10 @@ import json
 import os
 
 from rct229.rule_engine.engine import evaluate_rule
-from rct229.schema.validate import validate_rmr
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 from rct229.rules.section15 import *
+from rct229.schema.validate import validate_rmr
+
 
 # Generates the RMR triplet dictionaries from a test_dictionary's "rmr_transformation" element.
 # -test_dict = Dictionary with elements 'rmr_transformations' and 'rmr_transformations/user,baseline,proposed'
@@ -209,7 +210,7 @@ def run_section_tests(test_json_name):
         try:
             rule = globals()[function_name]()
         except KeyError:
-            outcome_text = f'RULE NOT FOUND: {function_name}'
+            outcome_text = f"RULE NOT FOUND: {function_name}"
             test_result_strings.append(outcome_text)
 
             # Append failed message to rule
@@ -245,7 +246,7 @@ def run_section_tests(test_json_name):
                 # Iterate through each outcome in outcome results
                 for outcome in outcome_result:
                     # Append test result for this outcome
-                    outcome_result_list.append(evaluate_outcome(outcome['result']))
+                    outcome_result_list.append(evaluate_outcome(outcome["result"]))
 
                 # Checks that ALL tests pass in test_results. If any fail, the test fails
                 test_result = all(outcome_result_list)
@@ -281,14 +282,14 @@ def run_section_tests(test_json_name):
 
 
 def validate_test_json_schema(test_json_path):
-    """ Evaluates a test JSON against the JSON schema. Raises flags for any errors found in any rule tests. Results
-        are printed to console
+    """Evaluates a test JSON against the JSON schema. Raises flags for any errors found in any rule tests. Results
+    are printed to console
 
-        Parameters
-        ----------
-        test_json_path : string
+    Parameters
+    ----------
+    test_json_path : string
 
-            Path to the test JSON in 'test_jsons' directory. (e.g., transformer_tests.json)
+        Path to the test JSON in 'test_jsons' directory. (e.g., transformer_tests.json)
 
     """
 
@@ -308,12 +309,12 @@ def validate_test_json_schema(test_json_path):
         user_rmr, baseline_rmr, proposed_rmr = generate_test_rmrs(test_dict)
 
         # Evaluate RMRs against the schema
-        user_result = validate_rmr(user_rmr) if user_rmr!= None else None
-        baseline_result =  validate_rmr(baseline_rmr) if baseline_rmr!= None else None
-        proposed_result =  validate_rmr(proposed_rmr) if proposed_rmr!= None else None
+        user_result = validate_rmr(user_rmr) if user_rmr != None else None
+        baseline_result = validate_rmr(baseline_rmr) if baseline_rmr != None else None
+        proposed_result = validate_rmr(proposed_rmr) if proposed_rmr != None else None
 
         results_list = [user_result, baseline_result, proposed_result]
-        rmr_type_list = ['User', 'Baseline', 'Proposed']
+        rmr_type_list = ["User", "Baseline", "Proposed"]
 
         for result, rmr_type in zip(results_list, rmr_type_list):
 
@@ -322,14 +323,14 @@ def validate_test_json_schema(test_json_path):
 
                 if result["passed"] is not True:
 
-                    error_message = result['error']
-                    failure_message = f'Schema validation in {test_id} for the {rmr_type} RMR: {error_message}'
+                    error_message = result["error"]
+                    failure_message = f"Schema validation in {test_id} for the {rmr_type} RMR: {error_message}"
                     failure_list.append(failure_message)
 
     if len(failure_list) == 0:
 
         base_name = os.path.basename(test_json_path)
-        print(f'No schema errors found in {base_name}')
+        print(f"No schema errors found in {base_name}")
         return True
 
     else:
@@ -338,7 +339,6 @@ def validate_test_json_schema(test_json_path):
             print(failure)
 
         return False
-
 
 
 def run_transformer_tests():
