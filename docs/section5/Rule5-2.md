@@ -24,7 +24,7 @@
 
 - For each building segment in the Baseline model: ```for building_segment_baseline in B_RMR.building.building_segments:```  
 
-  - For each thermal_block from building segment: ```for thermal_block_baseline in building_segment_baseline.thermal_blocks:```  
+  - For each thermal_block in building segment: ```for thermal_block_baseline in building_segment_baseline.thermal_blocks:```  
 
   - For each zone in thermal block: ```zone_baseline in thermal_block_baseline.zones:```  
 
