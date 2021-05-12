@@ -95,7 +95,7 @@ class Section15Rule3(RuleDefinitionListIndexedBase):
             description="User RMR transformer Name in Proposed RMR",
             rmr_context="transformers",
             rmrs_used=UserBaselineProposedVals(True, False, True),
-            each_rule=Section15Rule3.NameInProposed(),
+            each_rule=Section15Rule3.TransformerRule(),
             index_rmr="user",
         )
 
@@ -103,9 +103,9 @@ class Section15Rule3(RuleDefinitionListIndexedBase):
         # Get the Proposed transformer names
         return find_all("[*].name", context.proposed)
 
-    class NameInProposed(RuleDefinitionBase):
+    class TransformerRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section15Rule3.NameInProposed, self).__init__(
+            super(Section15Rule3.TransformerRule, self).__init__(
                 rmrs_used=UserBaselineProposedVals(True, False, False)
             )
 
@@ -134,7 +134,7 @@ class Section15Rule4(RuleDefinitionListIndexedBase):
             description="User RMR transformer Name in Baseline RMR",
             rmr_context="transformers",
             rmrs_used=UserBaselineProposedVals(True, True, False),
-            each_rule=Section15Rule4.NameInBaseline(),
+            each_rule=Section15Rule4.TransformerRule(),
             index_rmr="user",
         )
 
@@ -142,9 +142,9 @@ class Section15Rule4(RuleDefinitionListIndexedBase):
         # Get the Baseline transformer names
         return find_all("[*].name", context.baseline)
 
-    class NameInBaseline(RuleDefinitionBase):
+    class TransformerRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section15Rule4.NameInBaseline, self).__init__(
+            super(Section15Rule4.TransformerRule, self).__init__(
                 rmrs_used=UserBaselineProposedVals(True, False, False),
             )
 
@@ -173,13 +173,13 @@ class Section15Rule5(RuleDefinitionListIndexedBase):
             description="Transformer efficiency reported in Baseline RMR equals Table 8.4.4",
             rmr_context="transformers",
             rmrs_used=UserBaselineProposedVals(True, True, False),
-            each_rule=Section15Rule5.BaselineEffAsRequired(),
+            each_rule=Section15Rule5.TransformerRule(),
             index_rmr="user",
         )
 
-    class BaselineEffAsRequired(RuleDefinitionBase):
+    class TransformerRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section15Rule5.BaselineEffAsRequired, self).__init__(
+            super(Section15Rule5.TransformerRule, self).__init__(
                 rmrs_used=UserBaselineProposedVals(True, True, False),
             )
 
@@ -245,12 +245,12 @@ class Section15Rule6(RuleDefinitionListIndexedBase):
             description="Transformer efficiency reported in User RMR equals Table 8.4.4",
             rmr_context="transformers",
             rmrs_used=UserBaselineProposedVals(True, False, False),
-            each_rule=Section15Rule6.UserEffAtLeastRequired(),
+            each_rule=Section15Rule6.TransformerRule(),
         )
 
-    class UserEffAtLeastRequired(RuleDefinitionBase):
+    class TransformerRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section15Rule6.UserEffAtLeastRequired, self).__init__(
+            super(Section15Rule6.TransformerRule, self).__init__(
                 rmrs_used=UserBaselineProposedVals(True, False, False),
             )
 
