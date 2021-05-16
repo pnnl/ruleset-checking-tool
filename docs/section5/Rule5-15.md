@@ -16,16 +16,16 @@
 
 ## Rule Logic:  
 
-- For each building segment in the Baseline model: ```for building_segment_baseline in B_RMR.building.building_segments:```  
+- For each building segment in the Baseline model: ```for building_segment_b in B_RMR.building.building_segments:```  
 
-  - For each thermal_block in building segment: ```for thermal_block_baseline in building_segment_baseline.thermal_blocks:```  
+  - For each thermal_block in building segment: ```for thermal_block_b in building_segment_b.thermal_blocks:```  
 
-  - For each zone in thermal block: ```for zone_baseline in thermal_block_baseline.zones:```  
+  - For each zone in thermal block: ```for zone_b in thermal_block_b.zones:```  
 
-  - For each space in thermal zone: ```for space_baseline in zone_baseline.spaces:```  
+  - For each space in thermal zone: ```for space_b in zone_b.spaces:```  
 
-    - Get surfaces in space: ```for surface_baseline in space_baseline.surfaces:```  
+    - For each surface in space: ```for surface_b in space_b.surfaces:```  
 
-      - Get surface optics for roof: ```if ( surface_baseline.classification == "CEILING" ) AND ( surface_baseline.adjacent_to == "AMBIENT" ): roof_surface_optics_baseline = surface_baseline.surface_optics```  
+      - Get surface optics for roof: ```if ( surface_b.classification == "CEILING" ) AND ( 0<= surface_b.tilt <60 ) AND ( surface_b.adjacent_to == "AMBIENT" ): roof_surface_optics_b = surface_b.surface_optics```  
 
-      **Rule Assertion:** Baseline roof solar reflectance is 0.30: ```roof_surface_optics_baseline.absorptance_solar_exterior == 0.70```  
+        **Rule Assertion:** Baseline roof solar reflectance is 0.30: ```roof_surface_optics_b.absorptance_solar_exterior == 0.70```  
