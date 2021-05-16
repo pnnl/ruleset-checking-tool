@@ -18,28 +18,26 @@
 
 - Get building climate zone: ```climate_zone = B_RMR.weather.climate_zone```  
 
-- For each building segment in the Baseline model: ```for building_segment_baseline in B_RMR.building.building_segments:```  
+- For each building segment in the Baseline model: ```for building_segment_b in B_RMR.building.building_segments:```  
 
-  - For each thermal_block in building segment: ```for thermal_block_baseline in building_segment_baseline.thermal_blocks:```  
+  - Calculate the skylight to roof ratio: ```skylight_roof_ratio_b = opening_surface_ratio_calc(building_segment_b, "skylight")```  (Note XC, pending confirmation on whether the ratio is per building segment or building)
 
-  - For each zone in thermal block: ```for zone_baseline in thermal_block_baseline.zones:```  
+  - For each thermal_block in building segment: ```for thermal_block_b in building_segment_b.thermal_blocks:```  
 
-  - For each space in thermal zone: ```for space_baseline in zone_baseline.spaces:```  
+  - For each zone in thermal block: ```for zone_b in thermal_block_b.zones:```  
 
-    - Get surfaces in space: ```for surface_baseline in space_baseline.surfaces:```  
+  - For each space in thermal zone: ```for space_b in zone_b.spaces:```  
 
-      - Check if surface is roof: ```if ( surface_baseline.classification == "CEILING" ) AND ( surface_baseline.adjacent_to == "AMBIENT" ): roof_surface_baseline = surface_baseline```  
+    - Get space category (residential or non-residential): ```space_category_b = space_category_lookup(space_b.lighting_space_type)```  
 
-        - Calculate the total roof area: ```total_roof_area_baseline += roof_surface_baseline.area```  
+    - Get space conditioning type: ```space_conditioning_type_b = space_b.conditioning_type```  
 
-        - Get the U-factor for skylights: ```skylight_performance_value_baseline.append(skylight.u_factor for skylight in roof_surface_baseline.fenestration_subsurfaces)```  
+    - If space is conditioned or semiheated, get baseline U-factor for skylight from Table G3.4-1 to G3.4-8 based on climate zone, space category, space conditioning type, skylight to roof ratio and function type: ```skylight_performance_target = data_lookup(table_G3_4,climate_zone,space_category_b,space_conditioning_type_b,skylight_roof_ratio_b,"Skylight", U_all)```  
 
-        - Calculate the total skylight area: ```total_skylight_area_baseline += sum(skylight.area for skylight in roof_surface_baseline.fenestration_subsurfaces)```  
+    - For each surface in space: ```for surface_b in space_b.surfaces:```
 
-        - Calculate the skylight to roof ratio: ```skylight_roof_ratio_baseline = total_skylight_area_baseline / total_roof_area_baseline```  (Note XC, can we get the skylight roof ratio from Rule 5-12 instead of calculating it here?)
+      - Check if surface is roof: ```if ( surface_b.classification == "CEILING" ) AND ( 0 <= surface_b.tilt < 60) AND ( surface_b.adjacent_to == "AMBIENT" ): roof_surface_b = surface_b```  
 
-    - Get space conditioning type: ```space_conditioning_type_baseline = space_baseline.conditioning_type```  
+      - For each skylight in roof, get U-factor: ```for skylight_b in roof_surface_b.fenestration_subsurfaces: skylight_u_factor_b = skylight_b.u_factor```  
 
-      - Get baseline contruction for skylight from Table G3.4-1 to G3.4-8 based on climate zone, space conditioning type, skylight to roof ratio and function type: ```skylight_performance_target = data_lookup(table_G3_4,climate_zone,space_conditioning_type_baseline,skylight_roof_ratio_baseline,"Skylight", U_all)```  
-
-      **Rule Assertion:** Baseline skylight u_factor modeled matches Table G3.4-1 to G3.4-8: ```skylight_u_factor == skylight_performance_target for skylight_u_factor in skylight_performance_value_baseline```  
+        **Rule Assertion:** Baseline U-factor modeled for each skylight matches Table G3.4-1 to G3.4-8: ```skylight_u_factor_b == skylight_performance_target```  (Note XC, assuming unconditioned spaces do not follow Table G3.4 and will have a different rule to compare both area and thermal performance)
