@@ -24,8 +24,8 @@
 
   - For each space in thermal zone: ```for space_b in zone_b.spaces:```  
 
-    - Get surface in space: ```for surface_b in space_b.surfaces:```  
+    - For each surface in space: ```for surface_b in space_b.surfaces:```  
 
-      - Get vertical glazings in exterior wall: ```if ( 60<= surface_b.tile <= 90 ) AND ( surface_b.adjacent_to == "AMBIENT" ): windows_b = surface_b.fenestration_subsurfaces```  
+      - Get vertical glazings in exterior wall: ```if ( 60<= surface_b.tilt <= 90 ) AND ( surface_b.adjacent_to == "AMBIENT" ): windows_b = surface_b.fenestration_subsurfaces```  
 
         **Rule Assertion:** Baseline vertical fenestrations are not required to be modeled with manual window shading devices: ```if window.has_manual_interior_shades == TRUE for window in windows_b: raise_warning```  
