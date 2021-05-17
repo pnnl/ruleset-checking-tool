@@ -1,13 +1,15 @@
-import copy
+
 import json
-from jsonpointer import JsonPointer
+#from jsonpointer import JsonPointer
 import os
+import copy
 
 from rct229.utils.json_utils import slash_prefix_guarantee
 from rct229.rule_engine.engine import evaluate_rule
 from rct229.schema.validate import validate_rmr
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 from rct229.rules.section15 import *
+from rct229.ruletest_engine.ruletest_jsons.scripts.json_generation_utilities import merge_nested_dictionary
 
 # Generates the RMR triplet dictionaries from a test_dictionary's "rmr_transformation" element.
 # -test_dict = Dictionary with elements 'rmr_transformations' and 'rmr_transformations/user,baseline,proposed'
@@ -55,99 +57,65 @@ def generate_test_rmrs(test_dict):
      # The rmr_transformations field is required
     if 'rmr_transformations' not in test_dict:
         raise ValueError('rmr_transformations field is required in rule test')
-    
-    ## Set rmr_template to {} if it is not specified in test_dict
-    #rmr_template = test_dict.get('rmr_template', {})
-#
-    ## Each of these will remain None unless it is specified in
-    ## rmr_transformations. If its transfomration is set to {}, then it
-    ## will simply be a copy of rmr_template
-    #user_rmr = None
-    #baseline_rmr = None
-    #proposed_rmr = None
-#
-    ## Apply any given transformations to rmr_template to produce the three RMRs
-    #rmr_transformations = test_dict['rmr_transformations']
-    #if 'user' in rmr_transformations:
-    #    user_rmr = copy.deepcopy(rmr_template)
-    #    user_trans = rmr_transformations['user']
-    #    for path in user_trans:
-    #        value = user_trans[path]
-    #        JsonPointer(slash_prefix_guarantee(path)).set(user_rmr, value)
-    #if 'baseline' in rmr_transformations:
-    #    baseline_rmr = copy.deepcopy(rmr_template)
-    #    baseline_trans = rmr_transformations['baseline']
-    #    for path in baseline_trans:
-    #        value = baseline_trans[path]
-    #        JsonPointer(slash_prefix_guarantee(path)).set(baseline_rmr, value)
-    #if 'proposed' in rmr_transformations:
-    #    proposed_rmr = copy.deepcopy(rmr_template)
-    #    proposed_trans = rmr_transformations['proposed']
-    #    for path in proposed_trans:
-    #        value = proposed_trans[path]
-    #        JsonPointer(slash_prefix_guarantee(path)).set(proposed_rmr, value)
-#
-    #return user_rmr, baseline_rmr, proposed_rmr
 
-
-    # Read in transformations dictionary. This dictates how RMRs are built.
-    rmr_transformations_dict = test_dict["rmr_transformations"]
+    #Each of these will remain None unless it is specified in
+    # rmr_transformations. If its transfomration is set to {}, then it
+    # will simply be a copy of rmr_template
+    user_rmr = None
+    baseline_rmr = None
+    proposed_rmr = None
 
     # If RMRs are based on a template
     if "rmr_template" in test_dict:
-        # Set rmr_template to {} if it is not specified in test_dict
-        rmr_template = test_dict.get('rmr_template', {})
 
-        # Each of these will remain None unless it is specified in
-        # rmr_transformations. If its transfomration is set to {}, then it
-        # will simply be a copy of rmr_template
-        user_rmr = None
-        baseline_rmr = None
-        proposed_rmr = None
+        # Get a copy of the RMR template dictionary
+        rmr_template = test_dict['rmr_template']
 
-        # Apply any given transformations to rmr_template to produce the three RMRs
-        rmr_transformations = test_dict['rmr_transformations']
-        if 'user' in rmr_transformations:
-            user_rmr = copy.deepcopy(rmr_template)
-            user_trans = rmr_transformations['user']
-            for path in user_trans:
-                value = user_trans[path]
-                JsonPointer(slash_prefix_guarantee(path)).set(user_rmr, value)
-        if 'baseline' in rmr_transformations:
-            baseline_rmr = copy.deepcopy(rmr_template)
-            baseline_trans = rmr_transformations['baseline']
-            for path in baseline_trans:
-                value = baseline_trans[path]
-                JsonPointer(slash_prefix_guarantee(path)).set(baseline_rmr, value)
-        if 'proposed' in rmr_transformations:
-            proposed_rmr = copy.deepcopy(rmr_template)
-            proposed_trans = rmr_transformations['proposed']
-            for path in proposed_trans:
-                value = proposed_trans[path]
-                JsonPointer(slash_prefix_guarantee(path)).set(proposed_rmr, value)
+        # Initialize user/baseline/proposed RMRs with template if the rmr_template dictionary references them
+        if 'user' in rmr_template:
+            user_rmr = copy.deepcopy(rmr_template['json_template'])
 
-        return user_rmr, baseline_rmr, proposed_rmr
+        if 'baseline' in rmr_template:
+            baseline_rmr = copy.deepcopy(rmr_template['json_template'])
 
-    else:
+        if 'proposed' in rmr_template:
+            proposed_rmr = copy.deepcopy(rmr_template['json_template'])
 
-        # If RMR template does not exist, then simply use the transformations to populate RMRs
-        user_rmr = (
-            rmr_transformations_dict["user"]
-            if "user" in rmr_transformations_dict
-            else None
-        )
-        baseline_rmr = (
-            rmr_transformations_dict["baseline"]
-            if "baseline" in rmr_transformations_dict
-            else None
-        )
-        proposed_rmr = (
-            rmr_transformations_dict["proposed"]
-            if "proposed" in rmr_transformations_dict
-            else None
-        )
 
-        return user_rmr, baseline_rmr, proposed_rmr
+    # Read in transformations dictionary. This will perturb a template or fully define an RMR (if no template defined)
+    rmr_transformations_dict = test_dict["rmr_transformations"]
+
+    # If user/baseline/proposed RMR transformations exist, either update their existing template or set them directly
+    # from RMR transformations
+    if "user" in rmr_transformations_dict:
+
+        # If RMR dictionary is not initialized by a template, initialize it
+        if user_rmr is None:
+            user_rmr = {}
+
+        merge_nested_dictionary(user_rmr, rmr_transformations_dict["user"])
+        #user_rmr.update(rmr_transformations_dict["user"])
+
+    if "baseline" in rmr_transformations_dict:
+
+        # If RMR dictionary is not initialized by a template, initialize it
+        if baseline_rmr is None:
+            baseline_rmr = {}
+
+        merge_nested_dictionary(baseline_rmr, rmr_transformations_dict["baseline"])
+        #baseline_rmr.update(rmr_transformations_dict["baseline"])
+
+    if "proposed" in rmr_transformations_dict:
+
+        # If RMR dictionary is not initialized by a template, initialize it
+        if proposed_rmr is None:
+            proposed_rmr = {}
+
+        merge_nested_dictionary(proposed_rmr, rmr_transformations_dict["proposed"])
+        #proposed_rmr.update(rmr_transformations_dict["proposed"])
+
+
+    return user_rmr, baseline_rmr, proposed_rmr
 
 
 def evaluate_outcome(outcome):

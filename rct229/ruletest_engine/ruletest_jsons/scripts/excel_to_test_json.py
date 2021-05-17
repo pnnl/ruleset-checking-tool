@@ -8,8 +8,8 @@ from rct229.ruletest_engine.ruletest_jsons.scripts.json_generation_utilities imp
 
 # ---------------------------------------USER INPUTS---------------------------------------
 
-spreadsheet_name = "envelope_tests_draft.xlsx"
-json_name = "envelope_tests.json"
+spreadsheet_name = "envelope_tests_template_draft.xlsx"
+json_name = "envelope_tests_from_template.json"
 sheet_name = "TCDs"
 
 # --------------------------------------SCRIPT STARTS--------------------------------------

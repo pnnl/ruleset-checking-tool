@@ -5,6 +5,7 @@
 	"heating_ventilation_air_conditioning_systems": "buildings[0]/building_segments[0]/heating_ventilation_air_conditioning_systems",
 	"spaces": "buildings[0]/building_segments[0]/thermal_blocks[0]/zones[0]/spaces",
 	"surfaces": "buildings[0]/building_segments[0]/thermal_blocks[0]/zones[0]/spaces[0]/surfaces",
+	"thermal_blocks": "buildings[0]/building_segments[0]/thermal_blocks",
 	"zones": "buildings[0]/building_segments[0]/thermal_blocks[0]/zones"
 	
 }

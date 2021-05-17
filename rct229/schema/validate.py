@@ -7,8 +7,10 @@ file_dir = os.path.dirname(__file__)
 
 SCHEMA_KEY = "ASHRAE229.schema.json"
 SCHEMA_ENUM_KEY = "Enumerations2019ASHRAE901.schema.json"
+SCHEMA_RESNET_ENUM_KEY = "EnumerationsRESNET.schema.json"
 SCHEMA_PATH = os.path.join(file_dir, SCHEMA_KEY)
 SCHEMA_ENUM_PATH = os.path.join(file_dir, SCHEMA_ENUM_KEY)
+SCHEMA_RESNET_ENUM_PATH = os.path.join(file_dir, SCHEMA_RESNET_ENUM_KEY)
 
 
 def _schema_validate(rmr_obj):
@@ -23,9 +25,11 @@ def _schema_validate(rmr_obj):
         schema = json.load(json_file)
     with open(SCHEMA_ENUM_PATH) as json_file:
         schema_enum = json.load(json_file)
+    with open(SCHEMA_RESNET_ENUM_PATH) as json_file:
+        schema_resnet_enum = json.load(json_file)
 
     # Create a resolver which maps schema references to schema objects
-    schema_store = {SCHEMA_KEY: schema, SCHEMA_ENUM_KEY: schema_enum}
+    schema_store = {SCHEMA_KEY: schema, SCHEMA_ENUM_KEY: schema_enum, SCHEMA_RESNET_ENUM_KEY: schema_resnet_enum}
     resolver = jsonschema.RefResolver.from_schema(schema, store=schema_store)
 
     # Create a validator
