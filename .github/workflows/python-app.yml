@@ -7,7 +7,7 @@ on:
   push:
     branches: [master, develop, 'RCT/CH/github_actions']
   pull_request:
-    branches: [master, develop]
+    branches: [master, develop, 'RCT/CH/github_actions']
 
 jobs:
   black-formatting-check:
