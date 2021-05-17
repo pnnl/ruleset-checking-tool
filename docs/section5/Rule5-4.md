@@ -22,22 +22,34 @@
 
 - Get building climate zone: ```climate_zone = B_RMR.weather.climate_zone```  
 
-- For each building segment in the Baseline model: ```for building_segment_baseline in B_RMR.building.building_segments:```  
+- For each building segment in the Baseline model: ```for building_segment_b in B_RMR.building.building_segments:```  
 
-  - For each thermal_block in building segment: ```for thermal_block_baseline in building_segment_baseline.thermal_blocks:```  
+  - For each thermal_block in building segment: ```for thermal_block_b in building_segment_b.thermal_blocks:```  
 
-  - For each zone in thermal block: ```for zone_baseline in thermal_block_baseline.zones:```  
+  - For each zone in thermal block: ```for zone_b in thermal_block_b.zones:```  
 
-  - For each space in thermal zone: ```for space_baseline in zone_baseline.spaces:```  
+  - For each space in thermal zone: ```for space_b in zone_b.spaces:```  
 
-    - Get space conditioning type: ```space_conditioning_type_baseline = space_baseline.conditioning_type```  
+    - Get space category (residential or non-residential): ```space_category_b = space_category_lookup(space_b.lighting_space_type)```  
 
-      - Get baseline contruction from Table G3.4-1 to G3.4-8 based on climate zone, space conditioning type and function type: ```surface_performance_target = data_lookup(table_G3_4,climate_zone,space_conditioning_type_baseline,"Walls, Above-Grade")```  
+    - Get space conditioning type: ```space_conditioning_type_b = space_b.conditioning_type```  
 
-    - For each surface in space: ```for surface_baseline in space_baseline.surfaces:```  
+    - Get baseline construction from Table G3.4-1 to G3.4-8 based on climate zone, space category, space conditioning type and function type: ```surface_performance_target_u_factor, surface_performance_target_layers = data_lookup(table_G3_4,climate_zone,space_category_b,space_conditioning_type_b,"Walls, Above-Grade")```  
 
-      - Get the surface construction if the surface is above-grade wall: ```if ( surface_baseline.classification == "WALL" ) AND ( surface_baseline.adjacent_to == "AMBIENT" ): surface_construction_baseline = surface_baseline.construction```  
+    - For each surface in space: ```for surface_b in space_b.surfaces:```  
 
-      - Get the performance values for the construction: ```surface_performance_value_baseline = surface_construction_baseline.u_factor```  
+      - Get the surface construction if the surface is above-grade wall: ```if ( 60<= surface_b.tilt <= 90 ) AND ( surface_b.adjacent_to == "AMBIENT" ): surface_construction_b = surface_b.construction```  
 
-    **Rule Assertion:** Baseline below-grade wall construction modeled matches Table G3.4-1 to G3.4-8: ```surface_performance_value_baseline == surface_performance_target```  
+      - Get the surface construction input option: ```surface_input_option_b = surface_construction_b.surface_construction_input_option```  
+
+      - Case 1. If the input option is "layer-by-layer", get the layers of the construction: ```if surface_input_option_b == "layer-by-layer": construction_layers_b = surface_construction_b.layers```  
+
+        **Rule Assertion:** Baseline above-grade wall construction modeled matches Normative Appendix A for above-grade steel-framed walls: ```construction_layers_b == surface_performance_target_layers```  
+
+      - Case 2. If the input option is "simplified (R-value)" and u-factor is reported: ```else if surface_construction_b.u_factor: construction_u_factor = surface_construction_b.u_factor```  
+
+        **Rule Assertion:** Baseline above-grade wall construction modeled matches Table G3.4-1 to G3.4-8: ```construction_u_factor == surface_performance_target_u_factor```  
+
+      - Case 3. If the input option is "simplified (R-value)" and r-value reported: ```else if surface_construction_b.r_value: construction_r_value = surface_construction_b.r_value```  
+
+        **Rule Assertion:** Baseline above-grade wall construction modeled matches Table G3.4-1 to G3.4-8: ```construction_r_value == 1 / surface_performance_target_u_factor```  (Note XC, assumes the R-value includes air film?)
