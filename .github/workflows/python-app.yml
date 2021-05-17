@@ -2,7 +2,7 @@
 # and run tests with pytest
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-python-with-github-actions
 
-# Apply this workflow when pushing or creating a pull request to any branch
+# Apply this workflow when creating a pull request or pushing a commit to a PR
 on: pull_request
 
 jobs:
