@@ -37,6 +37,22 @@ Run with example RMRs
 
 
 ## Developer Notes
+
+#### Branch and Pull Request naming convention:
+The branch or PR name should have the form:
+```
+CODE/INITIALS/DESCRIPTIVE_NAME
+```
+
+CODE is one of the following:
+- RCT:  for generic, high-level changes to the ruleset checking tool. Examples include updates to README.md, and the schema files
+- RDS:  for changes related to the RDS files
+- RS:  for changes to the ruleset code (the actual rules)
+- RT:  for changes to the rule test engine
+
+INIITIALS refers to the initials of the owner of the branch or PR.
+
+#### Commit procedure:
 Before committing changes you should run the following commands from the `ruleset-checking-tool` directory.
 1. `pipenv run isort .` to sort imports according to PEP8 https://www.python.org/dev/peps/pep-0008/
 2. `pipenv run black .` to otherwise format code according to PEP8

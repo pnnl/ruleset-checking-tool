@@ -3,21 +3,21 @@ import os
 
 
 def get_nested_dict(dic, keys):
-    """ Used to get nested python dictionary strings
-        Example: get_nested_reference_dict(my_dict, ['a', 'b', 'c']) returns my_dict['a']['b']['c']
+    """Used to get nested python dictionary strings
+    Example: get_nested_reference_dict(my_dict, ['a', 'b', 'c']) returns my_dict['a']['b']['c']
 
-        Parameters
-        ----------
-        dic : dictionary
-            Dictionary of nested dictionaries.
-        keys: list
-            Key names used for writing in the nested dictionary
+    Parameters
+    ----------
+    dic : dictionary
+        Dictionary of nested dictionaries.
+    keys: list
+        Key names used for writing in the nested dictionary
 
-        Returns
-        -------
-        dic: dictionary
+    Returns
+    -------
+    dic: dictionary
 
-            Returns the referenced Python dictionary.
+        Returns the referenced Python dictionary.
     """
 
     last_key, last_index = parse_key_string(keys[-1])
@@ -65,7 +65,7 @@ def get_nested_dict(dic, keys):
             # the single value specified by the key.
             if is_list:
                 # If list isn't long enough, append a new dictionary to it to avoid index out of bounds
-                if len(reference_dict[key]) < list_index+1:
+                if len(reference_dict[key]) < list_index + 1:
                     reference_dict[key].append({})
                 reference_dict = reference_dict[key][list_index]
             else:
@@ -73,39 +73,39 @@ def get_nested_dict(dic, keys):
 
 
 def parse_key_string(key_string):
-    """ Inspects a string representing a key for any list references. Returns the parsed 'key' and 'list_index' reference
-        Example: 'surfaces[1]' references a key = 'surfaces' which represents a list. The '[1]' implies a reference
-                  to the second element in the 'surfaces' list. This would return both 'surfaces' and 1.
+    """Inspects a string representing a key for any list references. Returns the parsed 'key' and 'list_index' reference
+    Example: 'surfaces[1]' references a key = 'surfaces' which represents a list. The '[1]' implies a reference
+              to the second element in the 'surfaces' list. This would return both 'surfaces' and 1.
 
-        Parameters
-        ----------
-        key_string: str
-            String representing a key and possibly a reference to a list index. Example: 'surfaces[1]'
+    Parameters
+    ----------
+    key_string: str
+        String representing a key and possibly a reference to a list index. Example: 'surfaces[1]'
 
-        Returns
-        -------
-        key: str
-            String parsed out of key_string representing a referenced key.
-        list_index: int
-            Integer representing a list index parsed out of key_string. 'None' if no list reference is found
+    Returns
+    -------
+    key: str
+        String parsed out of key_string representing a referenced key.
+    list_index: int
+        Integer representing a list index parsed out of key_string. 'None' if no list reference is found
 
     """
 
-
     # If key specifies an in index (e.g.., something like "[1]" appended afterward a key name), parse the key and
     # index out from the string
-    if '[' in key_string:
-        split_str = key_string.split('[')
+    if "[" in key_string:
+        split_str = key_string.split("[")
         key = split_str[0]
-        list_index = int(split_str[1].replace(']', ''))
+        list_index = int(split_str[1].replace("]", ""))
     else:
         key = key_string
         list_index = None
 
     return key, list_index
 
+
 def set_nested_dict(dic, keys, value):
-    """ Used to set nested python dictionary strings. Useful for setting dictionary values for JSON generation.
+    """Used to set nested python dictionary strings. Useful for setting dictionary values for JSON generation.
     Example: nested_set(my_dict, ['a', 'b', 'c'], 'my_value') is same as my_dict['a']['b']['c'] = 'my_value'
 
     Parameters
@@ -177,8 +177,8 @@ def inject_json_path_from_enumeration(key_list, json_path_ref_string):
     enumeration_list = path_enum_dict[json_path_enumeration].split("/")
 
     # Append index back onto final key if JSON_PATH was defined as a list:
-    if list_index!= None:
-        enumeration_list[-1] = f'{enumeration_list[-1]}[{list_index}]'
+    if list_index != None:
+        enumeration_list[-1] = f"{enumeration_list[-1]}[{list_index}]"
 
     # Inject enumeration list into keylist
     key_list.extend(enumeration_list)
