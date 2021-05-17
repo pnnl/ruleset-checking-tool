@@ -1,10 +1,6 @@
 import pytest
-from table_8_4_4_eff import (
-    SINGLE_PHASE,
-    THREE_PHASE,
-    table_8_4_4_eff,
-    table_8_4_4_in_range,
-)
+from table_8_4_4_eff import (SINGLE_PHASE, THREE_PHASE, table_8_4_4_eff,
+                             table_8_4_4_in_range)
 
 
 # Testing table_8_4_4_in_range()

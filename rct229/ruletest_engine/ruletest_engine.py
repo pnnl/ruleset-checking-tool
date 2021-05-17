@@ -2,7 +2,8 @@ import json
 import os
 
 from rct229.rule_engine.engine import evaluate_rule
-from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
+from rct229.rule_engine.user_baseline_proposed_vals import \
+    UserBaselineProposedVals
 from rct229.rules.section15 import *
 from rct229.schema.validate import validate_rmr
 

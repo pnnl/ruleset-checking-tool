@@ -5,7 +5,7 @@
 on:
   # Apply this workflow when pushing or creating a pull request into master or develop
   push:
-    branches: [master, develop]
+    branches: [master, develop, 'RCT/CH/github_actions_test']
   pull_request:
     branches: [master, develop]
 

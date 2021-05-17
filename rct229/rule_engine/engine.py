@@ -2,7 +2,8 @@ import inspect
 
 import rct229.rule_engine.rule_base as base_classes
 import rct229.rules as rules
-from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
+from rct229.rule_engine.user_baseline_proposed_vals import \
+    UserBaselineProposedVals
 from rct229.schema.validate import validate_rmr
 
 

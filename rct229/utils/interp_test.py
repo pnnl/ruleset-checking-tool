@@ -1,5 +1,6 @@
 import pytest
-from interp import strict_linear_interpolation, strict_list_linear_interpolation
+from interp import (strict_linear_interpolation,
+                    strict_list_linear_interpolation)
 
 
 # Testing strict_linear_interpolation()

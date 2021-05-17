@@ -1,11 +1,12 @@
 from rct229.data.schema_enums import schema_enums
-from rct229.data_fns.table_8_4_4_eff import table_8_4_4_eff, table_8_4_4_in_range
-from rct229.rule_engine.rule_base import (
-    RuleDefinitionBase,
-    RuleDefinitionListIndexedBase,
-)
-from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
-from rct229.rule_engine.utils import _assert_equal_rule, _select_equal_or_lesser
+from rct229.data_fns.table_8_4_4_eff import (table_8_4_4_eff,
+                                             table_8_4_4_in_range)
+from rct229.rule_engine.rule_base import (RuleDefinitionBase,
+                                          RuleDefinitionListIndexedBase)
+from rct229.rule_engine.user_baseline_proposed_vals import \
+    UserBaselineProposedVals
+from rct229.rule_engine.utils import (_assert_equal_rule,
+                                      _select_equal_or_lesser)
 from rct229.utils.jsonpath_utils import find_all
 
 _DRY_TYPE = schema_enums["TransformerType"].DRY_TYPE.name
