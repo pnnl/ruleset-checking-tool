@@ -258,8 +258,8 @@ def clean_value(value):
                 value = float(value)
                 return value
             except ValueError:
-                if value == 'true' or value == 'false':
-                    return value == 'true'
+                if value.lower() == 'true' or value.lower() == 'false':
+                    return value.lower() == 'true'
                 else:
                     return value
 
