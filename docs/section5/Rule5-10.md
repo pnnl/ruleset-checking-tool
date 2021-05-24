@@ -26,6 +26,6 @@
 
     - For each surface in space: ```for surface_b in space_b.surfaces:```  
 
-      - Get vertical glazings in exterior wall: ```if ( 60<= surface_b.tilt <= 90 ) AND ( surface_b.adjacent_to == "AMBIENT" ): windows_b = surface_b.fenestration_subsurfaces```  
+      - Get vertical glazings in exterior wall: ```if ( 60 <= surface_b.tilt <= 90 ) AND ( surface_b.adjacent_to == "AMBIENT" ): windows_b = surface_b.fenestration_subsurfaces```  
 
-        **Rule Assertion:** Baseline vertical fenestrations are flush with the exterior wall, and no shading projects shall be modeled: ```if (window.has_shading_overhang == TRUE) OR (window.has_shading_sidefins == TRUE) for window in windows_b: raise_warning```  
+        **Rule Assertion:** Baseline vertical fenestrations are flush with the exterior wall, and no shading projects shall be modeled: ```if (window.has_shading_overhang == TRUE) OR (window.has_shading_sidefins == TRUE) for window in windows_b: raise_error```  
