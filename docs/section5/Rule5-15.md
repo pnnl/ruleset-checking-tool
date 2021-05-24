@@ -26,6 +26,6 @@
 
     - For each surface in space: ```for surface_b in space_b.surfaces:```  
 
-      - Get surface optics for roof: ```if ( surface_b.classification == "CEILING" ) AND ( 0<= surface_b.tilt <60 ) AND ( surface_b.adjacent_to == "AMBIENT" ): roof_surface_optics_b = surface_b.surface_optics```  
+      - Get surface optics for roof: ```if ( 0 <= surface_b.tilt < 60 ) AND ( surface_b.adjacent_to == "AMBIENT" ): roof_surface_optics_b = surface_b.surface_optics```  
 
         **Rule Assertion:** Baseline roof solar reflectance is 0.30: ```roof_surface_optics_b.absorptance_solar_exterior == 0.70```  
