@@ -36,7 +36,7 @@
 
     - For each surface in space: ```for surface_b in space_b.surfaces:```
 
-      - Check if surface is roof: ```if ( surface_b.classification == "CEILING" ) AND ( 0 <= surface_b.tilt < 60) AND ( surface_b.adjacent_to == "AMBIENT" ): roof_surface_b = surface_b```  
+      - Check if surface is roof: ```if ( 0 <= surface_b.tilt < 60) AND ( surface_b.adjacent_to == "AMBIENT" ): roof_surface_b = surface_b```  
 
       - For each skylight in roof, get SHGC: ```for skylight_b in roof_surface_b.fenestration_subsurfaces: skylight_shgc_b = skylight_b.solar_heat_gain_coefficient```  
 
