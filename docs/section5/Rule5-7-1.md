@@ -2,7 +2,7 @@
 **Rule ID:** 5-7-1  
 **Rule Description:** Baseline WWR should be equal to User WWR or 40%, whichever is smaller.  
 **Rule Assertion:** Baseline RMR = expected value  
-**Appendix G Section:** Envelope  
+**Appendix G Section:** Section G3.1-5(c) Building Envelope Modeling Requirements for the Baseline building  
 **Appendix G Section Reference:**
 - Table G3.1, 5. Building Envelope, Baseline Building Performance, c. Vertical Fenestration Areas
 - Table G3.1.1-1
