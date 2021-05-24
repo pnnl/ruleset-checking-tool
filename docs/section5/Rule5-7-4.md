@@ -2,7 +2,7 @@
 **Rule ID:** 5-7-4  
 **Rule Description:** Fenestration area is equal for Proposed RMR and User RMR.  
 **Rule Assertion:** Proposed RMR = expected value  
-**Appendix G Section:** Envelope  
+**Appendix G Section:** Section G3.1-5(c) Building Envelope Modeling Requirements for the Baseline building    
 **Appendix G Section Reference:**
 - Table G3.1, 5. Building Envelope, Baseline Building Performance, c. Vertical Fenestration Areas
 
