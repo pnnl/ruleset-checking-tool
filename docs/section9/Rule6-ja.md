@@ -22,9 +22,9 @@
 
   - Determine if the building segment uses Building Area Method: ```if lighting_building_area_type_proposed is "None": bam_flag = FALSE else bam_flag = TRUE```  
 
-- For each thermal_block in building_segment: ```thermal_block_proposed in lighting_building_area_type_proposed.thermal_blocks:```  
+- For each thermal_block in building_segment: ```thermal_block_proposed in building_segment_proposed.thermal_blocks:```  
 
-- For each thermal_zone in thermal_block: ```thermal_zone_proposed in thermal_block_proposed.zones:```  
+- For each zone in thermal_block: ```zone_proposed in thermal_block_proposed.zones:```  
 
 - For each space in thermal zone: ```space_proposed in thermal_zone_proposed.spaces:```  
 
