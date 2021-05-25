@@ -56,7 +56,7 @@ def generate_test_rmrs(test_dict):
     
      # The rmr_transformations field is required
     if 'rmr_transformations' not in test_dict:
-        raise ValueError('rmr_transformations field is required in rule test')
+        test_dict["rmr_transformations"] = {}
 
     #Each of these will remain None unless it is specified in
     # rmr_transformations. If its transfomration is set to {}, then it
@@ -75,11 +75,20 @@ def generate_test_rmrs(test_dict):
         if 'user' in rmr_template:
             user_rmr = copy.deepcopy(rmr_template['json_template'])
 
+            if 'user' not in test_dict["rmr_transformations"]:
+                test_dict["rmr_transformations"]["user"] = {}
+
         if 'baseline' in rmr_template:
             baseline_rmr = copy.deepcopy(rmr_template['json_template'])
 
+            if 'baseline' not in test_dict["rmr_transformations"]:
+                test_dict["rmr_transformations"]["baseline"] = {}
+
         if 'proposed' in rmr_template:
             proposed_rmr = copy.deepcopy(rmr_template['json_template'])
+
+            if 'proposed' not in test_dict["rmr_transformations"]:
+                test_dict["rmr_transformations"]["proposed"] = {}
 
 
     # Read in transformations dictionary. This will perturb a template or fully define an RMR (if no template defined)
