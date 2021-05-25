@@ -26,7 +26,7 @@
 
 - For each zone in thermal_block: ```zone_proposed in thermal_block_proposed.zones:```  
 
-- For each space in thermal zone: ```space_proposed in thermal_zone_proposed.spaces:```  
+- For each space in zone: ```space_proposed in zone_proposed.spaces:```  
 
   - Get floor_area from space: ```floor_area_proposed = space_proposed.floor_area```  
 
