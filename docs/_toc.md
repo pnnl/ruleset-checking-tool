@@ -134,4 +134,4 @@ The following documentation provides a technical description of ASHRAE 90.1-2019
   * 15-7 [FUTURE]: Transformer efficiency reported in Baseline RMR equals User RMR  
   * 15-8 [FUTURE]: Transformer efficiency reported in Proposed RMR equals User RMR  
   * 15-9 [FUTURE]: Transformer capacity ratio reported in Baseline RMR equals User RMR  
-  * 15-10 [FUTURE]: Transformer capacity ratio reported in Proposed RMR equals User RMR  
+  * [15-10](section15/Rule15-10.md): Transformer capacity ratio reported in Proposed RMR equals User RMR  
