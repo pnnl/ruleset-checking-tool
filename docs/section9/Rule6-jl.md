@@ -9,7 +9,7 @@
 - Table 9.6.1, Lighting Power Density Allowances Using the Space-by-Space Method and Minimum Control Requirements Using Either Method  
 - Table G3.7, Performance Rating Method Lighting Power Density Allowances and Occupancy Sensor Reductions Using the Space-by-Space Method
 
-**Applicability:** All required data elements exist for P_RMR  and B_RMR
+**Applicability:** All required data elements exist for P_RMR  and B_RMR  
 **Applicability Checks:**  
 
   1. Building has Hotel/Model Guestroom or Dormitory Living Quarters, Dwelling Units space types  
@@ -31,7 +31,7 @@
 
     - If the lighting_space_type is "Guest Room", or "Dormitory Living Quarters": ```if ( lighting_space_type_proposed == "Guest Room" or "Dormitory Living Quarters" ):```  
 
-      - Get the lighting power denstiy allowance for the proposed model: ```lighting_power_allowance_proposed = data_lookup(table_9_6_1, lighting_space_type_proposed)```  
+      - Get the lighting power density allowance for the proposed model: ```lighting_power_allowance_proposed = data_lookup(table_9_6_1, lighting_space_type_proposed)```  
 
     - If the lighting_space_type is "Dwelling Unit": ```else: lighting_power_allowance_proposed = 0.6```  
 
@@ -39,14 +39,18 @@
 
       - Get the total design power_per_area for the space: ```space_lighting_power_per_area_proposed = sum( lighting.power_per_area for lighting in interior_lighting_proposed )```  
 
-      **Rule Assertion:** For each space that is Hotel/Motel Guestroom or Dormitory Living Quarters, or Dwelling Unites in the proposed model: ```space_lighting_power_per_area_proposed <= lighting_power_allowance_proposed```  
+    - Get the matching space in U_RMR: ```space_user = match_data_element(U_RMR, spaces, space_proposed.name)```  
+
+      - Get the total design power_per_area for the space: ```space_lighting_power_per_area_user = sum( lighting.power_per_area for lighting in space_user.interior_lightings )```  
+
+        **Rule Assertion:** For each space that is Hotel/Motel Guestroom or Dormitory Living Quarters, or Dwelling Units in the proposed model: ```space_lighting_power_per_area_proposed = max( lighting_power_allowance_proposed, space_lighting_power_per_area_user)```  
 
     - Get matching space from Baseline RMR: ```space_baseline = match_data_element(B_RMR, spaces, space_proposed.name)```  
 
-      - Get the lighting power denstiy allowance for the baseline model: ```lighting_power_allowance_baseline = data_lookup(table_G_3_7, lighting_space_type_proposed)```  
+      - Get the lighting power density allowance for the baseline model: ```lighting_power_allowance_baseline = data_lookup(table_G_3_7, lighting_space_type_proposed)```  
 
       - Get interior_lighting in space: ```interior_lighting_baseline = space_baseline.interior_lightings```  
 
       - Get the total baseline power_per_area for the space: ```space_lighting_power_per_area_baseline = sum( lighting.power_per_area for lighting in interior_lighting_baseline )```  
 
-      **Rule Assertion:** For each space that is Hotel/Motel Guestroom or Dormitory Living Quarters, or Dwelling Unites in the baseline model: ```space_lighting_power_per_area_baseline == lighting_power_allowance_baseline```  
+        **Rule Assertion:** For each space that is Hotel/Motel Guestroom or Dormitory Living Quarters, or Dwelling Units in the baseline model: ```space_lighting_power_per_area_baseline == lighting_power_allowance_baseline```  
