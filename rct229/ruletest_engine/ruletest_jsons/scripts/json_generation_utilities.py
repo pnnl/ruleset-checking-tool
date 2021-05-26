@@ -245,23 +245,33 @@ def clean_value(value):
 
     """
 
-    # Set value directly if not convertible to a numeric
+    # Set value directly if a list or dict
     if isinstance(value, dict) or isinstance(value, list):
         return value
     else:
-        # Set value as integer or float if convertible
-        try:
-            value = int(value)
-            return value
-        except ValueError:
+
+        # If value is neither a list or dict, and a string, process it
+        if isinstance(value, str):
+            # Set value as boolean if possible
+            if value.lower() == 'true' or value.lower() == 'false':
+                return value.lower() == 'true'
             try:
+                # Check if integer or float if convertible
                 value = float(value)
-                return value
-            except ValueError:
-                if value.lower() == 'true' or value.lower() == 'false':
-                    return value.lower() == 'true'
-                else:
+
+                # Check for integer
+                if value % 1 == 0:
+                    value = int(value)
                     return value
+                else: # If not an integer, return the float
+                    return value
+
+            except ValueError:
+                # normal string
+                return value
+
+        else: #if not a list, dict, or string, this value is likely already cleaned
+            return value
 
 
 
