@@ -232,21 +232,12 @@
         "Test": "b",
         "description": "User RMR transformer name is not in the Proposed RMR",
         "expected_rule_outcome": "fail",
-        "rmr_template": {
-            "user": 1,
-            "proposed": 1,
-            "json_template": {
-                "transformers": [
-                    {
-                        "name": "Transformer_1"
-                    }
-                ]
-            }
-        },
         "rmr_transformations": {
             "user": {
                 "transformers": [
-                    {},
+                    {
+                        "name": "Transformer_1"
+                    },
                     {
                         "name": "Transformer_2"
                     }
@@ -254,7 +245,9 @@
             },
             "proposed": {
                 "transformers": [
-                    {},
+                    {
+                        "name": "Transformer_1"
+                    },
                     {
                         "name": "Transformer_4"
                     }
@@ -297,21 +290,12 @@
         "Test": "b",
         "description": "User RMR transformer name is not in the Baseline RMR",
         "expected_rule_outcome": "fail",
-        "rmr_template": {
-            "user": 1,
-            "baseline": 1,
-            "json_template": {
-                "transformers": [
-                    {
-                        "name": "Transformer_1"
-                    }
-                ]
-            }
-        },
         "rmr_transformations": {
             "user": {
                 "transformers": [
-                    {},
+                    {
+                        "name": "Transformer_1"
+                    },
                     {
                         "name": "Transformer_2"
                     }
@@ -319,7 +303,9 @@
             },
             "baseline": {
                 "transformers": [
-                    {},
+                    {
+                        "name": "Transformer_1"
+                    },
                     {
                         "name": "Transformer_4"
                     }
@@ -333,32 +319,26 @@
         "Test": "a",
         "description": "Dry Single-Phase transformer modeled in the User Model whose efficiency is > than Table 8.4.4. Baseline RMR equals Table 8.4.4",
         "expected_rule_outcome": "pass",
-        "rmr_template": {
-            "user": 1,
-            "baseline": 1,
-            "json_template": {
+        "rmr_transformations": {
+            "user": {
                 "transformers": [
                     {
                         "name": "Transformer_1",
                         "type": "DRY_TYPE",
                         "phase": "SINGLE_PHASE",
-                        "capacity": 25
-                    }
-                ]
-            }
-        },
-        "rmr_transformations": {
-            "user": {
-                "transformers": [
-                    {
-                        "efficiency": 0
+                        "capacity": 25,
+                        "efficiency": 0.99
                     }
                 ]
             },
             "baseline": {
                 "transformers": [
                     {
-                        "efficiency": 0
+                        "name": "Transformer_1",
+                        "type": "DRY_TYPE",
+                        "phase": "SINGLE_PHASE",
+                        "capacity": 25,
+                        "efficiency": 0.98
                     }
                 ]
             }
@@ -370,17 +350,26 @@
         "Test": "b",
         "description": "Dry Single-Phase transformer modeled in the User Model whose efficiency is > than Table 8.4.4. Baseline RMR does not equal Table 8.4.4",
         "expected_rule_outcome": "fail",
-        "rmr_template": {
-            "user": 1,
-            "baseline": 1,
-            "json_template": {
+        "rmr_transformations": {
+            "user": {
                 "transformers": [
                     {
                         "name": "Transformer_1",
                         "type": "DRY_TYPE",
                         "phase": "SINGLE_PHASE",
                         "capacity": 25,
-                        "efficiency": 0
+                        "efficiency": 0.99
+                    }
+                ]
+            },
+            "baseline": {
+                "transformers": [
+                    {
+                        "name": "Transformer_1",
+                        "type": "DRY_TYPE",
+                        "phase": "SINGLE_PHASE",
+                        "capacity": 25,
+                        "efficiency": 0.99
                     }
                 ]
             }
@@ -392,32 +381,26 @@
         "Test": "c",
         "description": "Dry Three-Phase transformer modeled in the User Model whose efficiency is > than Table 8.4.4. Baseline RMR matches Table 8.4.4",
         "expected_rule_outcome": "pass",
-        "rmr_template": {
-            "user": 1,
-            "baseline": 1,
-            "json_template": {
+        "rmr_transformations": {
+            "user": {
                 "transformers": [
                     {
                         "name": "Transformer_1",
                         "type": "DRY_TYPE",
                         "phase": "THREE_PHASE",
-                        "capacity": 25
-                    }
-                ]
-            }
-        },
-        "rmr_transformations": {
-            "user": {
-                "transformers": [
-                    {
-                        "efficiency": 0
+                        "capacity": 25,
+                        "efficiency": 0.99
                     }
                 ]
             },
             "baseline": {
                 "transformers": [
                     {
-                        "efficiency": 0
+                        "name": "Transformer_1",
+                        "type": "DRY_TYPE",
+                        "phase": "THREE_PHASE",
+                        "capacity": 25,
+                        "efficiency": 0.983
                     }
                 ]
             }
@@ -429,32 +412,26 @@
         "Test": "d",
         "description": "Dry Three-Phase transformer modeled in the User Model whose efficiency is > than Table 8.4.4. Baseline RMR matches Table 8.4.4",
         "expected_rule_outcome": "fail",
-        "rmr_template": {
-            "user": 1,
-            "baseline": 1,
-            "json_template": {
+        "rmr_transformations": {
+            "user": {
                 "transformers": [
                     {
                         "name": "Transformer_1",
                         "type": "DRY_TYPE",
                         "phase": "THREE_PHASE",
-                        "capacity": 25
-                    }
-                ]
-            }
-        },
-        "rmr_transformations": {
-            "user": {
-                "transformers": [
-                    {
-                        "efficiency": 0
+                        "capacity": 25,
+                        "efficiency": 0.99
                     }
                 ]
             },
             "baseline": {
                 "transformers": [
                     {
-                        "efficiency": 0
+                        "name": "Transformer_1",
+                        "type": "DRY_TYPE",
+                        "phase": "THREE_PHASE",
+                        "capacity": 25,
+                        "efficiency": 0.98
                     }
                 ]
             }
@@ -474,7 +451,7 @@
                         "type": "DRY_TYPE",
                         "phase": "SINGLE_PHASE",
                         "capacity": 25,
-                        "efficiency": 0
+                        "efficiency": 0.98
                     }
                 ]
             }
@@ -494,7 +471,7 @@
                         "type": "DRY_TYPE",
                         "phase": "SINGLE_PHASE",
                         "capacity": 25,
-                        "efficiency": 0
+                        "efficiency": 0.97
                     }
                 ]
             }
@@ -514,7 +491,7 @@
                         "type": "DRY_TYPE",
                         "phase": "THREE_PHASE",
                         "capacity": 25,
-                        "efficiency": 0
+                        "efficiency": 0.983
                     }
                 ]
             }
@@ -534,7 +511,7 @@
                         "type": "DRY_TYPE",
                         "phase": "THREE_PHASE",
                         "capacity": 25,
-                        "efficiency": 0
+                        "efficiency": 0.98
                     }
                 ]
             }
@@ -546,17 +523,26 @@
         "Test": "a",
         "description": "Transformer modeled in user RMR, Fluid-filled transformer modeled in the User Model, Baseline RMR equals User RMR",
         "expected_rule_outcome": "pass",
-        "rmr_template": {
-            "user": 1,
-            "baseline": 1,
-            "json_template": {
+        "rmr_transformations": {
+            "user": {
                 "transformers": [
                     {
                         "name": "Transformer_1",
                         "type": "FLUID_FILLED",
                         "phase": "THREE_PHASE",
                         "capacity": 30,
-                        "efficiency": 0
+                        "efficiency": 0.98
+                    }
+                ]
+            },
+            "baseline": {
+                "transformers": [
+                    {
+                        "name": "Transformer_1",
+                        "type": "FLUID_FILLED",
+                        "phase": "THREE_PHASE",
+                        "capacity": 30,
+                        "efficiency": 0.98
                     }
                 ]
             }
@@ -568,32 +554,26 @@
         "Test": "b",
         "description": "Transformer modeled in user RMR, Fluid-filled transformer modeled in the User Model, Baseline RMR does not equal User RMR",
         "expected_rule_outcome": "fail",
-        "rmr_template": {
-            "user": 1,
-            "baseline": 1,
-            "json_template": {
+        "rmr_transformations": {
+            "user": {
                 "transformers": [
                     {
                         "name": "Transformer_1",
                         "type": "FLUID_FILLED",
                         "phase": "THREE_PHASE",
-                        "capacity": 30
-                    }
-                ]
-            }
-        },
-        "rmr_transformations": {
-            "user": {
-                "transformers": [
-                    {
-                        "efficiency": 0
+                        "capacity": 30,
+                        "efficiency": 0.98
                     }
                 ]
             },
             "baseline": {
                 "transformers": [
                     {
-                        "efficiency": 0
+                        "name": "Transformer_1",
+                        "type": "FLUID_FILLED",
+                        "phase": "THREE_PHASE",
+                        "capacity": 30,
+                        "efficiency": 0.975
                     }
                 ]
             }
@@ -605,17 +585,26 @@
         "Test": "c",
         "description": "Transformer modeled in user RMR, Dry-type, single phase transformer modeled in the User Model, Baseline RMR equals User RMR",
         "expected_rule_outcome": "pass",
-        "rmr_template": {
-            "user": 1,
-            "baseline": 1,
-            "json_template": {
+        "rmr_transformations": {
+            "user": {
                 "transformers": [
                     {
                         "name": "Transformer_1",
                         "type": "DRY_TYPE",
                         "phase": "SINGLE_PHASE",
                         "capacity": 25,
-                        "efficiency": 0
+                        "efficiency": 0.98
+                    }
+                ]
+            },
+            "baseline": {
+                "transformers": [
+                    {
+                        "name": "Transformer_1",
+                        "type": "DRY_TYPE",
+                        "phase": "SINGLE_PHASE",
+                        "capacity": 25,
+                        "efficiency": 0.98
                     }
                 ]
             }
@@ -627,32 +616,26 @@
         "Test": "d",
         "description": "Transformer modeled in user RMR, Dry-type, single phase transformer modeled in the User Model, Baseline RMR does not equal User RMR",
         "expected_rule_outcome": "fail",
-        "rmr_template": {
-            "user": 1,
-            "baseline": 1,
-            "json_template": {
+        "rmr_transformations": {
+            "user": {
                 "transformers": [
                     {
                         "name": "Transformer_1",
                         "type": "DRY_TYPE",
                         "phase": "SINGLE_PHASE",
-                        "capacity": 25
-                    }
-                ]
-            }
-        },
-        "rmr_transformations": {
-            "user": {
-                "transformers": [
-                    {
-                        "efficiency": 0
+                        "capacity": 25,
+                        "efficiency": 0.98
                     }
                 ]
             },
             "baseline": {
                 "transformers": [
                     {
-                        "efficiency": 0
+                        "name": "Transformer_1",
+                        "type": "DRY_TYPE",
+                        "phase": "SINGLE_PHASE",
+                        "capacity": 25,
+                        "efficiency": 0.983
                     }
                 ]
             }
@@ -664,17 +647,26 @@
         "Test": "a",
         "description": "Transformer modeled in user RMR, Fluid-filled transformer modeled in the User Model, Proposed RMR equals User  RMR",
         "expected_rule_outcome": "pass",
-        "rmr_template": {
-            "user": 1,
-            "proposed": 1,
-            "json_template": {
+        "rmr_transformations": {
+            "user": {
                 "transformers": [
                     {
                         "name": "Transformer_1",
                         "type": "FLUID_FILLED",
                         "phase": "THREE_PHASE",
                         "capacity": 30,
-                        "efficiency": 0
+                        "efficiency": 0.98
+                    }
+                ]
+            },
+            "proposed": {
+                "transformers": [
+                    {
+                        "name": "Transformer_1",
+                        "type": "FLUID_FILLED",
+                        "phase": "THREE_PHASE",
+                        "capacity": 30,
+                        "efficiency": 0.98
                     }
                 ]
             }
@@ -686,32 +678,26 @@
         "Test": "b",
         "description": "Transformer modeled in user RMR, Fluid-filled transformer modeled in the User Model, Proposed RMR doesn't equal User Model RMR",
         "expected_rule_outcome": "fail",
-        "rmr_template": {
-            "user": 1,
-            "proposed": 1,
-            "json_template": {
+        "rmr_transformations": {
+            "user": {
                 "transformers": [
                     {
                         "name": "Transformer_1",
                         "type": "FLUID_FILLED",
                         "phase": "THREE_PHASE",
-                        "capacity": 30
-                    }
-                ]
-            }
-        },
-        "rmr_transformations": {
-            "user": {
-                "transformers": [
-                    {
-                        "efficiency": 0
+                        "capacity": 30,
+                        "efficiency": 0.98
                     }
                 ]
             },
             "proposed": {
                 "transformers": [
                     {
-                        "efficiency": 0
+                        "name": "Transformer_1",
+                        "type": "FLUID_FILLED",
+                        "phase": "THREE_PHASE",
+                        "capacity": 30,
+                        "efficiency": 0.975
                     }
                 ]
             }
@@ -723,17 +709,26 @@
         "Test": "c",
         "description": "Transformer modeled in user RMR, Dry-type, single phase transformer modeled in the User Model, Proposed RMR equals User RMR",
         "expected_rule_outcome": "pass",
-        "rmr_template": {
-            "user": 1,
-            "proposed": 1,
-            "json_template": {
+        "rmr_transformations": {
+            "user": {
                 "transformers": [
                     {
                         "name": "Transformer_1",
                         "type": "DRY_TYPE",
                         "phase": "SINGLE_PHASE",
                         "capacity": 25,
-                        "efficiency": 0
+                        "efficiency": 0.99
+                    }
+                ]
+            },
+            "proposed": {
+                "transformers": [
+                    {
+                        "name": "Transformer_1",
+                        "type": "DRY_TYPE",
+                        "phase": "SINGLE_PHASE",
+                        "capacity": 25,
+                        "efficiency": 0.99
                     }
                 ]
             }
@@ -745,32 +740,26 @@
         "Test": "d",
         "description": "Transformer modeled in user RMR, Dry-type, single phase transformer modeled in the User Model, Proposed RMR does not equal User RMR",
         "expected_rule_outcome": "fail",
-        "rmr_template": {
-            "user": 1,
-            "proposed": 1,
-            "json_template": {
+        "rmr_transformations": {
+            "user": {
                 "transformers": [
                     {
                         "name": "Transformer_1",
                         "type": "DRY_TYPE",
                         "phase": "THREE_PHASE",
-                        "capacity": 25
-                    }
-                ]
-            }
-        },
-        "rmr_transformations": {
-            "user": {
-                "transformers": [
-                    {
-                        "efficiency": 0
+                        "capacity": 25,
+                        "efficiency": 0.99
                     }
                 ]
             },
             "proposed": {
                 "transformers": [
                     {
-                        "efficiency": 0
+                        "name": "Transformer_1",
+                        "type": "DRY_TYPE",
+                        "phase": "THREE_PHASE",
+                        "capacity": 25,
+                        "efficiency": 0.98
                     }
                 ]
             }
@@ -782,17 +771,26 @@
         "Test": "e",
         "description": "Transformer modeled in user RMR, Dry-type, three phase transformer modeled in the User Model, Proposed RMR equals User RMR",
         "expected_rule_outcome": "pass",
-        "rmr_template": {
-            "user": 1,
-            "proposed": 1,
-            "json_template": {
+        "rmr_transformations": {
+            "user": {
                 "transformers": [
                     {
                         "name": "Transformer_1",
                         "type": "DRY_TYPE",
                         "phase": "THREE_PHASE",
                         "capacity": 25,
-                        "efficiency": 0
+                        "efficiency": 0.99
+                    }
+                ]
+            },
+            "proposed": {
+                "transformers": [
+                    {
+                        "name": "Transformer_1",
+                        "type": "DRY_TYPE",
+                        "phase": "THREE_PHASE",
+                        "capacity": 25,
+                        "efficiency": 0.99
                     }
                 ]
             }
@@ -804,32 +802,26 @@
         "Test": "f",
         "description": "Transformer modeled in user RMR, Dry-type, three phase transformer modeled in the User Model, Proposed RMR does not match User RMR",
         "expected_rule_outcome": "fail",
-        "rmr_template": {
-            "user": 1,
-            "proposed": 1,
-            "json_template": {
+        "rmr_transformations": {
+            "user": {
                 "transformers": [
                     {
                         "name": "Transformer_1",
                         "type": "DRY_TYPE",
                         "phase": "THREE_PHASE",
-                        "capacity": 25
-                    }
-                ]
-            }
-        },
-        "rmr_transformations": {
-            "user": {
-                "transformers": [
-                    {
-                        "efficiency": 0
+                        "capacity": 25,
+                        "efficiency": 0.99
                     }
                 ]
             },
             "proposed": {
                 "transformers": [
                     {
-                        "efficiency": 0
+                        "name": "Transformer_1",
+                        "type": "DRY_TYPE",
+                        "phase": "THREE_PHASE",
+                        "capacity": 25,
+                        "efficiency": 0.983
                     }
                 ]
             }
@@ -841,24 +833,14 @@
         "Test": "g",
         "description": "Transformer modeled in user RMR, Dry-type, three phase transformer modeled in the User Model, Proposed RMR efficiency matches User RMR but phase  does not match User RMR",
         "expected_rule_outcome": "pass",
-        "rmr_template": {
-            "user": 1,
-            "proposed": 1,
-            "json_template": {
+        "rmr_transformations": {
+            "user": {
                 "transformers": [
                     {
                         "name": "Transformer_1",
                         "type": "DRY_TYPE",
                         "capacity": 25,
-                        "efficiency": 0
-                    }
-                ]
-            }
-        },
-        "rmr_transformations": {
-            "user": {
-                "transformers": [
-                    {
+                        "efficiency": 0.98,
                         "phase": "THREE_PHASE"
                     }
                 ]
@@ -866,6 +848,10 @@
             "proposed": {
                 "transformers": [
                     {
+                        "name": "Transformer_1",
+                        "type": "DRY_TYPE",
+                        "capacity": 25,
+                        "efficiency": 0.98,
                         "phase": "SINGLE_PHASE"
                     }
                 ]
