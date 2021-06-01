@@ -137,7 +137,6 @@ def set_nested_dict(dic, keys, value):
         nested_dict[key].append(clean_value(value))
 
 
-
 def inject_json_path_from_enumeration(key_list, json_path_ref_string):
 
     """A few JSON paths are shorthanded with an enumeration. This function appends the key_list with the list of keys
@@ -253,8 +252,8 @@ def clean_value(value):
         # If value is neither a list or dict, and a string, process it
         if isinstance(value, str):
             # Set value as boolean if possible
-            if value.lower() == 'true' or value.lower() == 'false':
-                return value.lower() == 'true'
+            if value.lower() == "true" or value.lower() == "false":
+                return value.lower() == "true"
             try:
                 # Check if integer or float if convertible
                 value = float(value)
@@ -263,45 +262,51 @@ def clean_value(value):
                 if value % 1 == 0:
                     value = int(value)
                     return value
-                else: # If not an integer, return the float
+                else:  # If not an integer, return the float
                     return value
 
             except ValueError:
                 # normal string
                 return value
 
-        else: #if not a list, dict, or string, this value is likely already cleaned
+        else:  # if not a list, dict, or string, this value is likely already cleaned
             return value
-
 
 
 def merge_nested_dictionary(master_dict, new_data_dict, path=None):
     """Merges a nested dictionary into another nested_dictionary. Adapted from stackoverflow question found here:
-       https://stackoverflow.com/questions/7204805/how-to-merge-dictionaries-of-dictionaries
+    https://stackoverflow.com/questions/7204805/how-to-merge-dictionaries-of-dictionaries
 
-        Parameters
-        ----------
-        master_dict : dict
-            Nested dictionary being merged into master dictionary
-            
-        new_data_dict: dict
-            Nested dictionary receiving new data
+     Parameters
+     ----------
+     master_dict : dict
+         Nested dictionary being merged into master dictionary
+
+     new_data_dict: dict
+         Nested dictionary receiving new data
 
     """
 
-    if path is None: path = []
+    if path is None:
+        path = []
     for key in new_data_dict:
         if key in master_dict:
-            if isinstance(master_dict[key], dict) and isinstance(new_data_dict[key], dict):
-                merge_nested_dictionary(master_dict[key], new_data_dict[key], path + [str(key)])
-            elif isinstance(master_dict[key], list) and isinstance(new_data_dict[key], list):
+            if isinstance(master_dict[key], dict) and isinstance(
+                new_data_dict[key], dict
+            ):
+                merge_nested_dictionary(
+                    master_dict[key], new_data_dict[key], path + [str(key)]
+                )
+            elif isinstance(master_dict[key], list) and isinstance(
+                new_data_dict[key], list
+            ):
                 for master, new_data in zip(master_dict[key], new_data_dict[key]):
                     merge_nested_dictionary(master, new_data, path + [str(key)])
 
             elif master_dict[key] == new_data_dict[key]:
-                pass # same leaf value
+                pass  # same leaf value
             else:
-                raise Exception('Conflict at %s' % '.'.join(path + [str(key)]))
+                raise Exception("Conflict at %s" % ".".join(path + [str(key)]))
         else:
             master_dict[key] = new_data_dict[key]
     return master_dict

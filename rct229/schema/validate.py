@@ -29,7 +29,11 @@ def _schema_validate(rmr_obj):
         schema_resnet_enum = json.load(json_file)
 
     # Create a resolver which maps schema references to schema objects
-    schema_store = {SCHEMA_KEY: schema, SCHEMA_ENUM_KEY: schema_enum, SCHEMA_RESNET_ENUM_KEY: schema_resnet_enum}
+    schema_store = {
+        SCHEMA_KEY: schema,
+        SCHEMA_ENUM_KEY: schema_enum,
+        SCHEMA_RESNET_ENUM_KEY: schema_resnet_enum,
+    }
     resolver = jsonschema.RefResolver.from_schema(schema, store=schema_store)
 
     # Create a validator
