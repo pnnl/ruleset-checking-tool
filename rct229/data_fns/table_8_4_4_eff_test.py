@@ -1,4 +1,5 @@
 import pytest
+from numpy.testing import assert_approx_equal
 from table_8_4_4_eff import (
     SINGLE_PHASE,
     THREE_PHASE,
@@ -58,12 +59,14 @@ def test__table_8_4_4_eff__with_three_phase_high_value():
 
 
 def test__table_8_4_4_eff__with_single_phase_in_range_value():
-    assert table_8_4_4_eff(phase=SINGLE_PHASE, kVA=75) == 98.5
+    assert table_8_4_4_eff(phase=SINGLE_PHASE, kVA=75) == 0.985
 
 
 def test__table_8_4_4_eff__with_three_phase_in_range_value():
-    assert table_8_4_4_eff(phase=THREE_PHASE, kVA=75) == 98.6
+    assert table_8_4_4_eff(phase=THREE_PHASE, kVA=75) == 0.986
 
 
 def test__table_8_4_4_eff__with_single_phase_between_values():
-    assert table_8_4_4_eff(phase=SINGLE_PHASE, kVA=20) == (97.7 + 98) / 2
+    assert_approx_equal(
+        table_8_4_4_eff(phase=SINGLE_PHASE, kVA=20), (0.977 + 0.98) / 2, significant=4
+    )

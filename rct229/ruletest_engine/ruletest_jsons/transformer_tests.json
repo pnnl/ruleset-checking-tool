@@ -326,7 +326,7 @@
                         "name": "Transformer_1",
                         "type": "DRY_TYPE",
                         "phase": "SINGLE_PHASE",
-                        "capacity": 25,
+                        "capacity": 25000,
                         "efficiency": 0.99
                     }
                 ]
@@ -337,7 +337,7 @@
                         "name": "Transformer_1",
                         "type": "DRY_TYPE",
                         "phase": "SINGLE_PHASE",
-                        "capacity": 25,
+                        "capacity": 25000,
                         "efficiency": 0.98
                     }
                 ]
@@ -357,7 +357,7 @@
                         "name": "Transformer_1",
                         "type": "DRY_TYPE",
                         "phase": "SINGLE_PHASE",
-                        "capacity": 25,
+                        "capacity": 25000,
                         "efficiency": 0.99
                     }
                 ]
@@ -368,7 +368,7 @@
                         "name": "Transformer_1",
                         "type": "DRY_TYPE",
                         "phase": "SINGLE_PHASE",
-                        "capacity": 25,
+                        "capacity": 25000,
                         "efficiency": 0.99
                     }
                 ]
@@ -388,7 +388,7 @@
                         "name": "Transformer_1",
                         "type": "DRY_TYPE",
                         "phase": "THREE_PHASE",
-                        "capacity": 25,
+                        "capacity": 30000,
                         "efficiency": 0.99
                     }
                 ]
@@ -399,8 +399,8 @@
                         "name": "Transformer_1",
                         "type": "DRY_TYPE",
                         "phase": "THREE_PHASE",
-                        "capacity": 25,
-                        "efficiency": 0.983
+                        "capacity": 30000,
+                        "efficiency": 0.9823
                     }
                 ]
             }
@@ -410,7 +410,7 @@
         "Section": 15,
         "Rule": 5,
         "Test": "d",
-        "description": "Dry Three-Phase transformer modeled in the User Model whose efficiency is > than Table 8.4.4. Baseline RMR matches Table 8.4.4",
+        "description": "Dry Three-Phase transformer modeled in the User Model whose efficiency is > than Table 8.4.4. Baseline RMR does not match Table 8.4.4",
         "expected_rule_outcome": "fail",
         "rmr_transformations": {
             "user": {
@@ -419,7 +419,7 @@
                         "name": "Transformer_1",
                         "type": "DRY_TYPE",
                         "phase": "THREE_PHASE",
-                        "capacity": 25,
+                        "capacity": 30000,
                         "efficiency": 0.99
                     }
                 ]
@@ -430,7 +430,7 @@
                         "name": "Transformer_1",
                         "type": "DRY_TYPE",
                         "phase": "THREE_PHASE",
-                        "capacity": 25,
+                        "capacity": 30000,
                         "efficiency": 0.98
                     }
                 ]
@@ -450,7 +450,7 @@
                         "name": "Transformer_1",
                         "type": "DRY_TYPE",
                         "phase": "SINGLE_PHASE",
-                        "capacity": 25,
+                        "capacity": 25000,
                         "efficiency": 0.98
                     }
                 ]
@@ -470,7 +470,7 @@
                         "name": "Transformer_1",
                         "type": "DRY_TYPE",
                         "phase": "SINGLE_PHASE",
-                        "capacity": 25,
+                        "capacity": 25000,
                         "efficiency": 0.97
                     }
                 ]
@@ -490,7 +490,7 @@
                         "name": "Transformer_1",
                         "type": "DRY_TYPE",
                         "phase": "THREE_PHASE",
-                        "capacity": 25,
+                        "capacity": 25000,
                         "efficiency": 0.983
                     }
                 ]
@@ -510,7 +510,7 @@
                         "name": "Transformer_1",
                         "type": "DRY_TYPE",
                         "phase": "THREE_PHASE",
-                        "capacity": 25,
+                        "capacity": 25000,
                         "efficiency": 0.98
                     }
                 ]
@@ -530,7 +530,7 @@
                         "name": "Transformer_1",
                         "type": "FLUID_FILLED",
                         "phase": "THREE_PHASE",
-                        "capacity": 30,
+                        "capacity": 30000,
                         "efficiency": 0.98
                     }
                 ]
@@ -541,7 +541,7 @@
                         "name": "Transformer_1",
                         "type": "FLUID_FILLED",
                         "phase": "THREE_PHASE",
-                        "capacity": 30,
+                        "capacity": 30000,
                         "efficiency": 0.98
                     }
                 ]
@@ -561,7 +561,7 @@
                         "name": "Transformer_1",
                         "type": "FLUID_FILLED",
                         "phase": "THREE_PHASE",
-                        "capacity": 30,
+                        "capacity": 30000,
                         "efficiency": 0.98
                     }
                 ]
@@ -572,7 +572,7 @@
                         "name": "Transformer_1",
                         "type": "FLUID_FILLED",
                         "phase": "THREE_PHASE",
-                        "capacity": 30,
+                        "capacity": 30000,
                         "efficiency": 0.975
                     }
                 ]
@@ -592,7 +592,7 @@
                         "name": "Transformer_1",
                         "type": "DRY_TYPE",
                         "phase": "SINGLE_PHASE",
-                        "capacity": 25,
+                        "capacity": 25000,
                         "efficiency": 0.98
                     }
                 ]
@@ -603,7 +603,7 @@
                         "name": "Transformer_1",
                         "type": "DRY_TYPE",
                         "phase": "SINGLE_PHASE",
-                        "capacity": 25,
+                        "capacity": 25000,
                         "efficiency": 0.98
                     }
                 ]
@@ -623,7 +623,7 @@
                         "name": "Transformer_1",
                         "type": "DRY_TYPE",
                         "phase": "SINGLE_PHASE",
-                        "capacity": 25,
+                        "capacity": 25000,
                         "efficiency": 0.98
                     }
                 ]
@@ -634,7 +634,7 @@
                         "name": "Transformer_1",
                         "type": "DRY_TYPE",
                         "phase": "SINGLE_PHASE",
-                        "capacity": 25,
+                        "capacity": 25000,
                         "efficiency": 0.983
                     }
                 ]
@@ -654,7 +654,7 @@
                         "name": "Transformer_1",
                         "type": "FLUID_FILLED",
                         "phase": "THREE_PHASE",
-                        "capacity": 30,
+                        "capacity": 30000,
                         "efficiency": 0.98
                     }
                 ]
@@ -665,7 +665,7 @@
                         "name": "Transformer_1",
                         "type": "FLUID_FILLED",
                         "phase": "THREE_PHASE",
-                        "capacity": 30,
+                        "capacity": 30000,
                         "efficiency": 0.98
                     }
                 ]
@@ -685,7 +685,7 @@
                         "name": "Transformer_1",
                         "type": "FLUID_FILLED",
                         "phase": "THREE_PHASE",
-                        "capacity": 30,
+                        "capacity": 30000,
                         "efficiency": 0.98
                     }
                 ]
@@ -696,7 +696,7 @@
                         "name": "Transformer_1",
                         "type": "FLUID_FILLED",
                         "phase": "THREE_PHASE",
-                        "capacity": 30,
+                        "capacity": 30000,
                         "efficiency": 0.975
                     }
                 ]
@@ -716,7 +716,7 @@
                         "name": "Transformer_1",
                         "type": "DRY_TYPE",
                         "phase": "SINGLE_PHASE",
-                        "capacity": 25,
+                        "capacity": 25000,
                         "efficiency": 0.99
                     }
                 ]
@@ -727,7 +727,7 @@
                         "name": "Transformer_1",
                         "type": "DRY_TYPE",
                         "phase": "SINGLE_PHASE",
-                        "capacity": 25,
+                        "capacity": 25000,
                         "efficiency": 0.99
                     }
                 ]
@@ -747,7 +747,7 @@
                         "name": "Transformer_1",
                         "type": "DRY_TYPE",
                         "phase": "THREE_PHASE",
-                        "capacity": 25,
+                        "capacity": 25000,
                         "efficiency": 0.99
                     }
                 ]
@@ -758,7 +758,7 @@
                         "name": "Transformer_1",
                         "type": "DRY_TYPE",
                         "phase": "THREE_PHASE",
-                        "capacity": 25,
+                        "capacity": 25000,
                         "efficiency": 0.98
                     }
                 ]
@@ -778,7 +778,7 @@
                         "name": "Transformer_1",
                         "type": "DRY_TYPE",
                         "phase": "THREE_PHASE",
-                        "capacity": 25,
+                        "capacity": 25000,
                         "efficiency": 0.99
                     }
                 ]
@@ -789,7 +789,7 @@
                         "name": "Transformer_1",
                         "type": "DRY_TYPE",
                         "phase": "THREE_PHASE",
-                        "capacity": 25,
+                        "capacity": 25000,
                         "efficiency": 0.99
                     }
                 ]
@@ -809,7 +809,7 @@
                         "name": "Transformer_1",
                         "type": "DRY_TYPE",
                         "phase": "THREE_PHASE",
-                        "capacity": 25,
+                        "capacity": 25000,
                         "efficiency": 0.99
                     }
                 ]
@@ -820,7 +820,7 @@
                         "name": "Transformer_1",
                         "type": "DRY_TYPE",
                         "phase": "THREE_PHASE",
-                        "capacity": 25,
+                        "capacity": 25000,
                         "efficiency": 0.983
                     }
                 ]
@@ -839,7 +839,7 @@
                     {
                         "name": "Transformer_1",
                         "type": "DRY_TYPE",
-                        "capacity": 25,
+                        "capacity": 25000,
                         "efficiency": 0.98,
                         "phase": "THREE_PHASE"
                     }
@@ -850,7 +850,7 @@
                     {
                         "name": "Transformer_1",
                         "type": "DRY_TYPE",
-                        "capacity": 25,
+                        "capacity": 25000,
                         "efficiency": 0.98,
                         "phase": "SINGLE_PHASE"
                     }

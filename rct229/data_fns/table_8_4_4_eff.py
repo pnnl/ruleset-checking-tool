@@ -38,7 +38,8 @@ def table_8_4_4_eff(phase, kVA):
     Returns
     -------
     float
-        The required transformer percentage efficiency
+        The required transformer percentage efficiency. Expresses the efficiency of the transformer as a fraction from
+        0 to 1, where 1 would represent 100% efficiency.
     """
     # Check that the capacity is in range
     if (
@@ -58,4 +59,5 @@ def table_8_4_4_eff(phase, kVA):
         ],
     }
 
-    return strict_list_linear_interpolation(table_lists[phase], kVA)
+    # Divide by 100 to resolve percentage as float between 0 and 1. Round to 4 figures to match Table 8.4.4.
+    return round(strict_list_linear_interpolation(table_lists[phase], kVA) / 100, 4)
