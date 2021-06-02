@@ -1,7 +1,7 @@
+import copy
 import json
 import math
 import os
-import copy
 
 import pandas as pd
 
@@ -106,7 +106,6 @@ for (rule_name, columnData) in rules_df.iteritems():
                     # Set nested dictionary
                     set_nested_dict(json_dict, key_list, row_value)
 
-
         # Once all dictionaries are set, check if any of the RMR triplets utilize json templates
         if rmr_template_dict:
 
@@ -126,11 +125,22 @@ for (rule_name, columnData) in rules_df.iteritems():
 
                     # If this RMR has no perturbations, set the RMR value equal to the template
                     if rmr_string not in rmr_transformations_dict:
-                        rmr_transformations_dict[rmr_string] =  copy.deepcopy(rmr_template_dict[rule_name]["rmr_template"]["json_template"])
+                        rmr_transformations_dict[rmr_string] = copy.deepcopy(
+                            rmr_template_dict[rule_name]["rmr_template"][
+                                "json_template"
+                            ]
+                        )
 
                     # If perturbations to the template exist, merge the transformations with the template
                     else:
-                        rmr_transformations_dict[rmr_string] = merge_nested_dictionary(copy.deepcopy(rmr_template_dict[rule_name]["rmr_template"]["json_template"]), rmr_transformations_dict[rmr_string])
+                        rmr_transformations_dict[rmr_string] = merge_nested_dictionary(
+                            copy.deepcopy(
+                                rmr_template_dict[rule_name]["rmr_template"][
+                                    "json_template"
+                                ]
+                            ),
+                            rmr_transformations_dict[rmr_string],
+                        )
 
 
 # Dump JSON to string for writing
