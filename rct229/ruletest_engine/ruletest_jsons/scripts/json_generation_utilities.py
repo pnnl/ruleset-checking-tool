@@ -318,6 +318,20 @@ def merge_nested_dictionary(master_dict, new_data_dict, path=None):
 
 
 def create_schedule_list(schedule_str):
+    """Generates an 8760 list for schedules. If the value from a key/value pair has 'SCHEDULE' in it, this function
+    is called to parse the function parameters and creates the list.
+
+     Parameters
+     ----------
+     schedule_str : str
+         Nested dictionary being merged into master dictionary
+
+     Returns
+    -------
+    schedule_list: list
+        List of floats between 0 to 1. Represents a schedule. Length is 8760.
+
+    """
 
     # Parse schedule string for schedule name and potential value.
     # EX: "SCHEDULE:CONSTANT-0.2" will result in a list = ["CONSTANT","0.2"]
@@ -329,7 +343,8 @@ def create_schedule_list(schedule_str):
     if schedule_name == "CONSTANT":
 
         # Return the schedule parameter 8760 times
-        return [float(schedule_parameter)] * 8760
+        schedule_list = [float(schedule_parameter)] * 8760
+        return schedule_list
 
     else:
         raise Exception(f"Schedule named: {schedule_name} is not a valid schedule name")
