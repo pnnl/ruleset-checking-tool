@@ -436,7 +436,7 @@ class RuleDefinitionListIndexedBase(RuleDefinitionListBase):
     list_path : string
         A json path string into each RMR fragment that was produced by applying
         rmr_context. The resulting sub-RMR fragments should be the lists to be
-        looped over. The default is "$" which assumes that the rmr_context is
+        looped over. The default is "[*]" which assumes that the rmr_context is
         the list to be looped over.
         Note: the create_context_list() method can be overridden and
         ignore list_context.
@@ -455,7 +455,7 @@ class RuleDefinitionListIndexedBase(RuleDefinitionListBase):
         rmrs_used,
         each_rule,
         index_rmr,
-        list_path="$",
+        list_path="[*]",
         match_by="id",
     ):
         self.index_rmr = index_rmr
@@ -569,18 +569,9 @@ class RuleDefinitionListIndexedBase(RuleDefinitionListBase):
         # Generate the context list
         context_list = []
         for index in range(context_list_len):
-            if user_list is None:
-                user_entry = None
-            else:
-                user_entry = user_list[index]
-            if baseline_list is None:
-                baseline_entry = None
-            else:
-                baseline_entry = baseline_list[index]
-            if proposed_list is None:
-                proposed_entry = None
-            else:
-                proposed_entry = proposed_list[index]
+            user_entry = None if user_list is None else user_list[index]
+            baseline_entry = None if baseline_list is None else baseline_list[index]
+            proposed_entry = None if proposed_list is None else proposed_list[index]
 
             context_list.append(
                 UserBaselineProposedVals(user_entry, baseline_entry, proposed_entry)

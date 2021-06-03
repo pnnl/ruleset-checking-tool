@@ -1,3 +1,4 @@
+from numpy import sum
 from rct229.data.schema_enums import schema_enums
 from rct229.rule_engine.rule_base import (
     RuleDefinitionBase,
@@ -29,32 +30,41 @@ class Section9Rule6_jb(RuleDefinitionListIndexedBase):
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section9Rule6_jb.BuildingRule, self).__init__(
-                list_path="$..space[*]",
+                list_path="$..spaces[*]",  # All spaces inside the building
                 rmrs_used=UserBaselineProposedVals(True, False, True),
                 each_rule=Section9Rule6_jb.BuildingRule.SpaceRule(),
                 index_rmr="proposed",
             )
 
-            class SpaceRule(RuleDefinitionBase):
-                def __init__(self):
-                    super(
-                        Section9Rule6_jb.BuildingRule.BuildingSegmentRule.ThermalBlockRule.ZoneRule.SpaceRule,
-                        self,
-                    ).__init__(
-                        rmrs_used=UserBaselineProposedVals(True, False, True),
-                    )
+        class SpaceRule(RuleDefinitionBase):
+            def __init__(self):
+                super(
+                    Section9Rule6_jb.BuildingRule.BuildingSegmentRule.ThermalBlockRule.ZoneRule.SpaceRule,
+                    self,
+                ).__init__(
+                    rmrs_used=UserBaselineProposedVals(True, False, True),
+                )
 
-                def get_calc_vals(self, context, data=None):
-                    return {
-                        "user_space_lighting_power": 10,
-                        "proposed_space_lighting_power": 10,
-                    }
+            def get_calc_vals(self, context, data=None):
+                space_lighting_power_per_area_user = sum(
+                    find_all("interior_lighting[*].power_per_area", context.user)
+                )
+                space_lighting_power_per_area_proposed = sum(
+                    find_all("interior_lighting[*].power_per_area", context.proposed)
+                )
 
-                def rule_check(self, context, calc_vals=None, data=None):
-                    return (
-                        calc_vals["user_space_lighting_power"]
-                        == calc_vals["proposed_space_lighting_power"]
-                    )
+                return {
+                    "space_lighting_power_user": space_lighting_power_per_area_user
+                    * context.user["floor_area"],
+                    "space_lighting_power_proposed": space_lighting_power_per_area_proposed
+                    * context.proposed["floor_area"],
+                }
+
+            def rule_check(self, context, calc_vals=None, data=None):
+                return (
+                    calc_vals["space_lighting_power_user"]
+                    == calc_vals["space_lighting_power_proposed"]
+                )
 
 
 # ------------------------
