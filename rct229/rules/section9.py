@@ -24,79 +24,37 @@ class Section9Rule6_jb(RuleDefinitionListIndexedBase):
             rmrs_used=UserBaselineProposedVals(True, False, True),
             each_rule=Section9Rule6_jb.BuildingRule(),
             index_rmr="proposed",
-            match_by="/name",
         )
 
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section9Rule6_jb.BuildingRule, self).__init__(
+                list_path="$..space[*]",
                 rmrs_used=UserBaselineProposedVals(True, False, True),
-                each_rule=Section9Rule6_jb.BuildingRule.BuildingSegmentRule(),
+                each_rule=Section9Rule6_jb.BuildingRule.SpaceRule(),
                 index_rmr="proposed",
-                match_by="/name",
             )
 
-        class BuildingSegmentRule(RuleDefinitionListIndexedBase):
-            def __init__(self):
-                super(Section9Rule6_jb.BuildingRule.BuildingSegmentRule, self).__init__(
-                    rmrs_used=UserBaselineProposedVals(True, False, True),
-                    each_rule=Section9Rule6_jb.BuildingRule.BuildingSegmentRule.ThermalBlockRule(),
-                    index_rmr="proposed",
-                    match_by="/name",
-                )
-
-            def create_data(self, context, data):
-                # Get the User and Proposed lighting_building_area_type values
-                return UserBaselineProposedVals(
-                    context.user["lighting_building_area_type"],
-                    None,
-                    context.proposed["lighint_building_area_type"],
-                )
-
-            class ThermalBlockRule(RuleDefinitionListIndexedBase):
+            class SpaceRule(RuleDefinitionBase):
                 def __init__(self):
                     super(
-                        Section9Rule6_jb.BuildingRule.BuildingSegmentRule.ThermalBlockRule,
+                        Section9Rule6_jb.BuildingRule.BuildingSegmentRule.ThermalBlockRule.ZoneRule.SpaceRule,
                         self,
                     ).__init__(
                         rmrs_used=UserBaselineProposedVals(True, False, True),
-                        each_rule=Section9Rule6_jb.BuildingRule.BuildingSegmentRule.ThermalBlockRule.ZoneRule(),
-                        index_rmr="proposed",
-                        match_by="/name",
                     )
 
-                class ZoneRule(RuleDefinitionListIndexedBase):
-                    def __init__(self):
-                        super(
-                            Section9Rule6_jb.BuildingRule.BuildingSegmentRule.ThermalBlockRule.ZoneRule,
-                            self,
-                        ).__init__(
-                            rmrs_used=UserBaselineProposedVals(True, False, True),
-                            each_rule=Section9Rule6_jb.BuildingRule.BuildingSegmentRule.ThermalBlockRule.ZoneRule.SpaceRule(),
-                            index_rmr="proposed",
-                            match_by="/name",
-                        )
+                def get_calc_vals(self, context, data=None):
+                    return {
+                        "user_space_lighting_power": 10,
+                        "proposed_space_lighting_power": 10,
+                    }
 
-                    class SpaceRule(RuleDefinitionBase):
-                        def __init__(self):
-                            super(
-                                Section9Rule6_jb.BuildingRule.BuildingSegmentRule.ThermalBlockRule.ZoneRule.SpaceRule,
-                                self,
-                            ).__init__(
-                                rmrs_used=UserBaselineProposedVals(True, False, True),
-                            )
-
-                        def get_calc_vals(self, context, data=None):
-                            return {
-                                "user_space_lighting_power": 10,
-                                "proposed_space_lighting_power": 10,
-                            }
-
-                        def rule_check(self, context, calc_vals=None, data=None):
-                            return (
-                                calc_vals["user_space_lighting_power"]
-                                == calc_vals["proposed_space_lighting_power"]
-                            )
+                def rule_check(self, context, calc_vals=None, data=None):
+                    return (
+                        calc_vals["user_space_lighting_power"]
+                        == calc_vals["proposed_space_lighting_power"]
+                    )
 
 
 # ------------------------

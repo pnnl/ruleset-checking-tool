@@ -55,7 +55,7 @@ RMRS_WITH_MATCHING_USER_AND_BASELINE = UserBaselineProposedVals(RMR_1, RMR_1, RM
 BASE_RULE_1_OUTCOME_BASE = {
     "id": "1",
     "description": "Basic Rule",
-    "rmr_context": "transformers",
+    "rmr_context": "/transformers",
 }
 
 

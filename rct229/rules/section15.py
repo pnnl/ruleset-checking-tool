@@ -97,6 +97,7 @@ class Section15Rule3(RuleDefinitionListIndexedBase):
             rmrs_used=UserBaselineProposedVals(True, False, True),
             each_rule=Section15Rule3.TransformerRule(),
             index_rmr="user",
+            match_by="name",
         )
 
     def create_data(self, context, data):
@@ -136,6 +137,7 @@ class Section15Rule4(RuleDefinitionListIndexedBase):
             rmrs_used=UserBaselineProposedVals(True, True, False),
             each_rule=Section15Rule4.TransformerRule(),
             index_rmr="user",
+            match_by="name",
         )
 
     def create_data(self, context, data):
