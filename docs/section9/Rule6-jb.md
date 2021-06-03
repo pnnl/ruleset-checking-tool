@@ -23,7 +23,7 @@
 
     - Get floor_area from space: ```floor_area_user = space_user.floor_area```  
 
-    - Get interior_lighting in space: ```interior_lighting_user = space_user.interior_lightings```  
+    - Get interior_lighting in space: ```interior_lighting_user = space_user.interior_lighting```  
 
       - Get the total design power_per_area: ```space_lighting_power_per_area_proposed = sum( lighting.power_per_area for lighting in interior_lighting_user )```  
 
@@ -39,7 +39,7 @@
 
     - Get floor_area from space: ```floor_area_proposed = space_proposed.floor_area```  
 
-    - Get interior_lighting in space: ```interior_lighting_proposed = space_proposed.interior_lightings```  
+    - Get interior_lighting in space: ```interior_lighting_proposed = space_proposed.interior_lighting```  
 
       - Get the total design power_per_area: ```space_lighting_power_per_area_proposed = sum( lighting.power_per_area for lighting in interior_lighting_proposed )```  
 
