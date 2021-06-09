@@ -6,6 +6,7 @@ The following documentation provides a technical description of ASHRAE 90.1-2019
 ## Reference Material
   * [Rule Template](_rule_template.md): Template file for creating a new Rule Definition Development Strategy document
   * [Functions](_functions.md): A list of functions used within the Rule Definition Development Strategy documents
+  * [Ruleset Functions](_ruleset_functions.md): A list of commonly used functions that are specific to a ruleset.
 
 ## Data Tables
   * [8.4.4](data_tables/Table8-4-4.md): Minimum Nominal Efficiency Levels for Low-Voltage Dry-Type Distribution Transformers  
