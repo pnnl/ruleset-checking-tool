@@ -16,28 +16,42 @@
 **Data Lookup:** Table G3.7 and Table G3.8  
 ## Rule Logic: 
 
-- Get the building area lighting area type of the building segment in the Proposed model: ```building_light_area_type = building_segment.lighting_building_area_type``` (Note XC, assuming this field lists values from T-9.5.1 or T-G3.8, for "Building Area Method", or "None" if the building goes for "Space-by-Space Method")
+- For each building_segment in the Proposed Model: ```building_segment_proposed in P_RMR.building.building_segments```  
 
-- Get thermal_block from building segment: ```thermal_block in building_segment.thermal_blocks:```
+- Get the lighting_building_area_type for the building_segment: ```lighting_building_area_type_proposed = building_segment_proposed.lighting_building_area_type```  
 
-- Get thermal_zone from thermal block: ```thermal_zone in thermal_block.zones:```
+  - Determine if the building segment uses Building Area Method: ```if lighting_building_area_type_proposed is "None": bam_flag = FALSE else bam_flag = TRUE```  
 
-- Get space from thermal zone: ```space in thermal_zone.spaces:```
+- For each thermal_block in building_segment: ```thermal_block_proposed in building_segment_proposed.thermal_blocks:```  
 
-- Get floor_area from space: ```space_floor_area = space.floor_area```
+- For each zone in thermal_block: ```zone_proposed in thermal_block_proposed.zones:```  
 
-  - If building_light_area_type is in Table G3.8 then add floor_area to the total building floor area: ```total_building_area.append(space_floor_area)```
+- For each space in zone: ```space_proposed in zone_proposed.spaces:```  
 
-    - Get the allowable lighting power density for this building area type: ```if building_light_area_type in table_G3_8: allowable_LPD = data_lookup(table_G3_8, building_light_area_type) else raise_warning```
+  - Get floor_area from space: ```floor_area_proposed = space_proposed.floor_area```  
 
-    - Calculate the building total allowable lighting wattage: ```building_allowable_lighting_wattage = allowable_LPD * total_building_area```
+  - If bam_flag is TRUE then add floor_area to the total building segment floor area: ```total_building_segment_area_proposed += floor_area_proposed```  
 
-  - If building_light_area_type is "None", get lighting_space_type: ```lighting_space_type = space.lighting_space_type```
+    - Get the allowable lighting power density for this building area type: ```if lighting_building_area_type_proposed in table_G3_8: allowable_LPD_proposed = data_lookup(table_G3_8, lighting_building_area_type_proposed) else raise_warning```  
 
-    - If space_type_lighting exists in Table G3.7 then get the allowable lighting power density for this space type: ```if lighting_space_type in table_G3_7: allowable_LPD = data_lookup(table_G3_7, lighting_space_type) else raise_warning```
+    - Calculate the total allowable lighting wattage for the building segment: ```building_segment_allowable_lighting_wattage = allowable_LPD_proposed * total_building_segment_area_proposed```  
 
-    - Calculate the building total allowable lighting wattage: ```building_allowable_lighting_wattage.append(allowable_LPD * space_floor_area)```
+  - If bam_flag is FALSE, get lighting_space_type: ```lighting_space_type_proposed = space_proposed.lighting_space_type```  
 
-- Calculate the total lighting power for in the Proposed model: ```For interior_lighting in P_RMR.interior_lightings: building_designed_lighting_wattage.append(interior_lighting.power)```
+    - If lighting_space_type_proposed exists in Table G3.7 then get the allowable lighting power density for this space type: ```if lighting_space_type_proposed in table_G3_7: allowable_LPD_proposed = data_lookup(table_G3_7, lighting_space_type_proposed) else raise_warning```  
 
-**Rule Assertion:** For each Proposed building_segment: ```building_designed_lighting_wattage <= building_allowable_lighting_wattage```
+    - Calculate the total allowable lighting wattage for the building segment: ```building_segment_allowable_lighting_wattage_proposed += allowable_LPD_proposed * floor_area_proposed```  
+
+  - Get interior_lighting in space: ```interior_lighting_proposed = space_proposed.interior_lightings```  
+  
+    - Get the total design power_per_area for the space: ```space_lighting_power_per_area_proposed = sum( lighting.power_per_area for lighting in interior_lighting_proposed )```  
+
+    - Calculate the total design lighting wattage for the space: ```space_lighting_wattage_proposed = space_lighting_power_per_area_proposed * floor_area_proposed```  
+
+    - Calculate the total design lighting wattage for the building segment: ```building_segment_design_lighting_wattage_proposed += space_lighting_wattage_proposed```  
+
+- Calculate the total allowable lighting wattage for the whole building: ```for building_segment_proposed in P_RMR.building.building_segments: building_allowable_lighting_wattage_proposed += building_segment_allowable_lighting_wattage_proposed```  
+
+- Calculate the total design lighting power for for the whole buidling: ```for building_segment_proposed in P_RMR.building.building_segments: building_design_lighting_wattage_proposed += building_segment_design_lighting_wattage_proposed```  
+
+**Rule Assertion:** For the Proposed model: ```building_design_lighting_wattage_proposed <= building_allowable_lighting_wattage_proposed```  
