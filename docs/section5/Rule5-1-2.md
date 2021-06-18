@@ -1,7 +1,7 @@
 
-# Envelope - Rule 5-1-2  
+# Envelope - Rule 5-2  
 
-**Rule ID:** 5-1-2  
+**Rule ID:** 5-2  
 **Rule Description:** The building shall be modeled so that it does not shade itself.  
 **Rule Assertion:** Baseline RMR Building: surface.does_cast_shade = expected value  
 **Appendix G Section:** Section G3.1-5(b) Building Envelope Modeling Requirements for the Baseline building  
