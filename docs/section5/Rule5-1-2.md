@@ -22,9 +22,7 @@
   
     - For each zone in thermal block: ```zone_b in thermal_block_b.zones:```  
 
-      - For each space in zone: ```space_b in zone_b.spaces:```  
-
-        - For each surface in space: ```for surface_b in space_b.surfaces:```  
+        - For each surface in zone: ```for surface_b in zone_b.surfaces:```  
 
           - Check that surface is exterior: ```if ( surface_b.adjacent_to == "EXTERIOR" ): exterior_vertical_surface_b = surface_b```  
 
