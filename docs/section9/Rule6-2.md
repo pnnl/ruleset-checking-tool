@@ -1,7 +1,7 @@
 
-# Lighting - Rule 6-ja
+# Lighting - Rule 6-2
 
-**Rule ID:** 6-ja  
+**Rule ID:** 6-2  
 **Rule Description:** The total building interior lighting power shall not exceed the interior lighting power allowance determined using either Table G3.7 or G3.8.  
 **Appendix G Section:** Section G1.2.1(b) Mandatory Provisions related to interior lighting power
   
