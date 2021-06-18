@@ -1,7 +1,7 @@
 
-# Envelope - Rule 5-3  
+# Envelope - Rule 5-4    
 
-**Rule ID:** 5-3  
+**Rule ID:** 5-4  
 **Rule Description:** Opaque Assemblies used for new buildings, existing buildings, or additions shall conform with assemblies detailed in Appendix A and shall match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8: Below-grade walls—Concrete block (A4).  
 **Rule Assertion:** Baseline RMR Surface:U_factor = expected value  
 **Appendix G Section:** Section G3.1-5(b) Building Envelope Modeling Requirements for the Baseline building  
