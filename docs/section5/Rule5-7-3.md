@@ -2,7 +2,7 @@
 **Rule ID:** 5-7-3  
 **Rule Description:** Baseline RMR fenestration area prior to proposed work cannot be verified.  
 **Rule Assertion:** Cannot be verified  
-**Appendix G Section:** Envelope  
+**Appendix G Section:** Section G3.1-5(c) Building Envelope Modeling Requirements for the Baseline building  
 **Appendix G Section Reference:**
 - Table G3.1, 5. Building Envelope, Baseline Building Performance, c. Vertical Fenestration Areas
 
