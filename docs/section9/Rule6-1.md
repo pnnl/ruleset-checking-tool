@@ -1,7 +1,7 @@
 
-# Lighting - Rule 6-jb
+# Lighting - Rule 6-1
 
-**Rule ID:** 6-jb  
+**Rule ID:** 6-1  
 **Rule Description:** For the proposed building, each space has the same lighting power as the corresponding space in the U-RMR  
 **Appendix G Section:** Section G3.1-1(a) Modeling Requirements for the Proposed design  
 **Appendix G Section Reference:** None
