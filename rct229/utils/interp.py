@@ -1,5 +1,3 @@
-
-
 def strict_linear_interpolation(pt0, pt1, x):
     """Performs linear interpolation between two points
 
@@ -23,15 +21,15 @@ def strict_linear_interpolation(pt0, pt1, x):
     y1 = pt1[1]
 
     if not pt0[0] <= pt1[0]:
-        raise ValueError('pt0 pt1 out of order')
+        raise ValueError("pt0 pt1 out of order")
     elif not (x0 <= x <= x1):
-        raise ValueError('x out of range')
+        raise ValueError("x out of range")
     elif x == x0:
         return y0
     elif x == x1:
         return y1
     else:
-        return y0 + (x - x0) * (y1 - y0)/(x1 - x0)
+        return y0 + (x - x0) * (y1 - y0) / (x1 - x0)
 
 
 def strict_list_linear_interpolation(sorted_pts, x):
@@ -49,13 +47,14 @@ def strict_list_linear_interpolation(sorted_pts, x):
     float
         The interpolated value
     """
-
     if x < sorted_pts[0][0] or sorted_pts[-1][0] < x:
-        raise ValueError('x out of range')
+        raise ValueError("x out of range")
 
     for index in range(len(sorted_pts)):
-        if x <= sorted_pts[index +1][0]:
-            return strict_linear_interpolation(sorted_pts[index], sorted_pts[index +1], x)
+        if x <= sorted_pts[index + 1][0]:
+            return strict_linear_interpolation(
+                sorted_pts[index], sorted_pts[index + 1], x
+            )
 
     ## Should never get here
     assert False
