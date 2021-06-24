@@ -133,7 +133,7 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
 
 ## Section 12 - Receptacles and Other Loads
   * 12-1: Number of spaces modeled in User RMR and Baseline RMR are the same
-  * 12-2: Number of spaces modeled in User RMR and Proposed RMR are the same
+  * [12-2](section12/Rule12-2.md): Number of spaces modeled in User RMR and Proposed RMR are the same
   * 12-3: User RMR Space Name in Proposed RMR? 
   * 12-4: User RMR Space Name in Baseline RMR? 
   * 12-5: User RMR Receptacle Power in Proposed RMR?
