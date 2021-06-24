@@ -1,8 +1,8 @@
 
-# Envelope - Rule 5-2-2  
+# Envelope - Rule 5-4
 
-**Rule ID:** 5-2-2  
-**Rule Description:** Opaque Assemblies used for new buildings, existing buildings, or additions shall conform with assemblies detailed in Appendix A and shall match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8: Roofs—Insulation entirely above deck (A2.2) or have the same properties as P-RMR.  
+**Rule ID:** 5-4
+**Rule Description:** Baseline opaque Assemblies used for new buildings, existing buildings, or additions shall match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8: Roofs—Insulation entirely above deck (A2.2) 
 **Rule Assertion:** Baseline RMR Surface:U_factor = expected value  
 **Appendix G Section:** Section G3.1-5(b) Building Envelope Modeling Requirements for the Baseline building  
 **Appendix G Section Reference:** Tables G3.4-1 to G3.4-8  
@@ -12,7 +12,8 @@
 
 **Manual Check:** None  
 **Evaluation Context:** Each Data Element  
-**Data Lookup:** Tables G3.4-1 to G3.4-8  
+**Data Lookup:** Tables G3.4-1 to G3.4-8 
+**Functions:** Zone Conditioning Catergory, Opaque Surface Type, Surface Conditioning Catergory
 
 ## Rule Logic:   
 
