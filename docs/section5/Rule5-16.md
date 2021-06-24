@@ -1,6 +1,6 @@
-# Envelope - Rule 5-7-1 
-**Rule ID:** 5-7-1  
-**Rule Description:** Baseline WWR should be equal to User WWR or 40%, whichever is smaller.  
+# Envelope - Rule 5-16  
+**Rule ID:** 5-16  
+**Rule Description:** For building area types included in Table G3.1.1-1, vertical fenestration areas for new buildings and additions shall equal that in Table G3.1.1-1 based on the area of gross above-grade walls that separate conditioned spaces and semiheated spaces from the exterior. Where a building has multiple building area types, and each building area types included in Table G3.1.1-1, each type shall use the values in the table.  
 **Rule Assertion:** Baseline RMR = expected value  
 **Appendix G Section:** Section G3.1-5(c) Building Envelope Modeling Requirements for the Baseline building  
 **Appendix G Section Reference:**
