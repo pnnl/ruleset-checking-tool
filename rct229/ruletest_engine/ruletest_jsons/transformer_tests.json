@@ -8,15 +8,12 @@
             "user": {
                 "transformers": [
                     {
-                        "id": "1",
                         "name": "Transformer_1"
                     },
                     {
-                        "id": "2",
                         "name": "Transformer_2"
                     },
                     {
-                        "id": "3",
                         "name": " Transformer_3"
                     }
                 ]
@@ -24,15 +21,12 @@
             "baseline": {
                 "transformers": [
                     {
-                        "id": "1",
                         "name": "Transformer_1"
                     },
                     {
-                        "id": "2",
                         "name": "Transformer_2"
                     },
                     {
-                        "id": "3",
                         "name": " Transformer_3"
                     }
                 ]
@@ -49,15 +43,12 @@
             "user": {
                 "transformers": [
                     {
-                        "id": "1",
                         "name": "Transformer_1"
                     },
                     {
-                        "id": "2",
                         "name": "Transformer_2"
                     },
                     {
-                        "id": "3",
                         "name": " Transformer_3"
                     }
                 ]
@@ -65,16 +56,10 @@
             "baseline": {
                 "transformers": [
                     {
-                        "id": "1",
                         "name": "Transformer_1"
                     },
                     {
-                        "id": "2",
                         "name": "Transformer_2"
-                    },
-                    {
-                        "id": "null",
-                        "name": "null"
                     }
                 ]
             }
@@ -90,31 +75,22 @@
             "user": {
                 "transformers": [
                     {
-                        "id": "1",
                         "name": "Transformer_1"
                     },
                     {
-                        "id": "2",
                         "name": "Transformer_2"
-                    },
-                    {
-                        "id": "null",
-                        "name": "null"
                     }
                 ]
             },
             "baseline": {
                 "transformers": [
                     {
-                        "id": "1",
                         "name": "Transformer_1"
                     },
                     {
-                        "id": "2",
                         "name": "Transformer_2"
                     },
                     {
-                        "id": "3",
                         "name": " Transformer_3"
                     }
                 ]
@@ -131,15 +107,12 @@
             "user": {
                 "transformers": [
                     {
-                        "id": "1",
                         "name": "Transformer_1"
                     },
                     {
-                        "id": "2",
                         "name": "Transformer_2"
                     },
                     {
-                        "id": "3",
                         "name": " Transformer_3"
                     }
                 ]
@@ -147,15 +120,12 @@
             "proposed": {
                 "transformers": [
                     {
-                        "id": "1",
                         "name": "Transformer_1"
                     },
                     {
-                        "id": "2",
                         "name": "Transformer_2"
                     },
                     {
-                        "id": "3",
                         "name": " Transformer_3"
                     }
                 ]
@@ -172,15 +142,12 @@
             "user": {
                 "transformers": [
                     {
-                        "id": "1",
                         "name": "Transformer_1"
                     },
                     {
-                        "id": "2",
                         "name": "Transformer_2"
                     },
                     {
-                        "id": "3",
                         "name": " Transformer_3"
                     }
                 ]
@@ -188,16 +155,10 @@
             "proposed": {
                 "transformers": [
                     {
-                        "id": "1",
                         "name": "Transformer_1"
                     },
                     {
-                        "id": "2",
                         "name": "Transformer_2"
-                    },
-                    {
-                        "id": "null",
-                        "name": "null"
                     }
                 ]
             }
@@ -213,31 +174,22 @@
             "user": {
                 "transformers": [
                     {
-                        "id": "1",
                         "name": "Transformer_1"
                     },
                     {
-                        "id": "2",
                         "name": "Transformer_2"
-                    },
-                    {
-                        "id": "null",
-                        "name": "null"
                     }
                 ]
             },
             "proposed": {
                 "transformers": [
                     {
-                        "id": "1",
                         "name": "Transformer_1"
                     },
                     {
-                        "id": "2",
                         "name": "Transformer_2"
                     },
                     {
-                        "id": "3",
                         "name": " Transformer_3"
                     }
                 ]
@@ -254,11 +206,9 @@
             "user": {
                 "transformers": [
                     {
-                        "id": "1",
                         "name": "Transformer_1"
                     },
                     {
-                        "id": "2",
                         "name": "Transformer_2"
                     }
                 ]
@@ -266,11 +216,9 @@
             "proposed": {
                 "transformers": [
                     {
-                        "id": "1",
                         "name": "Transformer_1"
                     },
                     {
-                        "id": "2",
                         "name": "Transformer_2"
                     }
                 ]
@@ -287,11 +235,9 @@
             "user": {
                 "transformers": [
                     {
-                        "id": "1",
                         "name": "Transformer_1"
                     },
                     {
-                        "id": "2",
                         "name": "Transformer_2"
                     }
                 ]
@@ -299,11 +245,9 @@
             "proposed": {
                 "transformers": [
                     {
-                        "id": "1",
                         "name": "Transformer_1"
                     },
                     {
-                        "id": "2",
                         "name": "Transformer_4"
                     }
                 ]
@@ -320,11 +264,9 @@
             "user": {
                 "transformers": [
                     {
-                        "id": "1",
                         "name": "Transformer_1"
                     },
                     {
-                        "id": "2",
                         "name": "Transformer_2"
                     }
                 ]
@@ -332,11 +274,9 @@
             "baseline": {
                 "transformers": [
                     {
-                        "id": "1",
                         "name": "Transformer_1"
                     },
                     {
-                        "id": "2",
                         "name": "Transformer_2"
                     }
                 ]
@@ -353,11 +293,9 @@
             "user": {
                 "transformers": [
                     {
-                        "id": "1",
                         "name": "Transformer_1"
                     },
                     {
-                        "id": "2",
                         "name": "Transformer_2"
                     }
                 ]
@@ -365,11 +303,9 @@
             "baseline": {
                 "transformers": [
                     {
-                        "id": "1",
                         "name": "Transformer_1"
                     },
                     {
-                        "id": "2",
                         "name": "Transformer_4"
                     }
                 ]
