@@ -132,9 +132,9 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   * 6-16: Proposed building has been modeled with 30% occupancy sensor reduction factor for 'open plan' space with individually controlled workstation lighting
 
 ## Section 12 - Receptacles and Other Loads
-  * 12-1: Number of spaces modeled in User RMR and Baseline RMR are the same
+  * [12-1](section12/Rule12-1.md): Number of spaces modeled in User RMR and Baseline RMR are the same
   * [12-2](section12/Rule12-2.md): Number of spaces modeled in User RMR and Proposed RMR are the same
-  * 12-3: User RMR Space Name in Proposed RMR? 
+  * [12-3](section12/Rule12-3.md): User RMR Space Name in Proposed RMR? 
   * 12-4: User RMR Space Name in Baseline RMR? 
   * 12-5: User RMR Receptacle Power in Proposed RMR?
   * 12-6: User RMR Receptacle Schedule in Proposed RMR?
