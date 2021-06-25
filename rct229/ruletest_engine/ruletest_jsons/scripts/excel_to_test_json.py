@@ -9,7 +9,7 @@ from rct229.ruletest_engine.ruletest_jsons.scripts.json_generation_utilities imp
 
 # ---------------------------------------USER INPUTS---------------------------------------
 
-spreadsheet_name = "transformer_tests_draft.xlsx"
+spreadsheet_name = "transformer_tests_draft_updated.xlsx"
 json_name = "transformer_tests.json"
 sheet_name = "TCDs"
 

@@ -1,6 +1,6 @@
 from rct229.ruletest_engine.ruletest_engine import *
 
-test_json_name = "envelope_tests_from_template.json"
+test_json_name = "transformer_tests.json"
 
 json_dir = os.path.join(os.path.dirname(__file__), "..", "..", "ruletest_jsons")
 test_json_path = os.path.join(json_dir, test_json_name)

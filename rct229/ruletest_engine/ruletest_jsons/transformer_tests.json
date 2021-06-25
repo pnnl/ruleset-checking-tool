@@ -9,12 +9,15 @@
             "user": {
                 "transformers": [
                     {
+                        "id": 1,
                         "name": "Transformer_1"
                     },
                     {
+                        "id": 2,
                         "name": "Transformer_2"
                     },
                     {
+                        "id": 3,
                         "name": "Transformer_3"
                     }
                 ]
@@ -22,12 +25,15 @@
             "baseline": {
                 "transformers": [
                     {
+                        "id": 1,
                         "name": "Transformer_1"
                     },
                     {
+                        "id": 2,
                         "name": "Transformer_2"
                     },
                     {
+                        "id": 3,
                         "name": "Transformer_3"
                     }
                 ]
@@ -44,12 +50,15 @@
             "user": {
                 "transformers": [
                     {
+                        "id": 1,
                         "name": "Transformer_1"
                     },
                     {
+                        "id": 2,
                         "name": "Transformer_2"
                     },
                     {
+                        "id": 3,
                         "name": "Transformer_3"
                     }
                 ]
@@ -57,9 +66,11 @@
             "baseline": {
                 "transformers": [
                     {
+                        "id": 1,
                         "name": "Transformer_1"
                     },
                     {
+                        "id": 2,
                         "name": "Transformer_2"
                     }
                 ]
@@ -76,9 +87,11 @@
             "user": {
                 "transformers": [
                     {
+                        "id": 1,
                         "name": "Transformer_1"
                     },
                     {
+                        "id": 2,
                         "name": "Transformer_2"
                     }
                 ]
@@ -86,12 +99,15 @@
             "baseline": {
                 "transformers": [
                     {
+                        "id": 1,
                         "name": "Transformer_1"
                     },
                     {
+                        "id": 2,
                         "name": "Transformer_2"
                     },
                     {
+                        "id": 3,
                         "name": "Transformer_3"
                     }
                 ]
@@ -108,12 +124,15 @@
             "user": {
                 "transformers": [
                     {
+                        "id": 1,
                         "name": "Transformer_1"
                     },
                     {
+                        "id": 2,
                         "name": "Transformer_2"
                     },
                     {
+                        "id": 3,
                         "name": "Transformer_3"
                     }
                 ]
@@ -121,12 +140,15 @@
             "proposed": {
                 "transformers": [
                     {
+                        "id": 1,
                         "name": "Transformer_1"
                     },
                     {
+                        "id": 2,
                         "name": "Transformer_2"
                     },
                     {
+                        "id": 3,
                         "name": "Transformer_3"
                     }
                 ]
@@ -143,12 +165,15 @@
             "user": {
                 "transformers": [
                     {
+                        "id": 1,
                         "name": "Transformer_1"
                     },
                     {
+                        "id": 2,
                         "name": "Transformer_2"
                     },
                     {
+                        "id": 3,
                         "name": "Transformer_3"
                     }
                 ]
@@ -156,9 +181,11 @@
             "proposed": {
                 "transformers": [
                     {
+                        "id": 1,
                         "name": "Transformer_1"
                     },
                     {
+                        "id": 2,
                         "name": "Transformer_2"
                     }
                 ]
@@ -175,9 +202,11 @@
             "user": {
                 "transformers": [
                     {
+                        "id": 1,
                         "name": "Transformer_1"
                     },
                     {
+                        "id": 2,
                         "name": "Transformer_2"
                     }
                 ]
@@ -185,12 +214,15 @@
             "proposed": {
                 "transformers": [
                     {
+                        "id": 1,
                         "name": "Transformer_1"
                     },
                     {
+                        "id": 2,
                         "name": "Transformer_2"
                     },
                     {
+                        "id": 3,
                         "name": "Transformer_3"
                     }
                 ]
@@ -207,9 +239,11 @@
             "user": {
                 "transformers": [
                     {
+                        "id": 1,
                         "name": "Transformer_1"
                     },
                     {
+                        "id": 2,
                         "name": "Transformer_2"
                     }
                 ]
@@ -217,9 +251,11 @@
             "proposed": {
                 "transformers": [
                     {
+                        "id": 1,
                         "name": "Transformer_1"
                     },
                     {
+                        "id": 2,
                         "name": "Transformer_2"
                     }
                 ]
@@ -236,9 +272,11 @@
             "user": {
                 "transformers": [
                     {
+                        "id": 1,
                         "name": "Transformer_1"
                     },
                     {
+                        "id": 2,
                         "name": "Transformer_2"
                     }
                 ]
@@ -246,9 +284,11 @@
             "proposed": {
                 "transformers": [
                     {
+                        "id": 1,
                         "name": "Transformer_1"
                     },
                     {
+                        "id": 4,
                         "name": "Transformer_4"
                     }
                 ]
@@ -265,9 +305,11 @@
             "user": {
                 "transformers": [
                     {
+                        "id": 1,
                         "name": "Transformer_1"
                     },
                     {
+                        "id": 2,
                         "name": "Transformer_2"
                     }
                 ]
@@ -275,9 +317,11 @@
             "baseline": {
                 "transformers": [
                     {
+                        "id": 1,
                         "name": "Transformer_1"
                     },
                     {
+                        "id": 2,
                         "name": "Transformer_2"
                     }
                 ]
@@ -294,9 +338,11 @@
             "user": {
                 "transformers": [
                     {
+                        "id": 1,
                         "name": "Transformer_1"
                     },
                     {
+                        "id": 2,
                         "name": "Transformer_2"
                     }
                 ]
@@ -304,9 +350,11 @@
             "baseline": {
                 "transformers": [
                     {
+                        "id": 1,
                         "name": "Transformer_1"
                     },
                     {
+                        "id": 4,
                         "name": "Transformer_4"
                     }
                 ]
@@ -323,6 +371,7 @@
             "user": {
                 "transformers": [
                     {
+                        "id": 1,
                         "name": "Transformer_1",
                         "type": "DRY_TYPE",
                         "phase": "SINGLE_PHASE",
@@ -334,6 +383,7 @@
             "baseline": {
                 "transformers": [
                     {
+                        "id": 1,
                         "name": "Transformer_1",
                         "type": "DRY_TYPE",
                         "phase": "SINGLE_PHASE",
@@ -354,6 +404,7 @@
             "user": {
                 "transformers": [
                     {
+                        "id": 1,
                         "name": "Transformer_1",
                         "type": "DRY_TYPE",
                         "phase": "SINGLE_PHASE",
@@ -365,6 +416,7 @@
             "baseline": {
                 "transformers": [
                     {
+                        "id": 1,
                         "name": "Transformer_1",
                         "type": "DRY_TYPE",
                         "phase": "SINGLE_PHASE",
@@ -385,6 +437,7 @@
             "user": {
                 "transformers": [
                     {
+                        "id": 1,
                         "name": "Transformer_1",
                         "type": "DRY_TYPE",
                         "phase": "THREE_PHASE",
@@ -396,6 +449,7 @@
             "baseline": {
                 "transformers": [
                     {
+                        "id": 1,
                         "name": "Transformer_1",
                         "type": "DRY_TYPE",
                         "phase": "THREE_PHASE",
@@ -416,6 +470,7 @@
             "user": {
                 "transformers": [
                     {
+                        "id": 1,
                         "name": "Transformer_1",
                         "type": "DRY_TYPE",
                         "phase": "THREE_PHASE",
@@ -427,6 +482,7 @@
             "baseline": {
                 "transformers": [
                     {
+                        "id": 1,
                         "name": "Transformer_1",
                         "type": "DRY_TYPE",
                         "phase": "THREE_PHASE",
@@ -447,6 +503,7 @@
             "user": {
                 "transformers": [
                     {
+                        "id": 1,
                         "name": "Transformer_1",
                         "type": "DRY_TYPE",
                         "phase": "SINGLE_PHASE",
@@ -467,6 +524,7 @@
             "user": {
                 "transformers": [
                     {
+                        "id": 1,
                         "name": "Transformer_1",
                         "type": "DRY_TYPE",
                         "phase": "SINGLE_PHASE",
@@ -487,6 +545,7 @@
             "user": {
                 "transformers": [
                     {
+                        "id": 1,
                         "name": "Transformer_1",
                         "type": "DRY_TYPE",
                         "phase": "THREE_PHASE",
@@ -507,6 +566,7 @@
             "user": {
                 "transformers": [
                     {
+                        "id": 1,
                         "name": "Transformer_1",
                         "type": "DRY_TYPE",
                         "phase": "THREE_PHASE",
@@ -527,6 +587,7 @@
             "user": {
                 "transformers": [
                     {
+                        "id": 1,
                         "name": "Transformer_1",
                         "type": "FLUID_FILLED",
                         "phase": "THREE_PHASE",
@@ -538,6 +599,7 @@
             "baseline": {
                 "transformers": [
                     {
+                        "id": 1,
                         "name": "Transformer_1",
                         "type": "FLUID_FILLED",
                         "phase": "THREE_PHASE",
@@ -558,6 +620,7 @@
             "user": {
                 "transformers": [
                     {
+                        "id": 1,
                         "name": "Transformer_1",
                         "type": "FLUID_FILLED",
                         "phase": "THREE_PHASE",
@@ -569,6 +632,7 @@
             "baseline": {
                 "transformers": [
                     {
+                        "id": 1,
                         "name": "Transformer_1",
                         "type": "FLUID_FILLED",
                         "phase": "THREE_PHASE",
@@ -589,6 +653,7 @@
             "user": {
                 "transformers": [
                     {
+                        "id": 1,
                         "name": "Transformer_1",
                         "type": "DRY_TYPE",
                         "phase": "SINGLE_PHASE",
@@ -600,6 +665,7 @@
             "baseline": {
                 "transformers": [
                     {
+                        "id": 1,
                         "name": "Transformer_1",
                         "type": "DRY_TYPE",
                         "phase": "SINGLE_PHASE",
@@ -620,6 +686,7 @@
             "user": {
                 "transformers": [
                     {
+                        "id": 1,
                         "name": "Transformer_1",
                         "type": "DRY_TYPE",
                         "phase": "SINGLE_PHASE",
@@ -631,6 +698,7 @@
             "baseline": {
                 "transformers": [
                     {
+                        "id": 1,
                         "name": "Transformer_1",
                         "type": "DRY_TYPE",
                         "phase": "SINGLE_PHASE",
@@ -651,6 +719,7 @@
             "user": {
                 "transformers": [
                     {
+                        "id": 1,
                         "name": "Transformer_1",
                         "type": "FLUID_FILLED",
                         "phase": "THREE_PHASE",
@@ -662,6 +731,7 @@
             "proposed": {
                 "transformers": [
                     {
+                        "id": 1,
                         "name": "Transformer_1",
                         "type": "FLUID_FILLED",
                         "phase": "THREE_PHASE",
@@ -682,6 +752,7 @@
             "user": {
                 "transformers": [
                     {
+                        "id": 1,
                         "name": "Transformer_1",
                         "type": "FLUID_FILLED",
                         "phase": "THREE_PHASE",
@@ -693,6 +764,7 @@
             "proposed": {
                 "transformers": [
                     {
+                        "id": 1,
                         "name": "Transformer_1",
                         "type": "FLUID_FILLED",
                         "phase": "THREE_PHASE",
@@ -713,6 +785,7 @@
             "user": {
                 "transformers": [
                     {
+                        "id": 1,
                         "name": "Transformer_1",
                         "type": "DRY_TYPE",
                         "phase": "SINGLE_PHASE",
@@ -724,6 +797,7 @@
             "proposed": {
                 "transformers": [
                     {
+                        "id": 1,
                         "name": "Transformer_1",
                         "type": "DRY_TYPE",
                         "phase": "SINGLE_PHASE",
@@ -744,6 +818,7 @@
             "user": {
                 "transformers": [
                     {
+                        "id": 1,
                         "name": "Transformer_1",
                         "type": "DRY_TYPE",
                         "phase": "THREE_PHASE",
@@ -755,6 +830,7 @@
             "proposed": {
                 "transformers": [
                     {
+                        "id": 1,
                         "name": "Transformer_1",
                         "type": "DRY_TYPE",
                         "phase": "THREE_PHASE",
@@ -775,6 +851,7 @@
             "user": {
                 "transformers": [
                     {
+                        "id": 1,
                         "name": "Transformer_1",
                         "type": "DRY_TYPE",
                         "phase": "THREE_PHASE",
@@ -786,6 +863,7 @@
             "proposed": {
                 "transformers": [
                     {
+                        "id": 1,
                         "name": "Transformer_1",
                         "type": "DRY_TYPE",
                         "phase": "THREE_PHASE",
@@ -806,6 +884,7 @@
             "user": {
                 "transformers": [
                     {
+                        "id": 1,
                         "name": "Transformer_1",
                         "type": "DRY_TYPE",
                         "phase": "THREE_PHASE",
@@ -817,6 +896,7 @@
             "proposed": {
                 "transformers": [
                     {
+                        "id": 1,
                         "name": "Transformer_1",
                         "type": "DRY_TYPE",
                         "phase": "THREE_PHASE",
@@ -837,6 +917,7 @@
             "user": {
                 "transformers": [
                     {
+                        "id": 1,
                         "name": "Transformer_1",
                         "type": "DRY_TYPE",
                         "capacity": 25000,
@@ -848,6 +929,7 @@
             "proposed": {
                 "transformers": [
                     {
+                        "id": 1,
                         "name": "Transformer_1",
                         "type": "DRY_TYPE",
                         "capacity": 25000,
