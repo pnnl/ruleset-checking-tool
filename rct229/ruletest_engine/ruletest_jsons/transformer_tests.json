@@ -9,12 +9,15 @@
             "user": {
                 "transformers": [
                     {
+                        "id": 1,
                         "name": "Transformer_1"
                     },
                     {
+                        "id": 2,
                         "name": "Transformer_2"
                     },
                     {
+                        "id": 3,
                         "name": "Transformer_3"
                     }
                 ]
@@ -22,12 +25,15 @@
             "baseline": {
                 "transformers": [
                     {
+                        "id": 1,
                         "name": "Transformer_1"
                     },
                     {
+                        "id": 2,
                         "name": "Transformer_2"
                     },
                     {
+                        "id": 3,
                         "name": "Transformer_3"
                     }
                 ]
@@ -44,12 +50,15 @@
             "user": {
                 "transformers": [
                     {
+                        "id": 1,
                         "name": "Transformer_1"
                     },
                     {
+                        "id": 2,
                         "name": "Transformer_2"
                     },
                     {
+                        "id": 3,
                         "name": "Transformer_3"
                     }
                 ]
@@ -57,9 +66,11 @@
             "baseline": {
                 "transformers": [
                     {
+                        "id": 1,
                         "name": "Transformer_1"
                     },
                     {
+                        "id": 2,
                         "name": "Transformer_2"
                     }
                 ]
@@ -76,9 +87,11 @@
             "user": {
                 "transformers": [
                     {
+                        "id": 1,
                         "name": "Transformer_1"
                     },
                     {
+                        "id": 2,
                         "name": "Transformer_2"
                     }
                 ]
@@ -86,12 +99,15 @@
             "baseline": {
                 "transformers": [
                     {
+                        "id": 1,
                         "name": "Transformer_1"
                     },
                     {
+                        "id": 2,
                         "name": "Transformer_2"
                     },
                     {
+                        "id": 3,
                         "name": "Transformer_3"
                     }
                 ]
@@ -108,12 +124,15 @@
             "user": {
                 "transformers": [
                     {
+                        "id": 1,
                         "name": "Transformer_1"
                     },
                     {
+                        "id": 2,
                         "name": "Transformer_2"
                     },
                     {
+                        "id": 3,
                         "name": "Transformer_3"
                     }
                 ]
@@ -121,12 +140,15 @@
             "proposed": {
                 "transformers": [
                     {
+                        "id": 1,
                         "name": "Transformer_1"
                     },
                     {
+                        "id": 2,
                         "name": "Transformer_2"
                     },
                     {
+                        "id": 3,
                         "name": "Transformer_3"
                     }
                 ]
@@ -143,12 +165,15 @@
             "user": {
                 "transformers": [
                     {
+                        "id": 1,
                         "name": "Transformer_1"
                     },
                     {
+                        "id": 2,
                         "name": "Transformer_2"
                     },
                     {
+                        "id": 3,
                         "name": "Transformer_3"
                     }
                 ]
@@ -156,9 +181,11 @@
             "proposed": {
                 "transformers": [
                     {
+                        "id": 1,
                         "name": "Transformer_1"
                     },
                     {
+                        "id": 2,
                         "name": "Transformer_2"
                     }
                 ]
@@ -175,9 +202,11 @@
             "user": {
                 "transformers": [
                     {
+                        "id": 1,
                         "name": "Transformer_1"
                     },
                     {
+                        "id": 2,
                         "name": "Transformer_2"
                     }
                 ]
@@ -185,12 +214,15 @@
             "proposed": {
                 "transformers": [
                     {
+                        "id": 1,
                         "name": "Transformer_1"
                     },
                     {
+                        "id": 2,
                         "name": "Transformer_2"
                     },
                     {
+                        "id": 3,
                         "name": "Transformer_3"
                     }
                 ]
@@ -207,9 +239,11 @@
             "user": {
                 "transformers": [
                     {
+                        "id": 1,
                         "name": "Transformer_1"
                     },
                     {
+                        "id": 2,
                         "name": "Transformer_2"
                     }
                 ]
@@ -217,9 +251,11 @@
             "proposed": {
                 "transformers": [
                     {
+                        "id": 1,
                         "name": "Transformer_1"
                     },
                     {
+                        "id": 2,
                         "name": "Transformer_2"
                     }
                 ]
@@ -236,9 +272,11 @@
             "user": {
                 "transformers": [
                     {
+                        "id": 1,
                         "name": "Transformer_1"
                     },
                     {
+                        "id": 2,
                         "name": "Transformer_2"
                     }
                 ]
@@ -246,9 +284,11 @@
             "proposed": {
                 "transformers": [
                     {
+                        "id": 1,
                         "name": "Transformer_1"
                     },
                     {
+                        "id": 4,
                         "name": "Transformer_4"
                     }
                 ]
@@ -265,9 +305,11 @@
             "user": {
                 "transformers": [
                     {
+                        "id": 1,
                         "name": "Transformer_1"
                     },
                     {
+                        "id": 2,
                         "name": "Transformer_2"
                     }
                 ]
@@ -275,9 +317,11 @@
             "baseline": {
                 "transformers": [
                     {
+                        "id": 1,
                         "name": "Transformer_1"
                     },
                     {
+                        "id": 2,
                         "name": "Transformer_2"
                     }
                 ]
@@ -294,9 +338,11 @@
             "user": {
                 "transformers": [
                     {
+                        "id": 1,
                         "name": "Transformer_1"
                     },
                     {
+                        "id": 2,
                         "name": "Transformer_2"
                     }
                 ]
@@ -304,555 +350,12 @@
             "baseline": {
                 "transformers": [
                     {
+                        "id": 1,
                         "name": "Transformer_1"
                     },
                     {
+                        "id": 4,
                         "name": "Transformer_4"
-                    }
-                ]
-            }
-        }
-    },
-    "rule-15-5a": {
-        "Section": 15,
-        "Rule": 5,
-        "Test": "a",
-        "description": "Dry Single-Phase transformer modeled in the User Model whose efficiency is > than Table 8.4.4. Baseline RMR equals Table 8.4.4",
-        "expected_rule_outcome": "pass",
-        "rmr_transformations": {
-            "user": {
-                "transformers": [
-                    {
-                        "name": "Transformer_1",
-                        "type": "DRY_TYPE",
-                        "phase": "SINGLE_PHASE",
-                        "capacity": 25000,
-                        "efficiency": 0.99
-                    }
-                ]
-            },
-            "baseline": {
-                "transformers": [
-                    {
-                        "name": "Transformer_1",
-                        "type": "DRY_TYPE",
-                        "phase": "SINGLE_PHASE",
-                        "capacity": 25000,
-                        "efficiency": 0.98
-                    }
-                ]
-            }
-        }
-    },
-    "rule-15-5b": {
-        "Section": 15,
-        "Rule": 5,
-        "Test": "b",
-        "description": "Dry Single-Phase transformer modeled in the User Model whose efficiency is > than Table 8.4.4. Baseline RMR does not equal Table 8.4.4",
-        "expected_rule_outcome": "fail",
-        "rmr_transformations": {
-            "user": {
-                "transformers": [
-                    {
-                        "name": "Transformer_1",
-                        "type": "DRY_TYPE",
-                        "phase": "SINGLE_PHASE",
-                        "capacity": 25000,
-                        "efficiency": 0.99
-                    }
-                ]
-            },
-            "baseline": {
-                "transformers": [
-                    {
-                        "name": "Transformer_1",
-                        "type": "DRY_TYPE",
-                        "phase": "SINGLE_PHASE",
-                        "capacity": 25000,
-                        "efficiency": 0.99
-                    }
-                ]
-            }
-        }
-    },
-    "rule-15-5c": {
-        "Section": 15,
-        "Rule": 5,
-        "Test": "c",
-        "description": "Dry Three-Phase transformer modeled in the User Model whose efficiency is > than Table 8.4.4. Baseline RMR matches Table 8.4.4",
-        "expected_rule_outcome": "pass",
-        "rmr_transformations": {
-            "user": {
-                "transformers": [
-                    {
-                        "name": "Transformer_1",
-                        "type": "DRY_TYPE",
-                        "phase": "THREE_PHASE",
-                        "capacity": 30000,
-                        "efficiency": 0.99
-                    }
-                ]
-            },
-            "baseline": {
-                "transformers": [
-                    {
-                        "name": "Transformer_1",
-                        "type": "DRY_TYPE",
-                        "phase": "THREE_PHASE",
-                        "capacity": 30000,
-                        "efficiency": 0.9823
-                    }
-                ]
-            }
-        }
-    },
-    "rule-15-5d": {
-        "Section": 15,
-        "Rule": 5,
-        "Test": "d",
-        "description": "Dry Three-Phase transformer modeled in the User Model whose efficiency is > than Table 8.4.4. Baseline RMR does not match Table 8.4.4",
-        "expected_rule_outcome": "fail",
-        "rmr_transformations": {
-            "user": {
-                "transformers": [
-                    {
-                        "name": "Transformer_1",
-                        "type": "DRY_TYPE",
-                        "phase": "THREE_PHASE",
-                        "capacity": 30000,
-                        "efficiency": 0.99
-                    }
-                ]
-            },
-            "baseline": {
-                "transformers": [
-                    {
-                        "name": "Transformer_1",
-                        "type": "DRY_TYPE",
-                        "phase": "THREE_PHASE",
-                        "capacity": 30000,
-                        "efficiency": 0.98
-                    }
-                ]
-            }
-        }
-    },
-    "rule-15-6a": {
-        "Section": 15,
-        "Rule": 6,
-        "Test": "a",
-        "description": "Dry Single-Phase transformer modeled in the User Model whose efficiency equals Table 8.4.4. ",
-        "expected_rule_outcome": "pass",
-        "rmr_transformations": {
-            "user": {
-                "transformers": [
-                    {
-                        "name": "Transformer_1",
-                        "type": "DRY_TYPE",
-                        "phase": "SINGLE_PHASE",
-                        "capacity": 25000,
-                        "efficiency": 0.98
-                    }
-                ]
-            }
-        }
-    },
-    "rule-15-6b": {
-        "Section": 15,
-        "Rule": 6,
-        "Test": "b",
-        "description": "Dry Single-Phase transformer modeled in the User Model whose efficiency < Table 8.4.4.",
-        "expected_rule_outcome": "fail",
-        "rmr_transformations": {
-            "user": {
-                "transformers": [
-                    {
-                        "name": "Transformer_1",
-                        "type": "DRY_TYPE",
-                        "phase": "SINGLE_PHASE",
-                        "capacity": 25000,
-                        "efficiency": 0.97
-                    }
-                ]
-            }
-        }
-    },
-    "rule-15-6c": {
-        "Section": 15,
-        "Rule": 6,
-        "Test": "c",
-        "description": "Dry Three-Phase transformer modeled in the User Model whose efficiency equals Table 8.4.4. ",
-        "expected_rule_outcome": "pass",
-        "rmr_transformations": {
-            "user": {
-                "transformers": [
-                    {
-                        "name": "Transformer_1",
-                        "type": "DRY_TYPE",
-                        "phase": "THREE_PHASE",
-                        "capacity": 25000,
-                        "efficiency": 0.983
-                    }
-                ]
-            }
-        }
-    },
-    "rule-15-6d": {
-        "Section": 15,
-        "Rule": 6,
-        "Test": "d",
-        "description": "Dry Three-Phase transformer modeled in the User Model whose efficiency is < than Table 8.4.4.",
-        "expected_rule_outcome": "fail",
-        "rmr_transformations": {
-            "user": {
-                "transformers": [
-                    {
-                        "name": "Transformer_1",
-                        "type": "DRY_TYPE",
-                        "phase": "THREE_PHASE",
-                        "capacity": 25000,
-                        "efficiency": 0.98
-                    }
-                ]
-            }
-        }
-    },
-    "rule-15-7a": {
-        "Section": 15,
-        "Rule": 7,
-        "Test": "a",
-        "description": "Transformer modeled in user RMR, Fluid-filled transformer modeled in the User Model, Baseline RMR equals User RMR",
-        "expected_rule_outcome": "pass",
-        "rmr_transformations": {
-            "user": {
-                "transformers": [
-                    {
-                        "name": "Transformer_1",
-                        "type": "FLUID_FILLED",
-                        "phase": "THREE_PHASE",
-                        "capacity": 30000,
-                        "efficiency": 0.98
-                    }
-                ]
-            },
-            "baseline": {
-                "transformers": [
-                    {
-                        "name": "Transformer_1",
-                        "type": "FLUID_FILLED",
-                        "phase": "THREE_PHASE",
-                        "capacity": 30000,
-                        "efficiency": 0.98
-                    }
-                ]
-            }
-        }
-    },
-    "rule-15-7b": {
-        "Section": 15,
-        "Rule": 7,
-        "Test": "b",
-        "description": "Transformer modeled in user RMR, Fluid-filled transformer modeled in the User Model, Baseline RMR does not equal User RMR",
-        "expected_rule_outcome": "fail",
-        "rmr_transformations": {
-            "user": {
-                "transformers": [
-                    {
-                        "name": "Transformer_1",
-                        "type": "FLUID_FILLED",
-                        "phase": "THREE_PHASE",
-                        "capacity": 30000,
-                        "efficiency": 0.98
-                    }
-                ]
-            },
-            "baseline": {
-                "transformers": [
-                    {
-                        "name": "Transformer_1",
-                        "type": "FLUID_FILLED",
-                        "phase": "THREE_PHASE",
-                        "capacity": 30000,
-                        "efficiency": 0.975
-                    }
-                ]
-            }
-        }
-    },
-    "rule-15-7c": {
-        "Section": 15,
-        "Rule": 7,
-        "Test": "c",
-        "description": "Transformer modeled in user RMR, Dry-type, single phase transformer modeled in the User Model, Baseline RMR equals User RMR",
-        "expected_rule_outcome": "pass",
-        "rmr_transformations": {
-            "user": {
-                "transformers": [
-                    {
-                        "name": "Transformer_1",
-                        "type": "DRY_TYPE",
-                        "phase": "SINGLE_PHASE",
-                        "capacity": 25000,
-                        "efficiency": 0.98
-                    }
-                ]
-            },
-            "baseline": {
-                "transformers": [
-                    {
-                        "name": "Transformer_1",
-                        "type": "DRY_TYPE",
-                        "phase": "SINGLE_PHASE",
-                        "capacity": 25000,
-                        "efficiency": 0.98
-                    }
-                ]
-            }
-        }
-    },
-    "rule-15-7d": {
-        "Section": 15,
-        "Rule": 7,
-        "Test": "d",
-        "description": "Transformer modeled in user RMR, Dry-type, single phase transformer modeled in the User Model, Baseline RMR does not equal User RMR",
-        "expected_rule_outcome": "fail",
-        "rmr_transformations": {
-            "user": {
-                "transformers": [
-                    {
-                        "name": "Transformer_1",
-                        "type": "DRY_TYPE",
-                        "phase": "SINGLE_PHASE",
-                        "capacity": 25000,
-                        "efficiency": 0.98
-                    }
-                ]
-            },
-            "baseline": {
-                "transformers": [
-                    {
-                        "name": "Transformer_1",
-                        "type": "DRY_TYPE",
-                        "phase": "SINGLE_PHASE",
-                        "capacity": 25000,
-                        "efficiency": 0.983
-                    }
-                ]
-            }
-        }
-    },
-    "rule-15-8a": {
-        "Section": 15,
-        "Rule": 8,
-        "Test": "a",
-        "description": "Transformer modeled in user RMR, Fluid-filled transformer modeled in the User Model, Proposed RMR equals User  RMR",
-        "expected_rule_outcome": "pass",
-        "rmr_transformations": {
-            "user": {
-                "transformers": [
-                    {
-                        "name": "Transformer_1",
-                        "type": "FLUID_FILLED",
-                        "phase": "THREE_PHASE",
-                        "capacity": 30000,
-                        "efficiency": 0.98
-                    }
-                ]
-            },
-            "proposed": {
-                "transformers": [
-                    {
-                        "name": "Transformer_1",
-                        "type": "FLUID_FILLED",
-                        "phase": "THREE_PHASE",
-                        "capacity": 30000,
-                        "efficiency": 0.98
-                    }
-                ]
-            }
-        }
-    },
-    "rule-15-8b": {
-        "Section": 15,
-        "Rule": 8,
-        "Test": "b",
-        "description": "Transformer modeled in user RMR, Fluid-filled transformer modeled in the User Model, Proposed RMR doesn't equal User Model RMR",
-        "expected_rule_outcome": "fail",
-        "rmr_transformations": {
-            "user": {
-                "transformers": [
-                    {
-                        "name": "Transformer_1",
-                        "type": "FLUID_FILLED",
-                        "phase": "THREE_PHASE",
-                        "capacity": 30000,
-                        "efficiency": 0.98
-                    }
-                ]
-            },
-            "proposed": {
-                "transformers": [
-                    {
-                        "name": "Transformer_1",
-                        "type": "FLUID_FILLED",
-                        "phase": "THREE_PHASE",
-                        "capacity": 30000,
-                        "efficiency": 0.975
-                    }
-                ]
-            }
-        }
-    },
-    "rule-15-8c": {
-        "Section": 15,
-        "Rule": 8,
-        "Test": "c",
-        "description": "Transformer modeled in user RMR, Dry-type, single phase transformer modeled in the User Model, Proposed RMR equals User RMR",
-        "expected_rule_outcome": "pass",
-        "rmr_transformations": {
-            "user": {
-                "transformers": [
-                    {
-                        "name": "Transformer_1",
-                        "type": "DRY_TYPE",
-                        "phase": "SINGLE_PHASE",
-                        "capacity": 25000,
-                        "efficiency": 0.99
-                    }
-                ]
-            },
-            "proposed": {
-                "transformers": [
-                    {
-                        "name": "Transformer_1",
-                        "type": "DRY_TYPE",
-                        "phase": "SINGLE_PHASE",
-                        "capacity": 25000,
-                        "efficiency": 0.99
-                    }
-                ]
-            }
-        }
-    },
-    "rule-15-8d": {
-        "Section": 15,
-        "Rule": 8,
-        "Test": "d",
-        "description": "Transformer modeled in user RMR, Dry-type, single phase transformer modeled in the User Model, Proposed RMR does not equal User RMR",
-        "expected_rule_outcome": "fail",
-        "rmr_transformations": {
-            "user": {
-                "transformers": [
-                    {
-                        "name": "Transformer_1",
-                        "type": "DRY_TYPE",
-                        "phase": "THREE_PHASE",
-                        "capacity": 25000,
-                        "efficiency": 0.99
-                    }
-                ]
-            },
-            "proposed": {
-                "transformers": [
-                    {
-                        "name": "Transformer_1",
-                        "type": "DRY_TYPE",
-                        "phase": "THREE_PHASE",
-                        "capacity": 25000,
-                        "efficiency": 0.98
-                    }
-                ]
-            }
-        }
-    },
-    "rule-15-8e": {
-        "Section": 15,
-        "Rule": 8,
-        "Test": "e",
-        "description": "Transformer modeled in user RMR, Dry-type, three phase transformer modeled in the User Model, Proposed RMR equals User RMR",
-        "expected_rule_outcome": "pass",
-        "rmr_transformations": {
-            "user": {
-                "transformers": [
-                    {
-                        "name": "Transformer_1",
-                        "type": "DRY_TYPE",
-                        "phase": "THREE_PHASE",
-                        "capacity": 25000,
-                        "efficiency": 0.99
-                    }
-                ]
-            },
-            "proposed": {
-                "transformers": [
-                    {
-                        "name": "Transformer_1",
-                        "type": "DRY_TYPE",
-                        "phase": "THREE_PHASE",
-                        "capacity": 25000,
-                        "efficiency": 0.99
-                    }
-                ]
-            }
-        }
-    },
-    "rule-15-8f": {
-        "Section": 15,
-        "Rule": 8,
-        "Test": "f",
-        "description": "Transformer modeled in user RMR, Dry-type, three phase transformer modeled in the User Model, Proposed RMR does not match User RMR",
-        "expected_rule_outcome": "fail",
-        "rmr_transformations": {
-            "user": {
-                "transformers": [
-                    {
-                        "name": "Transformer_1",
-                        "type": "DRY_TYPE",
-                        "phase": "THREE_PHASE",
-                        "capacity": 25000,
-                        "efficiency": 0.99
-                    }
-                ]
-            },
-            "proposed": {
-                "transformers": [
-                    {
-                        "name": "Transformer_1",
-                        "type": "DRY_TYPE",
-                        "phase": "THREE_PHASE",
-                        "capacity": 25000,
-                        "efficiency": 0.983
-                    }
-                ]
-            }
-        }
-    },
-    "rule-15-8g": {
-        "Section": 15,
-        "Rule": 8,
-        "Test": "g",
-        "description": "Transformer modeled in user RMR, Dry-type, three phase transformer modeled in the User Model, Proposed RMR efficiency matches User RMR but phase  does not match User RMR",
-        "expected_rule_outcome": "pass",
-        "rmr_transformations": {
-            "user": {
-                "transformers": [
-                    {
-                        "name": "Transformer_1",
-                        "type": "DRY_TYPE",
-                        "capacity": 25000,
-                        "efficiency": 0.98,
-                        "phase": "THREE_PHASE"
-                    }
-                ]
-            },
-            "proposed": {
-                "transformers": [
-                    {
-                        "name": "Transformer_1",
-                        "type": "DRY_TYPE",
-                        "capacity": 25000,
-                        "efficiency": 0.98,
-                        "phase": "SINGLE_PHASE"
                     }
                 ]
             }
