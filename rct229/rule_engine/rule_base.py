@@ -14,6 +14,7 @@ class RuleDefinitionBase:
         description=None,
         rmr_context="",
         rmrs_used=UserBaselineProposedVals(True, True, True),
+        required_fields=None,
     ):
         """Base class for all Rule definitions
 
@@ -40,6 +41,7 @@ class RuleDefinitionBase:
         # Default rm_context is the root of the RMR
         self.rmr_context = to_json_pointer(rmr_context)
         self.rmrs_used = rmrs_used
+        self.required_fields = required_fields
 
     def evaluate(self, rmrs, data=None):
         """Generates the outcome dictionary for the rule
@@ -92,7 +94,9 @@ class RuleDefinitionBase:
             context = context_or_string
 
             # Check the context for general validity
-            if self.context_is_well_structured(context, data):
+            context_validity_dict = self.check_context_validity(context, data)
+            # If the context is valid, context_validity_dict will be the falsey {}
+            if not context_validity_dict:
 
                 # Check if rule is applicable
                 if self.is_applicable(context, data):
@@ -121,7 +125,7 @@ class RuleDefinitionBase:
                 else:
                     outcome["result"] = "NA"
             else:
-                outcome["result"] = "INVALID_RMR_STRUCTURE"
+                outcome["result"] = context_validity_dict
         else:
             # context should be a string indicating the RMRs that are missing
             # such as "MISSING_BASELINE"
@@ -206,10 +210,10 @@ class RuleDefinitionBase:
 
         return retval
 
-    def context_is_well_structured(self, context, data=None):
-        """Check that the context is well–structured
+    def check_context_validity(self, context, data=None):
+        """Check invalid context trio
 
-        This can be overridden as needed. This base implementation always
+        This should not be overridden. This base implementation always
         returns True, which allows the workflow to proceed.
 
         Parameters
@@ -223,7 +227,92 @@ class RuleDefinitionBase:
         boolean
             True if the context is well–structured
         """
+        retval = {}
 
+        user_invalid_str = (
+            self.check_user_context_validity(context.user, data)
+            if self.rmrs_used.user
+            else ""
+        )
+        if user_invalid_str:
+            retval["INVALID_USER_CONTEXT"] = user_invalid_str
+
+        baseline_invalid_str = (
+            self.check_baseline_context_validity(context.baseline, data)
+            if self.rmrs_used.baseline
+            else ""
+        )
+        if baseline_invalid_str:
+            retval["INVALID_BASELINE_CONTEXT"] = baseline_invalid_str
+
+        proposed_invalid_str = (
+            self.check_proposed_context_validity(context.proposed, data)
+            if self.rmrs_used.proposed
+            else ""
+        )
+        if proposed_invalid_str:
+            retval["INVALID_PROPOSED_CONTEXT"] = proposed_invalid_str
+
+        return retval
+
+    def check_single_context_validity(self, single_context, data=None):
+        invalid_list = []
+        if self.required_fields:
+            print("required_fields:", self.required_fields)
+            for jpath, fields in self.required_fields.items():
+                invalid_str = self._missing_fields_str(jpath, fields, single_context)
+                if invalid_str:
+                    invalid_list.append(invalid_str)
+
+        return "; ".join(invalid_list) if len(invalid_list) > 0 else ""
+
+    def check_user_context_validity(self, user_context, data=None):
+        print("check_user_context_validity")
+        return self.check_single_context_validity(user_context, data)
+
+    def check_baseline_context_validity(self, baseline_context, data=None):
+        print("check_baseline_context_validity")
+        return self.check_single_context_validity(baseline_context, data)
+
+    def check_proposed_context_validity(self, proposed_context, data=None):
+        print("check_proposed_context_validity")
+        return self.check_single_context_validity(proposed_context, data)
+
+    def _missing_fields_str(self, jpath, fields, single_context):
+        objs = find_all(jpath, single_context)
+        print("self:", self)
+        print("objs:", objs)
+        objs_errors = []
+        for obj in objs:
+            print("obj:", obj)
+            missing_fields = []
+            for field in fields:
+                if not hasattr(obj, field):
+                    missing_fields.append(field)
+            if len(missing_fields) > 0:
+                id_or_name_str = (
+                    "id:" + obj["id"]
+                    if hasattr(obj, "id")
+                    else ("name:" + obj["name"] if hasattr(obj, "name") else "")
+                )
+                objs_errors.append(
+                    id_or_name_str + " missing:" + ",".join(missing_fields)
+                )
+
+        return "; ".join(objs_errors)
+
+    def context_part_is_valid(self, single_context, data=None):
+        return None
+
+    def user_context_is_valid(self, context, data=None):
+        # If required_user_fields: call single_context_is_valid
+        # Return bool or error string
+        return True
+
+    def baseline_context_is_valid(self, context, data=None):
+        return True
+
+    def proposed_context_is_valid(self, context, data=None):
         return True
 
     def is_applicable(self, context, data=None):

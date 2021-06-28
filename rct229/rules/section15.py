@@ -177,11 +177,15 @@ class Section15Rule5(RuleDefinitionListIndexedBase):
             rmrs_used=UserBaselineProposedVals(True, True, False),
             each_rule=Section15Rule5.TransformerRule(),
             index_rmr="user",
+            match_by="name",
         )
 
     class TransformerRule(RuleDefinitionBase):
         def __init__(self):
             super(Section15Rule5.TransformerRule, self).__init__(
+                required_fields={
+                    "$": ["capacity", "efficiency", "type", "phase"],
+                },
                 rmrs_used=UserBaselineProposedVals(True, True, False),
             )
 
@@ -248,11 +252,16 @@ class Section15Rule6(RuleDefinitionListIndexedBase):
             rmr_context="transformers",
             rmrs_used=UserBaselineProposedVals(True, False, False),
             each_rule=Section15Rule6.TransformerRule(),
+            index_rmr="user",
+            match_by="name",
         )
 
     class TransformerRule(RuleDefinitionBase):
         def __init__(self):
             super(Section15Rule6.TransformerRule, self).__init__(
+                # required_fields={
+                #     "$": ["capacity", "efficiency", "type", "phase"],
+                # },
                 rmrs_used=UserBaselineProposedVals(True, False, False),
             )
 

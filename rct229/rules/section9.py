@@ -30,7 +30,7 @@ class Section9Rule6_jb(RuleDefinitionListIndexedBase):
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section9Rule6_jb.BuildingRule, self).__init__(
-                list_path="$..spaces[*]",  # All spaces inside the building
+                list_path="..spaces[*]",  # All spaces inside the building
                 rmrs_used=UserBaselineProposedVals(True, False, True),
                 each_rule=Section9Rule6_jb.BuildingRule.SpaceRule(),
                 index_rmr="proposed",
