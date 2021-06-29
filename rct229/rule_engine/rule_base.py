@@ -211,21 +211,29 @@ class RuleDefinitionBase:
         return retval
 
     def check_context_validity(self, context, data=None):
-        """Check invalid context trio
+        """Check the validity of each used part of the context trio
 
-        This should not be overridden. This base implementation always
-        returns True, which allows the workflow to proceed.
+        This should not be overridden. Override the other check validity methods
+        as needed instead.
 
         Parameters
         ----------
         context : UserBaselineProposedVals
             Object containing the contexts for the user, baseline, and proposed RMRs
-        data : An optional data object. It is ignored by this base implementation.
+        data : An optional data object
 
         Returns
         -------
-        boolean
-            True if the context is well–structured
+        dict
+            A dict of the form
+            {
+                "INVALID_USER_CONTEX": Error message,
+                "INVALID_BASELINE_CONTEXT": Error message,
+                "INVALID_PROPOSED_CONTEXT": Error message
+            },
+            where the fields are only included if the cooresponding context is
+            invalid. Therefore, if the context trio is completely valid, then
+            the empty dict is returned.
         """
         retval = {}
 
@@ -256,6 +264,24 @@ class RuleDefinitionBase:
         return retval
 
     def check_single_context_validity(self, single_context, data=None):
+        """Check the validity of a single part of the context trio
+
+        This may be overridden to provide alternate validation that, by default,
+        will be used to validate each part of the context trio.
+
+        Parameters
+        ----------
+        single_context : object
+            A single part of the context trio
+        data : object
+            A optional data object of any form
+
+        Returns
+        -------
+        string
+            A validation error message. The empty string indicates a valid
+            context part.
+        """
         invalid_list = []
         if self.required_fields:
             print("required_fields:", self.required_fields)
@@ -267,6 +293,24 @@ class RuleDefinitionBase:
         return "; ".join(invalid_list) if len(invalid_list) > 0 else ""
 
     def check_user_context_validity(self, user_context, data=None):
+        """Check the validity of the USER part of the context trio
+
+        This may be overridden to provide alternate validation that, by default,
+        will be used to validate each part of the context trio.
+
+        Parameters
+        ----------
+        single_context : object
+            A single part of the context trio
+        data : object
+            A optional data object of any form
+
+        Returns
+        -------
+        string
+            A validation error message. The empty string indicates a valid
+            context part.
+        """
         print("check_user_context_validity")
         return self.check_single_context_validity(user_context, data)
 
