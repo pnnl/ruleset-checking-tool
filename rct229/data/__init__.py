@@ -1,8 +1,7 @@
 import glob
+import json
 import pprint
 from os.path import basename, dirname, join
-
-import json
 
 # A dictionary that will contain all the data in this folder
 data = {}

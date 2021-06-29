@@ -2,7 +2,7 @@
     "transformers": [
       {
         "capacity": 15.0,
-        "efficiency": 0.9800,
+        "efficiency": 0.9770,
         "phase": "Single-Phase",
         "notes": "From 90.1-2019 Table 8.4.4"
       },
