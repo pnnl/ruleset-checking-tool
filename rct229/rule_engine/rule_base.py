@@ -370,25 +370,45 @@ class RuleDefinitionBase:
         """
         return self.check_single_context_validity(proposed_context, data)
 
-    def _missing_fields_str(self, jpath, fields, single_context):
-        objs = find_all(jpath, single_context)
-        objs_errors = []
-        for obj in objs:
+    def _missing_fields_str(self, jpath, required_fields, single_context):
+        """Untility method for listing missing required fields in a single
+        part of the context trio
+
+        Do NOT override this utility method.
+
+        Parameters
+        ----------
+        jpath: string
+            A json path to zero or more dictionaries
+        required_fields : list of strings
+            A list of the required fields
+        single_context : object
+            A single part of the context trio
+
+        Returns
+        -------
+        string
+            A string of semicolon separated list of strings of the form
+            'id:<id> missing:<comma separated list of missing fields>'
+        """
+        dicts = find_all(jpath, single_context)
+        dicts_errors = []
+        for dictionary in dicts:
             missing_fields = []
-            for field in fields:
-                if not hasattr(obj, field):
+            for field in required_fields:
+                if not field in dictionary:
                     missing_fields.append(field)
             if len(missing_fields) > 0:
                 id_or_name_str = (
-                    "id:" + obj["id"]
-                    if hasattr(obj, "id")
-                    else ("name:" + obj["name"] if hasattr(obj, "name") else "")
+                    "id:" + str(dictionary["id"])
+                    if "id" in dictionary
+                    else ("name:" + dictionary["name"] if "name" in dictionary else "")
                 )
-                objs_errors.append(
+                dicts_errors.append(
                     id_or_name_str + " missing:" + ",".join(missing_fields)
                 )
 
-        return "; ".join(objs_errors)
+        return "; ".join(dicts_errors)
 
     def is_applicable(self, context, data=None):
         """Checks that the rule applies

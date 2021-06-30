@@ -1,5 +1,4 @@
 import pytest
-
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 
@@ -11,6 +10,7 @@ from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedV
 RMR_1 = {
     "transformers": [
         {
+            "id": 1,
             "name": "Transformer 1",
             "type": "DRY_TYPE",
             "phase": "SINGLE_PHASE",
@@ -19,6 +19,7 @@ RMR_1 = {
             "peak_load": 500.0,
         },
         {
+            "id": 2,
             "name": "Transformer 2",
             "type": "DRY_TYPE",
             "phase": "SINGLE_PHASE",
@@ -33,6 +34,7 @@ RMR_1 = {
 RMR_2 = {
     "transformers": [
         {
+            "id": 1,
             "name": "Transformer 1",
             "type": "DRY_TYPE",
             "phase": "SINGLE_PHASE",
