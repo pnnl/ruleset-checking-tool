@@ -29,17 +29,19 @@
 
         - Get lighting in space: ```lighting_p = space_p.interior_lighting```  
 
-        - Get lighting schedule: ```schedule_p = match_data_element(P_RMR, schedules, lighting_p.lighting_multiplier_schedule_name)```  (Note XC, this would require match_data_element to use name instead of id)
+        - Check if lighting has occupancy control: ```if lighting_p.has_occupancy_control:```  
 
-        - Get lighting schedule equivalent full load hours: ```schedule_EFLH_p = EFLH(schedule_p.hourly_values)```  
+          - Get lighting schedule: ```schedule_p = match_data_element(P_RMR, schedules, lighting_p.lighting_multiplier_schedule_name)```  (Note XC, this would require match_data_element to use name instead of id)
 
-        - Get matching space from B_RMR: ```space_b = match_data_element(B_RMR, spaces, space_p.id)```  
+          - Get lighting schedule equivalent full load hours: ```schedule_EFLH_p = EFLH(schedule_p.hourly_values)```  
 
-          - Get lighting in space: ```lighting_b = space_b.interior_lighting```  
+          - Get matching space from B_RMR: ```space_b = match_data_element(B_RMR, spaces, space_p.id)```  
 
-          - Get lighting schedule: ```schedule_b = match_data_element(B_RMR, schedules, lighting_b.lighting_multiplier_schedule_name)```  
+            - Get lighting in space: ```lighting_b = space_b.interior_lighting```  
 
-          - Get lighting schedule equivalent full load hours: ```schedule_EFLH_b = EFLH(schedule_b.hourly_values)```  
+            - Get lighting schedule: ```schedule_b = match_data_element(B_RMR, schedules, lighting_b.lighting_multiplier_schedule_name)```  
+
+            - Get lighting schedule equivalent full load hours: ```schedule_EFLH_b = EFLH(schedule_b.hourly_values)```  
 
 **Rule Assertion:**  
 
