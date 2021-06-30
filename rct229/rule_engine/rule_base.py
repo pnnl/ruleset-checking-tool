@@ -213,6 +213,10 @@ class RuleDefinitionBase:
     def check_context_validity(self, context, data=None):
         """Check the validity of each used part of the context trio
 
+        It collects the validity error strings from the
+        check_user_context_validity, check_baseline_context_validity,
+        check_proposed_context_validity methods for the parts in self.rmrs_used.
+
         This should not be overridden. Override the other check validity methods
         as needed instead.
 
@@ -220,7 +224,7 @@ class RuleDefinitionBase:
         ----------
         context : UserBaselineProposedVals
             Object containing the contexts for the user, baseline, and proposed RMRs
-        data : An optional data object
+        data : An optional data object of any form.
 
         Returns
         -------
@@ -233,7 +237,7 @@ class RuleDefinitionBase:
             },
             where the fields are only included if the cooresponding context is
             invalid. Therefore, if the context trio is completely valid, then
-            the empty dict is returned.
+            the empty dict, {}, is returned.
         """
         retval = {}
 
@@ -269,12 +273,15 @@ class RuleDefinitionBase:
         This may be overridden to provide alternate validation that, by default,
         will be used to validate each part of the context trio.
 
+        This implementations checks for required fields.
+
         Parameters
         ----------
         single_context : object
             A single part of the context trio
         data : object
-            A optional data object of any form
+            An optional data object of any form. It is ignored by this
+            implementation.
 
         Returns
         -------
@@ -284,7 +291,6 @@ class RuleDefinitionBase:
         """
         invalid_list = []
         if self.required_fields:
-            print("required_fields:", self.required_fields)
             for jpath, fields in self.required_fields.items():
                 invalid_str = self._missing_fields_str(jpath, fields, single_context)
                 if invalid_str:
@@ -295,40 +301,79 @@ class RuleDefinitionBase:
     def check_user_context_validity(self, user_context, data=None):
         """Check the validity of the USER part of the context trio
 
-        This may be overridden to provide alternate validation that, by default,
-        will be used to validate each part of the context trio.
+        This may be overridden to provide alternate validation for the USER part
+        of the context trio.
+
+        This implementation simply calls the check_single_context_validity
+        method with the user_context.
 
         Parameters
         ----------
-        single_context : object
-            A single part of the context trio
+        user_context : object
+            The USER part of the context trio
         data : object
-            A optional data object of any form
+            An optional data object of any form
 
         Returns
         -------
         string
             A validation error message. The empty string indicates a valid
-            context part.
+            user_context.
         """
-        print("check_user_context_validity")
         return self.check_single_context_validity(user_context, data)
 
     def check_baseline_context_validity(self, baseline_context, data=None):
-        print("check_baseline_context_validity")
+        """Check the validity of the BASELINE part of the context trio
+
+        This may be overridden to provide alternate validation for the BASELINE
+        part of the context trio.
+
+        This implementation simply calls the check_single_context_validity
+        method with the baseline_context.
+
+        Parameters
+        ----------
+        baseline_context : object
+            The BASELINE part of the context trio
+        data : object
+            An optional data object of any form
+
+        Returns
+        -------
+        string
+            A validation error message. The empty string indicates a valid
+            baseline_context.
+        """
         return self.check_single_context_validity(baseline_context, data)
 
     def check_proposed_context_validity(self, proposed_context, data=None):
-        print("check_proposed_context_validity")
+        """Check the validity of the PROPOSED part of the context trio
+
+        This may be overridden to provide alternate validation for the PROPOSED
+        part of the context trio.
+
+        This implementation simply calls the check_single_context_validity
+        method with the proposed_context.
+
+        Parameters
+        ----------
+        proposed_context : object
+            The PROPOSED part of the context trio
+        data : object
+            An optional data object of any form
+
+        Returns
+        -------
+        string
+            A validation error message. The empty string indicates a valid
+            proposed_context.
+        """
         return self.check_single_context_validity(proposed_context, data)
 
     def _missing_fields_str(self, jpath, fields, single_context):
         objs = find_all(jpath, single_context)
-        print("self:", self)
-        print("objs:", objs)
         objs_errors = []
         for obj in objs:
-            print("obj:", obj)
             missing_fields = []
             for field in fields:
                 if not hasattr(obj, field):
@@ -344,20 +389,6 @@ class RuleDefinitionBase:
                 )
 
         return "; ".join(objs_errors)
-
-    def context_part_is_valid(self, single_context, data=None):
-        return None
-
-    def user_context_is_valid(self, context, data=None):
-        # If required_user_fields: call single_context_is_valid
-        # Return bool or error string
-        return True
-
-    def baseline_context_is_valid(self, context, data=None):
-        return True
-
-    def proposed_context_is_valid(self, context, data=None):
-        return True
 
     def is_applicable(self, context, data=None):
         """Checks that the rule applies
