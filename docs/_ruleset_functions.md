@@ -1,11 +1,11 @@
 ## get_zone_conditioning_category
-Description: Determine the Zone Conditioning Category for each zone. This function would cycle through each zone in an RMR and categorize it as ‘conditioned’, 'semi-heated’ or ‘unconditioned’.  
+Description: Determine the Zone Conditioning Category for each zone. This function would cycle through each zone in an RMR and categorize it as ‘conditioned’, 'semi-heated’ or ‘unconditioned’.  If ‘conditioned’ it will also categorize the space as ‘residential’ or ‘non-residential’.  
 
 Inputs:
   - **RMR**: The RMR that needs to determine zone conditioning category.  
 
 Returns:
-- **zone_conditioning_category**: The Zone Conditioning Category [conditioned, semi-heated, unconditioned].  
+- **zone_conditioning_category**: The Zone Conditioning Category [conditioned residential, conditioned non-residential, semi-heated, unconditioned].  
 
 
 Logic:  
@@ -16,37 +16,77 @@ Logic:
 
 - For each building segment in the RMR: ```for building_segment in RMR.building.building_segments:```  
 
-  - To determine zone conditioning category for zones served by an HVAC system, for each HVAC system in building segment: ```for hvac_system in building_segment.heating_ventilation_air_conditioning_systems:```  
+  - To determine eligibility for directly conditioned (heated or cooled) and semi-heated zones, for each HVAC system in building segment: ```for hvac_system in building_segment.heating_ventilation_air_conditioning_systems:```  
 
-    - Check if the system meets the criteria for serving directly conditioned (heated or cooled) zones, save all zones served by the system as directly conditioned: ```if ( hvac_system.simulation_result_sensible_cool_capacity >= 3.4 ) OR ( hvac_system.simulation_result_heat_capacity >= system_min_heating_output ):  for zone in hvac_system.zones_served: zone_conditioning_category_dict[zone.id] = "DIRECTLY-CONDITIONED"```  
+    - Check if the system meets the criteria for serving directly conditioned (heated or cooled) zones, save all zones served by the system as directly conditioned: ```if ( hvac_system.simulation_result_sensible_cool_capacity >= 3.4 ) OR ( hvac_system.simulation_result_heat_capacity >= system_min_heating_output ):  for zone in hvac_system.zones_served: directly_conditioned_zones.append(zone)```  
 
-    - Else check if the system meets the criteria for serving semi-heated zones, save all zones served by the system as semi-heated: ```else if hvac_system.simulation_result_heat_capacity >= 3.4: for zone in hvac_system.zones_served: zone_conditioning_category_dict[zone.id] = "SEMI-HEATED"```  
+    - Else check if the system meets the criteria for serving semi-heated zones, save all zones served by the system as semi-heated: ```else if hvac_system.simulation_result_heat_capacity >= 3.4: for zone in hvac_system.zones_served: semiheated_zones.append(zone)```  
 
-    - Else, save all zones served by the system as unconditioned: ```else: for zone in hvac_system.zones_served: zone_conditioning_category_dict[zone.id] = "UNCONDITIONED"```  
-
-  - To determine zone conditioning category for zones not served by any HVAC system, for each thermal block in building segment: ```for thermal_block in building_segment.thermal_blocks:```  
+  - To determine eligibility for indirectly conditioned zones, for each thermal block in building segment: ```for thermal_block in building_segment.thermal_blocks:```  
 
     - For each zone in thermal block: ```for zone in thermal_block.zones:```  
 
-      - If zone has not been classified: ```if zone.id not in zone_conditioning_category_dict:```  
+      - If zone is not directly conditioned (heated or cooled): ```if zone not in directly_conditioned_zones:```  
 
         - For each surface in zone: ```for surface in zone.surfaces:```  
 
-          - Check if surface is interior: ```if surface.adjacent_to == "INTERIOR":```  
+          - Check if surface is interior, get adjacent zone: ```if surface.adjacent_to == "INTERIOR": adjacent_zone = match_data_element(RMR, zones, surface.adjacent_zone_id)```  
 
-            - If the adjacent zone is directly conditioned (heated or cooled), add the product of the U-factor and surface area to the directly conditioned type: ```if zone_conditioning_category_dict[surface.adjacent_zone_id] == "DIRECTLY-CONDITIONED": directly_conditioned_product_sum += sum( ( fenestration.glazed_area + fenestration.opaque_area ) * fenestration.u_factor for fenestration in surface.fenestration_subsurfaces ) + ( surface.area - sum( ( fenestration.glazed_area + fenestration.opaque_area ) for fenestration in surface.fenestration_subsurfaces ) * surface.construction.u_factor```  
+            - If adjacent zone is directly conditioned (heated or cooled), add the product of the U-factor and surface area to the directly conditioned type: ```if adjacent_zone in directly_conditioned_zone: directly_conditioned_product_sum += sum( ( fenestration.glazed_area + fenestration.opaque_area ) * fenestration.u_factor for fenestration in surface.fenestration_subsurfaces ) + ( surface.area - sum( ( fenestration.glazed_area + fenestration.opaque_area ) for fenestration in surface.fenestration_subsurfaces ) * surface.construction.u_factor```  
 
             - Else, add the product of the U-factor and surface area to the other type (outdoor, semi-heated or unconditioned): ```else: other_product_sum += sum( ( fenestration.glazed_area + fenestration.opaque_area ) * fenestration.u_factor for fenestration in surface.fenestration_subsurfaces ) + ( surface.area - sum( ( fenestration.glazed_area + fenestration.opaque_area ) for fenestration in surface.fenestration_subsurfaces ) * surface.construction.u_factor```  
 
           - Else check if surface is exterior, add the product of the U-factor and surface area to the other type (outdoor, semi-heated or unconditioned): ```else if surface.adjacent_to == "EXTERIOR": other_product_sum += sum( ( fenestration.glazed_area + fenestration.opaque_area ) * fenestration.u_factor for fenestration in surface.fenestration_subsurfaces ) + ( surface.area - sum( ( fenestration.glazed_area + fenestration.opaque_area ) for fenestration in surface.fenestration_subsurfaces ) * surface.construction.u_factor```  
 
-      - Determine if the zone is indirectly conditioned: ```if directly_conditioned_product_sum > other_product_sum: zone_conditioning_category_dict[zone.id] = "INDIRECTLY-CONDITIONED"```  
+        - Determine if zone is indirectly conditioned: ```if directly_conditioned_product_sum > other_product_sum: indirectly_conditioned_zones.append(zone)```  
 
-      - Else, zone is unconditioned: ```else: zone_conditioning_category_dict[zone.id] = "UNCONDITIONED"```  
+  - Check if building segment is residential: ```if ( building_segment.lighting_building_area_type == "Dormitory" ) OR ( building_segment.lighting_building_area_type == "Hotel/Motel" ) OR ( building_segment.lighting_building_area_type == "Multifamily" ):```  
 
-- Save all directly and indirectly conditioned zones as conditioned: ```for key in zone_conditioning_category_dict: if ( zone_conditioning_category_dict[key] == "DIRECTLY-CONDITIONED" ) OR ( zone_conditioning_category_dict[key] == "INDIRECTLY-CONDITIONED" ): zone_conditioning_category_dict[key] == "CONDITIONED"```  
+    - For each thermal block in building segment: ```for thermal_block in building_segment.thermal_blocks:```  
 
-**Returns** ```return zone_conditioning_category_dict```
+      - For each zone in thermal block: ```for zone in thermal_block.zones:```  
+
+        - If zone is directly or indirectly conditioned, classify zone as conditioned residential: ```if ( zone in directly_conditioned_zones ) OR ( zone in indirectly_conditioned_zones ): zone_conditioning_category_dict[zone.id] = "CONDITIONED RESIDENTIAL"```
+
+        - Else if zone is semi-heated, classify zone as semi-heated: ```else if zone in semiheated_zones: zone_conditioning_category_dict[zone.id] = "SEMI-HEATED"```
+
+        - Else, classify zone as unconditioned: ```else: zone_conditioning_category_dict[zone.id] = "UNCONDITIONED"```  
+
+  - Else check if building segment is non-residential: ```else if building_segment.lighting_building_area_type:```  
+
+    - For each thermal block in building segment: ```for thermal_block in building_segment.thermal_blocks:```  
+
+    - For each zone in thermal block: ```for zone in thermal_block.zones:```  
+
+      - If zone is directly or indirectly conditioned, classify zone as conditioned non-residential: ```if ( zone in directly_conditioned_zones ) OR ( zone in indirectly_conditioned_zones ): zone_conditioning_category_dict[zone.id] = "CONDITIONED NON-RESIDENTIAL"```
+
+      - Else if zone is semi-heated, classify zone as semi-heated: ```else if zone in semiheated_zones: zone_conditioning_category_dict[zone.id] = "SEMI-HEATED"```
+
+      - Else, classify zone as unconditioned: ```else: zone_conditioning_category_dict[zone.id] = "UNCONDITIONED"```  
+  
+  - Else, building segment uses space-by-space type method, for each thermal block in building segment: ```for thermal_block in building_segment.thermal_blocks:```  
+
+    - For each zone in thermal block: ```for zone in thermal_block.zones:```  
+
+      - If zone is directly or indirectly conditioned: ```if ( zone in directly_conditioned_zones ) OR ( zone in indirectly_conditioned_zones ):```  
+
+        - For each space in zone: ```for space in zone.spaces:```  
+
+          - Check if space is residential: ```if ( space.lighting_space_type ==  "Dormitory - Living Quarters" ) OR ( space.lighting_space_type ==  "Fire Station - Sleeping Quarters" ) OR ( space.lighting_space_type ==  "Guest Room" ) OR ( space.lighting_space_type ==  "Dwelling Unit" ) OR ( space.lighting_space_type ==  "Healthcare Facility - Nursery" ) OR ( space.lighting_space_type ==  "Healthcare Facility - Patient Room" ): residential_flag = TRUE```  
+
+          - Else, space is non-residential: ```else: nonresidential_flag = TRUE```  
+
+        - If zone has both residential and non-residential spaces, classify zone as conditioned mixed: ```if residential_flag AND nonresidential_flag: zone_conditioning_category_dict[zone.id] = "CONDITIONED MIXED"```  
+
+        - Else if zone has only residential spaces, classify zone as conditioned residential: ```else if residential_flag: zone_conditioning_category_dict[zone.id] = "CONDITIONED RESIDENTIAL"```  
+
+        - Else, zone has only non-residential spaces, classify zone as conditioned non-residential: ```else: zone_conditioning_category_dict[zone.id] = "CONDITIONED NON-RESIDENTIAL"```  
+
+      - Else if zone is semi-heated, classify zone as semi-heated: ```else if zone in semiheated_zones: zone_conditioning_category_dict[zone.id] = "SEMI-HEATED"```  
+
+      - Else, classify zone as unconditioned: ```else: zone_conditioning_category_dict[zone.id] = "UNCONDITIONED"```  
+
+**Returns** ```return zone_conditioning_category_dict```  
 
 ## get_surface_conditioning_category
 Description: Determine Surface Conditioning Category for each Surface of all Zones in RMR.  
