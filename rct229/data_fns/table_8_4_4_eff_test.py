@@ -67,6 +67,4 @@ def test__table_8_4_4_eff__with_three_phase_in_range_value():
 
 
 def test__table_8_4_4_eff__with_single_phase_between_values():
-    assert_approx_equal(
-        table_8_4_4_eff(phase=SINGLE_PHASE, kVA=20), (0.977 + 0.98) / 2, significant=4
-    )
+    assert table_8_4_4_eff(phase=SINGLE_PHASE, kVA=20) == (0.977 + 0.98) / 2
