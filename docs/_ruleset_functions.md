@@ -1,11 +1,11 @@
 ## get_zone_conditioning_category
-Description: Determine the Zone Conditioning Category for each zone. This function would cycle through each zone in an RMR and categorize it as ‘conditioned’, 'semi-heated’ or ‘unconditioned’.  If ‘conditioned’ it will also categorize the space as ‘residential’ or ‘non-residential’.  
+Description: Determine the Zone Conditioning Category for each zone. This function would cycle through each zone in an RMR and categorize it as ‘conditioned’, 'semi-heated’, 'unenclosed' or ‘unconditioned’.  If ‘conditioned’ it will also categorize the space as ‘residential’ or ‘non-residential’.  
 
 Inputs:
   - **RMR**: The RMR that needs to determine zone conditioning category.  
 
 Returns:
-- **zone_conditioning_category**: The Zone Conditioning Category [conditioned residential, conditioned non-residential, semi-heated, unconditioned].  
+- **zone_conditioning_category**: The Zone Conditioning Category [conditioned residential, conditioned non-residential, semi-heated, unenclosed, unconditioned].  
 
 
 Logic:  
@@ -34,9 +34,9 @@ Logic:
 
             - If adjacent zone is directly conditioned (heated or cooled), add the product of the U-factor and surface area to the directly conditioned type: ```if adjacent_zone in directly_conditioned_zone: directly_conditioned_product_sum += sum( ( fenestration.glazed_area + fenestration.opaque_area ) * fenestration.u_factor for fenestration in surface.fenestration_subsurfaces ) + ( surface.area - sum( ( fenestration.glazed_area + fenestration.opaque_area ) for fenestration in surface.fenestration_subsurfaces ) * surface.construction.u_factor```  
 
-            - Else, add the product of the U-factor and surface area to the other type (outdoor, semi-heated or unconditioned): ```else: other_product_sum += sum( ( fenestration.glazed_area + fenestration.opaque_area ) * fenestration.u_factor for fenestration in surface.fenestration_subsurfaces ) + ( surface.area - sum( ( fenestration.glazed_area + fenestration.opaque_area ) for fenestration in surface.fenestration_subsurfaces ) * surface.construction.u_factor```  
+            - Else, add the product of the U-factor and surface area to the other type (outdoor, semi-heated, unenclosed or unconditioned): ```else: other_product_sum += sum( ( fenestration.glazed_area + fenestration.opaque_area ) * fenestration.u_factor for fenestration in surface.fenestration_subsurfaces ) + ( surface.area - sum( ( fenestration.glazed_area + fenestration.opaque_area ) for fenestration in surface.fenestration_subsurfaces ) * surface.construction.u_factor```  
 
-          - Else check if surface is exterior, add the product of the U-factor and surface area to the other type (outdoor, semi-heated or unconditioned): ```else if surface.adjacent_to == "EXTERIOR": other_product_sum += sum( ( fenestration.glazed_area + fenestration.opaque_area ) * fenestration.u_factor for fenestration in surface.fenestration_subsurfaces ) + ( surface.area - sum( ( fenestration.glazed_area + fenestration.opaque_area ) for fenestration in surface.fenestration_subsurfaces ) * surface.construction.u_factor```  
+          - Else check if surface is exterior, add the product of the U-factor and surface area to the other type (outdoor, semi-heated, unenclosed or unconditioned): ```else if surface.adjacent_to == "EXTERIOR": other_product_sum += sum( ( fenestration.glazed_area + fenestration.opaque_area ) * fenestration.u_factor for fenestration in surface.fenestration_subsurfaces ) + ( surface.area - sum( ( fenestration.glazed_area + fenestration.opaque_area ) for fenestration in surface.fenestration_subsurfaces ) * surface.construction.u_factor```  
 
         - Determine if zone is indirectly conditioned: ```if directly_conditioned_product_sum > other_product_sum: indirectly_conditioned_zones.append(zone)```  
 
@@ -48,7 +48,11 @@ Logic:
 
         - If zone is directly or indirectly conditioned, classify zone as conditioned residential: ```if ( zone in directly_conditioned_zones ) OR ( zone in indirectly_conditioned_zones ): zone_conditioning_category_dict[zone.id] = "CONDITIONED RESIDENTIAL"```
 
-        - Else if zone is semi-heated, classify zone as semi-heated: ```else if zone in semiheated_zones: zone_conditioning_category_dict[zone.id] = "SEMI-HEATED"```
+        - Else if zone is semi-heated, classify zone as semi-heated: ```else if zone in semiheated_zones: zone_conditioning_category_dict[zone.id] = "SEMI-HEATED"```  
+
+        - Else if zone is crawlspace, classify zone as unenclosed: ```else if ( ( zone.volume / sum( space.floor_area for space in zone.spaces ) ) < 7 ) AND ( ( get_opaque_surface_type(surface) == "FLOOR" ) AND ( surface.adjacent_to == "GROUND" ) for surface in zone.surfaces ): zone_conditioning_category_dict[zone.id] = "UNENCLOSED"```  
+
+        - Else if zone is attic, classify zone as unenclosed: ```else if ( ( get_opaque_surface_type(surface) == "CEILING" ) AND ( surface.adjacent_to == "EXTERIOR" ) for surface in zone.surfaces ): zone_conditioning_category_dict[zone.id] = "UNENCLOSED"```  (Note XC, this might also be unconditioned?)
 
         - Else, classify zone as unconditioned: ```else: zone_conditioning_category_dict[zone.id] = "UNCONDITIONED"```  
 
@@ -60,7 +64,11 @@ Logic:
 
       - If zone is directly or indirectly conditioned, classify zone as conditioned non-residential: ```if ( zone in directly_conditioned_zones ) OR ( zone in indirectly_conditioned_zones ): zone_conditioning_category_dict[zone.id] = "CONDITIONED NON-RESIDENTIAL"```
 
-      - Else if zone is semi-heated, classify zone as semi-heated: ```else if zone in semiheated_zones: zone_conditioning_category_dict[zone.id] = "SEMI-HEATED"```
+      - Else if zone is semi-heated, classify zone as semi-heated: ```else if zone in semiheated_zones: zone_conditioning_category_dict[zone.id] = "SEMI-HEATED"```  
+
+      - Else if zone is crawlspace, classify zone as unenclosed: ```else if ( ( zone.volume / sum( space.floor_area for space in zone.spaces ) ) < 7 ) AND ( ( get_opaque_surface_type(surface) == "FLOOR" ) AND ( surface.adjacent_to == "GROUND" ) for surface in zone.surfaces ): zone_conditioning_category_dict[zone.id] = "UNENCLOSED"```  
+
+      - Else if zone is attic, classify zone as unenclosed: ```else if ( ( get_opaque_surface_type(surface) == "CEILING" ) AND ( surface.adjacent_to == "EXTERIOR" ) for surface in zone.surfaces ): zone_conditioning_category_dict[zone.id] = "UNENCLOSED"```  
 
       - Else, classify zone as unconditioned: ```else: zone_conditioning_category_dict[zone.id] = "UNCONDITIONED"```  
   
@@ -83,6 +91,12 @@ Logic:
         - Else, zone has only non-residential spaces, classify zone as conditioned non-residential: ```else: zone_conditioning_category_dict[zone.id] = "CONDITIONED NON-RESIDENTIAL"```  
 
       - Else if zone is semi-heated, classify zone as semi-heated: ```else if zone in semiheated_zones: zone_conditioning_category_dict[zone.id] = "SEMI-HEATED"```  
+
+      - Else if zone has interior parking spaces, classify zone as unenclosed: ```if（ space.lighting_space_type == "Parking Area, Interior" for space in zone.spaces ）: zone_conditioning_category_dict[zone.id] = "UNENCLOSED"```  
+
+      - Else if zone is crawlspace, classify zone as unenclosed: ```else if ( ( zone.volume / sum( space.floor_area for space in zone.spaces ) ) < 7 ) AND ( ( get_opaque_surface_type(surface) == "FLOOR" ) AND ( surface.adjacent_to == "GROUND" ) for surface in zone.surfaces ): zone_conditioning_category_dict[zone.id] = "UNENCLOSED"```  
+
+      - Else if zone is attic, classify zone as unenclosed: ```else if ( ( get_opaque_surface_type(surface) == "CEILING" ) AND ( surface.adjacent_to == "EXTERIOR" ) for surface in zone.surfaces ): zone_conditioning_category_dict[zone.id] = "UNENCLOSED"```  
 
       - Else, classify zone as unconditioned: ```else: zone_conditioning_category_dict[zone.id] = "UNCONDITIONED"```  
 
