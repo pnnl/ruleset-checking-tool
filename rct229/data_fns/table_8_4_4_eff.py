@@ -66,5 +66,5 @@ def table_8_4_4_eff(phase, kVA):
         ],
     }
 
-    # Divide by 100 to resolve percentage as float between 0 and 1. Round to 4 figures to match Table 8.4.4.
-    return round(strict_list_linear_interpolation(table_lists[phase], kVA) / 100, 4)
+    # Round to 4 figures to match Table 8.4.4.
+    return round(strict_list_linear_interpolation(table_lists[phase], kVA), 4)

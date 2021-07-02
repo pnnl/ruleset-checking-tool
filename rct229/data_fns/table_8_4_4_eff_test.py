@@ -1,6 +1,7 @@
 import pytest
 from numpy.testing import assert_approx_equal
-from table_8_4_4_eff import (
+
+from rct229.data_fns.table_8_4_4_eff import (
     SINGLE_PHASE,
     THREE_PHASE,
     table_8_4_4_eff,
@@ -67,4 +68,4 @@ def test__table_8_4_4_eff__with_three_phase_in_range_value():
 
 
 def test__table_8_4_4_eff__with_single_phase_between_values():
-    assert table_8_4_4_eff(phase=SINGLE_PHASE, kVA=20) == (0.977 + 0.98) / 2
+    assert_approx_equal(table_8_4_4_eff(phase=SINGLE_PHASE, kVA=20), (0.977 + 0.98) / 2)
