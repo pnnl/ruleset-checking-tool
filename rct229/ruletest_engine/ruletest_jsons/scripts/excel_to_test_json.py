@@ -1,3 +1,4 @@
+import copy
 import json
 import math
 import os
@@ -8,8 +9,8 @@ from rct229.ruletest_engine.ruletest_jsons.scripts.json_generation_utilities imp
 
 # ---------------------------------------USER INPUTS---------------------------------------
 
-spreadsheet_name = "envelope_tests_draft.xlsx"
-json_name = "envelope_tests.json"
+spreadsheet_name = "transformer_tests_draft_updated.xlsx"
+json_name = "transformer_tests.json"
 sheet_name = "TCDs"
 
 # --------------------------------------SCRIPT STARTS--------------------------------------
@@ -46,6 +47,9 @@ rules_df = master_df.drop(keys, axis=1)
 # Initiailize dictionary for JSON
 json_dict = {}
 
+# Strings used by triplets
+triplet_strs = ["user", "proposed", "baseline"]
+
 
 # Iterate column by column through values_df
 for (rule_name, columnData) in rules_df.iteritems():
@@ -55,6 +59,9 @@ for (rule_name, columnData) in rules_df.iteritems():
 
     # If rule doesnt exist in dictionary
     if rule_name not in json_dict:
+
+        # Initialize a potential json template used to build any of the RMR triplets
+        rmr_template_dict = {}
 
         # Iterate through both keys and rule values
         for row_i in range(rule_value_list.size):
@@ -88,8 +95,52 @@ for (rule_name, columnData) in rules_df.iteritems():
 
                 add_to_dictionary_list(json_dict, key_list, row_value)
             else:
-                # Set nested dictionary
-                set_nested_dict(json_dict, key_list, row_value)
+
+                # If this is a template definition, store the template for the RMR transformations
+                if "rmr_template" in key_list:
+
+                    set_nested_dict(rmr_template_dict, key_list, row_value)
+
+                else:
+
+                    # Set nested dictionary
+                    set_nested_dict(json_dict, key_list, row_value)
+
+        # Once all dictionaries are set, check if any of the RMR triplets utilize json templates
+        if rmr_template_dict:
+
+            # If no transformations are defined, set an empty dictionary
+            if "rmr_transformations" not in json_dict[rule_name]:
+                json_dict[rule_name]["rmr_transformations"] = {}
+
+            # Read in transformations dictionary. This will perturb a template or fully define an RMR (if no template defined)
+            rmr_transformations_dict = json_dict[rule_name]["rmr_transformations"]
+
+            # Cycle through user, proposed, and baseline RMRs. Merge the template and their transformations
+            for rmr_string in triplet_strs:
+
+                # If this RMR utilizes the RMR template, merge its RMR transformations into the template and set
+                # the RMR dictionary.
+                if rmr_string in rmr_template_dict[rule_name]["rmr_template"]:
+
+                    # If this RMR has no perturbations, set the RMR value equal to the template
+                    if rmr_string not in rmr_transformations_dict:
+                        rmr_transformations_dict[rmr_string] = copy.deepcopy(
+                            rmr_template_dict[rule_name]["rmr_template"][
+                                "json_template"
+                            ]
+                        )
+
+                    # If perturbations to the template exist, merge the transformations with the template
+                    else:
+                        rmr_transformations_dict[rmr_string] = merge_nested_dictionary(
+                            copy.deepcopy(
+                                rmr_template_dict[rule_name]["rmr_template"][
+                                    "json_template"
+                                ]
+                            ),
+                            rmr_transformations_dict[rmr_string],
+                        )
 
 
 # Dump JSON to string for writing

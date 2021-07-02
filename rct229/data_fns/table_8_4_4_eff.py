@@ -66,4 +66,5 @@ def table_8_4_4_eff(phase, kVA):
         ],
     }
 
-    return strict_list_linear_interpolation(table_lists[phase], kVA)
+    # Round to 4 figures to match Table 8.4.4.
+    return round(strict_list_linear_interpolation(table_lists[phase], kVA), 4)

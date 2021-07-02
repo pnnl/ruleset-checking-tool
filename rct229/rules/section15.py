@@ -220,7 +220,7 @@ class Section15Rule5(RuleDefinitionListIndexedBase):
             return {
                 "baseline_transformer_efficiency": context.baseline["efficiency"],
                 "required_baseline_transformer_efficiency": table_8_4_4_eff(
-                    phase=baseline_phase, kVA=baseline_kVA
+                    phase=baseline_transformer_phase, kVA=baseline_transformer_kVA
                 ),
             }
 
