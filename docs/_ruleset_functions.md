@@ -5,7 +5,7 @@ Inputs:
   - **RMR**: The RMR that needs to determine zone conditioning category.  
 
 Returns:
-- **zone_conditioning_category**: The Zone Conditioning Category [conditioned residential, conditioned non-residential, semi-heated, unenclosed, unconditioned].  
+- **zone_conditioning_category**: The Zone Conditioning Category [conditioned residential, conditioned non-residential, conditioned mixed, semi-heated, unenclosed, unconditioned].  
 
 
 Logic:  
@@ -28,17 +28,21 @@ Logic:
 
       - If zone is not directly conditioned (heated or cooled): ```if zone not in directly_conditioned_zones:```  
 
-        - For each surface in zone: ```for surface in zone.surfaces:```  
+        - If any space in zone is atrium, zone is indirectly conditioned:: ```if ( ( space.lighting_space_type == "Atrium, <= 40ft in height" ) OR ( space.lighting_space_type == "Atrium, > 40ft in height" ) for space in zone.spaces ): indirectly_conditioned_zones.append(zone)```  
 
-          - Check if surface is interior, get adjacent zone: ```if surface.adjacent_to == "INTERIOR": adjacent_zone = match_data_element(RMR, zones, surface.adjacent_zone_id)```  
+        - Else, no space in zone is atrium: ```else:```  
 
-            - If adjacent zone is directly conditioned (heated or cooled), add the product of the U-factor and surface area to the directly conditioned type: ```if adjacent_zone in directly_conditioned_zone: directly_conditioned_product_sum += sum( ( fenestration.glazed_area + fenestration.opaque_area ) * fenestration.u_factor for fenestration in surface.fenestration_subsurfaces ) + ( surface.area - sum( ( fenestration.glazed_area + fenestration.opaque_area ) for fenestration in surface.fenestration_subsurfaces ) * surface.construction.u_factor```  
+          - For each surface in zone: ```for surface in zone.surfaces:```  
 
-            - Else, add the product of the U-factor and surface area to the other type (outdoor, semi-heated, unenclosed or unconditioned): ```else: other_product_sum += sum( ( fenestration.glazed_area + fenestration.opaque_area ) * fenestration.u_factor for fenestration in surface.fenestration_subsurfaces ) + ( surface.area - sum( ( fenestration.glazed_area + fenestration.opaque_area ) for fenestration in surface.fenestration_subsurfaces ) * surface.construction.u_factor```  
+            - Check if surface is interior, get adjacent zone: ```if surface.adjacent_to == "INTERIOR": adjacent_zone = match_data_element(RMR, zones, surface.adjacent_zone_id)```  
 
-          - Else check if surface is exterior, add the product of the U-factor and surface area to the other type (outdoor, semi-heated, unenclosed or unconditioned): ```else if surface.adjacent_to == "EXTERIOR": other_product_sum += sum( ( fenestration.glazed_area + fenestration.opaque_area ) * fenestration.u_factor for fenestration in surface.fenestration_subsurfaces ) + ( surface.area - sum( ( fenestration.glazed_area + fenestration.opaque_area ) for fenestration in surface.fenestration_subsurfaces ) * surface.construction.u_factor```  
+              - If adjacent zone is directly conditioned (heated or cooled), add the product of the U-factor and surface area to the directly conditioned type: ```if adjacent_zone in directly_conditioned_zone: directly_conditioned_product_sum += sum( ( fenestration.glazed_area + fenestration.opaque_area ) * fenestration.u_factor for fenestration in surface.fenestration_subsurfaces ) + ( surface.area - sum( ( fenestration.glazed_area + fenestration.opaque_area ) for fenestration in surface.fenestration_subsurfaces ) * surface.construction.u_factor```  
 
-        - Determine if zone is indirectly conditioned: ```if directly_conditioned_product_sum > other_product_sum: indirectly_conditioned_zones.append(zone)```  
+              - Else, add the product of the U-factor and surface area to the other type: ```else: other_product_sum += sum( ( fenestration.glazed_area + fenestration.opaque_area ) * fenestration.u_factor for fenestration in surface.fenestration_subsurfaces ) + ( surface.area - sum( ( fenestration.glazed_area + fenestration.opaque_area ) for fenestration in surface.fenestration_subsurfaces ) * surface.construction.u_factor```  
+
+            - Else check if surface is exterior, add the product of the U-factor and surface area to the other type: ```else if surface.adjacent_to == "EXTERIOR": other_product_sum += sum( ( fenestration.glazed_area + fenestration.opaque_area ) * fenestration.u_factor for fenestration in surface.fenestration_subsurfaces ) + ( surface.area - sum( ( fenestration.glazed_area + fenestration.opaque_area ) for fenestration in surface.fenestration_subsurfaces ) * surface.construction.u_factor```  
+
+          - Determine if zone is indirectly conditioned: ```if directly_conditioned_product_sum > other_product_sum: indirectly_conditioned_zones.append(zone)```  
 
   - Check if building segment is residential: ```if ( building_segment.lighting_building_area_type == "Dormitory" ) OR ( building_segment.lighting_building_area_type == "Hotel/Motel" ) OR ( building_segment.lighting_building_area_type == "Multifamily" ):```  
 
@@ -52,7 +56,7 @@ Logic:
 
         - Else if zone is crawlspace, classify zone as unenclosed: ```else if ( ( zone.volume / sum( space.floor_area for space in zone.spaces ) ) < 7 ) AND ( ( get_opaque_surface_type(surface) == "FLOOR" ) AND ( surface.adjacent_to == "GROUND" ) for surface in zone.surfaces ): zone_conditioning_category_dict[zone.id] = "UNENCLOSED"```  
 
-        - Else if zone is attic, classify zone as unenclosed: ```else if ( ( get_opaque_surface_type(surface) == "CEILING" ) AND ( surface.adjacent_to == "EXTERIOR" ) for surface in zone.surfaces ): zone_conditioning_category_dict[zone.id] = "UNENCLOSED"```  (Note XC, this might also be unconditioned?)
+        - Else if zone is attic, classify zone as unenclosed: ```else if ( ( get_opaque_surface_type(surface) == "CEILING" ) AND ( surface.adjacent_to == "EXTERIOR" ) for surface in zone.surfaces ): zone_conditioning_category_dict[zone.id] = "UNENCLOSED"```  
 
         - Else, classify zone as unconditioned: ```else: zone_conditioning_category_dict[zone.id] = "UNCONDITIONED"```  
 
@@ -103,7 +107,7 @@ Logic:
 **Returns** ```return zone_conditioning_category_dict```  
 
 ## get_surface_conditioning_category
-Description: Determine Surface Conditioning Category for each Surface of all Zones in RMR.  
+Description: This function would cycle through each surface in  a zone and categorize it as exterior res, exterior non res, exterior mixed, semi-exterior or unregulated.  
 
 Inputs:
 
@@ -111,7 +115,7 @@ Inputs:
 
 Returns:
 
-  - **surface_conditioning_category**: The Surface Conditioning Category [conditioned, semi-heated, unregulated].  
+  - **surface_conditioning_category**: The Surface Conditioning Category [exterior residential, exterior non-residential, exterior mixed, semi-exterior, unregulated].  
 
 Logic:  
 
@@ -123,47 +127,65 @@ Logic:
 
     - For each zone in thermal block: ```for zone in thermal_block.zones:```  
 
-      - If zone is conditioned: ```if zone_conditioning_category_dict[zone.id] == "CONDITIONED":```  
+      - If zone is residential and conditioned: ```if zone_conditioning_category_dict[zone.id] == "CONDITIONED RESIDENTIAL":```  
 
         - For each surface in zone: ```for surface in zone.surfaces:```  
 
-          - Check if surface adjacency is exterior or ground, surface is classified as conditioned: ```if ( surface.adjacent_to == "EXTERIOR" ) OR ( surface.adjacent_to == "GROUND" ): surface_conditioning_category_dict[surface.id] = "CONDITIONED"```  
+          - If surface adjacency is exterior, ground or if surface adjacency is interior and the adjacent zone is unenclosed, surface is classified as exterior residential type: ```if ( surface.adjacent_to == "EXTERIOR" ) OR ( surface.adjacent_to == "GROUND" ) OR ( ( surface.adjacent_to == "INTERIOR" ) AND ( zone_conditioning_category_dict[surface.adjacent_zone_id] == "UNENCLOSED" ) ): surface_conditioning_category_dict[surface.id] = "EXTERIOR RESIDENTIAL"```  
 
-          - Else if surface adjacency is interior, get adjacent zone: ```else if surface.adjacent_to == "INTERIOR": adjacent_zone = match_data_element(RMR, zones, surface.adjacent_zone_id)```  
+          - Else if surface adjacency is interior and the adjacent zone is semi-heated or unconditioned, surface is classified as semi-exterior: ```else if ( surface.adjacent_to == "INTERIOR" ) AND ( ( zone_conditioning_category_dict[surface.adjacent_zone_id] == "SEMI-HEATED" ) OR ( zone_conditioning_category_dict[surface.adjacent_zone_id] == "UNCONDITIONED" ) ): surface_conditioning_category_dict[surface.id] = "SEMI-EXTERIOR"```  
 
-            - Check if adjacent zone is conditioned, surface is classified as unregulated: ```if zone_conditioning_category_dict(adjacent_zone) == "CONDITIONED": surface_conditioning_category_dict[surface.id] = "UNREGULATED"```  
+          - Else, surface is unregulated: ```else: surface_conditioning_category_dict[surface.id] = "UNREGULATED"```  
 
-            - Else, adjacent zone is semi-heated or unconditioned, surface is classified as semi-heated: ```else: surface_conditioning_category_dict[surface.id] = "SEMI-HEATED"```  
-
-          - Else, surface adjacency is identical or undefined, surface is classified as unregulated: ```else: surface_conditioning_category_dict[surface.id] = "UNREGULATED"```  
-
-      - Else if zone is semi-heated: ```else if: zone_conditioning_category_dict[zone.id] == "SEMI-HEATED":```  
+      - Else if zone is non-residential and conditioned: ```else if zone_conditioning_category_dict[zone.id] == "CONDITIONED NONRESIDENTIAL":```  
 
         - For each surface in zone: ```for surface in zone.surfaces:```  
 
-          - Check if surface adjacency is exterior or ground, surface is classified as semi-heated: ```if ( surface.adjacent_to == "EXTERIOR" ) OR ( surface.adjacent_to == "GROUND" ): surface_conditioning_category_dict[surface.id] = "SEMI-HEATED"```  
+          - If surface adjacency is exterior, ground or if surface adjacency is interior and the adjacent zone is unenclosed, surface is classified as exterior non-residential type: ```if ( surface.adjacent_to == "EXTERIOR" ) OR ( surface.adjacent_to == "GROUND" ) OR ( ( surface.adjacent_to == "INTERIOR" ) AND ( zone_conditioning_category_dict[surface.adjacent_zone_id] == "UNENCLOSED" ) ): surface_conditioning_category_dict[surface.id] = "EXTERIOR NON-RESIDENTIAL"```  
 
-          - Else if surface adjacency is interior, get adjacent zone: ```else if surface.adjacent_to == "INTERIOR": adjacent_zone = match_data_element(RMR, zones, surface.adjacent_zone_id)```  
+          - Else if surface adjacency is interior and the adjacent zone is semi-heated or unconditioned, surface is classified as semi-exterior: ```else if ( surface.adjacent_to == "INTERIOR" ) AND ( ( zone_conditioning_category_dict[surface.adjacent_zone_id] == "SEMI-HEATED" ) OR ( zone_conditioning_category_dict[surface.adjacent_zone_id] == "UNCONDITIONED" ) ): surface_conditioning_category_dict[surface.id] = "SEMI-EXTERIOR"```  
 
-            - Check if adjacent zone is conditioned or unconditioned, surface is classified as semi-heated: ```if ( zone_conditioning_category_dict(adjacent_zone) == "CONDITIONED" ) OR ( zone_conditioning_category_dict(adjacent_zone) == "UNCONDITIONED" ): surface_conditioning_category_dict[surface.id] = "SEMI-HEATED"```  
+          - Else, surface is unregulated: ```else: surface_conditioning_category_dict[surface.id] = "UNREGULATED"```  
 
-            - Else, adjacent zone is semi-heated, surface is classified as unregulated: ```else: surface_conditioning_category_dict[surface.id] = "UNREGULATED"```  
+      - Else if zone is mixed and conditioned: ```else if zone_conditioning_category_dict[zone.id] == "CONDITIONED MIXED":```  
 
-          - Else, surface adjacency is identical or undefined, surface is classified as unregulated: ```else: surface_conditioning_category_dict[surface.id] = "UNREGULATED"```  
+        - For each surface in zone: ```for surface in zone.surfaces:```  
+
+          - If surface adjacency is exterior, ground or if surface adjacency is interior and the adjacent zone is unenclosed, surface is classified as exterior mixed type: ```if ( surface.adjacent_to == "EXTERIOR" ) OR ( surface.adjacent_to == "GROUND" ) OR ( ( surface.adjacent_to == "INTERIOR" ) AND ( zone_conditioning_category_dict[surface.adjacent_zone_id] == "UNENCLOSED" ) ): surface_conditioning_category_dict[surface.id] = "EXTERIOR MIXED"```  
+
+          - Else if surface adjacency is interior and the adjacent zone is semi-heated or unconditioned, surface is classified as semi-exterior: ```else if ( surface.adjacent_to == "INTERIOR" ) AND ( ( zone_conditioning_category_dict[surface.adjacent_zone_id] == "SEMI-HEATED" ) OR ( zone_conditioning_category_dict[surface.adjacent_zone_id] == "UNCONDITIONED" ) ): surface_conditioning_category_dict[surface.id] = "SEMI-EXTERIOR"```  
+
+          - Else, surface is unregulated: ```else: surface_conditioning_category_dict[surface.id] = "UNREGULATED"```  
+
+      - Else if zone is semi-heated: ```else if zone_conditioning_category_dict[zone.id] == "SEMI-HEATED":```  
+
+        - For each surface in zone: ```for surface in zone.surfaces:```  
+
+          - If surface adjacency is exterior, ground, or if surface adjacency is interior and the adjacent zone is conditioned, unenclosed or unconditioned, surface is classified as semi-exterior: ```if ( surface.adjacent_to == "EXTERIOR" ) OR ( surface.adjacent_to == "GROUND" ) OR ( ( surface.adjacent_to == "INTERIOR" ) AND ( ( zone_conditioning_category_dict[surface.adjacent_zone_id] == "CONDITIONED RESIDENTIAL" ) OR ( zone_conditioning_category_dict[surface.adjacent_zone_id] == "CONDITIONED NON-RESIDENTIAL" ) OR ( zone_conditioning_category_dict[surface.adjacent_zone_id] == "CONDITIONED MIXED" ) OR ( zone_conditioning_category_dict[surface.adjacent_zone_id] == "UNENCLOSED" ) OR ( zone_conditioning_category_dict[surface.adjacent_zone_id] == "UNCONDITIONED" ) ): surface_conditioning_category_dict[surface.id] = "SEMI-EXTERIOR"```  
+
+          - Else, surface is classified as unregulated: ```else: surface_conditioning_category_dict[surface.id] = "UNREGULATED"```  
+
+      - Else if zone is unenclosed: ```else if zone_conditioning_category_dict[zone.id] == "UNENCLOSED":```  
+
+        - For each surface in zone: ```for surface in zone.surfaces:```  
+
+          - If surface adjacency is interior and the adjacent zone is residential and conditioned, surface is classified as exterior residential: ```else if ( surface.adjacent_to == "INTERIOR" ) AND ( zone_conditioning_category_dict[surface.adjacent_zone_id] == "CONDITIONED RESIDENTIAL" ): surface_conditioning_category_dict[surface.id] = "EXTERIOR RESIDENTIAL"```  
+
+          - Else if surface adjacency is interior and the adjacent zone is non-residential and conditioned, surface is classified as exterior non-residential: ```else if ( surface.adjacent_to == "INTERIOR" ) AND ( zone_conditioning_category_dict[surface.adjacent_zone_id] == "CONDITIONED NON-RESIDENTIAL" ): surface_conditioning_category_dict[surface.id] = "EXTERIOR NON-RESIDENTIAL"```  
+
+          - Else if surface adjacency is interior and the adjacent zone is mixed and conditioned, surface is classified as exterior mixed: ```else if ( surface.adjacent_to == "INTERIOR" ) AND ( zone_conditioning_category_dict[surface.adjacent_zone_id] == "CONDITIONED MIXED" ): surface_conditioning_category_dict[surface.id] = "EXTERIOR MIXED"```  
+
+          - Else if surface adjacency is interior and the adjacent zone is semi-heated, surface is classified as semi-exterior: ```else if ( surface.adjacent_to == "INTERIOR" ) AND ( zone_conditioning_category_dict[surface.adjacent_zone_id] == "SEMI-HEATED" ): surface_conditioning_category_dict[surface.id] = "SEMI-EXTERIOR"```  
+
+          - Else, surface is classified as unregulated: ```else: surface_conditioning_category_dict[surface.id] = "UNREGULATED"```  
 
       - Else, zone is unconditioned: ```else:```  
 
-        - For each surface in zone: ```for surface in zone.surfaces:```  
+        - For each surface in zone:  ```for surface in zone.surfaces:```  
 
-          - Check if surface adjacency is exterior or ground, surface is classified as unregulated: ```if ( surface.adjacent_to == "EXTERIOR" ) OR ( surface.adjacent_to == "GROUND" ): surface_conditioning_category_dict[surface.id] = "UNREGULATED"```  
+          - If surface adjacency is interior and the adjacent zone is conditioned or semi-heated, surface is classified as semi-exterior: ```if ( surface.adjacent_to == "INTERIOR" ) AND ( ( zone_conditioning_category_dict[surface.adjacent_zone_id] == "CONDITIONED RESIDENTIAL" ) OR ( zone_conditioning_category_dict[surface.adjacent_zone_id] == "CONDITIONED NON-RESIDENTIAL" ) OR ( zone_conditioning_category_dict[surface.adjacent_zone_id] == "CONDITIONED MIXED" ) OR ( zone_conditioning_category_dict[surface.adjacent_zone_id] == "SEMI-HEATED" ) ): surface_conditioning_category_dict[surface.id] = "SEMI-EXTERIOR"```  
 
-          - Else if surface adjacency is interior, get adjacent zone: ```else if surface.adjacent_to == "INTERIOR": adjacent_zone = match_data_element(RMR, zones, surface.adjacent_zone_id)```  
-
-            - Check if adjacent zone is conditioned or semi-heated, surface is classified as semi-heated: ```if ( zone_conditioning_category_dict(adjacent_zone) == "CONDITIONED" ) OR ( zone_conditioning_category_dict(adjacent_zone) == "SEMI-HEATED" ): surface_conditioning_category_dict[surface.id] = "SEMI-HEATED"```  
-
-            - Else, adjacent zone is unconditioned, surface is classified as unregulated: ```else: surface_conditioning_category_dict[surface.id] = "UNREGULATED"```  
-
-          - Else, surface adjacency is identical or undefined, surface is classified as unregulated: ```else: surface_conditioning_category_dict[surface.id] = "UNREGULATED"```  
+          - Else, surface is classified as unregulated: ```else: surface_conditioning_category_dict[surface.id] = "UNREGULATED"```  
 
 **Returns** ```return surface_conditioning_category_dict```  
 
@@ -174,16 +196,33 @@ Inputs:
   - **Surface**: The surface that needs to determine surface type.  
 
 Returns:
-- **opaque_surface_type**: The Opaque Surface Type [wall, ceiling, floor].  
+- **opaque_surface_type**: The Opaque Surface Type [roof, heated slab-on-grade, unheated slab-on-grade, floor, above-grade wall, below-grade wall, unregulated].  
 
 
 Logic:  
 
-- If surface tilt is more than or equal to 0 degree and less than 60 degrees, surface is classified as ceiling: ```if 0 <= surface.tilt < 60: surface_type == "CEILING"```  
+- If surface tilt is more than or equal to 0 degree and less than 60 degrees, surface is classified as roof: ```if 0 <= surface.tilt < 60:```  
 
-- Else if surface tile is more than 120 degrees and less than or equal to 180 degrees, surface is classified as floor: ```else if 120 < surface.tilt <= 180: surface_type == "FLOOR"```  
+  - Determine if surface is roof: ```if surface.adjacent_to == "EXTERIOR": surface_type = "ROOF"```  
 
-- Else, surface is classified as wall: ```else: surface_type == "WALL"```
+  - Else, surface is unregulated: ```else: surface_type = "UNREGULATED"```  
 
-**Returns** ```return surface_type```
+- Else if surface tile is more than 120 degrees and less than or equal to 180 degrees, surface is classified as floor: ```else if 120 < surface.tilt <= 180:```  
 
+  - Determine if surface is heated slab-on-grade: ```if ( surface.construction.has_radiant_heating ) AND ( surface.adjacent_to == "GROUND" ): surface_type = "HEATED SLAB-ON-GRADE"```  
+
+  - Else determine if surface is unheated slab-on-grade: ```else if surface.adjacent_to == "GROUND": surface_type = "UNHEATED SLAB-ON-GRADE"```  
+
+  - Else determine if surface is exposed floor: ```else if surface.adjacent_to == "EXTERIOR": surface_type = "FLOOR"```  
+
+  - Else, surface is unregulated: ```else: surface_type = "UNREGULATED"```  
+
+- Else, surface is classified as wall: ```else:```  
+
+  - Determine if surface is below grade wall: ```if surface.adjacent_to == "GROUND": surface_type = "BELOW-GRADE WALL"```  
+
+  - Else determine if surface is above grade wall: ```else if surface.adjacent_to == "EXTERIOR": surface_type = "ABOVE-GRADE WALL"```  
+
+  - Else, surface is unregulated: ```else: surface_type = "UNREGULATED"```  
+
+**Returns** ```return surface_type```  
