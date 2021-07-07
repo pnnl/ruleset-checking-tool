@@ -10,16 +10,19 @@ class RuleDefinitionBase:
 
     def __init__(
         self,
+        rmrs_used,
         id=None,
         description=None,
         rmr_context="",
-        rmrs_used=UserBaselineProposedVals(True, True, True),
         required_fields=None,
     ):
         """Base class for all Rule definitions
 
         Parameters
         ----------
+        rmrs_used : UserBaselineProposedVals
+            A trio of boolen values indicating which RMRs are required by the
+            rule
         id : string
             Unique id for the rule
             Usually unspecified for nested rules
@@ -29,10 +32,16 @@ class RuleDefinitionBase:
         rmr_context : string
             A json pointer into each RMR, or RMR fragment, provided to the rule.
             For better human readability, the leading "/" may be ommitted.
-        rmrs_used : UserBaselineProposedVals
-            A trio of boolen values indicating which RMRs are required by the
-            rule
+        required_fields : dict
+            A dictionary of the form
+            {
+                "<json path>": [<required field names>],
+                ...
+            },
+            where the json path should resolve to a list of dectionaries.
+
         """
+        self.rmrs_used = rmrs_used
         self.id = id
         self.description = description
         # rmr_context is a jsonpointer string
@@ -40,7 +49,6 @@ class RuleDefinitionBase:
         # be inserted when the pointer is used in _get_context().
         # Default rm_context is the root of the RMR
         self.rmr_context = to_json_pointer(rmr_context)
-        self.rmrs_used = rmrs_used
         self.required_fields = required_fields
 
     def evaluate(self, rmrs, data=None):
@@ -502,10 +510,13 @@ class RuleDefinitionListBase(RuleDefinitionBase):
     Baseclass for Rule Definitions that apply to each element in a list context.
     """
 
-    def __init__(self, id, description, rmr_context, rmrs_used, each_rule):
+    def __init__(self, rmrs_used, each_rule, id=None, description=None, rmr_context=""):
         self.each_rule = each_rule
         super(RuleDefinitionListBase, self).__init__(
-            id=id, description=description, rmr_context=rmr_context, rmrs_used=rmrs_used
+            rmrs_used=rmrs_used,
+            id=id,
+            description=description,
+            rmr_context=rmr_context,
         )
 
     def create_context_list(self, context, data=None):
@@ -581,6 +592,14 @@ class RuleDefinitionListBase(RuleDefinitionBase):
         for ubp in context_list:
             item_outcome = self.each_rule.evaluate(ubp, data)
 
+            # Set the id for item_outcome
+            if ubp.user and ubp.user["id"]:
+                item_outcome["id"] = ubp.user["id"]
+            elif ubp.baseline and ubp.baseline["id"]:
+                item_outcome["id"] = ubp.baseline["id"]
+            elif ubp.proposed and ubp.proposed["id"]:
+                item_outcome["id"] = ubp.proposed["id"]
+
             # Set the name for item_outcome
             if ubp.user and ubp.user["name"]:
                 item_outcome["name"] = ubp.user["name"]
@@ -601,6 +620,13 @@ class RuleDefinitionListIndexedBase(RuleDefinitionListBase):
 
     Parameters
     ----------
+    rmrs_used : UserBaselineProposedVals
+        A trio of boolen values indicating which RMRs are required by the
+        rule
+    each_rule : RuleDefinitionBase | RuleDefinitionListBase
+        The rule to be applied to each element in the list
+    index_rmr : "user" | "baseline" | "proposed"
+        Indicates the RMR to be indexed over
     id : string
         Unique id for the rule
         Usually unspecified for nested rules
@@ -610,13 +636,6 @@ class RuleDefinitionListIndexedBase(RuleDefinitionListBase):
     rmr_context : string
         A json pointer into each RMR, or RMR fragment, provided to the rule.
         For better human readability, the leading "/" may be ommitted.
-    rmrs_used : UserBaselineProposedVals
-        A trio of boolen values indicating which RMRs are required by the
-        rule
-    each_rule : RuleDefinitionBase | RuleDefinitionListBase
-        The rule to be applied to each element in the list
-    index_rmr : "user" | "baseline" | "proposed"
-        Indicates the RMR to be indexed over
     list_path : string
         A json path string into each RMR fragment that was produced by applying
         rmr_context. The resulting sub-RMR fragments should be the lists to be
@@ -633,12 +652,12 @@ class RuleDefinitionListIndexedBase(RuleDefinitionListBase):
 
     def __init__(
         self,
-        id,
-        description,
-        rmr_context,
         rmrs_used,
         each_rule,
         index_rmr,
+        id=None,
+        description=None,
+        rmr_context="",
         list_path="[*]",
         match_by="id",
     ):
@@ -646,11 +665,11 @@ class RuleDefinitionListIndexedBase(RuleDefinitionListBase):
         self.list_path = list_path
         self.match_by = to_json_pointer(match_by)
         super(RuleDefinitionListIndexedBase, self).__init__(
+            rmrs_used=rmrs_used,
+            each_rule=each_rule,
             id=id,
             description=description,
             rmr_context=rmr_context,
-            rmrs_used=rmrs_used,
-            each_rule=each_rule,
         )
 
     def create_context_list(self, context, data=None):
