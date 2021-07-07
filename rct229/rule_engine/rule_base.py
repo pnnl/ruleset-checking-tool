@@ -1,6 +1,7 @@
 from jsonpointer import resolve_pointer
+
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
-from rct229.utils.json_utils import to_json_pointer
+from rct229.utils.json_utils import slash_prefix_guarantee
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.match_lists import match_lists
 
@@ -48,7 +49,7 @@ class RuleDefinitionBase:
         # As a convenience, any leading '/' should not be included and will
         # be inserted when the pointer is used in _get_context().
         # Default rm_context is the root of the RMR
-        self.rmr_context = to_json_pointer(rmr_context)
+        self.rmr_context = slash_prefix_guarantee(rmr_context)
         self.required_fields = required_fields
 
     def evaluate(self, rmrs, data=None):
@@ -663,7 +664,7 @@ class RuleDefinitionListIndexedBase(RuleDefinitionListBase):
     ):
         self.index_rmr = index_rmr
         self.list_path = list_path
-        self.match_by = to_json_pointer(match_by)
+        self.match_by = slash_prefix_guarantee(match_by)
         super(RuleDefinitionListIndexedBase, self).__init__(
             rmrs_used=rmrs_used,
             each_rule=each_rule,
