@@ -1,10 +1,17 @@
+import copy
 import json
+
+# from jsonpointer import JsonPointer
 import os
 
 from rct229.rule_engine.engine import evaluate_rule
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 from rct229.rules.section15 import *
+from rct229.ruletest_engine.ruletest_jsons.scripts.json_generation_utilities import (
+    merge_nested_dictionary,
+)
 from rct229.schema.validate import validate_rmr
+from rct229.utils.json_utils import slash_prefix_guarantee
 
 
 # Generates the RMR triplet dictionaries from a test_dictionary's "rmr_transformation" element.
@@ -15,51 +22,110 @@ def generate_test_rmrs(test_dict):
     Parameters
     ----------
     test_dict : dict
+        A dictionary including an optional rmr_template field and a
+        required rmr_transformations field.
 
-        Dictionary containing both the required RMR template and RMR transformation elements used to create the
-        RMR dictionary triplets. Includes elements 'rmr_transformations' and
-        'rmr_transformations/user,baseline,proposed'
+        If rmr_template is included, it is used as the starting point
+        for each RMR; if not included, the empty dictionary {} is used.
+
+        The rmr_transformations field has optional user, baseline,
+        and proposed fields. If any of these fields is present, its
+        corresponding RMR will be built by transforming the rmr_template. If
+        the user, baseline, or proposed fields are missing, then its
+        correponding RMR is set to None.
+
+        The transformations are made using jsonpointer and its set method.
+        For example, if rmr_transformations includes
+        {
+            "user": {
+                "ptr1": value1,
+                "ptr2": value2
+            }
+        }
+        then the user RMR will be produced by first treating "ptr1" as a
+        JsonPointer into rmr_template and setting the pointed to node to value1,
+        which can be of any type; and then repeating the process for "ptr2" and
+        value2. Note that the set method of JsonPointer will create any missing
+        fields along the path to the pointer, but will NOT add elements to a
+        list.
 
     Returns
     -------
-    tuple : a tuple containing:
+    tuple : a triplet containing:
         - user_rmr (dictionary): User RMR dictionary built from RMR Transformation definition
         - baseline_rmr (dictionary): Baseline RMR dictionary built from RMR Transformation definition
         - proposed_rmr (dictionary): Proposed RMR dictionary built from RMR Transformation definition
-
-        Returns the three RMR triplets. Order is user, baseline, proposed
     """
 
-    # Read in transformations dictionary. This dictates how RMRs are built.
-    rmr_transformations_dict = test_dict["rmr_transformations"]
+    # The rmr_transformations field is required
+    if "rmr_transformations" not in test_dict:
+        test_dict["rmr_transformations"] = {}
+
+    # Each of these will remain None unless it is specified in
+    # rmr_transformations. If its transfomration is set to {}, then it
+    # will simply be a copy of rmr_template
+    user_rmr = None
+    baseline_rmr = None
+    proposed_rmr = None
 
     # If RMRs are based on a template
     if "rmr_template" in test_dict:
-        template = test_dict["rmr_template"]
 
-        # TODO figure out how to handle templates, none needed yet
-        return None, None, None
+        # Get a copy of the RMR template dictionary
+        rmr_template = test_dict["rmr_template"]
 
-    else:
+        # Initialize user/baseline/proposed RMRs with template if the rmr_template dictionary references them
+        if "user" in rmr_template:
+            user_rmr = copy.deepcopy(rmr_template["json_template"])
 
-        # If RMR template does not exist, then simply use the transformations to populate RMRs
-        user_rmr = (
-            rmr_transformations_dict["user"]
-            if "user" in rmr_transformations_dict
-            else None
-        )
-        baseline_rmr = (
-            rmr_transformations_dict["baseline"]
-            if "baseline" in rmr_transformations_dict
-            else None
-        )
-        proposed_rmr = (
-            rmr_transformations_dict["proposed"]
-            if "proposed" in rmr_transformations_dict
-            else None
-        )
+            if "user" not in test_dict["rmr_transformations"]:
+                test_dict["rmr_transformations"]["user"] = {}
 
-        return user_rmr, baseline_rmr, proposed_rmr
+        if "baseline" in rmr_template:
+            baseline_rmr = copy.deepcopy(rmr_template["json_template"])
+
+            if "baseline" not in test_dict["rmr_transformations"]:
+                test_dict["rmr_transformations"]["baseline"] = {}
+
+        if "proposed" in rmr_template:
+            proposed_rmr = copy.deepcopy(rmr_template["json_template"])
+
+            if "proposed" not in test_dict["rmr_transformations"]:
+                test_dict["rmr_transformations"]["proposed"] = {}
+
+    # Read in transformations dictionary. This will perturb a template or fully define an RMR (if no template defined)
+    rmr_transformations_dict = test_dict["rmr_transformations"]
+
+    # If user/baseline/proposed RMR transformations exist, either update their existing template or set them directly
+    # from RMR transformations
+    if "user" in rmr_transformations_dict:
+
+        # If RMR dictionary is not initialized by a template, initialize it
+        if user_rmr is None:
+            user_rmr = {}
+
+        merge_nested_dictionary(user_rmr, rmr_transformations_dict["user"])
+        # user_rmr.update(rmr_transformations_dict["user"])
+
+    if "baseline" in rmr_transformations_dict:
+
+        # If RMR dictionary is not initialized by a template, initialize it
+        if baseline_rmr is None:
+            baseline_rmr = {}
+
+        merge_nested_dictionary(baseline_rmr, rmr_transformations_dict["baseline"])
+        # baseline_rmr.update(rmr_transformations_dict["baseline"])
+
+    if "proposed" in rmr_transformations_dict:
+
+        # If RMR dictionary is not initialized by a template, initialize it
+        if proposed_rmr is None:
+            proposed_rmr = {}
+
+        merge_nested_dictionary(proposed_rmr, rmr_transformations_dict["proposed"])
+        # proposed_rmr.update(rmr_transformations_dict["proposed"])
+
+    return user_rmr, baseline_rmr, proposed_rmr
 
 
 def evaluate_outcome(outcome):
@@ -138,9 +204,11 @@ def process_test_result(test_result, test_dict, test_id):
     if received_expected_outcome:
 
         if test_result:
-            outcome_text = f"SUCCESS: Test {test_id} passed as expected. The following condition was identified: {description}"
+            # f"SUCCESS: Test {test_id} passed as expected. The following condition was identified: {description}"
+            outcome_text = None
         else:
-            outcome_text = f"SUCCESS: Test {test_id} failed as expected. The following condition was identified: {description}"
+            # f"SUCCESS: Test {test_id} failed as expected. The following condition was identified: {description}"
+            outcome_text = None
 
     else:
 
@@ -257,7 +325,9 @@ def run_section_tests(test_json_name):
                 )
 
                 # Append results
-                test_result_strings.append(outcome_text)
+                if outcome_text is not None:
+                    test_result_strings.append(outcome_text)
+
                 test_results.append(received_expected_outcome)
 
             # If a single result, check the result
@@ -267,13 +337,20 @@ def run_section_tests(test_json_name):
                 outcome_text, received_expected_outcome = process_test_result(
                     test_result, test_dict, test_id
                 )
-                test_result_strings.append(outcome_text)
+
+                # Append results
+                if outcome_text is not None:
+                    test_result_strings.append(outcome_text)
+
                 test_results.append(received_expected_outcome)
 
     # Print results to console
-    for test_result_string in test_result_strings:
+    if len(test_result_strings) == 0:
+        print("All tests passed!")
+    else:
+        for test_result_string in test_result_strings:
 
-        print(test_result_string)
+            print(test_result_string)
 
     # Return whether or not all tests received their expected outcome as a boolean
     all_tests_successful = all(test_results)
@@ -354,3 +431,18 @@ def run_transformer_tests():
     transformer_rule_json = "transformer_tests.json"
 
     return run_section_tests(transformer_rule_json)
+
+
+def run_lighting_tests():
+    """Runs all tests found in the lighting tests JSON.
+
+    Returns
+    -------
+    None
+
+    Results of lighting test are spit out to console
+    """
+
+    lighting_test_json = "lighting_tests.json"
+
+    return run_section_tests(lighting_test_json)

@@ -1,15 +1,11 @@
 import pytest
-from json_utils import to_json_pointer
+from json_utils import slash_prefix_guarantee
 
 
 # Testing slash_prefix_guarantee
-def test__to_json_pointer__with_slash():
-    assert to_json_pointer("/pointer") == "/pointer"
+def test__slash_prefix_guarantee__with_slash():
+    assert slash_prefix_guarantee("/pointer") == "/pointer"
 
 
-def test__to_json_pointer__without_slash():
-    assert to_json_pointer("pointer") == "/pointer"
-
-
-def test__to_json_pointer__without_empty_string():
-    assert to_json_pointer("") == ""
+def test__slash_prefix_guarantee__without_slash():
+    assert slash_prefix_guarantee("pointer") == "/pointer"
