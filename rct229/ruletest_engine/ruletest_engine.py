@@ -7,6 +7,7 @@ import os
 from rct229.rule_engine.engine import evaluate_rule
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 from rct229.rules.section15 import *
+from rct229.rules.section6 import *
 from rct229.ruletest_engine.ruletest_jsons.scripts.json_generation_utilities import (
     merge_nested_dictionary,
 )
