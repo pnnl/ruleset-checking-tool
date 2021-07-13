@@ -1,5 +1,4 @@
 from jsonpointer import resolve_pointer
-
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 from rct229.utils.json_utils import slash_prefix_guarantee
 from rct229.utils.jsonpath_utils import find_all
@@ -560,10 +559,8 @@ class RuleDefinitionListBase(RuleDefinitionBase):
 
         Returns
         -------
-        UserBaselineProposedVals
-            Object containing the contexts for the user, baseline, and proposed
-            RMRs; an RMR's context is set to None if the corresponding flag
-            in self.rmrs_used is not set
+        any
+            The data object to pass on to the list rule
         """
         return data
 
