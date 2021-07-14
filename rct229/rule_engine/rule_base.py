@@ -700,6 +700,7 @@ class RuleDefinitionListIndexedBase(RuleDefinitionListBase):
         index_rmr = self.index_rmr
         rmrs_used = self.rmrs_used
         match_by = self.match_by
+        list_path = self.list_path
 
         # The index RMR must be either user, baseline, or proposed
         if index_rmr not in ["user", "baseline", "proposed"]:
@@ -707,17 +708,17 @@ class RuleDefinitionListIndexedBase(RuleDefinitionListBase):
 
         # The index RMR must be used
         if (
-            (index_rmr == "user" and not self.rmrs_used.user)
-            or (index_rmr == "baseline" and not self.rmrs_used.baseline)
-            or (index_rmr == "proposed" and not self.rmrs_used.proposed)
+            (index_rmr == "user" and not rmrs_used.user)
+            or (index_rmr == "baseline" and not rmrs_used.baseline)
+            or (index_rmr == "proposed" and not rmrs_used.proposed)
         ):
-            raise ValueError(CONTEXT_NOT_LIST)
+            raise ValueError(UNUSED_INDEX_RMR_MSG)
 
         # Get the list contexts
         list_trio = UserBaselineProposedVals(
-            find_all(self.list_path, context.user) if rmrs_used.user else None,
-            find_all(self.list_path, context.baseline) if rmrs_used.baseline else None,
-            find_all(self.list_path, context.proposed) if rmrs_used.proposed else None,
+            find_all(list_path, context.user) if rmrs_used.user else None,
+            find_all(list_path, context.baseline) if rmrs_used.baseline else None,
+            find_all(list_path, context.proposed) if rmrs_used.proposed else None,
         )
 
         # # This implementation assumes the used lists contexts are in fact lists
