@@ -1,4 +1,5 @@
 from numpy import sum
+
 from rct229.data.schema_enums import schema_enums
 from rct229.rule_engine.rule_base import (
     RuleDefinitionBase,
