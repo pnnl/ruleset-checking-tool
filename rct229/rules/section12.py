@@ -89,18 +89,18 @@ class Section12Rule3(RuleDefinitionListIndexedBase):
     def __init__(self):
         super(Section12Rule3, self).__init__(
             rmrs_used=UserBaselineProposedVals(True, False, True),
-            each_rule=Section12Rule2.BuildingRule(),
+            each_rule=Section12Rule3.BuildingRule(),
             index_rmr="user",
             id="12-3",
             description=("User RMR Space ID in Proposed RMR"),
             rmr_context="buildings",
         )
 
-    class BuildingRule(RuleDefinitionBase):
+    class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section12Rule3.BuildingRule, self).__init__(
                 rmrs_used=UserBaselineProposedVals(True, False, True),
-                each_rule=Section15Rule3.SpaceRule(),
+                each_rule=Section12Rule3.BuildingRule.SpaceRule(),
                 index_rmr="user",
                 list_path="$..spaces[*]",  # All spaces in the buliding
             )
