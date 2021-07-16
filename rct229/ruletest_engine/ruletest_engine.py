@@ -6,8 +6,8 @@ import os
 
 from rct229.rule_engine.engine import evaluate_rule
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
-from rct229.rules.section15 import *
 from rct229.rules.section6 import *
+from rct229.rules.section15 import *
 from rct229.ruletest_engine.ruletest_jsons.scripts.json_generation_utilities import (
     merge_nested_dictionary,
 )
@@ -129,12 +129,12 @@ def generate_test_rmrs(test_dict):
     return user_rmr, baseline_rmr, proposed_rmr
 
 
-def evaluate_outcome(outcome):
+def evaluate_outcome_enumeration_str(outcome_enumeration_str):
     """Returns a boolean for whether a rule passed/failed based on the outcome string enumeration
 
     Parameters
     ----------
-    outcome : str
+    outcome_enumeration_str : str
 
         String equal to a set of predetermined enumerations for rule outcomes. These enumerations describe things such
         as whether a test passed, failed, required manual check, etc.
@@ -146,19 +146,22 @@ def evaluate_outcome(outcome):
         Boolean describing whether the rule should be treated as passing or failing. Pass = True, Fail = False
     """
 
-    # Check result of rule evaluation against known string constants (TODO: write out these constants to new file)
-    if outcome == "PASSED":
+    # Check result of rule evaluation against known string constants
+    # (TODO: these constants should be stored elsewhere rather than called directly)
+    if outcome_enumeration_str == "PASSED":
         test_result = True
-    elif outcome == "FAILED":
+    elif outcome_enumeration_str == "FAILED":
         test_result = False
-    elif outcome == "MANUAL_CHECK_REQUIRED":
+    elif outcome_enumeration_str == "MANUAL_CHECK_REQUIRED":
         test_result = False
-    elif outcome == "MISSING_CONTEXT":
+    elif outcome_enumeration_str == "MISSING_CONTEXT":
         test_result = False
-    elif outcome == "NA":
+    elif outcome_enumeration_str == "NA":
         test_result = False
     else:
-        test_result = "TODO: Raise error"
+        raise ValueError(
+            f"OUTCOME: The enumeration {outcome_enumeration_str} does not have a test result interpretation."
+        )
 
     return test_result
 
@@ -243,16 +246,24 @@ def run_section_tests(test_json_name):
         os.path.dirname(__file__), "ruletest_jsons", test_json_name
     )
 
-    title_text = f"TESTS RESULTS FOR: {test_json_name}".center(50)
-    test_result_strings = [
+    # hash for capturing test results. Keys include: "results, log"
+    test_result_dict = {}
+    test_result_dict["results"] = []
+
+    # Flag checking if all tests succeed. Ensures a message gets printed if so.
+    all_tests_pass = True
+
+    # Print banner messages
+    banner_text = f"TESTS RESULTS FOR: {test_json_name}".center(50)
+    banner = [
         "-----------------------------------------------------------------------------------------",
-        f"--------------------{title_text}-------------------",
+        f"--------------------{banner_text}-------------------",
         "-----------------------------------------------------------------------------------------",
         "",
     ]
 
-    # List capturing all outcomes of the test_json being passed in
-    test_results = []
+    for line in banner:
+        print(line)
 
     # Open
     with open(test_json_path) as f:
@@ -275,15 +286,23 @@ def run_section_tests(test_json_name):
         # Construction function name for Section and rule
         function_name = f"Section{section}Rule{rule}"
 
+        test_result_dict["log"] = []  # Initialize log for this test result
+        test_result_dict[
+            f"{test_id}"
+        ] = []  # Initialize log of this tests multiple results
+        print_errors = False
+
         # Pull in rule, if written. If not found, fail the test and log which Section and Rule could not be found.
         try:
             rule = globals()[function_name]()
         except KeyError:
-            outcome_text = f"RULE NOT FOUND: {function_name}"
-            test_result_strings.append(outcome_text)
+
+            # Print message communicating that a rule cannot be found
+            print(f"RULE NOT FOUND: {function_name}. Cannot test {test_id}")
 
             # Append failed message to rule
-            test_results.append(False)
+            test_result_dict["results"].append(False)
+            all_tests_pass = False
             continue
 
         # Evaluate rule and check for invalid RMRs
@@ -293,68 +312,65 @@ def run_section_tests(test_json_name):
         # If invalid RMRs exist, fail this rule and append failed message
         if len(invalid_rmrs_dict) != 0:
 
-            # Find which RMRs were invalid and add them to test_result_strings
+            # Find which RMRs were invalid
             for invalid_rmr, invalid_rmr_message in invalid_rmrs_dict.items():
 
-                outcome_text = f"INVALID SCHEMA: Test {test_id}: {invalid_rmr} RMR: {invalid_rmr_message}"
-                test_result_strings.append(outcome_text)
+                # Print message communicating that the schema is invalid
+                print(
+                    f"INVALID SCHEMA: Test {test_id}: {invalid_rmr} RMR: {invalid_rmr_message}"
+                )
 
             # Append failed message to rule
-            test_results.append(False)
+            test_result_dict["results"].append(False)
+            all_tests_pass = False
 
         # If RMRs are valid, check their outcomes
         else:
 
-            outcome_result = evaluation_dict["outcomes"][0]["result"]
+            # Check the evaluation dictionary "outcomes" element
+            # NOTE: The outcome structure can either be a string for a single result or a list of dictionaries with
+            # multiple results based on the Rule being tested.
+            outcome_structure = evaluation_dict["outcomes"][0]
 
-            # If outcome result is a list of results (i.e. many elements get tested), check each against expected result
-            if isinstance(outcome_result, list):
+            # Update test_results_dict "log" and f"{test_id}" keys.
+            # -The "log" element contains a list string describing errors, if any.
+            # -The f"{test_id} element contains a list of booleans describing whether or not each testable element in
+            #  outcome structure met the expected outcome for this test_id
+            evaluate_outcome_object(
+                outcome_structure, test_result_dict, test_dict, test_id
+            )
 
-                outcome_result_list = []
+            # Check set of results for this test ID against expected outcome
+            if test_dict["expected_rule_outcome"] == "pass":
 
-                # Iterate through each outcome in outcome results
-                for outcome in outcome_result:
-                    # Append test result for this outcome
-                    outcome_result_list.append(evaluate_outcome(outcome["result"]))
+                # For an expected pass, ALL tested elements in the RMR triplet must pass
+                if not all(test_result_dict[f"{test_id}"]):
 
-                # Checks that ALL tests pass in test_results. If any fail, the test fails
-                test_result = all(outcome_result_list)
+                    print_errors = True
 
-                # Write outcome text based and "receive_expected_outcome" boolean based on the test result
-                outcome_text, received_expected_outcome = process_test_result(
-                    test_result, test_dict, test_id
-                )
+            elif test_dict["expected_rule_outcome"] == "fail":
 
-                # Append results
-                if outcome_text is not None:
-                    test_result_strings.append(outcome_text)
+                # If all elements don't meet the expected outcome, flag this as an error
+                if not any(test_result_dict[f"{test_id}"]):
+                    print_errors = True
 
-                test_results.append(received_expected_outcome)
+            # If errors were found, communicate the error logs
+            if print_errors:
 
-            # If a single result, check the result
-            else:
+                all_tests_pass = False
 
-                test_result = evaluate_outcome(outcome_result)
-                outcome_text, received_expected_outcome = process_test_result(
-                    test_result, test_dict, test_id
-                )
-
-                # Append results
-                if outcome_text is not None:
-                    test_result_strings.append(outcome_text)
-
-                test_results.append(received_expected_outcome)
+                # Print log of all errors
+                for test_result_string in test_result_dict["log"]:
+                    print(test_result_string)
 
     # Print results to console
-    if len(test_result_strings) == 0:
+    if all_tests_pass:
         print("All tests passed!")
-    else:
-        for test_result_string in test_result_strings:
 
-            print(test_result_string)
+    print("")  # Buffer line
 
-    # Return whether or not all tests received their expected outcome as a boolean
-    all_tests_successful = all(test_results)
+    # Return whether or not all tests in this test JSON received their expected outcome as a boolean
+    all_tests_successful = all(test_result_dict["results"])
 
     return all_tests_successful
 
@@ -417,6 +433,87 @@ def validate_test_json_schema(test_json_path):
             print(failure)
 
         return False
+
+
+def evaluate_outcome_object(outcome_dict, test_result_dict, test_dict, test_id):
+    """Evaluates the outcome of an evaluate_rule function call (can be either a dictionary or a list), comparing it
+    against the expected outcome for  given rule test. Results populate the "log" and "test_id" keys in the
+    test_result_dict dictionary.
+
+    Parameters
+    ----------
+    outcome_dict : list or dict
+
+       The evaluate_rule function returns a dictionary with an "outcome" key. This is an instance of the object
+       contained in that dictionary.
+
+    test_result_dict: dict
+
+        Dictionary used to log errors and aggregate the test results for a given outcome_dict. Updating this dictionary
+        is the chief purpose of this function. Most notably the test_result_dict[f"{test_id}"] element is populated with
+        a list of booleans describing whether or not the elements of the outcome_dict meet the expected outcome described
+        in test_dict.
+
+    test_dict: dict
+
+       Dictionary containing the rule test RMR triplets, expected outcome, and description information for the ruletest
+       being tested against
+
+    test_id: str
+       String describing the particular section, rule, and test case for a given rule test (e.g., rule-6-1-a)
+
+
+    """
+
+    # If the result key is a list of results (i.e. many elements get tested), keep drilling down until you get single
+    # dictionary
+    if isinstance(outcome_dict["result"], list):
+
+        # Iterate through each outcome in outcome results recursively until you get down to individual results
+        for nested_outcome in outcome_dict["result"]:
+
+            # Check outcome of each in list recursively until "result" key is not a list, but a dictionary
+            evaluate_outcome_object(
+                nested_outcome, test_result_dict, test_dict, test_id
+            )  # , outcome_result_list)
+
+    else:
+
+        # Process this tests results
+        outcome_enumeration_str = outcome_dict[
+            "result"
+        ]  # enumeration for result (e.g., PASS, FAIL, CONTEXT_MISSING)
+
+        # Evaluate whether Rule passes or fails, a boolean
+        rule_passed = evaluate_outcome_enumeration_str(outcome_enumeration_str)
+
+        # Write outcome text based and "receive_expected_outcome" boolean based on the test result
+        outcome_text, received_expected_outcome = process_test_result(
+            rule_passed, test_dict, test_id
+        )
+
+        # Append results if expected outcome not received
+        if not received_expected_outcome:
+
+            # Describe failure if not yet included in log
+            if outcome_text not in test_result_dict["log"]:
+                test_result_dict["log"].append(outcome_text)
+
+            # Context for the result (e.g., "Space 1"), if included
+            outcome_result_context = (
+                outcome_dict["name"] if "name" in outcome_dict else "Unknown context"
+            )
+
+            # Dictionary of calculated values converted to string
+            outcome_calc_vals_string = (
+                str(outcome_dict["calc_vals"]) if "calc_vals" in outcome_dict else "N/A"
+            )
+
+            test_result_dict["log"].append(
+                f"{outcome_result_context}: Calculated values - {outcome_calc_vals_string}"
+            )
+
+        test_result_dict[f"{test_id}"].append(received_expected_outcome)
 
 
 def run_transformer_tests():

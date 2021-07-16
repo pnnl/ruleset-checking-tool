@@ -13,5 +13,5 @@ def slash_prefix_guarantee(str):
         already start with one
     """
     slash_str = str if len(str) == 0 or str[0] is "/" else "/" + str
-    #print("slash_str:", slash_str)
+    # print("slash_str:", slash_str)
     return slash_str
