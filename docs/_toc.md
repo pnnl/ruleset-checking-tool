@@ -116,7 +116,7 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
 ## Section 6 - Lighting
   * [6-1](section6/Rule6-1.md): Proposed building interior lighting power should be equal to user building interior lighting power
   * [6-2](section6/Rule6-2.md): Proposed building interior lighting power shall not exceel total interior lighting power allowance determined using either G3.7 or G3.8
-  * 6-3: Spaces in proposed building with hardwired lighting, including Hotel/Motel Guest Rooms, Dormitory Living Quarters, Dwelling Units, interior lighting power >= Table 9.6.1. 
+  * [6-3](section6/Rule6-3.md): Spaces in proposed building with hardwired lighting, including Hotel/Motel Guest Rooms, Dormitory Living Quarters interior lighting power >= Table 9.6.1. and Interior lighting power for  'Dwelling Units' space type in the proposed building shall be >= 0.60 W/ft2.
   * 6-4: Interior lighting power for  'Dwelling Units' space type in the proposed building shall be >= 0.60 W/ft2
   * 6-5: Where a complete lighting system exists, the actual lighting power for each thermal block shall be used in he model. 
   * 6-6: Where a lighting system has been designed and submitted with design documents, lighting power shall be determined in accordance with Sections 9.1.3 and 9.1.4. 
