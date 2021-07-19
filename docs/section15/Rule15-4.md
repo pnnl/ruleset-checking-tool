@@ -1,16 +1,20 @@
 # Transformers - Rule 15-4
 **Rule ID:** Rule 15-4  
-**Description:** User RMR transformer Name in Baseline RMR  
+**Rule Description:** User RMR transformer Name in Baseline RMR  
+**Rule Assertion:** Baseline RMR = expected value  
 **Appendix G Section:** Transformers  
 **Appendix G Section Reference:** None  
-**Applicability:** Number of U_RMR.transformers > 0  
-**Manual Check:** None  
-**Evaluation Context:**  Each Data Element   
 **Data Lookup:** None  
-**Determining Expected Value:**
-- Get list of Baseline transformer names: `for transformer in B_RMR.building.transformers: baseline_transformer_names = transformer.name`
+**Evaluation Context:**  Each Data Element   
+**Applicability Checks:** None  
+**Manual Checks:** None  
 
-**Rule Assertion:**
-- For each User transformer: `for transformer in U_RMR.transformers: transformer.name in baseline_transformer_names`
+## Rule Logic:
+- Get list of Baseline transformer names: `_baseline_transformer_names = [ _baseline_transformer.name for _baseline_transformer in B_RMR.transformers ]`
+- For each transformer `_user_transformer` in `U_RMR.transformers`:
+    - **Rule Assertion:** `_user_tranformer.name in _baseline_transformer_names`
+
+## TCD Diagram
+<img src="../diagrams/Section15.png">
 
 **[Back](../_toc.md)**
