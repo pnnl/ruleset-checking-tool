@@ -560,10 +560,8 @@ class RuleDefinitionListBase(RuleDefinitionBase):
 
         Returns
         -------
-        UserBaselineProposedVals
-            Object containing the contexts for the user, baseline, and proposed
-            RMRs; an RMR's context is set to None if the corresponding flag
-            in self.rmrs_used is not set
+        any
+            The data object to pass on to the list rule
         """
         return data
 
@@ -703,6 +701,7 @@ class RuleDefinitionListIndexedBase(RuleDefinitionListBase):
         index_rmr = self.index_rmr
         rmrs_used = self.rmrs_used
         match_by = self.match_by
+        list_path = self.list_path
 
         # The index RMR must be either user, baseline, or proposed
         if index_rmr not in ["user", "baseline", "proposed"]:
@@ -710,26 +709,30 @@ class RuleDefinitionListIndexedBase(RuleDefinitionListBase):
 
         # The index RMR must be used
         if (
-            (index_rmr == "user" and not self.rmrs_used.user)
-            or (index_rmr == "baseline" and not self.rmrs_used.baseline)
-            or (index_rmr == "proposed" and not self.rmrs_used.proposed)
+            (index_rmr == "user" and not rmrs_used.user)
+            or (index_rmr == "baseline" and not rmrs_used.baseline)
+            or (index_rmr == "proposed" and not rmrs_used.proposed)
+        ):
+            raise ValueError(UNUSED_INDEX_RMR_MSG)
+
+        # Get the list contexts
+        user_list = find_all(list_path, context.user) if rmrs_used.user else None
+        baseline_list = (
+            find_all(list_path, context.baseline) if rmrs_used.baseline else None
+        )
+        proposed_list = (
+            find_all(list_path, context.proposed) if rmrs_used.proposed else None
+        )
+
+        # This implementation assumes the used lists contexts are in fact lists
+        if (
+            (rmrs_used.user and not isinstance(user_list, list))
+            or (rmrs_used.baseline and not isinstance(baseline_list, list))
+            or (rmrs_used.proposed and not isinstance(proposed_list, list))
         ):
             raise ValueError(CONTEXT_NOT_LIST)
 
-        # Get the list contexts
-        list_trio = UserBaselineProposedVals(
-            find_all(self.list_path, context.user) if rmrs_used.user else None,
-            find_all(self.list_path, context.baseline) if rmrs_used.baseline else None,
-            find_all(self.list_path, context.proposed) if rmrs_used.proposed else None,
-        )
-
-        # # This implementation assumes the used lists contexts are in fact lists
-        # if (
-        #     (rmrs_used.user and not isinstance(list_context_trio.user, list))
-        #     or (rmrs_used.baseline and not isinstance(list_context_trio.baseline, list))
-        #     or (rmrs_used.proposed and not isinstance(list_context_trio.proposed, list))
-        # ):
-        #     raise ValueError(CONTEXT_NOT_LIST)
+        list_trio = UserBaselineProposedVals(user_list, baseline_list, proposed_list)
 
         user_list = None
         baseline_list = None
