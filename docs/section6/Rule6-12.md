@@ -2,7 +2,7 @@
 # Lighting - Rule 6-12
 
 **Rule ID:** 6-12  
-**Rule Description:** Proposed building is modeled with dayligthing controls  
+**Rule Description:** Proposed building is modeled with daylighting controls  
 **Appendix G Section:** Section G3.1-6(h) Lighting: Modeling Requirements for the Proposed design  
 **Appendix G Section Reference:**  
 
