@@ -1,4 +1,4 @@
-#from rct229.rules.rule_section1 import section1_rule1
+# from rct229.rules.rule_section1 import section1_rule1
 
 # content of test_assert1.py
 def f():
@@ -7,6 +7,7 @@ def f():
 
 def test_function():
     assert f() == 4
+
 
 """
 def test_rule1_section1_fails_if_wwr_high():
