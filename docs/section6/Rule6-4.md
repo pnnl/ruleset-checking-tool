@@ -21,6 +21,10 @@
 
       - For each space in zone: ```space_p in zone_p.spaces:```  
 
-        - Check if status_type is existing: ```if space_p.status_type == "EXISTING":```
+        - Get interior lighting in U_RMR: ```interior_lighting_b = match_data_element(U_RMR, InteriorLightings, space_p.interior_lighting.id)```
 
-          **Rule Assertion:** Lighting power in the proposed RMR is as existing and cannot be verified by RCT: ```CAUTION```
+          **Rule Assertion:** 
+
+          - Case 1: Lighting power in the proposed RMR matches U_RMR and cannot be verified by RCT: ```if space_p.interior_lighting == interior_lighting_b: CAUTION```
+
+          - Case 2: Lighting power in the proposed RMR does not match U_RMR: ```else: FAIL```
