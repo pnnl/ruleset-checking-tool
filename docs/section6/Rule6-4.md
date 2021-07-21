@@ -25,6 +25,6 @@
 
           **Rule Assertion:** 
 
-          - Case 1: Lighting power in the proposed RMR matches U_RMR and cannot be verified by RCT: ```if space_p.interior_lighting == interior_lighting_b: CAUTION```
+          - Case 1: Lighting power in the proposed RMR is as existing and cannot be verified by RCT: ```if space_p.interior_lighting == interior_lighting_b: CAUTION```
 
           - Case 2: Lighting power in the proposed RMR does not match U_RMR: ```else: FAIL```
