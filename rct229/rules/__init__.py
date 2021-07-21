@@ -7,6 +7,7 @@ import rct229.rules as rules
 # Add all available rule modules in __all__
 __all__ = [
     "section6",
+    "section12",
     "section15",
 ]
 

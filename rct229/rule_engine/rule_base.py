@@ -87,7 +87,6 @@ class RuleDefinitionBase:
                     a list-type rule
             }
         """
-
         # Initialize the outcome dictionary
         outcome = {}
         if self.id:
@@ -203,7 +202,6 @@ class RuleDefinitionBase:
         """
 
         context = self._get_context(rmrs)
-
         missing_contexts = []
         if self.rmrs_used.user and context.user is None:
             missing_contexts.append("USER")
@@ -744,7 +742,7 @@ class RuleDefinitionListIndexedBase(RuleDefinitionListBase):
                     list_trio.user, list_trio.baseline, match_by
                 )
             if rmrs_used.proposed:
-                matched_lists = match_lists(
+                proposed_list = match_lists(
                     list_trio.user, list_trio.proposed, match_by
                 )
 
@@ -754,7 +752,7 @@ class RuleDefinitionListIndexedBase(RuleDefinitionListBase):
             context_list_len = len(baseline_list)
             if rmrs_used.user:
                 user_list = match_lists(list_trio.baseline, list_trio.user, match_by)
-            elif rmrs_used.proposed:
+            if rmrs_used.proposed:
                 proposed_list = match_lists(
                     list_trio.baseline, list_trio.proposed, match_by
                 )
@@ -765,7 +763,7 @@ class RuleDefinitionListIndexedBase(RuleDefinitionListBase):
             context_list_len = len(proposed_list)
             if rmrs_used.user:
                 user_list = match_lists(list_trio.proposed, list_trio.user, match_by)
-            elif rmrs_used.baseline:
+            if rmrs_used.baseline:
                 baseline_list = match_lists(
                     list_trio.proposed, list_trio.baseline, match_by
                 )
