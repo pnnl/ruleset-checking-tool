@@ -21,11 +21,11 @@
 
     - Get lighting power allowance: ```lighting_allowance_p = data_lookup(table_G3_8, building_segment_p.lighting_building_area_type)```  
 
-    - Get thermal_block from building segment: ```thermal_block_p in building_segment_p.thermal_blocks:```  
+    - For each thermal_block in building segment: ```thermal_block_p in building_segment_p.thermal_blocks:```  
 
-      - Get zone from thermal block: ```zone in thermal_block_p.zones:```  
+      - For each zone in thermal block: ```zone in thermal_block_p.zones:```  
 
-        - Get space from thermal zone: ```space in zone_p.spaces:```  
+        - For each space in thermal zone: ```space in zone_p.spaces:```  
 
           - Get interior lighting in space: ```interior_lighting_p = space.interior_lighting```  
 
