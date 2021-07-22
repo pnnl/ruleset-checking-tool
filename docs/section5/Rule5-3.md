@@ -15,7 +15,7 @@
 
 ## Rule Logic:  
 
-- Get surface conditioning category dictionary for B_RMR: ```scc_dictionary = get_surface_conditioning_category(B_RMR)```
+- Get surface conditioning category dictionary for B_RMR: ```scc_dictionary_b = get_surface_conditioning_category(B_RMR)```
 
 - For each building segment in the Baseline model: ```for building_segment_b in B_RMR.building.building_segments:```  
 
@@ -25,7 +25,7 @@
 
       - For each surface in zone, get surface type, ```for surface_b in zone_b.surfaces:```  
 
-        - If surface is roof or ceiling and is regulated, get surface construction: ```if ( get_opaque_surface_type(surface_b) == "ROOF" ) AND ( scc_dictionary[surface_b.id] != UNREGULATED ): construction_b = surface_b.construction```
+        - If surface is roof or ceiling and is regulated, get surface construction: ```if ( ( get_opaque_surface_type(surface_b) == "ROOF" ) AND ( scc_dictionary_b[surface_b.id] != UNREGULATED ) ): construction_b = surface_b.construction```
 
           **Rule Assertion:**  
 
