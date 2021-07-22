@@ -27,6 +27,6 @@
 
           **Rule Assertion:**  
 
-          Case 1: Surface U-factor in P_RMR matches U-RMR: ```if surface_p.construction.u_factor == surface_u.construction.u_factor: PASS```  
+          Case 1: Surface U-factor in P_RMR matches U_RMR: ```if surface_p.construction.u_factor == surface_u.construction.u_factor: PASS```  
 
           Case 2: Else: ```else: FAIL```  
