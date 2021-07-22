@@ -4,7 +4,7 @@
 **Rule ID:** 6-2  
 **Rule Description:** The total building interior lighting power shall not exceed the interior lighting power allowance determined using either Table G3.7 or G3.8.  
 **Appendix G Section:** Section G1.2.1(b) Mandatory Provisions related to interior lighting power
-  
+
 **Appendix G Section Reference:**  
 
 - Table G3.7, Performance Rating Method Lighting Power Density Allowances and Occupancy Sensor Reductions Using the Space-by-Space Method
@@ -14,7 +14,7 @@
 **Manual Check:** None  
 **Evaluation Context:** Each Data Element  
 **Data Lookup:** Table G3.7 and Table G3.8  
-## Rule Logic: 
+## Rule Logic:
 
 - For each building_segment in the Proposed Model: ```building_segment_proposed in P_RMR.building.building_segments```  
 
@@ -42,8 +42,8 @@
 
     - Calculate the total allowable lighting wattage for the building segment: ```building_segment_allowable_lighting_wattage_proposed += allowable_LPD_proposed * floor_area_proposed```  
 
-  - Get interior_lighting in space: ```interior_lighting_proposed = space_proposed.interior_lightings```  
-  
+  - Get interior_lighting in space: ```interior_lighting_proposed = space_proposed.interior_lighting```  
+
     - Get the total design power_per_area for the space: ```space_lighting_power_per_area_proposed = sum( lighting.power_per_area for lighting in interior_lighting_proposed )```  
 
     - Calculate the total design lighting wattage for the space: ```space_lighting_wattage_proposed = space_lighting_power_per_area_proposed * floor_area_proposed```  
