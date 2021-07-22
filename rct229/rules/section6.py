@@ -90,51 +90,63 @@ class Section6Rule2(RuleDefinitionListIndexedBase):
             )
 
         def get_calc_vals(self, context, data=None):
-            building_allowable_lighting_wattage = 0
-            building_design_lighting_wattage = 0
+            building_allowable_lighting_power = 0
+            building_design_lighting_power = 0
 
             for building_segment in context.proposed["building_segments"]:
-                lighting_building_area_type = building_segment[
+                building_segment_floor_area = 0
+                building_segment_allowable_lighting_power = 0
+                building_segment_design_lighting_power = 0
+
+                building_segment_lighting_building_area_type = building_segment[
                     "lighting_building_area_type"
                 ]
                 building_segment_uses_building_area_method = (
                     lighting_building_area_type is not None
                 )
-                building_segment_area = 0
-                building_segment_allowable_lighting_wattage = 0
-                building_segment_design_lighting_wattage = 0
 
                 for space in find_all("$..spaces[*]", building_segment):
                     space_floor_area = space["floor_area"]
+                    space_design_lighting_power = (
+                        sum(find_all("lightings[*].power_per_area", space))
+                        * space_floor_area
+                    )
                     if building_segment_uses_building_area_method:
-                        building_segment_area += space_floor_area
+                        building_segment_floor_area += space_floor_area
 
                     else:
                         # The building segment uses the Space-by-Space Method
-                        space_lighting_wattage = (
-                            sum(find_all("lightings[*].power_per_area", space))
-                            * space_floor_area
+                        lighting_space_type = space["lighting_space_type"]
+                        space_allowable_lpd = table_G3_7_lpd(
+                            space_type=lighting_space_type
                         )
-                        building_segment_design_lighting_wattage += (
-                            space_lighint_wattage
+                        building_segment_allowable_lighting_power += space_allowable_lpd
+                        building_segment_design_lighting_power += (
+                            space_design_lighting_power
                         )
 
-                building_allowable_lighting_wattage += (
-                    building_segment_allowable_lighting_wattage
+                if building_segment_uses_building_area_method:
+                    building_segment_allowable_lpd = table_G3_8_lpd(
+                        building_area_type=building_segment_lighting_building_area_type
+                    )
+                    building_segment_allowable_lighting_power = (
+                        building_segment_allowable_lpd * building_segment_floor_area
+                    )
+
+                building_allowable_lighting_power += (
+                    building_segment_allowable_lighting_power
                 )
-                building_design_lighting_wattage += (
-                    building_segment_design_lighting_wattage
-                )
+                building_design_lighting_power += building_segment_design_lighting_power
 
             return {
-                "building_allowable_lighting_wattage": building_allowable_lighting_wattage,
-                "building_design_lighting_wattage": building_design_lighting_wattage,
+                "building_allowable_lighting_power": building_allowable_lighting_power,
+                "building_design_lighting_power": building_design_lighting_power,
             }
 
         def rule_check(self, context, calc_vals, data=None):
             return (
-                calc_vals["space_lighting_power_user"]
-                == calc_vals["space_lighting_power_proposed"]
+                calc_vals["building_design_lighting_power"]
+                <= calc_vals["building_design_lighting_power"]
             )
 
 
