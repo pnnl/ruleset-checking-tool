@@ -21,9 +21,9 @@
 
     - For each zone in thermal block: ```for zone_b in thermal_block_b.zones:```  
 
-      - For each surface in zone, get surface type, ```for surface in zone.surfaces: surface_type_b = get_opaque_surface_type(surface)```  
+      - For each surface in zone, get surface type, ```for surface in zone_b.surfaces: surface_type_b = get_opaque_surface_type(surface)```  
 
-        - If surface is roof or ceiling, get surface construction: ```if ( surface_type_b == "ROOF" ) OR ( surface_type_b == "CEILING" ): construction_b = surface.construction```  
+        - If surface is roof or ceiling, get surface construction: ```if surface_type_b == "ROOF": construction_b = surface.construction```  
 
           **Rule Assertion:**  
 
