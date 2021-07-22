@@ -1,7 +1,7 @@
 
-# Envelope - Rule 5-3  
+# Envelope - Rule 5-4  
 
-**Rule ID:** 5-3  
+**Rule ID:** 5-4  
 **Rule Description:** Baseline roof assemblies must conform with assemblies detailed in Appendix A.  
 **Appendix G Section:** Section G3.1-5(b) Building Envelope Modeling Requirements for the Baseline building  
 **Appendix G Section Reference:** None  
@@ -29,6 +29,6 @@
 
           **Rule Assertion:**  
 
-          Case 1: Surface construction is specified with layers and a U-factor or R-value is provided: ```if (  ( construction_b.surface_construction_input_option == "LAYERS" ) AND ( construction_b.u_factor OR construction_b.r_value ) ): PASS```  
+          Case 1: Surface construction is specified with layers and a U-factor is provided: ```if (  ( construction_b.surface_construction_input_option == "LAYERS" ) AND ( construction_b.u_factor ) ): PASS```  
 
           Case 2: Else: ```else: FAIL```
