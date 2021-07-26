@@ -12,10 +12,14 @@
 **Manual Check:** None  
 **Evaluation Context:** Each Data Element  
 **Data Lookup:** None  
+**Function Call:**
+
+  1. get_surface_conditioning_category()  
+  2. get_opaque_surface_type()  
 
 ## Rule Logic:  
 
-- Get surface conditioning category dictionary for B_RMR: ```scc_dictionary_b = get_surface_conditioning_category(B_RMR)```
+- Get surface conditioning category dictionary for B_RMR: ```scc_dictionary_b = get_surface_conditioning_category(B_RMR)```  
 
 - For each building segment in the Baseline model: ```for building_segment_b in B_RMR.building.building_segments:```  
 
@@ -25,10 +29,10 @@
 
       - For each surface in zone, get surface type, ```for surface_b in zone_b.surfaces:```  
 
-        - If surface is roof or ceiling and is regulated, get surface construction: ```if ( ( get_opaque_surface_type(surface_b) == "ROOF" ) AND ( scc_dictionary_b[surface_b.id] != UNREGULATED ) ): construction_b = surface_b.construction```
+        - If surface is roof or ceiling and is regulated, get surface construction: ```if ( ( get_opaque_surface_type(surface_b) == "ROOF" ) AND ( scc_dictionary_b[surface_b.id] != UNREGULATED ) ): construction_b = surface_b.construction```  
 
           **Rule Assertion:**  
 
           Case 1: Surface construction is specified with layers and a U-factor is provided: ```if (  ( construction_b.surface_construction_input_option == "LAYERS" ) AND ( construction_b.u_factor ) ): PASS```  
 
-          Case 2: Else: ```else: FAIL```
+          Case 2: Else: ```else: FAIL```  
