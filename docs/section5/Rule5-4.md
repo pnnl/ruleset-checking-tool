@@ -27,7 +27,7 @@
 
     - For each zone in thermal block: ```for zone_b in thermal_block_b.zones:```  
 
-      - For each surface in zone, get surface type, ```for surface_b in zone_b.surfaces:```  
+      - For each surface in zone: ```for surface_b in zone_b.surfaces:```  
 
         - If surface is roof or ceiling and is regulated, get surface construction: ```if ( ( get_opaque_surface_type(surface_b) == "ROOF" ) AND ( scc_dictionary_b[surface_b.id] != UNREGULATED ) ): construction_b = surface_b.construction```  
 
