@@ -1,43 +1,44 @@
 
-# Envelope - Rule 5-6  
+# Envelope - Rule 5-14  
 
-**Rule ID:** 5-6  
-**Rule Description:** Opaque Assemblies used for new buildings, existing buildings, or additions shall conform with assemblies detailed in Appendix A and shall match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8: Slab-on-grade floors shall match the F-factor for unheated slabs from the same tables (A6).  
-**Rule Assertion:** Baseline RMR Surface:U_factor = expected value  
+**Rule ID:** 5-14  
+**Rule Description:**  Baseline slab-on-grade assemblies must conform with assemblies detailed in Appendix A ( Slab-on-grade floors shall match the F-factor for unheated slabs from the same tables (A6).).  
 **Appendix G Section:** Section G3.1-5(b) Building Envelope Modeling Requirements for the Baseline building  
-**Appendix G Section Reference:** Tables G3.4-1 to G3.4-8  
+**Appendix G Section Reference:** None  
 
 **Applicability:** All required data elements exist for B_RMR  
-**Applicability Checks:**  
-
-  1. Baseline space conditioning category (conditioned, semiheated, unconditioned), residential vs non-residential occupancy type and surface type (wall vs floor vs roof) are determined correctly  
+**Applicability Checks:** None  
 
 **Manual Check:** None  
 **Evaluation Context:** Each Data Element  
-**Data Lookup:** Tables G3.4-1 to G3.4-8  
+**Data Lookup:** None  
+**Function Call:**
+
+  1. get_surface_conditioning_category()  
+  2. get_opaque_surface_type()  
 
 ## Rule Logic:  
 
-- **Applicability Check 1:** Baseline space conditioning category (conditioned, semiheated, unconditioned), residential vs non-residential occupancy type and surface type (wall vs floor vs roof) are determined correctly.  
+- Get surface conditioning category dictionary for B_RMR: ```scc_dictionary_b = get_surface_conditioning_category(B_RMR)```  
 
-- Get building climate zone: ```climate_zone = B_RMR.weather.climate_zone```  
+- For each building segment in the Baseline model: ```for building_segment_b in B_RMR.building.building_segments:```  
 
-- For each building segment in the Baseline model: ```for building_segment_baseline in B_RMR.building.building_segments:```  
+  - For each thermal_block in building segment: ```for thermal_block_b in building_segment_b.thermal_blocks:```  
 
-  - For each thermal_block in building segment: ```for thermal_block_baseline in building_segment_baseline.thermal_blocks:```  
+    - For each zone in thermal block: ```for zone_b in thermal_block_b.zones:```  
 
-  - For each zone in thermal block: ```for zone_baseline in thermal_block_baseline.zones:```  
+      - For each surface in zone: ```for surface_b in zone_b.surfaces:```  
 
-  - For each space in thermal zone: ```for space_baseline in zone_baseline.spaces:```  
+        - If surface is heated slab-on-grade: ```if get_opaque_surface_type(surface_b) == "HEATED SLAB-ON-GRADE:```  
 
-    - Get space conditioning type: ```space_conditioning_type_baseline = space_baseline.conditioning_type```  
+          **Rule Assertion:**  
 
-      - Get baseline contruction from Table G3.4-1 to G3.4-8 based on climate zone, space conditioning type and function type: ```surface_performance_target = data_lookup(table_G3_4,climate_zone,space_conditioning_type_baseline,"Slab-on-Grade Floors")```  
+          Case 1: If heated slab-on-grade construction is modeled in B_RMR: ```FAIL```  
 
-    - For each surface in space: ```for surface_baseline in space_baseline.surfaces:```  
+        - Else if surface is unheated slab-on-grade and is regulated, get surface construction: ```else if ( ( get_opaque_surface_type(surface_b) == "UNHEATED SLAB-ON-GRADE" ) AND ( scc_dictionary_b[surface_b.id] != UNREGULATED ) ): construction_b = surface_b.construction```  
 
-      - Get the surface construction if the surface is slab-on-grade floor: ```if ( surface_baseline.classification == "FLOOR" ) AND ( surface_baseline.adjacent_to == "GROUND" ): surface_construction_baseline = surface_baseline.construction```  
+          **Rule Assertion:**  
 
-      - Get the performance values for the construction: ```surface_performance_value_baseline = surface_construction_baseline.f_factor```  (Note XC, assumes for slab on grade, RMR reports f-factor not u-factor)
+          Case 2: Unheated slab-on-grade construction is specified with layers and an F-factor is provided: ```if (  ( construction_b.surface_construction_input_option == "LAYERS" ) AND ( construction_b.f_factor ) ): PASS```  
 
-    **Rule Assertion:** Baseline slab-on-grade floor construction modeled matches Table G3.4-1 to G3.4-8: ```surface_performance_value_baseline == surface_performance_target```  
+          Case 3: Else: ```else: FAIL```  
