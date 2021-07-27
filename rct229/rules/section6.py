@@ -74,7 +74,7 @@ class Section6Rule2(RuleDefinitionListIndexedBase):
     """Rule 2 of ASHRAE 90.1-2019 Appendix G Section 6 (Lighting)"""
 
     def __init__(self):
-        super(Section6Rule1, self).__init__(
+        super(Section6Rule2, self).__init__(
             rmrs_used=UserBaselineProposedVals(False, False, True),
             each_rule=Section6Rule2.BuildingRule(),
             index_rmr="proposed",
@@ -85,7 +85,7 @@ class Section6Rule2(RuleDefinitionListIndexedBase):
 
     class BuildingRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section6Rule1.BuildingRule, self).__init__(
+            super(Section6Rule2.BuildingRule, self).__init__(
                 rmrs_used=UserBaselineProposedVals(False, False, True)
             )
 
@@ -102,25 +102,25 @@ class Section6Rule2(RuleDefinitionListIndexedBase):
                     "lighting_building_area_type"
                 ]
                 building_segment_uses_building_area_method = (
-                    lighting_building_area_type is not None
+                    building_segment_lighting_building_area_type is not None
                 )
 
                 for space in find_all("$..spaces[*]", building_segment):
                     space_floor_area = space["floor_area"]
-                    space_design_lighting_power = (
-                        sum(find_all("lightings[*].power_per_area", space))
-                        * space_floor_area
-                    )
+
                     if building_segment_uses_building_area_method:
                         building_segment_floor_area += space_floor_area
-
                     else:
                         # The building segment uses the Space-by-Space Method
                         lighting_space_type = space["lighting_space_type"]
-                        space_allowable_lpd = table_G3_7_lpd(
-                            space_type=lighting_space_type
+                        space_allowable_lpd = table_G3_7_lpd(lighting_space_type)
+                        building_segment_allowable_lighting_power += (
+                            space_allowable_lpd * space_floor_area
                         )
-                        building_segment_allowable_lighting_power += space_allowable_lpd
+                        space_design_lighting_power = (
+                            sum(find_all("lighting[*].power_per_area", space))
+                            * space_floor_area
+                        )
                         building_segment_design_lighting_power += (
                             space_design_lighting_power
                         )
