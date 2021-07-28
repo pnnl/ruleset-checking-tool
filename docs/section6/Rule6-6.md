@@ -37,4 +37,4 @@
 
           - Case 1: If lighting building area type is not specified: ```if NOT building_segment_p.lighting_building_area_type: FAIL```  
 
-          - Case 2: If lighting power does not equal to the value prescribed in Table 9.5.1 or lighting power in P_RMR is not the same as U_RMR: ```if ( ( interior_lighting_p.power_per_area == lighting_allowance_p ) OR ( interior_lighting_p == interior_lighting_u ) ): FAIL```  
+          - Case 2: If lighting power does not equal to the value prescribed in Table 9.5.1 or lighting power in P_RMR is not the same as U_RMR: ```if ( ( interior_lighting_p.power_per_area != lighting_allowance_p ) OR ( interior_lighting_p != interior_lighting_u ) ): FAIL```  
