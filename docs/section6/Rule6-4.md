@@ -8,10 +8,16 @@
 
 **Applicability:** All required data elements exist for P_RMR  
 **Applicability Checks:** None  
-**Manual Check:** None  
+**Manual Check:** 
+
+1. Where a complete lighting system exists, the actual lighting power cannot be verified by the RCT. Manual review is required.  
+
 **Evaluation Context:** Each Data Element  
 **Data Lookup:** None  
+
 ## Rule Logic: 
+
+- **Manual Check 1:** Manual review is required where a complete lighting system exists.
 
 - For each building_segment in the proposed model: ```building_segment_p in P_RMR.building.building_segments:```  
 
@@ -21,10 +27,8 @@
 
       - For each space in zone: ```space_p in zone_p.spaces:```  
 
-        - Get interior lighting in U_RMR: ```interior_lighting_b = match_data_element(U_RMR, InteriorLightings, space_p.interior_lighting.id)```
+        - Get interior lighting in U_RMR: ```interior_lighting_u = match_data_element(U_RMR, InteriorLightings, space_p.interior_lighting.id)```
 
           **Rule Assertion:** 
 
-          - Case 1: Lighting power in the proposed RMR is as existing and cannot be verified by RCT: ```if space_p.interior_lighting == interior_lighting_b: CAUTION```
-
-          - Case 2: Lighting power in the proposed RMR does not match U_RMR: ```else: FAIL```
+          - If lighting power in P_RMR is not the same as U_RMR: ```if space_p.interior_lighting != interior_lighting_u: FAIL```  
