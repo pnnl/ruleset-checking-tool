@@ -3,7 +3,7 @@
 
 **Rule ID:** 5-5  
 **Rule Description:** Baseline roof assemblies must match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8.  
-**Rule Assertion:** Baseline RMR Surface:U_factor = expected value  
+**Rule Assertion:** Baseline RMR roof: U_factor = expected value  
 **Appendix G Section:** Section G3.1-5(b) Building Envelope Modeling Requirements for the Baseline building  
 **Appendix G Section Reference:** Tables G3.4-1 to G3.4-8  
 
@@ -46,10 +46,12 @@
 
               - Else: ```manual_review_flag = TRUE```  
 
-                **Rule Assertion:**  
+          **Rule Assertion:**  
 
-                Case 1: If zone has both residential and non-residential spaces and the construction requirement is different, request manual review: ```if manual_review_flag == TRUE: RAISE_WARNING```  
+          Case 1: If zone has both residential and non-residential spaces and the construction requirement for roof is different, request manual review: ```if manual_review_flag == TRUE: RAISE_WARNING```  
 
-                Case 2: Else if roof U-factor matches Table G3.4: ```else if surface_construction_b.u_factor == target_u_factor: PASS```  
+          Case 2: Else if roof U-factor matches Table G3.4: ```else if surface_construction_b.u_factor == target_u_factor: PASS```  
 
-                Case 3: Else: ```else: FAIL```  
+          Case 3: Else: ```else: FAIL```  
+
+**[Back](../_toc.md)**
