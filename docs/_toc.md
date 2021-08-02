@@ -65,7 +65,7 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   * 5-1: Baseline Performance is the average of 4 rotations if vertical fenestration area per each orientation differ by more than 5%  
   * 5-2: Orientation is the same in user model and proposed model  
   * [5-3](section5/Rule5-3.md): Baseline building must be modeled so that it doesn't shade itself  
-  * 5-4: Baseline roof assemblies must conform with assemblies detailed in Appendix A ( Above-grade walls—Steel-framed A2.2) 
+  * [5-4](section5/Rule5-4.md): Baseline roof assemblies must conform with assemblies detailed in Appendix A ( Above-grade walls—Steel-framed A2.2) 
   * 5-5: Baseline roof assemblies must match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8
   * 5-6: Building enevelope U-factors must be modeled in proposed design as designed (roof, wall, windows, exterior floors)
   * 5-7: Baseline below-grade walls shall conform with assemblies detailed in Appendix A Concrete block, A4) 
