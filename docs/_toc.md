@@ -75,7 +75,7 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   * 5-11: Baseline above-grade wall assemblies must match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8
   * [5-12](section5/Rule5-12.md): Baseline floor assemblies must conform with assemblies detailed in Appendix A (Floors—Steel-joist (A5.3)) 
   * 5-13: Baseline floor assemblies must  match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-9
-  * 5-14: Baseline slab-on-grade assemblies must conform with assemblies detailed in Appendix A ( Slab-on-grade floors shall match the F-factor for unheated slabs from the same tables (A6).) 
+  * [5-14](section5/Rule5-14.md): Baseline slab-on-grade assemblies must conform with assemblies detailed in Appendix A ( Slab-on-grade floors shall match the F-factor for unheated slabs from the same tables (A6).) 
   * 5-15: Baseline slab-on-grade assemblies must match the appropriate assembly maximum F-factors in Tables G3.4-1 through G3.4-9
   * 5-16: Slab-on-grade F-factor in the proposed design must be modeled as-designed
   * 5-17: For building area types included in Table G3.1.1-1, vertical fenestration areas for new buildings and additions shall equal that in Table G3.1.1-1 based on the area of gross above-grade walls that separate conditioned spaces and semiheated spaces from the exterior. Where a building has multiple building area types, and each building area types included in Table G3.1.1-1, each type shall use the values in the table.
