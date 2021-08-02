@@ -20,6 +20,8 @@ def get_nested_dict(dic, keys):
         Returns the referenced Python dictionary.
     """
 
+    last_key, last_index = parse_key_string(keys[-1])
+
     # Generate a nested dictionary, slowly building on a reference nested dictionary each iteration through the loop.
     for key in keys:
 
@@ -40,10 +42,14 @@ def get_nested_dict(dic, keys):
             reference_dict = dic[key]
 
         # If the final key, return the referenced final, nested dictionary
-        elif key == keys[-1]:
+        elif key == last_key:
 
             if key not in reference_dict:
-                reference_dict[key] = {}
+                # If this is a dictionary, the last index on the last key parse will be None
+                if last_index == None:
+                    reference_dict[key] = {}
+                else:
+                    reference_dict[key] = []
 
             return reference_dict
 
@@ -118,8 +124,17 @@ def set_nested_dict(dic, keys, value):
     # as necessary
     nested_dict = get_nested_dict(dic, keys)
 
-    # Set value
-    nested_dict[keys[-1]] = clean_value(value)
+    # Parse final key to see if it's a list or dictionary/key value
+    key, list_index = parse_key_string(keys[-1])
+
+    # Set value. If list_index is None, this is just a key/value pair
+    if list_index == None:
+        nested_dict[key] = clean_value(value)
+
+    # If list_index is not None, the final key is a list, not a dictionary
+    else:
+        # Set list value
+        nested_dict[key].append(clean_value(value))
 
 
 def inject_json_path_from_enumeration(key_list, json_path_ref_string):
@@ -229,17 +244,107 @@ def clean_value(value):
 
     """
 
-    # Set value directly if not convertible to a numeric
+    # Set value directly if a list or dict
     if isinstance(value, dict) or isinstance(value, list):
         return value
     else:
-        # Set value as integer or float if convertible
-        try:
-            value = int(value)
-            return value
-        except ValueError:
+
+        # If value is neither a list or dict, and a string, process it
+        if isinstance(value, str):
+            # Set value as boolean if possible
+            if value.lower() == "true" or value.lower() == "false":
+                return value.lower() == "true"
+
+            # If the value references a schedule, parse string to create the list
+            if "SCHEDULE" in value:
+                return create_schedule_list(value)
+
             try:
+                # Check if integer or float if convertible
                 value = float(value)
-                return value
+
+                # Check for integer
+                if value % 1 == 0:
+                    value = int(value)
+                    return value
+                else:  # If not an integer, return the float
+                    return value
+
             except ValueError:
+                # normal string
                 return value
+
+        else:  # if not a list, dict, or string, this value is likely already cleaned
+            return value
+
+
+def merge_nested_dictionary(master_dict, new_data_dict, path=None):
+    """Merges a nested dictionary into another nested_dictionary. Adapted from stackoverflow question found here:
+    https://stackoverflow.com/questions/7204805/how-to-merge-dictionaries-of-dictionaries
+
+     Parameters
+     ----------
+     master_dict : dict
+         Nested dictionary being merged into master dictionary
+
+     new_data_dict: dict
+         Nested dictionary receiving new data
+
+    """
+
+    if path is None:
+        path = []
+    for key in new_data_dict:
+        if key in master_dict:
+            if isinstance(master_dict[key], dict) and isinstance(
+                new_data_dict[key], dict
+            ):
+                merge_nested_dictionary(
+                    master_dict[key], new_data_dict[key], path + [str(key)]
+                )
+            elif isinstance(master_dict[key], list) and isinstance(
+                new_data_dict[key], list
+            ):
+                for master, new_data in zip(master_dict[key], new_data_dict[key]):
+                    merge_nested_dictionary(master, new_data, path + [str(key)])
+
+            elif master_dict[key] == new_data_dict[key]:
+                pass  # same leaf value
+            else:
+                raise Exception("Conflict at %s" % ".".join(path + [str(key)]))
+        else:
+            master_dict[key] = new_data_dict[key]
+    return master_dict
+
+
+def create_schedule_list(schedule_str):
+    """Generates an 8760 list for schedules. If the value from a key/value pair has 'SCHEDULE' in it, this function
+    is called to parse the function parameters and creates the list.
+
+     Parameters
+     ----------
+     schedule_str : str
+         Nested dictionary being merged into master dictionary
+
+     Returns
+    -------
+    schedule_list: list
+        List of floats between 0 to 1. Represents a schedule. Length is 8760.
+
+    """
+
+    # Parse schedule string for schedule name and potential value.
+    # EX: "SCHEDULE:CONSTANT-0.2" will result in a list = ["CONSTANT","0.2"]
+    parsed_strings = schedule_str.split(":")[1].split("-")
+
+    schedule_name = parsed_strings[0]
+    schedule_parameter = parsed_strings[1]
+
+    if schedule_name == "CONSTANT":
+
+        # Return the schedule parameter 8760 times
+        schedule_list = [float(schedule_parameter)] * 8760
+        return schedule_list
+
+    else:
+        raise Exception(f"Schedule named: {schedule_name} is not a valid schedule name")
