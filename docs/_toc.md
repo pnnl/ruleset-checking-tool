@@ -68,7 +68,7 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   * [5-4](section5/Rule5-4.md): Baseline roof assemblies must conform with assemblies detailed in Appendix A ( Above-grade walls—Steel-framed A2.2) 
   * 5-5: Baseline roof assemblies must match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8
   * 5-6: Building enevelope U-factors must be modeled in proposed design as designed (roof, wall, windows, exterior floors)
-  * 5-7: Baseline below-grade walls shall conform with assemblies detailed in Appendix A Concrete block, A4) 
+  * [5-7](section5/Rule5-7.md): Baseline below-grade walls shall conform with assemblies detailed in Appendix A Concrete block, A4) 
   * 5-8: Baseline below-grade walls shall match the appropriate assembly maximum C-factors in Tables G3.4-1 through G3.4-8
   * 5-9: Below-grade wall C-factor must be the same in the proposed model as in the user model
   * [5-10](section5/Rule5-10.md): Baseline above-grade wall assemblies must conform with assemblies detailed in  Appendix A (Steel-framed A3.3) 
