@@ -1,8 +1,8 @@
 
-# Envelope - Rule 5-4  
+# Envelope - Rule 5-10  
 
-**Rule ID:** 5-4  
-**Rule Description:** Baseline roof assemblies must conform with assemblies detailed in Appendix A.  
+**Rule ID:** 5-10  
+**Rule Description:** Baseline above-grade wall assemblies must conform with assemblies detailed in  Appendix A (Steel-framed A3.3).  
 **Appendix G Section:** Section G3.1-5(b) Building Envelope Modeling Requirements for the Baseline building  
 **Appendix G Section Reference:** None  
 
@@ -29,10 +29,10 @@
 
       - For each surface in zone: ```for surface_b in zone_b.surfaces:```  
 
-        - If surface is roof or ceiling and is regulated, get surface construction: ```if ( ( get_opaque_surface_type(surface_b) == "ROOF" ) AND ( scc_dictionary_b[surface_b.id] != UNREGULATED ) ): construction_b = surface_b.construction```  
+        - If surface is above-grade wall and is regulated, get surface construction: ```if ( ( get_opaque_surface_type(surface_b) == "ABOVE-GRADE WALL" ) AND ( scc_dictionary_b[surface_b.id] != UNREGULATED ) ): construction_b = surface_b.construction```  
 
           **Rule Assertion:**  
 
-          Case 1: Surface construction is specified with layers and a U-factor is provided: ```if (  ( construction_b.surface_construction_input_option == "LAYERS" ) AND ( construction_b.u_factor ) ): PASS```  
+          Case 1: Above-grade wall construction is specified with layers and a U-factor is provided: ```if (  ( construction_b.surface_construction_input_option == "LAYERS" ) AND ( construction_b.u_factor ) ): PASS```  
 
           Case 2: Else: ```else: FAIL```  
