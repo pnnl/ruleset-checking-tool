@@ -255,9 +255,7 @@ Logic:
 
             - For each subsurface in surface: `for subsurface in surface.subsurfaces:`  
 
-              - If the glazed vision area is less than 50% of the total area, add glazed vision area to building segment total fenestration area: `if ( subsurface.glazed_area < ( subsurface.glazed_area + subsurface.opaque_area ) * 50% ): total_fenestration_area += subsurface.glazed_area`  
-
-              - Else, add total subsurface area to building segment total fenestration area: `else: total_fenestration_area += subsurface.glazed_area + subsurface.opaque_area`  
+              - If the glazed vision area is more than 50% of the total area, add glazed vision area to building segment total fenestration area: `if ( subsurface.glazed_area > ( subsurface.glazed_area + subsurface.opaque_area ) * 50% ): total_fenestration_area += subsurface.glazed_area + subsurface.opaque_area`  
 
       - For each surface in zone: `for surface in zone.surfaces:`
 
