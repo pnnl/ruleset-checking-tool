@@ -1,9 +1,12 @@
 from rct229.data import data
 from rct229.data.schema_enums import schema_enums
 
-_table_G3_7 = data["ashrae_90_1_prm_2019.prm_interior_lighting"]
+_osstd_prm_interior_lighting_data = data["ashrae_90_1_prm_2019.prm_interior_lighting"]
 
-_lighting_space_type_map = {
+# This dictionary maps the LightingSpaceType2019ASHRAE901TG37 enumerations to
+# the corresponding lpd_space_type values in the OSSTD file
+# ashrae_90_1_prm_2019.prm_interior_lighting.json
+lighting_space_enumeration_to_lpd_space_type_map = {
     "ATRIUM_LOW_MEDIUM": "atrium <= 40 ft height",
     "ATRIUM_HIGH": "atrium > 40 ft height",
     "AUDIENCE_SEATING_AREA_AUDITORIUM": "audience seating - auditorium",
@@ -45,8 +48,9 @@ _lighting_space_type_map = {
     "LABORATORY_IN_OR_AS_A_CLASSROOM": "??????????",
     "LABORATORY_ALL_OTHERS": "laboratory",
     "LAUNDRY_WASHING_AREA": "laundry/washing",
-    "LOADING_DOCK_INTERIOR": "??????????",
-    "LOBBY_FACILITY_FOR_THE_VISUALLY_IMPAIRED": "",
+    # FIXME: The w/ft^2 value should be 0.59 but is set to 0.6 in the OSSTD
+    "LOADING_DOCK_INTERIOR": "loading dock",
+    "LOBBY_FACILITY_FOR_THE_VISUALLY_IMPAIRED": "lobby for visually impared",
     "LOBBY_ELEVATOR": "lobby - elevator",
     "LOBBY_HOTEL": "lobby - hotel",
     "LOBBY_MOTION_PICTURE_THEATER": "lobby - motion picture theater",
@@ -87,7 +91,7 @@ _lighting_space_type_map = {
     "HEALTHCARE_FACILITY_RECOVERY_ROOM": "recovery",
     "LIBRARY_READING_AREA": "library - reading",
     "LIBRARY_STACKS": "library - stacks",
-    # The typo "manufacuring" below matches the OSSTD file
+    # NOTE: The typo "manufacuring" below matches the OSSTD file
     "MANUFACTURING_FACILITY_DETAILED_MANUFACTURING_AREA": "detailed manufacuring",
     "MANUFACTURING_FACILITY_EQUIPMENTROOM": "manufacturing equipment room",
     "MANUFACTURING_FACILITY_EXTRA_HIGH_BAY_AREA": "manufacturing extra high bay",
@@ -112,18 +116,43 @@ _lighting_space_type_map = {
 }
 
 
-def _table_G3_7_lpd(lighting_space_type):
-    """Returns the lighting power density required by ASHRAE 90.1 Table G3.7
+def _get_osstd_entry(lighting_space_type):
+    entries = [
+        entry
+        for entry in _osstd_prm_interior_lighting_data
+        if entry["lpd_space_type"] == lighting_space_type
+    ]
+    if len(entries) == 1:
+        match = entries[0]
+    else:
+        match = None
+
+    return match
 
 
+def table_G3_7_lpd(lighting_space_type, space_height):
+    """Returns the lighting power density for a space as
+    required by ASHRAE 90.1 Table G3.7
 
     Parameters
     ----------
     lighting_space_type : str
-        The
+        One of the LightingSpaceType2019ASHRAE901TG37 enumeration values
+    space_height : float
+        The height of the space [ft]
 
     Returns
     -------
     float
-        The lighting power density given by Table G3.7
+        The lighting power density given by Table G3.7 [W/ft^2]
     """
+    osstd_entry = _get_osstd_entry(lighting_space_type)
+    watts_per_sqft = osstd_entry["w/ft^2"]
+    watts_per_ft = osstd_entry["w/ft"]
+
+    if watts_per_ft is None:
+        lpd = watts_per_sqft
+    else:
+        lpd = watts_per_sqft + watts_per_ft * space_height
+
+    return lpd

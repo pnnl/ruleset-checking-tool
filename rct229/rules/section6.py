@@ -105,25 +105,36 @@ class Section6Rule2(RuleDefinitionListIndexedBase):
                     building_segment_lighting_building_area_type is not None
                 )
 
-                for space in find_all("$..spaces[*]", building_segment):
-                    space_floor_area = space["floor_area"]
+                for zone in find_all("$..zones[*]", building_segment):
+                    zone_volume = zone["volume"]
+                    spaces = zome["spaces"]
+                    zone_floor_area = sum([space["floor_area"] for space in spaces])
+                    zone_avg_height = zone_volume / zone_floor_area
 
-                    if building_segment_uses_building_area_method:
-                        building_segment_floor_area += space_floor_area
-                    else:
-                        # The building segment uses the Space-by-Space Method
-                        lighting_space_type = space["lighting_space_type"]
-                        space_allowable_lpd = table_G3_7_lpd(lighting_space_type)
-                        building_segment_allowable_lighting_power += (
-                            space_allowable_lpd * space_floor_area
-                        )
-                        space_design_lighting_power = (
-                            sum(find_all("lighting[*].power_per_area", space))
-                            * space_floor_area
-                        )
-                        building_segment_design_lighting_power += (
-                            space_design_lighting_power
-                        )
+                    for space in spaces:
+                        space_floor_area = space["floor_area"]
+                        if building_segment_uses_building_area_method:
+                            building_segment_floor_area += space_floor_area
+                        else:
+                            # The building segment uses the Space-by-Space Method
+                            lighting_space_type = space["lighting_space_type"]
+                            space_allowable_lpd = table_G3_7_lpd(
+                                lighting_space_type, space_height=zone_avg_height
+                            )
+                            building_segment_allowable_lighting_power += (
+                                space_allowable_lpd * space_floor_area
+                            )
+                            space_design_lighting_power = (
+                                sum(
+                                    find_all(
+                                        "interior_lighting[*].power_per_area", space
+                                    )
+                                )
+                                * space_floor_area
+                            )
+                            building_segment_design_lighting_power += (
+                                space_design_lighting_power
+                            )
 
                 if building_segment_uses_building_area_method:
                     building_segment_allowable_lpd = table_G3_8_lpd(
