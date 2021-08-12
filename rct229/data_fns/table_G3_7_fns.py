@@ -1,5 +1,4 @@
 from rct229.data import data
-from rct229.data.schema_enums import schema_enums
 
 _osstd_prm_interior_lighting_data = data["ashrae_90_1_prm_2019.prm_interior_lighting"]
 
@@ -27,7 +26,7 @@ lighting_space_enumeration_to_lpd_space_type_map = {
     "CONFERENCE_MEETING_MULTIPURPOSE_ROOM": "conference/meeting/multipurpose",
     "CONFINEMENT_CELLS": "confinement cells",
     "COPY_PRINT_ROOM": "copy/print",
-    "CORRIDOR_FACILITY_FOR_THE_VISUALLY_IMPAIRED": "",
+    "CORRIDOR_FACILITY_FOR_THE_VISUALLY_IMPAIRED": "corridor for visually impaired",
     "CORRIDOR_HOSPITAL": "corridor - hospital",
     "CORRIDOR_MANUFACTURING_FACILITY": "corridor - manufacturing facility",
     "CORRIDOR_ALL_OTHERS": "corridor - all other",
