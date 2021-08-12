@@ -85,7 +85,7 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   * 5-21: Need to add that fenestration area in the proposed model must be equal to user model
   * 5-22: Fenestration U-factors for residential, non-residential and semiheated spaces in the baseline model must match the appropriate requirements in Table G3.4-1 through G3.4-8 for the appropriate WWR in the baseline RMR.
   * 5-23: Fenestration (window and skylight) U-factors in the proposed  model must match the user model
-  * 5-24: Vertical fenestration SHGC  shall match the appropriate requirements in Tables G3.4-1 through G3.4-8 
+  * [5-24](section5/Rule5-24.md): Fenestration for new buildings, existing buildings, and additions shall be assumed to be flush with the exterior wall, and no shading projections shall be modeled.  
   * 5-25: Fenestration (window and skylight) SHGC in the proposed  model must match the user model
   * 5-26: Baseline fenestration shall be assumed to be flush with the exterior wall, and no shading projections shall be modeled.
   * 5-27: Proposed fenestration shall have the same shading projections as the user model.
