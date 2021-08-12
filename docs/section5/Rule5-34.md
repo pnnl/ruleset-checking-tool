@@ -1,7 +1,7 @@
 
-# Envelope - Rule 5-15  
+# Envelope - Rule 5-34  
 
-**Rule ID:** 5-15  
+**Rule ID:** 5-34  
 **Rule Description:**  The  exterior roof surfaces shall be modeled using a solar reflectance of 0.30.  
 **Rule Assertion:** Baseline RMR = expected value  
 **Appendix G Section:** Section G3.1-5(f) Building Envelope Modeling Requirements for the Baseline building  
