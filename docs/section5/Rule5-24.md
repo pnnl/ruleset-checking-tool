@@ -1,7 +1,7 @@
 
-# Envelope - Rule 5-10  
+# Envelope - Rule 5-24  
 
-**Rule ID:** 5-10  
+**Rule ID:** 5-24  
 **Rule Description:**  Fenestration for new buildings, existing buildings, and additions shall be assumed to be flush with the exterior wall, and no shading projections shall be modeled.  
 **Rule Assertion:** Baseline RMR = expected value  
 **Appendix G Section:** Section G3.1-5(d) Building Envelope Modeling Requirements for the Baseline building  
