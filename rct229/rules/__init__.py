@@ -5,7 +5,11 @@ import rct229.rule_engine.rule_base as base_classes
 import rct229.rules as rules
 
 # Add all available rule modules in __all__
-__all__ = ["section15"]
+__all__ = [
+    "section6",
+    "section12",
+    "section15",
+]
 
 
 def __getattr__(name):
