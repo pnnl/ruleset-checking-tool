@@ -52,6 +52,6 @@
 
           Case 2: Else if slab-on-grade floor F-factor matches Table G3.4: ```else if surface_construction_b.f_factor == target_f_factor: PASS```  
 
-          Case 3: Else: ```else: FAIL```  
+          Case 3: Else: ```else: RAISE_WARNING: "SLABS BELOW 24" BELOW GRADE IS NOT REGULATED."```  
 
 **[Back](../_toc.md)**
