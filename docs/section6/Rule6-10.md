@@ -14,12 +14,15 @@
 **Function Call:**  
 
   - compare_schedules()
+  - normalize_space_lighting_schedule()
 
 ## Rule Logic: 
 
-- For each building_segment in the baseline model: `building_segment_b in B_RMR.building.building_segments:`  
+- Get building open schedule in the baseline model: `building_open_schedule_b = B_RMR.building.building_open_schedule`  
 
-  - For each thermal_block in building segment: `thermal_block_b in building_segment_b.thermal_blocks:`  
+- For each building segment in building: `building_segment_b in B_RMR.building.building_segments:`  
+
+  - For each thermal block in building segment: `thermal_block_b in building_segment_b.thermal_blocks:`  
 
     - For each zone in thermal block: `zone_b in thermal_block_b.zones:`  
 
@@ -29,39 +32,34 @@
 
           - Get interior lighting occupancy control type: `control_type_b = interior_lighting_b.occupancy_control_type`  
 
-          - Get interior lighting schedule: `lighting_schedule_b = interior_lighting_b.lighting_multiplier_schedule`  
+        - Get normalized space lighting schedule: `normalized_schedule_b = normalize_space_lighting_schedule(space_b)`  
 
-          - Get matching interior lighting schedule in P_RMR: `lighting_schedule_p = match_data_element(P_RMR, Schedules, lighting_schedule_b.id)`  
+        - Get matching space in P_RMR: `space_p = match_data_element(P_RMR, Spaces, space_b.id)`  
 
-          - Determine if interior lighting schedule in B_RMR is the same as P_RMR: `schedule_match_flag = compare_schedules(lighting_schedule_b, lighting_schedule_p)`  
+          - Get normalized space lighting schedule: `normalized_schedule_p = normalize_space_lighting_schedule(space_p)`  
+
+        - Compare lighting schedule in B_RMR and P_RMR: `schedule_comparison_result = compare_schedules(normalized_schedule_b, normalized_schedule_p, building_open_schedule_b, 1)`  
 
         - Get lighting space type: `lighting_space_type_b = space_b.lighting_space_type`  
 
-          - If lighting space types is employee lunch and break rooms, conference/meeting rooms, or classrooms (not including shop classrooms, laboratory classrooms, and preschool through 12th-grade classrooms), set occupancy sensor flag: `if lighting_space_type_b in ["LOUNGE/BREAKROOM", "CONFERENCE/MEETING/MULTIPURPOSE ROOM", "CLASSROOM/LECTURE HALL/TRAINING ROOM - PENITENTIARY", "CLASSROOM/LECTURE HALL/TRAINING ROOM - ALL OTHER"]: occ_sensor_flag == TRUE`  
+          - If lighting space types is employee lunch and break rooms, conference/meeting rooms, or classrooms (not including shop classrooms, laboratory classrooms, and preschool through 12th-grade classrooms), set occupancy sensor flag: `if lighting_space_type_b in ["LOUNGE/BREAKROOM", "CONFERENCE/MEETING/MULTIPURPOSE ROOM", "CLASSROOM/LECTURE HALL/TRAINING ROOM - PENITENTIARY", "CLASSROOM/LECTURE HALL/TRAINING ROOM - ALL OTHER"]: occ_sensor_flag = TRUE`  
 
           **Rule Assertion:**  
 
-          - Case 1: If space requires occupancy sensor and interior lighting is modeled with full-auto on occupancy sensor control, and interior lighting schedule matches P_RMR: `if ( occ_sensor_flag ) and ( control_type_b == "FULL-AUTO ON" ) and ( schedule_match_flag ): PASS`  
+          - Case 1: If space requires occupancy sensor and interior lighting is modeled with full-auto on occupancy sensor control: `if ( occ_sensor_flag ) and ( control_type_b == "FULL-AUTO ON" ): PASS and return schedule_comparison_result`  
 
-          - Case 2: If space requires occupancy sensor and interior lighting is modeled with full-auto on occupancy sensor control, and interior lighting schedule does not match P_RMR: `if ( occ_sensor_flag ) and ( control_type_b == "FULL-AUTO ON" ) and ( NOT schedule_match_flag ): CAUTION`  
+          - Case 2: If space requires occupancy sensor and interior lighting is not modeled with full-auto on occupancy sensor control: `if ( occ_sensor_flag ) and ( control_type_b != "FULL-AUTO ON" ): FAIL`  
 
-          - Case 3: If space requires occupancy sensor and interior lighting is not modeled with full-auto on occupancy sensor control, and interior lighting schedule matches P_RMR: `if ( occ_sensor_flag ) and ( control_type_b != "FULL-AUTO ON" ) and ( schedule_match_flag ): CAUTION`  
+          - Case 3: If space does not require occupancy sensor and interior lighting is modeled with full-auto on occupancy sensor control: `if ( NOT occ_sensor_flag ) and ( control_type_b == "FULL-AUTO ON" ): FAIL`  
 
-          - Case 4: If space requires occupancy sensor and interior lighting is not modeled with full-auto on occupancy sensor control, and interior lighting schedule does not match P_RMR: `if ( occ_sensor_flag ) and ( control_type_b != "FULL-AUTO ON" ) and ( NOT schedule_match_flag ): FAIL`  
+          - Case 4: If space does not require occupancy sensor and interior lighting is not modeled with full-auto on occupancy sensor control: `if ( NOT occ_sensor_flag ) and ( control_type_b != "FULL-AUTO ON" ): PASS and return schedule_comparison_result`  
+ 
+**Temporary Function note:**
 
-          - Case 5: If space does not require occupancy sensor and interior lighting is modeled with full-auto on occupancy sensor control, and interior lighting schedule matches P_RMR: `if ( NOT occ_sensor_flag ) and ( control_type_b == "FULL-AUTO ON" ) and ( schedule_match_flag ): FAIL`  
+`compare_schedule_result = compare_schedules(lighting_schedule_p, normalized_schedule_b, building_open_schedule_p, reduction_factor_p)`
 
-          - Case 6: If space does not require occupancy sensor and interior lighting is modeled with full-auto on occupancy sensor control, and interior lighting schedule does not match P_RMR: `if ( NOT occ_sensor_flag ) and ( control_type_b == "FULL-AUTO ON" ) and ( NOT schedule_match_flag ): CAUTION`  
+(4 inputs, Schedule 1, Schedule 2, Mask Schedule, comparison factor)
 
-          - Case 7: If space does not require occupancy sensor and interior lighting is not modeled with full-auto on occupancy sensor control, and interior lighting schedule matches P_RMR: `if ( NOT occ_sensor_flag ) and ( control_type_b != "FULL-AUTO ON" ) and ( schedule_match_flag ): CAUTION`  
-
-          - Case 8: If space does not require occupancy sensor and interior lighting is not modeled with full-auto on occupancy sensor control, and interior lighting schedule does not match P_RMR: `if ( NOT occ_sensor_flag ) and ( control_type_b != "FULL-AUTO ON" ) and ( NOT schedule_match_flag ): CAUTION`  
-
-**Rule Assertion Table:**  
-| Input                     |Case 1 |Case 2   |Case 3   |Case 4   |Case 5   |Case 6   |Case 7   |Case 8   |
-| :-                        |:-:    |:-:      |:-:      |:-:      |:-:      |:-:      |:-:      |:-:      |
-| occ control required      |true   |true     |true     |true     |false    |false    |false    |false    |
-| "FULL-AUTO ON" modeled    |true   |true     |false    |false    |true     |true     |false    |false    |
-| schedule matches P_RMR    |true   |false    |true     |false    |true     |false    |true     |false    |
-| ASSERTION                 |PASS   |CAUTION  |CAUTION  |FAIL     |FAIL     |CAUTION  |CAUTION  |CAUTION  |
-
+- Schedule 2 as the comparison basis, i.e. Schedule 1 = Schedule 2 * comparison factor
+- When Mask Schedule hourly value is 0, schedules need to be the same at that hour. If Mask Schedule hourly value is 1, Schedule 1 needs to be comparison factor times Schedule 2 at that hour
+- can return "match", "equal and less", "equal and more", "equal, less and more", with bin data, TBD
