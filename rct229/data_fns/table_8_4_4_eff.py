@@ -5,7 +5,7 @@ from rct229.utils.interp import strict_list_linear_interpolation
 ElectricalPhase = schema_enums["ElectricalPhase"]
 SINGLE_PHASE = ElectricalPhase.SINGLE_PHASE.name
 THREE_PHASE = ElectricalPhase.THREE_PHASE.name
-_table_8_4_4 = data["table_8_4_4"]
+_table_8_4_4 = data["ashrae_90_1_prm_transformers"]
 
 MIN_KVA = 15
 MAX_SINGLE_PHASE_KVA = 333
@@ -38,7 +38,7 @@ def table_8_4_4_eff(phase, kVA):
     Returns
     -------
     float
-        The required transformer percentage efficiency
+        The required transformer efficiency as a decimal value
     """
     # Check that the capacity is in range
     if (
@@ -51,11 +51,20 @@ def table_8_4_4_eff(phase, kVA):
     # Create the lists to be used for linear interpolation
     table_lists = {
         SINGLE_PHASE: [
-            (item["kVA"], item["Efficiency"]) for item in _table_8_4_4[SINGLE_PHASE]
+            (item["capacity"], item["efficiency"])
+            for item in filter(
+                lambda list_item: list_item["phase"] == "Single-Phase",
+                _table_8_4_4["transformers"],
+            )
         ],
         THREE_PHASE: [
-            (item["kVA"], item["Efficiency"]) for item in _table_8_4_4[THREE_PHASE]
+            (item["capacity"], item["efficiency"])
+            for item in filter(
+                lambda list_item: list_item["phase"] == "Three-Phase",
+                _table_8_4_4["transformers"],
+            )
         ],
     }
 
-    return strict_list_linear_interpolation(table_lists[phase], kVA)
+    # Round to 4 figures to match Table 8.4.4.
+    return round(strict_list_linear_interpolation(table_lists[phase], kVA), 4)
