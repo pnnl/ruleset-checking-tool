@@ -10,41 +10,69 @@
 - Table G3.7, Performance Rating Method Lighting Power Density Allowances and Occupancy Sensor Reductions Using the Space-by-Space Method  
 
 **Applicability:** All required data elements exist for P_RMR  
-**Applicability Checks:** None  
+**Applicability Checks:**  
+
+  1. Pass Rule 6-10.
+
 **Manual Check:** Yes  
 **Evaluation Context:** Each Data Element  
 **Data Lookup:** Table G3.7  
+**Function Call:**  
+
+  - compare_schedules()
+  - normalize_space_lighting_schedule()
 
 ## Rule Logic:  
 
-- For each building_segment in the Proposed model: ```for building_segment_p in P_RMR.building.building_segments:```  
+- **Applicability Check 1:** If pass Rule 6-10: `if rule_6_10 == TRUE:`  
 
-  - For each thermal_block in building segment: ```thermal_block_p in building_segment_p.thermal_blocks:```  
+- Get building open schedule in the proposed model: `building_open_schedule_p = P_RMR.building.building_open_schedule`  
 
-    - For each zone in thermal block: ```zone_p in thermal_block_p.zones:```  
+- For each building segment in building: `for building_segment_p in P_RMR.building.building_segments:`  
 
-      - For each space in zone: ```space_p in zone_p.spaces:```  
+  - For each thermal block in building segment: `thermal_block_p in building_segment_p.thermal_blocks:`  
 
-        - Get lighting space type: ```lighting_space_type_p = space_p.lighting_space_type```  
+    - For each zone in thermal block: `zone_p in thermal_block_p.zones:`  
 
-        - Get lighting in space: ```lighting_p = space_p.interior_lighting```  
+      - For each space in zone: `space_p in zone_p.spaces:`  
 
-        - Check if lighting has occupancy control: ```if lighting_p.has_occupancy_control:```  
+        - Get matching space from B_RMR: `space_b = match_data_element(B_RMR, Spaces, space_p.id)`  
 
-          - Get lighting schedule: ```schedule_p = match_data_element(P_RMR, schedules, lighting_p.lighting_multiplier_schedule_name)```  (Note XC, this would require match_data_element to use name instead of id)
+          - Get normalized space lighting schedule for B_RMR: `normalized_schedule_b = normalize_space_lighting_schedule(space_b)`  
 
-          - Get lighting schedule equivalent full load hours: ```schedule_EFLH_p = EFLH(schedule_p.hourly_values)```  
+        - Get lighting space type: `lighting_space_type_p = space_p.lighting_space_type`  
 
-          - Get matching space from B_RMR: ```space_b = match_data_element(B_RMR, spaces, space_p.id)```  
+          - If lighting space type is employee lunch and break rooms, conference/meeting rooms, or classrooms (not including shop classrooms, laboratory classrooms, and preschool through 12th-grade classrooms), get baseline lighting occupancy sensor reduction factor from Table G3.7: `if lighting_space_type_p in ["LOUNGE/BREAKROOM", "CONFERENCE/MEETING/MULTIPURPOSE ROOM", "CLASSROOM/LECTURE HALL/TRAINING ROOM - PENITENTIARY", "CLASSROOM/LECTURE HALL/TRAINING ROOM - ALL OTHER"]: reduction_factor_b = data_lookup(table_G3_7, lighting_space_type_p, "FULL-AUTO ON")`  
 
-            - Get lighting in space: ```lighting_b = space_b.interior_lighting```  
+          - Else, set baseline reduction factor to 0: `else: reduction_factor_b = 0`  
 
-            - Get lighting schedule: ```schedule_b = match_data_element(B_RMR, schedules, lighting_b.lighting_multiplier_schedule_name)```  
+        - For each lighting in space: `lighting_p in space_p.interior_lighting:`  
 
-            - Get lighting schedule equivalent full load hours: ```schedule_EFLH_b = EFLH(schedule_b.hourly_values)```  
+          - Get lighting control type: `lighting_control_type_p = lighting_p.occupancy_control_type`  
 
-**Rule Assertion:**  
+          - Get lighting occupancy sensor reduction factor from Table G3.7: `reduction_factor_p = data_lookup(table_G3_7, lighting_space_type_p, lighting_control_type_p)`  
 
-- Case 1, Proposed model interior lighting schedule EFLH is equal to Baseline model: ```schedule_EFLH_p == schedule_EFLH_b: PASS```  
+          - Calculate adjusted lighting occupancy sensor reduction factor based on B_RMR: `adjusted_reduction_factor_p = ( 1 - reduction_factor_p ) / ( 1 - reduction_factor_b )`  
 
-- Case 2, Proposed model interior lighting schedule EFLH is not equal to Baseline model, raise warning and return lighting space type, lighting schedule EFLHs for manual check: ```schedule_EFLH_p != schedule_EFLH_b: CAUTION, return lighting_space_type_p, schedule_EFLH_p, schedule_EFLH_b```  
+          - Get lighting schedule: `lighting_schedule_p = lighting_p.lighting_multiplier_schedule`  
+
+          - Compare lighting schedules in P_RMR and B_RMR: `schedule_comparison_result = compare_schedules(lighting_schedule_p, normalized_schedule_b, building_open_schedule_p, adjusted_reduction_factor_p)`  
+
+            **Rule Assertion:**
+
+            - Case 1: For all hours, for each lighting, if lighting schedule in P_RMR is equal to lighting schedule in B_RMR times adjusted lighting occupancy sensor reduction factor: `if schedule_comparison_result == "MATCH": PASS`  
+
+            - Case 2: Else if lighting schedule in P_RMR is lower than or equal to lighting schedule in B_RMR times adjusted lighting occupancy sensor reduction factor: `if schedule_comparison_result == "EQUAL AND LESS": CAUTION`  
+
+            - Case 3: Else, lighting schedule in P_RMR is higher than lighting schedule in B_RMR times adjusted lighting occupancy sensor reduction factor: `if schedule_comparison_result == "EQUAL AND MORE": FAIL`  
+
+**Temporary Function note:**
+
+`compare_schedule_result = compare_schedules(lighting_schedule_p, normalized_schedule_b, building_open_schedule_p, reduction_factor_p)`
+
+(4 inputs, Schedule 1, Schedule 2, Mask Schedule, comparison factor)
+
+- Schedule 2 as the comparison basis, i.e. Schedule 1 = Schedule 2 * comparison factor
+- When Mask Schedule hourly value is 0, schedules need to be the same at that hour. If Mask Schedule hourly value is 1, Schedule 1 needs to be comparison factor times Schedule 2 at that hour
+- can return "match", "equal and less", "equal and more", "equal, less and more", with bin data, TBD
+
