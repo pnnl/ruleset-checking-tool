@@ -1,7 +1,8 @@
 import pytest
 from numpy.testing import assert_approx_equal
 from rct229.data_fns.table_G3_8_fns import (
-    lighting_space_enumeration_to_lpd_space_type_map ,
+    lighting_space_enumeration_to_lpd_space_type_map,
+    table_G3_8_lpd
 )
 from rct229.utils.json_utils import load_json
 
