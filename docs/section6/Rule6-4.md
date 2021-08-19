@@ -32,15 +32,19 @@
 
       - For each space in zone: `space_p in zone_p.spaces:`  
 
-        - For each interior lighting in space: `interior_lighting_p in space_p.interior_lightings:`  
+        - Get total lighting power density in space: `total_space_LPD_p = sum(interior_lighting.power_per_area for interior_lighting in space_p.interior_lighting)`
 
-          **Rule Assertion:**  
+        - Get matching space in U_RMR: `space_u = match_data_element(U_RMR, Spaces, space_p.id)`
 
-          - Case 1: If lighting status type in space is not-yet designed, and interior lighting power density matches Table 9.5.1: `if ( space_lighting_status_type_dict[space.id] == "NOT-YET DESIGNED" ) and ( interior_lighting_p.power_per_area == data_lookup(table_9_5_1, lighting_building_area_type_p) ): PASS and raise_warning "LIGHTING NEITHER EXISTS OR IS SUBMITTED WITH DESIGN DOCUMENTS. LIGHTING POWER DENSITY IN P_RMR MATCHES TABLE 9.5.1."`  
+          - Get total lighting power density in space in U_RMR: `total_space_LPD_u = sum(interior_lighting.power_per_area for interior_lighting in space_u.interior_lighting)`
 
-          - Case 2:  Else if lighting status type in space is not-yet designed, and interior lighting power density does not match Table 9.5.1 : `else if ( space_lighting_status_type_dict[space.id] == "NOT-YET DESIGNED" ) and ( interior_lighting_p.power_per_area != data_lookup(table_9_5_1, lighting_building_area_type_p) ): FAIL and raise_warning "LIGHTING NEITHER EXISTS OR IS SUBMITTED WITH DESIGN DOCUMENTS. LIGHTING POWER DENSITY IN P_RMR DOES NOT MATCH TABLE 9.5.1."`  
+        **Rule Assertion:**  
 
-          - Case 3: Else if lighting status type in space is as-designed or as-existing, and interior lighting power density in P_RMR matches U_RMR: `else if ( space_lighting_status_type_dict[space.id] == "AS-DESIGNED OR AS-EXISTING" ) and ( interior_lighting_p.power_per_area == match_data_element(U_RMR, InteriorLightings, interior_lighting_p.id).power_per_area ): PASS and raise_warning "LIGHTING EXISTS OR IS SUBMITTED WITH DESIGN DOCUMENTS. LIGHTING POWER DENSITY IN P_RMR MATCHES U_RMR"`  
+        - Case 1: If lighting status type is space as-designed or as-existing, and interior lighting power density in P_RMR matches U_RMR: `if ( space_lighting_status_type_dict[space.id] == "AS-DESIGNED OR AS-EXISTING" ) and ( total_space_LPD_p == total_space_LPD_u ): PASS and raise_warning "LIGHTING EXISTS OR IS SUBMITTED WITH DESIGN DOCUMENTS. LIGHTING POWER DENSITY IN P_RMR MATCHES U_RMR"`
 
-          - Case 4: Else if lighting status type in space is as-designed or as-existing, and interior lighting power density in P_RMR does not match U_RMR: `else if ( space_lighting_status_type_dict[space.id] == "AS-DESIGNED OR AS-EXISTING" ) and ( interior_lighting_p.power_per_area != match_data_element(U_RMR, InteriorLightings, interior_lighting_p.id).power_per_area ): CAUTION and raise_warning "LIGHTING EXISTS OR IS SUBMITTED WITH DESIGN DOCUMENTS. LIGHTING POWER DENSITY IN P_RMR DOES NOT MATCH U_RMR."`  
+        - Case 2: Else if lighting status type in space is as-designed or as-existing, and interior lighting power density in P_RMR does not match U_RMR: `else if ( space_lighting_status_type_dict[space.id] == "AS-DESIGNED OR AS-EXISTING" ) and ( total_space_LPD_p != total_space_LPD_u ): CAUTION and raise_warning "LIGHTING EXISTS OR IS SUBMITTED WITH DESIGN DOCUMENTS. LIGHTING POWER DENSITY IN P_RMR DOES NOT MATCH U_RMR."`
+
+        - Case 3: Else, lighting status type in space is not-yet designed or is as-designed or as-existing but matches Table 9.5.1. If interior lighting power density in P_RMR matches U_RMR: `else if total_space_LPD_p == total_space_LPD_u: PASS and raise_warning "LIGHTING IS NOT YET DESIGNED, OR LIGHTING IS AS-DESIGNED OR AS-EXISTING BUT MATCHES TABLE 9.5.1. LIGHTING POWER DENSITY IN P_RMR MATCHES U_RMR."`
+
+        - Case 4: Else, interior lighting power density in P_RMR does not match U_RMR: `else: CAUTION and raise_warning "LIGHTING IS NOT YET DESIGNED, OR LIGHTING IS AS-DESIGNED OR AS-EXISTING BUT MATCHES TABLE 9.5.1. LIGHTING POWER DENSITY IN P_RMR DOES NOT MATCH U_RMR."`
 
