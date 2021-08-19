@@ -1,5 +1,5 @@
 
-## get_building_segment_wwr
+## get_overall_building_segment_wwr
 
 Description: This function would determine window wall ratio for a building segment.  
 
@@ -33,15 +33,13 @@ Logic:
 
           - If surface is above-grade wall and adjacent to the exterior: `if ( get_opaque_surface_type(surface) == "ABOVE-GRADE WALL" ) AND ( scc_dictionary[surface.id] in ["EXTERIOR RESIDENTIAL", "EXTERIOR NON-RESIDENTIAL", "EXTERIOR MIXED", "SEMI-EXTERIOR"] ):`  
 
+            - Add surface area to building segment total envelope above-grade wall area: `total_envelope_wall_area += surface.area`
+
             - For each subsurface in surface: `for subsurface in surface.subsurfaces:`  
 
-              - If the glazed vision area is more than 50% of the total area, add glazed vision area to building segment total fenestration area: `if ( subsurface.glazed_area > ( subsurface.glazed_area + subsurface.opaque_area ) * 50% ): total_fenestration_area += subsurface.glazed_area + subsurface.opaque_area`  
+              - Check if subsurface is door, and if the glazed vision area is more than 50% of the total area, add subsurface total area to building segment total fenestration area: `if ( subsurface.classification == "DOOR" ) AND ( subsurface.glazed_area > ( subsurface.glazed_area + subsurface.opaque_area ) * 50% ): total_fenestration_area += subsurface.glazed_area + subsurface.opaque_area`  
 
-      - For each surface in zone: `for surface in zone.surfaces:`
-
-        - If surface is above-grade wall and is regulated: `if ( get_opaque_surface_type(surface) == "ABOVE-GRADE WALL" ) AND ( scc_dictionary[surface.id] != "UNREGULATED" ):`
-
-          - Add to envelope total above-grade wall area: `total_envelope_wall_area += surface.area`
+              - Else if subsurface is not door, add total subsurface area to building segment total fenestration area: `else if subsurface.classification != "DOOR" : total_fenestration_area += subsurface.glazed_area + subsurface.opaque_area`
 
 - Calculate WWR of the building segment: `window_wall_ratio = total_fenestration_area / total_envelope_wall_area`
 
