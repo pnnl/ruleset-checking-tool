@@ -1,18 +1,20 @@
 
 ## get_lighting_status_type
 
-Description: This function would determine whether the space lighting status type is not-yet designed, as-designed or as-existing.  
+Description: This function would determine whether the space lighting status type is 1). not-yet designed or match Table 9_5_1, 2). as-designed or as-existing.  
+
+Applicability: P_RMR Only
 
 Inputs:
   - **building_segment**: The building segment that needs to determine lighting status type.  
 
 Returns:
-- **space_lighting_status_type**: The Lighting Status Type Category [not-yet designed, as-designed or as-existing].    
+- **space_lighting_status_type**: The Lighting Status Type Category [not-yet designed or match Table_9_5_1, as-designed or as-existing].    
 
 Data Lookup:
 - Table 9.5.1  
 
-Function Call: None  
+Function Call: None
 
 Logic:  
 
@@ -24,7 +26,9 @@ Logic:
 
     - For each space in zone: `space in zone.spaces:`  
 
-      - If space lighting power density equals to allowance, save space interior lighting as not-yet designed: `if space.interior_lighting.power_per_area == allowable_LPD: space_lighting_status_type_dict[space.id] = "NOT-YET DESIGNED"`  
+      - Get total lighting power density in space: `total_space_LPD = sum(interior_lighting.power_per_area for interior_lighting in space.interior_lighting)`
+
+      - If space total lighting power density equals to allowance, save space interior lighting as not-yet designed: `if total_space_LPD == allowable_LPD: space_lighting_status_type_dict[space.id] = "NOT-YET DESIGNED OR MATCH TABLE_9_5_1"`  
 
       - Else, save space interior lighting as as-designed or as-existing: `else: space_lighting_status_type_dict[space.id] = "AS-DESIGNED OR AS-EXISTING"`  
 
