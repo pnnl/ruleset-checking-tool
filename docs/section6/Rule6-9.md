@@ -16,7 +16,7 @@
 **Function Call:**  
 
   - compare_schedules()
-  - normalize_space_lighting_schedule()
+  - normalize_space_schedules()
 
 **Evaluation Context:** Each Data Element  
 **Data Lookup:** None  
@@ -45,28 +45,33 @@
 
       - For each space in zone: `space_b in zone_b.spaces:`  
 
-        - Get normalized space lighting schedule: `normalized_schedule_b = normalize_space_lighting_schedule(space_b)`  
+        - Get normalized space lighting schedule: `normalized_schedule_b = normalize_space_schedules(space_b.interior_lighting)`  
 
         - Get matching space in P_RMR: `space_p = match_data_element(P_RMR, Spaces, space_b.id)`  
 
-          - Get normalized space lighting schedule in P_RMR: `normalized_schedule_p = normalize_space_lighting_schedule(space_p)`
+          - Get normalized space lighting schedule in P_RMR: `normalized_schedule_p = normalize_space_schedules(space_p.interior_lighting)`
 
-        - Check if automatic shutoff control is modeled in space during unoccupied hours (i.e. if lighting schedule hourly value in B_RMR is equal to P_RMR during unoccupied hours): `schedule_comparison_result = compare_schedules(normalized_schedule_b, normalized_schedule_p, building_open_schedule_b, none)`  
+        - Check if automatic shutoff control is modeled in space during building closed hours (i.e. if lighting schedule hourly value in B_RMR is equal to P_RMR during building closed hours): `schedule_comparison_result = compare_schedules(normalized_schedule_b, normalized_schedule_p, building_open_schedule_b, -111)`  
 
           **Rule Assertion:**
 
-          - Case 1: For unoccupied hours, if lighting schedule hourly value in B_RMR is equal to P_RMR: `if schedule_comparison_result == "MATCH": PASS`  
+          - Case 1: For building closed hours, if lighting schedule hourly value in B_RMR is equal to P_RMR: `if schedule_comparison_result == "MATCH": PASS`  
 
           - Case 2: Else: `else: CAUTION and return schedule_comparison_result`  
 
+**Future Change Note:**
 
-**Temporary Function note:**
+  1. building.building_open_schedule will need to be updated to building_segment.open_schedule once approved and added to the schema.
 
-`compare_schedule_result = compare_schedules(Schedule 1, Schedule 2, Mask Schedule, reduction_factor)`
 
-(4 inputs, Schedule 1, Schedule 2, Mask Schedule, comparison factor)
+**Temporary Function Note:**
 
-- Schedule 2 as the comparison basis, i.e. Schedule 1 = Schedule 2 * comparison factor
-- When Mask Schedule hourly value is 0, schedules need to be the same at that hour. If Mask Schedule hourly value is 1, Schedule 1 needs to be comparison factor times Schedule 2 at that hour. If Mask Schedule hourly value is 2, skip comparison.
+`compare_schedule_result = compare_schedules(Schedule 1, Schedule 2, Mask Schedule, comparison_factor)`
+
+(4 inputs, Schedule 1, Schedule 2, Mask Schedule, comparison_factor)
+
+- Schedule 2 as the comparison basis, i.e. Schedule 1 = Schedule 2 * comparison_factor
+- When Mask Schedule hourly value is 0, schedules need to be the same at that hour. If Mask Schedule hourly value is 1, Schedule 1 needs to be comparison factor times Schedule 2 at that hour. If Mask Schedule hourly value is 2, skip comparison for at hour.
+- If comparison_factor is not needed, set to -111 for now. For example, when the function only needs to compare if Schedule 1 and Schedule 2 are equal at some hours (when Mask Schedule is 0) and doesn't need to compare the rest of the hours (when Mask Schedule is 2). TBD.
 - can return "match", "equal and less", "equal and more", "equal, less and more", with bin data, TBD
 
