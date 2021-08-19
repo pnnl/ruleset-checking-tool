@@ -33,3 +33,7 @@ Logic:
       - Else, save space interior lighting as as-designed or as-existing: `else: space_lighting_status_type_dict[space.id] = "AS-DESIGNED OR AS-EXISTING"`  
 
 **Returns** `return space_lighting_status_type_dict`  
+
+**Notes:**
+  1. If building_segment.lighting_building_area_type is not specified, all space in building segment will be classified as "AS-DESIGNED OR AS-EXISTING".
+
