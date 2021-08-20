@@ -7,7 +7,7 @@ Inputs:
   - **RMR**: The RMR that needs to determine window wall ratio.  
 
 Returns:
-- **window_wall_ratio**: The window wall ratio of the building segment.  
+- **building_wwr_dictionary**: A dictionary that saves window wall ratio for all building segments in building.  
 
 Function Call:
 
@@ -41,8 +41,8 @@ Logic:
 
               - Else if subsurface is not door, add total subsurface area to building segment total fenestration area: `else if subsurface.classification != "DOOR" : total_fenestration_area += subsurface.glazed_area + subsurface.opaque_area`
 
-- Calculate WWR of the building segment: `window_wall_ratio = total_fenestration_area / total_envelope_wall_area`
+  - Calculate and save WWR of building segment: `building_wwr_dictionary[building_segment.id] = total_fenestration_area / total_envelope_wall_area`
 
-**Returns** `return window_wall_ratio`  
+**Returns** `return building_wwr_dictionary`  
 
 **[Back](../_toc.md)**
