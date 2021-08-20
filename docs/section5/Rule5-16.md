@@ -36,6 +36,6 @@
 
       - Case 1: If building segment window-wall-ratio matches Table G3.1.1-1 allowance: `if building_wwr_dictionary_b[building_segment_b.id] == data_lookup(table_G3_1_1_1, building_segment_b.area_type_vertical_fenestration): PASS`
 
-      - Case 2: Else: `else: CAUTION and raise_warning "BUILDING SEGMENT AREA TYPE IS INCLUDED IN TABLE G3.1.1-1. BUT BUILDING SEGMENT WINDOW-WALL-RATIO DOES NOT MATCH TABLE G3.1.1-1. CHECK IF BUILDING SEGMENT HAS EXISTING ENVELOPE THAT CAN BE EXCLUDED FROM THE WINDOW-WALL-RATIO CALCULATION."`
+      - Case 2: Else: `else: CAUTION and raise_warning "BASELINE BUILDING SEGMENT AREA TYPE IS INCLUDED IN TABLE G3.1.1-1. BUT BUILDING SEGMENT FENESTRATION AREA DOES NOT MATCH TABLE G3.1.1-1. CHECK IF BUILDING SEGMENT HAS EXISTING ENVELOPE THAT CAN BE EXCLUDED FROM THE WINDOW-WALL-RATIO CALCULATION."`
 
 **[Back](../_toc.md)**
