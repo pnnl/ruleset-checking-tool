@@ -1,36 +1,41 @@
-# Envelope - Rule 5-16  
-**Rule ID:** 5-16  
-**Rule Description:** For building area types included in Table G3.1.1-1, vertical fenestration areas for new buildings and additions shall equal that in Table G3.1.1-1 based on the area of gross above-grade walls that separate conditioned spaces and semiheated spaces from the exterior. Where a building has multiple building area types, and each building area types included in Table G3.1.1-1, each type shall use the values in the table.  
+
+# Envelope - Rule 5-18  
+
+**Rule ID:** 5-18  
+**Rule Description:** For building area types included in Table G3.1.1-1, vertical fenestration areas for new buildings and additions shall equal that in Table G3.1.1-1 based on the area of gross above-grade walls that separate conditioned spaces and semi-heated spaces from the exterior.  
 **Rule Assertion:** Baseline RMR = expected value  
 **Appendix G Section:** Section G3.1-5(c) Building Envelope Modeling Requirements for the Baseline building  
-**Appendix G Section Reference:**
-- Table G3.1, 5. Building Envelope, Baseline Building Performance, c. Vertical Fenestration Areas
-- Table G3.1.1-1
+**Appendix G Section Reference:**  
 
-**Data Lookup:** Table G3.1.1-1  
-**Evaluation Context:**  Each Data Element  
+- Table G3.1-5. Building Envelope, Baseline Building Performance, c. Vertical Fenestration Areas  
+- Table G3.1.1-1  
 
+**Applicability:** All required data elements exist for B_RMR
 **Applicability Checks:** 
-1. Building has spaces that are NEW, ADDITION or ALTERATION.
+
+1. Building has spaces that are NEW, ADDITION or ALTERATION.  
 
 **Manual Checks:** None  
+**Evaluation Context:**  Each Data Element  
+**Data Lookup:** Table G3.1.1-1  
+**Function Call:**  
 
-## Rule Logic:
-- **Applicability Check 1:** `length( [ if _space.status_type for _space in U_RMR...spaces is in [NEW, ADDITION, ALTERATION] ] ) > 0:`  
-- For each building segment in the Baseline model: `For _building_segment in B_RMR.building.building_segments:`
-    - Get the building area type of the building segment: `_building_area_type = _building_segment.area_type_vertical_fenestration`
-    - If building area type exists in Table G3.1.1-1 then get the allowable WWR for the building segment: `if _building_area_type in table_G3_1_1_1: _allowable_baseline_wwr = data_lookup(table_G3_1_1_1, _building_area_type) else: _allowable_baseline_wwr = 0.40`
-    - Get thermal_block from building segment: `_thermal_block in building_segment.thermal_blocks:`
-    - Get thermal_zone from thermal block: `_thermal_zone in _thermal_block.thermal_zones:`
-    - Get space from thermal zone: `_space in _thermal_zone.spaces:`
-        - Check that space is either [new, addition or alteration] and [heated and cooled, heated only, or semi-heated]: `if ( _space.status_type in [NEW, ADDITION, ALTERATION] ) AND ( _space.conditioning_type in [HEATED_AND_COOLED, HEATED_ONLY, SEMIHEATED] ):` 
-            - Get surface in space: `_surface in space.surfaces:`
-                - Check that surface is exterior and vertical: `if ( _surface.adjacent_to in [AMBIENT] ) AND ( 60 <= _surface.tilt <= 90 ): _exterior_vertical_surface = _surface`  
-                - Calculate the total fenestration area: `_fenestration_area = sum(_fenestration.area for _fenestration in _exterior_vertical_surface.fenestration_subsurfaces)`
-                - Calculate the total surface area: `_surface_area = _surface.area`  
-                - Calculate WWR of the building area type and space: `_WWR_baseline = _fenestration_area/_surface_area`
-                - Get matching space from User RMR: `_user_space = match_data_element(U_RMR, spaces, _space.name)`
-                - Repeat WWR calculation for User RMR space: `_WWR_user = _calculate_wwr(_user_space)`
-                - **Rule Assertion:** `_WWR_baseline == min(_WWR_user, _allowable_baseline_wwr)`
+  1. get_overall_building_segment_wwr()
+
+## Rule Logic:  
+
+- **Applicability Check 1:** `length( [ if space.status_type for space in U_RMR...spaces is in [NEW, ADDITION, ALTERATION] ] ) > 0:`  
+
+- Get window wall ratio dictionary for building: `building_wwr_dictionary_b = get_overall_building_segment_wwr(B_RMR)`
+
+- For each building segment in the Baseline model: `for building_segment_b in B_RMR.building.building_segments:`
+
+  - Check if building segment area type is included in Table G3.1.1-1: `if data_lookup(table_G3_1_1_1, building_segment_b.area_type_vertical_fenestration):`
+
+    **Rule Assertion:**
+
+      - Case 1: If building segment window-wall-ratio matches Table G3.1.1-1 allowance: `if building_wwr_dictionary_b[building_segment_b.id] == data_lookup(table_G3_1_1_1, building_segment_b.area_type_vertical_fenestration): PASS`
+
+      - Case 2: Else: `else: CAUTION and raise_warning "BUILDING SEGMENT AREA TYPE IS INCLUDED IN TABLE G3.1.1-1. BUT BUILDING SEGMENT WINDOW-WALL-RATIO DOES NOT MATCH TABLE G3.1.1-1. CHECK IF BUILDING SEGMENT HAS EXISTING ENVELOPE THAT CAN BE EXCLUDED FROM THE WINDOW-WALL-RATIO CALCULATION."`
 
 **[Back](../_toc.md)**
