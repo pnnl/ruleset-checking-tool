@@ -16,6 +16,7 @@
 
   - get_surface_conditioning_category()
   - get_opaque_surface_type()
+  - match_data_element()
 
 ## Rule Logic:  
 
