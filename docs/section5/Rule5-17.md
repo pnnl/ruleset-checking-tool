@@ -12,6 +12,10 @@
 **Manual Check:** None  
 **Evaluation Context:** Each Data Element  
 **Data Lookup:** None  
+**Function Call:**
+
+  - get_surface_conditioning_category()
+  - get_opaque_surface_type()
 
 ## Rule Logic:  
 
