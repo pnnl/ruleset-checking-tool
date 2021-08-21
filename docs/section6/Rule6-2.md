@@ -54,4 +54,17 @@
 
 - Calculate the total design lighting power for for the whole buidling: ```for building_segment_proposed in P_RMR.building.building_segments: building_design_lighting_wattage_proposed += building_segment_design_lighting_wattage_proposed```  
 
-**Rule Assertion:** For the Proposed model: ```building_design_lighting_wattage_proposed <= building_allowable_lighting_wattage_proposed```  
+**Rule Assertion:** For the Proposed model: ```building_design_lighting_wattage_proposed <= building_allowable_lighting_wattage_proposed``` 
+
+**Notes:** 
+The RDS needs to be updated in the future based on the following:
+- If lighting_building_area_type and lighting_space_type are know known, then calculate allowance based on both, pass if less than max  
+
+- If lighting_building_area_type is not specified, lighting_space_type for all spaces in the building segment is included: then determine allowance based on lighting space type.  
+    - If PASS- Output should say that project passed based on space by space method. Reviewer should verify if the project uses space by space method.  
+    - If FAIL- then CAUTION and say that it fails space by space method and lighting_building_area_type is not known to determine allowance based on BAT.  
+    
+- If lighting_building_area_type provided but lighting_space_type not included:   
+    - If PASS - Output should say that project passed based on building area method. Reviewer should verify if the project uses building area method. 
+    - If FAIL- then CAUTION and say that it fails building area method and lighting_space_type is not known to determine allowance based on space by sspace method.    
+
