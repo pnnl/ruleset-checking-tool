@@ -1,8 +1,6 @@
 from rct229.data import data
 from rct229.data_fns.table_utils import find_osstd_table_entry
 
-_osstd_prm_interior_lighting_data = data["ashrae_90_1_prm_2019.prm_interior_lighting"]
-
 # This dictionary maps the LightingSpaceType2019ASHRAE901TG37 enumerations to
 # the corresponding lpd_space_type values in the OSSTD file
 # ashrae_90_1_prm_2019.prm_interior_lighting.json
@@ -138,7 +136,7 @@ def table_G3_7_lpd(lighting_space_type, space_height):
     osstd_entry = find_osstd_table_entry(
         match_field_value=lpd_space_type,
         match_field_name="lpd_space_type",
-        osstd_table=_osstd_prm_interior_lighting_data,
+        osstd_table=data["ashrae_90_1_prm_2019.prm_interior_lighting"],
     )
     watts_per_sqft = osstd_entry["w/ft^2"]
     watts_per_ft = osstd_entry["w/ft"]
