@@ -1,9 +1,7 @@
 from rct229.data import data
+from rct229.data_fns.table_utils import find_osstd_table_entry
 
 _osstd_prm_interior_lighting_data = data["ashrae_90_1_prm_2019.prm_interior_lighting"]
-_osstd_prm_interior_lighting_list = _osstd_prm_interior_lighting_data[
-    "prm_interior_lighting"
-]
 
 # This dictionary maps the LightingSpaceType2019ASHRAE901TG37 enumerations to
 # the corresponding lpd_space_type values in the OSSTD file
@@ -43,7 +41,7 @@ lighting_space_enumeration_to_lpd_space_type_map = {
     "DINING_AREA_ALL_OTHERS": "dining - all other",
     "ELECTRICAL_MECHANICAL_ROOM": "electrical/mechanical",
     "EMERGENCY_VEHICLE_GARAGE": "emergency vehicle garage",
-    "FOOD_PREPARATION_AREA": "Food Preparation Area",
+    "FOOD_PREPARATION_AREA": "kitchen",
     "GUEST_ROOM": "guest room",
     "JUDGES_CHAMBERS": "judges chambers",
     "DWELLING_UNIT": "apartment - hardwired",
@@ -83,7 +81,7 @@ lighting_space_enumeration_to_lpd_space_type_map = {
     "GYMNASIUM_FITNESS_CENTER_PLAYING_AREA": "gymnasium playing area",
     "HEALTHCARE_FACILITY_EMERGENCY_ROOM": "emergency room",
     "HEALTHCARE_FACILITY_EXAM_TREATMENT_ROOM": "exam/treatment",
-    "HEALTHCARE_FACILITY_MEDICAL_SUPPLY_ROOM": "medical suppl",
+    "HEALTHCARE_FACILITY_MEDICAL_SUPPLY_ROOM": "medical supply",
     "HEALTHCARE_FACILITY_NURSERY": "nursery",
     "HEALTHCARE_FACILITY_NURSES_STATION": "nurses station",
     "HEALTHCARE_FACILITY_OPERATING_ROOM": "operating room",
@@ -117,20 +115,6 @@ lighting_space_enumeration_to_lpd_space_type_map = {
 }
 
 
-# def _get_osstd_entry(lighting_space_type):
-#     entries = HEALTHCARE_FACILITY_EXAM_TREATMENT_ROOM[
-#         entry
-#         for entry in _osstd_prm_interior_lighting_data
-#         if entry["lpd_space_type"] == lighting_space_type
-#     ]
-#     if len(entries) == 1:
-#         match = entries[0]
-#     else:
-#         match = None
-#
-#     return match
-
-
 def table_G3_7_lpd(lighting_space_type, space_height):
     """Returns the lighting power density for a space as
     required by ASHRAE 90.1 Table G3.7
@@ -147,7 +131,15 @@ def table_G3_7_lpd(lighting_space_type, space_height):
     float
         The lighting power density given by Table G3.7 [W/ft^2]
     """
-    osstd_entry = _get_osstd_entry(lighting_space_type)
+    lpd_space_type = lighting_space_enumeration_to_lpd_space_type_map[
+        lighting_space_type
+    ]
+
+    osstd_entry = find_osstd_table_entry(
+        match_field_value=lpd_space_type,
+        match_field_name="lpd_space_type",
+        osstd_table=_osstd_prm_interior_lighting_data,
+    )
     watts_per_sqft = osstd_entry["w/ft^2"]
     watts_per_ft = osstd_entry["w/ft"]
 
