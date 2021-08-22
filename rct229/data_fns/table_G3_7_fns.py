@@ -1,6 +1,9 @@
 from rct229.data import data
 
 _osstd_prm_interior_lighting_data = data["ashrae_90_1_prm_2019.prm_interior_lighting"]
+_osstd_prm_interior_lighting_list = _osstd_prm_interior_lighting_data[
+    "prm_interior_lighting"
+]
 
 # This dictionary maps the LightingSpaceType2019ASHRAE901TG37 enumerations to
 # the corresponding lpd_space_type values in the OSSTD file
@@ -44,8 +47,7 @@ lighting_space_enumeration_to_lpd_space_type_map = {
     "GUEST_ROOM": "guest room",
     "JUDGES_CHAMBERS": "judges chambers",
     "DWELLING_UNIT": "apartment - hardwired",
-    "LABORATORY_IN_OR_AS_A_CLASSROOM": "??????????",
-    "LABORATORY_ALL_OTHERS": "laboratory",
+    "LABORATORY_EXCEPT_IN_OR_AS_A_CLASSROOM": "laboratory",
     "LAUNDRY_WASHING_AREA": "laundry/washing",
     # FIXME: The w/ft^2 value should be 0.59 but is set to 0.6 in the OSSTD
     "LOADING_DOCK_INTERIOR": "loading dock",
@@ -115,18 +117,18 @@ lighting_space_enumeration_to_lpd_space_type_map = {
 }
 
 
-def _get_osstd_entry(lighting_space_type):
-    entries = [
-        entry
-        for entry in _osstd_prm_interior_lighting_data
-        if entry["lpd_space_type"] == lighting_space_type
-    ]
-    if len(entries) == 1:
-        match = entries[0]
-    else:
-        match = None
-
-    return match
+# def _get_osstd_entry(lighting_space_type):
+#     entries = HEALTHCARE_FACILITY_EXAM_TREATMENT_ROOM[
+#         entry
+#         for entry in _osstd_prm_interior_lighting_data
+#         if entry["lpd_space_type"] == lighting_space_type
+#     ]
+#     if len(entries) == 1:
+#         match = entries[0]
+#     else:
+#         match = None
+#
+#     return match
 
 
 def table_G3_7_lpd(lighting_space_type, space_height):
