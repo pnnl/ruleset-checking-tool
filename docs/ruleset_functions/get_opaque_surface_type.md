@@ -29,3 +29,7 @@ Logic:
   - Else determine if surface is above grade wall: ```else: surface_type = "ABOVE-GRADE WALL"```  
 
 **Returns** ```return surface_type```  
+
+**Notes:**
+
+  1. Baseline slab that is more than 24" below grade and is unregulated. Verify in RDS.
