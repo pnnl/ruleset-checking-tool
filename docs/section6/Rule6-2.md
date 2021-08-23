@@ -11,7 +11,7 @@
 - Table G3.8, Performance Rating Method Lighting Power Densities Using the Building Area Method  
 
 **Applicability:** All required data elements exist for P_RMR  
-**Manual Check:** None  
+**Manual Check:** Yes  
 **Evaluation Context:** Each Data Element  
 **Data Lookup:** Table G3.7 and Table G3.8  
 **Function Call:** None
@@ -28,11 +28,11 @@
 
       - For each space in zone: `space_p in zone_p.spaces:`  
 
-        - Add space lighting power to building segment total: `design_lighting_wattage += space_p.interior_lighting.power_per_area * space_p.floor_area`  
+        - For each interior lighting in space, add lighting power to building segment total: `building_segment_design_lighting_wattage += sum(interior_lighting.power_per_area for interior_lighting in space_p.interior_lighting) * space_p.floor_area`  
 
         - If building segment specifies lighting building area type , add space floor area to the total building segment floor area: `if allowable_LPD_BAM: total_building_segment_area_p += space_p.floor_area`  
 
-        - Check if any space does not specify lighting space type, flag for Building Area Method: `if NOT space_p.lighting_space_type in table_G3_7: BAM_flag = TRUE`  
+        - Check if any space does not specify lighting space type, flag for Building Area Method: `if NOT space_p.lighting_space_type in table_G3_7: check_BAM_flag = TRUE`  
 
         - Else, get the allowable lighting power density from Table G3-7: `else: allowable_LPD_space = data_lookup(table_G3_7, space_p.lighting_space_type)`  
 
@@ -40,17 +40,17 @@
 
 **Rule Assertion:**
 
-- Case 1: For each building segment, if both lighting building area type and lighting space type in all spaces are specified, and the total lighting power in P_RMR is less than or equal to the higher of the Building Area Method and Space-by-Space Method allowances: `if ( allowable_LPD_BAM ) and ( NOT BAM_flag ) and ( design_lighting_wattage <= max(allowable_LPD_BAM * total_building_segment_area_p, allowable_lighting_wattage_SBS) ): PASS`  
+- Case 1: For each building segment, if both lighting building area type and lighting space type in all spaces are specified, and the total lighting power in P_RMR is less than or equal to the higher of the Building Area Method and Space-by-Space Method allowances: `if ( allowable_LPD_BAM ) and ( NOT check_BAM_flag ) and ( building_segment_design_lighting_wattage <= max(allowable_LPD_BAM * total_building_segment_area_p, allowable_lighting_wattage_SBS) ): PASS`  
 
-- Case 2: Else if both lighting building area type and lighting space type in all spaces are specified, and the total lighting power in P_RMR is more than the higher of the Building Area Method and Space-by-Space Method allowances: `else if ( allowable_LPD_BAM ) and ( NOT BAM_flag ) and ( design_lighting_wattage > max(allowable_LPD_BAM * total_building_segment_area_p, allowable_lighting_wattage_SBS) ): FAIL`  
+- Case 2: Else if both lighting building area type and lighting space type in all spaces are specified, and the total lighting power in P_RMR is more than the higher of the Building Area Method and Space-by-Space Method allowances: `else if ( allowable_LPD_BAM ) and ( NOT check_BAM_flag ) and ( building_segment_design_lighting_wattage > max(allowable_LPD_BAM * total_building_segment_area_p, allowable_lighting_wattage_SBS) ): FAIL`  
 
-- Case 3: Else if lighting building area type is not specified, and lighting space type in all spaces are specified, and the total lighting power in P_RMR is less than or equal to the Space-by-Space Method allowance: `else if ( NOT allowable_LPD_BAM ) and ( NOT BAM_flag ) and ( design_lighting_wattage <= allowable_lighting_wattage_SBS ): PASS and raise_warning 'PROJECT PASSES BASED ON SPACE-BY-SPACE METHOD. VERIFY IF PROJECT USES SPACE-BY-SPACE METHOD.'`  
+- Case 3: Else if lighting building area type is not specified, and lighting space type in all spaces are specified, and the total lighting power in P_RMR is less than or equal to the Space-by-Space Method allowance: `else if ( NOT allowable_LPD_BAM ) and ( NOT check_BAM_flag ) and ( building_segment_design_lighting_wattage <= allowable_lighting_wattage_SBS ): PASS and raise_warning 'PROJECT PASSES BASED ON SPACE-BY-SPACE METHOD. VERIFY IF PROJECT USES SPACE-BY-SPACE METHOD.'`  
 
-- Case 4: Else if lighting building area type is not specified, and lighting space type in all spaces are specified, and the total lighting power in P_RMR is more than the Space-by-Space Method allowance: `else if ( NOT allowable_LPD_BAM ) and ( NOT BAM_flag ) and ( design_lighting_wattage > allowable_lighting_wattage_SBS ): FAIL and raise_warning 'PROJECT FAILS BASED ON SPACE-BY-SPACE METHOD. LIGHTING_BUILDING_AREA_TYPE IS NOT KNOWN TO DETERMINE BUILDING AREA METHOD ALLOWANCE.'`  
+- Case 4: Else if lighting building area type is not specified, and lighting space type in all spaces are specified, and the total lighting power in P_RMR is more than the Space-by-Space Method allowance: `else if ( NOT allowable_LPD_BAM ) and ( NOT check_BAM_flag ) and ( building_segment_design_lighting_wattage > allowable_lighting_wattage_SBS ): FAIL and raise_warning 'PROJECT FAILS BASED ON SPACE-BY-SPACE METHOD. LIGHTING_BUILDING_AREA_TYPE IS NOT KNOWN TO DETERMINE BUILDING AREA METHOD ALLOWANCE.'`  
 
-- Case 5: Else if lighting building area type is specified, and lighting space type is not specified in all spaces, and the total lighting power in P_RMR is less than or equal to Building Area Method allowance: `else if ( allowable_LPD_BAM ) and ( BAM_flag ) and ( design_lighting_wattage <= allowable_LPD_BAM * total_building_segment_area_p ): PASS and raise_warning 'PROJECT PASSES BASED ON BUILDING AREA METHOD. VERIFY IF PROJECT USES BUILDING AREA METHOD.'`  
+- Case 5: Else if lighting building area type is specified, and lighting space type is not specified in all spaces, and the total lighting power in P_RMR is less than or equal to Building Area Method allowance: `else if ( allowable_LPD_BAM ) and ( check_BAM_flag ) and ( building_segment_design_lighting_wattage <= allowable_LPD_BAM * total_building_segment_area_p ): PASS and raise_warning 'PROJECT PASSES BASED ON BUILDING AREA METHOD. VERIFY IF PROJECT USES BUILDING AREA METHOD.'`  
 
-- Case 6: Else if lighting building area type is specified, and lighting space type is not specified in all spaces, and the total lighting power in P_RMR is more than Building Area Method allowance: `else if ( allowable_LPD_BAM ) and ( BAM_flag ) and ( design_lighting_wattage > allowable_LPD_BAM * total_building_segment_area_p ): FAIL and raise_warning 'PROJECT FAILS BASED ON BUILDING AREA METHOD. LIGHTING_SPACE_TYPE IS NOT KNOWN IN ALL SPACES TO DETERMINE SPACE-BY-SPACE METHOD ALLOWANCE.'`  
+- Case 6: Else if lighting building area type is specified, and lighting space type is not specified in all spaces, and the total lighting power in P_RMR is more than Building Area Method allowance: `else if ( allowable_LPD_BAM ) and ( check_BAM_flag ) and ( building_segment_design_lighting_wattage > allowable_LPD_BAM * total_building_segment_area_p ): FAIL and raise_warning 'PROJECT FAILS BASED ON BUILDING AREA METHOD. LIGHTING_SPACE_TYPE IS NOT KNOWN IN ALL SPACES TO DETERMINE SPACE-BY-SPACE METHOD ALLOWANCE.'`  
 
 - Case 7: Else, lighting building area type is not specified, and lighting space type is not specified in all spaces: `Else: FAIL and raise_warning 'LIGHTING_BUILDING_AREA_TYPE IS NOT KNOWN AND LIGHTING_SPACE_TYPE IS NOT KNOWN IN ALL SPACES TO DETERMINE ALLOWANCE.'`  
 
