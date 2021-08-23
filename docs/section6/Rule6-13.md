@@ -10,9 +10,7 @@
 - Table G3.7, Performance Rating Method Lighting Power Density Allowances and Occupancy Sensor Reductions Using the Space-by-Space Method  
 
 **Applicability:** All required data elements exist for P_RMR  
-**Applicability Checks:**  
-
-  1. Pass Rule 6-10.
+**Applicability Checks:** None
 
 **Manual Check:** Yes  
 **Evaluation Context:** Each Data Element  
@@ -20,11 +18,9 @@
 **Function Call:**  
 
   - compare_schedules()
-  - normalize_space_lighting_schedule()
+  - normalize_space_schedules()
 
 ## Rule Logic:  
-
-- **Applicability Check 1:** If pass Rule 6-10: `if rule_6_10 == TRUE:`  
 
 - Get building open schedule in the proposed model: `building_open_schedule_p = P_RMR.building.building_open_schedule`  
 
@@ -38,41 +34,26 @@
 
         - Get matching space from B_RMR: `space_b = match_data_element(B_RMR, Spaces, space_p.id)`  
 
-          - Get normalized space lighting schedule for B_RMR: `normalized_schedule_b = normalize_space_lighting_schedule(space_b)`  
+          - Get normalized space lighting schedule for B_RMR: `normalized_schedule_b = normalize_space_schedules(space_b)`  
 
-        - Get lighting space type: `lighting_space_type_p = space_p.lighting_space_type`  
+        - Get normalized space lighting schedule: `normalized_schedule_b = normalize_space_schedules(space_p)`
 
-          - If lighting space type is employee lunch and break rooms, conference/meeting rooms, or classrooms (not including shop classrooms, laboratory classrooms, and preschool through 12th-grade classrooms), get baseline lighting occupancy sensor reduction factor from Table G3.7: `if lighting_space_type_p in ["LOUNGE/BREAKROOM", "CONFERENCE/MEETING/MULTIPURPOSE ROOM", "CLASSROOM/LECTURE HALL/TRAINING ROOM - PENITENTIARY", "CLASSROOM/LECTURE HALL/TRAINING ROOM - ALL OTHER"]: reduction_factor_b = data_lookup(table_G3_7, lighting_space_type_p, "FULL-AUTO ON")`  
+        - Compare lighting schedules in P_RMR and B_RMR: `schedule_comparison_result = compare_schedules(normalized_schedule_b, normalized_schedule_b, building_open_schedule_p, adjusted_reduction_factor_p)`  
 
-          - Else, set baseline reduction factor to 0: `else: reduction_factor_b = 0`  
+          **Rule Assertion:**
 
-        - For each lighting in space: `lighting_p in space_p.interior_lighting:`  
+          - Case 1: For all hours, for each lighting, if lighting schedule in P_RMR is equal to lighting schedule in B_RMR times adjusted lighting occupancy sensor reduction factor: `if schedule_comparison_result == "MATCH": PASS`  
 
-          - Get lighting control type: `lighting_control_type_p = lighting_p.occupancy_control_type`  
+          - Case 2: Else if lighting schedule in P_RMR is lower than or equal to lighting schedule in B_RMR times adjusted lighting occupancy sensor reduction factor: `if schedule_comparison_result == "EQUAL AND LESS": CAUTION`  
 
-          - Get lighting occupancy sensor reduction factor from Table G3.7: `reduction_factor_p = data_lookup(table_G3_7, lighting_space_type_p, lighting_control_type_p)`  
-
-          - Calculate adjusted lighting occupancy sensor reduction factor based on B_RMR: `adjusted_reduction_factor_p = ( 1 - reduction_factor_p ) / ( 1 - reduction_factor_b )`  
-
-          - Get lighting schedule: `lighting_schedule_p = lighting_p.lighting_multiplier_schedule`  
-
-          - Compare lighting schedules in P_RMR and B_RMR: `schedule_comparison_result = compare_schedules(lighting_schedule_p, normalized_schedule_b, building_open_schedule_p, adjusted_reduction_factor_p)`  
-
-            **Rule Assertion:**
-
-            - Case 1: For all hours, for each lighting, if lighting schedule in P_RMR is equal to lighting schedule in B_RMR times adjusted lighting occupancy sensor reduction factor: `if schedule_comparison_result == "MATCH": PASS`  
-
-            - Case 2: Else if lighting schedule in P_RMR is lower than or equal to lighting schedule in B_RMR times adjusted lighting occupancy sensor reduction factor: `if schedule_comparison_result == "EQUAL AND LESS": CAUTION`  
-
-            - Case 3: Else, lighting schedule in P_RMR is higher than lighting schedule in B_RMR times adjusted lighting occupancy sensor reduction factor: `if schedule_comparison_result == "EQUAL AND MORE": FAIL`  
+          - Case 3: Else, lighting schedule in P_RMR is higher than lighting schedule in B_RMR times adjusted lighting occupancy sensor reduction factor: `if schedule_comparison_result == "EQUAL AND MORE": CAUTION`  
 
 **Temporary Function note:**
 
-`compare_schedule_result = compare_schedules(lighting_schedule_p, normalized_schedule_b, building_open_schedule_p, reduction_factor_p)`
+`compare_schedule_result = compare_schedules(Schedule 1, Schedule 2, Mask Schedule, comparison factor)`
 
 (4 inputs, Schedule 1, Schedule 2, Mask Schedule, comparison factor)
 
 - Schedule 2 as the comparison basis, i.e. Schedule 1 = Schedule 2 * comparison factor
-- When Mask Schedule hourly value is 0, schedules need to be the same at that hour. If Mask Schedule hourly value is 1, Schedule 1 needs to be comparison factor times Schedule 2 at that hour
+- When Mask Schedule hourly value is 0, schedules need to be the same at that hour. If Mask Schedule hourly value is 1, Schedule 1 needs to be comparison factor times Schedule 2 at that hour. If Mask Schedule hourly value is 2, skip comparison.
 - can return "match", "equal and less", "equal and more", "equal, less and more", with bin data, TBD
-
