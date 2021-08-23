@@ -1,3 +1,6 @@
+from rct229.data.schema_enums import schema_enums
+
+
 def find_osstd_table_entry(match_field_value, match_field_name, osstd_table):
     """Find a specific entry in an OSSTD table
 
@@ -32,9 +35,31 @@ def find_osstd_table_entry(match_field_value, match_field_name, osstd_table):
     matching_entries = list(
         filter(lambda entry: entry[match_field_name] == match_field_value, data_list)
     )
-    assert len(matching_entries) == 1
+    assert len(matching_entries) == 1, f"Not exactly one {match_field_value} in OSSTD"
 
     matching_entry = matching_entries[0]
     assert type(matching_entry) is dict
 
     return matching_entries[0]
+
+
+def check_enumeration_to_osstd_match_field_value_map(
+    match_field_name,
+    enum_type,
+    osstd_table,
+    enumeration_to_match_field_value_map,
+    exclude_enum_names=[],
+):
+    schema_enum = schema_enums[enum_type]
+    for e in schema_enum:
+        e_name = e.name
+        if e_name in exclude_enum_names:
+            continue
+
+        # Make sure each space type in the enumeration is in our map
+        match_field_value = enumeration_to_match_field_value_map[e_name]
+        assert match_field_value is not None, f"{e_name} is not in the map"
+
+        # Make sure there is a corresponding entry in the OSSTD table
+        # find_osstd_table_entry() will throw if not
+        entry = find_osstd_table_entry(match_field_value, match_field_name, osstd_table)
