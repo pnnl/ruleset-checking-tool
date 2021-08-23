@@ -43,11 +43,15 @@
 
             - Case 1: If space lighting status type is as-designed or as-existing, and space total interior lighting power density in B_RMR matches Table G3.7: `if ( space_lighting_status_type == "AS-DESIGNED OR AS-EXISTING" ) AND ( total_space_LPD_b == data_lookup(table_G3_7, space_b.lighting_space_type) ): PASS`  
 
-            - Case 2: Else if space lighting status type is as-designed or as-existing, and space total interior lighting power density in B_RMR does not match Table G3.7 or if lighting space type is not specified: `else if ( space_lighting_status_type == "AS-DESIGNED OR AS-EXISTING" ) AND ( ( NOT space_b.lighting_space_type ) OR (total_space_LPD_b != data_lookup(table_G3_7, space_b.lighting_space_type)) ): FAIL`
+            - Case 2: Else if space lighting status type is as-designed or as-existing, and if lighting space type is not specified: `else if ( space_lighting_status_type == "AS-DESIGNED OR AS-EXISTING" ) AND ( NOT space_b.lighting_space_type ): CAUTION and raise_warning "LIGHTING SPACE TYPE IS NOT SPECIFIED TO DETERMINE BASELINE LPD."`
 
-            - Case 3: Else if space lighting status type is not-yet designed or matches Table_9_5_1, and space total interior lighting power density in B_RMR matches Table G3.7: `else if ( space_lighting_status_type == "NOT-YET DESIGNED OR MATCH TABLE_9_5_1" ) AND ( total_space_LPD_b == data_lookup(table_G3_7, space_b.lighting_space_type) ): PASS`
+            - Case 3: Else if space lighting status type is as-designed or as-existing, and space total interior lighting power density in B_RMR is higher than Table G3.7 and lighting space type is Sales Area: `else if ( space_lighting_status_type == "AS-DESIGNED OR AS-EXISTING" ) AND ( total_space_LPD_b > data_lookup(table_G3_7, space_b.lighting_space_type) ) AND ( space_b.lighting_space_type == "SALES AREA" ): CAUTION and raise_warning "BASELINE SPACE LIGHTING POWER DENSITY DOES NOT MATCH TABLE G3.7 AND SPACE IS SALES AREA. CHECK IF ADDITIONAL DISPLAY LIGHTING IS INCLUDED. "`
 
-            - Case 4: Else if space lighting status type is not-yet designed or matches Table_9_5_1, and space total interior lighting power density in B_RMR matches Table G3.8: `else if ( space_lighting_status_type == "NOT-YET DESIGNED OR MATCH TABLE_9_5_1" ) AND ( total_space_LPD_b == data_lookup(table_G3_8, building_segment_b.lighting_building_area_type) ): PASS`
+            - Case 4: Else if space lighting status type is as-designed or as-existing, and space total interior lighting power density in B_RMR does not match Table G3.7: `else if ( space_lighting_status_type == "AS-DESIGNED OR AS-EXISTING" ) AND ( total_space_LPD_b != data_lookup(table_G3_7, space_b.lighting_space_type) ): FAIL`
 
-            - Case 5: Else: `else: FAIL`
+            - Case 5: Else if space lighting status type is not-yet designed or matches Table_9_5_1, and space total interior lighting power density in B_RMR matches Table G3.7: `else if ( space_lighting_status_type == "NOT-YET DESIGNED OR MATCH TABLE_9_5_1" ) AND ( total_space_LPD_b == data_lookup(table_G3_7, space_b.lighting_space_type) ): PASS`
+
+            - Case 6: Else if space lighting status type is not-yet designed or matches Table_9_5_1, and space total interior lighting power density in B_RMR matches Table G3.8: `else if ( space_lighting_status_type == "NOT-YET DESIGNED OR MATCH TABLE_9_5_1" ) AND ( total_space_LPD_b == data_lookup(table_G3_8, building_segment_b.lighting_building_area_type) ): PASS`
+
+            - Case 7: Else: `else: FAIL`
 
