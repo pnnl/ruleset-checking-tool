@@ -122,7 +122,7 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   * 6-6: Where a lighting system has been designed and submitted with design documents, lighting power shall be determined in accordance with Sections 9.1.3 and 9.1.4. 
   * 6-7: Where lighting neither exists nor is submitted with design documents, lighting shall comply with but not exceed the requirements of Section 9. Lighting power shall be determined in accordance with the Building Area Method (Section 9.6.1)
   * [6-8](section6/Rule6-8.md): Baseline Interior Lighting Power Allowance for all spaces is determined based in Table G3.7 when lighting systems has been designed and submitted with design documents (space by space method is used).  
-  * 6-9: Baseline building is modeled with automatic shutoff controls in buildings >5000 ft2
+  * [6-9](section6/Rule6-9.md): Baseline building is modeled with automatic shutoff controls in buildings >5000 ft2
   * 6-10: Baseline building is modeled with occupancy sensor controls in applicable space types
   * [6-11](section6/Rule6-11.md): Baseline building is not modeled with daylighting control
   * 6-12: Proposed building is modeled with dayligthing controls
