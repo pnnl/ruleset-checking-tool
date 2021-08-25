@@ -1,5 +1,7 @@
 from numpy import sum
 from rct229.data.schema_enums import schema_enums
+from rct229.data_fns.table_G3_7_fns import table_G3_7_lpd
+from rct229.data_fns.table_G3_8_fns import table_G3_8_lpd
 from rct229.rule_engine.rule_base import (
     RuleDefinitionBase,
     RuleDefinitionListIndexedBase,
@@ -102,12 +104,12 @@ class Section6Rule2(RuleDefinitionListIndexedBase):
                     "lighting_building_area_type"
                 ]
                 building_segment_uses_building_area_method = (
-                    building_segment_lighting_building_area_type is not None
+                    building_segment_lighting_building_area_type != "NONE"
                 )
 
                 for zone in find_all("$..zones[*]", building_segment):
                     zone_volume = zone["volume"]
-                    spaces = zome["spaces"]
+                    spaces = zone["spaces"]
                     zone_floor_area = sum([space["floor_area"] for space in spaces])
                     zone_avg_height = zone_volume / zone_floor_area
 
@@ -157,7 +159,7 @@ class Section6Rule2(RuleDefinitionListIndexedBase):
         def rule_check(self, context, calc_vals, data=None):
             return (
                 calc_vals["building_design_lighting_power"]
-                <= calc_vals["building_design_lighting_power"]
+                <= calc_vals["building_allowable_lighting_power"]
             )
 
 

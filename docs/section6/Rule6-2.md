@@ -20,7 +20,7 @@
 
 - Get the lighting_building_area_type for the building_segment: ```lighting_building_area_type_proposed = building_segment_proposed.lighting_building_area_type```  
 
-  - Determine if the building segment uses Building Area Method: ```if lighting_building_area_type_proposed is "None": bam_flag = FALSE else bam_flag = TRUE```  
+  - Determine if the building segment uses Building Area Method: ```if lighting_building_area_type_proposed is "NONE": bam_flag = FALSE else bam_flag = TRUE```  
 
 - For each thermal_block in building_segment: ```thermal_block_proposed in building_segment_proposed.thermal_blocks:```  
 
@@ -32,13 +32,13 @@
 
   - If bam_flag is TRUE then add floor_area to the total building segment floor area: ```total_building_segment_area_proposed += floor_area_proposed```  
 
-    - Get the allowable lighting power density for this building area type: ```if lighting_building_area_type_proposed in table_G3_8: allowable_LPD_proposed = data_lookup(table_G3_8, lighting_building_area_type_proposed) else raise_warning```  
+    - Get the allowable lighting power density for this building area type: ```allowable_LPD_proposed = data_lookup(table_G3_8, lighting_building_area_type_proposed)```  
 
     - Calculate the total allowable lighting wattage for the building segment: ```building_segment_allowable_lighting_wattage = allowable_LPD_proposed * total_building_segment_area_proposed```  
 
   - If bam_flag is FALSE, get lighting_space_type: ```lighting_space_type_proposed = space_proposed.lighting_space_type```  
 
-    - If lighting_space_type_proposed exists in Table G3.7 then get the allowable lighting power density for this space type: ```if lighting_space_type_proposed in table_G3_7: allowable_LPD_proposed = data_lookup(table_G3_7, lighting_space_type_proposed) else raise_warning```  
+    - If lighting_space_type_proposed exists in Table G3.7 then get the allowable lighting power density for this space type: ```allowable_LPD_proposed = data_lookup(table_G3_7, lighting_space_type_proposed)```  
 
     - Calculate the total allowable lighting wattage for the building segment: ```building_segment_allowable_lighting_wattage_proposed += allowable_LPD_proposed * floor_area_proposed```  
 
@@ -54,17 +54,16 @@
 
 - Calculate the total design lighting power for for the whole buidling: ```for building_segment_proposed in P_RMR.building.building_segments: building_design_lighting_wattage_proposed += building_segment_design_lighting_wattage_proposed```  
 
-**Rule Assertion:** For the Proposed model: ```building_design_lighting_wattage_proposed <= building_allowable_lighting_wattage_proposed``` 
+**Rule Assertion:** For the Proposed model: ```building_design_lighting_wattage_proposed <= building_allowable_lighting_wattage_proposed```
 
-**Notes:** 
+**Notes:**
 The RDS needs to be updated in the future based on the following:
 - If lighting_building_area_type and lighting_space_type are know known, then calculate allowance based on both, pass if less than max  
 
 - If lighting_building_area_type is not specified, lighting_space_type for all spaces in the building segment is included: then determine allowance based on lighting space type.  
     - If PASS- Output should say that project passed based on space by space method. Reviewer should verify if the project uses space by space method.  
     - If FAIL- then CAUTION and say that it fails space by space method and lighting_building_area_type is not known to determine allowance based on BAT.  
-    
-- If lighting_building_area_type provided but lighting_space_type not included:   
-    - If PASS - Output should say that project passed based on building area method. Reviewer should verify if the project uses building area method. 
-    - If FAIL- then CAUTION and say that it fails building area method and lighting_space_type is not known to determine allowance based on space by sspace method.    
 
+- If lighting_building_area_type provided but lighting_space_type not included:   
+    - If PASS - Output should say that project passed based on building area method. Reviewer should verify if the project uses building area method.
+    - If FAIL- then CAUTION and say that it fails building area method and lighting_space_type is not known to determine allowance based on space by sspace method.    
