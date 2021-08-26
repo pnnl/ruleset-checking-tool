@@ -37,3 +37,4 @@ Logic:
 **Notes:**
   1. If building_segment.lighting_building_area_type is not specified, all space in building segment will be classified as "AS-DESIGNED OR AS-EXISTING".
 
+**[Back](../_toc.md)**

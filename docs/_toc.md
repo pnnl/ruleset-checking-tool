@@ -19,7 +19,14 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
 ## Reference Material
   * [Rule Template](_rule_template.md): Template file for creating a new Rule Definition Development Strategy document
   * [Functions](_functions.md): A list of functions used within the Rule Definition Development Strategy documents
-  * [Ruleset Functions](_ruleset_functions.md): A list of commonly used functions that are specific to a ruleset.
+
+## Ruleset Functions
+  * [get_lighting_status_type](ruleset_functions/get_lighting_status_type.md): This function would determine whether the space lighting status type is 1). not-yet designed or match Table 9_5_1, 2). as-designed or as-existing.  
+  * [get_opaque_surface_type.md](ruleset_functions/get_opaque_surface_type.md): This function would determine whether it is a wall, ceiling or floor.  
+  * [get_surface_conditioning_category.md](ruleset_functions/get_surface_conditioning_category.md): This function would cycle through each surface in  a zone and categorize it as exterior res, exterior non res, exterior mixed, semi-exterior or unregulated.  
+  * [get_wwr.md](ruleset_functions/get_wwr.md): This function would determine window wall ratio for a building segment.  
+  * [get_zone_conditioning_category.md](ruleset_functions/get_zone_conditioning_category.md): Determine the Zone Conditioning Category for each zone. This function would cycle through each zone in an RMR and categorize it as ‘conditioned’, 'semi-heated’, 'unenclosed' or ‘unconditioned’.  If ‘conditioned’ it will also categorize the space as ‘residential’ or ‘non-residential’.  
+  * [normalize_space_schedules.md](ruleset_functions/normalize_space_schedules.md):This function would determine a normalized schedule for a data element in space.  
 
 ## Data Tables
   * [8.4.4](data_tables/Table8-4-4.md): Minimum Nominal Efficiency Levels for Low-Voltage Dry-Type Distribution Transformers  
