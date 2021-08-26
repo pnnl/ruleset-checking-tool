@@ -78,7 +78,7 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   * [5-14](section5/Rule5-14.md): Baseline slab-on-grade assemblies must conform with assemblies detailed in Appendix A ( Slab-on-grade floors shall match the F-factor for unheated slabs from the same tables (A6).) 
   * 5-15: Baseline slab-on-grade assemblies must match the appropriate assembly maximum F-factors in Tables G3.4-1 through G3.4-9
   * 5-16: Slab-on-grade F-factor in the proposed design must be modeled as-designed
-  * 5-17: For building area types included in Table G3.1.1-1, vertical fenestration areas for new buildings and additions shall equal that in Table G3.1.1-1 based on the area of gross above-grade walls that separate conditioned spaces and semiheated spaces from the exterior. Where a building has multiple building area types, and each building area types included in Table G3.1.1-1, each type shall use the values in the table.
+  * [5-17](section5/Rule5-17.md): Opaque surfaces that are not regulated (not part of opaque building envelope) must be modeled the same in the baseline as in the proposed design.
   * 5-18: Need to add rule for building types not included in Table G3.1.1-1
   * 5-19: The vertical fenestration shall be distributed on each face of the building in the same proportion as in the proposed design. 
   * 5-20: The vertical fenestration area for eexisiting buildings shall match the user model
@@ -122,7 +122,7 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   * 6-6: Where a lighting system has been designed and submitted with design documents, lighting power shall be determined in accordance with Sections 9.1.3 and 9.1.4. 
   * 6-7: Where lighting neither exists nor is submitted with design documents, lighting shall comply with but not exceed the requirements of Section 9. Lighting power shall be determined in accordance with the Building Area Method (Section 9.6.1)
   * [6-8](section6/Rule6-8.md): Baseline Interior Lighting Power Allowance for all spaces is determined based in Table G3.7 when lighting systems has been designed and submitted with design documents (space by space method is used).  
-  * 6-9: Baseline building is modeled with automatic shutoff controls in buildings >5000 ft2
+  * [6-9](section6/Rule6-9.md): Baseline building is modeled with automatic shutoff controls in buildings >5000 ft2
   * 6-10: Baseline building is modeled with occupancy sensor controls in applicable space types
   * [6-11](section6/Rule6-11.md): Baseline building is not modeled with daylighting control
   * 6-12: Proposed building is modeled with dayligthing controls
