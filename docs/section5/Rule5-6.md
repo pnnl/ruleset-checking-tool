@@ -2,7 +2,7 @@
 # Envelope - Rule 5-6  
 
 **Rule ID:** 5-6  
-**Rule Description:** Building above-grade envelope U-factors must be modeled in proposed design as designed.  
+**Rule Description:** Building above-grade opaque surface U-factors must be modeled in proposed design as designed.  
 **Appendix G Section:** Section G3.1-5(a) Building Envelope Modeling Requirements for the Proposed building  
 **Appendix G Section Reference:** None  
 
@@ -27,7 +27,7 @@
 
       - For each surface in zone: `for surface_p in zone_p.surfaces:`  
 
-        - Check if surface is above-grade: `if get_opaque_surface_type(surface_p) in ["ROOF", "FLOOR", "ABOVE-GRADE WALL"]:`
+        - Check if surface is above-grade opaque surface: `if get_opaque_surface_type(surface_p) in ["ROOF", "FLOOR", "ABOVE-GRADE WALL"]:`
 
           - Get matching surface from U-RMR: `surface_u = match_data_element(U_RMR, surfaces, surface_p.id)`
 
