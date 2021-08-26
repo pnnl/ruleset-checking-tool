@@ -14,13 +14,10 @@
 **Data Lookup:** None  
 **Function Call:**
 
-  - get_surface_conditioning_category()
   - get_opaque_surface_type()
   - match_data_element()
 
 ## Rule Logic:  
-
-- Get surface conditioning category dictionary for P_RMR: `scc_dictionary_p = get_surface_conditioning_category(P_RMR)`  
 
 - For each building segment in the Proposed model: `for building_segment_p in P_RMR.building.building_segments:`  
 
@@ -30,7 +27,7 @@
 
       - For each surface in zone: `for surface_p in zone_p.surfaces:`  
 
-        - Check if surface is below-grade wall and is regulated: `if ( get_opaque_surface_type(surface_p) == "BELOW-GRADE WALL" ) AND ( scc_dictionary_p[surface_p.id] != "UNREGULATED" ):`
+        - Check if surface is below-grade wall: `if get_opaque_surface_type(surface_p) == "BELOW-GRADE WALL":`
 
           - Get matching surface from U-RMR: `surface_u = match_data_element(U_RMR, surfaces, surface_p.id)`  
 
