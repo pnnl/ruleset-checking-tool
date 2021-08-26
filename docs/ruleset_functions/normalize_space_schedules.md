@@ -48,8 +48,8 @@ Logic:
 
 **Returns** `return space_normalized_schedule_array`  
 
-**[Back](../_toc.md)**
-
 **Notes**:
 
   1. The current code requires Table 3.7 include additional column to account for manual-on and partial-auto-on credit (multiplied by 1.25).
+
+**[Back](../_toc.md)**
