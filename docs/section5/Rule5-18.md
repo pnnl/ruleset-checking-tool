@@ -10,10 +10,8 @@
 - Table G3.1-5. Building Envelope, Baseline Building Performance, c. Vertical Fenestration Areas  
 - Table G3.1.1-1  
 
-**Applicability:** All required data elements exist for B_RMR
-**Applicability Checks:** 
-
-1. Building has spaces that are NEW, ADDITION or ALTERATION.  
+**Applicability:** All required data elements exist for B_RMR  
+**Applicability Checks:** None  
 
 **Manual Checks:** None  
 **Evaluation Context:**  Each Data Element  
@@ -23,8 +21,6 @@
   1. get_overall_building_segment_wwr()
 
 ## Rule Logic:  
-
-- **Applicability Check 1:** `length( [ if space.status_type for space in U_RMR...spaces is in [NEW, ADDITION, ALTERATION] ] ) > 0:`  
 
 - Get window wall ratio dictionary for building: `building_wwr_dictionary_b = get_overall_building_segment_wwr(B_RMR)`
 
@@ -36,6 +32,6 @@
 
       - Case 1: If building segment window-wall-ratio matches Table G3.1.1-1 allowance: `if building_wwr_dictionary_b[building_segment_b.id] == data_lookup(table_G3_1_1_1, building_segment_b.area_type_vertical_fenestration): PASS`
 
-      - Case 2: Else: `else: CAUTION and raise_warning "BASELINE BUILDING SEGMENT AREA TYPE IS INCLUDED IN TABLE G3.1.1-1. BUT BUILDING SEGMENT FENESTRATION AREA DOES NOT MATCH TABLE G3.1.1-1. CHECK IF BUILDING SEGMENT HAS EXISTING ENVELOPE THAT CAN BE EXCLUDED FROM THE WINDOW-WALL-RATIO CALCULATION."`
+      - Case 2: Else: `else: FAIL and raise_warning "BASELINE BUILDING SEGMENT AREA TYPE IS INCLUDED IN TABLE G3.1.1-1. BUT BUILDING SEGMENT FENESTRATION AREA DOES NOT MATCH TABLE G3.1.1-1. CHECK IF BUILDING SEGMENT HAS EXISTING OR ALTERED ENVELOPE THAT CAN BE EXCLUDED FROM THE WINDOW-WALL-RATIO CALCULATION."`
 
 **[Back](../_toc.md)**
