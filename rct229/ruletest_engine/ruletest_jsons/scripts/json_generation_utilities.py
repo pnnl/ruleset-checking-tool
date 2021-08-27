@@ -353,7 +353,9 @@ def create_schedule_list(schedule_str):
         file_dir = os.path.dirname(__file__)
 
         # Define output json file path
-        schedule_json_path = os.path.join(file_dir, "resources", "schedule_library.json")
+        schedule_json_path = os.path.join(
+            file_dir, "resources", "schedule_library.json"
+        )
 
         with open(schedule_json_path) as f:
             schedule_dict = json.load(f)
@@ -363,6 +365,4 @@ def create_schedule_list(schedule_str):
 
     else:
 
-
         raise Exception(f"Schedule named: {schedule_name} is not a valid schedule name")
-
