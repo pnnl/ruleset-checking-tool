@@ -346,5 +346,23 @@ def create_schedule_list(schedule_str):
         schedule_list = [float(schedule_parameter)] * 8760
         return schedule_list
 
+    # If utilizing a predefined schedule from the schedule library, load it here
+    elif schedule_name == "LIBRARY":
+
+        # Load schedule JSON
+        file_dir = os.path.dirname(__file__)
+
+        # Define output json file path
+        schedule_json_path = os.path.join(file_dir, "resources", "schedule_library.json")
+
+        with open(schedule_json_path) as f:
+            schedule_dict = json.load(f)
+
+        schedule_list = schedule_dict[schedule_parameter]
+        return schedule_list
+
     else:
+
+
         raise Exception(f"Schedule named: {schedule_name} is not a valid schedule name")
+
