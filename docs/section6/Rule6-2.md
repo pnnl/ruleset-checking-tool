@@ -4,7 +4,7 @@
 **Rule ID:** 6-2  
 **Rule Description:** The total building interior lighting power shall not exceed the interior lighting power allowance determined using either Table G3.7 or G3.8.  
 **Appendix G Section:** Section G1.2.1(b) Mandatory Provisions related to interior lighting power
-  
+
 **Appendix G Section Reference:**  
 
 - Table G3.7, Performance Rating Method Lighting Power Density Allowances and Occupancy Sensor Reductions Using the Space-by-Space Method
@@ -16,14 +16,14 @@
 **Data Lookup:** Table G3.7 and Table G3.8  
 **Function Call:** None
 
-## Rule Logic: 
+## Rule Logic:
 
 - For each building segment in the Proposed Model: `building_segment_p in P_RMR.building.building_segments`  
 
   - If building segment specifies lighting building area type, get the allowable lighting power density from Table G3-8: `if building_segment_p.lighting_building_area_type in table_G3_8: allowable_LPD_BAM = data_lookup(table_G3_8, building_segment_p.lighting_building_area_type)`  
 
   - For each thermal block in building segment: `thermal_block_p in building_segment_p.thermal_blocks:`  
-  
+
     - For each zone in thermal block: `zone_p in thermal_block_p.zones:`  
 
       - For each space in zone: `space_p in zone_p.spaces:`  
@@ -54,15 +54,14 @@
 
 - Case 7: Else, lighting building area type is not specified, and lighting space type is not specified in all spaces: `Else: FAIL and raise_warning 'LIGHTING_BUILDING_AREA_TYPE IS NOT KNOWN AND LIGHTING_SPACE_TYPE IS NOT KNOWN IN ALL SPACES TO DETERMINE ALLOWANCE.'`  
 
-**Notes Before Update for Reference Only:** 
+**Notes Before Update for Reference Only:**
 The RDS needs to be updated in the future based on the following:
 - If lighting_building_area_type and lighting_space_type are know known, then calculate allowance based on both, pass if less than max  
 
 - If lighting_building_area_type is not specified, lighting_space_type for all spaces in the building segment is included: then determine allowance based on lighting space type.  
     - If PASS- Output should say that project passed based on space by space method. Reviewer should verify if the project uses space by space method.  
     - If FAIL- then CAUTION and say that it fails space by space method and lighting_building_area_type is not known to determine allowance based on BAT.  
-    
-- If lighting_building_area_type provided but lighting_space_type not included:   
-    - If PASS - Output should say that project passed based on building area method. Reviewer should verify if the project uses building area method. 
-    - If FAIL- then CAUTION and say that it fails building area method and lighting_space_type is not known to determine allowance based on space by sspace method.    
 
+- If lighting_building_area_type provided but lighting_space_type not included:   
+    - If PASS - Output should say that project passed based on building area method. Reviewer should verify if the project uses building area method.
+    - If FAIL- then CAUTION and say that it fails building area method and lighting_space_type is not known to determine allowance based on space by sspace method.    
