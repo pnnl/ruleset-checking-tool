@@ -1,5 +1,4 @@
 from numpy import sum
-
 from rct229.data.schema_enums import schema_enums
 from rct229.data_fns.table_G3_7_fns import table_G3_7_lpd
 from rct229.data_fns.table_G3_8_fns import table_G3_8_lpd
@@ -116,6 +115,13 @@ class Section6Rule2(RuleDefinitionListIndexedBase):
 
                     for space in spaces:
                         space_floor_area = space["floor_area"]
+                        space_design_lighting_power = (
+                            sum(find_all("interior_lighting[*].power_per_area", space))
+                            * space_floor_area
+                        )
+                        building_segment_design_lighting_power += (
+                            space_design_lighting_power
+                        )
                         if building_segment_uses_building_area_method:
                             building_segment_floor_area += space_floor_area
                         else:
@@ -126,17 +132,6 @@ class Section6Rule2(RuleDefinitionListIndexedBase):
                             )
                             building_segment_allowable_lighting_power += (
                                 space_allowable_lpd * space_floor_area
-                            )
-                            space_design_lighting_power = (
-                                sum(
-                                    find_all(
-                                        "interior_lighting[*].power_per_area", space
-                                    )
-                                )
-                                * space_floor_area
-                            )
-                            building_segment_design_lighting_power += (
-                                space_design_lighting_power
                             )
 
                 if building_segment_uses_building_area_method:
