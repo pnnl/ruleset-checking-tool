@@ -11,7 +11,7 @@
 **Manual Check:** No  
 **Evaluation Context:** Each Data Element  
 **Data Lookup:** None  
-## Rule Logic: 
+## Rule Logic:
 
 - Check if any space has daylight control in the Baseline model: ```For building_segment_b in B_RMR.building.building_segments:```  
 

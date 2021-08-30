@@ -1,5 +1,4 @@
 from numpy import sum
-
 from rct229.data.schema_enums import schema_enums
 from rct229.data_fns.table_G3_7_fns import table_G3_7_lpd
 from rct229.data_fns.table_G3_8_fns import table_G3_8_lpd
@@ -162,6 +161,49 @@ class Section6Rule2(RuleDefinitionListIndexedBase):
                 calc_vals["building_design_lighting_power"]
                 <= calc_vals["building_allowable_lighting_power"]
             )
+
+
+# ------------------------
+
+
+class Section6Rule11(RuleDefinitionListIndexedBase):
+    """Rule 11 of ASHRAE 90.1-2019 Appendix G Section 6 (Lighting)"""
+
+    def __init__(self):
+        super(Section6Rule11, self).__init__(
+            rmrs_used=UserBaselineProposedVals(False, True, False),
+            each_rule=Section6Rule11.BuildingRule(),
+            index_rmr="baseline",
+            id="6-11",
+            description="Baseline building is not modeled with daylighting control",
+            rmr_context="buildings",
+        )
+
+    class BuildingRule(RuleDefinitionBase):
+        def __init__(self):
+            super(Section6Rule11.BuildingRule, self).__init__(
+                required_fields={
+                    "$": ["building_segments"],
+                    "$.building_segments[*]": ["thermal_blocks"],
+                    "$.building_segments[*].thermal_blocks[*]": ["zones"],
+                    "$.building_segments[*].thermal_blocks[*].zones[*]": ["spaces"],
+                    "$.building_segments[*].thermal_blocks[*].zones[*].spaces[*]": [
+                        "interior_lighting"
+                    ],
+                    "$.building_segments[*].thermal_blocks[*].zones[*].spaces[*].interior_lighting[*]": [
+                        "has_daylighting_control"
+                    ],
+                },
+                rmrs_used=UserBaselineProposedVals(False, True, False),
+            )
+
+        def rule_check(self, context, calc_vals, data=None):
+            has_daylighting_control_instances = find_all(
+                "$..interior_lighting[*].has_daylighting_control", context.baseline
+            )
+
+            # Return True if none of the has_daylighting_control_instances is True
+            return not any(has_daylighting_control_instances)
 
 
 # ------------------------
