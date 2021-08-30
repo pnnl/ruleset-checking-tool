@@ -134,8 +134,7 @@ def table_G3_7_lpd(lighting_space_type, space_height):
     ]
 
     osstd_entry = find_osstd_table_entry(
-        match_field_value=lpd_space_type,
-        match_field_name="lpd_space_type",
+        [("lpd_space_type", lpd_space_type)],
         osstd_table=data["ashrae_90_1_prm_2019.prm_interior_lighting"],
     )
     watts_per_sqft = osstd_entry["w/ft^2"]
