@@ -23,4 +23,4 @@
 
     - Get interior_lighting in space: ```interior_lighting_b = space_b.interior_lighting```  
 
-      **Rule Assertion:** For each interior_lighting in the Baseline model: ```interior_lighting_b.has_daylight_control == FALSE```  
+      **Rule Assertion:** For each interior_lighting in the Baseline model: ```interior_lighting_b.has_daylighting_control == FALSE```  
