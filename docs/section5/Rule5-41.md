@@ -23,7 +23,7 @@
 
 - Get surface conditioning category dictionary for P_RMR: `scc_dictionary_p = get_surface_conditioning_category(P_RMR)`
 
-- For each building segment in the Baseline model: `for building_segment_p in P_RMR.building.building_segments:`  
+- For each building segment in the Proposed model: `for building_segment_p in P_RMR.building.building_segments:`  
 
   - For each thermal block in building segment: `for thermal_block_p in building_segment_p.thermal_blocks:`  
 
