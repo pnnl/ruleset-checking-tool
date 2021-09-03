@@ -39,8 +39,9 @@ climate_zone_enumeration_to_climate_zone_type_map = {
     "CZ6A": "6",
     "CZ6B": "6",
     "CZ7": "7",
-    "CZ8": "8"    
+    "CZ8": "8",
 }
+
 
 def table_3_2_lookup(climate_zone):
     """Returns the heating output for a climate zone as
@@ -54,9 +55,7 @@ def table_3_2_lookup(climate_zone):
     dict
         The Heating Output for a given Climate Zone given by Table 3.2 [Btu/h·ft^2]
     """
-    climate_zone_type = climate_zone_enumeration_to_climate_zone_type_map[
-        climate_zone
-    ]
+    climate_zone_type = climate_zone_enumeration_to_climate_zone_type_map[climate_zone]
     osstd_entry = find_osstd_table_entry(
         [("climate_zone", climate_zone_type)],
         osstd_table=data["ashrae_90_1_table_3_2"],
