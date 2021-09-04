@@ -1,27 +1,24 @@
-# Envelope - Rule 5-7-3  
-**Rule ID:** 5-7-3  
-**Rule Description:** Baseline RMR fenestration area prior to proposed work cannot be verified.  
-**Rule Assertion:** Cannot be verified  
-**Appendix G Section:** Section G3.1-5(c) Building Envelope Modeling Requirements for the Baseline building  
-**Appendix G Section Reference:**
-- Table G3.1, 5. Building Envelope, Baseline Building Performance, c. Vertical Fenestration Areas
 
-**Data Lookup:** None
+# Envelope - Rule 5-22  
+
+**Rule ID:** 5-22  
+**Rule Description:** The baseline fenestration area for an existing building shall equal the existing fenestration area prior to the proposed work.  
+**Rule Assertion:** B-RMR total (subsurface.glazed_area+subsurface.opaque_area) = expected value  
+**Appendix G Section:** Section G3.1-5(c) Building Envelope Modeling Requirements for the Baseline building  
+**Appendix G Section Reference:** None  
+
+**Data Lookup:** None  
 **Evaluation Context:**  Each Data Element  
 
-**Applicability Checks:** 
-1. Building has spaces that are EXISTING.
+**Applicability Checks:** None  
 
-**Manual Checks:** None  
+**Manual Checks:** Yes  
+**Function Call:**  None  
 
 ## Rule Logic:
-- **Applicability Check 1:** `length( [ if _space.status_type for _space in U_RMR...spaces is in [EXISTING ] ) > 0:`  
-- For each building segment in the Baseline model: `For building_segment in B_RMR.building.building_segments:`
-    - Get the building area type of the building segment: `_building_area_type = building_segment.area_type_vertical_fenestration`
-    - Get thermal_block from building segment: `_thermal_block in building_segment.thermal_blocks:`
-    - Get thermal_zone from thermal block: `_thermal_zone in _thermal_block.thermal_zones:`
-    - Get space from thermal zone: `_space in _thermal_zone.spaces:`
-    - Check if space is EXISTING: `if _space.status_type == EXISTING:`
-    - **Rule Assertion** `CANNOT_BE_VERIFIED`
+
+- Check if building is not all new: `if NOT B_RMR.building.is_all_new:`
+
+**Rule Assertion** `CAUTION and raise_warning "BUILDING IS EXISTING. THE BASELINE VERTICAL FENESTRATION AREA FOR EXISTING BUILDINGS MUST EQUAL TO THE FENESTRATION AREA PRIOR TO THE PROPOSED SCOPE OF WORK. THE BASELINE FENESTRATION AREA MUST BE CHECKED MANUALLY."`
 
 **[Back](../_toc.md)**
