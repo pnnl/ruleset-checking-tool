@@ -17,7 +17,7 @@
     - Get maximum regulated capacity: `if _user_transformer.phase == SINGLE_PHASE: _max_capacity_limit = 333.0 else if _user_transformer.phase == THREE_PHASE: _max_capacity_limit = 1000.0`  
     - **Applicability Check 1:** `_user_transformer.type == DRY_TYPE`  
     - **Applicability Check 2:** `_user_transformer.capacity >= 15.0 and _user_transformer.capacity <= _max_capacity_limit:`
-    - Get baseline transformer matching name of user transformer: `_baseline_transformer = match_data_element(B_RMR, transformeres, _user_transformer.name)`
+    - Get baseline transformer matching ID of user transformer: `_baseline_transformer = match_data_element(B_RMR, transformeres, _user_transformer.id)`
     - **Rule Assertion:** `_user_transformer.efficiency == _baseline_transformer.efficiency`
 
 ## Diagram
