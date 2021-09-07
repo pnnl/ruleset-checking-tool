@@ -1,4 +1,5 @@
 import pytest
+
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 
@@ -10,6 +11,7 @@ from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedV
 RMR_1 = {
     "transformers": [
         {
+            "id": 1,
             "name": "Transformer 1",
             "type": "DRY_TYPE",
             "phase": "SINGLE_PHASE",
@@ -18,6 +20,7 @@ RMR_1 = {
             "peak_load": 500.0,
         },
         {
+            "id": 2,
             "name": "Transformer 2",
             "type": "DRY_TYPE",
             "phase": "SINGLE_PHASE",
@@ -32,6 +35,7 @@ RMR_1 = {
 RMR_2 = {
     "transformers": [
         {
+            "id": 1,
             "name": "Transformer 1",
             "type": "DRY_TYPE",
             "phase": "SINGLE_PHASE",
@@ -55,7 +59,7 @@ RMRS_WITH_MATCHING_USER_AND_BASELINE = UserBaselineProposedVals(RMR_1, RMR_1, RM
 BASE_RULE_1_OUTCOME_BASE = {
     "id": "1",
     "description": "Basic Rule",
-    "rmr_context": "transformers",
+    "rmr_context": "/transformers",
 }
 
 
@@ -84,7 +88,6 @@ class _DerivedRule(RuleDefinitionBase):
         return data == "MANUAL_CHECK_REQUIRED"
 
     def rule_check(self, context, calc_vals=None, data=None):
-        print("data=", data)
         return type(data) is bool and data
 
 
@@ -156,6 +159,27 @@ def test__rule_definition_base__get_context__with_rmrs_present():
         and context.baseline == RMR_2["transformers"]
         and context.proposed == None
     )
+
+
+# Testing RuleDefinitionBase _missing_fields_str method ------------
+def test___missing_fields_str__with_no_missing_fields():
+    assert (
+        BASE_RULE_1._missing_fields_str(
+            jpath="foo",
+            required_fields=["one", "two"],
+            single_context={"foo": {"id": 0, "one": 1, "two": 2}},
+        )
+    ) == ""
+
+
+def test___missing_fields_str__with_missing_fields():
+    assert (
+        BASE_RULE_1._missing_fields_str(
+            jpath="foo",
+            required_fields=["one", "three", "four"],
+            single_context={"foo": {"id": 0, "one": 1, "two": 2}},
+        )
+    ) == "id:0 missing:three,four"
 
 
 # Testing RuleDefinitionBase is_applicable method ------------------

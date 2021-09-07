@@ -163,8 +163,7 @@
                 "GUEST_ROOM",
                 "JUDGES_CHAMBERS",
                 "DWELLING_UNIT",
-                "LABORATORY_IN_OR_AS_A_CLASSROOM",
-                "LABORATORY_ALL_OTHERS",
+                "LABORATORY_EXCEPT_IN_OR_AS_A_CLASSROOM",
                 "LAUNDRY_WASHING_AREA",
                 "LOADING_DOCK_INTERIOR",
                 "LOBBY_FACILITY_FOR_THE_VISUALLY_IMPAIRED",
@@ -269,8 +268,7 @@
                 "Guest Room",
                 "Judges Chambers",
                 "Dwelling Unit",
-                "Laboratory - In or as a classroom",
-                "Laboratory - All others",
+                "Laboratory - Except in or as a classroom",
                 "Laundry/Washing Area",
                 "Loading Dock, Interior",
                 "Lobby - Facility for the visually impaired (and not used primarily by the staff)",
@@ -1068,6 +1066,21 @@
                 "Existing",
                 "Addition",
                 "Alteration"
+            ]
+        },
+        "AdditionalSurfaceAdjacentTo2019ASHRAE901": {
+            "type": "string",
+            "enum": [
+                "UNENCLOSED",
+                "UNCONDITIONED",
+                "UNHEATED",
+                "SEMIHEATED"
+            ],
+            "descriptions": [
+                "The space on the other side of the surface is assumed to be unenclosed. The space on the other side of the surface is not explicity modeled.",
+                "The space on the other side of the surface is assumed to be unconditioned. The space on the other side of the surface is not explicity modeled.",
+                "Surface adjacent to a environment that is not heated but enclosed. The space on the other side of the surface is not explicity modeled.",
+                "Surface adjacent to a environment that is semi-heated. The space on the other side of the surface is not explicity modeled."
             ]
         }
     }
