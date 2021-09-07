@@ -1,0 +1,482 @@
+{
+    "rule-6-1-a": {
+        "Section": 6,
+        "Rule": 1,
+        "Test": "a",
+        "description": "Proposed building ILP equals to user building ILP",
+        "expected_rule_outcome": "pass",
+        "rmr_transformations": {
+            "user": {
+                "buildings": [
+                    {
+                        "id": 0,
+                        "name": "building_name",
+                        "building_segments": [
+                            {
+                                "id": 0,
+                                "name": "building_segment",
+                                "lighting_building_area_type": "HOTEL_MOTEL",
+                                "thermal_blocks": [
+                                    {
+                                        "id": 0,
+                                        "name": "Block 1",
+                                        "zones": [
+                                            {
+                                                "id": 0,
+                                                "name": "Thermal Zone 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": 1,
+                                                        "name": "Space 1",
+                                                        "lighting_space_type": "GUEST_ROOM",
+                                                        "floor_area": 9.29,
+                                                        "interior_lighting": [
+                                                            {
+                                                                "id": 1,
+                                                                "name": "Guest Room Lighting",
+                                                                "power_per_area": 4.4116
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "id": 2,
+                                                        "name": "Space 2",
+                                                        "lighting_space_type": "LOBBY_HOTEL",
+                                                        "floor_area": 92.9,
+                                                        "interior_lighting": [
+                                                            {
+                                                                "id": 2,
+                                                                "name": "Hotel Lobby Lighting",
+                                                                "power_per_area": 11.836
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            "proposed": {
+                "buildings": [
+                    {
+                        "id": 0,
+                        "name": "building_name",
+                        "building_segments": [
+                            {
+                                "id": 0,
+                                "name": "building_segment",
+                                "lighting_building_area_type": "HOTEL_MOTEL",
+                                "thermal_blocks": [
+                                    {
+                                        "id": 0,
+                                        "name": "Block 1",
+                                        "zones": [
+                                            {
+                                                "id": 0,
+                                                "name": "Thermal Zone 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": 1,
+                                                        "name": "Space 1",
+                                                        "lighting_space_type": "GUEST_ROOM",
+                                                        "floor_area": 9.29,
+                                                        "interior_lighting": [
+                                                            {
+                                                                "id": 1,
+                                                                "name": "Guest Room Lighting",
+                                                                "power_per_area": 4.4116
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "id": 2,
+                                                        "name": "Space 2",
+                                                        "lighting_space_type": "LOBBY_HOTEL",
+                                                        "floor_area": 92.9,
+                                                        "interior_lighting": [
+                                                            {
+                                                                "id": 2,
+                                                                "name": "Hotel Lobby Lighting",
+                                                                "power_per_area": 11.836
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    },
+    "rule-6-1-b": {
+        "Section": 6,
+        "Rule": 1,
+        "Test": "b",
+        "description": "Proposed building ILP does not equal user building ILP",
+        "expected_rule_outcome": "fail",
+        "rmr_transformations": {
+            "user": {
+                "buildings": [
+                    {
+                        "id": 0,
+                        "name": "building_name",
+                        "building_segments": [
+                            {
+                                "id": 0,
+                                "name": "building_segment",
+                                "lighting_building_area_type": "HOTEL_MOTEL",
+                                "thermal_blocks": [
+                                    {
+                                        "id": 0,
+                                        "name": "Block 1",
+                                        "zones": [
+                                            {
+                                                "id": 0,
+                                                "name": "Thermal Zone 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": 1,
+                                                        "name": "Space 1",
+                                                        "lighting_space_type": "GUEST_ROOM",
+                                                        "floor_area": 9.29,
+                                                        "interior_lighting": [
+                                                            {
+                                                                "id": 1,
+                                                                "name": "Guest Room Lighting",
+                                                                "power_per_area": 0.51
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "id": 2,
+                                                        "name": "Space 2",
+                                                        "lighting_space_type": "LOBBY_HOTEL",
+                                                        "floor_area": 92.9,
+                                                        "interior_lighting": [
+                                                            {
+                                                                "id": 2,
+                                                                "name": "Hotel Lobby Lighting",
+                                                                "power_per_area": 11.836
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            "proposed": {
+                "buildings": [
+                    {
+                        "id": 0,
+                        "name": "building_name",
+                        "building_segments": [
+                            {
+                                "id": 0,
+                                "name": "building_segment",
+                                "lighting_building_area_type": "HOTEL_MOTEL",
+                                "thermal_blocks": [
+                                    {
+                                        "id": 0,
+                                        "name": "Block 1",
+                                        "zones": [
+                                            {
+                                                "id": 0,
+                                                "name": "Thermal Zone 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": 1,
+                                                        "name": "Space 1",
+                                                        "lighting_space_type": "GUEST_ROOM",
+                                                        "floor_area": 9.29,
+                                                        "interior_lighting": [
+                                                            {
+                                                                "id": 1,
+                                                                "name": "Guest Room Lighting",
+                                                                "power_per_area": 0.41
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "id": 2,
+                                                        "name": "Space 2",
+                                                        "lighting_space_type": "LOBBY_HOTEL",
+                                                        "floor_area": 92.9,
+                                                        "interior_lighting": [
+                                                            {
+                                                                "id": 2,
+                                                                "name": "Hotel Lobby Lighting",
+                                                                "power_per_area": 11.836
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    },
+    "rule-6-2-a": {
+        "Section": 6,
+        "Rule": 2,
+        "Test": "a",
+        "description": "Lighting power for all spaces in the P-RMR is the less than the lighting power allowance for the building.",
+        "expected_rule_outcome": "pass",
+        "rmr_transformations": {
+            "proposed": {
+                "buildings": [
+                    {
+                        "id": 0,
+                        "name": "building_name",
+                        "building_segments": [
+                            {
+                                "id": 0,
+                                "name": "building_segment",
+                                "lighting_building_area_type": "HOTEL_MOTEL",
+                                "thermal_blocks": [
+                                    {
+                                        "id": 0,
+                                        "name": "Block 1",
+                                        "zones": [
+                                            {
+                                                "id": 0,
+                                                "name": "Thermal Zone 1",
+                                                "volume": 311.5,
+                                                "spaces": [
+                                                    {
+                                                        "id": 1,
+                                                        "name": "Space 1",
+                                                        "lighting_space_type": "GUEST_ROOM",
+                                                        "floor_area": 9.29,
+                                                        "interior_lighting": [
+                                                            {
+                                                                "id": 1,
+                                                                "name": "Guest Room Lighting",
+                                                                "power_per_area": 4.4116
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "id": 2,
+                                                        "name": "Space 2",
+                                                        "lighting_space_type": "LOBBY_HOTEL",
+                                                        "floor_area": 92.9,
+                                                        "interior_lighting": [
+                                                            {
+                                                                "id": 2,
+                                                                "name": "Hotel Lobby Lighting",
+                                                                "power_per_area": 11.836
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            "baseline": {
+                "buildings": [
+                    {
+                        "id": 0,
+                        "name": "building_name",
+                        "building_segments": [
+                            {
+                                "id": 0,
+                                "name": "building_segment",
+                                "lighting_building_area_type": "HOTEL_MOTEL",
+                                "thermal_blocks": [
+                                    {
+                                        "id": 0,
+                                        "name": "Block 1",
+                                        "zones": [
+                                            {
+                                                "id": 0,
+                                                "name": "Thermal Zone 1",
+                                                "volume": 311.5,
+                                                "spaces": [
+                                                    {
+                                                        "id": 1,
+                                                        "name": "Space 1",
+                                                        "lighting_space_type": "GUEST_ROOM",
+                                                        "floor_area": 9.29,
+                                                        "interior_lighting": [
+                                                            {
+                                                                "id": 1,
+                                                                "name": "Guest Room Lighting",
+                                                                "power_per_area": 4.4116
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "id": 2,
+                                                        "name": "Space 2",
+                                                        "lighting_space_type": "LOBBY_HOTEL",
+                                                        "floor_area": 92.9,
+                                                        "interior_lighting": [
+                                                            {
+                                                                "id": 2,
+                                                                "name": "Hotel Lobby Lighting",
+                                                                "power_per_area": 11.836
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    },
+    "rule-6-2-b": {
+        "Section": 6,
+        "Rule": 2,
+        "Test": "b",
+        "description": "Lighting power for all spaces in the P-RMR exceeds the lighting power allowance for the building",
+        "expected_rule_outcome": "fail",
+        "rmr_transformations": {
+            "proposed": {
+                "buildings": [
+                    {
+                        "id": 0,
+                        "name": "building_name",
+                        "building_segments": [
+                            {
+                                "id": 0,
+                                "name": "building_segment",
+                                "lighting_building_area_type": "HOTEL_MOTEL",
+                                "thermal_blocks": [
+                                    {
+                                        "id": 0,
+                                        "name": "Block 1",
+                                        "zones": [
+                                            {
+                                                "id": 0,
+                                                "name": "Thermal Zone 1",
+                                                "volume": 311.5,
+                                                "spaces": [
+                                                    {
+                                                        "id": 1,
+                                                        "name": "Space 1",
+                                                        "lighting_space_type": "GUEST_ROOM",
+                                                        "floor_area": 9.29,
+                                                        "interior_lighting": [
+                                                            {
+                                                                "id": 1,
+                                                                "name": "Guest Room Lighting",
+                                                                "power_per_area": 0.51
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "id": 2,
+                                                        "name": "Space 2",
+                                                        "lighting_space_type": "LOBBY_HOTEL",
+                                                        "floor_area": 92.9,
+                                                        "interior_lighting": [
+                                                            {
+                                                                "id": 2,
+                                                                "name": "Hotel Lobby Lighting",
+                                                                "power_per_area": 11.836
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            "baseline": {
+                "buildings": [
+                    {
+                        "id": 0,
+                        "name": "building_name",
+                        "building_segments": [
+                            {
+                                "id": 0,
+                                "name": "building_segment",
+                                "lighting_building_area_type": "HOTEL_MOTEL",
+                                "thermal_blocks": [
+                                    {
+                                        "id": 0,
+                                        "name": "Block 1",
+                                        "zones": [
+                                            {
+                                                "id": 0,
+                                                "name": "Thermal Zone 1",
+                                                "volume": 311.5,
+                                                "spaces": [
+                                                    {
+                                                        "id": 1,
+                                                        "name": "Space 1",
+                                                        "lighting_space_type": "GUEST_ROOM",
+                                                        "floor_area": 9.29,
+                                                        "interior_lighting": [
+                                                            {
+                                                                "id": 1,
+                                                                "name": "Guest Room Lighting",
+                                                                "power_per_area": 0.41
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "id": 2,
+                                                        "name": "Space 2",
+                                                        "lighting_space_type": "LOBBY_HOTEL",
+                                                        "floor_area": 92.9,
+                                                        "interior_lighting": [
+                                                            {
+                                                                "id": 2,
+                                                                "name": "Hotel Lobby Lighting",
+                                                                "power_per_area": 11.836
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    }
+}
