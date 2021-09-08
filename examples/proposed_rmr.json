@@ -46,6 +46,18 @@
                                           ]
                                       }
                                   ],
+                                  "surfaces": [
+                                    {
+                                      "id": 3,
+                                      "name": "surface_1",
+                                      "azimuth": 90
+                                    },
+                                    {
+                                      "id": 2,
+                                      "name": "surface_2",
+                                      "azimuth": 180
+                                    }
+                                  ],
                                   "volume": 11000
                               }
                           ]
