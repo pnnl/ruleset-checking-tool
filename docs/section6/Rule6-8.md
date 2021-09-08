@@ -32,3 +32,5 @@
     - Get the total design power_per_area for the space: ```_space_lighting_power_per_area = sum( _lighting.power_per_area for _lighting in _interior_lighting )``` 
 
      **Rule Assertion:** For each space in the baseline model: ```_space_lighting_power_per_area == _lighting_power_allowance```  
+     
+     **Note:** If space type = "sales area" and the baseline LPD doesnt align with G3.7, this could be due to additional retail lighting power allowance for display lighting. This space should include a CAUTION message and clarify that manual verification is required to verify the retail baseline LPD.
