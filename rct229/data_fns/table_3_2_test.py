@@ -3,7 +3,7 @@ import pytest
 from rct229.data import data
 from rct229.data.schema_enums import schema_enums
 from rct229.data_fns.table_3_2_fns import (
-    climate_zone_enumeration_to_climate_zone_type_map,
+    climate_zone_enumeration_to_climate_zone_map,
     table_3_2_lookup,
 )
 from rct229.data_fns.table_utils import (
@@ -49,13 +49,13 @@ def test__table_3_2_CZ8():
     assert table_3_2_lookup("CZ8") == {"system_min_heating_output": 19}
 
 
-# Testing climate_zone_enumeration_to_climate_zone_type_map ----------
-def test__lighting_space_enumeration_to_lpd_space_type_map():
+# Testing climate_zone_enumeration_to_climate_zone_map ----------
+def test__climate_zone_enumeration_to_climate_zone_map():
     # check_enumeration_to_osstd_match_field_value_map() will throw exception(s)
     # when a check fails
     check_enumeration_to_osstd_match_field_value_map(
         match_field_name="climate_zone",
         enum_type="ClimateZone2019ASHRAE901",
         osstd_table=data["ashrae_90_1_table_3_2"],
-        enumeration_to_match_field_value_map=climate_zone_enumeration_to_climate_zone_type_map,
+        enumeration_to_match_field_value_map=climate_zone_enumeration_to_climate_zone_map,
     )

@@ -5,22 +5,7 @@ from rct229.data_fns.table_utils import find_osstd_table_entry
 # This dictionary maps the ClimateZone2019ASHRAE901 enumerations to
 # the corresponding climate zone values in the OSSTD file
 # ashrae_90_1_table_3_2.json
-"""
-The enumeration has been updated to match the following climate zones from the standard.
-CZ0A, CZ0B -> "0"
-CZ1A, CZ1B -> "1"
-CZ2A, CZ2B -> "2"
-CZ3A, CZ3B -> "3A,3B"
-CZ3C -> "3C"
-CZ4A, CZ4B -> "4A,4B"
-CZ4C -> "4C"
-CZ5A, CZ5B, CZ5C -> "5"
-CZ6A, CZ6B -> "6"
-CZ7 -> "7"
-CZ8 -> "8"
-
-"""
-climate_zone_enumeration_to_climate_zone_type_map = {
+climate_zone_enumeration_to_climate_zone_map = {
     "CZ0A": "0",
     "CZ0B": "0",
     "CZ1A": "1",
@@ -43,21 +28,20 @@ climate_zone_enumeration_to_climate_zone_type_map = {
 }
 
 
-def table_3_2_lookup(climate_zone):
-    """Returns the heating output for a climate zone as
+def table_3_2_lookup(climate_zone_enum_val):
+    """Returns the minimum heating output for a climate zone as
     required by ASHRAE 90.1 Table 3.2
     Parameters
     ----------
-    climate_zone : str
+    climate_zone_enum_val : str
         One of the ClimateZone2019ASHRAE901 enumeration values
     Returns
     -------
-    dict
-        The Heating Output for a given Climate Zone given by Table 3.2 [Btu/h·ft^2]
+    A dictionary of the form: { system_min_heating_ouput: float – the heating output for the given climate one given by Table 3.2 [Btu/h·ft^2] }
     """
-    climate_zone_type = climate_zone_enumeration_to_climate_zone_type_map[climate_zone]
+    climate_zone = climate_zone_enumeration_to_climate_zone_map[climate_zone_enum_val]
     osstd_entry = find_osstd_table_entry(
-        [("climate_zone", climate_zone_type)],
+        [("climate_zone", climate_zone)],
         osstd_table=data["ashrae_90_1_table_3_2"],
     )
     system_min_heating_output = osstd_entry["Btu/h·ft^2"]
