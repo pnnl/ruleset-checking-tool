@@ -1,6 +1,7 @@
 from numpy import sum
+
 from rct229.data.schema_enums import schema_enums
-from rct229.data_fns.table_G3_7_fns import table_G3_7_lpd
+from rct229.data_fns.table_G3_7_fns import table_G3_7_lookup
 from rct229.data_fns.table_G3_8_fns import table_G3_8_lpd
 from rct229.rule_engine.rule_base import (
     RuleDefinitionBase,
@@ -127,7 +128,7 @@ class Section6Rule2(RuleDefinitionListIndexedBase):
                         else:
                             # The building segment uses the Space-by-Space Method
                             lighting_space_type = space["lighting_space_type"]
-                            space_allowable_lpd = table_G3_7_lpd(
+                            space_allowable_lpd = table_G3_7_lookup(
                                 lighting_space_type, space_height=zone_avg_height
                             )
                             building_segment_allowable_lighting_power += (

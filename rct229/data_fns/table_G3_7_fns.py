@@ -112,8 +112,8 @@ lighting_space_enumeration_to_lpd_space_type_map = {
     "WAREHOUSE_STORAGE_AREA_SMALLER_HAND_CARRIED_ITEMS": "warehouse - fine storage",
 }
 
-
-def table_G3_7_lpd(lighting_space_type, space_height):
+# ATRIUM_LOW_MEDIUM
+def table_G3_7_lookup(lighting_space_type, space_height):
     """Returns the lighting power density for a space as
     required by ASHRAE 90.1 Table G3.7
 
@@ -145,4 +145,4 @@ def table_G3_7_lpd(lighting_space_type, space_height):
     else:
         lpd = watts_per_sqft + watts_per_ft * space_height
 
-    return lpd
+    return {"lpd": lpd}
