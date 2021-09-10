@@ -30,7 +30,7 @@
 
       - For each surface in zone: `for surface_b in zone_b.surfaces:`
 
-        - Check if surface is above-grade wall or roof and is exterior: `if ( get_opaque_surface_type(surface_b) in ["ABOVE-GRADE WALL", "ROOF"] ) AND ( scc_dictionary_b[surface_b.id] != "UNREGULATED" ):`
+        - Check if surface is above-grade wall or roof and is exterior: `if ( get_opaque_surface_type(surface_b) == "ABOVE-GRADE WALL" ) AND ( scc_dictionary_b[surface_b.id] != "UNREGULATED" ):`
 
           - For each subsurface in surface: `for subsurface_b in surface_b:`
 
