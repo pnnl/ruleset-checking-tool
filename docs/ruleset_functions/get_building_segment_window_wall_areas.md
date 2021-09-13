@@ -32,7 +32,7 @@ Logic:
 
         - For each surface in zone: `for surface in zone.surfaces:`
 
-          - If surface is above-grade wall and adjacent to the exterior: `if ( get_opaque_surface_type(surface) == "ABOVE-GRADE WALL" ) AND ( scc_dictionary[surface.id] in ["EXTERIOR RESIDENTIAL", "EXTERIOR NON-RESIDENTIAL", "EXTERIOR MIXED", "SEMI-EXTERIOR"] ):`  
+          - If surface is above-grade wall and is part of exterior or semi-exterior building envelope: `if ( get_opaque_surface_type(surface) == "ABOVE-GRADE WALL" ) AND ( scc_dictionary[surface.id] in ["EXTERIOR RESIDENTIAL", "EXTERIOR NON-RESIDENTIAL", "EXTERIOR MIXED", "SEMI-EXTERIOR"] ):`  
 
             - Add surface area to building segment total envelope above-grade wall area: `total_envelope_wall_area += surface.area`
 
