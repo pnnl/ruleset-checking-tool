@@ -38,6 +38,6 @@
 
               - Case 1: For each subsurface, if subsurface shading projections in P_RMR are the same as in U_RMR: `if ( subsurface_p.has_shading_overhang == subsurface_u.has_shading_overhang ) AND ( subsurface_p.has_shading_sidefins == subsurface_u.has_shading_sidefins ): PASS`
 
-              - Case 2: Else: `else: FAIL`
+              - Case 2: Else: `else: FAIL and raise_warning "FENESTRATION IN THE PROPOSED DESIGN DOES NOT HAVE THE SAME SHADING PROJECTIONS AS IN THE USER MODEL."`
 
 **[Back](../_toc.md)**
