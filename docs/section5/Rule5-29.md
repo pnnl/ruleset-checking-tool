@@ -38,6 +38,6 @@
 
             - Case 1: For each subsurface, if subsurface is flush with the exterior wall, and no shading projections are modeled: `if ( NOT subsurface_b.has_shading_overhang ) AND ( NOT subsurface_b.has_shading_sidefins ): PASS`
 
-            - Case 2: Else: `else: FAIL`
+            - Case 2: Else: `else: FAIL and raise_warning "BASELINE FENESTRATION WAS MODELED WITH SHADING PROJECTIONS AND/OR OVERHANGS, WHICH IS INCORRECT."`
 
 **[Back](../_toc.md)**
