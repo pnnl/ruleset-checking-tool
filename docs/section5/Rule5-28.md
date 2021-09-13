@@ -40,6 +40,6 @@
 
               - Case 1: For each subsurface in B_RMR, if subsurface U-factor, SHGC, glazed area and opaque area is equal to that in P_RMR: `if ( subsurface_b.u_factor == subsurface_p.u_factor ) AND ( subsurface_b.solar_heat_gain_coefficient == subsurface_p.solar_heat_gain_coefficient ) AND ( subsurface_b.glazed_area == subsurface_p.glazed_area ) AND ( surface_b.opaque_area == surface_p.opaque_area ): PASS`
 
-              - Case 2: Else: `else: FAIL`
+              - Case 2: Else: `else: FAIL and raise_warning "SUBSURFACE THAT IS NOT REGULATED (NOT PART OF BUILDING ENVELOPE) IS NOT MODELED WITH THE SAME AREA, U-FACTOR AND SHGC IN THE BASELINE AS IN THE PROPOSED DESIGN."`
 
 **[Back](../_toc.md)**
