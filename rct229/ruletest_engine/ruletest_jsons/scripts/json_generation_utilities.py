@@ -183,57 +183,6 @@ def inject_json_path_from_enumeration(key_list, json_path_ref_string):
     key_list.extend(enumeration_list)
 
 
-def add_to_dictionary_list(json_dict, key_list, dict_string):
-    """Used to add a list of dictionaries to a Python dictionary
-
-    Parameters
-    ----------
-    json_dict : dict
-        Python dictionary to be appended with dictionary list
-
-    key_list: list
-        List of keys describing where to add this dictionary list
-
-    dict_string: str
-        String describing keys for dictionary list. E.g., "id:1,2,3"
-
-    """
-
-    # Remove DICT_LIST from key list
-    key_list.pop()
-
-    # Try to get the nested_dictionary where you will set the dictionary list. If KeyError, initialize
-    # that JSON path as a dictionary
-    try:
-        dictionary_list = get_nested_dict(json_dict, key_list)
-    except TypeError:
-        print("TODO: Need to resolve how to do a list inside a list")
-
-    except KeyError:
-        set_nested_dict(json_dict, key_list, {})
-        dictionary_list = get_nested_dict(json_dict, key_list)
-
-    split_pair = dict_string.split(":")
-    key = split_pair[0]  # e.g., id
-    value_list = split_pair[1].split(",")  # e.g., 1,2,3
-
-    # Check if a list of dictionaries has already been set at the list key in json_dict. If not, initialize it.
-    if not isinstance(dictionary_list, list):
-        dictionary_list = []
-
-    # Iterate through each value and add its key/value pair to each sequential dictionary in list
-    for i in range(len(value_list)):
-
-        # If a dictionary doesn't exist at element "i", add one
-        if len(dictionary_list) < i + 1:
-            dictionary_list.append({})
-
-        # Set value for dictionary "i" and key "key"
-        dictionary_list[i][key] = clean_value(value_list[i])
-
-    set_nested_dict(json_dict, key_list, dictionary_list)
-
-
 def clean_value(value):
     """Used to change strings to numerics, if possible.
 
