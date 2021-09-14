@@ -30,7 +30,7 @@ Logic:
 
       - If zone is not directly conditioned (heated or cooled): `if zone not in directly_conditioned_zones:`  
 
-        - If any space in zone is atrium, zone is indirectly conditioned:: `if ( ( space.lighting_space_type == "Atrium, <= 40ft in height" ) OR ( space.lighting_space_type == "Atrium, > 40ft in height" ) for space in zone.spaces ): indirectly_conditioned_zones.append(zone)`  
+        - If any space in zone is atrium, zone is indirectly conditioned:: `if ( ( space.lighting_space_type == "ATRIUM_LOW_MEDIUM" ) OR ( space.lighting_space_type == "ATRIUM_HIGH" ) for space in zone.spaces ): indirectly_conditioned_zones.append(zone)`  
 
         - Else, no space in zone is atrium: `else:`  
 
@@ -85,7 +85,7 @@ Logic:
       - Else if zone is attic, classify zone as unenclosed: `else if ( ( get_opaque_surface_type(surface) == "CEILING" ) AND ( surface.adjacent_to == "EXTERIOR" ) for surface in zone.surfaces ): zone_conditioning_category_dict[zone.id] = "UNENCLOSED"`  
 
       - Else, classify zone as unconditioned: `else: zone_conditioning_category_dict[zone.id] = "UNCONDITIONED"`  
-  
+
 **Returns** `return zone_conditioning_category_dict`  
 
 **[Back](../_toc.md)**
