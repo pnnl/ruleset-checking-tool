@@ -41,7 +41,7 @@ lighting_space_enumeration_to_lpd_space_type_map = {
 }
 
 
-def table_G3_8_lpd(building_area_type):
+def table_G3_8_lookup(building_area_type):
     """Returns the lighting power density for a space as
     required by ASHRAE 90.1 Table G3.8
     Parameters
@@ -64,4 +64,4 @@ def table_G3_8_lpd(building_area_type):
     watts_per_sqft = osstd_entry["w/ft^2"]
     lpd = watts_per_sqft
 
-    return lpd
+    return {"lpd": lpd}
