@@ -10,7 +10,7 @@
 **Applicability Checks:** None  
 
 **Manual Check:** None  
-**Evaluation Context:** Each Data Element  
+**Evaluation Context:** Building Segment  
 **Data Lookup:** None  
 
 ## Rule Logic:  
@@ -27,8 +27,7 @@
 
           - If surface azimuth in P_RMR does not match U_RMR, flag surface: ```if surface_p.azimuth != surface_u.azimuth: surface_check.append(surface)```  
 
-**Rule Assertion:**  
-
-Case 1: All surface azimuth in P_RMR matches U-RMR: ```if NOT surface_check: PASS```  
-
-Case 2: Else: ```else: FAIL```  
+            - **Rule Assertion:**  
+              Case 1: All surface azimuth in P_RMR matches U-RMR: ```if len(surface_check) == 0: PASS```  
+              
+              Case 2: Else: ```else: FAIL```  
