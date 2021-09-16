@@ -128,7 +128,7 @@ def table_G3_7_lookup(lighting_space_type, space_height):
     -------
     dict
         { lpd: float - The lighting power density given by Table G3.7 [W/ft^2] }
-        
+
     """
     lpd_space_type = lighting_space_enumeration_to_lpd_space_type_map[
         lighting_space_type
