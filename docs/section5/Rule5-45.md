@@ -3,7 +3,7 @@
 
 **Rule ID:** 5-45  
 **Rule Description:** The  infiltration schedules are the same in the proposed RMR as in the baseline RMR.  
-**Rule Assertion:** B-RMR hourly fractions of infiltration:infiltration_multiplier_schedule_name = P-RMR hourly fractions of infiltration:infiltration_multiplier_schedule_name.  
+**Rule Assertion:** B-RMR hourly fractions of infiltration:multiplier_schedule = P-RMR hourly fractions of infiltration:multiplier_schedule.  
 **Appendix G Section:** Section G3.1-5(b) Building Envelope Modeling Requirements for the Proposed design and Baseline  
 **Appendix G Section Reference:** None  
 
