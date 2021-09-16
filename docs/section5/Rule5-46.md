@@ -3,7 +3,7 @@
 
 **Rule ID:** 5-46  
 **Rule Description:** The infiltration shall be modeled using the same methodology and adjustments for weather and building operation in both the proposed design and the baseline building design.  
-**Rule Assertion:** For all zones, B-RMR infiltration:infiltration_modeling_method_name= P-RMR infiltration:infiltration_modeling_method_name.  
+**Rule Assertion:** For all zones, B-RMR infiltration:modeling_method_name = P-RMR infiltration:modeling_method_name and B-RMR infiltration:modeling_method = P-RMR infiltration:modeling_method.  
 **Appendix G Section:** Section G3.1-5(b) Building Envelope Modeling Requirements for the Proposed design and Baseline  
 **Appendix G Section Reference:** None  
 
@@ -33,7 +33,7 @@
 
           **Rule Assertion:**  
 
-          - Case 1: For each zone, if zone infiltration modeling method in P_RMR matches that in B_RMR: `if infiltration_p.modeling_method == infiltration_b.modeling_method: PASS`  
+          - Case 1: For each zone, if both zone infiltration modeling method name and modeling method in P_RMR match that in B_RMR: `if ( infiltration_p.modeling_method_name == infiltration_b.modeling_method_name ) AND ( infiltration_p.modeling_method == infiltration_b.modeling_method ): PASS`
 
           - Case 2: Else: `Else: FAIL`
 
