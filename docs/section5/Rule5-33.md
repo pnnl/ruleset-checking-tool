@@ -16,7 +16,6 @@
 **Function Call:**  
 
   1. match_data_element()
-  2. get_opaque_surface_type()
 
 ## Rule Logic:
 
@@ -28,16 +27,14 @@
 
       - For each surface in zone: `for surface_p in zone_p.surfaces:`
 
-        - Check if surface is above-grade wall: `if get_opaque_surface_type(surface_p) == "ABOVE-GRADE WALL":`
+        - For each subsurface in surface: `for subsurface_p in surface_p.subsurfaces:`
 
-          - For each subsurface in surface: `for subsurface_p in surface_p:`
+          - Get matching subsurface in U_RMR: `subsurface_u = match_data_element(U_RMR, Subsurfaces, subsurface_p.id)`
 
-            - Get matching subsurface in U_RMR: `subsurface_u = match_data_element(U_RMR, Subsurfaces, subsurface_p.id)`
+            **Rule Assertion:**
 
-              **Rule Assertion:**
+            - Case 1: For each vertical fenestration in P_RMR, if automatically controlled shading devices are modeled the same as in U_RMR: `if subsurface_p.has_automatic_shades == subsurface_u.has_automatic_shades: PASS`
 
-              - Case 1: For each vertical fenestration in P_RMR, if automatically controlled shading devices are modeled the same as in U_RMR: `if subsurface_p.has_automatic_shades == subsurface_u.has_automatic_shades: PASS`
-
-              - Case 2: Else: `else: FAIL`
+            - Case 2: Else: `else: FAIL`
 
 **[Back](../_toc.md)**
