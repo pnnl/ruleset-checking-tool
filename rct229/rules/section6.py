@@ -138,7 +138,7 @@ class Section6Rule2(RuleDefinitionListIndexedBase):
                 if building_segment_uses_building_area_method:
                     building_segment_allowable_lpd = table_G3_8_lookup(
                         building_area_type=building_segment_lighting_building_area_type
-                    ).lpd
+                    )["lpd"]
                     building_segment_allowable_lighting_power = (
                         building_segment_allowable_lpd * building_segment_floor_area
                     )

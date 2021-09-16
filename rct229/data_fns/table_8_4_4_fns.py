@@ -13,6 +13,25 @@ MAX_THREE_PHASE_KVA = 1000
 
 
 def table_8_4_4_in_range(phase, kVA):
+    """
+    Determines whether the capacity for a transformer is within the range of Table 8.4.4
+
+    The capacity range of Table 8.4.4 is between 15kVA and 333kVA inclusive for single-phase transformers and
+    between 15kVA and 1000kVA inclusive for three-phase transformers.
+
+    Parameters
+    -----------
+    phase : str
+        One of the ElectricalPhase enumeration values
+    kVA : float
+        The transformer capacity in kVA
+
+    Returns
+    --------
+    bool
+        True if the transformer capacity is in range and False otherwise
+
+    """
     return kVA >= MIN_KVA and (
         (phase == SINGLE_PHASE and kVA <= MAX_SINGLE_PHASE_KVA)
         or (phase == THREE_PHASE and kVA <= MAX_THREE_PHASE_KVA)
@@ -30,22 +49,20 @@ def table_8_4_4_lookup(phase, kVA):
 
     Parameters
     ----------
-    type : TransformerType
-        Enumerated transformer type
+    phase : str
+        One of the ElectricalPhase enumeration values
     kVA : float
         Transformer capacity in kVA
 
     Returns
     -------
-    float
-        The required transformer efficiency as a decimal value
+    dict
+        { efficiency: float – The required transformer efficiency as a decimal value }
     """
     # Check that the capacity is in range
-    if (
-        kVA < MIN_KVA
-        or (phase == SINGLE_PHASE and kVA > MAX_SINGLE_PHASE_KVA)
-        or (phase == THREE_PHASE and kVA > MAX_THREE_PHASE_KVA)
-    ):
+    try:
+        assert table_8_4_4_in_range(phase, kVA)
+    except:
         raise ValueError("kVA out of range")
 
     # Create the lists to be used for linear interpolation

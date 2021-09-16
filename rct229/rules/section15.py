@@ -212,7 +212,7 @@ class Section15Rule5(RuleDefinitionListIndexedBase):
 
             return {
                 "baseline_transformer_efficiency": context.baseline["efficiency"],
-                "required_baseline_transformer_efficiency": table_8_4_4_lookup(
+                "efficiency": table_8_4_4_lookup(
                     phase=baseline_transformer_phase, kVA=baseline_transformer_kVA
                 ),
             }
@@ -274,7 +274,7 @@ class Section15Rule6(RuleDefinitionListIndexedBase):
 
             return {
                 "user_transformer_efficiency": context.user["efficiency"],
-                "required_user_transformer_min_efficiency": table_8_4_4_lookup(
+                "efficiency": table_8_4_4_lookup(
                     phase=user_transformer_phase, kVA=user_transformer_kVA
                 ),
             }
