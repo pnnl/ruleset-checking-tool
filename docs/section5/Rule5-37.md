@@ -31,9 +31,9 @@
 
   - Calculate building segment skylight roof ratio: `srr_b = skylight_roof_areas_dictionary_b[building_segment_b.id][0] / skylight_roof_areas_dictionary_b[building_segment_b.id][1]`
 
-    - If skylight roof area is 2% or less, set skylight type to "0%-2.0%": `if srr_b <=0.02: skylight_type_b = "0%-2.0%"`
+    - If skylight roof area is 2% or less, set skylight percentage of roof area to "0%-2.0%": `if srr_b <=0.02: skylight_type_b = "0%-2.0%"`
 
-    - Else, set skylight type to "2.1%+": `else: skylight_type_b = "2.1+"`
+    - Else, set skylight percentage of roof area to "2.1%+": `else: skylight_type_b = "2.1+"`
 
   - For each thermal_block in building segment: `for thermal_block_b in building_segment_b.thermal_blocks:`  
 
@@ -43,7 +43,7 @@
 
         - Check if surface is roof or ceiling and is regulated, get surface conditioning category: `if ( get_opaque_surface_type(surface_b) == "ROOF" ) AND ( scc_dictionary_b[surface_b] != "UNREGULATED" ): scc_b = scc_dictionary_b[surface_b]`
 
-          - If surface is exterior residential, exterior non-residential, or semi-exterior, get baseline skylight construction U-factor from Table G3.4-1 to G3.4-8 based on climate zone, surface conditioning category and skylight type: `if scc_b in ["EXTERIOR RESIDENTIAL", "EXTERIOR NON-RESIDENTIAL", "SEMI-EXTERIOR"]: target_u_factor = data_lookup(table_G3_4, climate_zone, scc_b, "SKYLIGHT", skylight_type_b, "ASSEMBLY MAX. U")`  
+          - If surface is exterior residential, exterior non-residential, or semi-exterior, get baseline skylight construction U-factor from Table G3.4-1 to G3.4-8 based on climate zone, surface conditioning category and skylight percentage of roof area: `if scc_b in ["EXTERIOR RESIDENTIAL", "EXTERIOR NON-RESIDENTIAL", "SEMI-EXTERIOR"]: target_u_factor = data_lookup(table_G3_4, climate_zone, scc_b, "SKYLIGHT", skylight_type_b, "ASSEMBLY MAX. U")`  
 
           - Else if surface is exterior mixed, get baseline construction for both residential and non-residential type skylight: `else if ( scc_b == "EXTERIOR MIXED" ): target_u_factor_res = data_lookup(table_G3_4, climate_zone, "EXTERIOR RESIDENTIAL", "SKYLIGHT", skylight_type_b, "ASSEMBLY MAX. U"), target_u_factor_nonres = data_lookup(table_G3_4, climate_zone, "EXTERIOR NON-RESIDENTIAL", "SKYLIGHT", skylight_type_b, "ASSEMBLY MAX. U")`  
 
