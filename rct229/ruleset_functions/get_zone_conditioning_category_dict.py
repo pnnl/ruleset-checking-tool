@@ -1,14 +1,28 @@
 from rct229.data_fns.table_3_2_fns import table_3_2_lookup
 from rct229.utils.jsonpath_utils import find_all
 
-# TODO: These use IP and should be SI to match the schema
-CAPACITY_THRESHOLD = 3.4  # Btu/(h*ft2)
-CRAWLSPACE_HEIGHT_THRESHOLD = 7  # ft?
+# TODO: Use pint to deal with units
+CAPACITY_THRESHOLD_IP = 3.4  # Btu/(h*ft2)
+CAPACITY_THRESHOLD = 3.154907451 * CAPACITY_THRESHOLD_IP  # W/m2
+CRAWLSPACE_HEIGHT_THRESHOLD_IP = 7  # ft?
+CRAWLSPACE_HEIGHT_THRESHOLD = 0.3048 * CRAWLSPACE_HEIGHT_THRESHOLD_IP  # m
 
 
 def get_zone_conditioning_category_dict(climate_zone, building):
-    """
-    Assumes the rmr is schema–valid
+    """Determines the zone conditioning category for every zone in a building
+
+    Parameters
+    ----------
+    climate_zone : str
+        One of the ClimateZone2019ASHRAE901 enumerated values
+    building : dict
+        A dictionary representing a building as defined by the ASHRAE229 schema
+    Returns
+    -------
+    dict
+        A dictionary that maps zones to one of the conditioning categories:
+        "CONDITIONED MIXED", "CONDITIONED NON-RESIDENTIAL", "CONDITIONED RESIDENTIAL",
+        "SEMI-HEATED", "UNCONDITIONED", "UNENCLOSED"
     """
     system_min_heating_output = table_3_2_lookup(climate_zone)
 
@@ -170,7 +184,3 @@ def get_zone_conditioning_category_dict(climate_zone, building):
 
             else:
                 one_conditioning_category_dict[zone_id] = "UNCONDITIONED"
-
-
-#
-#
