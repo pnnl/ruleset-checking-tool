@@ -17,7 +17,7 @@
 
   1. get_surface_conditioning_category()  
   2. get_opaque_surface_type()  
-  3. get_building_skylight_roof_areas()
+  3. get_building_segment_skylight_roof_areas()
 
 ## Rule Logic:  
 
@@ -25,7 +25,7 @@
 
 - Get surface conditioning category dictionary for B_RMR: `scc_dictionary_b = get_surface_conditioning_category(B_RMR)`  
 
-- Get building skylight roof areas dictionary: `skylight_roof_areas_dictionary_b = get_building_skylight_roof_areas(B_RMR)`
+- Get building skylight roof areas dictionary: `skylight_roof_areas_dictionary_b = get_building_segment_skylight_roof_areas(B_RMR)`
 
 - For each building segment in the Baseline model: `for building_segment_b in B_RMR.building.building_segments:`  
 
