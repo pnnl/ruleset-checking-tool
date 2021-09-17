@@ -36,7 +36,7 @@
 
           - Case 2: Else if roof surface thermal emittance in P_RMR matches that in U_RMR but is not equal to 0.9: `else if ( surface_p.surface_optical_properties.absorptance_thermal_exterior == surface_u.surface_optical_properties.absorptance_thermal_exterior ) AND ( surface_p.surface_optical_properties.absorptance_thermal_exterior != 0.9 ): PASS and raise_warning "ROOF SURFACE EMITTANCE IN P-RMR MATCHES THAT IN U-RMR BUT IS NOT EQUAL TO 0.9."`
 
-          - Case 3: Else if roof surface thermal emittance in P_RMR does not match that in U_RMR but is equal to 0.9: `else if surface_p.surface_optical_properties.absorptance_thermal_exterior == 0.9: PASS and raise_warning "ROOF THERMAL EMITTANCE IN EQUAL TO THE PRESCRIBED DEFAULT VALUE OF 0.9 BUT DIFFERS FROM THE THERMAL EMITTALNCE IN THE USER MODEL."`
+          - Case 3: Else if roof surface thermal emittance in P_RMR does not match that in U_RMR but is equal to 0.9: `else if surface_p.surface_optical_properties.absorptance_thermal_exterior == 0.9: PASS and raise_warning "ROOF THERMAL EMITTANCE IS EQUAL TO THE PRESCRIBED DEFAULT VALUE OF 0.9 BUT DIFFERS FROM THE THERMAL EMITTALNCE IN THE USER MODEL."`
 
           - Case 4: Else, roof surface thermal emittance is P_RMR does not match that in U_RMR and is not equal to 0.9: `Else: FAIL`
 
