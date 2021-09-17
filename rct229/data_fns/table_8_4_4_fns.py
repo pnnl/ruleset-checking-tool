@@ -60,10 +60,8 @@ def table_8_4_4_lookup(phase, kVA):
         { efficiency: float – The required transformer efficiency as a decimal value }
     """
     # Check that the capacity is in range
-    try:
-        assert table_8_4_4_in_range(phase, kVA)
-    except:
-        raise ValueError("kVA out of range")
+
+    assert table_8_4_4_in_range(phase, kVA), "kVA out of range"
 
     # Create the lists to be used for linear interpolation
     table_lists = {

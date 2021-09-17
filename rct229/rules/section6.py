@@ -130,7 +130,7 @@ class Section6Rule2(RuleDefinitionListIndexedBase):
                             lighting_space_type = space["lighting_space_type"]
                             space_allowable_lpd = table_G3_7_lookup(
                                 lighting_space_type, space_height=zone_avg_height
-                            ).lpd
+                            )["lpd"]
                             building_segment_allowable_lighting_power += (
                                 space_allowable_lpd * space_floor_area
                             )

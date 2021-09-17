@@ -4,8 +4,8 @@ from numpy.testing import assert_approx_equal
 from rct229.data_fns.table_8_4_4_fns import (
     SINGLE_PHASE,
     THREE_PHASE,
-    table_8_4_4_in_range,
     table_8_4_4_lookup,
+    table_8_4_4_in_range,
 )
 
 
@@ -40,22 +40,22 @@ def test__table_8_4_4_in_range__with_three_phase_in_range_value():
 
 # Testing table_8_4_4_lookup()
 def test__table_8_4_4_eff__with_single_phase_low_value():
-    with pytest.raises(ValueError, match="kVA out of range"):
+    with pytest.raises(AssertionError, match="kVA out of range"):
         table_8_4_4_lookup(phase=SINGLE_PHASE, kVA=14)
 
 
 def test__table_8_4_4_eff__with_three_phase_low_value():
-    with pytest.raises(ValueError, match="kVA out of range"):
+    with pytest.raises(AssertionError, match="kVA out of range"):
         table_8_4_4_lookup(phase=THREE_PHASE, kVA=14)
 
 
 def test__table_8_4_4_eff__with_single_phase_high_value():
-    with pytest.raises(ValueError, match="kVA out of range"):
+    with pytest.raises(AssertionError, match="kVA out of range"):
         table_8_4_4_lookup(phase=SINGLE_PHASE, kVA=350)
 
 
 def test__table_8_4_4_eff__with_three_phase_high_value():
-    with pytest.raises(ValueError, match="kVA out of range"):
+    with pytest.raises(AssertionError, match="kVA out of range"):
         table_8_4_4_lookup(phase=THREE_PHASE, kVA=1100)
 
 
@@ -68,7 +68,4 @@ def test__table_8_4_4_eff__with_three_phase_in_range_value():
 
 
 def test__table_8_4_4_eff__with_single_phase_between_values():
-    assert_approx_equal(
-        table_8_4_4_lookup(phase=SINGLE_PHASE, kVA=20).get("efficiency"),
-        (0.977 + 0.98) / 2,
-    )
+    assert_approx_equal(table_8_4_4_lookup(phase=SINGLE_PHASE, kVA=20).get('efficiency'), (0.977 + 0.98) / 2)

@@ -200,7 +200,7 @@ class Section15Rule5(RuleDefinitionListIndexedBase):
                 and user_transformer_efficiency
                 >= table_8_4_4_lookup(
                     phase=user_transformer_phase, kVA=user_transformer_kVA
-                )
+                )['efficiency']
                 and baseline_transformer_type == _DRY_TYPE
                 and baseline_transformer_capacity_in_range
             )
@@ -212,9 +212,9 @@ class Section15Rule5(RuleDefinitionListIndexedBase):
 
             return {
                 "baseline_transformer_efficiency": context.baseline["efficiency"],
-                "efficiency": table_8_4_4_lookup(
+                "required_baseline_transformer_efficiency": table_8_4_4_lookup(
                     phase=baseline_transformer_phase, kVA=baseline_transformer_kVA
-                ),
+                )["efficiency"],
             }
 
         def rule_check(self, context, calc_vals=None, data=None):
@@ -274,9 +274,9 @@ class Section15Rule6(RuleDefinitionListIndexedBase):
 
             return {
                 "user_transformer_efficiency": context.user["efficiency"],
-                "efficiency": table_8_4_4_lookup(
+                "required_user_transformer_min_efficiency": table_8_4_4_lookup(
                     phase=user_transformer_phase, kVA=user_transformer_kVA
-                ),
+                )["efficiency"],
             }
 
         def rule_check(self, context, calc_vals=None, data=None):
