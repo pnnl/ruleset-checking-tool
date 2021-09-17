@@ -21,7 +21,7 @@ def get_opaque_surface_type(surface):
     -------
     str
         One of the following surface types: "ABOVE-GRADE WALL", "BELOW-GRADE WALL",
-        "FLOOR", "GROUND", "HEATED SLAB-ON=GRADE", "ROOF", "UNHEATED SLAB-ON-GRADE"
+        "FLOOR", "HEATED SLAB-ON-GRADE", "ROOF", "UNHEATED SLAB-ON-GRADE"
     """
     surface_type = None
     surface_tilt = surface["tilt"]
@@ -30,13 +30,13 @@ def get_opaque_surface_type(surface):
     if 0 <= surface_tilt < 60:
         surface_type = "ROOF"
 
-    # Check for floor
+    # Check for a floor type
     elif 120 <= surface_tilt <= 180:
         if (
             surface["construction"]["has_radiant_heating"]
             and surface["adjacent_to"] == "GROUND"
         ):
-            surface_type = "HEATED SLAB-ON=GRADE"
+            surface_type = "HEATED SLAB-ON-GRADE"
         elif surface["adjacent_to"] == "GROUND":
             surface_type = "UNHEATED SLAB-ON-GRADE"
         else:

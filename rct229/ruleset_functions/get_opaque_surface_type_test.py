@@ -1,25 +1,40 @@
 import pytest
-from rct229.data_fns.table_utils import find_osstd_table_entry
+from rct229.ruleset_functions.get_opaque_surface_type import get_opaque_surface_type
 
-FAKE_OSSTD_TABLE = {
-    "fake_list": [
-        {
-            "match_field": 1,
-            "other_field": "some_value",
-        },
-        {
-            "match_field": 2,
-            "other_field": "some_other_value",
-        },
-    ]
+TEST_SURFACES = {
+    "ABOVE-GRADE WALL": {
+        "adjacent_to": "INTERIOR",
+        "construction": {"has_radiant_heating": False},
+        "tilt": 80,
+    },
+    "BELOW-GRADE WALL": {
+        "adjacent_to": "GROUND",
+        "construction": {"has_radiant_heating": True},
+        "tilt": 100,
+    },
+    "FLOOR": {
+        "adjacent_to": "EXTERIOR",
+        "construction": {"has_radiant_heating": False},
+        "tilt": 160,
+    },
+    "HEATED SLAB-ON-GRADE": {
+        "adjacent_to": "GROUND",
+        "construction": {"has_radiant_heating": True},
+        "tilt": 120,
+    },
+    "ROOF": {
+        "adjacent_to": "EXTERIOR",
+        "construction": {"has_radiant_heating": False},
+        "tilt": 30,
+    },
+    "UNHEATED SLAB-ON-GRADE": {
+        "adjacent_to": "GROUND",
+        "construction": {"has_radiant_heating": False},
+        "tilt": 180,
+    },
 }
 
 
-def test__find_osstd_table_entry__with_single_pair():
-    assert find_osstd_table_entry(
-        [("match_field", 2)],
-        osstd_table=FAKE_OSSTD_TABLE,
-    ) == {
-        "match_field": 2,
-        "other_field": "some_other_value",
-    }
+def test__get_opaque_surface_type():
+    for key in TEST_SURFACES:
+        assert get_opaque_surface_type(TEST_SURFACES[key]) == key, f"Failed {key} test"
