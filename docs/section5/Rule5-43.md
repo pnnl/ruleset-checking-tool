@@ -16,8 +16,7 @@
 **Function Call:**  
 
   1. get_opaque_surface_type()
-  2. get_surface_conditioning_category()
-  3. match_data_element()
+  2. match_data_element()
 
 ## Rule Logic:  
 
@@ -31,14 +30,16 @@
 
       - For each surface in zone: `for surface_p in zone_p.surfaces;`
 
-        - Check if surface is roof and is regulated, get matching surface in U_RMR: `if ( get_opaque_surface_type(surface_p.id) == "ROOF" ) AND ( scc_dictionary_p[surface_p.id] != "UNREGULATED" ): surface_u = match_data_element(U_RMR, Surfaces, surface_p.id)`
+        - Check if surface is roof, get matching surface in U_RMR: `if get_opaque_surface_type(surface_p.id) == "ROOF": surface_u = match_data_element(U_RMR, Surfaces, surface_p.id)`
 
           **Rule Assertion:**  
 
-          - Case 1: If roof surface solar reflectance in P_RMR matches U_RMR: `if surface_p.surface_optical_properties.absorptance_solar_exterior == surface_u.surface_optical_properties.absorptance_solar_exterior: PASS`
+          - Case 1: If roof surface solar reflectance in P_RMR matches U_RMR and is equal to 0.3: `if ( surface_p.surface_optical_properties.absorptance_solar_exterior == surface_u.surface_optical_properties.absorptance_solar_exterior ) AND ( surface_p.surface_optical_properties.absorptance_solar_exterior == 0.7 ): PASS`
 
-          - Case 2: Else if roof surface solar reflectance in P_RMR does not match U_RMR but is equal to 0.3: `else if surface_p.surface_optical_properties.absorptance_solar_exterior == 0.7: PASS and raise_warning "ROOF SURFACE SOLAR REFLECTANCE IN P-RMR DOES NOT MATCH THAT IN U-RMR BUT IS EQUAL TO 0.3. WHERE AGED TEST DATA ARE UNAVAILABLE, THE ROOF SURFACE MAY BE MODELED WITH A REFLECTANCE OF 0.30 AND A THERMAL EMITTANCE OF 0.90. P-RMR MAY NOT BE EQUAL TO U-RMR IF AGED TEST DATA IS NOT AVAILABLE."`
+          - Case 2: Else if roof surface solar reflectance in P_RMR matches U_RMR and is not equal to 0.3: `else if ( surface_p.surface_optical_properties.absorptance_solar_exterior == surface_u.surface_optical_properties.absorptance_solar_exterior ) AND ( surface_p.surface_optical_properties.absorptance_solar_exterior != 0.7 ): PASS and raise_warning "ROOF SURFACE SOLAR REFLECTANCE IN P-RMR MATCHES THAT IN U-RMR BUT IS NOT EQUAL TO 0.3.`
 
-          - Case 3: Else: `Else: FAIL`
+          - Case 3: Else if roof surface solar reflectance in P_RMR does not match U_RMR but is equal to 0.3: `else if surface_p.surface_optical_properties.absorptance_solar_exterior == 0.7: PASS and raise_warning "ROOF SURFACE SOLAR REFLECTANCE IS EQUAL TO THE PRESCRIBED DEFAULT VALUE OF 0.3 BUT DIFFERS FROM THE SOLAR REFLECTANCE IN THE USER MODEL."`
+
+          - Case 3: Else, roof surface solar reflectance in P_RMR does not match that in U_RMR and is not equal to 0.3: `Else: FAIL`
 
 **[Back](../_toc.md)**
