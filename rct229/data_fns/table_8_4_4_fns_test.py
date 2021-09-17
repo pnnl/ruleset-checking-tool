@@ -4,8 +4,8 @@ from numpy.testing import assert_approx_equal
 from rct229.data_fns.table_8_4_4_fns import (
     SINGLE_PHASE,
     THREE_PHASE,
-    table_8_4_4_lookup,
     table_8_4_4_in_range,
+    table_8_4_4_lookup,
 )
 
 
@@ -68,4 +68,7 @@ def test__table_8_4_4_eff__with_three_phase_in_range_value():
 
 
 def test__table_8_4_4_eff__with_single_phase_between_values():
-    assert_approx_equal(table_8_4_4_lookup(phase=SINGLE_PHASE, kVA=20).get('efficiency'), (0.977 + 0.98) / 2)
+    assert_approx_equal(
+        table_8_4_4_lookup(phase=SINGLE_PHASE, kVA=20).get("efficiency"),
+        (0.977 + 0.98) / 2,
+    )

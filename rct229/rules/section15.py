@@ -200,7 +200,7 @@ class Section15Rule5(RuleDefinitionListIndexedBase):
                 and user_transformer_efficiency
                 >= table_8_4_4_lookup(
                     phase=user_transformer_phase, kVA=user_transformer_kVA
-                )['efficiency']
+                )["efficiency"]
                 and baseline_transformer_type == _DRY_TYPE
                 and baseline_transformer_capacity_in_range
             )
