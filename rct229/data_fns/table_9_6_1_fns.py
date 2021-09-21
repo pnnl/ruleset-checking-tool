@@ -3,8 +3,8 @@ from rct229.data import data
 from rct229.data_fns.table_utils import find_osstd_table_entry
 
 # This dictionary maps the Space Type enumerations to
-# the corresponding lpd values in the OSSTD file
-# ashrae_90_1_table_9_6_1.json
+# the corresponding lpd values in ashrae_90_1_table_9_6_1.json
+
 space_type_enumeration_to_lpd_map = {
     "GUEST_ROOM": "guest room",
     "DORMITORY_LIVING_QUARTERS": "dormitory - living quarters",
