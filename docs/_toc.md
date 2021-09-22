@@ -98,7 +98,7 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   * 5-27: Proposed fenestration shall have the same shading projections as the user model.
   * [5-28](section5/Rule5-28.md): Subsurface that is not regulated (not part of building envelope) must be modeled with the same area, U-factor and SHGC in the baseline as in the proposed design.
   * 5-29: Automatically controlled fenestration shading devices must not be modeled in the baseline building design.
-  * 5-30: Automatically controlled fenestration shading devices must be modeled in the proposed design the same as in user model.
+  * [5-30](section5/Rule5-30.md): Proposed fenestration has the same shading projections as the user model.
   * 5-31: Skylight area shall be equal to that in the proposed design or 3%, whichever is smaller. If the skylight area of the proposed design is greater than 3%, baseline skylight area shall be decreased by an identical percentage in all roof components in which skylights are located to reach 3%.
   * 5-32: Skylight area in the proposed design must be the same as in user model for each roof surface
   * 5-33: Skylight U-factors for residential, non-residential and semiheated spaces in the baseline model must match the appropriate requirements in Table G3.4-1 through G3.4-8
