@@ -2,10 +2,10 @@
 # Envelope - Rule 5-48  
 
 **Rule ID:** 5-48  
-**Rule Description:** The air leakage rate must be the same in the baseline and proposed design.  
+**Rule Description:** The air leakage rate in unconditioned and unenclosed spaces must be the same the baseline and proposed design.  
 **Rule Assertion:** B-RMR infiltration:air_leakage_rate = P-RMR infiltration:air_leakage_rate  
-**Appendix G Section:** Section G3.1-1 Building Envelope Modeling Requirements for the Proposed design and Baseline building  
-**Appendix G Section Reference:** None  
+**Appendix G Section:** Section 5 Envelope  
+**Appendix G Section Reference:** Section G3.1-1 Building Envelope Modeling Requirements for the Proposed design and Baseline building  
 
 **Applicability:** All required data elements exist for B_RMR  
 **Applicability Checks:**  None  
@@ -16,25 +16,26 @@
 **Function Call:** 
 
   1. match_data_element()
+  2. get_zone_conditioning_category()
 
 ## Rule Logic:  
 
-- For each building segment in the B_RMR: `for building_segment_b in B_RMR.building.building_segments:`
+- Get zone conditioning category for B_RMR: `zcc_b = get_zone_conditioning_category(B_RMR)`
 
-  - For each thermal block in building segment: `for thermal_block_b in building_segment_b.thermal_blocks:`
+- For each zone in B_RMR: `for zone_b in B_RMR...zones:`
 
-    - For each zone in thermal block: `for zone_b in thermal_block_b.zones:`
+  - Check if zone is unconditioned or unenclosed: `if zcc_b[zone_b.id] in ["UNENCLOSED", "UNCONDITIONED"]:`
 
-      - Get zone infiltration: `infiltration_b = zone_b.infiltration`
+    - Get zone infiltration: `infiltration_b = zone_b.infiltration`
 
-      - Get matching zone in P_RMR: `zone_p = match_data_element(P_RMR, Zones, zone_b.id)`
+    - Get matching zone in P_RMR: `zone_p = match_data_element(P_RMR, Zones, zone_b.id)`
 
-        - Get zone infiltration in P_RMR: `infiltration_p = zone_p.infiltration`
+      - Get zone infiltration in P_RMR: `infiltration_p = zone_p.infiltration`
 
-          **Rule Assertion:**  
+        **Rule Assertion:**  
 
-          - Case 1: For each unconditioned and unenclosed zone, if zone infiltration air leakage rate in B_RMR matches that in P_RMR: `if infiltration_b.air_leakage_rate == infiltration_p.air_leakage_rate: PASS`  
+        - Case 1: For each unconditioned and unenclosed zone, if zone infiltration air leakage rate in B_RMR matches that in P_RMR: `if infiltration_b.air_leakage_rate == infiltration_p.air_leakage_rate: PASS`  
 
-          - Case 2: Else: `Else: FAIL`
+        - Case 2: Else: `Else: FAIL`
 
 **[Back](../_toc.md)**
