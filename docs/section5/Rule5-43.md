@@ -4,8 +4,8 @@
 **Rule ID:** 5-43  
 **Rule Description:** The  proposed roof surfaces shall be modeled using the same solar reflectance as in the user model.  
 **Rule Assertion:** P-RMR SurfaceOpticalProperties:absorptance_solar_exterior = U-RMR SurfaceOpticalProperties:absorptance_solar_exterior  
-**Appendix G Section:** Section G3.1-1(a) Building Envelope Modeling Requirements for the Proposed design  
-**Appendix G Section Reference:** None  
+**Appendix G Section:** Section 5 Envelope  
+**Appendix G Section Reference:** Section G3.1-1(a) Building Envelope Modeling Requirements for the Proposed design  
 
 **Applicability:** All required data elements exist for P_RMR  
 **Applicability Checks:**  None  
@@ -19,8 +19,6 @@
   2. match_data_element()
 
 ## Rule Logic:  
-
-- Get surface conditioning category dictionary for P_RMR: `scc_dictionary_p = get_surface_conditioning_category(P_RMR)`
 
 - For each building segment in the Proposed model: `for building_segment_p in P_RMR.building.building_segments:`
 
@@ -40,6 +38,6 @@
 
           - Case 3: Else if roof surface solar reflectance in P_RMR does not match U_RMR but is equal to 0.3: `else if surface_p.surface_optical_properties.absorptance_solar_exterior == 0.7: PASS and raise_warning "ROOF SURFACE SOLAR REFLECTANCE IS EQUAL TO THE PRESCRIBED DEFAULT VALUE OF 0.3 BUT DIFFERS FROM THE SOLAR REFLECTANCE IN THE USER MODEL."`
 
-          - Case 3: Else, roof surface solar reflectance in P_RMR does not match that in U_RMR and is not equal to 0.3: `Else: FAIL`
+          - Case 4: Else, roof surface solar reflectance in P_RMR does not match that in U_RMR and is not equal to 0.3: `Else: FAIL`
 
 **[Back](../_toc.md)**
