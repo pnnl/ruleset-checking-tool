@@ -83,7 +83,7 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   * [5-12](section5/Rule5-12.md): Baseline floor assemblies must conform with assemblies detailed in Appendix A (Floors—Steel-joist (A5.3)) 
   * [5-13](section5/Rule5-13.md): Baseline floor assemblies must  match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-9
   * [5-14](section5/Rule5-14.md): Baseline slab-on-grade assemblies must conform with assemblies detailed in Appendix A ( Slab-on-grade floors shall match the F-factor for unheated slabs from the same tables (A6).) 
-  * 5-15: Baseline slab-on-grade assemblies must match the appropriate assembly maximum F-factors in Tables G3.4-1 through G3.4-9
+  * [5-15](section5/Rule5-15.md): Baseline slab-on-grade floor assemblies must match the appropriate assembly maximum F-factors in Tables G3.4-1 through G3.4-9
   * 5-16: Slab-on-grade F-factor in the proposed design must be modeled as-designed
   * [5-17](section5/Rule5-17.md): Opaque surfaces that are not regulated (not part of opaque building envelope) must be modeled the same in the baseline as in the proposed design.
   * 5-18: Need to add rule for building types not included in Table G3.1.1-1
