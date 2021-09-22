@@ -1,4 +1,108 @@
 {
+    "buildings": [
+      {
+          "id": 0,
+          "name": "building_name",
+          "building_segments": [
+              {
+                  "id": 0,
+                  "name": "building_segment_0",
+                  "lighting_building_area_type": "HOTEL_MOTEL",
+                  "thermal_blocks": [
+                      {
+                          "id": 0,
+                          "name": "Block 1",
+                          "zones": [
+                              {
+                                  "id": 0,
+                                  "name": "Thermal Zone 1",
+                                  "spaces": [
+                                      {
+                                          "id": 1,
+                                          "name": "Space 1",
+                                          "lighting_space_type": "GUEST_ROOM",
+                                          "floor_area": 100,
+                                          "interior_lighting": [
+                                              {
+                                                  "id": 1,
+                                                  "name": "Guest Room Lighting",
+                                                  "power_per_area": 0.41,
+                                                  "has_daylighting_control": false
+                                              }
+                                          ]
+                                      },
+                                      {
+                                          "id": 2,
+                                          "name": "Space 2",
+                                          "lighting_space_type": "LOBBY_HOTEL",
+                                          "floor_area": 1000,
+                                          "interior_lighting": [
+                                              {
+                                                  "id": 2,
+                                                  "name": "Hotel Lobby Lighting",
+                                                  "power_per_area": 1.1,
+                                                  "has_daylighting_control": false
+                                              }
+                                          ]
+                                      }
+                                  ],
+                                  "volume": 11000
+                              }
+                          ]
+                      }
+                  ]
+              },
+              {
+                  "id": 1,
+                  "name": "building_segment_1",
+                  "lighting_building_area_type": "NONE",
+                  "thermal_blocks": [
+                      {
+                          "id": 0,
+                          "name": "Block 1",
+                          "zones": [
+                              {
+                                  "id": 0,
+                                  "name": "Thermal Zone 1",
+                                  "spaces": [
+                                      {
+                                          "id": 1,
+                                          "name": "Space 1",
+                                          "lighting_space_type": "GUEST_ROOM",
+                                          "floor_area": 100,
+                                          "interior_lighting": [
+                                              {
+                                                  "id": 1,
+                                                  "name": "Guest Room Lighting",
+                                                  "power_per_area": 0.41,
+                                                  "has_daylighting_control": false
+                                              }
+                                          ]
+                                      },
+                                      {
+                                          "id": 2,
+                                          "name": "Space 2",
+                                          "lighting_space_type": "LOBBY_HOTEL",
+                                          "floor_area": 1000,
+                                          "interior_lighting": [
+                                              {
+                                                  "id": 2,
+                                                  "name": "Hotel Lobby Lighting",
+                                                  "power_per_area": 1.1,
+                                                  "has_daylighting_control": false
+                                              }
+                                          ]
+                                      }
+                                  ],
+                                  "volume": 11000
+                              }
+                          ]
+                      }
+                  ]
+              }
+          ]
+      }
+    ],
     "transformers": [
             {
                 "id": 1,
