@@ -19,7 +19,14 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
 ## Reference Material
   * [Rule Template](_rule_template.md): Template file for creating a new Rule Definition Development Strategy document
   * [Functions](_functions.md): A list of functions used within the Rule Definition Development Strategy documents
-  * [Ruleset Functions](_ruleset_functions.md): A list of commonly used functions that are specific to a ruleset.
+
+## Ruleset Functions
+  * [get_lighting_status_type](ruleset_functions/get_lighting_status_type.md): This function would determine whether the space lighting status type is 1). not-yet designed or match Table 9_5_1, 2). as-designed or as-existing.  
+  * [get_opaque_surface_type.md](ruleset_functions/get_opaque_surface_type.md): This function would determine whether it is a wall, ceiling or floor.  
+  * [get_surface_conditioning_category.md](ruleset_functions/get_surface_conditioning_category.md): This function would cycle through each surface in  a zone and categorize it as exterior res, exterior non res, exterior mixed, semi-exterior or unregulated.  
+  * [get_wwr.md](ruleset_functions/get_wwr.md): This function would determine window wall ratio for a building segment.  
+  * [get_zone_conditioning_category.md](ruleset_functions/get_zone_conditioning_category.md): Determine the Zone Conditioning Category for each zone. This function would cycle through each zone in an RMR and categorize it as ‘conditioned’, 'semi-heated’, 'unenclosed' or ‘unconditioned’.  If ‘conditioned’ it will also categorize the space as ‘residential’ or ‘non-residential’.  
+  * [normalize_space_schedules.md](ruleset_functions/normalize_space_schedules.md):This function would determine a normalized schedule for a data element in space.  
 
 ## Data Tables
   * [8.4.4](data_tables/Table8-4-4.md): Minimum Nominal Efficiency Levels for Low-Voltage Dry-Type Distribution Transformers  
@@ -63,29 +70,29 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
 
 ## Section 5 - Building Envelope
   * 5-1: Baseline Performance is the average of 4 rotations if vertical fenestration area per each orientation differ by more than 5%  
-  * 5-2: Orientation is the same in user model and proposed model  
+  * [5-2](section5/Rule5-2.md): Orientation is the same in user model and proposed model  
   * [5-3](section5/Rule5-3.md): Baseline building must be modeled so that it doesn't shade itself  
-  * 5-4: Baseline roof assemblies must conform with assemblies detailed in Appendix A ( Above-grade walls—Steel-framed A2.2) 
+  * [5-4](section5/Rule5-4.md): Baseline roof assemblies must conform with assemblies detailed in Appendix A ( Above-grade walls—Steel-framed A2.2) 
   * 5-5: Baseline roof assemblies must match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8
-  * 5-6: Building enevelope U-factors must be modeled in proposed design as designed (roof, wall, windows, exterior floors)
-  * 5-7: Baseline below-grade walls shall conform with assemblies detailed in Appendix A Concrete block, A4) 
-  * 5-8: Baseline below-grade walls shall match the appropriate assembly maximum C-factors in Tables G3.4-1 through G3.4-8
-  * 5-9: Below-grade wall C-factor must be the same in the proposed model as in the user model
-  * 5-10: Baseline above-grade wall assemblies must conform with assemblies detailed in  Appendix A (Steel-framed A3.3) 
-  * 5-11: Baseline above-grade wall assemblies must match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8
-  * 5-12: Baseline floor assemblies must conform with assemblies detailed in  Appendix A (Floors—Steel-joist (A5.3)) 
-  * 5-13: Baseline floor assemblies must  match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-9
-  * 5-14: Baseline slab-on-grade assemblies must conform with assemblies detailed in Appendix A ( Slab-on-grade floors shall match the F-factor for unheated slabs from the same tables (A6).) 
+  * [5-6](section5/Rule5-6.md): Building above-grade opaque surface U-factors must be modeled in proposed design as designed.  
+  * [5-7](section5/Rule5-7.md): Baseline below-grade walls shall conform with assemblies detailed in Appendix A Concrete block, A4) 
+  * [5-8](section5/Rule5-8.md): Baseline below-grade walls shall match the appropriate assembly maximum C-factors in Tables G3.4-1 through G3.4-8
+  * [5-9](section5/Rule5-9.md): Below-grade wall C-factor must be the same in the proposed model as in the user model  
+  * [5-10](section5/Rule5-10.md): Baseline above-grade wall assemblies must conform with assemblies detailed in  Appendix A (Steel-framed A3.3) 
+  * [5-11](section5/Rule5-11.md): Baseline above-grade wall assemblies must match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8
+  * [5-12](section5/Rule5-12.md): Baseline floor assemblies must conform with assemblies detailed in Appendix A (Floors—Steel-joist (A5.3)) 
+  * [5-13](section5/Rule5-13.md): Baseline floor assemblies must  match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-9
+  * [5-14](section5/Rule5-14.md): Baseline slab-on-grade assemblies must conform with assemblies detailed in Appendix A ( Slab-on-grade floors shall match the F-factor for unheated slabs from the same tables (A6).) 
   * 5-15: Baseline slab-on-grade assemblies must match the appropriate assembly maximum F-factors in Tables G3.4-1 through G3.4-9
   * 5-16: Slab-on-grade F-factor in the proposed design must be modeled as-designed
-  * 5-17: For building area types included in Table G3.1.1-1, vertical fenestration areas for new buildings and additions shall equal that in Table G3.1.1-1 based on the area of gross above-grade walls that separate conditioned spaces and semiheated spaces from the exterior. Where a building has multiple building area types, and each building area types included in Table G3.1.1-1, each type shall use the values in the table.
+  * [5-17](section5/Rule5-17.md): Opaque surfaces that are not regulated (not part of opaque building envelope) must be modeled the same in the baseline as in the proposed design.
   * 5-18: Need to add rule for building types not included in Table G3.1.1-1
   * 5-19: The vertical fenestration shall be distributed on each face of the building in the same proportion as in the proposed design. 
   * 5-20: The vertical fenestration area for eexisiting buildings shall match the user model
   * 5-21: Need to add that fenestration area in the proposed model must be equal to user model
   * 5-22: Fenestration U-factors for residential, non-residential and semiheated spaces in the baseline model must match the appropriate requirements in Table G3.4-1 through G3.4-8 for the appropriate WWR in the baseline RMR.
   * 5-23: Fenestration (window and skylight) U-factors in the proposed  model must match the user model
-  * 5-24: Vertical fenestration SHGC  shall match the appropriate requirements in Tables G3.4-1 through G3.4-8 
+  * [5-24](section5/Rule5-24.md): Fenestration for new buildings, existing buildings, and additions shall be assumed to be flush with the exterior wall, and no shading projections shall be modeled.  
   * 5-25: Fenestration (window and skylight) SHGC in the proposed  model must match the user model
   * 5-26: Baseline fenestration shall be assumed to be flush with the exterior wall, and no shading projections shall be modeled.
   * 5-27: Proposed fenestration shall have the same shading projections as the user model.
@@ -95,7 +102,7 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   * 5-31: Skylight area shall be equal to that in the proposed design or 3%, whichever is smaller. If the skylight area of the proposed design is greater than 3%, baseline skylight area shall be decreased by an identical percentage in all roof components in which skylights are located to reach 3%.
   * 5-32: Skylight area in the proposed design must be the same as in user model for each roof surface
   * 5-33: Skylight U-factors for residential, non-residential and semiheated spaces in the baseline model must match the appropriate requirements in Table G3.4-1 through G3.4-8
-  * 5-34: Skylight SHGC properties shall match the appropriate requirements in Tables G3.4-1 through G3.4-8 using the value and the applicable skylight percentage.
+  * [5-34](section5/Rule5-34.md): The baseline roof surfaces shall be modeled using a solar reflectance of 0.30.  
   * 5-35: Skylight U-factors for unconditioned spaces in the baseline model must match the appropriate U-factors in the user model
   * 5-36: The  baseline roof surfaces shall be modeled using a solar reflectance of 0.30.
   * 5-37: The  proposed roof surfaces shall be modeled using the same solar reflectance as in the user model.
@@ -122,7 +129,7 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   * 6-6: Where a lighting system has been designed and submitted with design documents, lighting power shall be determined in accordance with Sections 9.1.3 and 9.1.4. 
   * 6-7: Where lighting neither exists nor is submitted with design documents, lighting shall comply with but not exceed the requirements of Section 9. Lighting power shall be determined in accordance with the Building Area Method (Section 9.6.1)
   * [6-8](section6/Rule6-8.md): Baseline Interior Lighting Power Allowance for all spaces is determined based in Table G3.7 when lighting systems has been designed and submitted with design documents (space by space method is used).  
-  * 6-9: Baseline building is modeled with automatic shutoff controls in buildings >5000 ft2
+  * [6-9](section6/Rule6-9.md): Baseline building is modeled with automatic shutoff controls in buildings >5000 ft2
   * 6-10: Baseline building is modeled with occupancy sensor controls in applicable space types
   * [6-11](section6/Rule6-11.md): Baseline building is not modeled with daylighting control
   * 6-12: Proposed building is modeled with dayligthing controls
