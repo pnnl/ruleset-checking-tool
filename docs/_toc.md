@@ -86,7 +86,7 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   * [5-15](section5/Rule5-15.md): Baseline slab-on-grade floor assemblies must match the appropriate assembly maximum F-factors in Tables G3.4-1 through G3.4-9
   * [5-16](section5/Rule5-16.md): Slab-on-grade F-factor in the proposed design must be modeled as-designed
   * [5-17](section5/Rule5-17.md): Opaque surfaces that are not regulated (not part of opaque building envelope) must be modeled the same in the baseline as in the proposed design.
-  * 5-18: Need to add rule for building types not included in Table G3.1.1-1
+  * [5-18](section5/Rule5-18.md): For building area types included in Table G3.1.1-1, vertical fenestration areas for new buildings and additions shall equal that in Table G3.1.1-1 based on the area of gross above-grade walls that separate conditioned spaces and semi-heated spaces from the exterior
   * 5-19: The vertical fenestration shall be distributed on each face of the building in the same proportion as in the proposed design. 
   * 5-20: The vertical fenestration area for eexisiting buildings shall match the user model
   * 5-21: Need to add that fenestration area in the proposed model must be equal to user model
