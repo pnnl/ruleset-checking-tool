@@ -1,5 +1,4 @@
 from numpy import sum
-
 from rct229.data.schema_enums import schema_enums
 from rct229.rule_engine.rule_base import (
     RuleDefinitionBase,
@@ -7,6 +6,7 @@ from rct229.rule_engine.rule_base import (
 )
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 from rct229.utils.jsonpath_utils import find_all
+from rct229.utils.match_lists import match_lists_exectly_by_id
 
 # Rule Definitions for Section 5 of 90.1-2019 Appendix G
 
@@ -27,35 +27,39 @@ class Section5Rule2(RuleDefinitionListIndexedBase):
             rmr_context="buildings",
         )
 
-    class BuildingRule(RuleDefinitionListIndexedBase):
+    class BuildingRule(RuleDefinitionBase):
         def __init__(self):
             super(Section5Rule2.BuildingRule, self).__init__(
                 rmrs_used=UserBaselineProposedVals(True, False, True),
-                each_rule=Section5Rule2.BuildingRule.SurfaceRule(),
-                index_rmr="proposed",
-                list_path="$..surfaces[*]",  # All surfaces inside the building
+                required_fields={
+                    "$..surfaces[*]": ["azimuth"],
+                },
+                # TODO: add this to RuleDefinitionBase
+                must_match_by_ids=["$..surfaces[*]"],
             )
 
-        class SurfaceRule(RuleDefinitionBase):
-            def __init__(self):
-                super(Section5Rule2.BuildingRule.SurfaceRule, self,).__init__(
-                    required_fields={
-                        "$": ["azimuth"],
-                    },
-                    rmrs_used=UserBaselineProposedVals(True, False, True),
-                )
+        def get_calc_vals(self, context, data=None):
+            failing_surface_ids = []
+            proposed_surfaces = find_all("$..surfaces[*]", context.proposed)
+            user_surfaces = find_all("$..surfaces[*]", context.user)
+            print("user_surfaces:", user_surfaces)
 
-            def get_calc_vals(self, context, data=None):
-                azimuth_user = context.user["azimuth"]
-                azimuth_proposed = context.proposed["azimuth"]
+            # This assumes that the surfaces all match
+            # TODO: Implement match_exactly_by_id()
+            matched_user_surfaces = match_lists_exectly_by_id(
+                proposed_surfaces, user_surfaces
+            )
+            proposed_user_surface_pairs = zip(proposed_surfaces, matched_user_surfaces)
+            for (p_surface, u_surface) in proposed_user_surface_pairs:
+                print("p_surface:", p_surface)
+                print("u_surface:", u_surface)
+                if p_surface["azimuth"] != u_surface["azimuth"]:
+                    failing_surface_ids.append(p_surface["id"])
 
-                return {
-                    "azimuth_user": azimuth_user,
-                    "azimuth_proposed": azimuth_proposed,
-                }
+            return {"failing_surface_ids": failing_surface_ids}
 
-            def rule_check(self, context, calc_vals, data=None):
-                return calc_vals["azimuth_user"] == calc_vals["azimuth_proposed"]
+        def rule_check(self, context, calc_vals, data=None):
+            return len(calc_vals["failing_surface_ids"]) == 0
 
 
 # ------------------------
