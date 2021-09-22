@@ -1,10 +1,6 @@
 import rct229
 from rct229.data import data
-from rct229.data.schema_enums import schema_enums
-
-_osstd_prm_interior_lighting_data = data["ashrae_90_1_prm_2019.prm_interior_lighting"][
-    "prm_interior_lighting"
-]
+from rct229.data_fns.table_utils import find_osstd_table_entry
 
 # This dictionary maps the LightingSpaceType2019ASHRAE901T951TG38 enumerations to
 # the corresponding lpd_space_type values in the OSSTD file
@@ -45,29 +41,8 @@ lighting_space_enumeration_to_lpd_space_type_map = {
 }
 
 
-def _get_osstd_entry(lpd_space_type):
-    """Returns an entry for a matching lpd space type from interior lighting data
-    Parameters
-    ----------
-    lpd_space_type : str
-        One of the LightingSpaceType2019ASHRAE901TG38 enumeration values
-    Returns
-    -------
-    dict
-        The prm interior lighting entry for a given lpd space type
-
-    """
-    entries = [
-        entry
-        for entry in _osstd_prm_interior_lighting_data
-        if entry["lpd_space_type"] == lpd_space_type
-    ]
-    assert len(entries) == 1
-    return entries[0]
-
-
-def table_G3_8_lpd(building_area_type):
-    """Returns the lighting power density for a space as
+def table_G3_8_lookup(building_area_type):
+    """Returns the lighting power density for a building area type as
     required by ASHRAE 90.1 Table G3.8
     Parameters
     ----------
@@ -75,14 +50,19 @@ def table_G3_8_lpd(building_area_type):
         One of the LightingSpaceType2019ASHRAE901TG38 enumeration values
     Returns
     -------
-    float
-        The lighting power density given by Table G3.8 [W/ft^2]
+    dict
+        { lpd: float – The lighting power density given by Table G3.8 [W/ft^2] }
+
     """
     lpd_space_type = lighting_space_enumeration_to_lpd_space_type_map[
         building_area_type
     ]
-    osstd_entry = _get_osstd_entry(lpd_space_type)
+
+    osstd_entry = find_osstd_table_entry(
+        [("lpd_space_type", lpd_space_type)],
+        osstd_table=data["ashrae_90_1_prm_2019.prm_interior_lighting"],
+    )
     watts_per_sqft = osstd_entry["w/ft^2"]
     lpd = watts_per_sqft
 
-    return lpd
+    return {"lpd": lpd}
