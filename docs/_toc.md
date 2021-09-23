@@ -103,7 +103,7 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   * 5-32: Skylight area in the proposed design must be the same as in user model for each roof surface
   * 5-33: Skylight U-factors for residential, non-residential and semiheated spaces in the baseline model must match the appropriate requirements in Table G3.4-1 through G3.4-8
   * [5-34](section5/Rule5-34.md): The baseline roof surfaces shall be modeled using a solar reflectance of 0.30.  
-  * 5-35: Skylight U-factors for unconditioned spaces in the baseline model must match the appropriate U-factors in the user model
+  * [5-35](section5/Rule5-35.md): If the skylight area of the proposed design is greater than 3%, baseline skylight area shall be decreased by an identical percentage in all roof components in which skylights are located to reach 3%.  
   * 5-36: The  baseline roof surfaces shall be modeled using a solar reflectance of 0.30.
   * 5-37: The  proposed roof surfaces shall be modeled using the same solar reflectance as in the user model.
   * 5-38: The  baseline roof surfaces shall be modeled using a thermal emittance of 0.9
