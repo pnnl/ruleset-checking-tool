@@ -74,20 +74,20 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   * [5-3](section5/Rule5-3.md): Baseline building must be modeled so that it doesn't shade itself  
   * [5-4](section5/Rule5-4.md): Baseline roof assemblies must conform with assemblies detailed in Appendix A ( Above-grade walls—Steel-framed A2.2) 
   * 5-5: Baseline roof assemblies must match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8
-  * 5-6: Building enevelope U-factors must be modeled in proposed design as designed (roof, wall, windows, exterior floors)
+  * [5-6](section5/Rule5-6.md): Building above-grade opaque surface U-factors must be modeled in proposed design as designed.  
   * [5-7](section5/Rule5-7.md): Baseline below-grade walls shall conform with assemblies detailed in Appendix A Concrete block, A4) 
   * [5-8](section5/Rule5-8.md): Baseline below-grade walls shall match the appropriate assembly maximum C-factors in Tables G3.4-1 through G3.4-8
-  * 5-9: Below-grade wall C-factor must be the same in the proposed model as in the user model
+  * [5-9](section5/Rule5-9.md): Below-grade wall C-factor must be the same in the proposed model as in the user model  
   * [5-10](section5/Rule5-10.md): Baseline above-grade wall assemblies must conform with assemblies detailed in  Appendix A (Steel-framed A3.3) 
   * [5-11](section5/Rule5-11.md): Baseline above-grade wall assemblies must match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8
   * [5-12](section5/Rule5-12.md): Baseline floor assemblies must conform with assemblies detailed in Appendix A (Floors—Steel-joist (A5.3)) 
   * [5-13](section5/Rule5-13.md): Baseline floor assemblies must  match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-9
   * [5-14](section5/Rule5-14.md): Baseline slab-on-grade assemblies must conform with assemblies detailed in Appendix A ( Slab-on-grade floors shall match the F-factor for unheated slabs from the same tables (A6).) 
-  * 5-15: Baseline slab-on-grade assemblies must match the appropriate assembly maximum F-factors in Tables G3.4-1 through G3.4-9
-  * 5-16: Slab-on-grade F-factor in the proposed design must be modeled as-designed
+  * [5-15](section5/Rule5-15.md): Baseline slab-on-grade floor assemblies must match the appropriate assembly maximum F-factors in Tables G3.4-1 through G3.4-9
+  * [5-16](section5/Rule5-16.md): Slab-on-grade F-factor in the proposed design must be modeled as-designed
   * [5-17](section5/Rule5-17.md): Opaque surfaces that are not regulated (not part of opaque building envelope) must be modeled the same in the baseline as in the proposed design.
-  * 5-18: Need to add rule for building types not included in Table G3.1.1-1
-  * 5-19: The vertical fenestration shall be distributed on each face of the building in the same proportion as in the proposed design. 
+  * [5-18](section5/Rule5-18.md): For building area types included in Table G3.1.1-1, vertical fenestration areas for new buildings and additions shall equal that in Table G3.1.1-1 based on the area of gross above-grade walls that separate conditioned spaces and semi-heated spaces from the exterior
+  * [5-19](section5/Rule5-19.md): For building areas not shown in Table G3.1.1-1, vertical fenestration areas for new buildings and additions shall equal that in the proposed design or 40% of gross above-grade wall area, whichever is smaller. 
   * 5-20: The vertical fenestration area for eexisiting buildings shall match the user model
   * 5-21: Need to add that fenestration area in the proposed model must be equal to user model
   * 5-22: Fenestration U-factors for residential, non-residential and semiheated spaces in the baseline model must match the appropriate requirements in Table G3.4-1 through G3.4-8 for the appropriate WWR in the baseline RMR.
@@ -96,14 +96,14 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   * 5-25: Fenestration (window and skylight) SHGC in the proposed  model must match the user model
   * 5-26: Baseline fenestration shall be assumed to be flush with the exterior wall, and no shading projections shall be modeled.
   * 5-27: Proposed fenestration shall have the same shading projections as the user model.
-  * 5-28: Manual fenestration shading devices, such as blinds or shades, shall be modeled or not modeled the same as in the baseline building design.
+  * [5-28](section5/Rule5-28.md): Subsurface that is not regulated (not part of building envelope) must be modeled with the same area, U-factor and SHGC in the baseline as in the proposed design.
   * 5-29: Automatically controlled fenestration shading devices must not be modeled in the baseline building design.
-  * 5-30: Automatically controlled fenestration shading devices must be modeled in the proposed design the same as in user model.
+  * [5-30](section5/Rule5-30.md): Proposed fenestration has the same shading projections as the user model.
   * 5-31: Skylight area shall be equal to that in the proposed design or 3%, whichever is smaller. If the skylight area of the proposed design is greater than 3%, baseline skylight area shall be decreased by an identical percentage in all roof components in which skylights are located to reach 3%.
   * 5-32: Skylight area in the proposed design must be the same as in user model for each roof surface
   * 5-33: Skylight U-factors for residential, non-residential and semiheated spaces in the baseline model must match the appropriate requirements in Table G3.4-1 through G3.4-8
   * [5-34](section5/Rule5-34.md): The baseline roof surfaces shall be modeled using a solar reflectance of 0.30.  
-  * 5-35: Skylight U-factors for unconditioned spaces in the baseline model must match the appropriate U-factors in the user model
+  * [5-35](section5/Rule5-35.md): If the skylight area of the proposed design is greater than 3%, baseline skylight area shall be decreased by an identical percentage in all roof components in which skylights are located to reach 3%.  
   * 5-36: The  baseline roof surfaces shall be modeled using a solar reflectance of 0.30.
   * 5-37: The  proposed roof surfaces shall be modeled using the same solar reflectance as in the user model.
   * 5-38: The  baseline roof surfaces shall be modeled using a thermal emittance of 0.9
@@ -124,10 +124,10 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   * [6-1](section6/Rule6-1.md): Proposed building interior lighting power should be equal to user building interior lighting power
   * [6-2](section6/Rule6-2.md): Proposed building interior lighting power shall not exceel total interior lighting power allowance determined using either G3.7 or G3.8
   * [6-3](section6/Rule6-3.md): Spaces in proposed building with hardwired lighting, including Hotel/Motel Guest Rooms, Dormitory Living Quarters interior lighting power >= Table 9.6.1. and Interior lighting power for  'Dwelling Units' space type in the proposed building shall be >= 0.60 W/ft2.
-  * 6-4: Interior lighting power for  'Dwelling Units' space type in the proposed building shall be >= 0.60 W/ft2
-  * 6-5: Where a complete lighting system exists, the actual lighting power for each thermal block shall be used in he model. 
-  * 6-6: Where a lighting system has been designed and submitted with design documents, lighting power shall be determined in accordance with Sections 9.1.3 and 9.1.4. 
-  * 6-7: Where lighting neither exists nor is submitted with design documents, lighting shall comply with but not exceed the requirements of Section 9. Lighting power shall be determined in accordance with the Building Area Method (Section 9.6.1)
+  * [6-4](section6/Rule6-4.md): Where a complete lighting system exists, the actual lighting power for each thermal block shall be used in the model.
+  * 6-5: Where a lighting system has been designed and submitted with design documents, lighting power shall be determined in accordance with Sections 9.1.3 and 9.1.4.   
+  * 6-6: Where lighting neither exists nor is submitted with design documents, lighting shall comply with but not exceed the requirements of Section 9. Lighting power shall be determined in accordance with the Building Area Method (Section 9.6.1).  
+  * [6-7](section6/Rule6-7.md): Where a complete lighting system exists and where a lighting system has been designed and submitted with design documents, the baseline LPD is equal to expected value in Table G3.7.  
   * [6-8](section6/Rule6-8.md): Baseline Interior Lighting Power Allowance for all spaces is determined based in Table G3.7 when lighting systems has been designed and submitted with design documents (space by space method is used).  
   * [6-9](section6/Rule6-9.md): Baseline building is modeled with automatic shutoff controls in buildings >5000 ft2
   * 6-10: Baseline building is modeled with occupancy sensor controls in applicable space types

@@ -26,7 +26,8 @@
                                               {
                                                   "id": 1,
                                                   "name": "Guest Room Lighting",
-                                                  "power_per_area": 0.41
+                                                  "power_per_area": 0.41,
+                                                  "has_daylighting_control": false
                                               }
                                           ]
                                       },
@@ -39,7 +40,8 @@
                                               {
                                                   "id": 2,
                                                   "name": "Hotel Lobby Lighting",
-                                                  "power_per_area": 1.1
+                                                  "power_per_area": 1.1,
+                                                  "has_daylighting_control": false
                                               }
                                           ]
                                       }
@@ -72,7 +74,8 @@
                                               {
                                                   "id": 1,
                                                   "name": "Guest Room Lighting",
-                                                  "power_per_area": 0.41
+                                                  "power_per_area": 0.41,
+                                                  "has_daylighting_control": false
                                               }
                                           ]
                                       },
@@ -85,7 +88,8 @@
                                               {
                                                   "id": 2,
                                                   "name": "Hotel Lobby Lighting",
-                                                  "power_per_area": 1.1
+                                                  "power_per_area": 1.1,
+                                                  "has_daylighting_control": false
                                               }
                                           ]
                                       }
