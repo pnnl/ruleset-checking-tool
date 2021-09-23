@@ -38,5 +38,7 @@
           - Case 1: For each surface, if total subsurface area in P_RMR is equal to that in U_RMR: `if total_subsurface_area_p == total_subsurface_area_u: PASS`
 
           - Case 2: Else: `else: FAIL`
+    ## Note:  
+    - For future rrevision: Each surface in U-RMR may have multiple subsurface objects of different types, U-factors, SHGC, VT, overhangs, etc. So I think we need to check equivalency for each subsurface in U-RMR vs P-RMR without any aggregation, similar to how U-factor equivalency is checked for 5-25. 
 
 **[Back](../_toc.md)**
