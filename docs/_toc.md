@@ -91,24 +91,24 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   * 5-20: The vertical fenestration area for eexisiting buildings shall match the user model
   * 5-21: Need to add that fenestration area in the proposed model must be equal to user model
   * 5-22: Fenestration U-factors for residential, non-residential and semiheated spaces in the baseline model must match the appropriate requirements in Table G3.4-1 through G3.4-8 for the appropriate WWR in the baseline RMR.
-  * 5-23: Fenestration (window and skylight) U-factors in the proposed  model must match the user model
+  * [5-23](section5/Rule5-23.md): Subsurface area in the proposed design must be as-designed.  
   * [5-24](section5/Rule5-24.md): Fenestration for new buildings, existing buildings, and additions shall be assumed to be flush with the exterior wall, and no shading projections shall be modeled.  
   * [5-25](section5/Rule5-25.md): Fenestration (window and skylight) U-factors in the proposed model must match the user model.  
   * 5-26: Baseline fenestration shall be assumed to be flush with the exterior wall, and no shading projections shall be modeled.
   * 5-27: Proposed fenestration shall have the same shading projections as the user model.
-  * 5-28: Manual fenestration shading devices, such as blinds or shades, shall be modeled or not modeled the same as in the baseline building design.
+  * [5-28](section5/Rule5-28.md): Subsurface that is not regulated (not part of building envelope) must be modeled with the same area, U-factor and SHGC in the baseline as in the proposed design.
   * 5-29: Automatically controlled fenestration shading devices must not be modeled in the baseline building design.
-  * 5-30: Automatically controlled fenestration shading devices must be modeled in the proposed design the same as in user model.
+  * [5-30](section5/Rule5-30.md): Proposed fenestration has the same shading projections as the user model.
   * 5-31: Skylight area shall be equal to that in the proposed design or 3%, whichever is smaller. If the skylight area of the proposed design is greater than 3%, baseline skylight area shall be decreased by an identical percentage in all roof components in which skylights are located to reach 3%.
   * 5-32: Skylight area in the proposed design must be the same as in user model for each roof surface
   * 5-33: Skylight U-factors for residential, non-residential and semiheated spaces in the baseline model must match the appropriate requirements in Table G3.4-1 through G3.4-8
   * [5-34](section5/Rule5-34.md): The baseline roof surfaces shall be modeled using a solar reflectance of 0.30.  
-  * 5-35: Skylight U-factors for unconditioned spaces in the baseline model must match the appropriate U-factors in the user model
+  * [5-35](section5/Rule5-35.md): If the skylight area of the proposed design is greater than 3%, baseline skylight area shall be decreased by an identical percentage in all roof components in which skylights are located to reach 3%.  
   * 5-36: The  baseline roof surfaces shall be modeled using a solar reflectance of 0.30.
   * 5-37: The  proposed roof surfaces shall be modeled using the same solar reflectance as in the user model.
   * 5-38: The  baseline roof surfaces shall be modeled using a thermal emittance of 0.9
   * 5-39: The  proposed roof surfaces shall be modeled using the same thermal emittance as in the user model.
-  * 5-40: The  baseline roof surfaces shall be modeled using reflectivity of 0.30.
+  * [5-40](section5/Rule5-40.md): The baseline roof surfaces shall be modeled using a thermal emittance of 0.9.
   * 5-41: The  proposed roof surfaces shall be modeled using the same reflectivity as in the user model.
   * 5-42: The  infiltration modeling method in the baseline includes for adjustment for weather and building operation.
   * 5-43: The  infiltration equivalent full load hours are the same in the proposed RMR as in the baseline RMR
