@@ -108,7 +108,7 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   * 5-37: The  proposed roof surfaces shall be modeled using the same solar reflectance as in the user model.
   * 5-38: The  baseline roof surfaces shall be modeled using a thermal emittance of 0.9
   * 5-39: The  proposed roof surfaces shall be modeled using the same thermal emittance as in the user model.
-  * 5-40: The  baseline roof surfaces shall be modeled using reflectivity of 0.30.
+  * [5-40](section5/Rule5-40.md): The baseline roof surfaces shall be modeled using a thermal emittance of 0.9.
   * 5-41: The  proposed roof surfaces shall be modeled using the same reflectivity as in the user model.
   * 5-42: The  infiltration modeling method in the baseline includes for adjustment for weather and building operation.
   * 5-43: The  infiltration equivalent full load hours are the same in the proposed RMR as in the baseline RMR
