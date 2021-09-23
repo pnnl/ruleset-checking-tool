@@ -6,27 +6,28 @@ import os
 import pandas as pd
 
 from rct229.ruletest_engine.ruletest_jsons.scripts.json_generation_utilities import *
-from rct229.ruletest_engine.ruletest_jsons.scripts.json_schema_utilities import  *
-from rct229.schema.schema_unit_pint_definitions import get_pint_unit_registry
+from rct229.schema.config import ureg
+from rct229.schema.schema_utils import *
 
 # ---------------------------------------USER INPUTS---------------------------------------
 
-spreadsheet_name = "transformer_tests_draft.xlsx"
-json_name = "transformer_tests.json"
+spreadsheet_name = "receptacle_tests.xlsx"
+json_name = "receptacle_tests.json"
 sheet_name = "TCDs"
 
 # --------------------------------------SCRIPT STARTS--------------------------------------
+
 
 def get_rmr_json_path_from_key_list(key_list):
 
     """Ingests a python list of 'keys' from the test JSON spreadsheet and returns the ASHRAE229 schema JSON path
     associated with it. For example ['rmr_transformations', 'user', 'schedules[0]', 'hourly_values'] would return:
-    'schedules[0]/hourly_values'.
+    'schedules/hourly_values'.
 
      Parameters
      ----------
      key_list : list
-         List of strings representing keys used to build the ruletest JSON
+         List of strings representing keys used to build the ruletest JSON, from Ruletest spreadsheet
 
      Returns
     -------
@@ -35,34 +36,31 @@ def get_rmr_json_path_from_key_list(key_list):
 
     """
 
-
     # Get index for the beginning of the RMR JSON.
     # Order is always 'rmr_transformations' or 'rmr_template', <RMR_TYPE>, <RMR_JSON>, therefore add 2 index to
     # either 'rmr_transformation' or 'rmr_template' indices
-    if 'rmr_transformations' in key_list:
-        begin_rmr_index = key_list.index('rmr_transformations') + 2
+    if "rmr_transformations" in key_list:
+        begin_rmr_index = key_list.index("rmr_transformations") + 2
     else:
-        begin_rmr_index = key_list.index('rmr_template') + 2
+        begin_rmr_index = key_list.index("rmr_template") + 2
 
     final_index = len(key_list)
 
     # put together all RMR keys together to form a JSON path
-    json_path = '/'.join(key_list[begin_rmr_index: final_index])
+    json_path = "/".join(key_list[begin_rmr_index:final_index])
+
+    # Remove index references
+    json_path = clean_json_path(json_path)
 
     return json_path
 
 
-def convert_units_from_tcd_to_rmr_schema(ureg, tcd_value, tcd_units, key_list):
+def convert_units_from_tcd_to_rmr_schema(tcd_value, tcd_units, key_list):
 
     """Converts a quantity defined in the test case description's (TCD) to units compatible with the ASHRAE229 value.
 
     Parameters
     ----------
-
-    ureg : pint.UnitRegistry
-
-        A UnitRegistry from the pint package. This element handles interpreting and converting quantities of various
-        units
 
     tcd_value : float
 
@@ -83,11 +81,25 @@ def convert_units_from_tcd_to_rmr_schema(ureg, tcd_value, tcd_units, key_list):
 
     """
 
-    # Build JSON path from key list
-    json_path = get_rmr_json_path_from_key_list(key_list)
+    # Build JSON path from key list and remove list indices
+    # Example: ['rmr_transformations', 'user', 'schedules[0]', 'hourly_values'] => 'schedules/hourly_values'.
+    rmr_json_path = get_rmr_json_path_from_key_list(key_list)
+
+    # Re-concatenate JSON path into a list without index references
+    # Example: 'schedules/hourly_values' => ['schedules', 'hourly_values']
+    rmr_schema_key_list = rmr_json_path.split("/")
 
     # Extract the schema's required units for this given JSON path
-    schema_units = find_schema_unit_for_json_path(json_path)
+    schema_units = find_schema_unit_for_json_path(rmr_schema_key_list)
+
+    # If no units are returned, raise an error
+    if schema_units == None:
+        raise ValueError(
+            f"OUTCOME: Could not find associated units for JSON path: {rmr_json_path}"
+        )
+
+    # Take the schema unit's string from the RMR JSON schema and convert it to something Pint will understand
+    # Example: W/K-m2 --> W/(K*m2)
     schema_units = clean_schema_units(schema_units)
 
     # Define TCD quantity with units in pint (convert to float if necessary)
@@ -126,7 +138,7 @@ def create_test_json_from_excel(spreadsheet_name, sheet_name, json_name):
     """
 
     # Set pint translator
-    ureg = get_pint_unit_registry()
+    # ureg = get_pint_unit_registry()
 
     file_dir = os.path.dirname(__file__)
 
@@ -158,9 +170,9 @@ def create_test_json_from_excel(spreadsheet_name, sheet_name, json_name):
     rules_df = master_df.drop(keys, axis=1)
 
     # If units column exist, drop it too and set as a separate list
-    if 'units' in headers:
-        units_list = master_df['units'].values
-        rules_df = rules_df.drop('units', axis=1)
+    if "units" in headers:
+        units_list = master_df["units"].values
+        rules_df = rules_df.drop("units", axis=1)
 
     # Initiailize dictionary for JSON
     json_dict = {}
@@ -213,8 +225,9 @@ def create_test_json_from_excel(spreadsheet_name, sheet_name, json_name):
                     tcd_units = units_list[row_i]
 
                     # Convert row_value to match the units found in the ASHRAE 229 schema
-                    row_value = convert_units_from_tcd_to_rmr_schema(ureg, row_value, tcd_units, key_list)
-
+                    row_value = convert_units_from_tcd_to_rmr_schema(
+                        row_value, tcd_units, key_list
+                    )
 
                 # If this is a template definition, store the template for the RMR transformations
                 if "rmr_template" in key_list:
@@ -253,7 +266,9 @@ def create_test_json_from_excel(spreadsheet_name, sheet_name, json_name):
 
                         # If perturbations to the template exist, merge the transformations with the template
                         else:
-                            rmr_transformations_dict[rmr_string] = merge_nested_dictionary(
+                            rmr_transformations_dict[
+                                rmr_string
+                            ] = merge_nested_dictionary(
                                 copy.deepcopy(
                                     rmr_template_dict[rule_name]["rmr_template"][
                                         "json_template"

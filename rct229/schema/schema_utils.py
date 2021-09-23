@@ -1,30 +1,8 @@
-
-import re
-import os
 import json
+import os
 import re
 
-
-def clean_json_path(json_path_string):
-    """Ingests a string representing a JSON path. Replaces all the '[N]' substrings.
-    For example: 'transformers[0]/efficiency' => 'transformers/efficiency'
-
-     Parameters
-     ----------
-     json_path_string : str
-         String representing a JSON path that includes integers in square brackets. E.g., 'transformers[0]/efficiency'
-
-     Returns
-    -------
-    cleaned_path_string: str
-        JSON path string without square brackets.E.g., 'transformers/efficiency'
-
-    """
-
-    # Replace all integers within square brackets from path
-    cleaned_path_string = re.sub(r'\[\d+\]', '', json_path_string)
-
-    return cleaned_path_string
+import rct229.schema.config as config
 
 
 def clean_schema_units(schema_unit_str):
@@ -34,13 +12,13 @@ def clean_schema_units(schema_unit_str):
 
      Parameters
      ----------
-     json_path_string : str
+     schema_unit_str : str
          String representing a JSON path that includes integers in square brackets. E.g., 'transformers[0]/efficiency'
 
      Returns
     -------
-    cleaned_path_string: str
-        JSON path string without square brackets.E.g., 'transformers/efficiency'
+    cleaned_unit_str: str
+        The schema_unit_str string value translated to a string value the Pint library unit registry can understand.
 
     """
 
@@ -55,20 +33,25 @@ def clean_schema_units(schema_unit_str):
                 substring_list[i] = "(" + re.sub("-", "*", substring) + ")"
 
         # Put it all together
-        schema_unit_str = ''.join(substring_list)
+        cleaned_unit_str = "".join(substring_list)
 
-    return schema_unit_str
+    # Nothing to clean
+    else:
+        cleaned_unit_str = schema_unit_str
+
+    return cleaned_unit_str
 
 
-def find_schema_unit_for_json_path(json_quantity_path):
+def find_schema_unit_for_json_path(key_list):
     """Ingests a JSON path that has associated units the ASHRAE229 schema. This function returns the units for that
     JSON path as defined by the ASHRAE229 schema.
     For example: 'transformers/capacity' => 'V-A'
 
      Parameters
      ----------
-     json_quantity_path : str
-         String representing a JSON path has associated units. E.g., 'transformers/capacity'
+     key_list : list
+         List representing a JSON path has associated units. E.g., 'transformers/capacity' represented as
+         ['transformers', 'capacity']
 
      Returns
     -------
@@ -76,41 +59,26 @@ def find_schema_unit_for_json_path(json_quantity_path):
         Unit for the json_quantity_path. E.g., 'V-A'
 
     """
-    file_dir = os.path.abspath(os.path.dirname(__file__))
-    json_schema_path = os.path.join(file_dir, "..", "..", "..", "schema", "ASHRAE229.schema.json")
-
-    with open(json_schema_path) as f:
-        schema_dict = json.load(f)
-        schema_dict = schema_dict["definitions"]
 
     root_key = "ASHRAE229"
 
-    # Remove index references
-    json_quantity_path = clean_json_path(json_quantity_path)
-
-    key_list = json_quantity_path.split('/')
-
     # Initialize first reference to top level key
-    dict_ref = schema_dict[root_key]
+    dict_ref = config.schema_dict[root_key]
 
+    key_list_head = key_list[:-1]  # All but last key
     last_key = key_list[-1]
 
-    # Iterate through each key until you get to the end and return the units
-    for key in key_list:
+    # Iterate through each key until you get the final dictionary reference
+    for key in key_list_head:
+        reference_string = return_json_schema_reference(dict_ref, key)
+        dict_ref = config.schema_dict[reference_string]
 
-        if key == last_key:
-
-            if 'units' in dict_ref["properties"][key]:
-                return dict_ref["properties"][key]['units']
-            else:
-                raise ValueError(
-                    f"OUTCOME: Could not find associated units for JSON path: {json_quantity_path}"
-                )
-
-        else:
-
-            reference_string = return_json_schema_reference(dict_ref, key)
-            dict_ref = schema_dict[reference_string]
+    # Check the final dictionary reference for units
+    if "units" in dict_ref["properties"][last_key]:
+        return dict_ref["properties"][last_key]["units"]
+    else:
+        # If no units are found, return none
+        return None
 
 
 def return_json_schema_reference(object_dict, key):
@@ -138,18 +106,16 @@ def return_json_schema_reference(object_dict, key):
     properties_dict = object_dict["properties"][key]
 
     # $ref elements are either at the top level or buried inside "items"
-    if 'items' in properties_dict:
+    if "items" in properties_dict:
 
         # Return the reference string (the last element separated by the '/'s)
-        return properties_dict['items']['$ref'].split('/')[-1]
+        return properties_dict["items"]["$ref"].split("/")[-1]
 
-    elif '$ref' in properties_dict:
+    elif "$ref" in properties_dict:
 
         # Return the reference string (the last element separated by the '/'s)
-        return properties_dict['$ref'].split('/')[-1]
+        return properties_dict["$ref"].split("/")[-1]
 
     else:
 
-        raise ValueError(
-            f"OUTCOME: Could not find a $ref key for {properties_dict} "
-        )
+        raise ValueError(f"OUTCOME: Could not find a $ref key for {properties_dict} ")
