@@ -1,5 +1,3 @@
-from numpy import sum
-from rct229.data.schema_enums import schema_enums
 from rct229.rule_engine.rule_base import (
     RuleDefinitionBase,
     RuleDefinitionListIndexedBase,
@@ -42,17 +40,13 @@ class Section5Rule2(RuleDefinitionListIndexedBase):
             failing_surface_ids = []
             proposed_surfaces = find_all("$..surfaces[*]", context.proposed)
             user_surfaces = find_all("$..surfaces[*]", context.user)
-            print("user_surfaces:", user_surfaces)
 
             # This assumes that the surfaces all match
-            # TODO: Implement match_exactly_by_id()
             matched_user_surfaces = match_lists_exectly_by_id(
                 proposed_surfaces, user_surfaces
             )
             proposed_user_surface_pairs = zip(proposed_surfaces, matched_user_surfaces)
             for (p_surface, u_surface) in proposed_user_surface_pairs:
-                print("p_surface:", p_surface)
-                print("u_surface:", u_surface)
                 if p_surface["azimuth"] != u_surface["azimuth"]:
                     failing_surface_ids.append(p_surface["id"])
 
