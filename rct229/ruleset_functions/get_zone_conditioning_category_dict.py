@@ -24,7 +24,11 @@ def get_zone_conditioning_category_dict(climate_zone, building):
         "CONDITIONED MIXED", "CONDITIONED NON-RESIDENTIAL", "CONDITIONED RESIDENTIAL",
         "SEMI-HEATED", "UNCONDITIONED", "UNENCLOSED"
     """
-    system_min_heating_output = table_3_2_lookup(climate_zone)
+    system_min_heating_output = table_3_2_lookup(climate_zone)[
+        "system_min_heating_output"
+    ]
+
+    zone_conditioning_category_dict = {}
 
     directly_conditioned_zone_ids = []
     semiheated_zone_ids = []
@@ -39,18 +43,16 @@ def get_zone_conditioning_category_dict(climate_zone, building):
             hvac_system["simulation_result_sensible_cool_capacity"]
             >= CAPACITY_THRESHOLD
             or hvac_system["simulation_result_heat_capacity"]
-            >= system_min_heating_ouput
+            >= system_min_heating_output
         ):
             directly_conditioned_zone_ids.extend(hvac_system["zones_served"])
         elif hvac_system["simulation_result_heat_capacity"] >= CAPACITY_THRESHOLD:
-            semiheated_zone_ids.extend(
-                [zone["id"] for zone in hvac_system["zones_served"]]
-            )
+            semiheated_zone_ids.extend(hvac_system["zones_served"])
 
     # Determine eligibility for indirectly conditioned zones
     for zone in find_all("building_segments[*].thermal_blocks[*].zones[*]", building):
         if zone["id"] not in directly_conditioned_zone_ids:
-            lighting_space_types = find_all("spaces[*].lighting_space_type")
+            lighting_space_types = find_all("spaces[*].lighting_space_type", zone)
             any_space_type_in_zone_is_atrium = any(
                 [
                     lighting_space_type in ["ATRIUM_LOW_MEDIUM", "ATRIUM_HIGH"]
@@ -183,4 +185,6 @@ def get_zone_conditioning_category_dict(climate_zone, building):
                 zone_conditioning_category_dict[zone_id] = "UNENCLOSED"
 
             else:
-                one_conditioning_category_dict[zone_id] = "UNCONDITIONED"
+                zone_conditioning_category_dict[zone_id] = "UNCONDITIONED"
+
+        return zone_conditioning_category_dict
