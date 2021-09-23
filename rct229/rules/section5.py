@@ -1,5 +1,4 @@
 from numpy import sum
-
 from rct229.data.schema_enums import schema_enums
 from rct229.rule_engine.rule_base import (
     RuleDefinitionBase,
@@ -27,32 +26,30 @@ class Section5Rule3(RuleDefinitionListIndexedBase):
             rmr_context="buildings",
         )
 
-    class BuildingRule(RuleDefinitionListIndexedBase):
+    class BuildingRule(RuleDefinitionBase):
         def __init__(self):
             super(Section5Rule3.BuildingRule, self).__init__(
                 rmrs_used=UserBaselineProposedVals(False, True, False),
-                each_rule=Section5Rule3.BuildingRule.SurfaceRule(),
-                index_rmr="baseline",
-                list_path="$..surfaces[*]",  # All surfaces inside the building
+                required_fields={
+                    "$..surfaces[*]": ["adjacent_to"],
+                    "$..surfaces[?(@.adjacent_to='EXTERIOR')]": ["does_cast_shade"],
+                },
             )
 
-        class SurfaceRule(RuleDefinitionBase):
-            def __init__(self):
-                super(Section5Rule3.BuildingRule.SurfaceRule, self,).__init__(
-                    required_fields={
-                        "$": ["adjacent_to", "does_cast_shade"],
-                    },
-                    rmrs_used=UserBaselineProposedVals(False, True, False),
-                )
+        def get_calc_vals(self, context, data=None):
+            baseline_surfaces_casting_shade_ids = []
+            for surface in find_all(
+                "$..surfaces[?(@.adjacent_to='EXTERIOR')]", context.baseline
+            ):
+                if surface["does_cast_shade"]:
+                    baseline_surfaces_casting_shade_ids.append(surface["id"])
 
-            def is_applicable(self, context, data=None):
-                return context.baseline["adjacent_to"] == "EXTERIOR"
+            return {
+                "baseline_surfaces_casting_shade_ids": baseline_surfaces_casting_shade_ids
+            }
 
-            def get_calc_vals(self, context, data=None):
-                return {"does_cast_shade": context.baseline["does_cast_shade"]}
-
-            def rule_check(self, context, calc_vals, data=None):
-                return not calc_vals["does_cast_shade"]
+        def rule_check(self, context, calc_vals, data=None):
+            return len(calc_vals["baseline_surfaces_casting_shade_ids"]) == 0
 
 
 # ------------------------
