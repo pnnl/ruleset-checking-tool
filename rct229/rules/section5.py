@@ -13,7 +13,7 @@ from rct229.utils.match_lists import match_lists_exectly_by_id
 
 
 class Section5Rule2(RuleDefinitionListIndexedBase):
-    """Rule 2 of ASHRAE 90.1-2019 Appendix G Section 6 (Lighting)"""
+    """Rule 2 of ASHRAE 90.1-2019 Appendix G Section 5 (Envelope)"""
 
     def __init__(self):
         super(Section5Rule2, self).__init__(
