@@ -12,7 +12,7 @@ from rct229.utils.jsonpath_utils import find_all
 
 
 class Section5Rule3(RuleDefinitionListIndexedBase):
-    """Rule 3 of ASHRAE 90.1-2019 Appendix G Section 6 (Lighting)"""
+    """Rule 3 of ASHRAE 90.1-2019 Appendix G Section 5 (Envelope)"""
 
     def __init__(self):
         super(Section5Rule3, self).__init__(
