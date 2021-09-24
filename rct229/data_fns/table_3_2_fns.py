@@ -38,12 +38,12 @@ def table_3_2_lookup(climate_zone_enum_val):
     Returns
     -------
     dict
-        { system_min_heating_ouput: float – the heating output for the given climate one given by Table 3.2 [Btu/h·ft^2] }
+        { system_min_heating_ouput: float – the heating output for the given climate one given by Table 3.2 [Btu/h-ft^2] }
     """
     climate_zone = climate_zone_enumeration_to_climate_zone_map[climate_zone_enum_val]
     osstd_entry = find_osstd_table_entry(
         [("climate_zone", climate_zone)],
         osstd_table=data["ashrae_90_1_table_3_2"],
     )
-    system_min_heating_output = osstd_entry["Btu/h·ft^2"]
+    system_min_heating_output = osstd_entry["Btu/h-ft^2"]
     return {"system_min_heating_output": system_min_heating_output}
