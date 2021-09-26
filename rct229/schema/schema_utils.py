@@ -1,6 +1,7 @@
 import json
 import os
 import re
+from copy import deepcopy
 
 import rct229.schema.config as config
 from jsonpath_ng.ext import parse as parse_jsonpath
@@ -85,8 +86,6 @@ def find_schema_unit_for_json_path(key_list):
 def quantitize_rmr(rmr):
     """Replaces RMR items with pint quantities based on schema units
 
-    The replacements are performed in place.
-
     Parameters
     ----------
     rmr : dict
@@ -95,9 +94,11 @@ def quantitize_rmr(rmr):
     Returns
     -------
     dict
-        The original RMR with all numbers that have units in the schema
-        replaced with their corresponding pint quantities
+        A copy of the original RMR dictionary with all numbers that have units
+        in the schema replaced with their corresponding pint quantities
     """
+    rmr = deepcopy(rmr)
+
     # Match all rmr items
     all_rmr_item_matches = parse_jsonpath("$..*").find(rmr)
     for item in all_rmr_item_matches:
