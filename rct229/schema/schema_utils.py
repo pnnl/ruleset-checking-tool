@@ -101,8 +101,6 @@ def quantitize_rmr(rmr):
 
     # Match all rmr items
     all_rmr_item_matches = parse_jsonpath("$..*").find(rmr)
-    for item in all_rmr_item_matches:
-        print("full path:", item.full_path)
 
     # Pick out the number rmr item matches
     number_rmr_item_matches = list(
