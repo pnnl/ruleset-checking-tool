@@ -83,7 +83,7 @@ def find_schema_unit_for_json_path(key_list):
         return None
 
 
-def quantitize_rmr(rmr):
+def quantify_rmr(rmr):
     """Replaces RMR items with pint quantities based on schema units
 
     Parameters

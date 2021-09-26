@@ -3,7 +3,7 @@ import inspect
 import rct229.rule_engine.rule_base as base_classes
 import rct229.rules as rules
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
-from rct229.schema.schema_utils import quantitize_rmr
+from rct229.schema.schema_utils import quantify_rmr
 from rct229.schema.validate import validate_rmr
 
 
@@ -133,15 +133,18 @@ def evaluate_rules(rules_list, rmrs):
 
     # Replace the numbers that have schema units in the RMRs with the
     # appropriate pint quantities
+    # TODO: quantitization should happen right after schema validation and
+    # before other validations
     rmrs = UserBaselineProposedVals(
-        user=quantitize_rmr(rmrs.user),
-        baseline=quantitize_rmr(rmrs.baseline),
-        proposed=quantitize_rmr(rmrs.proposed),
+        user=quantify_rmr(rmrs.user),
+        baseline=quantify_rmr(rmrs.baseline),
+        proposed=quantify_rmr(rmrs.proposed),
     )
 
     # Evaluate the rules if all the used rmrs are valid
     if len(invalid_rmrs) == 0:
         for rule in rules_list:
+            print(f"Processing Rule {rule.id}")
             outcome = rule.evaluate(rmrs)
             outcomes.append(outcome)
 
