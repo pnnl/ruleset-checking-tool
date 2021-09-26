@@ -3,6 +3,7 @@ import inspect
 import rct229.rule_engine.rule_base as base_classes
 import rct229.rules as rules
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
+from rct229.schema.schema_utils import quantitize_rmr
 from rct229.schema.validate import validate_rmr
 
 
@@ -129,6 +130,14 @@ def evaluate_rules(rules_list, rmrs):
         proposed_validation = validate_rmr(rmrs.proposed)
         if proposed_validation["passed"] is not True:
             invalid_rmrs["Proposed"] = proposed_validation["error"]
+
+    # Replace the numbers that have schema units in the RMRs with the
+    # appropriate pint quantities
+    rmrs = UserBaselineProposedVals(
+        user=quantitize_rmr(rmrs.user),
+        baseline=quantitize_rmr(rmrs.baseline),
+        proposed=quantitize_rmr(rmrs.proposed),
+    )
 
     # Evaluate the rules if all the used rmrs are valid
     if len(invalid_rmrs) == 0:
