@@ -3,8 +3,6 @@ from rct229.data import data
 from rct229.data.schema_enums import schema_enums
 from rct229.schema.config import ureg
 
-# from rct229.utils.interp import strict_list_linear_interpolation
-
 ElectricalPhase = schema_enums["ElectricalPhase"]
 SINGLE_PHASE = ElectricalPhase.SINGLE_PHASE.name
 THREE_PHASE = ElectricalPhase.THREE_PHASE.name
