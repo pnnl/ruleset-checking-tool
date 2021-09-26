@@ -83,6 +83,21 @@ def find_schema_unit_for_json_path(key_list):
 
 
 def quantitize_rmr(rmr):
+    """Replaces RMR items with pint quantities based on schema units
+
+    The replacements are performed in place.
+
+    Parameters
+    ----------
+    rmr : dict
+        An RMR dictionary
+
+    Returns
+    -------
+    dict
+        The original RMR with all numbers that have units in the schema
+        replaced with their corresponding pint quantities
+    """
     # Match all rmr items
     all_rmr_item_matches = parse_jsonpath("$..*").find(rmr)
     for item in all_rmr_item_matches:
