@@ -3,9 +3,9 @@
 
 **Rule ID:** 5-21  
 **Rule Description:** The vertical fenestration shall be distributed on each face of the building in the same proportion as in the proposed design.  
-**Rule Assertion:** B-RMR total (subsurface.glazed_area+subsurface.opaque_area) = expected value for each zone  
-**Appendix G Section:** Section G3.1-5(c) Building Envelope Modeling Requirements for the Baseline building  
-**Appendix G Section Reference:**  None
+**Rule Assertion:** B-RMR total (subsurface.glazed_area+subsurface.opaque_area) = expected value for each surface  
+**Appendix G Section:** Section 5 Envelope  
+**Appendix G Section Reference:**  Section G3.1-5(c) Building Envelope Modeling Requirements for the Baseline building
 
 **Applicability:** All required data elements exist for B_RMR  
 **Applicability Checks:** None  
@@ -33,6 +33,7 @@
   - Get total fenestration area for building segment: `total_fenestration_area_b = window_wall_areas_dictionary_b[building_segment_b.id][0]`
 
   - Get matching building segment in P_RMR: `building_segment_p = match_data_element(P_RMR, BuildingSegments, building_segment_b.id)`
+  
     - Get total fenestration area for building segment in P_RMR: `total_fenestration_area_p = window_wall_areas_dictionary_p[building_segment_p.id][0]`
 
   - For each thermal block in building segment: `for thermal_block_b in building_segment_b.thermal_blocks:`
@@ -61,6 +62,6 @@
 
         - Case 1: For each surface, if total fenestration area in B_RMR is in the same proportion as in P_RMR: `if total_fenestration_area_surface_b / total_fenestration_area_b == total_fenestration_area_surface_p / total_fenestration_area_p: PASS`
 
-        - Case 2: Else: `else: FAIL and raise_warning "THE DISTRIBUTION OF VERTICAL FENESTRATION IN SURFACE IS NOT IN THE SAME PROPORTION AS IN THE PROPOSED DESIGN. VERIFY IF ENVELOPE IS EXISTING OR ALTERED AND CAN BE EXCLUDED FROM THIS CHECK."`
+        - Case 2: Else: `else: FAIL and show_message "HE VERTICAL FENESTRATION IS NOT DISTRIBUTED ACROSS BASELINE OPAQUE SURFACES IN THE SAME PROPORTION AS IN THE PROPOSED DESIGN. VERIFY IF ENVELOPE IS EXISTING OR ALTERED AND CAN BE EXCLUDED FROM THIS CHECK."`
 
 **[Back](../_toc.md)**
