@@ -18,5 +18,9 @@
 - **Applicability Check 1:** `CODE DESCRIBING APPLICABILITY CHECKS`  
 - <OTHER_LOGIC>  
 - **Rule Assertion:** `CODE DESCRIBING RULE ASSERTION`  
+  - PASS / PASS and show_message "..."
+  - FAIL / FAIL and show_message "..."
+  - CAUTION and raise_warning "..."
+
 
 **[Back](_toc.md)**
