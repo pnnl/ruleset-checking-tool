@@ -34,9 +34,9 @@
 
           - Case 1: If roof surface solar reflectance in P_RMR matches U_RMR and is equal to 0.3: `if ( surface_p.surface_optical_properties.absorptance_solar_exterior == surface_u.surface_optical_properties.absorptance_solar_exterior ) AND ( surface_p.surface_optical_properties.absorptance_solar_exterior == 0.7 ): PASS`
 
-          - Case 2: Else if roof surface solar reflectance in P_RMR matches U_RMR and is not equal to 0.3: `else if ( surface_p.surface_optical_properties.absorptance_solar_exterior == surface_u.surface_optical_properties.absorptance_solar_exterior ) AND ( surface_p.surface_optical_properties.absorptance_solar_exterior != 0.7 ): PASS and raise_warning "ROOF SURFACE SOLAR REFLECTANCE IN P-RMR MATCHES THAT IN U-RMR BUT IS NOT EQUAL TO 0.3.`
+          - Case 2: Else if roof surface solar reflectance in P_RMR matches U_RMR and is not equal to 0.3: `else if ( surface_p.surface_optical_properties.absorptance_solar_exterior == surface_u.surface_optical_properties.absorptance_solar_exterior ) AND ( surface_p.surface_optical_properties.absorptance_solar_exterior != 0.7 ): CAUTION and raise_warning "ROOF SURFACE SOLAR REFLECTANCE IN P-RMR MATCHES THAT IN U-RMR BUT IS NOT EQUAL TO 0.3. VERIFY THAT REFLECTANCE WAS ESTABLISHED USING AGED TEST DATA AS REQUIRED IN SECTION 5.5.3.1(a).`
 
-          - Case 3: Else if roof surface solar reflectance in P_RMR does not match U_RMR but is equal to 0.3: `else if surface_p.surface_optical_properties.absorptance_solar_exterior == 0.7: PASS and raise_warning "ROOF SURFACE SOLAR REFLECTANCE IS EQUAL TO THE PRESCRIBED DEFAULT VALUE OF 0.3 BUT DIFFERS FROM THE SOLAR REFLECTANCE IN THE USER MODEL."`
+          - Case 3: Else if roof surface solar reflectance in P_RMR does not match U_RMR but is equal to 0.3: `else if surface_p.surface_optical_properties.absorptance_solar_exterior == 0.7: PASS and show_message "ROOF SURFACE SOLAR REFLECTANCE IS EQUAL TO THE PRESCRIBED DEFAULT VALUE OF 0.3 BUT DIFFERS FROM THE SOLAR REFLECTANCE IN THE USER MODEL."`
 
           - Case 4: Else, roof surface solar reflectance in P_RMR does not match that in U_RMR and is not equal to 0.3: `Else: FAIL`
 
