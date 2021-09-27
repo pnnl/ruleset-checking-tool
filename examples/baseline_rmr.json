@@ -27,7 +27,7 @@
                                                   "id": 1,
                                                   "name": "Guest Room Lighting",
                                                   "power_per_area": 0.41,
-                                                  "has_daylighting_control": false
+                                                  "has_daylighting_control": true
                                               }
                                           ]
                                       },

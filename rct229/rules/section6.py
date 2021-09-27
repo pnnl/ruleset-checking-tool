@@ -1,5 +1,4 @@
 from numpy import sum
-
 from rct229.data.schema_enums import schema_enums
 from rct229.data_fns.table_G3_7_fns import table_G3_7_lookup
 from rct229.data_fns.table_G3_8_fns import table_G3_8_lookup
@@ -9,6 +8,7 @@ from rct229.rule_engine.rule_base import (
 )
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 from rct229.utils.jsonpath_utils import find_all
+from rct229.utils.pint_utils import pint_sum
 
 # Rule Definitions for Section 6 of 90.1-2019 Appendix G
 
@@ -49,11 +49,14 @@ class Section6Rule1(RuleDefinitionListIndexedBase):
                 )
 
             def get_calc_vals(self, context, data=None):
-                space_lighting_power_per_area_user = sum(
+                space_lighting_power_per_area_user = pint_sum(
                     find_all("interior_lighting[*].power_per_area", context.user)
                 )
-                space_lighting_power_per_area_proposed = sum(
+                space_lighting_power_per_area_proposed = pint_sum(
                     find_all("interior_lighting[*].power_per_area", context.proposed)
+                )
+                space_lighting_power_user = (
+                    space_lighting_power_per_area_user * context.user["floor_area"]
                 )
 
                 return {
@@ -110,14 +113,15 @@ class Section6Rule2(RuleDefinitionListIndexedBase):
 
                 for zone in find_all("$..zones[*]", building_segment):
                     zone_volume = zone["volume"]
-                    spaces = zone["spaces"]
-                    zone_floor_area = sum([space["floor_area"] for space in spaces])
+                    zone_floor_area = pint_sum(find_all("$..floor_area", zone))
                     zone_avg_height = zone_volume / zone_floor_area
 
-                    for space in spaces:
+                    for space in zone["spaces"]:
                         space_floor_area = space["floor_area"]
                         space_design_lighting_power = (
-                            sum(find_all("interior_lighting[*].power_per_area", space))
+                            pint_sum(
+                                find_all("interior_lighting[*].power_per_area", space)
+                            )
                             * space_floor_area
                         )
                         building_segment_design_lighting_power += (
@@ -194,13 +198,29 @@ class Section6Rule11(RuleDefinitionListIndexedBase):
                 rmrs_used=UserBaselineProposedVals(False, True, False),
             )
 
-        def rule_check(self, context, calc_vals, data=None):
-            has_daylighting_control_instances = find_all(
-                "$..interior_lighting[*].has_daylighting_control", context.baseline
+        def get_calc_vals(self, context, data=None):
+            interior_lighting_instances_with_daylighting_control = find_all(
+                "$..spaces[*].interior_lighting[?has_daylighting_control==true]",
+                context.baseline,
             )
+            ids_for_interior_lighting_instances_with_daylighting_control = [
+                instance["id"]
+                for instance in interior_lighting_instances_with_daylighting_control
+            ]
 
-            # Return True if none of the has_daylighting_control_instances is True
-            return not any(has_daylighting_control_instances)
+            return {
+                "ids_for_interior_lighting_instances_with_daylighting_control": ids_for_interior_lighting_instances_with_daylighting_control
+            }
+
+        def rule_check(self, context, calc_vals, data=None):
+            return (
+                len(
+                    calc_vals[
+                        "ids_for_interior_lighting_instances_with_daylighting_control"
+                    ]
+                )
+                == 0
+            )
 
 
 # ------------------------
