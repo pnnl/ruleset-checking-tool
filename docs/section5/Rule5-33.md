@@ -33,7 +33,7 @@
 
             **Rule Assertion:**
 
-            - Case 1: For each vertical fenestration in P_RMR, if automatically controlled shading devices are modeled the same as in U_RMR: `if subsurface_p.has_automatic_shades == subsurface_u.has_automatic_shades: PASS`
+            - Case 1: For each subsurface in P_RMR, if automatically controlled shading devices are modeled the same as in U_RMR: `if subsurface_p.has_automatic_shades == subsurface_u.has_automatic_shades: PASS`
 
             - Case 2: Else: `else: FAIL`
 
