@@ -10,7 +10,7 @@
 **Applicability:** All required data elements exist for B_RMR  
 **Applicability Checks:**  None  
 
-**Manual Check:** None  
+**Manual Check:** Yes  
 **Evaluation Context:** Each Data Element  
 **Data Lookup:** None  
 **Function Call:** None  
@@ -19,12 +19,10 @@
 
 **Rule Assertion:**  
 
-- Case 1: If shading by adjacent structure and terrain is modeled the same in B-RMR as in P-RMR: `if B_RMR.building.has_site_shading == P_RMR.building.has_site_shading: PASS`
+- Case 1: If neither B-RMR nor P-RMR has site shading modeled: `if ( NOT B_RMR.building.has_site_shading ) AND ( NOT P_RMR.building.has_site_shading ): PASS`
 
-- Case 2: Else: `else: FAIL`
+- Case 2: If both B-RMR and P-RMR have site shading modeled: `if ( B_RMR.building.has_site_shading ) AND ( P_RMR.building.has_site_shading ): CAUTION and raise_warning "SHADING BY ADJACENT STRUCTURES AND TERRAIN IS MODELED FOR BOTH B-RMR AND P-RMR. VERIFY SHADING IN BOTH CASES ARE THE SAME."`
+
+- Case 3: Else, site shading is modeled differently in B-RMR and P-RMR: `else: FAIL`
 
 **[Back](../_toc.md)**
-
-**Notes:**
-
-1. Did not find building.has_site_shading in the current schema.
