@@ -21,7 +21,7 @@
 
 - Case 1: If neither B-RMR nor P-RMR has site shading modeled: `if ( NOT B_RMR.building.has_site_shading ) AND ( NOT P_RMR.building.has_site_shading ): PASS`
 
-- Case 2: If both B-RMR and P-RMR have site shading modeled: `if ( B_RMR.building.has_site_shading ) AND ( P_RMR.building.has_site_shading ): CAUTION and raise_warning "SHADING BY ADJACENT STRUCTURES AND TERRAIN IS MODELED FOR BOTH B-RMR AND P-RMR. VERIFY SHADING IN BOTH CASES ARE THE SAME."`
+- Case 2: Else if both B-RMR and P-RMR have site shading modeled: `if ( B_RMR.building.has_site_shading ) AND ( P_RMR.building.has_site_shading ): CAUTION and raise_warning "SHADING BY ADJACENT STRUCTURES AND TERRAIN IS MODELED FOR BOTH B-RMR AND P-RMR. VERIFY SHADING IN BOTH CASES ARE THE SAME."`
 
 - Case 3: Else, site shading is modeled differently in B-RMR and P-RMR: `else: FAIL`
 
