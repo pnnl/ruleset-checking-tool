@@ -11,14 +11,16 @@ from rct229.data_fns.table_utils import (
     find_osstd_table_entry,
 )
 
+from rct229.schema.config import ureg
+watts_per_ft2 = ureg("watt / foot**2")
 
 # Testing table_9_6_1------------------------------------------
 def test__table_9_6_1_guest_room():
-    assert table_9_6_1_lookup("GUEST_ROOM") == {"lpd": 0.41}
+    assert table_9_6_1_lookup("GUEST_ROOM") == {"lpd": 0.41 * watts_per_ft2}
 
 
 def test__table_9_6_1_dormitory():
-    assert table_9_6_1_lookup("DORMITORY_LIVING_QUARTERS") == {"lpd": 0.50}
+    assert table_9_6_1_lookup("DORMITORY_LIVING_QUARTERS") == {"lpd": 0.50 * watts_per_ft2}
 
 
 # Testing building_type_enumeration_to_lpd_map ----------
