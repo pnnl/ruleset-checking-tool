@@ -28,6 +28,7 @@ climate_zone_enumeration_to_climate_zone_map = {
     "CZ8": "8",
 }
 
+
 def table_3_2_lookup(climate_zone_enum_val):
     """Returns the minimum heating output for a climate zone as
     required by ASHRAE 90.1 Table 3.2
@@ -46,7 +47,8 @@ def table_3_2_lookup(climate_zone_enum_val):
         osstd_table=data["ashrae_90_1_table_3_2"],
     )
     btu_per_hour_per_sqft = osstd_entry["Btu/h-ft^2"]
-    system_min_heating_output = btu_per_hour_per_sqft * ureg("british_thermal_unit / foot ** 2 / planck_constant")
+    system_min_heating_output = btu_per_hour_per_sqft * ureg(
+        "british_thermal_unit / foot ** 2 / planck_constant"
+    )
 
-    return {"system_min_heating_output": system_min_heating_output} 
-
+    return {"system_min_heating_output": system_min_heating_output}
