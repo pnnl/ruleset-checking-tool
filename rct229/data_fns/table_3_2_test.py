@@ -11,6 +11,7 @@ from rct229.data_fns.table_utils import (
     find_osstd_table_entry,
 )
 from rct229.schema.config import ureg
+
 btuh_per_ft2 = ureg("british_thermal_unit / foot ** 2 / planck_constant")
 
 # Testing table_3_2------------------------------------------
@@ -23,7 +24,7 @@ def test__table_3_2_CZ1():
 
 
 def test__table_3_2_CZ2():
-    assert table_3_2_lookup("CZ2A") == {"system_min_heating_output": 5 * btuh_per_ft2} 
+    assert table_3_2_lookup("CZ2A") == {"system_min_heating_output": 5 * btuh_per_ft2}
 
 
 def test__table_3_2_CZ3():
