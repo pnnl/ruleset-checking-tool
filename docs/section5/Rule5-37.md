@@ -17,7 +17,7 @@
 
   1. get_surface_conditioning_category()
   2. get_opaque_surface_type()
-  3. get_building_segment_skylight_roof_areas()
+  3. get_building_segment_skylight_roof_ratios()
   4. data_lookup()
 
 ## Rule Logic:  
@@ -26,11 +26,11 @@
 
 - Get surface conditioning category dictionary for B_RMR: `scc_dictionary_b = get_surface_conditioning_category(B_RMR)`  
 
-- Get building skylight roof areas dictionary: `skylight_roof_areas_dictionary_b = get_building_segment_skylight_roof_areas(B_RMR)`
+- Get building skylight roof ratios dictionary: `skylight_roof_ratios_dictionary_b = get_building_segment_skylight_roof_ratios(B_RMR)`
 
 - For each building segment in the Baseline model: `for building_segment_b in B_RMR.building.building_segments:`
 
-  - Check if building segment has exterior mixed type roof surface: `if skylight_roof_areas_dictionary_b[building_segment_b.id]["EXTERIOR MIXED"]["SURFACE_AREA"] > 0:`
+  - Check if building segment has exterior mixed type skylight: `if skylight_roof_ratios_dictionary_b[building_segment_b.id]["EXTERIOR MIXED"] > 0:`
 
     - Check if residential and non-residential type skylight U-factor requirements for different skylight-roof-ratio are the same, get skylight U-factor requirements: `if ( data_lookup(table_G3_4, climate_zone, "RESIDENTIAL, "SKYLIGHT", "0%-2.0%", "ASSEMBLY MAX. U") == data_lookup(table_G3_4, climate_zone, "RESIDENTIAL, "SKYLIGHT", "2.1%+", "ASSEMBLY MAX. U") ) AND ( data_lookup(table_G3_4, climate_zone, "NON-RESIDENTIAL, "SKYLIGHT", "0%-2.0%", "ASSEMBLY MAX. U") == data_lookup(table_G3_4, climate_zone, "NON-RESIDENTIAL, "SKYLIGHT", "2.1%+", "ASSEMBLY MAX. U") ) AND ( data_lookup(table_G3_4, climate_zone, "RESIDENTIAL, "SKYLIGHT", "0%-2.0%", "ASSEMBLY MAX. U") == data_lookup(table_G3_4, climate_zone, "NON-RESIDENTIAL, "SKYLIGHT", "0%-2.0%", "ASSEMBLY MAX. U") ): target_u_factor_res = target_u_factor_nonres = data_lookup(table_G3_4, climate_zone, "RESIDENTIAL, "SKYLIGHT", "0%-2.0%", "ASSEMBLY MAX. U")`
 
@@ -38,19 +38,19 @@
 
   - Else, building segment does not have exterior mixed type roof surface: `else:`
 
-    - Get skylight-roof-ratio for residential type roofs: `srr_res = skylight_roof_areas_dictionary_b[building_segment_b.id]["EXTERIOR RESIDENTIAL"]["SRR"]`
+    - Get skylight-roof-ratio for residential type roofs: `srr_res = skylight_roof_ratios_dictionary_b[building_segment_b.id]["EXTERIOR RESIDENTIAL"]`
 
       - If skylight-roof-ratio is greater than 2.0%, get baseline skylight construction requirement: `if srr_res > 0.02: target_u_factor_res = data_lookup(table_G3_4, climate_zone, "RESIDENTIAL", "SKYLIGHT", "2.1%+", "ASSEMBLY MAX. U")`
 
       - Else, skylight-roof-ratio is 0% to 2.0%, get baseline skylight construction requirement: `else: target_u_factor_res = data_lookup(table_G3_4, climate_zone, "RESIDENTIAL", "SKYLIGHT", "0%-2.0%", "ASSEMBLY MAX. U")`
 
-    - Get skylight-roof-ratio for non-residential type roofs: `srr_nonres = skylight_roof_areas_dictionary_b[building_segment_b.id]["NON-RESIDENTIAL"]["SRR"]`
+    - Get skylight-roof-ratio for non-residential type roofs: `srr_nonres = skylight_roof_ratios_dictionary_b[building_segment_b.id]["NON-RESIDENTIAL"]`
 
       - If skylight-roof-ratio is greater than 2.0%, get baseline skylight construction requirement: `if srr_nonres > 0.02: target_u_factor_nonres = data_lookup(table_G3_4, climate_zone, "NON-RESIDENTIAL", "SKYLIGHT", "2.1%+", "ASSEMBLY MAX. U")`
 
       - Else, skylight-roof-ratio is 0% to 2.0%, get baseline skylight construction requirement: `else: target_u_factor_nonres = data_lookup(table_G3_4, climate_zone, "NON-RESIDENTIAL", "SKYLIGHT", "0%-2.0%", "ASSEMBLY MAX. U")`
 
-  - Get skylight-roof-ratio for semi-exterior type roofs: `srr_semi_exterior = skylight_roof_areas_dictionary_b[building_segment_b.id]["SEMI-EXTERIOR"]["SRR"]`
+  - Get skylight-roof-ratio for semi-exterior type roofs: `srr_semi_exterior = skylight_roof_ratios_dictionary_b[building_segment_b.id]["SEMI-EXTERIOR"]`
 
     - If skylight-roof-ratio is greater than 2.0%, get baseline skylight construction requirement: `if srr_semi_exterior > 0.02: target_u_factor_semiheated = data_lookup(table_G3_4, climate_zone, "SEMIHEATED, "SKYLIGHT", "2.1%+", "ASSEMBLY MAX. U")`
 
