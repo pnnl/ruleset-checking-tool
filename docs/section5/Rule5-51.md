@@ -24,7 +24,3 @@
 - Case 2: Else: `else: FAIL`
 
 **[Back](../_toc.md)**
-
-**Notes:**
-
-1. Did not find building.has_site_shading in the current schema.
