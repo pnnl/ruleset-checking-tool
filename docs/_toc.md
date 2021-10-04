@@ -158,7 +158,7 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   * [15-5](section15/Rule15-5.md): Transformer efficiency reported in Baseline RMR equals Table 8.4.4  
   * [15-6](section15/Rule15-6.md): Transformer efficiency reported in User RMR equals Table 8.4.4  
   * 15-7: Transformer efficiency reported in Baseline RMR equals User RMR  
-  * 15-8: Transformer efficiency reported in Proposed RMR equals User RMR  
+  * [15-8](section15/Rule15-8.md): Transformer efficiency reported in Proposed RMR equals User RMR  
   * 15-9: Transformer capacity ratio reported in Baseline RMR equals User RMR  
   * 15-10: Transformer capacity ratio reported in Proposed RMR equals User RMR  
 
