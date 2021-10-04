@@ -1,5 +1,4 @@
 import click
-
 from rct229.reports.project_report import (
     print_json_report,
     print_rule_report,
@@ -65,9 +64,10 @@ def evalute_rmr_triplet(user_rmr, baseline_rmr, proposed_rmr):
         print("")
 
         report = evaluate_all_rules(user_rmr_obj, baseline_rmr_obj, proposed_rmr_obj)
+
         # Example - Print a final compliance report
         # [We'll actually most likely save a data file here and report occurs from separate CLI command]
-        print_json_report(report)
+        # print_json_report(report)
         print_rule_report(report)
         print_summary_report(report)
 

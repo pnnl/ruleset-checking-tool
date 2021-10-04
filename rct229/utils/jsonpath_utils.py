@@ -1,5 +1,4 @@
 from jsonpath_ng.ext import parse
-
 # NOTE: jsonpath_ng.ext is used to get support for filtering
 # and other extensions
 
