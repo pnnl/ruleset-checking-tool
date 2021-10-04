@@ -52,8 +52,7 @@
                                       "name": "surface_1",
                                       "adjacent_to": "INTERIOR",
                                       "azimuth": 90,
-                                      "does_cast_shade": true,
-
+                                      "does_cast_shade": true
                                     },
                                     {
                                       "id": 2,
