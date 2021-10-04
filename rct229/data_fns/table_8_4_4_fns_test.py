@@ -1,5 +1,6 @@
 import pytest
 from numpy.testing import assert_approx_equal
+
 from rct229.data_fns.table_8_4_4_fns import (
     SINGLE_PHASE,
     THREE_PHASE,
