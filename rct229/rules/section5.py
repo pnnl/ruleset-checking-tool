@@ -7,7 +7,9 @@ from rct229.utils.jsonpath_utils import find_all
 
 # Rule Definitions for Section 5 of 90.1-2019 Appendix G
 
-
+# ------------------------
+# Reusable constants
+EXTERIOR_SURFACES_JSONPATH = "$..surfaces[?(@.adjacent_to='EXTERIOR')]"
 # ------------------------
 
 
@@ -30,15 +32,13 @@ class Section5Rule3(RuleDefinitionListIndexedBase):
                 rmrs_used=UserBaselineProposedVals(False, True, False),
                 required_fields={
                     "$..surfaces[*]": ["adjacent_to"],
-                    "$..surfaces[?(@.adjacent_to='EXTERIOR')]": ["does_cast_shade"],
+                    EXTERIOR_SURFACES_JSONPATH: ["does_cast_shade"],
                 },
             )
 
         def get_calc_vals(self, context, data=None):
             baseline_surfaces_casting_shade_ids = []
-            for surface in find_all(
-                "$..surfaces[?(@.adjacent_to='EXTERIOR')]", context.baseline
-            ):
+            for surface in find_all(EXTERIOR_SURFACES_JSONPATH, context.baseline):
                 if surface["does_cast_shade"]:
                     baseline_surfaces_casting_shade_ids.append(surface["id"])
 
