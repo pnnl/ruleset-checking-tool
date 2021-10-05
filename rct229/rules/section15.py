@@ -163,7 +163,6 @@ class Section15Rule5(RuleDefinitionListIndexedBase):
             id="15-5",
             description="Transformer efficiency reported in Baseline RMR equals Table 8.4.4",
             rmr_context="transformers",
-            match_by="name",
         )
 
     class TransformerRule(RuleDefinitionBase):
@@ -237,7 +236,6 @@ class Section15Rule6(RuleDefinitionListIndexedBase):
             id="15-6",
             description="Transformer efficiency reported in User RMR equals Table 8.4.4",
             rmr_context="transformers",
-            match_by="name",
         )
 
     class TransformerRule(RuleDefinitionBase):
