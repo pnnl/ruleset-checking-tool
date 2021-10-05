@@ -2,7 +2,7 @@
 # Envelope - Rule 5-42  
 
 **Rule ID:** 5-42  
-**Rule Description:** The  baseline roof surfaces shall be modeled using a solar reflectance of 0.30.  
+**Rule Description:** The baseline roof surfaces shall be modeled using a solar reflectance of 0.30.  
 **Rule Assertion:** B-RMR SurfaceOpticalProperties:absorptance_solar_exterior = 0.7  
 **Appendix G Section:** Section G3.1-5(g) Building Envelope Modeling Requirements for the Baseline building  
 **Appendix G Section Reference:** None  
