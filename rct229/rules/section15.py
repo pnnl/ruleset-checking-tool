@@ -1,5 +1,5 @@
 from rct229.data.schema_enums import schema_enums
-from rct229.data_fns.table_8_4_4_eff import table_8_4_4_eff, table_8_4_4_in_range
+from rct229.data_fns.table_8_4_4_fns import table_8_4_4_in_range, table_8_4_4_lookup
 from rct229.rule_engine.rule_base import (
     RuleDefinitionBase,
     RuleDefinitionListIndexedBase,
@@ -178,43 +178,42 @@ class Section15Rule5(RuleDefinitionListIndexedBase):
             )
 
         def is_applicable(self, context, data=None):
-            # Provide conversion from VA to kVA
-            user_transformer_kVA = context.user["capacity"] / 1000
-            baseline_transformer_kVA = context.baseline["capacity"] / 1000
+            user_transformer_capacity = context.user["capacity"]
+            baseline_transformer_capacity = context.baseline["capacity"]
             user_transformer_type = context.user["type"]
             user_transformer_phase = context.user["phase"]
             user_transformer_efficiency = context.user["efficiency"]
             user_transformer_capacity_in_range = table_8_4_4_in_range(
-                phase=user_transformer_phase, kVA=user_transformer_kVA
+                phase=user_transformer_phase, capacity=user_transformer_capacity
             )
 
             baseline_transformer_type = context.baseline["type"]
             baseline_transformer_phase = context.baseline["phase"]
             baseline_transformer_capacity_in_range = table_8_4_4_in_range(
-                phase=baseline_transformer_phase, kVA=baseline_transformer_kVA
+                phase=baseline_transformer_phase, capacity=baseline_transformer_capacity
             )
 
             return (
                 user_transformer_type == _DRY_TYPE
                 and user_transformer_capacity_in_range
                 and user_transformer_efficiency
-                >= table_8_4_4_eff(
-                    phase=user_transformer_phase, kVA=user_transformer_kVA
-                )
+                >= table_8_4_4_lookup(
+                    phase=user_transformer_phase, capacity=user_transformer_capacity
+                )["efficiency"]
                 and baseline_transformer_type == _DRY_TYPE
                 and baseline_transformer_capacity_in_range
             )
 
         def get_calc_vals(self, context, data=None):
             baseline_transformer_phase = context.baseline["phase"]
-            # Convert from VA to user_kVA
-            baseline_transformer_kVA = context.baseline["capacity"] / 1000
+            baseline_transformer_capacity = context.baseline["capacity"]
 
             return {
                 "baseline_transformer_efficiency": context.baseline["efficiency"],
-                "required_baseline_transformer_efficiency": table_8_4_4_eff(
-                    phase=baseline_transformer_phase, kVA=baseline_transformer_kVA
-                ),
+                "required_baseline_transformer_efficiency": table_8_4_4_lookup(
+                    phase=baseline_transformer_phase,
+                    capacity=baseline_transformer_capacity,
+                )["efficiency"],
             }
 
         def rule_check(self, context, calc_vals=None, data=None):
@@ -253,13 +252,12 @@ class Section15Rule6(RuleDefinitionListIndexedBase):
             )
 
         def is_applicable(self, context, data=None):
-            # Provide conversion from VA to kVA
-            user_transformer_kVA = context.user["capacity"] / 1000
+            user_transformer_capacity = context.user["capacity"]
 
             user_transformer_type = context.user["type"]
             user_transformer_phase = context.user["phase"]
             user_transformer_capacity_in_range = table_8_4_4_in_range(
-                phase=user_transformer_phase, kVA=user_transformer_kVA
+                phase=user_transformer_phase, capacity=user_transformer_capacity
             )
 
             return (
@@ -269,14 +267,13 @@ class Section15Rule6(RuleDefinitionListIndexedBase):
 
         def get_calc_vals(self, context, data=None):
             user_transformer_phase = context.user["phase"]
-            # Provide conversion from VA to kVA
-            user_transformer_kVA = context.user["capacity"] / 1000
+            user_transformer_capacity = context.user["capacity"]
 
             return {
                 "user_transformer_efficiency": context.user["efficiency"],
-                "required_user_transformer_min_efficiency": table_8_4_4_eff(
-                    phase=user_transformer_phase, kVA=user_transformer_kVA
-                ),
+                "required_user_transformer_min_efficiency": table_8_4_4_lookup(
+                    phase=user_transformer_phase, capacity=user_transformer_capacity
+                )["efficiency"],
             }
 
         def rule_check(self, context, calc_vals=None, data=None):
