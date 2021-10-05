@@ -1,6 +1,7 @@
 import rct229
 from rct229.data import data
 from rct229.data_fns.table_utils import find_osstd_table_entry
+from rct229.schema.config import ureg
 
 # This dictionary maps the LightingSpaceType2019ASHRAE901T951TG38 enumerations to
 # the corresponding lpd_space_type values in the OSSTD file
@@ -63,6 +64,6 @@ def table_G3_8_lookup(building_area_type):
         osstd_table=data["ashrae_90_1_prm_2019.prm_interior_lighting"],
     )
     watts_per_sqft = osstd_entry["w/ft^2"]
-    lpd = watts_per_sqft
+    lpd = watts_per_sqft * ureg("watt / foot**2")
 
     return {"lpd": lpd}

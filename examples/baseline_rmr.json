@@ -27,7 +27,7 @@
                                                   "id": 1,
                                                   "name": "Guest Room Lighting",
                                                   "power_per_area": 0.41,
-                                                  "has_daylighting_control": false
+                                                  "has_daylighting_control": true
                                               }
                                           ]
                                       },
@@ -45,6 +45,29 @@
                                               }
                                           ]
                                       }
+                                  ],
+                                  "surfaces": [
+                                    {
+                                      "id": 1,
+                                      "name": "surface_1",
+                                      "adjacent_to": "INTERIOR",
+                                      "azimuth": 90,
+                                      "does_cast_shade": true
+                                    },
+                                    {
+                                      "id": 2,
+                                      "name": "surface_2",
+                                      "adjacent_to": "EXTERIOR",
+                                      "azimuth": 180,
+                                      "does_cast_shade": false
+                                    },
+                                    {
+                                      "id": 3,
+                                      "name": "surface_3",
+                                      "adjacent_to": "EXTERIOR",
+                                      "azimuth": 180,
+                                      "does_cast_shade": true
+                                    }
                                   ],
                                   "volume": 11000
                               }

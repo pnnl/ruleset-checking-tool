@@ -10,31 +10,34 @@ from rct229.data_fns.table_utils import (
     check_enumeration_to_osstd_match_field_value_map,
     find_osstd_table_entry,
 )
+from rct229.schema.config import ureg
+
+watts_per_ft2 = ureg("watt / foot**2")
 
 
 # Testing table_G3_8_lpd() ------------------------------------------
 def test__table_G3_8_lpd__automotive_facility():
-    assert table_G3_8_lookup("AUTOMOTIVE_FACILITY") == {"lpd": 0.9}
+    assert table_G3_8_lookup("AUTOMOTIVE_FACILITY") == {"lpd": 0.9 * watts_per_ft2}
 
 
 def test__table_G3_8_lpd__convention_center():
-    assert table_G3_8_lookup("CONVENTION_CENTER") == {"lpd": 1.20}
+    assert table_G3_8_lookup("CONVENTION_CENTER") == {"lpd": 1.20 * watts_per_ft2}
 
 
 def test_t_able_G3_8_lpd__courthouse():
-    assert table_G3_8_lookup("COURTHOUSE") == {"lpd": 1.20}
+    assert table_G3_8_lookup("COURTHOUSE") == {"lpd": 1.20 * watts_per_ft2}
 
 
 def test__table_G3_8_lpd__workshop():
-    assert table_G3_8_lookup("WORKSHOP") == {"lpd": 1.40}
+    assert table_G3_8_lookup("WORKSHOP") == {"lpd": 1.40 * watts_per_ft2}
 
 
 def test__table_G3_8_lpd__warehouse():
-    assert table_G3_8_lookup("WAREHOUSE") == {"lpd": 0.80}
+    assert table_G3_8_lookup("WAREHOUSE") == {"lpd": 0.80 * watts_per_ft2}
 
 
 def test__table_G3_8_lpd__courthouse():
-    assert table_G3_8_lookup("COURTHOUSE") == {"lpd": 1.20}
+    assert table_G3_8_lookup("COURTHOUSE") == {"lpd": 1.20 * watts_per_ft2}
 
 
 # Testing lighting_space_enumeration_to_lpd_space_type_map ----------
