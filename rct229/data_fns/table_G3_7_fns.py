@@ -1,5 +1,6 @@
 from rct229.data import data
 from rct229.data_fns.table_utils import find_osstd_table_entry
+from rct229.schema.config import ureg
 
 # This dictionary maps the LightingSpaceType2019ASHRAE901TG37 enumerations to
 # the corresponding lpd_space_type values in the OSSTD file
@@ -121,13 +122,14 @@ def table_G3_7_lookup(lighting_space_type, space_height):
     ----------
     lighting_space_type : str
         One of the LightingSpaceType2019ASHRAE901TG37 enumeration values
-    space_height : float
-        The height of the space [ft]
+    space_height : Quantity
+        The height of the space
 
     Returns
     -------
-    float
-        The lighting power density given by Table G3.7 [W/ft^2]
+    dict
+        { lpd: Quantity - The lighting power density given by Table G3.7 }
+
     """
     lpd_space_type = lighting_space_enumeration_to_lpd_space_type_map[
         lighting_space_type
@@ -137,12 +139,14 @@ def table_G3_7_lookup(lighting_space_type, space_height):
         [("lpd_space_type", lpd_space_type)],
         osstd_table=data["ashrae_90_1_prm_2019.prm_interior_lighting"],
     )
-    watts_per_sqft = osstd_entry["w/ft^2"]
-    watts_per_ft = osstd_entry["w/ft"]
+    watts_per_ft2 = osstd_entry["w/ft^2"] * ureg("watt / foot**2")
+    # Note: the units for the w/ft fields should actually be W/ft^3
+    # This might be None, so make the Quantity below instead
+    watts_per_ft3 = osstd_entry["w/ft"]
 
-    if watts_per_ft is None:
-        lpd = watts_per_sqft
+    if watts_per_ft3 is None:
+        lpd = watts_per_ft2
     else:
-        lpd = watts_per_sqft + watts_per_ft * space_height
+        lpd = watts_per_ft2 + watts_per_ft3 * ureg("watt / foot**3") * space_height
 
     return {"lpd": lpd}
