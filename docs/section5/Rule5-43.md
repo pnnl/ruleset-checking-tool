@@ -2,7 +2,7 @@
 # Envelope - Rule 5-43  
 
 **Rule ID:** 5-43  
-**Rule Description:** The  proposed roof surfaces shall be modeled using the same solar reflectance as in the user model.  
+**Rule Description:** The proposed roof surfaces shall be modeled using the same solar reflectance as in the user model.  
 **Rule Assertion:** P-RMR SurfaceOpticalProperties:absorptance_solar_exterior = U-RMR SurfaceOpticalProperties:absorptance_solar_exterior  
 **Appendix G Section:** Section 5 Envelope  
 **Appendix G Section Reference:** Section G3.1-1(a) Building Envelope Modeling Requirements for the Proposed design  
