@@ -2,7 +2,7 @@
 # Envelope - Rule 5-41  
 
 **Rule ID:** 5-41  
-**Rule Description:** The  proposed roof surfaces shall be modeled using the same thermal emittance as in the user model.  
+**Rule Description:** The proposed roof surfaces shall be modeled using the same thermal emittance as in the user model.  
 **Rule Assertion:** P-RMR SurfaceOpticalProperties:thermal_emittance = U-RMR SurfaceOpticalProperties:thermal_emittance  
 **Appendix G Section:** Section G3.1-1(a) Building Envelope Modeling Requirements for the Proposed design  
 **Appendix G Section Reference:** None  
