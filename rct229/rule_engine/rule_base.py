@@ -1,5 +1,4 @@
 from jsonpointer import resolve_pointer
-
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 from rct229.utils.json_utils import slash_prefix_guarantee
 from rct229.utils.jsonpath_utils import find_all
@@ -599,14 +598,6 @@ class RuleDefinitionListBase(RuleDefinitionBase):
                 item_outcome["id"] = ubp.baseline["id"]
             elif ubp.proposed and ubp.proposed["id"]:
                 item_outcome["id"] = ubp.proposed["id"]
-
-            # Set the name for item_outcome
-            if ubp.user and ubp.user["name"]:
-                item_outcome["name"] = ubp.user["name"]
-            elif ubp.baseline and ubp.baseline["name"]:
-                item_outcome["name"] = ubp.baseline["name"]
-            elif ubp.proposed and ubp.proposed["name"]:
-                item_outcome["name"] = ubp.proposed["name"]
 
             outcomes.append(item_outcome)
         return outcomes
