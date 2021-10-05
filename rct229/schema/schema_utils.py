@@ -3,8 +3,9 @@ import os
 import re
 from copy import deepcopy
 
-import rct229.schema.config as config
 from jsonpath_ng.ext import parse as parse_jsonpath
+
+import rct229.schema.config as config
 
 
 def clean_schema_units(schema_unit_str):
