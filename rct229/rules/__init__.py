@@ -8,8 +8,8 @@ import rct229.rules as rules
 __all__ = [
     "section5",
     "section6",
-    # "section12",
-    # "section15",
+    "section12",
+    "section15",
 ]
 
 
