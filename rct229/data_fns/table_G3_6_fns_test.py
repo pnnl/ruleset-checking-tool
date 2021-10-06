@@ -110,5 +110,4 @@ def test__building_exterior_enumeration_to_lpd_space_type_map():
         enum_type="ExteriorLightingAreas2019ASHRAE901TableG36",
         osstd_table=data["ashrae_90_1_table_3_6"],
         enumeration_to_match_field_value_map=building_exterior_enumeration_to_lpd_space_type_map,
-        exclude_enum_names=["BUILDING_FACADE"],
     )
