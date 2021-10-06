@@ -1,14 +1,11 @@
 import pytest
+
 from rct229.data import data
 from rct229.data.schema_enums import schema_enums
 from rct229.data_fns.table_G3_7_fns import (
-    lighting_space_enumeration_to_lpd_space_type_map,
-    table_G3_7_lookup,
-)
+    lighting_space_enumeration_to_lpd_space_type_map, table_G3_7_lookup)
 from rct229.data_fns.table_utils import (
-    check_enumeration_to_osstd_match_field_value_map,
-    find_osstd_table_entry,
-)
+    check_enumeration_to_osstd_match_field_value_map, find_osstd_table_entry)
 from rct229.schema.config import ureg
 
 feet = ureg("feet")
