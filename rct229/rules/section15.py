@@ -83,14 +83,13 @@ class Section15Rule3(RuleDefinitionListIndexedBase):
             each_rule=Section15Rule3.TransformerRule(),
             index_rmr="user",
             id="15-3",
-            description="User RMR transformer Name in Proposed RMR",
+            description="User RMR transformer id in Proposed RMR",
             rmr_context="transformers",
-            match_by="name",
         )
 
     def create_data(self, context, data):
-        # Get the Proposed transformer names
-        return find_all("[*].name", context.proposed)
+        # Get the Proposed transformer ids
+        return find_all("[*].id", context.proposed)
 
     class TransformerRule(RuleDefinitionBase):
         def __init__(self):
@@ -100,14 +99,14 @@ class Section15Rule3(RuleDefinitionListIndexedBase):
 
         def get_calc_vals(self, context, data=None):
             return {
-                "user_transformer_name": context.user["name"],
-                "proposed_transformer_names": data,
+                "user_transformer_id": context.user["id"],
+                "proposed_transformer_ids": data,
             }
 
         def rule_check(self, context, calc_vals=None, data=None):
             return (
-                calc_vals["user_transformer_name"]
-                in calc_vals["proposed_transformer_names"]
+                calc_vals["user_transformer_id"]
+                in calc_vals["proposed_transformer_ids"]
             )
 
 
@@ -123,14 +122,13 @@ class Section15Rule4(RuleDefinitionListIndexedBase):
             each_rule=Section15Rule4.TransformerRule(),
             index_rmr="user",
             id="15-4",
-            description="User RMR transformer Name in Baseline RMR",
+            description="User RMR transformer id in Baseline RMR",
             rmr_context="transformers",
-            match_by="name",
         )
 
     def create_data(self, context, data):
-        # Get the Baseline transformer names
-        return find_all("[*].name", context.baseline)
+        # Get the Baseline transformer ids
+        return find_all("[*].id", context.baseline)
 
     class TransformerRule(RuleDefinitionBase):
         def __init__(self):
@@ -140,14 +138,14 @@ class Section15Rule4(RuleDefinitionListIndexedBase):
 
         def get_calc_vals(self, context, data=None):
             return {
-                "user_transformer_name": context.user["name"],
-                "baseline_transformer_names": data,
+                "user_transformer_id": context.user["id"],
+                "baseline_transformer_ids": data,
             }
 
         def rule_check(self, context, calc_vals=None, data=None):
             return (
-                calc_vals["user_transformer_name"]
-                in calc_vals["baseline_transformer_names"]
+                calc_vals["user_transformer_id"]
+                in calc_vals["baseline_transformer_ids"]
             )
 
 
@@ -165,7 +163,6 @@ class Section15Rule5(RuleDefinitionListIndexedBase):
             id="15-5",
             description="Transformer efficiency reported in Baseline RMR equals Table 8.4.4",
             rmr_context="transformers",
-            match_by="name",
         )
 
     class TransformerRule(RuleDefinitionBase):
@@ -239,7 +236,6 @@ class Section15Rule6(RuleDefinitionListIndexedBase):
             id="15-6",
             description="Transformer efficiency reported in User RMR equals Table 8.4.4",
             rmr_context="transformers",
-            match_by="name",
         )
 
     class TransformerRule(RuleDefinitionBase):

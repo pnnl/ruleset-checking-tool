@@ -186,14 +186,11 @@ class Section6Rule11(RuleDefinitionListIndexedBase):
             super(Section6Rule11.BuildingRule, self).__init__(
                 required_fields={
                     "$": ["building_segments"],
-                    "$.building_segments[*]": ["thermal_blocks"],
-                    "$.building_segments[*].thermal_blocks[*]": ["zones"],
-                    "$.building_segments[*].thermal_blocks[*].zones[*]": ["spaces"],
-                    "$.building_segments[*].thermal_blocks[*].zones[*].spaces[*]": [
-                        "interior_lighting"
-                    ],
-                    "$.building_segments[*].thermal_blocks[*].zones[*].spaces[*].interior_lighting[*]": [
-                        "has_daylighting_control"
+                    "$.building_segments[*]": ["zones"],
+                    "$.building_segments[*].zones[*]": ["spaces"],
+                    "$.building_segments[*].zones[*].spaces[*]": ["interior_lighting"],
+                    "$.building_segments[*].zones[*].spaces[*].interior_lighting[*]": [
+                        "daylighting_control_type"
                     ],
                 },
                 rmrs_used=UserBaselineProposedVals(False, True, False),
@@ -201,7 +198,7 @@ class Section6Rule11(RuleDefinitionListIndexedBase):
 
         def get_calc_vals(self, context, data=None):
             interior_lighting_instances_with_daylighting_control = find_all(
-                "$..spaces[*].interior_lighting[?has_daylighting_control==true]",
+                "$..spaces[*].interior_lighting[?daylighting_control_type!='NONE']",
                 context.baseline,
             )
             ids_for_interior_lighting_instances_with_daylighting_control = [
