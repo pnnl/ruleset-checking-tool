@@ -12,14 +12,14 @@ from rct229.data_fns.table_utils import (
 )
 from rct229.schema.config import ureg
 
-watts_per_ft2 = ureg("watt / foot**2")
-watts_per_linear_ft = ureg("watt / foot")
+WATTS_PER_FT2 = ureg("watt / foot**2")
+WATTS_PER_LINEAR_FT = ureg("watt / foot")
 
 
 # Testing table_G3_6------------------------------------------
 def test__table_G3_6_UNCOVERED_PARKING_LOTS_AND_DRIVES():
     assert table_G3_6_lookup("UNCOVERED_PARKING_LOTS_AND_DRIVES") == {
-        "lpd": 0.15 * watts_per_ft2,
+        "lpd": 0.15 * WATTS_PER_FT2,
         "linear_lpd": None,
     }
 
@@ -27,34 +27,34 @@ def test__table_G3_6_UNCOVERED_PARKING_LOTS_AND_DRIVES():
 def test__table_G3_6_WALKWAY_NARROW():
     assert table_G3_6_lookup("WALKWAY_NARROW") == {
         "lpd": None,
-        "linear_lpd": 1.0 * watts_per_linear_ft,
+        "linear_lpd": 1.0 * WATTS_PER_LINEAR_FT,
     }
 
 
 def test__table_G3_6_WALKWAY_WIDE():
     assert table_G3_6_lookup("WALKWAY_WIDE") == {
-        "lpd": 0.2 * watts_per_ft2,
+        "lpd": 0.2 * WATTS_PER_FT2,
         "linear_lpd": None,
     }
 
 
 def test__table_G3_6_PLAZA_AREAS():
     assert table_G3_6_lookup("PLAZA_AREAS") == {
-        "lpd": 0.2 * watts_per_ft2,
+        "lpd": 0.2 * WATTS_PER_FT2,
         "linear_lpd": None,
     }
 
 
 def test__table_G3_6_SPECIAL_FEATURE_AREAS():
     assert table_G3_6_lookup("SPECIAL_FEATURE_AREAS") == {
-        "lpd": 0.2 * watts_per_ft2,
+        "lpd": 0.2 * WATTS_PER_FT2,
         "linear_lpd": None,
     }
 
 
 def test__table_G3_6_STAIRWAYS():
     assert table_G3_6_lookup("STAIRWAYS") == {
-        "lpd": 1.0 * watts_per_ft2,
+        "lpd": 1.0 * WATTS_PER_FT2,
         "linear_lpd": None,
     }
 
@@ -62,27 +62,27 @@ def test__table_G3_6_STAIRWAYS():
 def test__table_G3_6_MAIN_ENTRANCE_DOOR():
     assert table_G3_6_lookup("MAIN_ENTRANCE_DOOR") == {
         "lpd": None,
-        "linear_lpd": 30.0 * watts_per_linear_ft,
+        "linear_lpd": 30.0 * WATTS_PER_LINEAR_FT,
     }
 
 
 def test__table_G3_6_OTHER_ENTRANCE_OR_EXIT_DOORS():
     assert table_G3_6_lookup("OTHER_ENTRANCE_OR_EXIT_DOORS") == {
         "lpd": None,
-        "linear_lpd": 20.0 * watts_per_linear_ft,
+        "linear_lpd": 20.0 * WATTS_PER_LINEAR_FT,
     }
 
 
 def test__table_G3_6_EXTERIOR_CANOPIES():
     assert table_G3_6_lookup("EXTERIOR_CANOPIES") == {
-        "lpd": 1.25 * watts_per_ft2,
+        "lpd": 1.25 * WATTS_PER_FT2,
         "linear_lpd": None,
     }
 
 
 def test__table_G3_6_OUTDOOR_SALES_OPEN_AREAS():
     assert table_G3_6_lookup("OUTDOOR_SALES_OPEN_AREAS") == {
-        "lpd": 0.5 * watts_per_ft2,
+        "lpd": 0.5 * WATTS_PER_FT2,
         "linear_lpd": None,
     }
 
@@ -90,14 +90,14 @@ def test__table_G3_6_OUTDOOR_SALES_OPEN_AREAS():
 def test__table_G3_6_STREET_FRONTAGE():
     assert table_G3_6_lookup("STREET_FRONTAGE") == {
         "lpd": None,
-        "linear_lpd": 20.0 * watts_per_linear_ft,
+        "linear_lpd": 20.0 * WATTS_PER_LINEAR_FT,
     }
 
 
 def test__table_G3_6_NON_TRADABLE_FACADE():
     assert table_G3_6_lookup("NON_TRADABLE_FACADE") == {
-        "lpd": 0.2 * watts_per_ft2,
-        "linear_lpd": 5.0 * watts_per_linear_ft,
+        "lpd": 0.2 * WATTS_PER_FT2,
+        "linear_lpd": 5.0 * WATTS_PER_LINEAR_FT,
     }
 
 

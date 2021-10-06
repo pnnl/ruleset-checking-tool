@@ -1,4 +1,3 @@
-import rct229
 from rct229.data import data
 from rct229.data_fns.table_utils import find_osstd_table_entry
 from rct229.schema.config import ureg
@@ -34,7 +33,8 @@ def table_G3_6_lookup(building_exterior_type_enum_val):
     Returns
     -------
     dict
-        { lpd: Quantity - The lighting power density in watt per square foot given by Table G3.6, linear_lpd: Quantity - The lighting power density in watt per linear foot given by Table G3.6 }
+        { lpd: Quantity - The lighting power density in watt per square foot given by Table G3.6,
+        linear_lpd: Quantity - The lighting power density in watt per linear foot given by Table G3.6 }
 
     """
     building_exterior_type = building_exterior_enumeration_to_lpd_space_type_map[
@@ -45,16 +45,14 @@ def table_G3_6_lookup(building_exterior_type_enum_val):
         [("building_exterior_type", building_exterior_type)],
         osstd_table=data["ashrae_90_1_table_3_6"],
     )
+
     watts_per_ft2 = osstd_entry["w/ft^2"]
     watts_per_linear_ft = osstd_entry["w/ft"]
-    if watts_per_linear_ft is None:
-        lpd = watts_per_ft2 * ureg("watt / foot**2")
-        linear_lpd = None
-    elif watts_per_ft2 is None:
-        linear_lpd = watts_per_linear_ft * ureg("watt / foot")
-        lpd = None
-    else:
-        lpd = watts_per_ft2 * ureg("watt / foot**2")
-        linear_lpd = watts_per_linear_ft * ureg("watt / foot")
+    lpd = watts_per_ft2 * ureg("watt / foot**2") if watts_per_ft2 is not None else None
+    linear_lpd = (
+        watts_per_linear_ft * ureg("watt / foot")
+        if watts_per_linear_ft is not None
+        else None
+    )
 
     return {"lpd": lpd, "linear_lpd": linear_lpd}
