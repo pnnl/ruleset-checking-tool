@@ -3,9 +3,13 @@ import pytest
 from rct229.data import data
 from rct229.data.schema_enums import schema_enums
 from rct229.data_fns.table_3_2_fns import (
-    climate_zone_enumeration_to_climate_zone_map, table_3_2_lookup)
+    climate_zone_enumeration_to_climate_zone_map,
+    table_3_2_lookup,
+)
 from rct229.data_fns.table_utils import (
-    check_enumeration_to_osstd_match_field_value_map, find_osstd_table_entry)
+    check_enumeration_to_osstd_match_field_value_map,
+    find_osstd_table_entry,
+)
 from rct229.schema.config import ureg
 
 btuh_per_ft2 = ureg("british_thermal_unit / (hour * foot ** 2)")

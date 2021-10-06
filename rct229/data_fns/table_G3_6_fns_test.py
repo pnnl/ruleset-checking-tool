@@ -3,9 +3,13 @@ import pytest
 from rct229.data import data
 from rct229.data.schema_enums import schema_enums
 from rct229.data_fns.table_G3_6_fns import (
-    building_exterior_enumeration_to_lpd_space_type_map, table_G3_6_lookup)
+    building_exterior_enumeration_to_lpd_space_type_map,
+    table_G3_6_lookup,
+)
 from rct229.data_fns.table_utils import (
-    check_enumeration_to_osstd_match_field_value_map, find_osstd_table_entry)
+    check_enumeration_to_osstd_match_field_value_map,
+    find_osstd_table_entry,
+)
 from rct229.schema.config import ureg
 
 WATTS_PER_FT2 = ureg("watt / foot**2")

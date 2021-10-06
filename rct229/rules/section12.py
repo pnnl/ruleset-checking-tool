@@ -1,8 +1,9 @@
 from rct229.data.schema_enums import schema_enums
-from rct229.rule_engine.rule_base import (RuleDefinitionBase,
-                                          RuleDefinitionListIndexedBase)
-from rct229.rule_engine.user_baseline_proposed_vals import \
-    UserBaselineProposedVals
+from rct229.rule_engine.rule_base import (
+    RuleDefinitionBase,
+    RuleDefinitionListIndexedBase,
+)
+from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 from rct229.utils.jsonpath_utils import find_all
 
 # Rule Definitions for Section 12 of 90.1-2019 Appendix G
