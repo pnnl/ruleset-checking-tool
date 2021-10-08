@@ -10,7 +10,8 @@ Returns:
 - **zone_conditioning_category**: The Zone Conditioning Category [conditioned residential, conditioned non-residential, conditioned mixed, semi-heated, unenclosed, unconditioned].  
 
 Constants:
-- CAPACITY_THRESHOLD = 3.4 Btu/(h*ft2)
+- CAPACITY_THRESHOLD = 3.4 Btu/(h*ft2))
+- CRAWLSPACE_HEIGHT_THRESHOLD = 7 ft
 
 Logic:  
 
@@ -26,27 +27,25 @@ Logic:
 
     - Else check if the system meets the criteria for serving semi-heated zones, save all zones served by the system as semi-heated: `else if hvac_system.simulation_result_heat_capacity >= CAPACITY_THRESHOLD: for zone in hvac_system.zones_served: semiheated_zones.append(zone)`  
 
-  - To determine eligibility for indirectly conditioned zones, for each thermal block in building segment: `for thermal_block in building_segment.thermal_blocks:`  
+  - To determine eligibility for indirectly conditioned zones, for each zone in building_segment: `for zone in building_segment.zones:`  
 
-    - For each zone in thermal block: `for zone in thermal_block.zones:`  
+    - If zone is not directly conditioned (heated or cooled): `if zone not in directly_conditioned_zones:`  
 
-      - If zone is not directly conditioned (heated or cooled): `if zone not in directly_conditioned_zones:`  
+      - If any space in zone is atrium, zone is indirectly conditioned:: `if ( ( space.lighting_space_type == "ATRIUM_LOW_MEDIUM" ) OR ( space.lighting_space_type == "ATRIUM_HIGH" ) for space in zone.spaces ): indirectly_conditioned_zones.append(zone)`  
 
-        - If any space in zone is atrium, zone is indirectly conditioned:: `if ( ( space.lighting_space_type == "ATRIUM_LOW_MEDIUM" ) OR ( space.lighting_space_type == "ATRIUM_HIGH" ) for space in zone.spaces ): indirectly_conditioned_zones.append(zone)`  
+      - Else, no space in zone is atrium: `else:`  
 
-        - Else, no space in zone is atrium: `else:`  
+        - For each surface in zone: `for surface in zone.surfaces:`  
 
-          - For each surface in zone: `for surface in zone.surfaces:`  
+          - Check if surface is interior, get adjacent zone: `if surface.adjacent_to == "INTERIOR": adjacent_zone = match_data_element(RMR, zones, surface.adjacent_zone_id)`  
 
-            - Check if surface is interior, get adjacent zone: `if surface.adjacent_to == "INTERIOR": adjacent_zone = match_data_element(RMR, zones, surface.adjacent_zone_id)`  
+            - If adjacent zone is directly conditioned (heated or cooled), add the product of the U-factor and surface area to the directly conditioned type: `if adjacent_zone in directly_conditioned_zone: directly_conditioned_product_sum += sum( ( fenestration.glazed_area + fenestration.opaque_area ) * fenestration.u_factor for fenestration in surface.fenestration_subsurfaces ) + ( surface.area - sum( ( fenestration.glazed_area + fenestration.opaque_area ) for fenestration in surface.fenestration_subsurfaces ) * surface.construction.u_factor`  
 
-              - If adjacent zone is directly conditioned (heated or cooled), add the product of the U-factor and surface area to the directly conditioned type: `if adjacent_zone in directly_conditioned_zone: directly_conditioned_product_sum += sum( ( fenestration.glazed_area + fenestration.opaque_area ) * fenestration.u_factor for fenestration in surface.fenestration_subsurfaces ) + ( surface.area - sum( ( fenestration.glazed_area + fenestration.opaque_area ) for fenestration in surface.fenestration_subsurfaces ) * surface.construction.u_factor`  
+            - Else, add the product of the U-factor and surface area to the other type: `else: other_product_sum += sum( ( fenestration.glazed_area + fenestration.opaque_area ) * fenestration.u_factor for fenestration in surface.fenestration_subsurfaces ) + ( surface.area - sum( ( fenestration.glazed_area + fenestration.opaque_area ) for fenestration in surface.fenestration_subsurfaces ) * surface.construction.u_factor`  
 
-              - Else, add the product of the U-factor and surface area to the other type: `else: other_product_sum += sum( ( fenestration.glazed_area + fenestration.opaque_area ) * fenestration.u_factor for fenestration in surface.fenestration_subsurfaces ) + ( surface.area - sum( ( fenestration.glazed_area + fenestration.opaque_area ) for fenestration in surface.fenestration_subsurfaces ) * surface.construction.u_factor`  
+          - Else check if surface is exterior, add the product of the U-factor and surface area to the other type: `else if surface.adjacent_to == "EXTERIOR": other_product_sum += sum( ( fenestration.glazed_area + fenestration.opaque_area ) * fenestration.u_factor for fenestration in surface.fenestration_subsurfaces ) + ( surface.area - sum( ( fenestration.glazed_area + fenestration.opaque_area ) for fenestration in surface.fenestration_subsurfaces ) * surface.construction.u_factor`  
 
-            - Else check if surface is exterior, add the product of the U-factor and surface area to the other type: `else if surface.adjacent_to == "EXTERIOR": other_product_sum += sum( ( fenestration.glazed_area + fenestration.opaque_area ) * fenestration.u_factor for fenestration in surface.fenestration_subsurfaces ) + ( surface.area - sum( ( fenestration.glazed_area + fenestration.opaque_area ) for fenestration in surface.fenestration_subsurfaces ) * surface.construction.u_factor`  
-
-          - Determine if zone is indirectly conditioned: `if directly_conditioned_product_sum > other_product_sum: indirectly_conditioned_zones.append(zone)`  
+        - Determine if zone is indirectly conditioned: `if directly_conditioned_product_sum > other_product_sum: indirectly_conditioned_zones.append(zone)`  
 
   - Get lighting building area type for building segment: `lighting_building_area_type = building_segment.lighting_building_area_type`
 
@@ -82,7 +81,7 @@ Logic:
 
       - Else if zone has interior parking spaces, classify zone as unenclosed: `if（ space.lighting_space_type == "Parking Area, Interior" for space in zone.spaces ）: zone_conditioning_category_dict[zone.id] = "UNENCLOSED"`  
 
-      - Else if zone is crawlspace, classify zone as unenclosed: `else if ( ( zone.volume / sum( space.floor_area for space in zone.spaces ) ) < 7 ) AND ( ( get_opaque_surface_type(surface) == "FLOOR" ) AND ( surface.adjacent_to == "GROUND" ) for surface in zone.surfaces ): zone_conditioning_category_dict[zone.id] = "UNENCLOSED"`  
+      - Else if zone is crawlspace, classify zone as unenclosed: `else if ( ( zone.volume / sum( space.floor_area for space in zone.spaces ) ) < CRAWLSPACE_HEIGHT_THRESHOLD ) AND ( ( get_opaque_surface_type(surface) == "FLOOR" ) AND ( surface.adjacent_to == "GROUND" ) for surface in zone.surfaces ): zone_conditioning_category_dict[zone.id] = "UNENCLOSED"`  
 
       - Else if zone is attic, classify zone as unenclosed: `else if ( ( get_opaque_surface_type(surface) == "CEILING" ) AND ( surface.adjacent_to == "EXTERIOR" ) for surface in zone.surfaces ): zone_conditioning_category_dict[zone.id] = "UNENCLOSED"`  
 

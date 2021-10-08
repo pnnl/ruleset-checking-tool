@@ -1,11 +1,10 @@
 from rct229.data_fns.table_3_2_fns import table_3_2_lookup
+from rct229.schema.config import ureg
 from rct229.utils.jsonpath_utils import find_all
+from rct229.utils.pint_utils import pint_sum
 
-# TODO: Use pint to deal with units
-CAPACITY_THRESHOLD_IP = 3.4  # Btu/(h*ft2)
-CAPACITY_THRESHOLD = 3.154907451 * CAPACITY_THRESHOLD_IP  # W/m2
-CRAWLSPACE_HEIGHT_THRESHOLD_IP = 7  # ft?
-CRAWLSPACE_HEIGHT_THRESHOLD = 0.3048 * CRAWLSPACE_HEIGHT_THRESHOLD_IP  # m
+CAPACITY_THRESHOLD = 3.4 * ureg("Btu/(h*ft2)")
+CRAWLSPACE_HEIGHT_THRESHOLD = 7 * ureg("ft")
 
 
 def get_zone_conditioning_category_dict(climate_zone, building):
@@ -40,18 +39,17 @@ def get_zone_conditioning_category_dict(climate_zone, building):
         "building_segments[*].heating_ventilation_air_conditioning_systems[*]", building
     ):
         if (
-            hvac_system["simulation_result_sensible_cool_capacity"]
-            >= CAPACITY_THRESHOLD
-            or hvac_system["simulation_result_heat_capacity"]
-            >= system_min_heating_output
+            hvac_system["sensible_cool_capacity"] >= CAPACITY_THRESHOLD
+            or hvac_system["heat_capacity"] >= system_min_heating_output
         ):
             directly_conditioned_zone_ids.extend(hvac_system["zones_served"])
-        elif hvac_system["simulation_result_heat_capacity"] >= CAPACITY_THRESHOLD:
+        elif hvac_system["heat_capacity"] >= CAPACITY_THRESHOLD:
             semiheated_zone_ids.extend(hvac_system["zones_served"])
 
     # Determine eligibility for indirectly conditioned zones
-    for zone in find_all("building_segments[*].thermal_blocks[*].zones[*]", building):
-        if zone["id"] not in directly_conditioned_zone_ids:
+    for zone in find_all("building_segments[*].zones[*]", building):
+        zone_id = zone["id"]
+        if zone_id not in directly_conditioned_zone_ids:
             lighting_space_types = find_all("spaces[*].lighting_space_type", zone)
             any_space_type_in_zone_is_atrium = any(
                 [
@@ -60,9 +58,9 @@ def get_zone_conditioning_category_dict(climate_zone, building):
                 ]
             )
             if any_space_type_in_zone_is_atrium:
-                indirectly_conditioned_zone_ids.append(zone["id"])
+                indirectly_conditioned_zone_ids.append(zone_id)
             else:
-                directly_conditioned_ua = 0
+                directly_conditioned_ua = 0 * ureg("")
                 other_ua = 0
                 for surface in zone["surfaces"]:
                     if surface["adjacent_to"] == "INTERIOR":
@@ -95,7 +93,7 @@ def get_zone_conditioning_category_dict(climate_zone, building):
                         else:
                             other_ua += surface_ua
                 if directly_conditioned_ua > other_ua:
-                    indirectly_conditioned_zone_ids.append(zone["id"])
+                    indirectly_conditioned_zone_ids.append(zone_id)
 
     for building_segment in building["building_segments"]:
         # Set residential and non-residential flags
@@ -164,7 +162,6 @@ def get_zone_conditioning_category_dict(climate_zone, building):
             ):
                 zone_conditioning_category_dict[zone_id] = "UNENCLOSED"
             # Check for crawlspace
-            # TODO: Do they intend all, or do they want any?
             elif zone["volume"] / sum(find_all("spaces[*].floor_area", zone)) and any(
                 [
                     get_opaque_surface_type(surface) == "FLOOR"
@@ -174,7 +171,6 @@ def get_zone_conditioning_category_dict(climate_zone, building):
             ):
                 zone_conditioning_category_dict[zone_id] = "UNENCLOSED"
             # Check for attic
-            # TODO: Do they intend all, or do they want any?
             elif any(
                 [
                     get_opaque_surface_type(surface) == "CEILING"
