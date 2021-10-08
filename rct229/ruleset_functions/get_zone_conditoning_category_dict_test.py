@@ -9,7 +9,7 @@ from rct229.ruleset_functions.get_zone_conditioning_category_dict import (
 CLIMATE_ZONE = "CZ0A"
 SYSTEM_MIN_HEATING_OUTPUT = table_3_2_lookup(CLIMATE_ZONE)["system_min_heating_output"]
 TEST_BUILDING = {
-    "id": 1,
+    "id": "1",
     "name": "building1",
     "building_segments": [
         # Residential
@@ -19,7 +19,7 @@ TEST_BUILDING = {
                 {
                     "simulation_result_heat_capacity": SYSTEM_MIN_HEATING_OUTPUT - 1,
                     "simulation_result_sensible_cool_capacity": CAPACITY_THRESHOLD + 1,
-                    "zones_served": [1, 2],
+                    "zones_served": ["1", "2"],
                 }
             ],
             "thermal_blocks": [
@@ -27,7 +27,7 @@ TEST_BUILDING = {
                     "zones": [
                         # Both directly conditioned
                         {
-                            "id": 1,
+                            "id": "1",
                             "spaces": [
                                 {
                                     # Residential
@@ -36,7 +36,7 @@ TEST_BUILDING = {
                             ],
                         },
                         {
-                            "id": 2,
+                            "id": "2",
                             "spaces": [
                                 {
                                     # Non-residential
@@ -45,7 +45,7 @@ TEST_BUILDING = {
                             ],
                         },
                         {
-                            "id": 8,
+                            "id": "8",
                             "spaces": [
                                 # Residential
                                 {}
@@ -62,7 +62,7 @@ TEST_BUILDING = {
                 {
                     "simulation_result_heat_capacity": SYSTEM_MIN_HEATING_OUTPUT + 1,
                     "simulation_result_sensible_cool_capacity": CAPACITY_THRESHOLD - 1,
-                    "zones_served": [3, 4],
+                    "zones_served": ["3", "4"],
                 }
             ],
             "thermal_blocks": [
@@ -70,21 +70,21 @@ TEST_BUILDING = {
                     "zones": [
                         # Both indirectly conditioned
                         {
-                            "id": 3,
+                            "id": "3",
                             "spaces": [
                                 # Residential
                                 {"lighting_space_type": "GUEST_ROOM"}
                             ],
                         },
                         {
-                            "id": 4,
+                            "id": "4",
                             "spaces": [
                                 # Non-residential
                                 {"lighting_space_type": "BANKING_ACTIVITY_AREA"}
                             ],
                         },
                         {
-                            "id": 9,
+                            "id": "9",
                             "spaces": [
                                 # Non-residential
                                 {}
@@ -99,7 +99,7 @@ TEST_BUILDING = {
                 {
                     "simulation_result_heat_capacity": SYSTEM_MIN_HEATING_OUTPUT + 1,
                     "simulation_result_sensible_cool_capacity": CAPACITY_THRESHOLD - 1,
-                    "zones_served": [5, 6],
+                    "zones_served": ["5", "6"],
                 }
             ],
             "thermal_blocks": [
@@ -107,21 +107,21 @@ TEST_BUILDING = {
                     "zones": [
                         {
                             # Indirectly conditioned
-                            "id": 5,
+                            "id": "5",
                             "spaces": [{"lighting_space_type": "ATRIUM_LOW_MEDIUM"}],
                         },
                         {
                             # Indirectly conditioned
-                            "id": 6,
+                            "id": "6",
                             "spaces": [{"lighting_space_type": "ATRIUM_HIGH"}],
                         },
                         # {
-                        #     "id": 7,
+                        #     "id": "7",
                         #     "spaces": [
                         #         {"lighting_space_type": "BANKING_ACTIVITY_AREA"}
                         #     ],
                         #     "surfaces": [
-                        #         {"adjacent_to": "INTERIOR", "adjacent_zone_id": 3}
+                        #         {"adjacent_to": "INTERIOR", "adjacent_zone_id": "3"}
                         #     ]
                         # },
                     ]

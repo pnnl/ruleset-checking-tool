@@ -9,6 +9,8 @@ Inputs:
 Returns:  
 - **zone_conditioning_category**: The Zone Conditioning Category [conditioned residential, conditioned non-residential, conditioned mixed, semi-heated, unenclosed, unconditioned].  
 
+Constants:
+- CAPACITY_THRESHOLD = 3.4 Btu/(h*ft2)
 
 Logic:  
 
@@ -20,9 +22,9 @@ Logic:
 
   - To determine eligibility for directly conditioned (heated or cooled) and semi-heated zones, for each HVAC system in building segment: `for hvac_system in building_segment.heating_ventilation_air_conditioning_systems:`  
 
-    - Check if the system meets the criteria for serving directly conditioned (heated or cooled) zones, save all zones served by the system as directly conditioned: `if ( hvac_system.simulation_result_sensible_cool_capacity >= 3.4 ) OR ( hvac_system.simulation_result_heat_capacity >= system_min_heating_output ):  for zone in hvac_system.zones_served: directly_conditioned_zones.append(zone)`  
+    - Check if the system meets the criteria for serving directly conditioned (heated or cooled) zones, save all zones served by the system as directly conditioned: `if ( hvac_system.simulation_result_sensible_cool_capacity >= CAPACITY_THRESHOLD ) OR ( hvac_system.simulation_result_heat_capacity >= system_min_heating_output ):  for zone in hvac_system.zones_served: directly_conditioned_zones.append(zone)`  
 
-    - Else check if the system meets the criteria for serving semi-heated zones, save all zones served by the system as semi-heated: `else if hvac_system.simulation_result_heat_capacity >= 3.4: for zone in hvac_system.zones_served: semiheated_zones.append(zone)`  
+    - Else check if the system meets the criteria for serving semi-heated zones, save all zones served by the system as semi-heated: `else if hvac_system.simulation_result_heat_capacity >= CAPACITY_THRESHOLD: for zone in hvac_system.zones_served: semiheated_zones.append(zone)`  
 
   - To determine eligibility for indirectly conditioned zones, for each thermal block in building segment: `for thermal_block in building_segment.thermal_blocks:`  
 
