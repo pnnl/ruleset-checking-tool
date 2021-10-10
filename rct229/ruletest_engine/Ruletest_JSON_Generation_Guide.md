@@ -150,11 +150,17 @@ This guide will describe the process of generating test JSONs used to test Rules
 
 These spreadsheets can be found at the `ruletest_engine\ruletest_jsons\ruletest_spreadsheets` directory and generate JSONS using the `ruletest_engine\ruletest_jsons\scripts\excel_to_test_json.py` Python script.
 
-#### Spreadsheet Structure
+#### Spreadsheet Structure: Columns
 
-Each ruletest spreadsheet is separated into two notable sections-- keys used to describe JSON paths and the values assigned to them. Both keys and their corresponding JSON path values have some intricacies described here.
+Each ruletest spreadsheet is separated into three notable column sections-- 
 
-#### Keys and Values
+1. **Keys**: Keys dictate the hierarchy or nested strucutre of the resulting ruletest JSON
+2. **Units**: These columns define both the unit type (e.g., area, electric power) and TCD unit for a given row (e.g., ft2, Watts). These are important for translating between units required by the RMR schema and units used by the TCDs and 90.1.
+3. **Rule Tests**: The remainder of the columns are each dedicated to rule tests.
+
+keys used to describe JSON paths and the values assigned to them. Both keys and their corresponding JSON path values have some intricacies described here.
+
+##### Keys and Values
 
 Each ruletest spreadsheet utilizes keys to describe the JSON path for a given value. This is best described through example. Let's take a look at an example from the envelope tests. Consider the following in the spreadsheet:
 
@@ -162,7 +168,7 @@ Each ruletest spreadsheet utilizes keys to describe the JSON path for a given va
 | ------ | ------ | ------ | ------ | ------ |
 | rmr_transformations | user | buildings | is_new | true |
 
-The **four keys** here describe the JSON path. These keys include the following:
+A key column is specified with the string "*key*" followed by a number. The **four keys** here describe the JSON path. These keys include the following:
 
 - rmr_transformations
 - user
@@ -184,6 +190,37 @@ Their corresponding value for the header `rule-5-7a` is `true`. When ran through
             }
 }
 ```
+
+##### Units
+
+Values in Ruletests often have associate with them. Users should specify the units for any quantity in a given ruletest. There are two unit columns (typically follow the *key* columns) in the RCT Ruletest Spreadsheets. NOTE: these columns can and should be left blank if the row does not specify a quantity.
+
+1. **Unit types** - Categorize the value being specify as a string. For instance, floor area could be specifed as *area*. This column is titled "*unit_type*". A full list of existing enumerations can be found [here](https://github.com/pnnl/ruleset-checking-tool/tree/develop/rct229/schema/resources/unit_conventions.json "List of Enumerations").
+2. **Units** - The dimensional units describing the value quantity for a given ruletest described in the TCD. Typically these are in IP units. For instance, floor area might be *ft2*. This column is titled "*units*"
+
+Below are some examples:
+
+| unit_type | units |
+| ------ | ------ | 
+| transformer_capacity | V-A |
+| electric_power | W |
+| power_density | W/ft2 |
+| area | ft2 |
+
+### Spreadsheet Structure: Rows
+
+Ruletest JSON Spreadsheets are split into a few distinct sections:
+
+- **Unique Test ID** -- these three rows specify the Section, Rule, and Test ID for a given ruletest. These are conventionally the top rows in the Ruletest JSON Spreadsheet
+- **General Info** -- These rows specify none RMR specific parameters for a given ruletest. This includes information like a description to the test and whether or not it's expected to pass or fail. 
+    - *description* - This row describes what's being tested in a given ruletest
+    - *expected_rule_outcome* - This row specifies whether a given ruletest is expected to `pass`, `fail`, or `manual_check`
+- **Template** -- Many ruletest require multiple RMRs with nearly identical JSON structures. This section of rows serves to do define a "template"-- a set of values which are the same for all RMRs in a given ruletest. These rules have their first key (`key1`) equal to *rmr_template* 
+    - *user, proposed, baseline* - These three rows, if specified as `true`, will create a copy of the RMR template for the respective RMR (e.g., if the `rmr_template/user` row is set to `true`, a user RMR is generated with the values populated in the `rmr_template/json_template` rows)
+    - *rmr_template/json_template* - These rows specify the RMR values used in the RMR template (e.g., `rmr_template/json_template/buildings[0]/name` would specify a building name name for an RMR template)
+- **RMR Transformations** -- These rows specify the differences between the three RMR triplets (i.e., user, proposed, and baseline). This is where a user introduces values not specified in the **Template** section. For instance, a `user` and `baseline` RMR might be identical in everything except their transformer's effiency. Their key values would be `rmr_transformations/user/transformers[0]/efficiency` and `rmr_transformations/baseline/transformers[0]/efficiency`.
+
+
 
 #### The JSON_PATH Keyword
 
@@ -257,51 +294,8 @@ Breaking down the interesting parts--
 * Lastly, `name` specifies the zone name for each Zone in `zones`. 
 
 
-#### The DICT_LIST Keyword
 
-At times a rule will require multiple of the same element in a test RMR. These scenarios can be shortcut by passing a list of dictionaries or a `DICT_LIST` to the Python code instead. This is best described by an example. 
 
-Consider you want to generate the following JSON for transformer test case `rule-15-1a`:
-
-```json
-{
-    "rule-15-1a": {
-        "rmr_transformations": {
-            "user": {
-                "transformers": [
-                    {
-                        "name": "Transformer_1"
-                    },
-                    {
-                        "name": "Transformer_2"
-                    },
-                    {
-                        "name": " Transformer_3"
-                    }
-                ]
-            },
-        }
-    }
-}
-```
-
-Note how at the `transformers` element there exist three transformers with names `Transformer_1`, `Transformer_2`, and `Transformer_3`. The conventional, 1-to-1 assignments described above could apply here, but would require three separate entrees. This is where the `DICT_LIST` keyword could shorthand the definition within the spreadsheet. 
-
-To generate the above JSON with `DICT_LIST`, the key/value description in the test spreadsheet would appear as follows:
-
-| key1 | key2 | key3 | key4 | rule-15-1a |
-| ------ | ------ | ------ | ------ | ------ |
-| rmr_transformations | user | transformers | DICT_LIST | name:Transformer_1,Transformer_2, Transformer_3 |
-
-The `DICT_LIST` keyword placed as the final key informs the Python code that the value corresponding to this row must be parsed as a list of elements in a dictionary. In this case, a list with `name` as the keyword. The format for the string describing a `DICT_LIST` is *KEY:value_1, value_2, value_3...value_n*
-
-NOTE: this `DICT_LIST` call is functionally equivalent to using square brackets as follows:
-
-| key1 | key2 | key3 | key4 | rule-15-1a |
-| ------ | ------ | ------ | ------ | ------ |
-| rmr_transformations | user | transformers[0] | name | Transformer_1|
-| rmr_transformations | user | transformers[1] | name | Transformer_2|
-| rmr_transformations | user | transformers[2] | name | Transformer_3|
 
 ### Generating a Ruletest JSON
 
