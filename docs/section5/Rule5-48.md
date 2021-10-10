@@ -22,20 +22,24 @@
 
 - Get zone conditioning category for B_RMR: `zcc_b = get_zone_conditioning_category(B_RMR)`
 
-- For each zone in B_RMR: `for zone_b in B_RMR...zones:`
+- Get measured infiltration pressure difference: `measured_infiltration_pressure_difference_b = ASHRAE229.measured_infiltration_pressure_difference`
 
-  - Check if zone is unconditioned or unenclosed: `if zcc_b[zone_b.id] in ["UNENCLOSED", "UNCONDITIONED"]:`
+  - Check if measured infiltration pressure difference is at wind pressure: `if measured_infiltration_pressure_difference_b == "NO_TEST_PERFORMED":`
 
-    - Get zone infiltration: `infiltration_b = zone_b.infiltration`
+    - For each zone in B_RMR: `for zone_b in B_RMR...zones:`
 
-    - Get matching zone in P_RMR: `zone_p = match_data_element(P_RMR, Zones, zone_b.id)`
+      - Check if zone is unconditioned or unenclosed: `if zcc_b[zone_b.id] in ["UNENCLOSED", "UNCONDITIONED"]:`
 
-      - Get zone infiltration in P_RMR: `infiltration_p = zone_p.infiltration`
+        - Get zone infiltration: `infiltration_b = zone_b.infiltration`
 
-        **Rule Assertion:**  
+        - Get matching zone in P_RMR: `zone_p = match_data_element(P_RMR, Zones, zone_b.id)`
 
-        - Case 1: For each unconditioned and unenclosed zone, if zone infiltration air leakage rate in B_RMR matches that in P_RMR: `if infiltration_b.air_leakage_rate == infiltration_p.air_leakage_rate: PASS`  
+          - Get zone infiltration in P_RMR: `infiltration_p = zone_p.infiltration`
 
-        - Case 2: Else: `Else: FAIL`
+            **Rule Assertion:**  
+
+            - Case 1: For each unconditioned and unenclosed zone, if zone infiltration air leakage rate in B_RMR matches that in P_RMR: `if infiltration_b.measured_air_leakage_rate == infiltration_p.measured_air_leakage_rate: PASS`  
+
+            - Case 2: Else: `Else: FAIL`
 
 **[Back](../_toc.md)**
