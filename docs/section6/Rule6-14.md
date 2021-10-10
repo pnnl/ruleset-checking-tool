@@ -16,26 +16,41 @@
 **Evaluation Context:** Each Data Element  
 **Data Lookup:** None  
 
+**Function Call:**
+
+1. compare_schedules()
+2. match_data_element()
+
 ## Rule Logic:  
 
-- **Applicability Check 1:** ```if sum(space.floor_area for zone.space in P_RMR) < 5000:```  
+- **Applicability Check 1:** `if sum(space.floor_area for zone.space in P_RMR) < 5000:`
 
-- For each building_segment in the Proposed model: ```For building_segment_p in P_RMR.building.building_segments:```  
+- For each space in the Proposed model: `space_p in P_RMR...spaces:`
 
-  - For each thermal_block in building segment: ```thermal_block_p in building_segment_p.thermal_blocks:```  
+  - Get matching space from Baseline RMR: `space_b = match_data_element(B_RMR, Spaces, space_p.name)`
 
-    - For each zone in thermal block: ```zone_p in thermal_block_p.zones:```  
+    - Get interior lighting in space: `interior_lighting_b =  space_b.interior_lighting`
 
-      - For each space in thermal zone: ```space_p in zone_p.spaces:```  
+    - Get multiplier schedule for lighting: `schedule_b = interior_lighting_b.lighting_multiplier_schedule`
 
-        - Get interior lighting in space: ```interior_lighting_p =  space_p.interior_lighting```  
+  - For each interior lighting in space: `for interior_lighting_p in space_p.interior_lighting:`
 
-          - Get the EFLH value for the associated lighting schedule: ```schedule_EFLH_p = EFLH(interior_lighting_p.lighting_schedule_name)```  
+    - Get multiplier schedule for lighting: `schedule_p = interior_lighting_p.lighting_multiplier_schedule`
 
-          - Get matching space from Baseline RMR: ```space_b = match_data_element(B_RMR, spaces, space_p.name)```  
+    - Check if lighting has occupancy control: `if interior_lighting_p.occupancy_control_type != "NONE":`
 
-          - Get interior lighting in space: ```interior_lighting_b =  space_b.interior_lighting```  
+      - Compare lighting schedule in P_RMR with 90% of lighting schedule in B_RMR: `compare_schedules_result_dictionary = compare_schedules(schedule_p, schedule_b, always_2_schedule, 0.9)`
 
-          - Get the EFLH value for the associated lighting schedule: ```schedule_EFLH_b = EFLH(interior_lighting_b.lighting_schedule_name)```  
+    - Else, lighting does not have occupancy control, compare lighting schedule in P_RMR with that in B_RMR: `else: compare_schedules_result_dictionary = compare_schedules(schedule_p, schedule_b, always_1_schedule, 1)`
 
-            **Rule Assertion:** For each interior_lighting in P_RMR: ```if ( schedule_EFLH_p / schedule_EFLH_b ) <> 90%: CAUTION```  
+      **Rule Assertion:**
+
+      - Case 1: For each lighting, if lighting has daylighting control and uses schedule to model daylighting control, request manual review: `if ( interior_lighting_p.daylighting_control_type != "NONE" ) AND ( interior_lighting_p.are_schedules_used_for_modeling_daylighting_control ): CAUTION and raise_warning "LIGHTING HAS DAYLIGHTING CONTROL AND USES SCHEDULE TO MODEL DAYLIGHTING CONTROL. VERIFY IF SCHEDULE ADJUSTMENT IS MODELED CORRECTLY."`
+
+      - Case 2: Else if lighting does not have daylighting control, and lighting has occupancy control and each hourly lighting schedule fraction in P-RMR is equal to 0.9 times that in B-RMR: `else if ( interior_lighting_p.daylighting_control_type == "NONE" ) AND ( interior_lighting_p.occupancy_control_type != "NONE" ) AND ( interior_lighting_p.are_schedules_used_for_modeling_occupancy_control ) AND ( compare_schedules_result_dictionary[TOTAL_HOURS_COMPARED] == compare_schedules_result_dictionary[TOTAL_HOURS_MATCH] )`
+
+      - Case 3: Else if lighting does not have daylighting control, and lighting does not have occupancy control, and each hourly lighting schedule fraction in P-RMR is equal to that in B-RMR: `else if ( interior_lighting_p.daylighting_control_type == "NONE" ) AND ( interior_lighting_p.occupancy_control_type == "NONE" ) AND ( compare_schedules_result_dictionary[TOTAL_HOURS_COMPARED] == compare_schedules_result_dictionary[TOTAL_HOURS_MATCH] )`
+
+      - Case 4: Else: `else: FAIL and raise_warning "LIGHTING SCHEDULE EFLH IN P-RMR IS ${compare_schedules_result_dictionary[EFLH_DIFFERENCE]} OF THAT IN B-RMR."`
+
+**[Back](../_toc.md)**
