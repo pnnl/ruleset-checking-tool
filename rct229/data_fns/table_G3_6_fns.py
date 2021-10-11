@@ -3,10 +3,10 @@ from rct229.data_fns.table_utils import find_osstd_table_entry
 from rct229.schema.config import ureg
 
 # This dictionary maps the ExteriorLightingAreas2019ASHRAE901TableG36 enumerations to
-# the corresponding lpd_space_type values in the file
+# the corresponding building_exterior_type values in the file
 # ashrae_90_1_table_G3_6.json
 
-building_exterior_enumeration_to_lpd_space_type_map = {
+EXTERIOR_LIGHTING_AREA_ENUMERATION_TO_BUILDING_EXTERIOR_TYPE_MAP = {
     "UNCOVERED_PARKING_LOTS_AND_DRIVES": "Uncovered parking lots and drives",
     "WALKWAY_NARROW": "Walkway - narrow",
     "WALKWAY_WIDE": "Walkway - wide",
@@ -18,7 +18,6 @@ building_exterior_enumeration_to_lpd_space_type_map = {
     "EXTERIOR_CANOPIES": "Exterior canopies",
     "OUTDOOR_SALES_OPEN_AREAS": "Outdoor sales - open areas",
     "STREET_FRONTAGE": "Street frontage",
-    "NON_TRADABLE_FACADE": "Non-tradable facade",
     "BUILDING_FACADE": "Building facade",
     "AUTOMATED_TELLER_MACHINES": "Automated teller machines",
     "NIGHT_DEPOSITORIES": "Night depositories",
@@ -28,9 +27,8 @@ building_exterior_enumeration_to_lpd_space_type_map = {
     "PARKING_NEAR_24HR_RETAIL_ENTRANCES": "Parking near 24-hour retail entrances",
 }
 
-
-def table_G3_6_lookup(building_exterior_type_enum_val):
-    """Returns the lighting power density for a building_exterior as
+def table_G3_6_lookup(exterior_lighting_area_enum_val):
+    """Returns the lighting power density for a building_exterior_type as
     required by ASHRAE 90.1 Table G3.6
     Parameters
     ----------
@@ -40,12 +38,14 @@ def table_G3_6_lookup(building_exterior_type_enum_val):
     Returns
     -------
     dict
-        { lpd: Quantity - The lighting power density in watt per square foot given by Table G3.6,
-        linear_lpd: Quantity - The lighting power density in watt per linear foot given by Table G3.6 }
+        { 
+            lpd: Quantity - The lighting power density in watt per square foot given by Table G3.6,
+            linear_lpd: Quantity - The lighting power density in watt per linear foot given by Table G3.6 
+        }
 
     """
-    building_exterior_type = building_exterior_enumeration_to_lpd_space_type_map[
-        building_exterior_type_enum_val
+    building_exterior_type = EXTERIOR_LIGHTING_AREA_ENUMERATION_TO_BUILDING_EXTERIOR_TYPE_MAP[
+        exterior_lighting_area_enum_val
     ]
 
     osstd_entry = find_osstd_table_entry(
@@ -56,6 +56,7 @@ def table_G3_6_lookup(building_exterior_type_enum_val):
     watts_per_ft2 = osstd_entry["w/ft^2"]
     watts_per_linear_ft = osstd_entry["w/ft"]
     watt_per_location = osstd_entry["w/location"]
+    WATT_PER_DEVICE = 90
     lpd = watts_per_ft2 * ureg("watt / foot**2") if watts_per_ft2 is not None else None
     linear_lpd = (
         watts_per_linear_ft * ureg("watt / foot")
@@ -65,5 +66,8 @@ def table_G3_6_lookup(building_exterior_type_enum_val):
     location_lpd = (
         watt_per_location * ureg("watt") if watt_per_location is not None else None
     )
-
-    return {"lpd": lpd, "linear_lpd": linear_lpd, "location_lpd": location_lpd}
+    if(exterior_lighting_area_enum_val == "NIGHT_DEPOSITORIES" or exterior_lighting_area_enum_val == "AUTOMATED_TELLER_MACHINES"):
+        osstd_entry["w/device"] = WATT_PER_DEVICE 
+        return {"lpd": lpd, "linear_lpd": linear_lpd, "location_lpd": location_lpd, "watt_per_device": WATT_PER_DEVICE}
+    else:
+        return {"lpd": lpd, "linear_lpd": linear_lpd, "location_lpd": location_lpd}

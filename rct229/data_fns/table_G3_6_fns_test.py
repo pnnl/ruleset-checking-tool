@@ -3,7 +3,7 @@ import pytest
 from rct229.data import data
 from rct229.data.schema_enums import schema_enums
 from rct229.data_fns.table_G3_6_fns import (
-    building_exterior_enumeration_to_lpd_space_type_map,
+    EXTERIOR_LIGHTING_AREA_ENUMERATION_TO_BUILDING_EXTERIOR_TYPE_MAP,
     table_G3_6_lookup,
 )
 from rct229.data_fns.table_utils import (
@@ -105,15 +105,6 @@ def test__table_G3_6_STREET_FRONTAGE():
         "location_lpd": None,
     }
 
-
-def test__table_G3_6_NON_TRADABLE_FACADE():
-    assert table_G3_6_lookup("NON_TRADABLE_FACADE") == {
-        "lpd": 0.2 * WATTS_PER_FT2,
-        "linear_lpd": 5.0 * WATTS_PER_LINEAR_FT,
-        "location_lpd": None,
-    }
-
-
 def test__table_G3_6_EMERGENCY_VEHICLE_LOADING_AREA():
     assert table_G3_6_lookup("EMERGENCY_VEHICLE_LOADING_AREA") == {
         "lpd": 0.5 * WATTS_PER_FT2,
@@ -158,7 +149,8 @@ def test__table_G3_6_AUTOMATED_TELLER_MACHINES():
     assert table_G3_6_lookup("AUTOMATED_TELLER_MACHINES") == {
         "lpd": None,
         "linear_lpd": None,
-        "location_lpd": 360 * WATT_PER_LOCATION,
+        "location_lpd": 270 * WATT_PER_LOCATION,
+        "watt_per_device": 90
     }
 
 
@@ -166,17 +158,17 @@ def test__table_G3_6_NIGHT_DEPOSITORIES():
     assert table_G3_6_lookup("NIGHT_DEPOSITORIES") == {
         "lpd": None,
         "linear_lpd": None,
-        "location_lpd": 360 * WATT_PER_LOCATION,
+        "location_lpd": 270 * WATT_PER_LOCATION,
+        "watt_per_device": 90
     }
 
-
-# Testing building_exterior_enumeration_to_lpd_space_type_map ----------
-def test__building_exterior_enumeration_to_lpd_space_type_map():
+# Testing exterior_lighting_area_enumeration_to_building_exterior_type_map ----------
+def test__exterior_lighting_area_enumeration_to_building_exterior_type_map():
     # check_enumeration_to_osstd_match_field_value_map() will throw exception(s)
     # when a check fails
     check_enumeration_to_osstd_match_field_value_map(
         match_field_name="building_exterior_type",
         enum_type="ExteriorLightingAreas2019ASHRAE901TableG36",
         osstd_table=data["ashrae_90_1_table_G3_6"],
-        enumeration_to_match_field_value_map=building_exterior_enumeration_to_lpd_space_type_map,
+        enumeration_to_match_field_value_map=EXTERIOR_LIGHTING_AREA_ENUMERATION_TO_BUILDING_EXTERIOR_TYPE_MAP,
     )

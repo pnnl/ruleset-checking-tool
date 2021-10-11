@@ -83,13 +83,13 @@
             "building_exterior_type": "Automated teller machines",
             "w/ft^2": null,
             "w/ft": null,
-            "w/location": 360  
+            "w/location": 270
         },
         {
             "building_exterior_type": "Night depositories",
             "w/ft^2": null,
             "w/ft": null,
-            "w/location": 360
+            "w/location": 270
         },
         {
             "building_exterior_type": "Entrance and gatehouses",
