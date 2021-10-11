@@ -1,5 +1,5 @@
 
-## get_building_segment_skylight_roof_ratios
+## get_scc_skylight_roof_ratios
 
 Description: This function would determine skylight and envelope roof ratios for a building segment for residential, non-residential and semi-heated surface categories.  
 
@@ -9,7 +9,7 @@ Inputs:
 
 Returns:
 
-- **skylight_roof_ratios_dictionary**: A dictionary that saves building segment ID with its the skylight and roof ratios for residential, non-residential and semi-heated surface categories.
+- **scc_skylight_roof_ratios_dictionary**: A dictionary that saves building segment ID with its the skylight and roof ratios for residential, non-residential and semi-heated surface categories.
 
 Function Call:
 
@@ -60,8 +60,8 @@ Logic:
 
   - Calculate skylight roof ratio for semi-heated type surface conditioning category: `if total_semiheated_roof_area > 0: srr_semiheated = total_semiheated_skylight_area / total_semiheated_roof_area; else: srr_semiheated = 0`
 
-  - Save skylight-roof-ratio of different surface conditioning categories for building segment: `skylight_roof_ratios_dictionary[building_segment.id] = {"EXTERIOR RESIDENTIAL": srr_res, "EXTERIOR NON-RESIDENTIAL": srr_nonres, "EXTERIOR MIXED": srr_mixed, "SEMI-EXTERIOR": srr_semiheated}`
+  - Save skylight-roof-ratio of different surface conditioning categories for building segment: `scc_skylight_roof_ratios_dictionary[building_segment.id] = {"EXTERIOR RESIDENTIAL": srr_res, "EXTERIOR NON-RESIDENTIAL": srr_nonres, "EXTERIOR MIXED": srr_mixed, "SEMI-EXTERIOR": srr_semiheated}`
 
-**Returns** `return skylight_roof_ratios_dictionary`
+**Returns** `return scc_skylight_roof_ratios_dictionary`
 
 **[Back](../_toc.md)**
