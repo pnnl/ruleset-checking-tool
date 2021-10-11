@@ -4,8 +4,8 @@
 **Rule ID:** 5-45  
 **Rule Description:** The  infiltration schedules are the same in the proposed RMR as in the baseline RMR.  
 **Rule Assertion:** B-RMR hourly fractions of infiltration:multiplier_schedule = P-RMR hourly fractions of infiltration:multiplier_schedule.  
-**Appendix G Section:** Section G3.1-5(b) Building Envelope Modeling Requirements for the Proposed design and Baseline  
-**Appendix G Section Reference:** None  
+**Appendix G Section:** Section 5 Envelope  
+**Appendix G Section Reference:** Section G3.1-5(b) Building Envelope Modeling Requirements for the Proposed design and Baseline  
 
 **Applicability:** All required data elements exist for B_RMR  
 **Applicability Checks:**  None  
@@ -20,22 +20,20 @@
 
 ## Rule Logic:  
 
-- For each building segment in the Baseline model: `for building_segment_b in B_RMR.building.building_segments:`  
+- For each zone in the Baseline model: `for zone_b in B_RMR...zones:`
 
-  - For each thermal block in building segment: `for thermal_block_b in building_segment_b.thermal_blocks:`  
+  - Get zone infiltration: `infiltration_b = zone_b.infiltration`
 
-    - For each zone in thermal block: `for zone_b in thermal_block_b.zones:`
+  - Get matching zone in P_RMR: `zone_p = match_data_element(P_RMR, Zones, zone_b.id)`
 
-      - Get zone infiltration: `infiltration_b = zone_b.infiltration`  
+    - Get zone infiltration in P_RMR: `infiltration_p = zone_p.infiltration`
 
-      - Get matching zone in P_RMR: `zone_p = match_data_element(P_RMR, Zones, zone_b.id)`
+      - Compare infiltration schedules in B_RMR and P_RMR: `compare_schedules_result_dictionary = compare_schedules(infiltration_b.multiplier_schedule, infiltration_p.multiplier_schedule, always_1_schedule, 1)`
 
-        - Get zone infiltration in P_RMR: `infiltration_p = zone_p.infiltration`
+      **Rule Assertion:**  
 
-          **Rule Assertion:**  
+      - Case 1: For each zone, if each hourly zone infiltration schedule in P_RMR matches that in B_RMR: `if compare_schedules_result_dictionary[TOTAL_HOURS_COMPARED] == compare_schedules_result_dictionary[TOTAL_HOURS_MATCH]: PASS`
 
-          - Case 1: If zone infiltration schedule in P_RMR matches that in B_RMR: `if compare_schedules(infiltration_b.multiplier_schedule, infiltration_p.multiplier_schedule) == "EQUAL": PASS`  
-
-          - Case 2: Else: `Else: FAIL`
+      - Case 2: Else: `Else: FAIL and raise_warning "ZONE INFILTRATION SCHEDULE EFLH IN B-RMR IS {compare_schedules_result_dictionary[EFLH_DIFFERENCE]} OF THAT IN P-RMR."`
 
 **[Back](../_toc.md)**
