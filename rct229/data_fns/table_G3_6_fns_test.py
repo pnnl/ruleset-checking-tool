@@ -105,6 +105,7 @@ def test__table_G3_6_STREET_FRONTAGE():
         "location_lpd": None,
     }
 
+
 def test__table_G3_6_EMERGENCY_VEHICLE_LOADING_AREA():
     assert table_G3_6_lookup("EMERGENCY_VEHICLE_LOADING_AREA") == {
         "lpd": 0.5 * WATTS_PER_FT2,
@@ -150,7 +151,7 @@ def test__table_G3_6_AUTOMATED_TELLER_MACHINES():
         "lpd": None,
         "linear_lpd": None,
         "location_lpd": 270 * WATT_PER_LOCATION,
-        "watt_per_device": 90
+        "watt_per_device": 90,
     }
 
 
@@ -159,8 +160,9 @@ def test__table_G3_6_NIGHT_DEPOSITORIES():
         "lpd": None,
         "linear_lpd": None,
         "location_lpd": 270 * WATT_PER_LOCATION,
-        "watt_per_device": 90
+        "watt_per_device": 90,
     }
+
 
 # Testing exterior_lighting_area_enumeration_to_building_exterior_type_map ----------
 def test__exterior_lighting_area_enumeration_to_building_exterior_type_map():

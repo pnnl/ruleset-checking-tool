@@ -27,6 +27,7 @@ EXTERIOR_LIGHTING_AREA_ENUMERATION_TO_BUILDING_EXTERIOR_TYPE_MAP = {
     "PARKING_NEAR_24HR_RETAIL_ENTRANCES": "Parking near 24-hour retail entrances",
 }
 
+
 def table_G3_6_lookup(exterior_lighting_area_enum_val):
     """Returns the lighting power density for a building_exterior_type as
     required by ASHRAE 90.1 Table G3.6
@@ -38,15 +39,17 @@ def table_G3_6_lookup(exterior_lighting_area_enum_val):
     Returns
     -------
     dict
-        { 
+        {
             lpd: Quantity - The lighting power density in watt per square foot given by Table G3.6,
-            linear_lpd: Quantity - The lighting power density in watt per linear foot given by Table G3.6 
+            linear_lpd: Quantity - The lighting power density in watt per linear foot given by Table G3.6
         }
 
     """
-    building_exterior_type = EXTERIOR_LIGHTING_AREA_ENUMERATION_TO_BUILDING_EXTERIOR_TYPE_MAP[
-        exterior_lighting_area_enum_val
-    ]
+    building_exterior_type = (
+        EXTERIOR_LIGHTING_AREA_ENUMERATION_TO_BUILDING_EXTERIOR_TYPE_MAP[
+            exterior_lighting_area_enum_val
+        ]
+    )
 
     osstd_entry = find_osstd_table_entry(
         [("building_exterior_type", building_exterior_type)],
@@ -66,8 +69,16 @@ def table_G3_6_lookup(exterior_lighting_area_enum_val):
     location_lpd = (
         watt_per_location * ureg("watt") if watt_per_location is not None else None
     )
-    if(exterior_lighting_area_enum_val == "NIGHT_DEPOSITORIES" or exterior_lighting_area_enum_val == "AUTOMATED_TELLER_MACHINES"):
-        osstd_entry["w/device"] = WATT_PER_DEVICE 
-        return {"lpd": lpd, "linear_lpd": linear_lpd, "location_lpd": location_lpd, "watt_per_device": WATT_PER_DEVICE}
+    if (
+        exterior_lighting_area_enum_val == "NIGHT_DEPOSITORIES"
+        or exterior_lighting_area_enum_val == "AUTOMATED_TELLER_MACHINES"
+    ):
+        osstd_entry["w/device"] = WATT_PER_DEVICE
+        return {
+            "lpd": lpd,
+            "linear_lpd": linear_lpd,
+            "location_lpd": location_lpd,
+            "watt_per_device": WATT_PER_DEVICE,
+        }
     else:
         return {"lpd": lpd, "linear_lpd": linear_lpd, "location_lpd": location_lpd}
