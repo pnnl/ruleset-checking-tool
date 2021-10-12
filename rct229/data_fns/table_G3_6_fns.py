@@ -28,7 +28,7 @@ EXTERIOR_LIGHTING_AREA_ENUMERATION_TO_BUILDING_EXTERIOR_TYPE_MAP = {
 }
 
 
-def table_G3_6_lookup(exterior_lighting_area_enum_val):
+def table_G3_6_lookup(building_exterior_type):
     """Returns the lighting power density for a building_exterior_type as
     required by ASHRAE 90.1 Table G3.6
     Parameters
@@ -42,12 +42,14 @@ def table_G3_6_lookup(exterior_lighting_area_enum_val):
         {
             lpd: Quantity - The lighting power density in watt per square foot given by Table G3.6,
             linear_lpd: Quantity - The lighting power density in watt per linear foot given by Table G3.6
+            location_lpd: Quantity - The lighting power density in watt per linear foot given by Table G3.6
+            device_lpd: Quantity - The lighting power density in watt per linear foot given by Table G3.6
         }
 
     """
     building_exterior_type = (
         EXTERIOR_LIGHTING_AREA_ENUMERATION_TO_BUILDING_EXTERIOR_TYPE_MAP[
-            exterior_lighting_area_enum_val
+            building_exterior_type
         ]
     )
 
@@ -59,7 +61,8 @@ def table_G3_6_lookup(exterior_lighting_area_enum_val):
     watts_per_ft2 = osstd_entry["w/ft^2"]
     watts_per_linear_ft = osstd_entry["w/ft"]
     watt_per_location = osstd_entry["w/location"]
-    WATT_PER_DEVICE = 90
+    watt_per_device = osstd_entry["w/device"]
+
     lpd = watts_per_ft2 * ureg("watt / foot**2") if watts_per_ft2 is not None else None
     linear_lpd = (
         watts_per_linear_ft * ureg("watt / foot")
@@ -69,16 +72,11 @@ def table_G3_6_lookup(exterior_lighting_area_enum_val):
     location_lpd = (
         watt_per_location * ureg("watt") if watt_per_location is not None else None
     )
-    if (
-        exterior_lighting_area_enum_val == "NIGHT_DEPOSITORIES"
-        or exterior_lighting_area_enum_val == "AUTOMATED_TELLER_MACHINES"
-    ):
-        osstd_entry["w/device"] = WATT_PER_DEVICE
-        return {
-            "lpd": lpd,
-            "linear_lpd": linear_lpd,
-            "location_lpd": location_lpd,
-            "watt_per_device": WATT_PER_DEVICE,
-        }
-    else:
-        return {"lpd": lpd, "linear_lpd": linear_lpd, "location_lpd": location_lpd}
+    device_lpd = watt_per_device * ureg("watt") if watt_per_device is not None else None
+
+    return {
+        "lpd": lpd,
+        "linear_lpd": linear_lpd,
+        "location_lpd": location_lpd,
+        "device_lpd": device_lpd,
+    }
