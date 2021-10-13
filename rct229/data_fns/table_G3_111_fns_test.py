@@ -25,22 +25,24 @@ def test__table_G3_1_1_1_HOSPITAL():
     assert table_G3_1_1_1_lookup("HOSPITAL") == {"wwr": 0.27}
 
 
-# def test__table_G3_1_1_1_HOTEL_MOTEL_SMALL():
-# assert table_G3_1_1_1_lookup("HOTEL_MOTEL_SMALL") == {"wwr": 0.24}
+def test__table_G3_1_1_1_HOTEL_MOTEL_SMALL():
+    assert table_G3_1_1_1_lookup("HOTEL_MOTEL_SMALL") == {"wwr": 0.24}
 
 
-# def test__table_G3_1_1_1_HOTEL_MOTEL_LARGE():
-# assert table_G3_1_1_1_lookup("HOTEL_MOTEL_LARGE") == {"wwr": 0.34}
+def test__table_G3_1_1_1_HOTEL_MOTEL_LARGE():
+    assert table_G3_1_1_1_lookup("HOTEL_MOTEL_LARGE") == {"wwr": 0.34}
 
 
-# def test__table_G3_1_1_1_OFFICE_SMALL():
-# assert table_G3_1_1_1_lookup("OFFICE_SMALL") == {"wwr": 0.19}
+def test__table_G3_1_1_1_OFFICE_SMALL():
+    assert table_G3_1_1_1_lookup("OFFICE_SMALL") == {"wwr": 0.19}
 
-# def test__table_G3_1_1_1_OFFICE_MEDIUM():
-# assert table_G3_1_1_1_lookup("OFFICE_MEDIUM") == {"wwr": 0.31}
 
-# def test__table_G3_1_1_1_OFFICE_LARGE():
-# assert table_G3_1_1_1_lookup("OFFICE_LARGE") == {"wwr": 0.40}
+def test__table_G3_1_1_1_OFFICE_MEDIUM():
+    assert table_G3_1_1_1_lookup("OFFICE_MEDIUM") == {"wwr": 0.31}
+
+
+def test__table_G3_1_1_1_OFFICE_LARGE():
+    assert table_G3_1_1_1_lookup("OFFICE_LARGE") == {"wwr": 0.40}
 
 
 def test__table_G3_1_1_1_RESTAURANT_QUICK_SERVICE():
@@ -80,5 +82,5 @@ def test__building_area_type_to_vertical_fenestration_percentage_map():
         enum_type="VerticalFenestrationBuildingAreaType2019ASHRAE901",
         osstd_table=data["ashrae_90_1_prm_2019.prm_wwr_bldg_type"],
         enumeration_to_match_field_value_map=BUILDING_AREA_TYPE_TO_VERTICAL_FENESTRATION_PERCENTAGE_MAP,
-        exclude_enum_names=["HOTEL_MOTEL_SMALL"],
+        # exclude_enum_names=["HOTEL_MOTEL_SMALL"],
     )
