@@ -82,5 +82,4 @@ def test__building_area_type_to_vertical_fenestration_percentage_map():
         enum_type="VerticalFenestrationBuildingAreaType2019ASHRAE901",
         osstd_table=data["ashrae_90_1_prm_2019.prm_wwr_bldg_type"],
         enumeration_to_match_field_value_map=BUILDING_AREA_TYPE_TO_VERTICAL_FENESTRATION_PERCENTAGE_MAP,
-        # exclude_enum_names=["HOTEL_MOTEL_SMALL"],
     )
