@@ -5,7 +5,7 @@ from rct229.data_fns.table_utils import find_osstd_table_entry
 # This dictionary maps the VerticalFenestrationBuildingAreaType2019ASHRAE901 enumerations to
 # the corresponding wwr_building_type in the OSSTD file
 # ashrae_90_1_prm_2019.prm_wwr_bldg_type
-BUILDING_AREA_TYPE_TO_VERTICAL_FENESTRATION_PERCENTAGE_MAP = {
+VERTICAL_FENESTRATION_BUILDING_AREA_TYPE_TO_WWR_BUILDING_TYPE_MAP = {
     "GROCERY_STORE": "Grocery store",
     "HEALTHCARE_OUTPATIENT": "Healthcare (outpatient)",
     "HOSPITAL": "Hospital",
@@ -24,7 +24,7 @@ BUILDING_AREA_TYPE_TO_VERTICAL_FENESTRATION_PERCENTAGE_MAP = {
 }
 
 
-def table_G3_1_1_1_lookup(building_type_enum_val):
+def table_G3_1_1_1_lookup(vertical_fenestration_building_area_type_enum_val):
     """Returns the baseline building vertical fenestration percentage for a building area type as
     required by ASHRAE 90.1 Table G3.1.1-1
     Parameters
@@ -34,12 +34,14 @@ def table_G3_1_1_1_lookup(building_type_enum_val):
     Returns
     -------
     dict
-        { wwr: float – The window to wall ratio given by Table G3.1.1-1 }
+        { wwr: float – The window to wall ratio given by Table G3.1.1-1 expressed as a decimal between 0 and 1 }
 
     """
-    wwr_building_type = BUILDING_AREA_TYPE_TO_VERTICAL_FENESTRATION_PERCENTAGE_MAP[
-        building_type_enum_val
-    ]
+    wwr_building_type = (
+        VERTICAL_FENESTRATION_BUILDING_AREA_TYPE_TO_WWR_BUILDING_TYPE_MAP[
+            vertical_fenestration_building_area_type_enum_val
+        ]
+    )
 
     osstd_entry = find_osstd_table_entry(
         [("wwr_building_type", wwr_building_type)],
