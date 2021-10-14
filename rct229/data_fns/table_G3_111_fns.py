@@ -29,7 +29,7 @@ def table_G3_1_1_1_lookup(vertical_fenestration_building_area_type_enum_val):
     required by ASHRAE 90.1 Table G3.1.1-1
     Parameters
     ----------
-    building_type : str
+    vertical_fenestration_building_area_type_enum_val : str
         One of the VerticalFenestrationBuildingAreaType2019ASHRAE901 enumeration values
     Returns
     -------
