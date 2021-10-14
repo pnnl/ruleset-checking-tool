@@ -3,7 +3,7 @@ from rct229.schema.config import ureg
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.pint_utils import pint_sum
 
-CAPACITY_THRESHOLD = 3.4 * ureg("Btu/(h*ft2)")
+CAPACITY_THRESHOLD = 3.4 * ureg("Btu/(hr * ft**2)")
 CRAWLSPACE_HEIGHT_THRESHOLD = 7 * ureg("ft")
 
 
