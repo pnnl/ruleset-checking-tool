@@ -54,7 +54,7 @@ def table_G3_6_lookup(exterior_lighting_area):
     )
 
     osstd_entry = find_osstd_table_entry(
-        [("exterior_lighting_area", exterior_lighting_area)],
+        [("building_exterior_type", exterior_lighting_area)],
         osstd_table=data["ashrae_90_1_table_G3_6"],
     )
 

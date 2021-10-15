@@ -186,7 +186,7 @@ def test__exterior_lighting_area_enumeration_to_building_exterior_type_map():
     # check_enumeration_to_osstd_match_field_value_map() will throw exception(s)
     # when a check fails
     check_enumeration_to_osstd_match_field_value_map(
-        match_field_name="exterior_lighting_area",
+        match_field_name="building_exterior_type",
         enum_type="ExteriorLightingAreas2019ASHRAE901TableG36",
         osstd_table=data["ashrae_90_1_table_G3_6"],
         enumeration_to_match_field_value_map=EXTERIOR_LIGHTING_AREA_ENUMERATION_TO_BUILDING_EXTERIOR_TYPE_MAP,
