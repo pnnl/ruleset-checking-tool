@@ -9,7 +9,7 @@ Inputs:
 
 Returns:
 
-- **scc_skylight_roof_ratios_dictionary**: A dictionary that saves each surface conditioning category (residential, non-residential, mixed and semi-heated) with its the skylight and roof ratios for each building in RMR.
+- **scc_skylight_roof_ratios_dictionary**: A dictionary that saves each surface conditioning category (residential, non-residential, mixed and semi-heated) with its skylight-roof-ratios for each building in RMR.
 
 Function Call:
 
