@@ -25,14 +25,12 @@
 
     - Check if space is existing or altered, set rule applicability check to True: `if ( space_b.status_type == "EXISTING" ) OR ( space_b.status_type == "ALTERATION" ): rule_applicability_check = TRUE`
 
-      - Add to total number of existing or altered spaces in zone: `num_space_existing_altered += 1
+      - Add to total number of existing or altered spaces in zone: `num_space_existing_altered += 1`
 
-**Rule Assertion**
+**Rule Assertion:**
 
-- Case 1: For each zone, if all spaces in zone are existing or altered: `if num_space_existing_altered == LEN(zone_b.spaces): CAUTION and raise_warning "ZONE IS EXISTING. THE BASELINE VERTICAL FENESTRATION AREA FOR EXISTING ZONES MUST EQUAL TO THE FENESTRATION AREA PRIOR TO THE PROPOSED SCOPE OF WORK. THE BASELINE FENESTRATION AREA IN ZONE MUST BE CHECKED MANUALLY."`
+- For each zone, if any space in zone is existing or altered: `if num_space_existing_altered > 0: CAUTION and raise_warning "PART OR ALL OF ZONE IS EXISTING. THE BASELINE VERTICAL FENESTRATION AREA FOR EXISTING ZONES MUST EQUAL TO THE FENESTRATION AREA PRIOR TO THE PROPOSED SCOPE OF WORK. THE BASELINE FENESTRATION AREA IN ZONE MUST BE CHECKED MANUALLY."`
 
-- Case 2: Else if some spaces in zone are existing or altered: `else if num_space_existing_altered > 1: CAUTION and raise_warning "PART OF ZONE IS EXISTING. THE BASELINE VERTICAL FENESTRATION AREA FOR EXISTING ZONES MUST EQUAL TO THE FENESTRATION AREA PRIOR TO THE PROPOSED SCOPE OF WORK. THE BASELINE FENESTRATION AREA IN ZONE MUST BE CHECKED MANUALLY."`
-
-**Applicability Check:** For each building, if no space is existing or alteration, rule is not applicable: `if NOT rule_applicability_check: is_applicable = FALSE`
+**Applicability Check:** For each building, if no space is existing or altered, rule is not applicable: `if NOT rule_applicability_check: is_applicable = FALSE`
 
 **[Back](../_toc.md)**
