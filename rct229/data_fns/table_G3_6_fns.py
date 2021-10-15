@@ -3,7 +3,7 @@ from rct229.data_fns.table_utils import find_osstd_table_entry
 from rct229.schema.config import ureg
 
 # This dictionary maps the ExteriorLightingAreas2019ASHRAE901TableG36 enumerations to
-# the corresponding building_exterior_type values in the file
+# the corresponding exterior_lighting_area values in the file
 # ashrae_90_1_table_G3_6.json
 
 EXTERIOR_LIGHTING_AREA_ENUMERATION_TO_BUILDING_EXTERIOR_TYPE_MAP = {
@@ -28,12 +28,12 @@ EXTERIOR_LIGHTING_AREA_ENUMERATION_TO_BUILDING_EXTERIOR_TYPE_MAP = {
 }
 
 
-def table_G3_6_lookup(building_exterior_type):
-    """Returns the lighting power density for a building_exterior_type as
+def table_G3_6_lookup(exterior_lighting_area):
+    """Returns the lighting power density for a exterior_lighting_area as
     required by ASHRAE 90.1 Table G3.6
     Parameters
     ----------
-    building_exterior_type : str
+    exterior_lighting_area : str
         One of the ExteriorLightingAreas2019ASHRAE901TableG36 enumeration values
 
     Returns
@@ -47,14 +47,14 @@ def table_G3_6_lookup(building_exterior_type):
         }
 
     """
-    building_exterior_type = (
+    exterior_lighting_area = (
         EXTERIOR_LIGHTING_AREA_ENUMERATION_TO_BUILDING_EXTERIOR_TYPE_MAP[
-            building_exterior_type
+            exterior_lighting_area
         ]
     )
 
     osstd_entry = find_osstd_table_entry(
-        [("building_exterior_type", building_exterior_type)],
+        [("exterior_lighting_area", exterior_lighting_area)],
         osstd_table=data["ashrae_90_1_table_G3_6"],
     )
 
