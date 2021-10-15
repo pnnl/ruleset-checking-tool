@@ -1,7 +1,7 @@
 
 ## get_scc_skylight_roof_ratios
 
-Description: This function would determine skylight and envelope roof ratios for a building for residential, non-residential and semi-heated surface conditioning categories.  
+Description: This function would determine skylight and envelope roof ratios for a building for residential, non-residential, mixed and semi-heated surface conditioning categories.  
 
 Inputs:
 
