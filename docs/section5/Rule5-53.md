@@ -15,7 +15,7 @@
 **Data Lookup:** Tables G3.4-1 to G3.4-8  
 **Function Call:**  
 
-  1. get_surface_conditioning_category()  
+  1. get_surface_conditioning_category()
 
 ## Rule Logic:  
 
@@ -31,7 +31,7 @@
 
     - For each subsurface in surface: `for subsurface_b in surface_b.subsurfaces:`
 
-      - Check if subsurface is door: `if subsurface_b.subclassification == "DOOR"`
+      - Check if subsurface is opaque door: `if ( subsurface_b.subclassification == "DOOR" ) AND ( subsurface_b.glazed_area >= subsurface.opaque_area )`
 
         - Set rule applicability check to True: `rule_applicability_check = TRUE`
 
@@ -47,12 +47,12 @@
 
           **Rule Assertion:**  
 
-          - Case 1: For each door, if the door's parent zone has both residential and non-residential spaces and the construction requirements for door are different, request manual review: `if manual_review_flag == TRUE: CAUTION and raise_warning "ZONE HAS BOTH RESIDENTIAL AND NON-RESIDENTIAL TYPE SPACES AND THE REQUIREMENT FOR U-FACTOR FOR DOORS ARE DIFFERENT. VERIFY DOOR U-FACTOR IS MODELED CORRECTLY."`
+          - Case 1: For each opaque door, if the door's parent zone has both residential and non-residential spaces and the construction requirements for door are different, request manual review: `if manual_review_flag == TRUE: CAUTION and raise_warning "ZONE HAS BOTH RESIDENTIAL AND NON-RESIDENTIAL TYPE SPACES AND THE REQUIREMENT FOR U-FACTOR FOR DOORS ARE DIFFERENT. VERIFY DOOR U-FACTOR IS MODELED CORRECTLY."`
 
           - Case 2: Else if door U-factor matches Table G3.4: `else if subsurface_b.u_factor == target_u_factor: PASS`
 
           - Case 3: Else: `else: FAIL`
 
-**Applicability Check:** For each building, if building has no door, rule is not applicable: `if NOT rule_applicability_check: is_applicable = FALSE`
+**Applicability Check:** For each building, if building has no opaque door, rule is not applicable: `if NOT rule_applicability_check: is_applicable = FALSE`
 
 **[Back](../_toc.md)**
