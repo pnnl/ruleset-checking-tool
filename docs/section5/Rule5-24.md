@@ -38,7 +38,7 @@
 
   - Else, building does not have exterior mixed type wall surface: `else:`
 
-    - Get window-wall-ratio for residential type walls: `wwr_res = scc_window_wall_ratios_dictionary["EXTERIOR RESIDENTIAL"]`
+    - Get window-wall-ratio for residential type walls: `wwr_res = scc_window_wall_ratios_dictionary[building_b.id]["EXTERIOR RESIDENTIAL"]`
 
       - If window-wall-ratio is between 0% to 10%, get baseline vertical fenestration construction U-factor requirement: `if ( wwr_res > 0.0% ) AND ( wwr_res <= 10.0% ): target_u_factor_res = data_lookup(table_G3_4, climate_zone, "RESIDENTIAL", "VERTICAL GLAZING", "0%-10.0%", "ASSEMBLY MAX. U")`
 
@@ -48,7 +48,7 @@
 
       - Else, window-wall-ratio is between 30% to 40%, get baseline vertical fenestration construction U-factor requirement: `if ( wwr_res > 30.0% ) AND ( wwr_res <= 40.0% ): target_u_factor_res = data_lookup(table_G3_4, climate_zone, "RESIDENTIAL", "VERTICAL GLAZING", "30.1%-40.0%", "ASSEMBLY MAX. U")`
 
-    - Get window-wall-ratio for non-residential type walls: `wwr_nonres = scc_window_wall_ratios_dictionary["EXTERIOR NON-RESIDENTIAL"]`
+    - Get window-wall-ratio for non-residential type walls: `wwr_nonres = scc_window_wall_ratios_dictionary[building_b.id]["EXTERIOR NON-RESIDENTIAL"]`
 
       - If window-wall-ratio is between 0% to 10%, get baseline vertical fenestration construction U-factor requirement: `if ( wwr_nonres > 0.0% ) AND ( wwr_nonres <= 10.0% ): target_u_factor_nonres = data_lookup(table_G3_4, climate_zone, "NON-RESIDENTIAL", "VERTICAL GLAZING", "0%-10.0%", "ASSEMBLY MAX. U")`
 
@@ -58,7 +58,7 @@
 
       - Else, window-wall-ratio is between 30% to 40%, get baseline vertical fenestration construction U-factor requirement: `if ( wwr_nonres > 30.0% ) AND ( wwr_nonres <= 40.0% ): target_u_factor_nonres = data_lookup(table_G3_4, climate_zone, "NON-RESIDENTIAL", "VERTICAL GLAZING", "30.1%-40.0%", "ASSEMBLY MAX. U")`
 
-    - Get window-wall-ratio for semi-heated type walls: `wwr_semiheated = scc_window_wall_ratios_dictionary["SEMI-EXTERIOR"]`
+    - Get window-wall-ratio for semi-heated type walls: `wwr_semiheated = scc_window_wall_ratios_dictionary[building_b.id]["SEMI-EXTERIOR"]`
 
       - If window-wall-ratio is between 0% to 10%, get baseline vertical fenestration construction U-factor requirement: `if ( wwr_semiheated > 0.0% ) AND ( wwr_semiheated <= 10.0% ): target_u_factor_semiheated = data_lookup(table_G3_4, climate_zone, "SEMIHEATED", "VERTICAL GLAZING", "0%-10.0%", "ASSEMBLY MAX. U")`
 
@@ -72,11 +72,11 @@
 
     - For each surface in zone: `for surface_b in zone_b.surfaces:`
 
-      - Check if surface is above-grade wall with subsurface and is regulated: `if ( get_opaque_surface_type(surface_b) == "ABOVE-GRADE WALL"  ) AND ( surface_b.subsurfaces ) AND ( scc_dictionary_b[surface_b.id] != "UNREGULATED" ):`
+      - Check if surface is above-grade wall with subsurface and is regulated: `if ( get_opaque_surface_type(surface_b) == "ABOVE-GRADE WALL" ) AND ( surface_b.subsurfaces ) AND ( scc_dictionary_b[surface_b.id] != "UNREGULATED" ):`
 
         - For each subsurface in wall: `for subsurface_b in surface_b.subsurfaces:`
 
-          - Check if subsurface is door and glazed area is more than 50% of the total door area, or subsurface is window: `if (( subsurface_b.classification == "DOOR" ) AND ( subsurface_b.glazed_area > subsurface_b.opaque_area )) OR ( subsurface_b.classification == "WINDOW" ):`
+          - Check if subsurface is door and glazed area is more than 50% of the total door area, or subsurface is not door: `if (( subsurface_b.classification == "DOOR" ) AND ( subsurface_b.glazed_area > subsurface_b.opaque_area )) OR ( subsurface_b.classification != "DOOR" ):`
 
             **Rule Assertion:**
 
