@@ -26,56 +26,58 @@
 
 - Get surface conditioning category dictionary for B_RMR: `scc_dictionary_b = get_surface_conditioning_category(B_RMR)`  
 
-- Get building skylight roof ratios dictionary: `skylight_roof_ratios_dictionary_b = get_scc_skylight_roof_ratios(B_RMR)`
+- Get building skylight roof ratios dictionary: `scc_skylight_roof_ratios_dictionary = get_scc_skylight_roof_ratios(B_RMR)`
 
-- For each building segment in the Baseline model: `for building_segment_b in B_RMR.building.building_segments:`
+- For each building in the Baseline model: `for building_b in B_RMR.building:`
 
-  - Check if building segment has exterior mixed type skylight: `if skylight_roof_ratios_dictionary_b[building_segment_b.id]["EXTERIOR MIXED"] > 0:`
+  - Check if building has exterior mixed type skylight: `if scc_skylight_roof_ratios_dictionary[building_b.id]["EXTERIOR MIXED"] > 0:`
 
-    - Check if residential and non-residential type skylight U-factor requirements for different skylight-roof-ratio are the same, get skylight U-factor requirements: `if ( data_lookup(table_G3_4, climate_zone, "RESIDENTIAL, "SKYLIGHT", "0%-2.0%", "ASSEMBLY MAX. U") == data_lookup(table_G3_4, climate_zone, "RESIDENTIAL, "SKYLIGHT", "2.1%+", "ASSEMBLY MAX. U") ) AND ( data_lookup(table_G3_4, climate_zone, "NON-RESIDENTIAL, "SKYLIGHT", "0%-2.0%", "ASSEMBLY MAX. U") == data_lookup(table_G3_4, climate_zone, "NON-RESIDENTIAL, "SKYLIGHT", "2.1%+", "ASSEMBLY MAX. U") ) AND ( data_lookup(table_G3_4, climate_zone, "RESIDENTIAL, "SKYLIGHT", "0%-2.0%", "ASSEMBLY MAX. U") == data_lookup(table_G3_4, climate_zone, "NON-RESIDENTIAL, "SKYLIGHT", "0%-2.0%", "ASSEMBLY MAX. U") ): target_u_factor_res = target_u_factor_nonres = data_lookup(table_G3_4, climate_zone, "RESIDENTIAL, "SKYLIGHT", "0%-2.0%", "ASSEMBLY MAX. U")`
+    - Check if residential and non-residential type skylight U-factor requirements for different skylight-roof-ratio are the same, get skylight U-factor requirements: `if ( data_lookup(table_G3_4, climate_zone, "RESIDENTIAL, "SKYLIGHT", "0%-2.0%", "ASSEMBLY MAX. U") == data_lookup(table_G3_4, climate_zone, "RESIDENTIAL, "SKYLIGHT", "2.1%+", "ASSEMBLY MAX. U") ) AND ( data_lookup(table_G3_4, climate_zone, "NON-RESIDENTIAL, "SKYLIGHT", "0%-2.0%", "ASSEMBLY MAX. U") == data_lookup(table_G3_4, climate_zone, "NON-RESIDENTIAL, "SKYLIGHT", "2.1%+", "ASSEMBLY MAX. U") ) AND ( data_lookup(table_G3_4, climate_zone, "RESIDENTIAL, "SKYLIGHT", "0%-2.0%", "ASSEMBLY MAX. U") == data_lookup(table_G3_4, climate_zone, "NON-RESIDENTIAL, "SKYLIGHT", "0%-2.0%", "ASSEMBLY MAX. U") ): target_u_factor_mixed = data_lookup(table_G3_4, climate_zone, "RESIDENTIAL, "SKYLIGHT", "0%-2.0%", "ASSEMBLY MAX. U")`
 
     - Else, request manual review: `else: manual_review_flag = TRUE`
 
-  - Else, building segment does not have exterior mixed type roof surface: `else:`
+  - Else, building does not have exterior mixed type roof surface: `else:`
 
-    - Get skylight-roof-ratio for residential type roofs: `srr_res = skylight_roof_ratios_dictionary_b[building_segment_b.id]["EXTERIOR RESIDENTIAL"]`
+    - Get skylight-roof-ratio for residential type roofs: `srr_res = scc_skylight_roof_ratios_dictionary[building_b.id]["EXTERIOR RESIDENTIAL"]`
 
       - If skylight-roof-ratio is greater than 2.0%, get baseline skylight construction requirement: `if srr_res > 0.02: target_u_factor_res = data_lookup(table_G3_4, climate_zone, "RESIDENTIAL", "SKYLIGHT", "2.1%+", "ASSEMBLY MAX. U")`
 
       - Else, skylight-roof-ratio is 0% to 2.0%, get baseline skylight construction requirement: `else: target_u_factor_res = data_lookup(table_G3_4, climate_zone, "RESIDENTIAL", "SKYLIGHT", "0%-2.0%", "ASSEMBLY MAX. U")`
 
-    - Get skylight-roof-ratio for non-residential type roofs: `srr_nonres = skylight_roof_ratios_dictionary_b[building_segment_b.id]["NON-RESIDENTIAL"]`
+    - Get skylight-roof-ratio for non-residential type roofs: `srr_nonres = scc_skylight_roof_ratios_dictionary[building_b.id]["NON-RESIDENTIAL"]`
 
       - If skylight-roof-ratio is greater than 2.0%, get baseline skylight construction requirement: `if srr_nonres > 0.02: target_u_factor_nonres = data_lookup(table_G3_4, climate_zone, "NON-RESIDENTIAL", "SKYLIGHT", "2.1%+", "ASSEMBLY MAX. U")`
 
       - Else, skylight-roof-ratio is 0% to 2.0%, get baseline skylight construction requirement: `else: target_u_factor_nonres = data_lookup(table_G3_4, climate_zone, "NON-RESIDENTIAL", "SKYLIGHT", "0%-2.0%", "ASSEMBLY MAX. U")`
 
-  - Get skylight-roof-ratio for semi-exterior type roofs: `srr_semi_exterior = skylight_roof_ratios_dictionary_b[building_segment_b.id]["SEMI-EXTERIOR"]`
+  - Get skylight-roof-ratio for semi-exterior type roofs: `srr_semi_exterior = scc_skylight_roof_ratios_dictionary[building_b.id]["SEMI-EXTERIOR"]`
 
     - If skylight-roof-ratio is greater than 2.0%, get baseline skylight construction requirement: `if srr_semi_exterior > 0.02: target_u_factor_semiheated = data_lookup(table_G3_4, climate_zone, "SEMIHEATED, "SKYLIGHT", "2.1%+", "ASSEMBLY MAX. U")`
 
     - Else, skylight-roof-ratio is 0% to 2.0%, get baseline skylight construction requirement: `else: target_u_factor_semiheated = data_lookup(table_G3_4, climate_zone, "SEMIHEATED", "SKYLIGHT", "0%-2.0%", "ASSEMBLY MAX. U")`
 
-  - For each zone in building segment: `for zone_b in building_segment_b...zones:`
+  - For each zone in building: `for zone_b in building_b...zones:`
 
     - For each surface in zone: `for surface_b in zone_b.surfaces:`
 
-      - Check if surface is roof and has subsurface: `if ( get_opaque_surface_type(surface_b) == "ROOF"  ) AND ( surface_b.subsurfaces ):`
+      - Check if surface is roof with subsurface and is regulated: `if ( get_opaque_surface_type(surface_b) == "ROOF"  ) AND ( surface_b.subsurfaces ) AND ( scc_dictionary_b[surface_b.id] != "UNREGULATED" ):`
 
         - For each subsurface in roof: `for subsurface_b in surface_b.subsurfaces:`
 
-          **Rule Assertion:**
+          - Check if subsurface is door and glazed area is more than 50% of the total door area, or subsurface is not door: `if (( subsurface_b.classification == "DOOR" ) AND ( subsurface_b.glazed_area > subsurface_b.opaque_area )) OR ( subsurface_b.classification != "DOOR" ):`
 
-          - Case 1； If roof is exterior mixed type and the baseline requirements for residential and non-residential type U-factor for different skylight-roof-ratio are different: `if manual_review_flag AND ( scc_dictionary_b[surface_b] == "EXTERIOR MIXED" ): CAUTION and raise_warning "MANUAL REVIEW IS REQUESTED TO VERIFY SKYLIGHT MEETS U-FACTOR REQUIREMENT AS PER TABLE G3.4."`
+            **Rule Assertion:**
 
-          - Case 2: Else if roof is exterior mixed type and skylight U-factor matches Table G3.4 requirement: `else if ( scc_dictionary_b[surface_b] == "EXTERIOR MIXED" ) AND ( subsurface_b.u_factor == target_u_factor_res ): PASS`
+            - Case 1； For each subsurface, if roof is exterior mixed type and the baseline requirements for residential and non-residential type U-factor for different skylight-roof-ratio are different: `if manual_review_flag AND ( scc_dictionary_b[surface_b] == "EXTERIOR MIXED" ): CAUTION and raise_warning "MANUAL REVIEW IS REQUESTED TO VERIFY SKYLIGHT MEETS U-FACTOR REQUIREMENT AS PER TABLE G3.4."`
 
-          - Case 3: Else if roof is exterior residential type and skylight U-factor matches Table G3.4 requirement: `else if ( scc_dictionary_b[surface_b] == "EXTERIOR RESIDENTIAL" ) AND ( subsurface_b.u_factor == target_u_factor_res ): PASS`
+            - Case 2: Else if roof is exterior mixed type and skylight U-factor matches Table G3.4 requirement: `else if ( scc_dictionary_b[surface_b] == "EXTERIOR MIXED" ) AND ( subsurface_b.u_factor == target_u_factor_mixed ): PASS`
 
-          - Case 4: Else if roof is exterior non-residential type and skylight U-factor matches Table G3.4 requirement: `else if ( scc_dictionary_b[surface_b] == "EXTERIOR NON-RESIDENTIAL" ) AND ( subsurface_b.u_factor == target_u_factor_nonres ): PASS`
+            - Case 3: Else if roof is exterior residential type and skylight U-factor matches Table G3.4 requirement: `else if ( scc_dictionary_b[surface_b] == "EXTERIOR RESIDENTIAL" ) AND ( subsurface_b.u_factor == target_u_factor_res ): PASS`
 
-          - Case 5: Else if roof is semi-exterior type and skylight U-factor matches Table G3.4 requirement: `else if ( scc_dictionary_b[surface_b] == "SEMI-EXETERIOR" ) AND ( subsurface_b.u_factor == target_u_factor_semiheated ): PASS`
+            - Case 4: Else if roof is exterior non-residential type and skylight U-factor matches Table G3.4 requirement: `else if ( scc_dictionary_b[surface_b] == "EXTERIOR NON-RESIDENTIAL" ) AND ( subsurface_b.u_factor == target_u_factor_nonres ): PASS`
 
-          - Case 6: Else: `else: FAIL`
+            - Case 5: Else if roof is semi-exterior type and skylight U-factor matches Table G3.4 requirement: `else if ( scc_dictionary_b[surface_b] == "SEMI-EXTERIOR" ) AND ( subsurface_b.u_factor == target_u_factor_semiheated ): PASS`
+
+            - Case 6: Else: `else: FAIL`
 
 **[Back](../_toc.md)**
