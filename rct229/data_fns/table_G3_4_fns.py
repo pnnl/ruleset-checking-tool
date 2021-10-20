@@ -48,20 +48,16 @@ def table_G34_lookup(climate_zone, surface_conditioning_category, opaque_surface
 
     Parameters
     ----------
-    construction : str
-        One of the construction_properties enumeration values
-    standards_construction_type : str
-        One of the construction_properties enumeration values
-    building_category : str
-        One of the construction_properties enumeration values
-    climate_zone_set : str
-        One of the construction_properties enumeration values
+    climate_zone : str
+        One of the ClimateZone2019ASHRAE901 enumeration values
+    surface_conditioning_category : str
+        One of the ashrae_90_1_prm_2019.construction_properties enumeration values
+    opaque_surface_type : str
+        One of the ashrae_90_1_prm_2019.construction_properties enumeration values
     Returns
     -------
     dict
-        { assembly_maximum_u_value: Float - The assembly maximum u value given by table G3.4-1
-        assembly_maximum_f_factor: Float - The assembly maximum f factor given by table G3.4-1
-        assembly_maximum_c_factor:  Float - The assembly maximum c factor given by table G3.4-1 }
+        { assembly_maximum_u_value: Float - The assembly maximum u value given by table G3.4-1 }
 
     """
     climate_zone_set = CLIMATE_ZONE_ENUMERATION_TO_CLIMATE_ZONE_MAP[climate_zone]
