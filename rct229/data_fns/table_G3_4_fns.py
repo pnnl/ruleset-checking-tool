@@ -43,8 +43,8 @@ CLIMATE_ZONE_ENUMERATION_TO_CLIMATE_ZONE_MAP = {
 
 
 def table_G34_lookup(climate_zone, surface_conditioning_category, opaque_surface_type):
-    """Returns the assembly maxiumum values for a given construction, standard construction type,
-     building category and climate zone as required by ASHRAE 90.1 Table G3.4-1 through G3.4-8
+    """Returns the assembly maxiumum values for a given climate zone set, surface conditoning category
+     and opaque sruface type as required by ASHRAE 90.1 Table G3.4-1 through G3.4-8
 
     Parameters
     ----------
