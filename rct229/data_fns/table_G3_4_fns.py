@@ -1,16 +1,15 @@
-import rct229
 from rct229.data import data
 from rct229.data_fns.table_utils import find_osstd_table_entry
 from rct229.schema.config import ureg
 
-# This dictionary maps the opaque surface type to construction enumerations to
-# the corresponding construction values in ashrae_90_1_prm_2019.construction_properties.json
+# This dictionary maps the opaque surface types that are returned from get_opaque_surface_type()
+# to the corresponding construction values in ashrae_90_1_prm_2019.construction_properties.json
 OPAQUE_SURFACE_TYPE_TO_CONSTRUCTION_MAP = {
     "ABOVE-GRADE WALL": "PRM Steel Framed Exterior Wall",
 }
 
-# This dictionary maps the surface conditioning category enumerations to
-# the corresponding building category values in ashrae_90_1_prm_2019.construction_properties.json
+# This dictionary maps surface conditioning categories as returned from get_surface_conditioning_category_dict()
+# to the corresponding building category values in ashrae_90_1_prm_2019.construction_properties.json
 SURFACE_CONDITIONING_CATEGORY_TO_BUILDING_CATEGORY_MAP = {
     "EXTERIOR RESIDENTIAL": "Residential",
     "EXTERIOR NON-RESIDENTIAL": "Nonresidential",
@@ -19,7 +18,7 @@ SURFACE_CONDITIONING_CATEGORY_TO_BUILDING_CATEGORY_MAP = {
 
 # This dictionary maps the ClimateZone2019ASHRAE901 enumerations to
 # the corresponding climate zone set values  in the OSSTD file ashrae_90_1_prm_2019.construction_properties.json
-CLIMATE_ZONE_ENUMERATION_TO_CLIMATE_ZONE_MAP = {
+CLIMATE_ZONE_ENUMERATION_TO_CLIMATE_ZONE_SET_MAP = {
     "CZ0A": "ClimateZone 0",
     "CZ0B": "ClimateZone 0",
     "CZ1A": "ClimateZone 1",
@@ -43,7 +42,7 @@ CLIMATE_ZONE_ENUMERATION_TO_CLIMATE_ZONE_MAP = {
 
 
 def table_G34_lookup(climate_zone, surface_conditioning_category, opaque_surface_type):
-    """Returns the assembly maxiumum values for a given climate zone set, surface conditoning category
+    """Returns the assembly maxiumum values for a given climate zone, surface conditoning category
      and opaque sruface type as required by ASHRAE 90.1 Table G3.4-1 through G3.4-8
 
     Parameters
@@ -51,16 +50,16 @@ def table_G34_lookup(climate_zone, surface_conditioning_category, opaque_surface
     climate_zone : str
         One of the ClimateZone2019ASHRAE901 enumeration values
     surface_conditioning_category : str
-        One of the ashrae_90_1_prm_2019.construction_properties enumeration values
+        A surface conditioning category as returned by get_surface_conditioning_category_dict()
     opaque_surface_type : str
-        One of the ashrae_90_1_prm_2019.construction_properties enumeration values
+        An opaque surface type as returned by get_opaque_surfact_type()
     Returns
     -------
     dict
         { assembly_maximum_u_value: Float - The assembly maximum u value given by table G3.4-1 }
 
     """
-    climate_zone_set = CLIMATE_ZONE_ENUMERATION_TO_CLIMATE_ZONE_MAP[climate_zone]
+    climate_zone_set = CLIMATE_ZONE_ENUMERATION_TO_CLIMATE_ZONE_SET_MAP[climate_zone]
     building_category = SURFACE_CONDITIONING_CATEGORY_TO_BUILDING_CATEGORY_MAP[
         surface_conditioning_category
     ]
@@ -75,5 +74,7 @@ def table_G34_lookup(climate_zone, surface_conditioning_category, opaque_surface
         osstd_table=data["ashrae_90_1_prm_2019.construction_properties"],
     )
 
-    u_value = osstd_entry["assembly_maximum_u_value"]
+    assembly_maximum = osstd_entry["assembly_maximum_u_value"]
+    u_value = assembly_maximum * ureg("Btu / (hr * ft2 * delta_degF)")
+
     return {"u_value": u_value}
