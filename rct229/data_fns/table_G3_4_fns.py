@@ -56,7 +56,7 @@ def table_G34_lookup(climate_zone, surface_conditioning_category, opaque_surface
     Returns
     -------
     dict
-        { assembly_maximum_u_value: Float - The assembly maximum u value given by table G3.4-1 }
+        { assembly_maximum_u_value: Quantity - The assembly maximum u value given by Table G3.4-1 }
 
     """
     climate_zone_set = CLIMATE_ZONE_ENUMERATION_TO_CLIMATE_ZONE_SET_MAP[climate_zone]
@@ -74,7 +74,7 @@ def table_G34_lookup(climate_zone, surface_conditioning_category, opaque_surface
         osstd_table=data["ashrae_90_1_prm_2019.construction_properties"],
     )
 
-    assembly_maximum = osstd_entry["assembly_maximum_u_value"]
-    u_value = assembly_maximum * ureg("Btu / (hr * ft2 * delta_degF)")
+    ip_u_value_units = osstd_entry["assembly_maximum_u_value"]
+    u_value = ip_u_value_units * ureg("Btu / (hr * ft2 * delta_degF)")
 
     return {"u_value": u_value}
