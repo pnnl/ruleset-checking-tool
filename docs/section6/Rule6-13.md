@@ -36,9 +36,9 @@
 
           - Get normalized space lighting schedule for B_RMR: `normalized_schedule_b = normalize_space_schedules(space_b.interior_lighting)`  
 
-        - Get normalized space lighting schedule: `normalized_schedule_b = normalize_space_schedules(space_p.interior_lighting)`
+        - Get normalized space lighting schedule: `normalized_schedule_p = normalize_space_schedules(space_p.interior_lighting)`
 
-        - Compare lighting schedules in P_RMR and B_RMR: `schedule_comparison_result = compare_schedules(normalized_schedule_b, normalized_schedule_b, building_open_schedule_p, adjusted_reduction_factor_p)`  
+        - Compare lighting schedules in P_RMR and B_RMR: `schedule_comparison_result = compare_schedules(normalized_schedule_p, normalized_schedule_b, building_open_schedule_p, adjusted_reduction_factor_p)`  
 
           **Rule Assertion:**
 
