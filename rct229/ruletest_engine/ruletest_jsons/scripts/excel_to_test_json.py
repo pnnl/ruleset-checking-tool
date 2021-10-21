@@ -18,20 +18,20 @@ sheet_name = "TCDs"
 # --------------------------------------SCRIPT STARTS--------------------------------------
 
 
-def get_rmr_json_path_from_key_list(key_list):
+def get_rmr_key_list_from_tcd_key_list(tcd_key_list):
 
-    """Ingests a python list of 'keys' from the test JSON spreadsheet and returns the ASHRAE229 schema JSON path
-    associated with it. For example ['rmr_transformations', 'user', 'schedules[0]', 'hourly_values'] would return:
-    'schedules/hourly_values'.
+    """Ingests a python list of 'keys' from the test JSON spreadsheet and returns the relevant ASHRAE229 key list
+    Without the extra specifications used in TCD spreadsheet.
+    For example ['rmr_transformations', 'user', 'schedules[0]', 'hourly_values'] -> ['schedules', 'hourly_values'].
 
      Parameters
      ----------
-     key_list : list
+     tcd_key_list : list
          List of strings representing keys used to build the ruletest JSON, from Ruletest spreadsheet
 
      Returns
     -------
-    json_path: str
+    rmr_schema_key_list: list
         JSON path string (as understood by this script) representing the key_list's ASHRAE229 JSON path.
 
     """
@@ -39,20 +39,21 @@ def get_rmr_json_path_from_key_list(key_list):
     # Get index for the beginning of the RMR JSON.
     # Order is always 'rmr_transformations' or 'rmr_template', <RMR_TYPE>, <RMR_JSON>, therefore add 2 index to
     # either 'rmr_transformation' or 'rmr_template' indices
-    if "rmr_transformations" in key_list:
-        begin_rmr_index = key_list.index("rmr_transformations") + 2
+    if "rmr_transformations" in tcd_key_list:
+        begin_rmr_index = tcd_key_list.index("rmr_transformations") + 2
     else:
-        begin_rmr_index = key_list.index("rmr_template") + 2
+        begin_rmr_index = tcd_key_list.index("rmr_template") + 2
 
-    final_index = len(key_list)
+    final_index = len(tcd_key_list)
 
     # put together all RMR keys together to form a JSON path
-    json_path = "/".join(key_list[begin_rmr_index:final_index])
+    rmr_schema_key_list = tcd_key_list[begin_rmr_index:final_index]
 
     # Remove index references
-    json_path = clean_json_path(json_path)
+    for index, unclean_key in enumerate(rmr_schema_key_list):
+        rmr_schema_key_list[index] = remove_index_references_from_key(unclean_key)
 
-    return json_path
+    return rmr_schema_key_list
 
 
 def convert_units_from_tcd_to_rmr_schema(tcd_value, tcd_units, key_list):
@@ -81,26 +82,12 @@ def convert_units_from_tcd_to_rmr_schema(tcd_value, tcd_units, key_list):
 
     """
 
-    # Build JSON path from key list and remove list indices
-    # Example: ['rmr_transformations', 'user', 'schedules[0]', 'hourly_values'] => 'schedules/hourly_values'.
-    rmr_json_path = get_rmr_json_path_from_key_list(key_list)
+    # Clean TCD units to something pint can understand
+    tcd_units = clean_schema_units(tcd_units)
 
-    # Re-concatenate JSON path into a list without index references
-    # Example: 'schedules/hourly_values' => ['schedules', 'hourly_values']
-    rmr_schema_key_list = rmr_json_path.split("/")
-
-    # Extract the schema's required units for this given JSON path
-    schema_units = find_schema_unit_for_json_path(rmr_schema_key_list)
-
-    # If no units are returned, raise an error
-    if schema_units == None:
-        raise ValueError(
-            f"OUTCOME: Could not find associated units for JSON path: {rmr_json_path}"
-        )
-
-    # Take the schema unit's string from the RMR JSON schema and convert it to something Pint will understand
-    # Example: W/K-m2 --> W/(K*m2)
-    schema_units = clean_schema_units(schema_units)
+    # Take the TCD's list of keys and return RMR JSON schema's unit definition for the given JSON path
+    # Example: 'transformers[0]/capacity' => 'V*A'
+    rmr_pint_units = get_schema_units_from_tcd_json_path(key_list)
 
     # Define TCD quantity with units in pint (convert to float if necessary)
     if isinstance(tcd_value, str):
@@ -109,11 +96,50 @@ def convert_units_from_tcd_to_rmr_schema(tcd_value, tcd_units, key_list):
     tcd_quantity = tcd_value * ureg(tcd_units)
 
     # Convert TCD quantity to units required by schema
-    rmr_quantity = tcd_quantity.to(schema_units)
+    rmr_quantity = tcd_quantity.to(rmr_pint_units)
 
     rmr_value = rmr_quantity.magnitude
 
     return rmr_value
+
+
+def get_schema_units_from_tcd_json_path(tcd_key_list):
+    """Ingests a key_list that follows the TCD spreadsheet convention and returns the RMR schema units for it.
+
+    Parameters
+    ----------
+
+    tcd_key_list : list
+        List of strings representing keys used to build the ruletest JSON using the convention used in TCD spreadsheets.
+        This gets parsed to retrieve the ASHRAE229 schema's unit.
+        For example: ['transformers[0], 'capacity']
+
+    Returns
+    -------
+    pint_units: str
+        The ASHRAE229 schema's unit for the given tcd_key_list, cleaned to be understandable by Pint
+        For example: ['transformers[0], 'capacity'] => 'V*A'
+
+    """
+
+    # Build JSON path from key list and remove list indices
+    # Example: ['rmr_transformations', 'user', 'schedules[0]', 'hourly_values'] => '['schedules', 'hourly_values']
+    rmr_schema_key_list = get_rmr_key_list_from_tcd_key_list(tcd_key_list)
+
+    # Extract the schema's required units for this given JSON path
+    rmr_schema_units = find_schema_unit_for_json_path(rmr_schema_key_list)
+
+    # If no units are returned, raise an error
+    if rmr_schema_units == None:
+        raise ValueError(
+            f"OUTCOME: Could not find associated units for JSON path: {tcd_key_list}"
+        )
+
+    # Take the schema unit's string from the RMR JSON schema and convert it to something Pint will understand
+    # Example: W/K-m2 --> W/(K*m2)
+    pint_units = clean_schema_units(rmr_schema_units)
+
+    return pint_units
 
 
 def create_test_json_from_excel(spreadsheet_name, sheet_name, json_name):
@@ -136,9 +162,6 @@ def create_test_json_from_excel(spreadsheet_name, sheet_name, json_name):
         The name of the resulting ruletest JSON file
 
     """
-
-    # Set pint translator
-    # ureg = get_pint_unit_registry()
 
     file_dir = os.path.dirname(__file__)
 
@@ -169,10 +192,15 @@ def create_test_json_from_excel(spreadsheet_name, sheet_name, json_name):
     # Get value columns (i.e. not key columns) from spreadsheet
     rules_df = master_df.drop(keys, axis=1)
 
-    # If units column exist, drop it too and set as a separate list
+    # If units columns exist, drop them too and set as a separate lists
     if "units" in headers:
+
+        # Initialize both units and unit_types list
         units_list = master_df["units"].values
+
+        # Drop unit lists from rules_df
         rules_df = rules_df.drop("units", axis=1)
+        rules_df = rules_df.drop("unit_type", axis=1)
 
     # Initiailize dictionary for JSON
     json_dict = {}
@@ -286,4 +314,170 @@ def create_test_json_from_excel(spreadsheet_name, sheet_name, json_name):
         print("JSON complete and written to file: " + json_name)
 
 
+def update_unit_convention_record(spreadsheet_name, sheet_name):
+    """Parses a ruletest JSON spreadsheet for units and unit types to compare against existing unit_conventions.json
+    records. This JSON keeps record of existing display names for various unit types throughout the ASHRAE229 JSON
+    schema.
+    Example: For a unit_type == area, the TCDs might use 'ft2' while the RMR schema uses 'm2'. This would get recorded
+    in unit_conventions.json for other scripts to use when displaying reports.
+
+    Parameters
+    ----------
+
+    spreadsheet_name : str
+
+        Name of the ruletest spreadsheet in ./rct229/ruletest_engine/ruletest_jsons directory/ruletest_spreadsheets
+
+    sheet_name : str
+
+        The sheet in the spreadsheet with the ruletest information, typically 'TCDs'
+
+    """
+
+    file_dir = os.path.dirname(__file__)
+
+    # Define test spreadsheet path
+    spreadsheet_dir = "ruletest_spreadsheets"
+    spreadsheet_path = os.path.join(file_dir, "..", spreadsheet_dir, spreadsheet_name)
+
+    # Define output json file path
+    json_name = "unit_conventions.json"
+    unit_def_json_path = os.path.join(
+        file_dir, "..", "..", "..", "schema", "resources", json_name
+    )
+
+    # Pull out TCDs from spreadsheet
+    master_df = pd.read_excel(spreadsheet_path, sheet_name=sheet_name)
+
+    # Get headers to begin separating dictionary 'keys' and 'unit' columns
+    headers = master_df.columns
+
+    # Initialize column lists
+    relevant_columns = []
+    keys = []
+
+    # If header has substring 'unit' or 'key', append it to list of important columns. These columns have information
+    # necessary for mapping units from the TCD and RMR to the unit convention JSON
+    for header in headers:
+        if "unit" in header:
+            relevant_columns.append(header)
+        elif "key" in header:
+            keys.append(header)
+
+    # Combine units and keys column to get relevant columns from overall TCD spreadsheet
+    relevant_columns.extend(keys)
+
+    # Copy columns from the spreadsheet that correspond to units or keys
+    units_df = master_df[relevant_columns].copy()
+    keys_df = master_df[keys].copy()
+
+    # Initialize unit definition dictionary
+    with open(unit_def_json_path) as f:
+        unit_def_dict = json.load(f)
+
+    # Iterate row by row through units DF (not ideal by Pandas standards but these are small data frames)
+    for index, row in units_df.iterrows():
+
+        # Grab row values
+        unit_type = row["unit_type"]
+        tcd_unit = row["units"]
+
+        # Skip rows with no unit definition
+        if not isinstance(unit_type, str):
+            if math.isnan(unit_type):
+                continue
+
+        tcd_key = "ip"
+        rmr_key = "si"
+
+        requires_update = False
+
+        tcd_key_list = []
+
+        # Get list of keys using TCD convention (e.g., ['transformers[0]', 'capacity'] )
+        for key in keys:
+            key_value = keys_df[key][index]
+            if isinstance(key_value, str):
+
+                # If the key includes a JSON_PATH, parse for the short hand enumeration name and adjust the key list
+                if "JSON_PATH" in key_value:
+                    # Inject elements to key_list based on shorthand JSON_PATH enumeration
+                    # (e.g., JSON_PATH:spaces = ["buildings","building_segments","thermal_blocks","zones","spaces"])
+                    inject_json_path_from_enumeration(tcd_key_list, key_value)
+
+                else:
+                    tcd_key_list.append(key_value)
+
+        # Build JSON path from key list and remove list indices
+        # Example: ['rmr_transformations', 'user', 'schedules[0]', 'hourly_values'] => '['schedules', 'hourly_values']
+        rmr_schema_key_list = get_rmr_key_list_from_tcd_key_list(tcd_key_list)
+
+        # Extract the schema's required units for this given JSON path
+        rmr_schema_units = find_schema_unit_for_json_path(rmr_schema_key_list)
+
+        # If no units are returned, raise an error
+        if rmr_schema_units == None:
+            raise ValueError(
+                f"OUTCOME: Could not find associated units for JSON path: {tcd_key_list}"
+            )
+
+        # Check if existing JSON has values in IP and SI for this unit type and compare to the value extracted from
+        # this TCD spreadsheet. Update the unit conventions if not, raise warning if there's a conflict with an existing
+        # unit convention type
+        if unit_type in unit_def_dict[tcd_key]:
+
+            # Get existing definition
+            existing_unit = unit_def_dict[tcd_key][unit_type]
+
+            # Compare against TCD spreadsheet's units
+            if tcd_unit != existing_unit:
+                raise ValueError(
+                    f"Existing {tcd_key} unit definition for unit type '{unit_type}' is '{existing_unit}' but new TCD"
+                    f" spreadsheet is trying to set it to '{tcd_unit}'. Manually erase existing record to"
+                    f" update this unit type definition"
+                )
+
+        # If no record of unit_type in unit definition dictionary, add it
+        else:
+            unit_def_dict[tcd_key][unit_type] = tcd_unit
+            requires_update = True
+
+        # Update RMR units too
+        if unit_type in unit_def_dict[rmr_key]:
+
+            # Get existing definition
+            existing_unit = unit_def_dict[rmr_key][unit_type]
+
+            # Compare against TCD spreadsheet's units
+            if rmr_schema_units != existing_unit:
+                raise ValueError(
+                    f"Existing {rmr_key} unit definition for unit type '{unit_type}' is '{existing_unit}' but new TCD"
+                    f" spreadsheet is trying to set it to '{rmr_schema_units}'. Manually erase existing record to"
+                    f" update this unit type definition"
+                )
+
+        # If no record of unit_type in unit definition dictionary, add it
+        else:
+            unit_def_dict[rmr_key][unit_type] = rmr_schema_units
+            requires_update = True
+
+    if requires_update:
+
+        # Dump JSON to string for writing
+        json_string = json.dumps(unit_def_dict, indent=4)
+
+        # Write out updated unit definition JSON
+        with open(unit_def_json_path, "w") as json_file:
+            json_file.write(json_string)
+            print("JSON complete and written to file: " + json_name)
+    else:
+        print("No changes necessary for: " + json_name)
+
+
+# Create a test JSON for a given ruletest spreadsheet
 create_test_json_from_excel(spreadsheet_name, sheet_name, json_name)
+
+# Parse ruletest spreadsheet for unit types and update the unit conventions in unit_convention.json for:
+# -RMR (typically SI)
+# -Rule Tests (typically IP)
+update_unit_convention_record(spreadsheet_name, sheet_name)
