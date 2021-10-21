@@ -23,25 +23,23 @@
 
 ## Rule Logic:  
 
-- **Applicability Check 1:** `if sum(space.floor_area for zone.space in P_RMR) < 5000:`
+- **Applicability Check 1:** `if sum(space.floor_area for P_RMR...spaces) < 5000:`
 
 - For each space in the Proposed model: `space_p in P_RMR...spaces:`
 
   - Get matching space from Baseline RMR: `space_b = match_data_element(B_RMR, Spaces, space_p.name)`
 
-    - Get interior lighting in space: `interior_lighting_b =  space_b.interior_lighting`
-
-    - Get multiplier schedule for lighting: `schedule_b = interior_lighting_b.lighting_multiplier_schedule`
-
+    - Get normalized space lighting schedule for B_RMR: `normalized_schedule_b = normalize_space_schedules(space_b.interior_lighting)`
+  
   - For each interior lighting in space: `for interior_lighting_p in space_p.interior_lighting:`
 
     - Get multiplier schedule for lighting: `schedule_p = interior_lighting_p.lighting_multiplier_schedule`
 
     - Check if lighting has occupancy control: `if interior_lighting_p.occupancy_control_type != "NONE":`
 
-      - Compare lighting schedule in P_RMR with 90% of lighting schedule in B_RMR: `compare_schedules_result_dictionary = compare_schedules(schedule_p, schedule_b, always_2_schedule, 0.9)`
+      - Compare lighting schedule in P_RMR with 90% of lighting schedule in B_RMR: `compare_schedules_result_dictionary = compare_schedules(schedule_p, normalized_schedule_b, always_2_schedule, 0.9)`
 
-    - Else, lighting does not have occupancy control, compare lighting schedule in P_RMR with that in B_RMR: `else: compare_schedules_result_dictionary = compare_schedules(schedule_p, schedule_b, always_1_schedule, 1)`
+    - Else, lighting does not have occupancy control, compare lighting schedule in P_RMR with that in B_RMR: `else: compare_schedules_result_dictionary = compare_schedules(schedule_p, normalized_schedule_b, always_1_schedule, 1)`
 
       **Rule Assertion:**
 
