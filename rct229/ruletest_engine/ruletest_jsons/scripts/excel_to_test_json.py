@@ -102,6 +102,7 @@ def convert_units_from_tcd_to_rmr_schema(tcd_value, tcd_units, key_list):
 
     return rmr_value
 
+
 def get_schema_units_from_tcd_json_path(tcd_key_list):
     """Ingests a key_list that follows the TCD spreadsheet convention and returns the RMR schema units for it.
 
@@ -139,6 +140,7 @@ def get_schema_units_from_tcd_json_path(tcd_key_list):
     pint_units = clean_schema_units(rmr_schema_units)
 
     return pint_units
+
 
 def create_test_json_from_excel(spreadsheet_name, sheet_name, json_name):
     """Converts a ruletest JSON spreadsheet into a ruletest JSON. The generated JSON is output to
@@ -311,6 +313,7 @@ def create_test_json_from_excel(spreadsheet_name, sheet_name, json_name):
         json_file.write(json_string)
         print("JSON complete and written to file: " + json_name)
 
+
 def update_unit_convention_record(spreadsheet_name, sheet_name):
     """Parses a ruletest JSON spreadsheet for units and unit types to compare against existing unit_conventions.json
     records. This JSON keeps record of existing display names for various unit types throughout the ASHRAE229 JSON
@@ -339,7 +342,9 @@ def update_unit_convention_record(spreadsheet_name, sheet_name):
 
     # Define output json file path
     json_name = "unit_conventions.json"
-    unit_def_json_path = os.path.join(file_dir, "..", "..", "..", "schema", "resources", json_name)
+    unit_def_json_path = os.path.join(
+        file_dir, "..", "..", "..", "schema", "resources", json_name
+    )
 
     # Pull out TCDs from spreadsheet
     master_df = pd.read_excel(spreadsheet_path, sheet_name=sheet_name)
@@ -374,8 +379,8 @@ def update_unit_convention_record(spreadsheet_name, sheet_name):
     for index, row in units_df.iterrows():
 
         # Grab row values
-        unit_type = row['unit_type']
-        tcd_unit = row['units']
+        unit_type = row["unit_type"]
+        tcd_unit = row["units"]
 
         # Skip rows with no unit definition
         if not isinstance(unit_type, str):
@@ -437,7 +442,6 @@ def update_unit_convention_record(spreadsheet_name, sheet_name):
             unit_def_dict[tcd_key][unit_type] = tcd_unit
             requires_update = True
 
-
         # Update RMR units too
         if unit_type in unit_def_dict[rmr_key]:
 
@@ -468,7 +472,6 @@ def update_unit_convention_record(spreadsheet_name, sheet_name):
             print("JSON complete and written to file: " + json_name)
     else:
         print("No changes necessary for: " + json_name)
-
 
 
 # Create a test JSON for a given ruletest spreadsheet
