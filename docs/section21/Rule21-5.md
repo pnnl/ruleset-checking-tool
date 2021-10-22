@@ -10,7 +10,7 @@
 **Applicability:** All required data elements exist for B_RMR  
 **Applicability Checks:**  
 
-1. Baseline number of HW Loops > 0 and number of boilers in HW loop > 0.  
+1. Baseline system type is 1, 5, 7, 11, or 12
 
 **Manual Check:** None  
 **Evaluation Context:** Each Data Element  
@@ -47,19 +47,18 @@
 
     **Rule Assertion:**
 
-    - Case 1: If total conditioned area under the loop is 15,000sq.ft. or less and if only one boiler in on the loop: ``if ( loop_area_dict[hhw_loop] <= 15000 ) AND ( boilers_array.size == 1 ): PASS`
+    - Case 1: If total conditioned area under the loop is 15,000sq.ft. or less and if only one boiler in on the loop: `if ( loop_area_dict[hhw_loop] <= 15000 ) AND ( boilers_array.size == 1 ): PASS`
 
-    - Case 2: Else if total conditioned area under the loop is more than 15,000sq.ft. and two boilers are on the loop and the two boilers are sized equally: `else if ( loop_area_dict[hhw_loop] > 15000 ) AND ( boilers_array.size == 2 ) AND ( boilers_array[0].design_capacity == boilers_array[1].design_capacity ): PASS`
+    - Case 2: Else if total conditioned area under the loop is more than 15,000sq.ft. and two boilers are on the loop and the two boilers are sized equally: `else if ( loop_area_dict[hhw_loop] > 15000 ) AND ( boilers_array.size == 2 ) AND ( boilers_array[0].rated_capacity == boilers_array[1].rated_capacity ): PASS`
 
     - Case 3: Else: `FAIL`
 
 **Applicability Check:**
 
-1. Rule is applicable if B-RMR is modeled with at least one hot water loop: `if rule_applicability_check: is_applicable = TRUE`
+1. Rule is applicable if B-RMR system type is 1, 5, 7, 11, or 12: `if PLACEHOLDER_AIRSIDE_SYSTEM_RULE-X-XX:`
 
 **[Back](../_toc.md)**
 
 **Notes:**
 
 1. Indirectly conditioned zones does not have HVAC system, and may be adjacent to multiple directly conditioned zones served by different hvac systems. how to assign indirectly conditioned zone area?
-2. Do we need to also check boiler.rated_capacity?
