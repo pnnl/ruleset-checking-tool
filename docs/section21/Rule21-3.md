@@ -10,7 +10,7 @@
 **Applicability:** All required data elements exist for B-RMR  
 **Applicability Checks:**  
 
-1. B-RMR is modeled with heating fluid loop(s)
+1. B-RMR is modeled with heating fluid loop
 
 **Manual Check:** None  
 **Evaluation Context:** Building  
@@ -35,6 +35,6 @@
 
 **Applicability Check:**
 
-1. Rule is applicable if B-RMR is modeled with heating fluid loop(s): `if rule_applicability_check: is_applicable = TRUE`
+1. Rule is applicable if B-RMR is modeled with heating fluid loop: `if rule_applicability_check: is_applicable = TRUE`
 
 **[Back](../_toc.md)**
