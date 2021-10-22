@@ -38,7 +38,3 @@
 1. Rule is applicable if B-RMR is modeled with heating fluid loop(s): `if rule_applicability_check: is_applicable = TRUE`
 
 **[Back](../_toc.md)**
-
-**Note:**
-
-1. Does this apply to "HEATING_AND_COOLING" and "CONDENSER" type loops?
