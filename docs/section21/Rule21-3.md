@@ -10,20 +10,22 @@
 **Applicability:** All required data elements exist for B-RMR  
 **Applicability Checks:**  
 
-1. B-RMR is modeled with heating fluid loop
+1. B-RMR is modeled with at least one air-side system that is Type-1, 5, 7, 11, or 12.
 
 **Manual Check:** None  
 **Evaluation Context:** Building  
 **Data Lookup:** None  
 **Function Call:** None  
 
+**Applicability Check:**
+
+1. Rule is applicable if B-RMR is modeled with at least one air-side system that is Type-1, 5, 7, 11, or 12: `if PLACEHOLDER_AIRSIDE_SYSTEM_RULE-X-XX:`
+
 ## Rule Logic:  
 
 - For each fluid loop in B_RMR: `for fluid_loop_b in B_RMR.ASHRAE229.fluid_loops:`
 
   - Check if fluid loop type is heating: `if fluid_loop_b.type == "HEATING":`
-
-    - Set applicability flag: `rule_applicability_check = TRUE`
 
     - Get heating design and control component for fluid loop: `heating_design_and_control_b = fluid_loop_b.heating_design_and_control`
 
@@ -33,8 +35,9 @@
 
       - Case 2: Else: `else: FAIL`
 
-**Applicability Check:**
-
-1. Rule is applicable if B-RMR is modeled with heating fluid loop: `if rule_applicability_check: is_applicable = TRUE`
-
 **[Back](../_toc.md)**
+
+**Note:**
+
+1. Do we need to expand the logic to cover all cases, e.g. if logic cannot find any FluidLoop in B-RMR, or any FluidLoop that is heating type? This needs to be covered in either the logic or in applicability check.
+2. Dependency, B-RMR air-side system that is Type-1, 5, 7, 11, or 12 is modeled correctly with heating hot water plant.
