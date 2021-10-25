@@ -10,7 +10,7 @@
 **Applicability:** All required data elements exist for B_RMR  
 **Applicability Checks:**  
 
-1. Rule is applicable if B-RMR system type is 1, 5, 7, 11, or 12.
+1. B-RMR is modeled with at least one air-side system that is Type-1, 5, 7, 11, or 12
 2. B-RMR is not modeled with purchased heating.
 
 **Manual Check:** None  
@@ -20,7 +20,7 @@
 
 **Applicability Checks:**  
 
-1. Rule is applicable if B-RMR system type is 1, 5, 7, 11, or 12: `if PLACEHOLDER_AIRSIDE_SYSTEM_RULE-X-XX:`
+1. B-RMR is modeled with at least one air-side system that is Type-1, 5, 7, 11, or 12: `if PLACEHOLDER_AIRSIDE_SYSTEM_RULE-X-XX:`
 2. B-RMR is not modeled with purchased heating: `if NOT Rule-21-1:`
 
 ## Rule Logic:  
