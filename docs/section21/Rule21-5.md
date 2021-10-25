@@ -10,7 +10,8 @@
 **Applicability:** All required data elements exist for B_RMR  
 **Applicability Checks:**  
 
-1. Baseline system type is 1, 5, 7, 11, or 12
+1. B-RMR is modeled with at least one air-side system that is Type-1, 5, 7, 11, or 12
+2. B-RMR is not modeled with purchase heating
 
 **Manual Check:** None  
 **Evaluation Context:** Each Data Element  
@@ -19,29 +20,36 @@
 
   1. get_zone_conditioning_category()
 
+**Applicability Check:**
+
+1. B-RMR is modeled with at least one air-side system that is Type-1, 5, 7, 11, or 12: `if PLACEHOLDER_AIRSIDE_SYSTEM_RULE-X-XX:`
+2. B-RMR is not modeled with purchased heating: `if NOT Rule-21-1:`
+
 ## Rule Logic:  
 
 - Get zone conditioning category dictionary for B_RMR: `zcc_b = get_zone_conditioning_category(B_RMR)`
 
 - For each zone in B_RMR: `for zone_b in B_RMR...zones:`
 
-  - Check if zone is conditioned: `if zcc_b[zone_b.id] in ["CONDITIONED RESIDENTIAL", "CONDITIONED NON-RESIDENTIAL", "CONDITIONED MIXED"]:`
+  - Check if zone has HVAC terminals, get zone terminals: `if zone_b.terminals: zone_terminals_b = zone_b.terminals`
 
-    - Get HVAC system serving the zone: `hvac_sys_b =  zone_b.served_by_heating_ventilation_air_conditioning_systems`
+    - For each zone terminal: `for zone_terminal_b in zone_terminals_b:`
 
-      - Check if HVAC System is connected to hot water loop: `if hvac_sys_b.hot_water_loop:`
+      - Check if zone area has not been added to any heating hot water loop: `if NOT zone_flag:`
 
-        - Calculate zone total floor area: `zone_area_b = sum(space.floor_area for space in zone_b.spaces)`
+        - Get HVAC system serving the terminal: `hvac_b = zone_b.terminals.served_by_heating_ventilation_air_conditioning_systems`
 
-        - Add zone total floor area to the total area served by the hot water loop in a dictionary: `loop_area_dict[hvac_sys_b.hot_water_loop] += zone_area_b`
+          - Get heating system from HVAC system: `heating_system_b = hvac_b.heating_system`
 
-- For each conditioning component in B_RMR: `for conditioning_component_b in B_RMR.ASHRAE229.conditioning_components:`
+            - Check if heating system has heating hot water loop, get heating hot water loop: `if heating_system_b.hot_water_loop: hhw_loop_b = heating_system_b.hot_water_loop`
 
-  - Check if conditioning component is boiler, save boiler to loop boiler dictionary: `if conditioning_component_b IS boiler: loop_boiler_dict[conditioning_component_b.loop].append(conditioning_component_b)`
+              - Save zone area to heating hot water loop: `loop_area_dict[hhw_loop_b] += sum(space.floor_area for space in zone_b.spaces)`
 
-- For each hot water loop: `for hhw_loop in loop_area_dict.keys():`
+              - Set zone flag as True to avoid double counting the zone area: `zone_flag == TRUE`
 
-  - Set applicability flag: `rule_applicability_check = TRUE`
+- For each boiler in B_RMR, save boiler to loop boiler dictionary: `for boiler_b in B_RMR.ASHRAE229.boilers: loop_boiler_dict[boiler_b.loop].append(boiler_b)`
+
+- For each heating hot water loop: `for hhw_loop in loop_area_dict.keys():`
 
   - Get all boilers on the loop: `boilers_array = loop_boiler_dict[hhw_loop]`
 
@@ -53,12 +61,10 @@
 
     - Case 3: Else: `FAIL`
 
-**Applicability Check:**
-
-1. Rule is applicable if B-RMR system type is 1, 5, 7, 11, or 12: `if PLACEHOLDER_AIRSIDE_SYSTEM_RULE-X-XX:`
-
 **[Back](../_toc.md)**
 
 **Notes:**
 
 1. Indirectly conditioned zones does not have HVAC system, and may be adjacent to multiple directly conditioned zones served by different hvac systems. how to assign indirectly conditioned zone area?
+2. Dependency, B-RMR air-side system that is Type-1, 5, 7, 11, or 12 is modeled correctly with heating hot water plant (e.g. Line 42) and with only one heating hot water plant per building (e.g. Line 44)
+3. Or we get all air-side system that is Type-1, 5, 7, 11, or 12 and calculate the total area under these systems.
