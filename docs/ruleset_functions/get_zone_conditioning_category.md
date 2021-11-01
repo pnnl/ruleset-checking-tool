@@ -49,7 +49,7 @@ Logic:
 
   - Get lighting building area type for building segment: `lighting_building_area_type = building_segment.lighting_building_area_type`
 
-    - If lighting building area type is residential: `if lighting_building_area_type in ["Dormitory" , "Hotel/Motel", "Multifamily"]: segment_residential_flag = TRUE`  
+    - If lighting building area type is residential: `if lighting_building_area_type in ["DORMITORY" , "HOTEL_MOTEL", "MULTIFAMILY"]: segment_residential_flag = TRUE`  
 
     - Else if lighting building area type is specified, building segment is non-residential: `else if lighting_building_area_type: segment_nonresidential_flag = TRUE`
 
@@ -61,7 +61,7 @@ Logic:
 
         - For each space in zone: `for space in zone.spaces:`  
 
-          - Check if lighting space type is residential, space is classified as residential: `if space.lighting_space_type in ["Dormitory - Living Quarters" , "Fire Station - Sleeping Quarters", "Guest Room", "Dwelling Unit", "Healthcare Facility - Nursery", "Healthcare Facility - Patient Room"]: space_residential_flag = TRUE`  
+          - Check if lighting space type is residential, space is classified as residential: `if space.lighting_space_type in ["DORMITORY_LIVING_QUARTERS" , "FIRE_STATION_SLEEPING_QUARTERS", "GUEST_ROOM", "DWELLING_UNIT", "HEALTHCARE_FACILITY_NURSERY", "HEALTHCARE_FACILITY_PATIENT_ROOM"]: space_residential_flag = TRUE`  
 
           - Else if lighting space type is specified, space is classified as non-residential: `else if space.lighting_space_type: space_nonresidential_flag = TRUE`  
 
