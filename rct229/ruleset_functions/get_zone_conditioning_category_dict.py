@@ -3,9 +3,9 @@ from rct229.schema.config import ureg
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.pint_utils import pint_sum
 
-CAPACITY_THRESHOLD = 3.4 * ureg("Btu/(hr * ft**2)")
+CAPACITY_THRESHOLD = 3.4 * ureg("Btu/(hr * ft2)")
 CRAWLSPACE_HEIGHT_THRESHOLD = 7 * ureg("ft")
-ZERO_UA = 0 * ureg("ft2 * Btu / (hr * ft2 * deltaF)")
+ZERO_UA = 0 * ureg("ft2 * Btu / (hr * ft2 * delta_degF)")
 
 
 def get_zone_conditioning_category_dict(climate_zone, building):
@@ -152,11 +152,10 @@ def get_zone_conditioning_category_dict(climate_zone, building):
                 zone_id in directly_conditioned_zone_ids
                 or zone_id in indirectly_conditioned_zone_ids
             ):
-                # Set zone_has_residential_spaces and zone_has_nonresidential_spaces flags
+                # Determine zone_has_residential_spaces and zone_has_nonresidential_spaces flags
                 zone_has_residential_spaces = False
                 zone_has_nonresidential_spaces = False
                 for space in zone["spaces"]:
-                    # Set space residential and non-residential flags
                     space_lighting_space_type = space.get("lighting_space_type")
                     if space_lighting_space_type in [
                         "DORMITORY_LIVING_QUARTERS",
@@ -185,8 +184,11 @@ def get_zone_conditioning_category_dict(climate_zone, building):
                         zone_id
                     ] = "CONDITIONED NON-RESIDENTIAL"
 
+            # To get here, the zone is neither directly or indirectly conditioned
+            # Check for semi-heated
             elif zone_id in semiheated_zone_ids:
                 zone_conditioning_category_dict[zone_id] = "SEMI-HEATED"
+            # Check for interior parking spaces
             elif any(
                 [
                     lighting_space_type == "PARKING_AREA_INTERIOR"
@@ -197,7 +199,9 @@ def get_zone_conditioning_category_dict(climate_zone, building):
             ):
                 zone_conditioning_category_dict[zone_id] = "UNENCLOSED"
             # Check for crawlspace
-            elif zone["volume"] / sum(find_all("spaces[*].floor_area", zone)) and any(
+            elif zone["volume"] / pint_sum(
+                find_all("spaces[*].floor_area", zone)
+            ) < CRAWLSPACE_HEIGHT_THRESHOLD and any(
                 [
                     get_opaque_surface_type(surface) == "FLOOR"
                     and surface["adjacent_to"] == "GROUND"
@@ -214,7 +218,7 @@ def get_zone_conditioning_category_dict(climate_zone, building):
                 ]
             ):
                 zone_conditioning_category_dict[zone_id] = "UNENCLOSED"
-
+            # Anything else
             else:
                 zone_conditioning_category_dict[zone_id] = "UNCONDITIONED"
 
