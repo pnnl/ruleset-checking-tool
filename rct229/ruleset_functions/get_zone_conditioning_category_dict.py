@@ -5,6 +5,7 @@ from rct229.utils.pint_utils import pint_sum
 
 CAPACITY_THRESHOLD = 3.4 * ureg("Btu/(hr * ft**2)")
 CRAWLSPACE_HEIGHT_THRESHOLD = 7 * ureg("ft")
+ZERO_UA = 0 * ureg("ft2 * Btu / (hr * ft2 * deltaF)")
 
 
 def get_zone_conditioning_category_dict(climate_zone, building):
@@ -29,76 +30,110 @@ def get_zone_conditioning_category_dict(climate_zone, building):
 
     zone_conditioning_category_dict = {}
 
-    directly_conditioned_zone_ids = []
-    semiheated_zone_ids = []
-    indirectly_conditioned_zone_ids = []
+    building_zones = find_all("building_segments[*].zones[*]", building)
+
+    building_hvac_systems = find_all(
+        "building_segments[*].heating_ventilation_air_conditioning_systems[*]",
+        building,
+    )
+    # Create a map from an hvac system's id to the hvac system itself
+    building_hvac_systems_map = dict(
+        [(hvac_system["id"], hvac_system) for hvac_system in building_hvac_systems]
+    )
 
     # Determine eligibility for directly conditioned (heated or cooled) and
     # semi-heated zones
-    for hvac_system in find_all(
-        "building_segments[*].heating_ventilation_air_conditioning_systems[*]", building
-    ):
+    directly_conditioned_zone_ids = []
+    semiheated_zone_ids = []
+    for zone in building_zones:
+        zone_id = zone["id"]
+
+        zone_hvac_systems = [
+            building_hvac_systems_map[hvac_system_id]
+            for hvac_system_id in zone[
+                "served_by_heating_ventilation_air_conditioning_systems"
+            ]
+        ]
+        # Get the first sensible_cool_capacity and heat_capacity from each hvac system
+        zone_sensible_cool_capacities = [
+            hvac_system["sensible_cool_capacity"][0]
+            for hvac_system in zone_hvac_systems
+        ]
+        zone_heat_capacities = [
+            hvac_system["heat_capacity"][0] for hvac_system in zone_hvac_systems
+        ]
+        # Sum the capcities
+        total_zone_sensible_cool_capacity = pint_sum(zone_sensible_cool_capacities)
+        total_zone_heat_capacity = pint_sum(zone_heat_capacities)
+
         if (
-            hvac_system["sensible_cool_capacity"] >= CAPACITY_THRESHOLD
-            or hvac_system["heat_capacity"] >= system_min_heating_output
+            total_zone_sensible_cool_capacity >= CAPACITY_THRESHOLD
+            or total_zone_heat_capacity >= system_min_heating_output
         ):
-            directly_conditioned_zone_ids.extend(hvac_system["zones_served"])
-        elif hvac_system["heat_capacity"] >= CAPACITY_THRESHOLD:
-            semiheated_zone_ids.extend(hvac_system["zones_served"])
+            directly_conditioned_zone_ids.append(zone_id)
+        elif total_zone_heat_capacity >= CAPACITY_THRESHOLD:
+            semiheated_zone_ids.append(zone_id)
 
     # Determine eligibility for indirectly conditioned zones
-    for zone in find_all("building_segments[*].zones[*]", building):
+    indirectly_conditioned_zone_ids = []
+    for zone in building_zones:
         zone_id = zone["id"]
+
         if zone_id not in directly_conditioned_zone_ids:
-            lighting_space_types = find_all("spaces[*].lighting_space_type", zone)
-            any_space_type_in_zone_is_atrium = any(
+            zone_lighting_space_types = find_all("spaces[*].lighting_space_type", zone)
+            any_zone_lighting_space_type_is_atrium = any(
                 [
                     lighting_space_type in ["ATRIUM_LOW_MEDIUM", "ATRIUM_HIGH"]
-                    for lighting_space_type in lighting_space_types
+                    for lighting_space_type in zone_lighting_space_types
                 ]
             )
-            if any_space_type_in_zone_is_atrium:
+            if any_zone_lighting_space_type_is_atrium:
                 indirectly_conditioned_zone_ids.append(zone_id)
             else:
-                directly_conditioned_ua = 0 * ureg("")
-                other_ua = 0
+                zone_directly_conditioned_ua = ZERO_UA
+                zone_other_ua = ZERO_UA
                 for surface in zone["surfaces"]:
-                    if surface["adjacent_to"] == "INTERIOR":
-                        adjacent_zone_id = surface["adjacent_zone_id"]
-                        surface_fenestration_ua = sum(
-                            [
-                                (
-                                    fenestration["glazing_area"]
-                                    + fenestration["opaque_area"]
-                                )
-                                * fenestration["u_factor"]
-                                for fenestration in surface["fenestration_subsurfaces"]
-                            ]
-                        )
-                        surface_fenestration_area = sum(
-                            [
-                                (
-                                    fenestration["glazing_area"]
-                                    + fenestration["opaque_area"]
-                                )
-                            ]
-                        )
-                        surface_construction_ua = (
-                            surface["area"] - surface_fenestration_area
-                        ) * surface["construction"]["u_factor"]
-                        surface_ua = surface_fenestration_ua + surface_construction_ua
+                    # Calculate the UA for the surface
+                    surface_fenestration_ua = sum(
+                        [
+                            (fenestration["glazing_area"] + fenestration["opaque_area"])
+                            * fenestration["u_factor"]
+                            for fenestration in surface["fenestration_subsurfaces"]
+                        ]
+                    )
+                    surface_fenestration_area = sum(
+                        [(fenestration["glazing_area"] + fenestration["opaque_area"])]
+                    )
+                    surface_construction_ua = (
+                        surface["area"] - surface_fenestration_area
+                    ) * surface["construction"]["u_factor"]
+                    surface_ua = surface_fenestration_ua + surface_construction_ua
 
-                        if adjacent_zone_id in directly_conditioned_zone_ids:
-                            directly_conditioned_ua += surface_ua
-                        else:
-                            other_ua += surface_ua
+                    # Add the surface UA to one of the running totals for the zone
+                    # according to whether the surface is adjacent to a directly conditioned
+                    # zone or not
+                    adjacent_zone_id = surface["adjacent_zone"]
+                    if (
+                        surface["adjacent_to"] == "INTERIOR"
+                        and adjacent_zone_id in directly_conditioned_zone_ids
+                    ):
+                        zone_directly_conditioned_ua += surface_ua
+                    else:
+                        zone_other_ua += surface_ua
+
+                # The zone is indirectly conditioned if it is thermally more strongly
+                # connected to directly conditioned zones than to the exterior and other
+                # types of zones
                 if directly_conditioned_ua > other_ua:
                     indirectly_conditioned_zone_ids.append(zone_id)
-
+    # Taking stock:
+    # To this point, we have determined which zones are directly conditioned,
+    # semi-heated, or indirectly conditioned.
+    # Next we determine whether the zone is residential, non-residential, or mixed.
     for building_segment in building["building_segments"]:
-        # Set residential and non-residential flags
-        building_segment_residential_flag = False
-        building_segment_nonresidential_flag = False
+        # Set building_segment_is_residential and building_segment_is_nonresidential flags
+        building_segment_is_residential = False
+        building_segment_is_nonresidential = False
         building_segment_lighting_building_area_type = building_segment.get(
             "lighting_building_area_type"
         )
@@ -107,19 +142,19 @@ def get_zone_conditioning_category_dict(climate_zone, building):
             "HOTEL_MOTEL",
             "MULTIFAMILY",
         ]:
-            building_segment_residential_flag = True
+            building_segment_is_residential = True
         elif building_segment_lighting_building_area_type is not None:
-            building_segment_nonresidential_flag = True
+            building_segment_is_nonresidential = True
 
-        for zone in find_all("thermal_blocks[*].zones[*]", building_segment):
+        for zone in building_segment["zones"]:
             zone_id = zone["id"]
             if (
                 zone_id in directly_conditioned_zone_ids
                 or zone_id in indirectly_conditioned_zone_ids
             ):
-                # Set has_residential_spaces and has_nonresidential_spaces flags
-                has_residential_spaces = False
-                has_nonresidential_spaces = False
+                # Set zone_has_residential_spaces and zone_has_nonresidential_spaces flags
+                zone_has_residential_spaces = False
+                zone_has_nonresidential_spaces = False
                 for space in zone["spaces"]:
                     # Set space residential and non-residential flags
                     space_lighting_space_type = space.get("lighting_space_type")
@@ -131,21 +166,21 @@ def get_zone_conditioning_category_dict(climate_zone, building):
                         "HEALTHCARE_FACILITY_NURSERY",
                         "HEALTHCARE_FACILITY_PATIENT_ROOM",
                     ]:
-                        has_residential_spaces = True
+                        zone_has_residential_spaces = True
                     elif space_lighting_space_type is not None:
-                        has_nonresidential_spaces = True
-                    elif building_segment_residential_flag:
-                        has_residential_spaces = True
-                    elif building_segment_nonresidential_flag:
-                        has_nonresidential_spaces = True
+                        zone_has_nonresidential_spaces = True
+                    elif building_segment_is_residential:
+                        zone_has_residential_spaces = True
+                    elif building_segment_is_nonresidential:
+                        zone_has_nonresidential_spaces = True
                     else:
-                        has_nonresidential_spaces = True
+                        zone_has_nonresidential_spaces = True
 
-                if has_residential_spaces and has_nonresidential_spaces:
+                if zone_has_residential_spaces and zone_has_nonresidential_spaces:
                     zone_conditioning_category_dict[zone_id] = "CONDITIONED MIXED"
-                elif has_residential_spaces:
+                elif zone_has_residential_spaces:
                     zone_conditioning_category_dict[zone_id] = "CONDITIONED RESIDENTIAL"
-                elif has_nonresidential_spaces:
+                elif zone_has_nonresidential_spaces:
                     zone_conditioning_category_dict[
                         zone_id
                     ] = "CONDITIONED NON-RESIDENTIAL"
