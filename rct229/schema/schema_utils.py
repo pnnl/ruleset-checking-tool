@@ -100,14 +100,24 @@ def quantify_rmr(rmr):
     """
     rmr = deepcopy(rmr)
 
-    # Match all rmr items
-    all_rmr_item_matches = parse_jsonpath("$..*").find(rmr)
+    # Match all rmr field items
+    # Note, this does not match array items, but will pass through an array to get to a field item
+    all_rmr_field_item_matches = parse_jsonpath("$..*").find(rmr)
 
-    # Pick out the number rmr item matches
+    # Pick out the number fields and fields that hold an array of numbers
     number_rmr_item_matches = list(
         filter(
-            lambda rmr_item_match: type(rmr_item_match.value) in [int, float],
-            all_rmr_item_matches,
+            lambda rmr_item_match: (type(rmr_item_match.value) in [int, float])
+            or (
+                type(rmr_item_match.value) is list
+                and all(
+                    [
+                        type(list_item) in [int, float]
+                        for list_item in rmr_item_match.value
+                    ]
+                )
+            ),
+            all_rmr_field_item_matches,
         )
     )
 
