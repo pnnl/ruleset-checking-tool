@@ -24,6 +24,7 @@ def clean_schema_units(schema_unit_str):
         The schema_unit_str string value translated to a string value the Pint library unit registry can understand.
 
     """
+    cleaned_unit_str = schema_unit_str
 
     # Clean up dash symbol used with fractional units for pint to understand (e.g. W/K-m2 --> W/(K*m2))
     if "-" in schema_unit_str:
@@ -36,11 +37,19 @@ def clean_schema_units(schema_unit_str):
                 substring_list[i] = "(" + re.sub("-", "*", substring) + ")"
 
         # Put it all together
-        cleaned_unit_str = "".join(substring_list)
+        cleaned_unit_str = "/".join(substring_list)
 
-    # Nothing to clean
-    else:
-        cleaned_unit_str = schema_unit_str
+    # Replace all occurances of K with delta_degK and R with delta_degR
+    # Only match if there isn't a letter before or after
+    cleaned_unit_str = re.sub(
+        r"(?<![a-zA-Z])(K|R)(?![a-zA-Z])", r"delta_deg\1", cleaned_unit_str
+    )
+
+    # Replace all occurances of C with degC and F with degFdelta_degR
+    # Only match if there isn't a letter before or after
+    cleaned_unit_str = re.sub(
+        r"(?<![a-zA-Z])(C|F)(?![a-zA-Z])", r"deg\1", cleaned_unit_str
+    )
 
     return cleaned_unit_str
 
