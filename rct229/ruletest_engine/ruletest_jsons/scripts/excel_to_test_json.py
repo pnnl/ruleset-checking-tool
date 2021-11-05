@@ -11,8 +11,12 @@ from rct229.schema.schema_utils import *
 
 # ---------------------------------------USER INPUTS---------------------------------------
 
-spreadsheet_name = "receptacle_tests.xlsx"
-json_name = "receptacle_tests.json"
+# spreadsheet_name = "lighting_test_draft.xlsx"
+# json_name = "lighting_test_draft.json"
+# sheet_name = "TCDs"
+
+spreadsheet_name = "lighting_tcd_updates.xlsx"
+json_name = "lighting_tcd_update.json"
 sheet_name = "TCDs"
 
 # --------------------------------------SCRIPT STARTS--------------------------------------
@@ -38,11 +42,14 @@ def get_rmr_key_list_from_tcd_key_list(tcd_key_list):
 
     # Get index for the beginning of the RMR JSON.
     # Order is always 'rmr_transformations' or 'rmr_template', <RMR_TYPE>, <RMR_JSON>, therefore add 2 index to
-    # either 'rmr_transformation' or 'rmr_template' indices
+    # either 'rmr_transformation' or 'rmr_template' indices. If neither 'rmr_transformations' or 'rmr_template' is
+    # included, assume it begins at index 1 (typically what you see in the Templates tab)
     if "rmr_transformations" in tcd_key_list:
         begin_rmr_index = tcd_key_list.index("rmr_transformations") + 2
-    else:
+    elif "rmr_template" in tcd_key_list:
         begin_rmr_index = tcd_key_list.index("rmr_template") + 2
+    else:
+        begin_rmr_index = 0
 
     final_index = len(tcd_key_list)
 
@@ -142,6 +149,180 @@ def get_schema_units_from_tcd_json_path(tcd_key_list):
     return pint_units
 
 
+def create_dictionary_from_excel(spreadsheet_name, sheet_name):
+    """Converts a ruletest JSON spreadsheet into a python dictionary. This dictionary can easily be converted
+    to JSON by other scripts
+
+    Parameters
+    ----------
+
+    spreadsheet_name : str
+
+        Name of the ruletest spreadsheet in ./rct229/ruletest_engine/ruletest_jsons directory/ruletest_spreadsheets
+
+    sheet_name : str
+
+        The sheet in the spreadsheet with the ruletest information, typically 'TCDs'
+
+
+    Returns
+    -------
+    json_dict: dict
+        Python dictionary representation of the JSON described ty the ruletest JSON spreadsheet
+
+    """
+
+    file_dir = os.path.dirname(__file__)
+
+    # Define test spreadsheet path
+    spreadsheet_dir = "ruletest_spreadsheets"
+    spreadsheet_path = os.path.join(file_dir, "..", spreadsheet_dir, spreadsheet_name)
+
+    # Pull out TCDs from spreadsheet
+    master_df = pd.read_excel(spreadsheet_path, sheet_name=sheet_name)
+
+    # Get headers to begin separating dictionary 'keys' from 'values'
+    headers = master_df.columns
+
+    # Initialize headers
+    keys = []
+    non_test_related_columns = []
+    unit_headers = ['unit_type', 'units']
+    tcd_note_headers = ['data_group', 'data_element']
+
+    for header in headers:
+        # If header has substring 'key', consider it a key
+        if "key" in header:
+            keys.append(header)
+
+    # Copy columns from the spreadsheet that correspond to keys
+    keys_df = master_df[keys].copy()
+    non_test_related_columns += keys
+
+    # If units columns exist, initialize list of units and add unit headers to non_test_related_columns
+    if "units" in headers:
+        # Initialize both units and unit_types list
+        units_list = master_df["units"].values
+        non_test_related_columns += unit_headers
+
+    # If tcd book keeping columns exist, initialize list of units and add unit headers to non_test_related_columns
+    if "data_group" in headers:
+        non_test_related_columns += tcd_note_headers
+
+    # Get test_id columns (i.e. not keys, unit, or TCD note keeping columns) from spreadsheet
+    tests_df = master_df.drop(non_test_related_columns, axis=1)
+
+    # Initiailize dictionary for JSON
+    json_dict = {}
+
+    # Strings used by triplets
+    triplet_strs = ["user", "proposed", "baseline"]
+
+    # Iterate column by column through values_df
+    for (test_id, columnData) in tests_df.iteritems():
+
+        # List of this rule's column data
+        rule_value_list = columnData.values
+
+        # Initialize a potential json template used to build any of the RMR triplets
+        rmr_template_dict = {}
+
+        # Catch if a test_id is repeated in this tab. We wouldn't want to override an old one
+        if test_id in json_dict:
+            raise ValueError(
+                f"Test ID: `{test_id}` repeated in `{spreadsheet_name}` on tab `{sheet_name}`"
+            )
+
+        # If test_id has not yet been added, add it's content to json_dict
+        else:
+
+            # Iterate through both keys and rule values
+            for row_i in range(rule_value_list.size):
+
+                # row_value = what will be set to the dictionary's key/value pair
+                row_value = rule_value_list[row_i]
+
+                # Skip empty rows
+                if not isinstance(row_value, str):
+                    if math.isnan(row_value):
+                        continue
+
+                # Initialize this row's list of keys (e.g. ['rule-15-1a', 'rmr_transformations', 'user', 'transformer'])
+                key_list = [test_id]
+
+                for key in keys:
+                    key_value = keys_df[key][row_i]
+                    if isinstance(key_value, str):
+
+                        # If the key includes a JSON_PATH, parse for the short hand enumeration name and adjust the key list
+                        if "JSON_PATH" in key_value:
+                            # Inject elements to key_list based on shorthand JSON_PATH enumeration
+                            # (e.g., JSON_PATH:spaces = ["buildings","building_segments","thermal_blocks","zones","spaces"])
+                            inject_json_path_from_enumeration(key_list, key_value)
+
+                        else:
+                            key_list.append(key_value)
+
+                # If this row's value has units, convert to the schema's units first
+                if isinstance(units_list[row_i], str):
+                    # get the json_path from key list ( e.g. simplify ['rule-15-1a', 'rmr_transformations', 'user', 'transformer'])
+                    tcd_units = units_list[row_i]
+
+                    # Convert row_value to match the units found in the ASHRAE 229 schema
+                    row_value = convert_units_from_tcd_to_rmr_schema(
+                        row_value, tcd_units, key_list[1:]
+                    )
+
+                # If this is a template definition, store the template for the RMR transformations
+                if "rmr_template" in key_list:
+
+                    set_nested_dict(rmr_template_dict, key_list, row_value)
+
+                else:
+
+                    # Set nested dictionary
+                    set_nested_dict(json_dict, key_list, row_value)
+
+        # Once all dictionaries are set, check if any of the RMR triplets utilize json templates
+        if rmr_template_dict:
+
+            # If no transformations are defined, set an empty dictionary
+            if "rmr_transformations" not in json_dict[test_id]:
+                json_dict[test_id]["rmr_transformations"] = {}
+
+            # Read in transformations dictionary. This will perturb a template or fully define an RMR (if no template defined)
+            rmr_transformations_dict = json_dict[test_id]["rmr_transformations"]
+
+            # Cycle through user, proposed, and baseline RMRs. Merge the template and their transformations
+            for rmr_string in triplet_strs:
+
+                # If this RMR utilizes the RMR template, merge its RMR transformations into the template and set
+                # the RMR dictionary.
+                if rmr_string in rmr_template_dict[test_id]["rmr_template"]:
+
+                    # If this RMR has no perturbations, set the RMR value equal to the template
+                    if rmr_string not in rmr_transformations_dict:
+                        rmr_transformations_dict[rmr_string] = copy.deepcopy(
+                            rmr_template_dict[test_id]["rmr_template"][
+                                "json_template"
+                            ]
+                        )
+
+                    # If perturbations to the template exist, merge the transformations with the template
+                    else:
+                        rmr_transformations_dict[
+                            rmr_string
+                        ] = merge_nested_dictionary(
+                            copy.deepcopy(
+                                rmr_template_dict[test_id]["rmr_template"][
+                                    "json_template"
+                                ]
+                            ),
+                            rmr_transformations_dict[rmr_string],
+                        )
+
+    return json_dict
+
 def create_test_json_from_excel(spreadsheet_name, sheet_name, json_name):
     """Converts a ruletest JSON spreadsheet into a ruletest JSON. The generated JSON is output to
     ./rct229/ruletest_engine/ruletest_jsons directory
@@ -165,145 +346,10 @@ def create_test_json_from_excel(spreadsheet_name, sheet_name, json_name):
 
     file_dir = os.path.dirname(__file__)
 
-    # Define test spreadsheet path
-    spreadsheet_dir = "ruletest_spreadsheets"
-    spreadsheet_path = os.path.join(file_dir, "..", spreadsheet_dir, spreadsheet_name)
-
     # Define output json file path
     json_file_path = os.path.join(file_dir, "..", json_name)
 
-    # Pull out TCDs from spreadsheet
-    master_df = pd.read_excel(spreadsheet_path, sheet_name=sheet_name)
-
-    # Get headers to begin separating dictionary 'keys' from 'values'
-    headers = master_df.columns
-
-    # Initialize the key headers
-    keys = []
-
-    # If header has substring 'key', consider it a key
-    for header in headers:
-        if "key" in header:
-            keys.append(header)
-
-    # Copy columns from the spreadsheet that correspond to keys
-    keys_df = master_df[keys].copy()
-
-    # Get value columns (i.e. not key columns) from spreadsheet
-    rules_df = master_df.drop(keys, axis=1)
-
-    # If units columns exist, drop them too and set as a separate lists
-    if "units" in headers:
-
-        # Initialize both units and unit_types list
-        units_list = master_df["units"].values
-
-        # Drop unit lists from rules_df
-        rules_df = rules_df.drop("units", axis=1)
-        rules_df = rules_df.drop("unit_type", axis=1)
-
-    # Initiailize dictionary for JSON
-    json_dict = {}
-
-    # Strings used by triplets
-    triplet_strs = ["user", "proposed", "baseline"]
-
-    # Iterate column by column through values_df
-    for (rule_name, columnData) in rules_df.iteritems():
-
-        # List of this rule's column data
-        rule_value_list = columnData.values
-
-        # If rule doesnt exist in dictionary
-        if rule_name not in json_dict:
-
-            # Initialize a potential json template used to build any of the RMR triplets
-            rmr_template_dict = {}
-
-            # Iterate through both keys and rule values
-            for row_i in range(rule_value_list.size):
-
-                # row_value = what will be set to the dictionary's key/value pair
-                row_value = rule_value_list[row_i]
-
-                # Skip empty rows
-                if not isinstance(row_value, str):
-                    if math.isnan(row_value):
-                        continue
-
-                # Initialize this row's list of keys (e.g. ['rule-15-1a', 'rmr_transformations', 'user', 'transformer'])
-                key_list = [rule_name]
-
-                for key in keys:
-                    key_value = keys_df[key][row_i]
-                    if isinstance(key_value, str):
-
-                        # If the key includes a JSON_PATH, parse for the short hand enumeration name and adjust the key list
-                        if "JSON_PATH" in key_value:
-                            # Inject elements to key_list based on shorthand JSON_PATH enumeration
-                            # (e.g., JSON_PATH:spaces = ["buildings","building_segments","thermal_blocks","zones","spaces"])
-                            inject_json_path_from_enumeration(key_list, key_value)
-
-                        else:
-                            key_list.append(key_value)
-
-                # If this row's value has units, convert to the schema's units first
-                if isinstance(units_list[row_i], str):
-                    # get the json_path from key list ( e.g. simplify ['rule-15-1a', 'rmr_transformations', 'user', 'transformer'])
-                    tcd_units = units_list[row_i]
-
-                    # Convert row_value to match the units found in the ASHRAE 229 schema
-                    row_value = convert_units_from_tcd_to_rmr_schema(
-                        row_value, tcd_units, key_list
-                    )
-
-                # If this is a template definition, store the template for the RMR transformations
-                if "rmr_template" in key_list:
-
-                    set_nested_dict(rmr_template_dict, key_list, row_value)
-
-                else:
-
-                    # Set nested dictionary
-                    set_nested_dict(json_dict, key_list, row_value)
-
-            # Once all dictionaries are set, check if any of the RMR triplets utilize json templates
-            if rmr_template_dict:
-
-                # If no transformations are defined, set an empty dictionary
-                if "rmr_transformations" not in json_dict[rule_name]:
-                    json_dict[rule_name]["rmr_transformations"] = {}
-
-                # Read in transformations dictionary. This will perturb a template or fully define an RMR (if no template defined)
-                rmr_transformations_dict = json_dict[rule_name]["rmr_transformations"]
-
-                # Cycle through user, proposed, and baseline RMRs. Merge the template and their transformations
-                for rmr_string in triplet_strs:
-
-                    # If this RMR utilizes the RMR template, merge its RMR transformations into the template and set
-                    # the RMR dictionary.
-                    if rmr_string in rmr_template_dict[rule_name]["rmr_template"]:
-
-                        # If this RMR has no perturbations, set the RMR value equal to the template
-                        if rmr_string not in rmr_transformations_dict:
-                            rmr_transformations_dict[rmr_string] = copy.deepcopy(
-                                rmr_template_dict[rule_name]["rmr_template"][
-                                    "json_template"
-                                ]
-                            )
-
-                        # If perturbations to the template exist, merge the transformations with the template
-                        else:
-                            rmr_transformations_dict[
-                                rmr_string
-                            ] = merge_nested_dictionary(
-                                copy.deepcopy(
-                                    rmr_template_dict[rule_name]["rmr_template"][
-                                        "json_template"
-                                    ]
-                                ),
-                                rmr_transformations_dict[rmr_string],
-                            )
+    json_dict = create_dictionary_from_excel(spreadsheet_name, 'TCDs')
 
     # Dump JSON to string for writing
     json_string = json.dumps(json_dict, indent=4)
