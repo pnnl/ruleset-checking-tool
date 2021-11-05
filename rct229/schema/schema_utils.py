@@ -39,18 +39,6 @@ def clean_schema_units(schema_unit_str):
         # Put it all together
         cleaned_unit_str = "/".join(substring_list)
 
-    # Replace all occurances of K with delta_degK and R with delta_degR
-    # Only match if there isn't a letter before or after
-    cleaned_unit_str = re.sub(
-        r"(?<![a-zA-Z])(K|R)(?![a-zA-Z])", r"delta_deg\1", cleaned_unit_str
-    )
-
-    # Replace all occurances of C with degC and F with degFdelta_degR
-    # Only match if there isn't a letter before or after
-    cleaned_unit_str = re.sub(
-        r"(?<![a-zA-Z])(C|F)(?![a-zA-Z])", r"deg\1", cleaned_unit_str
-    )
-
     return cleaned_unit_str
 
 
