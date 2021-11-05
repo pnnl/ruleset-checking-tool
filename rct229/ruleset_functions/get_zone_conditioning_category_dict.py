@@ -5,7 +5,8 @@ from rct229.utils.pint_utils import pint_sum
 
 CAPACITY_THRESHOLD = 3.4 * ureg("Btu/(hr * ft2)")
 CRAWLSPACE_HEIGHT_THRESHOLD = 7 * ureg("ft")
-ZERO_UA = 0 * ureg("ft2 * Btu / (hr * ft2 * delta_degF)")
+ZERO_AREA = 0 * ureg("ft2")
+ZERO_UA = 0 * ureg("ft2 * Btu / (hr * ft2 * R)")
 
 
 def get_zone_conditioning_category_dict(climate_zone, building):
@@ -62,7 +63,7 @@ def get_zone_conditioning_category_dict(climate_zone, building):
         zone_heat_capacities = [
             hvac_system["heat_capacity"][0] for hvac_system in zone_hvac_systems
         ]
-        # Sum the capcities
+        # Sum the capacities
         total_zone_sensible_cool_capacity = pint_sum(zone_sensible_cool_capacities)
         total_zone_heat_capacity = pint_sum(zone_heat_capacities)
 
@@ -94,20 +95,16 @@ def get_zone_conditioning_category_dict(climate_zone, building):
                 zone_other_ua = ZERO_UA
                 for surface in zone["surfaces"]:
                     # Calculate the UA for the surface
-                    surface_fenestration_ua = sum(
+                    surface_ua = pint_sum(
                         [
-                            (fenestration["glazing_area"] + fenestration["opaque_area"])
-                            * fenestration["u_factor"]
-                            for fenestration in surface["fenestration_subsurfaces"]
+                            subsurface["u_factor"]
+                            * (
+                                subsurface.get("glazed_area", ZERO_AREA)
+                                + subsurface.get("opaque_area", ZERO_AREA)
+                            )
+                            for subsurface in surface["subsurfaces"]
                         ]
                     )
-                    surface_fenestration_area = sum(
-                        [(fenestration["glazing_area"] + fenestration["opaque_area"])]
-                    )
-                    surface_construction_ua = (
-                        surface["area"] - surface_fenestration_area
-                    ) * surface["construction"]["u_factor"]
-                    surface_ua = surface_fenestration_ua + surface_construction_ua
 
                     # Add the surface UA to one of the running totals for the zone
                     # according to whether the surface is adjacent to a directly conditioned
@@ -124,7 +121,7 @@ def get_zone_conditioning_category_dict(climate_zone, building):
                 # The zone is indirectly conditioned if it is thermally more strongly
                 # connected to directly conditioned zones than to the exterior and other
                 # types of zones
-                if directly_conditioned_ua > other_ua:
+                if zone_directly_conditioned_ua > zone_other_ua:
                     indirectly_conditioned_zone_ids.append(zone_id)
     # Taking stock:
     # To this point, we have determined which zones are directly conditioned,
