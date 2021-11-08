@@ -1,4 +1,12 @@
 from rct229.utils.jsonpath_utils import find_all
+from rct229.schema.config import ureg
+
+# Constants
+DEGREES = ureg("degrees")
+MIN_FLOOR_TILT = 120 * DEGREES
+MAX_FLOOR_TILT = 180 * DEGREES
+MIN_ROOF_TILT = 0 * DEGREES
+MAX_ROOF_TILT = 60 * DEGREES
 
 
 def get_opaque_surface_type(surface):
@@ -27,13 +35,13 @@ def get_opaque_surface_type(surface):
     surface_tilt = surface["tilt"]
 
     # Check for roof
-    if 0 <= surface_tilt < 60:
+    if MIN_ROOF_TILT <= surface_tilt < MAX_ROOF_TILT:
         surface_type = "ROOF"
 
     # Check for a floor type
-    elif 120 <= surface_tilt <= 180:
+    elif MIN_FLOOR_TILT <= surface_tilt <= MAX_FLOOR_TILT:
         if (
-            surface["construction"]["has_radiant_heating"]
+            surface["construction"].get("has_radiant_heating")
             and surface["adjacent_to"] == "GROUND"
         ):
             surface_type = "HEATED SLAB-ON-GRADE"
