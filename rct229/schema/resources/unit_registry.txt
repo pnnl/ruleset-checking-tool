@@ -126,8 +126,6 @@ steradian = radian ** 2 = sr
 square_degree = (π / 180) ** 2 * sr = sq_deg = sqdeg
 
 # Length
-yard = 0.9144 * meter = yd = international_yard  # since Jul 1959
-foot = yard / 3 = ft
 
 # Mass
 
