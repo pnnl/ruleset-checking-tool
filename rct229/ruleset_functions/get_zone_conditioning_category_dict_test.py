@@ -1,4 +1,5 @@
 import pytest
+
 from rct229.data_fns.table_3_2_fns import table_3_2_lookup
 from rct229.ruleset_functions.get_zone_conditioning_category_dict import (
     CAPACITY_THRESHOLD as CAPACITY_THRESHOLD_QUANTITY,
@@ -10,8 +11,8 @@ from rct229.ruleset_functions.get_zone_conditioning_category_dict import (
     get_zone_conditioning_category_dict,
 )
 from rct229.schema.config import ureg
-from rct229.schema.validate import schema_validate_rmr
 from rct229.schema.schema_utils import quantify_rmr
+from rct229.schema.validate import schema_validate_rmr
 
 CLIMATE_ZONE = "CZ0A"
 CAPACITY_DELTA = 1

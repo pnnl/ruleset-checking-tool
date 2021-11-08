@@ -1,5 +1,5 @@
-from rct229.utils.jsonpath_utils import find_all
 from rct229.schema.config import ureg
+from rct229.utils.jsonpath_utils import find_all
 
 # Constants
 DEGREES = ureg("degrees")

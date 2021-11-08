@@ -1,8 +1,8 @@
 from rct229.data_fns.table_3_2_fns import table_3_2_lookup
+from rct229.ruleset_functions.get_opaque_surface_type import get_opaque_surface_type
 from rct229.schema.config import ureg
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.pint_utils import pint_sum
-from rct229.ruleset_functions.get_opaque_surface_type import get_opaque_surface_type
 
 CAPACITY_THRESHOLD = 3.4 * ureg("Btu/(hr * ft2)")
 CRAWLSPACE_HEIGHT_THRESHOLD = 7 * ureg("ft")
