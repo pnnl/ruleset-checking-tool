@@ -2,6 +2,7 @@ from rct229.data_fns.table_3_2_fns import table_3_2_lookup
 from rct229.schema.config import ureg
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.pint_utils import pint_sum
+from rct229.ruleset_functions.get_opaque_surface_type import get_opaque_surface_type
 
 CAPACITY_THRESHOLD = 3.4 * ureg("Btu/(hr * ft2)")
 CRAWLSPACE_HEIGHT_THRESHOLD = 7 * ureg("ft")
@@ -68,12 +69,12 @@ def get_zone_conditioning_category_dict(climate_zone, building):
         total_zone_heat_capacity = pint_sum(zone_heat_capacities)
 
         if (
-            total_zone_sensible_cool_capacity >= CAPACITY_THRESHOLD
-            or total_zone_heat_capacity >= system_min_heating_output
+            total_zone_sensible_cool_capacity >= CAPACITY_THRESHOLD  # zone_1_1
+            or total_zone_heat_capacity >= system_min_heating_output  # zone_1_2
         ):
             directly_conditioned_zone_ids.append(zone_id)
         elif total_zone_heat_capacity >= CAPACITY_THRESHOLD:
-            semiheated_zone_ids.append(zone_id)
+            semiheated_zone_ids.append(zone_id)  # zone_1_3
 
     # Determine eligibility for indirectly conditioned zones
     indirectly_conditioned_zone_ids = []
@@ -89,7 +90,7 @@ def get_zone_conditioning_category_dict(climate_zone, building):
                 ]
             )
             if any_zone_lighting_space_type_is_atrium:
-                indirectly_conditioned_zone_ids.append(zone_id)
+                indirectly_conditioned_zone_ids.append(zone_id)  # zone_1_3
             else:
                 zone_directly_conditioned_ua = ZERO_UA
                 zone_other_ua = ZERO_UA
@@ -114,15 +115,15 @@ def get_zone_conditioning_category_dict(climate_zone, building):
                         surface["adjacent_to"] == "INTERIOR"
                         and adjacent_zone_id in directly_conditioned_zone_ids
                     ):
-                        zone_directly_conditioned_ua += surface_ua
+                        zone_directly_conditioned_ua += surface_ua  # zone_1_4
                     else:
-                        zone_other_ua += surface_ua
+                        zone_other_ua += surface_ua  # zone_1_4
 
                 # The zone is indirectly conditioned if it is thermally more strongly
                 # connected to directly conditioned zones than to the exterior and other
                 # types of zones
                 if zone_directly_conditioned_ua > zone_other_ua:
-                    indirectly_conditioned_zone_ids.append(zone_id)
+                    indirectly_conditioned_zone_ids.append(zone_id)  # zone_1_4
     # Taking stock:
     # To this point, we have determined which zones are directly conditioned,
     # semi-heated, or indirectly conditioned.
@@ -139,9 +140,9 @@ def get_zone_conditioning_category_dict(climate_zone, building):
             "HOTEL_MOTEL",
             "MULTIFAMILY",
         ]:
-            building_segment_is_residential = True
+            building_segment_is_residential = True  # bldg_seg_1
         elif building_segment_lighting_building_area_type is not None:
-            building_segment_is_nonresidential = True
+            building_segment_is_nonresidential = True  # bldg_seg_2
 
         for zone in building_segment["zones"]:
             zone_id = zone["id"]
@@ -162,29 +163,33 @@ def get_zone_conditioning_category_dict(climate_zone, building):
                         "HEALTHCARE_FACILITY_NURSERY",
                         "HEALTHCARE_FACILITY_PATIENT_ROOM",
                     ]:
-                        zone_has_residential_spaces = True
+                        zone_has_residential_spaces = True  # space_1_1_1
                     elif space_lighting_space_type is not None:
-                        zone_has_nonresidential_spaces = True
+                        zone_has_nonresidential_spaces = True  # space_1_1_2
                     elif building_segment_is_residential:
-                        zone_has_residential_spaces = True
+                        zone_has_residential_spaces = True  # space_1_1_3
                     elif building_segment_is_nonresidential:
-                        zone_has_nonresidential_spaces = True
+                        zone_has_nonresidential_spaces = True  # space_2_1_1
                     else:
-                        zone_has_nonresidential_spaces = True
+                        zone_has_nonresidential_spaces = True  # space_3_1_1
 
                 if zone_has_residential_spaces and zone_has_nonresidential_spaces:
-                    zone_conditioning_category_dict[zone_id] = "CONDITIONED MIXED"
+                    zone_conditioning_category_dict[
+                        zone_id
+                    ] = "CONDITIONED MIXED"  # zone_1_1
                 elif zone_has_residential_spaces:
-                    zone_conditioning_category_dict[zone_id] = "CONDITIONED RESIDENTIAL"
+                    zone_conditioning_category_dict[
+                        zone_id
+                    ] = "CONDITIONED RESIDENTIAL"  # zone_1_4
                 elif zone_has_nonresidential_spaces:
                     zone_conditioning_category_dict[
                         zone_id
-                    ] = "CONDITIONED NON-RESIDENTIAL"
+                    ] = "CONDITIONED NON-RESIDENTIAL"  # zone_1_2, zone_1_3
 
             # To get here, the zone is neither directly or indirectly conditioned
             # Check for semi-heated
             elif zone_id in semiheated_zone_ids:
-                zone_conditioning_category_dict[zone_id] = "SEMI-HEATED"
+                zone_conditioning_category_dict[zone_id] = "SEMI-HEATED"  # zone_1_5
             # Check for interior parking spaces
             elif any(
                 [
@@ -200,7 +205,8 @@ def get_zone_conditioning_category_dict(climate_zone, building):
                 find_all("spaces[*].floor_area", zone)
             ) < CRAWLSPACE_HEIGHT_THRESHOLD and any(
                 [
-                    get_opaque_surface_type(surface) == "FLOOR"
+                    get_opaque_surface_type(surface)
+                    in ["HEATED SLAB-ON-GRADE", "UNHEATED SLAB-ON-GRADE"]
                     and surface["adjacent_to"] == "GROUND"
                     for surface in zone["surfaces"]
                 ]
@@ -209,7 +215,7 @@ def get_zone_conditioning_category_dict(climate_zone, building):
             # Check for attic
             elif any(
                 [
-                    get_opaque_surface_type(surface) == "CEILING"
+                    get_opaque_surface_type(surface) == "ROOF"
                     and surface["adjacent_to"] == "EXTERIOR"
                     for surface in zone["surfaces"]
                 ]
@@ -219,4 +225,4 @@ def get_zone_conditioning_category_dict(climate_zone, building):
             else:
                 zone_conditioning_category_dict[zone_id] = "UNCONDITIONED"
 
-        return zone_conditioning_category_dict
+    return zone_conditioning_category_dict
