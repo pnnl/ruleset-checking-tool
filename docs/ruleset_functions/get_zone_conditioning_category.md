@@ -81,7 +81,7 @@ Logic:
 
       - Else if zone has interior parking spaces, classify zone as unenclosed: `if（ space.lighting_space_type == "Parking Area, Interior" for space in zone.spaces ）: zone_conditioning_category_dict[zone.id] = "UNENCLOSED"`  
 
-      - Else if zone is crawlspace, classify zone as unenclosed: `else if ( ( zone.volume / sum( space.floor_area for space in zone.spaces ) ) < CRAWLSPACE_HEIGHT_THRESHOLD ) AND ( ( get_opaque_surface_type(surface) == "FLOOR" ) AND ( surface.adjacent_to == "GROUND" ) for surface in zone.surfaces ): zone_conditioning_category_dict[zone.id] = "UNENCLOSED"`  
+      - Else if zone is crawlspace, classify zone as unenclosed: `else if ( ( zone.volume / sum( space.floor_area for space in zone.spaces ) ) < CRAWLSPACE_HEIGHT_THRESHOLD ) AND ( ( get_opaque_surface_type(surface) == "HEATED SLAB-ON-GRADE" OR get_opaque_surface_type(surface) == "UNHEATED SLAB-ON-GRADE") AND ( surface.adjacent_to == "GROUND" ) for surface in zone.surfaces ): zone_conditioning_category_dict[zone.id] = "UNENCLOSED"`  
 
       - Else if zone is attic, classify zone as unenclosed: `else if ( ( get_opaque_surface_type(surface) == "CEILING" ) AND ( surface.adjacent_to == "EXTERIOR" ) for surface in zone.surfaces ): zone_conditioning_category_dict[zone.id] = "UNENCLOSED"`  
 
