@@ -199,7 +199,7 @@ def get_zone_conditioning_category_dict(climate_zone, building):
                     )
                 ]
             ):
-                zone_conditioning_category_dict[zone_id] = "UNENCLOSED"
+                zone_conditioning_category_dict[zone_id] = "UNENCLOSED"  # zone_1_6
             # Check for crawlspace
             elif zone["volume"] / pint_sum(
                 find_all("spaces[*].floor_area", zone)
@@ -211,7 +211,7 @@ def get_zone_conditioning_category_dict(climate_zone, building):
                     for surface in zone["surfaces"]
                 ]
             ):
-                zone_conditioning_category_dict[zone_id] = "UNENCLOSED"
+                zone_conditioning_category_dict[zone_id] = "UNENCLOSED"  # zone_1_7
             # Check for attic
             elif any(
                 [
@@ -220,9 +220,9 @@ def get_zone_conditioning_category_dict(climate_zone, building):
                     for surface in zone["surfaces"]
                 ]
             ):
-                zone_conditioning_category_dict[zone_id] = "UNENCLOSED"
+                zone_conditioning_category_dict[zone_id] = "UNENCLOSED"  # zone_1_8
             # Anything else
             else:
-                zone_conditioning_category_dict[zone_id] = "UNCONDITIONED"
+                zone_conditioning_category_dict[zone_id] = "UNCONDITIONED"  # zone_1_9
 
     return zone_conditioning_category_dict
