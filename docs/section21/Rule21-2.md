@@ -2,7 +2,7 @@
 # Boiler - Rule 21-2  
 
 **Rule ID:** 21-2  
-**Rule Description:** Baseline should include all on-site distribution pumps included in the Proposed design.  
+**Rule Description:** For purchased HW or steam loops in the proposed design, baseline should include all on-site distribution pumps included in the proposed design.  
 **Rule Assertion:** B-RMR LEN(ASHRAE229:conditioning_component.pump) = P-RMR LEN(ASHRAE229:conditioning_component.pump) for pumps serving purchased hot water or steam loops  
 **Appendix G Section:** Section 21 Boiler  
 **Appendix G Section Reference:** Section G3.1.1.3.4 Building System-Specific Modeling Requirements for the Baseline model  
