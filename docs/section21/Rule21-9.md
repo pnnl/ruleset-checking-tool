@@ -29,9 +29,11 @@
 
   - Check if fluid loop is heating type: `if fluid_loop_b.type == "HEATING":`
 
+    - Get total pump power per flow rate on the loop and all child loops: `total_pump_power_per_flow_rate = fluid_loop_b.pump_power_per_flow_rate + sum(fluid_loop.pump_power_per_flow_rate for fluid_loop in fluid_loop_b.child_loops)`
+
     **Rule Assertion:**
 
-    - Case 1: For each heating hot water loop that is served by boiler(s), if total pump power per flow rate is equal to 19W/gpm: `if fluid_loop_b.pump_power_per_flow_rate == 19: PASS`
+    - Case 1: For each heating hot water loop that is served by boiler(s), if total pump power per flow rate is equal to 19W/gpm: `if total_pump_power_per_flow_rate == 19: PASS`
 
     - Case 2: Else: `else: FAIL`
 
