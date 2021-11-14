@@ -19,36 +19,35 @@
 **Function Call:**
 
 1. compare_schedules()
-2. match_data_element()
+2. normalize_space_schedules()
+3. match_data_element()
 
 ## Rule Logic:  
 
-- **Applicability Check 1:** `if sum(space.floor_area for P_RMR...spaces) < 5000:`
+- For each building in the Proposed model: `building_p in P_RMR.ASHRAE229.buildings:`
 
-- For each space in the Proposed model: `space_p in P_RMR...spaces:`
+  - **Applicability Check 1:** `if sum(space.floor_area for building_p...spaces) < 5000:`
 
-  - Get matching space from Baseline RMR: `space_b = match_data_element(B_RMR, Spaces, space_p.name)`
+    - For each space in the Proposed model building: `space_p in building_p...spaces:`
 
-    - Get normalized space lighting schedule for B_RMR: `normalized_schedule_b = normalize_space_schedules(space_b.interior_lighting)`
-  
-  - For each interior lighting in space: `for interior_lighting_p in space_p.interior_lighting:`
+      - Get matching space from Baseline RMR: `space_b = match_data_element(B_RMR, Spaces, space_p.name)`
 
-    - Get multiplier schedule for lighting: `schedule_p = interior_lighting_p.lighting_multiplier_schedule`
+        - Get normalized space lighting schedule for B_RMR: `normalized_schedule_b = normalize_space_schedules(space_b.interior_lighting)`
 
-    - Check if lighting has occupancy control: `if interior_lighting_p.occupancy_control_type != "NONE":`
+      - Get normalized space lighting schedule for P_RMR: `normalized_schedule_p = normalize_space_schedules(space_p.interior_lighting)`
 
-      - Compare lighting schedule in P_RMR with 90% of lighting schedule in B_RMR: `compare_schedules_result_dictionary = compare_schedules(schedule_p, normalized_schedule_b, always_2_schedule, 0.9)`
+      - Compare normalized lighting schedule in P_RMR with normalized lighting schedule in B_RMR: `compare_schedules_result_dictionary = compare_schedules(normalized_schedule_p, normalized_schedule_b, always_1_schedule, 1)`
 
-    - Else, lighting does not have occupancy control, compare lighting schedule in P_RMR with that in B_RMR: `else: compare_schedules_result_dictionary = compare_schedules(schedule_p, normalized_schedule_b, always_1_schedule, 1)`
+      - For each interior lighting in space: `for lighting_p in space_p.interior_lighting:`
+
+        - Check if any interior lighting in space has modeled daylight control using schedule, set daylight control flag to True: `if lighting_p.are_schedules_used_for_modeling_daylighting_control: daylight_control == TRUE`
 
       **Rule Assertion:**
 
-      - Case 1: For each lighting, if lighting has daylighting control and uses schedule to model daylighting control, request manual review: `if ( interior_lighting_p.daylighting_control_type != "NONE" ) AND ( interior_lighting_p.are_schedules_used_for_modeling_daylighting_control ): CAUTION and raise_warning "LIGHTING HAS DAYLIGHTING CONTROL AND USES SCHEDULE TO MODEL DAYLIGHTING CONTROL. VERIFY IF SCHEDULE ADJUSTMENT IS MODELED CORRECTLY."`
+      - Case 1: If space does not model any daylight control using schedule, and normalized space lighting schedule in P-RMR is equal to that in B-RMR: `if ( NOT daylight_control ) AND ( compare_schedules_result_dictionary[TOTAL_HOURS_COMPARED] == compare_schedules_result_dictionary[TOTAL_HOURS_MATCH] ): PASS`
 
-      - Case 2: Else if lighting does not have daylighting control, and lighting has occupancy control and each hourly lighting schedule fraction in P-RMR is equal to 0.9 times that in B-RMR: `else if ( interior_lighting_p.daylighting_control_type == "NONE" ) AND ( interior_lighting_p.occupancy_control_type != "NONE" ) AND ( interior_lighting_p.are_schedules_used_for_modeling_occupancy_control ) AND ( compare_schedules_result_dictionary[TOTAL_HOURS_COMPARED] == compare_schedules_result_dictionary[TOTAL_HOURS_MATCH] )`
+      - Case 2: Else if space does not model any daylight control, and normalized space lighting schedule in P-RMR is not equal to that in B-RMR: `else if ( NOT daylight_control ) AND ( compare_schedules_result_dictionary[TOTAL_HOURS_COMPARED] != compare_schedules_result_dictionary[TOTAL_HOURS_MATCH] ): FAIL and raise_message "SPACE LIGHTING SCHEDULE EFLH IN P-RMR IS ${compare_schedules_result_dictionary[EFLH_DIFFERENCE]} OF THAT IN B-RMR."`
 
-      - Case 3: Else if lighting does not have daylighting control, and lighting does not have occupancy control, and each hourly lighting schedule fraction in P-RMR is equal to that in B-RMR: `else if ( interior_lighting_p.daylighting_control_type == "NONE" ) AND ( interior_lighting_p.occupancy_control_type == "NONE" ) AND ( compare_schedules_result_dictionary[TOTAL_HOURS_COMPARED] == compare_schedules_result_dictionary[TOTAL_HOURS_MATCH] )`
-
-      - Case 4: Else: `else: FAIL and raise_warning "LIGHTING SCHEDULE EFLH IN P-RMR IS ${compare_schedules_result_dictionary[EFLH_DIFFERENCE]} OF THAT IN B-RMR."`
+      - Case 3: Else, space models at least one daylight control using schedule: `else: UNDETERMINED and raise_message "SPACE MODELS AT LEAST ONE DAYLIGHT CONTROL USING SCHEDULE. VERIFY IF OTHER PROGRAMMABLE LIGHTING CONTROL IS MODELED CORRECTLY USING SCHEDULE. LIGHTING SCHEDULE EFLH IN P-RMR IS ${compare_schedules_result_dictionary[EFLH_DIFFERENCE]} OF THAT IN B-RMR."`
 
 **[Back](../_toc.md)**
