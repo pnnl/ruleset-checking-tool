@@ -6,14 +6,14 @@
 **Appendix G Section:** Section 6 Lighting  
 **Appendix G Section Reference:** Section G3.1-6(h) Lighting: Modeling Requirements for the Proposed design  
 
-**Applicability:** All required data elements exist for U_RMR  
+**Applicability:** All required data elements exist for P_RMR  
 **Applicability Checks:** None  
 **Manual Check:** Yes  
 **Evaluation Context:** Each Data Element  
 **Data Lookup:** None  
 ## Rule Logic: 
 
-- Check if each zone has window or skylight in the building segment in the User model: `For zone_p in U_RMR...zones:`
+- Check if each zone has window or skylight in the building segment in the Proposed model: `For zone_p in P_RMR...zones:`
 
   - For each surfaces in zone: `surface_p in zone_p.surfaces`
 
@@ -27,7 +27,7 @@
 
       - Check if any interior_lighting has daylight control: `if ( lighting.daylighting_control_type != "NONE" for lighting in interior_lighting_p ): has_daylight_control_flag == TRUE`
 
-    **Rule Assertion:** For each zone in the User model:
+    **Rule Assertion:** For each zone in the Proposed model:
 
     - Case 1, if the zone has window or skylight and daylight control, and daylight control is not modeled using schedule: `if ( daylight_control_flag == TRUE ) AND ( has_daylight_control_flag == TRUE ) AND ( NOT interior_lighting_p.are_schedules_used_for_modeling_daylighting_control ): UNDETERMINED and raise_warning "SOME OF THE SPACES IN ZONE ARE MODELED WITH WINDOW OR SKYLIGHT AND SOME OF THE SPACES IN ZONE ARE MODELED WITH DAYLIGHTING CONTROL DIRECTLY THROUGH SIMULATION. VERIFY IF THE MANDATORY LIGHTING CONTROL REQUIREMENTS ARE MODELED CORRECTLY IN ZONE."`
 
