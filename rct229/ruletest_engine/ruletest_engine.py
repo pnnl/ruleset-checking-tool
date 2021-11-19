@@ -199,7 +199,7 @@ def process_test_result(test_result, test_dict, test_id):
 
     # Get reporting parameters. Check if the test is expected to pass/fail and read in the description.
     expected_outcome = test_dict["expected_rule_outcome"] == "pass"
-    description = test_dict["description"]
+    description = test_dict["test_description"]
 
     # Check if the test results agree with the expected outcome. Write an appropriate response based on their agreement
     received_expected_outcome = test_result == expected_outcome

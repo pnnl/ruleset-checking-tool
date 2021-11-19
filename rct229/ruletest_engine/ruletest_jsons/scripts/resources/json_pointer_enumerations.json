@@ -1,6 +1,7 @@
 {
-
+	"air_terminals": "buildings[0]/building_segments[0]/heating_ventilation_air_conditioning_systems[0]/air_terminals",
 	"building_segments": "buildings[0]/building_segments",
+	"fan_systems": "buildings[0]/building_segments[0]/heating_ventilation_air_conditioning_systems[0]/fan_systems",
 	"fenestration_subsurfaces": "buildings[0]/building_segments[0]/zones[0]/surfaces[0]/fenestration_subsurfaces",
 	"heating_ventilation_air_conditioning_systems": "buildings[0]/building_segments[0]/heating_ventilation_air_conditioning_systems",
 	"interior_lighting": "buildings[0]/building_segments[0]/zones[0]/spaces[0]/interior_lighting",

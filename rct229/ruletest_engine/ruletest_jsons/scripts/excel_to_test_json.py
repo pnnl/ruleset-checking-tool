@@ -11,12 +11,8 @@ from rct229.schema.schema_utils import *
 
 # ---------------------------------------USER INPUTS---------------------------------------
 
-# spreadsheet_name = "lighting_test_draft.xlsx"
-# json_name = "lighting_test_draft.json"
-# sheet_name = "TCDs"
-
 spreadsheet_name = "lighting_tcd_updates.xlsx"
-json_name = "lighting_tcd_update.json"
+json_name = "lighting_tcd_updates.json"
 sheet_name = "TCDs"
 
 # --------------------------------------SCRIPT STARTS--------------------------------------
@@ -187,8 +183,8 @@ def create_dictionary_from_excel(spreadsheet_name, sheet_name):
     # Initialize headers
     keys = []
     non_test_related_columns = []
-    unit_headers = ['unit_type', 'units']
-    tcd_note_headers = ['data_group', 'data_element']
+    unit_headers = ["unit_type", "units"]
+    tcd_note_headers = ["data_group", "data_element"]
 
     for header in headers:
         # If header has substring 'key', consider it a key
@@ -218,13 +214,16 @@ def create_dictionary_from_excel(spreadsheet_name, sheet_name):
     # Strings used by triplets
     triplet_strs = ["user", "proposed", "baseline"]
 
+    # Many rows in the spreadsheet are not required for the JSON. The spreadsheet will ignore all these key1 values
+    invalid_first_keys = ["Notes", "template_lookup"]
+
     # Iterate column by column through values_df
     for (test_id, columnData) in tests_df.iteritems():
 
         # List of this rule's column data
         rule_value_list = columnData.values
 
-        # Initialize a potential json template used to build any of the RMR triplets
+        # Initialize a dictionary to flag whether or not an RMR triplet uses a JSON template
         rmr_template_dict = {}
 
         # Catch if a test_id is repeated in this tab. We wouldn't want to override an old one
@@ -276,52 +275,50 @@ def create_dictionary_from_excel(spreadsheet_name, sheet_name):
                 # If this is a template definition, store the template for the RMR transformations
                 if "rmr_template" in key_list:
 
-                    set_nested_dict(rmr_template_dict, key_list, row_value)
+                    # If a JSON template, set the values for flagged RMR triplets
+                    if "json_template" in key_list:
+
+                        # Iterate through triplets and set values from template if flagged for it
+                        for rmr_triplet in triplet_strs:
+
+                            # Only copy the template for RMR triplets flagged as being included
+                            if (
+                                rmr_triplet
+                                in rmr_template_dict[test_id]["rmr_template"]
+                            ):
+
+                                # If anything other than True used to flag the triplet (e.g., False), skip it
+                                if (
+                                    rmr_template_dict[test_id]["rmr_template"][
+                                        rmr_triplet
+                                    ]
+                                    != True
+                                ):
+                                    continue
+
+                                # Create new keylist with respect to this triplet and set value
+                                triplet_key_list = [
+                                    test_id,
+                                    "rmr_transformations",
+                                    rmr_triplet,
+                                ] + key_list[3:]
+                                set_nested_dict(json_dict, triplet_key_list, row_value)
+
+                    # If not a JSON template, this implies it's setting a true/false flag for triplets
+                    else:
+                        set_nested_dict(rmr_template_dict, key_list, row_value)
 
                 else:
+
+                    # Skip irrelevant rows (e.g., "Notes")
+                    if key_list[1] in invalid_first_keys:
+                        continue
 
                     # Set nested dictionary
                     set_nested_dict(json_dict, key_list, row_value)
 
-        # Once all dictionaries are set, check if any of the RMR triplets utilize json templates
-        if rmr_template_dict:
-
-            # If no transformations are defined, set an empty dictionary
-            if "rmr_transformations" not in json_dict[test_id]:
-                json_dict[test_id]["rmr_transformations"] = {}
-
-            # Read in transformations dictionary. This will perturb a template or fully define an RMR (if no template defined)
-            rmr_transformations_dict = json_dict[test_id]["rmr_transformations"]
-
-            # Cycle through user, proposed, and baseline RMRs. Merge the template and their transformations
-            for rmr_string in triplet_strs:
-
-                # If this RMR utilizes the RMR template, merge its RMR transformations into the template and set
-                # the RMR dictionary.
-                if rmr_string in rmr_template_dict[test_id]["rmr_template"]:
-
-                    # If this RMR has no perturbations, set the RMR value equal to the template
-                    if rmr_string not in rmr_transformations_dict:
-                        rmr_transformations_dict[rmr_string] = copy.deepcopy(
-                            rmr_template_dict[test_id]["rmr_template"][
-                                "json_template"
-                            ]
-                        )
-
-                    # If perturbations to the template exist, merge the transformations with the template
-                    else:
-                        rmr_transformations_dict[
-                            rmr_string
-                        ] = merge_nested_dictionary(
-                            copy.deepcopy(
-                                rmr_template_dict[test_id]["rmr_template"][
-                                    "json_template"
-                                ]
-                            ),
-                            rmr_transformations_dict[rmr_string],
-                        )
-
     return json_dict
+
 
 def create_test_json_from_excel(spreadsheet_name, sheet_name, json_name):
     """Converts a ruletest JSON spreadsheet into a ruletest JSON. The generated JSON is output to
@@ -349,7 +346,7 @@ def create_test_json_from_excel(spreadsheet_name, sheet_name, json_name):
     # Define output json file path
     json_file_path = os.path.join(file_dir, "..", json_name)
 
-    json_dict = create_dictionary_from_excel(spreadsheet_name, 'TCDs')
+    json_dict = create_dictionary_from_excel(spreadsheet_name, "TCDs")
 
     # Dump JSON to string for writing
     json_string = json.dumps(json_dict, indent=4)
@@ -498,8 +495,8 @@ def update_unit_convention_record(spreadsheet_name, sheet_name):
             if rmr_schema_units != existing_unit:
                 raise ValueError(
                     f"Existing {rmr_key} unit definition for unit type '{unit_type}' is '{existing_unit}' but new TCD"
-                    f" spreadsheet is trying to set it to '{rmr_schema_units}'. Manually erase existing record to"
-                    f" update this unit type definition"
+                    f" spreadsheet is trying to set it to '{rmr_schema_units}'. Please pick a more specific name"
+                    f" for this unit definition"
                 )
 
         # If no record of unit_type in unit definition dictionary, add it
