@@ -31,7 +31,7 @@
 
       **Rule Assertion:**
 
-      - Case 1: For each fluid loop that chiller serves and its child loops, if design supply temperature is 44F: `if ( fluid_loop_b.cooling_or_condensing_design_and_control.design_supply_temperature == 44 ) AND ( child_loop.cooling_or_condensing_design_and_control.design_supply_temperature == 44 for child_loop in child_loops_b ): PASS`
+      - Case 1: For each chilled water loop and its child loops, if design supply temperature is 44F: `if ( fluid_loop_b.cooling_or_condensing_design_and_control.design_supply_temperature == 44 ) AND ( child_loop.cooling_or_condensing_design_and_control.design_supply_temperature == 44 for child_loop in child_loops_b ): PASS`
 
       - Case 2: Else: `else: FAIL`
 
