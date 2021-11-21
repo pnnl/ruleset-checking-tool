@@ -10,7 +10,7 @@
 **Applicability:** All required data elements exist for B_RMR  
 **Applicability Checks:**  
 
-1. B-RMR is modeled with at least one air-side system that is Type-7, 8, 11, 12, or 13.
+1. B-RMR is modeled with at least one air-side system that is Type-7, 8, 12, or 13.
 2. B-RMR is modeled with at least one chilled water system that does not use purchased chilled water.
 3. Pass Rule 22-3.
 
@@ -21,7 +21,7 @@
 
 **Applicability Checks:**  
 
-1. B-RMR is modeled with at least one air-side system that is Type-7, 8, 11, 12, or 13: `PLACEHOLDER`
+1. B-RMR is modeled with at least one air-side system that is Type-7, 8, 12, or 13: `PLACEHOLDER`
 
 2. B-RMR is modeled with at least one chilled water system that does not use purchased chilled water: `if B_RMR.ASHRAE229.chillers:`
 
