@@ -86,6 +86,6 @@
 
 - Case 2: Else if all subsurface in B-RMR is rules as "PASS": `PASS`
 
-- Case 3: Else: `FAIL`
+- Case 3: Else: `FAIL and raise_message "${NUMBER_OF_FAIL_COMPONENTS} of subsurfaces have failed the test.`
 
 **[Back](../_toc.md)**
