@@ -1,5 +1,5 @@
 
-## get_scc_window_wall_ratios
+## get_building_scc_window_wall_ratios
 
 Description: This function would determine window and envelope wall ratios for a building for residential, non-residential, mixed and semi-heated surface conditioning categories.  
 
@@ -9,7 +9,7 @@ Inputs:
 
 Returns:
 
-- **scc_window_wall_ratios_dictionary**: A dictionary that saves each surface conditioning category (residential, non-residential, mixed and semi-heated) with its window-wall-ratios for each building in RMR.
+- **building_scc_window_wall_ratios_dictionary**: A dictionary that saves each surface conditioning category (residential, non-residential, mixed and semi-heated) with its window-wall-ratios for each building in RMR.
 
 Function Call:
 
@@ -82,8 +82,8 @@ Logic:
 
 - Calculate window wall ratio for semi-heated type surface conditioning category: `if total_semiheated_wall_area > 0: wwr_semiheated = total_semiheated_window_area / total_semiheated_wall_area; else: wwr_semiheated = 0`
 
-- Save window-wall-ratio of different surface conditioning categories for building: `scc_window_wall_ratios_dictionary[building.id] = {"EXTERIOR RESIDENTIAL": wwr_res, "EXTERIOR NON-RESIDENTIAL": wwr_nonres, "EXTERIOR MIXED": wwr_mixed, "SEMI-EXTERIOR": wwr_semiheated}`
+- Save window-wall-ratio of different surface conditioning categories for building: `building_scc_window_wall_ratios_dictionary[building.id] = {"EXTERIOR RESIDENTIAL": wwr_res, "EXTERIOR NON-RESIDENTIAL": wwr_nonres, "EXTERIOR MIXED": wwr_mixed, "SEMI-EXTERIOR": wwr_semiheated}`
 
-**Returns** `return scc_window_wall_ratios_dictionary`
+**Returns** `return building_scc_window_wall_ratios_dictionary`
 
 **[Back](../_toc.md)**
