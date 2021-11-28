@@ -11,6 +11,7 @@
 **Applicability Checks:**  
 
 1. B-RMR is modeled with at least one air-side system that is Type-7, 8, 11, 12, or 13
+2. Pass Rule 22-42, Baseline must only have no more than one CHW plant.
 
 **Manual Check:** None  
 **Evaluation Context:** Building  
@@ -20,6 +21,7 @@
 **Applicability Checks:**  
 
 1. B-RMR is modeled with at least one air-side system that is Type-7, 8, 11, 12, or 13: `PLACEHOLDER`
+2. Pass Rule 22-42, Baseline must only have no more than one CHW plant: `if Rule-22-42 == "PASS":`
 
 ## Rule Logic:  
 
@@ -27,16 +29,10 @@
 
   - Check if loop is cooling type: `if fluid_loop_b.type == "COOLING":`
 
-    - Get child loops under cooling loop: `child_loops_b = fluid_loop_b.child_loops`
+    **Rule Assertion:**
 
-      **Rule Assertion:**
+    - Case 1: For baseline chilled water loop, if design supply temperature is 44F: `if fluid_loop_b.cooling_or_condensing_design_and_control.design_supply_temperature == 44: PASS`
 
-      - Case 1: For each chilled water loop and its child loops, if design supply temperature is 44F: `if ( fluid_loop_b.cooling_or_condensing_design_and_control.design_supply_temperature == 44 ) AND ( child_loop.cooling_or_condensing_design_and_control.design_supply_temperature == 44 for child_loop in child_loops_b ): PASS`
-
-      - Case 2: Else: `else: FAIL`
+    - Case 2: Else: `else: FAIL`
 
 **[Back](../_toc.md)**
-
-**Notes:**
-
-1. This is applicable to both CHW loop served by chiller and purchased chilled water. Using Section 22 for now. Purchased chilled water is Section 18. Or do we need to have a separate rule under Section 18 to check the temperature?
