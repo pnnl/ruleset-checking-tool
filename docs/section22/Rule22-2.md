@@ -10,7 +10,8 @@
 **Applicability:** All required data elements exist for B_RMR  
 **Applicability Checks:**  
 
-1. B-RMR is modeled with at least one air-side system that is Type-7, 8, 11, 12, or 13
+1. B-RMR is modeled with at least one air-side system that is Type-7, 8, 11, 12, or 13.
+2. Pass Rule 22-42, Baseline must only have no more than one CHW plant.
 
 **Manual Check:** None  
 **Evaluation Context:** Building  
@@ -20,6 +21,7 @@
 **Applicability Checks:**  
 
 1. B-RMR is modeled with at least one air-side system that is Type-7, 8, 11, 12, or 13: `PLACEHOLDER`
+2. Pass Rule 22-42, Baseline must only have no more than one CHW plant: `if Rule-22-42 == "PASS":`
 
 ## Rule Logic:  
 
@@ -27,13 +29,11 @@
 
   - Check if loop is cooling type: `if fluid_loop_b.type == "COOLING":`
 
-    - Get child loops under cooling loop: `child_loops_b = fluid_loop_b.child_loops`
+    **Rule Assertion:**
 
-      **Rule Assertion:**
+    - Case 1: For baseline chilled water loop, if design return temperature is 56F: `if fluid_loop_b.cooling_or_condensing_design_and_control.design_return_temperature == 56: PASS`
 
-      - Case 1: For each chilled water loop and its child loops, if design return temperature is 56F: `if ( fluid_loop_b.cooling_or_condensing_design_and_control.design_return_temperature == 56 ) AND ( child_loop.cooling_or_condensing_design_and_control.design_return_temperature == 56 for child_loop in child_loops_b ): PASS`
-
-      - Case 2: Else: `else: FAIL`
+    - Case 2: Else: `else: FAIL`
 
 **[Back](../_toc.md)**
 
