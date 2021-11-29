@@ -12,7 +12,6 @@
 
 1. B-RMR is modeled with at least one air-side system serves computer room HVAC system (System Type-11)
 2. B-RMR is modeled with at least one chilled water system that does not use purchased chilled water.
-3. Pass Rule 22-3.
 
 **Manual Check:** None  
 **Evaluation Context:** Building  
@@ -25,8 +24,6 @@
  `LEN(hvac.does_serve_computer_room == TRUE for hvac in B-RMR...heating_ventilation_air_conditioning_systems) > 0`
 
 2. B-RMR is modeled with at least one chilled water system that does not use purchased chilled water: `if B_RMR.ASHRAE229.chillers:`
-
-3. Pass Rule 22-3: `if Rule-22-3 == "PASS"`
 
 ## Rule Logic:  
 
