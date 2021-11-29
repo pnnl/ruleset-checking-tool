@@ -184,7 +184,7 @@ def create_dictionary_from_excel(spreadsheet_name, sheet_name):
     keys = []
     non_test_related_columns = []
     unit_headers = ["unit_type", "units"]
-    tcd_note_headers = ["data_group", "data_element"]
+    tcd_note_headers = ["data_group", "object_id", "parent_id", "data_element"]
 
     for header in headers:
         # If header has substring 'key', consider it a key
