@@ -1,5 +1,5 @@
 
-# CHW&CW - Rule 23-1  
+# Airside System - Rule 23-1  
 
 **Rule ID:** 23-1  
 **Rule Description:** For baseline systems 5-8 and 11, the SAT is reset higher by 5F under minimum cooling load conditions.  
@@ -29,7 +29,7 @@
 
       - Set applicability flag: `rule_applicability_check = TRUE`
 
-      - Get fan system of HVAC system: `fan_system_b = hvac_b.fan_systems` (See Note#1)
+      - Get fan system of HVAC system: `fan_system_b = hvac_b.fan_systems[0]` (See Note#1)
 
         **Rule Assertion:**
 
