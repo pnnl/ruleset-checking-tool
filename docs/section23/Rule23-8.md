@@ -1,5 +1,5 @@
 
-# CHW&CW - Rule 23-8  
+# Airside System - Rule 23-8  
 
 **Rule ID:** 23-8  
 **Rule Description:** For baseline systems 6 and 8, the minimum volume setpoint shall equal to 30% of peak primary design airflow or the rate required for minimum outside air whichever is larger.  
