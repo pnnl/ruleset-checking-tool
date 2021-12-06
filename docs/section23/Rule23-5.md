@@ -1,5 +1,5 @@
 
-# CHW&CW - Rule 23-5  
+# Airside System - Rule 23-5  
 
 **Rule ID:** 23-5  
 **Rule Description:** For baseline systems 6 and 8, Fans in parallel VAV fan-powered boxes shall be sized for 50% of the peak design primary air (from the VAV air-handling unit) flow rate and shall be modeled with 0.35 W/cfm fan power.  
