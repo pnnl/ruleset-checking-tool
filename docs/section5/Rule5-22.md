@@ -27,9 +27,15 @@
 
       - Add to total number of existing or altered spaces in zone: `num_space_existing_altered += 1`
 
-**Rule Assertion:**
+      - Add to array of zones with existing or altered spaces if not already saved: `if NOT zone_b in undetermined_zone_array: undetermined_zone_array.append(zone_b)`
 
-- For each zone, if any space in zone is existing or altered: `if num_space_existing_altered > 0: CAUTION and raise_warning "PART OR ALL OF ZONE IS EXISTING. THE BASELINE VERTICAL FENESTRATION AREA FOR EXISTING ZONES MUST EQUAL TO THE FENESTRATION AREA PRIOR TO THE PROPOSED SCOPE OF WORK. THE BASELINE FENESTRATION AREA IN ZONE MUST BE CHECKED MANUALLY."`
+**Rule Assertion - Component:**
+
+- For each zone, if any space in zone is existing or altered: `if num_space_existing_altered > 0: UNDETERMINED"`
+
+**Rule Assertion - RMR:**
+
+- Case 1: If any zone in B-RMR is ruled as "UNDETERMINED": `UNDETERMINED and raise_message "PART OR ALL OF ZONES LISTED BELOW IS EXISTING OR ALTERED. THE BASELINE VERTICAL FENESTRATION AREA FOR EXISTING ZONES MUST EQUAL TO THE FENESTRATION AREA PRIOR TO THE PROPOSED SCOPE OF WORK. THE BASELINE FENESTRATION AREA IN ZONE MUST BE CHECKED MANUALLY. ${undetermined_zone_array}"`
 
 **Applicability Check:** For each building, if no space is existing or altered, rule is not applicable: `if NOT rule_applicability_check: is_applicable = FALSE`
 
