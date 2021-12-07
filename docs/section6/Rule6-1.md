@@ -25,7 +25,7 @@
 
     - Get interior_lighting in space: ```interior_lighting_user = space_user.interior_lighting```  
 
-      - Get the total design power_per_area: ```space_lighting_power_per_area_proposed = sum( lighting.power_per_area for lighting in interior_lighting_user )```  
+      - Get the total design power_per_area: ```space_lighting_power_per_area_user = sum( lighting.power_per_area for lighting in interior_lighting_user )```  
 
       - Calculate the total design lighting power in space: ```space_total_lighting_power_user = space_lighting_power_per_area_user * floor_area_user```
 
