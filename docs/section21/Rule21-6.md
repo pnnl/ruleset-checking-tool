@@ -21,9 +21,9 @@
 
 **Applicability Checks:**  
 
-1. B-RMR is modeled with at least one air-side system that is Type-1, 5, 7, 11, or 12: `if PLACEHOLDER_AIRSIDE_SYSTEM_RULE-X-XX:`
-2. B-RMR is not modeled with purchased heating: `if NOT Rule-21-1:`
-3. B-RMR is modeled with two boilers: `if ( Rule-21-5 == PASS ) AND ( LEN(B_RMR.ASHRAE229.boilers) == 2)`
+1. B-RMR is modeled with at least one air-side system that is Type-1, 5, 7, 11, or 12: `PLACEHOLDER`
+2. B-RMR is not modeled with purchased heating: `if RULE-21-1 == "NOT APPLICABLE":`
+3. B-RMR is modeled with two boilers: `if ( Rule-21-5 == PASS ) AND ( LEN(B_RMR.ASHRAE229.boilers) == 2):`
 
 ## Rule Logic:  
 
