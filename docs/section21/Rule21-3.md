@@ -2,7 +2,7 @@
 # Boiler - Rule 21-3  
 
 **Rule ID:** 21-3  
-**Rule Description:** Plant capacities shall be based on coincident loads.  
+**Rule Description:** Heating hot water plant capacity shall be based on coincident loads.  
 **Rule Assertion:** B-RMR FluidLoop.heating_design_and_control: is_sized_using_coincident_load = True  
 **Appendix G Section:** Section 21 Boiler  
 **Appendix G Section Reference:** Section G3.1.2.2 Building System-Specific Modeling Requirements for the Baseline model  
@@ -19,7 +19,7 @@
 
 **Applicability Check:**
 
-1. Rule is applicable if B-RMR is modeled with at least one air-side system that is Type-1, 5, 7, 11, or 12: `if PLACEHOLDER_AIRSIDE_SYSTEM_RULE-X-XX:`
+1. Rule is applicable if B-RMR is modeled with at least one air-side system that is Type-1, 5, 7, 11, or 12: `PLACEHOLDER`
 
 ## Rule Logic:  
 
