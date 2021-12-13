@@ -16,6 +16,7 @@ class RuleDefinitionBase:
         description=None,
         rmr_context="",
         required_fields=None,
+        must_match_by_ids=[],
     ):
         """Base class for all Rule definitions
 
@@ -238,7 +239,7 @@ class RuleDefinitionBase:
         dict
             A dict of the form
             {
-                "INVALID_USER_CONTEX": Error message,
+                "INVALID_USER_CONTEXT": Error message,
                 "INVALID_BASELINE_CONTEXT": Error message,
                 "INVALID_PROPOSED_CONTEXT": Error message
             },
@@ -280,7 +281,7 @@ class RuleDefinitionBase:
         This may be overridden to provide alternate validation that, by default,
         will be used to validate each part of the context trio.
 
-        This implementations checks for required fields.
+        This implementation checks for required fields.
 
         Parameters
         ----------
@@ -598,14 +599,6 @@ class RuleDefinitionListBase(RuleDefinitionBase):
                 item_outcome["id"] = ubp.baseline["id"]
             elif ubp.proposed and ubp.proposed["id"]:
                 item_outcome["id"] = ubp.proposed["id"]
-
-            # Set the name for item_outcome
-            if ubp.user and ubp.user["name"]:
-                item_outcome["name"] = ubp.user["name"]
-            elif ubp.baseline and ubp.baseline["name"]:
-                item_outcome["name"] = ubp.baseline["name"]
-            elif ubp.proposed and ubp.proposed["name"]:
-                item_outcome["name"] = ubp.proposed["name"]
 
             outcomes.append(item_outcome)
         return outcomes
