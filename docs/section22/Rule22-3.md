@@ -36,7 +36,7 @@
 
   **Rule Assertion:**
 
-  - Case 1: For Baseline chilled water loop that is not purchased cooling and does not serve any Baseline System Type-11, if supply temperature is reset based on outdoor dry-bulb temperature: `if fluid_loop_b.cooling_or_condensing_design_and_control.temperature_reset_type == "OUTSIDE_AIR_RESET": PASS`
+  - Case 1: For Baseline chilled water loop that is not purchased cooling and does not serve any Baseline System Type-11, if supply temperature is reset based on outdoor dry-bulb temperature: `if primary_chw_loop_b.cooling_or_condensing_design_and_control.temperature_reset_type == "OUTSIDE_AIR_RESET": PASS`
 
   - Case 2: Else: `else: FAIL`
 
