@@ -16,6 +16,7 @@ class RuleDefinitionBase:
         description=None,
         rmr_context="",
         required_fields=None,
+        must_match_by_ids=[],
     ):
         """Base class for all Rule definitions
 
@@ -87,7 +88,6 @@ class RuleDefinitionBase:
                     a list-type rule
             }
         """
-
         # Initialize the outcome dictionary
         outcome = {}
         if self.id:
@@ -203,7 +203,6 @@ class RuleDefinitionBase:
         """
 
         context = self._get_context(rmrs)
-
         missing_contexts = []
         if self.rmrs_used.user and context.user is None:
             missing_contexts.append("USER")
@@ -240,7 +239,7 @@ class RuleDefinitionBase:
         dict
             A dict of the form
             {
-                "INVALID_USER_CONTEX": Error message,
+                "INVALID_USER_CONTEXT": Error message,
                 "INVALID_BASELINE_CONTEXT": Error message,
                 "INVALID_PROPOSED_CONTEXT": Error message
             },
@@ -282,7 +281,7 @@ class RuleDefinitionBase:
         This may be overridden to provide alternate validation that, by default,
         will be used to validate each part of the context trio.
 
-        This implementations checks for required fields.
+        This implementation checks for required fields.
 
         Parameters
         ----------
@@ -601,14 +600,6 @@ class RuleDefinitionListBase(RuleDefinitionBase):
             elif ubp.proposed and ubp.proposed["id"]:
                 item_outcome["id"] = ubp.proposed["id"]
 
-            # Set the name for item_outcome
-            if ubp.user and ubp.user["name"]:
-                item_outcome["name"] = ubp.user["name"]
-            elif ubp.baseline and ubp.baseline["name"]:
-                item_outcome["name"] = ubp.baseline["name"]
-            elif ubp.proposed and ubp.proposed["name"]:
-                item_outcome["name"] = ubp.proposed["name"]
-
             outcomes.append(item_outcome)
         return outcomes
 
@@ -744,7 +735,7 @@ class RuleDefinitionListIndexedBase(RuleDefinitionListBase):
                     list_trio.user, list_trio.baseline, match_by
                 )
             if rmrs_used.proposed:
-                matched_lists = match_lists(
+                proposed_list = match_lists(
                     list_trio.user, list_trio.proposed, match_by
                 )
 
@@ -754,7 +745,7 @@ class RuleDefinitionListIndexedBase(RuleDefinitionListBase):
             context_list_len = len(baseline_list)
             if rmrs_used.user:
                 user_list = match_lists(list_trio.baseline, list_trio.user, match_by)
-            elif rmrs_used.proposed:
+            if rmrs_used.proposed:
                 proposed_list = match_lists(
                     list_trio.baseline, list_trio.proposed, match_by
                 )
@@ -765,7 +756,7 @@ class RuleDefinitionListIndexedBase(RuleDefinitionListBase):
             context_list_len = len(proposed_list)
             if rmrs_used.user:
                 user_list = match_lists(list_trio.proposed, list_trio.user, match_by)
-            elif rmrs_used.baseline:
+            if rmrs_used.baseline:
                 baseline_list = match_lists(
                     list_trio.proposed, list_trio.baseline, match_by
                 )
