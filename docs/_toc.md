@@ -125,11 +125,7 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   * 6-9: Baseline building is modeled with automatic shutoff controls in buildings >5000 ft2
   * 6-10: Baseline building is modeled with occupancy sensor controls in applicable space types
   * [6-11](section6/Rule6-11.md): Baseline building is not modeled with daylighting control
-  * 6-12: Proposed building is modeled with dayligthing controls
-  * 6-13: Proposed building is modeled with additional occupancy sensor controls using occupancy sensor schedule reduction factors specified in Table G3.7
-  * [6-14](section6/Rule6-14.md): Proposed building is modeled with other programmable lighting controls through a 10% schedule reduction in buildings less than 5,000sq.ft.
-  * 6-15: Proposed building has been modeled with 1.25 * occupancy sensor reduction factor (from Table G3.7) for spaces with manual-on and partial-on occupancy sensor controls
-  * 6-16: Proposed building has been modeled with 30% occupancy sensor reduction factor for 'open plan' space with individually controlled workstation lighting
+  * [6-14](section6/Rule6-14.md): Proposed building is modeled with other programmable lighting controls through a 10% schedule reduction in buildings less than 5,000sq.ft.  
 
 ## Section 12 - Receptacles and Other Loads
   * [12-1](section12/Rule12-1.md): Number of spaces modeled in User RMR and Baseline RMR are the same
