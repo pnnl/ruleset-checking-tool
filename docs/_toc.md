@@ -115,6 +115,7 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   * [6-7](section6/Rule6-7.md): Where a complete lighting system exists and where a lighting system has been designed and submitted with design documents, the baseline LPD is equal to expected value in Table G3.7.  
   * [6-9](section6/Rule6-9.md): Baseline building is modeled with automatic shutoff controls in buildings >5000 ft2
   * [6-11](section6/Rule6-11.md): Baseline building is not modeled with daylighting control
+  * [6-14](section6/Rule6-14.md): Proposed building is modeled with other programmable lighting controls through a 10% schedule reduction in buildings less than 5,000sq.ft.  
 
 ## Section 12 - Receptacles and Other Loads
   * [12-1](section12/Rule12-1.md): Number of spaces modeled in User RMR and Baseline RMR are the same
