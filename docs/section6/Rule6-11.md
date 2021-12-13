@@ -11,7 +11,7 @@
 **Manual Check:** No  
 **Evaluation Context:** Each Data Element  
 **Data Lookup:** None  
-## Rule Logic: 
+## Rule Logic:
 
 - Check if any space has daylight control in the Baseline model: ```For building_segment_b in B_RMR.building.building_segments:```  
 
@@ -23,4 +23,4 @@
 
     - Get interior_lighting in space: ```interior_lighting_b = space_b.interior_lighting```  
 
-      **Rule Assertion:** For each interior_lighting in the Baseline model: ```interior_lighting_b.has_daylight_control == FALSE```  
+      **Rule Assertion:** For each interior_lighting in the Baseline model: ```interior_lighting_b.daylighting_control_type == NONE```  
