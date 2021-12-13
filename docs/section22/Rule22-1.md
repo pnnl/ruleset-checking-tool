@@ -11,7 +11,7 @@
 **Applicability Checks:**  
 
 1. B-RMR is modeled with at least one air-side system that is Type-7, 8, 11, 12, or 13
-2. Pass Rule 22-42, Baseline must only have no more than one CHW plant.
+2. Pass Rule 22-34, Baseline must only have no more than one CHW plant.
 3. B-RMR is not modeled with purchased chilled water.
 4. Pass Rule 22-22.
 
@@ -23,7 +23,7 @@
 **Applicability Checks:**  
 
 1. B-RMR is modeled with at least one air-side system that is Type-7, 8, 11, 12, or 13: `PLACEHOLDER`
-2. Pass Rule 22-42, Baseline must only have no more than one CHW plant: `if Rule-22-42 == "PASS":`
+2. Pass Rule 22-34, Baseline must only have no more than one CHW plant: `if Rule-22-34 == "PASS":`
 3. B-RMR is not modeled with purchased chilled water: `if Rule-18-8 == "NOT APPLICABLE":`  
 4. Pass Rule 21-18: `if Rule-21-18 == "PASS"`  
 
