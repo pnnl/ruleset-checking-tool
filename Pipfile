@@ -11,6 +11,7 @@ pylint = "*"
 pytest = "*"
 black = "*"
 isort = "*"
+icecream = "*"
 
 [packages]
 rct229 = {editable = true, path = "."}
@@ -21,3 +22,5 @@ pyyaml="*"
 jsonpointer="*"
 pandas = "*"
 xlrd = "~=1.2"
+numpy = "*"
+pint = "*"
