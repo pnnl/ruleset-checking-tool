@@ -32,8 +32,6 @@ def find_osstd_table_entry(match_field_name_value_pairs, osstd_table):
     data_list = osstd_table[keys[0]]
     assert type(data_list) is list
 
-    print("match_field_name_value_pairs", match_field_name_value_pairs)
-
     matching_entries = list(
         filter(
             lambda entry: all(
