@@ -1,0 +1,16 @@
+{
+    "si": {
+        "transformer_capacity": "V-A",
+        "electric_power": "W",
+        "volume": "m3",
+        "area": "m2",
+        "power_density": "W/m2"
+    },
+    "ip": {
+        "transformer_capacity": "V-A",
+        "electric_power": "W",
+        "volume": "ft3",
+        "area": "ft2",
+        "power_density": "W/ft2"
+    }
+}

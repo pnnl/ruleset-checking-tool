@@ -318,23 +318,24 @@ def create_schedule_list(schedule_str):
         raise Exception(f"Schedule named: {schedule_name} is not a valid schedule name")
 
 
-def clean_json_path(json_path_string):
+def remove_index_references_from_key(key):
     """Ingests a string representing a JSON path. Replaces all the '[N]' substrings.
-    For example: 'transformers[0]/efficiency' => 'transformers/efficiency'
+    For example: 'transformers[0]' ->'transformers'
 
      Parameters
      ----------
-     json_path_string : str
-         String representing a JSON path that includes integers in square brackets. E.g., 'transformers[0]/efficiency'
+     key : str
+         String representing a JSON path element that includes integers in square brackets.
+         E.g., 'transformers[0]'
 
      Returns
     -------
-    cleaned_path_string: str
-        JSON path string without square brackets.E.g., 'transformers/efficiency'
+    clean_key: str
+        JSON path string without square brackets.E.g., 'transformers[0]' ->'transformers'
 
     """
 
-    # Replace all integers within square brackets from path
-    cleaned_path_string = re.sub(r"\[\d+\]", "", json_path_string)
+    # Replace all integers within square brackets in key
+    clean_key = re.sub(r"\[\d+\]", "", key)
 
-    return cleaned_path_string
+    return clean_key

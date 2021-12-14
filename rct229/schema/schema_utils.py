@@ -45,7 +45,7 @@ def clean_schema_units(schema_unit_str):
 def find_schema_unit_for_json_path(key_list):
     """Ingests a JSON path that has associated units the ASHRAE229 schema. This function returns the units for that
     JSON path as defined by the ASHRAE229 schema.
-    For example: 'transformers/capacity' => 'V-A'
+    For example: ['transformers','capacity'] => 'V-A'
 
      Parameters
      ----------

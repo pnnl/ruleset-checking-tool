@@ -52,7 +52,7 @@ def table_G3_8_lookup(building_area_type):
     Returns
     -------
     dict
-        { lpd: float – The lighting power density given by Table G3.8 [W/ft^2] }
+        { lpd: Quantity – The lighting power density given by Table G3.8 [W/ft^2] }
 
     """
     lpd_space_type = lighting_space_enumeration_to_lpd_space_type_map[
