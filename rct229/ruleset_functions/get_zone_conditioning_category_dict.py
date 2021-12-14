@@ -52,9 +52,10 @@ def get_zone_conditioning_category_dict(climate_zone, building):
 
         zone_hvac_systems = [
             building_hvac_systems_map[hvac_system_id]
-            for hvac_system_id in zone[
-                "served_by_heating_ventilation_air_conditioning_systems"
-            ]
+            for hvac_system_id in find_all(
+                "terminals[*].served_by_heating_ventilation_air_conditioning_systems",
+                zone,
+            )
         ]
         # Get the first sensible_cool_capacity and heat_capacity from each hvac system
         zone_sensible_cool_capacities = [

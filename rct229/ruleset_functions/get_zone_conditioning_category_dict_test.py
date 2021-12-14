@@ -110,8 +110,11 @@ TEST_RMR = {
                             ],
                             "thermostat_cooling_setpoint_schedule": "tcs_sched_1",
                             "thermostat_heating_setpoint_schedule": "ths_sched_1",
-                            "served_by_heating_ventilation_air_conditioning_systems": [
-                                "hvac_1_1"
+                            "terminals": [
+                                {
+                                    "id": "terminal_1_1_1",
+                                    "served_by_heating_ventilation_air_conditioning_systems": "hvac_1_1",
+                                }
                             ],
                         },
                         # hvac_1_2 => directly_conditioned_zone
@@ -131,8 +134,11 @@ TEST_RMR = {
                             ],
                             "thermostat_cooling_setpoint_schedule": "tcs_sched_1",
                             "thermostat_heating_setpoint_schedule": "ths_sched_1",
-                            "served_by_heating_ventilation_air_conditioning_systems": [
-                                "hvac_1_2"
+                            "terminals": [
+                                {
+                                    "id": "terminal_1_2_1",
+                                    "served_by_heating_ventilation_air_conditioning_systems": "hvac_1_2",
+                                }
                             ],
                         },
                         # hvac_1_3 => semiheated_zone
@@ -155,8 +161,11 @@ TEST_RMR = {
                             ],
                             "thermostat_cooling_setpoint_schedule": "tcs_sched_1",
                             "thermostat_heating_setpoint_schedule": "ths_sched_1",
-                            "served_by_heating_ventilation_air_conditioning_systems": [
-                                "hvac_1_3"
+                            "terminals": [
+                                {
+                                    "id": "terminal_1_3_1",
+                                    "served_by_heating_ventilation_air_conditioning_systems": "hvac_1_3",
+                                }
                             ],
                             "surfaces": [],
                         },
@@ -180,8 +189,11 @@ TEST_RMR = {
                             ],
                             "thermostat_cooling_setpoint_schedule": "tcs_sched_1",
                             "thermostat_heating_setpoint_schedule": "ths_sched_1",
-                            "served_by_heating_ventilation_air_conditioning_systems": [
-                                "hvac_1_3"
+                            "terminals": [
+                                {
+                                    "id": "terminal_1_4_1",
+                                    "served_by_heating_ventilation_air_conditioning_systems": "hvac_1_3",
+                                }
                             ],
                             "surfaces": [
                                 # Adds to zone_other_ua
@@ -265,8 +277,11 @@ TEST_RMR = {
                             ],
                             "thermostat_cooling_setpoint_schedule": "tcs_sched_1",
                             "thermostat_heating_setpoint_schedule": "ths_sched_1",
-                            "served_by_heating_ventilation_air_conditioning_systems": [
-                                "hvac_1_3"
+                            "terminals": [
+                                {
+                                    "id": "terminal_1_5_1",
+                                    "served_by_heating_ventilation_air_conditioning_systems": "hvac_1_3",
+                                }
                             ],
                         },
                         # hvac_1_4 => neither directly nor semi-heated zone
@@ -319,8 +334,11 @@ TEST_RMR = {
                             ],
                             "thermostat_cooling_setpoint_schedule": "tcs_sched_1",
                             "thermostat_heating_setpoint_schedule": "ths_sched_1",
-                            "served_by_heating_ventilation_air_conditioning_systems": [
-                                "hvac_1_4"
+                            "terminals": [
+                                {
+                                    "id": "terminal_1_1_1",
+                                    "served_by_heating_ventilation_air_conditioning_systems": "hvac_1_4",
+                                }
                             ],
                         },
                         # hvac_1_4 => neither directly nor semi-heated zone
@@ -377,8 +395,11 @@ TEST_RMR = {
                             ],
                             "thermostat_cooling_setpoint_schedule": "tcs_sched_1",
                             "thermostat_heating_setpoint_schedule": "ths_sched_1",
-                            "served_by_heating_ventilation_air_conditioning_systems": [
-                                "hvac_1_4"
+                            "terminals": [
+                                {
+                                    "id": "terminal_1_7_1",
+                                    "served_by_heating_ventilation_air_conditioning_systems": "hvac_1_4",
+                                }
                             ],
                             "volume": 20,  # m3
                         },
@@ -435,8 +456,11 @@ TEST_RMR = {
                             ],
                             "thermostat_cooling_setpoint_schedule": "tcs_sched_1",
                             "thermostat_heating_setpoint_schedule": "ths_sched_1",
-                            "served_by_heating_ventilation_air_conditioning_systems": [
-                                "hvac_1_4",
+                            "terminals": [
+                                {
+                                    "id": "terminal_1_8_1",
+                                    "served_by_heating_ventilation_air_conditioning_systems": "hvac_1_4",
+                                }
                             ],
                             "volume": 1000,  # m3
                         },
@@ -493,8 +517,11 @@ TEST_RMR = {
                             ],
                             "thermostat_cooling_setpoint_schedule": "tcs_sched_1",
                             "thermostat_heating_setpoint_schedule": "ths_sched_1",
-                            "served_by_heating_ventilation_air_conditioning_systems": [
-                                "hvac_1_4",
+                            "terminals": [
+                                {
+                                    "id": "terminal_1_9_1",
+                                    "served_by_heating_ventilation_air_conditioning_systems": "hvac_1_4",
+                                }
                             ],
                             "volume": 1000,  # m3
                         },
@@ -532,8 +559,11 @@ TEST_RMR = {
                             ],
                             "thermostat_cooling_setpoint_schedule": "tcs_sched_1",
                             "thermostat_heating_setpoint_schedule": "ths_sched_1",
-                            "served_by_heating_ventilation_air_conditioning_systems": [
-                                "hvac_2_1"
+                            "terminals": [
+                                {
+                                    "id": "terminal_2_1_1",
+                                    "served_by_heating_ventilation_air_conditioning_systems": "hvac_2_1",
+                                }
                             ],
                         },
                     ],
@@ -569,8 +599,11 @@ TEST_RMR = {
                             ],
                             "thermostat_cooling_setpoint_schedule": "tcs_sched_1",
                             "thermostat_heating_setpoint_schedule": "ths_sched_1",
-                            "served_by_heating_ventilation_air_conditioning_systems": [
-                                "hvac_3_1"
+                            "terminals": [
+                                {
+                                    "id": "terminal_3_1_1",
+                                    "served_by_heating_ventilation_air_conditioning_systems": "hvac_3_1",
+                                }
                             ],
                         },
                     ],
