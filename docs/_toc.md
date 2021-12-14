@@ -87,6 +87,7 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   * [5-17](section5/Rule5-17.md): Opaque surfaces that are not regulated (not part of opaque building envelope) must be modeled the same in the baseline as in the proposed design.
   * [5-18](section5/Rule5-18.md): For building area types included in Table G3.1.1-1, vertical fenestration areas for new buildings and additions shall equal that in Table G3.1.1-1 based on the area of gross above-grade walls that separate conditioned spaces and semi-heated spaces from the exterior
   * [5-19](section5/Rule5-19.md): For building areas not shown in Table G3.1.1-1, vertical fenestration areas for new buildings and additions shall equal that in the proposed design or 40% of gross above-grade wall area, whichever is smaller. 
+  * [5-21](section5/Rule5-21.md): The vertical fenestration shall be distributed on each face of the building in the same proportion as in the proposed design.  
   * [5-23](section5/Rule5-23.md): Subsurface area in the proposed design must be as-designed.  
   * [5-24](section5/Rule5-24.md): Fenestration for new buildings, existing buildings, and additions shall be assumed to be flush with the exterior wall, and no shading projections shall be modeled.  
   * [5-25](section5/Rule5-25.md): Fenestration (window and skylight) U-factors in the proposed model must match the user model.  
