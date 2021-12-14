@@ -3,6 +3,19 @@
     "title": "Enumerations from ASHRAE 90.1-2019",
     "description": "Schema addition for ASHRAE 229 related to enumerations found in ASHRAE Standard 90.1-2019",
     "definitions": {
+        "CategoryType2019ASHRAE901": {
+            "type": "string",
+            "enum": [
+                "USER",
+                "PROPOSED",
+                "BASELINE"
+            ],
+            "descriptions": [
+                "The building model as described without consideration of the ruleset",
+                "The building model that corresponds with the Proposed Buildings Performance column of Appendix G Table G3.1",
+                "The building model that corresponds with the Baseline Buildings Performance column of Appendix G Table G3.1"
+            ]
+        },
         "CompliancePathType2019ASHRAE901": {
             "type": "string",
             "enum": [
@@ -163,8 +176,7 @@
                 "GUEST_ROOM",
                 "JUDGES_CHAMBERS",
                 "DWELLING_UNIT",
-                "LABORATORY_IN_OR_AS_A_CLASSROOM",
-                "LABORATORY_ALL_OTHERS",
+                "LABORATORY_EXCEPT_IN_OR_AS_A_CLASSROOM",
                 "LAUNDRY_WASHING_AREA",
                 "LOADING_DOCK_INTERIOR",
                 "LOBBY_FACILITY_FOR_THE_VISUALLY_IMPAIRED",
@@ -269,8 +281,7 @@
                 "Guest Room",
                 "Judges Chambers",
                 "Dwelling Unit",
-                "Laboratory - In or as a classroom",
-                "Laboratory - All others",
+                "Laboratory - Except in or as a classroom",
                 "Laundry/Washing Area",
                 "Loading Dock, Interior",
                 "Lobby - Facility for the visually impaired (and not used primarily by the staff)",
@@ -439,7 +450,6 @@
                 null,
                 null,
                 null,
-                null,
                 null
             ]
         },
@@ -472,7 +482,13 @@
                 "EXTERIOR_CANOPIES",
                 "OUTDOOR_SALES_OPEN_AREAS",
                 "STREET_FRONTAGE",
-                "NON_TRADABLE_FACADE"
+                "BUILDING_FACADE",
+                "AUTOMATED_TELLER_MACHINES",
+                "NIGHT_DEPOSITORIES",
+                "ENTRANCE_AND_GATEHOUSE",
+                "EMERGENCY_VEHICLE_LOADING_AREA",
+                "DRIVE_UP_WINDOWS_FAST_FOOD",
+                "PARKING_NEAR_24HR_RETAIL_ENTRANCES"
             ],
             "descriptions": [
                 "Uncovered parking lots and drives",
@@ -486,7 +502,13 @@
                 "Exterior canopies",
                 "Outdoor sales - open areas",
                 "Street frontage",
-                "Non-tradable facade"
+                "Building facade",
+                "Automated teller machines",
+                "Night depositories",
+                "Entrance and gatehouses",
+                "Emergency vehicle loading area",
+                "Drive-up windows at fast-food restaurants",
+                "Parking near 24-hour retail entrances"
             ],
             "notes": [
                 null,
@@ -499,6 +521,12 @@
                 null,
                 null,
                 null,
+                null,
+                null,
+                null,
+                null,
+                "Entrances and gatehouse inspection stations at guarded facilities.",
+                "Loading areas for law enforcement, fire, ambulance and other emergency service vehicles",
                 null,
                 null
             ]
@@ -911,7 +939,7 @@
                 "Warehouse (nonrefrigerated)"
             ]
         },
-        "FenestrationFrameType2019ASHRAE901": {
+        "SubsurfaceFrameType2019ASHRAE901": {
             "type": "string",
             "enum": [
                 "ALUMINUM_WITHOUT_BREAK",
@@ -1068,6 +1096,59 @@
                 "Existing",
                 "Addition",
                 "Alteration"
+            ]
+        },
+        "AdditionalSurfaceAdjacentTo2019ASHRAE901": {
+            "type": "string",
+            "enum": [
+                "UNENCLOSED",
+                "UNCONDITIONED",
+                "UNHEATED",
+                "SEMIHEATED"
+            ],
+            "descriptions": [
+                "The space on the other side of the surface is assumed to be unenclosed. The space on the other side of the surface is not explicity modeled.",
+                "The space on the other side of the surface is assumed to be unconditioned. The space on the other side of the surface is not explicity modeled.",
+                "Surface adjacent to a environment that is not heated but enclosed. The space on the other side of the surface is not explicity modeled.",
+                "Surface adjacent to a environment that is semi-heated. The space on the other side of the surface is not explicity modeled."
+            ]
+        },
+        "SubsurfaceSubclassificationType2019ASHRAE901": {
+            "type": "string",
+            "enum": [
+                "METAL_COILING_DOOR",
+                "NONSWINGING_DOOR",
+                "SECTIONAL_GARAGE_DOOR",
+                "SWINGING_DOOR",
+                "SPANDREL_GLASS",
+                "GLASS_BLOCK",
+                "OTHER"
+            ],
+            "descriptions": [
+                "an upward-acting, nonswinging door assembly consisting of interlocking horizontal slats or sheets that, upon opening the door, roll up around a horizontal barrel above the door opening.",
+                "roll-up, metal coiling, sliding, and any other door that is not a swinging door.",
+                "an upward-acting, nonswinging door assembly made of two or more horizontal panels hinged together vertically.",
+                "a door having an operable opaque panel with hinges or pivots on one side.",
+                "opaque glass that conceals structural building components from being visible from the exterior of the building",
+                "a translucent, hollow or solid block of glass for glazing openings or constructing partitions",
+                "other subclassifications"
+            ]
+        },
+        "HeatingVentilationAirConditioningBuildingAreaType2019ASHRAE901": {
+            "type": "string",
+            "enum": [
+                "RESIDENTIAL",
+                "PUBLIC_ASSEMBLY",
+                "RETAIL",
+                "HOSPITAL",
+                "OTHER_NON_RESIDENTIAL"
+            ],
+            "descriptions": [
+                "Residential",
+                "Public assembly",
+                "Retail",
+                "Hospital",
+                "Other non-residential"
             ]
         }
     }
