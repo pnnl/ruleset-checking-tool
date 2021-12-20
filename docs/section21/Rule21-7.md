@@ -10,10 +10,7 @@
 **Applicability:** All required data elements exist for B_RMR  
 **Applicability Checks:**  
 
-1. B-RMR is modeled with at least one air-side system that is Type-1, 5, 7, 11, or 12
-2. B-RMR is not modeled with purchased heating.
-3. Pass Rule 21-11
-4. Pass Rule 21-18
+1. B-RMR is not modeled with purchased heating.
 
 **Manual Check:** None  
 **Evaluation Context:** Building  
@@ -22,21 +19,30 @@
 
 **Applicability Checks:**  
 
-1. B-RMR is modeled with at least one air-side system that is Type-1, 5, 7, 11, or 12: `PLACEHOLDER`  
-2. B-RMR is not modeled with purchased heating: `if Rule-21-1 == "NOT APPLICABLE":`  
-3. Pass Rule 21-11: `if Rule-21-11 == "PASS"`  
-4. Pass Rule 21-18: `if Rule-21-18 == "PASS"`  
+1. B-RMR is not modeled with purchased heating: `if Rule-21-1 == "NOT APPLICABLE":`  
 
 ## Rule Logic:  
 
+- For each boiler in B_RMR, save boiler to loop boiler dictionary: `for boiler_b in B_RMR.ASHRAE229.boilers: loop_boiler_dict[boiler_b.loop].append(boiler_b)`
+
 - For each fluid loop in B_RMR: `for fluid_loop_b in B_RMR.ASHRAE229.fluid_loops:`
 
-  - Check if fluid loop is heating type: `if fluid_loop_b.type == "HEATING":`
+  - Check if fluid loop is connected to boiler(s): `if fluid_loop_b in loop_boiler_dict.keys()`
 
-    **Rule Assertion:**
+    **Rule Assertion - Component:**
 
     - Case 1: For each fluid loop that boiler serves, if design supply temperature is 180F and design return temperature is 130F: `if ( fluid_loop_b.heating_design_and_control.design_supply_temperature == 180 ) AND ( fluid_loop_b.heating_design_and_control.design_return_temperature == 130 ): PASS`
 
-    - Case 2: Else: `else: FAIL`
+    - Case 2: Else, save component ID to output array for failed components:: `else: FAIL and failed_components_array.append(fluid_loop_b)`
+
+**Rule Assertion - RMR:**
+
+- Case 1: If all components pass: `if ALL_COMPONENTS == PASS: PASS`
+
+- Case 2: Else, list all failed components' ID: `else: FAIL and raise_message ${failed_components_array}`
 
 **[Back](../_toc.md)**
+
+**Notes:**
+
+1. This logic only checks all fluid loops connected to boilers meet the requirement. Other heating loops that are not connected to boilers will not be checked. But these rules will fail the "one-loop" check.
