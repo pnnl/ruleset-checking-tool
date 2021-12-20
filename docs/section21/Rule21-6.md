@@ -10,31 +10,48 @@
 **Applicability:** All required data elements exist for B_RMR  
 **Applicability Checks:**  
 
-1. B-RMR is modeled with at least one air-side system that is Type-1, 5, 7, 11, or 12
-2. B-RMR is not modeled with purchased heating.
-3. B-RMR is modeled with two boilers.
+1. B-RMR pass Rule 21-5.
+2. B-RMR is modeled with two boilers on each heating fluid loop.
 
 **Manual Check:** None  
 **Evaluation Context:** Building  
 **Data Lookup:** None  
 **Function Call:** None  
 
-**Applicability Checks:**  
+**Applicability Checks 1:**  
 
-1. B-RMR is modeled with at least one air-side system that is Type-1, 5, 7, 11, or 12: `PLACEHOLDER`
-2. B-RMR is not modeled with purchased heating: `if RULE-21-1 == "NOT APPLICABLE":`
-3. B-RMR is modeled with two boilers: `if ( Rule-21-5 == PASS ) AND ( LEN(B_RMR.ASHRAE229.boilers) == 2):`
+1. B-RMR pass Rule 21-5: `if Rule-21-5 == PASS:`
 
 ## Rule Logic:  
 
-- Get both boilers in B_RMR: `boiler_1 = B_RMR.ASHRAE229.boilers[0], boiler_2 = B_RMR.ASHRAE229.boilers[1]`
+- For each boiler in B_RMR, save boiler to loop boiler dictionary: `for boiler_b in B_RMR.ASHRAE229.boilers: loop_boiler_dict[boiler_b.loop].append(boiler_b)`
 
-**Rule Assertion:**
+- For each fluid loop in B_RMR: `for fluid_loop_b in B_RMR.ASHRAE229.fluid_loops:`
 
-- Case 1: If boiler_1's operation lower limit is 0 and operation upper limit is equal to its rated capacity, and boiler_2's operation lower limit is equal to its rated capacity and operation upper limit is equal to twice its rated capacity: `if ( boiler_1.operation_lower_limit == 0 ) AND ( boiler_1.operation_upper_limit == boiler_1.rated_capacity ) AND ( boiler_2.operation_lower_limit == boiler_2.rated_capacity ) AND ( boiler_2.operation_upper_limit == boiler_2.rated_capacity * 2 ): PASS`
+  - Check if fluid loop type is heating: `if fluid_loop_b.type == "HEATING":`
 
-- Case 2: If boiler_2's operation lower limit is 0 and operation upper limit is equal to its rated capacity, and boiler_1's operation lower limit is equal to its rated capacity and operation upper limit is equal to twice its rated capacity: `if ( boiler_2.operation_lower_limit == 0 ) AND ( boiler_2.operation_upper_limit == boiler_2.rated_capacity ) AND ( boiler_1.operation_lower_limit == boiler_1.rated_capacity ) AND ( boiler_1.operation_upper_limit == boiler_1.rated_capacity * 2 ): PASS`
+    - Get all boilers on loop: `boilers_array = loop_boiler_dict[hhw_loop]`
 
-- Case 3: Else: `else: FAIL`
+      - Check if loop has two boilers, set applicability flag: `if boilers_array.length == 2: rule_applicability_check = TRUE`
+
+        - Get both boilers on loop: `boiler_1 = B_RMR.ASHRAE229.boilers[0], boiler_2 = B_RMR.ASHRAE229.boilers[1]`
+
+            **Rule Assertion - Component:**
+
+              - Case 1: If boiler_1's operation lower limit is 0 and operation upper limit is equal to its rated capacity, and boiler_2's operation lower limit is equal to its rated capacity and operation upper limit is equal to twice its rated capacity: `if ( boiler_1.operation_lower_limit == 0 ) AND ( boiler_1.operation_upper_limit == boiler_1.rated_capacity ) AND ( boiler_2.operation_lower_limit == boiler_2.rated_capacity ) AND ( boiler_2.operation_upper_limit == boiler_2.rated_capacity * 2 ): PASS`
+
+              - Case 2: If boiler_2's operation lower limit is 0 and operation upper limit is equal to its rated capacity, and boiler_1's operation lower limit is equal to its rated capacity and operation upper limit is equal to twice its rated capacity: `if ( boiler_2.operation_lower_limit == 0 ) AND ( boiler_2.operation_upper_limit == boiler_2.rated_capacity ) AND ( boiler_1.operation_lower_limit == boiler_1.rated_capacity ) AND ( boiler_1.operation_upper_limit == boiler_1.rated_capacity * 2 ): PASS`
+
+              - Case 3: Else, save component ID to output array for failed components: `else: FAIL and failed_components_array.append(boiler_1.id, boiler_2.id).`
+
+**Applicability Check 2:**
+
+1. Rule is applicable if P-RMR is modeled with purchased hot water or steam: `if rule_applicability_check: is_applicable = TRUE`
+
+**Rule Assertion - RMR:**
+
+- Case 1: If all components pass: `if ALL_COMPONENTS == PASS: PASS`
+
+- Case 2: Else, list all failed components' ID: `else: FAIL and raise_message ${failed_components_array}`
 
 **[Back](../_toc.md)**
