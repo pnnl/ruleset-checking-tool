@@ -35,13 +35,13 @@
 
       - Case 1: For each heating fluid loop, if heating design and control component is sized using coincident load: `if heating_design_and_control_b.is_sized_using_coincident_load: PASS`
 
-      - Case 2: Else, save component ID to output array: `else: FAIL and failed_component_array.append(fluid_loop_b.id).`
+      - Case 2: Else, save component ID to output array for failed components:: `else: FAIL and failed_components_array.append(fluid_loop_b.id).`
 
 **Rule Assertion - RMR:**
 
-- Case 1: If for all heating loop heating, design and control components are sized using coincident load: `if ALL_COMPONENTS == PASS: PASS`
+- Case 1: If all components pass: `if ALL_COMPONENTS == PASS: PASS`
 
-- Case 2: Else, list all failed components' ID: `else: FAIL and raise_message ${failed_component_array}`
+- Case 2: Else, list all failed components' ID: `else: FAIL and raise_message ${failed_components_array}`
 
 **[Back](../_toc.md)**
 
