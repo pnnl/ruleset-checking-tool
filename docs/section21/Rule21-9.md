@@ -11,8 +11,6 @@
 **Applicability Checks:**  
 
 1. B-RMR is not modeled with purchased heating.
-2. Pass Rule 21-11
-3. Pass Rule 21-18
 
 **Manual Check:** None  
 **Evaluation Context:** Building  
@@ -22,18 +20,18 @@
 **Applicability Checks:**  
 
 1. B-RMR is not modeled with purchased heating: `if Rule-21-1 == "NOT APPLICABLE":`  
-2. Pass Rule 21-11: `if Rule-21-11 == "PASS"`  
-3. Pass Rule 21-18: `if Rule-21-18 == "PASS"`  
 
 ## Rule Logic:  
 
+- For each boiler in B_RMR, save boiler to loop boiler dictionary: `for boiler_b in B_RMR.ASHRAE229.boilers: loop_boiler_dict[boiler_b.loop].append(boiler_b)`
+
 - For each fluid loop in B_RMR: `for fluid_loop_b in B_RMR.ASHRAE229.fluid_loops:`
 
-  - Check if fluid loop is heating type: `if fluid_loop_b.type == "HEATING":`
+  - Check if fluid loop is connected to boiler(s): `if fluid_loop_b in loop_boiler_dict.keys()`
 
     **Rule Assertion - Component:**
 
-    - Case 1: For heating hot water loop that is served by boiler, if total pump power per flow rate is equal to 19W/gpm: `if fluid_loop_b.pump_power_per_flow_rate == 19: PASS`
+    - Case 1: For heating hot water loop that boiler serves, if total pump power per flow rate is equal to 19W/gpm: `if fluid_loop_b.pump_power_per_flow_rate == 19: PASS`
 
     - Case 2: Else, save component ID to output array for failed components:: `else: FAIL and failed_components_array.append(fluid_loop_b)`
 
