@@ -31,10 +31,16 @@
 
   - Check if fluid loop is heating type: `if fluid_loop_b.type == "HEATING":`
 
-    **Rule Assertion:**
+    **Rule Assertion - Component:**
 
     - Case 1: For heating hot water loop that is served by boiler, if total pump power per flow rate is equal to 19W/gpm: `if fluid_loop_b.pump_power_per_flow_rate == 19: PASS`
 
-    - Case 2: Else: `else: FAIL`
+    - Case 2: Else, save component ID to output array for failed components:: `else: FAIL and failed_components_array.append(fluid_loop_b)`
+
+**Rule Assertion - RMR:**
+
+- Case 1: If all components pass: `if ALL_COMPONENTS == PASS: PASS`
+
+- Case 2: Else, list all failed components' ID: `else: FAIL and raise_message ${failed_components_array}`
 
 **[Back](../_toc.md)**
