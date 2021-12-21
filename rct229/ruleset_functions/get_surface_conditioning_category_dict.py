@@ -1,14 +1,15 @@
+import pandas as pd
+
 from rct229.ruleset_functions.get_zone_conditioning_category_dict import (
-    mock_get_zone_conditioning_category_dict,
-    CONDITIONED_RESIDENTIAL,
-    CONDITIONED_NON_RESIDENTIAL,
     CONDITIONED_MIXED,
+    CONDITIONED_NON_RESIDENTIAL,
+    CONDITIONED_RESIDENTIAL,
     SEMI_HEATED,
     UNCONDITIONED,
     UNENCOLOSED,
+    mock_get_zone_conditioning_category_dict,
 )
 from rct229.utils.jsonpath_utils import find_all
-import pandas as pd
 
 # Constants
 # TODO: These should directly from the enumerations
