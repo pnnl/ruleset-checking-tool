@@ -8,6 +8,15 @@ MAX_FLOOR_TILT = 180 * DEGREES
 MIN_ROOF_TILT = 0 * DEGREES
 MAX_ROOF_TILT = 60 * DEGREES
 
+# These constants are intended for export
+ABOVE_GRADE_WALL: str = "ABOVE-GRADE WALL"
+BELOW_GRADE_WALL: str = "BELOW-GRADE WALL"
+FLOOR: str = "FLOOR"
+GROUND: str = "GROUND"
+HEATED_SLAB_ON_GRADE: str = "HEATED SLAB-ON-GRADE"
+ROOF: str = "ROOF"
+UNHEATED_SLAB_ON_GRADE: str = "UNHEATED SLAB-ON-GRADE"
+
 
 def get_opaque_surface_type(surface):
     """Determines a surface's opaque surface type
@@ -36,24 +45,24 @@ def get_opaque_surface_type(surface):
 
     # Check for roof
     if MIN_ROOF_TILT <= surface_tilt < MAX_ROOF_TILT:
-        surface_type = "ROOF"
+        surface_type = ROOF
 
     # Check for a floor type
     elif MIN_FLOOR_TILT <= surface_tilt <= MAX_FLOOR_TILT:
         if (
             surface["construction"].get("has_radiant_heating")
-            and surface["adjacent_to"] == "GROUND"
+            and surface["adjacent_to"] == GROUND
         ):
-            surface_type = "HEATED SLAB-ON-GRADE"
-        elif surface["adjacent_to"] == "GROUND":
-            surface_type = "UNHEATED SLAB-ON-GRADE"
+            surface_type = HEATED_SLAB_ON_GRADE
+        elif surface["adjacent_to"] == GROUND:
+            surface_type = UNHEATED_SLAB_ON_GRADE
         else:
-            surface_type = "FLOOR"
+            surface_type = FLOOR
 
     # Is a wall
-    elif surface["adjacent_to"] == "GROUND":
-        surface_type = "BELOW-GRADE WALL"
+    elif surface["adjacent_to"] == GROUND:
+        surface_type = BELOW_GRADE_WALL
     else:
-        surface_type = "ABOVE-GRADE WALL"
+        surface_type = ABOVE_GRADE_WALL
 
     return surface_type
