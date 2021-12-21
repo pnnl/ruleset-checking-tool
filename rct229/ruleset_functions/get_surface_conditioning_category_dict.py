@@ -93,6 +93,21 @@ SCC_DATA_FRAME = pd.DataFrame(
 
 
 def get_surface_conditioning_category_dict(climate_zone, building):
+    """Determines the surface conditioning category for every surface in a building
+
+    Parameters
+    ----------
+    climate_zone : str
+        One of the ClimateZone2019ASHRAE901 enumerated values
+    building : dict
+        A dictionary representing a building as defined by the ASHRAE229 schema
+    Returns
+    -------
+    dict
+        A dictionary that maps surfaces to one of the conditioning categories:
+        EXTERIOR_RESIDENTIAL, EXTERIOR_NON_RESIDENTIAL, EXTERIOR_MIXED,
+        SEMI_EXTERIOR, UNREGULATED
+    """
     # The dictionary to be returned
     surface_conditioning_category_dict = {}
 
@@ -100,7 +115,7 @@ def get_surface_conditioning_category_dict(climate_zone, building):
     zcc_dict = get_zone_conditioning_category_dict(climate_zone, building)
 
     # Loop through all the zones in the building
-    for zone in find_all("$..zones[*]", building):
+    for zone in find_all("building_segments[*].zones[*]", building):
         # Zone conditioning category
         zcc = zcc_dict[zone["id"]]
 
@@ -108,8 +123,12 @@ def get_surface_conditioning_category_dict(climate_zone, building):
         for surface in zone["surfaces"]:
             surface_adjacent_to = surface["adjacent_to"]
             surface_conditioning_category_dict[surface["id"]] = SCC_DATA_FRAME.at(
+                # row index
                 zcc,
+                # column index
                 zcc_dict[surface["adjacent_zone"]]
                 if surface_adjacent_to == INTERIOR
                 else surface_adjacent_to,
             )
+
+    return surface_conditioning_category_dict
