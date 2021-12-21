@@ -11,8 +11,7 @@ purchased hot water or steam in both the proposed design and baseline building d
 **Applicability:** All required data elements exist for B_RMR  
 **Applicability Checks:**  
 
-1. P-RMR is modeled with purchased hot water or steam
-2. B-RMR is modeled with at least one air-side system that is Type-1, 5, 7, 11, or 12.
+1. B-RMR is modeled with at least one air-side system that is Type-1, 5, 7, 11, or 12.
 
 **Manual Check:** None  
 **Evaluation Context:** Building  
