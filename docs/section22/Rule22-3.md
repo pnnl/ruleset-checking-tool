@@ -10,12 +10,8 @@
 **Applicability:** All required data elements exist for B_RMR  
 **Applicability Checks:**  
 
-1. B-RMR is modeled with at least one air-side system that is Type-7, 8, 12, or 13
-2. B-RMR is not modeled with any air-side system that is type-11.
-3. B-RMR is not modeled with purchased chilled water.
-4. Pass Rule 22-34, Baseline must only have no more than one CHW plant.
-5. Pass Rule 22-7, Baseline chilled water system that does not use purchased chilled water shall be modeled as primary/secondary systems.
-
+1. B-RMR is not modeled with any air-side system that is type-11.
+2. B-RMR is not modeled with purchased chilled water.
 
 **Manual Check:** None  
 **Evaluation Context:** Building  
@@ -24,20 +20,27 @@
 
 **Applicability Checks:**  
 
-1. B-RMR is modeled with at least one air-side system that is Type-7, 8, 12, or 13: `PLACEHOLDER:`
-2. B-RMR is not modeled with any air-side system that is Type-11: `PLACEHOLDER`
-3. B-RMR is not modeled with purchased chilled water: `if Rule-18-8 == "NOT APPLICABLE":`
-4. Pass Rule 22-34, Baseline must only have no more than one CHW plant: `if Rule-22-34 == "PASS":`
-5. Pass Rule 22-7, Baseline chilled water system that does not use purchased chilled water shall be modeled as primary/secondary systems: `if Rule-22-7 == "PASS":`
+1. B-RMR is not modeled with any air-side system that is Type-11: `PLACEHOLDER`
+2. B-RMR is not modeled with purchased chilled water: `if Rule-18-8 == "NOT APPLICABLE":`
 
 ## Rule Logic:  
 
-- Get primary CHW loop in B_RMR `primary_chw_loop_b = B_RMR.ASHRAE229.chillers[0].cooling_loop`
+- For each chiller in B_RMR, save chiller to loop-chiller dictionary: `for chiller_b in B_RMR.ASHRAE229.chillers: loop_chiller_dict[chiller_b.cooling_loop].append(chiller_b)`
 
-  **Rule Assertion:**
+- For each fluid loop in B_RMR: `for fluid_loop_b in B_RMR.ASHRAE229.fluid_loops:`
 
-  - Case 1: For Baseline chilled water loop that is not purchased cooling and does not serve any Baseline System Type-11, if supply temperature is reset based on outdoor dry-bulb temperature: `if primary_chw_loop_b.cooling_or_condensing_design_and_control.temperature_reset_type == "OUTSIDE_AIR_RESET": PASS`
+  - Check if fluid loop is connected to chiller(s): `if fluid_loop_b in loop_chiller_dict.keys()`
 
-  - Case 2: Else: `else: FAIL`
+    **Rule Assertion - Component:**
+
+    - Case 1: For Baseline chilled water loop that is not purchased cooling and does not serve any Baseline System Type-11, if supply temperature is reset based on outdoor dry-bulb temperature: `if fluid_loop_b.cooling_or_condensing_design_and_control.temperature_reset_type == "OUTSIDE_AIR_RESET": PASS`
+
+    - Case 2: Else, save component ID to output array for failed components:: `else: FAIL and failed_components_array.append(fluid_loop_b)`
+
+**Rule Assertion - RMR:**
+
+- Case 1: If all components pass: `if ALL_COMPONENTS == PASS: PASS`
+
+- Case 2: Else, list all failed components' ID: `else: FAIL and raise_message ${failed_components_array}`
 
 **[Back](../_toc.md)**
