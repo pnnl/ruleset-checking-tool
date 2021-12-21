@@ -10,10 +10,7 @@
 **Applicability:** All required data elements exist for B_RMR  
 **Applicability Checks:**  
 
-1. B-RMR is modeled with at least one air-side system that is Type-7, 8, 11, 12, or 13
-2. Pass Rule 22-34, Baseline must only have no more than one CHW plant.
-3. B-RMR is not modeled with purchased chilled water.
-4. Pass Rule 22-22.
+1. B-RMR is not modeled with purchased chilled water.
 
 **Manual Check:** None  
 **Evaluation Context:** Building  
@@ -22,27 +19,26 @@
 
 **Applicability Checks:**  
 
-1. B-RMR is modeled with at least one air-side system that is Type-7, 8, 11, 12, or 13: `PLACEHOLDER`
-2. Pass Rule 22-34, Baseline must only have no more than one CHW plant: `if Rule-22-34 == "PASS":`
-3. B-RMR is not modeled with purchased chilled water: `if Rule-18-8 == "NOT APPLICABLE":`  
-4. Pass Rule 21-18: `if Rule-21-18 == "PASS"`  
+1. B-RMR is not modeled with purchased chilled water: `if Rule-18-8 == "NOT APPLICABLE":`  
 
 ## Rule Logic:  
 
+- For each chiller in B_RMR, save chiller to loop-chiller dictionary: `for chiller_b in B_RMR.ASHRAE229.chillers: loop_chiller_dict[chiller_b.cooling_loop].append(chiller_b)`
+
 - For each fluid loop in B_RMR: `for fluid_loop_b in B_RMR.ASHRAE229.fluid_loops:`
 
-  - Check if loop is cooling type: `if fluid_loop_b.type == "COOLING":`
+  - Check if fluid loop is connected to chiller(s): `if fluid_loop_b in loop_chiller_dict.keys()`
 
-    - Check if loop is primary CHW loop: `if fluid_loop_b.child_loops == NULL:` (See Note#1)
+    **Rule Assertion - Component:**
 
-      **Rule Assertion:**
+    - Case 1: For baseline primary chilled water loop, if design supply temperature is 44F: `if fluid_loop_b.cooling_or_condensing_design_and_control.design_supply_temperature == 44: PASS`
 
-      - Case 1: For baseline primary chilled water loop, if design supply temperature is 44F: `if fluid_loop_b.cooling_or_condensing_design_and_control.design_supply_temperature == 44: PASS`
+    - Case 2: Else, save component ID to output array for failed components:: `else: FAIL and failed_components_array.append(fluid_loop_b)`
 
-      - Case 2: Else: `else: FAIL`
+**Rule Assertion - RMR:**
+
+- Case 1: If all components pass: `if ALL_COMPONENTS == PASS: PASS`
+
+- Case 2: Else, list all failed components' ID: `else: FAIL and raise_message ${failed_components_array}`
 
 **[Back](../_toc.md)**
-
-**Notes:**
-
-1. This rule only need to check primary loop. If we use Rule 22-22 "The baseline building design’s chiller plant shall be modeled with chillers having the number and type as indicated in Table G3.1.3.7 as a function of building peak cooling load." as applicability check, we only check if the loop has child loop to verify that it is a primary loop. Similar to Rule 21-11A.
