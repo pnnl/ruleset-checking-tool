@@ -1,5 +1,5 @@
 from rct229.ruleset_functions.get_zone_conditioning_category_dict import (
-    get_zone_conditioning_category_dict,
+    mock_get_zone_conditioning_category_dict,
     CONDITIONED_RESIDENTIAL,
     CONDITIONED_NON_RESIDENTIAL,
     CONDITIONED_MIXED,
@@ -112,7 +112,7 @@ def get_surface_conditioning_category_dict(climate_zone, building):
     surface_conditioning_category_dict = {}
 
     # Get the conditioning category for all the zones in the building
-    zcc_dict = get_zone_conditioning_category_dict(climate_zone, building)
+    zcc_dict = mock_get_zone_conditioning_category_dict(climate_zone, building)
 
     # Loop through all the zones in the building
     for zone in find_all("building_segments[*].zones[*]", building):
