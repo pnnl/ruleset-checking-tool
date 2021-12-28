@@ -14,7 +14,7 @@ def mock_get_zone_conditioning_category_dict(climate_zone, building):
     """To be used until get_zone_conditioning_category_dict(climate_zone, building) is finished"""
     building_zones = find_all("building_segments[*].zones[*]", building)
 
-    return {zone["id"]: "CONDITIONED_MIXED" for zone in building_zones}
+    return {zone["id"]: "CONDITIONED MIXED" for zone in building_zones}
 
 
 def get_zone_conditioning_category_dict(climate_zone, building):
