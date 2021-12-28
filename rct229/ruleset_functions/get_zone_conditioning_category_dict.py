@@ -10,6 +10,13 @@ ZERO_AREA = 0 * ureg("ft2")
 ZERO_UA = 0 * ureg("ft2 * Btu / (hr * ft2 * R)")
 
 
+def mock_get_zone_conditioning_category_dict(climate_zone, building):
+    """To be used until get_zone_conditioning_category_dict(climate_zone, building) is finished"""
+    building_zones = find_all("building_segments[*].zones[*]", building)
+
+    return {zone["id"]: "CONDITIONED_MIXED" for zone in building_zones}
+
+
 def get_zone_conditioning_category_dict(climate_zone, building):
     """Determines the zone conditioning category for every zone in a building
 
