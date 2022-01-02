@@ -31,7 +31,7 @@
 
     **Rule Assertion - Component:**
 
-    - Case 1: For heating hot water loop that boiler serves, if loop is modeled with continuous variable flow: `if fluid_loop_b.heating_design_and_control.flow_control == "VARIABLE_FLOW": PASS`
+    - Case 1: For heating hot water loop that boiler serves, if loop is modeled with continuous variable flow: `if ( fluid_loop_b.heating_design_and_control.flow_control == "VARIABLE_FLOW" ) AND ( fluid_loop_b.operation == "CONTINUOUS" ): PASS`
 
     - Case 2: Else, save component ID to output array for failed components:: `else: FAIL and failed_components_array.append(fluid_loop_b)`
 
