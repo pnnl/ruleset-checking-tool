@@ -27,7 +27,7 @@
 
     - Get HVAC system serving terminal: `hvac_b = terminal_b.served_by_heating_ventilation_air_conditioning_systems`
   
-      - Check if HVAC system is type 6 or 8: `if baseline_hvac_type(hvac_b) in ["SYS-5", "SYS-7"]:`
+      - Check if HVAC system is type 5 or 7: `if baseline_hvac_type(hvac_b) in ["SYS-5", "SYS-7"]:`
 
         - Set applicability flag: `rule_applicability_check = TRUE`
 
