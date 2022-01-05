@@ -36,7 +36,7 @@ def clean_schema_units(schema_unit_str):
                 substring_list[i] = "(" + re.sub("-", "*", substring) + ")"
 
         # Put it all together
-        cleaned_unit_str = "".join(substring_list)
+        cleaned_unit_str = "/".join(substring_list)
 
     # Nothing to clean
     else:

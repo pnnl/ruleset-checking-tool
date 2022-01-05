@@ -11,9 +11,9 @@ from rct229.schema.schema_utils import *
 
 # ---------------------------------------USER INPUTS---------------------------------------
 
-spreadsheet_name = "lighting_tcd_updates.xlsx"
-json_name = "lighting_tcd_updates.json"
-sheet_name = "TCDs"
+spreadsheet_name = "example_rmrs.xlsx"
+json_name = "envelope_examples.json"
+sheet_name = "Envelope"
 
 # --------------------------------------SCRIPT STARTS--------------------------------------
 
@@ -346,7 +346,7 @@ def create_test_json_from_excel(spreadsheet_name, sheet_name, json_name):
     # Define output json file path
     json_file_path = os.path.join(file_dir, "..", json_name)
 
-    json_dict = create_dictionary_from_excel(spreadsheet_name, "TCDs")
+    json_dict = create_dictionary_from_excel(spreadsheet_name, sheet_name)
 
     # Dump JSON to string for writing
     json_string = json.dumps(json_dict, indent=4)
@@ -413,6 +413,7 @@ def update_unit_convention_record(spreadsheet_name, sheet_name):
     # Copy columns from the spreadsheet that correspond to units or keys
     units_df = master_df[relevant_columns].copy()
     keys_df = master_df[keys].copy()
+    requires_update = False
 
     # Initialize unit definition dictionary
     with open(unit_def_json_path) as f:
@@ -432,8 +433,6 @@ def update_unit_convention_record(spreadsheet_name, sheet_name):
 
         tcd_key = "ip"
         rmr_key = "si"
-
-        requires_update = False
 
         tcd_key_list = []
 
