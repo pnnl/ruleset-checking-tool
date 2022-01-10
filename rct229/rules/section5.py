@@ -97,3 +97,72 @@ class Section5Rule3(RuleDefinitionListIndexedBase):
 
 
 # ------------------------
+
+
+class Section5Rule31(RuleDefinitionListIndexedBase):
+    """Rule 3 of ASHRAE 90.1-2019 Appendix G Section 5 (Envelope)"""
+
+    def __init__(self):
+        super(Section5Rule31, self).__init__(
+            rmrs_used=UserBaselineProposedVals(False, True, True),
+            each_rule=Section5Rule31.BuildingRule(),
+            index_rmr="baseline",
+            id="5-31",
+            description="Manual fenestration shading devices, such as blinds or shades, shall be modeled or not modeled the same as in the baseline building design",
+            rmr_context="buildings",
+        )
+
+    class BuildingRule(RuleDefinitionListIndexedBase):
+        def __init__(self):
+            super(Section5Rule31.BuildingRule, self).__init__(
+                rmrs_used=UserBaselineProposedVals(False, True, True),
+                each_rule=Section5Rule31.BuildingRule.SurfaceRule(),
+                index_rmr="baseline",
+                list_path="$..surfaces[*]",
+            )
+
+        class SurfaceRule(RuleDefinitionBase):
+            def __init__(self):
+                super(Section5Rule31.BuildingRule.SurfaceRule, self).__init__(
+                    rmrs_used=UserBaselineProposedVals(False, True, True),
+                    required_fields={
+                        "subsurfaces[*]": ["has_manual_interior_shades"],
+                    },
+                )
+
+            def manual_check_required(self, context, calc_vals, data):
+                """Manual check is required if the has_manual_interior_shades values
+                for the proposed subsurfaces are not all the same"""
+                surface_p = context.proposed
+                # Using get() handles the case of a missing subsurfaces field
+                subsurfaces_p = surface_p.get("subsurfaces", [])
+                num_shades_p = len(
+                    [
+                        subsurface_p
+                        for subsurface_p in subsurfaces_p
+                        if subsurface_p["has_manual_interior_shades"]
+                    ]
+                )
+                num_subsurfaces_p = len(subsurfaces_p)
+
+                return num_shades_p > 0 and num_shades_p != num_subsurfaces_p
+
+            def rule_check(self, context, calc_vals, data=None):
+                subsurfaces_b = context.baseline.get("subsurfaces", [])
+                subsurfaces_p = context.proposed.get("subsurfaces", [])
+                has_manual_interior_shades_p = (
+                    subsurfaces_p[0] if len(subsurfaces_p) > 0 else None
+                )
+
+                # Note: Edge case: all() returns True for the empty list, so rule_check()
+                # returns True if the baseline surface has no subsurfaces
+                return all(
+                    [
+                        subsurface_b["has_manual_interior_shades"]
+                        == has_manual_interior_shades_p
+                        for subsurface_b in subsurfaces_b
+                    ]
+                )
+
+
+# ------------------------
