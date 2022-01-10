@@ -15,7 +15,7 @@ CONDITIONED_NON_RESIDENTIAL = "CONDITIONED NON-RESIDENTIAL"
 CONDITIONED_RESIDENTIAL = "CONDITIONED RESIDENTIAL"
 SEMI_HEATED = "SEMI-HEATED"
 UNCONDITIONED = "UNCONDITIONED"
-UNENCOLOSED = "UNENCLOSED"
+UNENCLOSED = "UNENCLOSED"
 
 
 def mock_get_zone_conditioning_category_dict(climate_zone, building):
@@ -215,7 +215,7 @@ def get_zone_conditioning_category_dict(climate_zone, building):
                     )
                 ]
             ):
-                zone_conditioning_category_dict[zone_id] = UNENCOLOSED  # zone_1_6
+                zone_conditioning_category_dict[zone_id] = UNENCLOSED  # zone_1_6
             # Check for crawlspace
             elif zone["volume"] / pint_sum(
                 find_all("spaces[*].floor_area", zone)
@@ -227,7 +227,7 @@ def get_zone_conditioning_category_dict(climate_zone, building):
                     for surface in zone["surfaces"]
                 ]
             ):
-                zone_conditioning_category_dict[zone_id] = UNENCOLOSED  # zone_1_7
+                zone_conditioning_category_dict[zone_id] = UNENCLOSED  # zone_1_7
             # Check for attic
             elif any(
                 [
@@ -236,7 +236,7 @@ def get_zone_conditioning_category_dict(climate_zone, building):
                     for surface in zone["surfaces"]
                 ]
             ):
-                zone_conditioning_category_dict[zone_id] = UNENCOLOSED  # zone_1_8
+                zone_conditioning_category_dict[zone_id] = UNENCLOSED  # zone_1_8
             # Anything else
             else:
                 zone_conditioning_category_dict[zone_id] = UNCONDITIONED  # zone_1_9

@@ -6,7 +6,7 @@ from rct229.ruleset_functions.get_zone_conditioning_category_dict import (
     CONDITIONED_RESIDENTIAL,
     SEMI_HEATED,
     UNCONDITIONED,
-    UNENCOLOSED,
+    UNENCLOSED,
     mock_get_zone_conditioning_category_dict,
 )
 from rct229.utils.jsonpath_utils import find_all
@@ -87,7 +87,7 @@ SCC_DATA_FRAME = pd.DataFrame(
         CONDITIONED_NON_RESIDENTIAL,
         CONDITIONED_MIXED,
         SEMI_HEATED,
-        UNENCOLOSED,
+        UNENCLOSED,
         UNCONDITIONED,
     ],
 )
