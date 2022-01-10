@@ -7,6 +7,14 @@ from rct229.ruleset_functions.get_opaque_surface_type import (
     get_opaque_surface_type,
     ROOF,
 )
+from rct229.ruleset_functions.get_surface_conditioning_category_dict import (
+    get_surface_conditioning_category_dict,
+    EXTERIOR_MIXED,
+    EXTERIOR_NON_RESIDENTIAL,
+    EXTERIOR_RESIDENTIAL,
+    SEMI_EXTERIOR,
+    UNREGULATED,
+)
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.match_lists import match_lists_exactly_by_id
 
@@ -120,7 +128,8 @@ class Section5Rule5(RuleDefinitionListIndexedBase):
         )
 
         def create_data(context, data=None):
-            return {"climate_zone": context.baseline["weather"]["climate_zone"]}
+            rmr_baseline = context.baseline
+            return {"climate_zone": rmr_baseline["weather"]["climate_zone"]}
 
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
@@ -131,14 +140,24 @@ class Section5Rule5(RuleDefinitionListIndexedBase):
                 index_rmr="baseline",
             )
 
-        # Create the list of all roof surfaces to be passed on to RoofRule
         def create_context_list(context, data=None):
-            context_list = []
-            for surface in find_all("$..surfaces[*]"):
-                if get_opaque_surface_type(surface) == ROOF:
-                    context_list.append(UserBaselineProposedVals(None, surface, None))
+            building = context.baseline
+            # List of all baseline roof surfaces to become the context for RoofRule
+            return [
+                UserBaselineProposedVals(None, surface, None)
+                for surface in find_all("$..surfaces[*]", building)
+                if get_opaque_surface_type(surface) == ROOF
+            ]
 
-            return context_list
+        def create_data(self, context, data=None):
+            building = context.baseline
+            # Merge into the existing data dict
+            return {
+                **data,
+                surface_conditioning_category_dict: get_surface_conditioning_category_dict(
+                    data["climate_zone"], building
+                ),
+            }
 
         class RoofRule(RuleDefinitionBase):
             def __init__(self):
@@ -148,21 +167,55 @@ class Section5Rule5(RuleDefinitionListIndexedBase):
                 )
 
             def get_calc_vals(self, context, data=None):
-                surface_conditioning_category_dict = (
-                    get_surface_conditioning_category_dict(
-                        data["climate_zone"], context.baseline
-                    )
-                )
-                for surface in find_all(EXTERIOR_SURFACES_JSONPATH, context.baseline):
-                    if surface["does_cast_shade"]:
-                        baseline_surfaces_casting_shade_ids.append(surface["id"])
+                climate_zone: str = data["climate_zone"]
+                scc: str = data["surface_conditioning_category_dict"][roof["id"]]
+                roof = context.baseline
+                roof_u_factor = roof["construction"]["u_factor"]
+
+                tartget_u_factor = None
+                target_u_factor_res = None
+                target_u_factor_nonres = None
+
+                if scc in [
+                    EXTERIOR_RESIDENTIAL,
+                    EXTERIOR_NON_RESIDENTIAL,
+                    SEMI_EXTERIOR,
+                ]:
+                    target_u_factor = table_G34_lookup(climate_zone, scc, ROOF)[
+                        "u_value"
+                    ]
+                elif scc == EXTERIOR_MIXED:
+                    target_u_factor_res = table_G34_lookup(
+                        climate_zone, EXTERIOR_RESIDENTIAL, ROOF
+                    )["u_value"]
+                    target_u_factor_nonres = table_G34_lookup(
+                        climate_zone, EXTERIOR_NON_RESIDENTIAL, ROOF
+                    )["u_value"]
+                    if target_u_factor_res == target_u_factor_nonres:
+                        target_u_factor = target_u_factor_res
 
                 return {
-                    "baseline_surfaces_casting_shade_ids": baseline_surfaces_casting_shade_ids
+                    "roof_u_factor": roof_u_factor,
+                    "target_u_factor": target_u_factor,
+                    "target_u_factor_res": target_u_factor_res,
+                    "target_u_factor_nonres": target_u_factor_nonres,
                 }
 
+            def manaul_check_required(self, context, calc_vals, data=None):
+                target_u_factor_res = calc_vals["target_u_factor_res"]
+                target_u_factor_nonres = calc_vals["target_u_factor_nonres"]
+
+                return (
+                    target_u_factor_res is not None
+                    and target_u_factor_nonres is not None
+                    and target_u_factor_res != target_u_factor_nonres
+                )
+
             def rule_check(self, context, calc_vals, data=None):
-                return len(calc_vals["baseline_surfaces_casting_shade_ids"]) == 0
+                roof_u_factor = calc_vals["roof_u_factor"]
+                target_u_factor = calc_vals["target_u_factor"]
+
+                return roof_u_factor == target_u_factor
 
 
 # ------------------------
