@@ -10,18 +10,31 @@
 **Applicability:** All required data elements exist for B-RMR  
 **Applicability Checks:**  
 
-1. B-RMR is modeled with at least one air-side system that is Type-1, 5, 7, 11, or 12.
-2. B-RMR is not modeled with purchase heating
+1. Pass Rule 21-1.
+2. B-RMR is modeled with at least one air-side system that is Type-1a, 7, 11, 12 or that is Type-1, 5, 7, 11, 12.
 
 **Manual Check:** None  
 **Evaluation Context:** Building  
 **Data Lookup:** None  
-**Function Call:** None  
+**Function Call:**  
+
+1. check_purchased_chw_hhw()
 
 **Applicability Check:**
 
-1. Rule is applicable if B-RMR is modeled with at least one air-side system that is Type-1, 5, 7, 11, or 12: `PLACEHOLDER`
-2. B-RMR is not modeled with purchased heating: `if RULE-21-1 == "NOT APPLICABLE":`
+1. Pass Rule 21-1: `if rule-21-1 == "PASS":`
+
+2. B-RMR is modeled with at least one air-side system that is Type-1a, 7, 11, 12 or that is Type-1, 5, 7, 11, 12:
+
+  - Check if P-RMR is modeled with purchased cooling or purchased hot water/steam: `purchased_chw_hhw_status_dict = check_purchased_chw_hhw(P_RMR)`
+
+    - If P-RMR is not modeled with purchased cooling (Note: Passing Rule 21-1 means P-RMR is not modeled with purchased heating.): `if NOT purchased_chw_hhw_status_dict["PURCHASED_COOLING"]:`
+
+      - Check if B-RMR is modeled with at least one air-side system that is Type-1, 5, 7, 11 or 12: `PLACEHOLDER`
+
+    - Else, P-RMR is modeled with purchased cooling: `else:`
+
+      - Check if B-RMR is modeled with at least one air-side system that is Type-1a, 7, 11 or 12: `PLACEHOLDER`
 
 ## Rule Logic:  
 
@@ -35,16 +48,6 @@
 
       - Case 1: For each heating fluid loop, if heating design and control component is sized using coincident load: `if heating_design_and_control_b.is_sized_using_coincident_load: PASS`
 
-      - Case 2: Else, save component ID to output array for failed components:: `else: FAIL and failed_components_array.append(fluid_loop_b.id).`
-
-**Rule Assertion - RMR:**
-
-- Case 1: If all components pass: `if ALL_COMPONENTS == PASS: PASS`
-
-- Case 2: Else, list all failed components' ID: `else: FAIL and raise_message ${failed_components_array}`
+      - Case 2: Else: `else: FAIL`
 
 **[Back](../_toc.md)**
-
-**Note:**
-
-1. Do we need to expand the logic to cover all cases, e.g. if logic cannot find any FluidLoop in B-RMR, or any FluidLoop that is heating type? This needs to be covered in either the logic or in applicability check.
