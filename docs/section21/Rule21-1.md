@@ -9,39 +9,37 @@ purchased hot water or steam in both the proposed design and baseline building d
 **Appendix G Section Reference:** Section G3.1.1.1 & G3.1.1.3.1 Building System-Specific Modeling Requirements for the Baseline model  
 
 **Applicability:** All required data elements exist for B_RMR  
-**Applicability Checks:**  
+**Applicability Checks:** None  
 
-1. B-RMR is modeled with at least one air-side system that is Type-1, 5, 7, 11, or 12.
-
-**Manual Check:** None  
+**Manual Check:** Yes  
 **Evaluation Context:** Building  
 **Data Lookup:** None  
-**Function Call:** None  
+**Function Call:** 
 
-**Applicability Check 1:**
-
-1. Rule is applicable if B-RMR is modeled with at least one air-side system that is Type-1, 5, 7, 11, or 12: `PLACEHOLDER`
+1. check_purchased_chw_hhw()
 
 ## Rule Logic:  
 
-- For each external fluid source in P_RMR: `for external_fluid_source_p in P_RMR.ASHRAE229.external_fluid_source:`
+- Check if P-RMR is modeled with purchased cooling or purchased hot water/steam: `purchased_chw_hhw_status_dict = check_purchased_chw_hhw(P_RMR)`
 
-  - Check if external fluid source in P_RMR is purchased hot water or steam: `if external_fluid_source_p.type in ["HOT_WATER", "STEAM]:`
+  - If P-RMR is not modeled with purchased hot water or steam: `if NOT purchased_chw_hhw_status_dict["PURCHASED_HEATING"]:`
 
-    - Set applicability flag: `rule_applicability_check = TRUE`
+    - Check if B-RMR is modeled with any external fluid source that is hot water or steam type: `if external_fluid_source_b.type in ["HOT_WATER", "STEAM"] for external_fluid_source_b in B_RMR.ASHRAE229.external_fluid_source:`
 
-**Rule Assertion:**
+      **Rule Assertion:** Case 1. Fail: `FAIL`
 
-- Case 1: If P-RMR is modeled with purchased hot water or steam: `if rule_applicability_check: UNDETERMINED and raise_message "P-RMR IS MODELED WITH PURCHASED HOT WATER OR STEAM. VERIFY B-RMR HEATING SOURCE IS MODELED CORRECTLY."`
+    - Else, B-RMR is not modeled with any external fluid source that is hot water or steam type: `else:`
 
-**Applicability Check 2:**
+      **Rule Assertion:** Case 2. Pass: `PASS`
 
-1. Rule is applicable if P-RMR is modeled with purchased hot water or steam: `if rule_applicability_check: is_applicable = TRUE`
+  - Else, P-RMR is modeled with external fluid source that is hot water or steam type: `else:`
+  
+    **Rule Assertion:** Case 3. Undetermined: `UNDETERMINED and raise_message "P-RMR IS MODELED WITH PURCHASED HOT WATER OR STEAM. VERIFY B-RMR HEATING SOURCE IS MODELED CORRECTLY."`
 
 **[Back](../_toc.md)**
 
 **Notes:**
 
-1. Do we need to check the utility rate (Hot-water or steam costs shall be based on actual utility rates)?
-2. What if P-RMR is modeled with purchased hot water and steam, which source should be modeled in the baseline?
-3. Can SHW also be served by purchased HHW or steam?
+1. What if P-RMR is modeled with purchased hot water and steam, which source should be modeled in the baseline?
+2. Can SHW also be served by purchased HHW or steam?
+3. How to make sure that the external fluid source is used by system in P-RMR? Maybe it's just a orphan object.
