@@ -139,7 +139,7 @@ month = year / 12
 
 # Temperature
 degree_Celsius = kelvin; offset: 273.15 = C = celsius = degC = degreeC
-degree_Rankine = 5 / 9 * kelvin; offset: 0 = R = rankine = degR = degreeR
+degree_Rankine = 5 / 9 * kelvin; offset: 0 = R = rankine = degR = degreeR = °R
 degree_Fahrenheit = 5 / 9 * kelvin; offset: 233.15 + 200 / 9 = F = fahrenheit = degF = degreeF
 
 # Area
