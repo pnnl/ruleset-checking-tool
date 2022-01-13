@@ -21,9 +21,9 @@ Logic:
 
       - Check if terminal is connected to heating hot water loop: `if terminal.reheat_from_loop:`
 
-        - Check if zone is not already saved in loop dictionary: `if NOT zone.id in loop_dict[terminal.reheat_from_loop]["ZONE_LIST"]:`
+        - Check if zone is not already saved in loop dictionary: `if NOT zone.id in loop_zone_list_w_area_dict[terminal.reheat_from_loop]["ZONE_LIST"]:`
 
-          - Save zone id and total floor area to loop dictionary: `loop_dict[terminal.reheat_from_loop]["ZONE_LIST"].append(zone.id), loop_dict[terminal.reheat_from_loop]["TOTAL_AREA"] += zone_area`
+          - Save zone id and total floor area to loop dictionary: `loop_zone_list_w_area_dict[terminal.reheat_from_loop]["ZONE_LIST"].append(zone.id), loop_zone_list_w_area_dict[terminal.reheat_from_loop]["TOTAL_AREA"] += zone_area`
 
       - Get HVAC system connected to terminal: `hvac_sys = terminal.served_by_heating_ventilation_air_conditioning_systems`
 
@@ -31,17 +31,17 @@ Logic:
 
           - Check if heating system is connected to any fluid loop, get fluid loop for heating: `if heating_system.hot_water_loop: heating_loop_id = heating_system.hot_water_loop`
 
-            - Check if zone is not already saved in loop dictionary: `if NOT zone.id in loop_dict[heating_loop_id]["ZONE_LIST"]:`
+            - Check if zone is not already saved in loop dictionary: `if NOT zone.id in loop_zone_list_w_area_dict[heating_loop_id]["ZONE_LIST"]:`
 
-              - Add zone id and total floor area to loop dictionary: `loop_dict[heating_loop_id]["ZONE_LIST"].append(zone.id), loop_dict[heating_loop_id]["TOTAL_AREA"] += zone_area`
+              - Add zone id and total floor area to loop dictionary: `loop_zone_list_w_area_dict[heating_loop_id]["ZONE_LIST"].append(zone.id), loop_zone_list_w_area_dict[heating_loop_id]["TOTAL_AREA"] += zone_area`
 
         - For each cooling system in HVAC system: `for cooling_system in hvac_sys.cooling_system:`
 
           - Check if cooling system is connected to any fluid loop, get fluid loop for cooling: `if cooling_system.chilled_water_loop: cooling_loop_id = cooling_system.chilled_water_loop`
 
-            - Check if zone is not already saved in loop dictionary: `if NOT zone.id in loop_dict[cooling_loop_id]["ZONE_LIST"]:`
+            - Check if zone is not already saved in loop dictionary: `if NOT zone.id in loop_zone_list_w_area_dict[cooling_loop_id]["ZONE_LIST"]:`
 
-              - Add zone id and total floor area to loop dictionary: `loop_dict[cooling_loop_id]["ZONE_LIST"].append(zone.id), loop_dict[cooling_loop_id]["TOTAL_AREA"] += zone_area`
+              - Add zone id and total floor area to loop dictionary: `loop_zone_list_w_area_dict[cooling_loop_id]["ZONE_LIST"].append(zone.id), loop_zone_list_w_area_dict[cooling_loop_id]["TOTAL_AREA"] += zone_area`
 
 **Returns** `return loop_zone_list_w_area_dict`  
 
