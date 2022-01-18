@@ -27,12 +27,12 @@ def get_hvac_zone_list_w_area_dict(building):
 
     for zone in find_all("$..zones[*]", building):
         terminals = zone.get("terminals")
-        # Note: None and [] are falsey
+        # Note: None and [] are falsey; zone.terminals is optional
         if terminals:
             zone_area = pint_sum(find_all("spaces[*].floor_area", zone))
-            for terminal in zone.terminals:
+            for terminal in terminals:
                 hvac_sys_id = terminal[
-                    "served_by_heating_ventialtion_air_conditiong_systems"
+                    "served_by_heating_ventilation_air_conditioning_systems"
                 ]
 
                 # Initialize the hvac_sys entry if not already there
@@ -43,7 +43,7 @@ def get_hvac_zone_list_w_area_dict(building):
                     }
 
                 hvac_sys_entry = hvac_zone_list_w_area_dict[hvac_sys_id]
-                if zone["id"] not in zone_list:
+                if zone["id"] not in hvac_sys_entry["zone_list"]:
                     hvac_sys_entry["zone_list"].append(zone["id"])
                     hvac_sys_entry["total_area"] += zone_area
 
