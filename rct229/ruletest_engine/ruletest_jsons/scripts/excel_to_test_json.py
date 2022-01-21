@@ -11,9 +11,9 @@ from rct229.schema.schema_utils import *
 
 # ---------------------------------------USER INPUTS---------------------------------------
 
-spreadsheet_name = "example_rmrs.xlsx"
-json_name = "envelope_examples.json"
-sheet_name = "Envelope"
+spreadsheet_name = "boiler_tcd_updates.xlsx"
+json_name = "boiler_tests.json"
+sheet_name = "TCDs"
 
 # --------------------------------------SCRIPT STARTS--------------------------------------
 
@@ -96,7 +96,9 @@ def convert_units_from_tcd_to_rmr_schema(tcd_value, tcd_units, key_list):
     if isinstance(tcd_value, str):
         tcd_value = float(tcd_value)
 
-    tcd_quantity = tcd_value * ureg(tcd_units)
+    # Set the TCD quantity through pint
+    Q_ = ureg.Quantity
+    tcd_quantity = Q_(tcd_value, ureg(tcd_units))
 
     # Convert TCD quantity to units required by schema
     rmr_quantity = tcd_quantity.to(rmr_pint_units)

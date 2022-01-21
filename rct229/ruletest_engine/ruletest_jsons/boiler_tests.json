@@ -1,0 +1,2264 @@
+{
+    "rule-21-1-a": {
+        "Section": 21,
+        "Rule": 1,
+        "Test": "a",
+        "test_description": "Baseline RMR is modeled with purchased HW, same as proposed RMR",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "21-1",
+            "ruleset_reference": "-",
+            "rule_description": "For purchased HW/steam in Proposed, the baseline shall also be modeled with Pursches HW/steam",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Proposed RMR",
+            "rule_dependency": "Proposed is modeled with purchased HW/steam",
+            "mandatory_rule": "No",
+            "schema_version": "0.0.5"
+        },
+        "rmr_transformations": {
+            "proposed": {
+                "id": "ASHRAE229 1",
+                "buildings": [
+                    {
+                        "id": "Building 1",
+                        "building_open_schedule": "Required Building Schedule 1",
+                        "building_segments": [
+                            {
+                                "id": "Building Segment 1",
+                                "zones": [
+                                    {
+                                        "id": "Thermal Zone 1",
+                                        "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                        "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                        "terminals": [
+                                            {
+                                                "id": "Terminal 1",
+                                                "is_supply_ducted": false,
+                                                "served_by_heating_ventilation_air_conditioning_systems": "AHU_HW_System1"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "id": "Thermal Zone 2",
+                                        "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                        "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                        "terminals": [
+                                            {
+                                                "id": "Terminal 1",
+                                                "is_supply_ducted": false,
+                                                "served_by_heating_ventilation_air_conditioning_systems": "AHU_HW_System1"
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "heating_ventilation_air_conditioning_systems": [
+                                    {
+                                        "id": "AHU_HW_System1",
+                                        "heating_system": {
+                                            "id": "Heating System 1",
+                                            "heating_system_type": "FLUID_LOOP",
+                                            "hot_water_loop": "Purchased HW Loop 1"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                "external_fluid_source": [
+                    {
+                        "id": "Purchased HW 1",
+                        "loop": "Purchased HW Loop 1",
+                        "type": "HOT_WATER"
+                    }
+                ],
+                "fluid_loops": [
+                    {
+                        "id": "Purchased HW Loop 1",
+                        "type": "HEATING"
+                    }
+                ]
+            },
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "buildings": [
+                    {
+                        "id": "Building 1",
+                        "building_open_schedule": "Required Building Schedule 1",
+                        "building_segments": [
+                            {
+                                "id": "Building Segment 1",
+                                "zones": [
+                                    {
+                                        "id": "Thermal Zone 1",
+                                        "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                        "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                        "terminals": [
+                                            {
+                                                "id": "Terminal 1",
+                                                "is_supply_ducted": false,
+                                                "served_by_heating_ventilation_air_conditioning_systems": "AHU_HW_System1"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "id": "Thermal Zone 2",
+                                        "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                        "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                        "terminals": [
+                                            {
+                                                "id": "Terminal 1",
+                                                "is_supply_ducted": false,
+                                                "served_by_heating_ventilation_air_conditioning_systems": "AHU_HW_System1"
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "heating_ventilation_air_conditioning_systems": [
+                                    {
+                                        "id": "AHU_HW_System1",
+                                        "heating_system": {
+                                            "id": "Heating System 1",
+                                            "heating_system_type": "FLUID_LOOP",
+                                            "hot_water_loop": "Purchased HW Loop 1"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                "external_fluid_source": [
+                    {
+                        "id": "Purchased HW 1",
+                        "loop": "Purchased HW Loop 1",
+                        "type": "HOT_WATER"
+                    }
+                ],
+                "fluid_loops": [
+                    {
+                        "id": "Purchased HW Loop 1",
+                        "type": "HEATING"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-21-1-b": {
+        "Section": 21,
+        "Rule": 1,
+        "Test": "b",
+        "test_description": "Baseline RMR is not modeled with purchased HW",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "21-1",
+            "ruleset_reference": "-",
+            "rule_description": "For purchased HW/steam in Proposed, the baseline shall also be modeled with Pursches HW/steam",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Proposed RMR",
+            "rule_dependency": "Proposed is modeled with purchased HW/steam",
+            "mandatory_rule": "No",
+            "schema_version": "0.0.5"
+        },
+        "rmr_transformations": {
+            "proposed": {
+                "id": "ASHRAE229 1",
+                "buildings": [
+                    {
+                        "id": "Building 1",
+                        "building_open_schedule": "Required Building Schedule 1",
+                        "building_segments": [
+                            {
+                                "id": "Building Segment 1",
+                                "zones": [
+                                    {
+                                        "id": "Thermal Zone 1",
+                                        "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                        "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                        "terminals": [
+                                            {
+                                                "id": "Terminal 1",
+                                                "is_supply_ducted": false,
+                                                "served_by_heating_ventilation_air_conditioning_systems": "AHU_HW_System1"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "id": "Thermal Zone 2",
+                                        "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                        "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                        "terminals": [
+                                            {
+                                                "id": "Terminal 1",
+                                                "is_supply_ducted": false,
+                                                "served_by_heating_ventilation_air_conditioning_systems": "AHU_HW_System1"
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "heating_ventilation_air_conditioning_systems": [
+                                    {
+                                        "id": "AHU_HW_System1",
+                                        "heating_system": {
+                                            "id": "Heating System 1",
+                                            "heating_system_type": "FLUID_LOOP",
+                                            "hot_water_loop": "Purchased HW Loop 1"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                "fluid_loops": [
+                    {
+                        "type": "HEATING",
+                        "id": "Purchased HW Loop 1"
+                    }
+                ],
+                "external_fluid_source": [
+                    {
+                        "id": "Purchased HW 1",
+                        "loop": "Purchased HW Loop 1",
+                        "type": "HOT_WATER"
+                    }
+                ]
+            },
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "buildings": [
+                    {
+                        "id": "Building 1",
+                        "building_open_schedule": "Required Building Schedule 1",
+                        "building_segments": [
+                            {
+                                "id": "Building Segment 1",
+                                "zones": [
+                                    {
+                                        "id": "Thermal Zone 1",
+                                        "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                        "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                        "terminals": [
+                                            {
+                                                "id": "Terminal 1",
+                                                "is_supply_ducted": false,
+                                                "served_by_heating_ventilation_air_conditioning_systems": "AHU_HW_System1"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "id": "Thermal Zone 2",
+                                        "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                        "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                        "terminals": [
+                                            {
+                                                "id": "Terminal 1",
+                                                "is_supply_ducted": false,
+                                                "served_by_heating_ventilation_air_conditioning_systems": "AHU_HW_System1"
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "heating_ventilation_air_conditioning_systems": [
+                                    {
+                                        "id": "AHU_HW_System1",
+                                        "heating_system": {
+                                            "id": "Heating System 1",
+                                            "heating_system_type": "FLUID_LOOP",
+                                            "hot_water_loop": "Purchased HW Loop 1"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                "fluid_loops": [
+                    {
+                        "type": "HEATING",
+                        "id": "Boiler HW Loop 1"
+                    }
+                ],
+                "boilers": [
+                    {
+                        "id": "Boiler 1",
+                        "loop": "Boiler Loop 1"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-21-2-a": {
+        "Section": 21,
+        "Rule": 2,
+        "Test": "a",
+        "test_description": "Baseline RMR is modeled purchased HW and with same number of pumps as proposed",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "21-2",
+            "ruleset_reference": "-",
+            "rule_description": "For purchased HW/steam in Proposed, the baseline shall have the same number of pumps as proposed",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Proposed RMR",
+            "rule_dependency": "Proposed is modeled with purchased HW/steam",
+            "mandatory_rule": "No",
+            "schema_version": "0.0.5"
+        },
+        "rmr_transformations": {
+            "proposed": {
+                "id": "ASHRAE229 1",
+                "buildings": [
+                    {
+                        "id": "Building 1",
+                        "building_open_schedule": "Required Building Schedule 1",
+                        "building_segments": [
+                            {
+                                "id": "Building Segment 1",
+                                "zones": [
+                                    {
+                                        "id": "Thermal Zone 1",
+                                        "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                        "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                        "terminals": [
+                                            {
+                                                "id": "Terminal 1",
+                                                "is_supply_ducted": false,
+                                                "served_by_heating_ventilation_air_conditioning_systems": "AHU_HW_System1"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "id": "Thermal Zone 2",
+                                        "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                        "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                        "terminals": [
+                                            {
+                                                "id": "Terminal 1",
+                                                "is_supply_ducted": false,
+                                                "served_by_heating_ventilation_air_conditioning_systems": "AHU_HW_System1"
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "heating_ventilation_air_conditioning_systems": [
+                                    {
+                                        "id": "AHU_HW_System1",
+                                        "heating_system": {
+                                            "id": "Heating System 1",
+                                            "heating_system_type": "FLUID_LOOP",
+                                            "hot_water_loop": "Purchased HW Loop 1"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                "external_fluid_source": [
+                    {
+                        "id": "Purchased HW 1",
+                        "loop": "Purchased HW Loop 1",
+                        "type": "HOT_WATER"
+                    }
+                ],
+                "pumps": [
+                    {
+                        "id": "HW Pump 1",
+                        "loop_or_piping": "Purchased HW Loop 1"
+                    },
+                    {
+                        "id": "HW Pump 2",
+                        "loop_or_piping": "Purchased HW Loop 1"
+                    }
+                ],
+                "fluid_loops": [
+                    {
+                        "id": "Purchased HW Loop 1",
+                        "type": "HEATING"
+                    }
+                ]
+            },
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "buildings": [
+                    {
+                        "id": "Building 1",
+                        "building_open_schedule": "Required Building Schedule 1",
+                        "building_segments": [
+                            {
+                                "id": "Building Segment 1",
+                                "zones": [
+                                    {
+                                        "id": "Thermal Zone 1",
+                                        "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                        "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                        "terminals": [
+                                            {
+                                                "id": "Terminal 1",
+                                                "is_supply_ducted": false,
+                                                "served_by_heating_ventilation_air_conditioning_systems": "AHU_HW_System1"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "id": "Thermal Zone 2",
+                                        "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                        "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                        "terminals": [
+                                            {
+                                                "id": "Terminal 1",
+                                                "is_supply_ducted": false,
+                                                "served_by_heating_ventilation_air_conditioning_systems": "AHU_HW_System1"
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "heating_ventilation_air_conditioning_systems": [
+                                    {
+                                        "id": "AHU_HW_System1",
+                                        "heating_system": {
+                                            "id": "Heating System 1",
+                                            "heating_system_type": "FLUID_LOOP",
+                                            "hot_water_loop": "Purchased HW Loop 1"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                "external_fluid_source": [
+                    {
+                        "id": "Purchased HW 1",
+                        "loop": "Purchased HW Loop 1",
+                        "type": "HOT_WATER"
+                    }
+                ],
+                "pumps": [
+                    {
+                        "id": "HW Pump 1",
+                        "loop_or_piping": "Purchased HW Loop 1"
+                    },
+                    {
+                        "id": "HW Pump 2",
+                        "loop_or_piping": "Purchased HW Loop 1"
+                    }
+                ],
+                "fluid_loops": [
+                    {
+                        "id": "Purchased HW Loop 1",
+                        "type": "HEATING"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-21-2-b": {
+        "Section": 21,
+        "Rule": 2,
+        "Test": "b",
+        "test_description": "Baseline RMR is modeled with purchased HW not modeled with same number of pumps as proposed",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "21-2",
+            "ruleset_reference": "-",
+            "rule_description": "For purchased HW/steam in Proposed, the baseline shall have the same number of pumps as proposed",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Proposed RMR",
+            "rule_dependency": "Proposed is modeled with purchased HW/steam",
+            "mandatory_rule": "No",
+            "schema_version": "0.0.5"
+        },
+        "rmr_transformations": {
+            "proposed": {
+                "id": "ASHRAE229 1",
+                "buildings": [
+                    {
+                        "id": "Building 1",
+                        "building_open_schedule": "Required Building Schedule 1",
+                        "building_segments": [
+                            {
+                                "id": "Building Segment 1",
+                                "zones": [
+                                    {
+                                        "id": "Thermal Zone 1",
+                                        "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                        "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                        "terminals": [
+                                            {
+                                                "id": "Terminal 1",
+                                                "is_supply_ducted": false,
+                                                "served_by_heating_ventilation_air_conditioning_systems": "AHU_HW_System1"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "id": "Thermal Zone 2",
+                                        "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                        "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                        "terminals": [
+                                            {
+                                                "id": "Terminal 1",
+                                                "is_supply_ducted": false,
+                                                "served_by_heating_ventilation_air_conditioning_systems": "AHU_HW_System1"
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "heating_ventilation_air_conditioning_systems": [
+                                    {
+                                        "id": "AHU_HW_System1",
+                                        "heating_system": {
+                                            "id": "Heating System 1",
+                                            "heating_system_type": "FLUID_LOOP",
+                                            "hot_water_loop": "Purchased HW Loop 1"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                "external_fluid_source": [
+                    {
+                        "id": "Purchased HW 1",
+                        "loop": "Purchased HW Loop 1",
+                        "type": "HOT_WATER"
+                    }
+                ],
+                "pumps": [
+                    {
+                        "id": "HW Pump 1",
+                        "loop_or_piping": "Purchased HW Loop 1"
+                    },
+                    {
+                        "id": "HW Pump 2",
+                        "loop_or_piping": "Purchased HW Loop 1"
+                    }
+                ],
+                "fluid_loops": [
+                    {
+                        "id": "Purchased HW Loop 1",
+                        "type": "HEATING"
+                    }
+                ]
+            },
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "buildings": [
+                    {
+                        "id": "Building 1",
+                        "building_open_schedule": "Required Building Schedule 1",
+                        "building_segments": [
+                            {
+                                "id": "Building Segment 1",
+                                "zones": [
+                                    {
+                                        "id": "Thermal Zone 1",
+                                        "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                        "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                        "terminals": [
+                                            {
+                                                "id": "Terminal 1",
+                                                "is_supply_ducted": false,
+                                                "served_by_heating_ventilation_air_conditioning_systems": "AHU_HW_System1"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "id": "Thermal Zone 2",
+                                        "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                        "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                        "terminals": [
+                                            {
+                                                "id": "Terminal 1",
+                                                "is_supply_ducted": false,
+                                                "served_by_heating_ventilation_air_conditioning_systems": "AHU_HW_System1"
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "heating_ventilation_air_conditioning_systems": [
+                                    {
+                                        "id": "AHU_HW_System1",
+                                        "heating_system": {
+                                            "id": "Heating System 1",
+                                            "heating_system_type": "FLUID_LOOP",
+                                            "hot_water_loop": "Purchased HW Loop 1"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                "external_fluid_source": [
+                    {
+                        "id": "Purchased HW 1",
+                        "loop": "Purchased HW Loop 1",
+                        "type": "HOT_WATER"
+                    }
+                ],
+                "pumps": [
+                    {
+                        "id": "HW Pump 1",
+                        "loop_or_piping": "Purchased HW Loop 1"
+                    },
+                    {
+                        "id": "HW Pump 2",
+                        "loop_or_piping": "Purchased HW Loop 1"
+                    },
+                    {
+                        "id": "HW Pump 3",
+                        "loop_or_piping": "Purchased HW Loop 1"
+                    }
+                ],
+                "fluid_loops": [
+                    {
+                        "id": "Purchased HW Loop 1",
+                        "type": "HEATING"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-21-3-a": {
+        "Section": 21,
+        "Rule": 3,
+        "Test": "a",
+        "test_description": "Baseline RMR is modeled with a HW loop that is sized based on coincident loads",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "21-3",
+            "ruleset_reference": "-",
+            "rule_description": "Plant sized based on coincident loads",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": "none",
+            "mandatory_rule": "Yes",
+            "schema_version": "0.0.5"
+        },
+        "rmr_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "fluid_loops": [
+                    {
+                        "id": "Purchased HW Loop 1",
+                        "type": "HEATING",
+                        "heating_design_and_control": {
+                            "id": "DAC 1",
+                            "is_sized_using_coincident_load": true
+                        }
+                    }
+                ]
+            }
+        }
+    },
+    "rule-21-3-b": {
+        "Section": 21,
+        "Rule": 3,
+        "Test": "b",
+        "test_description": "Baseline RMR is modeled with a HW loop that is not sized based on coincident loads",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "21-3",
+            "ruleset_reference": "-",
+            "rule_description": "Plant sized based on coincident loads",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": "none",
+            "mandatory_rule": "Yes",
+            "schema_version": "0.0.5"
+        },
+        "rmr_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "fluid_loops": [
+                    {
+                        "id": "Purchased HW Loop 1",
+                        "type": "HEATING",
+                        "heating_design_and_control": {
+                            "id": "DAC 1",
+                            "is_sized_using_coincident_load": false
+                        }
+                    }
+                ]
+            }
+        }
+    },
+    "rule-21-4-a": {
+        "Section": 21,
+        "Rule": 4,
+        "Test": "a",
+        "test_description": "Baseline RMR has a HW Loop with a natural draft boiler",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "21-4",
+            "ruleset_reference": "-",
+            "rule_description": "Boilers should be modeled if baseline system = 1,5,7,11,12 and should be of natural draft type.",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": "Baseline number of HW Loops > 0 and number of boilers in HW loop >0",
+            "mandatory_rule": "No",
+            "schema_version": "0.0.5"
+        },
+        "rmr_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "boilers": [
+                    {
+                        "id": "Boiler 1",
+                        "loop": "Boiler Loop 1",
+                        "draft_type": "NATURAL"
+                    },
+                    {
+                        "id": "Boiler 2",
+                        "loop": "Boiler Loop 1",
+                        "draft_type": "NATURAL"
+                    }
+                ],
+                "fluid_loops": [
+                    {
+                        "id": "Boiler Loop 1",
+                        "type": "HEATING"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-21-4-b": {
+        "Section": 21,
+        "Rule": 4,
+        "Test": "b",
+        "test_description": "Baseline RMR has a HW Loop with a natural draft boiler",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "21-4",
+            "ruleset_reference": "-",
+            "rule_description": "Boilers should be modeled if baseline system = 1,5,7,11,12 and should be of natural draft type.",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": "Baseline number of HW Loops > 0 and number of boilers in HW loop >0",
+            "mandatory_rule": "No",
+            "schema_version": "0.0.5"
+        },
+        "rmr_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "boilers": [
+                    {
+                        "id": "Boiler 1",
+                        "loop": "Boiler Loop 1",
+                        "draft_type": "NATURAL"
+                    },
+                    {
+                        "id": "Boiler 2",
+                        "loop": "Boiler Loop 1",
+                        "draft_type": "FORCED"
+                    }
+                ],
+                "fluid_loops": [
+                    {
+                        "id": "Boiler Loop 1",
+                        "type": "HEATING"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-21-5-a": {
+        "Section": 21,
+        "Rule": 5,
+        "Test": "a",
+        "test_description": "Baseline RMR has a HW Loop with a single boiler",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "21-5",
+            "ruleset_reference": "-",
+            "rule_description": "For building area>15,000ft2, two equally sized boilers should be modeled. Else a single boiler should be modeled.",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": "Baseline number of HW Loops > 0 and number of boilers in HW loop >1",
+            "mandatory_rule": "Yes",
+            "schema_version": "0.0.5"
+        },
+        "rmr_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "buildings": [
+                    {
+                        "id": "Building 1",
+                        "building_open_schedule": "Required Building Schedule 1",
+                        "building_segments": [
+                            {
+                                "id": "Building Segment 1",
+                                "zones": [
+                                    {
+                                        "id": "Thermal Zone 1",
+                                        "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                        "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                        "spaces": [
+                                            {
+                                                "id": "Space 1",
+                                                "occupant_multiplier_schedule": "Required Schedule 1",
+                                                "floor_area": 371.61215999999996
+                                            }
+                                        ],
+                                        "terminals": [
+                                            {
+                                                "id": "Terminal 1",
+                                                "is_supply_ducted": false,
+                                                "served_by_heating_ventilation_air_conditioning_systems": "AHU_HW_System1"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "id": "Thermal Zone 2",
+                                        "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                        "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                        "spaces": [
+                                            {
+                                                "id": "Space 2",
+                                                "occupant_multiplier_schedule": "Required Schedule 1",
+                                                "floor_area": 371.61215999999996
+                                            }
+                                        ],
+                                        "terminals": [
+                                            {
+                                                "id": "Terminal 1",
+                                                "is_supply_ducted": false,
+                                                "served_by_heating_ventilation_air_conditioning_systems": "AHU_HW_System1"
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "heating_ventilation_air_conditioning_systems": [
+                                    {
+                                        "id": "AHU_HW_System1",
+                                        "heating_system": {
+                                            "id": "HHW Coil 1",
+                                            "heating_system_type": "FLUID_LOOP",
+                                            "hot_water_loop": "Boiler Loop 1"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                "boilers": [
+                    {
+                        "id": "Boiler 1",
+                        "loop": "Boiler Loop 1",
+                        "design_capacity": 117228.44444444445
+                    }
+                ],
+                "fluid_loops": [
+                    {
+                        "id": "Boiler Loop 1",
+                        "type": "HEATING"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-21-5-b": {
+        "Section": 21,
+        "Rule": 5,
+        "Test": "b",
+        "test_description": "Baseline RMR has a HW Loop with a single boiler",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "21-5",
+            "ruleset_reference": "-",
+            "rule_description": "For building area>15,000ft2, two equally sized boilers should be modeled. Else a single boiler should be modeled.",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": "Baseline number of HW Loops > 0 and number of boilers in HW loop >1",
+            "mandatory_rule": "Yes",
+            "schema_version": "0.0.5"
+        },
+        "rmr_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "buildings": [
+                    {
+                        "id": "Building 1",
+                        "building_open_schedule": "Required Building Schedule 1",
+                        "building_segments": [
+                            {
+                                "id": "Building Segment 1",
+                                "zones": [
+                                    {
+                                        "id": "Thermal Zone 1",
+                                        "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                        "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                        "spaces": [
+                                            {
+                                                "id": "Space 1",
+                                                "occupant_multiplier_schedule": "Required Schedule 1",
+                                                "floor_area": 557.41824
+                                            }
+                                        ],
+                                        "terminals": [
+                                            {
+                                                "id": "Terminal 1",
+                                                "is_supply_ducted": false,
+                                                "served_by_heating_ventilation_air_conditioning_systems": "AHU_HW_System1"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "id": "Thermal Zone 2",
+                                        "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                        "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                        "spaces": [
+                                            {
+                                                "id": "Space 2",
+                                                "occupant_multiplier_schedule": "Required Schedule 1",
+                                                "floor_area": 557.41824
+                                            }
+                                        ],
+                                        "terminals": [
+                                            {
+                                                "id": "Terminal 1",
+                                                "is_supply_ducted": false,
+                                                "served_by_heating_ventilation_air_conditioning_systems": "AHU_HW_System1"
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "heating_ventilation_air_conditioning_systems": [
+                                    {
+                                        "id": "AHU_HW_System1",
+                                        "heating_system": {
+                                            "id": "HHW Coil 1",
+                                            "heating_system_type": "FLUID_LOOP",
+                                            "hot_water_loop": "Boiler Loop 1"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                "boilers": [
+                    {
+                        "id": "Boiler 1",
+                        "loop": "Boiler Loop 1",
+                        "design_capacity": 117228.44444444445
+                    },
+                    {
+                        "id": "Boiler 2",
+                        "loop": "Boiler Loop 1",
+                        "design_capacity": 117228.44444444445
+                    }
+                ],
+                "fluid_loops": [
+                    {
+                        "id": "Boiler Loop 1",
+                        "type": "HEATING"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-21-5-c": {
+        "Section": 21,
+        "Rule": 5,
+        "Test": "c",
+        "test_description": "Baseline RMR has a HW Loop with a single boiler",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "21-5",
+            "ruleset_reference": "-",
+            "rule_description": "For building area>15,000ft2, two equally sized boilers should be modeled. Else a single boiler should be modeled.",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": "Baseline number of HW Loops > 0 and number of boilers in HW loop >1",
+            "mandatory_rule": "Yes",
+            "schema_version": "0.0.5"
+        },
+        "rmr_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "buildings": [
+                    {
+                        "id": "Building 1",
+                        "building_open_schedule": "Required Building Schedule 1",
+                        "building_segments": [
+                            {
+                                "id": "Building Segment 1",
+                                "zones": [
+                                    {
+                                        "id": "Thermal Zone 1",
+                                        "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                        "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                        "spaces": [
+                                            {
+                                                "id": "Space 1",
+                                                "occupant_multiplier_schedule": "Required Schedule 1",
+                                                "floor_area": 557.41824
+                                            }
+                                        ],
+                                        "terminals": [
+                                            {
+                                                "id": "Terminal 1",
+                                                "is_supply_ducted": false,
+                                                "served_by_heating_ventilation_air_conditioning_systems": "AHU_HW_System1"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "id": "Thermal Zone 2",
+                                        "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                        "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                        "spaces": [
+                                            {
+                                                "id": "Space 2",
+                                                "occupant_multiplier_schedule": "Required Schedule 1",
+                                                "floor_area": 557.41824
+                                            }
+                                        ],
+                                        "terminals": [
+                                            {
+                                                "id": "Terminal 1",
+                                                "is_supply_ducted": false,
+                                                "served_by_heating_ventilation_air_conditioning_systems": "AHU_HW_System1"
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "heating_ventilation_air_conditioning_systems": [
+                                    {
+                                        "id": "AHU_HW_System1",
+                                        "heating_system": {
+                                            "id": "HHW Coil 1",
+                                            "heating_system_type": "FLUID_LOOP",
+                                            "hot_water_loop": "Boiler Loop 1"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                "boilers": [
+                    {
+                        "id": "Boiler 1",
+                        "loop": "Boiler Loop 1",
+                        "design_capacity": 117228.44444444445
+                    }
+                ],
+                "fluid_loops": [
+                    {
+                        "id": "Boiler Loop 1",
+                        "type": "HEATING"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-21-5-d": {
+        "Section": 21,
+        "Rule": 5,
+        "Test": "d",
+        "test_description": "Baseline RMR has a HW Loop with a single boiler",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "21-5",
+            "ruleset_reference": "-",
+            "rule_description": "For building area>15,000ft2, two equally sized boilers should be modeled. Else a single boiler should be modeled.",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": "Baseline number of HW Loops > 0 and number of boilers in HW loop >1",
+            "mandatory_rule": "Yes",
+            "schema_version": "0.0.5"
+        },
+        "rmr_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "buildings": [
+                    {
+                        "id": "Building 1",
+                        "building_open_schedule": "Required Building Schedule 1",
+                        "building_segments": [
+                            {
+                                "id": "Building Segment 1",
+                                "zones": [
+                                    {
+                                        "id": "Thermal Zone 1",
+                                        "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                        "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                        "spaces": [
+                                            {
+                                                "id": "Space 1",
+                                                "occupant_multiplier_schedule": "Required Schedule 1",
+                                                "floor_area": 557.41824
+                                            }
+                                        ],
+                                        "terminals": [
+                                            {
+                                                "id": "Terminal 1",
+                                                "is_supply_ducted": false,
+                                                "served_by_heating_ventilation_air_conditioning_systems": "AHU_HW_System1"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "id": "Thermal Zone 2",
+                                        "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                        "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                        "spaces": [
+                                            {
+                                                "id": "Space 2",
+                                                "occupant_multiplier_schedule": "Required Schedule 1",
+                                                "floor_area": 557.41824
+                                            }
+                                        ],
+                                        "terminals": [
+                                            {
+                                                "id": "Terminal 1",
+                                                "is_supply_ducted": false,
+                                                "served_by_heating_ventilation_air_conditioning_systems": "AHU_HW_System1"
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "heating_ventilation_air_conditioning_systems": [
+                                    {
+                                        "id": "AHU_HW_System1",
+                                        "heating_system": {
+                                            "id": "HHW Coil 1",
+                                            "heating_system_type": "FLUID_LOOP",
+                                            "hot_water_loop": "Boiler Loop 1"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                "boilers": [
+                    {
+                        "id": "Boiler 1",
+                        "loop": "Boiler Loop 1",
+                        "design_capacity": 117228.44444444445
+                    },
+                    {
+                        "id": "Boiler 2",
+                        "loop": "Boiler Loop 1",
+                        "design_capacity": 117228.44444444445
+                    }
+                ],
+                "fluid_loops": [
+                    {
+                        "id": "Boiler Loop 1",
+                        "type": "HEATING"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-21-5-f": {
+        "Section": 21,
+        "Rule": 5,
+        "Test": "f",
+        "test_description": "Baseline RMR has a HW Loop with two equally sized boilers",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "21-5",
+            "ruleset_reference": "-",
+            "rule_description": "For building area>15,000ft2, two equally sized boilers should be modeled. Else a single boiler should be modeled.",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": "Baseline number of HW Loops > 0 and number of boilers in HW loop >1",
+            "mandatory_rule": "Yes",
+            "schema_version": "0.0.5"
+        },
+        "rmr_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "buildings": [
+                    {
+                        "id": "Building 1",
+                        "building_open_schedule": "Required Building Schedule 1",
+                        "building_segments": [
+                            {
+                                "id": "Building Segment 1",
+                                "zones": [
+                                    {
+                                        "id": "Thermal Zone 1",
+                                        "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                        "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                        "spaces": [
+                                            {
+                                                "id": "Space 1",
+                                                "occupant_multiplier_schedule": "Required Schedule 1",
+                                                "floor_area": 836.12736
+                                            }
+                                        ],
+                                        "terminals": [
+                                            {
+                                                "id": "Terminal 1",
+                                                "is_supply_ducted": false,
+                                                "served_by_heating_ventilation_air_conditioning_systems": "AHU_HW_System1"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "id": "Thermal Zone 2",
+                                        "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                        "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                        "spaces": [
+                                            {
+                                                "id": "Space 2",
+                                                "occupant_multiplier_schedule": "Required Schedule 1",
+                                                "floor_area": 836.12736
+                                            }
+                                        ],
+                                        "terminals": [
+                                            {
+                                                "id": "Terminal 1",
+                                                "is_supply_ducted": false,
+                                                "served_by_heating_ventilation_air_conditioning_systems": "AHU_HW_System1"
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "heating_ventilation_air_conditioning_systems": [
+                                    {
+                                        "id": "AHU_HW_System1",
+                                        "heating_system": {
+                                            "id": "HHW Coil 1",
+                                            "heating_system_type": "FLUID_LOOP",
+                                            "hot_water_loop": "Boiler Loop 1"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                "boilers": [
+                    {
+                        "id": "Boiler 1",
+                        "loop": "Boiler Loop 1",
+                        "design_capacity": 117228.44444444445
+                    },
+                    {
+                        "id": "Boiler 2",
+                        "loop": "Boiler Loop 1",
+                        "design_capacity": 117228.44444444445
+                    }
+                ],
+                "fluid_loops": [
+                    {
+                        "id": "Boiler Loop 1",
+                        "type": "HEATING"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-21-5-g": {
+        "Section": 21,
+        "Rule": 5,
+        "Test": "g",
+        "test_description": "Baseline RMR has a HW Loop with two equally sized boilers",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "21-5",
+            "ruleset_reference": "-",
+            "rule_description": "For building area>15,000ft2, two equally sized boilers should be modeled. Else a single boiler should be modeled.",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": "Baseline number of HW Loops > 0 and number of boilers in HW loop >1",
+            "mandatory_rule": "Yes",
+            "schema_version": "0.0.5"
+        },
+        "rmr_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "buildings": [
+                    {
+                        "id": "Building 1",
+                        "building_open_schedule": "Required Building Schedule 1",
+                        "building_segments": [
+                            {
+                                "id": "Building Segment 1",
+                                "zones": [
+                                    {
+                                        "id": "Thermal Zone 1",
+                                        "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                        "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                        "spaces": [
+                                            {
+                                                "id": "Space 1",
+                                                "occupant_multiplier_schedule": "Required Schedule 1",
+                                                "floor_area": 836.12736
+                                            }
+                                        ],
+                                        "terminals": [
+                                            {
+                                                "id": "Terminal 1",
+                                                "is_supply_ducted": false,
+                                                "served_by_heating_ventilation_air_conditioning_systems": "AHU_HW_System1"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "id": "Thermal Zone 2",
+                                        "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                        "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                        "spaces": [
+                                            {
+                                                "id": "Space 2",
+                                                "occupant_multiplier_schedule": "Required Schedule 1",
+                                                "floor_area": 836.12736
+                                            }
+                                        ],
+                                        "terminals": [
+                                            {
+                                                "id": "Terminal 1",
+                                                "is_supply_ducted": false,
+                                                "served_by_heating_ventilation_air_conditioning_systems": "AHU_HW_System1"
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "heating_ventilation_air_conditioning_systems": [
+                                    {
+                                        "id": "AHU_HW_System1",
+                                        "heating_system": {
+                                            "id": "HHW Coil 1",
+                                            "heating_system_type": "FLUID_LOOP",
+                                            "hot_water_loop": "Boiler Loop 1"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                "boilers": [
+                    {
+                        "id": "Boiler 1",
+                        "loop": "Boiler Loop 1",
+                        "design_capacity": 87921.33333333333
+                    },
+                    {
+                        "id": "Boiler 2",
+                        "loop": "Boiler Loop 1",
+                        "design_capacity": 87921.33333333333
+                    },
+                    {
+                        "id": "Boiler 3",
+                        "loop": "Boiler Loop 1",
+                        "design_capacity": 87921.33333333333
+                    }
+                ],
+                "fluid_loops": [
+                    {
+                        "id": "Boiler Loop 1",
+                        "type": "HEATING"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-21-6-a": {
+        "Section": 21,
+        "Rule": 6,
+        "Test": "a",
+        "test_description": "Baseline RMR has a HW Loop with two boilers staged based on load",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "21-6",
+            "ruleset_reference": "-",
+            "rule_description": "For a baseline building with two boilers, each is staged based on Load.",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": "Number of boilers -= 2",
+            "mandatory_rule": "Yes",
+            "schema_version": "0.0.5"
+        },
+        "rmr_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "boilers": [
+                    {
+                        "id": "Boiler 1",
+                        "loop": "Boiler Loop 1",
+                        "design_capacity": 10257.488888888889,
+                        "energy_source_type": "NATURAL_GAS",
+                        "operation_lower_limit": 0,
+                        "operation_upper_limit": 35000
+                    },
+                    {
+                        "id": "Boiler 2",
+                        "loop": "Boiler Loop 1",
+                        "design_capacity": 10257.488888888889,
+                        "energy_source_type": "NATURAL_GAS",
+                        "operation_lower_limit": 35000,
+                        "operation_upper_limit": 70000
+                    }
+                ],
+                "fluid_loops": [
+                    {
+                        "id": "Boiler Loop 1",
+                        "type": "HEATING"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-21-6-b": {
+        "Section": 21,
+        "Rule": 6,
+        "Test": "b",
+        "test_description": "Baseline RMR has a HW Loop with two boilers staged based on load",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "21-6",
+            "ruleset_reference": "-",
+            "rule_description": "For a baseline building with two boilers, each is staged based on Load.",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": "Number of boilers -= 2",
+            "mandatory_rule": "Yes",
+            "schema_version": "0.0.5"
+        },
+        "rmr_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "boilers": [
+                    {
+                        "id": "Boiler 1",
+                        "loop": "Boiler Loop 1",
+                        "design_capacity": 10257.488888888889,
+                        "energy_source_type": "NATURAL_GAS",
+                        "operation_lower_limit": 0,
+                        "operation_upper_limit": 35000
+                    },
+                    {
+                        "id": "Boiler 2",
+                        "loop": "Boiler Loop 1",
+                        "design_capacity": 10257.488888888889,
+                        "energy_source_type": "NATURAL_GAS",
+                        "operation_lower_limit": 0,
+                        "operation_upper_limit": 70000
+                    }
+                ],
+                "fluid_loops": [
+                    {
+                        "id": "Boiler Loop 1",
+                        "type": "HEATING"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-21-7-a": {
+        "Section": 21,
+        "Rule": 7,
+        "Test": "a",
+        "test_description": "Baseline RMR has HW loop with Boiler, where HWST=180F and HWRT = 130F",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "21-7",
+            "ruleset_reference": "-",
+            "rule_description": "HWST=180F, HSRT=130F",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": "none",
+            "mandatory_rule": "Yes",
+            "schema_version": "0.0.5"
+        },
+        "rmr_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "boilers": [
+                    {
+                        "id": "Boiler 1",
+                        "loop": "Boiler Loop 1",
+                        "energy_source_type": "NATURAL_GAS"
+                    },
+                    {
+                        "id": "Boiler 2",
+                        "loop": "Boiler Loop 1"
+                    }
+                ],
+                "fluid_loops": [
+                    {
+                        "id": "Boiler Loop 1",
+                        "type": "HEATING",
+                        "heating_design_and_control": {
+                            "id": "DAC 1",
+                            "design_supply_temperature": 82.22222222222229,
+                            "design_return_temperature": 54.44444444444446
+                        }
+                    }
+                ]
+            }
+        }
+    },
+    "rule-21-7-b": {
+        "Section": 21,
+        "Rule": 7,
+        "Test": "b",
+        "test_description": "Baseline RMR has HW loop with Boiler, where HWST=180F and HWRT = 130F",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "21-7",
+            "ruleset_reference": "-",
+            "rule_description": "HWST=180F, HSRT=130F",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": "none",
+            "mandatory_rule": "Yes",
+            "schema_version": "0.0.5"
+        },
+        "rmr_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "boilers": [
+                    {
+                        "id": "Boiler 1",
+                        "loop": "Boiler Loop 1",
+                        "energy_source_type": "NATURAL_GAS"
+                    },
+                    {
+                        "id": "Boiler 2",
+                        "loop": "Boiler Loop 1"
+                    }
+                ],
+                "fluid_loops": [
+                    {
+                        "id": "Boiler Loop 1",
+                        "type": "HEATING",
+                        "heating_design_and_control": {
+                            "id": "DAC 1",
+                            "design_supply_temperature": 79.44444444444446,
+                            "design_return_temperature": 51.666666666666686
+                        }
+                    }
+                ]
+            }
+        }
+    },
+    "rule-21-8-a": {
+        "Section": 21,
+        "Rule": 8,
+        "Test": "a",
+        "test_description": "Baseline RMR has HW loop with Boiler, HWST is reset based on OAT (HWST=180F at 20F OA DryBylb, HWST=150F at 50F OA B=DryBulb, ramped linearly inbetween)",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "21-8",
+            "ruleset_reference": "-",
+            "rule_description": "HWST reset using OA reset schedule. 180F at 20F OAT, 150Fat 50F OAT, ramped linerarly between 150F and 180F.",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": "none",
+            "mandatory_rule": "No",
+            "schema_version": "0.0.5"
+        },
+        "rmr_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "boilers": [
+                    {
+                        "id": "Boiler 1",
+                        "loop": "Boiler Loop 1",
+                        "energy_source_type": "NATURAL_GAS"
+                    },
+                    {
+                        "id": "Boiler 2",
+                        "loop": "Boiler Loop 1"
+                    }
+                ],
+                "fluid_loops": [
+                    {
+                        "id": "Boiler Loop 1",
+                        "type": "HEATING",
+                        "heating_design_and_control": {
+                            "id": "DAC 1",
+                            "temperature_reset_type": "OUTSIDE_AIR_RESET",
+                            "design_supply_temperature": 82.22222222222229,
+                            "design_return_temperature": 65.5555555555556,
+                            "outdoor_high_for_loop_supply_temperature_reset": 50,
+                            "outdoor_low_for_loop_supply_temperature_reset": 20
+                        }
+                    }
+                ]
+            }
+        }
+    },
+    "rule-21-8-b": {
+        "Section": 21,
+        "Rule": 8,
+        "Test": "b",
+        "test_description": "Baseline RMR has HW loop with Boiler, HWST is reset based on OAT (HWST=180F at 20F OA DryBylb, HWST=150F at 50F OA B=DryBulb, ramped linearly inbetween)",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "21-8",
+            "ruleset_reference": "-",
+            "rule_description": "HWST reset using OA reset schedule. 180F at 20F OAT, 150Fat 50F OAT, ramped linerarly between 150F and 180F.",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": "none",
+            "mandatory_rule": "No",
+            "schema_version": "0.0.5"
+        },
+        "rmr_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "boilers": [
+                    {
+                        "id": "Boiler 1",
+                        "loop": "Boiler Loop 1",
+                        "energy_source_type": "NATURAL_GAS"
+                    },
+                    {
+                        "id": "Boiler 2",
+                        "loop": "Boiler Loop 1"
+                    }
+                ],
+                "fluid_loops": [
+                    {
+                        "id": "Boiler Loop 1",
+                        "type": "HEATING",
+                        "heating_design_and_control": {
+                            "id": "DAC 1",
+                            "temperature_reset_type": "OUTSIDE_AIR_RESET",
+                            "design_supply_temperature": 82.22222222222229,
+                            "design_return_temperature": 60.00000000000006,
+                            "outdoor_high_for_loop_supply_temperature_reset": 50,
+                            "outdoor_low_for_loop_supply_temperature_reset": 20
+                        }
+                    }
+                ]
+            }
+        }
+    },
+    "rule-21-8-c": {
+        "Section": 21,
+        "Rule": 8,
+        "Test": "c",
+        "test_description": "Baseline RMR has HW loop with Boiler, HWST is reset based on OAT (HWST=180F at 20F OA DryBylb, HWST=150F at 50F OA B=DryBulb, ramped linearly inbetween)",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "21-8",
+            "ruleset_reference": "-",
+            "rule_description": "HWST reset using OA reset schedule. 180F at 20F OAT, 150Fat 50F OAT, ramped linerarly between 150F and 180F.",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": "none",
+            "mandatory_rule": "No",
+            "schema_version": "0.0.5"
+        },
+        "rmr_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "boilers": [
+                    {
+                        "id": "Boiler 1",
+                        "loop": "Boiler Loop 1",
+                        "energy_source_type": "NATURAL_GAS"
+                    },
+                    {
+                        "id": "Boiler 2",
+                        "loop": "Boiler Loop 1"
+                    }
+                ],
+                "fluid_loops": [
+                    {
+                        "id": "Boiler Loop 1",
+                        "type": "HEATING",
+                        "heating_design_and_control": {
+                            "id": "DAC 1",
+                            "temperature_reset_type": "NO_RESET"
+                        }
+                    }
+                ]
+            }
+        }
+    },
+    "rule-21-9-a": {
+        "Section": 21,
+        "Rule": 9,
+        "Test": "a",
+        "test_description": "Baseline RMR has HW loop with Boiler, HW Loop pump power = 19W/GPM",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "21-9",
+            "ruleset_reference": "-",
+            "rule_description": "HW pump power = 19W/gpm",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": "none",
+            "mandatory_rule": "Yes",
+            "schema_version": "0.0.5"
+        },
+        "rmr_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "boilers": [
+                    {
+                        "id": "Boiler 1",
+                        "loop": "Boiler Loop 1",
+                        "energy_source_type": "NATURAL_GAS"
+                    },
+                    {
+                        "id": "Boiler 2",
+                        "loop": "Boiler Loop 1"
+                    }
+                ],
+                "pumps": [
+                    {
+                        "id": "HW Pump 1",
+                        "loop_or_piping": "Boiler Loop 1",
+                        "design_electric_power": 5000,
+                        "design_flow": 16.60037916666667
+                    }
+                ],
+                "fluid_loops": [
+                    {
+                        "id": "Boiler Loop 1",
+                        "type": "HEATING"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-21-9-b": {
+        "Section": 21,
+        "Rule": 9,
+        "Test": "b",
+        "test_description": "Baseline RMR has HW loop with Boiler, HW Loop pump power = 19W/GPM",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "21-9",
+            "ruleset_reference": "-",
+            "rule_description": "HW pump power = 19W/gpm",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": "none",
+            "mandatory_rule": "Yes",
+            "schema_version": "0.0.5"
+        },
+        "rmr_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "boilers": [
+                    {
+                        "id": "Boiler 1",
+                        "loop": "Boiler Loop 1",
+                        "energy_source_type": "NATURAL_GAS"
+                    },
+                    {
+                        "id": "Boiler 2",
+                        "loop": "Boiler Loop 1"
+                    }
+                ],
+                "pumps": [
+                    {
+                        "id": "HW Pump 1",
+                        "loop_or_piping": "Boiler Loop 1",
+                        "design_flow": 0.06308333333333335,
+                        "design_head": 18.287999999999997,
+                        "motor_efficiency": 0.9,
+                        "impeller_efficiency": 0.6667
+                    }
+                ],
+                "fluid_loops": [
+                    {
+                        "id": "Boiler Loop 1",
+                        "type": "HEATING"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-21-9-c": {
+        "Section": 21,
+        "Rule": 9,
+        "Test": "c",
+        "test_description": "Baseline RMR has HW loop with Boiler, HW Loop pump power = 19W/GPM",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "21-9",
+            "ruleset_reference": "-",
+            "rule_description": "HW pump power = 19W/gpm",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": "none",
+            "mandatory_rule": "Yes",
+            "schema_version": "0.0.5"
+        },
+        "rmr_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "boilers": [
+                    {
+                        "id": "Boiler 1",
+                        "loop": "Boiler Loop 1",
+                        "energy_source_type": "NATURAL_GAS"
+                    },
+                    {
+                        "id": "Boiler 2",
+                        "loop": "Boiler Loop 1"
+                    }
+                ],
+                "pumps": [
+                    {
+                        "id": "HW Pump 1",
+                        "loop_or_piping": "Boiler Loop 1",
+                        "design_electric_power": 5000,
+                        "design_flow": 13.878333333333337
+                    }
+                ],
+                "fluid_loops": [
+                    {
+                        "id": "Boiler Loop 1",
+                        "type": "HEATING"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-21-10-a": {
+        "Section": 21,
+        "Rule": 10,
+        "Test": "a",
+        "test_description": "Baseline RMR has HW loop with Boiler, HW Loop serves 12,000 ft2. Pump modeled as riding the pump curve",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "21-10",
+            "ruleset_reference": "-",
+            "rule_description": "Area serverd >=120,000 ft2, Pump is modeled with VSD\nArea served <120.000 ft2, pump modeled as riding the pump curve. ",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": "none",
+            "mandatory_rule": "Yes",
+            "schema_version": "0.0.5"
+        },
+        "rmr_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "buildings": [
+                    {
+                        "id": "Building 1",
+                        "building_open_schedule": "Required Building Schedule 1",
+                        "building_segments": [
+                            {
+                                "id": "Building Segment 1",
+                                "zones": [
+                                    {
+                                        "id": "Thermal Zone 1",
+                                        "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                        "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                        "spaces": [
+                                            {
+                                                "id": "Space 1",
+                                                "occupant_multiplier_schedule": "Required Schedule 1",
+                                                "floor_area": 5574.1824
+                                            }
+                                        ],
+                                        "terminals": [
+                                            {
+                                                "id": "Terminal 1",
+                                                "is_supply_ducted": false,
+                                                "served_by_heating_ventilation_air_conditioning_systems": "AHU_HW_System1"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "id": "Thermal Zone 2",
+                                        "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                        "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                        "spaces": [
+                                            {
+                                                "id": "Space 2",
+                                                "occupant_multiplier_schedule": "Required Schedule 1",
+                                                "floor_area": 3716.1215999999995
+                                            }
+                                        ],
+                                        "terminals": [
+                                            {
+                                                "id": "Terminal 1",
+                                                "is_supply_ducted": false,
+                                                "served_by_heating_ventilation_air_conditioning_systems": "AHU_HW_System1"
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "heating_ventilation_air_conditioning_systems": [
+                                    {
+                                        "id": "AHU_HW_System1",
+                                        "heating_system": {
+                                            "id": "HHW Coil 1",
+                                            "heating_system_type": "FLUID_LOOP",
+                                            "hot_water_loop": "Boiler Loop 1"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                "boilers": [
+                    {
+                        "id": "Boiler 1",
+                        "loop": "Boiler Loop 1"
+                    },
+                    {
+                        "id": "Boiler 2",
+                        "loop": "Boiler Loop 1"
+                    }
+                ],
+                "pumps": [
+                    {
+                        "id": "HW Pump 1",
+                        "loop_or_piping": "Boiler Loop 1",
+                        "speed_control": "FIXED_SPEED"
+                    }
+                ],
+                "fluid_loops": [
+                    {
+                        "id": "Boiler Loop 1",
+                        "type": "HEATING"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-21-10-b": {
+        "Section": 21,
+        "Rule": 10,
+        "Test": "b",
+        "test_description": "Baseline RMR has HW loop with Boiler, HW Loop serves 12,000 ft2. Pump modeled as riding the pump curve",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "21-10",
+            "ruleset_reference": "-",
+            "rule_description": "Area serverd >=120,000 ft2, Pump is modeled with VSD\nArea served <120.000 ft2, pump modeled as riding the pump curve. ",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": "none",
+            "mandatory_rule": "Yes",
+            "schema_version": "0.0.5"
+        },
+        "rmr_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "buildings": [
+                    {
+                        "id": "Building 1",
+                        "building_open_schedule": "Required Building Schedule 1",
+                        "building_segments": [
+                            {
+                                "id": "Building Segment 1",
+                                "zones": [
+                                    {
+                                        "id": "Thermal Zone 1",
+                                        "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                        "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                        "spaces": [
+                                            {
+                                                "id": "Space 1",
+                                                "occupant_multiplier_schedule": "Required Schedule 1",
+                                                "floor_area": 5574.1824
+                                            }
+                                        ],
+                                        "terminals": [
+                                            {
+                                                "id": "Terminal 1",
+                                                "is_supply_ducted": false,
+                                                "served_by_heating_ventilation_air_conditioning_systems": "AHU_HW_System1"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "id": "Thermal Zone 2",
+                                        "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                        "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                        "spaces": [
+                                            {
+                                                "id": "Space 2",
+                                                "occupant_multiplier_schedule": "Required Schedule 1",
+                                                "floor_area": 3716.1215999999995
+                                            }
+                                        ],
+                                        "terminals": [
+                                            {
+                                                "id": "Terminal 1",
+                                                "is_supply_ducted": false,
+                                                "served_by_heating_ventilation_air_conditioning_systems": "AHU_HW_System1"
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "heating_ventilation_air_conditioning_systems": [
+                                    {
+                                        "id": "AHU_HW_System1",
+                                        "heating_system": {
+                                            "id": "HHW Coil 1",
+                                            "heating_system_type": "FLUID_LOOP",
+                                            "hot_water_loop": "Boiler Loop 1"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                "boilers": [
+                    {
+                        "id": "Boiler 1",
+                        "loop": "Boiler Loop 1"
+                    },
+                    {
+                        "id": "Boiler 2",
+                        "loop": "Boiler Loop 1"
+                    }
+                ],
+                "pumps": [
+                    {
+                        "id": "HW Pump 1",
+                        "loop_or_piping": "Boiler Loop 1",
+                        "speed_control": "FIXED_SPEED"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-21-10-c": {
+        "Section": 21,
+        "Rule": 10,
+        "Test": "c",
+        "test_description": "Baseline RMR has HW loop with Boiler, HW Loop serves 150,000 ft2. Pump modeled as variable speed, variable flow",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "21-10",
+            "ruleset_reference": "-",
+            "rule_description": "Area serverd >=120,000 ft2, Pump is modeled with VSD\nArea served <120.000 ft2, pump modeled as riding the pump curve. ",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": "none",
+            "mandatory_rule": "Yes",
+            "schema_version": "0.0.5"
+        },
+        "rmr_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "buildings": [
+                    {
+                        "id": "Building 1",
+                        "building_open_schedule": "Required Building Schedule 1",
+                        "building_segments": [
+                            {
+                                "id": "Building Segment 1",
+                                "zones": [
+                                    {
+                                        "id": "Thermal Zone 1",
+                                        "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                        "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                        "spaces": [
+                                            {
+                                                "id": "Space 1",
+                                                "occupant_multiplier_schedule": "Required Schedule 1",
+                                                "floor_area": 5574.1824
+                                            }
+                                        ],
+                                        "terminals": [
+                                            {
+                                                "id": "Terminal 1",
+                                                "is_supply_ducted": false,
+                                                "served_by_heating_ventilation_air_conditioning_systems": "AHU_HW_System1"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "id": "Thermal Zone 2",
+                                        "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                        "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                        "spaces": [
+                                            {
+                                                "id": "Space 2",
+                                                "occupant_multiplier_schedule": "Required Schedule 1",
+                                                "floor_area": 3716.1215999999995
+                                            }
+                                        ],
+                                        "terminals": [
+                                            {
+                                                "id": "Terminal 1",
+                                                "is_supply_ducted": false,
+                                                "served_by_heating_ventilation_air_conditioning_systems": "AHU_HW_System1"
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "heating_ventilation_air_conditioning_systems": [
+                                    {
+                                        "id": "AHU_HW_System1",
+                                        "heating_system": {
+                                            "id": "HHW Coil 1",
+                                            "heating_system_type": "FLUID_LOOP",
+                                            "hot_water_loop": "Boiler Loop 1"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                "boilers": [
+                    {
+                        "id": "Boiler 1",
+                        "loop": "Boiler Loop 1"
+                    },
+                    {
+                        "id": "Boiler 2",
+                        "loop": "Boiler Loop 1"
+                    }
+                ],
+                "pumps": [
+                    {
+                        "id": "HW Pump 1",
+                        "loop_or_piping": "Boiler Loop 1",
+                        "speed_control": "VARIABLE_SPEED"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-21-10-d": {
+        "Section": 21,
+        "Rule": 10,
+        "Test": "d",
+        "test_description": "Baseline RMR has HW loop with Boiler, HW Loop serves 150,000 ft2. Pump modeled as riding the pump curve",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "21-10",
+            "ruleset_reference": "-",
+            "rule_description": "Area serverd >=120,000 ft2, Pump is modeled with VSD\nArea served <120.000 ft2, pump modeled as riding the pump curve. ",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": "none",
+            "mandatory_rule": "Yes",
+            "schema_version": "0.0.5"
+        },
+        "rmr_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "buildings": [
+                    {
+                        "id": "Building 1",
+                        "building_open_schedule": "Required Building Schedule 1",
+                        "building_segments": [
+                            {
+                                "id": "Building Segment 1",
+                                "zones": [
+                                    {
+                                        "id": "Thermal Zone 1",
+                                        "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                        "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                        "spaces": [
+                                            {
+                                                "id": "Space 1",
+                                                "occupant_multiplier_schedule": "Required Schedule 1",
+                                                "floor_area": 5574.1824
+                                            }
+                                        ],
+                                        "terminals": [
+                                            {
+                                                "id": "Terminal 1",
+                                                "is_supply_ducted": false,
+                                                "served_by_heating_ventilation_air_conditioning_systems": "AHU_HW_System1"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "id": "Thermal Zone 2",
+                                        "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                        "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                        "spaces": [
+                                            {
+                                                "id": "Space 2",
+                                                "occupant_multiplier_schedule": "Required Schedule 1",
+                                                "floor_area": 3716.1215999999995
+                                            }
+                                        ],
+                                        "terminals": [
+                                            {
+                                                "id": "Terminal 1",
+                                                "is_supply_ducted": false,
+                                                "served_by_heating_ventilation_air_conditioning_systems": "AHU_HW_System1"
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "heating_ventilation_air_conditioning_systems": [
+                                    {
+                                        "id": "AHU_HW_System1",
+                                        "heating_system": {
+                                            "id": "HHW Coil 1",
+                                            "heating_system_type": "FLUID_LOOP",
+                                            "hot_water_loop": "Boiler Loop 1"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                "boilers": [
+                    {
+                        "id": "Boiler 1",
+                        "loop": "Boiler Loop 1"
+                    },
+                    {
+                        "id": "Boiler 2",
+                        "loop": "Boiler Loop 1"
+                    }
+                ],
+                "pumps": [
+                    {
+                        "id": "HW Pump 1",
+                        "loop_or_piping": "Boiler Loop 1",
+                        "speed_control": "FIXED_SPEED"
+                    }
+                ]
+            }
+        }
+    }
+}
