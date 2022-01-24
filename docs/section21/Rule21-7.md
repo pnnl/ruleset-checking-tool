@@ -10,16 +10,37 @@
 **Applicability:** All required data elements exist for B_RMR  
 **Applicability Checks:**  
 
-1. B-RMR is not modeled with purchased heating.
+1. P-RMR is not modeled with purchased heating.
+2. B-RMR is modeled with at least one air-side system that is Type-1a, 7, 11, 12 or that is Type-1, 5, 7, 11, 12.
 
 **Manual Check:** None  
 **Evaluation Context:** Building  
 **Data Lookup:** None  
-**Function Call:** None  
+**Function Call:**  
+
+1. check_purchased_chw_hhw()
 
 **Applicability Checks:**  
 
-1. B-RMR is not modeled with purchased heating: `if Rule-21-1 == "NOT APPLICABLE":`  
+1. Check if P-RMR is modeled with purchased cooling or purchased hot water/steam: `purchased_chw_hhw_status_dict = check_purchased_chw_hhw(P_RMR)`
+
+  - If P-RMR is modeled with purchased hot water/steam, rule is not applicable: `if purchased_chw_hhw_status_dict["PURCHASED_HEATING"]: rule_applicability_flag = FALSE`
+
+  - Else, P-RMR is not modeled with purchased hot water/steam, continue to next applicability check: `if NOT purchased_chw_hhw_status_dict["PURCHASED_HEATING"]:`
+
+2. B-RMR is modeled with at least one air-side system that is Type-1a, 7, 11, 12 or that is Type-1, 5, 7, 11, 12:
+
+  - If P-RMR is not modeled with purchased cooling: `if NOT purchased_chw_hhw_status_dict["PURCHASED_COOLING"]:`
+
+    - Check if B-RMR is modeled with at least one air-side system that is Type-1, 5, 7, 11 or 12, continue to rule logic: `PLACEHOLDER`
+
+    - Else, rule is not applicable: `else: rule_applicability_flag = FALSE`
+
+  - Else, P-RMR is modeled with purchased cooling: `else:`
+
+    - Check if B-RMR is modeled with at least one air-side system that is Type-1a, 7, 11 or 12, continue to rule logic: `PLACEHOLDER`
+
+    - Else, rule is not applicable: `else: rule_applicability_flag = FALSE`
 
 ## Rule Logic:  
 
@@ -42,7 +63,3 @@
 - Case 2: Else, list all failed components' ID: `else: FAIL and raise_message ${failed_components_array}`
 
 **[Back](../_toc.md)**
-
-**Notes:**
-
-1. This logic only checks all fluid loops connected to boilers meet the requirement. Other heating loops that are not connected to boilers will not be checked. But these rules will fail the "one-loop" check.
