@@ -10,7 +10,7 @@
 **Applicability:** All required data elements exist for B-RMR  
 **Applicability Checks:**  
 
-1. Pass Rule 21-1.
+1. P-RMR is modeled with purchased heating.
 2. B-RMR is modeled with at least one air-side system that is Type-1a, 7, 11, 12 or that is Type-1, 5, 7, 11, 12.
 
 **Manual Check:** None  
@@ -22,19 +22,25 @@
 
 **Applicability Check:**
 
-1. Pass Rule 21-1: `if rule-21-1 == "PASS":`
+1. Check if P-RMR is modeled with purchased cooling or purchased hot water/steam: `purchased_chw_hhw_status_dict = check_purchased_chw_hhw(P_RMR)`
+
+  - If P-RMR is modeled with purchased hot water/steam, rule is not applicable: `if purchased_chw_hhw_status_dict["PURCHASED_HEATING"]: rule_applicability_flag = FALSE`
+
+  - Else, P-RMR is not modeled with purchased hot water/steam, continue to next applicability check: `if NOT purchased_chw_hhw_status_dict["PURCHASED_HEATING"]:`
 
 2. B-RMR is modeled with at least one air-side system that is Type-1a, 7, 11, 12 or that is Type-1, 5, 7, 11, 12:
 
-  - Check if P-RMR is modeled with purchased cooling or purchased hot water/steam: `purchased_chw_hhw_status_dict = check_purchased_chw_hhw(P_RMR)`
+  - If P-RMR is not modeled with purchased cooling: `if NOT purchased_chw_hhw_status_dict["PURCHASED_COOLING"]:`
 
-    - If P-RMR is not modeled with purchased cooling (Note: Passing Rule 21-1 means P-RMR is not modeled with purchased heating.): `if NOT purchased_chw_hhw_status_dict["PURCHASED_COOLING"]:`
+    - Check if B-RMR is modeled with at least one air-side system that is Type-1, 5, 7, 11 or 12, continue to rule logic: `PLACEHOLDER`
 
-      - Check if B-RMR is modeled with at least one air-side system that is Type-1, 5, 7, 11 or 12: `PLACEHOLDER`
+    - Else, rule is not applicable: `else: rule_applicability_flag = FALSE`
 
-    - Else, P-RMR is modeled with purchased cooling: `else:`
+  - Else, P-RMR is modeled with purchased cooling: `else:`
 
-      - Check if B-RMR is modeled with at least one air-side system that is Type-1a, 7, 11 or 12: `PLACEHOLDER`
+    - Check if B-RMR is modeled with at least one air-side system that is Type-1a, 7, 11 or 12, continue to rule logic: `PLACEHOLDER`
+
+    - Else, rule is not applicable: `else: rule_applicability_flag = FALSE`
 
 ## Rule Logic:  
 
