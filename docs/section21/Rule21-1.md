@@ -22,24 +22,10 @@ purchased hot water or steam in both the proposed design and baseline building d
 
 - Check if P-RMR is modeled with purchased cooling or purchased hot water/steam: `purchased_chw_hhw_status_dict = check_purchased_chw_hhw(P_RMR)`
 
-  - If P-RMR is not modeled with purchased hot water or steam: `if NOT purchased_chw_hhw_status_dict["PURCHASED_HEATING"]:`
+**Rule Assertion:**
 
-    - Check if B-RMR is modeled with any external fluid source that is hot water or steam type: `if external_fluid_source_b.type in ["HOT_WATER", "STEAM"] for external_fluid_source_b in B_RMR.ASHRAE229.external_fluid_source:`
+- Case 1: If P-RMR is not modeled with purchased hot water or steam: `if NOT purchased_chw_hhw_status_dict["PURCHASED_HEATING"]: NOT APPLICABLE`
 
-      **Rule Assertion:** Case 1. Fail: `FAIL`
-
-    - Else, B-RMR is not modeled with any external fluid source that is hot water or steam type: `else:`
-
-      **Rule Assertion:** Case 2. Pass: `PASS`
-
-  - Else, P-RMR is modeled with external fluid source that is hot water or steam type: `else:`
-  
-    **Rule Assertion:** Case 3. Undetermined: `UNDETERMINED and raise_message "P-RMR IS MODELED WITH PURCHASED HOT WATER OR STEAM. VERIFY B-RMR HEATING SOURCE IS MODELED CORRECTLY."`
+- CASE 2: Else, P-RMR is modeled with purchased hot water or steam type: `else: UNDETERMINED and raise_message "P-RMR IS MODELED WITH PURCHASED HOT WATER OR STEAM. VERIFY B-RMR HEATING SOURCE IS MODELED CORRECTLY."`
 
 **[Back](../_toc.md)**
-
-**Notes:**
-
-1. What if P-RMR is modeled with purchased hot water and steam, which source should be modeled in the baseline?
-2. Can SHW also be served by purchased HHW or steam?
-3. How to make sure that the external fluid source is used by system in P-RMR? Maybe it's just a orphan object.
