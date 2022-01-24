@@ -10,7 +10,7 @@
 **Applicability:** All required data elements exist for B_RMR  
 **Applicability Checks:**  
 
-1. Pass Rule 21-1.
+1. P-RMR is modeled with purchased heating.
 2. B-RMR is modeled with at least one air-side system that is Type-1a, 7, 11, 12 or that is Type-1, 5, 7, 11, 12.
 
 **Manual Check:** None  
@@ -18,23 +18,31 @@
 **Data Lookup:** None  
 **Function Call:**
 
-  1. get_zone_conditioning_category()
-  2. get_loop_zone_list_w_area()
+  1. check_purchased_chw_hhw()
+  2. get_zone_conditioning_category()
+  3. get_loop_zone_list_w_area()
 
 **Applicability Check:**
 
-1. Pass Rule 21-1: `if rule-21-1 == "PASS":`
+1. Check if P-RMR is modeled with purchased cooling or purchased hot water/steam: `purchased_chw_hhw_status_dict = check_purchased_chw_hhw(P_RMR)`
+
+  - If P-RMR is modeled with purchased hot water/steam, rule is not applicable: `if purchased_chw_hhw_status_dict["PURCHASED_HEATING"]: rule_applicability_flag = FALSE`
+
+  - Else, P-RMR is not modeled with purchased hot water/steam, continue to next applicability check: `if NOT purchased_chw_hhw_status_dict["PURCHASED_HEATING"]:`
+
 2. B-RMR is modeled with at least one air-side system that is Type-1a, 7, 11, 12 or that is Type-1, 5, 7, 11, 12:
 
-  - Check if P-RMR is modeled with purchased cooling or purchased hot water/steam: `purchased_chw_hhw_status_dict = check_purchased_chw_hhw(P_RMR)`
+  - If P-RMR is not modeled with purchased cooling: `if NOT purchased_chw_hhw_status_dict["PURCHASED_COOLING"]:`
 
-    - If P-RMR is not modeled with purchased cooling (Note: Passing Rule 21-1 means P-RMR is not modeled with purchased heating.): `if NOT purchased_chw_hhw_status_dict["PURCHASED_COOLING"]:`
+    - Check if B-RMR is modeled with at least one air-side system that is Type-1, 5, 7, 11 or 12, continue to rule logic: `PLACEHOLDER`
 
-      - Check if B-RMR is modeled with at least one air-side system that is Type-1, 5, 7, 11 or 12: `PLACEHOLDER`
+    - Else, rule is not applicable: `else: rule_applicability_flag = FALSE`
 
-    - Else, P-RMR is modeled with purchased cooling: `else:`
+  - Else, P-RMR is modeled with purchased cooling: `else:`
 
-      - Check if B-RMR is modeled with at least one air-side system that is Type-1a, 7, 11 or 12: `PLACEHOLDER`
+    - Check if B-RMR is modeled with at least one air-side system that is Type-1a, 7, 11 or 12, continue to rule logic: `PLACEHOLDER`
+
+    - Else, rule is not applicable: `else: rule_applicability_flag = FALSE`
 
 ## Rule Logic:  
 
@@ -52,7 +60,7 @@
 
   - Check if zone is classified as conditioned (including directly and indirectly conditioned) and zone is not connected to any heating loop: `if ( zone_conditioning_category_dict[zone_b.id] in ["CONDITIONED RESIDENTIAL", "CONDITIONED NON-RESIDENTIAL", "CONDITIONED MIXED"] ) AND ( NOT zone_b in heating_loop_zone_list ):`
 
-    - Classify zone as indirectly conditioned and add zone total area to total area served by heating loop: `heating_loop_conditioned_zone_area += SUM(space.floor_area for space in zone.spaces)` (Note XC, zone might be adjacent to directly conditioned zones that are cooling only, but its area is still added to HHW loop)
+    - Classify zone as indirectly conditioned and add zone total area to total area served by heating loop: `heating_loop_conditioned_zone_area += SUM(space.floor_area for space in zone.spaces)` (Note XC, in this logic zone might be adjacent to directly conditioned zones that are cooling only, but its area will still be added to HHW loop)
 
 **Rule Assertion:**
 
@@ -60,8 +68,10 @@
 
 - Case 2: Else if baseline building design plant serves a conditioned floor area more than 15,000sq.ft. and two boilers are modeled in B_RMR and the two boilers are sized equally: `else if ( heating_loop_conditioned_zone_area > 15000 ) AND ( LEN(B_RMR.ASHRAE229.boilers) == 2 ) AND ( B_RMR.ASHRAE229.boilers[0].rated_capacity == B_RMR.ASHRAE229.boilers[1].rated_capacity ): PASS`
 
+- Case 3: Else: `else: FAIL`
+
 **[Back](../_toc.md)**
 
 **Notes:**
 
-1. This assumes that each RMR has one HHW plant, not per building
+1. This assumes that each RMR has one HHW plant, not per building.
