@@ -12,7 +12,10 @@
 	"spaces": "buildings[0]/building_segments[0]/zones[0]/spaces",
 	"surfaces": "buildings[0]/building_segments[0]/zones[0]/surfaces",
 	"terminals": "buildings[0]/building_segments[0]/zones[0]/terminals",
-	"zones": "buildings[0]/building_segments[0]/zones"
+	"zones": "buildings[0]/building_segments[0]/zones",
+	"construction": "buildings[0]/building_segments[0]/zones[0]/surfaces[0]/construction",
+	"subsurfaces": "buildings[0]/building_segments[0]/zones[0]/surfaces[0]/subsurfaces",
+	"infiltration": "buildings[0]/building_segments[0]/zones[0]/infiltration"
 
 	
 }
