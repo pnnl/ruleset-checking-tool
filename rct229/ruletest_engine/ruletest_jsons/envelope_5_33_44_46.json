@@ -14,7 +14,7 @@
             "comparison_value": "User RMR",
             "rule_dependency": "None",
             "mandatory_rule": "Yes",
-            "schema_version": "0.0.1"
+            "schema_version": "0.0.5"
         },
         "rmr_transformations": {
             "user": {
@@ -98,7 +98,7 @@
             "comparison_value": "User RMR",
             "rule_dependency": "None",
             "mandatory_rule": "Yes",
-            "schema_version": "0.0.1"
+            "schema_version": "0.0.5"
         },
         "rmr_transformations": {
             "user": {
@@ -182,7 +182,7 @@
             "comparison_value": "User RMR",
             "rule_dependency": "None",
             "mandatory_rule": "Yes",
-            "schema_version": "0.0.1"
+            "schema_version": "0.0.5"
         },
         "rmr_transformations": {
             "user": {
@@ -266,7 +266,7 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "1. Baseline heating and cooling capacities are established correctly (air-side HVAC rule TBD). This affects baseline space conditioning categories",
             "mandatory_rule": 0,
-            "schema_version": "0.0.1"
+            "schema_version": "0.0.5"
         },
         "rmr_transformations": {
             "baseline": {
@@ -310,7 +310,7 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "1. Baseline heating and cooling capacities are established correctly (air-side HVAC rule TBD). This affects baseline space conditioning categories",
             "mandatory_rule": 0,
-            "schema_version": "0.0.1"
+            "schema_version": "0.0.5"
         },
         "rmr_transformations": {
             "baseline": {
@@ -355,7 +355,7 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "1. Baseline heating and cooling capacities are established correctly (air-side HVAC rule TBD). This affects baseline space conditioning categories",
             "mandatory_rule": 0,
-            "schema_version": "0.0.1"
+            "schema_version": "0.0.5"
         },
         "rmr_transformations": {
             "baseline": {
@@ -400,7 +400,7 @@
             "comparison_value": "Proposed RMR",
             "rule_dependency": 0,
             "mandatory_rule": 0,
-            "schema_version": "0.0.1"
+            "schema_version": "0.0.5"
         },
         "rmr_transformations": {
             "proposed": {
@@ -470,7 +470,7 @@
             "comparison_value": "Proposed RMR",
             "rule_dependency": 0,
             "mandatory_rule": 0,
-            "schema_version": "0.0.1"
+            "schema_version": "0.0.5"
         },
         "rmr_transformations": {
             "proposed": {
