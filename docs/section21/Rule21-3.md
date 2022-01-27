@@ -10,37 +10,22 @@
 **Applicability:** All required data elements exist for B-RMR  
 **Applicability Checks:**  
 
-1. P-RMR is modeled with purchased heating.
-2. B-RMR is modeled with at least one air-side system that is Type-1a, 7, 11, 12 or that is Type-1, 5, 7, 11, 12.
+1. B-RMR is modeled with at least one air-side system that is Type-1, 1a, 5, 7a, 11, 11a, 12, 12a.
 
 **Manual Check:** None  
 **Evaluation Context:** Building  
 **Data Lookup:** None  
 **Function Call:**  
 
-1. check_purchased_chw_hhw()
+1. get_baseline_system_types()
 
 **Applicability Check:**
 
-1. Check if P-RMR is modeled with purchased cooling or purchased hot water/steam: `purchased_chw_hhw_status_dict = check_purchased_chw_hhw(P_RMR)`
+- Get B-RMR system types: `baseline_hvac_system_dict = get_baseline_system_types(B-RMR)`
 
-  - If P-RMR is modeled with purchased hot water/steam, rule is not applicable: `if purchased_chw_hhw_status_dict["PURCHASED_HEATING"]: rule_applicability_flag = FALSE`
+  - Check if B-RMR is modeled with at least one air-side system that is Type-1, 1a, 5, 7a, 11, 11a, 12, 12a, continue to rule logic: `if any(sys_type in baseline_hvac_system_dict.keys() for sys_type in ["SYS-1", "SYS-1A", "SYS-5", "SYS-7", "SYS-7A", "SYS-11", "SYS-11A", "SYS-12", "SYS-12A"]): CHECK_RULE_LOGIC`
 
-  - Else, P-RMR is not modeled with purchased hot water/steam, continue to next applicability check: `if NOT purchased_chw_hhw_status_dict["PURCHASED_HEATING"]:`
-
-2. B-RMR is modeled with at least one air-side system that is Type-1a, 7, 11, 12 or that is Type-1, 5, 7, 11, 12:
-
-  - If P-RMR is not modeled with purchased cooling: `if NOT purchased_chw_hhw_status_dict["PURCHASED_COOLING"]:`
-
-    - Check if B-RMR is modeled with at least one air-side system that is Type-1, 5, 7, 11 or 12, continue to rule logic: `PLACEHOLDER`
-
-    - Else, rule is not applicable: `else: rule_applicability_flag = FALSE`
-
-  - Else, P-RMR is modeled with purchased cooling: `else:`
-
-    - Check if B-RMR is modeled with at least one air-side system that is Type-1a, 7, 11 or 12, continue to rule logic: `PLACEHOLDER`
-
-    - Else, rule is not applicable: `else: rule_applicability_flag = FALSE`
+  - Else, rule is not applicable to B-RMR: `else: NOT_APPLICABLE`
 
 ## Rule Logic:  
 
