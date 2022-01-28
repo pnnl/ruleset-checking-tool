@@ -9,6 +9,13 @@ CRAWLSPACE_HEIGHT_THRESHOLD = 7 * ureg("ft")
 ZERO_AREA = 0 * ureg("ft2")
 ZERO_UA = 0 * ureg("ft2 * Btu / (hr * ft2 * R)")
 
+CONDITIONED_MIXED = "CONDITIONED_MIXED"
+CONDITIONED_NON_RESIDENTIAL = "CONDITIONED_NON_RESIDENTIAL"
+CONDITIONED_RESIDENTIAL = "CONDITIONED_RESIDENTIAL"
+SEMI_HEATED = "SEMI_HEATED"
+UNCONDITIONED = "UNCONDITIONED"
+UNENCLOSED = "UNENCLOSED"
+
 
 def mock_get_zone_conditioning_category_dict(climate_zone, building):
     """To be used until get_zone_conditioning_category_dict(climate_zone, building) is finished"""
