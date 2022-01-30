@@ -10,39 +10,32 @@
 **Applicability:** All required data elements exist for B_RMR  
 **Applicability Checks:**  
 
-1. P-RMR is modeled with purchased heating.
-2. B-RMR is modeled with at least one air-side system that is Type-1a, 7, 11, 12 or that is Type-1, 5, 7, 11, 12.
+1. B-RMR is modeled with at least one air-side system that is Type-1, 5, 7, 11(for climate zones other than 0 through 3A), 12, 1a, 7a, 11a(for climate zones other than 0 through 3A), 12a.
 
 **Manual Check:** None  
 **Evaluation Context:** Each Data Element  
 **Data Lookup:** None  
 **Function Call:**
 
-  1. check_purchased_chw_hhw()
+  1. get_baseline_system_types()
   2. get_zone_conditioning_category()
   3. get_loop_zone_list_w_area()
 
 **Applicability Check:**
 
-1. Check if P-RMR is modeled with purchased cooling or purchased hot water/steam: `purchased_chw_hhw_status_dict = check_purchased_chw_hhw(P_RMR)`
+- Get B-RMR system types: `baseline_hvac_system_dict = get_baseline_system_types(B-RMR)`
 
-  - If P-RMR is modeled with purchased hot water/steam, rule is not applicable: `if purchased_chw_hhw_status_dict["PURCHASED_HEATING"]: rule_applicability_flag = FALSE`
+  - Check if B-RMR is modeled with any air-side system that is Type-11 or 11a: `if any(sys_type in baseline_hvac_system_dict.keys() for sys_type in ["SYS-11", "SYS-11A"]):`
 
-  - Else, P-RMR is not modeled with purchased hot water/steam, continue to next applicability check: `if NOT purchased_chw_hhw_status_dict["PURCHASED_HEATING"]:`
+    - Check if B-RMR is in climate zones other than 0 through 3A, continue to rule logic: `if NOT B_RMR.ASHRAE229.weather.climate_zone in ["0A", "0B", "1A", "1B", "2A", "2B", "3A"]: CHECK_RULE_LOGIC`
 
-2. B-RMR is modeled with at least one air-side system that is Type-1a, 7, 11, 12 or that is Type-1, 5, 7, 11, 12:
+    - Else, rule is not applicable to B-RMR: `else: RULE_NOT_APPLICABLE`
 
-  - If P-RMR is not modeled with purchased cooling: `if NOT purchased_chw_hhw_status_dict["PURCHASED_COOLING"]:`
+  - Else: `else:`
+  
+    - Check if B-RMR is modeled with at least one air-side system that is Type-1, 5, 7, 12, 1a, 7a, 12a, continue to rule logic: `if any(sys_type in baseline_hvac_system_dict.keys() for sys_type in ["SYS-1", "SYS-5", "SYS-7", "SYS-12", "SYS-1A", "SYS-7A", "SYS-12A"]): CHECK_RULE_LOGIC`
 
-    - Check if B-RMR is modeled with at least one air-side system that is Type-1, 5, 7, 11 or 12, continue to rule logic: `PLACEHOLDER`
-
-    - Else, rule is not applicable: `else: rule_applicability_flag = FALSE`
-
-  - Else, P-RMR is modeled with purchased cooling: `else:`
-
-    - Check if B-RMR is modeled with at least one air-side system that is Type-1a, 7, 11 or 12, continue to rule logic: `PLACEHOLDER`
-
-    - Else, rule is not applicable: `else: rule_applicability_flag = FALSE`
+    - Else, rule is not applicable to B-RMR: `else: RULE_NOT_APPLICABLE`
 
 ## Rule Logic:  
 
@@ -62,7 +55,7 @@
 
     - Classify zone as indirectly conditioned and add zone total area to total area served by heating loop: `heating_loop_conditioned_zone_area += SUM(space.floor_area for space in zone.spaces)` (Note XC, in this logic zone might be adjacent to directly conditioned zones that are cooling only, but its area will still be added to HHW loop)
 
-**Rule Assertion:**
+**Rule Assertion - Component:**
 
 - Case 1: If baseline building design plant serves a conditioned floor area of 15,000sq.ft. or less, and if only one boiler is modeled in B_RMR: `if ( heating_loop_conditioned_zone_area <= 15000 ) AND ( LEN(B_RMR.ASHRAE229.boilers) == 1 ): PASS`
 
@@ -74,4 +67,4 @@
 
 **Notes:**
 
-1. This assumes that each RMR has one HHW plant, not per building.
+1. This treats all buildings in an RMR (if it has multiple buildings) as one building with one HHW plant.
