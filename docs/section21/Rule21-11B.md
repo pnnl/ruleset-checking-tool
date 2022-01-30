@@ -10,37 +10,30 @@
 **Applicability:** All required data elements exist for B_RMR  
 **Applicability Checks:**  
 
-1. P-RMR is not modeled with purchased heating.
-2. B-RMR is modeled with at least one air-side system that is Type-1a, 7, 11, 12 or that is Type-1, 5, 7, 11, 12.
+1. B-RMR is modeled with at least one air-side system that is Type-1, 5, 7, 11(for climate zones other than 0 through 3A), 12, 1a, 7a, 11a(for climate zones other than 0 through 3A), 12a.
 
 **Manual Check:** None  
 **Evaluation Context:** Building  
 **Data Lookup:** None  
 **Function Call:**  
 
-1. check_purchased_chw_hhw()
+1. get_baseline_system_types()
 
 **Applicability Checks:**  
 
-1. Check if P-RMR is modeled with purchased cooling or purchased hot water/steam: `purchased_chw_hhw_status_dict = check_purchased_chw_hhw(P_RMR)`
+- Get B-RMR system types: `baseline_hvac_system_dict = get_baseline_system_types(B-RMR)`
 
-  - If P-RMR is modeled with purchased hot water/steam, rule is not applicable: `if purchased_chw_hhw_status_dict["PURCHASED_HEATING"]: rule_applicability_flag = FALSE`
+  - Check if B-RMR is modeled with any air-side system that is Type-11 or 11a: `if any(sys_type in baseline_hvac_system_dict.keys() for sys_type in ["SYS-11", "SYS-11A"]):`
 
-  - Else, P-RMR is not modeled with purchased hot water/steam, continue to next applicability check: `if NOT purchased_chw_hhw_status_dict["PURCHASED_HEATING"]:`
+    - Check if B-RMR is in climate zones other than 0 through 3A, continue to rule logic: `if NOT B_RMR.ASHRAE229.weather.climate_zone in ["0A", "0B", "1A", "1B", "2A", "2B", "3A"]: CHECK_RULE_LOGIC`
 
-2. B-RMR is modeled with at least one air-side system that is Type-1a, 7, 11, 12 or that is Type-1, 5, 7, 11, 12:
+    - Else, rule is not applicable to B-RMR: `else: RULE_NOT_APPLICABLE`
 
-  - If P-RMR is not modeled with purchased cooling: `if NOT purchased_chw_hhw_status_dict["PURCHASED_COOLING"]:`
+  - Else: `else:`
+  
+    - Check if B-RMR is modeled with at least one air-side system that is Type-1, 5, 7, 12, 1a, 7a, 12a, continue to rule logic: `if any(sys_type in baseline_hvac_system_dict.keys() for sys_type in ["SYS-1", "SYS-5", "SYS-7", "SYS-12", "SYS-1A", "SYS-7A", "SYS-12A"]): CHECK_RULE_LOGIC`
 
-    - Check if B-RMR is modeled with at least one air-side system that is Type-1, 5, 7, 11 or 12, continue to rule logic: `PLACEHOLDER`
-
-    - Else, rule is not applicable: `else: rule_applicability_flag = FALSE`
-
-  - Else, P-RMR is modeled with purchased cooling: `else:`
-
-    - Check if B-RMR is modeled with at least one air-side system that is Type-1a, 7, 11 or 12, continue to rule logic: `PLACEHOLDER`
-
-    - Else, rule is not applicable: `else: rule_applicability_flag = FALSE`
+    - Else, rule is not applicable to B-RMR: `else: RULE_NOT_APPLICABLE`
 
 ## Rule Logic:  
 
@@ -54,12 +47,6 @@
 
     - Case 1: For heating hot water loop that boiler serves, if loop is modeled with continuous variable flow: `if ( fluid_loop_b.heating_design_and_control.flow_control == "VARIABLE_FLOW" ) AND ( fluid_loop_b.operation == "CONTINUOUS" ): PASS`
 
-    - Case 2: Else, save component ID to output array for failed components:: `else: FAIL and failed_components_array.append(fluid_loop_b)`
-
-**Rule Assertion - RMR:**
-
-- Case 1: If all components pass: `if ALL_COMPONENTS == PASS: PASS`
-
-- Case 2: Else, list all failed components' ID: `else: FAIL and raise_message ${failed_components_array}`
+    - Case 2: Else: `else: FAIL`
 
 **[Back](../_toc.md)**
