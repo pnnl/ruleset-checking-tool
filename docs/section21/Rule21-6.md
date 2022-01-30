@@ -10,38 +10,30 @@
 **Applicability:** All required data elements exist for B_RMR  
 **Applicability Checks:**  
 
-1. P-RMR is not modeled with purchased heating.
-2. B-RMR is modeled with at least one air-side system that is Type-1a, 7, 11, 12 or that is Type-1, 5, 7, 11, 12.
-3. B-RMR HHW loop is modeled with two boilers.
+1. B-RMR is modeled with at least one air-side system that is Type-1, 5, 7, 11(for climate zones other than 0 through 3A), 12, 1a, 7a, 11a(for climate zones other than 0 through 3A), 12a.
 
 **Manual Check:** None  
 **Evaluation Context:** Building  
 **Data Lookup:** None  
 **Function Call:**  
 
-1. check_purchased_chw_hhw()
+1. get_baseline_system_types()
 
 **Applicability Checks:**  
 
-1. Check if P-RMR is modeled with purchased cooling or purchased hot water/steam: `purchased_chw_hhw_status_dict = check_purchased_chw_hhw(P_RMR)`
+- Get B-RMR system types: `baseline_hvac_system_dict = get_baseline_system_types(B-RMR)`
 
-  - If P-RMR is modeled with purchased hot water/steam, rule is not applicable: `if purchased_chw_hhw_status_dict["PURCHASED_HEATING"]: rule_applicability_flag = FALSE`
+  - Check if B-RMR is modeled with any air-side system that is Type-11 or 11a: `if any(sys_type in baseline_hvac_system_dict.keys() for sys_type in ["SYS-11", "SYS-11A"]):`
 
-  - Else, P-RMR is not modeled with purchased hot water/steam, continue to next applicability check: `if NOT purchased_chw_hhw_status_dict["PURCHASED_HEATING"]:`
+    - Check if B-RMR is in climate zones other than 0 through 3A, continue to rule logic: `if NOT B_RMR.ASHRAE229.weather.climate_zone in ["0A", "0B", "1A", "1B", "2A", "2B", "3A"]: CHECK_RULE_LOGIC`
 
-2. B-RMR is modeled with at least one air-side system that is Type-1a, 7, 11, 12 or that is Type-1, 5, 7, 11, 12:
+    - Else, rule is not applicable to B-RMR: `else: RULE_NOT_APPLICABLE`
 
-  - If P-RMR is not modeled with purchased cooling: `if NOT purchased_chw_hhw_status_dict["PURCHASED_COOLING"]:`
+  - Else: `else:`
+  
+    - Check if B-RMR is modeled with at least one air-side system that is Type-1, 5, 7, 12, 1a, 7a, 12a, continue to rule logic: `if any(sys_type in baseline_hvac_system_dict.keys() for sys_type in ["SYS-1", "SYS-5", "SYS-7", "SYS-12", "SYS-1A", "SYS-7A", "SYS-12A"]): CHECK_RULE_LOGIC`
 
-    - Check if B-RMR is modeled with at least one air-side system that is Type-1, 5, 7, 11 or 12, continue to rule logic: `PLACEHOLDER`
-
-    - Else, rule is not applicable: `else: rule_applicability_flag = FALSE`
-
-  - Else, P-RMR is modeled with purchased cooling: `else:`
-
-    - Check if B-RMR is modeled with at least one air-side system that is Type-1a, 7, 11 or 12, continue to rule logic: `PLACEHOLDER`
-
-    - Else, rule is not applicable: `else: rule_applicability_flag = FALSE`
+    - Else, rule is not applicable to B-RMR: `else: RULE_NOT_APPLICABLE`
 
 ## Rule Logic:  
 
@@ -53,7 +45,7 @@
 
     - Get all boilers on loop: `boilers_array = loop_boiler_dict[hhw_loop]`
 
-      - Check if loop has two boilers, loop is applicable: `if boilers_array.length == 2: component_applicability_flag = TRUE`
+      - Check if loop has two boilers: `if boilers_array.length == 2:`
 
         - Get both boilers on loop: `boiler_1 = B_RMR.ASHRAE229.boilers[0], boiler_2 = B_RMR.ASHRAE229.boilers[1]`
 
@@ -63,12 +55,6 @@
 
             - Case 2: Else if boiler_2's operation lower limit is 0 and operation upper limit is equal to its rated capacity, and boiler_1's operation lower limit is equal to its rated capacity and operation upper limit is equal to twice its rated capacity: `if ( boiler_2.operation_lower_limit == 0 ) AND ( boiler_2.operation_upper_limit == boiler_2.rated_capacity ) AND ( boiler_1.operation_lower_limit == boiler_1.rated_capacity ) AND ( boiler_1.operation_upper_limit == boiler_1.rated_capacity * 2 ): PASS`
 
-            - Case 3: Else, save component ID to output array for failed components: `else: FAIL and failed_components_array.append(fluid_loop_b.id).`
-
-**Rule Assertion - RMR:**
-
-- Case 1: If all components pass: `if ALL_COMPONENTS == PASS: PASS`
-
-- Case 2: Else, list all failed components' ID: `else: FAIL and raise_message ${failed_components_array}`
+            - Case 3: Else: `else: FAIL`
 
 **[Back](../_toc.md)**
