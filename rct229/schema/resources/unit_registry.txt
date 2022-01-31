@@ -174,7 +174,7 @@ therm = 1e5 * Btu = thm = EC_therm
 # Power
 [power] = [energy] / [time]
 watt = joule / second = W
-btu_h = british_thermal_unit / hour = btu/h
+british_thermal_unit_per_hour = Btu / hour = Btu_h = btu_h
 volt_ampere = volt * ampere = VA
 
 # Momentum
@@ -209,9 +209,6 @@ foot_pound = foot * force_pound = ft_lb = footpound
 
 # Heat transimission
 [heat_transmission] = [energy] / [area]
-
-# Heat transfer rate
-[heat_tranfer_rate] = [power] / ([area] * [temperature])
 
 # Luminance
 [luminance] = [luminosity] / [area]
