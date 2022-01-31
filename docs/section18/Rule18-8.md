@@ -10,31 +10,32 @@
 **Applicability:** All required data elements exist for B_RMR  
 **Applicability Checks:**  
 
-1. B-RMR is modeled with at least one air-side system that is Type-7, 8, 11, 12, or 13
+1. P-RMR is modeled with purchased chilled water.
 
 **Manual Check:** None  
 **Evaluation Context:** Building  
 **Data Lookup:** None  
-**Function Call:** None  
+**Function Call:**  
 
-**Applicability Checks:**  
+1. check_purchased_chw_hhw()
+2. get_baseline_system_types()
 
-1. B-RMR is modeled with at least one air-side system that is Type-7, 8, 11, 12, or 13: `PLACEHOLDER`
+**Applicability Checks:**
+
+- Check if P-RMR is modeled with purchased chilled water or purchased hot water/steam: `purchased_chw_hhw_status_dict = check_purchased_chw_hhw(P_RMR)`
+
+  - If P-RMR is not modeled with purchased chilled water, rule is not applicable to B-RMR: `if NOT purchased_chw_hhw_status_dict["PURCHASED_COOLING"]: RULE_NOT_APPLICABLE`
+
+  - Else, P-RMR is modeled with purchased chilled water, continue to rule logic: `else: CHECK_RULE_LOGIC`
 
 ## Rule Logic:  
 
-- For each external fluid source in P_RMR: `for external_fluid_source_p in P_RMR.ASHRAE229.external_fluid_source:`
-
-  - Check if external fluid source in P_RMR is purchased chilled water: `if external_fluid_source_p.type == "CHILLED_WATER":`
-
-    - Set applicability flag: `rule_applicability_check = TRUE`
+- Check if B-RMR is modeled with any air-side system that is Type-1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 13, 1b, 3b, 5b, 6b, 7b, 8b, 11b, 12b, 13b, i.e. any air-side system using cooling source other than purchased chilled water, set check flag to True: `if any(sys_type in baseline_hvac_system_dict.keys() for sys_type in ["SYS-1", "SYS-2", "SYS-3", "SYS-4", "SYS-5", "SYS-6", "SYS-7", "SYS-8", "SYS-9", "SYS-11", "SYS-12", "SYS-13", "SYS-1B", "SYS-3B", "SYS-5B", "SYS-6B", "SYS-7B", "SYS-8B", "SYS-11B", "SYS-12B", "SYS-13B"]): check_flag = TRUE`
 
 **Rule Assertion:**
 
-- Case 1: If P-RMR is modeled with purchased chilled water: `if rule_applicability_check: UNDETERMINED and raise_message "P-RMR IS MODELED WITH PURCHASED CHILLED WATER. VERIFY B-RMR COOLING SOURCE IS MODELED CORRECTLY."`
+- Case 1: If check flag is True: `if check_flag: FAIL`
 
-**Applicability Check 2:**
-
-1. Rule is applicable if P-RMR is modeled with purchased chilled water: `if rule_applicability_check: is_applicable = TRUE`
+- Case 2: Else: `PASS`
 
 **[Back](../_toc.md)**
