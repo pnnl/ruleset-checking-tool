@@ -10,16 +10,27 @@
 **Applicability:** All required data elements exist for B_RMR  
 **Applicability Checks:**  
 
-1. Pass Rule 22-4, Baseline chilled-water supply temperature shall be reset based on outdoor dry-bulb temperature if Baseline chilled water loop is not purchased cooling and loop does not serve any Baseline System Type-11.
+1. B-RMR is modeled with at least one air-side system that is Type-7, 8, 12, 13, 7b, 8b, 12b, 13b.
+2. B-RMR is not modeled with any air-side system that is Type-11 or 11b.
 
 **Manual Check:** None  
 **Evaluation Context:** Building  
 **Data Lookup:** None  
-**Function Call:** None  
+**Function Call:**  
+
+1. get_baseline_system_types()
 
 **Applicability Checks:**  
 
-1. Pass Rule 22-4: `if Rule-22-4 == "PASS":`
+- Get B-RMR system types: `baseline_hvac_system_dict = get_baseline_system_types(B-RMR)`
+
+  - Check if B-RMR is modeled with at least one air-side system that is Type-7, 8, 12, 13, 7b, 8b, 12b, 13b, i.e. with air-side system served by chiller(s), continue to rule logic: `if any(sys_type in baseline_hvac_system_dict.keys() for sys_type in ["SYS-7", "SYS-8", "SYS-12", "SYS-13", "SYS-7B", "SYS-8B", "SYS-12B", "SYS-13B"]):`
+
+    - Check if B-RMR is modeled with any air-side system that is Type-11 or 11b, rule is not applicable to B-RMR: `if any(sys_type in baseline_hvac_system_dict.keys() for sys_type in ["SYS-11", "SYS11B"]): RULE_NOT_APPLICABLE`
+
+    - Else, continue to rule logic: `else: CHECK_RULE_LOGIC`
+
+  - Else, rule is not applicable to B-RMR: `else: RULE_NOT_APPLICABLE`
 
 ## Rule Logic:  
 
@@ -27,18 +38,12 @@
 
 - For each fluid loop in B_RMR: `for fluid_loop_b in B_RMR.ASHRAE229.fluid_loops:`
 
-  - Check if fluid loop is connected to chiller(s): `if fluid_loop_b in loop_chiller_dict.keys()`
+  - Check if fluid loop is connected to chiller(s): `if fluid_loop_b.id in loop_chiller_dict.keys()`
 
     **Rule Assertion - Component:**
 
     - Case 1: For Baseline chilled water loop that is not purchased cooling and does not serve any Baseline System Type-11, if chilled-water supply temperature is reset to 44F at outdoor dry-bulb temperature of 80F and above, 54F at 60F and below, and ramped linearly between 44F and 54F at temperature between 80F and 60F: `if ( fluid_loop_b.cooling_or_condensing_design_and_control.outdoor_high_for_loop_supply_temperature_reset == 80 ) AND ( fluid_loop_b.cooling_or_condensing_design_and_control.outdoor_low_for_loop_supply_temperature_reset == 60 ) AND ( fluid_loop_b.cooling_or_condensing_design_and_control.loop_supply_temperature_at_outdoor_high == 44 ) AND ( fluid_loop_b.cooling_or_condensing_design_and_control.loop_supply_temperature_at_outdoor_low == 54 ): PASS`
 
-    - Case 2: Else, save component ID to output array for failed components:: `else: FAIL and failed_components_array.append(fluid_loop_b)`
-
-**Rule Assertion - RMR:**
-
-- Case 1: If all components pass: `if ALL_COMPONENTS == PASS: PASS`
-
-- Case 2: Else, list all failed components' ID: `else: FAIL and raise_message ${failed_components_array}`
+    - Case 2: Else: `else: FAIL`
 
 **[Back](../_toc.md)**
