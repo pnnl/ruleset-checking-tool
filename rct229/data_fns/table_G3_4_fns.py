@@ -120,10 +120,10 @@ def table_G34_lookup(climate_zone, surface_conditioning_category, opaque_surface
     search_results = {}
 
     if osstd_entry["assembly_maximum_u_value"]:
-        search_results["u_value"] = osstd_entry["assembly_maximum_u_value"]* ureg("Btu / (hr * ft2 * delta_degF)")
+        search_results["u_value"] = osstd_entry["assembly_maximum_u_value"] * (ureg.Btu_h / ureg.ft2 / ureg.delta_degF)
     if osstd_entry["assembly_maximum_f_factor"]:
-        search_results["f_factor"] = osstd_entry["assembly_maximum_f_factor"]* ureg("Btu / (hr * ft * delta_degF)")
+        search_results["f_factor"] = osstd_entry["assembly_maximum_f_factor"] * (ureg.Btu_h / ureg.ft / ureg.delta_degF)
     if osstd_entry["assembly_maximum_c_factor"]:
-        search_results["c_factor"] = osstd_entry["assembly_maximum_c_factor"]* ureg("Btu / (hr * ft2 * delta_degF)")
+        search_results["c_factor"] = osstd_entry["assembly_maximum_c_factor"] * (ureg.Btu_h / ureg.ft2 / ureg.delta_degF)
     # TODO need to add fenestration properties
     return search_results

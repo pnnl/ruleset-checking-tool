@@ -9,8 +9,7 @@ from rct229.utils.match_lists import match_lists_exactly_by_id
 from rct229.data_fns.table_G3_4_fns import table_G34_lookup
 from rct229.ruleset_functions.get_surface_conditioning_category_dict import get_surface_conditioning_category_dict
 from rct229.ruleset_functions.get_opaque_surface_type import get_opaque_surface_type
-from pint import UnitRegistry
-ureg = UnitRegistry()
+from rct229.schema.config import ureg
 
 # Rule Definitions for Section 5 of 90.1-2019 Appendix G
 CONSTANT = schema_enums["InfiltrationMethodType"].CONSTANT.name
@@ -120,6 +119,7 @@ class Section5Rule8(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section5Rule8.BuildingRule, self).__init__(
                 rmrs_used=UserBaselineProposedVals(False, True, False),
+                rmr_context= "ASHRAE229"
             )
 
         def get_calc_vals(self, context, data=None):
@@ -163,8 +163,9 @@ class Section5Rule8(RuleDefinitionListIndexedBase):
                             mix_surface_c_factor_ids.append(surface_b.id)
                         else:
                             target_c_factor = target_c_factor_res
-
-                    if surface_construction_b["c_factor"] - target_c_factor > 0.01:
+                    # convert values to IP unit to compare with standard.
+                    diff_factor = surface_construction_b["c_factor"].to('Btu_h / square_foot / delta_degF') - target_c_factor
+                    if abs(diff_factor.magnitude) > 0.01:
                         failing_surface_c_factor_ids.append(surface_b.id)
 
             calc_val["failing_surface_c_factor_ids"] = failing_surface_c_factor_ids
