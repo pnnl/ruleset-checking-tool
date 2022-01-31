@@ -10,19 +10,22 @@
 **Applicability:** All required data elements exist for B_RMR  
 **Applicability Checks:**  
 
-1. B-RMR is modeled with at least one air-side system serves computer room HVAC system (System Type-11)
-2. B-RMR is not modeled with purchased chilled water.
+1. B-RMR is modeled with at least one air-side system that is Type-11 or 11b.
 
 **Manual Check:** None  
 **Evaluation Context:** Building  
 **Data Lookup:** None  
-**Function Call:** None  
+**Function Call:**  
+
+1. get_baseline_system_types()
 
 **Applicability Checks:**  
 
-1. B-RMR is modeled with at least one air-side system serving computer room HVAC system (System Type-11):
- `PLACEHOLDER`
-2. B-RMR is not modeled with purchased chilled water: `if Rule-18-8 == "NOT APPLICABLE":`
+- Get B-RMR system types: `baseline_hvac_system_dict = get_baseline_system_types(B-RMR)`
+
+  - Check if B-RMR is modeled with at least one air-side system that is Type-11 or 11b: `if any(sys_type in baseline_hvac_system_dict.keys() for sys_type in ["SYS-11", "SYS-11B"]): CHECK_RULE_LOGIC`
+
+  - Else, rule is not applicable to B-RMR: `else: RULE_NOT_APPLICABLE`
 
 ## Rule Logic:  
 
@@ -36,12 +39,6 @@
 
     - Case 1: If CHW loop is modeled with load reset: `if ( fluid_loop_b.cooling_or_condensing_design_and_control.temperature_reset_type == "LOAD_RESET" ): PASS`
 
-    - Case 2: Else, save component ID to output array for failed components:: `else: FAIL and failed_components_array.append(fluid_loop_b)`
-
-**Rule Assertion - RMR:**
-
-- Case 1: If all components pass: `if ALL_COMPONENTS == PASS: PASS`
-
-- Case 2: Else, list all failed components' ID: `else: FAIL and raise_message ${failed_components_array}`
+    - Case 2: Else: `else: FAIL`
 
 **[Back](../_toc.md)**
