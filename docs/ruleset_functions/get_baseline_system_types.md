@@ -22,9 +22,17 @@ Standard Baseline HVAC Types:
 | Sys-8 VAV with PFP Boxes         | VAV with Parallel Fan-Powered Boxes and Reheat                  | CHW          | ER           | Sys-8a: VAV with PFP Boxes, PCHW w/ ER  | Sys-8b: VAV with PFP Boxes, w/ CHW and PHW        | Sys-7c: VAV with Reheat with PHW and PCHW |
 | Sys-9 HV gas-fired               | Heating and Ventilation                                         | None         | Furnace      | Sys-9: HV (No Changes)                  | Sys-9b: HV (PHW)                                  | Sys-9b: HV (PHW)                          |
 | Sys-10 HV electrical             | Heating and Ventilation                                         | None         | ER           | Sys-9: HV (No Changes)                  | Sys-9b: HV (PHW)                                  | Sys-9b: HV (PHW)                          |
-| Sys-11 SZ-VAV                    | Single Zone VAV System                                          | CHW          | ER or Boiler | Sys-11a: SZ-VAV w/ PCHW ER or Boiler    | Sys-11b SZ-VAV, w/ CHW and PHW                    | Sys-11c: SZ-VAV with PHW and PCHW         |
+| Sys-11.1 SZ-VAV                    | Single Zone VAV System                                          | CHW          | ER | Sys-11.1a: SZ-VAV w/ PCHW and ER    | Sys-11b SZ-VAV, w/ CHW and PHW                    | Sys-11c: SZ-VAV with PHW and PCHW         |
+| Sys-11.2 SZ-VAV                    | Single Zone VAV System                                          | CHW          | Boiler | Sys-11.2a: SZ-VAV w/ PCHW Boiler    | Sys-11b SZ-VAV, w/ CHW and PHW                    | Sys-11c: SZ-VAV with PHW and PCHW         |
 | Sys-12 SZ-CV-HW                  | Single Zone Constant Volume System                              | CHW          | Boiler       | Sys-12a: SZ-CV, w/ PCHW + Boiler        | Sys-12b SZ-CV-HW, w/ CHW and PHW                  | Sys-12c: SZ-CV with PHW and PCHW          |
 | Sys-13 SZ-CV-ER                  | Single Zone Constant Volume System                              | CHW          | ER           | Sys-13a: SZ-CV, PCHW w/ ER              | Sys-13b SZ-CV-ER, w/ CHW and PHW                  | Sys-13c: SZ-CV with PHW and PCHW          |
 
 
 Logic: TBD  
+
+**Notes:**
+1. We can use multiple functions, one for each baseline HVAC system type as shown below. The return values will be TRUE or FALSE. :
+is_baseline_system_1(HVAC_id)
+is_baseline_system_2(HVAC_id)
+
+Then "get_baseline_HVAC_system_types" would call these sub-functions to come up with the baseline system library.
