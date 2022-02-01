@@ -6,7 +6,7 @@
 - **B_RMR**: To determine which (if any) baseline HVAC system type 3 or 4 has been used for spaces (zones???) that differ by more than 40 equivalent full load hrs/week from other spaces (zones???) served by the system.   
 
 **Returns:**
-- **applicable_zones_G3.1.1c_40_EFLHs_list_b**: A list that saves all zones that have baseline HVAC system type 3 or 4 has been used for spaces (zones???) that differ by more than 40 equivalent full load hrs/week from other spaces (zones???) served by the system. 
+- **applicable_zones_G3.1.1c_40_EFLHs_dict_b**: A dictionary that saves all zones that have baseline HVAC system type 3 or 4 has been used for spaces (zones???) that differ by more than 40 equivalent full load hrs/week from other spaces (zones???) served by the system and the hvac system id. 
  
 **Function Call:** 
 
@@ -115,7 +115,7 @@
                         - Check if the HVAC system is 3 or 4 and not a computer room: `if zone_info_list_b[1] in ["SYS-3","SYS-3a","SYS-3b","SYS-3c","SYS-4"] AND zone_info_list_b[4] == FALSE:`
                             - Check if the zone meets G3.1.1 c, schedules that differ by more than 40 equivalent full load hrs/week from other spaces: `if abs(((EFLHs-zone_info_list_b[3])/counter)-zone_info_list_b[3]) > 40:`
                                 - Set applicability flag: `rule_applicability_check = TRUE`
-                                - Add to list of applicable zones: `applicable_zones_G3.1.1c_40_EFLHs_list_b = applicable_zones_G3.1.1c_40_EFLHs_list_b.append(zone_b.id)`
+                                - Add to dict of applicable zones as the key and hvac system as value: `applicable_zones_G3.1.1c_40_EFLHs_dict_b[zone_b.id] = zone_info_list_b[0]`
                                            
 
 
