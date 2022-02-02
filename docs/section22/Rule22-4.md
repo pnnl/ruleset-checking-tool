@@ -11,7 +11,7 @@
 **Applicability Checks:**  
 
 1. B-RMR is modeled with at least one air-side system that is Type-7, 8, 12, 13, 7b, 8b, 12b, 13b.
-2. B-RMR is not modeled with any air-side system that is Type-11 or 11b.
+2. B-RMR is not modeled with any air-side system that is Type-11.1, 11.2, 11.1a, 11.2a, 11b or 11c.
 
 **Manual Check:** None  
 **Evaluation Context:** Building  
@@ -26,7 +26,7 @@
 
   - Check if B-RMR is modeled with at least one air-side system that is Type-7, 8, 12, 13, 7b, 8b, 12b, 13b, i.e. with air-side system served by chiller(s), continue to rule logic: `if any(sys_type in baseline_hvac_system_dict.keys() for sys_type in ["SYS-7", "SYS-8", "SYS-12", "SYS-13", "SYS-7B", "SYS-8B", "SYS-12B", "SYS-13B"]):`
 
-    - Check if B-RMR is modeled with any air-side system that is Type-11 or 11b, rule is not applicable to B-RMR: `if any(sys_type in baseline_hvac_system_dict.keys() for sys_type in ["SYS-11", "SYS11B"]): RULE_NOT_APPLICABLE`
+    - Check if B-RMR is modeled with any air-side system that is Type-11.1, 11.2, 11.1a, 11.2a, 11b or 11c, rule is not applicable to B-RMR: `if any(sys_type in baseline_hvac_system_dict.keys() for sys_type in ["SYS-11.1", "SYS-11.2", "SYS-11.1A", "SYS-11.2A", "SYS-11B", "SYS-11C"]): RULE_NOT_APPLICABLE`
 
     - Else, continue to rule logic: `else: CHECK_RULE_LOGIC`
 
