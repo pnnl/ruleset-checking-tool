@@ -176,6 +176,7 @@ therm = 1e5 * Btu = thm = EC_therm
 [power] = [energy] / [time]
 watt = joule / second = W
 volt_ampere = volt * ampere = VA
+ton = 3517 * W
 
 # Momentum
 [momentum] = [length] * [mass] / [time]

@@ -10,7 +10,8 @@
         "capacity": "W",
         "fluid_flow_rate": "L/s",
         "pump_head": "m",
-        "temperature": "C"
+        "temperature": "C",
+        "cooling_capacity": "W"
     },
     "ip": {
         "transformer_capacity": "V-A",
@@ -23,6 +24,7 @@
         "capacity": "Btu/hr",
         "fluid_flow_rate": "gallon/min",
         "pump_head": "ft",
-        "temperature": "F"
+        "temperature": "F",
+        "cooling_capacity": "ton"
     }
 }
