@@ -21,7 +21,7 @@ def test_rule5_8_success():
 
 
 def test_rule5_8_one_surface_c_factor():
-    base_dir = "test_files\\baseline_rmr_5_8_c_factor.json"
+    base_dir = "test_files/baseline_rmr_5_8_c_factor.json"
     proposed_dir = None
     user_dir = None
 
