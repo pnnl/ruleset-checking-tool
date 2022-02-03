@@ -10,7 +10,7 @@ def test_rule5_8_success():
     -------
 
     '''
-    base_dir = "test_files\\baseline_rmr_5_8.json"
+    base_dir = "test_files/baseline_rmr_5_8.json"
     proposed_dir = None
     user_dir = None
 
