@@ -87,8 +87,8 @@ SCC_DATA_FRAME = pd.DataFrame(
             EXTERIOR_MIXED,
             SEMI_EXTERIOR,
             UNREGULATED,
-            UNREGULATED
-        ]
+            UNREGULATED,
+        ],
     },
     index=[
         CONDITIONED_RESIDENTIAL,

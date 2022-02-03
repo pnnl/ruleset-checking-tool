@@ -66,7 +66,9 @@ def wwr_to_search_criteria(wwr, search_criteria):
         search_criteria.append(("maximum_percent_of_surface", None))
 
 
-def table_G34_lookup(climate_zone, surface_conditioning_category, opaque_surface_type, wwr=None):
+def table_G34_lookup(
+    climate_zone, surface_conditioning_category, opaque_surface_type, wwr=None
+):
     """Returns the assembly maxiumum values for a given climate zone, surface conditoning category
      and opaque sruface type as required by ASHRAE 90.1 Table G3.4-1 through G3.4-8
 
@@ -92,7 +94,7 @@ def table_G34_lookup(climate_zone, surface_conditioning_category, opaque_surface
     ]
     construction = SURFACE_TYPE_TO_CONSTRUCTION_MAP[opaque_surface_type]
 
-    #TODO Need to revisit this code when space implementation is completed
+    # TODO Need to revisit this code when space implementation is completed
     # construction_set = find_osstd_table_entry(
     #     [
     #         ("template", "90.1-PRM-2019"),
@@ -104,10 +106,10 @@ def table_G34_lookup(climate_zone, surface_conditioning_category, opaque_surface
     # )
 
     search_criteria = [
-            ("climate_zone_set", climate_zone_set),
-            ("intended_surface_type", construction),
-            ("building_category", building_category)
-        ]
+        ("climate_zone_set", climate_zone_set),
+        ("intended_surface_type", construction),
+        ("building_category", building_category),
+    ]
 
     if wwr:
         wwr_to_search_criteria(wwr, search_criteria)
@@ -120,10 +122,16 @@ def table_G34_lookup(climate_zone, surface_conditioning_category, opaque_surface
     search_results = {}
 
     if osstd_entry["assembly_maximum_u_value"]:
-        search_results["u_value"] = osstd_entry["assembly_maximum_u_value"] * (ureg.Btu_h / ureg.ft2 / ureg.delta_degF)
+        search_results["u_value"] = osstd_entry["assembly_maximum_u_value"] * (
+            ureg.Btu_h / ureg.ft2 / ureg.delta_degF
+        )
     if osstd_entry["assembly_maximum_f_factor"]:
-        search_results["f_factor"] = osstd_entry["assembly_maximum_f_factor"] * (ureg.Btu_h / ureg.ft / ureg.delta_degF)
+        search_results["f_factor"] = osstd_entry["assembly_maximum_f_factor"] * (
+            ureg.Btu_h / ureg.ft / ureg.delta_degF
+        )
     if osstd_entry["assembly_maximum_c_factor"]:
-        search_results["c_factor"] = osstd_entry["assembly_maximum_c_factor"] * (ureg.Btu_h / ureg.ft2 / ureg.delta_degF)
+        search_results["c_factor"] = osstd_entry["assembly_maximum_c_factor"] * (
+            ureg.Btu_h / ureg.ft2 / ureg.delta_degF
+        )
     # TODO need to add fenestration properties
     return search_results

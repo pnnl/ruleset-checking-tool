@@ -1,15 +1,17 @@
 from rct229.data.schema_enums import schema_enums
+from rct229.data_fns.table_G3_4_fns import table_G34_lookup
 from rct229.rule_engine.rule_base import (
     RuleDefinitionBase,
     RuleDefinitionListIndexedBase,
 )
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
-from rct229.utils.jsonpath_utils import find_all, find_one, find_exactly_one
-from rct229.utils.match_lists import match_lists_exactly_by_id
-from rct229.data_fns.table_G3_4_fns import table_G34_lookup
-from rct229.ruleset_functions.get_surface_conditioning_category_dict import get_surface_conditioning_category_dict
 from rct229.ruleset_functions.get_opaque_surface_type import get_opaque_surface_type
+from rct229.ruleset_functions.get_surface_conditioning_category_dict import (
+    get_surface_conditioning_category_dict,
+)
 from rct229.schema.config import ureg
+from rct229.utils.jsonpath_utils import find_all, find_exactly_one, find_one
+from rct229.utils.match_lists import match_lists_exactly_by_id
 
 # Rule Definitions for Section 5 of 90.1-2019 Appendix G
 CONSTANT = schema_enums["InfiltrationMethodType"].CONSTANT.name
@@ -103,6 +105,7 @@ class Section5Rule3(RuleDefinitionListIndexedBase):
 
 # ------------------------
 
+
 class Section5Rule8(RuleDefinitionListIndexedBase):
     """Rule 8 of ASHRAE 90.1-2019 Appendix G Section 5 (Envelop)"""
 
@@ -112,7 +115,7 @@ class Section5Rule8(RuleDefinitionListIndexedBase):
             each_rule=Section5Rule8.BuildingRule(),
             index_rmr="baseline",
             id="5-8",
-            description = "Baseline below-grade walls shall match the appropriate assembly maximum C-factors in Table G3.4-1 through G3.4-8.",
+            description="Baseline below-grade walls shall match the appropriate assembly maximum C-factors in Table G3.4-1 through G3.4-8.",
         )
 
     class BuildingRule(RuleDefinitionBase):
@@ -127,7 +130,9 @@ class Section5Rule8(RuleDefinitionListIndexedBase):
             climate_zone = find_exactly_one("$..climate_zone", context.baseline)
             # QNS will there be multiple building scenario?
             building = find_one("$..buildings[*]", context.baseline)
-            scc_dictionary_b = get_surface_conditioning_category_dict(climate_zone, building)
+            scc_dictionary_b = get_surface_conditioning_category_dict(
+                climate_zone, building
+            )
             # QNS this code is likely to get all the surfaces under the RMR files regardless of the buildings.
             surfaces_b = find_all("$..zones[*].surfaces[*]", building)
             # build-in manual check flag.
@@ -138,36 +143,67 @@ class Section5Rule8(RuleDefinitionListIndexedBase):
             for surface_b in surfaces_b:
                 if get_opaque_surface_type(surface_b) == "BELOW-GRADE WALL":
                     # construction info
-                    surface_construction_b = surface_b['construction']
-                    scc_b = scc_dictionary_b[surface_b['id']]
+                    surface_construction_b = surface_b["construction"]
+                    scc_b = scc_dictionary_b[surface_b["id"]]
                     # QNS a good number to estimate?
                     target_c_factor = 0.0
                     # TODO All these need to change to enum later
-                    if scc_b == "EXTERIOR RESIDENTIAL" or scc_b == "EXTERIOR NON-RESIDENTIAL" or scc_b == "SEMI-EXTERIOR":
-                        target = table_G34_lookup(climate_zone, scc_b, "BELOW-GRADE WALL")
-                        target_c_factor = target["c_factor"] if "c_factor" in target else None
+                    if (
+                        scc_b == "EXTERIOR RESIDENTIAL"
+                        or scc_b == "EXTERIOR NON-RESIDENTIAL"
+                        or scc_b == "SEMI-EXTERIOR"
+                    ):
+                        target = table_G34_lookup(
+                            climate_zone, scc_b, "BELOW-GRADE WALL"
+                        )
+                        target_c_factor = (
+                            target["c_factor"] if "c_factor" in target else None
+                        )
 
                         if target_c_factor is None:
-                            raise Exception(f"Failed finding the c-factor for below grade wall in climate zone {climate_zone}")
+                            raise Exception(
+                                f"Failed finding the c-factor for below grade wall in climate zone {climate_zone}"
+                            )
 
                     elif scc_b == "EXTERIOR MIXED":
-                        target = table_G34_lookup(climate_zone, "EXTERIOR RESIDENTIAL", "BELOW-GRADE WALL")
-                        target_c_factor_res = target["c_factor"] if "c_factor" in target else None
-                        target = table_G34_lookup(climate_zone, "EXTERIOR NON-RESIDENTIAL", "BELOW-GRADE WALL")
-                        target_c_factor_nonres = target["c_factor"] if "c_factor" in target else None
+                        target = table_G34_lookup(
+                            climate_zone, "EXTERIOR RESIDENTIAL", "BELOW-GRADE WALL"
+                        )
+                        target_c_factor_res = (
+                            target["c_factor"] if "c_factor" in target else None
+                        )
+                        target = table_G34_lookup(
+                            climate_zone, "EXTERIOR NON-RESIDENTIAL", "BELOW-GRADE WALL"
+                        )
+                        target_c_factor_nonres = (
+                            target["c_factor"] if "c_factor" in target else None
+                        )
 
-                        if target_c_factor_res is None or target_c_factor_nonres is None:
-                            raise Exception(f"Failed finding the c-factor for below grade wall in climate zone {climate_zone}")
+                        if (
+                            target_c_factor_res is None
+                            or target_c_factor_nonres is None
+                        ):
+                            raise Exception(
+                                f"Failed finding the c-factor for below grade wall in climate zone {climate_zone}"
+                            )
 
-                        if target_c_factor_res.magnitude != target_c_factor_nonres.magnitude:
-                            mix_surface_c_factor_ids.append(surface_b['id'])
+                        if (
+                            target_c_factor_res.magnitude
+                            != target_c_factor_nonres.magnitude
+                        ):
+                            mix_surface_c_factor_ids.append(surface_b["id"])
                         else:
                             target_c_factor = target_c_factor_res
                     # convert values to IP unit to compare with standard.
-                    model_c_factor_magnitude = round(surface_construction_b["c_factor"].to('Btu_h / square_foot / delta_degF').magnitude, 2)
+                    model_c_factor_magnitude = round(
+                        surface_construction_b["c_factor"]
+                        .to("Btu_h / square_foot / delta_degF")
+                        .magnitude,
+                        2,
+                    )
                     target_c_factor_magnitude = target_c_factor.magnitude
                     if model_c_factor_magnitude != target_c_factor_magnitude:
-                        failing_surface_c_factor_ids.append(surface_b['id'])
+                        failing_surface_c_factor_ids.append(surface_b["id"])
 
             calc_val["failed_c_factor_surface_id"] = failing_surface_c_factor_ids
             calc_val["mix_surface_c_factor_ids"] = mix_surface_c_factor_ids
@@ -189,7 +225,8 @@ class Section5Rule8(RuleDefinitionListIndexedBase):
             -------
 
             """
-            return len(calc_vals['mix_surface_c_factor_ids']) > 0
+            return len(calc_vals["mix_surface_c_factor_ids"]) > 0
+
 
 # ------------------------
 
