@@ -119,7 +119,7 @@ class Section5Rule8(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section5Rule8.BuildingRule, self).__init__(
                 rmrs_used=UserBaselineProposedVals(False, True, False),
-                rmr_context= "ASHRAE229"
+                rmr_context="",
             )
 
         def get_calc_vals(self, context, data=None):
@@ -142,7 +142,7 @@ class Section5Rule8(RuleDefinitionListIndexedBase):
                     scc_b = scc_dictionary_b[surface_b['id']]
                     # QNS a good number to estimate?
                     target_c_factor = 0.0
-                    #TODO All these may need to change to enum later
+                    # TODO All these need to change to enum later
                     if scc_b == "EXTERIOR RESIDENTIAL" or scc_b == "EXTERIOR NON-RESIDENTIAL" or scc_b == "SEMI-EXTERIOR":
                         target = table_G34_lookup(climate_zone, scc_b, "BELOW-GRADE WALL")
                         target_c_factor = target["c_factor"] if "c_factor" in target else None
@@ -160,20 +160,21 @@ class Section5Rule8(RuleDefinitionListIndexedBase):
                             raise Exception(f"Failed finding the c-factor for below grade wall in climate zone {climate_zone}")
 
                         if target_c_factor_res.magnitude != target_c_factor_nonres.magnitude:
-                            mix_surface_c_factor_ids.append(surface_b.id)
+                            mix_surface_c_factor_ids.append(surface_b['id'])
                         else:
                             target_c_factor = target_c_factor_res
                     # convert values to IP unit to compare with standard.
-                    diff_factor = surface_construction_b["c_factor"].to('Btu_h / square_foot / delta_degF') - target_c_factor
-                    if abs(diff_factor.magnitude) > 0.01:
-                        failing_surface_c_factor_ids.append(surface_b.id)
+                    model_c_factor_magnitude = round(surface_construction_b["c_factor"].to('Btu_h / square_foot / delta_degF').magnitude, 2)
+                    target_c_factor_magnitude = target_c_factor.magnitude
+                    if model_c_factor_magnitude != target_c_factor_magnitude:
+                        failing_surface_c_factor_ids.append(surface_b['id'])
 
-            calc_val["failing_surface_c_factor_ids"] = failing_surface_c_factor_ids
+            calc_val["failed_c_factor_surface_id"] = failing_surface_c_factor_ids
             calc_val["mix_surface_c_factor_ids"] = mix_surface_c_factor_ids
             return calc_val
 
         def rule_check(self, context, calc_vals, data=None):
-            return len(calc_vals["failing_surface_c_factor_ids"]) == 0
+            return len(calc_vals["failed_c_factor_surface_id"]) == 0
 
         def manual_check_required(self, context, calc_vals=None, data=None):
             """
