@@ -1,3 +1,4 @@
+import logging
 from rct229.rule_engine.rule_base import (
     RuleDefinitionBase,
     RuleDefinitionListIndexedBase,
@@ -7,6 +8,8 @@ from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.match_lists import match_lists_exactly_by_id
 
 # Rule Definitions for Section 5 of 90.1-2019 Appendix G
+
+logger = logging.getLogger(__name__)
 
 # ------------------------
 # Reusable constants
@@ -37,6 +40,7 @@ class Section5Rule2(RuleDefinitionListIndexedBase):
             )
 
         def get_calc_vals(self, context, data=None):
+            logger.info("Section5Rule2 - Processing....")
             failing_surface_ids = []
             proposed_surfaces = find_all("$..surfaces[*]", context.proposed)
             user_surfaces = find_all("$..surfaces[*]", context.user)
