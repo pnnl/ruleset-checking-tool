@@ -1,4 +1,5 @@
 import click
+import logging.config
 
 from rct229.reports.project_report import (
     print_json_report,
@@ -7,6 +8,7 @@ from rct229.reports.project_report import (
 )
 from rct229.rule_engine.engine import evaluate_all_rules
 from rct229.schema.validate import validate_rmr
+from rct229.schema.resources.logging_config import LOGGING_CONFIG
 from rct229.utils.file import deserialize_rmr_file
 
 CONTEXT_SETTINGS = dict(help_option_names=["-h", "--help"])
@@ -36,6 +38,7 @@ help_text = short_help_text
 def evalute_rmr_triplet(user_rmr, baseline_rmr, proposed_rmr):
     print("Test implementation of rule engine for ASHRAE Std 229 RCT.")
     print("")
+    logging.config.dictConfig(LOGGING_CONFIG)
 
     user_rmr_obj = None
     baseline_rmr_obj = None
