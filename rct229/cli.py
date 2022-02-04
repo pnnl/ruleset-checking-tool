@@ -1,4 +1,6 @@
 import click
+import logging
+import logging.config
 
 from rct229.reports.project_report import (
     print_json_report,
@@ -7,6 +9,7 @@ from rct229.reports.project_report import (
 )
 from rct229.rule_engine.engine import evaluate_all_rules
 from rct229.schema.validate import validate_rmr
+from rct229.schema.resources.logging_config import LOGGING_CONFIG
 from rct229.utils.file import deserialize_rmr_file
 
 CONTEXT_SETTINGS = dict(help_option_names=["-h", "--help"])
@@ -99,4 +102,5 @@ def evalute_rmr_triplet(user_rmr, baseline_rmr, proposed_rmr):
 
 
 if __name__ == "__main__":
+    logging.config.dictConfig(LOGGING_CONFIG)
     cli()
