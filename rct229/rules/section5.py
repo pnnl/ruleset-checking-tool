@@ -1,3 +1,5 @@
+import logging
+
 from rct229.data.schema_enums import schema_enums
 from rct229.rule_engine.rule_base import (
     RuleDefinitionBase,
@@ -9,7 +11,7 @@ from rct229.utils.match_lists import match_lists_exactly_by_id
 
 # Rule Definitions for Section 5 of 90.1-2019 Appendix G
 CONSTANT = schema_enums["InfiltrationMethodType"].CONSTANT.name
-
+logger = logging.getLogger(__name__)
 # ------------------------
 # Reusable constants
 EXTERIOR_SURFACES_JSONPATH = "$..surfaces[?(@.adjacent_to='EXTERIOR')]"
@@ -39,6 +41,7 @@ class Section5Rule2(RuleDefinitionListIndexedBase):
             )
 
         def get_calc_vals(self, context, data=None):
+            logger.info("Section5Rule2 - Processing....")
             failing_surface_ids = []
             proposed_surfaces = find_all("$..surfaces[*]", context.proposed)
             user_surfaces = find_all("$..surfaces[*]", context.user)
@@ -51,7 +54,6 @@ class Section5Rule2(RuleDefinitionListIndexedBase):
             for (p_surface, u_surface) in proposed_user_surface_pairs:
                 if p_surface["azimuth"] != u_surface["azimuth"]:
                     failing_surface_ids.append(p_surface["id"])
-
             return {"failing_surface_ids": failing_surface_ids}
 
         def rule_check(self, context, calc_vals, data=None):
