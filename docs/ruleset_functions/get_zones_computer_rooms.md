@@ -20,6 +20,6 @@
 
     **Rule Logic**
     - Check if the applicability flag equals TRUE, if true then add to list of zones: `if rule_applicability_check == TRUE:`
-        - Add to list of applicable zones: `applicable_computer_room_list_p = applicable_computer_room_list_p.append(zone_p)`
+        - Add to list of applicable zones: `applicable_computer_room_list_p = applicable_computer_room_list_p.append(zone_p.id)`
 
 **[Back](../_toc.md)**
