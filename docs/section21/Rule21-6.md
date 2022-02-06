@@ -29,9 +29,9 @@
 
 ## Rule Logic:  
 
-- For each boiler in B_RMR, save boiler to loop boiler dictionary: `for boiler_b in B_RMR.ASHRAE229.boilers: loop_boiler_dict[boiler_b.loop].append(boiler_b)`
+- For each boiler in B_RMR, save boiler to loop boiler dictionary: `for boiler_b in B_RMR.RulesetModelInstance.boilers: loop_boiler_dict[boiler_b.loop].append(boiler_b)`
 
-- For each fluid loop in B_RMR: `for fluid_loop_b in B_RMR.ASHRAE229.fluid_loops:`
+- For each fluid loop in B_RMR: `for fluid_loop_b in B_RMR.RulesetModelInstance.fluid_loops:`
 
   - Check if fluid loop type is heating: `if fluid_loop_b.type == "HEATING":`
 
@@ -39,7 +39,7 @@
 
       - Check if loop has two boilers: `if boilers_array.length == 2:`
 
-        - Get both boilers on loop: `boiler_1 = B_RMR.ASHRAE229.boilers[0], boiler_2 = B_RMR.ASHRAE229.boilers[1]`
+        - Get both boilers on loop: `boiler_1 = B_RMR.RulesetModelInstance.boilers[0], boiler_2 = B_RMR.RulesetModelInstance.boilers[1]`
 
           **Rule Assertion - Component:**
 
