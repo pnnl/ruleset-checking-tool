@@ -10,36 +10,31 @@
 **Applicability:** All required data elements exist for B_RMR  
 **Applicability Checks:**  
 
-1. Baseline number of HW Loops > 0 and number of boilers in HW loop > 0.  
+1. B-RMR is modeled with at least one air-side system that is Type-1, 5, 7, 11.2, 12, 1a, 7a, 11.2a, 12a.
 
 **Manual Check:** None  
 **Evaluation Context:** Building  
 **Data Lookup:** None  
-**Function Call:** None  
+**Function Call:**  
 
-## Rule Logic:  
-
-- For each conditioning component in B_RMR: `for conditioning_component_b in B_RMR.ASHRAE229.conditioning_components:`
-
-  - Check if conditioning component is boiler: `if conditioning_component_b IS Boiler:`
-
-    - Check if boiler serves hot water loop: `if conditioning_component_b.loop.type == "HEATING":`
-
-      - Set applicability flag: `rule_applicability_check = TRUE`
-
-        **Rule Assertion:**
-
-        - Case 1: For each boiler, if it is modeled as natural draft type: `if conditioning_component_b.draft_type == "NATURAL": PASS`
-
-        - Case 2: Else: `else: FAIL`
+1. get_baseline_system_types()
 
 **Applicability Check:**
 
-1. Rule is applicable if B-RMR is modeled with at least one boiler: `if rule_applicability_check: is_applicable = TRUE`
+- Get B-RMR system types: `baseline_hvac_system_dict = get_baseline_system_types(B-RMR)`
+  
+  - Check if B-RMR is modeled with at least one air-side system that is Type-1, 5, 7, 11.2, 12, 1a, 7a, 11.2a, 12a, continue to rule logic: `if any(sys_type in baseline_hvac_system_dict.keys() for sys_type in ["SYS-1", "SYS-5", "SYS-7", "SYS-11.2", "SYS-12", "SYS-1A", "SYS-7A", "SYS-11.2A", "SYS-12A"]): CHECK_RULE_LOGIC`
+
+  - Else, rule is not applicable to B-RMR: `else: RULE_NOT_APPLICABLE`
+
+## Rule Logic:  
+
+- For each boiler in B-RMR: `for boiler_b in B_RMR.RulesetModelInstance.boilers:`
+
+  **Rule Assertion:**
+
+  - Case 1: For each boiler, if it is modeled as natural draft type: `if boiler_b.draft_type == "NATURAL": PASS`
+
+  - Case 2: Else: `else: FAIL`
 
 **[Back](../_toc.md)**
-
-**Notes:**
-
-1. Do we need to check if baseline system is 1,5,7,11,12, or does this rule apply to all boilers in B-RMR?
-2. Pending on how to get to external_fluid_source from conditioning_components.
