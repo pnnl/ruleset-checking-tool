@@ -10,47 +10,57 @@
 **Applicability:** All required data elements exist for B_RMR  
 **Applicability Checks:**  
 
-1. B-RMR passes Rule 22-7, Baseline chilled water system that does not use purchased chilled water shall be modeled as primary/secondary systems.
+1. B-RMR is modeled with at least one air-side system that is Type-7, 8, 11, 12, 13, 7b, 8b, 11b, 12b, 13b.
+2. B-RMR chilled water system cooling capacity is 300 tons or more.
 
 **Manual Check:** None  
 **Evaluation Context:** Building  
 **Data Lookup:** None  
-**Function Call:** None  
+**Function Call:**  
+
+1. get_baseline_system_types()
+2. get_primary_secondary_loops()
 
 **Applicability Checks:**  
 
-1. B-RMR passes Rule 22-7: `if Rule-22-7 == "PASS":`
+- **Check 1:** Get B-RMR system types: `baseline_hvac_system_dict = get_baseline_system_types(B-RMR)`
 
-## Rule Logic:  
+  - Check if B-RMR is modeled with at least one air-side system that is Type-7, 8, 11.1, 11.2, 12, 13, 7b, 8b, 11b, 12b, 13b, i.e. with air-side system served by chiller(s), continue to the next applicability check: `if any(sys_type in baseline_hvac_system_dict.keys() for sys_type in ["SYS-7", "SYS-8", "SYS-11.1", "SYS-11.2", "SYS-12", "SYS-13", "SYS-7B", "SYS-8B", "SYS-11B", "SYS-12B", "SYS-13B"]): NEXT_APPLICABILITY_CHECK`
 
-- For each pump in B_RMR: `for pump_b in B_RMR.ASHRAE229.pumps:`
+  - Else, rule is not applicable to B-RMR: `else: RULE_NOT_APPLICABLE`
+
+- **Check 2:** Get primary and secondary loops for B-RMR: `primary_secondary_loop_dictionary = get_primary_secondary_loops(B_RMR, "COOLING")`
+
+  - Check if primary and secondary loops are modeled correctly, continue to rule logic: `if primary_secondary_loop_dictionary["PRIMARY"] AND primary_secondary_loop_dictionary["SECONDARY"]: CHECK_RULE_LOGIC`
+
+  - Else, rule is not applicable to B-RMR: `else: RULE_NOT_APPLICABLE`
+
+## Rule Logic:
+
+- For each pump in B_RMR: `for pump_b in B_RMR.RulesetModelInstance.pumps:`
 
   - Save loop served by pump and pump to a dictionary: `loop_pump_dictionary[pump_b.loop_or_piping].append(pump)`
 
-- For each chiller in B_RMR: `for chiller_b in B_RMR.ASHRAE229.chillers:`
+- For each chiller in B_RMR: `for chiller_b in B_RMR.RulesetModelInstance.chillers:`
 
-  - Get cooling loop that chiller servers: `chw_loop_b = chiller_b.cooling_loop`
+  - Get cooling loop that chiller serves: `chw_loop_b_id = chiller_b.cooling_loop`
 
-    - Add chiller rated capacity to CHW loop total capacity: `chw_loop_capacity_dict[chw_loop_b] += chiller_b.rated_capacity`
+    - Add chiller rated capacity to CHW loop total capacity: `chw_loop_capacity_dict[chw_loop_b_id] += chiller_b.rated_capacity`
 
-- For each CHW loop that chiller serves: `for primary_loop_b in chw_loop_capacity_dict.keys():`
+- For each primary CHW loop: `for loop_b_id in primary_secondary_loop_dictionary["PRIMARY"]:`
 
-  - Check if CHW loop total cooling capacity is 300 tons or more: `if chw_loop_capacity_dict[primary_loop_b] >= 300 * CONVERSION(TON_TO_BTUH):`
+  - Check if CHW primary loop total cooling capacity is 300 tons or more: `if chw_loop_capacity_dict[loop_b_id] >= 300 * CONVERSION(TON_TO_BTUH):`
 
-    - For each secondary loop served by primary CHW loop: `for secondary_loop_b in primary_loop_b.child_loops:`
+    - Get primary loop: `primary_loop_b = get_component_by_id(loop_b_id)`
 
-      - For each secondary pump associated with secondary loop: `for secondary_pump in loop_pump_dictionary[secondary_loop_b]:`
+      - For each secondary loop served by primary CHW loop: `for secondary_loop_b in primary_loop_b.child_loops:`
 
-        **Rule Assertion - Component:**
+        - For each secondary pump associated with secondary loop: `for secondary_pump in loop_pump_dictionary[secondary_loop_b.id]:`
 
-        - Case 1: If secondary pump is modeled with variable-speed drives: `if secondary_pump.speed_control == "VARIABLE_SPEED": PASS`
+          **Rule Assertion - Component:**
 
-        - Case 2: Else, save component ID to output array for failed components:: `else: FAIL and failed_components_array.append(secondary_pump)`
+          - Case 1: If secondary pump is modeled with variable-speed drives: `if secondary_pump.speed_control == "VARIABLE_SPEED": PASS`
 
-**Rule Assertion - RMR:**
-
-- Case 1: If all components pass: `if ALL_COMPONENTS == PASS: PASS`
-
-- Case 2: Else, list all failed components' ID: `else: FAIL and raise_message ${failed_components_array}`
+          - Case 2: Else: `else: FAIL`
 
 **[Back](../_toc.md)**
