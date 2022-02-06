@@ -121,6 +121,6 @@
                                 - Set applicability flag: `rule_applicability_check = TRUE`
                                 - Add zone as key to dictionary and hvac system as value: `applicable_zones_G3.1.1c_40_EFLHs_dict_b[zone_b.id] = zone_info_list_b[0]`
                                            
-
+**Returns** `return aapplicable_zones_G3.1.1c_40_EFLHs_dict_b`
 
 **[Back](../_toc.md)**
