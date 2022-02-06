@@ -29,7 +29,7 @@
 
 ## Rule Logic:  
 
-- For each fluid loop in B_RMR: `for fluid_loop_b in B_RMR.ASHRAE229.fluid_loops:`
+- For each fluid loop in B_RMR: `for fluid_loop_b in B_RMR.RulesetModelInstance.fluid_loops:`
 
   - Check if fluid loop type is heating: `if fluid_loop_b.type == "HEATING":`
 
