@@ -10,47 +10,31 @@
 **Applicability:** All required data elements exist for B_RMR  
 **Applicability Checks:**  
 
-1. B-RMR is not modeled with purchased chilled water.
+1. B-RMR is modeled with at least one air-side system that is Type-7, 8, 11.1, 11.2, 12, 13, 7b, 8b, 11b, 12b, 13b.
 
 **Manual Check:** None  
 **Evaluation Context:** Building  
 **Data Lookup:** None  
-**Function Call:** None  
+**Function Call:**  
+
+1. get_baseline_system_types()
+2. get_primary_secondary_loops()
 
 **Applicability Checks:**  
 
-1. B-RMR is not modeled with purchased chilled water: `if Rule-18-8 == "NOT APPLICABLE":`
+- Get B-RMR system types: `baseline_hvac_system_dict = get_baseline_system_types(B-RMR)`
+
+  - Check if B-RMR is modeled with at least one air-side system that is Type-7, 8, 11.1, 11.2, 12, 13, 7b, 8b, 11b, 12b, 13b, i.e. with air-side system served by chiller(s), continue to rule logic: `if any(sys_type in baseline_hvac_system_dict.keys() for sys_type in ["SYS-7", "SYS-8", "SYS-11.1", "SYS-11.2", "SYS-12", "SYS-13", "SYS-7B", "SYS-8B", "SYS-11B", "SYS-12B", "SYS-13B"]): CHECK_RULE_LOGIC`
+
+  - Else, rule is not applicable to B-RMR: `else: RULE_NOT_APPLICABLE`
 
 ## Rule Logic:  
 
-- For each building segment in B_RMR: `for building_segment_b in B_RMR...building_segments:`
+- Get primary and secondary loops for B-RMR: `primary_secondary_loop_dictionary = get_primary_secondary_loops(B_RMR, "COOLING")`
+**Rule Assertion - Component:**
 
-  - For each HVAC system in building segment: `for hvac_b in building_segment_b.heating_ventilation_air_conditioning_systems`
+- Case 1: If primary and secondary loops are modeled correctly: `if primary_secondary_loop_dictionary["PRIMARY"] AND primary_secondary_loop_dictionary["SECONDARY"]: PASS`
 
-    - Check if HVAC system has chilled water coil: `if hvac_b.cooling_system.chilled_water_loop:`
-
-      - Save chilled water loop that serves cooling systems to secondary CHW loop array: `secondary_chw_loop_array.append(hvac_b.cooling_system.chilled_water_loop)`
-
-- For each chiller in B_RMR, save chiller to loop-chiller dictionary: `for chiller_b in B_RMR.ASHRAE229.chillers: loop_chiller_dict[chiller_b.cooling_loop].append(chiller_b)`
-
-- For each fluid loop in B_RMR: `for fluid_loop_b in B_RMR.ASHRAE229.fluid_loops:`
-
-  - Check if fluid loop is connected to chiller(s): `if fluid_loop_b in loop_chiller_dict.keys()`
-
-    - Check if fluid loop serves any cooling coils, set check coil flag to True: `if fluid_loop_b in secondary_chw_loop_array: check_coil_flag = TRUE`
-
-    - Check if fluid loop is not modeled with one secondary loop, set check number flag to True: `if LEN(fluid_loop_b.child_loops) != 1: check_number_flag = TRUE`
-
-    - Check if secondary CHW loop array are not the same as child loops of primary CHW loop, set check secondary loop flag to True: `if secondary_chw_loop_array == fluid_loop_b.child_loops: check_secondary_loop_flag = TRUE`
-
-**Rule Assertion - RMR:**
-
-- Case 1: If the CHW loop served by chiller(s) is connected to any HVAC system cooling coils: `if check_coil_flag: FAIL`
-
-- Case 2: Else if the CHW loop served by chiller has more than one child loop: `else if check_number_flag: FAIL`
-
-- Case 3: Else if HVAC system cooling coils are connected to CHW loops other than the child loop of the CHW loop served by chiller(s): `else if check_secondary_loop_flag: FAIL`
-
-- Case 4: Else: `else: PASS`
+- Case 2: Else: `else: FAIL`
 
 **[Back](../_toc.md)**
