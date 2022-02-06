@@ -35,7 +35,7 @@
 
 - Get dictionary that saves the list of zones and the total floor area served by each CHW or HHW loop: `loop_zone_list_w_area_dict = get_loop_zone_list_w_area(B_RMR)`
 
-- For each fluid loop in B_RMR: `for fluid_loop_b in B_RMR.ASHRAE229.fluid_loops:`
+- For each fluid loop in B_RMR: `for fluid_loop_b in B_RMR.RulesetModelInstance.fluid_loops:`
 
   - Check if fluid loop is heating type: `if fluid_loop_b.type == "HEATING":`
 
@@ -49,9 +49,9 @@
 
 **Rule Assertion - Component:**
 
-- Case 1: If baseline building design plant serves a conditioned floor area of 15,000sq.ft. or less, and if only one boiler is modeled in B_RMR: `if ( heating_loop_conditioned_zone_area <= 15000 ) AND ( LEN(B_RMR.ASHRAE229.boilers) == 1 ): PASS`
+- Case 1: If baseline building design plant serves a conditioned floor area of 15,000sq.ft. or less, and if only one boiler is modeled in B_RMR: `if ( heating_loop_conditioned_zone_area <= 15000 ) AND ( LEN(B_RMR.RulesetModelInstance.boilers) == 1 ): PASS`
 
-- Case 2: Else if baseline building design plant serves a conditioned floor area more than 15,000sq.ft. and two boilers are modeled in B_RMR and the two boilers are sized equally: `else if ( heating_loop_conditioned_zone_area > 15000 ) AND ( LEN(B_RMR.ASHRAE229.boilers) == 2 ) AND ( B_RMR.ASHRAE229.boilers[0].rated_capacity == B_RMR.ASHRAE229.boilers[1].rated_capacity ): PASS`
+- Case 2: Else if baseline building design plant serves a conditioned floor area more than 15,000sq.ft. and two boilers are modeled in B_RMR and the two boilers are sized equally: `else if ( heating_loop_conditioned_zone_area > 15000 ) AND ( LEN(B_RMR.RulesetModelInstance.boilers) == 2 ) AND ( B_RMR.RulesetModelInstance.boilers[0].rated_capacity == B_RMR.RulesetModelInstance.boilers[1].rated_capacity ): PASS`
 
 - Case 3: Else: `else: FAIL`
 
