@@ -76,7 +76,7 @@
  - Convert the list of applicable_hvac_systems_list_p to a set and the back to a list to eliminate duplicates after looping through all zones:
  `applicable_hvac_systems_10cd_list_p = list(set(applicable_hvac_systems_10cd_list_p))` 
 
- **Returns** `applicable_hvac_systems_10cd_list_p`  
+ **Returns** `return applicable_hvac_systems_10cd_list_p`  
 
                                  
 **[Back](../_toc.md)**
