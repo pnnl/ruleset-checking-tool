@@ -99,9 +99,9 @@
                     - Determine which HVAC system serves labs to comply with G3.1.1(d), the number of zones equals the number of zones with labs: `if h = y:`
                         - Set lab_sys_b equal to the system id: `lab_sys_b = floor_hvac_sys_type_IDs_5_7_list[0]`
                         - Set nonlab_sys_b equal to system id:  `nonlab_sys_b = floor_hvac_sys_type_IDs_5_7_list[1]`
-                            - Else if the number of zones equals the number of zones with labs for the second system: `if p = j:`
-                                - Set lab_sys_b equal to the system id: `lab_sys_b = floor_hvac_sys_type_IDs_5_7_list[1]`
-                                - Set nonlab_sys_b equal to system id:  `nonlab_sys_b = floor_hvac_sys_type_IDs_5_7_list[0]`
+                    - Else if the number of zones equals the number of zones with labs for the second system (else, do nothing): `elif p = j:`
+                        - Set lab_sys_b equal to the system id: `lab_sys_b = floor_hvac_sys_type_IDs_5_7_list[1]`
+                        - Set nonlab_sys_b equal to system id:  `nonlab_sys_b = floor_hvac_sys_type_IDs_5_7_list[0]`
                     
                     - Check if lab_sys_b is equal to none, set variable to true if equals "": `if lab_sys_b  == "":`
                         - Set lab_sys_b_applicability_flag to TRUE: `lab_sys_b_applicability_flag = TRUE`
