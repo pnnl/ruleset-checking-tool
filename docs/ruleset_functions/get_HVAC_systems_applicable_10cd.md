@@ -65,15 +65,18 @@
     
     - if zone has heating and cooling in the U_RMR: `if heating_system_exists_is-designed_u == TRUE AND cooling_system_exists_is-designed_u == TRUE:`
         - Set applicability flag: `function_applicability_check = FALSE`
-            - else if the zone has heating but no cooling in the U_RMR and P_RMR: `else if heating_system_exists_is-designed_u == TRUE AND cooling_system_exists_is-designed_u == FALSE AND heating_system_modeled_p == TRUE AND cooling_system_modeled_p == FALSE:`
-                - Set applicability flag: `function_applicability_check = FALSE`                
-                    - else, set applicability flag to true and add the proposed HVAC system(s) to the list: `else:`
-                        - Set applicability flag:`function_applicability_check == TRUE`
-                        - For each hvac_u in heating_ventilation_air_conditioning_systems_list_u: `for hvac_u in heating_ventilation_air_conditioning_systems_list_u:`
-                            - Get the analogous HVAC ID in the P_RMR: `hvac_p = match_data_element(P_RMR,heating_ventilation_air_conditioning_systems,hvac_u.id)`
-                                - Add to list of HVAC system that are applicable to this check: `applicable_hvac_systems_10cd_list_p = applicable_hvac_systems_10cd_list_p.append(hvac_p)`
+    - else if the zone has heating but no cooling in the U_RMR and P_RMR: `else if heating_system_exists_is-designed_u == TRUE AND cooling_system_exists_is-designed_u == FALSE AND heating_system_modeled_p == TRUE AND cooling_system_modeled_p == FALSE:`
+        - Set applicability flag: `function_applicability_check = FALSE`                
+    - else, set applicability flag to true and add the proposed HVAC system(s) to the list: `else:`
+        - Set applicability flag:`function_applicability_check == TRUE`
+        - For each hvac_u in heating_ventilation_air_conditioning_systems_list_u: `for hvac_u in heating_ventilation_air_conditioning_systems_list_u:`
+            - Get the analogous HVAC ID in the P_RMR: `hvac_p = match_data_element(P_RMR,heating_ventilation_air_conditioning_systems,hvac_u.id)`
+            - Add to list of HVAC system that are applicable to this check: `applicable_hvac_systems_10cd_list_p = applicable_hvac_systems_10cd_list_p.append(hvac_p)`
 
  - Convert the list of applicable_hvac_systems_list_p to a set and the back to a list to eliminate duplicates after looping through all zones:
- `applicable_hvac_systems_10cd_list_p = list(set(applicable_hvac_systems_10cd_list_p))`           
+ `applicable_hvac_systems_10cd_list_p = list(set(applicable_hvac_systems_10cd_list_p))` 
+
+ **Returns** `applicable_hvac_systems_10cd_list_p`  
+
                                  
 **[Back](../_toc.md)**
