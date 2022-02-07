@@ -153,7 +153,8 @@ class Section5Rule46(RuleDefinitionListIndexedBase):
     class BuildingRule(RuleDefinitionBase):
         def __init__(self):
             super(Section5Rule46.BuildingRule, self).__init__(
-                rmrs_used=UserBaselineProposedVals(False, True, True)
+                rmrs_used=UserBaselineProposedVals(False, True, True),
+                required_fields={"$..infiltration": ["algorithm_name", "modeling_method"]},
             )
 
         def get_calc_vals(self, context, data=None):
