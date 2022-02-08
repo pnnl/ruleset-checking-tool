@@ -23,6 +23,7 @@
                     - If modeled with cooling then get the hvac id: `hvac_p = match_data_element(P_RMR,HeatingVentilationAirConditioningSystem,hvac_u.id)`
                     - If modeled with cooling then add to list of hvac systems modeled with virtual cooling in the proposed: `proposed_hvac_modeled_with_virtual_cooling_list_p = proposed_hvac_modeled_with_virtual_cooling_list_p.append(hvac_p.id)`
  
+ # Duplicates are unlikely unless there are multiple coils modeled for cooling  
  - Convert the list of proposed_hvac_modeled_with_virtual_cooling_list_p to a set and the back to a list to eliminate duplicates after looping through all zones:
  `proposed_hvac_modeled_with_virtual_cooling_list_p = list(set(proposed_hvac_modeled_with_virtual_cooling_list_p))` 
 
