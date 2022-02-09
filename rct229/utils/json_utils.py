@@ -19,12 +19,16 @@ def get_value_from_key(key, context, func_name=None):
     -------
 
     """
+    resp = {}
     logger = logging.getLogger(func_name if func_name is not None else __name__)
-
     if context.get(key) is None:
         logger.info("key: '%s' is not in the context" % key)
-        return None
-    return context[key]
+        resp["status"] = "error"
+        resp["message"] = "Failed to find key: %s" % key
+    else:
+        resp["status"] = 'success'
+        resp["data"] = context.get(key)
+    return resp
 
 
 def slash_prefix_guarantee(str):

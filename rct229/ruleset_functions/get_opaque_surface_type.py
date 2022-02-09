@@ -1,6 +1,6 @@
 from rct229.schema.config import ureg
 from rct229.utils.jsonpath_utils import find_all
-
+from rct229.utils.json_utils import get_value_from_key
 # Constants
 DEGREES = ureg("degrees")
 MIN_FLOOR_TILT = 120 * DEGREES
@@ -32,7 +32,11 @@ def get_opaque_surface_type(surface):
         "FLOOR", "HEATED SLAB-ON-GRADE", "ROOF", "UNHEATED SLAB-ON-GRADE"
     """
     surface_type = None
-    surface_tilt = surface["tilt"]
+    tilt_resp = get_value_from_key("tilt", surface, __name__)
+    if tilt_resp["status"] == "success":
+        surface_tilt = tilt_resp["data"]
+    else:
+        return tilt_resp
 
     # Check for roof
     if MIN_ROOF_TILT <= surface_tilt < MAX_ROOF_TILT:
