@@ -16,11 +16,11 @@
 **Logic:**
 - For each building_segment in the U_RMR: `for building_segment_u in U_RMR:`
     - For each hvac_u in building_segment_u: `for hvac_u in building_segment_u:`
-        - Reset U_RMR cooling is designed boolean to FALSE: `cooling_designed_check_u = FALSE`
-        - Reset P_RMR cooling is modeled boolean to FALSE: `cooling_modeled_check_p = FALSE`
+        - Reset U_RMR cooling is designed boolean to FALSE, equals true if cooling is designed: `cooling_designed_check_u = FALSE`
+        - Reset P_RMR cooling is modeled boolean to FALSE, equals true if cooling is modeled: `cooling_modeled_check_p = FALSE`
         - For each cooling_system_u in hvac_u: `for cooling_system_u in hvac_u:`
             - Check if the cooling_system_type does not equal "None": `if cooling_system_u.cooling_system_type != "None":`
-                - Set cooling_none_check_u to true: `cooling_designed_check_u = TRUE`
+                - Set cooling_designed_check_u to true: `cooling_designed_check_u = TRUE`
         - Check if cooling is NOT designed for the hvac system in the U_RMR, cooling_designed_check_u = FALSE: `if cooling_designed_check_u == FALSE:`        
             - Get the analogous hvac id for the P_RMR: `hvac_p = match_data_element(P_RMR,HeatingVentilationAirConditioningSystem,hvac_u.id)`
                 - For each cooling_system_p in hvac_p: `for cooling_system_p in hvac_p:`
