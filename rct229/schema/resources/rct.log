@@ -1,0 +1,7 @@
+get_opaque_surface_type_test.py:47 [INFO] [__main__]: Process: ABOVE-GRADE WALL
+json_utils.py:26 [INFO] [rct229.ruleset_functions.get_opaque_surface_type]: key: 'tilt' is not in the context
+get_opaque_surface_type_test.py:47 [INFO] [__main__]: Process: BELOW-GRADE WALL
+get_opaque_surface_type_test.py:47 [INFO] [__main__]: Process: FLOOR
+get_opaque_surface_type_test.py:47 [INFO] [__main__]: Process: HEATED SLAB-ON-GRADE
+get_opaque_surface_type_test.py:47 [INFO] [__main__]: Process: ROOF
+get_opaque_surface_type_test.py:47 [INFO] [__main__]: Process: UNHEATED SLAB-ON-GRADE
