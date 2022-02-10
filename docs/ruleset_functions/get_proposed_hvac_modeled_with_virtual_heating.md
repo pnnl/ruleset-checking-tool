@@ -14,31 +14,36 @@
 1. match_data_element()
 
 **Logic:**
-- For each building_segment_p in the P_RMR: `for building_segment_p in P_RMR:`
+- For each building_segment_p in the P_RMR..BuildingSegment: `for building_segment_p in P_RMR...BuildingSegment:`
     - Get analogous segment in the U_RMR: `building_segment_u = match_data_element(U_RMR,BuildingSegment,building_segment_p.id)`
     - Get list of hvac systems in the U_RMR: `hvac_list_u = building_segment_u.heating_ventilation_air_conditioning_systems`
     - For each hvac_p in the building_segment_p: `for hvac_p in building_segment_p:`   
-        # The line below will indicate a virtual HVAC system was modeled in the proposed
+        # The line below will check if a virtual HVAC system was modeled in the proposed. If the hvac_p is not in the U_RMR then its a virtual system.
         - Check if the hvac system in the proposed design model is NOT in the U_RMR: `if hvac_p.id not in hvac_list_u:`
             - Reset virtual_heating_modeled_check_p boolean variable: `virtual_heating_modeled_check_p = FALSE`
-            # Below checks if a heating system specifically was modeled (could just be cooling for this hvac system). Not checking the preheat coils because if no heating is specified in the design then the proposed should be modeled identically to the baseline and preheat coils are not applicable to any baseline systems.
+            # Below checks if a heating system specifically was modeled (could just be cooling for this hvac system) for the vitual system in the proposed. We are not checking the preheat coils because if no heating is specified in the design then the proposed should be modeled identically to the baseline and preheat coils are not applicable to any baseline systems.
             - For each heating_system_p in hvac_p: `for heating_system_p in hvac_p:`
                 - Check if the heating_system_type != "None": `if heating_system_p.heating_system_type != "None":`
                     - Set virtual_heating_modeled_check_p to true: `virtual_heating_modeled_check_p = TRUE`
-            - Check if heating was modeled in the proposed via virtual_heating_modeled_check_p boolean variable (and not in the U_RMR) add hvac system to list: `if virtual_heating_modeled_check_p == TRUE: proposed_hvac_modeled_with_virtual_heating_list_p = proposed_hvac_modeled_with_virtual_heating_list_p.append(hvac_p.id)`
-        - Else, the hvac system in the proposed design model is in the U_RMR: `Else:`
+            - Check if heating was modeled in the proposed via the virtual_heating_modeled_check_p boolean variable and add the hvac system to the list with virtual heating if it was: `if virtual_heating_modeled_check_p == TRUE: proposed_hvac_modeled_with_virtual_heating_list_p = proposed_hvac_modeled_with_virtual_heating_list_p.append(hvac_p.id)`
+        - Else, the hvac system in the proposed design model is also in the U_RMR: `Else:`
             - Reset virtual_heating_modeled_check_p boolean variable: `virtual_heating_modeled_check_p = FALSE`
-            # Below compared the heating systems associated with the hvac system across the P_RMR and U_RMR if heating was modeled in the proposed. If heating was modeled in the proposed and in the U_RMR the heating system type is None then this means virtual heating was modeled in the proposed. Not checking the preheat coils because if no heating is specified in the design then the proposed should be modeled identically to the baseline and preheat coils are not applicable to any baseline systems.
+            # Below compares the heating systems associated with the hvac system across the P_RMR and U_RMR only if heating was modeled in the proposed. If heating was modeled in the proposed and NOT in the U_RMR (the heating system type is None in the U_RMR) then this means virtual heating was modeled in the proposed. We are not checking the preheat coils because if no heating is specified in the design then the proposed should be modeled identically to the baseline and preheat coils are not applicable to any baseline systems.
             - For each heating_system_p in hvac_p: `for heating_system_p in hvac_p:`
                 - Check if "None" is NOT the heating_system_type for heating_system_p, if its not "None" (means heating was modeled) then get the analogous heating system in the U_RMR and check if the heating_system_type is "None" in the U_RMR: `if heating_system_p.heating_system_type != "None":`
                     - Get analogous heating system in U_RMR: `heating_system_u = match_data_element(U_RMR,HeatingSystem,heating_system_p.id)`
                     - Check if the analogous system in the U_RMR has a heating system type equal to "None", if it does then set the virtual_heating_modeled_check_p boolean variable to TRUE : `if heating_system_u.heating_system_type == "None": virtual_heating_modeled_check_p = TRUE`
             - Check if heating was modeled in the proposed via virtual_heating_modeled_check_p boolean variable (and not in the U_RMR) add hvac system to list: `if virtual_heating_modeled_check_p == TRUE: proposed_hvac_modeled_with_virtual_heating_list_p = proposed_hvac_modeled_with_virtual_heating_list_p.append(hvac_p.id)`
- # Below checks if a terminal unit exists in both the P_RMR but not U_RMR. If there is a mismatch then the HVAC system associated with the terminal unit is added to the list of HVAC systems in which virtual heating was modeled in the proposed. If the terminal unit exists in both then it is checked to see if both have heating. If there is a mismatch the HVAC system associated with the terminal unit is added to the list of HVAC systems with virtual heating modeled in the proposed.
-
-- For each zone in P_RMR: `for zone_p in P_RMR...zones:`
-    - For each terminal in zone_p: `for terminal_p in zone_p.terminals:` 
-
+    # Below checks if a terminal unit exists in both the P_RMR and U_RMR. If there is a mismatch then the HVAC system associated with the terminal unit is added to the list of HVAC systems in which virtual heating was modeled in the proposed. If the terminal unit exists in both then it is checked to see if both have heating. If there is a mismatch the HVAC system associated with the terminal unit is added to the list of HVAC systems with virtual heating modeled in the proposed.
+    - For each terminal unit in the P_RMR: `for each terminal_p in P_RMR..Terminal:` 
+        - Reset virtual_heating_modeled_check_p boolean variable: `virtual_heating_modeled_check_p = FALSE`
+        - Get analogous terminal unit in the U_RMR: `terminal_u = match_data_element(U_RMR,TERMINAL,terminal_p.id)`
+        - Check if null was returned: `if terminal_u == Null:` (waiting from group to hear about what is returned if there is no analogous terminal unit in the U_RMR, the alternative is to create a list of all terminal unit IDs in the U_RMR)
+            - Add the associated HVAC system to list with virtual heating:`proposed_hvac_modeled_with_virtual_heating_list_p.append(terminal_p.served_by_heating_ventilation_air_conditioning_system)`
+        - Else, null NOT returned: `Else:`
+            - Check if "None" is NOT the heat_source for terminal_p, if its not "None" (means heating was modeled) then get the analogous heating system in the U_RMR and check if the heating_system_type is "None" in the U_RMR: `if terminal_p.heat_source != "None":`
+                - Check if the analogous system in the U_RMR has a heating system type equal to "None", if it does then set the virtual_heating_modeled_check_p boolean variable to TRUE : `if terminal_u.heat_Source == "None": virtual_heating_modeled_check_p = TRUE`
+            - Check if heating was modeled in the proposed via virtual_heating_modeled_check_p boolean variable (and not in the U_RMR) add hvac system to list: `if virtual_heating_modeled_check_p == TRUE: proposed_hvac_modeled_with_virtual_heating_list_p = proposed_hvac_modeled_with_virtual_heating_list_p.append(terminal_p.served_by_heating_ventilation_air_conditioning_system)`
 
  **Returns** `return proposed_hvac_modeled_with_virtual_heating_list_p`  
 
