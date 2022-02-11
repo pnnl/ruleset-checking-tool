@@ -1,12 +1,12 @@
 ## get_zones_computer_rooms
 
-**Description:** Get the list of zones that have computer rooms associated with them in the P-RMR.  
+**Description:** Get the list of zones that have at least one computer room associated with them in the P-RMR.  
 
 **Inputs:**
 - **P-RMR**: To determine if any of the zones have computer rooms associated with them.
 
 **Returns:**
-- **applicable_computer_room_list_p**: A list that saves all zones that have computer rooms associated with them.
+- **applicable_computer_room_list_p**: A list that saves all zones that have at least one computer room associated with them.
  
 **Function Call:** None 
 
