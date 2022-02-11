@@ -1,6 +1,6 @@
 ## get_zones_health_safety_vent_reqs
 
-**Description:** Get the list of zones that have health and safety mandated minimum ventilation requirements during unoccupied hours.  
+**Description:** Get the list of zones that are likely to have health and safety mandated minimum ventilation requirements during unoccupied hours.  
 
 **Inputs:**
 - **P-RMR**: To determine if any of the zones have spaces with lighting spaces types that are likely to have health and safety mandated minimum ventilation requirements during unoccupied hours.
@@ -8,14 +8,14 @@
 **Returns:**
 - **applicable_zones_health_safety_vent_list_p**: A list that saves all zones that are likely to have health and safety mandated minimum ventilation requirements during unoccupied hours.
  
-**Function Call:** 
+**Function Call:** None
 
 
 **Logic:**
-- For each zone in P_RMR: `for zone_p in P_RMR...zones:`
-    - Reset applicability flag: `rule_applicability_check = FALSE` 
-    - For each space in zone: `for space_p in zone_p.zones:`
-        - Check if space is of type that has health and safety mandated minimum ventilation requirements during unoccupied hours, if yes then set applicability flag to true: `if space_p.lighting_space_type in [CORRIDOR_HOSPITAL,LABORATORY_EXCEPT_IN_OR_AS_A_CLASSROOM,HEALTHCARE_FACILITY_OPERATING_ROOM]:`
+- For each zone in P_RMR: `for zone_p in P_RMR...Zones:`
+    - Reset applicability flag: `health_safety_reqs_unocc_check = FALSE` 
+    - For each space in zone: `for space_p in zone_p.spaces:`
+        - Check if space is of type that is likely to have health and safety mandated minimum ventilation requirements during unoccupied hours, if yes then set applicability flag to true: `if space_p.lighting_space_type in [CORRIDOR_HOSPITAL,LABORATORY_EXCEPT_IN_OR_AS_A_CLASSROOM,HEALTHCARE_FACILITY_OPERATING_ROOM]:`
             - Set applicability flag: `rule_applicability_check = TRUE`
 
     **Rule Logic**
