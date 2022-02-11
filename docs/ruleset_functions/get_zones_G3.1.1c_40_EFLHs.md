@@ -6,7 +6,7 @@
 - **B_RMR**: To determine which (if any) baseline HVAC system type 3 or 4 has been used for spaces (zones???) that differ by more than 40 equivalent full load hrs/week from other spaces (zones???) served by the system.   
 
 **Returns:**
-- **applicable_zones_G3.1.1c_40_EFLHs_dict_b**: A dictionary that saves all zones that have baseline HVAC system type 3 or 4 has been used for spaces (zones???) that differ by more than 40 equivalent full load hrs/week from other spaces (zones???) served by the system and the hvac system id. 
+- **applicable_zones_G3.1.1c_40_EFLHs_dict_b**: A dictionary that saves all zones that have baseline HVAC system type 3 or 4 modeled in the baseline because the zone differs by more than 40 equivalent full load hrs/week from other spaces (zones???) served by the predominant HVAC system. The associated hvac id is saved as the value associated with the zone id key. 
  
 **Function Call:** 
 
@@ -14,24 +14,24 @@
 
 
 **Logic:**
-- For each building_segment_b in B_RMR: `for building_segment_b in B_RMR:`
-- Set applicability flag to FALSE: `rule_applicability_check = FALSE`  
-- Set system type applicability flag to FALSE: `rule_applicability_check_system_type = FALSE`
+- For each building_segment_b in B_RMR: `for building_segment_b in B_RMR..BuildingSegment:`
+- Set applicability flag to FALSE: `hvac_sys_G3.1.1c_applies_check = FALSE`  
+- Set system type applicability flag to FALSE: `bldg_segment_G3.1.1c_could_apply_check = FALSE`
 - Get dictionary of baseline hvac system types and ids: `baseline_hvac_sys_type_ids_dict_b = get_baseline_system_types(B_RMR)`
     - For each hvac_b in the building_segment: `For hvac_b in building_segment_b.heating_ventilation_air_conditioning_systems:`
         - Get hvac system type for hvac_b: `hvac_sys_type_b = baseline_hvac_sys_type_ids_dict_b.keys()[list(baseline_hvac_sys_type_ids_dict_b.values()).index(hvac_b.id)]`
-        - Check if HVAC system is type 5, 6, 7, or 8 exists, if so then carry on, if not skip building segment: `if get_baseline_system_types(hvac_b.id) in ["SYS-5", "SYS-6", "SYS-7", "SYS-8", "SYS-7a", "SYS-8a","SYS-5b", "SYS-6b", "SYS-7b", "SYS-7c"]:rule_applicability_check_system_type = TRUE`
-    - Check if the system type applicability flag is true for the building segment: `if rule_applicability_check_system_type == TRUE:`        
-        # Create a dictionary with zone ID as key and a list with zone descriptor information (including the HVAC system with the longest fan schedule) for access later in the logic
-        - for each zone_b in the building_segment_b: `for zone_b in building_segment_b:`
-            - Reset the computer room boolean variable to false: `computer_room_zone_b = FALSE`
-            - Reset the all labs boolean variable to false: `all_labs_zone_b = FALSE`
-            - Reset total_space_floor_area to 0: `total_space_floor_area = 0`
-            - Reset sum_occ_area to 0" `sum_occ_area = 0`
+        - Check if HVAC system is type 5, 6, 7, or 8 exists, if so then carry on, if not skip building segment: `if get_baseline_system_types(hvac_b.id) in ["SYS-5", "SYS-6", "SYS-7", "SYS-8", "SYS-7a", "SYS-8a","SYS-5b", "SYS-6b", "SYS-7b", "SYS-7c"]:bldg_segment_G3.1.1c_could_apply_check = TRUE`
+        - Check if the system type applicability flag is true for the building segment, if not then skip this building_segment: `if bldg_segment_G3.1.1c_could_apply_check == TRUE:`        
+        # Create a dictionary with zone ID as key and a list with zone descriptor information (including the HVAC system with the longest fan schedule) for access later in the logic. This dictionary will be used later in the logic.
+        - for each zone_b in the building_segment_b: `for zone_b in building_segment_b.zones:`
+            - Reset the computer room boolean variable to false, indicates if zone contains computer rooms spaces: `computer_room_zone_b = FALSE`
+            - Reset the all labs boolean variable to false, indicate if zone includes all labs spaces: `all_labs_zone_b = FALSE`
+            - Reset total_zone_floor_area to 0, used for summing space floor area across the zones: `total_zone_floor_area = 0`
+            - Reset sum_occ_area to 0, used for calculating EFLHs occ sch for zone" `sum_occ_area = 0`
             - Get the floor number that the zone is associated with: `zone_floor_number_b = zone_b.zone_floor_number`
                 - Add to the list of floors in the building segment, keep adding as the code loops through the zones: `floor_list_b = floor_list_b.append(zone_floor_number_b)`
-            - For each terminal unit associated with each zone: `for terminal_b in zone_b:`
-                - Get the served_by_heating_ventilation_air_conditioning_systems for each terminal: `heating_ventilation_air_conditioning_systems_b = terminal_b.served_by_heating_ventilation_air_conditioning_systems`
+            - For each terminal unit associated with the zone: `for terminal_b in zone_b.terminals:`
+                - Get the served_by_heating_ventilation_air_conditioning_systems: `heating_ventilation_air_conditioning_systems_b = terminal_b.served_by_heating_ventilation_air_conditioning_systems`
                 - Add to list of heating_ventilation_air_conditioning_systems_list_b as the code loops through the terminal units: `heating_ventilation_air_conditioning_systems_list_b = heating_ventilation_air_conditioning_systems_list_b.append(heating_ventilation_air_conditioning_systems_b)`                
             - Convert the list of heating_ventilation_air_conditioning_systems_list_b associated with the zone to a set and the back to a list to eliminate duplicates after looping through terminal units: `heating_ventilation_air_conditioning_systems_list_b = list(set(heating_ventilation_air_conditioning_systems_list_b))`
             # Determine which hvac system associated with the zone has the longest fan schedule as that will be the system to compare to the proposed in terms of fan schedule per PNNL PRM RM (note in the baseline per the rules of App G there would only be one HVAC system per zone so for the baseline this is not necessary unless an error was made in modeling the baseline HVAC systems)
@@ -59,8 +59,8 @@
                 - For each value in the occupant_multiplier_schedule: `For i in range(8760):`
                     - Calculate EFLHs for the annual schedule, start by summing each hour of the year: `sum_occ_sch = sum_occ_sch + space_b.occupant_multiplier_schedule(i)`
                 - Calculate EFLHS * Space Area for the space and keep a running tally for the zone: `sum_occ_area = sum_occ_area + (sum_occ_sch * space_b.floor_area)`
-                - Calculate total floor area across the spaces in the zone: `total_space_floor_area = total_space_floor_area + space_b.floor_area`
-            - Calculate the weighted average occupancy EFLHs for the zone: `zone_b_weighted_average_occ_EFLHS = sum_occ_area/total_space_floor_area`
+                - Calculate total floor area across the spaces in the zone: `total_zone_floor_area = total_zone_floor_area + space_b.floor_area`
+            - Calculate the weighted average occupancy EFLHs for the zone: `zone_b_weighted_average_occ_EFLHS = sum_occ_area/total_zone_floor_area`
             # Create a dictionary with zone ID as key and a list with zone descriptor information
             - Create a list with the hvac_id_b, hvac_type_b, floor number, occ EFLHs, computer_room_zone_b, and labs_zone_b for the zone: `zone_b_descriptor_list = [hvac_id_b, hvac_type_b, zone_floor_number_b, zone_b_weighted_average_occ_EFLHS, computer_room_zone_b, labs_zone_b]`
             - Add the list of descriptors to a dictionary with the zone id as the key, start with empty list: `zone_info_b_dict[zone_b.id] = list()`
@@ -120,9 +120,9 @@
                     - Get list of values for the zone from the dictionary zone_info_b_dict: `zone_info_list_b = zone_info_b_dict(zone_b)`
                     - Check if the HVAC system is 3 or 4 and not a computer room: `if zone_info_list_b[1] in ["SYS-3","SYS-3a","SYS-3b","SYS-3c","SYS-4"] AND zone_info_list_b[4] == FALSE:`
                         - Check if the zone meets G3.1.1 c, schedules that differ by more than 40 equivalent full load hrs/week from other spaces: `if abs(((EFLHs-zone_info_list_b[3])/counter)-zone_info_list_b[3]) > 40:`
-                            - Set applicability flag: `rule_applicability_check = TRUE`
+                            - Set applicability flag: `hvac_sys_G3.1.1c_applies_check = TRUE`
                             - Add zone as key to dictionary and hvac system as value: `applicable_zones_G3.1.1c_40_EFLHs_dict_b[zone_b.id] = zone_info_list_b[0]`
                                            
-**Returns** `return aapplicable_zones_G3.1.1c_40_EFLHs_dict_b`
+**Returns** `return applicable_zones_G3.1.1c_40_EFLHs_dict_b`
 
 **[Back](../_toc.md)**
