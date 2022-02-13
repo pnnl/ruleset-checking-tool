@@ -12,8 +12,8 @@
 
 
 **Logic:**
-- For each building_segment in the B_RMR: `for building_segment_b in B_RMR:`
-    - For each hvac_b in the building_segment_b: `for hvac_b in building_segment_b:`
+- For each building_segment in the B_RMR: `for building_segment_b in B_RMR..BuildingSegment:`
+    - For each hvac_b in the building_segment_b: `for hvac_b in building_segment_b.heating_ventilation_air_conditioning_system:`
         - Reset zones served list: `zone_list_b = []`
         - For each zone_b in the building_segment_b: `for zone_b in building_segment_b:`
             - For each terminal unit associated with each zone: `for terminal_b in zone_b:`
