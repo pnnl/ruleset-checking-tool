@@ -12,7 +12,7 @@
 
 
 **Logic:**
-- For each zone in P_RMR: `zone_p in P_RMR...zones:`
+- For each zone in P_RMR: `zone_p in P_RMR..Zone:`
 - Reset applicability flag: `rule_applicability_check = FALSE`  
     - For each terminal unit associated with each zone: `terminal_p in zone_p:`
         - Get the served_by_heating_ventilation_air_conditioning_systems for each terminal: `heating_ventilation_air_conditioning_systems_p = terminal_p.served_by_heating_ventilation_air_conditioning_systems`
