@@ -142,6 +142,11 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
 
 ## Section 17 - Refrigeration
 
+## Section 21 - Central Heating Hot Water Systems
+  * [21-3](section21/Rule21-3.md): Heating hot water plant capacity shall be based on coincident loads.  
+  * [21-6](section21/Rule21-6.md): When baseline building includes two boilers each shall stage as required by load.  
+
 ## Section 22 - Central Chilled Water Systems
-  * [22-1] (section22/Rule22.1.md): Baseline chilled water design supply temperature shall be modeled at 44F.
+  * [22-1](section22/Rule22-1.md): Baseline chilled water design supply temperature shall be modeled at 44F.  
+  * [22-2](section22/Rule22-2.md): Baseline chilled water design return temperature shall be modeled at 56F.  
   * [22-5](section22/Rule22-5.md): For Baseline chilled water loop that is not purchased chilled water and serves computer room HVAC systems (System Type-11), chilled-water supply temperature shall be reset higher based on the HVAC system requiring the most cooling.  
