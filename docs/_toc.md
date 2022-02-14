@@ -147,7 +147,8 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   * [21-6](section21/Rule21-6.md): When baseline building includes two boilers each shall stage as required by load.  
   * [21-9](section21/Rule21-9.md): When baseline building includes boilers, Hot Water Pump Power = 19W/gpm.  
   * [21-10](section21/Rule21-10.md): When the building is modeled with HHW plant (served by either boiler(s) or purchased hot water/steam), the hot water pump shall be modeled as riding the pump curve if the hot water system serves less than 120,000 ft^2 otherwise it shall be modeled with a VFD.  
-  * [21-11A](section21/Rule21-11A.md) :When the system uses boilers the hot water system shall be modeled as primary only.  
+  * [21-11A](section21/Rule21-11A.md): When the system uses boilers the hot water system shall be modeled as primary only.  
+  * [21-11B](section21/Rule21-11B.md): When the system uses boilers the hot water system shall be modeled with continuous variable flow.  
 
 ## Section 22 - Central Chilled Water Systems
   * [22-1](section22/Rule22-1.md): Baseline chilled water design supply temperature shall be modeled at 44F.  
