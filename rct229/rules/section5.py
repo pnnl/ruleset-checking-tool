@@ -6,13 +6,13 @@ from rct229.rule_engine.rule_base import (
 )
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 from rct229.ruleset_functions.get_opaque_surface_type import (
-    get_opaque_surface_type,
     ABOVE_GRADE_WALL,
     BELOW_GRADE_WALL,
     FLOOR,
-    ROOF,
     HEATED_SOG,
+    ROOF,
     UNHEATED_SOG,
+    get_opaque_surface_type,
 )
 from rct229.ruleset_functions.get_surface_conditioning_category_dict import (
     get_surface_conditioning_category_dict,
@@ -163,9 +163,7 @@ class Section5Rule8(RuleDefinitionListIndexedBase):
                         or scc_b == "EXTERIOR NON-RESIDENTIAL"
                         or scc_b == "SEMI-EXTERIOR"
                     ):
-                        target = table_G34_lookup(
-                            climate_zone, scc_b, BELOW_GRADE_WALL
-                        )
+                        target = table_G34_lookup(climate_zone, scc_b, BELOW_GRADE_WALL)
                         target_c_factor = (
                             target["c_factor"] if "c_factor" in target else None
                         )
@@ -179,12 +177,16 @@ class Section5Rule8(RuleDefinitionListIndexedBase):
                         target = table_G34_lookup(
                             climate_zone, "EXTERIOR RESIDENTIAL", BELOW_GRADE_WALL
                         )
-                        target_c_factor_res = target["c_factor"] if "c_factor" in target else None
+                        target_c_factor_res = (
+                            target["c_factor"] if "c_factor" in target else None
+                        )
 
                         target = table_G34_lookup(
                             climate_zone, "EXTERIOR NON-RESIDENTIAL", BELOW_GRADE_WALL
                         )
-                        target_c_factor_nonres = target["c_factor"] if "c_factor" in target else None
+                        target_c_factor_nonres = (
+                            target["c_factor"] if "c_factor" in target else None
+                        )
 
                         if (
                             target_c_factor_res is None

@@ -14,6 +14,7 @@ ROOF = "ROOF"
 HEATED_SOG = "HEATED SLAB-ON-GRADE"
 UNHEATED_SOG = "UNHEATED SLAB-ON-GRADE"
 
+
 def get_opaque_surface_type(surface):
     """Determines a surface's opaque surface type
 
