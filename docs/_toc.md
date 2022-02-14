@@ -145,6 +145,7 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
 ## Section 21 - Central Heating Hot Water Systems
   * [21-3](section21/Rule21-3.md): Heating hot water plant capacity shall be based on coincident loads.  
   * [21-6](section21/Rule21-6.md): When baseline building includes two boilers each shall stage as required by load.  
+  * [21-9](section21/Rule21-9.md): When baseline building includes boilers, Hot Water Pump Power = 19W/gpm.  
 
 ## Section 22 - Central Chilled Water Systems
   * [22-1](section22/Rule22-1.md): Baseline chilled water design supply temperature shall be modeled at 44F.  
