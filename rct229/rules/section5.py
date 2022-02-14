@@ -158,17 +158,22 @@ class Section5Rule46(RuleDefinitionListIndexedBase):
             )
 
         def get_calc_vals(self, context, data=None):
-            failing_infiltration_zone_ids = []
+            infiltration_fail_id = []
+            missing_zone_id = []
             baseline_zones = find_all("$..zones[*]", context.baseline)
             proposed_zones = find_all("$..zones[*]", context.proposed)
 
-            # This assumes that the surfaces all match
-            matched_baseline_zones = match_lists_exactly_by_id(
-                proposed_zones, baseline_zones
-            )
-            proposed_baseline_zone_pairs = zip(proposed_zones, matched_baseline_zones)
-            for (p_zone, b_zone) in proposed_baseline_zone_pairs:
-                # need a method like match object
+            b_zone_dict = {b_zone["id"]: b_zone for b_zone in baseline_zones}
+
+            for p_zone in proposed_zones:
+                # Get matching baseline zone
+                b_zone = b_zone_dict.get(p_zone["id"])
+
+                if b_zone is None:
+                    missing_zone_id.append(p_zone["id"])
+                    # skip the infiltration check
+                    continue
+
                 p_zone_infiltration = p_zone["infiltration"]
                 # b_zone could be NONE - add a check.
                 b_zone_infiltration = b_zone["infiltration"]
@@ -179,9 +184,9 @@ class Section5Rule46(RuleDefinitionListIndexedBase):
                     or p_zone_infiltration["modeling_method"]
                     != b_zone_infiltration["modeling_method"]
                 ):
-                    failing_infiltration_zone_ids.append(p_zone["id"])
+                    infiltration_fail_id.append(p_zone["id"])
 
-            return {"failing_infiltration_zone_ids": failing_infiltration_zone_ids}
+            return {"infiltration_fail_id": infiltration_fail_id}
 
         def rule_check(self, context, calc_vals, data=None):
-            return len(calc_vals["failing_infiltration_zone_ids"]) == 0
+            return len(calc_vals["infiltration_fail_id"]) == 0 and len(calc_vals["missing_zone_id"] == 0)
