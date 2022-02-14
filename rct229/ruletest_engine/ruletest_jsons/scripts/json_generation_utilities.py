@@ -66,7 +66,7 @@ def get_nested_dict(dic, keys):
             # the single value specified by the key.
             if is_list:
                 # If list isn't long enough, append a new dictionary to it to avoid index out of bounds
-                if len(reference_dict[key]) < list_index + 1:
+                while len(reference_dict[key]) < list_index + 1:
                     reference_dict[key].append({})
                 reference_dict = reference_dict[key][list_index]
             else:
@@ -261,7 +261,8 @@ def merge_nested_dictionary(master_dict, new_data_dict, path=None):
             elif master_dict[key] == new_data_dict[key]:
                 pass  # same leaf value
             else:
-                raise Exception("Conflict at %s" % ".".join(path + [str(key)]))
+                # Overwrite old key value with one from new dictionary
+                master_dict[key] = new_data_dict[key]
         else:
             master_dict[key] = new_data_dict[key]
     return master_dict
