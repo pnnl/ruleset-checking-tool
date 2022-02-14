@@ -154,7 +154,9 @@ class Section5Rule46(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section5Rule46.BuildingRule, self).__init__(
                 rmrs_used=UserBaselineProposedVals(False, True, True),
-                required_fields={"$..infiltration": ["algorithm_name", "modeling_method"]},
+                required_fields={
+                    "$..infiltration": ["algorithm_name", "modeling_method"]
+                },
             )
 
         def get_calc_vals(self, context, data=None):
@@ -189,4 +191,6 @@ class Section5Rule46(RuleDefinitionListIndexedBase):
             return {"infiltration_fail_id": infiltration_fail_id}
 
         def rule_check(self, context, calc_vals, data=None):
-            return len(calc_vals["infiltration_fail_id"]) == 0 and len(calc_vals["missing_zone_id"] == 0)
+            return len(calc_vals["infiltration_fail_id"]) == 0 and len(
+                calc_vals["missing_zone_id"] == 0
+            )
