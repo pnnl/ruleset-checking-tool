@@ -1,12 +1,12 @@
 ## get_hvac_systems_5_6_serving_multiple_floors_b
 
-**Description:** Get the list the system 5, 5a, 5b, 6, 6a, 6b hvac system IDs that are modeled as serving more than one floor in the baseline design model.  
+**Description:** Get a dictionary of the system 5, 5a, 5b, 6, 6a, 6b hvac system IDs that are modeled as serving more than one floor in the baseline design model.  The dictionary consists of the hvac system ids as the key and the number of floors served as the value associated with the key. 
 
 **Inputs:**
 - **B-RMR**: To determine if any system type 5, 5a, 5b, 6, 6a, 6bs are modeled as serving more than one floor in the baseline.
 
 **Returns:**
-- **hvac_systems_5_6_serving_multiple_floors_list_b**: A list that saves all hvac system ids of system types 5, 5a, 5b, 6, 6a, 6b that serve more than 1 floor in the baseline design model.
+- **hvac_systems_5_6_serving_multiple_floors_dict_b**: A dictionary that saves all hvac system ids of system types 5, 5a, 5b, 6, 6a, 6b that serve more than 1 floor in the baseline design model and the number of floors served by each.
  
 **Function Call:** 
 
@@ -31,10 +31,10 @@
         - for each zone in the list of zones associated with the hvac system add to list of the floor names associated with the HVAC system: `for zone_b in zone_list_b:`
             - Add to list of floors: `list_floors_hvac_b = list_floors_hvac_b.append(zone_b.floor_name)`
         - Get number of unique values (which will equal the number of floors) for the hvac systems: `num_floors_hvac_b = len(set(list_floors_hvac_b))`
-        - Check if the number of unique values is greater than 1, if so then the system serves multiple floors and should be added to the list of hvac system serving multiple floors: `if num_floors_hvac_b > 1:` 
-            - Add to list of hvac systems serving multiple floors: `hvac_systems_5_6_serving_multiple_floors_list_b = hvac_systems_5_6_serving_multiple_floors_list_b.append(hvac_b.id)`
+        - Check if the number of unique values is greater than 1, if so then the system serves multiple floors and should be added to the dictionary of hvac systems serving multiple floors with the number of floors as a value: `if num_floors_hvac_b > 1:` 
+            - Add to dict of hvac systems serving multiple floors: `hvac_systems_5_6_serving_multiple_floors_dict_b [hvac_b.id] = num_floors_hvac_b`
 
-**Returns** `return hvac_systems_5_6_serving_multiple_floors_list_b`
+**Returns** `return hvac_systems_5_6_serving_multiple_floors_dict_b`
 
 **[Back](../_toc.md)**
     
