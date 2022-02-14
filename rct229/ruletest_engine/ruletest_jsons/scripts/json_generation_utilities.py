@@ -66,6 +66,7 @@ def get_nested_dict(dic, keys):
             # the single value specified by the key.
             if is_list:
                 # If list isn't long enough, append a new dictionary to it to avoid index out of bounds
+                # print(reference_dict[key])
                 while len(reference_dict[key]) < list_index + 1:
                     reference_dict[key].append({})
                 reference_dict = reference_dict[key][list_index]
