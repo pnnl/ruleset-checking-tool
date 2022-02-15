@@ -1,17 +1,16 @@
-## get_zones_hvac_system_humid_p
+# get_zones_hvac_system_humid_p  
 
-**Description:** Get the list of P_RMR zones and corresponding HVAC system IDs where humidification has been modeled.
+**Description:** Get the list of P_RMR zones and corresponding HVAC system IDs where humidification has been modeled.  
 
-**Inputs:**
-- **P-RMR**: To determine if any zones and corresponding HVAC systems have humidification modeled in the proposed.
+**Inputs:**  
+- **P-RMR**: To determine if any zones and corresponding HVAC systems have humidification modeled in the proposed.  
 
-**Returns:**
-- **applicable_zones_hvac_sys_humid_dict_p**: A dictionary that saves all zones IDs as keys and a list of associated HVAC sys IDs as values that have been modeled with humidification in the P_RMR.
+**Returns:**  
+- **applicable_zones_hvac_sys_humid_dict_p**: A dictionary that saves all zones IDs as keys and a list of associated HVAC sys IDs as values that have been modeled with humidification in the P_RMR.  
  
-**Function Call:** None
+**Function Call:** None  
 
-
-**Logic:**
+## Logic:  
 - For each zone in P_RMR: `zone_p in P_RMR..Zone:`
 - Reset zone modeled with humidification in the proposed boolean variable: `humidification_modeled_in_proposed_check = FALSE`  
     - For each terminal unit associated with each zone: `terminal_p in zone_p.terminals:`
@@ -34,7 +33,7 @@
             - Add to list of hvac_systems for the zone in which humidification was modeled in the proposed: `applicable_hvac_sys_list_p = applicable_hvac_sys_list_p.append(hvac_p)`
     - Check if the zone modeled with humidification in the proposed boolean variable equals TRUE for the zone on a whole, if true then add to dict with zone as key and list of hvac systems (i.e. those modeled with humidification in the proposed) as values: `if humidification_modeled_in_proposed_check == TRUE:`
         - Add to dict with zone as key and list of hvac systems with humidification modeled in the proposed as values, start with empty list: `applicable_zones_hvac_sys_humid_dict_p[zone_p.id] = list()`
-        - Add to dict with zone as key and list of hvac systems with humidification modeled in the proposed as values: `applicable_zones_hvac_sys_humid_dict_p[zone_b.id].extend(applicable_hvac_sys_list_p)`
+        - Add to dict with zone as key and list of hvac systems with humidification modeled in the proposed as values: `applicable_zones_hvac_sys_humid_dict_p[zone_b.id].extend(applicable_hvac_sys_list_p)`  
 
 **Returns** `return applicable_zones_hvac_sys_humid_dict_p`   
 
