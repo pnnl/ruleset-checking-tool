@@ -1,17 +1,17 @@
-## get_list_of_zones_per_hvac_sys_b
+# get_list_of_zones_per_hvac_sys_b
 
 **Description:** Get a dictionary with each HVAC system id as a key and a list of zones that each hvac system is associated with as values for the B-RMR.  
 
-**Inputs:**
-- **B-RMR**: To create a dictionary with each HVAC system id as a key and a list of zones that each hvac system is associated with as values for the B-RMR.
+**Inputs:**  
+- **B-RMR**: To create a dictionary with each HVAC system id as a key and a list of zones that each hvac system is associated with as values for the B-RMR.  
 
-**Returns:**
-- **hvac_id_zones_dict_b**: A dictionary with each HVAC system id as a key and a list of zones that each hvac system is associated with as values for the B-RMR.  
+**Returns:**  
+- **hvac_id_zones_dict_b**: A dictionary with each HVAC system id as a key and a list of zones that each hvac system is associated with as values for the B-RMR.   
  
-**Function Call:** None
+**Function Call:** None  
 
 
-**Logic:**
+## Logic:  
 - For each building_segment in the B_RMR: `for building_segment_b in B_RMR..BuildingSegment:`
     - For each hvac_b in the building_segment_b: `for hvac_b in building_segment_b.heating_ventilation_air_conditioning_system:`
         - Reset zones served list: `zone_list_b = []`
