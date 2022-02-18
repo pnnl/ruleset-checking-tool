@@ -5,7 +5,9 @@ from rct229.rule_engine.rule_base import (
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.match_lists import match_lists_exactly_by_id
-
+from rct229.ruleset_functions.get_surface_conditioning_category_dict import (
+    get_surface_conditioning_category_dict,
+)
 # Rule Definitions for Section 5 of 90.1-2019 Appendix G
 
 # ------------------------
@@ -97,3 +99,75 @@ class Section5Rule3(RuleDefinitionListIndexedBase):
 
 
 # ------------------------
+class Section5Rule28(RuleDefinitionListIndexedBase):
+    """Rule 18 of ASHRAE 90.1-2019 Appendix G Section 5 (Envelope)"""
+
+    def __init__(self):
+        super(Section5Rule28, self).__init__(
+            rmrs_used=UserBaselineProposedVals(False, True, True),
+            each_rule=Section5Rule28.BuildingRule(),
+            index_rmr="baseline",
+            id="5-28",
+            description="Subsurface that is not regulated (not part of building envelope) must be modeled with the "
+                        "same area, U-factor and SHGC in the baseline as in the proposed design",
+            list_path="buildings[*]",
+        )
+
+    def create_data(self, context, data=None):
+        return {"climate_zone": context.baseline["weather"]["climate_zone"]}
+
+    class BuildingRule(RuleDefinitionBase):
+        def __init__(self):
+            super(Section5Rule28.BuildingRule, self).__init__(
+                rmrs_used=UserBaselineProposedVals(False, True, True),
+                required_fields={
+                    "$..surfaces[*]": ["subsurfaces", "adjacent_to"],
+                    "$..subsurfaces[*]": ["u-factor", "solar_heat_gain_coefficient", "glazed_area", "opaque_area"]
+                },
+            )
+            self.warning_msg = "Subsurface that is not regulated (not part of building envelope) is not modeled with the same area, U-factor and SHGC in the baseline as in the proposed design"
+
+        def get_calc_vals(self, context, data=None):
+            missing_surface_id = []
+            failing_subsurface_id = []
+            climate_zone = data['climate_zone']
+            scc_dictionary_b = get_surface_conditioning_category_dict(climate_zone, context.baseline)
+            # Retrieve all surfaces under buildings
+            surfaces_b = find_all("$..zones[*].surfaces[*]", context.baseline)
+            surfaces_p = find_all("$..zones[*].surfaces[*]", context.proposed)
+
+            surfaces_b_dict = {surface_b["id"]: surface_b for surface_b in surfaces_b}
+
+            for surface_p in surfaces_p:
+                surface_b = surfaces_b_dict[surface_p["id"]]
+
+                if surface_b is None:
+                    missing_surface_id.append(surface_p["id"])
+                    continue
+
+                if scc_dictionary_b[surface_b["id"]] == "UNREGULATED":
+                    subsurfaces_b = surface_b["subsurfaces"]
+                    subsurfaces_p = surface_p["subsurfaces"]
+
+                    try:
+                        matched_subsurfaces = match_lists_exactly_by_id(subsurfaces_b, subsurfaces_p)
+                    except:
+                        # cannot find exactly match in number of subsurfaces between baseline and proposed
+                        return {"error": "Test failed because the number of sub-surfaces for surface id %s "
+                                         "does not match between baseline and proposed models" %surface_b["id"]}
+                    baseline_subsurfaces_pairs = zip(subsurfaces_b, matched_subsurfaces)
+                    for (subsurface_b, subsurface_m) in baseline_subsurfaces_pairs:
+                        if subsurface_b["u-factor"] != subsurface_m["u-factor"] or subsurface_b["solar_heat_gain_coefficient"] != subsurface_m["solar_heat_gain_coefficient"] or subsurface_b["glazed_area"] != subsurface_m["glazed_area"] or subsurface_b["opaque_area"] != subsurface_m["opaque_area"]:
+                            failing_subsurface_id.append(subsurface_b["id"])
+
+            return {"missing_surface_id": missing_surface_id, "failing_subsurface_id": failing_subsurface_id}
+
+        def rule_check(self, context, calc_vals=None, data=None):
+            if "error" in calc_vals:
+                return False
+            return len(calc_vals["missing_surface_id"] == 0 and calc_vals["failing_subsurface_id"] == 0)
+
+
+
+
+

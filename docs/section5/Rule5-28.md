@@ -19,14 +19,13 @@
   2. get_surface_conditioning_category()
 
 ## Rule Logic:
+- Get building climate zone: ```climate_zone = B_RMR.weather.climate_zone```
 
-- Get surface conditioning category dictionary for B_RMR: `scc_dictionary_b = get_surface_conditioning_category(B_RMR)`
+- Get surface conditioning category dictionary for B_RMR: `scc_dictionary_b = get_surface_conditioning_category(climate_zone, B_RMR)`
 
 - For each building segment in the Baseline model: `for building_segment_b in B_RMR.building.building_segments:`
-
-  - For each thermal block in building segment: `for thermal_block_b in building_segment_b.thermal_blocks:`
-
-    - For each zone in thermal block: `for zone_b in thermal_block_b.zones:`
+- 
+    - For each zone in thermal block: `for zone_b in building_segment_b.zones:`
 
       - For each surface in zone: `for surface_b in zone_b.surfaces:`
 
