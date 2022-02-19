@@ -65,4 +65,8 @@ def get_hvac_zone_list_w_area_dict(building):
                     hvac_sys_entry["zone_list"].append(zone["id"])
                     hvac_sys_entry["total_area"] += zone_area
 
+                assert_(
+                    hvac_sys_entry["total_area"] > ZERO.AREA,
+                    f"terminal:{terminal['id']} serves zero floor area",
+                )
     return hvac_zone_list_w_area_dict
