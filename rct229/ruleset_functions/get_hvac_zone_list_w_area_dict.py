@@ -1,6 +1,18 @@
 from rct229.schema.config import ureg
 from rct229.utils.jsonpath_utils import find_all
-from rct229.utils.pint_utils import pint_sum
+from rct229.utils.pint_utils import pint_sum, ZERO
+
+# Intended for export and internal use
+GET_HVAC_ZONE_LIST_W_AREA_DICT__REQUIRED_FIELDS = {
+    "building": {
+        "building_segments[*].zones[*].spaces[*]": [
+            "floor_area",
+        ],
+        "building_segments[*].zones[*].terminals[*]": [
+            "served_by_heating_ventilation_air_conditioning_systems"
+        ],
+    }
+}
 
 
 def get_hvac_zone_list_w_area_dict(building):
@@ -29,7 +41,8 @@ def get_hvac_zone_list_w_area_dict(building):
         terminals = zone.get("terminals")
         # Note: None and [] are falsey; zone.terminals is optional
         if terminals:
-            zone_area = pint_sum(find_all("spaces[*].floor_area", zone))
+            zone_area = pint_sum(find_all("spaces[*].floor_area", zone), ZERO.AREA)
+            assert_(zone_area > ZERO.AREA, f"zone:{zone['id']} has zero floor area")
             for terminal in terminals:
                 hvac_sys_id = terminal[
                     "served_by_heating_ventilation_air_conditioning_systems"
