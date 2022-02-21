@@ -1,5 +1,20 @@
 import functools
 import operator
+from rct229.schema.config import ureg
+
+
+class ZERO:
+    """Class holding zero values for various pint quantities"""
+
+    LENGTH = 8 * ureg("ft")
+    AREA = LENGTH * LENGTH
+    VOLUME = AREA * LENGTH
+
+    POWER = 0 * ureg("Btu/hr")
+    THERMAL_CAPACITY = POWER / AREA
+
+    U_FACTOR = ureg("Btu/(hr*ft2*degR)")
+    UA = U_FACTOR * AREA
 
 
 def pint_sum(qty_list, default=None):
