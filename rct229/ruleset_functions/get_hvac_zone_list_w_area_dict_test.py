@@ -7,7 +7,6 @@ from rct229.schema.config import ureg
 from rct229.schema.schema_utils import quantify_rmr
 from rct229.schema.validate import schema_validate_rmr
 
-
 TEST_RMR = {
     "id": "test_rmr",
     "buildings": [
