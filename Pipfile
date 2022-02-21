@@ -10,7 +10,6 @@ python_version = "3.7"
 pylint = "*"
 pytest = "*"
 isort = "5.10.1"
-black = "21.10b0"
 icecream = "*"
 black = "~=21.10b0"
 
