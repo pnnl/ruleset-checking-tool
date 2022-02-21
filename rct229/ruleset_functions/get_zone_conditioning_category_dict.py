@@ -1,49 +1,28 @@
 from dataclasses import dataclass
 
+from rct229.utils.assertions import (
+    assert_,
+    assert_nonempty_lists,
+    assert_required_fields,
+    getattr_,
+)
 from rct229.data_fns.table_3_2_fns import table_3_2_lookup
 from rct229.ruleset_functions.get_hvac_zone_list_w_area_dict import (
     get_hvac_zone_list_w_area_dict,
 )
+from rct229.ruleset_functions.get_opaque_surface_type import get_opaque_surface_type
 from rct229.schema.config import ureg
 from rct229.utils.jsonpath_utils import find_all
-from rct229.utils.pint_utils import pint_sum
+from rct229.utils.pint_utils import pint_sum, ZERO
 
 CAPACITY_THRESHOLD = 3.4 * ureg("Btu/(hr * ft2)")
 CRAWLSPACE_HEIGHT_THRESHOLD = 7 * ureg("ft")
-ZERO_AREA = 0 * ureg("ft2")
-ZERO_POWER = 0 * ureg("Btu/hr")
-ZERO_UA = 0 * ureg("ft2 * Btu / (hr * ft2 * R)")
-
-
-# TODO: Need to include any additional requirements from get_hvac_zone_list_w_area_dict(building)
-# TODO: Check for other required fields
-# Intended for export and internal use
-GET_ZONE_CONDITIONING_CATEGORY_DICT__REQUIRED_FIELDS = {
-    "building": {
-        "building_segments[*].zones[*]": ["spaces"],
-        "building_segments[*].zones[*].spaces[*]": [
-            "floor_area",
-            "lighting_space_type",
-        ],
-    }
-}
-
-
-def assert_required_fields(req_fields, obj):
-    assert all(
-        [
-            all([field in element for field in fields])
-            for element in find_all(jpath, obj)
-            for (jpath, fields) in req_fields
-        ]
-    )
 
 
 # TODO: Review for comparison tolerances
 
-
-@dataclass(frozen=True)
-class _ZoneConditioningCategory:
+# Intended for export and internal use
+class ZoneConditioningCategory:
     """Enumeration class for zone conditioning categories"""
 
     CONDITIONED_MIXED: str = "CONDITIONED MIXED"
@@ -54,8 +33,29 @@ class _ZoneConditioningCategory:
     UNENCLOSED: str = "UNENCLOSED"
 
 
-# Intended for export and internal use
-ZONE_CONDITIONING_CATEGORY = _ZoneConditioningCategory()
+# Intended for internal use
+GET_ZONE_CONDITIONING_CATEGORY_DICT__REQUIRED_FIELDS = {
+    "building": {
+        "building_segments[*].heating_ventilation_air_conditioning_systems[*].cooling_system": [
+            "sensible_cool_capacity"
+        ],
+        "building_segments[*].heating_ventilation_air_conditioning_systems[*].heating_system": [
+            "heat_capacity"
+        ],
+        "building_segments[*].heating_ventilation_air_conditioning_systems[*].preheat_system": [
+            "heat_capacity"
+        ],
+        "building_segments[*].zones[*].spaces[*]": [
+            "floor_area",
+        ],
+        "building_segments[*].zones[*].surfaces[*].subsurfaces[*]": [
+            "u_factor",
+        ],
+        "building_segments[*].zones[*].terminals[*]": [
+            "served_by_heating_ventilation_air_conditioning_systems"
+        ],
+    }
+}
 
 
 def get_zone_conditioning_category_dict(climate_zone, building):
@@ -78,6 +78,9 @@ def get_zone_conditioning_category_dict(climate_zone, building):
         GET_ZONE_CONDITIONING_CATEGORY_DICT__REQUIRED_FIELDS["building"], building
     )
 
+    # This will be the return value
+    zone_conditioning_category_dict = {}
+
     # Create a mapping from an hvac system's id to the hvac system itself
     hvac_systems_dict = {
         hvac_system["id"]: hvac_system
@@ -90,66 +93,74 @@ def get_zone_conditioning_category_dict(climate_zone, building):
     # Get a dict that maps from hvac system id to {zones_list, total_area} dict
     hvac_zone_list_w_area_dict = get_hvac_zone_list_w_area_dict(building)
 
-    # Produce a dict that maps each zone hvac system id to its cooling capacity
+    # Produce a dict that maps each hvac system id to its cooling capacity
     hvac_cool_capacity_dict = {
-        # Handle missing cooling_system
         hvac_sys_id: (
             (
                 hvac_systems_dict[hvac_sys_id]["cooling_system"][
                     "sensible_cool_capacity"
                 ]
                 if "cooling_system" in hvac_systems_dict[hvac_sys_id]
-                else ZERO_POWER
+                # Handle nonexistent cooling_system
+                else ZERO.POWER
             )
             / hvac_values["total_area"]
         )
-        for (hvac_sys_id, hvac_values) in hvac_zone_list_w_area_dict
+        for (hvac_sys_id, hvac_values) in hvac_zone_list_w_area_dict.items()
     }
-    # Produce a dict that maps each zone hvac system id to its heating capacity
+
+    # Produce a dict that maps each hvac system id to its heating capacity
     hvac_heat_capacity_dict = {
         hvac_sys_id: (
-            # Handle missing heating_system and/or preheat_system
             (
                 hvac_systems_dict[hvac_sys_id]["heating_system"]["heat_capacity"]
                 if "heating_system" in hvac_systems_dict[hvac_sys_id]
-                else ZERO_POWER
+                # Handle missing heating_system
+                else ZERO.POWER
             )
             + (
                 hvac_systems_dict[hvac_sys_id]["preheat_system"]["heat_capacity"]
                 if "preheat_system" in hvac_systems_dict[hvac_sys_id]
-                else ZERO_POWER
+                # Handle missing preheat_system
+                else ZERO.POWER
             )
         )
         / hvac_values["total_area"]
-        for (hvac_sys_id, hvac_values) in hvac_zone_list_w_area_dict
+        for (hvac_sys_id, hvac_values) in hvac_zone_list_w_area_dict.items()
     }
 
-    # Get heated space criteria
+    # Get heated space criterion
     system_min_heating_output = table_3_2_lookup(climate_zone)[
         "system_min_heating_output"
     ]
 
     # Produce a dict that maps each zone id to a {"sensible_cooling", "heating"} dict
     # representing zone capacities
-    zone_capacity_dict = {"sensible_cooling": ZERO_POWER, "heating": ZERO_POWER}
+    zone_capacity_dict = {}
     for zone in find_all("$..zones[*]", building):
-        zone_area = pint_sum([space["floor_area"] for space in zone["spaces"]])
-        assert zone_area > ZERO_AREA
+        zone_id = zone["id"]
+        zone_area = pint_sum(find_all("$..floor_area", zone), ZERO.AREA)
+        assert_(zone_area > ZERO.AREA, f"zone:{zone_id} has no floor area")
 
-        for terminal in zone["terminals"]:
+        zone_capacity_dict[zone_id] = zone_capacity = {
+            "sensible_cooling": ZERO.THERMAL_CAPACITY,
+            "heating": ZERO.THERMAL_CAPACITY,
+        }
+        # Note: Allow for there being no terminals field
+        for terminal in find_all("terminals[*]", zone):
             # Note: there is only one hvac system even though the field name is plural
             # This will change to singular in schema version 0.0.8
-            hvac_sys_id = hvac_systems_dict[
-                terminal["served_by_heating_ventilation_air_conditioning_systems"]
+            hvac_sys_id = terminal[
+                "served_by_heating_ventilation_air_conditioning_systems"
             ]
 
-            # Add cooling and heating capacites from the terminal
-            zone_capacity_dict["sensible_cooling"] += hvac_cool_capacity_dict.get(
-                hvac_sys_id, ZERO_POWER
+            # Add cooling and heating capacites for the terminal
+            zone_capacity["sensible_cooling"] += hvac_cool_capacity_dict.get(
+                hvac_sys_id, ZERO.THERMAL_CAPACITY
             )
-            zone_capacity_dict["heating"] += hvac_heat_capacity_dict.get(
-                hvac_sys_id, ZERO_POWER
-            ) + (terminal.get("heat_capacity", ZERO_POWER) / zone_area)
+            zone_capacity["heating"] += hvac_heat_capacity_dict.get(
+                hvac_sys_id, ZERO.THERMAL_CAPACITY
+            ) + (terminal.get("heat_capacity", ZERO.POWER) / zone_area)
 
     # Determine eligibility for directly conditioned (heated or cooled) and
     # semi-heated zones
@@ -172,6 +183,7 @@ def get_zone_conditioning_category_dict(climate_zone, building):
 
         if zone_id not in directly_conditioned_zone_ids:
             # Check for any ATRIUM type spaces
+            # Note: any([]) is False
             if any(
                 [
                     lighting_space_type in ["ATRIUM_LOW_MEDIUM", "ATRIUM_HIGH"]
@@ -183,8 +195,11 @@ def get_zone_conditioning_category_dict(climate_zone, building):
                 indirectly_conditioned_zone_ids.append(zone_id)  # zone_1_3
             # No ATRIUM spaces
             else:
-                zone_directly_conditioned_ua = ZERO_UA
-                zone_other_ua = ZERO_UA
+                zone_directly_conditioned_ua = ZERO.UA
+                zone_other_ua = ZERO.UA
+                assert_(
+                    find_all("surfaces[*]", zone), f"zone:{zone_id} has no surfaces"
+                )
                 for surface in zone["surfaces"]:
                     # Calculate the UA for the surface
                     surface_ua = pint_sum(
@@ -192,17 +207,26 @@ def get_zone_conditioning_category_dict(climate_zone, building):
                             subsurface["u_factor"]
                             * (
                                 # Can there be both glazed_area and opaque_area? Guessing not. Then should validate that at a high level.
-                                subsurface.get("glazed_area", ZERO_AREA)
-                                + subsurface.get("opaque_area", ZERO_AREA)
+                                subsurface.get("glazed_area", ZERO.AREA)
+                                + subsurface.get("opaque_area", ZERO.AREA)
                             )
-                            for subsurface in surface["subsurfaces"]
-                        ]
+                            for subsurface in find_all("subsurfaces[*]", surface)
+                        ],
+                        ZERO.U_FACTOR,
                     )
 
                     # Add the surface UA to one of the running totals for the zone
                     # according to whether the surface is adjacent to a directly conditioned
                     # zone or not
+                    assert_(
+                        "adjacent_zone" in surface,
+                        f"surface:{surface['id']} is missing adjacent_zone",
+                    )
                     adjacent_zone_id = surface["adjacent_zone"]
+                    assert_(
+                        "adjacent_to" in surface,
+                        f"surface:{surface['id']} is missing adjacent_to",
+                    )
                     if (
                         surface["adjacent_to"] == "INTERIOR"
                         and adjacent_zone_id in directly_conditioned_zone_ids
@@ -216,14 +240,16 @@ def get_zone_conditioning_category_dict(climate_zone, building):
                 # types of zones
                 if zone_directly_conditioned_ua > zone_other_ua:
                     indirectly_conditioned_zone_ids.append(zone_id)  # zone_1_4
+
     # Taking stock:
     # To this point, we have determined which zones are directly conditioned,
     # semi-heated, or indirectly conditioned.
     # Next we determine whether the zone is residential, non-residential, or mixed.
-    for building_segment in building["building_segments"]:
+    for building_segment in find_all("building_segments[*]", building):
         # Set building_segment_is_residential and building_segment_is_nonresidential flags
         building_segment_is_residential = False
         building_segment_is_nonresidential = False
+
         building_segment_lighting_building_area_type = building_segment.get(
             "lighting_building_area_type"
         )
@@ -236,7 +262,7 @@ def get_zone_conditioning_category_dict(climate_zone, building):
         elif building_segment_lighting_building_area_type is not None:
             building_segment_is_nonresidential = True  # bldg_seg_2
 
-        for zone in building_segment["zones"]:
+        for zone in find_all("zones[*]", building_segment):
             zone_id = zone["id"]
             if (
                 zone_id in directly_conditioned_zone_ids
@@ -245,7 +271,7 @@ def get_zone_conditioning_category_dict(climate_zone, building):
                 # Determine zone_has_residential_spaces and zone_has_nonresidential_spaces flags
                 zone_has_residential_spaces = False
                 zone_has_nonresidential_spaces = False
-                for space in zone["spaces"]:
+                for space in find_all("spaces[*]", zone):
                     space_lighting_space_type = space.get("lighting_space_type")
                     if space_lighting_space_type in [
                         "DORMITORY_LIVING_QUARTERS",
@@ -268,24 +294,24 @@ def get_zone_conditioning_category_dict(climate_zone, building):
                 if zone_has_residential_spaces and zone_has_nonresidential_spaces:
                     zone_conditioning_category_dict[
                         zone_id
-                    ] = ZONE_CONDITIONING_CATEGORY.CONDITIONED_MIXED  # zone_1_1
+                    ] = ZoneConditioningCategory.CONDITIONED_MIXED  # zone_1_1
                 elif zone_has_residential_spaces:
                     zone_conditioning_category_dict[
                         zone_id
-                    ] = ZONE_CONDITIONING_CATEGORY.CONDITIONED_RESIDENTIAL  # zone_1_4
+                    ] = ZoneConditioningCategory.CONDITIONED_RESIDENTIAL  # zone_1_4
                 elif zone_has_nonresidential_spaces:
                     zone_conditioning_category_dict[
                         zone_id
                     ] = (
-                        ZONE_CONDITIONING_CATEGORY.CONDITIONED_NON_RESIDENTIAL
+                        ZoneConditioningCategory.CONDITIONED_NON_RESIDENTIAL
                     )  # zone_1_2, zone_1_3
 
-            # To get here, the zone is neither directly or indirectly conditioned
+            # To get here, the zone is neither directly nor indirectly conditioned
             # Check for semi-heated
             elif zone_id in semiheated_zone_ids:
                 zone_conditioning_category_dict[
                     zone_id
-                ] = ZONE_CONDITIONING_CATEGORY.SEMI_HEATED  # zone_1_5
+                ] = ZoneConditioningCategory.SEMI_HEATED  # zone_1_5
             # Check for interior parking spaces
             elif any(
                 [
@@ -297,38 +323,43 @@ def get_zone_conditioning_category_dict(climate_zone, building):
             ):
                 zone_conditioning_category_dict[
                     zone_id
-                ] = ZONE_CONDITIONING_CATEGORY.UNENCLOSED  # zone_1_6
+                ] = ZoneConditioningCategory.UNENCLOSED  # zone_1_6
             # Check for crawlspace
-            # TODO: We should test that this zone has a volume and throw if not. This will
-            # allow other zones to not have a volume field.
-            elif zone["volume"] / pint_sum(
-                find_all("spaces[*].floor_area", zone)
-            ) < CRAWLSPACE_HEIGHT_THRESHOLD and any(
-                [
-                    get_opaque_surface_type(surface)
-                    in ["HEATED SLAB-ON-GRADE", "UNHEATED SLAB-ON-GRADE"]
-                    and surface["adjacent_to"] == "GROUND"
-                    for surface in zone["surfaces"]
-                ]
-            ):
-                zone_conditioning_category_dict[
-                    zone_id
-                ] = ZONE_CONDITIONING_CATEGORY.UNENCLOSED  # zone_1_7
-            # Check for attic
-            elif any(
-                [
-                    get_opaque_surface_type(surface) == "CEILING"
-                    and surface["adjacent_to"] == "EXTERIOR"
-                    for surface in zone["surfaces"]
-                ]
-            ):
-                zone_conditioning_category_dict[
-                    zone_id
-                ] = ZONE_CONDITIONING_CATEGORY.UNENCLOSED  # zone_1_8
-            # Anything else
             else:
-                zone_conditioning_category_dict[
-                    zone_id
-                ] = ZONE_CONDITIONING_CATEGORY.UNCONDITIONED  # zone_1_9
+                zone_volume = zone.get("volume", ZERO.VOLUME)
+                assert_(zone_volume > ZERO.VOLUME, f"zone:{zone_id} has no volume")
+                zone_floor_area = pint_sum(
+                    find_all("spaces[*].floor_area", zone), ZERO.AREA
+                )
+                assert_(
+                    zone_floor_area > ZERO.AREA, f"zone:{zone_id} has no floor area"
+                )
+                if zone_volume / zone_floor_area < CRAWLSPACE_HEIGHT_THRESHOLD and any(
+                    [
+                        get_opaque_surface_type(surface)
+                        in ["HEATED SLAB-ON-GRADE", "UNHEATED SLAB-ON-GRADE"]
+                        and surface["adjacent_to"] == "GROUND"
+                        for surface in zone["surfaces"]
+                    ]
+                ):
+                    zone_conditioning_category_dict[
+                        zone_id
+                    ] = ZoneConditioningCategory.UNENCLOSED  # zone_1_7
+                # Check for attic
+                elif any(
+                    [
+                        get_opaque_surface_type(surface) == "ROOF"
+                        and surface["adjacent_to"] == "EXTERIOR"
+                        for surface in zone["surfaces"]
+                    ]
+                ):
+                    zone_conditioning_category_dict[
+                        zone_id
+                    ] = ZoneConditioningCategory.UNENCLOSED  # zone_1_8
+                # Anything else
+                else:
+                    zone_conditioning_category_dict[
+                        zone_id
+                    ] = ZoneConditioningCategory.UNCONDITIONED  # zone_1_9
 
     return zone_conditioning_category_dict
