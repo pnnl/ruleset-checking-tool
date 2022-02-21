@@ -31,6 +31,7 @@
                         "id": "Chilled Water Loop 1",
                         "type": "COOLING",
                         "cooling_or_condensing_design_and_control": {
+                            "id": "Cool DAC 1",
                             "design_supply_temperature": 6.666666666666686
                         }
                     }
@@ -67,31 +68,12 @@
                 ],
                 "fluid_loops": [
                     {
-                        "id": "Boiler HW Loop 1",
+                        "id": "Chilled Water Loop 1",
                         "type": "COOLING",
                         "cooling_or_condensing_design_and_control": {
+                            "id": "Cool DAC 1",
                             "design_supply_temperature": 5.000000000000057
                         }
-                    }
-                ],
-                "boilers": [
-                    {
-                        "id": "Boiler 1",
-                        "loop": "Boiler Loop 1"
-                    }
-                ]
-            },
-            "proposed": {
-                "external_fluid_source": [
-                    {
-                        "id": "Purchased HW 1",
-                        "loop": "Purchased HW Loop 1",
-                        "type": "HOT_WATER"
-                    }
-                ],
-                "fluid_loops": [
-                    {
-                        "id": "Purchased HW Loop 1"
                     }
                 ]
             }
@@ -129,6 +111,7 @@
                         "id": "Chilled Water Loop 1",
                         "type": "COOLING",
                         "cooling_or_condensing_design_and_control": {
+                            "id": "Cool DAC 1",
                             "design_return_temperature": 13.333333333333371
                         }
                     }
@@ -168,16 +151,9 @@
                         "id": "Chilled Water Loop 1",
                         "type": "COOLING",
                         "cooling_or_condensing_design_and_control": {
+                            "id": "Cool DAC 1",
                             "design_return_temperature": 10.000000000000057
                         }
-                    }
-                ],
-                "pumps": [
-                    {},
-                    {},
-                    {
-                        "id": "HW Pump 3",
-                        "loop_or_piping": "Purchased HW Loop 1"
                     }
                 ]
             }
@@ -215,6 +191,7 @@
                         "id": "Chilled Water Loop 1",
                         "type": "COOLING",
                         "cooling_or_condensing_design_and_control": {
+                            "id": "Cool DAC 1",
                             "temperature_reset_type": "OUTSIDE_AIR_RESET"
                         }
                     }
@@ -254,6 +231,7 @@
                         "id": "Chilled Water Loop 1",
                         "type": "COOLING",
                         "cooling_or_condensing_design_and_control": {
+                            "id": "Cool DAC 1",
                             "temperature_reset_type": "NO_RESET"
                         }
                     }
@@ -293,6 +271,7 @@
                         "id": "Chilled Water Loop 1",
                         "type": "COOLING",
                         "cooling_or_condensing_design_and_control": {
+                            "id": "Cool DAC 1",
                             "temperature_reset_type": "OUTSIDE_AIR_RESET"
                         }
                     }
@@ -332,6 +311,7 @@
                         "id": "Chilled Water Loop 1",
                         "type": "COOLING",
                         "cooling_or_condensing_design_and_control": {
+                            "id": "Cool DAC 1",
                             "temperature_reset_type": "OUTSIDE_AIR_RESET"
                         }
                     }
@@ -371,6 +351,7 @@
                         "id": "Chilled Water Loop 1",
                         "type": "COOLING",
                         "cooling_or_condensing_design_and_control": {
+                            "id": "Cool DAC 1",
                             "temperature_reset_type": "OUTSIDE_AIR_RESET"
                         }
                     }
@@ -410,6 +391,7 @@
                         "id": "Chilled Water Loop 1",
                         "type": "COOLING",
                         "cooling_or_condensing_design_and_control": {
+                            "id": "Cool DAC 1",
                             "temperature_reset_type": "OUTSIDE_AIR_RESET"
                         }
                     }
@@ -449,6 +431,7 @@
                         "id": "Chilled Water Loop 1",
                         "type": "COOLING",
                         "cooling_or_condensing_design_and_control": {
+                            "id": "Cool DAC 1",
                             "temperature_reset_type": "OUTSIDE_AIR_RESET"
                         }
                     }
@@ -501,7 +484,7 @@
                                 ],
                                 "heating_ventilation_air_conditioning_systems": [
                                     {
-                                        "id": "System 11",
+                                        "id": "System Type 11",
                                         "cooling_system": {
                                             "id": "CHW Coil 1",
                                             "cooling_system_type": "FLUID_LOOP"
@@ -565,18 +548,16 @@
                         "id": "Chiller Loop 1",
                         "type": "COOLING",
                         "cooling_or_condensing_design_and_control": {
+                            "id": "Cool DAC 1",
                             "temperature_reset_type": "LOAD_RESET"
                         }
+                    },
+                    {
+                        "id": "HEATING"
                     }
                 ]
             }
-        },
-        "fluid_loops": [
-            {},
-            {
-                "id": "HEATING"
-            }
-        ]
+        }
     },
     "rule-22-5-b": {
         "Section": 22,
@@ -623,7 +604,7 @@
                                 ],
                                 "heating_ventilation_air_conditioning_systems": [
                                     {
-                                        "id": "System 11",
+                                        "id": "System Type 11",
                                         "cooling_system": {
                                             "id": "CHW Coil 1",
                                             "cooling_system_type": "FLUID_LOOP"
@@ -687,18 +668,16 @@
                         "id": "Chiller Loop 1",
                         "type": "COOLING",
                         "cooling_or_condensing_design_and_control": {
+                            "id": "Cool DAC 1",
                             "temperature_reset_type": "NO_RESET"
                         }
+                    },
+                    {
+                        "id": "HEATING"
                     }
                 ]
             }
-        },
-        "fluid_loops": [
-            {},
-            {
-                "id": "HEATING"
-            }
-        ]
+        }
     },
     "rule-22-6-a": {
         "Section": 22,
@@ -745,7 +724,7 @@
                                 ],
                                 "heating_ventilation_air_conditioning_systems": [
                                     {
-                                        "id": "System 11",
+                                        "id": "System Type 11",
                                         "cooling_system": {
                                             "id": "CHW Coil 1",
                                             "cooling_system_type": "FLUID_LOOP"
@@ -809,18 +788,16 @@
                         "id": "Chiller Loop 1",
                         "type": "COOLING",
                         "cooling_or_condensing_design_and_control": {
+                            "id": "Cool DAC 1",
                             "outdoor_high_for_loop_supply_temperature_reset": 12.222222222222285
                         }
+                    },
+                    {
+                        "id": "HEATING"
                     }
                 ]
             }
-        },
-        "fluid_loops": [
-            {},
-            {
-                "id": "HEATING"
-            }
-        ]
+        }
     },
     "rule-22-6-b": {
         "Section": 22,
@@ -867,7 +844,7 @@
                                 ],
                                 "heating_ventilation_air_conditioning_systems": [
                                     {
-                                        "id": "System 11",
+                                        "id": "System Type 11",
                                         "cooling_system": {
                                             "id": "CHW Coil 1",
                                             "cooling_system_type": "FLUID_LOOP"
@@ -931,18 +908,16 @@
                         "id": "Chiller Loop 1",
                         "type": "COOLING",
                         "cooling_or_condensing_design_and_control": {
+                            "id": "Cool DAC 1",
                             "outdoor_high_for_loop_supply_temperature_reset": 10.000000000000057
                         }
+                    },
+                    {
+                        "id": "HEATING"
                     }
                 ]
             }
-        },
-        "fluid_loops": [
-            {},
-            {
-                "id": "HEATING"
-            }
-        ]
+        }
     },
     "rule-22-7-a": {
         "Section": 22,
@@ -1349,7 +1324,11 @@
                         "child_loops": [
                             {
                                 "id": "Secondary Water Loop 1",
-                                "type": "COOLING"
+                                "type": "COOLING",
+                                "cooling_or_condensing_design_and_control": {
+                                    "id": "Cool DAC 1",
+                                    "minimum_flow_fraction": 0.25
+                                }
                             }
                         ]
                     }
@@ -1395,7 +1374,11 @@
                         "child_loops": [
                             {
                                 "id": "Secondary Water Loop 1",
-                                "type": "COOLING"
+                                "type": "COOLING",
+                                "cooling_or_condensing_design_and_control": {
+                                    "id": "Cool DAC 1",
+                                    "minimum_flow_fraction": 0.4
+                                }
                             }
                         ]
                     }
@@ -1704,6 +1687,7 @@
                         "id": "Chilled Water Loop 1",
                         "type": "COOLING",
                         "cooling_or_condensing_design_and_control": {
+                            "id": "Cool DAC 1",
                             "temperature_reset_type": "NO_RESET"
                         }
                     }
@@ -1742,6 +1726,7 @@
                         "id": "Chilled Water Loop 1",
                         "type": "COOLING",
                         "cooling_or_condensing_design_and_control": {
+                            "id": "Cool DAC 1",
                             "temperature_reset_type": "LOAD_RESET"
                         }
                     }
@@ -2256,6 +2241,12 @@
                         "type": "CLOSED_CIRCUIT_COOLING_TOWER",
                         "design_wetbulb_temperature": 23.888888888888914
                     }
+                ],
+                "fluid_loops": [
+                    {
+                        "id": "Condensing Water Loop 1",
+                        "type": "CONDENSER"
+                    }
                 ]
             }
         }
@@ -2286,6 +2277,12 @@
                         "type": "CLOSED_CIRCUIT_COOLING_TOWER",
                         "design_wetbulb_temperature": 11.111111111111143
                     }
+                ],
+                "fluid_loops": [
+                    {
+                        "id": "Condensing Water Loop 1",
+                        "type": "CONDENSER"
+                    }
                 ]
             }
         }
@@ -2315,6 +2312,2323 @@
                         "loop": "Condensing Water Loop 1",
                         "type": "CLOSED_CIRCUIT_COOLING_TOWER",
                         "design_wetbulb_temperature": 33.33333333333337
+                    }
+                ],
+                "fluid_loops": [
+                    {
+                        "id": "Condensing Water Loop 1",
+                        "type": "CONDENSER"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-22-16-a": {
+        "Section": 22,
+        "Rule": 16,
+        "Test": "a",
+        "test_description": "Heat rejection Device Approach is calculated correctly?",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "22-16",
+            "ruleset_reference": "-",
+            "rule_description": "Heat Rejection Device Approach calaculated correctly (T/F)",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": "Rule 36 is true",
+            "mandatory_rule": "Yes"
+        },
+        "rmr_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "heat_rejections": [
+                    {
+                        "id": "Cooling Tower 1",
+                        "loop": "Condensing Water Loop 1",
+                        "type": "CLOSED_CIRCUIT_COOLING_TOWER",
+                        "design_wetbulb_temperature": 23.000000000000057,
+                        "range": 5.5555555555556
+                    }
+                ],
+                "fluid_loops": [
+                    {
+                        "id": "Condensing Water Loop 1",
+                        "type": "CONDENSER"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-22-16-b": {
+        "Section": 22,
+        "Rule": 16,
+        "Test": "b",
+        "test_description": "Heat rejection Device Approach is not calculated correctly?",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "22-16",
+            "ruleset_reference": "-",
+            "rule_description": "Heat Rejection Device Approach calaculated correctly (T/F)",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": "Rule 36 is true",
+            "mandatory_rule": "Yes"
+        },
+        "rmr_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "heat_rejections": [
+                    {
+                        "id": "Cooling Tower 1",
+                        "loop": "Condensing Water Loop 1",
+                        "type": "CLOSED_CIRCUIT_COOLING_TOWER",
+                        "design_wetbulb_temperature": 23.000000000000057,
+                        "range": 4.444444444444457
+                    }
+                ],
+                "fluid_loops": [
+                    {
+                        "id": "Condensing Water Loop 1",
+                        "type": "CONDENSER"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-22-17-a": {
+        "Section": 22,
+        "Rule": 17,
+        "Test": "a",
+        "test_description": "Heat Rejection Supply Temperature is calcualted correctly?",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "22-17",
+            "ruleset_reference": "-",
+            "rule_description": "Heat Rejection Design Supply Temperature is correct ",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": "Rule 36 is true",
+            "mandatory_rule": "Yes"
+        },
+        "rmr_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "heat_rejections": [
+                    {
+                        "id": "Cooling Tower 1",
+                        "loop": "Condensing Water Loop 1",
+                        "type": "CLOSED_CIRCUIT_COOLING_TOWER",
+                        "design_supply_temperature": 29.444444444444457,
+                        "design_wetbulb_temperature": 23.000000000000057
+                    }
+                ],
+                "fluid_loops": [
+                    {
+                        "id": "Condensing Water Loop 1",
+                        "type": "CONDENSER"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-22-17-b": {
+        "Section": 22,
+        "Rule": 17,
+        "Test": "b",
+        "test_description": "Heat Rejection Supply Temperature is not calcualted correctly?",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "22-17",
+            "ruleset_reference": "-",
+            "rule_description": "Heat Rejection Design Supply Temperature is correct ",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": "Rule 36 is true",
+            "mandatory_rule": "Yes"
+        },
+        "rmr_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "heat_rejections": [
+                    {
+                        "id": "Cooling Tower 1",
+                        "loop": "Condensing Water Loop 1",
+                        "type": "CLOSED_CIRCUIT_COOLING_TOWER",
+                        "design_supply_temperature": 28.33333333333337,
+                        "design_wetbulb_temperature": 23.000000000000057
+                    }
+                ],
+                "fluid_loops": [
+                    {
+                        "id": "Condensing Water Loop 1",
+                        "type": "CONDENSER"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-22-18-a": {
+        "Section": 22,
+        "Rule": 18,
+        "Test": "a",
+        "test_description": "Heat rejection fan power equals 38 gpm per hp?",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "22-18",
+            "ruleset_reference": "-",
+            "rule_description": "Heat Rejection fan power = 3.47 L/s-kW (38.2 gpm/hp)",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": "Rule 36 is true",
+            "mandatory_rule": "No"
+        },
+        "rmr_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "heat_rejections": [
+                    {
+                        "id": "Cooling Tower 1",
+                        "loop": "Condensing Water Loop 1",
+                        "type": "CLOSED_CIRCUIT_COOLING_TOWER",
+                        "design_water_flowrate": 3.217250000000001,
+                        "fan_power": 1000
+                    }
+                ],
+                "fluid_loops": [
+                    {
+                        "id": "Condensing Water Loop 1",
+                        "type": "CONDENSER"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-22-18-b": {
+        "Section": 22,
+        "Rule": 18,
+        "Test": "b",
+        "test_description": "Heat rejection fan power does not equal 38 gpm per hp?",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "22-18",
+            "ruleset_reference": "-",
+            "rule_description": "Heat Rejection fan power = 3.47 L/s-kW (38.2 gpm/hp)",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": "Rule 36 is true",
+            "mandatory_rule": "No"
+        },
+        "rmr_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "heat_rejections": [
+                    {
+                        "id": "Cooling Tower 1",
+                        "loop": "Condensing Water Loop 1",
+                        "type": "CLOSED_CIRCUIT_COOLING_TOWER",
+                        "design_water_flowrate": 2.5233333333333343,
+                        "fan_power": 1000
+                    }
+                ],
+                "fluid_loops": [
+                    {
+                        "id": "Condensing Water Loop 1",
+                        "type": "CONDENSER"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-22-19-a": {
+        "Section": 22,
+        "Rule": 19,
+        "Test": "a",
+        "test_description": "Heat rejection fan speed control equals VFD",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "22-19",
+            "ruleset_reference": "-",
+            "rule_description": "Heat Rejection fan speed control = VFD?",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": "Rule 36 is true",
+            "mandatory_rule": "No"
+        },
+        "rmr_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "heat_rejections": [
+                    {
+                        "id": "Cooling Tower 1",
+                        "loop": "Condensing Water Loop 1",
+                        "type": "CLOSED_CIRCUIT_COOLING_TOWER",
+                        "fan_speed_control": "VARIABLE_SPEED"
+                    }
+                ],
+                "fluid_loops": [
+                    {
+                        "id": "Condensing Water Loop 1",
+                        "type": "CONDENSER"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-22-19-b": {
+        "Section": 22,
+        "Rule": 19,
+        "Test": "b",
+        "test_description": "Heat rejection fan speed control does not equal VFD",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "22-19",
+            "ruleset_reference": "-",
+            "rule_description": "Heat Rejection fan speed control = VFD?",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": "Rule 36 is true",
+            "mandatory_rule": "No"
+        },
+        "rmr_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "heat_rejections": [
+                    {
+                        "id": "Cooling Tower 1",
+                        "loop": "Condensing Water Loop 1",
+                        "type": "CLOSED_CIRCUIT_COOLING_TOWER",
+                        "fan_speed_control": "TWO_SPEED"
+                    }
+                ],
+                "fluid_loops": [
+                    {
+                        "id": "Condensing Water Loop 1",
+                        "type": "CONDENSER"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-22-20-a": {
+        "Section": 22,
+        "Rule": 20,
+        "Test": "a",
+        "test_description": "Heat rejection loop temperature reset equals \"load reset\"",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "22-20",
+            "ruleset_reference": "-",
+            "rule_description": "Heat Rejection Loop temperature reset = Load Reset ",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": "none",
+            "mandatory_rule": "Yes"
+        },
+        "rmr_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "heat_rejections": [
+                    {
+                        "id": "Cooling Tower 1",
+                        "loop": "Condensing Water Loop 1",
+                        "type": "CLOSED_CIRCUIT_COOLING_TOWER",
+                        "reset_type": "LOAD_RESET"
+                    }
+                ],
+                "fluid_loops": [
+                    {
+                        "id": "Condensing Water Loop 1",
+                        "type": "CONDENSER"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-22-20-b": {
+        "Section": 22,
+        "Rule": 20,
+        "Test": "b",
+        "test_description": "Heat rejection loop temperature reset does not equal \"load reset\"",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "22-20",
+            "ruleset_reference": "-",
+            "rule_description": "Heat Rejection Loop temperature reset = Load Reset ",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": "none",
+            "mandatory_rule": "Yes"
+        },
+        "rmr_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "heat_rejections": [
+                    {
+                        "id": "Cooling Tower 1",
+                        "loop": "Condensing Water Loop 1",
+                        "type": "CLOSED_CIRCUIT_COOLING_TOWER",
+                        "reset_type": "OTHER"
+                    }
+                ],
+                "fluid_loops": [
+                    {
+                        "id": "Condensing Water Loop 1",
+                        "type": "CONDENSER"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-22-21-a": {
+        "Section": 22,
+        "Rule": 21,
+        "Test": "a",
+        "test_description": "Heat rejection loop minimum reset temperatrue equals Table G3.1.3.11",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "22-21",
+            "ruleset_reference": "-",
+            "rule_description": "Miinimum condenser water reset temp is per Table G3.1.3.11?",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": "Rule 23 is true",
+            "mandatory_rule": "Yes"
+        },
+        "rmr_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "weather": {
+                    "climate_zone": "CZ5C"
+                },
+                "heat_rejections": [
+                    {
+                        "id": "Cooling Tower 1",
+                        "loop": "Condensing Water Loop 1",
+                        "type": "CLOSED_CIRCUIT_COOLING_TOWER",
+                        "minimum_reset_temperature": 18.33333333333337
+                    }
+                ],
+                "fluid_loops": [
+                    {
+                        "id": "Condensing Water Loop 1",
+                        "type": "CONDENSER"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-22-21-b": {
+        "Section": 22,
+        "Rule": 21,
+        "Test": "b",
+        "test_description": "Heat rejection loop minimum reset temperatrue does not equal Table G3.1.3.11",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "22-21",
+            "ruleset_reference": "-",
+            "rule_description": "Miinimum condenser water reset temp is per Table G3.1.3.11?",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": "Rule 23 is true",
+            "mandatory_rule": "Yes"
+        },
+        "rmr_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "weather": {
+                    "climate_zone": "CZ3C"
+                },
+                "heat_rejections": [
+                    {
+                        "id": "Cooling Tower 1",
+                        "loop": "Condensing Water Loop 1",
+                        "type": "CLOSED_CIRCUIT_COOLING_TOWER",
+                        "minimum_reset_temperature": 21.111111111111143
+                    }
+                ],
+                "fluid_loops": [
+                    {
+                        "id": "Condensing Water Loop 1",
+                        "type": "CONDENSER"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-22-21-c": {
+        "Section": 22,
+        "Rule": 21,
+        "Test": "c",
+        "test_description": "Heat rejection loop minimum reset temperatrue does not equal Table G3.1.3.11",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "22-21",
+            "ruleset_reference": "-",
+            "rule_description": "Miinimum condenser water reset temp is per Table G3.1.3.11?",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": "Rule 23 is true",
+            "mandatory_rule": "Yes"
+        },
+        "rmr_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "weather": {
+                    "climate_zone": "CZ4A"
+                },
+                "heat_rejections": [
+                    {
+                        "id": "Cooling Tower 1",
+                        "loop": "Condensing Water Loop 1",
+                        "type": "CLOSED_CIRCUIT_COOLING_TOWER",
+                        "minimum_reset_temperature": 23.888888888888914
+                    }
+                ],
+                "fluid_loops": [
+                    {
+                        "id": "Condensing Water Loop 1",
+                        "type": "CONDENSER"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-22-21-d": {
+        "Section": 22,
+        "Rule": 21,
+        "Test": "d",
+        "test_description": "Heat rejection loop minimum reset temperatrue does not equal Table G3.1.3.11",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "22-21",
+            "ruleset_reference": "-",
+            "rule_description": "Miinimum condenser water reset temp is per Table G3.1.3.11?",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": "Rule 23 is true",
+            "mandatory_rule": "Yes"
+        },
+        "rmr_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "weather": {
+                    "climate_zone": "CZ1A"
+                },
+                "heat_rejections": [
+                    {
+                        "id": "Cooling Tower 1",
+                        "loop": "Condensing Water Loop 1",
+                        "type": "CLOSED_CIRCUIT_COOLING_TOWER",
+                        "minimum_reset_temperature": 26.666666666666686
+                    }
+                ],
+                "fluid_loops": [
+                    {
+                        "id": "Condensing Water Loop 1",
+                        "type": "CONDENSER"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-22-21-e": {
+        "Section": 22,
+        "Rule": 21,
+        "Test": "e",
+        "test_description": "Heat rejection loop minimum reset temperatrue does not equal Table G3.1.3.11",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "22-21",
+            "ruleset_reference": "-",
+            "rule_description": "Miinimum condenser water reset temp is per Table G3.1.3.11?",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": "Rule 23 is true",
+            "mandatory_rule": "Yes"
+        },
+        "rmr_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "weather": {
+                    "climate_zone": "CZ5C"
+                },
+                "heat_rejections": [
+                    {
+                        "id": "Cooling Tower 1",
+                        "loop": "Condensing Water Loop 1",
+                        "type": "CLOSED_CIRCUIT_COOLING_TOWER",
+                        "minimum_reset_temperature": 26.666666666666686
+                    }
+                ],
+                "fluid_loops": [
+                    {
+                        "id": "Condensing Water Loop 1",
+                        "type": "CONDENSER"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-22-22-a": {
+        "Section": 22,
+        "Rule": 22,
+        "Test": "a",
+        "test_description": "Chiller type is correct per Table G3.1.3.7?",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "22-22",
+            "ruleset_reference": "-",
+            "rule_description": "Chiller Type is correct per Table G3.1.3.7?",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": "none",
+            "mandatory_rule": "Yes"
+        },
+        "rmr_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "chillers": [
+                    {
+                        "id": "Chilled Water  1",
+                        "cooling_loop": "Chilled Water Loop 1",
+                        "design_capacity": 2106683.0,
+                        "compressor_type": "SCREW"
+                    }
+                ],
+                "heat_rejections": [
+                    {
+                        "id": "Cooling Tower 1",
+                        "loop": "Condensing Water Loop 1",
+                        "type": "CLOSED_CIRCUIT_COOLING_TOWER"
+                    }
+                ],
+                "fluid_loops": [
+                    {
+                        "id": "Chilled Water Loop 1",
+                        "type": "COOLING",
+                        "child_loops": [
+                            {
+                                "id": "Condensing Water Loop 1",
+                                "type": "CONDENSER"
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    },
+    "rule-22-22-b": {
+        "Section": 22,
+        "Rule": 22,
+        "Test": "b",
+        "test_description": "Chiller type is correct per Table G3.1.3.7?",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "22-22",
+            "ruleset_reference": "-",
+            "rule_description": "Chiller Type is correct per Table G3.1.3.7?",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": "none",
+            "mandatory_rule": "Yes"
+        },
+        "rmr_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "chillers": [
+                    {
+                        "id": "Chilled Water  1",
+                        "cooling_loop": "Chilled Water Loop 1",
+                        "design_capacity": 2110200.0,
+                        "compressor_type": "CENTRIFUGAL"
+                    }
+                ],
+                "heat_rejections": [
+                    {
+                        "id": "Cooling Tower 1",
+                        "loop": "Condensing Water Loop 1",
+                        "type": "CLOSED_CIRCUIT_COOLING_TOWER"
+                    }
+                ],
+                "fluid_loops": [
+                    {
+                        "id": "Chilled Water Loop 1",
+                        "type": "COOLING",
+                        "child_loops": [
+                            {
+                                "id": "Condensing Water Loop 1",
+                                "type": "CONDENSER"
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    },
+    "rule-22-22-c": {
+        "Section": 22,
+        "Rule": 22,
+        "Test": "c",
+        "test_description": "Chiller type is not correct per Table G3.1.3.7?",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "22-22",
+            "ruleset_reference": "-",
+            "rule_description": "Chiller Type is correct per Table G3.1.3.7?",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": "none",
+            "mandatory_rule": "Yes"
+        },
+        "rmr_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "chillers": [
+                    {
+                        "id": "Chilled Water  1",
+                        "cooling_loop": "Chilled Water Loop 1",
+                        "design_capacity": 1934350.0,
+                        "compressor_type": "CENTRIFUGAL"
+                    }
+                ],
+                "heat_rejections": [
+                    {
+                        "id": "Cooling Tower 1",
+                        "loop": "Condensing Water Loop 1",
+                        "type": "CLOSED_CIRCUIT_COOLING_TOWER"
+                    }
+                ],
+                "fluid_loops": [
+                    {
+                        "id": "Chilled Water Loop 1",
+                        "type": "COOLING",
+                        "child_loops": [
+                            {
+                                "id": "Condensing Water Loop 1",
+                                "type": "CONDENSER"
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    },
+    "rule-22-22-d": {
+        "Section": 22,
+        "Rule": 22,
+        "Test": "d",
+        "test_description": "Chiller type is not correct per Table G3.1.3.7?",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "22-22",
+            "ruleset_reference": "-",
+            "rule_description": "Chiller Type is correct per Table G3.1.3.7?",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": "none",
+            "mandatory_rule": "Yes"
+        },
+        "rmr_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "chillers": [
+                    {
+                        "id": "Chilled Water  1",
+                        "cooling_loop": "Chilled Water Loop 1",
+                        "design_capacity": 2461900.0,
+                        "compressor_type": "SCREW"
+                    }
+                ],
+                "heat_rejections": [
+                    {
+                        "id": "Cooling Tower 1",
+                        "loop": "Condensing Water Loop 1",
+                        "type": "CLOSED_CIRCUIT_COOLING_TOWER"
+                    }
+                ],
+                "fluid_loops": [
+                    {
+                        "id": "Chilled Water Loop 1",
+                        "type": "COOLING",
+                        "child_loops": [
+                            {
+                                "id": "Condensing Water Loop 1",
+                                "type": "CONDENSER"
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    },
+    "rule-22-23-a": {
+        "Section": 22,
+        "Rule": 23,
+        "Test": "a",
+        "test_description": "Chiller efficiency is correct based on type and capacity",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "22-23",
+            "ruleset_reference": "-",
+            "rule_description": "Chiller efficiency is correct per Table G3.5.3",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": "none",
+            "mandatory_rule": "Yes"
+        },
+        "rmr_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "chillers": [
+                    {
+                        "id": "Chilled Water  1",
+                        "cooling_loop": "Chilled Water Loop 1",
+                        "design_capacity": 524033.0,
+                        "full_load_efficiency": 0.22462325845891384,
+                        "compressor_type": "SCREW"
+                    }
+                ],
+                "heat_rejections": [
+                    {
+                        "id": "Cooling Tower 1",
+                        "loop": "Condensing Water Loop 1",
+                        "type": "CLOSED_CIRCUIT_COOLING_TOWER"
+                    }
+                ],
+                "fluid_loops": [
+                    {
+                        "id": "Chilled Water Loop 1",
+                        "type": "COOLING",
+                        "child_loops": [
+                            {
+                                "id": "Condensing Water Loop 1",
+                                "type": "CONDENSER"
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    },
+    "rule-22-23-b": {
+        "Section": 22,
+        "Rule": 23,
+        "Test": "b",
+        "test_description": "Chiller efficiency is correct based on type and capacity",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "22-23",
+            "ruleset_reference": "-",
+            "rule_description": "Chiller efficiency is correct per Table G3.5.3",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": "none",
+            "mandatory_rule": "Yes"
+        },
+        "rmr_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "chillers": [
+                    {
+                        "id": "Chilled Water  1",
+                        "cooling_loop": "Chilled Water Loop 1",
+                        "design_capacity": 1051583.0,
+                        "full_load_efficiency": 0.20415126528291155,
+                        "compressor_type": "SCREW"
+                    }
+                ],
+                "heat_rejections": [
+                    {
+                        "id": "Cooling Tower 1",
+                        "loop": "Condensing Water Loop 1",
+                        "type": "CLOSED_CIRCUIT_COOLING_TOWER"
+                    }
+                ],
+                "fluid_loops": [
+                    {
+                        "id": "Chilled Water Loop 1",
+                        "type": "COOLING",
+                        "child_loops": [
+                            {
+                                "id": "Condensing Water Loop 1",
+                                "type": "CONDENSER"
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    },
+    "rule-22-23-c": {
+        "Section": 22,
+        "Rule": 23,
+        "Test": "c",
+        "test_description": "Chiller efficiency is correct based on type and capacity",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "22-23",
+            "ruleset_reference": "-",
+            "rule_description": "Chiller efficiency is correct per Table G3.5.3",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": "none",
+            "mandatory_rule": "Yes"
+        },
+        "rmr_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "chillers": [
+                    {
+                        "id": "Chilled Water  1",
+                        "cooling_loop": "Chilled Water Loop 1",
+                        "design_capacity": 1055100.0,
+                        "full_load_efficiency": 0.14955928348023884,
+                        "compressor_type": "CENTRIFUGAL"
+                    }
+                ],
+                "heat_rejections": [
+                    {
+                        "id": "Cooling Tower 1",
+                        "loop": "Condensing Water Loop 1",
+                        "type": "CLOSED_CIRCUIT_COOLING_TOWER"
+                    }
+                ],
+                "fluid_loops": [
+                    {
+                        "id": "Chilled Water Loop 1",
+                        "type": "COOLING",
+                        "child_loops": [
+                            {
+                                "id": "Condensing Water Loop 1",
+                                "type": "CONDENSER"
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    },
+    "rule-22-23-d": {
+        "Section": 22,
+        "Rule": 23,
+        "Test": "d",
+        "test_description": "Chiller efficiency is not correct based on type and capacity",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "22-23",
+            "ruleset_reference": "-",
+            "rule_description": "Chiller efficiency is correct per Table G3.5.3",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": "none",
+            "mandatory_rule": "Yes"
+        },
+        "rmr_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "chillers": [
+                    {
+                        "id": "Chilled Water  1",
+                        "cooling_loop": "Chilled Water Loop 1",
+                        "design_capacity": 1055100.0,
+                        "full_load_efficiency": 0.20415126528291155,
+                        "compressor_type": "CENTRIFUGAL"
+                    }
+                ],
+                "heat_rejections": [
+                    {
+                        "id": "Cooling Tower 1",
+                        "loop": "Condensing Water Loop 1",
+                        "type": "CLOSED_CIRCUIT_COOLING_TOWER"
+                    }
+                ],
+                "fluid_loops": [
+                    {
+                        "id": "Chilled Water Loop 1",
+                        "type": "COOLING",
+                        "child_loops": [
+                            {
+                                "id": "Condensing Water Loop 1",
+                                "type": "CONDENSER"
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    },
+    "rule-22-23-e": {
+        "Section": 22,
+        "Rule": 23,
+        "Test": "e",
+        "test_description": "Chiller efficiency is not correct based on type and capacity",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "22-23",
+            "ruleset_reference": "-",
+            "rule_description": "Chiller efficiency is correct per Table G3.5.3",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": "none",
+            "mandatory_rule": "Yes"
+        },
+        "rmr_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "chillers": [
+                    {
+                        "id": "Chilled Water  1",
+                        "cooling_loop": "Chilled Water Loop 1",
+                        "design_capacity": 1051583.0,
+                        "full_load_efficiency": 0.16377594540801818,
+                        "compressor_type": "SCREW"
+                    }
+                ],
+                "heat_rejections": [
+                    {
+                        "id": "Cooling Tower 1",
+                        "loop": "Condensing Water Loop 1",
+                        "type": "CLOSED_CIRCUIT_COOLING_TOWER"
+                    }
+                ],
+                "fluid_loops": [
+                    {
+                        "id": "Chilled Water Loop 1",
+                        "type": "COOLING",
+                        "child_loops": [
+                            {
+                                "id": "Condensing Water Loop 1",
+                                "type": "CONDENSER"
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    },
+    "rule-22-23-f": {
+        "Section": 22,
+        "Rule": 23,
+        "Test": "f",
+        "test_description": "Chiller efficiency is not correct based on type and capacity",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "22-23",
+            "ruleset_reference": "-",
+            "rule_description": "Chiller efficiency is correct per Table G3.5.3",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": "none",
+            "mandatory_rule": "Yes"
+        },
+        "rmr_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "chillers": [
+                    {
+                        "id": "Chilled Water  1",
+                        "cooling_loop": "Chilled Water Loop 1",
+                        "design_capacity": 524033.0,
+                        "full_load_efficiency": 0.1922092692635769,
+                        "compressor_type": "SCREW"
+                    }
+                ],
+                "heat_rejections": [
+                    {
+                        "id": "Cooling Tower 1",
+                        "loop": "Condensing Water Loop 1",
+                        "type": "CLOSED_CIRCUIT_COOLING_TOWER"
+                    }
+                ],
+                "fluid_loops": [
+                    {
+                        "id": "Chilled Water Loop 1",
+                        "type": "COOLING",
+                        "child_loops": [
+                            {
+                                "id": "Condensing Water Loop 1",
+                                "type": "CONDENSER"
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    },
+    "rule-22-24-a": {
+        "Section": 22,
+        "Rule": 24,
+        "Test": "a",
+        "test_description": "Chiller has an associated primary pump",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "22-24",
+            "ruleset_reference": "-",
+            "rule_description": "Chiller has an associated primary pump? ",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": "none",
+            "mandatory_rule": "Yes"
+        },
+        "rmr_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "chillers": [
+                    {
+                        "id": "Chilled Water  1",
+                        "cooling_loop": "Chilled Water Loop 1"
+                    }
+                ],
+                "pumps": [
+                    {
+                        "id": "Primary Pump 1",
+                        "loop_or_piping": "Chiller Loop 1"
+                    }
+                ],
+                "fluid_loops": [
+                    {
+                        "id": "Chilled Water Loop 1",
+                        "type": "COOLING"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-22-24-b": {
+        "Section": 22,
+        "Rule": 24,
+        "Test": "b",
+        "test_description": "chiller does not have an associated primary pump",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "22-24",
+            "ruleset_reference": "-",
+            "rule_description": "Chiller has an associated primary pump? ",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": "none",
+            "mandatory_rule": "Yes"
+        },
+        "rmr_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "chillers": [
+                    {
+                        "id": "Chilled Water  1",
+                        "cooling_loop": "Chilled Water Loop 1"
+                    }
+                ],
+                "fluid_loops": [
+                    {
+                        "id": "Chilled Water Loop 1",
+                        "type": "COOLING"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-22-24-c": {
+        "Section": 22,
+        "Rule": 24,
+        "Test": "c",
+        "test_description": "chiller does not have an associated primary pump",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "22-24",
+            "ruleset_reference": "-",
+            "rule_description": "Chiller has an associated primary pump? ",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": "none",
+            "mandatory_rule": "Yes"
+        },
+        "rmr_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "chillers": [
+                    {
+                        "id": "Chilled Water  1",
+                        "cooling_loop": "Chilled Water Loop 1"
+                    }
+                ],
+                "pumps": [
+                    {
+                        "id": "Secondary Pump 1",
+                        "loop_or_piping": "Secondary Water Loop 1"
+                    }
+                ],
+                "fluid_loops": [
+                    {
+                        "id": "Chilled Water Loop 1",
+                        "type": "COOLING",
+                        "child_loops": [
+                            {
+                                "id": "Secondary Water Loop 1",
+                                "type": "COOLING"
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    },
+    "rule-22-25-a": {
+        "Section": 22,
+        "Rule": 25,
+        "Test": "a",
+        "test_description": "primary pump speed control equals constant",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "22-25",
+            "ruleset_reference": "-",
+            "rule_description": "Primary pump sepeed control = constant",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": "rule 27 is true",
+            "mandatory_rule": "Yes"
+        },
+        "rmr_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "chillers": [
+                    {
+                        "id": "Chilled Water  1",
+                        "cooling_loop": "Chilled Water Loop 1"
+                    }
+                ],
+                "pumps": [
+                    {
+                        "id": "Primary Pump 1",
+                        "loop_or_piping": "Chiller Loop 1",
+                        "speed_control": "FIXED_SPEED"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-22-25-b": {
+        "Section": 22,
+        "Rule": 25,
+        "Test": "b",
+        "test_description": "pimary pump speed control does not equal constant",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "22-25",
+            "ruleset_reference": "-",
+            "rule_description": "Primary pump sepeed control = constant",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": "rule 27 is true",
+            "mandatory_rule": "Yes"
+        },
+        "rmr_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "chillers": [
+                    {
+                        "id": "Chilled Water  1",
+                        "cooling_loop": "Chilled Water Loop 1"
+                    }
+                ],
+                "pumps": [
+                    {
+                        "id": "Primary Pump 1",
+                        "loop_or_piping": "Chiller Loop 1",
+                        "speed_control": "VARIABLE_SPEED"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-22-26-a": {
+        "Section": 22,
+        "Rule": 26,
+        "Test": "a",
+        "test_description": "primary pump power equals 9W per gpm",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "22-26",
+            "ruleset_reference": "-",
+            "rule_description": "Primary pump power = 9W/gpm ",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": "Rule 27 is true and Loop doesn't serve System 11",
+            "mandatory_rule": "Yes"
+        },
+        "rmr_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "chillers": [
+                    {
+                        "id": "Chilled Water  1",
+                        "cooling_loop": "Chilled Water Loop 1"
+                    }
+                ],
+                "pumps": [
+                    {
+                        "id": "Primary Pump 1",
+                        "loop_or_piping": "Chiller Loop 1",
+                        "design_electric_power": 900,
+                        "design_flow": 6.308333333333335
+                    }
+                ]
+            }
+        }
+    },
+    "rule-22-26-b": {
+        "Section": 22,
+        "Rule": 26,
+        "Test": "b",
+        "test_description": "Primary pump power does not equal 9W per gpm",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "22-26",
+            "ruleset_reference": "-",
+            "rule_description": "Primary pump power = 9W/gpm ",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": "Rule 27 is true and Loop doesn't serve System 11",
+            "mandatory_rule": "Yes"
+        },
+        "rmr_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "chillers": [
+                    {
+                        "id": "Chilled Water  1",
+                        "cooling_loop": "Chilled Water Loop 1"
+                    }
+                ],
+                "pumps": [
+                    {
+                        "id": "Primary Pump 1",
+                        "loop_or_piping": "Chiller Loop 1",
+                        "design_electric_power": 1000,
+                        "design_flow": 6.308333333333335
+                    }
+                ]
+            }
+        }
+    },
+    "rule-22-27-a": {
+        "Section": 22,
+        "Rule": 27,
+        "Test": "a",
+        "test_description": "Primary pump power equals 12W per gpm when loop uses system 11.",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "22-27",
+            "ruleset_reference": "-",
+            "rule_description": "Primary pump power = 12W/gpm ",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": "Rule 27 is true and Loop serves system 11",
+            "mandatory_rule": "Yes"
+        },
+        "rmr_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "buildings": [
+                    {
+                        "id": "Building 1",
+                        "building_open_schedule": "Required Building Schedule 1",
+                        "building_segments": [
+                            {
+                                "id": "Building Segment 1",
+                                "zones": [
+                                    {
+                                        "id": "Thermal Zone 1",
+                                        "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                        "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                        "terminals": [
+                                            {
+                                                "id": "VAV Air Terminal 1",
+                                                "is_supply_ducted": true,
+                                                "reheat_source": "HOT_WATER",
+                                                "type": "VARIABLE_AIR_VOLUME",
+                                                "served_by_heating_ventilation_air_conditioning_systems": "VAV System 1"
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "heating_ventilation_air_conditioning_systems": [
+                                    {
+                                        "id": "System Type 11",
+                                        "cooling_system": {
+                                            "id": "CHW Coil 1",
+                                            "cooling_system_type": "FLUID_LOOP"
+                                        },
+                                        "heating_system": {
+                                            "id": "HHW Coil 1",
+                                            "heating_system_type": "FLUID_LOOP",
+                                            "hot_water_loop": "Boiler Loop 1"
+                                        },
+                                        "fan_systems": [
+                                            {
+                                                "id": "VAV Fan System 1",
+                                                "is_variable_air_volume": true,
+                                                "fan_control": "VARIABLE_SPEED_DRIVE",
+                                                "supply_fans": [
+                                                    {
+                                                        "id": "Supply Fan 1"
+                                                    }
+                                                ],
+                                                "return_fans": [
+                                                    {
+                                                        "id": "Return Fan 1"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                "boilers": [
+                    {
+                        "id": "Boiler 1",
+                        "energy_source_type": "NATURAL_GAS",
+                        "loop": "Boiler Loop 1"
+                    }
+                ],
+                "chillers": [
+                    {
+                        "id": "Chiller 1",
+                        "cooling_loop": "Chiller Loop 1",
+                        "energy_source_type": "ELECTRICITY"
+                    }
+                ],
+                "pumps": [
+                    {
+                        "id": "Boiler Pump 1",
+                        "loop_or_piping": "Boiler Loop 1",
+                        "speed_control": "FIXED_SPEED"
+                    },
+                    {
+                        "id": "Chiller Pump 1",
+                        "loop_or_piping": "Chiller Loop 1",
+                        "speed_control": "FIXED_SPEED",
+                        "design_electric_power": 1200,
+                        "design_flow": 6.308333333333335
+                    }
+                ],
+                "fluid_loops": [
+                    {
+                        "id": "Boiler Loop 1",
+                        "type": "HEATING"
+                    },
+                    {
+                        "id": "Chiller Loop 1"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-22-27-b": {
+        "Section": 22,
+        "Rule": 27,
+        "Test": "b",
+        "test_description": "Primary pump power does not equal 12W per gpm when loop uses system 11.",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "22-27",
+            "ruleset_reference": "-",
+            "rule_description": "Primary pump power = 12W/gpm ",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": "Rule 27 is true and Loop serves system 11",
+            "mandatory_rule": "Yes"
+        },
+        "rmr_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "buildings": [
+                    {
+                        "id": "Building 1",
+                        "building_open_schedule": "Required Building Schedule 1",
+                        "building_segments": [
+                            {
+                                "id": "Building Segment 1",
+                                "zones": [
+                                    {
+                                        "id": "Thermal Zone 1",
+                                        "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                        "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                        "terminals": [
+                                            {
+                                                "id": "VAV Air Terminal 1",
+                                                "is_supply_ducted": true,
+                                                "reheat_source": "HOT_WATER",
+                                                "type": "VARIABLE_AIR_VOLUME",
+                                                "served_by_heating_ventilation_air_conditioning_systems": "VAV System 1"
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "heating_ventilation_air_conditioning_systems": [
+                                    {
+                                        "id": "System Type 11",
+                                        "cooling_system": {
+                                            "id": "CHW Coil 1",
+                                            "cooling_system_type": "FLUID_LOOP"
+                                        },
+                                        "heating_system": {
+                                            "id": "HHW Coil 1",
+                                            "heating_system_type": "FLUID_LOOP",
+                                            "hot_water_loop": "Boiler Loop 1"
+                                        },
+                                        "fan_systems": [
+                                            {
+                                                "id": "VAV Fan System 1",
+                                                "is_variable_air_volume": true,
+                                                "fan_control": "VARIABLE_SPEED_DRIVE",
+                                                "supply_fans": [
+                                                    {
+                                                        "id": "Supply Fan 1"
+                                                    }
+                                                ],
+                                                "return_fans": [
+                                                    {
+                                                        "id": "Return Fan 1"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                "boilers": [
+                    {
+                        "id": "Boiler 1",
+                        "energy_source_type": "NATURAL_GAS",
+                        "loop": "Boiler Loop 1"
+                    }
+                ],
+                "chillers": [
+                    {
+                        "id": "Chiller 1",
+                        "cooling_loop": "Chiller Loop 1",
+                        "energy_source_type": "ELECTRICITY"
+                    }
+                ],
+                "pumps": [
+                    {
+                        "id": "Boiler Pump 1",
+                        "loop_or_piping": "Boiler Loop 1",
+                        "speed_control": "FIXED_SPEED"
+                    },
+                    {
+                        "id": "Chiller Pump 1",
+                        "loop_or_piping": "Chiller Loop 1",
+                        "speed_control": "FIXED_SPEED",
+                        "design_electric_power": 1400,
+                        "design_flow": 6.308333333333335
+                    }
+                ],
+                "fluid_loops": [
+                    {
+                        "id": "Boiler Loop 1",
+                        "type": "HEATING"
+                    },
+                    {
+                        "id": "Chiller Loop 1"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-22-28-a": {
+        "Section": 22,
+        "Rule": 28,
+        "Test": "a",
+        "test_description": "chiller has an associated condenser pump",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "22-28",
+            "ruleset_reference": "-",
+            "rule_description": "Chiller has an associated condenser pump?",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": "none",
+            "mandatory_rule": "Yes"
+        },
+        "rmr_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "chillers": [
+                    {
+                        "id": "Chiller 1",
+                        "cooling_loop": "Chiller Loop 1"
+                    }
+                ],
+                "heat_rejections": [
+                    {
+                        "id": "Cooling Tower 1",
+                        "loop": "Condensing Water Loop 1"
+                    }
+                ],
+                "pumps": [
+                    {
+                        "id": "Condensing Water Pump 1",
+                        "loop_or_piping": "Condensing Water Loop 1"
+                    }
+                ],
+                "fluid_loops": [
+                    {
+                        "id": "Chiller Loop 1",
+                        "type": "COOLING",
+                        "child_loops": [
+                            {
+                                "id": "Condensing Water Loop 1",
+                                "type": "CONDENSER"
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    },
+    "rule-22-28-b": {
+        "Section": 22,
+        "Rule": 28,
+        "Test": "b",
+        "test_description": "chiller does not have an associated condenser pump of the correct type",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "22-28",
+            "ruleset_reference": "-",
+            "rule_description": "Chiller has an associated condenser pump?",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": "none",
+            "mandatory_rule": "Yes"
+        },
+        "rmr_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "chillers": [
+                    {
+                        "id": "Chiller 1",
+                        "cooling_loop": "Chiller Loop 1"
+                    }
+                ],
+                "heat_rejections": [
+                    {
+                        "id": "Cooling Tower 1",
+                        "loop": "Condensing Water Loop 1"
+                    }
+                ],
+                "pumps": [
+                    {
+                        "id": "Chiller Pump 1",
+                        "loop_or_piping": "Chiller Loop 1"
+                    }
+                ],
+                "fluid_loops": [
+                    {
+                        "id": "Chiller Loop 1",
+                        "type": "COOLING",
+                        "child_loops": [
+                            {
+                                "id": "Condensing Water Loop 1",
+                                "type": "CONDENSER"
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    },
+    "rule-22-28-c": {
+        "Section": 22,
+        "Rule": 28,
+        "Test": "c",
+        "test_description": "chiller does not have an associated condenser pump",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "22-28",
+            "ruleset_reference": "-",
+            "rule_description": "Chiller has an associated condenser pump?",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": "none",
+            "mandatory_rule": "Yes"
+        },
+        "rmr_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "chillers": [
+                    {
+                        "id": "Chiller 1",
+                        "cooling_loop": "Chiller Loop 1"
+                    }
+                ],
+                "fluid_loops": [
+                    {
+                        "id": "Chiller Loop 1",
+                        "type": "COOLING"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-22-28-d": {
+        "Section": 22,
+        "Rule": 28,
+        "Test": "d",
+        "test_description": "chiller associated condenser pump name does not exist as a pump object",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "22-28",
+            "ruleset_reference": "-",
+            "rule_description": "Chiller has an associated condenser pump?",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": "none",
+            "mandatory_rule": "Yes"
+        },
+        "rmr_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "chillers": [
+                    {
+                        "id": "Chiller 1",
+                        "cooling_loop": "Chiller Loop 1"
+                    }
+                ],
+                "fluid_loops": [
+                    {
+                        "id": "Chiller Loop 1",
+                        "type": "COOLING"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-22-29-a": {
+        "Section": 22,
+        "Rule": 29,
+        "Test": "a",
+        "test_description": "condenser pump speed control equals constant",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "22-29",
+            "ruleset_reference": "-",
+            "rule_description": "Condenser pump speed control = constant",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": "Rule 31 is true",
+            "mandatory_rule": "No"
+        },
+        "rmr_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "chillers": [
+                    {
+                        "id": "Chiller 1",
+                        "cooling_loop": "Chiller Loop 1"
+                    }
+                ],
+                "heat_rejections": [
+                    {
+                        "id": "Cooling Tower 1",
+                        "loop": "Condensing Water Loop 1"
+                    }
+                ],
+                "pumps": [
+                    {
+                        "id": "Condensing Water Pump 1",
+                        "loop_or_piping": "Condensing Water Loop 1",
+                        "speed_control": "FIXED_SPEED"
+                    }
+                ],
+                "fluid_loops": [
+                    {
+                        "id": "Chiller Loop 1",
+                        "type": "COOLING",
+                        "child_loops": [
+                            {
+                                "id": "Condensing Water Loop 1",
+                                "type": "CONDENSER"
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    },
+    "rule-22-29-b": {
+        "Section": 22,
+        "Rule": 29,
+        "Test": "b",
+        "test_description": "condenser pump speed control does not equal constant",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "22-29",
+            "ruleset_reference": "-",
+            "rule_description": "Condenser pump speed control = constant",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": "Rule 31 is true",
+            "mandatory_rule": "No"
+        },
+        "rmr_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "chillers": [
+                    {
+                        "id": "Chiller 1",
+                        "cooling_loop": "Chiller Loop 1"
+                    }
+                ],
+                "heat_rejections": [
+                    {
+                        "id": "Cooling Tower 1",
+                        "loop": "Condensing Water Loop 1"
+                    }
+                ],
+                "pumps": [
+                    {
+                        "id": "Condensing Water Pump 1",
+                        "loop_or_piping": "Condensing Water Loop 1",
+                        "speed_control": "VARIABLE_SPEED"
+                    }
+                ],
+                "fluid_loops": [
+                    {
+                        "id": "Chiller Loop 1",
+                        "type": "COOLING",
+                        "child_loops": [
+                            {
+                                "id": "Condensing Water Loop 1",
+                                "type": "CONDENSER"
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    },
+    "rule-22-30-a": {
+        "Section": 22,
+        "Rule": 30,
+        "Test": "a",
+        "test_description": "condenser pum power equals 19W per gpm",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "22-30",
+            "ruleset_reference": "-",
+            "rule_description": "Condenser pump power is 19W/gpm",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": "Rule 31 is true and loop does not serve system type 11",
+            "mandatory_rule": "Yes"
+        },
+        "rmr_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "chillers": [
+                    {
+                        "id": "Chiller 1",
+                        "cooling_loop": "Chiller Loop 1"
+                    }
+                ],
+                "heat_rejections": [
+                    {
+                        "id": "Cooling Tower 1",
+                        "loop": "Condensing Water Loop 1"
+                    }
+                ],
+                "pumps": [
+                    {
+                        "id": "Condensing Water Pump 1",
+                        "loop_or_piping": "Condensing Water Loop 1",
+                        "design_electric_power": 1900,
+                        "design_flow": 6.308333333333335
+                    }
+                ],
+                "fluid_loops": [
+                    {
+                        "id": "Chiller Loop 1",
+                        "type": "COOLING",
+                        "child_loops": [
+                            {
+                                "id": "Condensing Water Loop 1",
+                                "type": "CONDENSER"
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    },
+    "rule-22-30-b": {
+        "Section": 22,
+        "Rule": 30,
+        "Test": "b",
+        "test_description": "condenser pump power does not equal 19W per gpm",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "22-30",
+            "ruleset_reference": "-",
+            "rule_description": "Condenser pump power is 19W/gpm",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": "Rule 31 is true and loop does not serve system type 11",
+            "mandatory_rule": "Yes"
+        },
+        "rmr_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "chillers": [
+                    {
+                        "id": "Chiller 1",
+                        "cooling_loop": "Chiller Loop 1"
+                    }
+                ],
+                "heat_rejections": [
+                    {
+                        "id": "Cooling Tower 1",
+                        "loop": "Condensing Water Loop 1"
+                    }
+                ],
+                "pumps": [
+                    {
+                        "id": "Condensing Water Pump 1",
+                        "loop_or_piping": "Condensing Water Loop 1",
+                        "design_electric_power": 2200,
+                        "design_flow": 6.308333333333335
+                    }
+                ],
+                "fluid_loops": [
+                    {
+                        "id": "Chiller Loop 1",
+                        "type": "COOLING",
+                        "child_loops": [
+                            {
+                                "id": "Condensing Water Loop 1",
+                                "type": "CONDENSER"
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    },
+    "rule-22-31-a": {
+        "Section": 22,
+        "Rule": 31,
+        "Test": "a",
+        "test_description": "Distribution pump power equals 22 W per gpm",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "22-31",
+            "ruleset_reference": "-",
+            "rule_description": "Distribution pump power is 22W/gpm",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": "Rule 31 is true and loop serves system type 11",
+            "mandatory_rule": "Yes"
+        },
+        "rmr_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "chillers": [
+                    {
+                        "id": "Chiller 1",
+                        "cooling_loop": "Chiller Loop 1"
+                    }
+                ],
+                "pumps": [
+                    {
+                        "id": "Chiller Pump 1",
+                        "loop_or_piping": "Chiller Loop 1",
+                        "design_electric_power": 2200,
+                        "design_flow": 6.308333333333335
+                    }
+                ],
+                "fluid_loops": [
+                    {
+                        "id": "Chiller Loop 1",
+                        "type": "COOLING"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-22-31-b": {
+        "Section": 22,
+        "Rule": 31,
+        "Test": "b",
+        "test_description": "Distribution pump power does not equal 22W per gpm",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "22-31",
+            "ruleset_reference": "-",
+            "rule_description": "Distribution pump power is 22W/gpm",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": "Rule 31 is true and loop serves system type 11",
+            "mandatory_rule": "Yes"
+        },
+        "rmr_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "chillers": [
+                    {
+                        "id": "Chiller 1",
+                        "cooling_loop": "Chiller Loop 1"
+                    }
+                ],
+                "pumps": [
+                    {
+                        "id": "Chiller Pump 1",
+                        "loop_or_piping": "Chiller Loop 1",
+                        "design_electric_power": 2000,
+                        "design_flow": 6.308333333333335
+                    }
+                ],
+                "fluid_loops": [
+                    {
+                        "id": "Chiller Loop 1",
+                        "type": "COOLING"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-22-32-a": {
+        "Section": 22,
+        "Rule": 32,
+        "Test": "a",
+        "test_description": "CHW Loop has correct number of chillers based on load",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "22-32",
+            "ruleset_reference": "-",
+            "rule_description": "CHW Loop has correct number of chillers based on Table G3.1.3.7",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": "none",
+            "mandatory_rule": "Yes"
+        },
+        "rmr_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "chillers": [
+                    {
+                        "id": "Chiller 1",
+                        "cooling_loop": "Chiller Loop 1",
+                        "design_capacity": 1055100.0
+                    }
+                ],
+                "fluid_loops": [
+                    {
+                        "id": "Chiller Loop 1",
+                        "type": "COOLING"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-22-32-b": {
+        "Section": 22,
+        "Rule": 32,
+        "Test": "b",
+        "test_description": "CHW Loop has correct number of chillers based on load",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "22-32",
+            "ruleset_reference": "-",
+            "rule_description": "CHW Loop has correct number of chillers based on Table G3.1.3.7",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": "none",
+            "mandatory_rule": "Yes"
+        },
+        "rmr_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "chillers": [
+                    {
+                        "id": "Chiller 1",
+                        "cooling_loop": "Chiller Loop 1",
+                        "design_capacity": 1055100.0
+                    },
+                    {
+                        "id": "Chiller 2",
+                        "cooling_loop": "Chiller Loop 1",
+                        "design_capacity": 1055100.0
+                    }
+                ]
+            }
+        }
+    },
+    "rule-22-32-c": {
+        "Section": 22,
+        "Rule": 32,
+        "Test": "c",
+        "test_description": "CHW Loop has correct number of chillers based on load",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "22-32",
+            "ruleset_reference": "-",
+            "rule_description": "CHW Loop has correct number of chillers based on Table G3.1.3.7",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": "none",
+            "mandatory_rule": "Yes"
+        },
+        "rmr_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "chillers": [
+                    {
+                        "id": "Chiller 1",
+                        "cooling_loop": "Chiller Loop 1",
+                        "design_capacity": 1055100.0
+                    },
+                    {
+                        "id": "Chiller 2",
+                        "cooling_loop": "Chiller Loop 1",
+                        "design_capacity": 1055100.0
+                    }
+                ]
+            }
+        }
+    },
+    "rule-22-32-d": {
+        "Section": 22,
+        "Rule": 32,
+        "Test": "d",
+        "test_description": "CHW Loop has correct number of chillers based on load",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "22-32",
+            "ruleset_reference": "-",
+            "rule_description": "CHW Loop has correct number of chillers based on Table G3.1.3.7",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": "none",
+            "mandatory_rule": "Yes"
+        },
+        "rmr_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "chillers": [
+                    {
+                        "id": "Chiller 1",
+                        "cooling_loop": "Chiller Loop 1",
+                        "design_capacity": 2813600.0
+                    },
+                    {
+                        "id": "Chiller 2",
+                        "cooling_loop": "Chiller Loop 1",
+                        "design_capacity": 2813600.0
+                    },
+                    {
+                        "id": "Chiller 3",
+                        "cooling_loop": "Chiller Loop 1",
+                        "design_capacity": 2813600.0
+                    }
+                ]
+            }
+        }
+    },
+    "rule-22-32-e": {
+        "Section": 22,
+        "Rule": 32,
+        "Test": "e",
+        "test_description": "CHW Loop has correct number of chillers based on load",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "22-32",
+            "ruleset_reference": "-",
+            "rule_description": "CHW Loop has correct number of chillers based on Table G3.1.3.7",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": "none",
+            "mandatory_rule": "Yes"
+        },
+        "rmr_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "chillers": [
+                    {
+                        "id": "Chiller 1",
+                        "cooling_loop": "Chiller Loop 1",
+                        "design_capacity": 2813600.0
+                    },
+                    {
+                        "id": "Chiller 2",
+                        "cooling_loop": "Chiller Loop 1",
+                        "design_capacity": 2813600.0
+                    },
+                    {
+                        "id": "Chiller 3",
+                        "cooling_loop": "Chiller Loop 1",
+                        "design_capacity": 2813600.0
+                    },
+                    {
+                        "id": "Chiller 4",
+                        "cooling_loop": "Chiller Loop 1",
+                        "design_capacity": 2813600.0
+                    }
+                ]
+            }
+        }
+    },
+    "rule-22-32-f": {
+        "Section": 22,
+        "Rule": 32,
+        "Test": "f",
+        "test_description": "CHW loop does not have correct number of chillers based on load",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "22-32",
+            "ruleset_reference": "-",
+            "rule_description": "CHW Loop has correct number of chillers based on Table G3.1.3.7",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": "none",
+            "mandatory_rule": "Yes"
+        },
+        "rmr_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "chillers": [
+                    {
+                        "id": "Chiller 1",
+                        "cooling_loop": "Chiller Loop 1",
+                        "design_capacity": 2110200.0
+                    }
+                ]
+            }
+        }
+    },
+    "rule-22-32-g": {
+        "Section": 22,
+        "Rule": 32,
+        "Test": "g",
+        "test_description": "CHW loop does not have correct number of chillers based on load",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "22-32",
+            "ruleset_reference": "-",
+            "rule_description": "CHW Loop has correct number of chillers based on Table G3.1.3.7",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": "none",
+            "mandatory_rule": "Yes"
+        },
+        "rmr_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "chillers": [
+                    {
+                        "id": "Chiller 1",
+                        "cooling_loop": "Chiller Loop 1",
+                        "design_capacity": 1758500.0
+                    },
+                    {
+                        "id": "Chiller 2",
+                        "cooling_loop": "Chiller Loop 1",
+                        "design_capacity": 1758500.0
+                    },
+                    {
+                        "id": "Chiller 3",
+                        "cooling_loop": "Chiller Loop 1",
+                        "design_capacity": 1758500.0
+                    },
+                    {
+                        "id": "Chiller 4",
+                        "cooling_loop": "Chiller Loop 1",
+                        "design_capacity": 1758500.0
+                    }
+                ]
+            }
+        }
+    },
+    "rule-22-32-h": {
+        "Section": 22,
+        "Rule": 32,
+        "Test": "h",
+        "test_description": "CHW loop does not have correct number of chillers based on load",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "22-32",
+            "ruleset_reference": "-",
+            "rule_description": "CHW Loop has correct number of chillers based on Table G3.1.3.7",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": "none",
+            "mandatory_rule": "Yes"
+        },
+        "rmr_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "chillers": [
+                    {
+                        "id": "Chiller 1",
+                        "cooling_loop": "Chiller Loop 1",
+                        "design_capacity": 3165300.0
                     }
                 ]
             }
