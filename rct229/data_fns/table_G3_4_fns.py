@@ -1,16 +1,24 @@
 from rct229.data import data
 from rct229.data_fns.table_utils import find_osstd_table_entry
 from rct229.schema.config import ureg
+from rct229.ruleset_functions.get_opaque_surface_type import (
+    ABOVE_GRADE_WALL,
+    BELOW_GRADE_WALL,
+    FLOOR,
+    ROOF,
+    HEATED_SOG,
+    UNHEATED_SOG
+)
 
 # This dictionary maps the opaque surface types that are returned from get_opaque_surface_type()
 # to the corresponding construction values in ashrae_90_1_prm_2019.construction_properties.json
 SURFACE_TYPE_TO_CONSTRUCTION_MAP = {
-    "ABOVE-GRADE WALL": "ExteriorWall",
-    "ROOF": "ExteriorRoof",
-    "HEATED SLAB-ON-GRADE": "GroundContactFloor",
-    "UNHEATED SLAB-ON-GRADE": "GroundContactFloor",
-    "FLOOR": "ExteriorFloor",
-    "BELOW-GRADE WALL": "GroundContactWall",
+    ABOVE_GRADE_WALL: "ExteriorWall",
+    ROOF: "ExteriorRoof",
+    HEATED_SOG: "GroundContactFloor",
+    UNHEATED_SOG: "GroundContactFloor",
+    FLOOR: "ExteriorFloor",
+    BELOW_GRADE_WALL: "GroundContactWall",
 }
 
 # This dictionary maps surface conditioning categories as returned from get_surface_conditioning_category_dict()
