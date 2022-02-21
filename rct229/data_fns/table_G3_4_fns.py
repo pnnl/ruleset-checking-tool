@@ -7,7 +7,7 @@ from rct229.ruleset_functions.get_opaque_surface_type import (
     FLOOR,
     ROOF,
     HEATED_SOG,
-    UNHEATED_SOG
+    UNHEATED_SOG,
 )
 
 # This dictionary maps the opaque surface types that are returned from get_opaque_surface_type()

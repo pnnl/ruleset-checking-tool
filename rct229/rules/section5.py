@@ -154,7 +154,11 @@ class Section5Rule8(RuleDefinitionListIndexedBase):
                     # QNS a good number to estimate?
                     target_c_factor = None
                     # TODO All these need to change to enum later
-                    if scc_b in ["EXTERIOR RESIDENTIAL", "EXTERIOR NON-RESIDENTIAL", "SEMI-EXTERIOR"]:
+                    if scc_b in [
+                        "EXTERIOR RESIDENTIAL",
+                        "EXTERIOR NON-RESIDENTIAL",
+                        "SEMI-EXTERIOR",
+                    ]:
                         target = table_G34_lookup(climate_zone, scc_b, BELOW_GRADE_WALL)
                         target_c_factor = target["c_factor"]
 
@@ -186,7 +190,7 @@ class Section5Rule8(RuleDefinitionListIndexedBase):
 
             return {
                 "failed_c_factor_surface_id": failing_surface_c_factor_ids,
-                "mix_surface_c_factor_ids": mix_surface_c_factor_ids
+                "mix_surface_c_factor_ids": mix_surface_c_factor_ids,
             }
 
         def manual_check_required(self, context, calc_vals=None, data=None):
