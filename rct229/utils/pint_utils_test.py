@@ -1,6 +1,6 @@
 import pytest
-
 from pint_utils import pint_sum
+
 from rct229.schema.config import ureg
 
 FLOOR_AREA = 1 * ureg("m2")

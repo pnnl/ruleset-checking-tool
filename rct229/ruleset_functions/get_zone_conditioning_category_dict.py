@@ -1,19 +1,19 @@
 from dataclasses import dataclass
 
-from rct229.utils.assertions import (
-    assert_,
-    assert_nonempty_lists,
-    assert_required_fields,
-    getattr_,
-)
 from rct229.data_fns.table_3_2_fns import table_3_2_lookup
 from rct229.ruleset_functions.get_hvac_zone_list_w_area_dict import (
     get_hvac_zone_list_w_area_dict,
 )
 from rct229.ruleset_functions.get_opaque_surface_type import get_opaque_surface_type
 from rct229.schema.config import ureg
+from rct229.utils.assertions import (
+    assert_,
+    assert_nonempty_lists,
+    assert_required_fields,
+    getattr_,
+)
 from rct229.utils.jsonpath_utils import find_all
-from rct229.utils.pint_utils import pint_sum, ZERO
+from rct229.utils.pint_utils import ZERO, pint_sum
 
 CAPACITY_THRESHOLD = 3.4 * ureg("Btu/(hr * ft2)")
 CRAWLSPACE_HEIGHT_THRESHOLD = 7 * ureg("ft")
