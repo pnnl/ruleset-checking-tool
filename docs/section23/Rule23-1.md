@@ -10,14 +10,22 @@
 **Applicability:** All required data elements exist for B_RMR  
 **Applicability Checks:**  
 
-1. B-RMR is modeled with at least one air-side system that is Type-5, 6, 7, 8, 11  
+1. B-RMR is modeled with at least one air-side system that is Type-5, 6, 7, 8, 11.1, 11.2, 7a, 8a, 11.1a, 11.2a, 5b, 6b, 7b, 8b, 11b, 7c, 11c.
 
-**Manual Check:** None  
 **Evaluation Context:** Building  
 **Data Lookup:** None  
 **Function Call:**  
 
-1. baseline_hvac_type()  
+1. get_baseline_system_types()
+2. is_baseline_system_type()
+
+**Applicability Checks:**  
+
+- Get B-RMR system types: `baseline_hvac_system_dict = get_baseline_system_types(B-RMR)`
+
+  - Check if B-RMR is modeled with at least one air-side system that is Type-5, 6, 7, 8, 11.1, 11.2, 7a, 8a, 11.1a, 11.2a, 5b, 6b, 7b, 8b, 11b, 7c, 11c, continue to rule logic: `if any(sys_type in baseline_hvac_system_dict.keys() for sys_type in ["SYS-5", "SYS-6", "SYS-7", "SYS-8", "SYS-11.1", "SYS-11.2", "SYS-7A", "SYS-8A", "SYS-11.1A", "SYS-11.2A", "SYS-5B", "SYS-6B", "SYS-7B", "SYS-8B", "SYS-11B", "SYS-7C", "SYS-11C"]): CHECK_RULE_LOGIC`
+
+  - Else, rule is not applicable to B-RMR: `else: RULE_NOT_APPLICABLE`
 
 ## Rule Logic:  
 
@@ -25,24 +33,14 @@
 
   - For each HVAC system in building segment: `for hvac_b in building_segment_b.heating_ventilation_air_conditioning_systems:`
 
-    - Check if HVAC system is type 5, 6, 7, 8 or 11: `if baseline_hvac_type(hvac_b) in ["SYS-5", "SYS-6", "SYS-7", "SYS-8", "SYS-11"]:`
-
-      - Set applicability flag: `rule_applicability_check = TRUE`
+    - Check if HVAC system is type 5, 6, 7, 8, 11.1, 11.2, 7a, 8a, 11.1a, 11.2a, 5b, 6b, 7b, 8b, 11b, 7c, 11c: `if any(is_baseline_system_type(hvac_b, sys_type) == TRUE for sys_type in ["SYS-5", "SYS-6", "SYS-7", "SYS-8", "SYS-11.1", "SYS-11.2", "SYS-7A", "SYS-8A", "SYS-11.1A", "SYS-11.2A", "SYS-5B", "SYS-6B", "SYS-7B", "SYS-8B", "SYS-11B", "SYS-7C", "SYS-11C"]):`
 
       - For each fan system in HVAC system: `for fan_system_b in hvac_b.fan_systems:`
 
         **Rule Assertion:**
 
-        - Case 1: For each HVAC system that is Type-5, 6, 7, 8 or 11, if supply air temperature is reset higher by 5F under minimum cooling load condition: `if ( fan_system_b.temperature_control == "ZONE_RESET" ) AND ( fan_system_b.reset_differential_temperature == 5 ): PASS`
+        - Case 1: For each HVAC system that is Type-5, 6, 7, 8, 11.1, 11.2, 7a, 8a, 11.1a, 11.2a, 5b, 6b, 7b, 8b, 11b, 7c, 11c, if supply air temperature is reset higher by 5F under minimum cooling load condition: `if ( fan_system_b.temperature_control == "ZONE_RESET" ) AND ( fan_system_b.reset_differential_temperature == 5 ): PASS`
 
         - Case 2: Else: `else: FAIL`
 
-**Applicability Checks:**  
-
-1. B-RMR is modeled with at least one air-side system that is Type-5, 6, 7, 8, or 11: `if rule_applicability_check: is_applicable = TRUE`
-
 **[Back](../_toc.md)**
-
-**Notes:**
-
-1. For baseline hvac.fan_systems, assuming only one fan system is modeled. Might need a separate check for this. Note from schema: "Normally one fan system is used but second fan systems may be used when a direct outdoor air system is used."
