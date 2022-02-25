@@ -13,56 +13,79 @@ The following is an example of a JSON output file produced by the RCT.
     ],
     "rules": {
         "rule_name1": {
+            "rule_id": 1-1,
+            "description": "Description of rule 1-1.",
+            "ruleset_section_id": "1",
+            "source_value_name": "USER_RMR",
+            "expected_value_name": "PROPOSED_RMR",
+            "assertion": "EQUALS",
             "evalutions": [
                 {
                     "id": 1,
-                    "calculated_calculated_values": {
-                        "calculated_value1": 1,
+                    "outcome": "PASS",
+                    "messages": ["informative message 1", "informative message 2"],
+                    "source_value": 1.0,
+                    "expected_value": 1.0,
+                    "calculated_values": {
+                        "calculated_value1": 1.0,
                         "calculated_value2": 0.5,
                         "calculated_value3": 100.0
-                    },
-                    "result": "PASS",
-
+                    }
                 },
                 {
                     "id": 2,
+                    "outcome": "NOT_APPLICABLE",
+                    "messages": ["informative message 1"],
+                    "source_value": null,
+                    "expected_value": null,
                     "calculated_values": {
-                        "calculated_value1": 2,
-                        "calculated_value2": 0.75,
-                        "calculated_value3": 1000.0
-                    },
-                    "result": "NOT_APPLICABLE",
+                        "calculated_value1": 2.0
+                    }
                 },
                 {
                     "id": 3,
+                    "outcome": "UNDETERMINED",
+                    "messages": ["informative message 1"],
+                    "source_value": 3.0,
+                    "expected_value": null,
                     "calculated_values": {
-                        "calculated_value1": 3,
+                        "calculated_value1": 3.0,
                         "calculated_value2": 1.0,
                         "calculated_value3": 10000.0
-                    },
-                    "result": "UNDETERMINED",
+                    }
                 },
                 {
                     "id": 4,
+                    "outcome": "FAIL",
+                    "messages": ["informative message 1"],
+                    "source_value": 4.0,
+                    "expected_value": 2.0,
                     "calculated_values": {
-                        "calculated_value1": 4,
+                        "calculated_value1": 4.0,
                         "calculated_value2": 1.5,
                         "calculated_value3": 100000.0
-                    },
-                    "result": "FAIL",
+                    }
                 }
             ]
         },
         "rule_name2": {
+            "rule_id": 1-2,
+            "description": "Description of rule 1-2.",
+            "ruleset_section_id": "1",
+            "source_value_name": "USER_RMR",
+            "expected_value_name": "wall_ufactor",
+            "assertion": "EQUALS",
             "evalutions": [
                 {
                     "id": 1,
-                    "calculated_calculated_values": {
+                    "outcome": "PASS",
+                    "messages": ["informative message 1"],
+                    "source_value": 15.0,
+                    "expected_value": 15.0,
+                    "calculated_values": {
                         "calculated_value1": 15.0,
                         "calculated_value2": 200.0,
-                    },
-                    "result": "PASS",
-
+                    }
                 },
             ]
         }
