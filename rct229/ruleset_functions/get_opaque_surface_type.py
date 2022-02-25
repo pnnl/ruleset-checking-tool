@@ -1,6 +1,5 @@
 from rct229.schema.config import ureg
 
-
 DEGREES = ureg("degrees")
 MIN_FLOOR_TILT = 120 * DEGREES
 MAX_FLOOR_TILT = 180 * DEGREES

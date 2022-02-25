@@ -12,9 +12,9 @@ from rct229.ruleset_functions.get_opaque_surface_type import (
 from rct229.ruleset_functions.get_surface_conditioning_category_dict import (
     get_surface_conditioning_category_dict,
 )
+from rct229.schema.config import ureg
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.match_lists import match_lists_exactly_by_id
-from rct229.schema.config import ureg
 
 # Rule Definitions for Section 5 of 90.1-2019 Appendix G
 CONSTANT = schema_enums["InfiltrationMethodType"].CONSTANT.name
@@ -108,6 +108,7 @@ class Section5Rule3(RuleDefinitionListIndexedBase):
 
 
 # ------------------------
+
 
 class Section5Rule8(RuleDefinitionListIndexedBase):
     """Rule 8 of ASHRAE 90.1-2019 Appendix G Section 5 (Envelope)"""
@@ -213,6 +214,7 @@ class Section5Rule8(RuleDefinitionListIndexedBase):
 
 # ------------------------
 
+
 class Section5Rule44(RuleDefinitionListIndexedBase):
     """Rule 44 of ASHRAE 90.1-2019 Appendix G Section 5 (Envelope)"""
 
@@ -300,8 +302,8 @@ class Section5Rule46(RuleDefinitionListIndexedBase):
                     infiltration_fail_id.append(p_zone["id"])
 
             return {
-              "infiltration_fail_id": infiltration_fail_id,
-              "missing_zone_id": missing_zone_id,
+                "infiltration_fail_id": infiltration_fail_id,
+                "missing_zone_id": missing_zone_id,
             }
 
         def rule_check(self, context, calc_vals, data=None):

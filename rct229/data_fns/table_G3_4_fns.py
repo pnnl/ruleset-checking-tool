@@ -1,14 +1,14 @@
 from rct229.data import data
 from rct229.data_fns.table_utils import find_osstd_table_entry
-from rct229.schema.config import ureg
 from rct229.ruleset_functions.get_opaque_surface_type import (
     ABOVE_GRADE_WALL,
     BELOW_GRADE_WALL,
     FLOOR,
-    ROOF,
     HEATED_SOG,
+    ROOF,
     UNHEATED_SOG,
 )
+from rct229.schema.config import ureg
 
 # This dictionary maps the opaque surface types that are returned from get_opaque_surface_type()
 # to the corresponding construction values in ashrae_90_1_prm_2019.construction_properties.json
