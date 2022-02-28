@@ -81,6 +81,14 @@ SCC_DATA_FRAME = pd.DataFrame(
             UNREGULATED,
             UNREGULATED,
         ],
+        GROUND: [
+            EXTERIOR_RESIDENTIAL,
+            EXTERIOR_NON_RESIDENTIAL,
+            EXTERIOR_MIXED,
+            SEMI_EXTERIOR,
+            UNREGULATED,
+            UNREGULATED,
+        ],
     },
     index=[
         CONDITIONED_RESIDENTIAL,
@@ -123,13 +131,13 @@ def get_surface_conditioning_category_dict(climate_zone, building):
         # Loop through all the surfaces in the zone
         for surface in zone["surfaces"]:
             surface_adjacent_to = surface["adjacent_to"]
-            surface_conditioning_category_dict[surface["id"]] = SCC_DATA_FRAME.at(
+            surface_conditioning_category_dict[surface["id"]] = SCC_DATA_FRAME.at[
                 # row index
                 zcc,
                 # column index
                 zcc_dict[surface["adjacent_zone"]]
                 if surface_adjacent_to == INTERIOR
                 else surface_adjacent_to,
-            )
+            ]
 
     return surface_conditioning_category_dict

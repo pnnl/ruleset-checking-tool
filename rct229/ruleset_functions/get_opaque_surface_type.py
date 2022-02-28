@@ -1,7 +1,5 @@
 from rct229.schema.config import ureg
-from rct229.utils.jsonpath_utils import find_all
 
-# Constants
 DEGREES = ureg("degrees")
 MIN_FLOOR_TILT = 120 * DEGREES
 MAX_FLOOR_TILT = 180 * DEGREES
@@ -40,7 +38,6 @@ def get_opaque_surface_type(surface):
         One of the following surface types: "ABOVE-GRADE WALL", "BELOW-GRADE WALL",
         "FLOOR", "HEATED SLAB-ON-GRADE", "ROOF", "UNHEATED SLAB-ON-GRADE"
     """
-    surface_type = None
     surface_tilt = surface["tilt"]
 
     # Check for roof
