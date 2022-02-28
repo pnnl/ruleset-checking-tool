@@ -12,12 +12,13 @@ from rct229.ruleset_functions.get_opaque_surface_type import (
 from rct229.ruleset_functions.get_surface_conditioning_category_dict import (
     get_surface_conditioning_category_dict,
 )
+from rct229.schema.config import ureg
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.match_lists import match_lists_exactly_by_id
-from rct229.schema.config import ureg
 
 # Rule Definitions for Section 5 of 90.1-2019 Appendix G
 CONSTANT = schema_enums["InfiltrationMethodType"].CONSTANT.name
+
 # ------------------------
 # Reusable constants
 EXTERIOR_SURFACES_JSONPATH = "$..surfaces[?(@.adjacent_to='EXTERIOR')]"
@@ -231,11 +232,11 @@ class Section5Rule44(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section5Rule44.BuildingRule, self).__init__(
                 rmrs_used=UserBaselineProposedVals(False, True, False),
-                required_fields={"$..infiltration[*]": ["modeling_method"]},
+                required_fields={"$..infiltration": ["modeling_method"]},
             )
 
         def get_calc_vals(self, context, data=None):
-            baseline_infiltration = find_all("$..infiltration[*]", context.baseline)
+            baseline_infiltration = find_all("$..infiltration", context.baseline)
             failing_infiltration_ids = [
                 b_infiltration["id"]
                 for b_infiltration in baseline_infiltration
@@ -266,21 +267,28 @@ class Section5Rule46(RuleDefinitionListIndexedBase):
     class BuildingRule(RuleDefinitionBase):
         def __init__(self):
             super(Section5Rule46.BuildingRule, self).__init__(
-                rmrs_used=UserBaselineProposedVals(False, True, True)
+                rmrs_used=UserBaselineProposedVals(False, True, True),
+                required_fields={
+                    "$..infiltration": ["algorithm_name", "modeling_method"]
+                },
             )
 
         def get_calc_vals(self, context, data=None):
-            failing_infiltration_zone_ids = []
+            infiltration_fail_id = []
+            missing_zone_id = []
             baseline_zones = find_all("$..zones[*]", context.baseline)
             proposed_zones = find_all("$..zones[*]", context.proposed)
 
-            # This assumes that the surfaces all match
-            matched_baseline_zones = match_lists_exactly_by_id(
-                proposed_zones, baseline_zones
-            )
-            proposed_baseline_zone_pairs = zip(proposed_zones, matched_baseline_zones)
-            for (p_zone, b_zone) in proposed_baseline_zone_pairs:
-                # need a method like match object
+            b_zone_dict = {b_zone["id"]: b_zone for b_zone in baseline_zones}
+
+            for p_zone in proposed_zones:
+                # Get matching baseline zone
+                b_zone = b_zone_dict.get(p_zone["id"])
+
+                if b_zone is None:
+                    missing_zone_id.append(p_zone["id"])
+                    # skip the infiltration check
+                    continue
                 p_zone_infiltration = p_zone["infiltration"]
                 # b_zone could be NONE - add a check.
                 b_zone_infiltration = b_zone["infiltration"]
@@ -291,9 +299,14 @@ class Section5Rule46(RuleDefinitionListIndexedBase):
                     or p_zone_infiltration["modeling_method"]
                     != b_zone_infiltration["modeling_method"]
                 ):
-                    failing_infiltration_zone_ids.append(p_zone["id"])
+                    infiltration_fail_id.append(p_zone["id"])
 
-            return {"failing_infiltration_zone_ids": failing_infiltration_zone_ids}
+            return {
+                "infiltration_fail_id": infiltration_fail_id,
+                "missing_zone_id": missing_zone_id,
+            }
 
         def rule_check(self, context, calc_vals, data=None):
-            return len(calc_vals["failing_infiltration_zone_ids"]) == 0
+            return len(calc_vals["infiltration_fail_id"]) == 0 and len(
+                calc_vals["missing_zone_id"] == 0
+            )
