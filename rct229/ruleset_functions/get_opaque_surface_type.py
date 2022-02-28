@@ -11,9 +11,9 @@ ABOVE_GRADE_WALL: str = "ABOVE-GRADE WALL"
 BELOW_GRADE_WALL: str = "BELOW-GRADE WALL"
 FLOOR: str = "FLOOR"
 GROUND: str = "GROUND"
-HEATED_SLAB_ON_GRADE: str = "HEATED SLAB-ON-GRADE"
+HEATED_SOG: str = "HEATED SLAB-ON-GRADE"
 ROOF: str = "ROOF"
-UNHEATED_SLAB_ON_GRADE: str = "UNHEATED SLAB-ON-GRADE"
+UNHEATED_SOG: str = "UNHEATED SLAB-ON-GRADE"
 
 
 def get_opaque_surface_type(surface):
@@ -50,9 +50,9 @@ def get_opaque_surface_type(surface):
             surface["construction"].get("has_radiant_heating")
             and surface["adjacent_to"] == GROUND
         ):
-            surface_type = HEATED_SLAB_ON_GRADE
+            surface_type = HEATED_SOG
         elif surface["adjacent_to"] == GROUND:
-            surface_type = UNHEATED_SLAB_ON_GRADE
+            surface_type = UNHEATED_SOG
         else:
             surface_type = FLOOR
 
