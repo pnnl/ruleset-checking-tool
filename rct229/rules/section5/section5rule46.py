@@ -24,9 +24,11 @@ class Section5Rule46(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section5Rule46.BuildingRule, self).__init__(
                 rmrs_used=UserBaselineProposedVals(False, True, True),
-                required_fields={"$..zones[*]": ["infiltration"],
-                                    "$..infiltration[*]": ["modeling_method"],
-                                    "$..infiltration[*]": ["algorithm_name"]}
+                required_fields={
+                    "$..zones[*]": ["infiltration"],
+                    "$..infiltration[*]": ["modeling_method"],
+                    "$..infiltration[*]": ["algorithm_name"],
+                },
             )
 
         def get_calc_vals(self, context, data=None):

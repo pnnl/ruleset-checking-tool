@@ -37,4 +37,3 @@ class Section12Rule1(RuleDefinitionListIndexedBase):
 
         def rule_check(self, context, calc_vals=None, data=None):
             return calc_vals["num_user_spaces"] == calc_vals["num_baseline_spaces"]
-

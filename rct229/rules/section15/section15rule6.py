@@ -5,6 +5,7 @@ from rct229.rule_engine.rule_base import (
     RuleDefinitionListIndexedBase,
 )
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
+
 _DRY_TYPE = schema_enums["TransformerType"].DRY_TYPE.name
 
 
