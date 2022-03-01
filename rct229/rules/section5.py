@@ -125,7 +125,7 @@ class Section5Rule5(RuleDefinitionListIndexedBase):
             required_fields={
                 "weather": ["climate_zone"],
             },
-            each_rule=Section5Rule3.BuildingRule(),
+            each_rule=Section5Rule5.BuildingRule(),
             index_rmr="baseline",
             id="5-5",
             description="Baseline roof assemblies must match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8.",
@@ -141,7 +141,7 @@ class Section5Rule5(RuleDefinitionListIndexedBase):
             super(Section5Rule5.BuildingRule, self).__init__(
                 rmrs_used=UserBaselineProposedVals(False, True, False),
                 required_fields={},
-                each_rule=Section5Rule3.BuildingRule.RoofRule(),
+                each_rule=Section5Rule5.BuildingRule.RoofRule(),
                 index_rmr="baseline",
             )
 
