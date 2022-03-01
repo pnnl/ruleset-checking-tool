@@ -6,8 +6,6 @@ from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedV
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.pint_utils import pint_sum
 
-# Rule Definitions for Section 6 of 90.1-2019 Appendix G
-
 
 class Section6Rule1(RuleDefinitionListIndexedBase):
     """Rule 1 of ASHRAE 90.1-2019 Appendix G Section 6 (Lighting)"""
