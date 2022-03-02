@@ -1,10 +1,18 @@
 {
-
+	"air_terminals": "buildings[0]/building_segments[0]/heating_ventilation_air_conditioning_systems[0]/air_terminals",
 	"building_segments": "buildings[0]/building_segments",
-	"fenestration_subsurfaces": "buildings[0]/building_segments[0]/thermal_blocks[0]/zones[0]/spaces[0]/surfaces[0]/fenestration_subsurfaces",
+	"cooling_system": "buildings[0]/building_segments[0]/heating_ventilation_air_conditioning_systems[0]/cooling_system",
+	"fan_systems": "buildings[0]/building_segments[0]/heating_ventilation_air_conditioning_systems[0]/fan_systems",
+	"fenestration_subsurfaces": "buildings[0]/building_segments[0]/zones[0]/surfaces[0]/fenestration_subsurfaces",
+	"heating_system": "buildings[0]/building_segments[0]/heating_ventilation_air_conditioning_systems[0]/heating_system",
 	"heating_ventilation_air_conditioning_systems": "buildings[0]/building_segments[0]/heating_ventilation_air_conditioning_systems",
-	"spaces": "buildings[0]/building_segments[0]/thermal_blocks[0]/zones[0]/spaces",
-	"surfaces": "buildings[0]/building_segments[0]/thermal_blocks[0]/zones[0]/spaces[0]/surfaces",
-	"zones": "buildings[0]/building_segments[0]/thermal_blocks[0]/zones"
+	"interior_lighting": "buildings[0]/building_segments[0]/zones[0]/spaces[0]/interior_lighting",
+	"miscellaneous_equipment": "buildings[0]/building_segments[0]/zones[0]/spaces[0]/miscellaneous_equipment",
+	"preheat_system": "buildings[0]/building_segments[0]/heating_ventilation_air_conditioning_systems[0]/preheat_system",
+	"spaces": "buildings[0]/building_segments[0]/zones[0]/spaces",
+	"surfaces": "buildings[0]/building_segments[0]/zones[0]/surfaces",
+	"terminals": "buildings[0]/building_segments[0]/zones[0]/terminals",
+	"zones": "buildings[0]/building_segments[0]/zones"
+
 	
 }

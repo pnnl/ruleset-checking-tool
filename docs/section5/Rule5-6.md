@@ -2,42 +2,37 @@
 # Envelope - Rule 5-6  
 
 **Rule ID:** 5-6  
-**Rule Description:** Opaque Assemblies used for new buildings, existing buildings, or additions shall conform with assemblies detailed in Appendix A and shall match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8: Slab-on-grade floors shall match the F-factor for unheated slabs from the same tables (A6)..  
-**Rule Assertion:** Baseline RMR Surface:U_factor = expected value  
-**Appendix G Section:** Section G3.1-5(b) Building Envelope Modeling Requirements for the Baseline building  
-**Appendix G Section Reference:** Tables G3.4-1 to G3.4-8  
+**Rule Description:** Building above-grade opaque surface U-factors must be modeled in proposed design as designed.  
+**Appendix G Section:** Section G3.1-5(a) Building Envelope Modeling Requirements for the Proposed building  
+**Appendix G Section Reference:** None  
 
-**Applicability:** All required data elements exist for B_RMR  
-**Applicability Checks:**  
-
-  1. Baseline space conditioning category (conditioned, semiheated, unconditioned), residential vs non-residential occupancy type and surface type (wall vs floor vs roof) are determined correctly  
+**Applicability:** All required data elements exist for P_RMR  
+**Applicability Checks:** None  
 
 **Manual Check:** None  
 **Evaluation Context:** Each Data Element  
-**Data Lookup:** Tables G3.4-1 to G3.4-8  
+**Data Lookup:** None  
+**Function Call:**
+
+  - match_data_element()
+  - get_opaque_surface_type()
 
 ## Rule Logic:  
 
-- **Applicability Check 1:** Baseline space conditioning category (conditioned, semiheated, unconditioned), residential vs non-residential occupancy type and surface type (wall vs floor vs roof) are determined correctly.  
+- For each building segment in the Proposed model: `for building_segment_p in P_RMR.building.building_segments:`  
 
-- Get building climate zone: ```climate_zone = B_RMR.weather.climate_zone```  
+  - For each thermal_block in building segment: `for thermal_block_p in building_segment_p.thermal_blocks:`  
 
-- For each building segment in the Baseline model: ```for building_segment_baseline in B_RMR.building.building_segments:```  
+    - For each zone in thermal block: `for zone_p in thermal_block_p.zones:`  
 
-  - For each thermal_block from building segment: ```for thermal_block_baseline in building_segment_baseline.thermal_blocks:```  
+      - For each surface in zone: `for surface_p in zone_p.surfaces:`  
 
-  - For each zone in thermal block: ```zone_baseline in thermal_block_baseline.zones:```  
+        - Check if surface is above-grade opaque surface: `if get_opaque_surface_type(surface_p) in ["ROOF", "FLOOR", "ABOVE-GRADE WALL"]:`
 
-  - For each space in thermal zone: ```space_baseline in zone_baseline.spaces:```  
+          - Get matching surface from U-RMR: `surface_u = match_data_element(U_RMR, surfaces, surface_p.id)`
 
-    - Get space conditioning type: ```space_conditioning_type_baseline = space_baseline.conditioning_type```  
+            **Rule Assertion:**  
 
-      - Get baseline contruction from Table G3.4-1 to G3.4-8 based on space conditioning type, status type and function type: ```surface_performance_target = data_lookup(climate_zone,space_conditioning_type_baseline,"Slab-on-Grade Floors")```  
+            Case 1: Surface U-factor in P_RMR matches U_RMR: `if surface_p.construction.u_factor == surface_u.construction.u_factor: PASS`  
 
-    - For each surface in space: ```for surface_baseline in space_baseline.surfaces:```  
-
-      - Get the surface construction if the surface is slab-on-grade floor: ```if ( surface_baseline.classification == "FLOOR" ) AND ( surface_baseline.adjacent_to == "GROUND" ): surface_construction_baseline = surface_baseline.construction```  
-
-      - Get the performance values for the construction: ```surface_performance_value_baseline = surface_construction_baseline.f_factor```  (Note XC, assumes for slab on grade, RMR reports f-factor not u-factor)
-
-    **Rule Assertion:** Baseline slab-on-grade floor consruction modeled matches Table G3.4-1 to G3.4-8: ```surface_performance_value_baseline == surface_performance_target```  
+            Case 2: Else: `else: FAIL`  
