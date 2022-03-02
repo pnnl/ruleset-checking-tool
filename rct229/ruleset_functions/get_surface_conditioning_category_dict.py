@@ -100,6 +100,18 @@ SCC_DATA_FRAME = pd.DataFrame(
     ],
 )
 
+# Intended for export and internal use
+GET_SURFACE_CONDITIONING_CATEGORY_DICT = {
+    "building": {
+        "building_segments[*].zones[*]": [
+            "surfaces"
+        ],
+        "building_segments[*].zones[*].surfaces[*]":[
+            "adjacent_to", "adjacent_zone"
+        ]
+    }
+}
+
 
 def get_surface_conditioning_category_dict(climate_zone, building):
     """Determines the surface conditioning category for every surface in a building

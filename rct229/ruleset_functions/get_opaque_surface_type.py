@@ -15,6 +15,15 @@ HEATED_SOG: str = "HEATED SLAB-ON-GRADE"
 ROOF: str = "ROOF"
 UNHEATED_SOG: str = "UNHEATED SLAB-ON-GRADE"
 
+# Intended for export and internal use
+GET_OPAQUE_SURFACE_TYPE = {
+    "building": {
+        "building_segments[*].zones[*].surfaces[*]": [
+            "tilt", "adjacent_to"
+        ],
+    }
+}
+
 
 def get_opaque_surface_type(surface):
     """Determines a surface's opaque surface type
