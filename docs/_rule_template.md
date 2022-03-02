@@ -1,6 +1,7 @@
 The following provides a template with general instructions for creating a Rule Definition Strategy (RDS) document for defining rules in the Ruleset Checking Tool.  
 
 # <SECTION_NAME> - Rule <RULE_ID>
+**Schema Version:** 0.0.10
 **Mandatory Rule:** True/False  
 **Rule ID:** The unique string identifier used to identify the rule within the ruleset.  
 **Rule Description:** A textual description of the rule intended to be human readable. This description is included in the output JSON created by the RCT.  
@@ -79,6 +80,7 @@ Notes:
         - Define quantity, unit, precision for the evaluation" `(Example) if calculated_value == expected_value: outcome == "PASS"`
         - Define undetermined case (if applicable): `(Example) elif calculated_value > expected_value: outcome == "UNDETERMINED"` 
         - Add message for manual checks, UNDETERMINED.
+        - Define not applicable case: `(Example) elif not Applicability check #2: outcome == "NOT_APPLICABLE"`
         - All other cases will get a failing outcome: `(Example) else: outcome == "FAIL"`   
 
 **[Back](_toc.md)**
