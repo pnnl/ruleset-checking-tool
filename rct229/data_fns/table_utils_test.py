@@ -1,4 +1,5 @@
 import pytest
+
 from rct229.data_fns.table_utils import find_osstd_table_entry
 
 FAKE_OSSTD_TABLE = {

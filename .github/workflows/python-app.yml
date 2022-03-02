@@ -17,6 +17,8 @@ jobs:
         # This will halt the action if formatting fails
         # Note: This will also fail if there are syntax errors
       - uses: psf/black@stable
+        with:
+          version: "21.10b0"
   run-pytests:
     name: Run pytests
     runs-on: 'ubuntu-latest'

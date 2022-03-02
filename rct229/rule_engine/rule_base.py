@@ -16,6 +16,7 @@ class RuleDefinitionBase:
         description=None,
         rmr_context="",
         required_fields=None,
+        must_match_by_ids=[],
     ):
         """Base class for all Rule definitions
 
@@ -238,7 +239,7 @@ class RuleDefinitionBase:
         dict
             A dict of the form
             {
-                "INVALID_USER_CONTEX": Error message,
+                "INVALID_USER_CONTEXT": Error message,
                 "INVALID_BASELINE_CONTEXT": Error message,
                 "INVALID_PROPOSED_CONTEXT": Error message
             },
@@ -280,7 +281,7 @@ class RuleDefinitionBase:
         This may be overridden to provide alternate validation that, by default,
         will be used to validate each part of the context trio.
 
-        This implementations checks for required fields.
+        This implementation checks for required fields.
 
         Parameters
         ----------
@@ -509,13 +510,22 @@ class RuleDefinitionListBase(RuleDefinitionBase):
     Baseclass for Rule Definitions that apply to each element in a list context.
     """
 
-    def __init__(self, rmrs_used, each_rule, id=None, description=None, rmr_context=""):
+    def __init__(
+        self,
+        rmrs_used,
+        each_rule,
+        id=None,
+        description=None,
+        rmr_context="",
+        required_fields=None,
+    ):
         self.each_rule = each_rule
         super(RuleDefinitionListBase, self).__init__(
             rmrs_used=rmrs_used,
             id=id,
             description=description,
             rmr_context=rmr_context,
+            required_fields=required_fields,
         )
 
     def create_context_list(self, context, data=None):
@@ -599,14 +609,6 @@ class RuleDefinitionListBase(RuleDefinitionBase):
             elif ubp.proposed and ubp.proposed["id"]:
                 item_outcome["id"] = ubp.proposed["id"]
 
-            # Set the name for item_outcome
-            if ubp.user and ubp.user["name"]:
-                item_outcome["name"] = ubp.user["name"]
-            elif ubp.baseline and ubp.baseline["name"]:
-                item_outcome["name"] = ubp.baseline["name"]
-            elif ubp.proposed and ubp.proposed["name"]:
-                item_outcome["name"] = ubp.proposed["name"]
-
             outcomes.append(item_outcome)
         return outcomes
 
@@ -659,6 +661,7 @@ class RuleDefinitionListIndexedBase(RuleDefinitionListBase):
         rmr_context="",
         list_path="[*]",
         match_by="id",
+        required_fields=None,
     ):
         self.index_rmr = index_rmr
         self.list_path = list_path
@@ -669,6 +672,7 @@ class RuleDefinitionListIndexedBase(RuleDefinitionListBase):
             id=id,
             description=description,
             rmr_context=rmr_context,
+            required_fields=required_fields,
         )
 
     def create_context_list(self, context, data=None):

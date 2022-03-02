@@ -131,18 +131,19 @@ def evaluate_rules(rules_list, rmrs):
         if proposed_validation["passed"] is not True:
             invalid_rmrs["Proposed"] = proposed_validation["error"]
 
-    # Replace the numbers that have schema units in the RMRs with the
-    # appropriate pint quantities
-    # TODO: quantitization should happen right after schema validation and
-    # before other validations
-    rmrs = UserBaselineProposedVals(
-        user=quantify_rmr(rmrs.user),
-        baseline=quantify_rmr(rmrs.baseline),
-        proposed=quantify_rmr(rmrs.proposed),
-    )
-
     # Evaluate the rules if all the used rmrs are valid
     if len(invalid_rmrs) == 0:
+        # Replace the numbers that have schema units in the RMRs with the
+        # appropriate pint quantities
+        # TODO: quantitization should happen right after schema validation and
+        # before other validations
+        rmrs = UserBaselineProposedVals(
+            user=quantify_rmr(rmrs.user),
+            baseline=quantify_rmr(rmrs.baseline),
+            proposed=quantify_rmr(rmrs.proposed),
+        )
+
+        # Evaluate the rules
         for rule in rules_list:
             print(f"Processing Rule {rule.id}")
             outcome = rule.evaluate(rmrs)

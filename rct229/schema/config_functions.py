@@ -7,13 +7,11 @@ import pint
 # Initialize pint ureg
 def get_pint_unit_registry():
 
-    ureg = pint.UnitRegistry()
-
     # Import unit definitions from text file
     path_to_units = os.path.join(
         os.path.dirname(__file__), "resources", "unit_registry.txt"
     )
-    ureg.load_definitions(path_to_units)
+    ureg = pint.UnitRegistry(path_to_units)
 
     return ureg
 
@@ -36,3 +34,23 @@ def get_schema_definitions_dictionary():
         schema_dictionary = schema_dictionary["definitions"]
 
     return schema_dictionary
+
+
+def get_unit_conventions_dictionary():
+    """Returns dictionary of unit conventions from ./rct229/schema/resources/unit_conventions.json
+
+     Returns
+    -------
+    convention_dict: dict
+        Python dictionary representation of ./rct229/schema/resources/unit_conventions.json. This dictionary contains
+        the SI and IP unit conventions for various unit types (e.g., area, power_density).
+
+    """
+
+    file_dir = os.path.dirname(__file__)
+    unit_convention_path = os.path.join(file_dir, "resources", "unit_conventions.json")
+
+    with open(unit_convention_path) as f:
+        convention_dict = json.load(f)
+
+    return convention_dict

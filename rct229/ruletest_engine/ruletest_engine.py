@@ -26,29 +26,12 @@ def generate_test_rmrs(test_dict):
         A dictionary including an optional rmr_template field and a
         required rmr_transformations field.
 
-        If rmr_template is included, it is used as the starting point
-        for each RMR; if not included, the empty dictionary {} is used.
-
         The rmr_transformations field has optional user, baseline,
         and proposed fields. If any of these fields is present, its
-        corresponding RMR will be built by transforming the rmr_template. If
-        the user, baseline, or proposed fields are missing, then its
-        correponding RMR is set to None.
+        corresponding RMR will be referenced. If the user, baseline,
+        or proposed fields are missing, then its correponding RMR is
+        set to None.
 
-        The transformations are made using jsonpointer and its set method.
-        For example, if rmr_transformations includes
-        {
-            "user": {
-                "ptr1": value1,
-                "ptr2": value2
-            }
-        }
-        then the user RMR will be produced by first treating "ptr1" as a
-        JsonPointer into rmr_template and setting the pointed to node to value1,
-        which can be of any type; and then repeating the process for "ptr2" and
-        value2. Note that the set method of JsonPointer will create any missing
-        fields along the path to the pointer, but will NOT add elements to a
-        list.
 
     Returns
     -------
@@ -58,41 +41,11 @@ def generate_test_rmrs(test_dict):
         - proposed_rmr (dictionary): Proposed RMR dictionary built from RMR Transformation definition
     """
 
-    # The rmr_transformations field is required
-    if "rmr_transformations" not in test_dict:
-        test_dict["rmr_transformations"] = {}
-
     # Each of these will remain None unless it is specified in
-    # rmr_transformations. If its transfomration is set to {}, then it
-    # will simply be a copy of rmr_template
+    # rmr_transformations.
     user_rmr = None
     baseline_rmr = None
     proposed_rmr = None
-
-    # If RMRs are based on a template
-    if "rmr_template" in test_dict:
-
-        # Get a copy of the RMR template dictionary
-        rmr_template = test_dict["rmr_template"]
-
-        # Initialize user/baseline/proposed RMRs with template if the rmr_template dictionary references them
-        if "user" in rmr_template:
-            user_rmr = copy.deepcopy(rmr_template["json_template"])
-
-            if "user" not in test_dict["rmr_transformations"]:
-                test_dict["rmr_transformations"]["user"] = {}
-
-        if "baseline" in rmr_template:
-            baseline_rmr = copy.deepcopy(rmr_template["json_template"])
-
-            if "baseline" not in test_dict["rmr_transformations"]:
-                test_dict["rmr_transformations"]["baseline"] = {}
-
-        if "proposed" in rmr_template:
-            proposed_rmr = copy.deepcopy(rmr_template["json_template"])
-
-            if "proposed" not in test_dict["rmr_transformations"]:
-                test_dict["rmr_transformations"]["proposed"] = {}
 
     # Read in transformations dictionary. This will perturb a template or fully define an RMR (if no template defined)
     rmr_transformations_dict = test_dict["rmr_transformations"]
@@ -101,30 +54,15 @@ def generate_test_rmrs(test_dict):
     # from RMR transformations
     if "user" in rmr_transformations_dict:
 
-        # If RMR dictionary is not initialized by a template, initialize it
-        if user_rmr is None:
-            user_rmr = {}
-
-        merge_nested_dictionary(user_rmr, rmr_transformations_dict["user"])
-        # user_rmr.update(rmr_transformations_dict["user"])
+        user_rmr = rmr_transformations_dict["user"]
 
     if "baseline" in rmr_transformations_dict:
 
-        # If RMR dictionary is not initialized by a template, initialize it
-        if baseline_rmr is None:
-            baseline_rmr = {}
-
-        merge_nested_dictionary(baseline_rmr, rmr_transformations_dict["baseline"])
-        # baseline_rmr.update(rmr_transformations_dict["baseline"])
+        baseline_rmr = rmr_transformations_dict["baseline"]
 
     if "proposed" in rmr_transformations_dict:
 
-        # If RMR dictionary is not initialized by a template, initialize it
-        if proposed_rmr is None:
-            proposed_rmr = {}
-
-        merge_nested_dictionary(proposed_rmr, rmr_transformations_dict["proposed"])
-        # proposed_rmr.update(rmr_transformations_dict["proposed"])
+        proposed_rmr = rmr_transformations_dict["proposed"]
 
     return user_rmr, baseline_rmr, proposed_rmr
 
@@ -199,7 +137,7 @@ def process_test_result(test_result, test_dict, test_id):
 
     # Get reporting parameters. Check if the test is expected to pass/fail and read in the description.
     expected_outcome = test_dict["expected_rule_outcome"] == "pass"
-    description = test_dict["description"]
+    description = test_dict["test_description"]
 
     # Check if the test results agree with the expected outcome. Write an appropriate response based on their agreement
     received_expected_outcome = test_result == expected_outcome

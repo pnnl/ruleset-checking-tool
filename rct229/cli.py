@@ -1,4 +1,5 @@
 import click
+
 from rct229.reports.project_report import (
     print_json_report,
     print_rule_report,
