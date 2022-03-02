@@ -145,6 +145,7 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
 ## Section 21 - Central Heating Hot Water Systems
   * [21-3](section21/Rule21-3.md): Heating hot water plant capacity shall be based on coincident loads.  
   * [21-4](section21/Rule21-4.md): When baseline building does not use purchased heat, baseline systems 1,5,7,11,12 shall be modeled with natural draft boilers.
+  * [21-5](section21/Rule21-5.md): The baseline building design boiler plant shall be modeled as having a single boiler if the baseline building design plant serves a conditioned floor area of 15,000sq.ft. or less, and as having two equally sized boilers for plants serving more than 15,000sq.ft.
   * [21-6](section21/Rule21-6.md): When baseline building includes two boilers each shall stage as required by load.  
   * [21-9](section21/Rule21-9.md): When baseline building includes boilers, Hot Water Pump Power = 19W/gpm.  
   * [21-10](section21/Rule21-10.md): When the building is modeled with HHW plant (served by either boiler(s) or purchased hot water/steam), the hot water pump shall be modeled as riding the pump curve if the hot water system serves less than 120,000 ft^2 otherwise it shall be modeled with a VFD.  
