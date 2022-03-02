@@ -154,5 +154,6 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
 
 ## Section 22 - Central Chilled Water Systems
   * [22-1](section22/Rule22-1.md): Baseline chilled water design supply temperature shall be modeled at 44F.  
-  * [22-2](section22/Rule22-2.md): Baseline chilled water design return temperature shall be modeled at 56F.  
+  * [22-2](section22/Rule22-2.md): Baseline chilled water design supply temperature shall be modeled at 44F.  
+  * [22-3](section22/Rule22-3.md): For Baseline chilled water loop that is not purchased cooling, chilled-water supply temperature shall be reset based on outdoor dry-bulb temperature if loop does not serve any Baseline System Type-11.
   * [22-5](section22/Rule22-5.md): For Baseline chilled water loop that is not purchased chilled water and serves computer room HVAC systems (System Type-11), chilled-water supply temperature shall be reset higher based on the HVAC system requiring the most cooling.  
