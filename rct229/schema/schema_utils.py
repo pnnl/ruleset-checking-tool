@@ -1,6 +1,9 @@
 import json
 import os
 import re
+from copy import deepcopy
+
+from jsonpath_ng.ext import parse as parse_jsonpath
 
 import rct229.schema.config as config
 
@@ -21,6 +24,7 @@ def clean_schema_units(schema_unit_str):
         The schema_unit_str string value translated to a string value the Pint library unit registry can understand.
 
     """
+    cleaned_unit_str = schema_unit_str
 
     # Clean up dash symbol used with fractional units for pint to understand (e.g. W/K-m2 --> W/(K*m2))
     if "-" in schema_unit_str:
@@ -33,11 +37,7 @@ def clean_schema_units(schema_unit_str):
                 substring_list[i] = "(" + re.sub("-", "*", substring) + ")"
 
         # Put it all together
-        cleaned_unit_str = "".join(substring_list)
-
-    # Nothing to clean
-    else:
-        cleaned_unit_str = schema_unit_str
+        cleaned_unit_str = "/".join(substring_list)
 
     return cleaned_unit_str
 
@@ -45,7 +45,7 @@ def clean_schema_units(schema_unit_str):
 def find_schema_unit_for_json_path(key_list):
     """Ingests a JSON path that has associated units the ASHRAE229 schema. This function returns the units for that
     JSON path as defined by the ASHRAE229 schema.
-    For example: 'transformers/capacity' => 'V-A'
+    For example: ['transformers','capacity'] => 'V-A'
 
      Parameters
      ----------
@@ -79,6 +79,69 @@ def find_schema_unit_for_json_path(key_list):
     else:
         # If no units are found, return none
         return None
+
+
+def quantify_rmr(rmr):
+    """Replaces RMR items with pint quantities based on schema units
+
+    Parameters
+    ----------
+    rmr : dict
+        An RMR dictionary
+
+    Returns
+    -------
+    dict
+        A copy of the original RMR dictionary with all numbers that have units
+        in the schema replaced with their corresponding pint quantities
+    """
+    rmr = deepcopy(rmr)
+
+    # Match all rmr field items
+    # Note, this does not match array items, but will pass through an array to get to a field item
+    all_rmr_field_item_matches = parse_jsonpath("$..*").find(rmr)
+
+    # Pick out the number fields and fields that hold an array of numbers
+    number_rmr_item_matches = list(
+        filter(
+            lambda rmr_item_match: (type(rmr_item_match.value) in [int, float])
+            or (
+                type(rmr_item_match.value) is list
+                and all(
+                    [
+                        type(list_item) in [int, float]
+                        for list_item in rmr_item_match.value
+                    ]
+                )
+            ),
+            all_rmr_field_item_matches,
+        )
+    )
+
+    # Replace all number items that have associated units in the schema
+    # with the appropriate pint quantity
+    for number_rmr_item_match in number_rmr_item_matches:
+        # Get the full path to the item
+        full_path = str(number_rmr_item_match.full_path)
+
+        # Split the full path at dots and list indexing
+        key_list = re.split(r"\.\[\d+\]\.|\.", full_path)
+
+        # Get the units string for the item from the schema
+        schema_unit_str = find_schema_unit_for_json_path(key_list)
+
+        if schema_unit_str is not None:
+            # Make the units string pint-compatible
+            pint_unit_str = clean_schema_units(schema_unit_str)
+
+            # Create the pint quantity to replace the number
+            pint_qty = number_rmr_item_match.value * config.ureg(pint_unit_str)
+
+            # Replace the number with the appropriate pint quantity
+            jsonpath_expr = parse_jsonpath(str(number_rmr_item_match.full_path))
+            jsonpath_expr.update(rmr, pint_qty)
+
+    return rmr
 
 
 def return_json_schema_reference(object_dict, key):

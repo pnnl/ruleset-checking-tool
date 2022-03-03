@@ -1,6 +1,7 @@
 import rct229
 from rct229.data import data
 from rct229.data_fns.table_utils import find_osstd_table_entry
+from rct229.schema.config import ureg
 
 # This dictionary maps the Space Type enumerations to
 # the corresponding lpd values in ashrae_90_1_table_9_6_1.json
@@ -22,7 +23,7 @@ def table_9_6_1_lookup(space_type_enum_val):
     Returns
     -------
     dict
-        { lpd: float - The lighting power density given by Table 9.6.1 [W/ft^2] }
+        { lpd: Quantity - The lighting power density given by Table 9.6.1 [W/ft^2] }
 
     """
     space_type = space_type_enumeration_to_lpd_map[space_type_enum_val]
@@ -30,5 +31,6 @@ def table_9_6_1_lookup(space_type_enum_val):
         [("space_type", space_type)],
         osstd_table=data["ashrae_90_1_table_9_6_1"],
     )
-    lpd = osstd_entry["w/ft^2"]
+    watts_per_sqft = osstd_entry["w/ft^2"]
+    lpd = watts_per_sqft * ureg("watt / foot**2")
     return {"lpd": lpd}
