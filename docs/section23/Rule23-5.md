@@ -44,7 +44,3 @@
         - Case 2: Else: `else: FAIL`
 
 **[Back](../_toc.md)**
-
-**Notes:**
-
-1. Right now the RDS checks both terminal.secondary_airflow and fan.design_airflow to make sure that both is 50% of primary airflow. Please confirm this approach.
