@@ -49,7 +49,9 @@ Logic:
 
     - Add central heating capacity per floor area to zone capacity dictionary: `zone_capacity_dict[zone.id]["HEATING"] += hvac_heat_capacity_dict[hvac_sys.id]`
 
-    - Check if terminal has heating capacity, add to zone capacity dictionary: `if terminal.heat_capacity: zone_capacity_dict[zone.id]["HEATING"] += terminal.heat_capacity / zone_area` (Note XC, it seems terminal does not have cooling capacity. Might need cooling capacity at the terminal level for equipment like active beams.)
+    - Check if terminal has heating capacity, add to zone capacity dictionary: `if terminal.heating_capacity: zone_capacity_dict[zone.id]["HEATING"] += terminal.heat_capacity / zone_area`
+
+    - Check if terminal has cooling capacity, add to zone capacity dictionary: `if terminal.cooling_capacity: zone_capacity_dict[zone.id]["SENSIBLE_COOLING"] += terminal.cooling_capacity / zone_area`
 
   - Check if zone meets the criteria for directly conditioned (heated or cooled) zone, save zone as directly conditioned: `if ( zone_capacity_dict[zone.id]["SENSIBLE_COOLING"] >= CAPACITY_THRESHOLD ) OR ( zone_capacity_dict[zone.id]["HEATING"] >= system_min_heating_output ): directly_conditioned_zones.append(zone.id)`
 
@@ -67,11 +69,11 @@ Logic:
 
         - Check if surface is interior, get adjacent zone: `if surface.adjacent_to == "INTERIOR": adjacent_zone = match_data_element(RMR, zones, surface.adjacent_zone_id)`  
 **[CH: There is no `surface.fenestration_subsurfaces` field. There is a `surface.subsurfaces` field instead. Subsurface has `opaque_area` and `glazed_area`.]**
-          - If adjacent zone is directly conditioned (heated or cooled), add the product of the U-factor and surface area to the directly conditioned type: `if adjacent_zone in directly_conditioned_zone: directly_conditioned_product_sum += sum( ( fenestration.glazed_area + fenestration.opaque_area ) * fenestration.u_factor for fenestration in surface.fenestration_subsurfaces ) + ( surface.area - sum( ( fenestration.glazed_area + fenestration.opaque_area ) for fenestration in surface.fenestration_subsurfaces ) * surface.construction.u_factor`  
+          - If adjacent zone is directly conditioned (heated or cooled), add the product of the U-factor and surface area to the directly conditioned type: `if adjacent_zone in directly_conditioned_zone: directly_conditioned_product_sum += sum( ( subsurface.glazed_area + subsurface.opaque_area ) * subsurface.u_factor for subsurface in surface.subsurfaces ) + ( surface.area - sum( ( subsurface.glazed_area + subsurface.opaque_area ) for subsurface in surface.subsurfaces ) * surface.construction.u_factor`  
 
-          - Else, add the product of the U-factor and surface area to the other type: `else: other_product_sum += sum( ( fenestration.glazed_area + fenestration.opaque_area ) * fenestration.u_factor for fenestration in surface.fenestration_subsurfaces ) + ( surface.area - sum( ( fenestration.glazed_area + fenestration.opaque_area ) for fenestration in surface.fenestration_subsurfaces ) * surface.construction.u_factor`  
+          - Else, add the product of the U-factor and surface area to the other type: `else: other_product_sum += sum( ( subsurface.glazed_area + subsurface.opaque_area ) * subsurface.u_factor for subsurface in surface.subsurfaces ) + ( surface.area - sum( ( subsurface.glazed_area + subsurface.opaque_area ) for subsurface in surface.subsurfaces ) * surface.construction.u_factor`  
 
-        - Else check if surface is exterior, add the product of the U-factor and surface area to the other type: `else if surface.adjacent_to == "EXTERIOR": other_product_sum += sum( ( fenestration.glazed_area + fenestration.opaque_area ) * fenestration.u_factor for fenestration in surface.fenestration_subsurfaces ) + ( surface.area - sum( ( fenestration.glazed_area + fenestration.opaque_area ) for fenestration in surface.fenestration_subsurfaces ) * surface.construction.u_factor`  
+        - Else check if surface is exterior, add the product of the U-factor and surface area to the other type: `else if surface.adjacent_to == "EXTERIOR": other_product_sum += sum( ( subsurface.glazed_area + subsurface.opaque_area ) * subsurface.u_factor for subsurface in surface.subsurfaces ) + ( surface.area - sum( ( subsurface.glazed_area + subsurface.opaque_area ) for subsurface in surface.subsurfaces ) * surface.construction.u_factor`  
 
       - Determine if zone is indirectly conditioned: `if directly_conditioned_product_sum > other_product_sum: indirectly_conditioned_zones.append(zone)`  
 
@@ -91,27 +93,26 @@ Logic:
 
         - Check if lighting space type is residential, space is classified as residential: `if space.lighting_space_type in ["DORMITORY_LIVING_QUARTERS" , "FIRE_STATION_SLEEPING_QUARTERS", "GUEST_ROOM", "DWELLING_UNIT", "HEALTHCARE_FACILITY_NURSERY", "HEALTHCARE_FACILITY_PATIENT_ROOM"]: space_residential_flag = TRUE`  
 **[CH: I suggest replacing `space_residential_flag` with `zone_has_residential_spaces` and replacing `space_nonresidential_flag` with `zone_has_residential_spaces`.]**
-        - Else if lighting space type is specified, space is classified as non-residential: `else if space.lighting_space_type: space_nonresidential_flag = TRUE`  
+        - Else if lighting space type is specified, space is classified as non-residential: `else if space.lighting_space_type: zone_has_nonresidential_spaces = TRUE`  
 
-        - Else if lighting space type is not specified, and lighting building area type is residential, space is classified as residential: `else if segment_residential_flag: space_residential_flag = TRUE`
+        - Else if lighting space type is not specified, and lighting building area type is residential, space is classified as residential: `else if segment_residential_flag: zone_has_residential_spaces = TRUE`
 
-        - Else if lighting space type is not specified, and lighting building area type is non-residential, space is classified as non-residential: `else if segment_nonresidential_flag: space_nonresidential_flag = TRUE`
+        - Else if lighting space type is not specified, and lighting building area type is non-residential, space is classified as non-residential: `else if segment_nonresidential_flag: zone_has_nonresidential_spaces = TRUE`
 
-        - Else, neither lighting space type or lighting building area type is specified, space is classified as non-residential (i.e. where the space classification is unknown, the space shall be classified as an office space as per G3.1-1(c)): `else: space_nonresidential_flag = TRUE`
+        - Else, neither lighting space type or lighting building area type is specified, space is classified as non-residential (i.e. where the space classification is unknown, the space shall be classified as an office space as per G3.1-1(c)): `else: zone_has_nonresidential_spaces = TRUE`
 
-      - If zone has both residential and non-residential spaces, classify zone as conditioned mixed: `if residential_flag AND nonresidential_flag: zone_conditioning_category_dict[zone.id] = "CONDITIONED MIXED"`  
+      - If zone has both residential and non-residential spaces, classify zone as conditioned mixed: `if zone_has_residential_spaces AND zone_has_nonresidential_spaces: zone_conditioning_category_dict[zone.id] = "CONDITIONED MIXED"`  
 
-      - Else if zone has only residential spaces, classify zone as conditioned residential: `else if residential_flag: zone_conditioning_category_dict[zone.id] = "CONDITIONED RESIDENTIAL"`  
+      - Else if zone has only residential spaces, classify zone as conditioned residential: `else if zone_has_residential_spaces: zone_conditioning_category_dict[zone.id] = "CONDITIONED RESIDENTIAL"`  
 
-      - Else if zone has only non-residential spaces, classify zone as conditioned non-residential: `else: zone_conditioning_category_dict[zone.id] = "CONDITIONED NON-RESIDENTIAL"`  
-
+      - Else, zone has only non-residential spaces, classify zone as conditioned non-residential: `else: zone_conditioning_category_dict[zone.id] = "CONDITIONED NON-RESIDENTIAL"`  
     - Else if zone is semi-heated, classify zone as semi-heated: `else if zone in semiheated_zones: zone_conditioning_category_dict[zone.id] = "SEMI-HEATED"`  
 
     - Else if zone has interior parking spaces, classify zone as unenclosed: `if（ space.lighting_space_type == "PARKING_AREA_INTERIOR" for space in zone.spaces ）: zone_conditioning_category_dict[zone.id] = "UNENCLOSED"`  
 
-    - Else if zone is crawlspace, classify zone as unenclosed: `else if ( ( zone.volume / sum( space.floor_area for space in zone.spaces ) ) < CRAWLSPACE_HEIGHT_THRESHOLD ) AND ( ( get_opaque_surface_type(surface) in ["HEATED SLAB-ON-GRADE", "UNHEATED SLAB-ON-GRADE"] ) AND ( surface.adjacent_to == "GROUND" ) for `**[CH: insert `any`]**` surface in zone.surfaces ): zone_conditioning_category_dict[zone.id] = "UNENCLOSED"`  (Note XC, need to check surface != Floor, RDS online not updated)
+    - Else if zone is crawlspace, classify zone as unenclosed: `else if ( ( zone.volume / sum( space.floor_area for space in zone.spaces ) ) < CRAWLSPACE_HEIGHT_THRESHOLD ) AND ( get_opaque_surface_type(surface) in ["HEATED SLAB-ON-GRADE", "UNHEATED SLAB-ON-GRADE"] for `**[CH: insert `any`]**` ANY surface in zone.surfaces ): zone_conditioning_category_dict[zone.id] = "UNENCLOSED"`
 
-    - Else if zone is attic, classify zone as unenclosed: `else if ( ( get_opaque_surface_type(surface) == "CEILING"`**[CH: ROOF?]**` ) AND ( surface.adjacent_to == "EXTERIOR" ) for `**[CH: insert `any`]**` surface in zone.surfaces ): zone_conditioning_category_dict[zone.id] = "UNENCLOSED"`  
+    - Else if zone is attic, classify zone as unenclosed: `else if ( ( get_opaque_surface_type(surface) == "ROOF"`**[CH: ROOF?]**` ) AND ( surface.adjacent_to == "EXTERIOR" ) for `**[CH: insert `any`]**` ANY surface in zone.surfaces ): zone_conditioning_category_dict[zone.id] = "UNENCLOSED"`  
 
     - Else, classify zone as unconditioned: `else: zone_conditioning_category_dict[zone.id] = "UNCONDITIONED"`  
 
