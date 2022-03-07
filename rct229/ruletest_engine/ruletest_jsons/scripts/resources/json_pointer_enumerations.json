@@ -15,6 +15,5 @@
 	"surfaces": "ruleset_model_instances[0]/buildings[0]/building_segments[0]/zones[0]/surfaces",
 	"terminals": "ruleset_model_instances[0]/buildings[0]/building_segments[0]/zones[0]/terminals",
 	"zones": "ruleset_model_instances[0]/buildings[0]/building_segments[0]/zones"
-
 	
 }

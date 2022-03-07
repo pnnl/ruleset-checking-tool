@@ -9,12 +9,20 @@ CRAWLSPACE_HEIGHT_THRESHOLD = 7 * ureg("ft")
 ZERO_AREA = 0 * ureg("ft2")
 ZERO_UA = 0 * ureg("ft2 * Btu / (hr * ft2 * R)")
 
+# The possible zone conditioning categories
+CONDITIONED_MIXED = "CONDITIONED_MIXED"
+CONDITIONED_NON_RESIDENTIAL = "CONDITIONED_NON_RESIDENTIAL"
+CONDITIONED_RESIDENTIAL = "CONDITIONED_RESIDENTIAL"
+SEMI_HEATED = "SEMI_HEATED"
+UNCONDITIONED = "UNCONDITIONED"
+UNENCLOSED = "UNENCLOSED"
+
 
 def mock_get_zone_conditioning_category_dict(climate_zone, building):
     """To be used until get_zone_conditioning_category_dict(climate_zone, building) is finished"""
     building_zones = find_all("building_segments[*].zones[*]", building)
 
-    return {zone["id"]: "CONDITIONED_MIXED" for zone in building_zones}
+    return {zone["id"]: CONDITIONED_MIXED for zone in building_zones}
 
 
 def get_zone_conditioning_category_dict(climate_zone, building):
@@ -30,8 +38,8 @@ def get_zone_conditioning_category_dict(climate_zone, building):
     -------
     dict
         A dictionary that maps zones to one of the conditioning categories:
-        "CONDITIONED MIXED", "CONDITIONED NON-RESIDENTIAL", "CONDITIONED RESIDENTIAL",
-        "SEMI-HEATED", "UNCONDITIONED", "UNENCLOSED"
+        CONDITIONED_MIXED, CONDITIONED_NON_RESIDENTIAL, CONDITIONED_RESIDENTIAL,
+        SEMI_HEATED, UNCONDITIONED, UNENCOLOSED
     """
     system_min_heating_output = table_3_2_lookup(climate_zone)[
         "system_min_heating_output"
@@ -184,20 +192,20 @@ def get_zone_conditioning_category_dict(climate_zone, building):
                 if zone_has_residential_spaces and zone_has_nonresidential_spaces:
                     zone_conditioning_category_dict[
                         zone_id
-                    ] = "CONDITIONED MIXED"  # zone_1_1
+                    ] = CONDITIONED_MIXED  # zone_1_1
                 elif zone_has_residential_spaces:
                     zone_conditioning_category_dict[
                         zone_id
-                    ] = "CONDITIONED RESIDENTIAL"  # zone_1_4
+                    ] = CONDITIONED_RESIDENTIAL  # zone_1_4
                 elif zone_has_nonresidential_spaces:
                     zone_conditioning_category_dict[
                         zone_id
-                    ] = "CONDITIONED NON-RESIDENTIAL"  # zone_1_2, zone_1_3
+                    ] = CONDITIONED_NON_RESIDENTIAL  # zone_1_2, zone_1_3
 
             # To get here, the zone is neither directly or indirectly conditioned
             # Check for semi-heated
             elif zone_id in semiheated_zone_ids:
-                zone_conditioning_category_dict[zone_id] = "SEMI-HEATED"  # zone_1_5
+                zone_conditioning_category_dict[zone_id] = SEMI_HEATED  # zone_1_5
             # Check for interior parking spaces
             elif any(
                 [
@@ -207,7 +215,7 @@ def get_zone_conditioning_category_dict(climate_zone, building):
                     )
                 ]
             ):
-                zone_conditioning_category_dict[zone_id] = "UNENCLOSED"  # zone_1_6
+                zone_conditioning_category_dict[zone_id] = UNENCLOSED  # zone_1_6
             # Check for crawlspace
             elif zone["volume"] / pint_sum(
                 find_all("spaces[*].floor_area", zone)
@@ -219,7 +227,7 @@ def get_zone_conditioning_category_dict(climate_zone, building):
                     for surface in zone["surfaces"]
                 ]
             ):
-                zone_conditioning_category_dict[zone_id] = "UNENCLOSED"  # zone_1_7
+                zone_conditioning_category_dict[zone_id] = UNENCLOSED  # zone_1_7
             # Check for attic
             elif any(
                 [
@@ -228,9 +236,9 @@ def get_zone_conditioning_category_dict(climate_zone, building):
                     for surface in zone["surfaces"]
                 ]
             ):
-                zone_conditioning_category_dict[zone_id] = "UNENCLOSED"  # zone_1_8
+                zone_conditioning_category_dict[zone_id] = UNENCLOSED  # zone_1_8
             # Anything else
             else:
-                zone_conditioning_category_dict[zone_id] = "UNCONDITIONED"  # zone_1_9
+                zone_conditioning_category_dict[zone_id] = UNCONDITIONED  # zone_1_9
 
     return zone_conditioning_category_dict

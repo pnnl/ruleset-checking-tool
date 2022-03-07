@@ -1,5 +1,8 @@
 {
     "id": "ashrae_229_1",
+    "weather": {
+      "climate_zone": "CZ4A"
+    },
     "buildings": [
       {
           "id": "0",

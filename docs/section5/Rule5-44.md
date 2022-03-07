@@ -19,9 +19,7 @@
 
 - For each building segment in the Baseline model: `for building_segment_b in B_RMR.building.building_segments:`  
 
-  - For each thermal block in building segment: `for thermal_block_b in building_segment_b.thermal_blocks:`  
-
-    - For each zone in thermal block, get zone infiltration: `for zone_b in thermal_block_b.zones: infiltration_b = zone_b.infiltration`  
+    - For each zone in building segment, get zone infiltration: `for zone_b in building_segment_b.zones: infiltration_b = zone_b.infiltration`  
 
       **Rule Assertion:**  
 
