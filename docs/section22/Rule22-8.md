@@ -1,22 +1,21 @@
 
 # CHW&CW - Rule 22-8  
 
+**Schema Version:** 0.0.10 **Mandatory Rule:** True
 **Rule ID:** 22-8  
 **Rule Description:** For Baseline chilled water system with cooling capacity of 300 tons or more, the secondary pump shall be modeled with variable-speed drives.  
 **Rule Assertion:** B-RMR = expected value  
 **Appendix G Section:** Section 22 CHW&CW Loop  
-**Appendix G Section Reference:** Section G3.1.3.10 Chilled-water supply temperature reset (System 7, 8, 11, 12 and 13)  
-
-**Applicability:** All required data elements exist for B_RMR  
+**90.1 Section Reference:** Section G3.1.3.10 Chilled-water pumps (System 7, 8, 11, 12 and 13)  
+**Data Lookup:** None  
+**Evaluation Context:** Building  
 **Applicability Checks:**  
 
 1. B-RMR is modeled with at least one air-side system that is Type-7, 8, 11, 12, 13, 7b, 8b, 11b, 12b, 13b.
-2. B-RMR chilled water system cooling capacity is 300 tons or more.
+2. Primary and secondary CHW loops are modeled correctly in B-RMR.
+3. B-RMR chilled water system cooling capacity is 300 tons or more.
 
-**Manual Check:** None  
-**Evaluation Context:** Building  
-**Data Lookup:** None  
-**Function Call:**  
+**Function Calls:**  
 
 1. get_baseline_system_types()
 2. get_primary_secondary_loops()
