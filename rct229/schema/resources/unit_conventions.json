@@ -14,7 +14,7 @@
         "volume": "ft3",
         "area": "ft2",
         "power_density": "W/ft2",
-        "thermal_transmittance": "Btu/hr-ft2-R",
-        "linear_thermal_transmittance": "Btu/hr-ft-R"
+        "thermal_transmittance": "Btu/hr-ft2-F",
+        "linear_thermal_transmittance": "Btu/hr-ft-F"
     }
 }
