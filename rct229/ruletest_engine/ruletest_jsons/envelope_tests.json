@@ -452,7 +452,7 @@
                                                     {
                                                         "id": "Space 1",
                                                         "occupant_multiplier_schedule": "Required Occupancy Sched 1",
-                                                        "lighting_space_type": "DWELLING_UNIT"
+                                                        "lighting_space_type": "WAREHOUSE_STORAGE_AREA_SMALLER_HAND_CARRIED_ITEMS"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -534,7 +534,7 @@
                                                     {
                                                         "id": "Space 1",
                                                         "occupant_multiplier_schedule": "Required Occupancy Sched 1",
-                                                        "lighting_space_type": "DWELLING_UNIT"
+                                                        "lighting_space_type": "WAREHOUSE_STORAGE_AREA_SMALLER_HAND_CARRIED_ITEMS"
                                                     }
                                                 ],
                                                 "surfaces": [
