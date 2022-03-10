@@ -619,7 +619,7 @@
         "Rule": 44,
         "Test": "c",
         "test_description": "constant infiltration modeling method is used",
-        "expected_rule_outcome": "pass",
+        "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-44",
             "ruleset_reference": "Table G3.1 #5 (b) proposed column: Infiltration shall be modeled using... adjustments for weather and building operation. These adjustments shall be made for each simulation time step and must account for but not be limited to weather conditions and HVAC system operation, including strategies that are\nintended to positively pressurize the building.",
