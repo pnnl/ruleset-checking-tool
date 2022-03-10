@@ -11,9 +11,9 @@ from rct229.schema.schema_utils import *
 
 # ---------------------------------------USER INPUTS---------------------------------------
 
-spreadsheet_name = "example_rmrs.xlsx"
-json_name = "envelope_examples.json"
-sheet_name = "Envelope"
+spreadsheet_name = "envelope_tcd_5_45.xlsx"
+json_name = "envelope_tcd_5_45.json"
+sheet_name = "TCDs"
 
 # --------------------------------------SCRIPT STARTS--------------------------------------
 
@@ -184,7 +184,7 @@ def create_dictionary_from_excel(spreadsheet_name, sheet_name):
     keys = []
     non_test_related_columns = []
     unit_headers = ["unit_type", "units"]
-    tcd_note_headers = ["data_group", "object_id", "parent_id", "data_element"]
+    tcd_note_headers = ["data_group", "data_element"]
 
     for header in headers:
         # If header has substring 'key', consider it a key
