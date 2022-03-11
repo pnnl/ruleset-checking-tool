@@ -34,7 +34,7 @@ class Section5Rule44(RuleDefinitionListIndexedBase):
             failing_infiltration_ids = [
                 b_infiltration["id"]
                 for b_infiltration in baseline_infiltration
-                if b_infiltration["modeling_method"] != CONSTANT
+                if b_infiltration["modeling_method"] == CONSTANT
             ]
             return {"failing_infiltration_ids": failing_infiltration_ids}
 
