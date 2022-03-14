@@ -220,6 +220,10 @@ TEST_RMR = {
                                     "adjacent_to": "INTERIOR",
                                     "adjacent_zone": "zone_1_3",  # semi-heated
                                     "area": 10,  # m2
+                                    "construction": {
+                                        "id": "const_1_4_1",
+                                        "u_factor": 0.1,  # W/(m2 * K)
+                                    },
                                     "subsurfaces": [
                                         {
                                             "id": "subsurface_1_4_1_1",
@@ -235,6 +239,10 @@ TEST_RMR = {
                                     "adjacent_to": "INTERIOR",
                                     "adjacent_zone": "zone_1_1",  # directly conditioned
                                     "area": 10,  # m2
+                                    "construction": {
+                                        "id": "const_1_4_2",
+                                        "u_factor": 0.1,  # W/(m2 * K)
+                                    },
                                     "subsurfaces": [
                                         {
                                             "id": "subsurface_1_4_2_1",
@@ -277,6 +285,10 @@ TEST_RMR = {
                                     "adjacent_to": "INTERIOR",
                                     "adjacent_zone": "zone_1_1",  # directly conditioned
                                     "area": 10,  # m2
+                                    "construction": {
+                                        "id": "const_1_5_1",
+                                        "u_factor": 0.1,  # W/(m2 * K)
+                                    },
                                     "subsurfaces": [
                                         {
                                             "id": "subsurface_1_5_1_1",
@@ -292,6 +304,10 @@ TEST_RMR = {
                                     "adjacent_to": "INTERIOR",
                                     "adjacent_zone": "zone_1_4",  # semi-heated
                                     "area": 10,  # m2
+                                    "construction": {
+                                        "id": "const_1_5_2",
+                                        "u_factor": 0.1,  # W/(m2 * K)
+                                    },
                                     "subsurfaces": [
                                         {
                                             "id": "subsurface_1_5_2_1",
@@ -335,6 +351,10 @@ TEST_RMR = {
                                     "adjacent_to": "INTERIOR",
                                     "adjacent_zone": "zone_1_4",  # semi-heated
                                     "area": 10,  # m2
+                                    "construction": {
+                                        "id": "const_1_6_1",
+                                        "u_factor": 0.1,  # W/(m2 * K)
+                                    },
                                     "subsurfaces": [
                                         {
                                             "id": "subsurface_1_6_1_1",
@@ -350,6 +370,10 @@ TEST_RMR = {
                                     "adjacent_to": "INTERIOR",
                                     "adjacent_zone": "zone_1_1",  # directly conditioned
                                     "area": 10,  # m2
+                                    "construction": {
+                                        "id": "const_1_6_2",
+                                        "u_factor": 0.1,  # W/(m2 * K)
+                                    },
                                     "subsurfaces": [
                                         {
                                             "id": "subsurface_1_6_2_1",
@@ -392,7 +416,10 @@ TEST_RMR = {
                                     "adjacent_to": "GROUND",
                                     "adjacent_zone": "zone_1_1",  # directly conditioned
                                     "area": 10,  # m2
-                                    "construction": {"id": "const_1_7_1_1"},
+                                    "construction": {
+                                        "id": "const_1_7_1",
+                                        "u_factor": 0.1,  # W/(m2 * K)
+                                    },
                                     "subsurfaces": [
                                         {
                                             "id": "subsurface_1_7_1_1",
@@ -409,7 +436,10 @@ TEST_RMR = {
                                     "adjacent_to": "INTERIOR",
                                     "adjacent_zone": "zone_1_4",  # semi-heated
                                     "area": 10,  # m2
-                                    "construction": {"id": "const_1_7_2_1"},
+                                    "construction": {
+                                        "id": "const_1_7_2",
+                                        "u_factor": 0.1,  # W/(m2 * K)
+                                    },
                                     "subsurfaces": [
                                         {
                                             "id": "subsurface_1_7_2_1",
@@ -447,7 +477,10 @@ TEST_RMR = {
                                     "adjacent_to": "EXTERIOR",
                                     "adjacent_zone": "zone_1_4",  # semi-heated
                                     "area": 10,  # m2
-                                    "construction": {"id": "const_1_8_1_1"},
+                                    "construction": {
+                                        "id": "const_1_8_1",
+                                        "u_factor": 0.1,  # W/(m2 * K)
+                                    },
                                     "subsurfaces": [
                                         {
                                             "id": "subsurface_1_8_1_1",
@@ -464,7 +497,10 @@ TEST_RMR = {
                                     "adjacent_to": "INTERIOR",
                                     "adjacent_zone": "zone_1_1",  # directly conditioned
                                     "area": 10,  # m2
-                                    "construction": {"id": "const_1_8_2_1"},
+                                    "construction": {
+                                        "id": "const_1_8_2",
+                                        "u_factor": 0.1,  # W/(m2 * K)
+                                    },
                                     "subsurfaces": [
                                         {
                                             "id": "subsurface_1_8_2_1",
@@ -502,7 +538,10 @@ TEST_RMR = {
                                     "adjacent_to": "EXTERIOR",
                                     "adjacent_zone": "zone_1_4",  # semi-heated
                                     "area": 10,  # m2
-                                    "construction": {"id": "const_1_9_1_1"},
+                                    "construction": {
+                                        "id": "const_1_9_1",
+                                        "u_factor": 0.1,  # W/(m2 * K)
+                                    },
                                     "subsurfaces": [
                                         {
                                             "id": "subsurface_1_9_1_1",
@@ -519,7 +558,10 @@ TEST_RMR = {
                                     "adjacent_to": "INTERIOR",
                                     "adjacent_zone": "zone_1_1",  # directly conditioned
                                     "area": 10,  # m2
-                                    "construction": {"id": "const_1_9_2_1"},
+                                    "construction": {
+                                        "id": "const_1_9_2",
+                                        "u_factor": 0.1,  # W/(m2 * K)
+                                    },
                                     "subsurfaces": [
                                         {
                                             "id": "subsurface_1_9_2_1",
