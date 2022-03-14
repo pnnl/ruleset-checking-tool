@@ -1,4 +1,4 @@
-# DO NOT REVIEW get_zones_G3.1.1c_40_EFLHs
+# PLEASE DO NOT REVIEW get_zones_G3.1.1c_40_EFLHs
 # IN PROGRESS - I PLAN TO MAKE MAJOR CHANGES
 
 **Description:** Get the list of zones in which baseline HVAC system type 3 or 4 has been used for spaces (zones???) that differ by more than 40 equivalent full load hrs/week from other spaces (zones???) served by the system.   
@@ -17,15 +17,34 @@
 
 ## Logic:  
 - For each building_segment_b in B_RMR: `for building_segment_b in B_RMR..BuildingSegment:`
-    - Set function applicability flag to FALSE, true if G3.1.1c applies to the hvac system : `hvac_sys_G3.1.1c_applies_check = FALSE`  
+    - Set function applicability flag to FALSE: `hvac_sys_G3.1.1c_applies_check = FALSE`  
     - Get dictionary of baseline hvac system types and ids from function: `baseline_hvac_sys_type_ids_dict_b = get_baseline_system_types(B_RMR)`
-    - Check if HVAC system is type 5, 6, 7, or 8 exists, if so then carry on, if not skip building segment: `if all (k in baseline_hvac_sys_type_ids_dict_b for k in ("SYS-5", "SYS-6", "SYS-7", "SYS-8", "SYS-7a", "SYS-8a","SYS-5b", "SYS-6b", "SYS-7b", "SYS-7c")):`   
+    - Check if there is an HVAC system of type 5, 6, 7, or 8 associated with the building segment, if so then carry on, if not skip building segment: `if all (k in baseline_hvac_sys_type_ids_dict_b for k in ("SYS-5", "SYS-6", "SYS-7", "SYS-8", "SYS-7a", "SYS-8a","SYS-5b", "SYS-6b", "SYS-7b", "SYS-7c")):`    
+        - For each zone_b in building_segment_b.zones: `For zone_b in building_segment_b.zones:`
+            - Get the floor number that the zone is associated with: `zone_floor_number_b = zone_b.zone_floor_number`
+            - Add to the list of floors in the building segment, keep adding as the code loops through the zones: `floor_list_b = floor_list_b.append(zone_floor_number_b)`    
+
+        This is a stuggle because a system 5, 6,7, or 8 could serve more than one floors if the floors have identical thermal blocks. If floors are identical then we can do this per floor. Thsi means that we should only look at one floor
+        
+        Potential functions to create
+        Returns list of hvac systems associated with a zone (do all zones in RMR and make dictionary)
+        Returns list of zones with labs
+        Returns equivalent full-load hours per week from other spaces served by the system, are considered to differ significantly (is this on average), so a functions that returns average EFLHs per week?
+        Returns list of dictionary of floor as key and list of zones as values
+
+
+        Potential functions to use
+        longest_fan_schedule
+        get_hvac_zone_list_w_area Returns hvac_zone_list_w_area_dictionary: A dictionary that saves the list of zones and the total floor area served by each HVAC system, i.e. {hvac_system_1.id: {"ZONE_LIST": [zone_1.id, zone_2.id, zone_3.id], "TOTAL_AREA": 10000}, hvac_system_2.id: {"ZONE_LIST": [zone_10.id], "TOTAL_AREA": 500}}
+        get list of zones with computer rooms
+       
+
+        
         Create a dictionary with zone ID as key and a list with zone descriptor information (including the HVAC system with the longest fan schedule) for access later in the logic. This dictionary will be used later in the logic.
         - for each zone_b in the building_segment_b: `for zone_b in building_segment_b.zones:`
             - Reset list of hvac systems associated with the zone: `heating_ventilation_air_conditioning_systems_list_b = []`   
             Gets the floor number associated with the zone
-            - Get the floor number that the zone is associated with: `zone_floor_number_b = zone_b.zone_floor_number`
-                - Add to the list of floors in the building segment, keep adding as the code loops through the zones: `floor_list_b = floor_list_b.append(zone_floor_number_b)`    
+            
             Gets a list of the hvac systems associated with the zone
             - For each terminal unit associated with the zone: `for terminal_b in zone_b.terminals:`
                 - Get the served_by_heating_ventilation_air_conditioning_systems: `heating_ventilation_air_conditioning_systems_b = terminal_b.served_by_heating_ventilation_air_conditioning_systems`
