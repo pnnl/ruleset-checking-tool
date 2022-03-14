@@ -1,4 +1,5 @@
 # get_zones_G3.1.1c_40_EFLHs
+# IN PROGRESS - I PLAN TO MAKE MAJOR CHANGES
 
 **Description:** Get the list of zones in which baseline HVAC system type 3 or 4 has been used for spaces (zones???) that differ by more than 40 equivalent full load hrs/week from other spaces (zones???) served by the system.   
 
@@ -11,6 +12,8 @@
 **Function Call:**  
 
 1. get_baseline_system_types  
+
+# IN PROGRESS - I PLAN TO MAKE MAJOR CHANGES
 
 ## Logic:  
 - For each building_segment_b in B_RMR: `for building_segment_b in B_RMR..BuildingSegment:`
