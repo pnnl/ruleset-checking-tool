@@ -16,6 +16,14 @@ from rct229.utils.pint_utils import ZERO, pint_sum
 CAPACITY_THRESHOLD = 3.4 * ureg("Btu/(hr * ft2)")
 CRAWLSPACE_HEIGHT_THRESHOLD = 7 * ureg("ft")
 
+# The possible zone conditioning categories
+CONDITIONED_MIXED = "CONDITIONED_MIXED"
+CONDITIONED_NON_RESIDENTIAL = "CONDITIONED_NON_RESIDENTIAL"
+CONDITIONED_RESIDENTIAL = "CONDITIONED_RESIDENTIAL"
+SEMI_HEATED = "SEMI_HEATED"
+UNCONDITIONED = "UNCONDITIONED"
+UNENCLOSED = "UNENCLOSED"
+
 
 # TODO: Review for comparison tolerances
 
@@ -69,8 +77,8 @@ def get_zone_conditioning_category_dict(climate_zone, building):
     -------
     dict
         A dictionary that maps zones to one of the conditioning categories:
-        "CONDITIONED MIXED", "CONDITIONED NON-RESIDENTIAL", "CONDITIONED RESIDENTIAL",
-        "SEMI-HEATED", "UNCONDITIONED", "UNENCLOSED"
+        CONDITIONED_MIXED, CONDITIONED_NON_RESIDENTIAL, CONDITIONED_RESIDENTIAL,
+        SEMI_HEATED, UNCONDITIONED, UNENCOLOSED
     """
     assert_required_fields(
         GET_ZONE_CONDITIONING_CATEGORY_DICT__REQUIRED_FIELDS["building"], building
