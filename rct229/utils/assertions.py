@@ -20,7 +20,7 @@ def assert_required_fields(req_fields, obj):
                 ), f"Missing {field} in {jpath} id:{element.get('id')}"
 
 
-def getattr_(obj, obj_name: str, *keys):
+def getattr_(obj, obj_name: str, first_key, *remaining_keys):
     """Gets the value inside a dictionary described by a key path or raises an expection
 
     Parameters
@@ -30,8 +30,10 @@ def getattr_(obj, obj_name: str, *keys):
         level along the key path, the dictionary must have an id field.
     obj_name : str
         The name for the dictionary to be searched
-    keys: [str]
-        One or more keys to be used as a search path
+    first_key : str
+        The first key in the path
+    remaining_keys: [str]
+        Any additional keys in the path
 
     Returns
     -------
@@ -43,8 +45,11 @@ def getattr_(obj, obj_name: str, *keys):
     AssertionError if the key path does not exist. The error message indicates what
     field was missing.
     """
-    first_key = keys[0]
     assert first_key in obj, f"{obj_name}:{obj['id']} is missing {first_key} field"
     val = obj[first_key]
 
-    return val if len(keys) == 1 else getattr_(val, first_key, *keys[1:])
+    return (
+        val
+        if len(remaining_keys) == 0
+        else getattr_(val, first_key, remaining_keys[0], *remaining_keys[1:])
+    )
