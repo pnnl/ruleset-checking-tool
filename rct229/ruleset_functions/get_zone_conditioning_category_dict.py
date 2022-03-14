@@ -199,8 +199,18 @@ def get_zone_conditioning_category_dict(climate_zone, building):
                     find_all("surfaces[*]", zone), f"zone:{zone_id} has no surfaces"
                 )
                 for surface in zone["surfaces"]:
-                    # Calculate the UA for the surface
-                    surface_ua = pint_sum(
+                    subsurfaces = find_all("subsurfaces[*]", surface)
+                    # Calculate the total area of all subsurfaces
+                    subsurfaces_area = pint_sum(
+                        [
+                            subsurface.get("glazed_area", ZERO.AREA)
+                            + subsurface.get("opaque_area", ZERO.AREA)
+                            for subsurface in subsurfaces
+                        ],
+                        ZERO.AREA,  # value used if there are no subsurfaces
+                    )
+                    # Calculate the total UA for all subsurfaces
+                    subsurfaces_ua = pint_sum(
                         [
                             subsurface["u_factor"]
                             * (
@@ -208,9 +218,27 @@ def get_zone_conditioning_category_dict(climate_zone, building):
                                 subsurface.get("glazed_area", ZERO.AREA)
                                 + subsurface.get("opaque_area", ZERO.AREA)
                             )
-                            for subsurface in find_all("subsurfaces[*]", surface)
+                            for subsurface in subsurfaces
                         ],
-                        ZERO.U_FACTOR,
+                        ZERO.U_FACTOR,  # value used if there are no subsurfaces
+                    )
+                    # Calculate the are of the surface that is not part of a subsurface
+                    assert_(
+                        "area" in surface, f"surface:{surface['id']} has no area field"
+                    )
+                    non_subsurfaces_area = surface["area"] - subsurfaces_area
+                    # Calculate the UA for the surface
+                    assert_(
+                        "construction" in surface,
+                        f"Surface:{surface['id']} has no construction field",
+                    )
+                    assert_(
+                        "u_factor" in surface["construction"],
+                        f"construction:{surface['construction']['id']} has no u_factor field",
+                    )
+                    surface_ua = (
+                        surface["construction"]["u_factor"] * non_subsurfaces_area
+                        + subsurfaces_ua
                     )
 
                     # Add the surface UA to one of the running totals for the zone
