@@ -1,5 +1,6 @@
-from rct229.ruletest_engine.ruletest_engine import *
 import excel_to_test_json
+
+from rct229.ruletest_engine.ruletest_engine import *
 
 test_json_name = excel_to_test_json.json_name
 

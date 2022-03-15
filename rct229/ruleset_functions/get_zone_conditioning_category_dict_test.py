@@ -15,17 +15,19 @@ from rct229.schema.schema_utils import quantify_rmr
 from rct229.schema.validate import schema_validate_rmr
 
 CLIMATE_ZONE = "CZ0A"
-CAPACITY_DELTA = 1
+POWER_DELTA = 1
 SYSTEM_MIN_HEATING_OUTPUT_QUANTITY = table_3_2_lookup(CLIMATE_ZONE)[
     "system_min_heating_output"
 ]
 
 # Convert pint quantities to match schema units
-SYSTEM_MIN_HEATING_OUTPUT = SYSTEM_MIN_HEATING_OUTPUT_QUANTITY.to("W/m2").magnitude
-CAPACITY_THRESHOLD = CAPACITY_THRESHOLD_QUANTITY.to("W/m2").magnitude
+SYSTEM_MIN_HEATING_OUTPUT = (
+    (SYSTEM_MIN_HEATING_OUTPUT_QUANTITY * 100 * ureg("m2")).to("W").magnitude
+)
+POWER_THRESHOLD_100 = (CAPACITY_THRESHOLD_QUANTITY * 100 * ureg("m2")).to("W").magnitude
 CRAWLSPACE_HEIGHT_THRESHOLD = CRAWLSPACE_HEIGHT_THRESHOLD_QUANTITY.to("m").magnitude
 
-# This single RMR is intended to include all to exercise all the get_zone_conditioning_category_dict() code
+# This single RMR is intended to exercise all the get_zone_conditioning_category_dict() code
 TEST_RMR = {
     "id": "test_rmr",
     "buildings": [
@@ -39,41 +41,69 @@ TEST_RMR = {
                     "id": "bldg_seg_1",
                     "lighting_building_area_type": "MULTIFAMILY",
                     "heating_ventilation_air_conditioning_systems": [
-                        # Use for directly conditioned zones
+                        # Use for zone_1_1, directly conditioned zone
                         {
                             "id": "hvac_1_1",
-                            "heat_capacity": [
-                                SYSTEM_MIN_HEATING_OUTPUT - CAPACITY_DELTA
-                            ],
-                            "sensible_cool_capacity": [
-                                CAPACITY_THRESHOLD + CAPACITY_DELTA
-                            ],
+                            "cooling_system": {
+                                "id": "csys_1_1_1",
+                                "sensible_cool_capacity": 2 * POWER_THRESHOLD_100
+                                + POWER_DELTA,
+                            },
                         },
-                        # Use for directly conditioned zones
+                        # Used for directly conditioned zone
                         {
                             "id": "hvac_1_2",
-                            "heat_capacity": [
-                                SYSTEM_MIN_HEATING_OUTPUT + CAPACITY_DELTA
-                            ],
-                            "sensible_cool_capacity": [
-                                CAPACITY_THRESHOLD - CAPACITY_DELTA
-                            ],
+                            "heating_system": {
+                                "id": "hsys_1_2_1",
+                                "heat_capacity": SYSTEM_MIN_HEATING_OUTPUT
+                                + POWER_DELTA,
+                            },
                         },
-                        # Use for semi-heated zones
+                        # Used for semi-heated zone
                         {
                             "id": "hvac_1_3",
-                            "heat_capacity": [CAPACITY_THRESHOLD + CAPACITY_DELTA],
-                            "sensible_cool_capacity": [
-                                CAPACITY_THRESHOLD - CAPACITY_DELTA
-                            ],
+                            "heating_system": {
+                                "id": "hsys_1_3_1",
+                                "heat_capacity": POWER_THRESHOLD_100 + POWER_DELTA,
+                            },
                         },
-                        # Use for zones that are neither directly conditioned nor semi-heated
+                        # Used for semi-heated zone
                         {
                             "id": "hvac_1_4",
-                            "heat_capacity": [CAPACITY_THRESHOLD - CAPACITY_DELTA],
-                            "sensible_cool_capacity": [
-                                CAPACITY_THRESHOLD - CAPACITY_DELTA
-                            ],
+                            "heating_system": {
+                                "id": "hsys_1_3_1",
+                                "heat_capacity": POWER_THRESHOLD_100 + POWER_DELTA,
+                            },
+                        },
+                        # Used for semi-heated zone
+                        {
+                            "id": "hvac_1_5",
+                            "heating_system": {
+                                "id": "hsys_1_5_1",
+                                "heat_capacity": POWER_THRESHOLD_100 + POWER_DELTA,
+                            },
+                        },
+                        # Used for neither directly nor semi-heated zone
+                        {
+                            "id": "hvac_1_6",
+                            "heating_system": {
+                                "id": "hsys_1_5_1",
+                                "heat_capacity": min(
+                                    POWER_THRESHOLD_100, SYSTEM_MIN_HEATING_OUTPUT
+                                )
+                                - POWER_DELTA,
+                            },
+                        },
+                        # Used for neither directly nor semi-heated zone
+                        {
+                            "id": "hvac_1_6",
+                            "heating_system": {
+                                "id": "hsys_1_5_1",
+                                "heat_capacity": min(
+                                    POWER_THRESHOLD_100, SYSTEM_MIN_HEATING_OUTPUT
+                                )
+                                - POWER_DELTA,
+                            },
                         },
                     ],
                     "zones": [
@@ -82,9 +112,6 @@ TEST_RMR = {
                         #   => zone_has_residential_spaces
                         # zone has a space with a nonresidential lighting_space_type
                         #   => zone_has_nonresidential_spaces
-                        # zone has a space with no specified lighting_space_type
-                        #   AND building_segment_is_residential
-                        #   => zone_has_residential_spaces
                         # zone_has_nonresidential_spaces AND zone_has_nonresidential_spaces
                         #   => zone_conditioning_category is "CONDITIONED MIXED"
                         {
@@ -93,18 +120,15 @@ TEST_RMR = {
                                 {
                                     # Residential
                                     "id": "space_1_1_1",
+                                    "floor_area": 100,  # m2
                                     "lighting_space_type": "DORMITORY_LIVING_QUARTERS",
                                     "occupant_multiplier_schedule": "om_sched_1",
                                 },
                                 {
                                     # Non-residential
                                     "id": "space_1_1_2",
+                                    "floor_area": 100,  # m2
                                     "lighting_space_type": "COMPUTER_ROOM",
-                                    "occupant_multiplier_schedule": "om_sched_1",
-                                },
-                                {
-                                    # Neither residential nor nonresidential
-                                    "id": "space_1_1_3",
                                     "occupant_multiplier_schedule": "om_sched_1",
                                 },
                             ],
@@ -128,6 +152,7 @@ TEST_RMR = {
                                 {
                                     # Non-residential
                                     "id": "space_1_2_1",
+                                    "floor_area": 100,  # m2
                                     "lighting_space_type": "COMPUTER_ROOM",
                                     "occupant_multiplier_schedule": "om_sched_1",
                                 }
@@ -155,6 +180,7 @@ TEST_RMR = {
                             "spaces": [
                                 {
                                     "id": "space_1_3_1",
+                                    "floor_area": 100,  # m2
                                     "lighting_space_type": "ATRIUM_HIGH",
                                     "occupant_multiplier_schedule": "om_sched_1",
                                 }
@@ -167,9 +193,8 @@ TEST_RMR = {
                                     "served_by_heating_ventilation_air_conditioning_systems": "hvac_1_3",
                                 }
                             ],
-                            "surfaces": [],
                         },
-                        # hvac_1_3 => semiheated_zone
+                        # hvac_1_4 => semiheated_zone
                         # More strongly thermally connected to directly conditioned zones
                         #   => indirectly_conditioned_zone
                         # building_segment_is_residential
@@ -184,15 +209,8 @@ TEST_RMR = {
                             "spaces": [
                                 {
                                     "id": "space_1_4_1",
+                                    "floor_area": 100,  # m2
                                     "occupant_multiplier_schedule": "om_sched_1",
-                                }
-                            ],
-                            "thermostat_cooling_setpoint_schedule": "tcs_sched_1",
-                            "thermostat_heating_setpoint_schedule": "ths_sched_1",
-                            "terminals": [
-                                {
-                                    "id": "terminal_1_4_1",
-                                    "served_by_heating_ventilation_air_conditioning_systems": "hvac_1_3",
                                 }
                             ],
                             "surfaces": [
@@ -202,6 +220,10 @@ TEST_RMR = {
                                     "adjacent_to": "INTERIOR",
                                     "adjacent_zone": "zone_1_3",  # semi-heated
                                     "area": 10,  # m2
+                                    "construction": {
+                                        "id": "const_1_4_1",
+                                        "u_factor": 0.1,  # W/(m2 * K)
+                                    },
                                     "subsurfaces": [
                                         {
                                             "id": "subsurface_1_4_1_1",
@@ -217,6 +239,10 @@ TEST_RMR = {
                                     "adjacent_to": "INTERIOR",
                                     "adjacent_zone": "zone_1_1",  # directly conditioned
                                     "area": 10,  # m2
+                                    "construction": {
+                                        "id": "const_1_4_2",
+                                        "u_factor": 0.1,  # W/(m2 * K)
+                                    },
                                     "subsurfaces": [
                                         {
                                             "id": "subsurface_1_4_2_1",
@@ -227,8 +253,16 @@ TEST_RMR = {
                                     ],
                                 },
                             ],
+                            "terminals": [
+                                {
+                                    "id": "terminal_1_4_1",
+                                    "served_by_heating_ventilation_air_conditioning_systems": "hvac_1_4",
+                                }
+                            ],
+                            "thermostat_cooling_setpoint_schedule": "tcs_sched_1",
+                            "thermostat_heating_setpoint_schedule": "ths_sched_1",
                         },
-                        # hvac_1_3 => semiheated_zone
+                        # hvac_1_5 => semiheated_zone
                         # NOT zone_directly_conditioned_ua > zone_other_ua
                         #   => NOT indirectly_conditioned_zone
                         # NOT directly_conditioned_zone
@@ -240,6 +274,7 @@ TEST_RMR = {
                             "spaces": [
                                 {
                                     "id": "space_1_5_1",
+                                    "floor_area": 100,  # m2
                                     "occupant_multiplier_schedule": "om_sched_1",
                                 }
                             ],
@@ -250,6 +285,10 @@ TEST_RMR = {
                                     "adjacent_to": "INTERIOR",
                                     "adjacent_zone": "zone_1_1",  # directly conditioned
                                     "area": 10,  # m2
+                                    "construction": {
+                                        "id": "const_1_5_1",
+                                        "u_factor": 0.1,  # W/(m2 * K)
+                                    },
                                     "subsurfaces": [
                                         {
                                             "id": "subsurface_1_5_1_1",
@@ -265,6 +304,10 @@ TEST_RMR = {
                                     "adjacent_to": "INTERIOR",
                                     "adjacent_zone": "zone_1_4",  # semi-heated
                                     "area": 10,  # m2
+                                    "construction": {
+                                        "id": "const_1_5_2",
+                                        "u_factor": 0.1,  # W/(m2 * K)
+                                    },
                                     "subsurfaces": [
                                         {
                                             "id": "subsurface_1_5_2_1",
@@ -280,11 +323,11 @@ TEST_RMR = {
                             "terminals": [
                                 {
                                     "id": "terminal_1_5_1",
-                                    "served_by_heating_ventilation_air_conditioning_systems": "hvac_1_3",
+                                    "served_by_heating_ventilation_air_conditioning_systems": "hvac_1_5",
                                 }
                             ],
                         },
-                        # hvac_1_4 => neither directly nor semi-heated zone
+                        # hvac_1_6 => neither directly nor semi-heated zone
                         # NOT directly_conditioned_ua > other_ua
                         #   => NOT indirectly_conditioned_zone
                         # building_segment_is_residential
@@ -296,6 +339,7 @@ TEST_RMR = {
                                 # Residential
                                 {
                                     "id": "space_1_6_1",
+                                    "floor_area": 100,  # m2
                                     "lighting_space_type": "PARKING_AREA_INTERIOR",
                                     "occupant_multiplier_schedule": "om_sched_1",
                                 }
@@ -307,11 +351,15 @@ TEST_RMR = {
                                     "adjacent_to": "INTERIOR",
                                     "adjacent_zone": "zone_1_4",  # semi-heated
                                     "area": 10,  # m2
+                                    "construction": {
+                                        "id": "const_1_6_1",
+                                        "u_factor": 0.1,  # W/(m2 * K)
+                                    },
                                     "subsurfaces": [
                                         {
                                             "id": "subsurface_1_6_1_1",
-                                            "glazed_area": 0,
-                                            "opaque_area": 10,  # m2
+                                            "glazed_area": 10,
+                                            "opaque_area": 0,  # m2
                                             "u_factor": 3,  # W/(m2 * K)
                                         }
                                     ],
@@ -322,11 +370,15 @@ TEST_RMR = {
                                     "adjacent_to": "INTERIOR",
                                     "adjacent_zone": "zone_1_1",  # directly conditioned
                                     "area": 10,  # m2
+                                    "construction": {
+                                        "id": "const_1_6_2",
+                                        "u_factor": 0.1,  # W/(m2 * K)
+                                    },
                                     "subsurfaces": [
                                         {
                                             "id": "subsurface_1_6_2_1",
-                                            "glazed_area": 10,  # m2
-                                            "opaque_area": 0,
+                                            "glazed_area": 0,  # m2
+                                            "opaque_area": 10,
                                             "u_factor": 0.5,  # W/(m2 * K)
                                         }
                                     ],
@@ -336,12 +388,12 @@ TEST_RMR = {
                             "thermostat_heating_setpoint_schedule": "ths_sched_1",
                             "terminals": [
                                 {
-                                    "id": "terminal_1_1_1",
-                                    "served_by_heating_ventilation_air_conditioning_systems": "hvac_1_4",
+                                    "id": "terminal_1_6_1",
+                                    "served_by_heating_ventilation_air_conditioning_systems": "hvac_1_6",
                                 }
                             ],
                         },
-                        # hvac_1_4 => neither directly nor semi-heated zone
+                        # No terminals => neither directly nor semi-heated zone
                         # NOT directly_conditioned_ua > other_ua
                         #   => NOT indirectly_conditioned_zone
                         # zone volume / zone area < CRAWLSPACE_HEIGHT_THRESHOLD
@@ -364,7 +416,10 @@ TEST_RMR = {
                                     "adjacent_to": "GROUND",
                                     "adjacent_zone": "zone_1_1",  # directly conditioned
                                     "area": 10,  # m2
-                                    "construction": {"id": "const_1_7_1_1"},
+                                    "construction": {
+                                        "id": "const_1_7_1",
+                                        "u_factor": 0.1,  # W/(m2 * K)
+                                    },
                                     "subsurfaces": [
                                         {
                                             "id": "subsurface_1_7_1_1",
@@ -381,7 +436,10 @@ TEST_RMR = {
                                     "adjacent_to": "INTERIOR",
                                     "adjacent_zone": "zone_1_4",  # semi-heated
                                     "area": 10,  # m2
-                                    "construction": {"id": "const_1_7_2_1"},
+                                    "construction": {
+                                        "id": "const_1_7_2",
+                                        "u_factor": 0.1,  # W/(m2 * K)
+                                    },
                                     "subsurfaces": [
                                         {
                                             "id": "subsurface_1_7_2_1",
@@ -395,15 +453,9 @@ TEST_RMR = {
                             ],
                             "thermostat_cooling_setpoint_schedule": "tcs_sched_1",
                             "thermostat_heating_setpoint_schedule": "ths_sched_1",
-                            "terminals": [
-                                {
-                                    "id": "terminal_1_7_1",
-                                    "served_by_heating_ventilation_air_conditioning_systems": "hvac_1_4",
-                                }
-                            ],
                             "volume": 20,  # m3
                         },
-                        # hvac_1_4 => neither directly nor semi-heated zone
+                        # No terminals => neither directly nor semi-heated zone
                         # NOT directly_conditioned_ua > other_ua
                         #   => NOT indirectly_conditioned_zone
                         # zone has EXTERIOR CEILING
@@ -425,7 +477,10 @@ TEST_RMR = {
                                     "adjacent_to": "EXTERIOR",
                                     "adjacent_zone": "zone_1_4",  # semi-heated
                                     "area": 10,  # m2
-                                    "construction": {"id": "const_1_8_1_1"},
+                                    "construction": {
+                                        "id": "const_1_8_1",
+                                        "u_factor": 0.1,  # W/(m2 * K)
+                                    },
                                     "subsurfaces": [
                                         {
                                             "id": "subsurface_1_8_1_1",
@@ -442,7 +497,10 @@ TEST_RMR = {
                                     "adjacent_to": "INTERIOR",
                                     "adjacent_zone": "zone_1_1",  # directly conditioned
                                     "area": 10,  # m2
-                                    "construction": {"id": "const_1_8_2_1"},
+                                    "construction": {
+                                        "id": "const_1_8_2",
+                                        "u_factor": 0.1,  # W/(m2 * K)
+                                    },
                                     "subsurfaces": [
                                         {
                                             "id": "subsurface_1_8_2_1",
@@ -456,15 +514,9 @@ TEST_RMR = {
                             ],
                             "thermostat_cooling_setpoint_schedule": "tcs_sched_1",
                             "thermostat_heating_setpoint_schedule": "ths_sched_1",
-                            "terminals": [
-                                {
-                                    "id": "terminal_1_8_1",
-                                    "served_by_heating_ventilation_air_conditioning_systems": "hvac_1_4",
-                                }
-                            ],
                             "volume": 1000,  # m3
                         },
-                        # hvac_1_4 => neither directly nor semi-heated zone
+                        # No terminals => neither directly nor semi-heated zone
                         # NOT directly_conditioned_ua > other_ua
                         #   => NOT indirectly_conditioned_zone
                         # zone has no interior parking, crawlspace, or attic
@@ -486,7 +538,10 @@ TEST_RMR = {
                                     "adjacent_to": "EXTERIOR",
                                     "adjacent_zone": "zone_1_4",  # semi-heated
                                     "area": 10,  # m2
-                                    "construction": {"id": "const_1_9_1_1"},
+                                    "construction": {
+                                        "id": "const_1_9_1",
+                                        "u_factor": 0.1,  # W/(m2 * K)
+                                    },
                                     "subsurfaces": [
                                         {
                                             "id": "subsurface_1_9_1_1",
@@ -503,7 +558,10 @@ TEST_RMR = {
                                     "adjacent_to": "INTERIOR",
                                     "adjacent_zone": "zone_1_1",  # directly conditioned
                                     "area": 10,  # m2
-                                    "construction": {"id": "const_1_9_2_1"},
+                                    "construction": {
+                                        "id": "const_1_9_2",
+                                        "u_factor": 0.1,  # W/(m2 * K)
+                                    },
                                     "subsurfaces": [
                                         {
                                             "id": "subsurface_1_9_2_1",
@@ -517,12 +575,6 @@ TEST_RMR = {
                             ],
                             "thermostat_cooling_setpoint_schedule": "tcs_sched_1",
                             "thermostat_heating_setpoint_schedule": "ths_sched_1",
-                            "terminals": [
-                                {
-                                    "id": "terminal_1_9_1",
-                                    "served_by_heating_ventilation_air_conditioning_systems": "hvac_1_4",
-                                }
-                            ],
                             "volume": 1000,  # m3
                         },
                     ],
@@ -533,15 +585,14 @@ TEST_RMR = {
                     "id": "bldg_seg_2",
                     "lighting_building_area_type": "FIRE_STATION",
                     "heating_ventilation_air_conditioning_systems": [
-                        # Use for directly conditioned zones
+                        # Used for directly conditioned zone
                         {
                             "id": "hvac_2_1",
-                            "heat_capacity": [
-                                SYSTEM_MIN_HEATING_OUTPUT - CAPACITY_DELTA
-                            ],
-                            "sensible_cool_capacity": [
-                                CAPACITY_THRESHOLD + CAPACITY_DELTA
-                            ],
+                            "cooling_system": {
+                                "id": "csys_2_1_1",
+                                "sensible_cool_capacity": POWER_THRESHOLD_100
+                                + POWER_DELTA,
+                            },
                         },
                     ],
                     "zones": [
@@ -553,8 +604,26 @@ TEST_RMR = {
                             "spaces": [
                                 {
                                     "id": "space_2_1_1",
+                                    "floor_area": 100,  # m2
                                     "lighting_space_type": "HEALTHCARE_FACILITY_PATIENT_ROOM",
                                     "occupant_multiplier_schedule": "om_sched_1",
+                                }
+                            ],
+                            "surfaces": [
+                                # Adds to zone_other_ua
+                                {
+                                    "id": "surface_2_1_1",
+                                    "adjacent_to": "INTERIOR",
+                                    "adjacent_zone": "zone_1_2",  # semi-heated
+                                    "area": 10,  # m2
+                                    "subsurfaces": [
+                                        {
+                                            "id": "subsurface_2_1_1_1",
+                                            "glazed_area": 0,
+                                            "opaque_area": 10,  # m2
+                                            "u_factor": 0.5,  # W/(m2 * K)
+                                        }
+                                    ],
                                 }
                             ],
                             "thermostat_cooling_setpoint_schedule": "tcs_sched_1",
@@ -576,12 +645,16 @@ TEST_RMR = {
                         # User for directly conditioned zones
                         {
                             "id": "hvac_3_1",
-                            "heat_capacity": [
-                                SYSTEM_MIN_HEATING_OUTPUT - CAPACITY_DELTA
-                            ],
-                            "sensible_cool_capacity": [
-                                CAPACITY_THRESHOLD + CAPACITY_DELTA
-                            ],
+                            "heating_system": {
+                                "id": "hsys_3_1_1",
+                                "heat_capacity": SYSTEM_MIN_HEATING_OUTPUT
+                                - POWER_DELTA,
+                            },
+                            "cooling_system": {
+                                "id": "csys_3_1_1",
+                                "sensible_cool_capacity": POWER_THRESHOLD_100
+                                + POWER_DELTA,
+                            },
                         },
                     ],
                     "zones": [
@@ -593,8 +666,27 @@ TEST_RMR = {
                             "spaces": [
                                 {
                                     "id": "space_3_1_1",
+                                    "floor_area": 100,  # m2
                                     "lighting_space_type": "GUEST_ROOM",
                                     "occupant_multiplier_schedule": "om_sched_1",
+                                }
+                            ],
+                            "surfaces": [
+                                # Adds to zone_other_ua
+                                {
+                                    "id": "surface_3_1_1",
+                                    "adjacent_to": "INTERIOR",
+                                    "adjacent_zone": "zone_1_2",  # semi-heated
+                                    "area": 10,  # m2
+                                    "subsurfaces": [
+                                        {
+                                            "id": "subsurface_3_1_1_1",
+                                            "glazed_area": 0,
+                                            "opaque_area": 10,  # m2
+                                            "u_factor": 0.5,  # W/(m2 * K)
+                                        }
+                                    ],
+                                    "tilt": 90,  # wall
                                 }
                             ],
                             "thermostat_cooling_setpoint_schedule": "tcs_sched_1",
@@ -637,6 +729,3 @@ def test__get_zone_conditioning_category_dict():
         "zone_2_1": "CONDITIONED RESIDENTIAL",
         "zone_3_1": "CONDITIONED RESIDENTIAL",
     }
-
-
-ic(get_zone_conditioning_category_dict(CLIMATE_ZONE, TEST_BUILDING))
