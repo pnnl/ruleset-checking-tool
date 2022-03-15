@@ -36,4 +36,3 @@ def test_rule5_8_one_surface_c_factor():
     # )
     results = {"result": "PASSED"}
     assert results["result"] == "PASSED"
-
