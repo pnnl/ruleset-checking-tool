@@ -17,7 +17,7 @@ class Section5Rule2(RuleDefinitionListIndexedBase):
             index_rmr="proposed",
             id="5-2",
             description="Orientation is the same in user model and proposed model",
-            rmr_context="buildings",
+            rmr_context="ruleset_model_instances/0/buildings",
         )
 
     class BuildingRule(RuleDefinitionBase):

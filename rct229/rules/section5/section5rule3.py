@@ -19,7 +19,7 @@ class Section5Rule3(RuleDefinitionListIndexedBase):
             index_rmr="baseline",
             id="5-3",
             description="The building shall be modeled so that it does not shade itself",
-            rmr_context="buildings",
+            rmr_context="ruleset_model_instances/0/buildings",
         )
 
     class BuildingRule(RuleDefinitionBase):

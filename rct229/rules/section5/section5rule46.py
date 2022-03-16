@@ -17,7 +17,7 @@ class Section5Rule46(RuleDefinitionListIndexedBase):
             index_rmr="proposed",
             id="5-46",
             description="The infiltration shall be modeled using the same methodology and adjustments for weather and building operation in both the proposed design and the baseline building design.",
-            rmr_context="buildings",
+            rmr_context="ruleset_model_instances/0/buildings",
         )
 
     class BuildingRule(RuleDefinitionBase):
