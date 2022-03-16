@@ -35,7 +35,7 @@ class Section5Rule5(RuleDefinitionListIndexedBase):
             index_rmr="baseline",
             id="5-5",
             description="Baseline roof assemblies must match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8.",
-            list_path="buildings[*]",
+            list_path="ruleset_model_instances[0].buildings[*]",
         )
 
     def create_data(self, context, data=None):
