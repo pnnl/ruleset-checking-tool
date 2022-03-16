@@ -13,81 +13,88 @@ from rct229.utils.jsonpath_utils import find_all
 
 # Constants
 # TODO: These should directly from the enumerations
-EXTERIOR = "EXTERIOR"
-GROUND = "GROUND"
-INTERIOR = "INTERIOR"
-# Surface conditioning categories (export these)
-EXTERIOR_MIXED = "EXTERIOR MIXED"
-EXTERIOR_NON_RESIDENTIAL = "EXTERIOR NON-RESIDENTIAL"
-EXTERIOR_RESIDENTIAL = "EXTERIOR RESIDENTIAL"
-SEMI_EXTERIOR = "SEMI-EXTERIOR"
-UNREGULATED = "UNREGULATED"
+
+
+# Intended for export and internal use
+class SurfaceConditioningCategory:
+    """Enumeration class for zone conditioning categories"""
+
+    EXTERIOR: str = "EXTERIOR"
+    GROUND: str = "GROUND"
+    INTERIOR: str = "INTERIOR"
+    # Surface conditioning categories (export these)
+    EXTERIOR_MIXED: str = "EXTERIOR MIXED"
+    EXTERIOR_NON_RESIDENTIAL: str = "EXTERIOR NON-RESIDENTIAL"
+    EXTERIOR_RESIDENTIAL: str = "EXTERIOR RESIDENTIAL"
+    SEMI_EXTERIOR: str = "SEMI-EXTERIOR"
+    UNREGULATED: str = "UNREGULATED"
+
 
 SCC_DATA_FRAME = pd.DataFrame(
     data={
         CONDITIONED_RESIDENTIAL: [
-            UNREGULATED,
-            UNREGULATED,
-            UNREGULATED,
-            SEMI_EXTERIOR,
-            EXTERIOR_RESIDENTIAL,
-            SEMI_EXTERIOR,
+            SurfaceConditioningCategory.UNREGULATED,
+            SurfaceConditioningCategory.UNREGULATED,
+            SurfaceConditioningCategory.UNREGULATED,
+            SurfaceConditioningCategory.SEMI_EXTERIOR,
+            SurfaceConditioningCategory.EXTERIOR_RESIDENTIAL,
+            SurfaceConditioningCategory.SEMI_EXTERIOR,
         ],
         CONDITIONED_NON_RESIDENTIAL: [
-            UNREGULATED,
-            UNREGULATED,
-            UNREGULATED,
-            SEMI_EXTERIOR,
-            EXTERIOR_NON_RESIDENTIAL,
-            SEMI_EXTERIOR,
+            SurfaceConditioningCategory.UNREGULATED,
+            SurfaceConditioningCategory.UNREGULATED,
+            SurfaceConditioningCategory.UNREGULATED,
+            SurfaceConditioningCategory.SEMI_EXTERIOR,
+            SurfaceConditioningCategory.EXTERIOR_NON_RESIDENTIAL,
+            SurfaceConditioningCategory.SEMI_EXTERIOR,
         ],
         CONDITIONED_MIXED: [
-            UNREGULATED,
-            UNREGULATED,
-            UNREGULATED,
-            SEMI_EXTERIOR,
-            EXTERIOR_MIXED,
-            SEMI_EXTERIOR,
+            SurfaceConditioningCategory.UNREGULATED,
+            SurfaceConditioningCategory.UNREGULATED,
+            SurfaceConditioningCategory.UNREGULATED,
+            SurfaceConditioningCategory.SEMI_EXTERIOR,
+            SurfaceConditioningCategory.EXTERIOR_MIXED,
+            SurfaceConditioningCategory.SEMI_EXTERIOR,
         ],
         SEMI_HEATED: [
-            SEMI_EXTERIOR,
-            SEMI_EXTERIOR,
-            SEMI_EXTERIOR,
-            UNREGULATED,
-            SEMI_EXTERIOR,
-            SEMI_EXTERIOR,
+            SurfaceConditioningCategory.SEMI_EXTERIOR,
+            SurfaceConditioningCategory.SEMI_EXTERIOR,
+            SurfaceConditioningCategory.SEMI_EXTERIOR,
+            SurfaceConditioningCategory.UNREGULATED,
+            SurfaceConditioningCategory.SEMI_EXTERIOR,
+            SurfaceConditioningCategory.SEMI_EXTERIOR,
         ],
         UNENCLOSED: [
-            EXTERIOR_RESIDENTIAL,
-            EXTERIOR_NON_RESIDENTIAL,
-            EXTERIOR_MIXED,
-            SEMI_EXTERIOR,
-            UNREGULATED,
-            UNREGULATED,
+            SurfaceConditioningCategory.EXTERIOR_RESIDENTIAL,
+            SurfaceConditioningCategory.EXTERIOR_NON_RESIDENTIAL,
+            SurfaceConditioningCategory.EXTERIOR_MIXED,
+            SurfaceConditioningCategory.SEMI_EXTERIOR,
+            SurfaceConditioningCategory.UNREGULATED,
+            SurfaceConditioningCategory.UNREGULATED,
         ],
         UNCONDITIONED: [
-            SEMI_EXTERIOR,
-            SEMI_EXTERIOR,
-            SEMI_EXTERIOR,
-            SEMI_EXTERIOR,
-            UNREGULATED,
-            UNREGULATED,
+            SurfaceConditioningCategory.SEMI_EXTERIOR,
+            SurfaceConditioningCategory.SEMI_EXTERIOR,
+            SurfaceConditioningCategory.SEMI_EXTERIOR,
+            SurfaceConditioningCategory.SEMI_EXTERIOR,
+            SurfaceConditioningCategory.UNREGULATED,
+            SurfaceConditioningCategory.UNREGULATED,
         ],
-        EXTERIOR: [
-            EXTERIOR_RESIDENTIAL,
-            EXTERIOR_NON_RESIDENTIAL,
-            EXTERIOR_MIXED,
-            SEMI_EXTERIOR,
-            UNREGULATED,
-            UNREGULATED,
+        SurfaceConditioningCategory.EXTERIOR: [
+            SurfaceConditioningCategory.EXTERIOR_RESIDENTIAL,
+            SurfaceConditioningCategory.EXTERIOR_NON_RESIDENTIAL,
+            SurfaceConditioningCategory.EXTERIOR_MIXED,
+            SurfaceConditioningCategory.SEMI_EXTERIOR,
+            SurfaceConditioningCategory.UNREGULATED,
+            SurfaceConditioningCategory.UNREGULATED,
         ],
-        GROUND: [
-            EXTERIOR_RESIDENTIAL,
-            EXTERIOR_NON_RESIDENTIAL,
-            EXTERIOR_MIXED,
-            SEMI_EXTERIOR,
-            UNREGULATED,
-            UNREGULATED,
+        SurfaceConditioningCategory.GROUND: [
+            SurfaceConditioningCategory.EXTERIOR_RESIDENTIAL,
+            SurfaceConditioningCategory.EXTERIOR_NON_RESIDENTIAL,
+            SurfaceConditioningCategory.EXTERIOR_MIXED,
+            SurfaceConditioningCategory.SEMI_EXTERIOR,
+            SurfaceConditioningCategory.UNREGULATED,
+            SurfaceConditioningCategory.UNREGULATED,
         ],
     },
     index=[
@@ -136,7 +143,7 @@ def get_surface_conditioning_category_dict(climate_zone, building):
                 zcc,
                 # column index
                 zcc_dict[surface["adjacent_zone"]]
-                if surface_adjacent_to == INTERIOR
+                if surface_adjacent_to == SurfaceConditioningCategory.INTERIOR
                 else surface_adjacent_to,
             ]
 
