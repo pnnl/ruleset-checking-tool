@@ -1,8 +1,8 @@
 import pytest
 
 from rct229.data_fns.table_3_2_fns import table_3_2_lookup
-from rct229.ruleset_functions.get_area_type_window_wall_area import (
-    get_area_type_window_wall_area,
+from rct229.ruleset_functions.get_area_type_window_wall_area_dict import (
+    get_area_type_window_wall_area_dict,
 )
 from rct229.ruleset_functions.get_zone_conditioning_category_dict import (
     CAPACITY_THRESHOLD as CAPACITY_THRESHOLD_QUANTITY,
@@ -396,17 +396,17 @@ def test__TEST_RMR__is_valid():
 
 
 def test__get_area_type_window_wall_area():
-    assert get_area_type_window_wall_area(CLIMATE_ZONE, TEST_BUILDING) == {
+    assert get_area_type_window_wall_area_dict(CLIMATE_ZONE, TEST_BUILDING) == {
         "HOTEL_MOTEL_SMALL": {
-            "TOTAL_WALL_AREA": 20 * ureg("m2"),
-            "TOTAL_WINDOW_AREA": 10 * ureg("m2"),
+            "total_wall_area": 20 * ureg("m2"),
+            "total_window_area": 10 * ureg("m2"),
         },
         "RETAIL_STAND_ALONE": {
-            "TOTAL_WALL_AREA": 20 * ureg("m2"),
-            "TOTAL_WINDOW_AREA": 10 * ureg("m2"),
+            "total_wall_area": 20 * ureg("m2"),
+            "total_window_area": 10 * ureg("m2"),
         },
         "NONE": {
-            "TOTAL_WALL_AREA": 10 * ureg("m2"),
-            "TOTAL_WINDOW_AREA": 5 * ureg("m2"),
+            "total_wall_area": 10 * ureg("m2"),
+            "total_window_area": 5 * ureg("m2"),
         },
     }
