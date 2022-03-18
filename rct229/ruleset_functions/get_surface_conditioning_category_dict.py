@@ -1,12 +1,7 @@
 import pandas as pd
 
 from rct229.ruleset_functions.get_zone_conditioning_category_dict import (
-    CONDITIONED_MIXED,
-    CONDITIONED_NON_RESIDENTIAL,
-    CONDITIONED_RESIDENTIAL,
-    SEMI_HEATED,
-    UNCONDITIONED,
-    UNENCLOSED,
+    ZoneConditioningCategory,
     get_zone_conditioning_category_dict,
 )
 from rct229.utils.jsonpath_utils import find_all
@@ -32,7 +27,7 @@ class SurfaceConditioningCategory:
 
 SCC_DATA_FRAME = pd.DataFrame(
     data={
-        CONDITIONED_RESIDENTIAL: [
+        ZoneConditioningCategory.CONDITIONED_RESIDENTIAL: [
             SurfaceConditioningCategory.UNREGULATED,
             SurfaceConditioningCategory.UNREGULATED,
             SurfaceConditioningCategory.UNREGULATED,
@@ -40,7 +35,7 @@ SCC_DATA_FRAME = pd.DataFrame(
             SurfaceConditioningCategory.EXTERIOR_RESIDENTIAL,
             SurfaceConditioningCategory.SEMI_EXTERIOR,
         ],
-        CONDITIONED_NON_RESIDENTIAL: [
+        ZoneConditioningCategory.CONDITIONED_NON_RESIDENTIAL: [
             SurfaceConditioningCategory.UNREGULATED,
             SurfaceConditioningCategory.UNREGULATED,
             SurfaceConditioningCategory.UNREGULATED,
@@ -48,7 +43,7 @@ SCC_DATA_FRAME = pd.DataFrame(
             SurfaceConditioningCategory.EXTERIOR_NON_RESIDENTIAL,
             SurfaceConditioningCategory.SEMI_EXTERIOR,
         ],
-        CONDITIONED_MIXED: [
+        ZoneConditioningCategory.CONDITIONED_MIXED: [
             SurfaceConditioningCategory.UNREGULATED,
             SurfaceConditioningCategory.UNREGULATED,
             SurfaceConditioningCategory.UNREGULATED,
@@ -56,7 +51,7 @@ SCC_DATA_FRAME = pd.DataFrame(
             SurfaceConditioningCategory.EXTERIOR_MIXED,
             SurfaceConditioningCategory.SEMI_EXTERIOR,
         ],
-        SEMI_HEATED: [
+        ZoneConditioningCategory.SEMI_HEATED: [
             SurfaceConditioningCategory.SEMI_EXTERIOR,
             SurfaceConditioningCategory.SEMI_EXTERIOR,
             SurfaceConditioningCategory.SEMI_EXTERIOR,
@@ -64,7 +59,7 @@ SCC_DATA_FRAME = pd.DataFrame(
             SurfaceConditioningCategory.SEMI_EXTERIOR,
             SurfaceConditioningCategory.SEMI_EXTERIOR,
         ],
-        UNENCLOSED: [
+        ZoneConditioningCategory.UNENCLOSED: [
             SurfaceConditioningCategory.EXTERIOR_RESIDENTIAL,
             SurfaceConditioningCategory.EXTERIOR_NON_RESIDENTIAL,
             SurfaceConditioningCategory.EXTERIOR_MIXED,
@@ -72,7 +67,7 @@ SCC_DATA_FRAME = pd.DataFrame(
             SurfaceConditioningCategory.UNREGULATED,
             SurfaceConditioningCategory.UNREGULATED,
         ],
-        UNCONDITIONED: [
+        ZoneConditioningCategory.UNCONDITIONED: [
             SurfaceConditioningCategory.SEMI_EXTERIOR,
             SurfaceConditioningCategory.SEMI_EXTERIOR,
             SurfaceConditioningCategory.SEMI_EXTERIOR,
@@ -98,12 +93,12 @@ SCC_DATA_FRAME = pd.DataFrame(
         ],
     },
     index=[
-        CONDITIONED_RESIDENTIAL,
-        CONDITIONED_NON_RESIDENTIAL,
-        CONDITIONED_MIXED,
-        SEMI_HEATED,
-        UNENCLOSED,
-        UNCONDITIONED,
+        ZoneConditioningCategory.CONDITIONED_RESIDENTIAL,
+        ZoneConditioningCategory.CONDITIONED_NON_RESIDENTIAL,
+        ZoneConditioningCategory.CONDITIONED_MIXED,
+        ZoneConditioningCategory.SEMI_HEATED,
+        ZoneConditioningCategory.UNENCLOSED,
+        ZoneConditioningCategory.UNCONDITIONED,
     ],
 )
 
