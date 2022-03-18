@@ -1,18 +1,18 @@
 import pytest
 
 from rct229.data_fns.table_3_2_fns import table_3_2_lookup
+from rct229.ruleset_functions.get_area_type_window_wall_area import (
+    get_area_type_window_wall_area,
+)
 from rct229.ruleset_functions.get_zone_conditioning_category_dict import (
     CAPACITY_THRESHOLD as CAPACITY_THRESHOLD_QUANTITY,
 )
 from rct229.ruleset_functions.get_zone_conditioning_category_dict import (
     CRAWLSPACE_HEIGHT_THRESHOLD as CRAWLSPACE_HEIGHT_THRESHOLD_QUANTITY,
 )
-from rct229.ruleset_functions.get_area_type_window_wall_area import get_area_type_window_wall_area
-
 from rct229.schema.config import ureg
 from rct229.schema.schema_utils import quantify_rmr
 from rct229.schema.validate import schema_validate_rmr
-
 
 CLIMATE_ZONE = "CZ0A"
 POWER_DELTA = 1
@@ -95,7 +95,7 @@ TEST_RMR = {
                                     "adjacent_to": "EXTERIOR",
                                     "adjacent_zone": "zone_1_2",
                                     "area": 10,  # m2
-                                    "tilt": 90, # above grade wall
+                                    "tilt": 90,  # above grade wall
                                     "subsurfaces": [
                                         {
                                             "id": "subsurface_1_1_1_1",
@@ -181,11 +181,11 @@ TEST_RMR = {
                         # Used for semi-heated zone
                         {
                             "id": "hvac_2_2",
-                            "heating_system":{
+                            "heating_system": {
                                 "id": "csys_2_2_1",
                                 "heat_capacity": POWER_THRESHOLD_100 + POWER_DELTA,
-                            }
-                        }
+                            },
+                        },
                     ],
                     "zones": [
                         # hvac_2_1 => directly_conditioned_zone
@@ -283,14 +283,15 @@ TEST_RMR = {
                 {
                     "id": "bldg_seg_3",
                     "lighting_building_area_type": "CONVENTION_CENTER",
-                    "heating_ventilation_air_conditioning_systems":[
+                    "heating_ventilation_air_conditioning_systems": [
                         # Used for directly conditioned zone
                         {
                             "id": "hvac_3_1",
                             "cooling_system": {
                                 "id": "csys_3_1_1",
-                                "sensible_cool_capacity": POWER_THRESHOLD_100 + POWER_DELTA
-                            }
+                                "sensible_cool_capacity": POWER_THRESHOLD_100
+                                + POWER_DELTA,
+                            },
                         }
                     ],
                     "zones": [
@@ -316,8 +317,8 @@ TEST_RMR = {
                                     "area": 10,  # m2
                                     "tilt": 90,  # above grade wall
                                     "construction": {
-                                       "id": "interior_wall_3_1_1",
-                                      "u_factor": 0.222, # W/(m2 * K)
+                                        "id": "interior_wall_3_1_1",
+                                        "u_factor": 0.222,  # W/(m2 * K)
                                     },
                                     "subsurfaces": [
                                         {
@@ -362,24 +363,23 @@ TEST_RMR = {
                                     "area": 10,  # m2
                                     "tilt": 90,  # above grade wall
                                     "construction": {
-                                      "id": "interior_wall_3_2_1",
-                                      "u_factor": 0.222, # W/(m2 * K)
+                                        "id": "interior_wall_3_2_1",
+                                        "u_factor": 0.222,  # W/(m2 * K)
                                     },
                                     "subsurfaces": [
                                         {
                                             "id": "subsurface_3_2_1_1",
                                             "classification": "WINDOW",
-                                            "glazed_area": 2, # m2
+                                            "glazed_area": 2,  # m2
                                             "opaque_area": 0,
                                             "u_factor": 2.4,  # W/(m2 * K)
                                         },
-
                                     ],
                                 }
                             ],
-                        }
+                        },
                     ],
-                }
+                },
             ],
         }
     ],
@@ -397,7 +397,16 @@ def test__TEST_RMR__is_valid():
 
 def test__get_area_type_window_wall_area():
     assert get_area_type_window_wall_area(CLIMATE_ZONE, TEST_BUILDING) == {
-        "HOTEL_MOTEL_SMALL": {"TOTAL_WALL_AREA": 20 * ureg("m2"), "TOTAL_WINDOW_AREA": 10 * ureg("m2")},
-        "RETAIL_STAND_ALONE": {"TOTAL_WALL_AREA": 20 * ureg("m2"), "TOTAL_WINDOW_AREA": 10 * ureg("m2")},
-        "NONE": {"TOTAL_WALL_AREA": 10 * ureg("m2"), "TOTAL_WINDOW_AREA": 5 * ureg("m2")}
+        "HOTEL_MOTEL_SMALL": {
+            "TOTAL_WALL_AREA": 20 * ureg("m2"),
+            "TOTAL_WINDOW_AREA": 10 * ureg("m2"),
+        },
+        "RETAIL_STAND_ALONE": {
+            "TOTAL_WALL_AREA": 20 * ureg("m2"),
+            "TOTAL_WINDOW_AREA": 10 * ureg("m2"),
+        },
+        "NONE": {
+            "TOTAL_WALL_AREA": 10 * ureg("m2"),
+            "TOTAL_WINDOW_AREA": 5 * ureg("m2"),
+        },
     }
