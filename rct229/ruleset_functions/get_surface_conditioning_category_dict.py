@@ -1,11 +1,13 @@
 import pandas as pd
 
+from rct229.data.schema_enums import schema_enums
 from rct229.ruleset_functions.get_zone_conditioning_category_dict import (
     ZoneConditioningCategory as ZCC,
+)
+from rct229.ruleset_functions.get_zone_conditioning_category_dict import (
     get_zone_conditioning_category_dict,
 )
 from rct229.utils.jsonpath_utils import find_all
-from rct229.data.schema_enums import schema_enums
 
 # Constants
 # TODO: These should directly from the enumerations
@@ -15,6 +17,7 @@ SurfaceAdjacentTo = schema_enums["SurfaceAdjacentTo"]
 # Intended for export and internal use
 class SurfaceConditioningCategory:
     """Enumeration class for zone conditioning categories"""
+
     # Surface conditioning categories (export these)
     EXTERIOR_MIXED: str = "EXTERIOR MIXED"
     EXTERIOR_NON_RESIDENTIAL: str = "EXTERIOR NON-RESIDENTIAL"

@@ -5,11 +5,11 @@ from rct229.ruleset_functions.get_opaque_surface_type import (
 )
 from rct229.ruleset_functions.get_surface_conditioning_category_dict import (
     SurfaceConditioningCategory as SCC,
-    get_surface_conditioning_category_dict
 )
-from rct229.utils.assertions import (
-    getattr_,
+from rct229.ruleset_functions.get_surface_conditioning_category_dict import (
+    get_surface_conditioning_category_dict,
 )
+from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all
 
 DOOR = schema_enums["SubsurfaceClassificationType"].DOOR.name
@@ -42,15 +42,17 @@ def get_area_type_window_wall_area_dict(climate_zone, building):
                 ]
             ):
 
-                window_wall_areas_dictionary[area_type]["total_wall_area"] += getattr_(surface, "surface", "area")
+                window_wall_areas_dictionary[area_type]["total_wall_area"] += getattr_(
+                    surface, "surface", "area"
+                )
 
                 # add sub-surfaces
                 for subsurface in find_all("subsurfaces[*]", surface):
-                    glazed_area = getattr_(subsurface, 'subsurface', 'glazed_area')
-                    opaque_area = getattr_(subsurface, 'subsurface', 'opaque_area')
-                    if (getattr_(subsurface, 'subsurface', 'classification') == DOOR) and (
-                        glazed_area > opaque_area
-                    ):
+                    glazed_area = getattr_(subsurface, "subsurface", "glazed_area")
+                    opaque_area = getattr_(subsurface, "subsurface", "opaque_area")
+                    if (
+                        getattr_(subsurface, "subsurface", "classification") == DOOR
+                    ) and (glazed_area > opaque_area):
                         window_wall_areas_dictionary[area_type][
                             "total_window_area"
                         ] += (glazed_area + opaque_area)
