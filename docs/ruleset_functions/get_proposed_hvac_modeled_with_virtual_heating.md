@@ -32,9 +32,6 @@
                 - For each preheat_system_p in hvac_p: `for preheat_system_p in hvac_p.preheat_system:`
                     - Check if the preheat_system_type != "None": `if preheat_system_p.preheat_system_type != "None":`
                         - Set has_virtual_heating_p to true: `has_virtual_heating_p = TRUE`              
-                - Check if heating was modeled in the proposed via the has_virtual_heating_p boolean variable and add the hvac system to the list with virtual heating if it was: `if has_virtual_heating_p == TRUE: proposed_hvac_modeled_with_virtual_heating_list_p = proposed_hvac_modeled_with_virtual_heating_list_p.append(hvac_p.id)`
-        
-        
         - Else, the hvac system in the proposed design model is also in the U_RMR: `Else:`
             - Reset has_virtual_heating_p boolean variable: `has_virtual_heating_p = FALSE`   
             Below compares the heating systems associated with the hvac system across the P_RMR and U_RMR only if heating was modeled in the proposed. If heating was modeled in the proposed and NOT in the U_RMR (the heating system type is None in the U_RMR) then this means virtual heating was modeled in the proposed. We are checking the preheat coils because baseline systems 5 through 8 have preheat coils. 
@@ -50,7 +47,7 @@
                         - Check if analogous preheat system exists in the U_RMR: `if match_data_element_exist(U_RMR,HeatingSystem,preheat_system_p.id) == TRUE:` 
                             - Get analogous preheat system in U_RMR: `preheat_system_u = match_data_element(U_RMR,HeatingSystem,preheat_system_p.id)`
                             - Check if the analogous system in the U_RMR has a preheat system type equal to "None", if it does then set the has_virtual_preheat_p boolean variable to TRUE : `if preheat_system_u.preheat_system_type == "None": has_virtual_heating_p = TRUE`            
-            - Check if heating was modeled in the proposed via has_virtual_heating_p boolean variable (and not in the U_RMR) add hvac system to list: `if has_virtual_heating_p == TRUE: proposed_hvac_modeled_with_virtual_heating_list_p = proposed_hvac_modeled_with_virtual_heating_list_p.append(hvac_p.id)`   
+        - Check if heating was modeled in the proposed via has_virtual_heating_p boolean variable (and not in the U_RMR) add hvac system to list: `if has_virtual_heating_p == TRUE: proposed_hvac_modeled_with_virtual_heating_list_p = proposed_hvac_modeled_with_virtual_heating_list_p.append(hvac_p.id)`   
 
  **Returns** `return proposed_hvac_modeled_with_virtual_heating_list_p`  
 
