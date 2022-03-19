@@ -6,8 +6,8 @@ from rct229.ruleset_functions.get_zone_conditioning_category_dict import (
     CONDITIONED_RESIDENTIAL,
     SEMI_HEATED,
     UNCONDITIONED,
-    UNENCOLOSED,
-    mock_get_zone_conditioning_category_dict,
+    UNENCLOSED,
+    get_zone_conditioning_category_dict,
 )
 from rct229.utils.jsonpath_utils import find_all
 
@@ -81,13 +81,21 @@ SCC_DATA_FRAME = pd.DataFrame(
             UNREGULATED,
             UNREGULATED,
         ],
+        GROUND: [
+            EXTERIOR_RESIDENTIAL,
+            EXTERIOR_NON_RESIDENTIAL,
+            EXTERIOR_MIXED,
+            SEMI_EXTERIOR,
+            UNREGULATED,
+            UNREGULATED,
+        ],
     },
     index=[
         CONDITIONED_RESIDENTIAL,
         CONDITIONED_NON_RESIDENTIAL,
         CONDITIONED_MIXED,
         SEMI_HEATED,
-        UNENCOLOSED,
+        UNENCLOSED,
         UNCONDITIONED,
     ],
 )
@@ -113,7 +121,7 @@ def get_surface_conditioning_category_dict(climate_zone, building):
     surface_conditioning_category_dict = {}
 
     # Get the conditioning category for all the zones in the building
-    zcc_dict = mock_get_zone_conditioning_category_dict(climate_zone, building)
+    zcc_dict = get_zone_conditioning_category_dict(climate_zone, building)
 
     # Loop through all the zones in the building
     for zone in find_all("building_segments[*].zones[*]", building):
@@ -123,13 +131,13 @@ def get_surface_conditioning_category_dict(climate_zone, building):
         # Loop through all the surfaces in the zone
         for surface in zone["surfaces"]:
             surface_adjacent_to = surface["adjacent_to"]
-            surface_conditioning_category_dict[surface["id"]] = SCC_DATA_FRAME.at(
+            surface_conditioning_category_dict[surface["id"]] = SCC_DATA_FRAME.at[
                 # row index
                 zcc,
                 # column index
                 zcc_dict[surface["adjacent_zone"]]
                 if surface_adjacent_to == INTERIOR
                 else surface_adjacent_to,
-            )
+            ]
 
     return surface_conditioning_category_dict

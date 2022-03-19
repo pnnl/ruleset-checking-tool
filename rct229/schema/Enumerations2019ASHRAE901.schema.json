@@ -240,7 +240,8 @@
                 "TRANSPORTATION_FACILITY_AIRPORT_CONCOURSE",
                 "TRANSPORTATION_FACILITY_TICKET_COUNTER",
                 "WAREHOUSE_STORAGE_AREA_MEDIUM_TO_BULKY_PALLETIZED_ITEMS",
-                "WAREHOUSE_STORAGE_AREA_SMALLER_HAND_CARRIED_ITEMS"
+                "WAREHOUSE_STORAGE_AREA_SMALLER_HAND_CARRIED_ITEMS",
+                "OFFICE"
             ],
             "descriptions": [
                 "Atrium - Low/Medium",
