@@ -1,6 +1,6 @@
 from rct229.data.schema_enums import schema_enums
 from rct229.ruleset_functions.get_opaque_surface_type import (
-    ABOVE_GRADE_WALL,
+    OpaqueSurfaceType as OST,
     get_opaque_surface_type,
 )
 from rct229.ruleset_functions.get_surface_conditioning_category_dict import (
@@ -31,7 +31,7 @@ def get_area_type_window_wall_area_dict(climate_zone, building):
             }
 
         for surface in find_all("zones[*].surfaces[*]", building_segment):
-            if (get_opaque_surface_type(surface) == ABOVE_GRADE_WALL) and (
+            if (get_opaque_surface_type(surface) == OST.ABOVE_GRADE_WALL) and (
                 scc_dictionary[surface["id"]]
                 in [
                     SCC.EXTERIOR_RESIDENTIAL,

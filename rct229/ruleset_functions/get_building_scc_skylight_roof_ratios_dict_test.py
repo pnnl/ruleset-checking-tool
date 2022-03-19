@@ -8,6 +8,14 @@ from rct229.ruleset_functions.get_zone_conditioning_category_dict import (
 from rct229.ruleset_functions.get_zone_conditioning_category_dict import (
     CRAWLSPACE_HEIGHT_THRESHOLD as CRAWLSPACE_HEIGHT_THRESHOLD_QUANTITY,
 )
+from rct229.ruleset_functions.get_building_scc_skylight_roof_ratios_dict import (
+    get_building_scc_skylight_roof_ratios_dict
+)
+
+from rct229.ruleset_functions.get_surface_conditioning_category_dict import (
+    SurfaceConditioningCategory as SCC
+)
+
 from rct229.schema.config import ureg
 from rct229.schema.schema_utils import quantify_rmr
 from rct229.schema.validate import schema_validate_rmr
@@ -81,6 +89,8 @@ TEST_RMR = {
                         # hvac_1_1 => directly_conditioned_zone
                         #   => zone_conditioning_category is "CONDITIONED RESIDENTIAL"
                         #   => door has greater opaque area than glazed area
+                        # total_res_roof_area = 10
+                        # total_res_skylight_area = 0
                         {
                             "id": "zone_1_1",
                             "spaces": [
@@ -99,7 +109,7 @@ TEST_RMR = {
                                     "adjacent_to": "EXTERIOR",
                                     "adjacent_zone": "zone_1_2",
                                     "area": 10,  # m2
-                                    "tilt": 180,  # roof
+                                    "tilt": 0,  # roof
                                     "subsurfaces": [
                                         {
                                             "id": "subsurface_1_1_1_1",
@@ -123,6 +133,8 @@ TEST_RMR = {
                         # hvac_1_2 => directly_conditioned_zone
                         #   => zone_conditioning_category is "CONDITIONED RESIDENTIAL"
                         #   => door has greater glazed area than opaque area
+                        # total_res_roof_area = 10
+                        # total_res_skylight_area = 4
                         {
                             "id": "zone_1_2",
                             "spaces": [
@@ -141,7 +153,7 @@ TEST_RMR = {
                                     "adjacent_to": "EXTERIOR",
                                     "adjacent_zone": "zone_1_1",
                                     "area": 10,  # m2
-                                    "tilt": 180,  # roof
+                                    "tilt": 0,  # roof
                                     "subsurfaces": [
                                         {
                                             "id": "subsurface_1_2_1_1",
@@ -165,6 +177,8 @@ TEST_RMR = {
                         # hvac_1_3 => directly_conditioned_zone
                         #  => zone_conditioning_category is "CONDITIONED NON-RESIDENTIAL"
                         #   => door has greater opaque area than glazed area
+                        # total_nonres_roof_area = 10
+                        # total_nonres_skylight_area = 0
                         {
                             "id": "zone_1_3",
                             "spaces": [
@@ -183,7 +197,7 @@ TEST_RMR = {
                                     "adjacent_to": "EXTERIOR",
                                     "adjacent_zone": "zone_1_4",
                                     "area": 10,  # m2
-                                    "tilt": 180,  # roof
+                                    "tilt": 0,  # roof
                                     "subsurfaces": [
                                         {
                                             "id": "subsurface_1_3_1_1",
@@ -207,6 +221,8 @@ TEST_RMR = {
                         # hvac_1_4 => directly_conditioned_zone
                         #  => zone_conditioning_category is "CONDITIONED NON-RESIDENTIAL"
                         #   => door has greater glazed area than opaque area
+                        # total_nonres_roof_area = 10
+                        # total_nonres_skylight_area = 4
                         {
                             "id": "zone_1_4",
                             "spaces": [
@@ -225,7 +241,7 @@ TEST_RMR = {
                                     "adjacent_to": "EXTERIOR",
                                     "adjacent_zone": "zone_1_3",
                                     "area": 10,  # m2
-                                    "tilt": 180,  # roof
+                                    "tilt": 0,  # roof
                                     "subsurfaces": [
                                         {
                                             "id": "subsurface_1_4_1_1",
@@ -276,6 +292,8 @@ TEST_RMR = {
                         # hvac_2_1 => semiheated_zone
                         # zone_conditioning_category is "SEMI-HEATED"
                         #   => door has greater opaque area than glazed area
+                        # total_semiheated_roof_area = 10
+                        # total_semiheated_skylight_area = 0
                         {
                             "id": "zone_2_1",
                             "spaces": [
@@ -292,7 +310,7 @@ TEST_RMR = {
                                     "adjacent_to": "EXTERIOR",
                                     "adjacent_zone": "zone_2_2",  # directly conditioned
                                     "area": 10,  # m2
-                                    "tilt": 180,  # above grade wall
+                                    "tilt": 0,  # above grade wall
                                     "construction": {
                                         "id": "const_1_5_1",
                                         "u_factor": 0.1,  # W/(m2 * K)
@@ -320,6 +338,8 @@ TEST_RMR = {
                         # hvac_2_2 => semiheated_zone
                         # zone_conditioning_category is "SEMI-HEATED"
                         #   => door has greater glazed area than opaque area
+                        # total_semiheated_roof_area = 10
+                        # total_semiheated_skylight_area = 4
                         {
                             "id": "zone_2_2",
                             "spaces": [
@@ -336,7 +356,7 @@ TEST_RMR = {
                                     "adjacent_to": "EXTERIOR",
                                     "adjacent_zone": "zone_2_1",  # directly conditioned
                                     "area": 10,  # m2
-                                    "tilt": 180,  # above grade wall
+                                    "tilt": 0,  # above grade wall
                                     "construction": {
                                         "id": "const_1_6_1",
                                         "u_factor": 0.1,  # W/(m2 * K)
@@ -368,6 +388,8 @@ TEST_RMR = {
     ],
 }
 
+TEST_BUILDING = quantify_rmr(TEST_RMR)["buildings"][0]
+
 
 def test__TEST_RMR__is_valid():
     schema_validation_result = schema_validate_rmr(TEST_RMR)
@@ -375,3 +397,9 @@ def test__TEST_RMR__is_valid():
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"
 
+
+def test__get_building_scc_skylight_roof_ratios_dict():
+    assert get_building_scc_skylight_roof_ratios_dict(CLIMATE_ZONE, TEST_BUILDING) == {
+        SCC.EXTERIOR_RESIDENTIAL: 0.2,
+        SCC.EXTERIOR_NON_RESIDENTIAL: 0.2,
+        SCC.SEMI_EXTERIOR: 0.2}
