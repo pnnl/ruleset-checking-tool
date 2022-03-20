@@ -8,7 +8,7 @@ Inputs:
 - **loop_type**: "COOLING" (or "HEATING", if needed in future)
 
 Returns: 
-- **primary_secondary_loop_dictionary**: A dictionary that saves the list of primary and secondary loops for the selected loop type, i.e. "HEATING" or "COOLING", e.g. {"PRIMARY": [loop_1.id, loop_2.id], "SECONDARY": [loop3.id]}. If primary loop or secondary loop is not modeled correctly in RMR, return an empty list for both.
+- **primary_secondary_loop_dictionary**: A dictionary that saves pairs of primary and secondary loops for the selected loop type, i.e. "HEATING" or "COOLING", e.g. {primary_loop_1.id: [secondary_loop_1.id, secondary_loop2.id], primary_loop_2.id: [secondary_loop3.id]]}. If RMR does not have primary-secondary loop configuration setup, return an empty dictionary.
 
 Logic:  
 
@@ -20,7 +20,15 @@ Logic:
 
     - Check if HVAC system has chilled water coil: `if hvac.cooling_system.chilled_water_loop:`
 
-      - Save chilled water loop that serves cooling systems to CHW coil loop array to get all loops connected to cooling coils: `chw_coil_loop_array.append(hvac.cooling_system.chilled_water_loop)` (Note XC, need to include zonal cooling coil as well once the schema is updated)
+      - Save chilled water loop that serves cooling systems to CHW coil loop array (array for all loops connected to cooling coils): `chw_coil_loop_array.append(hvac.cooling_system.chilled_water_loop)`
+
+  - For each zone in building segment: `for zone in building_segment.zones:`
+
+    - For each terminal in zone: `for terminal in zone.terminals:`
+
+      - Check if cooling source is chilled water: `if terminal.cooling_source == "CHILLED_WATER":`
+
+        - Save chilled water that serves terminal to CHW coil loop array (array for all loops connected to cooling coils): `chw_coil_loop_array.append(terminal.cooling_from_loop)`
 
 - For each fluid loop in RMR: `for fluid_loop in RMR.RulesetModelInstance.fluid_loops:`
 
@@ -46,11 +54,13 @@ Logic:
 
 - Check if child loop array and secondary loop array is the same, set pass child loop check flag to True: `if child_loop_array.sort() == secondary_loop_array.sort(): pass_child_loop_check_flag = TRUE`
 
-- If all three flags are true, save primary and secondary loop to output dictionary: `if pass_primary_check_flag AND pass_secondary_check_flag AND pass_child_loop_check_flag: primary_secondary_loop_dictionary["PRIMARY"] = primary_loop_array, primary_secondary_loop_dictionary["SECONDARY"] = secondary_loop_array`
+- If all three flags are true: `if pass_primary_check_flag AND pass_secondary_check_flag AND pass_child_loop_check_flag:`
 
-- Else, primary secondary configuration is not modeled correctly, save empty list to output dictionary: `else: primary_secondary_loop_dictionary["PRIMARY"] = [], primary_secondary_loop_dictionary["SECONDARY"] = []`
+  - For each primary loop: `for primary_loop in primary_loop_array:`
+  
+    - Save primary and secondary loop(s) pair to output dictionary: `primary_secondary_loop_dictionary[primary_loop_id].append(secondary_loop_id for secondary_loop_id in primary_loop.child_loops)`
 
-**Returns** `return primary_secondary_loop_dictionary`  
+**Returns** `return primary_secondary_loop_dictionary`
 
 **Notes:**
 
