@@ -1,9 +1,9 @@
 
 # CHW&CW - Rule 22-9  
 
-**Schema Version:** 0.0.10 **Mandatory Rule:** True
+**Schema Version:** 0.0.10 **Mandatory Rule:** True  
 **Rule ID:** 22-9  
-**Rule Description:** For Baseline chilled water system with cooling capacity of 300 tons or more, the secondary pump shall be modeled with a minimum flow of 25% of the design flow rate.  
+**Rule Description:** For Baseline chilled water system with cooling capacity of 300 tons or more, the secondary loop shall be modeled with a minimum flow of 25% of the design flow rate.  
 **Rule Assertion:** B-RMR = expected value  
 **Appendix G Section:** Section 22 CHW&CW Loop  
 **90.1 Section Reference:** Section G3.1.3.10 Chilled-water pumps (System 7, 8, 11, 12 and 13)  
@@ -19,6 +19,7 @@
 
 1. get_baseline_system_types()
 2. get_primary_secondary_loops()
+3. get_component_by_id()
 
 **Applicability Checks:**  
 
@@ -30,7 +31,7 @@
 
 - **Check 2:** Get primary and secondary loops for B-RMR: `primary_secondary_loop_dictionary = get_primary_secondary_loops(B_RMR, "COOLING")`
 
-  - Check if primary and secondary loops are modeled correctly, continue to rule logic: `if primary_secondary_loop_dictionary["PRIMARY"] AND primary_secondary_loop_dictionary["SECONDARY"]: CHECK_RULE_LOGIC`
+  - Check if B-RMR is modeled with primary-secondary configuration, continue to rule logic: `if LEN(primary_secondary_loop_dictionary) != 0: CHECK_RULE_LOGIC`
 
   - Else, rule is not applicable to B-RMR: `else: RULE_NOT_APPLICABLE`
 
@@ -54,12 +55,10 @@
 
       - For each secondary loop served by primary CHW loop: `for secondary_loop_id_b in primary_loop_b.child_loops:`
 
-        - For each secondary pump associated with secondary loop: `for secondary_pump in loop_pump_dictionary[secondary_loop_id_b]:`
+        **Rule Assertion - Component:**
 
-          **Rule Assertion - Component:**
+        - Case 1: If secondary loop is modeled with a minimum flow of 25% of the design flow rate: `if secondary_loop_id_b.cooling_or_condensing_design_and_control.minimum_flow_fraction == 0.25: PASS`
 
-          - Case 1: If secondary pump is modeled with a minimum flow of 25% of the design flow rate: `if secondary_pump.minium_flow == 0.25: PASS`
-
-          - Case 2: Else: `else: FAIL`
+        - Case 2: Else: `else: FAIL`
 
 **[Back](../_toc.md)**
