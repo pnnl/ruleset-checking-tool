@@ -7,6 +7,7 @@ from rct229.ruleset_functions.get_zone_conditioning_category_dict import (
 from rct229.ruleset_functions.get_zone_conditioning_category_dict import (
     get_zone_conditioning_category_dict,
 )
+from rct229.utils.assertions import assert_required_fields
 from rct229.utils.jsonpath_utils import find_all
 
 # Constants
@@ -103,6 +104,13 @@ SCC_DATA_FRAME = pd.DataFrame(
     ],
 )
 
+# Intended for internal use
+GET_SURFACE_CONDITIONING_CATEGORY_DICT__REQUIRED_FIELDS = {
+    "building": {
+        "$..surface[*]": ["adjacent_to", "adjacent_zone"],
+    }
+}
+
 
 def get_surface_conditioning_category_dict(climate_zone, building):
     """Determines the surface conditioning category for every surface in a building
@@ -120,6 +128,10 @@ def get_surface_conditioning_category_dict(climate_zone, building):
         EXTERIOR_RESIDENTIAL, EXTERIOR_NON_RESIDENTIAL, EXTERIOR_MIXED,
         SEMI_EXTERIOR, UNREGULATED
     """
+    assert_required_fields(
+        GET_SURFACE_CONDITIONING_CATEGORY_DICT__REQUIRED_FIELDS["building"], building
+    )
+
     # The dictionary to be returned
     surface_conditioning_category_dict = {}
 
@@ -132,7 +144,7 @@ def get_surface_conditioning_category_dict(climate_zone, building):
         zcc = zcc_dict[zone["id"]]
 
         # Loop through all the surfaces in the zone
-        for surface in zone["surfaces"]:
+        for surface in find_all("surfaces[*]", zone):
             surface_adjacent_to = surface["adjacent_to"]
             surface_conditioning_category_dict[surface["id"]] = SCC_DATA_FRAME.at[
                 # row index
