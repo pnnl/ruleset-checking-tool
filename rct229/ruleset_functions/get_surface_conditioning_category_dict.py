@@ -23,6 +23,18 @@ EXTERIOR_RESIDENTIAL = "EXTERIOR RESIDENTIAL"
 SEMI_EXTERIOR = "SEMI-EXTERIOR"
 UNREGULATED = "UNREGULATED"
 
+# Intended for export and internal use
+class SurfaceConditioningCategory:
+    """Enumeration class for zone conditioning categories"""
+
+    # Surface conditioning categories (export these)
+    EXTERIOR_MIXED: str = "EXTERIOR MIXED"
+    EXTERIOR_NON_RESIDENTIAL: str = "EXTERIOR NON-RESIDENTIAL"
+    EXTERIOR_RESIDENTIAL: str = "EXTERIOR RESIDENTIAL"
+    SEMI_EXTERIOR: str = "SEMI-EXTERIOR"
+    UNREGULATED: str = "UNREGULATED"
+
+
 SCC_DATA_FRAME = pd.DataFrame(
     data={
         CONDITIONED_RESIDENTIAL: [

@@ -15,6 +15,18 @@ HEATED_SOG: str = "HEATED SLAB-ON-GRADE"
 ROOF: str = "ROOF"
 UNHEATED_SOG: str = "UNHEATED SLAB-ON-GRADE"
 
+# Intended for export and internal use
+class OpaqueSurfaceType:
+    """Enumeration class for opaque surface types"""
+
+    ABOVE_GRADE_WALL: str = "ABOVE-GRADE WALL"
+    BELOW_GRADE_WALL: str = "BELOW-GRADE WALL"
+    FLOOR: str = "FLOOR"
+    GROUND: str = "GROUND"
+    HEATED_SOG: str = "HEATED SLAB-ON-GRADE"
+    ROOF: str = "ROOF"
+    UNHEATED_SOG: str = "UNHEATED SLAB-ON-GRADE"
+
 
 def get_opaque_surface_type(surface):
     """Determines a surface's opaque surface type
