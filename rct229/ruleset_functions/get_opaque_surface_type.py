@@ -10,6 +10,7 @@ MAX_ROOF_TILT = 60 * DEGREES
 # These constants are intended for export
 class OpaqueSurfaceType:
     """Enumeration class for zone conditioning categories"""
+
     # Opaque surface types
     ABOVE_GRADE_WALL: str = "ABOVE-GRADE WALL"
     BELOW_GRADE_WALL: str = "BELOW-GRADE WALL"

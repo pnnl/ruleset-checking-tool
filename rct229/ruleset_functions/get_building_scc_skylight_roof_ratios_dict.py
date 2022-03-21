@@ -1,14 +1,15 @@
 from rct229.data.schema_enums import schema_enums
+from rct229.ruleset_functions.get_opaque_surface_type import OpaqueSurfaceType as OST
+from rct229.ruleset_functions.get_opaque_surface_type import get_opaque_surface_type
 from rct229.ruleset_functions.get_surface_conditioning_category_dict import (
     SurfaceConditioningCategory as SCC,
-    get_surface_conditioning_category_dict
 )
-from rct229.ruleset_functions.get_opaque_surface_type import (
-    OpaqueSurfaceType as OST,
-    get_opaque_surface_type,
+from rct229.ruleset_functions.get_surface_conditioning_category_dict import (
+    get_surface_conditioning_category_dict,
 )
 from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all
+
 DOOR = schema_enums["SubsurfaceClassificationType"].DOOR.name
 
 
@@ -32,7 +33,9 @@ def get_building_scc_skylight_roof_ratios_dict(climate_zone, building):
                 total_nonres_skylight_area += _helper_calculate_skylight_area(surface)
             elif scc_dictionary[surface["id"]] == SCC.SEMI_EXTERIOR:
                 total_semiheated_roof_area += getattr_(surface, "surface", "area")
-                total_semiheated_skylight_area += _helper_calculate_skylight_area(surface)
+                total_semiheated_skylight_area += _helper_calculate_skylight_area(
+                    surface
+                )
 
     srr_res = 0.0
     srr_nonres = 0.0
@@ -44,7 +47,11 @@ def get_building_scc_skylight_roof_ratios_dict(climate_zone, building):
     if total_semiheated_roof_area > 0:
         srr_semiheated = total_semiheated_skylight_area / total_semiheated_roof_area
 
-    return {SCC.EXTERIOR_RESIDENTIAL: srr_res, SCC.EXTERIOR_NON_RESIDENTIAL: srr_nonres, SCC.SEMI_EXTERIOR: srr_semiheated}
+    return {
+        SCC.EXTERIOR_RESIDENTIAL: srr_res,
+        SCC.EXTERIOR_NON_RESIDENTIAL: srr_nonres,
+        SCC.SEMI_EXTERIOR: srr_semiheated,
+    }
 
 
 def _helper_calculate_skylight_area(surface):

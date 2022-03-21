@@ -1,21 +1,18 @@
 import pytest
 
 from rct229.data_fns.table_3_2_fns import table_3_2_lookup
-
+from rct229.ruleset_functions.get_building_scc_skylight_roof_ratios_dict import (
+    get_building_scc_skylight_roof_ratios_dict,
+)
+from rct229.ruleset_functions.get_surface_conditioning_category_dict import (
+    SurfaceConditioningCategory as SCC,
+)
 from rct229.ruleset_functions.get_zone_conditioning_category_dict import (
     CAPACITY_THRESHOLD as CAPACITY_THRESHOLD_QUANTITY,
 )
 from rct229.ruleset_functions.get_zone_conditioning_category_dict import (
     CRAWLSPACE_HEIGHT_THRESHOLD as CRAWLSPACE_HEIGHT_THRESHOLD_QUANTITY,
 )
-from rct229.ruleset_functions.get_building_scc_skylight_roof_ratios_dict import (
-    get_building_scc_skylight_roof_ratios_dict
-)
-
-from rct229.ruleset_functions.get_surface_conditioning_category_dict import (
-    SurfaceConditioningCategory as SCC
-)
-
 from rct229.schema.config import ureg
 from rct229.schema.schema_utils import quantify_rmr
 from rct229.schema.validate import schema_validate_rmr
@@ -72,7 +69,7 @@ TEST_RMR = {
                             "heating_system": {
                                 "id": "hsys_1_3_1",
                                 "heat_capacity": SYSTEM_MIN_HEATING_OUTPUT
-                                                 + POWER_DELTA,
+                                + POWER_DELTA,
                             },
                         },
                         # Used for zone_1_2, directly conditioned zone
@@ -81,7 +78,7 @@ TEST_RMR = {
                             "heating_system": {
                                 "id": "hsys_1_4_1",
                                 "heat_capacity": SYSTEM_MIN_HEATING_OUTPUT
-                                                 + POWER_DELTA,
+                                + POWER_DELTA,
                             },
                         },
                     ],
@@ -402,4 +399,5 @@ def test__get_building_scc_skylight_roof_ratios_dict():
     assert get_building_scc_skylight_roof_ratios_dict(CLIMATE_ZONE, TEST_BUILDING) == {
         SCC.EXTERIOR_RESIDENTIAL: 0.2,
         SCC.EXTERIOR_NON_RESIDENTIAL: 0.2,
-        SCC.SEMI_EXTERIOR: 0.2}
+        SCC.SEMI_EXTERIOR: 0.2,
+    }
