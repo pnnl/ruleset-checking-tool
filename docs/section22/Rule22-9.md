@@ -1,7 +1,8 @@
 
 # CHW&CW - Rule 22-9  
 
-**Schema Version:** 0.0.10 **Mandatory Rule:** True  
+**Schema Version:** 0.0.10  
+**Mandatory Rule:** True  
 **Rule ID:** 22-9  
 **Rule Description:** For Baseline chilled water system with cooling capacity of 300 tons or more, the secondary loop shall be modeled with a minimum flow of 25% of the design flow rate.  
 **Rule Assertion:** B-RMR = expected value  
@@ -12,7 +13,7 @@
 **Applicability Checks:**  
 
 1. B-RMR is modeled with at least one air-side system that is Type-7, 8, 11, 12, 13, 7b, 8b, 11b, 12b, 13b.
-2. Primary and secondary CHW loops are modeled correctly in B-RMR.
+2. B-RMR is modeled with primary-secondary configuration.
 3. B-RMR chilled water system cooling capacity is 300 tons or more.
 
 **Function Calls:**  
