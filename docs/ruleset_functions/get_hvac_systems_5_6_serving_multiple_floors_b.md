@@ -14,7 +14,7 @@
 2. get_hvac_zone_list_w_area()
 
 ## Logic:  
-- For each building_segment in the B_RMR: `for building_segment_b in B_RMR..BuildingSegment:`
+- For each building_segment in the B_RMR: `for building_segment_b in B_RMR...BuildingSegment:`
     - Reset list of applicable HVAC (HVAC systems that are of type 5, 5a, 5b, 6, 6a, 6b): `applicable_hvac_list_b = ""`
     - For each hvac_b in the building_segment_b: `for hvac_b in building_segment_b.heating_ventilation_air_conditioning_system:`
         - Reset the hvac_system_type_applicable boolean variable (indicates whether the hvac system type is relevant): `hvac_system_type_applicable = FALSE`
