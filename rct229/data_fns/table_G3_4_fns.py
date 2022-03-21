@@ -23,8 +23,11 @@ SURFACE_TYPE_TO_CONSTRUCTION_MAP = {
 
 # This dictionary maps surface conditioning categories as returned from get_surface_conditioning_category_dict()
 # to the corresponding building category values in ashrae_90_1_prm_2019.construction_properties.json
+# TODO Temporary fix for EXTERIOR MIXED type surface -
+#  Need to review with RDS on Surface_Conditioning_Category (Zone_Conditioning_Category) functions
 SURFACE_CONDITIONING_CATEGORY_TO_BUILDING_CATEGORY_MAP = {
     "EXTERIOR RESIDENTIAL": "Residential",
+    "EXTERIOR MIXED": "Nonresidential",
     "EXTERIOR NON-RESIDENTIAL": "Nonresidential",
     "SEMI-EXTERIOR": "Semiheated",
 }
