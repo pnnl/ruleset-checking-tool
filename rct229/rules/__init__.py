@@ -2,9 +2,8 @@ import importlib
 import inspect
 
 import rct229.rule_engine.rule_base as base_classes
-from rct229.rule_engine.rule_base import RuleDefinitionBase
 import rct229.rules as rules
-
+from rct229.rule_engine.rule_base import RuleDefinitionBase
 
 # Add all available rule modules in __all__
 __all__ = [
