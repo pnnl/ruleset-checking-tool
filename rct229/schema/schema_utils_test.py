@@ -18,9 +18,21 @@ def test__clean_schema_units__with_dash_in_denominator():
 def test__quantify_rmr():
     ureg = get_pint_unit_registry()
     assert quantify_rmr(
-        {"transformers": [{"id": 1, "name": "tranformer_1", "capacity": 500}]}
+        {
+            "ruleset_model_instances": [
+                {"transformers": [{"id": 1, "name": "tranformer_1", "capacity": 500}]}
+            ]
+        }
     ) == {
-        "transformers": [
-            {"id": 1, "name": "tranformer_1", "capacity": 500 * ureg("ampere * volt")}
+        "ruleset_model_instances": [
+            {
+                "transformers": [
+                    {
+                        "id": 1,
+                        "name": "tranformer_1",
+                        "capacity": 500 * ureg("ampere * volt"),
+                    }
+                ]
+            }
         ]
     }
