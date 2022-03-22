@@ -24,6 +24,7 @@ def clean_schema_units(schema_unit_str):
         The schema_unit_str string value translated to a string value the Pint library unit registry can understand.
 
     """
+    cleaned_unit_str = schema_unit_str
 
     # Clean up dash symbol used with fractional units for pint to understand (e.g. W/K-m2 --> W/(K*m2))
     if "-" in schema_unit_str:
@@ -36,11 +37,7 @@ def clean_schema_units(schema_unit_str):
                 substring_list[i] = "(" + re.sub("-", "*", substring) + ")"
 
         # Put it all together
-        cleaned_unit_str = "".join(substring_list)
-
-    # Nothing to clean
-    else:
-        cleaned_unit_str = schema_unit_str
+        cleaned_unit_str = "/".join(substring_list)
 
     return cleaned_unit_str
 
@@ -48,7 +45,7 @@ def clean_schema_units(schema_unit_str):
 def find_schema_unit_for_json_path(key_list):
     """Ingests a JSON path that has associated units the ASHRAE229 schema. This function returns the units for that
     JSON path as defined by the ASHRAE229 schema.
-    For example: 'transformers/capacity' => 'V-A'
+    For example: ['transformers','capacity'] => 'V-A'
 
      Parameters
      ----------
@@ -100,14 +97,24 @@ def quantify_rmr(rmr):
     """
     rmr = deepcopy(rmr)
 
-    # Match all rmr items
-    all_rmr_item_matches = parse_jsonpath("$..*").find(rmr)
+    # Match all rmr field items
+    # Note, this does not match array items, but will pass through an array to get to a field item
+    all_rmr_field_item_matches = parse_jsonpath("$..*").find(rmr)
 
-    # Pick out the number rmr item matches
+    # Pick out the number fields and fields that hold an array of numbers
     number_rmr_item_matches = list(
         filter(
-            lambda rmr_item_match: type(rmr_item_match.value) in [int, float],
-            all_rmr_item_matches,
+            lambda rmr_item_match: (type(rmr_item_match.value) in [int, float])
+            or (
+                type(rmr_item_match.value) is list
+                and all(
+                    [
+                        type(list_item) in [int, float]
+                        for list_item in rmr_item_match.value
+                    ]
+                )
+            ),
+            all_rmr_field_item_matches,
         )
     )
 

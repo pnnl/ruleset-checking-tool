@@ -48,7 +48,7 @@ def find_osstd_table_entry(match_field_name_value_pairs, osstd_table):
     )
     assert (
         len(matching_entries) == 1
-    ), f"Not exactly one match in OSSTD for {match_field_name_value_pairs}"
+    ), f"Not exactly one match in OSSTD for {match_field_name_value_pairs}, found {len(matching_entries)} instead."
 
     matching_entry = matching_entries[0]
     assert type(matching_entry) is dict

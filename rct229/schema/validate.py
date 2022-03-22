@@ -13,7 +13,7 @@ SCHEMA_ENUM_PATH = os.path.join(file_dir, SCHEMA_ENUM_KEY)
 SCHEMA_RESNET_ENUM_PATH = os.path.join(file_dir, SCHEMA_RESNET_ENUM_KEY)
 
 
-def _schema_validate(rmr_obj):
+def schema_validate_rmr(rmr_obj):
     """Validates an RMR against the schema
 
     This code follows the outline given in
@@ -48,19 +48,22 @@ def _schema_validate(rmr_obj):
         return {"passed": False, "error": "schema invalid: " + err.message}
 
 
-def _non_schema_validate(rmr_obj):
+def non_schema_validate_rmr(rmr_obj):
     """Provides non-schema validation for an RMR"""
-    # TODO: Add check for unique names, etc.
+    # TODO: Add checks for:
+    # The ids within each Group are unique
+    # A Subsurface must have exactly one of glazed_area or opaque_area
+    #
     return {"passed": True, "error": None}
 
 
 def validate_rmr(rmr_obj):
     """Validate an RMR against the schema and other high-level checks"""
     # Validate against the schema
-    result = _schema_validate(rmr_obj)
+    result = schema_validate_rmr(rmr_obj)
 
     if result["passed"]:
         # Provide non-schema validation
-        result = _non_schema_validate(rmr_obj)
+        result = non_schema_validate_rmr(rmr_obj)
 
     return result
