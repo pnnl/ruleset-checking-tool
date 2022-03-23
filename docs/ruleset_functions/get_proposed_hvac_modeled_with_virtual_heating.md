@@ -15,28 +15,25 @@
 2. match_data_element_exist()
 
 ## Logic:  
-- For each building_segment_p in the P_RMR...BuildingSegment: `for building_segment_p in P_RMR...BuildingSegment:`
-    - Get analogous segment in the U_RMR: `building_segment_u = match_data_element(U_RMR,BuildingSegment,building_segment_p.id)`
-    - Get list of hvac systems in the U_RMR: `hvac_list_u = building_segment_u.heating_ventilation_air_conditioning_systems`
-    - For each hvac_p in the building_segment_p: `for hvac_p in building_segment_p:`       
-        - Reset has_virtual_heating_p boolean variable: `has_virtual_heating_p = FALSE`   
+- For each hvac_p in the the P_RMR: `for hvac_p in P_RMR...HeatingVentilationAirConditioningSystem:`       
+    - Reset has_virtual_heating_p boolean variable: `has_virtual_heating_p = FALSE`   
         Below compares the heating systems associated with the hvac system across the P_RMR and U_RMR only if heating was modeled in the proposed. If heating was modeled in the proposed and NOT in the U_RMR (the heating system type is None in the U_RMR) then this means virtual heating was modeled in the proposed. We are checking the preheat coils because baseline systems 5 through 8 have preheat coils. 
-        - Check if there are any heating_system associated with hvac_p, if not skip to preheat check: `if hvac_p.heating_system != Null:`
-            - For each heating_system_p in hvac_p: `for heating_system_p in hvac_p.heating_system:`
-                - Check if "None" is NOT the heating_system_type for heating_system_p, if its not "None" (means heating was modeled) then get the analogous heating system in the U_RMR (if it exists) and check if the heating_system_type is "None" in the U_RMR: `if heating_system_p.heating_system_type != "None":`
-                    - Check if analogous heating system exists in the U_RMR: `if match_data_element_exist(U_RMR,HeatingSystem,heating_system_p.id) == TRUE:` 
-                        - Get analogous heating system in U_RMR: `heating_system_u = match_data_element(U_RMR,HeatingSystem,heating_system_p.id)`
-                        - Check if the analogous system in the U_RMR has a heating system type equal to "None", if it does then set the has_virtual_heating_p boolean variable to TRUE: `if heating_system_u.heating_system_type == "None": has_virtual_heating_p = TRUE`
-                    - Else, if the analogous heating system does not exist in the U_RMR, then set has_virtual_heating_p boolean variable to TRUE: `Else: has_virtual_heating_p = TRUE`
-        - Check if has_virtual_heating_p = false, if it equals true then skip indented logic: `if has_virtual_heating_p == False:`
-            - Check if there are any preheat_system associated with hvac_p, if not skip indented code: `if hvac_p.preheat_system != Null:`
-                - For each preheat_system_p in hvac_p: `for preheat_system_p in hvac_p.preheat_system:`
-                    - Check if "None" is NOT the preheat_system_type for preheat_system_p, if its not "None" (means preheat was modeled) then get the analogous preheat system in the U_RMR (if it exists) and check if the preheat_system_type is "None" in the U_RMR: `if preheat_system_p.preheat_system_type != "None":`
-                        - Check if analogous preheat system exists in the U_RMR: `if match_data_element_exist(U_RMR,HeatingSystem,preheat_system_p.id) == TRUE:` 
-                            - Get analogous preheat system in U_RMR: `preheat_system_u = match_data_element(U_RMR,HeatingSystem,preheat_system_p.id)`
-                            - Check if the analogous system in the U_RMR has a preheat system type equal to "None", if it does then set the has_virtual_preheat_p boolean variable to TRUE : `if preheat_system_u.preheat_system_type == "None": has_virtual_heating_p = TRUE`            
-                        - Else, if the analogous preheat system does not exist in the U_RMR, then set has_virtual_heating_p boolean variable to TRUE: `Else: has_virtual_heating_p = TRUE`
-        - Check if heating was modeled in the proposed via has_virtual_heating_p boolean variable (and not in the U_RMR) add hvac system to list: `if has_virtual_heating_p == TRUE: proposed_hvac_modeled_with_virtual_heating_list_p = proposed_hvac_modeled_with_virtual_heating_list_p.append(hvac_p.id)`   
+    - Check if there are any heating_system associated with hvac_p, if not skip to preheat check: `if hvac_p.heating_system != Null:`
+        - For each heating_system_p in hvac_p: `for heating_system_p in hvac_p.heating_system:`
+            - Check if "None" is NOT the heating_system_type for heating_system_p, if its not "None" (means heating was modeled) then get the analogous heating system in the U_RMR (if it exists) and check if the heating_system_type is "None" in the U_RMR: `if heating_system_p.heating_system_type != "None":`
+                - Check if analogous heating system exists in the U_RMR: `if match_data_element_exist(U_RMR,HeatingSystem,heating_system_p.id) == TRUE:` 
+                    - Get analogous heating system in U_RMR: `heating_system_u = match_data_element(U_RMR,HeatingSystem,heating_system_p.id)`
+                    - Check if the analogous system in the U_RMR has a heating system type equal to "None", if it does then set the has_virtual_heating_p boolean variable to TRUE: `if heating_system_u.heating_system_type == "None": has_virtual_heating_p = TRUE`
+                - Else, if the analogous heating system does not exist in the U_RMR, then set has_virtual_heating_p boolean variable to TRUE: `Else: has_virtual_heating_p = TRUE`
+    - Check if has_virtual_heating_p = false, if it equals true then skip indented logic: `if has_virtual_heating_p == False:`
+        - Check if there are any preheat_system associated with hvac_p, if not skip indented code: `if hvac_p.preheat_system != Null:`
+            - For each preheat_system_p in hvac_p: `for preheat_system_p in hvac_p.preheat_system:`
+                - Check if "None" is NOT the preheat_system_type for preheat_system_p, if its not "None" (means preheat was modeled) then get the analogous preheat system in the U_RMR (if it exists) and check if the preheat_system_type is "None" in the U_RMR: `if preheat_system_p.preheat_system_type != "None":`
+                    - Check if analogous preheat system exists in the U_RMR: `if match_data_element_exist(U_RMR,HeatingSystem,preheat_system_p.id) == TRUE:` 
+                        - Get analogous preheat system in U_RMR: `preheat_system_u = match_data_element(U_RMR,HeatingSystem,preheat_system_p.id)`
+                        - Check if the analogous system in the U_RMR has a preheat system type equal to "None", if it does then set the has_virtual_preheat_p boolean variable to TRUE : `if preheat_system_u.preheat_system_type == "None": has_virtual_heating_p = TRUE`            
+                    - Else, if the analogous preheat system does not exist in the U_RMR, then set has_virtual_heating_p boolean variable to TRUE: `Else: has_virtual_heating_p = TRUE`
+    - Check if heating was modeled in the proposed via has_virtual_heating_p boolean variable (and not in the U_RMR) add hvac system to list: `if has_virtual_heating_p == TRUE: proposed_hvac_modeled_with_virtual_heating_list_p = proposed_hvac_modeled_with_virtual_heating_list_p.append(hvac_p.id)`   
 
  **Returns** `return proposed_hvac_modeled_with_virtual_heating_list_p`  
 
