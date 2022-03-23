@@ -25,17 +25,17 @@ def get_building_scc_skylight_roof_ratios_dict(climate_zone, building):
     total_semiheated_skylight_area = ZERO.AREA
 
     for surface in find_all("building_segments[*].zones[*].surfaces[*]", building):
-        floor_area = getattr_(surface, "surface", "area")
-        skylight_area = _helper_calculate_skylight_area(surface)
         if get_opaque_surface_type(surface) == OST.ROOF:
+            roof_area = getattr_(surface, "surface", "area")
+            skylight_area = _helper_calculate_skylight_area(surface)
             if scc_dictionary[surface["id"]] == SCC.EXTERIOR_RESIDENTIAL:
-                total_res_roof_area += floor_area
+                total_res_roof_area += roof_area
                 total_res_skylight_area += skylight_area
             elif scc_dictionary[surface["id"]] == SCC.EXTERIOR_NON_RESIDENTIAL:
-                total_nonres_roof_area += floor_area
+                total_nonres_roof_area += roof_area
                 total_nonres_skylight_area += skylight_area
             elif scc_dictionary[surface["id"]] == SCC.SEMI_EXTERIOR:
-                total_semiheated_roof_area += floor_area
+                total_semiheated_roof_area += roof_area
                 total_semiheated_skylight_area += skylight_area
 
     srr_res = 0.0
