@@ -48,7 +48,7 @@ GET_ZONE_CONDITIONING_CATEGORY_DICT__REQUIRED_FIELDS = {
             "u_factor",
         ],
         "building_segments[*].zones[*].terminals[*]": [
-            "served_by_heating_ventilation_air_conditioning_systems"
+            "served_by_heating_ventilation_air_conditioning_system"
         ],
     }
 }
@@ -147,7 +147,7 @@ def get_zone_conditioning_category_dict(climate_zone, building):
             # Note: there is only one hvac system even though the field name is plural
             # This will change to singular in schema version 0.0.8
             hvac_sys_id = terminal[
-                "served_by_heating_ventilation_air_conditioning_systems"
+                "served_by_heating_ventilation_air_conditioning_system"
             ]
 
             # Add cooling and heating capacites for the terminal

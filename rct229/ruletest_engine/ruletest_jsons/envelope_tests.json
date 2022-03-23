@@ -20,51 +20,63 @@
             "baseline": {
                 "id": "ASHRAE229",
                 "weather": {
-                    "climate_zone": "CZ4A"
+                    "climate_zone": "CZ4A",
+                    "data_source_type": "OTHER"
                 },
-                "buildings": [
+                "ruleset_model_instances": [
                     {
-                        "id": "Building 1",
-                        "building_open_schedule": "Required Schedule 1",
-                        "building_segments": [
+                        "id": "RMR 1",
+                        "buildings": [
                             {
-                                "id": "Building Segment 1",
-                                "zones": [
+                                "id": "Building 1",
+                                "building_open_schedule": "Required Schedule 1",
+                                "building_segments": [
                                     {
-                                        "id": "zone_1",
-                                        "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
-                                        "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
-                                        "spaces": [
+                                        "id": "Building Segment 1",
+                                        "zones": [
                                             {
-                                                "id": "Space 1",
-                                                "occupant_multiplier_schedule": "Required Occupancy Sched 1",
-                                                "lighting_space_type": "DWELLING_UNIT"
+                                                "id": "zone_1",
+                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "occupant_multiplier_schedule": "Required Occupancy Sched 1",
+                                                        "lighting_space_type": "DWELLING_UNIT"
+                                                    }
+                                                ],
+                                                "terminals": [
+                                                    {
+                                                        "id": "Terminal 1",
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
+                                                    }
+                                                ],
+                                                "surfaces": [
+                                                    {
+                                                        "id": "surface_1",
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 90,
+                                                        "construction": {
+                                                            "id": "construction_1",
+                                                            "u_factor": 2.0612098807530947
+                                                        }
+                                                    }
+                                                ]
                                             }
                                         ],
-                                        "surfaces": [
+                                        "heating_ventilation_air_conditioning_systems": [
                                             {
-                                                "id": "surface_1",
-                                                "adjacent_to": "EXTERIOR",
-                                                "tilt": 90,
-                                                "construction": {
-                                                    "id": "construction_1",
-                                                    "u_factor": 2.0612098807530947
+                                                "id": "HVAC 1",
+                                                "cooling_system": {
+                                                    "id": "Cooling System 1",
+                                                    "sensible_cool_capacity": 17585.0
+                                                },
+                                                "heating_system": {
+                                                    "id": "Heating System 1",
+                                                    "heat_capacity": 9378.275555555556
                                                 }
                                             }
                                         ]
-                                    }
-                                ],
-                                "heating_ventilation_air_conditioning_systems": [
-                                    {
-                                        "id": "HVAC 1",
-                                        "cooling_system": {
-                                            "id": "Cooling System 1",
-                                            "sensible_cool_capacity": 17585.0
-                                        },
-                                        "heating_system": {
-                                            "id": "Heating System 1",
-                                            "heat_capacity": 9378.275555555556
-                                        }
                                     }
                                 ]
                             }
@@ -95,51 +107,63 @@
             "baseline": {
                 "id": "ASHRAE229",
                 "weather": {
-                    "climate_zone": "CZ4A"
+                    "climate_zone": "CZ4A",
+                    "data_source_type": "OTHER"
                 },
-                "buildings": [
+                "ruleset_model_instances": [
                     {
-                        "id": "Building 1",
-                        "building_open_schedule": "Required Schedule 1",
-                        "building_segments": [
+                        "id": "RMR 1",
+                        "buildings": [
                             {
-                                "id": "Building Segment 1",
-                                "zones": [
+                                "id": "Building 1",
+                                "building_open_schedule": "Required Schedule 1",
+                                "building_segments": [
                                     {
-                                        "id": "zone_1",
-                                        "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
-                                        "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
-                                        "spaces": [
+                                        "id": "Building Segment 1",
+                                        "zones": [
                                             {
-                                                "id": "Space 1",
-                                                "occupant_multiplier_schedule": "Required Occupancy Sched 1",
-                                                "lighting_space_type": "DWELLING_UNIT"
+                                                "id": "zone_1",
+                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "occupant_multiplier_schedule": "Required Occupancy Sched 1",
+                                                        "lighting_space_type": "DWELLING_UNIT"
+                                                    }
+                                                ],
+                                                "terminals": [
+                                                    {
+                                                        "id": "Terminal 1",
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
+                                                    }
+                                                ],
+                                                "surfaces": [
+                                                    {
+                                                        "id": "surface_1",
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 90,
+                                                        "construction": {
+                                                            "id": "construction_1",
+                                                            "u_factor": 2.0612098807530947
+                                                        }
+                                                    }
+                                                ]
                                             }
                                         ],
-                                        "surfaces": [
+                                        "heating_ventilation_air_conditioning_systems": [
                                             {
-                                                "id": "surface_1",
-                                                "adjacent_to": "EXTERIOR",
-                                                "tilt": 90,
-                                                "construction": {
-                                                    "id": "construction_1",
-                                                    "u_factor": 2.0612098807530947
+                                                "id": "HVAC 1",
+                                                "cooling_system": {
+                                                    "id": "Cooling System 1",
+                                                    "sensible_cool_capacity": 42204.0
+                                                },
+                                                "heating_system": {
+                                                    "id": "Heating System 1",
+                                                    "heat_capacity": 8792.133333333333
                                                 }
                                             }
                                         ]
-                                    }
-                                ],
-                                "heating_ventilation_air_conditioning_systems": [
-                                    {
-                                        "id": "HVAC 1",
-                                        "cooling_system": {
-                                            "id": "Cooling System 1",
-                                            "sensible_cool_capacity": 42204.0
-                                        },
-                                        "heating_system": {
-                                            "id": "Heating System 1",
-                                            "heat_capacity": 8792.133333333333
-                                        }
                                     }
                                 ]
                             }
@@ -170,51 +194,63 @@
             "baseline": {
                 "id": "ASHRAE229",
                 "weather": {
-                    "climate_zone": "CZ4A"
+                    "climate_zone": "CZ4A",
+                    "data_source_type": "OTHER"
                 },
-                "buildings": [
+                "ruleset_model_instances": [
                     {
-                        "id": "Building 1",
-                        "building_open_schedule": "Required Schedule 1",
-                        "building_segments": [
+                        "id": "RMR 1",
+                        "buildings": [
                             {
-                                "id": "Building Segment 1",
-                                "zones": [
+                                "id": "Building 1",
+                                "building_open_schedule": "Required Schedule 1",
+                                "building_segments": [
                                     {
-                                        "id": "zone_1",
-                                        "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
-                                        "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
-                                        "spaces": [
+                                        "id": "Building Segment 1",
+                                        "zones": [
                                             {
-                                                "id": "Space 1",
-                                                "occupant_multiplier_schedule": "Required Occupancy Sched 1",
-                                                "lighting_space_type": "DWELLING_UNIT"
+                                                "id": "zone_1",
+                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "occupant_multiplier_schedule": "Required Occupancy Sched 1",
+                                                        "lighting_space_type": "DWELLING_UNIT"
+                                                    }
+                                                ],
+                                                "terminals": [
+                                                    {
+                                                        "id": "Terminal 1",
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
+                                                    }
+                                                ],
+                                                "surfaces": [
+                                                    {
+                                                        "id": "surface_1",
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 90,
+                                                        "construction": {
+                                                            "id": "construction_1",
+                                                            "u_factor": 7.029690998270886
+                                                        }
+                                                    }
+                                                ]
                                             }
                                         ],
-                                        "surfaces": [
+                                        "heating_ventilation_air_conditioning_systems": [
                                             {
-                                                "id": "surface_1",
-                                                "adjacent_to": "EXTERIOR",
-                                                "tilt": 90,
-                                                "construction": {
-                                                    "id": "construction_1",
-                                                    "u_factor": 7.029690998270886
+                                                "id": "HVAC 1",
+                                                "cooling_system": {
+                                                    "id": "Cooling System 1",
+                                                    "sensible_cool_capacity": 17585.0
+                                                },
+                                                "heating_system": {
+                                                    "id": "Heating System 1",
+                                                    "heat_capacity": 9378.275555555556
                                                 }
                                             }
                                         ]
-                                    }
-                                ],
-                                "heating_ventilation_air_conditioning_systems": [
-                                    {
-                                        "id": "HVAC 1",
-                                        "cooling_system": {
-                                            "id": "Cooling System 1",
-                                            "sensible_cool_capacity": 17585.0
-                                        },
-                                        "heating_system": {
-                                            "id": "Heating System 1",
-                                            "heat_capacity": 9378.275555555556
-                                        }
                                     }
                                 ]
                             }
@@ -245,51 +281,63 @@
             "baseline": {
                 "id": "ASHRAE229",
                 "weather": {
-                    "climate_zone": "CZ4A"
+                    "climate_zone": "CZ4A",
+                    "data_source_type": "OTHER"
                 },
-                "buildings": [
+                "ruleset_model_instances": [
                     {
-                        "id": "Building 1",
-                        "building_open_schedule": "Required Schedule 1",
-                        "building_segments": [
+                        "id": "RMR 1",
+                        "buildings": [
                             {
-                                "id": "Building Segment 1",
-                                "zones": [
+                                "id": "Building 1",
+                                "building_open_schedule": "Required Schedule 1",
+                                "building_segments": [
                                     {
-                                        "id": "zone_1",
-                                        "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
-                                        "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
-                                        "spaces": [
+                                        "id": "Building Segment 1",
+                                        "zones": [
                                             {
-                                                "id": "Space 1",
-                                                "occupant_multiplier_schedule": "Required Occupancy Sched 1",
-                                                "lighting_space_type": "CLASSROOM_LECTURE_HALL_TRAINING_ROOM_ALL_OTHER"
+                                                "id": "zone_1",
+                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "occupant_multiplier_schedule": "Required Occupancy Sched 1",
+                                                        "lighting_space_type": "CLASSROOM_LECTURE_HALL_TRAINING_ROOM_ALL_OTHER"
+                                                    }
+                                                ],
+                                                "terminals": [
+                                                    {
+                                                        "id": "Terminal 1",
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
+                                                    }
+                                                ],
+                                                "surfaces": [
+                                                    {
+                                                        "id": "surface_1",
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 90,
+                                                        "construction": {
+                                                            "id": "construction_1",
+                                                            "u_factor": 3.9974979505514567
+                                                        }
+                                                    }
+                                                ]
                                             }
                                         ],
-                                        "surfaces": [
+                                        "heating_ventilation_air_conditioning_systems": [
                                             {
-                                                "id": "surface_1",
-                                                "adjacent_to": "EXTERIOR",
-                                                "tilt": 90,
-                                                "construction": {
-                                                    "id": "construction_1",
-                                                    "u_factor": 3.9974979505514567
+                                                "id": "HVAC 1",
+                                                "cooling_system": {
+                                                    "id": "Cooling System 1",
+                                                    "sensible_cool_capacity": 17585.0
+                                                },
+                                                "heating_system": {
+                                                    "id": "Heating System 1",
+                                                    "heat_capacity": 9378.275555555556
                                                 }
                                             }
                                         ]
-                                    }
-                                ],
-                                "heating_ventilation_air_conditioning_systems": [
-                                    {
-                                        "id": "HVAC 1",
-                                        "cooling_system": {
-                                            "id": "Cooling System 1",
-                                            "sensible_cool_capacity": 17585.0
-                                        },
-                                        "heating_system": {
-                                            "id": "Heating System 1",
-                                            "heat_capacity": 9378.275555555556
-                                        }
                                     }
                                 ]
                             }
@@ -320,51 +368,63 @@
             "baseline": {
                 "id": "ASHRAE229",
                 "weather": {
-                    "climate_zone": "CZ4A"
+                    "climate_zone": "CZ4A",
+                    "data_source_type": "OTHER"
                 },
-                "buildings": [
+                "ruleset_model_instances": [
                     {
-                        "id": "Building 1",
-                        "building_open_schedule": "Required Schedule 1",
-                        "building_segments": [
+                        "id": "RMR 1",
+                        "buildings": [
                             {
-                                "id": "Building Segment 1",
-                                "zones": [
+                                "id": "Building 1",
+                                "building_open_schedule": "Required Schedule 1",
+                                "building_segments": [
                                     {
-                                        "id": "zone_1",
-                                        "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
-                                        "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
-                                        "spaces": [
+                                        "id": "Building Segment 1",
+                                        "zones": [
                                             {
-                                                "id": "Space 1",
-                                                "occupant_multiplier_schedule": "Required Occupancy Sched 1",
-                                                "lighting_space_type": "CLASSROOM_LECTURE_HALL_TRAINING_ROOM_ALL_OTHER"
+                                                "id": "zone_1",
+                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "occupant_multiplier_schedule": "Required Occupancy Sched 1",
+                                                        "lighting_space_type": "CLASSROOM_LECTURE_HALL_TRAINING_ROOM_ALL_OTHER"
+                                                    }
+                                                ],
+                                                "terminals": [
+                                                    {
+                                                        "id": "Terminal 1",
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
+                                                    }
+                                                ],
+                                                "surfaces": [
+                                                    {
+                                                        "id": "surface_1",
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 90,
+                                                        "construction": {
+                                                            "id": "construction_1",
+                                                            "u_factor": 7.029690998270886
+                                                        }
+                                                    }
+                                                ]
                                             }
                                         ],
-                                        "surfaces": [
+                                        "heating_ventilation_air_conditioning_systems": [
                                             {
-                                                "id": "surface_1",
-                                                "adjacent_to": "EXTERIOR",
-                                                "tilt": 90,
-                                                "construction": {
-                                                    "id": "construction_1",
-                                                    "u_factor": 7.029690998270886
+                                                "id": "HVAC 1",
+                                                "cooling_system": {
+                                                    "id": "Cooling System 1",
+                                                    "sensible_cool_capacity": 17585.0
+                                                },
+                                                "heating_system": {
+                                                    "id": "Heating System 1",
+                                                    "heat_capacity": 9378.275555555556
                                                 }
                                             }
                                         ]
-                                    }
-                                ],
-                                "heating_ventilation_air_conditioning_systems": [
-                                    {
-                                        "id": "HVAC 1",
-                                        "cooling_system": {
-                                            "id": "Cooling System 1",
-                                            "sensible_cool_capacity": 17585.0
-                                        },
-                                        "heating_system": {
-                                            "id": "Heating System 1",
-                                            "heat_capacity": 9378.275555555556
-                                        }
                                     }
                                 ]
                             }
@@ -395,51 +455,63 @@
             "baseline": {
                 "id": "ASHRAE229",
                 "weather": {
-                    "climate_zone": "CZ4A"
+                    "climate_zone": "CZ4A",
+                    "data_source_type": "OTHER"
                 },
-                "buildings": [
+                "ruleset_model_instances": [
                     {
-                        "id": "Building 1",
-                        "building_open_schedule": "Required Schedule 1",
-                        "building_segments": [
+                        "id": "RMR 1",
+                        "buildings": [
                             {
-                                "id": "Building Segment 1",
-                                "zones": [
+                                "id": "Building 1",
+                                "building_open_schedule": "Required Schedule 1",
+                                "building_segments": [
                                     {
-                                        "id": "zone_1",
-                                        "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
-                                        "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
-                                        "spaces": [
+                                        "id": "Building Segment 1",
+                                        "zones": [
                                             {
-                                                "id": "Space 1",
-                                                "occupant_multiplier_schedule": "Required Occupancy Sched 1",
-                                                "lighting_space_type": "WAREHOUSE_STORAGE_AREA_SMALLER_HAND_CARRIED_ITEMS"
+                                                "id": "zone_1",
+                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "occupant_multiplier_schedule": "Required Occupancy Sched 1",
+                                                        "lighting_space_type": "WAREHOUSE_STORAGE_AREA_SMALLER_HAND_CARRIED_ITEMS"
+                                                    }
+                                                ],
+                                                "terminals": [
+                                                    {
+                                                        "id": "Terminal 1",
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
+                                                    }
+                                                ],
+                                                "surfaces": [
+                                                    {
+                                                        "id": "surface_1",
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 90,
+                                                        "construction": {
+                                                            "id": "construction_1",
+                                                            "u_factor": 3.9974979505514567
+                                                        }
+                                                    }
+                                                ]
                                             }
                                         ],
-                                        "surfaces": [
+                                        "heating_ventilation_air_conditioning_systems": [
                                             {
-                                                "id": "surface_1",
-                                                "adjacent_to": "EXTERIOR",
-                                                "tilt": 90,
-                                                "construction": {
-                                                    "id": "construction_1",
-                                                    "u_factor": 3.9974979505514567
+                                                "id": "HVAC 1",
+                                                "cooling_system": {
+                                                    "id": "Cooling System 1",
+                                                    "sensible_cool_capacity": 17585.0
+                                                },
+                                                "heating_system": {
+                                                    "id": "Heating System 1",
+                                                    "heat_capacity": 3516.8533333333335
                                                 }
                                             }
                                         ]
-                                    }
-                                ],
-                                "heating_ventilation_air_conditioning_systems": [
-                                    {
-                                        "id": "HVAC 1",
-                                        "cooling_system": {
-                                            "id": "Cooling System 1",
-                                            "sensible_cool_capacity": 17585.0
-                                        },
-                                        "heating_system": {
-                                            "id": "Heating System 1",
-                                            "heat_capacity": 3516.8533333333335
-                                        }
                                     }
                                 ]
                             }
@@ -470,51 +542,63 @@
             "baseline": {
                 "id": "ASHRAE229",
                 "weather": {
-                    "climate_zone": "CZ4A"
+                    "climate_zone": "CZ4A",
+                    "data_source_type": "OTHER"
                 },
-                "buildings": [
+                "ruleset_model_instances": [
                     {
-                        "id": "Building 1",
-                        "building_open_schedule": "Required Schedule 1",
-                        "building_segments": [
+                        "id": "RMR 1",
+                        "buildings": [
                             {
-                                "id": "Building Segment 1",
-                                "zones": [
+                                "id": "Building 1",
+                                "building_open_schedule": "Required Schedule 1",
+                                "building_segments": [
                                     {
-                                        "id": "zone_1",
-                                        "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
-                                        "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
-                                        "spaces": [
+                                        "id": "Building Segment 1",
+                                        "zones": [
                                             {
-                                                "id": "Space 1",
-                                                "occupant_multiplier_schedule": "Required Occupancy Sched 1",
-                                                "lighting_space_type": "WAREHOUSE_STORAGE_AREA_SMALLER_HAND_CARRIED_ITEMS"
+                                                "id": "zone_1",
+                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "occupant_multiplier_schedule": "Required Occupancy Sched 1",
+                                                        "lighting_space_type": "WAREHOUSE_STORAGE_AREA_SMALLER_HAND_CARRIED_ITEMS"
+                                                    }
+                                                ],
+                                                "terminals": [
+                                                    {
+                                                        "id": "Terminal 1",
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
+                                                    }
+                                                ],
+                                                "surfaces": [
+                                                    {
+                                                        "id": "surface_1",
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 90,
+                                                        "construction": {
+                                                            "id": "construction_1",
+                                                            "u_factor": 2.0328185600815645
+                                                        }
+                                                    }
+                                                ]
                                             }
                                         ],
-                                        "surfaces": [
+                                        "heating_ventilation_air_conditioning_systems": [
                                             {
-                                                "id": "surface_1",
-                                                "adjacent_to": "EXTERIOR",
-                                                "tilt": 90,
-                                                "construction": {
-                                                    "id": "construction_1",
-                                                    "u_factor": 2.0328185600815645
+                                                "id": "HVAC 1",
+                                                "cooling_system": {
+                                                    "id": "Cooling System 1",
+                                                    "sensible_cool_capacity": 17585.0
+                                                },
+                                                "heating_system": {
+                                                    "id": "Heating System 1",
+                                                    "heat_capacity": 3516.8533333333335
                                                 }
                                             }
                                         ]
-                                    }
-                                ],
-                                "heating_ventilation_air_conditioning_systems": [
-                                    {
-                                        "id": "HVAC 1",
-                                        "cooling_system": {
-                                            "id": "Cooling System 1",
-                                            "sensible_cool_capacity": 17585.0
-                                        },
-                                        "heating_system": {
-                                            "id": "Heating System 1",
-                                            "heat_capacity": 3516.8533333333335
-                                        }
                                     }
                                 ]
                             }
@@ -544,22 +628,27 @@
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229",
-                "buildings": [
+                "ruleset_model_instances": [
                     {
-                        "id": "Building 1",
-                        "building_open_schedule": "Required Schedule 1",
-                        "building_segments": [
+                        "id": "RMR 1",
+                        "buildings": [
                             {
-                                "id": "Building Segment 1",
-                                "zones": [
+                                "id": "Building 1",
+                                "building_open_schedule": "Required Schedule 1",
+                                "building_segments": [
                                     {
-                                        "id": "zone_1",
-                                        "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
-                                        "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
-                                        "infiltration": {
-                                            "id": "Infiltration 1",
-                                            "modeling_method": "WEATHER_DRIVEN"
-                                        }
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "zone_1",
+                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
+                                                "infiltration": {
+                                                    "id": "Infiltration 1",
+                                                    "modeling_method": "WEATHER_DRIVEN"
+                                                }
+                                            }
+                                        ]
                                     }
                                 ]
                             }
@@ -589,22 +678,27 @@
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229",
-                "buildings": [
+                "ruleset_model_instances": [
                     {
-                        "id": "Building 1",
-                        "building_open_schedule": "Required Schedule 1",
-                        "building_segments": [
+                        "id": "RMR 1",
+                        "buildings": [
                             {
-                                "id": "Building Segment 1",
-                                "zones": [
+                                "id": "Building 1",
+                                "building_open_schedule": "Required Schedule 1",
+                                "building_segments": [
                                     {
-                                        "id": "zone_1",
-                                        "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
-                                        "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
-                                        "infiltration": {
-                                            "id": "Infiltration 1",
-                                            "modeling_method": "PRESSURE_BASED"
-                                        }
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "zone_1",
+                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
+                                                "infiltration": {
+                                                    "id": "Infiltration 1",
+                                                    "modeling_method": "PRESSURE_BASED"
+                                                }
+                                            }
+                                        ]
                                     }
                                 ]
                             }
@@ -629,27 +723,32 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "1. Baseline heating and cooling capacities are established correctly (air-side HVAC rule TBD). This affects baseline space conditioning categories",
             "mandatory_rule": "Yes",
-            "schema_version": "0.0.5"
+            "schema_version": "0.0.12"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229",
-                "buildings": [
+                "ruleset_model_instances": [
                     {
-                        "id": "Building 1",
-                        "building_open_schedule": "Required Schedule 1",
-                        "building_segments": [
+                        "id": "RMR 1",
+                        "buildings": [
                             {
-                                "id": "Building Segment 1",
-                                "zones": [
+                                "id": "Building 1",
+                                "building_open_schedule": "Required Schedule 1",
+                                "building_segments": [
                                     {
-                                        "id": "zone_1",
-                                        "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
-                                        "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
-                                        "infiltration": {
-                                            "id": "Infiltration 1",
-                                            "modeling_method": "CONSTANT"
-                                        }
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "zone_1",
+                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
+                                                "infiltration": {
+                                                    "id": "Infiltration 1",
+                                                    "modeling_method": "CONSTANT"
+                                                }
+                                            }
+                                        ]
                                     }
                                 ]
                             }
@@ -674,28 +773,33 @@
             "comparison_value": "Baseline RMR",
             "rule_dependency": "None",
             "mandatory_rule": "Yes",
-            "schema_version": "0.0.5"
+            "schema_version": "0.0.12"
         },
         "rmr_transformations": {
             "proposed": {
                 "id": "ASHRAE229",
-                "buildings": [
+                "ruleset_model_instances": [
                     {
-                        "id": "Building 1",
-                        "building_open_schedule": "Required Schedule 1",
-                        "building_segments": [
+                        "id": "RMR 1",
+                        "buildings": [
                             {
-                                "id": "Building Segment 1",
-                                "zones": [
+                                "id": "Building 1",
+                                "building_open_schedule": "Required Schedule 1",
+                                "building_segments": [
                                     {
-                                        "id": "zone_1",
-                                        "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
-                                        "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
-                                        "infiltration": {
-                                            "id": "Infiltration 1",
-                                            "modeling_method": "WEATHER_DRIVEN",
-                                            "algorithm_name": "AIR-CHANGE"
-                                        }
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "zone_1",
+                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
+                                                "infiltration": {
+                                                    "id": "Infiltration 1",
+                                                    "modeling_method": "WEATHER_DRIVEN",
+                                                    "algorithm_name": "AIR-CHANGE"
+                                                }
+                                            }
+                                        ]
                                     }
                                 ]
                             }
@@ -705,23 +809,28 @@
             },
             "baseline": {
                 "id": "ASHRAE229",
-                "buildings": [
+                "ruleset_model_instances": [
                     {
-                        "id": "Building 1",
-                        "building_open_schedule": "Required Schedule 1",
-                        "building_segments": [
+                        "id": "RMR 1",
+                        "buildings": [
                             {
-                                "id": "Building Segment 1",
-                                "zones": [
+                                "id": "Building 1",
+                                "building_open_schedule": "Required Schedule 1",
+                                "building_segments": [
                                     {
-                                        "id": "zone_1",
-                                        "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
-                                        "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
-                                        "infiltration": {
-                                            "id": "Infiltration 1",
-                                            "modeling_method": "WEATHER_DRIVEN",
-                                            "algorithm_name": "AIR-CHANGE"
-                                        }
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "zone_1",
+                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
+                                                "infiltration": {
+                                                    "id": "Infiltration 1",
+                                                    "modeling_method": "WEATHER_DRIVEN",
+                                                    "algorithm_name": "AIR-CHANGE"
+                                                }
+                                            }
+                                        ]
                                     }
                                 ]
                             }
@@ -746,28 +855,33 @@
             "comparison_value": "Baseline RMR",
             "rule_dependency": "None",
             "mandatory_rule": "Yes",
-            "schema_version": "0.0.5"
+            "schema_version": "0.0.12"
         },
         "rmr_transformations": {
             "proposed": {
                 "id": "ASHRAE229",
-                "buildings": [
+                "ruleset_model_instances": [
                     {
-                        "id": "Building 1",
-                        "building_open_schedule": "Required Schedule 1",
-                        "building_segments": [
+                        "id": "RMR 1",
+                        "buildings": [
                             {
-                                "id": "Building Segment 1",
-                                "zones": [
+                                "id": "Building 1",
+                                "building_open_schedule": "Required Schedule 1",
+                                "building_segments": [
                                     {
-                                        "id": "zone_1",
-                                        "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
-                                        "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
-                                        "infiltration": {
-                                            "id": "Infiltration 1",
-                                            "modeling_method": "WEATHER_DRIVEN",
-                                            "algorithm_name": "ASHRAE-ENHANCED"
-                                        }
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "zone_1",
+                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
+                                                "infiltration": {
+                                                    "id": "Infiltration 1",
+                                                    "modeling_method": "WEATHER_DRIVEN",
+                                                    "algorithm_name": "ASHRAE-ENHANCED"
+                                                }
+                                            }
+                                        ]
                                     }
                                 ]
                             }
@@ -777,23 +891,28 @@
             },
             "baseline": {
                 "id": "ASHRAE229",
-                "buildings": [
+                "ruleset_model_instances": [
                     {
-                        "id": "Building 1",
-                        "building_open_schedule": "Required Schedule 1",
-                        "building_segments": [
+                        "id": "RMR 1",
+                        "buildings": [
                             {
-                                "id": "Building Segment 1",
-                                "zones": [
+                                "id": "Building 1",
+                                "building_open_schedule": "Required Schedule 1",
+                                "building_segments": [
                                     {
-                                        "id": "zone_1",
-                                        "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
-                                        "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
-                                        "infiltration": {
-                                            "id": "Infiltration 1",
-                                            "modeling_method": "WEATHER_DRIVEN",
-                                            "algorithm_name": "AIR-CHANGE"
-                                        }
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "zone_1",
+                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
+                                                "infiltration": {
+                                                    "id": "Infiltration 1",
+                                                    "modeling_method": "WEATHER_DRIVEN",
+                                                    "algorithm_name": "AIR-CHANGE"
+                                                }
+                                            }
+                                        ]
                                     }
                                 ]
                             }

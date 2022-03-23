@@ -19,7 +19,7 @@ class Section5Rule44(RuleDefinitionListIndexedBase):
             index_rmr="baseline",
             id="5-44",
             description="The infiltration modeling method in the baseline includes adjustment for weather and building operation.",
-            rmr_context="buildings",
+            rmr_context="ruleset_model_instances/0/buildings",
         )
 
     class BuildingRule(RuleDefinitionBase):
