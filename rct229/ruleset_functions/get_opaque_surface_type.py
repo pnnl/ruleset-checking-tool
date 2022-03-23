@@ -20,6 +20,7 @@ class OpaqueSurfaceType:
     ROOF: str = "ROOF"
     UNHEATED_SOG: str = "UNHEATED SLAB-ON-GRADE"
 
+
 # Intended for export and internal use
 class OpaqueSurfaceType:
     """Enumeration class for opaque surface types"""
