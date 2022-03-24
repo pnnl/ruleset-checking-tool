@@ -7,7 +7,7 @@ from rct229.ruleset_functions.get_zone_conditioning_category_dict import (
 from rct229.ruleset_functions.get_zone_conditioning_category_dict import (
     get_zone_conditioning_category_dict,
 )
-from rct229.utils.assertions import assert_required_fields
+from rct229.utils.assertions import assert_required_fields, getattr_
 from rct229.utils.jsonpath_utils import find_all
 
 # Constants
@@ -107,7 +107,7 @@ SCC_DATA_FRAME = pd.DataFrame(
 # Intended for internal use
 GET_SURFACE_CONDITIONING_CATEGORY_DICT__REQUIRED_FIELDS = {
     "building": {
-        "$..surface[*]": ["adjacent_to", "adjacent_zone"],
+        "$..surface[*]": ["adjacent_to"],
     }
 }
 
@@ -150,7 +150,7 @@ def get_surface_conditioning_category_dict(climate_zone, building):
                 # row index
                 zcc,
                 # column index
-                zcc_dict[surface["adjacent_zone"]]
+                zcc_dict[getattr_(surface, "surface", "adjacent_zone")]
                 if surface_adjacent_to == SurfaceAdjacentTo.INTERIOR.name
                 else surface_adjacent_to,
             ]
