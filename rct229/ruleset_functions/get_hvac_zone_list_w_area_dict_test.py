@@ -54,12 +54,7 @@ TEST_RMR = {
         }
     ],
 }
-TEST_RMR_12 = {
-    "id": "229_01",
-    "ruleset_model_instances":[
-        TEST_RMR
-    ]
-}
+TEST_RMR_12 = {"id": "229_01", "ruleset_model_instances": [TEST_RMR]}
 
 TEST_BUILDING = quantify_rmr(TEST_RMR_12)["ruleset_model_instances"][0]["buildings"][0]
 

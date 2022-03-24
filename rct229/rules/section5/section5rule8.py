@@ -4,10 +4,8 @@ from rct229.rule_engine.rule_base import (
     RuleDefinitionListIndexedBase,
 )
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
-from rct229.ruleset_functions.get_opaque_surface_type import (
-    BELOW_GRADE_WALL,
-    get_opaque_surface_type,
-)
+from rct229.ruleset_functions.get_opaque_surface_type import OpaqueSurfaceType as OST
+from rct229.ruleset_functions.get_opaque_surface_type import get_opaque_surface_type
 from rct229.ruleset_functions.get_surface_conditioning_category_dict import (
     get_surface_conditioning_category_dict,
 )
@@ -56,7 +54,7 @@ class Section5Rule8(RuleDefinitionListIndexedBase):
             mix_surface_c_factor_ids = []
 
             for surface_b in surfaces_b:
-                if get_opaque_surface_type(surface_b) == BELOW_GRADE_WALL:
+                if get_opaque_surface_type(surface_b) == OST.BELOW_GRADE_WALL:
                     # construction info
                     surface_construction_b = surface_b["construction"]
                     scc_b = scc_dictionary_b[surface_b["id"]]
@@ -68,17 +66,21 @@ class Section5Rule8(RuleDefinitionListIndexedBase):
                         "EXTERIOR NON-RESIDENTIAL",
                         "SEMI-EXTERIOR",
                     ]:
-                        target = table_G34_lookup(climate_zone, scc_b, BELOW_GRADE_WALL)
+                        target = table_G34_lookup(
+                            climate_zone, scc_b, OST.BELOW_GRADE_WALL
+                        )
                         target_c_factor = target["c_factor"]
 
                     elif scc_b == "EXTERIOR MIXED":
                         target = table_G34_lookup(
-                            climate_zone, "EXTERIOR RESIDENTIAL", BELOW_GRADE_WALL
+                            climate_zone, "EXTERIOR RESIDENTIAL", OST.BELOW_GRADE_WALL
                         )
                         target_c_factor_res = target["c_factor"]
 
                         target = table_G34_lookup(
-                            climate_zone, "EXTERIOR NON-RESIDENTIAL", BELOW_GRADE_WALL
+                            climate_zone,
+                            "EXTERIOR NON-RESIDENTIAL",
+                            OST.BELOW_GRADE_WALL,
                         )
                         target_c_factor_nonres = target["c_factor"]
 
