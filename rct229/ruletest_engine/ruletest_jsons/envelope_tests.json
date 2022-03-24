@@ -48,7 +48,11 @@
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
+<<<<<<< HEAD
                                                         "served_by_heating_ventilation_air_conditioning_systems": "HVAC 1"
+=======
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
+>>>>>>> 148dc9bba63d1738c5aca7f6146b504fd207dfe1
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -135,7 +139,11 @@
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
+<<<<<<< HEAD
                                                         "served_by_heating_ventilation_air_conditioning_systems": "HVAC 1"
+=======
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
+>>>>>>> 148dc9bba63d1738c5aca7f6146b504fd207dfe1
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -222,7 +230,11 @@
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
+<<<<<<< HEAD
                                                         "served_by_heating_ventilation_air_conditioning_systems": "HVAC 1"
+=======
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
+>>>>>>> 148dc9bba63d1738c5aca7f6146b504fd207dfe1
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -309,7 +321,11 @@
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
+<<<<<<< HEAD
                                                         "served_by_heating_ventilation_air_conditioning_systems": "HVAC 1"
+=======
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
+>>>>>>> 148dc9bba63d1738c5aca7f6146b504fd207dfe1
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -396,7 +412,11 @@
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
+<<<<<<< HEAD
                                                         "served_by_heating_ventilation_air_conditioning_systems": "HVAC 1"
+=======
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
+>>>>>>> 148dc9bba63d1738c5aca7f6146b504fd207dfe1
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -483,7 +503,11 @@
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
+<<<<<<< HEAD
                                                         "served_by_heating_ventilation_air_conditioning_systems": "HVAC 1"
+=======
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
+>>>>>>> 148dc9bba63d1738c5aca7f6146b504fd207dfe1
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -570,7 +594,11 @@
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
+<<<<<<< HEAD
                                                         "served_by_heating_ventilation_air_conditioning_systems": "HVAC 1"
+=======
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
+>>>>>>> 148dc9bba63d1738c5aca7f6146b504fd207dfe1
                                                     }
                                                 ],
                                                 "surfaces": [

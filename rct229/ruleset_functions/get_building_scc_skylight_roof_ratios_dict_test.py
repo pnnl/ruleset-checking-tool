@@ -1,8 +1,11 @@
 import pytest
 
 from rct229.data_fns.table_3_2_fns import table_3_2_lookup
-from rct229.ruleset_functions.get_area_type_window_wall_area_dict import (
-    get_area_type_window_wall_area_dict,
+from rct229.ruleset_functions.get_building_scc_skylight_roof_ratios_dict import (
+    get_building_scc_skylight_roof_ratios_dict,
+)
+from rct229.ruleset_functions.get_surface_conditioning_category_dict import (
+    SurfaceConditioningCategory as SCC,
 )
 from rct229.ruleset_functions.get_zone_conditioning_category_dict import (
     CAPACITY_THRESHOLD as CAPACITY_THRESHOLD_QUANTITY,
@@ -28,7 +31,7 @@ POWER_THRESHOLD_100 = (CAPACITY_THRESHOLD_QUANTITY * 100 * ureg("m2")).to("W").m
 CRAWLSPACE_HEIGHT_THRESHOLD = CRAWLSPACE_HEIGHT_THRESHOLD_QUANTITY.to("m").magnitude
 
 
-# This single RMR is intended to exercise all the get_zone_conditioning_category_dict() code
+# This single RMR is intended to exercise all the get_building_scc_skylight_roof_ratios_dict function
 TEST_RMR = {
     "id": "test_rmr",
     "buildings": [
@@ -36,8 +39,7 @@ TEST_RMR = {
             "id": "bldg_1",
             "building_open_schedule": "bldg_open_sched_1",
             "building_segments": [
-                # area_type_vertical_fenestration is nonresidential type
-                # In total this building segment has 10m2 windows and 20m2 walls.
+                # area_type_vertical_fenestration is residential type
                 {
                     "id": "bldg_seg_1",
                     "lighting_building_area_type": "MULTIFAMILY",
@@ -61,15 +63,31 @@ TEST_RMR = {
                                 + POWER_DELTA,
                             },
                         },
+                        # Used for zone_1_3, directly conditioned zone
+                        {
+                            "id": "hvac_1_3",
+                            "heating_system": {
+                                "id": "hsys_1_3_1",
+                                "heat_capacity": SYSTEM_MIN_HEATING_OUTPUT
+                                + POWER_DELTA,
+                            },
+                        },
+                        # Used for zone_1_2, directly conditioned zone
+                        {
+                            "id": "hvac_1_4",
+                            "heating_system": {
+                                "id": "hsys_1_4_1",
+                                "heat_capacity": SYSTEM_MIN_HEATING_OUTPUT
+                                + POWER_DELTA,
+                            },
+                        },
                     ],
                     "zones": [
                         # hvac_1_1 => directly_conditioned_zone
-                        # zone has a space with a residential lighting_space_type
-                        #   => zone_has_residential_spaces
-                        # zone has a space with a nonresidential lighting_space_type
-                        #   => zone_has_nonresidential_spaces
-                        # zone_has_nonresidential_spaces AND zone_has_nonresidential_spaces
-                        #   => zone_conditioning_category is "CONDITIONED MIXED"
+                        #   => zone_conditioning_category is "CONDITIONED RESIDENTIAL"
+                        #   => door has greater opaque area than glazed area
+                        # total_res_roof_area = 10
+                        # total_res_skylight_area = 0
                         {
                             "id": "zone_1_1",
                             "spaces": [
@@ -80,13 +98,6 @@ TEST_RMR = {
                                     "lighting_space_type": "DORMITORY_LIVING_QUARTERS",
                                     "occupant_multiplier_schedule": "om_sched_1",
                                 },
-                                {
-                                    # Non-residential
-                                    "id": "space_1_1_2",
-                                    "floor_area": 100,  # m2
-                                    "lighting_space_type": "COMPUTER_ROOM",
-                                    "occupant_multiplier_schedule": "om_sched_1",
-                                },
                             ],
                             "surfaces": [
                                 # Adds to zone_other_ua
@@ -95,13 +106,13 @@ TEST_RMR = {
                                     "adjacent_to": "EXTERIOR",
                                     "adjacent_zone": "zone_1_2",
                                     "area": 10,  # m2
-                                    "tilt": 90,  # above grade wall
+                                    "tilt": 0,  # roof
                                     "subsurfaces": [
                                         {
                                             "id": "subsurface_1_1_1_1",
-                                            "classification": "WINDOW",
-                                            "glazed_area": 5,
-                                            "opaque_area": 0,  # m2
+                                            "classification": "DOOR",
+                                            "glazed_area": 1,
+                                            "opaque_area": 3,  # m2
                                             "u_factor": 2.4,  # W/(m2 * K)
                                         }
                                     ],
@@ -117,20 +128,20 @@ TEST_RMR = {
                             ],
                         },
                         # hvac_1_2 => directly_conditioned_zone
-                        # zone has no residential spaces but a space has a lighting_space_type
-                        #   => zone_has_nonresidential_spaces
-                        # Not zone_has_residential_spaces and zone_has_nonesidential_spaces
-                        #  => zone_conditioning_category is "CONDITIONED NON-RESIDENTIAL"
+                        #   => zone_conditioning_category is "CONDITIONED RESIDENTIAL"
+                        #   => door has greater glazed area than opaque area
+                        # total_res_roof_area = 10
+                        # total_res_skylight_area = 4
                         {
                             "id": "zone_1_2",
                             "spaces": [
                                 {
-                                    # Non-residential
+                                    # Residential
                                     "id": "space_1_2_1",
                                     "floor_area": 100,  # m2
-                                    "lighting_space_type": "COMPUTER_ROOM",
+                                    "lighting_space_type": "DORMITORY_LIVING_QUARTERS",
                                     "occupant_multiplier_schedule": "om_sched_1",
-                                }
+                                },
                             ],
                             "surfaces": [
                                 # Adds to zone_other_ua
@@ -139,13 +150,13 @@ TEST_RMR = {
                                     "adjacent_to": "EXTERIOR",
                                     "adjacent_zone": "zone_1_1",
                                     "area": 10,  # m2
-                                    "tilt": 90,  # above grade wall
+                                    "tilt": 0,  # roof
                                     "subsurfaces": [
                                         {
                                             "id": "subsurface_1_2_1_1",
-                                            "classification": "WINDOW",
-                                            "glazed_area": 5,
-                                            "opaque_area": 0,  # m2
+                                            "classification": "DOOR",
+                                            "glazed_area": 3,
+                                            "opaque_area": 1,  # m2
                                             "u_factor": 2.4,  # W/(m2 * K)
                                         }
                                     ],
@@ -160,6 +171,94 @@ TEST_RMR = {
                                 }
                             ],
                         },
+                        # hvac_1_3 => directly_conditioned_zone
+                        #  => zone_conditioning_category is "CONDITIONED NON-RESIDENTIAL"
+                        #   => door has greater opaque area than glazed area
+                        # total_nonres_roof_area = 10
+                        # total_nonres_skylight_area = 0
+                        {
+                            "id": "zone_1_3",
+                            "spaces": [
+                                {
+                                    # Non-residential
+                                    "id": "space_1_3_1",
+                                    "floor_area": 100,  # m2
+                                    "lighting_space_type": "COMPUTER_ROOM",
+                                    "occupant_multiplier_schedule": "om_sched_1",
+                                }
+                            ],
+                            "surfaces": [
+                                # Adds to zone_other_ua
+                                {
+                                    "id": "surface_1_3_1",
+                                    "adjacent_to": "EXTERIOR",
+                                    "adjacent_zone": "zone_1_4",
+                                    "area": 10,  # m2
+                                    "tilt": 0,  # roof
+                                    "subsurfaces": [
+                                        {
+                                            "id": "subsurface_1_3_1_1",
+                                            "classification": "DOOR",
+                                            "glazed_area": 1,
+                                            "opaque_area": 3,  # m2
+                                            "u_factor": 2.4,  # W/(m2 * K)
+                                        }
+                                    ],
+                                }
+                            ],
+                            "thermostat_cooling_setpoint_schedule": "tcs_sched_1",
+                            "thermostat_heating_setpoint_schedule": "ths_sched_1",
+                            "terminals": [
+                                {
+                                    "id": "terminal_1_3_1",
+                                    "served_by_heating_ventilation_air_conditioning_system": "hvac_1_3",
+                                }
+                            ],
+                        },
+                        # hvac_1_4 => directly_conditioned_zone
+                        #  => zone_conditioning_category is "CONDITIONED NON-RESIDENTIAL"
+                        #   => door has greater glazed area than opaque area
+                        # total_nonres_roof_area = 10
+                        # total_nonres_skylight_area = 4
+                        {
+                            "id": "zone_1_4",
+                            "spaces": [
+                                {
+                                    # Non-residential
+                                    "id": "space_1_4_1",
+                                    "floor_area": 100,  # m2
+                                    "lighting_space_type": "COMPUTER_ROOM",
+                                    "occupant_multiplier_schedule": "om_sched_1",
+                                }
+                            ],
+                            "surfaces": [
+                                # Adds to zone_other_ua
+                                {
+                                    "id": "surface_1_4_1",
+                                    "adjacent_to": "EXTERIOR",
+                                    "adjacent_zone": "zone_1_3",
+                                    "area": 10,  # m2
+                                    "tilt": 0,  # roof
+                                    "subsurfaces": [
+                                        {
+                                            "id": "subsurface_1_4_1_1",
+                                            "classification": "DOOR",
+                                            "glazed_area": 3,
+                                            "opaque_area": 1,  # m2
+                                            "u_factor": 2.4,  # W/(m2 * K)
+                                        }
+                                    ],
+                                }
+                            ],
+                            "thermostat_cooling_setpoint_schedule": "tcs_sched_1",
+                            "thermostat_heating_setpoint_schedule": "ths_sched_1",
+                            "terminals": [
+                                {
+                                    "id": "terminal_1_4_1",
+                                    "served_by_heating_ventilation_air_conditioning_system": "hvac_1_4",
+                                }
+                            ],
+                        },
                     ],
                 },
                 # building segment area_type_vertical_fenestration is commercial type
@@ -169,13 +268,12 @@ TEST_RMR = {
                     "lighting_building_area_type": "FIRE_STATION",
                     "area_type_vertical_fenestration": "RETAIL_STAND_ALONE",
                     "heating_ventilation_air_conditioning_systems": [
-                        # Used for directly conditioned zone
+                        # Used for semi-heated zone
                         {
                             "id": "hvac_2_1",
-                            "cooling_system": {
+                            "heating_system": {
                                 "id": "csys_2_1_1",
-                                "sensible_cool_capacity": POWER_THRESHOLD_100
-                                + POWER_DELTA,
+                                "heat_capacity": POWER_THRESHOLD_100 + POWER_DELTA,
                             },
                         },
                         # Used for semi-heated zone
@@ -188,38 +286,42 @@ TEST_RMR = {
                         },
                     ],
                     "zones": [
-                        # hvac_2_1 => directly_conditioned_zone
-                        # zone only has residential spaces
-                        #   => zone_conditioning_category is "CONDITIONED RESIDENTIAL"
-                        # has 5m2 window and 10m2 wall
+                        # hvac_2_1 => semiheated_zone
+                        # zone_conditioning_category is "SEMI-HEATED"
+                        #   => door has greater opaque area than glazed area
+                        # total_semiheated_roof_area = 10
+                        # total_semiheated_skylight_area = 0
                         {
                             "id": "zone_2_1",
                             "spaces": [
                                 {
                                     "id": "space_2_1_1",
                                     "floor_area": 100,  # m2
-                                    "lighting_space_type": "HEALTHCARE_FACILITY_PATIENT_ROOM",
                                     "occupant_multiplier_schedule": "om_sched_1",
                                 }
                             ],
                             "surfaces": [
-                                # Adds to zone_other_ua
+                                # Adds to zone_directly_conditioned_ua
                                 {
                                     "id": "surface_2_1_1",
                                     "adjacent_to": "EXTERIOR",
-                                    "adjacent_zone": "zone_1_2",
+                                    "adjacent_zone": "zone_2_2",  # directly conditioned
                                     "area": 10,  # m2
-                                    "tilt": 90,  # above grade wall
+                                    "tilt": 0,  # above grade wall
+                                    "construction": {
+                                        "id": "const_1_5_1",
+                                        "u_factor": 0.1,  # W/(m2 * K)
+                                    },
                                     "subsurfaces": [
                                         {
                                             "id": "subsurface_2_1_1_1",
-                                            "classification": "WINDOW",
-                                            "glazed_area": 5,
-                                            "opaque_area": 0,  # m2
-                                            "u_factor": 2.4,  # W/(m2 * K)
+                                            "classification": "DOOR",
+                                            "glazed_area": 1,
+                                            "opaque_area": 3,  # m2
+                                            "u_factor": 0.5,  # W/(m2 * K)
                                         }
                                     ],
-                                }
+                                },
                             ],
                             "thermostat_cooling_setpoint_schedule": "tcs_sched_1",
                             "thermostat_heating_setpoint_schedule": "ths_sched_1",
@@ -232,8 +334,9 @@ TEST_RMR = {
                         },
                         # hvac_2_2 => semiheated_zone
                         # zone_conditioning_category is "SEMI-HEATED"
-                        # It has a Door subsurface but the opaque surface is greater than window surface
-                        # So its total surface does not count towards total window area
+                        #   => door has greater glazed area than opaque area
+                        # total_semiheated_roof_area = 10
+                        # total_semiheated_skylight_area = 4
                         {
                             "id": "zone_2_2",
                             "spaces": [
@@ -248,11 +351,11 @@ TEST_RMR = {
                                 {
                                     "id": "surface_2_2_1",
                                     "adjacent_to": "EXTERIOR",
-                                    "adjacent_zone": "zone_1_1",  # directly conditioned
+                                    "adjacent_zone": "zone_2_1",  # directly conditioned
                                     "area": 10,  # m2
-                                    "tilt": 90,  # above grade wall
+                                    "tilt": 0,  # above grade wall
                                     "construction": {
-                                        "id": "const_1_5_1",
+                                        "id": "const_1_6_1",
                                         "u_factor": 0.1,  # W/(m2 * K)
                                     },
                                     "subsurfaces": [
@@ -260,7 +363,7 @@ TEST_RMR = {
                                             "id": "subsurface_2_2_1_1",
                                             "classification": "DOOR",
                                             "glazed_area": 3,
-                                            "opaque_area": 2,  # m2
+                                            "opaque_area": 1,  # m2
                                             "u_factor": 0.5,  # W/(m2 * K)
                                         }
                                     ],
@@ -272,109 +375,6 @@ TEST_RMR = {
                                 {
                                     "id": "terminal_2_2_1",
                                     "served_by_heating_ventilation_air_conditioning_system": "hvac_2_2",
-                                }
-                            ],
-                        },
-                    ],
-                },
-                # Building segment has no area_type_vertical_fenestration
-                # The total window area in this building segment is 5 m2
-                # The total wall area in this building segment is 10 m2
-                {
-                    "id": "bldg_seg_3",
-                    "lighting_building_area_type": "CONVENTION_CENTER",
-                    "heating_ventilation_air_conditioning_systems": [
-                        # Used for directly conditioned zone
-                        {
-                            "id": "hvac_3_1",
-                            "cooling_system": {
-                                "id": "csys_3_1_1",
-                                "sensible_cool_capacity": POWER_THRESHOLD_100
-                                + POWER_DELTA,
-                            },
-                        }
-                    ],
-                    "zones": [
-                        # hvac_3_1 => directly_conditioned_zone
-                        # has a door subsurface, the glazed area is greater than the opaque area,
-                        # so its total area count towards window area.
-                        {
-                            "id": "zone_3_1",
-                            "spaces": [
-                                {
-                                    "id": "space_3_1_1",
-                                    "floor_area": 100,  # m2
-                                    "lighting_space_type": "HEALTHCARE_FACILITY_PATIENT_ROOM",
-                                    "occupant_multiplier_schedule": "om_sched_1",
-                                }
-                            ],
-                            "surfaces": [
-                                # Adds to zone_other_ua
-                                {
-                                    "id": "surface_3_1_1",
-                                    "adjacent_to": "EXTERIOR",
-                                    "adjacent_zone": "zone_1_2",  # semi-heated
-                                    "area": 10,  # m2
-                                    "tilt": 90,  # above grade wall
-                                    "construction": {
-                                        "id": "interior_wall_3_1_1",
-                                        "u_factor": 0.222,  # W/(m2 * K)
-                                    },
-                                    "subsurfaces": [
-                                        {
-                                            "id": "subsurface_3_1_1_1",
-                                            "classification": "DOOR",
-                                            "glazed_area": 3,
-                                            "opaque_area": 2,  # m2
-                                            "u_factor": 0.5,  # W/(m2 * K)
-                                        }
-                                    ],
-                                }
-                            ],
-                            "thermostat_cooling_setpoint_schedule": "tcs_sched_1",
-                            "thermostat_heating_setpoint_schedule": "ths_sched_1",
-                            "terminals": [
-                                {
-                                    "id": "terminal_3_1_1",
-                                    "served_by_heating_ventilation_air_conditioning_system": "hvac_3_1",
-                                }
-                            ],
-                        },
-                        # no hvac, lighting_space_type == "PARKING_AREA_INTERIOR" => unenclosed
-                        # has a 2 m2 window, however it should not count towards the total wall and window area
-                        {
-                            "id": "zone_3_2",
-                            "spaces": [
-                                {
-                                    "id": "space_3_2_1",
-                                    "floor_area": 100,  # m2
-                                    "lighting_space_type": "PARKING_AREA_INTERIOR",
-                                    "occupant_multiplier_schedule": "om_sched_1",
-                                }
-                            ],
-                            "thermostat_cooling_setpoint_schedule": "tcs_sched_1",
-                            "thermostat_heating_setpoint_schedule": "ths_sched_1",
-                            "surfaces": [
-                                # Adds to zone_other_ua
-                                {
-                                    "id": "surface_3_2_1",
-                                    "adjacent_to": "EXTERIOR",
-                                    "adjacent_zone": "zone_3_1",  # directly conditioned
-                                    "area": 10,  # m2
-                                    "tilt": 90,  # above grade wall
-                                    "construction": {
-                                        "id": "interior_wall_3_2_1",
-                                        "u_factor": 0.222,  # W/(m2 * K)
-                                    },
-                                    "subsurfaces": [
-                                        {
-                                            "id": "subsurface_3_2_1_1",
-                                            "classification": "WINDOW",
-                                            "glazed_area": 2,  # m2
-                                            "opaque_area": 0,
-                                            "u_factor": 2.4,  # W/(m2 * K)
-                                        },
-                                    ],
                                 }
                             ],
                         },
@@ -397,18 +397,9 @@ def test__TEST_RMR__is_valid():
     ], f"Schema error: {schema_validation_result['error']}"
 
 
-def test__get_area_type_window_wall_area():
-    assert get_area_type_window_wall_area_dict(CLIMATE_ZONE, TEST_BUILDING) == {
-        "HOTEL_MOTEL_SMALL": {
-            "total_wall_area": 20 * ureg("m2"),
-            "total_window_area": 10 * ureg("m2"),
-        },
-        "RETAIL_STAND_ALONE": {
-            "total_wall_area": 20 * ureg("m2"),
-            "total_window_area": 10 * ureg("m2"),
-        },
-        "NONE": {
-            "total_wall_area": 10 * ureg("m2"),
-            "total_window_area": 5 * ureg("m2"),
-        },
+def test__get_building_scc_skylight_roof_ratios_dict():
+    assert get_building_scc_skylight_roof_ratios_dict(CLIMATE_ZONE, TEST_BUILDING) == {
+        SCC.EXTERIOR_RESIDENTIAL: 0.2,
+        SCC.EXTERIOR_NON_RESIDENTIAL: 0.2,
+        SCC.SEMI_EXTERIOR: 0.2,
     }
