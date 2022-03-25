@@ -6,21 +6,23 @@ from rct229.rule_engine.rule_base import (
 )
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 from rct229.ruleset_functions.get_opaque_surface_type import (
-    BELOW_GRADE_WALL,
-    ABOVE_GRADE_WALL,
+    OpaqueSurfaceType,
+    # BELOW_GRADE_WALL,
+    # ABOVE_GRADE_WALL,
     get_opaque_surface_type,
 )
 from rct229.ruleset_functions.get_surface_conditioning_category_dict import (
-    EXTERIOR_MIXED,
-    EXTERIOR_NON_RESIDENTIAL,
-    EXTERIOR_RESIDENTIAL,
-    SEMI_EXTERIOR,
-    UNREGULATED,
+    SCC_DATA_FRAME,
+    # EXTERIOR_MIXED,
+    # EXTERIOR_NON_RESIDENTIAL,
+    # EXTERIOR_RESIDENTIAL,
+    # SEMI_EXTERIOR,
+    # UNREGULATED,
     get_surface_conditioning_category_dict,
 )
 from rct229.utils.jsonpath_utils import find_all
-
-
+print(f"SCC_DATA_FRAME:\n{SCC_DATA_FRAME.to_string()}")
+print(f"\n\nSCC:\n{SCC_DATA_FRAME.loc['UNENCLOSED']['GROUND']}")
 class Section5Rule11(RuleDefinitionListIndexedBase):
     """Rule 11 of ASHRAE 90.1-2019 Appendix G Section 5 (Envelope)"""
 
@@ -57,7 +59,7 @@ class Section5Rule11(RuleDefinitionListIndexedBase):
             return [
                 UserBaselineProposedVals(None, surface, None)
                 for surface in find_all("$..surfaces[*]", building)
-                if get_opaque_surface_type(surface) == ABOVE_GRADE_WALL
+                if get_opaque_surface_type(surface) == OpaqueSurfaceType.ABOVE_GRADE_WALL
             ]
 
         def create_data(self, context, data=None):
@@ -82,7 +84,7 @@ class Section5Rule11(RuleDefinitionListIndexedBase):
                 above_grade_wall = context.baseline
                 scc: str = data["surface_conditioning_category_dict"][above_grade_wall["id"]]
                 above_grade_wall_u_factor = above_grade_wall["construction"]["u_factor"]
-
+                print(f"scc: {scc}")
                 target_u_factor = None
                 target_u_factor_res = None
                 target_u_factor_nonres = None
@@ -92,15 +94,15 @@ class Section5Rule11(RuleDefinitionListIndexedBase):
                     EXTERIOR_NON_RESIDENTIAL,
                     SEMI_EXTERIOR,
                 ]:
-                    target_u_factor = table_G34_lookup(climate_zone, scc, ABOVE_GRADE_WALL)[
+                    target_u_factor = table_G34_lookup(climate_zone, scc, OpaqueSurfaceType.ABOVE_GRADE_WALL)[
                         "u_value"
                     ]
                 elif scc == EXTERIOR_MIXED:
                     target_u_factor_res = table_G34_lookup(
-                        climate_zone, EXTERIOR_RESIDENTIAL, ABOVE_GRADE_WALL
+                        climate_zone, EXTERIOR_RESIDENTIAL, OpaqueSurfaceType.ABOVE_GRADE_WALL
                     )["u_value"]
                     target_u_factor_nonres = table_G34_lookup(
-                        climate_zone, EXTERIOR_NON_RESIDENTIAL, ABOVE_GRADE_WALL
+                        climate_zone, EXTERIOR_NON_RESIDENTIAL, OpaqueSurfaceType.ABOVE_GRADE_WALL
                     )["u_value"]
                     if target_u_factor_res == target_u_factor_nonres:
                         target_u_factor = target_u_factor_res

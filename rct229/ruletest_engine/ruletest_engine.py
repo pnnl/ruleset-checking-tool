@@ -236,6 +236,7 @@ def run_section_tests(test_json_name):
         # Pull in rule, if written. If not found, fail the test and log which Section and Rule could not be found.
         try:
             rule = getattr(globals()[section_name], function_name)()
+            print(f"section_name: {section_name}, function_name:{function_name}")
         except KeyError:
 
             # Print message communicating that a rule cannot be found
@@ -290,7 +291,7 @@ def run_section_tests(test_json_name):
                     print_errors = True
 
             elif test_dict["expected_rule_outcome"] == "fail":
-
+                print(f"test_result_dict:\n{test_result_dict}")
                 # If all elements don't meet the expected outcome, flag this as an error
                 if not any(test_result_dict[f"{test_id}"]):
                     print_errors = True
@@ -303,7 +304,7 @@ def run_section_tests(test_json_name):
                 # Print log of all errors
                 for test_result_string in test_result_dict["log"]:
                     print(test_result_string)
-
+    print(f"\nall_tests_pass: {all_tests_pass}")
     # Print results to console
     if all_tests_pass:
         print("All tests passed!")
@@ -312,7 +313,7 @@ def run_section_tests(test_json_name):
 
     # Return whether or not all tests in this test JSON received their expected outcome as a boolean
     all_tests_successful = all(test_result_dict["results"])
-
+    print(f"all_tests_successful: {all_tests_successful}")
     return all_tests_successful
 
 
