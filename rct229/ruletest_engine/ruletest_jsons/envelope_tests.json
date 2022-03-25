@@ -14,7 +14,7 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "Baseline heating and cooling capacities are established correctly (air-side HVAC rule TBD). This affects baseline space conditioning categories",
             "mandatory_rule": 0,
-            "schema_version": "0.0.5"
+            "schema_version": "0.0.12"
         },
         "rmr_transformations": {
             "baseline": {
@@ -102,7 +102,7 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "Baseline heating and cooling capacities are established correctly (air-side HVAC rule TBD). This affects baseline space conditioning categories",
             "mandatory_rule": 0,
-            "schema_version": "0.0.5"
+            "schema_version": "0.0.12"
         },
         "rmr_transformations": {
             "baseline": {
@@ -189,7 +189,7 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "Baseline heating and cooling capacities are established correctly (air-side HVAC rule TBD). This affects baseline space conditioning categories",
             "mandatory_rule": 0,
-            "schema_version": "0.0.5"
+            "schema_version": "0.0.12"
         },
         "rmr_transformations": {
             "baseline": {
@@ -276,7 +276,7 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "Baseline heating and cooling capacities are established correctly (air-side HVAC rule TBD). This affects baseline space conditioning categories",
             "mandatory_rule": 0,
-            "schema_version": "0.0.5"
+            "schema_version": "0.0.12"
         },
         "rmr_transformations": {
             "baseline": {
@@ -363,7 +363,7 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "Baseline heating and cooling capacities are established correctly (air-side HVAC rule TBD). This affects baseline space conditioning categories",
             "mandatory_rule": 0,
-            "schema_version": "0.0.5"
+            "schema_version": "0.0.12"
         },
         "rmr_transformations": {
             "baseline": {
@@ -451,7 +451,7 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "Baseline heating and cooling capacities are established correctly (air-side HVAC rule TBD). This affects baseline space conditioning categories",
             "mandatory_rule": 0,
-            "schema_version": "0.0.5"
+            "schema_version": "0.0.12"
         },
         "rmr_transformations": {
             "baseline": {
@@ -538,7 +538,7 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "Baseline heating and cooling capacities are established correctly (air-side HVAC rule TBD). This affects baseline space conditioning categories",
             "mandatory_rule": 0,
-            "schema_version": "0.0.5"
+            "schema_version": "0.0.12"
         },
         "rmr_transformations": {
             "baseline": {
@@ -625,7 +625,7 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "1. Baseline heating and cooling capacities are established correctly (air-side HVAC rule TBD). This affects baseline space conditioning categories",
             "mandatory_rule": "Yes",
-            "schema_version": "0.0.5"
+            "schema_version": "0.0.12"
         },
         "rmr_transformations": {
             "baseline": {
@@ -675,7 +675,7 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "1. Baseline heating and cooling capacities are established correctly (air-side HVAC rule TBD). This affects baseline space conditioning categories",
             "mandatory_rule": "Yes",
-            "schema_version": "0.0.5"
+            "schema_version": "0.0.12"
         },
         "rmr_transformations": {
             "baseline": {

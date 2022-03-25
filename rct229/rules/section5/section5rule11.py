@@ -12,7 +12,7 @@ from rct229.ruleset_functions.get_opaque_surface_type import (
     get_opaque_surface_type,
 )
 from rct229.ruleset_functions.get_surface_conditioning_category_dict import (
-    SCC_DATA_FRAME,
+    SurfaceConditioningCategory,
     # EXTERIOR_MIXED,
     # EXTERIOR_NON_RESIDENTIAL,
     # EXTERIOR_RESIDENTIAL,
@@ -21,8 +21,8 @@ from rct229.ruleset_functions.get_surface_conditioning_category_dict import (
     get_surface_conditioning_category_dict,
 )
 from rct229.utils.jsonpath_utils import find_all
-print(f"SCC_DATA_FRAME:\n{SCC_DATA_FRAME.to_string()}")
-print(f"\n\nSCC:\n{SCC_DATA_FRAME.loc['UNENCLOSED']['GROUND']}")
+
+
 class Section5Rule11(RuleDefinitionListIndexedBase):
     """Rule 11 of ASHRAE 90.1-2019 Appendix G Section 5 (Envelope)"""
 
@@ -90,19 +90,19 @@ class Section5Rule11(RuleDefinitionListIndexedBase):
                 target_u_factor_nonres = None
 
                 if scc in [
-                    EXTERIOR_RESIDENTIAL,
-                    EXTERIOR_NON_RESIDENTIAL,
-                    SEMI_EXTERIOR,
+                    SurfaceConditioningCategory.EXTERIOR_RESIDENTIAL,
+                    SurfaceConditioningCategory.EXTERIOR_NON_RESIDENTIAL,
+                    SurfaceConditioningCategory.SEMI_EXTERIOR,
                 ]:
                     target_u_factor = table_G34_lookup(climate_zone, scc, OpaqueSurfaceType.ABOVE_GRADE_WALL)[
                         "u_value"
                     ]
-                elif scc == EXTERIOR_MIXED:
+                elif scc == SurfaceConditioningCategory.EXTERIOR_MIXED:
                     target_u_factor_res = table_G34_lookup(
-                        climate_zone, EXTERIOR_RESIDENTIAL, OpaqueSurfaceType.ABOVE_GRADE_WALL
+                        climate_zone, SurfaceConditioningCategory.EXTERIOR_RESIDENTIAL, OpaqueSurfaceType.ABOVE_GRADE_WALL
                     )["u_value"]
                     target_u_factor_nonres = table_G34_lookup(
-                        climate_zone, EXTERIOR_NON_RESIDENTIAL, OpaqueSurfaceType.ABOVE_GRADE_WALL
+                        climate_zone, SurfaceConditioningCategory.EXTERIOR_NON_RESIDENTIAL, OpaqueSurfaceType.ABOVE_GRADE_WALL
                     )["u_value"]
                     if target_u_factor_res == target_u_factor_nonres:
                         target_u_factor = target_u_factor_res

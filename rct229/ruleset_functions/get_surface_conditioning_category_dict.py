@@ -13,7 +13,11 @@ from rct229.utils.jsonpath_utils import find_all
 # Constants
 # TODO: These should directly from the enumerations
 SurfaceAdjacentTo = schema_enums["SurfaceAdjacentTo"]
-
+EXTERIOR_MIXED: str = "EXTERIOR MIXED"
+EXTERIOR_NON_RESIDENTIAL: str = "EXTERIOR NON-RESIDENTIAL"
+EXTERIOR_RESIDENTIAL: str = "EXTERIOR RESIDENTIAL"
+SEMI_EXTERIOR: str = "SEMI-EXTERIOR"
+UNREGULATED: str = "UNREGULATED"
 
 # Intended for export and internal use
 class SurfaceConditioningCategory:
