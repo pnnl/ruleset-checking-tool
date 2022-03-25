@@ -18,7 +18,7 @@ been submitted with design documents, the cooling system type shall be the same 
 ## Logic:  
 - For each hvac_p in the P_RMR: `for hvac_p in P_RMR...HeatingVentilationAirConditioningSystem:`    
     - Reset has_virtual_cooling_p boolean variable: `has_virtual_cooling_p = FALSE`   
-    - Check if there are any cooling_systems associated with hvac_p, if not skip indented code: `if hvac_p.cooling_system != Null:`
+    - Check if there are any cooling_systems associated with hvac_p, if not skip indented code (the cooling system type is NOT None [or cooling _system != Null] in the P_RMR: `if hvac_p.cooling_system != Null:`
         Below compares the cooling systems associated with the hvac system across the P_RMR and U_RMR only if cooling was modeled in the proposed. If cooling was modeled in the proposed and NOT in the U_RMR (the cooling system type is None in the U_RMR) then this means virtual cooling was modeled in the proposed. 
         - For each cooling_system_p in hvac_p: `for cooling_system_p in hvac_p.cooling_system:`
             - Check if "None" is NOT the cooling_system_type for cooling_system_p, if its not "None" (means cooling was modeled) then get the analogous cooling system in the U_RMR and check if the cooling_system_type is "None" in the U_RMR: `if cooling_system_p.cooling_system_type != "None":`
