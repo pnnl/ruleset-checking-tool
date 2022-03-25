@@ -17,7 +17,7 @@
 ## Logic:  
 - For each hvac_p in the the P_RMR: `for hvac_p in P_RMR...HeatingVentilationAirConditioningSystem:`       
     - Reset has_virtual_heating_p boolean variable: `has_virtual_heating_p = FALSE`   
-        Below compares the heating systems associated with the hvac system across the P_RMR and U_RMR only if heating was modeled in the proposed. If heating was modeled in the proposed and NOT in the U_RMR (the heating system type is None in the U_RMR) then this means virtual heating was modeled in the proposed. We are checking the preheat coils because baseline systems 5 through 8 have preheat coils. 
+        Below compares the heating systems associated with the hvac system across the P_RMR and U_RMR only if heating was modeled in the proposed. If heating was modeled in the proposed and NOT in the U_RMR (the heating system type is None [or heating_system = Null] in the U_RMR) then this means virtual heating was modeled in the proposed. We are checking the preheat coils because baseline systems 5 through 8 have preheat coils. 
     - Check if there are any heating_system associated with hvac_p, if not skip to preheat check: `if hvac_p.heating_system != Null:`
         - For each heating_system_p in hvac_p: `for heating_system_p in hvac_p.heating_system:`
             - Check if "None" is NOT the heating_system_type for heating_system_p, if its not "None" (means heating was modeled) then get the analogous heating system in the U_RMR (if it exists) and check if the heating_system_type is "None" in the U_RMR: `if heating_system_p.heating_system_type != "None":`
