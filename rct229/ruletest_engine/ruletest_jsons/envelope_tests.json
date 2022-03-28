@@ -390,7 +390,7 @@
                                                         "tilt": 0,
                                                         "construction": {
                                                             "id": "Construction 1",
-                                                            "u_factor": 2.0328185600815645
+                                                            "u_factor": 0.06305330288229763
                                                         }
                                                     }
                                                 ]
@@ -464,7 +464,7 @@
                                                         "tilt": 0,
                                                         "construction": {
                                                             "id": "Construction 1",
-                                                            "u_factor": 2.0328185600815645
+                                                            "u_factor": 0.06305330288229763
                                                         }
                                                     }
                                                 ]
@@ -538,7 +538,7 @@
                                                         "tilt": 0,
                                                         "construction": {
                                                             "id": "Construction 1",
-                                                            "u_factor": 7.029690998270886
+                                                            "u_factor": 0.21804466192258232
                                                         }
                                                     }
                                                 ]
@@ -612,7 +612,7 @@
                                                         "tilt": 0,
                                                         "construction": {
                                                             "id": "Construction 1",
-                                                            "u_factor": 2.0328185600815645
+                                                            "u_factor": 0.06305330288229763
                                                         }
                                                     }
                                                 ]
@@ -686,7 +686,7 @@
                                                         "tilt": 0,
                                                         "construction": {
                                                             "id": "Construction 1",
-                                                            "u_factor": 7.029690998270886
+                                                            "u_factor": 0.21804466192258232
                                                         }
                                                     }
                                                 ]
@@ -753,7 +753,7 @@
                                                         "tilt": 0,
                                                         "construction": {
                                                             "id": "Construction 1",
-                                                            "u_factor": 7.029690998270886
+                                                            "u_factor": 0.21804466192258232
                                                         }
                                                     }
                                                 ]
@@ -820,7 +820,7 @@
                                                         "tilt": 0,
                                                         "construction": {
                                                             "id": "Construction 1",
-                                                            "u_factor": 2.0328185600815645
+                                                            "u_factor": 0.06305330288229763
                                                         }
                                                     }
                                                 ]
@@ -894,7 +894,7 @@
                                                         "tilt": 90,
                                                         "construction": {
                                                             "id": "Construction 1",
-                                                            "c_factor": 36.75540374136304
+                                                            "c_factor": 1.1400671216679124
                                                         }
                                                     }
                                                 ]
@@ -968,7 +968,7 @@
                                                         "tilt": 90,
                                                         "construction": {
                                                             "id": "Construction 1",
-                                                            "c_factor": 36.75540374136304
+                                                            "c_factor": 1.1400671216679124
                                                         }
                                                     }
                                                 ]
@@ -1042,7 +1042,7 @@
                                                         "tilt": 90,
                                                         "construction": {
                                                             "id": "Construction 1",
-                                                            "c_factor": 2.0612098807530947
+                                                            "c_factor": 0.06393393560411743
                                                         }
                                                     }
                                                 ]
@@ -1116,7 +1116,7 @@
                                                         "tilt": 90,
                                                         "construction": {
                                                             "id": "Construction 1",
-                                                            "c_factor": 36.75540374136304
+                                                            "c_factor": 1.1400671216679124
                                                         }
                                                     }
                                                 ]
@@ -1190,7 +1190,7 @@
                                                         "tilt": 90,
                                                         "construction": {
                                                             "id": "Construction 1",
-                                                            "c_factor": 36.75540374136304
+                                                            "c_factor": 1.1400671216679124
                                                         }
                                                     }
                                                 ]
@@ -1264,7 +1264,7 @@
                                                         "tilt": 90,
                                                         "construction": {
                                                             "id": "Construction 1",
-                                                            "c_factor": 2.0612098807530947
+                                                            "c_factor": 0.06393393560411743
                                                         }
                                                     }
                                                 ]
@@ -1338,7 +1338,7 @@
                                                         "tilt": 90,
                                                         "construction": {
                                                             "id": "construction_1",
-                                                            "u_factor": 2.0612098807530947
+                                                            "u_factor": 0.06393393560411743
                                                         }
                                                     }
                                                 ]
@@ -1425,7 +1425,7 @@
                                                         "tilt": 90,
                                                         "construction": {
                                                             "id": "construction_1",
-                                                            "u_factor": 2.0612098807530947
+                                                            "u_factor": 0.06393393560411743
                                                         }
                                                     }
                                                 ]
@@ -1512,7 +1512,7 @@
                                                         "tilt": 90,
                                                         "construction": {
                                                             "id": "construction_1",
-                                                            "u_factor": 7.029690998270886
+                                                            "u_factor": 0.21804466192258232
                                                         }
                                                     }
                                                 ]
@@ -1599,7 +1599,7 @@
                                                         "tilt": 90,
                                                         "construction": {
                                                             "id": "construction_1",
-                                                            "u_factor": 3.9974979505514567
+                                                            "u_factor": 0.12399308723222774
                                                         }
                                                     }
                                                 ]
@@ -1686,7 +1686,7 @@
                                                         "tilt": 90,
                                                         "construction": {
                                                             "id": "construction_1",
-                                                            "u_factor": 7.029690998270886
+                                                            "u_factor": 0.21804466192258232
                                                         }
                                                     }
                                                 ]
@@ -1773,7 +1773,7 @@
                                                         "tilt": 90,
                                                         "construction": {
                                                             "id": "construction_1",
-                                                            "u_factor": 3.9974979505514567
+                                                            "u_factor": 0.12399308723222774
                                                         }
                                                     }
                                                 ]
@@ -1860,7 +1860,7 @@
                                                         "tilt": 90,
                                                         "construction": {
                                                             "id": "construction_1",
-                                                            "u_factor": 2.0328185600815645
+                                                            "u_factor": 0.06305330288229763
                                                         }
                                                     }
                                                 ]
