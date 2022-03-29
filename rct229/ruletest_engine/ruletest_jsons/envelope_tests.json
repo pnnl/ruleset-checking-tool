@@ -215,7 +215,7 @@
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
-                                                "id": "Zone 2",
+                                                "id": "Zone 1",
                                                 "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
                                                 "surfaces": [
@@ -246,6 +246,11 @@
                                                         "does_cast_shade": true
                                                     }
                                                 ]
+                                            },
+                                            {
+                                                "id": "Zone 2",
+                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1"
                                             }
                                         ]
                                     }
@@ -289,7 +294,7 @@
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
-                                                "id": "Zone 2",
+                                                "id": "Zone 1",
                                                 "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
                                                 "surfaces": [
@@ -320,6 +325,11 @@
                                                         "does_cast_shade": true
                                                     }
                                                 ]
+                                            },
+                                            {
+                                                "id": "Zone 2",
+                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1"
                                             }
                                         ]
                                     }
@@ -374,7 +384,8 @@
                                                     {
                                                         "id": "Space 1",
                                                         "occupant_multiplier_schedule": "Required Occupancy Sched 1",
-                                                        "lighting_space_type": "DWELLING_UNIT"
+                                                        "lighting_space_type": "DWELLING_UNIT",
+                                                        "floor_area": 23.225759999999998
                                                     }
                                                 ],
                                                 "terminals": [
@@ -394,6 +405,19 @@
                                                         }
                                                     }
                                                 ]
+                                            }
+                                        ],
+                                        "heating_ventilation_air_conditioning_systems": [
+                                            {
+                                                "id": "HVAC 1",
+                                                "cooling_system": {
+                                                    "id": "Cooling System 1",
+                                                    "sensible_cool_capacity": 17585.0
+                                                },
+                                                "heating_system": {
+                                                    "id": "Heating System 1",
+                                                    "heat_capacity": 9378.275555555556
+                                                }
                                             }
                                         ]
                                     }
@@ -448,7 +472,8 @@
                                                     {
                                                         "id": "Space 1",
                                                         "occupant_multiplier_schedule": "Required Occupancy Sched 1",
-                                                        "lighting_space_type": "DWELLING_UNIT"
+                                                        "lighting_space_type": "DWELLING_UNIT",
+                                                        "floor_area": 23.225759999999998
                                                     }
                                                 ],
                                                 "terminals": [
@@ -468,6 +493,19 @@
                                                         }
                                                     }
                                                 ]
+                                            }
+                                        ],
+                                        "heating_ventilation_air_conditioning_systems": [
+                                            {
+                                                "id": "HVAC 1",
+                                                "cooling_system": {
+                                                    "id": "Cooling System 1",
+                                                    "sensible_cool_capacity": 42204.0
+                                                },
+                                                "heating_system": {
+                                                    "id": "Heating System 1",
+                                                    "heat_capacity": 8792.133333333333
+                                                }
                                             }
                                         ]
                                     }
@@ -522,7 +560,8 @@
                                                     {
                                                         "id": "Space 1",
                                                         "occupant_multiplier_schedule": "Required Occupancy Sched 1",
-                                                        "lighting_space_type": "DWELLING_UNIT"
+                                                        "lighting_space_type": "DWELLING_UNIT",
+                                                        "floor_area": 23.225759999999998
                                                     }
                                                 ],
                                                 "terminals": [
@@ -542,6 +581,19 @@
                                                         }
                                                     }
                                                 ]
+                                            }
+                                        ],
+                                        "heating_ventilation_air_conditioning_systems": [
+                                            {
+                                                "id": "HVAC 1",
+                                                "cooling_system": {
+                                                    "id": "Cooling System 1",
+                                                    "sensible_cool_capacity": 17585.0
+                                                },
+                                                "heating_system": {
+                                                    "id": "Heating System 1",
+                                                    "heat_capacity": 9378.275555555556
+                                                }
                                             }
                                         ]
                                     }
@@ -596,7 +648,8 @@
                                                     {
                                                         "id": "Space 1",
                                                         "occupant_multiplier_schedule": "Required Occupancy Sched 1",
-                                                        "lighting_space_type": "CORRIDOR_ALL_OTHERS"
+                                                        "lighting_space_type": "CORRIDOR_ALL_OTHERS",
+                                                        "floor_area": 23.225759999999998
                                                     }
                                                 ],
                                                 "terminals": [
@@ -616,6 +669,19 @@
                                                         }
                                                     }
                                                 ]
+                                            }
+                                        ],
+                                        "heating_ventilation_air_conditioning_systems": [
+                                            {
+                                                "id": "HVAC 1",
+                                                "cooling_system": {
+                                                    "id": "Cooling System 1",
+                                                    "sensible_cool_capacity": 17585.0
+                                                },
+                                                "heating_system": {
+                                                    "id": "Heating System 1",
+                                                    "heat_capacity": 9378.275555555556
+                                                }
                                             }
                                         ]
                                     }
@@ -670,7 +736,8 @@
                                                     {
                                                         "id": "Space 1",
                                                         "occupant_multiplier_schedule": "Required Occupancy Sched 1",
-                                                        "lighting_space_type": "CORRIDOR_ALL_OTHERS"
+                                                        "lighting_space_type": "CORRIDOR_ALL_OTHERS",
+                                                        "floor_area": 23.225759999999998
                                                     }
                                                 ],
                                                 "terminals": [
@@ -690,6 +757,19 @@
                                                         }
                                                     }
                                                 ]
+                                            }
+                                        ],
+                                        "heating_ventilation_air_conditioning_systems": [
+                                            {
+                                                "id": "HVAC 1",
+                                                "cooling_system": {
+                                                    "id": "Cooling System 1",
+                                                    "sensible_cool_capacity": 17585.0
+                                                },
+                                                "heating_system": {
+                                                    "id": "Heating System 1",
+                                                    "heat_capacity": 9378.275555555556
+                                                }
                                             }
                                         ]
                                     }
@@ -740,6 +820,14 @@
                                                 "id": "Zone 1",
                                                 "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "occupant_multiplier_schedule": "Required Occupancy Sched 1",
+                                                        "lighting_space_type": "CORRIDOR_ALL_OTHERS",
+                                                        "floor_area": 23.225759999999998
+                                                    }
+                                                ],
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
@@ -757,6 +845,19 @@
                                                         }
                                                     }
                                                 ]
+                                            }
+                                        ],
+                                        "heating_ventilation_air_conditioning_systems": [
+                                            {
+                                                "id": "HVAC 1",
+                                                "cooling_system": {
+                                                    "id": "Cooling System 1",
+                                                    "sensible_cool_capacity": 17585.0
+                                                },
+                                                "heating_system": {
+                                                    "id": "Heating System 1",
+                                                    "heat_capacity": 3516.8533333333335
+                                                }
                                             }
                                         ]
                                     }
@@ -807,6 +908,14 @@
                                                 "id": "Zone 1",
                                                 "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "occupant_multiplier_schedule": "Required Occupancy Sched 1",
+                                                        "lighting_space_type": "CORRIDOR_ALL_OTHERS",
+                                                        "floor_area": 23.225759999999998
+                                                    }
+                                                ],
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
@@ -824,6 +933,19 @@
                                                         }
                                                     }
                                                 ]
+                                            }
+                                        ],
+                                        "heating_ventilation_air_conditioning_systems": [
+                                            {
+                                                "id": "HVAC 1",
+                                                "cooling_system": {
+                                                    "id": "Cooling System 1",
+                                                    "sensible_cool_capacity": 17585.0
+                                                },
+                                                "heating_system": {
+                                                    "id": "Heating System 1",
+                                                    "heat_capacity": 3516.8533333333335
+                                                }
                                             }
                                         ]
                                     }
@@ -878,7 +1000,8 @@
                                                     {
                                                         "id": "Space 1",
                                                         "occupant_multiplier_schedule": "Required Occupancy Sched 1",
-                                                        "lighting_space_type": "GUEST_ROOM"
+                                                        "lighting_space_type": "GUEST_ROOM",
+                                                        "floor_area": 23.225759999999998
                                                     }
                                                 ],
                                                 "terminals": [
@@ -898,6 +1021,19 @@
                                                         }
                                                     }
                                                 ]
+                                            }
+                                        ],
+                                        "heating_ventilation_air_conditioning_systems": [
+                                            {
+                                                "id": "HVAC 1",
+                                                "cooling_system": {
+                                                    "id": "Cooling System 1",
+                                                    "sensible_cool_capacity": 17585.0
+                                                },
+                                                "heating_system": {
+                                                    "id": "Heating System 1",
+                                                    "heat_capacity": 10257.488888888889
+                                                }
                                             }
                                         ]
                                     }
@@ -952,7 +1088,8 @@
                                                     {
                                                         "id": "Space 1",
                                                         "occupant_multiplier_schedule": "Required Occupancy Sched 1",
-                                                        "lighting_space_type": "GUEST_ROOM"
+                                                        "lighting_space_type": "GUEST_ROOM",
+                                                        "floor_area": 23.225759999999998
                                                     }
                                                 ],
                                                 "terminals": [
@@ -972,6 +1109,19 @@
                                                         }
                                                     }
                                                 ]
+                                            }
+                                        ],
+                                        "heating_ventilation_air_conditioning_systems": [
+                                            {
+                                                "id": "HVAC 1",
+                                                "cooling_system": {
+                                                    "id": "Cooling System 1",
+                                                    "sensible_cool_capacity": 3517.0
+                                                },
+                                                "heating_system": {
+                                                    "id": "Heating System 1",
+                                                    "heat_capacity": 3516.8533333333335
+                                                }
                                             }
                                         ]
                                     }
@@ -1026,7 +1176,8 @@
                                                     {
                                                         "id": "Space 1",
                                                         "occupant_multiplier_schedule": "Required Occupancy Sched 1",
-                                                        "lighting_space_type": "GUEST_ROOM"
+                                                        "lighting_space_type": "GUEST_ROOM",
+                                                        "floor_area": 23.225759999999998
                                                     }
                                                 ],
                                                 "terminals": [
@@ -1046,6 +1197,19 @@
                                                         }
                                                     }
                                                 ]
+                                            }
+                                        ],
+                                        "heating_ventilation_air_conditioning_systems": [
+                                            {
+                                                "id": "HVAC 1",
+                                                "cooling_system": {
+                                                    "id": "Cooling System 1",
+                                                    "sensible_cool_capacity": 17585.0
+                                                },
+                                                "heating_system": {
+                                                    "id": "Heating System 1",
+                                                    "heat_capacity": 10257.488888888889
+                                                }
                                             }
                                         ]
                                     }
@@ -1100,7 +1264,8 @@
                                                     {
                                                         "id": "Space 1",
                                                         "occupant_multiplier_schedule": "Required Occupancy Sched 1",
-                                                        "lighting_space_type": "GUEST_ROOM"
+                                                        "lighting_space_type": "GUEST_ROOM",
+                                                        "floor_area": 23.225759999999998
                                                     }
                                                 ],
                                                 "terminals": [
@@ -1120,6 +1285,19 @@
                                                         }
                                                     }
                                                 ]
+                                            }
+                                        ],
+                                        "heating_ventilation_air_conditioning_systems": [
+                                            {
+                                                "id": "HVAC 1",
+                                                "cooling_system": {
+                                                    "id": "Cooling System 1",
+                                                    "sensible_cool_capacity": 17585.0
+                                                },
+                                                "heating_system": {
+                                                    "id": "Heating System 1",
+                                                    "heat_capacity": 10257.488888888889
+                                                }
                                             }
                                         ]
                                     }
@@ -1174,7 +1352,8 @@
                                                     {
                                                         "id": "Space 1",
                                                         "occupant_multiplier_schedule": "Required Occupancy Sched 1",
-                                                        "lighting_space_type": "GUEST_ROOM"
+                                                        "lighting_space_type": "GUEST_ROOM",
+                                                        "floor_area": 23.225759999999998
                                                     }
                                                 ],
                                                 "terminals": [
@@ -1194,6 +1373,19 @@
                                                         }
                                                     }
                                                 ]
+                                            }
+                                        ],
+                                        "heating_ventilation_air_conditioning_systems": [
+                                            {
+                                                "id": "HVAC 1",
+                                                "cooling_system": {
+                                                    "id": "Cooling System 1",
+                                                    "sensible_cool_capacity": 17585.0
+                                                },
+                                                "heating_system": {
+                                                    "id": "Heating System 1",
+                                                    "heat_capacity": 8792.133333333333
+                                                }
                                             }
                                         ]
                                     }
@@ -1248,7 +1440,8 @@
                                                     {
                                                         "id": "Space 1",
                                                         "occupant_multiplier_schedule": "Required Occupancy Sched 1",
-                                                        "lighting_space_type": "GUEST_ROOM"
+                                                        "lighting_space_type": "GUEST_ROOM",
+                                                        "floor_area": 23.225759999999998
                                                     }
                                                 ],
                                                 "terminals": [
@@ -1268,6 +1461,19 @@
                                                         }
                                                     }
                                                 ]
+                                            }
+                                        ],
+                                        "heating_ventilation_air_conditioning_systems": [
+                                            {
+                                                "id": "HVAC 1",
+                                                "cooling_system": {
+                                                    "id": "Cooling System 1",
+                                                    "sensible_cool_capacity": 17585.0
+                                                },
+                                                "heating_system": {
+                                                    "id": "Heating System 1",
+                                                    "heat_capacity": 8792.133333333333
+                                                }
                                             }
                                         ]
                                     }
@@ -1322,7 +1528,8 @@
                                                     {
                                                         "id": "Space 1",
                                                         "occupant_multiplier_schedule": "Required Occupancy Sched 1",
-                                                        "lighting_space_type": "DWELLING_UNIT"
+                                                        "lighting_space_type": "DWELLING_UNIT",
+                                                        "floor_area": 23.225759999999998
                                                     }
                                                 ],
                                                 "terminals": [
@@ -1409,7 +1616,8 @@
                                                     {
                                                         "id": "Space 1",
                                                         "occupant_multiplier_schedule": "Required Occupancy Sched 1",
-                                                        "lighting_space_type": "DWELLING_UNIT"
+                                                        "lighting_space_type": "DWELLING_UNIT",
+                                                        "floor_area": 23.225759999999998
                                                     }
                                                 ],
                                                 "terminals": [
@@ -1496,7 +1704,8 @@
                                                     {
                                                         "id": "Space 1",
                                                         "occupant_multiplier_schedule": "Required Occupancy Sched 1",
-                                                        "lighting_space_type": "DWELLING_UNIT"
+                                                        "lighting_space_type": "DWELLING_UNIT",
+                                                        "floor_area": 23.225759999999998
                                                     }
                                                 ],
                                                 "terminals": [
@@ -1583,7 +1792,8 @@
                                                     {
                                                         "id": "Space 1",
                                                         "occupant_multiplier_schedule": "Required Occupancy Sched 1",
-                                                        "lighting_space_type": "CLASSROOM_LECTURE_HALL_TRAINING_ROOM_ALL_OTHER"
+                                                        "lighting_space_type": "CLASSROOM_LECTURE_HALL_TRAINING_ROOM_ALL_OTHER",
+                                                        "floor_area": 23.225759999999998
                                                     }
                                                 ],
                                                 "terminals": [
@@ -1670,7 +1880,8 @@
                                                     {
                                                         "id": "Space 1",
                                                         "occupant_multiplier_schedule": "Required Occupancy Sched 1",
-                                                        "lighting_space_type": "CLASSROOM_LECTURE_HALL_TRAINING_ROOM_ALL_OTHER"
+                                                        "lighting_space_type": "CLASSROOM_LECTURE_HALL_TRAINING_ROOM_ALL_OTHER",
+                                                        "floor_area": 23.225759999999998
                                                     }
                                                 ],
                                                 "terminals": [
@@ -1757,7 +1968,8 @@
                                                     {
                                                         "id": "Space 1",
                                                         "occupant_multiplier_schedule": "Required Occupancy Sched 1",
-                                                        "lighting_space_type": "WAREHOUSE_STORAGE_AREA_SMALLER_HAND_CARRIED_ITEMS"
+                                                        "lighting_space_type": "WAREHOUSE_STORAGE_AREA_SMALLER_HAND_CARRIED_ITEMS",
+                                                        "floor_area": 23.225759999999998
                                                     }
                                                 ],
                                                 "terminals": [
@@ -1844,7 +2056,8 @@
                                                     {
                                                         "id": "Space 1",
                                                         "occupant_multiplier_schedule": "Required Occupancy Sched 1",
-                                                        "lighting_space_type": "WAREHOUSE_STORAGE_AREA_SMALLER_HAND_CARRIED_ITEMS"
+                                                        "lighting_space_type": "WAREHOUSE_STORAGE_AREA_SMALLER_HAND_CARRIED_ITEMS",
+                                                        "floor_area": 23.225759999999998
                                                     }
                                                 ],
                                                 "terminals": [
