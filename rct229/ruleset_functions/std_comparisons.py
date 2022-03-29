@@ -1,4 +1,4 @@
-def std_equal(std_val, val, units: str, ndigits: int = 0):
+def std_equal(std_val, val, units, ndigits: int = 0):
     """Determines whether two pint quantities are considered equal, in the eyes of
     the standard being used
 
@@ -11,8 +11,8 @@ def std_equal(std_val, val, units: str, ndigits: int = 0):
         A pint quantity considered the standard value
     val : Quantity
         A pint quantity to be compared to the standard value
-    units : str
-        A pint units string
+    units : str | Quantity
+        A pint units string or a pint Quantity
     ndigits : int
         The number of digits precision after the decimal point
     Returns
