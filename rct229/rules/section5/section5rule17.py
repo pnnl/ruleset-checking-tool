@@ -41,7 +41,7 @@ class Section5Rule17(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section5Rule17.BuildingRule, self).__init__(
                 rmrs_used=UserBaselineProposedVals(False, True, True),
-                required_fields={"$..zones[*]": ["surfaces"]},
+                required_fields={},
                 each_rule=Section5Rule17.BuildingRule.UnregulatedSurfaceRule(),
                 index_rmr="baseline",
             )
@@ -79,8 +79,8 @@ class Section5Rule17(RuleDefinitionListIndexedBase):
         class UnregulatedSurfaceRule(RuleDefinitionBase):
             def __init__(self):
                 super(Section5Rule17.BuildingRule.UnregulatedSurfaceRule, self).__init__(
-                    rmrs_used=UserBaselineProposedVals(False, True, False),
-                    required_fields={"surfaces": ["construction", "tilt"]},
+                    rmrs_used=UserBaselineProposedVals(False, True, True),
+                    required_fields={"$": ["construction"]},
                 )
 
             def get_calc_vals(self, context, data=None):
