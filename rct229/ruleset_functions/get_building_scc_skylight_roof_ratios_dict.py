@@ -42,7 +42,7 @@ def get_building_scc_skylight_roof_ratios_dict(climate_zone, building):
     total_nonres_roof_area = ZERO.AREA
     total_nonres_skylight_area = ZERO.AREA
     total_mixed_roof_area = ZERO.AREA
-    total_mixed_skylight_area = ZERO.ARE
+    total_mixed_skylight_area = ZERO.AREA
     total_semiheated_roof_area = ZERO.AREA
     total_semiheated_skylight_area = ZERO.AREA
 
