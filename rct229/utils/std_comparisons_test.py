@@ -1,6 +1,6 @@
 import pytest
 
-from rct229.ruleset_functions.std_comparisons import std_equal
+from rct229.utils.std_comparisons import std_equal
 from rct229.schema.config import ureg
 
 _M2 = ureg("m2")
