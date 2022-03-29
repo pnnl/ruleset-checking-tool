@@ -14,6 +14,27 @@ DOOR = schema_enums["SubsurfaceClassificationType"].DOOR.name
 
 
 def get_area_type_window_wall_area_dict(climate_zone, building):
+    """Gets a dictionary mapping building area type to a dictionary of (total area of
+        above grade vertical surfaces) and (total area of fenestration)
+
+        Parameters
+        ----------
+        climate_zone : str
+            One of the ClimateZone2019ASHRAE901 enumerated values
+        building : dict
+            A dictionary representing a building as defined by the ASHRAE229 schema
+
+        Returns
+        -------
+        dict
+            A dictionary that saves each area type in a building as per Table G3.1.1-1 with its total fenestration
+            and envelope above-grade wall areas,
+            {"AREA_TYPE_1":
+                {"TOTAL_WALL_AREA": 1000, "TOTAL_WINDOW_AREA": 300},
+            "AREA_TYPE_2":
+                {"TOTAL_WALL_AREA": 2000, "TOTAL_WINDOW_AREA": 100}
+            }
+        """
     # required fields for this function are coming from the nested functions.
     scc_dictionary = get_surface_conditioning_category_dict(climate_zone, building)
     window_wall_areas_dictionary = {}
@@ -34,7 +55,6 @@ def get_area_type_window_wall_area_dict(climate_zone, building):
                 in [
                     SCC.EXTERIOR_RESIDENTIAL,
                     SCC.EXTERIOR_NON_RESIDENTIAL,
-                    # TODO may remove this category in the future.
                     SCC.EXTERIOR_MIXED,
                     SCC.SEMI_EXTERIOR,
                 ]

@@ -7,6 +7,7 @@ from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedV
 from rct229.ruleset_functions.get_opaque_surface_type import OpaqueSurfaceType as OST
 from rct229.ruleset_functions.get_opaque_surface_type import get_opaque_surface_type
 from rct229.ruleset_functions.get_surface_conditioning_category_dict import (
+    SurfaceConditioningCategory as SCC,
     get_surface_conditioning_category_dict,
 )
 from rct229.utils.jsonpath_utils import find_all
@@ -32,90 +33,84 @@ class Section5Rule8(RuleDefinitionListIndexedBase):
     def create_data(self, context, data=None):
         return {"climate_zone": context.baseline["weather"]["climate_zone"]}
 
-    class BuildingRule(RuleDefinitionBase):
+    class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section5Rule8.BuildingRule, self).__init__(
                 rmrs_used=UserBaselineProposedVals(False, True, False),
                 required_fields={"$..zones[*]": ["surfaces"]},
+                each_rule=Section5Rule8.BuildingRule.BelowGradeWallRule(),
+                index_rmr="baseline",
             )
 
-        def get_calc_vals(self, context, data=None):
-            # Climate zone should have only one in RMR
-            climate_zone = data["climate_zone"]
-            # Becasue list_path is building, the scope of the context.baseline here is building
-            scc_dictionary_b = get_surface_conditioning_category_dict(
-                climate_zone, context.baseline
-            )
-            # Retrieve all surfaces under the building
-            surfaces_b = find_all("$..zones[*].surfaces[*]", context.baseline)
-            # build-in manual check flag.
-            calc_val = {}
-            failing_surface_c_factor_ids = []
-            mix_surface_c_factor_ids = []
+        def create_context_list(self, context, data=None):
+            building = context.baseline
+            # List of all baseline roof surfaces to become the context for RoofRule
+            return [
+                UserBaselineProposedVals(None, surface, None)
+                for surface in find_all("$..surfaces[*]", building)
+                if get_opaque_surface_type(surface) == OST.BELOW_GRADE_WALL
+            ]
 
-            for surface_b in surfaces_b:
-                if get_opaque_surface_type(surface_b) == OST.BELOW_GRADE_WALL:
-                    # construction info
-                    surface_construction_b = surface_b["construction"]
-                    scc_b = scc_dictionary_b[surface_b["id"]]
-                    # QNS a good number to estimate?
-                    target_c_factor = None
-                    # TODO All these need to change to enum later
-                    if scc_b in [
-                        "EXTERIOR RESIDENTIAL",
-                        "EXTERIOR NON-RESIDENTIAL",
-                        "SEMI-EXTERIOR",
-                    ]:
-                        target = table_G34_lookup(
-                            climate_zone, scc_b, OST.BELOW_GRADE_WALL
-                        )
-                        target_c_factor = target["c_factor"]
-
-                    elif scc_b == "EXTERIOR MIXED":
-                        target = table_G34_lookup(
-                            climate_zone, "EXTERIOR RESIDENTIAL", OST.BELOW_GRADE_WALL
-                        )
-                        target_c_factor_res = target["c_factor"]
-
-                        target = table_G34_lookup(
-                            climate_zone,
-                            "EXTERIOR NON-RESIDENTIAL",
-                            OST.BELOW_GRADE_WALL,
-                        )
-                        target_c_factor_nonres = target["c_factor"]
-
-                        if target_c_factor_res != target_c_factor_nonres:
-                            mix_surface_c_factor_ids.append(surface_b["id"])
-                        else:
-                            target_c_factor = target_c_factor_res
-                    # convert values to IP unit to compare with standard.
-                    model_c_factor_magnitude = round(
-                        surface_construction_b["c_factor"]
-                        .to("Btu_h / square_foot / delta_degF")
-                        .magnitude,
-                        2,
-                    )
-                    target_c_factor_magnitude = target_c_factor.magnitude
-                    if model_c_factor_magnitude != target_c_factor_magnitude:
-                        failing_surface_c_factor_ids.append(surface_b["id"])
-
+        def create_data(self, context, data=None):
+            building = context.baseline
+            # Merge into the existing data dict
             return {
-                "failed_c_factor_surface_id": failing_surface_c_factor_ids,
-                "mix_surface_c_factor_ids": mix_surface_c_factor_ids,
+                **data,
+                "surface_conditioning_category_dict": get_surface_conditioning_category_dict(
+                    data["climate_zone"], building
+                ),
             }
 
-        def manual_check_required(self, context, calc_vals=None, data=None):
-            """
-            Return True or False if the results shall depends on manual check
-            Parameters
-            ----------
-            context
-            calc_vals
-            data
-            Returns
-            -------
-            """
-            return len(calc_vals["mix_surface_c_factor_ids"]) > 0
+        class BelowGradeWallRule(RuleDefinitionBase):
+            def __init__(self):
+                super(Section5Rule8.BuildingRule.BelowGradeWallRule, self).__init__(
+                    rmrs_used=UserBaselineProposedVals(False, True, False),
+                    required_fields={},
+                )
 
-        def rule_check(self, context, calc_vals, data=None):
-            return len(calc_vals["failed_c_factor_surface_id"]) == 0
+            def get_calc_vals(self, context, data=None):
+                climate_zone: str = data["climate_zone"]
+                below_grade_wall = context.baseline
+                scc: str = data["surface_conditioning_category_dict"][below_grade_wall["id"]]
+                wall_c_factor = below_grade_wall["construction"]["c_factor"]
+
+                target_c_factor = None
+                target_c_factor_res = None
+                target_c_factor_nonres = None
+
+                if scc in [SCC.SEMI_EXTERIOR, SCC.EXTERIOR_RESIDENTIAL, SCC.EXTERIOR_NON_RESIDENTIAL]:
+                    target = table_G34_lookup(
+                        climate_zone, scc, OST.BELOW_GRADE_WALL
+                    )
+                    target_c_factor = target["c_factor"]
+                elif scc == SCC.EXTERIOR_MIXED:
+                    target_c_factor_res = table_G34_lookup(
+                        climate_zone, SCC.EXTERIOR_RESIDENTIAL, OST.BELOW_GRADE_WALL
+                    )
+                    target_c_factor_nonres = table_G34_lookup(
+                        climate_zone, SCC.EXTERIOR_NON_RESIDENTIAL, OST.BELOW_GRADE_WALL
+                    )
+
+                    if target_c_factor_res == target_c_factor_nonres:
+                        target_c_factor = target_c_factor_res
+
+                return {
+                    "below_grade_wall_c_factor": wall_c_factor,
+                    "target_c_factor": target_c_factor,
+                    "target_c_factor_res": target_c_factor_res,
+                    "target_c_factor_nonres": target_c_factor_nonres,
+                }
+
+            def manual_check_required(self, context, calc_vals=None, data=None):
+                target_c_factor_res = calc_vals["target_c_factor_res"]
+                target_c_factor_nonres = calc_vals["target_c_factor_nonres"]
+                return (
+                        target_c_factor_res is not None
+                        and target_c_factor_nonres is not None
+                        and target_c_factor_res != target_c_factor_nonres
+                )
+
+            def rule_check(self, context, calc_vals, data=None):
+                below_grade_wall_c_factor = calc_vals["below_grade_wall_c_factor"]
+                target_c_factor = calc_vals["target_c_factor"]
+                return below_grade_wall_c_factor == target_c_factor
