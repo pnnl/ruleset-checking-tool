@@ -69,7 +69,8 @@ class Section5Rule13(RuleDefinitionListIndexedBase):
             def __init__(self):
                 super(Section5Rule13.BuildingRule.FloorRule, self).__init__(
                     rmrs_used=UserBaselineProposedVals(False, True, False),
-                    required_fields={},
+                    required_fields={"$": ["construction"],
+                                     "construction": ["u_factor"]},
                 )
 
             def get_calc_vals(self, context, data=None):
