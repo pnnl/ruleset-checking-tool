@@ -54,11 +54,11 @@ class Section5Rule17(RuleDefinitionListIndexedBase):
             proposed_surfaces = find_all("$..surfaces[*]", context.proposed)
 
             # This assumes that the surfaces matched by IDs between proposed and baseline
-            matched_baseline_surfaces = match_lists_exactly_by_id(
-                proposed_surfaces, baseline_surfaces
+            matched_proposed_surfaces = match_lists_exactly_by_id(
+                baseline_surfaces, proposed_surfaces
             )
 
-            proposed_baseline_surface_pairs = zip(proposed_surfaces, matched_baseline_surfaces)
+            proposed_baseline_surface_pairs = zip(baseline_surfaces, matched_proposed_surfaces)
 
             return [
                 UserBaselineProposedVals(None, surface_b, surface_p)
@@ -148,11 +148,11 @@ class Section5Rule17(RuleDefinitionListIndexedBase):
                             calc_vals["baseline_surface_u_factor"] == calc_vals["proposed_surface_u_factor"]
                 elif baseline_surface_type in [OST.UNHEATED_SOG, OST.HEATED_SOG]:
                     return calc_vals["proposed_surface_f_factor"] is not None or \
-                           calc_vals["baseline_surface_f_factor"] is not None or \
-                           calc_vals["baseline_surface_f_factor"] == calc_vals["proposed_surface_f_factor"]
+                            calc_vals["baseline_surface_f_factor"] is not None or \
+                            calc_vals["baseline_surface_f_factor"] == calc_vals["proposed_surface_f_factor"]
                 elif baseline_surface_type == OST.BELOW_GRADE_WALL:
                     return calc_vals["proposed_surface_c_factor"] is not None or \
-                           calc_vals["baseline_surface_c_factor"] is not None or \
-                           calc_vals["baseline_surface_c_factor"] == calc_vals["proposed_surface_c_factor"]
+                            calc_vals["baseline_surface_c_factor"] is not None or \
+                            calc_vals["baseline_surface_c_factor"] == calc_vals["proposed_surface_c_factor"]
                 else:
                     return False
