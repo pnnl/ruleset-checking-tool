@@ -37,7 +37,7 @@ class Section5Rule8(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section5Rule8.BuildingRule, self).__init__(
                 rmrs_used=UserBaselineProposedVals(False, True, False),
-                required_fields={"$..zones[*]": ["surfaces"]},
+                required_fields={},
                 each_rule=Section5Rule8.BuildingRule.BelowGradeWallRule(),
                 index_rmr="baseline",
             )
@@ -65,7 +65,7 @@ class Section5Rule8(RuleDefinitionListIndexedBase):
             def __init__(self):
                 super(Section5Rule8.BuildingRule.BelowGradeWallRule, self).__init__(
                     rmrs_used=UserBaselineProposedVals(False, True, False),
-                    required_fields={},
+                    required_fields={"$": ["construction"], "construction": ["c_factor"]},
                 )
 
             def get_calc_vals(self, context, data=None):

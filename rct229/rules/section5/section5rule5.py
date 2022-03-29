@@ -69,8 +69,8 @@ class Section5Rule5(RuleDefinitionListIndexedBase):
             def __init__(self):
                 super(Section5Rule5.BuildingRule.RoofRule, self).__init__(
                     rmrs_used=UserBaselineProposedVals(False, True, False),
-                    required_fields={},
-                )
+                    required_fields={"$": ["construction"], "construction": ["u_factor"]},
+                    )
 
             def get_calc_vals(self, context, data=None):
                 climate_zone: str = data["climate_zone"]
