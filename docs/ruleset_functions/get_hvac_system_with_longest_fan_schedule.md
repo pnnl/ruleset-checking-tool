@@ -3,7 +3,7 @@
 **Description:** Returns the HeatingVentilationAirAconditioningSystem.id associated with a zone (function input) in the RMR (function input) that has the longest fan schedule.
 
 **Inputs:**
-- **zone_p.id**: A zone id associated with the RMR to determine the HeatingVentilationAirAconditioningSystem.id that has the longest fan schedule.
+- **zone_x.id**: A zone id associated with the RMR to determine the HeatingVentilationAirAconditioningSystem.id that has the longest fan schedule.
 - **U,P, or B-RMR**: to determine the HeatingVentilationAirAconditioningSystem.id that has the longest fan schedule for a specific zone in the specified RMR.
 
 **Returns:**
