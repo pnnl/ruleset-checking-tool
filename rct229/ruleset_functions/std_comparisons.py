@@ -1,4 +1,4 @@
-def std_equality(std_val, val, units, ndigits=0):
+def std_equal(std_val, val, units, ndigits=0):
     """Determines whether two pint quantities are considered equal, in the eyes of
     the standard being used
 
