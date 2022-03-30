@@ -15,12 +15,34 @@ DOOR = schema_enums["SubsurfaceClassificationType"].DOOR.name
 
 
 def get_building_scc_skylight_roof_ratios_dict(climate_zone, building):
+    """Gets a dictionary mapping skylight and envelope roof ratios for a building for residential, non-residential,
+    mixed and semi-heated surface conditioning categories
+
+            Parameters
+            ----------
+            climate_zone : str
+                One of the ClimateZone2019ASHRAE901 enumerated values
+            building : dict
+                A dictionary representing a building as defined by the ASHRAE229 schema
+
+            Returns
+            -------
+            dict
+                A dictionary that saves each surface conditioning category (residential, non-residential, mixed and semi-heated)
+                with its skylight-roof-ratios for each building in RMR.
+                {
+                    "building_id": {"EXTERIOR RESIDENTIAL": srr_res, "EXTERIOR NON-RESIDENTIAL": srr_nonres,
+                    "EXTERIOR MIXED": srr_mixed, "SEMI-EXTERIOR": srr_semiheated},
+                }
+            """
     # required fields for this function are coming from the nested functions
     scc_dictionary = get_surface_conditioning_category_dict(climate_zone, building)
     total_res_roof_area = ZERO.AREA
     total_res_skylight_area = ZERO.AREA
     total_nonres_roof_area = ZERO.AREA
     total_nonres_skylight_area = ZERO.AREA
+    total_mixed_roof_area = ZERO.AREA
+    total_mixed_skylight_area = ZERO.AREA
     total_semiheated_roof_area = ZERO.AREA
     total_semiheated_skylight_area = ZERO.AREA
 
@@ -34,23 +56,30 @@ def get_building_scc_skylight_roof_ratios_dict(climate_zone, building):
             elif scc_dictionary[surface["id"]] == SCC.EXTERIOR_NON_RESIDENTIAL:
                 total_nonres_roof_area += roof_area
                 total_nonres_skylight_area += skylight_area
+            elif scc_dictionary[surface["id"]] == SCC.EXTERIOR_MIXED:
+                total_mixed_roof_area += roof_area
+                total_mixed_skylight_area += skylight_area
             elif scc_dictionary[surface["id"]] == SCC.SEMI_EXTERIOR:
                 total_semiheated_roof_area += roof_area
                 total_semiheated_skylight_area += skylight_area
 
     srr_res = 0.0
     srr_nonres = 0.0
+    srr_mixed = 0.0
     srr_semiheated = 0.0
     if total_res_roof_area > ZERO.AREA:
         srr_res = total_res_skylight_area / total_res_roof_area
     if total_nonres_roof_area > ZERO.AREA:
         srr_nonres = total_nonres_skylight_area / total_nonres_roof_area
+    if total_mixed_roof_area > ZERO.AREA:
+        srr_mixed = total_mixed_skylight_area / total_mixed_roof_area
     if total_semiheated_roof_area > ZERO.AREA:
         srr_semiheated = total_semiheated_skylight_area / total_semiheated_roof_area
 
     return {
         SCC.EXTERIOR_RESIDENTIAL: srr_res,
         SCC.EXTERIOR_NON_RESIDENTIAL: srr_nonres,
+        SCC.EXTERIOR_MIXED: srr_mixed,
         SCC.SEMI_EXTERIOR: srr_semiheated,
     }
 
