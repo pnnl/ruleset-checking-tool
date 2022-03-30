@@ -136,7 +136,7 @@ def process_test_result(test_result, test_dict, test_id):
         failed when expected to fail)
 
     """
-
+    print(f"test_result: {test_result}, test_dict:{test_dict}, test_id:{test_id}")
     # Get reporting parameters. Check if the test is expected to pass/fail and read in the description.
     expected_outcome = test_dict["expected_rule_outcome"] == "pass"
     description = test_dict["test_description"]
@@ -236,7 +236,7 @@ def run_section_tests(test_json_name):
         # Pull in rule, if written. If not found, fail the test and log which Section and Rule could not be found.
         try:
             rule = getattr(globals()[section_name], function_name)()
-            print(f"section_name: {section_name}, function_name:{function_name}")
+
         except KeyError:
 
             # Print message communicating that a rule cannot be found
@@ -498,6 +498,6 @@ def run_envelope_tests():
     Results of envelope test are spit out to console
     """
 
-    envelope_test_json = "envelope_tests.json"
+    envelope_test_json = "envelope_tests_5_11.json"
 
     return run_section_tests(envelope_test_json)
