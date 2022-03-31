@@ -14,6 +14,7 @@ from rct229.ruleset_functions.get_surface_conditioning_category_dict import (
     get_surface_conditioning_category_dict,
 )
 from rct229.utils.jsonpath_utils import find_all
+from rct229.utils.std_comparisons import std_equal
 
 
 class Section5Rule5(RuleDefinitionListIndexedBase):
@@ -69,8 +70,11 @@ class Section5Rule5(RuleDefinitionListIndexedBase):
             def __init__(self):
                 super(Section5Rule5.BuildingRule.RoofRule, self).__init__(
                     rmrs_used=UserBaselineProposedVals(False, True, False),
-                    required_fields={"$": ["construction"], "construction": ["u_factor"]},
-                    )
+                    required_fields={
+                        "$": ["construction"],
+                        "construction": ["u_factor"],
+                    },
+                )
 
             def get_calc_vals(self, context, data=None):
                 climate_zone: str = data["climate_zone"]
@@ -121,4 +125,4 @@ class Section5Rule5(RuleDefinitionListIndexedBase):
                 roof_u_factor = calc_vals["roof_u_factor"]
                 target_u_factor = calc_vals["target_u_factor"]
 
-                return roof_u_factor == target_u_factor
+                return std_equal(roof_u_factor, target_u_factor)
