@@ -136,7 +136,7 @@ def process_test_result(test_result, test_dict, test_id):
         failed when expected to fail)
 
     """
-    print(f"test_result: {test_result}, test_dict:{test_dict}, test_id:{test_id}")
+
     # Get reporting parameters. Check if the test is expected to pass/fail and read in the description.
     expected_outcome = test_dict["expected_rule_outcome"] == "pass"
     description = test_dict["test_description"]
@@ -291,7 +291,7 @@ def run_section_tests(test_json_name):
                     print_errors = True
 
             elif test_dict["expected_rule_outcome"] == "fail":
-                print(f"test_result_dict:\n{test_result_dict}")
+
                 # If all elements don't meet the expected outcome, flag this as an error
                 if not any(test_result_dict[f"{test_id}"]):
                     print_errors = True
