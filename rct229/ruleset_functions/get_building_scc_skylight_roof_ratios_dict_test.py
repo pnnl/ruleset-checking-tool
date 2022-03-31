@@ -380,6 +380,145 @@ TEST_RMR = {
                         },
                     ],
                 },
+                {
+                    "id": "bldg_seg_3",
+                    "lighting_building_area_type": "MULTIFAMILY",
+                    "heating_ventilation_air_conditioning_systems": [
+                        # Use for zone_3_1, directly conditioned zone
+                        {
+                            "id": "hvac_3_1",
+                            "cooling_system": {
+                                "id": "csys_3_1_1",
+                                "sensible_cool_capacity": 2 * POWER_THRESHOLD_100
+                                + POWER_DELTA,
+                            },
+                        },
+                        {
+                            "id": "hvac_3_2",
+                            "cooling_system": {
+                                "id": "csys_3_2_1",
+                                "sensible_cool_capacity": 2 * POWER_THRESHOLD_100
+                                + POWER_DELTA,
+                            },
+                        },
+                    ],
+                    "zones": [
+                        # hvac_3_1 => directly_conditioned_zone
+                        # zone has a space with a residential lighting_space_type
+                        #   => zone_has_residential_spaces
+                        # zone has a space with a nonresidential lighting_space_type
+                        #   => zone_has_nonresidential_spaces
+                        # zone_has_nonresidential_spaces AND zone_has_nonresidential_spaces
+                        #   => zone_conditioning_category is "CONDITIONED MIXED"
+                        {
+                            "id": "zone_3_1",
+                            "spaces": [
+                                {
+                                    # Residential
+                                    "id": "space_3_1_1",
+                                    "floor_area": 100,  # m2
+                                    "lighting_space_type": "DORMITORY_LIVING_QUARTERS",
+                                    "occupant_multiplier_schedule": "om_sched_1",
+                                },
+                                {
+                                    # Non-residential
+                                    "id": "space_3_1_2",
+                                    "floor_area": 100,  # m2
+                                    "lighting_space_type": "COMPUTER_ROOM",
+                                    "occupant_multiplier_schedule": "om_sched_1",
+                                },
+                            ],
+                            "surfaces": [
+                                # Adds to zone_directly_conditioned_ua
+                                {
+                                    "id": "surface_3_1_1",
+                                    "adjacent_to": "EXTERIOR",
+                                    "adjacent_zone": "zone_3_2",  # directly conditioned
+                                    "area": 10,  # m2
+                                    "tilt": 0,  # above grade wall
+                                    "construction": {
+                                        "id": "const_3_5_1",
+                                        "u_factor": 0.1,  # W/(m2 * K)
+                                    },
+                                    "subsurfaces": [
+                                        {
+                                            "id": "subsurface_3_1_1_1",
+                                            "classification": "DOOR",
+                                            "glazed_area": 1,
+                                            "opaque_area": 3,  # m2
+                                            "u_factor": 0.5,  # W/(m2 * K)
+                                        }
+                                    ],
+                                },
+                            ],
+                            "thermostat_cooling_setpoint_schedule": "tcs_sched_1",
+                            "thermostat_heating_setpoint_schedule": "ths_sched_1",
+                            "terminals": [
+                                {
+                                    "id": "terminal_3_1_1",
+                                    "served_by_heating_ventilation_air_conditioning_system": "hvac_3_1",
+                                }
+                            ],
+                        },
+                        # hvac_3_2 => directly_conditioned_zone
+                        # zone has a space with a residential lighting_space_type
+                        #   => zone_has_residential_spaces
+                        # zone has a space with a nonresidential lighting_space_type
+                        #   => zone_has_nonresidential_spaces
+                        # zone_has_nonresidential_spaces AND zone_has_nonresidential_spaces
+                        #   => zone_conditioning_category is "CONDITIONED MIXED"
+                        {
+                            "id": "zone_3_2",
+                            "spaces": [
+                                {
+                                    # Residential
+                                    "id": "space_3_2_1",
+                                    "floor_area": 100,  # m2
+                                    "lighting_space_type": "DORMITORY_LIVING_QUARTERS",
+                                    "occupant_multiplier_schedule": "om_sched_1",
+                                },
+                                {
+                                    # Non-residential
+                                    "id": "space_3_2_2",
+                                    "floor_area": 100,  # m2
+                                    "lighting_space_type": "COMPUTER_ROOM",
+                                    "occupant_multiplier_schedule": "om_sched_1",
+                                },
+                            ],
+                            "surfaces": [
+                                # Adds to zone_directly_conditioned_ua
+                                {
+                                    "id": "surface_3_2_1",
+                                    "adjacent_to": "EXTERIOR",
+                                    "adjacent_zone": "zone_3_1",  # directly conditioned
+                                    "area": 10,  # m2
+                                    "tilt": 0,  # above grade wall
+                                    "construction": {
+                                        "id": "const_3_6_1",
+                                        "u_factor": 0.1,  # W/(m2 * K)
+                                    },
+                                    "subsurfaces": [
+                                        {
+                                            "id": "subsurface_3_2_1_1",
+                                            "classification": "DOOR",
+                                            "glazed_area": 3,
+                                            "opaque_area": 1,  # m2
+                                            "u_factor": 0.5,  # W/(m2 * K)
+                                        }
+                                    ],
+                                },
+                            ],
+                            "thermostat_cooling_setpoint_schedule": "tcs_sched_1",
+                            "thermostat_heating_setpoint_schedule": "ths_sched_1",
+                            "terminals": [
+                                {
+                                    "id": "terminal_3_2_1",
+                                    "served_by_heating_ventilation_air_conditioning_system": "hvac_3_2",
+                                }
+                            ],
+                        },
+                    ],
+                },
             ],
         }
     ],
@@ -402,4 +541,5 @@ def test__get_building_scc_skylight_roof_ratios_dict():
         SCC.EXTERIOR_RESIDENTIAL: 0.2,
         SCC.EXTERIOR_NON_RESIDENTIAL: 0.2,
         SCC.SEMI_EXTERIOR: 0.2,
+        SCC.EXTERIOR_MIXED: 0.2,
     }

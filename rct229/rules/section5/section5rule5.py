@@ -5,20 +5,16 @@ from rct229.rule_engine.rule_base import (
     RuleDefinitionListIndexedBase,
 )
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
-from rct229.ruleset_functions.get_opaque_surface_type import (
-    BELOW_GRADE_WALL,
-    ROOF,
-    get_opaque_surface_type,
+from rct229.ruleset_functions.get_opaque_surface_type import OpaqueSurfaceType as OST
+from rct229.ruleset_functions.get_opaque_surface_type import get_opaque_surface_type
+from rct229.ruleset_functions.get_surface_conditioning_category_dict import (
+    SurfaceConditioningCategory as SCC,
 )
 from rct229.ruleset_functions.get_surface_conditioning_category_dict import (
-    EXTERIOR_MIXED,
-    EXTERIOR_NON_RESIDENTIAL,
-    EXTERIOR_RESIDENTIAL,
-    SEMI_EXTERIOR,
-    UNREGULATED,
     get_surface_conditioning_category_dict,
 )
 from rct229.utils.jsonpath_utils import find_all
+from rct229.utils.std_comparisons import std_equal
 
 
 class Section5Rule5(RuleDefinitionListIndexedBase):
@@ -57,7 +53,7 @@ class Section5Rule5(RuleDefinitionListIndexedBase):
             return [
                 UserBaselineProposedVals(None, surface, None)
                 for surface in find_all("$..surfaces[*]", building)
-                if get_opaque_surface_type(surface) == ROOF
+                if get_opaque_surface_type(surface) == OST.ROOF
             ]
 
         def create_data(self, context, data=None):
@@ -74,7 +70,10 @@ class Section5Rule5(RuleDefinitionListIndexedBase):
             def __init__(self):
                 super(Section5Rule5.BuildingRule.RoofRule, self).__init__(
                     rmrs_used=UserBaselineProposedVals(False, True, False),
-                    required_fields={},
+                    required_fields={
+                        "$": ["construction"],
+                        "construction": ["u_factor"],
+                    },
                 )
 
             def get_calc_vals(self, context, data=None):
@@ -88,19 +87,19 @@ class Section5Rule5(RuleDefinitionListIndexedBase):
                 target_u_factor_nonres = None
 
                 if scc in [
-                    EXTERIOR_RESIDENTIAL,
-                    EXTERIOR_NON_RESIDENTIAL,
-                    SEMI_EXTERIOR,
+                    SCC.EXTERIOR_RESIDENTIAL,
+                    SCC.EXTERIOR_NON_RESIDENTIAL,
+                    SCC.SEMI_EXTERIOR,
                 ]:
-                    target_u_factor = table_G34_lookup(climate_zone, scc, ROOF)[
+                    target_u_factor = table_G34_lookup(climate_zone, scc, OST.ROOF)[
                         "u_value"
                     ]
-                elif scc == EXTERIOR_MIXED:
+                elif scc == SCC.EXTERIOR_MIXED:
                     target_u_factor_res = table_G34_lookup(
-                        climate_zone, EXTERIOR_RESIDENTIAL, ROOF
+                        climate_zone, SCC.EXTERIOR_RESIDENTIAL, OST.ROOF
                     )["u_value"]
                     target_u_factor_nonres = table_G34_lookup(
-                        climate_zone, EXTERIOR_NON_RESIDENTIAL, ROOF
+                        climate_zone, SCC.EXTERIOR_NON_RESIDENTIAL, OST.ROOF
                     )["u_value"]
                     if target_u_factor_res == target_u_factor_nonres:
                         target_u_factor = target_u_factor_res
@@ -126,4 +125,4 @@ class Section5Rule5(RuleDefinitionListIndexedBase):
                 roof_u_factor = calc_vals["roof_u_factor"]
                 target_u_factor = calc_vals["target_u_factor"]
 
-                return roof_u_factor == target_u_factor
+                return std_equal(roof_u_factor, target_u_factor)

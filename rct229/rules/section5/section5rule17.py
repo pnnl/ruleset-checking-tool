@@ -3,17 +3,16 @@ from rct229.rule_engine.rule_base import (
     RuleDefinitionListIndexedBase,
 )
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
-from rct229.ruleset_functions.get_opaque_surface_type import (
-    OpaqueSurfaceType as OST,
-    get_opaque_surface_type,
-)
+from rct229.ruleset_functions.get_opaque_surface_type import OpaqueSurfaceType as OST
+from rct229.ruleset_functions.get_opaque_surface_type import get_opaque_surface_type
 from rct229.ruleset_functions.get_surface_conditioning_category_dict import (
     SurfaceConditioningCategory as SCC,
+)
+from rct229.ruleset_functions.get_surface_conditioning_category_dict import (
     get_surface_conditioning_category_dict,
 )
 from rct229.utils.jsonpath_utils import find_all
-
-from rct229.utils.match_lists import match_lists_exactly_by_id
+from rct229.utils.match_lists import match_lists_by_id
 
 
 class Section5Rule17(RuleDefinitionListIndexedBase):
@@ -64,21 +63,25 @@ class Section5Rule17(RuleDefinitionListIndexedBase):
             proposed_surfaces = find_all("$..surfaces[*]", context.proposed)
 
             # This assumes that the surfaces matched by IDs between proposed and baseline
-            matched_proposed_surfaces = match_lists_exactly_by_id(
-                proposed_surfaces, baseline_surfaces
+            matched_proposed_surfaces = match_lists_by_id(
+                baseline_surfaces, proposed_surfaces
             )
 
-            proposed_baseline_surface_pairs = zip(baseline_surfaces, matched_proposed_surfaces)
+            proposed_baseline_surface_pairs = zip(
+                baseline_surfaces, matched_proposed_surfaces
+            )
 
             return [
                 UserBaselineProposedVals(None, surface_b, surface_p)
                 for surface_b, surface_p in proposed_baseline_surface_pairs
-                if scc[surface_b["id"]] == SCC.UNREGULATED and surface_p is not None
+                if scc[surface_b["id"]] == SCC.UNREGULATED
             ]
 
         class UnregulatedSurfaceRule(RuleDefinitionBase):
             def __init__(self):
-                super(Section5Rule17.BuildingRule.UnregulatedSurfaceRule, self).__init__(
+                super(
+                    Section5Rule17.BuildingRule.UnregulatedSurfaceRule, self
+                ).__init__(
                     rmrs_used=UserBaselineProposedVals(False, True, True),
                     required_fields={"$": ["construction"]},
                 )
@@ -94,26 +97,38 @@ class Section5Rule17(RuleDefinitionListIndexedBase):
 
                 calc_vals = {
                     "baseline_surface_type": surface_b_type,
-                    "proposed_surface_type": surface_p_type
+                    "proposed_surface_type": surface_p_type,
                 }
 
                 if surface_b_type in [OST.ABOVE_GRADE_WALL, OST.FLOOR, OST.ROOF]:
                     return {
                         **calc_vals,
-                        "baseline_surface_u_factor": surface_b_construction.get("u_factor"),
-                        "proposed_surface_u_factor": surface_p_construction.get("u_factor")
+                        "baseline_surface_u_factor": surface_b_construction.get(
+                            "u_factor"
+                        ),
+                        "proposed_surface_u_factor": surface_p_construction.get(
+                            "u_factor"
+                        ),
                     }
                 elif surface_b_type in [OST.UNHEATED_SOG, OST.HEATED_SOG]:
                     return {
                         **calc_vals,
-                        "baseline_surface_f_factor": surface_b_construction.get("f_factor"),
-                        "proposed_surface_f_factor": surface_p_construction.get("f_factor")
+                        "baseline_surface_f_factor": surface_b_construction.get(
+                            "f_factor"
+                        ),
+                        "proposed_surface_f_factor": surface_p_construction.get(
+                            "f_factor"
+                        ),
                     }
                 elif surface_b_type == OST.BELOW_GRADE_WALL:
                     return {
                         **calc_vals,
-                        "baseline_surface_c_factor": surface_b_construction.get("c_factor"),
-                        "proposed_surface_c_factor": surface_p_construction.get("c_factor")
+                        "baseline_surface_c_factor": surface_b_construction.get(
+                            "c_factor"
+                        ),
+                        "proposed_surface_c_factor": surface_p_construction.get(
+                            "c_factor"
+                        ),
                     }
                 else:
                     # Will never reach this line
@@ -125,20 +140,32 @@ class Section5Rule17(RuleDefinitionListIndexedBase):
                 baseline_surface_type = calc_vals["baseline_surface_type"]
                 proposed_surface_type = calc_vals["proposed_surface_type"]
                 # Check 1. surface type needs to be matched
-                if proposed_surface_type is None or baseline_surface_type != proposed_surface_type:
+                if (
+                    proposed_surface_type is None
+                    or baseline_surface_type != proposed_surface_type
+                ):
                     return False
 
                 if baseline_surface_type in [OST.ABOVE_GRADE_WALL, OST.FLOOR, OST.ROOF]:
-                    return calc_vals["proposed_surface_u_factor"] is not None and \
-                            calc_vals["baseline_surface_u_factor"] is not None and \
-                            calc_vals["baseline_surface_u_factor"] == calc_vals["proposed_surface_u_factor"]
+                    return (
+                        calc_vals["proposed_surface_u_factor"] is not None
+                        and calc_vals["baseline_surface_u_factor"] is not None
+                        and calc_vals["baseline_surface_u_factor"]
+                        == calc_vals["proposed_surface_u_factor"]
+                    )
                 elif baseline_surface_type in [OST.UNHEATED_SOG, OST.HEATED_SOG]:
-                    return calc_vals["proposed_surface_f_factor"] is not None and \
-                            calc_vals["baseline_surface_f_factor"] is not None and \
-                            calc_vals["baseline_surface_f_factor"] == calc_vals["proposed_surface_f_factor"]
+                    return (
+                        calc_vals["proposed_surface_f_factor"] is not None
+                        and calc_vals["baseline_surface_f_factor"] is not None
+                        and calc_vals["baseline_surface_f_factor"]
+                        == calc_vals["proposed_surface_f_factor"]
+                    )
                 elif baseline_surface_type == OST.BELOW_GRADE_WALL:
-                    return calc_vals["proposed_surface_c_factor"] is not None and \
-                            calc_vals["baseline_surface_c_factor"] is not None and \
-                            calc_vals["baseline_surface_c_factor"] == calc_vals["proposed_surface_c_factor"]
+                    return (
+                        calc_vals["proposed_surface_c_factor"] is not None
+                        and calc_vals["baseline_surface_c_factor"] is not None
+                        and calc_vals["baseline_surface_c_factor"]
+                        == calc_vals["proposed_surface_c_factor"]
+                    )
                 else:
                     return False
