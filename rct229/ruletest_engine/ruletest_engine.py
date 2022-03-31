@@ -304,6 +304,7 @@ def run_section_tests(test_json_name):
                 # Print log of all errors
                 for test_result_string in test_result_dict["log"]:
                     print(test_result_string)
+
     print(f"\nall_tests_pass: {all_tests_pass}")
     # Print results to console
     if all_tests_pass:
@@ -498,6 +499,13 @@ def run_envelope_tests():
     Results of envelope test are spit out to console
     """
 
-    envelope_test_json = "envelope_tests_5_11.json"
-
+    # envelope_test_json = "envelope_5_5.json"
+    # envelope_test_json = "envelope_tests_5_11.json"
+    # envelope_test_json = "envelope_tests_5_11_only_A.json"
+    # envelope_test_json = "envelope_tests_5_11_only_B.json"
+    envelope_test_json = "envelope_tests_5_11_only_C.json" # has problem
+    # envelope_test_json = "envelope_tests_5_11_only_D.json"
+    # envelope_test_json = "envelope_tests_5_11_only_E.json" # has problem
+    # envelope_test_json = "envelope_tests_5_11_only_F.json"
+    # envelope_test_json = "envelope_tests_5_11_only_G.json" # has problem
     return run_section_tests(envelope_test_json)

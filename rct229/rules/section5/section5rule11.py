@@ -14,7 +14,7 @@ from rct229.ruleset_functions.get_surface_conditioning_category_dict import (
     get_surface_conditioning_category_dict,
 )
 from rct229.utils.jsonpath_utils import find_all
-
+from rct229.utils.std_comparisons import std_equal
 
 class Section5Rule11(RuleDefinitionListIndexedBase):
     """Rule 11 of ASHRAE 90.1-2019 Appendix G Section 5 (Envelope)"""
@@ -52,7 +52,7 @@ class Section5Rule11(RuleDefinitionListIndexedBase):
             return [
                 UserBaselineProposedVals(None, surface, None)
                 for surface in find_all("$..surfaces[*]", building)
-                if get_opaque_surface_type(surface) == OpaqueSurfaceType.ABOVE_GRADE_WALL
+                if get_opaque_surface_type(surface) == OST.ABOVE_GRADE_WALL
             ]
 
         def create_data(self, context, data=None):
@@ -77,7 +77,7 @@ class Section5Rule11(RuleDefinitionListIndexedBase):
                 above_grade_wall = context.baseline
                 scc: str = data["surface_conditioning_category_dict"][above_grade_wall["id"]]
                 above_grade_wall_u_factor = above_grade_wall["construction"]["u_factor"]
-                print(f"scc: {scc}")
+
                 target_u_factor = None
                 target_u_factor_res = None
                 target_u_factor_nonres = None
@@ -121,4 +121,4 @@ class Section5Rule11(RuleDefinitionListIndexedBase):
                 above_grade_wall_u_factor = calc_vals["above_grade_wall_u_factor"]
                 target_u_factor = calc_vals["target_u_factor"]
 
-                return above_grade_wall_u_factor == target_u_factor
+                return std_equal(above_grade_wall_u_factor, target_u_factor)
