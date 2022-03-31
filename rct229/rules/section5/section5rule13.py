@@ -13,6 +13,7 @@ from rct229.ruleset_functions.get_surface_conditioning_category_dict import (
     get_surface_conditioning_category_dict,
 )
 from rct229.utils.jsonpath_utils import find_all
+from rct229.utils.std_comparisons import std_equal
 
 
 class Section5Rule13(RuleDefinitionListIndexedBase):
@@ -122,4 +123,4 @@ class Section5Rule13(RuleDefinitionListIndexedBase):
                 floor_u_factor = calc_vals["floor_u_factor"]
                 target_u_factor = calc_vals["target_u_factor"]
 
-                return floor_u_factor == target_u_factor
+                return std_equal(floor_u_factor, target_u_factor)
