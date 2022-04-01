@@ -516,9 +516,9 @@ TEST_RMR = {
                                     "served_by_heating_ventilation_air_conditioning_system": "hvac_3_2",
                                 }
                             ],
-                        }
-                    ]
-                }
+                        },
+                    ],
+                },
             ],
         }
     ],
@@ -541,5 +541,5 @@ def test__get_building_scc_skylight_roof_ratios_dict():
         SCC.EXTERIOR_RESIDENTIAL: 0.2,
         SCC.EXTERIOR_NON_RESIDENTIAL: 0.2,
         SCC.SEMI_EXTERIOR: 0.2,
-        SCC.EXTERIOR_MIXED: 0.2
+        SCC.EXTERIOR_MIXED: 0.2,
     }
