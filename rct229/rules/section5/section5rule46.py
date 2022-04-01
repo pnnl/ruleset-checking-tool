@@ -4,7 +4,7 @@ from rct229.rule_engine.rule_base import (
 )
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 from rct229.utils.jsonpath_utils import find_all
-from rct229.utils.match_lists import match_lists_exactly_by_id
+from rct229.utils.match_lists import match_lists_by_id
 
 
 class Section5Rule46(RuleDefinitionListIndexedBase):
@@ -37,9 +37,7 @@ class Section5Rule46(RuleDefinitionListIndexedBase):
             proposed_zones = find_all("$..zones[*]", context.proposed)
 
             # This assumes that the surfaces all match
-            matched_baseline_zones = match_lists_exactly_by_id(
-                proposed_zones, baseline_zones
-            )
+            matched_baseline_zones = match_lists_by_id(proposed_zones, baseline_zones)
             proposed_baseline_zone_pairs = zip(proposed_zones, matched_baseline_zones)
             for (p_zone, b_zone) in proposed_baseline_zone_pairs:
                 # need a method like match object
