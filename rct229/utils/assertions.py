@@ -1,6 +1,12 @@
 from rct229.utils.jsonpath_utils import find_all
 
 
+class MissingKeyException(Exception):
+    def __init__(self, object_name, obj_id, first_key):
+        message = f"{object_name}:{obj_id} is missing {first_key} field"
+        super().__init__(message)
+
+
 def assert_(bool, err_msg):
     assert bool, err_msg
 
@@ -45,7 +51,8 @@ def getattr_(obj, obj_name: str, first_key, *remaining_keys):
     AssertionError if the key path does not exist. The error message indicates what
     field was missing.
     """
-    assert first_key in obj, f"{obj_name}:{obj['id']} is missing {first_key} field"
+    if first_key not in obj:
+        raise MissingKeyException(obj_name, obj["id"], first_key)
     val = obj[first_key]
 
     return (

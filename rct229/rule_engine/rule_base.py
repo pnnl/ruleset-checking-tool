@@ -1,6 +1,7 @@
 from jsonpointer import resolve_pointer
 
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
+from rct229.utils.assertions import MissingKeyException
 from rct229.utils.json_utils import slash_prefix_guarantee
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.match_lists import match_lists
@@ -113,26 +114,29 @@ class RuleDefinitionBase:
                     # Get calculated values; these can be used by
                     # manual_check_required() or rule_check() and will
                     # be included in the output
-                    calc_vals = self.get_calc_vals(context, data)
-                    if calc_vals is not None:
-                        outcome["calc_vals"] = calc_vals
+                    try:
+                        calc_vals = self.get_calc_vals(context, data)
+                        if calc_vals is not None:
+                            outcome["calc_vals"] = calc_vals
 
-                    # Determine if manual check is required
-                    if self.manual_check_required(context, calc_vals, data):
-                        outcome["result"] = "MANUAL_CHECK_REQUIRED"
-                    else:
-                        # Evaluate the actual rule check
-                        result = self.rule_check(context, calc_vals, data)
-                        if isinstance(result, list):
-                            # The result is a list of outcomes
-                            outcome["result"] = result
-                        # Assume result type is bool
-                        elif result:
-                            outcome["result"] = "PASSED"
+                        # Determine if manual check is required
+                        if self.manual_check_required(context, calc_vals, data):
+                            outcome["result"] = "MANUAL_CHECK_REQUIRED"
                         else:
-                            outcome["result"] = "FAILED"
+                            # Evaluate the actual rule check
+                            result = self.rule_check(context, calc_vals, data)
+                            if isinstance(result, list):
+                                # The result is a list of outcomes
+                                outcome["result"] = result
+                            # Assume result type is bool
+                            elif result:
+                                outcome["result"] = "PASSED"
+                            else:
+                                outcome["result"] = "FAILED"
+                    except MissingKeyException as ke:
+                        outcome["result"] = str(ke)
                 else:
-                    outcome["result"] = "NA"
+                    outcome["result"] = "UNDERTERMINED"
             else:
                 outcome["result"] = context_validity_dict
         else:
