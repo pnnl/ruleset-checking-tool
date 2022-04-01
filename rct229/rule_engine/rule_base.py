@@ -84,8 +84,8 @@ class RuleDefinitionBase:
                 id: string - A unique identifier for the rule; ommitted if None
                 description: string - The rule description; ommitted if None
                 rmr_context: string - a JSON pointer into the RMR; omitted if empty
-                result: string or list - One of the strings "PASS", "FAIL", "NA",
-                    or "REQUIRES_MANUAL_CHECK" or a list of outcomes for
+                result: string or list - One of the strings "PASS", "FAIL", "UNDERTERMINED",
+                    or a list of outcomes for
                     a list-type rule
             }
         """
@@ -121,7 +121,7 @@ class RuleDefinitionBase:
 
                         # Determine if manual check is required
                         if self.manual_check_required(context, calc_vals, data):
-                            outcome["result"] = "MANUAL_CHECK_REQUIRED"
+                            outcome["result"] = "UNDERTERMINED"
                         else:
                             # Evaluate the actual rule check
                             result = self.rule_check(context, calc_vals, data)
