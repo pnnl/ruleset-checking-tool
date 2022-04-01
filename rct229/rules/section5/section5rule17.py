@@ -11,8 +11,10 @@ from rct229.ruleset_functions.get_surface_conditioning_category_dict import (
 from rct229.ruleset_functions.get_surface_conditioning_category_dict import (
     get_surface_conditioning_category_dict,
 )
+from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.match_lists import match_lists_by_id
+from rct229.utils.std_comparisons import std_equal
 
 
 class Section5Rule17(RuleDefinitionListIndexedBase):
@@ -103,31 +105,31 @@ class Section5Rule17(RuleDefinitionListIndexedBase):
                 if surface_b_type in [OST.ABOVE_GRADE_WALL, OST.FLOOR, OST.ROOF]:
                     return {
                         **calc_vals,
-                        "baseline_surface_u_factor": surface_b_construction.get(
-                            "u_factor"
+                        "baseline_surface_u_factor": getattr_(
+                            surface_b_construction, "construction", "u_factor"
                         ),
-                        "proposed_surface_u_factor": surface_p_construction.get(
-                            "u_factor"
+                        "proposed_surface_u_factor": getattr_(
+                            surface_p_construction, "construction", "u_factor"
                         ),
                     }
                 elif surface_b_type in [OST.UNHEATED_SOG, OST.HEATED_SOG]:
                     return {
                         **calc_vals,
-                        "baseline_surface_f_factor": surface_b_construction.get(
-                            "f_factor"
+                        "baseline_surface_f_factor": getattr_(
+                            surface_b_construction, "construction", "f_factor"
                         ),
-                        "proposed_surface_f_factor": surface_p_construction.get(
-                            "f_factor"
+                        "proposed_surface_f_factor": getattr_(
+                            surface_p_construction, "construction", "f_factor"
                         ),
                     }
                 elif surface_b_type == OST.BELOW_GRADE_WALL:
                     return {
                         **calc_vals,
-                        "baseline_surface_c_factor": surface_b_construction.get(
-                            "c_factor"
+                        "baseline_surface_c_factor": getattr_(
+                            surface_b_construction, "construction", "c_factor"
                         ),
-                        "proposed_surface_c_factor": surface_p_construction.get(
-                            "c_factor"
+                        "proposed_surface_c_factor": getattr_(
+                            surface_p_construction, "construction", "c_factor"
                         ),
                     }
                 else:
@@ -147,25 +149,19 @@ class Section5Rule17(RuleDefinitionListIndexedBase):
                     return False
 
                 if baseline_surface_type in [OST.ABOVE_GRADE_WALL, OST.FLOOR, OST.ROOF]:
-                    return (
-                        calc_vals["proposed_surface_u_factor"] is not None
-                        and calc_vals["baseline_surface_u_factor"] is not None
-                        and calc_vals["baseline_surface_u_factor"]
-                        == calc_vals["proposed_surface_u_factor"]
+                    return std_equal(
+                        calc_vals["baseline_surface_u_factor"],
+                        calc_vals["proposed_surface_u_factor"],
                     )
                 elif baseline_surface_type in [OST.UNHEATED_SOG, OST.HEATED_SOG]:
-                    return (
-                        calc_vals["proposed_surface_f_factor"] is not None
-                        and calc_vals["baseline_surface_f_factor"] is not None
-                        and calc_vals["baseline_surface_f_factor"]
-                        == calc_vals["proposed_surface_f_factor"]
+                    return std_equal(
+                        calc_vals["baseline_surface_f_factor"],
+                        calc_vals["proposed_surface_f_factor"],
                     )
                 elif baseline_surface_type == OST.BELOW_GRADE_WALL:
-                    return (
-                        calc_vals["proposed_surface_c_factor"] is not None
-                        and calc_vals["baseline_surface_c_factor"] is not None
-                        and calc_vals["baseline_surface_c_factor"]
-                        == calc_vals["proposed_surface_c_factor"]
+                    return std_equal(
+                        calc_vals["baseline_surface_c_factor"],
+                        calc_vals["proposed_surface_c_factor"],
                     )
                 else:
                     return False
