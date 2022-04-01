@@ -5,12 +5,12 @@ from rct229.rule_engine.rule_base import (
     RuleDefinitionListIndexedBase,
 )
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
-from rct229.ruleset_functions.get_opaque_surface_type import (
-    OpaqueSurfaceType as OST,
-    get_opaque_surface_type,
-)
+from rct229.ruleset_functions.get_opaque_surface_type import OpaqueSurfaceType as OST
+from rct229.ruleset_functions.get_opaque_surface_type import get_opaque_surface_type
 from rct229.ruleset_functions.get_surface_conditioning_category_dict import (
     SurfaceConditioningCategory as SCC,
+)
+from rct229.ruleset_functions.get_surface_conditioning_category_dict import (
     get_surface_conditioning_category_dict,
 )
 from rct229.utils.jsonpath_utils import find_all
@@ -76,7 +76,9 @@ class Section5Rule11(RuleDefinitionListIndexedBase):
             def get_calc_vals(self, context, data=None):
                 climate_zone: str = data["climate_zone"]
                 above_grade_wall = context.baseline
-                scc: str = data["surface_conditioning_category_dict"][above_grade_wall["id"]]
+                scc: str = data["surface_conditioning_category_dict"][
+                    above_grade_wall["id"]
+                ]
                 above_grade_wall_u_factor = above_grade_wall["construction"]["u_factor"]
 
                 target_u_factor = None
@@ -88,9 +90,9 @@ class Section5Rule11(RuleDefinitionListIndexedBase):
                     SCC.EXTERIOR_NON_RESIDENTIAL,
                     SCC.SEMI_EXTERIOR,
                 ]:
-                    target_u_factor = table_G34_lookup(climate_zone, scc, OST.ABOVE_GRADE_WALL)[
-                        "u_value"
-                    ]
+                    target_u_factor = table_G34_lookup(
+                        climate_zone, scc, OST.ABOVE_GRADE_WALL
+                    )["u_value"]
                 elif scc == SCC.EXTERIOR_MIXED:
                     target_u_factor_res = table_G34_lookup(
                         climate_zone, SCC.EXTERIOR_RESIDENTIAL, OST.ABOVE_GRADE_WALL
@@ -112,11 +114,7 @@ class Section5Rule11(RuleDefinitionListIndexedBase):
                 target_u_factor_res = calc_vals["target_u_factor_res"]
                 target_u_factor_nonres = calc_vals["target_u_factor_nonres"]
 
-                return (
-                    target_u_factor_res is not None
-                    and target_u_factor_nonres is not None
-                    and target_u_factor_res != target_u_factor_nonres
-                )
+                return target_u_factor_res != target_u_factor_nonres
 
             def rule_check(self, context, calc_vals, data=None):
                 above_grade_wall_u_factor = calc_vals["above_grade_wall_u_factor"]

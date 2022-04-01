@@ -1536,7 +1536,6 @@
                                                     {
                                                         "id": "Terminal 1",
                                                         "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
-
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -1889,7 +1888,6 @@
                                                     {
                                                         "id": "Terminal 1",
                                                         "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
-
                                                     }
                                                 ],
                                                 "surfaces": [

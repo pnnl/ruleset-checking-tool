@@ -236,7 +236,6 @@ def run_section_tests(test_json_name):
         # Pull in rule, if written. If not found, fail the test and log which Section and Rule could not be found.
         try:
             rule = getattr(globals()[section_name], function_name)()
-
         except KeyError:
 
             # Print message communicating that a rule cannot be found
@@ -305,7 +304,6 @@ def run_section_tests(test_json_name):
                 for test_result_string in test_result_dict["log"]:
                     print(test_result_string)
 
-    print(f"\nall_tests_pass: {all_tests_pass}")
     # Print results to console
     if all_tests_pass:
         print("All tests passed!")
@@ -314,7 +312,7 @@ def run_section_tests(test_json_name):
 
     # Return whether or not all tests in this test JSON received their expected outcome as a boolean
     all_tests_successful = all(test_result_dict["results"])
-    print(f"all_tests_successful: {all_tests_successful}")
+
     return all_tests_successful
 
 
@@ -499,13 +497,6 @@ def run_envelope_tests():
     Results of envelope test are spit out to console
     """
 
-    # envelope_test_json = "envelope_5_5.json"
-    # envelope_test_json = "envelope_tests_5_11.json"
-    # envelope_test_json = "envelope_tests_5_11_only_A.json"
-    # envelope_test_json = "envelope_tests_5_11_only_B.json"
-    envelope_test_json = "envelope_tests_5_11_only_C.json" # has problem
-    # envelope_test_json = "envelope_tests_5_11_only_D.json"
-    # envelope_test_json = "envelope_tests_5_11_only_E.json" # has problem
-    # envelope_test_json = "envelope_tests_5_11_only_F.json"
-    # envelope_test_json = "envelope_tests_5_11_only_G.json" # has problem
+    envelope_test_json = "envelope_tests.json"
+
     return run_section_tests(envelope_test_json)
