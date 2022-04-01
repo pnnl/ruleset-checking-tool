@@ -5,12 +5,12 @@ from rct229.rule_engine.rule_base import (
     RuleDefinitionListIndexedBase,
 )
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
-from rct229.ruleset_functions.get_opaque_surface_type import (
-    OpaqueSurfaceType as OST,
-    get_opaque_surface_type,
-)
+from rct229.ruleset_functions.get_opaque_surface_type import OpaqueSurfaceType as OST
+from rct229.ruleset_functions.get_opaque_surface_type import get_opaque_surface_type
 from rct229.ruleset_functions.get_surface_conditioning_category_dict import (
     SurfaceConditioningCategory as SCC,
+)
+from rct229.ruleset_functions.get_surface_conditioning_category_dict import (
     get_surface_conditioning_category_dict,
 )
 from rct229.utils.jsonpath_utils import find_all
