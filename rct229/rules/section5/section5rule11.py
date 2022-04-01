@@ -16,6 +16,7 @@ from rct229.ruleset_functions.get_surface_conditioning_category_dict import (
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.std_comparisons import std_equal
 
+
 class Section5Rule11(RuleDefinitionListIndexedBase):
     """Rule 11 of ASHRAE 90.1-2019 Appendix G Section 5 (Envelope)"""
 
@@ -30,7 +31,7 @@ class Section5Rule11(RuleDefinitionListIndexedBase):
             index_rmr="baseline",
             id="5-11",
             description="Baseline above-grade wall assemblies must match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8.",
-            list_path="buildings[*]",
+            list_path="ruleset_model_instances[0].buildings[*]",
         )
 
     def create_data(self, context, data=None):
@@ -46,15 +47,6 @@ class Section5Rule11(RuleDefinitionListIndexedBase):
                 index_rmr="baseline",
             )
 
-        def create_context_list(self, context, data=None):
-            building = context.baseline
-            # List of all baseline above-grade wall surfaces to become the context for AboveGradeWallRule
-            return [
-                UserBaselineProposedVals(None, surface, None)
-                for surface in find_all("$..surfaces[*]", building)
-                if get_opaque_surface_type(surface) == OST.ABOVE_GRADE_WALL
-            ]
-
         def create_data(self, context, data=None):
             building = context.baseline
             # Merge into the existing data dict
@@ -64,6 +56,15 @@ class Section5Rule11(RuleDefinitionListIndexedBase):
                     data["climate_zone"], building
                 ),
             }
+
+        def create_context_list(self, context, data=None):
+            building = context.baseline
+            # List of all baseline above-grade wall surfaces to become the context for AboveGradeWallRule
+            return [
+                UserBaselineProposedVals(None, surface, None)
+                for surface in find_all("$..surfaces[*]", building)
+                if get_opaque_surface_type(surface) == OST.ABOVE_GRADE_WALL
+            ]
 
         class AboveGradeWallRule(RuleDefinitionBase):
             def __init__(self):
