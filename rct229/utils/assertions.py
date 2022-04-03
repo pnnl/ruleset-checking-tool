@@ -1,14 +1,33 @@
 from rct229.utils.jsonpath_utils import find_all
 
 
-class MissingKeyException(Exception):
+class AssertionStatusCategory:
+    """Enumeration class for RCT execution status"""
+    SEVERE: str = "SEVERE"
+    WARNING: str = "WARNING"
+
+
+class RCTException(Exception):
+    def __init__(self, message, status):
+        super().__init__(message)
+        self.status = status
+
+
+class DataErrorException(RCTException):
+    def __init__(self, object_name, obj_id, message):
+        error_message = f"[{object_name}]:[{obj_id}]: {message}"
+        super().__init__(error_message, AssertionStatusCategory.SEVERE)
+
+
+class MissingKeyException(RCTException):
     def __init__(self, object_name, obj_id, first_key):
         message = f"{object_name}:{obj_id} is missing {first_key} field"
-        super().__init__(message)
+        super().__init__(message, AssertionStatusCategory.SEVERE)
 
 
-def assert_(bool, err_msg):
-    assert bool, err_msg
+def assert_(bool, err_msg, status):
+    if not bool:
+        raise RCTException(err_msg, status)
 
 
 def assert_nonempty_lists(req_nonempty_lists, obj):
@@ -21,9 +40,8 @@ def assert_required_fields(req_fields, obj):
     for (jpath, fields) in req_fields.items():
         for element in find_all(jpath, obj):
             for field in fields:
-                assert (
-                    field in element
-                ), f"Missing {field} in {jpath} id:{element.get('id')}"
+                if field not in element:
+                    raise MissingKeyException(jpath, element.get("id"), field)
 
 
 def getattr_(obj, obj_name: str, first_key, *remaining_keys):
