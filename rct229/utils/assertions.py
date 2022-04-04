@@ -3,6 +3,7 @@ from rct229.utils.jsonpath_utils import find_all
 
 class AssertionStatusCategory:
     """Enumeration class for RCT execution status"""
+
     SEVERE: str = "SEVERE"
     WARNING: str = "WARNING"
 

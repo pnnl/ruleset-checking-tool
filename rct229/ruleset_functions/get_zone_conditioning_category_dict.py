@@ -4,8 +4,8 @@ from rct229.ruleset_functions.get_hvac_zone_list_w_area_dict import (
 )
 from rct229.ruleset_functions.get_opaque_surface_type import get_opaque_surface_type
 from rct229.schema.config import ureg
+from rct229.utils.assertions import AssertionStatusCategory as ASC
 from rct229.utils.assertions import (
-    AssertionStatusCategory as ASC,
     assert_,
     assert_nonempty_lists,
     assert_required_fields,
@@ -195,7 +195,9 @@ def get_zone_conditioning_category_dict(climate_zone, building):
                 zone_directly_conditioned_ua = ZERO.UA
                 zone_other_ua = ZERO.UA
                 assert_(
-                    find_all("surfaces[*]", zone), f"zone:{zone_id} has no surfaces", ASC.SEVERE
+                    find_all("surfaces[*]", zone),
+                    f"zone:{zone_id} has no surfaces",
+                    ASC.SEVERE,
                 )
                 for surface in zone["surfaces"]:
                     subsurfaces = find_all("subsurfaces[*]", surface)
@@ -222,11 +224,14 @@ def get_zone_conditioning_category_dict(climate_zone, building):
                         ZERO.U_FACTOR,  # value used if there are no subsurfaces
                     )
                     # Calculate the are of the surface that is not part of a subsurface
-                    non_subsurfaces_area = getattr_(surface, "surface", "area") - subsurfaces_area
+                    non_subsurfaces_area = (
+                        getattr_(surface, "surface", "area") - subsurfaces_area
+                    )
                     # Calculate the UA for the surface
                     surface_construction = getattr_(surface, "surface", "construction")
                     surface_ua = (
-                        getattr_(surface_construction, "construction", "u_factor") * non_subsurfaces_area
+                        getattr_(surface_construction, "construction", "u_factor")
+                        * non_subsurfaces_area
                         + subsurfaces_ua
                     )
 
@@ -334,12 +339,18 @@ def get_zone_conditioning_category_dict(climate_zone, building):
             # Check for crawlspace
             else:
                 zone_volume = zone.get("volume", ZERO.VOLUME)
-                assert_(zone_volume > ZERO.VOLUME, f"zone:{zone_id} has no volume", ASC.SEVERE)
+                assert_(
+                    zone_volume > ZERO.VOLUME,
+                    f"zone:{zone_id} has no volume",
+                    ASC.SEVERE,
+                )
                 zone_floor_area = pint_sum(
                     find_all("spaces[*].floor_area", zone), ZERO.AREA
                 )
                 assert_(
-                    zone_floor_area > ZERO.AREA, f"zone:{zone_id} has no floor area", ASC.SEVERE
+                    zone_floor_area > ZERO.AREA,
+                    f"zone:{zone_id} has no floor area",
+                    ASC.SEVERE,
                 )
                 if zone_volume / zone_floor_area < CRAWLSPACE_HEIGHT_THRESHOLD and any(
                     [

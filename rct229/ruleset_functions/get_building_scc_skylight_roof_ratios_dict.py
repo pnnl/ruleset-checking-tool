@@ -34,7 +34,7 @@ def get_building_scc_skylight_roof_ratios_dict(climate_zone, building):
                     "building_id": {"EXTERIOR RESIDENTIAL": srr_res, "EXTERIOR NON-RESIDENTIAL": srr_nonres,
                     "EXTERIOR MIXED": srr_mixed, "SEMI-EXTERIOR": srr_semiheated},
                 }
-            """
+    """
     # required fields for this function are coming from the nested functions
     scc_dictionary = get_surface_conditioning_category_dict(climate_zone, building)
     total_res_roof_area = ZERO.AREA

@@ -1,4 +1,5 @@
 from rct229.schema.config import ureg
+from rct229.utils.assertions import AssertionStatusCategory as ASC
 from rct229.utils.assertions import assert_, assert_required_fields
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.pint_utils import ZERO, pint_sum
@@ -47,7 +48,11 @@ def get_hvac_zone_list_w_area_dict(building):
         # Note: None and [] are falsey; zone.terminals is optional
         if terminals:
             zone_area = pint_sum(find_all("spaces[*].floor_area", zone), ZERO.AREA)
-            assert_(zone_area > ZERO.AREA, f"zone:{zone['id']} has zero floor area")
+            assert_(
+                zone_area > ZERO.AREA,
+                f"zone:{zone['id']} has zero floor area",
+                ASC.SEVERE,
+            )
             for terminal in terminals:
                 hvac_sys_id = terminal[
                     "served_by_heating_ventilation_air_conditioning_system"
@@ -68,5 +73,6 @@ def get_hvac_zone_list_w_area_dict(building):
                 assert_(
                     hvac_sys_entry["total_area"] > ZERO.AREA,
                     f"terminal:{terminal['id']} serves zero floor area",
+                    ASC.SEVERE,
                 )
     return hvac_zone_list_w_area_dict
