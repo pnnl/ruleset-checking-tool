@@ -1,7 +1,7 @@
 from jsonpointer import resolve_pointer
 
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
-from rct229.utils.assertions import MissingKeyException
+from rct229.utils.assertions import MissingKeyException, RCTFailureException
 from rct229.utils.json_utils import slash_prefix_guarantee
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.match_lists import match_lists
@@ -134,9 +134,13 @@ class RuleDefinitionBase:
                             else:
                                 outcome["result"] = "FAILED"
                     except MissingKeyException as ke:
-                        outcome["result"] = str(ke)
+                        outcome["result"] = "UNDETERMINED"
+                        outcome["message"] = str(ke)
+                    except RCTFailureException as fe:
+                        outcome["result"] = "FAILED"
+                        outcome["message"] = str(fe)
                 else:
-                    outcome["result"] = "UNDERTERMINED"
+                    outcome["result"] = "UNDETERMINED"
             else:
                 outcome["result"] = context_validity_dict
         else:

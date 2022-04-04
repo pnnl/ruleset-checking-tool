@@ -4,10 +4,8 @@ from rct229.ruleset_functions.get_hvac_zone_list_w_area_dict import (
 )
 from rct229.ruleset_functions.get_opaque_surface_type import get_opaque_surface_type
 from rct229.schema.config import ureg
-from rct229.utils.assertions import AssertionStatusCategory as ASC
 from rct229.utils.assertions import (
     assert_,
-    assert_nonempty_lists,
     assert_required_fields,
     getattr_,
 )
@@ -137,7 +135,7 @@ def get_zone_conditioning_category_dict(climate_zone, building):
     for zone in find_all("$..zones[*]", building):
         zone_id = zone["id"]
         zone_area = pint_sum(find_all("$..floor_area", zone), ZERO.AREA)
-        assert_(zone_area > ZERO.AREA, f"zone:{zone_id} has no floor area", ASC.SEVERE)
+        assert_(zone_area > ZERO.AREA, f"zone:{zone_id} has no floor area")
 
         zone_capacity_dict[zone_id] = zone_capacity = {
             "sensible_cooling": ZERO.THERMAL_CAPACITY,
@@ -196,8 +194,7 @@ def get_zone_conditioning_category_dict(climate_zone, building):
                 zone_other_ua = ZERO.UA
                 assert_(
                     find_all("surfaces[*]", zone),
-                    f"zone:{zone_id} has no surfaces",
-                    ASC.SEVERE,
+                    f"zone:{zone_id} has no surfaces"
                 )
                 for surface in zone["surfaces"]:
                     subsurfaces = find_all("subsurfaces[*]", surface)
@@ -342,7 +339,6 @@ def get_zone_conditioning_category_dict(climate_zone, building):
                 assert_(
                     zone_volume > ZERO.VOLUME,
                     f"zone:{zone_id} has no volume",
-                    ASC.SEVERE,
                 )
                 zone_floor_area = pint_sum(
                     find_all("spaces[*].floor_area", zone), ZERO.AREA
@@ -350,7 +346,6 @@ def get_zone_conditioning_category_dict(climate_zone, building):
                 assert_(
                     zone_floor_area > ZERO.AREA,
                     f"zone:{zone_id} has no floor area",
-                    ASC.SEVERE,
                 )
                 if zone_volume / zone_floor_area < CRAWLSPACE_HEIGHT_THRESHOLD and any(
                     [

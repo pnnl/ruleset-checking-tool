@@ -9,15 +9,14 @@ class AssertionStatusCategory:
 
 
 class RCTException(Exception):
-    def __init__(self, message, status):
+    def __init__(self, message, status=AssertionStatusCategory.SEVERE):
         super().__init__(message)
         self.status = status
 
 
-class DataErrorException(RCTException):
-    def __init__(self, object_name, obj_id, message):
-        error_message = f"[{object_name}]:[{obj_id}]: {message}"
-        super().__init__(error_message, AssertionStatusCategory.SEVERE)
+class RCTFailureException(RCTException):
+    def __init__(self, message):
+        super().__init__(message, AssertionStatusCategory.SEVERE)
 
 
 class MissingKeyException(RCTException):
@@ -26,9 +25,9 @@ class MissingKeyException(RCTException):
         super().__init__(message, AssertionStatusCategory.SEVERE)
 
 
-def assert_(bool, err_msg, status):
+def assert_(bool, err_msg):
     if not bool:
-        raise RCTException(err_msg, status)
+        raise RCTFailureException(err_msg)
 
 
 def assert_nonempty_lists(req_nonempty_lists, obj):
