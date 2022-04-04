@@ -218,7 +218,7 @@ def get_zone_conditioning_category_dict(climate_zone, building):
                             )
                             for subsurface in subsurfaces
                         ],
-                        ZERO.U_FACTOR,  # value used if there are no subsurfaces
+                        ZERO.UA,  # value used if there are no subsurfaces
                     )
                     # Calculate the are of the surface that is not part of a subsurface
                     assert_(
