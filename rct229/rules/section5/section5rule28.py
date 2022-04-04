@@ -44,7 +44,6 @@ class Section5Rule28(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section5Rule28.BuildingRule, self).__init__(
                 rmrs_used=UserBaselineProposedVals(False, True, True),
-                required_fields={},
                 each_rule=Section5Rule28.BuildingRule.UnregulatedSurfaceRule(),
                 index_rmr="baseline",
             )
@@ -87,26 +86,8 @@ class Section5Rule28(RuleDefinitionListIndexedBase):
                     Section5Rule28.BuildingRule.UnregulatedSurfaceRule, self
                 ).__init__(
                     rmrs_used=UserBaselineProposedVals(False, True, True),
-                    required_fields={},
+                    list_path="subsurfaces[*]"
                 )
-
-            def create_context_list(self, context, data=None):
-                baseline_subsurfaces = find_all("$..subsurfaces[*]", context.baseline)
-                proposed_subsurfaces = find_all("$..subsurfaces[*]", context.proposed)
-
-                # This assumes that the subsurfaces matched by IDs between proposed and baseline
-                matched_proposed_subsurfaces = match_lists_by_id(
-                    baseline_subsurfaces, proposed_subsurfaces
-                )
-
-                proposed_baseline_subsurface_pairs = zip(
-                    baseline_subsurfaces, matched_proposed_subsurfaces
-                )
-
-                return [
-                    UserBaselineProposedVals(None, subsurface_b, subsurface_p)
-                    for subsurface_b, subsurface_p in proposed_baseline_subsurface_pairs
-                ]
 
             class UnregulatedSubsurfaceRule(RuleDefinitionBase):
                 def __init__(self):
