@@ -109,7 +109,7 @@ def test__rule_definition_base__evaluate__with_missing_baseline():
 def test__rule_definition_base__evaluate__with_false_is_applicable():
     assert DERIVED_RULE.evaluate(RMRS_WITH_MATCHING_USER_AND_BASELINE, data="NA") == {
         **BASE_RULE_1_OUTCOME_BASE,
-        "result": "UNDETERMINED",
+        "result": "NOT_APPLICABLE",
     }
 
 

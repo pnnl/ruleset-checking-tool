@@ -11,4 +11,4 @@ def test__getattr___with_missing_field():
     try:
         getattr_(GETATTR_TEST_OBJ, "Obj", "field1", "field2", "field4")
     except MissingKeyException as e:
-        assert str(e) == "field2:f1 is missing field4 field" and e.status == "SEVERE"
+        assert str(e) == "field2:f1 is missing field4 field"
