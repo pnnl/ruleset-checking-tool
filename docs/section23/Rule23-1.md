@@ -1,20 +1,20 @@
 
 # CHW&CW - Rule 23-1  
 
+**Schema Version:** 0.0.12  
+**Mandatory Rule:** True  
 **Rule ID:** 23-1  
 **Rule Description:** For baseline systems 5-8 and 11, the SAT is reset higher by 5F under minimum cooling load conditions.  
 **Rule Assertion:** B-RMR = expected value  
 **Appendix G Section:** Section 23 Air-side  
-**Appendix G Section Reference:** Section G3.1.3.12 Supply Air Temperature Reset (Systems 5 through 8 and 11)  
-
-**Applicability:** All required data elements exist for B_RMR  
+**90.1 Section Reference:** Section G3.1.3.12 Supply Air Temperature Reset (Systems 5 through 8 and 11)  
+**Data Lookup:** None  
+**Evaluation Context:** Building  
 **Applicability Checks:**  
 
 1. B-RMR is modeled with at least one air-side system that is Type-5, 6, 7, 8, 11.1, 11.2, 7a, 8a, 11.1a, 11.2a, 5b, 6b, 7b, 8b, 11b, 7c, 11c.
 
-**Evaluation Context:** Building  
-**Data Lookup:** None  
-**Function Call:**  
+**Function Calls:**  
 
 1. get_baseline_system_types()
 2. is_baseline_system_type()
