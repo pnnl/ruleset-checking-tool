@@ -1,4 +1,4 @@
-from rct229.utils.assertions import getattr_
+from rct229.utils.assertions import MissingKeyException, getattr_
 
 GETATTR_TEST_OBJ = {"field1": {"id": "f1", "field2": {"id": "f1", "field3": 7}}}
 
@@ -6,7 +6,9 @@ GETATTR_TEST_OBJ = {"field1": {"id": "f1", "field2": {"id": "f1", "field3": 7}}}
 def test__getattr___with_required_fields():
     assert getattr_(GETATTR_TEST_OBJ, "Obj", "field1", "field2", "field3") == 7
 
-    def test__getattr___with_missing_field():
-        with pytest.raises(AssertionError) as ae:
-            getattr_(GETATTR_TEST_OBJ, "Obj", "field1", "field2", "field4")
-        assert str(ae.value) == "Obj is missing field4 field"
+
+def test__getattr___with_missing_field():
+    try:
+        getattr_(GETATTR_TEST_OBJ, "Obj", "field1", "field2", "field4")
+    except MissingKeyException as e:
+        assert str(e) == "field2:f1 is missing field4 field"

@@ -6,7 +6,6 @@ from rct229.ruleset_functions.get_opaque_surface_type import get_opaque_surface_
 from rct229.schema.config import ureg
 from rct229.utils.assertions import (
     assert_,
-    assert_nonempty_lists,
     assert_required_fields,
     getattr_,
 )
@@ -194,7 +193,8 @@ def get_zone_conditioning_category_dict(climate_zone, building):
                 zone_directly_conditioned_ua = ZERO.UA
                 zone_other_ua = ZERO.UA
                 assert_(
-                    find_all("surfaces[*]", zone), f"zone:{zone_id} has no surfaces"
+                    find_all("surfaces[*]", zone),
+                    f"zone:{zone_id} has no surfaces"
                 )
                 for surface in zone["surfaces"]:
                     subsurfaces = find_all("subsurfaces[*]", surface)
@@ -221,38 +221,23 @@ def get_zone_conditioning_category_dict(climate_zone, building):
                         ZERO.UA,  # value used if there are no subsurfaces
                     )
                     # Calculate the are of the surface that is not part of a subsurface
-                    assert_(
-                        "area" in surface, f"surface:{surface['id']} has no area field"
+                    non_subsurfaces_area = (
+                        getattr_(surface, "surface", "area") - subsurfaces_area
                     )
-                    non_subsurfaces_area = surface["area"] - subsurfaces_area
                     # Calculate the UA for the surface
-                    assert_(
-                        "construction" in surface,
-                        f"Surface:{surface['id']} has no construction field",
-                    )
-                    assert_(
-                        "u_factor" in surface["construction"],
-                        f"construction:{surface['construction']['id']} has no u_factor field",
-                    )
+                    surface_construction = getattr_(surface, "surface", "construction")
                     surface_ua = (
-                        surface["construction"]["u_factor"] * non_subsurfaces_area
+                        getattr_(surface_construction, "construction", "u_factor")
+                        * non_subsurfaces_area
                         + subsurfaces_ua
                     )
 
                     # Add the surface UA to one of the running totals for the zone
                     # according to whether the surface is adjacent to a directly conditioned
                     # zone or not
-                    assert_(
-                        "adjacent_zone" in surface,
-                        f"surface:{surface['id']} is missing adjacent_zone",
-                    )
-                    adjacent_zone_id = surface["adjacent_zone"]
-                    assert_(
-                        "adjacent_to" in surface,
-                        f"surface:{surface['id']} is missing adjacent_to",
-                    )
+                    adjacent_zone_id = getattr_(surface, "surface", "adjacent_zone")
                     if (
-                        surface["adjacent_to"] == "INTERIOR"
+                        getattr_(surface, "surface", "adjacent_to") == "INTERIOR"
                         and adjacent_zone_id in directly_conditioned_zone_ids
                     ):
                         zone_directly_conditioned_ua += surface_ua  # zone_1_4
@@ -351,12 +336,16 @@ def get_zone_conditioning_category_dict(climate_zone, building):
             # Check for crawlspace
             else:
                 zone_volume = zone.get("volume", ZERO.VOLUME)
-                assert_(zone_volume > ZERO.VOLUME, f"zone:{zone_id} has no volume")
+                assert_(
+                    zone_volume > ZERO.VOLUME,
+                    f"zone:{zone_id} has no volume",
+                )
                 zone_floor_area = pint_sum(
                     find_all("spaces[*].floor_area", zone), ZERO.AREA
                 )
                 assert_(
-                    zone_floor_area > ZERO.AREA, f"zone:{zone_id} has no floor area"
+                    zone_floor_area > ZERO.AREA,
+                    f"zone:{zone_id} has no floor area",
                 )
                 if zone_volume / zone_floor_area < CRAWLSPACE_HEIGHT_THRESHOLD and any(
                     [

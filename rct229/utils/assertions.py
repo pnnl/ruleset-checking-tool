@@ -1,8 +1,33 @@
 from rct229.utils.jsonpath_utils import find_all
 
 
+class AssertionStatusCategory:
+    """Enumeration class for RCT execution status"""
+
+    SEVERE: str = "SEVERE"
+    WARNING: str = "WARNING"
+
+
+class RCTException(Exception):
+    def __init__(self, message):
+        super().__init__(message)
+        # self.status = status
+
+
+class RCTFailureException(RCTException):
+    def __init__(self, message):
+        super().__init__(message)
+
+
+class MissingKeyException(RCTException):
+    def __init__(self, object_name, obj_id, first_key):
+        message = f"{object_name}:{obj_id} is missing {first_key} field"
+        super().__init__(message)
+
+
 def assert_(bool, err_msg):
-    assert bool, err_msg
+    if not bool:
+        raise RCTFailureException(err_msg)
 
 
 def assert_nonempty_lists(req_nonempty_lists, obj):
@@ -15,9 +40,8 @@ def assert_required_fields(req_fields, obj):
     for (jpath, fields) in req_fields.items():
         for element in find_all(jpath, obj):
             for field in fields:
-                assert (
-                    field in element
-                ), f"Missing {field} in {jpath} id:{element.get('id')}"
+                if field not in element:
+                    raise MissingKeyException(jpath, element.get("id"), field)
 
 
 def getattr_(obj, obj_name: str, first_key, *remaining_keys):
@@ -45,7 +69,8 @@ def getattr_(obj, obj_name: str, first_key, *remaining_keys):
     AssertionError if the key path does not exist. The error message indicates what
     field was missing.
     """
-    assert first_key in obj, f"{obj_name}:{obj['id']} is missing {first_key} field"
+    if first_key not in obj:
+        raise MissingKeyException(obj_name, obj["id"], first_key)
     val = obj[first_key]
 
     return (
