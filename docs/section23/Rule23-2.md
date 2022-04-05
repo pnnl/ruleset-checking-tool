@@ -1,20 +1,20 @@
 
 # Airside System - Rule 23-2  
 
+**Schema Version:** 0.0.12  
+**Mandatory Rule:** True  
 **Rule ID:** 23-2  
 **Rule Description:** System 5 & 7 minimum volume setpoint shall be 30% of zone peak airflow, minimum outdoor airflow, or rate required to comply with minium accreditation standards whichever is larger.  
 **Rule Assertion:** B-RMR = expected value  
 **Appendix G Section:** Section 23 Air-side  
-**Appendix G Section Reference:** Section G3.1.3.13 VAV Minimum Flow Set Points (Systems 5 and 7)  
-
-**Applicability:** All required data elements exist for B_RMR  
+**90.1 Section Reference:** Section G3.1.3.13 VAV Minimum Flow Set Points (Systems 5 and 7)  
+**Data Lookup:** None  
+**Evaluation Context:** Building  
 **Applicability Checks:**  
 
 1. B-RMR is modeled with at least one air-side system that is Type-5, 7, 7a, 5b, 7b, 7c.
 
-**Evaluation Context:** Building  
-**Data Lookup:** None  
-**Function Call:**  
+**Function Calls:**  
 
 1. get_baseline_system_types()
 2. is_baseline_system_type()
