@@ -11,9 +11,9 @@ from rct229.schema.schema_utils import *
 
 # ---------------------------------------USER INPUTS---------------------------------------
 
-spreadsheet_name = "example_rmrs.xlsx"
-json_name = "envelope_examples.json"
-sheet_name = "Envelope"
+spreadsheet_name = "envelope_tcd_master.xlsx"
+json_name = "envelope_tests.json"
+sheet_name = "TCDs"
 
 # --------------------------------------SCRIPT STARTS--------------------------------------
 
