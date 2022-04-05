@@ -1,20 +1,21 @@
 
 # Airside System - Rule 23-5  
 
+**Schema Version:** 0.0.10  
+**Mandatory Rule:** True  
 **Rule ID:** 23-5  
 **Rule Description:** For baseline systems 6 and 8, Fans in parallel VAV fan-powered boxes shall be sized for 50% of the peak design primary air (from the VAV air-handling unit) flow rate and shall be modeled with 0.35 W/cfm fan power.  
 **Rule Assertion:** B-RMR = expected value  
 **Appendix G Section:** Section 23 Air-side  
-**Appendix G Section Reference:** Section G3.1.3.14 Fan Power and Control (Systems 6 and 8)  
+**90.1 Section Reference:** Section G3.1.3.14 Fan Power and Control (Systems 6 and 8)  
+**Data Lookup:** None  
+**Evaluation Context:** Building  
 
-**Applicability:** All required data elements exist for B_RMR  
 **Applicability Checks:**  
 
 1. B-RMR is modeled with at least one air-side system that is Type-6, 8, 8a, 6b, 8b.  
 
-**Evaluation Context:** Building  
-**Data Lookup:** None  
-**Function Call:**  
+**Function Calls:**  
 
 1. get_baseline_system_types()
 2. is_baseline_system_type()
