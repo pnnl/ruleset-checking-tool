@@ -4,6 +4,8 @@ from rct229.ruleset_functions.get_opaque_surface_type import get_opaque_surface_
 from rct229.schema.config import ureg
 
 # Constants
+from rct229.utils.assertions import MissingKeyException
+
 DEGREES = ureg("degrees")
 
 TEST_SURFACES = {
@@ -38,6 +40,21 @@ TEST_SURFACES = {
         "tilt": 180 * DEGREES,
     },
 }
+
+MISS_KEY_SURFACE = {
+    "ABOVE-GRADE WALL": {
+        "id": "surface",
+        "adjacent_to": "INTERIOR",
+        "construction": {"has_radiant_heating": False},
+    },
+}
+
+
+def test__get_opaque_surface_type_raise_exception():
+    try:
+        get_opaque_surface_type(MISS_KEY_SURFACE["ABOVE-GRADE WALL"])
+    except MissingKeyException as ke:
+        assert str(ke) == "$:surface is missing tilt field"
 
 
 def test__get_opaque_surface_type():

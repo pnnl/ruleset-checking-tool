@@ -1,4 +1,5 @@
 from rct229.schema.config import ureg
+from rct229.utils.assertions import assert_required_fields, getattr_
 
 DEGREES = ureg("degrees")
 MIN_FLOOR_TILT = 120 * DEGREES
@@ -17,6 +18,16 @@ class OpaqueSurfaceType:
     HEATED_SOG: str = "HEATED SLAB-ON-GRADE"
     ROOF: str = "ROOF"
     UNHEATED_SOG: str = "UNHEATED SLAB-ON-GRADE"
+
+
+# Intended for export and internal use
+GET_OPAQUE_SURFACE_TYPE__REQUIRED_FIELDS = {
+    "surface": {
+        "$": [
+            "tilt",
+        ],
+    }
+}
 
 
 def get_opaque_surface_type(surface):
@@ -41,6 +52,10 @@ def get_opaque_surface_type(surface):
         One of the following surface types: "ABOVE-GRADE WALL", "BELOW-GRADE WALL",
         "FLOOR", "HEATED SLAB-ON-GRADE", "ROOF", "UNHEATED SLAB-ON-GRADE"
     """
+    assert_required_fields(
+        GET_OPAQUE_SURFACE_TYPE__REQUIRED_FIELDS["surface"], surface
+    )
+
     surface_tilt = surface["tilt"]
 
     # Check for roof
@@ -50,17 +65,18 @@ def get_opaque_surface_type(surface):
     # Check for a floor type
     elif MIN_FLOOR_TILT <= surface_tilt <= MAX_FLOOR_TILT:
         if (
-            surface["construction"].get("has_radiant_heating")
-            and surface["adjacent_to"] == OpaqueSurfaceType.GROUND
+            # need to check for None or false or true
+            getattr_(surface, "surface", "construction").get("has_radiant_heating")
+            and getattr_(surface, "surface", "adjacent_to") == OpaqueSurfaceType.GROUND
         ):
             surface_type = OpaqueSurfaceType.HEATED_SOG
-        elif surface["adjacent_to"] == OpaqueSurfaceType.GROUND:
+        elif getattr_(surface, "surface", "adjacent_to") == OpaqueSurfaceType.GROUND:
             surface_type = OpaqueSurfaceType.UNHEATED_SOG
         else:
             surface_type = OpaqueSurfaceType.FLOOR
 
     # Is a wall
-    elif surface["adjacent_to"] == OpaqueSurfaceType.GROUND:
+    elif getattr_(surface, "surface", "adjacent_to") == OpaqueSurfaceType.GROUND:
         surface_type = OpaqueSurfaceType.BELOW_GRADE_WALL
     else:
         surface_type = OpaqueSurfaceType.ABOVE_GRADE_WALL

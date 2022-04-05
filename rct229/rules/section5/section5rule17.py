@@ -11,7 +11,7 @@ from rct229.ruleset_functions.get_surface_conditioning_category_dict import (
 from rct229.ruleset_functions.get_surface_conditioning_category_dict import (
     get_surface_conditioning_category_dict,
 )
-from rct229.utils.assertions import getattr_
+from rct229.utils.assertions import getattr_, RCTException
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.match_lists import match_lists_by_id
 from rct229.utils.std_comparisons import std_equal
@@ -136,7 +136,7 @@ class Section5Rule17(RuleDefinitionListIndexedBase):
                     # Will never reach this line
                     # The OST defaults all unidentifiable surfaces to above wall grade
                     # Serve code completeness
-                    raise Exception(f"Unrecognized surface type: {surface_b_type}")
+                    raise RCTException(f"Unrecognized surface type: {surface_b_type}")
 
             def rule_check(self, context, calc_vals, data=None):
                 baseline_surface_type = calc_vals["baseline_surface_type"]
