@@ -21,6 +21,7 @@ VERTICAL_FENESTRATION_BUILDING_AREA_TYPE_TO_WWR_BUILDING_TYPE_MAP = {
     "SCHOOL_PRIMARY": "School (primary)",
     "SCHOOL_SECONDARY_AND_UNIVERSITY": "School (secondary and university)",
     "WAREHOUSE_NONREFRIGERATED": "Warehouse (nonrefrigerated)",
+    "OTHER": "All others",
 }
 
 
