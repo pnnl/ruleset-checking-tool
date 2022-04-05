@@ -13,7 +13,7 @@ from rct229.ruleset_functions.get_zone_conditioning_category_dict import (
     get_zone_conditioning_category_dict,
 )
 from rct229.schema.config import ureg
-from rct229.utils.assertions import assert_, assert_required_fields, getattr_
+from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.pint_utils import ZERO, pint_sum
 
