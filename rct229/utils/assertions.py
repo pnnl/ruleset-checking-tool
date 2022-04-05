@@ -9,20 +9,20 @@ class AssertionStatusCategory:
 
 
 class RCTException(Exception):
-    def __init__(self, message, status=AssertionStatusCategory.SEVERE):
+    def __init__(self, message):
         super().__init__(message)
-        self.status = status
+        # self.status = status
 
 
 class RCTFailureException(RCTException):
     def __init__(self, message):
-        super().__init__(message, AssertionStatusCategory.SEVERE)
+        super().__init__(message)
 
 
 class MissingKeyException(RCTException):
     def __init__(self, object_name, obj_id, first_key):
         message = f"{object_name}:{obj_id} is missing {first_key} field"
-        super().__init__(message, AssertionStatusCategory.SEVERE)
+        super().__init__(message)
 
 
 def assert_(bool, err_msg):
