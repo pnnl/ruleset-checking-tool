@@ -409,12 +409,18 @@
                                                         "id": "Surface 1",
                                                         "adjacent_to": "GROUND",
                                                         "tilt": 90,
+                                                        "area": 9.290303999999999,
                                                         "construction": {
                                                             "id": "Construction 1",
                                                             "c_factor": 6.473221113108893
                                                         }
                                                     }
                                                 ]
+                                            },
+                                            {
+                                                "id": "Zone 2",
+                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1"
                                             }
                                         ],
                                         "heating_ventilation_air_conditioning_systems": [
@@ -422,11 +428,11 @@
                                                 "id": "HVAC 1",
                                                 "cooling_system": {
                                                     "id": "Cooling System 1",
-                                                    "sensible_cool_capacity": 17585.0
+                                                    "sensible_cool_capacity": 0.0
                                                 },
                                                 "heating_system": {
                                                     "id": "Heating System 1",
-                                                    "heat_capacity": 8792.133333333333
+                                                    "heat_capacity": 699.8538133333334
                                                 }
                                             }
                                         ]
@@ -497,12 +503,18 @@
                                                         "id": "Surface 1",
                                                         "adjacent_to": "GROUND",
                                                         "tilt": 90,
+                                                        "area": 9.290303999999999,
                                                         "construction": {
                                                             "id": "Construction 1",
                                                             "c_factor": 0.363408904595587
                                                         }
                                                     }
                                                 ]
+                                            },
+                                            {
+                                                "id": "Zone 2",
+                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1"
                                             }
                                         ],
                                         "heating_ventilation_air_conditioning_systems": [
@@ -510,11 +522,11 @@
                                                 "id": "HVAC 1",
                                                 "cooling_system": {
                                                     "id": "Cooling System 1",
-                                                    "sensible_cool_capacity": 17585.0
+                                                    "sensible_cool_capacity": 0.0
                                                 },
                                                 "heating_system": {
                                                     "id": "Heating System 1",
-                                                    "heat_capacity": 8792.133333333333
+                                                    "heat_capacity": 699.8538133333334
                                                 }
                                             }
                                         ]
