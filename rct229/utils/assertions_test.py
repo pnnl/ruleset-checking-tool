@@ -1,4 +1,4 @@
-from rct229.utils.assertions import getattr_, MissingKeyException
+from rct229.utils.assertions import MissingKeyException, getattr_
 
 GETATTR_TEST_OBJ = {"field1": {"id": "f1", "field2": {"id": "f1", "field3": 7}}}
 
