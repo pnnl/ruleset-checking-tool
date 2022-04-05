@@ -28,4 +28,12 @@ Inputs:
 Returns:  
 - **data_element**: A RMR Data Element object.
 
+## convert_event_schedule_to_hourly 
+Description: Convert an event type schedule to an hourly type schedule.  
+Inputs:  
+- **Schedule**: The event type schedule that needs to be converted.
+
+Returns:  
+- **Schedule**: The equivalent hourly type schedule.
+
 **[Back](_toc.md)**
