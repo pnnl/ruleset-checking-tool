@@ -120,6 +120,7 @@ class RuleDefinitionBase:
                         # Determine if manual check is required
                         if self.manual_check_required(context, calc_vals, data):
                             outcome["result"] = "UNDETERMINED"
+                            outcome["message"] = "MANUAL CHECK REQUIRED"
                         else:
                             # Evaluate the actual rule check
                             result = self.rule_check(context, calc_vals, data)
@@ -129,10 +130,13 @@ class RuleDefinitionBase:
                             # Assume result type is bool
                             elif result:
                                 outcome["result"] = "PASSED"
+                                outcome["message"] = "RULE CHECK PASSED"
                             else:
                                 outcome["result"] = "FAILED"
+                                outcome["message"] = "RULE CHECK FAILED"
                     else:
                         outcome["result"] = "NOT_APPLICABLE"
+                        outcome["message"] = "RULE CHECK NOT APPLICABLE"
                 except MissingKeyException as ke:
                     outcome["result"] = "UNDETERMINED"
                     outcome["message"] = str(ke)
