@@ -126,25 +126,14 @@ class Section5Rule28(RuleDefinitionListIndexedBase):
                     }
 
                 def rule_check(self, context, calc_vals, data=None):
-                    if (
-                        std_equal(
+                    return std_equal(
                             calc_vals["baseline_subsurface_u_factor"],
                             calc_vals["proposed_subsurface_u_factor"],
-                        )
-                        and std_equal(
+                        ) and std_equal(
                             calc_vals["solar_heat_gain_coefficient"],
                             calc_vals["solar_heat_gain_coefficient"],
-                        )
-                        and std_equal(
+                        ) and std_equal(
                             calc_vals["glazed_area"], calc_vals["glazed_area"]
-                        )
-                        and std_equal(
+                        ) and std_equal(
                             calc_vals["opaque_area"], calc_vals["opaque_area"]
                         )
-                    ):
-                        return True
-                    else:
-                        calc_vals[
-                            "warning"
-                        ] = "SUBSURFACE THAT IS NOT REGULATED (NOT PART OF BUILDING ENVELOPE) IS NOT MODELED WITH THE SAME AREA, U-FACTOR AND SHGC IN THE BASELINE AS IN THE PROPOSED DESIGN."
-                        return False
