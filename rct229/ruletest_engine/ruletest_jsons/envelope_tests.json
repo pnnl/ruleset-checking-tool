@@ -401,7 +401,7 @@
                                                         "tilt": 0,
                                                         "construction": {
                                                             "id": "Construction 1",
-                                                            "u_factor": 0.06305330288229763
+                                                            "u_factor": 0.35773064046128095
                                                         }
                                                     }
                                                 ]
@@ -489,7 +489,7 @@
                                                         "tilt": 0,
                                                         "construction": {
                                                             "id": "Construction 1",
-                                                            "u_factor": 0.06305330288229763
+                                                            "u_factor": 0.35773064046128095
                                                         }
                                                     }
                                                 ]
@@ -522,7 +522,7 @@
         "Rule": 5,
         "Test": "c",
         "test_description": "Building is located in climate zone 4A and includes a space that has residential occupancy type and is  coditioned based on heating capacity of the HVAC system that servies the parent zone. The baseline roof U-factor for the space is not established correctly.",
-        "expected_rule_outcome": "pass",
+        "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-5",
             "ruleset_reference": "G3.1 #5 (b) Opaque assemblies used for new buildings, existing buildings, or additions ... shall match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8:",
@@ -577,7 +577,7 @@
                                                         "tilt": 0,
                                                         "construction": {
                                                             "id": "Construction 1",
-                                                            "u_factor": 0.21804466192258232
+                                                            "u_factor": 1.2378615812787181
                                                         }
                                                     }
                                                 ]
@@ -665,7 +665,7 @@
                                                         "tilt": 0,
                                                         "construction": {
                                                             "id": "Construction 1",
-                                                            "u_factor": 0.06305330288229763
+                                                            "u_factor": 0.35773064046128095
                                                         }
                                                     }
                                                 ]
@@ -698,7 +698,7 @@
         "Rule": 5,
         "Test": "e",
         "test_description": "Building is located in climate zone 4A and includes a space that has nonresidential occupancy type and is  coditioned based on heating capacity of the HVAC system that servies the parent zone. The baseline roof U-factor for the space is not established correctly.",
-        "expected_rule_outcome": "pass",
+        "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-5",
             "ruleset_reference": "G3.1 #5 (b) Opaque assemblies used for new buildings, existing buildings, or additions ... shall match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8:",
@@ -753,7 +753,7 @@
                                                         "tilt": 0,
                                                         "construction": {
                                                             "id": "Construction 1",
-                                                            "u_factor": 0.21804466192258232
+                                                            "u_factor": 1.2378615812787181
                                                         }
                                                     }
                                                 ]
@@ -841,7 +841,7 @@
                                                         "tilt": 0,
                                                         "construction": {
                                                             "id": "Construction 1",
-                                                            "u_factor": 0.21804466192258232
+                                                            "u_factor": 1.2378615812787181
                                                         }
                                                     }
                                                 ]
@@ -874,7 +874,7 @@
         "Rule": 5,
         "Test": "g",
         "test_description": "A space is semiheated based on heating and cooling capacity of the HVAC system that servies the the parent zone. Building is located in climate zone 4A. The baseline roof U-factor for the space is not established correctly.",
-        "expected_rule_outcome": "pass",
+        "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-5",
             "ruleset_reference": "G3.1 #5 (b) Opaque assemblies used for new buildings, existing buildings, or additions ... shall match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8:",
@@ -929,7 +929,7 @@
                                                         "tilt": 0,
                                                         "construction": {
                                                             "id": "Construction 1",
-                                                            "u_factor": 0.06305330288229763
+                                                            "u_factor": 0.35773064046128095
                                                         }
                                                     }
                                                 ]
@@ -1017,7 +1017,7 @@
                                                         "tilt": 90,
                                                         "construction": {
                                                             "id": "Construction 1",
-                                                            "c_factor": 1.1400671216679124
+                                                            "c_factor": 6.473221113108893
                                                         }
                                                     }
                                                 ]
@@ -1105,7 +1105,7 @@
                                                         "tilt": 90,
                                                         "construction": {
                                                             "id": "Construction 1",
-                                                            "c_factor": 1.1400671216679124
+                                                            "c_factor": 6.473221113108893
                                                         }
                                                     }
                                                 ]
@@ -1193,7 +1193,7 @@
                                                         "tilt": 90,
                                                         "construction": {
                                                             "id": "Construction 1",
-                                                            "c_factor": 0.06393393560411743
+                                                            "c_factor": 0.363408904595587
                                                         }
                                                     }
                                                 ]
@@ -1281,7 +1281,7 @@
                                                         "tilt": 90,
                                                         "construction": {
                                                             "id": "Construction 1",
-                                                            "c_factor": 1.1400671216679124
+                                                            "c_factor": 6.473221113108893
                                                         }
                                                     }
                                                 ]
@@ -1369,7 +1369,7 @@
                                                         "tilt": 90,
                                                         "construction": {
                                                             "id": "Construction 1",
-                                                            "c_factor": 1.1400671216679124
+                                                            "c_factor": 6.473221113108893
                                                         }
                                                     }
                                                 ]
@@ -1457,7 +1457,7 @@
                                                         "tilt": 90,
                                                         "construction": {
                                                             "id": "Construction 1",
-                                                            "c_factor": 0.06393393560411743
+                                                            "c_factor": 0.363408904595587
                                                         }
                                                     }
                                                 ]
@@ -1545,7 +1545,7 @@
                                                         "tilt": 90,
                                                         "construction": {
                                                             "id": "construction_1",
-                                                            "u_factor": 0.06393393560411743
+                                                            "u_factor": 0.363408904595587
                                                         }
                                                     }
                                                 ]
@@ -1633,7 +1633,7 @@
                                                         "tilt": 90,
                                                         "construction": {
                                                             "id": "construction_1",
-                                                            "u_factor": 0.06393393560411743
+                                                            "u_factor": 0.363408904595587
                                                         }
                                                     }
                                                 ]
@@ -1721,7 +1721,7 @@
                                                         "tilt": 90,
                                                         "construction": {
                                                             "id": "construction_1",
-                                                            "u_factor": 0.21804466192258232
+                                                            "u_factor": 1.2378615812787181
                                                         }
                                                     }
                                                 ]
@@ -1809,7 +1809,7 @@
                                                         "tilt": 90,
                                                         "construction": {
                                                             "id": "construction_1",
-                                                            "u_factor": 0.12399308723222774
+                                                            "u_factor": 0.7041047526539498
                                                         }
                                                     }
                                                 ]
@@ -1897,7 +1897,7 @@
                                                         "tilt": 90,
                                                         "construction": {
                                                             "id": "construction_1",
-                                                            "u_factor": 0.21804466192258232
+                                                            "u_factor": 1.2378615812787181
                                                         }
                                                     }
                                                 ]
@@ -1985,7 +1985,7 @@
                                                         "tilt": 90,
                                                         "construction": {
                                                             "id": "construction_1",
-                                                            "u_factor": 0.12399308723222774
+                                                            "u_factor": 0.7041047526539498
                                                         }
                                                     }
                                                 ]
@@ -2073,7 +2073,7 @@
                                                         "tilt": 90,
                                                         "construction": {
                                                             "id": "construction_1",
-                                                            "u_factor": 0.06305330288229763
+                                                            "u_factor": 0.35773064046128095
                                                         }
                                                     }
                                                 ]

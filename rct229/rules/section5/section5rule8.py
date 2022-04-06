@@ -8,9 +8,12 @@ from rct229.ruleset_functions.get_opaque_surface_type import OpaqueSurfaceType a
 from rct229.ruleset_functions.get_opaque_surface_type import get_opaque_surface_type
 from rct229.ruleset_functions.get_surface_conditioning_category_dict import (
     SurfaceConditioningCategory as SCC,
+)
+from rct229.ruleset_functions.get_surface_conditioning_category_dict import (
     get_surface_conditioning_category_dict,
 )
 from rct229.utils.jsonpath_utils import find_all
+from rct229.utils.std_comparisons import std_equal
 
 
 class Section5Rule8(RuleDefinitionListIndexedBase):
@@ -65,23 +68,30 @@ class Section5Rule8(RuleDefinitionListIndexedBase):
             def __init__(self):
                 super(Section5Rule8.BuildingRule.BelowGradeWallRule, self).__init__(
                     rmrs_used=UserBaselineProposedVals(False, True, False),
-                    required_fields={"$": ["construction"], "construction": ["c_factor"]},
+                    required_fields={
+                        "$": ["construction"],
+                        "construction": ["c_factor"],
+                    },
                 )
 
             def get_calc_vals(self, context, data=None):
                 climate_zone: str = data["climate_zone"]
                 below_grade_wall = context.baseline
-                scc: str = data["surface_conditioning_category_dict"][below_grade_wall["id"]]
+                scc: str = data["surface_conditioning_category_dict"][
+                    below_grade_wall["id"]
+                ]
                 wall_c_factor = below_grade_wall["construction"]["c_factor"]
 
                 target_c_factor = None
                 target_c_factor_res = None
                 target_c_factor_nonres = None
 
-                if scc in [SCC.SEMI_EXTERIOR, SCC.EXTERIOR_RESIDENTIAL, SCC.EXTERIOR_NON_RESIDENTIAL]:
-                    target = table_G34_lookup(
-                        climate_zone, scc, OST.BELOW_GRADE_WALL
-                    )
+                if scc in [
+                    SCC.SEMI_EXTERIOR,
+                    SCC.EXTERIOR_RESIDENTIAL,
+                    SCC.EXTERIOR_NON_RESIDENTIAL,
+                ]:
+                    target = table_G34_lookup(climate_zone, scc, OST.BELOW_GRADE_WALL)
                     target_c_factor = target["c_factor"]
                 elif scc == SCC.EXTERIOR_MIXED:
                     target_c_factor_res = table_G34_lookup(
@@ -105,12 +115,13 @@ class Section5Rule8(RuleDefinitionListIndexedBase):
                 target_c_factor_res = calc_vals["target_c_factor_res"]
                 target_c_factor_nonres = calc_vals["target_c_factor_nonres"]
                 return (
-                        target_c_factor_res is not None
-                        and target_c_factor_nonres is not None
-                        and target_c_factor_res != target_c_factor_nonres
+                    target_c_factor_res is not None
+                    and target_c_factor_nonres is not None
+                    and target_c_factor_res != target_c_factor_nonres
                 )
 
             def rule_check(self, context, calc_vals, data=None):
                 below_grade_wall_c_factor = calc_vals["below_grade_wall_c_factor"]
                 target_c_factor = calc_vals["target_c_factor"]
-                return below_grade_wall_c_factor == target_c_factor
+
+                return std_equal(below_grade_wall_c_factor, target_c_factor)
