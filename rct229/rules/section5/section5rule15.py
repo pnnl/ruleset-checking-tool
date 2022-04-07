@@ -5,12 +5,12 @@ from rct229.rule_engine.rule_base import (
     RuleDefinitionListIndexedBase,
 )
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
-from rct229.ruleset_functions.get_opaque_surface_type import (
-    OpaqueSurfaceType as OST,
-    get_opaque_surface_type,
-)
+from rct229.ruleset_functions.get_opaque_surface_type import OpaqueSurfaceType as OST
+from rct229.ruleset_functions.get_opaque_surface_type import get_opaque_surface_type
 from rct229.ruleset_functions.get_surface_conditioning_category_dict import (
     SurfaceConditioningCategory as SCC,
+)
+from rct229.ruleset_functions.get_surface_conditioning_category_dict import (
     get_surface_conditioning_category_dict,
 )
 from rct229.utils.jsonpath_utils import find_all
@@ -79,8 +79,12 @@ class Section5Rule15(RuleDefinitionListIndexedBase):
             def get_calc_vals(self, context, data=None):
                 climate_zone: str = data["climate_zone"]
                 slab_on_grade_floor = context.baseline
-                scc: str = data["surface_conditioning_category_dict"][slab_on_grade_floor["id"]]
-                slab_on_grade_floor_f_factor = slab_on_grade_floor["construction"]["f_factor"]
+                scc: str = data["surface_conditioning_category_dict"][
+                    slab_on_grade_floor["id"]
+                ]
+                slab_on_grade_floor_f_factor = slab_on_grade_floor["construction"][
+                    "f_factor"
+                ]
 
                 target_f_factor = None
                 target_f_factor_res = None
@@ -91,16 +95,16 @@ class Section5Rule15(RuleDefinitionListIndexedBase):
                     SCC.EXTERIOR_NON_RESIDENTIAL,
                     SCC.SEMI_EXTERIOR,
                 ]:
-                    target_f_factor = table_G34_lookup(climate_zone, scc, OST.UNHEATED_SOG)[
-                        "u_value"
-                    ]
+                    target_f_factor = table_G34_lookup(
+                        climate_zone, scc, OST.UNHEATED_SOG
+                    )["f_value"]
                 elif scc == SCC.EXTERIOR_MIXED:
                     target_f_factor_res = table_G34_lookup(
                         climate_zone, SCC.EXTERIOR_RESIDENTIAL, OST.UNHEATED_SOG
-                    )["u_value"]
+                    )["f_value"]
                     target_f_factor_nonres = table_G34_lookup(
                         climate_zone, SCC.EXTERIOR_NON_RESIDENTIAL, OST.UNHEATED_SOG
-                    )["u_value"]
+                    )["f_value"]
                     if target_f_factor_res == target_f_factor_nonres:
                         target_f_factor = target_f_factor_res
 
@@ -115,11 +119,7 @@ class Section5Rule15(RuleDefinitionListIndexedBase):
                 target_f_factor_res = calc_vals["target_f_factor_res"]
                 target_f_factor_nonres = calc_vals["target_f_factor_nonres"]
 
-                return (
-                    target_f_factor_res is not None
-                    and target_f_factor_nonres is not None
-                    and target_f_factor_res != target_f_factor_nonres
-                )
+                return target_f_factor_res != target_f_factor_nonres
 
             def rule_check(self, context, calc_vals, data=None):
                 slab_on_grade_floor_f_factor = calc_vals["slab_on_grade_floor_f_factor"]
