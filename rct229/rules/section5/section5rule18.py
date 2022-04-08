@@ -3,10 +3,10 @@ from rct229.rule_engine.rule_base import RuleDefinitionListIndexedBase, RuleDefi
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 from rct229.ruleset_functions.get_area_type_window_wall_area_dict import get_area_type_window_wall_area_dict
 from rct229.utils.jsonpath_utils import find_all
+from rct229.utils.std_comparisons import std_equal
 
-MSG_WARN_MATCHED = "BUILDING IS NOT ALL NEW AND BASELINE WWR MATCHES VALUES PRESCRIBED IN TABLE G3.1.1-1. HOWEVER, THE FENESTRATION AREA PRESCRIBED IN TABLE G3.1.1-1 DOES NOT APPLY TO THE EXISTING ENVELOPE PER TABLE G3.1 BASELINE COLUMN #5 (C). FOR EXISTING ENVELOPE, THE BASELINE FENESTRATION AREA MUST EQUAL THE EXISTING FENESTRATION AREA PRIOR TO THE PROPOSED WORK. A MANUAL CHECK IS REQUIRED TO VERIFY COMPLIANCE."
-MSG_WARN_MISMATCHED = "BUILDING IS NOT ALL NEW AND BASELINE WWR DOES NOT MATCH VALUES PRESCRIBED IN TABLE G3.1.1-1. HOWEVER, THE FENESTRATION AREA PRESCRIBED IN TABLE G3.1.1-1 DOES NOT APPLY TO THE EXISTING ENVELOPE PER TABLE G3.1 BASELINE COLUMN #5(c). FOR EXISTING ENVELOPE, THE BASELINE FENESTRATION AREA MUST EQUAL THE EXISTING FENESTRATION AREA PRIOR TO THE PROPOSED WORK. A MANUAL CHECK IS REQUIRED TO VERIFY COMPLIANCE."
-
+CASE3_WARN_MESSAGE = "BUILDING IS NOT ALL NEW AND BASELINE WWR MATCHES VALUES PRESCRIBED IN TABLE G3.1.1-1. HOWEVER, THE FENESTRATION AREA PRESCRIBED IN TABLE G3.1.1-1 DOES NOT APPLY TO THE EXISTING ENVELOPE PER TABLE G3.1 BASELINE COLUMN #5 (C). FOR EXISTING ENVELOPE, THE BASELINE FENESTRATION AREA MUST EQUAL THE EXISTING FENESTRATION AREA PRIOR TO THE PROPOSED WORK. A MANUAL CHECK IS REQUIRED TO VERIFY COMPLIANCE."
+CASE4_WARN_MESSAGE = "BUILDING IS NOT ALL NEW AND BASELINE WWR DOES NOT MATCH VALUES PRESCRIBED IN TABLE G3.1.1-1. HOWEVER, THE FENESTRATION AREA PRESCRIBED IN TABLE G3.1.1-1 DOES NOT APPLY TO THE EXISTING ENVELOPE PER TABLE G3.1 BASELINE COLUMN #5(c). FOR EXISTING ENVELOPE, THE BASELINE FENESTRATION AREA MUST EQUAL THE EXISTING FENESTRATION AREA PRIOR TO THE PROPOSED WORK. A MANUAL CHECK IS REQUIRED TO VERIFY COMPLIANCE."
 
 class Section5Rule18(RuleDefinitionListIndexedBase):
     """Rule 2 of ASHRAE 90.1-2019 Appendix G Section 5 (Envelope)"""
@@ -14,6 +14,10 @@ class Section5Rule18(RuleDefinitionListIndexedBase):
     def __init__(self):
         super(Section5Rule18, self).__init__(
             rmrs_used=UserBaselineProposedVals(False, True, False),
+            required_fields={
+                "$": ["weather"],
+                "weather": ["climate_zone"],
+            },
             each_rule=Section5Rule18.BuildingRule(),
             index_rmr="baseline",
             id="5-18",
@@ -29,88 +33,83 @@ class Section5Rule18(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section5Rule18.BuildingRule, self).__init__(
                 rmrs_used=UserBaselineProposedVals(False, True, False),
-                required_fields={},
-                each_rule=Section5Rule18.BuildingRule.BuildingSegmentRule(),
+                required_fields={
+                    "$": ["building_segments"],
+                    "building_segments": ["is_all_new", "area_type_vertical_fenestration"],
+                },
                 index_rmr="baseline",
+                each_rule=Section5Rule18.BuildingRule.AreaTypeRule(),
             )
-
-        def create_context_list(self, context, data=None):
-            building = context.baseline
-            # List of all baseline roof surfaces to become the context for RoofRule
-            return [
-                UserBaselineProposedVals(None, building_segment, None)
-                for building_segment in find_all("$..building_segments[*]", building)
-            ]
 
         def create_data(self, context, data=None):
             building = context.baseline
-            # Merge into the existing data dict
+            area_type_window_wall_area_dict_b = get_area_type_window_wall_area_dict(
+                    data["climate_zone"], building
+                )
+            is_area_type_all_new_dict = {}
+
+            for building_segment in find_all("building_segments", building):
+                area_type = building_segment["area_type_vertical_fenestration"]
+                if area_type not in is_area_type_all_new_dict:
+                    is_area_type_all_new_dict[area_type] = building_segment["is_all_new"]
+                else:
+                    is_area_type_all_new_dict[area_type] = building_segment["is_all_new"]
+
             return {
                 **data,
-                "area_type_vertical_fenestration": get_area_type_window_wall_area_dict(
-                    data["climate_zone"], building
-                ),
+                "is_area_type_all_new_dict": is_area_type_all_new_dict,
+                "area_type_window_wall_ratio_dict": area_type_window_wall_area_dict_b,
             }
 
-        class BuildingSegmentRule(RuleDefinitionBase):
+        def create_context_list(self, context, data=None):
+            building = context.baseline
+            area_type_to_building_segment_dict = {}
+            for building_segment in find_all("building_segments", building):
+                area_type = building_segment["area_type_vertical_fenestration"]
+                if area_type not in area_type_to_building_segment_dict:
+                    # create a subcontext from building_segments.
+                    area_type_to_building_segment_dict[area_type] = {"building_segments": []}
+                area_type_to_building_segment_dict[area_type]["building_segments"].append(building_segment)
+
+            return [
+                UserBaselineProposedVals(None, building_segments, None)
+                for area_type, building_segments in area_type_to_building_segment_dict.items()
+            ]
+
+        class AreaTypeRule(RuleDefinitionBase):
             def __init__(self):
-                super(Section5Rule18.BuildingRule.BuildingSegmentRule, self).__init__(
+                super(Section5Rule18.BuildingRule.AreaTypeRule, self).__init__(
                     rmrs_used=UserBaselineProposedVals(False, True, False),
-                    required_fields={"$": ["is_all_new"]},
                     )
 
             def get_calc_vals(self, context, data=None):
-                building_segment_b = context.baseline
-                window_wall_areas_dictionary_b = data["area_type_vertical_fenestration"]
+                building_segments_b = context.baseline
+                is_area_type_all_new_dict = data["is_area_type_all_new_dict"]
+                area_type_window_wall_ratio_b = data["area_type_window_wall_ratio_dict"]
 
-                area_type_vertical_fenestration = building_segment_b.get("area_type_vertical_fenestration")
-                building_segment_wwr = 0.0
-                target_area_type_wwr = 0.0
-
-                if area_type_vertical_fenestration is None:
-                    # if the building segment has no area_type_vertical_fenestration, then set the building_segment_wwr
-                    # to "None" list of window_wall_ratio. - indicate manual check is required
-                    building_segment_wwr = window_wall_areas_dictionary_b["None"]["total_window_area"] \
-                                             / window_wall_areas_dictionary_b["None"]["total_wall_area"]
-                    target_area_type_wwr = None
-                elif window_wall_areas_dictionary_b[area_type_vertical_fenestration]["total_wall_area"] == 0:
-                    # Calculation error - unlikely to happen, added for code completeness
-                    # indicate manual check is required
-                    building_segment_wwr = None
-                    target_area_type_wwr = None
-                else:
-                    building_segment_wwr = window_wall_areas_dictionary_b[area_type_vertical_fenestration]["total_window_area"] \
-                    / window_wall_areas_dictionary_b[area_type_vertical_fenestration]["total_wall_area"]
-
-                    if table_G3_1_1_1_lookup(building_segment_b.get("area_type_vertical_fenestration")):
-                        target_area_type_wwr = table_G3_1_1_1_lookup(building_segment_b.get("area_type_vertical_fenestration"))
-                    else:
-                        # Building_segment has area_type_vertical_fenestration but not it is not in Table G3.1.1-1.
-                        # Set it as Other type, which is 40%
-                        target_area_type_wwr = 0.4
+                # all building segments in AreaType rule has the same area type
+                # (see create_context_list function in the parent class)
+                area_type = building_segments_b[0]["area_type_vertical_fenestration"]
+                area_type_wwr = 0.0
+                area_type_target_wwr = 0.0
+                if area_type is not "NONE":
+                    area_type_wwr = area_type_window_wall_ratio_b[area_type]["total_window_area"] \
+                                       / area_type_window_wall_ratio_b[area_type]["total_wall_area"]
+                    area_type_target_wwr = table_G3_1_1_1_lookup(area_type)
 
                 return {
-                    "id": building_segment_b["id"],
-                    "area_type_vertical_fenestration": area_type_vertical_fenestration,
-                    "building_segment_wwr": building_segment_wwr,
-                    "target_area_type_wwr": target_area_type_wwr
+                    "is_all_new":  is_area_type_all_new_dict[area_type],
+                    "area_type_wwr": area_type_wwr,
+                    "area_type_target_wwr": area_type_target_wwr
                 }
 
             def manual_check_required(self, context, calc_vals=None, data=None):
-                return calc_vals["target_area_type_wwr"] is None
+                # Raise warning...based on checks?
+                return not calc_vals["is_all_new"]
 
             def rule_check(self, context, calc_vals=None, data=None):
-                building_segment = context.baseline
-                building_segment_wwr = calc_vals["building_segment_wwr"]
-                target_area_type_wwr = calc_vals["target_area_type_wwr"]
-                if building_segment["is_all_new"]:
-                    return building_segment_wwr == target_area_type_wwr
-                else:
-                    if building_segment_wwr == target_area_type_wwr:
-                        calc_vals["message"] = MSG_WARN_MATCHED
-                        return True
-                    else:
-                        calc_vals["message"] = MSG_WARN_MISMATCHED
-                        return False
+                area_type_wwr = calc_vals["area_type_wwr"]
+                area_type_target_wwr = calc_vals["area_type_target_wwr"]
+                return std_equal(area_type_target_wwr, area_type_wwr)
 
 

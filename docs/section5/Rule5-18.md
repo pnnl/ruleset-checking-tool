@@ -24,7 +24,7 @@
 
 - For each building segment in the Baseline model: `for building_segment_b in B_RMR...building_segments:`
 
-  - If area type has not been saved in is_area_type_all_new_dict, save building segment area type with its is_all_new flag  : `if NOT building_segment_b.area_type_vertical_fenestration in is_area_type_all_new_dict.keys(): is_area_type_all_new_dict[building_segment_b.area_type_vertical_fenestration] = building_segment_b.is_all_new`
+  - If area type has not been saved in is_area_type_all_new_dict, save building segment area type with its is_all_new flag  : `if NOT building_segment_b.area_type_vertical_fenestration in is_area_type_all_new_dict.keys(): `is_area_type_all_new_dict`[building_segment_b.area_type_vertical_fenestration] = building_segment_b.is_all_new`
 
   - Else if building segment is_all_new flag is FALSE, update is_area_type_all_new_dict: `else if NOT building_segment_b.is_all_new: is_area_type_all_new_dict[building_segment_b.area_type_vertical_fenestration] = building_segment_b.is_all_new`
 
