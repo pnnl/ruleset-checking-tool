@@ -4,11 +4,7 @@ from rct229.ruleset_functions.get_hvac_zone_list_w_area_dict import (
 )
 from rct229.ruleset_functions.get_opaque_surface_type import get_opaque_surface_type
 from rct229.schema.config import ureg
-from rct229.utils.assertions import (
-    assert_,
-    assert_required_fields,
-    getattr_,
-)
+from rct229.utils.assertions import assert_, assert_required_fields, getattr_
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.pint_utils import ZERO, pint_sum
 
@@ -193,8 +189,7 @@ def get_zone_conditioning_category_dict(climate_zone, building):
                 zone_directly_conditioned_ua = ZERO.UA
                 zone_other_ua = ZERO.UA
                 assert_(
-                    find_all("surfaces[*]", zone),
-                    f"zone:{zone_id} has no surfaces"
+                    find_all("surfaces[*]", zone), f"zone:{zone_id} has no surfaces"
                 )
                 for surface in zone["surfaces"]:
                     subsurfaces = find_all("subsurfaces[*]", surface)
