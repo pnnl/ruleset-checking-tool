@@ -97,14 +97,14 @@ class Section5Rule15(RuleDefinitionListIndexedBase):
                 ]:
                     target_f_factor = table_G34_lookup(
                         climate_zone, scc, OST.UNHEATED_SOG
-                    )["f_value"]
+                    )["f_factor"]
                 elif scc == SCC.EXTERIOR_MIXED:
                     target_f_factor_res = table_G34_lookup(
                         climate_zone, SCC.EXTERIOR_RESIDENTIAL, OST.UNHEATED_SOG
-                    )["f_value"]
+                    )["f_factor"]
                     target_f_factor_nonres = table_G34_lookup(
                         climate_zone, SCC.EXTERIOR_NON_RESIDENTIAL, OST.UNHEATED_SOG
-                    )["f_value"]
+                    )["f_factor"]
                     if target_f_factor_res == target_f_factor_nonres:
                         target_f_factor = target_f_factor_res
 
@@ -122,7 +122,7 @@ class Section5Rule15(RuleDefinitionListIndexedBase):
                 return target_f_factor_res != target_f_factor_nonres
 
             def rule_check(self, context, calc_vals, data=None):
-                slab_on_grade_floor_f_factor = calc_vals["slab_on_grade_floor_f_factor"]
+                slab_on_grade_floor_f_factor = calc_vals["target_f_factor"]
                 target_f_factor = calc_vals["target_f_factor"]
 
                 return std_equal(slab_on_grade_floor_f_factor, target_f_factor)
