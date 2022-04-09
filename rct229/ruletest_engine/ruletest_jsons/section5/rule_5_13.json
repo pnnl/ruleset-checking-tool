@@ -1,18 +1,18 @@
 {
-    "rule-5-5-a": {
+    "rule-5-13-a": {
         "Section": 5,
-        "Rule": 5,
+        "Rule": 13,
         "Test": "a",
-        "test_description": "Building is located in climate zone 4A and includes a space that has residential occupancy type and is  coditioned based on heating capacity of the HVAC system that servies the parent zone. The baseline roof U-factor for the space is established correctly.",
+        "test_description": "Building is located in climate zone 4A and includes a space that has residential occupancy type and is  conditionedbased on heating capacity of the HVAC system that servies the parent zone. The baseline floor U-factor for the zone is established correctly.\n\n",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "5-5",
+            "rule_id": "5-13",
             "ruleset_reference": "G3.1 #5 (b) Opaque assemblies used for new buildings, existing buildings, or additions ... shall match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8:",
-            "rule_description": "Baseline roof assemblies must match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8",
+            "rule_description": "Baseline floor assemblies must  match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-9",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "rule_dependency": "None",
+            "rule_dependency": "Baseline heating and cooling capacities are established correctly (air-side HVAC rule TBD). This affects baseline space conditioning categories",
             "primary_rule": "Y",
             "schema_version": "0.0.12"
         },
@@ -56,10 +56,10 @@
                                                     {
                                                         "id": "Surface 1",
                                                         "adjacent_to": "EXTERIOR",
-                                                        "tilt": 0,
+                                                        "tilt": 90,
                                                         "construction": {
-                                                            "id": "Construction 1",
-                                                            "u_factor": 0.35773064046128095
+                                                            "id": "construction_1",
+                                                            "u_factor": 2.0612098807530947
                                                         }
                                                     }
                                                 ]
@@ -87,20 +87,20 @@
             }
         }
     },
-    "rule-5-5-b": {
+    "rule-5-13-b": {
         "Section": 5,
-        "Rule": 5,
+        "Rule": 13,
         "Test": "b",
-        "test_description": "Building is located in climate zone 4A and includes a space that has residential occupancy type and is  conditioned based on cooling capacity of the HVAC system that servies the parent zone. The baseline roof U-factor for the space is established correctly.",
+        "test_description": "Building is located in climate zone 4A and includes a space that has residential occupancy type and is  conditionedbased on cooling capacity of the HVAC system that servies the parent zone. The baseline floor U-factor for the zone is established correctly.\n\n",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "5-5",
+            "rule_id": "5-13",
             "ruleset_reference": "G3.1 #5 (b) Opaque assemblies used for new buildings, existing buildings, or additions ... shall match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8:",
-            "rule_description": "Baseline roof assemblies must match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8",
+            "rule_description": "Baseline floor assemblies must  match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-9",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "rule_dependency": "None",
+            "rule_dependency": "Baseline heating and cooling capacities are established correctly (air-side HVAC rule TBD). This affects baseline space conditioning categories",
             "primary_rule": "Y",
             "schema_version": "0.0.12"
         },
@@ -144,10 +144,10 @@
                                                     {
                                                         "id": "Surface 1",
                                                         "adjacent_to": "EXTERIOR",
-                                                        "tilt": 0,
+                                                        "tilt": 90,
                                                         "construction": {
-                                                            "id": "Construction 1",
-                                                            "u_factor": 0.35773064046128095
+                                                            "id": "construction_1",
+                                                            "u_factor": 2.0612098807530947
                                                         }
                                                     }
                                                 ]
@@ -175,20 +175,20 @@
             }
         }
     },
-    "rule-5-5-c": {
+    "rule-5-13-c": {
         "Section": 5,
-        "Rule": 5,
+        "Rule": 13,
         "Test": "c",
-        "test_description": "Building is located in climate zone 4A and includes a space that has residential occupancy type and is  conditioned based on heating capacity of the HVAC system that servies the parent zone. The baseline roof U-factor for the space is not established correctly.",
+        "test_description": "Building is located in climate zone 4A and includes a space that has residential occupancy type and is  conditionedbased on heating capacity of the HVAC system that servies the parent zone. The baseline floor U-factor for the zone is not established correctly.\n\n",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "5-5",
+            "rule_id": "5-13",
             "ruleset_reference": "G3.1 #5 (b) Opaque assemblies used for new buildings, existing buildings, or additions ... shall match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8:",
-            "rule_description": "Baseline roof assemblies must match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8",
+            "rule_description": "Baseline floor assemblies must  match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-9",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "rule_dependency": "None",
+            "rule_dependency": "Baseline heating and cooling capacities are established correctly (air-side HVAC rule TBD). This affects baseline space conditioning categories",
             "primary_rule": "Y",
             "schema_version": "0.0.12"
         },
@@ -232,10 +232,10 @@
                                                     {
                                                         "id": "Surface 1",
                                                         "adjacent_to": "EXTERIOR",
-                                                        "tilt": 0,
+                                                        "tilt": 90,
                                                         "construction": {
-                                                            "id": "Construction 1",
-                                                            "u_factor": 1.2378615812787181
+                                                            "id": "construction_1",
+                                                            "u_factor": 7.029690998270886
                                                         }
                                                     }
                                                 ]
@@ -263,20 +263,20 @@
             }
         }
     },
-    "rule-5-5-d": {
+    "rule-5-13-d": {
         "Section": 5,
-        "Rule": 5,
+        "Rule": 13,
         "Test": "d",
-        "test_description": "Building is located in climate zone 4A and includes a space that has nonresidential occupancy type and is  coditioned based on heating capacity of the HVAC system that servies the parent zone. The baseline roof U-factor for the space is established correctly.",
+        "test_description": "Building is located in climate zone 4A and includes a space that has nonresidential occupancy type and is  conditionedbased on heating capacity of the HVAC system that servies the parent zone. The baseline floor U-factor for the zone is established correctly.\n\n",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "5-5",
+            "rule_id": "5-13",
             "ruleset_reference": "G3.1 #5 (b) Opaque assemblies used for new buildings, existing buildings, or additions ... shall match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8:",
-            "rule_description": "Baseline roof assemblies must match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8",
+            "rule_description": "Baseline floor assemblies must  match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-9",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "rule_dependency": "None",
+            "rule_dependency": "Baseline heating and cooling capacities are established correctly (air-side HVAC rule TBD). This affects baseline space conditioning categories",
             "primary_rule": "Y",
             "schema_version": "0.0.12"
         },
@@ -306,7 +306,7 @@
                                                     {
                                                         "id": "Space 1",
                                                         "occupant_multiplier_schedule": "Required Occupancy Sched 1",
-                                                        "lighting_space_type": "CORRIDOR_ALL_OTHERS",
+                                                        "lighting_space_type": "CLASSROOM_LECTURE_HALL_TRAINING_ROOM_ALL_OTHER",
                                                         "floor_area": 23.225759999999998
                                                     }
                                                 ],
@@ -320,10 +320,10 @@
                                                     {
                                                         "id": "Surface 1",
                                                         "adjacent_to": "EXTERIOR",
-                                                        "tilt": 0,
+                                                        "tilt": 90,
                                                         "construction": {
-                                                            "id": "Construction 1",
-                                                            "u_factor": 0.35773064046128095
+                                                            "id": "construction_1",
+                                                            "u_factor": 3.9974979505514567
                                                         }
                                                     }
                                                 ]
@@ -351,20 +351,20 @@
             }
         }
     },
-    "rule-5-5-e": {
+    "rule-5-13-e": {
         "Section": 5,
-        "Rule": 5,
+        "Rule": 13,
         "Test": "e",
-        "test_description": "Building is located in climate zone 4A and includes a space that has nonresidential occupancy type and is  coditioned based on heating capacity of the HVAC system that servies the parent zone. The baseline roof U-factor for the space is not established correctly.",
+        "test_description": "Building is located in climate zone 4A and includes a space that has nonresidential occupancy type and is  conditionedbased on heating capacity of the HVAC system that servies the parent zone. The baseline floor U-factor for the zone is not established correctly.\n\n",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "5-5",
+            "rule_id": "5-13",
             "ruleset_reference": "G3.1 #5 (b) Opaque assemblies used for new buildings, existing buildings, or additions ... shall match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8:",
-            "rule_description": "Baseline roof assemblies must match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8",
+            "rule_description": "Baseline floor assemblies must  match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-9",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "rule_dependency": "None",
+            "rule_dependency": "Baseline heating and cooling capacities are established correctly (air-side HVAC rule TBD). This affects baseline space conditioning categories",
             "primary_rule": "Y",
             "schema_version": "0.0.12"
         },
@@ -394,7 +394,7 @@
                                                     {
                                                         "id": "Space 1",
                                                         "occupant_multiplier_schedule": "Required Occupancy Sched 1",
-                                                        "lighting_space_type": "CORRIDOR_ALL_OTHERS",
+                                                        "lighting_space_type": "CLASSROOM_LECTURE_HALL_TRAINING_ROOM_ALL_OTHER",
                                                         "floor_area": 23.225759999999998
                                                     }
                                                 ],
@@ -408,10 +408,10 @@
                                                     {
                                                         "id": "Surface 1",
                                                         "adjacent_to": "EXTERIOR",
-                                                        "tilt": 0,
+                                                        "tilt": 90,
                                                         "construction": {
-                                                            "id": "Construction 1",
-                                                            "u_factor": 1.2378615812787181
+                                                            "id": "construction_1",
+                                                            "u_factor": 7.029690998270886
                                                         }
                                                     }
                                                 ]
@@ -439,20 +439,20 @@
             }
         }
     },
-    "rule-5-5-f": {
+    "rule-5-13-f": {
         "Section": 5,
-        "Rule": 5,
+        "Rule": 13,
         "Test": "f",
-        "test_description": "A space is semiheated based on heating and cooling capacity of the HVAC system that servies the the parent zone. Building is located in climate zone 4A. The baseline roof U-factor for the space is established correctly.",
+        "test_description": "A zone is semiheated based on heating and cooling capacity of the HVAC system that servies the parent zone. Building is located in climate zone 4A. The baseline floor U-factor for the zone is established correctly.\n\n",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "5-5",
+            "rule_id": "5-13",
             "ruleset_reference": "G3.1 #5 (b) Opaque assemblies used for new buildings, existing buildings, or additions ... shall match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8:",
-            "rule_description": "Baseline roof assemblies must match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8",
+            "rule_description": "Baseline floor assemblies must  match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-9",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "rule_dependency": "None",
+            "rule_dependency": "Baseline heating and cooling capacities are established correctly (air-side HVAC rule TBD). This affects baseline space conditioning categories",
             "primary_rule": "Y",
             "schema_version": "0.0.12"
         },
@@ -482,7 +482,7 @@
                                                     {
                                                         "id": "Space 1",
                                                         "occupant_multiplier_schedule": "Required Occupancy Sched 1",
-                                                        "lighting_space_type": "CORRIDOR_ALL_OTHERS",
+                                                        "lighting_space_type": "WAREHOUSE_STORAGE_AREA_SMALLER_HAND_CARRIED_ITEMS",
                                                         "floor_area": 23.225759999999998
                                                     }
                                                 ],
@@ -496,19 +496,13 @@
                                                     {
                                                         "id": "Surface 1",
                                                         "adjacent_to": "EXTERIOR",
-                                                        "tilt": 0,
-                                                        "area": 9.290303999999999,
+                                                        "tilt": 90,
                                                         "construction": {
-                                                            "id": "Construction 1",
-                                                            "u_factor": 1.2378615812787181
+                                                            "id": "construction_1",
+                                                            "u_factor": 3.9974979505514567
                                                         }
                                                     }
                                                 ]
-                                            },
-                                            {
-                                                "id": "Zone 2",
-                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1"
                                             }
                                         ],
                                         "heating_ventilation_air_conditioning_systems": [
@@ -533,20 +527,20 @@
             }
         }
     },
-    "rule-5-5-g": {
+    "rule-5-13-g": {
         "Section": 5,
-        "Rule": 5,
+        "Rule": 13,
         "Test": "g",
-        "test_description": "A space is semiheated based on heating and cooling capacity of the HVAC system that servies the the parent zone. Building is located in climate zone 4A. The baseline roof U-factor for the space is not established correctly.",
+        "test_description": "A zone is semiheated based on heating and cooling capacity of the HVAC system that servies the parent zone. Building is located in climate zone 4A. The baseline floor U-factor for the zone is not established correctly.\n\n",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "5-5",
+            "rule_id": "5-13",
             "ruleset_reference": "G3.1 #5 (b) Opaque assemblies used for new buildings, existing buildings, or additions ... shall match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8:",
-            "rule_description": "Baseline roof assemblies must match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8",
+            "rule_description": "Baseline floor assemblies must  match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-9",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "rule_dependency": "None",
+            "rule_dependency": "Baseline heating and cooling capacities are established correctly (air-side HVAC rule TBD). This affects baseline space conditioning categories",
             "primary_rule": "Y",
             "schema_version": "0.0.12"
         },
@@ -576,7 +570,7 @@
                                                     {
                                                         "id": "Space 1",
                                                         "occupant_multiplier_schedule": "Required Occupancy Sched 1",
-                                                        "lighting_space_type": "CORRIDOR_ALL_OTHERS",
+                                                        "lighting_space_type": "WAREHOUSE_STORAGE_AREA_SMALLER_HAND_CARRIED_ITEMS",
                                                         "floor_area": 23.225759999999998
                                                     }
                                                 ],
@@ -590,19 +584,13 @@
                                                     {
                                                         "id": "Surface 1",
                                                         "adjacent_to": "EXTERIOR",
-                                                        "tilt": 0,
-                                                        "area": 9.290303999999999,
+                                                        "tilt": 90,
                                                         "construction": {
-                                                            "id": "Construction 1",
-                                                            "u_factor": 0.35773064046128095
+                                                            "id": "construction_1",
+                                                            "u_factor": 3.9974979505514567
                                                         }
                                                     }
                                                 ]
-                                            },
-                                            {
-                                                "id": "Zone 2",
-                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1"
                                             }
                                         ],
                                         "heating_ventilation_air_conditioning_systems": [

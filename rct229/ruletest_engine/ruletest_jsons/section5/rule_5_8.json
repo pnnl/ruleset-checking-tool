@@ -13,7 +13,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "rule_dependency": "None",
-            "mandatory_rule": 0,
+            "primary_rule": "Y",
             "schema_version": "0.0.12"
         },
         "rmr_transformations": {
@@ -101,7 +101,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "rule_dependency": "None",
-            "mandatory_rule": 0,
+            "primary_rule": "Y",
             "schema_version": "0.0.12"
         },
         "rmr_transformations": {
@@ -189,7 +189,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "rule_dependency": "None",
-            "mandatory_rule": 0,
+            "primary_rule": "Y",
             "schema_version": "0.0.12"
         },
         "rmr_transformations": {
@@ -277,7 +277,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "rule_dependency": "None",
-            "mandatory_rule": 0,
+            "primary_rule": "Y",
             "schema_version": "0.0.12"
         },
         "rmr_transformations": {
@@ -365,7 +365,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "rule_dependency": "None",
-            "mandatory_rule": 0,
+            "primary_rule": "Y",
             "schema_version": "0.0.12"
         },
         "rmr_transformations": {
@@ -459,7 +459,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "rule_dependency": "None",
-            "mandatory_rule": 0,
+            "primary_rule": "Y",
             "schema_version": "0.0.12"
         },
         "rmr_transformations": {

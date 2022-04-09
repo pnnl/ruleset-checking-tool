@@ -3,7 +3,7 @@
         "Section": 5,
         "Rule": 3,
         "Test": "a",
-        "test_description": "Building has interior and exterior surfaces. All exterior surfaces are correctly modeled as not casting shade in the baseline",
+        "test_description": "Project has one building segement with two zones and both interior and exterior surfaces. All exterior surfaces are correctly modeled as not casting shade in the baseline",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-3",
@@ -13,7 +13,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "rule_dependency": "None",
-            "mandatory_rule": 0,
+            "primary_rule": "N",
             "schema_version": "0.0.12"
         },
         "rmr_transformations": {
@@ -92,7 +92,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "rule_dependency": "None",
-            "mandatory_rule": 0,
+            "primary_rule": "N",
             "schema_version": "0.0.12"
         },
         "rmr_transformations": {
