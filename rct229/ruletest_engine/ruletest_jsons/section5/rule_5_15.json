@@ -1,14 +1,14 @@
 {
-    "rule-5-11-a": {
+    "rule-5-15-a": {
         "Section": 5,
-        "Rule": 11,
+        "Rule": 15,
         "Test": "a",
-        "test_description": "Building is located in climate zone 4A and includes a space that has residential occupancy type and is  conditionedbased on heating capacity of the HVAC system that servies the parent zone. The baseline above-grade wall U-factor for the zone is established correctly.",
+        "test_description": "Building is located in climate zone 4A and includes a space that has residential occupancy type and is  conditionedbased on heating capacity of the HVAC system that servies the parent zone. The baseline slab-on-grade floor F-factor for the zone is established correctly.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "5-11",
+            "rule_id": "5-15",
             "ruleset_reference": "G3.1 #5 (b) Opaque assemblies used for new buildings, existing buildings, or additions ... shall match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8:",
-            "rule_description": "Baseline above-grade wall assemblies must match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8",
+            "rule_description": "Baseline slab-on-grade assemblies must match the appropriate assembly maximum F-factors in Tables G3.4-1 through G3.4-9",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
@@ -42,7 +42,7 @@
                                                     {
                                                         "id": "Space 1",
                                                         "occupant_multiplier_schedule": "Required Occupancy Sched 1",
-                                                        "lighting_space_type": "DWELLING_UNIT",
+                                                        "lighting_space_type": "DORMITORY_LIVING_QUARTERS",
                                                         "floor_area": 23.225759999999998
                                                     }
                                                 ],
@@ -55,11 +55,11 @@
                                                 "surfaces": [
                                                     {
                                                         "id": "Surface 1",
-                                                        "adjacent_to": "EXTERIOR",
-                                                        "tilt": 90,
+                                                        "adjacent_to": "GROUND",
+                                                        "tilt": 180,
                                                         "construction": {
                                                             "id": "construction_1",
-                                                            "u_factor": 0.363408904595587
+                                                            "c_factor": 7.171647601628536
                                                         }
                                                     }
                                                 ]
@@ -87,16 +87,16 @@
             }
         }
     },
-    "rule-5-11-b": {
+    "rule-5-15-b": {
         "Section": 5,
-        "Rule": 11,
+        "Rule": 15,
         "Test": "b",
-        "test_description": "Building is located in climate zone 4A and includes a space that has residential occupancy type and is  conditionedbased on cooling capacity of the HVAC system that servies the parent zone. The baseline above-grade wall U-factor for the zone is established correctly.",
+        "test_description": "Building is located in climate zone 4A and includes a space that has residential occupancy type and is  conditionedbased on cooling capacity of the HVAC system that servies it. The baseline slab-on-grade floor F-factor for the space is established correctly.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "5-11",
+            "rule_id": "5-15",
             "ruleset_reference": "G3.1 #5 (b) Opaque assemblies used for new buildings, existing buildings, or additions ... shall match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8:",
-            "rule_description": "Baseline above-grade wall assemblies must match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8",
+            "rule_description": "Baseline slab-on-grade assemblies must match the appropriate assembly maximum F-factors in Tables G3.4-1 through G3.4-9",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
@@ -130,7 +130,7 @@
                                                     {
                                                         "id": "Space 1",
                                                         "occupant_multiplier_schedule": "Required Occupancy Sched 1",
-                                                        "lighting_space_type": "DWELLING_UNIT",
+                                                        "lighting_space_type": "DORMITORY_LIVING_QUARTERS",
                                                         "floor_area": 23.225759999999998
                                                     }
                                                 ],
@@ -143,11 +143,11 @@
                                                 "surfaces": [
                                                     {
                                                         "id": "Surface 1",
-                                                        "adjacent_to": "EXTERIOR",
-                                                        "tilt": 90,
+                                                        "adjacent_to": "GROUND",
+                                                        "tilt": 180,
                                                         "construction": {
                                                             "id": "construction_1",
-                                                            "u_factor": 0.363408904595587
+                                                            "c_factor": 7.171647601628536
                                                         }
                                                     }
                                                 ]
@@ -158,7 +158,7 @@
                                                 "id": "HVAC 1",
                                                 "cooling_system": {
                                                     "id": "Cooling System 1",
-                                                    "sensible_cool_capacity": 42204.0
+                                                    "sensible_cool_capacity": 38687.0
                                                 },
                                                 "heating_system": {
                                                     "id": "Heating System 1",
@@ -175,16 +175,16 @@
             }
         }
     },
-    "rule-5-11-c": {
+    "rule-5-15-c": {
         "Section": 5,
-        "Rule": 11,
+        "Rule": 15,
         "Test": "c",
-        "test_description": "Building is located in climate zone 4A and includes a space that has residential occupancy type and is  conditionedbased on heating capacity of the HVAC system that servies the parent zone. The baseline above-grade wall U-factor for the zone is not established correctly.",
+        "test_description": "Building is located in climate zone 4A and includes a space that has residential occupancy type and is  conditionedbased on heating capacity of the HVAC system that servies it. The baseline slab-on-grade floor F-factor for the space is not established correctly.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "5-11",
+            "rule_id": "5-15",
             "ruleset_reference": "G3.1 #5 (b) Opaque assemblies used for new buildings, existing buildings, or additions ... shall match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8:",
-            "rule_description": "Baseline above-grade wall assemblies must match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8",
+            "rule_description": "Baseline slab-on-grade assemblies must match the appropriate assembly maximum F-factors in Tables G3.4-1 through G3.4-9",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
@@ -218,7 +218,7 @@
                                                     {
                                                         "id": "Space 1",
                                                         "occupant_multiplier_schedule": "Required Occupancy Sched 1",
-                                                        "lighting_space_type": "DWELLING_UNIT",
+                                                        "lighting_space_type": "DORMITORY_LIVING_QUARTERS",
                                                         "floor_area": 23.225759999999998
                                                     }
                                                 ],
@@ -231,11 +231,11 @@
                                                 "surfaces": [
                                                     {
                                                         "id": "Surface 1",
-                                                        "adjacent_to": "EXTERIOR",
-                                                        "tilt": 90,
+                                                        "adjacent_to": "GROUND",
+                                                        "tilt": 180,
                                                         "construction": {
                                                             "id": "construction_1",
-                                                            "u_factor": 1.2378615812787181
+                                                            "c_factor": 2.2258795406479703
                                                         }
                                                     }
                                                 ]
@@ -263,16 +263,16 @@
             }
         }
     },
-    "rule-5-11-d": {
+    "rule-5-15-d": {
         "Section": 5,
-        "Rule": 11,
+        "Rule": 15,
         "Test": "d",
-        "test_description": "Building is located in climate zone 4A and includes a space that has nonresidential occupancy type and is  conditionedbased on heating capacity of the HVAC system that servies the parent zone. The baseline above-grade wall U-factor for the zone is established correctly.",
+        "test_description": "Building is located in climate zone 4A and includes a space that has nonresidential occupancy type and is  conditionedbased on heating capacity of the HVAC system that servies it. The baseline slab-on-grade floor F-factor for the space is established correctly.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "5-11",
+            "rule_id": "5-15",
             "ruleset_reference": "G3.1 #5 (b) Opaque assemblies used for new buildings, existing buildings, or additions ... shall match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8:",
-            "rule_description": "Baseline above-grade wall assemblies must match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8",
+            "rule_description": "Baseline slab-on-grade assemblies must match the appropriate assembly maximum F-factors in Tables G3.4-1 through G3.4-9",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
@@ -306,7 +306,7 @@
                                                     {
                                                         "id": "Space 1",
                                                         "occupant_multiplier_schedule": "Required Occupancy Sched 1",
-                                                        "lighting_space_type": "CLASSROOM_LECTURE_HALL_TRAINING_ROOM_ALL_OTHER",
+                                                        "lighting_space_type": "WORKSHOP",
                                                         "floor_area": 23.225759999999998
                                                     }
                                                 ],
@@ -319,11 +319,11 @@
                                                 "surfaces": [
                                                     {
                                                         "id": "Surface 1",
-                                                        "adjacent_to": "EXTERIOR",
-                                                        "tilt": 90,
+                                                        "adjacent_to": "GROUND",
+                                                        "tilt": 180,
                                                         "construction": {
                                                             "id": "construction_1",
-                                                            "u_factor": 0.7041047526539498
+                                                            "c_factor": 7.171647601628536
                                                         }
                                                     }
                                                 ]
@@ -351,16 +351,16 @@
             }
         }
     },
-    "rule-5-11-e": {
+    "rule-5-15-e": {
         "Section": 5,
-        "Rule": 11,
+        "Rule": 15,
         "Test": "e",
-        "test_description": "Building is located in climate zone 4A and includes a space that has nonresidential occupancy type and is  conditionedbased on heating capacity of the HVAC system that servies the parent zone. The baseline above-grade wall U-factor for the zone is not established correctly.",
-        "expected_rule_outcome": "fail",
+        "test_description": "Building is located in climate zone 4A and includes a space that has nonresidential occupancy type and is  conditionedbased on heating capacity of the HVAC system that servies it. The baseline slab-on-grade floor F-factor for the space is not established correctly.",
+        "expected_rule_outcome": "manual_check",
         "standard": {
-            "rule_id": "5-11",
+            "rule_id": "5-15",
             "ruleset_reference": "G3.1 #5 (b) Opaque assemblies used for new buildings, existing buildings, or additions ... shall match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8:",
-            "rule_description": "Baseline above-grade wall assemblies must match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8",
+            "rule_description": "Baseline slab-on-grade assemblies must match the appropriate assembly maximum F-factors in Tables G3.4-1 through G3.4-9",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
@@ -394,7 +394,7 @@
                                                     {
                                                         "id": "Space 1",
                                                         "occupant_multiplier_schedule": "Required Occupancy Sched 1",
-                                                        "lighting_space_type": "CLASSROOM_LECTURE_HALL_TRAINING_ROOM_ALL_OTHER",
+                                                        "lighting_space_type": "STAIRWELL",
                                                         "floor_area": 23.225759999999998
                                                     }
                                                 ],
@@ -407,11 +407,11 @@
                                                 "surfaces": [
                                                     {
                                                         "id": "Surface 1",
-                                                        "adjacent_to": "EXTERIOR",
-                                                        "tilt": 90,
+                                                        "adjacent_to": "GROUND",
+                                                        "tilt": 180,
                                                         "construction": {
                                                             "id": "construction_1",
-                                                            "u_factor": 1.2378615812787181
+                                                            "c_factor": 2.1350273144990735
                                                         }
                                                     }
                                                 ]
@@ -439,16 +439,16 @@
             }
         }
     },
-    "rule-5-11-f": {
+    "rule-5-15-f": {
         "Section": 5,
-        "Rule": 11,
+        "Rule": 15,
         "Test": "f",
-        "test_description": "A zone is semiheated based on heating and cooling capacity of the HVAC system that servies the parent zone. Building is located in climate zone 4A. The baseline above-grade wall U-factor for the zone is established correctly.",
+        "test_description": "A space is semiheated based on heating and cooling capacity of the HVAC system that servies the parent zone. Building is located in climate zone 4A. The baseline slab-on-grade floor F-factor for the zone is established correctly.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "5-11",
+            "rule_id": "5-15",
             "ruleset_reference": "G3.1 #5 (b) Opaque assemblies used for new buildings, existing buildings, or additions ... shall match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8:",
-            "rule_description": "Baseline above-grade wall assemblies must match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8",
+            "rule_description": "Baseline slab-on-grade assemblies must match the appropriate assembly maximum F-factors in Tables G3.4-1 through G3.4-9",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
@@ -495,12 +495,11 @@
                                                 "surfaces": [
                                                     {
                                                         "id": "Surface 1",
-                                                        "adjacent_to": "EXTERIOR",
-                                                        "tilt": 90,
-                                                        "area": 9.290303999999999,
+                                                        "adjacent_to": "GROUND",
+                                                        "tilt": 180,
                                                         "construction": {
                                                             "id": "construction_1",
-                                                            "u_factor": 0.7041047526539498
+                                                            "c_factor": 7.171647601628536
                                                         }
                                                     }
                                                 ]
@@ -528,16 +527,16 @@
             }
         }
     },
-    "rule-5-11-g": {
+    "rule-5-15-g": {
         "Section": 5,
-        "Rule": 11,
+        "Rule": 15,
         "Test": "g",
-        "test_description": "A zone is semiheated based on heating and cooling capacity of the HVAC system that servies the parent zone. Building is located in climate zone 4A. The baseline above-grade wall U-factor for the zone is not established correctly.",
-        "expected_rule_outcome": "fail",
+        "test_description": "A space is semiheated based on heating and cooling capacity of the HVAC system that servies the parent zone. Building is located in climate zone 4A. The baseline slab-on-grade floor F-factor for the zone is not established correctly.",
+        "expected_rule_outcome": "manual_check",
         "standard": {
-            "rule_id": "5-11",
+            "rule_id": "5-15",
             "ruleset_reference": "G3.1 #5 (b) Opaque assemblies used for new buildings, existing buildings, or additions ... shall match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8:",
-            "rule_description": "Baseline above-grade wall assemblies must match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8",
+            "rule_description": "Baseline slab-on-grade assemblies must match the appropriate assembly maximum F-factors in Tables G3.4-1 through G3.4-9",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
@@ -584,12 +583,11 @@
                                                 "surfaces": [
                                                     {
                                                         "id": "Surface 1",
-                                                        "adjacent_to": "EXTERIOR",
-                                                        "tilt": 90,
-                                                        "area": 9.290303999999999,
+                                                        "adjacent_to": "GROUND",
+                                                        "tilt": 180,
                                                         "construction": {
                                                             "id": "construction_1",
-                                                            "u_factor": 0.35773064046128095
+                                                            "c_factor": 2.1350273144990735
                                                         }
                                                     }
                                                 ]
