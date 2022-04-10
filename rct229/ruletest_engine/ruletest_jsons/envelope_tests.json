@@ -846,11 +846,6 @@
                                                         }
                                                     }
                                                 ]
-                                            },
-                                            {
-                                                "id": "Zone 2",
-                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1"
                                             }
                                         ],
                                         "heating_ventilation_air_conditioning_systems": [
@@ -940,11 +935,6 @@
                                                         }
                                                     }
                                                 ]
-                                            },
-                                            {
-                                                "id": "Zone 2",
-                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1"
                                             }
                                         ],
                                         "heating_ventilation_air_conditioning_systems": [
@@ -1386,11 +1376,6 @@
                                                         }
                                                     }
                                                 ]
-                                            },
-                                            {
-                                                "id": "Zone 2",
-                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1"
                                             }
                                         ],
                                         "heating_ventilation_air_conditioning_systems": [
@@ -1480,11 +1465,6 @@
                                                         }
                                                     }
                                                 ]
-                                            },
-                                            {
-                                                "id": "Zone 2",
-                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1"
                                             }
                                         ],
                                         "heating_ventilation_air_conditioning_systems": [
@@ -2014,11 +1994,6 @@
                                                         }
                                                     }
                                                 ]
-                                            },
-                                            {
-                                                "id": "Zone 2",
-                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1"
                                             }
                                         ],
                                         "heating_ventilation_air_conditioning_systems": [
@@ -2108,11 +2083,6 @@
                                                         }
                                                     }
                                                 ]
-                                            },
-                                            {
-                                                "id": "Zone 2",
-                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1"
                                             }
                                         ],
                                         "heating_ventilation_air_conditioning_systems": [
@@ -2635,6 +2605,7 @@
                                                         "id": "Surface 1",
                                                         "adjacent_to": "EXTERIOR",
                                                         "tilt": 90,
+                                                        "area": 9.290303999999999,
                                                         "construction": {
                                                             "id": "construction_1",
                                                             "u_factor": 3.9974979505514567
@@ -2723,6 +2694,7 @@
                                                         "id": "Surface 1",
                                                         "adjacent_to": "EXTERIOR",
                                                         "tilt": 90,
+                                                        "area": 9.290303999999999,
                                                         "construction": {
                                                             "id": "construction_1",
                                                             "u_factor": 3.9974979505514567
@@ -3420,6 +3392,8 @@
                                                     {
                                                         "id": "Surface 1",
                                                         "adjacent_to": "EXTERIOR",
+                                                        "tilt": 90,
+                                                        "area": 9.290303999999999,
                                                         "construction": {
                                                             "id": "construction_1",
                                                             "u_factor": 7.097830167882559
@@ -3468,6 +3442,8 @@
                                                     {
                                                         "id": "Surface 1",
                                                         "adjacent_to": "EXTERIOR",
+                                                        "tilt": 90,
+                                                        "area": 9.290303999999999,
                                                         "construction": {
                                                             "id": "construction_1",
                                                             "u_factor": 7.097830167882559
@@ -3536,6 +3512,8 @@
                                                     {
                                                         "id": "Surface 1",
                                                         "adjacent_to": "EXTERIOR",
+                                                        "tilt": 90,
+                                                        "area": 9.290303999999999,
                                                         "construction": {
                                                             "id": "construction_1",
                                                             "u_factor": 7.097830167882559
@@ -3584,6 +3562,8 @@
                                                     {
                                                         "id": "Surface 1",
                                                         "adjacent_to": "EXTERIOR",
+                                                        "tilt": 90,
+                                                        "area": 9.290303999999999,
                                                         "construction": {
                                                             "id": "construction_1",
                                                             "u_factor": 7.665656581313163
@@ -3658,6 +3638,8 @@
                                                     {
                                                         "id": "Surface 1",
                                                         "adjacent_to": "EXTERIOR",
+                                                        "tilt": 90,
+                                                        "area": 9.290303999999999,
                                                         "construction": {
                                                             "id": "construction_1",
                                                             "u_factor": 7.097830167882559
@@ -3725,6 +3707,8 @@
                                                     {
                                                         "id": "Surface 1",
                                                         "adjacent_to": "EXTERIOR",
+                                                        "tilt": 90,
+                                                        "area": 9.290303999999999,
                                                         "construction": {
                                                             "id": "construction_1",
                                                             "u_factor": 7.097830167882559
@@ -3812,6 +3796,8 @@
                                                     {
                                                         "id": "Surface 1",
                                                         "adjacent_to": "EXTERIOR",
+                                                        "tilt": 90,
+                                                        "area": 9.290303999999999,
                                                         "construction": {
                                                             "id": "construction_1",
                                                             "u_factor": 7.097830167882559
@@ -3879,6 +3865,8 @@
                                                     {
                                                         "id": "Surface 1",
                                                         "adjacent_to": "EXTERIOR",
+                                                        "tilt": 90,
+                                                        "area": 9.290303999999999,
                                                         "construction": {
                                                             "id": "construction_1",
                                                             "u_factor": 7.665656581313163
@@ -3961,6 +3949,7 @@
                                                         "id": "Surface 1",
                                                         "adjacent_to": "GROUND",
                                                         "tilt": 90,
+                                                        "area": 9.290303999999999,
                                                         "construction": {
                                                             "id": "construction_1",
                                                             "c_factor": 7.097830167882559
@@ -4010,6 +3999,7 @@
                                                         "id": "Surface 1",
                                                         "adjacent_to": "GROUND",
                                                         "tilt": 90,
+                                                        "area": 9.290303999999999,
                                                         "construction": {
                                                             "id": "construction_1",
                                                             "c_factor": 7.097830167882559
@@ -4079,6 +4069,7 @@
                                                         "id": "Surface 1",
                                                         "adjacent_to": "GROUND",
                                                         "tilt": 90,
+                                                        "area": 9.290303999999999,
                                                         "construction": {
                                                             "id": "construction_1",
                                                             "c_factor": 7.097830167882559
@@ -4128,6 +4119,7 @@
                                                         "id": "Surface 1",
                                                         "adjacent_to": "GROUND",
                                                         "tilt": 90,
+                                                        "area": 9.290303999999999,
                                                         "construction": {
                                                             "id": "construction_1",
                                                             "c_factor": 7.665656581313163
@@ -4203,6 +4195,7 @@
                                                         "id": "Surface 1",
                                                         "adjacent_to": "GROUND",
                                                         "tilt": 90,
+                                                        "area": 9.290303999999999,
                                                         "construction": {
                                                             "id": "construction_1",
                                                             "c_factor": 7.097830167882559
@@ -4271,6 +4264,7 @@
                                                         "id": "Surface 1",
                                                         "adjacent_to": "GROUND",
                                                         "tilt": 90,
+                                                        "area": 9.290303999999999,
                                                         "construction": {
                                                             "id": "construction_1",
                                                             "c_factor": 7.097830167882559
@@ -4359,6 +4353,7 @@
                                                         "id": "Surface 1",
                                                         "adjacent_to": "GROUND",
                                                         "tilt": 90,
+                                                        "area": 9.290303999999999,
                                                         "construction": {
                                                             "id": "construction_1",
                                                             "c_factor": 7.097830167882559
@@ -4427,6 +4422,7 @@
                                                         "id": "Surface 1",
                                                         "adjacent_to": "GROUND",
                                                         "tilt": 90,
+                                                        "area": 9.290303999999999,
                                                         "construction": {
                                                             "id": "construction_1",
                                                             "c_factor": 7.665656581313163
@@ -4509,6 +4505,7 @@
                                                         "id": "Surface 1",
                                                         "adjacent_to": "GROUND",
                                                         "tilt": 180,
+                                                        "area": 9.290303999999999,
                                                         "construction": {
                                                             "id": "construction_1",
                                                             "f_factor": 2.1634186351706037
@@ -4558,6 +4555,7 @@
                                                         "id": "Surface 1",
                                                         "adjacent_to": "GROUND",
                                                         "tilt": 180,
+                                                        "area": 9.290303999999999,
                                                         "construction": {
                                                             "id": "construction_1",
                                                             "f_factor": 2.1634186351706037
@@ -4627,6 +4625,7 @@
                                                         "id": "Surface 1",
                                                         "adjacent_to": "GROUND",
                                                         "tilt": 180,
+                                                        "area": 9.290303999999999,
                                                         "construction": {
                                                             "id": "construction_1",
                                                             "f_factor": 2.1634186351706037
@@ -4676,6 +4675,7 @@
                                                         "id": "Surface 1",
                                                         "adjacent_to": "GROUND",
                                                         "tilt": 180,
+                                                        "area": 9.290303999999999,
                                                         "construction": {
                                                             "id": "construction_1",
                                                             "f_factor": 2.336492125984252
@@ -4751,6 +4751,7 @@
                                                         "id": "Surface 1",
                                                         "adjacent_to": "GROUND",
                                                         "tilt": 180,
+                                                        "area": 9.290303999999999,
                                                         "construction": {
                                                             "id": "construction_1",
                                                             "f_factor": 2.1634186351706037
@@ -4819,6 +4820,7 @@
                                                         "id": "Surface 1",
                                                         "adjacent_to": "GROUND",
                                                         "tilt": 180,
+                                                        "area": 9.290303999999999,
                                                         "construction": {
                                                             "id": "construction_1",
                                                             "f_factor": 2.1634186351706037
@@ -4907,6 +4909,7 @@
                                                         "id": "Surface 1",
                                                         "adjacent_to": "GROUND",
                                                         "tilt": 180,
+                                                        "area": 9.290303999999999,
                                                         "construction": {
                                                             "id": "construction_1",
                                                             "f_factor": 2.1634186351706037
@@ -4975,6 +4978,7 @@
                                                         "id": "Surface 1",
                                                         "adjacent_to": "GROUND",
                                                         "tilt": 180,
+                                                        "area": 9.290303999999999,
                                                         "construction": {
                                                             "id": "construction_1",
                                                             "f_factor": 2.336492125984252
