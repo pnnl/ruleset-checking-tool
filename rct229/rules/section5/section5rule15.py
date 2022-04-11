@@ -122,7 +122,7 @@ class Section5Rule15(RuleDefinitionListIndexedBase):
                 return target_f_factor_res != target_f_factor_nonres
 
             def rule_check(self, context, calc_vals, data=None):
-                slab_on_grade_floor_f_factor = calc_vals["target_f_factor"]
                 target_f_factor = calc_vals["target_f_factor"]
+                slab_on_grade_floor_f_factor = calc_vals["slab_on_grade_floor_f_factor"]
 
-                return std_equal(slab_on_grade_floor_f_factor, target_f_factor)
+                return std_equal(target_f_factor, slab_on_grade_floor_f_factor)
