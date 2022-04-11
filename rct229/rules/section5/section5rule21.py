@@ -6,8 +6,8 @@ from rct229.ruleset_functions.get_opaque_surface_type import (OpaqueSurfaceType 
 from rct229.utils.assertions import getattr_, MissingKeyException
 from rct229.utils.jsonpath_utils import find_all
 from rct229.ruleset_functions.get_surface_conditioning_category_dict import (SurfaceConditioningCategory as SCC, get_surface_conditioning_category_dict)
-from rct229.utils.match_lists import match_lists_exactly_by_id
-
+from rct229.utils.match_lists import match_lists_by_id
+from rct229.utils.pint_utils import ZERO
 
 DOOR = schema_enums["SubsurfaceClassificationType"].DOOR.name
 
@@ -52,10 +52,8 @@ class Section5Rule21(RuleDefinitionListIndexedBase):
 
             return {
                 **data,
-                "total_fenestration_area_b": sum([window_wall_areas_dictionary_b[key]["total_window_area"]
-                                                  for key in window_wall_areas_dictionary_b.keys()]),
-                "total_fenestration_area_p": sum([window_wall_areas_dictionary_p[key]["total_window_area"]
-                                                  for key in window_wall_areas_dictionary_p.keys()]),
+                "total_fenestration_area_b": sum(find_all("$..total_window_area", window_wall_areas_dictionary_b), ZERO.AREA),
+                "total_fenestration_area_p": sum(find_all("$..total_window_area", window_wall_areas_dictionary_p), ZERO.AREA),
                 "surface_conditioning_category_dict_b": get_surface_conditioning_category_dict(
                     data["climate_zone"], building_b
                 ),
@@ -70,9 +68,9 @@ class Section5Rule21(RuleDefinitionListIndexedBase):
             baseline_surfaces = find_all("$..surfaces[*]", building_b)
             proposed_surfaces = find_all("$..surfaces[*]", building_p)
 
-            matched_proposed_surfaces = match_lists_exactly_by_id(baseline_surfaces, proposed_surfaces)
+            matched_proposed_surfaces = match_lists_by_id(baseline_surfaces, proposed_surfaces)
             proposed_baseline_surface_pairs = zip(baseline_surfaces, matched_proposed_surfaces)
-            # List of all baseline roof surfaces to become the context for RoofRule
+            # List of all baseline above grade wall to become the context for AboveGradeWall
             return [
                 UserBaselineProposedVals(None, surface_b, surface_p)
                 for surface_b, surface_p in proposed_baseline_surface_pairs
@@ -90,15 +88,16 @@ class Section5Rule21(RuleDefinitionListIndexedBase):
                 )
 
             @staticmethod
-            def _helper_calc_val(fenestration_area_surface, surface):
-                for subsurface in surface["subsurfaces"]:
-                    subsurface_classification = getattr_(subsurface, "subsurface", "classification")
-                    glazed_area = getattr_(subsurface, "subsurface", "glazed_area")
-                    opaque_area = getattr_(subsurface, "subsurface", "opaque_area")
-                    if subsurface_classification == DOOR and glazed_area > opaque_area:
-                        fenestration_area_surface += (glazed_area + opaque_area)
-                    else:
-                        fenestration_area_surface += (glazed_area + opaque_area)
+            def _helper_calc_val(above_grade_wall):
+                """Helper function for calculating the total fenestration area for an above grade wall"""
+
+                return sum([
+                    subsurface.get("glazed_area", ZERO.AREA) + subsurface.get("opaque_area", ZERO.AREA)
+                    for subsurface in find_all("subsurfaces[*]", above_grade_wall)
+                    if (subsurface["classification"] == DOOR and
+                        (subsurface.get("glazed_area", ZERO.AREA) > subsurface.get("opaque_area", ZERO.AREA)) or
+                        (subsurface["classification"] != DOOR))
+                ], ZERO.AREA)
 
             def get_calc_vals(self, context, data=None):
                 above_grade_wall_b = context.baseline
@@ -127,12 +126,6 @@ class Section5Rule21(RuleDefinitionListIndexedBase):
                     "total_fenestration_area_surface_p": total_fenestration_area_surface_p,
                     "total_fenestration_area_p": total_fenestration_area_p
                 }
-
-                if above_grade_wall_b.get["subsurfaces"] is None:
-                    # wall has no fenestration surfaces
-                    return {
-                        **calc_val
-                    }
 
                 try:
                     self._helper_calc_val(total_fenestration_area_surface_b, above_grade_wall_b)
