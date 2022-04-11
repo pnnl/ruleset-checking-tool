@@ -11,6 +11,12 @@ MSG_WARN_MISMATCHED = "BUILDING IS NOT ALL NEW AND BASELINE WWR DOES NOT MATCH V
 class Section5Rule19(RuleDefinitionListIndexedBase):
     """Rule 19 of ASHRAE 90.1-2019 Appendix G Section 5 (Envelope)"""
 
+    # TODO Q) Is the 19's most similar ruleset is 18?
+    # TODO Q) How do you make sure that the code executes correctly without the test json files? e.g., is there anyway to see what's inside in the "context" argument?
+    # TODO Q) How do I know if I need "create_context_list", "create_data" methods and "required_fields"?
+    # TODO Q) What are the B_RMR and P_RMR in RDS? Does b stand for baseline and p stand for proposed?
+    # TODO Q) where is Rule Assertion part in RDS located?
+
     def __init__(self):
         super(Section5Rule19, self).__init__(
             rmrs_used=UserBaselineProposedVals(False, True, False),
@@ -61,20 +67,16 @@ class Section5Rule19(RuleDefinitionListIndexedBase):
 
             def get_calc_vals(self, context, data=None):
                 building_segment_b = context.baseline
-                # TODO Q1) What are the B_RMR and P_RMR?
-                # TODO Q2)
-                # TODO Q3)
-                # TODO Q4)
-
+                building_segment_p = context.proposed
 
                 # Get window wall areas dictionary for B_RMR
                 window_wall_areas_dictionary_b = data["area_type_vertical_fenestration"]
 
                 # Get window wall areas dictionary for P_RMR
-                window_wall_areas_dictionary_b = data["area_type_vertical_fenestration"]
+                window_wall_areas_dictionary_p = data["area_type_vertical_fenestration"]
 
                 # Check if building segment area type is not included in Table G3.1.1-1
-                if table_G3_1_1_1_lookup(building_segment_b.get("area_type_vertical_fenestration")):
+                if not table_G3_1_1_1_lookup(building_segment_b.get("area_type_vertical_fenestration")):
                     pass
                     # Check if building segment is not all new, set manual_check_flag:
 
