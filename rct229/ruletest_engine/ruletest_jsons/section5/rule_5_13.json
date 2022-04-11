@@ -1,14 +1,14 @@
 {
-    "rule-5-11-a": {
+    "rule-5-13-a": {
         "Section": 5,
-        "Rule": 11,
+        "Rule": 13,
         "Test": "a",
-        "test_description": "Building is located in climate zone 4A and includes a space that has residential occupancy type and is  conditionedbased on heating capacity of the HVAC system that servies the parent zone. The baseline above-grade wall U-factor for the zone is established correctly.",
+        "test_description": "Building is located in climate zone 4A and includes a space that has residential occupancy type and is  conditionedbased on heating capacity of the HVAC system that servies the parent zone. The baseline floor U-factor for the zone is established correctly.\n\n",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "5-11",
+            "rule_id": "5-13",
             "ruleset_reference": "G3.1 #5 (b) Opaque assemblies used for new buildings, existing buildings, or additions ... shall match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8:",
-            "rule_description": "Baseline above-grade wall assemblies must match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8",
+            "rule_description": "Baseline floor assemblies must  match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-9",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
@@ -59,7 +59,7 @@
                                                         "tilt": 90,
                                                         "construction": {
                                                             "id": "construction_1",
-                                                            "u_factor": 0.363408904595587
+                                                            "u_factor": 2.0612098807530947
                                                         }
                                                     }
                                                 ]
@@ -87,16 +87,16 @@
             }
         }
     },
-    "rule-5-11-b": {
+    "rule-5-13-b": {
         "Section": 5,
-        "Rule": 11,
+        "Rule": 13,
         "Test": "b",
-        "test_description": "Building is located in climate zone 4A and includes a space that has residential occupancy type and is  conditionedbased on cooling capacity of the HVAC system that servies the parent zone. The baseline above-grade wall U-factor for the zone is established correctly.",
+        "test_description": "Building is located in climate zone 4A and includes a space that has residential occupancy type and is  conditionedbased on cooling capacity of the HVAC system that servies the parent zone. The baseline floor U-factor for the zone is established correctly.\n\n",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "5-11",
+            "rule_id": "5-13",
             "ruleset_reference": "G3.1 #5 (b) Opaque assemblies used for new buildings, existing buildings, or additions ... shall match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8:",
-            "rule_description": "Baseline above-grade wall assemblies must match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8",
+            "rule_description": "Baseline floor assemblies must  match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-9",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
@@ -147,7 +147,7 @@
                                                         "tilt": 90,
                                                         "construction": {
                                                             "id": "construction_1",
-                                                            "u_factor": 0.363408904595587
+                                                            "u_factor": 2.0612098807530947
                                                         }
                                                     }
                                                 ]
@@ -175,16 +175,16 @@
             }
         }
     },
-    "rule-5-11-c": {
+    "rule-5-13-c": {
         "Section": 5,
-        "Rule": 11,
+        "Rule": 13,
         "Test": "c",
-        "test_description": "Building is located in climate zone 4A and includes a space that has residential occupancy type and is  conditionedbased on heating capacity of the HVAC system that servies the parent zone. The baseline above-grade wall U-factor for the zone is not established correctly.",
+        "test_description": "Building is located in climate zone 4A and includes a space that has residential occupancy type and is  conditionedbased on heating capacity of the HVAC system that servies the parent zone. The baseline floor U-factor for the zone is not established correctly.\n\n",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "5-11",
+            "rule_id": "5-13",
             "ruleset_reference": "G3.1 #5 (b) Opaque assemblies used for new buildings, existing buildings, or additions ... shall match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8:",
-            "rule_description": "Baseline above-grade wall assemblies must match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8",
+            "rule_description": "Baseline floor assemblies must  match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-9",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
@@ -235,7 +235,7 @@
                                                         "tilt": 90,
                                                         "construction": {
                                                             "id": "construction_1",
-                                                            "u_factor": 1.2378615812787181
+                                                            "u_factor": 7.029690998270886
                                                         }
                                                     }
                                                 ]
@@ -263,16 +263,16 @@
             }
         }
     },
-    "rule-5-11-d": {
+    "rule-5-13-d": {
         "Section": 5,
-        "Rule": 11,
+        "Rule": 13,
         "Test": "d",
-        "test_description": "Building is located in climate zone 4A and includes a space that has nonresidential occupancy type and is  conditionedbased on heating capacity of the HVAC system that servies the parent zone. The baseline above-grade wall U-factor for the zone is established correctly.",
+        "test_description": "Building is located in climate zone 4A and includes a space that has nonresidential occupancy type and is  conditionedbased on heating capacity of the HVAC system that servies the parent zone. The baseline floor U-factor for the zone is established correctly.\n\n",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "5-11",
+            "rule_id": "5-13",
             "ruleset_reference": "G3.1 #5 (b) Opaque assemblies used for new buildings, existing buildings, or additions ... shall match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8:",
-            "rule_description": "Baseline above-grade wall assemblies must match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8",
+            "rule_description": "Baseline floor assemblies must  match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-9",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
@@ -323,7 +323,7 @@
                                                         "tilt": 90,
                                                         "construction": {
                                                             "id": "construction_1",
-                                                            "u_factor": 0.7041047526539498
+                                                            "u_factor": 3.9974979505514567
                                                         }
                                                     }
                                                 ]
@@ -351,16 +351,16 @@
             }
         }
     },
-    "rule-5-11-e": {
+    "rule-5-13-e": {
         "Section": 5,
-        "Rule": 11,
+        "Rule": 13,
         "Test": "e",
-        "test_description": "Building is located in climate zone 4A and includes a space that has nonresidential occupancy type and is  conditionedbased on heating capacity of the HVAC system that servies the parent zone. The baseline above-grade wall U-factor for the zone is not established correctly.",
+        "test_description": "Building is located in climate zone 4A and includes a space that has nonresidential occupancy type and is  conditionedbased on heating capacity of the HVAC system that servies the parent zone. The baseline floor U-factor for the zone is not established correctly.\n\n",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "5-11",
+            "rule_id": "5-13",
             "ruleset_reference": "G3.1 #5 (b) Opaque assemblies used for new buildings, existing buildings, or additions ... shall match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8:",
-            "rule_description": "Baseline above-grade wall assemblies must match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8",
+            "rule_description": "Baseline floor assemblies must  match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-9",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
@@ -411,7 +411,7 @@
                                                         "tilt": 90,
                                                         "construction": {
                                                             "id": "construction_1",
-                                                            "u_factor": 1.2378615812787181
+                                                            "u_factor": 7.029690998270886
                                                         }
                                                     }
                                                 ]
@@ -439,16 +439,16 @@
             }
         }
     },
-    "rule-5-11-f": {
+    "rule-5-13-f": {
         "Section": 5,
-        "Rule": 11,
+        "Rule": 13,
         "Test": "f",
-        "test_description": "A zone is semiheated based on heating and cooling capacity of the HVAC system that servies the parent zone. Building is located in climate zone 4A. The baseline above-grade wall U-factor for the zone is established correctly.",
+        "test_description": "A zone is semiheated based on heating and cooling capacity of the HVAC system that servies the parent zone. Building is located in climate zone 4A. The baseline floor U-factor for the zone is established correctly.\n\n",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "5-11",
+            "rule_id": "5-13",
             "ruleset_reference": "G3.1 #5 (b) Opaque assemblies used for new buildings, existing buildings, or additions ... shall match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8:",
-            "rule_description": "Baseline above-grade wall assemblies must match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8",
+            "rule_description": "Baseline floor assemblies must  match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-9",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
@@ -500,7 +500,7 @@
                                                         "area": 9.290303999999999,
                                                         "construction": {
                                                             "id": "construction_1",
-                                                            "u_factor": 0.7041047526539498
+                                                            "u_factor": 3.9974979505514567
                                                         }
                                                     }
                                                 ]
@@ -528,16 +528,16 @@
             }
         }
     },
-    "rule-5-11-g": {
+    "rule-5-13-g": {
         "Section": 5,
-        "Rule": 11,
+        "Rule": 13,
         "Test": "g",
-        "test_description": "A zone is semiheated based on heating and cooling capacity of the HVAC system that servies the parent zone. Building is located in climate zone 4A. The baseline above-grade wall U-factor for the zone is not established correctly.",
+        "test_description": "A zone is semiheated based on heating and cooling capacity of the HVAC system that servies the parent zone. Building is located in climate zone 4A. The baseline floor U-factor for the zone is not established correctly.\n\n",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "5-11",
+            "rule_id": "5-13",
             "ruleset_reference": "G3.1 #5 (b) Opaque assemblies used for new buildings, existing buildings, or additions ... shall match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8:",
-            "rule_description": "Baseline above-grade wall assemblies must match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8",
+            "rule_description": "Baseline floor assemblies must  match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-9",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
@@ -589,7 +589,7 @@
                                                         "area": 9.290303999999999,
                                                         "construction": {
                                                             "id": "construction_1",
-                                                            "u_factor": 0.35773064046128095
+                                                            "u_factor": 3.9974979505514567
                                                         }
                                                     }
                                                 ]

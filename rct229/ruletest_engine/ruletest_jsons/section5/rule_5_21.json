@@ -1,0 +1,294 @@
+{
+    "rule-5-21-a": {
+        "Section": 5,
+        "Rule": 21,
+        "Test": "a",
+        "test_description": "Building includes a zone that has two exterior walls with windows. Vertical fenestration area in the baseline model is distributed on each face in the same proportion as in the proposed design. ",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "5-21",
+            "ruleset_reference": "Table G3.1 #5 baseline column #c: The vertical fenestration shall be distributed on each face of the building in the same proportion as in the proposed design.",
+            "rule_description": "The vertical fenestration shall be distributed on each face of the building in the same proportion as in the proposed design",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Proposed RMR",
+            "rule_dependency": "None",
+            "primary_rule": "Y",
+            "schema_version": "0.0.12"
+        },
+        "rmr_transformations": {
+            "proposed": {
+                "id": "ASHRAE229",
+                "weather": {
+                    "climate_zone": "CZ4A",
+                    "data_source_type": "OTHER"
+                },
+                "ruleset_model_instances": [
+                    {
+                        "id": "RMR 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_open_schedule": "Required Schedule 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Zone 1",
+                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
+                                                "surfaces": [
+                                                    {
+                                                        "id": "Surface 1",
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 90,
+                                                        "area": 92.90303999999999,
+                                                        "subsurfaces": [
+                                                            {
+                                                                "id": "SubSurface 1",
+                                                                "glazed_area": 18.580607999999998,
+                                                                "opaque_area": 0.0
+                                                            },
+                                                            {
+                                                                "id": "SubSurface 2",
+                                                                "glazed_area": 9.290303999999999,
+                                                                "opaque_area": 4.6451519999999995
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "id": "Surface 2",
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 75,
+                                                        "area": 1000,
+                                                        "subsurfaces": [
+                                                            {
+                                                                "id": "SubSurface 3",
+                                                                "glazed_area": 37.161215999999996,
+                                                                "opaque_area": 9.290303999999999
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            "baseline": {
+                "id": "ASHRAE229",
+                "weather": {
+                    "climate_zone": "CZ4A",
+                    "data_source_type": "OTHER"
+                },
+                "ruleset_model_instances": [
+                    {
+                        "id": "RMR 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_open_schedule": "Required Schedule 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Zone 1",
+                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
+                                                "surfaces": [
+                                                    {
+                                                        "id": "Surface 1",
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 90,
+                                                        "area": 92.90303999999999,
+                                                        "subsurfaces": [
+                                                            {
+                                                                "id": "SubSurface 1",
+                                                                "glazed_area": 9.290303999999999,
+                                                                "opaque_area": 0.0
+                                                            },
+                                                            {
+                                                                "id": "SubSurface 2",
+                                                                "glazed_area": 4.6451519999999995,
+                                                                "opaque_area": 2.3225759999999998
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "id": "Surface 2",
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 75,
+                                                        "area": 1000,
+                                                        "subsurfaces": [
+                                                            {
+                                                                "id": "SubSurface 3",
+                                                                "glazed_area": 18.580607999999998,
+                                                                "opaque_area": 4.6451519999999995
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    },
+    "rule-5-21-b": {
+        "Section": 5,
+        "Rule": 21,
+        "Test": "b",
+        "test_description": "Building includes a zone that has two exterior walls with windows. Vertical fenestration area in the baseline model is not distributed on each face in the same proportion as in the proposed design. ",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "5-21",
+            "ruleset_reference": "Table G3.1 #5 baseline column #c: The vertical fenestration shall be distributed on each face of the building in the same proportion as in the proposed design.",
+            "rule_description": "The vertical fenestration shall be distributed on each face of the building in the same proportion as in the proposed design",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Proposed RMR",
+            "rule_dependency": "None",
+            "primary_rule": "Y",
+            "schema_version": "0.0.12"
+        },
+        "rmr_transformations": {
+            "proposed": {
+                "id": "ASHRAE229",
+                "weather": {
+                    "climate_zone": "CZ4A",
+                    "data_source_type": "OTHER"
+                },
+                "ruleset_model_instances": [
+                    {
+                        "id": "RMR 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_open_schedule": "Required Schedule 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Zone 1",
+                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
+                                                "surfaces": [
+                                                    {
+                                                        "id": "Surface 1",
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 90,
+                                                        "area": 92.90303999999999,
+                                                        "subsurfaces": [
+                                                            {
+                                                                "id": "SubSurface 1",
+                                                                "glazed_area": 18.580607999999998,
+                                                                "opaque_area": 0.0
+                                                            },
+                                                            {
+                                                                "id": "SubSurface 2",
+                                                                "glazed_area": 9.290303999999999,
+                                                                "opaque_area": 4.6451519999999995
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "id": "Surface 2",
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 75,
+                                                        "area": 1000,
+                                                        "subsurfaces": [
+                                                            {
+                                                                "id": "SubSurface 3",
+                                                                "glazed_area": 37.161215999999996,
+                                                                "opaque_area": 9.290303999999999
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            "baseline": {
+                "id": "ASHRAE229",
+                "weather": {
+                    "climate_zone": "CZ4A",
+                    "data_source_type": "OTHER"
+                },
+                "ruleset_model_instances": [
+                    {
+                        "id": "RMR 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_open_schedule": "Required Schedule 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Zone 1",
+                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
+                                                "surfaces": [
+                                                    {
+                                                        "id": "Surface 1",
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 90,
+                                                        "area": 92.90303999999999,
+                                                        "subsurfaces": [
+                                                            {
+                                                                "id": "SubSurface 1",
+                                                                "glazed_area": 18.580607999999998,
+                                                                "opaque_area": 0.0
+                                                            },
+                                                            {
+                                                                "id": "SubSurface 2",
+                                                                "glazed_area": 4.6451519999999995,
+                                                                "opaque_area": 2.3225759999999998
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "id": "Surface 2",
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 75,
+                                                        "area": 1000,
+                                                        "subsurfaces": [
+                                                            {
+                                                                "id": "SubSurface 3",
+                                                                "glazed_area": 18.580607999999998,
+                                                                "opaque_area": 4.6451519999999995
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    }
+}

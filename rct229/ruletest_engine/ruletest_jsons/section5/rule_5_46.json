@@ -13,7 +13,7 @@
             "rule_assertion": "=",
             "comparison_value": "Baseline RMR",
             "rule_dependency": "None",
-            "mandatory_rule": "Yes",
+            "primary_rule": "Y",
             "schema_version": "0.0.12"
         },
         "rmr_transformations": {
@@ -95,7 +95,7 @@
             "rule_assertion": "=",
             "comparison_value": "Baseline RMR",
             "rule_dependency": "None",
-            "mandatory_rule": "Yes",
+            "primary_rule": "Y",
             "schema_version": "0.0.12"
         },
         "rmr_transformations": {

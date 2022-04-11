@@ -13,7 +13,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "rule_dependency": "None",
-            "mandatory_rule": 0,
+            "primary_rule": "Y",
             "schema_version": "0.0.12"
         },
         "rmr_transformations": {
@@ -101,7 +101,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "rule_dependency": "None",
-            "mandatory_rule": 0,
+            "primary_rule": "Y",
             "schema_version": "0.0.12"
         },
         "rmr_transformations": {
@@ -189,7 +189,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "rule_dependency": "None",
-            "mandatory_rule": 0,
+            "primary_rule": "Y",
             "schema_version": "0.0.12"
         },
         "rmr_transformations": {
@@ -277,7 +277,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "rule_dependency": "None",
-            "mandatory_rule": 0,
+            "primary_rule": "Y",
             "schema_version": "0.0.12"
         },
         "rmr_transformations": {
@@ -365,7 +365,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "rule_dependency": "None",
-            "mandatory_rule": 0,
+            "primary_rule": "Y",
             "schema_version": "0.0.12"
         },
         "rmr_transformations": {
@@ -416,11 +416,6 @@
                                                         }
                                                     }
                                                 ]
-                                            },
-                                            {
-                                                "id": "Zone 2",
-                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1"
                                             }
                                         ],
                                         "heating_ventilation_air_conditioning_systems": [
@@ -459,7 +454,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "rule_dependency": "None",
-            "mandatory_rule": 0,
+            "primary_rule": "Y",
             "schema_version": "0.0.12"
         },
         "rmr_transformations": {
@@ -510,11 +505,6 @@
                                                         }
                                                     }
                                                 ]
-                                            },
-                                            {
-                                                "id": "Zone 2",
-                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1"
                                             }
                                         ],
                                         "heating_ventilation_air_conditioning_systems": [

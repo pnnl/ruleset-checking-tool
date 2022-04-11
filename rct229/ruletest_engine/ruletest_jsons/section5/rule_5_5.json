@@ -13,7 +13,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "rule_dependency": "None",
-            "mandatory_rule": 0,
+            "primary_rule": "Y",
             "schema_version": "0.0.12"
         },
         "rmr_transformations": {
@@ -91,7 +91,7 @@
         "Section": 5,
         "Rule": 5,
         "Test": "b",
-        "test_description": "Building is located in climate zone 4A and includes a space that has residential occupancy type and is  coditioned based on cooling capacity of the HVAC system that servies the parent zone. The baseline roof U-factor for the space is established correctly.",
+        "test_description": "Building is located in climate zone 4A and includes a space that has residential occupancy type and is  conditioned based on cooling capacity of the HVAC system that servies the parent zone. The baseline roof U-factor for the space is established correctly.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-5",
@@ -101,7 +101,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "rule_dependency": "None",
-            "mandatory_rule": 0,
+            "primary_rule": "Y",
             "schema_version": "0.0.12"
         },
         "rmr_transformations": {
@@ -179,7 +179,7 @@
         "Section": 5,
         "Rule": 5,
         "Test": "c",
-        "test_description": "Building is located in climate zone 4A and includes a space that has residential occupancy type and is  coditioned based on heating capacity of the HVAC system that servies the parent zone. The baseline roof U-factor for the space is not established correctly.",
+        "test_description": "Building is located in climate zone 4A and includes a space that has residential occupancy type and is  conditioned based on heating capacity of the HVAC system that servies the parent zone. The baseline roof U-factor for the space is not established correctly.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-5",
@@ -189,7 +189,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "rule_dependency": "None",
-            "mandatory_rule": 0,
+            "primary_rule": "Y",
             "schema_version": "0.0.12"
         },
         "rmr_transformations": {
@@ -277,7 +277,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "rule_dependency": "None",
-            "mandatory_rule": 0,
+            "primary_rule": "Y",
             "schema_version": "0.0.12"
         },
         "rmr_transformations": {
@@ -365,7 +365,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "rule_dependency": "None",
-            "mandatory_rule": 0,
+            "primary_rule": "Y",
             "schema_version": "0.0.12"
         },
         "rmr_transformations": {
@@ -453,7 +453,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "rule_dependency": "None",
-            "mandatory_rule": 0,
+            "primary_rule": "Y",
             "schema_version": "0.0.12"
         },
         "rmr_transformations": {
@@ -504,11 +504,6 @@
                                                         }
                                                     }
                                                 ]
-                                            },
-                                            {
-                                                "id": "Zone 2",
-                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1"
                                             }
                                         ],
                                         "heating_ventilation_air_conditioning_systems": [
@@ -547,7 +542,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "rule_dependency": "None",
-            "mandatory_rule": 0,
+            "primary_rule": "Y",
             "schema_version": "0.0.12"
         },
         "rmr_transformations": {
@@ -598,11 +593,6 @@
                                                         }
                                                     }
                                                 ]
-                                            },
-                                            {
-                                                "id": "Zone 2",
-                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1"
                                             }
                                         ],
                                         "heating_ventilation_air_conditioning_systems": [
