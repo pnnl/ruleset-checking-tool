@@ -32,7 +32,9 @@
                                 "building_open_schedule": "Required Schedule 1",
                                 "building_segments": [
                                     {
+                                        "is_all_new": true,
                                         "id": "Building Segment 1",
+                                        "area_type_vertical_fenestration": "SCHOOL_PRIMARY",
                                         "zones": [
                                             {
                                                 "id": "Zone 1",
@@ -63,7 +65,8 @@
                                                                 "id": "SubSurface 1",
                                                                 "classification": "WINDOW",
                                                                 "glazed_area": 20.4386688,
-                                                                "opaque_area": 0.0
+                                                                "opaque_area": 0.0,
+                                                                "u_factor": 3.2366105565544463
                                                             }
                                                         ]
                                                     },
@@ -77,7 +80,8 @@
                                                                 "id": "SubSurface 2",
                                                                 "classification": "DOOR",
                                                                 "glazed_area": 400,
-                                                                "opaque_area": 40
+                                                                "opaque_area": 40,
+                                                                "u_factor": 8.233482994743767
                                                             }
                                                         ]
                                                     }
@@ -139,7 +143,9 @@
                                 "building_open_schedule": "Required Schedule 1",
                                 "building_segments": [
                                     {
+                                        "is_all_new": true,
                                         "id": "Building Segment 1",
+                                        "area_type_vertical_fenestration": "SCHOOL_PRIMARY",
                                         "zones": [
                                             {
                                                 "id": "Zone 1",
@@ -170,7 +176,8 @@
                                                                 "id": "SubSurface 1",
                                                                 "classification": "WINDOW",
                                                                 "glazed_area": 20.4386688,
-                                                                "opaque_area": 0.0
+                                                                "opaque_area": 0.0,
+                                                                "u_factor": 3.2366105565544463
                                                             }
                                                         ]
                                                     },
@@ -184,7 +191,8 @@
                                                                 "id": "SubSurface 2",
                                                                 "classification": "DOOR",
                                                                 "glazed_area": 400,
-                                                                "opaque_area": 60
+                                                                "opaque_area": 60,
+                                                                "u_factor": 8.233482994743767
                                                             }
                                                         ]
                                                     }
@@ -246,7 +254,9 @@
                                 "building_open_schedule": "Required Schedule 1",
                                 "building_segments": [
                                     {
+                                        "is_all_new": true,
                                         "id": "Building Segment 1",
+                                        "area_type_vertical_fenestration": "WAREHOUSE_NONREFRIGERATED",
                                         "zones": [
                                             {
                                                 "id": "Zone 1",
@@ -277,9 +287,14 @@
                                                                 "id": "SubSurface 1",
                                                                 "classification": "WINDOW",
                                                                 "glazed_area": 5.5741824,
-                                                                "opaque_area": 0.0
+                                                                "opaque_area": 0.0,
+                                                                "u_factor": 3.2366105565544463
                                                             }
-                                                        ]
+                                                        ],
+                                                        "construction": {
+                                                            "id": "construction_1",
+                                                            "u_factor": 3.2366105565544463
+                                                        }
                                                     },
                                                     {
                                                         "id": "Surface 2",
@@ -291,9 +306,14 @@
                                                                 "id": "SubSurface 2",
                                                                 "classification": "WINDOW",
                                                                 "glazed_area": 100,
-                                                                "opaque_area": 20
+                                                                "opaque_area": 20,
+                                                                "u_factor": 3.2366105565544463
                                                             }
-                                                        ]
+                                                        ],
+                                                        "construction": {
+                                                            "id": "construction_2",
+                                                            "u_factor": 3.2366105565544463
+                                                        }
                                                     }
                                                 ]
                                             }
@@ -353,7 +373,9 @@
                                 "building_open_schedule": "Required Schedule 1",
                                 "building_segments": [
                                     {
+                                        "is_all_new": true,
                                         "id": "Building Segment 1",
+                                        "area_type_vertical_fenestration": "WAREHOUSE_NONREFRIGERATED",
                                         "zones": [
                                             {
                                                 "id": "Zone 1",
@@ -384,9 +406,14 @@
                                                                 "id": "SubSurface 1",
                                                                 "classification": "WINDOW",
                                                                 "glazed_area": 5.5741824,
-                                                                "opaque_area": 1.8580607999999998
+                                                                "opaque_area": 1.8580607999999998,
+                                                                "u_factor": 3.2366105565544463
                                                             }
-                                                        ]
+                                                        ],
+                                                        "construction": {
+                                                            "id": "construction_1",
+                                                            "u_factor": 3.2366105565544463
+                                                        }
                                                     },
                                                     {
                                                         "id": "Surface 2",
@@ -398,9 +425,14 @@
                                                                 "id": "SubSurface 2",
                                                                 "classification": "WINDOW",
                                                                 "glazed_area": 100,
-                                                                "opaque_area": 20
+                                                                "opaque_area": 20,
+                                                                "u_factor": 3.2366105565544463
                                                             }
-                                                        ]
+                                                        ],
+                                                        "construction": {
+                                                            "id": "construction_2",
+                                                            "u_factor": 3.2366105565544463
+                                                        }
                                                     }
                                                 ]
                                             }

@@ -28,7 +28,7 @@ class Section5Rule18(RuleDefinitionListIndexedBase):
             index_rmr="baseline",
             id="5-18",
             description="For building area types included in Table G3.1.1-1, vertical fenestration areas for new buildings and additions shall equal that in Table G3.1.1-1 based on the area of gross above-grade walls that separate conditioned spaces and semi-heated spaces from the exterior.",
-            rmr_context="ruleset_model_instances/0/buildings",
+            list_path="ruleset_model_instances[0].buildings[*]",
         )
 
     def create_data(self, context, data=None):
@@ -41,7 +41,7 @@ class Section5Rule18(RuleDefinitionListIndexedBase):
                 rmrs_used=UserBaselineProposedVals(False, True, False),
                 required_fields={
                     "$": ["building_segments"],
-                    "building_segments": [
+                    "building_segment": [
                         "is_all_new",
                         "area_type_vertical_fenestration",
                     ],
@@ -56,7 +56,7 @@ class Section5Rule18(RuleDefinitionListIndexedBase):
                 data["climate_zone"], building
             )
             is_area_type_all_new_dict = {}
-            for building_segment in find_all("building_segments", building):
+            for building_segment in find_all("$..building_segments[*]", building):
                 area_type = building_segment["area_type_vertical_fenestration"]
                 # add key-value pair or override the existing value
                 is_area_type_all_new_dict[area_type] = building_segment[
@@ -73,11 +73,11 @@ class Section5Rule18(RuleDefinitionListIndexedBase):
             building = context.baseline
             area_type_to_building_segment_dict = {}
             # dict map area_type with list of building_segment
-            for building_segment in find_all("building_segments", building):
+            for building_segment in find_all("$..building_segments[*]", building):
                 area_type = building_segment["area_type_vertical_fenestration"]
                 if area_type not in area_type_to_building_segment_dict:
-                    area_type_to_building_segment_dict[area_type] = []
-                area_type_to_building_segment_dict[area_type].append(building_segment)
+                    area_type_to_building_segment_dict[area_type] = {"id": area_type, "building_segments":[]}
+                area_type_to_building_segment_dict[area_type]["building_segments"].append(building_segment)
             # create list based on area_type
             return [
                 UserBaselineProposedVals(None, building_segments, None)
@@ -91,7 +91,7 @@ class Section5Rule18(RuleDefinitionListIndexedBase):
                 )
 
             def get_calc_vals(self, context, data=None):
-                building_segments_b = context.baseline
+                building_segments_b = context.baseline["building_segments"]
                 is_area_type_all_new_dict = data["is_area_type_all_new_dict"]
                 area_type_window_wall_ratio_b = data["area_type_window_wall_ratio_dict"]
 
@@ -110,7 +110,7 @@ class Section5Rule18(RuleDefinitionListIndexedBase):
                 return {
                     "is_all_new": is_area_type_all_new_dict[area_type],
                     "area_type_wwr": area_type_wwr,
-                    "area_type_target_wwr": area_type_target_wwr,
+                    "area_type_target_wwr": area_type_target_wwr['wwr'],
                 }
 
             def manual_check_required(self, context, calc_vals=None, data=None):
