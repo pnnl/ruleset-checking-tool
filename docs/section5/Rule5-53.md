@@ -47,7 +47,7 @@
 
           **Rule Assertion:**  
 
-          - Case 1: For each opaque door, if the door's parent zone has both residential and non-residential spaces and the construction requirements for door are different, request manual review: `if manual_review_flag == TRUE: CAUTION and raise_warning "ZONE HAS BOTH RESIDENTIAL AND NON-RESIDENTIAL TYPE SPACES AND THE REQUIREMENT FOR U-FACTOR FOR DOORS ARE DIFFERENT. VERIFY DOOR U-FACTOR IS MODELED CORRECTLY."`
+          - Case 1: For each opaque door, if the door's parent zone has both residential and non-residential spaces and the construction requirements for door are different, request manual review: `if manual_review_flag == TRUE: UNDETERMINED and raise_message "ZONE HAS BOTH RESIDENTIAL AND NON-RESIDENTIAL TYPE SPACES AND THE REQUIREMENT FOR U-FACTOR FOR DOORS ARE DIFFERENT. VERIFY DOOR U-FACTOR IS MODELED CORRECTLY."`
 
           - Case 2: Else if door U-factor matches Table G3.4: `else if subsurface_b.u_factor == target_u_factor: PASS`
 
