@@ -59,9 +59,7 @@ class Section5Rule18(RuleDefinitionListIndexedBase):
             for building_segment in find_all("$..building_segments[*]", building):
                 area_type = building_segment["area_type_vertical_fenestration"]
                 # add key-value pair or override the existing value
-                is_area_type_all_new_dict[area_type] = building_segment[
-                    "is_all_new"
-                ]
+                is_area_type_all_new_dict[area_type] = building_segment["is_all_new"]
 
             return {
                 **data,
@@ -76,8 +74,13 @@ class Section5Rule18(RuleDefinitionListIndexedBase):
             for building_segment in find_all("$..building_segments[*]", building):
                 area_type = building_segment["area_type_vertical_fenestration"]
                 if area_type not in area_type_to_building_segment_dict:
-                    area_type_to_building_segment_dict[area_type] = {"id": area_type, "building_segments":[]}
-                area_type_to_building_segment_dict[area_type]["building_segments"].append(building_segment)
+                    area_type_to_building_segment_dict[area_type] = {
+                        "id": area_type,
+                        "building_segments": [],
+                    }
+                area_type_to_building_segment_dict[area_type][
+                    "building_segments"
+                ].append(building_segment)
             # create list based on area_type
             return [
                 UserBaselineProposedVals(None, building_segments, None)
@@ -110,7 +113,7 @@ class Section5Rule18(RuleDefinitionListIndexedBase):
                 return {
                     "is_all_new": is_area_type_all_new_dict[area_type],
                     "area_type_wwr": area_type_wwr,
-                    "area_type_target_wwr": area_type_target_wwr['wwr'],
+                    "area_type_target_wwr": area_type_target_wwr["wwr"],
                 }
 
             def manual_check_required(self, context, calc_vals=None, data=None):

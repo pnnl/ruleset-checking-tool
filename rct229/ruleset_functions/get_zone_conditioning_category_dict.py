@@ -7,7 +7,8 @@ from rct229.schema.config import ureg
 from rct229.utils.assertions import (
     assert_,
     assert_required_fields,
-    getattr_, get_first_attr_,
+    get_first_attr_,
+    getattr_,
 )
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.pint_utils import ZERO, pint_sum
@@ -229,19 +230,24 @@ def get_zone_conditioning_category_dict(climate_zone, building):
                     surface_ua = ZERO.UA
                     try:
                         surface_ua = (
-                            get_first_attr_(surface_construction, "construction", ["u_factor", "f_factor", "c_factor"])
+                            get_first_attr_(
+                                surface_construction,
+                                "construction",
+                                ["u_factor", "f_factor", "c_factor"],
+                            )
                             * non_subsurfaces_area
                             + subsurfaces_ua
                         )
                     except Exception as e:
-                       surface_ua = ZERO.UA
+                        surface_ua = ZERO.UA
 
                     # Add the surface UA to one of the running totals for the zone
                     # according to whether the surface is adjacent to a directly conditioned
                     # zone or not
                     if (
                         getattr_(surface, "surface", "adjacent_to") == "INTERIOR"
-                        and getattr_(surface, "surface", "adjacent_zone") in directly_conditioned_zone_ids
+                        and getattr_(surface, "surface", "adjacent_zone")
+                        in directly_conditioned_zone_ids
                     ):
                         zone_directly_conditioned_ua += surface_ua  # zone_1_4
                     else:
