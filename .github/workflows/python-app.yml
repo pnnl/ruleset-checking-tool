@@ -6,17 +6,19 @@
 on: pull_request
 
 jobs:
-  black-formatting-check:
-    name: Black formatting check
-    runs-on: 'ubuntu-latest'
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-      - name: Setup Python
-        uses: actions/setup-python@v2
-        # This will halt the action if formatting fails
-        # Note: This will also fail if there are syntax errors
-      - uses: psf/black@stable
+#   black-formatting-check:
+#     name: Black formatting check
+#     runs-on: 'ubuntu-latest'
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v2
+#       - name: Setup Python
+#         uses: actions/setup-python@v2
+#         # This will halt the action if formatting fails
+#         # Note: This will also fail if there are syntax errors
+#       - uses: psf/black@stable
+#         with:
+#           version: "21.10b0"
   run-pytests:
     name: Run pytests
     runs-on: 'ubuntu-latest'
