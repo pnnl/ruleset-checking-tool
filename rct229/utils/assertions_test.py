@@ -7,6 +7,7 @@ GETFIRSTATTR_TEST_OBJ = {"id": "c1", "u_factor": 1.234}
 def test__getattr___with_required_fields():
     assert getattr_(GETATTR_TEST_OBJ, "Obj", "field1", "field2", "field3") == 7
 
+
 def test__getattr___with_missing_field():
     try:
         getattr_(GETATTR_TEST_OBJ, "Obj", "field1", "field2", "field4")

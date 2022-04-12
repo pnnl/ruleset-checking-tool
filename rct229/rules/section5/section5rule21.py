@@ -1,12 +1,22 @@
 from rct229.data.schema_enums import schema_enums
-from rct229.rule_engine.rule_base import RuleDefinitionListIndexedBase, RuleDefinitionBase
+from rct229.rule_engine.rule_base import (
+    RuleDefinitionBase,
+    RuleDefinitionListIndexedBase,
+)
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
-from rct229.ruleset_functions.get_area_type_window_wall_area_dict import get_area_type_window_wall_area_dict
-from rct229.ruleset_functions.get_opaque_surface_type import (OpaqueSurfaceType as OST, get_opaque_surface_type)
-from rct229.utils.assertions import getattr_, MissingKeyException
+from rct229.ruleset_functions.get_area_type_window_wall_area_dict import (
+    get_area_type_window_wall_area_dict,
+)
+from rct229.ruleset_functions.get_opaque_surface_type import OpaqueSurfaceType as OST
+from rct229.ruleset_functions.get_opaque_surface_type import get_opaque_surface_type
+from rct229.ruleset_functions.get_surface_conditioning_category_dict import (
+    SurfaceConditioningCategory as SCC,
+)
+from rct229.ruleset_functions.get_surface_conditioning_category_dict import (
+    get_surface_conditioning_category_dict,
+)
+from rct229.utils.assertions import MissingKeyException, getattr_
 from rct229.utils.jsonpath_utils import find_all
-from rct229.ruleset_functions.get_surface_conditioning_category_dict import (SurfaceConditioningCategory as SCC,
-                                                                             get_surface_conditioning_category_dict)
 from rct229.utils.match_lists import match_lists_by_id
 from rct229.utils.pint_utils import ZERO
 from rct229.utils.std_comparisons import std_equal
@@ -49,15 +59,23 @@ class Section5Rule21(RuleDefinitionListIndexedBase):
             building_p = context.proposed
             climate_zone = data["climate_zone"]
 
-            window_wall_areas_dictionary_b = get_area_type_window_wall_area_dict(climate_zone, building_b)
-            window_wall_areas_dictionary_p = get_area_type_window_wall_area_dict(climate_zone, building_p)
+            window_wall_areas_dictionary_b = get_area_type_window_wall_area_dict(
+                climate_zone, building_b
+            )
+            window_wall_areas_dictionary_p = get_area_type_window_wall_area_dict(
+                climate_zone, building_p
+            )
 
             return {
                 **data,
-                "total_fenestration_area_b": sum(find_all("$..total_window_area", window_wall_areas_dictionary_b),
-                                                 ZERO.AREA),
-                "total_fenestration_area_p": sum(find_all("$..total_window_area", window_wall_areas_dictionary_p),
-                                                 ZERO.AREA),
+                "total_fenestration_area_b": sum(
+                    find_all("$..total_window_area", window_wall_areas_dictionary_b),
+                    ZERO.AREA,
+                ),
+                "total_fenestration_area_p": sum(
+                    find_all("$..total_window_area", window_wall_areas_dictionary_p),
+                    ZERO.AREA,
+                ),
                 "surface_conditioning_category_dict_b": get_surface_conditioning_category_dict(
                     data["climate_zone"], building_b
                 ),
@@ -72,14 +90,18 @@ class Section5Rule21(RuleDefinitionListIndexedBase):
             baseline_surfaces = find_all("$..surfaces[*]", building_b)
             proposed_surfaces = find_all("$..surfaces[*]", building_p)
 
-            matched_proposed_surfaces = match_lists_by_id(baseline_surfaces, proposed_surfaces)
-            proposed_baseline_surface_pairs = zip(baseline_surfaces, matched_proposed_surfaces)
+            matched_proposed_surfaces = match_lists_by_id(
+                baseline_surfaces, proposed_surfaces
+            )
+            proposed_baseline_surface_pairs = zip(
+                baseline_surfaces, matched_proposed_surfaces
+            )
             # List of all baseline above grade wall to become the context for AboveGradeWall
             return [
                 UserBaselineProposedVals(None, surface_b, surface_p)
                 for surface_b, surface_p in proposed_baseline_surface_pairs
-                if
-                get_opaque_surface_type(surface_b) == OST.ABOVE_GRADE_WALL and scc[surface_b["id"]] != SCC.UNREGULATED
+                if get_opaque_surface_type(surface_b) == OST.ABOVE_GRADE_WALL
+                and scc[surface_b["id"]] != SCC.UNREGULATED
             ]
 
         class AboveGradeWallRule(RuleDefinitionBase):
@@ -98,27 +120,54 @@ class Section5Rule21(RuleDefinitionListIndexedBase):
 
                 def _helper_calc_val(above_grade_wall):
                     """Helper function for calculating the total fenestration area for an above grade wall"""
-                    return sum([
-                        subsurface.get("glazed_area", ZERO.AREA) + subsurface.get("opaque_area", ZERO.AREA)
-                        for subsurface in find_all("subsurfaces[*]", above_grade_wall)
-                        if (getattr_(subsurface, "subsurface", "classification") == DOOR and
-                            (subsurface.get("glazed_area", ZERO.AREA) > subsurface.get("opaque_area", ZERO.AREA)) or
-                            (getattr_(subsurface, "subsurface", "classification") != DOOR))
-                    ], ZERO.AREA)
+                    return sum(
+                        [
+                            subsurface.get("glazed_area", ZERO.AREA)
+                            + subsurface.get("opaque_area", ZERO.AREA)
+                            for subsurface in find_all(
+                                "subsurfaces[*]", above_grade_wall
+                            )
+                            if (
+                                getattr_(subsurface, "subsurface", "classification")
+                                == DOOR
+                                and (
+                                    subsurface.get("glazed_area", ZERO.AREA)
+                                    > subsurface.get("opaque_area", ZERO.AREA)
+                                )
+                                or (
+                                    getattr_(subsurface, "subsurface", "classification")
+                                    != DOOR
+                                )
+                            )
+                        ],
+                        ZERO.AREA,
+                    )
 
                 return {
-                    "total_fenestration_area_surface_b": _helper_calc_val(above_grade_wall_b),
+                    "total_fenestration_area_surface_b": _helper_calc_val(
+                        above_grade_wall_b
+                    ),
                     "total_fenestration_area_b": data["total_fenestration_area_b"],
-                    "total_fenestration_area_surface_p": _helper_calc_val(above_grade_wall_p),
-                    "total_fenestration_area_p": data["total_fenestration_area_p"]
+                    "total_fenestration_area_surface_p": _helper_calc_val(
+                        above_grade_wall_p
+                    ),
+                    "total_fenestration_area_p": data["total_fenestration_area_p"],
                 }
 
             def rule_check(self, context, calc_vals=None, data=None):
-                total_fenestration_area_surface_b = calc_vals["total_fenestration_area_surface_b"]
-                total_fenestration_area_surface_p = calc_vals["total_fenestration_area_surface_p"]
+                total_fenestration_area_surface_b = calc_vals[
+                    "total_fenestration_area_surface_b"
+                ]
+                total_fenestration_area_surface_p = calc_vals[
+                    "total_fenestration_area_surface_p"
+                ]
                 total_fenestration_area_b = calc_vals["total_fenestration_area_b"]
                 total_fenestration_area_p = calc_vals["total_fenestration_area_p"]
 
-                return (total_fenestration_area_b == ZERO.AREA and total_fenestration_area_p == ZERO.AREA) or \
-                       std_equal((total_fenestration_area_surface_b / total_fenestration_area_b),
-                                 (total_fenestration_area_surface_p / total_fenestration_area_p))
+                return (
+                    total_fenestration_area_b == ZERO.AREA
+                    and total_fenestration_area_p == ZERO.AREA
+                ) or std_equal(
+                    (total_fenestration_area_surface_b / total_fenestration_area_b),
+                    (total_fenestration_area_surface_p / total_fenestration_area_p),
+                )
