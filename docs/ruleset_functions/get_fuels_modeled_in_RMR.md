@@ -1,9 +1,9 @@
 # get_fuels_modeled_in_RMR
 
-**Description:** Get a list of the fuels used in the P-RMR.  Includes fuels used by HVAC systems including terminal units, chillers, boilers, ExternalFluidSources, and SWHs.
+**Description:** Get a list of the fuels used in the RMR.  Includes fuels used by HVAC systems including terminal units, chillers, boilers, ExternalFluidSources, and SWHs.
 
 **Inputs:**
-- **U, P, or B-RMR**: To determine a list of the fuels used in the P-RMR.  Includes fuels used by HVAC systems including terminal units, chillers, boilers, ExternalFluidSources, and SWHs in the RMR.
+- **U, P, or B-RMR**: To determine a list of the fuels used in the RMR.  Includes fuels used by HVAC systems including terminal units, chillers, boilers, ExternalFluidSources, and SWHs in the RMR.
 
 **Returns:**
 - **fuels_list_x**: A list that saves all the fuels modeled in the RMR.
