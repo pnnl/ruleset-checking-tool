@@ -24,25 +24,23 @@
 
 - For each building segment in the Proposed model: `for building_segment_b in B_RMR.building.building_segments:`  
 
-  - For each thermal_block in building segment: `for thermal_block_b in building_segment_b.thermal_blocks:`  
+  - For each zone in thermal block: `for zone_b in building_segment_b.zones:`  
 
-    - For each zone in thermal block: `for zone_b in thermal_block_b.zones:`  
+    - For each surface in zone: `for surface_b in zone_b.surfaces:`  
 
-      - For each surface in zone: `for surface_b in zone_b.surfaces:`  
+      - Check if surface is unregulated: `if ( scc_dictionary_b[surface_b.id] == UNREGULATED ):`  
 
-        - Check if surface is unregulated: `if ( scc_dictionary_b[surface_b.id] == UNREGULATED ):`  
+        - Get surface type: `surface_type_b = get_opaque_surface_type(surface_b)`
 
-          - Get surface type: `surface_type_b = get_opaque_surface_type(surface_b)`
+        - Get matching surface from P_RMR: `surface_p = match_data_element(P_RMR, surfaces, surface_b.id)`  
 
-          - Get matching surface from P_RMR: `surface_p = match_data_element(P_RMR, surfaces, surface_b.id)`  
+          **Rule Assertion:**  
 
-            **Rule Assertion:**  
+          - Case 1: If surface type is roof, floor or above-grade wall, and surface construction U-factor in B_RMR matches P_RMR: `if ( surface_type_b in ["ROOF", "FLOOR", "ABOVE-GRADE WALL"] ) AND ( surface_b.construction.u_factor == surface_p.construction.u_factor ): PASS`
 
-            - Case 1: If surface type is roof, floor or above-grade wall, and surface construction U-factor in B_RMR matches P_RMR: `if ( surface_type_b in ["ROOF", "FLOOR", "ABOVE-GRADE WALL"] ) AND ( surface_b.construction.u_factor == surface_p.construction.u_factor ): PASS`
+          - Case 2: Else if surface type is heated slab-on-grade or unheated slab-on-grade, and surface construction F-factor in B_RMR matches P_RMR: `if ( surface_type_b in ["HEATED SLAB-ON-GRADE", "UNHEATED SLAB-ON-GRADE"] ) AND ( surface_b.construction.f_factor == surface_p.construction.f_factor ): PASS`
 
-            - Case 2: Else if surface type is heated slab-on-grade or unheated slab-on-grade, and surface construction F-factor in B_RMR matches P_RMR: `if ( surface_type_b in ["HEATED SLAB-ON-GRADE", "UNHEATED SLAB-ON-GRADE"] ) AND ( surface_b.construction.f_factor == surface_p.construction.f_factor ): PASS`
+          - Case 3: Else if surface type is below-grade wall, and surface construction C-factor in B_RMR matches P_RMR: `if ( surface_type_b =="BELOW-GRADE WALL" ) AND ( surface_b.construction.c_factor == surface_p.construction.c_factor ): PASS`
 
-            - Case 3: Else if surface type is below-grade wall, and surface construction C-factor in B_RMR matches P_RMR: `if ( surface_type_b =="BELOW-GRADE WALL" ) AND ( surface_b.construction.c_factor == surface_p.construction.c_factor ): PASS`
-
-            - Case 4: Else: `else: FAIL`
+          - Case 4: Else: `else: FAIL`
 
