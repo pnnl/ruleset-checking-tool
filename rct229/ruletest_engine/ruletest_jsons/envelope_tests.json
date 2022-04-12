@@ -2783,9 +2783,10 @@
                                                         "id": "Surface 1",
                                                         "adjacent_to": "GROUND",
                                                         "tilt": 180,
+                                                        "area": 9.290303999999999,
                                                         "construction": {
                                                             "id": "construction_1",
-                                                            "c_factor": 7.171647601628536
+                                                            "f_factor": 1.2634364829396327
                                                         }
                                                     }
                                                 ]
@@ -2871,9 +2872,10 @@
                                                         "id": "Surface 1",
                                                         "adjacent_to": "GROUND",
                                                         "tilt": 180,
+                                                        "area": 9.290303999999999,
                                                         "construction": {
                                                             "id": "construction_1",
-                                                            "c_factor": 7.171647601628536
+                                                            "f_factor": 1.2634364829396327
                                                         }
                                                     }
                                                 ]
@@ -2959,9 +2961,10 @@
                                                         "id": "Surface 1",
                                                         "adjacent_to": "GROUND",
                                                         "tilt": 180,
+                                                        "area": 9.290303999999999,
                                                         "construction": {
                                                             "id": "construction_1",
-                                                            "c_factor": 2.2258795406479703
+                                                            "f_factor": 2.185918188976378
                                                         }
                                                     }
                                                 ]
@@ -3047,9 +3050,10 @@
                                                         "id": "Surface 1",
                                                         "adjacent_to": "GROUND",
                                                         "tilt": 180,
+                                                        "area": 9.290303999999999,
                                                         "construction": {
                                                             "id": "construction_1",
-                                                            "c_factor": 7.171647601628536
+                                                            "f_factor": 1.2634364829396327
                                                         }
                                                     }
                                                 ]
@@ -3135,9 +3139,10 @@
                                                         "id": "Surface 1",
                                                         "adjacent_to": "GROUND",
                                                         "tilt": 180,
+                                                        "area": 9.290303999999999,
                                                         "construction": {
                                                             "id": "construction_1",
-                                                            "c_factor": 2.1350273144990735
+                                                            "f_factor": 2.185918188976378
                                                         }
                                                     }
                                                 ]
@@ -3223,9 +3228,10 @@
                                                         "id": "Surface 1",
                                                         "adjacent_to": "GROUND",
                                                         "tilt": 180,
+                                                        "area": 9.290303999999999,
                                                         "construction": {
                                                             "id": "construction_1",
-                                                            "c_factor": 7.171647601628536
+                                                            "f_factor": 1.2634364829396327
                                                         }
                                                     }
                                                 ]
@@ -3311,9 +3317,10 @@
                                                         "id": "Surface 1",
                                                         "adjacent_to": "GROUND",
                                                         "tilt": 180,
+                                                        "area": 9.290303999999999,
                                                         "construction": {
                                                             "id": "construction_1",
-                                                            "c_factor": 2.1350273144990735
+                                                            "f_factor": 2.185918188976378
                                                         }
                                                     }
                                                 ]
