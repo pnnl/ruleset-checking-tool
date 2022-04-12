@@ -46,10 +46,7 @@ def get_hvac_zone_list_w_area_dict(building):
         # Note: None and [] are falsey; zone.terminals is optional
         if terminals:
             zone_area = pint_sum(find_all("spaces[*].floor_area", zone), ZERO.AREA)
-            assert_(
-                zone_area > ZERO.AREA,
-                f"zone:{zone['id']} has zero floor area"
-            )
+            assert_(zone_area > ZERO.AREA, f"zone:{zone['id']} has zero floor area")
             for terminal in terminals:
                 hvac_sys_id = terminal[
                     "served_by_heating_ventilation_air_conditioning_system"
@@ -69,6 +66,6 @@ def get_hvac_zone_list_w_area_dict(building):
 
                 assert_(
                     hvac_sys_entry["total_area"] > ZERO.AREA,
-                    f"terminal:{terminal['id']} serves zero floor area"
+                    f"terminal:{terminal['id']} serves zero floor area",
                 )
     return hvac_zone_list_w_area_dict

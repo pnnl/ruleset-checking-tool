@@ -158,7 +158,7 @@
                                                 "id": "HVAC 1",
                                                 "cooling_system": {
                                                     "id": "Cooling System 1",
-                                                    "sensible_cool_capacity": 3517.0
+                                                    "sensible_cool_capacity": 17585.0
                                                 },
                                                 "heating_system": {
                                                     "id": "Heating System 1",

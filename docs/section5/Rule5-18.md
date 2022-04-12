@@ -24,18 +24,18 @@
 
 - For each building segment in the Baseline model: `for building_segment_b in B_RMR...building_segments:`
 
-  - If area type has not been saved in is_area_type_all_new_dict, save building segment area type with its is_all_new flag  : `if NOT building_segment_b.area_type_vertical_fenestration in is_area_type_all_new_dict.keys(): is_area_type_all_new_dict[building_segment_b.area_type_vertical_fenestration] = building_segment_b.is_all_new`
+  - If area type has not been saved in is_area_type_all_new_dict, save building segment area type with its is_all_new flag  : `if NOT building_segment_b.area_type_vertical_fenestration in is_area_type_all_new_dict.keys(): `is_area_type_all_new_dict`[building_segment_b.area_type_vertical_fenestration] = building_segment_b.is_all_new`
 
   - Else if building segment is_all_new flag is FALSE, update is_area_type_all_new_dict: `else if NOT building_segment_b.is_all_new: is_area_type_all_new_dict[building_segment_b.area_type_vertical_fenestration] = building_segment_b.is_all_new`
 
 - For each unique area type in building: `for area_type_b in window_wall_areas_dictionary_b.keys():`
 
   - Check if area type is in Table G3.1.1-1, calculate window-wall-ratio: `if area_type_b != "NONE": area_type_wwr = window_wall_areas_dictionary_b[area_type_b]["TOTAL_WINDOW_AREA"] / window_wall_areas_dictionary_b[area_type_b]["TOTAL_WALL_AREA"]`
-
+  
   - Check if any building segment related to area type is not new, set manual_check_flag: `if NOT is_area_type_all_new_dict[area_type_b]: manual_check_flag = TRUE`
 
     **Rule Assertion:**
-
+  
     - Case 1: For each area type that is in Table G3.1.1-1, if all related building segments are new and area type window-wall-ratio matches Table G3.1.1-1 allowance: `if ( NOT manual_check_flag) AND ( area_type_wwr == data_lookup(table_G3_1_1_1, area_type_b) ): PASS`
 
     - Case 2: Else if all building segments in building are new and building segment window-wall-ratio does not match Table G3.1.1-1 allowance: `else if ( NOT manual_check_flag ) AND ( area_type_wwr != data_lookup(table_G3_1_1_1, area_type_b) ): FAIL`
