@@ -65,6 +65,14 @@ Set boolean variables to FALSE. Default is fuel is not used for space or SWH hea
     - Get terminal heat source: `energy_source_type_x = terminal_x.heat_source`
     - Check if the energy source is electric, if so then set boolean variable to true: `if energy_source_type_x in ["ELECTRIC"]:fuels_electricity_x = TRUE`
     - Check else if the energy source is other, if so then set boolean variable to true (else, do nothing): `elif energy_source_type_x in ["OTHER"]:fuels_other_x = TRUE`  
+- Loop through all ServiceWaterHeatingEquipment to determine the fuels used by the ServiceWaterHeatingEquipment in the RMR. Boolean variables are set to TRUE accordingly, for each ServiceWaterHeatingEquipment_x in the X_RMR: `for ServiceWaterHeatingEquipment_x in X_RMR...ServiceWaterHeatingEquipment:`  
+    - Reset energy source variable: `energy_source_type_x = ""`
+    - Get the energy_source_type: `energy_source_type_x = ServiceWaterHeatingEquipment_x.heater_fuel_type` 
+    - Check if the energy source is propane, if so then set boolean variable to true: `if energy_source_type_x in ["PROPANE"]:fuels_propane_x = TRUE`
+    - Check else if the energy source is natural gas, if so then set boolean variable to true: `elif energy_source_type_x in ["NATURAL_GAS"]:fuels_natural_gas_x = TRUE`
+    - Check else if the energy source is electricity, if so then set boolean variable to true: `elif energy_source_type_x in ["ELECTRICITY"]:fuels_electricity_x = TRUE`
+    - Check else if the energy source is fuel oil, if so then set boolean variable to true: `elif energy_source_type_x in ["FUEL_OIL"]:fuels_oil_x = TRUE`
+    - Else, set other boolean variable to true: `Else:fuels_other_x = TRUE`  
 
 This section creates a list of the applicable fuel types the RMR based on the outcome of the boolean variables above.
 - if fuels_propane_x equals true then list item 1 equals "PROPANE" otherwise "": `if fuels_propane_x == TRUE: list_item_1 = "PROPANE"`
