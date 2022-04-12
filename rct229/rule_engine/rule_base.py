@@ -110,9 +110,9 @@ class RuleDefinitionBase:
                 try:
                     # Check if rule is applicable
                     if self.is_applicable(context, data):
-                    # Get calculated values; these can be used by
-                    # manual_check_required() or rule_check() and will
-                    # be included in the output
+                        # Get calculated values; these can be used by
+                        # manual_check_required() or rule_check() and will
+                        # be included in the output
                         calc_vals = self.get_calc_vals(context, data)
                         if calc_vals is not None:
                             outcome["calc_vals"] = calc_vals
