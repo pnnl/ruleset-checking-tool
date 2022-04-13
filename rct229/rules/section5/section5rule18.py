@@ -15,7 +15,7 @@ CASE4_WARN_MESSAGE = "BUILDING IS NOT ALL NEW AND BASELINE WWR DOES NOT MATCH VA
 
 
 class Section5Rule18(RuleDefinitionListIndexedBase):
-    """Rule 2 of ASHRAE 90.1-2019 Appendix G Section 5 (Envelope)"""
+    """Rule 18 of ASHRAE 90.1-2019 Appendix G Section 5 (Envelope)"""
 
     def __init__(self):
         super(Section5Rule18, self).__init__(
