@@ -499,13 +499,6 @@ def run_envelope_tests():
     Results of envelope test are spit out to console
     """
 
-    # envelope_test_json = "envelope_5_5.json"
-    # envelope_test_json = "envelope_tests_5_11.json"
-    # envelope_test_json = "envelope_tests_5_11_only_A.json"
-    # envelope_test_json = "envelope_tests_5_11_only_B.json"
-    envelope_test_json = "envelope_tests_5_11_only_C.json" # has problem
-    # envelope_test_json = "envelope_tests_5_11_only_D.json"
-    # envelope_test_json = "envelope_tests_5_11_only_E.json" # has problem
-    # envelope_test_json = "envelope_tests_5_11_only_F.json"
-    # envelope_test_json = "envelope_tests_5_11_only_G.json" # has problem
+    envelope_test_json = "envelope_tests.json"
+
     return run_section_tests(envelope_test_json)
