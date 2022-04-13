@@ -36,22 +36,20 @@
   
     - Get total skylight area for building segment in P_RMR: `total_skylight_area_p = skylight_roof_areas_dictionary_p[building_segment_p.id][0]`
 
-  - For each thermal block in building segment: `for thermal_block_b in building_segment_b.thermal_blocks:`
+  - For each thermal block in building segment: `for zone_b in building_segment_b.zones:`
+  
+    - For each surface in zone: `for surface_b in zone_b.surfaces:`  
 
-    - For each zone in thermal block: `for zone_b in thermal_block_b.zones:`  
+      - Check if surface is roof and is regulated: `if ( get_opaque_surface_type(surface_b.id) == "ROOF" ) AND ( scc_dictionary_b[surface_b.id] != "UNREGULATED" ):`
 
-      - For each surface in zone: `for surface_b in zone_b.surfaces:`  
+        - Add total skylight area to roof total skylight area: `total_skylight_area_surface_b = sum(subsurface.glazed_area + subsurface.opaque_area for subsurface in surface_b.subsurfaces)`
 
-        - Check if surface is roof and is regulated: `if ( get_opaque_surface_type(surface_b.id) == "ROOF" ) AND ( scc_dictionary_b[surface_b.id] != "UNREGULATED" ):`
+        - Get matching surface in P_RMR: `surface_p = match_data_element(P_RMR, Surfaces, surface_b.id)`
 
-          - Add total skylight area to roof total skylight area: `total_skylight_area_surface_b = sum(subsurface.glazed_area + subsurface.opaque_area for subsurface in surface_b.subsurfaces)`
+          - Add total skylight area to roof total skylight area in P_RMR: `total_skylight_area_surface_p = sum(subsurface.glazed_area + subsurface.opaque_area for subsurface in surface_p.subsurfaces)`
 
-          - Get matching surface in P_RMR: `surface_p = match_data_element(P_RMR, Surfaces, surface_b.id)`
+          **Rule Assertion:**
 
-            - Add total skylight area to roof total skylight area in P_RMR: `total_skylight_area_surface_p = sum(subsurface.glazed_area + subsurface.opaque_area for subsurface in surface_p.subsurfaces)`
+          - Case 1: For each surface, if total skylight area in B_RMR is in the same proportion as in P_RMR: `if total_skylight_area_surface_b / total_skylight_area_b == total_skylight_area_surface_p / total_skylight_area_p: PASS`
 
-            **Rule Assertion:**
-
-            - Case 1: For each surface, if total skylight area in B_RMR is in the same proportion as in P_RMR: `if total_skylight_area_surface_b / total_skylight_area_b == total_skylight_area_surface_p / total_skylight_area_p: PASS`
-
-            - Case 2: Else: `else: FAIL`
+          - Case 2: Else: `else: FAIL`
