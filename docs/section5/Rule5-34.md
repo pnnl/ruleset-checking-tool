@@ -7,8 +7,9 @@
 **Appendix G Section:** Section G3.1-5(e) Building Envelope Modeling Requirements for the Baseline building  
 **Appendix G Section Reference:** None  
 
-**Applicability:** All required data elements exist for B_RMR  
-**Applicability Checks:**  None  
+**Applicability:** All required data elements exist for B_RMR
+**Applicability Checks:**  
+1. the skylight area in the proposed design is 3% or less.
 
 **Manual Check:** None  
 **Evaluation Context:** Each Data Element  
