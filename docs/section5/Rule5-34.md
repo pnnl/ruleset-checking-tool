@@ -26,11 +26,11 @@
 
 - For each building segment in B_RMR: `for building_segment_b in B_RMR.building.building_segments:`  
 
-  - Calculate skylight roof ratio for building segment: `skylight_roof_ratio_b = skylight_roof_areas_dictionary_b[building_segment_b.id][0] / skylight_roof_areas_dictionary_b[building_segment_b.id][1]`
+  - Calculate skylight roof ratio for building segment: `skylight_roof_ratio_b = skylight_roof_areas_dictionary_b[building_segment_b.id][total_skylight_area] / skylight_roof_areas_dictionary_b[building_segment_b.id][total_envelope_roof_area]`
 
   - Get matching building segment in P_RMR: `building_segment_p = match_data_element(P_RMR, BuildingSegments, building_segment_b.id)`
 
-    - Calculate skylight roof ratio for building segment in P_RMR: `skylight_roof_ratio_p = skylight_roof_areas_dictionary_p[building_segment_p.id][0] / skylight_roof_areas_dictionary_p[building_segment_p.id][1]`
+    - Calculate skylight roof ratio for building segment in P_RMR: `skylight_roof_ratio_p = skylight_roof_areas_dictionary_p[building_segment_p.id][total_skylight_area] / skylight_roof_areas_dictionary_p[building_segment_p.id][total_envelope_roof_area]`
 
     - Check if skylight roof ratio in P_RMR is 3% or less: `if skylight_roof_ratio_p <= 0.03:`
 
