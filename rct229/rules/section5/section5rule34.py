@@ -8,7 +8,7 @@ from rct229.ruleset_functions.get_building_segment_skylight_roof_areas_dict impo
 )
 from rct229.utils.std_comparisons import std_equal
 
-SKYLIGHT_THRESHOLD = 0.3
+SKYLIGHT_THRESHOLD = 0.03
 
 
 class Section5Rule34(RuleDefinitionListIndexedBase):
