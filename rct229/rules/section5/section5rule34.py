@@ -8,6 +8,8 @@ from rct229.ruleset_functions.get_building_segment_skylight_roof_areas_dict impo
 )
 from rct229.utils.std_comparisons import std_equal
 
+SKYLIGHT_THRESHOLD = 0.3
+
 
 class Section5Rule34(RuleDefinitionListIndexedBase):
     """Rule 34 of ASHRAE 90.1-2019 Appendix G Section 5 (Envelope)"""
@@ -58,6 +60,21 @@ class Section5Rule34(RuleDefinitionListIndexedBase):
                 super(Section5Rule34.BuildingRule.BuildingSegmentRule, self).__init__(
                     rmrs_used=UserBaselineProposedVals(False, True, False),
                 )
+
+            def is_applicable(self, context, data=None):
+                proposed = context.proposed
+                skylight_roof_areas_dictionary_p = data[
+                    "skylight_roof_areas_dictionary_p"
+                ]
+                skylight_roof_ratio_p = (
+                    skylight_roof_areas_dictionary_p[proposed["id"]][
+                        "total_skylight_area"
+                    ]
+                    / skylight_roof_areas_dictionary_p[proposed["id"]][
+                        "total_envelope_roof_area"
+                    ],
+                )
+                return skylight_roof_ratio_p <= SKYLIGHT_THRESHOLD
 
             def get_calc_vals(self, context, data=None):
                 baseline = context.baseline

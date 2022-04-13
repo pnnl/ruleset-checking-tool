@@ -33,6 +33,8 @@
     - Calculate skylight roof ratio for building segment in P_RMR: `skylight_roof_ratio_p = skylight_roof_areas_dictionary_p[building_segment_p.id][total_skylight_area] / skylight_roof_areas_dictionary_p[building_segment_p.id][total_envelope_roof_area]`
 
     - Check if skylight roof ratio in P_RMR is 3% or less: `if skylight_roof_ratio_p <= 0.03:`
+    
+    - if skylight roof ratio in P_RMR is greater than 3%, Rule is not applicable: `else: NOT_APPLICABLE` 
 
       **Rule Assertion:** 
 
