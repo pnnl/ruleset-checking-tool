@@ -651,6 +651,12 @@ class RuleDefinitionListIndexedBase(RuleDefinitionListBase):
         Note: the create_context_list() method can be overridden and
         ignore list_context.
         For better human readability, the leading "/" may be ommitted.
+    list_filter : func
+        A function used to filter the context_list obtained by applying list_path. If
+        The function signature should be func(list_item, data=None) -> bool.
+        For simple filter functions, a lambda function can be passed to the initilizer.
+        For more complex filter functions, the function may be defined as a private
+        function (preceding _) inside the enclosing rule definition.
     match_by : string
         A json pointer into each element of the list, generally to a field
         of the list element. The default is "/id" since the id is assumed to
@@ -666,11 +672,14 @@ class RuleDefinitionListIndexedBase(RuleDefinitionListBase):
         description=None,
         rmr_context="",
         list_path="[*]",
+        # The identity filter is used by default
+        list_filter=lambda list_item, data=None: list_item,
         match_by="id",
         required_fields=None,
     ):
         self.index_rmr = index_rmr
         self.list_path = list_path
+        self.list_filter = list_filter
         self.match_by = slash_prefix_guarantee(match_by)
         super(RuleDefinitionListIndexedBase, self).__init__(
             rmrs_used=rmrs_used,
@@ -687,6 +696,8 @@ class RuleDefinitionListIndexedBase(RuleDefinitionListBase):
         Overrides the base implementation to create a list that has an entry
         for each item in the index_rmr RMR, the other RMR entries are padded with
         None for non-matches.
+
+        The resulting list can also be filtered using the list_filter field.
 
         This may be overridden to produce lists that do not directly appear in
         the RMR.
@@ -789,4 +800,9 @@ class RuleDefinitionListIndexedBase(RuleDefinitionListBase):
                 UserBaselineProposedVals(user_entry, baseline_entry, proposed_entry)
             )
 
-        return context_list
+        # Filter the context list
+        filtered_context_list = [
+            list_item for list_item in context_list if self.list_filter(list_item, data)
+        ]
+
+        return filtered_context_list
