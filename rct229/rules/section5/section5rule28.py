@@ -3,17 +3,12 @@ from rct229.rule_engine.rule_base import (
     RuleDefinitionListIndexedBase,
 )
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
-from rct229.ruleset_functions.get_opaque_surface_type import get_opaque_surface_type
-from rct229.ruleset_functions.get_surface_conditioning_category_dict import (
-    SurfaceConditioningCategory as OST,
-)
 from rct229.ruleset_functions.get_surface_conditioning_category_dict import (
     SurfaceConditioningCategory as SCC,
 )
 from rct229.ruleset_functions.get_surface_conditioning_category_dict import (
     get_surface_conditioning_category_dict,
 )
-from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.match_lists import match_lists_by_id
 from rct229.utils.std_comparisons import std_equal
@@ -32,7 +27,7 @@ class Section5Rule28(RuleDefinitionListIndexedBase):
             each_rule=Section5Rule28.BuildingRule(),
             index_rmr="baseline",
             id="5-17",
-            description="Opaque surfaces that are not regulated (not part of opaque building envelope) must be modeled the same in the baseline as in the proposed design. ",
+            description="Subsurface that is not regulated (not part of building envelope) must be modeled with the same area, U-factor and SHGC in the baseline as in the proposed design.",
             list_path="ruleset_model_instances[0].buildings[*]",
         )
 
@@ -53,14 +48,14 @@ class Section5Rule28(RuleDefinitionListIndexedBase):
             # Merge into the existing data dict
             return {
                 **data,
-                "surface_conditioning_category_dict": get_surface_conditioning_category_dict(
+                "scc_dict_b": get_surface_conditioning_category_dict(
                     data["climate_zone"], building
                 ),
             }
 
         def create_context_list(self, context, data=None):
             # List of all baseline unregulated surfaces to become the context for Unregulated Surfaces
-            scc = data["surface_conditioning_category_dict"]
+            scc = data["scc_dict_b"]
 
             baseline_surfaces = find_all("$..surfaces[*]", context.baseline)
             proposed_surfaces = find_all("$..surfaces[*]", context.proposed)
