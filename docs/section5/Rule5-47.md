@@ -32,11 +32,11 @@
 
   - Check if zone is conditioned or semi-heated, add zone infiltration flow rate to building total: `if zone_conditioning_category_dict_b[zone.id] in [CONDITIONED RESIDENTIAL, CONDITIONED NON-RESIDENTIAL, CONDITIONED MIXED, SEMI-HEATED]: building_total_air_leakage_rate_b += zone_b.infiltration.infiltration_flow_rate`
 
-- Calculate the required baseline infiltration flow rate in cfm: `target_infiltration_flow_rate_b = 1.0 * building_total_envelope_area`
+- Calculate the required baseline infiltration flow rate at 75Pa in cfm: `target_infiltration_flow_rate_b = 1.0 * building_total_envelope_area`
 
 **Rule Assertion:**  
 
-- Case 1: For B_RMR, if the total zone infiltration rate for conditioned and semi-heated zones is equal to the required baseline infiltration rate at wind pressure: `if building_total_air_leakage_rate_b == target_infiltration_flow_rate_b: PASS`
+- Case 1: For B_RMR, if the total zone infiltration rate for conditioned and semi-heated zones is equal to the required baseline infiltration rate at 75Pa with a conversion factor of 0.112 as per Section G3.1.1.4: `if building_total_air_leakage_rate_b == target_infiltration_flow_rate_b * 0.112: PASS`
 
 - Case 2: Else: `else: FAIL`
 
