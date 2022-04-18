@@ -13,7 +13,7 @@
 **Manual Check:** None  
 **Evaluation Context:** Each Data Element  
 **Data Lookup:** None  
-**Function Call:** 
+**Function Call:**
 
   1. get_surface_conditioning_category()
   2. get_zone_conditioning_category()
@@ -26,28 +26,28 @@
 
 - For each building segment in the Proposed model: `for building_segment_p in P_RMR.building.building_segments:`
 
-  - For each thermal block in building segment: `for thermal_block_p in building_segment_p.thermal_blocks:`
+  - For each zone in building segment: `for zone_p in building_segment_p.zones:`
 
-    - For each zone in thermal block: `for zone_p in thermal_block_p.zones:`
+    - For each surface in zone: `for surface_p in zone_p.surfaces:`
 
-      - For each surface in zone: `for surface_p in zone_p.surfaces:`
+      - Check if surface is regulated, add zone total area of building envelope to building total: `if scc_dict_p[surface_p.id] != "UNREGULATED": building_total_envelope_area += sum(surface.area for surface in zone_p.surfaces)`
 
-        - Check if surface is regulated, add zone total area of building envelope to building total: `if scc_dict_p[surface_p.id] != "UNREGULATED": building_total_envelope_area += sum(surface.area for surface in zone_p.surfaces)`
+    - Check if zone is conditioned or semi-heated, add zone air leakage rate to building total: `if zone_conditioning_category_dict_p[zone.id] in [CONDITIONED RESIDENTIAL, CONDITIONED NON-RESIDENTIAL, CONDITIONED MIXED, SEMI-HEATED]: building_total_air_leakage_rate += zone_p.infiltration.infiltration_flow_rate`
 
-      - Check if zone is conditioned or semi-heated, add zone air leakage rate to building total: `if zone_conditioning_category_dict_p[zone.id] in [CONDITIONED RESIDENTIAL, CONDITIONED NON-RESIDENTIAL, CONDITIONED MIXED, SEMI-HEATED]: building_total_air_leakage_rate += zone_p.infiltration.air_leakage_rate`
+      - Check if measured air leakage rate is not entered for zone, raise empty measured air leakage rate flag: `if NOT zone_p.infiltration.measured_air_leakage_rate: empty_measured_air_leakage_rate_flow_flag = TRUE`
 
-- Calculate the required proposed design air leakage rate at 75Pa: `target_air_leakage_rate_p = 0.6 * building_total_envelope_area * 0.00047194745`
+      - Else, measured air leakage rate is entered for zone, add measured air leakage rate to building total: `else: building_total_measured_air_leakage_rate += zone_p.infiltration.measured_air_leakage_rate`
+
+- Calculate the required proposed design air leakage rate at 75Pa: `target_air_leakage_rate_75pa_p = 0.6 * building_total_envelope_area`
 
 **Rule Assertion:**  
 
-- Case 1: For P_RMR, if infiltration pressure difference is 75Pa and the total air leakage rate for conditioned and semi-heated zones is equal to the required proposed design air leakage rate at 75Pa: `if ( P_RMR.ASHRAE229.infiltration_pressure_difference == 75 ) AND ( building_total_air_leakage_rate == target_air_leakage_rate_p ): PASS`
+- Case 1: For P_RMR, if the building total air leakage rate for conditioned and semi-heated zones is equal to the required proposed design air leakage rate at 75Pa with a conversion factor of 0.112 as per Section G3.1.1.4: `if building_total_air_leakage_rate == target_air_leakage_rate_75pa_p * 0.112: PASS`
 
-- Case 2: Else if infiltration pressure difference is 75Pa for P_RMR and the total air leakage rate for conditioned and semi-heated zones is not equal to the required proposed design air leakage rate at 75Pa: `if ( P_RMR.ASHRAE229.infiltration_pressure_difference == 75 ) AND ( building_total_air_leakage_rate != target_air_leakage_rate_p ): FAIL`
+- Case 2: else if 1). the building total air leakage rate for conditioned and semi-heated zones is not equal to the required proposed design air leakage rate at 75Pa with a conversion factor of 0.112 as per Section G3.1.1.4, and 2). measured air leakage rate is not entered for all conditioned and semi-heated zones: `else if ( building_total_air_leakage_rate != target_air_leakage_rate_75pa_p * 0.112 ) AND ( empty_measured_air_leakage_rate_flow_flag ): UNDETERMINED and raise_message "THE BUILDING TOTAL AIR LEAKAGE RATE IS NOT EQUAL TO THE REQUIRED PROPOSED DESIGN AIR LEAKAGE RATE AT 75PA WITH A CONVERSION FACTOR OF 0.112 AS PER SECTION G3.1.1.4. AND MEASURED AIR LEAKAGE RATE IS NOT ENTERED FOR ALL CONDITIONED AND SEMI-HEATED ZONES. VERIFY THE PROPOSED AIR LEAKAGE RATE IS MODELED CORRECTLY."`
 
-- Case 3: Else if infiltration pressure difference is 0Pa for P_RMR and the total air leakage rate for conditioned and semi-heated zones is equal to the required proposed design air leakage rate at 0Pa (0.112 is referenced in G3.1.1.4 Modeling Building Envelope Infiltration): `if ( P_RMR.ASHRAE229.infiltration_pressure_difference == 0 ) AND ( building_total_air_leakage_rate == target_air_leakage_rate_p * 0.112 ): PASS`
+- Case 3: else if 1). the building total air leakage rate for conditioned and semi-heated zones is not equal to the required proposed design air leakage rate at 75Pa with a conversion factor of 0.112 as per Section G3.1.1.4, and 2). the measured air leakage rate is entered for all conditioned and semi-heated zones, and 3). the building total air leakage rate is equal to the measured air leakage rate with a conversion factor of 0.112 as per Section G3.1.1.4: `else if ( building_total_air_leakage_rate != target_air_leakage_rate_75pa_p * 0.112 ) AND ( empty_measured_air_leakage_rate_flow_flag == FALSE ) AND ( building_total_air_leakage_rate == building_total_measured_air_leakage_rate * 0.112 ): PASS`
 
-- Case 4: Else if infiltration pressure difference is 0Pa for P_RMR and the total air leakage rate for conditioned and semi-heated zones is not equal to the required proposed design air leakage rate at 0Pa (0.112 is referenced in G3.1.1.4 Modeling Building Envelope Infiltration): `if ( P_RMR.ASHRAE229.infiltration_pressure_difference == 0 ) AND ( building_total_air_leakage_rate != target_air_leakage_rate_p * 0.112 ): FAIL`
-
-- Case 5: Else, infiltration pressure difference is neither 75Pa nor 0Pa for P_RMR: `else: FAIL and raise_warning "90.1 SECTION G3.1.1.4 PRESCRIBED PROPOSED DESIGN INFILTRATION RATE AT 75PA AND METHODOLOGY TO CONVERT AIR LEAKAGE RATE AT 75PA TO AIR LEAKAGE AT WIND PRESSURE. THE MODELED INFILTRATION IS AT PRESSURE DIFFERENTIAL OTHER THAN THE TWO OPTIONS PRESCRIBED BY 90.1. EXCEPTION APPLIES WHEN WHOLE-BUILDING AIR LEAKAGE TESTING IS SPECIFIED DURING DESIGN AND COMPLETED AFTER CONSTRUCTION. THE PROPOSED DESIGN AIR LEAKAGE RATE OF THE BUILDING ENVELOPE SHALL BE AS MEASURED. MANUAL CHECK IS REQUIRED TO VERIFY THAT PROPOSED DESIGN INFILTRATION WAS MODELED CORRECTLY."`
+- Case 4: else, 1). the building total air leakage rate for conditioned and semi-heated zones is not equal to the required proposed design air leakage rate at 75Pa with a conversion factor of 0.112 as per Section G3.1.1.4, and 2). the measured air leakage rate is entered for all conditioned and semi-heated zones, but 3). the building total air leakage rate is not equal to the measured air leakage rate with a conversion factor of 0.112 as per Section G3.1.1.4: `else: FAIL`
 
 **[Back](../_toc.md)**
