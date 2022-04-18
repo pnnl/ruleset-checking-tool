@@ -55,16 +55,6 @@ class Section5Rule21(RuleDefinitionListIndexedBase):
                 # list_path and list_filter together determine the list of
                 # above grade walls to be passed to AboveGradeWallRule
                 list_path="$..surfaces[*]",
-                list_filter=(
-                    lambda list_item, data=None: get_opaque_surface_type(
-                        list_item.baseline
-                    )
-                    == OST.ABOVE_GRADE_WALL
-                    and data["surface_conditioning_category_dict_b"][
-                        list_item.baseline["id"]
-                    ]
-                    != SCC.UNREGULATED
-                ),
             )
 
         def create_data(self, context, data=None):
@@ -93,6 +83,15 @@ class Section5Rule21(RuleDefinitionListIndexedBase):
                     data["climate_zone"], building_b
                 ),
             }
+
+        def list_filter(self, context_item, data=None):
+            surface_b = context_item.baseline
+
+            return (
+                get_opaque_surface_type(surface_b) == OST.ABOVE_GRADE_WALL
+                and data["surface_conditioning_category_dict_b"][surface_b["id"]]
+                != SCC.UNREGULATED
+            )
 
         class AboveGradeWallRule(RuleDefinitionBase):
             def __init__(self):
