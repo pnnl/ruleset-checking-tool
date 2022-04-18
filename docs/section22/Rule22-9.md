@@ -30,17 +30,13 @@
 
   - Else, rule is not applicable to B-RMR: `else: RULE_NOT_APPLICABLE`
 
-- **Check 2:** Get primary and secondary loops for B-RMR: `primary_secondary_loop_dictionary = get_primary_secondary_loops(B_RMR, "COOLING")`
+- **Check 2:** Get primary and secondary loops for B-RMR: `primary_secondary_loop_dictionary = get_primary_secondary_loops(B_RMR)`
 
   - Check if B-RMR is modeled with primary-secondary configuration, continue to rule logic: `if LEN(primary_secondary_loop_dictionary) != 0: CHECK_RULE_LOGIC`
 
   - Else, rule is not applicable to B-RMR: `else: RULE_NOT_APPLICABLE`
 
 ## Rule Logic:  
-
-- For each pump in B_RMR: `for pump_b in B_RMR.RulesetModelInstance.pumps:`
-
-  - Save loop served by pump and pump to a dictionary: `loop_pump_dictionary[pump_b.loop_or_piping].append(pump)`
 
 - For each chiller in B_RMR: `for chiller_b in B_RMR.RulesetModelInstance.chillers:`
 
