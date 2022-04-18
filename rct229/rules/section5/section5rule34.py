@@ -23,7 +23,7 @@ class Section5Rule34(RuleDefinitionListIndexedBase):
             },
             each_rule=Section5Rule34.BuildingRule(),
             index_rmr="baseline",
-            id="5-15",
+            id="5-34",
             description="If skylight area in the proposed design is 3% or less of the roof surface, the skylight area in baseline shall be equal to that in the proposed design.",
             list_path="ruleset_model_instances[0].buildings[*]",
         )
@@ -58,19 +58,19 @@ class Section5Rule34(RuleDefinitionListIndexedBase):
         class BuildingSegmentRule(RuleDefinitionBase):
             def __init__(self):
                 super(Section5Rule34.BuildingRule.BuildingSegmentRule, self).__init__(
-                    rmrs_used=UserBaselineProposedVals(False, True, False),
+                    rmrs_used=UserBaselineProposedVals(False, True, True),
                 )
 
             def is_applicable(self, context, data=None):
-                proposed = context.proposed
+                building_segment_p = context.proposed
                 skylight_roof_areas_dictionary_p = data[
                     "skylight_roof_areas_dictionary_p"
                 ]
                 skylight_roof_ratio_p = (
-                    skylight_roof_areas_dictionary_p[proposed["id"]][
+                    skylight_roof_areas_dictionary_p[building_segment_p["id"]][
                         "total_skylight_area"
                     ]
-                    / skylight_roof_areas_dictionary_p[proposed["id"]][
+                    / skylight_roof_areas_dictionary_p[building_segment_p["id"]][
                         "total_envelope_roof_area"
                     ],
                 )
