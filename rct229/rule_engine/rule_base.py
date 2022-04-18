@@ -581,6 +581,32 @@ class RuleDefinitionListBase(RuleDefinitionBase):
         """
         return data
 
+    def list_filter(self, context_item, data=None):
+        """Function used to filter the context_list
+
+        The default implementation simply passes each list_item through (no filtering)
+
+        An inheriting rule can override this function to reduce the context list that
+        is returned from create_context_list.
+
+        Parameters
+        ----------
+        context_item : dict
+            An item from the context_list
+        data : object
+            The data object for the rule. Note: list_filter will be used after
+            create_data is called, so this function will have access to any data
+            this rule added to the data object.
+            This implementation ignores the data argument, but overriding functions
+            are free to make use of it.
+
+        Returns
+        -------
+        list of UserBaselineProposedVals
+            A filtered list of context trios
+        """
+        return context_item
+
     def rule_check(self, context, calc_vals=None, data=None):
         """Overrides the base implementation to apply a rule to each entry in
         a list
@@ -602,9 +628,14 @@ class RuleDefinitionListBase(RuleDefinitionBase):
         # Create the data to be passed to each_rule
         data = self.create_data(context, data)
         context_list = self.create_context_list(context, data)
+        filtered_context_list = [
+            context_item
+            for context_item in context_list
+            if self.list_filter(context_item, data)
+        ]
         outcomes = []
 
-        for ubp in context_list:
+        for ubp in filtered_context_list:
             item_outcome = self.each_rule.evaluate(ubp, data)
 
             # Set the id for item_outcome
@@ -651,11 +682,6 @@ class RuleDefinitionListIndexedBase(RuleDefinitionListBase):
         Note: the create_context_list() method can be overridden and
         ignore list_context.
         For better human readability, the leading "/" may be ommitted.
-    list_filter : func
-        A function used to filter the context_list obtained by applying list_path. If
-        The function signature should be func(list_item, data=None) -> bool.
-        For simple filter functions, a lambda function can be passed to the initilizer.
-        For more complex filter functions, the function may be defined as a private
         function (preceding _) inside the enclosing rule definition.
     match_by : string
         A json pointer into each element of the list, generally to a field
@@ -672,14 +698,11 @@ class RuleDefinitionListIndexedBase(RuleDefinitionListBase):
         description=None,
         rmr_context="",
         list_path="[*]",
-        # The identity filter is used by default
-        list_filter=lambda list_item, data=None: list_item,
         match_by="id",
         required_fields=None,
     ):
         self.index_rmr = index_rmr
         self.list_path = list_path
-        self.list_filter = list_filter
         self.match_by = slash_prefix_guarantee(match_by)
         super(RuleDefinitionListIndexedBase, self).__init__(
             rmrs_used=rmrs_used,
@@ -800,9 +823,4 @@ class RuleDefinitionListIndexedBase(RuleDefinitionListBase):
                 UserBaselineProposedVals(user_entry, baseline_entry, proposed_entry)
             )
 
-        # Filter the context list
-        filtered_context_list = [
-            list_item for list_item in context_list if self.list_filter(list_item, data)
-        ]
-
-        return filtered_context_list
+        return context_list
