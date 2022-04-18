@@ -55,6 +55,8 @@ class Section5Rule19(RuleDefinitionListIndexedBase):
                 # add key-value pair or override the existing value
                 is_area_type_all_new_dict[area_type] = building_segment["is_all_new"]
 
+            # get the building vertical fenestration percentage from Table G3.1.1-1
+            proposed_ = table_G3_1_1_1_lookup()
             return {
                 **data,
                 "is_area_type_all_new_dict": is_area_type_all_new_dict,
@@ -89,21 +91,30 @@ class Section5Rule19(RuleDefinitionListIndexedBase):
                     )
 
             def get_calc_vals(self, context, data=None):
+                # get Baseline window wall areas
                 building_segments_b = context.baseline["building_segments"]
-                is_area_type_all_new_dict = data["is_area_type_all_new_dict"]
-                area_type_window_wall_ratio_b = data["area_type_window_wall_ratio_dict"]
+                # get propose window wall areas
+                building_segments_b = context.proposed["building_segments"]
 
-                # all building segments in AreaType rule has the same area type
-                # (see create_context_list function in the parent class)
-                area_type = building_segments_b[0]["area_type_vertical_fenestration"]
-                area_type_wwr = 0.0
-                area_type_target_wwr = 0.0
-                if area_type is not "NONE":
-                    area_type_wwr = (
-                            area_type_window_wall_ratio_b[area_type]["total_window_area"]
-                            / area_type_window_wall_ratio_b[area_type]["total_wall_area"]
-                    )
-                    area_type_target_wwr = table_G3_1_1_1_lookup(area_type)
+                # check if the wwr is equal to the proposed design
+                if
+
+
+                # building_segments_b = context.baseline["building_segments"]
+                # is_area_type_all_new_dict = data["is_area_type_all_new_dict"]
+                # area_type_window_wall_ratio_b = data["area_type_window_wall_ratio_dict"]
+                #
+                # # all building segments in AreaType rule has the same area type
+                # # (see create_context_list function in the parent class)
+                # area_type = building_segments_b[0]["area_type_vertical_fenestration"]
+                # area_type_wwr = 0.0
+                # area_type_target_wwr = 0.0
+                # if area_type is not "NONE":
+                #     area_type_wwr = (
+                #             area_type_window_wall_ratio_b[area_type]["total_window_area"]
+                #             / area_type_window_wall_ratio_b[area_type]["total_wall_area"]
+                #     )
+                #     area_type_target_wwr = table_G3_1_1_1_lookup(area_type)
 
                 return {
                     "is_all_new": is_area_type_all_new_dict[area_type],
