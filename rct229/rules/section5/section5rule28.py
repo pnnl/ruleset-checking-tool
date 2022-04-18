@@ -26,7 +26,7 @@ class Section5Rule28(RuleDefinitionListIndexedBase):
             },
             each_rule=Section5Rule28.BuildingRule(),
             index_rmr="baseline",
-            id="5-17",
+            id="5-28",
             description="Subsurface that is not regulated (not part of building envelope) must be modeled with the same area, U-factor and SHGC in the baseline as in the proposed design.",
             list_path="ruleset_model_instances[0].buildings[*]",
         )
@@ -81,7 +81,7 @@ class Section5Rule28(RuleDefinitionListIndexedBase):
                     Section5Rule28.BuildingRule.UnregulatedSurfaceRule, self
                 ).__init__(
                     rmrs_used=UserBaselineProposedVals(False, True, True),
-                    list_path="subsurfaces[*]"
+                    list_path="subsurfaces[*]",
                 )
 
             class UnregulatedSubsurfaceRule(RuleDefinitionBase):
@@ -91,14 +91,6 @@ class Section5Rule28(RuleDefinitionListIndexedBase):
                         self,
                     ).__init__(
                         rmrs_used=UserBaselineProposedVals(False, True, True),
-                        required_fields={
-                            "$": [
-                                "u_factor",
-                                "solar_heat_gain_coefficient",
-                                "glazed_area",
-                                "opaque_area",
-                            ]
-                        },
                     )
 
                 def get_calc_vals(self, context, data=None):
@@ -106,29 +98,28 @@ class Section5Rule28(RuleDefinitionListIndexedBase):
                     subsurface_p = context.proposed
 
                     return {
-                        "baseline_subsurface_u_factor": subsurface_b["u_factor"],
-                        "proposed_subsurface_u_factor": subsurface_p["u_factor"],
-                        "baseline_subsurface_shgc": subsurface_b[
+                        "subsurface_u_factor_b": subsurface_b.get("u_factor"),
+                        "subsurface_u_factor_p": subsurface_p.get("u_factor"),
+                        "subsurface_shgc_b": subsurface_b.get(
                             "solar_heat_gain_coefficient"
-                        ],
-                        "proposed_subsurface_shgc": subsurface_p[
+                        ),
+                        "subsurface_shgc_p": subsurface_p.get(
                             "solar_heat_gain_coefficient"
-                        ],
-                        "baseline_subsurface_glazed_area": subsurface_b["glazed_area"],
-                        "proposed_subsurface_glazed_area": subsurface_p["glazed_area"],
-                        "baseline_subsurface_opaque_area": subsurface_b["opaque_area"],
-                        "proposed_subsurface_opaque_area": subsurface_p["opaque_area"],
+                        ),
+                        "subsurface_glazed_area_b": subsurface_b.get("glazed_area"),
+                        "subsurface_glazed_area_p": subsurface_p.get("glazed_area"),
+                        "subsurface_opaque_area_b": subsurface_b.get("opaque_area"),
+                        "subsurface_opaque_area_p": subsurface_p.get("opaque_area"),
                     }
 
                 def rule_check(self, context, calc_vals, data=None):
-                    return std_equal(
-                            calc_vals["baseline_subsurface_u_factor"],
-                            calc_vals["proposed_subsurface_u_factor"],
-                        ) and std_equal(
-                            calc_vals["solar_heat_gain_coefficient"],
-                            calc_vals["solar_heat_gain_coefficient"],
-                        ) and std_equal(
-                            calc_vals["glazed_area"], calc_vals["glazed_area"]
-                        ) and std_equal(
-                            calc_vals["opaque_area"], calc_vals["opaque_area"]
-                        )
+                    return (
+                        calc_vals["subsurface_u_factor_b"]
+                        == calc_vals["subsurface_u_factor_p"]
+                        and calc_vals["subsurface_shgc_b"]
+                        == calc_vals["subsurface_shgc_p"]
+                        and calc_vals["subsurface_glazed_area_b"]
+                        == calc_vals["subsurface_glazed_area_p"]
+                        and calc_vals["subsurface_opaque_area_b"]
+                        == calc_vals["subsurface_opaque_area_p"]
+                    )
