@@ -4,8 +4,15 @@ import importlib
 __all__ = [
     "section5rule2",
     "section5rule3",
-    # "section5rule5",
+    "section5rule5",
     "section5rule8",
+    "section5rule11",
+    "section5rule13",
+    "section5rule15",
+    "section5rule17",
+    "section5rule18",
+    "section5rule21",
+    "section5rule28",
     "section5rule44",
     "section5rule46",
 ]

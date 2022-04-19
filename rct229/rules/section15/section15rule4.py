@@ -16,7 +16,7 @@ class Section15Rule4(RuleDefinitionListIndexedBase):
             index_rmr="user",
             id="15-4",
             description="User RMR transformer id in Baseline RMR",
-            rmr_context="transformers",
+            rmr_context="ruleset_model_instances/0/transformers",
         )
 
     def create_data(self, context, data):
