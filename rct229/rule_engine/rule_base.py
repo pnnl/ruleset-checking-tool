@@ -18,6 +18,8 @@ class RuleDefinitionBase:
         rmr_context="",
         required_fields=None,
         must_match_by_ids=[],
+        manual_check_required_msg="Manual Check Required",
+        non_applicable_msg="Not Applicable",
     ):
         """Base class for all Rule definitions
 
@@ -53,6 +55,8 @@ class RuleDefinitionBase:
         # Default rm_context is the root of the RMR
         self.rmr_context = slash_prefix_guarantee(rmr_context)
         self.required_fields = required_fields
+        self.manual_check_required_msg = manual_check_required_msg
+        self.non_applicable_msg = non_applicable_msg
 
     def evaluate(self, rmrs, data=None):
         """Generates the outcome dictionary for the rule
@@ -120,7 +124,7 @@ class RuleDefinitionBase:
                         # Determine if manual check is required
                         if self.manual_check_required(context, calc_vals, data):
                             outcome["result"] = "UNDETERMINED"
-                            outcome["message"] = "MANUAL CHECK REQUIRED"
+                            outcome["message"] = self.manual_check_required_msg
                         else:
                             # Evaluate the actual rule check
                             result = self.rule_check(context, calc_vals, data)
@@ -130,13 +134,11 @@ class RuleDefinitionBase:
                             # Assume result type is bool
                             elif result:
                                 outcome["result"] = "PASSED"
-                                outcome["message"] = "RULE CHECK PASSED"
                             else:
                                 outcome["result"] = "FAILED"
-                                outcome["message"] = "RULE CHECK FAILED"
                     else:
                         outcome["result"] = "NOT_APPLICABLE"
-                        outcome["message"] = "RULE CHECK NOT APPLICABLE"
+                        outcome["message"] = self.non_applicable_msg
                 except MissingKeyException as ke:
                     outcome["result"] = "UNDETERMINED"
                     outcome["message"] = str(ke)
