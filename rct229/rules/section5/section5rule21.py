@@ -52,6 +52,9 @@ class Section5Rule21(RuleDefinitionListIndexedBase):
                 required_fields={},
                 each_rule=Section5Rule21.BuildingRule.AboveGradeWallRule(),
                 index_rmr="baseline",
+                # list_path and list_filter together determine the list of
+                # above grade walls to be passed to AboveGradeWallRule
+                list_path="$..surfaces[*]",
             )
 
         def create_data(self, context, data=None):
@@ -81,28 +84,14 @@ class Section5Rule21(RuleDefinitionListIndexedBase):
                 ),
             }
 
-        def create_context_list(self, context, data=None):
-            building_b = context.baseline
-            building_p = context.proposed
+        def list_filter(self, context_item, data=None):
+            surface_b = context_item.baseline
 
-            scc = data["surface_conditioning_category_dict_b"]
-
-            baseline_surfaces = find_all("$..surfaces[*]", building_b)
-            proposed_surfaces = find_all("$..surfaces[*]", building_p)
-
-            matched_proposed_surfaces = match_lists_by_id(
-                baseline_surfaces, proposed_surfaces
+            return (
+                get_opaque_surface_type(surface_b) == OST.ABOVE_GRADE_WALL
+                and data["surface_conditioning_category_dict_b"][surface_b["id"]]
+                != SCC.UNREGULATED
             )
-            proposed_baseline_surface_pairs = zip(
-                baseline_surfaces, matched_proposed_surfaces
-            )
-            # List of all baseline above grade wall to become the context for AboveGradeWall
-            return [
-                UserBaselineProposedVals(None, surface_b, surface_p)
-                for surface_b, surface_p in proposed_baseline_surface_pairs
-                if get_opaque_surface_type(surface_b) == OST.ABOVE_GRADE_WALL
-                and scc[surface_b["id"]] != SCC.UNREGULATED
-            ]
 
         class AboveGradeWallRule(RuleDefinitionBase):
             def __init__(self):
