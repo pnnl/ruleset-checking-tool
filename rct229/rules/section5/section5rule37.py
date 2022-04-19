@@ -14,7 +14,7 @@ class Section5Rule37(RuleDefinitionListIndexedBase):
             },
             each_rule=Section5Rule37.BuildingRule(),
             index_rmr="baseline",
-            id="5-17",
-            description="Opaque surfaces that are not regulated (not part of opaque building envelope) must be modeled the same in the baseline as in the proposed design. ",
+            id="5-37",
+            description="Skylight U-factors for residential, non-residential and semi-heated spaces in the baseline model must match the appropriate requirements in Table G3.4-1 through G3.4-8.",
             list_path="ruleset_model_instances[0].buildings[*]",
         )
