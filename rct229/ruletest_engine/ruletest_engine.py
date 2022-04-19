@@ -6,7 +6,9 @@ import os
 
 from rct229.rule_engine.engine import evaluate_rule
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
+from rct229.rules.section5 import *
 from rct229.rules.section6 import *
+from rct229.rules.section12 import *
 from rct229.rules.section15 import *
 from rct229.ruletest_engine.ruletest_jsons.scripts.json_generation_utilities import (
     merge_nested_dictionary,
@@ -90,7 +92,7 @@ def evaluate_outcome_enumeration_str(outcome_enumeration_str):
         test_result = True
     elif outcome_enumeration_str == "FAILED":
         test_result = False
-    elif outcome_enumeration_str == "MANUAL_CHECK_REQUIRED":
+    elif outcome_enumeration_str == "UNDETERMINED":
         test_result = False
     elif outcome_enumeration_str == "MISSING_CONTEXT":
         test_result = False
@@ -222,6 +224,7 @@ def run_section_tests(test_json_name):
         rule = test_dict["Rule"]
 
         # Construction function name for Section and rule
+        section_name = f"section{section}rule{rule}"
         function_name = f"Section{section}Rule{rule}"
 
         test_result_dict["log"] = []  # Initialize log for this test result
@@ -232,7 +235,7 @@ def run_section_tests(test_json_name):
 
         # Pull in rule, if written. If not found, fail the test and log which Section and Rule could not be found.
         try:
-            rule = globals()[function_name]()
+            rule = getattr(globals()[section_name], function_name)()
         except KeyError:
 
             # Print message communicating that a rule cannot be found
@@ -482,3 +485,18 @@ def run_lighting_tests():
     lighting_test_json = "lighting_tests.json"
 
     return run_section_tests(lighting_test_json)
+
+
+def run_envelope_tests():
+    """Runs all tests found in the envelope tests JSON.
+
+    Returns
+    -------
+    None
+
+    Results of envelope test are spit out to console
+    """
+
+    envelope_test_json = "envelope_tests.json"
+
+    return run_section_tests(envelope_test_json)
