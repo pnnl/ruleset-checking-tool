@@ -84,6 +84,9 @@ def convert_units_from_tcd_to_rmr_schema(tcd_value, tcd_units, key_list):
         The converted TCD value into the units required by the ASHRAE229 schema
 
     """
+    # if the value is bool type - then return the value
+    if isinstance(tcd_value, bool):
+        return tcd_value
 
     # Clean TCD units to something pint can understand
     tcd_units = clean_schema_units(tcd_units)

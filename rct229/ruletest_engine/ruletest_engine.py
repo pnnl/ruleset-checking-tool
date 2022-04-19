@@ -92,7 +92,7 @@ def evaluate_outcome_enumeration_str(outcome_enumeration_str):
         test_result = True
     elif outcome_enumeration_str == "FAILED":
         test_result = False
-    elif outcome_enumeration_str == "MANUAL_CHECK_REQUIRED":
+    elif outcome_enumeration_str == "UNDETERMINED":
         test_result = False
     elif outcome_enumeration_str == "MISSING_CONTEXT":
         test_result = False

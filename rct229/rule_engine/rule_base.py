@@ -110,9 +110,9 @@ class RuleDefinitionBase:
                 try:
                     # Check if rule is applicable
                     if self.is_applicable(context, data):
-                    # Get calculated values; these can be used by
-                    # manual_check_required() or rule_check() and will
-                    # be included in the output
+                        # Get calculated values; these can be used by
+                        # manual_check_required() or rule_check() and will
+                        # be included in the output
                         calc_vals = self.get_calc_vals(context, data)
                         if calc_vals is not None:
                             outcome["calc_vals"] = calc_vals
@@ -585,6 +585,32 @@ class RuleDefinitionListBase(RuleDefinitionBase):
         """
         return data
 
+    def list_filter(self, context_item, data=None):
+        """Function used to filter the context_list
+
+        The default implementation simply passes each list_item through (no filtering)
+
+        An inheriting rule can override this function to reduce the context list that
+        is returned from create_context_list.
+
+        Parameters
+        ----------
+        context_item : dict
+            An item from the context_list
+        data : object
+            The data object for the rule. Note: list_filter will be used after
+            create_data is called, so this function will have access to any data
+            this rule added to the data object.
+            This implementation ignores the data argument, but overriding functions
+            are free to make use of it.
+
+        Returns
+        -------
+        list of UserBaselineProposedVals
+            A filtered list of context trios
+        """
+        return context_item
+
     def rule_check(self, context, calc_vals=None, data=None):
         """Overrides the base implementation to apply a rule to each entry in
         a list
@@ -606,9 +632,14 @@ class RuleDefinitionListBase(RuleDefinitionBase):
         # Create the data to be passed to each_rule
         data = self.create_data(context, data)
         context_list = self.create_context_list(context, data)
+        filtered_context_list = [
+            context_item
+            for context_item in context_list
+            if self.list_filter(context_item, data)
+        ]
         outcomes = []
 
-        for ubp in context_list:
+        for ubp in filtered_context_list:
             item_outcome = self.each_rule.evaluate(ubp, data)
 
             # Set the id for item_outcome
@@ -655,6 +686,7 @@ class RuleDefinitionListIndexedBase(RuleDefinitionListBase):
         Note: the create_context_list() method can be overridden and
         ignore list_context.
         For better human readability, the leading "/" may be ommitted.
+        function (preceding _) inside the enclosing rule definition.
     match_by : string
         A json pointer into each element of the list, generally to a field
         of the list element. The default is "/id" since the id is assumed to
@@ -691,6 +723,8 @@ class RuleDefinitionListIndexedBase(RuleDefinitionListBase):
         Overrides the base implementation to create a list that has an entry
         for each item in the index_rmr RMR, the other RMR entries are padded with
         None for non-matches.
+
+        The resulting list can also be filtered using the list_filter field.
 
         This may be overridden to produce lists that do not directly appear in
         the RMR.
