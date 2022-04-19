@@ -7,11 +7,13 @@ file_dir = os.path.dirname(__file__)
 
 SCHEMA_KEY = "ASHRAE229.schema.json"
 SCHEMA_ENUM_KEY = "Enumerations2019ASHRAE901.schema.json"
+SCHEMA_RESNET_ENUM_KEY = "EnumerationsRESNET.schema.json"
 SCHEMA_PATH = os.path.join(file_dir, SCHEMA_KEY)
 SCHEMA_ENUM_PATH = os.path.join(file_dir, SCHEMA_ENUM_KEY)
+SCHEMA_RESNET_ENUM_PATH = os.path.join(file_dir, SCHEMA_RESNET_ENUM_KEY)
 
 
-def _schema_validate(rmr_obj):
+def schema_validate_rmr(rmr_obj):
     """Validates an RMR against the schema
 
     This code follows the outline given in
@@ -23,9 +25,15 @@ def _schema_validate(rmr_obj):
         schema = json.load(json_file)
     with open(SCHEMA_ENUM_PATH) as json_file:
         schema_enum = json.load(json_file)
+    with open(SCHEMA_RESNET_ENUM_PATH) as json_file:
+        schema_resnet_enum = json.load(json_file)
 
     # Create a resolver which maps schema references to schema objects
-    schema_store = {SCHEMA_KEY: schema, SCHEMA_ENUM_KEY: schema_enum}
+    schema_store = {
+        SCHEMA_KEY: schema,
+        SCHEMA_ENUM_KEY: schema_enum,
+        SCHEMA_RESNET_ENUM_KEY: schema_resnet_enum,
+    }
     resolver = jsonschema.RefResolver.from_schema(schema, store=schema_store)
 
     # Create a validator
@@ -40,19 +48,22 @@ def _schema_validate(rmr_obj):
         return {"passed": False, "error": "schema invalid: " + err.message}
 
 
-def _non_schema_validate(rmr_obj):
+def non_schema_validate_rmr(rmr_obj):
     """Provides non-schema validation for an RMR"""
-    # TODO: Add check for unique names, etc.
+    # TODO: Add checks for:
+    # The ids within each Group are unique
+    # A Subsurface must have exactly one of glazed_area or opaque_area
+    #
     return {"passed": True, "error": None}
 
 
 def validate_rmr(rmr_obj):
     """Validate an RMR against the schema and other high-level checks"""
     # Validate against the schema
-    result = _schema_validate(rmr_obj)
+    result = schema_validate_rmr(rmr_obj)
 
     if result["passed"]:
         # Provide non-schema validation
-        result = _non_schema_validate(rmr_obj)
+        result = non_schema_validate_rmr(rmr_obj)
 
     return result
