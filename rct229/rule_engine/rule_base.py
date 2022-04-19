@@ -530,6 +530,8 @@ class RuleDefinitionListBase(RuleDefinitionBase):
         description=None,
         rmr_context="",
         required_fields=None,
+        manual_check_required_msg="Manual Check Required",
+        non_applicable_msg="Not Applicable",
     ):
         self.each_rule = each_rule
         super(RuleDefinitionListBase, self).__init__(
@@ -538,6 +540,8 @@ class RuleDefinitionListBase(RuleDefinitionBase):
             description=description,
             rmr_context=rmr_context,
             required_fields=required_fields,
+            manual_check_required_msg=manual_check_required_msg,
+            non_applicable_msg=non_applicable_msg
         )
 
     def create_context_list(self, context, data=None):
@@ -706,6 +710,9 @@ class RuleDefinitionListIndexedBase(RuleDefinitionListBase):
         list_path="[*]",
         match_by="id",
         required_fields=None,
+        manual_check_required_msg="Manual Check Required",
+        non_applicable_msg="Not Applicable",
+
     ):
         self.index_rmr = index_rmr
         self.list_path = list_path
@@ -717,6 +724,8 @@ class RuleDefinitionListIndexedBase(RuleDefinitionListBase):
             description=description,
             rmr_context=rmr_context,
             required_fields=required_fields,
+            manual_check_required_msg=manual_check_required_msg,
+            non_applicable_msg=non_applicable_msg
         )
 
     def create_context_list(self, context, data=None):
