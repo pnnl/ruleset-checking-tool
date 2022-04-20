@@ -8,7 +8,7 @@ from rct229.utils.match_lists import match_lists_by_id
 
 
 class Section5Rule46(RuleDefinitionListIndexedBase):
-    """Rule 44 of ASHRAE 90.1-2019 Appendix G Section 5 (Envelope)"""
+    """Rule 46 of ASHRAE 90.1-2019 Appendix G Section 5 (Envelope)"""
 
     def __init__(self):
         super(Section5Rule46, self).__init__(
