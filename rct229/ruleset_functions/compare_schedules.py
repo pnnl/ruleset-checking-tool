@@ -1,7 +1,7 @@
 from rct229.utils.assertions import RCTFailureException
 
-REGULAR_YEAR_HOUR = 8760
-LEAP_YEAR_HOUR = 8784
+REGULAR_YEAR_HOURS = 8760
+LEAP_YEAR_HOURS = 8784
 
 
 def compare_schedules(schedule_1: list, schedule_2: list, mask_schedule: list, comparison_factor: float, is_leap_year: bool):
@@ -10,13 +10,13 @@ def compare_schedules(schedule_1: list, schedule_2: list, mask_schedule: list, c
 
         Parameters
         ----------
-        schedule_1: list, First schedule [0.187, 0.187, 0.187, ... ]
-        schedule_2: list, Second schedule [0.187, 0.187, 0.187, ...]
-        mask_schedule: list, The schedule that defines comparison mode for all hours (8760 or 8784) in a year, i.e.
+        schedule_1: List[float], example: [0.187, 0.187, 0.187, ... ]
+        schedule_2: List[float], example: [0.1, 0.1, 0.1, ... ]
+        mask_schedule: List[float], The schedule that defines comparison mode for all hours (8760 or 8784) in a year, i.e.
             if hourly value is 1, schedule_1 is evaluated to be equal to schedule_2;
             if hourly value is 2, schedule_1 is evaluated to be equal to schedule_2 times the comparison factor;
             if hourly value is 0, comparison was skipped for that particular hour
-            (example when evaluating shut off controls, only he building closed hrs are evaluated) [1,1,1,1,1...]
+            (example when evaluating shut off controls, only he building closed hrs are evaluated) exmaple: [1,1,1,1,1...]
         comparison_factor: float, The target multiplier number for schedule_1 compared to schedule_2, i.e. when applicable,
             the hourly value in schedule_1 shall be equal to that in schedule_2 times the comparison_factor. 1.0
         is_leap_year: bool, indicate whether the comparison is in a leap year or not. True / False
@@ -32,9 +32,7 @@ def compare_schedules(schedule_1: list, schedule_2: list, mask_schedule: list, c
             "EFLH_DIFFERENCE: EFLH_difference
             }
         """
-    num_hours = REGULAR_YEAR_HOUR
-    if is_leap_year:
-        num_hours = LEAP_YEAR_HOUR
+    num_hours = LEAP_YEAR_HOURS if is_leap_year else REGULAR_YEAR_HOURS
 
     if len(schedule_1) != len(schedule_2) or len(schedule_1) != len(mask_schedule) or len(schedule_1) != num_hours:
         raise RCTFailureException(f"Failed when comparing hourly schedules with target number of hours. target number of hour: {num_hours}, "
@@ -58,7 +56,12 @@ def compare_schedules(schedule_1: list, schedule_2: list, mask_schedule: list, c
             eflh_schedule_2 += schedule_2[index] * comparison_factor
             if schedule_1[index] == schedule_2[index] * comparison_factor:
                 total_hours_match += 1
-    eflh_difference = eflh_schedule_1 / eflh_schedule_2
+
+    if eflh_schedule_2 > 0:
+        eflh_difference = eflh_schedule_1 / eflh_schedule_2
+    else:
+        # only if the comparison factor is 0.0 or mask_schedule = [0] * 8760
+        eflh_difference = eflh_schedule_1
 
     return {
         "total_hours_compared": total_hours_compared,

@@ -9,9 +9,9 @@ def test__Test_Schedule_Compare_Success_1():
     Test that will apply multiplier to schedule_2 to match schedule_1.
     Expect 8760 compared and match with eflh difference = 1.0
     """
-    schedule_1 = [0.8 for i in range(8760)]
-    schedule_2 = [1.0 for j in range(8760)]
-    mask_schedule = [2 for k in range(8760)]
+    schedule_1 = [0.8] * 8760
+    schedule_2 = [1.0] * 8760
+    mask_schedule = [2] * 8760
     multiplier = 0.8
     results = compare_schedules(schedule_1, schedule_2, mask_schedule, multiplier, False)
     assert results["total_hours_compared"] == 8760.0 and results["total_hours_match"] == 8760.0 and abs(results["eflh_difference"] - 1.0) <= 0.001
@@ -21,9 +21,9 @@ def test__Test_Schedule_Compare_Success_2():
     Test that will not apply multiplier to schedule_2 to match schedule_1.
     Expect 8760 compared and match with eflh difference = 1.0
     """
-    schedule_1 = [1.0 for i in range(8760)]
-    schedule_2 = [1.0 for j in range(8760)]
-    mask_schedule = [1 for k in range(8760)]
+    schedule_1 = [1.0] * 8760
+    schedule_2 = [1.0] * 8760
+    mask_schedule = [1.0] * 8760
     multiplier = 0.8
     results = compare_schedules(schedule_1, schedule_2, mask_schedule, multiplier, False)
     assert results["total_hours_compared"] == 8760.0 and results["total_hours_match"] == 8760.0 and abs(results["eflh_difference"] - 1.0) <= 0.001
@@ -33,9 +33,9 @@ def test__Test_Schedule_Compare_Success_3():
     Test that will apply multiplier to schedule_2 to match schedule_1.
     Expect 8760 compared but 0 match with eflh difference = 1.25
     """
-    schedule_1 = [1.0 for i in range(8760)]
-    schedule_2 = [1.0 for j in range(8760)]
-    mask_schedule = [2 for k in range(8760)]
+    schedule_1 = [1.0] * 8760
+    schedule_2 = [1.0] * 8760
+    mask_schedule = [2.0] * 8760
     multiplier = 0.8
     results = compare_schedules(schedule_1, schedule_2, mask_schedule, multiplier, False)
     assert results["total_hours_compared"] == 8760.0 and results["total_hours_match"] == 0.0 and abs(results["eflh_difference"] - 1.25) <= 0.001
@@ -46,9 +46,9 @@ def test__Test_Schedule_Compare_Success_4():
     Expect 8784 compared and 8784 match with eflh difference = 1.0
 
     """
-    schedule_1 = [1.0 for i in range(8784)]
-    schedule_2 = [1.0 for j in range(8784)]
-    mask_schedule = [1 for k in range(8784)]
+    schedule_1 = [1.0] * 8784
+    schedule_2 = [1.0] * 8784
+    mask_schedule = [1.0] * 8784
     multiplier = 0.8
     results = compare_schedules(schedule_1, schedule_2, mask_schedule, multiplier, True)
     assert results["total_hours_compared"] == 8784.0 and results["total_hours_match"] == 8784.0 and abs(results["eflh_difference"] - 1.0) <= 0.001
@@ -59,9 +59,9 @@ def test__Test_Schedule_Compare_Failed_1():
     Expect 8784 compared and 8784 match with eflh difference = 1.0,
     but the actual length of schedule is 8760, raise exception
     """
-    schedule_1 = [1.0 for i in range(8760)]
-    schedule_2 = [1.0 for j in range(8760)]
-    mask_schedule = [2 for k in range(8760)]
+    schedule_1 = [1.0] * 8760
+    schedule_2 = [1.0] * 8760
+    mask_schedule = [2.0] * 8760
     multiplier = 0.8
     try:
         results = compare_schedules(schedule_1, schedule_2, mask_schedule, multiplier, True)
@@ -75,9 +75,9 @@ def test__Test_Schedule_Compare_Failed_2():
     Test that will apply multiplier to schedule_2 to match schedule_1.
     schedule_2 has 8784 hours and schedule 1 has 8760 hours - mismached, raise exception
     """
-    schedule_1 = [1.0 for i in range(8760)]
-    schedule_2 = [1.0 for j in range(8784)]
-    mask_schedule = [2 for k in range(8760)]
+    schedule_1 = [1.0] * 8784
+    schedule_2 = [1.0] * 8784
+    mask_schedule = [2.0] * 8784
     multiplier = 0.8
     try:
         results = compare_schedules(schedule_1, schedule_2, mask_schedule, multiplier, True)
