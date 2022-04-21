@@ -63,7 +63,6 @@ class Section5Rule31(RuleDefinitionListIndexedBase):
                 )
                 # None - if no subsurfaces, then the code wont evaluate the subsurface rule
                 return {
-                    **data,
                     "proposed_subsurface_manual_shade": subsurfaces_with_manual_interior_shades_p[
                         0
                     ][
