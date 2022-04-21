@@ -2,7 +2,7 @@
 # Envelope - Rule 5-36  
 
 **Rule ID:** 5-36  
-**Rule Description:**  Skylight area must be allocated to surfaces in the same proportion in the baseline as in the proposed design; Skylight orientation and tilt shall be the same as in the proposed design.
+**Rule Description:**  Skylight area must be allocated to surfaces in the same proportion in the baseline as in the proposed design.
 **Rule Assertion:** B-RMR (subsurface.glazed_area+subsurface.opaque_area) = expected value for each zone  
 **Appendix G Section:** Section G3.1-5(e) Building Envelope Modeling Requirements for the Baseline building  
 **Appendix G Section Reference:** None  

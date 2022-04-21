@@ -33,7 +33,7 @@ class Section5Rule36(RuleDefinitionListIndexedBase):
             each_rule=Section5Rule36.BuildingRule(),
             index_rmr="baseline",
             id="5-36",
-            description="Skylight area must be allocated to surfaces in the same proportion in the baseline as in the proposed design; Skylight orientation and tilt shall be the same as in the proposed design.",
+            description="Skylight area must be allocated to surfaces in the same proportion in the baseline as in the proposed design.",
             list_path="ruleset_model_instances[0].buildings[*]",
         )
 
