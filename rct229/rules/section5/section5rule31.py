@@ -9,6 +9,7 @@ from rct229.utils.match_lists import match_lists_by_id
 
 MANUAL_CHECK_MSG = "Surface in P-RMR has subsurfaces modeled with different manual shade status. Verify if subsurfaces manual shade status in B-RMR are modeled the same as in P-RMR"
 
+
 class Section5Rule31(RuleDefinitionListIndexedBase):
     """Rule 5 of ASHRAE 90.1-2019 Appendix G Section 5 (Envelope)"""
 
@@ -41,7 +42,7 @@ class Section5Rule31(RuleDefinitionListIndexedBase):
                     each_rule=Section5Rule31.BuildingRule.SurfaceRule.SubsurfaceRule(),
                     index_rmr="baseline",
                     list_path="subsurfaces[*]",
-                    manual_check_required_msg=MANUAL_CHECK_MSG
+                    manual_check_required_msg=MANUAL_CHECK_MSG,
                 )
 
             def manual_check_required(self, context, calc_vals=None, data=None):
