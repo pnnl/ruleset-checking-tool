@@ -9,6 +9,9 @@ python_version = "3.7"
 [dev-packages]
 pylint = "*"
 pytest = "*"
+isort = "5.10.1"
+icecream = "*"
+black = "~=21.10b0"
 
 [packages]
 rct229 = {editable = true, path = "."}
@@ -19,3 +22,5 @@ pyyaml="*"
 jsonpointer="*"
 pandas = "*"
 xlrd = "~=1.2"
+numpy = "*"
+pint = "*"
