@@ -74,13 +74,13 @@
                                                         "id": "Surface 2",
                                                         "adjacent_to": "EXTERIOR",
                                                         "tilt": 90,
-                                                        "area": 2000,
+                                                        "area": 185.80607999999998,
                                                         "subsurfaces": [
                                                             {
                                                                 "id": "SubSurface 2",
                                                                 "classification": "DOOR",
-                                                                "glazed_area": 400,
-                                                                "opaque_area": 40,
+                                                                "glazed_area": 37.161215999999996,
+                                                                "opaque_area": 3.7161215999999997,
                                                                 "u_factor": 8.233482994743767
                                                             }
                                                         ]
@@ -185,13 +185,13 @@
                                                         "id": "Surface 2",
                                                         "adjacent_to": "EXTERIOR",
                                                         "tilt": 90,
-                                                        "area": 2000,
+                                                        "area": 185.80607999999998,
                                                         "subsurfaces": [
                                                             {
                                                                 "id": "SubSurface 2",
                                                                 "classification": "DOOR",
-                                                                "glazed_area": 400,
-                                                                "opaque_area": 60,
+                                                                "glazed_area": 37.161215999999996,
+                                                                "opaque_area": 5.5741824,
                                                                 "u_factor": 8.233482994743767
                                                             }
                                                         ]
@@ -300,13 +300,13 @@
                                                         "id": "Surface 2",
                                                         "adjacent_to": "EXTERIOR",
                                                         "tilt": 90,
-                                                        "area": 2000,
+                                                        "area": 185.80607999999998,
                                                         "subsurfaces": [
                                                             {
                                                                 "id": "SubSurface 2",
                                                                 "classification": "WINDOW",
-                                                                "glazed_area": 100,
-                                                                "opaque_area": 20,
+                                                                "glazed_area": 9.290303999999999,
+                                                                "opaque_area": 1.8580607999999998,
                                                                 "u_factor": 3.2366105565544463
                                                             }
                                                         ],
@@ -419,13 +419,13 @@
                                                         "id": "Surface 2",
                                                         "adjacent_to": "EXTERIOR",
                                                         "tilt": 90,
-                                                        "area": 2000,
+                                                        "area": 185.80607999999998,
                                                         "subsurfaces": [
                                                             {
                                                                 "id": "SubSurface 2",
                                                                 "classification": "WINDOW",
-                                                                "glazed_area": 100,
-                                                                "opaque_area": 20,
+                                                                "glazed_area": 9.290303999999999,
+                                                                "opaque_area": 1.8580607999999998,
                                                                 "u_factor": 3.2366105565544463
                                                             }
                                                         ],
