@@ -1,6 +1,7 @@
 import rct229
 from rct229.data import data
 from rct229.data_fns.table_utils import find_osstd_table_entry
+from rct229.schema.config import ureg
 
 # This dictionary maps the ClimateZone2019ASHRAE901 enumerations to
 # the corresponding climate zone values in the OSSTD file
@@ -38,12 +39,16 @@ def table_3_2_lookup(climate_zone_enum_val):
     Returns
     -------
     dict
-        { system_min_heating_ouput: float – the heating output for the given climate one given by Table 3.2 [Btu/h·ft^2] }
+        { system_min_heating_ouput: Quantity – the heating output for the given climate zone given by Table 3.2 [Btu/h-ft^2] }
     """
     climate_zone = climate_zone_enumeration_to_climate_zone_map[climate_zone_enum_val]
     osstd_entry = find_osstd_table_entry(
         [("climate_zone", climate_zone)],
         osstd_table=data["ashrae_90_1_table_3_2"],
     )
-    system_min_heating_output = osstd_entry["Btu/h·ft^2"]
+    btuh_per_ft2 = osstd_entry["Btu/h-ft^2"]
+    system_min_heating_output = btuh_per_ft2 * ureg(
+        "british_thermal_unit / (hour * foot ** 2)"
+    )
+
     return {"system_min_heating_output": system_min_heating_output}

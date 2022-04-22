@@ -2,9 +2,9 @@
 # Envelope - Rule 5-34  
 
 **Rule ID:** 5-34  
-**Rule Description:**  The  exterior roof surfaces shall be modeled using a solar reflectance of 0.30.  
-**Rule Assertion:** Baseline RMR = expected value  
-**Appendix G Section:** Section G3.1-5(f) Building Envelope Modeling Requirements for the Baseline building  
+**Rule Description:** If skylight area in the proposed design is 3% or less of the roof surface, the skylight area in baseline shall be equal to that in the proposed design.  
+**Rule Assertion:** B-RMR total (subsurface.glazed_area+subsurface.opaque_area) = expected value  
+**Appendix G Section:** Section G3.1-5(e) Building Envelope Modeling Requirements for the Baseline building  
 **Appendix G Section Reference:** None  
 
 **Applicability:** All required data elements exist for B_RMR  
@@ -13,19 +13,29 @@
 **Manual Check:** None  
 **Evaluation Context:** Each Data Element  
 **Data Lookup:** None  
+**Function Call:**  
 
-## Rule Logic:  
+  1. get_building_segment_skylight_roof_areas()  
+  2. match_data_element()
 
-- For each building segment in the Baseline model: ```for building_segment_b in B_RMR.building.building_segments:```  
+## Rule Logic:
 
-  - For each thermal_block in building segment: ```for thermal_block_b in building_segment_b.thermal_blocks:```  
+- Get building skylight roof areas dictionary for B_RMR: `skylight_roof_areas_dictionary_b = get_building_segment_skylight_roof_areas(B_RMR)`
 
-  - For each zone in thermal block: ```for zone_b in thermal_block_b.zones:```  
+- Get building skylight roof areas dictionary for P_RMR: `skylight_roof_areas_dictionary_p = get_building_segment_skylight_roof_areas(P_RMR)`
 
-  - For each space in thermal zone: ```for space_b in zone_b.spaces:```  
+- For each building segment in B_RMR: `for building_segment_b in B_RMR.building.building_segments:`  
 
-    - For each surface in space: ```for surface_b in space_b.surfaces:```  
+  - Calculate skylight roof ratio for building segment: `skylight_roof_ratio_b = skylight_roof_areas_dictionary_b[building_segment_b.id][0] / skylight_roof_areas_dictionary_b[building_segment_b.id][1]`
 
-      - Get surface optics for roof: ```if ( 0 <= surface_b.tilt < 60 ) AND ( surface_b.adjacent_to == "AMBIENT" ): roof_surface_optics_b = surface_b.surface_optics```  
+  - Get matching building segment in P_RMR: `building_segment_p = match_data_element(P_RMR, BuildingSegments, building_segment_b.id)`
 
-        **Rule Assertion:** Baseline roof solar reflectance is 0.30: ```roof_surface_optics_b.absorptance_solar_exterior == 0.70```  
+    - Calculate skylight roof ratio for building segment in P_RMR: `skylight_roof_ratio_p = skylight_roof_areas_dictionary_p[building_segment_p.id][0] / skylight_roof_areas_dictionary_p[building_segment_p.id][1]`
+
+    - Check if skylight roof ratio in P_RMR is 3% or less: `if skylight_roof_ratio_p <= 0.03:`
+
+      **Rule Assertion:** 
+
+      - Case 1: For each building segment in B_RMR, the skylight to roof ratio is equal to that in P_RMR: `if skylight_roof_ratio_b == skylight_roof_ratio_p: PASS`  
+
+      - Case 2: Else: `Else: FAIL`

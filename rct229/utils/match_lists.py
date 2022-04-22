@@ -44,3 +44,10 @@ def match_lists(index_list, list2, id_pointer):
     )
 
     return match_list
+
+
+def match_lists_by_id(index_list, list2):
+    match_list2 = match_lists(index_list, list2, "/id")
+    assert len(match_list2) == len(index_list)
+
+    return match_list2
