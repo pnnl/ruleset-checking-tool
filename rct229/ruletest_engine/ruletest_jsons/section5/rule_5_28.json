@@ -25,7 +25,7 @@
                 },
                 "ruleset_model_instances": [
                     {
-                        "id": "RMR 1",
+                        "id": "RMR1",
                         "buildings": [
                             {
                                 "id": "Building 1",
@@ -35,36 +35,43 @@
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
-                                                "id": "zone_1",
+                                                "id": "Zone 1",
                                                 "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
-                                                "volume": 800,
+                                                "volume": 21.237634943999996,
                                                 "spaces": [
                                                     {
-                                                        "id": "space_1",
-                                                        "floor_area": 100,
-                                                        "occupant_multiplier_schedule": "occupancy_1"
+                                                        "id": "Space 1",
+                                                        "occupant_multiplier_schedule": "Required Occupancy Sched 1",
+                                                        "floor_area": 23.225759999999998
+                                                    }
+                                                ],
+                                                "terminals": [
+                                                    {
+                                                        "id": "Terminal 1",
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
                                                     {
                                                         "id": "Surface 1",
                                                         "adjacent_to": "EXTERIOR",
-                                                        "area": 100,
                                                         "tilt": 90,
-                                                        "construction": {
-                                                            "id": "construction_1",
-                                                            "u_factor": 6.3
-                                                        },
+                                                        "area": 92.90303999999999,
                                                         "subsurfaces": [
                                                             {
-                                                                "id": "Subsurface 1",
-                                                                "glazed_area": 46.451519999999995,
-                                                                "opaque_area": 9.290303999999999,
-                                                                "u_factor": 38.32828290656582,
+                                                                "id": "SubSurface 1",
+                                                                "classification": "WINDOW",
+                                                                "glazed_area": 5.5741824,
+                                                                "opaque_area": 1.8580607999999998,
+                                                                "u_factor": 3.2366105565544463,
                                                                 "solar_heat_gain_coefficient": 0.5
                                                             }
-                                                        ]
+                                                        ],
+                                                        "construction": {
+                                                            "id": "construction_1",
+                                                            "u_factor": 3.2366105565544463
+                                                        }
                                                     }
                                                 ]
                                             }
@@ -74,11 +81,11 @@
                                                 "id": "HVAC 1",
                                                 "cooling_system": {
                                                     "id": "Cooling System 1",
-                                                    "sensible_cool_capacity": 31653000.0
+                                                    "sensible_cool_capacity": 0.0
                                                 },
                                                 "heating_system": {
                                                     "id": "Heating System 1",
-                                                    "heat_capacity": 8792.133333333333
+                                                    "heat_capacity": 0.0
                                                 }
                                             }
                                         ]
@@ -97,7 +104,7 @@
                 },
                 "ruleset_model_instances": [
                     {
-                        "id": "RMR 1",
+                        "id": "RMR1",
                         "buildings": [
                             {
                                 "id": "Building 1",
@@ -107,36 +114,43 @@
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
-                                                "id": "zone_1",
+                                                "id": "Zone 1",
                                                 "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
-                                                "volume": 800,
+                                                "volume": 21.237634943999996,
                                                 "spaces": [
                                                     {
-                                                        "id": "space_1",
-                                                        "floor_area": 100,
-                                                        "occupant_multiplier_schedule": "occupancy_1"
+                                                        "id": "Space 1",
+                                                        "occupant_multiplier_schedule": "Required Occupancy Sched 1",
+                                                        "floor_area": 23.225759999999998
+                                                    }
+                                                ],
+                                                "terminals": [
+                                                    {
+                                                        "id": "Terminal 1",
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
                                                     {
                                                         "id": "Surface 1",
                                                         "adjacent_to": "EXTERIOR",
-                                                        "area": 100,
                                                         "tilt": 90,
-                                                        "construction": {
-                                                            "id": "construction_1",
-                                                            "u_factor": 6.3
-                                                        },
+                                                        "area": 92.90303999999999,
                                                         "subsurfaces": [
                                                             {
-                                                                "id": "Subsurface 1",
-                                                                "glazed_area": 46.451519999999995,
-                                                                "opaque_area": 9.290303999999999,
-                                                                "u_factor": 38.32828290656582,
+                                                                "id": "SubSurface 1",
+                                                                "classification": "WINDOW",
+                                                                "glazed_area": 5.5741824,
+                                                                "opaque_area": 1.8580607999999998,
+                                                                "u_factor": 3.2366105565544463,
                                                                 "solar_heat_gain_coefficient": 0.5
                                                             }
-                                                        ]
+                                                        ],
+                                                        "construction": {
+                                                            "id": "construction_1",
+                                                            "u_factor": 3.2366105565544463
+                                                        }
                                                     }
                                                 ]
                                             }
@@ -146,11 +160,11 @@
                                                 "id": "HVAC 1",
                                                 "cooling_system": {
                                                     "id": "Cooling System 1",
-                                                    "sensible_cool_capacity": 31653000.0
+                                                    "sensible_cool_capacity": 0.0
                                                 },
                                                 "heating_system": {
                                                     "id": "Heating System 1",
-                                                    "heat_capacity": 8792.133333333333
+                                                    "heat_capacity": 0.0
                                                 }
                                             }
                                         ]
@@ -189,7 +203,7 @@
                 },
                 "ruleset_model_instances": [
                     {
-                        "id": "RMR 1",
+                        "id": "RMR1",
                         "buildings": [
                             {
                                 "id": "Building 1",
@@ -199,22 +213,43 @@
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
-                                                "id": "zone_1",
+                                                "id": "Zone 1",
                                                 "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
+                                                "volume": 21.237634943999996,
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "occupant_multiplier_schedule": "Required Occupancy Sched 1",
+                                                        "floor_area": 23.225759999999998
+                                                    }
+                                                ],
+                                                "terminals": [
+                                                    {
+                                                        "id": "Terminal 1",
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
+                                                    }
+                                                ],
                                                 "surfaces": [
                                                     {
                                                         "id": "Surface 1",
                                                         "adjacent_to": "EXTERIOR",
+                                                        "tilt": 90,
+                                                        "area": 92.90303999999999,
                                                         "subsurfaces": [
                                                             {
                                                                 "id": "SubSurface 1",
-                                                                "glazed_area": 46.451519999999995,
-                                                                "u_factor": 38.32828290656582,
-                                                                "solar_heat_gain_coefficient": 0.5,
-                                                                "opaque_area": 11.1483648
+                                                                "classification": "WINDOW",
+                                                                "glazed_area": 5.5741824,
+                                                                "opaque_area": 0.9290303999999999,
+                                                                "u_factor": 3.2366105565544463,
+                                                                "solar_heat_gain_coefficient": 0.5
                                                             }
-                                                        ]
+                                                        ],
+                                                        "construction": {
+                                                            "id": "construction_1",
+                                                            "u_factor": 3.2366105565544463
+                                                        }
                                                     }
                                                 ]
                                             }
@@ -224,11 +259,11 @@
                                                 "id": "HVAC 1",
                                                 "cooling_system": {
                                                     "id": "Cooling System 1",
-                                                    "sensible_cool_capacity": 0
+                                                    "sensible_cool_capacity": 0.0
                                                 },
                                                 "heating_system": {
                                                     "id": "Heating System 1",
-                                                    "heat_capacity": 0
+                                                    "heat_capacity": 0.0
                                                 }
                                             }
                                         ]
@@ -247,7 +282,7 @@
                 },
                 "ruleset_model_instances": [
                     {
-                        "id": "RMR 1",
+                        "id": "RMR1",
                         "buildings": [
                             {
                                 "id": "Building 1",
@@ -257,22 +292,43 @@
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
-                                                "id": "zone_1",
+                                                "id": "Zone 1",
                                                 "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
+                                                "volume": 21.237634943999996,
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "occupant_multiplier_schedule": "Required Occupancy Sched 1",
+                                                        "floor_area": 23.225759999999998
+                                                    }
+                                                ],
+                                                "terminals": [
+                                                    {
+                                                        "id": "Terminal 1",
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
+                                                    }
+                                                ],
                                                 "surfaces": [
                                                     {
                                                         "id": "Surface 1",
                                                         "adjacent_to": "EXTERIOR",
+                                                        "tilt": 90,
+                                                        "area": 92.90303999999999,
                                                         "subsurfaces": [
                                                             {
                                                                 "id": "SubSurface 1",
-                                                                "glazed_area": 46.451519999999995,
-                                                                "u_factor": 38.32828290656582,
-                                                                "solar_heat_gain_coefficient": 0.5,
-                                                                "opaque_area": 9.290303999999999
+                                                                "classification": "WINDOW",
+                                                                "glazed_area": 5.5741824,
+                                                                "opaque_area": 1.8580607999999998,
+                                                                "u_factor": 3.2366105565544463,
+                                                                "solar_heat_gain_coefficient": 0.5
                                                             }
-                                                        ]
+                                                        ],
+                                                        "construction": {
+                                                            "id": "construction_1",
+                                                            "u_factor": 3.2366105565544463
+                                                        }
                                                     }
                                                 ]
                                             }
@@ -282,11 +338,11 @@
                                                 "id": "HVAC 1",
                                                 "cooling_system": {
                                                     "id": "Cooling System 1",
-                                                    "sensible_cool_capacity": 0
+                                                    "sensible_cool_capacity": 0.0
                                                 },
                                                 "heating_system": {
                                                     "id": "Heating System 1",
-                                                    "heat_capacity": 0
+                                                    "heat_capacity": 0.0
                                                 }
                                             }
                                         ]
@@ -303,7 +359,7 @@
         "Section": 5,
         "Rule": 28,
         "Test": "c",
-        "test_description": "Fenestration that is not regulated based on the parameters of the baseline zone is modeled with a different area than in the propose design",
+        "test_description": "Fenestration that is not regulated based on the parameters of the baseline zone is modeled with a different u-factor than in the propose design",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-28",
@@ -325,7 +381,7 @@
                 },
                 "ruleset_model_instances": [
                     {
-                        "id": "RMR 1",
+                        "id": "RMR1",
                         "buildings": [
                             {
                                 "id": "Building 1",
@@ -335,22 +391,43 @@
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
-                                                "id": "zone_1",
+                                                "id": "Zone 1",
                                                 "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
+                                                "volume": 21.237634943999996,
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "occupant_multiplier_schedule": "Required Occupancy Sched 1",
+                                                        "floor_area": 23.225759999999998
+                                                    }
+                                                ],
+                                                "terminals": [
+                                                    {
+                                                        "id": "Terminal 1",
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
+                                                    }
+                                                ],
                                                 "surfaces": [
                                                     {
                                                         "id": "Surface 1",
                                                         "adjacent_to": "EXTERIOR",
+                                                        "tilt": 90,
+                                                        "area": 92.90303999999999,
                                                         "subsurfaces": [
                                                             {
                                                                 "id": "SubSurface 1",
-                                                                "glazed_area": 46.451519999999995,
-                                                                "opaque_area": 11.1483648,
-                                                                "solar_heat_gain_coefficient": 0.5,
-                                                                "u_factor": 6.75
+                                                                "classification": "WINDOW",
+                                                                "glazed_area": 5.5741824,
+                                                                "opaque_area": 1.8580607999999998,
+                                                                "u_factor": 4.5426113074448375,
+                                                                "solar_heat_gain_coefficient": 0.5
                                                             }
-                                                        ]
+                                                        ],
+                                                        "construction": {
+                                                            "id": "construction_1",
+                                                            "u_factor": 3.2366105565544463
+                                                        }
                                                     }
                                                 ]
                                             }
@@ -360,11 +437,11 @@
                                                 "id": "HVAC 1",
                                                 "cooling_system": {
                                                     "id": "Cooling System 1",
-                                                    "sensible_cool_capacity": 31653000.0
+                                                    "sensible_cool_capacity": 0.0
                                                 },
                                                 "heating_system": {
                                                     "id": "Heating System 1",
-                                                    "heat_capacity": 8792.133333333333
+                                                    "heat_capacity": 0.0
                                                 }
                                             }
                                         ]
@@ -383,7 +460,7 @@
                 },
                 "ruleset_model_instances": [
                     {
-                        "id": "RMR 1",
+                        "id": "RMR1",
                         "buildings": [
                             {
                                 "id": "Building 1",
@@ -393,22 +470,43 @@
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
-                                                "id": "zone_1",
+                                                "id": "Zone 1",
                                                 "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
+                                                "volume": 21.237634943999996,
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "occupant_multiplier_schedule": "Required Occupancy Sched 1",
+                                                        "floor_area": 23.225759999999998
+                                                    }
+                                                ],
+                                                "terminals": [
+                                                    {
+                                                        "id": "Terminal 1",
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
+                                                    }
+                                                ],
                                                 "surfaces": [
                                                     {
                                                         "id": "Surface 1",
                                                         "adjacent_to": "EXTERIOR",
+                                                        "tilt": 90,
+                                                        "area": 92.90303999999999,
                                                         "subsurfaces": [
                                                             {
                                                                 "id": "SubSurface 1",
-                                                                "glazed_area": 46.451519999999995,
-                                                                "opaque_area": 11.1483648,
-                                                                "solar_heat_gain_coefficient": 0.5,
-                                                                "u_factor": 3.75
+                                                                "classification": "WINDOW",
+                                                                "glazed_area": 5.5741824,
+                                                                "opaque_area": 1.8580607999999998,
+                                                                "u_factor": 3.2366105565544463,
+                                                                "solar_heat_gain_coefficient": 0.5
                                                             }
-                                                        ]
+                                                        ],
+                                                        "construction": {
+                                                            "id": "construction_1",
+                                                            "u_factor": 3.2366105565544463
+                                                        }
                                                     }
                                                 ]
                                             }
@@ -418,11 +516,11 @@
                                                 "id": "HVAC 1",
                                                 "cooling_system": {
                                                     "id": "Cooling System 1",
-                                                    "sensible_cool_capacity": 31653000.0
+                                                    "sensible_cool_capacity": 0.0
                                                 },
                                                 "heating_system": {
                                                     "id": "Heating System 1",
-                                                    "heat_capacity": 8792.133333333333
+                                                    "heat_capacity": 0.0
                                                 }
                                             }
                                         ]
@@ -439,7 +537,7 @@
         "Section": 5,
         "Rule": 28,
         "Test": "d",
-        "test_description": "Fenestration that is not regulated based on the parameters of the baseline zone is modeled with a different area than in the propose design",
+        "test_description": "Fenestration that is not regulated based on the parameters of the baseline zone is modeled with a different u-factor than in the propose design",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-28",
@@ -461,7 +559,7 @@
                 },
                 "ruleset_model_instances": [
                     {
-                        "id": "RMR 1",
+                        "id": "RMR1",
                         "buildings": [
                             {
                                 "id": "Building 1",
@@ -471,22 +569,43 @@
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
-                                                "id": "zone_1",
+                                                "id": "Zone 1",
                                                 "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
+                                                "volume": 21.237634943999996,
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "occupant_multiplier_schedule": "Required Occupancy Sched 1",
+                                                        "floor_area": 23.225759999999998
+                                                    }
+                                                ],
+                                                "terminals": [
+                                                    {
+                                                        "id": "Terminal 1",
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
+                                                    }
+                                                ],
                                                 "surfaces": [
                                                     {
                                                         "id": "Surface 1",
                                                         "adjacent_to": "EXTERIOR",
+                                                        "tilt": 90,
+                                                        "area": 92.90303999999999,
                                                         "subsurfaces": [
                                                             {
                                                                 "id": "SubSurface 1",
-                                                                "glazed_area": 46.451519999999995,
-                                                                "opaque_area": 11.1483648,
-                                                                "u_factor": 38.32828290656582,
-                                                                "solar_heat_gain_coefficient": 0.5
+                                                                "classification": "WINDOW",
+                                                                "glazed_area": 5.5741824,
+                                                                "opaque_area": 1.8580607999999998,
+                                                                "u_factor": 3.2366105565544463,
+                                                                "solar_heat_gain_coefficient": 0.3
                                                             }
-                                                        ]
+                                                        ],
+                                                        "construction": {
+                                                            "id": "construction_1",
+                                                            "u_factor": 3.2366105565544463
+                                                        }
                                                     }
                                                 ]
                                             }
@@ -496,11 +615,11 @@
                                                 "id": "HVAC 1",
                                                 "cooling_system": {
                                                     "id": "Cooling System 1",
-                                                    "sensible_cool_capacity": 31653000.0
+                                                    "sensible_cool_capacity": 0.0
                                                 },
                                                 "heating_system": {
                                                     "id": "Heating System 1",
-                                                    "heat_capacity": 8792.133333333333
+                                                    "heat_capacity": 0.0
                                                 }
                                             }
                                         ]
@@ -519,7 +638,7 @@
                 },
                 "ruleset_model_instances": [
                     {
-                        "id": "RMR 1",
+                        "id": "RMR1",
                         "buildings": [
                             {
                                 "id": "Building 1",
@@ -529,22 +648,43 @@
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
-                                                "id": "zone_1",
+                                                "id": "Zone 1",
                                                 "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
+                                                "volume": 21.237634943999996,
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "occupant_multiplier_schedule": "Required Occupancy Sched 1",
+                                                        "floor_area": 23.225759999999998
+                                                    }
+                                                ],
+                                                "terminals": [
+                                                    {
+                                                        "id": "Terminal 1",
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
+                                                    }
+                                                ],
                                                 "surfaces": [
                                                     {
                                                         "id": "Surface 1",
                                                         "adjacent_to": "EXTERIOR",
+                                                        "tilt": 90,
+                                                        "area": 92.90303999999999,
                                                         "subsurfaces": [
                                                             {
                                                                 "id": "SubSurface 1",
-                                                                "glazed_area": 46.451519999999995,
-                                                                "opaque_area": 11.1483648,
-                                                                "u_factor": 38.32828290656582,
-                                                                "solar_heat_gain_coefficient": 0.4
+                                                                "classification": "WINDOW",
+                                                                "glazed_area": 5.5741824,
+                                                                "opaque_area": 1.8580607999999998,
+                                                                "u_factor": 3.2366105565544463,
+                                                                "solar_heat_gain_coefficient": 0.5
                                                             }
-                                                        ]
+                                                        ],
+                                                        "construction": {
+                                                            "id": "construction_1",
+                                                            "u_factor": 3.2366105565544463
+                                                        }
                                                     }
                                                 ]
                                             }
@@ -554,11 +694,11 @@
                                                 "id": "HVAC 1",
                                                 "cooling_system": {
                                                     "id": "Cooling System 1",
-                                                    "sensible_cool_capacity": 31653000.0
+                                                    "sensible_cool_capacity": 0.0
                                                 },
                                                 "heating_system": {
                                                     "id": "Heating System 1",
-                                                    "heat_capacity": 8792.133333333333
+                                                    "heat_capacity": 0.0
                                                 }
                                             }
                                         ]
