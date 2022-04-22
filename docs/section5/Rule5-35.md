@@ -8,7 +8,8 @@
 **Appendix G Section Reference:** None  
 
 **Applicability:** All required data elements exist for B_RMR  
-**Applicability Checks:**  None  
+**Applicability Checks:**
+1. the skylight area in the proposed design is 3% or greater.  
 
 **Manual Check:** None  
 **Evaluation Context:** Each Data Element  
@@ -26,7 +27,7 @@
 
 - For each building segment in B_RMR: `for building_segment_b in B_RMR.building.building_segments:`
 
-  - Calculate skylight roof ratio for building segment: `skylight_roof_ratio_b = skylight_roof_areas_dictionary_b[building_segment_b.id][0] / skylight_roof_areas_dictionary_b[building_segment_b.id][1]`
+  - Calculate skylight roof ratio for building segment: `skylight_roof_ratio_b = skylight_roof_areas_dictionary_b[building_segment_b.id]["total_skylight_area"] / skylight_roof_areas_dictionary_b[building_segment_b.id]["total_envelope_roof_area"]`
 
   - Get matching building segment in P_RMR: `building_segment_p = match_data_element(P_RMR, BuildingSegments, building_segment_b.id)`
 
@@ -34,7 +35,7 @@
 
       - Check if skylight roof ratio in P_RMR is greater than 3%: `if skylight_roof_ratio_p > 0.03:`
 
-        **Rule Assertion:** 
+        **Rule Assertion:**
 
         - Case 1: For each building segment in B_RMR, the skylight to roof ratio is equal to 3%: `if skylight_roof_ratio_b == 0.03: PASS`  
 

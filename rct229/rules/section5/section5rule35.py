@@ -24,7 +24,7 @@ class Section5Rule35(RuleDefinitionListIndexedBase):
             each_rule=Section5Rule35.BuildingRule(),
             index_rmr="baseline",
             id="5-35",
-            description=" If the skylight area of the proposed design is greater than 3%, baseline skylight area shall be decreased by an identical percentage in all roof components in which skylights are located to reach 3%.",
+            description="If the skylight area of the proposed design is greater than 3%, baseline skylight area shall be decreased by an identical percentage in all roof components in which skylights are located to reach 3%.",
             list_path="ruleset_model_instances[0].buildings[*]",
         )
 
@@ -42,43 +42,42 @@ class Section5Rule35(RuleDefinitionListIndexedBase):
             )
 
         def create_data(self, context, data=None):
-            baseline = context.baseline
-            proposed = context.proposed
+            building_b = context.baseline
+            building_p = context.proposed
             # Merge into the existing data dict
             return {
                 **data,
                 "skylight_roof_areas_dictionary_b": get_building_segment_skylight_roof_areas_dict(
-                    data["climate_zone"], baseline
+                    data["climate_zone"], building_b
                 ),
                 "skylight_roof_areas_dictionary_p": get_building_segment_skylight_roof_areas_dict(
-                    data["climate_zone"], proposed
+                    data["climate_zone"], building_p
                 ),
             }
 
         class BuildingSegmentRule(RuleDefinitionBase):
             def __init__(self):
                 super(Section5Rule35.BuildingRule.BuildingSegmentRule, self).__init__(
-                    rmrs_used=UserBaselineProposedVals(False, True, False),
+                    rmrs_used=UserBaselineProposedVals(False, True, True),
                 )
 
             def is_applicable(self, context, data=None):
-                proposed = context.proposed
+                building_p = context.proposed
                 skylight_roof_areas_dictionary_p = data[
                     "skylight_roof_areas_dictionary_p"
                 ]
                 skylight_roof_ratio_p = (
-                    skylight_roof_areas_dictionary_p[proposed["id"]][
+                    skylight_roof_areas_dictionary_p[building_p["id"]][
                         "total_skylight_area"
                     ]
-                    / skylight_roof_areas_dictionary_p[proposed["id"]][
+                    / skylight_roof_areas_dictionary_p[building_p["id"]][
                         "total_envelope_roof_area"
-                    ],
+                    ]
                 )
                 return skylight_roof_ratio_p > SKYLIGHT_THRESHOLD
 
             def get_calc_vals(self, context, data=None):
-                baseline = context.baseline
-                proposed = context.proposed
+                building_segment_b = context.baseline
                 skylight_roof_areas_dictionary_b = data[
                     "skylight_roof_areas_dictionary_b"
                 ]
@@ -88,20 +87,23 @@ class Section5Rule35(RuleDefinitionListIndexedBase):
 
                 return {
                     "skylight_roof_ratio_b": skylight_roof_areas_dictionary_b[
-                        baseline["id"]
+                        building_segment_b["id"]
                     ]["total_skylight_area"]
-                    / skylight_roof_areas_dictionary_b[baseline["id"]][
+                    / skylight_roof_areas_dictionary_b[building_segment_b["id"]][
                         "total_envelope_roof_area"
                     ],
-                    "skylight_roof_ratio_p": skylight_roof_areas_dictionary_p[
-                        proposed["id"]
-                    ]["total_skylight_area"]
-                    / skylight_roof_areas_dictionary_p[proposed["id"]][
-                        "total_envelope_roof_area"
-                    ],
+                    "skylight_total_roof_ratio_p": sum(
+                        component["total_skylight_area"]
+                        for component in skylight_roof_areas_dictionary_p.values()
+                    )
+                    / sum(
+                        component["total_envelope_roof_area"]
+                        for component in skylight_roof_areas_dictionary_p.values()
+                    ),
                 }
+
 
             def rule_check(self, context, calc_vals=None, data=None):
                 skylight_roof_ratio_b = calc_vals["skylight_roof_ratio_b"]
-
-                return std_equal(skylight_roof_ratio_b, SKYLIGHT_THRESHOLD)
+                skylight_roof_ratio_p = calc_vals["skylight_total_roof_ratio_p"]
+                return std_equal(skylight_roof_ratio_b, skylight_roof_ratio_p)
