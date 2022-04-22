@@ -1,4 +1,3 @@
-from rct229.data_fns.table_G3_111_fns import table_G3_1_1_1_lookup
 from rct229.rule_engine.rule_base import (
     RuleDefinitionBase,
     RuleDefinitionListIndexedBase,
@@ -17,7 +16,11 @@ class Section5Rule19(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section5Rule19, self).__init__(
-            rmrs_used=UserBaselineProposedVals(False, True, False),
+            rmrs_used=UserBaselineProposedVals(False, True, True),
+            required_fields={
+                "$": ["weather"],
+                "weather": ["climate_zone"],
+            },
             each_rule=Section5Rule19.BuildingRule(),
             index_rmr="baseline",
             id="5-19",
@@ -32,7 +35,7 @@ class Section5Rule19(RuleDefinitionListIndexedBase):
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section5Rule19.BuildingRule, self).__init__(
-                rmrs_used=UserBaselineProposedVals(False, True, False),
+                rmrs_used=UserBaselineProposedVals(False, True, True),
                 required_fields={
                     "$": ["building_segments"],
                     "building_segment": [
@@ -45,18 +48,23 @@ class Section5Rule19(RuleDefinitionListIndexedBase):
             )
 
         def create_data(self, context, data=None):
-            building = context.baseline
-            area_type_window_wall_area_dict_b = get_area_type_window_wall_area_dict(
-                data["climate_zone"], building
-            )
-            is_area_type_all_new_dict = {}
-            for building_segment in find_all("$..building_segments[*]", building):
-                area_type = building_segment["area_type_vertical_fenestration"]
-                # add key-value pair or override the existing value
-                is_area_type_all_new_dict[area_type] = building_segment["is_all_new"]
+            building_b = context.baseline
+            building_p = context.proposed
 
-            # get the building vertical fenestration percentage from Table G3.1.1-1
-            proposed_ = table_G3_1_1_1_lookup()
+            area_type_window_wall_area_dict_b = get_area_type_window_wall_area_dict(
+                data["climate_zone"], building_b
+            )
+            area_type_window_wall_area_dict_p = get_area_type_window_wall_area_dict(
+                data["climate_zone"], building_p
+            )
+
+            # is_area_type_all_new_dict = {}
+            # for building_segment in find_all("$..building_segments[*]", building_b):
+            #     area_type = building_segment["area_type_vertical_fenestration"]
+            #     # add key-value pair or override the existing value
+            #     is_area_type_all_new_dict[area_type] = building_segment["is_all_new"]
+
+
             return {
                 **data,
                 "is_area_type_all_new_dict": is_area_type_all_new_dict,
@@ -86,7 +94,7 @@ class Section5Rule19(RuleDefinitionListIndexedBase):
         class BuildingSegmentRule(RuleDefinitionBase):
             def __init__(self):
                 super(Section5Rule19.BuildingRule.BuildingSegmentRule, self).__init__(
-                    rmrs_used=UserBaselineProposedVals(False, True, False),
+                    rmrs_used=UserBaselineProposedVals(False, True, True),
                     required_fields={"$": ["is_all_new"]},
                     )
 
@@ -97,7 +105,7 @@ class Section5Rule19(RuleDefinitionListIndexedBase):
                 building_segments_b = context.proposed["building_segments"]
 
                 # check if the wwr is equal to the proposed design
-                if
+
 
 
                 # building_segments_b = context.baseline["building_segments"]
@@ -115,12 +123,12 @@ class Section5Rule19(RuleDefinitionListIndexedBase):
                 #             / area_type_window_wall_ratio_b[area_type]["total_wall_area"]
                 #     )
                 #     area_type_target_wwr = table_G3_1_1_1_lookup(area_type)
-
-                return {
-                    "is_all_new": is_area_type_all_new_dict[area_type],
-                    "area_type_wwr": area_type_wwr,
-                    "area_type_target_wwr": area_type_target_wwr["wwr"],
-                }
+                return None
+                # return {
+                #     "is_all_new": is_area_type_all_new_dict[area_type],
+                #     "area_type_wwr": area_type_wwr,
+                #     "area_type_target_wwr": area_type_target_wwr["wwr"],
+                # }
 
             def manual_check_required(self, context, calc_vals=None, data=None):
                 # Raise warning...based on checks?

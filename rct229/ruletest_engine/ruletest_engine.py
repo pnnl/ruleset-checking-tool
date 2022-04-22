@@ -498,7 +498,7 @@ def run_envelope_tests():
     Results of envelope test are spit out to console
     """
 
-    envelope_test_json = "envelope_tests.json"
-    # envelope_test_json = "section5/rule_5_17.json"
+    # envelope_test_json = "envelope_tests.json"
+    envelope_test_json = "section5/rule_5_19_copied.json"
 
     return run_section_tests(envelope_test_json)
