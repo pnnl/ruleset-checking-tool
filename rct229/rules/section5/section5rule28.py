@@ -67,7 +67,7 @@ class Section5Rule28(RuleDefinitionListIndexedBase):
                     rmrs_used=UserBaselineProposedVals(False, True, True),
                     list_path="subsurfaces[*]",
                     each_rule=Section5Rule28.BuildingRule.UnregulatedSurfaceRule.UnregulatedSubsurfaceRule(),
-                    index_rmr="baseline"
+                    index_rmr="baseline",
                 )
 
             class UnregulatedSubsurfaceRule(RuleDefinitionBase):
