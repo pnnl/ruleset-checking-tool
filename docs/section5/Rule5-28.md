@@ -24,22 +24,20 @@
 
 - For each building segment in the Baseline model: `for building_segment_b in B_RMR.building.building_segments:`
 
-  - For each thermal block in building segment: `for thermal_block_b in building_segment_b.thermal_blocks:`
+  - For each zone in thermal block: `for zone_b in building_segment_b.zones:`
 
-    - For each zone in thermal block: `for zone_b in thermal_block_b.zones:`
+    - For each surface in zone: `for surface_b in zone_b.surfaces:`
 
-      - For each surface in zone: `for surface_b in zone_b.surfaces:`
+      - Check if surface is unregulated: `if scc_dictionary_b[surface_b.id] == "UNREGULATED":`
 
-        - Check if surface is unregulated: `if scc_dictionary_b[surface_b.id] == "UNREGULATED":`
+        - For each subsurface in surface: `for subsurface_b in surface_b:`
 
-          - For each subsurface in surface: `for subsurface_b in surface_b:`
+          - Get matching subsurface in P_RMR: `subsurface_p = match_data_element(P_RMR, Subsurfaces, subsurface_b.id)`
 
-            - Get matching subsurface in P_RMR: `subsurface_p = match_data_element(P_RMR, Subsurfaces, subsurface_b.id)`
+            **Rule Assertion:**
 
-              **Rule Assertion:**
+            - Case 1: For each subsurface in B_RMR, if subsurface U-factor, SHGC, glazed area and opaque area is equal to that in P_RMR: `if ( subsurface_b.u_factor == subsurface_p.u_factor ) AND ( subsurface_b.solar_heat_gain_coefficient == subsurface_p.solar_heat_gain_coefficient ) AND ( subsurface_b.glazed_area == subsurface_p.glazed_area ) AND ( surface_b.opaque_area == surface_p.opaque_area ): PASS`
 
-              - Case 1: For each subsurface in B_RMR, if subsurface U-factor, SHGC, glazed area and opaque area is equal to that in P_RMR: `if ( subsurface_b.u_factor == subsurface_p.u_factor ) AND ( subsurface_b.solar_heat_gain_coefficient == subsurface_p.solar_heat_gain_coefficient ) AND ( subsurface_b.glazed_area == subsurface_p.glazed_area ) AND ( surface_b.opaque_area == surface_p.opaque_area ): PASS`
-
-              - Case 2: Else: `else: FAIL and raise_warning "SUBSURFACE THAT IS NOT REGULATED (NOT PART OF BUILDING ENVELOPE) IS NOT MODELED WITH THE SAME AREA, U-FACTOR AND SHGC IN THE BASELINE AS IN THE PROPOSED DESIGN."`
+            - Case 2: Else: `else: FAIL and raise_warning "SUBSURFACE THAT IS NOT REGULATED (NOT PART OF BUILDING ENVELOPE) IS NOT MODELED WITH THE SAME AREA, U-FACTOR AND SHGC IN THE BASELINE AS IN THE PROPOSED DESIGN."`
 
 **[Back](../_toc.md)**
