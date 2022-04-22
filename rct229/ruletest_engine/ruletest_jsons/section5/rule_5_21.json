@@ -82,7 +82,7 @@
                                                         "id": "Surface 2",
                                                         "adjacent_to": "EXTERIOR",
                                                         "tilt": 75,
-                                                        "area": 1000,
+                                                        "area": 92.90303999999999,
                                                         "construction": {
                                                             "id": "construction_2",
                                                             "u_factor": 3.2366105565544463
@@ -185,7 +185,7 @@
                                                         "id": "Surface 2",
                                                         "adjacent_to": "EXTERIOR",
                                                         "tilt": 75,
-                                                        "area": 1000,
+                                                        "area": 92.90303999999999,
                                                         "construction": {
                                                             "id": "construction_2",
                                                             "u_factor": 3.2366105565544463
@@ -308,7 +308,7 @@
                                                         "id": "Surface 2",
                                                         "adjacent_to": "EXTERIOR",
                                                         "tilt": 75,
-                                                        "area": 1000,
+                                                        "area": 92.90303999999999,
                                                         "construction": {
                                                             "id": "construction_2",
                                                             "u_factor": 3.2366105565544463
@@ -411,7 +411,7 @@
                                                         "id": "Surface 2",
                                                         "adjacent_to": "EXTERIOR",
                                                         "tilt": 75,
-                                                        "area": 1000,
+                                                        "area": 92.90303999999999,
                                                         "construction": {
                                                             "id": "construction_2",
                                                             "u_factor": 3.2366105565544463
