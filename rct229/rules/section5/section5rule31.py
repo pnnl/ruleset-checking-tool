@@ -59,11 +59,10 @@ class Section5Rule31(RuleDefinitionListIndexedBase):
             def create_data(self, context, data=None):
                 surface_p = context.proposed
                 subsurfaces_with_manual_interior_shades_p = find_all(
-                    "subsurfaces[?(@.has_manual_interior_shades=True)]", surface_p
+                    "subsurfaces[?(@.has_manual_interior_shades=true)]", surface_p
                 )
                 # None - if no subsurfaces, then the code wont evaluate the subsurface rule
                 return {
-                    **data,
                     "proposed_subsurface_manual_shade": subsurfaces_with_manual_interior_shades_p[
                         0
                     ][
