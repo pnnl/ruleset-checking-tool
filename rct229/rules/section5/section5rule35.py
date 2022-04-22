@@ -24,7 +24,7 @@ class Section5Rule35(RuleDefinitionListIndexedBase):
             each_rule=Section5Rule35.BuildingRule(),
             index_rmr="baseline",
             id="5-35",
-            description="If the skylight area of the proposed design is greater than 3%, baseline skylight area shall be decreased by an identical percentage in all roof components in which skylights are located to reach 3%.",
+            description="If the skylight area of the proposed design is greater than 3%, baseline skylight area shall be decreased in all roof components in which skylights are located to reach 3%.",
             list_path="ruleset_model_instances[0].buildings[*]",
         )
 
@@ -102,8 +102,6 @@ class Section5Rule35(RuleDefinitionListIndexedBase):
                     ),
                 }
 
-
             def rule_check(self, context, calc_vals=None, data=None):
                 skylight_roof_ratio_b = calc_vals["skylight_roof_ratio_b"]
-                skylight_roof_ratio_p = calc_vals["skylight_total_roof_ratio_p"]
-                return std_equal(skylight_roof_ratio_b, skylight_roof_ratio_p)
+                return std_equal(skylight_roof_ratio_b, 0.03)

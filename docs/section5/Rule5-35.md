@@ -2,7 +2,7 @@
 # Envelope - Rule 5-35  
 
 **Rule ID:** 5-35  
-**Rule Description:**  If the skylight area of the proposed design is greater than 3%, baseline skylight area shall be decreased by an identical percentage in all roof components in which skylights are located to reach 3%.  
+**Rule Description:**  If the skylight area of the proposed design is greater than 3%, baseline skylight area shall be decreased in all roof components in which skylights are located to reach 3%.  
 **Rule Assertion:** B-RMR total (subsurface.glazed_area+subsurface.opaque_area) = expected value for each zone  
 **Appendix G Section:** Section G3.1-5(e) Building Envelope Modeling Requirements for the Baseline building  
 **Appendix G Section Reference:** None  
