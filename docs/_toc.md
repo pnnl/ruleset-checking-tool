@@ -88,6 +88,7 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   * [5-18](section5/Rule5-18.md): For building area types included in Table G3.1.1-1, vertical fenestration areas for new buildings and additions shall equal that in Table G3.1.1-1 based on the area of gross above-grade walls that separate conditioned spaces and semi-heated spaces from the exterior
   * [5-19](section5/Rule5-19.md): For building areas not shown in Table G3.1.1-1, vertical fenestration areas for new buildings and additions shall equal that in the proposed design or 40% of gross above-grade wall area, whichever is smaller. 
   * [5-21](section5/Rule5-21.md): The vertical fenestration shall be distributed on each face of the building in the same proportion as in the proposed design.  
+  * [5-22](section5/Rule5-22.md): The baseline fenestration area for an existing building shall equal the existing fenestration area prior to the proposed work.
   * [5-23](section5/Rule5-23.md): Subsurface area in the proposed design must be as-designed.  
   * [5-24](section5/Rule5-24.md): Vertical fenestration U-factors for residential, non-residential and semi-heated spaces in the baseline model must match the appropriate requirements in Table G3.4-1 through G3.4-8 for the appropriate WWR in the baseline RMR.  
   * [5-25](section5/Rule5-25.md): Fenestration (window and skylight) U-factors in the proposed model must match the user model.  
@@ -97,6 +98,7 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   * [5-30](section5/Rule5-30.md): Proposed fenestration has the same shading projections as the user model.
   * [5-31](section5/Rule5-31.md): Manual fenestration shading devices, such as blinds or shades, shall be modeled or not modeled the same as in the baseline building design.
   * [5-33](section5/Rule5-33.md): Automatically controlled fenestration shading devices must be modeled in the proposed design the same as in user model.  
+  * [5-34](section5/Rule5-34.md):  If skylight area in the proposed design is 3% or less of the roof surface, the skylight area in baseline shall be equal to that in the proposed design.  
   * [5-35](section5/Rule5-35.md): If the skylight area of the proposed design is greater than 3%, baseline skylight area shall be decreased by an identical percentage in all roof components in which skylights are located to reach 3%.  
   * [5-36](section5/Rule5-36.md): Skylight area must be allocated to surfaces in the same proportion in the baseline as in the proposed design; Skylight orientation and tilt shall be the same as in the proposed design.  
   * [5-37](section5/Rule5-37.md): Skylight U-factors for residential, non-residential and semi-heated spaces in the baseline model must match the appropriate requirements in Table G3.4-1 through G3.4-8.  
@@ -142,5 +144,20 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
 
 ## Section 17 - Refrigeration
 
+## Section 21 - Central Heating Hot Water Systems
+  * [21-3](section21/Rule21-3.md): Heating hot water plant capacity shall be based on coincident loads.  
+  * [21-4](section21/Rule21-4.md): When baseline building does not use purchased heat, baseline systems 1,5,7,11,12 shall be modeled with natural draft boilers.
+  * [21-6](section21/Rule21-6.md): When baseline building includes two boilers each shall stage as required by load.  
+  * [21-7](section21/Rule21-7.md): When baseline building requires boilers, systems 1,5,7,11 and 12 - Model HWST = 180F and return design temp = 130F.
+  * [21-9](section21/Rule21-9.md): When baseline building includes boilers, Hot Water Pump Power = 19W/gpm.  
+  * [21-10](section21/Rule21-10.md): When the building is modeled with HHW plant (served by either boiler(s) or purchased hot water/steam), the hot water pump shall be modeled as riding the pump curve if the hot water system serves less than 120,000 ft^2 otherwise it shall be modeled with a VFD.  
+  * [21-11A](section21/Rule21-11A.md): When the system uses boilers the hot water system shall be modeled as primary only.  
+  * [21-11B](section21/Rule21-11B.md): When the system uses boilers the hot water system shall be modeled with continuous variable flow.  
+  * [21-11C](section21/Rule21-11C.md): When the system uses boilers the hot water system shall be modeled with a minimum turndown ratio of 0.25.
+  * [21-21](section21/Rule21-21.md): For baseline building, fossil fuel systems shall be modeled using natural gas as their fuel source.
+
 ## Section 22 - Central Chilled Water Systems
+  * [22-1](section22/Rule22-1.md): Baseline chilled water design supply temperature shall be modeled at 44F.  
+  * [22-2](section22/Rule22-2.md): Baseline chilled water design supply temperature shall be modeled at 44F.  
+  * [22-3](section22/Rule22-3.md): For Baseline chilled water loop that is not purchased cooling, chilled-water supply temperature shall be reset based on outdoor dry-bulb temperature if loop does not serve any Baseline System Type-11.
   * [22-5](section22/Rule22-5.md): For Baseline chilled water loop that is not purchased chilled water and serves computer room HVAC systems (System Type-11), chilled-water supply temperature shall be reset higher based on the HVAC system requiring the most cooling.  
