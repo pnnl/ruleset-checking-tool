@@ -1,6 +1,7 @@
 from jsonpointer import resolve_pointer
 
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
+from rct229.utils.assertions import MissingKeyException, RCTFailureException
 from rct229.utils.json_utils import slash_prefix_guarantee
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.match_lists import match_lists
@@ -16,6 +17,9 @@ class RuleDefinitionBase:
         description=None,
         rmr_context="",
         required_fields=None,
+        must_match_by_ids=[],
+        manual_check_required_msg=None,
+        not_applicable_msg=None,
     ):
         """Base class for all Rule definitions
 
@@ -51,6 +55,8 @@ class RuleDefinitionBase:
         # Default rm_context is the root of the RMR
         self.rmr_context = slash_prefix_guarantee(rmr_context)
         self.required_fields = required_fields
+        self.manual_check_required_msg = manual_check_required_msg
+        self.not_applicable_msg = not_applicable_msg
 
     def evaluate(self, rmrs, data=None):
         """Generates the outcome dictionary for the rule
@@ -82,8 +88,8 @@ class RuleDefinitionBase:
                 id: string - A unique identifier for the rule; ommitted if None
                 description: string - The rule description; ommitted if None
                 rmr_context: string - a JSON pointer into the RMR; omitted if empty
-                result: string or list - One of the strings "PASS", "FAIL", "NA",
-                    or "REQUIRES_MANUAL_CHECK" or a list of outcomes for
+                result: string or list - One of the strings "PASS", "FAIL", "UNDETERMINED", "NOT_APPLICABLE"
+                    or a list of outcomes for
                     a list-type rule
             }
         """
@@ -105,33 +111,42 @@ class RuleDefinitionBase:
             context_validity_dict = self.check_context_validity(context, data)
             # If the context is valid, context_validity_dict will be the falsey {}
             if not context_validity_dict:
+                try:
+                    # Check if rule is applicable
+                    if self.is_applicable(context, data):
+                        # Get calculated values; these can be used by
+                        # manual_check_required() or rule_check() and will
+                        # be included in the output
+                        calc_vals = self.get_calc_vals(context, data)
+                        if calc_vals is not None:
+                            outcome["calc_vals"] = calc_vals
 
-                # Check if rule is applicable
-                if self.is_applicable(context, data):
-
-                    # Get calculated values; these can be used by
-                    # manual_check_required() or rule_check() and will
-                    # be included in the output
-                    calc_vals = self.get_calc_vals(context, data)
-                    if calc_vals is not None:
-                        outcome["calc_vals"] = calc_vals
-
-                    # Determine if manual check is required
-                    if self.manual_check_required(context, calc_vals, data):
-                        outcome["result"] = "MANUAL_CHECK_REQUIRED"
-                    else:
-                        # Evaluate the actual rule check
-                        result = self.rule_check(context, calc_vals, data)
-                        if isinstance(result, list):
-                            # The result is a list of outcomes
-                            outcome["result"] = result
-                        # Assume result type is bool
-                        elif result:
-                            outcome["result"] = "PASSED"
+                        # Determine if manual check is required
+                        if self.manual_check_required(context, calc_vals, data):
+                            outcome["result"] = "UNDETERMINED"
+                            if self.manual_check_required_msg:
+                                outcome["message"] = self.manual_check_required_msg
                         else:
-                            outcome["result"] = "FAILED"
-                else:
-                    outcome["result"] = "NA"
+                            # Evaluate the actual rule check
+                            result = self.rule_check(context, calc_vals, data)
+                            if isinstance(result, list):
+                                # The result is a list of outcomes
+                                outcome["result"] = result
+                            # Assume result type is bool
+                            elif result:
+                                outcome["result"] = "PASSED"
+                            else:
+                                outcome["result"] = "FAILED"
+                    else:
+                        outcome["result"] = "NOT_APPLICABLE"
+                        if self.not_applicable_msg:
+                            outcome["message"] = self.not_applicable_msg
+                except MissingKeyException as ke:
+                    outcome["result"] = "UNDETERMINED"
+                    outcome["message"] = str(ke)
+                except RCTFailureException as fe:
+                    outcome["result"] = "FAILED"
+                    outcome["message"] = str(fe)
             else:
                 outcome["result"] = context_validity_dict
         else:
@@ -238,7 +253,7 @@ class RuleDefinitionBase:
         dict
             A dict of the form
             {
-                "INVALID_USER_CONTEX": Error message,
+                "INVALID_USER_CONTEXT": Error message,
                 "INVALID_BASELINE_CONTEXT": Error message,
                 "INVALID_PROPOSED_CONTEXT": Error message
             },
@@ -280,7 +295,7 @@ class RuleDefinitionBase:
         This may be overridden to provide alternate validation that, by default,
         will be used to validate each part of the context trio.
 
-        This implementations checks for required fields.
+        This implementation checks for required fields.
 
         Parameters
         ----------
@@ -509,13 +524,26 @@ class RuleDefinitionListBase(RuleDefinitionBase):
     Baseclass for Rule Definitions that apply to each element in a list context.
     """
 
-    def __init__(self, rmrs_used, each_rule, id=None, description=None, rmr_context=""):
+    def __init__(
+        self,
+        rmrs_used,
+        each_rule,
+        id=None,
+        description=None,
+        rmr_context="",
+        required_fields=None,
+        manual_check_required_msg="Manual Check Required",
+        not_applicable_msg="Not Applicable",
+    ):
         self.each_rule = each_rule
         super(RuleDefinitionListBase, self).__init__(
             rmrs_used=rmrs_used,
             id=id,
             description=description,
             rmr_context=rmr_context,
+            required_fields=required_fields,
+            manual_check_required_msg=manual_check_required_msg,
+            not_applicable_msg=not_applicable_msg
         )
 
     def create_context_list(self, context, data=None):
@@ -565,6 +593,32 @@ class RuleDefinitionListBase(RuleDefinitionBase):
         """
         return data
 
+    def list_filter(self, context_item, data=None):
+        """Function used to filter the context_list
+
+        The default implementation simply passes each list_item through (no filtering)
+
+        An inheriting rule can override this function to reduce the context list that
+        is returned from create_context_list.
+
+        Parameters
+        ----------
+        context_item : dict
+            An item from the context_list
+        data : object
+            The data object for the rule. Note: list_filter will be used after
+            create_data is called, so this function will have access to any data
+            this rule added to the data object.
+            This implementation ignores the data argument, but overriding functions
+            are free to make use of it.
+
+        Returns
+        -------
+        list of UserBaselineProposedVals
+            A filtered list of context trios
+        """
+        return context_item
+
     def rule_check(self, context, calc_vals=None, data=None):
         """Overrides the base implementation to apply a rule to each entry in
         a list
@@ -586,9 +640,14 @@ class RuleDefinitionListBase(RuleDefinitionBase):
         # Create the data to be passed to each_rule
         data = self.create_data(context, data)
         context_list = self.create_context_list(context, data)
+        filtered_context_list = [
+            context_item
+            for context_item in context_list
+            if self.list_filter(context_item, data)
+        ]
         outcomes = []
 
-        for ubp in context_list:
+        for ubp in filtered_context_list:
             item_outcome = self.each_rule.evaluate(ubp, data)
 
             # Set the id for item_outcome
@@ -598,14 +657,6 @@ class RuleDefinitionListBase(RuleDefinitionBase):
                 item_outcome["id"] = ubp.baseline["id"]
             elif ubp.proposed and ubp.proposed["id"]:
                 item_outcome["id"] = ubp.proposed["id"]
-
-            # Set the name for item_outcome
-            if ubp.user and ubp.user["name"]:
-                item_outcome["name"] = ubp.user["name"]
-            elif ubp.baseline and ubp.baseline["name"]:
-                item_outcome["name"] = ubp.baseline["name"]
-            elif ubp.proposed and ubp.proposed["name"]:
-                item_outcome["name"] = ubp.proposed["name"]
 
             outcomes.append(item_outcome)
         return outcomes
@@ -643,6 +694,7 @@ class RuleDefinitionListIndexedBase(RuleDefinitionListBase):
         Note: the create_context_list() method can be overridden and
         ignore list_context.
         For better human readability, the leading "/" may be ommitted.
+        function (preceding _) inside the enclosing rule definition.
     match_by : string
         A json pointer into each element of the list, generally to a field
         of the list element. The default is "/id" since the id is assumed to
@@ -659,6 +711,10 @@ class RuleDefinitionListIndexedBase(RuleDefinitionListBase):
         rmr_context="",
         list_path="[*]",
         match_by="id",
+        required_fields=None,
+        manual_check_required_msg="Manual Check Required",
+        not_applicable_msg="Not Applicable",
+
     ):
         self.index_rmr = index_rmr
         self.list_path = list_path
@@ -669,6 +725,9 @@ class RuleDefinitionListIndexedBase(RuleDefinitionListBase):
             id=id,
             description=description,
             rmr_context=rmr_context,
+            required_fields=required_fields,
+            manual_check_required_msg=manual_check_required_msg,
+            not_applicable_msg=not_applicable_msg
         )
 
     def create_context_list(self, context, data=None):
@@ -677,6 +736,8 @@ class RuleDefinitionListIndexedBase(RuleDefinitionListBase):
         Overrides the base implementation to create a list that has an entry
         for each item in the index_rmr RMR, the other RMR entries are padded with
         None for non-matches.
+
+        The resulting list can also be filtered using the list_filter field.
 
         This may be overridden to produce lists that do not directly appear in
         the RMR.

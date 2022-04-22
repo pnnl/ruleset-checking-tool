@@ -1,5 +1,6 @@
 import json
 import os
+import re
 
 
 def get_nested_dict(dic, keys):
@@ -65,7 +66,8 @@ def get_nested_dict(dic, keys):
             # the single value specified by the key.
             if is_list:
                 # If list isn't long enough, append a new dictionary to it to avoid index out of bounds
-                if len(reference_dict[key]) < list_index + 1:
+                # print(reference_dict[key])
+                while len(reference_dict[key]) < list_index + 1:
                     reference_dict[key].append({})
                 reference_dict = reference_dict[key][list_index]
             else:
@@ -183,57 +185,6 @@ def inject_json_path_from_enumeration(key_list, json_path_ref_string):
     key_list.extend(enumeration_list)
 
 
-def add_to_dictionary_list(json_dict, key_list, dict_string):
-    """Used to add a list of dictionaries to a Python dictionary
-
-    Parameters
-    ----------
-    json_dict : dict
-        Python dictionary to be appended with dictionary list
-
-    key_list: list
-        List of keys describing where to add this dictionary list
-
-    dict_string: str
-        String describing keys for dictionary list. E.g., "id:1,2,3"
-
-    """
-
-    # Remove DICT_LIST from key list
-    key_list.pop()
-
-    # Try to get the nested_dictionary where you will set the dictionary list. If KeyError, initialize
-    # that JSON path as a dictionary
-    try:
-        dictionary_list = get_nested_dict(json_dict, key_list)
-    except TypeError:
-        print("TODO: Need to resolve how to do a list inside a list")
-
-    except KeyError:
-        set_nested_dict(json_dict, key_list, {})
-        dictionary_list = get_nested_dict(json_dict, key_list)
-
-    split_pair = dict_string.split(":")
-    key = split_pair[0]  # e.g., id
-    value_list = split_pair[1].split(",")  # e.g., 1,2,3
-
-    # Check if a list of dictionaries has already been set at the list key in json_dict. If not, initialize it.
-    if not isinstance(dictionary_list, list):
-        dictionary_list = []
-
-    # Iterate through each value and add its key/value pair to each sequential dictionary in list
-    for i in range(len(value_list)):
-
-        # If a dictionary doesn't exist at element "i", add one
-        if len(dictionary_list) < i + 1:
-            dictionary_list.append({})
-
-        # Set value for dictionary "i" and key "key"
-        dictionary_list[i][key] = clean_value(value_list[i])
-
-    set_nested_dict(json_dict, key_list, dictionary_list)
-
-
 def clean_value(value):
     """Used to change strings to numerics, if possible.
 
@@ -311,7 +262,8 @@ def merge_nested_dictionary(master_dict, new_data_dict, path=None):
             elif master_dict[key] == new_data_dict[key]:
                 pass  # same leaf value
             else:
-                raise Exception("Conflict at %s" % ".".join(path + [str(key)]))
+                # Overwrite old key value with one from new dictionary
+                master_dict[key] = new_data_dict[key]
         else:
             master_dict[key] = new_data_dict[key]
     return master_dict
@@ -366,3 +318,114 @@ def create_schedule_list(schedule_str):
     else:
 
         raise Exception(f"Schedule named: {schedule_name} is not a valid schedule name")
+
+
+def remove_index_references_from_key(key):
+    """Ingests a string representing a JSON path. Replaces all the '[N]' substrings.
+    For example: 'transformers[0]' ->'transformers'
+
+     Parameters
+     ----------
+     key : str
+         String representing a JSON path element that includes integers in square brackets.
+         E.g., 'transformers[0]'
+
+     Returns
+    -------
+    clean_key: str
+        JSON path string without square brackets.E.g., 'transformers[0]' ->'transformers'
+
+    """
+
+    # Replace all integers within square brackets in key
+    clean_key = re.sub(r"\[\d+\]", "", key)
+
+    return clean_key
+
+
+def disaggregate_master_ruletest_json(master_json_name):
+
+    """Ingests a string representing a JSON file name from rct229/ruletest_engine/ruletest_jsons. JSONs in that
+    directory contain ALL ruletests for a particular grouping of rules (e.g., 'envelope_tests.json' has every test case
+    for envelope based rules). This scripts breaks out test cases into individual section + rule JSONs.
+
+
+         Parameters
+         ----------
+         master_json_name : str
+             String representing a name of master JSON file in rct229/ruletest_engine/ruletest_jsons
+             E.g., 'envelope_tests.json'
+
+
+    """
+
+    # Get this file's directory
+    file_dir = os.path.dirname(__file__)
+
+    # master JSON should be in the ruletest_jsons directory
+    master_json_path = os.path.join(file_dir, "..", master_json_name)
+
+    # Initialize master JSON dictionary
+    with open(master_json_path) as f:
+        master_dict = json.load(f)
+
+    # Initialize dictionary used to break out master dictionary into sections and rules
+    rule_dictionary = {}
+
+    # Initialize elements used to check section + rule combination
+    prev_section = ""
+    prev_rule = ""
+
+    # Inner function used for writing out ruletest JSONs
+    def write_ruletest_json(section, rule):
+
+        # Initialize ruletest json name
+        json_name = f"rule_{section}_{rule}.json"
+        ruletest_json_name = os.path.join(f"section{section}", f"{json_name}")
+        json_file_path = os.path.join(file_dir, "..", ruletest_json_name)
+
+        # Dump JSON to string for writing
+        json_string = json.dumps(rule_dictionary, indent=4)
+
+        # Write JSON string to file
+        with open(json_file_path, "w") as json_file:
+            json_file.write(json_string)
+            print(
+                f"Ruletests for Section {section}, Rule {rule} complete and written to file: {json_name}"
+            )
+
+    # Iterate through each key (i.e., ruletest), checking if a subsequent ruletest matches the section and rule number
+    # of the previous key. Ruletests of the same section and rule should go in their own JSON.
+    for ruletest in master_dict:
+
+        # Initialize this ruletest's dictionary
+        ruletest_dict = master_dict[ruletest]
+
+        # Pull out rule and section
+        section = ruletest_dict["Section"]
+        rule = ruletest_dict["Rule"]
+        test_case = ruletest_dict["Test"]
+
+        # Create unique ID for this rule and previous
+        rule_id = f"{section}-{rule}"
+        prev_rule_id = f"{prev_section}-{prev_rule}"
+
+        # New section + rule. Write out last rule test dictionary before creating a new one
+        if prev_section != "":
+            if rule_id != prev_rule_id:
+
+                # Write out previous rule dictionary, then initialize a new one
+                write_ruletest_json(prev_section, prev_rule)
+
+                # Wipe and reinitailize rule_dictionary for new section + rule
+                rule_dictionary = {}
+
+        # Add this test case to the existing rule_dictionary
+        rule_dictionary[f"rule-{rule_id}-{test_case}"] = ruletest_dict
+
+        # Record previous section
+        prev_section = section
+        prev_rule = rule
+
+    # Write out final rule dictionary
+    write_ruletest_json(prev_section, prev_rule)
