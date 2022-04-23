@@ -1,3 +1,4 @@
+from rct229.data_fns.table_G3_111_fns import table_G3_1_1_1_lookup
 from rct229.rule_engine.rule_base import (
     RuleDefinitionBase,
     RuleDefinitionListIndexedBase,
@@ -48,6 +49,7 @@ class Section5Rule19(RuleDefinitionListIndexedBase):
             )
 
         def create_data(self, context, data=None):
+            print(data)
             building_b = context.baseline
             building_p = context.proposed
 
@@ -57,18 +59,21 @@ class Section5Rule19(RuleDefinitionListIndexedBase):
             area_type_window_wall_area_dict_p = get_area_type_window_wall_area_dict(
                 data["climate_zone"], building_p
             )
-
-            # is_area_type_all_new_dict = {}
-            # for building_segment in find_all("$..building_segments[*]", building_b):
-            #     area_type = building_segment["area_type_vertical_fenestration"]
-            #     # add key-value pair or override the existing value
-            #     is_area_type_all_new_dict[area_type] = building_segment["is_all_new"]
-
+            is_area_type_all_new_dict_baseline = {}
+            for building_segment in find_all("$..building_segments[*]", building_b):
+                area_type = building_segment["area_type_vertical_fenestration"]
+                is_area_type_all_new_dict_baseline[area_type] = building_segment["is_all_new"]
+            is_area_type_all_new_dict_proposed = {}
+            for building_segment in find_all("$..building_segments[*]", building_b):
+                area_type = building_segment["area_type_vertical_fenestration"]
+                is_area_type_all_new_dict_proposed[area_type] = building_segment["is_all_new"]
 
             return {
                 **data,
-                "is_area_type_all_new_dict": is_area_type_all_new_dict,
-                "area_type_window_wall_ratio_dict": area_type_window_wall_area_dict_b,
+                "is_area_type_all_new_dict_baseline": is_area_type_all_new_dict_baseline,
+                "is_area_type_all_new_dict_proposed": is_area_type_all_new_dict_proposed,
+                "area_type_window_wall_ratio_dict_baseline": area_type_window_wall_area_dict_b,
+                "area_type_window_wall_ratio_dict_proposed": area_type_window_wall_area_dict_p,
             }
 
         def create_context_list(self, context, data=None):
@@ -99,6 +104,7 @@ class Section5Rule19(RuleDefinitionListIndexedBase):
                     )
 
             def get_calc_vals(self, context, data=None):
+                print(context)
                 # get Baseline window wall areas
                 building_segments_b = context.baseline["building_segments"]
                 # get propose window wall areas
@@ -107,22 +113,6 @@ class Section5Rule19(RuleDefinitionListIndexedBase):
                 # check if the wwr is equal to the proposed design
 
 
-
-                # building_segments_b = context.baseline["building_segments"]
-                # is_area_type_all_new_dict = data["is_area_type_all_new_dict"]
-                # area_type_window_wall_ratio_b = data["area_type_window_wall_ratio_dict"]
-                #
-                # # all building segments in AreaType rule has the same area type
-                # # (see create_context_list function in the parent class)
-                # area_type = building_segments_b[0]["area_type_vertical_fenestration"]
-                # area_type_wwr = 0.0
-                # area_type_target_wwr = 0.0
-                # if area_type is not "NONE":
-                #     area_type_wwr = (
-                #             area_type_window_wall_ratio_b[area_type]["total_window_area"]
-                #             / area_type_window_wall_ratio_b[area_type]["total_wall_area"]
-                #     )
-                #     area_type_target_wwr = table_G3_1_1_1_lookup(area_type)
                 return None
                 # return {
                 #     "is_all_new": is_area_type_all_new_dict[area_type],
