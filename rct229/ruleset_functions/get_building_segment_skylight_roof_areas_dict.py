@@ -75,8 +75,8 @@ def get_building_segment_skylight_roof_areas_dict(climate_zone, building):
                             "total_envelope_roof_area"
                         ] += getattr_(surface, "surface", "area")
 
-                        building_segment_roof_areas["total_skylight_area"] += pint_sum(
+                        building_segment_roof_areas["total_skylight_area"] += sum(
                             find_all("subsurfaces[*].glazed_area", surface)
-                        ) + pint_sum(find_all("subsurfaces[*].opaque_area", surface))
+                        ) + sum(find_all("subsurfaces[*].opaque_area", surface))
 
     return building_segment_roof_areas_dict

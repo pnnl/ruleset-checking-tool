@@ -18,6 +18,8 @@ class RuleDefinitionBase:
         rmr_context="",
         required_fields=None,
         must_match_by_ids=[],
+        manual_check_required_msg=None,
+        not_applicable_msg=None,
     ):
         """Base class for all Rule definitions
 
@@ -53,6 +55,8 @@ class RuleDefinitionBase:
         # Default rm_context is the root of the RMR
         self.rmr_context = slash_prefix_guarantee(rmr_context)
         self.required_fields = required_fields
+        self.manual_check_required_msg = manual_check_required_msg
+        self.not_applicable_msg = not_applicable_msg
 
     def evaluate(self, rmrs, data=None):
         """Generates the outcome dictionary for the rule
@@ -120,6 +124,8 @@ class RuleDefinitionBase:
                         # Determine if manual check is required
                         if self.manual_check_required(context, calc_vals, data):
                             outcome["result"] = "UNDETERMINED"
+                            if self.manual_check_required_msg:
+                                outcome["message"] = self.manual_check_required_msg
                         else:
                             # Evaluate the actual rule check
                             result = self.rule_check(context, calc_vals, data)
@@ -133,6 +139,8 @@ class RuleDefinitionBase:
                                 outcome["result"] = "FAILED"
                     else:
                         outcome["result"] = "NOT_APPLICABLE"
+                        if self.not_applicable_msg:
+                            outcome["message"] = self.not_applicable_msg
                 except MissingKeyException as ke:
                     outcome["result"] = "UNDETERMINED"
                     outcome["message"] = str(ke)
@@ -524,6 +532,8 @@ class RuleDefinitionListBase(RuleDefinitionBase):
         description=None,
         rmr_context="",
         required_fields=None,
+        manual_check_required_msg="Manual Check Required",
+        not_applicable_msg="Not Applicable",
     ):
         self.each_rule = each_rule
         super(RuleDefinitionListBase, self).__init__(
@@ -532,6 +542,8 @@ class RuleDefinitionListBase(RuleDefinitionBase):
             description=description,
             rmr_context=rmr_context,
             required_fields=required_fields,
+            manual_check_required_msg=manual_check_required_msg,
+            not_applicable_msg=not_applicable_msg,
         )
 
     def create_context_list(self, context, data=None):
@@ -700,6 +712,8 @@ class RuleDefinitionListIndexedBase(RuleDefinitionListBase):
         list_path="[*]",
         match_by="id",
         required_fields=None,
+        manual_check_required_msg="Manual Check Required",
+        not_applicable_msg="Not Applicable",
     ):
         self.index_rmr = index_rmr
         self.list_path = list_path
@@ -711,6 +725,8 @@ class RuleDefinitionListIndexedBase(RuleDefinitionListBase):
             description=description,
             rmr_context=rmr_context,
             required_fields=required_fields,
+            manual_check_required_msg=manual_check_required_msg,
+            not_applicable_msg=not_applicable_msg,
         )
 
     def create_context_list(self, context, data=None):
