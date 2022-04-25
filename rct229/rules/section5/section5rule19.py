@@ -4,13 +4,16 @@ from rct229.rule_engine.rule_base import (
     RuleDefinitionListIndexedBase,
 )
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
-from rct229.ruleset_functions.get_area_type_window_wall_area_dict import get_area_type_window_wall_area_dict
+from rct229.ruleset_functions.get_area_type_window_wall_area_dict import (
+    get_area_type_window_wall_area_dict,
+)
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.std_comparisons import std_equal
 
 MSG_WARN_MATCHED = "BUILDING IS NOT ALL NEW AND BASELINE WWR MATCHES VALUES PRESCRIBED IN TABLE G3.1.1-1. HOWEVER, THE FENESTRATION AREA PRESCRIBED IN TABLE G3.1.1-1 DOES NOT APPLY TO THE EXISTING ENVELOPE PER TABLE G3.1 BASELINE COLUMN #5 (C). FOR EXISTING ENVELOPE, THE BASELINE FENESTRATION AREA MUST EQUAL THE EXISTING FENESTRATION AREA PRIOR TO THE PROPOSED WORK. A MANUAL CHECK IS REQUIRED TO VERIFY COMPLIANCE."
 MSG_WARN_MISMATCHED = "BUILDING IS NOT ALL NEW AND BASELINE WWR DOES NOT MATCH VALUES PRESCRIBED IN TABLE G3.1.1-1. HOWEVER, THE FENESTRATION AREA PRESCRIBED IN TABLE G3.1.1-1 DOES NOT APPLY TO THE EXISTING ENVELOPE PER TABLE G3.1 BASELINE COLUMN #5(c). FOR EXISTING ENVELOPE, THE BASELINE FENESTRATION AREA MUST EQUAL THE EXISTING FENESTRATION AREA PRIOR TO THE PROPOSED WORK. A MANUAL CHECK IS REQUIRED TO VERIFY COMPLIANCE."
 WWR_THRESHOLD = 0.4
+
 
 class Section5Rule19(RuleDefinitionListIndexedBase):
     """Rule 19 of ASHRAE 90.1-2019 Appendix G Section 5 (Envelope)"""
@@ -61,11 +64,15 @@ class Section5Rule19(RuleDefinitionListIndexedBase):
             is_area_type_all_new_dict_baseline = {}
             for building_segment in find_all("$..building_segments[*]", building_b):
                 area_type = building_segment["area_type_vertical_fenestration"]
-                is_area_type_all_new_dict_baseline[area_type] = building_segment["is_all_new"]
+                is_area_type_all_new_dict_baseline[area_type] = building_segment[
+                    "is_all_new"
+                ]
             is_area_type_all_new_dict_proposed = {}
             for building_segment in find_all("$..building_segments[*]", building_p):
                 area_type = building_segment["area_type_vertical_fenestration"]
-                is_area_type_all_new_dict_proposed[area_type] = building_segment["is_all_new"]
+                is_area_type_all_new_dict_proposed[area_type] = building_segment[
+                    "is_all_new"
+                ]
 
             return {
                 **data,
@@ -79,15 +86,19 @@ class Section5Rule19(RuleDefinitionListIndexedBase):
             def __init__(self):
                 super(Section5Rule19.BuildingRule.BuildingSegmentRule, self).__init__(
                     rmrs_used=UserBaselineProposedVals(False, True, True),
-                    )
+                )
 
             def get_calc_vals(self, context, data=None):
                 # get Baseline window wall areas
                 building_segments_b = context.baseline["building_segments"]
                 is_area_type_all_new_dict_b = data["is_area_type_all_new_dict_baseline"]
-                area_type_window_wall_ratio_b = data["area_type_window_wall_ratio_dict_baseline"]
+                area_type_window_wall_ratio_b = data[
+                    "area_type_window_wall_ratio_dict_baseline"
+                ]
 
-                area_type_window_wall_ratio_p = data["area_type_window_wall_ratio_dict_proposed"]
+                area_type_window_wall_ratio_p = data[
+                    "area_type_window_wall_ratio_dict_proposed"
+                ]
 
                 area_type = building_segments_b[0]["area_type_vertical_fenestration"]
                 area_type_wwr_baseline = 0.0
@@ -95,14 +106,13 @@ class Section5Rule19(RuleDefinitionListIndexedBase):
                 area_type_target_wwr = table_G3_1_1_1_lookup(area_type)
                 if area_type_target_wwr is not "NONE":
                     area_type_wwr_baseline = (
-                            area_type_window_wall_ratio_b[area_type]["total_window_area"]
-                            / area_type_window_wall_ratio_b[area_type]["total_wall_area"]
+                        area_type_window_wall_ratio_b[area_type]["total_window_area"]
+                        / area_type_window_wall_ratio_b[area_type]["total_wall_area"]
                     )
                     area_type_wwr_propose = (
-                            area_type_window_wall_ratio_p[area_type]["total_window_area"]
-                            / area_type_window_wall_ratio_p[area_type]["total_wall_area"]
+                        area_type_window_wall_ratio_p[area_type]["total_window_area"]
+                        / area_type_window_wall_ratio_p[area_type]["total_wall_area"]
                     )
-
 
                 return {
                     "is_all_new_baseline": is_area_type_all_new_dict_b[area_type],
@@ -116,5 +126,7 @@ class Section5Rule19(RuleDefinitionListIndexedBase):
 
             def rule_check(self, context, calc_vals=None, data=None):
                 area_type_wwr = calc_vals["area_type_wwr_baseline"]
-                area_type_target_wwr = min(calc_vals["area_type_wwr_propose"], WWR_THRESHOLD)
+                area_type_target_wwr = min(
+                    calc_vals["area_type_wwr_propose"], WWR_THRESHOLD
+                )
                 return std_equal(area_type_target_wwr, area_type_wwr)
