@@ -458,6 +458,10 @@ class RuleDefinitionBase:
         This base implementation simply returns the value of
         self.not_applicable_msg, which defaults to the empty string.
 
+        This method should only be overridden if there is more than one string
+        used for the NOT_APPLICABLE case. A fixed string can be given in the
+        `not_applicable_msg` field passed to the initializer.
+
         Parameters
         ----------
         context : UserBaselineProposedVals
@@ -525,6 +529,10 @@ class RuleDefinitionBase:
 
         This base implementation simply returns the value of
         self.manual_check_required_msg, which defaults to the empty string.
+
+        This method should only be overridden if there is more than one string
+        used for the MANUAL_CHECK_REQUIRED case. A fixed string can be given in the
+        `manual_check_required_msg` field passed to the initializer.
 
         Parameters
         ----------
