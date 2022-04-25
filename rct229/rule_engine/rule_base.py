@@ -18,8 +18,8 @@ class RuleDefinitionBase:
         rmr_context="",
         required_fields=None,
         must_match_by_ids=[],
-        manual_check_required_msg=None,
-        not_applicable_msg=None,
+        manual_check_required_msg="",
+        not_applicable_msg="",
     ):
         """Base class for all Rule definitions
 
@@ -452,6 +452,28 @@ class RuleDefinitionBase:
 
         return True
 
+    def get_not_applicable_msg(self, context, calc_vals=None, data=None):
+        """Gets the message to include in the outcome for the NOT_APPLICABLE case.
+
+        This base implementation simply returns the value of
+        self.not_applicable_msg, which defaults to the empty string.
+
+        Parameters
+        ----------
+        context : UserBaselineProposedVals
+            Object containing the contexts for the user, baseline, and proposed RMRs
+        calc_vals : dict | None
+        data : dict | None
+            An optional data dictionary
+
+        Returns
+        -------
+        str
+            The message associated with the NOT_APPLICABLE case
+        """
+
+        return self.not_applicable_msg
+
     def get_calc_vals(self, context, data=None):
         """Calculates values for the rule and returns them in a dict.
 
@@ -497,6 +519,28 @@ class RuleDefinitionBase:
         """
 
         return False
+
+    def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
+        """Gets the message to include in the outcome for the MANUAL_CHECK_REQUIRED case.
+
+        This base implementation simply returns the value of
+        self.manual_check_required_msg, which defaults to the empty string.
+
+        Parameters
+        ----------
+        context : UserBaselineProposedVals
+            Object containing the contexts for the user, baseline, and proposed RMRs
+        calc_vals : dict or None
+
+        data : An optional data object. It is ignored by this base implementation.
+
+        Returns
+        -------
+        str
+            The message associated with the MANUAL_CHECK_REQUIRED case
+        """
+
+        return self.manual_check_required_msg
 
     def rule_check(self, context, calc_vals=None, data=None):
         """This actually checks the rule for the given context
