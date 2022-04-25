@@ -83,24 +83,24 @@ def getattr_(obj, obj_name: str, first_key, *remaining_keys):
 def get_first_attr_(obj, obj_name: str, key_list):
     """Gets first value inside a dictionary described by a list of keys or raises an expection
 
-        Parameters
-        ----------
-        obj : dict
-            A potentially nested dictionary of dictionaries to be searched. At each
-            level along the key path, the dictionary must have an id field.
-        obj_name : str
-            The name for the dictionary to be searched
-        key_list : list
-            A list of key to test
+    Parameters
+    ----------
+    obj : dict
+        A potentially nested dictionary of dictionaries to be searched. At each
+        level along the key path, the dictionary must have an id field.
+    obj_name : str
+        The name for the dictionary to be searched
+    key_list : list
+        A list of key to test
 
-        Returns
-        -------
-        any
-            The value stored in the first exist/valid key.
+    Returns
+    -------
+    any
+        The value stored in the first exist/valid key.
 
-        Raises
-        ------
-        AssertionError if all keys in the list are not exist in the object, raise MissingKeyException
+    Raises
+    ------
+    AssertionError if all keys in the list are not exist in the object, raise MissingKeyException
     """
     for key in key_list:
         if obj.get(key):
