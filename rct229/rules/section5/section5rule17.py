@@ -18,7 +18,7 @@ from rct229.utils.std_comparisons import std_equal
 
 
 class Section5Rule17(RuleDefinitionListIndexedBase):
-    """Rule 5 of ASHRAE 90.1-2019 Appendix G Section 5 (Envelope)"""
+    """Rule 17 of ASHRAE 90.1-2019 Appendix G Section 5 (Envelope)"""
 
     def __init__(self):
         super(Section5Rule17, self).__init__(
