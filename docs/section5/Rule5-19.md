@@ -15,7 +15,7 @@
 
 **Manual Checks:** None  
 **Evaluation Context:**  Each Data Element  
-**Data Lookup:** Table G3.1.1-1  M
+**Data Lookup:** Table G3.1.1-1
 **Function Call:**  
 
   1. get_area_type_window_wall_areas()  
