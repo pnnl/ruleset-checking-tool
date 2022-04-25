@@ -11,7 +11,8 @@ DOOR = schema_enums["SubsurfaceClassificationType"].DOOR.name
 # Intended for internal use
 GET_BUILDING_SCC_WINDOW_WALL_RATIO_DICT__REQUIRED_FIELDS = {
     "building": {
-        "$..surface[*]": ["adjacent_to"],
+        "$..surface[*]": ["area"],
+        "$..subsurface[*]": ["classification"],
     }
 }
 
@@ -61,10 +62,44 @@ def get_building_scc_window_wall_ratio_dict(climate_zone, building):
         total_semiheated_wall_area = ZERO.AREA
 
         if get_opaque_surface_type(surface) == OST.ABOVE_GRADE_WALL:
-            if scc == SCC.EXTERIOR_RESIDENTIAL:
-                total_res_wall_area += surface.get("area", ZERO.AREA)
-                for subsurface in find_all("subsurfaces[*]", surface):
-                    subsurface_classification = getattr_(subsurface, "subsurface", "classification")
-                    if subsurface_classification ==
+            surface_area = surface["area"]
+            for subsurface in find_all("subsurfaces[*]", surface):
+                glazed_area = subsurface.get("glazed_area", ZERO.AREA)
+                opaque_area = subsurface.get("opaque_area", ZERO.AREA)
+                window_area = (
+                    glazed_area + opaque_area
+                    if subsurface["classification"] != DOOR
+                    or (glazed_area > opaque_area)
+                    else ZERO.AREA
+                )
 
-    return surface_conditioning_category_dict
+            if scc == SCC.EXTERIOR_RESIDENTIAL:
+                total_res_wall_area += surface_area
+                toal_res_window_area += window_area
+            elif scc == SCC.EXTERIOR_NON_RESIDENTIAL:
+                total_nonres_wall_area += surface_area
+                toal_nonres_window_area += window_area
+            elif scc == SCC.EXTERIOR_MIXED:
+                total_mixed_wall_area += surface_area
+                toal_mixed_window_area += window_area
+            elif scc == SCC.SEMI_HEATED:
+                total_semiheated_wall_area += surface_area
+                toal_semiheated_window_area += window_area
+            else:
+                # Should never get here
+                assert False, "Unknown SCC value"
+
+    return {
+        SCC.EXTERIOR_RESIDENTIAL: total_res_window_area / total_res_wall_area
+        if total_res_wall_area > 0
+        else 0,
+        SCC.EXTERIOR_NON_RESIDENTIAL: total_nonres_window_area / total_nonres_wall_area
+        if total_nonres_wall_area > 0
+        else 0,
+        SCC.EXTERIOR_MIXED: total_mixed_window_area / total_mixed_wall_area
+        if total_mixed_wall_area > 0
+        else 0,
+        SCC.SEMI_HEATED: total_semiheated_window_area / total_semiheated_wall_area
+        if total_semiheated_wall_area > 0
+        else 0,
+    }
