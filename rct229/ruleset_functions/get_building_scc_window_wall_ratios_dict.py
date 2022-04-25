@@ -38,9 +38,6 @@ def get_building_scc_window_wall_ratio_dict(climate_zone, building):
         GET_BUILDING_SCC_WINDOW_WALL_RATIO_DICT__REQUIRED_FIELDS["building"], building
     )
 
-    # The dictionary to be returned
-    get_building_scc_window_wall_ratio_dict = {}
-
     # Get the conditioning category for all the zones in the building
     scc_dict = get_surface_conditioning_category_dict(climate_zone, building)
 
