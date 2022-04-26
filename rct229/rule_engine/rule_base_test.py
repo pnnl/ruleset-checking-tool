@@ -65,6 +65,8 @@ BASE_RULE_1_OUTCOME_BASE = {
 
 BASE_RULE_ARGS = {
     **BASE_RULE_1_OUTCOME_BASE,
+    "not_applicable_msg": "Not applicable message",
+    "manual_check_required_msg": "Manual check required message",
     "rmrs_used": UserBaselineProposedVals(True, True, False),
 }
 
@@ -110,6 +112,7 @@ def test__rule_definition_base__evaluate__with_false_is_applicable():
     assert DERIVED_RULE.evaluate(RMRS_WITH_MATCHING_USER_AND_BASELINE, data="NA") == {
         **BASE_RULE_1_OUTCOME_BASE,
         "result": "NOT_APPLICABLE",
+        "message": "Not applicable message",
     }
 
 
@@ -119,6 +122,7 @@ def test__rule_definition_base__evaluate__with_true_manual_check_required():
     ) == {
         **DERIVED_RULE_outcome_base,
         "result": "UNDETERMINED",
+        "message": "Manual check required message",
     }
 
 
