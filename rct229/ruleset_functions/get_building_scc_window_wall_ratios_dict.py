@@ -11,13 +11,13 @@ DOOR = schema_enums["SubsurfaceClassificationType"].DOOR.name
 # Intended for internal use
 GET_BUILDING_SCC_WINDOW_WALL_RATIO_DICT__REQUIRED_FIELDS = {
     "building": {
-        "$..surface[*]": ["area"],
-        "$..subsurface[*]": ["classification"],
+        "$..surfaces[*]": ["area"],
+        "$..subsurfaces[*]": ["classification"],
     }
 }
 
 
-def get_building_scc_window_wall_ratio_dict(climate_zone, building):
+def get_building_scc_window_wall_ratios_dict(climate_zone, building):
     """Determines the window to wall ratio for each surface conditioning category
     in a building
 
