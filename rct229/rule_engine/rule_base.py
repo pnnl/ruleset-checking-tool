@@ -124,8 +124,10 @@ class RuleDefinitionBase:
                         # Determine if manual check is required
                         if self.manual_check_required(context, calc_vals, data):
                             outcome["result"] = "UNDETERMINED"
-                            manual_check_required = self.get_manual_check_required_msg(
-                                context, calc_vals, data
+                            manual_check_required_msg = (
+                                self.get_manual_check_required_msg(
+                                    context, calc_vals, data
+                                )
                             )
                             if manual_check_required_msg:
                                 outcome["message"] = manual_check_required_msg
