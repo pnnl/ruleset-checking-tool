@@ -139,6 +139,7 @@ class RuleDefinitionBase:
                                 outcome["result"] = "FAILED"
                     else:
                         outcome["result"] = "NOT_APPLICABLE"
+                        not_applicable_msg = self.get_not_applicable_msg(context, data)
                         if self.not_applicable_msg:
                             outcome["message"] = self.not_applicable_msg
                 except MissingKeyException as ke:
@@ -452,7 +453,7 @@ class RuleDefinitionBase:
 
         return True
 
-    def get_not_applicable_msg(self, context, calc_vals=None, data=None):
+    def get_not_applicable_msg(self, context, data=None):
         """Gets the message to include in the outcome for the NOT_APPLICABLE case.
 
         This base implementation simply returns the value of
