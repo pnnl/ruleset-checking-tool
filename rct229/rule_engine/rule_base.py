@@ -124,8 +124,11 @@ class RuleDefinitionBase:
                         # Determine if manual check is required
                         if self.manual_check_required(context, calc_vals, data):
                             outcome["result"] = "UNDETERMINED"
-                            if self.manual_check_required_msg:
-                                outcome["message"] = self.manual_check_required_msg
+                            manual_check_required = self.get_manual_check_required_msg(
+                                context, calc_vals, data
+                            )
+                            if manual_check_required_msg:
+                                outcome["message"] = manual_check_required_msg
                         else:
                             # Evaluate the actual rule check
                             result = self.rule_check(context, calc_vals, data)
@@ -140,8 +143,8 @@ class RuleDefinitionBase:
                     else:
                         outcome["result"] = "NOT_APPLICABLE"
                         not_applicable_msg = self.get_not_applicable_msg(context, data)
-                        if self.not_applicable_msg:
-                            outcome["message"] = self.not_applicable_msg
+                        if not_applicable_msg:
+                            outcome["message"] = not_applicable_msg
                 except MissingKeyException as ke:
                     outcome["result"] = "UNDETERMINED"
                     outcome["message"] = str(ke)
