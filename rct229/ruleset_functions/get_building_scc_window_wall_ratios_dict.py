@@ -38,7 +38,7 @@ def get_building_scc_window_wall_ratio_dict(climate_zone, building):
         GET_BUILDING_SCC_WINDOW_WALL_RATIO_DICT__REQUIRED_FIELDS["building"], building
     )
 
-    # Get the conditioning category for all the zones in the building
+    # Get the conditioning category for all the surfaces in the building
     scc_dict = get_surface_conditioning_category_dict(climate_zone, building)
 
     # Loop through all the surfaces in the building
@@ -50,13 +50,13 @@ def get_building_scc_window_wall_ratio_dict(climate_zone, building):
         total_res_window_area = ZERO.AREA
         total_nonres_window_area = ZERO.AREA
         total_mixed_window_area = ZERO.AREA
-        total_semiheated_window_area = ZERO.AREA
+        total_semi_exterior_window_area = ZERO.AREA
 
         # Initialize total wall areas
         total_res_wall_area = ZERO.AREA
         total_nonres_wall_area = ZERO.AREA
         total_mixed_wall_area = ZERO.AREA
-        total_semiheated_wall_area = ZERO.AREA
+        total_semi_exterior_wall_area = ZERO.AREA
 
         if get_opaque_surface_type(surface) == OST.ABOVE_GRADE_WALL:
             surface_area = surface["area"]
@@ -79,12 +79,11 @@ def get_building_scc_window_wall_ratio_dict(climate_zone, building):
             elif scc == SCC.EXTERIOR_MIXED:
                 total_mixed_wall_area += surface_area
                 toal_mixed_window_area += window_area
-            elif scc == SCC.SEMI_HEATED:
-                total_semiheated_wall_area += surface_area
-                toal_semiheated_window_area += window_area
+            elif scc == SCC.SEMI_EXTERIOR:
+                total_semi_exterior_wall_area += surface_area
+                toal_semi_exterior_window_area += window_area
             else:
-                # Should never get here
-                assert False, "Unknown SCC value"
+                assert scc == SCC.UNREGULATED
 
     return {
         SCC.EXTERIOR_RESIDENTIAL: total_res_window_area / total_res_wall_area
@@ -96,7 +95,8 @@ def get_building_scc_window_wall_ratio_dict(climate_zone, building):
         SCC.EXTERIOR_MIXED: total_mixed_window_area / total_mixed_wall_area
         if total_mixed_wall_area > 0
         else 0,
-        SCC.SEMI_HEATED: total_semiheated_window_area / total_semiheated_wall_area
-        if total_semiheated_wall_area > 0
+        SCC.SEMI_EXTERIOR: total_semi_exterior_window_area
+        / total_semi_exterior_wall_area
+        if total_semi_exterior_wall_area > 0
         else 0,
     }
