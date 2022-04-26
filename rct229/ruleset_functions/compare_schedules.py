@@ -4,7 +4,7 @@ REGULAR_YEAR_HOURS = 8760
 LEAP_YEAR_HOURS = 8784
 
 
-def compare_schedules(schedule_1: list, schedule_2: list, mask_schedule: list, comparison_factor: float, is_leap_year: bool):
+def compare_schedules(schedule_1, schedule_2, mask_schedule, comparison_factor: float, is_leap_year: bool):
     """compare two schedules and determine if they match with or without a comparison factor when applicable
         NOTE: The function only works with hourly schedule for now.
 
