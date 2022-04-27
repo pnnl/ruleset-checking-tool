@@ -245,10 +245,11 @@ def run_section_tests(test_json_name):
             test_result_dict["results"].append(False)
             all_tests_pass = False
             continue
-
+        import pprint
         # Evaluate rule and check for invalid RMRs
         evaluation_dict = evaluate_rule(rule, rmr_trio)
         # print(json.dumps(evaluation_dict))
+        pprint.pprint(evaluation_dict)
         invalid_rmrs_dict = evaluation_dict["invalid_rmrs"]
 
         # If invalid RMRs exist, fail this rule and append failed message
@@ -498,6 +499,7 @@ def run_envelope_tests():
     Results of envelope test are spit out to console
     """
 
-    envelope_test_json = "envelope_tests.json"
-
+    # envelope_test_json = "envelope_tests.json"
+    envelope_test_json = "section5/rule_5_19_fixed.json"
+    # envelope_test_json = "section5/rule_5_35.json"
     return run_section_tests(envelope_test_json)
