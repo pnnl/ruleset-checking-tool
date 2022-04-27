@@ -1,12 +1,11 @@
-import pytest
 from unittest.mock import patch
+
+import pytest
 
 from rct229.ruleset_functions.get_building_scc_window_wall_ratios_dict import (
     get_building_scc_window_wall_ratios_dict,
 )
-from rct229.ruleset_functions.get_opaque_surface_type import (
-    OpaqueSurfaceType as OST,
-)
+from rct229.ruleset_functions.get_opaque_surface_type import OpaqueSurfaceType as OST
 from rct229.ruleset_functions.get_surface_conditioning_category_dict import (
     SurfaceConditioningCategory as SCC,
 )
@@ -116,8 +115,8 @@ TEST_RMR = {
 TEST_SCC_DICT = {
     "surface_1_1_1": SCC.EXTERIOR_RESIDENTIAL,
     "surface_1_1_2": SCC.EXTERIOR_NON_RESIDENTIAL,
-    "surface_1_1_2": SCC.EXTERIOR_MIXED,
-    "surface_1_1_2": SCC.SEMI_EXTERIOR,
+    "surface_1_1_3": SCC.EXTERIOR_MIXED,
+    "surface_1_1_4": SCC.SEMI_EXTERIOR,
 }
 
 TEST_RMR_12 = {"id": "229_01", "ruleset_model_instances": [TEST_RMR]}
@@ -133,11 +132,11 @@ def test__TEST_RMR__is_valid():
 
 
 @patch(
-    "rct229.ruleset_functions.get_opaque_surface_type.get_opaque_surface_type",
+    "rct229.ruleset_functions.get_building_scc_window_wall_ratios_dict.get_opaque_surface_type",
     return_value=OST.ABOVE_GRADE_WALL,
 )
 @patch(
-    "rct229.ruleset_functions.get_surface_conditioning_category_dict.get_surface_conditioning_category_dict",
+    "rct229.ruleset_functions.get_building_scc_window_wall_ratios_dict.get_surface_conditioning_category_dict",
     return_value=TEST_SCC_DICT,
 )
 def test__get_building_scc_skylight_roof_ratios_dict(
@@ -149,3 +148,5 @@ def test__get_building_scc_skylight_roof_ratios_dict(
         SCC.EXTERIOR_MIXED: 0.25,
         SCC.SEMI_EXTERIOR: 0.25,
     }
+    assert mock_get_surface_conditioning_category_dict.called
+    assert mock_get_opaque_surface_type.called
