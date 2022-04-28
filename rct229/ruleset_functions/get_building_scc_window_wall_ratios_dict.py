@@ -89,6 +89,7 @@ def get_building_scc_window_wall_ratios_dict(climate_zone, building):
                 total_semi_exterior_wall_area += surface_area
                 total_semi_exterior_window_area += surface_window_area
             else:
+                # Sanity check: the only remaining SCC option is UNREGULATED
                 assert scc == SCC.UNREGULATED
 
     return {
