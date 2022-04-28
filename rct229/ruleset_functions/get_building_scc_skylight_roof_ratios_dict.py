@@ -14,7 +14,7 @@ from rct229.utils.pint_utils import ZERO
 DOOR = schema_enums["SubsurfaceClassificationType"].DOOR.name
 
 
-def get_building_scc_skylight_roof_ratios_dict(climate_zone, building):
+def get_building_scc_skylight_roof_ratios_dict(climate_zone, ruleset_model_instance):
     """Gets a dictionary mapping skylight and envelope roof ratios for a building for residential, non-residential,
     mixed and semi-heated surface conditioning categories
 
@@ -22,8 +22,8 @@ def get_building_scc_skylight_roof_ratios_dict(climate_zone, building):
             ----------
             climate_zone : str
                 One of the ClimateZone2019ASHRAE901 enumerated values
-            building : dict
-                A dictionary representing a building as defined by the ASHRAE229 schema
+            ruleset_model_instance : dict
+                A dictionary representing an ruleset model instance as defined by the ASHRAE229 schema
 
             Returns
             -------
@@ -36,7 +36,6 @@ def get_building_scc_skylight_roof_ratios_dict(climate_zone, building):
                 }
     """
     # required fields for this function are coming from the nested functions
-    scc_dictionary = get_surface_conditioning_category_dict(climate_zone, building)
     total_res_roof_area = ZERO.AREA
     total_res_skylight_area = ZERO.AREA
     total_nonres_roof_area = ZERO.AREA
@@ -46,42 +45,46 @@ def get_building_scc_skylight_roof_ratios_dict(climate_zone, building):
     total_semiheated_roof_area = ZERO.AREA
     total_semiheated_skylight_area = ZERO.AREA
 
-    for surface in find_all("building_segments[*].zones[*].surfaces[*]", building):
-        if get_opaque_surface_type(surface) == OST.ROOF:
-            roof_area = getattr_(surface, "surface", "area")
-            skylight_area = _helper_calculate_skylight_area(surface)
-            if scc_dictionary[surface["id"]] == SCC.EXTERIOR_RESIDENTIAL:
-                total_res_roof_area += roof_area
-                total_res_skylight_area += skylight_area
-            elif scc_dictionary[surface["id"]] == SCC.EXTERIOR_NON_RESIDENTIAL:
-                total_nonres_roof_area += roof_area
-                total_nonres_skylight_area += skylight_area
-            elif scc_dictionary[surface["id"]] == SCC.EXTERIOR_MIXED:
-                total_mixed_roof_area += roof_area
-                total_mixed_skylight_area += skylight_area
-            elif scc_dictionary[surface["id"]] == SCC.SEMI_EXTERIOR:
-                total_semiheated_roof_area += roof_area
-                total_semiheated_skylight_area += skylight_area
+    for building in find_all("buildings[*]", ruleset_model_instance):
+        scc_dictionary = get_surface_conditioning_category_dict(climate_zone, building)
+        for surface in find_all(
+            "building_segments[*].zones[*].surfaces[*]", ruleset_model_instance
+        ):
+            if get_opaque_surface_type(surface) == OST.ROOF:
+                roof_area = getattr_(surface, "surface", "area")
+                skylight_area = _helper_calculate_skylight_area(surface)
+                if scc_dictionary[surface["id"]] == SCC.EXTERIOR_RESIDENTIAL:
+                    total_res_roof_area += roof_area
+                    total_res_skylight_area += skylight_area
+                elif scc_dictionary[surface["id"]] == SCC.EXTERIOR_NON_RESIDENTIAL:
+                    total_nonres_roof_area += roof_area
+                    total_nonres_skylight_area += skylight_area
+                elif scc_dictionary[surface["id"]] == SCC.EXTERIOR_MIXED:
+                    total_mixed_roof_area += roof_area
+                    total_mixed_skylight_area += skylight_area
+                elif scc_dictionary[surface["id"]] == SCC.SEMI_EXTERIOR:
+                    total_semiheated_roof_area += roof_area
+                    total_semiheated_skylight_area += skylight_area
 
-    srr_res = 0.0
-    srr_nonres = 0.0
-    srr_mixed = 0.0
-    srr_semiheated = 0.0
-    if total_res_roof_area > ZERO.AREA:
-        srr_res = total_res_skylight_area / total_res_roof_area
-    if total_nonres_roof_area > ZERO.AREA:
-        srr_nonres = total_nonres_skylight_area / total_nonres_roof_area
-    if total_mixed_roof_area > ZERO.AREA:
-        srr_mixed = total_mixed_skylight_area / total_mixed_roof_area
-    if total_semiheated_roof_area > ZERO.AREA:
-        srr_semiheated = total_semiheated_skylight_area / total_semiheated_roof_area
+        srr_res = 0.0
+        srr_nonres = 0.0
+        srr_mixed = 0.0
+        srr_semiheated = 0.0
+        if total_res_roof_area > ZERO.AREA:
+            srr_res = total_res_skylight_area / total_res_roof_area
+        if total_nonres_roof_area > ZERO.AREA:
+            srr_nonres = total_nonres_skylight_area / total_nonres_roof_area
+        if total_mixed_roof_area > ZERO.AREA:
+            srr_mixed = total_mixed_skylight_area / total_mixed_roof_area
+        if total_semiheated_roof_area > ZERO.AREA:
+            srr_semiheated = total_semiheated_skylight_area / total_semiheated_roof_area
 
-    return {
-        SCC.EXTERIOR_RESIDENTIAL: srr_res,
-        SCC.EXTERIOR_NON_RESIDENTIAL: srr_nonres,
-        SCC.EXTERIOR_MIXED: srr_mixed,
-        SCC.SEMI_EXTERIOR: srr_semiheated,
-    }
+        return {
+            SCC.EXTERIOR_RESIDENTIAL: srr_res,
+            SCC.EXTERIOR_NON_RESIDENTIAL: srr_nonres,
+            SCC.EXTERIOR_MIXED: srr_mixed,
+            SCC.SEMI_EXTERIOR: srr_semiheated,
+        }
 
 
 def _helper_calculate_skylight_area(surface):
