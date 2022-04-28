@@ -48,7 +48,7 @@ def get_building_scc_skylight_roof_ratios_dict(climate_zone, ruleset_model_insta
     for building in find_all("buildings[*]", ruleset_model_instance):
         scc_dictionary = get_surface_conditioning_category_dict(climate_zone, building)
         for surface in find_all(
-            "building_segments[*].zones[*].surfaces[*]", ruleset_model_instance
+            "building_segments[*].zones[*].surfaces[*]", building
         ):
             if get_opaque_surface_type(surface) == OST.ROOF:
                 roof_area = getattr_(surface, "surface", "area")
