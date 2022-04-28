@@ -51,7 +51,7 @@ class Section5Rule48(RuleDefinitionListIndexedBase):
                 if zone_conditioning_category[zone_b["id"]] in ["UNENCLOSED", "UNCONDITIONED"]:
                     zone_b_infiltration = zone_b["infiltration"]["infiltration_flow_rate"]
 
-                    zone_p = match_lists_by_id(proposed_zones, baseline_zones, zone_b["id"])
+                    zone_p = match_lists_by_id(proposed_zones[0], zone_b, zone_b["id"]) #### can't find "match_data_element" function
                     zone_p_infiltration = zone_p[0]["infiltration"]["infiltration_flow_rate"]
 
             return {"baseline_infiltration":zone_b_infiltration,
