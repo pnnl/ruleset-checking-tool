@@ -9,7 +9,7 @@ Inputs:
 
 Returns:
 
-- **building_scc_window_wall_ratios_dictionary**: A dictionary that saves each surface conditioning category (residential, non-residential, mixed and semi-exterior) with its window-wall-ratios for each building in RMR.
+- **building_scc_window_wall_ratios_dictionary**: A dictionary that saves each surface conditioning category (residential, non-residential, mixed and semi-heated) with its window-wall-ratios for each building in RMR.
 
 Function Call:
 
@@ -62,17 +62,17 @@ Logic:
 
           - Else, subsurface is not door, add total subsurface area to building total mixed type window area: `total_mixed_window_area += subsurface.glazed_area + subsurface.opaque_area`
 
-      - Else if wall is semi-heated type: `if scc_dictionary[surface.id] == ["SEMI-EXTERIOR"]:`
+      - Else if wall is semi-heated type: `if scc_dictionary[surface.id] == ["SEMI-HEATED"]:`
 
-        - Add wall area to building total envelope semi-heated type wall area: `total_semi_exterior_wall_area += surface.area`
+        - Add wall area to building total envelope semi-heated type wall area: `total_semiheated_wall_area += surface.area`
 
         - For each subsurface in surface: `for subsurface in surface.subsurfaces:`
 
           - Check if subsurface is door: `if subsurface.classification == "DOOR":`
 
-            - If glazed area in door is more than 50% of the total door area, add door area to building total semi-heated type window area: `if subsurface.glazed_area > subsurface.opaque_area: total_semi_exterior_window_area += subsurface.glazed_area + subsurface.opaque_area`
+            - If glazed area in door is more than 50% of the total door area, add door area to building total semi-heated type window area: `if subsurface.glazed_area > subsurface.opaque_area: total_semiheated_window_area += subsurface.glazed_area + subsurface.opaque_area`
 
-          - Else, subsurface is not door, add total subsurface area to building total semi-heated type window area: `total_semi_exterior_window_area += subsurface.glazed_area + subsurface.opaque_area`
+          - Else, subsurface is not door, add total subsurface area to building total semi-heated type window area: `total_semiheated_window_area += subsurface.glazed_area + subsurface.opaque_area`
 
 - Calculate window wall ratio for residential type surface conditioning category: `if total_res_wall_area > 0: wwr_res = total_res_window_area / total_res_wall_area; else: wwr_res = 0`
 
@@ -80,9 +80,9 @@ Logic:
 
 - Calculate window wall ratio for mixed type surface conditioning category: `if total_mixed_wall_area > 0: wwr_mixed = total_mixed_window_area / total_mixed_wall_area; else: wwr_mixed = 0`
 
-- Calculate window wall ratio for semi-exterior type surface conditioning category: `if total_semi_exterior_wall_area > 0: wwr_semi_exterior = total_semi_exterior_window_area / total_semi_exterior_wall_area; else: wwr_semi_exterior = 0`
+- Calculate window wall ratio for semi-heated type surface conditioning category: `if total_semiheated_wall_area > 0: wwr_semiheated = total_semiheated_window_area / total_semiheated_wall_area; else: wwr_semiheated = 0`
 
-- Save window-wall-ratio of different surface conditioning categories for building: `building_scc_window_wall_ratios_dictionary[building.id] = {"EXTERIOR RESIDENTIAL": wwr_res, "EXTERIOR NON-RESIDENTIAL": wwr_nonres, "EXTERIOR MIXED": wwr_mixed, "SEMI-EXTERIOR": wwr_semi_exterior}`
+- Save window-wall-ratio of different surface conditioning categories for building: `building_scc_window_wall_ratios_dictionary[building.id] = {"EXTERIOR RESIDENTIAL": wwr_res, "EXTERIOR NON-RESIDENTIAL": wwr_nonres, "EXTERIOR MIXED": wwr_mixed, "SEMI-EXTERIOR": wwr_semiheated}`
 
 **Returns** `return building_scc_window_wall_ratios_dictionary`
 
