@@ -6,7 +6,7 @@ from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedV
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.match_lists import match_lists_by_id
 from rct229.ruleset_functions.get_zone_conditioning_category_dict import get_zone_conditioning_category_dict
-
+import pprint
 class Section5Rule48(RuleDefinitionListIndexedBase):
     """Rule 48 of ASHRAE 90.1-2019 Appendix G Section 5 (Envelope)"""
 
@@ -41,48 +41,21 @@ class Section5Rule48(RuleDefinitionListIndexedBase):
 
         def get_calc_vals(self, context, data=None):
             climate_zone = data["climate_zone"]
-            building_b = context.baseline
-            building_p = context.proposed
 
             baseline_zones = find_all("$..zones[*]", context.baseline)
             proposed_zones = find_all("$..zones[*]", context.proposed)
 
+            zone_conditioning_category = get_zone_conditioning_category_dict(climate_zone, context.baseline)
+            b_RMR_zone = context.baseline["building_segments"][0]["zones"]
+            for zone_b in b_RMR_zone:
+                if zone_conditioning_category[zone_b["id"]] in ["UNENCLOSED", "UNCONDITIONED"]:
+                    zone_b_infiltration = zone_b["infiltration"]["infiltration_flow_rate"]
 
-            zone_conditioning_category = get_zone_conditioning_category_dict(climate_zone, building_b)
-            print(zone_conditioning_category)
+                    zone_p = match_lists_by_id(proposed_zones, baseline_zones, zone_b["id"])
+                    zone_p_infiltration = zone_p[0]["infiltration"]["infiltration_flow_rate"]
 
-            # baseline_infiltration=0
-            # proposed_infiltration=0
-            # # This assumes that the surfaces all match
-            # matched_baseline_zones = match_lists_by_id(proposed_zones, baseline_zones)
-            # proposed_baseline_zone_pairs = zip(proposed_zones, matched_baseline_zones)
-            # for (p_zone, b_zone) in proposed_baseline_zone_pairs:
-            #     # if b_zone[] in ["UNENCLOSED", "UNCONDITIONED"]:
-            #         pass
-
-            # matched_baseline_zones = match_lists_by_id(proposed_zones, baseline_zones)
-
-
-            # This assumes that the surfaces all match
-            # matched_baseline_zones = match_lists_by_id(proposed_zones, baseline_zones)
-            # proposed_baseline_zone_pairs = zip(proposed_zones, matched_baseline_zones)
-            # for (p_zone, b_zone) in proposed_baseline_zone_pairs:
-            #     # need a method like match object
-            #     p_zone_infiltration = p_zone["infiltration"]
-            #     # b_zone could be NONE - add a check.
-            #     b_zone_infiltration = b_zone["infiltration"]
-            #
-            #     if (
-            #         p_zone_infiltration["algorithm_name"]
-            #         != b_zone_infiltration["algorithm_name"]
-            #         or p_zone_infiltration["modeling_method"]
-            #         != b_zone_infiltration["modeling_method"]
-            #     ):
-            #         failing_infiltration_zone_ids.append(p_zone["id"])
-
-            # return {"baseline_infiltration": baseline_infiltration,
-            #         "proposed_infiltration": proposed_infiltration,}
-            return None
+            return {"baseline_infiltration":zone_b_infiltration,
+                    "proposed_infiltration": zone_p_infiltration,}
 
         def rule_check(self, context, calc_vals, data=None):
             return calc_vals["baseline_infiltration"] == calc_vals["proposed_infiltration"]

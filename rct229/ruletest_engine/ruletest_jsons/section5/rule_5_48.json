@@ -38,6 +38,27 @@
                                                 "id": "zone_1",
                                                 "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
+												"volume": 21.237634943999996,
+												"surfaces": [
+                                                    {
+                                                        "id": "Surface 1",
+														"adjacent_to": "EXTERIOR",
+														"tilt": 90,
+														"area": 9.290303999999999,
+                                                        "azimuth": 20,
+														"construction": {
+                                                            "id": "construction_1",
+                                                            "u_factor": 7.097830167882559
+                                                        }
+                                                    }
+                                                ],
+												"spaces": [
+                                                    {
+                                                        "id": "Space 1",
+														"occupant_multiplier_schedule": "Required Occupancy Sched 1",
+                                                        "floor_area": 23.225759999999998
+                                                    }
+                                                ],
                                                 "infiltration": {
                                                     "id": "Infiltration 1",
                                                     "infiltration_flow_rate": 0.8495
@@ -48,10 +69,12 @@
                                             {
                                                 "id": "HVAC 1",
                                                 "cooling_system": {
-                                                    "id": "Cooling System 1"
+                                                    "id": "Cooling System 1",
+													"sensible_cool_capacity": 42204.0
                                                 },
                                                 "heating_system": {
-                                                    "id": "Heating System 1"
+                                                    "id": "Heating System 1",
+													"heat_capacity": 10257.488888888889
                                                 }
                                             }
                                         ]
@@ -83,6 +106,27 @@
                                                 "id": "zone_1",
                                                 "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
+												"volume": 21.237634943999996,
+												 "surfaces": [
+                                                    {
+                                                        "id": "Surface 1",
+														"adjacent_to": "EXTERIOR",
+														"tilt": 90,
+														"area": 9.290303999999999,
+                                                        "azimuth": 20,
+													    "construction": {
+                                                            "id": "construction_1",
+                                                            "u_factor": 7.097830167882559
+                                                        }
+                                                    }
+                                                ],
+												"spaces": [
+                                                    {
+                                                        "id": "Space 1",
+														"occupant_multiplier_schedule": "Required Occupancy Sched 1",
+                                                        "floor_area": 23.225759999999998
+                                                    }
+                                                ],
                                                 "infiltration": {
                                                     "id": "Infiltration 1",
                                                     "infiltration_flow_rate": 0.8495
@@ -93,10 +137,12 @@
                                             {
                                                 "id": "HVAC 1",
                                                 "cooling_system": {
-                                                    "id": "Cooling System 1"
+                                                    "id": "Cooling System 1",
+													"sensible_cool_capacity": 42204.0
                                                 },
                                                 "heating_system": {
-                                                    "id": "Heating System 1"
+                                                    "id": "Heating System 1",
+													"heat_capacity": 10257.488888888889
                                                 }
                                             }
                                         ]
@@ -148,6 +194,27 @@
                                                 "id": "zone_1",
                                                 "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
+												"volume": 21.237634943999996,
+												"surfaces": [
+                                                    {
+                                                        "id": "Surface 1",
+														"adjacent_to": "EXTERIOR",
+														"tilt": 90,
+														"area": 9.290303999999999,
+                                                        "azimuth": 20,
+														"construction": {
+                                                            "id": "construction_1",
+                                                            "u_factor": 7.097830167882559
+                                                        }
+                                                    }
+                                                ],
+												"spaces": [
+                                                    {
+                                                        "id": "Space 1",
+														"occupant_multiplier_schedule": "Required Occupancy Sched 1",
+                                                        "floor_area": 23.225759999999998
+                                                    }
+                                                ],
                                                 "infiltration": {
                                                     "id": "infiltration_1",
                                                     "infiltration_flow_rate": 0.8495
@@ -158,10 +225,12 @@
                                             {
                                                 "id": "HVAC 1",
                                                 "cooling_system": {
-                                                    "id": "Cooling System 1"
+                                                    "id": "Cooling System 1",
+													"sensible_cool_capacity": 42204.0
                                                 },
                                                 "heating_system": {
-                                                    "id": "Heating System 1"
+                                                    "id": "Heating System 1",
+													"heat_capacity": 10257.488888888889
                                                 }
                                             }
                                         ]
@@ -193,6 +262,27 @@
                                                 "id": "zone_1",
                                                 "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
+												"volume": 21.237634943999996,
+												 "surfaces": [
+                                                    {
+                                                        "id": "Surface 1",
+														"adjacent_to": "EXTERIOR",
+														"tilt": 90,
+														"area": 9.290303999999999,
+                                                        "azimuth": 20,
+													    "construction": {
+                                                            "id": "construction_1",
+                                                            "u_factor": 7.097830167882559
+                                                        }
+                                                    }
+                                                ],
+												"spaces": [
+                                                    {
+                                                        "id": "Space 1",
+														"occupant_multiplier_schedule": "Required Occupancy Sched 1",
+                                                        "floor_area": 23.225759999999998
+                                                    }
+                                                ],
                                                 "infiltration": {
                                                     "id": "infiltration_1",
                                                     "infiltration_flow_rate": 1.5341
@@ -203,10 +293,12 @@
                                             {
                                                 "id": "HVAC 1",
                                                 "cooling_system": {
-                                                    "id": "Cooling System 1"
+                                                    "id": "Cooling System 1",
+													"sensible_cool_capacity": 42204.0
                                                 },
                                                 "heating_system": {
-                                                    "id": "Heating System 1"
+                                                    "id": "Heating System 1",
+													"heat_capacity": 10257.488888888889
                                                 }
                                             }
                                         ]
