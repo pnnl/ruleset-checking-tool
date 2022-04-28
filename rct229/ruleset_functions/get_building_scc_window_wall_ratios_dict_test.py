@@ -148,5 +148,3 @@ def test__get_building_scc_skylight_roof_ratios_dict(
         SCC.EXTERIOR_MIXED: 0.25,
         SCC.SEMI_EXTERIOR: 0.25,
     }
-    assert mock_get_surface_conditioning_category_dict.called
-    assert mock_get_opaque_surface_type.called
