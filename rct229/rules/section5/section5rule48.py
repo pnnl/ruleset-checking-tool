@@ -3,10 +3,12 @@ from rct229.rule_engine.rule_base import (
     RuleDefinitionListIndexedBase,
 )
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
+from rct229.ruleset_functions.get_zone_conditioning_category_dict import (
+    get_zone_conditioning_category_dict,
+)
 from rct229.utils.jsonpath_utils import find_all
-from rct229.utils.match_lists import match_lists_by_id
-from rct229.ruleset_functions.get_zone_conditioning_category_dict import get_zone_conditioning_category_dict
-import pprint
+
+
 class Section5Rule48(RuleDefinitionListIndexedBase):
     """Rule 48 of ASHRAE 90.1-2019 Appendix G Section 5 (Envelope)"""
 
@@ -28,7 +30,6 @@ class Section5Rule48(RuleDefinitionListIndexedBase):
         rmr_baseline = context.baseline
         return {"climate_zone": rmr_baseline["weather"]["climate_zone"]}
 
-
     class BuildingRule(RuleDefinitionBase):
         def __init__(self):
             super(Section5Rule48.BuildingRule, self).__init__(
@@ -45,17 +46,34 @@ class Section5Rule48(RuleDefinitionListIndexedBase):
             baseline_zones = find_all("$..zones[*]", context.baseline)
             proposed_zones = find_all("$..zones[*]", context.proposed)
 
-            zone_conditioning_category = get_zone_conditioning_category_dict(climate_zone, context.baseline)
-            b_RMR_zone = context.baseline["building_segments"][0]["zones"]
-            for zone_b in b_RMR_zone:
-                if zone_conditioning_category[zone_b["id"]] in ["UNENCLOSED", "UNCONDITIONED"]:
-                    zone_b_infiltration = zone_b["infiltration"]["infiltration_flow_rate"]
+            zone_conditioning_category = get_zone_conditioning_category_dict(
+                climate_zone, context.baseline
+            )
 
-                    zone_p = match_lists_by_id(proposed_zones[0], zone_b, zone_b["id"]) #### can't find "match_data_element" function
-                    zone_p_infiltration = zone_p[0]["infiltration"]["infiltration_flow_rate"]
+            for zone_b in baseline_zones:
+                if zone_conditioning_category[zone_b["id"]] in [
+                    "UNENCLOSED",
+                    "UNCONDITIONED",
+                ]:
+                    zone_b_infiltration = zone_b["infiltration"][
+                        "infiltration_flow_rate"
+                    ]
 
-            return {"baseline_infiltration":zone_b_infiltration,
-                    "proposed_infiltration": zone_p_infiltration,}
+                    # find a zone that has the same 'id' in the proposed RMR
+                    # used below for-loop because "match_data_element" function doesn't exit
+                    for zone_p in proposed_zones:
+                        if zone_p["id"] == zone_b["id"]:
+                            zone_p_infiltration = zone_p["infiltration"][
+                                "infiltration_flow_rate"
+                            ]
+                            break
+
+            return {
+                "baseline_infiltration": zone_b_infiltration,
+                "proposed_infiltration": zone_p_infiltration,
+            }
 
         def rule_check(self, context, calc_vals, data=None):
-            return calc_vals["baseline_infiltration"] == calc_vals["proposed_infiltration"]
+            return (
+                calc_vals["baseline_infiltration"] == calc_vals["proposed_infiltration"]
+            )
