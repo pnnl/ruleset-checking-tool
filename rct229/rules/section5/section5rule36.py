@@ -15,7 +15,6 @@ from rct229.ruleset_functions.get_surface_conditioning_category_dict import (
     get_surface_conditioning_category_dict,
 )
 from rct229.utils.jsonpath_utils import find_all
-from rct229.utils.match_lists import match_lists_by_id
 from rct229.utils.pint_utils import ZERO
 from rct229.utils.std_comparisons import std_equal
 
@@ -51,19 +50,19 @@ class Section5Rule36(RuleDefinitionListIndexedBase):
             )
 
         def create_data(self, context, data=None):
-            baseline = context.baseline
-            proposed = context.proposed
+            building_b = context.baseline
+            building_p = context.proposed
             # Merge into the existing data dict
             return {
                 **data,
-                "scc_dictionary_b": get_surface_conditioning_category_dict(
-                    data["climate_zone"], baseline
+                "scc_dict_b": get_surface_conditioning_category_dict(
+                    data["climate_zone"], building_b
                 ),
                 "skylight_roof_areas_dictionary_b": get_building_segment_skylight_roof_areas_dict(
-                    data["climate_zone"], baseline
+                    data["climate_zone"], building_b
                 ),
                 "skylight_roof_areas_dictionary_p": get_building_segment_skylight_roof_areas_dict(
-                    data["climate_zone"], proposed
+                    data["climate_zone"], building_p
                 ),
             }
 
@@ -71,8 +70,9 @@ class Section5Rule36(RuleDefinitionListIndexedBase):
             def __ceil__(self):
                 super(Section5Rule36.BuildingRule.BuildingSegmentRule, self).__init__(
                     rmrs_used=UserBaselineProposedVals(False, True, True),
-                    each_rule=Section5Rule36.BuildingRule.BuildingSegmentRule.SurfaceRule(),
+                    each_rule=Section5Rule36.BuildingRule.BuildingSegmentRule.RoofRule(),
                     index_rmr="baseline",
+                    list_path="$..surfaces[*]",
                 )
 
             def create_data(self, context, data=None):
@@ -80,7 +80,7 @@ class Section5Rule36(RuleDefinitionListIndexedBase):
                 building_segment_p = context.proposed
 
                 return {
-                    "scc_dictionary_b": data["scc_dictionary_b"],
+                    "scc_dict_b": data["scc_dict_b"],
                     "total_skylight_area_b": data["skylight_roof_areas_dictionary_b"][
                         building_segment_b["id"]
                     ]["total_skylight_area"],
@@ -89,31 +89,18 @@ class Section5Rule36(RuleDefinitionListIndexedBase):
                     ]["total_skylight_area"],
                 }
 
-            def create_context_list(self, context, data=None):
-                # create a list of regulated roof surfaces in baseline and proposed case
-                scc = data["scc_dictionary_b"]
-
-                surfaces_b = find_all("$..surfaces[*]", context.baseline)
-                surfaces_p = find_all("$..surfaces[*]", context.proposed)
-
-                # This assumes that the surfaces matched by IDs between proposed and baseline
-                matched_proposed_surfaces = match_lists_by_id(surfaces_b, surfaces_p)
-
-                proposed_baseline_surface_pairs = zip(
-                    surfaces_b, matched_proposed_surfaces
+            def list_filter(self, context_item, data=None):
+                scc = data["scc_dict_b"]
+                surface_b = context_item.baseline
+                return (
+                    get_opaque_surface_type(surface_b) == OST.ROOF
+                    and scc[surface_b["id"]] != SCC.UNREGULATED
                 )
 
-                return [
-                    UserBaselineProposedVals(None, surface_b, surface_p)
-                    for surface_b, surface_p in proposed_baseline_surface_pairs
-                    if get_opaque_surface_type(surface_b) == OST.ROOF
-                    and scc[surface_b["id"]] != SCC.UNREGULATED
-                ]
-
-            class SurfaceRule(RuleDefinitionBase):
+            class RoofRule(RuleDefinitionBase):
                 def __init__(self):
                     super(
-                        Section5Rule36.BuildingRule.BuildingSegmentRule.SurfaceRule,
+                        Section5Rule36.BuildingRule.BuildingSegmentRule.RoofRule,
                         self,
                     ).__init__(
                         rmrs_used=UserBaselineProposedVals(False, True, False),
@@ -144,20 +131,31 @@ class Section5Rule36(RuleDefinitionListIndexedBase):
                     )
 
                     return {
-                        "skylight_surface_to_total_area_ratio_b": total_skylight_area_surface_b
-                        / total_skylight_area_b,
-                        "skylight_surface_to_total_area_ratio_p": total_skylight_area_surface_p
-                        / total_skylight_area_p,
+                        "total_skylight_area_b": total_skylight_area_b,
+                        "total_skylight_area_p": total_skylight_area_p,
+                        "total_skylight_area_surface_b": total_skylight_area_surface_b,
+                        "total_skylight_area_surface_p": total_skylight_area_surface_p,
                     }
 
                 def rule_check(self, context, calc_vals=None, data=None):
-                    skylight_surface_total_area_ratio_b = calc_vals[
-                        "skylight_surface_to_total_area_ratio_b"
+
+                    total_skylight_area_b = calc_vals["total_skylight_area_b"]
+                    total_skylight_area_p = calc_vals["total_skylight_area_p"]
+                    total_skylight_area_surface_b = calc_vals[
+                        "total_skylight_area_surface_b"
                     ]
-                    skylight_surface_total_area_ratio_p = calc_vals[
-                        "skylight_surface_to_total_area_ratio_p"
+                    total_skylight_area_surface_p = calc_vals[
+                        "total_skylight_area_surface_p"
                     ]
-                    return std_equal(
-                        skylight_surface_total_area_ratio_b,
-                        skylight_surface_total_area_ratio_p,
+
+                    return (
+                        # both segments have no skylight area
+                        total_skylight_area_b == 0 and total_skylight_area_p == 0
+                    ) or (
+                        # both segments have skylight area and ratios are the same
+                        total_skylight_area_b * total_skylight_area_p > 0
+                        and std_equal(
+                            total_skylight_area_b / total_skylight_area_surface_b,
+                            total_skylight_area_p / total_skylight_area_surface_p,
+                        )
                     )
