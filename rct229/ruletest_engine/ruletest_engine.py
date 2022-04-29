@@ -1,5 +1,6 @@
 import copy
 import json
+import pprint
 
 # from jsonpointer import JsonPointer
 import os
@@ -248,7 +249,7 @@ def run_section_tests(test_json_name):
 
         # Evaluate rule and check for invalid RMRs
         evaluation_dict = evaluate_rule(rule, rmr_trio)
-        # print(json.dumps(evaluation_dict))
+        # pprint.pprint(evaluation_dict)
         invalid_rmrs_dict = evaluation_dict["invalid_rmrs"]
 
         # If invalid RMRs exist, fail this rule and append failed message
