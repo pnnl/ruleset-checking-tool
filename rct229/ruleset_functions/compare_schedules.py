@@ -1,4 +1,4 @@
-from rct229.utils.assertions import RCTFailureException
+from rct229.utils.assertions import RCTFailureException, assert_
 
 REGULAR_YEAR_HOURS = 8760
 LEAP_YEAR_HOURS = 8784
@@ -45,23 +45,25 @@ def compare_schedules(schedule_1, schedule_2, mask_schedule, comparison_factor: 
     eflh_schedule_2 = 0.0
     total_hours_match = 0.0
     for index, hourly_value in enumerate(mask_schedule):
-        total_hours_compared += 1
         if hourly_value == 1:
+            total_hours_compared += 1
             eflh_schedule_1 += schedule_1[index]
             eflh_schedule_2 += schedule_2[index]
             if schedule_1[index] == schedule_2[index]:
                 total_hours_match += 1
         elif hourly_value == 2:
+            total_hours_compared += 1
             eflh_schedule_1 += schedule_1[index]
             eflh_schedule_2 += schedule_2[index] * comparison_factor
             if schedule_1[index] == schedule_2[index] * comparison_factor:
                 total_hours_match += 1
 
+    eflh_difference = 0.0
     if eflh_schedule_2 > 0:
         eflh_difference = eflh_schedule_1 / eflh_schedule_2
     else:
         # only if the comparison factor is 0.0 or mask_schedule = [0] * 8760
-        eflh_difference = eflh_schedule_1
+        assert_(eflh_schedule_2 > 0, f"EFLH_schedule_2 is 0, check comparison factor and mask_schedule. Comparison factor: #{comparison_factor}; total hours compared: #{total_hours_compared}")
 
     return {
         "total_hours_compared": total_hours_compared,
