@@ -13,8 +13,15 @@ def test__Test_Schedule_Compare_Success_1():
     schedule_2 = [1.0] * 8760
     mask_schedule = [2] * 8760
     multiplier = 0.8
-    results = compare_schedules(schedule_1, schedule_2, mask_schedule, multiplier, False)
-    assert results["total_hours_compared"] == 8760.0 and results["total_hours_match"] == 8760.0 and abs(results["eflh_difference"] - 1.0) <= 0.001
+    results = compare_schedules(
+        schedule_1, schedule_2, mask_schedule, multiplier, False
+    )
+    assert (
+        results["total_hours_compared"] == 8760.0
+        and results["total_hours_match"] == 8760.0
+        and abs(results["eflh_difference"] - 1.0) <= 0.001
+    )
+
 
 def test__Test_Schedule_Compare_Success_2():
     """
@@ -25,8 +32,15 @@ def test__Test_Schedule_Compare_Success_2():
     schedule_2 = [1.0] * 8760
     mask_schedule = [1.0] * 8760
     multiplier = 0.8
-    results = compare_schedules(schedule_1, schedule_2, mask_schedule, multiplier, False)
-    assert results["total_hours_compared"] == 8760.0 and results["total_hours_match"] == 8760.0 and abs(results["eflh_difference"] - 1.0) <= 0.001
+    results = compare_schedules(
+        schedule_1, schedule_2, mask_schedule, multiplier, False
+    )
+    assert (
+        results["total_hours_compared"] == 8760.0
+        and results["total_hours_match"] == 8760.0
+        and abs(results["eflh_difference"] - 1.0) <= 0.001
+    )
+
 
 def test__Test_Schedule_Compare_Success_3():
     """
@@ -37,8 +51,15 @@ def test__Test_Schedule_Compare_Success_3():
     schedule_2 = [1.0] * 8760
     mask_schedule = [2.0] * 8760
     multiplier = 0.8
-    results = compare_schedules(schedule_1, schedule_2, mask_schedule, multiplier, False)
-    assert results["total_hours_compared"] == 8760.0 and results["total_hours_match"] == 0.0 and abs(results["eflh_difference"] - 1.25) <= 0.001
+    results = compare_schedules(
+        schedule_1, schedule_2, mask_schedule, multiplier, False
+    )
+    assert (
+        results["total_hours_compared"] == 8760.0
+        and results["total_hours_match"] == 0.0
+        and abs(results["eflh_difference"] - 1.25) <= 0.001
+    )
+
 
 def test__Test_Schedule_Compare_Success_4():
     """
@@ -51,7 +72,12 @@ def test__Test_Schedule_Compare_Success_4():
     mask_schedule = [1.0] * 8784
     multiplier = 0.8
     results = compare_schedules(schedule_1, schedule_2, mask_schedule, multiplier, True)
-    assert results["total_hours_compared"] == 8784.0 and results["total_hours_match"] == 8784.0 and abs(results["eflh_difference"] - 1.0) <= 0.001
+    assert (
+        results["total_hours_compared"] == 8784.0
+        and results["total_hours_match"] == 8784.0
+        and abs(results["eflh_difference"] - 1.0) <= 0.001
+    )
+
 
 def test__Test_Schedule_Compare_Failed_1():
     """
@@ -64,11 +90,16 @@ def test__Test_Schedule_Compare_Failed_1():
     mask_schedule = [2.0] * 8760
     multiplier = 0.8
     try:
-        results = compare_schedules(schedule_1, schedule_2, mask_schedule, multiplier, True)
+        results = compare_schedules(
+            schedule_1, schedule_2, mask_schedule, multiplier, True
+        )
     except RCTFailureException as rfe:
-        assert str(rfe) == ("Failed when comparing hourly schedules with target number of hours. target "
-                            "number of hour: 8784, number of hours of schedule_1 : 8760; number of hours "
-                            "of schedule_2: 8760; number of hours of mask_schedule: 8760")
+        assert str(rfe) == (
+            "Failed when comparing hourly schedules with target number of hours. target "
+            "number of hour: 8784, number of hours of schedule_1 : 8760; number of hours "
+            "of schedule_2: 8760; number of hours of mask_schedule: 8760"
+        )
+
 
 def test__Test_Schedule_Compare_Failed_2():
     """
@@ -80,8 +111,12 @@ def test__Test_Schedule_Compare_Failed_2():
     mask_schedule = [2.0] * 8784
     multiplier = 0.8
     try:
-        results = compare_schedules(schedule_1, schedule_2, mask_schedule, multiplier, True)
+        results = compare_schedules(
+            schedule_1, schedule_2, mask_schedule, multiplier, True
+        )
     except RCTFailureException as rfe:
-        assert str(rfe) == ("Failed when comparing hourly schedules with target number of hours. target "
-                            "number of hour: 8784, number of hours of schedule_1 : 8760; number of hours "
-                            "of schedule_2: 8784; number of hours of mask_schedule: 8760")
+        assert str(rfe) == (
+            "Failed when comparing hourly schedules with target number of hours. target "
+            "number of hour: 8784, number of hours of schedule_1 : 8760; number of hours "
+            "of schedule_2: 8784; number of hours of mask_schedule: 8760"
+        )
