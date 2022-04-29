@@ -1,9 +1,9 @@
 import copy
 import json
-import pprint
 
 # from jsonpointer import JsonPointer
 import os
+import pprint
 
 from rct229.rule_engine.engine import evaluate_rule
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
