@@ -20,7 +20,7 @@ Logic:
 
 - Get surface conditioning category dictionary for RMR: `scc_dictionary = get_surface_conditioning_category(RMR)`
 
-- For each zone in building: `zone in RMR...zones:`
+- For each zone in RMR: `zone in RMR...zones:`
 
   - For each surface in zone: `for surface in zone.surfaces:`
 
