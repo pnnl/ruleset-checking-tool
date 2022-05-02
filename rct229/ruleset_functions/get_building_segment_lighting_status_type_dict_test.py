@@ -1,10 +1,11 @@
 import pytest
 
 from rct229.ruleset_functions.get_building_segment_lighting_status_type_dict import (
-    get_building_segment_lighting_status_type_dict,
     LightingStatusType as LST,
 )
-
+from rct229.ruleset_functions.get_building_segment_lighting_status_type_dict import (
+    get_building_segment_lighting_status_type_dict,
+)
 from rct229.schema.config import ureg
 from rct229.schema.schema_utils import quantify_rmr
 from rct229.schema.validate import schema_validate_rmr
