@@ -1,0 +1,370 @@
+{
+    "rule-5-36-a": {
+        "Section": 5,
+        "Rule": 36,
+        "Test": "a",
+        "test_description": "Building includes a conditioned zone that has two roof surfaces both of which have skylights. Baseline skylight area is allocated to roof surfaces in the same proportion as in the proposed design",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "5-36",
+            "ruleset_reference": "Table G3.1#5 baselnid column e: Skylight orientation and tilt shall be the same as in the proposed design.",
+            "rule_description": "Skylight area must be allocated to surfaces in the same proportion in the baseline as in the proposed design; Skylight orientation and tilt shall be the same as in the proposed design.",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Proposed RMR",
+            "rule_dependency": "None",
+            "primary_rule": "Y",
+            "schema_version": "0.0.12"
+        },
+        "rmr_transformations": {
+            "proposed": {
+                "id": "ASHRAE229",
+                "weather": {
+                    "climate_zone": "CZ4A",
+                    "data_source_type": "OTHER"
+                },
+                "ruleset_model_instances": [
+                    {
+                        "id": "RMR1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_open_schedule": "Required Schedule 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Zone 1",
+                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
+                                                "volume": 21.237634943999996,
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "occupant_multiplier_schedule": "Required Occupancy Sched 1"
+                                                    }
+                                                ],
+                                                "terminals": [
+                                                    {
+                                                        "id": "Terminal 1",
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
+                                                    }
+                                                ],
+                                                "surfaces": [
+                                                    {
+                                                        "id": "Surface 1",
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 30,
+                                                        "area": 92.90303999999999,
+                                                        "subsurfaces": [
+                                                            {
+                                                                "id": "Subsurface 1",
+                                                                "glazed_area": 9.290303999999999,
+                                                                "opaque_area": 4.6451519999999995
+                                                            },
+                                                            {
+                                                                "id": "Subsurface 2",
+                                                                "glazed_area": 83.612736,
+                                                                "opaque_area": 9.290303999999999
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "id": "Surface 2",
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 50,
+                                                        "area": 185.80607999999998
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilation_air_conditioning_systems": [
+                                            {
+                                                "id": "HVAC 1",
+                                                "cooling_system": {
+                                                    "id": "Cooling System 1",
+                                                    "sensible_cool_capacity": 35170.0
+                                                },
+                                                "heating_system": {
+                                                    "id": "Heating System 1",
+                                                    "heat_capacity": 8792.133333333333
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            "baseline": {
+                "id": "ASHRAE229",
+                "weather": {
+                    "climate_zone": "CZ4A",
+                    "data_source_type": "OTHER"
+                },
+                "ruleset_model_instances": [
+                    {
+                        "id": "RMR1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_open_schedule": "Required Schedule 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Zone 1",
+                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
+                                                "volume": 21.237634943999996,
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "occupant_multiplier_schedule": "Required Occupancy Sched 1"
+                                                    }
+                                                ],
+                                                "terminals": [
+                                                    {
+                                                        "id": "Terminal 1",
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
+                                                    }
+                                                ],
+                                                "surfaces": [
+                                                    {
+                                                        "id": "Surface 1",
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 30,
+                                                        "area": 92.90303999999999,
+                                                        "subsurfaces": [
+                                                            {
+                                                                "id": "Subsurface 1",
+                                                                "glazed_area": 4.6451519999999995,
+                                                                "opaque_area": 2.3225759999999998
+                                                            },
+                                                            {
+                                                                "id": "Subsurface 2",
+                                                                "glazed_area": 41.806368,
+                                                                "opaque_area": 4.6451519999999995
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "id": "Surface 2",
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 50,
+                                                        "area": 185.80607999999998
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilation_air_conditioning_systems": [
+                                            {
+                                                "id": "HVAC 1",
+                                                "cooling_system": {
+                                                    "id": "Cooling System 1",
+                                                    "sensible_cool_capacity": 35170.0
+                                                },
+                                                "heating_system": {
+                                                    "id": "Heating System 1",
+                                                    "heat_capacity": 8792.133333333333
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    },
+    "rule-5-36-b": {
+        "Section": 5,
+        "Rule": 36,
+        "Test": "b",
+        "test_description": "Building includes a conditioned zone that has two roof surfaces both of which have skylights. Baseline skylight area is allocated to roof surfaces in the same proportion as in the proposed design",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "5-36",
+            "ruleset_reference": "Table G3.1#5 baselnid column e: Skylight orientation and tilt shall be the same as in the proposed design.",
+            "rule_description": "Skylight area must be allocated to surfaces in the same proportion in the baseline as in the proposed design; Skylight orientation and tilt shall be the same as in the proposed design.",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Proposed RMR",
+            "rule_dependency": "None",
+            "primary_rule": "Y",
+            "schema_version": "0.0.12"
+        },
+        "rmr_transformations": {
+            "proposed": {
+                "id": "ASHRAE229",
+                "weather": {
+                    "climate_zone": "CZ4A",
+                    "data_source_type": "OTHER"
+                },
+                "ruleset_model_instances": [
+                    {
+                        "id": "RMR1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_open_schedule": "Required Schedule 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Zone 1",
+                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
+                                                "volume": 21.237634943999996,
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "occupant_multiplier_schedule": "Required Occupancy Sched 1"
+                                                    }
+                                                ],
+                                                "terminals": [
+                                                    {
+                                                        "id": "Terminal 1",
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
+                                                    }
+                                                ],
+                                                "surfaces": [
+                                                    {
+                                                        "id": "Surface 1",
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 30,
+                                                        "area": 92.90303999999999,
+                                                        "subsurfaces": [
+                                                            {
+                                                                "id": "Subsurface 1",
+                                                                "glazed_area": 9.290303999999999,
+                                                                "opaque_area": 4.6451519999999995
+                                                            },
+                                                            {
+                                                                "id": "Subsurface 2",
+                                                                "glazed_area": 83.612736,
+                                                                "opaque_area": 9.290303999999999
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "id": "Surface 2",
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 50,
+                                                        "area": 185.80607999999998
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilation_air_conditioning_systems": [
+                                            {
+                                                "id": "HVAC 1",
+                                                "cooling_system": {
+                                                    "id": "Cooling System 1",
+                                                    "sensible_cool_capacity": 35170.0
+                                                },
+                                                "heating_system": {
+                                                    "id": "Heating System 1",
+                                                    "heat_capacity": 8792.133333333333
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            "baseline": {
+                "id": "ASHRAE229",
+                "weather": {
+                    "climate_zone": "CZ4A",
+                    "data_source_type": "OTHER"
+                },
+                "ruleset_model_instances": [
+                    {
+                        "id": "RMR1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_open_schedule": "Required Schedule 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Zone 1",
+                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
+                                                "volume": 21.237634943999996,
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "occupant_multiplier_schedule": "Required Occupancy Sched 1"
+                                                    }
+                                                ],
+                                                "terminals": [
+                                                    {
+                                                        "id": "Terminal 1",
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
+                                                    }
+                                                ],
+                                                "surfaces": [
+                                                    {
+                                                        "id": "Surface 1",
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 30,
+                                                        "area": 92.90303999999999,
+                                                        "subsurfaces": [
+                                                            {
+                                                                "id": "Subsurface 1",
+                                                                "glazed_area": 4.6451519999999995,
+                                                                "opaque_area": 2.3225759999999998
+                                                            },
+                                                            {
+                                                                "id": "Subsurface 2",
+                                                                "glazed_area": 83.612736,
+                                                                "opaque_area": 9.290303999999999
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "id": "Surface 2",
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 50,
+                                                        "area": 185.80607999999998
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilation_air_conditioning_systems": [
+                                            {
+                                                "id": "HVAC 1",
+                                                "cooling_system": {
+                                                    "id": "Cooling System 1",
+                                                    "sensible_cool_capacity": 35170.0
+                                                },
+                                                "heating_system": {
+                                                    "id": "Heating System 1",
+                                                    "heat_capacity": 8792.133333333333
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    }
+}
