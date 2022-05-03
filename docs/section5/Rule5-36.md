@@ -2,7 +2,7 @@
 # Envelope - Rule 5-36  
 
 **Rule ID:** 5-36  
-**Rule Description:**  Skylight area must be allocated to surfaces in the same proportion in the baseline as in the proposed design.
+**Rule Description:**  Skylight area must be allocated to surfaces in the same proportion in the baseline as in the proposed design.  
 **Rule Assertion:** B-RMR (subsurface.glazed_area+subsurface.opaque_area) = expected value for each zone  
 **Appendix G Section:** Section G3.1-5(e) Building Envelope Modeling Requirements for the Baseline building  
 **Appendix G Section Reference:** None  
@@ -36,7 +36,7 @@
   
     - Get total skylight area for building segment in P_RMR: `total_skylight_area_p = skylight_roof_areas_dictionary_p[building_segment_p.id][0]`
 
-  - For each thermal block in building segment: `for zone_b in building_segment_b.zones:`
+  - For each zone in building segment: `for zone_b in building_segment_b.zones:`
   
     - For each surface in zone: `for surface_b in zone_b.surfaces:`  
 

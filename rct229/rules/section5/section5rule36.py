@@ -152,8 +152,9 @@ class Section5Rule36(RuleDefinitionListIndexedBase):
                         # both segments have no skylight area
                         total_skylight_area_b == 0 and total_skylight_area_p == 0
                     ) or (
-                        # both segments have skylight area and ratios are the same
+                        # product to ensure neither is 0
                         total_skylight_area_b * total_skylight_area_p > 0
+                        # both segments' skylight area ratios are the same
                         and std_equal(
                             total_skylight_area_b / total_skylight_area_surface_b,
                             total_skylight_area_p / total_skylight_area_surface_p,
