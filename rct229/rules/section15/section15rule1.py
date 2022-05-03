@@ -11,7 +11,7 @@ class Section15Rule1(RuleDefinitionBase):
         description = (
             "Number of transformers modeled in User RMR and Baseline RMR are the same"
         )
-        rmr_context = "transformers"
+        rmr_context = "ruleset_model_instances/0/transformers"
         super(Section15Rule1, self).__init__(rmrs_used, id, description, rmr_context)
 
     def is_applicable(self, context, data=None):

@@ -18,7 +18,7 @@ class Section12Rule1(RuleDefinitionListIndexedBase):
             description=(
                 "Number of spaces modeled in User RMR and Baseline RMR are the same"
             ),
-            rmr_context="buildings",
+            rmr_context="ruleset_model_instances/0/buildings",
         )
 
     class BuildingRule(RuleDefinitionBase):

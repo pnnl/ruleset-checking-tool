@@ -3,6 +3,7 @@ import json
 
 # from jsonpointer import JsonPointer
 import os
+import pprint
 
 from rct229.rule_engine.engine import evaluate_rule
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
@@ -92,7 +93,7 @@ def evaluate_outcome_enumeration_str(outcome_enumeration_str):
         test_result = True
     elif outcome_enumeration_str == "FAILED":
         test_result = False
-    elif outcome_enumeration_str == "MANUAL_CHECK_REQUIRED":
+    elif outcome_enumeration_str == "UNDETERMINED":
         test_result = False
     elif outcome_enumeration_str == "MISSING_CONTEXT":
         test_result = False
@@ -248,6 +249,7 @@ def run_section_tests(test_json_name):
 
         # Evaluate rule and check for invalid RMRs
         evaluation_dict = evaluate_rule(rule, rmr_trio)
+        # pprint.pprint(evaluation_dict)
         invalid_rmrs_dict = evaluation_dict["invalid_rmrs"]
 
         # If invalid RMRs exist, fail this rule and append failed message

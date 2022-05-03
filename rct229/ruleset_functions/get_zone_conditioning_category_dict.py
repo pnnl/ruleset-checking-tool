@@ -6,8 +6,8 @@ from rct229.ruleset_functions.get_opaque_surface_type import get_opaque_surface_
 from rct229.schema.config import ureg
 from rct229.utils.assertions import (
     assert_,
-    assert_nonempty_lists,
     assert_required_fields,
+    get_first_attr_,
     getattr_,
 )
 from rct229.utils.jsonpath_utils import find_all
@@ -16,16 +16,6 @@ from rct229.utils.pint_utils import ZERO, pint_sum
 CAPACITY_THRESHOLD = 3.4 * ureg("Btu/(hr * ft2)")
 CRAWLSPACE_HEIGHT_THRESHOLD = 7 * ureg("ft")
 
-# The possible zone conditioning categories
-CONDITIONED_MIXED = "CONDITIONED_MIXED"
-CONDITIONED_NON_RESIDENTIAL = "CONDITIONED_NON_RESIDENTIAL"
-CONDITIONED_RESIDENTIAL = "CONDITIONED_RESIDENTIAL"
-SEMI_HEATED = "SEMI_HEATED"
-UNCONDITIONED = "UNCONDITIONED"
-UNENCLOSED = "UNENCLOSED"
-
-
-# TODO: Review for comparison tolerances
 
 # Intended for export and internal use
 class ZoneConditioningCategory:
@@ -58,7 +48,7 @@ GET_ZONE_CONDITIONING_CATEGORY_DICT__REQUIRED_FIELDS = {
             "u_factor",
         ],
         "building_segments[*].zones[*].terminals[*]": [
-            "served_by_heating_ventilation_air_conditioning_systems"
+            "served_by_heating_ventilation_air_conditioning_system"
         ],
     }
 }
@@ -157,7 +147,7 @@ def get_zone_conditioning_category_dict(climate_zone, building):
             # Note: there is only one hvac system even though the field name is plural
             # This will change to singular in schema version 0.0.8
             hvac_sys_id = terminal[
-                "served_by_heating_ventilation_air_conditioning_systems"
+                "served_by_heating_ventilation_air_conditioning_system"
             ]
 
             # Add cooling and heating capacites for the terminal
@@ -228,42 +218,36 @@ def get_zone_conditioning_category_dict(climate_zone, building):
                             )
                             for subsurface in subsurfaces
                         ],
-                        ZERO.U_FACTOR,  # value used if there are no subsurfaces
+                        ZERO.UA,  # value used if there are no subsurfaces
                     )
                     # Calculate the are of the surface that is not part of a subsurface
-                    assert_(
-                        "area" in surface, f"surface:{surface['id']} has no area field"
+                    non_subsurfaces_area = (
+                        getattr_(surface, "surface", "area") - subsurfaces_area
                     )
-                    non_subsurfaces_area = surface["area"] - subsurfaces_area
                     # Calculate the UA for the surface
-                    assert_(
-                        "construction" in surface,
-                        f"Surface:{surface['id']} has no construction field",
-                    )
-                    assert_(
-                        "u_factor" in surface["construction"],
-                        f"construction:{surface['construction']['id']} has no u_factor field",
-                    )
-                    surface_ua = (
-                        surface["construction"]["u_factor"] * non_subsurfaces_area
-                        + subsurfaces_ua
-                    )
+                    surface_construction = getattr_(surface, "surface", "construction")
+                    # TODO Temp code for test
+                    surface_ua = ZERO.UA
+                    try:
+                        surface_ua = (
+                            get_first_attr_(
+                                surface_construction,
+                                "construction",
+                                ["u_factor", "f_factor", "c_factor"],
+                            )
+                            * non_subsurfaces_area
+                            + subsurfaces_ua
+                        )
+                    except Exception as e:
+                        surface_ua = ZERO.UA
 
                     # Add the surface UA to one of the running totals for the zone
                     # according to whether the surface is adjacent to a directly conditioned
                     # zone or not
-                    assert_(
-                        "adjacent_zone" in surface,
-                        f"surface:{surface['id']} is missing adjacent_zone",
-                    )
-                    adjacent_zone_id = surface["adjacent_zone"]
-                    assert_(
-                        "adjacent_to" in surface,
-                        f"surface:{surface['id']} is missing adjacent_to",
-                    )
                     if (
-                        surface["adjacent_to"] == "INTERIOR"
-                        and adjacent_zone_id in directly_conditioned_zone_ids
+                        getattr_(surface, "surface", "adjacent_to") == "INTERIOR"
+                        and getattr_(surface, "surface", "adjacent_zone")
+                        in directly_conditioned_zone_ids
                     ):
                         zone_directly_conditioned_ua += surface_ua  # zone_1_4
                     else:
@@ -361,12 +345,16 @@ def get_zone_conditioning_category_dict(climate_zone, building):
             # Check for crawlspace
             else:
                 zone_volume = zone.get("volume", ZERO.VOLUME)
-                assert_(zone_volume > ZERO.VOLUME, f"zone:{zone_id} has no volume")
+                assert_(
+                    zone_volume > ZERO.VOLUME,
+                    f"zone:{zone_id} has no volume",
+                )
                 zone_floor_area = pint_sum(
                     find_all("spaces[*].floor_area", zone), ZERO.AREA
                 )
                 assert_(
-                    zone_floor_area > ZERO.AREA, f"zone:{zone_id} has no floor area"
+                    zone_floor_area > ZERO.AREA,
+                    f"zone:{zone_id} has no floor area",
                 )
                 if zone_volume / zone_floor_area < CRAWLSPACE_HEIGHT_THRESHOLD and any(
                     [
