@@ -19,7 +19,7 @@ class Section15Rule5(RuleDefinitionListIndexedBase):
             index_rmr="user",
             id="15-5",
             description="Transformer efficiency reported in Baseline RMR equals Table 8.4.4",
-            rmr_context="transformers",
+            rmr_context="ruleset_model_instances/0/transformers",
         )
 
     class TransformerRule(RuleDefinitionBase):
