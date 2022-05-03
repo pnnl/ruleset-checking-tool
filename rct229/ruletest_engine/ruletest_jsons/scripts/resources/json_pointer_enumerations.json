@@ -1,13 +1,23 @@
 {
-
-	"building_segments": "buildings[0]/building_segments",
-	"fenestration_subsurfaces": "buildings[0]/building_segments[0]/thermal_blocks[0]/zones[0]/surfaces[0]/fenestration_subsurfaces",
-	"heating_ventilation_air_conditioning_systems": "buildings[0]/building_segments[0]/heating_ventilation_air_conditioning_systems",
-	"interior_lighting": "buildings[0]/building_segments[0]/thermal_blocks[0]/zones[0]/spaces[0]/interior_lighting",
-	"miscellaneous_equipment": "buildings[0]/building_segments[0]/thermal_blocks[0]/zones[0]/spaces[0]/miscellaneous_equipment",
-	"spaces": "buildings[0]/building_segments[0]/thermal_blocks[0]/zones[0]/spaces",
-	"surfaces": "buildings[0]/building_segments[0]/thermal_blocks[0]/zones[0]/surfaces",
-	"thermal_blocks": "buildings[0]/building_segments[0]/thermal_blocks",
-	"zones": "buildings[0]/building_segments[0]/thermal_blocks[0]/zones"
-	
+	"air_terminals": "ruleset_model_instances[0]/buildings[0]/building_segments[0]/heating_ventilation_air_conditioning_systems[0]/air_terminals",
+	"buildings": "ruleset_model_instances[0]/buildings",
+	"building_segments": "ruleset_model_instances[0]/buildings[0]/building_segments",
+	"climate_zone": "weather/climate_zone",
+	"construction": "ruleset_model_instances[0]/buildings[0]/building_segments[0]/zones[0]/surfaces[0]/construction",
+	"cooling_system": "ruleset_model_instances[0]/buildings[0]/building_segments[0]/heating_ventilation_air_conditioning_systems[0]/cooling_system",
+	"fan_systems": "ruleset_model_instances[0]/buildings[0]/building_segments[0]/heating_ventilation_air_conditioning_systems[0]/fan_systems",
+	"fenestration_subsurfaces": "ruleset_model_instances[0]/buildings[0]/building_segments[0]/zones[0]/surfaces[0]/fenestration_subsurfaces",
+	"heating_system": "ruleset_model_instances[0]/buildings[0]/building_segments[0]/heating_ventilation_air_conditioning_systems[0]/heating_system",
+	"heating_ventilation_air_conditioning_systems": "ruleset_model_instances[0]/buildings[0]/building_segments[0]/heating_ventilation_air_conditioning_systems",
+	"infiltration": "ruleset_model_instances[0]/buildings[0]/building_segments[0]/zones[0]/infiltration",
+	"interior_lighting": "ruleset_model_instances[0]/buildings[0]/building_segments[0]/zones[0]/spaces[0]/interior_lighting",
+	"miscellaneous_equipment": "ruleset_model_instances[0]/buildings[0]/building_segments[0]/zones[0]/spaces[0]/miscellaneous_equipment",
+	"preheat_system": "ruleset_model_instances[0]/buildings[0]/building_segments[0]/heating_ventilation_air_conditioning_systems[0]/preheat_system",
+	"sensible_cool_capacity": "ruleset_model_instances[0]/buildings[0]/building_segments[0]/heating_ventilation_air_conditioning_systems[0]/cooling_system/sensible_cool_capacity",
+	"spaces": "ruleset_model_instances[0]/buildings[0]/building_segments[0]/zones[0]/spaces",
+	"subsurfaces": "ruleset_model_instances[0]/buildings[0]/building_segments[0]/zones[0]/surfaces[0]/subsurfaces",
+	"surfaces": "ruleset_model_instances[0]/buildings[0]/building_segments[0]/zones[0]/surfaces",
+	"surface_optics": "ruleset_model_instances[0]/buildings[0]/building_segments[0]/zones[0]/surfaces[0]/surface_optics",
+	"terminals": "ruleset_model_instances[0]/buildings[0]/building_segments[0]/zones[0]/terminals",
+	"zones": "ruleset_model_instances[0]/buildings[0]/building_segments[0]/zones"
 }
