@@ -47,9 +47,6 @@ class Section5Rule37(RuleDefinitionListIndexedBase):
         rmr_baseline = context.baseline
         return {
             "climate_zone": rmr_baseline["weather"]["climate_zone"],
-            "building_scc_skylight_roof_ratios_dict_b": get_building_scc_skylight_roof_ratios_dict(
-                rmr_baseline["weather"]["climate_zone"], rmr_baseline
-            ),
         }
 
     class BuildingRule(RuleDefinitionListIndexedBase):
@@ -66,10 +63,11 @@ class Section5Rule37(RuleDefinitionListIndexedBase):
             # If building segment exterior mixed skylight to roof ratio is greater than 0
             # and residential, nonresidential and <=2% and > 2% u_factors are identical
             # then set the manual check required and stop execution.
+            building_b = context.baseline
             climate_zone = data["climate_zone"]
-            building_scc_skylight_roof_ratios_dict_b = data[
-                "building_scc_skylight_roof_ratios_dict_b"
-            ]
+            building_scc_skylight_roof_ratios_dict_b = get_building_scc_skylight_roof_ratios_dict(
+                    climate_zone, building_b
+            )
             target_exterior_2per_residential = table_G34_lookup(
                 climate_zone,
                 SCC.EXTERIOR_RESIDENTIAL,
@@ -96,20 +94,20 @@ class Section5Rule37(RuleDefinitionListIndexedBase):
             )
             return (
                 building_scc_skylight_roof_ratios_dict_b[SCC.EXTERIOR_MIXED] > 0
-                and target_exterior_2per_residential["u_factor"]
-                != target_exterior_2per_nonresidential["u_factor"]
-                or target_exterior_above2_residential["u_factor"]
-                != target_exterior_above2_nonresidential["u_factor"]
-                or target_exterior_2per_residential["u_factor"]
-                != target_exterior_2per_nonresidential["u_factor"]
+                and (target_exterior_2per_residential["u_value"]
+                != target_exterior_2per_nonresidential["u_value"]
+                or target_exterior_above2_residential["u_value"]
+                != target_exterior_above2_nonresidential["u_value"]
+                or target_exterior_2per_residential["u_value"]
+                != target_exterior_2per_nonresidential["u_value"])
             )
 
         def create_data(self, context, data=None):
             building_b = context.baseline
             climate_zone = data["climate_zone"]
-            building_scc_skylight_roof_ratios_dict_b = data[
-                "building_scc_skylight_roof_ratios_dict_b"
-            ]
+            building_scc_skylight_roof_ratios_dict_b = get_building_scc_skylight_roof_ratios_dict(
+                    climate_zone, building_b
+            )
 
             # Process target_u_factor_res
             srr_res = building_scc_skylight_roof_ratios_dict_b[SCC.EXTERIOR_RESIDENTIAL]
@@ -174,9 +172,9 @@ class Section5Rule37(RuleDefinitionListIndexedBase):
                 ),
                 # at this point, target_u_factor_mixed should be same regardless of
                 # residential <2% or >2%, skylight.
-                "target_u_factor_res_b": target_u_factor_res["u_factor"],
-                "target_u_factor_nonres_b": target_u_factor_nonres["u_factor"],
-                "target_u_factor_semiheated_b": target_u_factor_semiheated["u_factor"],
+                "target_u_factor_res_b": target_u_factor_res["u_value"],
+                "target_u_factor_nonres_b": target_u_factor_nonres["u_value"],
+                "target_u_factor_semiheated_b": target_u_factor_semiheated["u_value"],
             }
 
         def list_filter(self, context_item, data=None):
