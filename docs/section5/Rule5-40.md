@@ -24,9 +24,9 @@
 
 - For each building segment in the Baseline model: `for building_segment_b in B_RMR.building.building_segments:`
 
-  - For each zone in thermal block: `for zone_b in building_segments.zones:`
+  - For each zone_b in building_segment_b: `for zone_b in building_segments.zones:`
 
-    - For each surface in zone: `for surface_b in zone_b.surfaces;`
+    - For each surface_b in zone_b: `for surface_b in zone_b.surfaces;`
 
       - Check if surface is roof and is regulated, get surface optical properties: `if ( get_opaque_surface_type(surface_b.id) == "ROOF" ) AND ( scc_dictionary_b[surface_b.id] != "UNREGULATED" ): surface_optical_properties_b = surface_b.surface_optical_properties`
 
