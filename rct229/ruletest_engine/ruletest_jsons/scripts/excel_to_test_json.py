@@ -11,8 +11,8 @@ from rct229.schema.schema_utils import *
 
 # ---------------------------------------USER INPUTS---------------------------------------
 
-spreadsheet_name = "envelope_tcd_5_45.xlsx"
-json_name = "envelope_tcd_5_45.json"
+spreadsheet_name = "envelope_tcd_master.xlsx"
+json_name = "envelope_tests.json"
 sheet_name = "TCDs"
 
 # --------------------------------------SCRIPT STARTS--------------------------------------
@@ -84,6 +84,9 @@ def convert_units_from_tcd_to_rmr_schema(tcd_value, tcd_units, key_list):
         The converted TCD value into the units required by the ASHRAE229 schema
 
     """
+    # if the value is bool type - then return the value
+    if isinstance(tcd_value, bool):
+        return tcd_value
 
     # Clean TCD units to something pint can understand
     tcd_units = clean_schema_units(tcd_units)
@@ -184,7 +187,7 @@ def create_dictionary_from_excel(spreadsheet_name, sheet_name):
     keys = []
     non_test_related_columns = []
     unit_headers = ["unit_type", "units"]
-    tcd_note_headers = ["data_group", "data_element"]
+    tcd_note_headers = ["data_group", "object_id", "parent_id", "data_element"]
 
     for header in headers:
         # If header has substring 'key', consider it a key
