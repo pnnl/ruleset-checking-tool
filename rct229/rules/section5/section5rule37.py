@@ -65,8 +65,8 @@ class Section5Rule37(RuleDefinitionListIndexedBase):
             # then set the manual check required and stop execution.
             building_b = context.baseline
             climate_zone = data["climate_zone"]
-            building_scc_skylight_roof_ratios_dict_b = get_building_scc_skylight_roof_ratios_dict(
-                    climate_zone, building_b
+            building_scc_skylight_roof_ratios_dict_b = (
+                get_building_scc_skylight_roof_ratios_dict(climate_zone, building_b)
             )
             target_exterior_2per_residential = table_G34_lookup(
                 climate_zone,
@@ -92,21 +92,22 @@ class Section5Rule37(RuleDefinitionListIndexedBase):
                 OST.SKYLIGHT,
                 skylit_wwr=0.03,
             )
-            return (
-                building_scc_skylight_roof_ratios_dict_b[SCC.EXTERIOR_MIXED] > 0
-                and (target_exterior_2per_residential["u_value"]
+            return building_scc_skylight_roof_ratios_dict_b[
+                SCC.EXTERIOR_MIXED
+            ] > 0 and (
+                target_exterior_2per_residential["u_value"]
                 != target_exterior_2per_nonresidential["u_value"]
                 or target_exterior_above2_residential["u_value"]
                 != target_exterior_above2_nonresidential["u_value"]
                 or target_exterior_2per_residential["u_value"]
-                != target_exterior_2per_nonresidential["u_value"])
+                != target_exterior_2per_nonresidential["u_value"]
             )
 
         def create_data(self, context, data=None):
             building_b = context.baseline
             climate_zone = data["climate_zone"]
-            building_scc_skylight_roof_ratios_dict_b = get_building_scc_skylight_roof_ratios_dict(
-                    climate_zone, building_b
+            building_scc_skylight_roof_ratios_dict_b = (
+                get_building_scc_skylight_roof_ratios_dict(climate_zone, building_b)
             )
 
             # Process target_u_factor_res
