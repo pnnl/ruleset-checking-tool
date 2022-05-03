@@ -16,7 +16,7 @@ class Section12Rule3(RuleDefinitionListIndexedBase):
             index_rmr="user",
             id="12-3",
             description=("User RMR Space ID in Proposed RMR"),
-            rmr_context="buildings",
+            rmr_context="ruleset_model_instances/0/buildings",
         )
 
     class BuildingRule(RuleDefinitionListIndexedBase):
