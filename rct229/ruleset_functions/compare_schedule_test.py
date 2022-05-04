@@ -57,7 +57,7 @@ def test__Test_Schedule_Compare_Success_3():
     assert (
         results["total_hours_compared"] == 8760.0
         and results["total_hours_match"] == 0.0
-        and abs(results["eflh_difference"] - (8760 - 8760*0.8)) <= 0.001
+        and abs(results["eflh_difference"] - (8760 - 8760 * 0.8)) <= 0.001
     )
 
 

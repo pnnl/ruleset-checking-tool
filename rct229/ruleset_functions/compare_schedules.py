@@ -7,7 +7,7 @@ LEAP_YEAR_HOURS = 8784
 def compare_schedules(
     schedule_1, schedule_2, mask_schedule, comparison_factor: float, is_leap_year: bool
 ):
-    """compare two schedules and determine if they match with or without a comparison factor when applicable
+    """Compare two schedules and determine if they match with or without a comparison factor when applicable
     NOTE: The function only works with hourly schedule for now.
 
     Parameters
@@ -29,24 +29,21 @@ def compare_schedules(
     the number of hours schedule_1 matches schedule_2 with the comparison_factor,
     EFLH difference for schedule_1 and schedule_2,
     i.e. {
-        "TOTAL_HOURS_COMPARED": total_hours_compared,
-        "TOTAL_HOURS_MATCH": total_hours_match,
-        "EFLH_DIFFERENCE: EFLH_difference
+        "total_hour_compared": total_hours_compared,
+        "total_hour_matched": total_hours_match,
+        "eflh_difference: EFLH_difference
         }
     """
     num_hours = LEAP_YEAR_HOURS if is_leap_year else REGULAR_YEAR_HOURS
 
-    if (
-        len(schedule_1) != len(schedule_2)
-        or len(schedule_1) != len(mask_schedule)
-        or len(schedule_1) != num_hours
-    ):
-        raise RCTFailureException(
-            f"Failed when comparing hourly schedules with target number of hours. target number of hour: {num_hours}, "
-            f"number of hours of schedule_1 : {len(schedule_1)}; "
-            f"number of hours of schedule_2: {len(schedule_2)}; "
-            f"number of hours of mask_schedule: {len(mask_schedule)}"
-        )
+    assert_(
+        (
+            len(schedule_1) != len(schedule_2)
+            or len(schedule_1) != len(mask_schedule)
+            or len(schedule_1) != num_hours
+        ),
+        f"Failed when comparing hourly schedules with target number of hours. target number of hour: {num_hours}, number of hours of schedule_1 : {len(schedule_1)}; number of hours of schedule_2: {len(schedule_2)}; number of hours of mask_schedule: {len(mask_schedule)}",
+    )
 
     total_hours_compared = 0.0
     eflh_schedule_1 = 0.0
