@@ -3,7 +3,7 @@
         "Section": 5,
         "Rule": 48,
         "Test": "a",
-        "test_description": "air leakage rate and schedule are the same in the proposed design as in the user model",
+        "test_description": "Air leakage rate at wind pressure in unenclosed and unconditioned spaces is not the same in the proposed design as in the user model",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-48",
@@ -19,9 +19,13 @@
         "rmr_transformations": {
             "proposed": {
                 "id": "ASHRAE229",
+                "weather": {
+                    "climate_zone": "CZ4A",
+                    "data_source_type": "OTHER"
+                },
                 "ruleset_model_instances": [
                     {
-                        "id": "RMR 1",
+                        "id": "RMR1",
                         "buildings": [
                             {
                                 "id": "Building 1",
@@ -57,9 +61,13 @@
             },
             "baseline": {
                 "id": "ASHRAE229",
+                "weather": {
+                    "climate_zone": "CZ4A",
+                    "data_source_type": "OTHER"
+                },
                 "ruleset_model_instances": [
                     {
-                        "id": "RMR 1",
+                        "id": "RMR1",
                         "buildings": [
                             {
                                 "id": "Building 1",
@@ -99,7 +107,7 @@
         "Section": 5,
         "Rule": 48,
         "Test": "b",
-        "test_description": "air leakage rate is not the same in the proposed design as in the user model",
+        "test_description": "Air leakage rate at wind pressure in unenclosed and unconditioned spaces is not the same in the proposed design as in the user model",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-48",
@@ -115,9 +123,13 @@
         "rmr_transformations": {
             "proposed": {
                 "id": "ASHRAE229",
+                "weather": {
+                    "climate_zone": "CZ4A",
+                    "data_source_type": "OTHER"
+                },
                 "ruleset_model_instances": [
                     {
-                        "id": "RMR 1",
+                        "id": "RMR1",
                         "buildings": [
                             {
                                 "id": "Building 1",
@@ -153,9 +165,13 @@
             },
             "baseline": {
                 "id": "ASHRAE229",
+                "weather": {
+                    "climate_zone": "CZ4A",
+                    "data_source_type": "OTHER"
+                },
                 "ruleset_model_instances": [
                     {
-                        "id": "RMR 1",
+                        "id": "RMR1",
                         "buildings": [
                             {
                                 "id": "Building 1",
@@ -195,7 +211,7 @@
         "Section": 5,
         "Rule": 48,
         "Test": "c",
-        "test_description": "air leakage schedule is not the same in the proposed design as in the user model",
+        "test_description": "Air leakage schedule in unenclosed and unconditioned spaces is not the same in the proposed design as in the user model",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-48",
@@ -211,9 +227,13 @@
         "rmr_transformations": {
             "proposed": {
                 "id": "ASHRAE229",
+                "weather": {
+                    "climate_zone": "CZ4A",
+                    "data_source_type": "OTHER"
+                },
                 "ruleset_model_instances": [
                     {
-                        "id": "RMR 1",
+                        "id": "RMR1",
                         "buildings": [
                             {
                                 "id": "Building 1",
@@ -249,9 +269,13 @@
             },
             "baseline": {
                 "id": "ASHRAE229",
+                "weather": {
+                    "climate_zone": "CZ4A",
+                    "data_source_type": "OTHER"
+                },
                 "ruleset_model_instances": [
                     {
-                        "id": "RMR 1",
+                        "id": "RMR1",
                         "buildings": [
                             {
                                 "id": "Building 1",

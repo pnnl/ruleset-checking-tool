@@ -3,7 +3,7 @@
         "Section": 5,
         "Rule": 36,
         "Test": "a",
-        "test_description": "Building includes a conditioned zone that has two roof surfaces both of which have skylights. Baseline skylight area is allocated to roof surfaces in the same proportion as in the proposed design",
+        "test_description": "Building includes a conditioned zone that has two roof surfaces both of which have skylights. Each baseline subsurface's proportion of the building's total glazed area is equal to the proposed.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-36",
@@ -42,7 +42,8 @@
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
-                                                        "occupant_multiplier_schedule": "Required Occupancy Sched 1"
+                                                        "occupant_multiplier_schedule": "Required Occupancy Sched 1",
+                                                        "floor_area": 23.225759999999998
                                                     }
                                                 ],
                                                 "terminals": [
@@ -60,13 +61,10 @@
                                                         "subsurfaces": [
                                                             {
                                                                 "id": "Subsurface 1",
+                                                                "classification": "SKYLIGHT",
                                                                 "glazed_area": 9.290303999999999,
-                                                                "opaque_area": 4.6451519999999995
-                                                            },
-                                                            {
-                                                                "id": "Subsurface 2",
-                                                                "glazed_area": 83.612736,
-                                                                "opaque_area": 9.290303999999999
+                                                                "opaque_area": 4.6451519999999995,
+                                                                "u_factor": 3.406958480583628
                                                             }
                                                         ]
                                                     },
@@ -74,7 +72,16 @@
                                                         "id": "Surface 2",
                                                         "adjacent_to": "EXTERIOR",
                                                         "tilt": 50,
-                                                        "area": 185.80607999999998
+                                                        "area": 185.80607999999998,
+                                                        "subsurfaces": [
+                                                            {
+                                                                "id": "Subsurface 2",
+                                                                "classification": "SKYLIGHT",
+                                                                "glazed_area": 83.612736,
+                                                                "opaque_area": 9.290303999999999,
+                                                                "u_factor": 3.406958480583628
+                                                            }
+                                                        ]
                                                     }
                                                 ]
                                             }
@@ -124,7 +131,8 @@
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
-                                                        "occupant_multiplier_schedule": "Required Occupancy Sched 1"
+                                                        "occupant_multiplier_schedule": "Required Occupancy Sched 1",
+                                                        "floor_area": 23.225759999999998
                                                     }
                                                 ],
                                                 "terminals": [
@@ -142,13 +150,9 @@
                                                         "subsurfaces": [
                                                             {
                                                                 "id": "Subsurface 1",
+                                                                "classification": "SKYLIGHT",
                                                                 "glazed_area": 4.6451519999999995,
                                                                 "opaque_area": 2.3225759999999998
-                                                            },
-                                                            {
-                                                                "id": "Subsurface 2",
-                                                                "glazed_area": 41.806368,
-                                                                "opaque_area": 4.6451519999999995
                                                             }
                                                         ]
                                                     },
@@ -156,7 +160,15 @@
                                                         "id": "Surface 2",
                                                         "adjacent_to": "EXTERIOR",
                                                         "tilt": 50,
-                                                        "area": 185.80607999999998
+                                                        "area": 185.80607999999998,
+                                                        "subsurfaces": [
+                                                            {
+                                                                "id": "Subsurface 2",
+                                                                "classification": "SKYLIGHT",
+                                                                "glazed_area": 41.806368,
+                                                                "opaque_area": 4.6451519999999995
+                                                            }
+                                                        ]
                                                     }
                                                 ]
                                             }
@@ -187,7 +199,7 @@
         "Section": 5,
         "Rule": 36,
         "Test": "b",
-        "test_description": "Building includes a conditioned zone that has two roof surfaces both of which have skylights. Baseline skylight area is allocated to roof surfaces in the same proportion as in the proposed design",
+        "test_description": "Building includes a conditioned zone that has two roof surfaces both of which have skylights. Each baseline subsurface's proportion of the building's total glazed area is not equal to the proposed.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-36",
@@ -226,7 +238,8 @@
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
-                                                        "occupant_multiplier_schedule": "Required Occupancy Sched 1"
+                                                        "occupant_multiplier_schedule": "Required Occupancy Sched 1",
+                                                        "floor_area": 23.225759999999998
                                                     }
                                                 ],
                                                 "terminals": [
@@ -244,13 +257,10 @@
                                                         "subsurfaces": [
                                                             {
                                                                 "id": "Subsurface 1",
+                                                                "classification": "SKYLIGHT",
                                                                 "glazed_area": 9.290303999999999,
-                                                                "opaque_area": 4.6451519999999995
-                                                            },
-                                                            {
-                                                                "id": "Subsurface 2",
-                                                                "glazed_area": 83.612736,
-                                                                "opaque_area": 9.290303999999999
+                                                                "opaque_area": 4.6451519999999995,
+                                                                "u_factor": 3.406958480583628
                                                             }
                                                         ]
                                                     },
@@ -258,7 +268,16 @@
                                                         "id": "Surface 2",
                                                         "adjacent_to": "EXTERIOR",
                                                         "tilt": 50,
-                                                        "area": 185.80607999999998
+                                                        "area": 185.80607999999998,
+                                                        "subsurfaces": [
+                                                            {
+                                                                "id": "Subsurface 2",
+                                                                "classification": "SKYLIGHT",
+                                                                "glazed_area": 83.612736,
+                                                                "opaque_area": 9.290303999999999,
+                                                                "u_factor": 3.406958480583628
+                                                            }
+                                                        ]
                                                     }
                                                 ]
                                             }
@@ -308,7 +327,8 @@
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
-                                                        "occupant_multiplier_schedule": "Required Occupancy Sched 1"
+                                                        "occupant_multiplier_schedule": "Required Occupancy Sched 1",
+                                                        "floor_area": 23.225759999999998
                                                     }
                                                 ],
                                                 "terminals": [
@@ -326,13 +346,9 @@
                                                         "subsurfaces": [
                                                             {
                                                                 "id": "Subsurface 1",
+                                                                "classification": "SKYLIGHT",
                                                                 "glazed_area": 4.6451519999999995,
                                                                 "opaque_area": 2.3225759999999998
-                                                            },
-                                                            {
-                                                                "id": "Subsurface 2",
-                                                                "glazed_area": 83.612736,
-                                                                "opaque_area": 9.290303999999999
                                                             }
                                                         ]
                                                     },
@@ -340,7 +356,15 @@
                                                         "id": "Surface 2",
                                                         "adjacent_to": "EXTERIOR",
                                                         "tilt": 50,
-                                                        "area": 185.80607999999998
+                                                        "area": 185.80607999999998,
+                                                        "subsurfaces": [
+                                                            {
+                                                                "id": "Subsurface 2",
+                                                                "classification": "SKYLIGHT",
+                                                                "glazed_area": 83.612736,
+                                                                "opaque_area": 9.290303999999999
+                                                            }
+                                                        ]
                                                     }
                                                 ]
                                             }

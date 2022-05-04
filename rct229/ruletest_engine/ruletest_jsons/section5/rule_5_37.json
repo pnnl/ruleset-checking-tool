@@ -43,7 +43,8 @@
                                                     {
                                                         "id": "Space 1",
                                                         "occupant_multiplier_schedule": "Required Occupancy Sched 1",
-                                                        "lighting_space_type": "DWELLING_UNIT"
+                                                        "lighting_space_type": "DWELLING_UNIT",
+                                                        "floor_area": 23.225759999999998
                                                     }
                                                 ],
                                                 "terminals": [
@@ -61,9 +62,10 @@
                                                         "subsurfaces": [
                                                             {
                                                                 "id": "Subsurface 1",
+                                                                "classification": "SKYLIGHT",
                                                                 "glazed_area": 4.6451519999999995,
                                                                 "opaque_area": 0.9290303999999999,
-                                                                "u_factor": 18.698523794269814
+                                                                "u_factor": 3.293393197897507
                                                             }
                                                         ]
                                                     }
@@ -136,7 +138,8 @@
                                                     {
                                                         "id": "Space 1",
                                                         "occupant_multiplier_schedule": "Required Occupancy Sched 1",
-                                                        "lighting_space_type": "DWELLING_UNIT"
+                                                        "lighting_space_type": "DWELLING_UNIT",
+                                                        "floor_area": 23.225759999999998
                                                     }
                                                 ],
                                                 "terminals": [
@@ -154,9 +157,10 @@
                                                         "subsurfaces": [
                                                             {
                                                                 "id": "Subsurface 1",
+                                                                "classification": "SKYLIGHT",
                                                                 "glazed_area": 4.6451519999999995,
                                                                 "opaque_area": 0.9290303999999999,
-                                                                "u_factor": 22.24630322538423
+                                                                "u_factor": 3.918002252671172
                                                             }
                                                         ]
                                                     }
@@ -229,7 +233,8 @@
                                                     {
                                                         "id": "Space 1",
                                                         "occupant_multiplier_schedule": "Required Occupancy Sched 1",
-                                                        "lighting_space_type": "OFFICE_ENCLOSED"
+                                                        "lighting_space_type": "OFFICE_ENCLOSED",
+                                                        "floor_area": 23.225759999999998
                                                     }
                                                 ],
                                                 "terminals": [
@@ -247,9 +252,10 @@
                                                         "subsurfaces": [
                                                             {
                                                                 "id": "Subsurface 1",
+                                                                "classification": "SKYLIGHT",
                                                                 "glazed_area": 4.6451519999999995,
                                                                 "opaque_area": 0.9290303999999999,
-                                                                "u_factor": 22.24630322538423
+                                                                "u_factor": 3.918002252671172
                                                             }
                                                         ]
                                                     }
@@ -322,7 +328,8 @@
                                                     {
                                                         "id": "Space 1",
                                                         "occupant_multiplier_schedule": "Required Occupancy Sched 1",
-                                                        "lighting_space_type": "OFFICE_ENCLOSED"
+                                                        "lighting_space_type": "OFFICE_ENCLOSED",
+                                                        "floor_area": 23.225759999999998
                                                     }
                                                 ],
                                                 "terminals": [
@@ -340,9 +347,10 @@
                                                         "subsurfaces": [
                                                             {
                                                                 "id": "Subsurface 1",
+                                                                "classification": "SKYLIGHT",
                                                                 "glazed_area": 4.6451519999999995,
                                                                 "opaque_area": 0.9290303999999999,
-                                                                "u_factor": 22.359868508070353
+                                                                "u_factor": 3.918002252671172
                                                             }
                                                         ]
                                                     }
@@ -414,7 +422,8 @@
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
-                                                        "occupant_multiplier_schedule": "Required Occupancy Sched 1"
+                                                        "occupant_multiplier_schedule": "Required Occupancy Sched 1",
+                                                        "floor_area": 23.225759999999998
                                                     }
                                                 ],
                                                 "terminals": [
@@ -432,9 +441,10 @@
                                                         "subsurfaces": [
                                                             {
                                                                 "id": "Subsurface 1",
+                                                                "classification": "SKYLIGHT",
                                                                 "glazed_area": 4.6451519999999995,
                                                                 "opaque_area": 0.9290303999999999,
-                                                                "u_factor": 43.84755564511129
+                                                                "u_factor": 7.722439222656224
                                                             }
                                                         ]
                                                     }
@@ -506,7 +516,8 @@
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
-                                                        "occupant_multiplier_schedule": "Required Occupancy Sched 1"
+                                                        "occupant_multiplier_schedule": "Required Occupancy Sched 1",
+                                                        "floor_area": 23.225759999999998
                                                     }
                                                 ],
                                                 "terminals": [
@@ -524,9 +535,10 @@
                                                         "subsurfaces": [
                                                             {
                                                                 "id": "Subsurface 1",
+                                                                "classification": "SKYLIGHT",
                                                                 "glazed_area": 4.6451519999999995,
                                                                 "opaque_area": 0.9290303999999999,
-                                                                "u_factor": 18.698523794269814
+                                                                "u_factor": 3.293393197897507
                                                             }
                                                         ]
                                                     }
