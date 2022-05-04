@@ -21,9 +21,7 @@
 
 - For each building segment in the Proposed model: `for building_segment_p in P_RMR.building.building_segments:`  
 
-  - For each thermal block in building segment: `for thermal_block_p in building_segment_p.thermal_blocks:`  
-
-    - For each zone in thermal block: `for zone_p in thermal_block_p.zones:`
+    - For each zone in building segment: `for zone_p in building_segment_p.zones:`
 
       - Get zone infiltration: `infiltration_p = zone_p.infiltration`  
 
