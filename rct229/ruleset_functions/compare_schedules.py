@@ -66,15 +66,7 @@ def compare_schedules(
             if schedule_1[index] == schedule_2[index] * comparison_factor:
                 total_hours_match += 1
 
-    eflh_difference = 0.0
-    if eflh_schedule_2 > 0:
-        eflh_difference = eflh_schedule_1 / eflh_schedule_2
-    else:
-        # only if the comparison factor is 0.0 or mask_schedule = [0] * 8760
-        assert_(
-            eflh_schedule_2 > 0,
-            f"EFLH_schedule_2 is 0, check comparison factor and mask_schedule. Comparison factor: #{comparison_factor}; total hours compared: #{total_hours_compared}",
-        )
+    eflh_difference = eflh_schedule_1 - eflh_schedule_2
 
     return {
         "total_hours_compared": total_hours_compared,
