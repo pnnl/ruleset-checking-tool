@@ -16,12 +16,14 @@ def clean_schema_units(schema_unit_str):
      Parameters
      ----------
      schema_unit_str : str
-         String representing a JSON path that includes integers in square brackets. E.g., 'transformers[0]/efficiency'
+         String representing a display or service name representation that may be misunderstood by pint. This funciton
+         cleans up this unit (e.g., W/K-m2)
 
      Returns
     -------
     cleaned_unit_str: str
         The schema_unit_str string value translated to a string value the Pint library unit registry can understand.
+        (e.g., W/(K*m2)
 
     """
     cleaned_unit_str = schema_unit_str
