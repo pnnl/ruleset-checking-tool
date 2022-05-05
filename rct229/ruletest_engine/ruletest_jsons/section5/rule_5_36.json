@@ -1,14 +1,14 @@
 {
-    "rule-5-34-a": {
+    "rule-5-36-a": {
         "Section": 5,
-        "Rule": 34,
+        "Rule": 36,
         "Test": "a",
-        "test_description": "Building includes a conditioned zone that has two roof surfaces one of which has skylights. Skylight area in the proposed design is less than 3% of total roof area. Baseline skylight area is correctly modeled as equal to the skylight area in the proposed design.",
+        "test_description": "Building includes a conditioned zone that has two roof surfaces both of which have skylights. Each baseline subsurface's proportion of the building's total glazed area is equal to the proposed.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "5-34",
-            "ruleset_reference": "Table G3.1#5 baselnid column e. e. Skylights and Glazed Smoke Vents. Skylight area shall be\nequal to that in the proposed design or 3%, whichever is smaller.",
-            "rule_description": "If skylight area in the proposed desing is 3% or less of the roof surface, the skylight area shall be equal to that in the proposed design.",
+            "rule_id": "5-36",
+            "ruleset_reference": "Table G3.1#5 baselnid column e: Skylight orientation and tilt shall be the same as in the proposed design.",
+            "rule_description": "Skylight area must be allocated to surfaces in the same proportion in the baseline as in the proposed design; Skylight orientation and tilt shall be the same as in the proposed design.",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Proposed RMR",
@@ -61,10 +61,10 @@
                                                         "subsurfaces": [
                                                             {
                                                                 "id": "Subsurface 1",
-                                                                "glazed_area": 5.5741824,
-                                                                "opaque_area": 1.8580607999999998,
-                                                                "u_factor": 3.2366105565544463,
-                                                                "solar_heat_gain_coefficient": 0.5
+                                                                "classification": "SKYLIGHT",
+                                                                "glazed_area": 9.290303999999999,
+                                                                "opaque_area": 4.6451519999999995,
+                                                                "u_factor": 3.406958480583628
                                                             }
                                                         ]
                                                     },
@@ -72,7 +72,16 @@
                                                         "id": "Surface 2",
                                                         "adjacent_to": "EXTERIOR",
                                                         "tilt": 50,
-                                                        "area": 185.80607999999998
+                                                        "area": 185.80607999999998,
+                                                        "subsurfaces": [
+                                                            {
+                                                                "id": "Subsurface 2",
+                                                                "classification": "SKYLIGHT",
+                                                                "glazed_area": 83.612736,
+                                                                "opaque_area": 9.290303999999999,
+                                                                "u_factor": 3.406958480583628
+                                                            }
+                                                        ]
                                                     }
                                                 ]
                                             }
@@ -82,11 +91,11 @@
                                                 "id": "HVAC 1",
                                                 "cooling_system": {
                                                     "id": "Cooling System 1",
-                                                    "sensible_cool_capacity": 42204.0
+                                                    "sensible_cool_capacity": 35170.0
                                                 },
                                                 "heating_system": {
                                                     "id": "Heating System 1",
-                                                    "heat_capacity": 10257.488888888889
+                                                    "heat_capacity": 8792.133333333333
                                                 }
                                             }
                                         ]
@@ -141,10 +150,10 @@
                                                         "subsurfaces": [
                                                             {
                                                                 "id": "Subsurface 1",
-                                                                "glazed_area": 5.5741824,
-                                                                "opaque_area": 1.8580607999999998,
-                                                                "u_factor": 3.2366105565544463,
-                                                                "solar_heat_gain_coefficient": 0.5
+                                                                "classification": "SKYLIGHT",
+                                                                "glazed_area": 4.6451519999999995,
+                                                                "opaque_area": 2.3225759999999998,
+                                                                "u_factor": 3.406958480583628
                                                             }
                                                         ]
                                                     },
@@ -152,7 +161,16 @@
                                                         "id": "Surface 2",
                                                         "adjacent_to": "EXTERIOR",
                                                         "tilt": 50,
-                                                        "area": 185.80607999999998
+                                                        "area": 185.80607999999998,
+                                                        "subsurfaces": [
+                                                            {
+                                                                "id": "Subsurface 2",
+                                                                "classification": "SKYLIGHT",
+                                                                "glazed_area": 41.806368,
+                                                                "opaque_area": 4.6451519999999995,
+                                                                "u_factor": 3.406958480583628
+                                                            }
+                                                        ]
                                                     }
                                                 ]
                                             }
@@ -162,11 +180,11 @@
                                                 "id": "HVAC 1",
                                                 "cooling_system": {
                                                     "id": "Cooling System 1",
-                                                    "sensible_cool_capacity": 42204.0
+                                                    "sensible_cool_capacity": 35170.0
                                                 },
                                                 "heating_system": {
                                                     "id": "Heating System 1",
-                                                    "heat_capacity": 10257.488888888889
+                                                    "heat_capacity": 8792.133333333333
                                                 }
                                             }
                                         ]
@@ -179,16 +197,16 @@
             }
         }
     },
-    "rule-5-34-b": {
+    "rule-5-36-b": {
         "Section": 5,
-        "Rule": 34,
+        "Rule": 36,
         "Test": "b",
-        "test_description": "Building includes a conditioned zone that has two roof surfaces one of which has skylights. Skylight area in the proposed design is less than 3% of the total roof area. Baseline skylight area is not equal to the  skylight area in the proposed desiging, which is incorrect.",
+        "test_description": "Building includes a conditioned zone that has two roof surfaces both of which have skylights. Each baseline subsurface's proportion of the building's total glazed area is not equal to the proposed.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "5-34",
-            "ruleset_reference": "Table G3.1#5 baselnid column e. e. Skylights and Glazed Smoke Vents. Skylight area shall be\nequal to that in the proposed design or 3%, whichever is smaller.",
-            "rule_description": "If skylight area in the proposed desing is 3% or less of the roof surface, the skylight area shall be equal to that in the proposed design.",
+            "rule_id": "5-36",
+            "ruleset_reference": "Table G3.1#5 baselnid column e: Skylight orientation and tilt shall be the same as in the proposed design.",
+            "rule_description": "Skylight area must be allocated to surfaces in the same proportion in the baseline as in the proposed design; Skylight orientation and tilt shall be the same as in the proposed design.",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Proposed RMR",
@@ -241,10 +259,10 @@
                                                         "subsurfaces": [
                                                             {
                                                                 "id": "Subsurface 1",
-                                                                "glazed_area": 5.5741824,
-                                                                "opaque_area": 1.8580607999999998,
-                                                                "u_factor": 3.2366105565544463,
-                                                                "solar_heat_gain_coefficient": 0.5
+                                                                "classification": "SKYLIGHT",
+                                                                "glazed_area": 9.290303999999999,
+                                                                "opaque_area": 4.6451519999999995,
+                                                                "u_factor": 3.406958480583628
                                                             }
                                                         ]
                                                     },
@@ -252,7 +270,16 @@
                                                         "id": "Surface 2",
                                                         "adjacent_to": "EXTERIOR",
                                                         "tilt": 50,
-                                                        "area": 185.80607999999998
+                                                        "area": 185.80607999999998,
+                                                        "subsurfaces": [
+                                                            {
+                                                                "id": "Subsurface 2",
+                                                                "classification": "SKYLIGHT",
+                                                                "glazed_area": 83.612736,
+                                                                "opaque_area": 9.290303999999999,
+                                                                "u_factor": 3.406958480583628
+                                                            }
+                                                        ]
                                                     }
                                                 ]
                                             }
@@ -262,11 +289,11 @@
                                                 "id": "HVAC 1",
                                                 "cooling_system": {
                                                     "id": "Cooling System 1",
-                                                    "sensible_cool_capacity": 42204.0
+                                                    "sensible_cool_capacity": 35170.0
                                                 },
                                                 "heating_system": {
                                                     "id": "Heating System 1",
-                                                    "heat_capacity": 10257.488888888889
+                                                    "heat_capacity": 8792.133333333333
                                                 }
                                             }
                                         ]
@@ -321,10 +348,10 @@
                                                         "subsurfaces": [
                                                             {
                                                                 "id": "Subsurface 1",
-                                                                "glazed_area": 3.7161215999999997,
-                                                                "opaque_area": 1.8580607999999998,
-                                                                "u_factor": 3.2366105565544463,
-                                                                "solar_heat_gain_coefficient": 0.5
+                                                                "classification": "SKYLIGHT",
+                                                                "glazed_area": 4.6451519999999995,
+                                                                "opaque_area": 2.3225759999999998,
+                                                                "u_factor": 3.406958480583628
                                                             }
                                                         ]
                                                     },
@@ -332,7 +359,16 @@
                                                         "id": "Surface 2",
                                                         "adjacent_to": "EXTERIOR",
                                                         "tilt": 50,
-                                                        "area": 185.80607999999998
+                                                        "area": 185.80607999999998,
+                                                        "subsurfaces": [
+                                                            {
+                                                                "id": "Subsurface 2",
+                                                                "classification": "SKYLIGHT",
+                                                                "glazed_area": 83.612736,
+                                                                "opaque_area": 9.290303999999999,
+                                                                "u_factor": 3.406958480583628
+                                                            }
+                                                        ]
                                                     }
                                                 ]
                                             }
@@ -342,11 +378,11 @@
                                                 "id": "HVAC 1",
                                                 "cooling_system": {
                                                     "id": "Cooling System 1",
-                                                    "sensible_cool_capacity": 42204.0
+                                                    "sensible_cool_capacity": 35170.0
                                                 },
                                                 "heating_system": {
                                                     "id": "Heating System 1",
-                                                    "heat_capacity": 10257.488888888889
+                                                    "heat_capacity": 8792.133333333333
                                                 }
                                             }
                                         ]

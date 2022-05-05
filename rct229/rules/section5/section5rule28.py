@@ -57,7 +57,7 @@ class Section5Rule28(RuleDefinitionListIndexedBase):
         def list_filter(self, context_item, data=None):
             surface_b = context_item.baseline
 
-            return data["scc_dict_b"][surface_b["id"]] != SCC.UNREGULATED
+            return data["scc_dict_b"][surface_b["id"]] == SCC.UNREGULATED
 
         class UnregulatedSurfaceRule(RuleDefinitionListIndexedBase):
             def __init__(self):
