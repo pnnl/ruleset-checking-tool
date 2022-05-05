@@ -160,6 +160,6 @@ class Section5Rule36(RuleDefinitionListIndexedBase):
                         # both segments' skylight area ratios are the same
                         and std_equal(
                             total_skylight_area_surface_b / total_skylight_area_b,
-                            total_skylight_area_surface_p / total_skylight_area_p
+                            total_skylight_area_surface_p / total_skylight_area_p,
                         )
                     )
