@@ -67,7 +67,7 @@ class Section5Rule36(RuleDefinitionListIndexedBase):
             }
 
         class BuildingSegmentRule(RuleDefinitionListIndexedBase):
-            def __ceil__(self):
+            def __init__(self):
                 super(Section5Rule36.BuildingRule.BuildingSegmentRule, self).__init__(
                     rmrs_used=UserBaselineProposedVals(False, True, True),
                     each_rule=Section5Rule36.BuildingRule.BuildingSegmentRule.RoofRule(),
@@ -103,7 +103,7 @@ class Section5Rule36(RuleDefinitionListIndexedBase):
                         Section5Rule36.BuildingRule.BuildingSegmentRule.RoofRule,
                         self,
                     ).__init__(
-                        rmrs_used=UserBaselineProposedVals(False, True, False),
+                        rmrs_used=UserBaselineProposedVals(False, True, True),
                     )
 
                 def get_calc_vals(self, context, data=None):
@@ -150,13 +150,16 @@ class Section5Rule36(RuleDefinitionListIndexedBase):
 
                     return (
                         # both segments have no skylight area
-                        total_skylight_area_b == 0 and total_skylight_area_p == 0
+                        total_skylight_area_b == 0
+                        and total_skylight_area_p == 0
+                        and total_skylight_area_surface_b == 0
+                        and total_skylight_area_surface_p == 0
                     ) or (
                         # product to ensure neither is 0
                         total_skylight_area_b * total_skylight_area_p > 0
                         # both segments' skylight area ratios are the same
                         and std_equal(
-                            total_skylight_area_b / total_skylight_area_surface_b,
-                            total_skylight_area_p / total_skylight_area_surface_p,
+                            total_skylight_area_surface_b / total_skylight_area_b,
+                            total_skylight_area_surface_p / total_skylight_area_p
                         )
                     )
