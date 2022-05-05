@@ -25,7 +25,7 @@
                 },
                 "ruleset_model_instances": [
                     {
-                        "id": "RMR1",
+                        "id": "RMR 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
@@ -114,7 +114,7 @@
                 },
                 "ruleset_model_instances": [
                     {
-                        "id": "RMR1",
+                        "id": "RMR 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
@@ -152,7 +152,8 @@
                                                                 "id": "Subsurface 1",
                                                                 "classification": "SKYLIGHT",
                                                                 "glazed_area": 4.6451519999999995,
-                                                                "opaque_area": 2.3225759999999998
+                                                                "opaque_area": 2.3225759999999998,
+                                                                "u_factor": 3.406958480583628
                                                             }
                                                         ]
                                                     },
@@ -166,7 +167,8 @@
                                                                 "id": "Subsurface 2",
                                                                 "classification": "SKYLIGHT",
                                                                 "glazed_area": 41.806368,
-                                                                "opaque_area": 4.6451519999999995
+                                                                "opaque_area": 4.6451519999999995,
+                                                                "u_factor": 3.406958480583628
                                                             }
                                                         ]
                                                     }
@@ -221,7 +223,7 @@
                 },
                 "ruleset_model_instances": [
                     {
-                        "id": "RMR1",
+                        "id": "RMR 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
@@ -310,7 +312,7 @@
                 },
                 "ruleset_model_instances": [
                     {
-                        "id": "RMR1",
+                        "id": "RMR 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
@@ -348,7 +350,8 @@
                                                                 "id": "Subsurface 1",
                                                                 "classification": "SKYLIGHT",
                                                                 "glazed_area": 4.6451519999999995,
-                                                                "opaque_area": 2.3225759999999998
+                                                                "opaque_area": 2.3225759999999998,
+                                                                "u_factor": 3.406958480583628
                                                             }
                                                         ]
                                                     },
@@ -362,7 +365,8 @@
                                                                 "id": "Subsurface 2",
                                                                 "classification": "SKYLIGHT",
                                                                 "glazed_area": 83.612736,
-                                                                "opaque_area": 9.290303999999999
+                                                                "opaque_area": 9.290303999999999,
+                                                                "u_factor": 3.406958480583628
                                                             }
                                                         ]
                                                     }

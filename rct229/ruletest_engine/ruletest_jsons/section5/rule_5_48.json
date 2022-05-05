@@ -3,7 +3,7 @@
         "Section": 5,
         "Rule": 48,
         "Test": "a",
-        "test_description": "Air leakage rate at wind pressure in unenclosed and unconditioned spaces is not the same in the proposed design as in the user model",
+        "test_description": "Air leakage rate at wind pressure in unenclosed and unconditioned spaces is the same in the proposed design as in the user model",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-48",
@@ -25,7 +25,7 @@
                 },
                 "ruleset_model_instances": [
                     {
-                        "id": "RMR1",
+                        "id": "RMR 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
@@ -45,14 +45,6 @@
                                             }
                                         ]
                                     }
-                                ]
-                            }
-                        ],
-                        "schedules": [
-                            {
-                                "id": "Infiltration Schedule",
-                                "hourly_values": [
-                                    1
                                 ]
                             }
                         ]
@@ -67,7 +59,7 @@
                 },
                 "ruleset_model_instances": [
                     {
-                        "id": "RMR1",
+                        "id": "RMR 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
@@ -87,14 +79,6 @@
                                             }
                                         ]
                                     }
-                                ]
-                            }
-                        ],
-                        "schedules": [
-                            {
-                                "id": "Infiltration Schedule",
-                                "hourly_values": [
-                                    1
                                 ]
                             }
                         ]
@@ -129,7 +113,7 @@
                 },
                 "ruleset_model_instances": [
                     {
-                        "id": "RMR1",
+                        "id": "RMR 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
@@ -151,14 +135,6 @@
                                     }
                                 ]
                             }
-                        ],
-                        "schedules": [
-                            {
-                                "id": "Infiltration Schedule",
-                                "hourly_values": [
-                                    1
-                                ]
-                            }
                         ]
                     }
                 ]
@@ -171,7 +147,7 @@
                 },
                 "ruleset_model_instances": [
                     {
-                        "id": "RMR1",
+                        "id": "RMR 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
@@ -191,118 +167,6 @@
                                             }
                                         ]
                                     }
-                                ]
-                            }
-                        ],
-                        "schedules": [
-                            {
-                                "id": "Infiltration Schedule",
-                                "hourly_values": [
-                                    1
-                                ]
-                            }
-                        ]
-                    }
-                ]
-            }
-        }
-    },
-    "rule-5-48-c": {
-        "Section": 5,
-        "Rule": 48,
-        "Test": "c",
-        "test_description": "Air leakage schedule in unenclosed and unconditioned spaces is not the same in the proposed design as in the user model",
-        "expected_rule_outcome": "fail",
-        "standard": {
-            "rule_id": "5-48",
-            "ruleset_reference": "Table G3.1 #1, Baseline column: The baseline building design shall be developed by modifying the proposed design as described in Section G3. Except as specifically instructed, all building systems and equipment shall be modeled identically in the proposed design and baseline building design.",
-            "rule_description": "The air leakage rate in unconditioned and unenclosed spaces must be the same in the baseline and proposed design",
-            "applicable_rmr": "Baseline RMR",
-            "rule_assertion": "=",
-            "comparison_value": "Proposed RMR",
-            "rule_dependency": "1. Baseline heating and cooling capacities are established correctly (air-side HVAC rule TBD). This affects baseline space conditioning categories",
-            "primary_rule": "Y",
-            "schema_version": "0.0.12"
-        },
-        "rmr_transformations": {
-            "proposed": {
-                "id": "ASHRAE229",
-                "weather": {
-                    "climate_zone": "CZ4A",
-                    "data_source_type": "OTHER"
-                },
-                "ruleset_model_instances": [
-                    {
-                        "id": "RMR1",
-                        "buildings": [
-                            {
-                                "id": "Building 1",
-                                "building_open_schedule": "Required Schedule 1",
-                                "building_segments": [
-                                    {
-                                        "id": "Building Segment 1",
-                                        "zones": [
-                                            {
-                                                "id": "Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
-                                                "infiltration": {
-                                                    "id": "Infiltration 1",
-                                                    "measured_air_leakage_rate": 4.009193529983999
-                                                }
-                                            }
-                                        ]
-                                    }
-                                ]
-                            }
-                        ],
-                        "schedules": [
-                            {
-                                "id": "Infiltration Schedule",
-                                "hourly_values": [
-                                    0.8
-                                ]
-                            }
-                        ]
-                    }
-                ]
-            },
-            "baseline": {
-                "id": "ASHRAE229",
-                "weather": {
-                    "climate_zone": "CZ4A",
-                    "data_source_type": "OTHER"
-                },
-                "ruleset_model_instances": [
-                    {
-                        "id": "RMR1",
-                        "buildings": [
-                            {
-                                "id": "Building 1",
-                                "building_open_schedule": "Required Schedule 1",
-                                "building_segments": [
-                                    {
-                                        "id": "Building Segment 1",
-                                        "zones": [
-                                            {
-                                                "id": "Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
-                                                "infiltration": {
-                                                    "id": "Infiltration 1",
-                                                    "measured_air_leakage_rate": 4.009193529983999
-                                                }
-                                            }
-                                        ]
-                                    }
-                                ]
-                            }
-                        ],
-                        "schedules": [
-                            {
-                                "id": "Infiltration Schedule",
-                                "hourly_values": [
-                                    1
                                 ]
                             }
                         ]
