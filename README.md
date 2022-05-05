@@ -37,9 +37,12 @@ The core functionality of the RCT is the evaluation of logic defining each rule 
 ### Software Testing Workflow
 
 The RCT validation and verification software test suite is run using the *<ADD IN FUTURE>* command.  This command composes RMR triplets for each of the Rule Tests and then evaluates each RMR triplet for the corresponding Rule Definition using the same rule engine as the Project Testing Workflow.  A report is provided that details any Rule Tests that provided unexpected results.
+
 #### Rule Tests
 The test cases for the Software Testing Workflow are defined in the Rule Test JSON files.  These files are located in the [rct229/ruletest_engine/ruletest_jsons](rct229/ruletest_engine/ruletest_jsons) directory.  The Rule Tests are contained within JSON files that define the related Rule Definition, the RMR transformation to apply, and the expected outcome of the test evaluation.  The JSON files can be generated using an Excel spreadsheet and Python scripts.  This process is described in the [Rule Test JSON Generation Guide](rct229/ruletest_engine/Ruletest_JSON_Generation_Guide.md).
+
 ## Developing the RCT
+
 ### Commands
 The following provides some useful commands as you get started developing the RCT package.
 
@@ -85,6 +88,7 @@ Before committing changes you should run the following commands from the `rulese
 
 #### Mocking functions for pytests:
 - For an explanation of how to specify `<module>` in `patch("<module>.<imported_thing>")` see: https://medium.com/@durgaswaroop/writing-better-tests-in-python-with-pytest-mock-part-2-92b828e1453c
+
 
 ## Disclaimer Notice      
 This material was prepared as an account of work sponsored by an agency of the United States Government.  Neither the United States Government nor the United States Department of Energy, nor Battelle, nor any of their employees, nor any jurisdiction or organization that has cooperated in the development of these materials, makes any warranty, express or implied, or assumes any legal liability or responsibility for the accuracy, completeness, or usefulness or any information, apparatus, product, software, or process disclosed, or represents that its use would not infringe privately owned rights.
