@@ -7948,7 +7948,7 @@
         "Section": 5,
         "Rule": 37,
         "Test": "a",
-        "test_description": "Building is located in climate zone 4A. It includes a semiheated zone based on heating and cooling capacity of the HVAC system that servies it. Skylight area in the building is 0%-2.0%. The baseline skylight U-factor is established correctly.",
+        "test_description": "Building is located in climate zone 4A. It includes a zone with residential occupancy type that is conditioned based on heating and cooling capacity of the HVAC system that servies it. Skylight area in the building is 0%-2.0%. The baseline skylight U-factor is established correctly.\n\n",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-37",
@@ -8043,7 +8043,7 @@
         "Section": 5,
         "Rule": 37,
         "Test": "b",
-        "test_description": "Building is located in climate zone 4A. It includes a semiheated zone based on heating and cooling capacity of the HVAC system that servies it. Skylight area in the building is 0%-2.0%. The baseline skylight U-factor is established correctly.",
+        "test_description": "Building is located in climate zone 4A. It includes a zone with residential occupancy type that is conditioned based on heating and cooling capacity of the HVAC system that servies it. Skylight area in the building is 0%-2.0%. The baseline skylight U-factor is not established correctly.\n\n",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-37",
@@ -8138,7 +8138,7 @@
         "Section": 5,
         "Rule": 37,
         "Test": "c",
-        "test_description": "Building is located in climate zone 4A. It includes a semiheated zone based on heating and cooling capacity of the HVAC system that servies it. Skylight area in the building is 0%-2.0%. The baseline skylight U-factor is established correctly.",
+        "test_description": "Building is located in climate zone 4A. It includes a zone with non-residential occupancy type that is conditioned based on heating and cooling capacity of the HVAC system that servies it. Skylight area in the building is 0%-2.0%. The baseline skylight U-factor is established correctly.\n\n",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-37",
@@ -8233,8 +8233,8 @@
         "Section": 5,
         "Rule": 37,
         "Test": "d",
-        "test_description": "Building is located in climate zone 4A. It includes a semiheated zone based on heating and cooling capacity of the HVAC system that servies it. Skylight area in the building is 0%-2.0%. The baseline skylight U-factor is established correctly.",
-        "expected_rule_outcome": "fail",
+        "test_description": "Building is located in climate zone 4A. It includes a zone with non-residential occupancy type that is conditioned based on heating and cooling capacity of the HVAC system that servies it. Skylight area in the building is 0%-2.0%. The baseline skylight U-factor is established correctly.\n\n",
+        "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-37",
             "ruleset_reference": "Table G3.1#5 baseline column e: Skylight U-factor \u2026 shall match the appropriate requirements in Tables G3.4-1 through G3.4-8 using the value and the applicable skylight percentage.",
@@ -8328,8 +8328,8 @@
         "Section": 5,
         "Rule": 37,
         "Test": "e",
-        "test_description": "Building is located in climate zone 4A. It includes a semiheated zone based on heating and cooling capacity of the HVAC system that servies it. Skylight area in the building is 0%-2.0%. The baseline skylight U-factor is established correctly.",
-        "expected_rule_outcome": "pass",
+        "test_description": "Building is located in climate zone 4A. It includes a semiheated zone based on heating and cooling capacity of the HVAC system that servies it. Skylight area in the building is 0%-2.0%. The baseline skylight U-factor is not established correctly.\n\n",
+        "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-37",
             "ruleset_reference": "Table G3.1#5 baseline column e: Skylight U-factor \u2026 shall match the appropriate requirements in Tables G3.4-1 through G3.4-8 using the value and the applicable skylight percentage.",
@@ -8422,7 +8422,7 @@
         "Section": 5,
         "Rule": 37,
         "Test": "f",
-        "test_description": "Building is located in climate zone 4A. It includes a semiheated zone based on heating and cooling capacity of the HVAC system that servies it. Skylight area in the building is 0%-2.0%. The baseline skylight U-factor is established correctly.",
+        "test_description": "Building is located in climate zone 4A. It includes a semiheated zone based on heating and cooling capacity of the HVAC system that servies it. Skylight area in the building is 0%-2.0%. The baseline skylight U-factor is established correctly.\n\n",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-37",
