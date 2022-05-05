@@ -48,7 +48,7 @@
                                                 "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
                                                 "infiltration": {
                                                     "id": "Infiltration 1",
-                                                    "measured_air_leakage_rate": 4.009193529983999
+                                                    "infiltration_flow_rate": 4.009193529983999
                                                 },
 												"surfaces": [
                                                     {
@@ -101,7 +101,7 @@
                                                 "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
                                                 "infiltration": {
                                                     "id": "Infiltration 1",
-                                                    "measured_air_leakage_rate": 4.009193529983999
+                                                    "infiltration_flow_rate": 4.009193529983999
                                                 },
 												"surfaces": [
                                                     {
@@ -174,7 +174,7 @@
                                                 "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
                                                 "infiltration": {
                                                     "id": "Infiltration 1",
-                                                    "measured_air_leakage_rate": 7.282620996019198
+                                                    "infiltration_flow_rate": 7.282620996019198
                                                 },
 												"surfaces": [
                                                     {
@@ -227,7 +227,7 @@
                                                 "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
                                                 "infiltration": {
                                                     "id": "Infiltration 1",
-                                                    "measured_air_leakage_rate": 4.009193529983999
+                                                    "infiltration_flow_rate": 4.009193529983999
                                                 },
 												"surfaces": [
                                                     {

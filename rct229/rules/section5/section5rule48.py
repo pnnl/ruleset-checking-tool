@@ -7,7 +7,6 @@ from rct229.ruleset_functions.get_zone_conditioning_category_dict import (
     get_zone_conditioning_category_dict,
 )
 from rct229.utils.jsonpath_utils import find_all
-from rct229.utils.match_lists import match_lists_by_id
 
 
 class Section5Rule48(RuleDefinitionListIndexedBase):
@@ -55,35 +54,27 @@ class Section5Rule48(RuleDefinitionListIndexedBase):
                     rmrs_used=UserBaselineProposedVals(False, True, True),
                     required_fields={
                         "$..zones[*]": ["infiltration"],
-                        "$..infiltration[*]": ["measured_air_leakage_rate"],
+                        "$..infiltration[*]": ["infiltration_flow_rate"],
                     },
                 )
 
             def get_calc_vals(self, context, data=None):
-                building_b = context.baseline
-                building_p = context.proposed
+                zone_b = context.baseline
+                zone_p = context.proposed
 
-                baseline_zones = find_all("$..zones[*]", building_b)
-                proposed_zones = find_all("$..zones[*]", building_p)
+                baseline_zones = find_all("$..zones[*]", zone_b)
+                proposed_zones = find_all("$..zones[*]", zone_p)
 
-                matched_baseline_zones = match_lists_by_id(
-                    proposed_zones, baseline_zones
-                )
-                proposed_baseline_zone_pairs = zip(
-                    proposed_zones, matched_baseline_zones
-                )
-
-                for (p_zone, b_zone) in proposed_baseline_zone_pairs:
-                    if data["scc_dict_b"][b_zone["id"]] in [
-                        "UNENCLOSED",
-                        "UNCONDITIONED",
-                    ]:
-                        zone_b_infiltration = b_zone["infiltration"][
-                            "measured_air_leakage_rate"
-                        ]
-                        zone_p_infiltration = p_zone["infiltration"][
-                            "measured_air_leakage_rate"
-                        ]
+                if data["scc_dict_b"][baseline_zones[0]["id"]] in [
+                    "UNENCLOSED",
+                    "UNCONDITIONED",
+                ]:
+                    zone_b_infiltration = baseline_zones[0]["infiltration"][
+                        "infiltration_flow_rate"
+                    ]
+                    zone_p_infiltration = proposed_zones[0]["infiltration"][
+                        "infiltration_flow_rate"
+                    ]
 
                 return {
                     "baseline_infiltration": zone_b_infiltration,
