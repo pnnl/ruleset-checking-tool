@@ -36,8 +36,6 @@
                                         "zones": [
                                             {
                                                 "id": "Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
 												"volume": 21.237634943999996,
 												"spaces": [
                                                     {
@@ -46,6 +44,8 @@
                                                         "floor_area": 23.225759999999998
                                                     }
                                                 ],
+                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
                                                 "infiltration": {
                                                     "id": "Infiltration 1",
                                                     "measured_air_leakage_rate": 4.009193529983999
@@ -89,8 +89,6 @@
                                         "zones": [
                                             {
                                                 "id": "Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
 												"volume": 21.237634943999996,
 												"spaces": [
                                                     {
@@ -99,6 +97,8 @@
                                                         "floor_area": 23.225759999999998
                                                     }
                                                 ],
+                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
                                                 "infiltration": {
                                                     "id": "Infiltration 1",
                                                     "measured_air_leakage_rate": 4.009193529983999
@@ -162,8 +162,6 @@
                                         "zones": [
                                             {
                                                 "id": "Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
 												"volume": 21.237634943999996,
 												"spaces": [
                                                     {
@@ -172,6 +170,8 @@
                                                         "floor_area": 23.225759999999998
                                                     }
                                                 ],
+                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
                                                 "infiltration": {
                                                     "id": "Infiltration 1",
                                                     "measured_air_leakage_rate": 7.282620996019198
