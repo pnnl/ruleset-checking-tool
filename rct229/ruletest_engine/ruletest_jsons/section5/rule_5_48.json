@@ -3,7 +3,7 @@
         "Section": 5,
         "Rule": 48,
         "Test": "a",
-        "test_description": "Air leakage rate at wind pressure in unenclosed and unconditioned spaces is not the same in the proposed design as in the user model",
+        "test_description": "Air leakage rate at wind pressure in unenclosed and unconditioned spaces is the same in the proposed design as in the user model",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-48",
@@ -35,23 +35,12 @@
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
-                                                "id": "zone_1",
+                                                "id": "Zone 1",
                                                 "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
                                                 "infiltration": {
                                                     "id": "Infiltration 1",
-                                                    "infiltration_flow_rate": 0.8495
-                                                }
-                                            }
-                                        ],
-                                        "heating_ventilation_air_conditioning_systems": [
-                                            {
-                                                "id": "HVAC 1",
-                                                "cooling_system": {
-                                                    "id": "Cooling System 1"
-                                                },
-                                                "heating_system": {
-                                                    "id": "Heating System 1"
+                                                    "measured_air_leakage_rate": 4.009193529983999
                                                 }
                                             }
                                         ]
@@ -80,23 +69,12 @@
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
-                                                "id": "zone_1",
+                                                "id": "Zone 1",
                                                 "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
                                                 "infiltration": {
                                                     "id": "Infiltration 1",
-                                                    "infiltration_flow_rate": 0.8495
-                                                }
-                                            }
-                                        ],
-                                        "heating_ventilation_air_conditioning_systems": [
-                                            {
-                                                "id": "HVAC 1",
-                                                "cooling_system": {
-                                                    "id": "Cooling System 1"
-                                                },
-                                                "heating_system": {
-                                                    "id": "Heating System 1"
+                                                    "measured_air_leakage_rate": 4.009193529983999
                                                 }
                                             }
                                         ]
@@ -145,23 +123,12 @@
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
-                                                "id": "zone_1",
+                                                "id": "Zone 1",
                                                 "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
                                                 "infiltration": {
-                                                    "id": "infiltration_1",
-                                                    "infiltration_flow_rate": 0.8495
-                                                }
-                                            }
-                                        ],
-                                        "heating_ventilation_air_conditioning_systems": [
-                                            {
-                                                "id": "HVAC 1",
-                                                "cooling_system": {
-                                                    "id": "Cooling System 1"
-                                                },
-                                                "heating_system": {
-                                                    "id": "Heating System 1"
+                                                    "id": "Infiltration 1",
+                                                    "measured_air_leakage_rate": 7.282620996019198
                                                 }
                                             }
                                         ]
@@ -190,23 +157,12 @@
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
-                                                "id": "zone_1",
+                                                "id": "Zone 1",
                                                 "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
                                                 "infiltration": {
-                                                    "id": "infiltration_1",
-                                                    "infiltration_flow_rate": 1.5341
-                                                }
-                                            }
-                                        ],
-                                        "heating_ventilation_air_conditioning_systems": [
-                                            {
-                                                "id": "HVAC 1",
-                                                "cooling_system": {
-                                                    "id": "Cooling System 1"
-                                                },
-                                                "heating_system": {
-                                                    "id": "Heating System 1"
+                                                    "id": "Infiltration 1",
+                                                    "measured_air_leakage_rate": 4.009193529983999
                                                 }
                                             }
                                         ]
