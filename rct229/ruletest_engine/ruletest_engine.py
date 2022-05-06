@@ -500,5 +500,5 @@ def run_envelope_tests():
     """
 
     envelope_test_json = "envelope_tests.json"
-    
+
     return run_section_tests(envelope_test_json)
