@@ -587,23 +587,23 @@ class RuleDefinitionBase:
         This base implementation simply returns the value of
         self.fail_msg, which defaults to the empty string.
 
-                This method should only be overridden if there is more than one string
-                used for the PASS or FAIL case. A fixed string can be given in the
-                `fail_msg` field passed to the initializer.
+        This method should only be overridden if there is more than one string
+        used for the PASS or FAIL case. A fixed string can be given in the
+        `fail_msg` field passed to the initializer.
 
-                Parameters
-                ----------
-                context : UserBaselineProposedVals
-                    Object containing the contexts for the user, baseline, and proposed RMRs
-                calc_vals : dict or None
+        Parameters
+        ----------
+        context : UserBaselineProposedVals
+            Object containing the contexts for the user, baseline, and proposed RMRs
+        calc_vals : dict or None
 
-                data : An optional data object. It is ignored by this base implementation.
+        data : An optional data object. It is ignored by this base implementation.
 
-                Returns
-                -------
-                str
-                    The message associated with the Pass or Fail case
-                """
+        Returns
+        -------
+        str
+            The message associated with the Pass or Fail case
+        """
 
         return self.fail_msg
 

@@ -84,5 +84,5 @@ class Section5Rule40(RuleDefinitionListIndexedBase):
             def rule_check(self, context, calc_vals=None, data=None):
                 return std_equal(
                     TARGET_ABSORPTANCE_THERMAL_EXTERIOR,
-                    calc_vals["obsorptance_thermal_exterior"]
+                    calc_vals["obsorptance_thermal_exterior"],
                 )

@@ -150,7 +150,8 @@ class Section5Rule36(RuleDefinitionListIndexedBase):
 
                     return (
                         # both segments have no skylight area
-                        total_skylight_area_b == 0 and total_skylight_area_p == 0
+                        total_skylight_area_b == 0
+                        and total_skylight_area_p == 0
                     ) or (
                         # product to ensure neither is 0
                         total_skylight_area_b * total_skylight_area_p > 0
