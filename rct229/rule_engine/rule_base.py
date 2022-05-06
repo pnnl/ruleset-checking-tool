@@ -659,9 +659,6 @@ class RuleDefinitionListBase(RuleDefinitionBase):
         An inheriting rule can override this function to reduce the context list that
         is returned from create_context_list.
 
-        NOTE: when overriding this function, it is important to know that rmd scope for none-index rmd, could be NONE.
-        It is recommended to add a NONE check for those rmd scope.
-
         Parameters
         ----------
         context_item : dict
