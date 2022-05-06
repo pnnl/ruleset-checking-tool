@@ -1,4 +1,5 @@
 from rct229.utils.assertions import RCTFailureException, assert_
+from rct229.utils.std_comparisons import std_equal
 
 REGULAR_YEAR_HOURS = 8760
 LEAP_YEAR_HOURS = 8784
@@ -45,28 +46,28 @@ def compare_schedules(
         f"Failed when comparing hourly schedules with target number of hours. target number of hour: {num_hours}, number of hours of schedule_1 : {len(schedule_1)}; number of hours of schedule_2: {len(schedule_2)}; number of hours of mask_schedule: {len(mask_schedule)}",
     )
 
-    total_hours_compared = 0.0
+    total_hours_compared = 0
     eflh_schedule_1 = 0.0
     eflh_schedule_2 = 0.0
-    total_hours_match = 0.0
+    total_hours_matched = 0
     for index, hourly_value in enumerate(mask_schedule):
         if hourly_value == 1:
             total_hours_compared += 1
             eflh_schedule_1 += schedule_1[index]
             eflh_schedule_2 += schedule_2[index]
             if schedule_1[index] == schedule_2[index]:
-                total_hours_match += 1
+                total_hours_matched += 1
         elif hourly_value == 2:
             total_hours_compared += 1
             eflh_schedule_1 += schedule_1[index]
             eflh_schedule_2 += schedule_2[index] * comparison_factor
-            if schedule_1[index] == schedule_2[index] * comparison_factor:
-                total_hours_match += 1
+            if std_equal(schedule_1[index], schedule_2[index] * comparison_factor):
+                total_hours_matched += 1
 
     eflh_difference = eflh_schedule_1 - eflh_schedule_2
 
     return {
         "total_hours_compared": total_hours_compared,
-        "total_hours_match": total_hours_match,
+        "total_hours_matched": total_hours_matched,
         "eflh_difference": eflh_difference,
     }

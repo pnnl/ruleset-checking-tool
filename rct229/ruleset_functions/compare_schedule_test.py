@@ -18,7 +18,7 @@ def test__Test_Schedule_Compare_Success_1():
     )
     assert (
         results["total_hours_compared"] == 8760.0
-        and results["total_hours_match"] == 8760.0
+        and results["total_hours_matched"] == 8760.0
         and results["eflh_difference"] == 0
     )
 
@@ -37,7 +37,7 @@ def test__Test_Schedule_Compare_Success_2():
     )
     assert (
         results["total_hours_compared"] == 8760.0
-        and results["total_hours_match"] == 8760.0
+        and results["total_hours_matched"] == 8760.0
         and results["eflh_difference"] == 0
     )
 
@@ -56,7 +56,7 @@ def test__Test_Schedule_Compare_Success_3():
     )
     assert (
         results["total_hours_compared"] == 8760.0
-        and results["total_hours_match"] == 0.0
+        and results["total_hours_matched"] == 0.0
         and abs(results["eflh_difference"] - (8760 - 8760 * 0.8)) <= 0.001
     )
 
@@ -74,7 +74,7 @@ def test__Test_Schedule_Compare_Success_4():
     results = compare_schedules(schedule_1, schedule_2, mask_schedule, multiplier, True)
     assert (
         results["total_hours_compared"] == 8784.0
-        and results["total_hours_match"] == 8784.0
+        and results["total_hours_matched"] == 8784.0
         and results["eflh_difference"] == 0
     )
 
