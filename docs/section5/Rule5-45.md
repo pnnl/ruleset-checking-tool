@@ -28,7 +28,7 @@
 
     - Get zone infiltration in P_RMR: `infiltration_p = zone_p.infiltration`
 
-      - Compare infiltration schedules in B_RMR and P_RMR: `compare_schedules_result_dictionary = compare_schedules(infiltration_b.multiplier_schedule, infiltration_p.multiplier_schedule, always_1_schedule, 1)`
+      - Compare infiltration schedules in B_RMR and P_RMR: `compare_schedules_result_dictionary = compare_schedules(infiltration_b.multiplier_schedule, infiltration_p.multiplier_schedule, always_1_schedule, 1, is_leap_year)`
 
       **Rule Assertion:**  
 

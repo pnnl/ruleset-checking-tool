@@ -5928,321 +5928,7 @@
             }
         }
     },
-    "rule-5-44-a": {
-        "Section": 5,
-        "Rule": 44,
-        "Test": "a",
-        "test_description": "weather_driven infiltration modeling method is used",
-        "expected_rule_outcome": "pass",
-        "standard": {
-            "rule_id": "5-44",
-            "ruleset_reference": "Table G3.1 #5 (b) proposed column: Infiltration shall be modeled using... adjustments for weather and building operation. These adjustments shall be made for each simulation time step and must account for but not be limited to weather conditions and HVAC system operation, including strategies that are\nintended to positively pressurize the building.",
-            "rule_description": "The  infiltration modeling method in the baseline includes adjustment for weather and building operation. ",
-            "applicable_rmr": "Baseline RMR",
-            "rule_assertion": "=",
-            "comparison_value": "Expected Value",
-            "rule_dependency": "1. Baseline heating and cooling capacities are established correctly (air-side HVAC rule TBD). This affects baseline space conditioning categories",
-            "primary_rule": "Y",
-            "schema_version": "0.0.12"
-        },
-        "rmr_transformations": {
-            "baseline": {
-                "id": "ASHRAE229",
-                "ruleset_model_instances": [
-                    {
-                        "id": "RMR 1",
-                        "buildings": [
-                            {
-                                "id": "Building 1",
-                                "building_open_schedule": "Required Schedule 1",
-                                "building_segments": [
-                                    {
-                                        "id": "Building Segment 1",
-                                        "zones": [
-                                            {
-                                                "id": "zone_1",
-                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
-                                                "infiltration": {
-                                                    "id": "Infiltration 1",
-                                                    "modeling_method": "WEATHER_DRIVEN"
-                                                }
-                                            }
-                                        ]
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                ]
-            }
-        }
-    },
-    "rule-5-44-b": {
-        "Section": 5,
-        "Rule": 44,
-        "Test": "b",
-        "test_description": "pressure_based infiltration modeling method is used",
-        "expected_rule_outcome": "pass",
-        "standard": {
-            "rule_id": "5-44",
-            "ruleset_reference": "Table G3.1 #5 (b) proposed column: Infiltration shall be modeled using... adjustments for weather and building operation. These adjustments shall be made for each simulation time step and must account for but not be limited to weather conditions and HVAC system operation, including strategies that are\nintended to positively pressurize the building.",
-            "rule_description": "The  infiltration modeling method in the baseline includes adjustment for weather and building operation. ",
-            "applicable_rmr": "Baseline RMR",
-            "rule_assertion": "=",
-            "comparison_value": "Expected Value",
-            "rule_dependency": "1. Baseline heating and cooling capacities are established correctly (air-side HVAC rule TBD). This affects baseline space conditioning categories",
-            "primary_rule": "Y",
-            "schema_version": "0.0.12"
-        },
-        "rmr_transformations": {
-            "baseline": {
-                "id": "ASHRAE229",
-                "ruleset_model_instances": [
-                    {
-                        "id": "RMR 1",
-                        "buildings": [
-                            {
-                                "id": "Building 1",
-                                "building_open_schedule": "Required Schedule 1",
-                                "building_segments": [
-                                    {
-                                        "id": "Building Segment 1",
-                                        "zones": [
-                                            {
-                                                "id": "zone_1",
-                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
-                                                "infiltration": {
-                                                    "id": "Infiltration 1",
-                                                    "modeling_method": "PRESSURE_BASED"
-                                                }
-                                            }
-                                        ]
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                ]
-            }
-        }
-    },
-    "rule-5-44-c": {
-        "Section": 5,
-        "Rule": 44,
-        "Test": "c",
-        "test_description": "constant infiltration modeling method is used",
-        "expected_rule_outcome": "fail",
-        "standard": {
-            "rule_id": "5-44",
-            "ruleset_reference": "Table G3.1 #5 (b) proposed column: Infiltration shall be modeled using... adjustments for weather and building operation. These adjustments shall be made for each simulation time step and must account for but not be limited to weather conditions and HVAC system operation, including strategies that are\nintended to positively pressurize the building.",
-            "rule_description": "The  infiltration modeling method in the baseline includes adjustment for weather and building operation. ",
-            "applicable_rmr": "Baseline RMR",
-            "rule_assertion": "=",
-            "comparison_value": "Expected Value",
-            "rule_dependency": "1. Baseline heating and cooling capacities are established correctly (air-side HVAC rule TBD). This affects baseline space conditioning categories",
-            "primary_rule": "Y",
-            "schema_version": "0.0.12"
-        },
-        "rmr_transformations": {
-            "baseline": {
-                "id": "ASHRAE229",
-                "ruleset_model_instances": [
-                    {
-                        "id": "RMR 1",
-                        "buildings": [
-                            {
-                                "id": "Building 1",
-                                "building_open_schedule": "Required Schedule 1",
-                                "building_segments": [
-                                    {
-                                        "id": "Building Segment 1",
-                                        "zones": [
-                                            {
-                                                "id": "zone_1",
-                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
-                                                "infiltration": {
-                                                    "id": "Infiltration 1",
-                                                    "modeling_method": "CONSTANT"
-                                                }
-                                            }
-                                        ]
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                ]
-            }
-        }
-    },
-    "rule-5-46-a": {
-        "Section": 5,
-        "Rule": 46,
-        "Test": "a",
-        "test_description": "The proposed infiltration modeling method is the same as the baseline infiltration modeling method",
-        "expected_rule_outcome": "pass",
-        "standard": {
-            "rule_id": "5-46",
-            "ruleset_reference": "Table G3.1 #5 (b) proposed column: Infiltration shall be modeled using the same methodology\nand adjustments for weather and building operation in both the proposed design and the baseline building design. ",
-            "rule_description": "The Infiltration shall be modeled using the same methodology and adjustments for weather and building operation in both the proposed design and the baseline building design.",
-            "applicable_rmr": "Proposed RMR",
-            "rule_assertion": "=",
-            "comparison_value": "Baseline RMR",
-            "rule_dependency": "None",
-            "primary_rule": "Y",
-            "schema_version": "0.0.12"
-        },
-        "rmr_transformations": {
-            "proposed": {
-                "id": "ASHRAE229",
-                "ruleset_model_instances": [
-                    {
-                        "id": "RMR 1",
-                        "buildings": [
-                            {
-                                "id": "Building 1",
-                                "building_open_schedule": "Required Schedule 1",
-                                "building_segments": [
-                                    {
-                                        "id": "Building Segment 1",
-                                        "zones": [
-                                            {
-                                                "id": "zone_1",
-                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
-                                                "infiltration": {
-                                                    "id": "Infiltration 1",
-                                                    "modeling_method": "WEATHER_DRIVEN",
-                                                    "algorithm_name": "AIR-CHANGE"
-                                                }
-                                            }
-                                        ]
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                ]
-            },
-            "baseline": {
-                "id": "ASHRAE229",
-                "ruleset_model_instances": [
-                    {
-                        "id": "RMR 1",
-                        "buildings": [
-                            {
-                                "id": "Building 1",
-                                "building_open_schedule": "Required Schedule 1",
-                                "building_segments": [
-                                    {
-                                        "id": "Building Segment 1",
-                                        "zones": [
-                                            {
-                                                "id": "zone_1",
-                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
-                                                "infiltration": {
-                                                    "id": "Infiltration 1",
-                                                    "modeling_method": "WEATHER_DRIVEN",
-                                                    "algorithm_name": "AIR-CHANGE"
-                                                }
-                                            }
-                                        ]
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                ]
-            }
-        }
-    },
-    "rule-5-46-b": {
-        "Section": 5,
-        "Rule": 46,
-        "Test": "b",
-        "test_description": "The proposed infiltration modeling method is the same as the baseline infiltration modeling method",
-        "expected_rule_outcome": "fail",
-        "standard": {
-            "rule_id": "5-46",
-            "ruleset_reference": "Table G3.1 #5 (b) proposed column: Infiltration shall be modeled using the same methodology\nand adjustments for weather and building operation in both the proposed design and the baseline building design. ",
-            "rule_description": "The Infiltration shall be modeled using the same methodology and adjustments for weather and building operation in both the proposed design and the baseline building design.",
-            "applicable_rmr": "Proposed RMR",
-            "rule_assertion": "=",
-            "comparison_value": "Baseline RMR",
-            "rule_dependency": "None",
-            "primary_rule": "Y",
-            "schema_version": "0.0.12"
-        },
-        "rmr_transformations": {
-            "proposed": {
-                "id": "ASHRAE229",
-                "ruleset_model_instances": [
-                    {
-                        "id": "RMR 1",
-                        "buildings": [
-                            {
-                                "id": "Building 1",
-                                "building_open_schedule": "Required Schedule 1",
-                                "building_segments": [
-                                    {
-                                        "id": "Building Segment 1",
-                                        "zones": [
-                                            {
-                                                "id": "zone_1",
-                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
-                                                "infiltration": {
-                                                    "id": "Infiltration 1",
-                                                    "modeling_method": "WEATHER_DRIVEN",
-                                                    "algorithm_name": "ASHRAE-ENHANCED"
-                                                }
-                                            }
-                                        ]
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                ]
-            },
-            "baseline": {
-                "id": "ASHRAE229",
-                "ruleset_model_instances": [
-                    {
-                        "id": "RMR 1",
-                        "buildings": [
-                            {
-                                "id": "Building 1",
-                                "building_open_schedule": "Required Schedule 1",
-                                "building_segments": [
-                                    {
-                                        "id": "Building Segment 1",
-                                        "zones": [
-                                            {
-                                                "id": "zone_1",
-                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
-                                                "infiltration": {
-                                                    "id": "Infiltration 1",
-                                                    "modeling_method": "WEATHER_DRIVEN",
-                                                    "algorithm_name": "AIR-CHANGE"
-                                                }
-                                            }
-                                        ]
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                ]
-            }
-        }
-    },
-    "rule5-28-a": {
+    "rule-5-28-a": {
         "Section": 5,
         "Rule": 28,
         "Test": "a",
@@ -6268,7 +5954,7 @@
                 },
                 "ruleset_model_instances": [
                     {
-                        "id": "RMR1",
+                        "id": "RMR 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
@@ -6347,7 +6033,7 @@
                 },
                 "ruleset_model_instances": [
                     {
-                        "id": "RMR1",
+                        "id": "RMR 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
@@ -6420,7 +6106,7 @@
             }
         }
     },
-    "rule5-28-b": {
+    "rule-5-28-b": {
         "Section": 5,
         "Rule": 28,
         "Test": "b",
@@ -6446,7 +6132,7 @@
                 },
                 "ruleset_model_instances": [
                     {
-                        "id": "RMR1",
+                        "id": "RMR 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
@@ -6525,7 +6211,7 @@
                 },
                 "ruleset_model_instances": [
                     {
-                        "id": "RMR1",
+                        "id": "RMR 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
@@ -6598,7 +6284,7 @@
             }
         }
     },
-    "rule5-28-c": {
+    "rule-5-28-c": {
         "Section": 5,
         "Rule": 28,
         "Test": "c",
@@ -6624,7 +6310,7 @@
                 },
                 "ruleset_model_instances": [
                     {
-                        "id": "RMR1",
+                        "id": "RMR 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
@@ -6703,7 +6389,7 @@
                 },
                 "ruleset_model_instances": [
                     {
-                        "id": "RMR1",
+                        "id": "RMR 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
@@ -6776,7 +6462,7 @@
             }
         }
     },
-    "rule5-28-d": {
+    "rule-5-28-d": {
         "Section": 5,
         "Rule": 28,
         "Test": "d",
@@ -6802,7 +6488,7 @@
                 },
                 "ruleset_model_instances": [
                     {
-                        "id": "RMR1",
+                        "id": "RMR 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
@@ -6881,7 +6567,7 @@
                 },
                 "ruleset_model_instances": [
                     {
-                        "id": "RMR1",
+                        "id": "RMR 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
@@ -6954,7 +6640,7 @@
             }
         }
     },
-    "rule5-31-a": {
+    "rule-5-31-a": {
         "Section": 5,
         "Rule": 31,
         "Test": "a",
@@ -6976,7 +6662,7 @@
                 "id": "ASHRAE229",
                 "ruleset_model_instances": [
                     {
-                        "id": "RMR1",
+                        "id": "RMR 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
@@ -7013,7 +6699,7 @@
                 "id": "ASHRAE229",
                 "ruleset_model_instances": [
                     {
-                        "id": "RMR1",
+                        "id": "RMR 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
@@ -7070,7 +6756,7 @@
                 "id": "ASHRAE229",
                 "ruleset_model_instances": [
                     {
-                        "id": "RMR1",
+                        "id": "RMR 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
@@ -7107,7 +6793,7 @@
                 "id": "ASHRAE229",
                 "ruleset_model_instances": [
                     {
-                        "id": "RMR1",
+                        "id": "RMR 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
@@ -7168,7 +6854,7 @@
                 },
                 "ruleset_model_instances": [
                     {
-                        "id": "RMR1",
+                        "id": "RMR 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
@@ -7248,7 +6934,7 @@
                 },
                 "ruleset_model_instances": [
                     {
-                        "id": "RMR1",
+                        "id": "RMR 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
@@ -7348,7 +7034,7 @@
                 },
                 "ruleset_model_instances": [
                     {
-                        "id": "RMR1",
+                        "id": "RMR 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
@@ -7428,7 +7114,7 @@
                 },
                 "ruleset_model_instances": [
                     {
-                        "id": "RMR1",
+                        "id": "RMR 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
@@ -7528,7 +7214,7 @@
                 },
                 "ruleset_model_instances": [
                     {
-                        "id": "RMR1",
+                        "id": "RMR 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
@@ -7608,7 +7294,7 @@
                 },
                 "ruleset_model_instances": [
                     {
-                        "id": "RMR1",
+                        "id": "RMR 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
@@ -7682,7 +7368,7 @@
             }
         }
     },
-    "rule5-35-b": {
+    "rule-5-35-b": {
         "Section": 5,
         "Rule": 35,
         "Test": "b",
@@ -7708,7 +7394,7 @@
                 },
                 "ruleset_model_instances": [
                     {
-                        "id": "RMR1",
+                        "id": "RMR 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
@@ -7788,7 +7474,7 @@
                 },
                 "ruleset_model_instances": [
                     {
-                        "id": "RMR1",
+                        "id": "RMR 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
@@ -7851,6 +7537,1524 @@
                                                     "id": "Heating System 1",
                                                     "heat_capacity": 10257.488888888889
                                                 }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    },
+    "rule-5-36-a": {
+        "Section": 5,
+        "Rule": 36,
+        "Test": "a",
+        "test_description": "Building includes a conditioned zone that has two roof surfaces both of which have skylights. Each baseline subsurface's proportion of the building's total glazed area is equal to the proposed.",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "5-36",
+            "ruleset_reference": "Table G3.1#5 baselnid column e: Skylight orientation and tilt shall be the same as in the proposed design.",
+            "rule_description": "Skylight area must be allocated to surfaces in the same proportion in the baseline as in the proposed design; Skylight orientation and tilt shall be the same as in the proposed design.",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Proposed RMR",
+            "rule_dependency": "None",
+            "primary_rule": "Y",
+            "schema_version": "0.0.12"
+        },
+        "rmr_transformations": {
+            "proposed": {
+                "id": "ASHRAE229",
+                "weather": {
+                    "climate_zone": "CZ4A",
+                    "data_source_type": "OTHER"
+                },
+                "ruleset_model_instances": [
+                    {
+                        "id": "RMR 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_open_schedule": "Required Schedule 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Zone 1",
+                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
+                                                "volume": 21.237634943999996,
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "occupant_multiplier_schedule": "Required Occupancy Sched 1",
+                                                        "floor_area": 23.225759999999998
+                                                    }
+                                                ],
+                                                "terminals": [
+                                                    {
+                                                        "id": "Terminal 1",
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
+                                                    }
+                                                ],
+                                                "surfaces": [
+                                                    {
+                                                        "id": "Surface 1",
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 30,
+                                                        "area": 92.90303999999999,
+                                                        "subsurfaces": [
+                                                            {
+                                                                "id": "Subsurface 1",
+                                                                "classification": "SKYLIGHT",
+                                                                "glazed_area": 9.290303999999999,
+                                                                "opaque_area": 4.6451519999999995,
+                                                                "u_factor": 3.406958480583628
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "id": "Surface 2",
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 50,
+                                                        "area": 185.80607999999998,
+                                                        "subsurfaces": [
+                                                            {
+                                                                "id": "Subsurface 2",
+                                                                "classification": "SKYLIGHT",
+                                                                "glazed_area": 83.612736,
+                                                                "opaque_area": 9.290303999999999,
+                                                                "u_factor": 3.406958480583628
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilation_air_conditioning_systems": [
+                                            {
+                                                "id": "HVAC 1",
+                                                "cooling_system": {
+                                                    "id": "Cooling System 1",
+                                                    "sensible_cool_capacity": 35170.0
+                                                },
+                                                "heating_system": {
+                                                    "id": "Heating System 1",
+                                                    "heat_capacity": 8792.133333333333
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            "baseline": {
+                "id": "ASHRAE229",
+                "weather": {
+                    "climate_zone": "CZ4A",
+                    "data_source_type": "OTHER"
+                },
+                "ruleset_model_instances": [
+                    {
+                        "id": "RMR 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_open_schedule": "Required Schedule 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Zone 1",
+                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
+                                                "volume": 21.237634943999996,
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "occupant_multiplier_schedule": "Required Occupancy Sched 1",
+                                                        "floor_area": 23.225759999999998
+                                                    }
+                                                ],
+                                                "terminals": [
+                                                    {
+                                                        "id": "Terminal 1",
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
+                                                    }
+                                                ],
+                                                "surfaces": [
+                                                    {
+                                                        "id": "Surface 1",
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 30,
+                                                        "area": 92.90303999999999,
+                                                        "subsurfaces": [
+                                                            {
+                                                                "id": "Subsurface 1",
+                                                                "classification": "SKYLIGHT",
+                                                                "glazed_area": 4.6451519999999995,
+                                                                "opaque_area": 2.3225759999999998,
+                                                                "u_factor": 3.406958480583628
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "id": "Surface 2",
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 50,
+                                                        "area": 185.80607999999998,
+                                                        "subsurfaces": [
+                                                            {
+                                                                "id": "Subsurface 2",
+                                                                "classification": "SKYLIGHT",
+                                                                "glazed_area": 41.806368,
+                                                                "opaque_area": 4.6451519999999995,
+                                                                "u_factor": 3.406958480583628
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilation_air_conditioning_systems": [
+                                            {
+                                                "id": "HVAC 1",
+                                                "cooling_system": {
+                                                    "id": "Cooling System 1",
+                                                    "sensible_cool_capacity": 35170.0
+                                                },
+                                                "heating_system": {
+                                                    "id": "Heating System 1",
+                                                    "heat_capacity": 8792.133333333333
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    },
+    "rule-5-36-b": {
+        "Section": 5,
+        "Rule": 36,
+        "Test": "b",
+        "test_description": "Building includes a conditioned zone that has two roof surfaces both of which have skylights. Each baseline subsurface's proportion of the building's total glazed area is not equal to the proposed.",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "5-36",
+            "ruleset_reference": "Table G3.1#5 baselnid column e: Skylight orientation and tilt shall be the same as in the proposed design.",
+            "rule_description": "Skylight area must be allocated to surfaces in the same proportion in the baseline as in the proposed design; Skylight orientation and tilt shall be the same as in the proposed design.",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Proposed RMR",
+            "rule_dependency": "None",
+            "primary_rule": "Y",
+            "schema_version": "0.0.12"
+        },
+        "rmr_transformations": {
+            "proposed": {
+                "id": "ASHRAE229",
+                "weather": {
+                    "climate_zone": "CZ4A",
+                    "data_source_type": "OTHER"
+                },
+                "ruleset_model_instances": [
+                    {
+                        "id": "RMR 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_open_schedule": "Required Schedule 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Zone 1",
+                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
+                                                "volume": 21.237634943999996,
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "occupant_multiplier_schedule": "Required Occupancy Sched 1",
+                                                        "floor_area": 23.225759999999998
+                                                    }
+                                                ],
+                                                "terminals": [
+                                                    {
+                                                        "id": "Terminal 1",
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
+                                                    }
+                                                ],
+                                                "surfaces": [
+                                                    {
+                                                        "id": "Surface 1",
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 30,
+                                                        "area": 92.90303999999999,
+                                                        "subsurfaces": [
+                                                            {
+                                                                "id": "Subsurface 1",
+                                                                "classification": "SKYLIGHT",
+                                                                "glazed_area": 9.290303999999999,
+                                                                "opaque_area": 4.6451519999999995,
+                                                                "u_factor": 3.406958480583628
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "id": "Surface 2",
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 50,
+                                                        "area": 185.80607999999998,
+                                                        "subsurfaces": [
+                                                            {
+                                                                "id": "Subsurface 2",
+                                                                "classification": "SKYLIGHT",
+                                                                "glazed_area": 83.612736,
+                                                                "opaque_area": 9.290303999999999,
+                                                                "u_factor": 3.406958480583628
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilation_air_conditioning_systems": [
+                                            {
+                                                "id": "HVAC 1",
+                                                "cooling_system": {
+                                                    "id": "Cooling System 1",
+                                                    "sensible_cool_capacity": 35170.0
+                                                },
+                                                "heating_system": {
+                                                    "id": "Heating System 1",
+                                                    "heat_capacity": 8792.133333333333
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            "baseline": {
+                "id": "ASHRAE229",
+                "weather": {
+                    "climate_zone": "CZ4A",
+                    "data_source_type": "OTHER"
+                },
+                "ruleset_model_instances": [
+                    {
+                        "id": "RMR 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_open_schedule": "Required Schedule 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Zone 1",
+                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
+                                                "volume": 21.237634943999996,
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "occupant_multiplier_schedule": "Required Occupancy Sched 1",
+                                                        "floor_area": 23.225759999999998
+                                                    }
+                                                ],
+                                                "terminals": [
+                                                    {
+                                                        "id": "Terminal 1",
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
+                                                    }
+                                                ],
+                                                "surfaces": [
+                                                    {
+                                                        "id": "Surface 1",
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 30,
+                                                        "area": 92.90303999999999,
+                                                        "subsurfaces": [
+                                                            {
+                                                                "id": "Subsurface 1",
+                                                                "classification": "SKYLIGHT",
+                                                                "glazed_area": 4.6451519999999995,
+                                                                "opaque_area": 2.3225759999999998,
+                                                                "u_factor": 3.406958480583628
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "id": "Surface 2",
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 50,
+                                                        "area": 185.80607999999998,
+                                                        "subsurfaces": [
+                                                            {
+                                                                "id": "Subsurface 2",
+                                                                "classification": "SKYLIGHT",
+                                                                "glazed_area": 83.612736,
+                                                                "opaque_area": 9.290303999999999,
+                                                                "u_factor": 3.406958480583628
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilation_air_conditioning_systems": [
+                                            {
+                                                "id": "HVAC 1",
+                                                "cooling_system": {
+                                                    "id": "Cooling System 1",
+                                                    "sensible_cool_capacity": 35170.0
+                                                },
+                                                "heating_system": {
+                                                    "id": "Heating System 1",
+                                                    "heat_capacity": 8792.133333333333
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    },
+    "rule-5-37-a": {
+        "Section": 5,
+        "Rule": 37,
+        "Test": "a",
+        "test_description": "Building is located in climate zone 4A. It includes a zone with residential occupancy type that is conditioned based on heating and cooling capacity of the HVAC system that servies it. Skylight area in the building is 0%-2.0%. The baseline skylight U-factor is established correctly.",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "5-37",
+            "ruleset_reference": "Table G3.1#5 baseline column e: Skylight U-factor \u2026 shall match the appropriate requirements in Tables G3.4-1 through G3.4-8 using the value and the applicable skylight percentage.",
+            "rule_description": "Skylight U-factors for residential, non-residential and semiheated spaces in the baseline model must match the appropriate requirements in Table G3.4-1 through G3.4-8",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": "1. Baseline heating and cooling capacities are established correctly (air-side HVAC rule TBD). This affects baseline space conditioning categories\n2. Baseline skylight area is established correctly (Rules 34,35)",
+            "primary_rule": "Y",
+            "schema_version": "0.0.12"
+        },
+        "rmr_transformations": {
+            "baseline": {
+                "id": "ASHRAE229",
+                "weather": {
+                    "climate_zone": "CZ4A",
+                    "data_source_type": "OTHER"
+                },
+                "ruleset_model_instances": [
+                    {
+                        "id": "RMR 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_open_schedule": "Required Schedule 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Zone 1",
+                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
+                                                "volume": 21.237634943999996,
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "occupant_multiplier_schedule": "Required Occupancy Sched 1",
+                                                        "lighting_space_type": "DWELLING_UNIT",
+                                                        "floor_area": 23.225759999999998
+                                                    }
+                                                ],
+                                                "terminals": [
+                                                    {
+                                                        "id": "Terminal 1",
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
+                                                    }
+                                                ],
+                                                "surfaces": [
+                                                    {
+                                                        "id": "Surface 1",
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 30,
+                                                        "area": 929.0303999999999,
+                                                        "subsurfaces": [
+                                                            {
+                                                                "id": "Subsurface 1",
+                                                                "classification": "SKYLIGHT",
+                                                                "glazed_area": 4.6451519999999995,
+                                                                "opaque_area": 0.9290303999999999,
+                                                                "u_factor": 3.293393197897507
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilation_air_conditioning_systems": [
+                                            {
+                                                "id": "HVAC 1",
+                                                "cooling_system": {
+                                                    "id": "Cooling System 1",
+                                                    "sensible_cool_capacity": 35170.0
+                                                },
+                                                "heating_system": {
+                                                    "id": "Heating System 1",
+                                                    "heat_capacity": 9378.275555555556
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    },
+    "rule-5-37-b": {
+        "Section": 5,
+        "Rule": 37,
+        "Test": "b",
+        "test_description": "Building is located in climate zone 4A. It includes a zone with residential occupancy type that is conditioned based on heating and cooling capacity of the HVAC system that servies it. Skylight area in the building is 0%-2.0%. The baseline skylight U-factor is not established correctly.",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "5-37",
+            "ruleset_reference": "Table G3.1#5 baseline column e: Skylight U-factor \u2026 shall match the appropriate requirements in Tables G3.4-1 through G3.4-8 using the value and the applicable skylight percentage.",
+            "rule_description": "Skylight U-factors for residential, non-residential and semiheated spaces in the baseline model must match the appropriate requirements in Table G3.4-1 through G3.4-8",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": "1. Baseline heating and cooling capacities are established correctly (air-side HVAC rule TBD). This affects baseline space conditioning categories\n2. Baseline skylight area is established correctly (Rules 34,35)",
+            "primary_rule": "Y",
+            "schema_version": "0.0.12"
+        },
+        "rmr_transformations": {
+            "baseline": {
+                "id": "ASHRAE229",
+                "weather": {
+                    "climate_zone": "CZ4A",
+                    "data_source_type": "OTHER"
+                },
+                "ruleset_model_instances": [
+                    {
+                        "id": "RMR 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_open_schedule": "Required Schedule 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Zone 1",
+                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
+                                                "volume": 21.237634943999996,
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "occupant_multiplier_schedule": "Required Occupancy Sched 1",
+                                                        "lighting_space_type": "DWELLING_UNIT",
+                                                        "floor_area": 23.225759999999998
+                                                    }
+                                                ],
+                                                "terminals": [
+                                                    {
+                                                        "id": "Terminal 1",
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
+                                                    }
+                                                ],
+                                                "surfaces": [
+                                                    {
+                                                        "id": "Surface 1",
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 30,
+                                                        "area": 929.0303999999999,
+                                                        "subsurfaces": [
+                                                            {
+                                                                "id": "Subsurface 1",
+                                                                "classification": "SKYLIGHT",
+                                                                "glazed_area": 4.6451519999999995,
+                                                                "opaque_area": 0.9290303999999999,
+                                                                "u_factor": 3.918002252671172
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilation_air_conditioning_systems": [
+                                            {
+                                                "id": "HVAC 1",
+                                                "cooling_system": {
+                                                    "id": "Cooling System 1",
+                                                    "sensible_cool_capacity": 35170.0
+                                                },
+                                                "heating_system": {
+                                                    "id": "Heating System 1",
+                                                    "heat_capacity": 9378.275555555556
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    },
+    "rule-5-37-c": {
+        "Section": 5,
+        "Rule": 37,
+        "Test": "c",
+        "test_description": "Building is located in climate zone 4A. It includes a zone with non-residential occupancy type that is conditioned based on heating and cooling capacity of the HVAC system that servies it. Skylight area in the building is 0%-2.0%. The baseline skylight U-factor is established correctly.",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "5-37",
+            "ruleset_reference": "Table G3.1#5 baseline column e: Skylight U-factor \u2026 shall match the appropriate requirements in Tables G3.4-1 through G3.4-8 using the value and the applicable skylight percentage.",
+            "rule_description": "Skylight U-factors for residential, non-residential and semiheated spaces in the baseline model must match the appropriate requirements in Table G3.4-1 through G3.4-8",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": "1. Baseline heating and cooling capacities are established correctly (air-side HVAC rule TBD). This affects baseline space conditioning categories\n2. Baseline skylight area is established correctly (Rules 34,35)",
+            "primary_rule": "Y",
+            "schema_version": "0.0.12"
+        },
+        "rmr_transformations": {
+            "baseline": {
+                "id": "ASHRAE229",
+                "weather": {
+                    "climate_zone": "CZ4A",
+                    "data_source_type": "OTHER"
+                },
+                "ruleset_model_instances": [
+                    {
+                        "id": "RMR 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_open_schedule": "Required Schedule 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Zone 1",
+                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
+                                                "volume": 21.237634943999996,
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "occupant_multiplier_schedule": "Required Occupancy Sched 1",
+                                                        "lighting_space_type": "OFFICE_ENCLOSED",
+                                                        "floor_area": 23.225759999999998
+                                                    }
+                                                ],
+                                                "terminals": [
+                                                    {
+                                                        "id": "Terminal 1",
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
+                                                    }
+                                                ],
+                                                "surfaces": [
+                                                    {
+                                                        "id": "Surface 1",
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 30,
+                                                        "area": 929.0303999999999,
+                                                        "subsurfaces": [
+                                                            {
+                                                                "id": "Subsurface 1",
+                                                                "classification": "SKYLIGHT",
+                                                                "glazed_area": 4.6451519999999995,
+                                                                "opaque_area": 0.9290303999999999,
+                                                                "u_factor": 3.918002252671172
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilation_air_conditioning_systems": [
+                                            {
+                                                "id": "HVAC 1",
+                                                "cooling_system": {
+                                                    "id": "Cooling System 1",
+                                                    "sensible_cool_capacity": 35170.0
+                                                },
+                                                "heating_system": {
+                                                    "id": "Heating System 1",
+                                                    "heat_capacity": 9378.275555555556
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    },
+    "rule-5-37-d": {
+        "Section": 5,
+        "Rule": 37,
+        "Test": "d",
+        "test_description": "Building is located in climate zone 4A. It includes a zone with non-residential occupancy type that is conditioned based on heating and cooling capacity of the HVAC system that servies it. Skylight area in the building is 0%-2.0%. The baseline skylight U-factor is established correctly.",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "5-37",
+            "ruleset_reference": "Table G3.1#5 baseline column e: Skylight U-factor \u2026 shall match the appropriate requirements in Tables G3.4-1 through G3.4-8 using the value and the applicable skylight percentage.",
+            "rule_description": "Skylight U-factors for residential, non-residential and semiheated spaces in the baseline model must match the appropriate requirements in Table G3.4-1 through G3.4-8",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": "1. Baseline heating and cooling capacities are established correctly (air-side HVAC rule TBD). This affects baseline space conditioning categories\n2. Baseline skylight area is established correctly (Rules 34,35)",
+            "primary_rule": "Y",
+            "schema_version": "0.0.12"
+        },
+        "rmr_transformations": {
+            "baseline": {
+                "id": "ASHRAE229",
+                "weather": {
+                    "climate_zone": "CZ4A",
+                    "data_source_type": "OTHER"
+                },
+                "ruleset_model_instances": [
+                    {
+                        "id": "RMR 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_open_schedule": "Required Schedule 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Zone 1",
+                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
+                                                "volume": 21.237634943999996,
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "occupant_multiplier_schedule": "Required Occupancy Sched 1",
+                                                        "lighting_space_type": "OFFICE_ENCLOSED",
+                                                        "floor_area": 23.225759999999998
+                                                    }
+                                                ],
+                                                "terminals": [
+                                                    {
+                                                        "id": "Terminal 1",
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
+                                                    }
+                                                ],
+                                                "surfaces": [
+                                                    {
+                                                        "id": "Surface 1",
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 30,
+                                                        "area": 929.0303999999999,
+                                                        "subsurfaces": [
+                                                            {
+                                                                "id": "Subsurface 1",
+                                                                "classification": "SKYLIGHT",
+                                                                "glazed_area": 4.6451519999999995,
+                                                                "opaque_area": 0.9290303999999999,
+                                                                "u_factor": 3.918002252671172
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilation_air_conditioning_systems": [
+                                            {
+                                                "id": "HVAC 1",
+                                                "cooling_system": {
+                                                    "id": "Cooling System 1",
+                                                    "sensible_cool_capacity": 35170.0
+                                                },
+                                                "heating_system": {
+                                                    "id": "Heating System 1",
+                                                    "heat_capacity": 9378.275555555556
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    },
+    "rule-5-37-e": {
+        "Section": 5,
+        "Rule": 37,
+        "Test": "e",
+        "test_description": "Building is located in climate zone 4A. It includes a semiheated zone based on heating and cooling capacity of the HVAC system that servies it. Skylight area in the building is 0%-2.0%. The baseline skylight U-factor is not established correctly.\n\n",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "5-37",
+            "ruleset_reference": "Table G3.1#5 baseline column e: Skylight U-factor \u2026 shall match the appropriate requirements in Tables G3.4-1 through G3.4-8 using the value and the applicable skylight percentage.",
+            "rule_description": "Skylight U-factors for residential, non-residential and semiheated spaces in the baseline model must match the appropriate requirements in Table G3.4-1 through G3.4-8",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": "1. Baseline heating and cooling capacities are established correctly (air-side HVAC rule TBD). This affects baseline space conditioning categories\n2. Baseline skylight area is established correctly (Rules 34,35)",
+            "primary_rule": "Y",
+            "schema_version": "0.0.12"
+        },
+        "rmr_transformations": {
+            "baseline": {
+                "id": "ASHRAE229",
+                "weather": {
+                    "climate_zone": "CZ4A",
+                    "data_source_type": "OTHER"
+                },
+                "ruleset_model_instances": [
+                    {
+                        "id": "RMR 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_open_schedule": "Required Schedule 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Zone 1",
+                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
+                                                "volume": 21.237634943999996,
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "occupant_multiplier_schedule": "Required Occupancy Sched 1",
+                                                        "floor_area": 23.225759999999998
+                                                    }
+                                                ],
+                                                "terminals": [
+                                                    {
+                                                        "id": "Terminal 1",
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
+                                                    }
+                                                ],
+                                                "surfaces": [
+                                                    {
+                                                        "id": "Surface 1",
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 30,
+                                                        "area": 929.0303999999999,
+                                                        "subsurfaces": [
+                                                            {
+                                                                "id": "Subsurface 1",
+                                                                "classification": "SKYLIGHT",
+                                                                "glazed_area": 4.6451519999999995,
+                                                                "opaque_area": 0.9290303999999999,
+                                                                "u_factor": 7.722439222656224
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilation_air_conditioning_systems": [
+                                            {
+                                                "id": "HVAC 1",
+                                                "cooling_system": {
+                                                    "id": "Cooling System 1",
+                                                    "sensible_cool_capacity": 0.0
+                                                },
+                                                "heating_system": {
+                                                    "id": "Heating System 1",
+                                                    "heat_capacity": 699.8538133333334
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    },
+    "rule-5-37-f": {
+        "Section": 5,
+        "Rule": 37,
+        "Test": "f",
+        "test_description": "Building is located in climate zone 4A. It includes a semiheated zone based on heating and cooling capacity of the HVAC system that servies it. Skylight area in the building is 0%-2.0%. The baseline skylight U-factor is established correctly.",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "5-37",
+            "ruleset_reference": "Table G3.1#5 baseline column e: Skylight U-factor \u2026 shall match the appropriate requirements in Tables G3.4-1 through G3.4-8 using the value and the applicable skylight percentage.",
+            "rule_description": "Skylight U-factors for residential, non-residential and semiheated spaces in the baseline model must match the appropriate requirements in Table G3.4-1 through G3.4-8",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": "1. Baseline heating and cooling capacities are established correctly (air-side HVAC rule TBD). This affects baseline space conditioning categories\n2. Baseline skylight area is established correctly (Rules 34,35)",
+            "primary_rule": "Y",
+            "schema_version": "0.0.12"
+        },
+        "rmr_transformations": {
+            "baseline": {
+                "id": "ASHRAE229",
+                "weather": {
+                    "climate_zone": "CZ4A",
+                    "data_source_type": "OTHER"
+                },
+                "ruleset_model_instances": [
+                    {
+                        "id": "RMR 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_open_schedule": "Required Schedule 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Zone 1",
+                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
+                                                "volume": 21.237634943999996,
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "occupant_multiplier_schedule": "Required Occupancy Sched 1",
+                                                        "floor_area": 23.225759999999998
+                                                    }
+                                                ],
+                                                "terminals": [
+                                                    {
+                                                        "id": "Terminal 1",
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
+                                                    }
+                                                ],
+                                                "surfaces": [
+                                                    {
+                                                        "id": "Surface 1",
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 30,
+                                                        "area": 929.0303999999999,
+                                                        "subsurfaces": [
+                                                            {
+                                                                "id": "Subsurface 1",
+                                                                "classification": "SKYLIGHT",
+                                                                "glazed_area": 4.6451519999999995,
+                                                                "opaque_area": 0.9290303999999999,
+                                                                "u_factor": 3.293393197897507
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilation_air_conditioning_systems": [
+                                            {
+                                                "id": "HVAC 1",
+                                                "cooling_system": {
+                                                    "id": "Cooling System 1",
+                                                    "sensible_cool_capacity": 0.0
+                                                },
+                                                "heating_system": {
+                                                    "id": "Heating System 1",
+                                                    "heat_capacity": 699.8538133333334
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    },
+    "rule-5-44-a": {
+        "Section": 5,
+        "Rule": 44,
+        "Test": "a",
+        "test_description": "weather_driven infiltration modeling method is used",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "5-44",
+            "ruleset_reference": "Table G3.1 #5 (b) proposed column: Infiltration shall be modeled using... adjustments for weather and building operation. These adjustments shall be made for each simulation time step and must account for but not be limited to weather conditions and HVAC system operation, including strategies that are\nintended to positively pressurize the building.",
+            "rule_description": "The  infiltration modeling method in the baseline includes adjustment for weather and building operation. ",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": "1. Baseline heating and cooling capacities are established correctly (air-side HVAC rule TBD). This affects baseline space conditioning categories",
+            "primary_rule": "Y",
+            "schema_version": "0.0.12"
+        },
+        "rmr_transformations": {
+            "baseline": {
+                "id": "ASHRAE229",
+                "ruleset_model_instances": [
+                    {
+                        "id": "RMR 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_open_schedule": "Required Schedule 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Zone 1",
+                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
+                                                "infiltration": {
+                                                    "id": "Infiltration 1",
+                                                    "modeling_method": "WEATHER_DRIVEN"
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    },
+    "rule-5-44-b": {
+        "Section": 5,
+        "Rule": 44,
+        "Test": "b",
+        "test_description": "pressure_based infiltration modeling method is used",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "5-44",
+            "ruleset_reference": "Table G3.1 #5 (b) proposed column: Infiltration shall be modeled using... adjustments for weather and building operation. These adjustments shall be made for each simulation time step and must account for but not be limited to weather conditions and HVAC system operation, including strategies that are\nintended to positively pressurize the building.",
+            "rule_description": "The  infiltration modeling method in the baseline includes adjustment for weather and building operation. ",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": "1. Baseline heating and cooling capacities are established correctly (air-side HVAC rule TBD). This affects baseline space conditioning categories",
+            "primary_rule": "Y",
+            "schema_version": "0.0.12"
+        },
+        "rmr_transformations": {
+            "baseline": {
+                "id": "ASHRAE229",
+                "ruleset_model_instances": [
+                    {
+                        "id": "RMR 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_open_schedule": "Required Schedule 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Zone 1",
+                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
+                                                "infiltration": {
+                                                    "id": "Infiltration 1",
+                                                    "modeling_method": "PRESSURE_BASED"
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    },
+    "rule-5-44-c": {
+        "Section": 5,
+        "Rule": 44,
+        "Test": "c",
+        "test_description": "constant infiltration modeling method is used",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "5-44",
+            "ruleset_reference": "Table G3.1 #5 (b) proposed column: Infiltration shall be modeled using... adjustments for weather and building operation. These adjustments shall be made for each simulation time step and must account for but not be limited to weather conditions and HVAC system operation, including strategies that are\nintended to positively pressurize the building.",
+            "rule_description": "The  infiltration modeling method in the baseline includes adjustment for weather and building operation. ",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": "1. Baseline heating and cooling capacities are established correctly (air-side HVAC rule TBD). This affects baseline space conditioning categories",
+            "primary_rule": "Y",
+            "schema_version": "0.0.12"
+        },
+        "rmr_transformations": {
+            "baseline": {
+                "id": "ASHRAE229",
+                "ruleset_model_instances": [
+                    {
+                        "id": "RMR 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_open_schedule": "Required Schedule 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Zone 1",
+                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
+                                                "infiltration": {
+                                                    "id": "Infiltration 1",
+                                                    "modeling_method": "CONSTANT"
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    },
+    "rule-5-46-a": {
+        "Section": 5,
+        "Rule": 46,
+        "Test": "a",
+        "test_description": "The proposed infiltration modeling method is the same as the baseline infiltration modeling method",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "5-46",
+            "ruleset_reference": "Table G3.1 #5 (b) proposed column: Infiltration shall be modeled using the same methodology\nand adjustments for weather and building operation in both the proposed design and the baseline building design. ",
+            "rule_description": "The Infiltration shall be modeled using the same methodology and adjustments for weather and building operation in both the proposed design and the baseline building design.",
+            "applicable_rmr": "Proposed RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Baseline RMR",
+            "rule_dependency": "None",
+            "primary_rule": "Y",
+            "schema_version": "0.0.12"
+        },
+        "rmr_transformations": {
+            "proposed": {
+                "id": "ASHRAE229",
+                "ruleset_model_instances": [
+                    {
+                        "id": "RMR 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_open_schedule": "Required Schedule 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Zone 1",
+                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
+                                                "infiltration": {
+                                                    "id": "Infiltration 1",
+                                                    "modeling_method": "WEATHER_DRIVEN",
+                                                    "algorithm_name": "AIR-CHANGE"
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            "baseline": {
+                "id": "ASHRAE229",
+                "ruleset_model_instances": [
+                    {
+                        "id": "RMR 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_open_schedule": "Required Schedule 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Zone 1",
+                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
+                                                "infiltration": {
+                                                    "id": "Infiltration 1",
+                                                    "modeling_method": "WEATHER_DRIVEN",
+                                                    "algorithm_name": "AIR-CHANGE"
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    },
+    "rule-5-46-b": {
+        "Section": 5,
+        "Rule": 46,
+        "Test": "b",
+        "test_description": "The proposed infiltration modeling method is the same as the baseline infiltration modeling method",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "5-46",
+            "ruleset_reference": "Table G3.1 #5 (b) proposed column: Infiltration shall be modeled using the same methodology\nand adjustments for weather and building operation in both the proposed design and the baseline building design. ",
+            "rule_description": "The Infiltration shall be modeled using the same methodology and adjustments for weather and building operation in both the proposed design and the baseline building design.",
+            "applicable_rmr": "Proposed RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Baseline RMR",
+            "rule_dependency": "None",
+            "primary_rule": "Y",
+            "schema_version": "0.0.12"
+        },
+        "rmr_transformations": {
+            "proposed": {
+                "id": "ASHRAE229",
+                "ruleset_model_instances": [
+                    {
+                        "id": "RMR 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_open_schedule": "Required Schedule 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Zone 1",
+                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
+                                                "infiltration": {
+                                                    "id": "Infiltration 1",
+                                                    "modeling_method": "WEATHER_DRIVEN",
+                                                    "algorithm_name": "ASHRAE-ENHANCED"
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            "baseline": {
+                "id": "ASHRAE229",
+                "ruleset_model_instances": [
+                    {
+                        "id": "RMR 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_open_schedule": "Required Schedule 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Zone 1",
+                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
+                                                "infiltration": {
+                                                    "id": "Infiltration 1",
+                                                    "modeling_method": "WEATHER_DRIVEN",
+                                                    "algorithm_name": "AIR-CHANGE"
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    },
+    "rule-5-48-a": {
+        "Section": 5,
+        "Rule": 48,
+        "Test": "a",
+        "test_description": "Air leakage rate at wind pressure in unenclosed and unconditioned spaces is the same in the proposed design as in the user model",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "5-48",
+            "ruleset_reference": "Table G3.1 #1, Baseline column: The baseline building design shall be developed by modifying the proposed design as described in Section G3. Except as specifically instructed, all building systems and equipment shall be modeled identically in the proposed design and baseline building design.",
+            "rule_description": "The air leakage rate in unconditioned and unenclosed spaces must be the same in the baseline and proposed design",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Proposed RMR",
+            "rule_dependency": "1. Baseline heating and cooling capacities are established correctly (air-side HVAC rule TBD). This affects baseline space conditioning categories",
+            "primary_rule": "Y",
+            "schema_version": "0.0.12"
+        },
+        "rmr_transformations": {
+            "proposed": {
+                "id": "ASHRAE229",
+                "weather": {
+                    "climate_zone": "CZ4A",
+                    "data_source_type": "OTHER"
+                },
+                "ruleset_model_instances": [
+                    {
+                        "id": "RMR 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_open_schedule": "Required Schedule 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Zone 1",
+                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
+                                                "volume": 21.237634943999996,
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "occupant_multiplier_schedule": "Required Occupancy Sched 1",
+                                                        "floor_area": 23.225759999999998
+                                                    }
+                                                ],
+                                                "infiltration": {
+                                                    "id": "Infiltration 1",
+                                                    "infiltration_flow_rate": 4.009193529983999
+                                                },
+                                                "surfaces": [
+                                                    {
+                                                        "id": "Surface 1",
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 90,
+                                                        "area": 929.0303999999999
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            "baseline": {
+                "id": "ASHRAE229",
+                "weather": {
+                    "climate_zone": "CZ4A",
+                    "data_source_type": "OTHER"
+                },
+                "ruleset_model_instances": [
+                    {
+                        "id": "RMR 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_open_schedule": "Required Schedule 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Zone 1",
+                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
+                                                "volume": 21.237634943999996,
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "occupant_multiplier_schedule": "Required Occupancy Sched 1",
+                                                        "floor_area": 23.225759999999998
+                                                    }
+                                                ],
+                                                "infiltration": {
+                                                    "id": "Infiltration 1",
+                                                    "infiltration_flow_rate": 4.009193529983999
+                                                },
+                                                "surfaces": [
+                                                    {
+                                                        "id": "Surface 1",
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 90,
+                                                        "area": 929.0303999999999
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    },
+    "rule-5-48-b": {
+        "Section": 5,
+        "Rule": 48,
+        "Test": "b",
+        "test_description": "Air leakage rate at wind pressure in unenclosed and unconditioned spaces is not the same in the proposed design as in the user model",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "5-48",
+            "ruleset_reference": "Table G3.1 #1, Baseline column: The baseline building design shall be developed by modifying the proposed design as described in Section G3. Except as specifically instructed, all building systems and equipment shall be modeled identically in the proposed design and baseline building design.",
+            "rule_description": "The air leakage rate in unconditioned and unenclosed spaces must be the same in the baseline and proposed design",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Proposed RMR",
+            "rule_dependency": "1. Baseline heating and cooling capacities are established correctly (air-side HVAC rule TBD). This affects baseline space conditioning categories",
+            "primary_rule": "Y",
+            "schema_version": "0.0.12"
+        },
+        "rmr_transformations": {
+            "proposed": {
+                "id": "ASHRAE229",
+                "weather": {
+                    "climate_zone": "CZ4A",
+                    "data_source_type": "OTHER"
+                },
+                "ruleset_model_instances": [
+                    {
+                        "id": "RMR 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_open_schedule": "Required Schedule 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Zone 1",
+                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
+                                                "volume": 21.237634943999996,
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "occupant_multiplier_schedule": "Required Occupancy Sched 1",
+                                                        "floor_area": 23.225759999999998
+                                                    }
+                                                ],
+                                                "infiltration": {
+                                                    "id": "Infiltration 1",
+                                                    "infiltration_flow_rate": 7.282620996019198
+                                                },
+                                                "surfaces": [
+                                                    {
+                                                        "id": "Surface 1",
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 90,
+                                                        "area": 929.0303999999999
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            "baseline": {
+                "id": "ASHRAE229",
+                "weather": {
+                    "climate_zone": "CZ4A",
+                    "data_source_type": "OTHER"
+                },
+                "ruleset_model_instances": [
+                    {
+                        "id": "RMR 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_open_schedule": "Required Schedule 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Zone 1",
+                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
+                                                "volume": 21.237634943999996,
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "occupant_multiplier_schedule": "Required Occupancy Sched 1",
+                                                        "floor_area": 23.225759999999998
+                                                    }
+                                                ],
+                                                "infiltration": {
+                                                    "id": "Infiltration 1",
+                                                    "infiltration_flow_rate": 4.009193529983999
+                                                },
+                                                "surfaces": [
+                                                    {
+                                                        "id": "Surface 1",
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 90,
+                                                        "area": 929.0303999999999
+                                                    }
+                                                ]
                                             }
                                         ]
                                     }
