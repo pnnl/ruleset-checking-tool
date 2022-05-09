@@ -502,6 +502,6 @@ def run_envelope_tests():
     """
 
     # envelope_test_json = "envelope_tests.json"
-    envelope_test_json = "section5/rule_5_19_fixed.json"
-    # envelope_test_json = "section5/rule_5_35.json"
+    envelope_test_json = "section5/rule_5_19.json"
+
     return run_section_tests(envelope_test_json)

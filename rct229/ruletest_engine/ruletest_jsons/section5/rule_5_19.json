@@ -3,7 +3,7 @@
         "Section": 5,
         "Rule": 19,
         "Test": "a",
-        "test_description": "Building area type = \"multifamily\"; building includes a conditioned zone that has two exterior walls with windows. Vertical fenestration area in the user model exceeds 40% of wall area of conditioned zone.  ",
+        "test_description": "Building area type = \"multifamily\"; building includes a conditioned zone that has two exterior walls with windows. Vertical fenestration area in the user model exceeds 40% of wall area of conditioned zone.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-19",
@@ -19,6 +19,10 @@
         "rmr_transformations": {
             "proposed": {
                 "id": "ASHRAE229",
+				"weather": {
+                    "climate_zone": "CZ4A",
+                    "data_source_type": "OTHER"
+                },
                 "ruleset_model_instances": [
                     {
                         "id": "RMR 1",
@@ -30,6 +34,7 @@
                                     {
                                         "id": "Building Segment 1",
                                         "area_type_vertical_fenestration": "OTHER",
+										"is_all_new": true,
                                         "zones": [
                                             {
                                                 "id": "Zone 1",
@@ -87,6 +92,10 @@
             },
             "baseline": {
                 "id": "ASHRAE229",
+				"weather": {
+                    "climate_zone": "CZ4A",
+                    "data_source_type": "OTHER"
+                },
                 "ruleset_model_instances": [
                     {
                         "id": "RMR 1",
@@ -98,6 +107,7 @@
                                     {
                                         "id": "Building Segment 1",
                                         "area_type_vertical_fenestration": "OTHER",
+										"is_all_new": true,
                                         "zones": [
                                             {
                                                 "id": "Zone 1",
@@ -175,6 +185,10 @@
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229",
+				"weather": {
+                    "climate_zone": "CZ4A",
+                    "data_source_type": "OTHER"
+                },
                 "ruleset_model_instances": [
                     {
                         "id": "RMR 1",
@@ -186,6 +200,7 @@
                                     {
                                         "id": "Building Segment 1",
                                         "area_type_vertical_fenestration": "OTHER",
+										"is_all_new": true,
                                         "zones": [
                                             {
                                                 "id": "Zone 1",
@@ -263,6 +278,10 @@
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229",
+				"weather": {
+                    "climate_zone": "CZ4A",
+                    "data_source_type": "OTHER"
+                },
                 "ruleset_model_instances": [
                     {
                         "id": "RMR 1",
@@ -274,6 +293,7 @@
                                     {
                                         "id": "Building Segment 1",
                                         "area_type_vertical_fenestration": "OTHER",
+										"is_all_new": true,
                                         "zones": [
                                             {
                                                 "id": "Zone 1",
@@ -351,6 +371,10 @@
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229",
+				"weather": {
+                    "climate_zone": "CZ4A",
+                    "data_source_type": "OTHER"
+                },
                 "ruleset_model_instances": [
                     {
                         "id": "RMR 1",
@@ -362,6 +386,7 @@
                                     {
                                         "id": "Building Segment 1",
                                         "area_type_vertical_fenestration": "OTHER",
+										"is_all_new": true,
                                         "zones": [
                                             {
                                                 "id": "Zone 1",
