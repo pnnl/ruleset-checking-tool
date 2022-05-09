@@ -8865,10 +8865,26 @@
                                                 "id": "Zone 1",
                                                 "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
+                                                "volume": 21.237634943999996,
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "occupant_multiplier_schedule": "Required Occupancy Sched 1",
+                                                        "floor_area": 23.225759999999998
+                                                    }
+                                                ],
                                                 "infiltration": {
                                                     "id": "Infiltration 1",
-                                                    "measured_air_leakage_rate": 4.009193529983999
-                                                }
+                                                    "infiltration_flow_rate": 4.009193529983999
+                                                },
+                                                "surfaces": [
+                                                    {
+                                                        "id": "Surface 1",
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 90,
+                                                        "area": 929.0303999999999
+                                                    }
+                                                ]
                                             }
                                         ]
                                     }
@@ -8899,10 +8915,26 @@
                                                 "id": "Zone 1",
                                                 "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
+                                                "volume": 21.237634943999996,
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "occupant_multiplier_schedule": "Required Occupancy Sched 1",
+                                                        "floor_area": 23.225759999999998
+                                                    }
+                                                ],
                                                 "infiltration": {
                                                     "id": "Infiltration 1",
-                                                    "measured_air_leakage_rate": 4.009193529983999
-                                                }
+                                                    "infiltration_flow_rate": 4.009193529983999
+                                                },
+                                                "surfaces": [
+                                                    {
+                                                        "id": "Surface 1",
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 90,
+                                                        "area": 929.0303999999999
+                                                    }
+                                                ]
                                             }
                                         ]
                                     }
@@ -8953,10 +8985,26 @@
                                                 "id": "Zone 1",
                                                 "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
+                                                "volume": 21.237634943999996,
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "occupant_multiplier_schedule": "Required Occupancy Sched 1",
+                                                        "floor_area": 23.225759999999998
+                                                    }
+                                                ],
                                                 "infiltration": {
                                                     "id": "Infiltration 1",
-                                                    "measured_air_leakage_rate": 7.282620996019198
-                                                }
+                                                    "infiltration_flow_rate": 7.282620996019198
+                                                },
+                                                "surfaces": [
+                                                    {
+                                                        "id": "Surface 1",
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 90,
+                                                        "area": 929.0303999999999
+                                                    }
+                                                ]
                                             }
                                         ]
                                     }
@@ -8987,10 +9035,26 @@
                                                 "id": "Zone 1",
                                                 "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
+                                                "volume": 21.237634943999996,
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "occupant_multiplier_schedule": "Required Occupancy Sched 1",
+                                                        "floor_area": 23.225759999999998
+                                                    }
+                                                ],
                                                 "infiltration": {
                                                     "id": "Infiltration 1",
-                                                    "measured_air_leakage_rate": 4.009193529983999
-                                                }
+                                                    "infiltration_flow_rate": 4.009193529983999
+                                                },
+                                                "surfaces": [
+                                                    {
+                                                        "id": "Surface 1",
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 90,
+                                                        "area": 929.0303999999999
+                                                    }
+                                                ]
                                             }
                                         ]
                                     }

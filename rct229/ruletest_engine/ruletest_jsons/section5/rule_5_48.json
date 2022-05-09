@@ -46,10 +46,19 @@
                                                 ],
                                                 "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
+                                                "volume": 21.237634943999996,
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "occupant_multiplier_schedule": "Required Occupancy Sched 1",
+                                                        "floor_area": 23.225759999999998
+                                                    }
+                                                ],
                                                 "infiltration": {
                                                     "id": "Infiltration 1",
                                                     "infiltration_flow_rate": 4.009193529983999
                                                 },
+<<<<<<< HEAD
 												"surfaces": [
                                                     {
                                                         "id": "Surface 1",
@@ -59,6 +68,14 @@
 														"construction": {
                                                             "id": "construction_1"
                                                         }
+=======
+                                                "surfaces": [
+                                                    {
+                                                        "id": "Surface 1",
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 90,
+                                                        "area": 929.0303999999999
+>>>>>>> af8d5bacbeab332b708ac8186b1884c62a0f3da6
                                                     }
                                                 ]
                                             }
@@ -99,10 +116,19 @@
                                                 ],
                                                 "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
+                                                "volume": 21.237634943999996,
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "occupant_multiplier_schedule": "Required Occupancy Sched 1",
+                                                        "floor_area": 23.225759999999998
+                                                    }
+                                                ],
                                                 "infiltration": {
                                                     "id": "Infiltration 1",
                                                     "infiltration_flow_rate": 4.009193529983999
                                                 },
+<<<<<<< HEAD
 												"surfaces": [
                                                     {
                                                         "id": "Surface 1",
@@ -112,6 +138,14 @@
 														"construction": {
                                                             "id": "construction_1"
                                                         }
+=======
+                                                "surfaces": [
+                                                    {
+                                                        "id": "Surface 1",
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 90,
+                                                        "area": 929.0303999999999
+>>>>>>> af8d5bacbeab332b708ac8186b1884c62a0f3da6
                                                     }
                                                 ]
                                             }
@@ -172,10 +206,19 @@
                                                 ],
                                                 "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
+                                                "volume": 21.237634943999996,
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "occupant_multiplier_schedule": "Required Occupancy Sched 1",
+                                                        "floor_area": 23.225759999999998
+                                                    }
+                                                ],
                                                 "infiltration": {
                                                     "id": "Infiltration 1",
                                                     "infiltration_flow_rate": 7.282620996019198
                                                 },
+<<<<<<< HEAD
 												"surfaces": [
                                                     {
                                                         "id": "Surface 1",
@@ -185,6 +228,14 @@
 														"construction": {
                                                             "id": "construction_1"
                                                         }
+=======
+                                                "surfaces": [
+                                                    {
+                                                        "id": "Surface 1",
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 90,
+                                                        "area": 929.0303999999999
+>>>>>>> af8d5bacbeab332b708ac8186b1884c62a0f3da6
                                                     }
                                                 ]
                                             }
@@ -225,10 +276,19 @@
                                                 ],
                                                 "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
+                                                "volume": 21.237634943999996,
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "occupant_multiplier_schedule": "Required Occupancy Sched 1",
+                                                        "floor_area": 23.225759999999998
+                                                    }
+                                                ],
                                                 "infiltration": {
                                                     "id": "Infiltration 1",
                                                     "infiltration_flow_rate": 4.009193529983999
                                                 },
+<<<<<<< HEAD
 												"surfaces": [
                                                     {
                                                         "id": "Surface 1",
@@ -238,6 +298,14 @@
 														"construction": {
                                                             "id": "construction_1"
                                                         }
+=======
+                                                "surfaces": [
+                                                    {
+                                                        "id": "Surface 1",
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 90,
+                                                        "area": 929.0303999999999
+>>>>>>> af8d5bacbeab332b708ac8186b1884c62a0f3da6
                                                     }
                                                 ]
                                             }
