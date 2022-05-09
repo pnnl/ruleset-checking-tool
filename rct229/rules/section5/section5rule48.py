@@ -4,6 +4,9 @@ from rct229.rule_engine.rule_base import (
 )
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 from rct229.ruleset_functions.get_zone_conditioning_category_dict import (
+    ZoneConditioningCategory as ZCC,
+)
+from rct229.ruleset_functions.get_zone_conditioning_category_dict import (
     get_zone_conditioning_category_dict,
 )
 from rct229.utils.jsonpath_utils import find_all
@@ -36,6 +39,7 @@ class Section5Rule48(RuleDefinitionListIndexedBase):
                 rmrs_used=UserBaselineProposedVals(False, True, True),
                 each_rule=Section5Rule48.BuildingRule.ZoneRule(),
                 index_rmr="baseline",
+                list_path="$..zones[*]",
             )
 
         def create_data(self, context, data=None):
@@ -48,13 +52,18 @@ class Section5Rule48(RuleDefinitionListIndexedBase):
                 ),
             }
 
+        def list_filter(self, context_item, data=None):
+            scc_dict_b = data["scc_dict_b"]
+            zone_b = context_item.baseline
+            return scc_dict_b[zone_b["id"]] in [ZCC.UNCONDITIONED, ZCC.UNENCLOSED]
+
         class ZoneRule(RuleDefinitionBase):
             def __init__(self):
                 super(Section5Rule48.BuildingRule.ZoneRule, self).__init__(
                     rmrs_used=UserBaselineProposedVals(False, True, True),
                     required_fields={
-                        "$..zones[*]": ["infiltration"],
-                        "$..infiltration[*]": ["infiltration_flow_rate"],
+                        "$": ["infiltration"],
+                        "infiltration[*]": ["infiltration_flow_rate"],
                     },
                 )
 
@@ -62,19 +71,8 @@ class Section5Rule48(RuleDefinitionListIndexedBase):
                 zone_b = context.baseline
                 zone_p = context.proposed
 
-                baseline_zones = find_all("$..zones[*]", zone_b)
-                proposed_zones = find_all("$..zones[*]", zone_p)
-
-                if data["scc_dict_b"][baseline_zones[0]["id"]] in [
-                    "UNENCLOSED",
-                    "UNCONDITIONED",
-                ]:
-                    zone_b_infiltration = baseline_zones[0]["infiltration"][
-                        "infiltration_flow_rate"
-                    ]
-                    zone_p_infiltration = proposed_zones[0]["infiltration"][
-                        "infiltration_flow_rate"
-                    ]
+                zone_b_infiltration = zone_b["infiltration"]["infiltration_flow_rate"]
+                zone_p_infiltration = zone_p["infiltration"]["infiltration_flow_rate"]
 
                 return {
                     "baseline_infiltration": zone_b_infiltration,

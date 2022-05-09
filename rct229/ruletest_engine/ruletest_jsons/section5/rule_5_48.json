@@ -58,7 +58,6 @@
                                                     "id": "Infiltration 1",
                                                     "infiltration_flow_rate": 4.009193529983999
                                                 },
-<<<<<<< HEAD
 												"surfaces": [
                                                     {
                                                         "id": "Surface 1",
@@ -68,16 +67,8 @@
 														"construction": {
                                                             "id": "construction_1"
                                                         }
-=======
-                                                "surfaces": [
-                                                    {
-                                                        "id": "Surface 1",
-                                                        "adjacent_to": "EXTERIOR",
-                                                        "tilt": 90,
-                                                        "area": 929.0303999999999
->>>>>>> af8d5bacbeab332b708ac8186b1884c62a0f3da6
-                                                    }
-                                                ]
+													}
+												]
                                             }
                                         ]
                                     }
@@ -128,7 +119,6 @@
                                                     "id": "Infiltration 1",
                                                     "infiltration_flow_rate": 4.009193529983999
                                                 },
-<<<<<<< HEAD
 												"surfaces": [
                                                     {
                                                         "id": "Surface 1",
@@ -138,16 +128,8 @@
 														"construction": {
                                                             "id": "construction_1"
                                                         }
-=======
-                                                "surfaces": [
-                                                    {
-                                                        "id": "Surface 1",
-                                                        "adjacent_to": "EXTERIOR",
-                                                        "tilt": 90,
-                                                        "area": 929.0303999999999
->>>>>>> af8d5bacbeab332b708ac8186b1884c62a0f3da6
-                                                    }
-                                                ]
+													}
+												]
                                             }
                                         ]
                                     }
@@ -218,7 +200,6 @@
                                                     "id": "Infiltration 1",
                                                     "infiltration_flow_rate": 7.282620996019198
                                                 },
-<<<<<<< HEAD
 												"surfaces": [
                                                     {
                                                         "id": "Surface 1",
@@ -228,16 +209,8 @@
 														"construction": {
                                                             "id": "construction_1"
                                                         }
-=======
-                                                "surfaces": [
-                                                    {
-                                                        "id": "Surface 1",
-                                                        "adjacent_to": "EXTERIOR",
-                                                        "tilt": 90,
-                                                        "area": 929.0303999999999
->>>>>>> af8d5bacbeab332b708ac8186b1884c62a0f3da6
-                                                    }
-                                                ]
+													}
+												]
                                             }
                                         ]
                                     }
@@ -288,7 +261,6 @@
                                                     "id": "Infiltration 1",
                                                     "infiltration_flow_rate": 4.009193529983999
                                                 },
-<<<<<<< HEAD
 												"surfaces": [
                                                     {
                                                         "id": "Surface 1",
@@ -298,16 +270,8 @@
 														"construction": {
                                                             "id": "construction_1"
                                                         }
-=======
-                                                "surfaces": [
-                                                    {
-                                                        "id": "Surface 1",
-                                                        "adjacent_to": "EXTERIOR",
-                                                        "tilt": 90,
-                                                        "area": 929.0303999999999
->>>>>>> af8d5bacbeab332b708ac8186b1884c62a0f3da6
-                                                    }
-                                                ]
+													}
+												]
                                             }
                                         ]
                                     }
