@@ -1,7 +1,9 @@
+from rct229.data.schema_enums import schema_enums
 from rct229.data_fns.table_9_5_1_fns import table_9_5_1_lookup
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.std_comparisons import std_equal
 
+NONE = schema_enums["LightingSpaceType2019ASHRAE901T951TG38"].NONE.name
 
 # Intended for export and internal use
 class LightingStatusType:
@@ -33,7 +35,7 @@ def get_building_segment_lighting_status_type_dict(building_segment):
     # The return value dict
     building_segment_lighting_status_type_dict = {}
 
-    if lighting_building_area_type is None or lighting_building_area_type == "NONE":
+    if lighting_building_area_type is None or lighting_building_area_type == NONE:
         building_segment_lighting_status_type_dict = {
             space["id"]: LightingStatusType.AS_DESIGNED_OR_AS_EXISTING
             for space in spaces
