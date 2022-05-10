@@ -1,5 +1,6 @@
 from rct229.data_fns.table_G3_7_fns import table_G3_7_lookup
 from rct229.data_fns.table_G3_8_fns import table_G3_8_lookup
+from rct229.ruleset_functions.get_avg_zone_ht import get_avg_zone_ht
 from rct229.rule_engine.rule_base import (
     RuleDefinitionBase,
     RuleDefinitionListIndexedBase,
@@ -45,9 +46,7 @@ class Section6Rule2(RuleDefinitionListIndexedBase):
                 )
 
                 for zone in find_all("$..zones[*]", building_segment):
-                    zone_volume = zone["volume"]
-                    zone_floor_area = pint_sum(find_all("$..floor_area", zone))
-                    zone_avg_height = zone_volume / zone_floor_area
+                    zone_avg_height = get_avg_zone_ht(zone)
 
                     for space in zone["spaces"]:
                         space_floor_area = space["floor_area"]
