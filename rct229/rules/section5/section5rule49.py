@@ -17,7 +17,7 @@ class Section5Rule49(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section5Rule49, self).__init__(
-            rmrs_used=UserBaselineProposedVals(False, True, True),
+            rmrs_used=UserBaselineProposedVals(False, False, True),
             required_fields={
                 "$": ["weather"],
                 "weather": ["climate_zone"],
@@ -30,13 +30,13 @@ class Section5Rule49(RuleDefinitionListIndexedBase):
         )
 
     def create_data(self, context, data=None):  # put it under the "BuildingRule"
-        rmr_baseline = context.baseline
-        return {"climate_zone": rmr_baseline["weather"]["climate_zone"]}
+        rmr_proposed = context.proposed
+        return {"climate_zone": rmr_proposed["weather"]["climate_zone"]}
 
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section5Rule49.BuildingRule, self).__init__(
-                rmrs_used=UserBaselineProposedVals(False, True, True),
+                rmrs_used=UserBaselineProposedVals(False, False, True),
                 each_rule=Section5Rule49.BuildingRule.BuildingSegmentRule(),
                 index_rmr="proposed",
                 list_path="$..zones[*]",
@@ -48,47 +48,47 @@ class Section5Rule49(RuleDefinitionListIndexedBase):
 
             return {
                 **data,
-                "scc_dict_b": get_zone_conditioning_category_dict(
+                "zcc_dict_b": get_zone_conditioning_category_dict(
                     data["climate_zone"], building_b
                 ),
-                "scc_dict_p": get_zone_conditioning_category_dict(
+                "zcc_dict_p": get_zone_conditioning_category_dict(
                     data["climate_zone"], building_p
                 ),
             }
 
-        def list_filter(self, context_item, data=None):
-            scc_dict_p = data["scc_dict_p"]
-            zone_p = context_item.proposed
-            return (scc_dict_p[zone_p["id"]] != SCC.UNREGULATED # SurfaceConditioningCategory -> UNREGULATED
-                    and  [zone_p["id"]] in [ZCC.CONDITIONED_RESIDENTIAL, ZCC.CONDITIONED_NON_RESIDENTIAL, ZCC.SEMI_HEATED]
-                    )
-
+        # def list_filter(self, context_item, data=None):
+        #     zcc_dict_p = data["zcc_dict_p"]
+        #     zone_p = context_item.proposed
+        #     return (zcc_dict_p[zone_p["id"]] != SCC.UNREGULATED # SurfaceConditioningCategory -> UNREGULATED
+        #             and  [zone_p["id"]] in [ZCC.CONDITIONED_RESIDENTIAL, ZCC.CONDITIONED_NON_RESIDENTIAL, ZCC.SEMI_HEATED]
+        #             )
+        #
         class BuildingSegmentRule(RuleDefinitionBase):
             def __init__(self):
-                super(Section5Rule35.BuildingRule.BuildingSegmentRule, self).__init__(
-                    rmrs_used=UserBaselineProposedVals(False, True, True),
+                super(Section5Rule49.BuildingRule.BuildingSegmentRule, self).__init__(
+                    rmrs_used=UserBaselineProposedVals(False, False, True),
                     required_fields={
                         "$": ["infiltration"],
                         "infiltration[*]": ["measured_air_leakage_rate"],
                     },
                 )
-
-            def get_calc_vals(self, context, data=None):
-                zone_b = context.baseline
-                zone_p = context.proposed
-
-                building_total_envelope_area  =
-
-                building_total_measured_air_leakage_rate = 0
-
-                building_total_measured_air_leakage_rate += zone_p["infiltration"]["measured_air_leakage_rate"]
-
-                return {
-                    "building_total_envelope_area": building_total_envelope_area,
-                    "building_total_measured_air_leakage_rate ": building_total_measured_air_leakage_rate,
-                }
-
-            def rule_check(self, context, calc_vals, data=None):
-                return (
-                    calc_vals["target_air_leakage_rate_75pa_p"] == 0.6 * calc_vals["building_total_envelope_area"]
-                )
+        #
+        #     def get_calc_vals(self, context, data=None):
+        #         zone_b = context.baseline
+        #         zone_p = context.proposed
+        #
+        #         building_total_envelope_area  =
+        #
+        #         building_total_measured_air_leakage_rate = 0
+        #
+        #         building_total_measured_air_leakage_rate += zone_p["infiltration"]["measured_air_leakage_rate"]
+        #
+        #         return {
+        #             "building_total_envelope_area": building_total_envelope_area,
+        #             "building_total_measured_air_leakage_rate ": building_total_measured_air_leakage_rate,
+        #         }
+        #
+        #     def rule_check(self, context, calc_vals, data=None):
+        #         return (
+        #             calc_vals["target_air_leakage_rate_75pa_p"] == 0.6 * calc_vals["building_total_envelope_area"]
+        #         )
