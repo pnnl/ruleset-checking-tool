@@ -47,15 +47,15 @@ class Section5Rule48(RuleDefinitionListIndexedBase):
 
             return {
                 **data,
-                "scc_dict_b": get_zone_conditioning_category_dict(
+                "zcc_dict_b": get_zone_conditioning_category_dict(
                     data["climate_zone"], building_b
                 ),
             }
 
         def list_filter(self, context_item, data=None):
-            scc_dict_b = data["scc_dict_b"]
+            zcc_dict_b = data["zcc_dict_b"]
             zone_b = context_item.baseline
-            return scc_dict_b[zone_b["id"]] in [ZCC.UNCONDITIONED, ZCC.UNENCLOSED]
+            return zcc_dict_b[zone_b["id"]] in [ZCC.UNCONDITIONED, ZCC.UNENCLOSED]
 
         class ZoneRule(RuleDefinitionBase):
             def __init__(self):
@@ -71,12 +71,12 @@ class Section5Rule48(RuleDefinitionListIndexedBase):
                 zone_b = context.baseline
                 zone_p = context.proposed
 
-                zone_b_infiltration = zone_b["infiltration"]["infiltration_flow_rate"]
-                zone_p_infiltration = zone_p["infiltration"]["infiltration_flow_rate"]
+                zone_infiltration_flow_rate_b = zone_b["infiltration"]["infiltration_flow_rate"]
+                zone_infiltration_flow_rate_p = zone_p["infiltration"]["infiltration_flow_rate"]
 
                 return {
-                    "baseline_infiltration": zone_b_infiltration,
-                    "proposed_infiltration": zone_p_infiltration,
+                    "baseline_infiltration": zone_infiltration_flow_rate_b,
+                    "proposed_infiltration": zone_infiltration_flow_rate_p,
                 }
 
             def rule_check(self, context, calc_vals, data=None):
