@@ -18,7 +18,7 @@
     - Reset zone_computer_room_floor_area variable: `zone_computer_room_floor_area = 0`
     - Reset total_zone_floor_area variable: `total_zone_floor_area = 0`
     - For each space in zone: `for space_x in zone_x.Spaces:`        
-        - Get space floor_area: `space_floor_area = space_x.floor_area * CONVERSION(m2_TO_ft2)`
+        - Get space floor_area: `space_floor_area = space_x.floor_area`
         - Check if space is of type computer room, if yes then set the zone has computer room boolean variable to true and add the floor area to the total computer room floor area variable for the zone: `if space_x.lighting_space_type in ["COMPUTER_ROOM"]:`
             - Set zone has computer room boolean variable to true: `zone_has_computer_room_check = TRUE`
             - Add floor area to zone_computer_room_floor_area: `zone_computer_room_floor_area = zone_computer_room_floor_area + space_floor_area`
