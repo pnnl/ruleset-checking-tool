@@ -9,7 +9,8 @@
         "linear_thermal_transmittance": "W/m-K",
         "cooling_capacity": "W",
         "capacity": "W",
-        "volumetric_flow_rate": "m3/s"
+        "volumetric_flow_rate": "m3/s",
+        "infiltration_pressure_difference": "Pa"
     },
     "ip": {
         "transformer_capacity": "V-A",
@@ -21,6 +22,7 @@
         "linear_thermal_transmittance": "Btu/hr-ft-R",
         "cooling_capacity": "ton",
         "capacity": "Btu/hr",
-        "volumetric_flow_rate": "cfm"
+        "volumetric_flow_rate": "cfm",
+        "infiltration_pressure_difference": "Pa"
     }
 }
