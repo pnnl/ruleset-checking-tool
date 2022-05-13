@@ -500,6 +500,8 @@ def run_envelope_tests():
     """
 
     # envelope_test_json = "envelope_tests.json"
+    # envelope_test_json = "section5/rule_5_36.json"
+    # envelope_test_json = "section5/rule_5_15.json"
+    # envelope_test_json = "section5/rule_5_45.json"
     envelope_test_json = "section5/rule_5_49.json"
-
     return run_section_tests(envelope_test_json)
