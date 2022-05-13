@@ -13,7 +13,7 @@ SURFACE_TYPE_TO_CONSTRUCTION_MAP = {
     OST.FLOOR: "ExteriorFloor",
     OST.BELOW_GRADE_WALL: "GroundContactWall",
     # this is not covered in the OST.
-    "Vertical Glazing": "ExteriorWindow"
+    "Vertical Glazing": "ExteriorWindow",
 }
 
 # This dictionary maps surface conditioning categories as returned from get_surface_conditioning_category_dict()

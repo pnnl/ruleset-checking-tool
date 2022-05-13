@@ -1,10 +1,21 @@
 from rct229.data.schema_enums import schema_enums
 from rct229.data_fns.table_G3_4_fns import table_G34_lookup
-from rct229.rule_engine.rule_base import RuleDefinitionListIndexedBase, RuleDefinitionBase
+from rct229.rule_engine.rule_base import (
+    RuleDefinitionBase,
+    RuleDefinitionListIndexedBase,
+)
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
-from rct229.ruleset_functions.get_building_scc_window_wall_ratios_dict import get_building_scc_window_wall_ratios_dict
-from rct229.ruleset_functions.get_opaque_surface_type import (get_opaque_surface_type, OpaqueSurfaceType as OST)
-from rct229.ruleset_functions.get_surface_conditioning_category_dict import (get_surface_conditioning_category_dict, SurfaceConditioningCategory as SCC)
+from rct229.ruleset_functions.get_building_scc_window_wall_ratios_dict import (
+    get_building_scc_window_wall_ratios_dict,
+)
+from rct229.ruleset_functions.get_opaque_surface_type import OpaqueSurfaceType as OST
+from rct229.ruleset_functions.get_opaque_surface_type import get_opaque_surface_type
+from rct229.ruleset_functions.get_surface_conditioning_category_dict import (
+    SurfaceConditioningCategory as SCC,
+)
+from rct229.ruleset_functions.get_surface_conditioning_category_dict import (
+    get_surface_conditioning_category_dict,
+)
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.std_comparisons import std_equal
 
@@ -36,10 +47,14 @@ class Section5Rule24(RuleDefinitionListIndexedBase):
         # The implementation is temporary
         bldg_scc_wwr_ratio_dict = {}
         for building_b in find_all(self.list_path, rmr_baseline):
-            bldg_scc_wwr_ratio_dict[building_b["id"]] = get_building_scc_window_wall_ratios_dict(climate, building_b)
+            bldg_scc_wwr_ratio_dict[
+                building_b["id"]
+            ] = get_building_scc_window_wall_ratios_dict(climate, building_b)
 
-        return {"climate_zone": rmr_baseline["weather"]["climate_zone"],
-                "bldg_scc_wwr_ratio_dict": bldg_scc_wwr_ratio_dict}
+        return {
+            "climate_zone": rmr_baseline["weather"]["climate_zone"],
+            "bldg_scc_wwr_ratio_dict": bldg_scc_wwr_ratio_dict,
+        }
 
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
@@ -54,19 +69,59 @@ class Section5Rule24(RuleDefinitionListIndexedBase):
             building_b = context.baseline
             climate = data["climate_zone"]
             bldg_scc_wwr_ratio = data["bldg_scc_wwr_ratio_dict"][building_b["id"]]
-            return bldg_scc_wwr_ratio[building_b["id"]][SCC.EXTERIOR_MIXED] == 0 or not (
-                table_G34_lookup(climate, SCC.EXTERIOR_RESIDENTIAL, "Vertical Glazing", wwr=0.1) ==
-                table_G34_lookup(climate, SCC.EXTERIOR_RESIDENTIAL, "Vertical Glazing", wwr=10.1) ==
-                table_G34_lookup(climate, SCC.EXTERIOR_RESIDENTIAL, "Vertical Glazing", wwr=20.1) ==
-                table_G34_lookup(climate, SCC.EXTERIOR_RESIDENTIAL, "Vertical Glazing", wwr=30.1)
-            ) or not (
-                table_G34_lookup(climate, SCC.EXTERIOR_NON_RESIDENTIAL, "Vertical Glazing", wwr=0.1) ==
-                table_G34_lookup(climate, SCC.EXTERIOR_NON_RESIDENTIAL, "Vertical Glazing", wwr=10.1) ==
-                table_G34_lookup(climate, SCC.EXTERIOR_NON_RESIDENTIAL, "Vertical Glazing", wwr=20.1) ==
-                table_G34_lookup(climate, SCC.EXTERIOR_NON_RESIDENTIAL, "Vertical Glazing", wwr=30.1)
-            ) or not (
-                table_G34_lookup(climate, SCC.EXTERIOR_RESIDENTIAL, "Vertical Glazing", wwr=0.1) ==
-                table_G34_lookup(climate, SCC.EXTERIOR_NON_RESIDENTIAL, "Vertical Glazing", wwr=0.1)
+            return (
+                bldg_scc_wwr_ratio[building_b["id"]][SCC.EXTERIOR_MIXED] == 0
+                or not (
+                    table_G34_lookup(
+                        climate, SCC.EXTERIOR_RESIDENTIAL, "Vertical Glazing", wwr=0.1
+                    )
+                    == table_G34_lookup(
+                        climate, SCC.EXTERIOR_RESIDENTIAL, "Vertical Glazing", wwr=10.1
+                    )
+                    == table_G34_lookup(
+                        climate, SCC.EXTERIOR_RESIDENTIAL, "Vertical Glazing", wwr=20.1
+                    )
+                    == table_G34_lookup(
+                        climate, SCC.EXTERIOR_RESIDENTIAL, "Vertical Glazing", wwr=30.1
+                    )
+                )
+                or not (
+                    table_G34_lookup(
+                        climate,
+                        SCC.EXTERIOR_NON_RESIDENTIAL,
+                        "Vertical Glazing",
+                        wwr=0.1,
+                    )
+                    == table_G34_lookup(
+                        climate,
+                        SCC.EXTERIOR_NON_RESIDENTIAL,
+                        "Vertical Glazing",
+                        wwr=10.1,
+                    )
+                    == table_G34_lookup(
+                        climate,
+                        SCC.EXTERIOR_NON_RESIDENTIAL,
+                        "Vertical Glazing",
+                        wwr=20.1,
+                    )
+                    == table_G34_lookup(
+                        climate,
+                        SCC.EXTERIOR_NON_RESIDENTIAL,
+                        "Vertical Glazing",
+                        wwr=30.1,
+                    )
+                )
+                or not (
+                    table_G34_lookup(
+                        climate, SCC.EXTERIOR_RESIDENTIAL, "Vertical Glazing", wwr=0.1
+                    )
+                    == table_G34_lookup(
+                        climate,
+                        SCC.EXTERIOR_NON_RESIDENTIAL,
+                        "Vertical Glazing",
+                        wwr=0.1,
+                    )
+                )
             )
 
         def create_data(self, context, data=None):
@@ -74,24 +129,64 @@ class Section5Rule24(RuleDefinitionListIndexedBase):
             climate = data["climate_zone"]
             bldg_scc_wwr_ratio = data["bldg_scc_wwr_ratio_dict"][building_b["id"]]
             # get all data
-            target_u_factor_mix = table_G34_lookup(climate, SCC.EXTERIOR_RESIDENTIAL, "Vertical Glazing", wwr=bldg_scc_wwr_ratio[SCC.EXTERIOR_MIXED])["u_value"] if bldg_scc_wwr_ratio[SCC.EXTERIOR_MIXED] > 0 else 0.0
-            target_u_factor_res = table_G34_lookup(climate, SCC.EXTERIOR_RESIDENTIAL, "Vertical Glazing", wwr=bldg_scc_wwr_ratio[SCC.EXTERIOR_RESIDENTIAL])["u_value"] if bldg_scc_wwr_ratio[SCC.EXTERIOR_RESIDENTIAL] > 0 else 0.0
-            target_u_factor_nonres = table_G34_lookup(climate, SCC.EXTERIOR_NON_RESIDENTIAL, "Vertical Glazing", wwr=bldg_scc_wwr_ratio[SCC.EXTERIOR_NON_RESIDENTIAL])["u_value"] if bldg_scc_wwr_ratio[SCC.EXTERIOR_NON_RESIDENTIAL] > 0 else 0.0
-            target_u_factor_semiheated = table_G34_lookup(climate, SCC.SEMI_EXTERIOR, "Vertical Glazing", wwr=bldg_scc_wwr_ratio[SCC.SEMI_EXTERIOR])["u_value"] if bldg_scc_wwr_ratio[SCC.SEMI_EXTERIOR] > 0 else 0.0
+            target_u_factor_mix = (
+                table_G34_lookup(
+                    climate,
+                    SCC.EXTERIOR_RESIDENTIAL,
+                    "Vertical Glazing",
+                    wwr=bldg_scc_wwr_ratio[SCC.EXTERIOR_MIXED],
+                )["u_value"]
+                if bldg_scc_wwr_ratio[SCC.EXTERIOR_MIXED] > 0
+                else 0.0
+            )
+            target_u_factor_res = (
+                table_G34_lookup(
+                    climate,
+                    SCC.EXTERIOR_RESIDENTIAL,
+                    "Vertical Glazing",
+                    wwr=bldg_scc_wwr_ratio[SCC.EXTERIOR_RESIDENTIAL],
+                )["u_value"]
+                if bldg_scc_wwr_ratio[SCC.EXTERIOR_RESIDENTIAL] > 0
+                else 0.0
+            )
+            target_u_factor_nonres = (
+                table_G34_lookup(
+                    climate,
+                    SCC.EXTERIOR_NON_RESIDENTIAL,
+                    "Vertical Glazing",
+                    wwr=bldg_scc_wwr_ratio[SCC.EXTERIOR_NON_RESIDENTIAL],
+                )["u_value"]
+                if bldg_scc_wwr_ratio[SCC.EXTERIOR_NON_RESIDENTIAL] > 0
+                else 0.0
+            )
+            target_u_factor_semiheated = (
+                table_G34_lookup(
+                    climate,
+                    SCC.SEMI_EXTERIOR,
+                    "Vertical Glazing",
+                    wwr=bldg_scc_wwr_ratio[SCC.SEMI_EXTERIOR],
+                )["u_value"]
+                if bldg_scc_wwr_ratio[SCC.SEMI_EXTERIOR] > 0
+                else 0.0
+            )
             return {
                 **data,
                 # TODO this function will likely need to be revised to RMD level later.
-                "scc_dict_b": get_surface_conditioning_category_dict(climate, building_b),
+                "scc_dict_b": get_surface_conditioning_category_dict(
+                    climate, building_b
+                ),
                 "target_u_factor_mix": target_u_factor_mix,
                 "target_u_factor_res": target_u_factor_res,
                 "target_u_factor_nonres": target_u_factor_nonres,
-                "target_u_factor_semiheated": target_u_factor_semiheated
+                "target_u_factor_semiheated": target_u_factor_semiheated,
             }
 
         def list_filter(self, context_item, data=None):
             surface_b = context_item.baseline
             scc_dict_b = data["scc_dict_b"]
-            return (get_opaque_surface_type(surface_b) == OST.ABOVE_GRADE_WALL) and (scc_dict_b[surface_b["id"]] != SCC.UNREGULATED)
+            return (get_opaque_surface_type(surface_b) == OST.ABOVE_GRADE_WALL) and (
+                scc_dict_b[surface_b["id"]] != SCC.UNREGULATED
+            )
 
         class AboveGradeWallRule(RuleDefinitionListIndexedBase):
             def __init__(self):
@@ -101,25 +196,34 @@ class Section5Rule24(RuleDefinitionListIndexedBase):
                     index_rmr="baseline",
                     list_path="subsurfaces[*]",
                     required_fields={
-                        "subsurfaces": ["classification", "glazed_area", "opaque_area", "u_factor"]
-                    }
+                        "subsurfaces": [
+                            "classification",
+                            "glazed_area",
+                            "opaque_area",
+                            "u_factor",
+                        ]
+                    },
                 )
 
             def create_data(self, context, data=None):
                 surface_b = context.baseline
                 scc_dict_b = data["scc_dict_b"]
-                return {
-                    **data,
-                    "scc": scc_dict_b[surface_b["id"]]
-                }
+                return {**data, "scc": scc_dict_b[surface_b["id"]]}
 
             def list_filter(self, context_item, data=None):
                 subsurface_b = context_item.baseline
-                return subsurface_b is None or subsurface_b["classification"] != DOOR or subsurface_b["glazed_area"] > subsurface_b["opaque_area"]
+                return (
+                    subsurface_b is None
+                    or subsurface_b["classification"] != DOOR
+                    or subsurface_b["glazed_area"] > subsurface_b["opaque_area"]
+                )
 
             class SubsurfaceRule(RuleDefinitionBase):
                 def __init__(self):
-                    super(Section5Rule24.BuildingRule.AboveGradeWallRule.SubsurfaceRule, self).__init__(
+                    super(
+                        Section5Rule24.BuildingRule.AboveGradeWallRule.SubsurfaceRule,
+                        self,
+                    ).__init__(
                         rmrs_used=UserBaselineProposedVals(False, True, False),
                     )
 
@@ -141,9 +245,15 @@ class Section5Rule24(RuleDefinitionListIndexedBase):
                     elif scc == SCC.SEMI_EXTERIOR:
                         target_u_factor = data["target_u_factor_semiheated"]
                     else:
-                        assert(scc in [SCC.EXTERIOR_MIXED, SCC.EXTERIOR_RESIDENTIAL, SCC.EXTERIOR_NON_RESIDENTIAL, SCC.SEMI_EXTERIOR],
-                               f"Severe Error: No matching surface category for: {scc}")
+                        assert (
+                            scc
+                            in [
+                                SCC.EXTERIOR_MIXED,
+                                SCC.EXTERIOR_RESIDENTIAL,
+                                SCC.EXTERIOR_NON_RESIDENTIAL,
+                                SCC.SEMI_EXTERIOR,
+                            ],
+                            f"Severe Error: No matching surface category for: {scc}",
+                        )
 
                     return std_equal(target_u_factor, calc_vals["subsurface_u_factor"])
-
-
