@@ -50,14 +50,17 @@
                                                     "id": "Infiltration 1",
                                                     "infiltration_flow_rate": 4.009193529983999
                                                 },
-                                                "surfaces": [
+												"surfaces": [
                                                     {
                                                         "id": "Surface 1",
-                                                        "adjacent_to": "EXTERIOR",
-                                                        "tilt": 90,
-                                                        "area": 929.0303999999999
-                                                    }
-                                                ]
+														"adjacent_to": "EXTERIOR",
+														"tilt": 90,
+                                                        "area": 929.0303999999999,
+														"construction": {
+                                                            "id": "construction_1"
+                                                        }
+													}
+												]
                                             }
                                         ]
                                     }
@@ -100,14 +103,17 @@
                                                     "id": "Infiltration 1",
                                                     "infiltration_flow_rate": 4.009193529983999
                                                 },
-                                                "surfaces": [
+												"surfaces": [
                                                     {
                                                         "id": "Surface 1",
-                                                        "adjacent_to": "EXTERIOR",
-                                                        "tilt": 90,
-                                                        "area": 929.0303999999999
-                                                    }
-                                                ]
+														"adjacent_to": "EXTERIOR",
+														"tilt": 90,
+                                                        "area": 929.0303999999999,
+														"construction": {
+                                                            "id": "construction_1"
+                                                        }
+													}
+												]
                                             }
                                         ]
                                     }
@@ -170,14 +176,17 @@
                                                     "id": "Infiltration 1",
                                                     "infiltration_flow_rate": 7.282620996019198
                                                 },
-                                                "surfaces": [
+												"surfaces": [
                                                     {
                                                         "id": "Surface 1",
-                                                        "adjacent_to": "EXTERIOR",
-                                                        "tilt": 90,
-                                                        "area": 929.0303999999999
-                                                    }
-                                                ]
+														"adjacent_to": "EXTERIOR",
+														"tilt": 90,
+                                                        "area": 929.0303999999999,
+														"construction": {
+                                                            "id": "construction_1"
+                                                        }
+													}
+												]
                                             }
                                         ]
                                     }
@@ -220,14 +229,17 @@
                                                     "id": "Infiltration 1",
                                                     "infiltration_flow_rate": 4.009193529983999
                                                 },
-                                                "surfaces": [
+												"surfaces": [
                                                     {
                                                         "id": "Surface 1",
-                                                        "adjacent_to": "EXTERIOR",
-                                                        "tilt": 90,
-                                                        "area": 929.0303999999999
-                                                    }
-                                                ]
+														"adjacent_to": "EXTERIOR",
+														"tilt": 90,
+                                                        "area": 929.0303999999999,
+														"construction": {
+                                                            "id": "construction_1"
+                                                        }
+													}
+												]
                                             }
                                         ]
                                     }
