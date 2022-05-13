@@ -12,6 +12,8 @@ SURFACE_TYPE_TO_CONSTRUCTION_MAP = {
     OST.UNHEATED_SOG: "GroundContactFloor",
     OST.FLOOR: "ExteriorFloor",
     OST.BELOW_GRADE_WALL: "GroundContactWall",
+    # this is not covered in the OST.
+    "Vertical Glazing": "ExteriorWindow"
 }
 
 # This dictionary maps surface conditioning categories as returned from get_surface_conditioning_category_dict()
@@ -53,16 +55,16 @@ CLIMATE_ZONE_ENUMERATION_TO_CLIMATE_ZONE_SET_MAP = {
 # Helper function to add WWR to the search criteria for getting the correct
 # Exterior windows, skylight and glass doors
 def wwr_to_search_criteria(wwr, search_criteria):
-    if wwr <= 10.0:
+    if wwr <= 0.1:
         search_criteria.append(("minimum_percent_of_surface", 0))
         search_criteria.append(("maximum_percent_of_surface", 10))
-    elif wwr <= 20.0:
+    elif wwr <= 0.2:
         search_criteria.append(("minimum_percent_of_surface", 10.1))
         search_criteria.append(("maximum_percent_of_surface", 20))
-    elif wwr <= 30.0:
+    elif wwr <= 0.3:
         search_criteria.append(("minimum_percent_of_surface", 20.1))
         search_criteria.append(("maximum_percent_of_surface", 30))
-    elif wwr <= 40.0:
+    elif wwr <= 0.4:
         search_criteria.append(("minimum_percent_of_surface", 30.1))
         search_criteria.append(("maximum_percent_of_surface", 40))
     else:
