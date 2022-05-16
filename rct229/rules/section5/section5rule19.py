@@ -42,7 +42,7 @@ class Section5Rule19(RuleDefinitionListIndexedBase):
                 rmrs_used=UserBaselineProposedVals(False, True, True),
                 required_fields={
                     "$": ["building_segments"],
-                    # "building_segments": [
+                    # "building_segment": [
                     #     "is_all_new",
                     #     "area_type_vertical_fenestration",
                     # ],
@@ -53,73 +53,17 @@ class Section5Rule19(RuleDefinitionListIndexedBase):
             building_b = context.baseline
             building_p = context.proposed
 
-            area_type_window_wall_area_dict_b = get_area_type_window_wall_area_dict(
-                data["climate_zone"], building_b
-            )
-            area_type_window_wall_area_dict_p = get_area_type_window_wall_area_dict(
-                data["climate_zone"], building_p
-            )
-            is_area_type_all_new_dict_baseline = {}
-            for building_segment in find_all("$..building_segments[*]", building_b):
-                area_type = building_segment["area_type_vertical_fenestration"]
-                is_area_type_all_new_dict_baseline[area_type] = building_segment[
-                    "is_all_new"
-                ]
-            is_area_type_all_new_dict_proposed = {}
-            for building_segment in find_all("$..building_segments[*]", building_p):
-                area_type = building_segment["area_type_vertical_fenestration"]
-                is_area_type_all_new_dict_proposed[area_type] = building_segment[
-                    "is_all_new"
-                ]
-
             return {
                 **data,
-                "is_area_type_all_new_dict_baseline": is_area_type_all_new_dict_baseline,
-                "is_area_type_all_new_dict_proposed": is_area_type_all_new_dict_proposed,
-                "area_type_window_wall_ratio_dict_baseline": area_type_window_wall_area_dict_b,
-                "area_type_window_wall_ratio_dict_proposed": area_type_window_wall_area_dict_p,
+                "is_area_type_all_new_dict_baseline": 1,
+                "is_area_type_all_new_dict_proposed": 1,
+                "area_type_window_wall_ratio_dict_baseline": 1,
+                "area_type_window_wall_ratio_dict_proposed": 1,
             }
 
 
-        # def get_calc_vals(self, context, data=None):
-        #     # get Baseline window wall areas
-        #     building_segments_b = context.baseline["building_segments"]
-        #     is_area_type_all_new_dict_b = data["is_area_type_all_new_dict_baseline"]
-        #     area_type_window_wall_ratio_b = data[
-        #         "area_type_window_wall_ratio_dict_baseline"
-        #     ]
-        #
-        #     area_type_window_wall_ratio_p = data[
-        #         "area_type_window_wall_ratio_dict_proposed"
-        #     ]
-        #
-        #     area_type = building_segments_b[0]["area_type_vertical_fenestration"]
-        #     area_type_wwr_baseline = 0.0
-        #     area_type_wwr_propose = 0.0
-        #     area_type_target_wwr = table_G3_1_1_1_lookup(area_type)
-        #     if area_type_target_wwr is not "NONE":
-        #         area_type_wwr_baseline = (
-        #             area_type_window_wall_ratio_b[area_type]["total_window_area"]
-        #             / area_type_window_wall_ratio_b[area_type]["total_wall_area"]
-        #         )
-        #         area_type_wwr_propose = (
-        #             area_type_window_wall_ratio_p[area_type]["total_window_area"]
-        #             / area_type_window_wall_ratio_p[area_type]["total_wall_area"]
-        #         )
-        #
-        #     return {
-        #         "is_all_new_baseline": is_area_type_all_new_dict_b[area_type],
-        #         "area_type_wwr_baseline": area_type_wwr_baseline,
-        #         "area_type_wwr_propose": area_type_wwr_propose,
-        #     }
-        #
-        # def manual_check_required(self, context, calc_vals=None, data=None):
-        #     # Raise warning...based on checks?
-        #     return not calc_vals["is_all_new_baseline"]
-        #
-        # def rule_check(self, context, calc_vals=None, data=None):
-        #     area_type_wwr = calc_vals["area_type_wwr_baseline"]
-        #     area_type_target_wwr = min(
-        #         calc_vals["area_type_wwr_propose"], WWR_THRESHOLD
-        #     )
-        #     return std_equal(area_type_target_wwr, area_type_wwr)
+        def get_calc_vals(self, context, data=None):
+            pass
+
+        def rule_check(self, context, calc_vals=None, data=None):
+            pass
