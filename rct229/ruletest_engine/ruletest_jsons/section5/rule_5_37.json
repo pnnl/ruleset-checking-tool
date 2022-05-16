@@ -383,7 +383,7 @@
         "Section": 5,
         "Rule": 37,
         "Test": "e",
-        "test_description": "Building is located in climate zone 4A. It includes a semiheated zone based on heating and cooling capacity of the HVAC system that servies it. Skylight area in the building is 0%-2.0%. The baseline skylight U-factor is not established correctly.\n\n",
+        "test_description": "Building is located in climate zone 4A. It includes a semiheated zone based on heating and cooling capacity of the HVAC system that servies it. Skylight area in the building is 0%-2.0%. The baseline skylight U-factor is not established correctly.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-37",
