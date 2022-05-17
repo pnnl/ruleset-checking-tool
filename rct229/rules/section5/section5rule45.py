@@ -9,6 +9,7 @@ from rct229.ruleset_functions.compare_schedules import (
     compare_schedules,
 )
 from rct229.utils.assertions import getattr_
+from rct229.utils.jsonpath_utils import find_one_with_field_value
 
 
 class Section5Rule45(RuleDefinitionListIndexedBase):
@@ -42,20 +43,20 @@ class Section5Rule45(RuleDefinitionListIndexedBase):
         def create_data(self, context, data=None):
             rmd_b = context.baseline
             rmd_p = context.proposed
-            return {**data,
-                    "schedules_b": rmd_b["schedules"],
-                    "schedules_p": rmd_p["schedules"]}
-
-        def list_filter(self, context_item, data=None):
-            # baseline should match to proposed
-            zone_b = context_item.baseline
-            return "infiltration" in zone_b
+            return {
+                **data,
+                "schedules_b": rmd_b["schedules"],
+                "schedules_p": rmd_p["schedules"],
+            }
 
         class ZoneRule(RuleDefinitionBase):
             def __init__(self):
                 super(Section5Rule45.RuleSetModelInstanceRule.ZoneRule, self).__init__(
                     rmrs_used=UserBaselineProposedVals(False, True, True),
-                    required_fields={"infiltration": ["multiplier_schedule"]},
+                    required_fields={
+                        "$": ["infiltration"],
+                        "infiltration": ["multiplier_schedule"],
+                    },
                 )
 
             def get_calc_vals(self, context, data=None):
@@ -65,7 +66,7 @@ class Section5Rule45(RuleDefinitionListIndexedBase):
                 schedules_b = data["schedules_b"]
                 schedules_p = data["schedules_p"]
 
-                mask_schedule = [1.0] * (
+                mask_schedule = [1] * (
                     LEAP_YEAR_HOURS if data["is_leap_year"] else REGULAR_YEAR_HOURS
                 )
 
@@ -76,22 +77,43 @@ class Section5Rule45(RuleDefinitionListIndexedBase):
                     # search for the schedule used in infiltration data group.
                     # Set to empty list if non-matched,
                     # raise exception if not hourly schedule or the hourly_values key is missing
-                    next((getattr_(sched, "schedule", "hourly_values") for sched in schedules_b if sched["id"] == infiltration_b["multiplier_schedule"]), []),
-                    next((getattr_(sched, "schedule", "hourly_values") for sched in schedules_p if sched["id"] == infiltration_p["multiplier_schedule"]), []),
+                    getattr_(
+                        find_one_with_field_value(
+                            "$",
+                            "id",
+                            infiltration_b["multiplier_schedule"],
+                            schedules_b,
+                        ),
+                        "schedule",
+                        "hourly_values",
+                    ),
+                    getattr_(
+                        find_one_with_field_value(
+                            "$",
+                            "id",
+                            infiltration_p["multiplier_schedule"],
+                            schedules_p,
+                        ),
+                        "schedule",
+                        "hourly_values",
+                    ),
                     mask_schedule,
-                    1.0,
-                    data["is_leap_year"],
+                    comparison_factor=1.0,
+                    is_leap_year=data["is_leap_year"],
                 )
 
             def rule_check(self, context, calc_vals=None, data=None):
                 total_hours_compared = calc_vals["total_hours_compared"]
-                total_hours_match = calc_vals["total_hours_matched"]
+                total_hours_matched = calc_vals["total_hours_matched"]
                 # total_hours_compared needs to be greater than 0.0
                 return (
-                    total_hours_compared > 0.0 and total_hours_compared == total_hours_match
+                    total_hours_compared > 0.0
+                    and total_hours_compared == total_hours_matched
                 )
 
             def get_fail_msg(self, context, calc_vals=None, data=None):
                 elfh_difference = calc_vals["eflh_difference"]
-                return f"Baseline and proposed infiltration schedules are not the same. " \
-                       f"The difference of baseline EFLH to proposed EFLH is equal to {elfh_difference}."
+                return (
+                    f"Baseline and proposed infiltration schedules are not the same. "
+                    f"The difference between baseline EFLH to proposed EFLH is equal to {elfh_difference}."
+                )
