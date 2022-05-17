@@ -45,9 +45,8 @@ class Section5Rule49(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section5Rule49.BuildingRule, self).__init__(
                 rmrs_used=UserBaselineProposedVals(False, False, True),
-                required_fields={
-                    "$..zones[*]": ["infiltration", "surfaces"]
-                },
+                required_fields={"$..zones[*]": ["infiltration", "surfaces"]},
+                fail_msg="The building total air leakage rate is not equal to the required proposed design air leakage rate at 75Pa with a Conversion Factor of 0.112 as per section G3.1.1.4. and Measured air leakage rate is not entered for all conditioned and semi-heated zones. Verify the proposed air leakage rate is modeled correctly.",
             )
 
         def get_calc_vals(self, context, data=None):
@@ -60,35 +59,57 @@ class Section5Rule49(RuleDefinitionListIndexedBase):
                 data["climate_zone"], building_p
             )
 
-            building_total_envelope_area = 0.0
-            building_total_air_leakage_rate = 0.0
-            building_total_measured_air_leakage_rate = 0.0
+            building_total_air_leakage_rate = 0.0 # * ZERO.FLOW
+            building_total_measured_air_leakage_rate = 0.0 # * ZERO.FLOW
             empty_measured_air_leakage_rate_flow_flag = False
 
             building_total_envelope_area = sum(
                 [
-                    surface.get("area")
+                    surface.get("area", ZERO.AREA)
                     for surface in find_all("$..surfaces[*]", building_p)
                     if scc_dict_p[surface["id"]] != SCC.UNREGULATED
                 ],
                 ZERO.AREA,
             )
 
-            for zones in find_all("$..zones[*]", building_p):
-                if zones["infiltration"].get("measured_air_leakage_rate"):
-                    building_total_measured_air_leakage_rate += zones["infiltration"][
+            for zone in find_all("$..zones[*]", building_p):
+                measured_air_leakage_rate = zone["infiltration"].get(
+                    "measured_air_leakage_rate"
+                )
+                if measured_air_leakage_rate:
+                    building_total_measured_air_leakage_rate += zone["infiltration"][
                         "measured_air_leakage_rate"
                     ]
                 else:
                     empty_measured_air_leakage_rate_flow_flag = True
-                    if zcc_dict_p[zones["id"]] in [
+                    if zcc_dict_p[zone["id"]] in [
                         ZCC.CONDITIONED_RESIDENTIAL,
                         ZCC.CONDITIONED_NON_RESIDENTIAL,
                         ZCC.SEMI_HEATED,
                     ]:
-                        building_total_air_leakage_rate += zones["infiltration"][
+                        building_total_air_leakage_rate += zone["infiltration"][
                             "infiltration_flow_rate"
                         ]
+
+            # for zone in find_all("$..zones[*]", building_p):
+            #     if zcc_dict_p[zone["id"]] in [
+            #         ZCC.CONDITIONED_RESIDENTIAL,
+            #         ZCC.CONDITIONED_NON_RESIDENTIAL,
+            #         ZCC.SEMI_HEATED,
+            #     ]:
+            #         building_total_air_leakage_rate += zone["infiltration"][
+            #             "infiltration_flow_rate"
+            #         ]
+            #
+            #     measured_air_leakage_rate = zone["infiltration"][
+            #         "measured_air_leakage_rate"
+            #     ]
+            #     if measured_air_leakage_rate:
+            #         building_total_measured_air_leakage_rate += zone["infiltration"][
+            #             "measured_air_leakage_rate"
+            #         ]
+            #     else:
+            #         empty_measured_air_leakage_rate_flow_flag = True
 
             target_air_leakage_rate_75pa_p = (
                 TARGET_AIR_LEAKAGE_COEFF
@@ -108,9 +129,7 @@ class Section5Rule49(RuleDefinitionListIndexedBase):
             building_total_measured_air_leakage_rate = calc_vals[
                 "building_total_measured_air_leakage_rate"
             ]
-            target_air_leakage_rate_75pa_p = calc_vals[
-                "target_air_leakage_rate_75pa_p"
-            ]
+            target_air_leakage_rate_75pa_p = calc_vals["target_air_leakage_rate_75pa_p"]
             empty_measured_air_leakage_rate_flow_flag = calc_vals[
                 "empty_measured_air_leakage_rate_flow_flag"
             ]
@@ -128,5 +147,19 @@ class Section5Rule49(RuleDefinitionListIndexedBase):
                 )
             )
 
-        def get_fail_msg(self, context, calc_vals=None, data=None):
-            return "The building total air leakage rate is not equal to the required proposed design air leakage rate at 75Pa with a Conversion Factor of 0.112 as per section G3.1.1.4. and Measured air leakage rate is not entered for all conditioned and semi-heated zones. Verify the proposed air leakage rate is modeled correctly."
+        def manual_check_required(self, context, calc_vals=None, data=None):
+            building_total_air_leakage_rate = calc_vals[
+                "building_total_air_leakage_rate"
+            ]
+            target_air_leakage_rate_75pa_p = calc_vals["target_air_leakage_rate_75pa_p"]
+            empty_measured_air_leakage_rate_flow_flag = calc_vals[
+                "empty_measured_air_leakage_rate_flow_flag"
+            ]
+
+            return (
+                std_equal(
+                    building_total_air_leakage_rate,
+                    0.112 * target_air_leakage_rate_75pa_p,
+                )
+                and empty_measured_air_leakage_rate_flow_flag
+            )
