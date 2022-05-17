@@ -70,8 +70,8 @@ class Section5Rule24(RuleDefinitionListIndexedBase):
             climate = data["climate_zone"]
             bldg_scc_wwr_ratio = data["bldg_scc_wwr_ratio_dict"][building_b["id"]]
             return (
-                bldg_scc_wwr_ratio[building_b["id"]][SCC.EXTERIOR_MIXED] == 0
-                or not (
+                bldg_scc_wwr_ratio[SCC.EXTERIOR_MIXED] > 0
+                and (
                     table_G34_lookup(
                         climate, SCC.EXTERIOR_RESIDENTIAL, "Vertical Glazing", wwr=0.1
                     )
@@ -85,7 +85,7 @@ class Section5Rule24(RuleDefinitionListIndexedBase):
                         climate, SCC.EXTERIOR_RESIDENTIAL, "Vertical Glazing", wwr=30.1
                     )
                 )
-                or not (
+                and (
                     table_G34_lookup(
                         climate,
                         SCC.EXTERIOR_NON_RESIDENTIAL,
@@ -111,7 +111,7 @@ class Section5Rule24(RuleDefinitionListIndexedBase):
                         wwr=30.1,
                     )
                 )
-                or not (
+                and (
                     table_G34_lookup(
                         climate, SCC.EXTERIOR_RESIDENTIAL, "Vertical Glazing", wwr=0.1
                     )
@@ -196,7 +196,7 @@ class Section5Rule24(RuleDefinitionListIndexedBase):
                     index_rmr="baseline",
                     list_path="subsurfaces[*]",
                     required_fields={
-                        "subsurfaces": [
+                        "$.subsurfaces[*]": [
                             "classification",
                             "glazed_area",
                             "opaque_area",
