@@ -40,32 +40,18 @@
                                                 "id": "Zone 1",
                                                 "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
-												"spaces": [
-                                                    {
-                                                        "id": "Space 1",
-                                                        "occupant_multiplier_schedule": "Required Occupancy Sched 1",
-                                                        "floor_area": 23.225759999999998
-                                                    }
-                                                ],
-												"terminals": [
-                                                    {
-                                                        "id": "Terminal 1",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
-                                                    }
-                                                ],
                                                 "surfaces": [
                                                     {
                                                         "id": "Surface 1",
                                                         "adjacent_to": "EXTERIOR",
                                                         "tilt": 82.5,
-														"area": 92.90303999999999,
+                                                        "area": 92.90303999999999,
                                                         "subsurfaces": [
                                                             {
                                                                 "id": "SubSurface 1",
                                                                 "classification": "WINDOW",
-																"glazed_area": 20.4386688,
-                                                                "opaque_area": 16.72249,
-																"u_factor": 2.0612098807530947
+                                                                "opaque_area": 0.0,
+                                                                "glazed_area": 55.741823999999994
                                                             }
                                                         ]
                                                     },
@@ -77,10 +63,7 @@
                                                         "subsurfaces": [
                                                             {
                                                                 "id": "SubSurface 2",
-                                                                "classification": "WINDOW",
-																"glazed_area": 37.161215999999996,
-                                                                "opaque_area": 3.7161215999999997,
-																"u_factor": 2.0612098807530947
+                                                                "classification": "WINDOW"
                                                             }
                                                         ]
                                                     }
@@ -130,19 +113,6 @@
                                                 "id": "Zone 1",
                                                 "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
-												"spaces": [
-                                                    {
-                                                        "id": "Space 1",
-                                                        "occupant_multiplier_schedule": "Required Occupancy Sched 1",
-                                                        "floor_area": 23.225759999999998
-                                                    }
-                                                ],
-												"terminals": [
-                                                    {
-                                                        "id": "Terminal 1",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
-                                                    }
-                                                ],
                                                 "surfaces": [
                                                     {
                                                         "id": "Surface 1",
@@ -154,8 +124,7 @@
                                                                 "id": "SubSurface 1",
                                                                 "classification": "WINDOW",
                                                                 "opaque_area": 0.0,
-                                                                "glazed_area": 37.161215999999996,
-																"u_factor": 2.0612098807530947
+                                                                "glazed_area": 37.161215999999996
                                                             }
                                                         ]
                                                     },
@@ -167,10 +136,7 @@
                                                         "subsurfaces": [
                                                             {
                                                                 "id": "SubSurface 2",
-                                                                "classification": "WINDOW",
-																"glazed_area": 37.161215999999996,
-                                                                "opaque_area": 3.7161215999999997,
-																"u_factor": 2.0612098807530947
+                                                                "classification": "WINDOW"
                                                             }
                                                         ]
                                                     }
@@ -217,96 +183,6 @@
             "schema_version": "0.0.12"
         },
         "rmr_transformations": {
-			"proposed": {
-                "id": "ASHRAE229",
-				"weather": {
-                    "climate_zone": "CZ4A",
-                    "data_source_type": "OTHER"
-                },
-                "ruleset_model_instances": [
-                    {
-                        "id": "RMR 1",
-                        "buildings": [
-                            {
-                                "id": "Building 1",
-                                "building_open_schedule": "Required Schedule 1",
-                                "building_segments": [
-                                    {
-                                        "id": "Building Segment 1",
-                                        "area_type_vertical_fenestration": "OTHER",
-										"is_all_new": true,
-                                        "zones": [
-                                            {
-                                                "id": "Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
-												"spaces": [
-                                                    {
-                                                        "id": "Space 1",
-                                                        "occupant_multiplier_schedule": "Required Occupancy Sched 1",
-                                                        "floor_area": 23.225759999999998
-                                                    }
-                                                ],
-												"terminals": [
-                                                    {
-                                                        "id": "Terminal 1",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
-                                                    }
-                                                ],
-                                                "surfaces": [
-                                                    {
-                                                        "id": "Surface 1",
-                                                        "adjacent_to": "EXTERIOR",
-                                                        "tilt": 82.5,
-														"area": 92.90303999999999,
-                                                        "subsurfaces": [
-                                                            {
-                                                                "id": "SubSurface 1",
-                                                                "classification": "WINDOW",
-																"glazed_area": 20.4386688,
-                                                                "opaque_area": 16.72249,
-																"u_factor": 2.0612098807530947
-                                                            }
-                                                        ]
-                                                    },
-                                                    {
-                                                        "id": "Surface 2",
-                                                        "adjacent_to": "EXTERIOR",
-                                                        "tilt": 90,
-                                                        "area": 2000,
-                                                        "subsurfaces": [
-                                                            {
-                                                                "id": "SubSurface 2",
-                                                                "classification": "WINDOW",
-																"glazed_area": 37.161215999999996,
-                                                                "opaque_area": 3.7161215999999997,
-																"u_factor": 2.0612098807530947
-                                                            }
-                                                        ]
-                                                    }
-                                                ]
-                                            }
-                                        ],
-                                        "heating_ventilation_air_conditioning_systems": [
-                                            {
-                                                "id": "HVAC 1",
-                                                "cooling_system": {
-                                                    "id": "Cooling System 1",
-                                                    "sensible_cool_capacity": 52755.0
-                                                },
-                                                "heating_system": {
-                                                    "id": "Heating System 1",
-                                                    "heat_capacity": 10.257488888888888
-                                                }
-                                            }
-                                        ]
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                ]
-            },
             "baseline": {
                 "id": "ASHRAE229",
 				"weather": {
@@ -330,19 +206,6 @@
                                                 "id": "Zone 1",
                                                 "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
-												"spaces": [
-                                                    {
-                                                        "id": "Space 1",
-                                                        "occupant_multiplier_schedule": "Required Occupancy Sched 1",
-                                                        "floor_area": 23.225759999999998
-                                                    }
-                                                ],
-												"terminals": [
-                                                    {
-                                                        "id": "Terminal 1",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
-                                                    }
-                                                ],
                                                 "surfaces": [
                                                     {
                                                         "id": "Surface 1",
@@ -352,10 +215,7 @@
                                                         "subsurfaces": [
                                                             {
                                                                 "id": "SubSurface 1",
-																"classification": "WINDOW",
-                                                                "opaque_area": 0.0,
-																"glazed_area": 37.161215999999996,
-																"u_factor": 2.0612098807530947
+                                                                "opaque_area": 0.0
                                                             }
                                                         ]
                                                     },
@@ -369,8 +229,7 @@
                                                                 "id": "SubSurface 2",
                                                                 "classification": "WINDOW",
                                                                 "glazed_area": 700,
-                                                                "opaque_area": 100,
-																"u_factor": 2.0612098807530947
+                                                                "opaque_area": 100
                                                             }
                                                         ]
                                                     }
@@ -417,96 +276,6 @@
             "schema_version": "0.0.12"
         },
         "rmr_transformations": {
-			"proposed": {
-                "id": "ASHRAE229",
-				"weather": {
-                    "climate_zone": "CZ4A",
-                    "data_source_type": "OTHER"
-                },
-                "ruleset_model_instances": [
-                    {
-                        "id": "RMR 1",
-                        "buildings": [
-                            {
-                                "id": "Building 1",
-                                "building_open_schedule": "Required Schedule 1",
-                                "building_segments": [
-                                    {
-                                        "id": "Building Segment 1",
-                                        "area_type_vertical_fenestration": "OTHER",
-										"is_all_new": false,
-                                        "zones": [
-                                            {
-                                                "id": "Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
-												"spaces": [
-                                                    {
-                                                        "id": "Space 1",
-                                                        "occupant_multiplier_schedule": "Required Occupancy Sched 1",
-                                                        "floor_area": 23.225759999999998
-                                                    }
-                                                ],
-												"terminals": [
-                                                    {
-                                                        "id": "Terminal 1",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
-                                                    }
-                                                ],
-                                                "surfaces": [
-                                                    {
-                                                        "id": "Surface 1",
-                                                        "adjacent_to": "EXTERIOR",
-                                                        "tilt": 82.5,
-														"area": 92.90303999999999,
-                                                        "subsurfaces": [
-                                                            {
-                                                                "id": "SubSurface 1",
-                                                                "classification": "WINDOW",
-																"glazed_area": 700,
-                                                                "opaque_area": 16.72249,
-																"u_factor": 2.0612098807530947
-                                                            }
-                                                        ]
-                                                    },
-                                                    {
-                                                        "id": "Surface 2",
-                                                        "adjacent_to": "EXTERIOR",
-                                                        "tilt": 90,
-                                                        "area": 2000,
-                                                        "subsurfaces": [
-                                                            {
-                                                                "id": "SubSurface 2",
-                                                                "classification": "WINDOW",
-																"glazed_area": 37.161215999999996,
-                                                                "opaque_area": 3.7161215999999997,
-																"u_factor": 2.0612098807530947
-                                                            }
-                                                        ]
-                                                    }
-                                                ]
-                                            }
-                                        ],
-                                        "heating_ventilation_air_conditioning_systems": [
-                                            {
-                                                "id": "HVAC 1",
-                                                "cooling_system": {
-                                                    "id": "Cooling System 1",
-                                                    "sensible_cool_capacity": 52755.0
-                                                },
-                                                "heating_system": {
-                                                    "id": "Heating System 1",
-                                                    "heat_capacity": 10.257488888888888
-                                                }
-                                            }
-                                        ]
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                ]
-            },
             "baseline": {
                 "id": "ASHRAE229",
 				"weather": {
@@ -524,25 +293,12 @@
                                     {
                                         "id": "Building Segment 1",
                                         "area_type_vertical_fenestration": "OTHER",
-										"is_all_new": false,
+										"is_all_new": true,
                                         "zones": [
                                             {
                                                 "id": "Zone 1",
                                                 "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
-												"spaces": [
-                                                    {
-                                                        "id": "Space 1",
-                                                        "occupant_multiplier_schedule": "Required Occupancy Sched 1",
-                                                        "floor_area": 23.225759999999998
-                                                    }
-                                                ],
-												"terminals": [
-                                                    {
-                                                        "id": "Terminal 1",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
-                                                    }
-                                                ],
                                                 "surfaces": [
                                                     {
                                                         "id": "Surface 1",
@@ -552,10 +308,7 @@
                                                         "subsurfaces": [
                                                             {
                                                                 "id": "SubSurface 1",
-																"classification": "WINDOW",
-																"glazed_area": 700,
-                                                                "opaque_area": 0.0,
-																"u_factor": 2.0612098807530947
+                                                                "opaque_area": 0.0
                                                             }
                                                         ]
                                                     },
@@ -569,8 +322,7 @@
                                                                 "id": "SubSurface 2",
                                                                 "classification": "WINDOW",
                                                                 "glazed_area": 200,
-                                                                "opaque_area": 100,
-																"u_factor": 2.0612098807530947
+                                                                "opaque_area": 100
                                                             }
                                                         ]
                                                     }
@@ -617,96 +369,6 @@
             "schema_version": "0.0.12"
         },
         "rmr_transformations": {
-			"proposed": {
-                "id": "ASHRAE229",
-				"weather": {
-                    "climate_zone": "CZ4A",
-                    "data_source_type": "OTHER"
-                },
-                "ruleset_model_instances": [
-                    {
-                        "id": "RMR 1",
-                        "buildings": [
-                            {
-                                "id": "Building 1",
-                                "building_open_schedule": "Required Schedule 1",
-                                "building_segments": [
-                                    {
-                                        "id": "Building Segment 1",
-                                        "area_type_vertical_fenestration": "OTHER",
-										"is_all_new": false,
-                                        "zones": [
-                                            {
-                                                "id": "Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
-												"spaces": [
-                                                    {
-                                                        "id": "Space 1",
-                                                        "occupant_multiplier_schedule": "Required Occupancy Sched 1",
-                                                        "floor_area": 23.225759999999998
-                                                    }
-                                                ],
-												"terminals": [
-                                                    {
-                                                        "id": "Terminal 1",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
-                                                    }
-                                                ],
-                                                "surfaces": [
-                                                    {
-                                                        "id": "Surface 1",
-                                                        "adjacent_to": "EXTERIOR",
-                                                        "tilt": 82.5,
-														"area": 92.90303999999999,
-                                                        "subsurfaces": [
-                                                            {
-                                                                "id": "SubSurface 1",
-                                                                "classification": "WINDOW",
-																"glazed_area": 20.4386688,
-                                                                "opaque_area": 16.72249,
-																"u_factor": 2.0612098807530947
-                                                            }
-                                                        ]
-                                                    },
-                                                    {
-                                                        "id": "Surface 2",
-                                                        "adjacent_to": "EXTERIOR",
-                                                        "tilt": 90,
-                                                        "area": 2000,
-                                                        "subsurfaces": [
-                                                            {
-                                                                "id": "SubSurface 2",
-                                                                "classification": "WINDOW",
-																"glazed_area": 37.161215999999996,
-                                                                "opaque_area": 3.7161215999999997,
-																"u_factor": 2.0612098807530947
-                                                            }
-                                                        ]
-                                                    }
-                                                ]
-                                            }
-                                        ],
-                                        "heating_ventilation_air_conditioning_systems": [
-                                            {
-                                                "id": "HVAC 1",
-                                                "cooling_system": {
-                                                    "id": "Cooling System 1",
-                                                    "sensible_cool_capacity": 52755.0
-                                                },
-                                                "heating_system": {
-                                                    "id": "Heating System 1",
-                                                    "heat_capacity": 10.257488888888888
-                                                }
-                                            }
-                                        ]
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                ]
-            },
             "baseline": {
                 "id": "ASHRAE229",
 				"weather": {
@@ -724,25 +386,12 @@
                                     {
                                         "id": "Building Segment 1",
                                         "area_type_vertical_fenestration": "OTHER",
-										"is_all_new": false,
+										"is_all_new": true,
                                         "zones": [
                                             {
                                                 "id": "Zone 1",
                                                 "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
-												"spaces": [
-                                                    {
-                                                        "id": "Space 1",
-                                                        "occupant_multiplier_schedule": "Required Occupancy Sched 1",
-                                                        "floor_area": 23.225759999999998
-                                                    }
-                                                ],
-												"terminals": [
-                                                    {
-                                                        "id": "Terminal 1",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
-                                                    }
-                                                ],
                                                 "surfaces": [
                                                     {
                                                         "id": "Surface 1",
@@ -752,10 +401,7 @@
                                                         "subsurfaces": [
                                                             {
                                                                 "id": "SubSurface 1",
-																"classification": "WINDOW",
-																"glazed_area": 700,
-                                                                "opaque_area": 0.0,
-																"u_factor": 2.0612098807530947
+                                                                "opaque_area": 0.0
                                                             }
                                                         ]
                                                     },
@@ -769,8 +415,7 @@
                                                                 "id": "SubSurface 2",
                                                                 "classification": "WINDOW",
                                                                 "glazed_area": 700,
-                                                                "opaque_area": 100,
-																"u_factor": 2.0612098807530947
+                                                                "opaque_area": 100
                                                             }
                                                         ]
                                                     }
