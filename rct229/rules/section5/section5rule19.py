@@ -42,28 +42,65 @@ class Section5Rule19(RuleDefinitionListIndexedBase):
                 rmrs_used=UserBaselineProposedVals(False, True, True),
                 required_fields={
                     "$": ["building_segments"],
-                    # "building_segment": [
-                    #     "is_all_new",
-                    #     "area_type_vertical_fenestration",
-                    # ],
+                    "building_segment": [
+                        "is_all_new",
+                    ],
                 },
             )
 
-        def create_data(self, context, data=None):
+        def get_calc_vals(self, context, data=None):
             building_b = context.baseline
             building_p = context.proposed
 
+            area_type_window_wall_area_dict_b = get_area_type_window_wall_area_dict(
+                data["climate_zone"], building_b
+            )
+            area_type_window_wall_area_dict_p = get_area_type_window_wall_area_dict(
+                data["climate_zone"], building_p
+            )
+
+            wwr_b = (
+                area_type_window_wall_area_dict_b["OTHER"]["total_window_area"]
+                / area_type_window_wall_area_dict_b["OTHER"]["total_wall_area"]
+            )
+            wwr_p = (
+                area_type_window_wall_area_dict_p["OTHER"]["total_window_area"]
+                / area_type_window_wall_area_dict_p["OTHER"]["total_wall_area"]
+            )
+
+            manual_check_flag = False
+            for building_segment in find_all("$..building_segments[*]", building_b):
+                if not table_G3_1_1_1_lookup(
+                    building_segment["area_type_vertical_fenestration"]
+                )['wwr']:
+                    if not building_segment["is_all_new"]:
+                        manual_check_flag = True
+
             return {
-                **data,
-                "is_area_type_all_new_dict_baseline": 1,
-                "is_area_type_all_new_dict_proposed": 1,
-                "area_type_window_wall_ratio_dict_baseline": 1,
-                "area_type_window_wall_ratio_dict_proposed": 1,
+                "wwr_b": wwr_b,
+                "wwr_p": wwr_p,
+                "manual_check_flag": manual_check_flag,
             }
 
-
-        def get_calc_vals(self, context, data=None):
-            pass
-
         def rule_check(self, context, calc_vals=None, data=None):
-            pass
+            wwr_b = calc_vals["wwr_b"]
+            wwr_p = calc_vals["wwr_p"]
+            manual_check_flag = calc_vals["manual_check_flag"]
+
+            return not manual_check_flag and std_equal(wwr_b, min(wwr_p, WWR_THRESHOLD))
+
+        def manual_check_required(self, context, calc_vals=None, data=None):
+
+            return calc_vals["manual_check_flag"]
+
+        def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
+            wwr_b = calc_vals["wwr_b"]
+            wwr_p = calc_vals["wwr_p"]
+
+            if calc_vals["manual_check_flag"]:
+                if std_equal(wwr_b, min(wwr_p, WWR_THRESHOLD)):
+                    manual_check_msg = MSG_WARN_MATCHED
+                else:
+                    manual_check_msg = MSG_WARN_MISMATCHED
+
+            return manual_check_msg
