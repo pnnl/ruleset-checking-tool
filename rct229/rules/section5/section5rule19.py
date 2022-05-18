@@ -1,4 +1,3 @@
-from rct229.data_fns.table_G3_111_fns import table_G3_1_1_1_lookup
 from rct229.rule_engine.rule_base import (
     RuleDefinitionBase,
     RuleDefinitionListIndexedBase,
@@ -44,6 +43,7 @@ class Section5Rule19(RuleDefinitionListIndexedBase):
                     "$": ["building_segments"],
                     "building_segment": [
                         "is_all_new",
+                        "area_type_vertical_fenestration",
                     ],
                 },
             )
@@ -70,9 +70,7 @@ class Section5Rule19(RuleDefinitionListIndexedBase):
 
             manual_check_flag = False
             for building_segment in find_all("$..building_segments[*]", building_b):
-                if not table_G3_1_1_1_lookup(
-                    building_segment["area_type_vertical_fenestration"]
-                )['wwr']:
+                if building_segment["area_type_vertical_fenestration"] == "OTHER":
                     if not building_segment["is_all_new"]:
                         manual_check_flag = True
 
@@ -83,22 +81,21 @@ class Section5Rule19(RuleDefinitionListIndexedBase):
             }
 
         def rule_check(self, context, calc_vals=None, data=None):
-            wwr_b = calc_vals["wwr_b"]
-            wwr_p = calc_vals["wwr_p"]
-            manual_check_flag = calc_vals["manual_check_flag"]
 
-            return not manual_check_flag and std_equal(wwr_b, min(wwr_p, WWR_THRESHOLD))
+            return not calc_vals["manual_check_flag"] and std_equal(
+                calc_vals["wwr_b"], min(calc_vals["wwr_p"], WWR_THRESHOLD)
+            )
 
         def manual_check_required(self, context, calc_vals=None, data=None):
 
             return calc_vals["manual_check_flag"]
 
         def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
-            wwr_b = calc_vals["wwr_b"]
-            wwr_p = calc_vals["wwr_p"]
 
             if calc_vals["manual_check_flag"]:
-                if std_equal(wwr_b, min(wwr_p, WWR_THRESHOLD)):
+                if std_equal(
+                    calc_vals["wwr_b"], min(calc_vals["wwr_p"], WWR_THRESHOLD)
+                ):
                     manual_check_msg = MSG_WARN_MATCHED
                 else:
                     manual_check_msg = MSG_WARN_MISMATCHED
