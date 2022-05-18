@@ -1,21 +1,19 @@
-from rct229.rule_engine.rule_base import (
-    RuleDefinitionBase,
-    RuleDefinitionListIndexedBase,
-)
-from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
-from rct229.ruleset_functions.get_surface_conditioning_category_dict import (
-    SurfaceConditioningCategory as SCC,
-    get_surface_conditioning_category_dict,
-)
-from rct229.ruleset_functions.get_zone_conditioning_category_dict import (
-    ZoneConditioningCategory as ZCC,
-    get_zone_conditioning_category_dict,
-)
-
+from rct229.rule_engine.rule_base import (RuleDefinitionBase,
+                                          RuleDefinitionListIndexedBase)
+from rct229.rule_engine.user_baseline_proposed_vals import \
+    UserBaselineProposedVals
+from rct229.ruleset_functions.get_surface_conditioning_category_dict import \
+    SurfaceConditioningCategory as SCC
+from rct229.ruleset_functions.get_surface_conditioning_category_dict import \
+    get_surface_conditioning_category_dict
+from rct229.ruleset_functions.get_zone_conditioning_category_dict import \
+    ZoneConditioningCategory as ZCC
+from rct229.ruleset_functions.get_zone_conditioning_category_dict import \
+    get_zone_conditioning_category_dict
+from rct229.schema.config import ureg
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.pint_utils import ZERO
 from rct229.utils.std_comparisons import std_equal
-from rct229.schema.config import ureg
 
 TARGET_AIR_LEAKAGE_COEFF = 0.6 * ureg("cfm / foot**2")
 
@@ -59,8 +57,8 @@ class Section5Rule49(RuleDefinitionListIndexedBase):
                 data["climate_zone"], building_p
             )
 
-            building_total_air_leakage_rate = 0.0 # * ZERO.FLOW
-            building_total_measured_air_leakage_rate = 0.0 # * ZERO.FLOW
+            building_total_air_leakage_rate = 0.0 * ZERO.FLOW
+            building_total_measured_air_leakage_rate = 0.0 * ZERO.FLOW
             empty_measured_air_leakage_rate_flow_flag = False
 
             building_total_envelope_area = sum(
@@ -73,6 +71,16 @@ class Section5Rule49(RuleDefinitionListIndexedBase):
             )
 
             for zone in find_all("$..zones[*]", building_p):
+                if zcc_dict_p[zone["id"]] in [
+                    ZCC.CONDITIONED_RESIDENTIAL,
+                    ZCC.CONDITIONED_NON_RESIDENTIAL,
+                    ZCC.CONDITIONED_MIXED,
+                    ZCC.SEMI_HEATED,
+                ]:
+                    building_total_air_leakage_rate += zone["infiltration"][
+                        "infiltration_flow_rate"
+                    ]
+
                 measured_air_leakage_rate = zone["infiltration"].get(
                     "measured_air_leakage_rate"
                 )
@@ -82,34 +90,6 @@ class Section5Rule49(RuleDefinitionListIndexedBase):
                     ]
                 else:
                     empty_measured_air_leakage_rate_flow_flag = True
-                    if zcc_dict_p[zone["id"]] in [
-                        ZCC.CONDITIONED_RESIDENTIAL,
-                        ZCC.CONDITIONED_NON_RESIDENTIAL,
-                        ZCC.SEMI_HEATED,
-                    ]:
-                        building_total_air_leakage_rate += zone["infiltration"][
-                            "infiltration_flow_rate"
-                        ]
-
-            # for zone in find_all("$..zones[*]", building_p):
-            #     if zcc_dict_p[zone["id"]] in [
-            #         ZCC.CONDITIONED_RESIDENTIAL,
-            #         ZCC.CONDITIONED_NON_RESIDENTIAL,
-            #         ZCC.SEMI_HEATED,
-            #     ]:
-            #         building_total_air_leakage_rate += zone["infiltration"][
-            #             "infiltration_flow_rate"
-            #         ]
-            #
-            #     measured_air_leakage_rate = zone["infiltration"][
-            #         "measured_air_leakage_rate"
-            #     ]
-            #     if measured_air_leakage_rate:
-            #         building_total_measured_air_leakage_rate += zone["infiltration"][
-            #             "measured_air_leakage_rate"
-            #         ]
-            #     else:
-            #         empty_measured_air_leakage_rate_flow_flag = True
 
             target_air_leakage_rate_75pa_p = (
                 TARGET_AIR_LEAKAGE_COEFF
@@ -157,7 +137,7 @@ class Section5Rule49(RuleDefinitionListIndexedBase):
             ]
 
             return (
-                std_equal(
+                not std_equal(
                     building_total_air_leakage_rate,
                     0.112 * target_air_leakage_rate_75pa_p,
                 )
