@@ -246,7 +246,7 @@ def run_section_tests(test_json_name):
             test_result_dict["results"].append(False)
             all_tests_pass = False
             continue
-        import pprint
+
         # Evaluate rule and check for invalid RMRs
         evaluation_dict = evaluate_rule(rule, rmr_trio)
         pprint.pprint(evaluation_dict)
