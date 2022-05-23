@@ -17,14 +17,12 @@ DOOR = schema_enums["SubsurfaceClassificationType"].DOOR.name
 def get_building_scc_skylight_roof_ratios_dict(climate_zone, building):
     """Gets a dictionary mapping skylight and envelope roof ratios for a building for residential, non-residential,
     mixed and semi-heated surface conditioning categories
-
             Parameters
             ----------
             climate_zone : str
                 One of the ClimateZone2019ASHRAE901 enumerated values
             building : dict
                 A dictionary representing a building as defined by the ASHRAE229 schema
-
             Returns
             -------
             dict
