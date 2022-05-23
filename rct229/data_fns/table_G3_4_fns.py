@@ -13,7 +13,7 @@ SURFACE_TYPE_TO_CONSTRUCTION_MAP = {
     OST.FLOOR: "ExteriorFloor",
     OST.BELOW_GRADE_WALL: "GroundContactWall",
     # this is not covered in the OST.
-    "Vertical Glazing": "ExteriorWindow",
+    "VERTICAL GLAZING": "ExteriorWindow",
 }
 
 # This dictionary maps surface conditioning categories as returned from get_surface_conditioning_category_dict()
@@ -54,22 +54,24 @@ CLIMATE_ZONE_ENUMERATION_TO_CLIMATE_ZONE_SET_MAP = {
 
 # Helper function to add WWR to the search criteria for getting the correct
 # Exterior windows, skylight and glass doors
-def wwr_to_search_criteria(wwr, search_criteria):
+def wwr_to_search_criteria(wwr):
+    wwr_search_list = []
     if wwr <= 0.1:
-        search_criteria.append(("minimum_percent_of_surface", 0))
-        search_criteria.append(("maximum_percent_of_surface", 10))
+        wwr_search_list.append(("minimum_percent_of_surface", 0))
+        wwr_search_list.append(("maximum_percent_of_surface", 10))
     elif wwr <= 0.2:
-        search_criteria.append(("minimum_percent_of_surface", 10.1))
-        search_criteria.append(("maximum_percent_of_surface", 20))
+        wwr_search_list.append(("minimum_percent_of_surface", 10.1))
+        wwr_search_list.append(("maximum_percent_of_surface", 20))
     elif wwr <= 0.3:
-        search_criteria.append(("minimum_percent_of_surface", 20.1))
-        search_criteria.append(("maximum_percent_of_surface", 30))
+        wwr_search_list.append(("minimum_percent_of_surface", 20.1))
+        wwr_search_list.append(("maximum_percent_of_surface", 30))
     elif wwr <= 0.4:
-        search_criteria.append(("minimum_percent_of_surface", 30.1))
-        search_criteria.append(("maximum_percent_of_surface", 40))
+        wwr_search_list.append(("minimum_percent_of_surface", 30.1))
+        wwr_search_list.append(("maximum_percent_of_surface", 40))
     else:
-        search_criteria.append(("minimum_percent_of_surface", None))
-        search_criteria.append(("maximum_percent_of_surface", None))
+        wwr_search_list.append(("minimum_percent_of_surface", None))
+        wwr_search_list.append(("maximum_percent_of_surface", None))
+    return wwr_search_list
 
 
 def table_G34_lookup(
@@ -118,7 +120,7 @@ def table_G34_lookup(
     ]
 
     if wwr:
-        wwr_to_search_criteria(wwr, search_criteria)
+        search_criteria.extend(wwr_to_search_criteria(wwr))
 
     osstd_entry = find_osstd_table_entry(
         search_criteria,
