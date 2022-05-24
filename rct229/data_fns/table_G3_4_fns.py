@@ -13,7 +13,7 @@ SURFACE_TYPE_TO_CONSTRUCTION_MAP = {
     OST.FLOOR: "ExteriorFloor",
     OST.BELOW_GRADE_WALL: "GroundContactWall",
     "VERTICAL GLAZING": "ExteriorWindow",
-    OST.SKYLIGHT: "Skylight",
+    "SKYLIGHT": "Skylight",
 }
 
 # This dictionary maps surface conditioning categories as returned from get_surface_conditioning_category_dict()

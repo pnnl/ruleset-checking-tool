@@ -247,10 +247,7 @@ class Section5Rule24(RuleDefinitionListIndexedBase):
                     elif scc == SCC.SEMI_EXTERIOR:
                         target_u_factor = data["target_u_factor_semiheated"]
                     else:
-                        assert (
-                            False,
-                            f"Severe Error: No matching surface category for: {scc}",
-                        )
+                        assert False, f"Severe Error: No matching surface category for: {scc}"
 
                     return {
                         "target_u_factor": target_u_factor,

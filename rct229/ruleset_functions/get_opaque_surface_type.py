@@ -18,7 +18,6 @@ class OpaqueSurfaceType:
     HEATED_SOG: str = "HEATED SLAB-ON-GRADE"
     ROOF: str = "ROOF"
     UNHEATED_SOG: str = "UNHEATED SLAB-ON-GRADE"
-    SKYLIGHT: str = "SKYLIGHT"
 
 
 def get_opaque_surface_type(surface):
