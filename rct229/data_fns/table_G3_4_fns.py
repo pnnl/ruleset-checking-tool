@@ -12,8 +12,8 @@ SURFACE_TYPE_TO_CONSTRUCTION_MAP = {
     OST.UNHEATED_SOG: "GroundContactFloor",
     OST.FLOOR: "ExteriorFloor",
     OST.BELOW_GRADE_WALL: "GroundContactWall",
-    # this is not covered in the OST.
     "VERTICAL GLAZING": "ExteriorWindow",
+    OST.SKYLIGHT: "Skylight",
 }
 
 # This dictionary maps surface conditioning categories as returned from get_surface_conditioning_category_dict()
@@ -53,6 +53,7 @@ CLIMATE_ZONE_ENUMERATION_TO_CLIMATE_ZONE_SET_MAP = {
 
 
 # Helper function to add WWR to the search criteria for getting the correct
+
 # Exterior windows, skylight and glass doors
 def wwr_to_search_criteria(wwr):
     wwr_search_list = []
@@ -74,8 +75,23 @@ def wwr_to_search_criteria(wwr):
     return wwr_search_list
 
 
+# Helper funciton to add WWR to the search criteria for getting the correct
+# Exterior skylight
+def skylit_to_search_criteria(wwr, search_criteria):
+    if wwr <= 0.02:
+        search_criteria.append(("minimum_percent_of_surface", 0))
+        search_criteria.append(("maximum_percent_of_surface", 2.0))
+    else:
+        search_criteria.append(("minimum_percent_of_surface", 2.0))
+        search_criteria.append(("maximum_percent_of_surface", None))
+
+
 def table_G34_lookup(
-    climate_zone, surface_conditioning_category, opaque_surface_type, wwr=None
+    climate_zone,
+    surface_conditioning_category,
+    opaque_surface_type,
+    wwr=None,
+    skylit_wwr=None,
 ):
     """Returns the assembly maxiumum values for a given climate zone, surface conditoning category
      and opaque sruface type as required by ASHRAE 90.1 Table G3.4-1 through G3.4-8
@@ -121,6 +137,9 @@ def table_G34_lookup(
 
     if wwr:
         search_criteria.extend(wwr_to_search_criteria(wwr))
+
+    if skylit_wwr:
+        skylit_to_search_criteria(skylit_wwr, search_criteria)
 
     osstd_entry = find_osstd_table_entry(
         search_criteria,
