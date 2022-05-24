@@ -65,75 +65,87 @@ class Section5Rule26(RuleDefinitionListIndexedBase):
                 list_path="$..surfaces[*]",
             )
 
-        def manual_check_required(self, context, calc_vals=None, data=None):
+        def create_data(self, context, data=None):
             building_b = context.baseline
-            climate = data["climate_zone"]
+            climate_zone = data["climate_zone"]
             bldg_scc_wwr_ratio = data["bldg_scc_wwr_ratio_dict"][building_b["id"]]
-            return (
-                bldg_scc_wwr_ratio[SCC.EXTERIOR_MIXED] > 0
-                and (
+            # manual flag required?
+            manual_check_required_flag = bldg_scc_wwr_ratio[
+                SCC.EXTERIOR_MIXED
+            ] > 0 and not (
+                (
                     table_G34_lookup(
-                        climate, SCC.EXTERIOR_RESIDENTIAL, "Vertical Glazing", wwr=0.1
-                    )["solar_heat_gain_coefficient"]
-                    == table_G34_lookup(
-                        climate, SCC.EXTERIOR_RESIDENTIAL, "Vertical Glazing", wwr=10.1
-                    )["solar_heat_gain_coefficient"]
-                    == table_G34_lookup(
-                        climate, SCC.EXTERIOR_RESIDENTIAL, "Vertical Glazing", wwr=20.1
-                    )["solar_heat_gain_coefficient"]
-                    == table_G34_lookup(
-                        climate, SCC.EXTERIOR_RESIDENTIAL, "Vertical Glazing", wwr=30.1
-                    )["solar_heat_gain_coefficient"]
-                )
-                and (
-                    table_G34_lookup(
-                        climate,
-                        SCC.EXTERIOR_NON_RESIDENTIAL,
-                        "Vertical Glazing",
+                        climate_zone,
+                        SCC.EXTERIOR_RESIDENTIAL,
+                        "VERTICAL GLAZING",
                         wwr=0.1,
                     )["solar_heat_gain_coefficient"]
                     == table_G34_lookup(
-                        climate,
-                        SCC.EXTERIOR_NON_RESIDENTIAL,
-                        "Vertical Glazing",
+                        climate_zone,
+                        SCC.EXTERIOR_RESIDENTIAL,
+                        "VERTICAL GLAZING",
                         wwr=10.1,
                     )["solar_heat_gain_coefficient"]
                     == table_G34_lookup(
-                        climate,
-                        SCC.EXTERIOR_NON_RESIDENTIAL,
-                        "Vertical Glazing",
+                        climate_zone,
+                        SCC.EXTERIOR_RESIDENTIAL,
+                        "VERTICAL GLAZING",
                         wwr=20.1,
                     )["solar_heat_gain_coefficient"]
                     == table_G34_lookup(
-                        climate,
-                        SCC.EXTERIOR_NON_RESIDENTIAL,
-                        "Vertical Glazing",
+                        climate_zone,
+                        SCC.EXTERIOR_RESIDENTIAL,
+                        "VERTICAL GLAZING",
                         wwr=30.1,
                     )["solar_heat_gain_coefficient"]
                 )
                 and (
                     table_G34_lookup(
-                        climate, SCC.EXTERIOR_RESIDENTIAL, "Vertical Glazing", wwr=0.1
+                        climate_zone,
+                        SCC.EXTERIOR_NON_RESIDENTIAL,
+                        "VERTICAL GLAZING",
+                        wwr=0.1,
                     )["solar_heat_gain_coefficient"]
                     == table_G34_lookup(
-                        climate,
+                        climate_zone,
                         SCC.EXTERIOR_NON_RESIDENTIAL,
-                        "Vertical Glazing",
+                        "VERTICAL GLAZING",
+                        wwr=10.1,
+                    )["solar_heat_gain_coefficient"]
+                    == table_G34_lookup(
+                        climate_zone,
+                        SCC.EXTERIOR_NON_RESIDENTIAL,
+                        "VERTICAL GLAZING",
+                        wwr=20.1,
+                    )["solar_heat_gain_coefficient"]
+                    == table_G34_lookup(
+                        climate_zone,
+                        SCC.EXTERIOR_NON_RESIDENTIAL,
+                        "VERTICAL GLAZING",
+                        wwr=30.1,
+                    )["solar_heat_gain_coefficient"]
+                )
+                and (
+                    table_G34_lookup(
+                        climate_zone,
+                        SCC.EXTERIOR_RESIDENTIAL,
+                        "VERTICAL GLAZING",
+                        wwr=0.1,
+                    )["solar_heat_gain_coefficient"]
+                    == table_G34_lookup(
+                        climate_zone,
+                        SCC.EXTERIOR_NON_RESIDENTIAL,
+                        "VERTICAL GLAZING",
                         wwr=0.1,
                     )["solar_heat_gain_coefficient"]
                 )
             )
-
-        def create_data(self, context, data=None):
-            building_b = context.baseline
-            climate = data["climate_zone"]
-            bldg_scc_wwr_ratio = data["bldg_scc_wwr_ratio_dict"][building_b["id"]]
-            # get all data
+            # get standard code data
             target_shgc_mix = (
                 table_G34_lookup(
-                    climate,
+                    climate_zone,
                     SCC.EXTERIOR_RESIDENTIAL,
-                    "Vertical Glazing",
+                    "VERTICAL GLAZING",
                     wwr=bldg_scc_wwr_ratio[SCC.EXTERIOR_MIXED],
                 )["solar_heat_gain_coefficient"]
                 if bldg_scc_wwr_ratio[SCC.EXTERIOR_MIXED] > 0
@@ -141,9 +153,9 @@ class Section5Rule26(RuleDefinitionListIndexedBase):
             )
             target_shgc_res = (
                 table_G34_lookup(
-                    climate,
+                    climate_zone,
                     SCC.EXTERIOR_RESIDENTIAL,
-                    "Vertical Glazing",
+                    "VERTICAL GLAZING",
                     wwr=bldg_scc_wwr_ratio[SCC.EXTERIOR_RESIDENTIAL],
                 )["solar_heat_gain_coefficient"]
                 if bldg_scc_wwr_ratio[SCC.EXTERIOR_RESIDENTIAL] > 0
@@ -151,9 +163,9 @@ class Section5Rule26(RuleDefinitionListIndexedBase):
             )
             target_shgc_nores = (
                 table_G34_lookup(
-                    climate,
+                    climate_zone,
                     SCC.EXTERIOR_NON_RESIDENTIAL,
-                    "Vertical Glazing",
+                    "VERTICAL GLAZING",
                     wwr=bldg_scc_wwr_ratio[SCC.EXTERIOR_NON_RESIDENTIAL],
                 )["solar_heat_gain_coefficient"]
                 if bldg_scc_wwr_ratio[SCC.EXTERIOR_NON_RESIDENTIAL] > 0
@@ -161,9 +173,9 @@ class Section5Rule26(RuleDefinitionListIndexedBase):
             )
             target_shgc_semiheated = (
                 table_G34_lookup(
-                    climate,
+                    climate_zone,
                     SCC.SEMI_EXTERIOR,
-                    "Vertical Glazing",
+                    "VERTICAL GLAZING",
                     wwr=bldg_scc_wwr_ratio[SCC.SEMI_EXTERIOR],
                 )["solar_heat_gain_coefficient"]
                 if bldg_scc_wwr_ratio[SCC.SEMI_EXTERIOR] > 0
@@ -173,8 +185,9 @@ class Section5Rule26(RuleDefinitionListIndexedBase):
                 **data,
                 # TODO this function will likely need to be revised to RMD level later.
                 "scc_dict_b": get_surface_conditioning_category_dict(
-                    climate, building_b
+                    climate_zone, building_b
                 ),
+                "manual_check_required_flag": manual_check_required_flag,
                 "target_shgc_mix": target_shgc_mix,
                 "target_shgc_res": target_shgc_res,
                 "target_shgc_nores": target_shgc_nores,
@@ -205,6 +218,16 @@ class Section5Rule26(RuleDefinitionListIndexedBase):
                     },
                 )
 
+            def manual_check_required(self, context, calc_vals=None, data=None):
+                scc_dict_b = data["scc_dict_b"]
+                manual_check_required_flag = data["manual_check_required_flag"]
+                surface_b = context.baseline
+                # if exterior mixed and required manual check
+                return (
+                    scc_dict_b[surface_b["id"]] == SCC.EXTERIOR_MIXED
+                    and manual_check_required_flag
+                )
+
             def create_data(self, context, data=None):
                 surface_b = context.baseline
                 scc_dict_b = data["scc_dict_b"]
@@ -212,10 +235,8 @@ class Section5Rule26(RuleDefinitionListIndexedBase):
 
             def list_filter(self, context_item, data=None):
                 subsurface_b = context_item.baseline
-                # subsurface_b could be none (surface has no subsurface)
                 return (
-                    subsurface_b is None
-                    or subsurface_b["classification"] != DOOR
+                    subsurface_b["classification"] != DOOR
                     or subsurface_b["glazed_area"] > subsurface_b["opaque_area"]
                 )
 
@@ -229,13 +250,8 @@ class Section5Rule26(RuleDefinitionListIndexedBase):
                     )
 
                 def get_calc_vals(self, context, data=None):
-                    subsurface_b = context.baseline
-                    return {
-                        "subsurface_shgc": subsurface_b["solar_heat_gain_coefficient"]
-                    }
-
-                def rule_check(self, context, calc_vals=None, data=None):
                     scc = data["scc"]
+                    subsurface_b = context.baseline
                     target_shgc = 0.0
                     if scc == SCC.EXTERIOR_MIXED:
                         target_shgc = data["target_shgc_mix"]
@@ -247,5 +263,12 @@ class Section5Rule26(RuleDefinitionListIndexedBase):
                         target_shgc = data["target_shgc_semiheated"]
                     else:
                         assert f"Severe Error: No matching surface category for: {scc}"
+                    return {
+                        "subsurface_shgc": subsurface_b["solar_heat_gain_coefficient"],
+                        "target_shgc": target_shgc,
+                    }
 
-                    return std_equal(target_shgc, calc_vals["subsurface_shgc"])
+                def rule_check(self, context, calc_vals=None, data=None):
+                    target_shgc = calc_vals["target_shgc"]
+                    subsurface_shgc = calc_vals["subsurface_shgc"]
+                    return std_equal(target_shgc, subsurface_shgc)
