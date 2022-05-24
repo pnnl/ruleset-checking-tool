@@ -49,6 +49,8 @@ class Section5Rule45(RuleDefinitionListIndexedBase):
                 "schedules_p": rmd_p["schedules"],
             }
 
+        # TODO we may need to add a building level for reporting purpose in the future.
+
         class ZoneRule(RuleDefinitionBase):
             def __init__(self):
                 super(Section5Rule45.RuleSetModelInstanceRule.ZoneRule, self).__init__(
