@@ -236,11 +236,6 @@ class Section5Rule24(RuleDefinitionListIndexedBase):
 
                 def get_calc_vals(self, context, data=None):
                     subsurface_b = context.baseline
-                    return {
-                        "subsurface_u_factor": subsurface_b["u_factor"],
-                    }
-
-                def rule_check(self, context, calc_vals=None, data=None):
                     scc = data["scc"]
                     target_u_factor = None
                     if scc == SCC.EXTERIOR_MIXED:
@@ -257,4 +252,12 @@ class Section5Rule24(RuleDefinitionListIndexedBase):
                             f"Severe Error: No matching surface category for: {scc}",
                         )
 
-                    return std_equal(target_u_factor, calc_vals["subsurface_u_factor"])
+                    return {
+                        "target_u_factor": target_u_factor,
+                        "subsurface_u_factor": subsurface_b["u_factor"],
+                    }
+
+                def rule_check(self, context, calc_vals=None, data=None):
+                    target_u_factor = calc_vals["target_u_factor"]
+                    subsurface_u_factor = calc_vals["subsurface_u_factor"]
+                    return std_equal(target_u_factor, subsurface_u_factor)
