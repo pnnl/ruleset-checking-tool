@@ -30,7 +30,7 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Schedule 1",
+                                "building_open_schedule": "Building  Open Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -39,9 +39,19 @@
                                                 "id": "Zone 1",
                                                 "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
+                                                "volume": 1415.8423295999996,
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "occupant_multiplier_schedule": "Required Schedule 1",
+                                                        "lighting_space_type": "OFFICE_ENCLOSED",
+                                                        "floor_area": 464.51519999999994
+                                                    }
+                                                ],
                                                 "infiltration": {
                                                     "id": "Infiltration 1",
-                                                    "measured_air_leakage_rate": 2.359737215999999
+                                                    "multiplier_schedule": "Infiltration Schedule 1",
+                                                    "measured_air_leakage_rate": 4.719474431999998
                                                 },
                                                 "terminals": [
                                                     {
@@ -52,6 +62,7 @@
                                                 "surfaces": [
                                                     {
                                                         "id": "Surface 1",
+                                                        "azimuth": 180,
                                                         "adjacent_to": "EXTERIOR",
                                                         "tilt": 90,
                                                         "area": 464.51519999999994
@@ -70,11 +81,11 @@
                                                 "id": "HVAC 1",
                                                 "cooling_system": {
                                                     "id": "Cooling System 1",
-                                                    "sensible_cool_capacity": 35170.0
+                                                    "sensible_cool_capacity": 7034.0
                                                 },
                                                 "heating_system": {
                                                     "id": "Heating System 1",
-                                                    "heat_capacity": 9378.275555555556
+                                                    "heat_capacity": 17584.266666666666
                                                 }
                                             }
                                         ]
@@ -118,7 +129,7 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Schedule 1",
+                                "building_open_schedule": "Building  Open Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -127,9 +138,19 @@
                                                 "id": "Zone 1",
                                                 "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
+                                                "volume": 1415.8423295999996,
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "occupant_multiplier_schedule": "Required Schedule 1",
+                                                        "lighting_space_type": "OFFICE_ENCLOSED",
+                                                        "floor_area": 464.51519999999994
+                                                    }
+                                                ],
                                                 "infiltration": {
                                                     "id": "Infiltration 1",
-                                                    "measured_air_leakage_rate": 4.719474431999998
+                                                    "multiplier_schedule": "Infiltration Schedule 1",
+                                                    "measured_air_leakage_rate": 2.359737215999999
                                                 },
                                                 "terminals": [
                                                     {
@@ -140,6 +161,7 @@
                                                 "surfaces": [
                                                     {
                                                         "id": "Surface 1",
+                                                        "azimuth": 180,
                                                         "adjacent_to": "EXTERIOR",
                                                         "tilt": 90,
                                                         "area": 464.51519999999994
@@ -158,11 +180,11 @@
                                                 "id": "HVAC 1",
                                                 "cooling_system": {
                                                     "id": "Cooling System 1",
-                                                    "sensible_cool_capacity": 35170.0
+                                                    "sensible_cool_capacity": 7034.0
                                                 },
                                                 "heating_system": {
                                                     "id": "Heating System 1",
-                                                    "heat_capacity": 9378.275555555556
+                                                    "heat_capacity": 17584.266666666666
                                                 }
                                             }
                                         ]
@@ -214,8 +236,18 @@
                                                 "id": "Zone 1",
                                                 "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
+                                                "volume": 1415.8423295999996,
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "occupant_multiplier_schedule": "Required Schedule 1",
+                                                        "lighting_space_type": "OFFICE_ENCLOSED",
+                                                        "floor_area": 464.51519999999994
+                                                    }
+                                                ],
                                                 "infiltration": {
                                                     "id": "Infiltration 1",
+                                                    "multiplier_schedule": "Infiltration Schedule 2",
                                                     "infiltration_flow_rate": 0.5285811363839998
                                                 },
                                                 "terminals": [
@@ -245,11 +277,11 @@
                                                 "id": "HVAC 1",
                                                 "cooling_system": {
                                                     "id": "Cooling System 1",
-                                                    "sensible_cool_capacity": 35170.0
+                                                    "sensible_cool_capacity": 7034.0
                                                 },
                                                 "heating_system": {
                                                     "id": "Heating System 1",
-                                                    "heat_capacity": 9378.275555555556
+                                                    "heat_capacity": 17584.266666666666
                                                 }
                                             }
                                         ]
@@ -301,8 +333,18 @@
                                                 "id": "Zone 1",
                                                 "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
+                                                "volume": 1415.8423295999996,
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "occupant_multiplier_schedule": "Required Schedule 1",
+                                                        "lighting_space_type": "OFFICE_ENCLOSED",
+                                                        "floor_area": 464.51519999999994
+                                                    }
+                                                ],
                                                 "infiltration": {
                                                     "id": "Infiltration 1",
+                                                    "multiplier_schedule": "Infiltration Schedule 3",
                                                     "infiltration_flow_rate": 1.0571622727679997
                                                 },
                                                 "terminals": [
@@ -332,11 +374,11 @@
                                                 "id": "HVAC 1",
                                                 "cooling_system": {
                                                     "id": "Cooling System 1",
-                                                    "sensible_cool_capacity": 35170.0
+                                                    "sensible_cool_capacity": 7034.0
                                                 },
                                                 "heating_system": {
                                                     "id": "Heating System 1",
-                                                    "heat_capacity": 9378.275555555556
+                                                    "heat_capacity": 17584.266666666666
                                                 }
                                             }
                                         ]
@@ -380,7 +422,7 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Schedule 1",
+                                "building_open_schedule": "Building  Open Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -389,9 +431,19 @@
                                                 "id": "Zone 1",
                                                 "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
+                                                "volume": 1415.8423295999996,
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "occupant_multiplier_schedule": "Required Schedule 1",
+                                                        "lighting_space_type": "WAREHOUSE_STORAGE_AREA_SMALLER_HAND_CARRIED_ITEMS",
+                                                        "floor_area": 464.51519999999994
+                                                    }
+                                                ],
                                                 "infiltration": {
                                                     "id": "Infiltration 1",
-                                                    "measured_air_leakage_rate": 2.359737215999999
+                                                    "multiplier_schedule": "Infiltration Schedule 1",
+                                                    "measured_air_leakage_rate": 4.719474431999998
                                                 },
                                                 "terminals": [
                                                     {
@@ -402,9 +454,14 @@
                                                 "surfaces": [
                                                     {
                                                         "id": "Surface 1",
+                                                        "azimuth": 180,
                                                         "adjacent_to": "EXTERIOR",
                                                         "tilt": 90,
-                                                        "area": 464.51519999999994
+                                                        "area": 464.51519999999994,
+                                                        "construction": {
+                                                            "id": "construction_1",
+                                                            "u_factor": 3.2366105565544463
+                                                        }
                                                     },
                                                     {
                                                         "id": "Surface 1",
@@ -468,7 +525,7 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Schedule 1",
+                                "building_open_schedule": "Building  Open Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -477,9 +534,19 @@
                                                 "id": "Zone 1",
                                                 "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
+                                                "volume": 1415.8423295999996,
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "occupant_multiplier_schedule": "Required Schedule 1",
+                                                        "lighting_space_type": "WAREHOUSE_STORAGE_AREA_SMALLER_HAND_CARRIED_ITEMS",
+                                                        "floor_area": 464.51519999999994
+                                                    }
+                                                ],
                                                 "infiltration": {
                                                     "id": "Infiltration 1",
-                                                    "measured_air_leakage_rate": 4.719474431999998
+                                                    "multiplier_schedule": "Infiltration Schedule 1",
+                                                    "measured_air_leakage_rate": 2.359737215999999
                                                 },
                                                 "terminals": [
                                                     {
@@ -490,9 +557,14 @@
                                                 "surfaces": [
                                                     {
                                                         "id": "Surface 1",
+                                                        "azimuth": 180,
                                                         "adjacent_to": "EXTERIOR",
                                                         "tilt": 90,
-                                                        "area": 464.51519999999994
+                                                        "area": 464.51519999999994,
+                                                        "construction": {
+                                                            "id": "construction_1",
+                                                            "u_factor": 3.2366105565544463
+                                                        }
                                                     },
                                                     {
                                                         "id": "Surface 1",
