@@ -51,6 +51,7 @@
                                                 "infiltration": {
                                                     "id": "Infiltration 1",
                                                     "multiplier_schedule": "Infiltration Schedule 1",
+                                                    "infiltration_flow_rate": 0.3171486818303999,
                                                     "measured_air_leakage_rate": 2.831684659199999
                                                 },
                                                 "terminals": [
@@ -150,6 +151,7 @@
                                                 "infiltration": {
                                                     "id": "Infiltration 1",
                                                     "multiplier_schedule": "Infiltration Schedule 1",
+                                                    "infiltration_flow_rate": 0.5285811363839998,
                                                     "measured_air_leakage_rate": 2.359737215999999
                                                 },
                                                 "terminals": [
@@ -248,7 +250,8 @@
                                                 "infiltration": {
                                                     "id": "Infiltration 1",
                                                     "multiplier_schedule": "Infiltration Schedule 1",
-                                                    "infiltration_flow_rate": 0.3171486818303999
+                                                    "infiltration_flow_rate": 0.3171486818303999,
+                                                    "measured_air_leakage_rate": 2.831684659199999
                                                 },
                                                 "terminals": [
                                                     {
@@ -272,7 +275,11 @@
                                                         "id": "Surface 1",
                                                         "adjacent_to": "GROUND",
                                                         "tilt": 90,
-                                                        "area": 464.51519999999994
+                                                        "area": 464.51519999999994,
+                                                        "construction": {
+                                                            "id": "construction_1",
+                                                            "u_factor": 3.2366105565544463
+                                                        }
                                                     }
                                                 ]
                                             }
@@ -282,7 +289,7 @@
                                                 "id": "HVAC 1",
                                                 "cooling_system": {
                                                     "id": "Cooling System 1",
-                                                    "sensible_cool_capacity": 0.0
+                                                    "sensible_cool_capacity": 21102000.0
                                                 },
                                                 "heating_system": {
                                                     "id": "Heating System 1",
@@ -350,7 +357,8 @@
                                                 "infiltration": {
                                                     "id": "Infiltration 1",
                                                     "multiplier_schedule": "Infiltration Schedule 1",
-                                                    "infiltration_flow_rate": 0.5285811363839998
+                                                    "infiltration_flow_rate": 0.5285811363839998,
+                                                    "measured_air_leakage_rate": 2.359737215999999
                                                 },
                                                 "terminals": [
                                                     {
@@ -374,7 +382,11 @@
                                                         "id": "Surface 1",
                                                         "adjacent_to": "GROUND",
                                                         "tilt": 90,
-                                                        "area": 464.51519999999994
+                                                        "area": 464.51519999999994,
+                                                        "construction": {
+                                                            "id": "construction_1",
+                                                            "u_factor": 3.2366105565544463
+                                                        }
                                                     }
                                                 ]
                                             }
@@ -384,7 +396,7 @@
                                                 "id": "HVAC 1",
                                                 "cooling_system": {
                                                     "id": "Cooling System 1",
-                                                    "sensible_cool_capacity": 0.0
+                                                    "sensible_cool_capacity": 21102000.0
                                                 },
                                                 "heating_system": {
                                                     "id": "Heating System 1",
