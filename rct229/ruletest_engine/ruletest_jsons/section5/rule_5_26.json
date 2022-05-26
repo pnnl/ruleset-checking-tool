@@ -65,6 +65,7 @@
                                                                 "classification": "WINDOW",
                                                                 "glazed_area": 5.5741824,
                                                                 "opaque_area": 1.8580607999999998,
+                                                                "u_factor": 3.2366105565544463,
                                                                 "solar_heat_gain_coefficient": 0.39
                                                             }
                                                         ]
@@ -160,6 +161,7 @@
                                                                 "classification": "WINDOW",
                                                                 "glazed_area": 5.5741824,
                                                                 "opaque_area": 1.8580607999999998,
+                                                                "u_factor": 3.2366105565544463,
                                                                 "solar_heat_gain_coefficient": 0.4
                                                             }
                                                         ]
@@ -255,6 +257,7 @@
                                                                 "classification": "WINDOW",
                                                                 "glazed_area": 5.5741824,
                                                                 "opaque_area": 1.8580607999999998,
+                                                                "u_factor": 3.2366105565544463,
                                                                 "solar_heat_gain_coefficient": 0.39
                                                             }
                                                         ]
@@ -350,6 +353,7 @@
                                                                 "classification": "WINDOW",
                                                                 "glazed_area": 5.5741824,
                                                                 "opaque_area": 1.8580607999999998,
+                                                                "u_factor": 3.2366105565544463,
                                                                 "solar_heat_gain_coefficient": 0.4
                                                             }
                                                         ]
@@ -445,6 +449,7 @@
                                                                 "classification": "WINDOW",
                                                                 "glazed_area": 5.5741824,
                                                                 "opaque_area": 1.8580607999999998,
+                                                                "u_factor": 3.2366105565544463,
                                                                 "solar_heat_gain_coefficient": 0.4
                                                             }
                                                         ]
@@ -540,6 +545,7 @@
                                                                 "classification": "WINDOW",
                                                                 "glazed_area": 5.5741824,
                                                                 "opaque_area": 1.8580607999999998,
+                                                                "u_factor": 3.2366105565544463,
                                                                 "solar_heat_gain_coefficient": 0.39
                                                             }
                                                         ]
