@@ -447,7 +447,11 @@
                                                                 "opaque_area": 1.8580607999999998,
                                                                 "u_factor": 6.927482243853377
                                                             }
-                                                        ]
+                                                        ],
+                                                        "construction": {
+                                                            "id": "construction_1",
+                                                            "u_factor": 3.2366105565544463
+                                                        }
                                                     }
                                                 ]
                                             }
@@ -542,7 +546,11 @@
                                                                 "opaque_area": 1.8580607999999998,
                                                                 "u_factor": 3.2366105565544463
                                                             }
-                                                        ]
+                                                        ],
+                                                        "construction": {
+                                                            "id": "construction_1",
+                                                            "u_factor": 3.2366105565544463
+                                                        }
                                                     }
                                                 ]
                                             }
