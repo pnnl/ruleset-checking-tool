@@ -71,25 +71,25 @@ class Section5Rule37(RuleDefinitionListIndexedBase):
             target_exterior_2per_residential = table_G34_lookup(
                 climate_zone,
                 SCC.EXTERIOR_RESIDENTIAL,
-                OST.SKYLIGHT,
+                "SKYLIGHT",
                 skylit_wwr=0.02,
             )
             target_exterior_2per_nonresidential = table_G34_lookup(
                 climate_zone,
                 SCC.EXTERIOR_NON_RESIDENTIAL,
-                OST.SKYLIGHT,
+                "SKYLIGHT",
                 skylit_wwr=0.02,
             )
             target_exterior_above2_residential = table_G34_lookup(
                 climate_zone,
                 SCC.EXTERIOR_RESIDENTIAL,
-                OST.SKYLIGHT,
+                "SKYLIGHT",
                 skylit_wwr=0.03,
             )
             target_exterior_above2_nonresidential = table_G34_lookup(
                 climate_zone,
                 SCC.EXTERIOR_NON_RESIDENTIAL,
-                OST.SKYLIGHT,
+                "SKYLIGHT",
                 skylit_wwr=0.03,
             )
             return building_scc_skylight_roof_ratios_dict_b[
@@ -116,14 +116,14 @@ class Section5Rule37(RuleDefinitionListIndexedBase):
                 table_G34_lookup(
                     climate_zone,
                     SCC.EXTERIOR_RESIDENTIAL,
-                    OST.SKYLIGHT,
+                    "SKYLIGHT",
                     skylit_wwr=0.02,
                 )
                 if srr_res > 0.02
                 else table_G34_lookup(
                     climate_zone,
                     SCC.EXTERIOR_RESIDENTIAL,
-                    OST.SKYLIGHT,
+                    "SKYLIGHT",
                     skylit_wwr=0.03,
                 )
             )
@@ -135,14 +135,14 @@ class Section5Rule37(RuleDefinitionListIndexedBase):
                 table_G34_lookup(
                     climate_zone,
                     SCC.EXTERIOR_NON_RESIDENTIAL,
-                    OST.SKYLIGHT,
+                    "SKYLIGHT",
                     skylit_wwr=0.02,
                 )
                 if srr_nonres > 0.02
                 else table_G34_lookup(
                     climate_zone,
                     SCC.EXTERIOR_NON_RESIDENTIAL,
-                    OST.SKYLIGHT,
+                    "SKYLIGHT",
                     skylit_wwr=0.03,
                 )
             )
@@ -154,14 +154,14 @@ class Section5Rule37(RuleDefinitionListIndexedBase):
                 table_G34_lookup(
                     climate_zone,
                     SCC.SEMI_EXTERIOR,
-                    OST.SKYLIGHT,
+                    "SKYLIGHT",
                     skylit_wwr=0.02,
                 )
                 if srr_semi_exterior > 0.02
                 else table_G34_lookup(
                     climate_zone,
                     SCC.SEMI_EXTERIOR,
-                    OST.SKYLIGHT,
+                    "SKYLIGHT",
                     skylit_wwr=0.03,
                 )
             )
