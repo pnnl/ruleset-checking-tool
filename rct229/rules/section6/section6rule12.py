@@ -5,7 +5,6 @@ from rct229.rule_engine.rule_base import (
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 from rct229.utils.jsonpath_utils import find_all
 
-
 MSG_WARN_DAYLIGHT_NO_SCHEDULE = "Some of the spaces in zone are modeled with window or skylight and some of the spaces in zone are modeled with daylighting control directly through simulation. Verify if the mandatory lighting control requirements are modeled correctly in zone."
 MSG_WARN_DAYLIGHT = "Some of the spaces in zone are modeled with window or skylight and some of the spaces in zone are modeled with daylighting control with schedule. Verify if schedule adjustment is modeled correctly."
 MSG_WARN_NO_DAYLIGHT = "Some of the spaces in zone are modeled with fenestration but no daylighting controls. The design must include mandatory daylighting controls unless any of the exceptions to 90.1 section 9.4.1.1€ apply."
@@ -34,7 +33,7 @@ class Section6Rule12(RuleDefinitionListIndexedBase):
                     "$.building_segments[*].zones[*].surfaces[*]": ["adjacent_to", "subsurfaces"],
                     "$.building_segments[*].zones[*].spaces[*]": ["interior_lighting"],
                     "$.building_segments[*].zones[*].spaces[*].interior_lighting[*]": [
-                        "daylighting_control_type"
+                        "daylighting_control_type", "are_schedules_used_for_modeling_daylighting_control"
                     ],
                 },
                 rmrs_used=UserBaselineProposedVals(False, False, True),
@@ -48,14 +47,11 @@ class Section6Rule12(RuleDefinitionListIndexedBase):
             for subsurface in find_all("$..surfaces[*].subsurfaces[?classification != 'DOOR']", building_p):
                 daylight_flag_u = True
 
-            for lighting in find_all("$..spaces[*].interior_lighting[?daylighting_control_type != 'NONE']", building_p):
-                has_daylight_control_flag = True
-
             interior_lighting_u = False
-
-            # Question
-            # 1. 'interior_lighting_u = space_u.interior_lighting'?? something's missing, should be True or False
-            # 2, in the json file, there is no subsurfaces for case a
+            for lighting in find_all("$..spaces[*].interior_lighting", building_p):
+                interior_lighting_u = lighting[0]["are_schedules_used_for_modeling_daylighting_control"]
+                if lighting[0]["daylighting_control_type"] != "NONE":
+                    has_daylight_control_flag = True
 
             return {
                 "daylight_flag_u": daylight_flag_u,
@@ -74,18 +70,19 @@ class Section6Rule12(RuleDefinitionListIndexedBase):
         def manual_check_required(self, context, calc_vals=None, data=None):
             daylight_flag_u = calc_vals["daylight_flag_u"]
             has_daylight_control_flag = calc_vals["has_daylight_control_flag"]
+            interior_lighting_u = calc_vals["interior_lighting_u"]
 
-            return (daylight_flag_u and has_daylight_control_flag)
+            return (daylight_flag_u and has_daylight_control_flag and not interior_lighting_u)
 
 
         def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
             daylight_flag_u = calc_vals["daylight_flag_u"]
             has_daylight_control_flag = calc_vals["has_daylight_control_flag"]
-            inteior = True # calc_vals["interior_lighting_u"]
+            interior_lighting_u = calc_vals["interior_lighting_u"]
 
             if daylight_flag_u:
                 if has_daylight_control_flag:
-                    if not inteior:
+                    if not interior_lighting_u:
                         manual_check_msg = MSG_WARN_DAYLIGHT_NO_SCHEDULE
                     else:
                         manual_check_msg = MSG_WARN_DAYLIGHT
