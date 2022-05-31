@@ -1,5 +1,5 @@
 
-# Lighting - Rule 6-1  
+# Lighting - Rule 6-1 
 
 **Rule ID:** 6-1 
 **Rule Description:** For the proposed building, each space has the same lighting power as the corresponding space in the U-RMR  
