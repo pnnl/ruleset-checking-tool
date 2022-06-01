@@ -99,3 +99,8 @@
 - Case 3: Else: `FAIL and raise_message "${NUMBER_OF_FAIL_COMPONENTS} of subsurfaces have failed the test."`
 
 **[Back](../_toc.md)**
+
+**Notes:**
+
+1. Future improvement on this RDS: "One improvement that may be made to both 5-26 and 5-37 to reduce occurance of "undetermined" outcome is to check whether "mixed" fenestration would affect the WWR bracket for either residential or non-residential. Currently, the indeterminate outcome is produced if the U-factor in Tables G3.4 differs for residential vs non-residential and WWR bracket. However, if area or "mixed" fenestration is small enough to not result in a change of WWR bracket for either residential or non-residential, the rule can produce PASS or FAIL outcome instead of UNDETERMINED." This would require changes in get_rmi_scc_window_wall_ratios() function to return areas for each surface conditioning category instead of just percentages.
+Similarly for Rule-5-24, 5-37 and 5-38.
