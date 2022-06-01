@@ -62,9 +62,13 @@ Logic:
 
         - For each terminal in zone: `for terminal in zone.terminals:`
 
-          - Check if zonal reheat is connected to any loop in purchased heating loop array: `if terminal.reheat_from_loop in purchased_hhw_loop_array`
+          - Check if zonal heating coil is connected to any loop in purchased heating loop array: `if terminal.heating_from_loop in purchased_hhw_loop_array`
 
             - Set purchased heating flag as True and break logic loop #2: `purchased_chw_hhw_status_dict["PURCHASED_HEATING"] = TRUE, BREAK`
+
+          - Check if zonal cooling coil is connected to any loop in purchased cooling loop array: `if terminal.cooling_from_loop in purchased_chw_loop_array`
+
+            - Set purchased cooling flag as True and break logic loop #2: `purchased_chw_hhw_status_dict["PURCHASED_COOLING"] = TRUE, BREAK`
 
 **Returns** `return purchased_chw_hhw_status_dict`  
 
@@ -72,4 +76,4 @@ Logic:
 
 1. For purchased heating, another option is to check if SHW uses purchased heating. If not and RMR has external fluid source, then assume purchased heating is used for space heating.
 
-2. Pending question on baseboard, radiant system, active beams in zone, whether these use reheat_from_loop or is part of an HVAC system, and whether terminal has cooling output.
+2. Pending question on baseboard, radiant system, whether these are terminal or an HVAC system.
