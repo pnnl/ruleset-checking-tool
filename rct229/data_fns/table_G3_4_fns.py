@@ -160,5 +160,9 @@ def table_G34_lookup(
         search_results["c_factor"] = osstd_entry["assembly_maximum_c_factor"] * (
             ureg.Btu_h / ureg.ft2 / ureg.delta_degF
         )
+    if osstd_entry["assembly_maximum_solar_heat_gain_coefficient"]:
+        search_results["solar_heat_gain_coefficient"] = osstd_entry[
+            "assembly_maximum_solar_heat_gain_coefficient"
+        ]
     # TODO need to add fenestration properties
     return search_results
