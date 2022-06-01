@@ -87,3 +87,7 @@ Logic:
 **Returns** `return rmi_scc_window_wall_ratios_dictionary`
 
 **[Back](../_toc.md)**
+
+**Notes:**
+
+1. Potential future change to return area for each surface conditioning category instead of percentages. See notes in RDS Rule 5-26.md for details.
