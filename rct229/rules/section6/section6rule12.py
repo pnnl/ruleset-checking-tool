@@ -59,21 +59,10 @@ class Section6Rule12(RuleDefinitionListIndexedBase):
                 "interior_lighting_u": interior_lighting_u,
             }
 
-        def rule_check(self, context, calc_vals, data=None):
-            daylight_flag_u = calc_vals["daylight_flag_u"]
-            has_daylight_control_flag = calc_vals["has_daylight_control_flag"]
-
-            return (not (daylight_flag_u and not has_daylight_control_flag) or
-                    not (not daylight_flag_u and has_daylight_control_flag)
-                    )
-
         def manual_check_required(self, context, calc_vals=None, data=None):
             daylight_flag_u = calc_vals["daylight_flag_u"]
-            has_daylight_control_flag = calc_vals["has_daylight_control_flag"]
-            interior_lighting_u = calc_vals["interior_lighting_u"]
 
-            return (daylight_flag_u and has_daylight_control_flag and not interior_lighting_u)
-
+            return daylight_flag_u
 
         def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
             daylight_flag_u = calc_vals["daylight_flag_u"]
@@ -82,13 +71,21 @@ class Section6Rule12(RuleDefinitionListIndexedBase):
 
             if daylight_flag_u:
                 if has_daylight_control_flag:
-                    if not interior_lighting_u:
-                        manual_check_msg = MSG_WARN_DAYLIGHT_NO_SCHEDULE
-                    else:
+                    if interior_lighting_u:
                         manual_check_msg = MSG_WARN_DAYLIGHT
+                    else:
+                        manual_check_msg = MSG_WARN_DAYLIGHT_NO_SCHEDULE
                 else:
                     manual_check_msg = MSG_WARN_NO_DAYLIGHT
 
             return manual_check_msg
 
+        def rule_check(self, context, calc_vals, data=None):
+            daylight_flag_u = calc_vals["daylight_flag_u"]
+            has_daylight_control_flag = calc_vals["has_daylight_control_flag"]
 
+            return not daylight_flag_u and not has_daylight_control_flag
+
+            # return (not (daylight_flag_u and not has_daylight_control_flag) or
+            #         not (not daylight_flag_u and has_daylight_control_flag)
+            #         )
