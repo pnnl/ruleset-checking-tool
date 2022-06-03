@@ -66,7 +66,11 @@ class Section6Rule2(RuleDefinitionListIndexedBase):
                             # The building segment uses the Space-by-Space Method
                             lighting_space_type = space["lighting_space_type"]
                             space_allowable_lpd = table_G3_7_lookup(
-                                lighting_space_type, space_height=zone_avg_height
+                                lighting_space_type,
+                                # do not need control type
+                                None,
+                                space_height=zone_avg_height,
+                                space_area=space_floor_area
                             )["lpd"]
                             building_segment_allowable_lighting_power += (
                                 space_allowable_lpd * space_floor_area

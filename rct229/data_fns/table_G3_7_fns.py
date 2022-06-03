@@ -1,6 +1,7 @@
 from rct229.data import data
 from rct229.data_fns.table_utils import find_osstd_table_entry
 from rct229.schema.config import ureg
+from rct229.data.schema_enums import schema_enums
 
 # This dictionary maps the LightingSpaceType2019ASHRAE901TG37 enumerations to
 # the corresponding lpd_space_type values in the OSSTD file
@@ -113,8 +114,12 @@ lighting_space_enumeration_to_lpd_space_type_map = {
     "WAREHOUSE_STORAGE_AREA_SMALLER_HAND_CARRIED_ITEMS": "warehouse - fine storage",
 }
 
+FULL_AUTO_ON = schema_enums["LightingOccupancyControlType"].FULL_AUTO_ON.name
+PARTIAL_AUTO_ON = schema_enums["LightingOccupancyControlType"].PARTIAL_AUTO_ON.name
+MANUAL_ON = schema_enums["LightingOccupancyControlType"].MANUAL_ON.name
+
 # ATRIUM_LOW_MEDIUM
-def table_G3_7_lookup(lighting_space_type, space_height):
+def table_G3_7_lookup(lighting_space_type, occupancy_control_type, space_height, space_area):
     """Returns the lighting power density for a space as
     required by ASHRAE 90.1 Table G3.7
 
@@ -122,8 +127,12 @@ def table_G3_7_lookup(lighting_space_type, space_height):
     ----------
     lighting_space_type : str
         One of the LightingSpaceType2019ASHRAE901TG37 enumeration values
+    occupancy_control_type: str
+        One of the LightingOccupancyControlOptions enumeration values
     space_height : Quantity
         The height of the space
+    space_area: Quantity
+        The area of the space
 
     Returns
     -------
@@ -142,11 +151,24 @@ def table_G3_7_lookup(lighting_space_type, space_height):
     watts_per_ft2 = osstd_entry["w/ft^2"] * ureg("watt / foot**2")
     # Note: the units for the w/ft fields should actually be W/ft^3
     # This might be None, so make the Quantity below instead
-    watts_per_ft3 = osstd_entry["w/ft"]
+    watts_per_ft = osstd_entry["w/ft"]
 
-    if watts_per_ft3 is None:
+    if watts_per_ft is None:
         lpd = watts_per_ft2
     else:
-        lpd = watts_per_ft2 + watts_per_ft3 * ureg("watt / foot**3") * space_height
+        lpd = watts_per_ft2 + watts_per_ft * ureg("watt / foot") * space_height / space_area
 
-    return {"lpd": lpd}
+    control_credit = 0.0
+    manon_or_partauto = osstd_entry["manon_or_partauto"]
+    if occupancy_control_type in [PARTIAL_AUTO_ON, MANUAL_ON]:
+        if manon_or_partauto:
+            control_credit = osstd_entry["occup_sensor_savings"]
+        else:
+            control_credit = osstd_entry["occup_sensor_auto_on_svgs"]
+    elif occupancy_control_type == FULL_AUTO_ON:
+        control_credit = osstd_entry["occup_sensor_auto_on_svgs"]
+    else:
+        # no credit
+        control_credit = 0.0
+
+    return {"lpd": lpd, "control_credit": control_credit}
