@@ -42,3 +42,5 @@
         - Calculate the total design lighting power in space: `space_total_lighting_power_proposed = space_lighting_power_per_area_proposed * floor_area_proposed`
 
   **Rule Assertion:** The total lighting power in each space for U_RMR and P_RMR are the same: `space_total_lighting_power_user = space_total_lighting_power_proposed`
+
+**[Back](../_toc.md)**
