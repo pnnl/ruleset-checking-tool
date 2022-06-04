@@ -30,10 +30,14 @@ class Section6Rule12(RuleDefinitionListIndexedBase):
                     "$": ["building_segments"],
                     "$.building_segments[*]": ["zones"],
                     "$.building_segments[*].zones[*]": ["surfaces"],
-                    "$.building_segments[*].zones[*].surfaces[*]": ["adjacent_to", "subsurfaces"],
+                    "$.building_segments[*].zones[*].surfaces[*]": [
+                        "adjacent_to",
+                        "subsurfaces",
+                    ],
                     "$.building_segments[*].zones[*].spaces[*]": ["interior_lighting"],
                     "$.building_segments[*].zones[*].spaces[*].interior_lighting[*]": [
-                        "daylighting_control_type", "are_schedules_used_for_modeling_daylighting_control"
+                        "daylighting_control_type",
+                        "are_schedules_used_for_modeling_daylighting_control",
                     ],
                 },
                 rmrs_used=UserBaselineProposedVals(False, False, True),
@@ -44,18 +48,22 @@ class Section6Rule12(RuleDefinitionListIndexedBase):
 
             daylight_flag_u = False
             has_daylight_control_flag = False
-            for subsurface in find_all("$..surfaces[*].subsurfaces[?classification != 'DOOR']", building_p):
+            for subsurface in find_all(
+                "$..surfaces[*].subsurfaces[?classification != 'DOOR']", building_p
+            ):
                 daylight_flag_u = True
 
             interior_lighting_u = False
             for lighting in find_all("$..spaces[*].interior_lighting", building_p):
-                interior_lighting_u = lighting[0]["are_schedules_used_for_modeling_daylighting_control"]
+                interior_lighting_u = lighting[0][
+                    "are_schedules_used_for_modeling_daylighting_control"
+                ]
                 if lighting[0]["daylighting_control_type"] != "NONE":
                     has_daylight_control_flag = True
 
             return {
                 "daylight_flag_u": daylight_flag_u,
-                "has_daylight_control_flag":has_daylight_control_flag,
+                "has_daylight_control_flag": has_daylight_control_flag,
                 "interior_lighting_u": interior_lighting_u,
             }
 
@@ -85,7 +93,3 @@ class Section6Rule12(RuleDefinitionListIndexedBase):
             has_daylight_control_flag = calc_vals["has_daylight_control_flag"]
 
             return not daylight_flag_u and not has_daylight_control_flag
-
-            # return (not (daylight_flag_u and not has_daylight_control_flag) or
-            #         not (not daylight_flag_u and has_daylight_control_flag)
-            #         )
