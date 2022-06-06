@@ -69,7 +69,10 @@ def getattr_(obj, obj_name: str, first_key, *remaining_keys):
     AssertionError if the key path does not exist. The error message indicates what
     field was missing.
     """
-    assert_(obj is None, f"Object: {obj_name} provided is None, failed to search for key: {first_key}")
+    assert_(
+        obj is None,
+        f"Object: {obj_name} provided is None, failed to search for key: {first_key}",
+    )
 
     if first_key not in obj:
         raise MissingKeyException(obj_name, obj["id"], first_key)

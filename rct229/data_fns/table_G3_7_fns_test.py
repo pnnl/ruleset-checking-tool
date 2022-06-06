@@ -19,15 +19,19 @@ watts_per_sqft = ureg("watt / foot**2")
 # Testing table_G3_7_lookup() ----------------------------------------
 def test__table_G3_7_lookup__with_w_per_ft_null():
     assert table_G3_7_lookup(
-        lighting_space_type="DORMITORY_LIVING_QUARTERS", occupancy_control_type=None, space_height=8 * feet,
-        space_area=16*squarefeet
+        lighting_space_type="DORMITORY_LIVING_QUARTERS",
+        occupancy_control_type=None,
+        space_height=8 * feet,
+        space_area=16 * squarefeet,
     ) == {"lpd": 1.11 * watts_per_sqft, "control_credit": 0.0}
 
 
 def test__table_G3_7_lookup__with_w_per_ft_not_null():
     assert table_G3_7_lookup(
-        lighting_space_type="ATRIUM_HIGH", occupancy_control_type="PARTIAL_AUTO_ON", space_height=20 * feet,
-        space_area=16*squarefeet
+        lighting_space_type="ATRIUM_HIGH",
+        occupancy_control_type="PARTIAL_AUTO_ON",
+        space_height=20 * feet,
+        space_area=16 * squarefeet,
     ) == {"lpd": (0.5 + 0.025 * 20 / 16) * watts_per_sqft, "control_credit": 0.125}
 
 

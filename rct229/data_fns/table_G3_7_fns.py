@@ -1,7 +1,7 @@
 from rct229.data import data
+from rct229.data.schema_enums import schema_enums
 from rct229.data_fns.table_utils import find_osstd_table_entry
 from rct229.schema.config import ureg
-from rct229.data.schema_enums import schema_enums
 
 # This dictionary maps the LightingSpaceType2019ASHRAE901TG37 enumerations to
 # the corresponding lpd_space_type values in the OSSTD file
@@ -119,7 +119,9 @@ PARTIAL_AUTO_ON = schema_enums["LightingOccupancyControlType"].PARTIAL_AUTO_ON.n
 MANUAL_ON = schema_enums["LightingOccupancyControlType"].MANUAL_ON.name
 
 # ATRIUM_LOW_MEDIUM
-def table_G3_7_lookup(lighting_space_type, occupancy_control_type, space_height, space_area):
+def table_G3_7_lookup(
+    lighting_space_type, occupancy_control_type, space_height, space_area
+):
     """Returns the lighting power density for a space as
     required by ASHRAE 90.1 Table G3.7
 
@@ -156,7 +158,10 @@ def table_G3_7_lookup(lighting_space_type, occupancy_control_type, space_height,
     if watts_per_ft is None:
         lpd = watts_per_ft2
     else:
-        lpd = watts_per_ft2 + watts_per_ft * ureg("watt / foot") * space_height / space_area
+        lpd = (
+            watts_per_ft2
+            + watts_per_ft * ureg("watt / foot") * space_height / space_area
+        )
 
     control_credit = 0.0
     manon_or_partauto = osstd_entry["manon_or_partauto"]
