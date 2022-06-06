@@ -23,73 +23,80 @@ class Section6Rule12(RuleDefinitionListIndexedBase):
             rmr_context="ruleset_model_instances/0/buildings",
         )
 
-    class BuildingRule(RuleDefinitionBase):
+    class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section6Rule12.BuildingRule, self).__init__(
-                required_fields={
-                    "$": ["building_segments"],
-                    "$.building_segments[*]": ["zones"],
-                    "$.building_segments[*].zones[*]": ["surfaces"],
-                    "$.building_segments[*].zones[*].surfaces[*]": [
-                        "adjacent_to",
-                        "subsurfaces",
-                    ],
-                    "$.building_segments[*].zones[*].spaces[*]": ["interior_lighting"],
-                    "$.building_segments[*].zones[*].spaces[*].interior_lighting[*]": [
-                        "daylighting_control_type",
-                        "are_schedules_used_for_modeling_daylighting_control",
-                    ],
-                },
                 rmrs_used=UserBaselineProposedVals(False, False, True),
+                each_rule=Section6Rule12.BuildingRule.ZoneRule(),
+                index_rmr="proposed",
+                list_path="$..zones[*]",
             )
 
-        def get_calc_vals(self, context, data=None):
-            building_p = context.proposed
+        class ZoneRule(RuleDefinitionBase):
+            def __init__(self):
+                super(Section6Rule12.BuildingRule.ZoneRule, self).__init__(
+                    rmrs_used=UserBaselineProposedVals(False, False, True),
+                    required_fields={
+                        "$": ["spaces", "surfaces"],
+                        "$.spaces[*]": ["interior_lighting"],
+                        "$.spaces[*].interior_lighting[*]": [
+                            "daylighting_control_type",
+                            "are_schedules_used_for_modeling_daylighting_control",
+                        ],
+                        "$.surfaces[*]": [
+                            "adjacent_to",
+                            "subsurfaces",
+                        ],
+                    },
+                )
 
-            daylight_flag_u = False
-            has_daylight_control_flag = False
-            for subsurface in find_all(
-                "$..surfaces[*].subsurfaces[?classification != 'DOOR']", building_p
-            ):
-                daylight_flag_u = True
+            def get_calc_vals(self, context, data=None):
+                building_p = context.proposed
 
-            interior_lighting_u = False
-            for lighting in find_all("$..spaces[*].interior_lighting", building_p):
-                interior_lighting_u = lighting[0][
-                    "are_schedules_used_for_modeling_daylighting_control"
-                ]
-                if lighting[0]["daylighting_control_type"] != "NONE":
-                    has_daylight_control_flag = True
+                daylight_flag_u = False
+                has_daylight_control_flag = False
+                for subsurface in find_all(
+                    "$..surfaces[*].subsurfaces[?classification != 'DOOR']", building_p
+                ):
+                    daylight_flag_u = True
 
-            return {
-                "daylight_flag_u": daylight_flag_u,
-                "has_daylight_control_flag": has_daylight_control_flag,
-                "interior_lighting_u": interior_lighting_u,
-            }
+                interior_lighting_u = False
+                for lighting in find_all("$..spaces[*].interior_lighting", building_p):
+                    interior_lighting_u = lighting[0][
+                        "are_schedules_used_for_modeling_daylighting_control"
+                    ]
+                    if lighting[0]["daylighting_control_type"] != "NONE":
+                        has_daylight_control_flag = True
 
-        def manual_check_required(self, context, calc_vals=None, data=None):
-            daylight_flag_u = calc_vals["daylight_flag_u"]
+                return {
+                    "daylight_flag_u": daylight_flag_u,
+                    "has_daylight_control_flag": has_daylight_control_flag,
+                    "interior_lighting_u": interior_lighting_u,
+                }
 
-            return daylight_flag_u
+            def manual_check_required(self, context, calc_vals=None, data=None):
+                daylight_flag_u = calc_vals["daylight_flag_u"]
 
-        def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
-            daylight_flag_u = calc_vals["daylight_flag_u"]
-            has_daylight_control_flag = calc_vals["has_daylight_control_flag"]
-            interior_lighting_u = calc_vals["interior_lighting_u"]
+                return daylight_flag_u
 
-            if daylight_flag_u:
-                if has_daylight_control_flag:
-                    if interior_lighting_u:
-                        manual_check_msg = MSG_WARN_DAYLIGHT
+            def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
+                daylight_flag_u = calc_vals["daylight_flag_u"]
+                has_daylight_control_flag = calc_vals["has_daylight_control_flag"]
+                interior_lighting_u = calc_vals["interior_lighting_u"]
+
+                if daylight_flag_u:
+                    if has_daylight_control_flag:
+                        if interior_lighting_u:
+                            manual_check_msg = MSG_WARN_DAYLIGHT
+                        else:
+                            manual_check_msg = MSG_WARN_DAYLIGHT_NO_SCHEDULE
                     else:
-                        manual_check_msg = MSG_WARN_DAYLIGHT_NO_SCHEDULE
-                else:
-                    manual_check_msg = MSG_WARN_NO_DAYLIGHT
+                        manual_check_msg = MSG_WARN_NO_DAYLIGHT
 
-            return manual_check_msg
+                return manual_check_msg
 
-        def rule_check(self, context, calc_vals, data=None):
-            daylight_flag_u = calc_vals["daylight_flag_u"]
-            has_daylight_control_flag = calc_vals["has_daylight_control_flag"]
+            def rule_check(self, context, calc_vals, data=None):
+                daylight_flag_u = calc_vals["daylight_flag_u"]
+                has_daylight_control_flag = calc_vals["has_daylight_control_flag"]
 
-            return not daylight_flag_u and not has_daylight_control_flag
+                return not daylight_flag_u and not has_daylight_control_flag
