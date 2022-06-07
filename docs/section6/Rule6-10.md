@@ -1,7 +1,7 @@
 
-# Lighting - Rule 6-14  
+# Lighting - Rule 6-10  
 
-**Rule ID:** 6-14  
+**Rule ID:** 6-10  
 **Rule Description:** Proposed building is modeled with other programmable lighting controls through a 10% schedule reduction in buildings less than 5,000sq.ft.  
 **Rule Assertion:** Proposed RMR = expected value  
 **Appendix G Section:** Section G3.1-6(i) Modeling Requirements for the Proposed design  
@@ -49,5 +49,8 @@
       - Case 2: Else if space does not model any daylight control, and normalized space lighting schedule in P-RMR is not equal to that in B-RMR: `else if ( NOT daylight_control ) AND ( compare_schedules_result_dictionary[TOTAL_HOURS_COMPARED] != compare_schedules_result_dictionary[TOTAL_HOURS_MATCH] ): FAIL and raise_message "SPACE LIGHTING SCHEDULE EFLH IN P-RMR IS ${compare_schedules_result_dictionary[EFLH_DIFFERENCE]} OF THAT IN B-RMR."`
 
       - Case 3: Else, space models at least one daylight control using schedule: `else: UNDETERMINED and raise_message "SPACE MODELS AT LEAST ONE DAYLIGHT CONTROL USING SCHEDULE. VERIFY IF OTHER PROGRAMMABLE LIGHTING CONTROL IS MODELED CORRECTLY USING SCHEDULE. LIGHTING SCHEDULE EFLH IN P-RMR IS ${compare_schedules_result_dictionary[EFLH_DIFFERENCE]} OF THAT IN B-RMR."`
+
+**Notes:**
+  1. Updated the Rule ID from 6-14 to 6-10 on 6/3/2022
 
 **[Back](../_toc.md)**

@@ -1,4 +1,3 @@
-
 # Envelope - Rule 5-37  
 
 **Rule ID:** 5-37  

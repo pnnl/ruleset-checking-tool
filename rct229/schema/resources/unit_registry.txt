@@ -153,6 +153,9 @@ cubic_centimeter = centimeter ** 3 = cc
 m3 = meter ** 3
 gallon = 3.785 * L
 
+# Volumetric Flow Rtae
+cfm = ft ** 3 / min
+
 # Frequency
 [frequency] = 1 / [time]
 

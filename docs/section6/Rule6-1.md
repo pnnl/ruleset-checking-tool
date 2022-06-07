@@ -1,7 +1,7 @@
 
-# Lighting - Rule 6-jb
+# Lighting - Rule 6-1 
 
-**Rule ID:** 6-jb  
+**Rule ID:** 6-1  
 **Rule Description:** For the proposed building, each space has the same lighting power as the corresponding space in the U-RMR  
 **Appendix G Section:** Section G3.1-1(a) Modeling Requirements for the Proposed design  
 **Appendix G Section Reference:** None
@@ -42,3 +42,5 @@
         - Calculate the total design lighting power in space: `space_total_lighting_power_proposed = space_lighting_power_per_area_proposed * floor_area_proposed`
 
   **Rule Assertion:** The total lighting power in each space for U_RMR and P_RMR are the same: `space_total_lighting_power_user = space_total_lighting_power_proposed`
+
+**[Back](../_toc.md)**
