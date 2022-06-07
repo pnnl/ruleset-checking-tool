@@ -1,5 +1,6 @@
 import json
 import os
+
 import pytest
 
 from rct229.schema.validate import validate_rmr
