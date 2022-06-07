@@ -16,7 +16,7 @@ class Section6Rule11(RuleDefinitionListIndexedBase):
             index_rmr="baseline",
             id="6-11",
             description="Baseline building is not modeled with daylighting control",
-            rmr_context="buildings",
+            rmr_context="ruleset_model_instances/0/buildings",
         )
 
     class BuildingRule(RuleDefinitionBase):
