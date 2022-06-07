@@ -21,7 +21,7 @@
                 "id": "ASHRAE229",
                 "ruleset_model_instances": [
                     {
-                        "id": "RMR1",
+                        "id": "RMR 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
@@ -58,7 +58,7 @@
                 "id": "ASHRAE229",
                 "ruleset_model_instances": [
                     {
-                        "id": "RMR1",
+                        "id": "RMR 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
@@ -115,7 +115,7 @@
                 "id": "ASHRAE229",
                 "ruleset_model_instances": [
                     {
-                        "id": "RMR1",
+                        "id": "RMR 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
@@ -152,7 +152,7 @@
                 "id": "ASHRAE229",
                 "ruleset_model_instances": [
                     {
-                        "id": "RMR1",
+                        "id": "RMR 1",
                         "buildings": [
                             {
                                 "id": "Building 1",

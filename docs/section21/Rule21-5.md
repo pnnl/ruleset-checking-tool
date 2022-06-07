@@ -55,8 +55,9 @@
 
 - Case 3: Else: `else: FAIL`
 
-**[Back](../_toc.md)**
-
 **Notes:**
 
 1. This treats all buildings in an RMR (if it has multiple buildings) as one building with one HHW plant.
+
+
+**[Back](../_toc.md)**

@@ -10,7 +10,7 @@
 **Applicability:** All required data elements exist for B_RMR  
 **Applicability Checks:** None  
 
-**Manual Checks:** None  
+**Manual Checks:** Yes
 **Evaluation Context:**  Each Data Element  
 **Data Lookup:** Table G3.1.1-1  
 **Function Call:**  
@@ -30,8 +30,10 @@
 
 - For each unique area type in building: `for area_type_b in window_wall_areas_dictionary_b.keys():`
 
-  - Check if area type is in Table G3.1.1-1, calculate window-wall-ratio: `if area_type_b != "NONE": area_type_wwr = window_wall_areas_dictionary_b[area_type_b]["TOTAL_WINDOW_AREA"] / window_wall_areas_dictionary_b[area_type_b]["TOTAL_WALL_AREA"]`
-  
+  - Check if area type is in Table G3.1.1-1 besides OTHER, calculate window-wall-ratio: `if area_type_b != "OTHER": area_type_wwr = window_wall_areas_dictionary_b[area_type_b]["TOTAL_WINDOW_AREA"] / window_wall_areas_dictionary_b[area_type_b]["TOTAL_WALL_AREA"]`
+
+  - Else area type is None ```manual_review_flag = TRUE```    
+
   - Check if any building segment related to area type is not new, set manual_check_flag: `if NOT is_area_type_all_new_dict[area_type_b]: manual_check_flag = TRUE`
 
     **Rule Assertion:**

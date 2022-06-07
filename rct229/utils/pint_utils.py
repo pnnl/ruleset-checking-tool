@@ -16,7 +16,7 @@ class ZERO:
 
     U_FACTOR = ureg("Btu/(hr*ft2*degR)")
     UA = U_FACTOR * AREA
-
+    FLOW = VOLUME / ureg("minute")
 
 def pint_sum(qty_list, default=None):
     if len(qty_list) == 0:
