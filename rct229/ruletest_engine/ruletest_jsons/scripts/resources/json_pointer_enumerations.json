@@ -14,6 +14,7 @@
 	"miscellaneous_equipment": "ruleset_model_instances[0]/buildings[0]/building_segments[0]/zones[0]/spaces[0]/miscellaneous_equipment",
 	"preheat_system": "ruleset_model_instances[0]/buildings[0]/building_segments[0]/heating_ventilation_air_conditioning_systems[0]/preheat_system",
 	"sensible_cool_capacity": "ruleset_model_instances[0]/buildings[0]/building_segments[0]/heating_ventilation_air_conditioning_systems[0]/cooling_system/sensible_cool_capacity",
+	"schedules": "ruleset_model_instances[0]/schedules",
 	"spaces": "ruleset_model_instances[0]/buildings[0]/building_segments[0]/zones[0]/spaces",
 	"subsurfaces": "ruleset_model_instances[0]/buildings[0]/building_segments[0]/zones[0]/surfaces[0]/subsurfaces",
 	"surfaces": "ruleset_model_instances[0]/buildings[0]/building_segments[0]/zones[0]/surfaces",

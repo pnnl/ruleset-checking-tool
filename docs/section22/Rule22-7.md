@@ -1,21 +1,19 @@
 
 # CHW&CW - Rule 22-7  
 
+**Schema Version:** 0.0.10 **Mandatory Rule:** True  
 **Rule ID:** 22-7  
 **Rule Description:** Baseline chilled water system that does not use purchased chilled water shall be modeled as primary/secondary systems.  
 **Rule Assertion:** B-RMR = expected value  
 **Appendix G Section:** Section 22 CHW&CW Loop  
-**Appendix G Section Reference:** Section G3.1.3.10 Chilled-water supply temperature reset (System 7, 8, 11, 12 and 13)  
-
-**Applicability:** All required data elements exist for B_RMR  
+**90.1 Section Reference:** Section G3.1.3.10 Chilled-Water Pumps (Systems 7, 8, 11, 12, and 13)  
+**Data Lookup:** None  
+**Evaluation Context:** Building  
 **Applicability Checks:**  
 
 1. B-RMR is modeled with at least one air-side system that is Type-7, 8, 11.1, 11.2, 12, 13, 7b, 8b, 11b, 12b, 13b.
 
-**Manual Check:** None  
-**Evaluation Context:** Building  
-**Data Lookup:** None  
-**Function Call:**  
+**Function Calls:**  
 
 1. get_baseline_system_types()
 2. get_primary_secondary_loops()
@@ -31,9 +29,10 @@
 ## Rule Logic:  
 
 - Get primary and secondary loops for B-RMR: `primary_secondary_loop_dictionary = get_primary_secondary_loops(B_RMR, "COOLING")`
+
 **Rule Assertion - Component:**
 
-- Case 1: If primary and secondary loops are modeled correctly: `if primary_secondary_loop_dictionary["PRIMARY"] AND primary_secondary_loop_dictionary["SECONDARY"]: PASS`
+- Case 1: If B-RMR is modeled with primary-secondary configuration: `if LEN(primary_secondary_loop_dictionary) != 0: PASS`
 
 - Case 2: Else: `else: FAIL`
 

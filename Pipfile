@@ -12,6 +12,7 @@ pytest = "*"
 isort = "5.10.1"
 icecream = "*"
 black = "~=21.10b0"
+pytest-watch = "*"
 
 [packages]
 rct229 = {editable = true, path = "."}

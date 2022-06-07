@@ -2,76 +2,63 @@
 # Lighting - Rule 6-9
 
 **Rule ID:** 6-9  
-**Rule Description:** Baseline building is modeled with automatic shutoff controls in buildings >5000 sq.ft.  
-**Appendix G Section:** Section G3.1-6 Modeling Requirements for the Baseline building  
-**Appendix G Section Reference:**  None  
+**Rule Description:** Additional occupancy sensor controls in the proposed building are modeled through schedule adjustments based on factors defined in Table G3.7.  
+**Rule Assertion:** Proposed RMR = expected value  
+**Appendix G Section:** Section G3.1-6(i) Modeling Requirements for the Proposed design  
+**Appendix G Section Reference:**  
 
-**Applicability:** All required data elements exist for B_RMR  
-**Applicability Checks:**  
+- Table G3.7, Performance Rating Method Lighting Power Density Allowances and Occupancy Sensor Reductions Using the Space-by-Space Method  
 
-  1. Building total area is more than 5,000sq.ft.  
+**Applicability:** All required data elements exist for P_RMR  
+**Applicability Checks:** None
 
 **Manual Check:** Yes  
-
+**Evaluation Context:** Each Data Element  
+**Data Lookup:** Table G3.7  
 **Function Call:**  
 
   - compare_schedules()
   - normalize_space_schedules()
 
-**Evaluation Context:** Each Data Element  
-**Data Lookup:** None  
+## Rule Logic:  
 
-## Rule Logic: 
+- Get building open schedule in the proposed model: `building_open_schedule_p = P_RMR.building.building_open_schedule`  
 
-- For each building_segment in the Baseline model: `for building_segment_b in B_RMR.building.building_segments:`  
+- For each building segment in building: `for building_segment_p in P_RMR.building.building_segments:`  
 
-  - For each thermal_block in building segment: `for thermal_block_b in building_segment.thermal_blocks:`  
+  - For each thermal block in building segment: `thermal_block_p in building_segment_p.thermal_blocks:`  
 
-    - For each zone in thermal block: `for zone_b in thermal_block_b.zones:`  
+    - For each zone in thermal block: `zone_p in thermal_block_p.zones:`  
 
-      - For each space in zone: `for space_b in zone.spaces:`  
+      - For each space in zone: `space_p in zone_p.spaces:`  
 
-        - Add space floor area to building total floor area: `building_total_area_b += space_b.floor_area`  
+        - Get matching space from B_RMR: `space_b = match_data_element(B_RMR, Spaces, space_p.id)`  
 
-- **Applicability Check 1:**`if building_total_area_b > 5000:`  
+          - Get normalized space lighting schedule for B_RMR: `normalized_schedule_b = normalize_space_schedules(space_b.interior_lighting)`  
 
-- Get building open schedule in the baseline model: `building_open_schedule_b = B_RMR.building.building_open_schedule`  
+        - Get normalized space lighting schedule: `normalized_schedule_p = normalize_space_schedules(space_p.interior_lighting)`
 
-- For each building segment in building: `building_segment_b in B_RMR.building.building_segments:`  
-
-  - For each thermal block in building segment: `thermal_block_b in building_segment_b.thermal_blocks:`  
-
-    - For each zone in thermal block: `zone_b in thermal_block_b.zones:`  
-
-      - For each space in zone: `space_b in zone_b.spaces:`  
-
-        - Get normalized space lighting schedule: `normalized_schedule_b = normalize_space_schedules(space_b.interior_lighting)`  
-
-        - Get matching space in P_RMR: `space_p = match_data_element(P_RMR, Spaces, space_b.id)`  
-
-          - Get normalized space lighting schedule in P_RMR: `normalized_schedule_p = normalize_space_schedules(space_p.interior_lighting)`
-
-        - Check if automatic shutoff control is modeled in space during building closed hours (i.e. if lighting schedule hourly value in B_RMR is equal to P_RMR during building closed hours): `schedule_comparison_result = compare_schedules(normalized_schedule_b, normalized_schedule_p, building_open_schedule_b, -111)`  
+        - Compare lighting schedules in P_RMR and B_RMR: `schedule_comparison_result = compare_schedules(normalized_schedule_p, normalized_schedule_b, building_open_schedule_p, adjusted_reduction_factor_p)`  
 
           **Rule Assertion:**
 
-          - Case 1: For building closed hours, if lighting schedule hourly value in B_RMR is equal to P_RMR: `if schedule_comparison_result == "MATCH": PASS`  
+          - Case 1: For all hours, for each lighting, if lighting schedule in P_RMR is equal to lighting schedule in B_RMR times adjusted lighting occupancy sensor reduction factor: `if schedule_comparison_result == "MATCH": PASS`  
 
-          - Case 2: Else: `else: CAUTION and return schedule_comparison_result`  
+          - Case 2: Else if lighting schedule in P_RMR is lower than or equal to lighting schedule in B_RMR times adjusted lighting occupancy sensor reduction factor: `if schedule_comparison_result == "EQUAL AND LESS": FAIL and raise_warning "SCHEDULE ADJUSTMENT MAY BE CORRECT IF SPACE INCLUDES DAYLIGHT CONTROL MODELED BY SCHEDULE ADJUSTMENT OR INDIVIDUAL WORKSTATIONS WITH LIGHTING CONTROLLED BY OCCUPANCY SENSORS (TABLE G3.7 FOOTNOTE C)."`  
 
-**Future Change Note:**
+          - Case 3: Else, lighting schedule in P_RMR is higher than lighting schedule in B_RMR times adjusted lighting occupancy sensor reduction factor: `if schedule_comparison_result == "EQUAL AND MORE": UNDETERMINED and raise_message "LIGHTING SCHEDULE IN P-RMR INCLUDING ADJUSTED LIGHTING OCCUPANCY SENSOR REDUCTION FACTOR IS HIGHER THAN THAT IN B-RMR. VERIFY ADDITIONAL OCCUPANCY SENSOR CONTROL IS MODELED CORRECTLY IN P-RMR."`  
 
-  1. building.building_open_schedule will need to be updated to building_segment.open_schedule once approved and added to the schema.
+**Notes:**
+  1. Updated the Rule ID from 6-13 to 6-9 on 6/3/2022
 
+**Temporary Function note:**
 
-**Temporary Function Note:**
+`compare_schedule_result = compare_schedules(Schedule 1, Schedule 2, Mask Schedule, comparison factor)`
 
-`compare_schedule_result = compare_schedules(Schedule 1, Schedule 2, Mask Schedule, comparison_factor)`
+(4 inputs, Schedule 1, Schedule 2, Mask Schedule, comparison factor)
 
-(4 inputs, Schedule 1, Schedule 2, Mask Schedule, comparison_factor)
-
-- Schedule 2 as the comparison basis, i.e. Schedule 1 = Schedule 2 * comparison_factor
-- When Mask Schedule hourly value is 0, schedules need to be the same at that hour. If Mask Schedule hourly value is 1, Schedule 1 needs to be comparison factor times Schedule 2 at that hour. If Mask Schedule hourly value is 2, skip comparison for at hour.
-- If comparison_factor is not needed, set to -111 for now. For example, when the function only needs to compare if Schedule 1 and Schedule 2 are equal at some hours (when Mask Schedule is 0) and doesn't need to compare the rest of the hours (when Mask Schedule is 2). TBD.
+- Schedule 2 as the comparison basis, i.e. Schedule 1 = Schedule 2 * comparison factor
+- When Mask Schedule hourly value is 0, schedules need to be the same at that hour. If Mask Schedule hourly value is 1, Schedule 1 needs to be comparison factor times Schedule 2 at that hour. If Mask Schedule hourly value is 2, skip comparison.
 - can return "match", "equal and less", "equal and more", "equal, less and more", with bin data, TBD
 
+**[Back](../_toc.md)**

@@ -32,3 +32,5 @@
   - For each space in zone, add to the total number of spaces in the Proposed model: ```for space_proposed in zone_proposed.spaces: num_of_spaces_proposed += 1```  
 
 **Rule Assertion:** ```num_of_spaces_user == num_of_spaces_proposed```  
+
+**[Back](../_toc.md)**
