@@ -1,7 +1,7 @@
 
-# Lighting - Rule 6-12
+# Lighting - Rule 6-8
 
-**Rule ID:** 6-12  
+**Rule ID:** 6-8  
 **Rule Description:** User building is modeled with daylighting controls directly or through schedule adjustments.  
 **Appendix G Section:** Section 6 Lighting  
 **Appendix G Section Reference:** Section G3.1-6(h) Lighting: Modeling Requirements for the Proposed design  
@@ -38,5 +38,10 @@
     - Case 4, else if the zone does not have window or skylight and daylight control is modeled: `else if ( daylight_flag_u == FALSE ) AND ( has_daylight_control_flag == TRUE ): FAIL`
 
     - Case 5, else, the zone does not have window or skylight and no daylight control is modeled: `else: PASS`
+
+**Notes:**
+  1. Updated the Rule ID from 6-12 to 6-8 on 6/3/2022
+  2. The rule has been written to apply to user RMR, it should instead be implemented to apply to P-RMR- should discuss
+
 
 **[Back](../_toc.md)**
