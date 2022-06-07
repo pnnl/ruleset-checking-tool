@@ -159,6 +159,9 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
 
 ## Section 17 - Refrigeration
 
+## Section 18 - Central Chilled Water Systems
+  * [18-8](section18/Rule18-8.md): For systems using purchased chilled water, the cooling source shall be modeled as purchased chilled water in both the proposed design and baseline building design. If any system in the proposed design uses purchased chilled water, all baseline systems with chilled water coils shall use purchased chilled water. On-site chillers and direct expansion equipment shall not be modeled in the baseline building design.
+
 ## Section 21 - Central Heating Hot Water Systems
   * [21-1](section21/Rule21-1.md): For systems using purchased hot water or steam, the heating source shall be modeled as purchased hot water or steam in both the proposed design and baseline building design. If any system in the proposed design uses purchased hot water or steam, all baseline systems with hot water coils shall use the same type of purchased hot water or steam.
   * [21-3](section21/Rule21-3.md): Heating hot water plant capacity shall be based on coincident loads.  
