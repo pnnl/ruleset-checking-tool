@@ -9,7 +9,7 @@ from rct229.utils.pint_utils import ZERO
 from rct229.utils.std_comparisons import std_equal
 
 TARGET_AIR_LEAKAGE_COEFF = 1.0 * ureg("cfm / foot**2")
-TOTAL_AIR_LEAKAGE_COEFF = 0.112
+TOTAL_AIR_LEAKAGE_FACTOR = 0.112
 
 
 class Section5Rule47(RuleDefinitionListIndexedBase):
@@ -25,29 +25,29 @@ class Section5Rule47(RuleDefinitionListIndexedBase):
             each_rule=Section5Rule47.BuildingRule(),
             index_rmr="baseline",
             id="5-47",
-            description="The baseline air leakage rate of the building envelope (I75Pa) at a fixed building pressure differential of 0.3 in. of water shall be 1 cfm/ft2. The air leakage rate of the building envelope shall be converted to appropriate units for the simulation program using one of the methods in Section G3.1.1.4.",
+            description="The baseline air leakage rate of the building envelope (I_75Pa) at a fixed building pressure differential of 0.3 in. of water shall be 1 cfm/ft2. The air leakage rate of the building envelope shall be converted to appropriate units for the simulation program using one of the methods in Section G3.1.1.4.",
             list_path="ruleset_model_instances[0].buildings[*]",
         )
 
     def create_data(self, context, data=None):
-        rmr_proposed = context.proposed
-        return {"climate_zone": rmr_proposed["weather"]["climate_zone"]}
+        rmr_baseline = context.baseline
+        return {"climate_zone": rmr_baseline["weather"]["climate_zone"]}
 
     class BuildingRule(RuleDefinitionBase):
         def __init__(self):
             super(Section5Rule47.BuildingRule, self).__init__(
-                rmrs_used=UserBaselineProposedVals(False, False, True),
+                rmrs_used=UserBaselineProposedVals(False, True, False),
                 required_fields={"$..zones[*]": ["surfaces"]},
             )
 
         def get_calc_vals(self, context, data=None):
-            building_p = context.proposed
+            building_b = context.baseline
 
-            scc_dict_p = get_surface_conditioning_category_dict(
-                data["climate_zone"], building_p
+            scc_dict_b = get_surface_conditioning_category_dict(
+                data["climate_zone"], building_b
             )
-            zcc_dict_p = get_zone_conditioning_category_dict(
-                data["climate_zone"], building_p
+            zcc_dict_b = get_zone_conditioning_category_dict(
+                data["climate_zone"], building_b
             )
 
             building_total_air_leakage_rate = ZERO.FLOW
@@ -55,18 +55,18 @@ class Section5Rule47(RuleDefinitionListIndexedBase):
             building_total_envelope_area = sum(
                 [
                     getattr_(surface, "surface", "area")
-                    for surface in find_all("$..surfaces[*]", building_p)
-                    if scc_dict_p[surface["id"]] != SCC.UNREGULATED
+                    for surface in find_all("$..surfaces[*]", building_b)
+                    if scc_dict_b[surface["id"]] != SCC.UNREGULATED
                 ],
                 ZERO.AREA,
             )
 
-            target_air_leakage_rate_75pa_p = (
+            target_air_leakage_rate_75pa_b = (
                 TARGET_AIR_LEAKAGE_COEFF
             ) * building_total_envelope_area
 
-            for zone in find_all("$..zones[*]", building_p):
-                if zcc_dict_p[zone["id"]] in [
+            for zone in find_all("$..zones[*]", building_b):
+                if zcc_dict_b[zone["id"]] in [
                     ZCC.CONDITIONED_RESIDENTIAL,
                     ZCC.CONDITIONED_NON_RESIDENTIAL,
                     ZCC.CONDITIONED_MIXED,
@@ -78,10 +78,10 @@ class Section5Rule47(RuleDefinitionListIndexedBase):
 
             return {
                 "building_total_air_leakage_rate": building_total_air_leakage_rate,
-                "target_air_leakage_rate_75pa_b": target_air_leakage_rate_75pa_p,
+                "target_air_leakage_rate_75pa_b": target_air_leakage_rate_75pa_b,
             }
 
         def rule_check(self, context, calc_vals=None, data=None):
             building_total_air_leakage_rate = calc_vals["building_total_air_leakage_rate"]
             target_air_leakage_rate_75pa_b = calc_vals["target_air_leakage_rate_75pa_b"]
-            return std_equal(target_air_leakage_rate_75pa_b * TOTAL_AIR_LEAKAGE_COEFF, building_total_air_leakage_rate)
+            return std_equal(target_air_leakage_rate_75pa_b * TOTAL_AIR_LEAKAGE_FACTOR, building_total_air_leakage_rate)
