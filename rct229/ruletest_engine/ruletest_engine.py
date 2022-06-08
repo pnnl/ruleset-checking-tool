@@ -1,9 +1,9 @@
 import copy
 import json
-import pprint
 
 # from jsonpointer import JsonPointer
 import os
+import pprint
 
 from rct229.rule_engine.engine import evaluate_rule
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
@@ -249,7 +249,7 @@ def run_section_tests(test_json_name):
 
         # Evaluate rule and check for invalid RMRs
         evaluation_dict = evaluate_rule(rule, rmr_trio)
-        # pprint.pprint(evaluation_dict)
+        pprint.pprint(evaluation_dict)
         invalid_rmrs_dict = evaluation_dict["invalid_rmrs"]
 
         # If invalid RMRs exist, fail this rule and append failed message
@@ -496,7 +496,7 @@ def run_envelope_tests():
     -------
     None
 
-    Results of envelope test are spit out to console
+    Results of envelope stest are spit out to console
     """
 
     envelope_test_json = "envelope_tests.json"
