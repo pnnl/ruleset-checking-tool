@@ -919,7 +919,8 @@
                 "RETAIL_STRIP_MALL",
                 "SCHOOL_PRIMARY",
                 "SCHOOL_SECONDARY_AND_UNIVERSITY",
-                "WAREHOUSE_NONREFRIGERATED"
+                "WAREHOUSE_NONREFRIGERATED",
+                "OTHER"
             ],
             "descriptions": [
                 "Grocery store",
@@ -936,7 +937,8 @@
                 "Retail (strip mall)",
                 "School (primary)",
                 "School (secondary and university)",
-                "Warehouse (nonrefrigerated)"
+                "Warehouse (nonrefrigerated)",
+                "Other"
             ]
         },
         "SubsurfaceFrameType2019ASHRAE901": {
@@ -1039,6 +1041,17 @@
                 "Retail",
                 "Hospital",
                 "Other non-residential"
+            ]
+        },
+        "OutputSchema2019ASHRAE901": {
+            "type": "string",
+            "enum": [
+                "OUTPUT_SCHEMA_ASHRAE901_2019",
+                "OTHER"
+            ],
+            "descriptions": [
+                "Output schema for ASHRAE 90.1 2019",
+                "other"
             ]
         }
     }
