@@ -1,0 +1,132 @@
+{
+  "lighting_power_density":[
+    {
+      "building_area_type": "Automotive facility",
+      "w/ft^2": 0.75
+    },
+    {
+      "building_area_type": "Convention center",
+      "w/ft^2": 0.64
+    },
+    {
+      "building_area_type": "Courthouse",
+      "w/ft^2": 0.79
+    },
+    {
+      "building_area_type": "Dining: Bar lounge/leisure",
+      "w/ft^2": 0.80
+    },
+    {
+      "building_area_type": "Dining: Cafeteria/fast food",
+      "w/ft^2": 0.76
+    },
+    {
+      "building_area_type": "Dining: Family",
+      "w/ft^2": 0.71
+    },
+    {
+      "building_area_type": "Dormitory",
+      "w/ft^2": 0.53
+    },
+    {
+      "building_area_type": "Exercise center",
+      "w/ft^2": 0.72
+    },
+    {
+      "building_area_type": "Fire station",
+      "w/ft^2": 0.56
+    },
+    {
+      "building_area_type": "Gymnasium",
+      "w/ft^2": 0.76
+    },
+    {
+      "building_area_type": "Health-care clinic",
+      "w/ft^2": 0.81
+    },
+    {
+      "building_area_type": "Hospital",
+      "w/ft^2": 0.96
+    },
+    {
+      "building_area_type": "Hotel/motel",
+      "w/ft^2": 0.56
+    },
+    {
+      "building_area_type": "Library",
+      "w/ft^2": 0.83
+    },
+    {
+      "building_area_type": "Manufacturing facility",
+      "w/ft^2": 0.82
+    },
+    {
+      "building_area_type": "Motion picture theater",
+      "w/ft^2": 0.44
+    },
+    {
+      "building_area_type": "Multifamily",
+      "w/ft^2": 0.45
+    },
+    {
+      "building_area_type": "Museum",
+      "w/ft^2": 0.55
+    },
+    {
+      "building_area_type": "Office",
+      "w/ft^2": 0.64
+    },
+    {
+      "building_area_type": "Parking garage",
+      "w/ft^2": 0.18
+    },
+    {
+      "building_area_type": "Penitentiary",
+      "w/ft^2": 0.69
+    },
+    {
+      "building_area_type": "Performing arts theater",
+      "w/ft^2": 0.84
+    },
+    {
+      "building_area_type": "Police station",
+      "w/ft^2": 0.66
+    },
+    {
+      "building_area_type": "Post office",
+      "w/ft^2": 0.65
+    },
+    {
+      "building_area_type": "Religious facility",
+      "w/ft^2": 0.67
+    },
+    {
+      "building_area_type": "Retail",
+      "w/ft^2": 0.84
+    },
+    {
+      "building_area_type": "School/university",
+      "w/ft^2": 0.72
+    },
+    {
+      "building_area_type": "Sports arena",
+      "w/ft^2": 0.76
+    },
+    {
+      "building_area_type": "Town hall",
+      "w/ft^2": 0.69
+    },
+    {
+      "building_area_type": "Transportation",
+      "w/ft^2": 0.50
+    },
+    {
+      "building_area_type": "Warehouse",
+      "w/ft^2": 0.45
+    },
+    {
+      "building_area_type": "Workshop",
+      "w/ft^2": 0.91
+    }
+  ]
+}

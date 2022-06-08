@@ -6,7 +6,10 @@
         "area": "m2",
         "power_density": "W/m2",
         "thermal_transmittance": "W/m2-K",
-        "linear_thermal_transmittance": "W/m-K"
+        "linear_thermal_transmittance": "W/m-K",
+        "cooling_capacity": "W",
+        "capacity": "W",
+        "volumetric_flow_rate": "m3/s"
     },
     "ip": {
         "transformer_capacity": "V-A",
@@ -15,6 +18,9 @@
         "area": "ft2",
         "power_density": "W/ft2",
         "thermal_transmittance": "Btu/hr-ft2-R",
-        "linear_thermal_transmittance": "Btu/hr-ft-R"
+        "linear_thermal_transmittance": "Btu/hr-ft-R",
+        "cooling_capacity": "ton",
+        "capacity": "Btu/hr",
+        "volumetric_flow_rate": "cfm"
     }
 }
