@@ -70,7 +70,7 @@ class Section6Rule2(RuleDefinitionListIndexedBase):
                                 # do not need control type
                                 None,
                                 space_height=zone_avg_height,
-                                space_area=space_floor_area
+                                space_area=space_floor_area,
                             )["lpd"]
                             building_segment_allowable_lighting_power += (
                                 space_allowable_lpd * space_floor_area

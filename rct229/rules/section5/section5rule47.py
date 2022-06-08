@@ -1,7 +1,20 @@
-from rct229.rule_engine.rule_base import RuleDefinitionListIndexedBase, RuleDefinitionBase
+from rct229.rule_engine.rule_base import (
+    RuleDefinitionBase,
+    RuleDefinitionListIndexedBase,
+)
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
-from rct229.ruleset_functions.get_surface_conditioning_category_dict import (get_surface_conditioning_category_dict, SurfaceConditioningCategory as SCC)
-from rct229.ruleset_functions.get_zone_conditioning_category_dict import (get_zone_conditioning_category_dict, ZoneConditioningCategory as ZCC)
+from rct229.ruleset_functions.get_surface_conditioning_category_dict import (
+    SurfaceConditioningCategory as SCC,
+)
+from rct229.ruleset_functions.get_surface_conditioning_category_dict import (
+    get_surface_conditioning_category_dict,
+)
+from rct229.ruleset_functions.get_zone_conditioning_category_dict import (
+    ZoneConditioningCategory as ZCC,
+)
+from rct229.ruleset_functions.get_zone_conditioning_category_dict import (
+    get_zone_conditioning_category_dict,
+)
 from rct229.schema.config import ureg
 from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all
@@ -82,6 +95,11 @@ class Section5Rule47(RuleDefinitionListIndexedBase):
             }
 
         def rule_check(self, context, calc_vals=None, data=None):
-            building_total_air_leakage_rate = calc_vals["building_total_air_leakage_rate"]
+            building_total_air_leakage_rate = calc_vals[
+                "building_total_air_leakage_rate"
+            ]
             target_air_leakage_rate_75pa_b = calc_vals["target_air_leakage_rate_75pa_b"]
-            return std_equal(target_air_leakage_rate_75pa_b * TOTAL_AIR_LEAKAGE_FACTOR, building_total_air_leakage_rate)
+            return std_equal(
+                target_air_leakage_rate_75pa_b * TOTAL_AIR_LEAKAGE_FACTOR,
+                building_total_air_leakage_rate,
+            )
