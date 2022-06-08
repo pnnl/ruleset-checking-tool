@@ -155,6 +155,9 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   * [15-5](section15/Rule15-5.md): Transformer efficiency reported in Baseline RMR equals Table 8.4.4  
   * [15-6](section15/Rule15-6.md): Transformer efficiency reported in User RMR equals Table 8.4.4   
 
+## Section 10 - Airside systems
+  * [10-3](section10/10-3.md): For systems serving computer rooms, the baseline building design shall not have reheat for the purpose of dehumidification.
+
 ## Section 16 - Elevators
 
 ## Section 17 - Refrigeration
