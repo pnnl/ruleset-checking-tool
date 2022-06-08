@@ -144,6 +144,13 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   * [6-9](section6/Rule6-9.md): Proposed building is modeled with additional occupancy sensor controls using occupancy sensor schedule reduction factors specified in Table G3.7.  
   * [6-10](section6/Rule6-10.md): Proposed building is modeled with other programmable lighting controls through a 10% schedule reduction in buildings less than 5,000sq.ft.  
 
+## Section 10 - Airside systems
+  * [10-3](section10/10-3.md): For systems serving computer rooms, the baseline building design shall not have reheat for the purpose of dehumidification.
+  * [10-6](section10/10-6.md): For HVAC systems designed, mechanical cooling equipment efficiencies shall be adjusted to remove the supply fan energy from the efficiency rating.
+  * [10-7](section10/10-7.md): Baseline shall be modeled with the COPnfcooling HVAC system efficiency per Tables G3.5.1-G3.5.6.  Where multiple HVAC zones or residential spaces are combined into a single thermal block the cooling efficiencies (for baseline HVAC System Types 3 and 4) shall be based on the  equipment capacity of the thermal block divided by the number of HVAC zones or residential spaces.
+  * [10-10](section10/10-10.md): Where no heating system exists or no heating system has been submitted with design documents, the proposed building system type shall be the same system as modeled in the baseline building design and shall comply with but not exceed the requirements of Section 6.
+  * [10-11](section10/10-11.md): Except for spaces with baseline system 9 or 10, if no cooling system exists or no cooling system has been submitted with design documents, the proposed building cooling system type shall be the same as modeled in the baseline building design and shall comply with the requirements of Section 6.
+
 ## Section 12 - Receptacles and Other Loads
   * [12-1](section12/Rule12-1.md): Number of spaces modeled in User RMR and Baseline RMR are the same
   * [12-2](section12/Rule12-2.md): Number of spaces modeled in User RMR and Proposed RMR are the same
@@ -156,13 +163,7 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   * [15-4](section15/Rule15-4.md): User RMR transformer Name in Baseline RMR   
   * [15-5](section15/Rule15-5.md): Transformer efficiency reported in Baseline RMR equals Table 8.4.4  
   * [15-6](section15/Rule15-6.md): Transformer efficiency reported in User RMR equals Table 8.4.4   
-
-## Section 10 - Airside systems
-  * [10-3](section10/10-3.md): For systems serving computer rooms, the baseline building design shall not have reheat for the purpose of dehumidification.
-  * [10-6](section10/10-6.md): For HVAC systems designed, mechanical cooling equipment efficiencies shall be adjusted to remove the supply fan energy from the efficiency rating.
-  * [10-7](section10/10-7.md): Baseline shall be modeled with the COPnfcooling HVAC system efficiency per Tables G3.5.1-G3.5.6.  Where multiple HVAC zones or residential spaces are combined into a single thermal block the cooling efficiencies (for baseline HVAC System Types 3 and 4) shall be based on the  equipment capacity of the thermal block divided by the number of HVAC zones or residential spaces.
-  * [10-10](section10/10-10.md): Where no heating system exists or no heating system has been submitted with design documents, the proposed building system type shall be the same system as modeled in the baseline building design and shall comply with but not exceed the requirements of Section 6.
-
+  
 ## Section 16 - Elevators
 
 ## Section 17 - Refrigeration
