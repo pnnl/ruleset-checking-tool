@@ -161,6 +161,7 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   * [10-3](section10/10-3.md): For systems serving computer rooms, the baseline building design shall not have reheat for the purpose of dehumidification.
   * [10-6](section10/10-6.md): For HVAC systems designed, mechanical cooling equipment efficiencies shall be adjusted to remove the supply fan energy from the efficiency rating.
   * [10-7](section10/10-7.md): Baseline shall be modeled with the COPnfcooling HVAC system efficiency per Tables G3.5.1-G3.5.6.  Where multiple HVAC zones or residential spaces are combined into a single thermal block the cooling efficiencies (for baseline HVAC System Types 3 and 4) shall be based on the  equipment capacity of the thermal block divided by the number of HVAC zones or residential spaces.
+  * [10-10](section10/10-10.md): Where no heating system exists or no heating system has been submitted with design documents, the proposed building system type shall be the same system as modeled in the baseline building design and shall comply with but not exceed the requirements of Section 6.
 
 ## Section 16 - Elevators
 
