@@ -50,7 +50,10 @@ def schema_validate_rmr(rmr_obj):
 
 def non_schema_validate_rmr(rmr_obj):
     """Provides non-schema validation for an RMR"""
-    # TODO: Add check for unique names, etc.
+    # TODO: Add checks for:
+    # The ids within each Group are unique
+    # A Subsurface must have exactly one of glazed_area or opaque_area
+    #
     return {"passed": True, "error": None}
 
 
