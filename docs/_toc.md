@@ -133,16 +133,15 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   * [5-52](section5/Rule5-52.md): It is acceptable to use either an annual average ground temperature or monthly average ground temperatures for calculation of heat loss through basement floors.  
 
 ## Section 6 - Lighting
-  * [6-1](section6/Rule6-1.md): Proposed building interior lighting power should be equal to user building interior lighting power
-  * [6-2](section6/Rule6-2.md): Proposed building interior lighting power shall not exceel total interior lighting power allowance determined using either G3.7 or G3.8
-  * [6-3](section6/Rule6-3.md): Spaces in proposed building with hardwired lighting, including Hotel/Motel Guest Rooms, Dormitory Living Quarters interior lighting power >= Table 9.6.1. and Interior lighting power for  'Dwelling Units' space type in the proposed building shall be >= 0.60 W/ft2.
-  * [6-4](section6/Rule6-4.md): Where a complete lighting system exists, the actual lighting power for each thermal block shall be used in the model.
-  * [6-5](section6/Rule6-5.md): Where a complete lighting system exists and where a lighting system has been designed and submitted with design documents, the baseline LPD is equal to expected value in Table G3.7.  
-  * [6-6](section6/Rule6-6.md): Baseline building is modeled with automatic shutoff controls in buildings >5000 ft2
-  * [6-7](section6/Rule6-7.md): Baseline building is not modeled with daylighting control
-  * [6-8](section6/Rule6-8.md): Proposed building is modeled with daylighting controls
-  * [6-9](section6/Rule6-9.md): Proposed building is modeled with additional occupancy sensor controls using occupancy sensor schedule reduction factors specified in Table G3.7.  
-  * [6-10](section6/Rule6-10.md): Proposed building is modeled with other programmable lighting controls through a 10% schedule reduction in buildings less than 5,000sq.ft.  
+  * [6-1](section6/Rule6-1.md): Proposed building interior lighting power shall not exceel total interior lighting power allowance determined using either G3.7 or G3.8
+  * [6-2](section6/Rule6-2.md): Spaces in proposed building with hardwired lighting, including Hotel/Motel Guest Rooms, Dormitory Living Quarters interior lighting power >= Table 9.6.1. and Interior lighting power for  'Dwelling Units' space type in the proposed building shall be >= 0.60 W/ft2.
+  * [6-3](section6/Rule6-3.md): Where a complete lighting system exists, the actual lighting power for each thermal block shall be used in the model.
+  * [6-4](section6/Rule6-4.md): Where a complete lighting system exists and where a lighting system has been designed and submitted with design documents, the baseline LPD is equal to expected value in Table G3.7.  
+  * [6-5](section6/Rule6-5.md): Baseline building is modeled with automatic shutoff controls in buildings >5000 ft2
+  * [6-6](section6/Rule6-6.md): Baseline building is not modeled with daylighting control
+  * [6-7](section6/Rule6-7.md): Proposed building is modeled with daylighting controls
+  * [6-8](section6/Rule6-8.md): Proposed building is modeled with additional occupancy sensor controls using occupancy sensor schedule reduction factors specified in Table G3.7.  
+  * [6-9](section6/Rule6-9.md): Proposed building is modeled with other programmable lighting controls through a 10% schedule reduction in buildings less than 5,000sq.ft.  
 
 ## Section 10 - Airside systems
   * [10-3](section10/10-3.md): For systems serving computer rooms, the baseline building design shall not have reheat for the purpose of dehumidification.

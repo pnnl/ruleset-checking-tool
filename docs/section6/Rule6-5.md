@@ -2,61 +2,81 @@
 # Lighting - Rule 6-5
 
 **Rule ID:** 6-5  
-**Rule Description:** Where a complete lighting system exists and where a lighting system has been designed and submitted with design documents, the baseline LPD is equal to expected value in Table G3.7. Where lighting neither exists nor is submitted with design documents, baseline LPD shall be determined in accordance with Table G3-7 for "Office-Open Plan" space type.
-
-**Appendix G Section:** Section G3.1-6 Modeling Requirements for the Baseline
+**Rule Description:** Baseline building is modeled with automatic shutoff controls in buildings >5000 sq.ft.  
+**Appendix G Section:** Section G3.1-6 Modeling Requirements for the Baseline building  
+**Appendix G Section Reference:**  None  
 
 **Applicability:** All required data elements exist for B_RMR  
-**Applicability Checks:** None  
-**Manual Check:** No
+**Applicability Checks:**  
 
-**Evaluation Context:** Each Data Element  
-**Data Lookup:** Table G3.7  
+  1. Building total area is more than 5,000sq.ft.  
+
+**Manual Check:** Yes  
+
 **Function Call:**  
 
-  - get_lighting_status_type()
-  - match_data_element()
-  - data_lookup()
+  - compare_schedules()
+  - normalize_space_schedules()
 
+**Evaluation Context:** Each Data Element  
+**Data Lookup:** None  
 
 ## Rule Logic: 
 
-- For each building segment in the baseline model: `building_segment_b in B_RMR.building.building_segments:`  
+- For each building_segment in the Baseline model: `for building_segment_b in B_RMR.building.building_segments:`  
 
-  - Get matching building segment in R_RMR: `building_segment_p = match_data_element(P_RMR, BuildingSegments, building_segment_b.id)`
+  - For each thermal_block in building segment: `for thermal_block_b in building_segment.thermal_blocks:`  
 
-    - Get lighting status type dictionary for P_RMR: `space_lighting_status_type_dict_p = get_lighting_status_type(building_segment_p)`  
-  
+    - For each zone in thermal block: `for zone_b in thermal_block_b.zones:`  
+
+      - For each space in zone: `for space_b in zone.spaces:`  
+
+        - Add space floor area to building total floor area: `building_total_area_b += space_b.floor_area`  
+
+- **Applicability Check 1:**`if building_total_area_b > 5000:`  
+
+- Get building open schedule in the baseline model: `building_open_schedule_b = B_RMR.building.building_open_schedule`  
+
+- For each building segment in building: `building_segment_b in B_RMR.building.building_segments:`  
+
   - For each thermal block in building segment: `thermal_block_b in building_segment_b.thermal_blocks:`  
-  
+
     - For each zone in thermal block: `zone_b in thermal_block_b.zones:`  
 
       - For each space in zone: `space_b in zone_b.spaces:`  
 
-        - For each space in zone: `space_b in zone_b.spaces:`  
+        - Get normalized space lighting schedule: `normalized_schedule_b = normalize_space_schedules(space_b.interior_lighting)`  
 
-          - Get total lighting power density in space: `total_space_LPD_b = sum(interior_lighting.power_per_area for interior_lighting in space_b.interior_lighting)`
+        - Get matching space in P_RMR: `space_p = match_data_element(P_RMR, Spaces, space_b.id)`  
 
-          - Get lighting status type for space: `space_lighting_status_type = space_lighting_status_type_dict_p[match_data_element(P_RMR, Spaces, space_b.id).id]`
+          - Get normalized space lighting schedule in P_RMR: `normalized_schedule_p = normalize_space_schedules(space_p.interior_lighting)`
 
-          - Check if lighting space type is specified, get lighting power density allowance from Table G3.7: `if space_b.lighting_space_type: LPD_allowance_b = data_lookup(table_G3_7, space_b.lighting_space_type)`
+        - Check if automatic shutoff control is modeled in space during building closed hours (i.e. if lighting schedule hourly value in B_RMR is equal to P_RMR during building closed hours): `schedule_comparison_result = compare_schedules(normalized_schedule_b, normalized_schedule_p, building_open_schedule_b, -111)`  
 
-          - Else, lighting space type is not specified, assume "Office-Open Plan" as lighting space type to get lighting power density allowance from Table G3.7: `else: LPD_allowance_b = data_lookup(table_G3_7, "OFFICE-OPEN PLAN")`
+          **Rule Assertion:**
 
-            **Rule Assertion:**
+          - Case 1: For building closed hours, if lighting schedule hourly value in B_RMR is equal to P_RMR: `if schedule_comparison_result == "MATCH": PASS`  
 
-            - Case 1: If space lighting status type is as-designed or as-existing, and lighting space type is not specified: `if ( space_lighting_status_type == "AS-DESIGNED OR AS-EXISTING" ) AND ( NOT space_b.lighting_space_type ): FAIL and raise_warning "P_RMR LIGHTING STATUS TYPE IS AS-DESIGNED OR AS-EXISTING. BUT LIGHTING SPACE TYPE IN B_RMR IS NOT SPECIFIED."`
+          - Case 2: Else: `else: CAUTION and return schedule_comparison_result`  
 
-            - Case 2: Else if space lighting status type is as-designed or as-existing, and space total interior lighting power density in B_RMR matches Table G3.7: `else if ( space_lighting_status_type == "AS-DESIGNED OR AS-EXISTING" ) AND ( total_space_LPD_b == LPD_allowance_b ): PASS`  
-
-            - Case 3: Else if space lighting status type is as-designed or as-existing, and space total interior lighting power density in B_RMR does not match Table G3.7: `else if ( space_lighting_status_type == "AS-DESIGNED OR AS-EXISTING" ) AND ( total_space_LPD_b != LPD_allowance_b ): FAIL`
-
-            - Case 4: Else if space lighting status type is not-yet designed or matches Table_9_5_1, and space total interior lighting power density in B_RMR matches Table G3.7: `else if ( space_lighting_status_type == "NOT-YET DESIGNED OR MATCH TABLE_9_5_1" ) AND ( total_space_LPD_b == LPD_allowance_b ): PASS`
-
-            - Case 5: Else, space lighting status type is not-yet designed or matches Table_9_5_1, and space total interior lighting power density in B_RMR does not match Table G3.7: `else if ( space_lighting_status_type == "NOT-YET DESIGNED OR MATCH TABLE_9_5_1" ) AND ( total_space_LPD_b != LPD_allowance_b ): FAIL`
 
 **Notes:**
-  1. Requirements from addendum AF to 90.1-2019 have not been incorporated into this RDS.
-  2. Updated the Rule ID from 6-7 to 6-5 on 6/3/2022
+  1. Updated the Rule ID from 6-9 to 6-6 on 6/3/2022
+  2. Updated the Rule ID from 6-6 to 6-5 on 6/8/2022
+
+**Future Change Note:**
+
+  1. building.building_open_schedule will need to be updated to building_segment.open_schedule once approved and added to the schema.
+
+**Temporary Function Note:**
+
+`compare_schedule_result = compare_schedules(Schedule 1, Schedule 2, Mask Schedule, comparison_factor)`
+
+(4 inputs, Schedule 1, Schedule 2, Mask Schedule, comparison_factor)
+
+- Schedule 2 as the comparison basis, i.e. Schedule 1 = Schedule 2 * comparison_factor
+- When Mask Schedule hourly value is 0, schedules need to be the same at that hour. If Mask Schedule hourly value is 1, Schedule 1 needs to be comparison factor times Schedule 2 at that hour. If Mask Schedule hourly value is 2, skip comparison for at hour.
+- If comparison_factor is not needed, set to -111 for now. For example, when the function only needs to compare if Schedule 1 and Schedule 2 are equal at some hours (when Mask Schedule is 0) and doesn't need to compare the rest of the hours (when Mask Schedule is 2). TBD.
+- can return "match", "equal and less", "equal and more", "equal, less and more", with bin data, TBD
 
 **[Back](../_toc.md)**
