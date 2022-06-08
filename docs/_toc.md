@@ -158,6 +158,7 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
 
 ## Section 10 - Airside systems
   * [10-3](section10/10-3.md): For systems serving computer rooms, the baseline building design shall not have reheat for the purpose of dehumidification.
+  * [10-6](section10/10-6.md): For HVAC systems designed, mechanical cooling equipment efficiencies shall be adjusted to remove the supply fan energy from the efficiency rating.
 
 ## Section 16 - Elevators
 
