@@ -21,10 +21,8 @@
 - **Applicability Check 1:** Check if any Hotel/Model Guestroom or Dormitory Living Quarters, or Dwelling Units exist in the building segment in the proposed model: ```for building_segment_p in P_RMR.building.building_segments:```  
 
   - For each building segment in the proposed model: ```for building_segment_p in P_RMR.building.building_segments:```  
-
-    - For each thermal_block in building segment: ```thermal_block_p in building_segment_p.thermal_blocks:```  
-
-      - For each zone in thermal block: ```zone_p in thermal_block_p.zones:```  
+  
+      - For each zone in building segment: ```zone_p in building_segment_p.zones:```  
 
         - For each space in zone: ```space_p in zone_p.spaces:```  
 
@@ -32,20 +30,21 @@
 
 - For each building segment in the proposed model: ```for building_segment_p in P_RMR.building.building_segments:```  
 
-  - For each thermal_block in building segment: ```thermal_block_p in building_segment_p.thermal_blocks:```  
+  - For each zone in building segment: ```zone_p in building_segment_p.zones:```  
+  
+    - For each space in zone: ```space_p in zone_p.spaces:```  
 
-    - For each zone in thermal block: ```zone_p in thermal_block_p.zones:```  
+      - Check if lighting_space_type of the space is "Guest Room" or "Dormitory Living Quarters", get the lighting power density allowance for the proposed model from Table 9.6.1: ```if ( space_p.lighting_space_type == "Guest Room" ) OR ( space_p.lighting_space_type == "Dormitory Living Quarters" ): lighting_power_allowance_p = data_lookup(table_9_6_1, space_p.lighting_space_type)```  
 
-      - For each space in zone: ```space_p in zone_p.spaces:```  
+      - Else check if the lighting_space_type is "Dwelling Unit", get the lighting power density allowance from Table G3.1-6-e as 0.6W/sq.ft.: ```elseif ( space_p.lighting_space_type == "Dwelling Unit" ): lighting_power_allowance_p = 0.6```  
 
-        - Check if lighting_space_type of the space is "Guest Room" or "Dormitory Living Quarters", get the lighting power density allowance for the proposed model from Table 9.6.1: ```if ( space_p.lighting_space_type == "Guest Room" ) OR ( space_p.lighting_space_type == "Dormitory Living Quarters" ): lighting_power_allowance_p = data_lookup(table_9_6_1, space_p.lighting_space_type)```  
+      - Get the total design power_per_area for the space: ```space_lighting_power_per_area_p = sum( lighting.power_per_area for lighting in space_p.interior_lighting )```  
 
-        - Else check if the lighting_space_type is "Dwelling Unit", get the lighting power density allowance from Table G3.1-6-e as 0.6W/sq.ft.: ```elseif ( space_p.lighting_space_type == "Dwelling Unit" ): lighting_power_allowance_p = 0.6```  
+      - Get the matching space in U_RMR: ```space_u = match_data_element(U_RMR, spaces, space_p.id)```  
 
-        - Get the total design power_per_area for the space: ```space_lighting_power_per_area_p = sum( lighting.power_per_area for lighting in space_p.interior_lighting )```  
+        - Get the total design power_per_area for the space in U_RMR: ```space_lighting_power_per_area_u = sum( lighting.power_per_area for lighting in space_u.interior_lighting )```  
 
-        - Get the matching space in U_RMR: ```space_u = match_data_element(U_RMR, spaces, space_p.id)```  
+          **Rule Assertion:** For each space that is Hotel/Motel Guestroom or Dormitory Living Quarters in the proposed model, lighting power used in the simulation shall be equal to the lighting power allowance in Table 9.6.1 or as designed, whichever is larger; for each space that is Dwelling Units in the proposed model, lighting power used in the simulation shall be equal to 0.6W/sq.ft. or as designed, whichever is larger: ```space_lighting_power_per_area_p == max( lighting_power_allowance_p, space_lighting_power_per_area_u)```  
 
-          - Get the total design power_per_area for the space in U_RMR: ```space_lighting_power_per_area_u = sum( lighting.power_per_area for lighting in space_u.interior_lighting )```  
 
-            **Rule Assertion:** For each space that is Hotel/Motel Guestroom or Dormitory Living Quarters in the proposed model, lighting power used in the simulation shall be equal to the lighting power allowance in Table 9.6.1 or as designed, whichever is larger; for each space that is Dwelling Units in the proposed model, lighting power used in the simulation shall be equal to 0.6W/sq.ft. or as designed, whichever is larger: ```space_lighting_power_per_area_p = max( lighting_power_allowance_p, space_lighting_power_per_area_u)```  
+**[Back](../_toc.md)**
