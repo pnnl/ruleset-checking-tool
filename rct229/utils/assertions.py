@@ -70,7 +70,7 @@ def getattr_(obj, obj_name: str, first_key, *remaining_keys):
     field was missing.
     """
     assert_(
-        obj is None,
+        obj is not None,
         f"Object: {obj_name} provided is None, failed to search for key: {first_key}",
     )
 

@@ -31,11 +31,15 @@ def normalize_space_schedules(space, zone_height, schedules):
     space_total_hourly_use_per_area_array = []
 
     for interior_lighting in space.get("interior_lighting", []):
-        power_per_area = interior_lighting.get("power_per_area", 0.0) # ZERO POWER PER AREA / Power density
+        power_per_area = interior_lighting.get(
+            "power_per_area", 0.0
+        )  # ZERO POWER PER AREA / Power density
         space_total_power_per_area += power_per_area
 
         control_credit = 0.0
-        if interior_lighting.get("are_schedules_used_for_modeling_occupancy_control", None):
+        if interior_lighting.get(
+            "are_schedules_used_for_modeling_occupancy_control", None
+        ):
             control_credit = table_G3_7_lookup(
                 lighting_space_type=getattr_(space, "space", "lighting_space_type"),
                 # occupancy control type can be None - simply ignored the credit
