@@ -5,16 +5,18 @@ from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all, find_one_with_field_value
 from rct229.utils.pint_utils import pint_sum, ZERO
 
+CASE_3_MSG = "Lighting schedule in P-RMD including adjusted lighting occupancy sensor reduction factor is higher than that in B-RMD. Verify Additional occupancy sensor control is modeled correctly in P-RMD"
+CASE_2_MSG = "Schedule adjustment may be correct if space includes daylight control modeled by schedule adjustment or individual workstation with lighting controlled by occupancy sensors (TABLE G3.7 Footnote c)"
 
-class Section6Rule13(RuleDefinitionListIndexedBase):
-    """Rule 13 of ASHRAE 90.1-2019 Appendix G Section 6 (Lighting)"""
+class Section6Rule8(RuleDefinitionListIndexedBase):
+    """Rule 8 of ASHRAE 90.1-2019 Appendix G Section 6 (Lighting)"""
 
     def __init__(self):
-        super(Section6Rule13, self).__init__(
+        super(Section6Rule8, self).__init__(
             rmrs_used=UserBaselineProposedVals(False, True, True),
-            each_rule=Section6Rule13.RuleSetModelInstanceRule(),
+            each_rule=Section6Rule8.RuleSetModelInstanceRule(),
             index_rmr="proposed",
-            id="6-13",
+            id="6-8",
             description="Additional occupancy sensor controls in the proposed building are modeled through schedule adjustments based on factors defined in Table G3.7.",
             list_path="ruleset_model_instances[0]",
             required_fields={"$": ["calendar"], "calendar": ["is_leap_year"]},
@@ -26,9 +28,9 @@ class Section6Rule13(RuleDefinitionListIndexedBase):
 
     class RuleSetModelInstanceRule(RuleDefinitionListIndexedBase):
         def __init__(self):
-            super(Section6Rule13.RuleSetModelInstanceRule, self).__init__(
+            super(Section6Rule8.RuleSetModelInstanceRule, self).__init__(
                 rmrs_used=UserBaselineProposedVals(False, True, True),
-                each_rule=Section6Rule13.RuleSetModelInstanceRule.BuildingRule(),
+                each_rule=Section6Rule8.RuleSetModelInstanceRule.BuildingRule(),
                 index_rmr="proposed",
                 list_path="buildings[*]",
                 required_fields={"$": ["schedules"]},
@@ -45,9 +47,9 @@ class Section6Rule13(RuleDefinitionListIndexedBase):
 
         class BuildingRule(RuleDefinitionListIndexedBase):
             def __init__(self):
-                super(Section6Rule13.RuleSetModelInstanceRule.BuildingRule, self).__init__(
+                super(Section6Rule8.RuleSetModelInstanceRule.BuildingRule, self).__init__(
                     rmrs_used=UserBaselineProposedVals(False, True, True),
-                    each_rule=Section6Rule13.RuleSetModelInstanceRule.BuildingRule.ZoneRule(),
+                    each_rule=Section6Rule8.RuleSetModelInstanceRule.BuildingRule.ZoneRule(),
                     index_rmr="proposed",
                     list_path="$..zones[*]",
                 )
@@ -64,9 +66,9 @@ class Section6Rule13(RuleDefinitionListIndexedBase):
 
             class ZoneRule(RuleDefinitionListIndexedBase):
                 def __init__(self):
-                    super(Section6Rule13.RuleSetModelInstanceRule.BuildingRule.ZoneRule, self).__init__(
+                    super(Section6Rule8.RuleSetModelInstanceRule.BuildingRule.ZoneRule, self).__init__(
                         rmrs_used=UserBaselineProposedVals(False, True, True),
-                        each_rule=Section6Rule13.RuleSetModelInstanceRule.BuildingRule.ZoneRule.SpaceRule(),
+                        each_rule=Section6Rule8.RuleSetModelInstanceRule.BuildingRule.ZoneRule.SpaceRule(),
                         index_rmr="proposed",
                         list_path="spaces[*]",
                         required_fields={
@@ -83,7 +85,7 @@ class Section6Rule13(RuleDefinitionListIndexedBase):
 
                 class SpaceRule(RuleDefinitionBase):
                     def __init__(self):
-                        super(Section6Rule13.RuleSetModelInstanceRule.BuildingRule.ZoneRule.SpaceRule, self).__init__(
+                        super(Section6Rule8.RuleSetModelInstanceRule.BuildingRule.ZoneRule.SpaceRule, self).__init__(
                             rmrs_used=UserBaselineProposedVals(False, True, True)
                         )
 
@@ -96,8 +98,29 @@ class Section6Rule13(RuleDefinitionListIndexedBase):
                         building_open_schedule_p = data["building_open_schedule_p"]
 
                         normalized_schedule_b = normalize_space_schedules(space_b, avg_space_height, schedules_b)
-                        normalized_schedule_p = normalized_space_schedules(space_p, avg_space_height, schedules_p)
+                        normalized_schedule_p = normalize_space_schedules(space_p, avg_space_height, schedules_p)
                         schedule_comparison_result = compare_schedules(normalized_schedule_p, normalized_schedule_b, building_open_schedule_p, 1.0)
+
+                        return {
+                            "total_hours_compared": schedule_comparison_result["total_hours_compared"],
+                            "total_hours_matched": schedule_comparison_result["total_hours_compared"],
+                        }
+
+                    def manual_check_required(self, context, calc_vals=None, data=None):
+                        total_hours_compared = calc_vals["total_hours_compared"]
+                        total_hours_matched = calc_vals["total_hours_matched"]
+                        return total_hours_matched > total_hours_compared
+
+                    def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
+                        return CASE_3_MSG
+
+                    def rule_check(self, context, calc_vals=None, data=None):
+                        total_hours_compared = calc_vals["total_hours_compared"]
+                        total_hours_matched = calc_vals["total_hours_matched"]
+                        return total_hours_matched == total_hours_compared
+
+                    def get_fail_msg(self, context, calc_vals=None, data=None):
+                        return CASE_2_MSG
 
 
 
