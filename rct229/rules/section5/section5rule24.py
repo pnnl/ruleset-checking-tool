@@ -75,16 +75,28 @@ class Section5Rule24(RuleDefinitionListIndexedBase):
             ] > 0 and not (
                 (
                     table_G34_lookup(
-                        climate_zone, SCC.EXTERIOR_RESIDENTIAL, "VERTICAL GLAZING", wwr=0.1
+                        climate_zone,
+                        SCC.EXTERIOR_RESIDENTIAL,
+                        "VERTICAL GLAZING",
+                        wwr=0.1,
                     )["u_value"]
                     == table_G34_lookup(
-                        climate_zone, SCC.EXTERIOR_RESIDENTIAL, "VERTICAL GLAZING", wwr=10.1
+                        climate_zone,
+                        SCC.EXTERIOR_RESIDENTIAL,
+                        "VERTICAL GLAZING",
+                        wwr=10.1,
                     )["u_value"]
                     == table_G34_lookup(
-                        climate_zone, SCC.EXTERIOR_RESIDENTIAL, "VERTICAL GLAZING", wwr=20.1
+                        climate_zone,
+                        SCC.EXTERIOR_RESIDENTIAL,
+                        "VERTICAL GLAZING",
+                        wwr=20.1,
                     )["u_value"]
                     == table_G34_lookup(
-                        climate_zone, SCC.EXTERIOR_RESIDENTIAL, "VERTICAL GLAZING", wwr=30.1
+                        climate_zone,
+                        SCC.EXTERIOR_RESIDENTIAL,
+                        "VERTICAL GLAZING",
+                        wwr=30.1,
                     )["u_value"]
                 )
                 and (
@@ -115,7 +127,10 @@ class Section5Rule24(RuleDefinitionListIndexedBase):
                 )
                 and (
                     table_G34_lookup(
-                        climate_zone, SCC.EXTERIOR_RESIDENTIAL, "VERTICAL GLAZING", wwr=0.1
+                        climate_zone,
+                        SCC.EXTERIOR_RESIDENTIAL,
+                        "VERTICAL GLAZING",
+                        wwr=0.1,
                     )["u_value"]
                     == table_G34_lookup(
                         climate_zone,
@@ -247,7 +262,9 @@ class Section5Rule24(RuleDefinitionListIndexedBase):
                     elif scc == SCC.SEMI_EXTERIOR:
                         target_u_factor = data["target_u_factor_semiheated"]
                     else:
-                        assert False, f"Severe Error: No matching surface category for: {scc}"
+                        assert (
+                            False
+                        ), f"Severe Error: No matching surface category for: {scc}"
 
                     return {
                         "target_u_factor": target_u_factor,
