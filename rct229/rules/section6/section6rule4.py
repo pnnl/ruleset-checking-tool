@@ -64,6 +64,7 @@ class Section6Rule4(RuleDefinitionListIndexedBase):
             def create_data(self, context, data=None):
                 zone_b = context.baseline
 
+                # We will need this after Weili's update to table_G3_7_lookup()
                 return {"avg_zone_ht_b": get_avg_zone_ht(zone_b)}
 
         class SpaceRule(RuleDefinitionBase):
