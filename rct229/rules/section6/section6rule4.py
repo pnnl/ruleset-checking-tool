@@ -108,8 +108,16 @@ class Section6Rule4(RuleDefinitionListIndexedBase):
                 total_space_lpd_b = calc_vals["total_space_lpd_b"]
                 lpd_allowance_b = calc_vals["lpd_allowance_b"]
 
-                # Passes for both values of space_lighting_status_type_p
-                return std_equal(total_space_lpd_b, lpd_allowance_b)
+                return (
+                    # Not Case 1
+                    not (
+                        space_lighting_status_type_p
+                        == LightingStatusType.AS_DESIGNED_OR_AS_EXISTING
+                        and not lighting_space_type_b
+                    )
+                    # Passes for both values of space_lighting_status_type_p
+                    and std_equal(total_space_lpd_b, lpd_allowance_b)
+                )
 
             def get_fail_msg(self, context, calc_vals=None, data=None):
                 space_b = context.baseline
