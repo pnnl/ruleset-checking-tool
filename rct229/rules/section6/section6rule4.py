@@ -7,8 +7,8 @@ from rct229.rule_engine.rule_base import (
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 from rct229.ruleset_functions.get_avg_zone_ht import get_avg_zone_ht
 from rct229.ruleset_functions.get_building_segment_lighting_status_type_dict import (
-    get_building_segment_lighting_status_type_dict,
     LightingStatusType,
+    get_building_segment_lighting_status_type_dict,
 )
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.std_comparisons import std_equal
