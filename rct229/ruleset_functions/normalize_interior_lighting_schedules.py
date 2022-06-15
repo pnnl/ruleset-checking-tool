@@ -29,7 +29,7 @@ def normalize_interior_lighting_schedules(space, space_height, schedules):
         GET_NORMALIZE_SPACE_SCHEDULE__REQUIRED_FIELDS["space"], space
     )
 
-    space_total_power_per_area = 0.0
+    space_total_power_per_area = ZERO.POWER_PER_AREA
     space_total_hourly_use_per_area_array = []
 
     for interior_lighting in space.get("interior_lighting", []):
