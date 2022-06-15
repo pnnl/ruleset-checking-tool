@@ -3,6 +3,8 @@ from rct229.utils.assertions import assert_, assert_required_fields, getattr_
 from rct229.utils.jsonpath_utils import find_one_with_field_value
 
 # Intended for internal use
+from rct229.utils.pint_utils import ZERO, ONE
+
 GET_NORMALIZE_SPACE_SCHEDULE__REQUIRED_FIELDS = {
     "space": {
         "$": ["lighting_space_type", "floor_area"],
@@ -11,13 +13,13 @@ GET_NORMALIZE_SPACE_SCHEDULE__REQUIRED_FIELDS = {
 }
 
 
-def normalize_space_schedules(space, zone_height, schedules):
+def normalize_interior_lighting_schedules(space, space_height, schedules):
     """This function would determine a normalized schedule for a data element in space.
     NOTE: The function currently only works for interior lighting
     Parameters
     ----------
     space: JSON - The space element that needs to determine a normalized schedule, e.g. space.interior_lighting
-    zone_height: float, average height of the zone
+    space_height: float, height of a space, it is typically the average height of the thermal zone
     schedules: List[JSON] - schedule element
     Returns
     -------
@@ -31,9 +33,12 @@ def normalize_space_schedules(space, zone_height, schedules):
     space_total_hourly_use_per_area_array = []
 
     for interior_lighting in space.get("interior_lighting", []):
-        power_per_area = interior_lighting.get(
-            "power_per_area", 0.0
-        )  # ZERO POWER PER AREA / Power density
+        power_per_area = interior_lighting.get("power_per_area", ZERO.POWER_PER_AREA) * ONE.POWER_PER_AREA
+        # Ensure non-zero power
+        assert_(
+            power_per_area > ZERO.POWER_PER_AREA,
+            f'{interior_lighting["id"]} power_per_area is either missing or set to 0.0',
+        )
         space_total_power_per_area += power_per_area
 
         control_credit = 0.0
@@ -46,7 +51,7 @@ def normalize_space_schedules(space, zone_height, schedules):
                 occupancy_control_type=interior_lighting.get(
                     "occupancy_control_type", None
                 ),
-                space_height=zone_height,
+                space_height=space_height,
                 space_area=getattr_(space, "space", "floor_area"),
             )["control_credit"]
 
@@ -58,6 +63,7 @@ def normalize_space_schedules(space, zone_height, schedules):
             "hourly_values",
         )
         hourly_use_per_area_array = [
+            # control_credit is a fraction of lighting power density.
             hourly_value / (1.0 - control_credit) * power_per_area
             for hourly_value in schedule_hourly_value
         ]

@@ -1,6 +1,8 @@
 import pytest
 
-from rct229.ruleset_functions.normalize_interior_lighting_schedules import normalize_space_schedules
+from rct229.ruleset_functions.normalize_interior_lighting_schedules import (
+    normalize_interior_lighting_schedules,
+)
 
 TEST_SPACES = {
     "spaces": [
@@ -61,9 +63,9 @@ def test__normalize_space_schedules_success_1():
         / (2.3 + 5.5 + 2.3)
     ] * 8760
 
-    results = normalize_space_schedules(
+    results = normalize_interior_lighting_schedules(
         space=TEST_SPACES["spaces"][0],
-        zone_height=ZONE_HEIGHT,
+        space_height=ZONE_HEIGHT,
         schedules=TEST_SCHEDULES["schedules"],
     )
     assert test_space_normalized_schedule_array == results
