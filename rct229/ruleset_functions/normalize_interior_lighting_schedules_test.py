@@ -1,6 +1,6 @@
 import pytest
 
-from rct229.ruleset_functions.normalize_space_schedules import normalize_space_schedules
+from rct229.ruleset_functions.normalize_interior_lighting_schedules import normalize_space_schedules
 
 TEST_SPACES = {
     "spaces": [
