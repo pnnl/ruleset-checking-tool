@@ -19,7 +19,7 @@ class ZERO:
     UA = U_FACTOR * AREA
     FLOW = VOLUME / ureg("minute")
 
-
+    
 class ONE:
     """Class holding one values for various pint quantities"""
     LENGTH = 1.0 * ureg("ft")
@@ -33,7 +33,6 @@ class ONE:
     U_FACTOR = ureg("Btu/(hr*ft2*degR)")
     UA = U_FACTOR * AREA
     FLOW = VOLUME / ureg("minute")
-
 
 def pint_sum(qty_list, default=None):
     if len(qty_list) == 0:
