@@ -1,6 +1,7 @@
 from rct229.rule_engine.rule_base import RuleDefinitionListIndexedBase, RuleDefinitionBase
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 from rct229.ruleset_functions.compare_schedules import compare_schedules
+from rct229.ruleset_functions.normalize_interior_lighting_schedules import normalize_interior_lighting_schedules
 from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all, find_one_with_field_value
 from rct229.utils.pint_utils import pint_sum, ZERO
@@ -97,8 +98,8 @@ class Section6Rule8(RuleDefinitionListIndexedBase):
                         schedules_p = data["schedules_p"]
                         building_open_schedule_p = data["building_open_schedule_p"]
 
-                        normalized_schedule_b = normalize_space_schedules(space_b, avg_space_height, schedules_b)
-                        normalized_schedule_p = normalize_space_schedules(space_p, avg_space_height, schedules_p)
+                        normalized_schedule_b = normalize_interior_lighting_schedules(space_b, avg_space_height, schedules_b)
+                        normalized_schedule_p = normalize_interior_lighting_schedules(space_p, avg_space_height, schedules_p)
                         schedule_comparison_result = compare_schedules(normalized_schedule_p, normalized_schedule_b, building_open_schedule_p, 1.0)
 
                         return {
