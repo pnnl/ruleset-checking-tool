@@ -1,7 +1,7 @@
 
 ## normalize_space_schedules
 
-Description: This function would determine a normalized schedule for a data element in space.  
+Description: This function would determine a normalized interior lighting schedule for interior_lighting data element in space. 
 
 Inputs:
   - **Space.data_element**: The space data element that needs to determine a normalized schedule, e.g. space.interior_lighting.
@@ -51,5 +51,5 @@ Logic:
 **Notes**:
 
   1. The current code requires Table 3.7 include additional column to account for manual-on and partial-auto-on credit (multiplied by 1.25).
-
+  2. The function only works with hourly schedules
 **[Back](../_toc.md)**
