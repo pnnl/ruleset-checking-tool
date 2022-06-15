@@ -1,9 +1,9 @@
 from rct229.data_fns.table_G3_7_fns import table_G3_7_lookup
 from rct229.utils.assertions import assert_, assert_required_fields, getattr_
-from rct229.utils.jsonpath_utils import find_one_with_field_value
+from rct229.utils.jsonpath_utils import find_exactly_one_with_field_value
 
 # Intended for internal use
-from rct229.utils.pint_utils import ZERO, ONE
+from rct229.utils.pint_utils import ZERO
 
 GET_NORMALIZE_SPACE_SCHEDULE__REQUIRED_FIELDS = {
     "space": {
@@ -33,7 +33,7 @@ def normalize_interior_lighting_schedules(space, space_height, schedules):
     space_total_hourly_use_per_area_array = []
 
     for interior_lighting in space.get("interior_lighting", []):
-        power_per_area = interior_lighting.get("power_per_area", ZERO.POWER_PER_AREA) * ONE.POWER_PER_AREA
+        power_per_area = interior_lighting.get("power_per_area", ZERO.POWER_PER_AREA)
         # Ensure non-zero power
         assert_(
             power_per_area > ZERO.POWER_PER_AREA,
@@ -56,7 +56,7 @@ def normalize_interior_lighting_schedules(space, space_height, schedules):
             )["control_credit"]
 
         schedule_hourly_value = getattr_(
-            find_one_with_field_value(
+            find_exactly_one_with_field_value(
                 "$", "id", interior_lighting["lighting_multiplier_schedule"], schedules
             ),
             "schedule",

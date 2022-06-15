@@ -3,9 +3,15 @@ import pytest
 from rct229.ruleset_functions.normalize_interior_lighting_schedules import (
     normalize_interior_lighting_schedules,
 )
+from rct229.schema.schema_utils import quantify_rmr
 
-TEST_SPACES = {
-    "spaces": [
+TEST_RMR = {
+    "id": "building_1",
+    "buildings": [{
+        "building_segments": [{
+            "zones": [{
+                "id": "zone_1",
+                "spaces": [
         {
             "id": "space_1",
             "occupant_multiplier_schedule": "Required Occupancy Sched 1",
@@ -39,14 +45,19 @@ TEST_SPACES = {
             "floor_area": 23.25,
         }
     ]
+            }]
+        }]
+    }]
 }
+
+TEST_SPACE_RMR = {"id": "229_01", "ruleset_model_instances": [TEST_RMR]}
 
 TEST_SCHEDULES = {
     "schedules": [{"id": "light_multiplier_sched_1", "hourly_values": [0.8] * 8760}]
 }
 
 ZONE_HEIGHT = 10.0
-
+TEST_SPACES = quantify_rmr(TEST_SPACE_RMR)["ruleset_model_instances"][0]["buildings"][0]["building_segments"][0]["zones"][0]["spaces"][0]
 
 def test__normalize_space_schedules_success_1():
     """
@@ -64,7 +75,7 @@ def test__normalize_space_schedules_success_1():
     ] * 8760
 
     results = normalize_interior_lighting_schedules(
-        space=TEST_SPACES["spaces"][0],
+        space=TEST_SPACES,
         space_height=ZONE_HEIGHT,
         schedules=TEST_SCHEDULES["schedules"],
     )
