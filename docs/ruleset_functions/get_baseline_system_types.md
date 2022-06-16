@@ -17,19 +17,44 @@
 ## Logic:  
 - For each HVAC system in the B_RMR: `hvac_b in B_RMR..HeatingVentilationAirConditioningSystem:`    
     Declare empty lists of the hvac_b.id associated with each system type in the B_RMR. 
-    - Declare a list for SYS-1: `SYS-1 = []`  
-    - Declare a list for SYS-1a: `SYS-1a = []` 
-    - Declare a list for SYS-1b: `SYS-1b = []` 
-    - Declare a list for SYS-1c: `SYS-1c = []` 
-    - Declare a list for SYS-2 (all SYS-2 scenarios with purchased CHW or HW turn into one of the 3 SYS-1s ): `SYS-2 = []` 
-    - Declare a list for SYS-3: `SYS-3 = []`  
-    - Declare a list for SYS-3a: `SYS-3a = []`  
-    - Declare a list for SYS-3b: `SYS-3b = []`  
-    - Declare a list for SYS-3c: `SYS-3c = []`  
-    - Declare a list for SYS-4 (all SYS-4 scenarios with purchased CHW or HW turn into one of the 3 SYS-3s ): `SYS-4 = []`  
-
-
-
+    - Declare a list for SYS-1, Packaged Terminal Air Conditioner : `SYS-1 = []`  
+    - Declare a list for SYS-1a, PCHW with HW boiler: `SYS-1a = []` 
+    - Declare a list for SYS-1b, DX cooling with PHW: `SYS-1b = []` 
+    - Declare a list for SYS-1c, PCHW and PHW: `SYS-1c = []` 
+    - Declare a list for SYS-2,  Packaged Terminal Heat Pump (all SYS-2 scenarios with purchased CHW or HW (PCHW/PHW) turn into one of the 3 SYS-1s with PCHW/PHW): `SYS-2 = []` 
+    - Declare a list for SYS-3, Packaged Rooftop Air Conditioner: `SYS-3 = []`  
+    - Declare a list for SYS-3a, PCHW with furnace: `SYS-3a = []`  
+    - Declare a list for SYS-3b, DX cooling with PHW: `SYS-3b = []`  
+    - Declare a list for SYS-3c, PCHW and PHW: `SYS-3c = []`  
+    - Declare a list for SYS-4, Packaged Rooftop Heat Pump (all SYS-4 scenarios with PCHW/PHW turn into one of the 3 SYS-3s with PCHW/PHW ): `SYS-4 = []`  
+    - Declare a list for SYS-5, Packaged Rooftop VAV with Reheat: `SYS-5 = []`  
+    - Declare a list for SYS-5b, DX and PHW: `SYS-5 = []`  
+    - Declare a list for SYS-6, Packaged Rooftop VAV with Parallel Fan-Powered Boxes and Reheat: `SYS-6 = []`  
+    - Declare a list for SYS-6b, DX and PHW: `SYS-6 = []`  
+    - Declare a list for SYS-7, VAV with reheat: `SYS-7 = []`  
+    - Declare a list for SYS-7a, PCHW with HW boiler: `SYS-7a = []`  
+    - Declare a list for SYS-7b, CHW with PHW: `SYS-7b = []`  
+    - Declare a list for SYS-7c, PCHW and PHW: `SYS-7c = []`  
+    - Declare a list for SYS-8, VAV with Parallel Fan-Powered Boxes and Reheat: `SYS-8 = []`  
+    - Declare a list for SYS-8a, PCHW with Electric Resistance: `SYS-8a = []`  
+    - Declare a list for SYS-8b, CHW with PHW: `SYS-8b = []`  
+    - Declare a list for SYS-9, Heating and Ventilation w/Furnace: `SYS-9 = []`  
+    - Declare a list for SYS-9b, PHW: `SYS-9b = []`  
+    - Declare a list for SYS-10, Heating and Ventilation w/Electric: `SYS-10 = []`  
+    - Declare a list for SYS-11.1, Single Zone VAV System with CHW and Electric Heat : `SYS-11.1 = []`  
+    - Declare a list for SYS-11.1a, Single Zone VAV System with PCHW and Electric Heat : `SYS-11.1a = []`  
+    - Declare a list for SYS-11b, Single Zone VAV System with CHW and PHW : `SYS-11b = []`  
+    - Declare a list for SYS-11c, Single Zone VAV System with PCHW and PHW : `SYS-11c = []`  
+    - Declare a list for SYS-11.2, Single Zone VAV System with CHW and HW boiler : `SYS-11.2 = []`  
+    - Declare a list for SYS-11.2a, Single Zone VAV System with PCHW and HW boiler : `SYS-11.2a = []`  
+    - Declare a list for SYS-12, Single Zone Constant Volume System with CHW and HW boiler : `SYS-12 = []`  
+    - Declare a list for SYS-12a, PCHW with HW boiler: `SYS-12a = []`  
+    - Declare a list for SYS-12b, CHW with PHW: `SYS-12b = []`  
+    - Declare a list for SYS-12c, PCHW and PHW: `SYS-12c = []`  
+    - Declare a list for SYS-13, Single Zone Constant Volume System with CHW and Electric Heat : `SYS-13 = []`  
+    - Declare a list for SYS-13a, PCHW with and Electric Heat: `SYS-13a = []`  
+    - Declare a list for SYS-13b, CHW with PHW: `SYS-13b = []`  How does this differ from 12b?
+    - Declare a list for SYS-13c, PCHW and PHW: `SYS-13c = []`  How does this difffer from 12c?
 
 
 **Returns** `return baseline_hvac_system_dictionary`  
