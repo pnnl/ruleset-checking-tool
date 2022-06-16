@@ -1,15 +1,43 @@
 
-## get_baseline_system_types
-Test
-Description: Identify all the baseline system types modeled in a B-RMR.
+# get_baseline_system_types
 
-Inputs:  
+
+**Description:**  Identify all the baseline system types modeled in a B-RMR.
+
+**Inputs:**
 - **B-RMR**: The B-RMR that needs to get the list of all HVAC system types.
 
-Returns: 
+**Returns:**  
 - **baseline_hvac_system_dictionary**: A dictionary that saves all baseline HVAC system types in B-RMR with their IDs, i.e. {"SYS-3": ["hvac_id_1", "hvac_id_10"], "SYS-7A": ["hvac_id_3", "hvac_id_17", "hvac_id_6], "SYS-9": ["hvac_id_2"]}
 
-Standard Baseline HVAC Types:
+**Function Call:** 
+1. is_baseline_system_1()  
+
+
+## Logic:  
+- For each HVAC system in the B_RMR: `hvac_b in B_RMR..HeatingVentilationAirConditioningSystem:`    
+    Declare empty lists of the hvac_b.id associated with each system type in the B_RMR. 
+    - Declare a list for SYS-1: `SYS-1 = []`  
+    - Declare a list for SYS-1a: `SYS-1a = []` 
+    - Declare a list for SYS-1b: `SYS-1b = []` 
+    - Declare a list for SYS-1c: `SYS-1c = []` 
+    - Declare a list for SYS-2 (all SYS-2 scenarios with purchased CHW or HW turn into one of the 3 SYS-1s ): `SYS-2 = []` 
+    - Declare a list for SYS-3: `SYS-3 = []`  
+    - Declare a list for SYS-3a: `SYS-3a = []`  
+    - Declare a list for SYS-3b: `SYS-3b = []`  
+    - Declare a list for SYS-3c: `SYS-3c = []`  
+    - Declare a list for SYS-4 (all SYS-4 scenarios with purchased CHW or HW turn into one of the 3 SYS-3s ): `SYS-4 = []`  
+
+
+
+
+
+**Returns** `return baseline_hvac_system_dictionary`  
+
+**Notes:**
+
+
+1. Standard Baseline HVAC Types:
 |                                  | Air-side System                                                 | Cooling Type | Heating Type | Air-side System with PCHW Only          | Air-side System with PHHW Only                    | Air-side System with PCHW & PHHW          |
 |----------------------------------|-----------------------------------------------------------------|--------------|--------------|-----------------------------------------|---------------------------------------------------|-------------------------------------------|
 | Sys-1 PTAC                       | Packaged Terminal Air Conditioner                               | DX           | Boiler       | Sys-1a: CV FCU, PCHW w/ Boiler          | Sys-1b: PTAC w/ DX and PHW                        | Sys-1c: CV FCU with PHW and PCHW          |
@@ -28,11 +56,11 @@ Standard Baseline HVAC Types:
 | Sys-13 SZ-CV-ER                  | Single Zone Constant Volume System                              | CHW          | ER           | Sys-13a: SZ-CV, PCHW w/ ER              | Sys-13b SZ-CV-ER, w/ CHW and PHW                  | Sys-13c: SZ-CV with PHW and PCHW          |
 
 
-Logic: TBD  
-
-**Notes:**
-1. We can use multiple functions, one for each baseline HVAC system type as shown below. The return values will be TRUE or FALSE. :
+2. We can use multiple functions, one for each baseline HVAC system type as shown below. The return values will be TRUE or FALSE. :
 is_baseline_system_1(HVAC_id)
 is_baseline_system_2(HVAC_id)
 
 Then "get_baseline_HVAC_system_types" would call these sub-functions to come up with the baseline system library.
+
+
+**[Back](../_toc.md)**
