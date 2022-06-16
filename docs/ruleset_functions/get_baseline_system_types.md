@@ -1,6 +1,6 @@
 
 ## get_baseline_system_types
-
+Test
 Description: Identify all the baseline system types modeled in a B-RMR.
 
 Inputs:  
