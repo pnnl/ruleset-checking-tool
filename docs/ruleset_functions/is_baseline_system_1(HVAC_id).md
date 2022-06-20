@@ -37,6 +37,6 @@
 **Returns** `is_baseline_system_1`  
 
 **Notes**
-1. To limit redundant coding. I am thinking that we should also check to see if it is Sys-1, Sys-1a, Sys-1b, or Sys-1c in the same function and return strings of either Sys-1, Sys-1a, Sys-1b, Sys-1c, or Not Sys 1.
+1. To limit redundant coding. I am thinking that we should also check to see if it is Sys-1, Sys-1a, Sys-1b, or Sys-1c in the same function and return strings of either Sys-1, Sys-1a, Sys-1b, Sys-1c, or Not_Sys_1.
 
 **[Back](../_toc.md)**
