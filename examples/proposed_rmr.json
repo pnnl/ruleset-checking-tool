@@ -52,18 +52,21 @@
                                         "id": "1",
                                         "adjacent_to": "INTERIOR",
                                         "azimuth": 90,
+                                        "area": 100,
                                         "does_cast_shade": true
                                     },
                                     {
                                         "id": "2",
                                         "adjacent_to": "EXTERIOR",
                                         "azimuth": 180,
+                                        "area": 100,
                                         "does_cast_shade": false
                                     },
                                     {
                                         "id": "3",
                                         "adjacent_to": "EXTERIOR",
                                         "azimuth": 180,
+                                        "area": 100,
                                         "does_cast_shade": true
                                     }
                                 ],
