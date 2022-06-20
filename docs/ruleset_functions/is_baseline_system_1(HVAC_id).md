@@ -30,9 +30,13 @@
             - Check that there is a zone associated with the HVAC system and that there is only one zone in the zone list, if not then the function should return FALSE and no need to carry on with remaining logic: `if len(zone_list_b) == 0 OR zone_list_b == Null OR len(zone_list_b) > 1: is_baseline_system_1 = FALSE`  
             - Create an object for the zone associated with the HVAC system: `zone_b = zone_list_b[0]`
             - Check that there is a terminal unit associated with the zone and that there is only one terminal unit associated with the zone, if not then the function should return FALSE and no need to carry on with remaining logic: `if len(zone_b.terminals) != 1: is_baseline_system_1 = FALSE`  
-            - Create an object for the terminal unit associated with the zone: `terminal_b = zone_b.terminals[0]`  
-            - Check that the data elements associated with the terminal unit align with system 1, if not then the function should return FALSE and no need to carry on with remaining logic: `if terminal_b.heating_source != "None" or terminal_b.cooling_source != "None" or terminal_b.fan != Null or terminal_b.type != "CONSTANT_AIR_VOLUME" or terminal_b.is_supply_ducted != FALSE: is_baseline_system_1 = FALSE`  
+            - Check if is_baseline_system_1 equals TRUE: `if is_baseline_system_1 == TRUE:`  
+                - Create an object for the terminal unit associated with the zone: `terminal_b = zone_b.terminals[0]`  
+                - Check that the data elements associated with the terminal unit align with system 1, if not then the function should return FALSE: `if terminal_b.heating_source != "None" or terminal_b.cooling_source != "None" or terminal_b.fan != Null or terminal_b.type != "CONSTANT_AIR_VOLUME": is_baseline_system_1 = FALSE`  
 
 **Returns** `is_baseline_system_1`  
+
+**Notes**
+1. To limit redundant coding. I am thinking that we should also check to see if it is Sys-1, Sys-1a, Sys-1b, or Sys-1c in the same function and return strings of either Sys-1, Sys-1a, Sys-1b, Sys-1c, or Not Sys 1.
 
 **[Back](../_toc.md)**
