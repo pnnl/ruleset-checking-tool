@@ -8,6 +8,7 @@ from rct229.reports.project_report import (
 from rct229.rule_engine.engine import evaluate_all_rules
 from rct229.schema.validate import validate_rmr
 from rct229.utils.file import deserialize_rmr_file
+from rct229.ruletest_engine.ruletest_engine import *
 
 CONTEXT_SETTINGS = dict(help_option_names=["-h", "--help"])
 
@@ -22,6 +23,28 @@ def cli():
     """
     ASHRAE 229 - Ruleset Checking Tool
     """
+
+
+# Software Test Workflow
+test_short_help_text = "Software test workflow, add sections to do test."
+
+
+@cli.command("test", short_help=test_short_help_text, help=test_short_help_text, hidden=True)
+@click.argument("section", type=click.STRING)
+def run_test(section=None):
+    if section:
+        print(f"software test workflow for section {section}")
+        if section == "section5":
+            run_envelope_tests()
+        elif section == "section6":
+            run_lighting_tests()
+        elif section == "section15":
+            run_transformer_tests()
+    else:
+        print(f"software test workflow for all tests")
+        run_transformer_tests()
+        run_lighting_tests()
+        run_envelope_tests()
 
 
 # Evaluate RMR Triplet
