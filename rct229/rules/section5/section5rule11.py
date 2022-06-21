@@ -110,7 +110,7 @@ class Section5Rule11(RuleDefinitionListIndexedBase):
                     "target_u_factor_nonres": target_u_factor_nonres,
                 }
 
-            def manaul_check_required(self, context, calc_vals, data=None):
+            def manual_check_required(self, context, calc_vals, data=None):
                 target_u_factor_res = calc_vals["target_u_factor_res"]
                 target_u_factor_nonres = calc_vals["target_u_factor_nonres"]
 
