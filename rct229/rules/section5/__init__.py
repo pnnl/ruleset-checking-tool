@@ -4,8 +4,6 @@ import importlib
 __all__ = [
     "section5rule2",
     "section5rule3",
-    "section5rule5",
-    "section5rule8",
     "section5rule11",
     "section5rule13",
     "section5rule15",
@@ -22,12 +20,10 @@ __all__ = [
     "section5rule36",
     "section5rule37",
     "section5rule40",
-    "section5rule42",
     "section5rule44",
     "section5rule45",
     "section5rule46",
     "section5rule47",
-    "section5rule48",
     "section5rule49",
 ]
 
