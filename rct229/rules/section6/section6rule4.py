@@ -22,7 +22,7 @@ class Section6Rule4(RuleDefinitionListIndexedBase):
     """Rule 4 of ASHRAE 90.1-2019 Appendix G Section 6 (Lighting)"""
 
     def __init__(self):
-        super(Section6Rule7, self).__init__(
+        super(Section6Rule4, self).__init__(
             rmrs_used=UserBaselineProposedVals(False, True, True),
             each_rule=Section6Rule7.BuildingSegmentRule(),
             index_rmr="baseline",
@@ -52,11 +52,11 @@ class Section6Rule4(RuleDefinitionListIndexedBase):
         class ZoneRule(RuleDefinitionListIndexedBase):
             def __init__(self):
                 super(
-                    Section6Rule7.BuildingRule.BuildingSegmentRule.ZoneRule,
+                    Section6Rule4.BuildingRule.BuildingSegmentRule.ZoneRule,
                     self,
                 ).__init__(
                     rmrs_used=UserBaselineProposedVals(False, True, True),
-                    each_rule=Section6Rule7.BuildingRule.BuildingSegmentRule.ZoneRule.SpaceRule(),
+                    each_rule=Section6Rule4.BuildingRule.BuildingSegmentRule.ZoneRule.SpaceRule(),
                     index_rmr="baseline",
                     list_path="spaces[*]",
                 )
@@ -70,7 +70,7 @@ class Section6Rule4(RuleDefinitionListIndexedBase):
         class SpaceRule(RuleDefinitionBase):
             def __init__(self):
                 super(
-                    Section6Rule7.BuildingRule.BuildingSegmentRule.SpaceRule,
+                    Section6Rule4.BuildingRule.BuildingSegmentRule.SpaceRule,
                     self,
                 ).__init__(
                     fail_msg="P_RMR lighting status type is as-designed or as-existing. But lighting space type in B_RMR is not specified.",
@@ -116,7 +116,14 @@ class Section6Rule4(RuleDefinitionListIndexedBase):
                         and not lighting_space_type_b
                     )
                     # Passes for both values of space_lighting_status_type_p
-                    and std_equal(total_space_lpd_b, lpd_allowance_b)
+                    and (
+                        space_lighting_status_type_p
+                        in [
+                            LightingStatusType.AS_DESIGNED_OR_AS_EXISTING,
+                            LightingStatusType.NOT_YET_DESIGNED_OR_MATCH_TABLE_9_5_1,
+                        ]
+                        and std_equal(total_space_lpd_b, lpd_allowance_b)
+                    )
                 )
 
             def get_fail_msg(self, context, calc_vals=None, data=None):
