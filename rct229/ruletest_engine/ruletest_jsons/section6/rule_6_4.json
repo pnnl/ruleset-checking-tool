@@ -3,12 +3,12 @@
         "Section": 6,
         "Rule": 4,
         "Test": "a",
-        "test_description": "For en exisiting building, the lighting power in the P-RMR is as exisiting",
-        "expected_rule_outcome": "caution",
+        "test_description": "Project has one building segment with one zone with two spaces. The lighting power density in the proposed RMR is the same as the lighting power density in the user RMR for all spaces in the building.",
+        "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "6-4",
-            "ruleset_reference": 0,
-            "rule_description": "Where a complete lighting system exists, the actual lighting power for each thermal block shall be used in he model. Where a lighting system has been designed and submitted with design documents, lighting power shall be determined in accordance with Sections 9.1.3 and 9.1.4. Where lighting neither exists nor is submitted with design documents, lighting shall comply with but not exceed the requirements of Section 9. Lighting power shall be determined in accordance with the Building Area Method (Section 9.6.1)",
+            "ruleset_reference": "Table G3.1 Proposed Building Performance (a)(b)(c)",
+            "rule_description": "Where a complete lighting system exists, the actual lighting power for each thermal block shall be used in the model. Where a lighting system has been designed and submitted with design documents, lighting power shall be determined in accordance with Sections 9.1.3 and 9.1.4. Where lighting neither exists nor is submitted with design documents, lighting shall comply with but not exceed the requirements of Section 9. Lighting power shall be determined in accordance with the Building Area Method (Section 9.5.1)",
             "applicable_rmr": "Proposed RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
@@ -17,6 +17,62 @@
             "schema_version": "0.0.12"
         },
         "rmr_transformations": {
+            "user": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_instances": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_open_schedule": "Building Open Schedule 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "volume": 33.98021591039999,
+                                                "thermostat_cooling_setpoint_schedule": "Cooling Setpoint Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Heating Setpoint Schedule 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 9.290303999999999,
+                                                        "occupant_multiplier_schedule": "Occupancy Schedule 1",
+                                                        "interior_lighting": [
+                                                            {
+                                                                "id": "Guest Room Lighting",
+                                                                "lighting_multiplier_schedule": "Guest Room Lighting Schedule 1",
+                                                                "power_per_area": 3.767368645848403
+                                                            }
+                                                        ],
+                                                        "lighting_space_type": "GUEST_ROOM"
+                                                    },
+                                                    {
+                                                        "id": "Space 2",
+                                                        "floor_area": 92.90303999999999,
+                                                        "occupant_multiplier_schedule": "Occupancy Schedule 2",
+                                                        "interior_lighting": [
+                                                            {
+                                                                "id": "Hotel Lobby Lighting",
+                                                                "lighting_multiplier_schedule": "Hotel Lobby Lighting Schedule",
+                                                                "power_per_area": 9.149323854203265
+                                                            }
+                                                        ],
+                                                        "lighting_space_type": "LOBBY_HOTEL"
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "lighting_building_area_type": "HOTEL_MOTEL"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
             "proposed": {
                 "id": "ASHRAE229 1",
                 "ruleset_model_instances": [
@@ -25,37 +81,311 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Schedule 1",
+                                "building_open_schedule": "Building Open Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Thermal Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Required Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Schedule 1",
+                                                "volume": 33.98021591039999,
+                                                "thermostat_cooling_setpoint_schedule": "Cooling Setpoint Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Heating Setpoint Schedule 1",
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
-                                                        "lighting_space_type": "DINING_AREA_FAMILY_DINING",
-                                                        "floor_area": 92.90303999999999,
-                                                        "occupant_multiplier_schedule": "Required Schedule 1",
+                                                        "floor_area": 9.290303999999999,
+                                                        "occupant_multiplier_schedule": "Occupancy Schedule 1",
                                                         "interior_lighting": [
                                                             {
-                                                                "id": "Dining Area Lighting 1",
-                                                                "power_per_area": 6.458346250025834,
-                                                                "lighting_multiplier_schedule": "Required Schedule 1"
-                                                            },
-                                                            {
-                                                                "id": "Dining Area Lighting 2",
-                                                                "power_per_area": 3.4444513333471116,
-                                                                "lighting_multiplier_schedule": "Required Schedule 1"
+                                                                "id": "Guest Room Lighting",
+                                                                "lighting_multiplier_schedule": "Guest Room Lighting Schedule 1",
+                                                                "power_per_area": 3.767368645848403
                                                             }
-                                                        ]
+                                                        ],
+                                                        "lighting_space_type": "GUEST_ROOM"
+                                                    },
+                                                    {
+                                                        "id": "Space 2",
+                                                        "floor_area": 92.90303999999999,
+                                                        "occupant_multiplier_schedule": "Occupancy Schedule 2",
+                                                        "interior_lighting": [
+                                                            {
+                                                                "id": "Hotel Lobby Lighting",
+                                                                "lighting_multiplier_schedule": "Hotel Lobby Lighting Schedule",
+                                                                "power_per_area": 9.149323854203265
+                                                            }
+                                                        ],
+                                                        "lighting_space_type": "LOBBY_HOTEL"
                                                     }
                                                 ]
                                             }
-                                        ]
+                                        ],
+                                        "lighting_building_area_type": "HOTEL_MOTEL"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    },
+    "rule-6-4-b": {
+        "Section": 6,
+        "Rule": 4,
+        "Test": "b",
+        "test_description": "Project has one building segment with one zone with two spaces. The lighting power density in the proposed RMR is not the same as the lighting power density in the user RMR for all spaces in the building.",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "6-4",
+            "ruleset_reference": "Table G3.1 Proposed Building Performance (a)(b)(c)",
+            "rule_description": "Where a complete lighting system exists, the actual lighting power for each thermal block shall be used in the model. Where a lighting system has been designed and submitted with design documents, lighting power shall be determined in accordance with Sections 9.1.3 and 9.1.4. Where lighting neither exists nor is submitted with design documents, lighting shall comply with but not exceed the requirements of Section 9. Lighting power shall be determined in accordance with the Building Area Method (Section 9.5.1)",
+            "applicable_rmr": "Proposed RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": "None",
+            "mandatory_rule": "Yes",
+            "schema_version": "0.0.12"
+        },
+        "rmr_transformations": {
+            "user": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_instances": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_open_schedule": "Building Open Schedule 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "volume": 33.98021591039999,
+                                                "thermostat_cooling_setpoint_schedule": "Cooling Setpoint Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Heating Setpoint Schedule 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 9.290303999999999,
+                                                        "occupant_multiplier_schedule": "Occupancy Schedule 1",
+                                                        "interior_lighting": [
+                                                            {
+                                                                "id": "Guest Room Lighting",
+                                                                "lighting_multiplier_schedule": "Guest Room Lighting Schedule 1",
+                                                                "power_per_area": 2.368060291676139
+                                                            }
+                                                        ],
+                                                        "lighting_space_type": "GUEST_ROOM"
+                                                    },
+                                                    {
+                                                        "id": "Space 2",
+                                                        "floor_area": 92.90303999999999,
+                                                        "occupant_multiplier_schedule": "Occupancy Schedule 2",
+                                                        "interior_lighting": [
+                                                            {
+                                                                "id": "Hotel Lobby Lighting",
+                                                                "lighting_multiplier_schedule": "Hotel Lobby Lighting Schedule",
+                                                                "power_per_area": 6.99654177086132
+                                                            }
+                                                        ],
+                                                        "lighting_space_type": "LOBBY_HOTEL"
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "lighting_building_area_type": "HOTEL_MOTEL"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            "proposed": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_instances": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_open_schedule": "Building Open Schedule 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "volume": 33.98021591039999,
+                                                "thermostat_cooling_setpoint_schedule": "Cooling Setpoint Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Heating Setpoint Schedule 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 9.290303999999999,
+                                                        "occupant_multiplier_schedule": "Occupancy Schedule 1",
+                                                        "interior_lighting": [
+                                                            {
+                                                                "id": "Guest Room Lighting",
+                                                                "lighting_multiplier_schedule": "Guest Room Lighting Schedule 1",
+                                                                "power_per_area": 3.767368645848403
+                                                            }
+                                                        ],
+                                                        "lighting_space_type": "GUEST_ROOM"
+                                                    },
+                                                    {
+                                                        "id": "Space 2",
+                                                        "floor_area": 92.90303999999999,
+                                                        "occupant_multiplier_schedule": "Occupancy Schedule 2",
+                                                        "interior_lighting": [
+                                                            {
+                                                                "id": "Hotel Lobby Lighting",
+                                                                "lighting_multiplier_schedule": "Hotel Lobby Lighting Schedule",
+                                                                "power_per_area": 9.149323854203265
+                                                            }
+                                                        ],
+                                                        "lighting_space_type": "LOBBY_HOTEL"
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "lighting_building_area_type": "HOTEL_MOTEL"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    },
+    "rule-6-4-c": {
+        "Section": 6,
+        "Rule": 4,
+        "Test": "c",
+        "test_description": "Project has one building segment with one zone with two spaces. The lighting power density in the proposed RMR is not the same as the lighting power density in the user RMR for all spaces in the building. P RMR LPD matches Standard 90.1-2019 Table 9.5.1",
+        "expected_rule_outcome": "undetermined",
+        "standard": {
+            "rule_id": "6-4",
+            "ruleset_reference": "Table G3.1 Proposed Building Performance (a)(b)(c)",
+            "rule_description": "Where a complete lighting system exists, the actual lighting power for each thermal block shall be used in the model. Where a lighting system has been designed and submitted with design documents, lighting power shall be determined in accordance with Sections 9.1.3 and 9.1.4. Where lighting neither exists nor is submitted with design documents, lighting shall comply with but not exceed the requirements of Section 9. Lighting power shall be determined in accordance with the Building Area Method (Section 9.5.1)",
+            "applicable_rmr": "Proposed RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": "None",
+            "mandatory_rule": "Yes",
+            "schema_version": "0.0.12"
+        },
+        "rmr_transformations": {
+            "user": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_instances": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_open_schedule": "Building Open Schedule 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "volume": 33.98021591039999,
+                                                "thermostat_cooling_setpoint_schedule": "Cooling Setpoint Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Heating Setpoint Schedule 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 9.290303999999999,
+                                                        "occupant_multiplier_schedule": "Occupancy Schedule 1",
+                                                        "interior_lighting": [
+                                                            {
+                                                                "id": "Guest Room Lighting",
+                                                                "lighting_multiplier_schedule": "Guest Room Lighting Schedule 1",
+                                                                "power_per_area": 4.736120583352278
+                                                            }
+                                                        ],
+                                                        "lighting_space_type": "GUEST_ROOM"
+                                                    },
+                                                    {
+                                                        "id": "Space 2",
+                                                        "floor_area": 92.90303999999999,
+                                                        "occupant_multiplier_schedule": "Occupancy Schedule 2",
+                                                        "interior_lighting": [
+                                                            {
+                                                                "id": "Hotel Lobby Lighting",
+                                                                "lighting_multiplier_schedule": "Hotel Lobby Lighting Schedule",
+                                                                "power_per_area": 6.027789833357446
+                                                            }
+                                                        ],
+                                                        "lighting_space_type": "LOBBY_HOTEL"
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "lighting_building_area_type": "HOTEL_MOTEL"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            "proposed": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_instances": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_open_schedule": "Building Open Schedule 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "volume": 33.98021591039999,
+                                                "thermostat_cooling_setpoint_schedule": "Cooling Setpoint Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Heating Setpoint Schedule 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 9.290303999999999,
+                                                        "occupant_multiplier_schedule": "Occupancy Schedule 1",
+                                                        "interior_lighting": [
+                                                            {
+                                                                "id": "Guest Room Lighting",
+                                                                "lighting_multiplier_schedule": "Guest Room Lighting Schedule 1",
+                                                                "power_per_area": 6.027789833357446
+                                                            }
+                                                        ],
+                                                        "lighting_space_type": "GUEST_ROOM"
+                                                    },
+                                                    {
+                                                        "id": "Space 2",
+                                                        "floor_area": 92.90303999999999,
+                                                        "occupant_multiplier_schedule": "Occupancy Schedule 2",
+                                                        "interior_lighting": [
+                                                            {
+                                                                "id": "Hotel Lobby Lighting",
+                                                                "lighting_multiplier_schedule": "Hotel Lobby Lighting Schedule",
+                                                                "power_per_area": 6.027789833357446
+                                                            }
+                                                        ],
+                                                        "lighting_space_type": "LOBBY_HOTEL"
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "lighting_building_area_type": "HOTEL_MOTEL"
                                     }
                                 ]
                             }
