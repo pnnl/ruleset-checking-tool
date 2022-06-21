@@ -15,7 +15,7 @@
 
 
 ## Logic:   
-Declare empty lists of the hvac_b.id associated with each system type in the B_RMR, . 
+Declare empty lists of the hvac_b.id associated with each system type in the B_RMR (I do not think think this is needed but it helps to idenify everything needed) 
 - Declare a list for SYS-1, Packaged Terminal Air Conditioner : `SYS-1 = []`  
 - Declare a list for SYS-1a, PCHW with HW boiler: `SYS-1a = []` 
 - Declare a list for SYS-1b, DX cooling with PHW: `SYS-1b = []` 
@@ -52,8 +52,8 @@ Declare empty lists of the hvac_b.id associated with each system type in the B_R
 - Declare a list for SYS-12c, PCHW and PHW: `SYS-12c = []`  
 - Declare a list for SYS-13, Single Zone Constant Volume System with CHW and Electric Heat : `SYS-13 = []`  
 - Declare a list for SYS-13a, PCHW with and Electric Heat: `SYS-13a = []`  
-- Declare a list for SYS-13b, CHW with PHW: `SYS-13b = []`  How does this differ from 12b?
-- Declare a list for SYS-13c, PCHW and PHW: `SYS-13c = []`  How does this difffer from 12c?
+- Declare a list for SYS-13b, CHW with PHW: `SYS-13b = []`  QUESTION: How does this differ from 12b?
+- Declare a list for SYS-13c, PCHW and PHW: `SYS-13c = []`  QUESTION: How does this difffer from 12c?
 
 - For each HVAC system in the B_RMR: `hvac_b in B_RMR..HeatingVentilationAirConditioningSystem:`   
     - Call system type 1 function which will return a string of either SYS-1, SYS-1a, SYS-1b, SYS-1c, or Not_Sys_1: `sys_1_type = is_baseline_system_1()`  
@@ -62,6 +62,12 @@ Declare empty lists of the hvac_b.id associated with each system type in the B_R
     - Check elif SYS-1b, if it is then add to list of SYS-1bs: `elif sys_1_type == "SYS-1b": SYS-1b = SYS-1b.append(hvac_b.id)`
     - Check elif SYS-1c, if it is then add to list of SYS-1cs: `elif sys_1_type == "SYS-1c": SYS-1b = SYS-1c.append(hvac_b.id)`
     - Else, do nothing: `Else:`
+
+    - PLACEHOLDER, each is_baseline_system_#() function will be called for each HVAC system in the baseline as shown for system 1.
+
+
+
+- Create dictionary after looping through each HVAC system from lists:`baseline_hvac_system_dictionary = {"SYS-1": [SYS-1], "SYS-1a": [SYS-1a],"SYS-1b": [SYS-1b],"SYS-1c": [SYS-1c],"SYS-2": [SYS-2],"SYS-3",[SYS-3], "SYS-3a": [SYS-3a],"SYS-3b": [SYS-3b],"SYS-1c": [SYS-3c],"SYS-4": [SYS-4],"SYS-5": [SYS-5],"SYS-5b": [SYS-5b],"SYS-6": [SYS-6],"SYS-6b": [SYS-6b], "SYS-7": [SYS-7], "SYS-7a": [SYS-7a],"SYS-7b": [SYS-7b],"SYS-1c": [SYS-7c],"SYS-8": [SYS-8], "SYS-8a": [SYS-1a],"SYS-8b": [SYS-8b],"SYS-9": [SYS-9], "SYS-9b": [SYS-9b],"SYS-10": [SYS-10], "SYS-11.1": [SYS-11.1], "SYS-11.1a": [SYS-11.1a],"SYS-11b": [SYS-11b],"SYS-11c", [SYS-11c],"SYS-11.2": [SYS-11.2], "SYS-11.2a": [SYS-11.2a], "SYS-12": [SYS-12], "SYS-12a": [SYS-12a],"SYS-12b": [SYS-12b],"SYS-12c": [SYS-12c], "SYS-13": [SYS-13], "SYS-13a": [SYS-13a],"SYS-13b": [SYS-13b],"SYS-13c": [SYS-13c]}`
 
 **Returns** `return baseline_hvac_system_dictionary`  
 
