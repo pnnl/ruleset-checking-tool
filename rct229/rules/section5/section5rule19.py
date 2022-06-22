@@ -48,6 +48,13 @@ class Section5Rule19(RuleDefinitionListIndexedBase):
                 },
             )
 
+        def is_applicable(self, context, data=None):
+            building_b = context.baseline
+            area_type_window_wall_area_dict_b = get_area_type_window_wall_area_dict(
+                data["climate_zone"], building_b
+            )
+            return "OTHER" in area_type_window_wall_area_dict_b
+
         def get_calc_vals(self, context, data=None):
             building_b = context.baseline
             building_p = context.proposed
