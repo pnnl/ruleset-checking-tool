@@ -2,12 +2,13 @@ from rct229.rule_engine.rule_base import RuleDefinitionListIndexedBase, RuleDefi
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 from rct229.ruleset_functions.compare_schedules import compare_schedules
 from rct229.ruleset_functions.normalize_interior_lighting_schedules import normalize_interior_lighting_schedules
+from rct229.schema.config import ureg
 from rct229.utils.assertions import getattr_
-from rct229.utils.jsonpath_utils import find_all, find_one_with_field_value
+from rct229.utils.jsonpath_utils import find_all, find_exactly_one_with_field_value
 from rct229.utils.pint_utils import ZERO, pint_sum
 import functools
 
-FLOOR_AREA_LIMIT = 5000 # square foot
+FLOOR_AREA_LIMIT = 5000 * ureg('ft2') # square foot
 
 
 class Section6Rule9(RuleDefinitionListIndexedBase):
@@ -19,7 +20,8 @@ class Section6Rule9(RuleDefinitionListIndexedBase):
             each_rule=Section6Rule9.RuleSetModelInstanceRule(),
             index_rmr="proposed",
             id="6-9",
-            description="Proposed building is modeled with other programmable lighting controls through a 10% schedule reduction in buildings less than 5,000sq.ft.",
+            description="Proposed building is modeled with other programmable lighting controls through a 10% "
+                        "schedule reduction in buildings less than 5,000sq.ft.",
             list_path="ruleset_model_instances[0]",
             required_fields={"$": ["calendar"], "calendar": ["is_leap_year"]},
         )
@@ -63,8 +65,8 @@ class Section6Rule9(RuleDefinitionListIndexedBase):
                 schedules_p = data["schedules_p"]
                 return {
                     **data,
-                    "building_open_schedule_p":  getattr_(
-                        find_one_with_field_value("$", "id", building_p["building_open_schedule"], schedules_p),
+                    "building_open_schedule_p": getattr_(
+                        find_exactly_one_with_field_value("$", "id", building_p["building_open_schedule"], schedules_p),
                         "schedule", "hourly_values")
                 }
 
@@ -81,14 +83,9 @@ class Section6Rule9(RuleDefinitionListIndexedBase):
                     zone_p = context.proposed
                     return {
                         **data,
-                        "avg_space_height": zone_p.get("volume", 0.0) / pint_sum(
+                        "avg_space_height": zone_p.get("volume", ZERO.VOLUME) / pint_sum(
                             find_all("spaces[*].floor_area", zone_p), ZERO.AREA)
                     }
-
-                def list_filter(self, context_item, data=None):
-                    # filter out spaces with no interior lighting
-                    space_b = context_item.baseline
-                    return space_b.get("interior_lighting", None)
 
                 class SpaceRule(RuleDefinitionBase):
                     def __init__(self):
@@ -104,13 +101,21 @@ class Section6Rule9(RuleDefinitionListIndexedBase):
                         schedules_p = data["schedules_p"]
                         building_open_schedule_p = data["building_open_schedule_p"]
 
-                        normalized_schedule_b = normalize_interior_lighting_schedules(space_b, avg_space_height, schedules_b)
-                        normalized_schedule_p = normalize_interior_lighting_schedules(space_p, avg_space_height, schedules_p)
-                        schedule_comparison_result_dictionary = compare_schedules(normalized_schedule_p, normalized_schedule_b,
-                                                                       building_open_schedule_p, 1.0)
-                        daylight_control = functools.reduce(lambda daylight_control_a, daylight_control_b: daylight_control_a | daylight_control_b, find_all("interior_lighting[*].are_schedules_used_for_modeling_daylighting_control", space_p))
+                        normalized_schedule_b = normalize_interior_lighting_schedules(space_b, avg_space_height,
+                                                                                      schedules_b)
+                        normalized_schedule_p = normalize_interior_lighting_schedules(space_p, avg_space_height,
+                                                                                      schedules_p)
+                        schedule_comparison_result_dictionary = compare_schedules(normalized_schedule_p,
+                                                                                  normalized_schedule_b,
+                                                                                  building_open_schedule_p, 1.0)
+                        daylight_control = any(
+                            find_all(
+                                "interior_lighting[*].are_schedules_used_for_modeling_daylighting_control",
+                                space_p
+                            )
+                        )
 
-                        return{
+                        return {
                             "daylight_control": daylight_control,
                             "total_hours_compared": schedule_comparison_result_dictionary["total_hours_compared"],
                             "total_hours_matched": schedule_comparison_result_dictionary["total_hours_matched"],
@@ -123,7 +128,9 @@ class Section6Rule9(RuleDefinitionListIndexedBase):
 
                     def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
                         elfh_differeces = calc_vals["eflh_difference"]
-                        return f"Space models at least one daylight control using schedule. Verify if other programmable lighting control is modeled correctly using schedule. Lighting schedule EFLH in P-RMD is {elfh_differeces} of that in B-RMD"
+                        return f"Space models at least one daylight control using schedule. Verify if other " \
+                               f"programmable lighting control is modeled correctly using schedule. Lighting schedule " \
+                               f"EFLH in P-RMD is {elfh_differeces} of that in B-RMD. "
 
                     def rule_check(self, context, calc_vals=None, data=None):
                         total_hours_compared = calc_vals["total_hours_compared"]
@@ -132,4 +139,4 @@ class Section6Rule9(RuleDefinitionListIndexedBase):
 
                     def get_fail_msg(self, context, calc_vals=None, data=None):
                         eflh_difference = calc_vals["eflh_difference"]
-                        return f"Space lighting schedule EFLH in P-RMD is {eflh_difference} of that in B-RMD"
+                        return f"Space lighting schedule EFLH in P-RMD is {eflh_difference} of that in B-RMD."
