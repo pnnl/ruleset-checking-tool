@@ -1,13 +1,13 @@
 # is_baseline_system_1  
 
-**Description:** Get either Sys-1, Sys-1a, Sys-1b, Sys-1c, or Not_Sys_1 string output which indicates whether the HVAC system is ASHRAE 90.1 2019 Appendix G system 1 (PTAC), system 1a (system 1 with purchased heating), system 1b (system 1 with purchased CHW), system 1c (system 1 with purchased CHW and purchased HW).  
+**Description:** Get either Sys-1, Sys-1a, Sys-1b, Sys-1c, or Not_Sys_1 string output which indicates whether the HVAC system is ASHRAE 90.1 2019 Appendix G system 1 (PTAC), system 1a (system 1 with purchased CHW), system 1b (system 1 with purchased heating), system 1c (system 1 with purchased CHW and purchased HW).  
 
 **Inputs:**  
 - **B-RMR**: To evaluate if the hvac system is modeled as either Sys-1, Sys-1a, Sys-1b, Sys-1c, or Not_Sys_1 in the B_RMR.   
 - **hvac_b.id**: The id of the hvac system to evaluate.  
 
 **Returns:**  
-- **is_baseline_system_1**: The function returns either Sys-1, Sys-1a, Sys-1b, Sys-1c, or Not_Sys_1 string output which indicates whether the HVAC system is ASHRAE 90.1 2019 Appendix G system 1 (PTAC), system 1a (system 1 with purchased heating), system 1b (system 1 with purchased CHW), system 1c (system 1 with purchased CHW and purchased HW)  
+- **is_baseline_system_1**: The function returns either Sys-1, Sys-1a, Sys-1b, Sys-1c, or Not_Sys_1 string output which indicates whether the HVAC system is ASHRAE 90.1 2019 Appendix G system 1 (PTAC), system 1a (system 1 with purchased CHW), system 1b (system 1 with purchased heating), system 1c (system 1 with purchased CHW and purchased HW).  
  
 **Function Call:** 
 1. get_hvac_zone_list_w_area()  
@@ -18,6 +18,7 @@
 6. is_fluid_loop_attached_to_boiler()
 7. is_fluid_loop_purchased_heating()
 8. is_fluid_loop_purchased_CHW()
+9. is_cooling_type_fluid_loop()
 
 ## Logic:    
 - Create an object associated with the hvac system: `hvac_b = hvac_b.id`  
@@ -31,13 +32,21 @@
                 - Check that there is only one terminal unit associated with the zone, if yes then carry on with remaining logic: `if len(zone_b.terminals) == 1:`  
                     - Create an object for the terminal unit associated with the zone: `terminal_b = zone_b.terminals[0]`  
                     - Check that the data elements associated with the terminal unit align with system 1: `if (terminal_b.heating_source == "None" or terminal_b.heating_source == Null) AND (terminal_b.cooling_source == "None" or terminal_b.cooling_source == Null) And terminal_b.fan == Null AND terminal_b.type == "CONSTANT_AIR_VOLUME":`    
-                        - if coolingsystem is DX and the fluid loop serves a boiler then SYS-1: `if is_cooling_type_DX(B_RMR, hvac_b.id) == TRUE AND is_fluid_loop_attached_to_boiler(B_RMR, hvac_b.id) : is_baseline_system_1 = "SYS-1"`
-                        - elif
-
+                        - if coolingsystem is DX and the heating fluid loop serves a boiler then SYS-1: `if is_cooling_type_DX(B_RMR, hvac_b.id) == TRUE AND is_fluid_loop_attached_to_boiler(B_RMR, hvac_b.id) == TRUE: is_baseline_system_1 = "SYS-1"`
+                        - elif coolingsystem is DX and the fluid loop is purchased heating then SYS-1b: `elif is_cooling_type_DX(B_RMR, hvac_b.id) == TRUE AND is_fluid_loop_purchased_heating(B_RMR, hvac_b.id) == TRUE: is_baseline_system_1 = "SYS-1b"`
+                        - elif the cooling system is a fluid loop: `elif is_cooling_type_fluid_loop(B_RMR, hvac_b.id) == TRUE:` 
+                            - if the cooling system is purchased CHW and heating fluid loop serves a boiler then SYS-1a: `if is_fluid_loop_purchased_CHW(B_RMR, hvac_b.id) == TRUE AND is_fluid_loop_attached_to_boiler(B_RMR, hvac_b.id) == TRUE: is_baseline_system_1 = "SYS-1b"`
+                            - elif the cooling system is purchased CHW and heating system is purchaed heating then SYS-1c: `if is_fluid_loop_purchased_CHW(B_RMR, hvac_b.id) == TRUE AND is_fluid_loop_purchased_heating(B_RMR, hvac_b.id) == TRUE: is_baseline_system_1 = "SYS-1c"`
+                            - Else, is_baseline_system_1 = "Not_Sys_1": `is_baseline_system_1 = Not_Sys_1`  
+                        - Else, is_baseline_system_1 = "Not_Sys_1": `is_baseline_system_1 = Not_Sys_1`
+                - Else, is_baseline_system_1 = "Not_Sys_1": `is_baseline_system_1 = Not_Sys_1`
+            - Else, is_baseline_system_1 = "Not_Sys_1": `is_baseline_system_1 = Not_Sys_1`
+        - Else, is_baseline_system_1 = "Not_Sys_1": `is_baseline_system_1 = Not_Sys_1`
+    - Else, is_baseline_system_1 = "Not_Sys_1": `is_baseline_system_1 = Not_Sys_1`
+- Else, is_baseline_system_1 = "Not_Sys_1": `is_baseline_system_1 = Not_Sys_1`
 
 **Returns** `is_baseline_system_1`  
 
-**Notes**
-1. To limit redundant coding. I am thinking that we should also check to see if it is Sys-1, Sys-1a, Sys-1b, or Sys-1c in the same function and return strings of either Sys-1, Sys-1a, Sys-1b, Sys-1c, or Not_Sys_1.
+
 
 **[Back](../_toc.md)**
