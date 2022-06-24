@@ -86,7 +86,7 @@ class Section5Rule45(RuleDefinitionListIndexedBase):
                             infiltration_b["multiplier_schedule"],
                             schedules_b,
                         ),
-                        "schedule",
+                        "schedules",
                         "hourly_values",
                     ),
                     getattr_(
@@ -96,7 +96,7 @@ class Section5Rule45(RuleDefinitionListIndexedBase):
                             infiltration_p["multiplier_schedule"],
                             schedules_p,
                         ),
-                        "schedule",
+                        "schedules",
                         "hourly_values",
                     ),
                     mask_schedule,
