@@ -96,14 +96,13 @@ class Section5Rule8(RuleDefinitionListIndexedBase):
                 elif scc == SCC.EXTERIOR_MIXED:
                     target_c_factor_res = table_G34_lookup(
                         climate_zone, SCC.EXTERIOR_RESIDENTIAL, OST.BELOW_GRADE_WALL
-                    )
+                    )["c_factor"]
                     target_c_factor_nonres = table_G34_lookup(
                         climate_zone, SCC.EXTERIOR_NON_RESIDENTIAL, OST.BELOW_GRADE_WALL
-                    )
+                    )["c_factor"]
 
                     if target_c_factor_res == target_c_factor_nonres:
                         target_c_factor = target_c_factor_res
-
                 return {
                     "below_grade_wall_c_factor": wall_c_factor,
                     "target_c_factor": target_c_factor,
@@ -123,5 +122,4 @@ class Section5Rule8(RuleDefinitionListIndexedBase):
             def rule_check(self, context, calc_vals, data=None):
                 below_grade_wall_c_factor = calc_vals["below_grade_wall_c_factor"]
                 target_c_factor = calc_vals["target_c_factor"]
-
                 return std_equal(below_grade_wall_c_factor, target_c_factor)
