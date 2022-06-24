@@ -67,14 +67,18 @@ class Section5Rule34(RuleDefinitionListIndexedBase):
                     "skylight_roof_areas_dictionary_p"
                 ]
 
-                total_skylight_area_p = skylight_roof_areas_dictionary_p[building_segment_p["id"]][
-                        "total_skylight_area"
-                    ]
-                total_envelope_roof_area_p = skylight_roof_areas_dictionary_p[building_segment_p["id"]][
-                        "total_envelope_roof_area"
-                    ]
+                total_skylight_area_p = skylight_roof_areas_dictionary_p[
+                    building_segment_p["id"]
+                ]["total_skylight_area"]
+                total_envelope_roof_area_p = skylight_roof_areas_dictionary_p[
+                    building_segment_p["id"]
+                ]["total_envelope_roof_area"]
                 # avoid zero division
-                return total_envelope_roof_area_p > 0.0 and total_skylight_area_p / total_envelope_roof_area_p <= SKYLIGHT_THRESHOLD
+                return (
+                    total_envelope_roof_area_p > 0.0
+                    and total_skylight_area_p / total_envelope_roof_area_p
+                    <= SKYLIGHT_THRESHOLD
+                )
 
             def get_calc_vals(self, context, data=None):
                 building_segment_b = context.baseline
