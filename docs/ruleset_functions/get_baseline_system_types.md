@@ -60,7 +60,7 @@ Declare empty lists of the hvac_b.id associated with each system type in the B_R
     - Check if SYS-1, if it is then add to list of SYS-1s: `if sys_1_type == "SYS-1": SYS-1 = SYS-1.append(hvac_b.id)` 
     - Check elif SYS-1a, if it is then add to list of SYS-1as: `elif sys_1_type == "SYS-1a": SYS-1a = SYS-1a.append(hvac_b.id)`
     - Check elif SYS-1b, if it is then add to list of SYS-1bs: `elif sys_1_type == "SYS-1b": SYS-1b = SYS-1b.append(hvac_b.id)`
-    - Check elif SYS-1c, if it is then add to list of SYS-1cs: `elif sys_1_type == "SYS-1c": SYS-1b = SYS-1c.append(hvac_b.id)`
+    - Check elif SYS-1c, if it is then add to list of SYS-1cs: `elif sys_1_type == "SYS-1c": SYS-1c = SYS-1c.append(hvac_b.id)`
     - Else, do nothing: `Else:`
 
     - PLACEHOLDER, each is_baseline_system_#() function will be called for each HVAC system in the baseline as shown for system 1.
