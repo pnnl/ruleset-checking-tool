@@ -15,6 +15,7 @@
 3. is_cooling_type_DX()
 4. serves_single_zone()  
 5. is_fan_CV()  
+6. is_fluid_loop_attached_to_boiler()
 
 ## Logic:  
 - Set the is_baseline_system_1 boolean variable to true (if it does not meet the criteria below then it gets set to false): `is_baseline_system_1 = TRUE`  
