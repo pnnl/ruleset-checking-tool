@@ -13,7 +13,8 @@
 1. get_hvac_zone_list_w_area()  
 2. is_heating_type_fluid_loop()
 3. is_cooling_type_DX()
-4. serves_single_zone()
+4. serves_single_zone()  
+5. is_fan_CV()  
 
 ## Logic:  
 - Set the is_baseline_system_1 boolean variable to true (if it does not meet the criteria below then it gets set to false): `is_baseline_system_1 = TRUE`  
@@ -24,16 +25,17 @@
     - Check if is_baseline_system_1 equals TRUE: `if is_baseline_system_1 == TRUE:`  
         - Check if coolingsystem is DX: `if is_cooling_type_DX(B_RMR, hvac_b.id) == FALSE: is_baseline_system_1 = FALSE`
         - Check if is_baseline_system_1 equals TRUE: `if is_baseline_system_1 == TRUE:`  
-            - Check if fansystem is constant volume: `if is_cooling_type_DX(B_RMR, hvac_b.id) == FALSE: is_baseline_system_1 = FALSE`
+            - Check if fansystem is constant volume: `if is_fan_CV(B_RMR, hvac_b.id) == FALSE: is_baseline_system_1 = FALSE`
             - Check if is_baseline_system_1 equals TRUE: `if is_baseline_system_1 == TRUE:`  
-                - Get dictionary list of baseline zones and the associated HVAC systems: `hvac_zone_list_w_area_dict_b = get_hvac_zone_list_w_area (B_RMR)`  
-                - Get list of zones that the HVAC system serves (should only be one): `zone_list_b = hvac_zone_list_w_area_dict_b[hvac_b.id]["ZONE_LIST"]`  
-                - Check that there is a zone associated with the HVAC system and that there is only one zone in the zone list, if not then the function should return FALSE and no need to carry on with remaining logic: `if len(zone_list_b) == 0 OR zone_list_b == Null OR len(zone_list_b) > 1: is_baseline_system_1 = FALSE`  
-                - Create an object for the zone associated with the HVAC system: `zone_b = zone_list_b[0]`
-                - Check that there is a terminal unit associated with the zone and that there is only one terminal unit associated with the zone, if not then the function should return FALSE and no need to carry on with remaining logic: `if len(zone_b.terminals) != 1: is_baseline_system_1 = FALSE`  
-                - Check if is_baseline_system_1 equals TRUE: `if is_baseline_system_1 == TRUE:`  
-                    - Create an object for the terminal unit associated with the zone: `terminal_b = zone_b.terminals[0]`  
-                    - Check that the data elements associated with the terminal unit align with system 1, if not then the function should return FALSE: `if terminal_b.heating_source != "None" or terminal_b.cooling_source != "None" or terminal_b.fan != Null or terminal_b.type != "CONSTANT_AIR_VOLUME": is_baseline_system_1 = FALSE`  
+                - Check if the hvac system serves a single zone: `if serves_single_zone(B_RMR, hvac_b.id) == FALSE: is_baseline_system_1 = FALSE`
+                    - Check if is_baseline_system_1 equals TRUE: `if is_baseline_system_1 == TRUE:`  
+                        - Get dictionary list of baseline zones and the associated HVAC systems: `hvac_zone_list_w_area_dict_b = get_hvac_zone_list_w_area (B_RMR)`  
+                        - Get list of zones that the HVAC system serves (should only be one): `zone_list_b = hvac_zone_list_w_area_dict_b[hvac_b.id]["ZONE_LIST"]`  
+                        - Create an object for the zone associated with the HVAC system: `zone_b = zone_list_b[0]`
+                        - Check that there is a terminal unit associated with the zone and that there is only one terminal unit associated with the zone, if not then the function should return FALSE and no need to carry on with remaining logic: `if len(zone_b.terminals) != 1: is_baseline_system_1 = FALSE`  
+                        - Check if is_baseline_system_1 equals TRUE: `if is_baseline_system_1 == TRUE:`  
+                            - Create an object for the terminal unit associated with the zone: `terminal_b = zone_b.terminals[0]`  
+                            - Check that the data elements associated with the terminal unit align with system 1, if not then the function should return FALSE: `if terminal_b.heating_source != "None" or terminal_b.cooling_source != "None" or terminal_b.fan != Null or terminal_b.type != "CONSTANT_AIR_VOLUME": is_baseline_system_1 = FALSE`  
 
 **Returns** `is_baseline_system_1`  
 
