@@ -21,17 +21,15 @@
 **Evaluation Context:** Each Data Element  
 **Data Lookup:** None  
 
-## Rule Logic: 
+## Rule Logic:
 
-- For each building_segment in the Baseline model: `for building_segment_b in B_RMR.building.building_segments:`  
+- For each building_segment in the Baseline model: `for building_segment_b in B_RMR.building.building_segments:`
 
-  - For each thermal_block in building segment: `for thermal_block_b in building_segment.thermal_blocks:`  
+  - For each zone in building_segment: `for zone_b in building_segment_b.zones:`  
 
-    - For each zone in thermal block: `for zone_b in thermal_block_b.zones:`  
+    - For each space in zone: `for space_b in zone.spaces:`  
 
-      - For each space in zone: `for space_b in zone.spaces:`  
-
-        - Add space floor area to building total floor area: `building_total_area_b += space_b.floor_area`  
+      - Add space floor area to building total floor area: `building_total_area_b += space_b.floor_area`  
 
 - **Applicability Check 1:**`if building_total_area_b > 5000:`  
 
