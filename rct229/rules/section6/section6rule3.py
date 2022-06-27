@@ -23,7 +23,7 @@ class Section6Rule3(RuleDefinitionListIndexedBase):
             index_rmr="proposed",
             id="6-3",
             description="Spaces in proposed building with hardwired lighting, including Hotel/Motel Guest Rooms, Dormitory Living Quarters, Interior Lighting Power >= Table 9.6.1 or the lighting design in the user model, whichever is greater; For Dwelling Units, Interior Lighting Power >= 0.6W/sq.ft. or the lighting design in the user model, whichever is greater",
-            list_path="ruleset_model_instances[0].buildings[*].zones[*].spaces[*]",
+            list_path="ruleset_model_instances[0]..spaces[*]",
         )
 
     class SpaceRule(RuleDefinitionBase):
