@@ -26,7 +26,8 @@ def cli():
 
 
 # Software Test Workflow
-test_short_help_text = "Software test workflow, add sections to do test."
+test_short_help_text = "Software test workflow, add sections to do test. argument (optional): section string, currently " \
+                       "available: section5, section6, section15 "
 
 
 @cli.command("test", short_help=test_short_help_text, help=test_short_help_text, hidden=True)
@@ -48,7 +49,7 @@ def run_test(section=None):
 
 
 # Evaluate RMR Triplet
-short_help_text = "Test RMR triplet."
+short_help_text = "Test RMD triplet. arguments: user_rmd, baseline_rmd, proposed_rmd (directory to these files)"
 help_text = short_help_text
 
 
