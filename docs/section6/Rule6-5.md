@@ -16,7 +16,7 @@
 **Function Call:**  
 
   - compare_schedules()
-  - normalize_space_schedules()
+  - normalize_interior_lighting_schedules()
 
 **Evaluation Context:** Each Data Element  
 **Data Lookup:** None  
@@ -51,18 +51,19 @@
 
           - Get normalized space lighting schedule in P_RMR: `normalized_schedule_p = normalize_space_schedules(space_p.interior_lighting)`
 
-        - Check if automatic shutoff control is modeled in space during building closed hours (i.e. if lighting schedule hourly value in B_RMR is equal to P_RMR during building closed hours): `schedule_comparison_result = compare_schedules(normalized_schedule_b, normalized_schedule_p, building_open_schedule_b, -111)`  
+        - Check if automatic shutoff control is modeled in space during building closed hours (i.e. if lighting schedule hourly value in B_RMR is equal to P_RMR during building closed hours): `schedule_comparison_result = compare_schedules(normalized_schedule_p, normalized_schedule_b, building_open_schedule_b, -111)`  
 
           **Rule Assertion:**
 
-          - Case 1: For building closed hours, if lighting schedule hourly value in B_RMR is equal to P_RMR: `if schedule_comparison_result == "MATCH": PASS`  
+          - Case 1: For building closed hours, if lighting schedule hourly value in B_RMR is equal to P_RMR: `if schedule_comparison_result['TOTAL_HOURS_COMPARED'] == schedule_comparison_result['TOTAL_HOURS_MATCH']: PASS`  
 
-          - Case 2: Else: `else: CAUTION and return schedule_comparison_result`  
+          - Case 2: Else: `else: FAILED and return schedule_comparison_result['EFLH_DIFFERENCE']`  
 
 
 **Notes:**
   1. Updated the Rule ID from 6-9 to 6-6 on 6/3/2022
   2. Updated the Rule ID from 6-6 to 6-5 on 6/8/2022
+  3. Updated the Rule logic with new normalized_interior_lighting_schedules and compare_schedule (not approved yet.)
 
 **Future Change Note:**
 

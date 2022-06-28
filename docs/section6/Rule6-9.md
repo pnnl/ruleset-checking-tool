@@ -26,6 +26,8 @@
 
 - For each building in the Proposed model: `building_p in P_RMR.ASHRAE229.buildings:`
 
+- Get building open schedule in the proposed model: `building_open_schedule_p = P_RMR.building.building_open_schedule`  
+
   - **Applicability Check 1:** `if sum(space.floor_area for building_p...spaces) < 5000:`
 
     - For each space in the Proposed model building: `space_p in building_p...spaces:`
@@ -35,12 +37,16 @@
         - Get normalized space lighting schedule for B_RMR: `normalized_schedule_b = normalize_space_schedules(space_b.interior_lighting)`
 
       - Get normalized space lighting schedule for P_RMR: `normalized_schedule_p = normalize_space_schedules(space_p.interior_lighting)`
+      
+      - Check if lighting uses schedule to model occupancy control, get occupancy control credit: `if interior_lighting.are_schedules_used_for_modeling_occupancy_control: control_credit = data_lookup(table_G3_7, space.lighting_space_type, interior_lighting.occupancy_control_type)`
 
-      - Compare normalized lighting schedule in P_RMR with normalized lighting schedule in B_RMR: `compare_schedules_result_dictionary = compare_schedules(normalized_schedule_p, normalized_schedule_b, always_1_schedule, 1)`
+        - Else, set occupancy control credit to 0: `else: control_credit = 0`
 
-      - For each interior lighting in space: `for lighting_p in space_p.interior_lighting:`
+        - Compare normalized lighting schedule in P_RMR with normalized lighting schedule in B_RMR: `compare_schedules_result_dictionary = compare_schedules(normalized_schedule_p, normalized_schedule_b, building_open_schedule_p, 1/（1 - control_credit)`
 
-        - Check if any interior lighting in space has modeled daylight control using schedule, set daylight control flag to True: `if lighting_p.are_schedules_used_for_modeling_daylighting_control: daylight_control == TRUE`
+        - For each interior lighting in space: `for lighting_p in space_p.interior_lighting:`
+
+          - Check if any interior lighting in space has modeled daylight control using schedule, set daylight control flag to True: `if lighting_p.are_schedules_used_for_modeling_daylighting_control: daylight_control == TRUE`
 
       **Rule Assertion:**
 

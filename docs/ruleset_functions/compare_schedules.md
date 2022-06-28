@@ -24,7 +24,7 @@ Logic:
 
 - For each hour in mask_schedule's hourly values array: `for hourly_value in hourly_value_mask_sch:`
 
-  - If hourly value in mask_schedule is 1: `if hourly_value == 1:`
+  - If hourly value in mask_schedule is 0: `if hourly_value == 0:`
 
     - Add to the pool of hours need comparison: `total_hours_compared += 1`
 
@@ -32,7 +32,7 @@ Logic:
 
     - If schedule_1 hourly value is equal to schedule_2, save to the pool of hours that meets requirement: `if hourly_value_sch_1 == hourly_value_sch_2: total_hours_match += 1`
 
-  - Else if hourly value in mask_schedule is 2: `else if hourly_value == 2:`
+  - Else if hourly value in mask_schedule is 1 and compare_factor is provided as positive value: `else if hourly_value == 1 and comparison_factor > 0:`
 
     - Add to the pool of hours need comparison: `total_hours_compared += 1`
 
