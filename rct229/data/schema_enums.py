@@ -21,9 +21,10 @@ with open(schema_path) as json_file:
 _enum_schema_matches = parse("$..* where enum").find(_enum_schema_obj)
 _schema_matches = parse("$..* where enum").find(_schema_obj)
 # Concatinate the two match lists using a list comprehension
-_match_list = [
-    match for matches in [_enum_schema_matches, _schema_matches] for match in matches
-]
+# _match_list = [
+#     match for matches in [_enum_schema_matches, _schema_matches] for match in matches
+# ]
+_match_list = [*_enum_schema_matches, *_schema_matches]
 
 # Create a dictionary of all the enumerations as dictionaries
 _enum_dicts = {
@@ -51,4 +52,4 @@ def print_schema_enums():
 
 
 # Uncomment this for checking the enumerations after a schema change
-# print_schema_enums()
+print_schema_enums()
