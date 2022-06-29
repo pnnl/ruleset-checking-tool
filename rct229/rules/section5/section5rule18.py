@@ -17,7 +17,7 @@ NONE_WARN_MESSAGE = (
     "Building vertical fenestration area type is missing, manual check is required."
 )
 
-OTHER = schema_enums["VerticalFenestrationBuildingAreaType2019ASHRAE901"].OTHER.name
+OTHER = schema_enums["VerticalFenestrationBuildingAreaType2019ASHRAE901"].OTHER
 
 
 class Section5Rule18(RuleDefinitionListIndexedBase):

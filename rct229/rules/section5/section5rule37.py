@@ -23,7 +23,7 @@ MANUAL_CHECK_MSG = "Manual review is required to verify skylight meets U-factor 
 MANUAL_CHECK_APPLICABLE = (
     "The subsurface type is Door, not applicable for the rule-checking"
 )
-DOOR = schema_enums["SubsurfaceClassificationType"].DOOR.name
+DOOR = schema_enums["SubsurfaceClassificationType"].DOOR
 
 
 class Section5Rule37(RuleDefinitionListIndexedBase):
