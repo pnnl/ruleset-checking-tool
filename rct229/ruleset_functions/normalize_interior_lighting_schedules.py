@@ -41,20 +41,6 @@ def normalize_interior_lighting_schedules(space, space_height, schedules):
         )
         space_total_power_per_area += power_per_area
 
-        control_credit = 0.0
-        if interior_lighting.get(
-            "are_schedules_used_for_modeling_occupancy_control", None
-        ):
-            control_credit = table_G3_7_lookup(
-                lighting_space_type=getattr_(space, "space", "lighting_space_type"),
-                # occupancy control type can be None - simply ignored the credit
-                occupancy_control_type=interior_lighting.get(
-                    "occupancy_control_type", None
-                ),
-                space_height=space_height,
-                space_area=getattr_(space, "space", "floor_area"),
-            )["control_credit"]
-
         schedule_hourly_value = getattr_(
             find_exactly_one_with_field_value(
                 "$", "id", interior_lighting["lighting_multiplier_schedule"], schedules
@@ -64,7 +50,7 @@ def normalize_interior_lighting_schedules(space, space_height, schedules):
         )
         hourly_use_per_area_array = [
             # control_credit is a fraction of lighting power density.
-            hourly_value / (1.0 - control_credit) * power_per_area
+            hourly_value * power_per_area
             for hourly_value in schedule_hourly_value
         ]
 

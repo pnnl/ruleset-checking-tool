@@ -1,4 +1,4 @@
-from rct229.utils.assertions import RCTFailureException, assert_
+from rct229.utils.assertions import assert_
 from rct229.utils.std_comparisons import std_equal
 
 REGULAR_YEAR_HOURS = 8760
@@ -51,13 +51,13 @@ def compare_schedules(
     eflh_schedule_2 = 0.0
     total_hours_matched = 0
     for index, hourly_value in enumerate(mask_schedule):
-        if hourly_value == 1:
+        if hourly_value == 0:
             total_hours_compared += 1
             eflh_schedule_1 += schedule_1[index]
             eflh_schedule_2 += schedule_2[index]
             if schedule_1[index] == schedule_2[index]:
                 total_hours_matched += 1
-        elif hourly_value == 2:
+        elif hourly_value == 1 and comparison_factor > 0.0:
             total_hours_compared += 1
             eflh_schedule_1 += schedule_1[index]
             eflh_schedule_2 += schedule_2[index] * comparison_factor
