@@ -94,8 +94,7 @@ def check_enumeration_to_osstd_match_field_value_map(
     dict
         The matching table entry
     """
-    schema_enum = schema_enums[enum_type]
-    for e in schema_enum.__dict__.keys():
+    for e in schema_enums[enum_type].get_list():
         if e in exclude_enum_names:
             continue
 
