@@ -79,8 +79,7 @@ def test__normalize_space_schedules_success_1():
     """
 
     test_space_normalized_schedule_array = [
-        (0.8 * (1 / (1 - 0.375) * 2.3 + 1 / (1 - 0.3) * 5.5 + 1 / (1 - 0.0) * 2.3))
-        / (2.3 + 5.5 + 2.3)
+        0.8
     ] * 8760
 
     results = normalize_interior_lighting_schedules(

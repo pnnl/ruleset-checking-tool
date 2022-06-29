@@ -11,7 +11,7 @@ def test__Test_Schedule_Compare_Success_1():
     """
     schedule_1 = [0.8] * 8760
     schedule_2 = [1.0] * 8760
-    mask_schedule = [2] * 8760
+    mask_schedule = [1] * 8760
     multiplier = 0.8
     results = compare_schedules(
         schedule_1, schedule_2, mask_schedule, multiplier, False
@@ -30,7 +30,7 @@ def test__Test_Schedule_Compare_Success_2():
     """
     schedule_1 = [1.0] * 8760
     schedule_2 = [1.0] * 8760
-    mask_schedule = [1.0] * 8760
+    mask_schedule = [0.0] * 8760
     multiplier = 0.8
     results = compare_schedules(
         schedule_1, schedule_2, mask_schedule, multiplier, False
@@ -49,7 +49,7 @@ def test__Test_Schedule_Compare_Success_3():
     """
     schedule_1 = [1.0] * 8760
     schedule_2 = [1.0] * 8760
-    mask_schedule = [2.0] * 8760
+    mask_schedule = [1.0] * 8760
     multiplier = 0.8
     results = compare_schedules(
         schedule_1, schedule_2, mask_schedule, multiplier, False
@@ -69,7 +69,7 @@ def test__Test_Schedule_Compare_Success_4():
     """
     schedule_1 = [1.0] * 8784
     schedule_2 = [1.0] * 8784
-    mask_schedule = [1.0] * 8784
+    mask_schedule = [0.0] * 8784
     multiplier = 0.8
     results = compare_schedules(schedule_1, schedule_2, mask_schedule, multiplier, True)
     assert (
@@ -87,7 +87,7 @@ def test__Test_Schedule_Compare_Failed_1():
     """
     schedule_1 = [1.0] * 8760
     schedule_2 = [1.0] * 8760
-    mask_schedule = [2.0] * 8760
+    mask_schedule = [1.0] * 8760
     multiplier = 0.8
     try:
         results = compare_schedules(
@@ -108,7 +108,7 @@ def test__Test_Schedule_Compare_Failed_2():
     """
     schedule_1 = [1.0] * 8784
     schedule_2 = [1.0] * 8784
-    mask_schedule = [2.0] * 8784
+    mask_schedule = [1.0] * 8784
     multiplier = 0.8
     try:
         results = compare_schedules(
