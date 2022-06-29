@@ -95,14 +95,13 @@ def check_enumeration_to_osstd_match_field_value_map(
         The matching table entry
     """
     schema_enum = schema_enums[enum_type]
-    for e in schema_enum:
-        e_name = e.name
-        if e_name in exclude_enum_names:
+    for e in schema_enum.__dict__.keys():
+        if e in exclude_enum_names:
             continue
 
         # Make sure each space type in the enumeration is in our map
-        match_field_value = enumeration_to_match_field_value_map[e_name]
-        assert match_field_value is not None, f"{e_name} is not in the map"
+        match_field_value = enumeration_to_match_field_value_map[e]
+        assert match_field_value is not None, f"{e} is not in the map"
 
         # Make sure there is a corresponding entry in the OSSTD table
         # find_osstd_table_entry() will throw if not
