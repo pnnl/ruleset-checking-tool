@@ -1,7 +1,6 @@
 import pytest
 
 from rct229.data import data
-from rct229.data.schema_enums import schema_enums
 from rct229.data_fns.table_9_5_1_fns import (
     lighting_space_type_enumeration_to_lpd_map,
     table_9_5_1_lookup,
