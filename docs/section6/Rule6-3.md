@@ -21,11 +21,9 @@
 
 - For each building segment in the proposed model: `building_segment_p in P_RMR.building.building_segments:`  
 
-  - Get lighting status type dictionary for building segment: `space_lighting_status_type_dict = get_lighting_status_type(building_segment_p)`  
+  - Get lighting status type dictionary for building segment: `space_lighting_status_type_dict = get_lighting_status_type(building_segment_p)`
 
-  - For each thermal block in building segment: `thermal_block_p in building_segment_p.thermal_blocks:`  
-
-    - For each zone in thermal block: `zone_p in thermal_block_p.zones:`  
+    - For each zone in thermal block: `zone_p in building_segment_p.zones:`  
 
       - For each space in zone: `space_p in zone_p.spaces:`  
 
