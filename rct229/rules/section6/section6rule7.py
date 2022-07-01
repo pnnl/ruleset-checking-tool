@@ -10,31 +10,31 @@ MSG_WARN_DAYLIGHT = "Some of the spaces in zone are modeled with window or skyli
 MSG_WARN_NO_DAYLIGHT = "Some of the spaces in zone are modeled with fenestration but no daylighting controls. The design must include mandatory daylighting controls unless any of the exceptions to 90.1 section 9.4.1.1€ apply."
 
 
-class Section6Rule12(RuleDefinitionListIndexedBase):
-    """Rule 12 of ASHRAE 90.1-2019 Appendix G Section 6 (Lighting)"""
+class Section6Rule7(RuleDefinitionListIndexedBase):
+    """Rule 7 of ASHRAE 90.1-2019 Appendix G Section 6 (Lighting)"""
 
     def __init__(self):
-        super(Section6Rule12, self).__init__(
+        super(Section6Rule7, self).__init__(
             rmrs_used=UserBaselineProposedVals(False, False, True),
-            each_rule=Section6Rule12.BuildingRule(),
+            each_rule=Section6Rule7.BuildingRule(),
             index_rmr="proposed",
-            id="6-12",
+            id="6-7",
             description="User building is modeled with daylighting controls directly or through schedule adjustments.",
             rmr_context="ruleset_model_instances/0/buildings",
         )
 
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
-            super(Section6Rule12.BuildingRule, self).__init__(
+            super(Section6Rule7.BuildingRule, self).__init__(
                 rmrs_used=UserBaselineProposedVals(False, False, True),
-                each_rule=Section6Rule12.BuildingRule.ZoneRule(),
+                each_rule=Section6Rule7.BuildingRule.ZoneRule(),
                 index_rmr="proposed",
                 list_path="$..zones[*]",
             )
 
         class ZoneRule(RuleDefinitionBase):
             def __init__(self):
-                super(Section6Rule12.BuildingRule.ZoneRule, self).__init__(
+                super(Section6Rule7.BuildingRule.ZoneRule, self).__init__(
                     rmrs_used=UserBaselineProposedVals(False, False, True),
                     required_fields={
                         "$": ["spaces", "surfaces"],
