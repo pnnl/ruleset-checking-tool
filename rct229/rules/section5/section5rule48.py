@@ -9,7 +9,6 @@ from rct229.ruleset_functions.get_zone_conditioning_category_dict import (
 from rct229.ruleset_functions.get_zone_conditioning_category_dict import (
     get_zone_conditioning_category_dict,
 )
-from rct229.utils.jsonpath_utils import find_all
 
 
 class Section5Rule48(RuleDefinitionListIndexedBase):

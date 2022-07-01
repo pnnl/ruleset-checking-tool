@@ -17,6 +17,7 @@ from rct229.ruleset_functions.get_surface_conditioning_category_dict import (
     get_surface_conditioning_category_dict,
 )
 from rct229.utils.jsonpath_utils import find_all
+from rct229.utils.pint_utils import ZERO
 from rct229.utils.std_comparisons import std_equal
 
 DOOR = schema_enums["SubsurfaceClassificationType"].DOOR.name
@@ -149,7 +150,7 @@ class Section5Rule24(RuleDefinitionListIndexedBase):
                     wwr=bldg_scc_wwr_ratio[SCC.EXTERIOR_MIXED],
                 )["u_value"]
                 if bldg_scc_wwr_ratio[SCC.EXTERIOR_MIXED] > 0
-                else 0.0
+                else ZERO.U_FACTOR
             )
             target_u_factor_res = (
                 table_G34_lookup(
@@ -159,7 +160,7 @@ class Section5Rule24(RuleDefinitionListIndexedBase):
                     wwr=bldg_scc_wwr_ratio[SCC.EXTERIOR_RESIDENTIAL],
                 )["u_value"]
                 if bldg_scc_wwr_ratio[SCC.EXTERIOR_RESIDENTIAL] > 0
-                else 0.0
+                else ZERO.U_FACTOR
             )
             target_u_factor_nonres = (
                 table_G34_lookup(
@@ -169,7 +170,7 @@ class Section5Rule24(RuleDefinitionListIndexedBase):
                     wwr=bldg_scc_wwr_ratio[SCC.EXTERIOR_NON_RESIDENTIAL],
                 )["u_value"]
                 if bldg_scc_wwr_ratio[SCC.EXTERIOR_NON_RESIDENTIAL] > 0
-                else 0.0
+                else ZERO.U_FACTOR
             )
             target_u_factor_semiheated = (
                 table_G34_lookup(
@@ -179,7 +180,7 @@ class Section5Rule24(RuleDefinitionListIndexedBase):
                     wwr=bldg_scc_wwr_ratio[SCC.SEMI_EXTERIOR],
                 )["u_value"]
                 if bldg_scc_wwr_ratio[SCC.SEMI_EXTERIOR] > 0
-                else 0.0
+                else ZERO.U_FACTOR
             )
             return {
                 **data,

@@ -12,10 +12,9 @@ from rct229.ruleset_functions.get_zone_conditioning_category_dict import (
 from rct229.ruleset_functions.get_zone_conditioning_category_dict import (
     get_zone_conditioning_category_dict,
 )
-from rct229.schema.config import ureg
 from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all
-from rct229.utils.pint_utils import ZERO, pint_sum
+from rct229.utils.pint_utils import ZERO
 
 # NOTE: There are no required fields at this function's level, but the ruleset_functions
 # called do have required fields

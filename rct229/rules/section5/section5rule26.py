@@ -17,6 +17,7 @@ from rct229.ruleset_functions.get_surface_conditioning_category_dict import (
     get_surface_conditioning_category_dict,
 )
 from rct229.utils.jsonpath_utils import find_all
+from rct229.utils.pint_utils import ZERO
 from rct229.utils.std_comparisons import std_equal
 
 DOOR = schema_enums["SubsurfaceClassificationType"].DOOR.name
@@ -235,8 +236,8 @@ class Section5Rule26(RuleDefinitionListIndexedBase):
             def list_filter(self, context_item, data=None):
                 subsurface_b = context_item.baseline
                 return subsurface_b["classification"] != DOOR or subsurface_b.get(
-                    ["glazed_area"], 0.0
-                ) > subsurface_b.get(["opaque_area"], 0.0)
+                    ["glazed_area"], ZERO.AREA
+                ) > subsurface_b.get(["opaque_area"], ZERO.AREA)
 
             class SubsurfaceRule(RuleDefinitionBase):
                 def __init__(self):
