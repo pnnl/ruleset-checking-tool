@@ -1,11 +1,9 @@
 from rct229.data.schema_enums import schema_enums
-from rct229.data_fns.table_G3_7_fns import table_G3_7_lookup
 from rct229.rule_engine.rule_base import (
     RuleDefinitionBase,
     RuleDefinitionListIndexedBase,
 )
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
-from rct229.ruleset_functions.get_avg_zone_height import get_avg_zone_height
 from rct229.ruleset_functions.get_building_segment_lighting_status_type_dict import (
     LightingStatusType,
     get_building_segment_lighting_status_type_dict,
