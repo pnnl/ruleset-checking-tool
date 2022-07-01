@@ -69,8 +69,6 @@ class Section6Rule7(RuleDefinitionListIndexedBase):
 
                     if lighting["daylighting_control_type"] != "NONE":
                         has_daylight_control_flag = True
-                    else:
-                        has_daylight_control_flag = False
 
                 return {
                     "daylight_flag_p": daylight_flag_p,
