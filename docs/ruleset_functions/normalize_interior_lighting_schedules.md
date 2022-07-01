@@ -1,5 +1,5 @@
 
-## normalize_space_schedules
+## normalize_interior_lighting_schedules
 
 Description: This function would determine a normalized interior lighting schedule for interior_lighting data element in space. 
 
@@ -28,7 +28,7 @@ Logic:
 
   - Get lighting schedule: `schedule = interior_lighting.lighting_multiplier_schedule`
 
-    - If schedule is hourly type, adjust hourly values to exclude occupancy control credit, then multiply adjusted hourly values with power per area and save to an hourly use per area array: `if schedule.schedule_sequence_type == "HOURLY": hourly_use_per_area_array.append(hourly_value * power_per_area for hourly_value in schedule.hourly_values)`
+    - If schedule is hourly type, multiply hourly values with power per area and save to an hourly use per area array: `if schedule.schedule_sequence_type == "HOURLY": hourly_use_per_area_array.append(hourly_value * power_per_area for hourly_value in schedule.hourly_values)`
 
     - Else, schedule is event type, convert schedule values to hourly: `else: converted_schedule_array = convert_schedule_to_hourly(schedule)`
 
@@ -42,6 +42,5 @@ Logic:
 
 **Notes**:
 
-  1. The current code requires Table 3.7 include additional column to account for manual-on and partial-auto-on credit (multiplied by 1.25).
-  2. The function only works with hourly schedules
+1The function only works with hourly schedules
 **[Back](../_toc.md)**

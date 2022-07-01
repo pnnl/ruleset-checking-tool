@@ -6,7 +6,7 @@ Description: This function would compare two schedules and determine if they mat
 Inputs:
 - **schedule_1**: First schedule.
 - **schedule_2**: Second schedule.
-- **mask_schedule**: The schedule that defines comparison mode for all 8760 hours in a year, i.e. if hourly value is 1, schedule_1 is evaluated to be equal to schedule_2; if hourly value is 2, schedule_1 is evaluated to be equal to schedule_2 times the comparison factor; if hourly value is 0, comparison was skipped for that particular hour (example when evaluating shut off controls, only he building closed hrs are evaluated).  
+- **mask_schedule**: The schedule that defines comparison mode for all 8760 or 8784 hours in a year, i.e. if hourly value is 0, comparison was skipped for that particular hour (example when evaluating shut off controls, only the building closed hrs are evaluated); if hourly value is 1, schedule_1 is evaluated to be equal to schedule_2 times the comparison factor;  
 - **comparison_factor**: The target multiplier number for schedule_1 compared to schedule_2, i.e. when applicable, the hourly value in schedule_1 shall be equal to that in schedule_2 times the comparison_factor.
 
 Returns:
