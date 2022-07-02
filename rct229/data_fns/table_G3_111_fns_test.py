@@ -1,7 +1,6 @@
 import pytest
 
 from rct229.data import data
-from rct229.data.schema_enums import schema_enums
 from rct229.data_fns.table_G3_111_fns import (
     VERTICAL_FENESTRATION_BUILDING_AREA_TYPE_TO_WWR_BUILDING_TYPE_MAP,
     table_G3_1_1_1_lookup,

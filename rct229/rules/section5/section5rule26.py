@@ -19,7 +19,7 @@ from rct229.ruleset_functions.get_surface_conditioning_category_dict import (
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.std_comparisons import std_equal
 
-DOOR = schema_enums["SubsurfaceClassificationType"].DOOR.name
+DOOR = schema_enums["SubsurfaceClassificationType"].DOOR
 
 
 class Section5Rule26(RuleDefinitionListIndexedBase):

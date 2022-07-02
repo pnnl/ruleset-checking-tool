@@ -1,4 +1,3 @@
-from rct229.data.schema_enums import schema_enums
 from rct229.data_fns.table_G3_4_fns import table_G34_lookup
 from rct229.rule_engine.rule_base import (
     RuleDefinitionBase,
@@ -111,7 +110,7 @@ class Section5Rule5(RuleDefinitionListIndexedBase):
                     "target_u_factor_nonres": target_u_factor_nonres,
                 }
 
-            def manaul_check_required(self, context, calc_vals, data=None):
+            def manual_check_required(self, context, calc_vals, data=None):
                 target_u_factor_res = calc_vals["target_u_factor_res"]
                 target_u_factor_nonres = calc_vals["target_u_factor_nonres"]
 

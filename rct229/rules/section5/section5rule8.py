@@ -91,15 +91,16 @@ class Section5Rule8(RuleDefinitionListIndexedBase):
                     SCC.EXTERIOR_RESIDENTIAL,
                     SCC.EXTERIOR_NON_RESIDENTIAL,
                 ]:
-                    target = table_G34_lookup(climate_zone, scc, OST.BELOW_GRADE_WALL)
-                    target_c_factor = target["c_factor"]
+                    target_c_factor = table_G34_lookup(
+                        climate_zone, scc, OST.BELOW_GRADE_WALL
+                    )["c_factor"]
                 elif scc == SCC.EXTERIOR_MIXED:
                     target_c_factor_res = table_G34_lookup(
                         climate_zone, SCC.EXTERIOR_RESIDENTIAL, OST.BELOW_GRADE_WALL
-                    )
+                    )["c_factor"]
                     target_c_factor_nonres = table_G34_lookup(
                         climate_zone, SCC.EXTERIOR_NON_RESIDENTIAL, OST.BELOW_GRADE_WALL
-                    )
+                    )["c_factor"]
 
                     if target_c_factor_res == target_c_factor_nonres:
                         target_c_factor = target_c_factor_res
