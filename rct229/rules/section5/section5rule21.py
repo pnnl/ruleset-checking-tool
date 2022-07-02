@@ -21,7 +21,7 @@ from rct229.utils.match_lists import match_lists_by_id
 from rct229.utils.pint_utils import ZERO
 from rct229.utils.std_comparisons import std_equal
 
-DOOR = schema_enums["SubsurfaceClassificationType"].DOOR.name
+DOOR = schema_enums["SubsurfaceClassificationType"].DOOR
 
 
 class Section5Rule21(RuleDefinitionListIndexedBase):

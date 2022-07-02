@@ -114,9 +114,9 @@ lighting_space_enumeration_to_lpd_space_type_map = {
     "WAREHOUSE_STORAGE_AREA_SMALLER_HAND_CARRIED_ITEMS": "warehouse - fine storage",
 }
 
-FULL_AUTO_ON = schema_enums["LightingOccupancyControlType"].FULL_AUTO_ON.name
-PARTIAL_AUTO_ON = schema_enums["LightingOccupancyControlType"].PARTIAL_AUTO_ON.name
-MANUAL_ON = schema_enums["LightingOccupancyControlType"].MANUAL_ON.name
+FULL_AUTO_ON = schema_enums["LightingOccupancyControlType"].FULL_AUTO_ON
+PARTIAL_AUTO_ON = schema_enums["LightingOccupancyControlType"].PARTIAL_AUTO_ON
+MANUAL_ON = schema_enums["LightingOccupancyControlType"].MANUAL_ON
 
 # ATRIUM_LOW_MEDIUM
 def table_G3_7_lookup(

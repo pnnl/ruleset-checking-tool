@@ -13,22 +13,22 @@ DORMITORY_LIVING_QUARTERS = schema_enums[
 DWELLING_UNIT = schema_enums["LightingSpaceType2019ASHRAE901TG37"].DWELLING_UNIT
 
 
-class Section6Rule2(RuleDefinitionListIndexedBase):
-    """Rule 2 of ASHRAE 90.1-2019 Appendix G Section 6 (Lighting)"""
+class Section6Rule3(RuleDefinitionListIndexedBase):
+    """Rule 3 of ASHRAE 90.1-2019 Appendix G Section 6 (Lighting)"""
 
     def __init__(self):
-        super(Section6Rule2, self).__init__(
+        super(Section6Rule3, self).__init__(
             rmrs_used=UserBaselineProposedVals(True, False, True),
-            each_rule=Section6Rule2.SpaceRule(),
+            each_rule=Section6Rule3.SpaceRule(),
             index_rmr="proposed",
-            id="6-2",
+            id="6-3",
             description="Spaces in proposed building with hardwired lighting, including Hotel/Motel Guest Rooms, Dormitory Living Quarters, Interior Lighting Power >= Table 9.6.1 or the lighting design in the user model, whichever is greater; For Dwelling Units, Interior Lighting Power >= 0.6W/sq.ft. or the lighting design in the user model, whichever is greater",
             list_path="ruleset_model_instances[0].buildings[*].zones[*].spaces[*]",
         )
 
     class SpaceRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section6Rule2.SpaceRule, self).__init__(
+            super(Section6Rule3.SpaceRule, self).__init__(
                 rmrs_used=UserBaselineProposedVals(True, False, True),
                 required_fields={
                     "$": ["lighting_space_type", "interior_lighting"],
