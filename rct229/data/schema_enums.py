@@ -59,7 +59,7 @@ schema_enums = {key: _ListEnum(enum_list) for key, enum_list in _enums_dict.item
 def print_schema_enums():
     """Print all the schema enumerations with their names and values
 
-    This is primarily useful for debuggin purposes
+    This is primarily useful for debugging purposes
     """
     for key in schema_enums:
         print(f"{key}:")
@@ -69,4 +69,4 @@ def print_schema_enums():
 
 
 # Uncomment this for checking the enumerations after a schema change
-print_schema_enums()
+# print_schema_enums()
