@@ -7,11 +7,11 @@ verify_ssl = true
 python_version = "3.7"
 
 [dev-packages]
+black = "22.6.0"
 pylint = "*"
 pytest = "*"
 isort = "5.10.1"
 icecream = "*"
-black = "~=21.10b0"
 pytest-watch = "*"
 
 [packages]
