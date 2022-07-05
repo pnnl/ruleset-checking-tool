@@ -17,6 +17,9 @@ class RuleDefinitionListBase(RuleDefinitionBase):
         required_fields=None,
         manual_check_required_msg="Manual Check Required",
         not_applicable_msg="Not Applicable",
+        # An example data object:
+        #    {"cliimate_zone": ("baseline", weather/climate_zone")}
+        data=None,
     ):
         self.each_rule = each_rule
         super(RuleDefinitionListBase, self).__init__(
@@ -52,13 +55,24 @@ class RuleDefinitionListBase(RuleDefinitionBase):
         """
         raise NotImplementedError
 
-    def create_data(self, context, data=None):
-        """Create the data object to be passed to each_rule
+    def create_data(self, context, data):
+        """Create the new data dictionary to be merged into the existing data dictionary
+        that will be passed to the subrule
 
-        This is typically overridden to collect data available at this rule's
-        level that is needed by each_rule.
+        This new data will be merged into the existing data dictionary by the
+        rule_check method.
 
-        This default implementation simply returns the data that was passed in.
+        This method is typically overridden to collect data available at this rule's
+        level that is needed by some subrule.
+
+        This default implementation checks for a data argument to the initializer being
+        set. If set, the object is resolved as json pointers
+        to extract the new data from context.
+
+        If the new data is only one or more elements that can be obtained directly from
+        context, then do not override this method; use the data initializer
+        instead. Override this method if any calculations are required to obtain the
+        new data.
 
         Parameters
         ----------
@@ -74,9 +88,16 @@ class RuleDefinitionListBase(RuleDefinitionBase):
             RMRs; an RMR's context is set to None if the corresponding flag
             in self.rmrs_used is not set
         """
-        return data
+        new_data = {}
+        # Merge in the data_pointers data
+        if self.data:
+            for key, (component, jptr) in self.data.items():
+                # TODO: check json pointer parse syntax
+                new_data[key] = jp.parse(jptr, context.get_item(component))
 
-    def list_filter(self, context_item, data=None):
+        return new_data
+
+    def list_filter(self, context_item, data):
         """Function used to filter the context_list
 
         The default implementation simply passes each list_item through (no filtering)
@@ -105,7 +126,7 @@ class RuleDefinitionListBase(RuleDefinitionBase):
         """
         return context_item
 
-    def rule_check(self, context, calc_vals=None, data=None):
+    def rule_check(self, context, calc_vals=None, data={}):
         """Overrides the base implementation to apply a rule to each entry in
         a list
 
@@ -115,7 +136,10 @@ class RuleDefinitionListBase(RuleDefinitionBase):
         ----------
         context : UserBaselineProposedVals
             Object containing the contexts for the user, baseline, and proposed RMRs
-        data : An optional data object. It is ignored by this base implementation.
+        data : dict
+            An optional dictionary. New data, based on data_pointers, data_paths, or
+            create_data() will be merged into this data dictionary and passed to each
+            subrule.
 
         Returns
         -------
@@ -123,16 +147,20 @@ class RuleDefinitionListBase(RuleDefinitionBase):
             A list of rule outcomes. The each outcome in the list is augmented
             with a name field that is the name of the entry in the context list.
         """
-        # Create the data to be passed to each_rule
-        data = self.create_data(context, data)
+        # Merge in new data to be passed to the subrule indicated by each_rule
+        data = {**data, **self.create_data(context, data)}
+
+        # Create the context list
+        # Note: create_context_list has access to the new data included just above
         context_list = self.create_context_list(context, data)
         filtered_context_list = [
             context_item
             for context_item in context_list
             if self.list_filter(context_item, data)
         ]
-        outcomes = []
 
+        # Evalutate the subrule for each item in the context list
+        outcomes = []
         for ubp in filtered_context_list:
             item_outcome = self.each_rule.evaluate(ubp, data)
 
@@ -145,4 +173,5 @@ class RuleDefinitionListBase(RuleDefinitionBase):
                 item_outcome["id"] = ubp.proposed["id"]
 
             outcomes.append(item_outcome)
+
         return outcomes
