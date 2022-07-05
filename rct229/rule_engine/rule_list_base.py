@@ -87,13 +87,11 @@ class RuleDefinitionListBase(RuleDefinitionBase):
 
         Returns
         -------
-        UserBaselineProposedVals
-            Object containing the contexts for the user, baseline, and proposed
-            RMRs; an RMR's context is set to None if the corresponding flag
-            in self.rmrs_used is not set
+        dict
+            A dictionary representing new data to be merged into the current data
+            dictionary
         """
         new_data = {}
-        # Merge in the data_pointers data
         if self.data_items:
             for key, (component, jptr) in self.data_items.items():
                 new_data[key] = resolve_pointer(

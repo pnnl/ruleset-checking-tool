@@ -38,7 +38,7 @@ class RuleDefinitionListIndexedBase(RuleDefinitionListBase):
         ignore list_context.
         For better human readability, the leading "/" may be ommitted.
         function (preceding _) inside the enclosing rule definition.
-    data: dict
+    data_items: dict
         An object that specifies one or more context items to be added to the data
         dictionary. It has the form:
         {
@@ -81,7 +81,7 @@ class RuleDefinitionListIndexedBase(RuleDefinitionListBase):
             data_items=data_items,
         )
 
-    def create_context_list(self, context, data=None):
+    def create_context_list(self, context, data):
         """Generates a list of context trios
 
         Overrides the base implementation to create a list that has an entry
