@@ -17,7 +17,6 @@ pytest-watch = "*"
 [packages]
 rct229 = {editable = true, path = "."}
 jsonpath-ng = "*"
-click="*"
 jsonschema="*"
 pyyaml="*"
 jsonpointer="*"
@@ -25,3 +24,5 @@ pandas = "*"
 xlrd = "~=1.2"
 numpy = "*"
 pint = "*"
+click = "==8.0.4"
+regex = "==2022.1.18"
