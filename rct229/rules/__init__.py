@@ -19,9 +19,19 @@ __all__ = [
 def __getrules__():
     modules = []
     __getrules_module__helper(rules, modules)
-    base_class_names = ([f[0] for f in inspect.getmembers(base_classes, inspect.isclass)])
-    base_class_names = base_class_names + [f[0] for f in inspect.getmembers(base_list_classes, inspect.isclass)]
-    base_class_names = list(set(base_class_names + [f[0] for f in inspect.getmembers(base_list_indexed_classes, inspect.isclass)]))
+    base_class_names = [f[0] for f in inspect.getmembers(base_classes, inspect.isclass)]
+    base_class_names = base_class_names + [
+        f[0] for f in inspect.getmembers(base_list_classes, inspect.isclass)
+    ]
+    base_class_names = list(
+        set(
+            base_class_names
+            + [
+                f[0]
+                for f in inspect.getmembers(base_list_indexed_classes, inspect.isclass)
+            ]
+        )
+    )
     available_rules = []
     for module in modules:
         available_rules += [

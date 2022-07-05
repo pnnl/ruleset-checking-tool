@@ -3,7 +3,6 @@ from rct229.utils.assertions import assert_, assert_required_fields
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.pint_utils import ZERO
 
-
 # Intended for internal use
 GET_AVG_ZONE_HEIGHT__REQUIRED_FIELDS = {"zone": {"$": ["spaces", "volume"]}}
 
