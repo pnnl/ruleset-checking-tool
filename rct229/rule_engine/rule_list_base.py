@@ -1,5 +1,8 @@
+from jsonpointer import resolve_pointer
+
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
+from rct229.utils.json_utils import slash_prefix_guarantee
 
 
 class RuleDefinitionListBase(RuleDefinitionBase):
@@ -19,9 +22,10 @@ class RuleDefinitionListBase(RuleDefinitionBase):
         not_applicable_msg="Not Applicable",
         # An example data object:
         #    {"cliimate_zone": ("baseline", weather/climate_zone")}
-        data=None,
+        data_items=None,
     ):
         self.each_rule = each_rule
+        self.data_items = data_items
         super(RuleDefinitionListBase, self).__init__(
             rmrs_used=rmrs_used,
             id=id,
@@ -32,7 +36,7 @@ class RuleDefinitionListBase(RuleDefinitionBase):
             not_applicable_msg=not_applicable_msg,
         )
 
-    def create_context_list(self, context, data=None):
+    def create_context_list(self, context, data):
         """Generates a list of context trios
 
         For a list-type rule, we need to create a list of contexts to pass on
@@ -90,10 +94,11 @@ class RuleDefinitionListBase(RuleDefinitionBase):
         """
         new_data = {}
         # Merge in the data_pointers data
-        if self.data:
-            for key, (component, jptr) in self.data.items():
-                # TODO: check json pointer parse syntax
-                new_data[key] = jp.parse(jptr, context.get_item(component))
+        if self.data_items:
+            for key, (component, jptr) in self.data_items.items():
+                new_data[key] = resolve_pointer(
+                    getattr(context, component), slash_prefix_guarantee(jptr), None
+                )
 
         return new_data
 

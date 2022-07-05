@@ -29,7 +29,7 @@ class Section5Rule5(RuleDefinitionListIndexedBase):
             id="5-5",
             description="Baseline roof assemblies must match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8.",
             list_path="ruleset_model_instances[0].buildings[*]",
-            data={"climate_zone": ("baseline", "weather/climate_zone")},
+            data_items={"climate_zone": ("baseline", "weather/climate_zone")},
         )
 
     class BuildingRule(RuleDefinitionListIndexedBase):

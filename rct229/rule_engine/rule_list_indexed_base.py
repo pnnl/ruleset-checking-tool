@@ -38,6 +38,13 @@ class RuleDefinitionListIndexedBase(RuleDefinitionListBase):
         ignore list_context.
         For better human readability, the leading "/" may be ommitted.
         function (preceding _) inside the enclosing rule definition.
+    data: dict
+        An object that specifies one or more context items to be added to the data
+        dictionary. It has the form:
+        {
+            "key": ("user"|"baseline"|"proposed", "json pointer to an item in the context"),
+            ...
+        }
     match_by : string
         A json pointer into each element of the list, generally to a field
         of the list element. The default is "/id" since the id is assumed to
@@ -57,6 +64,7 @@ class RuleDefinitionListIndexedBase(RuleDefinitionListBase):
         required_fields=None,
         manual_check_required_msg="Manual Check Required",
         not_applicable_msg="Not Applicable",
+        data_items=None,
     ):
         self.index_rmr = index_rmr
         self.list_path = list_path
@@ -70,6 +78,7 @@ class RuleDefinitionListIndexedBase(RuleDefinitionListBase):
             required_fields=required_fields,
             manual_check_required_msg=manual_check_required_msg,
             not_applicable_msg=not_applicable_msg,
+            data_items=data_items,
         )
 
     def create_context_list(self, context, data=None):
