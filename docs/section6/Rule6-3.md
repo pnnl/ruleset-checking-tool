@@ -23,7 +23,7 @@
 
   - Get lighting status type dictionary for building segment: `space_lighting_status_type_dict = get_lighting_status_type(building_segment_p)`
 
-    - For each zone in thermal block: `zone_p in building_segment_p.zones:`  
+    - For each zone in a building segment: `zone_p in building_segment_p.zones:`  
 
       - For each space in zone: `space_p in zone_p.spaces:`  
 

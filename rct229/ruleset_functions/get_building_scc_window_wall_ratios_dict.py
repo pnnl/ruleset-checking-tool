@@ -7,11 +7,11 @@ from rct229.ruleset_functions.get_surface_conditioning_category_dict import (
 from rct229.ruleset_functions.get_surface_conditioning_category_dict import (
     get_surface_conditioning_category_dict,
 )
-from rct229.utils.assertions import assert_required_fields, getattr_
+from rct229.utils.assertions import assert_required_fields
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.pint_utils import ZERO
 
-DOOR = schema_enums["SubsurfaceClassificationType"].DOOR.name
+DOOR = schema_enums["SubsurfaceClassificationType"].DOOR
 
 # Intended for internal use
 GET_BUILDING_SCC_WINDOW_WALL_RATIO_DICT__REQUIRED_FIELDS = {

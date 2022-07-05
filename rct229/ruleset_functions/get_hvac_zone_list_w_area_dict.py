@@ -56,7 +56,7 @@ def get_hvac_zone_list_w_area_dict(building):
                 if hvac_sys_id not in hvac_zone_list_w_area_dict:
                     hvac_zone_list_w_area_dict[hvac_sys_id] = {
                         "zone_list": [],
-                        "total_area": 0,
+                        "total_area": ZERO.AREA,
                     }
 
                 hvac_sys_entry = hvac_zone_list_w_area_dict[hvac_sys_id]
