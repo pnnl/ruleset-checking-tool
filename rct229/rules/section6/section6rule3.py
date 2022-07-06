@@ -1,14 +1,17 @@
 from rct229.data.schema_enums import schema_enums
-from rct229.data_fns.table_9_6_1_fns import table_9_6_1_lookup
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
+from rct229.ruleset_functions.get_building_segment_lighting_status_type_dict import (
+    LightingStatusType,
+    get_building_segment_lighting_status_type_dict,
+)
+from rct229.utils.jsonpath_utils import find_all
+from rct229.utils.std_comparisons import std_equal
 
-GUEST_ROOM = schema_enums["LightingSpaceType2019ASHRAE901TG37"].GUEST_ROOM
-DORMITORY_LIVING_QUARTERS = schema_enums[
+OFFICE_OPEN_PLAN = schema_enums[
     "LightingSpaceType2019ASHRAE901TG37"
-].DORMITORY_LIVING_QUARTERS
-DWELLING_UNIT = schema_enums["LightingSpaceType2019ASHRAE901TG37"].DWELLING_UNIT
+].OFFICE_OPEN_PLAN
 
 
 class Section6Rule3(RuleDefinitionListIndexedBase):
@@ -17,66 +20,72 @@ class Section6Rule3(RuleDefinitionListIndexedBase):
     def __init__(self):
         super(Section6Rule3, self).__init__(
             rmrs_used=UserBaselineProposedVals(True, False, True),
-            each_rule=Section6Rule3.SpaceRule(),
+            each_rule=Section6Rule3.BuildingSegmentRule(),
             index_rmr="proposed",
             id="6-3",
-            description="Spaces in proposed building with hardwired lighting, including Hotel/Motel Guest Rooms, Dormitory Living Quarters, Interior Lighting Power >= Table 9.6.1 or the lighting design in the user model, whichever is greater; For Dwelling Units, Interior Lighting Power >= 0.6W/sq.ft. or the lighting design in the user model, whichever is greater",
-            list_path="ruleset_model_instances[0].buildings[*].zones[*].spaces[*]",
+            description="Where a complete lighting system exists, the actual lighting power for each building_segment shall be used in the model. Where a lighting system has been designed and submitted with design documents, lighting power shall be determined in accordance with Sections 9.1.3 and 9.1.4. Where lighting neither exists nor is submitted with design documents, lighting shall comply with but not exceed the requirements of Section 9. Lighting power shall be determined in accordance with the Building Area Method (Section 9.5.1).",
+            list_path="ruleset_model_instances[0].buildings[*].building_segments[*]",
         )
 
-    class SpaceRule(RuleDefinitionBase):
+    class BuildingSegmentRule(RuleDefinitionListIndexedBase):
         def __init__(self):
-            super(Section6Rule3.SpaceRule, self).__init__(
+            super(Section6Rule3.BuildingSegmentRule, self).__init__(
                 rmrs_used=UserBaselineProposedVals(True, False, True),
-                required_fields={
-                    "$": ["lighting_space_type", "interior_lighting"],
-                    "interior_lighting": ["power_per_area"],
-                },
+                each_rule=Section6Rule3.BuildingSegmentRule.SpaceRule(),
+                index_rmr="proposed",
+                list_path="zones[*].spaces[*]",
             )
 
-        def is_applicable(self, context, data=None):
-            space_p = context.proposed
-            lighting_space_type_p = space_p["lighting_space_type"]
-            return lighting_space_type_p in [
-                GUEST_ROOM,
-                DWELLING_UNIT,
-                DORMITORY_LIVING_QUARTERS,
-            ]
-
-        def get_calc_vals(self, context, data=None):
-            space_p = context.proposed
-            space_u = context.user
-
-            # get allowance
-            lighting_power_allowance_p = table_9_6_1_lookup(
-                space_p["lighting_space_type"]
-            )
-
-            # sum of space_p lighting power density
-            space_lighting_power_per_area_p = sum(
-                interior_lighting["power_per_area"]
-                for interior_lighting in space_p["interior_lighting"]
-            )
-            space_lighting_power_per_area_u = sum(
-                interior_lighting["power_per_area"]
-                for interior_lighting in space_u["interior_lighting"]
-            )
+        def create_data(self, context, data=None):
+            building_segment_p = context.proposed
 
             return {
-                "lighting_power_allowance_p": lighting_power_allowance_p,
-                "space_lighting_power_per_area_p": space_lighting_power_per_area_p,
-                "space_lighting_power_per_area_u": space_lighting_power_per_area_u,
+                "building_segment_lighting_status_type_dict_p": get_building_segment_lighting_status_type_dict(
+                    building_segment_p
+                )
             }
 
-        def rule_check(self, context, calc_vals=None, data=None):
-            lighting_power_allowance_p = calc_vals["lighting_power_allowance_p"]
-            space_lighting_power_per_area_p = calc_vals[
-                "space_lighting_power_per_area_p"
-            ]
-            space_lighting_power_per_area_u = calc_vals[
-                "space_lighting_power_per_area_u"
-            ]
+        class SpaceRule(RuleDefinitionBase):
+            def __init__(self):
+                super(
+                    Section6Rule3.BuildingSegmentRule.SpaceRule,
+                    self,
+                ).__init__(
+                    fail_msg="Lighting exists or is submitted with design documents. Lighting power density in P_RMR "
+                             "does not match U_RMR.",
+                    manual_check_required_msg="Lighting is not yet designed, or lighting is as-designed or "
+                                                "as-existing but matches Table 9.5.1. Lighting power density in P_RMR"
+                                                " does not match U_RMR.",
+                    rmrs_used=UserBaselineProposedVals(True, False, True)
+                )
 
-            return space_lighting_power_per_area_p == max(
-                lighting_power_allowance_p, space_lighting_power_per_area_u
-            )
+            def get_calc_vals(self, context, data=None):
+                space_u = context.user
+                space_p = context.proposed
+                total_space_lpd_u = sum(
+                    find_all("interior_lighting[*].power_per_area", space_u)
+                )
+                total_space_lpd_p = sum(
+                    find_all("interior_lighting[*].power_per_area", space_p)
+                )
+
+                space_lighting_status_type_p = data[
+                    "building_segment_lighting_status_type_dict_p"
+                ][space_p["id"]]
+
+                return {
+                    "total_space_lpd_u": total_space_lpd_u,
+                    "total_space_lpd_p": total_space_lpd_p,
+                    "space_lighting_status_type_p": space_lighting_status_type_p,
+                }
+
+            def manual_check_required(self, context, calc_vals=None, data=None):
+                space_lighting_status_type_p = calc_vals["space_lighting_status_type_p"]
+                total_space_lpd_u = calc_vals["total_space_lpd_u"]
+                total_space_lpd_p = calc_vals["total_space_lpd_p"]
+                return not std_equal(total_space_lpd_u, total_space_lpd_p) and space_lighting_status_type_p is not LightingStatusType.AS_DESIGNED_OR_AS_EXISTING
+
+            def rule_check(self, context, calc_vals=None, data=None):
+                total_space_lpd_u = calc_vals["total_space_lpd_u"]
+                total_space_lpd_p = calc_vals["total_space_lpd_p"]
+                return std_equal(total_space_lpd_u, total_space_lpd_p)
