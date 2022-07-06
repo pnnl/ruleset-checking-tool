@@ -43,6 +43,7 @@
                                                         "interior_lighting": [
                                                             {
                                                                 "id": "Space 1 Lighting 1",
+                                                                "occupancy_control_type": "NONE",
                                                                 "lighting_multiplier_schedule": "Space 1 Lighting Schedule 1",
                                                                 "power_per_area": 4.843759687519376
                                                             }
@@ -86,6 +87,7 @@
                                                         "interior_lighting": [
                                                             {
                                                                 "id": "Space 1 Lighting 1",
+                                                                "occupancy_control_type": "NONE",
                                                                 "lighting_multiplier_schedule": "Space 1 Lighting Schedule 1",
                                                                 "power_per_area": 7.965293708365196
                                                             }
@@ -148,6 +150,7 @@
                                                         "interior_lighting": [
                                                             {
                                                                 "id": "Space 1 Lighting 1",
+                                                                "occupancy_control_type": "NONE",
                                                                 "lighting_multiplier_schedule": "Space 1 Lighting Schedule 1",
                                                                 "power_per_area": 4.843759687519376
                                                             }
@@ -191,8 +194,9 @@
                                                         "interior_lighting": [
                                                             {
                                                                 "id": "Space 1 Lighting 1",
+                                                                "occupancy_control_type": "NONE",
                                                                 "lighting_multiplier_schedule": "Space 1 Lighting Schedule 1",
-                                                                "power_per_area": 7.965293708365196
+                                                                "power_per_area": 11.840301458380697
                                                             }
                                                         ],
                                                         "lighting_space_type": "OFFICE_ENCLOSED"
@@ -254,6 +258,7 @@
                                                         "interior_lighting": [
                                                             {
                                                                 "id": "Space 1 Lighting 1",
+                                                                "occupancy_control_type": "NONE",
                                                                 "lighting_multiplier_schedule": "Space 1 Lighting Schedule 1",
                                                                 "power_per_area": 4.843759687519376
                                                             }
@@ -297,6 +302,7 @@
                                                         "interior_lighting": [
                                                             {
                                                                 "id": "Space 1 Lighting 1",
+                                                                "occupancy_control_type": "NONE",
                                                                 "lighting_multiplier_schedule": "Space 1 Lighting Schedule 1",
                                                                 "power_per_area": 13.99308354172264
                                                             }
@@ -360,8 +366,9 @@
                                                         "interior_lighting": [
                                                             {
                                                                 "id": "Space 1 Lighting 1",
+                                                                "occupancy_control_type": "NONE",
                                                                 "lighting_multiplier_schedule": "Space 1 Lighting Schedule 1",
-                                                                "power_per_area": 4.843759687519376
+                                                                "power_per_area": 6.888902666694223
                                                             }
                                                         ]
                                                     }
@@ -402,6 +409,7 @@
                                                         "interior_lighting": [
                                                             {
                                                                 "id": "Space 1 Lighting 1",
+                                                                "occupancy_control_type": "NONE",
                                                                 "lighting_multiplier_schedule": "Space 1 Lighting Schedule 1",
                                                                 "power_per_area": 11.840301458380697
                                                             }
@@ -464,6 +472,7 @@
                                                         "interior_lighting": [
                                                             {
                                                                 "id": "Space 1 Lighting 1",
+                                                                "occupancy_control_type": "NONE",
                                                                 "lighting_multiplier_schedule": "Space 1 Lighting Schedule 1",
                                                                 "power_per_area": 4.843759687519376
                                                             }
@@ -506,6 +515,7 @@
                                                         "interior_lighting": [
                                                             {
                                                                 "id": "Space 1 Lighting 1",
+                                                                "occupancy_control_type": "NONE",
                                                                 "lighting_multiplier_schedule": "Space 1 Lighting Schedule 1",
                                                                 "power_per_area": 13.99308354172264
                                                             }
