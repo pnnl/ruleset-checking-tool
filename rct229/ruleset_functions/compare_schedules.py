@@ -1,4 +1,4 @@
-from rct229.utils.assertions import RCTFailureException, assert_
+from rct229.utils.assertions import assert_
 from rct229.utils.std_comparisons import std_equal
 
 REGULAR_YEAR_HOURS = 8760

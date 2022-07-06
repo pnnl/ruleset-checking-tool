@@ -58,10 +58,16 @@
                                                         "id": "Surface 1",
                                                         "adjacent_to": "EXTERIOR",
                                                         "tilt": 90,
-                                                        "construction": {
-                                                            "id": "construction_1",
-                                                            "u_factor": 3.2366105565544463
-                                                        }
+                                                        "area": 92.90303999999999,
+                                                        "subsurfaces": [
+                                                            {
+                                                                "id": "SubSurface 1",
+                                                                "classification": "WINDOW",
+                                                                "glazed_area": 5.5741824,
+                                                                "opaque_area": 1.8580607999999998,
+                                                                "u_factor": 3.2366105565544463
+                                                            }
+                                                        ]
                                                     }
                                                 ]
                                             }
@@ -147,10 +153,16 @@
                                                         "id": "Surface 1",
                                                         "adjacent_to": "EXTERIOR",
                                                         "tilt": 90,
-                                                        "construction": {
-                                                            "id": "construction_1",
-                                                            "u_factor": 3.520523763269749
-                                                        }
+                                                        "area": 92.90303999999999,
+                                                        "subsurfaces": [
+                                                            {
+                                                                "id": "SubSurface 1",
+                                                                "classification": "WINDOW",
+                                                                "glazed_area": 5.5741824,
+                                                                "opaque_area": 1.8580607999999998,
+                                                                "u_factor": 3.520523763269749
+                                                            }
+                                                        ]
                                                     }
                                                 ]
                                             }
@@ -236,10 +248,16 @@
                                                         "id": "Surface 1",
                                                         "adjacent_to": "EXTERIOR",
                                                         "tilt": 90,
-                                                        "construction": {
-                                                            "id": "construction_1",
-                                                            "u_factor": 3.2366105565544463
-                                                        }
+                                                        "area": 92.90303999999999,
+                                                        "subsurfaces": [
+                                                            {
+                                                                "id": "SubSurface 1",
+                                                                "classification": "WINDOW",
+                                                                "glazed_area": 5.5741824,
+                                                                "opaque_area": 1.8580607999999998,
+                                                                "u_factor": 3.2366105565544463
+                                                            }
+                                                        ]
                                                     }
                                                 ]
                                             }
@@ -325,10 +343,16 @@
                                                         "id": "Surface 1",
                                                         "adjacent_to": "EXTERIOR",
                                                         "tilt": 90,
-                                                        "construction": {
-                                                            "id": "construction_1",
-                                                            "u_factor": 6.927482243853377
-                                                        }
+                                                        "area": 92.90303999999999,
+                                                        "subsurfaces": [
+                                                            {
+                                                                "id": "SubSurface 1",
+                                                                "classification": "WINDOW",
+                                                                "glazed_area": 5.5741824,
+                                                                "opaque_area": 1.8580607999999998,
+                                                                "u_factor": 6.927482243853377
+                                                            }
+                                                        ]
                                                     }
                                                 ]
                                             }
@@ -414,9 +438,19 @@
                                                         "id": "Surface 1",
                                                         "adjacent_to": "EXTERIOR",
                                                         "tilt": 90,
+                                                        "area": 92.90303999999999,
+                                                        "subsurfaces": [
+                                                            {
+                                                                "id": "SubSurface 1",
+                                                                "classification": "WINDOW",
+                                                                "glazed_area": 5.5741824,
+                                                                "opaque_area": 1.8580607999999998,
+                                                                "u_factor": 6.927482243853377
+                                                            }
+                                                        ],
                                                         "construction": {
                                                             "id": "construction_1",
-                                                            "u_factor": 6.927482243853377
+                                                            "u_factor": 3.2366105565544463
                                                         }
                                                     }
                                                 ]
@@ -503,6 +537,16 @@
                                                         "id": "Surface 1",
                                                         "adjacent_to": "EXTERIOR",
                                                         "tilt": 90,
+                                                        "area": 92.90303999999999,
+                                                        "subsurfaces": [
+                                                            {
+                                                                "id": "SubSurface 1",
+                                                                "classification": "WINDOW",
+                                                                "glazed_area": 5.5741824,
+                                                                "opaque_area": 1.8580607999999998,
+                                                                "u_factor": 3.2366105565544463
+                                                            }
+                                                        ],
                                                         "construction": {
                                                             "id": "construction_1",
                                                             "u_factor": 3.2366105565544463

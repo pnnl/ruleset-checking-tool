@@ -1,7 +1,7 @@
 
-# Lighting - Rule 6-11
+# Lighting - Rule 6-6
 
-**Rule ID:** 6-11  
+**Rule ID:** 6-6  
 **Rule Description:** Baseline building is not modeled with daylighting control  
 **Appendix G Section:** Section G3.1-6 Modeling Requirements for the baseline building  
 **Appendix G Section Reference:**  
@@ -24,3 +24,9 @@
     - Get interior_lighting in space: ```interior_lighting_b = space_b.interior_lighting```  
 
       **Rule Assertion:** For each interior_lighting in the Baseline model: ```interior_lighting_b.daylighting_control_type == NONE```  
+
+**Notes:**
+  1. Updated the Rule ID from 6-11 to 6-7 on 6/3/2022
+  2. Updated the Rule ID from 6-7 to 6-6 on 6/8/2022
+
+**[Back](../_toc.md)**

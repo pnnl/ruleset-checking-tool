@@ -1,7 +1,5 @@
-from rct229.rule_engine.rule_base import (
-    RuleDefinitionBase,
-    RuleDefinitionListIndexedBase,
-)
+from rct229.rule_engine.rule_base import RuleDefinitionBase
+from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 from rct229.ruleset_functions.get_building_segment_skylight_roof_areas_dict import (
     get_building_segment_skylight_roof_areas_dict,
@@ -155,11 +153,11 @@ class Section5Rule36(RuleDefinitionListIndexedBase):
                         and total_skylight_area_surface_b == 0
                         and total_skylight_area_surface_p == 0
                     ) or (
-                        # product to ensure neither is 0
+                        # product to ensure neither is 0 & short-circuit logic if either of them is 0.
                         total_skylight_area_b * total_skylight_area_p > 0
                         # both segments' skylight area ratios are the same
                         and std_equal(
                             total_skylight_area_surface_b / total_skylight_area_b,
-                            total_skylight_area_surface_p / total_skylight_area_p
+                            total_skylight_area_surface_p / total_skylight_area_p,
                         )
                     )
