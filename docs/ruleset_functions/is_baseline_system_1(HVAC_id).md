@@ -19,6 +19,13 @@
 7. is_fluid_loop_purchased_heating()
 8. is_fluid_loop_purchased_CHW()
 9. is_cooling_type_fluid_loop()
+10. is_terminal_heat_source_none()  
+11. is_terminal_cool_source_none()  
+12. is_terminal_fan_null()  
+13. is_terminal_type_CAV()  
+14. is_terminal_type_four_pipe()  
+15. is_terminal_supply_ducted()  
+
 
 ## Logic:    
 - Create an object associated with the hvac system: `hvac_b = hvac_b.id`  
