@@ -19,8 +19,6 @@
 
 **Returns** `return is_fan_CV`  
 
-**Notes**
-1. Should we also check if associated terminal_b.type != "CONSTANT_AIR_VOLUME" as well for this function?
 
 
 **[Back](../_toc.md)**
