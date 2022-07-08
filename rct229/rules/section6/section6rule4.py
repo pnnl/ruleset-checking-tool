@@ -122,7 +122,7 @@ class Section6Rule4(RuleDefinitionListIndexedBase):
                         "space_lighting_status_type_p"
                     ]
                     total_space_lpd_b = calc_vals["total_space_lpd_b"]
-                    lpd_allowance_b = calc_vals["lpd_allowance_b"]
+                    lpd_allowance_b = calc_vals["lpd_allowance_b"]['lpd']
 
                     return (
                         # Not Case 1
