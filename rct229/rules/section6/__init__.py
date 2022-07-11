@@ -6,7 +6,7 @@ __all__ = [
     "section6rule2",
     "section6rule3",
     "section6rule4",
-    "section6rule11"
+    "section6rule6.py"
 ]
 
 
