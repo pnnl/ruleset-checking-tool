@@ -16,7 +16,8 @@ class Section6Rule1(RuleDefinitionListIndexedBase):
             each_rule=Section6Rule1.BuildingRule(),
             index_rmr="proposed",
             id="6-1",
-            description="The total building interior lighting power shall not exceed the interior lighting power allowance determined using either Table G3.7 or G3.8",
+            description="The total building interior lighting power shall not exceed the interior lighting power "
+            "allowance determined using either Table G3.7 or G3.8",
             rmr_context="ruleset_model_instances/0/buildings",
         )
 
@@ -92,7 +93,7 @@ class Section6Rule1(RuleDefinitionListIndexedBase):
                 "building_design_lighting_power": building_design_lighting_power,
             }
 
-        def rule_check(self, context, calc_vals, data=None):
+        def rule_check(self, context, calc_vals=None, data=None):
             return (
                 calc_vals["building_design_lighting_power"]
                 <= calc_vals["building_allowable_lighting_power"]

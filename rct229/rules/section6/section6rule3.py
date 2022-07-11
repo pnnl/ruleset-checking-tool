@@ -9,9 +9,7 @@ from rct229.ruleset_functions.get_building_segment_lighting_status_type_dict imp
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.std_comparisons import std_equal
 
-OFFICE_OPEN_PLAN = schema_enums[
-    "LightingSpaceType2019ASHRAE901TG37"
-].OFFICE_OPEN_PLAN
+OFFICE_OPEN_PLAN = schema_enums["LightingSpaceType2019ASHRAE901TG37"].OFFICE_OPEN_PLAN
 
 
 class Section6Rule3(RuleDefinitionListIndexedBase):
@@ -47,16 +45,13 @@ class Section6Rule3(RuleDefinitionListIndexedBase):
 
         class SpaceRule(RuleDefinitionBase):
             def __init__(self):
-                super(
-                    Section6Rule3.BuildingSegmentRule.SpaceRule,
-                    self,
-                ).__init__(
+                super(Section6Rule3.BuildingSegmentRule.SpaceRule, self,).__init__(
                     fail_msg="Lighting exists or is submitted with design documents. Lighting power density in P_RMR "
-                             "does not match U_RMR.",
+                    "does not match U_RMR.",
                     manual_check_required_msg="Lighting is not yet designed, or lighting is as-designed or "
-                                                "as-existing but matches Table 9.5.1. Lighting power density in P_RMR"
-                                                " does not match U_RMR.",
-                    rmrs_used=UserBaselineProposedVals(True, False, True)
+                    "as-existing but matches Table 9.5.1. Lighting power density in P_RMR"
+                    " does not match U_RMR.",
+                    rmrs_used=UserBaselineProposedVals(True, False, True),
                 )
 
             def get_calc_vals(self, context, data=None):
@@ -83,7 +78,11 @@ class Section6Rule3(RuleDefinitionListIndexedBase):
                 space_lighting_status_type_p = calc_vals["space_lighting_status_type_p"]
                 total_space_lpd_u = calc_vals["total_space_lpd_u"]
                 total_space_lpd_p = calc_vals["total_space_lpd_p"]
-                return not std_equal(total_space_lpd_u, total_space_lpd_p) and space_lighting_status_type_p is not LightingStatusType.AS_DESIGNED_OR_AS_EXISTING
+                return (
+                    not std_equal(total_space_lpd_u, total_space_lpd_p)
+                    and space_lighting_status_type_p
+                    is not LightingStatusType.AS_DESIGNED_OR_AS_EXISTING
+                )
 
             def rule_check(self, context, calc_vals=None, data=None):
                 total_space_lpd_u = calc_vals["total_space_lpd_u"]

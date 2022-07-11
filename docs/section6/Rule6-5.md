@@ -45,19 +45,19 @@
 
       - For each space in zone: `space_b in zone_b.spaces:`  
 
-        - Get normalized space lighting schedule: `normalized_schedule_b = normalize_space_schedules(space_b.interior_lighting)`  
+        - Get normalized space lighting schedule: `normalized_schedule_b = normalize_interior_lighting_schedules(space_b.interior_lighting, false)`  
 
         - Get matching space in P_RMR: `space_p = match_data_element(P_RMR, Spaces, space_b.id)`  
 
-          - Get normalized space lighting schedule in P_RMR: `normalized_schedule_p = normalize_space_schedules(space_p.interior_lighting)`
+          - Get normalized space lighting schedule in P_RMR: `normalized_schedule_p = normalize_interior_lighting_schedules(space_p.interior_lighting, true)`
 
-        - Check if automatic shutoff control is modeled in space during building closed hours (i.e. if lighting schedule hourly value in B_RMR is equal to P_RMR during building closed hours): `schedule_comparison_result = compare_schedules(normalized_schedule_b, normalized_schedule_p, building_open_schedule_b, -111)`  
+        - Check if automatic shutoff control is modeled in space during building closed hours (i.e. if lighting schedule hourly value in B_RMR is equal to P_RMR during building closed hours): `schedule_comparison_result = compare_schedules(normalized_schedule_b, normalized_schedule_p, inverse(building_open_schedule_b))`  
 
           **Rule Assertion:**
 
-          - Case 1: For building closed hours, if lighting schedule hourly value in B_RMR is equal to P_RMR: `if schedule_comparison_result == "MATCH": PASS`  
+          - Case 1: For building closed hours, if lighting schedule hourly value in B_RMR is equal to P_RMR: `if schedule_comparison_result["total_hours_compared"] == schedule_comparison_result["total_hours_matched"]: PASS`  
 
-          - Case 2: Else: `else: CAUTION and return schedule_comparison_result`  
+          - Case 2: Else: `else: Failed`  
 
 
 **Notes:**
