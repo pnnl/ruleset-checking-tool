@@ -98,6 +98,9 @@ class Section5Rule21(RuleDefinitionListIndexedBase):
                         "$": ["construction"],
                         "construction": ["u_factor"],
                     },
+                    fail_msg="The vertical fenestration is not distributed across baseline opaque surfaces in the "
+                             "same proportion as in the proposed design. Verify if envelope is existing or altered "
+                             "and can be excluded from this check."
                 )
 
             def get_calc_vals(self, context, data=None):

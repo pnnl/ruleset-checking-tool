@@ -214,6 +214,8 @@ class Section5Rule26(RuleDefinitionListIndexedBase):
                             "solar_heat_gain_coefficient",
                         ]
                     },
+                    manual_check_required_msg="Manual review is requested to verify vertical fenestration meets SHGC "
+                                              "requirement as per Table G3.4. "
                 )
 
             def manual_check_required(self, context, calc_vals=None, data=None):

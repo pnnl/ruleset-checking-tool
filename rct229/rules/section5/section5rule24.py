@@ -215,6 +215,8 @@ class Section5Rule24(RuleDefinitionListIndexedBase):
                             "u_factor",
                         ]
                     },
+                    manual_check_required_msg="Manual review is requested to verify vertical fenestration meets "
+                                              "U-factor requirement as per Table G3.4. "
                 )
 
             def manual_check_required(self, context, calc_vals=None, data=None):

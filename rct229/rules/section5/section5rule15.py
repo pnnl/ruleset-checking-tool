@@ -71,6 +71,11 @@ class Section5Rule15(RuleDefinitionListIndexedBase):
                         "$": ["construction"],
                         "construction": ["f_factor"],
                     },
+                    manual_check_required_msg="Zone has both residential and non-residential spaces and the "
+                                              "construction requirements for slab-on-grade floor are different. "
+                                              "Verify construction is modeled correctly.",
+                    fail_msg='Baseline slab F-factor is not as expected for slabs that are less than 24" below grade. '
+                             'verify that the slab is more than 24" below grade and is unregulated. '
                 )
 
             def get_calc_vals(self, context, data=None):
@@ -112,7 +117,7 @@ class Section5Rule15(RuleDefinitionListIndexedBase):
                     "target_f_factor_nonres": target_f_factor_nonres,
                 }
 
-            def manaul_check_required(self, context, calc_vals, data=None):
+            def manual_check_required(self, context, calc_vals=None, data=None):
                 target_f_factor_res = calc_vals["target_f_factor_res"]
                 target_f_factor_nonres = calc_vals["target_f_factor_nonres"]
 
