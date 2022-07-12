@@ -52,8 +52,7 @@ Install `pipenv` using `pip`
 `pip install pipenv`
 
 Now tests can be run by first installing dependencies and then running pytest.
-1. `pipenv install --dev --skip-lock`
-2. `pipenv lock --pre`
+1. `pipenv install --dev`
 2. `pipenv run pytest`
 
 You can also package with pipenv to test the CLI tool.

@@ -77,7 +77,7 @@ SCC_DATA_FRAME = pd.DataFrame(
             SurfaceConditioningCategory.UNREGULATED,
             SurfaceConditioningCategory.UNREGULATED,
         ],
-        SurfaceAdjacentTo.EXTERIOR.name: [
+        SurfaceAdjacentTo.EXTERIOR: [
             SurfaceConditioningCategory.EXTERIOR_RESIDENTIAL,
             SurfaceConditioningCategory.EXTERIOR_NON_RESIDENTIAL,
             SurfaceConditioningCategory.EXTERIOR_MIXED,
@@ -85,7 +85,7 @@ SCC_DATA_FRAME = pd.DataFrame(
             SurfaceConditioningCategory.UNREGULATED,
             SurfaceConditioningCategory.UNREGULATED,
         ],
-        SurfaceAdjacentTo.GROUND.name: [
+        SurfaceAdjacentTo.GROUND: [
             SurfaceConditioningCategory.EXTERIOR_RESIDENTIAL,
             SurfaceConditioningCategory.EXTERIOR_NON_RESIDENTIAL,
             SurfaceConditioningCategory.EXTERIOR_MIXED,
@@ -151,7 +151,7 @@ def get_surface_conditioning_category_dict(climate_zone, building):
                 zcc,
                 # column index
                 zcc_dict[getattr_(surface, "surface", "adjacent_zone")]
-                if surface_adjacent_to == SurfaceAdjacentTo.INTERIOR.name
+                if surface_adjacent_to == SurfaceAdjacentTo.INTERIOR
                 else surface_adjacent_to,
             ]
 
