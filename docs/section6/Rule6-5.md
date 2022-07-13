@@ -64,19 +64,4 @@
   1. Updated the Rule ID from 6-9 to 6-6 on 6/3/2022
   2. Updated the Rule ID from 6-6 to 6-5 on 6/8/2022
 
-**Future Change Note:**
-
-  1. building.building_open_schedule will need to be updated to building_segment.open_schedule once approved and added to the schema.
-
-**Temporary Function Note:**
-
-`compare_schedule_result = compare_schedules(Schedule 1, Schedule 2, Mask Schedule, comparison_factor)`
-
-(4 inputs, Schedule 1, Schedule 2, Mask Schedule, comparison_factor)
-
-- Schedule 2 as the comparison basis, i.e. Schedule 1 = Schedule 2 * comparison_factor
-- When Mask Schedule hourly value is 0, schedules need to be the same at that hour. If Mask Schedule hourly value is 1, Schedule 1 needs to be comparison factor times Schedule 2 at that hour. If Mask Schedule hourly value is 2, skip comparison for at hour.
-- If comparison_factor is not needed, set to -111 for now. For example, when the function only needs to compare if Schedule 1 and Schedule 2 are equal at some hours (when Mask Schedule is 0) and doesn't need to compare the rest of the hours (when Mask Schedule is 2). TBD.
-- can return "match", "equal and less", "equal and more", "equal, less and more", with bin data, TBD
-
 **[Back](../_toc.md)**

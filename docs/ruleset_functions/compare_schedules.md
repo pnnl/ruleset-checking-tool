@@ -6,10 +6,10 @@ Description: This function would compare two schedules and determine if they mat
 Inputs:
 - **schedule_1**: First schedule.
 - **schedule_2**: Second schedule.
-- **mask_schedule**: The schedule that defines comparison mode for all 8760 hours in a year, i.e. if hourly value is 1, schedule_1 is evaluated to be equal to schedule_2; if hourly value is 2, schedule_1 is evaluated to be equal to schedule_2 times the comparison factor; if hourly value is 0, comparison was skipped for that particular hour (example when evaluating shut off controls, only he building closed hrs are evaluated).  
+- **mask_schedule**: The schedule that defines comparison mode for all 8760 hours in a year, i.e. if hourly value is 1, schedule_1 is evaluated to be equal to schedule_2; if hourly value is 0, comparison was skipped for that particular hour (example when evaluating shut off controls, only he building closed hrs are evaluated).  
 
 Returns:
-- **compare_schedules_result_dictionary**: A dictionary containing the total number of hours that the function compares, the number of hours schedule_1 matches schedule_2 with the comparison_factor, EFLH difference for schedule_1 and schedule_2, i.e. {"TOTAL_HOURS_COMPARED": total_hours_compared, "TOTAL_HOURS_MATCH": total_hours_match, "EFLH_DIFFERENCE: EFLH_difference}
+- **compare_schedules_result_dictionary**: A dictionary containing the total number of hours that the function compares, the number of hours schedule_1 matches schedule_2 with the comparison_factor, EFLH difference (EFLH_schedule_1 / EFLH_schedule_2) for schedule_1 and schedule_2, i.e. {"TOTAL_HOURS_COMPARED": total_hours_compared, "TOTAL_HOURS_MATCH": total_hours_match, "EFLH_DIFFERENCE: EFLH_difference}
 
 Function Call:
 

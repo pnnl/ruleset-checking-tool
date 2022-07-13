@@ -1,10 +1,10 @@
 
-## normalize_space_schedules
+## normalize_interior_lighting_schedules
 
 Description: This function would determine a normalized interior lighting schedule for interior_lighting data element in space. 
 
 Inputs:
-  - **Space.data_element**: The space data element that needs to determine a normalized schedule, e.g. space.interior_lighting.
+  - **Space**: The space in which its interior lightings need to determine a normalized schedule.
   - **adjust_for_credit**: Flag to indicate whether the schedule normalization needs to add control credit adjustment.
 
 Returns:
