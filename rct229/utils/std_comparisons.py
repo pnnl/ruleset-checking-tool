@@ -1,4 +1,5 @@
 DEFAULT_PERCENT_TOLERANCE = 0.05
+AHJ_RA_COMPARE = False
 
 
 def std_equal(

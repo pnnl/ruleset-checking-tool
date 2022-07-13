@@ -8,17 +8,17 @@ _M2 = ureg("m2")
 
 
 def test__compare_standard_val_stringent_compare_gt():
-    assert compare_standard_val(1.5 * _M2, 1.0 * _M2, operator.gt, ahj_ra_compare=True)
+        assert compare_standard_val(True, 1.5 * _M2, 1.0 * _M2, operator.gt)
 
 
 def test__compare_standard_val_stringent_compare_lt():
-    assert compare_standard_val(1.0 * _M2, 1.5 * _M2, operator.lt, ahj_ra_compare=True)
+    assert compare_standard_val(True, 1.0 * _M2, 1.5 * _M2, operator.lt)
 
 
 def test__compare_standard_val_stringent_compare_gt_equal():
     """test equal when ahj flat set to True"""
-    assert compare_standard_val(0.9999 * _M2, 1.0 * _M2, operator.gt, ahj_ra_compare=True)
+    assert compare_standard_val(True, 0.9999 * _M2, 1.0 * _M2, operator.gt)
 
 
 def test__compare_standard_val_non_stringent_code_compare():
-    assert compare_standard_val(0.9999 * _M2, 1.0 * _M2)
+    assert compare_standard_val(False, 0.9999 * _M2, 1.0 * _M2)
