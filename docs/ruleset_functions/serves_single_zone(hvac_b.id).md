@@ -15,7 +15,7 @@
 ## Logic:   
 - Get dictionary list of baseline zones and the associated HVAC systems: `hvac_zone_list_w_area_dict_b = get_hvac_zone_list_w_area (B_RMR)`  
 - Get list of zones that the baseline HVAC system serves: `zone_list_b = hvac_zone_list_w_area_dict_b[hvac_b.id]["ZONE_LIST"]`  
-- Check if the number of zones associated with the HVAC system does not equal 1: `if len(zone_list_b) !=: serves_single_zone_boolean = FALSE`
+- Check if the number of zones associated with the HVAC system does not equal 1: `if len(zone_list_b) != 1: serves_single_zone_boolean = FALSE`
 - Else, serves_single_zone_boolean equals TRUE (HVAC system serves a single zone): `Else: serves_single_zone_boolean = TRUE`
 
 **Returns** `return serves_single_zone_boolean`  
