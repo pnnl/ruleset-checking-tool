@@ -54,10 +54,10 @@ help_text = short_help_text
 
 
 @cli.command("evaluate", short_help=short_help_text, help=help_text, hidden=True)
-@click.argument("user_rmr", type=click.File("rb"))
-@click.argument("baseline_rmr", type=click.File("rb"))
-@click.argument("proposed_rmr", type=click.File("rb"))
-def evalute_rmr_triplet(user_rmr, baseline_rmr, proposed_rmr):
+@click.argument("user_rmd", type=click.File("rb"))
+@click.argument("baseline_rmd", type=click.File("rb"))
+@click.argument("proposed_rmd", type=click.File("rb"))
+def evalute_rmr_triplet(user_rmd, baseline_rmd, proposed_rmd):
     print("Test implementation of rule engine for ASHRAE Std 229 RCT.")
     print("")
 
@@ -66,17 +66,17 @@ def evalute_rmr_triplet(user_rmr, baseline_rmr, proposed_rmr):
     proposed_rmr_obj = None
     rmr_are_valid_json = True
     try:
-        user_rmr_obj = deserialize_rmr_file(user_rmr)
+        user_rmr_obj = deserialize_rmr_file(user_rmd)
     except:
         rmr_are_valid_json = False
         print("User RMR is not a valid JSON file")
     try:
-        baseline_rmr_obj = deserialize_rmr_file(baseline_rmr)
+        baseline_rmr_obj = deserialize_rmr_file(baseline_rmd)
     except:
         rmr_are_valid_json = False
         print("Baseline RMR is not a valid JSON file")
     try:
-        proposed_rmr_obj = deserialize_rmr_file(proposed_rmr)
+        proposed_rmr_obj = deserialize_rmr_file(proposed_rmd)
     except:
         rmr_are_valid_json = False
         print("Proposed RMR is not a valid JSON file")
