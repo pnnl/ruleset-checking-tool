@@ -13,7 +13,6 @@
 **Function Call:** 
 2. is_heating_type_fluid_loop()
 3. is_cooling_type_DX()
-4. serves_single_zone()  
 5. is_fan_CV()  
 6. is_fluid_loop_attached_to_boiler()
 7. is_fluid_loop_purchased_heating()
