@@ -1,29 +1,25 @@
 # are_all_terminal_fans_null   
 
-**Description:** Returns TRUE if the fan data element associated with all terminal units associated with the hvac system is equal to Null. It returns FALSE if any terminal unit has a fan data element not equal to Null.   
+**Description:** Returns TRUE if the fan data element associated with all terminal units input to this function are equal to Null. It returns FALSE if any terminal unit has a fan data element not equal to Null.   
    
 
 **Inputs:**  
-- **B-RMR**: To evaluate if the fan data element associated with all terminal units associated with the hvac system is equal to Null.   
-- **hvac_b.id**: The id of the hvac system to evaluate.  
+- **B-RMR**: To evaluate if the fan data element associated with all terminal units is equal to Null.   
+- **terminal_unit_id_list**: List of terminal units to assess.
 
 **Returns:**  
-- **are_all_terminal_fans_null**: The function returns TRUE if the fan data element associated with all terminal units associated with the hvac system is equal to Null. It returns FALSE if any terminal unit has a fan data element not equal to Null.     
+- **are_all_terminal_fans_null**: The function returns TRUE if the fan data element associated with all terminal units input to this function are equal to Null. It returns FALSE if any terminal unit has a fan data element not equal to Null.     
  
-**Function Call:**  
-1. get_list_of_terminal_units_served_by_hvac_sys()      
+**Function Call:**  None  
 
 ## Logic: 
-- Get list of the terminal units associated with the hvac system: `list_of_terminal_units_served_by_hvac_sys = get_list_of_terminal_units_served_by_hvac_sys(B_RMR, hvac_b.id)`  
-- Check if there is at least one terminal unit in the list: `if len(list_of_terminal_units_served_by_hvac_sys) >= 1:`
-    - For each terminal_b in the list of terminal units: `For terminal_b in list_of_terminal_units_served_by_hvac_sys:`  
-        - Create an object for the terminal unit: `terminal_b = terminal_b.id`  
-        - Check if the list of fans associated with the terminal unit equals Null: `if terminal_b.fan == Null: are_all_terminal_fans_null = TRUE`
-        - Else: `Else: are_all_terminal_fans_null = FALSE`
-        - Check if are_all_terminal_fans_null equals False, if it does then leave the loop: `if are_all_terminal_fans_null == FALSE:`
-            - Leave the loop: `break`
-        - Else: continue looping: `Else:`   
-- Else: `Else: are_all_terminal_fans_null = FALSE`  
+- For each terminal_b in the list of terminal units: `For terminal_b in terminal_unit_id_list:`  
+    - Create an object for the terminal unit: `terminal_b = terminal_b.id`  
+    - Check if the list of fans associated with the terminal unit equals Null: `if terminal_b.fan == Null: are_all_terminal_fans_null = TRUE`
+    - Else: `Else: are_all_terminal_fans_null = FALSE`
+    - Check if are_all_terminal_fans_null equals False, if it does then leave the loop: `if are_all_terminal_fans_null == FALSE:`
+        - Leave the loop: `break`
+    - Else: continue looping: `Else:`   
 
 **Returns** `return are_all_terminal_fans_null`  
 
