@@ -11,10 +11,17 @@
 **Function Call:**  None
 
 ## Logic:   
-- For each terminal unit in the RMR: `For terminal_x in RMR...Terminal:`
-    - Check if the served_by_heating_ventilation_air_conditioning_system equals to the hvac id input to the function: `if terminal_x.served_by_heating_ventilation_air_conditioning_system = hvac_x.id:`  
-        - Add it to the list of terminal units associated with the HVAC system: `get_dict_of_zones_and_terminal_units_served_by_hvac_sys = get_dict_of_zones_and_terminal_units_served_by_hvac_sys.append(terminal_x.id)`  
-    - Else, do nothing: `Else:`
+- For each zone in RMR: `for zone in RMR...Zone:`
+    - Check if the zone is connected to any terminals (i.e., does not equal null): `if len(zone.terminals) != Null:`  
+        - Get zone ID: `zone_id = zone.id`
+        - For each terminal unit serving the zone: `for terminal in zone.terminals:`
+            - Get terminal ID: `terminal_id = terminal.id`  
+            - Get HVAC system connected to the terminal: `hvac_sys_id = terminal.served_by_heating_ventilation_air_conditioning_systems` 
+            - Check if the zone is not already saved in HVAC system dictionary: `if NOT zone_id in dict_of_zones_and_terminal_units_served_by_hvac_sys[hvac_sys_id]["ZONE_LIST"]:`
+                - Add zone id to the HVAC system dictionary: `dict_of_zones_and_terminal_units_served_by_hvac_sys[hvac_sys_id]["ZONE_LIST"].append(zone_id)`
+            - Add the terminal id to the HVAC system dictionary: `dict_of_zones_and_terminal_units_served_by_hvac_sys[hvac_sys_id]["Terminal_Unit_LIST"].append(terminal_id)`  
+
+**Returns**  `return dict_of_zones_and_terminal_units_served_by_hvac_sys`
 
 **[Back](../_toc.md)**
 
