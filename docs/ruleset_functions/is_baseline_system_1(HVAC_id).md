@@ -25,7 +25,6 @@
 13. are_all_terminal_types_CAV()  
 14. are_all_terminal_types_four_pipe()  
 15. are_all_terminal_supplies_ducted()  
-16. get_terminal_unit_for_SZ_baseline_HVAC()  
 17. are_all_terminal_heat_sources_hot_water()  
 18. are_all_terminal_cool_sources_chilled_water() 
 19. does_each_zone_have_only_one_terminal()    
