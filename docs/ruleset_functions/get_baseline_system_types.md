@@ -11,10 +11,12 @@
 - **baseline_hvac_system_dictionary**: A dictionary that saves all baseline HVAC system types in B-RMR with their IDs, i.e. {"SYS-3": ["hvac_id_1", "hvac_id_10"], "SYS-7A": ["hvac_id_3", "hvac_id_17", "hvac_id_6], "SYS-9": ["hvac_id_2"]}
 
 **Function Call:** 
-1. is_baseline_system_1()  
-
+1. get_dict_of_zones_and_terminal_units_served_by_hvac_sys()      
+2. is_baseline_system_1()  
+ 
 
 ## Logic:   
+- Get dictionary of zones and terminal unit IDs associated with each HVAC system in the RMR to pass to the sub functions: `dict_of_zones_and_terminal_units_served_by_hvac_sys  = get_dict_of_zones_and_terminal_units_served_by_hvac_sys(B_RMR)`  
 Declare empty lists of the hvac_b.id associated with each system type in the B_RMR (I do not think think this is needed but it helps to idenify everything needed) 
 - Declare a list for SYS-1, Packaged Terminal Air Conditioner : `SYS-1 = []`  
 - Declare a list for SYS-1a, PCHW with HW boiler: `SYS-1a = []` 
@@ -56,7 +58,7 @@ Declare empty lists of the hvac_b.id associated with each system type in the B_R
 - Declare a list for SYS-13c, PCHW and PHW: `SYS-13c = []`  QUESTION: How does this difffer from 12c?
 
 - For each HVAC system in the B_RMR: `hvac_b in B_RMR..HeatingVentilationAirConditioningSystem:`   
-    - Call system type 1 function which will return a string of either SYS-1, SYS-1a, SYS-1b, SYS-1c, or Not_Sys_1: `sys_1_type = is_baseline_system_1()`  
+    - Call system type 1 function which will return a string of either SYS-1, SYS-1a, SYS-1b, SYS-1c, or Not_Sys_1: `sys_1_type = is_baseline_system_1(B_RMR, hvac_b.id,dict_of_zones_and_terminal_units_served_by_hvac_sys)`  
     - Check if SYS-1, if it is then add to list of SYS-1s: `if sys_1_type == "SYS-1": SYS-1 = SYS-1.append(hvac_b.id)` 
     - Check elif SYS-1a, if it is then add to list of SYS-1as: `elif sys_1_type == "SYS-1a": SYS-1a = SYS-1a.append(hvac_b.id)`
     - Check elif SYS-1b, if it is then add to list of SYS-1bs: `elif sys_1_type == "SYS-1b": SYS-1b = SYS-1b.append(hvac_b.id)`
