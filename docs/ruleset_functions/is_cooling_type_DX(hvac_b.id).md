@@ -1,6 +1,6 @@
 # is_cooling_type_DX  
 
-**Description:** Returns TRUE if the HVAC system has DX cooling. Returns FALSE if the HVAC system has anything other than DX cooling or if it has more than 1 cooling system.   
+**Description:** Returns TRUE if the HVAC system has DX cooling. Returns FALSE if the HVAC system has anything other than DX cooling or if it has more than 1 or no cooling system.   
 
 **Inputs:**  
 - **B-RMR**: To evaluate if the hvac system is modeled with DX cooling.   
