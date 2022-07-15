@@ -1,7 +1,7 @@
-from rct229.rule_engine.rule_base import (
-    RuleDefinitionBase,
-    RuleDefinitionListIndexedBase,
-)
+from rct229.data_fns.table_G3_7_fns import table_G3_7_lookup
+from rct229.data_fns.table_G3_8_fns import table_G3_8_lookup
+from rct229.rule_engine.rule_base import RuleDefinitionBase
+from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.pint_utils import pint_sum
@@ -12,53 +12,88 @@ class Section6Rule1(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section6Rule1, self).__init__(
-            rmrs_used=UserBaselineProposedVals(True, False, True),
+            rmrs_used=UserBaselineProposedVals(False, False, True),
             each_rule=Section6Rule1.BuildingRule(),
             index_rmr="proposed",
             id="6-1",
-            description="For the proposed building, each space has the same lighting power as the corresponding space in the U-RMR",
+            description="The total building interior lighting power shall not exceed the interior lighting power allowance determined using either Table G3.7 or G3.8",
             rmr_context="ruleset_model_instances/0/buildings",
         )
 
-    class BuildingRule(RuleDefinitionListIndexedBase):
+    class BuildingRule(RuleDefinitionBase):
         def __init__(self):
             super(Section6Rule1.BuildingRule, self).__init__(
-                rmrs_used=UserBaselineProposedVals(True, False, True),
-                each_rule=Section6Rule1.BuildingRule.SpaceRule(),
-                index_rmr="proposed",
-                list_path="$..spaces[*]",  # All spaces inside the building
+                rmrs_used=UserBaselineProposedVals(False, False, True)
             )
 
-        class SpaceRule(RuleDefinitionBase):
-            def __init__(self):
-                super(Section6Rule1.BuildingRule.SpaceRule, self,).__init__(
-                    required_fields={
-                        "$": ["interior_lighting", "floor_area"],
-                        "interior_lighting[*]": ["power_per_area"],
-                    },
-                    rmrs_used=UserBaselineProposedVals(True, False, True),
+        def get_calc_vals(self, context, data=None):
+            building_allowable_lighting_power = 0
+            building_design_lighting_power = 0
+
+            for building_segment in context.proposed["building_segments"]:
+                building_segment_floor_area = 0
+                building_segment_allowable_lighting_power = 0
+                building_segment_design_lighting_power = 0
+
+                building_segment_lighting_building_area_type = building_segment[
+                    "lighting_building_area_type"
+                ]
+                building_segment_uses_building_area_method = (
+                    building_segment_lighting_building_area_type != "NONE"
                 )
 
-            def get_calc_vals(self, context, data=None):
-                space_lighting_power_per_area_user = pint_sum(
-                    find_all("interior_lighting[*].power_per_area", context.user)
-                )
-                space_lighting_power_per_area_proposed = pint_sum(
-                    find_all("interior_lighting[*].power_per_area", context.proposed)
-                )
-                space_lighting_power_user = (
-                    space_lighting_power_per_area_user * context.user["floor_area"]
-                )
+                for zone in find_all("$..zones[*]", building_segment):
+                    zone_volume = zone["volume"]
+                    zone_floor_area = pint_sum(find_all("$..floor_area", zone))
+                    zone_avg_height = zone_volume / zone_floor_area
 
-                return {
-                    "space_lighting_power_user": space_lighting_power_per_area_user
-                    * context.user["floor_area"],
-                    "space_lighting_power_proposed": space_lighting_power_per_area_proposed
-                    * context.proposed["floor_area"],
-                }
+                    for space in zone["spaces"]:
+                        space_floor_area = space["floor_area"]
+                        space_design_lighting_power = (
+                            pint_sum(
+                                find_all("interior_lighting[*].power_per_area", space)
+                            )
+                            * space_floor_area
+                        )
+                        building_segment_design_lighting_power += (
+                            space_design_lighting_power
+                        )
+                        if building_segment_uses_building_area_method:
+                            building_segment_floor_area += space_floor_area
+                        else:
+                            # The building segment uses the Space-by-Space Method
+                            lighting_space_type = space["lighting_space_type"]
+                            space_allowable_lpd = table_G3_7_lookup(
+                                lighting_space_type,
+                                # do not need control type
+                                None,
+                                space_height=zone_avg_height,
+                                space_area=space_floor_area,
+                            )["lpd"]
+                            building_segment_allowable_lighting_power += (
+                                space_allowable_lpd * space_floor_area
+                            )
 
-            def rule_check(self, context, calc_vals, data=None):
-                return (
-                    calc_vals["space_lighting_power_user"]
-                    == calc_vals["space_lighting_power_proposed"]
+                if building_segment_uses_building_area_method:
+                    building_segment_allowable_lpd = table_G3_8_lookup(
+                        building_area_type=building_segment_lighting_building_area_type
+                    )["lpd"]
+                    building_segment_allowable_lighting_power = (
+                        building_segment_allowable_lpd * building_segment_floor_area
+                    )
+
+                building_allowable_lighting_power += (
+                    building_segment_allowable_lighting_power
                 )
+                building_design_lighting_power += building_segment_design_lighting_power
+
+            return {
+                "building_allowable_lighting_power": building_allowable_lighting_power,
+                "building_design_lighting_power": building_design_lighting_power,
+            }
+
+        def rule_check(self, context, calc_vals, data=None):
+            return (
+                calc_vals["building_design_lighting_power"]
+                <= calc_vals["building_allowable_lighting_power"]
+            )

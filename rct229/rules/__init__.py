@@ -2,6 +2,8 @@ import importlib
 import inspect
 
 import rct229.rule_engine.rule_base as base_classes
+import rct229.rule_engine.rule_list_base as base_list_classes
+import rct229.rule_engine.rule_list_indexed_base as base_list_indexed_classes
 import rct229.rules as rules
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 
@@ -18,6 +20,18 @@ def __getrules__():
     modules = []
     __getrules_module__helper(rules, modules)
     base_class_names = [f[0] for f in inspect.getmembers(base_classes, inspect.isclass)]
+    base_class_names = base_class_names + [
+        f[0] for f in inspect.getmembers(base_list_classes, inspect.isclass)
+    ]
+    base_class_names = list(
+        set(
+            base_class_names
+            + [
+                f[0]
+                for f in inspect.getmembers(base_list_indexed_classes, inspect.isclass)
+            ]
+        )
+    )
     available_rules = []
     for module in modules:
         available_rules += [

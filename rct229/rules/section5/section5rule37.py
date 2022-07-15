@@ -1,9 +1,7 @@
 from rct229.data.schema_enums import schema_enums
 from rct229.data_fns.table_G3_4_fns import table_G34_lookup
-from rct229.rule_engine.rule_base import (
-    RuleDefinitionBase,
-    RuleDefinitionListIndexedBase,
-)
+from rct229.rule_engine.rule_base import RuleDefinitionBase
+from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 from rct229.ruleset_functions.get_building_scc_skylight_roof_ratios_dict import (
     get_building_scc_skylight_roof_ratios_dict,
@@ -23,7 +21,7 @@ MANUAL_CHECK_MSG = "Manual review is required to verify skylight meets U-factor 
 MANUAL_CHECK_APPLICABLE = (
     "The subsurface type is Door, not applicable for the rule-checking"
 )
-DOOR = schema_enums["SubsurfaceClassificationType"].DOOR.name
+DOOR = schema_enums["SubsurfaceClassificationType"].DOOR
 
 
 class Section5Rule37(RuleDefinitionListIndexedBase):
