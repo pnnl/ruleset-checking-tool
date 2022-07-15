@@ -14,7 +14,7 @@
 1. get_list_of_terminal_units_served_by_hvac_sys()      
 
 ## Logic: 
-- Get list of the terminal units associated with the hvac system: list_of_terminal_units_served_by_hvac_sys = get_list_of_terminal_units_served_by_hvac_sys(B_RMR, hvac_b.id)
+- Get list of the terminal units associated with the hvac system: `list_of_terminal_units_served_by_hvac_sys = get_list_of_terminal_units_served_by_hvac_sys(B_RMR, hvac_b.id)`  
 - Check if there is at least one terminal unit in the list: `if len(list_of_terminal_units_served_by_hvac_sys) >= 1:`
     - For each terminal_b in the list of terminal units: `For terminal_b in list_of_terminal_units_served_by_hvac_sys:`  
         - Create an object for the terminal unit: `terminal_b = terminal_b.id`  
