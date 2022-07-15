@@ -5,11 +5,13 @@
 **Inputs:**  
 - **B-RMR**: To evaluate if the hvac system is modeled as either Sys-1, Sys-1a, Sys-1b, Sys-1c, or Not_Sys_1 in the B_RMR.   
 - **hvac_b.id**: The id of the hvac system to evaluate.  
+- **dict_of_zones_and_terminal_units_served_by_hvac_sys**: dictionary of zones and terminal unit IDs associated with each HVAC system in the RMR.
 
 **Returns:**  
 - **is_baseline_system_1**: The function returns either Sys-1, Sys-1a, Sys-1b, Sys-1c, or Not_Sys_1 string output which indicates whether the HVAC system is ASHRAE 90.1 2019 Appendix G system 1 (PTAC), system 1a (system 1 with purchased CHW), system 1b (system 1 with purchased heating), system 1c (system 1 with purchased CHW and purchased HW).  
  
 **Function Call:** 
+1. get_dict_of_zones_and_terminal_units_served_by_hvac_sys()  
 2. is_heating_type_fluid_loop()
 3. is_cooling_type_DX()
 4. serves_single_zone()  
@@ -33,6 +35,8 @@ I deleted the first function and didn't think it was crucial to update the subse
 
 ## Logic:    
 - Create an object associated with the hvac system: `hvac_b = hvac_b.id`  
+- Get list of terminal units associated with the hvac system: `terminal_unit_id_list = dict_of_zones_and_terminal_units_served_by_hvac_sys[hvac_b.id]["Terminal_Unit_List"]`  
+- Get list of zones associated with the hvac system: `zone_id_list = dict_of_zones_and_terminal_units_served_by_hvac_sys[hvac_b.id]["Zone_List"]` 
 - Check that there is no preheat system (it equals Null), if there is none then carry on: `if Len(hvac_b.preheat_system) == Null:`  
     - Check if heatingsystem is a fluid_loop, if it is then carry on: `if is_heating_type_fluid_loop(B_RMR, hvac_b.id) == TRUE:`     
         - Check if fansystem is constant volume, if yes then carry on: `if is_fan_CV(B_RMR, hvac_b.id) == TRUE:`  
