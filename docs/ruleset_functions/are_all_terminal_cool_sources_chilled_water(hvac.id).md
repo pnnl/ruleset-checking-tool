@@ -11,9 +11,8 @@
  
 **Function Call:**  None     
 
-## Logic: 
-- Create list of the terminal units to assess: `list_of_terminal_units_served_by_hvac_sys = terminal_unit_id_list`  
-- For each terminal_b in the list of terminal units: `For terminal_b in list_of_terminal_units_served_by_hvac_sys:`  
+## Logic:  
+- For each terminal_b in the list of terminal units: `For terminal_b in terminal_unit_id_list:`  
     - Create an object for the terminal unit: `terminal_b = terminal_b.id`  
     - Check if the cool source associated with the terminal unit equals CHILLED_WATER: `if terminal_b.cooling_source == "CHILLED_WATER": are_all_terminal_cool_sources_chilled_water = TRUE`
     - Else: `Else: are_all_terminal_cool_sources_chilled_water = FALSE`
