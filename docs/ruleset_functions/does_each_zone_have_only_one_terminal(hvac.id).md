@@ -12,13 +12,12 @@
 **Function Call:**  None    
 
 ## Logic: 
+- Set does_each_zone_have_only_one_terminal = TRUE: `does_each_zone_have_only_one_terminal = TRUE`  
 - For each zone id in zone_id_list: `For zone_id in zone_id_list:`   
     - Create zone object: `zone = zone_id`
-    - Check if there is one terminal unit associated with the zone, if only one then set does_each_zone_have_only_one_terminal to true: `if len(zone.terminals) = 1:does_each_zone_have_only_one_terminal = TRUE`   
-    - Else: `Else: does_each_zone_have_only_one_terminal = FALSE`
-    - Check if does_each_zone_have_only_one_terminal equals False, if it does then leave the loop: `if does_each_zone_have_only_one_terminal == FALSE:`
-        - Leave the loop: `break`
-    - Else: continue looping: `Else:`   
+    - Check if there is not one terminal unit associated with the zone: `if len(zone.terminals) != 1:`     
+        - Set does_each_zone_have_only_one_terminal = FALSE: `does_each_zone_have_only_one_terminal = FALSE`  
+        - Leave the loop: `break`  
 
 **Returns** `return does_each_zone_have_only_one_terminal`  
 
