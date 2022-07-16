@@ -13,7 +13,7 @@
 1. is_there_only_one_cooling_system()    
 
 ## Logic:   
-- Set is_cooling_type_DX = FALSE: `is_cooling_type_DX = FALSE`  
+- Set is_cooling_type_fluid_loop = FALSE: `is_cooling_type_fluid_loop = FALSE`  
 - Check that there is only one cooling system associated with the HVAC system: `if is_there_only_one_cooling_system(B_RMR,hvac_b.id) == TRUE:`  
     - Create an object associate with the cooling_system associated with hvac_b: `cooling_system_b = hvac_b.cooling_system[0]`
     - Check if the system is FLUID_LOOP, if yes then is_cooling_type_fluid_loop equals TRUE  : `if cooling_system_b.cooling_system_type == "FLUID_LOOP": is_cooling_type_fluid_loop = TRUE` 
