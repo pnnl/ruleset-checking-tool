@@ -16,7 +16,10 @@
  
 
 ## Logic:   
+Below is so that the looping associated with get_dict_of_zones_and_terminal_units_served_by_hvac_sys() does not have to be repeated for each relevant function which would be highly inefficient since it loops through all zones in the B_RMR.
 - Get dictionary of zones and terminal unit IDs associated with each HVAC system in the RMR to pass to the sub functions: `dict_of_zones_and_terminal_units_served_by_hvac_sys  = get_dict_of_zones_and_terminal_units_served_by_hvac_sys(B_RMR)`  
+- Get list of terminal units associated with the hvac system from the dictionary input to the function: `terminal_unit_id_list = dict_of_zones_and_terminal_units_served_by_hvac_sys[hvac_b.id]["Terminal_Unit_List"]`  
+- Get list of zone ids associated with the hvac system from the dictionary input to the function: `zone_id_list = dict_of_zones_and_terminal_units_served_by_hvac_sys[hvac_b.id]["Zone_List"]` 
 Declare empty lists of the hvac_b.id associated with each system type in the B_RMR (I do not think think this is needed but it helps to idenify everything needed) 
 - Declare a list for SYS-1, Packaged Terminal Air Conditioner : `SYS-1 = []`  
 - Declare a list for SYS-1a, PCHW with HW boiler: `SYS-1a = []` 
@@ -54,17 +57,18 @@ Declare empty lists of the hvac_b.id associated with each system type in the B_R
 - Declare a list for SYS-12c, PCHW and PHW: `SYS-12c = []`  
 - Declare a list for SYS-13, Single Zone Constant Volume System with CHW and Electric Heat : `SYS-13 = []`  
 - Declare a list for SYS-13a, PCHW with and Electric Heat: `SYS-13a = []`  
-- Declare a list for SYS-13b, CHW with PHW: `SYS-13b = []`  QUESTION: How does this differ from 12b?
-- Declare a list for SYS-13c, PCHW and PHW: `SYS-13c = []`  QUESTION: How does this difffer from 12c?
+
 
 - For each HVAC system in the B_RMR: `hvac_b in B_RMR..HeatingVentilationAirConditioningSystem:`   
-    - Call system type 1 function which will return a string of either SYS-1, SYS-1a, SYS-1b, SYS-1c, or Not_Sys_1: `sys_1_type = is_baseline_system_1(B_RMR, hvac_b.id,dict_of_zones_and_terminal_units_served_by_hvac_sys)`  
+    - Reset HVAC system type found boolean variable to FALSE: `hvac_sys_type_found = FALSE`  
+    - Call system type 1 function which will return a string of either SYS-1, SYS-1a, SYS-1b, SYS-1c, or Not_Sys_1: `sys_1_type = is_baseline_system_1(B_RMR, hvac_b.id,terminal_unit_id_list,zone_id_list)`  
     - Check if SYS-1, if it is then add to list of SYS-1s: `if sys_1_type == "SYS-1": SYS-1 = SYS-1.append(hvac_b.id)` 
     - Check elif SYS-1a, if it is then add to list of SYS-1as: `elif sys_1_type == "SYS-1a": SYS-1a = SYS-1a.append(hvac_b.id)`
     - Check elif SYS-1b, if it is then add to list of SYS-1bs: `elif sys_1_type == "SYS-1b": SYS-1b = SYS-1b.append(hvac_b.id)`
     - Check elif SYS-1c, if it is then add to list of SYS-1cs: `elif sys_1_type == "SYS-1c": SYS-1c = SYS-1c.append(hvac_b.id)`
     - Else, do nothing: `Else:`
-
+    - Check if sys_1_type does not equal Not_Sys_1: `if sys_1_type != "Not_Sys_1": hvac_sys_type_found = TRUE`  
+    - Check if hvac_sys_type_found = FALSE, if it does carry on if it equals TRUE then loop to the next hvac system: `if hvac_sys_type_found == FALSE:` 
     - PLACEHOLDER, each is_baseline_system_#() function will be called for each HVAC system in the baseline as shown for system 1.
 
 
@@ -92,14 +96,10 @@ Declare empty lists of the hvac_b.id associated with each system type in the B_R
 | Sys-11.1 SZ-VAV                    | Single Zone VAV System                                          | CHW          | ER | Sys-11.1a: SZ-VAV w/ PCHW and ER    | Sys-11b SZ-VAV, w/ CHW and PHW                    | Sys-11c: SZ-VAV with PHW and PCHW         |
 | Sys-11.2 SZ-VAV                    | Single Zone VAV System                                          | CHW          | Boiler | Sys-11.2a: SZ-VAV w/ PCHW and Boiler    | Sys-11b SZ-VAV, w/ CHW and PHW                    | Sys-11c: SZ-VAV with PHW and PCHW         |
 | Sys-12 SZ-CV-HW                  | Single Zone Constant Volume System                              | CHW          | Boiler       | Sys-12a: SZ-CV, w/ PCHW + Boiler        | Sys-12b SZ-CV-HW, w/ CHW and PHW                  | Sys-12c: SZ-CV with PHW and PCHW          |
-| Sys-13 SZ-CV-ER                  | Single Zone Constant Volume System                              | CHW          | ER           | Sys-13a: SZ-CV, PCHW w/ ER              | Sys-13b SZ-CV-ER, w/ CHW and PHW                  | Sys-13c: SZ-CV with PHW and PCHW          |
+| Sys-13 SZ-CV-ER                  | Single Zone Constant Volume System                              | CHW          | ER           | Sys-13a: SZ-CV, PCHW w/ ER              | Sys-12b SZ-CV-ER, w/ CHW and PHW                  | Sys-12c: SZ-CV with PHW and PCHW          |
 
 
-2. We can use multiple functions, one for each baseline HVAC system type as shown below. The return values will be TRUE or FALSE. :
-is_baseline_system_1(HVAC_id)
-is_baseline_system_2(HVAC_id)
 
-Then "get_baseline_HVAC_system_types" would call these sub-functions to come up with the baseline system library.
 
 
 **[Back](../_toc.md)**
