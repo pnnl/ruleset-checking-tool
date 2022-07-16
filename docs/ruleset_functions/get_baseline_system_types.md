@@ -18,8 +18,6 @@
 ## Logic:   
 Below is so that the looping associated with get_dict_of_zones_and_terminal_units_served_by_hvac_sys() does not have to be repeated for each relevant function which would be highly inefficient since it loops through all zones in the B_RMR.
 - Get dictionary of zones and terminal unit IDs associated with each HVAC system in the RMR to pass to the sub functions: `dict_of_zones_and_terminal_units_served_by_hvac_sys  = get_dict_of_zones_and_terminal_units_served_by_hvac_sys(B_RMR)`  
-- Get list of terminal units associated with the hvac system from the dictionary input to the function: `terminal_unit_id_list = dict_of_zones_and_terminal_units_served_by_hvac_sys[hvac_b.id]["Terminal_Unit_List"]`  
-- Get list of zone ids associated with the hvac system from the dictionary input to the function: `zone_id_list = dict_of_zones_and_terminal_units_served_by_hvac_sys[hvac_b.id]["Zone_List"]` 
 Declare empty lists of the hvac_b.id associated with each system type in the B_RMR (I do not think think this is needed but it helps to idenify everything needed) 
 - Declare a list for SYS-1, Packaged Terminal Air Conditioner : `SYS-1 = []`  
 - Declare a list for SYS-1a, PCHW with HW boiler: `SYS-1a = []` 
@@ -60,6 +58,9 @@ Declare empty lists of the hvac_b.id associated with each system type in the B_R
 
 
 - For each HVAC system in the B_RMR: `hvac_b in B_RMR..HeatingVentilationAirConditioningSystem:`   
+    The two lines below allow for improved efficiency of the code. 
+    - Get list of terminal units associated with the hvac system from the dictionary input to the function: `terminal_unit_id_list = dict_of_zones_and_terminal_units_served_by_hvac_sys[hvac_b.id]["Terminal_Unit_List"]`  
+    - Get list of zone ids associated with the hvac system from the dictionary input to the function: `zone_id_list = dict_of_zones_and_terminal_units_served_by_hvac_sys[hvac_b.id]["Zone_List"]` 
     - Reset HVAC system type found boolean variable to FALSE: `hvac_sys_type_found = FALSE`  
     - Call system type 1 function which will return a string of either SYS-1, SYS-1a, SYS-1b, SYS-1c, or Not_Sys_1: `sys_1_type = is_baseline_system_1(B_RMR, hvac_b.id,terminal_unit_id_list,zone_id_list)`  
     - Check if SYS-1, if it is then add to list of SYS-1s: `if sys_1_type == "SYS-1": SYS-1 = SYS-1.append(hvac_b.id)` 
