@@ -12,13 +12,12 @@
 **Function Call:**  None    
 
 ## Logic: 
+- Set are_all_terminal_types_four_pipe = TRUE: `are_all_terminal_types_four_pipe = TRUE`  
 - For each terminal_b in the list of terminal units: `For terminal_b in terminal_unit_id_list:`  
     - Create an object for the terminal unit: `terminal_b = terminal_b.id`  
-    - Check if the terminal unit type is FOUR_PIPE_FAN_COIL_UNIT: `if terminal_b.type == "FOUR_PIPE_FAN_COIL_UNIT": are_all_terminal_types_four_pipe = TRUE`
-    - Else: `Else: are_all_terminal_types_four_pipe = FALSE`
-    - Check if are_all_terminal_types_four_pipe equals False, if it does then leave the loop: `if are_all_terminal_types_four_pipe == FALSE:`
-        - Leave the loop: `break`
-    - Else: continue looping: `Else:`  
+    - Check if the terminal unit type is Not FOUR_PIPE_FAN_COIL_UNIT: `if terminal_b.type != "FOUR_PIPE_FAN_COIL_UNIT":`  
+        - Set are_all_terminal_types_four_pipe = FALSE: `are_all_terminal_types_four_pipe = FALSE`
+        - Leave the loop: `break`  
 
 **Returns** `return are_all_terminal_types_four_pipe`  
 
