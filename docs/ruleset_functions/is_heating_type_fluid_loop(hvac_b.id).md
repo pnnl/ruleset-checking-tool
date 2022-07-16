@@ -16,7 +16,7 @@
 - Set is_heating_type_fluid_loop = FALSE: `is_heating_type_fluid_loop = FALSE`  
 - Check that there is only one heating system associated with the HVAC system: `if is_there_only_one_heating_system(B_RMR,hvac_b.id) == TRUE:`  
     - Create an object associate with the heating_system associated with hvac_b: `heating_system_b = hvac_b.heating_system[0]`
-    - Check if the system type is FLUID_LOOP, if yes then is_heating_type_fluid_loop equals TRUE  : `if heating_system_b.heating_system_type == "FLUID_LOOP": is_heating_type_fluid_loop = TRUE` 
+    - Check if the system type is FLUID_LOOP AND that hot_water_loop does not equal Null , if yes then is_heating_type_fluid_loop equals TRUE: `if heating_system_b.heating_system_type == "FLUID_LOOP" AND heating_system_b.hot_water_loop != Null: is_heating_type_fluid_loop = TRUE` 
 
 **Returns** `return is_heating_type_fluid_loop`  
 
