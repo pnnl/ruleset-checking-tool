@@ -9,7 +9,8 @@
 **Returns:**  
 - **is_heating_type_fluid_loop**: Returns TRUE if the HVAC system heating system has fluid loop as the heating type AND only one heating system is associated with the HVAC system. Returns FALSE if the HVAC system has a heating system type other than fluid loop or if it has more than one heating system.   
  
-**Function Call:** None  
+**Function Call:**  
+1. is_there_only_one_heating_system()
 
 ## Logic:   
 - Set is_heating_type_fluid_loop = FALSE: `is_heating_type_fluid_loop = FALSE`  
