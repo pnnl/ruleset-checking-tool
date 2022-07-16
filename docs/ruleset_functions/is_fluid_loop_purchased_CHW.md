@@ -12,14 +12,13 @@
 **Function Call:** None  
 
 ## Logic:   
-- Check if RMR is not modeled with external fluid source: `if NOT RMR.ASHRAE229.external_fluid_source: is_fluid_loop_purchased_CHW = FALSE`
-- Else, continue on: `Else:`  
-    - for each external fluid source in RMR: `for external_fluid_source.id in RMR.ASHRAE229.external_fluid_source:`
+- Set is_fluid_loop_purchased_CHW equal to FALSE: `is_fluid_loop_purchased_CHW = FALSE`  
+- Check if RMR is not modeled with external fluid source: `if RMR.RuleModelInstance.external_fluid_source != Null:`  
+    - For each external fluid source in RMR: `for external_fluid_source.id in RMR.RuleModelInstance.external_fluid_source:`  
         - Check if external fluid source is chilled water: `if external_fluid_source.id.type == "CHILLED_WATER"`    
-            - Add the associated loop to the purchased_chilled_water_loop_list_b list: `purchased_chilled_water_loop_list_b = purchased_chilled_water_loop_list_b.append (external_fluid_source.id.type)` 
-    - Create an object associate with the cooling_system fluid loop associated with hvac_b: `fluid_loop_b = hvac_b.cooling_system[0].chilled_water_loop`
-    - Check if the fluid loop id is in the list created above, if yes then is_fluid_loop_purchased_CHW equals TRUE  : `if fluid_loop_b.id in purchased_chilled_water_loop_list_b: is_fluid_loop_purchased_CHW = TRUE` 
-    - Else, is_fluid_loop_purchased_CHW = FALSE: `ELse: is_fluid_loop_purchased_CHW = FALSE`  
+            - Add the associated loop to the purchased_chilled_water_loop_list_b list: `purchased_chilled_water_loop_list_b = purchased_chilled_water_loop_list_b.append (external_fluid_source.id)`  
+    - Create an object associate with the cooling_system fluid loop associated with hvac_b: `fluid_loop_b = hvac_b.cooling_system[0].chilled_water_loop`  
+    - Check if the fluid loop id is in the list created above, if yes then is_fluid_loop_purchased_CHW equals TRUE  : `if fluid_loop_b.id in purchased_chilled_water_loop_list_b: is_fluid_loop_purchased_CHW = TRUE`  
 
 **Returns** `is_fluid_loop_purchased_CHW`  
 
