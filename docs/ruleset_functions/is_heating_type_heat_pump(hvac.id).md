@@ -9,14 +9,14 @@
 **Returns:**  
 - **is_heating_type_heat_pump**: Returns TRUE if the HVAC system has heat pump as the heating system type AND only one heating system . Returns FALSE if the HVAC system has a heating system type other than heat pump as the heating system type or if it has more than one heating system.   
  
-**Function Call:** None  
+**Function Call:**  
+1. is_there_only_one_heating_system()  
 
 ## Logic:   
-- Check that there is only one heating system associated with the HVAC system: `if Len(hvac_b.heating_system) != 1: is_heating_type_heat_pump = FALSE`  
-- Else, carry on: `Else: `
+- Set is_heating_type_heat_pump = FALSE: `is_heating_type_heat_pump = FALSE`  
+- Check that there is only one heating system associated with the HVAC system: `if is_there_only_one_heating_system(B_RMR,hvac_b.id) == TRUE:`  
     - Create an object associate with the heating_system associated with hvac_b: `heating_system_b = hvac_b.heating_system[0]`
-    - Check if the system is HEAT_PUMP, if yes then is_heating_type_heat_pump equals TRUE  : `if heating_system_b.heating_system_type == "HEAT_PUMP": is_heating_type_heat_pump = TRUE` 
-    - Else, is_heating_type_heat_pump = FALSE: `ELse: is_heating_type_heat_pump = FALSE`  
+    - Check if the system is HEAT_PUMP, if yes then is_heating_type_heat_pump equals TRUE  : `if heating_system_b.heating_system_type == "HEAT_PUMP": is_heating_type_heat_pump = TRUE`   
 
 **Returns** `return is_heating_type_heat_pump`  
 
