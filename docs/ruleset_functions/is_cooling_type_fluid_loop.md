@@ -16,7 +16,7 @@
 - Set is_cooling_type_fluid_loop = FALSE: `is_cooling_type_fluid_loop = FALSE`  
 - Check that there is only one cooling system associated with the HVAC system: `if is_there_only_one_cooling_system(B_RMR,hvac_b.id) == TRUE:`  
     - Create an object associate with the cooling_system associated with hvac_b: `cooling_system_b = hvac_b.cooling_system[0]`
-    - Check if the system is FLUID_LOOP, if yes then is_cooling_type_fluid_loop equals TRUE  : `if cooling_system_b.cooling_system_type == "FLUID_LOOP": is_cooling_type_fluid_loop = TRUE` 
+    - Check if the system is FLUID_LOOP and the chilled water loop does not equal null, if yes then is_cooling_type_fluid_loop equals TRUE  : `if cooling_system_b.cooling_system_type == "FLUID_LOOP" AND cooling_system_b.chilled_water_loop != Null: is_cooling_type_fluid_loop = TRUE` 
 
 **Returns** `return is_cooling_type_fluid_loop`  
 
