@@ -12,13 +12,12 @@
 **Function Call:**  None        
 
 ## Logic:   
+- Set are_all_terminal_types_CAV = TRUE: `are_all_terminal_types_CAV = TRUE`  
 - For each terminal_b in the list of terminal units: `For terminal_b in terminal_unit_id_list:`  
     - Create an object for the terminal unit: `terminal_b = terminal_b.id`  
-    - Check if the terminal unit type is constant air volume (CAV): `if terminal_b.type == "CONSTANT_AIR_VOLUME": are_all_terminal_types_CAV = TRUE`  
-    - Else: `Else: are_all_terminal_types_CAV = FALSE`
-    - Check if are_all_terminal_types_CAV equals False, if it does then leave the loop: `if are_all_terminal_types_CAV == FALSE:`
-        - Leave the loop: `break`
-    - Else: continue looping: `Else:`    
+    - Check if the terminal unit type is not constant air volume (CAV): `if terminal_b.type != "CONSTANT_AIR_VOLUME":`  
+        - Set are_all_terminal_types_CAV = FALSE: `are_all_terminal_types_CAV = FALSE`
+        - Leave the loop: `break`  
 
 **Returns** `return are_all_terminal_types_CAV`   
 
