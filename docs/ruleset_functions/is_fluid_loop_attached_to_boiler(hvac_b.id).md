@@ -12,12 +12,11 @@
 **Function Call:** None  
 
 ## Logic:   
+- Set is_fluid_loop_attached_to_boiler equal to FALSE: `is_fluid_loop_attached_to_boiler = FALSE`  
 - For each boiler in B_RMR, save boiler to loop boiler dictionary: `for boiler_b in B_RMR.RulesetModelInstance.boilers: loop_boiler_dict[boiler_b.loop].append(boiler_b)`
 - Create an object associate with the heating_system fluid loop associated with hvac_b: `fluid_loop_b = hvac_b.heating_system[0].hot_water_loop`
 - Check if the fluid loop type is heating: `if fluid_loop_b.type = "HEATING":`
-    - Check if the fluid loop id is in the list created above, if yes then is_fluid_loop_attached_to_boiler equals TRUE  : `if fluid_loop_b.id in hot_water_loop_list_b: is_fluid_loop_attached_to_boiler = TRUE` 
-    - Else, is_fluid_loop_attached_to_boiler = FALSE: `ELse: is_fluid_loop_attached_to_boiler = FALSE`  
-- Else, is_fluid_loop_attached_to_boiler = FALSE: `ELse: is_fluid_loop_attached_to_boiler = FALSE`  
+    - Check if the fluid loop id is in the list of keys created above, if yes then is_fluid_loop_attached_to_boiler equals TRUE: `if fluid_loop_b.id in loop_boiler_dict.keys(): is_fluid_loop_attached_to_boiler = TRUE` 
 
 **Returns** `is_fluid_loop_attached_to_boiler`  
 
