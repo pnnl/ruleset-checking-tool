@@ -15,8 +15,8 @@
 - Set are_all_terminal_supplies_ducted = TRUE: `are_all_terminal_supplies_ducted = TRUE`  
 - For each terminal_b in the list of terminal units: `For terminal_b in terminal_unit_id_list:`  
     - Create an object for the terminal unit: `terminal_b = terminal_b.id`  
-    - Check if the terminal supply is not ducted: `if terminal_b.is_supply_ducted != TRUE:`
-        - Set are_all_terminal_supplies_ducted = FALSE: `are_all_terminal_supplies_ducted = FALSE`
+    - Check if the terminal supply is not ducted: `if terminal_b.is_supply_ducted != TRUE:`  
+        - Set are_all_terminal_supplies_ducted = FALSE: `are_all_terminal_supplies_ducted = FALSE`  
         - Leave the loop: `break`  
 
 **Returns** `return are_all_terminal_supplies_ducted`  
