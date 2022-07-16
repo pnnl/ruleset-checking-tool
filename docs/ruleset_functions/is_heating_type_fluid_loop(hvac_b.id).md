@@ -12,11 +12,10 @@
 **Function Call:** None  
 
 ## Logic:   
-- Check that there is only one heating system associated with the HVAC system: `if Len(hvac_b.heating_system) != 1: is_heating_type_fluid_loop = FALSE`  
-- Else, carry on: `Else: `
+- Set is_heating_type_fluid_loop = FALSE: `is_heating_type_fluid_loop = FALSE`  
+- Check that there is only one heating system associated with the HVAC system: `if is_there_only_one_heating_system(B_RMR,hvac_b.id) == TRUE:`  
     - Create an object associate with the heating_system associated with hvac_b: `heating_system_b = hvac_b.heating_system[0]`
     - Check if the system type is FLUID_LOOP, if yes then is_heating_type_fluid_loop equals TRUE  : `if heating_system_b.heating_system_type == "FLUID_LOOP": is_heating_type_fluid_loop = TRUE` 
-    - Else, is_heating_type_fluid_loop = FALSE: `ELse: is_heating_type_fluid_loop = FALSE`  
 
 **Returns** `return is_heating_type_fluid_loop`  
 
