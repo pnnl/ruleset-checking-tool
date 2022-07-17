@@ -81,28 +81,15 @@ class Section6Rule4(RuleDefinitionListIndexedBase):
                     space_lighting_status_type_p = data[
                         "building_segment_lighting_status_type_dict_p"
                     ][space_p["id"]]
-                    lpd_allowance_b = pint_sum(
-                        [
-                            table_G3_7_lookup(
+                    lpd_allowance_b = table_G3_7_lookup(
                                 space_b["lighting_space_type"],
-                                getattr_(
-                                    lpd, "interior_light", "occupancy_control_type"
-                                ),
                                 data["avg_zone_ht_b"],
                                 getattr_(space_b, "Space", "floor_area"),
-                            )
-                            if "lighting_space_type" in space_b
-                            else table_G3_7_lookup(
+                            ) if "lighting_space_type" in space_b else table_G3_7_lookup(
                                 OFFICE_OPEN_PLAN,
                                 data["avg_zone_ht_b"],
-                                getattr_(
-                                    lpd, "interior_light", "occupancy_control_type"
-                                ),
                                 getattr_(space_b, "Space", "floor_area"),
                             )
-                            for lpd in find_all("interior_lighting[*]", space_b)
-                        ]
-                    )
 
                     return {
                         "total_space_lpd_b": total_space_lpd_b,

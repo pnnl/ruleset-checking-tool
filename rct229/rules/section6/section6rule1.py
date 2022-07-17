@@ -66,8 +66,6 @@ class Section6Rule1(RuleDefinitionListIndexedBase):
                             lighting_space_type = space["lighting_space_type"]
                             space_allowable_lpd = table_G3_7_lookup(
                                 lighting_space_type,
-                                # do not need control type
-                                None,
                                 space_height=zone_avg_height,
                                 space_area=space_floor_area,
                             )["lpd"]

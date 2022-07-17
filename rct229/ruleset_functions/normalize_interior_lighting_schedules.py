@@ -1,4 +1,4 @@
-from rct229.data_fns.table_G3_7_fns import table_G3_7_lookup
+from rct229.data_fns.table_G3_7_fns import table_G3_7_lookup, MANUAL_ON, PARTIAL_AUTO_ON, OTHER
 from rct229.utils.assertions import assert_, assert_required_fields, getattr_
 from rct229.utils.jsonpath_utils import find_exactly_one_with_field_value
 
@@ -48,15 +48,21 @@ def normalize_interior_lighting_schedules(
         if adjust_for_credit and interior_lighting.get(
             "are_schedules_used_for_modeling_occupancy_control", None
         ):
+            bonus_adjustment = 1.0
+            occupancy_control_type = interior_lighting.get(
+                    "occupancy_control_type", OTHER
+                )
+
+            if occupancy_control_type in [MANUAL_ON, PARTIAL_AUTO_ON]:
+                bonus_adjustment = 1.25
+
             control_credit = table_G3_7_lookup(
                 lighting_space_type=getattr_(space, "space", "lighting_space_type"),
                 # occupancy control type can be None - simply ignored the credit
-                occupancy_control_type=interior_lighting.get(
-                    "occupancy_control_type", None
-                ),
                 space_height=space_height,
                 space_area=getattr_(space, "space", "floor_area"),
-            )["control_credit"]
+            )["control_credit"] * bonus_adjustment
+
 
         schedule_hourly_value = getattr_(
             find_exactly_one_with_field_value(
