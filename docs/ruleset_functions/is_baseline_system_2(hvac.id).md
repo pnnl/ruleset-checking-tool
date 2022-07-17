@@ -21,6 +21,7 @@
 7. are_all_terminal_types_CAV()  
 8. are_all_terminal_supplies_ducted()  
 9. does_each_zone_have_only_one_terminal()   
+10. does_hvac_system_serve_single_zone()  
 
 
 ## Logic:    
@@ -30,7 +31,7 @@
     - Check if heatingsystem is a heat pump, if it is then carry on: `if is_heating_type_heat_pump(B_RMR, hvac_b.id) == TRUE:`     
         - Check if the coolingsystem is DX, if it is then carry on: `if is_cooling_type_DX(B_RMR, hvac_b.id) == TRUE:`      
             - Check if fansystem is constant volume, if yes then carry on: `if is_fan_CV(B_RMR, hvac_b.id) == TRUE:`  
-                - Check if the hvac system serves a single zone and that the zone only has one terminal unit: `if len(terminal_unit_id_list) == 1 AND len(zone_id_list) == 1 and does_each_zone_have_only_one_terminal(B_RMR,zone_id_list) == TRUE:`       
+                - Check if the hvac system serves a single zone and that the zone only has one terminal unit: `if does_hvac_system_serve_single_zone(B_RMR, zone_id_list) == TRUE AND does_each_zone_have_only_one_terminal(B_RMR,zone_id_list) == TRUE:`       
                     - Check that the data elements associated with the terminal unit align with system 2: `if are_all_terminal_heat_sources_none_or_null(B_RMR,terminal_unit_id_list) == TRUE AND are_all_terminal_cool_sources_none_or_null(B_RMR,terminal_unit_id_list) == TRUE And are_all_terminal_fans_null(B_RMR,terminal_unit_id_list) == TRUE AND are_all_terminal_supplies_ducted(B_RMR,terminal_unit_id_list) == FALSE AND are_all_terminal_types_CAV(B_RMR,terminal_unit_id_list) == TRUE:is_baseline_system_2 = "Sys-2"`  
 
 **Returns** `is_baseline_system_2`  
