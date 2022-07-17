@@ -12,9 +12,9 @@
 - **is_baseline_system_2**: The function returns either Sys-2 or Not_Sys_2 string output which indicates whether the HVAC system is ASHRAE 90.1 2019 Appendix G system 2 (PTHP).  
  
 **Function Call:**   
-1. is_heating_type_heat_pump()
-2. is_cooling_type_DX()
-3. is_fan_CV()  
+1. is_hvac_sys_heating_type_heat_pump()
+2. is_hvac_sys_cooling_type_DX()
+3. is_hvac_sys_fan_sys_CV()  
 4. are_all_terminal_heat_sources_none_or_null()  
 5. are_all_terminal_cool_sources_none_or_null() 
 6. are_all_terminal_fans_null()  
@@ -28,9 +28,9 @@
 - Set is_baseline_system_2 = Not_Sys_2: `is_baseline_system_2 = "Not_Sys_2"`  
 - Create an object associated with the hvac system: `hvac_b = hvac_b.id`  
 - Check that there is no preheat system (it equals Null), if there is none then carry on: `if Len(hvac_b.preheat_system) == Null:`  
-    - Check if heatingsystem is a heat pump, if it is then carry on: `if is_heating_type_heat_pump(B_RMR, hvac_b.id) == TRUE:`     
-        - Check if the coolingsystem is DX, if it is then carry on: `if is_cooling_type_DX(B_RMR, hvac_b.id) == TRUE:`      
-            - Check if fansystem is constant volume, if yes then carry on: `if is_fan_CV(B_RMR, hvac_b.id) == TRUE:`  
+    - Check if heatingsystem is a heat pump, if it is then carry on: `if is_hvac_sys_heating_type_heat_pump(B_RMR, hvac_b.id) == TRUE:`     
+        - Check if the coolingsystem is DX, if it is then carry on: `if is_hvac_sys_cooling_type_DX(B_RMR, hvac_b.id) == TRUE:`      
+            - Check if fansystem is constant volume, if yes then carry on: `if is_hvac_sys_fan_sys_CV(B_RMR, hvac_b.id) == TRUE:`  
                 - Check if the hvac system serves a single zone and that the zone only has one terminal unit: `if does_hvac_system_serve_single_zone(B_RMR, zone_id_list) == TRUE AND does_each_zone_have_only_one_terminal(B_RMR,zone_id_list) == TRUE:`       
                     - Check that the data elements associated with the terminal unit align with system 2: `if are_all_terminal_heat_sources_none_or_null(B_RMR,terminal_unit_id_list) == TRUE AND are_all_terminal_cool_sources_none_or_null(B_RMR,terminal_unit_id_list) == TRUE And are_all_terminal_fans_null(B_RMR,terminal_unit_id_list) == TRUE AND are_all_terminal_supplies_ducted(B_RMR,terminal_unit_id_list) == FALSE AND are_all_terminal_types_CAV(B_RMR,terminal_unit_id_list) == TRUE:is_baseline_system_2 = "Sys-2"`  
 
