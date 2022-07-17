@@ -28,6 +28,7 @@
 14. are_all_terminal_heat_sources_hot_water()  
 15. are_all_terminal_cool_sources_chilled_water() 
 16. does_each_zone_have_only_one_terminal()    
+17. does_hvac_system_serve_single_zone()  
  
 ## Logic:    
 - Create an object associated with the hvac system: `hvac_b = hvac_b.id`  
@@ -35,7 +36,7 @@
 - Check that there is no preheat system (it equals Null), if there is none then carry on: `if Len(hvac_b.preheat_system) == Null:`  
     - Check if heatingsystem is a fluid_loop, if it is then carry on: `if is_heating_type_fluid_loop(B_RMR, hvac_b.id) == TRUE:`     
         - Check if fansystem is constant volume, if yes then carry on: `if is_fan_CV(B_RMR, hvac_b.id) == TRUE:`  
-            - Check if the hvac system serves a single zone and that the zone only has one terminal unit: `if len(terminal_unit_id_list) == 1 AND len(zone_id_list) == 1 and does_each_zone_have_only_one_terminal(B_RMR,zone_id_list) == TRUE:`     
+            - Check if the hvac system serves a single zone and that the zone only has one terminal unit: `if does_hvac_system_serve_single_zone(B_RMR, zone_id_list) == TRUE AND does_each_zone_have_only_one_terminal(B_RMR,zone_id_list) == TRUE:`     
                 - Check that the data elements associated with the terminal unit align with system 1: `if are_all_terminal_heat_sources_none_or_null(B_RMR,terminal_unit_id_list) == TRUE AND are_all_terminal_cool_sources_none_or_null(B_RMR,terminal_unit_id_list) == TRUE And are_all_terminal_fans_null(B_RMR,terminal_unit_id_list) == TRUE AND are_all_terminal_supplies_ducted(B_RMR,terminal_unit_id_list) == FALSE:`        
                     - if coolingsystem is DX and the heating fluid loop serves a boiler and the terminal type is constant volume then SYS-1: `if is_cooling_type_DX(B_RMR, hvac_b.id) == TRUE AND is_fluid_loop_attached_to_boiler(B_RMR, hvac_b.id) == TRUE AND are_all_terminal_types_CAV(B_RMR,terminal_unit_id_list) == TRUE: is_baseline_system_1 = "SYS-1"`
                     - elif coolingsystem is DX and the fluid loop is purchased heating and the terminal type is constant volume then SYS-1b: `elif is_cooling_type_DX(B_RMR, hvac_b.id) == TRUE AND is_fluid_loop_purchased_heating(B_RMR, hvac_b.id) == TRUE AND are_all_terminal_types_CAV(B_RMR,terminal_unit_id_list) == TRUE: is_baseline_system_1 = "SYS-1b"`
