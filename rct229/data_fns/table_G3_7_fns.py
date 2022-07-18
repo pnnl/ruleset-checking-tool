@@ -118,6 +118,7 @@ FULL_AUTO_ON = schema_enums["LightingOccupancyControlType"].FULL_AUTO_ON
 PARTIAL_AUTO_ON = schema_enums["LightingOccupancyControlType"].PARTIAL_AUTO_ON
 MANUAL_ON = schema_enums["LightingOccupancyControlType"].MANUAL_ON
 OTHER = schema_enums["LightingOccupancyControlType"].OTHER
+NONE = schema_enums["LightingOccupancyControlType"].NONE
 
 # ATRIUM_LOW_MEDIUM
 def table_G3_7_lookup(
