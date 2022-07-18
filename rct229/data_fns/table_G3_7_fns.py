@@ -121,9 +121,7 @@ OTHER = schema_enums["LightingOccupancyControlType"].OTHER
 NONE = schema_enums["LightingOccupancyControlType"].NONE
 
 # ATRIUM_LOW_MEDIUM
-def table_G3_7_lookup(
-    lighting_space_type, space_height, space_area
-):
+def table_G3_7_lookup(lighting_space_type, space_height, space_area):
     """Returns the lighting power density for a space as
     required by ASHRAE 90.1 Table G3.7
 

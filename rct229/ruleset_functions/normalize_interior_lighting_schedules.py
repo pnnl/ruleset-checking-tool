@@ -1,4 +1,10 @@
-from rct229.data_fns.table_G3_7_fns import table_G3_7_lookup, MANUAL_ON, PARTIAL_AUTO_ON, OTHER, NONE
+from rct229.data_fns.table_G3_7_fns import (
+    MANUAL_ON,
+    NONE,
+    OTHER,
+    PARTIAL_AUTO_ON,
+    table_G3_7_lookup,
+)
 from rct229.utils.assertions import assert_, assert_required_fields, getattr_
 from rct229.utils.jsonpath_utils import find_exactly_one_with_field_value
 
@@ -50,8 +56,8 @@ def normalize_interior_lighting_schedules(
         ):
             bonus_adjustment = 1.0
             occupancy_control_type = interior_lighting.get(
-                    "occupancy_control_type", OTHER
-                )
+                "occupancy_control_type", OTHER
+            )
 
             if occupancy_control_type in [MANUAL_ON, PARTIAL_AUTO_ON]:
                 bonus_adjustment = 1.25
@@ -59,12 +65,15 @@ def normalize_interior_lighting_schedules(
                 # no credit and adjustment for none occupancy control
                 bonus_adjustment = 0.0
 
-            control_credit = table_G3_7_lookup(
-                lighting_space_type=getattr_(space, "space", "lighting_space_type"),
-                # occupancy control type can be None - simply ignored the credit
-                space_height=space_height,
-                space_area=getattr_(space, "space", "floor_area"),
-            )["control_credit"] * bonus_adjustment
+            control_credit = (
+                table_G3_7_lookup(
+                    lighting_space_type=getattr_(space, "space", "lighting_space_type"),
+                    # occupancy control type can be None - simply ignored the credit
+                    space_height=space_height,
+                    space_area=getattr_(space, "space", "floor_area"),
+                )["control_credit"]
+                * bonus_adjustment
+            )
 
         schedule_hourly_value = getattr_(
             find_exactly_one_with_field_value(

@@ -27,6 +27,7 @@ def test__table_G3_7_lookup__with_w_per_ft_null():
         == {"lpd": 1.11 * watts_per_sqft, "control_credit": 0.1}
     )
 
+
 def test__table_G3_7_lookup__with_w_per_ft_not_null():
     assert (
         table_G3_7_lookup(
