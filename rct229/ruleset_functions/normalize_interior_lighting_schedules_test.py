@@ -7,47 +7,53 @@ from rct229.schema.schema_utils import quantify_rmr
 
 TEST_RMR = {
     "id": "building_1",
-    "buildings": [{
-        "building_segments": [{
-            "zones": [{
-                "id": "zone_1",
-                "spaces": [
+    "buildings": [
         {
-            "id": "space_1",
-            "occupant_multiplier_schedule": "Required Occupancy Sched 1",
-            "lighting_space_type": "OFFICE_ENCLOSED",
-            "interior_lighting": [
+            "building_segments": [
                 {
-                    "id": "light_1",
-                    "power_per_area": 2.3,
-                    "lighting_multiplier_schedule": "light_multiplier_sched_1",
-                    "occupancy_control_type": "MANUAL_ON",
-                    # control credit: 0.375
-                    "are_schedules_used_for_modeling_occupancy_control": True,
-                },
-                {
-                    "id": "light_2",
-                    "power_per_area": 5.5,
-                    "lighting_multiplier_schedule": "light_multiplier_sched_1",
-                    "occupancy_control_type": "FULL_AUTO_ON",
-                    # control credit: 0.3
-                    "are_schedules_used_for_modeling_occupancy_control": True,
-                },
-                {
-                    "id": "light_2",
-                    "power_per_area": 2.3,
-                    "lighting_multiplier_schedule": "light_multiplier_sched_1",
-                    "occupancy_control_type": "NONE",
-                    # control credit: 0.0
-                    "are_schedules_used_for_modeling_occupancy_control": False,
-                },
-            ],
-            "floor_area": 23.25,
+                    "zones": [
+                        {
+                            "id": "zone_1",
+                            "spaces": [
+                                {
+                                    "id": "space_1",
+                                    "occupant_multiplier_schedule": "Required Occupancy Sched 1",
+                                    "lighting_space_type": "OFFICE_ENCLOSED",
+                                    "interior_lighting": [
+                                        {
+                                            "id": "light_1",
+                                            "power_per_area": 2.3,
+                                            "lighting_multiplier_schedule": "light_multiplier_sched_1",
+                                            "occupancy_control_type": "MANUAL_ON",
+                                            # control credit: 0.375
+                                            "are_schedules_used_for_modeling_occupancy_control": True,
+                                        },
+                                        {
+                                            "id": "light_2",
+                                            "power_per_area": 5.5,
+                                            "lighting_multiplier_schedule": "light_multiplier_sched_1",
+                                            "occupancy_control_type": "FULL_AUTO_ON",
+                                            # control credit: 0.3
+                                            "are_schedules_used_for_modeling_occupancy_control": True,
+                                        },
+                                        {
+                                            "id": "light_2",
+                                            "power_per_area": 2.3,
+                                            "lighting_multiplier_schedule": "light_multiplier_sched_1",
+                                            "occupancy_control_type": "NONE",
+                                            # control credit: 0.0
+                                            "are_schedules_used_for_modeling_occupancy_control": False,
+                                        },
+                                    ],
+                                    "floor_area": 23.25,
+                                }
+                            ],
+                        }
+                    ]
+                }
+            ]
         }
-    ]
-            }]
-        }]
-    }]
+    ],
 }
 
 TEST_SPACE_RMR = {"id": "229_01", "ruleset_model_instances": [TEST_RMR]}
@@ -57,7 +63,10 @@ TEST_SCHEDULES = {
 }
 
 ZONE_HEIGHT = 10.0
-TEST_SPACES = quantify_rmr(TEST_SPACE_RMR)["ruleset_model_instances"][0]["buildings"][0]["building_segments"][0]["zones"][0]["spaces"][0]
+TEST_SPACES = quantify_rmr(TEST_SPACE_RMR)["ruleset_model_instances"][0]["buildings"][
+    0
+]["building_segments"][0]["zones"][0]["spaces"][0]
+
 
 def test__normalize_space_schedules_success_1():
     """

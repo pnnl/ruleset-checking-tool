@@ -1,9 +1,6 @@
-from rct229.data.schema_enums import schema_enums
 from rct229.data_fns.table_G3_4_fns import table_G34_lookup
-from rct229.rule_engine.rule_base import (
-    RuleDefinitionBase,
-    RuleDefinitionListIndexedBase,
-)
+from rct229.rule_engine.rule_base import RuleDefinitionBase
+from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 from rct229.ruleset_functions.get_opaque_surface_type import OpaqueSurfaceType as OST
 from rct229.ruleset_functions.get_opaque_surface_type import get_opaque_surface_type
@@ -111,7 +108,7 @@ class Section5Rule5(RuleDefinitionListIndexedBase):
                     "target_u_factor_nonres": target_u_factor_nonres,
                 }
 
-            def manaul_check_required(self, context, calc_vals, data=None):
+            def manual_check_required(self, context, calc_vals, data=None):
                 target_u_factor_res = calc_vals["target_u_factor_res"]
                 target_u_factor_nonres = calc_vals["target_u_factor_nonres"]
 

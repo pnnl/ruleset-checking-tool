@@ -1,9 +1,7 @@
 from rct229.data.schema_enums import schema_enums
 from rct229.data_fns.table_G3_4_fns import table_G34_lookup
-from rct229.rule_engine.rule_base import (
-    RuleDefinitionBase,
-    RuleDefinitionListIndexedBase,
-)
+from rct229.rule_engine.rule_base import RuleDefinitionBase
+from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 from rct229.ruleset_functions.get_building_scc_window_wall_ratios_dict import (
     get_building_scc_window_wall_ratios_dict,
@@ -17,9 +15,10 @@ from rct229.ruleset_functions.get_surface_conditioning_category_dict import (
     get_surface_conditioning_category_dict,
 )
 from rct229.utils.jsonpath_utils import find_all
+from rct229.utils.pint_utils import ZERO
 from rct229.utils.std_comparisons import std_equal
 
-DOOR = schema_enums["SubsurfaceClassificationType"].DOOR.name
+DOOR = schema_enums["SubsurfaceClassificationType"].DOOR
 
 
 class Section5Rule26(RuleDefinitionListIndexedBase):
@@ -235,8 +234,8 @@ class Section5Rule26(RuleDefinitionListIndexedBase):
             def list_filter(self, context_item, data=None):
                 subsurface_b = context_item.baseline
                 return subsurface_b["classification"] != DOOR or subsurface_b.get(
-                    ["glazed_area"], 0.0
-                ) > subsurface_b.get(["opaque_area"], 0.0)
+                    ["glazed_area"], ZERO.AREA
+                ) > subsurface_b.get(["opaque_area"], ZERO.AREA)
 
             class SubsurfaceRule(RuleDefinitionBase):
                 def __init__(self):

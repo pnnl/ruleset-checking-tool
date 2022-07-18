@@ -12,7 +12,6 @@ from rct229.ruleset_functions.get_zone_conditioning_category_dict import (
 from rct229.ruleset_functions.get_zone_conditioning_category_dict import (
     get_zone_conditioning_category_dict,
 )
-from rct229.schema.config import ureg
 from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.pint_utils import ZERO, pint_sum
@@ -75,8 +74,10 @@ def get_building_segment_skylight_roof_areas_dict(climate_zone, building):
                             "total_envelope_roof_area"
                         ] += getattr_(surface, "surface", "area")
 
-                        building_segment_roof_areas["total_skylight_area"] += sum(
-                            find_all("subsurfaces[*].glazed_area", surface)
-                        ) + sum(find_all("subsurfaces[*].opaque_area", surface))
+                        building_segment_roof_areas["total_skylight_area"] += pint_sum(
+                            find_all("subsurfaces[*].glazed_area", surface), ZERO.AREA
+                        ) + pint_sum(
+                            find_all("subsurfaces[*].opaque_area", surface), ZERO.AREA
+                        )
 
     return building_segment_roof_areas_dict
