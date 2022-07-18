@@ -1,4 +1,5 @@
-from rct229.rule_engine.rule_base import RuleDefinitionListIndexedBase, RuleDefinitionBase
+from rct229.rule_engine.rule_base import RuleDefinitionBase
+from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 from rct229.ruleset_functions.compare_schedules import compare_schedules
 from rct229.ruleset_functions.normalize_interior_lighting_schedules import normalize_interior_lighting_schedules
@@ -17,7 +18,7 @@ class Section6Rule9(RuleDefinitionListIndexedBase):
     def __init__(self):
         super(Section6Rule9, self).__init__(
             rmrs_used=UserBaselineProposedVals(False, True, True),
-            each_rule=Section6Rule9.RuleSetModelInstanceRule(),
+            each_rule=Section6Rule9.RulesetModelInstanceRule(),
             index_rmr="proposed",
             id="6-9",
             description="Proposed building is modeled with other programmable lighting controls through a 10% "
@@ -30,28 +31,28 @@ class Section6Rule9(RuleDefinitionListIndexedBase):
         rmd_p = context.proposed
         return {"is_leap_year": rmd_p["calendar"]["is_leap_year"]}
 
-    class RuleSetModelInstanceRule(RuleDefinitionListIndexedBase):
+    class RulesetModelInstanceRule(RuleDefinitionListIndexedBase):
         def __init__(self):
-            super(Section6Rule9.RuleSetModelInstanceRule, self).__init__(
+            super(Section6Rule9.RulesetModelInstanceRule, self).__init__(
                 rmrs_used=UserBaselineProposedVals(False, True, True),
-                each_rule=Section6Rule9.RuleSetModelInstanceRule.BuildingRule(),
+                each_rule=Section6Rule9.RulesetModelInstanceRule.BuildingRule(),
                 index_rmr="proposed",
                 list_path="buildings[*]",
                 required_fields={"$": ["schedules"]},
             )
 
         def create_data(self, context, data=None):
-            rmd_p = context.proposed
+            rmi_p = context.proposed
             return {
                 **data,
-                "schedules_p": rmd_p["schedules"],
+                "schedules_p": rmi_p["schedules"],
             }
 
         class BuildingRule(RuleDefinitionListIndexedBase):
             def __init__(self):
-                super(Section6Rule9.RuleSetModelInstanceRule.BuildingRule, self).__init__(
+                super(Section6Rule9.RulesetModelInstanceRule.BuildingRule, self).__init__(
                     rmrs_used=UserBaselineProposedVals(False, True, True),
-                    each_rule=Section6Rule9.RuleSetModelInstanceRule.BuildingRule.ZoneRule(),
+                    each_rule=Section6Rule9.RulesetModelInstanceRule.BuildingRule.ZoneRule(),
                     index_rmr="proposed",
                     list_path="$..zones[*]",
                 )
@@ -72,9 +73,9 @@ class Section6Rule9(RuleDefinitionListIndexedBase):
 
             class ZoneRule(RuleDefinitionListIndexedBase):
                 def __init__(self):
-                    super(Section6Rule9.RuleSetModelInstanceRule.BuildingRule.ZoneRule, self).__init__(
+                    super(Section6Rule9.RulesetModelInstanceRule.BuildingRule.ZoneRule, self).__init__(
                         rmrs_used=UserBaselineProposedVals(False, True, True),
-                        each_rule=Section6Rule9.RuleSetModelInstanceRule.BuildingRule.ZoneRule.SpaceRule(),
+                        each_rule=Section6Rule9.RulesetModelInstanceRule.BuildingRule.ZoneRule.SpaceRule(),
                         index_rmr="proposed",
                         list_path="spaces[*]",
                     )
@@ -89,7 +90,7 @@ class Section6Rule9(RuleDefinitionListIndexedBase):
 
                 class SpaceRule(RuleDefinitionBase):
                     def __init__(self):
-                        super(Section6Rule9.RuleSetModelInstanceRule.BuildingRule.ZoneRule.SpaceRule, self).__init__(
+                        super(Section6Rule9.RulesetModelInstanceRule.BuildingRule.ZoneRule.SpaceRule, self).__init__(
                             rmrs_used=UserBaselineProposedVals(False, True, True)
                         )
 
@@ -100,14 +101,15 @@ class Section6Rule9(RuleDefinitionListIndexedBase):
                         schedules_b = data["schedules_b"]
                         schedules_p = data["schedules_p"]
                         building_open_schedule_p = data["building_open_schedule_p"]
+                        is_leap_year = data["is_leap_year"]
 
                         normalized_schedule_b = normalize_interior_lighting_schedules(space_b, avg_space_height,
-                                                                                      schedules_b)
+                                                                                      schedules_b, adjust_for_credit=False)
                         normalized_schedule_p = normalize_interior_lighting_schedules(space_p, avg_space_height,
-                                                                                      schedules_p)
+                                                                                      schedules_p, adjust_for_credit=True)
                         schedule_comparison_result_dictionary = compare_schedules(normalized_schedule_p,
                                                                                   normalized_schedule_b,
-                                                                                  building_open_schedule_p, 1.0)
+                                                                                  building_open_schedule_p, is_leap_year=is_leap_year)
                         daylight_control = any(
                             find_all(
                                 "interior_lighting[*].are_schedules_used_for_modeling_daylighting_control",
