@@ -1,9 +1,7 @@
 from rct229.data.schema_enums import schema_enums
 from rct229.data_fns.table_G3_111_fns import table_G3_1_1_1_lookup
-from rct229.rule_engine.rule_base import (
-    RuleDefinitionBase,
-    RuleDefinitionListIndexedBase,
-)
+from rct229.rule_engine.rule_base import RuleDefinitionBase
+from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 from rct229.ruleset_functions.get_area_type_window_wall_area_dict import (
     get_area_type_window_wall_area_dict,
@@ -13,9 +11,12 @@ from rct229.utils.std_comparisons import std_equal
 
 CASE3_WARN_MESSAGE = "Building is not all new and baseline WWR matches values prescribed in Table G3.1.1-1. However, the fenestration area prescribed in Table G3.1.1-1 does not apply to the existing envelope per Table G3.1 baseline column #5 (c). For existing envelope, the baseline fenestration area must equal the existing fenestration area prior to the proposed work. A manual check is therefore required to verify compliance."
 CASE4_WARN_MESSAGE = "Building is not all new and baseline WWR does not match values prescribed in Table G3.1.1-1. However, the fenestration area prescribed in Table G3.1.1-1 does not apply to the existing envelope per Table G3.1 baseline column #5 (c). For existing envelope, the baseline fenestration area must equal the existing fenestration area prior to the proposed work. A manual check is therefore required to verify compliance"
-NONE_WARN_MESSAGE = "Building vertical fenestration area type is missing, manual check is required."
+NONE_WARN_MESSAGE = (
+    "Building vertical fenestration area type is missing, manual check is required."
+)
 
-OTHER = schema_enums["VerticalFenestrationBuildingAreaType2019ASHRAE901"].OTHER.name
+OTHER = schema_enums["VerticalFenestrationBuildingAreaType2019ASHRAE901"].OTHER
+
 
 class Section5Rule18(RuleDefinitionListIndexedBase):
     """Rule 18 of ASHRAE 90.1-2019 Appendix G Section 5 (Envelope)"""
@@ -127,7 +128,9 @@ class Section5Rule18(RuleDefinitionListIndexedBase):
             def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
                 manual_check_msg = ""
                 if not calc_vals["is_all_new"]:
-                    if std_equal(calc_vals["area_type_wwr"], calc_vals["area_type_target_wwr"]):
+                    if std_equal(
+                        calc_vals["area_type_wwr"], calc_vals["area_type_target_wwr"]
+                    ):
                         manual_check_msg = CASE3_WARN_MESSAGE
                     else:
                         manual_check_msg = CASE4_WARN_MESSAGE

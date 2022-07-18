@@ -11,20 +11,18 @@ from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.pint_utils import ZERO
 
-DOOR = schema_enums["SubsurfaceClassificationType"].DOOR.name
+DOOR = schema_enums["SubsurfaceClassificationType"].DOOR
 
 
 def get_building_scc_skylight_roof_ratios_dict(climate_zone, building):
     """Gets a dictionary mapping skylight and envelope roof ratios for a building for residential, non-residential,
     mixed and semi-heated surface conditioning categories
-
             Parameters
             ----------
             climate_zone : str
                 One of the ClimateZone2019ASHRAE901 enumerated values
             building : dict
                 A dictionary representing a building as defined by the ASHRAE229 schema
-
             Returns
             -------
             dict

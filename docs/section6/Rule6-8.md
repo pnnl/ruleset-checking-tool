@@ -1,7 +1,7 @@
 
-# Lighting - Rule 6-13
+# Lighting - Rule 6-8
 
-**Rule ID:** 6-13  
+**Rule ID:** 6-8  
 **Rule Description:** Additional occupancy sensor controls in the proposed building are modeled through schedule adjustments based on factors defined in Table G3.7.  
 **Rule Assertion:** Proposed RMR = expected value  
 **Appendix G Section:** Section G3.1-6(i) Modeling Requirements for the Proposed design  
@@ -48,6 +48,10 @@
 
           - Case 3: Else, lighting schedule in P_RMR is higher than lighting schedule in B_RMR times adjusted lighting occupancy sensor reduction factor: `if schedule_comparison_result == "EQUAL AND MORE": UNDETERMINED and raise_message "LIGHTING SCHEDULE IN P-RMR INCLUDING ADJUSTED LIGHTING OCCUPANCY SENSOR REDUCTION FACTOR IS HIGHER THAN THAT IN B-RMR. VERIFY ADDITIONAL OCCUPANCY SENSOR CONTROL IS MODELED CORRECTLY IN P-RMR."`  
 
+**Notes:**
+  1. Updated the Rule ID from 6-13 to 6-9 on 6/3/2022
+  2. Updated the Rule ID from 6-9 to 6-8 on 6/8/2022
+
 **Temporary Function note:**
 
 `compare_schedule_result = compare_schedules(Schedule 1, Schedule 2, Mask Schedule, comparison factor)`
@@ -58,3 +62,4 @@
 - When Mask Schedule hourly value is 0, schedules need to be the same at that hour. If Mask Schedule hourly value is 1, Schedule 1 needs to be comparison factor times Schedule 2 at that hour. If Mask Schedule hourly value is 2, skip comparison.
 - can return "match", "equal and less", "equal and more", "equal, less and more", with bin data, TBD
 
+**[Back](../_toc.md)**

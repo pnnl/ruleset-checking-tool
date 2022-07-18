@@ -1,18 +1,16 @@
-from rct229.rule_engine.rule_base import (
-    RuleDefinitionBase,
-    RuleDefinitionListIndexedBase,
-)
+from rct229.rule_engine.rule_base import RuleDefinitionBase
+from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 from rct229.utils.jsonpath_utils import find_all
 
 
-class Section6Rule11(RuleDefinitionListIndexedBase):
-    """Rule 11 of ASHRAE 90.1-2019 Appendix G Section 6 (Lighting)"""
+class Section6Rule6(RuleDefinitionListIndexedBase):
+    """Rule 6 of ASHRAE 90.1-2019 Appendix G Section 6 (Lighting)"""
 
     def __init__(self):
-        super(Section6Rule11, self).__init__(
+        super(Section6Rule6, self).__init__(
             rmrs_used=UserBaselineProposedVals(False, True, False),
-            each_rule=Section6Rule11.BuildingRule(),
+            each_rule=Section6Rule6.BuildingRule(),
             index_rmr="baseline",
             id="6-11",
             description="Baseline building is not modeled with daylighting control",
@@ -21,7 +19,7 @@ class Section6Rule11(RuleDefinitionListIndexedBase):
 
     class BuildingRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section6Rule11.BuildingRule, self).__init__(
+            super(Section6Rule6.BuildingRule, self).__init__(
                 required_fields={
                     "$": ["building_segments"],
                     "$.building_segments[*]": ["zones"],
@@ -48,7 +46,7 @@ class Section6Rule11(RuleDefinitionListIndexedBase):
                 "ids_for_interior_lighting_instances_with_daylighting_control": ids_for_interior_lighting_instances_with_daylighting_control
             }
 
-        def rule_check(self, context, calc_vals, data=None):
+        def rule_check(self, context, calc_vals=None, data=None):
             return (
                 len(
                     calc_vals[
