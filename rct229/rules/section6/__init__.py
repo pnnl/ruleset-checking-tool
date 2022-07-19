@@ -7,8 +7,12 @@ __all__ = [
     "section6rule3",
     "section6rule4",
     "section6rule6",
-    "section6rule7"
+    "section6rule7",
+    "section6rule8",
+    "section6rule9",
 ]
+
+from rct229.rules.section6 import section6rule7
 
 
 def __getattr__(name):
