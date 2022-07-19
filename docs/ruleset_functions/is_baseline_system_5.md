@@ -12,17 +12,21 @@
 - **is_baseline_system_5**: The function returns either Sys-5, Sys-5b, or Not_Sys_5 string output which indicates whether the HVAC system is ASHRAE 90.1 2019 Appendix G system 5 (Package VAV with Reheat) or system 5b (system 5 with purchased heating).   
  
 **Function Call:** 
-1. is_hvac_sys_heating_type_fluid_loop()
-2. is_hvac_sys_cooling_type_DX()
-3. is_hvac_sys_fan_sys_VSD()  
-5. is_hvac_sys_fluid_loop_purchased_heating()
+1. does_each_zone_have_only_one_terminal()    
+2. is_hvac_system_multizone()  
+3. is_hvac_sys_cooling_type_DX()
+4. is_hvac_sys_fan_sys_VSD()  
+5. is_hvac_sys_preheating_type_fluid_loop()
+6. is_hvac_sys_preheat_fluid_loop_attached_to_boiler()
+7. is_hvac_sys_preheat_fluid_loop_purchased_heating()  
 8. are_all_terminal_heat_sources_hot_water()  
-9. are_all_terminal_cool_sources_none_or_null() 
-10. are_all_terminal_fans_null()  
-11. are_all_terminal_types_VAV()  
-12. are_all_terminal_supplies_ducted()  
-13. does_each_zone_have_only_one_terminal()    
-14. is_hvac_system_multizone()  
+9. are_all_terminal_heating_loops_attached_to_boiler()  
+10. are_all_terminal_cool_sources_none_or_null() 
+11. are_all_terminal_fans_null()  
+12. are_all_terminal_types_VAV()  
+13. are_all_terminal_supplies_ducted()  
+
+
  
 ## Logic:    
 - Create an object associated with the hvac system: `hvac_b = hvac_b.id`  
