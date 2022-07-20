@@ -26,7 +26,9 @@
 
 - For each building segment in building: `for building_segment_p in P_RMR.building.building_segments:`  
 
-    - For each zone in thermal block: `zone_p in building_segment_p.zones:` 
+  - For each thermal block in building segment: `thermal_block_p in building_segment_p.thermal_blocks:`  
+
+    - For each zone in thermal block: `zone_p in thermal_block_p.zones:`  
 
       - For each space in zone: `space_p in zone_p.spaces:`  
 
@@ -36,7 +38,7 @@
 
         - Get normalized space lighting schedule: `normalized_schedule_p = normalize_space_schedules(space_p.interior_lighting)`
 
-        - Compare lighting schedules in P_RMR and B_RMR: `schedule_comparison_result = compare_schedules(normalized_schedule_p, normalized_schedule_b, building_open_schedule_p)`  
+        - Compare lighting schedules in P_RMR and B_RMR: `schedule_comparison_result = compare_schedules(normalized_schedule_p, normalized_schedule_b, building_open_schedule_p, adjusted_reduction_factor_p)`  
 
           **Rule Assertion:**
 
