@@ -72,6 +72,8 @@ class Section5Rule28(RuleDefinitionListIndexedBase):
                         self,
                     ).__init__(
                         rmrs_used=UserBaselineProposedVals(False, True, True),
+                        fail_msg="Subsurface that is not regulated (Not part of building envelope) is not modeled "
+                                 "with the same area, U-factor and SHGC in the baseline as in the propsoed design.",
                     )
 
                 def get_calc_vals(self, context, data=None):
