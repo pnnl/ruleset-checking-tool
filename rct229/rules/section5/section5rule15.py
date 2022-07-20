@@ -42,16 +42,14 @@ class Section5Rule15(RuleDefinitionListIndexedBase):
                 required_fields={},
                 each_rule=Section5Rule15.BuildingRule.SlabOnGradeFloorRule(),
                 index_rmr="baseline",
+                list_path="$..surfaces[*]",
             )
 
-        def create_context_list(self, context, data=None):
-            building = context.baseline
-            # List of all baseline slab on grade floor surfaces to become the context for SlabOnGradeFloorRule
-            return [
-                UserBaselineProposedVals(None, surface, None)
-                for surface in find_all("$..surfaces[*]", building)
-                if get_opaque_surface_type(surface) == OST.UNHEATED_SOG
-            ]
+        def list_filter(self, context_item, data=None):
+            surface_b = context_item.baseline
+            return (
+                    get_opaque_surface_type(surface_b) == OST.UNHEATED_SOG
+            )
 
         def create_data(self, context, data=None):
             building = context.baseline
