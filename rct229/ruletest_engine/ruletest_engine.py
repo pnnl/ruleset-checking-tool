@@ -98,8 +98,8 @@ def evaluate_outcome_enumeration_str(outcome_enumeration_str):
         test_result = "undetermined"
     elif outcome_enumeration_str == "REQUIRES_MANUAL_CHECK":
         test_result = "manual_check"
-    elif outcome_enumeration_str == "NA":
-        test_result = False
+    elif outcome_enumeration_str == "NOT_APPLICABLE":
+        test_result = "not_applicable"
     else:
         raise ValueError(
             f"OUTCOME: The enumeration {outcome_enumeration_str} does not have a test result interpretation."
@@ -172,7 +172,7 @@ def process_test_result(test_result, test_dict, test_id):
         elif test_result == "manual_check":
             outcome_text = f"FAILURE: Test {test_id} returned 'manual_check' unexpectedly."
         else:
-            outcome_text = f"FAILURE: Test {test_id} did not return the expected result '{test_result}'"
+            outcome_text = f"FAILURE: Test {test_id} returned '{test_result}' unexpectedly"
 
     return outcome_text, received_expected_outcome
 
