@@ -1,7 +1,6 @@
 import pytest
 
 from rct229.data import data
-from rct229.data.schema_enums import schema_enums
 from rct229.data_fns.table_G3_6_fns import (
     EXTERIOR_LIGHTING_AREA_ENUMERATION_TO_BUILDING_EXTERIOR_TYPE_MAP,
     table_G3_6_lookup,
