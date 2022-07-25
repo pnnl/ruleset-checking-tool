@@ -19,7 +19,7 @@
 
     - Check if surface is exterior: `if surface_p.adjacent_to == "EXTERIOR":`
 
-      - Check if surface has any subsurface that is not door, set daylight flag as TRUE: `if ( subsurface.classification != "DOOR" for subsurface in surface_p.subsurfaces ): zone_pdaylight_flag_p == TRUE`
+      - Check if surface has any subsurface that is not door, set daylight flag as TRUE: `if ( subsurface.classification != "DOOR" for subsurface in surface_p.subsurfaces ): daylight_flag_p == TRUE`
 
   - For each space in zone: `space_p in zone_p.spaces:`
 

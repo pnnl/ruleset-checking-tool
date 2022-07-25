@@ -12,8 +12,6 @@ __all__ = [
     "section6rule9",
 ]
 
-from rct229.rules.section6 import section6rule7
-
 
 def __getattr__(name):
     if name in __all__:
