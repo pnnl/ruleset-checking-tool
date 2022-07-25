@@ -15,7 +15,7 @@
 - Set does_each_zone_have_only_one_terminal = TRUE: `does_each_zone_have_only_one_terminal = TRUE`  
 - For each zone id in zone_id_list: `For zone_id in zone_id_list:`   
     - Create zone object: `zone = zone_id`
-    - Check if there is not one terminal unit associated with the zone: `if len(zone.terminals) != 1:`     
+    - check if there is more than one terminal or no terminal units associated with the zone: `if len(zone.terminals) != 1:`     
         - Set does_each_zone_have_only_one_terminal = FALSE: `does_each_zone_have_only_one_terminal = FALSE`  
         - Leave the loop: `break`  
 
