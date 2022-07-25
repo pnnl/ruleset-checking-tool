@@ -89,15 +89,12 @@ def evaluate_outcome_enumeration_str(outcome_enumeration_str):
     """
 
     # Check result of rule evaluation against known string constants
-    # (TODO: these constants should be stored elsewhere rather than called directly)
     if outcome_enumeration_str == "PASSED":
         test_result = "pass"
     elif outcome_enumeration_str == "FAILED":
         test_result = "fail"
-    elif outcome_enumeration_str == "UNDETERMINED":
+    elif outcome_enumeration_str == "UNDETERMINED": # previously used for manual_check
         test_result = "undetermined"
-    elif outcome_enumeration_str == "REQUIRES_MANUAL_CHECK":
-        test_result = "manual_check"
     elif outcome_enumeration_str == "NOT_APPLICABLE":
         test_result = "not_applicable"
     else:
