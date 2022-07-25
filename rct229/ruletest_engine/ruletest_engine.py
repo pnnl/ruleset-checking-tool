@@ -79,7 +79,7 @@ def evaluate_outcome_enumeration_str(outcome_enumeration_str):
     outcome_enumeration_str : str
 
         String equal to a set of predetermined enumerations for rule outcomes. These enumerations describe things such
-        as whether a test passed, failed, required manual check, etc.
+        as whether a test passed, failed, undetermined, etc.
 
     Returns
     -------
@@ -112,7 +112,7 @@ def process_test_result(test_result, test_dict, test_id):
     ----------
     test_result : str
 
-        String describing rule outcome. OPTIONS: 'pass', 'fail', 'undetermined', 'manual_check'
+        String describing rule outcome. OPTIONS: 'pass', 'fail', 'undetermined'
 
     test_dict : dict
 
@@ -154,8 +154,6 @@ def process_test_result(test_result, test_dict, test_id):
             outcome_text = None
         elif test_result == "undetermined":
             outcome_text = None
-        elif test_result == "manual_check":
-            outcome_text = None
 
 
     else:
@@ -166,8 +164,6 @@ def process_test_result(test_result, test_dict, test_id):
             outcome_text = f"FAILURE: Test {test_id} failed unexpectedly. The following condition was not identified: {description}"
         elif test_result == "undetermined":
             outcome_text = f"FAILURE: Test {test_id} returned 'undetermined' unexpectedly."
-        elif test_result == "manual_check":
-            outcome_text = f"FAILURE: Test {test_id} returned 'manual_check' unexpectedly."
         else:
             outcome_text = f"FAILURE: Test {test_id} returned '{test_result}' unexpectedly"
 
