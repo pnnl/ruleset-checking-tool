@@ -114,14 +114,14 @@ lighting_space_enumeration_to_lpd_space_type_map = {
     "WAREHOUSE_STORAGE_AREA_SMALLER_HAND_CARRIED_ITEMS": "warehouse - fine storage",
 }
 
-FULL_AUTO_ON = schema_enums["LightingOccupancyControlType"].FULL_AUTO_ON.name
-PARTIAL_AUTO_ON = schema_enums["LightingOccupancyControlType"].PARTIAL_AUTO_ON.name
-MANUAL_ON = schema_enums["LightingOccupancyControlType"].MANUAL_ON.name
+FULL_AUTO_ON = schema_enums["LightingOccupancyControlType"].FULL_AUTO_ON
+PARTIAL_AUTO_ON = schema_enums["LightingOccupancyControlType"].PARTIAL_AUTO_ON
+MANUAL_ON = schema_enums["LightingOccupancyControlType"].MANUAL_ON
+OTHER = schema_enums["LightingOccupancyControlType"].OTHER
+NONE = schema_enums["LightingOccupancyControlType"].NONE
 
 # ATRIUM_LOW_MEDIUM
-def table_G3_7_lookup(
-    lighting_space_type, occupancy_control_type, space_height, space_area
-):
+def table_G3_7_lookup(lighting_space_type, space_height, space_area):
     """Returns the lighting power density for a space as
     required by ASHRAE 90.1 Table G3.7
 
@@ -129,8 +129,6 @@ def table_G3_7_lookup(
     ----------
     lighting_space_type : str
         One of the LightingSpaceType2019ASHRAE901TG37 enumeration values
-    occupancy_control_type: str
-        One of the LightingOccupancyControlOptions enumeration values
     space_height : Quantity
         The height of the space
     space_area: Quantity
@@ -163,17 +161,6 @@ def table_G3_7_lookup(
             + watts_per_ft * ureg("watt / foot") * space_height / space_area
         )
 
-    control_credit = 0.0
-    manon_or_partauto = osstd_entry["manon_or_partauto"]
-    if occupancy_control_type in [PARTIAL_AUTO_ON, MANUAL_ON]:
-        if manon_or_partauto:
-            control_credit = osstd_entry["occup_sensor_savings"]
-        else:
-            control_credit = osstd_entry["occup_sensor_auto_on_svgs"]
-    elif occupancy_control_type == FULL_AUTO_ON:
-        control_credit = osstd_entry["occup_sensor_auto_on_svgs"]
-    else:
-        # no credit
-        control_credit = 0.0
+    control_credit = osstd_entry["occup_sensor_auto_on_svgs"]
 
     return {"lpd": lpd, "control_credit": control_credit}
