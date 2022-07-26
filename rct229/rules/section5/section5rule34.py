@@ -1,11 +1,10 @@
-from rct229.rule_engine.rule_base import (
-    RuleDefinitionBase,
-    RuleDefinitionListIndexedBase,
-)
+from rct229.rule_engine.rule_base import RuleDefinitionBase
+from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 from rct229.ruleset_functions.get_building_segment_skylight_roof_areas_dict import (
     get_building_segment_skylight_roof_areas_dict,
 )
+from rct229.utils.pint_utils import ZERO
 from rct229.utils.std_comparisons import std_equal
 
 SKYLIGHT_THRESHOLD = 0.03
@@ -66,16 +65,19 @@ class Section5Rule34(RuleDefinitionListIndexedBase):
                 skylight_roof_areas_dictionary_p = data[
                     "skylight_roof_areas_dictionary_p"
                 ]
-                skylight_roof_ratio_p = (
-                    skylight_roof_areas_dictionary_p[building_segment_p["id"]][
-                        "total_skylight_area"
-                    ]
-                    / skylight_roof_areas_dictionary_p[building_segment_p["id"]][
-                        "total_envelope_roof_area"
-                    ]
-                )
 
-                return skylight_roof_ratio_p <= SKYLIGHT_THRESHOLD
+                total_skylight_area_p = skylight_roof_areas_dictionary_p[
+                    building_segment_p["id"]
+                ]["total_skylight_area"]
+                total_envelope_roof_area_p = skylight_roof_areas_dictionary_p[
+                    building_segment_p["id"]
+                ]["total_envelope_roof_area"]
+                # avoid zero division
+                return (
+                    total_envelope_roof_area_p > ZERO.AREA
+                    and total_skylight_area_p / total_envelope_roof_area_p
+                    <= SKYLIGHT_THRESHOLD
+                )
 
             def get_calc_vals(self, context, data=None):
                 building_segment_b = context.baseline

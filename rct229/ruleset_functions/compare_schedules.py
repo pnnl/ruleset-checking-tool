@@ -1,13 +1,11 @@
-from rct229.utils.assertions import RCTFailureException, assert_
+from rct229.utils.assertions import assert_
 from rct229.utils.std_comparisons import std_equal
 
 REGULAR_YEAR_HOURS = 8760
 LEAP_YEAR_HOURS = 8784
 
 
-def compare_schedules(
-    schedule_1, schedule_2, mask_schedule, comparison_factor: float, is_leap_year: bool
-):
+def compare_schedules(schedule_1, schedule_2, mask_schedule, is_leap_year: bool):
     """Compare two schedules and determine if they match with or without a comparison factor when applicable
     NOTE: The function only works with hourly schedule for now.
 
@@ -20,8 +18,6 @@ def compare_schedules(
         if hourly value is 2, schedule_1 is evaluated to be equal to schedule_2 times the comparison factor;
         if hourly value is 0, comparison was skipped for that particular hour
         (example when evaluating shut off controls, only he building closed hrs are evaluated) exmaple: [1,1,1,1,1...]
-    comparison_factor: float, The target multiplier number for schedule_1 compared to schedule_2, i.e. when applicable,
-        the hourly value in schedule_1 shall be equal to that in schedule_2 times the comparison_factor. 1.0
     is_leap_year: bool, indicate whether the comparison is in a leap year or not. True / False
 
     Returns
@@ -56,12 +52,6 @@ def compare_schedules(
             eflh_schedule_1 += schedule_1[index]
             eflh_schedule_2 += schedule_2[index]
             if schedule_1[index] == schedule_2[index]:
-                total_hours_matched += 1
-        elif hourly_value == 2:
-            total_hours_compared += 1
-            eflh_schedule_1 += schedule_1[index]
-            eflh_schedule_2 += schedule_2[index] * comparison_factor
-            if std_equal(schedule_1[index], schedule_2[index] * comparison_factor):
                 total_hours_matched += 1
 
     eflh_difference = eflh_schedule_1 - eflh_schedule_2

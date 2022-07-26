@@ -40,9 +40,9 @@
     - Case 1: For heating hot water loop that boiler serves, if total pump power per flow rate is equal to 19W/gpm: `if fluid_loop_b.pump_power_per_flow_rate == 19: PASS`
 
     - Case 2: Else: `else: FAIL`
-
-**[Back](../_toc.md)**
-
+    
 **Notes:**
 
 1. This rule does not check any pump power on heating loop that is not connected to boiler(s). If RMR has heating loop not connected to boiler(s), it will fail the one HHW loop rule. 
+
+**[Back](../_toc.md)**
