@@ -37,12 +37,12 @@ The core functionality of the RCT is the evaluation of logic defining each rule 
 ### Software Testing Workflow
 
 The RCT validation and verification software test suite is run using the *<ADD IN FUTURE>* command.  This command composes RMR triplets for each of the Rule Tests and then evaluates each RMR triplet for the corresponding Rule Definition using the same rule engine as the Project Testing Workflow.  A report is provided that details any Rule Tests that provided unexpected results.
-  
+
 #### Rule Tests
 The test cases for the Software Testing Workflow are defined in the Rule Test JSON files.  These files are located in the [rct229/ruletest_engine/ruletest_jsons](rct229/ruletest_engine/ruletest_jsons) directory.  The Rule Tests are contained within JSON files that define the related Rule Definition, the RMR transformation to apply, and the expected outcome of the test evaluation.  The JSON files can be generated using an Excel spreadsheet and Python scripts.  This process is described in the [Rule Test JSON Generation Guide](rct229/ruletest_engine/Ruletest_JSON_Generation_Guide.md).
- 
+
 ## Developing the RCT
-  
+
 ### Commands
 The following provides some useful commands as you get started developing the RCT package.
 
@@ -52,8 +52,7 @@ Install `pipenv` using `pip`
 `pip install pipenv`
 
 Now tests can be run by first installing dependencies and then running pytest.
-1. `pipenv install --dev --skip-lock`
-2. `pipenv lock --pre`
+1. `pipenv install --dev`
 2. `pipenv run pytest`
 
 You can also package with pipenv to test the CLI tool.
@@ -85,6 +84,9 @@ Before committing changes you should run the following commands from the `rulese
 1. `pipenv run isort .` to sort imports according to PEP8 https://www.python.org/dev/peps/pep-0008/
 2. `pipenv run black .` to otherwise format code according to PEP8
 3. `pipenv run pytest` to run all unit tests
+
+#### Mocking functions for pytests:
+- For an explanation of how to specify `<module>` in `patch("<module>.<imported_thing>")` see: https://medium.com/@durgaswaroop/writing-better-tests-in-python-with-pytest-mock-part-2-92b828e1453c
 
 
 ## Disclaimer Notice      

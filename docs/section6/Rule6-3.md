@@ -2,50 +2,46 @@
 # Lighting - Rule 6-3
 
 **Rule ID:** 6-3  
-**Rule Description:** Spaces in proposed building with hardwired lighting, including Hotel/Motel Guest Rooms, Dormitory Living Quarters, Interior Lighting Power >= Table 9.6.1; For Dwelling Units, Interior Lighting Power >= 0.6W/sq.ft.  
-**Appendix G Section:** Table G3.1 Part 6 Lighting under Proposed Building Performance paragraph (e)  
-**Appendix G Section Reference:**  
+**Rule Description:** Where a complete lighting system exists, the actual lighting power for each thermal block shall be used in the model.  Where a lighting system has been designed and submitted with design documents, lighting power shall be determined in accordance with Sections 9.1.3 and 9.1.4. Where lighting neither exists nor is submitted with design documents, lighting shall comply with but not exceed the requirements of Section 9. Lighting power shall be determined in accordance with the Building Area Method (Section 9.5.1)
 
-- Table 9.6.1, Lighting Power Density Allowances Using the Space-by-Space Method and Minimum Control Requirements Using Either Method  
+**Appendix G Section:** Section G3.1-6(a)(b)(c) Modeling Requirements for the Proposed Design  
 
 **Applicability:** All required data elements exist for P_RMR  
-**Applicability Checks:**  
+**Applicability Checks:** None  
+**Manual Check:** No
 
-  1. Building has Hotel/Model Guestroom or Dormitory Living Quarters, Dwelling Units space types  
-
-**Manual Check:** None  
 **Evaluation Context:** Each Data Element  
-**Data Lookup:** Table 9.6.1 and Table G3.7  
+**Data Lookup:** Table 9.5.1  
+**Function Call:**  
+
+  - get_lighting_status_type()
+  - match_data_element()
+
 ## Rule Logic: 
 
-- **Applicability Check 1:** Check if any Hotel/Model Guestroom or Dormitory Living Quarters, or Dwelling Units exist in the building segment in the proposed model: ```for building_segment_p in P_RMR.building.building_segments:```  
+- For each building segment in the proposed model: `building_segment_p in P_RMR.building.building_segments:`  
 
-  - For each building segment in the proposed model: ```for building_segment_p in P_RMR.building.building_segments:```  
+  - Get lighting status type dictionary for building segment: `space_lighting_status_type_dict = get_lighting_status_type(building_segment_p)`
 
-    - For each thermal_block in building segment: ```thermal_block_p in building_segment_p.thermal_blocks:```  
+    - For each zone in a building segment: `zone_p in building_segment_p.zones:`  
 
-      - For each zone in thermal block: ```zone_p in thermal_block_p.zones:```  
+      - For each space in zone: `space_p in zone_p.spaces:`  
 
-        - For each space in zone: ```space_p in zone_p.spaces:```  
+        - Get total lighting power density in space: `total_space_LPD_p = sum(interior_lighting.power_per_area for interior_lighting in space_p.interior_lighting)`
 
-          - Check if lighting_space_type of the space is "Guest Room", "Dormitory Living Quarters" or "Dwelling Units": ```if ( space_p.lighting_space_type == "Guest Room" ) OR ( space_p.lighting_space_type == "Dormitory Living Quarters" ) OR ( space_p.lighting_space_type == "Dwelling Units" ):```  
+        - Get matching space in U_RMR: `space_u = match_data_element(U_RMR, Spaces, space_p.id)`
 
-- For each building segment in the proposed model: ```for building_segment_p in P_RMR.building.building_segments:```  
+          - Get total lighting power density in space in U_RMR: `total_space_LPD_u = sum(interior_lighting.power_per_area for interior_lighting in space_u.interior_lighting)`
 
-  - For each thermal_block in building segment: ```thermal_block_p in building_segment_p.thermal_blocks:```  
+        **Rule Assertion:**  
 
-    - For each zone in thermal block: ```zone_p in thermal_block_p.zones:```  
+        - Case 1: If lighting status type in space is not-yet designed, or as-designed or as-existing, and interior lighting power density in P_RMR matches U_RMR: `if total_space_LPD_p == total_space_LPD_u: PASS`
 
-      - For each space in zone: ```space_p in zone_p.spaces:```  
+        - Case 2: Else if lighting status type in space is as-designed or as-existing, and interior lighting power density in P_RMR does not match U_RMR: `else if ( space_lighting_status_type_dict[space.id] == "AS-DESIGNED OR AS-EXISTING" ) and ( total_space_LPD_p != total_space_LPD_u ): FAIL and raise_warning "LIGHTING EXISTS OR IS SUBMITTED WITH DESIGN DOCUMENTS. LIGHTING POWER DENSITY IN P_RMR DOES NOT MATCH U_RMR."`
 
-        - Check if lighting_space_type of the space is "Guest Room" or "Dormitory Living Quarters", get the lighting power density allowance for the proposed model from Table 9.6.1: ```if ( space_p.lighting_space_type == "Guest Room" ) OR ( space_p.lighting_space_type == "Dormitory Living Quarters" ): lighting_power_allowance_p = data_lookup(table_9_6_1, space_p.lighting_space_type)```  
+        - Case 3: Else, interior lighting power density in P_RMR does not match U_RMR: `else: UNDETERMINED and raise_warning "LIGHTING IS NOT YET DESIGNED, OR LIGHTING IS AS-DESIGNED OR AS-EXISTING BUT MATCHES TABLE 9.5.1. LIGHTING POWER DENSITY IN P_RMR DOES NOT MATCH U_RMR."`
 
-        - Else check if the lighting_space_type is "Dwelling Unit", get the lighting power density allowance from Table G3.1-6-e as 0.6W/sq.ft.: ```elseif ( space_p.lighting_space_type == "Dwelling Unit" ): lighting_power_allowance_p = 0.6```  
+**Notes:**
+  1. Updated the Rule ID from 6-4 to 6-3 on 6/8/2022
 
-        - Get the total design power_per_area for the space: ```space_lighting_power_per_area_p = sum( lighting.power_per_area for lighting in space_p.interior_lighting )```  
-
-        - Get the matching space in U_RMR: ```space_u = match_data_element(U_RMR, spaces, space_p.id)```  
-
-          - Get the total design power_per_area for the space in U_RMR: ```space_lighting_power_per_area_u = sum( lighting.power_per_area for lighting in space_u.interior_lighting )```  
-
-            **Rule Assertion:** For each space that is Hotel/Motel Guestroom or Dormitory Living Quarters in the proposed model, lighting power used in the simulation shall be equal to the lighting power allowance in Table 9.6.1 or as designed, whichever is larger; for each space that is Dwelling Units in the proposed model, lighting power used in the simulation shall be equal to 0.6W/sq.ft. or as designed, whichever is larger: ```space_lighting_power_per_area_p = max( lighting_power_allowance_p, space_lighting_power_per_area_u)```  
+**[Back](../_toc.md)**

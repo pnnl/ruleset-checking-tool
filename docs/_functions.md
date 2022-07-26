@@ -28,4 +28,14 @@ Inputs:
 Returns:  
 - **data_element**: A RMR Data Element object.
 
+## match_data_element_exist
+Description: Returns a true or false to indicate whether there is a data element with the matching `name` in either a User, Proposed or Baseline RMR. True means that it exists and false means that it does not exist.
+Inputs:  
+- **rmr:** The RMR data object (U_RMR, P_RMR, B_RMR) for determining if there is a matching data element.  
+- **data_group:** The name of the RMR schema Data Group for looking up the data element.   
+- **name:** The name parameter used for looking up the Data Element.
+
+Returns:  
+- **data_element_exist**: True or False.
+
 **[Back](_toc.md)**

@@ -7,6 +7,10 @@
         {
             "space_type": "dormitory - living quarters",
             "w/ft^2": 0.50
+        },
+        {
+            "space_type": "dwelling unit",
+            "w/ft^2": 0.60
         }
            ]
 }

@@ -33,7 +33,7 @@ help_text = short_help_text
 @click.argument("user_rmr", type=click.File("rb"))
 @click.argument("baseline_rmr", type=click.File("rb"))
 @click.argument("proposed_rmr", type=click.File("rb"))
-def evalute_rmr_triplet(user_rmr, baseline_rmr, proposed_rmr):
+def evaluate_rmr_triplet(user_rmr, baseline_rmr, proposed_rmr):
     print("Test implementation of rule engine for ASHRAE Std 229 RCT.")
     print("")
 
