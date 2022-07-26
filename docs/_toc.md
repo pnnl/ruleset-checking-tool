@@ -116,7 +116,7 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   * [5-30](section5/Rule5-30.md): Proposed fenestration has the same shading projections as the user model.
   * [5-31](section5/Rule5-31.md): Manual fenestration shading devices, such as blinds or shades, shall be modeled or not modeled the same as in the baseline building design.
   * [5-33](section5/Rule5-33.md): Automatically controlled fenestration shading devices must be modeled in the proposed design the same as in user model.  
-  * [5-34](section5/Rule5-34.md):  If skylight area in the proposed design is 3% or less of the roof surface, the skylight area in baseline shall be equal to that in the proposed design.  
+  * [5-34](section5/Rule5-34.md): If skylight area in the proposed design is 3% or less of the roof surface, the skylight area in baseline shall be equal to that in the proposed design.  
   * [5-35](section5/Rule5-35.md): If the skylight area of the proposed design is greater than 3%, baseline skylight area shall be decreased by an identical percentage in all roof components in which skylights are located to reach 3%.  
   * [5-36](section5/Rule5-36.md): Skylight area must be allocated to surfaces in the same proportion in the baseline as in the proposed design; Skylight orientation and tilt shall be the same as in the proposed design.  
   * [5-37](section5/Rule5-37.md): Skylight U-factors for residential, non-residential and semi-heated spaces in the baseline model must match the appropriate requirements in Table G3.4-1 through G3.4-8.  
@@ -204,6 +204,7 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   * [22-20](section22/Rule22-20.md): The tower shall be controlled to maintain a leaving water temperature, where weather permits.
   * [22-21](section22/Rule22-21.md): The baseline minimum condenser water reset temperature is per Table G3.1.3.11.
   * [22-22](section22/Rule22-22.md): The baseline building design’s chiller plant shall be modeled with chillers having the type as indicated in Table G3.1.3.7 as a function of building peak cooling load. 
+  * [22-23](section22/Rule22-23.md): The baseline chiller efficiencies shall be modeled at the minimum efficiency levels for full load, in accordance with Tables G3.5.3.
   * [22-24](section22/Rule22-24.md): Each baseline chiller shall be modeled with separate chilled water pump interlocked to operate with the associated chiller.
   * [22-25](section22/Rule22-25.md): For baseline chilled-water systems served by chiller(s), the primary pump shall be modeled as constant volume. 
   * [22-26](section22/Rule22-26.md): For chilled-water systems served by chiller(s) and does not serve baseline System-11, the baseline building constant-volume primary pump power shall be modeled as 9 W/gpm. 
