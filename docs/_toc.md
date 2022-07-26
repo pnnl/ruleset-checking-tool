@@ -180,9 +180,9 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   * [21-7](section21/Rule21-7.md): When baseline building requires boilers, systems 1,5,7,11 and 12 - Model HWST = 180F and return design temp = 130F.
   * [21-9](section21/Rule21-9.md): When baseline building includes boilers, Hot Water Pump Power = 19W/gpm.  
   * [21-10](section21/Rule21-10.md): When the building is modeled with HHW plant (served by either boiler(s) or purchased hot water/steam), the hot water pump shall be modeled as riding the pump curve if the hot water system serves less than 120,000 ft^2 otherwise it shall be modeled with a VFD.  
-  * [21-11A](section21/Rule21-11A.md): When the system uses boilers the hot water system shall be modeled as primary only.  
-  * [21-11B](section21/Rule21-11B.md): When the system uses boilers the hot water system shall be modeled with continuous variable flow.  
-  * [21-11C](section21/Rule21-11C.md): When the system uses boilers the hot water system shall be modeled with a minimum turndown ratio of 0.25.
+  * [21-11](section21/Rule21-11.md): When the system uses boilers the hot water system shall be modeled as primary only.  
+  * [21-12](section21/Rule21-12.md): When the system uses boilers the hot water system shall be modeled with continuous variable flow.  
+  * [21-13](section21/Rule21-13.md): When the system uses boilers the hot water system shall be modeled with a minimum turndown ratio of 0.25.
   * [21-18](section21/Rule21-18.md): Baseline shall have only one heating hot water plant.
   * [21-19](section21/Rule21-19.md): All boilers in the baseline building design shall be modeled at the minimum efficiency levels, both part load and full load, in accordance with Tables G3.5.6.
   * [21-21](section21/Rule21-21.md): For baseline building, fossil fuel systems shall be modeled using natural gas as their fuel source.
