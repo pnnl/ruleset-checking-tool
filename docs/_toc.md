@@ -193,6 +193,7 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   * [22-3](section22/Rule22-3.md): For Baseline chilled water loop that is not purchased cooling, chilled-water supply temperature shall be reset based on outdoor dry-bulb temperature if loop does not serve any Baseline System Type-11.
   * [22-4](section22/Rule22-4.md): For Baseline chilled water loop that is not purchased chilled water and does not serve any computer room HVAC systems, chilled-water supply temperature shall be reset using the following schedule: 44F at outdoor dry-bulb temperature of 80F and above, 54F at 60F and below, and ramped linearly between 44F and 54F at temperature between 80F and 60F.
   * [22-5](section22/Rule22-5.md): For Baseline chilled water loop that is not purchased chilled water and serves computer room HVAC systems (System Type-11), chilled-water supply temperature shall be reset higher based on the HVAC system requiring the most cooling.  
+  * [22-6](section22/Rule22-6.md): For Baseline chilled water loop that is not purchased chilled water and serves computer room HVAC systems (System Type-11), The maximum reset chilled-water supply temperature shall be 54F.
   * [22-7](section22/Rule22-7.md): Baseline chilled water system that does not use purchased chilled water shall be modeled as primary/secondary systems.
   * [22-8](section22/Rule22-8.md): For Baseline chilled water system with cooling capacity of 300 tons or more, the secondary pump shall be modeled with variable-speed drives.
   * [22-9](section22/Rule22-9.md): For Baseline chilled water system with cooling capacity of 300 tons or more, the secondary loop shall be modeled with a minimum flow of 25% of the design flow rate. 
@@ -203,6 +204,7 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   * [22-21](section22/Rule22-21.md): The baseline minimum condenser water reset temperature is per Table G3.1.3.11.
   * [22-22](section22/Rule22-22.md): The baseline building design’s chiller plant shall be modeled with chillers having the type as indicated in Table G3.1.3.7 as a function of building peak cooling load. 
   * [22-24](section22/Rule22-24.md): Each baseline chiller shall be modeled with separate chilled water pump interlocked to operate with the associated chiller.
+  * [22-25](section22/Rule22-25.md): For baseline chilled-water systems served by chiller(s), the primary pump shall be modeled as constant volume. 
   * [22-26](section22/Rule22-26.md): For chilled-water systems served by chiller(s) and does not serve baseline System-11, the baseline building constant-volume primary pump power shall be modeled as 9 W/gpm. 
   * [22-27](section22/Rule22-27.md): For chilled-water systems served by chiller(s) and serves baseline System-11, the baseline building constant-volume primary pump power shall be modeled as 12 W/gpm. 
   * [22-28](section22/Rule22-28.md): Each baseline chiller shall be modeled with separate condenser-water pump interlocked to operate with the associated chiller.
