@@ -19,6 +19,7 @@ from rct229.utils.pint_utils import ZERO
 from rct229.utils.std_comparisons import std_equal
 
 DOOR = schema_enums["SubsurfaceClassificationType"].DOOR
+MANUAL_CHECK_REQUIRED_MSG = "Manual review is requested to verify vertical fenestration meets U-factor requirement as per Table G3.4. "
 
 
 class Section5Rule24(RuleDefinitionListIndexedBase):
@@ -215,6 +216,7 @@ class Section5Rule24(RuleDefinitionListIndexedBase):
                             "u_factor",
                         ]
                     },
+                    manual_check_required_msg=MANUAL_CHECK_REQUIRED_MSG,
                 )
 
             def manual_check_required(self, context, calc_vals=None, data=None):
