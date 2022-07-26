@@ -1,7 +1,5 @@
-from rct229.rule_engine.rule_base import (
-    RuleDefinitionBase,
-    RuleDefinitionListIndexedBase,
-)
+from rct229.rule_engine.rule_base import RuleDefinitionBase
+from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 from rct229.utils.jsonpath_utils import find_all
 
@@ -16,7 +14,7 @@ class Section15Rule3(RuleDefinitionListIndexedBase):
             index_rmr="user",
             id="15-3",
             description="User RMR transformer id in Proposed RMR",
-            rmr_context="transformers",
+            rmr_context="ruleset_model_instances/0/transformers",
         )
 
     def create_data(self, context, data):

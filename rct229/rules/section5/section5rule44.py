@@ -1,12 +1,10 @@
 from rct229.data.schema_enums import schema_enums
-from rct229.rule_engine.rule_base import (
-    RuleDefinitionBase,
-    RuleDefinitionListIndexedBase,
-)
+from rct229.rule_engine.rule_base import RuleDefinitionBase
+from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 from rct229.utils.jsonpath_utils import find_all
 
-CONSTANT = schema_enums["InfiltrationMethodType"].CONSTANT.name
+CONSTANT = schema_enums["InfiltrationMethodType"].CONSTANT
 
 
 class Section5Rule44(RuleDefinitionListIndexedBase):
@@ -19,7 +17,7 @@ class Section5Rule44(RuleDefinitionListIndexedBase):
             index_rmr="baseline",
             id="5-44",
             description="The infiltration modeling method in the baseline includes adjustment for weather and building operation.",
-            rmr_context="buildings",
+            rmr_context="ruleset_model_instances/0/buildings",
         )
 
     class BuildingRule(RuleDefinitionBase):
@@ -34,7 +32,7 @@ class Section5Rule44(RuleDefinitionListIndexedBase):
             failing_infiltration_ids = [
                 b_infiltration["id"]
                 for b_infiltration in baseline_infiltration
-                if b_infiltration["modeling_method"] != CONSTANT
+                if b_infiltration["modeling_method"] == CONSTANT
             ]
             return {"failing_infiltration_ids": failing_infiltration_ids}
 

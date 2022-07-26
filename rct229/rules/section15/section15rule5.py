@@ -1,12 +1,10 @@
 from rct229.data.schema_enums import schema_enums
 from rct229.data_fns.table_8_4_4_fns import table_8_4_4_in_range, table_8_4_4_lookup
-from rct229.rule_engine.rule_base import (
-    RuleDefinitionBase,
-    RuleDefinitionListIndexedBase,
-)
+from rct229.rule_engine.rule_base import RuleDefinitionBase
+from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 
-_DRY_TYPE = schema_enums["TransformerType"].DRY_TYPE.name
+_DRY_TYPE = schema_enums["TransformerType"].DRY_TYPE
 
 
 class Section15Rule5(RuleDefinitionListIndexedBase):
@@ -19,7 +17,7 @@ class Section15Rule5(RuleDefinitionListIndexedBase):
             index_rmr="user",
             id="15-5",
             description="Transformer efficiency reported in Baseline RMR equals Table 8.4.4",
-            rmr_context="transformers",
+            rmr_context="ruleset_model_instances/0/transformers",
         )
 
     class TransformerRule(RuleDefinitionBase):

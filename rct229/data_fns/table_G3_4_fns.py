@@ -1,30 +1,28 @@
 from rct229.data import data
 from rct229.data_fns.table_utils import find_osstd_table_entry
-from rct229.ruleset_functions.get_opaque_surface_type import (
-    ABOVE_GRADE_WALL,
-    BELOW_GRADE_WALL,
-    FLOOR,
-    HEATED_SOG,
-    ROOF,
-    UNHEATED_SOG,
-)
+from rct229.ruleset_functions.get_opaque_surface_type import OpaqueSurfaceType as OST
 from rct229.schema.config import ureg
 
 # This dictionary maps the opaque surface types that are returned from get_opaque_surface_type()
 # to the corresponding construction values in ashrae_90_1_prm_2019.construction_properties.json
 SURFACE_TYPE_TO_CONSTRUCTION_MAP = {
-    ABOVE_GRADE_WALL: "ExteriorWall",
-    ROOF: "ExteriorRoof",
-    HEATED_SOG: "GroundContactFloor",
-    UNHEATED_SOG: "GroundContactFloor",
-    FLOOR: "ExteriorFloor",
-    BELOW_GRADE_WALL: "GroundContactWall",
+    OST.ABOVE_GRADE_WALL: "ExteriorWall",
+    OST.ROOF: "ExteriorRoof",
+    OST.HEATED_SOG: "GroundContactFloor",
+    OST.UNHEATED_SOG: "GroundContactFloor",
+    OST.FLOOR: "ExteriorFloor",
+    OST.BELOW_GRADE_WALL: "GroundContactWall",
+    "VERTICAL GLAZING": "ExteriorWindow",
+    "SKYLIGHT": "Skylight",
 }
 
 # This dictionary maps surface conditioning categories as returned from get_surface_conditioning_category_dict()
 # to the corresponding building category values in ashrae_90_1_prm_2019.construction_properties.json
+# TODO Temporary fix for EXTERIOR MIXED type surface -
+#  Need to review with RDS on Surface_Conditioning_Category (Zone_Conditioning_Category) functions
 SURFACE_CONDITIONING_CATEGORY_TO_BUILDING_CATEGORY_MAP = {
     "EXTERIOR RESIDENTIAL": "Residential",
+    "EXTERIOR MIXED": "Nonresidential",
     "EXTERIOR NON-RESIDENTIAL": "Nonresidential",
     "SEMI-EXTERIOR": "Semiheated",
 }
@@ -55,27 +53,45 @@ CLIMATE_ZONE_ENUMERATION_TO_CLIMATE_ZONE_SET_MAP = {
 
 
 # Helper function to add WWR to the search criteria for getting the correct
+
 # Exterior windows, skylight and glass doors
-def wwr_to_search_criteria(wwr, search_criteria):
-    if wwr <= 10.0:
-        search_criteria.append(("minimum_percent_of_surface", 0))
-        search_criteria.append(("maximum_percent_of_surface", 10))
-    elif wwr <= 20.0:
-        search_criteria.append(("minimum_percent_of_surface", 10.1))
-        search_criteria.append(("maximum_percent_of_surface", 20))
-    elif wwr <= 30.0:
-        search_criteria.append(("minimum_percent_of_surface", 20.1))
-        search_criteria.append(("maximum_percent_of_surface", 30))
-    elif wwr <= 40.0:
-        search_criteria.append(("minimum_percent_of_surface", 30.1))
-        search_criteria.append(("maximum_percent_of_surface", 40))
+def wwr_to_search_criteria(wwr):
+    wwr_search_list = []
+    if wwr <= 0.1:
+        wwr_search_list.append(("minimum_percent_of_surface", 0))
+        wwr_search_list.append(("maximum_percent_of_surface", 10))
+    elif wwr <= 0.2:
+        wwr_search_list.append(("minimum_percent_of_surface", 10.1))
+        wwr_search_list.append(("maximum_percent_of_surface", 20))
+    elif wwr <= 0.3:
+        wwr_search_list.append(("minimum_percent_of_surface", 20.1))
+        wwr_search_list.append(("maximum_percent_of_surface", 30))
+    elif wwr <= 0.4:
+        wwr_search_list.append(("minimum_percent_of_surface", 30.1))
+        wwr_search_list.append(("maximum_percent_of_surface", 40))
     else:
-        search_criteria.append(("minimum_percent_of_surface", None))
+        wwr_search_list.append(("minimum_percent_of_surface", None))
+        wwr_search_list.append(("maximum_percent_of_surface", None))
+    return wwr_search_list
+
+
+# Helper funciton to add WWR to the search criteria for getting the correct
+# Exterior skylight
+def skylit_to_search_criteria(wwr, search_criteria):
+    if wwr <= 0.02:
+        search_criteria.append(("minimum_percent_of_surface", 0))
+        search_criteria.append(("maximum_percent_of_surface", 2.0))
+    else:
+        search_criteria.append(("minimum_percent_of_surface", 2.0))
         search_criteria.append(("maximum_percent_of_surface", None))
 
 
 def table_G34_lookup(
-    climate_zone, surface_conditioning_category, opaque_surface_type, wwr=None
+    climate_zone,
+    surface_conditioning_category,
+    opaque_surface_type,
+    wwr=None,
+    skylit_wwr=None,
 ):
     """Returns the assembly maxiumum values for a given climate zone, surface conditoning category
      and opaque sruface type as required by ASHRAE 90.1 Table G3.4-1 through G3.4-8
@@ -120,7 +136,10 @@ def table_G34_lookup(
     ]
 
     if wwr:
-        wwr_to_search_criteria(wwr, search_criteria)
+        search_criteria.extend(wwr_to_search_criteria(wwr))
+
+    if skylit_wwr:
+        skylit_to_search_criteria(skylit_wwr, search_criteria)
 
     osstd_entry = find_osstd_table_entry(
         search_criteria,
@@ -141,5 +160,9 @@ def table_G34_lookup(
         search_results["c_factor"] = osstd_entry["assembly_maximum_c_factor"] * (
             ureg.Btu_h / ureg.ft2 / ureg.delta_degF
         )
+    if osstd_entry["assembly_maximum_solar_heat_gain_coefficient"]:
+        search_results["solar_heat_gain_coefficient"] = osstd_entry[
+            "assembly_maximum_solar_heat_gain_coefficient"
+        ]
     # TODO need to add fenestration properties
     return search_results

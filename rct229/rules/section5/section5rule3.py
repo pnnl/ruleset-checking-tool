@@ -1,7 +1,5 @@
-from rct229.rule_engine.rule_base import (
-    RuleDefinitionBase,
-    RuleDefinitionListIndexedBase,
-)
+from rct229.rule_engine.rule_base import RuleDefinitionBase
+from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 from rct229.utils.jsonpath_utils import find_all
 
@@ -19,7 +17,7 @@ class Section5Rule3(RuleDefinitionListIndexedBase):
             index_rmr="baseline",
             id="5-3",
             description="The building shall be modeled so that it does not shade itself",
-            rmr_context="buildings",
+            rmr_context="ruleset_model_instances/0/buildings",
         )
 
     class BuildingRule(RuleDefinitionBase):

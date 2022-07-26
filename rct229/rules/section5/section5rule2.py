@@ -1,10 +1,8 @@
-from rct229.rule_engine.rule_base import (
-    RuleDefinitionBase,
-    RuleDefinitionListIndexedBase,
-)
+from rct229.rule_engine.rule_base import RuleDefinitionBase
+from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 from rct229.utils.jsonpath_utils import find_all
-from rct229.utils.match_lists import match_lists_exactly_by_id
+from rct229.utils.match_lists import match_lists_by_id
 
 
 class Section5Rule2(RuleDefinitionListIndexedBase):
@@ -17,7 +15,7 @@ class Section5Rule2(RuleDefinitionListIndexedBase):
             index_rmr="proposed",
             id="5-2",
             description="Orientation is the same in user model and proposed model",
-            rmr_context="buildings",
+            rmr_context="ruleset_model_instances/0/buildings",
         )
 
     class BuildingRule(RuleDefinitionBase):
@@ -37,9 +35,7 @@ class Section5Rule2(RuleDefinitionListIndexedBase):
             user_surfaces = find_all("$..surfaces[*]", context.user)
 
             # This assumes that the surfaces all match
-            matched_user_surfaces = match_lists_exactly_by_id(
-                proposed_surfaces, user_surfaces
-            )
+            matched_user_surfaces = match_lists_by_id(proposed_surfaces, user_surfaces)
             proposed_user_surface_pairs = zip(proposed_surfaces, matched_user_surfaces)
             for (p_surface, u_surface) in proposed_user_surface_pairs:
                 if p_surface["azimuth"] != u_surface["azimuth"]:
