@@ -1,5 +1,6 @@
 import json
 import os
+
 import jsonschema
 
 from rct229.utils.jsonpath_utils import find_all

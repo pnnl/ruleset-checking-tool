@@ -1,6 +1,7 @@
-from copy import deepcopy
 import json
 import os
+from copy import deepcopy
+
 import pytest
 
 from rct229.schema.validate import (
