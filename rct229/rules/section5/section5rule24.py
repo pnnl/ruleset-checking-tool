@@ -34,7 +34,7 @@ class Section5Rule24(RuleDefinitionListIndexedBase):
             each_rule=Section5Rule24.BuildingRule(),
             index_rmr="baseline",
             id="5-24",
-            description="Vertical fenestration U-factors for residential, non-residential and semi-heated spaces in the baseline model must match the appropriate requirements in Table G3.4-1 through G3.4-8 for the appropriate WWR in the baseline RMD",
+            description="Vertical fenestration U-factors for residential, non-residential and semi-heated spaces in the baseline model must match the appropriate requirements in Table G3.4-1 through G3.4-8 for the appropriate WWR in the baseline RMD.",
             list_path="ruleset_model_instances[0].buildings[*]",
         )
 

@@ -136,7 +136,7 @@ class Section5Rule17(RuleDefinitionListIndexedBase):
                     # Serve code completeness
                     raise Exception(f"Unrecognized surface type: {surface_b_type}")
 
-            def rule_check(self, context, calc_vals, data=None):
+            def rule_check(self, context, calc_vals=None, data=None):
                 baseline_surface_type = calc_vals["baseline_surface_type"]
                 proposed_surface_type = calc_vals["proposed_surface_type"]
                 # Check 1. surface type needs to be matched

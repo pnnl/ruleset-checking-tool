@@ -44,15 +44,6 @@ class Section5Rule5(RuleDefinitionListIndexedBase):
                 index_rmr="baseline",
             )
 
-        def create_context_list(self, context, data=None):
-            building = context.baseline
-            # List of all baseline roof surfaces to become the context for RoofRule
-            return [
-                UserBaselineProposedVals(None, surface, None)
-                for surface in find_all("$..surfaces[*]", building)
-                if get_opaque_surface_type(surface) == OST.ROOF
-            ]
-
         def create_data(self, context, data=None):
             building = context.baseline
             # Merge into the existing data dict
@@ -62,6 +53,15 @@ class Section5Rule5(RuleDefinitionListIndexedBase):
                     data["climate_zone"], building
                 ),
             }
+
+        def create_context_list(self, context, data=None):
+            building = context.baseline
+            # List of all baseline roof surfaces to become the context for RoofRule
+            return [
+                UserBaselineProposedVals(None, surface, None)
+                for surface in find_all("$..surfaces[*]", building)
+                if get_opaque_surface_type(surface) == OST.ROOF
+            ]
 
         class RoofRule(RuleDefinitionBase):
             def __init__(self):
@@ -108,7 +108,7 @@ class Section5Rule5(RuleDefinitionListIndexedBase):
                     "target_u_factor_nonres": target_u_factor_nonres,
                 }
 
-            def manual_check_required(self, context, calc_vals, data=None):
+            def manual_check_required(self, context, calc_vals=None, data=None):
                 target_u_factor_res = calc_vals["target_u_factor_res"]
                 target_u_factor_nonres = calc_vals["target_u_factor_nonres"]
 
@@ -118,7 +118,7 @@ class Section5Rule5(RuleDefinitionListIndexedBase):
                     and target_u_factor_res != target_u_factor_nonres
                 )
 
-            def rule_check(self, context, calc_vals, data=None):
+            def rule_check(self, context, calc_vals=None, data=None):
                 roof_u_factor = calc_vals["roof_u_factor"]
                 target_u_factor = calc_vals["target_u_factor"]
 

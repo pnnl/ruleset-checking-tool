@@ -43,15 +43,6 @@ class Section5Rule8(RuleDefinitionListIndexedBase):
                 index_rmr="baseline",
             )
 
-        def create_context_list(self, context, data=None):
-            building = context.baseline
-            # List of all baseline roof surfaces to become the context for RoofRule
-            return [
-                UserBaselineProposedVals(None, surface, None)
-                for surface in find_all("$..surfaces[*]", building)
-                if get_opaque_surface_type(surface) == OST.BELOW_GRADE_WALL
-            ]
-
         def create_data(self, context, data=None):
             building = context.baseline
             # Merge into the existing data dict
@@ -61,6 +52,15 @@ class Section5Rule8(RuleDefinitionListIndexedBase):
                     data["climate_zone"], building
                 ),
             }
+
+        def create_context_list(self, context, data=None):
+            building = context.baseline
+            # List of all baseline roof surfaces to become the context for RoofRule
+            return [
+                UserBaselineProposedVals(None, surface, None)
+                for surface in find_all("$..surfaces[*]", building)
+                if get_opaque_surface_type(surface) == OST.BELOW_GRADE_WALL
+            ]
 
         class BelowGradeWallRule(RuleDefinitionBase):
             def __init__(self):
@@ -119,7 +119,7 @@ class Section5Rule8(RuleDefinitionListIndexedBase):
                     and target_c_factor_res != target_c_factor_nonres
                 )
 
-            def rule_check(self, context, calc_vals, data=None):
+            def rule_check(self, context, calc_vals=None, data=None):
                 below_grade_wall_c_factor = calc_vals["below_grade_wall_c_factor"]
                 target_c_factor = calc_vals["target_c_factor"]
 
