@@ -43,6 +43,7 @@ class Section5Rule17(RuleDefinitionListIndexedBase):
                 required_fields={},
                 each_rule=Section5Rule17.BuildingRule.UnregulatedSurfaceRule(),
                 index_rmr="baseline",
+                list_path="$..surfaces[*]",
             )
 
         def create_data(self, context, data=None):
@@ -55,27 +56,12 @@ class Section5Rule17(RuleDefinitionListIndexedBase):
                 ),
             }
 
-        def create_context_list(self, context, data=None):
-            # List of all baseline unregulated surfaces to become the context for Unregulated Surfaces
+        def list_filter(self, context_item, data=None):
             scc = data["surface_conditioning_category_dict"]
-
-            baseline_surfaces = find_all("$..surfaces[*]", context.baseline)
-            proposed_surfaces = find_all("$..surfaces[*]", context.proposed)
-
-            # This assumes that the surfaces matched by IDs between proposed and baseline
-            matched_proposed_surfaces = match_lists_by_id(
-                baseline_surfaces, proposed_surfaces
+            surface_b = context_item.baseline
+            return (
+                    scc[surface_b["id"]] == SCC.UNREGULATED
             )
-
-            proposed_baseline_surface_pairs = zip(
-                baseline_surfaces, matched_proposed_surfaces
-            )
-
-            return [
-                UserBaselineProposedVals(None, surface_b, surface_p)
-                for surface_b, surface_p in proposed_baseline_surface_pairs
-                if scc[surface_b["id"]] == SCC.UNREGULATED
-            ]
 
         class UnregulatedSurfaceRule(RuleDefinitionBase):
             def __init__(self):

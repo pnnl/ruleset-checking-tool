@@ -72,6 +72,7 @@ class Section5Rule18(RuleDefinitionListIndexedBase):
             }
 
         def create_context_list(self, context, data=None):
+            # EXAMPLE of reorganizing the context.
             building = context.baseline
             area_type_to_building_segment_dict = {}
             # dict map area_type with list of building_segment

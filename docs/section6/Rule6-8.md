@@ -26,7 +26,7 @@
 
 - For each building segment in building: `for building_segment_p in P_RMR.building.building_segments:`  
 
-    - For each zone in building_segments: `zone_p in building_segment_p.zones:` 
+    - For each zone in building_segments: `zone_p in building_segment_p.zones:`
 
       - For each space in zone: `space_p in zone_p.spaces:`  
 
