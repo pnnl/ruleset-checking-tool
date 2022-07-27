@@ -1,0 +1,48 @@
+# is_baseline_system_6  
+
+**Description:** Get either Sys-6, Sys-6b, or Not_Sys_6 string output which indicates whether the HVAC system is ASHRAE 90.1 2019 Appendix G system 6 (Package VAV with PFP Boxes) or system 6b (system 6 with purchased heating).  
+
+**Inputs:**  
+- **B-RMR**: To evaluate if the hvac system is modeled as either Sys-6, Sys-6b, or Not_Sys_6 in the B_RMR.   
+- **hvac_b.id**: The id of the hvac system to evaluate.  
+- **terminal_unit_id_list**: list of terminal unit IDs associated with the HVAC system to be evaluated. These are sent to this function from the master get_baseline_system_types function.
+- **zone_id_list**: list of zone IDs associated with the HVAC system to be evaluated. These are sent to this function from the master get_baseline_system_types function.
+
+**Returns:**  
+- **is_baseline_system_6**: The function returns either Sys-6, Sys-6b, or Not_Sys_6 string output which indicates whether the HVAC system is ASHRAE 90.1 2019 Appendix G system 6 (Package VAV with PFP Boxes) or system 6b (system 6 with purchased heating).   
+ 
+**Function Call:** 
+1. does_each_zone_have_only_one_terminal()    
+2. is_hvac_system_multizone()  
+3. is_hvac_sys_cooling_type_DX()
+4. is_hvac_sys_fan_sys_VSD()  
+5. is_hvac_sys_preheating_type_fluid_loop()
+6. is_hvac_sys_preheat_fluid_loop_attached_to_boiler()
+7. is_hvac_sys_preheat_fluid_loop_purchased_heating()  
+8. are_all_terminal_heat_sources_hot_water()  
+9. are_all_terminal_heating_loops_attached_to_boiler()  
+10. are_all_terminal_heating_loops_purchased_heating()  
+11. are_all_terminal_cool_sources_none_or_null() 
+12. are_all_terminal_fans_null()  
+13. are_all_terminal_types_VAV()  
+14. are_all_terminal_supplies_ducted()  
+
+ 
+## Logic:    
+- Create an object associated with the hvac system: `hvac_b = hvac_b.id`  
+- Set is_baseline_system_6 = Not_Sys_6: `is_baseline_system_6 = "Not_Sys_6"`    
+- Check that there is one preheat system per G3.1.3.19, if there is then carry on: `if Len(hvac_b.preheat_system) == 1:`   
+    - Check if the preheat system is a fluid loop, if yes then carry on: `if is_hvac_sys_preheating_type_fluid_loop(B_RMR, hvac_b.id) == TRUE:`
+        - Check if the cooling system type is DX, if yes then carry on: `if is_hvac_sys_cooling_type_DX(B_RMR, hvac_b.id) == TRUE:`  
+            - Check if fansystem is variable speed drive controlled, if yes then carry on: `if is_hvac_sys_fan_sys_VSD(B_RMR, hvac_b.id) == TRUE:`  
+                - Check if the hvac system is multizone and that each zone only has one terminal unit: `if is_hvac_system_multizone(B_RMR, zone_id_list) == TRUE AND does_each_zone_have_only_one_terminal(B_RMR,zone_id_list) == TRUE:`     
+                    - Check that the data elements associated with the terminal units align with system 6: `if are_all_terminal_heat_sources_hot_water(B_RMR,terminal_unit_id_list) == TRUE AND are_all_terminal_cool_sources_none_or_null(B_RMR,terminal_unit_id_list) == TRUE And are_all_terminal_fans_null(B_RMR,terminal_unit_id_list) == TRUE AND are_all_terminal_supplies_ducted(B_RMR,terminal_unit_id_list) == TRUE and are_all_terminal_types_VAV(B_RMR,terminal_unit_id_list) == TRUE:`        
+                        - if the preheat loop and all terminals are attached to a boiler then Sys-6: `if is_hvac_sys_preheat_fluid_loop_attached_to_boiler(B_RMR, hvac_b.id) == TRUE AND are_all_terminal_heating_loops_attached_to_boiler(B_RMR,terminal_unit_id_list) == TRUE: is_baseline_system_6 = "Sys-6"`
+                        - elif the preheat loop and all terminals are purchased heating then Sys-6b: `elif is_hvac_sys_preheat_fluid_loop_purchased_heating(B_RMR, hvac_b.id) == TRUE and are_all_terminal_heating_loops_purchased_heating(B_RMR,terminal_unit_id_list) == TRUE:is_baseline_system_6 = "Sys-6b"`  
+         
+
+**Returns** `is_baseline_system_6`  
+
+
+
+**[Back](../_toc.md)**
