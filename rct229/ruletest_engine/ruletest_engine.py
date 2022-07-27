@@ -71,34 +71,32 @@ def generate_test_rmrs(test_dict):
 
 
 def evaluate_outcome_enumeration_str(outcome_enumeration_str):
-    """Returns a boolean for whether a rule passed/failed based on the outcome string enumeration
+    """Evaluate the test outcome string. Translates Rule outcome string to a string matching ruletest JSON convention
+        # (e.g., "PASSED" => "pass")
 
     Parameters
     ----------
     outcome_enumeration_str : str
 
         String equal to a set of predetermined enumerations for rule outcomes. These enumerations describe things such
-        as whether a test passed, failed, required manual check, etc.
+        as whether a test passed, failed, undetermined, etc.
 
     Returns
     -------
-    test_result : bool
+    test_result : str
 
-        Boolean describing whether the rule should be treated as passing or failing. Pass = True, Fail = False
+        Translated Rule outcome string to one matching ruletest JSON convention (e.g., 'pass')
     """
 
     # Check result of rule evaluation against known string constants
-    # (TODO: these constants should be stored elsewhere rather than called directly)
     if outcome_enumeration_str == "PASSED":
-        test_result = True
+        test_result = "pass"
     elif outcome_enumeration_str == "FAILED":
-        test_result = False
-    elif outcome_enumeration_str == "UNDETERMINED":
-        test_result = False
-    elif outcome_enumeration_str == "MISSING_CONTEXT":
-        test_result = False
-    elif outcome_enumeration_str == "NA":
-        test_result = False
+        test_result = "fail"
+    elif outcome_enumeration_str == "UNDETERMINED": # previously used for manual_check
+        test_result = "undetermined"
+    elif outcome_enumeration_str == "NOT_APPLICABLE":
+        test_result = "not_applicable"
     else:
         raise ValueError(
             f"OUTCOME: The enumeration {outcome_enumeration_str} does not have a test result interpretation."
@@ -112,9 +110,9 @@ def process_test_result(test_result, test_dict, test_id):
 
     Parameters
     ----------
-    test_result : bool
+    test_result : str
 
-        Boolean for whether or not a test passed. Passed = True, Failed = False
+        String describing rule outcome. OPTIONS: 'pass', 'fail', 'undetermined'
 
     test_dict : dict
 
@@ -139,28 +137,35 @@ def process_test_result(test_result, test_dict, test_id):
     """
 
     # Get reporting parameters. Check if the test is expected to pass/fail and read in the description.
-    expected_outcome = test_dict["expected_rule_outcome"] == "pass"
+    # expected_outcome = test_dict["expected_rule_outcome"] == "pass"
     description = test_dict["test_description"]
 
     # Check if the test results agree with the expected outcome. Write an appropriate response based on their agreement
-    received_expected_outcome = test_result == expected_outcome
+    received_expected_outcome = test_result == test_dict["expected_rule_outcome"]
 
     # Check if the test results agree with the expected outcome. Write an appropriate response based on their agreement
     if received_expected_outcome:
 
-        if test_result:
+        if test_result == "pass":
             # f"SUCCESS: Test {test_id} passed as expected. The following condition was identified: {description}"
             outcome_text = None
-        else:
+        elif test_result == "fail":
             # f"SUCCESS: Test {test_id} failed as expected. The following condition was identified: {description}"
             outcome_text = None
+        elif test_result == "undetermined":
+            outcome_text = None
+
 
     else:
 
-        if test_result:
+        if test_result == "pass":
             outcome_text = f"FAILURE: Test {test_id} passed unexpectedly. The following condition was not identified: {description}"
-        else:
+        elif test_result == "fail":
             outcome_text = f"FAILURE: Test {test_id} failed unexpectedly. The following condition was not identified: {description}"
+        elif test_result == "undetermined":
+            outcome_text = f"FAILURE: Test {test_id} returned 'undetermined' unexpectedly."
+        else:
+            outcome_text = f"FAILURE: Test {test_id} returned '{test_result}' unexpectedly"
 
     return outcome_text, received_expected_outcome
 
@@ -427,12 +432,13 @@ def evaluate_outcome_object(outcome_dict, test_result_dict, test_dict, test_id):
             "result"
         ]  # enumeration for result (e.g., PASS, FAIL, CONTEXT_MISSING)
 
-        # Evaluate whether Rule passes or fails, a boolean
-        rule_passed = evaluate_outcome_enumeration_str(outcome_enumeration_str)
+        # Evaluate the test outcome. Translates Rule outcome a string matching ruletest JSON convention
+        # (e.g., "PASSED" => "pass")
+        test_result = evaluate_outcome_enumeration_str(outcome_enumeration_str)
 
         # Write outcome text based and "receive_expected_outcome" boolean based on the test result
         outcome_text, received_expected_outcome = process_test_result(
-            rule_passed, test_dict, test_id
+            test_result, test_dict, test_id
         )
 
         # Append results if expected outcome not received

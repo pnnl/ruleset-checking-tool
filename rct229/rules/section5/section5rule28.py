@@ -7,9 +7,8 @@ from rct229.ruleset_functions.get_surface_conditioning_category_dict import (
 from rct229.ruleset_functions.get_surface_conditioning_category_dict import (
     get_surface_conditioning_category_dict,
 )
-from rct229.utils.jsonpath_utils import find_all
-from rct229.utils.match_lists import match_lists_by_id
-from rct229.utils.std_comparisons import std_equal
+
+FAIL_MSG = "Subsurface that is not regulated (Not part of building envelope) is not modeled with the same area, U-factor and SHGC in the baseline as in the propsoed design."
 
 
 class Section5Rule28(RuleDefinitionListIndexedBase):
@@ -75,6 +74,7 @@ class Section5Rule28(RuleDefinitionListIndexedBase):
                         self,
                     ).__init__(
                         rmrs_used=UserBaselineProposedVals(False, True, True),
+                        fail_msg=FAIL_MSG,
                     )
 
                 def get_calc_vals(self, context, data=None):

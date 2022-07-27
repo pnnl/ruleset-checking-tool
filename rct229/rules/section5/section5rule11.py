@@ -1,4 +1,3 @@
-from rct229.data.schema_enums import schema_enums
 from rct229.data_fns.table_G3_4_fns import table_G34_lookup
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
@@ -43,6 +42,7 @@ class Section5Rule11(RuleDefinitionListIndexedBase):
                 required_fields={},
                 each_rule=Section5Rule11.BuildingRule.AboveGradeWallRule(),
                 index_rmr="baseline",
+                list_path="$..surfaces[*]",
             )
 
         def create_data(self, context, data=None):
@@ -55,14 +55,11 @@ class Section5Rule11(RuleDefinitionListIndexedBase):
                 ),
             }
 
-        def create_context_list(self, context, data=None):
-            building = context.baseline
-            # List of all baseline above-grade wall surfaces to become the context for AboveGradeWallRule
-            return [
-                UserBaselineProposedVals(None, surface, None)
-                for surface in find_all("$..surfaces[*]", building)
-                if get_opaque_surface_type(surface) == OST.ABOVE_GRADE_WALL
-            ]
+        def list_filter(self, context_item, data=None):
+            surface_b = context_item.baseline
+            return (
+                    get_opaque_surface_type(surface_b) == OST.ABOVE_GRADE_WALL
+            )
 
         class AboveGradeWallRule(RuleDefinitionBase):
             def __init__(self):
