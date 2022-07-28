@@ -29,9 +29,7 @@
     - Check if fansystem is constant volume, if yes then carry on: `if is_hvac_sys_fan_sys_CV(B_RMR, hvac_b.id) == TRUE:`  
         - Check if the hvac system serves a single zone and that the zone only has one terminal unit: `if does_hvac_system_serve_single_zone(B_RMR, zone_id_list) == TRUE AND does_each_zone_have_only_one_terminal(B_RMR,zone_id_list) == TRUE:`     
             - Check that the data elements associated with the terminal unit align with system 10: `if are_all_terminal_heat_sources_none_or_null(B_RMR,terminal_unit_id_list) == TRUE AND are_all_terminal_cool_sources_none_or_null(B_RMR,terminal_unit_id_list) == TRUE And are_all_terminal_fans_null(B_RMR,terminal_unit_id_list) == TRUE AND are_all_terminal_types_CAV(B_RMR,terminal_unit_id_list) == TRUE:`        
-                - if coolingsystem is None and the heating type is a furnace then Sys-9: `if is_hvac_sys_cooling_type_none(B_RMR, hvac_b.id) == TRUE AND is_hvac_sys_heating_type_furnace(B_RMR, hvac_b.id) == TRUE: is_baseline_system_10 = "Sys-9"`
-                - elif coolingsystem is None and the heating type is fluid loop: `elif is_hvac_sys_cooling_type_none(B_RMR, hvac_b.id) == TRUE and is_hvac_sys_heating_type_fluid_loop(B_RMR, hvac_b.id) == TRUE:`  
-                    - Check if fluid loop is purchased heating: `is_hvac_sys_fluid_loop_purchased_heating(B_RMR, hvac_b.id) == TRUE: is_baseline_system_10 = "Sys-9b"`  
+                - if coolingsystem is None and the heating type is a electric then Sys-10: `if is_hvac_sys_cooling_type_none(B_RMR, hvac_b.id) == TRUE AND is_hvac_sys_heating_type_elec_resistance(B_RMR, hvac_b.id) == TRUE: is_baseline_system_10 = "Sys-10"`  
 
 **Returns** `is_baseline_system_10`  
 
