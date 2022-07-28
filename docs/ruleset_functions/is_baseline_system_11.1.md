@@ -20,12 +20,11 @@
 6. is_hvac_sys_fan_sys_VSD()  
 7. is_hvac_sys_heating_type_fluid_loop()
 8. is_hvac_sys_fluid_loop_purchased_heating()  
-9. is_hvac_sys_fluid_loop_attached_to_boiler ()
-10. is_hvac_sys_heating_type_elec_resistance()
-11. are_all_terminal_heat_sources_none_or_null()  
-12. are_all_terminal_cool_sources_none_or_null() 
-13. are_all_terminal_types_VAV()  
-14. are_all_terminal_fans_null() 
+9. is_hvac_sys_heating_type_elec_resistance()
+10. are_all_terminal_heat_sources_none_or_null()  
+11. are_all_terminal_cool_sources_none_or_null() 
+12. are_all_terminal_types_VAV()  
+13. are_all_terminal_fans_null() 
 
 
 ## Logic:    
