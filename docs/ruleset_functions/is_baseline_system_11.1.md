@@ -39,8 +39,8 @@
                     - elif the hvac sys heating loop is electric resistance and the hvac sys cooling loop is purchased CHW then Sys-11.1a: `elif is_hvac_sys_heating_type_elec_resistance(B_RMR, hvac_b.id) == TRUE AND  is_hvac_sys_fluid_loop_purchased_CHW(B_RMR, hvac_b.id) == TRUE: is_baseline_system_11.1 = "Sys-11.1a"` 
                     - elif the heating loop is a fluid loop: `elif is_hvac_sys_heating_type_fluid_loop(B_RMR, hvac_b.id) == TRUE:`  
                         - If heating loop is purchased heating: `If is_hvac_sys_fluid_loop_purchased_heating(B_RMR, hvac_b.id) == TRUE:`  
-                            - if the cooling loop is attached to a chiller then Sys-11b: `If is_hvac_sys_fluid_loop_attached_to_chiller(B_RMR, hvac_b.id) == TRUE: "Sys-11b"`
-                            - elif the cooling loop is purchased CHW then Sys-11c: `If iis_hvac_sys_fluid_loop_purchased_CHW(B_RMR, hvac_b.id) == TRUE: "Sys-11c"` 
+                            - if the cooling loop is attached to a chiller then Sys-11b: `If is_hvac_sys_fluid_loop_attached_to_chiller(B_RMR, hvac_b.id) == TRUE: is_baseline_system_11.1 = "Sys-11b"`
+                            - elif the cooling loop is purchased CHW then Sys-11c: `If iis_hvac_sys_fluid_loop_purchased_CHW(B_RMR, hvac_b.id) == TRUE: is_baseline_system_11.1 = "Sys-11c"` 
                                             
 
 **Returns** `is_baseline_system_11.1`  
