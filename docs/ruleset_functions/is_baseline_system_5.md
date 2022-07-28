@@ -25,7 +25,6 @@
 11. are_all_terminal_cool_sources_none_or_null() 
 12. are_all_terminal_fans_null()  
 13. are_all_terminal_types_VAV()  
-14. are_all_terminal_supplies_ducted()  
 
  
 ## Logic:    
@@ -36,7 +35,7 @@
         - Check if the cooling system type is DX, if yes then carry on: `if is_hvac_sys_cooling_type_DX(B_RMR, hvac_b.id) == TRUE:`  
             - Check if fansystem is variable speed drive controlled, if yes then carry on: `if is_hvac_sys_fan_sys_VSD(B_RMR, hvac_b.id) == TRUE:`  
                 - Check if the hvac system is multizone and that each zone only has one terminal unit: `if is_hvac_system_multizone(B_RMR, zone_id_list) == TRUE AND does_each_zone_have_only_one_terminal(B_RMR,zone_id_list) == TRUE:`     
-                    - Check that the data elements associated with the terminal units align with system 5: `if are_all_terminal_heat_sources_hot_water(B_RMR,terminal_unit_id_list) == TRUE AND are_all_terminal_cool_sources_none_or_null(B_RMR,terminal_unit_id_list) == TRUE And are_all_terminal_fans_null(B_RMR,terminal_unit_id_list) == TRUE AND are_all_terminal_supplies_ducted(B_RMR,terminal_unit_id_list) == TRUE and are_all_terminal_types_VAV(B_RMR,terminal_unit_id_list) == TRUE:`        
+                    - Check that the data elements associated with the terminal units align with system 5: `if are_all_terminal_heat_sources_hot_water(B_RMR,terminal_unit_id_list) == TRUE AND are_all_terminal_cool_sources_none_or_null(B_RMR,terminal_unit_id_list) == TRUE And are_all_terminal_fans_null(B_RMR,terminal_unit_id_list) == TRUE AND are_all_terminal_types_VAV(B_RMR,terminal_unit_id_list) == TRUE:`        
                         - if the preheat loop and all terminals are attached to a boiler then SYS-5: `if is_hvac_sys_preheat_fluid_loop_attached_to_boiler(B_RMR, hvac_b.id) == TRUE AND are_all_terminal_heating_loops_attached_to_boiler(B_RMR,terminal_unit_id_list) == TRUE: is_baseline_system_5 = "SYS-5"`
                         - elif the preheat loop and all terminals are purchased heating then SYS-5b: `elif is_hvac_sys_preheat_fluid_loop_purchased_heating(B_RMR, hvac_b.id) == TRUE and are_all_terminal_heating_loops_purchased_heating(B_RMR,terminal_unit_id_list) == TRUE:is_baseline_system_5 = "SYS-5b"`  
          
