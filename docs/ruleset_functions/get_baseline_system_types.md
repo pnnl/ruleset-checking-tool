@@ -13,6 +13,19 @@
 **Function Call:** 
 1. get_dict_of_zones_and_terminal_units_served_by_hvac_sys()      
 2. is_baseline_system_1()  
+3. is_baseline_system_2()  
+4. is_baseline_system_3()  
+5. is_baseline_system_4()  
+6. is_baseline_system_5()  
+7. is_baseline_system_6()  
+8. is_baseline_system_7()  
+9. is_baseline_system_8()  
+10. is_baseline_system_9()  
+11. is_baseline_system_10()  
+12. is_baseline_system_11.1()  
+13. is_baseline_system_11.2()  
+14. is_baseline_system_12() 
+15. is_baseline_system_13()
  
 
 ## Logic:   
@@ -30,9 +43,9 @@ Declare empty lists of the hvac_b.id associated with each system type in the B_R
 - Declare a list for SYS-3c, PCHW and PHW: `SYS-3c = []`  
 - Declare a list for SYS-4, Packaged Rooftop Heat Pump (all SYS-4 scenarios with PCHW/PHW turn into one of the 3 SYS-3s with PCHW/PHW ): `SYS-4 = []`  
 - Declare a list for SYS-5, Packaged Rooftop VAV with Reheat: `SYS-5 = []`  
-- Declare a list for SYS-5b, DX and PHW: `SYS-5 = []`  
+- Declare a list for SYS-5b, DX and PHW: `SYS-5b = []`  
 - Declare a list for SYS-6, Packaged Rooftop VAV with Parallel Fan-Powered Boxes and Reheat: `SYS-6 = []`  
-- Declare a list for SYS-6b, DX and PHW: `SYS-6 = []`  
+- Declare a list for SYS-6b, DX and PHW: `SYS-6b = []`  
 - Declare a list for SYS-7, VAV with reheat: `SYS-7 = []`  
 - Declare a list for SYS-7a, PCHW with HW boiler: `SYS-7a = []`  
 - Declare a list for SYS-7b, CHW with PHW: `SYS-7b = []`  
