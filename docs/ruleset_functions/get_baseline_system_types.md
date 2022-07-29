@@ -31,7 +31,7 @@
 ## Logic:   
 Below is so that the looping associated with get_dict_of_zones_and_terminal_units_served_by_hvac_sys() does not have to be repeated for each relevant function which would be highly inefficient since it loops through all zones in the B_RMR.
 - Get dictionary of zones and terminal unit IDs associated with each HVAC system in the RMR to pass to the sub functions: `dict_of_zones_and_terminal_units_served_by_hvac_sys  = get_dict_of_zones_and_terminal_units_served_by_hvac_sys(B_RMR)`  
-Declare empty lists of the hvac_b.id associated with each system type in the B_RMR (I do not think think this is needed but it helps to idenify everything needed) 
+Declare empty lists of the hvac_b.id associated with each system type in the B_RMR (This declaration is not needed but it helps to identify everything needed to make sure its all been covered) 
 - Declare a list for SYS-1, Packaged Terminal Air Conditioner : `SYS-1 = []`  
 - Declare a list for SYS-1a, PCHW with HW boiler: `SYS-1a = []` 
 - Declare a list for SYS-1b, DX cooling with PHW: `SYS-1b = []` 
@@ -53,6 +53,7 @@ Declare empty lists of the hvac_b.id associated with each system type in the B_R
 - Declare a list for SYS-8, VAV with Parallel Fan-Powered Boxes and Reheat: `SYS-8 = []`  
 - Declare a list for SYS-8a, PCHW with Electric Resistance: `SYS-8a = []`  
 - Declare a list for SYS-8b, CHW with PHW: `SYS-8b = []`  
+- Declare a list for SYS-8b, CHW with PHW: `SYS-8c = []`  Change made by CML because 7c does not have fan power boxes
 - Declare a list for SYS-9, Heating and Ventilation w/Furnace: `SYS-9 = []`  
 - Declare a list for SYS-9b, PHW: `SYS-9b = []`  
 - Declare a list for SYS-10, Heating and Ventilation w/Electric: `SYS-10 = []`  
