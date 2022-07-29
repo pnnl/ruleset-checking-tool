@@ -22,13 +22,9 @@
 8. are_all_terminal_heat_sources_none_or_null()  
 9. are_all_terminal_cool_sources_none_or_null() 
 10. are_all_terminal_fans_null()  
-11. are_all_terminal_types_CAV()  
-12. are_all_terminal_types_four_pipe()  
-13. are_all_terminal_supplies_ducted()  
-14. are_all_terminal_heat_sources_hot_water()  
-15. are_all_terminal_cool_sources_chilled_water() 
-16. does_each_zone_have_only_one_terminal()    
-17. does_hvac_system_serve_single_zone()  
+11. are_all_terminal_supplies_ducted()  
+12. does_each_zone_have_only_one_terminal()    
+13. does_hvac_system_serve_single_zone()  
  
 ## Logic:    
 - Create an object associated with the hvac system: `hvac_b = hvac_b.id`  
