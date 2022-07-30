@@ -95,3 +95,5 @@ class Section6Rule7(RuleDefinitionListIndexedBase):
                 fail_msg = MSG_WARN_NO_DAYLIGHT
             else:
                 fail_msg = ""
+
+            return fail_msg
