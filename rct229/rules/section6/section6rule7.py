@@ -91,9 +91,4 @@ class Section6Rule7(RuleDefinitionListIndexedBase):
             daylight_flag_p = calc_vals["daylight_flag_p"]
             has_daylight_control_flag = calc_vals["has_daylight_control_flag"]
 
-            if daylight_flag_p and not has_daylight_control_flag:
-                fail_msg = MSG_WARN_NO_DAYLIGHT
-            else:
-                fail_msg = ""
-
-            return fail_msg
+            return MSG_WARN_NO_DAYLIGHT if daylight_flag_p and not has_daylight_control_flag else ""
