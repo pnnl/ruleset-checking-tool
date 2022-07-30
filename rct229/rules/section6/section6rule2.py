@@ -22,10 +22,7 @@ class Section6Rule2(RuleDefinitionListIndexedBase):
             each_rule=Section6Rule2.SpaceRule(),
             index_rmr="proposed",
             id="6-2",
-            description="Spaces in proposed building with hardwired lighting, including Hotel/Motel Guest Rooms, "
-            "Dormitory Living Quarters, Interior Lighting Power >= Table 9.6.1 or the lighting design in "
-            "the user model, whichever is greater; For Dwelling Units, Interior Lighting Power >= "
-            "0.6W/sq.ft. or the lighting design in the user model, whichever is greater",
+            description="SSpaces in proposed building with hardwired lighting, including Hotel/Motel Guest Rooms, Dormitory Living Quarters, Interior Lighting Power >= Table 9.6.1; For Dwelling Units, Interior Lighting Power >= 0.6W/sq.ft.",
             list_path="ruleset_model_instances[0].buildings[*].building_segments[*].zones[*].spaces[*]",
         )
 
@@ -35,7 +32,7 @@ class Section6Rule2(RuleDefinitionListIndexedBase):
                 rmrs_used=UserBaselineProposedVals(True, False, True),
                 required_fields={
                     "$": ["lighting_space_type", "interior_lighting"],
-                    # "interior_lighting": ["power_per_area"],
+                    "$.interior_lighting[*]": ["power_per_area"],
                 },
             )
 

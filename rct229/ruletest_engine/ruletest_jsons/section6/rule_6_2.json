@@ -44,10 +44,6 @@
                                                                 "id": "Space 1 Lighting 1",
                                                                 "lighting_multiplier_schedule": "Space 1 Lighting Schedule 1",
                                                                 "power_per_area": 11.947940562547794
-                                                            },
-                                                            {
-                                                                "id": "Space 1 Lighting 2",
-                                                                "lighting_multiplier_schedule": "Space 1 Lighting Schedule 2"
                                                             }
                                                         ],
                                                         "lighting_space_type": "DORMITORY_LIVING_QUARTERS"
@@ -102,10 +98,6 @@
                                                                 "id": "Space 1 Lighting 1",
                                                                 "lighting_multiplier_schedule": "Space 1 Lighting Schedule 1",
                                                                 "power_per_area": 11.947940562547794
-                                                            },
-                                                            {
-                                                                "id": "Space 1 Lighting 2",
-                                                                "lighting_multiplier_schedule": "Space 1 Lighting Schedule 2"
                                                             }
                                                         ],
                                                         "lighting_space_type": "DORMITORY_LIVING_QUARTERS"
@@ -180,10 +172,6 @@
                                                                 "id": "Space 1 Lighting 1",
                                                                 "lighting_multiplier_schedule": "Space 1 Lighting Schedule 1",
                                                                 "power_per_area": 11.947940562547794
-                                                            },
-                                                            {
-                                                                "id": "Space 1 Lighting 2",
-                                                                "lighting_multiplier_schedule": "Space 1 Lighting Schedule 2"
                                                             }
                                                         ],
                                                         "lighting_space_type": "DORMITORY_LIVING_QUARTERS"
@@ -238,10 +226,6 @@
                                                                 "id": "Space 1 Lighting 1",
                                                                 "lighting_multiplier_schedule": "Space 1 Lighting Schedule 1",
                                                                 "power_per_area": 13.024331604218766
-                                                            },
-                                                            {
-                                                                "id": "Space 1 Lighting 2",
-                                                                "lighting_multiplier_schedule": "Space 1 Lighting Schedule 2"
                                                             }
                                                         ],
                                                         "lighting_space_type": "DORMITORY_LIVING_QUARTERS"
