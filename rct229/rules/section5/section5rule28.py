@@ -8,6 +8,9 @@ from rct229.ruleset_functions.get_surface_conditioning_category_dict import (
     get_surface_conditioning_category_dict,
 )
 
+FAIL_MSG = "Subsurface that is not regulated (Not part of building envelope) is not modeled with the same area, U-factor and SHGC in the baseline as in the propsoed design."
+
+
 class Section5Rule28(RuleDefinitionListIndexedBase):
     """Rule 5 of ASHRAE 90.1-2019 Appendix G Section 5 (Envelope)"""
 
@@ -71,6 +74,7 @@ class Section5Rule28(RuleDefinitionListIndexedBase):
                         self,
                     ).__init__(
                         rmrs_used=UserBaselineProposedVals(False, True, True),
+                        fail_msg=FAIL_MSG,
                     )
 
                 def get_calc_vals(self, context, data=None):

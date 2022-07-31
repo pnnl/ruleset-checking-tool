@@ -42,16 +42,14 @@ class Section5Rule5(RuleDefinitionListIndexedBase):
                 required_fields={},
                 each_rule=Section5Rule5.BuildingRule.RoofRule(),
                 index_rmr="baseline",
+                list_path="$..surfaces[*]",
             )
 
-        def create_context_list(self, context, data=None):
-            building = context.baseline
-            # List of all baseline roof surfaces to become the context for RoofRule
-            return [
-                UserBaselineProposedVals(None, surface, None)
-                for surface in find_all("$..surfaces[*]", building)
-                if get_opaque_surface_type(surface) == OST.ROOF
-            ]
+        def list_filter(self, context_item, data=None):
+            surface_b = context_item.baseline
+            return (
+                    get_opaque_surface_type(surface_b) == OST.ROOF
+            )
 
         def create_data(self, context, data=None):
             building = context.baseline

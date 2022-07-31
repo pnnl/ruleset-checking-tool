@@ -13,6 +13,15 @@ from rct229.ruleset_functions.get_surface_conditioning_category_dict import (
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.std_comparisons import std_equal
 
+MANUAL_CHECK_REQUIRED_MSG = (
+    "Zone has both residential and non-residential spaces and the construction requirements "
+    "for slab-on-grade floor are different. Verify construction is modeled correctly. "
+)
+FAIL_MSG = (
+    'Baseline slab F-factor is not as expected for slabs that are less than 24" below grade. verify that the '
+    'slab is more than 24" below grade and is unregulated. '
+)
+
 
 class Section5Rule15(RuleDefinitionListIndexedBase):
     """Rule 15 of ASHRAE 90.1-2019 Appendix G Section 5 (Envelope)"""
@@ -42,16 +51,14 @@ class Section5Rule15(RuleDefinitionListIndexedBase):
                 required_fields={},
                 each_rule=Section5Rule15.BuildingRule.SlabOnGradeFloorRule(),
                 index_rmr="baseline",
+                list_path="$..surfaces[*]",
             )
 
-        def create_context_list(self, context, data=None):
-            building = context.baseline
-            # List of all baseline slab on grade floor surfaces to become the context for SlabOnGradeFloorRule
-            return [
-                UserBaselineProposedVals(None, surface, None)
-                for surface in find_all("$..surfaces[*]", building)
-                if get_opaque_surface_type(surface) == OST.UNHEATED_SOG
-            ]
+        def list_filter(self, context_item, data=None):
+            surface_b = context_item.baseline
+            return (
+                    get_opaque_surface_type(surface_b) == OST.UNHEATED_SOG
+            )
 
         def create_data(self, context, data=None):
             building = context.baseline
@@ -71,6 +78,8 @@ class Section5Rule15(RuleDefinitionListIndexedBase):
                         "$": ["construction"],
                         "construction": ["f_factor"],
                     },
+                    manual_check_required_msg=MANUAL_CHECK_REQUIRED_MSG,
+                    fail_msg=FAIL_MSG,
                 )
 
             def get_calc_vals(self, context, data=None):
@@ -112,7 +121,7 @@ class Section5Rule15(RuleDefinitionListIndexedBase):
                     "target_f_factor_nonres": target_f_factor_nonres,
                 }
 
-            def manaul_check_required(self, context, calc_vals, data=None):
+            def manual_check_required(self, context, calc_vals=None, data=None):
                 target_f_factor_res = calc_vals["target_f_factor_res"]
                 target_f_factor_nonres = calc_vals["target_f_factor_nonres"]
 

@@ -10,10 +10,10 @@ from rct229.ruleset_functions.get_building_segment_lighting_status_type_dict imp
 )
 from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all
-from rct229.utils.pint_utils import pint_sum
 from rct229.utils.std_comparisons import std_equal
 
 OFFICE_OPEN_PLAN = schema_enums["LightingSpaceType2019ASHRAE901TG37"].OFFICE_OPEN_PLAN
+FAIL_MSG = "P_RMR lighting status type is as-designed or as-existing. But lighting space type in B_RMR is not specified."
 
 
 class Section6Rule4(RuleDefinitionListIndexedBase):
@@ -68,7 +68,7 @@ class Section6Rule4(RuleDefinitionListIndexedBase):
                         Section6Rule4.BuildingSegmentRule.ZoneRule.SpaceRule,
                         self,
                     ).__init__(
-                        fail_msg="P_RMR lighting status type is as-designed or as-existing. But lighting space type in B_RMR is not specified.",
+                        fail_msg=FAIL_MSG,
                         rmrs_used=UserBaselineProposedVals(False, True, True),
                     )
 
@@ -81,31 +81,18 @@ class Section6Rule4(RuleDefinitionListIndexedBase):
                     space_lighting_status_type_p = data[
                         "building_segment_lighting_status_type_dict_p"
                     ][space_p["id"]]
-                    lpd_allowance_b = pint_sum(
-                        [
-                            table_G3_7_lookup(
-                                space_b["lighting_space_type"],
-                                getattr_(
-                                    lpd, "interior_light", "occupancy_control_type"
-                                ),
-                                data["avg_zone_ht_b"],
-                                getattr_(
-                                    space_b, "Space", "floor_area"
-                                ),
-                            )
-                            if "lighting_space_type" in space_b
-                            else table_G3_7_lookup(
-                                OFFICE_OPEN_PLAN,
-                                data["avg_zone_ht_b"],
-                                getattr_(
-                                    lpd, "interior_light", "occupancy_control_type"
-                                ),
-                                getattr_(
-                                    space_b, "Space", "floor_area"
-                                ),
-                            )
-                            for lpd in find_all("interior_lighting[*]", space_b)
-                        ]
+                    lpd_allowance_b = (
+                        table_G3_7_lookup(
+                            space_b["lighting_space_type"],
+                            data["avg_zone_ht_b"],
+                            getattr_(space_b, "Space", "floor_area"),
+                        )
+                        if "lighting_space_type" in space_b
+                        else table_G3_7_lookup(
+                            OFFICE_OPEN_PLAN,
+                            data["avg_zone_ht_b"],
+                            getattr_(space_b, "Space", "floor_area"),
+                        )
                     )
 
                     return {
@@ -122,7 +109,7 @@ class Section6Rule4(RuleDefinitionListIndexedBase):
                         "space_lighting_status_type_p"
                     ]
                     total_space_lpd_b = calc_vals["total_space_lpd_b"]
-                    lpd_allowance_b = calc_vals["lpd_allowance_b"]['lpd']
+                    lpd_allowance_b = calc_vals["lpd_allowance_b"]["lpd"]
 
                     return (
                         # Not Case 1
