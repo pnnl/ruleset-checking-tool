@@ -1,9 +1,8 @@
-from rct229.rule_engine.rule_base import (
-    RuleDefinitionBase,
-    RuleDefinitionListIndexedBase,
-)
+from rct229.rule_engine.rule_base import RuleDefinitionBase
+from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 from rct229.schema.config import ureg
+from rct229.utils.masks import invert_mask
 
 BUILDING_AREA_CUTTOFF = ureg("5000 ft2")
 
@@ -15,68 +14,63 @@ class Section6Rule5(RuleDefinitionListIndexedBase):
         super(Section6Rule5, self).__init__(
             id="6-5",
             rmrs_used=UserBaselineProposedVals(False, True, True),
-            each_rule=Section6Rule5.BuidlingRule(),
+            each_rule=Section6Rule5.BuildingRule(),
             index_rmr="baseline",
             description="Baseline building is modeled with automatic shutoff controls in buildings >5000 sq.ft.",
-            required_fields={"$": ["schedules"]},
+            required_fields={
+                "$": ["calendar", "schedules"],
+                "calendar": ["is_leap_year"],
+            },
             list_path="ruleset_model_instances[0].buildings[*]",
+            data_items={
+                "is_leap_year_b": ("baseline", "calendar/is_leap_year"),
+                "schedules_b": ("baseline", "schedules"),
+                "schedules_p": ("proposed", "schedules"),
+            },
         )
 
-        def create_data(self, context, data={}):
-            rmi_b = context.baseline
-            rmi_p = context.proposed
+    class BuildingRule(RuleDefinitionListIndexedBase):
+        def __init__(self):
+            super(Section6Rule5.BuildingRule, self).__init__(
+                rmrs_used=UserBaselineProposedVals(False, True, True),
+                each_rule=Section6Rule5.BuildingRule.ZoneRule(),
+                index_rmr="baseline",
+                required_fields={"$": ["building_open_schedule"]},
+                data_items={
+                    "building_open_schedule_b",
+                    ("baseline", "building_open_schedule"),
+                },
+            )
 
-            return {
-                **data,
-                "schedules_b": rmi_b["schedules"],
-                "schedules_p": rmi_p["schedules"],
-            }
+        def is_applicable(self, context, data):
+            building_total_area_b = pint_sum(
+                "$..spaces[*].floor_area", building_b, ZERO.AREA
+            )
 
-        class BuildingRule(RuleDefinitionListIndexedBase):
+            return building_total_area_b > BUILDING_AREA_CUTTOFF
+
+        class ZoneRule(RuleDefinitionListIndexedBase):
             def __init__(self):
-                super(Section6Rule5.BuildingSegmentRule, self).__init__(
+                super(Section6Rule5.BuildingRule.ZoneRule, self).__init__(
                     rmrs_used=UserBaselineProposedVals(False, True, True),
-                    each_rule=Section6Rule5.BuidlingRule.ZoneRule(),
-                    required_fields={"$": ["building_open_schedule"]},
+                    each_rule=Section6Rule5.BuildingRule.ZoneRule.SpaceRule(),
+                    index_rmr="baseline",
                 )
 
-            def is_applicable(self, context, data):
-                building_total_area_b = pint_sum(
-                    "$..spaces[*].floor_area", building_b, ZERO.AREA
-                )
-
-                return building_total_area_b > BUILDING_AREA_CUTTOFF
-
-            def create_data(self, context, data={}):
-                building_b = context.baseline
-
+            def create_data(self, context, data=None):
                 return {
-                    **data,
-                    "building_open_schedule_b": building_b["building_open_schedule"],
+                    "avg_zone_height_b": get_avg_zone_height(zone_b),
+                    "avg_zone_height_p": get_avg_zone_height(zone_p),
                 }
-
-            class ZoneRule(RuleDefinitionListIndexedBase):
-                def __init__(self):
-                    super(Section6Rule5.BuildingRule.ZoneRule, self).__init__(
-                        rmrs_used=UserBaselineProposedVals(False, True, True),
-                        # required_fields={"$": []},
-                    )
-
-                def create_data(self, context, data=None):
-                    return {
-                        **data,
-                        "avg_zone_height_b": get_avg_zone_height(zone_b),
-                        "avg_zone_height_p": get_avg_zone_height(zone_p),
-                    }
 
             class SpaceRule(RuleDefinitionBase):
                 def __init__(self):
-                    super(Section6Rule5.SpaceRule, self).__init__(
-                        rmrs_used=UserBaselineProposedVals(True, False, True),
-                        required_fields={"$": ["interior_lighting"]},
+                    super(Section6Rule5.BuildingRule.ZoneRule.SpaceRule, self).__init__(
+                        rmrs_used=UserBaselineProposedVals(True, False, True)
                     )
 
                 def get_calc_vals(self, context, data=None):
+                    is_leap_year_b = data["is_leap_year_b"]
                     schedules_b = data["schedules_b"]
                     schedules_p = data["schedules_p"]
                     space_b = context.baseline
@@ -85,34 +79,34 @@ class Section6Rule5(RuleDefinitionListIndexedBase):
                     space_height_p = data["avg_zone_height_p"]
                     normalized_interior_lighting_schedule_b = (
                         normalize_interior_lighting_schedules(
-                            space_b, space_height_b, schedules_b
+                            space_b,
+                            space_height_b,
+                            schedules_b,
+                            adjust_for_credit=False,
                         )
                     )
                     normalized_interior_lighting_schedule_p = (
                         normalize_interior_lighting_schedules(
-                            space_p, space_height_p, schedules_p
+                            space_p,
+                            space_height_p,
+                            schedules_p,
+                            adjust_for_credit=False,
                         )
                     )
 
                     schedule_comparison_result = compare_schedules(
                         normalized_interior_lighting_schedule_b,
                         normalized_interior_lighting_schedule_p,
-                        mask_schedule=building_open_schedule_b,
-                        comparison_factor=-111,
-                        is_leap_year=is_leap_year,
+                        mask_schedule=invert_mask(building_open_schedule_b),
+                        is_leap_year=is_leap_year_b,
                     )
 
                     return {"schedule_comparison_result": schedule_comparison_result}
 
                 def rule_check(self, context, calc_vals=None, data=None):
-                    lighting_power_allowance_p = calc_vals["lighting_power_allowance_p"]
-                    space_lighting_power_per_area_p = calc_vals[
-                        "space_lighting_power_per_area_p"
-                    ]
-                    space_lighting_power_per_area_u = calc_vals[
-                        "space_lighting_power_per_area_u"
-                    ]
+                    schedule_comparison_result = calc_vals["schedule_comparison_result"]
 
-                    return space_lighting_power_per_area_p == max(
-                        lighting_power_allowance_p, space_lighting_power_per_area_u
+                    return (
+                        schedule_comparison_result["total+hours_matched"]
+                        == schedule_comparison_result["total_hours_matched"]
                     )
