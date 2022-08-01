@@ -37,11 +37,8 @@ class Section5Rule21(RuleDefinitionListIndexedBase):
             id="5-21",
             description="The vertical fenestration shall be distributed on each face of the building in the same proportion as in the proposed design.",
             list_path="ruleset_model_instances[0].buildings[*]",
+            data_items={"climate_zone": ("baseline", "weather/climate_zone")},
         )
-
-    def create_data(self, context, data=None):
-        rmr_baseline = context.baseline
-        return {"climate_zone": rmr_baseline["weather"]["climate_zone"]}
 
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
@@ -68,7 +65,6 @@ class Section5Rule21(RuleDefinitionListIndexedBase):
             )
 
             return {
-                **data,
                 "total_fenestration_area_b": sum(
                     find_all("$..total_window_area", window_wall_areas_dictionary_b),
                     ZERO.AREA,

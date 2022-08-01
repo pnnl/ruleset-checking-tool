@@ -59,7 +59,7 @@ class RuleDefinitionBase:
         self.not_applicable_msg = not_applicable_msg
         self.fail_msg = fail_msg
 
-    def evaluate(self, rmrs, data=None):
+    def evaluate(self, rmrs, data={}):
         """Generates the outcome dictionary for the rule
 
         This method also orchestrates the high-level workflow for any rule.
