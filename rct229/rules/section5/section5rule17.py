@@ -30,11 +30,8 @@ class Section5Rule17(RuleDefinitionListIndexedBase):
             id="5-17",
             description="Opaque surfaces that are not regulated (not part of opaque building envelope) must be modeled the same in the baseline as in the proposed design. ",
             list_path="ruleset_model_instances[0].buildings[*]",
+            data_items={"climate_zone": ("baseline", "weather/climate_zone")},
         )
-
-    def create_data(self, context, data=None):
-        rmr_baseline = context.baseline
-        return {"climate_zone": rmr_baseline["weather"]["climate_zone"]}
 
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
@@ -48,9 +45,7 @@ class Section5Rule17(RuleDefinitionListIndexedBase):
 
         def create_data(self, context, data=None):
             building = context.baseline
-            # Merge into the existing data dict
             return {
-                **data,
                 "surface_conditioning_category_dict": get_surface_conditioning_category_dict(
                     data["climate_zone"], building
                 ),
@@ -59,9 +54,7 @@ class Section5Rule17(RuleDefinitionListIndexedBase):
         def list_filter(self, context_item, data=None):
             scc = data["surface_conditioning_category_dict"]
             surface_b = context_item.baseline
-            return (
-                    scc[surface_b["id"]] == SCC.UNREGULATED
-            )
+            return scc[surface_b["id"]] == SCC.UNREGULATED
 
         class UnregulatedSurfaceRule(RuleDefinitionBase):
             def __init__(self):
