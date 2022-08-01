@@ -25,11 +25,8 @@ class Section5Rule35(RuleDefinitionListIndexedBase):
             id="5-35",
             description="If the skylight area of the proposed design is greater than 3%, baseline skylight area shall be decreased in all roof components in which skylights are located to reach 3%.",
             list_path="ruleset_model_instances[0].buildings[*]",
+            data_items={"climate_zone": ("baseline", "weather/climate_zone")},
         )
-
-    def create_data(self, context, data=None):
-        rmr_baseline = context.baseline
-        return {"climate_zone": rmr_baseline["weather"]["climate_zone"]}
 
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
@@ -43,9 +40,7 @@ class Section5Rule35(RuleDefinitionListIndexedBase):
         def create_data(self, context, data=None):
             building_b = context.baseline
             building_p = context.proposed
-            # Merge into the existing data dict
             return {
-                **data,
                 "skylight_roof_areas_dictionary_b": get_building_segment_skylight_roof_areas_dict(
                     data["climate_zone"], building_b
                 ),

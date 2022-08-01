@@ -26,11 +26,8 @@ class Section5Rule28(RuleDefinitionListIndexedBase):
             id="5-28",
             description="Subsurface that is not regulated (not part of building envelope) must be modeled with the same area, U-factor and SHGC in the baseline as in the proposed design.",
             list_path="ruleset_model_instances[0].buildings[*]",
+            data_items={"climate_zone": ("baseline", "weather/climate_zone")},
         )
-
-    def create_data(self, context, data=None):
-        rmr_baseline = context.baseline
-        return {"climate_zone": rmr_baseline["weather"]["climate_zone"]}
 
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
@@ -43,9 +40,7 @@ class Section5Rule28(RuleDefinitionListIndexedBase):
 
         def create_data(self, context, data=None):
             building = context.baseline
-            # Merge into the existing data dict
             return {
-                **data,
                 "scc_dict_b": get_surface_conditioning_category_dict(
                     data["climate_zone"], building
                 ),

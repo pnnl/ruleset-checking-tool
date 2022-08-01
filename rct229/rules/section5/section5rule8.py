@@ -29,10 +29,8 @@ class Section5Rule8(RuleDefinitionListIndexedBase):
                 "$": ["weather"],
                 "weather": ["climate_zone"],
             },
+            data_items={"climate_zone": ("baseline", "weather/climate_zone")},
         )
-
-    def create_data(self, context, data=None):
-        return {"climate_zone": context.baseline["weather"]["climate_zone"]}
 
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
@@ -46,15 +44,11 @@ class Section5Rule8(RuleDefinitionListIndexedBase):
 
         def list_filter(self, context_item, data=None):
             surface_b = context_item.baseline
-            return (
-                    get_opaque_surface_type(surface_b) == OST.BELOW_GRADE_WALL
-            )
+            return get_opaque_surface_type(surface_b) == OST.BELOW_GRADE_WALL
 
         def create_data(self, context, data=None):
             building = context.baseline
-            # Merge into the existing data dict
             return {
-                **data,
                 "surface_conditioning_category_dict": get_surface_conditioning_category_dict(
                     data["climate_zone"], building
                 ),
