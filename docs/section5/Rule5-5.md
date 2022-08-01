@@ -48,8 +48,10 @@
 
         Case 1: If zone has both residential and non-residential spaces and the construction requirement for roof is different, request manual review: ```if manual_review_flag == TRUE: RAISE_WARNING```  
 
-        Case 2: Else if roof U-factor matches Table G3.4: ```else if surface_construction_b.u_factor == target_u_factor: PASS```  
+        Case 2: Else if roof U-factor matches Table G3.4: ```else if surface_construction_b.u_factor == target_u_factor: PASS```
 
+          - Conservative comparison less equal: ```if AHJ_RA_compare == True and surface_construction_b.u_factor <= target_u_factor: PASS```
+        
         Case 3: Else: ```else: FAIL```  
 
 **[Back](../_toc.md)**
