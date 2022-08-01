@@ -46,9 +46,11 @@ class Section6Rule9(RuleDefinitionListIndexedBase):
 
         def create_data(self, context, data=None):
             rmi_p = context.proposed
+            rmi_b = context.baseline
             return {
                 **data,
                 "schedules_p": rmi_p["schedules"],
+                "schedules_b": rmi_b["schedules"],
             }
 
         class BuildingRule(RuleDefinitionListIndexedBase):
@@ -66,7 +68,7 @@ class Section6Rule9(RuleDefinitionListIndexedBase):
                 building_p = context.proposed
                 return (
                     pint_sum(find_all("spaces[*].floor_area", building_p), ZERO.AREA)
-                    >= FLOOR_AREA_LIMIT
+                    <= FLOOR_AREA_LIMIT
                 )
 
             def create_data(self, context, data=None):

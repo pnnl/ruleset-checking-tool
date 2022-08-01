@@ -26,7 +26,7 @@
 
 - For each building segment in building: `for building_segment_p in P_RMR.building.building_segments:`  
 
-    - For each zone in thermal block: `zone_p in building_segment_p.zones:`  
+    - For each zone in building_segments: `zone_p in building_segment_p.zones:`
 
       - For each space in zone: `space_p in zone_p.spaces:`  
 
@@ -49,15 +49,5 @@
 **Notes:**
   1. Updated the Rule ID from 6-13 to 6-9 on 6/3/2022
   2. Updated the Rule ID from 6-9 to 6-8 on 6/8/2022
-
-**Temporary Function note:**
-
-`compare_schedule_result = compare_schedules(Schedule 1, Schedule 2, Mask Schedule, comparison factor)`
-
-(4 inputs, Schedule 1, Schedule 2, Mask Schedule, comparison factor)
-
-- Schedule 2 as the comparison basis, i.e. Schedule 1 = Schedule 2 * comparison factor
-- When Mask Schedule hourly value is 0, schedules need to be the same at that hour. If Mask Schedule hourly value is 1, Schedule 1 needs to be comparison factor times Schedule 2 at that hour. If Mask Schedule hourly value is 2, skip comparison.
-- can return "match", "equal and less", "equal and more", "equal, less and more", with bin data, TBD
 
 **[Back](../_toc.md)**
