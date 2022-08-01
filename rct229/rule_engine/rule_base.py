@@ -141,6 +141,9 @@ class RuleDefinitionBase:
                             # Assume result type is bool
                             elif result:
                                 outcome["result"] = "PASSED"
+                                pass_msg = self.get_pass_msg(context, calc_vals, data)
+                                if pass_msg:
+                                    outcome["message"] = pass_msg
                             else:
                                 outcome["result"] = "FAILED"
                                 fail_msg = self.get_fail_msg(context, calc_vals, data)

@@ -45,7 +45,8 @@ class Section6Rule1(RuleDefinitionListIndexedBase):
             return {
                 "allowable_LPD_BAM": table_G3_8_lookup(
                     building_segment_p["lighting_building_area_type"]
-                )["lpd"] if building_segment_p.get("lighting_building_area_type") != None else ZERO.POWER_PER_AREA
+                )["lpd"] if building_segment_p.get("lighting_building_area_type") != None else ZERO.POWER_PER_AREA,
+                "building_area_type_bool": True if building_segment_p.get("lighting_building_area_type") != None else False
             }
 
         class ZoneRule(RuleDefinitionListIndexedBase):
@@ -82,6 +83,7 @@ class Section6Rule1(RuleDefinitionListIndexedBase):
                     allowable_LPD_BAM = data["allowable_LPD_BAM"]
                     avg_space_height = data["avg_space_height"]
                     floor_area_p = data["floor_area_p"]
+                    building_area_type_bool = data["building_area_type_bool"]
 
                     building_segment_design_lighting_wattage = (
                         pint_sum(
@@ -92,7 +94,7 @@ class Section6Rule1(RuleDefinitionListIndexedBase):
                     )
 
                     total_building_segment_area_p = ZERO.AREA
-                    if space_p.get("lighting_building_area_type") != None:
+                    if building_area_type_bool != None:
                         total_building_segment_area_p += space_p["floor_area"]
 
                     check_BAM_flag = False
@@ -102,15 +104,13 @@ class Section6Rule1(RuleDefinitionListIndexedBase):
                         check_BAM_flag = True
                     else:
                         allowable_LPD_space = table_G3_7_lookup(
-                            space_p["lighting_space_type"],
+                            space_p.get("lighting_space_type"),
                             avg_space_height,
                             floor_area_p,
                         )["lpd"]
                         allowable_lighting_wattage_SBS += (
                             allowable_LPD_space * space_p["floor_area"]
                         )
-
-                    multiplied_value = allowable_LPD_BAM * total_building_segment_area_p
 
                     return {
                         "allowable_LPD_BAM": allowable_LPD_BAM,
@@ -119,7 +119,6 @@ class Section6Rule1(RuleDefinitionListIndexedBase):
                         "total_building_segment_area_p": total_building_segment_area_p,
                         "allowable_LPD_space": allowable_LPD_space,
                         "allowable_lighting_wattage_SBS": allowable_lighting_wattage_SBS,
-                        "multiplied_value": multiplied_value,
                     }
 
                 def get_pass_msg(self, context, calc_vals=None, data=None):
