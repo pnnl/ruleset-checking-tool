@@ -1,8 +1,15 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
+from rct229.ruleset_functions.compare_schedules import compare_schedules
+from rct229.ruleset_functions.get_avg_zone_height import get_avg_zone_height
+from rct229.ruleset_functions.normalize_interior_lighting_schedules import (
+    normalize_interior_lighting_schedules,
+)
 from rct229.schema.config import ureg
+from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.masks import invert_mask
+from rct229.utils.pint_utils import ZERO, pint_sum
 
 BUILDING_AREA_CUTTOFF = ureg("5000 ft2")
 
@@ -37,14 +44,14 @@ class Section6Rule5(RuleDefinitionListIndexedBase):
                 index_rmr="baseline",
                 required_fields={"$": ["building_open_schedule"]},
                 data_items={
-                    "building_open_schedule_b",
-                    ("baseline", "building_open_schedule"),
+                    "building_open_schedule_b": ("baseline", "building_open_schedule"),
                 },
             )
 
         def is_applicable(self, context, data):
+            building_b = context.baseline
             building_total_area_b = pint_sum(
-                "$..spaces[*].floor_area", building_b, ZERO.AREA
+                find_all("$..spaces[*].floor_area", building_b, ZERO.AREA)
             )
 
             return building_total_area_b > BUILDING_AREA_CUTTOFF
@@ -58,6 +65,8 @@ class Section6Rule5(RuleDefinitionListIndexedBase):
                 )
 
             def create_data(self, context, data=None):
+                zone_b = context.baseline
+                zone_p = context.proposed
                 return {
                     "avg_zone_height_b": get_avg_zone_height(zone_b),
                     "avg_zone_height_p": get_avg_zone_height(zone_p),
@@ -66,7 +75,7 @@ class Section6Rule5(RuleDefinitionListIndexedBase):
             class SpaceRule(RuleDefinitionBase):
                 def __init__(self):
                     super(Section6Rule5.BuildingRule.ZoneRule.SpaceRule, self).__init__(
-                        rmrs_used=UserBaselineProposedVals(True, False, True)
+                        rmrs_used=UserBaselineProposedVals(False, True, True)
                     )
 
                 def get_calc_vals(self, context, data=None):
@@ -107,6 +116,6 @@ class Section6Rule5(RuleDefinitionListIndexedBase):
                     schedule_comparison_result = calc_vals["schedule_comparison_result"]
 
                     return (
-                        schedule_comparison_result["total+hours_matched"]
+                        schedule_comparison_result["total_hours_matched"]
                         == schedule_comparison_result["total_hours_matched"]
                     )
