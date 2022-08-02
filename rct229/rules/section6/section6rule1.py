@@ -121,30 +121,6 @@ class Section6Rule1(RuleDefinitionListIndexedBase):
                         "allowable_lighting_wattage_SBS": allowable_lighting_wattage_SBS,
                     }
 
-                def get_pass_msg(self, context, calc_vals=None, data=None):
-                    allowable_LPD_BAM = calc_vals["allowable_LPD_BAM"]
-                    check_BAM_flag = calc_vals["check_BAM_flag"]
-
-                    if allowable_LPD_BAM and not check_BAM_flag:
-                        return ""
-                    elif not allowable_LPD_BAM and not check_BAM_flag:
-                        return CASE3_WARNING
-                    else:
-                        return CASE5_WARNING
-
-                def get_fail_msg(self, context, calc_vals=None, data=None):
-                    allowable_LPD_BAM = calc_vals["allowable_LPD_BAM"]
-                    check_BAM_flag = calc_vals["check_BAM_flag"]
-
-                    if allowable_LPD_BAM and not check_BAM_flag:
-                        return ""
-                    elif not allowable_LPD_BAM and not check_BAM_flag:
-                        return CASE4_WARNING
-                    elif allowable_LPD_BAM and check_BAM_flag:
-                        return CASE6_WARNING
-                    elif not allowable_LPD_BAM and check_BAM_flag:
-                        return CASE7_WARNING
-
                 def rule_check(self, context, calc_vals=None, data=None):
                     allowable_LPD_BAM = calc_vals["allowable_LPD_BAM"]
                     check_BAM_flag = calc_vals["check_BAM_flag"]
@@ -184,3 +160,27 @@ class Section6Rule1(RuleDefinitionListIndexedBase):
                             return False
                     else:
                         return False
+
+                def get_pass_msg(self, context, calc_vals=None, data=None):
+                    allowable_LPD_BAM = calc_vals["allowable_LPD_BAM"]
+                    check_BAM_flag = calc_vals["check_BAM_flag"]
+
+                    if allowable_LPD_BAM and not check_BAM_flag:
+                        return ""
+                    elif not allowable_LPD_BAM and not check_BAM_flag:
+                        return CASE3_WARNING
+                    else:
+                        return CASE5_WARNING
+
+                def get_fail_msg(self, context, calc_vals=None, data=None):
+                    allowable_LPD_BAM = calc_vals["allowable_LPD_BAM"]
+                    check_BAM_flag = calc_vals["check_BAM_flag"]
+
+                    if allowable_LPD_BAM and not check_BAM_flag:
+                        return ""
+                    elif not allowable_LPD_BAM and not check_BAM_flag:
+                        return CASE4_WARNING
+                    elif allowable_LPD_BAM and check_BAM_flag:
+                        return CASE6_WARNING
+                    elif not allowable_LPD_BAM and check_BAM_flag:
+                        return CASE7_WARNING
