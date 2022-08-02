@@ -6,7 +6,6 @@ from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedV
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.pint_utils import ZERO, pint_sum
 
-
 CASE3_WARNING = "Project passes based on space-by-space method. Verify if project sues space-by-space method."
 CASE4_WARNING = "Project fails based on space-by-space method. LIGHTING_BUILDING_AREA_TYPE is not known to determine building area method allowance."
 CASE5_WARNING = "Project passes based on building area method. Verify if project uses building area method."
@@ -26,7 +25,6 @@ class Section6Rule1(RuleDefinitionListIndexedBase):
             description="The total building interior lighting power shall not exceed the interior lighting power "
             "allowance determined using either Table G3.7 or G3.8",
             list_path="ruleset_model_instances[0].buildings[*].building_segments[*]",
-            # rmr_context="ruleset_model_instances/0/buildings",
         )
 
     class BuildingSegmentRule(RuleDefinitionListIndexedBase):
@@ -38,9 +36,8 @@ class Section6Rule1(RuleDefinitionListIndexedBase):
                 list_path="$..zones[*]",
             )
 
-        def create_data(self, context, data=None):
+        def create_data(self, context, data):
             building_segment_p = context.proposed
-
 
             return {
                 "allowable_LPD_BAM": table_G3_8_lookup(
@@ -59,14 +56,13 @@ class Section6Rule1(RuleDefinitionListIndexedBase):
                     required_fields={"$": ["volume"]},
                 )
 
-            def create_data(self, context, data=None):
+            def create_data(self, context, data):
                 zone_p = context.proposed
                 floor_area_p = pint_sum(
                     find_all("spaces[*].floor_area", zone_p), ZERO.AREA
                 )
 
                 return {
-                    **data,
                     "floor_area_p": floor_area_p,
                     "avg_space_height": zone_p.get("volume", ZERO.VOLUME)
                     / floor_area_p,
