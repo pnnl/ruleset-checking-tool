@@ -28,7 +28,7 @@ class Section6Rule5(RuleDefinitionListIndexedBase):
                 "$": ["calendar"],
                 "calendar": ["is_leap_year"],
             },
-            list_path="ruleset_model_instances[0].buildings[*]",
+            list_path="ruleset_model_instances[0]",
             data_items={"is_leap_year_b": ("baseline", "calendar/is_leap_year")},
         )
 
@@ -54,6 +54,7 @@ class Section6Rule5(RuleDefinitionListIndexedBase):
                     rmrs_used=UserBaselineProposedVals(False, True, True),
                     each_rule=Section6Rule5.RulesetModelInstanceRule.BuildingRule.ZoneRule(),
                     index_rmr="baseline",
+                    list_path="$..zones[*]",
                     required_fields={"$": ["building_open_schedule"]},
                     data_items={
                         "building_open_schedule_b": (
@@ -80,6 +81,7 @@ class Section6Rule5(RuleDefinitionListIndexedBase):
                         rmrs_used=UserBaselineProposedVals(False, True, True),
                         each_rule=Section6Rule5.RulesetModelInstanceRule.BuildingRule.ZoneRule.SpaceRule(),
                         index_rmr="baseline",
+                        list_path="spaces[*]",
                     )
 
                 def create_data(self, context, data=None):
@@ -100,13 +102,15 @@ class Section6Rule5(RuleDefinitionListIndexedBase):
                         )
 
                     def get_calc_vals(self, context, data=None):
+                        space_b = context.baseline
+                        space_p = context.proposed
+                        building_open_schedule_b = data["building_open_schedule_b"]
                         is_leap_year_b = data["is_leap_year_b"]
                         schedules_b = data["schedules_b"]
                         schedules_p = data["schedules_p"]
-                        space_b = context.baseline
-                        space_p = context.proposed
                         space_height_b = data["avg_zone_height_b"]
                         space_height_p = data["avg_zone_height_p"]
+
                         normalized_interior_lighting_schedule_b = (
                             normalize_interior_lighting_schedules(
                                 space_b,
