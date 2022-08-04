@@ -19,6 +19,7 @@ from rct229.utils.pint_utils import ZERO
 from rct229.utils.std_comparisons import std_equal
 
 DOOR = schema_enums["SubsurfaceClassificationType"].DOOR
+MANUAL_CHECK_REQUIRED_MSG = "Manual review is requested to verify vertical fenestration meets U-factor requirement as per Table G3.4. "
 
 
 class Section5Rule24(RuleDefinitionListIndexedBase):
@@ -180,8 +181,8 @@ class Section5Rule24(RuleDefinitionListIndexedBase):
                 if bldg_scc_wwr_ratio[SCC.SEMI_EXTERIOR] > 0
                 else ZERO.U_FACTOR
             )
+
             return {
-                **data,
                 # TODO this function will likely need to be revised to RMD level later.
                 "scc_dict_b": get_surface_conditioning_category_dict(
                     climate_zone, building_b
@@ -215,6 +216,7 @@ class Section5Rule24(RuleDefinitionListIndexedBase):
                             "u_factor",
                         ]
                     },
+                    manual_check_required_msg=MANUAL_CHECK_REQUIRED_MSG,
                 )
 
             def manual_check_required(self, context, calc_vals=None, data=None):
@@ -230,7 +232,7 @@ class Section5Rule24(RuleDefinitionListIndexedBase):
             def create_data(self, context, data=None):
                 surface_b = context.baseline
                 scc_dict_b = data["scc_dict_b"]
-                return {**data, "scc": scc_dict_b[surface_b["id"]]}
+                return {"scc": scc_dict_b[surface_b["id"]]}
 
             def list_filter(self, context_item, data=None):
                 subsurface_b = context_item.baseline

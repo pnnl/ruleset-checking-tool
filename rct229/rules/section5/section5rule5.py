@@ -29,11 +29,8 @@ class Section5Rule5(RuleDefinitionListIndexedBase):
             id="5-5",
             description="Baseline roof assemblies must match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8.",
             list_path="ruleset_model_instances[0].buildings[*]",
+            data_items={"climate_zone": ("baseline", "weather/climate_zone")},
         )
-
-    def create_data(self, context, data=None):
-        rmr_baseline = context.baseline
-        return {"climate_zone": rmr_baseline["weather"]["climate_zone"]}
 
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
@@ -42,22 +39,17 @@ class Section5Rule5(RuleDefinitionListIndexedBase):
                 required_fields={},
                 each_rule=Section5Rule5.BuildingRule.RoofRule(),
                 index_rmr="baseline",
+                list_path="$..surfaces[*]",
             )
 
-        def create_context_list(self, context, data=None):
-            building = context.baseline
-            # List of all baseline roof surfaces to become the context for RoofRule
-            return [
-                UserBaselineProposedVals(None, surface, None)
-                for surface in find_all("$..surfaces[*]", building)
-                if get_opaque_surface_type(surface) == OST.ROOF
-            ]
+        def list_filter(self, context_item, data=None):
+            surface_b = context_item.baseline
+            return get_opaque_surface_type(surface_b) == OST.ROOF
 
-        def create_data(self, context, data=None):
+        def create_data(self, context, data):
             building = context.baseline
-            # Merge into the existing data dict
+
             return {
-                **data,
                 "surface_conditioning_category_dict": get_surface_conditioning_category_dict(
                     data["climate_zone"], building
                 ),

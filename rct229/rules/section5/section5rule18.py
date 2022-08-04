@@ -33,11 +33,8 @@ class Section5Rule18(RuleDefinitionListIndexedBase):
             id="5-18",
             description="For building area types included in Table G3.1.1-1, vertical fenestration areas for new buildings and additions shall equal that in Table G3.1.1-1 based on the area of gross above-grade walls that separate conditioned spaces and semi-heated spaces from the exterior.",
             list_path="ruleset_model_instances[0].buildings[*]",
+            data_items={"climate_zone": ("baseline", "weather/climate_zone")},
         )
-
-    def create_data(self, context, data=None):
-        rmr_baseline = context.baseline
-        return {"climate_zone": rmr_baseline["weather"]["climate_zone"]}
 
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
@@ -66,12 +63,12 @@ class Section5Rule18(RuleDefinitionListIndexedBase):
                 is_area_type_all_new_dict[area_type] = building_segment["is_all_new"]
 
             return {
-                **data,
                 "is_area_type_all_new_dict": is_area_type_all_new_dict,
                 "area_type_window_wall_ratio_dict": area_type_window_wall_area_dict_b,
             }
 
         def create_context_list(self, context, data=None):
+            # EXAMPLE of reorganizing the context.
             building = context.baseline
             area_type_to_building_segment_dict = {}
             # dict map area_type with list of building_segment
