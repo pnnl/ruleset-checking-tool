@@ -7,7 +7,7 @@ from rct229.ruleset_functions.normalize_interior_lighting_schedules import (
     normalize_interior_lighting_schedules,
 )
 from rct229.schema.config import ureg
-from rct229.utils.jsonpath_utils import find_all
+from rct229.utils.jsonpath_utils import find_all, find_exactly_one_with_field_value
 from rct229.utils.masks import invert_mask
 from rct229.utils.pint_utils import ZERO, pint_sum
 
@@ -57,7 +57,7 @@ class Section6Rule5(RuleDefinitionListIndexedBase):
                     list_path="$..zones[*]",
                     required_fields={"$": ["building_open_schedule"]},
                     data_items={
-                        "building_open_schedule_b": (
+                        "building_open_schedule_id_b": (
                             "baseline",
                             "building_open_schedule",
                         ),
@@ -102,9 +102,18 @@ class Section6Rule5(RuleDefinitionListIndexedBase):
                         )
 
                     def get_calc_vals(self, context, data=None):
+                        schedules_b = data["schedules_b"]
                         space_b = context.baseline
                         space_p = context.proposed
-                        building_open_schedule_b = data["building_open_schedule_b"]
+                        building_open_schedule_id_b = data[
+                            "building_open_schedule_id_b"
+                        ]
+                        building_open_schedule_b = find_exactly_one_with_field_value(
+                            jpath="$[*]",
+                            field="id",
+                            value=building_open_schedule_id_b,
+                            obj=schedules_b,
+                        )
                         is_leap_year_b = data["is_leap_year_b"]
                         schedules_b = data["schedules_b"]
                         schedules_p = data["schedules_p"]
