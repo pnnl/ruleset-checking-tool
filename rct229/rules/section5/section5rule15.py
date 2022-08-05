@@ -51,10 +51,6 @@ class Section5Rule15(RuleDefinitionListIndexedBase):
                 list_path="$..surfaces[*]",
             )
 
-        def list_filter(self, context_item, data=None):
-            surface_b = context_item.baseline
-            return get_opaque_surface_type(surface_b) == OST.UNHEATED_SOG
-
         def create_data(self, context, data=None):
             building = context.baseline
             return {
@@ -62,6 +58,10 @@ class Section5Rule15(RuleDefinitionListIndexedBase):
                     data["climate_zone"], building
                 ),
             }
+
+        def list_filter(self, context_item, data=None):
+            surface_b = context_item.baseline
+            return get_opaque_surface_type(surface_b) == OST.UNHEATED_SOG
 
         class SlabOnGradeFloorRule(RuleDefinitionBase):
             def __init__(self):
@@ -120,7 +120,7 @@ class Section5Rule15(RuleDefinitionListIndexedBase):
 
                 return target_f_factor_res != target_f_factor_nonres
 
-            def rule_check(self, context, calc_vals, data=None):
+            def rule_check(self, context, calc_vals=None, data=None):
                 target_f_factor = calc_vals["target_f_factor"]
                 slab_on_grade_floor_f_factor = calc_vals["slab_on_grade_floor_f_factor"]
 

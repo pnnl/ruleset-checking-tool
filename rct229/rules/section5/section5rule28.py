@@ -12,7 +12,7 @@ FAIL_MSG = "Subsurface that is not regulated (Not part of building envelope) is 
 
 
 class Section5Rule28(RuleDefinitionListIndexedBase):
-    """Rule 5 of ASHRAE 90.1-2019 Appendix G Section 5 (Envelope)"""
+    """Rule 28 of ASHRAE 90.1-2019 Appendix G Section 5 (Envelope)"""
 
     def __init__(self):
         super(Section5Rule28, self).__init__(
