@@ -14,6 +14,8 @@ def invert_mask(mask):
     list
         The new inverse mask
     """
+    # The mask should have zeros and ones only
+    assert all(map(lambda x: x in [0, 1], mask))
     # (0 + 1) % 2 == 1
     # (1 + 1) % 2 == 0
     return [(mask_val + 1) % 2 for mask_val in mask]
