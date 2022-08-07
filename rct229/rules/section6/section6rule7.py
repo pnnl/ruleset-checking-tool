@@ -5,8 +5,8 @@ from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedV
 from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all
 
-MSG_WARN_DAYLIGHT_NO_SCHEDULE = "Some of the spaces in zone are modeled with window or skylight and some of the spaces in zone are modeled with daylighting control directly through simulation. Verify if the mandatory lighting control requirements are modeled correctly in zone."
-MSG_WARN_DAYLIGHT = "Some of the spaces in zone are modeled with window or skylight and some of the spaces in zone are modeled with daylighting control with schedule. Verify if schedule adjustment is modeled correctly."
+MSG_WARN_DAYLIGHT_NO_SCHEDULE = "Some of the spaces in zone are modeled with window(s) and/or skylight(s) and have daylighting controls modeled explicitly in the simulation tool. Verify that the mandatory lighting control requirements are met."
+MSG_WARN_DAYLIGHT = "Some of the spaces in zone are modeled with window(s) and/or skylight(s) and have daylighting controls modeled via schedule adjustment. Verify that the mandatory lighting control requirements are met, and that the supporting documentation is provided for the schedule adjustment."
 MSG_WARN_NO_DAYLIGHT = "Some of the spaces in zone are modeled with fenestration but no daylighting controls. The design must include mandatory daylighting controls unless any of the exceptions to 90.1 section 9.4.1.1€ apply."
 
 DAYLIGHT_CONTROL_TYPE = schema_enums["LightingDaylightingControlType"].NONE
