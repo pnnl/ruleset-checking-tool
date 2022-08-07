@@ -13,7 +13,7 @@
 **Data Lookup:** None  
 ## Rule Logic: 
 
-- Check if each zone has window or skylight in the building segment in the User model: `For zone_p in P_RMR...zones:`
+- Check if each zone has window or skylight in the building segment in the Proposed model: `For zone_p in P_RMR...zones:`
 
   - For each surfaces in zone: `surface_p in zone_p.surfaces`
 
@@ -29,7 +29,7 @@
       
       - Check if any interior_lighting with daylight control has it modeled using schedule adjustment: `if (lighting.are_schedules_used_for_modeling_daylighting_control==TRUE for lighting in interior_lighting_p): daylight_schedule_adjustment_flag = TRUE`
     
-**Rule Assertion:** For each zone in the User model:
+**Rule Assertion:** For each zone in the Proposed model:
 
     - Case 1, if the zone has window or skylight and daylight control, and daylight control is not modeled using schedule: `if ( daylight_flag_p == TRUE ) AND ( has_daylight_control_flag == TRUE ) AND ( NOT daylight_schedule_adjustment_flag ): UNDETERMINED and raise_warning "SOME OF THE SPACES IN ZONE ARE MODELED WITH WINDOW(S) AND/OR SKYLIGHT(S) AND HAVE DAYLIGHTING CONTROLS MODELED EXPLICITLY IN THE SIMULATION TOOL. VERIFY THAT THE MANDATORY LIGHTING CONTROL REQUIREMENTS ARE MET."`
 
