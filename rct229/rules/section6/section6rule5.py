@@ -7,6 +7,7 @@ from rct229.ruleset_functions.normalize_interior_lighting_schedules import (
     normalize_interior_lighting_schedules,
 )
 from rct229.schema.config import ureg
+from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all, find_exactly_one_with_field_value
 from rct229.utils.masks import invert_mask
 from rct229.utils.pint_utils import ZERO, pint_sum
@@ -109,10 +110,15 @@ class Section6Rule5(RuleDefinitionListIndexedBase):
                             "building_open_schedule_id_b"
                         ]
                         building_open_schedule_b = find_exactly_one_with_field_value(
-                            jpath="$[*]",
+                            jpath="$",
                             field="id",
                             value=building_open_schedule_id_b,
                             obj=schedules_b,
+                        )
+                        hourly_building_open_schedule_b = getattr_(
+                            building_open_schedule_b,
+                            "building_open_schedule_b",
+                            "hourly_values",
                         )
                         is_leap_year_b = data["is_leap_year_b"]
                         schedules_b = data["schedules_b"]
@@ -140,7 +146,7 @@ class Section6Rule5(RuleDefinitionListIndexedBase):
                         schedule_comparison_result = compare_schedules(
                             normalized_interior_lighting_schedule_b,
                             normalized_interior_lighting_schedule_p,
-                            mask_schedule=invert_mask(building_open_schedule_b),
+                            mask_schedule=invert_mask(hourly_building_open_schedule_b),
                             is_leap_year=is_leap_year_b,
                         )
 
@@ -154,6 +160,6 @@ class Section6Rule5(RuleDefinitionListIndexedBase):
                         ]
 
                         return (
-                            schedule_comparison_result["total_hours_matched"]
+                            schedule_comparison_result["total_hours_compared"]
                             == schedule_comparison_result["total_hours_matched"]
                         )
