@@ -9,8 +9,6 @@ MSG_WARN_DAYLIGHT_NO_SCHEDULE = "Some of the spaces in zone are modeled with win
 MSG_WARN_DAYLIGHT = "Some of the spaces in zone are modeled with window(s) and/or skylight(s) and have daylighting controls modeled via schedule adjustment. Verify that the mandatory lighting control requirements are met, and that the supporting documentation is provided for the schedule adjustment."
 MSG_WARN_NO_DAYLIGHT = "Some of the spaces in zone are modeled with fenestration but no daylighting controls. The design must include mandatory daylighting controls unless any of the exceptions to 90.1 section 9.4.1.1€ apply."
 
-DAYLIGHT_CONTROL_TYPE = schema_enums["LightingDaylightingControlType"].NONE
-
 
 class Section6Rule7(RuleDefinitionListIndexedBase):
     """Rule 7 of ASHRAE 90.1-2019 Appendix G Section 6 (Lighting)"""
@@ -45,21 +43,30 @@ class Section6Rule7(RuleDefinitionListIndexedBase):
                 > 0
             )
 
-            has_daylight_control_flag = False
-            for lighting in find_all("$..interior_lighting[*]", zone_p):
-                interior_lighting_p = getattr_(
-                    lighting,
-                    "interior_lighting",
-                    "are_schedules_used_for_modeling_daylighting_control",
+            has_daylight_control_flag = (
+                len(
+                    find_all(
+                        "$..spaces[*].interior_lighting[?daylighting_control_type!='NONE']",
+                        zone_p,
+                    )
                 )
+                > 0
+            )
 
-                if lighting["daylighting_control_type"] != DAYLIGHT_CONTROL_TYPE:
-                    has_daylight_control_flag = True
+            daylight_schedule_adjustment_flag = (
+                len(
+                    find_all(
+                        "$..spaces[*].interior_lighting[?are_schedules_used_for_modeling_daylighting_control == true]",
+                        zone_p,
+                    )
+                )
+                > 0
+            )
 
             return {
                 "daylight_flag_p": daylight_flag_p,
                 "has_daylight_control_flag": has_daylight_control_flag,
-                "interior_lighting_p": interior_lighting_p,
+                "daylight_schedule_adjustment_flag": daylight_schedule_adjustment_flag,
             }
 
         def manual_check_required(self, context, calc_vals=None, data=None):
@@ -71,10 +78,12 @@ class Section6Rule7(RuleDefinitionListIndexedBase):
         def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
             daylight_flag_p = calc_vals["daylight_flag_p"]
             has_daylight_control_flag = calc_vals["has_daylight_control_flag"]
-            interior_lighting_p = calc_vals["interior_lighting_p"]
+            daylight_schedule_adjustment_flag = calc_vals[
+                "daylight_schedule_adjustment_flag"
+            ]
 
             if daylight_flag_p and has_daylight_control_flag:
-                if interior_lighting_p:
+                if daylight_schedule_adjustment_flag:
                     manual_check_msg = MSG_WARN_DAYLIGHT
                 else:
                     manual_check_msg = MSG_WARN_DAYLIGHT_NO_SCHEDULE
@@ -91,4 +100,8 @@ class Section6Rule7(RuleDefinitionListIndexedBase):
             daylight_flag_p = calc_vals["daylight_flag_p"]
             has_daylight_control_flag = calc_vals["has_daylight_control_flag"]
 
-            return MSG_WARN_NO_DAYLIGHT if daylight_flag_p and not has_daylight_control_flag else ""
+            return (
+                MSG_WARN_NO_DAYLIGHT
+                if daylight_flag_p and not has_daylight_control_flag
+                else ""
+            )
