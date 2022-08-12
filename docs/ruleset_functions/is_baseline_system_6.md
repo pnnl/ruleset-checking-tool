@@ -26,8 +26,7 @@
 12. do_all_terminals_have_one_fan() 
 13. are_all_terminal_cool_sources_none_or_null() 
 14. are_all_terminal_types_VAV()  
-15. are_all_terminal_supplies_ducted()  
-16. is_there_only_one_hvac_sys_cooling_system ()  
+15. is_there_only_one_hvac_sys_cooling_system ()  
 
 
 ## Logic:    
