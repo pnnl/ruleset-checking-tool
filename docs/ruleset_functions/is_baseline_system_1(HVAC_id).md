@@ -22,11 +22,10 @@
 8. are_all_terminal_heat_sources_none_or_null()  
 9. are_all_terminal_cool_sources_none_or_null() 
 10. are_all_terminal_fans_null()  
-11. are_all_terminal_supplies_ducted()  
-12. does_each_zone_have_only_one_terminal()    
-13. does_hvac_system_serve_single_zone()  
-14. is_baseline_system_1c()
-15. are_all_terminal_types_CAV() 
+11. does_each_zone_have_only_one_terminal()    
+12. does_hvac_system_serve_single_zone()  
+13. is_baseline_system_1c()
+14. are_all_terminal_types_CAV() 
  
 ## Logic:    
 - Create an object associated with the hvac system: `hvac_b = hvac_b.id`  
@@ -36,7 +35,7 @@
         - Check if heatingsystem is a fluid_loop, if it is then carry on: `if is_hvac_sys_heating_type_fluid_loop(B_RMR, hvac_b.id) == TRUE:`     
             - Check if fansystem is constant volume, if yes then carry on: `if is_hvac_sys_fan_sys_CV(B_RMR, hvac_b.id) == TRUE:`  
                 - Check if the hvac system serves a single zone and that the zone only has one terminal unit: `if does_hvac_system_serve_single_zone(B_RMR, zone_id_list) == TRUE AND does_each_zone_have_only_one_terminal(B_RMR,zone_id_list) == TRUE:`     
-                    - Check that the data elements associated with the terminal unit align with system 1: `if are_all_terminal_heat_sources_none_or_null(B_RMR,terminal_unit_id_list) == TRUE AND are_all_terminal_cool_sources_none_or_null(B_RMR,terminal_unit_id_list) == TRUE And are_all_terminal_fans_null(B_RMR,terminal_unit_id_list) == TRUE AND are_all_terminal_supplies_ducted(B_RMR,terminal_unit_id_list) == FALSE AND are_all_terminal_types_CAV(B_RMR,terminal_unit_id_list) == TRUE:`        
+                    - Check that the data elements associated with the terminal unit align with system 1: `if are_all_terminal_heat_sources_none_or_null(B_RMR,terminal_unit_id_list) == TRUE AND are_all_terminal_cool_sources_none_or_null(B_RMR,terminal_unit_id_list) == TRUE And are_all_terminal_fans_null(B_RMR,terminal_unit_id_list) == TRUE AND are_all_terminal_types_CAV(B_RMR,terminal_unit_id_list) == TRUE:`        
                         - if coolingsystem is DX and the heating fluid loop serves a boiler then SYS-1: `if is_hvac_sys_cooling_type_DX(B_RMR, hvac_b.id) == TRUE AND is_hvac_sys_fluid_loop_attached_to_boiler(B_RMR, hvac_b.id) == TRUE: is_baseline_system_1 = "SYS-1"`
                         - elif coolingsystem is DX and the fluid loop is purchased heating then SYS-1b: `elif is_hvac_sys_cooling_type_DX(B_RMR, hvac_b.id) == TRUE AND is_hvac_sys_fluid_loop_purchased_heating(B_RMR, hvac_b.id) == TRUE: is_baseline_system_1 = "SYS-1b"`
                         - elif the cooling system is a fluid loop : `elif is_hvac_sys_cooling_type_fluid_loop(B_RMR, hvac_b.id) == TRUE:`   
