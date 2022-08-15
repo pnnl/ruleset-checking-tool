@@ -12,7 +12,7 @@ from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.std_comparisons import std_equal
 
-OFFICE_OPEN_PLAN = schema_enums["LightingSpaceType2019ASHRAE901TG37"].OFFICE_OPEN_PLAN
+OFFICE_OPEN_PLAN = schema_enums["LightingSpaceOptions2019ASHRAE901TG37"].OFFICE_OPEN_PLAN
 FAIL_MSG = "P_RMR lighting status type is as-designed or as-existing. But lighting space type in B_RMR is not specified."
 
 

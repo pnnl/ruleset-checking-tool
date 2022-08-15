@@ -2,7 +2,7 @@ from rct229.data import data
 from rct229.data_fns.table_utils import find_osstd_table_entry
 from rct229.schema.config import ureg
 
-# This dictionary maps the ExteriorLightingAreas2019ASHRAE901TableG36 enumerations to
+# This dictionary maps the ExteriorLightingAreaOptions2019ASHRAE901TableG36 enumerations to
 # the corresponding exterior_lighting_area values in the file
 # ashrae_90_1_table_G3_6.json
 
@@ -25,16 +25,18 @@ EXTERIOR_LIGHTING_AREA_ENUMERATION_TO_BUILDING_EXTERIOR_TYPE_MAP = {
     "EMERGENCY_VEHICLE_LOADING_AREA": "Emergency vehicle loading area",
     "DRIVE_UP_WINDOWS_FAST_FOOD": "Drive-up windows at fast-food restaurants",
     "PARKING_NEAR_24HR_RETAIL_ENTRANCES": "Parking near 24-hour retail entrances",
+    "MISCELLANEOUS_TRADABLE": "Miscellaneous tradable",
+    "MISCELLANEOUS_NON_TRADABLE": "Miscellaneous non tradable",
 }
 
 
 def table_G3_6_lookup(exterior_lighting_area):
-    """Returns the lighting power density for a exterior_lighting_area as
+    """Returns the lighting power density for an exterior_lighting_area as
     required by ASHRAE 90.1 Table G3.6
     Parameters
     ----------
     exterior_lighting_area : str
-        One of the ExteriorLightingAreas2019ASHRAE901TableG36 enumeration values
+        One of the ExteriorLightingAreaOptions2019ASHRAE901TableG36 enumeration values
 
     Returns
     -------

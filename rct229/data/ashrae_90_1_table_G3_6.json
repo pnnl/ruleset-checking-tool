@@ -133,7 +133,19 @@
             "w/ft": null,
             "w/location": 800,
             "w/device": null
-       } 
-
+       },
+        {
+            "building_exterior_type": "Miscellaneous tradable",
+            "w/ft^2": null,
+            "w/ft": null,
+            "w/location": null,
+            "w/device": null
+       }, {
+            "building_exterior_type": "Miscellaneous non tradable",
+            "w/ft^2": null,
+            "w/ft": null,
+            "w/location": null,
+            "w/device": null
+       }
     ]
 }
