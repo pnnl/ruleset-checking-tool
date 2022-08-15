@@ -189,4 +189,5 @@ def test__exterior_lighting_area_enumeration_to_building_exterior_type_map():
         enum_type="ExteriorLightingAreaOptions2019ASHRAE901TableG36",
         osstd_table=data["ashrae_90_1_table_G3_6"],
         enumeration_to_match_field_value_map=EXTERIOR_LIGHTING_AREA_ENUMERATION_TO_BUILDING_EXTERIOR_TYPE_MAP,
+        exclude_enum_names=["MISCELLANEOUS_TRADABLE", "MISCELLANEOUS_NON_TRADABLE"]
     )
