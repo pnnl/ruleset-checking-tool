@@ -1,5 +1,5 @@
 import pytest
-from pint_utils import pint_sum
+from pint_utils import CalcQ, calcq_to_q, pint_sum
 
 from rct229.schema.config import ureg
 
@@ -17,3 +17,19 @@ def test__pint_sum__with_empty_list_and_default():
 def test__pint_sum__with_empty_list_and_no_default():
     with pytest.raises(AssertionError):
         pint_sum([])
+
+
+def test__clacq_to_q__with_quantity():
+    assert calcq_to_q(FLOOR_AREA) == FLOOR_AREA
+
+
+def test__clacq_to_q__with_calcq():
+    assert calcq_to_q(CalcQ("area", FLOOR_AREA)) == FLOOR_AREA
+
+
+def test__clacq_to_q__with_list():
+    assert calcq_to_q([CalcQ("area", FLOOR_AREA)]) == [FLOOR_AREA]
+
+
+def test__clacq_to_q__with_dict():
+    assert calcq_to_q({"key": CalcQ("area", FLOOR_AREA)}) == {"key": FLOOR_AREA}
