@@ -96,9 +96,9 @@ class Section6Rule4(RuleDefinitionListIndexedBase):
                     )
 
                     return {
-                        "total_space_lpd_b": total_space_lpd_b,
+                        "total_space_lpd_b": CalcQ("power_density", total_space_lpd_b),
                         "space_lighting_status_type_p": space_lighting_status_type_p,
-                        "lpd_allowance_b": lpd_allowance_b,
+                        "lpd_allowance_b": CalcQ("power_density", lpd_allowance_b),
                     }
 
                 def rule_check(self, context, calc_vals=None, data=None):
