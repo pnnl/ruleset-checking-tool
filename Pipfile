@@ -7,15 +7,16 @@ verify_ssl = true
 python_version = "3.7"
 
 [dev-packages]
+black = "22.6.0"
 pylint = "*"
 pytest = "*"
-black = "*"
-isort = "*"
+isort = "5.10.1"
+icecream = "*"
+pytest-watch = "*"
 
 [packages]
 rct229 = {editable = true, path = "."}
 jsonpath-ng = "*"
-click="*"
 jsonschema="*"
 pyyaml="*"
 jsonpointer="*"
@@ -23,3 +24,5 @@ pandas = "*"
 xlrd = "~=1.2"
 numpy = "*"
 pint = "*"
+click = "==8.0.4"
+regex = "==2022.1.18"
