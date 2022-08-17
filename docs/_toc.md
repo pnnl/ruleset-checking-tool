@@ -34,6 +34,7 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   * [get_zones_computer_rooms](ruleset_functions/get_zones_computer_rooms.md): Returns a dictionary with the zones that have at least one computer room space associated with them in the RMR as the keys. The values associated with each key are in a list form. The list associated with each key contains the computer room floor area as the first item in the list and the total zone floor area as the second item in the list.
   * [are_all_terminal_heat_sources_hot_water](ruleset_functions/are_all_terminal_heat_sources_hot_water(hvac.id).md): Returns TRUE if the heat source associated with all terminal units input to this function is HOT_WATER. It returns FALSE if any terminal unit has a heat source other than HOT_WATER.
   * [is_hvac_sys_heating_type_elec_resistance](ruleset_functions/is_hvac_sys_heating_type_elec_resistance.md): Returns TRUE if the HVAC system heating system heating type is ELECTRIC_RESISTANCE. Returns FALSE if the HVAC system heating system has anything other than ELECTRIC_RESISTANCE.
+  * [is_hvac_sys_cooling_type_none](ruleset_functions/is_hvac_sys_cooling_type_none.md): Returns TRUE if the HVAC system cooling type is None or Null. Returns FALSE if the HVAC system has anything other than None or Null for the cooling type or if it has more than 1 or no cooling system.
 
 ## Data Tables
   * [8.4.4](data_tables/Table8-4-4.md): Minimum Nominal Efficiency Levels for Low-Voltage Dry-Type Distribution Transformers  
