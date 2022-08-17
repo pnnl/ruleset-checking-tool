@@ -40,6 +40,7 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   * [are_all_terminal_heat_sources_electric](ruleset_functions/are_all_terminal_heat_sources_electric.md): Returns TRUE if the heat source associated with all terminal units input to this function are electric. It returns FALSE if any terminal unit has a heat source other than electric.
   * [is_hvac_sys_preheating_type_elec_resistance](ruleset_functions/is_hvac_sys_preheating_type_elec_resistance.md): Returns TRUE if the HVAC system preheating system heating type is ELECTRIC_RESISTANCE. Returns FALSE if the HVAC system preheating system has anything other than ELECTRIC_RESISTANCE.
   * [are_all_terminal_heating_loops_purchased_heating](ruleset_functions/are_all_terminal_heating_loops_purchased_heating.md): Returns TRUE if the fluid loop associated with the heating_from_loop associated with each terminal unit is purchased heating. Returns FALSE if this is not the case.
+  * [is_hvac_sys_preheat_fluid_loop_attached_to_boiler](ruleset_functions/is_hvac_sys_preheat_fluid_loop_attached_to_boiler.md): Returns TRUE if the fluid loop associated with the preheat system associated with the HVAC system is attached to a boiler. Returns FALSE if this is not the case.
 
 ## Data Tables
   * [8.4.4](data_tables/Table8-4-4.md): Minimum Nominal Efficiency Levels for Low-Voltage Dry-Type Distribution Transformers  
