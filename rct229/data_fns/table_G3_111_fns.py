@@ -21,6 +21,7 @@ VERTICAL_FENESTRATION_BUILDING_AREA_TYPE_TO_WWR_BUILDING_TYPE_MAP = {
     "SCHOOL_PRIMARY": "School (primary)",
     "SCHOOL_SECONDARY_AND_UNIVERSITY": "School (secondary and university)",
     "WAREHOUSE_NONREFRIGERATED": "Warehouse (nonrefrigerated)",
+    "OTHER": "All others",
 }
 
 
@@ -37,6 +38,10 @@ def table_G3_1_1_1_lookup(vertical_fenestration_building_area_type_enum_val):
         { wwr: float – The window to wall ratio given by Table G3.1.1-1 expressed as a decimal between 0 and 1 }
 
     """
+
+    if vertical_fenestration_building_area_type_enum_val is None:
+        return None
+
     wwr_building_type = (
         VERTICAL_FENESTRATION_BUILDING_AREA_TYPE_TO_WWR_BUILDING_TYPE_MAP[
             vertical_fenestration_building_area_type_enum_val
