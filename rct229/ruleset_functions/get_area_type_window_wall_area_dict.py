@@ -12,6 +12,7 @@ from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.pint_utils import ZERO
 
 DOOR = schema_enums["SubsurfaceClassificationType"].DOOR
+NONE_AREA_TYPE = "NONE"
 
 
 def get_area_type_window_wall_area_dict(climate_zone, building):
