@@ -5,9 +5,7 @@ from rct229.data_fns.table_G3_7_fns import (
     lighting_space_enumeration_to_lpd_space_type_map,
     table_G3_7_lookup,
 )
-from rct229.data_fns.table_utils import (
-    check_enumeration_to_osstd_match_field_value_map,
-)
+from rct229.data_fns.table_utils import check_enumeration_to_osstd_match_field_value_map
 from rct229.schema.config import ureg
 
 feet = ureg("feet")
@@ -16,19 +14,25 @@ watts_per_sqft = ureg("watt / foot**2")
 
 # Testing table_G3_7_lookup() ----------------------------------------
 def test__table_G3_7_lookup__with_w_per_ft_null():
-    assert table_G3_7_lookup(
-        lighting_space_type="DORMITORY_LIVING_QUARTERS",
-        space_height=8 * feet,
-        space_area=16 * squarefeet,
-    ) == {"lpd": 1.11 * watts_per_sqft, "control_credit": 0.1}
+    assert (
+        table_G3_7_lookup(
+            lighting_space_type="DORMITORY_LIVING_QUARTERS",
+            space_height=8 * feet,
+            space_area=16 * squarefeet,
+        )
+        == {"lpd": 1.11 * watts_per_sqft, "control_credit": 0.1}
+    )
 
 
 def test__table_G3_7_lookup__with_w_per_ft_not_null():
-    assert table_G3_7_lookup(
-        lighting_space_type="ATRIUM_HIGH",
-        space_height=20 * feet,
-        space_area=16 * squarefeet,
-    ) == {"lpd": (0.5 + 0.025 * 20 / 16) * watts_per_sqft, "control_credit": 0.1}
+    assert (
+        table_G3_7_lookup(
+            lighting_space_type="ATRIUM_HIGH",
+            space_height=20 * feet,
+            space_area=16 * squarefeet,
+        )
+        == {"lpd": (0.5 + 0.025 * 20 / 16) * watts_per_sqft, "control_credit": 0.1}
+    )
 
 
 # Testing lighting_space_enumeration_to_lpd_space_type_map ----------

@@ -24,7 +24,7 @@ EXTERIOR_LIGHTING_AREA_ENUMERATION_TO_BUILDING_EXTERIOR_TYPE_MAP = {
     "ENTRANCE_AND_GATEHOUSE": "Entrance and gatehouses",
     "EMERGENCY_VEHICLE_LOADING_AREA": "Emergency vehicle loading area",
     "DRIVE_UP_WINDOWS_FAST_FOOD": "Drive-up windows at fast-food restaurants",
-    "PARKING_NEAR_24HR_RETAIL_ENTRANCES": "Parking near 24-hour retail entrances"
+    "PARKING_NEAR_24HR_RETAIL_ENTRANCES": "Parking near 24-hour retail entrances",
 }
 
 
