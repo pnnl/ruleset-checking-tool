@@ -38,6 +38,7 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   * [do_all_terminals_have_one_fan](ruleset_functions/do_all_terminals_have_one_fan.md): Returns TRUE if the fan data element associated with all terminal units input to this function are equal to one (i.e., there is only one fan associated with the terminal unit). It returns FALSE if any terminal unit has a fan data element not equal to one (i.e., there is NOT only one fan associated with the terminal unit).
   * [are_all_terminal_fan_configs_parallel](ruleset_functions/are_all_terminal_fan_configs_parallel.md): Returns TRUE if the fan configuration associated with all terminal units input to this function are parallel. It returns FALSE if any terminal unit has a fan configuration other than parallel.
   * [are_all_terminal_heat_sources_electric](ruleset_functions/are_all_terminal_heat_sources_electric.md): Returns TRUE if the heat source associated with all terminal units input to this function are electric. It returns FALSE if any terminal unit has a heat source other than electric.
+  * [is_hvac_sys_preheating_type_elec_resistance](ruleset_functions/is_hvac_sys_preheating_type_elec_resistance.md): Returns TRUE if the HVAC system preheating system heating type is ELECTRIC_RESISTANCE. Returns FALSE if the HVAC system preheating system has anything other than ELECTRIC_RESISTANCE.
 
 ## Data Tables
   * [8.4.4](data_tables/Table8-4-4.md): Minimum Nominal Efficiency Levels for Low-Voltage Dry-Type Distribution Transformers  
