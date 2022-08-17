@@ -26,12 +26,14 @@
     - Get interior_lighting in space: `interior_lighting_u = space_u.interior_lighting`
 
       - Check if any interior_lighting has daylight control: `if ( lighting.daylighting_control_type != "NONE" for lighting in interior_lighting_u ): has_daylight_control_flag == TRUE`
+      
+      - Check if any interior_lighting with daylight control has it modeled using schedule adjustment: `if (lighting.are_schedules_used_for_modeling_daylighting_control==TRUE for lighting in interior_lighting_u): daylight_schedule_adjustment_flag = TRUE`
+    
+**Rule Assertion:** For each zone in the User model:
 
-    **Rule Assertion:** For each zone in the User model:
+    - Case 1, if the zone has window or skylight and daylight control, and daylight control is not modeled using schedule: `if ( daylight_flag_u == TRUE ) AND ( has_daylight_control_flag == TRUE ) AND ( NOT daylight_schedule_adjustment_flag ): UNDETERMINED and raise_warning "SOME OF THE SPACES IN ZONE ARE MODELED WITH WINDOW(S) AND/OR SKYLIGHT(S) AND HAVE DAYLIGHTING CONTROLS MODELED EXPLICITLY IN THE SIMULATION TOOL. VERIFY THAT THE MANDATORY LIGHTING CONTROL REQUIREMENTS ARE MET."`
 
-    - Case 1, if the zone has window or skylight and daylight control, and daylight control is not modeled using schedule: `if ( daylight_flag_u == TRUE ) AND ( has_daylight_control_flag == TRUE ) AND ( NOT interior_lighting_u.are_schedules_used_for_modeling_daylighting_control ): UNDETERMINED and raise_warning "SOME OF THE SPACES IN ZONE ARE MODELED WITH WINDOW OR SKYLIGHT AND SOME OF THE SPACES IN ZONE ARE MODELED WITH DAYLIGHTING CONTROL DIRECTLY THROUGH SIMULATION. VERIFY IF THE MANDATORY LIGHTING CONTROL REQUIREMENTS ARE MODELED CORRECTLY IN ZONE."`
-
-    - Case 2, else if the zone has window or skylight and daylight control, and daylight control is modeled using schedule: `if ( daylight_flag_u == TRUE ) AND ( has_daylight_control_flag == TRUE ) AND ( interior_lighting_u.are_schedules_used_for_modeling_daylighting_control ): UNDETERMINED and raise_warning "SOME OF THE SPACES IN ZONE ARE MODELED WITH WINDOW OR SKYLIGHT AND SOME OF THE SPACES IN ZONE ARE MODELED WITH DAYLIGHTING CONTROL WITH SCHEDULE. VERIFY IF SCHEDULE ADJUSTMENT IS MODELED CORRECTLY."`
+    - Case 2, else if the zone has window or skylight and daylight control, and daylight control is modeled using schedule: `if ( daylight_flag_u == TRUE ) AND ( has_daylight_control_flag == TRUE ) AND ( daylight_schedule_adjustment_flag ): UNDETERMINED and raise_warning "SOME OF THE SPACES IN ZONE ARE MODELED WITH WINDOW(S) AND/OR SKYLIGHT(S) AND HAVE DAYLIGHTING CONTROLS MODELED VIA SCHEDULE ADJUSTMENT. VERIFY THAT THE MANDATORY LIGHTING CONTROL REQUIREMENTS ARE MET, AND THAT THE SUPPORTING DOCUMENTATION IS PROVIDED FOR THE SCHEDULE ADJUSTMENT."`
 
     - Case 3, else if the zone has window or skylight and daylight control is not modeled:  `else if ( daylight_flag_u == TRUE ) AND ( has_daylight_control_flag == FALSE ): FAIL and raise_warning "SOME OF THE SPACES IN ZONE ARE MODELED WITH FENESTRATION BUT NO DAYLIGHTING CONTROLS. THE DESIGN MUST INCLUDE MANDATORY DAYLIGHTING CONTROLS UNLESS ANY OF THE EXCEPTIONS TO 90.1 SECTION 9.4.1.1(E) APPLY."`
 

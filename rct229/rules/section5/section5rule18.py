@@ -4,7 +4,7 @@ from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 from rct229.ruleset_functions.get_area_type_window_wall_area_dict import (
-    get_area_type_window_wall_area_dict,
+    get_area_type_window_wall_area_dict,NONE_AREA_TYPE
 )
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.std_comparisons import std_equal
@@ -33,11 +33,8 @@ class Section5Rule18(RuleDefinitionListIndexedBase):
             id="5-18",
             description="For building area types included in Table G3.1.1-1, vertical fenestration areas for new buildings and additions shall equal that in Table G3.1.1-1 based on the area of gross above-grade walls that separate conditioned spaces and semi-heated spaces from the exterior.",
             list_path="ruleset_model_instances[0].buildings[*]",
+            data_items={"climate_zone": ("baseline", "weather/climate_zone")},
         )
-
-    def create_data(self, context, data=None):
-        rmr_baseline = context.baseline
-        return {"climate_zone": rmr_baseline["weather"]["climate_zone"]}
 
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
@@ -66,7 +63,6 @@ class Section5Rule18(RuleDefinitionListIndexedBase):
                 is_area_type_all_new_dict[area_type] = building_segment["is_all_new"]
 
             return {
-                **data,
                 "is_area_type_all_new_dict": is_area_type_all_new_dict,
                 "area_type_window_wall_ratio_dict": area_type_window_wall_area_dict_b,
             }
@@ -112,7 +108,7 @@ class Section5Rule18(RuleDefinitionListIndexedBase):
                     area_type_window_wall_ratio_b[area_type]["total_window_area"]
                     / area_type_window_wall_ratio_b[area_type]["total_wall_area"]
                 )
-                if area_type != "NONE":
+                if area_type != NONE_AREA_TYPE:
                     area_type_target_wwr = table_G3_1_1_1_lookup(area_type)
 
                 return {
@@ -124,7 +120,7 @@ class Section5Rule18(RuleDefinitionListIndexedBase):
 
             def manual_check_required(self, context, calc_vals=None, data=None):
                 # Raise warning...based on checks?
-                return not calc_vals["is_all_new"] or calc_vals["area_type"] == "NONE"
+                return not calc_vals["is_all_new"] or calc_vals["area_type"] == NONE_AREA_TYPE
 
             def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
                 manual_check_msg = ""
