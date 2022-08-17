@@ -2,7 +2,7 @@
 # Envelope - Rule 5-49  
 
 **Rule ID:** 5-49  
-**Rule Description:** The proposed air leakage rate of the building envelope (I75Pa) at a fixed building pressure differential of 0.3 in. of water shall be 0.6 cfm/ft2 for buildings providing verification in accordance with Section 5.9.1.2. The air leakage rate of the building envelope shall be converted to appropriate units for the simulation program using one of the methods in Section G3.1.1.4. Exceptions: When whole-building air leakage testing, in accordance with Section 5.4.3.1.1, is specified during design and completed after construction, the proposed design air leakage rate of the building envelope shall be as measured.  
+**Rule Description:** The proposed air leakage rate of the building envelope (I<sub>75Pa</sub>) at a fixed building pressure differential of 0.3 in. of water shall be 0.6 cfm/ft2 for buildings providing verification in accordance with Section 5.9.1.2. The air leakage rate of the building envelope shall be converted to appropriate units for the simulation program using one of the methods in Section G3.1.1.4. Exceptions: When whole-building air leakage testing, in accordance with Section 5.4.3.1.1, is specified during design and completed after construction, the proposed design air leakage rate of the building envelope shall be as measured.  
 **Rule Assertion:** Sum of P-RMR zone.infiltration.air_leakage_rate = expected value  
 **Appendix G Section:** Section G3.1-5(b) Building Envelope Modeling Requirements for the Proposed design  
 **Appendix G Section Reference:** None  

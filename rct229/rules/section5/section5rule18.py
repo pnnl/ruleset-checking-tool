@@ -1,17 +1,21 @@
+from rct229.data.schema_enums import schema_enums
 from rct229.data_fns.table_G3_111_fns import table_G3_1_1_1_lookup
-from rct229.rule_engine.rule_base import (
-    RuleDefinitionBase,
-    RuleDefinitionListIndexedBase,
-)
+from rct229.rule_engine.rule_base import RuleDefinitionBase
+from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 from rct229.ruleset_functions.get_area_type_window_wall_area_dict import (
-    get_area_type_window_wall_area_dict,
+    get_area_type_window_wall_area_dict,NONE_AREA_TYPE
 )
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.std_comparisons import std_equal
 
-CASE3_WARN_MESSAGE = "BUILDING IS NOT ALL NEW AND BASELINE WWR MATCHES VALUES PRESCRIBED IN TABLE G3.1.1-1. HOWEVER, THE FENESTRATION AREA PRESCRIBED IN TABLE G3.1.1-1 DOES NOT APPLY TO THE EXISTING ENVELOPE PER TABLE G3.1 BASELINE COLUMN #5 (C). FOR EXISTING ENVELOPE, THE BASELINE FENESTRATION AREA MUST EQUAL THE EXISTING FENESTRATION AREA PRIOR TO THE PROPOSED WORK. A MANUAL CHECK IS REQUIRED TO VERIFY COMPLIANCE."
-CASE4_WARN_MESSAGE = "BUILDING IS NOT ALL NEW AND BASELINE WWR DOES NOT MATCH VALUES PRESCRIBED IN TABLE G3.1.1-1. HOWEVER, THE FENESTRATION AREA PRESCRIBED IN TABLE G3.1.1-1 DOES NOT APPLY TO THE EXISTING ENVELOPE PER TABLE G3.1 BASELINE COLUMN #5(c). FOR EXISTING ENVELOPE, THE BASELINE FENESTRATION AREA MUST EQUAL THE EXISTING FENESTRATION AREA PRIOR TO THE PROPOSED WORK. A MANUAL CHECK IS REQUIRED TO VERIFY COMPLIANCE."
+CASE3_WARN_MESSAGE = "Building is not all new and baseline WWR matches values prescribed in Table G3.1.1-1. However, the fenestration area prescribed in Table G3.1.1-1 does not apply to the existing envelope per Table G3.1 baseline column #5 (c). For existing envelope, the baseline fenestration area must equal the existing fenestration area prior to the proposed work. A manual check is therefore required to verify compliance."
+CASE4_WARN_MESSAGE = "Building is not all new and baseline WWR does not match values prescribed in Table G3.1.1-1. However, the fenestration area prescribed in Table G3.1.1-1 does not apply to the existing envelope per Table G3.1 baseline column #5 (c). For existing envelope, the baseline fenestration area must equal the existing fenestration area prior to the proposed work. A manual check is therefore required to verify compliance"
+NONE_WARN_MESSAGE = (
+    "Building vertical fenestration area type is missing, manual check is required."
+)
+
+OTHER = schema_enums["VerticalFenestrationBuildingAreaType2019ASHRAE901"].OTHER
 
 
 class Section5Rule18(RuleDefinitionListIndexedBase):
@@ -29,11 +33,8 @@ class Section5Rule18(RuleDefinitionListIndexedBase):
             id="5-18",
             description="For building area types included in Table G3.1.1-1, vertical fenestration areas for new buildings and additions shall equal that in Table G3.1.1-1 based on the area of gross above-grade walls that separate conditioned spaces and semi-heated spaces from the exterior.",
             list_path="ruleset_model_instances[0].buildings[*]",
+            data_items={"climate_zone": ("baseline", "weather/climate_zone")},
         )
-
-    def create_data(self, context, data=None):
-        rmr_baseline = context.baseline
-        return {"climate_zone": rmr_baseline["weather"]["climate_zone"]}
 
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
@@ -62,12 +63,12 @@ class Section5Rule18(RuleDefinitionListIndexedBase):
                 is_area_type_all_new_dict[area_type] = building_segment["is_all_new"]
 
             return {
-                **data,
                 "is_area_type_all_new_dict": is_area_type_all_new_dict,
                 "area_type_window_wall_ratio_dict": area_type_window_wall_area_dict_b,
             }
 
         def create_context_list(self, context, data=None):
+            # EXAMPLE of reorganizing the context.
             building = context.baseline
             area_type_to_building_segment_dict = {}
             # dict map area_type with list of building_segment
@@ -85,6 +86,7 @@ class Section5Rule18(RuleDefinitionListIndexedBase):
             return [
                 UserBaselineProposedVals(None, building_segments, None)
                 for area_type, building_segments in area_type_to_building_segment_dict.items()
+                if area_type != OTHER
             ]
 
         class AreaTypeRule(RuleDefinitionBase):
@@ -101,16 +103,16 @@ class Section5Rule18(RuleDefinitionListIndexedBase):
                 # all building segments in AreaType rule has the same area type
                 # (see create_context_list function in the parent class)
                 area_type = building_segments_b[0]["area_type_vertical_fenestration"]
-                area_type_wwr = 0.0
                 area_type_target_wwr = 0.0
-                if area_type is not "NONE":
-                    area_type_wwr = (
-                        area_type_window_wall_ratio_b[area_type]["total_window_area"]
-                        / area_type_window_wall_ratio_b[area_type]["total_wall_area"]
-                    )
+                area_type_wwr = (
+                    area_type_window_wall_ratio_b[area_type]["total_window_area"]
+                    / area_type_window_wall_ratio_b[area_type]["total_wall_area"]
+                )
+                if area_type != NONE_AREA_TYPE:
                     area_type_target_wwr = table_G3_1_1_1_lookup(area_type)
 
                 return {
+                    "area_type": area_type,
                     "is_all_new": is_area_type_all_new_dict[area_type],
                     "area_type_wwr": area_type_wwr,
                     "area_type_target_wwr": area_type_target_wwr["wwr"],
@@ -118,7 +120,20 @@ class Section5Rule18(RuleDefinitionListIndexedBase):
 
             def manual_check_required(self, context, calc_vals=None, data=None):
                 # Raise warning...based on checks?
-                return not calc_vals["is_all_new"]
+                return not calc_vals["is_all_new"] or calc_vals["area_type"] == NONE_AREA_TYPE
+
+            def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
+                manual_check_msg = ""
+                if not calc_vals["is_all_new"]:
+                    if std_equal(
+                        calc_vals["area_type_wwr"], calc_vals["area_type_target_wwr"]
+                    ):
+                        manual_check_msg = CASE3_WARN_MESSAGE
+                    else:
+                        manual_check_msg = CASE4_WARN_MESSAGE
+                if calc_vals["area_type"] == "NONE":
+                    manual_check_msg = NONE_WARN_MESSAGE
+                return manual_check_msg
 
             def rule_check(self, context, calc_vals=None, data=None):
                 area_type_wwr = calc_vals["area_type_wwr"]
