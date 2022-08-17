@@ -43,6 +43,7 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   * [is_hvac_sys_preheat_fluid_loop_attached_to_boiler](ruleset_functions/is_hvac_sys_preheat_fluid_loop_attached_to_boiler.md): Returns TRUE if the fluid loop associated with the preheat system associated with the HVAC system is attached to a boiler. Returns FALSE if this is not the case.
   * [is_hvac_sys_preheat_fluid_loop_purchased_heating](ruleset_functions/is_hvac_sys_preheat_fluid_loop_purchased_heating.md): Returns TRUE if the fluid loop associated with the preheating system associated with the HVAC system is attached to an external purchased heating loop. Returns FALSE if this is not the case.
   * [is_hvac_sys_preheating_type_fluid_loop](ruleset_functions/is_hvac_sys_preheating_type_fluid_loop.md): Returns TRUE if the HVAC system preheating system heating type is fluid loop. Returns FALSE if the HVAC system preheating system has anything other than fluid loop.
+  * [are_all_terminal_types_VAV](ruleset_functions/are_all_terminal_types_VAV.md): Returns TRUE if all of the terminal unit types input to this function are variable air volume (VAV). It returns FALSE if any of the terminal units are of a type other than variable air volume (VAV).
 
 ## Data Tables
   * [8.4.4](data_tables/Table8-4-4.md): Minimum Nominal Efficiency Levels for Low-Voltage Dry-Type Distribution Transformers  
