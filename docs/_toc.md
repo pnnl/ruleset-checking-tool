@@ -32,6 +32,9 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   * [get_primary_secondary_loops.md](ruleset_functions/get_primary_secondary_loops.md): Get the list of primary and secondary loops for CHW for a B-RMR.
   * [get_hvac_systems_5_6_serving_multiple_floors_b](ruleset_functions/get_hvac_systems_5_6_serving_multiple_floors_b.md): Get a dictionary of the system 5, 5a, 5b, 6, 6a, 6b hvac system IDs that are modeled as serving more than one floor in the baseline design model.  The dictionary consists of the hvac system ids as the key and the number of floors served as the value associated with the key.
   * [get_zones_computer_rooms](ruleset_functions/get_zones_computer_rooms.md): Returns a dictionary with the zones that have at least one computer room space associated with them in the RMR as the keys. The values associated with each key are in a list form. The list associated with each key contains the computer room floor area as the first item in the list and the total zone floor area as the second item in the list.
+  * [are_all_terminal_heat_sources_hot_water](ruleset_functions/are_all_terminal_heat_sources_hot_water(hvac.id).md): Returns TRUE if the heat source associated with all terminal units input to this function is HOT_WATER. It returns FALSE if any terminal unit has a heat source other than HOT_WATER.
+  * [is_hvac_sys_heating_type_elec_resistance](ruleset_functions/is_hvac_sys_heating_type_elec_resistance.md): Returns TRUE if the HVAC system heating system heating type is ELECTRIC_RESISTANCE. Returns FALSE if the HVAC system heating system has anything other than ELECTRIC_RESISTANCE.
+
 ## Data Tables
   * [8.4.4](data_tables/Table8-4-4.md): Minimum Nominal Efficiency Levels for Low-Voltage Dry-Type Distribution Transformers  
   * [G3.1.1-1](data_tables/Table3-1-1-1.md): Baseline Building Vertical Fenestration Percentage of Gross Above-Grade-Wall Area  
@@ -220,3 +223,5 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
 
 ## Section 23 - Chilled Water Systems and Condenser Water Systems
   * [23-1](section23/Rule23-1.md): For baseline systems 5-8 and 11, the SAT is reset higher by 5F under minimum cooling load conditions.
+  * [23-2](section23/Rule23-2.md): System 5, 6, 7 and 8 minimum volume setpoint shall be 30% of zone peak airflow, minimum outdoor airflow, or rate required to comply with minium accreditation standards whichever is larger.
+  * [23-10](section23/Rule23-10.md): System 5-8 and 11 - part load VAV fan power shall be modeled using either method 1 or 2 in Table G3.1.3.15. This rule will only validate data points from Method-1 Part-load Fan Power Data. However, both methods are equivalent. When modeling inputs are based on Method 2, values should be converted to Method 1 when writing to RMD.

@@ -183,7 +183,6 @@ class Section5Rule26(RuleDefinitionListIndexedBase):
                 else None
             )
             return {
-                **data,
                 # TODO this function will likely need to be revised to RMD level later.
                 "scc_dict_b": get_surface_conditioning_category_dict(
                     climate_zone, building_b
@@ -231,7 +230,7 @@ class Section5Rule26(RuleDefinitionListIndexedBase):
             def create_data(self, context, data=None):
                 surface_b = context.baseline
                 scc_dict_b = data["scc_dict_b"]
-                return {**data, "scc": scc_dict_b[surface_b["id"]]}
+                return {"scc": scc_dict_b[surface_b["id"]]}
 
             def list_filter(self, context_item, data=None):
                 subsurface_b = context_item.baseline
