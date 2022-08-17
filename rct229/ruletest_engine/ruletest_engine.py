@@ -3,10 +3,13 @@ import json
 
 # from jsonpointer import JsonPointer
 import os
+import pprint
 
 from rct229.rule_engine.engine import evaluate_rule
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
+from rct229.rules.section5 import *
 from rct229.rules.section6 import *
+from rct229.rules.section12 import *
 from rct229.rules.section15 import *
 from rct229.ruletest_engine.ruletest_jsons.scripts.json_generation_utilities import (
     merge_nested_dictionary,
@@ -26,29 +29,12 @@ def generate_test_rmrs(test_dict):
         A dictionary including an optional rmr_template field and a
         required rmr_transformations field.
 
-        If rmr_template is included, it is used as the starting point
-        for each RMR; if not included, the empty dictionary {} is used.
-
         The rmr_transformations field has optional user, baseline,
         and proposed fields. If any of these fields is present, its
-        corresponding RMR will be built by transforming the rmr_template. If
-        the user, baseline, or proposed fields are missing, then its
-        correponding RMR is set to None.
+        corresponding RMR will be referenced. If the user, baseline,
+        or proposed fields are missing, then its correponding RMR is
+        set to None.
 
-        The transformations are made using jsonpointer and its set method.
-        For example, if rmr_transformations includes
-        {
-            "user": {
-                "ptr1": value1,
-                "ptr2": value2
-            }
-        }
-        then the user RMR will be produced by first treating "ptr1" as a
-        JsonPointer into rmr_template and setting the pointed to node to value1,
-        which can be of any type; and then repeating the process for "ptr2" and
-        value2. Note that the set method of JsonPointer will create any missing
-        fields along the path to the pointer, but will NOT add elements to a
-        list.
 
     Returns
     -------
@@ -58,41 +44,11 @@ def generate_test_rmrs(test_dict):
         - proposed_rmr (dictionary): Proposed RMR dictionary built from RMR Transformation definition
     """
 
-    # The rmr_transformations field is required
-    if "rmr_transformations" not in test_dict:
-        test_dict["rmr_transformations"] = {}
-
     # Each of these will remain None unless it is specified in
-    # rmr_transformations. If its transfomration is set to {}, then it
-    # will simply be a copy of rmr_template
+    # rmr_transformations.
     user_rmr = None
     baseline_rmr = None
     proposed_rmr = None
-
-    # If RMRs are based on a template
-    if "rmr_template" in test_dict:
-
-        # Get a copy of the RMR template dictionary
-        rmr_template = test_dict["rmr_template"]
-
-        # Initialize user/baseline/proposed RMRs with template if the rmr_template dictionary references them
-        if "user" in rmr_template:
-            user_rmr = copy.deepcopy(rmr_template["json_template"])
-
-            if "user" not in test_dict["rmr_transformations"]:
-                test_dict["rmr_transformations"]["user"] = {}
-
-        if "baseline" in rmr_template:
-            baseline_rmr = copy.deepcopy(rmr_template["json_template"])
-
-            if "baseline" not in test_dict["rmr_transformations"]:
-                test_dict["rmr_transformations"]["baseline"] = {}
-
-        if "proposed" in rmr_template:
-            proposed_rmr = copy.deepcopy(rmr_template["json_template"])
-
-            if "proposed" not in test_dict["rmr_transformations"]:
-                test_dict["rmr_transformations"]["proposed"] = {}
 
     # Read in transformations dictionary. This will perturb a template or fully define an RMR (if no template defined)
     rmr_transformations_dict = test_dict["rmr_transformations"]
@@ -101,63 +57,46 @@ def generate_test_rmrs(test_dict):
     # from RMR transformations
     if "user" in rmr_transformations_dict:
 
-        # If RMR dictionary is not initialized by a template, initialize it
-        if user_rmr is None:
-            user_rmr = {}
-
-        merge_nested_dictionary(user_rmr, rmr_transformations_dict["user"])
-        # user_rmr.update(rmr_transformations_dict["user"])
+        user_rmr = rmr_transformations_dict["user"]
 
     if "baseline" in rmr_transformations_dict:
 
-        # If RMR dictionary is not initialized by a template, initialize it
-        if baseline_rmr is None:
-            baseline_rmr = {}
-
-        merge_nested_dictionary(baseline_rmr, rmr_transformations_dict["baseline"])
-        # baseline_rmr.update(rmr_transformations_dict["baseline"])
+        baseline_rmr = rmr_transformations_dict["baseline"]
 
     if "proposed" in rmr_transformations_dict:
 
-        # If RMR dictionary is not initialized by a template, initialize it
-        if proposed_rmr is None:
-            proposed_rmr = {}
-
-        merge_nested_dictionary(proposed_rmr, rmr_transformations_dict["proposed"])
-        # proposed_rmr.update(rmr_transformations_dict["proposed"])
+        proposed_rmr = rmr_transformations_dict["proposed"]
 
     return user_rmr, baseline_rmr, proposed_rmr
 
 
 def evaluate_outcome_enumeration_str(outcome_enumeration_str):
-    """Returns a boolean for whether a rule passed/failed based on the outcome string enumeration
+    """Evaluate the test outcome string. Translates Rule outcome string to a string matching ruletest JSON convention
+        # (e.g., "PASSED" => "pass")
 
     Parameters
     ----------
     outcome_enumeration_str : str
 
         String equal to a set of predetermined enumerations for rule outcomes. These enumerations describe things such
-        as whether a test passed, failed, required manual check, etc.
+        as whether a test passed, failed, undetermined, etc.
 
     Returns
     -------
-    test_result : bool
+    test_result : str
 
-        Boolean describing whether the rule should be treated as passing or failing. Pass = True, Fail = False
+        Translated Rule outcome string to one matching ruletest JSON convention (e.g., 'pass')
     """
 
     # Check result of rule evaluation against known string constants
-    # (TODO: these constants should be stored elsewhere rather than called directly)
     if outcome_enumeration_str == "PASSED":
-        test_result = True
+        test_result = "pass"
     elif outcome_enumeration_str == "FAILED":
-        test_result = False
-    elif outcome_enumeration_str == "MANUAL_CHECK_REQUIRED":
-        test_result = False
-    elif outcome_enumeration_str == "MISSING_CONTEXT":
-        test_result = False
-    elif outcome_enumeration_str == "NA":
-        test_result = False
+        test_result = "fail"
+    elif outcome_enumeration_str == "UNDETERMINED":  # previously used for manual_check
+        test_result = "undetermined"
+    elif outcome_enumeration_str == "NOT_APPLICABLE":
+        test_result = "not_applicable"
     else:
         raise ValueError(
             f"OUTCOME: The enumeration {outcome_enumeration_str} does not have a test result interpretation."
@@ -171,9 +110,9 @@ def process_test_result(test_result, test_dict, test_id):
 
     Parameters
     ----------
-    test_result : bool
+    test_result : str
 
-        Boolean for whether or not a test passed. Passed = True, Failed = False
+        String describing rule outcome. OPTIONS: 'pass', 'fail', 'undetermined'
 
     test_dict : dict
 
@@ -198,28 +137,38 @@ def process_test_result(test_result, test_dict, test_id):
     """
 
     # Get reporting parameters. Check if the test is expected to pass/fail and read in the description.
-    expected_outcome = test_dict["expected_rule_outcome"] == "pass"
-    description = test_dict["description"]
+    # expected_outcome = test_dict["expected_rule_outcome"] == "pass"
+    description = test_dict["test_description"]
 
     # Check if the test results agree with the expected outcome. Write an appropriate response based on their agreement
-    received_expected_outcome = test_result == expected_outcome
+    received_expected_outcome = test_result == test_dict["expected_rule_outcome"]
 
     # Check if the test results agree with the expected outcome. Write an appropriate response based on their agreement
     if received_expected_outcome:
 
-        if test_result:
+        if test_result == "pass":
             # f"SUCCESS: Test {test_id} passed as expected. The following condition was identified: {description}"
             outcome_text = None
-        else:
+        elif test_result == "fail":
             # f"SUCCESS: Test {test_id} failed as expected. The following condition was identified: {description}"
+            outcome_text = None
+        elif test_result == "undetermined":
             outcome_text = None
 
     else:
 
-        if test_result:
+        if test_result == "pass":
             outcome_text = f"FAILURE: Test {test_id} passed unexpectedly. The following condition was not identified: {description}"
-        else:
+        elif test_result == "fail":
             outcome_text = f"FAILURE: Test {test_id} failed unexpectedly. The following condition was not identified: {description}"
+        elif test_result == "undetermined":
+            outcome_text = (
+                f"FAILURE: Test {test_id} returned 'undetermined' unexpectedly."
+            )
+        else:
+            outcome_text = (
+                f"FAILURE: Test {test_id} returned '{test_result}' unexpectedly"
+            )
 
     return outcome_text, received_expected_outcome
 
@@ -284,6 +233,7 @@ def run_section_tests(test_json_name):
         rule = test_dict["Rule"]
 
         # Construction function name for Section and rule
+        section_name = f"section{section}rule{rule}"
         function_name = f"Section{section}Rule{rule}"
 
         test_result_dict["log"] = []  # Initialize log for this test result
@@ -294,7 +244,7 @@ def run_section_tests(test_json_name):
 
         # Pull in rule, if written. If not found, fail the test and log which Section and Rule could not be found.
         try:
-            rule = globals()[function_name]()
+            rule = getattr(globals()[section_name], function_name)()
         except KeyError:
 
             # Print message communicating that a rule cannot be found
@@ -307,6 +257,7 @@ def run_section_tests(test_json_name):
 
         # Evaluate rule and check for invalid RMRs
         evaluation_dict = evaluate_rule(rule, rmr_trio)
+        pprint.pprint(evaluation_dict)
         invalid_rmrs_dict = evaluation_dict["invalid_rmrs"]
 
         # If invalid RMRs exist, fail this rule and append failed message
@@ -484,12 +435,13 @@ def evaluate_outcome_object(outcome_dict, test_result_dict, test_dict, test_id):
             "result"
         ]  # enumeration for result (e.g., PASS, FAIL, CONTEXT_MISSING)
 
-        # Evaluate whether Rule passes or fails, a boolean
-        rule_passed = evaluate_outcome_enumeration_str(outcome_enumeration_str)
+        # Evaluate the test outcome. Translates Rule outcome a string matching ruletest JSON convention
+        # (e.g., "PASSED" => "pass")
+        test_result = evaluate_outcome_enumeration_str(outcome_enumeration_str)
 
         # Write outcome text based and "receive_expected_outcome" boolean based on the test result
         outcome_text, received_expected_outcome = process_test_result(
-            rule_passed, test_dict, test_id
+            test_result, test_dict, test_id
         )
 
         # Append results if expected outcome not received
@@ -541,6 +493,21 @@ def run_lighting_tests():
     Results of lighting test are spit out to console
     """
 
-    lighting_test_json = "lighting_tests.json"
+    lighting_test_json = "section6/rule_6_5.json"
 
     return run_section_tests(lighting_test_json)
+
+
+def run_envelope_tests():
+    """Runs all tests found in the envelope tests JSON.
+
+    Returns
+    -------
+    None
+
+    Results of envelope stest are spit out to console
+    """
+
+    envelope_test_json = "envelope_tests.json"
+
+    return run_section_tests(envelope_test_json)
