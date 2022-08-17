@@ -8,9 +8,11 @@ from rct229.ruleset_functions.get_surface_conditioning_category_dict import (
     get_surface_conditioning_category_dict,
 )
 
+FAIL_MSG = "Subsurface that is not regulated (Not part of building envelope) is not modeled with the same area, U-factor and SHGC in the baseline as in the propsoed design."
+
 
 class Section5Rule28(RuleDefinitionListIndexedBase):
-    """Rule 5 of ASHRAE 90.1-2019 Appendix G Section 5 (Envelope)"""
+    """Rule 28 of ASHRAE 90.1-2019 Appendix G Section 5 (Envelope)"""
 
     def __init__(self):
         super(Section5Rule28, self).__init__(
@@ -24,11 +26,8 @@ class Section5Rule28(RuleDefinitionListIndexedBase):
             id="5-28",
             description="Subsurface that is not regulated (not part of building envelope) must be modeled with the same area, U-factor and SHGC in the baseline as in the proposed design.",
             list_path="ruleset_model_instances[0].buildings[*]",
+            data_items={"climate_zone": ("baseline", "weather/climate_zone")},
         )
-
-    def create_data(self, context, data=None):
-        rmr_baseline = context.baseline
-        return {"climate_zone": rmr_baseline["weather"]["climate_zone"]}
 
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
@@ -41,9 +40,7 @@ class Section5Rule28(RuleDefinitionListIndexedBase):
 
         def create_data(self, context, data=None):
             building = context.baseline
-            # Merge into the existing data dict
             return {
-                **data,
                 "scc_dict_b": get_surface_conditioning_category_dict(
                     data["climate_zone"], building
                 ),
@@ -72,6 +69,7 @@ class Section5Rule28(RuleDefinitionListIndexedBase):
                         self,
                     ).__init__(
                         rmrs_used=UserBaselineProposedVals(False, True, True),
+                        fail_msg=FAIL_MSG,
                     )
 
                 def get_calc_vals(self, context, data=None):
