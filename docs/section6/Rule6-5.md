@@ -21,43 +21,29 @@
 **Evaluation Context:** Each Data Element  
 **Data Lookup:** None  
 
-## Rule Logic: 
+## Rule Logic:
+- For each building in Baseline model: `for building_b in B_RMD`
+  - Get building_open_schedule: `building_open_schedule_b = match_data_element(B_RMD, Schedules, building_b.building_open_schedule)`
+  - For each space in the building: `for space_b in building_b...spaces:`
+    - Add space floor area to building total floor area: `building_total_area_b += space_b.floor_area`  
 
-- For each building_segment in the Baseline model: `for building_segment_b in B_RMR.building.building_segments:`  
+  - **Applicability Check 1:**`if building_total_area_b > 5000:`  
 
-  - For each thermal_block in building segment: `for thermal_block_b in building_segment.thermal_blocks:`  
+  - For each space in building_b: `space_b in building_b...spaces:`  
 
-    - For each zone in thermal block: `for zone_b in thermal_block_b.zones:`  
+    - Get normalized space lighting schedule: `normalized_schedule_b = normalize_interior_lighting_schedules(space_b.interior_lighting, false)`  
 
-      - For each space in zone: `for space_b in zone.spaces:`  
+    - Get matching space in P_RMR: `space_p = match_data_element(P_RMR, Spaces, space_b.id)`  
 
-        - Add space floor area to building total floor area: `building_total_area_b += space_b.floor_area`  
+      - Get normalized space lighting schedule in P_RMR: `normalized_schedule_p = normalize_interior_lighting_schedules(space_p.interior_lighting, false)`
 
-- **Applicability Check 1:**`if building_total_area_b > 5000:`  
+    - Check if automatic shutoff control is modeled in space during building closed hours (i.e. if lighting schedule hourly value in B_RMR is equal to P_RMR during building closed hours): `schedule_comparison_result = compare_schedules(normalized_schedule_b, normalized_schedule_p, inverse(building_open_schedule_b))`  
 
-- Get building open schedule in the baseline model: `building_open_schedule_b = B_RMR.building.building_open_schedule`  
+    **Rule Assertion:**
 
-- For each building segment in building: `building_segment_b in B_RMR.building.building_segments:`  
+    - Case 1: For building closed hours, if lighting schedule hourly value in B_RMR is equal to P_RMR: `if schedule_comparison_result["total_hours_compared"] == schedule_comparison_result["total_hours_matched"]: PASS`  
 
-  - For each thermal block in building segment: `thermal_block_b in building_segment_b.thermal_blocks:`  
-
-    - For each zone in thermal block: `zone_b in thermal_block_b.zones:`  
-
-      - For each space in zone: `space_b in zone_b.spaces:`  
-
-        - Get normalized space lighting schedule: `normalized_schedule_b = normalize_interior_lighting_schedules(space_b.interior_lighting, false)`  
-
-        - Get matching space in P_RMR: `space_p = match_data_element(P_RMR, Spaces, space_b.id)`  
-
-          - Get normalized space lighting schedule in P_RMR: `normalized_schedule_p = normalize_interior_lighting_schedules(space_p.interior_lighting, false)`
-
-        - Check if automatic shutoff control is modeled in space during building closed hours (i.e. if lighting schedule hourly value in B_RMR is equal to P_RMR during building closed hours): `schedule_comparison_result = compare_schedules(normalized_schedule_b, normalized_schedule_p, inverse(building_open_schedule_b))`  
-
-          **Rule Assertion:**
-
-          - Case 1: For building closed hours, if lighting schedule hourly value in B_RMR is equal to P_RMR: `if schedule_comparison_result["total_hours_compared"] == schedule_comparison_result["total_hours_matched"]: PASS`  
-
-          - Case 2: Else: `else: Failed`  
+    - Case 2: Else: `else: Failed`  
 
 
 **Notes:**

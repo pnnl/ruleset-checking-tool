@@ -30,8 +30,7 @@ def find_exactly_one_with_field_value(jpath, field, value, obj):
     matches = find_all_with_field_value(jpath, field, value, obj)
     assert (
         len(matches) == 1
-    ), f"Search data referenced in {jpath} with key {value} returned multiple or None results"
-
+    ), f"Search data referenced in {jpath} with key:value {field}:{value} returned {len(matches)} results instead of one"
     return matches[0]
 
 
@@ -40,5 +39,4 @@ def find_exactly_one(jpath, obj):
     assert (
         len(matches) == 1
     ), f"Search data referenced in {jpath} returned multiple or None results"
-
     return matches[0]
