@@ -38,7 +38,6 @@ class Section6Rule3(RuleDefinitionListIndexedBase):
 
         def create_data(self, context, data=None):
             building_segment_p = context.proposed
-
             return {
                 "building_segment_lighting_status_type_dict_p": get_building_segment_lighting_status_type_dict(
                     building_segment_p
