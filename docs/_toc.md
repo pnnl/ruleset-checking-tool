@@ -220,3 +220,4 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
 
 ## Section 23 - Chilled Water Systems and Condenser Water Systems
   * [23-1](section23/Rule23-1.md): For baseline systems 5-8 and 11, the SAT is reset higher by 5F under minimum cooling load conditions.
+  * [23-2](section23/Rule23-2.md): System 5, 6, 7 and 8 minimum volume setpoint shall be 30% of zone peak airflow, minimum outdoor airflow, or rate required to comply with minium accreditation standards whichever is larger.
