@@ -29,10 +29,8 @@ class Section5Rule8(RuleDefinitionListIndexedBase):
                 "$": ["weather"],
                 "weather": ["climate_zone"],
             },
+            data_items={"climate_zone": ("baseline", "weather/climate_zone")},
         )
-
-    def create_data(self, context, data=None):
-        return {"climate_zone": context.baseline["weather"]["climate_zone"]}
 
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
@@ -41,26 +39,20 @@ class Section5Rule8(RuleDefinitionListIndexedBase):
                 required_fields={},
                 each_rule=Section5Rule8.BuildingRule.BelowGradeWallRule(),
                 index_rmr="baseline",
+                list_path="$..surfaces[*]",
             )
-
-        def create_context_list(self, context, data=None):
-            building = context.baseline
-            # List of all baseline roof surfaces to become the context for RoofRule
-            return [
-                UserBaselineProposedVals(None, surface, None)
-                for surface in find_all("$..surfaces[*]", building)
-                if get_opaque_surface_type(surface) == OST.BELOW_GRADE_WALL
-            ]
 
         def create_data(self, context, data=None):
             building = context.baseline
-            # Merge into the existing data dict
             return {
-                **data,
                 "surface_conditioning_category_dict": get_surface_conditioning_category_dict(
                     data["climate_zone"], building
                 ),
             }
+
+        def list_filter(self, context_item, data=None):
+            surface_b = context_item.baseline
+            return get_opaque_surface_type(surface_b) == OST.BELOW_GRADE_WALL
 
         class BelowGradeWallRule(RuleDefinitionBase):
             def __init__(self):
@@ -119,7 +111,7 @@ class Section5Rule8(RuleDefinitionListIndexedBase):
                     and target_c_factor_res != target_c_factor_nonres
                 )
 
-            def rule_check(self, context, calc_vals, data=None):
+            def rule_check(self, context, calc_vals=None, data=None):
                 below_grade_wall_c_factor = calc_vals["below_grade_wall_c_factor"]
                 target_c_factor = calc_vals["target_c_factor"]
 
