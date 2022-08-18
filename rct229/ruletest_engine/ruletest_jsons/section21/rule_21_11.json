@@ -3,7 +3,7 @@
         "Section": 21,
         "Rule": 11,
         "Test": "a",
-        "test_description": "Baseline RMR has utilizes system 7 with child loop value correctly set to null",
+        "test_description": "Baseline RMR has system 7 with child loop value correctly set to null",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "21-11",
@@ -125,7 +125,7 @@
         "Section": 21,
         "Rule": 11,
         "Test": "b",
-        "test_description": "Baseline RMR has utilizes system 7 with child loop incorrectly referencing to  FluidLoop 2",
+        "test_description": "Baseline RMR has system 7 with child loop incorrectly referencing to  FluidLoop 2",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-11",
@@ -236,7 +236,11 @@
                             {
                                 "id": "FluidLoop 1",
                                 "type": "HEATING",
-                                "child_loops": "FluidLoop 2"
+                                "child_loops": [
+                                    {
+                                        "id": "FluidLoop 2"
+                                    }
+                                ]
                             },
                             {
                                 "id": "FluidLoop 2",
