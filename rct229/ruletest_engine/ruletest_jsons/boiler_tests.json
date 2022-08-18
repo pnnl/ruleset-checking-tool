@@ -2712,7 +2712,7 @@
         "Section": 21,
         "Rule": 12,
         "Test": "a",
-        "test_description": "Baseline RMR has system 7 with heating design and control's minimum flow fraction correctly set to 0.25",
+        "test_description": "Baseline RMR has system 7 with flow control and operation correctly",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "21-12",
@@ -2825,7 +2825,8 @@
                                 "type": "HEATING",
                                 "heating_design_and_control": {
                                     "id": "DAC1",
-                                    "minimum_flow_fraction": 0.25
+                                    "flow_control": "VARIABLE_FLOW",
+                                    "operation": "CONTINUOUS"
                                 }
                             }
                         ]
@@ -2838,7 +2839,7 @@
         "Section": 21,
         "Rule": 12,
         "Test": "b",
-        "test_description": "Baseline RMR has system 7 with heating design and control's minimum flow fraction incorrectly set to 0.30",
+        "test_description": "Baseline RMR has system 7 with flow control and operation incorrectly",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-12",
@@ -2951,7 +2952,8 @@
                                 "type": "HEATING",
                                 "heating_design_and_control": {
                                     "id": "DAC1",
-                                    "minimum_flow_fraction": 0.3
+                                    "flow_control": "FIXED_FLOW",
+                                    "operation": "INTERMITTENT"
                                 }
                             }
                         ]
