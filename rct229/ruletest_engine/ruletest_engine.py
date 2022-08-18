@@ -93,7 +93,7 @@ def evaluate_outcome_enumeration_str(outcome_enumeration_str):
         test_result = "pass"
     elif outcome_enumeration_str == "FAILED":
         test_result = "fail"
-    elif outcome_enumeration_str == "UNDETERMINED": # previously used for manual_check
+    elif outcome_enumeration_str == "UNDETERMINED":  # previously used for manual_check
         test_result = "undetermined"
     elif outcome_enumeration_str == "NOT_APPLICABLE":
         test_result = "not_applicable"
@@ -155,7 +155,6 @@ def process_test_result(test_result, test_dict, test_id):
         elif test_result == "undetermined":
             outcome_text = None
 
-
     else:
 
         if test_result == "pass":
@@ -163,9 +162,13 @@ def process_test_result(test_result, test_dict, test_id):
         elif test_result == "fail":
             outcome_text = f"FAILURE: Test {test_id} failed unexpectedly. The following condition was not identified: {description}"
         elif test_result == "undetermined":
-            outcome_text = f"FAILURE: Test {test_id} returned 'undetermined' unexpectedly."
+            outcome_text = (
+                f"FAILURE: Test {test_id} returned 'undetermined' unexpectedly."
+            )
         else:
-            outcome_text = f"FAILURE: Test {test_id} returned '{test_result}' unexpectedly"
+            outcome_text = (
+                f"FAILURE: Test {test_id} returned '{test_result}' unexpectedly"
+            )
 
     return outcome_text, received_expected_outcome
 
@@ -254,7 +257,7 @@ def run_section_tests(test_json_name):
 
         # Evaluate rule and check for invalid RMRs
         evaluation_dict = evaluate_rule(rule, rmr_trio)
-        pprint.pprint(evaluation_dict)
+        # pprint.pprint(evaluation_dict)
         invalid_rmrs_dict = evaluation_dict["invalid_rmrs"]
 
         # If invalid RMRs exist, fail this rule and append failed message
@@ -490,7 +493,7 @@ def run_lighting_tests():
     Results of lighting test are spit out to console
     """
 
-    lighting_test_json = "lighting_tests.json"
+    lighting_test_json = "section6/rule_6_5.json"
 
     return run_section_tests(lighting_test_json)
 
