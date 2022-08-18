@@ -12,7 +12,7 @@ from rct229.utils.jsonpath_utils import find_all
 
 # Constants
 # TODO: These should directly from the enumerations
-SurfaceAdjacentTo = schema_enums["SurfaceAdjacentTo"]
+SurfaceAdjacentTo = schema_enums["SurfaceAdjacentToOptions"]
 
 
 # Intended for export and internal use
@@ -118,7 +118,7 @@ def get_surface_conditioning_category_dict(climate_zone, building):
     Parameters
     ----------
     climate_zone : str
-        One of the ClimateZone2019ASHRAE901 enumerated values
+        One of the ClimateZoneOptions2019ASHRAE901 enumerated values
     building : dict
         A dictionary representing a building as defined by the ASHRAE229 schema
     Returns
