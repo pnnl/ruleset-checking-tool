@@ -4,11 +4,11 @@ from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 
-GUEST_ROOM = schema_enums["LightingSpaceType2019ASHRAE901TG37"].GUEST_ROOM
+GUEST_ROOM = schema_enums["LightingSpaceOptions2019ASHRAE901TG37"].GUEST_ROOM
 DORMITORY_LIVING_QUARTERS = schema_enums[
-    "LightingSpaceType2019ASHRAE901TG37"
+    "LightingSpaceOptions2019ASHRAE901TG37"
 ].DORMITORY_LIVING_QUARTERS
-DWELLING_UNIT = schema_enums["LightingSpaceType2019ASHRAE901TG37"].DWELLING_UNIT
+DWELLING_UNIT = schema_enums["LightingSpaceOptions2019ASHRAE901TG37"].DWELLING_UNIT
 
 
 class Section6Rule2(RuleDefinitionListIndexedBase):
