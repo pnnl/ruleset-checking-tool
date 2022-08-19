@@ -100,7 +100,7 @@ def calcq_to_q(obj):
     return retval
 
 
-def calcq_to_str(obj) -> str:
+def calcq_to_str(unit_system, obj) -> str:
     """Replaces a CalcQ object with its string representation using the units associated
     with its q_type. It will also walk any combination of dicts and lists, replacing
     any CalcQ objects.
@@ -120,11 +120,11 @@ def calcq_to_str(obj) -> str:
 
     """
     if isinstance(obj, CalcQ):
-        retval = obj.to_str()
+        retval = obj.to_str(unit_system)
     elif isinstance(obj, list):
-        retval = [calcq_to_str(item) for item in obj]
+        retval = [calcq_to_str(unit_system, item) for item in obj]
     elif isinstance(obj, dict):
-        retval = {key: calcq_to_str(value) for key, value in obj.items()}
+        retval = {key: calcq_to_str(unit_system, value) for key, value in obj.items()}
     else:
         retval = obj
 
