@@ -13,7 +13,6 @@
  
 **Function Call:** 
 1. does_each_zone_have_only_one_terminal()    
-2. is_hvac_system_multizone()  
 3. is_hvac_sys_cooling_type_fluid_loop()  
 4. is_hvac_sys_fluid_loop_purchased_CHW()
 5. is_hvac_sys_fluid_loop_attached_to_chiller()
@@ -39,7 +38,7 @@
         - Check that there is only one cooling system: `if is_there_only_one_hvac_sys_cooling_system (B_RMR, hvac_b.id) == TRUE:` 
             - Check if the cooling system type is a fluid loop, if yes then carry on: `if is_hvac_sys_cooling_type_fluid_loop(B_RMR, hvac_b.id) == TRUE:`  
                 - Check if fansystem is variable speed drive controlled, if yes then carry on: `if is_hvac_sys_fan_sys_VSD(B_RMR, hvac_b.id) == TRUE:`  
-                    - Check if the hvac system is multizone and that each zone only has one terminal unit: `if is_hvac_system_multizone(B_RMR, zone_id_list) == TRUE AND does_each_zone_have_only_one_terminal(B_RMR,zone_id_list) == TRUE:`     
+                    - Check that each zone only has one terminal unit: `if does_each_zone_have_only_one_terminal(B_RMR,zone_id_list) == TRUE:`     
                         - Check that the data elements associated with the terminal units align with system 8: `if are_all_terminal_cool_sources_none_or_null(B_RMR,terminal_unit_id_list) == TRUE And do_all_terminals_have_one_fan(B_RMR,terminal_unit_id_list) == TRUE AND are_all_terminal_types_VAV(B_RMR,terminal_unit_id_list) == TRUE AND are_all_terminal_fan_configs_parallel(B_RMR,terminal_unit_id_list) == TRUE:`        
                             - if the hvac sys preheat loop is electric resistance, the terminal units have electric reheat, and the hvac sys cooling loop is attached to a chiller then Sys-8: `if is_hvac_sys_preheating_type_elec_resistance(B_RMR, hvac_b.id) == TRUE AND are_all_terminal_heat_sources_electric(B_RMR,terminal_unit_id_list) == TRUE is_hvac_sys_fluid_loop_attached_to_chiller(B_RMR, hvac_b.id) == TRUE: is_baseline_system_8 = "Sys-8"`
                             - elif the hvac sys preheat loop is electric resistance, the terminal units have electric reheat, and the hvac sys cooling loop is purchased CHW then Sys-8a: `elif is_hvac_sys_preheating_type_elec_resistance(B_RMR, hvac_b.id) == TRUE AND are_all_terminal_heat_sources_electric(B_RMR,terminal_unit_id_list) == TRUE AND is_hvac_sys_fluid_loop_purchased_CHW(B_RMR, hvac_b.id) == TRUE: is_baseline_system_8 = "Sys-8a"` 
