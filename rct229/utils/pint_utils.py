@@ -16,25 +16,25 @@ class UNIT_SYSTEM:
 
 _UNIT_CONVENTIONS = {
     UNIT_SYSTEM.SI: {
-        "transformer_capacity": "V-A",
+        "transformer_capacity": "V*A",
         "electric_power": "W",
         "volume": "m3",
         "area": "m2",
         "power_density": "W/m2",
-        "thermal_transmittance": "W/m2-K",
-        "linear_thermal_transmittance": "W/m-K",
+        "thermal_transmittance": "W/(m2*K)",
+        "linear_thermal_transmittance": "W/(m*K)",
         "cooling_capacity": "W",
         "capacity": "W",
         "volumetric_flow_rate": "m3/s",
     },
     UNIT_SYSTEM.IP: {
-        "transformer_capacity": "V-A",
+        "transformer_capacity": "V*A",
         "electric_power": "W",
         "volume": "ft3",
         "area": "ft2",
         "power_density": "W/ft2",
-        "thermal_transmittance": "Btu/hr-ft2-R",
-        "linear_thermal_transmittance": "Btu/hr-ft-R",
+        "thermal_transmittance": "Btu/(hr*ft2*R)",
+        "linear_thermal_transmittance": "Btu/(hr*ft*R)",
         "cooling_capacity": "ton",
         "capacity": "Btu/hr",
         "volumetric_flow_rate": "cfm",
@@ -120,7 +120,7 @@ def calcq_to_str(unit_system, obj) -> str:
 
     """
     if isinstance(obj, CalcQ):
-        retval = obj.to_str(unit_system)
+        retval = None if obj.q is None else obj.to_str(unit_system)
     elif isinstance(obj, list):
         retval = [calcq_to_str(unit_system, item) for item in obj]
     elif isinstance(obj, dict):

@@ -39,7 +39,11 @@ def test__CalcQ__to_str():
     assert CalcQ("area", FLOOR_AREA).to_str(UNIT_SYSTEM.IP) == "1 ft2"
 
 
-def test__calcq_to_str():
+def test__calcq_to_str__with_non_none_q():
     assert calcq_to_str(UNIT_SYSTEM.IP, {"key": CalcQ("area", FLOOR_AREA)}) == {
         "key": "1 ft2"
     }
+
+
+def test__calcq_to_str__with_none_q():
+    assert calcq_to_str(UNIT_SYSTEM.IP, {"key": CalcQ("area", None)}) == {"key": None}
