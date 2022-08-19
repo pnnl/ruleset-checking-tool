@@ -124,7 +124,7 @@ class RuleDefinitionBase:
                         # remaining methods
                         calc_vals = calcq_to_q(raw_calc_vals)
                         if calc_vals is not None:
-                            outcome["calc_vals"] = calc_vals
+                            outcome["calc_vals"] = raw_calc_vals
 
                         # Determine if manual check is required
                         if self.manual_check_required(context, calc_vals, data):
