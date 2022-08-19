@@ -6,7 +6,7 @@ from rct229.ruleset_functions.get_baseline_system_types import mock_get_baseline
 from rct229.utils.assertions import getattr_
 
 APPLICABLE_SYS_TYPE = ["SYS-1", "SYS-5", "SYS-7", "SYS-11.2", "SYS-12", "SYS-1A", "SYS-7A", "SYS-11.2A", "SYS-12A"]
-HEATING = schema_enums["FluidLoopTypeOptions"].HEATING
+HEATING = schema_enums["FluidLoopOptions"].HEATING
 
 
 class Section21Rule3(RuleDefinitionListIndexedBase):
@@ -18,7 +18,7 @@ class Section21Rule3(RuleDefinitionListIndexedBase):
             index_rmr="baseline",
             id="21-3",
             description="Heating hot water plant capacity shall be based on coincident loads.",
-            rmr_context="ruleset_model_instances/0/fluid_loop",
+            rmr_context="ruleset_model_instances/0/fluid_loops",
         )
 
     def is_applicable(self, context, data=None):
@@ -37,7 +37,7 @@ class Section21Rule3(RuleDefinitionListIndexedBase):
                 rmrs_used=UserBaselineProposedVals(False, True, False),
                 required_fields={
                     "$": ["heating_design_and_control"],
-                    "$heating_design_and_control": ["is_sized_using_coincident_load"]
+                    "$.heating_design_and_control": ["is_sized_using_coincident_load"]
                 }
             )
 
