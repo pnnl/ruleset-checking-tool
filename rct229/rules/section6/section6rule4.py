@@ -96,12 +96,11 @@ class Section6Rule4(RuleDefinitionListIndexedBase):
                             data["avg_zone_ht_b"],
                             getattr_(space_b, "Space", "floor_area"),
                         )
-                    )
+                    )["lpd"]
 
                     return {
                         "total_space_lpd_b": CalcQ("power_density", total_space_lpd_b),
                         "space_lighting_status_type_p": space_lighting_status_type_p,
-                        # FIXME
                         "lpd_allowance_b": CalcQ("power_density", lpd_allowance_b),
                     }
 
@@ -113,7 +112,7 @@ class Section6Rule4(RuleDefinitionListIndexedBase):
                         "space_lighting_status_type_p"
                     ]
                     total_space_lpd_b = calc_vals["total_space_lpd_b"]
-                    lpd_allowance_b = calc_vals["lpd_allowance_b"]["lpd"]
+                    lpd_allowance_b = calc_vals["lpd_allowance_b"]
 
                     return (
                         # Not Case 1
