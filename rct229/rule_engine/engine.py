@@ -5,7 +5,7 @@ import rct229.rules as rules
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 from rct229.schema.schema_utils import quantify_rmr
 from rct229.schema.validate import validate_rmr
-from rct229.utils.pint_utils import calcq_to_str, UNIT_SYSTEM
+from rct229.utils.pint_utils import UNIT_SYSTEM, calcq_to_str
 
 
 def get_available_rules():
@@ -152,5 +152,5 @@ def evaluate_rules(rules_list, rmrs, unit_system=UNIT_SYSTEM.IP):
 
     return {
         "invalid_rmrs": invalid_rmrs,
-        "outcomes": calcq_to_str(UNIT_SYSTEM.IP, outcomes),
+        "outcomes": calcq_to_str(unit_system, outcomes),
     }
