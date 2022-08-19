@@ -1,9 +1,9 @@
 import pytest
-from pint_utils import CalcQ, calcq_to_q, pint_sum
+from pint_utils import CalcQ, calcq_to_q, pint_sum, UNIT_SYSTEM
 
 from rct229.schema.config import ureg
 
-FLOOR_AREA = 1 * ureg("m2")
+FLOOR_AREA = 1 * ureg("ft2")
 
 
 def test__pint_sum__with_list_len_2():
@@ -33,3 +33,7 @@ def test__clacq_to_q__with_list():
 
 def test__clacq_to_q__with_dict():
     assert calcq_to_q({"key": CalcQ("area", FLOOR_AREA)}) == {"key": FLOOR_AREA}
+
+
+def test__CalcQ__to_str():
+    assert CalcQ("area", FLOOR_AREA).to_str(UNIT_SYSTEM.IP) == "1 ft2"
