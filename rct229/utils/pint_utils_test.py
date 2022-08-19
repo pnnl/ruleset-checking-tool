@@ -1,5 +1,5 @@
 import pytest
-from pint_utils import CalcQ, calcq_to_q, calcq_to_str, pint_sum, UNIT_SYSTEM
+from pint_utils import UNIT_SYSTEM, CalcQ, calcq_to_q, calcq_to_str, pint_sum
 
 from rct229.schema.config import ureg
 

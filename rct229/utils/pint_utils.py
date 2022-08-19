@@ -1,6 +1,6 @@
-from dataclasses import dataclass
 import functools
 import operator
+from dataclasses import dataclass
 
 from pint import Quantity
 
