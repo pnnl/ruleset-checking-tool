@@ -18,7 +18,7 @@ from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.pint_utils import ZERO
 from rct229.utils.std_comparisons import std_equal
 
-DOOR = schema_enums["SubsurfaceClassificationType"].DOOR
+DOOR = schema_enums["SubsurfaceClassificationOptions"].DOOR
 FAIL_MSG = "The vertical fenestration is not distributed across baseline opaque surfaces in the same proportion as in the proposed design. Verify if envelope is existing or altered and can be excluded from this check."
 
 
