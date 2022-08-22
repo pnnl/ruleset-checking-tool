@@ -32,10 +32,8 @@ jobs:
           cache: 'pipenv'
       - name: Install pipenv
         run: curl https://raw.githubusercontent.com/pypa/pipenv/master/get-pipenv.py | python
-        run: pip install pipenv
       - name: Install dependencies
-        run: |
-          pipenv install
+        run: pipenv install
       - name: Run tests
         # This will halt the action if any of the tests fail
         run: pipenv run pytest -v
