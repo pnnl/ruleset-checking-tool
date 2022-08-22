@@ -493,7 +493,7 @@ def run_lighting_tests():
     Results of lighting test are spit out to console
     """
 
-    lighting_test_json = "section6/rule_6_4.json"
+    lighting_test_json = "lighting_tests.json"
 
     return run_section_tests(lighting_test_json)
 
@@ -508,6 +508,6 @@ def run_envelope_tests():
     Results of envelope stest are spit out to console
     """
 
-    envelope_test_json = "section5/rule_5_5.json"
+    envelope_test_json = "envelope_tests.json"
 
     return run_section_tests(envelope_test_json)
