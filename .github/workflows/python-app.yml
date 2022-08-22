@@ -33,7 +33,7 @@ jobs:
       - name: Install pipenv
         run: curl https://raw.githubusercontent.com/pypa/pipenv/master/get-pipenv.py | python
       - name: Install dependencies
-        run: pipenv install
+        run: pipenv install -dev
       - name: Run tests
         # This will halt the action if any of the tests fail
         run: pipenv run pytest -v
