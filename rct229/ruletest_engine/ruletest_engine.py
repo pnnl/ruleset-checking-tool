@@ -494,7 +494,7 @@ def run_lighting_tests():
     Results of lighting test are spit out to console
     """
 
-    lighting_test_json = "section6/rule_6_5.json"
+    lighting_test_json = "lighting_tests.json"
 
     return run_section_tests(lighting_test_json)
 
