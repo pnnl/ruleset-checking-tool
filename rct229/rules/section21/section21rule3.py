@@ -18,7 +18,8 @@ class Section21Rule3(RuleDefinitionListIndexedBase):
             index_rmr="baseline",
             id="21-3",
             description="Heating hot water plant capacity shall be based on coincident loads.",
-            list_path="ruleset_model_instances[0].fluid_loops[*]",
+            rmr_context="ruleset_model_instances/0",
+            list_path="fluid_loops[*]",
         )
 
     def is_applicable(self, context, data=None):
