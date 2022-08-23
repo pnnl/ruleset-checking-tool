@@ -23,8 +23,8 @@ class Section21Rule3(RuleDefinitionListIndexedBase):
         )
 
     def is_applicable(self, context, data=None):
-        rmd_b = context.baseline
-        # FIXME: replace with baseline_system_types = get_baseline_system_types(rmd_b) when get_baseline_system_types
+        rmi_b = context.baseline
+        # FIXME: replace with baseline_system_types = get_baseline_system_types(rmi_b) when get_baseline_system_types
         #  is ready.
         baseline_system_types = {"SYS-7A": ["hvac_sys_7_a"], "SYS-11A": ["hvac_sys_11_a"]}
         # if any system type found in the APPLICABLE_SYS_TYPES then return applicable.
