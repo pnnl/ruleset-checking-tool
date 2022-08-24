@@ -1,9 +1,7 @@
 # Add all available rule modules in __all__
 import importlib
 
-__all__ = [
-    "section21rule3"
-]
+__all__ = ["section21rule3"]
 
 
 def __getattr__(name):
