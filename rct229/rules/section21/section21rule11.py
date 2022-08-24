@@ -46,7 +46,7 @@ class Section21Rule11(RuleDefinitionListIndexedBase):
             rmrs_used=UserBaselineProposedVals(False, True, False),
             each_rule=Section21Rule11.HeatingFluidLoopRule(),
             index_rmr="baseline",
-            id="21-9",
+            id="21-11",
             description="The baseline building design uses boilers or purchased hot water, the hot water pumping system shall be modeled as primary-only.",
             list_path="ruleset_model_instances[0].fluid_loops[*]",
         )
@@ -56,8 +56,8 @@ class Section21Rule11(RuleDefinitionListIndexedBase):
         # FIXME: replace with baseline_system_types = get_baseline_system_types(rmd_b) when get_baseline_system_types
         #  is ready.
         baseline_system_types = {
-            "SYS-7A": ["hvac_sys_7_a"],
-            "SYS-11A": ["hvac_sys_11_a"],
+            "SYS-7": ["hvac_sys_7"],
+            "SYS-11B": ["hvac_sys_11_b"],
         }
         # if any system type found in the APPLICABLE_SYS_TYPES then return applicable.
         return any(
@@ -76,10 +76,7 @@ class Section21Rule11(RuleDefinitionListIndexedBase):
 
         def get_calc_vals(self, context, data=None):
             heating_fluid_loop_b = context.baseline
-
-            return {
-                "child_loop": getattr_(heating_fluid_loop_b, "FluidLoop", "child_loop")
-            }
+            return {"child_loop": heating_fluid_loop_b.get("child_loops")}
 
         def rule_check(self, context, calc_vals=None, data=None):
             return True if calc_vals["child_loop"] == None else False
