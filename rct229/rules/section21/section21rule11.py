@@ -1,11 +1,8 @@
 from rct229.data.schema_enums import schema_enums
 from rct229.rule_engine.rule_base import RuleDefinitionBase
-from rct229.rule_engine.rule_list_indexed_base import \
-    RuleDefinitionListIndexedBase
-from rct229.rule_engine.user_baseline_proposed_vals import \
-    UserBaselineProposedVals
-from rct229.ruleset_functions.get_baseline_system_types import \
-    get_baseline_system_types
+from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
+from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
+from rct229.ruleset_functions.get_baseline_system_types import get_baseline_system_types
 from rct229.utils.assertions import getattr_
 
 APPLICABLE_SYS_TYPES = [
@@ -76,7 +73,8 @@ class Section21Rule11(RuleDefinitionListIndexedBase):
 
         def get_calc_vals(self, context, data=None):
             heating_fluid_loop_b = context.baseline
-            return {"child_loop": heating_fluid_loop_b.get("child_loops")}
+            return {"has_child_loops": bool(heating_fluid_loop_b.get("child_loops"))}
 
         def rule_check(self, context, calc_vals=None, data=None):
-            return True if calc_vals["child_loop"] == None else False
+            has_child_loops = calc_vals["has_child_loops"]
+            return not has_child_loops
