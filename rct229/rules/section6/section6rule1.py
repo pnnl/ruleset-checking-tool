@@ -180,3 +180,4 @@ class Section6Rule1(RuleDefinitionListIndexedBase):
                         return CASE6_WARNING
                     elif not allowable_LPD_BAM and check_BAM_flag:
                         return CASE7_WARNING
+                    

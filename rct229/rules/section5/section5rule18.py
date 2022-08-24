@@ -4,6 +4,7 @@ from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 from rct229.ruleset_functions.get_area_type_window_wall_area_dict import (
+    NONE_AREA_TYPE,
     get_area_type_window_wall_area_dict,
 )
 from rct229.utils.jsonpath_utils import find_all
@@ -15,7 +16,7 @@ NONE_WARN_MESSAGE = (
     "Building vertical fenestration area type is missing, manual check is required."
 )
 
-OTHER = schema_enums["VerticalFenestrationBuildingAreaType2019ASHRAE901"].OTHER
+OTHER = schema_enums["VerticalFenestrationBuildingAreaOptions2019ASHRAE901"].OTHER
 
 
 class Section5Rule18(RuleDefinitionListIndexedBase):
@@ -108,7 +109,7 @@ class Section5Rule18(RuleDefinitionListIndexedBase):
                     area_type_window_wall_ratio_b[area_type]["total_window_area"]
                     / area_type_window_wall_ratio_b[area_type]["total_wall_area"]
                 )
-                if area_type != "NONE":
+                if area_type != NONE_AREA_TYPE:
                     area_type_target_wwr = table_G3_1_1_1_lookup(area_type)
 
                 return {
@@ -120,7 +121,10 @@ class Section5Rule18(RuleDefinitionListIndexedBase):
 
             def manual_check_required(self, context, calc_vals=None, data=None):
                 # Raise warning...based on checks?
-                return not calc_vals["is_all_new"] or calc_vals["area_type"] == "NONE"
+                return (
+                    not calc_vals["is_all_new"]
+                    or calc_vals["area_type"] == NONE_AREA_TYPE
+                )
 
             def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
                 manual_check_msg = ""

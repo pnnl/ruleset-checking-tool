@@ -4,6 +4,7 @@ from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedV
 from rct229.utils.assertions import MissingKeyException, RCTFailureException
 from rct229.utils.json_utils import slash_prefix_guarantee
 from rct229.utils.jsonpath_utils import find_all
+from rct229.utils.pint_utils import calcq_to_q
 
 
 class RuleDefinitionBase:
@@ -120,9 +121,12 @@ class RuleDefinitionBase:
                         # Get calculated values; these can be used by
                         # manual_check_required() or rule_check() and will
                         # be included in the output
-                        calc_vals = self.get_calc_vals(context, data)
+                        raw_calc_vals = self.get_calc_vals(context, data)
+                        # Convert all CalcQ values to its q value for use in the
+                        # remaining methods
+                        calc_vals = calcq_to_q(raw_calc_vals)
                         if calc_vals is not None:
-                            outcome["calc_vals"] = calc_vals
+                            outcome["calc_vals"] = raw_calc_vals
 
                         # Determine if manual check is required
                         if self.manual_check_required(context, calc_vals, data):
