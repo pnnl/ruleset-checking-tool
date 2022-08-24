@@ -7,21 +7,21 @@ FLUID_LOOP = schema_enums["FluidLoopOptions"]
 
 def is_hvac_sys_preheat_fluid_loop_attached_to_boiler(rmi_b, hvac_b_id):
     """Returns True if the fluid loop associated with preheat system associated with the HVAC system is attached to a boiler.
-        Returns False if this is not the case.
+    Returns False if this is not the case.
 
-        Parameters
-        ----------
-        rmi_b : json
-            RMD at RuleSetModelInstance level
-        hvac_b_id : str
-            The HVAC system ID.
+    Parameters
+    ----------
+    rmi_b : json
+        RMD at RuleSetModelInstance level
+    hvac_b_id : str
+        The HVAC system ID.
 
-        Returns
-        -------
-        bool
-            True: preheat system is attached to a boiler
-            False
-        """
+    Returns
+    -------
+    bool
+        True: preheat system is attached to a boiler
+        False
+    """
     is_hvac_sys_preheat_fluid_loop_attached_to_boiler_flag = False
     boilers = find_all("$.boilers[*]", rmi_b)
     loop_boiler_dict = dict()
@@ -32,17 +32,25 @@ def is_hvac_sys_preheat_fluid_loop_attached_to_boiler(rmi_b, hvac_b_id):
         loop_boiler_dict[loop_id].append(boiler_b)
 
     # Get the hvac system
-    hvac_b = find_one_with_field_value("$.buildings[*].building_segments[*].heating_ventilation_air_conditioning_systems",
-                                               "id", hvac_b_id,
-                                               rmi_b)
+    hvac_b = find_one_with_field_value(
+        "$.buildings[*].building_segments[*].heating_ventilation_air_conditioning_systems",
+        "id",
+        hvac_b_id,
+        rmi_b,
+    )
     # Check if hvac_b has preheat system
     if hvac_b and hvac_b.get("preheat_system"):
         hot_water_loop_id = hvac_b["preheat_system"].get("hot_water_loop")
         # Check if the preheat system has hot water loop and the hot water loop connects to a boiler(s)
         if hot_water_loop_id and hot_water_loop_id in loop_boiler_dict.keys():
-            hot_water_loop = find_one_with_field_value("$.fluid_loops", "id", hot_water_loop_id, rmi_b)
+            hot_water_loop = find_one_with_field_value(
+                "$.fluid_loops", "id", hot_water_loop_id, rmi_b
+            )
             # check if the boiler-preheat system loop type is Heating
-            if hot_water_loop and getattr_(hot_water_loop, "fluidloop", "type") == FLUID_LOOP.HEATING:
+            if (
+                hot_water_loop
+                and getattr_(hot_water_loop, "fluidloop", "type") == FLUID_LOOP.HEATING
+            ):
                 is_hvac_sys_preheat_fluid_loop_attached_to_boiler_flag = True
 
     return is_hvac_sys_preheat_fluid_loop_attached_to_boiler_flag
