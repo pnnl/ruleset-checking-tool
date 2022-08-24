@@ -8,7 +8,7 @@ BOILER_COMBUSTION_OPTION = schema_enums["BoilerCombustionOptions"]
 
 
 class Section21Rule4(RuleDefinitionListIndexedBase):
-    """Rule 3 of ASHRAE 90.1-2019 Appendix G Section 23 (Hot water loop)"""
+    """Rule 4 of ASHRAE 90.1-2019 Appendix G Section 21 (Hot water loop)"""
     def __init__(self):
         super(Section21Rule4, self).__init__(
             rmrs_used=UserBaselineProposedVals(False, True, False),
@@ -24,7 +24,7 @@ class Section21Rule4(RuleDefinitionListIndexedBase):
         rmi_b = context.baseline
         # FIXME: replace with baseline_system_types = get_baseline_system_types(rmi_b) when get_baseline_system_types
         #  is ready.
-        baseline_system_types = {"SYS-7A": ["hvac_sys_7_a"], "SYS-11A": ["hvac_sys_11_a"]}
+        baseline_system_types = {"SYS-7": ["hvac_sys_7_a"], "SYS-11": ["hvac_sys_11_a"]}
         # if any system type found in the APPLICABLE_SYS_TYPES then return applicable.
         return any([key in APPLICABLE_SYS_TYPES for key in baseline_system_types.keys()])
 
