@@ -155,6 +155,7 @@ gallon = 3.785 * L
 
 # Volumetric Flow Rtae
 cfm = ft ** 3 / min
+gpm = gallon / min
 
 # Frequency
 [frequency] = 1 / [time]
