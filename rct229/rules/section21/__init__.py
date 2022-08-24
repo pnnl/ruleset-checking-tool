@@ -2,7 +2,8 @@
 import importlib
 
 __all__ = [
-    "section21rule11.py"
+    "section21rule3",
+    "section21rule11"
 ]
 
 
