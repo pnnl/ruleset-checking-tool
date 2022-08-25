@@ -8,13 +8,7 @@ import rct229.rules as rules
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 
 # Add all available rule modules in __all__
-__all__ = [
-    "section5",
-    "section6",
-    "section12",
-    "section15",
-    "section21"
-]
+__all__ = ["section5", "section6", "section12", "section15", "section21"]
 
 
 def __getrules__():
