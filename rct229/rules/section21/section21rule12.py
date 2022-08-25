@@ -8,6 +8,10 @@ from rct229.ruleset_functions.get_baseline_system_types import \
     get_baseline_system_types
 from rct229.utils.assertions import getattr_
 
+VARIABLE_FLOW = schema_enums["FluidLoopFlowControlOptions"].VARIABLE_FLOW
+CONTINUOUS = schema_enums["FluidLoopOperationOptions"].CONTINUOUS
+
+
 APPLICABLE_SYS_TYPES = [
     "SYS-1",
     "SYS-5",
@@ -90,7 +94,7 @@ class Section21Rule12(RuleDefinitionListIndexedBase):
         def rule_check(self, context, calc_vals=None, data=None):
             return (
                 True
-                if calc_vals["flow_control"] == "VARIABLE_FLOW"
-                and calc_vals["operation"] == "CONTINUOUS"
+                if calc_vals["flow_control"] == VARIABLE_FLOW
+                and calc_vals["operation"] == CONTINUOUS
                 else False
             )
