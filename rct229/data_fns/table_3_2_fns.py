@@ -3,7 +3,7 @@ from rct229.data import data
 from rct229.data_fns.table_utils import find_osstd_table_entry
 from rct229.schema.config import ureg
 
-# This dictionary maps the ClimateZone2019ASHRAE901 enumerations to
+# This dictionary maps the ClimateZoneOptions2019ASHRAE901 enumerations to
 # the corresponding climate zone values in the OSSTD file
 # ashrae_90_1_table_3_2.json
 climate_zone_enumeration_to_climate_zone_map = {
@@ -35,7 +35,7 @@ def table_3_2_lookup(climate_zone_enum_val):
     Parameters
     ----------
     climate_zone_enum_val : str
-        One of the ClimateZone2019ASHRAE901 enumeration values
+        One of the ClimateZoneOptions2019ASHRAE901 enumeration values
     Returns
     -------
     dict
