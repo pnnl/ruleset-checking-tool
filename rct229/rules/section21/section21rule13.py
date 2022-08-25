@@ -38,7 +38,7 @@ FLUID_LOOP = schema_enums["FluidLoopOptions"]
 
 
 class Section21Rule13(RuleDefinitionListIndexedBase):
-    """Rule 13 of ASHRAE 90.1-2019 Appendix G Section 23 (Hot water loop)"""
+    """Rule 13 of ASHRAE 90.1-2019 Appendix G Section 21 (Hot water loop)"""
 
     def __init__(self):
         super(Section21Rule13, self).__init__(
