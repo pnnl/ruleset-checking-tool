@@ -96,6 +96,9 @@
                                 "id": "Boiler 1",
                                 "loop": "Boiler Loop 1",
                                 "design_capacity": 117228.44444444445,
+                                "efficiency": 0.75,
+                                "efficiency_metric": "THERMAL",
+                                "energy_source_type": "NATURAL_GAS",
                                 "operation_lower_limit": 0,
                                 "operation_upper_limit": 40000
                             },
@@ -227,6 +230,9 @@
                                 "id": "Boiler 1",
                                 "loop": "Boiler Loop 1",
                                 "design_capacity": 117228.44444444445,
+                                "efficiency": 0.75,
+                                "efficiency_metric": "THERMAL",
+                                "energy_source_type": "NATURAL_GAS",
                                 "operation_lower_limit": 40000,
                                 "operation_upper_limit": 80000
                             },
@@ -358,6 +364,9 @@
                                 "id": "Boiler 1",
                                 "loop": "Boiler Loop 1",
                                 "design_capacity": 117228.44444444445,
+                                "efficiency": 0.75,
+                                "efficiency_metric": "THERMAL",
+                                "energy_source_type": "NATURAL_GAS",
                                 "operation_lower_limit": 0,
                                 "operation_upper_limit": 40000
                             },
