@@ -1,6 +1,7 @@
 import operator
 from functools import partial
-from rct229.utils.std_comparisons import (AHJ_RA_COMPARE, std_equal)
+
+from rct229.utils.std_comparisons import AHJ_RA_COMPARE, std_equal
 
 
 def compare_standard_val(ahj_ra_compare, val, std_val, operator=None) -> bool:
@@ -29,7 +30,15 @@ def compare_standard_val(ahj_ra_compare, val, std_val, operator=None) -> bool:
         return std_equal(std_val, val)
 
 
-std_lt = partial(compare_standard_val, ahj_ra_compare=AHJ_RA_COMPARE, operator=operator.lt)
-std_le = partial(compare_standard_val, ahj_ra_compare=AHJ_RA_COMPARE, operator=operator.le)
-std_gt = partial(compare_standard_val, ahj_ra_compare=AHJ_RA_COMPARE, operator=operator.gt)
-std_ge = partial(compare_standard_val, ahj_ra_compare=AHJ_RA_COMPARE, operator=operator.ge)
+std_lt = partial(
+    compare_standard_val, ahj_ra_compare=AHJ_RA_COMPARE, operator=operator.lt
+)
+std_le = partial(
+    compare_standard_val, ahj_ra_compare=AHJ_RA_COMPARE, operator=operator.le
+)
+std_gt = partial(
+    compare_standard_val, ahj_ra_compare=AHJ_RA_COMPARE, operator=operator.gt
+)
+std_ge = partial(
+    compare_standard_val, ahj_ra_compare=AHJ_RA_COMPARE, operator=operator.ge
+)
