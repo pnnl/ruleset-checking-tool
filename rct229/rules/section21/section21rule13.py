@@ -5,8 +5,6 @@ from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedV
 from rct229.ruleset_functions.get_baseline_system_types import get_baseline_system_types
 from rct229.utils.assertions import getattr_
 
-MINIMUM_TURNDOWN_RATIO = 0.25
-
 APPLICABLE_SYS_TYPES = [
     "SYS-1",
     "SYS-5",
@@ -35,6 +33,7 @@ APPLICABLE_SYS_TYPES = [
     "SYS-13C",
 ]
 FLUID_LOOP = schema_enums["FluidLoopOptions"]
+MINIMUM_TURNDOWN_RATIO = 0.25
 
 
 class Section21Rule13(RuleDefinitionListIndexedBase):
@@ -71,7 +70,7 @@ class Section21Rule13(RuleDefinitionListIndexedBase):
                 rmrs_used=UserBaselineProposedVals(False, True, False),
                 required_fields={
                     "$": ["heating_design_and_control"],
-                    "$.heating_design_and_control": ["minimum_flow_fraction"],
+                    "heating_design_and_control": ["minimum_flow_fraction"],
                 },
             )
 
@@ -83,8 +82,6 @@ class Section21Rule13(RuleDefinitionListIndexedBase):
             return {"minimum_flow_fraction": minimum_flow_fraction}
 
         def rule_check(self, context, calc_vals=None, data=None):
-            return (
-                True
-                if calc_vals["minimum_flow_fraction"] == MINIMUM_TURNDOWN_RATIO
-                else False
-            )
+            minimum_flow_fraction = calc_vals["minimum_flow_fraction"]
+
+            return minimum_flow_fraction == MINIMUM_TURNDOWN_RATIO
