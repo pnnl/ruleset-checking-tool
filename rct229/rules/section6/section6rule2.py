@@ -29,6 +29,16 @@ class Section6Rule2(RuleDefinitionListIndexedBase):
             list_path="ruleset_model_instances[0]..spaces[*]",
         )
 
+    def list_filter(self, context_item, data=None):
+        space_p = context_item.proposed
+        lighting_space_type_p = space_p["lighting_space_type"]
+
+        return lighting_space_type_p in [
+            GUEST_ROOM,
+            DWELLING_UNIT,
+            DORMITORY_LIVING_QUARTERS,
+        ]
+
     class SpaceRule(RuleDefinitionBase):
         def __init__(self):
             super(Section6Rule2.SpaceRule, self).__init__(
@@ -38,16 +48,6 @@ class Section6Rule2(RuleDefinitionListIndexedBase):
                     "interior_lighting[*]": ["power_per_area"],
                 },
             )
-
-        def list_filter(self, context_item, data=None):
-            space_p = context_item.proposed
-            lighting_space_type_p = space_p["lighting_space_type"]
-
-            return lighting_space_type_p in [
-                GUEST_ROOM,
-                DWELLING_UNIT,
-                DORMITORY_LIVING_QUARTERS,
-            ]
 
         def get_calc_vals(self, context, data=None):
             space_p = context.proposed
@@ -62,7 +62,6 @@ class Section6Rule2(RuleDefinitionListIndexedBase):
                     space_p["lighting_space_type"]
                 )["lpd"]
             else:
-                assert space_p["lighting_space_type"] == DWELLING_UNIT
                 lighting_power_allowance_p = DWELLING_UNIT_MIN_LIGHTING_POWER_PER_AREA
 
             space_lighting_power_per_area_p = pint_sum(
