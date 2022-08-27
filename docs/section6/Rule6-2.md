@@ -37,7 +37,7 @@
 
             - Get the total design power_per_area for the space in U_RMR: ```space_lighting_power_per_area_u = sum( lighting.power_per_area for lighting in space_u.interior_lighting )```  
 
-              **Rule Assertion:** For each space that is Hotel/Motel Guestroom or Dormitory Living Quarters in the proposed model, lighting power used in the simulation shall be equal to the lighting power allowance in Table 9.6.1 or as designed, whichever is larger; for each space that is Dwelling Units in the proposed model, lighting power used in the simulation shall be equal to 0.6W/sq.ft. or as designed, whichever is larger: ```space_lighting_power_per_area_p == max( lighting_power_allowance_p, space_lighting_power_per_area_u)```  
+            **Rule Assertion:** For each space that is Hotel/Motel Guestroom or Dormitory Living Quarters in the proposed model, lighting power used in the simulation shall be equal to the lighting power allowance in Table 9.6.1 or as designed, whichever is larger; for each space that is Dwelling Units in the proposed model, lighting power used in the simulation shall be equal to 0.6W/sq.ft. or as designed, whichever is larger: ```space_lighting_power_per_area_p == max( lighting_power_allowance_p, space_lighting_power_per_area_u)```  
 
 **Notes:**
   1. Updated the Rule ID from 6-3 to 6-2 on 6/8/2022
