@@ -5,10 +5,6 @@ from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedV
 from rct229.ruleset_functions.get_baseline_system_types import get_baseline_system_types
 from rct229.utils.assertions import getattr_
 
-VARIABLE_FLOW = schema_enums["FluidLoopFlowControlOptions"].VARIABLE_FLOW
-CONTINUOUS = schema_enums["FluidLoopOperationOptions"].CONTINUOUS
-
-
 APPLICABLE_SYS_TYPES = [
     "SYS-1",
     "SYS-5",
@@ -37,6 +33,8 @@ APPLICABLE_SYS_TYPES = [
     "SYS-13C",
 ]
 FLUID_LOOP = schema_enums["FluidLoopOptions"]
+FLUID_LOOP_FLOW_CONTROL = schema_enums["FluidLoopFlowControlOptions"]
+FLUID_LOOP_FLOW_OPERATION = schema_enums["FluidLoopOperationOptions"]
 
 
 class Section21Rule12(RuleDefinitionListIndexedBase):
@@ -76,7 +74,7 @@ class Section21Rule12(RuleDefinitionListIndexedBase):
                 rmrs_used=UserBaselineProposedVals(False, True, False),
                 required_fields={
                     "$": ["heating_design_and_control"],
-                    "$.heating_design_and_control": ["flow_control", "operation"],
+                    "heating_design_and_control": ["flow_control", "operation"],
                 },
             )
 
@@ -89,9 +87,10 @@ class Section21Rule12(RuleDefinitionListIndexedBase):
             return {"flow_control": flow_control, "operation": operation}
 
         def rule_check(self, context, calc_vals=None, data=None):
+            flow_control = calc_vals["flow_control"]
+            operation = calc_vals["operation"]
+
             return (
-                True
-                if calc_vals["flow_control"] == VARIABLE_FLOW
-                and calc_vals["operation"] == CONTINUOUS
-                else False
+                flow_control == FLUID_LOOP_FLOW_CONTROL.VARIABLE_FLOW
+                and operation == FLUID_LOOP_FLOW_OPERATION.CONTINUOUS
             )
