@@ -11,7 +11,7 @@ ASHRAE Standard 229P is a proposed standard entitled, "Protocols for Evaluating 
 ## Introduction
 The Ruleset Checking Tool (RCT) is a Python package providing a command line tool for evaluating whether baseline and proposed Building Energy Models (BEM) meet the requirements of ANSI/ASHRAE/IES Standard 90.1-2019 Appendix G.  The tool accepts Ruleset Model Report (RMR) files representing the User, Baseline, and Proposed models as inputs, and generates an output report describing the RMR evalaution.
 
-**This is an early alpha version and is highly unstable!**
+**This is an early alpha version and is highly unstable!** 
 
 **This package will change significantly during the next several versions.**
 
