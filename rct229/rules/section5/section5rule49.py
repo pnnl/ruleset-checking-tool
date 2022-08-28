@@ -16,7 +16,7 @@ from rct229.ruleset_functions.get_zone_conditioning_category_dict import (
 from rct229.schema.config import ureg
 from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all
-from rct229.utils.pint_utils import CalcQ, ZERO
+from rct229.utils.pint_utils import ZERO, CalcQ
 from rct229.utils.std_comparisons import std_equal
 
 TARGET_AIR_LEAKAGE_COEFF = 0.6 * ureg("cfm / foot**2")
