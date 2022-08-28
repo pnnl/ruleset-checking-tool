@@ -11,6 +11,7 @@ from rct229.ruleset_functions.get_surface_conditioning_category_dict import (
     get_surface_conditioning_category_dict,
 )
 from rct229.utils.jsonpath_utils import find_all
+from rct229.utils.pint_utils import CalcQ
 from rct229.utils.std_comparisons import std_equal
 
 MANUAL_CHECK_REQUIRED_MSG = (
@@ -108,10 +109,18 @@ class Section5Rule15(RuleDefinitionListIndexedBase):
                         target_f_factor = target_f_factor_res
 
                 return {
-                    "slab_on_grade_floor_f_factor": slab_on_grade_floor_f_factor,
-                    "target_f_factor": target_f_factor,
-                    "target_f_factor_res": target_f_factor_res,
-                    "target_f_factor_nonres": target_f_factor_nonres,
+                    "slab_on_grade_floor_f_factor": CalcQ(
+                        "linear_thermal_transmittance", slab_on_grade_floor_f_factor
+                    ),
+                    "target_f_factor": CalcQ(
+                        "linear_thermal_transmittance", target_f_factor
+                    ),
+                    "target_f_factor_res": CalcQ(
+                        "linear_thermal_transmittance", target_f_factor_res
+                    ),
+                    "target_f_factor_nonres": CalcQ(
+                        "linear_thermal_transmittance", target_f_factor_nonres
+                    ),
                 }
 
             def manual_check_required(self, context, calc_vals=None, data=None):
