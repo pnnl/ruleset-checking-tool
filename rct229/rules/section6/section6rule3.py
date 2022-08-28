@@ -6,6 +6,7 @@ from rct229.ruleset_functions.get_building_segment_lighting_status_type_dict imp
     LightingStatusType,
     get_building_segment_lighting_status_type_dict,
 )
+from rct229.utils.pint_utils import CalcQ
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.std_comparisons import std_equal
 
@@ -69,8 +70,8 @@ class Section6Rule3(RuleDefinitionListIndexedBase):
                 ][space_p["id"]]
 
                 return {
-                    "total_space_lpd_u": total_space_lpd_u,
-                    "total_space_lpd_p": total_space_lpd_p,
+                    "total_space_lpd_u": CalcQ("power_density", total_space_lpd_u),
+                    "total_space_lpd_p": CalcQ("power_density", total_space_lpd_p),
                     "space_lighting_status_type_p": space_lighting_status_type_p,
                 }
 
