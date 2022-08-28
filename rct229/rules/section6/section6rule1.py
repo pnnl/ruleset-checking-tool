@@ -5,7 +5,7 @@ from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedB
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all
-from rct229.utils.pint_utils import pint_sum
+from rct229.utils.pint_utils import CalcQ, pint_sum
 
 
 class Section6Rule1(RuleDefinitionListIndexedBase):
@@ -90,8 +90,12 @@ class Section6Rule1(RuleDefinitionListIndexedBase):
                 building_design_lighting_power += building_segment_design_lighting_power
 
             return {
-                "building_allowable_lighting_power": building_allowable_lighting_power,
-                "building_design_lighting_power": building_design_lighting_power,
+                "building_allowable_lighting_power": CalcQ(
+                    "electric_power", building_allowable_lighting_power
+                ),
+                "building_design_lighting_power": CalcQ(
+                    "electric_power", building_design_lighting_power
+                ),
             }
 
         def rule_check(self, context, calc_vals=None, data=None):
