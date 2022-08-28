@@ -16,7 +16,7 @@ from rct229.ruleset_functions.get_zone_conditioning_category_dict import (
 from rct229.schema.config import ureg
 from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all
-from rct229.utils.pint_utils import ZERO
+from rct229.utils.pint_utils import CalcQ, ZERO
 from rct229.utils.std_comparisons import std_equal
 
 TARGET_AIR_LEAKAGE_COEFF = 0.6 * ureg("cfm / foot**2")
@@ -100,9 +100,15 @@ class Section5Rule49(RuleDefinitionListIndexedBase):
             ) * building_total_envelope_area
 
             return {
-                "building_total_air_leakage_rate": building_total_air_leakage_rate,
-                "building_total_measured_air_leakage_rate": building_total_measured_air_leakage_rate,
-                "target_air_leakage_rate_75pa_p": target_air_leakage_rate_75pa_p,
+                "building_total_air_leakage_rate": CalcQ(
+                    "volumetric_flow_rate", building_total_air_leakage_rate
+                ),
+                "building_total_measured_air_leakage_rate": CalcQ(
+                    "volumetric_flow_rate", building_total_measured_air_leakage_rate
+                ),
+                "target_air_leakage_rate_75pa_p": CalcQ(
+                    "volumetric_flow_rate", target_air_leakage_rate_75pa_p
+                ),
                 "empty_measured_air_leakage_rate_flow_flag": empty_measured_air_leakage_rate_flow_flag,
             }
 
