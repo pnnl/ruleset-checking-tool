@@ -6,8 +6,8 @@ from rct229.ruleset_functions.get_building_segment_lighting_status_type_dict imp
     LightingStatusType,
     get_building_segment_lighting_status_type_dict,
 )
-from rct229.utils.pint_utils import CalcQ
 from rct229.utils.jsonpath_utils import find_all
+from rct229.utils.pint_utils import CalcQ
 from rct229.utils.std_comparisons import std_equal
 
 OFFICE_OPEN_PLAN = schema_enums[
