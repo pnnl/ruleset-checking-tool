@@ -95,7 +95,7 @@
                             {
                                 "id": "Boiler 1",
                                 "loop": "Boiler Loop 1",
-                                "design_capacity": 117228.44444444445,
+                                "rated_capacity": 117228.44444444445,
                                 "efficiency": 0.75,
                                 "efficiency_metric": "THERMAL",
                                 "energy_source_type": "NATURAL_GAS"
@@ -220,7 +220,7 @@
                             {
                                 "id": "Boiler 1",
                                 "loop": "Boiler Loop 1",
-                                "design_capacity": 117228.44444444445,
+                                "rated_capacity": 117228.44444444445,
                                 "efficiency": 0.75,
                                 "efficiency_metric": "THERMAL",
                                 "energy_source_type": "NATURAL_GAS"
