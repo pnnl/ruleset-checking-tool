@@ -94,7 +94,6 @@ class Section5Rule45(RuleDefinitionListIndexedBase):
                         "hourly_values",
                     ),
                     mask_schedule,
-                    comparison_factor=1.0,
                     is_leap_year=data["is_leap_year"],
                 )
 
