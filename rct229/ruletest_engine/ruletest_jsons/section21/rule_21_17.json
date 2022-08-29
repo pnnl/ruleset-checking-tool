@@ -95,7 +95,7 @@
                             {
                                 "id": "Boiler 1",
                                 "loop": "Boiler Loop 1",
-                                "design_capacity": 73267.77777777778,
+                                "rated_capacity": 73267.77777777778,
                                 "efficiency": 0.8,
                                 "efficiency_metric": "ANNUAL_FUEL_UTILIZATION",
                                 "energy_source_type": "NATURAL_GAS"
@@ -220,7 +220,7 @@
                             {
                                 "id": "Boiler 1",
                                 "loop": "Boiler Loop 1",
-                                "design_capacity": 73267.77777777778,
+                                "rated_capacity": 73267.77777777778,
                                 "efficiency": 0.8,
                                 "efficiency_metric": "ANNUAL_FUEL_UTILIZATION",
                                 "energy_source_type": "NATURAL_GAS"
@@ -345,7 +345,7 @@
                             {
                                 "id": "Boiler 1",
                                 "loop": "Boiler Loop 1",
-                                "design_capacity": 146535.55555555556,
+                                "rated_capacity": 146535.55555555556,
                                 "efficiency": 0.75,
                                 "efficiency_metric": "THERMAL",
                                 "energy_source_type": "NATURAL_GAS"
@@ -470,7 +470,7 @@
                             {
                                 "id": "Boiler 1",
                                 "loop": "Boiler Loop 1",
-                                "design_capacity": 146535.55555555556,
+                                "rated_capacity": 146535.55555555556,
                                 "efficiency": 0.75,
                                 "efficiency_metric": "THERMAL",
                                 "energy_source_type": "NATURAL_GAS"
@@ -595,7 +595,7 @@
                             {
                                 "id": "Boiler 1",
                                 "loop": "Boiler Loop 1",
-                                "design_capacity": 879213.3333333334,
+                                "rated_capacity": 879213.3333333334,
                                 "efficiency": 0.8,
                                 "efficiency_metric": "COMBUSTION",
                                 "energy_source_type": "NATURAL_GAS"
@@ -720,7 +720,7 @@
                             {
                                 "id": "Boiler 1",
                                 "loop": "Boiler Loop 1",
-                                "design_capacity": 879213.3333333334,
+                                "rated_capacity": 879213.3333333334,
                                 "efficiency": 0.8,
                                 "efficiency_metric": "COMBUSTION",
                                 "energy_source_type": "NATURAL_GAS"
