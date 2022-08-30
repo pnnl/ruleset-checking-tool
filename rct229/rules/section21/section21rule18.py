@@ -15,7 +15,7 @@ APPLICABLE_SYS_TYPES = [
     "SYS-12A",
 ]
 
-FUEL_SOURCE_OPTION = schema_enums["EnergySourceOptions"]
+FUEL_SOURCE = schema_enums["EnergySourceOptions"]
 
 
 class Section21Rule18(RuleDefinitionListIndexedBase):
@@ -59,8 +59,8 @@ class Section21Rule18(RuleDefinitionListIndexedBase):
 
         def manual_check_required(self, context, calc_vals=None, data=None):
             boiler_energy_source_type_b = calc_vals["boiler_energy_source_type_b"]
-            return boiler_energy_source_type_b == FUEL_SOURCE_OPTION.PROPANE
+            return boiler_energy_source_type_b == FUEL_SOURCE.PROPANE
 
         def rule_check(self, context, calc_vals=None, data=None):
             boiler_energy_source_type_b = calc_vals["boiler_energy_source_type_b"]
-            return boiler_energy_source_type_b == FUEL_SOURCE_OPTION.NATURAL_GAS
+            return boiler_energy_source_type_b == FUEL_SOURCE.NATURAL_GAS
