@@ -18,8 +18,8 @@ APPLICABLE_SYS_TYPES = [
     "SYS-12A",
 ]
 
-BOILER_RATED_CAPACITY_300000 = 300000 * ureg("Btu/hr")
-BOILER_RATED_CAPACITY_2500000 = 2500000 * ureg("Btu/hr")
+BOILER_RATED_CAPACITY_LOW_LIMIT = 300000 * ureg("Btu/hr")
+BOILER_RATED_CAPACITY_HIGH_LIMIT = 2500000 * ureg("Btu/hr")
 BOILER_EFFICIENCY_80 = 0.8
 BOILER_EFFICIENCY_75 = 0.75
 BOILER_EFFICIENCY_METRIC = schema_enums["BoilerEfficiencyMetricOptions"]
@@ -80,18 +80,18 @@ class Section21Rule17(RuleDefinitionListIndexedBase):
 
             return (
                 (
-                    boiler_rated_capacity_b < BOILER_RATED_CAPACITY_300000
+                    boiler_rated_capacity_b < BOILER_RATED_CAPACITY_LOW_LIMIT
                     and boiler_efficiency_metric_b
                     == BOILER_EFFICIENCY_METRIC.ANNUAL_FUEL_UTILIZATION
                     and std_equal(boiler_efficiency_b, BOILER_EFFICIENCY_80)
                 )
                 or (
-                    boiler_rated_capacity_b <= BOILER_RATED_CAPACITY_2500000
+                    boiler_rated_capacity_b <= BOILER_RATED_CAPACITY_HIGH_LIMIT
                     and boiler_efficiency_metric_b == BOILER_EFFICIENCY_METRIC.THERMAL
                     and std_equal(boiler_efficiency_b, BOILER_EFFICIENCY_75)
                 )
                 or (
-                    boiler_rated_capacity_b > BOILER_RATED_CAPACITY_2500000
+                    boiler_rated_capacity_b > BOILER_RATED_CAPACITY_HIGH_LIMIT
                     and boiler_efficiency_metric_b
                     == BOILER_EFFICIENCY_METRIC.COMBUSTION
                     and std_equal(boiler_efficiency_b, BOILER_EFFICIENCY_80)
