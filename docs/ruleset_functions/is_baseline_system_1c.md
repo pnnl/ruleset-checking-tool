@@ -20,6 +20,7 @@
 7. does_each_zone_have_only_one_terminal()    
 8. does_hvac_system_serve_single_zone()  
 9. all_terminal_chw_loops_purchased_cooling()
+10. are_all_terminal_heating_loops_purchased_heating()  
  
 ## Logic:    
 - Create an object associated with the hvac system: `hvac_b = hvac_b.id`  
@@ -30,8 +31,8 @@
         - Check that there is no fan system, if there is none then carry on: `if len(hvac_b.fan_system) == Null:`     
             - Check if the hvac system serves a single zone and that the zone only has one terminal unit: `if does_hvac_system_serve_single_zone(B_RMR, zone_id_list) == TRUE AND does_each_zone_have_only_one_terminal(B_RMR,zone_id_list) == TRUE:`  
                 - Check that the data elements associated with the terminal unit align with system 1c, if yes then carry on: `if are_all_terminal_heat_sources_hot_water(B_RMR,terminal_unit_id_list) == TRUE AND are_all_terminal_cool_sources_chilled_water(B_RMR,terminal_unit_id_list) == TRUE And do_all_terminals_have_one_fan( B_RMR,terminal_unit_id_list) == TRUE AND  are_all_terminal_types_CAV(B_RMR,terminal_unit_id_list) ==  TRUE:`        
-                    - Check if all terminal HW loops are purchased heating: `if are_all_terminal_heating_loops_purchased_heating(B_RMR, hvac_b.id) == TRUE:`  
-                        - Check if all termina CHW loop are purchased cooling: `if are_all_terminal_chw_loops_purchased_cooling(B_RMR, hvac_b.id) == TRUE: is_baseline_system_1c == TRUE`  
+                    - Check if all terminal HW loops are purchased heating: `if are_all_terminal_heating_loops_purchased_heating(B_RMR,terminal_unit_id_list) == TRUE:`  
+                        - Check if all termina CHW loop are purchased cooling: `if are_all_terminal_chw_loops_purchased_cooling(B_RMR,terminal_unit_id_list) == TRUE: is_baseline_system_1c == TRUE`  
 
 **Returns** `is_baseline_system_1c`  
 
