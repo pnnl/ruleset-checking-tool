@@ -47,7 +47,4 @@ Functions:
 **Notes:**
 
 1. Prerequisite: baseline systems are model correctly with preheat coils - Xing.
-2. Not sure where this function is to be used so I am not clear why it only checks the preheat coil. 
-For example, 
-Systems 1, 1a, 1b, 3b, 3c, 11.2, 11.2a, 11b, 11c, and 12, 12a, 12b, 12c will have HW coils as heating coils. 
-Systems 5, 5a, 5b, 6b, 7, 7a, 7b, 7c, 8b, 8c, 9b and 1c will have HW coils at the terminal units.
+2. Prerequisute is that baseline systems are modeled correctly with the same loops serving all relevant coils for each zone. 
