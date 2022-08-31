@@ -1,6 +1,7 @@
 {
 	"air_terminals": "ruleset_model_instances[0]/buildings[0]/building_segments[0]/heating_ventilation_air_conditioning_systems[0]/air_terminals",
 	"boilers": "ruleset_model_instances[0]/boilers",
+	"chillers": "ruleset_model_instances[0]/chillers",
 	"buildings": "ruleset_model_instances[0]/buildings",
 	"building_segments": "ruleset_model_instances[0]/buildings[0]/building_segments",
 	"climate_zone": "weather/climate_zone",
