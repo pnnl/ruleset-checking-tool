@@ -13,7 +13,7 @@
 
 ## Logic:   
 - Set is_hvac_sys_preheating_type_fluid_loop = FALSE: `is_hvac_sys_preheating_type_fluid_loop = FALSE`  
-- Create an object associate with the preheating_system associated with hvac_b: `preheating_system_b = hvac_b.preheat_system[0]`
+- Create an object associate with the preheating_system associated with hvac_b: `preheating_system_b = hvac_b.preheat_system`
 - Check if the system type is FLUID_LOOP AND that hot_water_loop does not equal Null , if yes then is_hvac_sys_preheating_type_fluid_loop equals TRUE: `if preheating_system_b.heating_system_type == "FLUID_LOOP" AND preheating_system_b.hot_water_loop != Null: is_hvac_sys_preheating_type_fluid_loop = TRUE` 
 
 **Returns** `return is_hvac_sys_preheating_type_fluid_loop`  
