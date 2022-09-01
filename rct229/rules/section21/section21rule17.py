@@ -3,7 +3,6 @@ from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 from rct229.ruleset_functions.get_baseline_system_types import get_baseline_system_types
-from rct229.utils.std_comparisons import std_equal
 from rct229.schema.config import ureg
 
 APPLICABLE_SYS_TYPES = [
@@ -83,17 +82,17 @@ class Section21Rule17(RuleDefinitionListIndexedBase):
                     boiler_rated_capacity_b < BOILER_RATED_CAPACITY_LOW_LIMIT
                     and boiler_efficiency_metric_b
                     == BOILER_EFFICIENCY_METRIC.ANNUAL_FUEL_UTILIZATION
-                    and std_equal(boiler_efficiency_b, BOILER_EFFICIENCY_80)
+                    and boiler_efficiency_b == BOILER_EFFICIENCY_80
                 )
                 or (
                     boiler_rated_capacity_b <= BOILER_RATED_CAPACITY_HIGH_LIMIT
                     and boiler_efficiency_metric_b == BOILER_EFFICIENCY_METRIC.THERMAL
-                    and std_equal(boiler_efficiency_b, BOILER_EFFICIENCY_75)
+                    and boiler_efficiency_b == BOILER_EFFICIENCY_75
                 )
                 or (
                     boiler_rated_capacity_b > BOILER_RATED_CAPACITY_HIGH_LIMIT
                     and boiler_efficiency_metric_b
                     == BOILER_EFFICIENCY_METRIC.COMBUSTION
-                    and std_equal(boiler_efficiency_b, BOILER_EFFICIENCY_80)
+                    and boiler_efficiency_b == BOILER_EFFICIENCY_80
                 )
             )
