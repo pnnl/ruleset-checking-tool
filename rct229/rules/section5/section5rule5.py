@@ -12,6 +12,7 @@ from rct229.ruleset_functions.get_surface_conditioning_category_dict import (
     get_surface_conditioning_category_dict,
 )
 from rct229.utils.jsonpath_utils import find_all
+from rct229.utils.pint_utils import CalcQ
 from rct229.utils.std_comparisons import std_equal
 
 
@@ -95,10 +96,14 @@ class Section5Rule5(RuleDefinitionListIndexedBase):
                         target_u_factor = target_u_factor_res
 
                 return {
-                    "roof_u_factor": roof_u_factor,
-                    "target_u_factor": target_u_factor,
-                    "target_u_factor_res": target_u_factor_res,
-                    "target_u_factor_nonres": target_u_factor_nonres,
+                    "roof_u_factor": CalcQ("thermal_transmittance", roof_u_factor),
+                    "target_u_factor": CalcQ("thermal_transmittance", target_u_factor),
+                    "target_u_factor_res": CalcQ(
+                        "thermal_transmittance", target_u_factor_res
+                    ),
+                    "target_u_factor_nonres": CalcQ(
+                        "thermal_transmittance", target_u_factor_nonres
+                    ),
                 }
 
             def manual_check_required(self, context=None, calc_vals=None, data=None):

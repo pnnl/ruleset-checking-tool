@@ -10,6 +10,7 @@ from rct229.ruleset_functions.get_building_segment_lighting_status_type_dict imp
 )
 from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all
+from rct229.utils.pint_utils import CalcQ
 from rct229.utils.std_comparisons import std_equal
 
 OFFICE_OPEN_PLAN = schema_enums[
@@ -95,12 +96,12 @@ class Section6Rule4(RuleDefinitionListIndexedBase):
                             data["avg_zone_ht_b"],
                             getattr_(space_b, "Space", "floor_area"),
                         )
-                    )
+                    )["lpd"]
 
                     return {
-                        "total_space_lpd_b": total_space_lpd_b,
+                        "total_space_lpd_b": CalcQ("power_density", total_space_lpd_b),
                         "space_lighting_status_type_p": space_lighting_status_type_p,
-                        "lpd_allowance_b": lpd_allowance_b,
+                        "lpd_allowance_b": CalcQ("power_density", lpd_allowance_b),
                     }
 
                 def rule_check(self, context, calc_vals=None, data=None):
@@ -111,7 +112,7 @@ class Section6Rule4(RuleDefinitionListIndexedBase):
                         "space_lighting_status_type_p"
                     ]
                     total_space_lpd_b = calc_vals["total_space_lpd_b"]
-                    lpd_allowance_b = calc_vals["lpd_allowance_b"]["lpd"]
+                    lpd_allowance_b = calc_vals["lpd_allowance_b"]
 
                     return (
                         # Not Case 1
