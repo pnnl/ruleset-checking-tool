@@ -21,16 +21,41 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   * [Functions](_functions.md): A list of functions used within the Rule Definition Development Strategy documents
 
 ## Ruleset Functions
+### General functions
   * [get_lighting_status_type](ruleset_functions/get_lighting_status_type.md): This function would determine whether the space lighting status type is 1). not-yet designed or match Table 9_5_1, 2). as-designed or as-existing.  
   * [get_opaque_surface_type.md](ruleset_functions/get_opaque_surface_type.md): This function would determine whether it is a wall, ceiling or floor.  
   * [get_surface_conditioning_category.md](ruleset_functions/get_surface_conditioning_category.md): This function would cycle through each surface in  a zone and categorize it as exterior res, exterior non res, exterior mixed, semi-exterior or unregulated.  
   * [get_wwr.md](ruleset_functions/get_wwr.md): This function would determine window wall ratio for a building segment.  
   * [get_zone_conditioning_category.md](ruleset_functions/get_zone_conditioning_category.md): Determine the Zone Conditioning Category for each zone. This function would cycle through each zone in an RMR and categorize it as ‘conditioned’, 'semi-heated’, 'unenclosed' or ‘unconditioned’.  If ‘conditioned’ it will also categorize the space as ‘residential’ or ‘non-residential’.  
-  * [normalize_interior_lighting_schedules.md](ruleset_functions/normalize_interior_lighting_schedules.md):This function would determine a normalized schedule for a data element in space
+  * [normalize_interior_lighting_schedules.md](ruleset_functions/normalize_interior_lighting_schedules.md):This function would determine a normalized schedule for a data element in space.
+  * [compare_schedules](ruleset_functions/compare_schedules.md): This function would compare two schedules and determine if they match with or without a comparison factor when applicable.  
   * [get_fuels_modeled_in_RMR.md](ruleset_functions/get_fuels_modeled_in_RMR.md): Get a list of the fuels used in the RMR.  Includes fuels used by HVAC systems including terminal units, chillers, boilers, ExternalFluidSources, and SWHs.
   * [get_primary_secondary_loops.md](ruleset_functions/get_primary_secondary_loops.md): Get the list of primary and secondary loops for CHW for a B-RMR.
   * [get_hvac_systems_5_6_serving_multiple_floors_b](ruleset_functions/get_hvac_systems_5_6_serving_multiple_floors_b.md): Get a dictionary of the system 5, 5a, 5b, 6, 6a, 6b hvac system IDs that are modeled as serving more than one floor in the baseline design model.  The dictionary consists of the hvac system ids as the key and the number of floors served as the value associated with the key.
   * [get_zones_computer_rooms](ruleset_functions/get_zones_computer_rooms.md): Returns a dictionary with the zones that have at least one computer room space associated with them in the RMR as the keys. The values associated with each key are in a list form. The list associated with each key contains the computer room floor area as the first item in the list and the total zone floor area as the second item in the list.
+
+### HVAC sub functions
+  * [are_all_terminal_heat_sources_hot_water](ruleset_functions/baseline_systems/baseline_hvac_sub_functions/are_all_terminal_heat_sources_hot_water(hvac.id).md): Returns TRUE if the heat source associated with all terminal units input to this function is HOT_WATER. It returns FALSE if any terminal unit has a heat source other than HOT_WATER.
+  * [is_hvac_sys_heating_type_elec_resistance](ruleset_functions/baseline_systems/baseline_hvac_sub_functions/is_hvac_sys_heating_type_elec_resistance.md): Returns TRUE if the HVAC system heating system heating type is ELECTRIC_RESISTANCE. Returns FALSE if the HVAC system heating system has anything other than ELECTRIC_RESISTANCE.
+  * [is_hvac_sys_cooling_type_none](ruleset_functions/baseline_systems/baseline_hvac_sub_functions/is_hvac_sys_cooling_type_none.md): Returns TRUE if the HVAC system cooling type is None or Null. Returns FALSE if the HVAC system has anything other than None or Null for the cooling type or if it has more than 1 or no cooling system.
+  * [do_all_terminals_have_one_fan](ruleset_functions/baseline_systems/baseline_hvac_sub_functions/do_all_terminals_have_one_fan.md): Returns TRUE if the fan data element associated with all terminal units input to this function are equal to one (i.e., there is only one fan associated with the terminal unit). It returns FALSE if any terminal unit has a fan data element not equal to one (i.e., there is NOT only one fan associated with the terminal unit).
+  * [are_all_terminal_fan_configs_parallel](ruleset_functions/baseline_systems/baseline_hvac_sub_functions/are_all_terminal_fan_configs_parallel.md): Returns TRUE if the fan configuration associated with all terminal units input to this function are parallel. It returns FALSE if any terminal unit has a fan configuration other than parallel.
+  * [are_all_terminal_heat_sources_electric](ruleset_functions/baseline_systems/baseline_hvac_sub_functions/are_all_terminal_heat_sources_electric.md): Returns TRUE if the heat source associated with all terminal units input to this function are electric. It returns FALSE if any terminal unit has a heat source other than electric.
+  * [is_hvac_sys_preheating_type_elec_resistance](ruleset_functions/baseline_systems/baseline_hvac_sub_functions/is_hvac_sys_preheating_type_elec_resistance.md): Returns TRUE if the HVAC system preheating system heating type is ELECTRIC_RESISTANCE. Returns FALSE if the HVAC system preheating system has anything other than ELECTRIC_RESISTANCE.
+  * [are_all_terminal_heating_loops_purchased_heating](ruleset_functions/baseline_systems/baseline_hvac_sub_functions/are_all_terminal_heating_loops_purchased_heating.md): Returns TRUE if the fluid loop associated with the heating_from_loop associated with each terminal unit is purchased heating. Returns FALSE if this is not the case.
+  * [is_hvac_sys_preheat_fluid_loop_attached_to_boiler](ruleset_functions/baseline_systems/baseline_hvac_sub_functions/is_hvac_sys_preheat_fluid_loop_attached_to_boiler.md): Returns TRUE if the fluid loop associated with the preheat system associated with the HVAC system is attached to a boiler. Returns FALSE if this is not the case.
+  * [is_hvac_sys_preheat_fluid_loop_purchased_heating](ruleset_functions/baseline_systems/baseline_hvac_sub_functions/is_hvac_sys_preheat_fluid_loop_purchased_heating.md): Returns TRUE if the fluid loop associated with the preheating system associated with the HVAC system is attached to an external purchased heating loop. Returns FALSE if this is not the case.
+  * [is_hvac_sys_preheating_type_fluid_loop](ruleset_functions/baseline_systems/baseline_hvac_sub_functions/is_hvac_sys_preheating_type_fluid_loop.md): Returns TRUE if the HVAC system preheating system heating type is fluid loop. Returns FALSE if the HVAC system preheating system has anything other than fluid loop.
+  * [are_all_terminal_types_VAV](ruleset_functions/baseline_systems/baseline_hvac_sub_functions/are_all_terminal_types_VAV.md): Returns TRUE if all of the terminal unit types input to this function are variable air volume (VAV). It returns FALSE if any of the terminal units are of a type other than variable air volume (VAV).
+  * [is_hvac_sys_heating_type_furnace](ruleset_functions/baseline_systems/baseline_hvac_sub_functions/is_hvac_sys_heating_type_furnace.md): Returns TRUE if the HVAC system heating system heating type is furnace. Returns FALSE if the HVAC system heating system has anything other than furnace or if it has more than 1 heating system.
+  * [is_hvac_sys_cooling_type_DX](ruleset_functions/baseline_systems/baseline_hvac_sub_functions/is_hvac_sys_cooling_type_DX.md): Returns TRUE if the HVAC system has DX cooling. Returns FALSE if the HVAC system has anything other than DX cooling or if it has more than 1 or no cooling system.
+  * [is_hvac_sys_fan_sys_CV](ruleset_functions/baseline_systems/baseline_hvac_sub_functions/is_hvac_sys_fan_sys_CV.md): Returns TRUE if the HVAC system fan system is constant volume. Returns FALSE if the HVAC system fan system is anything other than constant volume.
+  * [is_hvac_sys_heating_type_heat_pump](ruleset_functions/baseline_systems/baseline_hvac_sub_functions/is_hvac_sys_heating_type_heat_pump.md): Returns TRUE if the HVAC system has heat pump as the heating system type. Returns FALSE if the HVAC system has anything other than heat pump as the heating system type or if it has more than 1 heating system.
+  * [is_hvac_sys_fluid_loop_attached_to_boiler](ruleset_functions/baseline_systems/baseline_hvac_sub_functions/is_hvac_sys_fluid_loop_attached_to_boiler.md): Returns TRUE if the fluid loop associated with the heating system associated with the HVAC system is attached to a boiler. Returns FALSE if this is not the case. 
+  * [does_hvac_system_serve_single_zone](ruleset_functions/baseline_systems/baseline_hvac_sub_functions/does_hvac_system_serve_single_zone.md): Returns TRUE if the HVAC system serves a single zone. Returns FALSE if the HVAC system serves multiple zones. 
+  * [is_hvac_sys_heating_type_fluid_loop](ruleset_functions/baseline_systems/baseline_hvac_sub_functions/is_hvac_sys_heating_type_fluid_loop.md): Returns TRUE if the HVAC system heating system heating type is fluid loop. Returns FALSE if the HVAC system heating system has anything other than fluid loop or if it has more than 1 heating system. 
+  * [are_all_terminal_supplies_ducted](ruleset_functions/baseline_systems/baseline_hvac_sub_functions/are_all_terminal_supplies_ducted.md): Returns TRUE if all of the terminal supplies are ducted (i.e., is_supply_ducted = TRUE) for the list of terminal units input to the function. It returns FALSE if any of the terminal supplies are not ducted (i.e., is_supply_ducted = FALSE). 
+
 ## Data Tables
   * [8.4.4](data_tables/Table8-4-4.md): Minimum Nominal Efficiency Levels for Low-Voltage Dry-Type Distribution Transformers  
   * [G3.1.1-1](data_tables/Table3-1-1-1.md): Baseline Building Vertical Fenestration Percentage of Gross Above-Grade-Wall Area  
@@ -115,7 +140,7 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   * [5-30](section5/Rule5-30.md): Proposed fenestration has the same shading projections as the user model.
   * [5-31](section5/Rule5-31.md): Manual fenestration shading devices, such as blinds or shades, shall be modeled or not modeled the same as in the baseline building design.
   * [5-33](section5/Rule5-33.md): Automatically controlled fenestration shading devices must be modeled in the proposed design the same as in user model.  
-  * [5-34](section5/Rule5-34.md):  If skylight area in the proposed design is 3% or less of the roof surface, the skylight area in baseline shall be equal to that in the proposed design.  
+  * [5-34](section5/Rule5-34.md): If skylight area in the proposed design is 3% or less of the roof surface, the skylight area in baseline shall be equal to that in the proposed design.  
   * [5-35](section5/Rule5-35.md): If the skylight area of the proposed design is greater than 3%, baseline skylight area shall be decreased by an identical percentage in all roof components in which skylights are located to reach 3%.  
   * [5-36](section5/Rule5-36.md): Skylight area must be allocated to surfaces in the same proportion in the baseline as in the proposed design; Skylight orientation and tilt shall be the same as in the proposed design.  
   * [5-37](section5/Rule5-37.md): Skylight U-factors for residential, non-residential and semi-heated spaces in the baseline model must match the appropriate requirements in Table G3.4-1 through G3.4-8.  
@@ -168,7 +193,6 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
 ## Section 17 - Refrigeration
 
 ## Section 18 - Central Chilled Water Systems
-  * [18-8](section18/Rule18-8.md): For systems using purchased chilled water, the cooling source shall be modeled as purchased chilled water in both the proposed design and baseline building design. If any system in the proposed design uses purchased chilled water, all baseline systems with chilled water coils shall use purchased chilled water. On-site chillers and direct expansion equipment shall not be modeled in the baseline building design.
 
 ## Section 21 - Central Heating Hot Water Systems
   * [21-1](section21/Rule21-1.md): For systems using purchased hot water or steam, the heating source shall be modeled as purchased hot water or steam in both the proposed design and baseline building design. If any system in the proposed design uses purchased hot water or steam, all baseline systems with hot water coils shall use the same type of purchased hot water or steam.
@@ -179,12 +203,12 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   * [21-7](section21/Rule21-7.md): When baseline building requires boilers, systems 1,5,7,11 and 12 - Model HWST = 180F and return design temp = 130F.
   * [21-9](section21/Rule21-9.md): When baseline building includes boilers, Hot Water Pump Power = 19W/gpm.  
   * [21-10](section21/Rule21-10.md): When the building is modeled with HHW plant (served by either boiler(s) or purchased hot water/steam), the hot water pump shall be modeled as riding the pump curve if the hot water system serves less than 120,000 ft^2 otherwise it shall be modeled with a VFD.  
-  * [21-11A](section21/Rule21-11A.md): When the system uses boilers the hot water system shall be modeled as primary only.  
-  * [21-11B](section21/Rule21-11B.md): When the system uses boilers the hot water system shall be modeled with continuous variable flow.  
-  * [21-11C](section21/Rule21-11C.md): When the system uses boilers the hot water system shall be modeled with a minimum turndown ratio of 0.25.
-  * [21-18](section21/Rule21-18.md): Baseline shall have only one heating hot water plant.
-  * [21-19](section21/Rule21-19.md): All boilers in the baseline building design shall be modeled at the minimum efficiency levels, both part load and full load, in accordance with Tables G3.5.6.
-  * [21-21](section21/Rule21-21.md): For baseline building, fossil fuel systems shall be modeled using natural gas as their fuel source.
+  * [21-11](section21/Rule21-11.md): When the system uses boilers the hot water system shall be modeled as primary only.  
+  * [21-12](section21/Rule21-12.md): When the system uses boilers the hot water system shall be modeled with continuous variable flow.  
+  * [21-13](section21/Rule21-13.md): When the system uses boilers the hot water system shall be modeled with a minimum turndown ratio of 0.25.
+  * [21-16](section21/Rule21-16.md): Baseline shall have only one heating hot water plant.
+  * [21-17](section21/Rule21-17.md): All boilers in the baseline building design shall be modeled at the minimum efficiency levels, both part load and full load, in accordance with Tables G3.5.6.
+  * [21-18](section21/Rule21-18.md): For baseline building, fossil fuel systems shall be modeled using natural gas as their fuel source.
 
 ## Section 22 - Central Chilled Water Systems
   * [22-1](section22/Rule22-1.md): Baseline chilled water design supply temperature shall be modeled at 44F.  
@@ -192,24 +216,36 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   * [22-3](section22/Rule22-3.md): For Baseline chilled water loop that is not purchased cooling, chilled-water supply temperature shall be reset based on outdoor dry-bulb temperature if loop does not serve any Baseline System Type-11.
   * [22-4](section22/Rule22-4.md): For Baseline chilled water loop that is not purchased chilled water and does not serve any computer room HVAC systems, chilled-water supply temperature shall be reset using the following schedule: 44F at outdoor dry-bulb temperature of 80F and above, 54F at 60F and below, and ramped linearly between 44F and 54F at temperature between 80F and 60F.
   * [22-5](section22/Rule22-5.md): For Baseline chilled water loop that is not purchased chilled water and serves computer room HVAC systems (System Type-11), chilled-water supply temperature shall be reset higher based on the HVAC system requiring the most cooling.  
+  * [22-6](section22/Rule22-6.md): For Baseline chilled water loop that is not purchased chilled water and serves computer room HVAC systems (System Type-11), The maximum reset chilled-water supply temperature shall be 54F.
   * [22-7](section22/Rule22-7.md): Baseline chilled water system that does not use purchased chilled water shall be modeled as primary/secondary systems.
   * [22-8](section22/Rule22-8.md): For Baseline chilled water system with cooling capacity of 300 tons or more, the secondary pump shall be modeled with variable-speed drives.
   * [22-9](section22/Rule22-9.md): For Baseline chilled water system with cooling capacity of 300 tons or more, the secondary loop shall be modeled with a minimum flow of 25% of the design flow rate. 
   * [22-10](section22/Rule22-10.md): For Baseline chilled water system with cooling capacity less than 300ton, the secondary pump shall be modeled as riding the pump curve. For Baseline chilled water system with cooling capacity of 300 tons or more, the secondary pump shall be modeled with variable-speed drives. 
   * [22-11](section22/Rule22-11.md): For Baseline chilled-water system that does not use purchased chilled water, variable-flow secondary pump shall be modeled as 13W/gpm at design conditions. 
   * [22-14](section22/Rule22-14.md): The baseline heat-rejection device shall have a design temperature rise of 10°F. 
-  * [22-17](section22/Rule22-17.md): The baseline condenser-water design supply temperature shall be calculated using the cooling tower approach to the 0.4% evaporation design wet-bulb temperature, valid for wet-bulbs from 55°F to 90°F. 
-  * [22-21](section22/Rule22-21.md): The baseline minimum condenser water reset temperature is per Table G3.1.3.11.
-  * [22-22](section22/Rule22-22.md): The baseline building design’s chiller plant shall be modeled with chillers having the type as indicated in Table G3.1.3.7 as a function of building peak cooling load. 
-  * [22-24](section22/Rule22-24.md): Each baseline chiller shall be modeled with separate chilled water pump interlocked to operate with the associated chiller.
-  * [22-26](section22/Rule22-26.md): For chilled-water systems served by chiller(s) and does not serve baseline System-11, the baseline building constant-volume primary pump power shall be modeled as 9 W/gpm. 
-  * [22-27](section22/Rule22-27.md): For chilled-water systems served by chiller(s) and serves baseline System-11, the baseline building constant-volume primary pump power shall be modeled as 12 W/gpm. 
-  * [22-28](section22/Rule22-28.md): Each baseline chiller shall be modeled with separate condenser-water pump interlocked to operate with the associated chiller.
-  * [22-30](section22/Rule22-30.md): For chilled-water systems served by chiller(s) and does not serve baseline System-11, condenser-water pump power shall be 19 W/gpm. 
-  * [22-31](section22/Rule22-31.md): For chilled-water systems served by chiller(s) and serves baseline System-11, condenser-water pump power shall be 22 W/gpm. 
-  * [22-32](section22/Rule22-32.md): The baseline building design’s chiller plant shall be modeled with chillers having the number as indicated in Table G3.1.3.7 as a function of building peak cooling load. 
-  * [22-34](section22/Rule22-34.md): Baseline chilled water system that does not use purchased chilled water must only have no more than one CHW plant.
-  * [22-35](section22/Rule22-35.md): For baseline cooling chilled water plant that is served by chiller(s), the capacity shall be based on coincident loads.
+  * [22-16](section22/Rule22-16.md): The baseline condenser-water design supply temperature shall be calculated using the cooling tower approach to the 0.4% evaporation design wet-bulb temperature, valid for wet-bulbs from 55°F to 90°F. 
+  * [22-19](section22/Rule22-19.md): The tower shall be controlled to maintain a leaving water temperature, where weather permits.
+  * [22-20](section22/Rule22-20.md): The baseline minimum condenser water reset temperature is per Table G3.1.3.11.
+  * [22-21](section22/Rule22-21.md): The baseline building design’s chiller plant shall be modeled with chillers having the type as indicated in Table G3.1.3.7 as a function of building peak cooling load. 
+  * [22-22](section22/Rule22-22.md): The baseline chiller efficiencies shall be modeled at the minimum efficiency levels for full load, in accordance with Tables G3.5.3.
+  * [22-23](section22/Rule22-23.md): Each baseline chiller shall be modeled with separate chilled water pump interlocked to operate with the associated chiller.
+  * [22-24](section22/Rule22-24.md): For baseline chilled-water systems served by chiller(s), the primary pump shall be modeled as constant volume. 
+  * [22-25](section22/Rule22-25.md): For chilled-water systems served by chiller(s) and does not serve baseline System-11, the baseline building constant-volume primary pump power shall be modeled as 9 W/gpm. 
+  * [22-26](section22/Rule22-26.md): For chilled-water systems served by chiller(s) and serves baseline System-11, the baseline building constant-volume primary pump power shall be modeled as 12 W/gpm. 
+  * [22-27](section22/Rule22-27.md): Each baseline chiller shall be modeled with separate condenser-water pump interlocked to operate with the associated chiller.
+  * [22-29](section22/Rule22-29.md): For chilled-water systems served by chiller(s) and does not serve baseline System-11, condenser-water pump power shall be 19 W/gpm. 
+  * [22-30](section22/Rule22-30.md): For chilled-water systems served by chiller(s) and serves baseline System-11, condenser-water pump power shall be 22 W/gpm. 
+  * [22-31](section22/Rule22-31.md): The baseline building design’s chiller plant shall be modeled with chillers having the number as indicated in Table G3.1.3.7 as a function of building peak cooling load. 
+  * [22-33](section22/Rule22-33.md): Baseline chilled water system that does not use purchased chilled water must only have no more than one CHW plant.
+  * [22-34](section22/Rule22-34.md): For baseline cooling chilled water plant that is served by chiller(s), the capacity shall be based on coincident loads.
   * [22-36](section22/Rule22-36.md): Baseline chilled water system that does not use purchased chilled water shall be modeled with constant flow primary loop and variable flow secondary loop.
+  * [22-37](section22/Rule22-37.md): The baseline chiller efficiencies shall be modeled at the minimum efficiency levels for part load, in accordance with Tables G3.5.3.
+  * [22-40](section22/Rule22-40.md): For systems using purchased chilled water, the cooling source shall be modeled as purchased chilled water in both the proposed design and baseline building design. If any system in the proposed design uses purchased chilled water, all baseline systems with chilled water coils shall use purchased chilled water. On-site chillers and direct expansion equipment shall not be modeled in the baseline building design.
+
 ## Section 23 - Chilled Water Systems and Condenser Water Systems
   * [23-1](section23/Rule23-1.md): For baseline systems 5-8 and 11, the SAT is reset higher by 5F under minimum cooling load conditions.
+  * [23-2](section23/Rule23-2.md): System 5, 6, 7 and 8 minimum volume setpoint shall be 30% of zone peak airflow, minimum outdoor airflow, or rate required to comply with minimum accreditation standards whichever is larger.
+  * [23-5](section23/Rule23-5.md): For baseline systems 6 and 8, Fans in parallel VAV fan-powered boxes shall be sized for 50% of the peak design primary air (from the VAV air-handling unit) flow rate and shall be modeled with 0.35 W/cfm fan power.
+  * [23-9](section23/Rule23-9.md): Systems 6&8: Supply air temperature setpoint shall be constant at the design condition.
+  * [23-10](section23/Rule23-10.md): System 5-8 and 11 - part load VAV fan power shall be modeled using either method 1 or 2 in Table G3.1.3.15. This rule will only validate data points from Method-1 Part-load Fan Power Data. However, both methods are equivalent. When modeling inputs are based on Method 2, values should be converted to Method 1 when writing to RMD.
+  * [23-19](section23/Rule23-19.md): Systems 5 - 8, the baseline system shall be modeled with preheat coils controlled to a fixed set point 20F less than the design room heating temperature setpoint.
