@@ -51,6 +51,8 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   * [is_hvac_sys_cooling_type_DX](ruleset_functions/baseline_systems/baseline_hvac_sub_functions/is_hvac_sys_cooling_type_DX.md): Returns TRUE if the HVAC system has DX cooling. Returns FALSE if the HVAC system has anything other than DX cooling or if it has more than 1 or no cooling system.
   * [is_hvac_sys_fan_sys_CV](ruleset_functions/baseline_systems/baseline_hvac_sub_functions/is_hvac_sys_fan_sys_CV.md): Returns TRUE if the HVAC system fan system is constant volume. Returns FALSE if the HVAC system fan system is anything other than constant volume.
   * [is_hvac_sys_heating_type_heat_pump](ruleset_functions/baseline_systems/baseline_hvac_sub_functions/is_hvac_sys_heating_type_heat_pump.md): Returns TRUE if the HVAC system has heat pump as the heating system type. Returns FALSE if the HVAC system has anything other than heat pump as the heating system type or if it has more than 1 heating system.
+  * [is_hvac_sys_fluid_loop_attached_to_boiler](ruleset_functions/baseline_systems/baseline_hvac_sub_functions/is_hvac_sys_fluid_loop_attached_to_boiler.md): Returns TRUE if the fluid loop associated with the heating system associated with the HVAC system is attached to a boiler. Returns FALSE if this is not the case. 
+
 
 ## Data Tables
   * [8.4.4](data_tables/Table8-4-4.md): Minimum Nominal Efficiency Levels for Low-Voltage Dry-Type Distribution Transformers  
