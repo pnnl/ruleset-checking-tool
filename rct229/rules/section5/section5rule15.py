@@ -13,6 +13,15 @@ from rct229.ruleset_functions.get_surface_conditioning_category_dict import (
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.std_comparisons import std_equal
 
+MANUAL_CHECK_REQUIRED_MSG = (
+    "Zone has both residential and non-residential spaces and the construction requirements "
+    "for slab-on-grade floor are different. Verify construction is modeled correctly. "
+)
+FAIL_MSG = (
+    'Baseline slab F-factor is not as expected for slabs that are less than 24" below grade. verify that the '
+    'slab is more than 24" below grade and is unregulated. '
+)
+
 
 class Section5Rule15(RuleDefinitionListIndexedBase):
     """Rule 15 of ASHRAE 90.1-2019 Appendix G Section 5 (Envelope)"""
@@ -29,11 +38,8 @@ class Section5Rule15(RuleDefinitionListIndexedBase):
             id="5-15",
             description="Baseline slab-on-grade floor assemblies must match the appropriate assembly maximum F-factors in Tables G3.4-1 through G3.4-9.",
             list_path="ruleset_model_instances[0].buildings[*]",
+            data_items={"climate_zone": ("baseline", "weather/climate_zone")},
         )
-
-    def create_data(self, context, data=None):
-        rmr_baseline = context.baseline
-        return {"climate_zone": rmr_baseline["weather"]["climate_zone"]}
 
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
@@ -42,26 +48,20 @@ class Section5Rule15(RuleDefinitionListIndexedBase):
                 required_fields={},
                 each_rule=Section5Rule15.BuildingRule.SlabOnGradeFloorRule(),
                 index_rmr="baseline",
+                list_path="$..surfaces[*]",
             )
-
-        def create_context_list(self, context, data=None):
-            building = context.baseline
-            # List of all baseline slab on grade floor surfaces to become the context for SlabOnGradeFloorRule
-            return [
-                UserBaselineProposedVals(None, surface, None)
-                for surface in find_all("$..surfaces[*]", building)
-                if get_opaque_surface_type(surface) == OST.UNHEATED_SOG
-            ]
 
         def create_data(self, context, data=None):
             building = context.baseline
-            # Merge into the existing data dict
             return {
-                **data,
                 "surface_conditioning_category_dict": get_surface_conditioning_category_dict(
                     data["climate_zone"], building
                 ),
             }
+
+        def list_filter(self, context_item, data=None):
+            surface_b = context_item.baseline
+            return get_opaque_surface_type(surface_b) == OST.UNHEATED_SOG
 
         class SlabOnGradeFloorRule(RuleDefinitionBase):
             def __init__(self):
@@ -71,6 +71,8 @@ class Section5Rule15(RuleDefinitionListIndexedBase):
                         "$": ["construction"],
                         "construction": ["f_factor"],
                     },
+                    manual_check_required_msg=MANUAL_CHECK_REQUIRED_MSG,
+                    fail_msg=FAIL_MSG,
                 )
 
             def get_calc_vals(self, context, data=None):
@@ -112,13 +114,13 @@ class Section5Rule15(RuleDefinitionListIndexedBase):
                     "target_f_factor_nonres": target_f_factor_nonres,
                 }
 
-            def manaul_check_required(self, context, calc_vals, data=None):
+            def manual_check_required(self, context, calc_vals=None, data=None):
                 target_f_factor_res = calc_vals["target_f_factor_res"]
                 target_f_factor_nonres = calc_vals["target_f_factor_nonres"]
 
                 return target_f_factor_res != target_f_factor_nonres
 
-            def rule_check(self, context, calc_vals, data=None):
+            def rule_check(self, context, calc_vals=None, data=None):
                 target_f_factor = calc_vals["target_f_factor"]
                 slab_on_grade_floor_f_factor = calc_vals["slab_on_grade_floor_f_factor"]
 
