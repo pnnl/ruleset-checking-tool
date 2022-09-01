@@ -27,7 +27,7 @@ SURFACE_CONDITIONING_CATEGORY_TO_BUILDING_CATEGORY_MAP = {
     "SEMI-EXTERIOR": "Semiheated",
 }
 
-# This dictionary maps the ClimateZone2019ASHRAE901 enumerations to
+# This dictionary maps the ClimateZoneOptions2019ASHRAE901 enumerations to
 # the corresponding climate zone set values  in the OSSTD file ashrae_90_1_prm_2019.construction_properties.json
 CLIMATE_ZONE_ENUMERATION_TO_CLIMATE_ZONE_SET_MAP = {
     "CZ0A": "ClimateZone 0",
@@ -99,7 +99,7 @@ def table_G34_lookup(
     Parameters
     ----------
     climate_zone : str
-        One of the ClimateZone2019ASHRAE901 enumeration values
+        One of the ClimateZoneOptions2019ASHRAE901 enumeration values
     surface_conditioning_category : str
         A surface conditioning category as returned by get_surface_conditioning_category_dict()
     opaque_surface_type : str
