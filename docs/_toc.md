@@ -52,6 +52,7 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   * [is_hvac_sys_fan_sys_CV](ruleset_functions/baseline_systems/baseline_hvac_sub_functions/is_hvac_sys_fan_sys_CV.md): Returns TRUE if the HVAC system fan system is constant volume. Returns FALSE if the HVAC system fan system is anything other than constant volume.
   * [is_hvac_sys_heating_type_heat_pump](ruleset_functions/baseline_systems/baseline_hvac_sub_functions/is_hvac_sys_heating_type_heat_pump.md): Returns TRUE if the HVAC system has heat pump as the heating system type. Returns FALSE if the HVAC system has anything other than heat pump as the heating system type or if it has more than 1 heating system.
   * [is_hvac_sys_fluid_loop_attached_to_boiler](ruleset_functions/baseline_systems/baseline_hvac_sub_functions/is_hvac_sys_fluid_loop_attached_to_boiler.md): Returns TRUE if the fluid loop associated with the heating system associated with the HVAC system is attached to a boiler. Returns FALSE if this is not the case. 
+  * [does_hvac_system_serve_single_zone](ruleset_functions/baseline_systems/baseline_hvac_sub_functions/does_hvac_system_serve_single_zone.md): Returns TRUE if the HVAC system serves a single zone. Returns FALSE if the HVAC system serves multiple zones. 
 
 
 ## Data Tables
