@@ -1,5 +1,6 @@
-from rct229.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.is_hvac_sys_preheating_type_fluid_loop import \
-    is_hvac_sys_preheating_type_fluid_loop
+from rct229.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.is_hvac_sys_preheating_type_fluid_loop import (
+    is_hvac_sys_preheating_type_fluid_loop,
+)
 
 TEST_RMD = {
     "id": "test_rmd",
@@ -15,7 +16,7 @@ TEST_RMD = {
                             "preheat_system": {
                                 "id": "preheat_system",
                                 "hot_water_loop": "HW_Loop_1",
-                                "heating_system_type": "FLUID_LOOP"
+                                "heating_system_type": "FLUID_LOOP",
                             },
                         },
                         {
@@ -24,7 +25,7 @@ TEST_RMD = {
                             "preheat_system": {
                                 "id": "preheat_system",
                                 "hot_water_loop": "HW_Loop_2",
-                                "heating_system_type": "HEAT_PUMP"
+                                "heating_system_type": "HEAT_PUMP",
                             },
                         },
                         {
@@ -58,12 +59,8 @@ def test__preheatheating_type_fluid_loop():
 
 
 def test__preheatheating_type_heat_pump():
-    assert (
-        is_hvac_sys_preheating_type_fluid_loop(TEST_RMD, "hvac_2") == False
-    )
+    assert is_hvac_sys_preheating_type_fluid_loop(TEST_RMD, "hvac_2") == False
 
 
 def test__preheatheating_type_data_missing():
-    assert (
-        is_hvac_sys_preheating_type_fluid_loop(TEST_RMD, "hvac_3") == False
-    )
+    assert is_hvac_sys_preheating_type_fluid_loop(TEST_RMD, "hvac_3") == False
