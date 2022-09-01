@@ -53,8 +53,8 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   * [is_hvac_sys_heating_type_heat_pump](ruleset_functions/baseline_systems/baseline_hvac_sub_functions/is_hvac_sys_heating_type_heat_pump.md): Returns TRUE if the HVAC system has heat pump as the heating system type. Returns FALSE if the HVAC system has anything other than heat pump as the heating system type or if it has more than 1 heating system.
   * [is_hvac_sys_fluid_loop_attached_to_boiler](ruleset_functions/baseline_systems/baseline_hvac_sub_functions/is_hvac_sys_fluid_loop_attached_to_boiler.md): Returns TRUE if the fluid loop associated with the heating system associated with the HVAC system is attached to a boiler. Returns FALSE if this is not the case. 
   * [does_hvac_system_serve_single_zone](ruleset_functions/baseline_systems/baseline_hvac_sub_functions/does_hvac_system_serve_single_zone.md): Returns TRUE if the HVAC system serves a single zone. Returns FALSE if the HVAC system serves multiple zones. 
-
-
+  * [is_hvac_sys_heating_type_fluid_loop](ruleset_functions/baseline_systems/baseline_hvac_sub_functions/is_hvac_sys_heating_type_fluid_loop.md): Returns TRUE if the HVAC system heating system heating type is fluid loop. Returns FALSE if the HVAC system heating system has anything other than fluid loop or if it has more than 1 heating system. 
+  
 ## Data Tables
   * [8.4.4](data_tables/Table8-4-4.md): Minimum Nominal Efficiency Levels for Low-Voltage Dry-Type Distribution Transformers  
   * [G3.1.1-1](data_tables/Table3-1-1-1.md): Baseline Building Vertical Fenestration Percentage of Gross Above-Grade-Wall Area  
