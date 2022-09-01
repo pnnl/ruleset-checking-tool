@@ -14,7 +14,7 @@
             "comparison_value": "Baseline RMR",
             "rule_dependency": "None",
             "primary_rule": "Y",
-            "schema_version": "0.0.12"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "proposed": {
@@ -96,7 +96,7 @@
             "comparison_value": "Baseline RMR",
             "rule_dependency": "None",
             "primary_rule": "Y",
-            "schema_version": "0.0.12"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "proposed": {
