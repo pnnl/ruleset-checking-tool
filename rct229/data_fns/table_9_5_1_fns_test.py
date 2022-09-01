@@ -1,7 +1,6 @@
 import pytest
 
 from rct229.data import data
-from rct229.data.schema_enums import schema_enums
 from rct229.data_fns.table_9_5_1_fns import (
     lighting_space_type_enumeration_to_lpd_map,
     table_9_5_1_lookup,
@@ -29,7 +28,7 @@ def test__lighting_space_type_enumeration_to_lpd_map():
     # when a check fails
     check_enumeration_to_osstd_match_field_value_map(
         match_field_name="building_area_type",
-        enum_type="LightingSpaceType2019ASHRAE901T951TG38",
+        enum_type="LightingSpaceOptions2019ASHRAE901T951TG38",
         osstd_table=data["ashrae_90_1_table_9_5_1"],
         enumeration_to_match_field_value_map=lighting_space_type_enumeration_to_lpd_map,
         exclude_enum_names=["NONE"],
