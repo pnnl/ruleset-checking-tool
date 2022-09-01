@@ -1,9 +1,7 @@
 from rct229.data.schema_enums import schema_enums
 from rct229.data_fns.table_G3_4_fns import table_G34_lookup
-from rct229.rule_engine.rule_base import (
-    RuleDefinitionBase,
-    RuleDefinitionListIndexedBase,
-)
+from rct229.rule_engine.rule_base import RuleDefinitionBase
+from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 from rct229.ruleset_functions.get_building_scc_window_wall_ratios_dict import (
     get_building_scc_window_wall_ratios_dict,
@@ -17,9 +15,11 @@ from rct229.ruleset_functions.get_surface_conditioning_category_dict import (
     get_surface_conditioning_category_dict,
 )
 from rct229.utils.jsonpath_utils import find_all
+from rct229.utils.pint_utils import ZERO
 from rct229.utils.std_comparisons import std_equal
 
-DOOR = schema_enums["SubsurfaceClassificationType"].DOOR.name
+DOOR = schema_enums["SubsurfaceClassificationOptions"].DOOR
+MANUAL_CHECK_REQUIRED_MSG = "Manual review is requested to verify vertical fenestration meets U-factor requirement as per Table G3.4. "
 
 
 class Section5Rule24(RuleDefinitionListIndexedBase):
@@ -35,7 +35,7 @@ class Section5Rule24(RuleDefinitionListIndexedBase):
             each_rule=Section5Rule24.BuildingRule(),
             index_rmr="baseline",
             id="5-24",
-            description="Vertical fenestration U-factors for residential, non-residential and semi-heated spaces in the baseline model must match the appropriate requirements in Table G3.4-1 through G3.4-8 for the appropriate WWR in the baseline RMD",
+            description="Vertical fenestration U-factors for residential, non-residential and semi-heated spaces in the baseline model must match the appropriate requirements in Table G3.4-1 through G3.4-8 for the appropriate WWR in the baseline RMD.",
             list_path="ruleset_model_instances[0].buildings[*]",
         )
 
@@ -149,7 +149,7 @@ class Section5Rule24(RuleDefinitionListIndexedBase):
                     wwr=bldg_scc_wwr_ratio[SCC.EXTERIOR_MIXED],
                 )["u_value"]
                 if bldg_scc_wwr_ratio[SCC.EXTERIOR_MIXED] > 0
-                else 0.0
+                else ZERO.U_FACTOR
             )
             target_u_factor_res = (
                 table_G34_lookup(
@@ -159,7 +159,7 @@ class Section5Rule24(RuleDefinitionListIndexedBase):
                     wwr=bldg_scc_wwr_ratio[SCC.EXTERIOR_RESIDENTIAL],
                 )["u_value"]
                 if bldg_scc_wwr_ratio[SCC.EXTERIOR_RESIDENTIAL] > 0
-                else 0.0
+                else ZERO.U_FACTOR
             )
             target_u_factor_nonres = (
                 table_G34_lookup(
@@ -169,7 +169,7 @@ class Section5Rule24(RuleDefinitionListIndexedBase):
                     wwr=bldg_scc_wwr_ratio[SCC.EXTERIOR_NON_RESIDENTIAL],
                 )["u_value"]
                 if bldg_scc_wwr_ratio[SCC.EXTERIOR_NON_RESIDENTIAL] > 0
-                else 0.0
+                else ZERO.U_FACTOR
             )
             target_u_factor_semiheated = (
                 table_G34_lookup(
@@ -179,10 +179,10 @@ class Section5Rule24(RuleDefinitionListIndexedBase):
                     wwr=bldg_scc_wwr_ratio[SCC.SEMI_EXTERIOR],
                 )["u_value"]
                 if bldg_scc_wwr_ratio[SCC.SEMI_EXTERIOR] > 0
-                else 0.0
+                else ZERO.U_FACTOR
             )
+
             return {
-                **data,
                 # TODO this function will likely need to be revised to RMD level later.
                 "scc_dict_b": get_surface_conditioning_category_dict(
                     climate_zone, building_b
@@ -216,6 +216,7 @@ class Section5Rule24(RuleDefinitionListIndexedBase):
                             "u_factor",
                         ]
                     },
+                    manual_check_required_msg=MANUAL_CHECK_REQUIRED_MSG,
                 )
 
             def manual_check_required(self, context, calc_vals=None, data=None):
@@ -231,7 +232,7 @@ class Section5Rule24(RuleDefinitionListIndexedBase):
             def create_data(self, context, data=None):
                 surface_b = context.baseline
                 scc_dict_b = data["scc_dict_b"]
-                return {**data, "scc": scc_dict_b[surface_b["id"]]}
+                return {"scc": scc_dict_b[surface_b["id"]]}
 
             def list_filter(self, context_item, data=None):
                 subsurface_b = context_item.baseline
