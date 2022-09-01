@@ -1,7 +1,5 @@
-from rct229.rule_engine.rule_base import (
-    RuleDefinitionBase,
-    RuleDefinitionListIndexedBase,
-)
+from rct229.rule_engine.rule_base import RuleDefinitionBase
+from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 from rct229.utils.jsonpath_utils import find_all
 
@@ -20,6 +18,8 @@ class Section15Rule4(RuleDefinitionListIndexedBase):
         )
 
     def create_data(self, context, data):
+        transformers_b = context.baseline
+        return {"transformer_ids_b": find_all("[*].id", transformers_b)}
         # Get the Baseline transformer ids
         return find_all("[*].id", context.baseline)
 
@@ -32,11 +32,8 @@ class Section15Rule4(RuleDefinitionListIndexedBase):
         def get_calc_vals(self, context, data=None):
             return {
                 "user_transformer_id": context.user["id"],
-                "baseline_transformer_ids": data,
+                "transformer_ids_b": data["transformer_ids_b"],
             }
 
         def rule_check(self, context, calc_vals=None, data=None):
-            return (
-                calc_vals["user_transformer_id"]
-                in calc_vals["baseline_transformer_ids"]
-            )
+            return calc_vals["user_transformer_id"] in calc_vals["transformer_ids_b"]
