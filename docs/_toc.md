@@ -56,6 +56,7 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   * [is_hvac_sys_heating_type_fluid_loop](ruleset_functions/baseline_systems/baseline_hvac_sub_functions/is_hvac_sys_heating_type_fluid_loop.md): Returns TRUE if the HVAC system heating system heating type is fluid loop. Returns FALSE if the HVAC system heating system has anything other than fluid loop or if it has more than 1 heating system. 
   * [is_hvac_sys_cooling_type_fluid_loop](ruleset_functions/baseline_systems/baseline_hvac_sub_functions/is_hvac_sys_cooling_type_fluid_loop.md): Returns TRUE if the HVAC system has fluid_loop cooling. Returns FALSE if the HVAC system has anything other than fluid_loop cooling or if it has more than 1 cooling system.
   * [is_there_only_one_hvac_sys_heating_system](ruleset_functions/baseline_systems/baseline_hvac_sub_functions/is_there_only_one_hvac_sys_heating_system.md): Returns TRUE if the HVAC system has only one heating system associated with it. Returns FALSE if the HVAC system has anything other than 1 heating system associated with it.
+  * [are_all_terminal_heat_sources_none_or_null](ruleset_functions/baseline_systems/baseline_hvac_sub_functions/are_all_terminal_heat_sources_none_or_null.md): Returns TRUE if the heat source associated with all terminal units input to this function are None or Null. It returns FALSE if any terminal unit has a heat source other than None or Null.
 
 ## Data Tables
   * [8.4.4](data_tables/Table8-4-4.md): Minimum Nominal Efficiency Levels for Low-Voltage Dry-Type Distribution Transformers  
