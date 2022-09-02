@@ -32,11 +32,10 @@ def is_hvac_sys_cooling_type_fluid_loop(rmi_b, hvac_b_id):
     )
     # Check if hvac_b has preheat system
     cooling_system = hvac_b.get("cooling_system")
-    if cooling_system:
-        if (
-            cooling_system.get("chilled_water_loop") is not None
-            and cooling_system["cooling_system_type"] == COOLING_SYSTEM_TYPE.FLUID_LOOP
-        ):
-            is_hvac_sys_cooling_type_fluid_loop_flag = True
+    is_hvac_sys_cooling_type_fluid_loop_flag = (
+        cooling_system is not None
+        and cooling_system.get("chilled_water_loop") is not None
+        and cooling_system["cooling_system_type"] == COOLING_SYSTEM_TYPE.FLUID_LOOP
+    )
 
     return is_hvac_sys_cooling_type_fluid_loop_flag
