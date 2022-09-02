@@ -4,7 +4,7 @@
 
 **Inputs:**  
 - **B-RMR**: To evaluate if the heat source associated with all terminal units associated with the hvac system is None or Null.   
-- **terminal_unit_id_list**: List of terminal units to assess.
+- **terminal_unit_id_list**: List of terminal units IDs.
 
 **Returns:**  
 - **are_all_terminal_heat_sources_none_or_null**: The function returns TRUE if the heat source associated with all terminal units input to this function are None or Null. It returns FALSE if any terminal unit has a heat source other than None or Null.  
