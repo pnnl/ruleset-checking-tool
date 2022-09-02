@@ -21,4 +21,4 @@
 
 **Returns** `return are_all_terminal_cool_sources_none_or_null`  
 
-**[Back](../_toc.md)**
+**[Back](../../../_toc.md)**
