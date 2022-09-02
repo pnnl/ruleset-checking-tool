@@ -56,7 +56,7 @@ def test__climate_zone_enumeration_to_climate_zone_map():
     # when a check fails
     check_enumeration_to_osstd_match_field_value_map(
         match_field_name="climate_zone",
-        enum_type="ClimateZone2019ASHRAE901",
+        enum_type="ClimateZoneOptions2019ASHRAE901",
         osstd_table=data["ashrae_90_1_table_3_2"],
         enumeration_to_match_field_value_map=climate_zone_enumeration_to_climate_zone_map,
     )
