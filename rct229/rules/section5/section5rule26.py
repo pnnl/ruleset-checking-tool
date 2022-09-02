@@ -1,9 +1,7 @@
 from rct229.data.schema_enums import schema_enums
 from rct229.data_fns.table_G3_4_fns import table_G34_lookup
-from rct229.rule_engine.rule_base import (
-    RuleDefinitionBase,
-    RuleDefinitionListIndexedBase,
-)
+from rct229.rule_engine.rule_base import RuleDefinitionBase
+from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 from rct229.ruleset_functions.get_building_scc_window_wall_ratios_dict import (
     get_building_scc_window_wall_ratios_dict,
@@ -17,9 +15,11 @@ from rct229.ruleset_functions.get_surface_conditioning_category_dict import (
     get_surface_conditioning_category_dict,
 )
 from rct229.utils.jsonpath_utils import find_all
+from rct229.utils.pint_utils import ZERO
 from rct229.utils.std_comparisons import std_equal
 
-DOOR = schema_enums["SubsurfaceClassificationType"].DOOR.name
+DOOR = schema_enums["SubsurfaceClassificationOptions"].DOOR
+MANUAL_CHECK_REQUIRED_MSG = "Manual review is requested to verify vertical fenestration meets SHGC requirement as per Table G3.4. "
 
 
 class Section5Rule26(RuleDefinitionListIndexedBase):
@@ -46,7 +46,9 @@ class Section5Rule26(RuleDefinitionListIndexedBase):
         # TODO It is determined that later we will modify this function to RMD level -
         # This implementation is temporary
         bldg_scc_wwr_ratio_dict = {
-            building_b["id"]: get_building_scc_window_wall_ratios_dict(climate_zone, building_b)
+            building_b["id"]: get_building_scc_window_wall_ratios_dict(
+                climate_zone, building_b
+            )
             for building_b in find_all(self.list_path, rmr_baseline)
         }
 
@@ -70,74 +72,74 @@ class Section5Rule26(RuleDefinitionListIndexedBase):
             bldg_scc_wwr_ratio = data["bldg_scc_wwr_ratio_dict"][building_b["id"]]
             # manual flag required?
             manual_check_required_flag = bldg_scc_wwr_ratio[
-                                             SCC.EXTERIOR_MIXED
-                                         ] > 0 and not (
-                    (
-                            table_G34_lookup(
-                                climate_zone,
-                                SCC.EXTERIOR_RESIDENTIAL,
-                                "VERTICAL GLAZING",
-                                wwr=0.1,
-                            )["solar_heat_gain_coefficient"]
-                            == table_G34_lookup(
+                SCC.EXTERIOR_MIXED
+            ] > 0 and not (
+                (
+                    table_G34_lookup(
+                        climate_zone,
+                        SCC.EXTERIOR_RESIDENTIAL,
+                        "VERTICAL GLAZING",
+                        wwr=0.1,
+                    )["solar_heat_gain_coefficient"]
+                    == table_G34_lookup(
                         climate_zone,
                         SCC.EXTERIOR_RESIDENTIAL,
                         "VERTICAL GLAZING",
                         wwr=10.1,
                     )["solar_heat_gain_coefficient"]
-                            == table_G34_lookup(
+                    == table_G34_lookup(
                         climate_zone,
                         SCC.EXTERIOR_RESIDENTIAL,
                         "VERTICAL GLAZING",
                         wwr=20.1,
                     )["solar_heat_gain_coefficient"]
-                            == table_G34_lookup(
+                    == table_G34_lookup(
                         climate_zone,
                         SCC.EXTERIOR_RESIDENTIAL,
                         "VERTICAL GLAZING",
                         wwr=30.1,
                     )["solar_heat_gain_coefficient"]
-                    )
-                    and (
-                            table_G34_lookup(
-                                climate_zone,
-                                SCC.EXTERIOR_NON_RESIDENTIAL,
-                                "VERTICAL GLAZING",
-                                wwr=0.1,
-                            )["solar_heat_gain_coefficient"]
-                            == table_G34_lookup(
-                        climate_zone,
-                        SCC.EXTERIOR_NON_RESIDENTIAL,
-                        "VERTICAL GLAZING",
-                        wwr=10.1,
-                    )["solar_heat_gain_coefficient"]
-                            == table_G34_lookup(
-                        climate_zone,
-                        SCC.EXTERIOR_NON_RESIDENTIAL,
-                        "VERTICAL GLAZING",
-                        wwr=20.1,
-                    )["solar_heat_gain_coefficient"]
-                            == table_G34_lookup(
-                        climate_zone,
-                        SCC.EXTERIOR_NON_RESIDENTIAL,
-                        "VERTICAL GLAZING",
-                        wwr=30.1,
-                    )["solar_heat_gain_coefficient"]
-                    )
-                    and (
-                            table_G34_lookup(
-                                climate_zone,
-                                SCC.EXTERIOR_RESIDENTIAL,
-                                "VERTICAL GLAZING",
-                                wwr=0.1,
-                            )["solar_heat_gain_coefficient"]
-                            == table_G34_lookup(
+                )
+                and (
+                    table_G34_lookup(
                         climate_zone,
                         SCC.EXTERIOR_NON_RESIDENTIAL,
                         "VERTICAL GLAZING",
                         wwr=0.1,
                     )["solar_heat_gain_coefficient"]
-                    )
+                    == table_G34_lookup(
+                        climate_zone,
+                        SCC.EXTERIOR_NON_RESIDENTIAL,
+                        "VERTICAL GLAZING",
+                        wwr=10.1,
+                    )["solar_heat_gain_coefficient"]
+                    == table_G34_lookup(
+                        climate_zone,
+                        SCC.EXTERIOR_NON_RESIDENTIAL,
+                        "VERTICAL GLAZING",
+                        wwr=20.1,
+                    )["solar_heat_gain_coefficient"]
+                    == table_G34_lookup(
+                        climate_zone,
+                        SCC.EXTERIOR_NON_RESIDENTIAL,
+                        "VERTICAL GLAZING",
+                        wwr=30.1,
+                    )["solar_heat_gain_coefficient"]
+                )
+                and (
+                    table_G34_lookup(
+                        climate_zone,
+                        SCC.EXTERIOR_RESIDENTIAL,
+                        "VERTICAL GLAZING",
+                        wwr=0.1,
+                    )["solar_heat_gain_coefficient"]
+                    == table_G34_lookup(
+                        climate_zone,
+                        SCC.EXTERIOR_NON_RESIDENTIAL,
+                        "VERTICAL GLAZING",
+                        wwr=0.1,
+                    )["solar_heat_gain_coefficient"]
+                )
             )
             # get standard code data
             target_shgc_mix = (
@@ -181,7 +183,6 @@ class Section5Rule26(RuleDefinitionListIndexedBase):
                 else None
             )
             return {
-                **data,
                 # TODO this function will likely need to be revised to RMD level later.
                 "scc_dict_b": get_surface_conditioning_category_dict(
                     climate_zone, building_b
@@ -197,7 +198,7 @@ class Section5Rule26(RuleDefinitionListIndexedBase):
             surface_b = context_item.baseline
             scc_dict_b = data["scc_dict_b"]
             return (get_opaque_surface_type(surface_b) == OST.ABOVE_GRADE_WALL) and (
-                    scc_dict_b[surface_b["id"]] != SCC.UNREGULATED
+                scc_dict_b[surface_b["id"]] != SCC.UNREGULATED
             )
 
         class AboveGradeWallRule(RuleDefinitionListIndexedBase):
@@ -213,6 +214,7 @@ class Section5Rule26(RuleDefinitionListIndexedBase):
                             "solar_heat_gain_coefficient",
                         ]
                     },
+                    manual_check_required_msg=MANUAL_CHECK_REQUIRED_MSG,
                 )
 
             def manual_check_required(self, context, calc_vals=None, data=None):
@@ -221,21 +223,20 @@ class Section5Rule26(RuleDefinitionListIndexedBase):
                 surface_b = context.baseline
                 # if exterior mixed and required manual check
                 return (
-                        scc_dict_b[surface_b["id"]] == SCC.EXTERIOR_MIXED
-                        and manual_check_required_flag
+                    scc_dict_b[surface_b["id"]] == SCC.EXTERIOR_MIXED
+                    and manual_check_required_flag
                 )
 
             def create_data(self, context, data=None):
                 surface_b = context.baseline
                 scc_dict_b = data["scc_dict_b"]
-                return {**data, "scc": scc_dict_b[surface_b["id"]]}
+                return {"scc": scc_dict_b[surface_b["id"]]}
 
             def list_filter(self, context_item, data=None):
                 subsurface_b = context_item.baseline
-                return (
-                        subsurface_b["classification"] != DOOR
-                        or subsurface_b.get(["glazed_area"], 0.0) > subsurface_b.get(["opaque_area"], 0.0)
-                )
+                return subsurface_b["classification"] != DOOR or subsurface_b.get(
+                    ["glazed_area"], ZERO.AREA
+                ) > subsurface_b.get(["opaque_area"], ZERO.AREA)
 
             class SubsurfaceRule(RuleDefinitionBase):
                 def __init__(self):
@@ -268,4 +269,6 @@ class Section5Rule26(RuleDefinitionListIndexedBase):
                 def rule_check(self, context, calc_vals=None, data=None):
                     target_shgc = calc_vals["target_shgc"]
                     subsurface_shgc = calc_vals["subsurface_shgc"]
-                    return target_shgc is not None and std_equal(target_shgc, subsurface_shgc)
+                    return target_shgc is not None and std_equal(
+                        target_shgc, subsurface_shgc
+                    )

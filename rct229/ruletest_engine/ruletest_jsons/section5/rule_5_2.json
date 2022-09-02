@@ -14,7 +14,7 @@
             "comparison_value": "User RMR",
             "rule_dependency": "None",
             "primary_rule": "N",
-            "schema_version": "0.0.12"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "user": {
@@ -106,7 +106,7 @@
             "comparison_value": "User RMR",
             "rule_dependency": "None",
             "primary_rule": "N",
-            "schema_version": "0.0.12"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "user": {

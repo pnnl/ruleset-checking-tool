@@ -8,12 +8,12 @@ def aggregate_outcomes(outcomes):
                     summary_dict["number_failed"] += 1
                 elif result == "PASSED":
                     summary_dict["number_passed"] += 1
-                elif result == "MANUAL_CHECK_REQUIRED":
-                    summary_dict["number_manual_check_required"] += 1
-                elif result.startswith("MISSING_"):
-                    summary_dict["number_missing_context"] += 1
-                elif result == "NA":
+                elif result == "UNDETERMINED":
+                    summary_dict["number_undetermined"] += 1
+                elif result == "NOT_APPLICABLE":
                     summary_dict["number_not_applicable"] += 1
+                elif result == "INVALID_BASELINE_CONTEXT":
+                    summary_dict["number_invalid_context"] += 1
             elif type(result) is list:
                 summary_dict["number_evaluations"] -= 1
                 _count_results(result)
@@ -35,9 +35,8 @@ def aggregate_outcomes(outcomes):
         "number_passed": 0,
         "number_failed": 0,
         "number_invalid_context": 0,
-        "number_missing_context": 0,
+        "number_undetermined": 0,
         "number_not_applicable": 0,
-        "number_manual_check_required": 0,
     }
     _count_results(outcomes)
 

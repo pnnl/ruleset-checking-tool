@@ -3,21 +3,21 @@
         "Section": 6,
         "Rule": 7,
         "Test": "a",
-        "test_description": "For a new building where lighting neither exisits, nor is submitted with design documents, the LPD of the baseline RMR = Table G3.8",
-        "expected_rule_outcome": "pass",
+        "test_description": "The proposed building has one building segment with one zone and one space. The proposed building doesn\u2019t have a door subsurface, the interior lighting has daylighting control, and schedules are not used to model daylight schedules.",
+        "expected_rule_outcome": "undetermined",
         "standard": {
             "rule_id": "6-7",
-            "ruleset_reference": 0,
-            "rule_description": "Where lighting neither exists nor is submitted with design documents, baseline LPD shall be determined in accordance with Table G3-8",
-            "applicable_rmr": "Baseline RMR",
+            "ruleset_reference": "(Previously 6-12, then 6-11) Table G3.1(6) Proposed Building Performance (h)",
+            "rule_description": "Automatic daylighting responsive controls shall be modeled directly in the proposed design or through schedule adjustments determined by a separate daylighting analysis. Modeling and schedule  adjustments shall separately account for primary sidelighted areas, secondary sidelighted areas, and toplighted areas",
+            "applicable_rmr": "Proposed RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "rule_dependency": "Lighting system in the proposed building = is not designed, not exisiting.",
+            "rule_dependency": "None",
             "mandatory_rule": "Yes",
-            "schema_version": "0.0.12"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
-            "baseline": {
+            "proposed": {
                 "id": "ASHRAE229 1",
                 "ruleset_model_instances": [
                     {
@@ -25,26 +25,38 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Schedule 1",
+                                "building_open_schedule": "Building Open Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
-                                        "lighting_building_area_type": "OFFICE",
                                         "zones": [
                                             {
                                                 "id": "Thermal Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Required Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Schedule 1",
+                                                "thermostat_cooling_setpoint_schedule": "Cooling Setpoint Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Heating Setpoint Schedule 1",
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
                                                         "floor_area": 92.90303999999999,
-                                                        "occupant_multiplier_schedule": "Required Schedule 1",
+                                                        "occupant_multiplier_schedule": "Occupancy Schedule 1",
                                                         "interior_lighting": [
                                                             {
-                                                                "id": "Office Lighting",
-                                                                "power_per_area": 10.763910416709724,
-                                                                "lighting_multiplier_schedule": "Required Schedule 1"
+                                                                "id": "Lighting 1",
+                                                                "daylighting_control_type": "STEPPED",
+                                                                "lighting_multiplier_schedule": "Lighting Schedule",
+                                                                "are_schedules_used_for_modeling_daylighting_control": false
+                                                            }
+                                                        ]
+                                                    }
+                                                ],
+                                                "surfaces": [
+                                                    {
+                                                        "id": "surface_1",
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "subsurfaces": [
+                                                            {
+                                                                "id": "window_1",
+                                                                "classification": "WINDOW"
                                                             }
                                                         ]
                                                     }
@@ -64,21 +76,21 @@
         "Section": 6,
         "Rule": 7,
         "Test": "b",
-        "test_description": "For a new building where lighting neither exisits, nor is submitted with design documents, the LPD of the baseline RMR = Table G3.8",
-        "expected_rule_outcome": "fail",
+        "test_description": "The proposed building has one building segment with one zone and one space. The proposed building doesn\u2019t have a door subsurface, the interior lighting has daylighting control, and schedules are used to model daylight schedules.",
+        "expected_rule_outcome": "undetermined",
         "standard": {
             "rule_id": "6-7",
-            "ruleset_reference": 0,
-            "rule_description": "Where lighting neither exists nor is submitted with design documents, baseline LPD shall be determined in accordance with Table G3-8",
-            "applicable_rmr": "Baseline RMR",
+            "ruleset_reference": "(Previously 6-12, then 6-11) Table G3.1(6) Proposed Building Performance (h)",
+            "rule_description": "Automatic daylighting responsive controls shall be modeled directly in the proposed design or through schedule adjustments determined by a separate daylighting analysis. Modeling and schedule  adjustments shall separately account for primary sidelighted areas, secondary sidelighted areas, and toplighted areas",
+            "applicable_rmr": "Proposed RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "rule_dependency": "Lighting system in the proposed building = is not designed, not exisiting.",
+            "rule_dependency": "None",
             "mandatory_rule": "Yes",
-            "schema_version": "0.0.12"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
-            "baseline": {
+            "proposed": {
                 "id": "ASHRAE229 1",
                 "ruleset_model_instances": [
                     {
@@ -86,26 +98,284 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Schedule 1",
+                                "building_open_schedule": "Building Open Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
-                                        "lighting_building_area_type": "OFFICE",
                                         "zones": [
                                             {
                                                 "id": "Thermal Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Required Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Schedule 1",
+                                                "thermostat_cooling_setpoint_schedule": "Cooling Setpoint Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Heating Setpoint Schedule 1",
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
                                                         "floor_area": 92.90303999999999,
-                                                        "occupant_multiplier_schedule": "Required Schedule 1",
+                                                        "occupant_multiplier_schedule": "Occupancy Schedule 1",
                                                         "interior_lighting": [
                                                             {
-                                                                "id": "Office Lighting",
-                                                                "power_per_area": 12.270857875049083,
-                                                                "lighting_multiplier_schedule": "Required Schedule 1"
+                                                                "id": "Lighting 1",
+                                                                "daylighting_control_type": "STEPPED",
+                                                                "lighting_multiplier_schedule": "Lighting Schedule",
+                                                                "are_schedules_used_for_modeling_daylighting_control": true
+                                                            }
+                                                        ]
+                                                    }
+                                                ],
+                                                "surfaces": [
+                                                    {
+                                                        "id": "surface_1",
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "subsurfaces": [
+                                                            {
+                                                                "id": "window_1",
+                                                                "classification": "WINDOW"
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "id": "surface_2",
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "subsurfaces": [
+                                                            {
+                                                                "id": "window_2"
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    },
+    "rule-6-7-c": {
+        "Section": 6,
+        "Rule": 7,
+        "Test": "c",
+        "test_description": "The proposed building has one building segment with one zone and one space. The proposed building doesn\u2019t have a door subsurface, the interior lighting doesn't have daylighting control, and schedules are not used to model daylight schedules.",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "6-7",
+            "ruleset_reference": "(Previously 6-12, then 6-11) Table G3.1(6) Proposed Building Performance (h)",
+            "rule_description": "Automatic daylighting responsive controls shall be modeled directly in the proposed design or through schedule adjustments determined by a separate daylighting analysis. Modeling and schedule  adjustments shall separately account for primary sidelighted areas, secondary sidelighted areas, and toplighted areas",
+            "applicable_rmr": "Proposed RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": "None",
+            "mandatory_rule": "Yes",
+            "schema_version": "0.0.18"
+        },
+        "rmr_transformations": {
+            "proposed": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_instances": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_open_schedule": "Building Open Schedule 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "thermostat_cooling_setpoint_schedule": "Cooling Setpoint Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Heating Setpoint Schedule 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 92.90303999999999,
+                                                        "occupant_multiplier_schedule": "Occupancy Schedule 1",
+                                                        "interior_lighting": [
+                                                            {
+                                                                "id": "Lighting 1",
+                                                                "daylighting_control_type": "NONE",
+                                                                "lighting_multiplier_schedule": "Lighting Schedule",
+                                                                "are_schedules_used_for_modeling_daylighting_control": false
+                                                            }
+                                                        ]
+                                                    }
+                                                ],
+                                                "surfaces": [
+                                                    {
+                                                        "id": "surface_1",
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "subsurfaces": [
+                                                            {
+                                                                "id": "window_1",
+                                                                "classification": "WINDOW"
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "id": "surface_2",
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "subsurfaces": [
+                                                            {
+                                                                "id": "window_2"
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    },
+    "rule-6-7-d": {
+        "Section": 6,
+        "Rule": 7,
+        "Test": "d",
+        "test_description": "The proposed building has one building segment with one zone and one space. The proposed building has a door subsurface, the interior lighting has daylighting control, and schedules are not used to model daylight schedules.",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "6-7",
+            "ruleset_reference": "(Previously 6-12, then 6-11) Table G3.1(6) Proposed Building Performance (h)",
+            "rule_description": "Automatic daylighting responsive controls shall be modeled directly in the proposed design or through schedule adjustments determined by a separate daylighting analysis. Modeling and schedule  adjustments shall separately account for primary sidelighted areas, secondary sidelighted areas, and toplighted areas",
+            "applicable_rmr": "Proposed RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": "None",
+            "mandatory_rule": "Yes",
+            "schema_version": "0.0.18"
+        },
+        "rmr_transformations": {
+            "proposed": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_instances": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_open_schedule": "Building Open Schedule 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "thermostat_cooling_setpoint_schedule": "Cooling Setpoint Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Heating Setpoint Schedule 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 92.90303999999999,
+                                                        "occupant_multiplier_schedule": "Occupancy Schedule 1",
+                                                        "interior_lighting": [
+                                                            {
+                                                                "id": "Lighting 1",
+                                                                "daylighting_control_type": "STEPPED",
+                                                                "lighting_multiplier_schedule": "Lighting Schedule",
+                                                                "are_schedules_used_for_modeling_daylighting_control": false
+                                                            }
+                                                        ]
+                                                    }
+                                                ],
+                                                "surfaces": [
+                                                    {
+                                                        "id": "surface_1",
+                                                        "adjacent_to": "INTERIOR",
+                                                        "subsurfaces": [
+                                                            {
+                                                                "id": "window_1",
+                                                                "classification": "WINDOW"
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "id": "surface_2",
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "subsurfaces": [
+                                                            {
+                                                                "id": "window_2"
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    },
+    "rule-6-7-e": {
+        "Section": 6,
+        "Rule": 7,
+        "Test": "e",
+        "test_description": "The proposed building has one building segment with one zone and one space. The proposed building doesn\u2019t have a door subsurface, the interior lighting doesn't have daylighting control, and schedules are not used to model daylight schedules.",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "6-7",
+            "ruleset_reference": "(Previously 6-12, then 6-11) Table G3.1(6) Proposed Building Performance (h)",
+            "rule_description": "Automatic daylighting responsive controls shall be modeled directly in the proposed design or through schedule adjustments determined by a separate daylighting analysis. Modeling and schedule  adjustments shall separately account for primary sidelighted areas, secondary sidelighted areas, and toplighted areas",
+            "applicable_rmr": "Proposed RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": "None",
+            "mandatory_rule": "Yes",
+            "schema_version": "0.0.18"
+        },
+        "rmr_transformations": {
+            "proposed": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_instances": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_open_schedule": "Building Open Schedule 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "thermostat_cooling_setpoint_schedule": "Cooling Setpoint Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Heating Setpoint Schedule 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 92.90303999999999,
+                                                        "occupant_multiplier_schedule": "Occupancy Schedule 1",
+                                                        "interior_lighting": [
+                                                            {
+                                                                "id": "Lighting 1",
+                                                                "daylighting_control_type": "NONE",
+                                                                "lighting_multiplier_schedule": "Lighting Schedule",
+                                                                "are_schedules_used_for_modeling_daylighting_control": false
+                                                            }
+                                                        ]
+                                                    }
+                                                ],
+                                                "surfaces": [
+                                                    {
+                                                        "id": "surface_1",
+                                                        "adjacent_to": "INTERIOR",
+                                                        "subsurfaces": [
+                                                            {
+                                                                "id": "window_1",
+                                                                "classification": "WINDOW"
                                                             }
                                                         ]
                                                     }

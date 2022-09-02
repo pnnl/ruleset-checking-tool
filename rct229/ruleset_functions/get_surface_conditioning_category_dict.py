@@ -12,7 +12,7 @@ from rct229.utils.jsonpath_utils import find_all
 
 # Constants
 # TODO: These should directly from the enumerations
-SurfaceAdjacentTo = schema_enums["SurfaceAdjacentTo"]
+SurfaceAdjacentTo = schema_enums["SurfaceAdjacentToOptions"]
 
 
 # Intended for export and internal use
@@ -77,7 +77,7 @@ SCC_DATA_FRAME = pd.DataFrame(
             SurfaceConditioningCategory.UNREGULATED,
             SurfaceConditioningCategory.UNREGULATED,
         ],
-        SurfaceAdjacentTo.EXTERIOR.name: [
+        SurfaceAdjacentTo.EXTERIOR: [
             SurfaceConditioningCategory.EXTERIOR_RESIDENTIAL,
             SurfaceConditioningCategory.EXTERIOR_NON_RESIDENTIAL,
             SurfaceConditioningCategory.EXTERIOR_MIXED,
@@ -85,7 +85,7 @@ SCC_DATA_FRAME = pd.DataFrame(
             SurfaceConditioningCategory.UNREGULATED,
             SurfaceConditioningCategory.UNREGULATED,
         ],
-        SurfaceAdjacentTo.GROUND.name: [
+        SurfaceAdjacentTo.GROUND: [
             SurfaceConditioningCategory.EXTERIOR_RESIDENTIAL,
             SurfaceConditioningCategory.EXTERIOR_NON_RESIDENTIAL,
             SurfaceConditioningCategory.EXTERIOR_MIXED,
@@ -118,7 +118,7 @@ def get_surface_conditioning_category_dict(climate_zone, building):
     Parameters
     ----------
     climate_zone : str
-        One of the ClimateZone2019ASHRAE901 enumerated values
+        One of the ClimateZoneOptions2019ASHRAE901 enumerated values
     building : dict
         A dictionary representing a building as defined by the ASHRAE229 schema
     Returns
@@ -151,7 +151,7 @@ def get_surface_conditioning_category_dict(climate_zone, building):
                 zcc,
                 # column index
                 zcc_dict[getattr_(surface, "surface", "adjacent_zone")]
-                if surface_adjacent_to == SurfaceAdjacentTo.INTERIOR.name
+                if surface_adjacent_to == SurfaceAdjacentTo.INTERIOR
                 else surface_adjacent_to,
             ]
 

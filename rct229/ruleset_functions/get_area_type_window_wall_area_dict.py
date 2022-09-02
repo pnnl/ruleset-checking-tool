@@ -9,8 +9,10 @@ from rct229.ruleset_functions.get_surface_conditioning_category_dict import (
 )
 from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all
+from rct229.utils.pint_utils import ZERO
 
-DOOR = schema_enums["SubsurfaceClassificationType"].DOOR.name
+DOOR = schema_enums["SubsurfaceClassificationOptions"].DOOR
+NONE_AREA_TYPE = "NONE"
 
 
 def get_area_type_window_wall_area_dict(climate_zone, building):
@@ -20,7 +22,7 @@ def get_area_type_window_wall_area_dict(climate_zone, building):
     Parameters
     ----------
     climate_zone : str
-        One of the ClimateZone2019ASHRAE901 enumerated values
+        One of the ClimateZoneOptions2019ASHRAE901 enumerated values
     building : dict
         A dictionary representing a building as defined by the ASHRAE229 schema
 
@@ -47,8 +49,8 @@ def get_area_type_window_wall_area_dict(climate_zone, building):
 
         if area_type not in window_wall_areas_dictionary:
             window_wall_areas_dictionary[area_type] = {
-                "total_wall_area": 0.0,
-                "total_window_area": 0.0,
+                "total_wall_area": ZERO.AREA,
+                "total_window_area": ZERO.AREA,
             }
 
         for surface in find_all("zones[*].surfaces[*]", building_segment):
