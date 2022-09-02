@@ -28,10 +28,7 @@ def are_all_terminal_heat_sources_none_or_null(rmi_b, terminal_unit_id_list):
             terminal_b_id,
             rmi_b,
         )
-        if (
-            terminal_b.get("heating_source") is not None
-            and not terminal_b["heating_source"] == HEATING_SOURCE.NONE
-        ):
+        if terminal_b.get("heating_source") not in [None, HEATING_SOURCE.NONE]:
             are_all_terminal_heat_sources_none_or_null_flag = False
             break
 
