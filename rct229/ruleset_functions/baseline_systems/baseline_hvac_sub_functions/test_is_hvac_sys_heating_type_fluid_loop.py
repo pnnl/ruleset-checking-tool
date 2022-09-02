@@ -1,5 +1,6 @@
-from rct229.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.is_hvac_sys_heating_type_fluid_loop import \
-    is_hvac_sys_heating_type_fluid_loop
+from rct229.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.is_hvac_sys_heating_type_fluid_loop import (
+    is_hvac_sys_heating_type_fluid_loop,
+)
 
 TEST_RMD = {
     "id": "test_rmd",
@@ -12,21 +13,20 @@ TEST_RMD = {
                     "heating_ventilation_air_conditioning_systems": [
                         {
                             "id": "hvac_1",
-                            "heating_system":
-                                {
-                                    "id": "heating_1",
-                                    "heating_system_type": "FLUID_LOOP",
-                                    "hot_water_loop": "HW_Loop_1",
-                                }
+                            "heating_system": {
+                                "id": "heating_1",
+                                "heating_system_type": "FLUID_LOOP",
+                                "hot_water_loop": "HW_Loop_1",
+                            },
                         },
                         {
                             # Case where the preheat system has a wrong hot_water_loop id
                             "id": "hvac_2",
-                            "heating_system":
-                                {"id": "heating_2",
-                                       "heating_system_type": "HEAT_PUMP",
-                                       "hot_water_loop": "HW_Loop_2",
-                                 },
+                            "heating_system": {
+                                "id": "heating_2",
+                                "heating_system_type": "HEAT_PUMP",
+                                "hot_water_loop": "HW_Loop_2",
+                            },
                         },
                         {
                             # Case where there is no preheat system
@@ -51,17 +51,14 @@ TEST_RMD = {
     ],
 }
 
+
 def test_hvac_sys_heating_type_fluid_loop():
     assert is_hvac_sys_heating_type_fluid_loop(TEST_RMD, "hvac_1") == True
 
 
 def test__hvac_sys_heating_type_heat_pump():
-    assert (
-        is_hvac_sys_heating_type_fluid_loop(TEST_RMD, "hvac_2") == False
-    )
+    assert is_hvac_sys_heating_type_fluid_loop(TEST_RMD, "hvac_2") == False
 
 
 def test__hvac_sys_heating_type_no_heating_system():
-    assert (
-        is_hvac_sys_heating_type_fluid_loop(TEST_RMD, "hvac_3") == False
-    )
+    assert is_hvac_sys_heating_type_fluid_loop(TEST_RMD, "hvac_3") == False
