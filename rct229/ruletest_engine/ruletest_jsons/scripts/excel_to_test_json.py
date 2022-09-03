@@ -4,6 +4,7 @@ import math
 import os
 
 import pandas as pd
+import pint
 
 from rct229.ruletest_engine.ruletest_jsons.scripts.json_generation_utilities import *
 from rct229.schema.config import ureg
@@ -99,7 +100,11 @@ def convert_units_from_tcd_to_rmr_schema(tcd_value, tcd_units, key_list):
     if isinstance(tcd_value, str):
         tcd_value = float(tcd_value)
 
-    tcd_quantity = tcd_value * ureg(tcd_units)
+    # Set TCD quantity and catch issues with non-multiplicative units, e.g., temperatures
+    try:
+        tcd_quantity = tcd_value * ureg(tcd_units)
+    except pint.errors.OffsetUnitCalculusError:
+        tcd_quantity = ureg.Quantity(tcd_value, tcd_units)
 
     # Convert TCD quantity to units required by schema
     rmr_quantity = tcd_quantity.to(rmr_pint_units)
