@@ -21,4 +21,4 @@
 
 **Returns** `return does_each_zone_have_only_one_terminal`  
 
-**[Back](../_toc.md)**
+**[Back](../../../_toc.md)**
