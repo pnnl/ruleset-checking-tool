@@ -18,4 +18,6 @@
 
 **Returns** `return is_hvac_sys_preheating_type_elec_resistance`  
 
+
 **[Back](../../../_toc.md)**
+

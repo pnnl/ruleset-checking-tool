@@ -22,7 +22,7 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
 
 ## Ruleset Functions
 
-### General functions
+### General ruleset functions
   * [get_lighting_status_type](ruleset_functions/get_lighting_status_type.md): This function would determine whether the space lighting status type is 1). not-yet designed or match Table 9_5_1, 2). as-designed or as-existing.  
   * [get_opaque_surface_type.md](ruleset_functions/get_opaque_surface_type.md): This function would determine whether it is a wall, ceiling or floor.  
   * [get_surface_conditioning_category.md](ruleset_functions/get_surface_conditioning_category.md): This function would cycle through each surface in  a zone and categorize it as exterior res, exterior non res, exterior mixed, semi-exterior or unregulated.  
@@ -54,6 +54,7 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   * [is_hvac_sys_preheating_type_fluid_loop](ruleset_functions/baseline_systems/baseline_hvac_sub_functions/is_hvac_sys_preheating_type_fluid_loop.md): Returns TRUE if the HVAC system preheating system heating type is fluid loop. Returns FALSE if the HVAC system preheating system has anything other than fluid loop.
   * [are_all_terminal_types_VAV](ruleset_functions/baseline_systems/baseline_hvac_sub_functions/are_all_terminal_types_VAV.md): Returns TRUE if all of the terminal unit types input to this function are variable air volume (VAV). It returns FALSE if any of the terminal units are of a type other than variable air volume (VAV).
   * [is_hvac_sys_heating_type_furnace](ruleset_functions/baseline_systems/baseline_hvac_sub_functions/is_hvac_sys_heating_type_furnace.md): Returns TRUE if the HVAC system heating system heating type is furnace. Returns FALSE if the HVAC system heating system has anything other than furnace or if it has more than 1 heating system.
+  * [is_hvac_sys_fluid_loop_attached_to_chiller](ruleset_functions/baseline_systems/baseline_hvac_sub_functions/is_hvac_sys_fluid_loop_attached_to_chiller.md): Returns TRUE if the fluid loop associated with the cooling system associated with the HVAC system is attached to a chiller. Returns FALSE if this is not the case.
   * [is_hvac_sys_cooling_type_DX](ruleset_functions/baseline_systems/baseline_hvac_sub_functions/is_hvac_sys_cooling_type_DX.md): Returns TRUE if the HVAC system has DX cooling. Returns FALSE if the HVAC system has anything other than DX cooling or if it has more than 1 or no cooling system.
   * [is_hvac_sys_fan_sys_CV](ruleset_functions/baseline_systems/baseline_hvac_sub_functions/is_hvac_sys_fan_sys_CV.md): Returns TRUE if the HVAC system fan system is constant volume. Returns FALSE if the HVAC system fan system is anything other than constant volume.
   * [is_hvac_sys_heating_type_heat_pump](ruleset_functions/baseline_systems/baseline_hvac_sub_functions/is_hvac_sys_heating_type_heat_pump.md): Returns TRUE if the HVAC system has heat pump as the heating system type. Returns FALSE if the HVAC system has anything other than heat pump as the heating system type or if it has more than 1 heating system.
