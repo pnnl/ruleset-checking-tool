@@ -22,4 +22,4 @@
 
 **Returns** `return do_all_terminals_have_one_fan`  
 
-**[Back](../_toc.md)**
+**[Back](../../../_toc.md)**
