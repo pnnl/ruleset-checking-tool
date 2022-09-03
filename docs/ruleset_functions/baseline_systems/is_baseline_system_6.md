@@ -49,4 +49,4 @@
 1. In the current graphical depiction it has electric reheat for when there is purchased heating at the HVAC system level but based on G3.1.1.3.1 it appears that all heating coils should be purchased heating when there is purchased heating in the building providing space heating.  If others disagree I can of course modify this but just wanted to highlight the assumption used in the logic above. 
 
 
-**[Back](../_toc.md)**
+**[Back](../../_toc.md)**
