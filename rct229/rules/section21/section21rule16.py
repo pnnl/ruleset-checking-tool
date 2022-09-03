@@ -35,17 +35,14 @@ APPLICABLE_SYS_TYPES = [
 HEATING = schema_enums["FluidLoopOptions"].HEATING
 
 
-class Section21Rule16(RuleDefinitionListIndexedBase):
+class Section21Rule16(RuleDefinitionBase):
     """Rule 16 of ASHRAE 90.1-2019 Appendix G Section 21 (Hot water loop)"""
 
     def __init__(self):
         super(Section21Rule16, self).__init__(
             rmrs_used=UserBaselineProposedVals(False, True, False),
-            each_rule=Section21Rule16.RuleSetModelInstanceRule(),
-            index_rmr="baseline",
             id="21-16",
             description="Baseline shall have only one heating hot water plant.",
-            rmr_context="ruleset_model_instances/0",
         )
 
     def is_applicable(self, context, data=None):
@@ -61,25 +58,13 @@ class Section21Rule16(RuleDefinitionListIndexedBase):
             [key in APPLICABLE_SYS_TYPES for key in baseline_system_types.keys()]
         )
 
-    class RuleSetModelInstanceRule(RuleDefinitionBase):
-        def __init__(self):
-            super(Section21Rule16.RuleSetModelInstanceRule, self).__init__(
-                rmrs_used=UserBaselineProposedVals(False, True, False),
-            )
+    def get_calc_vals(self, context, data=None):
+        heating_fluid_loop_b = context.baseline
+        hhw_loop_count = len(
+            find_all("$..fluid_loops[?type == HEATING]", heating_fluid_loop_b)
+        )
+        return {"hhw_loop_count": hhw_loop_count}
 
-        def get_calc_vals(self, context, data=None):
-            heating_fluid_loop_b = context.baseline
-            bool_hhw_loop_count = (
-                len(
-                    find_all(
-                        "fluid_loops[?type == HEATING]",
-                        heating_fluid_loop_b,
-                    )
-                )
-                == 1
-            )
-            return {"bool_hhw_loop_count": bool_hhw_loop_count}
-
-        def rule_check(self, context, calc_vals=None, data=None):
-            bool_hhw_loop_count = calc_vals["bool_hhw_loop_count"]
-            return bool_hhw_loop_count
+    def rule_check(self, context, calc_vals=None, data=None):
+        bool_hhw_loop_count = calc_vals["hhw_loop_count"]
+        return bool_hhw_loop_count == 1
