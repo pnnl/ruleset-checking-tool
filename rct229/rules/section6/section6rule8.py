@@ -33,11 +33,8 @@ class Section6Rule8(RuleDefinitionListIndexedBase):
             "adjustments based on factors defined in Table G3.7.",
             list_path="ruleset_model_instances[0]",
             required_fields={"$": ["calendar"], "calendar": ["is_leap_year"]},
+            data_items={"is_leap_year": ("baseline", "calendar/is_leap_year")},
         )
-
-    def create_data(self, context, data=None):
-        rmd_b = context.baseline
-        return {"is_leap_year": rmd_b["calendar"]["is_leap_year"]}
 
     class RulesetModelInstanceRule(RuleDefinitionListIndexedBase):
         def __init__(self):
@@ -47,16 +44,11 @@ class Section6Rule8(RuleDefinitionListIndexedBase):
                 index_rmr="proposed",
                 list_path="buildings[*]",
                 required_fields={"$": ["schedules"]},
+                data_items={
+                    "schedules_b": ("baseline", "schedules"),
+                    "schedules_p": ("proposed", "schedules"),
+                },
             )
-
-        def create_data(self, context, data=None):
-            rmi_b = context.baseline
-            rmi_p = context.proposed
-            return {
-                **data,
-                "schedules_b": rmi_b["schedules"],
-                "schedules_p": rmi_p["schedules"],
-            }
 
         class BuildingRule(RuleDefinitionListIndexedBase):
             def __init__(self):
@@ -73,7 +65,6 @@ class Section6Rule8(RuleDefinitionListIndexedBase):
                 building_p = context.proposed
                 schedules_p = data["schedules_p"]
                 return {
-                    **data,
                     "building_open_schedule_p": getattr_(
                         find_exactly_one_with_field_value(
                             "$", "id", building_p["building_open_schedule"], schedules_p
@@ -99,7 +90,6 @@ class Section6Rule8(RuleDefinitionListIndexedBase):
                 def create_data(self, context, data=None):
                     zone_p = context.proposed
                     return {
-                        **data,
                         "avg_space_height": zone_p.get("volume", ZERO.VOLUME)
                         / pint_sum(find_all("spaces[*].floor_area", zone_p), ZERO.AREA),
                     }
