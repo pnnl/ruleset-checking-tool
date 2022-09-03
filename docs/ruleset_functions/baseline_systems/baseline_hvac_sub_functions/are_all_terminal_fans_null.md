@@ -22,4 +22,4 @@
 
 **Returns** `return are_all_terminal_fans_null`  
 
-**[Back](../_toc.md)**
+**[Back](../../../_toc.md)**
