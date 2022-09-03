@@ -14,7 +14,7 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "None",
             "mandatory_rule": "Yes",
-            "schema_version": "0.0.12"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "user": {
@@ -146,7 +146,7 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "None",
             "mandatory_rule": "Yes",
-            "schema_version": "0.0.12"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "user": {
@@ -278,7 +278,7 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "None",
             "mandatory_rule": "Yes",
-            "schema_version": "0.0.12"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "user": {
@@ -321,7 +321,7 @@
                                                             {
                                                                 "id": "Hotel Lobby Lighting",
                                                                 "lighting_multiplier_schedule": "Hotel Lobby Lighting Schedule",
-                                                                "power_per_area": 6.027789833357446
+                                                                "power_per_area": 4.736120583352278
                                                             }
                                                         ],
                                                         "lighting_space_type": "LOBBY_HOTEL"
