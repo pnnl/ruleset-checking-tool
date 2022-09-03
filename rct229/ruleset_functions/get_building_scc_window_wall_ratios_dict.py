@@ -11,7 +11,7 @@ from rct229.utils.assertions import assert_required_fields
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.pint_utils import ZERO
 
-DOOR = schema_enums["SubsurfaceClassificationType"].DOOR
+DOOR = schema_enums["SubsurfaceClassificationOptions"].DOOR
 
 # Intended for internal use
 GET_BUILDING_SCC_WINDOW_WALL_RATIO_DICT__REQUIRED_FIELDS = {
@@ -29,7 +29,7 @@ def get_building_scc_window_wall_ratios_dict(climate_zone, building):
     Parameters
     ----------
     climate_zone : str
-        One of the ClimateZone2019ASHRAE901 enumerated values
+        One of the ClimateZoneOptions2019ASHRAE901 enumerated values
     building : dict
         A dictionary representing a building as defined by the ASHRAE229 schema
 

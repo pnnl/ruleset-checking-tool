@@ -7,7 +7,7 @@ MANUAL_CHECK_MSG = "Surface in P-RMR has subsurfaces modeled with different manu
 
 
 class Section5Rule31(RuleDefinitionListIndexedBase):
-    """Rule 5 of ASHRAE 90.1-2019 Appendix G Section 5 (Envelope)"""
+    """Rule 31 of ASHRAE 90.1-2019 Appendix G Section 5 (Envelope)"""
 
     def __init__(self):
         super(Section5Rule31, self).__init__(

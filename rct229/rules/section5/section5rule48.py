@@ -41,9 +41,7 @@ class Section5Rule48(RuleDefinitionListIndexedBase):
 
         def create_data(self, context, data=None):
             building_b = context.baseline
-
             return {
-                **data,
                 "zcc_dict_b": get_zone_conditioning_category_dict(
                     data["climate_zone"], building_b
                 ),
