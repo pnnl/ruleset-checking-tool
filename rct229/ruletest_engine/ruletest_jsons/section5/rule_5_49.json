@@ -14,7 +14,7 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "None",
             "primary_rule": "Y",
-            "schema_version": "0.0.12"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "proposed": {
@@ -51,8 +51,7 @@
                                                 "infiltration": {
                                                     "id": "Infiltration 1",
                                                     "multiplier_schedule": "Infiltration Schedule 1",
-                                                    "infiltration_flow_rate": 0.3171486818303999,
-                                                    "measured_air_leakage_rate": 2.831684659199999
+                                                    "infiltration_flow_rate": 0.3171486818303999
                                                 },
                                                 "terminals": [
                                                     {
@@ -69,7 +68,7 @@
                                                         "area": 464.51519999999994
                                                     },
                                                     {
-                                                        "id": "Surface 1",
+                                                        "id": "Surface 2",
                                                         "adjacent_to": "GROUND",
                                                         "tilt": 90,
                                                         "area": 464.51519999999994
@@ -82,11 +81,11 @@
                                                 "id": "HVAC 1",
                                                 "cooling_system": {
                                                     "id": "Cooling System 1",
-                                                    "sensible_cool_capacity": 21102000.0
+                                                    "design_sensible_cool_capacity": 21102000.0
                                                 },
                                                 "heating_system": {
                                                     "id": "Heating System 1",
-                                                    "heat_capacity": 4396.066666666667
+                                                    "design_capacity": 4396.066666666667
                                                 }
                                             }
                                         ]
@@ -104,7 +103,7 @@
         "Rule": 49,
         "Test": "b",
         "test_description": "Building is located in climate zone 4A and includes one conditioned zone which has two surfaces - one adjacent to exterior and another adjacent to ground. The proposed infiltration flow rate at wind pressure is not based on default 0.6 cfm/ft2  @75PA. Manual check required to verify that site measurements were performed",
-        "expected_rule_outcome": "fail",
+        "expected_rule_outcome": "manual_check",
         "standard": {
             "rule_id": "5-49",
             "ruleset_reference": "Table G3.1 #5 Proposed column (b): The proposed air leakage rate of the building envelope (I75Pa) at a fixed building pressure differential of 0.3 in. of water shall be 0.6 cfm/ft2 for buildings providing verification in accordance with Section 5.9.1.2. The air leakage rate of the building envelope shall be converted to appropriate units for the simulation program using one of the methods in Section G3.1.1.4. \nExceptions: When whole-building air leakage testing, in accordance with Section 5.4.3.1.1, is specified during design and completed after construction, the proposed design air leakage rate of the building envelope shall be as measured. ",
@@ -114,7 +113,7 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "None",
             "primary_rule": "Y",
-            "schema_version": "0.0.12"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "proposed": {
@@ -151,8 +150,7 @@
                                                 "infiltration": {
                                                     "id": "Infiltration 1",
                                                     "multiplier_schedule": "Infiltration Schedule 1",
-                                                    "infiltration_flow_rate": 0.5285811363839998,
-                                                    "measured_air_leakage_rate": 2.359737215999999
+                                                    "infiltration_flow_rate": 0.5285811363839998
                                                 },
                                                 "terminals": [
                                                     {
@@ -169,7 +167,7 @@
                                                         "area": 464.51519999999994
                                                     },
                                                     {
-                                                        "id": "Surface 1",
+                                                        "id": "Surface 2",
                                                         "adjacent_to": "GROUND",
                                                         "tilt": 90,
                                                         "area": 464.51519999999994
@@ -182,11 +180,11 @@
                                                 "id": "HVAC 1",
                                                 "cooling_system": {
                                                     "id": "Cooling System 1",
-                                                    "sensible_cool_capacity": 21102000.0
+                                                    "design_sensible_cool_capacity": 21102000.0
                                                 },
                                                 "heating_system": {
                                                     "id": "Heating System 1",
-                                                    "heat_capacity": 4396.066666666667
+                                                    "design_capacity": 4396.066666666667
                                                 }
                                             }
                                         ]
@@ -214,7 +212,7 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "None",
             "primary_rule": "Y",
-            "schema_version": "0.0.12"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "proposed": {
@@ -265,21 +263,13 @@
                                                         "azimuth": 180,
                                                         "adjacent_to": "EXTERIOR",
                                                         "tilt": 90,
-                                                        "area": 464.51519999999994,
-                                                        "construction": {
-                                                            "id": "construction_1",
-                                                            "u_factor": 3.2366105565544463
-                                                        }
+                                                        "area": 464.51519999999994
                                                     },
                                                     {
-                                                        "id": "Surface 1",
+                                                        "id": "Surface 2",
                                                         "adjacent_to": "GROUND",
                                                         "tilt": 90,
-                                                        "area": 464.51519999999994,
-                                                        "construction": {
-                                                            "id": "construction_1",
-                                                            "u_factor": 3.2366105565544463
-                                                        }
+                                                        "area": 464.51519999999994
                                                     }
                                                 ]
                                             }
@@ -289,11 +279,11 @@
                                                 "id": "HVAC 1",
                                                 "cooling_system": {
                                                     "id": "Cooling System 1",
-                                                    "sensible_cool_capacity": 21102000.0
+                                                    "design_sensible_cool_capacity": 21102000.0
                                                 },
                                                 "heating_system": {
                                                     "id": "Heating System 1",
-                                                    "heat_capacity": 699.8538133333334
+                                                    "design_capacity": 699.8538133333334
                                                 }
                                             }
                                         ]
@@ -321,7 +311,7 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "None",
             "primary_rule": "Y",
-            "schema_version": "0.0.12"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "proposed": {
@@ -372,21 +362,13 @@
                                                         "azimuth": 180,
                                                         "adjacent_to": "EXTERIOR",
                                                         "tilt": 90,
-                                                        "area": 464.51519999999994,
-                                                        "construction": {
-                                                            "id": "construction_1",
-                                                            "u_factor": 3.2366105565544463
-                                                        }
+                                                        "area": 464.51519999999994
                                                     },
                                                     {
-                                                        "id": "Surface 1",
+                                                        "id": "Surface 2",
                                                         "adjacent_to": "GROUND",
                                                         "tilt": 90,
-                                                        "area": 464.51519999999994,
-                                                        "construction": {
-                                                            "id": "construction_1",
-                                                            "u_factor": 3.2366105565544463
-                                                        }
+                                                        "area": 464.51519999999994
                                                     }
                                                 ]
                                             }
@@ -396,11 +378,11 @@
                                                 "id": "HVAC 1",
                                                 "cooling_system": {
                                                     "id": "Cooling System 1",
-                                                    "sensible_cool_capacity": 21102000.0
+                                                    "design_sensible_cool_capacity": 21102000.0
                                                 },
                                                 "heating_system": {
                                                     "id": "Heating System 1",
-                                                    "heat_capacity": 699.8538133333334
+                                                    "design_capacity": 699.8538133333334
                                                 }
                                             }
                                         ]

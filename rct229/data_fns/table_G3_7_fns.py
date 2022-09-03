@@ -3,7 +3,7 @@ from rct229.data.schema_enums import schema_enums
 from rct229.data_fns.table_utils import find_osstd_table_entry
 from rct229.schema.config import ureg
 
-# This dictionary maps the LightingSpaceType2019ASHRAE901TG37 enumerations to
+# This dictionary maps the LightingSpaceOptions2019ASHRAE901TG37 enumerations to
 # the corresponding lpd_space_type values in the OSSTD file
 # ashrae_90_1_prm_2019.prm_interior_lighting.json
 lighting_space_enumeration_to_lpd_space_type_map = {
@@ -114,23 +114,21 @@ lighting_space_enumeration_to_lpd_space_type_map = {
     "WAREHOUSE_STORAGE_AREA_SMALLER_HAND_CARRIED_ITEMS": "warehouse - fine storage",
 }
 
-FULL_AUTO_ON = schema_enums["LightingOccupancyControlType"].FULL_AUTO_ON
-PARTIAL_AUTO_ON = schema_enums["LightingOccupancyControlType"].PARTIAL_AUTO_ON
-MANUAL_ON = schema_enums["LightingOccupancyControlType"].MANUAL_ON
+FULL_AUTO_ON = schema_enums["LightingOccupancyControlOptions"].FULL_AUTO_ON
+PARTIAL_AUTO_ON = schema_enums["LightingOccupancyControlOptions"].PARTIAL_AUTO_ON
+MANUAL_ON = schema_enums["LightingOccupancyControlOptions"].MANUAL_ON
+OTHER = schema_enums["LightingOccupancyControlOptions"].OTHER
+NONE = schema_enums["LightingOccupancyControlOptions"].NONE
 
 # ATRIUM_LOW_MEDIUM
-def table_G3_7_lookup(
-    lighting_space_type, occupancy_control_type, space_height, space_area
-):
+def table_G3_7_lookup(lighting_space_type, space_height, space_area):
     """Returns the lighting power density for a space as
     required by ASHRAE 90.1 Table G3.7
 
     Parameters
     ----------
     lighting_space_type : str
-        One of the LightingSpaceType2019ASHRAE901TG37 enumeration values
-    occupancy_control_type: str
-        One of the LightingOccupancyControlOptions enumeration values
+        One of the LightingSpaceOptions2019ASHRAE901TG37 enumeration values
     space_height : Quantity
         The height of the space
     space_area: Quantity
@@ -163,17 +161,6 @@ def table_G3_7_lookup(
             + watts_per_ft * ureg("watt / foot") * space_height / space_area
         )
 
-    control_credit = 0.0
-    manon_or_partauto = osstd_entry["manon_or_partauto"]
-    if occupancy_control_type in [PARTIAL_AUTO_ON, MANUAL_ON]:
-        if manon_or_partauto:
-            control_credit = osstd_entry["occup_sensor_savings"]
-        else:
-            control_credit = osstd_entry["occup_sensor_auto_on_svgs"]
-    elif occupancy_control_type == FULL_AUTO_ON:
-        control_credit = osstd_entry["occup_sensor_auto_on_svgs"]
-    else:
-        # no credit
-        control_credit = 0.0
+    control_credit = osstd_entry["occup_sensor_auto_on_svgs"]
 
     return {"lpd": lpd, "control_credit": control_credit}
