@@ -1,10 +1,11 @@
 
-## normalize_space_schedules
+## normalize_interior_lighting_schedules
 
 Description: This function would determine a normalized interior lighting schedule for interior_lighting data element in space. 
 
 Inputs:
-  - **Space.data_element**: The space data element that needs to determine a normalized schedule, e.g. space.interior_lighting.
+  - **Space**: The space in which its interior lightings need to determine a normalized schedule.
+  - **adjust_for_credit**: Flag to indicate whether the schedule normalization needs to add control credit adjustment.
 
 Returns:
 - **space_normalized_schedule_array**: An array containing 8760 hourly values of a normalized schedule of the space data element.
@@ -29,8 +30,14 @@ Logic:
   - Get lighting power per area: `power_per_area = interior_lighting.power_per_area`
 
     - Add lighting power per area to space total: `space_total_power_per_area += power_per_area`
+  
+  - Set bonus_adjustment to 1.0: `bonus_adjustment = 1.0`
+  
+  - Check if `interior_lighting.occupancy_control_type` data is provided. Set to `OTHER` if this data is missing: `if not interior_lighting.has('occupancy_control_type): interior_lighting.occupancy_control_type = OTHER`
 
-  - Check if lighting uses schedule to model occupancy control, get occupancy control credit: `if interior_lighting.are_schedules_used_for_modeling_occupancy_control: control_credit = data_lookup(table_G3_7, space.lighting_space_type, interior_lighting.occupancy_control_type)`
+  - else if `interior_lighting.occupancy_control_type` is MANUAL_ON or PARTIAL_AUTO_ON, set bonus_adjustment to 1.25: `if interior_lighting.occupancy_control_type = [MANUAL_ON, PARTIAL_AUTO_ON]: bonus_adjustment = 1.25`
+
+  - Check if adjust_for_credit is true and lighting uses schedule to model occupancy control, get occupancy control credit: `if adjust_for_credit and interior_lighting.are_schedules_used_for_modeling_occupancy_control: control_credit = data_lookup(table_G3_7, space.lighting_space_type, interior_lighting.occupancy_control_type, bonus_adjustment)`
 
   - Else, set occupancy control credit to 0: `else: control_credit = 0`
 

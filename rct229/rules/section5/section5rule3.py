@@ -1,7 +1,5 @@
-from rct229.rule_engine.rule_base import (
-    RuleDefinitionBase,
-    RuleDefinitionListIndexedBase,
-)
+from rct229.rule_engine.rule_base import RuleDefinitionBase
+from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 from rct229.utils.jsonpath_utils import find_all
 
@@ -42,5 +40,5 @@ class Section5Rule3(RuleDefinitionListIndexedBase):
                 "baseline_surfaces_casting_shade_ids": baseline_surfaces_casting_shade_ids
             }
 
-        def rule_check(self, context, calc_vals, data=None):
+        def rule_check(self, context, calc_vals=None, data=None):
             return len(calc_vals["baseline_surfaces_casting_shade_ids"]) == 0
