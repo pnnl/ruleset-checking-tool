@@ -32,11 +32,8 @@ class Section5Rule36(RuleDefinitionListIndexedBase):
             id="5-36",
             description="Skylight area must be allocated to surfaces in the same proportion in the baseline as in the proposed design.",
             list_path="ruleset_model_instances[0].buildings[*]",
+            data_items={"climate_zone": ("baseline", "weather/climate_zone")},
         )
-
-    def create_data(self, context, data=None):
-        rmr_baseline = context.baseline
-        return {"climate_zone": rmr_baseline["weather"]["climate_zone"]}
 
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
@@ -50,9 +47,7 @@ class Section5Rule36(RuleDefinitionListIndexedBase):
         def create_data(self, context, data=None):
             building_b = context.baseline
             building_p = context.proposed
-            # Merge into the existing data dict
             return {
-                **data,
                 "scc_dict_b": get_surface_conditioning_category_dict(
                     data["climate_zone"], building_b
                 ),
@@ -76,7 +71,6 @@ class Section5Rule36(RuleDefinitionListIndexedBase):
             def create_data(self, context, data=None):
                 building_segment_b = context.baseline
                 building_segment_p = context.proposed
-
                 return {
                     "scc_dict_b": data["scc_dict_b"],
                     "total_skylight_area_b": data["skylight_roof_areas_dictionary_b"][
