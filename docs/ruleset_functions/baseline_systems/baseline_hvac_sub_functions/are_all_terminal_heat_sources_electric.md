@@ -21,4 +21,4 @@
 
 **Returns** `return are_all_terminal_heat_sources_electric`  
 
-**[Back](../_toc.md)**
+**[Back](../../../_toc.md)**

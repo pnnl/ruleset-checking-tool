@@ -21,4 +21,4 @@
 
 **Returns** `return are_all_terminal_fan_configs_parallel`  
 
-**[Back](../_toc.md)**
+**[Back](../../../_toc.md)**
