@@ -14,7 +14,7 @@
             "comparison_value": "Proposed RMR",
             "rule_dependency": "1. Baseline heating and cooling capacities are established correctly (air-side HVAC rule TBD). This affects baseline space conditioning categories",
             "primary_rule": "Y",
-            "schema_version": "0.0.12"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "proposed": {
@@ -50,17 +50,18 @@
                                                     "id": "Infiltration 1",
                                                     "infiltration_flow_rate": 4.009193529983999
                                                 },
-												"surfaces": [
+                                                "surfaces": [
                                                     {
                                                         "id": "Surface 1",
-														"adjacent_to": "EXTERIOR",
-														"tilt": 90,
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 90,
                                                         "area": 929.0303999999999,
-														"construction": {
-                                                            "id": "construction_1"
+                                                        "construction": {
+                                                            "id": "construction_1",
+                                                            "u_factor": 3.2366105565544463
                                                         }
-													}
-												]
+                                                    }
+                                                ]
                                             }
                                         ]
                                     }
@@ -103,17 +104,18 @@
                                                     "id": "Infiltration 1",
                                                     "infiltration_flow_rate": 4.009193529983999
                                                 },
-												"surfaces": [
+                                                "surfaces": [
                                                     {
                                                         "id": "Surface 1",
-														"adjacent_to": "EXTERIOR",
-														"tilt": 90,
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 90,
                                                         "area": 929.0303999999999,
-														"construction": {
-                                                            "id": "construction_1"
+                                                        "construction": {
+                                                            "id": "construction_1",
+                                                            "u_factor": 3.2366105565544463
                                                         }
-													}
-												]
+                                                    }
+                                                ]
                                             }
                                         ]
                                     }
@@ -140,7 +142,7 @@
             "comparison_value": "Proposed RMR",
             "rule_dependency": "1. Baseline heating and cooling capacities are established correctly (air-side HVAC rule TBD). This affects baseline space conditioning categories",
             "primary_rule": "Y",
-            "schema_version": "0.0.12"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "proposed": {
@@ -176,17 +178,18 @@
                                                     "id": "Infiltration 1",
                                                     "infiltration_flow_rate": 7.282620996019198
                                                 },
-												"surfaces": [
+                                                "surfaces": [
                                                     {
                                                         "id": "Surface 1",
-														"adjacent_to": "EXTERIOR",
-														"tilt": 90,
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 90,
                                                         "area": 929.0303999999999,
-														"construction": {
-                                                            "id": "construction_1"
+                                                        "construction": {
+                                                            "id": "construction_1",
+                                                            "u_factor": 3.2366105565544463
                                                         }
-													}
-												]
+                                                    }
+                                                ]
                                             }
                                         ]
                                     }
@@ -229,17 +232,18 @@
                                                     "id": "Infiltration 1",
                                                     "infiltration_flow_rate": 4.009193529983999
                                                 },
-												"surfaces": [
+                                                "surfaces": [
                                                     {
                                                         "id": "Surface 1",
-														"adjacent_to": "EXTERIOR",
-														"tilt": 90,
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 90,
                                                         "area": 929.0303999999999,
-														"construction": {
-                                                            "id": "construction_1"
+                                                        "construction": {
+                                                            "id": "construction_1",
+                                                            "u_factor": 3.2366105565544463
                                                         }
-													}
-												]
+                                                    }
+                                                ]
                                             }
                                         ]
                                     }
