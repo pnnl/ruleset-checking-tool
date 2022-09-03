@@ -3,6 +3,7 @@ from rct229.data_fns.table_G3_8_fns import table_G3_8_lookup
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
+from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.pint_utils import pint_sum
 
@@ -16,7 +17,8 @@ class Section6Rule1(RuleDefinitionListIndexedBase):
             each_rule=Section6Rule1.BuildingRule(),
             index_rmr="proposed",
             id="6-1",
-            description="The total building interior lighting power shall not exceed the interior lighting power allowance determined using either Table G3.7 or G3.8",
+            description="The total building interior lighting power shall not exceed the interior lighting power "
+            "allowance determined using either Table G3.7 or G3.8",
             rmr_context="ruleset_model_instances/0/buildings",
         )
 
@@ -35,9 +37,9 @@ class Section6Rule1(RuleDefinitionListIndexedBase):
                 building_segment_allowable_lighting_power = 0
                 building_segment_design_lighting_power = 0
 
-                building_segment_lighting_building_area_type = building_segment[
-                    "lighting_building_area_type"
-                ]
+                building_segment_lighting_building_area_type = building_segment.get(
+                    "lighting_building_area_type", "NONE"
+                )
                 building_segment_uses_building_area_method = (
                     building_segment_lighting_building_area_type != "NONE"
                 )
@@ -62,11 +64,11 @@ class Section6Rule1(RuleDefinitionListIndexedBase):
                             building_segment_floor_area += space_floor_area
                         else:
                             # The building segment uses the Space-by-Space Method
-                            lighting_space_type = space["lighting_space_type"]
+                            lighting_space_type = getattr_(
+                                space, "space", "lighting_space_type"
+                            )
                             space_allowable_lpd = table_G3_7_lookup(
                                 lighting_space_type,
-                                # do not need control type
-                                None,
                                 space_height=zone_avg_height,
                                 space_area=space_floor_area,
                             )["lpd"]
@@ -92,7 +94,7 @@ class Section6Rule1(RuleDefinitionListIndexedBase):
                 "building_design_lighting_power": building_design_lighting_power,
             }
 
-        def rule_check(self, context, calc_vals, data=None):
+        def rule_check(self, context, calc_vals=None, data=None):
             return (
                 calc_vals["building_design_lighting_power"]
                 <= calc_vals["building_allowable_lighting_power"]
