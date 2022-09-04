@@ -43,6 +43,7 @@ class Section21Rule16(RuleDefinitionBase):
             rmrs_used=UserBaselineProposedVals(False, True, False),
             id="21-16",
             description="Baseline shall have only one heating hot water plant.",
+            rmr_context="ruleset_model_instances/0",
         )
 
     def is_applicable(self, context, data=None):
@@ -59,12 +60,10 @@ class Section21Rule16(RuleDefinitionBase):
         )
 
     def get_calc_vals(self, context, data=None):
-        heating_fluid_loop_b = context.baseline
-        hhw_loop_count = len(
-            find_all("$..fluid_loops[?type == HEATING]", heating_fluid_loop_b)
-        )
+        rmi_b = context.baseline
+        hhw_loop_count = len(find_all("$..fluid_loops[?type == HEATING]", rmi_b))
         return {"hhw_loop_count": hhw_loop_count}
 
     def rule_check(self, context, calc_vals=None, data=None):
-        bool_hhw_loop_count = calc_vals["hhw_loop_count"]
-        return bool_hhw_loop_count == 1
+        hhw_loop_count = calc_vals["hhw_loop_count"]
+        return hhw_loop_count == 1
