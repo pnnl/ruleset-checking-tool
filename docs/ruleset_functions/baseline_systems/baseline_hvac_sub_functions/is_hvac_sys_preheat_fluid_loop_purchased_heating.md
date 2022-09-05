@@ -23,5 +23,5 @@
 **Returns** `is_hvac_sys_preheat_fluid_loop_purchased_heating`  
 
 
-
 **[Back](../../../_toc.md)**
+
