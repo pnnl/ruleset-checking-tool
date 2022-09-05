@@ -33,12 +33,11 @@ def is_hvac_sys_preheating_type_fluid_loop(rmi_b, hvac_b_id):
     )
     # get preheat system from the HVAC
     preheat_system = hvac_b.get("preheat_system")
-    if preheat_system:
-        if (
-            preheat_system.get("hot_water_loop") is not None
-            and getattr_(preheat_system, "preheat_system", "heating_system_type")
-            == HEATING_SYSTEM.FLUID_LOOP
-        ):
-            is_hvac_sys_preheating_type_fluid_loop_flag = True
+    is_hvac_sys_preheating_type_fluid_loop_flag = (
+        preheat_system is not None
+        and preheat_system.get("hot_water_loop") is not None
+        and getattr_(preheat_system, "preheat_system", "heating_system_type")
+        == HEATING_SYSTEM.FLUID_LOOP
+    )
 
     return is_hvac_sys_preheating_type_fluid_loop_flag
