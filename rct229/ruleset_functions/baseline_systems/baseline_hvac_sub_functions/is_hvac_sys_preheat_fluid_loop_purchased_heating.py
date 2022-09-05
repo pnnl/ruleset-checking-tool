@@ -41,9 +41,10 @@ def is_hvac_sys_preheat_fluid_loop_purchased_heating(rmi_b, hvac_b_id):
         rmi_b,
     )
     # Check if hvac_b has preheat system
-    if hvac_b.get("preheat_system") and hvac_b["preheat_system"].get("hot_water_loop"):
-        fluid_loop_b_id = hvac_b["preheat_system"]["hot_water_loop"]
-        if fluid_loop_b_id in purchased_heating_loop_list_b:
-            is_hvac_sys_preheat_fluid_loop_purchased_heating_flag = True
+    preheat_system = hvac_b.get("preheat_system")
+    is_hvac_sys_preheat_fluid_loop_purchased_heating_flag = (
+        preheat_system is not None
+        and preheat_system.get("hot_water_loop") in purchased_heating_loop_list_b
+    )
 
     return is_hvac_sys_preheat_fluid_loop_purchased_heating_flag
