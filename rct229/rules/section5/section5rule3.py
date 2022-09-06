@@ -40,5 +40,5 @@ class Section5Rule3(RuleDefinitionListIndexedBase):
                 "baseline_surfaces_casting_shade_ids": baseline_surfaces_casting_shade_ids
             }
 
-        def rule_check(self, context, calc_vals, data=None):
+        def rule_check(self, context, calc_vals=None, data=None):
             return len(calc_vals["baseline_surfaces_casting_shade_ids"]) == 0
