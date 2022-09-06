@@ -23,7 +23,6 @@ Functions:
     - For each terminal serving the zone: `for terminal in zone.terminals:`
       - Check if the heat source is hot water: `if terminal.heating_source == "HOT_WATER":`  
         - Get the heating from loop ID: `hhw_loop_id = terminal.heating_from_loop`
-        - Check if zone is not already saved in heating hot water loop dictionary: `if NOT zone.id in hvac_zone_list_w_area_dict[hhw_loop_id]["ZONE_LIST"]:`  
           - Save zone id and total floor area to loop dictionary: `hw_loop_zone_list_w_area_dict[hhw_loop_id]["ZONE_LIST"].append(zone.id), hw_loop_zone_list_w_area_dict[hhw_loop_id]["TOTAL_AREA"] += zone_area`
           - Set zone_HHW_loop_found = TRUE: `zone_HHW_loop_found = TRUE`  
       - Check if the hot water loop serving the zone has been found, if it has not then carry on: `if zone_HHW_loop_found == FALSE:`
@@ -32,14 +31,12 @@ Functions:
           - Check if HVAC system has preheat coil: `if hvac.preheat_system != NULL AND hvac.preheat_system[0].heating_system_type != "None":`
             - Check that the preheat coil is a fluid_loop: `if is_hvac_sys_preheating_type_fluid_loop(B-RMR, hvac.id) == TRUE:`   
               - Get heating hot water loop serving preheat coil: `hhw_loop_id = hvac.preheat_system[0].hot_water_loop`
-              - Check if zone is not already saved in heating hot water loop dictionary: `if NOT zone.id in hvac_zone_list_w_area_dict[hhw_loop_id]["ZONE_LIST"]:`  
                 - Save zone id and total floor area to loop dictionary: `hw_loop_zone_list_w_area_dict[hhw_loop_id]["ZONE_LIST"].append(zone.id), hw_loop_zone_list_w_area_dict[hhw_loop_id]["TOTAL_AREA"] += zone_area`
                 - Set zone_HHW_loop_found = TRUE: `zone_HHW_loop_found = TRUE`  
           - Check if the hot water loop serving the zone has been found, if it has not then carry on: `if zone_HHW_loop_found == FALSE:`
             - Check if HVAC system has a heating coil: `if hvac.heating_system != NULL AND hvac.heating_system[0].heating_system_type != "None":`
               - Check that the heating coil is a fluid_loop: `if is_hvac_sys_heating_type_fluid_loop(B-RMR, hvac.id) == TRUE:`   
                 - Get heating hot water loop serving the heating coil: `hhw_loop_id = hvac.heating_system[0].hot_water_loop`
-                - Check if zone is not already saved in heating hot water loop dictionary: `if NOT zone.id in hvac_zone_list_w_area_dict[hhw_loop_id]["ZONE_LIST"]:`  
                   - Save zone id and total floor area to loop dictionary: `hw_loop_zone_list_w_area_dict[hhw_loop_id]["ZONE_LIST"].append(zone.id), hw_loop_zone_list_w_area_dict[hhw_loop_id]["TOTAL_AREA"] += zone_area`
 
 **Returns** `return hw_loop_zone_list_w_area_dict`  
