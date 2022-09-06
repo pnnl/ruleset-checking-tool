@@ -14,7 +14,7 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "None",
             "primary_rule": "N",
-            "schema_version": "0.0.12"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "baseline": {
@@ -93,7 +93,7 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "None",
             "primary_rule": "N",
-            "schema_version": "0.0.12"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "baseline": {
