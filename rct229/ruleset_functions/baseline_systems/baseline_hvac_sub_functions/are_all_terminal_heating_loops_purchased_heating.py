@@ -1,0 +1,60 @@
+from rct229.data.schema_enums import schema_enums
+from rct229.utils.assertions import getattr_
+from rct229.utils.jsonpath_utils import find_exactly_one_with_field_value
+
+EXTERNAL_FLUID_SOURCE = schema_enums["ExternalFluidSourceOptions"]
+FLUID_LOOP_TYPE = schema_enums["FluidLoopOptions"]
+
+
+def are_all_terminal_heating_loops_purchased_heating(rmi_b, terminal_unit_id_list):
+    """Returns TRUE if the fluid loop associated with the heating_from_loop associated with each terminal unit is purchased heating. Returns FALSE if this is not the case.
+    ----------
+    rmi_b : json
+        RMD at RuleSetModelInstance level
+    terminal_unit_id_list : list
+        List of terminal units IDs
+    Returns
+    -------
+    bool
+        True: fluid loop associated with the heating_from_loop associated with each terminal unit is purchased heating
+        False: otherwise
+    """
+    are_all_terminal_heating_loops_purchased_heating_flag = True
+    purchased_heating_loop_list_b = []
+
+    external_fluid_sources = rmi_b.get("external_fluid_source")
+    if external_fluid_sources:
+        for external_fluid_source in external_fluid_sources:
+            if (
+                external_fluid_source.get("type")
+                in [
+                    EXTERNAL_FLUID_SOURCE.HOT_WATER,
+                    EXTERNAL_FLUID_SOURCE.STEAM,
+                ]
+                and external_fluid_source.get("loop") is not None
+            ):
+                purchased_heating_loop_list_b.append(external_fluid_source["loop"])
+
+    for terminal_b_id in terminal_unit_id_list:
+        terminal_b = find_exactly_one_with_field_value(
+            "$.buildings[*].building_segments[*].zones[*].terminals",
+            "id",
+            terminal_b_id,
+            rmi_b,
+        )
+        heating_from_loop = terminal_b.get("heating_from_loop")
+        if heating_from_loop:
+            fluid_loop = find_exactly_one_with_field_value(
+                "$.fluid_loops",
+                "id",
+                heating_from_loop,
+                rmi_b,
+            )
+            if (
+                getattr_(fluid_loop, "fluid loop", "type") != FLUID_LOOP_TYPE.HEATING
+                or heating_from_loop not in purchased_heating_loop_list_b
+            ):
+                are_all_terminal_heating_loops_purchased_heating_flag = False
+                break
+
+    return are_all_terminal_heating_loops_purchased_heating_flag
