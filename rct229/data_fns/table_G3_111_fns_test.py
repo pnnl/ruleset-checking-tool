@@ -1,7 +1,6 @@
 import pytest
 
 from rct229.data import data
-from rct229.data.schema_enums import schema_enums
 from rct229.data_fns.table_G3_111_fns import (
     VERTICAL_FENESTRATION_BUILDING_AREA_TYPE_TO_WWR_BUILDING_TYPE_MAP,
     table_G3_1_1_1_lookup,
@@ -79,7 +78,7 @@ def test__building_area_type_to_vertical_fenestration_percentage_map():
     # when a check fails
     check_enumeration_to_osstd_match_field_value_map(
         match_field_name="wwr_building_type",
-        enum_type="VerticalFenestrationBuildingAreaType2019ASHRAE901",
+        enum_type="VerticalFenestrationBuildingAreaOptions2019ASHRAE901",
         osstd_table=data["ashrae_90_1_prm_2019.prm_wwr_bldg_type"],
         enumeration_to_match_field_value_map=VERTICAL_FENESTRATION_BUILDING_AREA_TYPE_TO_WWR_BUILDING_TYPE_MAP,
     )
