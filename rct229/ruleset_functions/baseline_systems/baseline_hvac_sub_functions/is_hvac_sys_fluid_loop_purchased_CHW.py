@@ -24,7 +24,10 @@ def is_hvac_sys_fluid_loop_purchased_chw(rmi_b, hvac_b_id):
     external_fluid_sources = rmi_b.get("external_fluid_source")
     if external_fluid_sources:
         for external_fluid_source in external_fluid_sources:
-            if external_fluid_source.get("type") == EXTERNAL_FLUID_SOURCE.CHILLED_WATER and external_fluid_source.get("loop") is not None:
+            if (
+                external_fluid_source.get("type") == EXTERNAL_FLUID_SOURCE.CHILLED_WATER
+                and external_fluid_source.get("loop") is not None
+            ):
                 purchased_cooling_loop_list_b.append(external_fluid_source["loop"])
 
     # Get the hvac system
