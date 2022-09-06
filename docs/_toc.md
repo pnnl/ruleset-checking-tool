@@ -79,6 +79,7 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   * [is_hvac_sys_fluid_loop_purchased_CHW](ruleset_functions/baseline_systems/baseline_hvac_sub_functions/is_hvac_sys_fluid_loop_purchased_CHW.md): Returns TRUE if the fluid loop associated with the cooling system associated with the HVAC system is attached to an external purchased chilled water loop. Returns FALSE if this is not the case. 
   * [is_hvac_sys_fan_sys_VSD](ruleset_functions/baseline_systems/baseline_hvac_sub_functions/is_hvac_sys_fan_sys_VSD.md): Returns TRUE if the HVAC system fan system is variable speed drive controlled. Returns FALSE if the HVAC system fan system is anything other than variable speed drive controlled. 
   * [are_all_terminal_heating_loops_attached_to_boiler](ruleset_functions/baseline_systems/baseline_hvac_sub_functions/are_all_terminal_heating_loops_attached_to_boiler.md): Returns TRUE if the fluid loop associated with the heating_from_loop associated with each terminal unit is attached to a boiler. Returns FALSE if this is not the case.
+  * [is_hvac_system_multizone](ruleset_functions/baseline_systems/baseline_hvac_sub_functions/is_hvac_system_multizone.md): Returns TRUE if the HVAC system serves multiple zones. Returns FALSE if the HVAC system serves a single or no zones.
 
 ## Data Tables
   * [8.4.4](data_tables/Table8-4-4.md): Minimum Nominal Efficiency Levels for Low-Voltage Dry-Type Distribution Transformers  
