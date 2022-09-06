@@ -4,9 +4,9 @@ from rct229.data import data
 from rct229.data.schema_enums import schema_enums
 from rct229.schema.config import ureg
 
-ElectricalPhase = schema_enums["ElectricalPhase"]
-SINGLE_PHASE = ElectricalPhase.SINGLE_PHASE.name
-THREE_PHASE = ElectricalPhase.THREE_PHASE.name
+ElectricalPhase = schema_enums["ElectricalPhaseOptions"]
+SINGLE_PHASE = ElectricalPhase.SINGLE_PHASE
+THREE_PHASE = ElectricalPhase.THREE_PHASE
 _table_8_4_4 = data["ashrae_90_1_prm_transformers"]
 
 kVA = ureg("kilovolt * ampere")

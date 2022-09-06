@@ -1,7 +1,5 @@
-from rct229.rule_engine.rule_base import (
-    RuleDefinitionBase,
-    RuleDefinitionListIndexedBase,
-)
+from rct229.rule_engine.rule_base import RuleDefinitionBase
+from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 from rct229.ruleset_functions.compare_schedules import (
     LEAP_YEAR_HOURS,
@@ -24,11 +22,8 @@ class Section5Rule45(RuleDefinitionListIndexedBase):
             description="The infiltration schedules are the same in the proposed RMR as in the baseline RMR.",
             list_path="ruleset_model_instances[0]",
             required_fields={"$": ["calendar"], "calendar": ["is_leap_year"]},
+            data_items={"is_leap_year": ("baseline", "calendar/is_leap_year")},
         )
-
-    def create_data(self, context, data=None):
-        rmd_b = context.baseline
-        return {"is_leap_year": rmd_b["calendar"]["is_leap_year"]}
 
     class RuleSetModelInstanceRule(RuleDefinitionListIndexedBase):
         def __init__(self):
@@ -44,7 +39,6 @@ class Section5Rule45(RuleDefinitionListIndexedBase):
             rmd_b = context.baseline
             rmd_p = context.proposed
             return {
-                **data,
                 "schedules_b": rmd_b["schedules"],
                 "schedules_p": rmd_p["schedules"],
             }
@@ -100,7 +94,6 @@ class Section5Rule45(RuleDefinitionListIndexedBase):
                         "hourly_values",
                     ),
                     mask_schedule,
-                    comparison_factor=1.0,
                     is_leap_year=data["is_leap_year"],
                 )
 

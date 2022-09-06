@@ -21,11 +21,9 @@
 
 - For each building segment in the proposed model: `building_segment_p in P_RMR.building.building_segments:`  
 
-  - Get lighting status type dictionary for building segment: `space_lighting_status_type_dict = get_lighting_status_type(building_segment_p)`  
+  - Get lighting status type dictionary for building segment: `space_lighting_status_type_dict = get_lighting_status_type(building_segment_p)`
 
-  - For each thermal block in building segment: `thermal_block_p in building_segment_p.thermal_blocks:`  
-
-    - For each zone in thermal block: `zone_p in thermal_block_p.zones:`  
+    - For each zone in a building segment: `zone_p in building_segment_p.zones:`  
 
       - For each space in zone: `space_p in zone_p.spaces:`  
 
@@ -41,7 +39,7 @@
 
         - Case 2: Else if lighting status type in space is as-designed or as-existing, and interior lighting power density in P_RMR does not match U_RMR: `else if ( space_lighting_status_type_dict[space.id] == "AS-DESIGNED OR AS-EXISTING" ) and ( total_space_LPD_p != total_space_LPD_u ): FAIL and raise_warning "LIGHTING EXISTS OR IS SUBMITTED WITH DESIGN DOCUMENTS. LIGHTING POWER DENSITY IN P_RMR DOES NOT MATCH U_RMR."`
 
-        - Case 3: Else, interior lighting power density in P_RMR does not match U_RMR: `else: CAUTION and raise_warning "LIGHTING IS NOT YET DESIGNED, OR LIGHTING IS AS-DESIGNED OR AS-EXISTING BUT MATCHES TABLE 9.5.1. LIGHTING POWER DENSITY IN P_RMR DOES NOT MATCH U_RMR."`
+        - Case 3: Else, interior lighting power density in P_RMR does not match U_RMR: `else: UNDETERMINED and raise_warning "LIGHTING IS NOT YET DESIGNED, OR LIGHTING IS AS-DESIGNED OR AS-EXISTING BUT MATCHES TABLE 9.5.1. LIGHTING POWER DENSITY IN P_RMR DOES NOT MATCH U_RMR."`
 
 **Notes:**
   1. Updated the Rule ID from 6-4 to 6-3 on 6/8/2022

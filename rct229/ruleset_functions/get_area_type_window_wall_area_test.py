@@ -48,7 +48,7 @@ TEST_RMR = {
                             "id": "hvac_1_1",
                             "cooling_system": {
                                 "id": "csys_1_1_1",
-                                "sensible_cool_capacity": 2 * POWER_THRESHOLD_100
+                                "design_sensible_cool_capacity": 2 * POWER_THRESHOLD_100
                                 + POWER_DELTA,
                             },
                         },
@@ -57,7 +57,7 @@ TEST_RMR = {
                             "id": "hvac_1_2",
                             "heating_system": {
                                 "id": "hsys_1_2_1",
-                                "heat_capacity": SYSTEM_MIN_HEATING_OUTPUT
+                                "design_capacity": SYSTEM_MIN_HEATING_OUTPUT
                                 + POWER_DELTA,
                             },
                         },
@@ -174,7 +174,7 @@ TEST_RMR = {
                             "id": "hvac_2_1",
                             "cooling_system": {
                                 "id": "csys_2_1_1",
-                                "sensible_cool_capacity": POWER_THRESHOLD_100
+                                "design_sensible_cool_capacity": POWER_THRESHOLD_100
                                 + POWER_DELTA,
                             },
                         },
@@ -183,7 +183,7 @@ TEST_RMR = {
                             "id": "hvac_2_2",
                             "heating_system": {
                                 "id": "csys_2_2_1",
-                                "heat_capacity": POWER_THRESHOLD_100 + POWER_DELTA,
+                                "design_capacity": POWER_THRESHOLD_100 + POWER_DELTA,
                             },
                         },
                     ],
@@ -289,7 +289,7 @@ TEST_RMR = {
                             "id": "hvac_3_1",
                             "cooling_system": {
                                 "id": "csys_3_1_1",
-                                "sensible_cool_capacity": POWER_THRESHOLD_100
+                                "design_sensible_cool_capacity": POWER_THRESHOLD_100
                                 + POWER_DELTA,
                             },
                         }
