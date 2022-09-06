@@ -53,5 +53,6 @@ def are_all_terminal_heating_loops_attached_to_boiler(rmi_b, terminal_unit_id_li
                 break
         else:
             are_all_terminal_heating_loops_attached_to_boiler_flag = False
+            break
 
     return are_all_terminal_heating_loops_attached_to_boiler_flag
