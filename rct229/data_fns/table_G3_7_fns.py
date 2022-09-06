@@ -1,8 +1,9 @@
 from rct229.data import data
+from rct229.data.schema_enums import schema_enums
 from rct229.data_fns.table_utils import find_osstd_table_entry
 from rct229.schema.config import ureg
 
-# This dictionary maps the LightingSpaceType2019ASHRAE901TG37 enumerations to
+# This dictionary maps the LightingSpaceOptions2019ASHRAE901TG37 enumerations to
 # the corresponding lpd_space_type values in the OSSTD file
 # ashrae_90_1_prm_2019.prm_interior_lighting.json
 lighting_space_enumeration_to_lpd_space_type_map = {
@@ -113,17 +114,25 @@ lighting_space_enumeration_to_lpd_space_type_map = {
     "WAREHOUSE_STORAGE_AREA_SMALLER_HAND_CARRIED_ITEMS": "warehouse - fine storage",
 }
 
+FULL_AUTO_ON = schema_enums["LightingOccupancyControlOptions"].FULL_AUTO_ON
+PARTIAL_AUTO_ON = schema_enums["LightingOccupancyControlOptions"].PARTIAL_AUTO_ON
+MANUAL_ON = schema_enums["LightingOccupancyControlOptions"].MANUAL_ON
+OTHER = schema_enums["LightingOccupancyControlOptions"].OTHER
+NONE = schema_enums["LightingOccupancyControlOptions"].NONE
+
 # ATRIUM_LOW_MEDIUM
-def table_G3_7_lookup(lighting_space_type, space_height):
+def table_G3_7_lookup(lighting_space_type, space_height, space_area):
     """Returns the lighting power density for a space as
     required by ASHRAE 90.1 Table G3.7
 
     Parameters
     ----------
     lighting_space_type : str
-        One of the LightingSpaceType2019ASHRAE901TG37 enumeration values
+        One of the LightingSpaceOptions2019ASHRAE901TG37 enumeration values
     space_height : Quantity
         The height of the space
+    space_area: Quantity
+        The area of the space
 
     Returns
     -------
@@ -142,11 +151,16 @@ def table_G3_7_lookup(lighting_space_type, space_height):
     watts_per_ft2 = osstd_entry["w/ft^2"] * ureg("watt / foot**2")
     # Note: the units for the w/ft fields should actually be W/ft^3
     # This might be None, so make the Quantity below instead
-    watts_per_ft3 = osstd_entry["w/ft"]
+    watts_per_ft = osstd_entry["w/ft"]
 
-    if watts_per_ft3 is None:
+    if watts_per_ft is None:
         lpd = watts_per_ft2
     else:
-        lpd = watts_per_ft2 + watts_per_ft3 * ureg("watt / foot**3") * space_height
+        lpd = (
+            watts_per_ft2
+            + watts_per_ft * ureg("watt / foot") * space_height / space_area
+        )
 
-    return {"lpd": lpd}
+    control_credit = osstd_entry["occup_sensor_auto_on_svgs"]
+
+    return {"lpd": lpd, "control_credit": control_credit}

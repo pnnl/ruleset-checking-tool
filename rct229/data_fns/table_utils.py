@@ -48,7 +48,7 @@ def find_osstd_table_entry(match_field_name_value_pairs, osstd_table):
     )
     assert (
         len(matching_entries) == 1
-    ), f"Not exactly one match in OSSTD for {match_field_name_value_pairs}"
+    ), f"Not exactly one match in OSSTD for {match_field_name_value_pairs}, found {len(matching_entries)} instead."
 
     matching_entry = matching_entries[0]
     assert type(matching_entry) is dict
@@ -94,15 +94,13 @@ def check_enumeration_to_osstd_match_field_value_map(
     dict
         The matching table entry
     """
-    schema_enum = schema_enums[enum_type]
-    for e in schema_enum:
-        e_name = e.name
-        if e_name in exclude_enum_names:
+    for e in schema_enums[enum_type].get_list():
+        if e in exclude_enum_names:
             continue
 
         # Make sure each space type in the enumeration is in our map
-        match_field_value = enumeration_to_match_field_value_map[e_name]
-        assert match_field_value is not None, f"{e_name} is not in the map"
+        match_field_value = enumeration_to_match_field_value_map[e]
+        assert match_field_value is not None, f"{e} is not in the map"
 
         # Make sure there is a corresponding entry in the OSSTD table
         # find_osstd_table_entry() will throw if not
