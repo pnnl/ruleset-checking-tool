@@ -77,6 +77,7 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   * [are_all_terminal_fans_null](ruleset_functions/baseline_systems/baseline_hvac_sub_functions/are_all_terminal_fans_null.md): Returns TRUE if the fan data element associated with all terminal units input to this function are equal to Null. It returns FALSE if any terminal unit has a fan data element not equal to Null.
   * [does_each_zone_have_only_one_terminal](ruleset_functions/baseline_systems/baseline_hvac_sub_functions/does_each_zone_have_only_one_terminal.md): Returns TRUE if each zone input to this function only has one terminal unit. It returns FALSE if any zone has more than one terminal unit. 
   * [is_hvac_sys_fluid_loop_purchased_CHW](ruleset_functions/baseline_systems/baseline_hvac_sub_functions/is_hvac_sys_fluid_loop_purchased_CHW.md): Returns TRUE if the fluid loop associated with the cooling system associated with the HVAC system is attached to an external purchased chilled water loop. Returns FALSE if this is not the case. 
+  * [are_all_terminal_heating_loops_attached_to_boiler](ruleset_functions/baseline_systems/baseline_hvac_sub_functions/are_all_terminal_heating_loops_attached_to_boiler.md): Returns TRUE if the fluid loop associated with the heating_from_loop associated with each terminal unit is attached to a boiler. Returns FALSE if this is not the case.
 
 ## Data Tables
   * [8.4.4](data_tables/Table8-4-4.md): Minimum Nominal Efficiency Levels for Low-Voltage Dry-Type Distribution Transformers  
