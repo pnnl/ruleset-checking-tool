@@ -181,7 +181,7 @@ def schema_validate_rmr(rmr_obj):
         SCHEMA_ENUM_KEY: schema_enum,
         SCHEMA_T24_ENUM_KEY: schema_t24_enum,
         SCHEMA_RESNET_ENUM_KEY: schema_resnet_enum,
-        SCHEMA_OUTPUT_KEY: schema_output
+        SCHEMA_OUTPUT_KEY: schema_output,
     }
     resolver = jsonschema.RefResolver.from_schema(schema, store=schema_store)
 
