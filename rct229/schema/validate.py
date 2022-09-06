@@ -10,9 +10,13 @@ file_dir = os.path.dirname(__file__)
 SCHEMA_KEY = "ASHRAE229.schema.json"
 SCHEMA_ENUM_KEY = "Enumerations2019ASHRAE901.schema.json"
 SCHEMA_RESNET_ENUM_KEY = "EnumerationsRESNET.schema.json"
+SCHEMA_T24_ENUM_KEY = "Enumerations2019T24.schema.json"
+SCHEMA_OUTPUT_KEY = "Output2019ASHRAE901.schema.json"
 SCHEMA_PATH = os.path.join(file_dir, SCHEMA_KEY)
 SCHEMA_ENUM_PATH = os.path.join(file_dir, SCHEMA_ENUM_KEY)
+SCHEMA_T24_ENUM_PATH = os.path.join(file_dir, SCHEMA_T24_ENUM_KEY)
 SCHEMA_RESNET_ENUM_PATH = os.path.join(file_dir, SCHEMA_RESNET_ENUM_KEY)
+SCHEMA_OUTPUT_PATH = os.path.join(file_dir, SCHEMA_OUTPUT_KEY)
 
 
 def check_unique_ids_in_ruleset_model_instances(rmd):
@@ -164,14 +168,20 @@ def schema_validate_rmr(rmr_obj):
         schema = json.load(json_file)
     with open(SCHEMA_ENUM_PATH) as json_file:
         schema_enum = json.load(json_file)
+    with open(SCHEMA_T24_ENUM_PATH) as json_file:
+        schema_t24_enum = json.load(json_file)
     with open(SCHEMA_RESNET_ENUM_PATH) as json_file:
         schema_resnet_enum = json.load(json_file)
+    with open(SCHEMA_OUTPUT_PATH) as json_file:
+        schema_output = json.load(json_file)
 
     # Create a resolver which maps schema references to schema objects
     schema_store = {
         SCHEMA_KEY: schema,
         SCHEMA_ENUM_KEY: schema_enum,
+        SCHEMA_T24_ENUM_KEY: schema_t24_enum,
         SCHEMA_RESNET_ENUM_KEY: schema_resnet_enum,
+        SCHEMA_OUTPUT_KEY: schema_output,
     }
     resolver = jsonschema.RefResolver.from_schema(schema, store=schema_store)
 
