@@ -2887,7 +2887,7 @@
                 "pump_power_per_flow_rate": {
                     "description": "Total design pump power divided by the loop design flow rate",
                     "type": "number",
-                    "units": "W/s-L",
+                    "units": "W-s/L",
                     "notes": "This is the pump power per flow rate for the entire pumping system on the current FluidLoop. The power and flow rate should be for the current FluidLoop only and does not include power and flow rate in any child loops."
                 },
                 "child_loops": {
