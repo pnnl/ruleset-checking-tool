@@ -62,7 +62,7 @@ class Section21Rule7(RuleDefinitionListIndexedBase):
     def list_filter(self, context_item, data):
         fluid_loop_b = context_item.baseline
         loop_boiler_dict = data["loop_boiler_dict"]
-        return fluid_loop_b in loop_boiler_dict.keys()
+        return fluid_loop_b["id"] in loop_boiler_dict.keys()
 
     class HeatingFluidLoopRule(RuleDefinitionBase):
         def __init__(self):
