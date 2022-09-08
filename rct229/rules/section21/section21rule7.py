@@ -2,9 +2,10 @@ from rct229.data.schema_enums import schema_enums
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
-from rct229.utils.assertions import getattr_
 from rct229.schema.config import ureg
+from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all
+from rct229.utils.std_comparisons import std_equal
 
 APPLICABLE_SYS_TYPES = [
     "SYS-1",
@@ -17,7 +18,7 @@ APPLICABLE_SYS_TYPES = [
     "SYS-11.2A",
     "SYS-12A",
 ]
-DESIGN_SUPPLY_TEMP = 180. * ureg("degF")
+DESIGN_SUPPLY_TEMP = 180 * ureg("degF")
 DESIGN_RETURN_TEMP = 130 * ureg("degF")
 
 
@@ -86,6 +87,12 @@ class Section21Rule7(RuleDefinitionListIndexedBase):
         def rule_check(self, context, calc_vals=None, data=None):
             design_supply_temperature = calc_vals["design_supply_temperature"]
             design_return_temperature = calc_vals["design_return_temperature"]
+            # return std_equal(
+            #     design_supply_temperature, DESIGN_SUPPLY_TEMP
+            # ) and std_equal(
+            #     design_return_temperature, DESIGN_RETURN_TEMP
+            # )
+
             return (
                 design_supply_temperature == DESIGN_SUPPLY_TEMP
                 and design_return_temperature == DESIGN_RETURN_TEMP
