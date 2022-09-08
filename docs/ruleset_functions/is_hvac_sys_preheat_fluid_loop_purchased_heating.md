@@ -13,7 +13,7 @@
 
 ## Logic:   
 - Set is_hvac_sys_preheat_fluid_loop_purchased_heating equal to FALSE: `is_hvac_sys_preheat_fluid_loop_purchased_heating = FALSE`  
-- Check if RMR is not modeled with external fluid source: `if RMR.RuleModelInstance.external_fluid_source != Null:`  
+- Check if RMR is modeled with external fluid source: `if RMR.RuleModelInstance.external_fluid_source != Null:`  
     - For each external fluid source in RMR: `for external_fluid_source.id in RMR.RuleModelInstance.external_fluid_source:`  
         - Check if external fluid source is heating type: `if external_fluid_source.id.type == "HOT_WATER" OR external_fluid_source.id.type == "STEAM":`    
             - Add the associated loop to the purchased_heating_loop_list_b list: `purchased_heating_loop_list_b = purchased_heating_loop_list_b.append (external_fluid_source.id.loop.id)`   
