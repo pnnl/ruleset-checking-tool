@@ -198,6 +198,7 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   * [6-9](section6/Rule6-9.md): Proposed building is modeled with other programmable lighting controls through a 10% schedule reduction in buildings less than 5,000sq.ft.  
 
 ## Section 10 - Airside systems
+  * [10-1](section10/10-1.md): The proposed design includes humidification and the baseline building design has been modeled with adiabatic humidification if proposed design does not comply with 90.1-2019 Section 6.5.2.4 and non-adiabatic humidification otherwise.
   * [10-3](section10/10-3.md): For systems serving computer rooms, the baseline building design shall not have reheat for the purpose of dehumidification.
   * [10-4](section10/10-4.md): Baseline HVAC systems using fossil fuel shall be modeled using natural gas. Except where natural gas is not available for the proposed building site, propane shall be used as the heating fuel.
   * [10-6](section10/10-6.md): For HVAC systems designed, mechanical cooling equipment efficiencies shall be adjusted to remove the supply fan energy from the efficiency rating.
