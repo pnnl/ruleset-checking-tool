@@ -32,7 +32,7 @@
 
   - For each area type in window wall areas dictionary: `for area_type_p in window_wall_areas_dictionary_p.keys():`
   
-    - Calculate total fenestration area for B_RMR: `total_fenestration_area_p += window_wall_areas_dictionary_b[area_type_p]["TOTAL_WINDOW_AREA"]`
+    - Calculate total fenestration area for B_RMR: `total_fenestration_area_p += window_wall_areas_dictionary_p[area_type_p]["TOTAL_WINDOW_AREA"]`
 
 - Get surface conditioning category dictionary for B_RMR: `scc_dictionary_b = get_surface_conditioning_category(B_RMR)`
 
@@ -62,7 +62,7 @@
 
           - Case 1: For each surface, if total fenestration area in B_RMR is in the same proportion as in P_RMR: `if total_fenestration_area_surface_b / total_fenestration_area_b == total_fenestration_area_surface_p / total_fenestration_area_p: PASS`
 
-          - Case 2: Else: `else: FAIL and show_message "HE VERTICAL FENESTRATION IS NOT DISTRIBUTED ACROSS BASELINE OPAQUE SURFACES IN THE SAME PROPORTION AS IN THE PROPOSED DESIGN. VERIFY IF ENVELOPE IS EXISTING OR ALTERED AND CAN BE EXCLUDED FROM THIS CHECK."`
+          - Case 2: Else: `else: FAIL and show_message "THE VERTICAL FENESTRATION IS NOT DISTRIBUTED ACROSS BASELINE OPAQUE SURFACES IN THE SAME PROPORTION AS IN THE PROPOSED DESIGN. VERIFY IF ENVELOPE IS EXISTING OR ALTERED AND CAN BE EXCLUDED FROM THIS CHECK."`
 
 **[Back](../_toc.md)**
 
