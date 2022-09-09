@@ -116,15 +116,15 @@
                         "fluid_loops": [
                             {
                                 "id": "Boiler Loop 1",
-                                "type": "HEATING",
+                                "type": "HEATING"
+                            },
+                            {
+                                "id": "Chiller Loop 1",
+                                "type": "COOLING",
                                 "cooling_or_condensing_design_and_control": {
                                     "id": "CCDC 1",
                                     "design_supply_temperature": 6.666666666666686
                                 }
-                            },
-                            {
-                                "id": "Chiller Loop 1",
-                                "type": "COOLING"
                             }
                         ]
                     }
@@ -249,15 +249,15 @@
                         "fluid_loops": [
                             {
                                 "id": "Boiler Loop 1",
-                                "type": "HEATING",
+                                "type": "HEATING"
+                            },
+                            {
+                                "id": "Chiller Loop 1",
+                                "type": "COOLING",
                                 "cooling_or_condensing_design_and_control": {
                                     "id": "CCDC 1",
                                     "design_supply_temperature": 10.000000000000057
                                 }
-                            },
-                            {
-                                "id": "Chiller Loop 1",
-                                "type": "COOLING"
                             }
                         ]
                     }
@@ -382,15 +382,15 @@
                         "fluid_loops": [
                             {
                                 "id": "Boiler Loop 1",
-                                "type": "HEATING",
+                                "type": "HEATING"
+                            },
+                            {
+                                "id": "Chiller Loop 1",
+                                "type": "COOLING",
                                 "cooling_or_condensing_design_and_control": {
                                     "id": "CCDC 1",
                                     "design_supply_temperature": 13.333333333333371
                                 }
-                            },
-                            {
-                                "id": "Chiller Loop 1",
-                                "type": "COOLING"
                             }
                         ]
                     }
@@ -515,15 +515,15 @@
                         "fluid_loops": [
                             {
                                 "id": "Boiler Loop 1",
-                                "type": "HEATING",
+                                "type": "HEATING"
+                            },
+                            {
+                                "id": "Chiller Loop 1",
+                                "type": "COOLING",
                                 "cooling_or_condensing_design_and_control": {
                                     "id": "CCDC 1",
                                     "design_supply_temperature": 15.5555555555556
                                 }
-                            },
-                            {
-                                "id": "Chiller Loop 1",
-                                "type": "COOLING"
                             }
                         ]
                     }
@@ -653,15 +653,15 @@
                         "fluid_loops": [
                             {
                                 "id": "Boiler Loop 1",
-                                "type": "HEATING",
+                                "type": "HEATING"
+                            },
+                            {
+                                "id": "Chiller Loop 1",
+                                "type": "COOLING",
                                 "cooling_or_condensing_design_and_control": {
                                     "id": "CCDC 1",
                                     "temperature_reset_type": "OUTSIDE_AIR_RESET"
                                 }
-                            },
-                            {
-                                "id": "Chiller Loop 1",
-                                "type": "COOLING"
                             }
                         ]
                     }
@@ -791,15 +791,15 @@
                         "fluid_loops": [
                             {
                                 "id": "Boiler Loop 1",
-                                "type": "HEATING",
+                                "type": "HEATING"
+                            },
+                            {
+                                "id": "Chiller Loop 1",
+                                "type": "COOLING",
                                 "cooling_or_condensing_design_and_control": {
                                     "id": "CCDC 1",
                                     "temperature_reset_type": "CONSTANT"
                                 }
-                            },
-                            {
-                                "id": "Chiller Loop 1",
-                                "type": "COOLING"
                             }
                         ]
                     }
@@ -929,7 +929,11 @@
                         "fluid_loops": [
                             {
                                 "id": "Boiler Loop 1",
-                                "type": "HEATING",
+                                "type": "HEATING"
+                            },
+                            {
+                                "id": "Chiller Loop 1",
+                                "type": "COOLING",
                                 "cooling_or_condensing_design_and_control": {
                                     "id": "CCDC 1",
                                     "outdoor_high_for_loop_supply_temperature_reset": 26.666666666666686,
@@ -937,10 +941,6 @@
                                     "loop_supply_temperature_at_outdoor_high": 6.666666666666686,
                                     "loop_supply_temperature_at_outdoor_low": 12.222222222222285
                                 }
-                            },
-                            {
-                                "id": "Chiller Loop 1",
-                                "type": "COOLING"
                             }
                         ]
                     }
@@ -1070,7 +1070,11 @@
                         "fluid_loops": [
                             {
                                 "id": "Boiler Loop 1",
-                                "type": "HEATING",
+                                "type": "HEATING"
+                            },
+                            {
+                                "id": "Chiller Loop 1",
+                                "type": "COOLING",
                                 "cooling_or_condensing_design_and_control": {
                                     "id": "CCDC 1",
                                     "outdoor_high_for_loop_supply_temperature_reset": 32.222222222222285,
@@ -1078,10 +1082,6 @@
                                     "loop_supply_temperature_at_outdoor_high": 12.222222222222285,
                                     "loop_supply_temperature_at_outdoor_low": 17.77777777777783
                                 }
-                            },
-                            {
-                                "id": "Chiller Loop 1",
-                                "type": "COOLING"
                             }
                         ]
                     }
