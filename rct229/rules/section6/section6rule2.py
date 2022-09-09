@@ -3,6 +3,7 @@ from rct229.data_fns.table_9_6_1_fns import table_9_6_1_lookup
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
+from rct229.utils.pint_utils import CalcQ
 from rct229.schema.config import ureg
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.pint_utils import ZERO, pint_sum
@@ -74,9 +75,15 @@ class Section6Rule2(RuleDefinitionListIndexedBase):
             )
 
             return {
-                "lighting_power_allowance_p": lighting_power_allowance_p,
-                "space_lighting_power_per_area_p": space_lighting_power_per_area_p,
-                "space_lighting_power_per_area_u": space_lighting_power_per_area_u,
+                "lighting_power_allowance_p": CalcQ(
+                    "power_density", lighting_power_allowance_p
+                ),
+                "space_lighting_power_per_area_p": CalcQ(
+                    "power_density", space_lighting_power_per_area_p
+                ),
+                "space_lighting_power_per_area_u": CalcQ(
+                    "power_density", space_lighting_power_per_area_u
+                ),
             }
 
         def rule_check(self, context, calc_vals=None, data=None):
