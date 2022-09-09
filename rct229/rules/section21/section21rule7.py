@@ -69,6 +69,13 @@ class Section21Rule7(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section21Rule7.HeatingFluidLoopRule, self).__init__(
                 rmrs_used=UserBaselineProposedVals(False, True, False),
+                required_fields={
+                    "$": ["heating_design_and_control"],
+                    "heating_design_and_control": [
+                        "design_supply_temperature",
+                        "design_return_temperature",
+                    ],
+                },
             )
 
         def get_calc_vals(self, context, data=None):
