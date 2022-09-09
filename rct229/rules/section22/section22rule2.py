@@ -1,8 +1,6 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
-from rct229.rule_engine.rule_list_indexed_base import \
-    RuleDefinitionListIndexedBase
-from rct229.rule_engine.user_baseline_proposed_vals import \
-    UserBaselineProposedVals
+from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
+from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 from rct229.schema.config import ureg
 from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all
@@ -85,6 +83,12 @@ class Section22Rule2(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section22Rule2.ChillerFluidLoopRule, self).__init__(
                 rmrs_used=UserBaselineProposedVals(False, True, False),
+                required_fields={
+                    "$": ["cooling_or_condensing_design_and_control"],
+                    "cooling_or_condensing_design_and_control": [
+                        "design_return_temperature"
+                    ],
+                },
             )
 
         def get_calc_vals(self, context, data=None):
@@ -97,5 +101,7 @@ class Section22Rule2(RuleDefinitionListIndexedBase):
 
         def rule_check(self, context, calc_vals=None, data=None):
             design_return_temperature = calc_vals["design_return_temperature"]
-            # return design_return_temperature == DESIGN_RETURN_TEMP
-            return std_equal(design_return_temperature, DESIGN_RETURN_TEMP)
+            return std_equal(
+                design_return_temperature.to(ureg.kelvin),
+                DESIGN_RETURN_TEMP.to(ureg.kelvin),
+            )
