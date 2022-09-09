@@ -4,6 +4,7 @@ from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedV
 from rct229.schema.config import ureg
 from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all
+from rct229.utils.std_comparisons import std_equal
 
 APPLICABLE_SYS_TYPES = [
     "SYS-7",
@@ -94,4 +95,5 @@ class Section22Rule1(RuleDefinitionListIndexedBase):
 
         def rule_check(self, context, calc_vals=None, data=None):
             design_supply_temperature = calc_vals["design_supply_temperature"]
-            return design_supply_temperature == DESIGN_SUPPLY_TEMP
+            # return design_supply_temperature == DESIGN_SUPPLY_TEMP
+            return std_equal(design_supply_temperature, DESIGN_SUPPLY_TEMP)
