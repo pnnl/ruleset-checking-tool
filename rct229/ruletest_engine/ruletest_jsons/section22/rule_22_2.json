@@ -123,7 +123,7 @@
                                 "type": "COOLING",
                                 "cooling_or_condensing_design_and_control": {
                                     "id": "CCDC 1",
-                                    "design_supply_temperature": 13.333333333333371
+                                    "design_return_temperature": 13.333333333333371
                                 }
                             }
                         ]
@@ -256,7 +256,7 @@
                                 "type": "COOLING",
                                 "cooling_or_condensing_design_and_control": {
                                     "id": "CCDC 1",
-                                    "design_supply_temperature": 15.5555555555556
+                                    "design_return_temperature": 15.5555555555556
                                 }
                             }
                         ]
