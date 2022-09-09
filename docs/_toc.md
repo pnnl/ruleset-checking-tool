@@ -38,6 +38,7 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
 
 ### HVAC type functions
   * [is_baseline_system_1](ruleset_functions/baseline_systems/is_baseline_system_1.md): Get either Sys-1, Sys-1a, Sys-1b, Sys-1c, or Not_Sys_1 string output which indicates whether the HVAC system is ASHRAE 90.1 2019 Appendix G system 1 (PTAC), system 1a (system 1 with purchased CHW), system 1b (system 1 with purchased heating), system 1c (system 1 with purchased CHW and purchased HW).
+  * [is_baseline_system_1c](ruleset_functions/baseline_systems/is_baseline_system_1c.md): Returns true or false to whether the baseline system type is 1c (system 1 with purchased CHW and purchased HW).
   * [is_baseline_system_2](ruleset_functions/baseline_systems/is_baseline_system_2.md): Get either Sys-2 or Not_Sys_2 string output which indicates whether the HVAC system is ASHRAE 90.1 2019 Appendix G system 2 (PTHP).
   * [is_baseline_system_3](ruleset_functions/baseline_systems/is_baseline_system_3.md): Get either Sys-3, Sys-3a, Sys-3b, Sys-3c, or Not_Sys_3 string output which indicates whether the HVAC system is ASHRAE 90.1 2019 Appendix G system 3 (PSZ), system 3a (system 3 with purchased CHW), system 3b (system 3 with purchased heating), system 3c (system 3 with purchased CHW and purchased HW).
   * [is_baseline_system_4](ruleset_functions/baseline_systems/is_baseline_system_4.md): Get either Sys-4 or Not_Sys_4 string output which indicates whether the HVAC system is ASHRAE 90.1 2019 Appendix G system 4 (PSZ-HP).
