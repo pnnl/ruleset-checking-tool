@@ -33,17 +33,6 @@ class Section21Rule9(RuleDefinitionListIndexedBase):
             list_path="fluid_loops[*]",
         )
 
-    def create_data(self, context, data):
-        rmi_b = context.baseline
-        boilers = find_all("$.boilers[*]", rmi_b)
-        loop_boiler_dict = {}
-        for boiler_b in boilers:
-            loop_id = getattr_(boiler_b, "boiler", "loop")
-            if not loop_id in loop_boiler_dict.keys():
-                loop_boiler_dict[loop_id] = []
-            loop_boiler_dict[loop_id].append(boiler_b)
-        return {"loop_boiler_dict": loop_boiler_dict}
-
     def is_applicable(self, context, data=None):
         rmi_b = context.baseline
         # FIXME: replace with baseline_system_types = get_baseline_system_types(rmi_b) when get_baseline_system_types
@@ -57,6 +46,17 @@ class Section21Rule9(RuleDefinitionListIndexedBase):
             [key in APPLICABLE_SYS_TYPES for key in baseline_system_types.keys()]
         )
 
+    def create_data(self, context, data):
+        rmi_b = context.baseline
+        boilers = find_all("$.boilers[*]", rmi_b)
+        loop_boiler_dict = {}
+        for boiler_b in boilers:
+            loop_id = getattr_(boiler_b, "boilers", "loop")
+            if loop_id not in loop_boiler_dict.keys():
+                loop_boiler_dict[loop_id] = []
+            loop_boiler_dict[loop_id].append(boiler_b)
+        return {"loop_boiler_dict": loop_boiler_dict}
+
     def list_filter(self, context_item, data):
         fluid_loop_b = context_item.baseline
         loop_boiler_dict = data["loop_boiler_dict"]
@@ -66,6 +66,9 @@ class Section21Rule9(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section21Rule9.HeatingFluidLoopRule, self).__init__(
                 rmrs_used=UserBaselineProposedVals(False, True, False),
+                required_fields={
+                    "$": ["pump_power_per_flow_rate"],
+                },
             )
 
         def get_calc_vals(self, context, data=None):
