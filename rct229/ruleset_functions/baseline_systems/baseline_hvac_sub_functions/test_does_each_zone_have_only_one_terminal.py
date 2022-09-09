@@ -54,8 +54,8 @@ def test__zone_have_two_terminal():
 
 
 def test__zone_have_empty_terminal():
-    assert does_each_zone_have_only_one_terminal(TEST_RMD, ["zone_3"]) == True
+    assert does_each_zone_have_only_one_terminal(TEST_RMD, ["zone_3"]) == False
 
 
 def test__zone_have_no_terminal():
-    assert does_each_zone_have_only_one_terminal(TEST_RMD, ["zone_4"]) == True
+    assert does_each_zone_have_only_one_terminal(TEST_RMD, ["zone_4"]) == False
