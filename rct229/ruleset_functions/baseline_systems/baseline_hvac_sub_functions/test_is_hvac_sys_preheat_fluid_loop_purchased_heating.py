@@ -15,7 +15,7 @@ TEST_RMD = {
                             "id": "hvac_1",
                             "preheat_system": {
                                 "id": "preheat_system_1",
-                                "hot_water_loop": "fluid_loop_1",
+                                "hot_water_loop": "HW_Loop_1",
                             },
                         },
                         {
@@ -23,7 +23,7 @@ TEST_RMD = {
                             "id": "hvac_2",
                             "preheat_system": {
                                 "id": "preheat_system_2",
-                                "hot_water_loop": "fluid_loop_2",
+                                "hot_water_loop": "ST_Loop_1",
                             },
                         },
                         {
@@ -31,7 +31,7 @@ TEST_RMD = {
                             "id": "hvac_3",
                             "preheat_system": {
                                 "id": "preheat_system_3",
-                                "hot_water_loop": "HW_Loop_1",
+                                "hot_water_loop": "CHW_Loop_1",
                             },
                         },
                         {
@@ -42,6 +42,11 @@ TEST_RMD = {
                 }
             ],
         }
+    ],
+    "fluid_loops": [
+        {"id": "HW_Loop_1", "type": "HEATING"},
+        {"id": "ST_Loop_1", "type": "HEATING"},
+        {"id": "CHW_Loop_1", "type": "COOLING"},
     ],
     "external_fluid_source": [
         {"id": "fluid_loop_1", "loop": "HW_Loop_1", "type": "HOT_WATER"},
