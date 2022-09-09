@@ -4,9 +4,11 @@ import importlib
 __all__ = [
     "section21rule3",
     "section21rule4",
+    "section21rule6",
     "section21rule11",
     "section21rule12",
     "section21rule13",
+    "section21rule17",
     "section21rule18",
 ]
 

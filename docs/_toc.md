@@ -198,6 +198,7 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
 
 ## Section 10 - Airside systems
   * [10-3](section10/10-3.md): For systems serving computer rooms, the baseline building design shall not have reheat for the purpose of dehumidification.
+  * [10-4](section10/10-4.md): Baseline HVAC systems using fossil fuel shall be modeled using natural gas. Except where natural gas is not available for the proposed building site, propane shall be used as the heating fuel.
   * [10-6](section10/10-6.md): For HVAC systems designed, mechanical cooling equipment efficiencies shall be adjusted to remove the supply fan energy from the efficiency rating.
   * [10-7](section10/10-7.md): Baseline shall be modeled with the COPnfcooling HVAC system efficiency per Tables G3.5.1-G3.5.6.  Where multiple HVAC zones or residential spaces are combined into a single thermal block the cooling efficiencies (for baseline HVAC System Types 3 and 4) shall be based on the  equipment capacity of the thermal block divided by the number of HVAC zones or residential spaces.
   * [10-9](section10/10-9.md): Where multiple HVAC zones or residential spaces are combined into a single thermal block, baseline HVAC System Types 5 or 6 efficiencies shall be based on the cooling equipment capacity of a single floor.

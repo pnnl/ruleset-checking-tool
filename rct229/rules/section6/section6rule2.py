@@ -5,7 +5,7 @@ from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedB
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 from rct229.schema.config import ureg
 from rct229.utils.jsonpath_utils import find_all
-from rct229.utils.pint_utils import ZERO, pint_sum
+from rct229.utils.pint_utils import ZERO, CalcQ, pint_sum
 
 GUEST_ROOM = schema_enums["LightingSpaceOptions2019ASHRAE901TG37"].GUEST_ROOM
 DORMITORY_LIVING_QUARTERS = schema_enums[
@@ -74,9 +74,15 @@ class Section6Rule2(RuleDefinitionListIndexedBase):
             )
 
             return {
-                "lighting_power_allowance_p": lighting_power_allowance_p,
-                "space_lighting_power_per_area_p": space_lighting_power_per_area_p,
-                "space_lighting_power_per_area_u": space_lighting_power_per_area_u,
+                "lighting_power_allowance_p": CalcQ(
+                    "power_density", lighting_power_allowance_p
+                ),
+                "space_lighting_power_per_area_p": CalcQ(
+                    "power_density", space_lighting_power_per_area_p
+                ),
+                "space_lighting_power_per_area_u": CalcQ(
+                    "power_density", space_lighting_power_per_area_u
+                ),
             }
 
         def rule_check(self, context, calc_vals=None, data=None):
