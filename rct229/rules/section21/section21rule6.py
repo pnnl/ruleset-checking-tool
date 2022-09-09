@@ -4,6 +4,7 @@ from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedB
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all
+from rct229.utils.pint_utils import ZERO
 
 APPLICABLE_SYS_TYPES = [
     "SYS-1",
@@ -108,13 +109,15 @@ class Section21Rule6(RuleDefinitionListIndexedBase):
             boiler_2_operation_upper_limit = calc_vals["boiler_2_operation_upper_limit"]
             boiler_2_rated_capacity = calc_vals["boiler_2_rated_capacity"]
             return (
-                boiler_1_operation_lower_limit == 0
+                boiler_1_operation_lower_limit == ZERO.POWER
                 and boiler_1_operation_upper_limit == boiler_1_rated_capacity
-                and boiler_2_operation_lower_limit == boiler_2_rated_capacity
-                and boiler_2_operation_upper_limit == boiler_2_rated_capacity * 2
+                and boiler_2_operation_lower_limit == boiler_1_rated_capacity
+                and boiler_2_operation_upper_limit
+                == boiler_1_rated_capacity + boiler_2_rated_capacity
             ) or (
-                boiler_2_operation_lower_limit == 0
+                boiler_2_operation_lower_limit == ZERO.POWER
                 and boiler_2_operation_upper_limit == boiler_2_rated_capacity
-                and boiler_1_operation_lower_limit == boiler_1_rated_capacity
-                and boiler_1_operation_upper_limit == boiler_1_rated_capacity * 2
+                and boiler_1_operation_lower_limit == boiler_2_rated_capacity
+                and boiler_1_operation_upper_limit
+                == boiler_2_rated_capacity + boiler_1_rated_capacity
             )
