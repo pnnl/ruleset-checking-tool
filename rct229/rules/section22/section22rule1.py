@@ -83,6 +83,12 @@ class Section22Rule1(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section22Rule1.ChillerFluidLoopRule, self).__init__(
                 rmrs_used=UserBaselineProposedVals(False, True, False),
+                required_fields={
+                    "$": ["cooling_or_condensing_design_and_control"],
+                    "cooling_or_condensing_design_and_control": [
+                        "design_supply_temperature"
+                    ],
+                },
             )
 
         def get_calc_vals(self, context, data=None):
@@ -95,5 +101,7 @@ class Section22Rule1(RuleDefinitionListIndexedBase):
 
         def rule_check(self, context, calc_vals=None, data=None):
             design_supply_temperature = calc_vals["design_supply_temperature"]
-            # return design_supply_temperature == DESIGN_SUPPLY_TEMP
-            return std_equal(design_supply_temperature, DESIGN_SUPPLY_TEMP)
+            return std_equal(
+                design_supply_temperature.to(ureg.kelvin),
+                DESIGN_SUPPLY_TEMP.to(ureg.kelvin),
+            )
