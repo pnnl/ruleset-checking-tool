@@ -27,7 +27,9 @@ def is_hvac_sys_fluid_loop_attached_to_chiller(rmi_b, hvac_b_id):
     """
     is_hvac_sys_fluid_loop_attached_to_chiller_flag = False
     chillers = find_all("$.chillers[*]", rmi_b)
-    cooling_loop_ids = [getattr_(chiller_b, "chiller", "cooling_loop") for chiller_b in chillers]
+    cooling_loop_ids = [
+        getattr_(chiller_b, "chiller", "cooling_loop") for chiller_b in chillers
+    ]
 
     # Get the hvac system
     hvac_b = find_exactly_one_with_field_value(
