@@ -32,8 +32,7 @@ def is_hvac_sys_fan_sys_vsd(rmi_b, hvac_b_id):
     fan_system = hvac_b.get("fan_system")
     is_hvac_sys_fan_sys_vsd_flag = (
         fan_system is not None
-        and fan_system.get("fan_control") is not None
-        and fan_system["fan_control"]
+        and fan_system.get("fan_control")
         == FAN_SYSTEM_SUPPLY_FAN_CONTROL.VARIABLE_SPEED_DRIVE
     )
 
