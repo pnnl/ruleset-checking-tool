@@ -29,10 +29,7 @@ def are_all_terminal_types_VAV(rmi_b, terminal_unit_id_list):
             terminal_b_id,
             rmi_b,
         )
-        if (
-            terminal_b.get("type") is None
-            or terminal_b["type"] != TERMINAL_TYPE.VARIABLE_AIR_VOLUME
-        ):
+        if terminal_b.get("type") != TERMINAL_TYPE.VARIABLE_AIR_VOLUME:
             are_all_terminal_types_VAV_flag = False
             break
 
