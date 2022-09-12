@@ -58,13 +58,17 @@ TEST_RMD = {
 TEST_RMD_FULL = {"id": "229_01", "ruleset_model_instances": [TEST_RMD]}
 
 
-def test__preheat_fluid_loop_purchased_heating_hw():
+def test__fluid_loop_purchased_heating_hw():
     assert is_hvac_sys_fluid_loop_purchased_heating(TEST_RMD, "hvac_1") == True
 
 
-def test__preheat_fluid_loop_purchased_heating_steam():
+def test__fluid_loop_purchased_heating_steam():
     assert is_hvac_sys_fluid_loop_purchased_heating(TEST_RMD, "hvac_2") == True
 
 
-def test__preheat_fluid_loop_purchased_heating_not_external():
+def test__fluid_loop_purchased_heating_not_external():
     assert is_hvac_sys_fluid_loop_purchased_heating(TEST_RMD, "hvac_3") == False
+
+
+def test__fluid_loop_purchased_heating_no_hot_water():
+    assert is_hvac_sys_fluid_loop_purchased_heating(TEST_RMD, "hvac_4") == False

@@ -1,5 +1,9 @@
 from rct229.data.schema_enums import schema_enums
-from rct229.utils.jsonpath_utils import find_exactly_one_with_field_value
+from rct229.utils.jsonpath_utils import (
+    find_all,
+    find_exactly_one_with_field_value,
+    find_one,
+)
 
 EXTERNAL_FLUID_SOURCE = schema_enums["ExternalFluidSourceOptions"]
 
@@ -20,21 +24,12 @@ def is_hvac_sys_fluid_loop_purchased_heating(rmi_b, hvac_b_id):
         True: the fluid loop associated with the heating system associated with the HVAC system is attached to an external purchased heating loop
         False: otherwise
     """
-    is_hvac_sys_fluid_loop_purchased_heating_flag = False
-    purchased_heating_loop_id_list_b = []
-
-    external_fluid_sources = rmi_b.get("external_fluid_source")
-    if external_fluid_sources:
-        for external_fluid_source in external_fluid_sources:
-            if (
-                external_fluid_source.get("type")
-                in [
-                    EXTERNAL_FLUID_SOURCE.HOT_WATER,
-                    EXTERNAL_FLUID_SOURCE.STEAM,
-                ]
-                and external_fluid_source.get("loop") is not None
-            ):
-                purchased_heating_loop_id_list_b.append(external_fluid_source["loop"])
+    purchased_heating_loop_id_list_b = [
+        *find_all(
+            f"(external_fluid_source[?(@.type=={EXTERNAL_FLUID_SOURCE.HOT_WATER})].loop) | (external_fluid_source[?(@.type=={EXTERNAL_FLUID_SOURCE.STEAM})].loop)",
+            rmi_b,
+        )
+    ]
 
     # Get the hvac system
     hvac_b = find_exactly_one_with_field_value(
@@ -43,13 +38,11 @@ def is_hvac_sys_fluid_loop_purchased_heating(rmi_b, hvac_b_id):
         hvac_b_id,
         rmi_b,
     )
-    # Check if hvac_b has preheat system
-    heating_system = hvac_b.get("heating_system")
-    if heating_system:
-        hot_water_loop_id = heating_system.get("hot_water_loop")
-        is_hvac_sys_fluid_loop_purchased_heating_flag = (
-            hot_water_loop_id is not None
-            and hot_water_loop_id in purchased_heating_loop_id_list_b
-        )
+
+    hot_water_loop_id = find_one("heating_system.hot_water_loop", hvac_b)
+    is_hvac_sys_fluid_loop_purchased_heating_flag = (
+        hot_water_loop_id is not None
+        and hot_water_loop_id in purchased_heating_loop_id_list_b
+    )
 
     return is_hvac_sys_fluid_loop_purchased_heating_flag
