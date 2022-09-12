@@ -1,5 +1,5 @@
 from rct229.data.schema_enums import schema_enums
-from rct229.utils.jsonpath_utils import find_exactly_one_with_field_value, find_all
+from rct229.utils.jsonpath_utils import find_all, find_exactly_one_with_field_value
 
 EXTERNAL_FLUID_SOURCE = schema_enums["ExternalFluidSourceOptions"]
 
@@ -19,11 +19,11 @@ def is_hvac_sys_fluid_loop_purchased_chw(rmi_b, hvac_b_id):
         False: otherwise
     """
     purchased_cooling_loop_id_list_b = [
-         *find_all(
-             f"external_fluid_source[?(@.type=={EXTERNAL_FLUID_SOURCE.CHILLED_WATER})].loop",
-             rmi_b,
-         )
-     ]
+        *find_all(
+            f"external_fluid_source[?(@.type=={EXTERNAL_FLUID_SOURCE.CHILLED_WATER})].loop",
+            rmi_b,
+        )
+    ]
 
     # Get the hvac system
     hvac_b = find_exactly_one_with_field_value(
