@@ -34,9 +34,11 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   * [get_primary_secondary_loops.md](ruleset_functions/get_primary_secondary_loops.md): Get the list of primary and secondary loops for CHW for a B-RMR.
   * [get_hvac_systems_5_6_serving_multiple_floors_b](ruleset_functions/get_hvac_systems_5_6_serving_multiple_floors_b.md): Get a dictionary of the system 5, 5a, 5b, 6, 6a, 6b hvac system IDs that are modeled as serving more than one floor in the baseline design model.  The dictionary consists of the hvac system ids as the key and the number of floors served as the value associated with the key.
   * [get_zones_computer_rooms](ruleset_functions/get_zones_computer_rooms.md): Returns a dictionary with the zones that have at least one computer room space associated with them in the RMR as the keys. The values associated with each key are in a list form. The list associated with each key contains the computer room floor area as the first item in the list and the total zone floor area as the second item in the list.
+  * [get_HVAC_systems_primarily_serving_comp_rooms](ruleset_functions/get_HVAC_systems_primarily_serving_comp_rooms.md): Returns a list of HVAC systems in which greater than 50% of the area served by the HVAC system is computer room space.
 
 ### HVAC type functions
   * [is_baseline_system_1](ruleset_functions/baseline_systems/is_baseline_system_1.md): Get either Sys-1, Sys-1a, Sys-1b, Sys-1c, or Not_Sys_1 string output which indicates whether the HVAC system is ASHRAE 90.1 2019 Appendix G system 1 (PTAC), system 1a (system 1 with purchased CHW), system 1b (system 1 with purchased heating), system 1c (system 1 with purchased CHW and purchased HW).
+  * [is_baseline_system_1c](ruleset_functions/baseline_systems/is_baseline_system_1c.md): Returns true or false to whether the baseline system type is 1c (system 1 with purchased CHW and purchased HW).
   * [is_baseline_system_2](ruleset_functions/baseline_systems/is_baseline_system_2.md): Get either Sys-2 or Not_Sys_2 string output which indicates whether the HVAC system is ASHRAE 90.1 2019 Appendix G system 2 (PTHP).
   * [is_baseline_system_3](ruleset_functions/baseline_systems/is_baseline_system_3.md): Get either Sys-3, Sys-3a, Sys-3b, Sys-3c, or Not_Sys_3 string output which indicates whether the HVAC system is ASHRAE 90.1 2019 Appendix G system 3 (PSZ), system 3a (system 3 with purchased CHW), system 3b (system 3 with purchased heating), system 3c (system 3 with purchased CHW and purchased HW).
   * [is_baseline_system_4](ruleset_functions/baseline_systems/is_baseline_system_4.md): Get either Sys-4 or Not_Sys_4 string output which indicates whether the HVAC system is ASHRAE 90.1 2019 Appendix G system 4 (PSZ-HP).
@@ -79,6 +81,8 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   * [is_hvac_sys_fluid_loop_purchased_CHW](ruleset_functions/baseline_systems/baseline_hvac_sub_functions/is_hvac_sys_fluid_loop_purchased_CHW.md): Returns TRUE if the fluid loop associated with the cooling system associated with the HVAC system is attached to an external purchased chilled water loop. Returns FALSE if this is not the case. 
   * [is_hvac_sys_fan_sys_VSD](ruleset_functions/baseline_systems/baseline_hvac_sub_functions/is_hvac_sys_fan_sys_VSD.md): Returns TRUE if the HVAC system fan system is variable speed drive controlled. Returns FALSE if the HVAC system fan system is anything other than variable speed drive controlled. 
   * [are_all_terminal_heating_loops_attached_to_boiler](ruleset_functions/baseline_systems/baseline_hvac_sub_functions/are_all_terminal_heating_loops_attached_to_boiler.md): Returns TRUE if the fluid loop associated with the heating_from_loop associated with each terminal unit is attached to a boiler. Returns FALSE if this is not the case.
+  * [is_hvac_system_multizone](ruleset_functions/baseline_systems/baseline_hvac_sub_functions/is_hvac_system_multizone.md): Returns TRUE if the HVAC system serves multiple zones. Returns FALSE if the HVAC system serves a single or no zones.
+  * [is_hvac_sys_fluid_loop_purchased_heating](ruleset_functions/baseline_systems/baseline_hvac_sub_functions/is_hvac_sys_fluid_loop_purchased_heating.md): Returns TRUE if the fluid loop associated with the heating system associated with the HVAC system is attached to an external purchased heating loop. Returns FALSE if this is not the case.
 
 ## Data Tables
   * [8.4.4](data_tables/Table8-4-4.md): Minimum Nominal Efficiency Levels for Low-Voltage Dry-Type Distribution Transformers  
@@ -127,6 +131,7 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   * [4-6](section4/4-6.md): HVAC fans in the proposed design model shall remain on during unoccupied hours in systems primarily serving computer rooms.  
   * [4-8](section4/4-8.md): Schedules may be allowed to differ between proposed design and baseline building design when necessary to model nonstandard efficiency measures, such as automatic natural ventilation controls, automatic demand control ventilation controls. In no case shall schedules differ where the controls are manual.  
   * [4-10](section4/4-10.md): Schedules for HVAC fans that provide outdoor air for ventilation shall be cycled ON and OFF to meet heating and cooling loads during unoccupied hours excluding HVAC systems that meet Table G3.1-4 Schedules for the proposed building exceptions #s 2 and 3.  
+  * [4-11](section4/4-11.md): Fan schedules shall be modeled identically in the baseline and proposed unless Table G3.1 Section 4 baseline exceptions are applicable. Fan Schedules may be allowed to differ when Section 4 Baseline Column Exceptions #1, #2 Or #3 are applicable.
   * [4-12](section4/4-12.md): For Systems 6 and 8, only the terminal-unit fan and reheat coil shall be energized to meet heating set point during unoccupied hours.  
   * [4-15](section4/4-15.md): Schedules for HVAC fans that provide outdoor air for ventilation shall run continuously whenever spaces are occupied in the B_RMR. 
   * [4-16](section4/4-16.md): Where no heating and/or cooling system is to be installed, and a heating or cooling system is being simulated only to meet the requirements described in this table, heating and/or cooling system fans shall not be simulated as running continuously during occupied hours but shall be cycled ON and OFF to meet heating and cooling loads during all hours in the B_RMR.  
@@ -193,11 +198,16 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   * [6-9](section6/Rule6-9.md): Proposed building is modeled with other programmable lighting controls through a 10% schedule reduction in buildings less than 5,000sq.ft.  
 
 ## Section 10 - Airside systems
+  * [10-1](section10/10-1.md): The proposed design includes humidification and the baseline building design has been modeled with adiabatic humidification if proposed design does not comply with 90.1-2019 Section 6.5.2.4 and non-adiabatic humidification otherwise.
   * [10-3](section10/10-3.md): For systems serving computer rooms, the baseline building design shall not have reheat for the purpose of dehumidification.
+  * [10-4](section10/10-4.md): Baseline HVAC systems using fossil fuel shall be modeled using natural gas. Except where natural gas is not available for the proposed building site, propane shall be used as the heating fuel.
   * [10-6](section10/10-6.md): For HVAC systems designed, mechanical cooling equipment efficiencies shall be adjusted to remove the supply fan energy from the efficiency rating.
   * [10-7](section10/10-7.md): Baseline shall be modeled with the COPnfcooling HVAC system efficiency per Tables G3.5.1-G3.5.6.  Where multiple HVAC zones or residential spaces are combined into a single thermal block the cooling efficiencies (for baseline HVAC System Types 3 and 4) shall be based on the  equipment capacity of the thermal block divided by the number of HVAC zones or residential spaces.
+  * [10-9](section10/10-9.md): Where multiple HVAC zones or residential spaces are combined into a single thermal block, baseline HVAC System Types 5 or 6 efficiencies shall be based on the cooling equipment capacity of a single floor.
   * [10-10](section10/10-10.md): Where no heating system exists or no heating system has been submitted with design documents, the proposed building system type shall be the same system as modeled in the baseline building design and shall comply with but not exceed the requirements of Section 6.
   * [10-11](section10/10-11.md): Except for spaces with baseline system 9 or 10, if no cooling system exists or no cooling system has been submitted with design documents, the proposed building cooling system type shall be the same as modeled in the baseline building design and shall comply with the requirements of Section 6.
+  * [10-13A](section10/10-13A.md): For HVAC systems designed, mechanical heating equipment efficiencies shall be adjusted to remove the supply fan energy from the efficiency rating.
+  * [10-13B](section10/10-13B.md): For proposed HVAC systems designed, mechanical preheating equipment efficiencies shall be adjusted to remove the supply fan energy from the efficiency rating.
 
 ## Section 12 - Receptacles and Other Loads
   * [12-1](section12/Rule12-1.md): Number of spaces modeled in User RMR and Baseline RMR are the same
@@ -210,7 +220,7 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   * [15-3](section15/Rule15-3.md): User RMR transformer Name in Proposed RMR  
   * [15-4](section15/Rule15-4.md): User RMR transformer Name in Baseline RMR   
   * [15-5](section15/Rule15-5.md): Transformer efficiency reported in Baseline RMR equals Table 8.4.4  
-  * [15-6](section15/Rule15-6.md): Transformer efficiency reported in User RMR equals Table 8.4.4   
+  * [15-6](section15/Rule15-6.md): Transformer efficiency reported in User RMR equals Table 8.4.4.
   
 ## Section 16 - Elevators
 

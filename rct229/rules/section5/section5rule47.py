@@ -16,7 +16,7 @@ from rct229.ruleset_functions.get_zone_conditioning_category_dict import (
 from rct229.schema.config import ureg
 from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all
-from rct229.utils.pint_utils import ZERO
+from rct229.utils.pint_utils import ZERO, CalcQ
 from rct229.utils.std_comparisons import std_equal
 
 TARGET_AIR_LEAKAGE_COEFF = 1.0 * ureg("cfm / foot**2")
@@ -85,8 +85,12 @@ class Section5Rule47(RuleDefinitionListIndexedBase):
                     )
 
             return {
-                "building_total_air_leakage_rate": building_total_air_leakage_rate,
-                "target_air_leakage_rate_75pa_b": target_air_leakage_rate_75pa_b,
+                "building_total_air_leakage_rate": CalcQ(
+                    "volumetric_flow_rate", building_total_air_leakage_rate
+                ),
+                "target_air_leakage_rate_75pa_b": CalcQ(
+                    "volumetric_flow_rate", target_air_leakage_rate_75pa_b
+                ),
             }
 
         def rule_check(self, context, calc_vals=None, data=None):

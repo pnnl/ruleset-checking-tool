@@ -12,6 +12,7 @@ from rct229.ruleset_functions.get_surface_conditioning_category_dict import (
 from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.match_lists import match_lists_by_id
+from rct229.utils.pint_utils import CalcQ
 from rct229.utils.std_comparisons import std_equal
 
 
@@ -102,11 +103,17 @@ class Section5Rule17(RuleDefinitionListIndexedBase):
                 elif surface_b_type == OST.BELOW_GRADE_WALL:
                     return {
                         **calc_vals,
-                        "baseline_surface_c_factor": getattr_(
-                            surface_b_construction, "construction", "c_factor"
+                        "baseline_surface_c_factor": CalcQ(
+                            "thermal_transmittance",
+                            getattr_(
+                                surface_b_construction, "construction", "c_factor"
+                            ),
                         ),
-                        "proposed_surface_c_factor": getattr_(
-                            surface_p_construction, "construction", "c_factor"
+                        "proposed_surface_c_factor": CalcQ(
+                            "thermal_transmittance",
+                            getattr_(
+                                surface_p_construction, "construction", "c_factor"
+                            ),
                         ),
                     }
                 else:
