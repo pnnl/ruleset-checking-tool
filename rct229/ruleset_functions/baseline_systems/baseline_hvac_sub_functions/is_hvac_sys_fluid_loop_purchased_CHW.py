@@ -36,7 +36,8 @@ def is_hvac_sys_fluid_loop_purchased_chw(rmi_b, hvac_b_id):
         hvac_b_id,
         rmi_b,
     )
-    # the hvac_sys has cooling system and has chilled_water_loop and the loop id is in purchased_cooling_loop_id_list
+    # the hvac_sys has a cooling system and the cooling system has a chilled_water_loop and
+    # the loop id is in the purchased_cooling_loop_id_list
     is_hvac_sys_fluid_loop_purchased_chw_flag = (
         find_one("cooling_system.chilled_water_loop", hvac_b)
         in purchased_cooling_loop_id_list_b
