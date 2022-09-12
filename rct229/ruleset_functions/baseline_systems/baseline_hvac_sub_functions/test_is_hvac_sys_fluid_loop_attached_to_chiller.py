@@ -39,13 +39,18 @@ TEST_RMD = {
         {
             "id": "chiller_1",
             "cooling_loop": "CHW_Loop_1",
-        }
+        },
+        {
+            "id": "chiller_1",
+            "cooling_loop": "CHW_Loop_2",
+        },
     ],
     "fluid_loops": [
         {
             "id": "CHW_Loop_1",
             "type": "COOLING",
-        }
+        },
+        {"id": "CHW_Loop_2"},
     ],
 }
 

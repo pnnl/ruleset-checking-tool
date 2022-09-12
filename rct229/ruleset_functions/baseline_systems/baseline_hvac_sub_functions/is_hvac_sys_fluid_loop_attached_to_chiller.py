@@ -3,6 +3,7 @@ from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import (
     find_all,
     find_exactly_one_with_field_value,
+    find_one,
     find_one_with_field_value,
 )
 
@@ -39,15 +40,12 @@ def is_hvac_sys_fluid_loop_attached_to_chiller(rmi_b, hvac_b_id):
         rmi_b,
     )
 
-    cooling_system = hvac_b.get("cooling_system")
-    if cooling_system:
-        chilled_water_loop_id = cooling_system.get("chilled_water_loop")
-        # Check if the cooling system has chilled water loop and the chilled water loop connects to a chiller(s)
-        if chilled_water_loop_id and chilled_water_loop_id in cooling_loop_ids:
-            chilled_water_loop = find_exactly_one_with_field_value(
-                "$.fluid_loops", "id", chilled_water_loop_id, rmi_b
-            )
-            # check if the chiller system loop type is Cooling
-            if getattr_(chilled_water_loop, "fluidloop", "type") == FLUID_LOOP.COOLING:
-                is_hvac_sys_fluid_loop_attached_to_chiller_flag = True
+    chilled_water_loop_id = find_one("cooling_system.chilled_water_loop", hvac_b)
+    if chilled_water_loop_id in cooling_loop_ids:
+        chilled_water_loop = find_exactly_one_with_field_value(
+            "$.fluid_loops", "id", chilled_water_loop_id, rmi_b
+        )
+        if find_one("type", chilled_water_loop) == FLUID_LOOP.COOLING:
+            is_hvac_sys_fluid_loop_attached_to_chiller_flag = True
+
     return is_hvac_sys_fluid_loop_attached_to_chiller_flag
