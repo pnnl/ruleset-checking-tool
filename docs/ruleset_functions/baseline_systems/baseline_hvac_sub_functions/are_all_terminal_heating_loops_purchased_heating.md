@@ -19,7 +19,7 @@
             - Add the associated loop to the purchased_heating_loop_list_b list: `purchased_heating_loop_list_b = purchased_heating_loop_list_b.append (external_fluid_source.loop)`   
 - For each terminal_b in the list of terminal units: `For terminal_b in terminal_unit_id_list:`  
   - Create an object associate with the heating_from_loop associated with terminal_b: `terminal_fluid_loop_b = terminal_b.heating_from_loop`  
-  - Check if the fluid loop type is NOT of type heating OR if the fluid loop id is NOT in the list of keys created above: `if terminal_fluid_loop_b.type != "HEATING" OR terminal_fluid_loop_b.id Not in purchased_heating_loop_list_b:`
+  - Check if the terminal fluid loop is not None and its fluid loop type is NOT of type heating OR if the fluid loop id is NOT in the list of keys created above: `if terminal_fluid_loop_b is not None and terminal_fluid_loop_b.type != "HEATING" OR terminal_fluid_loop_b.id Not in purchased_heating_loop_list_b:`
       - Set are_all_terminal_heating_loops_purchased_heating = FALSE: `are_all_terminal_heating_loops_purchased_heating = FALSE`  
       - Leave the loop: `break`   
 
