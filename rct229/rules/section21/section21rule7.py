@@ -1,10 +1,12 @@
 from rct229.data.schema_enums import schema_enums
 from rct229.rule_engine.rule_base import RuleDefinitionBase
-from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
+from rct229.rule_engine.rule_list_indexed_base import \
+    RuleDefinitionListIndexedBase
+from rct229.rule_engine.user_baseline_proposed_vals import \
+    UserBaselineProposedVals
 from rct229.schema.config import ureg
-from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all
+from rct229.utils.pint_utils import CalcQ
 from rct229.utils.std_comparisons import std_equal
 
 APPLICABLE_SYS_TYPES = [
@@ -36,17 +38,6 @@ class Section21Rule7(RuleDefinitionListIndexedBase):
             list_path="fluid_loops[*]",
         )
 
-    def create_data(self, context, data):
-        rmi_b = context.baseline
-        boilers = find_all("$.boilers[*]", rmi_b)
-        loop_boiler_dict = {}
-        for boiler_b in boilers:
-            loop_id = getattr_(boiler_b, "boiler", "loop")
-            if not loop_id in loop_boiler_dict.keys():
-                loop_boiler_dict[loop_id] = []
-            loop_boiler_dict[loop_id].append(boiler_b)
-        return {"loop_boiler_dict": loop_boiler_dict}
-
     def is_applicable(self, context, data=None):
         rmi_b = context.baseline
         # FIXME: replace with baseline_system_types = get_baseline_system_types(rmi_b) when get_baseline_system_types
@@ -60,10 +51,15 @@ class Section21Rule7(RuleDefinitionListIndexedBase):
             [key in APPLICABLE_SYS_TYPES for key in baseline_system_types.keys()]
         )
 
+    def create_data(self, context, data):
+        rmi_b = context.baseline
+        boiler_loop_ids = find_all("boilers[*].loop", rmi_b)
+        return {"loop_boiler_dict": boiler_loop_ids}
+
     def list_filter(self, context_item, data):
         fluid_loop_b = context_item.baseline
         loop_boiler_dict = data["loop_boiler_dict"]
-        return fluid_loop_b["id"] in loop_boiler_dict.keys()
+        return fluid_loop_b["id"] in loop_boiler_dict
 
     class HeatingFluidLoopRule(RuleDefinitionBase):
         def __init__(self):
@@ -87,8 +83,8 @@ class Section21Rule7(RuleDefinitionListIndexedBase):
                 "design_return_temperature"
             ]
             return {
-                "design_supply_temperature": design_supply_temperature,
-                "design_return_temperature": design_return_temperature,
+                "design_supply_temperature": CalcQ("temperature", design_supply_temperature),
+                "design_return_temperature": CalcQ("temperature", design_return_temperature),
             }
 
         def rule_check(self, context, calc_vals=None, data=None):
