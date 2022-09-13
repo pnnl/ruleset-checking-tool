@@ -26,6 +26,7 @@ _UNIT_CONVENTIONS = {
         "cooling_capacity": "W",
         "capacity": "W",
         "volumetric_flow_rate": "m3/s",
+        "temperature": "C",
     },
     UNIT_SYSTEM.IP: {
         "transformer_capacity": "V*A",
@@ -38,6 +39,7 @@ _UNIT_CONVENTIONS = {
         "cooling_capacity": "ton",
         "capacity": "Btu/hr",
         "volumetric_flow_rate": "cfm",
+        "temperature": "F",
     },
 }
 
