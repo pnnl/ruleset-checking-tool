@@ -2,8 +2,8 @@ from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 from rct229.schema.config import ureg
-from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all
+from rct229.utils.pint_utils import CalcQ
 from rct229.utils.std_comparisons import std_equal
 
 APPLICABLE_SYS_TYPES = [
@@ -50,17 +50,6 @@ class Section22Rule2(RuleDefinitionListIndexedBase):
             list_path="fluid_loops[*]",
         )
 
-    def create_data(self, context, data):
-        rmi_b = context.baseline
-        chillers = find_all("$.chillers[*]", rmi_b)
-        loop_chiller_dict = {}
-        for chiller_b in chillers:
-            loop_id = getattr_(chiller_b, "chillers", "cooling_loop")
-            if loop_id not in loop_chiller_dict.keys():
-                loop_chiller_dict[loop_id] = []
-            loop_chiller_dict[loop_id].append(chiller_b)
-        return {"loop_chiller_dict": loop_chiller_dict}
-
     def is_applicable(self, context, data=None):
         rmi_b = context.baseline
         # FIXME: replace with baseline_system_types = get_baseline_system_types(rmi_b) when get_baseline_system_types
@@ -74,10 +63,15 @@ class Section22Rule2(RuleDefinitionListIndexedBase):
             [key in APPLICABLE_SYS_TYPES for key in baseline_system_types.keys()]
         )
 
+    def create_data(self, context, data):
+        rmi_b = context.baseline
+        chiller_loop_ids = find_all("chillers[*].cooling_loop", rmi_b)
+        return {"loop_chiller_dict": chiller_loop_ids}
+
     def list_filter(self, context_item, data):
         fluid_loop_b = context_item.baseline
         loop_chiller_dict = data["loop_chiller_dict"]
-        return fluid_loop_b["id"] in loop_chiller_dict.keys()
+        return fluid_loop_b["id"] in loop_chiller_dict
 
     class ChillerFluidLoopRule(RuleDefinitionBase):
         def __init__(self):
@@ -97,7 +91,11 @@ class Section22Rule2(RuleDefinitionListIndexedBase):
                 "cooling_or_condensing_design_and_control"
             ]["design_return_temperature"]
 
-            return {"design_return_temperature": design_return_temperature}
+            return {
+                "design_return_temperature": CalcQ(
+                    "temperature", design_return_temperature
+                )
+            }
 
         def rule_check(self, context, calc_vals=None, data=None):
             design_return_temperature = calc_vals["design_return_temperature"]
