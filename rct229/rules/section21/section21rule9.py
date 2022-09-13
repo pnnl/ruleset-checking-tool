@@ -16,7 +16,7 @@ APPLICABLE_SYS_TYPES = [
     "SYS-11.2A",
     "SYS-12A",
 ]
-PUMP_POWER_PER_FLOW_RATE = 19.0 * ureg("W/gpm")
+REQUIRED_PUMP_POWER_PER_FLOW_RATE = 19.0 * ureg("W/gpm")
 
 
 class Section21Rule9(RuleDefinitionListIndexedBase):
@@ -48,19 +48,13 @@ class Section21Rule9(RuleDefinitionListIndexedBase):
 
     def create_data(self, context, data):
         rmi_b = context.baseline
-        boilers = find_all("$.boilers[*]", rmi_b)
-        loop_boiler_dict = {}
-        for boiler_b in boilers:
-            loop_id = getattr_(boiler_b, "boilers", "loop")
-            if loop_id not in loop_boiler_dict.keys():
-                loop_boiler_dict[loop_id] = []
-            loop_boiler_dict[loop_id].append(boiler_b)
-        return {"loop_boiler_dict": loop_boiler_dict}
+        boiler_loop_ids = find_all("boilers[*].loop", rmi_b)
+        return {"loop_boiler_dict": boiler_loop_ids}
 
     def list_filter(self, context_item, data):
         fluid_loop_b = context_item.baseline
         loop_boiler_dict = data["loop_boiler_dict"]
-        return fluid_loop_b["id"] in loop_boiler_dict.keys()
+        return fluid_loop_b["id"] in loop_boiler_dict
 
     class HeatingFluidLoopRule(RuleDefinitionBase):
         def __init__(self):
@@ -80,4 +74,4 @@ class Section21Rule9(RuleDefinitionListIndexedBase):
 
         def rule_check(self, context, calc_vals=None, data=None):
             pump_power_per_flow_rate = calc_vals["pump_power_per_flow_rate"]
-            return pump_power_per_flow_rate == PUMP_POWER_PER_FLOW_RATE
+            return pump_power_per_flow_rate == REQUIRED_PUMP_POWER_PER_FLOW_RATE
