@@ -24,12 +24,10 @@ def is_hvac_sys_fluid_loop_purchased_heating(rmi_b, hvac_b_id):
         True: the fluid loop associated with the heating system associated with the HVAC system is attached to an external purchased heating loop
         False: otherwise
     """
-    purchased_heating_loop_id_list_b = [
-        *find_all(
-            f"(external_fluid_source[?(@.type=={EXTERNAL_FLUID_SOURCE.HOT_WATER})].loop) | (external_fluid_source[?(@.type=={EXTERNAL_FLUID_SOURCE.STEAM})].loop)",
-            rmi_b,
-        )
-    ]
+    purchased_heating_loop_id_list_b = find_all(
+        f"(external_fluid_source[?(@.type=={EXTERNAL_FLUID_SOURCE.HOT_WATER})].loop) | (external_fluid_source[?(@.type=={EXTERNAL_FLUID_SOURCE.STEAM})].loop)",
+        rmi_b,
+    )
 
     # Get the hvac system
     hvac_b = find_exactly_one_with_field_value(
