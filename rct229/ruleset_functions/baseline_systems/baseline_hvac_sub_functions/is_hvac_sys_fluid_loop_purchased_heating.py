@@ -39,10 +39,11 @@ def is_hvac_sys_fluid_loop_purchased_heating(rmi_b, hvac_b_id):
         rmi_b,
     )
 
-    hot_water_loop_id = find_one("heating_system.hot_water_loop", hvac_b)
+    # the hvac_sys has a heating system and the heating system has a hot_water_loop and
+    # the loop id is in the purchased_heating_loop_id_list
     is_hvac_sys_fluid_loop_purchased_heating_flag = (
-        hot_water_loop_id is not None
-        and hot_water_loop_id in purchased_heating_loop_id_list_b
+        find_one("heating_system.hot_water_loop", hvac_b)
+        in purchased_heating_loop_id_list_b
     )
 
     return is_hvac_sys_fluid_loop_purchased_heating_flag
