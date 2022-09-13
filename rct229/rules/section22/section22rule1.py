@@ -2,8 +2,8 @@ from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 from rct229.schema.config import ureg
-from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all
+from rct229.utils.pint_utils import CalcQ
 from rct229.utils.std_comparisons import std_equal
 
 APPLICABLE_SYS_TYPES = [
@@ -91,7 +91,11 @@ class Section22Rule1(RuleDefinitionListIndexedBase):
                 "cooling_or_condensing_design_and_control"
             ]["design_supply_temperature"]
 
-            return {"design_supply_temperature": design_supply_temperature}
+            return {
+                "design_supply_temperature": CalcQ(
+                    "temperature", design_supply_temperature
+                )
+            }
 
         def rule_check(self, context, calc_vals=None, data=None):
             design_supply_temperature = calc_vals["design_supply_temperature"]
