@@ -50,17 +50,6 @@ class Section22Rule1(RuleDefinitionListIndexedBase):
             list_path="fluid_loops[*]",
         )
 
-    def create_data(self, context, data):
-        rmi_b = context.baseline
-        chillers = find_all("$.chillers[*]", rmi_b)
-        loop_chiller_dict = {}
-        for chiller_b in chillers:
-            loop_id = getattr_(chiller_b, "chillers", "cooling_loop")
-            if not loop_id in loop_chiller_dict.keys():
-                loop_chiller_dict[loop_id] = []
-            loop_chiller_dict[loop_id].append(chiller_b)
-        return {"loop_chiller_dict": loop_chiller_dict}
-
     def is_applicable(self, context, data=None):
         rmi_b = context.baseline
         # FIXME: replace with baseline_system_types = get_baseline_system_types(rmi_b) when get_baseline_system_types
@@ -74,10 +63,15 @@ class Section22Rule1(RuleDefinitionListIndexedBase):
             [key in APPLICABLE_SYS_TYPES for key in baseline_system_types.keys()]
         )
 
+    def create_data(self, context, data):
+        rmi_b = context.baseline
+        chiller_loop_ids = find_all("chillers[*].cooling_loop", rmi_b)
+        return {"loop_chiller_dict": chiller_loop_ids}
+
     def list_filter(self, context_item, data):
         fluid_loop_b = context_item.baseline
         loop_chiller_dict = data["loop_chiller_dict"]
-        return fluid_loop_b["id"] in loop_chiller_dict.keys()
+        return fluid_loop_b["id"] in loop_chiller_dict
 
     class ChillerFluidLoopRule(RuleDefinitionBase):
         def __init__(self):
