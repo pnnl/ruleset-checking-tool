@@ -3,6 +3,7 @@
         "Section": 22,
         "Rule": 16,
         "Test": "a",
+        "test_description": "Baseline building is system type 7 and is correctly modeled with the wet-bulb and approach temperatures",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-16",
@@ -130,8 +131,8 @@
                             {
                                 "id": "Heat Rejection 1",
                                 "loop": "Chiller Loop 1",
-                                "design_wetbulb_temperature": -6.666666666666629,
-                                "approach": 4.444444444444457
+                                "design_wetbulb_temperature": 12.777777777777828,
+                                "approach": -14.999999999999943
                             }
                         ]
                     }
@@ -143,6 +144,7 @@
         "Section": 22,
         "Rule": 16,
         "Test": "b",
+        "test_description": "Baseline building is system type 7 and is incorrectly modeled with the wet-bulb and approach temperatures",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-16",
@@ -270,8 +272,8 @@
                             {
                                 "id": "Heat Rejection 1",
                                 "loop": "Chiller Loop 1",
-                                "design_wetbulb_temperature": -4.4444444444444,
-                                "approach": 4.444444444444457
+                                "design_wetbulb_temperature": 12.777777777777828,
+                                "approach": -12.222222222222172
                             }
                         ]
                     }
