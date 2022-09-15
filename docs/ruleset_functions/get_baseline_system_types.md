@@ -77,7 +77,11 @@ Declare empty lists of the hvac_b.id associated with each system type in the B_R
     - Get list of terminal units associated with the hvac system from the dictionary input to the function: `terminal_unit_id_list = dict_of_zones_and_terminal_units_served_by_hvac_sys[hvac_b.id]["Terminal_Unit_List"]`  
     - Get list of zone ids associated with the hvac system from the dictionary input to the function: `zone_id_list = dict_of_zones_and_terminal_units_served_by_hvac_sys[hvac_b.id]["Zone_List"]` 
     - Reset HVAC system type found boolean variable to FALSE: `hvac_sys_type_found = FALSE`  
-    - Check that each terminal unit serves one zone: `if does_each_terminal_serve_only_one_zone(B_RMR,terminal_unit_id_list) ==  TRUE`  
+    - Reset terminal_units_serve_one_zone boolean variable to FALSE: `terminal_units_serve_one_zone = TRUE` 
+    - Loop through each terminal to ensure each terminal serves one zone: `for terminal in terminal_unit_id_list:` 
+        - Check if the termimal unit serves 1 zone: `if len(dict_with_terminal_units_and_zones[terminal]) != 1`  
+        - Set boolean variable to false: `terminal_units_serve_one_zone = FALSE`   
+    - Check if all the terminal units serve one zone: `if terminal_units_serve_one_zone == TRUE:`  
         - Call system type 1 function which will return a string of either SYS-1, SYS-1a, SYS-1b, SYS-1c, or Not_Sys_1: `sys_1_type = is_baseline_system_1(B_RMR, hvac_b.id,terminal_unit_id_list,zone_id_list)`  
         - Check if SYS-1, if it is then add to list of SYS-1s: `if sys_1_type == "SYS-1": SYS-1 = SYS-1.append(hvac_b.id)` 
         - Check elif SYS-1a, if it is then add to list of SYS-1as: `elif sys_1_type == "SYS-1a": SYS-1a = SYS-1a.append(hvac_b.id)`
