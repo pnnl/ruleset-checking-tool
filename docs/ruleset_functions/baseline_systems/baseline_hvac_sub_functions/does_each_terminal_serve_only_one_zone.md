@@ -20,6 +20,9 @@
     - For each zone in the B_RMR: `For zone_b in B_RMR...Zone:` 
         - Check if terminal_b is in zone_b.terminals.id (terminal_b is a terminal id and zone.terminals appears to be a list of terminal objects, leaving it up to the RCT team to decide how to determine if terminal_b is an ID associated with the list of terminal objects): `if terminal_b in list(zone_b.terminals.id):`  
         - Increase counter by 1: `counter = counter + 1`  
+        - Check if counter is greater than 1: `if counter > 1:` 
+        - Set does_each_terminal_serve_only_one_zone equal to false: `does_each_terminal_serve_only_one_zone = FALSE`  
+        - Leave the loop: `break`
     - Check if counter does not equal 1: `if counter != 1:` 
         - Set does_each_terminal_serve_only_one_zone equal to false: `does_each_terminal_serve_only_one_zone = FALSE`  
         - Leave the loop: `break`
