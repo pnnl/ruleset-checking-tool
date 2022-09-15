@@ -77,7 +77,7 @@ Declare empty lists of the hvac_b.id associated with each system type in the B_R
     - Get list of terminal units associated with the hvac system from the dictionary input to the function: `terminal_unit_id_list = dict_of_zones_and_terminal_units_served_by_hvac_sys[hvac_b.id]["Terminal_Unit_List"]`  
     - Get list of zone ids associated with the hvac system from the dictionary input to the function: `zone_id_list = dict_of_zones_and_terminal_units_served_by_hvac_sys[hvac_b.id]["Zone_List"]` 
     - Reset HVAC system type found boolean variable to FALSE: `hvac_sys_type_found = FALSE`  
-    - Reset terminal_units_serve_one_zone boolean variable to FALSE: `terminal_units_serve_one_zone = TRUE` 
+    - Reset terminal_units_serve_one_zone boolean variable to TRUE: `terminal_units_serve_one_zone = TRUE` 
     - Loop through each terminal to ensure each terminal serves one zone: `for terminal in terminal_unit_id_list:` 
         - Check if the termimal unit serves 1 zone: `if len(dict_with_terminal_units_and_zones[terminal]) != 1`  
         - Set boolean variable to false: `terminal_units_serve_one_zone = FALSE`   
