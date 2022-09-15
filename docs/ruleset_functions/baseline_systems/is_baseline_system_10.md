@@ -27,10 +27,8 @@
 14. are_all_terminal_types_CAV()   
 15. does_each_zone_have_only_one_terminal()    
 16. does_hvac_system_serve_single_zone()  
-17. is_there_only_one_hvac_sys_heating_system ()  
- 
 
- 
+
 ## Logic:    
 - Create an object associated with the hvac system: `hvac_b = hvac_b.id`  
 - Set is_baseline_system_10 = Not_Sys_10: `is_baseline_system_10 = "Not_Sys_10"`    
