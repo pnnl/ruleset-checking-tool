@@ -3,6 +3,7 @@
         "Section": 22,
         "Rule": 19,
         "Test": "a",
+        "test_description": "Baseline building is system type 7 and is correctly modeled with the temperature reset type",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-19",
@@ -135,6 +136,7 @@
         "Section": 22,
         "Rule": 19,
         "Test": "b",
+        "test_description": "Baseline building is system type 7 and is incorrectly modeled with the temperature reset type",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-19",
