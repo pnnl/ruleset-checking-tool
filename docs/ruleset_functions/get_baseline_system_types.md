@@ -26,12 +26,13 @@
 13. is_baseline_system_11.2()  
 14. is_baseline_system_12() 
 15. is_baseline_system_13()
-16. does_each_terminal_serve_only_one_zone()
+16. get_dict_with_terminal_units_and_zones ()
  
 
 ## Logic:   
 Below is so that the looping associated with get_dict_of_zones_and_terminal_units_served_by_hvac_sys() does not have to be repeated for each relevant function which would be highly inefficient since it loops through all zones in the B_RMR.
 - Get dictionary of zones and terminal unit IDs associated with each HVAC system in the RMR to pass to the sub functions: `dict_of_zones_and_terminal_units_served_by_hvac_sys  = get_dict_of_zones_and_terminal_units_served_by_hvac_sys(B_RMR)`  
+- Get dictionary of zones associated with each terminal unit: `dict_with_terminal_units_and_zones = get_dict_with_terminal_units_and_zones(B_RMR)`  
 Declare empty lists of the hvac_b.id associated with each system type in the B_RMR (This declaration is not needed but it helps to identify everything needed to make sure its all been covered) 
 - Declare a list for SYS-1, Packaged Terminal Air Conditioner : `SYS-1 = []`  
 - Declare a list for SYS-1a, PCHW with HW boiler: `SYS-1a = []` 
