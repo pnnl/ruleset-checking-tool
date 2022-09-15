@@ -13,7 +13,7 @@
  
 **Function Call:**  None  
 
- PLEASE HOLD OFF ON THE REVIEW I HAVE A BETTER IDEA. I WILL CREATE A DCTIONARY WITH TERMINAL UNIT AS THE KEY AND A ZONE LIST AS THE VLAUES FOR EACH KEY. THIS WILL REDUCE LOOPING - 9/15/2022 AT 12:45 pm
+ THIS IS NO LONGER USED - Please see https://github.com/pnnl/ruleset-checking-tool/pull/647 instead
 ## Logic: 
 - Set does_each_terminal_serve_only_one_zone = TRUE: `does_each_terminal_serve_only_one_zone = TRUE`  
 - For each terminal_b in the list of terminal units: `For terminal_b in terminal_unit_id_list:`  
