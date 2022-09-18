@@ -23,14 +23,14 @@ def is_hvac_sys_preheat_fluid_loop_purchased_heating(rmi_b, hvac_b_id):
     """
     purchased_heating_loop_list_b = [
         *find_all(
-            f"(external_fluid_source[?(@.type=={EXTERNAL_FLUID_SOURCE.HOT_WATER})].loop) | (external_fluid_source[?(@.type=={EXTERNAL_FLUID_SOURCE.STEAM})].loop)",
+            f'external_fluid_source[*][?(@.type="{EXTERNAL_FLUID_SOURCE.HOT_WATER}"), ?(@.type="{EXTERNAL_FLUID_SOURCE.STEAM}")].loop',
             rmi_b,
         )
     ]
 
     # Get the hvac system
     hvac_b = find_exactly_one_with_field_value(
-        "$.buildings[*].building_segments[*].heating_ventilation_air_conditioning_systems",
+        "$.buildings[*].building_segments[*].heating_ventilation_air_conditioning_systems[*]",
         "id",
         hvac_b_id,
         rmi_b,
