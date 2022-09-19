@@ -4,7 +4,7 @@ from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedV
 from rct229.utils.jsonpath_utils import find_all
 
 # Reusable constants
-EXTERIOR_SURFACES_JSONPATH = "$..surfaces[?(@.adjacent_to='EXTERIOR')]"
+EXTERIOR_SURFACES_JSONPATH = '$..surfaces[?(@.adjacent_to="EXTERIOR")]'
 
 
 class Section5Rule3(RuleDefinitionListIndexedBase):

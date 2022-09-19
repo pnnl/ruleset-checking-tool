@@ -24,8 +24,8 @@ class Section5Rule46(RuleDefinitionListIndexedBase):
                 rmrs_used=UserBaselineProposedVals(False, True, True),
                 required_fields={
                     "$..zones[*]": ["infiltration"],
-                    "$..infiltration[*]": ["modeling_method"],
-                    "$..infiltration[*]": ["algorithm_name"],
+                    "$..infiltration": ["modeling_method"],
+                    "$..infiltration": ["algorithm_name"],
                 },
             )
 

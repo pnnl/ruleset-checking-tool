@@ -44,9 +44,9 @@ class Section5Rule31(RuleDefinitionListIndexedBase):
             def manual_check_required(self, context, calc_vals=None, data=None):
                 surface_p = context.proposed
                 # raise data error exception if proposed surface has no subsurfaces
-                subsurfaces_p = find_all("subsurfaces", surface_p)
+                subsurfaces_p = find_all("subsurfaces[*]", surface_p)
                 subsurfaces_with_manual_interior_shades_p = find_all(
-                    "subsurfaces[?(@.has_manual_interior_shades=True)]", surface_p
+                    "subsurfaces[*][?(@.has_manual_interior_shades=true)]", surface_p
                 )
 
                 return len(subsurfaces_with_manual_interior_shades_p) != 0 and len(
