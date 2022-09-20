@@ -538,5 +538,4 @@ def run_chiller_tests():
     Results of chiller test are spit out to console
     """
     boiler_test_json = "section22/rule_22_1.json"
-
     return run_section_tests(boiler_test_json)
