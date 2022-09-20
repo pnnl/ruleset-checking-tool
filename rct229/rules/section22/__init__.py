@@ -3,6 +3,7 @@ import importlib
 
 __all__ = [
     "section22rule1",
+    "section22rule2",
 ]
 
 
