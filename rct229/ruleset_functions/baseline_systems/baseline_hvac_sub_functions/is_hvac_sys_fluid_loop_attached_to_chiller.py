@@ -34,7 +34,7 @@ def is_hvac_sys_fluid_loop_attached_to_chiller(rmi_b, hvac_b_id):
 
     # Get the hvac system
     hvac_b = find_exactly_one_with_field_value(
-        "$.buildings[*].building_segments[*].heating_ventilation_air_conditioning_systems",
+        "$.buildings[*].building_segments[*].heating_ventilation_air_conditioning_systems[*]",
         "id",
         hvac_b_id,
         rmi_b,
@@ -43,7 +43,7 @@ def is_hvac_sys_fluid_loop_attached_to_chiller(rmi_b, hvac_b_id):
     chilled_water_loop_id = find_one("cooling_system.chilled_water_loop", hvac_b)
     if chilled_water_loop_id in cooling_loop_ids:
         chilled_water_loop = find_exactly_one_with_field_value(
-            "fluid_loops", "id", chilled_water_loop_id, rmi_b
+            "fluid_loops[*]", "id", chilled_water_loop_id, rmi_b
         )
         is_hvac_sys_fluid_loop_attached_to_chiller_flag = (
             find_one("type", chilled_water_loop) == FLUID_LOOP.COOLING

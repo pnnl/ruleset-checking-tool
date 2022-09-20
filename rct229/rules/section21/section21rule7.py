@@ -1,9 +1,11 @@
+from rct229.data.schema_enums import schema_enums
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 from rct229.schema.config import ureg
-from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all
+from rct229.utils.pint_utils import CalcQ
+from rct229.utils.std_comparisons import std_equal
 
 APPLICABLE_SYS_TYPES = [
     "SYS-1",
@@ -16,19 +18,20 @@ APPLICABLE_SYS_TYPES = [
     "SYS-11.2A",
     "SYS-12A",
 ]
-REQUIRED_PUMP_POWER_PER_FLOW_RATE = 19.0 * ureg("W/gpm")
+DESIGN_SUPPLY_TEMP = 180 * ureg("degF")
+DESIGN_RETURN_TEMP = 130 * ureg("degF")
 
 
-class Section21Rule9(RuleDefinitionListIndexedBase):
-    """Rule 9 of ASHRAE 90.1-2019 Appendix G Section 21 (Hot water loop)"""
+class Section21Rule7(RuleDefinitionListIndexedBase):
+    """Rule 7 of ASHRAE 90.1-2019 Appendix G Section 21 (Hot water loop)"""
 
     def __init__(self):
-        super(Section21Rule9, self).__init__(
+        super(Section21Rule7, self).__init__(
             rmrs_used=UserBaselineProposedVals(False, True, False),
-            each_rule=Section21Rule9.HeatingFluidLoopRule(),
+            each_rule=Section21Rule7.HeatingFluidLoopRule(),
             index_rmr="baseline",
-            id="21-9",
-            description="When baseline building includes boilers, Hot Water Pump Power = 19W/gpm.",
+            id="21-7",
+            description="When baseline building requires boilers, systems 1,5,7,11 and 12 - Model HWST = 180F and return design temp = 130F.",
             rmr_context="ruleset_model_instances/0",
             list_path="fluid_loops[*]",
         )
@@ -38,7 +41,7 @@ class Section21Rule9(RuleDefinitionListIndexedBase):
         # FIXME: replace with baseline_system_types = get_baseline_system_types(rmi_b) when get_baseline_system_types
         #  is ready.
         baseline_system_types = {
-            "SYS-7": ["hvac_sys_7"],
+            "SYS-7A": ["hvac_sys_7_a"],
             "SYS-12": ["hvac_sys_12"],
         }
         # if any system type found in the APPLICABLE_SYS_TYPES then return applicable.
@@ -58,20 +61,41 @@ class Section21Rule9(RuleDefinitionListIndexedBase):
 
     class HeatingFluidLoopRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section21Rule9.HeatingFluidLoopRule, self).__init__(
+            super(Section21Rule7.HeatingFluidLoopRule, self).__init__(
                 rmrs_used=UserBaselineProposedVals(False, True, False),
                 required_fields={
-                    "$": ["pump_power_per_flow_rate"],
+                    "$": ["heating_design_and_control"],
+                    "heating_design_and_control": [
+                        "design_supply_temperature",
+                        "design_return_temperature",
+                    ],
                 },
             )
 
         def get_calc_vals(self, context, data=None):
             fluid_loop_b = context.baseline
-            pump_power_per_flow_rate = fluid_loop_b["pump_power_per_flow_rate"]
+            design_supply_temperature = fluid_loop_b["heating_design_and_control"][
+                "design_supply_temperature"
+            ]
+            design_return_temperature = fluid_loop_b["heating_design_and_control"][
+                "design_return_temperature"
+            ]
             return {
-                "pump_power_per_flow_rate": pump_power_per_flow_rate,
+                "design_supply_temperature": CalcQ(
+                    "temperature", design_supply_temperature
+                ),
+                "design_return_temperature": CalcQ(
+                    "temperature", design_return_temperature
+                ),
             }
 
         def rule_check(self, context, calc_vals=None, data=None):
-            pump_power_per_flow_rate = calc_vals["pump_power_per_flow_rate"]
-            return pump_power_per_flow_rate == REQUIRED_PUMP_POWER_PER_FLOW_RATE
+            design_supply_temperature = calc_vals["design_supply_temperature"]
+            design_return_temperature = calc_vals["design_return_temperature"]
+            return std_equal(
+                design_supply_temperature.to(ureg.kelvin),
+                DESIGN_SUPPLY_TEMP.to(ureg.kelvin),
+            ) and std_equal(
+                design_return_temperature.to(ureg.kelvin),
+                DESIGN_RETURN_TEMP.to(ureg.kelvin),
+            )

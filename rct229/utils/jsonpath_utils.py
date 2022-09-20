@@ -1,17 +1,22 @@
+from jsonpath2.path import Path
 from jsonpath_ng.ext import parse
 
 # NOTE: jsonpath_ng.ext is used to get support for filtering
 # and other extensions
 
 
+def ensure_root(jpath):
+    return jpath if jpath.startswith("$") else "$." + jpath
+
+
 def find_all(jpath, obj):
-    return [match.value for match in parse(jpath).find(obj)]
+    p = Path.parse_str(ensure_root(jpath))
+    return [m.current_value for m in p.match(obj)]
 
 
 def find_all_with_field_value(jpath, field, value, obj):
-    return [
-        match.value for match in parse(f'{jpath}[?(@.{field}="{value}")]').find(obj)
-    ]
+    p = Path.parse_str(ensure_root(f'{jpath}[?(@.{field}="{value}")]'))
+    return [m.current_value for m in p.match(obj)]
 
 
 def find_one(jpath, obj):

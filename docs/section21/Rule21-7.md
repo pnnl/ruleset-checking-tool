@@ -29,7 +29,7 @@
 
 ## Rule Logic:  
 
-- For each boiler in B_RMR, save boiler to loop boiler dictionary: `for boiler_b in B_RMR.RulesetModelInstance.boilers: loop_boiler_dict[boiler_b.loop].append(boiler_b)`
+- For each boiler in B_RMI, save boiler to loop boiler list: `for boiler_b in B_RMI.RulesetModelInstance.boilers: loop_boiler_ids.append(boiler_b.id)`
 
 - For each fluid loop in B_RMR: `for fluid_loop_b in B_RMR.RulesetModelInstance.fluid_loops:`
 
