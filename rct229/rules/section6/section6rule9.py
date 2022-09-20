@@ -69,7 +69,10 @@ class Section6Rule9(RuleDefinitionListIndexedBase):
                 return {
                     "building_open_schedule_p": getattr_(
                         find_exactly_one_with_field_value(
-                            "$", "id", building_p["building_open_schedule"], schedules_p
+                            "$[*]",
+                            "id",
+                            building_p["building_open_schedule"],
+                            schedules_p,
                         ),
                         "schedule",
                         "hourly_values",
