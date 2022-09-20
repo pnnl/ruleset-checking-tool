@@ -5,12 +5,14 @@ from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedB
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.pint_utils import ZERO, pint_sum
+from rct229.utils.pint_utils import CalcQ, pint_sum
 
 CASE3_WARNING = "Project passes based on space-by-space method. Verify if project sues space-by-space method."
 CASE4_WARNING = "Project fails based on space-by-space method. LIGHTING_BUILDING_AREA_TYPE is not known to determine building area method allowance."
 CASE5_WARNING = "Project passes based on building area method. Verify if project uses building area method."
 CASE6_WARNING = "Project fails based on building area method. LIGHTING_SPACE_TYPE is not known in all spaces to determine space-by-space method allowance."
 CASE7_WARNING = "LIGHTING_BUILDING_AREA_TYPE is not known and LIGHTING_SPACE_TYPE is not known in all spaces to determine allowance."
+
 
 
 class Section6Rule1(RuleDefinitionListIndexedBase):
@@ -44,7 +46,13 @@ class Section6Rule1(RuleDefinitionListIndexedBase):
                     building_segment_p["lighting_building_area_type"]
                 )["lpd"] if building_segment_p.get("lighting_building_area_type") != None else ZERO.POWER_PER_AREA,
                 "building_area_type_bool": True if building_segment_p.get("lighting_building_area_type") != None else False
-            }
+                "building_allowable_lighting_power": CalcQ(
+                    "electric_power", building_allowable_lighting_power
+                ),
+                "building_design_lighting_power": CalcQ(
+                    "electric_power", building_design_lighting_power
+                ),
+
 
         class ZoneRule(RuleDefinitionListIndexedBase):
             def __init__(self):
