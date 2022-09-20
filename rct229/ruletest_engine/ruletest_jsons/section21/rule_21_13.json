@@ -1,14 +1,14 @@
 {
-    "rule-21-4-a": {
+    "rule-21-13-a": {
         "Section": 21,
-        "Rule": 4,
+        "Rule": 13,
         "Test": "a",
-        "test_description": "Baseline building is system type 7 and is correctly modeled with a HW Loop with a natural draft boiler",
+        "test_description": "Baseline RMR has system 7 with heating design and control's minimum flow fraction correctly set to 0.25",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "21-4",
-            "ruleset_reference": "G3.1.3.2",
-            "rule_description": "When baseline building does not use purchased heat, baseline systems 1,5,7,11,12 shall be modeled with natural draft boilers.",
+            "rule_id": "21-13",
+            "ruleset_reference": "G3.1.3.5",
+            "rule_description": "When the baseline building uses boiler(s) or purchased hot water, the hot water pumping system shall be modeled with a minimum turndown ratio of 0.25.",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
@@ -100,8 +100,7 @@
                                 "rated_capacity": 117228.44444444445,
                                 "efficiency": 0.75,
                                 "efficiency_metric": "THERMAL",
-                                "energy_source_type": "NATURAL_GAS",
-                                "draft_type": "NATURAL"
+                                "energy_source_type": "NATURAL_GAS"
                             }
                         ],
                         "chillers": [
@@ -125,7 +124,11 @@
                         "fluid_loops": [
                             {
                                 "id": "Boiler Loop 1",
-                                "type": "HEATING"
+                                "type": "HEATING",
+                                "heating_design_and_control": {
+                                    "id": "DAC 1",
+                                    "minimum_flow_fraction": 0.25
+                                }
                             }
                         ]
                     }
@@ -133,16 +136,16 @@
             }
         }
     },
-    "rule-21-4-b": {
+    "rule-21-13-b": {
         "Section": 21,
-        "Rule": 4,
+        "Rule": 13,
         "Test": "b",
-        "test_description": "Baseline building is system type 7  and is incorrectly modeled with a HW Loop with a forced draft boiler",
+        "test_description": "Baseline RMR has system 7 with heating design and control's minimum flow fraction incorrectly set to 0.30",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "21-4",
-            "ruleset_reference": "G3.1.3.2",
-            "rule_description": "When baseline building does not use purchased heat, baseline systems 1,5,7,11,12 shall be modeled with natural draft boilers.",
+            "rule_id": "21-13",
+            "ruleset_reference": "G3.1.3.5",
+            "rule_description": "When the baseline building uses boiler(s) or purchased hot water, the hot water pumping system shall be modeled with a minimum turndown ratio of 0.25.",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
@@ -234,8 +237,7 @@
                                 "rated_capacity": 117228.44444444445,
                                 "efficiency": 0.75,
                                 "efficiency_metric": "THERMAL",
-                                "energy_source_type": "NATURAL_GAS",
-                                "draft_type": "FORCED"
+                                "energy_source_type": "NATURAL_GAS"
                             }
                         ],
                         "chillers": [
@@ -259,7 +261,11 @@
                         "fluid_loops": [
                             {
                                 "id": "Boiler Loop 1",
-                                "type": "HEATING"
+                                "type": "HEATING",
+                                "heating_design_and_control": {
+                                    "id": "DAC 1",
+                                    "minimum_flow_fraction": 0.3
+                                }
                             }
                         ]
                     }
