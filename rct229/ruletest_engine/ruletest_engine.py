@@ -12,6 +12,7 @@ from rct229.rules.section6 import *
 from rct229.rules.section12 import *
 from rct229.rules.section15 import *
 from rct229.rules.section21 import *
+from rct229.rules.section22 import *
 from rct229.ruletest_engine.ruletest_jsons.scripts.json_generation_utilities import (
     merge_nested_dictionary,
 )
@@ -524,4 +525,18 @@ def run_boiler_tests():
     Results of boiler test are spit out to console
     """
     boiler_test_json = "section21/rule_21_3.json"
+    return run_section_tests(boiler_test_json)
+
+
+def run_chiller_tests():
+    """Runs all tests found in the chiller tests JSON
+
+    Returns
+    -------
+    None
+
+    Results of chiller test are spit out to console
+    """
+    boiler_test_json = "section22/rule_22_1.json"
+
     return run_section_tests(boiler_test_json)
