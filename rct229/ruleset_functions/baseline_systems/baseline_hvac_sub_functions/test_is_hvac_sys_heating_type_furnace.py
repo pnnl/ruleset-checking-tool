@@ -1,5 +1,6 @@
-from rct229.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.is_hvac_sys_heating_type_furnace import \
-    is_hvac_sys_heating_type_furnace
+from rct229.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.is_hvac_sys_heating_type_furnace import (
+    is_hvac_sys_heating_type_furnace,
+)
 
 TEST_RMD = {
     "id": "test_rmd",
