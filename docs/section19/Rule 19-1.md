@@ -43,10 +43,10 @@
 
 
 **Notes/Questions:**  
-1. Shall we split this into 2 rules that assess heating and cooling separately? Perhaps not needed. 
-2. Systems 1a, 1c, 9b, and 10 cannot be assessed because coils are defined at the terminal. 
-3. We already check that the project is modeled by orientation in Rule 5-1. I think this would just involve checking the sizing then. Shall we remove the orientation part of the rule? 
-4. Why does it say the over_sizing_factor is only for furnaces and heat pumps in the schema? 
+1. Shall we split this into 2 rules that assess heating and cooling separately? Perhaps not needed as above appears to work fine. 
+2. Systems 1a, 1c, 9b, and 10 cannot be assessed because coils are defined at the terminal. This does not appear to impact anything though.
+3. We already check that the project is modeled by orientation in Rule 5-1. The check that the sizing factors are consistent across orientations will be an umbrella check. 
+4. Shall I update this to only check the oversizing factor for furnaces, heat pumps, and DX cooling based on exchanges with Mike R at PNNL?  
 5. What would we expect for a 25% oversizing factor? 1.25 or 25%?
 
 **[Back](_toc.md)**
