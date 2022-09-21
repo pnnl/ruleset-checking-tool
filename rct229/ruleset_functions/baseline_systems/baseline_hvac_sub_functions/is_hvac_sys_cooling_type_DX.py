@@ -27,10 +27,8 @@ def is_hvac_sys_cooling_type_dx(rmi_b, hvac_b_id):
         hvac_b_id,
         rmi_b,
     )
-    is_hvac_sys_cooling_type_dx_flag = (
-        hvac_b.get("cooling_system") is not None
-        and find_one("$.cooling_system.cooling_system_type", hvac_b)
+
+    return (
+        find_one("$.cooling_system.cooling_system_type", hvac_b)
         == COOLING_SYSTEM_TYPE.DIRECT_EXPANSION
     )
-
-    return is_hvac_sys_cooling_type_dx_flag
