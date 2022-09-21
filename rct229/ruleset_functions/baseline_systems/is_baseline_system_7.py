@@ -71,7 +71,7 @@ def is_baseline_system_7(rmi_b, hvac_b_id, terminal_unit_id_list, zone_id_list):
 
     # Get the hvac system
     hvac_b = find_exactly_one_with_field_value(
-        "buildings[*].building_segments[*].heating_ventilation_air_conditioning_systems",
+        "buildings[*].building_segments[*].heating_ventilation_air_conditioning_systems[*]",
         "id",
         hvac_b_id,
         rmi_b,
@@ -87,7 +87,7 @@ def is_baseline_system_7(rmi_b, hvac_b_id, terminal_unit_id_list, zone_id_list):
         (
             hvac_b.get("heating_system") is None
             or find_one(
-                f"heating_system[?(@.heating_system_type={HEATING_SYSTEM.NONE})]",
+                f'heating_system[?(@.heating_system_type="{HEATING_SYSTEM.NONE}")]',
                 hvac_b,
             )
             is not None
@@ -108,39 +108,23 @@ def is_baseline_system_7(rmi_b, hvac_b_id, terminal_unit_id_list, zone_id_list):
 
     if has_required_sys and are_sys_data_matched:
         # Confirm required data for Sys-7, now to decide which system type 7
-        is_hvac_sys_preheat_fluid_loop_attached_to_boiler_flag = (
-            is_hvac_sys_preheat_fluid_loop_attached_to_boiler(rmi_b, hvac_b_id)
-        )
-        are_all_terminal_heating_loops_attached_to_boiler_flag = (
-            are_all_terminal_heating_loops_attached_to_boiler(
-                rmi_b, terminal_unit_id_list
-            )
-        )
         is_hvac_sys_fluid_loop_attached_to_chiller_flag = (
             is_hvac_sys_fluid_loop_attached_to_chiller(rmi_b, hvac_b_id)
         )
         is_hvac_sys_fluid_loop_purchased_chw_flag = (
             is_hvac_sys_fluid_loop_purchased_chw(rmi_b, hvac_b_id)
         )
-        is_hvac_sys_preheat_fluid_loop_purchased_heating_flag = (
-            is_hvac_sys_preheat_fluid_loop_purchased_heating(rmi_b, hvac_b_id)
-        )
-        are_all_terminal_heating_loops_purchased_heating_flag = (
-            are_all_terminal_heating_loops_purchased_heating(
-                rmi_b, terminal_unit_id_list
-            )
-        )
         if (
-            is_hvac_sys_preheat_fluid_loop_attached_to_boiler_flag
-            and are_all_terminal_heating_loops_attached_to_boiler_flag
+            is_hvac_sys_preheat_fluid_loop_attached_to_boiler(rmi_b, hvac_b_id)
+            and are_all_terminal_heating_loops_attached_to_boiler(rmi_b, terminal_unit_id_list)
         ):
             if is_hvac_sys_fluid_loop_attached_to_chiller_flag:
                 is_baseline_system_7_str = HVAC_SYS.SYS_7
             elif is_hvac_sys_fluid_loop_purchased_chw_flag:
                 is_baseline_system_7_str = HVAC_SYS.SYS_7A
         elif (
-            is_hvac_sys_preheat_fluid_loop_purchased_heating_flag
-            and are_all_terminal_heating_loops_purchased_heating_flag
+                is_hvac_sys_preheat_fluid_loop_purchased_heating(rmi_b, hvac_b_id)
+                and are_all_terminal_heating_loops_purchased_heating(rmi_b, terminal_unit_id_list)
         ):
             if is_hvac_sys_fluid_loop_attached_to_chiller_flag:
                 is_baseline_system_7_str = HVAC_SYS.SYS_7B

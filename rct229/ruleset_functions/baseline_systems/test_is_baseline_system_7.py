@@ -1,8 +1,5 @@
+from rct229.ruleset_functions.baseline_systems.baseline_system_util import HVAC_SYS
 from rct229.ruleset_functions.baseline_systems.is_baseline_system_7 import (
-    SYS_7,
-    SYS_7A,
-    SYS_7B,
-    SYS_7C,
     is_baseline_system_7,
 )
 
@@ -235,7 +232,7 @@ def test_is_baseline_system_7_true():
             ["VAV Air Terminal 1"],
             ["Thermal Zone 1"],
         )
-        == SYS_7
+        == HVAC_SYS.SYS_7
     )
 
 
@@ -247,7 +244,7 @@ def test_is_baseline_system_7a_true():
             ["VAV Air Terminal 2"],
             ["Thermal Zone 2"],
         )
-        == SYS_7A
+        == HVAC_SYS.SYS_7A
     )
 
 
@@ -259,7 +256,7 @@ def test_is_baseline_system_7b_true():
             ["VAV Air Terminal 3"],
             ["Thermal Zone 3"],
         )
-        == SYS_7B
+        == HVAC_SYS.SYS_7B
     )
 
 
@@ -271,5 +268,5 @@ def test_is_baseline_system_7c_true():
             ["VAV Air Terminal 4"],
             ["Thermal Zone 4"],
         )
-        == SYS_7C
+        == HVAC_SYS.SYS_7C
     )
