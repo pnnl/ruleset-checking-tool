@@ -41,21 +41,17 @@ from rct229.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.is_hv
 from rct229.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.is_hvac_sys_preheating_type_fluid_loop import (
     is_hvac_sys_preheating_type_fluid_loop,
 )
+from rct229.ruleset_functions.baseline_systems.baseline_system_util import HVAC_SYS
 from rct229.utils.jsonpath_utils import find_exactly_one_with_field_value, find_one
 
 HEATING_SYSTEM = schema_enums["HeatingSystemOptions"]
-NOT_SYS_7 = "Not_Sys_7"
-SYS_7 = "Sys-7"
-SYS_7A = "Sys-7a"
-SYS_7B = "Sys-7b"
-SYS_7C = "Sys-7c"
 
 
 def is_baseline_system_7(rmi_b, hvac_b_id, terminal_unit_id_list, zone_id_list):
     """
     Get either Sys-7, Sys-7a, Sys-7b, Sys-7c or Not_Sys_7 string output which indicates whether the HVAC system is
     ASHRAE 90.1 2019 Appendix G system 7 (VAV with Reheat), system 7a (system 7 with purchased CHW), system 7b (
-    system 7 with purchased heating), pr system 7c (system 7 with purchased heating and purchased CHW).
+    system 7 with purchased heating), or system 7c (system 7 with purchased heating and purchased CHW).
 
     Parameters
     ----------
@@ -71,7 +67,7 @@ def is_baseline_system_7(rmi_b, hvac_b_id, terminal_unit_id_list, zone_id_list):
     purchased CHW), system 7b (system 7 with purchased heating), pr system 7c (system 7 with purchased heating and
     purchased CHW). -------
     """
-    is_baseline_system_7_str = NOT_SYS_7
+    is_baseline_system_7_str = HVAC_SYS.UNMATCHED
 
     # Get the hvac system
     hvac_b = find_exactly_one_with_field_value(
@@ -139,16 +135,16 @@ def is_baseline_system_7(rmi_b, hvac_b_id, terminal_unit_id_list, zone_id_list):
             and are_all_terminal_heating_loops_attached_to_boiler_flag
         ):
             if is_hvac_sys_fluid_loop_attached_to_chiller_flag:
-                is_baseline_system_7_str = SYS_7
+                is_baseline_system_7_str = HVAC_SYS.SYS_7
             elif is_hvac_sys_fluid_loop_purchased_chw_flag:
-                is_baseline_system_7_str = SYS_7A
+                is_baseline_system_7_str = HVAC_SYS.SYS_7A
         elif (
             is_hvac_sys_preheat_fluid_loop_purchased_heating_flag
             and are_all_terminal_heating_loops_purchased_heating_flag
         ):
             if is_hvac_sys_fluid_loop_attached_to_chiller_flag:
-                is_baseline_system_7_str = SYS_7B
+                is_baseline_system_7_str = HVAC_SYS.SYS_7B
             elif is_hvac_sys_fluid_loop_purchased_chw_flag:
-                is_baseline_system_7_str = SYS_7C
+                is_baseline_system_7_str = HVAC_SYS.SYS_7C
 
     return is_baseline_system_7_str
