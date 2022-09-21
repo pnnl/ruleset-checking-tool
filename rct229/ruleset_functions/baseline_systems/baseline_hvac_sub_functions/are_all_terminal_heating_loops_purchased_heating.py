@@ -25,15 +25,14 @@ def are_all_terminal_heating_loops_purchased_heating(rmi_b, terminal_unit_id_lis
     # external_fluid_sources = rmi_b.get("external_fluid_source")
     purchased_heating_loop_id_list_b = [
         *find_all(
-            f"(external_fluid_source[?(@.type=={EXTERNAL_FLUID_SOURCE.HOT_WATER})].loop) | (external_fluid_source[?("
-            f"@.type=={EXTERNAL_FLUID_SOURCE.STEAM})].loop)",
+            f'external_fluid_source[*][?(@.type="{EXTERNAL_FLUID_SOURCE.HOT_WATER}"), ?(@.type="{EXTERNAL_FLUID_SOURCE.STEAM}")].loop',
             rmi_b,
         )
     ]
 
     for terminal_b_id in terminal_unit_id_list:
         terminal_b = find_exactly_one_with_field_value(
-            "$.buildings[*].building_segments[*].zones[*].terminals",
+            "$.buildings[*].building_segments[*].zones[*].terminals[*]",
             "id",
             terminal_b_id,
             rmi_b,
@@ -41,7 +40,7 @@ def are_all_terminal_heating_loops_purchased_heating(rmi_b, terminal_unit_id_lis
         heating_from_loop_id = terminal_b.get("heating_from_loop")
         if heating_from_loop_id:
             fluid_loop = find_exactly_one_with_field_value(
-                "$.fluid_loops",
+                "$.fluid_loops[*]",
                 "id",
                 heating_from_loop_id,
                 rmi_b,

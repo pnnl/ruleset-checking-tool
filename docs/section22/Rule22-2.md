@@ -18,6 +18,7 @@
 **Function Call:**  
 
 1. get_baseline_system_types()
+2. find_all()
 
 **Applicability Checks:**  
 
@@ -29,7 +30,7 @@
 
 ## Rule Logic:  
 
-- For each chiller in B_RMR, save chiller to loop-chiller dictionary: `for chiller_b in B_RMR.ASHRAE229.chillers: loop_chiller_dict[chiller_b.cooling_loop].append(chiller_b)`
+- For each boiler in B_RMI, save boiler to loop boiler dictionary: `loop_boiler_dict = find_all(B-RMI)`
 
 - For each fluid loop in B_RMR: `for fluid_loop_b in B_RMR.ASHRAE229.fluid_loops:`
 
