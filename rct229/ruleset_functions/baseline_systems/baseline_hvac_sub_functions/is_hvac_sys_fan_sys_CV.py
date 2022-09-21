@@ -30,8 +30,7 @@ def is_hvac_sys_fan_sys_cv(rmi_b, hvac_b_id):
     fan_system = hvac_b.get("fan_system")
     is_hvac_sys_fan_sys_cv_flag = (
         fan_system is not None
-        and fan_system.get("fan_control")
-        == FAN_SYSTEM_SUPPLY_FAN_CONTROL.CONSTANT
+        and fan_system.get("fan_control") == FAN_SYSTEM_SUPPLY_FAN_CONTROL.CONSTANT
     )
 
     return is_hvac_sys_fan_sys_cv_flag

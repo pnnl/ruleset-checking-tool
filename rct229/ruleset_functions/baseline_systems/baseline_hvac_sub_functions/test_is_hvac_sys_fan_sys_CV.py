@@ -1,5 +1,6 @@
-from rct229.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.is_hvac_sys_fan_sys_CV import \
-    is_hvac_sys_fan_sys_cv
+from rct229.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.is_hvac_sys_fan_sys_CV import (
+    is_hvac_sys_fan_sys_cv,
+)
 
 TEST_RMD = {
     "id": "test_rmd",
