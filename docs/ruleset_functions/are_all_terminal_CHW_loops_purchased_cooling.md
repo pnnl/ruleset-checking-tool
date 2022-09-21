@@ -13,7 +13,7 @@
 
 ## Logic:   
 - Set are_all_terminal_CHW_loops_purchased_cooling equal to TRUE: `are_all_terminal_CHW_loops_purchased_cooling = TRUE`  
-- Check if RMR is not modeled with external fluid source: `if RMR.RuleModelInstance.external_fluid_source != Null:`  
+- Check if RMR is modeled with external fluid source: `if RMR.RuleModelInstance.external_fluid_source != Null:`  
     - For each external fluid source in RMR: `for external_fluid_source.id in RMR.RuleModelInstance.external_fluid_source:`  
         - Check if external fluid source is CHW: `if external_fluid_source.id.type == "CHILLED_WATER":`    
             - Add the associated loop to the purchased_cooling_loop_list_b list: `purchased_cooling_loop_list_b = purchased_cooling_loop_list_b.append (external_fluid_source.id.loop.id)`   
