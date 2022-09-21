@@ -114,17 +114,19 @@ def is_baseline_system_7(rmi_b, hvac_b_id, terminal_unit_id_list, zone_id_list):
         is_hvac_sys_fluid_loop_purchased_chw_flag = (
             is_hvac_sys_fluid_loop_purchased_chw(rmi_b, hvac_b_id)
         )
-        if (
-            is_hvac_sys_preheat_fluid_loop_attached_to_boiler(rmi_b, hvac_b_id)
-            and are_all_terminal_heating_loops_attached_to_boiler(rmi_b, terminal_unit_id_list)
+        if is_hvac_sys_preheat_fluid_loop_attached_to_boiler(
+            rmi_b, hvac_b_id
+        ) and are_all_terminal_heating_loops_attached_to_boiler(
+            rmi_b, terminal_unit_id_list
         ):
             if is_hvac_sys_fluid_loop_attached_to_chiller_flag:
                 is_baseline_system_7_str = HVAC_SYS.SYS_7
             elif is_hvac_sys_fluid_loop_purchased_chw_flag:
                 is_baseline_system_7_str = HVAC_SYS.SYS_7A
-        elif (
-                is_hvac_sys_preheat_fluid_loop_purchased_heating(rmi_b, hvac_b_id)
-                and are_all_terminal_heating_loops_purchased_heating(rmi_b, terminal_unit_id_list)
+        elif is_hvac_sys_preheat_fluid_loop_purchased_heating(
+            rmi_b, hvac_b_id
+        ) and are_all_terminal_heating_loops_purchased_heating(
+            rmi_b, terminal_unit_id_list
         ):
             if is_hvac_sys_fluid_loop_attached_to_chiller_flag:
                 is_baseline_system_7_str = HVAC_SYS.SYS_7B
