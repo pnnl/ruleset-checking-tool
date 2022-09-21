@@ -1,5 +1,5 @@
 from rct229.data.schema_enums import schema_enums
-from rct229.utils.jsonpath_utils import find_exactly_one_with_field_value
+from rct229.utils.jsonpath_utils import find_exactly_one_with_field_value, find_one
 
 FAN_SYSTEM_SUPPLY_FAN_CONTROL = schema_enums["FanSystemSupplyFanControlOptions"]
 
@@ -27,10 +27,8 @@ def is_hvac_sys_fan_sys_cv(rmi_b, hvac_b_id):
         hvac_b_id,
         rmi_b,
     )
-    fan_system = hvac_b.get("fan_system")
-    is_hvac_sys_fan_sys_cv_flag = (
-        fan_system is not None
-        and fan_system.get("fan_control") == FAN_SYSTEM_SUPPLY_FAN_CONTROL.CONSTANT
-    )
 
-    return is_hvac_sys_fan_sys_cv_flag
+    return (
+        find_one("$.fan_system.fan_control", hvac_b)
+        == FAN_SYSTEM_SUPPLY_FAN_CONTROL.CONSTANT
+    )
