@@ -19,6 +19,9 @@
         - Set are_all_terminal_types_VAV = FALSE: `are_all_terminal_types_VAV = FALSE`
         - Leave the loop: `break`  
 
-**Returns** `return are_all_terminal_types_VAV`   
+**Returns** `return are_all_terminal_types_VAV` 
+
+**Notes:**  
+1. This function is always called after "if is_hvac_sys_fan_sys_VSD(B_RMR, hvac_b.id) == TRUE", so we are not requiring that VAV is defined both on system and terminal level. 
 
 **[Back](../_toc.md)**
