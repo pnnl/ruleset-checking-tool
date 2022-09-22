@@ -94,6 +94,7 @@ class Section6Rule1(RuleDefinitionListIndexedBase):
 
         def rule_check(self, context, calc_vals=None, data=None):
             allowable_LPD_BAM = calc_vals["allowable_LPD_BAM"]
+            check_BAM_flag = calc_vals["check_BAM_flag"]
             building_segment_design_lighting_wattage = calc_vals[
                 "building_segment_design_lighting_wattage"
             ]
@@ -107,11 +108,11 @@ class Section6Rule1(RuleDefinitionListIndexedBase):
             )
 
             return (
-                building_segment_design_lighting_wattage <= allowable_LPD_wattage_BAM
+                (allowable_LPD_BAM or not check_BAM_flag)
+                and building_segment_design_lighting_wattage
+                <= allowable_LPD_wattage_BAM
                 or building_segment_design_lighting_wattage
                 <= allowable_lighting_wattage_SBS
-                or building_segment_design_lighting_wattage
-                <= max(allowable_LPD_wattage_BAM, allowable_lighting_wattage_SBS)
             )
 
         def get_pass_msg(self, context, calc_vals=None, data=None):
