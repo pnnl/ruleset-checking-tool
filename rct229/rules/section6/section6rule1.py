@@ -80,10 +80,16 @@ class Section6Rule1(RuleDefinitionListIndexedBase):
 
             return {
                 "allowable_LPD_BAM": CalcQ("power_density", allowable_LPD_BAM),
-                "building_segment_design_lighting_wattage": CalcQ("electric_power", building_segment_design_lighting_wattage),
+                "building_segment_design_lighting_wattage": CalcQ(
+                    "electric_power", building_segment_design_lighting_wattage
+                ),
                 "check_BAM_flag": check_BAM_flag,
-                "total_building_segment_area_p": CalcQ("area", total_building_segment_area_p),
-                "allowable_lighting_wattage_SBS": CalcQ("electric_power", allowable_lighting_wattage_SBS),
+                "total_building_segment_area_p": CalcQ(
+                    "area", total_building_segment_area_p
+                ),
+                "allowable_lighting_wattage_SBS": CalcQ(
+                    "electric_power", allowable_lighting_wattage_SBS
+                ),
             }
 
         def rule_check(self, context, calc_vals=None, data=None):
