@@ -86,12 +86,6 @@ class Section6Rule1(RuleDefinitionListIndexedBase):
                 "allowable_lighting_wattage_SBS": CalcQ("electric_power", allowable_lighting_wattage_SBS),
             }
 
-            return {
-                "total_space_lpd_u": CalcQ("power_density", total_space_lpd_u),
-                "total_space_lpd_p": CalcQ("power_density", total_space_lpd_p),
-                "space_lighting_status_type_p": space_lighting_status_type_p,
-            }
-
         def rule_check(self, context, calc_vals=None, data=None):
             allowable_LPD_BAM = calc_vals["allowable_LPD_BAM"]
             check_BAM_flag = calc_vals["check_BAM_flag"]
