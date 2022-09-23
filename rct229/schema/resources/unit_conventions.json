@@ -9,7 +9,11 @@
         "linear_thermal_transmittance": "W/m-K",
         "cooling_capacity": "W",
         "capacity": "W",
-        "volumetric_flow_rate": "m3/s"
+        "volumetric_flow_rate": "m3/s",
+        "cooling_efficiency": "W/W",
+        "temperature": "C",
+        "fluid_flow_rate": "L/s",
+        "pump_head": "m"
     },
     "ip": {
         "transformer_capacity": "V-A",
@@ -21,6 +25,10 @@
         "linear_thermal_transmittance": "Btu/hr-ft-R",
         "cooling_capacity": "ton",
         "capacity": "Btu/hr",
-        "volumetric_flow_rate": "cfm"
+        "volumetric_flow_rate": "cfm",
+        "cooling_efficiency": "kW/ton",
+        "temperature": "F",
+        "fluid_flow_rate": "gallon/min",
+        "pump_head": "ft"
     }
 }
