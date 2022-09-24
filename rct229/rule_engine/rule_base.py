@@ -4,6 +4,7 @@ from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedV
 from rct229.utils.assertions import MissingKeyException, RCTFailureException
 from rct229.utils.json_utils import slash_prefix_guarantee
 from rct229.utils.jsonpath_utils import find_all
+from rct229.utils.pint_utils import calcq_to_q
 
 
 class RuleDefinitionBase:
@@ -19,6 +20,7 @@ class RuleDefinitionBase:
         must_match_by_ids=[],
         manual_check_required_msg="",
         fail_msg="",
+        pass_msg="",
         not_applicable_msg="",
     ):
         """Base class for all Rule definitions
@@ -58,8 +60,9 @@ class RuleDefinitionBase:
         self.manual_check_required_msg = manual_check_required_msg
         self.not_applicable_msg = not_applicable_msg
         self.fail_msg = fail_msg
+        self.pass_msg = pass_msg
 
-    def evaluate(self, rmrs, data=None):
+    def evaluate(self, rmrs, data={}):
         """Generates the outcome dictionary for the rule
 
         This method also orchestrates the high-level workflow for any rule.
@@ -118,9 +121,12 @@ class RuleDefinitionBase:
                         # Get calculated values; these can be used by
                         # manual_check_required() or rule_check() and will
                         # be included in the output
-                        calc_vals = self.get_calc_vals(context, data)
+                        raw_calc_vals = self.get_calc_vals(context, data)
+                        # Convert all CalcQ values to its q value for use in the
+                        # remaining methods
+                        calc_vals = calcq_to_q(raw_calc_vals)
                         if calc_vals is not None:
-                            outcome["calc_vals"] = calc_vals
+                            outcome["calc_vals"] = raw_calc_vals
 
                         # Determine if manual check is required
                         if self.manual_check_required(context, calc_vals, data):
@@ -141,6 +147,9 @@ class RuleDefinitionBase:
                             # Assume result type is bool
                             elif result:
                                 outcome["result"] = "PASSED"
+                                pass_msg = self.get_pass_msg(context, calc_vals, data)
+                                if pass_msg:
+                                    outcome["message"] = pass_msg
                             else:
                                 outcome["result"] = "FAILED"
                                 fail_msg = self.get_fail_msg(context, calc_vals, data)
@@ -605,3 +614,29 @@ class RuleDefinitionBase:
         """
 
         return self.fail_msg
+
+    def get_pass_msg(self, context, calc_vals=None, data=None):
+        """Gets the message to include in the outcome for the PASS case.
+
+        This base implementation simply returns the value of
+        self.pass_msg, which defaults to the empty string.
+
+        This method should only be overridden if there is more than one string
+        used for the PASS or PASS case. A fixed string can be given in the
+        `pass_msg` field passed to the initializer.
+
+        Parameters
+        ----------
+        context : UserBaselineProposedVals
+            Object containing the contexts for the user, baseline, and proposed RMRs
+        calc_vals : dict or None
+
+        data : An optional data object. It is ignored by this base implementation.
+
+        Returns
+        -------
+        str
+            The message associated with the Pass or Fail case
+        """
+
+        return self.pass_msg

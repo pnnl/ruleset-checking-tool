@@ -28,11 +28,8 @@ class Section6Rule9(RuleDefinitionListIndexedBase):
             "schedule reduction in buildings less than 5,000sq.ft.",
             list_path="ruleset_model_instances[0]",
             required_fields={"$": ["calendar"], "calendar": ["is_leap_year"]},
+            data_items={"is_leap_year": ("proposed", "calendar/is_leap_year")},
         )
-
-    def create_data(self, context, data=None):
-        rmd_p = context.proposed
-        return {"is_leap_year": rmd_p["calendar"]["is_leap_year"]}
 
     class RulesetModelInstanceRule(RuleDefinitionListIndexedBase):
         def __init__(self):
@@ -42,16 +39,11 @@ class Section6Rule9(RuleDefinitionListIndexedBase):
                 index_rmr="proposed",
                 list_path="buildings[*]",
                 required_fields={"$": ["schedules"]},
+                data_items={
+                    "schedules_b": ("baseline", "schedules"),
+                    "schedules_p": ("proposed", "schedules"),
+                },
             )
-
-        def create_data(self, context, data=None):
-            rmi_p = context.proposed
-            rmi_b = context.baseline
-            return {
-                **data,
-                "schedules_p": rmi_p["schedules"],
-                "schedules_b": rmi_b["schedules"],
-            }
 
         class BuildingRule(RuleDefinitionListIndexedBase):
             def __init__(self):
@@ -75,10 +67,12 @@ class Section6Rule9(RuleDefinitionListIndexedBase):
                 building_p = context.proposed
                 schedules_p = data["schedules_p"]
                 return {
-                    **data,
                     "building_open_schedule_p": getattr_(
                         find_exactly_one_with_field_value(
-                            "$", "id", building_p["building_open_schedule"], schedules_p
+                            "$[*]",
+                            "id",
+                            building_p["building_open_schedule"],
+                            schedules_p,
                         ),
                         "schedule",
                         "hourly_values",
@@ -100,7 +94,6 @@ class Section6Rule9(RuleDefinitionListIndexedBase):
                 def create_data(self, context, data=None):
                     zone_p = context.proposed
                     return {
-                        **data,
                         "avg_space_height": zone_p.get("volume", ZERO.VOLUME)
                         / pint_sum(find_all("spaces[*].floor_area", zone_p), ZERO.AREA),
                     }

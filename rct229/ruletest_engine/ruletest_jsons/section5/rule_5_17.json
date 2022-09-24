@@ -14,7 +14,7 @@
             "comparison_value": "Proposed RMR",
             "rule_dependency": "None",
             "primary_rule": "Y",
-            "schema_version": "0.0.12"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "proposed": {
@@ -134,7 +134,7 @@
             "comparison_value": "Proposed RMR",
             "rule_dependency": "None",
             "primary_rule": "Y",
-            "schema_version": "0.0.12"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "proposed": {
@@ -254,7 +254,7 @@
             "comparison_value": "Proposed RMR",
             "rule_dependency": "None",
             "primary_rule": "Y",
-            "schema_version": "0.0.12"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "proposed": {
@@ -278,18 +278,13 @@
                                                 "id": "Zone 1",
                                                 "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
+                                                "volume": 56.63369318399999,
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
                                                         "occupant_multiplier_schedule": "Required Occupancy Sched 1",
                                                         "lighting_space_type": "WAREHOUSE_STORAGE_AREA_SMALLER_HAND_CARRIED_ITEMS",
                                                         "floor_area": 23.225759999999998
-                                                    }
-                                                ],
-                                                "terminals": [
-                                                    {
-                                                        "id": "Terminal 1",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -311,11 +306,11 @@
                                                 "id": "HVAC 1",
                                                 "cooling_system": {
                                                     "id": "Cooling System 1",
-                                                    "sensible_cool_capacity": 0.0
+                                                    "design_sensible_cool_capacity": 0.0
                                                 },
                                                 "heating_system": {
                                                     "id": "Heating System 1",
-                                                    "heat_capacity": 699.8538133333334
+                                                    "design_capacity": 699.8538133333334
                                                 }
                                             }
                                         ]
@@ -347,18 +342,13 @@
                                                 "id": "Zone 1",
                                                 "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
+                                                "volume": 56.63369318399999,
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
                                                         "occupant_multiplier_schedule": "Required Occupancy Sched 1",
                                                         "lighting_space_type": "WAREHOUSE_STORAGE_AREA_SMALLER_HAND_CARRIED_ITEMS",
                                                         "floor_area": 23.225759999999998
-                                                    }
-                                                ],
-                                                "terminals": [
-                                                    {
-                                                        "id": "Terminal 1",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -380,11 +370,11 @@
                                                 "id": "HVAC 1",
                                                 "cooling_system": {
                                                     "id": "Cooling System 1",
-                                                    "sensible_cool_capacity": 0.0
+                                                    "design_sensible_cool_capacity": 0.0
                                                 },
                                                 "heating_system": {
                                                     "id": "Heating System 1",
-                                                    "heat_capacity": 699.8538133333334
+                                                    "design_capacity": 699.8538133333334
                                                 }
                                             }
                                         ]
@@ -412,7 +402,7 @@
             "comparison_value": "Proposed RMR",
             "rule_dependency": "None",
             "primary_rule": "Y",
-            "schema_version": "0.0.12"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "proposed": {
@@ -436,18 +426,13 @@
                                                 "id": "Zone 1",
                                                 "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
+                                                "volume": 56.63369318399999,
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
                                                         "occupant_multiplier_schedule": "Required Occupancy Sched 1",
                                                         "lighting_space_type": "WAREHOUSE_STORAGE_AREA_SMALLER_HAND_CARRIED_ITEMS",
                                                         "floor_area": 23.225759999999998
-                                                    }
-                                                ],
-                                                "terminals": [
-                                                    {
-                                                        "id": "Terminal 1",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -469,11 +454,11 @@
                                                 "id": "HVAC 1",
                                                 "cooling_system": {
                                                     "id": "Cooling System 1",
-                                                    "sensible_cool_capacity": 0.0
+                                                    "design_sensible_cool_capacity": 0.0
                                                 },
                                                 "heating_system": {
                                                     "id": "Heating System 1",
-                                                    "heat_capacity": 699.8538133333334
+                                                    "design_capacity": 699.8538133333334
                                                 }
                                             }
                                         ]
@@ -505,18 +490,13 @@
                                                 "id": "Zone 1",
                                                 "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
+                                                "volume": 56.63369318399999,
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
                                                         "occupant_multiplier_schedule": "Required Occupancy Sched 1",
                                                         "lighting_space_type": "WAREHOUSE_STORAGE_AREA_SMALLER_HAND_CARRIED_ITEMS",
                                                         "floor_area": 23.225759999999998
-                                                    }
-                                                ],
-                                                "terminals": [
-                                                    {
-                                                        "id": "Terminal 1",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -538,11 +518,11 @@
                                                 "id": "HVAC 1",
                                                 "cooling_system": {
                                                     "id": "Cooling System 1",
-                                                    "sensible_cool_capacity": 0.0
+                                                    "design_sensible_cool_capacity": 0.0
                                                 },
                                                 "heating_system": {
                                                     "id": "Heating System 1",
-                                                    "heat_capacity": 699.8538133333334
+                                                    "design_capacity": 699.8538133333334
                                                 }
                                             }
                                         ]
@@ -570,7 +550,7 @@
             "comparison_value": "Proposed RMR",
             "rule_dependency": "None",
             "primary_rule": "Y",
-            "schema_version": "0.0.12"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "proposed": {
@@ -690,7 +670,7 @@
             "comparison_value": "Proposed RMR",
             "rule_dependency": "None",
             "primary_rule": "Y",
-            "schema_version": "0.0.12"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "proposed": {
@@ -810,7 +790,7 @@
             "comparison_value": "Proposed RMR",
             "rule_dependency": "None",
             "primary_rule": "Y",
-            "schema_version": "0.0.12"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "proposed": {
@@ -834,18 +814,13 @@
                                                 "id": "Zone 1",
                                                 "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
+                                                "volume": 56.63369318399999,
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
                                                         "occupant_multiplier_schedule": "Required Occupancy Sched 1",
                                                         "lighting_space_type": "WAREHOUSE_STORAGE_AREA_SMALLER_HAND_CARRIED_ITEMS",
                                                         "floor_area": 23.225759999999998
-                                                    }
-                                                ],
-                                                "terminals": [
-                                                    {
-                                                        "id": "Terminal 1",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -867,11 +842,11 @@
                                                 "id": "HVAC 1",
                                                 "cooling_system": {
                                                     "id": "Cooling System 1",
-                                                    "sensible_cool_capacity": 0.0
+                                                    "design_sensible_cool_capacity": 0.0
                                                 },
                                                 "heating_system": {
                                                     "id": "Heating System 1",
-                                                    "heat_capacity": 699.8538133333334
+                                                    "design_capacity": 699.8538133333334
                                                 }
                                             }
                                         ]
@@ -903,18 +878,13 @@
                                                 "id": "Zone 1",
                                                 "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
+                                                "volume": 56.63369318399999,
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
                                                         "occupant_multiplier_schedule": "Required Occupancy Sched 1",
                                                         "lighting_space_type": "WAREHOUSE_STORAGE_AREA_SMALLER_HAND_CARRIED_ITEMS",
                                                         "floor_area": 23.225759999999998
-                                                    }
-                                                ],
-                                                "terminals": [
-                                                    {
-                                                        "id": "Terminal 1",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -936,11 +906,11 @@
                                                 "id": "HVAC 1",
                                                 "cooling_system": {
                                                     "id": "Cooling System 1",
-                                                    "sensible_cool_capacity": 0.0
+                                                    "design_sensible_cool_capacity": 0.0
                                                 },
                                                 "heating_system": {
                                                     "id": "Heating System 1",
-                                                    "heat_capacity": 699.8538133333334
+                                                    "design_capacity": 699.8538133333334
                                                 }
                                             }
                                         ]
@@ -968,7 +938,7 @@
             "comparison_value": "Proposed RMR",
             "rule_dependency": "None",
             "primary_rule": "Y",
-            "schema_version": "0.0.12"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "proposed": {
@@ -992,18 +962,13 @@
                                                 "id": "Zone 1",
                                                 "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
+                                                "volume": 56.63369318399999,
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
                                                         "occupant_multiplier_schedule": "Required Occupancy Sched 1",
                                                         "lighting_space_type": "WAREHOUSE_STORAGE_AREA_SMALLER_HAND_CARRIED_ITEMS",
                                                         "floor_area": 23.225759999999998
-                                                    }
-                                                ],
-                                                "terminals": [
-                                                    {
-                                                        "id": "Terminal 1",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -1025,11 +990,11 @@
                                                 "id": "HVAC 1",
                                                 "cooling_system": {
                                                     "id": "Cooling System 1",
-                                                    "sensible_cool_capacity": 0.0
+                                                    "design_sensible_cool_capacity": 0.0
                                                 },
                                                 "heating_system": {
                                                     "id": "Heating System 1",
-                                                    "heat_capacity": 699.8538133333334
+                                                    "design_capacity": 699.8538133333334
                                                 }
                                             }
                                         ]
@@ -1061,18 +1026,13 @@
                                                 "id": "Zone 1",
                                                 "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
+                                                "volume": 56.63369318399999,
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
                                                         "occupant_multiplier_schedule": "Required Occupancy Sched 1",
                                                         "lighting_space_type": "WAREHOUSE_STORAGE_AREA_SMALLER_HAND_CARRIED_ITEMS",
                                                         "floor_area": 23.225759999999998
-                                                    }
-                                                ],
-                                                "terminals": [
-                                                    {
-                                                        "id": "Terminal 1",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -1094,11 +1054,11 @@
                                                 "id": "HVAC 1",
                                                 "cooling_system": {
                                                     "id": "Cooling System 1",
-                                                    "sensible_cool_capacity": 0.0
+                                                    "design_sensible_cool_capacity": 0.0
                                                 },
                                                 "heating_system": {
                                                     "id": "Heating System 1",
-                                                    "heat_capacity": 699.8538133333334
+                                                    "design_capacity": 699.8538133333334
                                                 }
                                             }
                                         ]
@@ -1126,7 +1086,7 @@
             "comparison_value": "Proposed RMR",
             "rule_dependency": "None",
             "primary_rule": "Y",
-            "schema_version": "0.0.12"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "proposed": {
@@ -1246,7 +1206,7 @@
             "comparison_value": "Proposed RMR",
             "rule_dependency": "None",
             "primary_rule": "Y",
-            "schema_version": "0.0.12"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "proposed": {
@@ -1366,7 +1326,7 @@
             "comparison_value": "Proposed RMR",
             "rule_dependency": "None",
             "primary_rule": "Y",
-            "schema_version": "0.0.12"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "proposed": {
@@ -1390,18 +1350,13 @@
                                                 "id": "Zone 1",
                                                 "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
+                                                "volume": 56.63369318399999,
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
                                                         "occupant_multiplier_schedule": "Required Occupancy Sched 1",
                                                         "lighting_space_type": "WAREHOUSE_STORAGE_AREA_SMALLER_HAND_CARRIED_ITEMS",
                                                         "floor_area": 23.225759999999998
-                                                    }
-                                                ],
-                                                "terminals": [
-                                                    {
-                                                        "id": "Terminal 1",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -1416,19 +1371,6 @@
                                                         }
                                                     }
                                                 ]
-                                            }
-                                        ],
-                                        "heating_ventilation_air_conditioning_systems": [
-                                            {
-                                                "id": "HVAC 1",
-                                                "cooling_system": {
-                                                    "id": "Cooling System 1",
-                                                    "sensible_cool_capacity": 0.0
-                                                },
-                                                "heating_system": {
-                                                    "id": "Heating System 1",
-                                                    "heat_capacity": 699.8538133333334
-                                                }
                                             }
                                         ]
                                     }
@@ -1459,18 +1401,13 @@
                                                 "id": "Zone 1",
                                                 "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
+                                                "volume": 56.63369318399999,
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
                                                         "occupant_multiplier_schedule": "Required Occupancy Sched 1",
                                                         "lighting_space_type": "WAREHOUSE_STORAGE_AREA_SMALLER_HAND_CARRIED_ITEMS",
                                                         "floor_area": 23.225759999999998
-                                                    }
-                                                ],
-                                                "terminals": [
-                                                    {
-                                                        "id": "Terminal 1",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -1485,19 +1422,6 @@
                                                         }
                                                     }
                                                 ]
-                                            }
-                                        ],
-                                        "heating_ventilation_air_conditioning_systems": [
-                                            {
-                                                "id": "HVAC 1",
-                                                "cooling_system": {
-                                                    "id": "Cooling System 1",
-                                                    "sensible_cool_capacity": 0.0
-                                                },
-                                                "heating_system": {
-                                                    "id": "Heating System 1",
-                                                    "heat_capacity": 699.8538133333334
-                                                }
                                             }
                                         ]
                                     }
@@ -1524,7 +1448,7 @@
             "comparison_value": "Proposed RMR",
             "rule_dependency": "None",
             "primary_rule": "Y",
-            "schema_version": "0.0.12"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "proposed": {
@@ -1548,18 +1472,13 @@
                                                 "id": "Zone 1",
                                                 "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
+                                                "volume": 56.63369318399999,
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
                                                         "occupant_multiplier_schedule": "Required Occupancy Sched 1",
                                                         "lighting_space_type": "WAREHOUSE_STORAGE_AREA_SMALLER_HAND_CARRIED_ITEMS",
                                                         "floor_area": 23.225759999999998
-                                                    }
-                                                ],
-                                                "terminals": [
-                                                    {
-                                                        "id": "Terminal 1",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -1574,19 +1493,6 @@
                                                         }
                                                     }
                                                 ]
-                                            }
-                                        ],
-                                        "heating_ventilation_air_conditioning_systems": [
-                                            {
-                                                "id": "HVAC 1",
-                                                "cooling_system": {
-                                                    "id": "Cooling System 1",
-                                                    "sensible_cool_capacity": 0.0
-                                                },
-                                                "heating_system": {
-                                                    "id": "Heating System 1",
-                                                    "heat_capacity": 699.8538133333334
-                                                }
                                             }
                                         ]
                                     }
@@ -1617,18 +1523,13 @@
                                                 "id": "Zone 1",
                                                 "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
+                                                "volume": 56.63369318399999,
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
                                                         "occupant_multiplier_schedule": "Required Occupancy Sched 1",
                                                         "lighting_space_type": "WAREHOUSE_STORAGE_AREA_SMALLER_HAND_CARRIED_ITEMS",
                                                         "floor_area": 23.225759999999998
-                                                    }
-                                                ],
-                                                "terminals": [
-                                                    {
-                                                        "id": "Terminal 1",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -1643,19 +1544,6 @@
                                                         }
                                                     }
                                                 ]
-                                            }
-                                        ],
-                                        "heating_ventilation_air_conditioning_systems": [
-                                            {
-                                                "id": "HVAC 1",
-                                                "cooling_system": {
-                                                    "id": "Cooling System 1",
-                                                    "sensible_cool_capacity": 0.0
-                                                },
-                                                "heating_system": {
-                                                    "id": "Heating System 1",
-                                                    "heat_capacity": 699.8538133333334
-                                                }
                                             }
                                         ]
                                     }

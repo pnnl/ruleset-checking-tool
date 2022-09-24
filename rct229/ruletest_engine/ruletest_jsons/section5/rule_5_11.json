@@ -14,7 +14,7 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "Baseline heating and cooling capacities are established correctly (air-side HVAC rule TBD). This affects baseline space conditioning categories",
             "primary_rule": "Y",
-            "schema_version": "0.0.12"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "baseline": {
@@ -70,11 +70,11 @@
                                                 "id": "HVAC 1",
                                                 "cooling_system": {
                                                     "id": "Cooling System 1",
-                                                    "sensible_cool_capacity": 17585.0
+                                                    "design_sensible_cool_capacity": 17585.0
                                                 },
                                                 "heating_system": {
                                                     "id": "Heating System 1",
-                                                    "heat_capacity": 9378.275555555556
+                                                    "design_capacity": 9378.275555555556
                                                 }
                                             }
                                         ]
@@ -102,7 +102,7 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "Baseline heating and cooling capacities are established correctly (air-side HVAC rule TBD). This affects baseline space conditioning categories",
             "primary_rule": "Y",
-            "schema_version": "0.0.12"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "baseline": {
@@ -158,11 +158,11 @@
                                                 "id": "HVAC 1",
                                                 "cooling_system": {
                                                     "id": "Cooling System 1",
-                                                    "sensible_cool_capacity": 42204.0
+                                                    "design_sensible_cool_capacity": 42204.0
                                                 },
                                                 "heating_system": {
                                                     "id": "Heating System 1",
-                                                    "heat_capacity": 8792.133333333333
+                                                    "design_capacity": 8792.133333333333
                                                 }
                                             }
                                         ]
@@ -190,7 +190,7 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "Baseline heating and cooling capacities are established correctly (air-side HVAC rule TBD). This affects baseline space conditioning categories",
             "primary_rule": "Y",
-            "schema_version": "0.0.12"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "baseline": {
@@ -246,11 +246,11 @@
                                                 "id": "HVAC 1",
                                                 "cooling_system": {
                                                     "id": "Cooling System 1",
-                                                    "sensible_cool_capacity": 17585.0
+                                                    "design_sensible_cool_capacity": 17585.0
                                                 },
                                                 "heating_system": {
                                                     "id": "Heating System 1",
-                                                    "heat_capacity": 9378.275555555556
+                                                    "design_capacity": 9378.275555555556
                                                 }
                                             }
                                         ]
@@ -278,7 +278,7 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "Baseline heating and cooling capacities are established correctly (air-side HVAC rule TBD). This affects baseline space conditioning categories",
             "primary_rule": "Y",
-            "schema_version": "0.0.12"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "baseline": {
@@ -334,11 +334,11 @@
                                                 "id": "HVAC 1",
                                                 "cooling_system": {
                                                     "id": "Cooling System 1",
-                                                    "sensible_cool_capacity": 17585.0
+                                                    "design_sensible_cool_capacity": 17585.0
                                                 },
                                                 "heating_system": {
                                                     "id": "Heating System 1",
-                                                    "heat_capacity": 9378.275555555556
+                                                    "design_capacity": 9378.275555555556
                                                 }
                                             }
                                         ]
@@ -366,7 +366,7 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "Baseline heating and cooling capacities are established correctly (air-side HVAC rule TBD). This affects baseline space conditioning categories",
             "primary_rule": "Y",
-            "schema_version": "0.0.12"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "baseline": {
@@ -422,11 +422,11 @@
                                                 "id": "HVAC 1",
                                                 "cooling_system": {
                                                     "id": "Cooling System 1",
-                                                    "sensible_cool_capacity": 17585.0
+                                                    "design_sensible_cool_capacity": 17585.0
                                                 },
                                                 "heating_system": {
                                                     "id": "Heating System 1",
-                                                    "heat_capacity": 9378.275555555556
+                                                    "design_capacity": 9378.275555555556
                                                 }
                                             }
                                         ]
@@ -454,7 +454,7 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "Baseline heating and cooling capacities are established correctly (air-side HVAC rule TBD). This affects baseline space conditioning categories",
             "primary_rule": "Y",
-            "schema_version": "0.0.12"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "baseline": {
@@ -511,11 +511,11 @@
                                                 "id": "HVAC 1",
                                                 "cooling_system": {
                                                     "id": "Cooling System 1",
-                                                    "sensible_cool_capacity": 0.0
+                                                    "design_sensible_cool_capacity": 0.0
                                                 },
                                                 "heating_system": {
                                                     "id": "Heating System 1",
-                                                    "heat_capacity": 699.8538133333334
+                                                    "design_capacity": 699.8538133333334
                                                 }
                                             }
                                         ]
@@ -543,7 +543,7 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "Baseline heating and cooling capacities are established correctly (air-side HVAC rule TBD). This affects baseline space conditioning categories",
             "primary_rule": "Y",
-            "schema_version": "0.0.12"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "baseline": {
@@ -600,11 +600,11 @@
                                                 "id": "HVAC 1",
                                                 "cooling_system": {
                                                     "id": "Cooling System 1",
-                                                    "sensible_cool_capacity": 0.0
+                                                    "design_sensible_cool_capacity": 0.0
                                                 },
                                                 "heating_system": {
                                                     "id": "Heating System 1",
-                                                    "heat_capacity": 699.8538133333334
+                                                    "design_capacity": 699.8538133333334
                                                 }
                                             }
                                         ]
