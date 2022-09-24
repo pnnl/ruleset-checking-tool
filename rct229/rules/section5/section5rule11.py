@@ -11,6 +11,7 @@ from rct229.ruleset_functions.get_surface_conditioning_category_dict import (
     get_surface_conditioning_category_dict,
 )
 from rct229.utils.jsonpath_utils import find_all
+from rct229.utils.pint_utils import CalcQ
 from rct229.utils.std_comparisons import std_equal
 
 
@@ -29,11 +30,8 @@ class Section5Rule11(RuleDefinitionListIndexedBase):
             id="5-11",
             description="Baseline above-grade wall assemblies must match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8.",
             list_path="ruleset_model_instances[0].buildings[*]",
+            data_items={"climate_zone": ("baseline", "weather/climate_zone")},
         )
-
-    def create_data(self, context, data=None):
-        rmr_baseline = context.baseline
-        return {"climate_zone": rmr_baseline["weather"]["climate_zone"]}
 
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
@@ -47,9 +45,7 @@ class Section5Rule11(RuleDefinitionListIndexedBase):
 
         def create_data(self, context, data=None):
             building = context.baseline
-            # Merge into the existing data dict
             return {
-                **data,
                 "surface_conditioning_category_dict": get_surface_conditioning_category_dict(
                     data["climate_zone"], building
                 ),
@@ -57,9 +53,7 @@ class Section5Rule11(RuleDefinitionListIndexedBase):
 
         def list_filter(self, context_item, data=None):
             surface_b = context_item.baseline
-            return (
-                    get_opaque_surface_type(surface_b) == OST.ABOVE_GRADE_WALL
-            )
+            return get_opaque_surface_type(surface_b) == OST.ABOVE_GRADE_WALL
 
         class AboveGradeWallRule(RuleDefinitionBase):
             def __init__(self):
@@ -99,19 +93,25 @@ class Section5Rule11(RuleDefinitionListIndexedBase):
                         target_u_factor = target_u_factor_res
 
                 return {
-                    "above_grade_wall_u_factor": above_grade_wall_u_factor,
-                    "target_u_factor": target_u_factor,
-                    "target_u_factor_res": target_u_factor_res,
-                    "target_u_factor_nonres": target_u_factor_nonres,
+                    "above_grade_wall_u_factor": CalcQ(
+                        "thermal_transmittance", above_grade_wall_u_factor
+                    ),
+                    "target_u_factor": CalcQ("thermal_transmittance", target_u_factor),
+                    "target_u_factor_res": CalcQ(
+                        "thermal_transmittance", target_u_factor_res
+                    ),
+                    "target_u_factor_nonres": CalcQ(
+                        "thermal_transmittance", target_u_factor_nonres
+                    ),
                 }
 
-            def manual_check_required(self, context, calc_vals, data=None):
+            def manual_check_required(self, context, calc_vals=None, data=None):
                 target_u_factor_res = calc_vals["target_u_factor_res"]
                 target_u_factor_nonres = calc_vals["target_u_factor_nonres"]
 
                 return target_u_factor_res != target_u_factor_nonres
 
-            def rule_check(self, context, calc_vals, data=None):
+            def rule_check(self, context, calc_vals=None, data=None):
                 above_grade_wall_u_factor = calc_vals["above_grade_wall_u_factor"]
                 target_u_factor = calc_vals["target_u_factor"]
 

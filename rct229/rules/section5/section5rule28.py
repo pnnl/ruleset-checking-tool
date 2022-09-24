@@ -7,12 +7,13 @@ from rct229.ruleset_functions.get_surface_conditioning_category_dict import (
 from rct229.ruleset_functions.get_surface_conditioning_category_dict import (
     get_surface_conditioning_category_dict,
 )
+from rct229.utils.pint_utils import CalcQ
 
 FAIL_MSG = "Subsurface that is not regulated (Not part of building envelope) is not modeled with the same area, U-factor and SHGC in the baseline as in the propsoed design."
 
 
 class Section5Rule28(RuleDefinitionListIndexedBase):
-    """Rule 5 of ASHRAE 90.1-2019 Appendix G Section 5 (Envelope)"""
+    """Rule 28 of ASHRAE 90.1-2019 Appendix G Section 5 (Envelope)"""
 
     def __init__(self):
         super(Section5Rule28, self).__init__(
@@ -26,11 +27,8 @@ class Section5Rule28(RuleDefinitionListIndexedBase):
             id="5-28",
             description="Subsurface that is not regulated (not part of building envelope) must be modeled with the same area, U-factor and SHGC in the baseline as in the proposed design.",
             list_path="ruleset_model_instances[0].buildings[*]",
+            data_items={"climate_zone": ("baseline", "weather/climate_zone")},
         )
-
-    def create_data(self, context, data=None):
-        rmr_baseline = context.baseline
-        return {"climate_zone": rmr_baseline["weather"]["climate_zone"]}
 
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
@@ -43,9 +41,7 @@ class Section5Rule28(RuleDefinitionListIndexedBase):
 
         def create_data(self, context, data=None):
             building = context.baseline
-            # Merge into the existing data dict
             return {
-                **data,
                 "scc_dict_b": get_surface_conditioning_category_dict(
                     data["climate_zone"], building
                 ),
@@ -82,18 +78,30 @@ class Section5Rule28(RuleDefinitionListIndexedBase):
                     subsurface_p = context.proposed
 
                     return {
-                        "subsurface_u_factor_b": subsurface_b.get("u_factor"),
-                        "subsurface_u_factor_p": subsurface_p.get("u_factor"),
+                        "subsurface_u_factor_b": CalcQ(
+                            "thermal_transmittance", subsurface_b.get("u_factor")
+                        ),
+                        "subsurface_u_factor_p": CalcQ(
+                            "thermal_transmittance", subsurface_p.get("u_factor")
+                        ),
                         "subsurface_shgc_b": subsurface_b.get(
                             "solar_heat_gain_coefficient"
                         ),
                         "subsurface_shgc_p": subsurface_p.get(
                             "solar_heat_gain_coefficient"
                         ),
-                        "subsurface_glazed_area_b": subsurface_b.get("glazed_area"),
-                        "subsurface_glazed_area_p": subsurface_p.get("glazed_area"),
-                        "subsurface_opaque_area_b": subsurface_b.get("opaque_area"),
-                        "subsurface_opaque_area_p": subsurface_p.get("opaque_area"),
+                        "subsurface_glazed_area_b": CalcQ(
+                            "area", subsurface_b.get("glazed_area")
+                        ),
+                        "subsurface_glazed_area_p": CalcQ(
+                            "area", subsurface_p.get("glazed_area")
+                        ),
+                        "subsurface_opaque_area_b": CalcQ(
+                            "area", subsurface_b.get("opaque_area")
+                        ),
+                        "subsurface_opaque_area_p": CalcQ(
+                            "area", subsurface_p.get("opaque_area")
+                        ),
                     }
 
                 def rule_check(self, context, calc_vals, data=None):
