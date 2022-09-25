@@ -44,7 +44,7 @@ TEST_RMR = {
                             "id": "hvac_1_2",
                             "heating_system": {
                                 "id": "hsys_1_2_1",
-                                "heat_capacity": SYSTEM_MIN_HEATING_OUTPUT
+                                "design_capacity": SYSTEM_MIN_HEATING_OUTPUT
                                 + POWER_DELTA,
                             },
                         },

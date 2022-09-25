@@ -12,6 +12,7 @@ from rct229.ruleset_functions.get_surface_conditioning_category_dict import (
 from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.match_lists import match_lists_by_id
+from rct229.utils.pint_utils import CalcQ
 from rct229.utils.std_comparisons import std_equal
 
 
@@ -30,11 +31,8 @@ class Section5Rule17(RuleDefinitionListIndexedBase):
             id="5-17",
             description="Opaque surfaces that are not regulated (not part of opaque building envelope) must be modeled the same in the baseline as in the proposed design. ",
             list_path="ruleset_model_instances[0].buildings[*]",
+            data_items={"climate_zone": ("baseline", "weather/climate_zone")},
         )
-
-    def create_data(self, context, data=None):
-        rmr_baseline = context.baseline
-        return {"climate_zone": rmr_baseline["weather"]["climate_zone"]}
 
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
@@ -43,39 +41,21 @@ class Section5Rule17(RuleDefinitionListIndexedBase):
                 required_fields={},
                 each_rule=Section5Rule17.BuildingRule.UnregulatedSurfaceRule(),
                 index_rmr="baseline",
+                list_path="$..surfaces[*]",
             )
 
         def create_data(self, context, data=None):
             building = context.baseline
-            # Merge into the existing data dict
             return {
-                **data,
                 "surface_conditioning_category_dict": get_surface_conditioning_category_dict(
                     data["climate_zone"], building
                 ),
             }
 
-        def create_context_list(self, context, data=None):
-            # List of all baseline unregulated surfaces to become the context for Unregulated Surfaces
+        def list_filter(self, context_item, data=None):
             scc = data["surface_conditioning_category_dict"]
-
-            baseline_surfaces = find_all("$..surfaces[*]", context.baseline)
-            proposed_surfaces = find_all("$..surfaces[*]", context.proposed)
-
-            # This assumes that the surfaces matched by IDs between proposed and baseline
-            matched_proposed_surfaces = match_lists_by_id(
-                baseline_surfaces, proposed_surfaces
-            )
-
-            proposed_baseline_surface_pairs = zip(
-                baseline_surfaces, matched_proposed_surfaces
-            )
-
-            return [
-                UserBaselineProposedVals(None, surface_b, surface_p)
-                for surface_b, surface_p in proposed_baseline_surface_pairs
-                if scc[surface_b["id"]] == SCC.UNREGULATED
-            ]
+            surface_b = context_item.baseline
+            return scc[surface_b["id"]] == SCC.UNREGULATED
 
         class UnregulatedSurfaceRule(RuleDefinitionBase):
             def __init__(self):
@@ -123,11 +103,17 @@ class Section5Rule17(RuleDefinitionListIndexedBase):
                 elif surface_b_type == OST.BELOW_GRADE_WALL:
                     return {
                         **calc_vals,
-                        "baseline_surface_c_factor": getattr_(
-                            surface_b_construction, "construction", "c_factor"
+                        "baseline_surface_c_factor": CalcQ(
+                            "thermal_transmittance",
+                            getattr_(
+                                surface_b_construction, "construction", "c_factor"
+                            ),
                         ),
-                        "proposed_surface_c_factor": getattr_(
-                            surface_p_construction, "construction", "c_factor"
+                        "proposed_surface_c_factor": CalcQ(
+                            "thermal_transmittance",
+                            getattr_(
+                                surface_p_construction, "construction", "c_factor"
+                            ),
                         ),
                     }
                 else:
@@ -136,7 +122,7 @@ class Section5Rule17(RuleDefinitionListIndexedBase):
                     # Serve code completeness
                     raise Exception(f"Unrecognized surface type: {surface_b_type}")
 
-            def rule_check(self, context, calc_vals, data=None):
+            def rule_check(self, context, calc_vals=None, data=None):
                 baseline_surface_type = calc_vals["baseline_surface_type"]
                 proposed_surface_type = calc_vals["proposed_surface_type"]
                 # Check 1. surface type needs to be matched

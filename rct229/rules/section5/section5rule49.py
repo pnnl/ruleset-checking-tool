@@ -16,7 +16,7 @@ from rct229.ruleset_functions.get_zone_conditioning_category_dict import (
 from rct229.schema.config import ureg
 from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all
-from rct229.utils.pint_utils import ZERO
+from rct229.utils.pint_utils import ZERO, CalcQ
 from rct229.utils.std_comparisons import std_equal
 
 TARGET_AIR_LEAKAGE_COEFF = 0.6 * ureg("cfm / foot**2")
@@ -40,12 +40,9 @@ class Section5Rule49(RuleDefinitionListIndexedBase):
             id="5-49",
             description="The proposed air leakage rate of the building envelope (I75Pa) at a fixed building pressure differential of 0.3 in. of water shall be 0.6 cfm/ft2 for buildings providing verification in accordance with Section 5.9.1.2. The air leakage rate of the building envelope shall be converted to appropriate units for the simulation program using one of the methods in Section G3.1.1.4. Exceptions: When whole-building air leakage testing, in accordance with Section 5.4.3.1.1, is specified during design and completed after construction, the proposed design air leakage rate of the building envelope shall be as measured.",
             list_path="ruleset_model_instances[0].buildings[*]",
+            data_items={"climate_zone": ("proposed", "weather/climate_zone")},
             manual_check_required_msg=MANUAL_CHECK_MSG,
         )
-
-    def create_data(self, context, data=None):
-        rmr_proposed = context.proposed
-        return {"climate_zone": rmr_proposed["weather"]["climate_zone"]}
 
     class BuildingRule(RuleDefinitionBase):
         def __init__(self):
@@ -103,9 +100,15 @@ class Section5Rule49(RuleDefinitionListIndexedBase):
             ) * building_total_envelope_area
 
             return {
-                "building_total_air_leakage_rate": building_total_air_leakage_rate,
-                "building_total_measured_air_leakage_rate": building_total_measured_air_leakage_rate,
-                "target_air_leakage_rate_75pa_p": target_air_leakage_rate_75pa_p,
+                "building_total_air_leakage_rate": CalcQ(
+                    "volumetric_flow_rate", building_total_air_leakage_rate
+                ),
+                "building_total_measured_air_leakage_rate": CalcQ(
+                    "volumetric_flow_rate", building_total_measured_air_leakage_rate
+                ),
+                "target_air_leakage_rate_75pa_p": CalcQ(
+                    "volumetric_flow_rate", target_air_leakage_rate_75pa_p
+                ),
                 "empty_measured_air_leakage_rate_flow_flag": empty_measured_air_leakage_rate_flow_flag,
             }
 

@@ -15,10 +15,11 @@ from rct229.ruleset_functions.get_surface_conditioning_category_dict import (
     get_surface_conditioning_category_dict,
 )
 from rct229.utils.jsonpath_utils import find_all
-from rct229.utils.pint_utils import ZERO
+from rct229.utils.pint_utils import ZERO, CalcQ
 from rct229.utils.std_comparisons import std_equal
 
-DOOR = schema_enums["SubsurfaceClassificationType"].DOOR
+DOOR = schema_enums["SubsurfaceClassificationOptions"].DOOR
+MANUAL_CHECK_REQUIRED_MSG = "Manual review is requested to verify vertical fenestration meets U-factor requirement as per Table G3.4. "
 
 
 class Section5Rule24(RuleDefinitionListIndexedBase):
@@ -34,7 +35,7 @@ class Section5Rule24(RuleDefinitionListIndexedBase):
             each_rule=Section5Rule24.BuildingRule(),
             index_rmr="baseline",
             id="5-24",
-            description="Vertical fenestration U-factors for residential, non-residential and semi-heated spaces in the baseline model must match the appropriate requirements in Table G3.4-1 through G3.4-8 for the appropriate WWR in the baseline RMD",
+            description="Vertical fenestration U-factors for residential, non-residential and semi-heated spaces in the baseline model must match the appropriate requirements in Table G3.4-1 through G3.4-8 for the appropriate WWR in the baseline RMD.",
             list_path="ruleset_model_instances[0].buildings[*]",
         )
 
@@ -180,8 +181,8 @@ class Section5Rule24(RuleDefinitionListIndexedBase):
                 if bldg_scc_wwr_ratio[SCC.SEMI_EXTERIOR] > 0
                 else ZERO.U_FACTOR
             )
+
             return {
-                **data,
                 # TODO this function will likely need to be revised to RMD level later.
                 "scc_dict_b": get_surface_conditioning_category_dict(
                     climate_zone, building_b
@@ -215,6 +216,7 @@ class Section5Rule24(RuleDefinitionListIndexedBase):
                             "u_factor",
                         ]
                     },
+                    manual_check_required_msg=MANUAL_CHECK_REQUIRED_MSG,
                 )
 
             def manual_check_required(self, context, calc_vals=None, data=None):
@@ -230,7 +232,7 @@ class Section5Rule24(RuleDefinitionListIndexedBase):
             def create_data(self, context, data=None):
                 surface_b = context.baseline
                 scc_dict_b = data["scc_dict_b"]
-                return {**data, "scc": scc_dict_b[surface_b["id"]]}
+                return {"scc": scc_dict_b[surface_b["id"]]}
 
             def list_filter(self, context_item, data=None):
                 subsurface_b = context_item.baseline
@@ -266,8 +268,12 @@ class Section5Rule24(RuleDefinitionListIndexedBase):
                         ), f"Severe Error: No matching surface category for: {scc}"
 
                     return {
-                        "target_u_factor": target_u_factor,
-                        "subsurface_u_factor": subsurface_b["u_factor"],
+                        "target_u_factor": CalcQ(
+                            "thermal_transmittance", target_u_factor
+                        ),
+                        "subsurface_u_factor": CalcQ(
+                            "thermal_transmittance", subsurface_b["u_factor"]
+                        ),
                     }
 
                 def rule_check(self, context, calc_vals=None, data=None):

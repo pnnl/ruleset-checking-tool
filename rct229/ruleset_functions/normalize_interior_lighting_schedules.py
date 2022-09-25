@@ -1,4 +1,10 @@
-from rct229.data_fns.table_G3_7_fns import table_G3_7_lookup
+from rct229.data_fns.table_G3_7_fns import (
+    MANUAL_ON,
+    NONE,
+    OTHER,
+    PARTIAL_AUTO_ON,
+    table_G3_7_lookup,
+)
 from rct229.utils.assertions import assert_, assert_required_fields, getattr_
 from rct229.utils.jsonpath_utils import find_exactly_one_with_field_value
 
@@ -13,7 +19,9 @@ GET_NORMALIZE_SPACE_SCHEDULE__REQUIRED_FIELDS = {
 }
 
 
-def normalize_interior_lighting_schedules(space, space_height, schedules):
+def normalize_interior_lighting_schedules(
+    space, space_height, schedules, adjust_for_credit=True
+):
     """This function would determine a normalized schedule for a data element in space.
     NOTE: The function currently only works for interior lighting
     Parameters
@@ -21,6 +29,7 @@ def normalize_interior_lighting_schedules(space, space_height, schedules):
     space: JSON - The space element that needs to determine a normalized schedule, e.g. space.interior_lighting
     space_height: float, height of a space, it is typically the average height of the thermal zone
     schedules: List[JSON] - schedule element
+    adjust_for_credit: Boolean - indicate whether the function needs to adjust schedule value by control credit
     Returns
     -------
     A list containing 8760/8784 hourly values of a noralized schedule of the space data element
@@ -42,22 +51,36 @@ def normalize_interior_lighting_schedules(space, space_height, schedules):
         space_total_power_per_area += power_per_area
 
         control_credit = 0.0
-        if interior_lighting.get(
+        if adjust_for_credit and interior_lighting.get(
             "are_schedules_used_for_modeling_occupancy_control", None
         ):
-            control_credit = table_G3_7_lookup(
-                lighting_space_type=getattr_(space, "space", "lighting_space_type"),
-                # occupancy control type can be None - simply ignored the credit
-                occupancy_control_type=interior_lighting.get(
-                    "occupancy_control_type", None
-                ),
-                space_height=space_height,
-                space_area=getattr_(space, "space", "floor_area"),
-            )["control_credit"]
+            bonus_adjustment = 1.0
+            occupancy_control_type = interior_lighting.get(
+                "occupancy_control_type", OTHER
+            )
+
+            if occupancy_control_type in [MANUAL_ON, PARTIAL_AUTO_ON]:
+                bonus_adjustment = 1.25
+            elif occupancy_control_type == NONE:
+                # no credit and adjustment for none occupancy control
+                bonus_adjustment = 0.0
+
+            control_credit = (
+                table_G3_7_lookup(
+                    lighting_space_type=getattr_(space, "space", "lighting_space_type"),
+                    # occupancy control type can be None - simply ignored the credit
+                    space_height=space_height,
+                    space_area=getattr_(space, "space", "floor_area"),
+                )["control_credit"]
+                * bonus_adjustment
+            )
 
         schedule_hourly_value = getattr_(
             find_exactly_one_with_field_value(
-                "$", "id", interior_lighting["lighting_multiplier_schedule"], schedules
+                "$[*]",
+                "id",
+                interior_lighting["lighting_multiplier_schedule"],
+                schedules,
             ),
             "schedule",
             "hourly_values",
