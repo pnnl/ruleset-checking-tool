@@ -5,9 +5,14 @@ from rct229.utils.jsonpath_utils import find_all
 
 MANUAL_CHECK_MSG = "Surface in P-RMR has subsurfaces modeled with different manual shade status. Verify if subsurfaces manual shade status in B-RMR are modeled the same as in P-RMR"
 
+# Json path for subsurfaces with has_manual_interior_shades set to True
+MANUALLY_SHADED_SUBSURFACES_JSON = (
+    "$.subsurfaces[*][?(@.has_manual_interior_shades=true)]"
+)
+
 
 class Section5Rule31(RuleDefinitionListIndexedBase):
-    """Rule 5 of ASHRAE 90.1-2019 Appendix G Section 5 (Envelope)"""
+    """Rule 31 of ASHRAE 90.1-2019 Appendix G Section 5 (Envelope)"""
 
     def __init__(self):
         super(Section5Rule31, self).__init__(
@@ -33,20 +38,19 @@ class Section5Rule31(RuleDefinitionListIndexedBase):
             def __init__(self):
                 super(Section5Rule31.BuildingRule.SurfaceRule, self).__init__(
                     rmrs_used=UserBaselineProposedVals(False, True, True),
-                    # Make sure subsurfaces are matched
-                    # List_path will be evaluated after manual check
                     each_rule=Section5Rule31.BuildingRule.SurfaceRule.SubsurfaceRule(),
                     index_rmr="baseline",
+                    # Make sure subsurfaces are matched
+                    # List_path will be evaluated after manual check
                     list_path="subsurfaces[*]",
                     manual_check_required_msg=MANUAL_CHECK_MSG,
                 )
 
             def manual_check_required(self, context, calc_vals=None, data=None):
                 surface_p = context.proposed
-                # raise data error exception if proposed surface has no subsurfaces
-                subsurfaces_p = find_all("subsurfaces", surface_p)
+                subsurfaces_p = find_all("$.subsurfaces[*]", surface_p)
                 subsurfaces_with_manual_interior_shades_p = find_all(
-                    "subsurfaces[?(@.has_manual_interior_shades=True)]", surface_p
+                    MANUALLY_SHADED_SUBSURFACES_JSON, surface_p
                 )
 
                 return len(subsurfaces_with_manual_interior_shades_p) != 0 and len(
@@ -56,7 +60,7 @@ class Section5Rule31(RuleDefinitionListIndexedBase):
             def create_data(self, context, data=None):
                 surface_p = context.proposed
                 subsurfaces_with_manual_interior_shades_p = find_all(
-                    "subsurfaces[?(@.has_manual_interior_shades=true)]", surface_p
+                    MANUALLY_SHADED_SUBSURFACES_JSON, surface_p
                 )
                 # None - if no subsurfaces, then the code wont evaluate the subsurface rule
                 return {

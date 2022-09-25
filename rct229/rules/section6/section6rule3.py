@@ -7,9 +7,12 @@ from rct229.ruleset_functions.get_building_segment_lighting_status_type_dict imp
     get_building_segment_lighting_status_type_dict,
 )
 from rct229.utils.jsonpath_utils import find_all
+from rct229.utils.pint_utils import CalcQ
 from rct229.utils.std_comparisons import std_equal
 
-OFFICE_OPEN_PLAN = schema_enums["LightingSpaceType2019ASHRAE901TG37"].OFFICE_OPEN_PLAN
+OFFICE_OPEN_PLAN = schema_enums[
+    "LightingSpaceOptions2019ASHRAE901TG37"
+].OFFICE_OPEN_PLAN
 FAIL_MSG = "Lighting exists or is submitted with design documents. Lighting power density in P_RMR does not match U_RMR."
 MANUAL_CHECK_REQUIRED_MSG = "Lighting is not yet designed, or lighting is as-designed or as-existing but matches Table 9.5.1. Lighting power density in P_RMR does not match U_RMR."
 
@@ -38,7 +41,6 @@ class Section6Rule3(RuleDefinitionListIndexedBase):
 
         def create_data(self, context, data=None):
             building_segment_p = context.proposed
-
             return {
                 "building_segment_lighting_status_type_dict_p": get_building_segment_lighting_status_type_dict(
                     building_segment_p
@@ -68,8 +70,8 @@ class Section6Rule3(RuleDefinitionListIndexedBase):
                 ][space_p["id"]]
 
                 return {
-                    "total_space_lpd_u": total_space_lpd_u,
-                    "total_space_lpd_p": total_space_lpd_p,
+                    "total_space_lpd_u": CalcQ("power_density", total_space_lpd_u),
+                    "total_space_lpd_p": CalcQ("power_density", total_space_lpd_p),
                     "space_lighting_status_type_p": space_lighting_status_type_p,
                 }
 

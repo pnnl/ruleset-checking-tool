@@ -4,7 +4,7 @@ from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 
-_DRY_TYPE = schema_enums["TransformerType"].DRY_TYPE
+_DRY_TYPE = schema_enums["TransformerOptions"].DRY_TYPE
 
 
 class Section15Rule5(RuleDefinitionListIndexedBase):

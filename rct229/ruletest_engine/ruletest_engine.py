@@ -11,6 +11,8 @@ from rct229.rules.section5 import *
 from rct229.rules.section6 import *
 from rct229.rules.section12 import *
 from rct229.rules.section15 import *
+from rct229.rules.section21 import *
+from rct229.rules.section22 import *
 from rct229.ruletest_engine.ruletest_jsons.scripts.json_generation_utilities import (
     merge_nested_dictionary,
 )
@@ -93,7 +95,7 @@ def evaluate_outcome_enumeration_str(outcome_enumeration_str):
         test_result = "pass"
     elif outcome_enumeration_str == "FAILED":
         test_result = "fail"
-    elif outcome_enumeration_str == "UNDETERMINED": # previously used for manual_check
+    elif outcome_enumeration_str == "UNDETERMINED":  # previously used for manual_check
         test_result = "undetermined"
     elif outcome_enumeration_str == "NOT_APPLICABLE":
         test_result = "not_applicable"
@@ -155,7 +157,6 @@ def process_test_result(test_result, test_dict, test_id):
         elif test_result == "undetermined":
             outcome_text = None
 
-
     else:
 
         if test_result == "pass":
@@ -163,9 +164,13 @@ def process_test_result(test_result, test_dict, test_id):
         elif test_result == "fail":
             outcome_text = f"FAILURE: Test {test_id} failed unexpectedly. The following condition was not identified: {description}"
         elif test_result == "undetermined":
-            outcome_text = f"FAILURE: Test {test_id} returned 'undetermined' unexpectedly."
+            outcome_text = (
+                f"FAILURE: Test {test_id} returned 'undetermined' unexpectedly."
+            )
         else:
-            outcome_text = f"FAILURE: Test {test_id} returned '{test_result}' unexpectedly"
+            outcome_text = (
+                f"FAILURE: Test {test_id} returned '{test_result}' unexpectedly"
+            )
 
     return outcome_text, received_expected_outcome
 
@@ -254,7 +259,7 @@ def run_section_tests(test_json_name):
 
         # Evaluate rule and check for invalid RMRs
         evaluation_dict = evaluate_rule(rule, rmr_trio)
-        pprint.pprint(evaluation_dict)
+        # pprint.pprint(evaluation_dict)
         invalid_rmrs_dict = evaluation_dict["invalid_rmrs"]
 
         # If invalid RMRs exist, fail this rule and append failed message
@@ -508,3 +513,29 @@ def run_envelope_tests():
     envelope_test_json = "envelope_tests.json"
 
     return run_section_tests(envelope_test_json)
+
+
+def run_boiler_tests():
+    """Runs all tests found in the boiler tests JSON
+
+    Returns
+    -------
+    None
+
+    Results of boiler test are spit out to console
+    """
+    boiler_test_json = "section21/rule_21_3.json"
+    return run_section_tests(boiler_test_json)
+
+
+def run_chiller_tests():
+    """Runs all tests found in the chiller tests JSON
+
+    Returns
+    -------
+    None
+
+    Results of chiller test are spit out to console
+    """
+    boiler_test_json = "section22/rule_22_1.json"
+    return run_section_tests(boiler_test_json)

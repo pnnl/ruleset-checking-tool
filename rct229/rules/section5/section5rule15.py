@@ -11,6 +11,7 @@ from rct229.ruleset_functions.get_surface_conditioning_category_dict import (
     get_surface_conditioning_category_dict,
 )
 from rct229.utils.jsonpath_utils import find_all
+from rct229.utils.pint_utils import CalcQ
 from rct229.utils.std_comparisons import std_equal
 
 MANUAL_CHECK_REQUIRED_MSG = (
@@ -38,11 +39,8 @@ class Section5Rule15(RuleDefinitionListIndexedBase):
             id="5-15",
             description="Baseline slab-on-grade floor assemblies must match the appropriate assembly maximum F-factors in Tables G3.4-1 through G3.4-9.",
             list_path="ruleset_model_instances[0].buildings[*]",
+            data_items={"climate_zone": ("baseline", "weather/climate_zone")},
         )
-
-    def create_data(self, context, data=None):
-        rmr_baseline = context.baseline
-        return {"climate_zone": rmr_baseline["weather"]["climate_zone"]}
 
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
@@ -54,21 +52,17 @@ class Section5Rule15(RuleDefinitionListIndexedBase):
                 list_path="$..surfaces[*]",
             )
 
-        def list_filter(self, context_item, data=None):
-            surface_b = context_item.baseline
-            return (
-                    get_opaque_surface_type(surface_b) == OST.UNHEATED_SOG
-            )
-
         def create_data(self, context, data=None):
             building = context.baseline
-            # Merge into the existing data dict
             return {
-                **data,
                 "surface_conditioning_category_dict": get_surface_conditioning_category_dict(
                     data["climate_zone"], building
                 ),
             }
+
+        def list_filter(self, context_item, data=None):
+            surface_b = context_item.baseline
+            return get_opaque_surface_type(surface_b) == OST.UNHEATED_SOG
 
         class SlabOnGradeFloorRule(RuleDefinitionBase):
             def __init__(self):
@@ -115,10 +109,18 @@ class Section5Rule15(RuleDefinitionListIndexedBase):
                         target_f_factor = target_f_factor_res
 
                 return {
-                    "slab_on_grade_floor_f_factor": slab_on_grade_floor_f_factor,
-                    "target_f_factor": target_f_factor,
-                    "target_f_factor_res": target_f_factor_res,
-                    "target_f_factor_nonres": target_f_factor_nonres,
+                    "slab_on_grade_floor_f_factor": CalcQ(
+                        "linear_thermal_transmittance", slab_on_grade_floor_f_factor
+                    ),
+                    "target_f_factor": CalcQ(
+                        "linear_thermal_transmittance", target_f_factor
+                    ),
+                    "target_f_factor_res": CalcQ(
+                        "linear_thermal_transmittance", target_f_factor_res
+                    ),
+                    "target_f_factor_nonres": CalcQ(
+                        "linear_thermal_transmittance", target_f_factor_nonres
+                    ),
                 }
 
             def manual_check_required(self, context, calc_vals=None, data=None):
@@ -127,7 +129,7 @@ class Section5Rule15(RuleDefinitionListIndexedBase):
 
                 return target_f_factor_res != target_f_factor_nonres
 
-            def rule_check(self, context, calc_vals, data=None):
+            def rule_check(self, context, calc_vals=None, data=None):
                 target_f_factor = calc_vals["target_f_factor"]
                 slab_on_grade_floor_f_factor = calc_vals["slab_on_grade_floor_f_factor"]
 
