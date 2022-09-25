@@ -7,6 +7,7 @@ from rct229.ruleset_functions.get_zone_conditioning_category_dict import (
 from rct229.ruleset_functions.get_zone_conditioning_category_dict import (
     get_zone_conditioning_category_dict,
 )
+from rct229.utils.pint_utils import CalcQ
 
 
 class Section5Rule48(RuleDefinitionListIndexedBase):
@@ -58,7 +59,7 @@ class Section5Rule48(RuleDefinitionListIndexedBase):
                     rmrs_used=UserBaselineProposedVals(False, True, True),
                     required_fields={
                         "$": ["infiltration"],
-                        "infiltration[*]": ["infiltration_flow_rate"],
+                        "infiltration": ["infiltration_flow_rate"],
                     },
                 )
 
@@ -74,8 +75,12 @@ class Section5Rule48(RuleDefinitionListIndexedBase):
                 ]
 
                 return {
-                    "baseline_infiltration": zone_infiltration_flow_rate_b,
-                    "proposed_infiltration": zone_infiltration_flow_rate_p,
+                    "baseline_infiltration": CalcQ(
+                        "volumetric_flow_rate", zone_infiltration_flow_rate_b
+                    ),
+                    "proposed_infiltration": CalcQ(
+                        "volumetric_flow_rate", zone_infiltration_flow_rate_p
+                    ),
                 }
 
             def rule_check(self, context, calc_vals, data=None):
