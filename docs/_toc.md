@@ -35,6 +35,7 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   * [get_hvac_systems_5_6_serving_multiple_floors_b](ruleset_functions/get_hvac_systems_5_6_serving_multiple_floors_b.md): Get a dictionary of the system 5, 5a, 5b, 6, 6a, 6b hvac system IDs that are modeled as serving more than one floor in the baseline design model.  The dictionary consists of the hvac system ids as the key and the number of floors served as the value associated with the key.
   * [get_zones_computer_rooms](ruleset_functions/get_zones_computer_rooms.md): Returns a dictionary with the zones that have at least one computer room space associated with them in the RMR as the keys. The values associated with each key are in a list form. The list associated with each key contains the computer room floor area as the first item in the list and the total zone floor area as the second item in the list.
   * [get_HVAC_systems_primarily_serving_comp_rooms](ruleset_functions/get_HVAC_systems_primarily_serving_comp_rooms.md): Returns a list of HVAC systems in which greater than 50% of the area served by the HVAC system is computer room space.
+  * [get_dict_of_zones_and_terminal_units_served_by_hvac_sys](ruleset_functions/get_dict_of_zones_and_terminal_units_served_by_hvac_sys.md): Returns a dictionary of zones and terminal unit IDs associated with each HVAC system in the RMR.
   * [get_baseline_system_type](ruleset_functions/get_baseline_system_types.md): Identify all the baseline system types modeled in a B-RMR.
 
 ### HVAC type functions
