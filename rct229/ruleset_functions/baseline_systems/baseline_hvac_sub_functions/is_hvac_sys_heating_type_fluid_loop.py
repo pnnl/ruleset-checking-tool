@@ -23,7 +23,7 @@ def is_hvac_sys_heating_type_fluid_loop(rmi_b, hvac_b_id):
         False: HVAC system has a heating system type other than fluid loop or if it has more than one heating system.
     """
     hvac_b = find_exactly_one_with_field_value(
-        "$.buildings[*].building_segments[*].heating_ventilation_air_conditioning_systems",
+        "$.buildings[*].building_segments[*].heating_ventilation_air_conditioning_systems[*]",
         "id",
         hvac_b_id,
         rmi_b,
