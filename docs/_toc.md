@@ -89,6 +89,7 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   * [are_all_terminal_heating_loops_attached_to_boiler](ruleset_functions/baseline_systems/baseline_hvac_sub_functions/are_all_terminal_heating_loops_attached_to_boiler.md): Returns TRUE if the fluid loop associated with the heating_from_loop associated with each terminal unit is attached to a boiler. Returns FALSE if this is not the case.
   * [is_hvac_system_multizone](ruleset_functions/baseline_systems/baseline_hvac_sub_functions/is_hvac_system_multizone.md): Returns TRUE if the HVAC system serves multiple zones. Returns FALSE if the HVAC system serves a single or no zones.
   * [is_hvac_sys_fluid_loop_purchased_heating](ruleset_functions/baseline_systems/baseline_hvac_sub_functions/is_hvac_sys_fluid_loop_purchased_heating.md): Returns TRUE if the fluid loop associated with the heating system associated with the HVAC system is attached to an external purchased heating loop. Returns FALSE if this is not the case.
+  * [are_all_terminal_types_CAV_With_None_Equal_to_Null](ruleset_functions/baseline_systems/baseline_hvac_sub_functions/are_all_terminal_types_CAV_With_None_Equal_to_Null.md): Returns TRUE if all of the terminal unit types input to this function are constant air volume (CAV). It returns FALSE if any of the terminal units are of a type other than constant air volume (CAV).
 
 ## Data Tables
   * [8.4.4](data_tables/Table8-4-4.md): Minimum Nominal Efficiency Levels for Low-Voltage Dry-Type Distribution Transformers  
