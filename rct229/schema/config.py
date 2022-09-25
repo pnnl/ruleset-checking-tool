@@ -1,4 +1,4 @@
-from icecream import install as install_icecream
+# from icecream import install as install_icecream
 
 from rct229.schema.config_functions import *
 
@@ -10,4 +10,4 @@ ureg = get_pint_unit_registry()
 
 # Add icecream to the builtins modules so it can be called
 # fom anywhere for debugging purposes
-install_icecream()
+# install_icecream()

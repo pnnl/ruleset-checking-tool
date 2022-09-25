@@ -11,30 +11,29 @@ jobs:
     runs-on: 'ubuntu-latest'
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Setup Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4
         # This will halt the action if formatting fails
         # Note: This will also fail if there are syntax errors
       - uses: psf/black@stable
+        with:
+          version: "22.6.0"
   run-pytests:
     name: Run pytests
     runs-on: 'ubuntu-latest'
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Setup Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4
         with:
           python-version: '3.7'
+          cache: 'pipenv'
       - name: Install pipenv
-        # TODO: cache pipenv
-        run: pip install pipenv
+        run: curl https://raw.githubusercontent.com/pypa/pipenv/master/get-pipenv.py | python
       - name: Install dependencies
-        # TODO: cache the dependencies; probably don't need the second command
-        run: |
-          pipenv install --dev --skip-lock
-          pipenv lock --pre
+        run: pipenv install --dev
       - name: Run tests
         # This will halt the action if any of the tests fail
         run: pipenv run pytest -v
