@@ -2,7 +2,7 @@ import rct229
 from rct229.data import data
 from rct229.data_fns.table_utils import find_osstd_table_entry
 
-# This dictionary maps the VerticalFenestrationBuildingAreaType2019ASHRAE901 enumerations to
+# This dictionary maps the VerticalFenestrationBuildingAreaOptions2019ASHRAE901 enumerations to
 # the corresponding wwr_building_type in the OSSTD file
 # ashrae_90_1_prm_2019.prm_wwr_bldg_type
 VERTICAL_FENESTRATION_BUILDING_AREA_TYPE_TO_WWR_BUILDING_TYPE_MAP = {
@@ -31,7 +31,7 @@ def table_G3_1_1_1_lookup(vertical_fenestration_building_area_type_enum_val):
     Parameters
     ----------
     vertical_fenestration_building_area_type_enum_val : str
-        One of the VerticalFenestrationBuildingAreaType2019ASHRAE901 enumeration values
+        One of the VerticalFenestrationBuildingAreaOptions2019ASHRAE901 enumeration values
     Returns
     -------
     dict
