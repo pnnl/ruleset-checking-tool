@@ -15,15 +15,15 @@ from rct229.ruleset_functions.get_surface_conditioning_category_dict import (
 )
 from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all
-from rct229.utils.pint_utils import ZERO
+from rct229.utils.pint_utils import ZERO, CalcQ
 from rct229.utils.std_comparisons import std_equal
 
-DOOR = schema_enums["SubsurfaceClassificationType"].DOOR
+DOOR = schema_enums["SubsurfaceClassificationOptions"].DOOR
 FAIL_MSG = "The vertical fenestration is not distributed across baseline opaque surfaces in the same proportion as in the proposed design. Verify if envelope is existing or altered and can be excluded from this check."
 
 
 class Section5Rule21(RuleDefinitionListIndexedBase):
-    """Rule 5 of ASHRAE 90.1-2019 Appendix G Section 5 (Envelope)"""
+    """Rule 21 of ASHRAE 90.1-2019 Appendix G Section 5 (Envelope)"""
 
     def __init__(self):
         super(Section5Rule21, self).__init__(
@@ -37,11 +37,8 @@ class Section5Rule21(RuleDefinitionListIndexedBase):
             id="5-21",
             description="The vertical fenestration shall be distributed on each face of the building in the same proportion as in the proposed design.",
             list_path="ruleset_model_instances[0].buildings[*]",
+            data_items={"climate_zone": ("baseline", "weather/climate_zone")},
         )
-
-    def create_data(self, context, data=None):
-        rmr_baseline = context.baseline
-        return {"climate_zone": rmr_baseline["weather"]["climate_zone"]}
 
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
@@ -68,7 +65,6 @@ class Section5Rule21(RuleDefinitionListIndexedBase):
             )
 
             return {
-                **data,
                 "total_fenestration_area_b": sum(
                     find_all("$..total_window_area", window_wall_areas_dictionary_b),
                     ZERO.AREA,
@@ -132,14 +128,18 @@ class Section5Rule21(RuleDefinitionListIndexedBase):
                     )
 
                 return {
-                    "total_fenestration_area_surface_b": _helper_calc_val(
-                        above_grade_wall_b
+                    "total_fenestration_area_surface_b": CalcQ(
+                        "area", _helper_calc_val(above_grade_wall_b)
                     ),
-                    "total_fenestration_area_b": data["total_fenestration_area_b"],
-                    "total_fenestration_area_surface_p": _helper_calc_val(
-                        above_grade_wall_p
+                    "total_fenestration_area_b": CalcQ(
+                        "area", data["total_fenestration_area_b"]
                     ),
-                    "total_fenestration_area_p": data["total_fenestration_area_p"],
+                    "total_fenestration_area_surface_p": CalcQ(
+                        "area", _helper_calc_val(above_grade_wall_p)
+                    ),
+                    "total_fenestration_area_p": CalcQ(
+                        "area", data["total_fenestration_area_p"]
+                    ),
                 }
 
             def rule_check(self, context, calc_vals=None, data=None):

@@ -14,14 +14,14 @@ from rct229.ruleset_functions.get_surface_conditioning_category_dict import (
 from rct229.ruleset_functions.get_surface_conditioning_category_dict import (
     get_surface_conditioning_category_dict,
 )
-from rct229.utils.pint_utils import ZERO
+from rct229.utils.pint_utils import ZERO, CalcQ
 from rct229.utils.std_comparisons import std_equal
 
 MANUAL_CHECK_MSG = "Manual review is required to verify skylight meets U-factor requirement as per table G3.4."
 MANUAL_CHECK_APPLICABLE = (
     "The subsurface type is Door, not applicable for the rule-checking"
 )
-DOOR = schema_enums["SubsurfaceClassificationType"].DOOR
+DOOR = schema_enums["SubsurfaceClassificationOptions"].DOOR
 
 
 class Section5Rule37(RuleDefinitionListIndexedBase):
@@ -39,13 +39,8 @@ class Section5Rule37(RuleDefinitionListIndexedBase):
             id="5-37",
             description="Skylight U-factors for residential, non-residential and semi-heated spaces in the baseline model must match the appropriate requirements in Table G3.4-1 through G3.4-8.",
             list_path="ruleset_model_instances[0].buildings[*]",
+            data_items={"climate_zone": ("baseline", "weather/climate_zone")},
         )
-
-    def create_data(self, context, data=None):
-        rmr_baseline = context.baseline
-        return {
-            "climate_zone": rmr_baseline["weather"]["climate_zone"],
-        }
 
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
@@ -165,7 +160,6 @@ class Section5Rule37(RuleDefinitionListIndexedBase):
             )
 
             return {
-                **data,
                 "surface_conditioning_category_dict_b": get_surface_conditioning_category_dict(
                     climate_zone, building_b
                 ),
@@ -199,7 +193,7 @@ class Section5Rule37(RuleDefinitionListIndexedBase):
             def create_data(self, context, data=None):
                 surface_b = context.baseline
                 scc_type = data["surface_conditioning_category_dict_b"][surface_b["id"]]
-                return {**data, "scc_type": scc_type}
+                return {"scc_type": scc_type}
 
             class SubsurfaceRule(RuleDefinitionBase):
                 def __init__(self):
@@ -246,8 +240,12 @@ class Section5Rule37(RuleDefinitionListIndexedBase):
                         target_u_factor = target_u_factor_semiheated_b
 
                     return {
-                        "subsurface_b_u_factor": subsurface_b_u_factor,
-                        "target_u_factor": target_u_factor,
+                        "subsurface_b_u_factor": CalcQ(
+                            "thermal_transmittance", subsurface_b_u_factor
+                        ),
+                        "target_u_factor": CalcQ(
+                            "thermal_transmittance", target_u_factor
+                        ),
                     }
 
                 def rule_check(self, context, calc_vals=None, data=None):

@@ -4,7 +4,7 @@ from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedB
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 from rct229.utils.jsonpath_utils import find_all
 
-CONSTANT = schema_enums["InfiltrationMethodType"].CONSTANT
+CONSTANT = schema_enums["InfiltrationMethodOptions"].CONSTANT
 
 
 class Section5Rule44(RuleDefinitionListIndexedBase):
@@ -24,11 +24,11 @@ class Section5Rule44(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section5Rule44.BuildingRule, self).__init__(
                 rmrs_used=UserBaselineProposedVals(False, True, False),
-                required_fields={"$..infiltration[*]": ["modeling_method"]},
+                required_fields={"$..infiltration": ["modeling_method"]},
             )
 
         def get_calc_vals(self, context, data=None):
-            baseline_infiltration = find_all("$..infiltration[*]", context.baseline)
+            baseline_infiltration = find_all("$..infiltration", context.baseline)
             failing_infiltration_ids = [
                 b_infiltration["id"]
                 for b_infiltration in baseline_infiltration
