@@ -15,10 +15,10 @@ from rct229.ruleset_functions.get_surface_conditioning_category_dict import (
     get_surface_conditioning_category_dict,
 )
 from rct229.utils.jsonpath_utils import find_all
-from rct229.utils.pint_utils import ZERO
+from rct229.utils.pint_utils import ZERO, CalcQ
 from rct229.utils.std_comparisons import std_equal
 
-DOOR = schema_enums["SubsurfaceClassificationType"].DOOR
+DOOR = schema_enums["SubsurfaceClassificationOptions"].DOOR
 MANUAL_CHECK_REQUIRED_MSG = "Manual review is requested to verify vertical fenestration meets U-factor requirement as per Table G3.4. "
 
 
@@ -268,8 +268,12 @@ class Section5Rule24(RuleDefinitionListIndexedBase):
                         ), f"Severe Error: No matching surface category for: {scc}"
 
                     return {
-                        "target_u_factor": target_u_factor,
-                        "subsurface_u_factor": subsurface_b["u_factor"],
+                        "target_u_factor": CalcQ(
+                            "thermal_transmittance", target_u_factor
+                        ),
+                        "subsurface_u_factor": CalcQ(
+                            "thermal_transmittance", subsurface_b["u_factor"]
+                        ),
                     }
 
                 def rule_check(self, context, calc_vals=None, data=None):

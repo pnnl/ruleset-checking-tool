@@ -33,13 +33,13 @@ class ZoneConditioningCategory:
 GET_ZONE_CONDITIONING_CATEGORY_DICT__REQUIRED_FIELDS = {
     "building": {
         "building_segments[*].heating_ventilation_air_conditioning_systems[*].cooling_system": [
-            "sensible_cool_capacity"
+            "design_sensible_cool_capacity"
         ],
         "building_segments[*].heating_ventilation_air_conditioning_systems[*].heating_system": [
-            "heat_capacity"
+            "design_capacity"
         ],
         "building_segments[*].heating_ventilation_air_conditioning_systems[*].preheat_system": [
-            "heat_capacity"
+            "design_capacity"
         ],
         "building_segments[*].zones[*].spaces[*]": [
             "floor_area",
@@ -60,7 +60,7 @@ def get_zone_conditioning_category_dict(climate_zone, building):
     Parameters
     ----------
     climate_zone : str
-        One of the ClimateZone2019ASHRAE901 enumerated values
+        One of the ClimateZoneOptions2019ASHRAE901 enumerated values
     building : dict
         A dictionary representing a building as defined by the ASHRAE229 schema
     Returns
@@ -94,7 +94,7 @@ def get_zone_conditioning_category_dict(climate_zone, building):
         hvac_sys_id: (
             (
                 hvac_systems_dict[hvac_sys_id]["cooling_system"][
-                    "sensible_cool_capacity"
+                    "design_sensible_cool_capacity"
                 ]
                 if "cooling_system" in hvac_systems_dict[hvac_sys_id]
                 # Handle nonexistent cooling_system
@@ -109,7 +109,7 @@ def get_zone_conditioning_category_dict(climate_zone, building):
     hvac_heat_capacity_dict = {
         hvac_sys_id: (
             (
-                hvac_systems_dict[hvac_sys_id]["heating_system"]["heat_capacity"]
+                hvac_systems_dict[hvac_sys_id]["heating_system"]["design_capacity"]
                 if "heating_system" in hvac_systems_dict[hvac_sys_id]
                 # Handle missing heating_system
                 else ZERO.POWER
