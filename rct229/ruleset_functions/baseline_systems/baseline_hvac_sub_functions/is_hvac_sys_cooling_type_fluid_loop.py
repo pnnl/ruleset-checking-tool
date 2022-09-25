@@ -1,5 +1,5 @@
 from rct229.data.schema_enums import schema_enums
-from rct229.utils.jsonpath_utils import find_exactly_one_with_field_value
+from rct229.utils.jsonpath_utils import find_exactly_one_with_field_value, find_one
 
 COOLING_SYSTEM_TYPE = schema_enums["CoolingSystemOptions"]
 
@@ -21,11 +21,9 @@ def is_hvac_sys_cooling_type_fluid_loop(rmi_b, hvac_b_id):
         True: HVAC system has fluid_loop cooling
         False: HVAC system has a cooling system type other than fluid_loop
     """
-    is_hvac_sys_cooling_type_fluid_loop_flag = False
-
     # Get the hvac system
     hvac_b = find_exactly_one_with_field_value(
-        "$.buildings[*].building_segments[*].heating_ventilation_air_conditioning_systems",
+        "$.buildings[*].building_segments[*].heating_ventilation_air_conditioning_systems[*]",
         "id",
         hvac_b_id,
         rmi_b,
@@ -35,7 +33,8 @@ def is_hvac_sys_cooling_type_fluid_loop(rmi_b, hvac_b_id):
     is_hvac_sys_cooling_type_fluid_loop_flag = (
         cooling_system is not None
         and cooling_system.get("chilled_water_loop") is not None
-        and cooling_system["cooling_system_type"] == COOLING_SYSTEM_TYPE.FLUID_LOOP
+        and find_one("cooling_system_type", cooling_system)
+        == COOLING_SYSTEM_TYPE.FLUID_LOOP
     )
 
     return is_hvac_sys_cooling_type_fluid_loop_flag

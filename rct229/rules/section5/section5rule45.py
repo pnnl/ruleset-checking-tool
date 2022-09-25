@@ -21,7 +21,7 @@ class Section5Rule45(RuleDefinitionListIndexedBase):
             id="5-45",
             description="The infiltration schedules are the same in the proposed RMR as in the baseline RMR.",
             list_path="ruleset_model_instances[0]",
-            required_fields={"$": ["calendar"], "calendar": ["is_leap_year"]},
+            required_fields={"$": ["calendar"], "$.calendar": ["is_leap_year"]},
             data_items={"is_leap_year": ("baseline", "calendar/is_leap_year")},
         )
 
@@ -51,7 +51,7 @@ class Section5Rule45(RuleDefinitionListIndexedBase):
                     rmrs_used=UserBaselineProposedVals(False, True, True),
                     required_fields={
                         "$": ["infiltration"],
-                        "infiltration": ["multiplier_schedule"],
+                        "$.infiltration": ["multiplier_schedule"],
                     },
                 )
 
@@ -75,7 +75,7 @@ class Section5Rule45(RuleDefinitionListIndexedBase):
                     # raise exception if not hourly schedule or the hourly_values key is missing
                     getattr_(
                         find_one_with_field_value(
-                            "$",
+                            "$[*]",
                             "id",
                             infiltration_b["multiplier_schedule"],
                             schedules_b,
@@ -85,7 +85,7 @@ class Section5Rule45(RuleDefinitionListIndexedBase):
                     ),
                     getattr_(
                         find_one_with_field_value(
-                            "$",
+                            "$[*]",
                             "id",
                             infiltration_p["multiplier_schedule"],
                             schedules_p,
