@@ -3,6 +3,7 @@
 	"boilers": "ruleset_model_instances[0]/boilers",
 	"buildings": "ruleset_model_instances[0]/buildings",
 	"building_segments": "ruleset_model_instances[0]/buildings[0]/building_segments",
+	"chillers": "ruleset_model_instances[0]/chillers",
 	"climate_zone": "weather/climate_zone",
 	"construction": "ruleset_model_instances[0]/buildings[0]/building_segments[0]/zones[0]/surfaces[0]/construction",
 	"cooling_system": "ruleset_model_instances[0]/buildings[0]/building_segments[0]/heating_ventilation_air_conditioning_systems[0]/cooling_system",
