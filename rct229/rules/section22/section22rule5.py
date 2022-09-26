@@ -1,12 +1,18 @@
+from rct229.data.schema_enums import schema_enums
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
-from rct229.schema.config import ureg
 from rct229.utils.jsonpath_utils import find_all
-from rct229.utils.pint_utils import CalcQ
-from rct229.utils.std_comparisons import std_equal
 
-APPLICABLE_SYS_TYPES = ["SYS-11.1", "SYS-11.2", "SYS-11.1A", "SYS-11.2A", "SYS-11B", "SYS-11C"]
+APPLICABLE_SYS_TYPES = [
+    "SYS-11.1",
+    "SYS-11.2",
+    "SYS-11.1A",
+    "SYS-11.2A",
+    "SYS-11B",
+    "SYS-11C",
+]
+TEMP_RESET_OPTION = schema_enums["TemperatureResetOptions"]
 
 
 class Section22Rule5(RuleDefinitionListIndexedBase):
@@ -31,7 +37,9 @@ class Section22Rule5(RuleDefinitionListIndexedBase):
             "SYS-11.1": ["hvac_sys_11_1"],
         }
         # if any system type found in the APPLICABLE_SYS_TYPES then return applicable.
-        return any([key in APPLICABLE_SYS_TYPES for key in baseline_system_types.keys()])
+        return any(
+            [key in APPLICABLE_SYS_TYPES for key in baseline_system_types.keys()]
+        )
 
     def create_data(self, context, data):
         rmi_b = context.baseline
@@ -57,18 +65,13 @@ class Section22Rule5(RuleDefinitionListIndexedBase):
 
         def get_calc_vals(self, context, data=None):
             fluid_loop_b = context.baseline
-            outdoor_high_for_loop_supply_temperature_reset = fluid_loop_b[
+            temperature_reset_type = fluid_loop_b[
                 "cooling_or_condensing_design_and_control"
-            ]["outdoor_high_for_loop_supply_temperature_reset"]
+            ]["temperature_reset_type"]
 
-            return {
-                "outdoor_high_for_loop_supply_temperature_reset":  outdoor_high_for_loop_supply_temperature_reset
-            }
+            return {"temperature_reset_type": temperature_reset_type}
 
         def rule_check(self, context, calc_vals=None, data=None):
-            outdoor_high_for_loop_supply_temperature_reset = calc_vals[
-                "outdoor_high_for_loop_supply_temperature_reset"
-            ]
+            temperature_reset_type = calc_vals["temperature_reset_type"]
 
-
-            return
+            return temperature_reset_type == TEMP_RESET_OPTION.LOAD_RESET
