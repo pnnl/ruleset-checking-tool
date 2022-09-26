@@ -7,7 +7,7 @@
 - **U-RMR or P-RMR or B-RMR**: The U-RMR, P-RMR or B-RMR
 
 **Returns:**  
-- **list_buildiung_area_types_with_total_area_and_zones**: A list that saves all the HVAC building area types in the file and includes a list of all the zone ids associated with area type as well as the total area of each building area type
+- **list_buildiung_area_types_with_total_area_and_zones**: A dict that saves all the HVAC building area types in the file and includes a list of all the zone ids associated with area type as well as the total area of each building area type
  
 **Function Call:** None
 
@@ -19,7 +19,7 @@
 		- add zone_id to list_of_zones: `list_of_zones.append(zone.id)`
 		- For each space in zone: `for space in zone.spaces:`
 			- add space area: `list_buildiung_area_types_with_total_area_and_zones[building_segment.area_type_heating_ventilation_air_conditioning_system]["AREA"] += space.floor_area`
-	- Append zone_ids to the list: `list_buildiung_area_types_with_total_area_and_zones[building_segment.area_type_heating_ventilation_air_conditioning_system]["ZONE_IDS"] = list_of_zones
+	- Append zone_ids to the dict: `list_buildiung_area_types_with_total_area_and_zones[building_segment.area_type_heating_ventilation_air_conditioning_system]["ZONE_IDS"] = list_of_zones
 	
 	 **Returns** `return list_buildiung_area_types_with_total_area_and_zones`  
 
