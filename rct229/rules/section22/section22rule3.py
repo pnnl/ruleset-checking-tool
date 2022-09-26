@@ -2,7 +2,7 @@ from rct229.data.schema_enums import schema_enums
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
-from rct229.utils.jsonpath_utils import find_all
+from rct229.utils.jsonpath_utils import find_all, find_one
 
 APPLICABLE_SYS_TYPES = [
     "SYS-7",
@@ -22,11 +22,11 @@ NOT_APPLICABLE_SYS_TYPES = [
     "SYS-11B",
     "SYS-11C",
 ]
-TEMP_RETURN_TYPE = schema_enums["TemperatureResetOptions"]
+TEMP_RESET_TYPE = schema_enums["TemperatureResetOptions"]
 
 
 class Section22Rule3(RuleDefinitionListIndexedBase):
-    """Rule 3 of ASHRAE 90.1-2019 Appendix G Section 22 (Hot water loop)"""
+    """Rule 3 of ASHRAE 90.1-2019 Appendix G Section 22 (Chilled water loop)"""
 
     def __init__(self):
         super(Section22Rule3, self).__init__(
@@ -56,13 +56,13 @@ class Section22Rule3(RuleDefinitionListIndexedBase):
 
     def create_data(self, context, data):
         rmi_b = context.baseline
-        chiller_loop_ids = find_all("chillers[*].cooling_loop", rmi_b)
-        return {"loop_chiller_dict": chiller_loop_ids}
+        chiller_loop_ids_list = find_all("chillers[*].cooling_loop", rmi_b)
+        return {"chiller_loop_ids": chiller_loop_ids_list}
 
     def list_filter(self, context_item, data):
         fluid_loop_b = context_item.baseline
-        loop_chiller_dict = data["loop_chiller_dict"]
-        return fluid_loop_b["id"] in loop_chiller_dict
+        loop_chiller_ids_list = data["chiller_loop_ids"]
+        return fluid_loop_b["id"] in loop_chiller_ids_list
 
     class ChillerFluidLoopRule(RuleDefinitionBase):
         def __init__(self):
@@ -70,19 +70,17 @@ class Section22Rule3(RuleDefinitionListIndexedBase):
                 rmrs_used=UserBaselineProposedVals(False, True, False),
                 required_fields={
                     "$": ["cooling_or_condensing_design_and_control"],
-                    "cooling_or_condensing_design_and_control": [
-                        "temperature_reset_type"
-                    ],
                 },
             )
 
         def get_calc_vals(self, context, data=None):
             fluid_loop_b = context.baseline
-            temperature_reset_type = fluid_loop_b[
-                "cooling_or_condensing_design_and_control"
-            ]["temperature_reset_type"]
+            temperature_reset_type = find_one(
+                "$..cooling_or_condensing_design_and_control.temperature_reset_type",
+                fluid_loop_b,
+            )
             return {"temperature_reset_type": temperature_reset_type}
 
         def rule_check(self, context, calc_vals=None, data=None):
             temperature_reset_type = calc_vals["temperature_reset_type"]
-            return temperature_reset_type == TEMP_RETURN_TYPE.OUTSIDE_AIR_RESET
+            return temperature_reset_type == TEMP_RESET_TYPE.OUTSIDE_AIR_RESET
