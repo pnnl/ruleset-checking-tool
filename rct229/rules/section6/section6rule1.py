@@ -101,40 +101,25 @@ class Section6Rule1(RuleDefinitionListIndexedBase):
             total_building_segment_area_p = calc_vals["total_building_segment_area_p"]
             allowable_lighting_wattage_SBS = calc_vals["allowable_lighting_wattage_SBS"]
 
-            if allowable_LPD_BAM and not check_BAM_flag:
-                if building_segment_design_lighting_wattage <= max(
-                    allowable_LPD_BAM * total_building_segment_area_p,
-                    allowable_lighting_wattage_SBS,
-                ):
-                    return True
-                else:
-                    return False
-            elif not (allowable_LPD_BAM and check_BAM_flag):
-                if (
-                    building_segment_design_lighting_wattage
-                    <= allowable_lighting_wattage_SBS
-                ):
-                    return True
-                else:
-                    return False
-            elif allowable_LPD_BAM and check_BAM_flag:
-                if (
-                    building_segment_design_lighting_wattage
-                    <= allowable_LPD_BAM * total_building_segment_area_p
-                ):
-                    return True
-                else:
-                    return False
-            else:
-                return False
+            allowable_LPD_wattage_BAM = (
+                allowable_LPD_BAM * total_building_segment_area_p
+                if allowable_LPD_BAM
+                else ZERO.POWER
+            )
+
+            return (
+                (allowable_LPD_BAM or not check_BAM_flag)
+                and building_segment_design_lighting_wattage
+                <= allowable_LPD_wattage_BAM
+                or building_segment_design_lighting_wattage
+                <= allowable_lighting_wattage_SBS
+            )
 
         def get_pass_msg(self, context, calc_vals=None, data=None):
             allowable_LPD_BAM = calc_vals["allowable_LPD_BAM"]
             check_BAM_flag = calc_vals["check_BAM_flag"]
 
-            if allowable_LPD_BAM and not check_BAM_flag:
-                return ""
-            elif not allowable_LPD_BAM and not check_BAM_flag:
+            if not allowable_LPD_BAM and not check_BAM_flag:
                 return CASE3_WARNING
             else:
                 return CASE5_WARNING
@@ -143,9 +128,7 @@ class Section6Rule1(RuleDefinitionListIndexedBase):
             allowable_LPD_BAM = calc_vals["allowable_LPD_BAM"]
             check_BAM_flag = calc_vals["check_BAM_flag"]
 
-            if allowable_LPD_BAM and not check_BAM_flag:
-                return ""
-            elif not allowable_LPD_BAM and not check_BAM_flag:
+            if not allowable_LPD_BAM and not check_BAM_flag:
                 return CASE4_WARNING
             elif allowable_LPD_BAM and check_BAM_flag:
                 return CASE6_WARNING
