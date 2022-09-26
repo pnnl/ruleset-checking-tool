@@ -16,7 +16,7 @@ TEMP_RESET_OPTION = schema_enums["TemperatureResetOptions"]
 
 
 class Section22Rule5(RuleDefinitionListIndexedBase):
-    """Rule 4 of ASHRAE 90.1-2019 Appendix G Section 22 (Chilled water loop)"""
+    """Rule 5 of ASHRAE 90.1-2019 Appendix G Section 22 (Chilled water loop)"""
 
     def __init__(self):
         super(Section22Rule5, self).__init__(
@@ -58,7 +58,7 @@ class Section22Rule5(RuleDefinitionListIndexedBase):
                 required_fields={
                     "$": ["cooling_or_condensing_design_and_control"],
                     "cooling_or_condensing_design_and_control": [
-                        "temperature_reset_type ",
+                        "temperature_reset_type",
                     ],
                 },
             )
