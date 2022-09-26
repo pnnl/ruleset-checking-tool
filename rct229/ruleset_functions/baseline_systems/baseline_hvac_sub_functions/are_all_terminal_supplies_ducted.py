@@ -27,6 +27,7 @@ def are_all_terminal_supplies_ducted(rmi_b, terminal_unit_id_list):
             terminal_b_id,
             rmi_b,
         )
+        # Set flag to False if is_suppy_ducted is False or is missing
         if not terminal_b.get("is_supply_ducted"):
             are_all_terminal_supplies_ducted_flag = False
             break
