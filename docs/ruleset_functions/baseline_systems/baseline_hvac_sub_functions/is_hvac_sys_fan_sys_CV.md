@@ -13,7 +13,7 @@
 
 ## Logic:   
 
-- Create an object associate with the fan_system associated with hvac_b: `fan_system_b = hvac_b.fan_system[0]`
+- Create an object associate with the fan_system associated with hvac_b: `fan_system_b = hvac_b.fan_system`
 - Check if the system control is constant volume, if yes then is_hvac_sys_fan_sys_CV equals TRUE  : `if fan_system_b.fan_control == "CONSTANT":is_hvac_sys_fan_sys_CV = TRUE` 
 - Else, is_hvac_sys_fan_sys_CV = FALSE: `ELse: is_hvac_sys_fan_sys_CV = FALSE`  
 
