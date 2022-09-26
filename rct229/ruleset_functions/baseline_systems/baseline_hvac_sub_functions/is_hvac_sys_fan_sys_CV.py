@@ -17,7 +17,7 @@ def is_hvac_sys_fan_sys_cv(rmi_b, hvac_b_id):
     Returns
     -------
     bool
-        True: the HVAC system fan system his constant volume
+        True: the HVAC system fan system has constant volume
         False: the HVAC system has a fan system that is anything other than constant volume
     """
     # Get the hvac system
