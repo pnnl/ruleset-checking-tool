@@ -24,10 +24,10 @@ NOT_APPLICABLE_SYS_TYPES = [
     "SYS-11B",
     "SYS-11C",
 ]
-REQUIRED_OUTDOOR_HIGH_LOOP_SUPPLY_TEMP_RESET = 80 * ureg("degF")
-REQUIRED_OUTDOOR_LOW_LOOP_SUPPLY_TEMP_RESET = 60 * ureg("degF")
-REQUIRED_LOOP_SUPPLY_TEMP_OUTDOOR_HIGH = 44 * ureg("degF")
-REQUIRED_LOOP_SUPPLY_TEMP_OUTDOOR_LOW = 54 * ureg("degF")
+REQUIRED_OUTDOOR_HIGH_LOOP_SUPPLY_TEMP_RESET = ureg("80 degF")
+REQUIRED_OUTDOOR_LOW_LOOP_SUPPLY_TEMP_RESET = ureg("60 degF")
+REQUIRED_LOOP_SUPPLY_TEMP_OUTDOOR_HIGH = ureg("44 degF")
+REQUIRED_LOOP_SUPPLY_TEMP_OUTDOOR_LOW = ureg("54 degF")
 
 
 class Section22Rule4(RuleDefinitionListIndexedBase):
@@ -61,13 +61,13 @@ class Section22Rule4(RuleDefinitionListIndexedBase):
 
     def create_data(self, context, data):
         rmi_b = context.baseline
-        chiller_loop_ids = find_all("chillers[*].cooling_loop", rmi_b)
-        return {"loop_chiller_dict": chiller_loop_ids}
+        chiller_loop_ids_list = find_all("chillers[*].cooling_loop", rmi_b)
+        return {"chiller_loop_ids_list": chiller_loop_ids_list}
 
     def list_filter(self, context_item, data):
         fluid_loop_b = context_item.baseline
-        loop_chiller_dict = data["loop_chiller_dict"]
-        return fluid_loop_b["id"] in loop_chiller_dict
+        loop_chiller_list = data["chiller_loop_ids_list"]
+        return fluid_loop_b["id"] in loop_chiller_list
 
     class ChillerFluidLoopRule(RuleDefinitionBase):
         def __init__(self):
