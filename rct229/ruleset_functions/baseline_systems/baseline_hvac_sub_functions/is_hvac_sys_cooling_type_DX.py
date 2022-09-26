@@ -5,7 +5,7 @@ COOLING_SYSTEM_TYPE = schema_enums["CoolingSystemOptions"]
 
 
 def is_hvac_sys_cooling_type_dx(rmi_b, hvac_b_id):
-    """Returns TRUE if the HVAC system has DX cooling. Returns FALSE if the HVAC system has anything other than DX cooling or if it has more than 1 or no cooling system.
+    """Returns TRUE if the HVAC system has DX cooling. Returns FALSE if the HVAC system has anything other than DX cooling.
 
     Parameters
     ----------
