@@ -20,6 +20,7 @@ class RuleDefinitionBase:
         must_match_by_ids=[],
         manual_check_required_msg="",
         fail_msg="",
+        pass_msg="",
         not_applicable_msg="",
     ):
         """Base class for all Rule definitions
@@ -59,6 +60,7 @@ class RuleDefinitionBase:
         self.manual_check_required_msg = manual_check_required_msg
         self.not_applicable_msg = not_applicable_msg
         self.fail_msg = fail_msg
+        self.pass_msg = pass_msg
 
     def evaluate(self, rmrs, data={}):
         """Generates the outcome dictionary for the rule
