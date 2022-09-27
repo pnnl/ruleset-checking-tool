@@ -11,7 +11,9 @@
 
 **Evaluation Context:** Each HeatingVentilationAirConditioningSystem Data Group  
 
-**Applicability Checks:** None  
+**Applicability Checks:** 
+
+1. Applies to the following baseline system types: 1, 1b, 2, 3, 3a, 3b, 4, 5, 5b, 6, 6b, 9 (systems with furnaces, heat pumps, and DX cooling coils)  
 
 **Function Calls:**  
 1. get_baseline_system_types()  
@@ -19,34 +21,30 @@
 
 ## Rule Logic:  
 - Get B-RMR system types: `baseline_hvac_system_dict = get_baseline_system_types(B-RMR)`  
-- For each hvac system in B_RMR: `for hvac in B_RMR...HeatingVentilationAirConditioningSystem:`  
-    - Reset the is_undetermined boolean variable: `is_undetermined = False`   
-    - Reset heating_oversizing_factor: `heating_oversizing_factor = ""`  
-    - Reset cooling_oversizing_factor: `cooling_oversizing_factor = ""`  
-    - Get baseline system type: `sys_type = list(baseline_hvac_system_dict.keys())[list(baseline_hvac_system_dict.values()).index(hvac.id)]`  
-    - Check if the baseline hvac system type is not Sys 1a, 1c, 9b, or 10 as these are not able to be assessed and the outcome is undetermined: `if sys_type Not in ["SYS-1a", "SYS-1c", "SYS-9b", "SYS-10"]:`  
-        - Check if the baseline hvac system type has a heating coil at the HVAC system level: `if sys_type in ["SYS-1", "SYS-1b", "SYS-2", "SYS-3", "SYS-3a", "SYS-3b", "SYS-3c", "SYS-4", "SYS-9", "SYS-11.1", "SYS-11.2", "SYS-11.2a", "SYS-11.1a", "SYS-11b", "SYS-11c", "SYS-12", "SYS-12a", "SYS-12b", "SYS-12c", "SYS-13", "SYS-13a"]:`  
-            - Get the over sizing factor associated with the heating coil: `heating_oversizing_factor = hvac.heating_system.oversizing_factor`  
-        - Else if the baseline hvac system type has a preheat coil at the HVAC system level: `elif sys_type in ["SYS-5", "SYS-5b", "SYS-6", "SYS-6b", "SYS-7", "SYS-7a", "SYS-7b", "SYS7c", "SYS-8", "SYS-8a", "SYS-8b", "SYS-8c"]:`  
-            - Get the over sizing factor associated with the preheat coil: `heating_oversizing_factor = hvac.preheat_system.oversizing_factor`  
-        - Check if the baseline hvac system type has a cooling coil at the HVAC system level: `if sys_type in ["SYS-1", "SYS-1b", "SYS-2", "SYS-3", "SYS-3a", "SYS-3b", "SYS-3c", "SYS-4", "SYS-5", "SYS-5b", "SYS-6", "SYS-6b", "SYS-7", "SYS-7a", "SYS-7b", "SYS7c", "SYS-8", "SYS-8a", "SYS-8b", "SYS-8c", "SYS-11.1", "SYS-11.2", "SYS-11.2a", "SYS-11.1a", "SYS-11b", "SYS-11c", "SYS-12", "SYS-12a", "SYS-12b", "SYS-12c", "SYS-13", "SYS-13a"]:`  
-            - Get the over sizing factor associated with the cooling coil: `cooling_oversizing_factor = hvac.cooling_system.oversizing_factor`        
-        - Else: `Else: cooling_oversizing_factor = "n/a"`   
-    - Else, set is_undetermined boolean variable to True: `is_undetermined boolean variable = True`   
-    
-    - **Rule Assertion:** 
-    - Case 1: If heating_oversizing_factor = 1.25 and cooling_oversizing_factor = 1.15 then pass: `if heating_oversizing_factor == 1.25 AND cooling_oversizing_factor == 1.15: outcome = "PASS"`  
-    - Case 2: Else if heating_oversizing_factor = 1.25 and cooling_oversizing_factor = n/a then pass: `elif heating_oversizing_factor == 1.25 AND cooling_oversizing_factor == "n/a": outcome = "PASS"`  
-    - Case 3: Else if is_undetermined = True then outcome is UNDETERMINED: `elif is_undetermined == TRUE: outcome = "UNDETERMINED" and raise_message "Conduct a manual check of the over sizing factors for <hvac.id>"`  
-    - Case 4: Else, fail: `Else: outcome = "Fail"`  
+- Check if this rule is applicable to any HVAC systems in the B_RMR, if not then the outcome is IN_APPLICABLE for all HVAC systems: `If any(hvac.id in baseline_hvac_system_dict[sys_type] for sys_type in ["SYS-1", "SYS-1b","SYS-2", "SYS-3", "SYS-3a", "SYS-4", "SYS-5", "SYS-5b", "SYS-6", "SYS-6b", "SYS-9"]):`   
+    - For each hvac system in B_RMR: `for hvac in B_RMR...HeatingVentilationAirConditioningSystem:`    
+        - Reset heating_oversizing_factor: `heating_oversizing_factor = ""`  
+        - Reset cooling_oversizing_factor: `cooling_oversizing_factor = ""`  
+        - Get baseline system type: `sys_type = list(baseline_hvac_system_dict.keys())[list(baseline_hvac_system_dict.values()).index(hvac.id)]`  
+        - Check if the baseline system type has a furnace, heat pump, or DX cooling coil, ELSE then rule outcome for this HVAC system is NOT_APPLICABLE: `if sys_type in ["SYS-1", "SYS-1b","SYS-2", "SYS-3", "SYS-3a", "SYS-4", "SYS-5", "SYS-5b", "SYS-6", "SYS-6b", "SYS-9"]:`  
+            - Check if the baseline hvac system type has a furnace or heat pump coil at the HVAC system level: `if sys_type in ["SYS-2", "SYS-3", "SYS-3a", "SYS-4", "SYS-9"]:`  
+                - Get the over sizing factor associated with the heating coil: `heating_oversizing_factor = hvac.heating_system.oversizing_factor`     
+            - Else: `Else: heating_oversizing_factor = "n/a"` 
+            - Check if the baseline hvac system type has a DX cooling coil at the HVAC system level: `if sys_type in ["SYS-1", "SYS-1b", "SYS-2", "SYS-3", "SYS-3b", "SYS-4", "SYS-5", "SYS-5b", "SYS-6", "SYS-6b"]:`  
+                - Get the over sizing factor associated with the cooling coil: `cooling_oversizing_factor = hvac.cooling_system.oversizing_factor`        
+            - Else: `Else: cooling_oversizing_factor = "n/a"`   
+
+            - **Rule Assertion:** 
+            - Case 1: If heating_oversizing_factor = 25% and cooling_oversizing_factor = 15% then pass: `if heating_oversizing_factor == 25% AND cooling_oversizing_factor == 15%: outcome = "PASS"`  
+            - Case 2: Else if heating_oversizing_factor = 25% and cooling_oversizing_factor = n/a then pass: `elif heating_oversizing_factor == 25% AND cooling_oversizing_factor == "n/a": outcome = "PASS"`  
+            - Case 3: Else if cooling_oversizing_factor = 15% and heating_oversizing_factor = n/a then pass: `elif cooling_oversizing_factor == 15% AND heating_oversizing_factor == "n/a": outcome = "PASS"`  
+            - Case 4: Else, fail: `Else: outcome = "Fail"`  
 
 
 
 **Notes/Questions:**  
-1. Shall we split this into 2 rules that assess heating and cooling separately? Perhaps not needed as above appears to work fine. 
-2. Systems 1a, 1c, 9b, and 10 cannot be assessed because coils are defined at the terminal. This does not appear to impact anything though.
-3. We already check that the project is modeled by orientation in Rule 5-1. The check that the sizing factors are consistent across orientations will be an umbrella check. 
-4. Shall I update this to only check the oversizing factor for furnaces, heat pumps, and DX cooling based on exchanges with Mike R at PNNL?  
-5. What would we expect for a 25% oversizing factor? 1.25 or 25%?
+1. Sizing factor modeled identically across orientations will be checked by umbrella rule. 
+2. Per dicussion with Mike R. and group rule applies to furnaces, heat pumps, and DX cooling coils.  
+
 
 **[Back](_toc.md)**
