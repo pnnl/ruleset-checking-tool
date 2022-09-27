@@ -53,7 +53,7 @@ class Section22Rule16(RuleDefinitionListIndexedBase):
             [key in APPLICABLE_SYS_TYPES for key in baseline_system_types.keys()]
         ) and all(
             REQUIRED_LOW_DESIGN_WETBULB_TEMP.to(ureg.kelvin)
-            <= heat_rejection_wetbulb_temp_b
+            <= heat_rejection_wetbulb_temp_b.to(ureg.kelvin)
             <= REQUIRED_HIGH_DESIGN_WETBULB_TEMP.to(ureg.kelvin)
             for heat_rejection_wetbulb_temp_b in find_all(
                 "heat_rejections[*].design_wetbulb_temperature", rmi_b
