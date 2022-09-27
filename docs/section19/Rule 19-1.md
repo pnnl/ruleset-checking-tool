@@ -20,12 +20,14 @@
 
 
 ## Rule Logic:  
+**Applicability Check 1:**  At the whole building level
 - Get B-RMR system types: `baseline_hvac_system_dict = get_baseline_system_types(B-RMR)`  
 - Check if this rule is applicable to any HVAC systems in the B_RMR, if not then the outcome is IN_APPLICABLE for all HVAC systems: `If any(hvac.id in baseline_hvac_system_dict[sys_type] for sys_type in ["SYS-1", "SYS-1b","SYS-2", "SYS-3", "SYS-3a", "SYS-4", "SYS-5", "SYS-5b", "SYS-6", "SYS-6b", "SYS-9"]):`   
     - For each hvac system in B_RMR: `for hvac in B_RMR...HeatingVentilationAirConditioningSystem:`    
         - Reset heating_oversizing_factor: `heating_oversizing_factor = ""`  
         - Reset cooling_oversizing_factor: `cooling_oversizing_factor = ""`  
         - Get baseline system type: `sys_type = list(baseline_hvac_system_dict.keys())[list(baseline_hvac_system_dict.values()).index(hvac.id)]`  
+        **Applicability Check 2:** At the component level
         - Check if the baseline system type has a furnace, heat pump, or DX cooling coil, ELSE then rule outcome for this HVAC system is NOT_APPLICABLE: `if sys_type in ["SYS-1", "SYS-1b","SYS-2", "SYS-3", "SYS-3a", "SYS-4", "SYS-5", "SYS-5b", "SYS-6", "SYS-6b", "SYS-9"]:`  
             - Check if the baseline hvac system type has a furnace or heat pump coil at the HVAC system level: `if sys_type in ["SYS-2", "SYS-3", "SYS-3a", "SYS-4", "SYS-9"]:`  
                 - Get the over sizing factor associated with the heating coil: `heating_oversizing_factor = hvac.heating_system.oversizing_factor`     
