@@ -62,13 +62,13 @@ class Section22Rule16(RuleDefinitionListIndexedBase):
 
     def create_data(self, context, data):
         rmi_b = context.baseline
-        supply_temperature_b_dict = {
+        supply_temperature_dict_b = {
             heat_rejection_loop: find_exactly_one_with_field_value(
                 "$..fluid_loops[*]", "id", heat_rejection_loop, rmi_b
             )["cooling_or_condensing_design_and_control"]["design_supply_temperature"]
             for heat_rejection_loop in find_all("heat_rejections[*].loop", rmi_b)
         }
-        return {"supply_temperature_b_dict": supply_temperature_b_dict}
+        return {"supply_temperature_dict_b": supply_temperature_dict_b}
 
     class ChillerHeatRejectionRule(RuleDefinitionBase):
         def __init__(self):
@@ -94,8 +94,9 @@ class Section22Rule16(RuleDefinitionListIndexedBase):
             wbt_b = calc_vals["wbt_b"]
             approach_b = calc_vals["approach_b"]
             loop_b = calc_vals["loop_b"]
-            supply_temperature_b = data["supply_temperature_b_dict"][loop_b]
+            supply_temperature_b = data["supply_temperature_dict_b"][loop_b]
             return std_equal(
                 supply_temperature_b.to(ureg.kelvin),
                 ((wbt_b.m + approach_b.m) * ureg("degC")).to(ureg.kelvin),
             )
+
