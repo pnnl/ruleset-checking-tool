@@ -17,7 +17,7 @@ def does_each_zone_have_only_one_terminal(rmi_b, zone_id_list):
     does_each_zone_have_only_one_terminal_flag = True
     for zone_id in zone_id_list:
         zone = find_exactly_one_with_field_value(
-            "$.buildings[*].building_segments[*].zones", "id", zone_id, rmi_b
+            "$.buildings[*].building_segments[*].zones[*]", "id", zone_id, rmi_b
         )
         if zone.get("terminals") is None or len(zone["terminals"]) != 1:
             does_each_zone_have_only_one_terminal_flag = False

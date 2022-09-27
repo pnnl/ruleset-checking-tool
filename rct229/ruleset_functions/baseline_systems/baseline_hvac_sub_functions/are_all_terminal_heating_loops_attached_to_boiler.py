@@ -34,7 +34,7 @@ def are_all_terminal_heating_loops_attached_to_boiler(rmi_b, terminal_unit_id_li
 
     for terminal_b_id in terminal_unit_id_list:
         terminal_b = find_exactly_one_with_field_value(
-            "$.buildings[*].building_segments[*].zones[*].terminals",
+            "$.buildings[*].building_segments[*].zones[*].terminals[*]",
             "id",
             terminal_b_id,
             rmi_b,
@@ -43,7 +43,7 @@ def are_all_terminal_heating_loops_attached_to_boiler(rmi_b, terminal_unit_id_li
         # return None if terminal_b has no heating_from_loop field, or
         # the heating_from_loop id cannot be found in fluid_loops
         fluid_loop = find_one_with_field_value(
-            "$.fluid_loops",
+            "$.fluid_loops[*]",
             "id",
             heating_from_loop_id,
             rmi_b,

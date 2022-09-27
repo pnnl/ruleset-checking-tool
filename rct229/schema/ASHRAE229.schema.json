@@ -3203,7 +3203,7 @@
                 },
                 "energy_source_type": {
                     "description": "Source of energy for the boiler",
-                    "$ref": "Output2019ASHRAE901.schema.json#/definitions/EnergySourceOptions"
+                    "$ref": "ASHRAE229.schema.json#/definitions/EnergySourceOptions"
                 },
                 "efficiency_metric": {
                     "description": "The type of efficiency metric used",
