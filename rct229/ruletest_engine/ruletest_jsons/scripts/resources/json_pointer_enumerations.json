@@ -13,6 +13,7 @@
 	"fluid_loops": "ruleset_model_instances[0]/fluid_loops",
 	"heating_system": "ruleset_model_instances[0]/buildings[0]/building_segments[0]/heating_ventilation_air_conditioning_systems[0]/heating_system",
 	"heating_ventilation_air_conditioning_systems": "ruleset_model_instances[0]/buildings[0]/building_segments[0]/heating_ventilation_air_conditioning_systems",
+	"heat_rejections": "ruleset_model_instances[0]/heat_rejections",
 	"infiltration": "ruleset_model_instances[0]/buildings[0]/building_segments[0]/zones[0]/infiltration",
 	"interior_lighting": "ruleset_model_instances[0]/buildings[0]/building_segments[0]/zones[0]/spaces[0]/interior_lighting",
 	"miscellaneous_equipment": "ruleset_model_instances[0]/buildings[0]/building_segments[0]/zones[0]/spaces[0]/miscellaneous_equipment",
