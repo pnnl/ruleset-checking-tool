@@ -2,8 +2,8 @@
 **Schema Version:** 0.0.21  
 **Mandatory Rule:** True  
 **Rule ID:** 19-1   
-**Rule Description:** HVAC system coil capacities for the baseline building design shall be based on sizing runs for each orientation and shall be oversized by 15% for cooling and 25% for heating.  
-**Rule Assertion:** Options are Pass/Fail/Undetermined     
+**Rule Description:** HVAC system coil capacities for the baseline building design shall be oversized by 15% for cooling and 25% for heating..  
+**Rule Assertion:** Options are Pass/Fail/IN_APPLICABLE     
 **Appendix G Section:** Section G3.1.2.2    
 **90.1 Section Reference:** None  
 
