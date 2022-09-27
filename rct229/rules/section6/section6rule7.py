@@ -10,7 +10,7 @@ MSG_WARN_NO_DAYLIGHT = "Some of the spaces in zone are modeled with fenestration
 
 DOOR = schema_enums["SubsurfaceClassificationOptions"].DOOR
 EXTERIOR = schema_enums["SurfaceAdjacentToOptions"].EXTERIOR
-MONE = schema_enums["LightingDaylightingControlOptions"].NONE
+NONE = schema_enums["LightingDaylightingControlOptions"].NONE
 
 
 class Section6Rule7(RuleDefinitionListIndexedBase):
@@ -39,7 +39,8 @@ class Section6Rule7(RuleDefinitionListIndexedBase):
             daylight_flag_p = (
                 len(
                     find_all(
-                        "$..surfaces[?adjacent_to = EXTERIOR].subsurfaces[?classification != DOOR]",
+                        # Doors in a surface adjacent to exterior
+                        f'$..surfaces[*][?(@.adjacent_to = "{EXTERIOR}")].subsurfaces[*][?(@.classification != "{DOOR}")]',
                         zone_p,
                     )
                 )
@@ -49,7 +50,8 @@ class Section6Rule7(RuleDefinitionListIndexedBase):
             has_daylight_control_flag = (
                 len(
                     find_all(
-                        "$..spaces[*].interior_lighting[?daylighting_control_type!= NONE]",
+                        # interior_lighting instances with daylighting_control_type set to NONE
+                        f'$..spaces[*].interior_lighting[*][?(@.daylighting_control_type!= "{NONE}")]',
                         zone_p,
                     )
                 )
@@ -58,7 +60,8 @@ class Section6Rule7(RuleDefinitionListIndexedBase):
 
             daylight_schedule_adjustment_flag = any(
                 find_all(
-                    "$..spaces[*].interior_lighting[?are_schedules_used_for_modeling_daylighting_control == true]",
+                    # insterior_lighting instances with are_schedules_used_for_modeling_daylighting_control set to True
+                    "$..spaces[*].interior_lighting[*][?(@.are_schedules_used_for_modeling_daylighting_control = true)]",
                     zone_p,
                 )
             )
