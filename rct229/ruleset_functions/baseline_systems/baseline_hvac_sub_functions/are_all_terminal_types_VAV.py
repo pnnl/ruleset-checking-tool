@@ -24,7 +24,7 @@ def are_all_terminal_types_VAV(rmi_b, terminal_unit_id_list):
 
     for terminal_b_id in terminal_unit_id_list:
         terminal_b = find_exactly_one_with_field_value(
-            "$.buildings[*].building_segments[*].zones[*].terminals",
+            "$.buildings[*].building_segments[*].zones[*].terminals[*]",
             "id",
             terminal_b_id,
             rmi_b,
