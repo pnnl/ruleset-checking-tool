@@ -636,7 +636,7 @@ class RuleDefinitionBase:
         Returns
         -------
         str
-            The message associated with the Pass or Fail case
+            The message associated with the Pass case
         """
 
         return self.pass_msg
