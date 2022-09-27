@@ -99,4 +99,3 @@ class Section22Rule16(RuleDefinitionListIndexedBase):
                 supply_temperature_b.to(ureg.kelvin),
                 ((wbt_b.m + approach_b.m) * ureg("degC")).to(ureg.kelvin),
             )
-
