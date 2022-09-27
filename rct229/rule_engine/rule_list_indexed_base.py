@@ -59,7 +59,7 @@ class RuleDefinitionListIndexedBase(RuleDefinitionListBase):
         id=None,
         description=None,
         rmr_context="",
-        list_path="[*]",
+        list_path="$[*]",
         match_by="id",
         required_fields=None,
         manual_check_required_msg="Manual Check Required",

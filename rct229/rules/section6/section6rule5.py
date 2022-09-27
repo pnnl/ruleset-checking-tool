@@ -110,7 +110,7 @@ class Section6Rule5(RuleDefinitionListIndexedBase):
                             "building_open_schedule_id_b"
                         ]
                         building_open_schedule_b = find_exactly_one_with_field_value(
-                            jpath="$",
+                            jpath="$[*]",
                             field="id",
                             value=building_open_schedule_id_b,
                             obj=schedules_b,
