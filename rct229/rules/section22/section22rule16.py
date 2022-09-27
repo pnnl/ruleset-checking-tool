@@ -68,7 +68,6 @@ class Section22Rule16(RuleDefinitionListIndexedBase):
             )["cooling_or_condensing_design_and_control"]["design_supply_temperature"]
             for heat_rejection_loop in find_all("heat_rejections[*].loop", rmi_b)
         }
-
         return {"supply_temperature_b_dict": supply_temperature_b_dict}
 
     class ChillerHeatRejectionRule(RuleDefinitionBase):
@@ -98,5 +97,5 @@ class Section22Rule16(RuleDefinitionListIndexedBase):
             supply_temperature_b = data["supply_temperature_b_dict"][loop_b]
             return std_equal(
                 supply_temperature_b.to(ureg.kelvin),
-                (wbt_b + approach_b).to(ureg.kelvin),
+                ((wbt_b.m + approach_b.m) * ureg("degC")).to(ureg.kelvin),
             )
