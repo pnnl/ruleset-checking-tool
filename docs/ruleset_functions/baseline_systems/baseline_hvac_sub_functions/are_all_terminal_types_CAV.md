@@ -7,7 +7,7 @@
 - **terminal_unit_id_list**: List of terminal units to assess.  
 
 **Returns:**  
-- **are_all_terminal_types_CAV**: The function returns TRUE if all of the terminal unit types input to this function are constant air volume (CAV) if this data element is undefined. It returns FALSE if any of the terminal units are of a type other than constant air volume (CAV).      
+- **are_all_terminal_types_CAV**: The function returns TRUE if all of the terminal unit types input to this function are constant air volume (CAV). It returns FALSE if any of the terminal units are of a type other than constant air volume (CAV).      
  
 **Function Call:**  None        
 
