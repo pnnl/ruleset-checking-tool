@@ -1,5 +1,5 @@
-from rct229.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.are_all_terminal_heat_sources_hot_water import (
-    are_all_terminal_heat_sources_hot_water,
+from rct229.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.are_all_terminal_heat_sources_electric import (
+    are_all_terminal_heat_sources_electric,
 )
 
 TEST_RMD = {
@@ -30,11 +30,12 @@ TEST_RMD_FULL = {"id": "229_01", "ruleset_model_instances": [TEST_RMD]}
 
 
 def test__all_terminal_heat_source_hot_water():
-    assert are_all_terminal_heat_sources_hot_water(TEST_RMD, ["terminal_2"]) == True
+    assert are_all_terminal_heat_sources_electric(TEST_RMD, ["terminal_2"]) == False
 
 
-def test__all_terminal_heat_source_not_hot_water():
-    assert (
-        are_all_terminal_heat_sources_hot_water(TEST_RMD, ["terminal_2", "terminal_3"])
-        == False
-    )
+def test__all_terminal_heat_source_electric():
+    assert are_all_terminal_heat_sources_electric(TEST_RMD, ["terminal_3"]) == True
+
+
+def test__all_terminal_heat_source_none():
+    assert are_all_terminal_heat_sources_electric(TEST_RMD, ["terminal_1"]) == False

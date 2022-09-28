@@ -25,7 +25,7 @@ def are_all_terminal_heat_sources_hot_water(rmi_b, terminal_unit_id_list):
     are_all_terminal_heat_sources_hot_water_flag = True
     for terminal_b_id in terminal_unit_id_list:
         terminal_b = find_exact_one_terminal_unit(rmi_b, terminal_b_id)
-        if terminal_b.get("heating_source") not in [None, HEATING_SOURCE.HOT_WATER]:
+        if terminal_b.get("heating_source") != HEATING_SOURCE.HOT_WATER:
             are_all_terminal_heat_sources_hot_water_flag = False
             break
 
