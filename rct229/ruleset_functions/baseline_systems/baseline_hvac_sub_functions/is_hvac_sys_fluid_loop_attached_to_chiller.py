@@ -1,11 +1,10 @@
 from rct229.data.schema_enums import schema_enums
-from rct229.utils.assertions import getattr_
-from rct229.utils.jsonpath_utils import (
-    find_all,
-    find_exactly_one_with_field_value,
-    find_one,
-    find_one_with_field_value,
+from rct229.ruleset_functions.baseline_systems.baseline_system_util import (
+    find_exact_one_hvac_system,
+    find_exact_one_loop,
 )
+from rct229.utils.assertions import getattr_
+from rct229.utils.jsonpath_utils import find_all, find_one
 
 FLUID_LOOP = schema_enums["FluidLoopOptions"]
 
@@ -33,18 +32,11 @@ def is_hvac_sys_fluid_loop_attached_to_chiller(rmi_b, hvac_b_id):
     ]
 
     # Get the hvac system
-    hvac_b = find_exactly_one_with_field_value(
-        "$.buildings[*].building_segments[*].heating_ventilation_air_conditioning_systems[*]",
-        "id",
-        hvac_b_id,
-        rmi_b,
-    )
+    hvac_b = find_exact_one_hvac_system(rmi_b, hvac_b_id)
 
     chilled_water_loop_id = find_one("cooling_system.chilled_water_loop", hvac_b)
     if chilled_water_loop_id in cooling_loop_ids:
-        chilled_water_loop = find_exactly_one_with_field_value(
-            "fluid_loops[*]", "id", chilled_water_loop_id, rmi_b
-        )
+        chilled_water_loop = find_exact_one_loop(rmi_b, chilled_water_loop_id)
         is_hvac_sys_fluid_loop_attached_to_chiller_flag = (
             find_one("type", chilled_water_loop) == FLUID_LOOP.COOLING
         )
