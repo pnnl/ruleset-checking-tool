@@ -59,7 +59,7 @@ class Section5Rule48(RuleDefinitionListIndexedBase):
                     rmrs_used=UserBaselineProposedVals(False, True, True),
                     required_fields={
                         "$": ["infiltration"],
-                        "infiltration[*]": ["infiltration_flow_rate"],
+                        "infiltration": ["infiltration_flow_rate"],
                     },
                 )
 
