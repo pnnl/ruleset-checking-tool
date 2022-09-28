@@ -1,6 +1,6 @@
 # is_hvac_sys_heating_type_furnace 
 
-**Description:** Returns TRUE if the HVAC system heating system heating type is furnace. Returns FALSE if the HVAC system heating system has anything other than furnace or if it has more than 1 heating system.   
+**Description:** Returns TRUE if the HVAC system heating system heating type is furnace. Returns FALSE if the HVAC system heating system has anything other than furnace.   
 
 **Inputs:**  
 - **B-RMR**: To evaluate if the hvac system is modeled with heating type furnace.   
