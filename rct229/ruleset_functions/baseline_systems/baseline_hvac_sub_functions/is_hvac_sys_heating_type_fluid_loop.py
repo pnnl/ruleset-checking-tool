@@ -4,7 +4,6 @@ from rct229.ruleset_functions.baseline_systems.baseline_system_util import (
 )
 from rct229.utils.jsonpath_utils import find_one
 
-
 HEATING_SYSTEM = schema_enums["HeatingSystemOptions"]
 
 
