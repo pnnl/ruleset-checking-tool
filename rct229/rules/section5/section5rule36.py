@@ -13,7 +13,7 @@ from rct229.ruleset_functions.get_surface_conditioning_category_dict import (
     get_surface_conditioning_category_dict,
 )
 from rct229.utils.jsonpath_utils import find_all
-from rct229.utils.pint_utils import ZERO
+from rct229.utils.pint_utils import ZERO, CalcQ
 from rct229.utils.std_comparisons import std_equal
 
 
@@ -123,10 +123,14 @@ class Section5Rule36(RuleDefinitionListIndexedBase):
                     )
 
                     return {
-                        "total_skylight_area_b": total_skylight_area_b,
-                        "total_skylight_area_p": total_skylight_area_p,
-                        "total_skylight_area_surface_b": total_skylight_area_surface_b,
-                        "total_skylight_area_surface_p": total_skylight_area_surface_p,
+                        "total_skylight_area_b": CalcQ("area", total_skylight_area_b),
+                        "total_skylight_area_p": CalcQ("area", total_skylight_area_p),
+                        "total_skylight_area_surface_b": CalcQ(
+                            "area", total_skylight_area_surface_b
+                        ),
+                        "total_skylight_area_surface_p": CalcQ(
+                            "area", total_skylight_area_surface_p
+                        ),
                     }
 
                 def rule_check(self, context, calc_vals=None, data=None):

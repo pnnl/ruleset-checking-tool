@@ -23,13 +23,21 @@ TEST_RMD = {
                             # Case where the preheat system has a wrong hot_water_loop id
                             "id": "hvac_2",
                             "preheat_system": {
-                                "id": "preheat_system",
+                                "id": "preheat_system_2",
                                 "hot_water_loop": "HW_Loop_2",
                             },
                         },
                         {
-                            # Case where there is no preheat system
+                            # Case where the hot water type fluid type is not heating
                             "id": "hvac_3",
+                            "preheat_system": {
+                                "id": "preheat_system_3",
+                                "hot_water_loop": "HW_Loop_3",
+                            },
+                        },
+                        {
+                            # Case where there is no preheat system
+                            "id": "hvac_4"
                         },
                     ],
                 }
@@ -40,13 +48,21 @@ TEST_RMD = {
         {
             "id": "boiler_1",
             "loop": "HW_Loop_1",
-        }
+        },
+        {
+            "id": "boiler_1",
+            "loop": "HW_Loop_3",
+        },
     ],
     "fluid_loops": [
         {
             "id": "HW_Loop_1",
             "type": "HEATING",
-        }
+        },
+        {
+            "id": "HW_Loop_3",
+            "type": "HEATING_AND_COOLING",
+        },
     ],
 }
 
@@ -64,6 +80,12 @@ def test__preheat_attached_to_boiler_failed_fluidloop():
 
 
 def test__preheat_attached_to_boiler_failed_no_preheat():
+    assert (
+        is_hvac_sys_preheat_fluid_loop_attached_to_boiler(TEST_RMD, "hvac_4") == False
+    )
+
+
+def test__preheat_attached_to_boiler_failed_type_not_heating():
     assert (
         is_hvac_sys_preheat_fluid_loop_attached_to_boiler(TEST_RMD, "hvac_3") == False
     )
