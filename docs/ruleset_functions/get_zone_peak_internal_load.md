@@ -7,7 +7,7 @@
 - **zone**
 
 **Returns:**  
-- **result**: a numeric value in W/sf giving the sum of the internal coincident peak loads in all spaces in the zone
+- **result**: an array giving 2 values: [total peak watts in the zone, total zone area] the total peak watts is the  of the internal coincident peak loads in all spaces in the zone
  
 **Function Call:**
 - **get_baseline_system_types**
@@ -36,7 +36,7 @@
 	- check if internal_loads_this_hour is greater than max_internal_load: `if internal_loads_this_hour > max_internal_load:`
 		- reset max_internal_load to internal_loads_this_hour: `max_internal_load = internal_loads_this_hour`
 
-- normalize the max_internal_load value by the area of the zone to get the result in W/sf: `result = max_internal_load / area`
+- create the result array: `result = [max_internal_load, area]`
 
 
 **Returns** `result`
