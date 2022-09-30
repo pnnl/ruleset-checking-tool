@@ -1,5 +1,5 @@
 # get_zone_peak_internal_load
-
+**Schema Version:** 0.0.21
 **Description:** finds the peak coincident internal loads of a zone and returns the value in W/sf
 
 **Inputs:** 
@@ -7,19 +7,23 @@
 - **zone**
 
 **Returns:**  
-- **result**: an array giving 2 values: [total peak watts in the zone, total zone area] the total peak watts is the  of the internal coincident peak loads in all spaces in the zone
+- **result**: an array giving 5 values: [total peak watts in the zone, total zone area, full load hours] the total peak watts is the internal coincident peak loads in all spaces in the zone - full load hours is the total of all full load hours for the space, normalized by the individual load.
+- For example: if a space has 1 W/sf lighting (2000 hours/year), 0.5 W/sf misc equipment (8000 hours/year), and no occupancy, the full_load_hours would be:
+	- (1 / 1.5) * 2000 + (0.5 / 1.5) * 8000 = 4000
  
 **Function Call:**
 - **get_baseline_system_types**
 
 ## Logic:
 
-- create list of all loads in the zone.  Each load is an array of: [the peak in W, schedule hourly values], the peak in W takes into account the sensible and latent fraction: `loads = []`
+- create list of all loads in the zone.  Each load is an array of: [the peak in W, schedule hourly values,schedule_multiplier], the peak in W takes into account the sensible and latent fraction, for where there are multiple internal_loads in a space, the schedule multiplier indicates the % of total of the internal load: `loads = []`
 - create an area variable which will be the sum of all space areas: `zone_area = 0`
 - For each space in zone: `for space in zone.spaces:`
 	- add the space.floor_area to the area variable: `zone_area += space.floor_area`
-	- get information for interior lighting: `lights = space.interior_lighting`
-	- create the array for the lights: `lights_info = [space.area * lights.power_per_area, lights.lighting_multiplier_schedule.hourly_values]`
+	- create lights power variable for storing the total space lighting power: `lights_power = 0`
+	- For each lighting object in the space: `for lights in space.interior_lighting:`
+		- add the space lighting power to the lights_power variable: `lights_power += lights.power_per_area`
+	- create the array for the lights: `lights_info = [lights_power, space.normalize_interior_lighting_schedules]`
 	- append the lights_info to the loads list: `loads.append(lights_info)`
 	- get information for people: `people_info = [space.number_of_occupants * space.occupant_sensible_heat_gain, space.occupant_multiplier_schedule.hourly_values]`
 	- append people_info to the list: `loads.append(people_info)`
@@ -36,7 +40,14 @@
 	- check if internal_loads_this_hour is greater than max_internal_load: `if internal_loads_this_hour > max_internal_load:`
 		- reset max_internal_load to internal_loads_this_hour: `max_internal_load = internal_loads_this_hour`
 
-- create the result array: `result = [max_internal_load, area]`
+- create total_user_internal_load: `total_user_internal_load = 0`
+- loop through the loads and get the total max load for the Space.  This is used to do the average EFLH calculation: `for load in loads:`
+	- add load to total_user_internal_load: `total_user_internal_load += load[0]
+- now create the EFLH variable: `eflh = 0`
+- loop through the loads one last time: `for load in loads:`
+	- add the EFLH for this load to the EFLH total: `eflh += (load[0]/total_user_internal_load) * sum(load[1])`
+
+- create the result array: `result = [max_internal_load, area, eflh]`
 
 
 **Returns** `result`
