@@ -54,18 +54,22 @@ TEST_RMD = {
 
 
 def test_get_hvac_zone_terminals():
-    assert ordered(get_dict_of_zones_and_terminal_units_served_by_hvac_sys(TEST_RMD)) == ordered({
-        "hvac_1": {"terminal_unit_list": ["terminal_1"], "zone_list": ["zone_1"]},
-        "hvac_2": {
-            "terminal_unit_list": ["terminal_2", "terminal_5"],
-            "zone_list": ["zone_1", "zone_2"],
-        },
-        "hvac_3": {"terminal_unit_list": ["terminal_3"], "zone_list": ["zone_1"]},
-        "hvac_4": {
-            "terminal_unit_list": ["terminal_4", "terminal_6"],
-            "zone_list": ["zone_2"],
-        },
-    })
+    assert ordered(
+        get_dict_of_zones_and_terminal_units_served_by_hvac_sys(TEST_RMD)
+    ) == ordered(
+        {
+            "hvac_1": {"terminal_unit_list": ["terminal_1"], "zone_list": ["zone_1"]},
+            "hvac_2": {
+                "terminal_unit_list": ["terminal_2", "terminal_5"],
+                "zone_list": ["zone_1", "zone_2"],
+            },
+            "hvac_3": {"terminal_unit_list": ["terminal_3"], "zone_list": ["zone_1"]},
+            "hvac_4": {
+                "terminal_unit_list": ["terminal_4", "terminal_6"],
+                "zone_list": ["zone_2"],
+            },
+        }
+    )
 
 
 def ordered(obj):
