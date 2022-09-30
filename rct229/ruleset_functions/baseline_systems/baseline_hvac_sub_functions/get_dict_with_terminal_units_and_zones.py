@@ -2,6 +2,17 @@ from rct229.utils.jsonpath_utils import find_all
 
 
 def get_dict_with_terminal_units_and_zones(rmi):
+    """
+    Returns a dictionary of zone IDs associated with each terminal unit in the RMD.
+
+    Parameters
+    ----------
+    rmi: json
+
+    Returns ------- dict a dictionary of zones associated with each terminal unit in the RMR, {terminal_unit_1.id: [
+    zone_1.id, zone_2.id, zone_3.id], terminal_unit_2.id: [zone_4.id, zone_9.id, zone_30.id]}
+
+    """
     terminal_units_and_zones_dict = {}
     for terminal in find_all("$..terminals[*]", rmi):
         terminal_id = terminal["id"]

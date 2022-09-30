@@ -1,6 +1,6 @@
 # get_dict_with_terminal_units_and_zones    
 
-**Description:** Returns a dictionary of zone IDs associated with each terminal unit in the RMR.   
+**Description:** Returns a dictionary of zone IDs associated with each terminal unit in the RMD.   
 
 **Inputs:**  
 - **RMR**: The RMR to evalute (B-RMR or P-RMR or U-RMR).    
