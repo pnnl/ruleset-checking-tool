@@ -27,7 +27,7 @@ class Section22Rule14(RuleDefinitionListIndexedBase):
     def __init__(self):
         super(Section22Rule14, self).__init__(
             rmrs_used=UserBaselineProposedVals(False, True, False),
-            each_rule=Section22Rule14.ChillerHeatRejectionRule(),
+            each_rule=Section22Rule14.HeatRejectionRule(),
             index_rmr="baseline",
             id="22-14",
             description="The baseline heat-rejection device shall have a design temperature rise of 10°F.",
@@ -48,9 +48,9 @@ class Section22Rule14(RuleDefinitionListIndexedBase):
             [key in APPLICABLE_SYS_TYPES for key in baseline_system_types.keys()]
         )
 
-    class ChillerHeatRejectionRule(RuleDefinitionBase):
+    class HeatRejectionRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section22Rule14.ChillerHeatRejectionRule, self).__init__(
+            super(Section22Rule14.HeatRejectionRule, self).__init__(
                 rmrs_used=UserBaselineProposedVals(False, True, False),
                 required_fields={
                     "$": ["range"],
