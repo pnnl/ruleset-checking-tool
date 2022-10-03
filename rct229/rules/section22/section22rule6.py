@@ -50,8 +50,8 @@ class Section22Rule6(RuleDefinitionListIndexedBase):
 
     def list_filter(self, context_item, data):
         fluid_loop_b = context_item.baseline
-        loop_chiller_list = data["chiller_loop_ids_list"]
-        return fluid_loop_b["id"] in loop_chiller_list
+        chiller_loop_ids_list = data["chiller_loop_ids_list"]
+        return fluid_loop_b["id"] in chiller_loop_ids_list
 
     class ChillerFluidLoopRule(RuleDefinitionBase):
         def __init__(self):
