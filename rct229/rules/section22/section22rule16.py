@@ -32,7 +32,7 @@ class Section22Rule16(RuleDefinitionListIndexedBase):
     def __init__(self):
         super(Section22Rule16, self).__init__(
             rmrs_used=UserBaselineProposedVals(False, True, False),
-            each_rule=Section22Rule16.ChillerHeatRejectionRule(),
+            each_rule=Section22Rule16.HeatRejectionRule(),
             index_rmr="baseline",
             id="22-16",
             description="The baseline condenser-water design supply temperature shall be calculated using the cooling tower approach to the 0.4% evaporation design wet-bulb temperature, valid for wet-bulbs from 55°F to 90°F.",
@@ -51,7 +51,7 @@ class Section22Rule16(RuleDefinitionListIndexedBase):
         # if any system type found in the APPLICABLE_SYS_TYPES and wet-bulb temp is in the correct range then return applicable.
         return any(
             [key in APPLICABLE_SYS_TYPES for key in baseline_system_types.keys()]
-        ) and all(
+        ) and any(
             REQUIRED_LOW_DESIGN_WETBULB_TEMP.to(ureg.kelvin)
             <= heat_rejection_wetbulb_temp_b.to(ureg.kelvin)
             <= REQUIRED_HIGH_DESIGN_WETBULB_TEMP.to(ureg.kelvin)
@@ -70,9 +70,9 @@ class Section22Rule16(RuleDefinitionListIndexedBase):
         }
         return {"supply_temperature_dict_b": supply_temperature_dict_b}
 
-    class ChillerHeatRejectionRule(RuleDefinitionBase):
+    class HeatRejectionRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section22Rule16.ChillerHeatRejectionRule, self).__init__(
+            super(Section22Rule16.HeatRejectionRule, self).__init__(
                 rmrs_used=UserBaselineProposedVals(False, True, False),
                 required_fields={
                     "$": ["design_wetbulb_temperature", "approach", "loop"],
@@ -81,21 +81,25 @@ class Section22Rule16(RuleDefinitionListIndexedBase):
 
         def get_calc_vals(self, context, data=None):
             heat_rejection_b = context.baseline
-            wbt_b = heat_rejection_b["design_wetbulb_temperature"]
+            design_wetbulb_temperature = heat_rejection_b["design_wetbulb_temperature"]
             approach_b = heat_rejection_b["approach"]
             loop_b = heat_rejection_b["loop"]
             return {
-                "wbt_b": CalcQ("temperature", wbt_b),
+                "design_wetbulb_temperature": CalcQ(
+                    "temperature", design_wetbulb_temperature
+                ),
                 "approach_b": CalcQ("temperature", approach_b),
                 "loop_b": loop_b,
             }
 
         def rule_check(self, context, calc_vals=None, data=None):
-            wbt_b = calc_vals["wbt_b"]
+            design_wetbulb_temperature = calc_vals["design_wetbulb_temperature"]
             approach_b = calc_vals["approach_b"]
             loop_b = calc_vals["loop_b"]
             supply_temperature_b = data["supply_temperature_dict_b"][loop_b]
             return std_equal(
                 supply_temperature_b.to(ureg.kelvin),
-                ((wbt_b.m + approach_b.m) * ureg("degC")).to(ureg.kelvin),
+                ((design_wetbulb_temperature.m + approach_b.m) * ureg("degC")).to(
+                    ureg.kelvin
+                ),
             )
