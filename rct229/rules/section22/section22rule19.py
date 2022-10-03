@@ -17,7 +17,7 @@ APPLICABLE_SYS_TYPES = [
     "SYS-12B",
     "SYS-13B",
 ]
-REQUIRED_TEMP_RESET_TYPE = schema_enums["TemperatureResetOptions"]
+REQUIRED_TEMP_RESET = schema_enums["TemperatureResetOptions"]
 
 
 class Section22Rule19(RuleDefinitionListIndexedBase):
@@ -26,7 +26,7 @@ class Section22Rule19(RuleDefinitionListIndexedBase):
     def __init__(self):
         super(Section22Rule19, self).__init__(
             rmrs_used=UserBaselineProposedVals(False, True, False),
-            each_rule=Section22Rule19.ChillerHeatRejectionRule(),
+            each_rule=Section22Rule19.HeatRejectionRule(),
             index_rmr="baseline",
             id="22-19",
             description="The tower shall be controlled to maintain a leaving water temperature, where weather permits.",
@@ -57,9 +57,9 @@ class Section22Rule19(RuleDefinitionListIndexedBase):
         }
         return {"temp_reset_type_dict_b": temp_reset_type_dict_b}
 
-    class ChillerHeatRejectionRule(RuleDefinitionBase):
+    class HeatRejectionRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section22Rule19.ChillerHeatRejectionRule, self).__init__(
+            super(Section22Rule19.HeatRejectionRule, self).__init__(
                 rmrs_used=UserBaselineProposedVals(False, True, False),
             )
 
@@ -71,4 +71,4 @@ class Section22Rule19(RuleDefinitionListIndexedBase):
 
         def rule_check(self, context, calc_vals=None, data=None):
             temperature_reset_type = calc_vals["temperature_reset_type"]
-            return temperature_reset_type == REQUIRED_TEMP_RESET_TYPE.CONSTANT
+            return temperature_reset_type == REQUIRED_TEMP_RESET.CONSTANT
