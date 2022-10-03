@@ -12,7 +12,7 @@ APPLICABLE_SYS_TYPES = [
     "SYS-11B",
     "SYS-11C",
 ]
-TEMP_RESET_OPTION = schema_enums["TemperatureResetOptions"]
+TEMP_RESET = schema_enums["TemperatureResetOptions"]
 
 
 class Section22Rule5(RuleDefinitionListIndexedBase):
@@ -48,8 +48,8 @@ class Section22Rule5(RuleDefinitionListIndexedBase):
 
     def list_filter(self, context_item, data):
         fluid_loop_b = context_item.baseline
-        loop_chiller_list = data["chiller_loop_ids_list"]
-        return fluid_loop_b["id"] in loop_chiller_list
+        chiller_loop_ids_list = data["chiller_loop_ids_list"]
+        return fluid_loop_b["id"] in chiller_loop_ids_list
 
     class ChillerFluidLoopRule(RuleDefinitionBase):
         def __init__(self):
@@ -74,4 +74,4 @@ class Section22Rule5(RuleDefinitionListIndexedBase):
         def rule_check(self, context, calc_vals=None, data=None):
             temperature_reset_type = calc_vals["temperature_reset_type"]
 
-            return temperature_reset_type == TEMP_RESET_OPTION.LOAD_RESET
+            return temperature_reset_type == TEMP_RESET.LOAD_RESET
