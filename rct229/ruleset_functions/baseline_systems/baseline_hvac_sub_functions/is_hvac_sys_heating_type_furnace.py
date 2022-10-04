@@ -1,6 +1,6 @@
 from rct229.data.schema_enums import schema_enums
 from rct229.ruleset_functions.baseline_systems.baseline_system_util import (
-    find_exact_one_hvac_system,
+    find_exactly_one_hvac_system,
 )
 from rct229.utils.jsonpath_utils import find_one
 
@@ -23,7 +23,7 @@ def is_hvac_sys_heating_type_furnace(rmi_b, hvac_b_id):
             True: the HVAC system heating system has furnace as the heating type
             False: the HVAC system has a heating system type other than furnace
     """
-    hvac_b = find_exact_one_hvac_system(rmi_b, hvac_b_id)
+    hvac_b = find_exactly_one_hvac_system(rmi_b, hvac_b_id)
 
     return (
         find_one("$.heating_system.heating_system_type", hvac_b)

@@ -11,7 +11,7 @@ class HVAC_SYS:
     UNMATCHED = "Not_Sys"
 
 
-def find_exact_one_hvac_system(rmi, hvac_id):
+def find_exactly_one_hvac_system(rmi, hvac_id):
     """
     Search for the HVAC data group in a ruleset model instance by matching hvac_id
     Raise exception if no matching HVAC
@@ -33,7 +33,7 @@ def find_exact_one_hvac_system(rmi, hvac_id):
     )
 
 
-def find_exact_one_terminal_unit(rmi, terminal_unit_id):
+def find_exactly_one_terminal_unit(rmi, terminal_unit_id):
     """
     Search for the terminal unit data group in a ruleset model instance by matching terminal_unit_id
     Raise exception if no matching terminal unit
@@ -54,7 +54,7 @@ def find_exact_one_terminal_unit(rmi, terminal_unit_id):
     )
 
 
-def find_exact_one_zone(rmi, zone_id):
+def find_exactly_one_zone(rmi, zone_id):
     """
     Search for the zone data group in a ruleset model instance by matching zone_id
     Raise exception if no matching zone
@@ -73,7 +73,7 @@ def find_exact_one_zone(rmi, zone_id):
     )
 
 
-def find_exact_one_loop(rmi, loop_id):
+def find_exactly_one_loop(rmi, loop_id):
     """
     Search for the loop data group in a ruleset model instance by matching loop_id
     Raise exception if no matching zone
