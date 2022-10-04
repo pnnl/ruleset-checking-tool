@@ -2,6 +2,7 @@ from rct229.data.schema_enums import schema_enums
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
+from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all, find_exactly_one_with_field_value
 
 APPLICABLE_SYS_TYPES = [
@@ -17,7 +18,7 @@ APPLICABLE_SYS_TYPES = [
     "SYS-12B",
     "SYS-13B",
 ]
-REQUIRED_TEMP_RESET = schema_enums["TemperatureResetOptions"]
+TEMPERATURE_RESET = schema_enums["TemperatureResetOptions"]
 
 
 class Section22Rule19(RuleDefinitionListIndexedBase):
@@ -49,13 +50,13 @@ class Section22Rule19(RuleDefinitionListIndexedBase):
 
     def create_data(self, context, data):
         rmi_b = context.baseline
-        temp_reset_type_dict_b = {
-            heat_rejection_loop: find_exactly_one_with_field_value(
-                "$..fluid_loops[*]", "id", heat_rejection_loop, rmi_b
-            )["cooling_or_condensing_design_and_control"]["temperature_reset_type"]
-            for heat_rejection_loop in find_all("heat_rejections[*].loop", rmi_b)
+        heat_rejection_loop_dict = {
+            heat_rejection_loop_id: find_exactly_one_with_field_value(
+                "$..fluid_loops[*]", "id", heat_rejection_loop_id, rmi_b
+            )
+            for heat_rejection_loop_id in find_all("heat_rejections[*].loop", rmi_b)
         }
-        return {"temp_reset_type_dict_b": temp_reset_type_dict_b}
+        return {"heat_rejection_loop_dict": heat_rejection_loop_dict}
 
     class HeatRejectionRule(RuleDefinitionBase):
         def __init__(self):
@@ -66,9 +67,14 @@ class Section22Rule19(RuleDefinitionListIndexedBase):
         def get_calc_vals(self, context, data=None):
             heat_rejection_b = context.baseline
             loop_b = heat_rejection_b["loop"]
-            temperature_reset_type = data["temp_reset_type_dict_b"][loop_b]
+            temperature_reset_type = getattr_(
+                data["heat_rejection_loop_dict"][loop_b],
+                "temperature_reset_type",
+                "cooling_or_condensing_design_and_control",
+                "temperature_reset_type",
+            )
             return {"temperature_reset_type": temperature_reset_type}
 
         def rule_check(self, context, calc_vals=None, data=None):
             temperature_reset_type = calc_vals["temperature_reset_type"]
-            return temperature_reset_type == REQUIRED_TEMP_RESET.CONSTANT
+            return temperature_reset_type == TEMPERATURE_RESET.CONSTANT
