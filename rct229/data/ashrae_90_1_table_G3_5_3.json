@@ -1,0 +1,46 @@
+{
+  "prm_water_chiller_min_efficiency": [
+    {
+      "cooling_type": "displacement",
+      "minimum_capacity": 0.0,
+      "maximum_capacity": 149.99,
+      "minimum_full_load_efficiency": 0.790,
+      "minimum_integrated_part_load_value": 0.676
+    },
+    {
+      "cooling_type": "displacement",
+      "minimum_capacity": 150.0,
+      "maximum_capacity": 299.99,
+      "minimum_full_load_efficiency": 0.718,
+      "minimum_integrated_part_load_value": 0.629
+    },
+    {
+      "cooling_type": "displacement",
+      "minimum_capacity": 300.0,
+      "maximum_capacity": 9999.99,
+      "minimum_full_load_efficiency": 0.639,
+      "minimum_integrated_part_load_value": 0.572
+    },
+    {
+      "cooling_type": "centrifugal",
+      "minimum_capacity": 0.0,
+      "maximum_capacity": 149.99,
+      "minimum_full_load_efficiency": 0.703,
+      "minimum_integrated_part_load_value": 0.670
+    },
+    {
+      "cooling_type": "centrifugal",
+      "minimum_capacity": 150.0,
+      "maximum_capacity": 299.99,
+      "minimum_full_load_efficiency": 0.634,
+      "minimum_integrated_part_load_value": 0.596
+    },
+    {
+      "cooling_type": "centrifugal",
+      "minimum_capacity": 300.0,
+      "maximum_capacity": 9999.99,
+      "minimum_full_load_efficiency": 0.576,
+      "minimum_integrated_part_load_value": 0.549
+    }
+  ]
+}
