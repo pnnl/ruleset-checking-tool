@@ -1,9 +1,8 @@
 from rct229.data.schema_enums import schema_enums
-from rct229.utils.jsonpath_utils import (
-    find_all,
-    find_exactly_one_with_field_value,
-    find_one,
+from rct229.ruleset_functions.baseline_systems.baseline_system_util import (
+    find_exactly_one_hvac_system,
 )
+from rct229.utils.jsonpath_utils import find_all, find_one
 
 EXTERNAL_FLUID_SOURCE = schema_enums["ExternalFluidSourceOptions"]
 
@@ -30,12 +29,7 @@ def is_hvac_sys_fluid_loop_purchased_chw(rmi_b, hvac_b_id):
     ]
 
     # Get the hvac system
-    hvac_b = find_exactly_one_with_field_value(
-        "$.buildings[*].building_segments[*].heating_ventilation_air_conditioning_systems[*]",
-        "id",
-        hvac_b_id,
-        rmi_b,
-    )
+    hvac_b = find_exactly_one_hvac_system(rmi_b, hvac_b_id)
     # the hvac_sys has a cooling system and the cooling system has a chilled_water_loop and
     # the loop id is in the purchased_cooling_loop_id_list
     is_hvac_sys_fluid_loop_purchased_chw_flag = (

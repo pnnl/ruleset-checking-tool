@@ -1,5 +1,7 @@
 from rct229.data.schema_enums import schema_enums
-from rct229.utils.jsonpath_utils import find_exactly_one_with_field_value
+from rct229.ruleset_functions.baseline_systems.baseline_system_util import (
+    find_exactly_one_hvac_system,
+)
 
 FAN_SYSTEM_SUPPLY_FAN_CONTROL = schema_enums["FanSystemSupplyFanControlOptions"]
 
@@ -20,15 +22,9 @@ def is_hvac_sys_fan_sys_vsd(rmi_b, hvac_b_id):
         True: HVAC system fan system his variable speed drive control
         False: the HVAC system has a fan system that is anything other than variable speed drive controlled
     """
-    is_hvac_sys_fan_sys_vsd_flag = False
 
     # Get the hvac system
-    hvac_b = find_exactly_one_with_field_value(
-        "$.buildings[*].building_segments[*].heating_ventilation_air_conditioning_systems[*]",
-        "id",
-        hvac_b_id,
-        rmi_b,
-    )
+    hvac_b = find_exactly_one_hvac_system(rmi_b, hvac_b_id)
     fan_system = hvac_b.get("fan_system")
     is_hvac_sys_fan_sys_vsd_flag = (
         fan_system is not None
