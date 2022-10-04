@@ -95,8 +95,9 @@ def is_baseline_system_7(rmi_b, hvac_b_id, terminal_unit_id_list, zone_id_list):
     )
 
     are_sys_data_matched = (
+        has_required_sys
         # sub functions handles missing required sys, and return False.
-        is_hvac_sys_preheating_type_fluid_loop(rmi_b, hvac_b_id)
+        and is_hvac_sys_preheating_type_fluid_loop(rmi_b, hvac_b_id)
         and is_hvac_sys_cooling_type_fluid_loop(rmi_b, hvac_b_id)
         and is_hvac_sys_fan_sys_vsd(rmi_b, hvac_b_id)
         and does_each_zone_have_only_one_terminal(rmi_b, zone_id_list)
@@ -106,7 +107,7 @@ def is_baseline_system_7(rmi_b, hvac_b_id, terminal_unit_id_list, zone_id_list):
         and are_all_terminal_types_VAV(rmi_b, terminal_unit_id_list)
     )
 
-    if has_required_sys and are_sys_data_matched:
+    if are_sys_data_matched:
         # Confirm required data for Sys-7, now to decide which system type 7
         is_hvac_sys_fluid_loop_attached_to_chiller_flag = (
             is_hvac_sys_fluid_loop_attached_to_chiller(rmi_b, hvac_b_id)
