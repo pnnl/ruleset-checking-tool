@@ -1,6 +1,6 @@
 from rct229.data.schema_enums import schema_enums
 from rct229.ruleset_functions.baseline_systems.baseline_system_util import (
-    find_exact_one_hvac_system,
+    find_exactly_one_hvac_system,
 )
 from rct229.utils.jsonpath_utils import find_one
 
@@ -25,10 +25,8 @@ def is_hvac_sys_cooling_type_none(rmi_b, hvac_b_id):
         False: HVAC system has anything other than None or Null for the cooling type
     """
     # Get the hvac system
-    hvac_b = find_exact_one_hvac_system(rmi_b, hvac_b_id)
+    hvac_b = find_exactly_one_hvac_system(rmi_b, hvac_b_id)
     # Check if hvac_b has preheat system
     cooling_system_type = find_one("$.cooling_system.cooling_system_type", hvac_b)
 
-    return (
-        cooling_system_type == COOLING_SYSTEM_TYPE.NONE or cooling_system_type == None
-    )
+    return cooling_system_type in [COOLING_SYSTEM_TYPE.NONE, None]
