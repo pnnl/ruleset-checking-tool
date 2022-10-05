@@ -3,7 +3,7 @@
 **Mandatory Rule:** True  
 **Rule ID:** 19-1   
 **Rule Description:** HVAC system coil capacities for the baseline building design shall be oversized by 15% for cooling and 25% for heating..  
-**Rule Assertion:** Options are Pass/Fail/IN_APPLICABLE     
+**Rule Assertion:** Options are Pass/Fail/NOT_APPLICABLE     
 **Appendix G Section:** Section G3.1.2.2    
 **90.1 Section Reference:** None  
 
@@ -37,9 +37,9 @@
             - Else: `Else: cooling_oversizing_factor = "n/a"`   
 
             - **Rule Assertion:** 
-            - Case 1: If heating_oversizing_factor = 25% and cooling_oversizing_factor = 15% then pass: `if heating_oversizing_factor == 25% AND cooling_oversizing_factor == 15%: outcome = "PASS"`  
-            - Case 2: Else if heating_oversizing_factor = 25% and cooling_oversizing_factor = n/a then pass: `elif heating_oversizing_factor == 25% AND cooling_oversizing_factor == "n/a": outcome = "PASS"`  
-            - Case 3: Else if cooling_oversizing_factor = 15% and heating_oversizing_factor = n/a then pass: `elif cooling_oversizing_factor == 15% AND heating_oversizing_factor == "n/a": outcome = "PASS"`  
+            - Case 1: If heating_oversizing_factor = 25% and cooling_oversizing_factor = 15% and hvac.heating_system.is_autosized ==  TRUE AND hvac.cooling_system.is_autosized ==  TRUE  then pass: `if heating_oversizing_factor == 25% AND cooling_oversizing_factor == 15% AND hvac.heating_system.is_autosized ==  TRUE AND hvac.cooling_system.is_autosized ==  TRUE: outcome = "PASS"`  
+            - Case 2: Else if heating_oversizing_factor = 25% and hvac.heating_system.is_autosized ==  TRUE and cooling_oversizing_factor = n/a then pass: `elif heating_oversizing_factor == 25% AND hvac.heating_system.is_autosized ==  TRUE AND cooling_oversizing_factor == "n/a": outcome = "PASS"`  
+            - Case 3: Else if cooling_oversizing_factor = 15% and hvac.cooling_system.is_autosized ==  TRUE and heating_oversizing_factor = n/a then pass: `elif cooling_oversizing_factor == 15% AND hvac.cooling_system.is_autosized ==  TRUE AND heating_oversizing_factor == "n/a": outcome = "PASS"`  
             - Case 4: Else, fail: `Else: outcome = "Fail"`  
 
 
