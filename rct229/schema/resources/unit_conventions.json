@@ -14,7 +14,8 @@
         "pump_head": "m",
         "temperature": "C",
         "power_per_volumetric_flow_rate": "W-s/L",
-        "cooling_efficiency": "W/W"
+        "cooling_efficiency": "W/W",
+        "power_per_flow_rate": "W-s/L"
     },
     "ip": {
         "transformer_capacity": "V-A",
@@ -31,6 +32,7 @@
         "pump_head": "ft",
         "temperature": "F",
         "power_per_volumetric_flow_rate": "W/gpm",
-        "cooling_efficiency": "kW/ton"
+        "cooling_efficiency": "kW/ton",
+        "power_per_flow_rate": "W/gpm"
     }
 }
