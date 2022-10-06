@@ -1,7 +1,10 @@
 import pytest
 
 from rct229.data import data
-from rct229.data_fns.table_3_2_fns import table_3_2_lookup, table_3_2_climate_zone_enumeration_to_climate_zone_map
+from rct229.data_fns.table_3_2_fns import (
+    table_3_2_climate_zone_enumeration_to_climate_zone_map,
+    table_3_2_lookup,
+)
 from rct229.data_fns.table_utils import check_enumeration_to_osstd_match_field_value_map
 from rct229.schema.config import ureg
 
