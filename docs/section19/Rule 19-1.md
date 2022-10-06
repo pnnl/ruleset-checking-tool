@@ -26,7 +26,6 @@
 - For each hvac system in B_RMR: `for hvac in B_RMR...HeatingVentilationAirConditioningSystem:`    
     - Reset heating_oversizing_factor: `heating_oversizing_factor = ""`  
     - Reset cooling_oversizing_factor: `cooling_oversizing_factor = ""`  
-    - Get baseline system type: `sys_type = list(baseline_hvac_system_dict.keys())[list(baseline_hvac_system_dict.values()).index(hvac.id)]`  
     - Check if the baseline system type has a furnace, heat pump, and/or DX cooling coil, ELSE then rule outcome for this HVAC system is NOT_APPLICABLE: `if is_hvac_sys_heating_type_furnace(B_RMR, hvac.id) == TRUE OR is_hvac_sys_heating_type_heat_pump(B_RMR, hvac.id) ==  TRUE OR is_hvac_sys_cooling_type_DX(B_RMR, hvac.id) == TRUE:`   
         - Check if the baseline hvac system type has a furnace or heat pump coil at the HVAC system level: `if is_hvac_sys_heating_type_furnace(B_RMR, hvac.id) == TRUE OR is_hvac_sys_heating_type_heat_pump(B_RMR, hvac.id) ==  TRUE:`  
             - Get the over sizing factor associated with the heating coil: `heating_oversizing_factor = hvac.heating_system.oversizing_factor`     
