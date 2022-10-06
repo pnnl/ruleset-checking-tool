@@ -13,13 +13,12 @@ def get_dict_with_terminal_units_and_zones(rmi):
     zone_1.id, zone_2.id, zone_3.id], terminal_unit_2.id: [zone_4.id, zone_9.id, zone_30.id]}
 
     """
-    terminal_units_and_zones_dict = {}
-    for terminal in find_all("$..terminals[*]", rmi):
-        terminal_id = terminal["id"]
-        terminal_units_and_zones_dict[terminal_id] = find_all(
+    return {
+        terminal["id"]: find_all(
             # search all zones that have terminal(s) match to this terminal id
             # and return them in a list.
-            f'$..zones[*][?(@.terminals[*].id="{terminal_id}")].id',
+            f'$..zones[*][?(@.terminals[*].id="{terminal["id"]}")].id',
             rmi,
         )
-    return terminal_units_and_zones_dict
+        for terminal in find_all("$..terminals[*]", rmi)
+    }
