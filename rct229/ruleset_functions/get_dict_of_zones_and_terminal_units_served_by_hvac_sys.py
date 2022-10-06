@@ -19,48 +19,31 @@ def get_dict_of_zones_and_terminal_units_served_by_hvac_sys(rmi):
         zone_id = zone["id"]
         for terminal in find_all("$.terminals[*]", zone):
             terminal_id = terminal["id"]
-            hvac_id = terminal.get(
+            hvac_sys_id = terminal.get(
                 "served_by_heating_ventilation_air_conditioning_systems"
             )
-            if hvac_id:
+            if hvac_sys_id:
                 if (
-                    hvac_id
+                    hvac_sys_id
                     not in dict_of_zones_and_terminal_units_served_by_hvac_sys.keys()
                 ):
-                    dict_of_zones_and_terminal_units_served_by_hvac_sys[hvac_id] = {}
-                    dict_of_zones_and_terminal_units_served_by_hvac_sys[hvac_id][
-                        "zone_list"
-                    ] = []
-                    dict_of_zones_and_terminal_units_served_by_hvac_sys[hvac_id][
-                        "terminal_unit_list"
-                    ] = []
+                    dict_of_zones_and_terminal_units_served_by_hvac_sys[hvac_sys_id] = {
+                        "terminal_unit_list": [],
+                        "zone_list": [],
+                    }
 
-                dict_of_zones_and_terminal_units_served_by_hvac_sys[hvac_id][
-                    "zone_list"
-                ].append(zone_id)
-                # Remove duplications in the list - unordered removal
-                dict_of_zones_and_terminal_units_served_by_hvac_sys[hvac_id][
-                    "zone_list"
-                ] = list(
-                    set(
-                        dict_of_zones_and_terminal_units_served_by_hvac_sys[hvac_id][
-                            "zone_list"
-                        ]
-                    )
-                )
-                dict_of_zones_and_terminal_units_served_by_hvac_sys[hvac_id][
-                    "terminal_unit_list"
-                ].append(terminal_id)
+                zone_list = dict_of_zones_and_terminal_units_served_by_hvac_sys[
+                    hvac_sys_id
+                ]["zone_list"]
+                if zone_id not in zone_list:
+                    zone_list.append(zone_id)
 
-                # Remove duplications in the list - unordered removal
-                dict_of_zones_and_terminal_units_served_by_hvac_sys[hvac_id][
-                    "terminal_unit_list"
-                ] = list(
-                    set(
-                        dict_of_zones_and_terminal_units_served_by_hvac_sys[hvac_id][
-                            "terminal_unit_list"
-                        ]
-                    )
+                terminal_unit_list = (
+                    dict_of_zones_and_terminal_units_served_by_hvac_sys[
+                        hvac_sys_id
+                    ]["terminal_unit_list"]
                 )
+                if terminal_id not in terminal_unit_list:
+                    terminal_unit_list.append(terminal_id)
 
     return dict_of_zones_and_terminal_units_served_by_hvac_sys
