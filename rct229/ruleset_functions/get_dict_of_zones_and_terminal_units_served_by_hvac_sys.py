@@ -39,9 +39,9 @@ def get_dict_of_zones_and_terminal_units_served_by_hvac_sys(rmi):
                     zone_list.append(zone_id)
 
                 terminal_unit_list = (
-                    dict_of_zones_and_terminal_units_served_by_hvac_sys[
-                        hvac_sys_id
-                    ]["terminal_unit_list"]
+                    dict_of_zones_and_terminal_units_served_by_hvac_sys[hvac_sys_id][
+                        "terminal_unit_list"
+                    ]
                 )
                 if terminal_id not in terminal_unit_list:
                     terminal_unit_list.append(terminal_id)
