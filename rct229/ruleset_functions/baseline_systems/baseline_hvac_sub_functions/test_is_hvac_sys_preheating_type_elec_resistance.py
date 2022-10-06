@@ -53,13 +53,13 @@ TEST_RMD = {
 TEST_RMD_FULL = {"id": "229_01", "ruleset_model_instances": [TEST_RMD]}
 
 
-def test__preheatheating_type_fluid_loop():
+def test__preheatheating_type__fluid_loop():
     assert is_hvac_sys_preheating_type_elec_resistance(TEST_RMD, "hvac_1") == False
 
 
-def test__preheatheating_type_electric_resistance():
+def test__preheatheating_type__electric_resistance():
     assert is_hvac_sys_preheating_type_elec_resistance(TEST_RMD, "hvac_2") == True
 
 
-def test__preheatheating_type_data_missing():
+def test__preheatheating_type__data_missing():
     assert is_hvac_sys_preheating_type_elec_resistance(TEST_RMD, "hvac_3") == False
