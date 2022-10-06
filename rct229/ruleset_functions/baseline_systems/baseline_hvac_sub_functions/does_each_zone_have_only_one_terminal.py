@@ -1,5 +1,5 @@
 from rct229.ruleset_functions.baseline_systems.baseline_system_util import (
-    find_exact_one_zone,
+    find_exactly_one_zone,
 )
 
 
@@ -18,7 +18,7 @@ def does_each_zone_have_only_one_terminal(rmi_b, zone_id_list):
     """
     does_each_zone_have_only_one_terminal_flag = True
     for zone_id in zone_id_list:
-        zone = find_exact_one_zone(rmi_b, zone_id)
+        zone = find_exactly_one_zone(rmi_b, zone_id)
         if zone.get("terminals") is None or len(zone["terminals"]) != 1:
             does_each_zone_have_only_one_terminal_flag = False
             break
