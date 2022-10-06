@@ -1,4 +1,7 @@
 from rct229.data.schema_enums import schema_enums
+from rct229.ruleset_functions.baseline_systems.baseline_system_util import (
+    find_exactly_one_hvac_system,
+)
 from rct229.utils.jsonpath_utils import find_exactly_one_with_field_value, find_one
 
 COOLING_SYSTEM_TYPE = schema_enums["CoolingSystemOptions"]
@@ -21,12 +24,7 @@ def is_hvac_sys_cooling_type_dx(rmi_b, hvac_b_id):
         False: the HVAC system has a cooling system type other than DX
     """
     # Get the hvac system
-    hvac_b = find_exactly_one_with_field_value(
-        "$.buildings[*].building_segments[*].heating_ventilation_air_conditioning_systems[*]",
-        "id",
-        hvac_b_id,
-        rmi_b,
-    )
+    hvac_b = find_exactly_one_hvac_system(rmi_b, hvac_b_id)
 
     return (
         find_one("$.cooling_system.cooling_system_type", hvac_b)
