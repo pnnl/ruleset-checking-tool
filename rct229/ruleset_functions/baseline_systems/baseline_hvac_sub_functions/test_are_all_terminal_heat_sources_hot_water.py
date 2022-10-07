@@ -29,18 +29,18 @@ TEST_RMD = {
 TEST_RMD_FULL = {"id": "229_01", "ruleset_model_instances": [TEST_RMD]}
 
 
-def test__all_terminal_heat_source_hot_water():
+def test__all_terminal_heat_source__hot_water():
     assert are_all_terminal_heat_sources_hot_water(TEST_RMD, ["terminal_2"]) == True
 
 
-def test__all_terminal_heat_source_hot_water_or_null():
+def test__all_terminal_heat_source__hot_water_or_null():
     assert (
         are_all_terminal_heat_sources_hot_water(TEST_RMD, ["terminal_1", "terminal_2"])
-        == True
+        == False
     )
 
 
-def test__all_terminal_heat_source_not_hot_water():
+def test__all_terminal_heat_source__not_hot_water():
     assert (
         are_all_terminal_heat_sources_hot_water(TEST_RMD, ["terminal_2", "terminal_3"])
         == False
