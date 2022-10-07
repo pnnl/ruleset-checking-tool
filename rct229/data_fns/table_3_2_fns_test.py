@@ -2,13 +2,10 @@ import pytest
 
 from rct229.data import data
 from rct229.data_fns.table_3_2_fns import (
-    climate_zone_enumeration_to_climate_zone_map,
+    table_3_2_climate_zone_enumeration_to_climate_zone_map,
     table_3_2_lookup,
 )
-from rct229.data_fns.table_utils import (
-    check_enumeration_to_osstd_match_field_value_map,
-    find_osstd_table_entry,
-)
+from rct229.data_fns.table_utils import check_enumeration_to_osstd_match_field_value_map
 from rct229.schema.config import ureg
 
 btuh_per_ft2 = ureg("british_thermal_unit / (hour * foot ** 2)")
@@ -58,5 +55,5 @@ def test__climate_zone_enumeration_to_climate_zone_map():
         match_field_name="climate_zone",
         enum_type="ClimateZoneOptions2019ASHRAE901",
         osstd_table=data["ashrae_90_1_table_3_2"],
-        enumeration_to_match_field_value_map=climate_zone_enumeration_to_climate_zone_map,
+        enumeration_to_match_field_value_map=table_3_2_climate_zone_enumeration_to_climate_zone_map,
     )

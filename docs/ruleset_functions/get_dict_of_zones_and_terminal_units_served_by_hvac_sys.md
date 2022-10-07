@@ -1,6 +1,6 @@
 # get_dict_of_zones_and_terminal_units_served_by_hvac_sys    
 
-**Description:** Returns a dictionary of zones and terminal unit IDs associated with each HVAC system in the RMR.   
+**Description:** Returns a dictionary of zones and terminal unit IDs associated with each HVAC system in the RMD.   
 
 **Inputs:**  
 - **RMR**: The RMR to evalute (B-RMR or P-RMR or U-RMR).    

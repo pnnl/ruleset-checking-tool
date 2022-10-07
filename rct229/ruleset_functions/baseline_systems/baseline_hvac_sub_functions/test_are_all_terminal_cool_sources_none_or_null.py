@@ -29,7 +29,7 @@ TEST_RMD = {
 TEST_RMD_FULL = {"id": "229_01", "ruleset_model_instances": [TEST_RMD]}
 
 
-def test__all_terminal_heat_source_none_or_null():
+def test__all_terminal_heat_source__none_or_null():
     assert (
         are_all_terminal_cool_sources_none_or_null(
             TEST_RMD, ["terminal_1", "terminal_3"]
@@ -38,7 +38,7 @@ def test__all_terminal_heat_source_none_or_null():
     )
 
 
-def test__all_terminal_heat_source_none_or_null_one_hw():
+def test__all_terminal_heat_source__none_or_null_one_hw():
     assert (
         are_all_terminal_cool_sources_none_or_null(
             TEST_RMD, ["terminal_2", "terminal_3"]
