@@ -52,7 +52,7 @@ class Section22Rule20(RuleDefinitionListIndexedBase):
 
     def create_data(self, context, data):
         rmi_b = context.baseline
-        tower_leaving_temperature_b = data  ## should be updated
+        tower_leaving_temperature_b = data
         return {"tower_leaving_temperature_b": tower_leaving_temperature_b}
 
     class HeatRejectionRule(RuleDefinitionBase):
