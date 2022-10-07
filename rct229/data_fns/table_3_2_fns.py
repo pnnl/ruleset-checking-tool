@@ -48,7 +48,7 @@ def table_3_2_lookup(climate_zone_enum_val):
         [("climate_zone", climate_zone)],
         osstd_table=data["ashrae_90_1_table_3_2"],
     )
-    btuh_per_ft2 = osstd_entry["heating_output_load"]
+    btuh_per_ft2 = osstd_entry["heating_output_btu/h-^2"]
     system_min_heating_output = btuh_per_ft2 * ureg(
         "british_thermal_unit / (hour * foot ** 2)"
     )
