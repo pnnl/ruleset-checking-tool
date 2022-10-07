@@ -1,8 +1,8 @@
 from rct229.data.schema_enums import schema_enums
 from rct229.ruleset_functions.baseline_systems.baseline_system_util import (
-    find_exact_one_hvac_system,
+    find_exactly_one_hvac_system,
 )
-from rct229.utils.jsonpath_utils import find_exactly_one_with_field_value, find_one
+from rct229.utils.jsonpath_utils import find_one
 
 HEATING_SYSTEM = schema_enums["HeatingSystemOptions"]
 
@@ -25,7 +25,7 @@ def is_hvac_sys_preheating_type_fluid_loop(rmi_b, hvac_b_id):
         False: otherwise
     """
     # Get the hvac system
-    hvac_b = find_exact_one_hvac_system(rmi_b, hvac_b_id)
+    hvac_b = find_exactly_one_hvac_system(rmi_b, hvac_b_id)
     # get preheat system from the HVAC
     preheat_system = hvac_b.get("preheat_system")
     is_hvac_sys_preheating_type_fluid_loop_flag = (
