@@ -38,7 +38,7 @@ class Section22Rule23(RuleDefinitionListIndexedBase):
         #  is ready.
         baseline_system_types = {
             "SYS-7": ["hvac_sys_7"],
-            "SYS-11-a": ["hvac_sys_11_a"],
+            "SYS-11-1": ["hvac_sys_11_1"],
         }
         # if any system type found in the APPLICABLE_SYS_TYPES then return applicable.
         return any(
@@ -47,7 +47,6 @@ class Section22Rule23(RuleDefinitionListIndexedBase):
 
     def create_data(self, context, data):
         rmi_b = context.baseline
-
         no_of_chillers_b = len(find_all("chillers[*]", rmi_b))
 
         primary_chw_loop_id_array = find_all("chillers[*].cooling_loop", rmi_b)
@@ -55,7 +54,6 @@ class Section22Rule23(RuleDefinitionListIndexedBase):
         for pump_b in find_all("pumps[*]", rmi_b):
             if pump_b["loop_or_piping"] in primary_chw_loop_id_array:
                 primary_chw_loop_pump_num += 1
-
         return {
             "no_of_chillers_b": no_of_chillers_b,
             "primary_chw_loop_pump_num": primary_chw_loop_pump_num,
@@ -79,7 +77,6 @@ class Section22Rule23(RuleDefinitionListIndexedBase):
             return {"interlock_flag": interlock_flag}
 
         def rule_check(self, context, calc_vals=None, data=None):
-            chiller_b = context.baseline
             primary_chw_loop_pump_num = data["primary_chw_loop_pump_num"]
             interlock_flag = calc_vals["interlock_flag"]
             no_of_chillers_b = data["no_of_chillers_b"]
