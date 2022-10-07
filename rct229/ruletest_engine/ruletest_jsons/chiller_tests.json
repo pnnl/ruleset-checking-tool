@@ -2748,6 +2748,7 @@
         "Rule": 20,
         "Test": "a",
         "test_description": "Baseline building is system type 7 and is correctly modeled with the minimum reset temperature",
+        "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-20",
             "ruleset_reference": "G3.1.3.9",
@@ -2867,6 +2868,13 @@
                             {
                                 "id": "Chiller Loop 1",
                                 "type": "COOLING"
+                            }
+                        ],
+                        "heat_rejections": [
+                            {
+                                "id": "Heat Rejection 1",
+                                "loop": "Chiller Loop 1",
+                                "leaving_water_setpoint_temperature": 23.888888888888914
                             }
                         ]
                     }
@@ -2879,6 +2887,7 @@
         "Rule": 20,
         "Test": "b",
         "test_description": "Baseline building is system type 7 and is incorrectly modeled with the minimum reset temperature",
+        "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-20",
             "ruleset_reference": "G3.1.3.9",
@@ -2999,6 +3008,13 @@
                                 "id": "Chiller Loop 1",
                                 "type": "COOLING"
                             }
+                        ],
+                        "heat_rejections": [
+                            {
+                                "id": "Heat Rejection 1",
+                                "loop": "Chiller Loop 1",
+                                "leaving_water_setpoint_temperature": 26.666666666666686
+                            }
                         ]
                     }
                 ]
@@ -3009,6 +3025,7 @@
         "Section": 22,
         "Rule": 21,
         "Test": "a",
+        "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-21",
             "ruleset_reference": "G3.1.3.9",
@@ -3140,6 +3157,7 @@
         "Section": 22,
         "Rule": 21,
         "Test": "b",
+        "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-21",
             "ruleset_reference": "G3.1.3.9",

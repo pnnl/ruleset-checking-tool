@@ -1,4 +1,4 @@
-from rct229.data_fns.table_G3_4_fns import table_G34_lookup
+from rct229.data_fns.table_3_1_3_11_fns import table_3_1_3_11_lookup
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
@@ -28,12 +28,15 @@ class Section22Rule20(RuleDefinitionListIndexedBase):
     def __init__(self):
         super(Section22Rule20, self).__init__(
             rmrs_used=UserBaselineProposedVals(False, True, False),
+            required_fields={
+                "$": ["weather"],
+                "weather": ["climate_zone"],
+            },
             each_rule=Section22Rule20.HeatRejectionRule(),
             index_rmr="baseline",
             id="22-20",
             description="The baseline minimum condenser water reset temperature is per Table G3.1.3.11.",
-            rmr_context="ruleset_model_instances/0",
-            list_path="heat_rejections[*]",
+            list_path="ruleset_model_instances[0].heat_rejections[*]",
             data_items={"climate_zone": ("baseline", "weather/climate_zone")},
         )
 
@@ -43,17 +46,12 @@ class Section22Rule20(RuleDefinitionListIndexedBase):
         #  is ready.
         baseline_system_types = {
             "SYS-7": ["hvac_sys_7"],
-            "SYS-11-a": ["hvac_sys_11_a"],
+            "SYS-11.1": ["hvac_sys_11_1"],
         }
         # if any system type found in the APPLICABLE_SYS_TYPES then return applicable.
         return any(
             [key in APPLICABLE_SYS_TYPES for key in baseline_system_types.keys()]
         )
-
-    def create_data(self, context, data):
-        rmi_b = context.baseline
-        tower_leaving_temperature_b = data
-        return {"tower_leaving_temperature_b": tower_leaving_temperature_b}
 
     class HeatRejectionRule(RuleDefinitionBase):
         def __init__(self):
@@ -66,22 +64,29 @@ class Section22Rule20(RuleDefinitionListIndexedBase):
 
         def get_calc_vals(self, context, data=None):
             heat_rejection_b = context.baseline
-            leaving_water_setpoint_temperature = heat_rejection_b[
-                "leaving_water_setpoint_temperature"
+
+            tower_leaving_temperature_b = table_3_1_3_11_lookup(data["climate_zone"])[
+                "leaving_water_temperature"
             ]
 
+            leaving_water_setpoint_temperature_b = heat_rejection_b[
+                "leaving_water_setpoint_temperature"
+            ]
             return {
-                "leaving_water_setpoint_temperature": CalcQ(
-                    "temperature", leaving_water_setpoint_temperature
-                )
+                "tower_leaving_temperature_b": CalcQ(
+                    "temperature", tower_leaving_temperature_b
+                ),
+                "leaving_water_setpoint_temperature_b": CalcQ(
+                    "temperature", leaving_water_setpoint_temperature_b
+                ),
             }
 
         def rule_check(self, context, calc_vals=None, data=None):
-            leaving_water_setpoint_temperature = calc_vals[
-                "leaving_water_setpoint_temperature"
+            tower_leaving_temperature_b = calc_vals["tower_leaving_temperature_b"]
+            leaving_water_setpoint_temperature_b = calc_vals[
+                "leaving_water_setpoint_temperature_b"
             ]
-            tower_leaving_temperature_b = data["tower_leaving_temperature_b"]
             return std_equal(
-                leaving_water_setpoint_temperature.to(ureg.kelvin),
                 tower_leaving_temperature_b.to(ureg.kelvin),
+                leaving_water_setpoint_temperature_b.to(ureg.kelvin),
             )
