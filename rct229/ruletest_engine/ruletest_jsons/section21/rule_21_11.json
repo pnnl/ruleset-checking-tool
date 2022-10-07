@@ -125,6 +125,10 @@
                             {
                                 "id": "FluidLoop 1",
                                 "type": "HEATING"
+                            },
+                            {
+                                "id": "Chiller Loop 1",
+                                "type": "COOLING"
                             }
                         ]
                     }

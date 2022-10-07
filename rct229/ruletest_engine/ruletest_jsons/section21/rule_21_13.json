@@ -129,6 +129,10 @@
                                     "id": "DAC 1",
                                     "minimum_flow_fraction": 0.25
                                 }
+                            },
+                            {
+                                "id": "Chiller Loop 1",
+                                "type": "COOLING"
                             }
                         ]
                     }
@@ -266,6 +270,10 @@
                                     "id": "DAC 1",
                                     "minimum_flow_fraction": 0.3
                                 }
+                            },
+                            {
+                                "id": "Chiller Loop 1",
+                                "type": "COOLING"
                             }
                         ]
                     }
