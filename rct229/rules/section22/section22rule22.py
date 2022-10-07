@@ -72,7 +72,7 @@ class Section22Rule22(RuleDefinitionListIndexedBase):
 
             kW_ton_full_load_b = table_3_5_3_lookup(
                 compressor_type_b, size_category, "FL"
-            )
+            )["minimum_full_load_efficiency_kw_per_ton"]
             return {
                 "size_category": size_category,
                 "kW_ton_full_load_b": kW_ton_full_load_b,
