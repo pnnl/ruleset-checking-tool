@@ -2,10 +2,8 @@ from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 from rct229.schema.config import ureg
-from rct229.utils.jsonpath_utils import (
-    find_all,
-    find_exactly_one_with_field_value,
-)
+from rct229.utils.assertions import getattr_
+from rct229.utils.jsonpath_utils import find_all, find_exactly_one_with_field_value
 from rct229.utils.pint_utils import CalcQ
 from rct229.utils.std_comparisons import std_equal
 
@@ -62,43 +60,50 @@ class Section22Rule16(RuleDefinitionListIndexedBase):
 
     def create_data(self, context, data):
         rmi_b = context.baseline
-        supply_temperature_dict_b = {
+        heat_rejection_loop_dict = {
             heat_rejection_loop: find_exactly_one_with_field_value(
                 "$..fluid_loops[*]", "id", heat_rejection_loop, rmi_b
-            )["cooling_or_condensing_design_and_control"]["design_supply_temperature"]
+            )
             for heat_rejection_loop in find_all("heat_rejections[*].loop", rmi_b)
         }
-        return {"supply_temperature_dict_b": supply_temperature_dict_b}
+        return {"heat_rejection_loop_dict": heat_rejection_loop_dict}
 
     class HeatRejectionRule(RuleDefinitionBase):
         def __init__(self):
             super(Section22Rule16.HeatRejectionRule, self).__init__(
                 rmrs_used=UserBaselineProposedVals(False, True, False),
-                required_fields={
-                    "$": ["design_wetbulb_temperature", "approach", "loop"],
-                },
             )
 
         def get_calc_vals(self, context, data=None):
             heat_rejection_b = context.baseline
-            design_wetbulb_temperature = heat_rejection_b["design_wetbulb_temperature"]
-            approach_b = heat_rejection_b["approach"]
             loop_b = heat_rejection_b["loop"]
+            design_wetbulb_temperature_b = heat_rejection_b[
+                "design_wetbulb_temperature"
+            ]
+            approach_b = heat_rejection_b["approach"]
+            design_supply_temperature_b = getattr_(
+                data["heat_rejection_loop_dict"][loop_b],
+                "design_supply_temperature",
+                "cooling_or_condensing_design_and_control",
+                "design_supply_temperature",
+            )
             return {
-                "design_wetbulb_temperature": CalcQ(
-                    "temperature", design_wetbulb_temperature
+                "loop_b": loop_b,
+                "design_wetbulb_temperature_b": CalcQ(
+                    "temperature", design_wetbulb_temperature_b
                 ),
                 "approach_b": CalcQ("temperature", approach_b),
-                "loop_b": loop_b,
+                "design_supply_temperature_b": CalcQ(
+                    "temperature", design_supply_temperature_b
+                ),
             }
 
         def rule_check(self, context, calc_vals=None, data=None):
-            design_wetbulb_temperature = calc_vals["design_wetbulb_temperature"]
+            design_wetbulb_temperature = calc_vals["design_wetbulb_temperature_b"]
             approach_b = calc_vals["approach_b"]
-            loop_b = calc_vals["loop_b"]
-            supply_temperature_b = data["supply_temperature_dict_b"][loop_b]
-            return std_equal(
-                supply_temperature_b.to(ureg.kelvin),
+            design_supply_temperature_b = calc_vals["design_supply_temperature_b"]
+            return std_equal(  # TODO double-check this part after the schema is updated
+                design_supply_temperature_b.to(ureg.kelvin),
                 ((design_wetbulb_temperature.m + approach_b.m) * ureg("degC")).to(
                     ureg.kelvin
                 ),
