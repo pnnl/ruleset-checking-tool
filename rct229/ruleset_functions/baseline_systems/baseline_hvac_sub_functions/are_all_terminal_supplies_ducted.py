@@ -1,3 +1,6 @@
+from rct229.ruleset_functions.baseline_systems.baseline_system_util import (
+    find_exactly_one_terminal_unit,
+)
 from rct229.utils.jsonpath_utils import find_exactly_one_with_field_value
 
 
@@ -21,12 +24,7 @@ def are_all_terminal_supplies_ducted(rmi_b, terminal_unit_id_list):
     """
     are_all_terminal_supplies_ducted_flag = True
     for terminal_b_id in terminal_unit_id_list:
-        terminal_b = find_exactly_one_with_field_value(
-            "$.buildings[*].building_segments[*].zones[*].terminals[*]",
-            "id",
-            terminal_b_id,
-            rmi_b,
-        )
+        terminal_b = find_exactly_one_terminal_unit(rmi_b, terminal_b_id)
         # Set flag to False if is_suppy_ducted is False or is missing
         if not terminal_b.get("is_supply_ducted"):
             are_all_terminal_supplies_ducted_flag = False
