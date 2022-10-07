@@ -1,4 +1,4 @@
-from rct229.data_fns.table_G3_4_fns import table_G34_lookup
+from rct229.data_fns.table_3_5_3_fns import table_3_5_3_lookup
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
@@ -31,7 +31,7 @@ class Section22Rule22(RuleDefinitionListIndexedBase):
             id="22-22",
             description="The baseline chiller efficiencies shall be modeled at the minimum efficiency levels for full load, in accordance with Tables G3.5.3.",
             rmr_context="ruleset_model_instances/0",
-            list_path="fluid_loops[*]",
+            list_path="chillers[*]",
         )
 
     def is_applicable(self, context, data=None):
@@ -40,7 +40,7 @@ class Section22Rule22(RuleDefinitionListIndexedBase):
         #  is ready.
         baseline_system_types = {
             "SYS-7": ["hvac_sys_7"],
-            "SYS-11": ["hvac_sys_11"],
+            "SYS-11.1": ["hvac_sys_11.1"],
         }
         # if any system type found in the APPLICABLE_SYS_TYPES and not found in NOT_APPLICABLE_SYS_TYPES then return applicable.
         return any(
@@ -58,8 +58,8 @@ class Section22Rule22(RuleDefinitionListIndexedBase):
 
         def get_calc_vals(self, context, data=None):
             chiller_b = context.baseline
-            rated_capacity_b = chiller_b["rated_capacity"]
             compressor_type_b = chiller_b["compressor_type"]
+            rated_capacity_b = chiller_b["rated_capacity"]
 
             if rated_capacity_b < 150 * ureg("Btu/hr"):
                 size_category = "< 150TONS"
@@ -70,8 +70,9 @@ class Section22Rule22(RuleDefinitionListIndexedBase):
             else:
                 size_category = "> 600TONS"
 
-            kW_ton_full_load_b = 1  ## should be replaced with table_3_2_lookup
-
+            kW_ton_full_load_b = table_3_5_3_lookup(
+                compressor_type_b, size_category, "FL"
+            )
             return {
                 "size_category": size_category,
                 "kW_ton_full_load_b": kW_ton_full_load_b,
