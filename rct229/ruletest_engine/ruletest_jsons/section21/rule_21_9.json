@@ -126,6 +126,10 @@
                                 "id": "Boiler Loop 1",
                                 "type": "HEATING",
                                 "pump_power_per_flow_rate": 301.1889035667107
+                            },
+                            {
+                                "id": "Chiller Loop 1",
+                                "type": "COOLING"
                             }
                         ]
                     }
@@ -260,6 +264,10 @@
                                 "id": "Boiler Loop 1",
                                 "type": "HEATING",
                                 "pump_power_per_flow_rate": 332.89299867899604
+                            },
+                            {
+                                "id": "Chiller Loop 1",
+                                "type": "COOLING"
                             }
                         ]
                     }
