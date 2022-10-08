@@ -193,18 +193,6 @@ rmd_model = {
 }
 
 
-def test_is_baseline_system_11_1B():
-    assert (
-        is_baseline_system_11_1(
-            rmd_model["ruleset_model_instances"][0],
-            "System Type 11",
-            ["VAV Air Terminal 1B"],
-            ["Thermal Zone 1B"],
-        )
-        == HVAC_SYS.SYS_11_1B
-    )
-
-
 def test_is_baseline__system_11_1():
     assert (
         is_baseline_system_11_1(
