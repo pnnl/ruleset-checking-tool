@@ -59,7 +59,7 @@ class Section21Rule16(RuleDefinitionBase):
 
     def get_calc_vals(self, context, data=None):
         rmi_b = context.baseline
-        hhw_loop_count = len(find_all("$..fluid_loops[?type == HEATING]", rmi_b))
+        hhw_loop_count = len(find_all('$..fluid_loops[*][?(@.type = "HEATING")]', rmi_b))
         return {"hhw_loop_count": hhw_loop_count}
 
     def rule_check(self, context, calc_vals=None, data=None):
