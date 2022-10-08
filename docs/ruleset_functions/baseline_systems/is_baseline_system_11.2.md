@@ -28,7 +28,7 @@
 ## Logic:    
 - Create an object associated with the hvac system: `hvac_b = hvac_b.id`  
 - Set is_baseline_system_11.2 = Not_Sys_11.2: `is_baseline_system_11.2 = "Not_Sys_11.2"`    
-- Check that there is no preheat system, if there is none then carry on: `if len(hvac_b.preheat_system) == Null or hvac_b.preheat_system[0].heating_system_type = "NONE" :`   
+- Check that there is no preheat system, if there is none then carry on: `if hvac_b.preheat_system == Null or hvac_b.preheat_system.heating_system_type = "NONE" :`   
     - Check if the cooling system type is a fluid loop, if yes then carry on: `if is_hvac_sys_cooling_type_fluid_loop(B_RMR, hvac_b.id) == TRUE:`  
         - Check if fansystem is variable speed drive controlled, if yes then carry on: `if is_hvac_sys_fan_sys_VSD(B_RMR, hvac_b.id) == TRUE:`  
             - Check if the hvac system is single zone and that each zone only has one terminal unit: `if does_hvac_system_serve_single_zone(B_RMR, zone_id_list) == TRUE AND does_each_zone_have_only_one_terminal(B_RMR,zone_id_list) == TRUE:`     
