@@ -1,20 +1,21 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
+from rct229.ruleset_functions.baseline_systems.baseline_system_util import HVAC_SYS
+from rct229.ruleset_functions.get_baseline_system_types import get_baseline_system_types
 from rct229.schema.config import ureg
-from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all
 
 APPLICABLE_SYS_TYPES = [
-    "SYS-1",
-    "SYS-5",
-    "SYS-7",
-    "SYS-11.2",
-    "SYS-12",
-    "SYS-1A",
-    "SYS-7A",
-    "SYS-11.2A",
-    "SYS-12A",
+    HVAC_SYS.SYS_1,
+    HVAC_SYS.SYS_1A,
+    HVAC_SYS.SYS_5,
+    HVAC_SYS.SYS_7,
+    HVAC_SYS.SYS_7A,
+    HVAC_SYS.SYS_11_2,
+    HVAC_SYS.SYS_11_2A,
+    HVAC_SYS.SYS_12,
+    HVAC_SYS.SYS_12A,
 ]
 REQUIRED_PUMP_POWER_PER_FLOW_RATE = 19.0 * ureg("W/gpm")
 
@@ -35,12 +36,7 @@ class Section21Rule9(RuleDefinitionListIndexedBase):
 
     def is_applicable(self, context, data=None):
         rmi_b = context.baseline
-        # FIXME: replace with baseline_system_types = get_baseline_system_types(rmi_b) when get_baseline_system_types
-        #  is ready.
-        baseline_system_types = {
-            "SYS-7": ["hvac_sys_7"],
-            "SYS-12": ["hvac_sys_12"],
-        }
+        baseline_system_types = get_baseline_system_types(rmi_b)
         # if any system type found in the APPLICABLE_SYS_TYPES then return applicable.
         return any(
             [key in APPLICABLE_SYS_TYPES for key in baseline_system_types.keys()]
