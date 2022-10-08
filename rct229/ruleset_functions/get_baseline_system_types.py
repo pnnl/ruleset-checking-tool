@@ -1,9 +1,13 @@
-from rct229.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.get_dict_with_terminal_units_and_zones import \
-    get_dict_with_terminal_units_and_zones
+from rct229.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.get_dict_with_terminal_units_and_zones import (
+    get_dict_with_terminal_units_and_zones,
+)
 from rct229.ruleset_functions.baseline_systems.baseline_system_util import HVAC_SYS
-from rct229.ruleset_functions.baseline_systems.is_baseline_system_7 import is_baseline_system_7
-from rct229.ruleset_functions.get_dict_of_zones_and_terminal_units_served_by_hvac_sys import \
-    get_dict_of_zones_and_terminal_units_served_by_hvac_sys
+from rct229.ruleset_functions.baseline_systems.is_baseline_system_7 import (
+    is_baseline_system_7,
+)
+from rct229.ruleset_functions.get_dict_of_zones_and_terminal_units_served_by_hvac_sys import (
+    get_dict_of_zones_and_terminal_units_served_by_hvac_sys,
+)
 from rct229.utils.jsonpath_utils import find_all
 
 
@@ -25,16 +29,27 @@ def get_baseline_system_types(rmi_b):
     -------
     """
     baseline_hvac_system_dict = {}
-    dict_of_zones_and_terminal_units_served_by_hvac_sys = get_dict_of_zones_and_terminal_units_served_by_hvac_sys(rmi_b)
+    dict_of_zones_and_terminal_units_served_by_hvac_sys = (
+        get_dict_of_zones_and_terminal_units_served_by_hvac_sys(rmi_b)
+    )
     dict_with_terminal_units_and_zones = get_dict_with_terminal_units_and_zones(rmi_b)
 
     for hvac_b in find_all("$..heating_ventilation_air_conditioning_systems[*]", rmi_b):
         hvac_b_id = hvac_b["id"]
-        terminal_unit_id_list = dict_of_zones_and_terminal_units_served_by_hvac_sys[hvac_b_id]["terminal_unit_list"]
-        zone_id_list = dict_of_zones_and_terminal_units_served_by_hvac_sys[hvac_b_id]["zone_list"]
+        terminal_unit_id_list = dict_of_zones_and_terminal_units_served_by_hvac_sys[
+            hvac_b_id
+        ]["terminal_unit_list"]
+        zone_id_list = dict_of_zones_and_terminal_units_served_by_hvac_sys[hvac_b_id][
+            "zone_list"
+        ]
         # one terminal per zone for all baseline systems
-        if all(len(dict_with_terminal_units_and_zones[terminal_id]) == 1 for terminal_id in terminal_unit_id_list):
-            system_7 = is_baseline_system_7(rmi_b, hvac_b_id, terminal_unit_id_list, zone_id_list)
+        if all(
+            len(dict_with_terminal_units_and_zones[terminal_id]) == 1
+            for terminal_id in terminal_unit_id_list
+        ):
+            system_7 = is_baseline_system_7(
+                rmi_b, hvac_b_id, terminal_unit_id_list, zone_id_list
+            )
             if system_7 != HVAC_SYS.UNMATCHED:
                 # system 7 matched.
                 if system_7 not in baseline_hvac_system_dict.keys():
@@ -44,4 +59,3 @@ def get_baseline_system_types(rmi_b):
                 continue
 
     return baseline_hvac_system_dict
-

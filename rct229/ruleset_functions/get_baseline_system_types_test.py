@@ -223,8 +223,8 @@ sys_7_rmd = {
 
 def test_get_baseline_system_types__system_7():
     assert get_baseline_system_types(sys_7_rmd["ruleset_model_instances"][0]) == {
-        'Sys-7': ['System 7'],
-        'Sys-7a': ['System 7a'],
-        'Sys-7b': ['System 7b'],
-        'Sys-7c': ['System 7c']
+        "Sys-7": ["System 7"],
+        "Sys-7a": ["System 7a"],
+        "Sys-7b": ["System 7b"],
+        "Sys-7c": ["System 7c"],
     }

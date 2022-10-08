@@ -3,6 +3,7 @@ from rct229.utils.jsonpath_utils import find_exactly_one_with_field_value
 
 class HVAC_SYS:
     """Class holding HVAC system type value"""
+
     SYS_1 = "Sys-1"
     SYS_1A = "Sys-1a"
     SYS_1B = "Sys-1b"
