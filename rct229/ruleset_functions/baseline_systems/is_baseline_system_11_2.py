@@ -84,7 +84,9 @@ def is_baseline_system_11_2(rmi_b, hvac_b_id, terminal_unit_id_list, zone_id_lis
         and are_all_terminal_types_VAV(rmi_b, terminal_unit_id_list)
     )
 
-    if are_sys_data_matched and is_hvac_sys_fluid_loop_attached_to_boiler(rmi_b, hvac_b_id):
+    if are_sys_data_matched and is_hvac_sys_fluid_loop_attached_to_boiler(
+        rmi_b, hvac_b_id
+    ):
         if is_hvac_sys_fluid_loop_attached_to_chiller(rmi_b, hvac_b_id):
             is_baseline_system_11_2_str = HVAC_SYS.SYS_11_2
         elif is_hvac_sys_fluid_loop_purchased_chw(rmi_b, hvac_b_id):
