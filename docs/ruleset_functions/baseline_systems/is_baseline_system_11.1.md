@@ -3,13 +3,13 @@
 **Description:** Get either Sys-11.1, Sys-11.1a, Sys-11b, Sys-11c, or Not_Sys_11.1 string output which indicates whether the HVAC system is ASHRAE 90.1 2019 Appendix G system 11.1 (Single Zone VAV System with Electric Resistance Heating), system 11.1a (system 11.1 with purchased CHW), system 11b (system 11.1 with purchased heating), or system 11c (system 11.1 with purchased CHW and purchased heating).  
 
 **Inputs:**  
-- **B-RMR**: To evaluate if the hvac system is modeled as either Sys-11.1, Sys-11.1a, Sys-11b, Sys-11c, or Not_Sys_11.1 in the B_RMD.   
+- **B-RMR**: To evaluate if the hvac system is modeled as either Sys-11.1, Sys-11.1a, Sys-11b, Sys-11c, or Not_Sys in the B_RMD.   
 - **hvac_b.id**: The id of the hvac system to evaluate.  
 - **terminal_unit_id_list**: list of terminal unit IDs associated with the HVAC system to be evaluated. These are sent to this function from the master get_baseline_system_types function.
 - **zone_id_list**: list of zone IDs associated with the HVAC system to be evaluated. These are sent to this function from the master get_baseline_system_types function.
 
 **Returns:**  
-- **is_baseline_system_11.1**: The function returns either Sys-11.1, Sys-11.1a, Sys-11b, Sys-11c, or Not_Sys_11.1 string output which indicates whether the HVAC system is ASHRAE 90.1 2019 Appendix G system 11.1 (Single Zone VAV System with Electric Resistance Heating), system 11.1a (system 11.1 with purchased CHW), system 11b (system 11.1 with purchased heating), or system 11c (system 11.1 with purchased CHW and purchased heating).     
+- **is_baseline_system_11.1**: The function returns either Sys-11.1, Sys-11.1a, Sys-11b, Sys-11c, or Not_Sys string output which indicates whether the HVAC system is ASHRAE 90.1 2019 Appendix G system 11.1 (Single Zone VAV System with Electric Resistance Heating), system 11.1a (system 11.1 with purchased CHW), system 11b (system 11.1 with purchased heating), or system 11c (system 11.1 with purchased CHW and purchased heating).     
  
 **Function Call:** 
 1. does_each_zone_have_only_one_terminal()    

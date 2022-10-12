@@ -77,11 +77,8 @@ def is_baseline_system_11_1(rmi_b, hvac_b_id, terminal_unit_id_list, zone_id_lis
     # check if the hvac system has the required sub systems for system type 11.1
     has_required_sys = (
         hvac_b.get("preheat_system") is None
-        or find_one(
-            f'preheat_system[?(@.heating_system_type="{HEATING_SYSTEM.NONE}")]',
-            hvac_b,
-        )
-        is not None
+        or hvac_b["preheat_system"].get("heating_system_type") is None
+        or hvac_b["preheat_system"]["heating_system_type"] == HEATING_SYSTEM.NONE
     )
 
     are_sys_data_matched = (
