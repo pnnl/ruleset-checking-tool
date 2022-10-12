@@ -104,5 +104,5 @@ class Section22Rule16(RuleDefinitionListIndexedBase):
             design_supply_temperature_b = calc_vals["design_supply_temperature_b"]
             return std_equal(
                 design_supply_temperature_b.to(ureg.kelvin),
-                design_wetbulb_temperature.to(ureg.kelvin) + approach_b.to(ureg.kelvin)
+                design_wetbulb_temperature.to(ureg.kelvin) + approach_b.to(ureg.kelvin),
             )
