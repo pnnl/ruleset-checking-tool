@@ -9,7 +9,7 @@
 - **zone_id_list**: list of zone IDs associated with the HVAC system to be evaluated. These are sent to this function from the master get_baseline_system_types function.
 
 **Returns:**  
-- **is_baseline_system_11.2**: The function returns either Sys-11.2, Sys-11.2a or Not_Sys_11.2 string output which indicates whether the HVAC system is ASHRAE 90.1 2019 Appendix G 11.2 (Single Zone VAV System with Hot Water Heating (Boiler)) or system 11.2a (system 11.2 with purchased CHW).     
+- **is_baseline_system_11.2**: The function returns either Sys-11.2, Sys-11.2a or Not_Sys string output which indicates whether the HVAC system is ASHRAE 90.1 2019 Appendix G 11.2 (Single Zone VAV System with Hot Water Heating (Boiler)) or system 11.2a (system 11.2 with purchased CHW).     
  
 **Function Call:** 
 1. does_each_zone_have_only_one_terminal()    
