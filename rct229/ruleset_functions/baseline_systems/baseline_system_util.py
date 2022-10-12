@@ -8,6 +8,8 @@ class HVAC_SYS:
     SYS_7A = "Sys-7a"
     SYS_7B = "Sys-7b"
     SYS_7C = "Sys-7c"
+    SYS_11_2 = "Sys-11-2"
+    SYS_11_2A = "Sys-11-2A"
     UNMATCHED = "Not_Sys"
 
 
