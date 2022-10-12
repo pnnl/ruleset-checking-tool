@@ -12,6 +12,8 @@ class HVAC_SYS:
     SYS_11_1A = "Sys-11.1a"
     SYS_11_1B = "Sys-11b"
     SYS_11_1C = "Sys-11c"
+    SYS_11_2 = "Sys-11-2"
+    SYS_11_2A = "Sys-11-2A"
     UNMATCHED = "Not_Sys"
 
 
