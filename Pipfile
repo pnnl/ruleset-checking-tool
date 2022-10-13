@@ -16,7 +16,6 @@ pytest-watch = "*"
 
 [packages]
 rct229 = {editable = true, path = "."}
-jsonpath-ng = "*"
 jsonschema="*"
 pyyaml="*"
 jsonpointer="*"
