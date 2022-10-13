@@ -163,8 +163,8 @@
 			- check if there is a value in space_area_type: `if space_area_type != "None":`
 				- add space area: `list_buildiung_area_types_with_total_area_and_zones[space_area_type]["AREA"] += space.floor_area`
 			- otherwise, we'll need to map the building area type off of the ligthing category: `else:`
-				- add space to the area based on space.lighting_space_type: `space_area_type = lighting_space_lookup[space.lighting_space_type]`
-				- 							    `list_buildiung_area_types_with_total_area_and_zones[space_area_type]["AREA"] += space.floor_area`
+				- set the space area type based on lighting space area: `space_area_type = lighting_space_lookup[space.lighting_space_type]`
+				- add space to the area based on space.lighting_space_type: `list_buildiung_area_types_with_total_area_and_zones[space_area_type]["AREA"] += space.floor_area`
 
 	- Append zone_ids to the dict: `list_buildiung_area_types_with_total_area_and_zones[space_area_type]["ZONE_IDS"] = list_of_zones`
 	
