@@ -16,8 +16,7 @@
 ## Logic:  
 
 - call get_HVAC_building_area_types_and_zones and sort the list: `sorted_list = sorted(get_HVAC_building_area_types_and_zones.items(), key=lambda x: x[1]["AREA"], reverse = True)`
-- the first item in the list will be the building area type with the largest area
-- predominant_HVAC_building_area_type = sorted_list[0][0]
+- the first item in the list will be the building area type with the largest area: `predominant_HVAC_building_area_type = sorted_list[0][0]`
 	
 	 **Returns** `return predominant_HVAC_building_area_type`  
 
