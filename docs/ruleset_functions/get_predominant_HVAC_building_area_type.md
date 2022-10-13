@@ -10,7 +10,8 @@
 **Returns:**  
 - **predominant_HVAC_building_area_type**: A String of the predominant HVAC building area type, defined as the building area type with the largest floor area
  
-**Function Call:** None
+**Function Call:** 
+- **get_HVAC_building_area_types_and_zones**
 
 ## Logic:  
 
