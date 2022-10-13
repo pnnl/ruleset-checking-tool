@@ -1,3 +1,5 @@
+import inspect
+
 from rct229.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.get_dict_with_terminal_units_and_zones import (
     get_dict_with_terminal_units_and_zones,
 )
@@ -28,7 +30,15 @@ def get_baseline_system_types(rmi_b):
     i.e. {"SYS-3": ["hvac_id_1", "hvac_id_10"], "SYS-7A": ["hvac_id_3", "hvac_id_17", "hvac_id_6], "SYS-9": ["hvac_id_2"]}
     -------
     """
-    baseline_hvac_system_dict = {}
+    # A list of the attribute values from the HVAC_SYS class
+    hvac_sys_list = [
+        i[1]
+        for i in inspect.getmembers(HVAC_SYS)
+        if type(i[0]) is str and i[0].startswith("SYS")
+    ]
+
+    baseline_hvac_system_dict = {sys_type: [] for sys_type in hvac_sys_list}
+
     dict_of_zones_and_terminal_units_served_by_hvac_sys = (
         get_dict_of_zones_and_terminal_units_served_by_hvac_sys(rmi_b)
     )
@@ -47,14 +57,11 @@ def get_baseline_system_types(rmi_b):
             len(dict_with_terminal_units_and_zones[terminal_id]) == 1
             for terminal_id in terminal_unit_id_list
         ):
-            system_7 = is_baseline_system_7(
+            hvac_sys = is_baseline_system_7(
                 rmi_b, hvac_b_id, terminal_unit_id_list, zone_id_list
             )
-            if system_7 != HVAC_SYS.UNMATCHED:
-                # system 7 matched.
-                if system_7 not in baseline_hvac_system_dict.keys():
-                    baseline_hvac_system_dict[system_7] = []
-                baseline_hvac_system_dict[system_7].append(hvac_b_id)
+            if hvac_sys != HVAC_SYS.UNMATCHED:
+                baseline_hvac_system_dict[hvac_sys].append(hvac_b_id)
                 # added to the dictionary, move to next iteration
                 continue
 

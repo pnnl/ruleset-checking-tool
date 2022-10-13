@@ -1,3 +1,4 @@
+from rct229.ruleset_functions.baseline_systems.baseline_system_util import HVAC_SYS
 from rct229.ruleset_functions.get_baseline_system_types import get_baseline_system_types
 
 sys_7_rmd = {
@@ -222,9 +223,17 @@ sys_7_rmd = {
 
 
 def test_get_baseline_system_types__system_7():
-    assert get_baseline_system_types(sys_7_rmd["ruleset_model_instances"][0]) == {
-        "Sys-7": ["System 7"],
-        "Sys-7a": ["System 7a"],
-        "Sys-7b": ["System 7b"],
-        "Sys-7c": ["System 7c"],
-    }
+    baseline_system_types_dict = get_baseline_system_types(
+        sys_7_rmd["ruleset_model_instances"][0]
+    )
+    available_type_lists = [
+        hvac_type
+        for hvac_type in baseline_system_types_dict.keys()
+        if len(baseline_system_types_dict[hvac_type]) > 0
+    ]
+
+    test_types = [HVAC_SYS.SYS_7, HVAC_SYS.SYS_7A, HVAC_SYS.SYS_7B, HVAC_SYS.SYS_7C]
+
+    assert any(
+        [available_type in test_types for available_type in available_type_lists]
+    )

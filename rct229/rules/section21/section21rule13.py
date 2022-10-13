@@ -8,13 +8,13 @@ from rct229.utils.assertions import getattr_
 
 APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_1,
-    HVAC_SYS.SYS_1A,
     HVAC_SYS.SYS_5,
     HVAC_SYS.SYS_7,
-    HVAC_SYS.SYS_7A,
     HVAC_SYS.SYS_11_2,
-    HVAC_SYS.SYS_11_2A,
     HVAC_SYS.SYS_12,
+    HVAC_SYS.SYS_1A,
+    HVAC_SYS.SYS_7A,
+    HVAC_SYS.SYS_11_2A,
     HVAC_SYS.SYS_12A,
     HVAC_SYS.SYS_1B,
     HVAC_SYS.SYS_3B,
@@ -24,16 +24,12 @@ APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_8B,
     HVAC_SYS.SYS_9B,
     HVAC_SYS.SYS_11_1B,
-    HVAC_SYS.SYS_11_2B,
     HVAC_SYS.SYS_12B,
-    HVAC_SYS.SYS_13B,
     HVAC_SYS.SYS_1C,
     HVAC_SYS.SYS_3C,
     HVAC_SYS.SYS_7C,
     HVAC_SYS.SYS_11_1C,
-    HVAC_SYS.SYS_11_2C,
     HVAC_SYS.SYS_12C,
-    HVAC_SYS.SYS_13C,
 ]
 FLUID_LOOP = schema_enums["FluidLoopOptions"]
 MINIMUM_TURNDOWN_RATIO = 0.25
@@ -55,10 +51,18 @@ class Section21Rule13(RuleDefinitionListIndexedBase):
 
     def is_applicable(self, context, data=None):
         rmi_b = context.baseline
-        baseline_system_types = get_baseline_system_types(rmi_b)
-        # if any system type found in the APPLICABLE_SYS_TYPES then return applicable.
+        baseline_system_types_dict = get_baseline_system_types(rmi_b)
+        # create a list contains all HVAC systems that are modeled in the rmi_b
+        available_type_lists = [
+            hvac_type
+            for hvac_type in baseline_system_types_dict.keys()
+            if len(baseline_system_types_dict[hvac_type]) > 0
+        ]
         return any(
-            [key in APPLICABLE_SYS_TYPES for key in baseline_system_types.keys()]
+            [
+                available_type in APPLICABLE_SYS_TYPES
+                for available_type in available_type_lists
+            ]
         )
 
     def list_filter(self, context_item, data):
