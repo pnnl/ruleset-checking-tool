@@ -1,11 +1,19 @@
 import inspect
 
-import rct229.rule_engine.rule_base as base_classes
 import rct229.rules as rules
+from rct229.reports.ashrae901_2019_detail_report import ASHRAE9012019DetailReport
+from rct229.reports.engine_raw_output import EngineRawOutput
+from rct229.reports.engine_raw_summary import EngineRawSummary
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 from rct229.schema.schema_utils import quantify_rmr
 from rct229.schema.validate import validate_rmr
 from rct229.utils.pint_utils import UNIT_SYSTEM, calcq_to_str
+
+REPORT_MODULE = {
+    "RAW_OUTPUT": EngineRawOutput,
+    "RAW_SUMMARY": EngineRawSummary,
+    "ASHRAE9012019_DETAIL": ASHRAE9012019DetailReport,
+}
 
 
 def get_available_rules():
@@ -32,7 +40,7 @@ def get_available_rules():
 #     pass
 
 # Functions for evaluating rules
-def evaluate_all_rules(user_rmr, baseline_rmr, proposed_rmr):
+def evaluate_all_rules(user_rmr, baseline_rmr, proposed_rmr, report_plugin=[]):
 
     # Get reference to rule functions in rules model
     AvailableRuleDefinitions = rules.__getrules__()
@@ -40,6 +48,13 @@ def evaluate_all_rules(user_rmr, baseline_rmr, proposed_rmr):
     rules_list = [RuleDef[1]() for RuleDef in AvailableRuleDefinitions]
     rmrs = UserBaselineProposedVals(user_rmr, baseline_rmr, proposed_rmr)
     report = evaluate_rules(rules_list, rmrs)
+
+    # reporting module
+    if report_plugin:
+        # have report attached.
+        for report_type in report_plugin:
+            report_module = REPORT_MODULE[report_type]()
+            report_module.generate(report, '../examples/output/')
 
     return report
 
@@ -74,7 +89,7 @@ def evaluate_rule(rule, rmrs, unit_system=UNIT_SYSTEM.IP):
     return evaluate_rules([rule], rmrs)
 
 
-def evaluate_rules(rules_list, rmrs, unit_system=UNIT_SYSTEM.IP):
+def evaluate_rules(rules_list, rmrs, unit_system=UNIT_SYSTEM.IP, report_plugin=[]):
     """Evaluates a list of rules against an RMR trio
 
     Parameters
