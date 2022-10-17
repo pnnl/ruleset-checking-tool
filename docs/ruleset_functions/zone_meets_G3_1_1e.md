@@ -5,8 +5,7 @@
 
 **Inputs:**
 - **P-RMR**
-- **B-RMR**
-- **zone**
+- **zone_id**
 
 **Returns:**  
 - **result**: a string - either "E" or "No"
@@ -35,12 +34,16 @@
 		`if zone in building_segment.zones:`
 			- break - this means the variable "building_segment" is the building_segment that contains the zone:
 			`break`
+	- create a list of hvac system serving the zone: `hvac_systems_serving_zone = []`
+	- loop through the terminals in the zone: `for terminal in zone.terminals:`
+		- get the hvac system served by the terminal: `hvac_systems_serving_zone.append(terminal.served_by_heating_ventilating_air_conditioning_system)`
 	- loop through each heating system: `for system_p in building_segment.heating_ventilation_air_conditioning_systems:`
-		- look for a cooling system: `if system_p.cooling_system != "Null":`
-			- check to see if the cooling_system_options equals "None": `if system_p.cooling_system.cooling_system_options == "None":`
-				- the zone is eligible
-			- otherwise: `else:`
-				- there is a cooling system and the zone is not eligible: `eligible = FALSE`
+		- check if system_p is in the list of hvac systems serving the zone: `if system_p in hvac_systems_serving_zone:`
+			- look for a cooling system: `if system_p.cooling_system != "Null":`
+				- check to see if the cooling_system_options equals "None": `if system_p.cooling_system.cooling_system_options == "None":`
+					- the zone is eligible
+				- otherwise: `else:`
+					- there is a cooling system and the zone is not eligible: `eligible = FALSE`
 
 - if the zone is still eligible: `if eligible:`
 	- set result to "E": `result = "E"`
