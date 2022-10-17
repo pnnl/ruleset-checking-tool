@@ -22,12 +22,12 @@
 	- check if the space has an eligible lighting type: `if space_p.lighting_space_type not in eligible_space_types:`
 		- set eligibility to False - any non-compliant space type will result in a non-eligible zone: `eligible = FALSE`
 
-- if the zone is not eligible, check if it is a vestibule: `if eligible == FALSE:`
+- if the zone is not eligible, check if it is a vestibule: `if not eligible:`
 	- set variable is_a_vestibule = is_zone_a_vestibule: `is_a_vestibule = is_zone_a_vestibule(zone, B-RMR)`
 	- if the result is not equal to no, then it is eligible to be a vestibule: `if is_a_vestibule != "NO":`
 		- set eligible to true: `eligible = TRUE`
 
-- if the zone is still eligible: `if eligible == TRUE:`
+- if the zone is still eligible: `if eligible:`
 	- check if the proposed has a heating-only system
 	- get the building_segment_p the zone is in:
 	`for building_segment_p in P-RMR.building.building_segments:`
@@ -42,7 +42,7 @@
 			- otherwise: `else:`
 				- there is a cooling system and the zone is not eligible: `eligible = FALSE`
 
-- if the zone is still eligible: `if eligible == TRUE:`
+- if the zone is still eligible: `if eligible:`
 	- set result to "E": `result = "E"`
 	- however, if there is transfer air into the space from an air conditioned zone, it is not eligible, so look for transfer air into the space: `if zone.transfer_airflow_rate > 0:`
 		- there is no way of knowing where the transfer air is coming from, so for now will give the result the tag "E_T" to signal that there is transfer air.  When the rule is written, "E_T" from this function will trigger an "UNDETERMINED" result and indicate manual checking for transfer air from air-conditioned space: `result = "E_T"
