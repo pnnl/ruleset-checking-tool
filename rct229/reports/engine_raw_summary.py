@@ -10,15 +10,23 @@ class EngineRawSummary(RCTReport):
 
     def generate_rule_report(self, rule_outcome, outcome_dict):
         string_list = []
-        string_list.append("--------------------------------------------------------------------\n")
+        string_list.append(
+            "--------------------------------------------------------------------\n"
+        )
         string_list.append(f"Rule: {str(rule_outcome['id'])}\n")
         string_list.append(f"Description: {str(rule_outcome['description'])}\n")
         string_list.append(
             f"RMD context: {str(rule_outcome['rmr_context'])}\n"
-        ) if "rmr_context" in rule_outcome else string_list.append("RMD context: full scope\n")
+        ) if "rmr_context" in rule_outcome else string_list.append(
+            "RMD context: full scope\n"
+        )
         string_list.append(f"Rule result: {str(rule_outcome['result'])}\n")
-        string_list.append("--------------------------------------------------------------------\n")
-        self.num_evaluation = self._rule_outcome_helper(rule_outcome["result"], outcome_dict)
+        string_list.append(
+            "--------------------------------------------------------------------\n"
+        )
+        self.num_evaluation = self._rule_outcome_helper(
+            rule_outcome["result"], outcome_dict
+        )
         return string_list
 
     def add_rule_to_ruleset_report(self, ruleset_report, rule_report, rule_outcome):
@@ -29,22 +37,27 @@ class EngineRawSummary(RCTReport):
         # add summary to the string
         ruleset_report.append("----------------------------------\n")
         ruleset_report.append("Summary\n")
+        ruleset_report.append(f"{self.num_evaluation} evaluations\n")
         ruleset_report.append(
-            f"{self.num_evaluation} evaluations\n"
+            f"{self.ruleset_outcome[RCTOutcomeLabel.PASS]} evaluations passed\n"
         )
-        ruleset_report.append(f"{self.ruleset_outcome[RCTOutcomeLabel.PASS]} evaluations passed\n")
-        ruleset_report.append(f"{self.ruleset_outcome[RCTOutcomeLabel.FAILED]} evaluations failed\n")
-        ruleset_report.append(f"{self.ruleset_outcome[RCTOutcomeLabel.NOT_APPLICABLE]} evaluations not applicable\n")
+        ruleset_report.append(
+            f"{self.ruleset_outcome[RCTOutcomeLabel.FAILED]} evaluations failed\n"
+        )
+        ruleset_report.append(
+            f"{self.ruleset_outcome[RCTOutcomeLabel.NOT_APPLICABLE]} evaluations not applicable\n"
+        )
         ruleset_report.append(
             f"{self.ruleset_outcome[RCTOutcomeLabel.UNDETERMINED]} evaluations requiring manual check\n"
         )
         ruleset_report.append("----------------------------------\n")
 
-        with open(output_dir, 'w') as output_report:
-            output_report.write(''.join(ruleset_report))
+        with open(output_dir, "w") as output_report:
+            output_report.write("".join(ruleset_report))
 
     def _rule_outcome_helper(self, rule_outcomes, outcomes_dict):
         num_evaluation = 0
+
         def _count_result(number_evaluation, rule_outcome, outcome_dict):
             if type(rule_outcome) is str:
                 return
@@ -64,6 +77,5 @@ class EngineRawSummary(RCTReport):
                         number_evaluation -= 1
                         _count_result(number_evaluation, outcome_dict, outcome_dict)
             _count_result(num_evaluation, rule_outcomes, outcomes_dict)
+
         return num_evaluation
-
-

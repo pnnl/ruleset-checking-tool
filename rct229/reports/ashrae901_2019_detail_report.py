@@ -43,15 +43,22 @@ class ASHRAE9012019DetailReport(RCTReport):
         ruleset_report[rule_report["rule_id"]] = rule_report
 
     def save_ruleset_report(self, ruleset_report, report_dir):
-        with open(report_dir, 'w') as output_report:
+        with open(report_dir, "w") as output_report:
             output_report.write(json.dumps(ruleset_report, indent=4))
 
     def _rule_outcome_helper(self, results, eval_list, outcome_dict):
         def output_node(output_result, output_eval_list, output_outcome_dict):
             # in this case, it is the rule checking component
             evaluation_outcome = dict()
-            if any([key.startswith("INVALID_") and key.endswith("_CONTEXT") for key in output_result.keys()]):
-                evaluation_outcome["invalid_msg"] = "".join([output_result[key] for key in output_result.keys()])
+            if any(
+                [
+                    key.startswith("INVALID_") and key.endswith("_CONTEXT")
+                    for key in output_result.keys()
+                ]
+            ):
+                evaluation_outcome["invalid_msg"] = "".join(
+                    [output_result[key] for key in output_result.keys()]
+                )
                 output_outcome_dict[RCTOutcomeLabel.UNDETERMINED] += 1
             else:
                 outcome_label = output_result["result"]
@@ -65,10 +72,16 @@ class ASHRAE9012019DetailReport(RCTReport):
                     output_outcome_dict[RCTOutcomeLabel.NOT_APPLICABLE] += 1
                 evaluation_outcome["id"] = output_result["id"]
                 evaluation_outcome["outcome"] = outcome_label
-                evaluation_outcome["messages"] = output_result["message"] if output_result.get(
-                    "message") is not None else ""
-                evaluation_outcome["calculated_values"] = calc_vals_converter(output_result["calc_vals"]) if output_result.get(
-                    "calc_vals") is not None else ""
+                evaluation_outcome["messages"] = (
+                    output_result["message"]
+                    if output_result.get("message") is not None
+                    else ""
+                )
+                evaluation_outcome["calculated_values"] = (
+                    calc_vals_converter(output_result["calc_vals"])
+                    if output_result.get("calc_vals") is not None
+                    else ""
+                )
             output_eval_list.append(evaluation_outcome)
 
         outcome = results["result"]
@@ -79,9 +92,3 @@ class ASHRAE9012019DetailReport(RCTReport):
         else:
             for result in outcome:
                 self._rule_outcome_helper(result, eval_list, outcome_dict)
-
-
-
-
-
-

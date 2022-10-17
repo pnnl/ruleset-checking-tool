@@ -54,7 +54,7 @@ def evaluate_all_rules(user_rmr, baseline_rmr, proposed_rmr, report_plugin=[]):
         # have report attached.
         for report_type in report_plugin:
             report_module = REPORT_MODULE[report_type]()
-            report_module.generate(report, '../examples/output/')
+            report_module.generate(report, "../examples/output/")
 
     return report
 

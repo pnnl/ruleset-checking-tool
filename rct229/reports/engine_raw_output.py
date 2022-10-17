@@ -11,11 +11,14 @@ class EngineRawOutput(RCTReport):
         self.ruleset_report_file = "raw_output.json"
 
     def generate_rule_report(self, rule_outcome, outcome_dict):
-
         def rule_report_helper(rule_outcomes, outcomes_dict):
             if type(rule_outcomes) is dict:
                 if any(
-                        [key.startswith("INVALID_") and key.endswith("_CONTEXT") for key in rule_outcomes.keys()]):
+                    [
+                        key.startswith("INVALID_") and key.endswith("_CONTEXT")
+                        for key in rule_outcomes.keys()
+                    ]
+                ):
                     outcomes_dict[RCTOutcomeLabel.UNDETERMINED] += 1
                 elif type(rule_outcomes["result"]) is list:
                     rule_report_helper(rule_outcomes["result"], outcomes_dict)
@@ -26,10 +29,13 @@ class EngineRawOutput(RCTReport):
                     else:
                         outcomes_dict[rule_outcome_str] += 1
                     if "calc_vals" in rule_outcomes.keys():
-                        rule_outcomes["calc_vals"] = calc_vals_converter(rule_outcomes["calc_vals"])
+                        rule_outcomes["calc_vals"] = calc_vals_converter(
+                            rule_outcomes["calc_vals"]
+                        )
             else:
                 for result in rule_outcomes:
                     rule_report_helper(result, outcome_dict)
+
         rule_report_helper(rule_outcome, outcome_dict)
         return rule_outcome
 
@@ -38,5 +44,5 @@ class EngineRawOutput(RCTReport):
         ruleset_report.append(rule_report)
 
     def save_ruleset_report(self, ruleset_report, report_dir):
-        with open(report_dir, 'w') as output_report:
+        with open(report_dir, "w") as output_report:
             output_report.write(json.dumps(ruleset_report, indent=4))

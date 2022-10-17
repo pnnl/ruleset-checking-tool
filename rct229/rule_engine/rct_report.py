@@ -1,7 +1,9 @@
+import os
 from datetime import datetime
+
 # rule outcome evaluation logic
 from rct229.rule_engine.rct_outcome_label import RCTOutcomeLabel
-import os
+
 
 class RCTReport:
     def __init__(self):
@@ -53,7 +55,9 @@ class RCTReport:
                 }
                 rule_report = self.generate_rule_report(outcome, rule_outcome_dict)
                 rule_outcome = self.calculate_rule_outcome(rule_outcome_dict)
-                self.add_rule_to_ruleset_report(ruleset_report, rule_report, rule_outcome)
+                self.add_rule_to_ruleset_report(
+                    ruleset_report, rule_report, rule_outcome
+                )
             report_dir = os.path.join(report_dir, self.ruleset_report_file)
             self.save_ruleset_report(ruleset_report, report_dir)
 
@@ -133,7 +137,3 @@ class RCTReport:
 
         """
         pass
-
-
-
-
