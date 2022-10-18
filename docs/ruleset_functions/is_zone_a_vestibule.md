@@ -39,7 +39,7 @@
 		- now check the number of surfaces in the zone.  No more than 6 surfaces means it is very likely a vestibule: `if(len(zone.surfaces.length) <=6):`
 			- vestibule_check = "LIKELY"
 		- otherwise, this could be a long corridor (for a 40,000 ft2 floor, at 2% suface area & 10 ft wide, it would be 80ft long): `else:`
-			- vestibule_check = "MAYBE"
+			- vestibule_check = "POSSIBLY"
 
 
 	 **Returns** `return vestibule_check`  
