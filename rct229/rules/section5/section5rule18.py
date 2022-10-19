@@ -43,7 +43,7 @@ class Section5Rule18(RuleDefinitionListIndexedBase):
                 rmrs_used=UserBaselineProposedVals(False, True, False),
                 required_fields={
                     "$": ["building_segments"],
-                    "building_segment": [
+                    "building_segments": [
                         "is_all_new",
                         "area_type_vertical_fenestration",
                     ],
