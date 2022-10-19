@@ -18,11 +18,11 @@ rmd_model = {
                                     "terminals": [
                                         {
                                             "id": "PTAC Terminal 1",
-                                            "is_supply_ducted": false,
+                                            "is_supply_ducted": False,
                                             "type": "CONSTANT_AIR_VOLUME",
-                                            "served_by_heating_ventilation_air_conditioning_system": "PTAC 1"
+                                            "served_by_heating_ventilation_air_conditioning_system": "PTAC 1",
                                         }
-                                    ]
+                                    ],
                                 }
                             ],
                             "heating_ventilation_air_conditioning_systems": [
@@ -30,35 +30,31 @@ rmd_model = {
                                     "id": "PTAC 1",
                                     "cooling_system": {
                                         "id": "DX Coil 1",
-                                        "cooling_system_type": "DIRECT_EXPANSION"
+                                        "cooling_system_type": "DIRECT_EXPANSION",
                                     },
                                     "heating_system": {
                                         "id": "HHW Coil 1",
                                         "heating_system_type": "FLUID_LOOP",
-                                        "hot_water_loop": "Boiler Loop 1"
+                                        "hot_water_loop": "Boiler Loop 1",
                                     },
                                     "fan_system": {
                                         "id": "CAV Fan System 1",
                                         "fan_control": "CONSTANT",
-                                        "supply_fans": [
-                                            {
-                                                "id": "Supply Fan 1"
-                                            }
-                                        ]
-                                    }
+                                        "supply_fans": [{"id": "Supply Fan 1"}],
+                                    },
                                 }
-                            ]
+                            ],
                         }
-                    ]
+                    ],
                 }
             ],
             "boilers": [
                 {
                     "id": "Boiler 1",
                     "loop": "Boiler Loop 1",
-                    "energy_source_type": "NATURAL_GAS"
+                    "energy_source_type": "NATURAL_GAS",
                 }
-            ]
+            ],
         }
-    ]
+    ],
 }
