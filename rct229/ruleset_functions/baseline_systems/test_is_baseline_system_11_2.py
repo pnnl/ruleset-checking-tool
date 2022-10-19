@@ -3,7 +3,7 @@ from rct229.ruleset_functions.baseline_systems.is_baseline_system_11_2 import (
     is_baseline_system_11_2,
 )
 
-rmd_b = {
+SYS_11_2_TEST_RMD = {
     "id": "ASHRAE229 1",
     "ruleset_model_instances": [
         {
@@ -140,7 +140,7 @@ rmd_b = {
 def test_is_baseline_system__11_2():
     assert (
         is_baseline_system_11_2(
-            rmd_b["ruleset_model_instances"][0],
+            SYS_11_2_TEST_RMD["ruleset_model_instances"][0],
             "System Type 11.2",
             ["VAV Air Terminal 1"],
             ["Thermal Zone 1"],
@@ -152,7 +152,7 @@ def test_is_baseline_system__11_2():
 def test_is_baseline_system__11_2A():
     assert (
         is_baseline_system_11_2(
-            rmd_b["ruleset_model_instances"][0],
+            SYS_11_2_TEST_RMD["ruleset_model_instances"][0],
             "System Type 11.2A",
             ["VAV Air Terminal 1A"],
             ["Thermal Zone 1A"],

@@ -7,6 +7,12 @@ from rct229.ruleset_functions.baseline_systems.baseline_system_util import HVAC_
 from rct229.ruleset_functions.baseline_systems.is_baseline_system_7 import (
     is_baseline_system_7,
 )
+from rct229.ruleset_functions.baseline_systems.is_baseline_system_11_1 import (
+    is_baseline_system_11_1,
+)
+from rct229.ruleset_functions.baseline_systems.is_baseline_system_11_2 import (
+    is_baseline_system_11_2,
+)
 from rct229.ruleset_functions.get_dict_of_zones_and_terminal_units_served_by_hvac_sys import (
     get_dict_of_zones_and_terminal_units_served_by_hvac_sys,
 )
@@ -63,6 +69,22 @@ def get_baseline_system_types(rmi_b):
             if hvac_sys != HVAC_SYS.UNMATCHED:
                 baseline_hvac_system_dict[hvac_sys].append(hvac_b_id)
                 # added to the dictionary, move to next iteration
+                continue
+
+            # HVAC system type 11.1
+            hvac_sys = is_baseline_system_11_1(
+                rmi_b, hvac_b_id, terminal_unit_id_list, zone_id_list
+            )
+            if hvac_sys != HVAC_SYS.UNMATCHED:
+                baseline_hvac_system_dict[hvac_sys].append(hvac_b_id)
+                continue
+
+            # HVAC system type 11.2
+            hvac_sys = is_baseline_system_11_2(
+                rmi_b, hvac_b_id, terminal_unit_id_list, zone_id_list
+            )
+            if hvac_sys != HVAC_SYS.UNMATCHED:
+                baseline_hvac_system_dict[hvac_sys].append(hvac_b_id)
                 continue
 
     return baseline_hvac_system_dict
