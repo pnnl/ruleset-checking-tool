@@ -1,0 +1,56 @@
+# does_zone_meet_G3_1_1e
+**Schema Version:** 0.0.22  
+
+**Description:** determines whether a given zone meets the G3_1_1e exception "Thermal zones designed with heating-only systems in the proposed design serving storage rooms, stairwells, vestibules, electrical/mechanical rooms, and restrooms not exhausting or transferring air from mechanically cooled thermal zones in the proposed design shall use system type 9 or 10 in the baseline building design."
+
+**Inputs:**
+- **P-RMD**
+- **B-RMD**
+- **zone_id**
+
+**Returns:**  
+- **result**: a string - either "E" or "No"
+ 
+**Function Call:**
+- **is_a_vestibule**
+- **is_zone_mechanically_cooled**
+- **get_zone** - Weili mentioned a get_zone function, but I don't see it in the docs, I'm assuming we can pass an RMD and zone_id and get a zone?
+
+## Logic:
+- create list of eligible space types: `eligible_space_types = ["STORAGE_ROOM_HOSPITAL", "STORAGE_ROOM_SMALL", "STORAGE_ROOM_LARGE", "WAREHOUSE_STORAGE_AREA_MEDIUM_TO_BULKY_PALLETIZED_ITEMS", "WAREHOUSE_STORAGE_AREA_SMALLER_HAND_CARRIED_ITEMS", "STAIRWELL", "ELECTRICAL_MECHANICAL_ROOM", "RESTROOM_FACILITY_FOR_THE_VISUALLY_IMPAIRED", "RESTROOM_ALL_OTHERS"]
+- set the result variable to No - only a positive test can give it a different value: `result = NO`
+- set eligibility boolean to False: `eligible = TRUE`
+- get the zone in the P-RMD: `zone_p = get_zone(P-RMD,zone_id)`
+- get the zone in the B-RMD: `zone_b = get_zone(B-RMD,zone_id)`
+- For each space in zone_b: `for space_p in zone_b.Spaces:`
+	- check if the space has an eligible lighting type: `if space_p.lighting_space_type not in eligible_space_types:`
+		- set eligibility to False - any non-compliant space type will result in a non-eligible zone: `eligible = FALSE`
+
+- if the zone is not eligible, check if it is a vestibule: `if not eligible:`
+	- set variable is_a_vestibule = is_zone_a_vestibule: `is_a_vestibule = is_zone_a_vestibule(zone_b, B-RMD)`
+	- if the result is not equal to no, then it is eligible to be a vestibule: `if is_a_vestibule != NO:`
+		- set eligible to true: `eligible = TRUE`
+
+- if the zone is still eligible: `if eligible:`
+	- check if the proposed has a heating-only system by using the is_zone_mechanically_cooled function: `if is_zone_mechanically_cooled(P-RMD,zone_p)`
+		- mechanically cooled zones are not eligible: `eligible = FALSE`
+
+- if the zone is still eligible: `if eligible:`
+	- set result to YES: `result = YES`
+	- we still need to signal if the zone is LIKELY a vestible.  We only do this if the zone is eligible in all the other checks.  So if the proposed zone is mechanically cooled, it doesn't matter if this is a vestibule or not: `if is_a_vestibule == LIKELY:`
+		- set result to LIKELY_VESTIBULE: result = `LIKELY_VESTIBULE`
+	- otherwise, if the zone is MAYBE a vestibule: `if is_a_vestibule == MAYBE:`
+		- - set result to MAYBE_VESTIBULE: result = `MAYBE_VESTIBULE`
+	- however, if there is transfer air into the space from an air conditioned zone, it is not eligible, so look for transfer air into the space: `if zone_p.transfer_airflow_rate > 0:`
+		- if the transfer air source zone is air conditioned, the zone is not eligible.  Find the transfer air source zone - THIS IS NOT YET INCLUDED IN THE SCHEMA AND WILL NEED TO BE UPDATED WITH THE CORRECT VARIABLE NAMES WHEN IT IS INCLUDED: `transfer_air_source_zone = zone_p.transfer_airflow_source_zone`
+		- if the source is air conditioned, the zone is not eligible.  Use the is_zone_mechanically_cooled to determine if the source zone is mechanically cooled: `if is_zone_mechanically_cooled(P-RMD,source_zone)`:
+			- eligible = FALSE
+
+
+
+**Returns** `result`
+
+
+**Notes/Questions:**  
+
+**[Back](../_toc.md)**
