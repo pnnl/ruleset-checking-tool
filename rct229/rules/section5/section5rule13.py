@@ -53,7 +53,11 @@ class Section5Rule13(RuleDefinitionListIndexedBase):
 
         def list_filter(self, context_item, data=None):
             surface_b = context_item.baseline
-            return get_opaque_surface_type(surface_b) == OST.FLOOR
+            scc = data["surface_conditioning_category_dict"][surface_b["id"]]
+            return (
+                get_opaque_surface_type(surface_b) == OST.FLOOR
+                and scc is not SCC.UNREGULATED
+            )
 
         class FloorRule(RuleDefinitionBase):
             def __init__(self):

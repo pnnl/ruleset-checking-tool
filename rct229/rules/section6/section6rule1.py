@@ -57,7 +57,8 @@ class Section6Rule1(RuleDefinitionListIndexedBase):
                 for space_p in find_all("$..spaces[*]", zone_p):
                     building_segment_design_lighting_wattage += (
                         pint_sum(
-                            find_all("$..interior_lighting[*].power_per_area", space_p)
+                            find_all("$..interior_lighting[*].power_per_area", space_p),
+                            ZERO.POWER_PER_AREA,
                         )
                         * space_p["floor_area"]
                     )
