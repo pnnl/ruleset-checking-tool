@@ -150,12 +150,14 @@ def process_test_result(test_result, test_dict, test_id):
 
         if test_result == "pass":
             # f"SUCCESS: Test {test_id} passed as expected. The following condition was identified: {description}"
-            outcome_text = None
+            outcome_text = "PASS"
         elif test_result == "fail":
             # f"SUCCESS: Test {test_id} failed as expected. The following condition was identified: {description}"
-            outcome_text = None
+            outcome_text = "FAIL"
         elif test_result == "undetermined":
-            outcome_text = None
+            outcome_text = "UNDETERMINED"
+        elif test_result == "not_applicable":
+            outcome_text = "NOT_APPLICABLE"
 
     else:
 
