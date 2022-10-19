@@ -9,7 +9,7 @@
 - **zone_id**
 
 **Returns:**  
-- **result**: a string - either "E" or "No"
+- **result**: an ENUM YES, NO, LIKELY_VESTIBULE or MAYBE_VESTIBULE
  
 **Function Call:**
 - **is_a_vestibule**
@@ -44,7 +44,7 @@
 	- however, if there is transfer air into the space from an air conditioned zone, it is not eligible, so look for transfer air into the space: `if zone_p.transfer_airflow_rate > 0:`
 		- if the transfer air source zone is air conditioned, the zone is not eligible.  Find the transfer air source zone - THIS IS NOT YET INCLUDED IN THE SCHEMA AND WILL NEED TO BE UPDATED WITH THE CORRECT VARIABLE NAMES WHEN IT IS INCLUDED: `transfer_air_source_zone = zone_p.transfer_airflow_source_zone`
 		- if the source is air conditioned, the zone is not eligible.  Use the is_zone_mechanically_cooled to determine if the source zone is mechanically cooled: `if is_zone_mechanically_cooled(P-RMD,source_zone)`:
-			- eligible = FALSE
+			- set result to NO: `result = NO`
 
 
 
