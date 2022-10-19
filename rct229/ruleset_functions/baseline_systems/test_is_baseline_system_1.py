@@ -76,7 +76,7 @@ rmd_model = {
                                             "served_by_heating_ventilation_air_conditioning_system": "PTAC 1c",
                                         }
                                     ],
-                                }
+                                },
                             ],
                             "heating_ventilation_air_conditioning_systems": [
                                 {
@@ -118,7 +118,7 @@ rmd_model = {
                                 },
                                 {
                                     "id": "PTAC 1c",
-                                }
+                                },
                             ],
                         }
                     ],
