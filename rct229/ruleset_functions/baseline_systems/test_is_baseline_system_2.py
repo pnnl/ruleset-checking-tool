@@ -20,9 +20,9 @@ SYS_2_RMD = {
                                             "id": "PTHP Terminal 1",
                                             "is_supply_ducted": True,
                                             "type": "CONSTANT_AIR_VOLUME",
-                                            "served_by_heating_ventilation_air_conditioning_system": "PTHP 1"
+                                            "served_by_heating_ventilation_air_conditioning_system": "PTHP 1",
                                         }
-                                    ]
+                                    ],
                                 }
                             ],
                             "heating_ventilation_air_conditioning_systems": [
@@ -30,27 +30,23 @@ SYS_2_RMD = {
                                     "id": "PTHP 1",
                                     "cooling_system": {
                                         "id": "HP Cooling Coil 1",
-                                        "cooling_system_type": "DIRECT_EXPANSION"
+                                        "cooling_system_type": "DIRECT_EXPANSION",
                                     },
                                     "heating_system": {
                                         "id": "HP Heating Coil 1",
-                                        "heating_system_type": "HEAT_PUMP"
+                                        "heating_system_type": "HEAT_PUMP",
                                     },
                                     "fan_system": {
                                         "id": "CAV Fan System 1",
                                         "fan_control": "CONSTANT",
-                                        "supply_fans": [
-                                            {
-                                                "id": "Supply Fan 1"
-                                            }
-                                        ]
-                                    }
+                                        "supply_fans": [{"id": "Supply Fan 1"}],
+                                    },
                                 }
-                            ]
+                            ],
                         }
-                    ]
+                    ],
                 }
-            ]
+            ],
         }
-    ]
+    ],
 }
