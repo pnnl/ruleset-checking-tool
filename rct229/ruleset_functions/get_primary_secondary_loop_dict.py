@@ -1,10 +1,13 @@
 from itertools import chain
 
+from rct229.data.schema_enums import schema_enums
 from rct229.ruleset_functions.baseline_systems.baseline_system_util import (
     find_exactly_one_fluid_loop,
 )
 from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all
+
+FLUID_LOOP = schema_enums["FluidLoopOptions"]
 
 APPLICABLE_SYS_TYPES = [
     "SYS-7",
@@ -51,10 +54,12 @@ def get_primary_secondary_loops_dict(rmi_b):
     child_loop_ids = []
     secondary_loop_ids = []
 
+    # This flag will be set if the for loop breaks prematurely
     for_break_flag = False
-    # TODO: Replace "COOLING" with enumeration?
     # Interate through cooling type fluid loops
-    for chilled_fluid_loop in find_all('fluid_loops[*][?(@.type="COOLING")]'):
+    for chilled_fluid_loop in find_all(
+        f'fluid_loops[*][?(@.type="{FLUID_LOOP.COOLING}")]'
+    ):
         cfl_id = chilled_fluid_loop["id"]
         if cfl_id in chiller_loop_ids and cfl_id in non_process_chw_coil_loop_ids:
             for_break_flag = True
