@@ -39,7 +39,9 @@ def are_all_terminal_heating_loops_attached_to_boiler(rmi_b, terminal_unit_id_li
             heating_from_loop_id not in loop_boiler_id_list
             # return None if terminal_b has no heating_from_loop field, or
             # the heating_from_loop id cannot be found in fluid_loops
-            or find_one("type", find_exactly_one_fluid_loop(rmi_b, heating_from_loop_id))
+            or find_one(
+                "type", find_exactly_one_fluid_loop(rmi_b, heating_from_loop_id)
+            )
             != FLUID_LOOP_TYPE.HEATING
         ):
             are_all_terminal_heating_loops_attached_to_boiler_flag = False
