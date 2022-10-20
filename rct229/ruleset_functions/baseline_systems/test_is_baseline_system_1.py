@@ -1,4 +1,9 @@
-rmd_model = {
+# hvac_id = "PTAC 1" => Sys_1, [Thermal Zone 1], [PTAC Terminal 1]
+# hvac_id = "PTAC 1a" => Sys_1a, [Thermal Zone 1a], [PTAC Terminal 1a]
+# hvac_id = "PTAC 1b" => Sys_1b, [Thermal Zone 1b], [PTAC Terminal 1b]
+# hvac_id = "PTAC 1c" => Sys_1c, [Thermal Zone 1c], [PTAC Terminal 1c]
+
+SYS_1_RMD = {
     "id": "ASHRAE229 1",
     "ruleset_model_instances": [
         {
