@@ -70,10 +70,7 @@ class Section22Rule23(RuleDefinitionListIndexedBase):
 
         def get_calc_vals(self, context, data=None):
             chiller_b = context.baseline
-
-            interlock_flag = False
-            if chiller_b["is_chilled_water_pump_interlocked"]:
-                interlock_flag = True
+            interlock_flag = chiller_b["is_chilled_water_pump_interlocked"]
             return {"interlock_flag": interlock_flag}
 
         def rule_check(self, context, calc_vals=None, data=None):
