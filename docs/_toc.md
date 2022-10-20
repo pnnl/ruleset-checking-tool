@@ -37,6 +37,7 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   * [get_HVAC_systems_primarily_serving_comp_rooms](ruleset_functions/get_HVAC_systems_primarily_serving_comp_rooms.md): Returns a list of HVAC systems in which greater than 50% of the area served by the HVAC system is computer room space.
   * [get_dict_of_zones_and_terminal_units_served_by_hvac_sys](ruleset_functions/get_dict_of_zones_and_terminal_units_served_by_hvac_sys.md): Returns a dictionary of zones and terminal unit IDs associated with each HVAC system in the RMR.
   * [get_baseline_system_type](ruleset_functions/get_baseline_system_types.md): Identify all the baseline system types modeled in a B-RMR.
+  * [get_hvac_zone_list_w_area](ruleset_functions/get_hvac_zone_list_w_area.md): Get the list of zones and their total floor area served by each HVAC system in a RMR.
 
 ### HVAC type functions
   * [is_baseline_system_1](ruleset_functions/baseline_systems/is_baseline_system_1.md): Get either Sys-1, Sys-1a, Sys-1b, Sys-1c, or Not_Sys_1 string output which indicates whether the HVAC system is ASHRAE 90.1 2019 Appendix G system 1 (PTAC), system 1a (system 1 with purchased CHW), system 1b (system 1 with purchased heating), system 1c (system 1 with purchased CHW and purchased HW).
