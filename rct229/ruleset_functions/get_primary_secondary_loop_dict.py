@@ -27,7 +27,7 @@ APPLICABLE_SYS_TYPES = [
 def get_primary_secondary_loops_dict(rmi_b):
     baseline_hvac_system_dict = get_baseline_system_types(rmi_b)
 
-    # Use find_all here to avoid including None for missing cooling_loop s
+    # Use find_all here to avoid including None for missing cooling_loops
     # Note: a chiller_loop id could appear more than once in this list
     chiller_loop_ids = find_all("$.chillers[*].cooling_loop", rmi_b)
 
@@ -72,17 +72,19 @@ def get_primary_secondary_loops_dict(rmi_b):
                 )
             ):
                 primary_loop_ids.append(cfl_id)
+                # NOTE: child_loop_ids could contain duplicates (though it may not make physical sense)
                 child_loop_ids = [*child_loop_ids, *chilled_fluid_loop["child_loops"]]
         elif cfl_id in non_process_chw_coil_loop_ids:
-            # NOTE: this condition will fail if child_loops does not exist or if the
-            # list is empty
+            # NOTE: this condition will fail if either child_loops does not exist or
+            # if the list is empty
             if chilled_fluid_loop.get("child_loops"):
                 for_break_flag = True
                 break
             else:
                 secondary_loop_ids.append(cfl_id)
 
-    if for_break_flag or sorted(child_loop_ids) != sorted(secondary_loop_ids):
+    # Use set() to avoid the possiblity of duplicates in child_loop_ids
+    if for_break_flag or set(child_loop_ids) != set(secondary_loop_ids):
         primary_secondary_loop_dict = {}
     else:
         primary_secondary_loop_dict = {
