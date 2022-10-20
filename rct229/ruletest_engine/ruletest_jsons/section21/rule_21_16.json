@@ -264,6 +264,10 @@
                                 "type": "HEATING"
                             },
                             {
+                                "id": "Chiller Loop 1",
+                                "type": "COOLING"
+                            },
+                            {
                                 "id": "Boiler Loop 2",
                                 "type": "HEATING"
                             }
