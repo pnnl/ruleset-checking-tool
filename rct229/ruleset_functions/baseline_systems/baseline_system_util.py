@@ -106,7 +106,7 @@ def find_exactly_one_zone(rmi, zone_id):
     )
 
 
-def find_exactly_one_loop(rmi, loop_id):
+def find_exactly_one_fluid_loop(rmi, loop_id):
     """
     Search for the loop data group in a ruleset model instance by matching loop_id
     Raise exception if no matching zone

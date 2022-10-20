@@ -1,6 +1,22 @@
 from itertools import chain
 
+from rct229.ruleset_functions.baseline_systems.baseline_system_util import find_exactly_one_fluid_loop
+from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all
+
+APPLICABLE_SYS_TYPES = [
+    "SYS-7",
+    "SYS-8",
+    "SYS-11.1",
+    "SYS-11.2",
+    "SYS-12",
+    "SYS-13",
+    "SYS-7B",
+    "SYS-8B",
+    "SYS-11B",
+    "SYS-12B",
+    "SYS-13B",
+]
 
 
 def get_primary_secondary_loops_dict(rmi_b):
@@ -10,4 +26,57 @@ def get_primary_secondary_loops_dict(rmi_b):
     # Note: a chiller_loop id could appear more than once in this list
     chiller_loop_ids = find_all("$.chillers[*].cooling_loop", rmi_b)
 
-    non_process_chw_coil_loop_ids = [hvac.cooling_system.chilled_water_loop]
+    applicable_hvac_ids = [
+        hvac_id
+        for hvac_id in baseline_hvac_system_dict[sys_type]
+        for sys_type in APPLICABLE_SYS_TYPES
+    ]
+    applicable_hvac_systems = [
+        hvac
+        for hvac in find_all(
+            "$..building_segments[*].heating_ventilation_air_conditioning_systems[*]",
+            rmi_b,
+        )
+        if hvac["id"] in applicable_hvac_ids
+    ]
+    non_process_chw_coil_loop_ids = [
+        # Get hvac["cooling_system"]["chilled_water_loop"] or raise exception
+        getattr_(hvac, "hvac system", "cooling_system", "chilled_water_loop")
+        for hvac in applicable_hvac_systems
+    ]
+
+    primary_loop_ids = []
+    child_loop_ids = []
+    secondary_loop_ids = []
+
+    for_break_flag = False
+    # TODO: Replace "COOLING" with enumeration?
+    # Interate through cooling type fluid loops
+    for chilled_fluid_loop in find_all('fluid_loops[*][?(@.type="COOLING")]'):
+        cfl_id = chilled_fluid_loop["id"]
+        if cfl_id in chiller_loop_ids and cfl_id in non_process_chw_coil_loop_ids:
+            for_break_flag = True
+            break
+        elif cfl_id in chiller_loop_ids:
+            if all(
+                child_loop_id in non_process_chw_coil_loop_ids
+                for child_loop_id in getattr_(
+                    chilled_fluid_loop, "FluidLoop", "child_loops"
+                )
+            ):
+                primary_loop_ids.append(cfl_id)
+                child_loop_ids = [*child_loop_ids, *chilled_fluid_loop["child_loops"]]
+        elif cfl_id in non_process_chw_coil_loop_ids:
+            # NOTE: this condition will fail if child_loops does not exist or if the
+            # list is empty
+            if chilled_fluid_loop.get("child_loops"):
+                for_break_flag = True
+                break
+            else:
+                secondary_loop_ids.append(cfl_id)
+
+    primary_secondary_loop_dict = {}
+    if (not for_break_flag) and sorted(child_loop_ids) == sorted(secondary_loop_ids):
+        primary_secondary_loop_dict = {
+            primary_loop_id: [secondary_loop_id for secondary_loop_id in primary_loop["child_loops"]] for primary_loop
+        }
