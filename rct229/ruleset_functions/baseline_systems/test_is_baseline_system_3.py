@@ -25,9 +25,9 @@ SYS_3_RMD = {
                                             "id": "Air Terminal 3",
                                             "is_supply_ducted": True,
                                             "type": "CONSTANT_AIR_VOLUME",
-                                            "served_by_heating_ventilation_air_conditioning_system": "System Type 3"
+                                            "served_by_heating_ventilation_air_conditioning_system": "System Type 3",
                                         }
-                                    ]
+                                    ],
                                 },
                                 {
                                     "id": "Thermal Zone 3a",
@@ -38,31 +38,27 @@ SYS_3_RMD = {
                                             "id": "Air Terminal 3a",
                                             "is_supply_ducted": True,
                                             "type": "CONSTANT_AIR_VOLUME",
-                                            "served_by_heating_ventilation_air_conditioning_system": "System Type 3a"
+                                            "served_by_heating_ventilation_air_conditioning_system": "System Type 3a",
                                         }
-                                    ]
-                                }
+                                    ],
+                                },
                             ],
                             "heating_ventilation_air_conditioning_systems": [
                                 {
                                     "id": "System Type 3",
                                     "cooling_system": {
                                         "id": "DX Coil 3",
-                                        "cooling_system_type": "DIRECT_EXPANSION"
+                                        "cooling_system_type": "DIRECT_EXPANSION",
                                     },
                                     "heating_system": {
                                         "id": "Furnace Coil 3",
-                                        "heating_system_type": "FURNACE"
+                                        "heating_system_type": "FURNACE",
                                     },
                                     "fan_system": {
                                         "id": "CAV Fan System 3",
                                         "fan_control": "CONSTANT",
-                                        "supply_fans": [
-                                            {
-                                                "id": "Supply Fan 1"
-                                            }
-                                        ]
-                                    }
+                                        "supply_fans": [{"id": "Supply Fan 1"}],
+                                    },
                                 },
                                 {
                                     "id": "System Type 3a",
@@ -78,12 +74,8 @@ SYS_3_RMD = {
                                     "fan_system": {
                                         "id": "CAV Fan System 3a",
                                         "fan_control": "CONSTANT",
-                                        "supply_fans": [
-                                            {
-                                                "id": "Supply Fan 3a"
-                                            }
-                                        ]
-                                    }
+                                        "supply_fans": [{"id": "Supply Fan 3a"}],
+                                    },
                                 },
                                 {
                                     "id": "System Type 3b",
@@ -99,12 +91,8 @@ SYS_3_RMD = {
                                     "fan_system": {
                                         "id": "CAV Fan System 3b",
                                         "fan_control": "CONSTANT",
-                                        "supply_fans": [
-                                            {
-                                                "id": "Supply Fan 3b"
-                                            }
-                                        ]
-                                    }
+                                        "supply_fans": [{"id": "Supply Fan 3b"}],
+                                    },
                                 },
                                 {
                                     "id": "System Type 3c",
@@ -121,16 +109,12 @@ SYS_3_RMD = {
                                     "fan_system": {
                                         "id": "CAV Fan System 3c",
                                         "fan_control": "CONSTANT",
-                                        "supply_fans": [
-                                            {
-                                                "id": "Supply Fan 3c"
-                                            }
-                                        ]
-                                    }
-                                }
-                            ]
+                                        "supply_fans": [{"id": "Supply Fan 3c"}],
+                                    },
+                                },
+                            ],
                         }
-                    ]
+                    ],
                 }
             ],
             "fluid_loops": [
@@ -156,5 +140,5 @@ SYS_3_RMD = {
                 },
             ],
         }
-    ]
+    ],
 }
