@@ -18,6 +18,9 @@
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "weather": {
+                    "climate_zone": "CZ4A"
+                },
                 "ruleset_model_instances": [
                     {
                         "id": "RMD 1",
@@ -151,6 +154,9 @@
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "weather": {
+                    "climate_zone": "CZ4A"
+                },
                 "ruleset_model_instances": [
                     {
                         "id": "RMD 1",
@@ -284,6 +290,9 @@
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "weather": {
+                    "climate_zone": "CZ4A"
+                },
                 "ruleset_model_instances": [
                     {
                         "id": "RMD 1",
@@ -417,6 +426,9 @@
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "weather": {
+                    "climate_zone": "CZ4A"
+                },
                 "ruleset_model_instances": [
                     {
                         "id": "RMD 1",
@@ -550,6 +562,9 @@
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "weather": {
+                    "climate_zone": "CZ4A"
+                },
                 "ruleset_model_instances": [
                     {
                         "id": "RMD 1",
@@ -688,6 +703,9 @@
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "weather": {
+                    "climate_zone": "CZ4A"
+                },
                 "ruleset_model_instances": [
                     {
                         "id": "RMD 1",
@@ -826,6 +844,9 @@
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "weather": {
+                    "climate_zone": "CZ4A"
+                },
                 "ruleset_model_instances": [
                     {
                         "id": "RMD 1",
@@ -967,6 +988,9 @@
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "weather": {
+                    "climate_zone": "CZ4A"
+                },
                 "ruleset_model_instances": [
                     {
                         "id": "RMD 1",
@@ -1600,6 +1624,9 @@
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "weather": {
+                    "climate_zone": "CZ4A"
+                },
                 "ruleset_model_instances": [
                     {
                         "id": "RMD 1",
@@ -1738,6 +1765,9 @@
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "weather": {
+                    "climate_zone": "CZ4A"
+                },
                 "ruleset_model_instances": [
                     {
                         "id": "RMD 1",
@@ -1876,6 +1906,9 @@
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "weather": {
+                    "climate_zone": "CZ4A"
+                },
                 "ruleset_model_instances": [
                     {
                         "id": "RMD 1",
@@ -2015,6 +2048,9 @@
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "weather": {
+                    "climate_zone": "CZ4A"
+                },
                 "ruleset_model_instances": [
                     {
                         "id": "RMD 1",
@@ -2154,6 +2190,9 @@
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "weather": {
+                    "climate_zone": "CZ4A"
+                },
                 "ruleset_model_instances": [
                     {
                         "id": "RMD 1",
@@ -2295,6 +2334,9 @@
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "weather": {
+                    "climate_zone": "CZ4A"
+                },
                 "ruleset_model_instances": [
                     {
                         "id": "RMD 1",
@@ -2436,6 +2478,9 @@
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "weather": {
+                    "climate_zone": "CZ4A"
+                },
                 "ruleset_model_instances": [
                     {
                         "id": "RMD 1",
@@ -2575,6 +2620,9 @@
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "weather": {
+                    "climate_zone": "CZ4A"
+                },
                 "ruleset_model_instances": [
                     {
                         "id": "RMD 1",
@@ -2700,6 +2748,7 @@
         "Rule": 20,
         "Test": "a",
         "test_description": "Baseline building is system type 7 and is correctly modeled with the minimum reset temperature",
+        "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-20",
             "ruleset_reference": "G3.1.3.9",
@@ -2713,6 +2762,9 @@
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "weather": {
+                    "climate_zone": "CZ4A"
+                },
                 "ruleset_model_instances": [
                     {
                         "id": "RMD 1",
@@ -2816,6 +2868,13 @@
                             {
                                 "id": "Chiller Loop 1",
                                 "type": "COOLING"
+                            }
+                        ],
+                        "heat_rejections": [
+                            {
+                                "id": "Heat Rejection 1",
+                                "loop": "Chiller Loop 1",
+                                "leaving_water_setpoint_temperature": 23.888888888888914
                             }
                         ]
                     }
@@ -2828,6 +2887,7 @@
         "Rule": 20,
         "Test": "b",
         "test_description": "Baseline building is system type 7 and is incorrectly modeled with the minimum reset temperature",
+        "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-20",
             "ruleset_reference": "G3.1.3.9",
@@ -2841,6 +2901,9 @@
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "weather": {
+                    "climate_zone": "CZ4A"
+                },
                 "ruleset_model_instances": [
                     {
                         "id": "RMD 1",
@@ -2944,6 +3007,13 @@
                             {
                                 "id": "Chiller Loop 1",
                                 "type": "COOLING"
+                            }
+                        ],
+                        "heat_rejections": [
+                            {
+                                "id": "Heat Rejection 1",
+                                "loop": "Chiller Loop 1",
+                                "leaving_water_setpoint_temperature": 26.666666666666686
                             }
                         ]
                     }
@@ -2968,6 +3038,9 @@
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "weather": {
+                    "climate_zone": "CZ4A"
+                },
                 "ruleset_model_instances": [
                     {
                         "id": "RMD 1",
@@ -3096,6 +3169,9 @@
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "weather": {
+                    "climate_zone": "CZ4A"
+                },
                 "ruleset_model_instances": [
                     {
                         "id": "RMD 1",
@@ -3226,6 +3302,9 @@
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "weather": {
+                    "climate_zone": "CZ4A"
+                },
                 "ruleset_model_instances": [
                     {
                         "id": "RMD 1",
@@ -3358,6 +3437,9 @@
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "weather": {
+                    "climate_zone": "CZ4A"
+                },
                 "ruleset_model_instances": [
                     {
                         "id": "RMD 1",
@@ -3490,6 +3572,9 @@
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "weather": {
+                    "climate_zone": "CZ4A"
+                },
                 "ruleset_model_instances": [
                     {
                         "id": "RMD 1",
@@ -3622,6 +3707,9 @@
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "weather": {
+                    "climate_zone": "CZ4A"
+                },
                 "ruleset_model_instances": [
                     {
                         "id": "RMD 1",
@@ -3754,6 +3842,9 @@
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "weather": {
+                    "climate_zone": "CZ4A"
+                },
                 "ruleset_model_instances": [
                     {
                         "id": "RMD 1",
@@ -3884,6 +3975,9 @@
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "weather": {
+                    "climate_zone": "CZ4A"
+                },
                 "ruleset_model_instances": [
                     {
                         "id": "RMD 1",
@@ -4014,6 +4108,9 @@
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "weather": {
+                    "climate_zone": "CZ4A"
+                },
                 "ruleset_model_instances": [
                     {
                         "id": "RMD 1",
@@ -4151,6 +4248,9 @@
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "weather": {
+                    "climate_zone": "CZ4A"
+                },
                 "ruleset_model_instances": [
                     {
                         "id": "RMD 1",
@@ -4288,6 +4388,9 @@
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "weather": {
+                    "climate_zone": "CZ4A"
+                },
                 "ruleset_model_instances": [
                     {
                         "id": "RMD 1",
@@ -4426,6 +4529,9 @@
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "weather": {
+                    "climate_zone": "CZ4A"
+                },
                 "ruleset_model_instances": [
                     {
                         "id": "RMD 1",
@@ -4792,6 +4898,780 @@
                                         "id": "Cooling Child Loop 2"
                                     }
                                 ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    },
+    "rule-22-27-a": {
+        "Section": 22,
+        "Rule": 27,
+        "Test": "a",
+        "test_description": "Baseline building is system type 11 and is correctly modeled with the is_condenser_water_pump_interlocked key",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "22-27",
+            "ruleset_reference": "G3.1.3.9",
+            "rule_description": "For chilled-water systems served by chiller(s) and serves baseline System-11, the baseline building constant-volume primary pump power shall be modeled as 12 W/gpm.",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "primary_rule": "Yes",
+            "schema_version": 0.018
+        },
+        "rmr_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "weather": {
+                    "climate_zone": "CZ4A"
+                },
+                "ruleset_model_instances": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_open_schedule": "Required Building Schedule 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                                "terminals": [
+                                                    {
+                                                        "id": "VAV Air Terminal 1",
+                                                        "is_supply_ducted": true,
+                                                        "heating_source": "HOT_WATER",
+                                                        "type": "VARIABLE_AIR_VOLUME",
+                                                        "served_by_heating_ventilation_air_conditioning_system": "VAV System 1",
+                                                        "heating_from_loop": "Boiler Loop 1"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "id": "Thermal Zone 2",
+                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                                "terminals": [
+                                                    {
+                                                        "id": "VAV Air Terminal 2",
+                                                        "is_supply_ducted": true,
+                                                        "heating_source": "HOT_WATER",
+                                                        "type": "VARIABLE_AIR_VOLUME",
+                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "heating_from_loop": "Boiler Loop 1"
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilation_air_conditioning_systems": [
+                                            {
+                                                "id": "System 7",
+                                                "cooling_system": {
+                                                    "id": "CHW Coil 1",
+                                                    "cooling_system_type": "FLUID_LOOP",
+                                                    "chilled_water_loop": "Chiller Loop 1"
+                                                },
+                                                "fan_system": {
+                                                    "id": "VAV Fan System 1",
+                                                    "fan_control": "VARIABLE_SPEED_DRIVE",
+                                                    "supply_fans": [
+                                                        {
+                                                            "id": "Supply Fan 1"
+                                                        }
+                                                    ],
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "Return Fan 1"
+                                                        }
+                                                    ]
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "boilers": [
+                            {
+                                "id": "Boiler 1",
+                                "loop": "Boiler Loop 1",
+                                "energy_source_type": "NATURAL_GAS"
+                            }
+                        ],
+                        "chillers": [
+                            {
+                                "id": "Chiller 1",
+                                "cooling_loop": "Chiller Loop 1",
+                                "is_condenser_water_pump_interlocked": true
+                            }
+                        ],
+                        "pumps": [
+                            {
+                                "id": "Boiler Pump 1",
+                                "loop_or_piping": "Boiler Loop 1",
+                                "speed_control": "FIXED_SPEED"
+                            },
+                            {
+                                "id": "Chiller Pump 1",
+                                "loop_or_piping": "Chiller Loop 1",
+                                "speed_control": "FIXED_SPEED"
+                            }
+                        ],
+                        "fluid_loops": [
+                            {
+                                "id": "Boiler Loop 1",
+                                "type": "HEATING"
+                            },
+                            {
+                                "id": "Chiller Loop 1",
+                                "type": "COOLING"
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    },
+    "rule-22-27-b": {
+        "Section": 22,
+        "Rule": 27,
+        "Test": "b",
+        "test_description": "Baseline building is system type 11 and is incorrectly modeled with the is_condenser_water_pump_interlocked key",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "22-27",
+            "ruleset_reference": "G3.1.3.9",
+            "rule_description": "For chilled-water systems served by chiller(s) and serves baseline System-11, the baseline building constant-volume primary pump power shall be modeled as 12 W/gpm.",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "primary_rule": "Yes",
+            "schema_version": 0.018
+        },
+        "rmr_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "weather": {
+                    "climate_zone": "CZ4A"
+                },
+                "ruleset_model_instances": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_open_schedule": "Required Building Schedule 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                                "terminals": [
+                                                    {
+                                                        "id": "VAV Air Terminal 1",
+                                                        "is_supply_ducted": true,
+                                                        "heating_source": "HOT_WATER",
+                                                        "type": "VARIABLE_AIR_VOLUME",
+                                                        "served_by_heating_ventilation_air_conditioning_system": "VAV System 1",
+                                                        "heating_from_loop": "Boiler Loop 1"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "id": "Thermal Zone 2",
+                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                                "terminals": [
+                                                    {
+                                                        "id": "VAV Air Terminal 2",
+                                                        "is_supply_ducted": true,
+                                                        "heating_source": "HOT_WATER",
+                                                        "type": "VARIABLE_AIR_VOLUME",
+                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "heating_from_loop": "Boiler Loop 1"
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilation_air_conditioning_systems": [
+                                            {
+                                                "id": "System 7",
+                                                "cooling_system": {
+                                                    "id": "CHW Coil 1",
+                                                    "cooling_system_type": "FLUID_LOOP",
+                                                    "chilled_water_loop": "Chiller Loop 1"
+                                                },
+                                                "fan_system": {
+                                                    "id": "VAV Fan System 1",
+                                                    "fan_control": "VARIABLE_SPEED_DRIVE",
+                                                    "supply_fans": [
+                                                        {
+                                                            "id": "Supply Fan 1"
+                                                        }
+                                                    ],
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "Return Fan 1"
+                                                        }
+                                                    ]
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "boilers": [
+                            {
+                                "id": "Boiler 1",
+                                "loop": "Boiler Loop 1",
+                                "energy_source_type": "NATURAL_GAS"
+                            }
+                        ],
+                        "chillers": [
+                            {
+                                "id": "Chiller 1",
+                                "cooling_loop": "Chiller Loop 1",
+                                "is_condenser_water_pump_interlocked": false
+                            }
+                        ],
+                        "pumps": [
+                            {
+                                "id": "Boiler Pump 1",
+                                "loop_or_piping": "Boiler Loop 1",
+                                "speed_control": "FIXED_SPEED"
+                            },
+                            {
+                                "id": "Chiller Pump 1",
+                                "loop_or_piping": "Chiller Loop 1",
+                                "speed_control": "FIXED_SPEED"
+                            }
+                        ],
+                        "fluid_loops": [
+                            {
+                                "id": "Boiler Loop 1",
+                                "type": "HEATING"
+                            },
+                            {
+                                "id": "Chiller Loop 1",
+                                "type": "COOLING"
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    },
+    "rule-22-29-a": {
+        "Section": 22,
+        "Rule": 29,
+        "Test": "a",
+        "test_description": "Baseline building is system type 11 and is correctly modeled with the is_condenser_water_pump_interlocked key",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "22-29",
+            "ruleset_reference": "G3.1.3.9",
+            "rule_description": "The baseline building design condenser-water pump shall be modeled as constant volume.",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "primary_rule": "No",
+            "schema_version": 0.018
+        },
+        "rmr_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "weather": {
+                    "climate_zone": "CZ4A"
+                },
+                "ruleset_model_instances": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_open_schedule": "Required Building Schedule 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                                "terminals": [
+                                                    {
+                                                        "id": "VAV Air Terminal 1",
+                                                        "is_supply_ducted": true,
+                                                        "heating_source": "HOT_WATER",
+                                                        "type": "VARIABLE_AIR_VOLUME",
+                                                        "served_by_heating_ventilation_air_conditioning_system": "VAV System 1",
+                                                        "heating_from_loop": "Boiler Loop 1"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "id": "Thermal Zone 2",
+                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                                "terminals": [
+                                                    {
+                                                        "id": "VAV Air Terminal 2",
+                                                        "is_supply_ducted": true,
+                                                        "heating_source": "HOT_WATER",
+                                                        "type": "VARIABLE_AIR_VOLUME",
+                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "heating_from_loop": "Boiler Loop 1"
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilation_air_conditioning_systems": [
+                                            {
+                                                "id": "System 7",
+                                                "cooling_system": {
+                                                    "id": "CHW Coil 1",
+                                                    "cooling_system_type": "FLUID_LOOP",
+                                                    "chilled_water_loop": "Chiller Loop 1"
+                                                },
+                                                "fan_system": {
+                                                    "id": "VAV Fan System 1",
+                                                    "fan_control": "VARIABLE_SPEED_DRIVE",
+                                                    "supply_fans": [
+                                                        {
+                                                            "id": "Supply Fan 1"
+                                                        }
+                                                    ],
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "Return Fan 1"
+                                                        }
+                                                    ]
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "boilers": [
+                            {
+                                "id": "Boiler 1",
+                                "loop": "Boiler Loop 1",
+                                "energy_source_type": "NATURAL_GAS"
+                            }
+                        ],
+                        "chillers": [
+                            {
+                                "id": "Chiller 1",
+                                "cooling_loop": "Chiller Loop 1",
+                                "condensing_loop": "Chiller Loop 1"
+                            }
+                        ],
+                        "pumps": [
+                            {
+                                "id": "Boiler Pump 1",
+                                "loop_or_piping": "Boiler Loop 1",
+                                "speed_control": "FIXED_SPEED"
+                            },
+                            {
+                                "id": "Chiller Pump 1",
+                                "loop_or_piping": "Chiller Loop 1",
+                                "speed_control": "FIXED_SPEED"
+                            }
+                        ],
+                        "fluid_loops": [
+                            {
+                                "id": "Boiler Loop 1",
+                                "type": "HEATING"
+                            },
+                            {
+                                "id": "Chiller Loop 1",
+                                "type": "COOLING",
+                                "pump_power_per_flow_rate": 301.1889035667107
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    },
+    "rule-22-29-b": {
+        "Section": 22,
+        "Rule": 29,
+        "Test": "b",
+        "test_description": "Baseline building is system type 11 and is incorrectly modeled with the is_condenser_water_pump_interlocked key",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "22-29",
+            "ruleset_reference": "G3.1.3.9",
+            "rule_description": "The baseline building design condenser-water pump shall be modeled as constant volume.",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "primary_rule": "No",
+            "schema_version": 0.018
+        },
+        "rmr_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "weather": {
+                    "climate_zone": "CZ4A"
+                },
+                "ruleset_model_instances": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_open_schedule": "Required Building Schedule 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                                "terminals": [
+                                                    {
+                                                        "id": "VAV Air Terminal 1",
+                                                        "is_supply_ducted": true,
+                                                        "heating_source": "HOT_WATER",
+                                                        "type": "VARIABLE_AIR_VOLUME",
+                                                        "served_by_heating_ventilation_air_conditioning_system": "VAV System 1",
+                                                        "heating_from_loop": "Boiler Loop 1"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "id": "Thermal Zone 2",
+                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                                "terminals": [
+                                                    {
+                                                        "id": "VAV Air Terminal 2",
+                                                        "is_supply_ducted": true,
+                                                        "heating_source": "HOT_WATER",
+                                                        "type": "VARIABLE_AIR_VOLUME",
+                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "heating_from_loop": "Boiler Loop 1"
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilation_air_conditioning_systems": [
+                                            {
+                                                "id": "System 7",
+                                                "cooling_system": {
+                                                    "id": "CHW Coil 1",
+                                                    "cooling_system_type": "FLUID_LOOP",
+                                                    "chilled_water_loop": "Chiller Loop 1"
+                                                },
+                                                "fan_system": {
+                                                    "id": "VAV Fan System 1",
+                                                    "fan_control": "VARIABLE_SPEED_DRIVE",
+                                                    "supply_fans": [
+                                                        {
+                                                            "id": "Supply Fan 1"
+                                                        }
+                                                    ],
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "Return Fan 1"
+                                                        }
+                                                    ]
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "boilers": [
+                            {
+                                "id": "Boiler 1",
+                                "loop": "Boiler Loop 1",
+                                "energy_source_type": "NATURAL_GAS"
+                            }
+                        ],
+                        "chillers": [
+                            {
+                                "id": "Chiller 1",
+                                "cooling_loop": "Chiller Loop 1",
+                                "condensing_loop": "Chiller Loop 1"
+                            }
+                        ],
+                        "pumps": [
+                            {
+                                "id": "Boiler Pump 1",
+                                "loop_or_piping": "Boiler Loop 1",
+                                "speed_control": "FIXED_SPEED"
+                            },
+                            {
+                                "id": "Chiller Pump 1",
+                                "loop_or_piping": "Chiller Loop 1",
+                                "speed_control": "FIXED_SPEED"
+                            }
+                        ],
+                        "fluid_loops": [
+                            {
+                                "id": "Boiler Loop 1",
+                                "type": "HEATING"
+                            },
+                            {
+                                "id": "Chiller Loop 1",
+                                "type": "COOLING",
+                                "pump_power_per_flow_rate": 348.7450462351387
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    },
+    "rule-22-30-a": {
+        "Section": 22,
+        "Rule": 30,
+        "Test": "a",
+        "test_description": "Baseline building is system type 11 and is correctly modeled with the is_condenser_water_pump_interlocked key",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "22-30",
+            "ruleset_reference": "G3.1.3.9",
+            "rule_description": "For chilled-water systems served by chiller(s) and does not serve baseline System-11, condenser-water pump power shall be 19 W/gpm.",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "primary_rule": "Yes",
+            "schema_version": 0.018
+        },
+        "rmr_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_instances": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_open_schedule": "Required Building Schedule 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                                "terminals": [
+                                                    {
+                                                        "id": "VAV Air Terminal 1",
+                                                        "is_supply_ducted": true,
+                                                        "heating_source": "HOT_WATER",
+                                                        "type": "VARIABLE_AIR_VOLUME",
+                                                        "served_by_heating_ventilation_air_conditioning_system": "VAV System 1"
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilation_air_conditioning_systems": [
+                                            {
+                                                "id": "System Type 11",
+                                                "cooling_system": {
+                                                    "id": "CHW Coil 1",
+                                                    "cooling_system_type": "FLUID_LOOP"
+                                                },
+                                                "heating_system": {
+                                                    "id": "HHW Coil 1",
+                                                    "heating_system_type": "FLUID_LOOP",
+                                                    "hot_water_loop": "Boiler Loop 1"
+                                                },
+                                                "fan_system": {
+                                                    "id": "VAV Fan System 1",
+                                                    "fan_control": "VARIABLE_SPEED_DRIVE",
+                                                    "supply_fans": [
+                                                        {
+                                                            "id": "Supply Fan 1"
+                                                        }
+                                                    ],
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "Return Fan 1"
+                                                        }
+                                                    ]
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "boilers": [
+                            {
+                                "id": "Boiler 1",
+                                "loop": "Boiler Loop 1",
+                                "energy_source_type": "NATURAL_GAS"
+                            }
+                        ],
+                        "chillers": [
+                            {
+                                "id": "Chiller 1",
+                                "cooling_loop": "Chiller Loop 1",
+                                "energy_source_type": "ELECTRICITY",
+                                "condensing_loop": "Chiller Loop 1"
+                            }
+                        ],
+                        "pumps": [
+                            {
+                                "id": "Boiler Pump 1",
+                                "loop_or_piping": "Boiler Loop 1",
+                                "speed_control": "FIXED_SPEED"
+                            },
+                            {
+                                "id": "Chiller Pump 1",
+                                "loop_or_piping": "Chiller Loop 1",
+                                "speed_control": "FIXED_SPEED"
+                            }
+                        ],
+                        "fluid_loops": [
+                            {
+                                "id": "Boiler Loop 1",
+                                "type": "HEATING"
+                            },
+                            {
+                                "id": "Chiller Loop 1",
+                                "type": "COOLING",
+                                "pump_power_per_flow_rate": 348.7450462351387
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    },
+    "rule-22-30-b": {
+        "Section": 22,
+        "Rule": 30,
+        "Test": "b",
+        "test_description": "Baseline building is system type 11 and is incorrectly modeled with the is_condenser_water_pump_interlocked key",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "22-30",
+            "ruleset_reference": "G3.1.3.9",
+            "rule_description": "For chilled-water systems served by chiller(s) and does not serve baseline System-11, condenser-water pump power shall be 19 W/gpm.",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "primary_rule": "Yes",
+            "schema_version": 0.018
+        },
+        "rmr_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_instances": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_open_schedule": "Required Building Schedule 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                                "terminals": [
+                                                    {
+                                                        "id": "VAV Air Terminal 1",
+                                                        "is_supply_ducted": true,
+                                                        "heating_source": "HOT_WATER",
+                                                        "type": "VARIABLE_AIR_VOLUME",
+                                                        "served_by_heating_ventilation_air_conditioning_system": "VAV System 1"
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilation_air_conditioning_systems": [
+                                            {
+                                                "id": "System Type 11",
+                                                "cooling_system": {
+                                                    "id": "CHW Coil 1",
+                                                    "cooling_system_type": "FLUID_LOOP"
+                                                },
+                                                "heating_system": {
+                                                    "id": "HHW Coil 1",
+                                                    "heating_system_type": "FLUID_LOOP",
+                                                    "hot_water_loop": "Boiler Loop 1"
+                                                },
+                                                "fan_system": {
+                                                    "id": "VAV Fan System 1",
+                                                    "fan_control": "VARIABLE_SPEED_DRIVE",
+                                                    "supply_fans": [
+                                                        {
+                                                            "id": "Supply Fan 1"
+                                                        }
+                                                    ],
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "Return Fan 1"
+                                                        }
+                                                    ]
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "boilers": [
+                            {
+                                "id": "Boiler 1",
+                                "loop": "Boiler Loop 1",
+                                "energy_source_type": "NATURAL_GAS"
+                            }
+                        ],
+                        "chillers": [
+                            {
+                                "id": "Chiller 1",
+                                "cooling_loop": "Chiller Loop 1",
+                                "energy_source_type": "ELECTRICITY",
+                                "condensing_loop": "Chiller Loop 1"
+                            }
+                        ],
+                        "pumps": [
+                            {
+                                "id": "Boiler Pump 1",
+                                "loop_or_piping": "Boiler Loop 1",
+                                "speed_control": "FIXED_SPEED"
+                            },
+                            {
+                                "id": "Chiller Pump 1",
+                                "loop_or_piping": "Chiller Loop 1",
+                                "speed_control": "FIXED_SPEED"
+                            }
+                        ],
+                        "fluid_loops": [
+                            {
+                                "id": "Boiler Loop 1",
+                                "type": "HEATING"
+                            },
+                            {
+                                "id": "Chiller Loop 1",
+                                "type": "COOLING",
+                                "pump_power_per_flow_rate": 396.3011889035667
                             }
                         ]
                     }
