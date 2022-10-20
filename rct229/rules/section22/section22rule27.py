@@ -23,7 +23,7 @@ class Section22Rule27(RuleDefinitionListIndexedBase):
     def __init__(self):
         super(Section22Rule27, self).__init__(
             rmrs_used=UserBaselineProposedVals(False, True, False),
-            each_rule=Section22Rule27.ChillerFluidLoopRule(),
+            each_rule=Section22Rule27.ChillerRule(),
             index_rmr="baseline",
             id="22-27",
             description="Each baseline chiller shall be modeled with separate condenser-water pump interlocked to operate with the associated chiller.",
@@ -44,9 +44,9 @@ class Section22Rule27(RuleDefinitionListIndexedBase):
             [key in APPLICABLE_SYS_TYPES for key in baseline_system_types.keys()]
         )
 
-    class ChillerFluidLoopRule(RuleDefinitionBase):
+    class ChillerRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section22Rule27.ChillerFluidLoopRule, self).__init__(
+            super(Section22Rule27.ChillerRule, self).__init__(
                 rmrs_used=UserBaselineProposedVals(False, True, False),
                 required_fields={
                     "$": ["is_condenser_water_pump_interlocked"],
@@ -54,8 +54,8 @@ class Section22Rule27(RuleDefinitionListIndexedBase):
             )
 
         def get_calc_vals(self, context, data=None):
-            fluid_loop_b = context.baseline
-            is_condenser_water_pump_interlocked = fluid_loop_b[
+            chiller_b = context.baseline
+            is_condenser_water_pump_interlocked = chiller_b[
                 "is_condenser_water_pump_interlocked"
             ]
             return {
