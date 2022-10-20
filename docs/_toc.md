@@ -37,6 +37,7 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   * [get_HVAC_systems_primarily_serving_comp_rooms](ruleset_functions/get_HVAC_systems_primarily_serving_comp_rooms.md): Returns a list of HVAC systems in which greater than 50% of the area served by the HVAC system is computer room space.
   * [get_dict_of_zones_and_terminal_units_served_by_hvac_sys](ruleset_functions/get_dict_of_zones_and_terminal_units_served_by_hvac_sys.md): Returns a dictionary of zones and terminal unit IDs associated with each HVAC system in the RMD.
   * [get_baseline_system_type](ruleset_functions/get_baseline_system_types.md): Identify all the baseline system types modeled in a B-RMD.
+  * [get_hvac_zone_list_w_area](ruleset_functions/get_hvac_zone_list_w_area.md): Get the list of zones and their total floor area served by each HVAC system in a RMD.
   * [check_purchased_chw_hhw](ruleset_functions/check_purchased_chw_hhw.md): Check if RMD is modeled with purchased chilled water as space cooling source or purchased hot water/steam as space heating source. If any system in RMD uses purchased chilled water, function shall return True for purchased chilled water as space cooling source. Similarly, if any system in RMD uses purchased hot water or steam, function shall return True for purchased hot water/steam as space heating source.
 
 ### HVAC type functions
