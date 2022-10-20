@@ -3,7 +3,7 @@ from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 from rct229.schema.config import ureg
-from rct229.utils.jsonpath_utils import find_all
+from rct229.utils.assertions import assert_
 from rct229.utils.pint_utils import CalcQ
 from rct229.utils.std_comparisons import std_equal
 
@@ -37,11 +37,20 @@ class Section22Rule20(RuleDefinitionListIndexedBase):
             id="22-20",
             description="The baseline minimum condenser water reset temperature is per Table G3.1.3.11.",
             list_path="ruleset_model_instances[0].heat_rejections[*]",
+            # required_fields={
+            #     "$": ["ruleset_model_instances"],
+            # },
             data_items={"climate_zone": ("baseline", "weather/climate_zone")},
         )
 
     def is_applicable(self, context, data=None):
-        rmi_b = context.baseline
+        rmd_b = context.baseline
+        rmi_b = rmd_b["ruleset_model_instances"][0]
+        assert_(
+            rmi_b,
+            "ruleset_model_instance list is empty",
+        )
+
         # FIXME: replace with baseline_system_types = get_baseline_system_types(rmi_b) when get_baseline_system_types
         #  is ready.
         baseline_system_types = {
