@@ -90,14 +90,23 @@ def get_baseline_system_types(rmi_b):
 
             # Add error handling
             # no matching system warning
-            iterator = iter([hvac_b_id in baseline_hvac_system_dict[hvac_sys_key] for hvac_sys_key in baseline_hvac_system_dict.keys()])
+            iterator = iter(
+                [
+                    hvac_b_id in baseline_hvac_system_dict[hvac_sys_key]
+                    for hvac_sys_key in baseline_hvac_system_dict.keys()
+                ]
+            )
             # consume from index 0 until first true or it's exhausted
             at_least_one_hvac_sys = any(iterator)
             # carry on consuming until another true value / exhausted
             multiple_hvac_sys = any(iterator)
             if not at_least_one_hvac_sys:
-                raise RCTFailureException(f"Error: HVAC {hvac_b_id} does not match any baseline system type.")
+                raise RCTFailureException(
+                    f"Error: HVAC {hvac_b_id} does not match any baseline system type."
+                )
             if multiple_hvac_sys:
-                raise RCTFailureException(f"Error: HVAC {hvac_b_id} matches to multiple baseline system types - check your RMD models")
+                raise RCTFailureException(
+                    f"Error: HVAC {hvac_b_id} matches to multiple baseline system types - check your RMD models"
+                )
 
     return baseline_hvac_system_dict
