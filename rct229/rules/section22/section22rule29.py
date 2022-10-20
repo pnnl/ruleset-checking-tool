@@ -2,6 +2,7 @@ from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 from rct229.schema.config import ureg
 from rct229.utils.jsonpath_utils import find_all, find_exactly_one_with_field_value
+from rct229.utils.std_comparisons import std_equal
 
 APPLICABLE_SYS_TYPES = [
     "SYS-7",
@@ -23,7 +24,6 @@ class Section22Rule29(RuleDefinitionBase):
     def __init__(self):
         super(Section22Rule29, self).__init__(
             rmrs_used=UserBaselineProposedVals(False, True, False),
-            # index_rmr="baseline",
             id="22-29",
             description="For chilled-water systems served by chiller(s) and does not serve baseline System-11, condenser-water pump power shall be 19 W/gpm.",
             rmr_context="ruleset_model_instances/0",
@@ -48,10 +48,12 @@ class Section22Rule29(RuleDefinitionBase):
         rmi_b = context.baseline
         condenser_loop_pump_power_list = [
             True
-            if find_exactly_one_with_field_value(
-                "$..fluid_loops[*]", "id", condenser_loop_id, rmi_b
-            ).get("pump_power_per_flow_rate")
-            == REQUIRED_PUMP_POWER
+            if std_equal(
+                find_exactly_one_with_field_value(
+                    "$..fluid_loops[*]", "id", condenser_loop_id, rmi_b
+                ).get("pump_power_per_flow_rate"),
+                REQUIRED_PUMP_POWER,
+            )
             else False
             for condenser_loop_id in find_all("chillers[*].condensing_loop", rmi_b)
         ]
