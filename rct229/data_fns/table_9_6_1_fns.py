@@ -9,6 +9,7 @@ from rct229.schema.config import ureg
 space_type_enumeration_to_lpd_map = {
     "GUEST_ROOM": "guest room",
     "DORMITORY_LIVING_QUARTERS": "dormitory - living quarters",
+    "DWELLING_UNIT": "dwelling unit",
 }
 
 
