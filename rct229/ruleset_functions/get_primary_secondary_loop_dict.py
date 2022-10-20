@@ -1,6 +1,8 @@
 from itertools import chain
 
-from rct229.ruleset_functions.baseline_systems.baseline_system_util import find_exactly_one_fluid_loop
+from rct229.ruleset_functions.baseline_systems.baseline_system_util import (
+    find_exactly_one_fluid_loop,
+)
 from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all
 
@@ -75,8 +77,17 @@ def get_primary_secondary_loops_dict(rmi_b):
             else:
                 secondary_loop_ids.append(cfl_id)
 
-    primary_secondary_loop_dict = {}
-    if (not for_break_flag) and sorted(child_loop_ids) == sorted(secondary_loop_ids):
+    if for_break_flag or sorted(child_loop_ids) != sorted(secondary_loop_ids):
+        primary_secondary_loop_dict = {}
+    else:
         primary_secondary_loop_dict = {
-            primary_loop_id: [secondary_loop_id for secondary_loop_id in primary_loop["child_loops"]] for primary_loop
+            primary_loop_id: [
+                secondary_loop_id
+                for secondary_loop_id in find_exactly_one_fluid_loop(primary_loop_id)[
+                    "child_loops"
+                ]
+            ]
+            for primary_loop_id in primary_loop_ids
         }
+
+    return primary_secondary_loop_dict
