@@ -1,0 +1,41 @@
+# get_zone_eflh
+
+**Description:** provides the equivalent full load hours of the zone.  Equivalent full load hours are defined as: any hour where the occupancy fraction is greater than 5% AND the HVAC system is in occupied mode.  For this function, we are recognizing the HVAC system as being in occupied mode if ANY of the HVAC systems serving the zone are in occupied mode.
+**Applicability Note:** hvac_system.fan_system.operation_schedule is being used as the HVAC operation schedule.  Therefore, this check will not work for radiant systems or other systems that do not include a fan
+
+**Inputs:** 
+- **RMD**
+- **zone**
+
+**Returns:**  
+- **flh**: a number equal to the total equivalent full load hours for the year
+ 
+**Function Call:**
+- **get_list_hvac_systems_associated_with_zone**
+
+## Logic:
+- create a list to hold information about the occupancy of each space: `people_info_for_spaces = []`
+- create a variable for the total number of zone occupants: `total_zone_occupants = 0`
+- loop through the spaces in the zone collecting information about occupancy: `for space in zone.spaces:`
+  - append the information about the occupancy to the list: `people_info_for_spaces.append([space.number_of_occupants, space.occupant_multiplier_schedule.hourly_values])`
+  - add the occupants of this space to the total number of zone occupants: `total_zone_occupants += space.number_of_occupants`
+- get the list of the hvac systems associated with the zone: `hvac_systems_list = get_list_hvac_systems_associated_with_zone(RMD,zone.id)`
+- create an index to which each full load hour will be added: `flh = 0`
+- now calculate flh for each hour of the year: `for hour in range(8760):`
+  - calculate the number of people in the zone this hour: `occupants_this_hour = 0`
+  - loop through the people_info_for_spaces: `for space_people_info in people_info_for_spaces:`
+    - multiply the max number of people in this space (index 0) by the schedule value (index 1) and add it to people_this_hour: `occupants_this_hour += space_people_info[0] * space_people_info[1][hour]`
+  - check if the people this hour is greater than 5%: `if((occupants_this_hour / total_zone_occupants)>0.05:`
+    - now check to see if there are any HVAC systems that are operational this hour.  Create a boolean: `hvac_systems_operational_this_hour = FALSE`
+    - loop through the hvac_systems_list: `for hvac_system in hvac_systems_list:`
+      - check if the HVAC system fan operating schedule is greater than 1 this hour: `if hvac_system.fan_system.operation_schedule[hour] == 1:`
+        - the system is operational this hour, set the boolean to TRUE: `hvac_systems_operational_this_hour = TRUE`
+    - check if the boolean is true: `if hvac_systems_operational_this_hour:`
+      - add the hour to the flh: `flh += 1`
+
+**Returns** `flh`
+
+**Questions:**
+# 1.  Do we need to do a check to see if FanSystem and it's operating schedule exist before calling hvac_system.fan_system.operation_schedule?
+
+**[Back](../_toc.md)**
