@@ -21,6 +21,7 @@ for the peak W/sf calculation I've assumed:
 - **get_list_hvac_systems_associated_with_zone**
 - **get_hvac_zone_list_w_area**
 - **find_zone**
+- **get_zone_eflh**
 
 ## Logic:
 - set the result variable to "No" - only a positive test can give it a different value: `result = "No"`
@@ -55,8 +56,9 @@ for the peak W/sf calculation I've assumed:
 					- add the zone internal loads to the system_total_peaks:
 					`a = get_zone_peak_internal_load(zone_b)`
 					`system_total_peak += a[0]`
+					- get the zone eflh by using the get_zone_eflh function.  This returns eflh for the year, so we need to convert to weeks by dividing by 52.1428: `zone_eflh = get_zone_eflh(zone)/52.1428`
 					- add the eflh to the eflh list.  We are multiplying the schedule by the zone area so that later we can divide the total by the total area.  Otherwise small zones with very different schedules have too great an impact
-					`eflh.append(a[2] * a[1])`
+					`eflh.append(zone_eflh * a[1])`
 		- now calculate the average internal load: `avg_internal_load = system_total_peak / system_total_area`
 		- and calculate the averge eflh: `avg_eflh = sum(eflh)/len(eflh)`
 		- get the internal load of the reference zone: `internal_loads = get_zone_peak_internal_load(zone)`
