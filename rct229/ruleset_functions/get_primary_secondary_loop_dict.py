@@ -25,6 +25,19 @@ APPLICABLE_SYS_TYPES = [
 
 
 def get_primary_secondary_loops_dict(rmi_b):
+    """
+    Get the list of primary and secondary loops for CHW for a B-RMI.
+
+    Parameters
+    ----------
+    rmi_b: A baseline ruleset model instance
+
+    Returns: primary_secondary_loops_dict
+    A dictionary that saves pairs of primary and secondary loops for
+    baseline chilled water system, e.g. {primary_loop_1.id: [secondary_loop_1.id,
+    secondary_loop2.id], primary_loop_2.id: [secondary_loop3.id]]}. If B-RMI does
+    not have primary-secondary loop configuration setup, return an empty dictionary.
+    """
     baseline_hvac_system_dict = get_baseline_system_types(rmi_b)
 
     # Use find_all here to avoid including None for missing cooling_loops
