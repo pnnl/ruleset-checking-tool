@@ -36,7 +36,7 @@
 - loop through all the hours of the year: `for hour in range(8760):`
 	- create variable for the value of internal loads for the hour: `internal_loads_this_hour = 0`
 	- loop through each load: `for load in loads:`
-		- calculate the total internal load for this hour for this object and add it to internal_loads_this_hour: `internal_loads_this_hour += load[0] * load[1][hour]
+		- calculate the total internal load for this hour for this object and add it to internal_loads_this_hour: `internal_loads_this_hour += load[0] * load[1][hour]`
 	- check if internal_loads_this_hour is greater than max_internal_load: `if internal_loads_this_hour > max_internal_load:`
 		- reset max_internal_load to internal_loads_this_hour: `max_internal_load = internal_loads_this_hour`
 
