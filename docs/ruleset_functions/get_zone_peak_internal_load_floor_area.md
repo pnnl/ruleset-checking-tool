@@ -1,4 +1,4 @@
-# get_zone_peak_internal_load_floor_area_flh
+# get_zone_peak_internal_load_floor_area
 **Schema Version:** 0.0.21
 **Description:** finds the peak coincident internal loads of a zone and returns the value in btu/h/ft2
 
