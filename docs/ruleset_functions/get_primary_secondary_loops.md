@@ -1,21 +1,21 @@
 
 ## get_primary_secondary_loops (TBD, change name to get_baseline_chw_primary_secondary_loops)
 
-Description: Get the list of primary and secondary loops for CHW for a B-RMR.
+Description: Get the list of primary and secondary loops for CHW for a B-RMI.
 
 Inputs:  
-- **B-RMR**: B-RMR that needs to get the list of primary and secondary loops.
+- **B-RMI**: B-RMI that needs to get the list of primary and secondary loops.
 
-Returns: 
-- **primary_secondary_loop_dictionary**: A dictionary that saves pairs of primary and secondary loops for baseline chilled water system, e.g. {primary_loop_1.id: [secondary_loop_1.id, secondary_loop2.id], primary_loop_2.id: [secondary_loop3.id]]}. If B-RMR does not have primary-secondary loop configuration setup, return an empty dictionary.
+Returns:
+- **primary_secondary_loop_dictionary**: A dictionary that saves pairs of primary and secondary loops for baseline chilled water system, e.g. {primary_loop_1.id: [secondary_loop_1.id, secondary_loop2.id], primary_loop_2.id: [secondary_loop3.id]]}. If B-RMI does not have primary-secondary loop configuration setup, return an empty dictionary.
 
 Logic:  
 
-- Get B-RMR system types: `baseline_hvac_system_dict = get_baseline_system_types(B-RMR)`
+- Get B-RMI system types: `baseline_hvac_system_dict = get_baseline_system_types(B-RMI)`
 
-- For each chiller in B-RMR, save its cooling loop to CHW chiller loop array to get all loops connected to chiller(s): `for chiller in B-RMR.RulesetModelInstance.chillers: chiller_loop_array.append(chiller.cooling_loop)`
+- For each chiller in B-RMI, save its cooling loop to CHW chiller loop array to get all loops connected to chiller(s): `for chiller in B-RMI.RulesetModelInstance.chillers: chiller_loop_array.append(chiller.cooling_loop)`
 
-- For each building segment in B-RMR: `for building_segment in B-RMR...building_segments:`
+- For each building segment in B-RMI: `for building_segment in B-RMI...building_segments:`
 
   - For each HVAC system in building segment: `for hvac in building_segment.heating_ventilation_air_conditioning_systems`
 
@@ -23,7 +23,7 @@ Logic:
 
       - Save chilled water loop that serves cooling systems to non-process CHW coil loop array (array for all loops connected to cooling coils): `non_process_chw_coil_loop_array.append(hvac.cooling_system.chilled_water_loop)`
 
-- For each fluid loop in B-RMR: `for fluid_loop in B-RMR.RulesetModelInstance.fluid_loops:`
+- For each fluid loop in B-RMI: `for fluid_loop in B-RMI.fluid_loops:`
 
   - Check if loop type is cooling: `if fluid_loop.type == "COOLING":`
 
@@ -45,10 +45,10 @@ Logic:
 
 - Check if child loop array and secondary loop array is not the same, break logic and return an empty dictionary: `if child_loop_array.sort() != secondary_loop_array.sort(): BREAK and return primary_secondary_loop_dictionary = {}`
 
-- Else, B-RMR is modeled with primary-secondary configuration: `else:`
+- Else, B-RMI is modeled with primary-secondary configuration: `else:`
 
   - For each primary loop: `for primary_loop_id in primary_loop_array:`
-  
+
     - Save primary and secondary loop(s) pair to output dictionary: `primary_secondary_loop_dictionary[primary_loop_id].append(secondary_loop_id for secondary_loop_id in primary_loop.child_loops)`
 
 **Returns** `return primary_secondary_loop_dictionary`
@@ -61,7 +61,7 @@ Logic:
 3). if a cooling loop is connected to cooling coil, it shall not have any child loops
 4). the collection of child loops of all of 2) shall be the same as all of 3)
 
-2. B-RMR might have process chiller(s). Process chiller(s) and its associated loop(s) should be excluded from the primary-secondary loop check. Hence the logic only returns primary loops that serves standard baseline systems with chilled water coils.
+2. B-RMI might have process chiller(s). Process chiller(s) and its associated loop(s) should be excluded from the primary-secondary loop check. Hence the logic only returns primary loops that serves standard baseline systems with chilled water coils.
 
 3. Zonal cooling coils are not considered as this function will be used for baseline systems only.
 
