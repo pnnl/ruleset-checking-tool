@@ -31,12 +31,12 @@ def get_hw_loop_zone_list_w_area(rmi_b):
     """
     hw_loop_zone_list_w_area_dict = dict()
     for zone in find_all("$..building_segments[*].zones[*]", rmi_b):
-        # None or empty will be falsy
         zone_area = pint_sum(
             [
                 space.get("floor_area", ZERO.AREA)
                 for space in find_all("$.spaces[*]", zone)
-            ]
+            ],
+            ZERO.AREA,
         )
         for terminal in find_all("$.terminals[*]", zone):
             hhw_loop_id = None
@@ -45,9 +45,7 @@ def get_hw_loop_zone_list_w_area(rmi_b):
                 # If a terminal heating source is hot water, then it must have a heating_from_loop
                 # Otherwise, raise exception
                 hhw_loop_id = getattr_(terminal, "terminal", "heating_from_loop")
-            if not hhw_loop_id and terminal.get(
-                "served_by_heating_ventilation_air_conditioning_system"
-            ):
+            elif terminal.get("served_by_heating_ventilation_air_conditioning_system"):
                 hvac_id = terminal[
                     "served_by_heating_ventilation_air_conditioning_system"
                 ]
@@ -60,9 +58,7 @@ def get_hw_loop_zone_list_w_area(rmi_b):
                     hhw_loop_id = find_exactly_one_hvac_system(rmi_b, hvac_id)[
                         "preheat_system"
                     ]["hot_water_loop"]
-                if not hhw_loop_id and is_hvac_sys_heating_type_fluid_loop(
-                    rmi_b, hvac_id
-                ):
+                elif is_hvac_sys_heating_type_fluid_loop(rmi_b, hvac_id):
                     # check the case the terminal is connected with an HVAC, whose heating system is supplied by
                     # a hot water loop. The is_hvac_sys_heating_type_fluid_loop returns true only
                     # 1. heating_system exist and,
