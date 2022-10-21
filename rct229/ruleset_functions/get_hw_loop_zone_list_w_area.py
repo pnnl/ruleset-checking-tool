@@ -53,9 +53,10 @@ def get_hw_loop_zone_list_w_area(rmi_b):
                 ]
                 if is_hvac_sys_preheating_type_fluid_loop(rmi_b, hvac_id):
                     # check the case the terminal is connected with an HVAC, whose preheating system is supplied
-                    # by a hot water loop. The is_hvac_sys_preheating_type_fluid_loop takes care of None
-                    # preheat_system Return turn ensures the preheat_system and hot_water_loop data are supplied
-                    # in HVAC
+                    # by a hot water loop. The is_hvac_sys_preheating_type_fluid_loop returns true only
+                    # 1. preheat_system exist and,
+                    # 2. preheat_system.hot_water_loop exist and,
+                    # 3. preheat_system.heating_system_type is HEATING_SYSTEM.FLUID_LOOP
                     hhw_loop_id = find_exactly_one_hvac_system(rmi_b, hvac_id)[
                         "preheat_system"
                     ]["hot_water_loop"]
@@ -63,8 +64,10 @@ def get_hw_loop_zone_list_w_area(rmi_b):
                     rmi_b, hvac_id
                 ):
                     # check the case the terminal is connected with an HVAC, whose heating system is supplied by
-                    # a hot water loop. The is_hvac_sys_heating_type_fluid_loop takes care of None heating_system
-                    # scenario and ensures the heating_system and hot_water_loop data are supplied in HVAC
+                    # a hot water loop. The is_hvac_sys_heating_type_fluid_loop returns true only
+                    # 1. heating_system exist and,
+                    # 2. heating_system.hot_water_loop exist and,
+                    # 3. heating_system.heating_system_type is HEATING_SYSTEM.FLUID_LOOP
                     hhw_loop_id = find_exactly_one_hvac_system(rmi_b, hvac_id)[
                         "heating_system"
                     ]["hot_water_loop"]
