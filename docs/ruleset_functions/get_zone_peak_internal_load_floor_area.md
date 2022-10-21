@@ -7,9 +7,7 @@
 - **zone**
 
 **Returns:**  
-- **result**: an array giving 3 values: [total peak btu/h/ft2 in the zone, total zone area, full load hours] the total peak btu/sf is the internal coincident peak loads in all spaces in the zone - full load hours is the total of all full load hours for the space, normalized by the individual load.
-- For example: if a space has 1 W/sf lighting (2000 hours/year), 0.5 W/sf misc equipment (8000 hours/year), and no occupancy, the full_load_hours would be:
-	- (1 / 1.5) * 2000 + (0.5 / 1.5) * 8000 = 4000
+- **result**: an array giving 2 values: [total peak btu/h/ft2 in the zone, total zone area] the total peak btu/sf is the internal coincident peak loads in all spaces in the zone
  
 **Function Call:**
 
@@ -40,14 +38,7 @@
 	- check if internal_loads_this_hour is greater than max_internal_load: `if internal_loads_this_hour > max_internal_load:`
 		- reset max_internal_load to internal_loads_this_hour: `max_internal_load = internal_loads_this_hour`
 
-- create total_user_internal_load: `total_user_internal_load = 0`
-- loop through the loads and get the total max load for the Space.  This is used to do the average EFLH calculation: `for load in loads:`
-	- add load to total_user_internal_load: `total_user_internal_load += load[0]
-- now create the EFLH variable: `eflh = 0`
-- loop through the loads one last time: `for load in loads:`
-	- add the EFLH for this load to the EFLH total: `eflh += (load[0]/total_user_internal_load) * sum(load[1])`
-
-- create the result array: `result = [max_internal_load, area, eflh]`
+- create the result array: `result = [max_internal_load, area]`
 
 
 **Returns** `result`
