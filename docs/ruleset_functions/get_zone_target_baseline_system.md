@@ -4,8 +4,8 @@
 **Description:** Following G3.1.1, determines the baseline system type for each zone in a building
 
 **Inputs:**
-- **P-RMR**
-- **B-RMR**
+- **P-RMD**
+- **B-RMD**
 
 **Returns:**  
 - **zones_and_systems**: a dictionary with zone / list pairs where the first value in the list is the expected system type (ex "SYS-3") and the second value is the rule used to choose the system, (eg "G3_1_1e"): zones_and_systems[zone] = ["SYS-3", "G3_1_1e"]
@@ -40,13 +40,13 @@
 	- if the bat is not equal to the predominant building area type: `if bat != predominant_building_area_type:`
 		- and if the area of this bat < 20,000 ft2: `if list_building_area_types_and_zones[bat]["AREA"] <= 20000:`
 			- add this area to the area value for determining predominant HVAC system type: `area = area + list_building_area_types_and_zones[bat]["AREA"]`
-- expected_system_type = expected_system_type_from_Table_G3_1_1(predominant_building_area_type,num_floors,area,climate_zone)
-- fill the zones_and_systems list with the expected system for all zones (we'll overwrite the other zones in the next step): `for zone in zones_and_systems:`
-	- set the value to expected_system_type: `zones_and_systems[zone] = expected_system_type`
+- expected_system_type_list = expected_system_type_from_Table_G3_1_1(predominant_building_area_type,num_floors,area,climate_zone)
+- fill the zones_and_systems list with the expected system and description string for all zones (we'll overwrite the other zones in the next step): `for zone in zones_and_systems:`
+	- set the value to expected_system_type_list: `zones_and_systems[zone] = expected_system_type_list`
 	
 - now we need to go through each 'exception' to Table_G3_1_1 in order.
 
-- G3.1.1b "Use additional system types for nonpredominant conditions (i.e., residential/nonresidential) if those conditions apply to more than 20,000 ft2 of conditioned floor area." uses the same logic that we just used for the expected_system_type, except that we select systems based on non-predominant building area types and the area of these non-predominant conditions
+- G3.1.1b "Use additional system types for nonpredominant conditions (i.e., residential/nonresidential) if those conditions apply to more than 20,000 ft2 of conditioned floor area." uses the same logic that we just used for the expected_system_type_list, except that we select systems based on non-predominant building area types and the area of these non-predominant conditions
 - loop throught the building area types: `for bat in list_building_area_types_and_zones:`
 	- look for any bat's that have more than 20000 ft2 area: `if list_building_area_types_and_zones[bat]["AREA"] >=20000:`
 		- we select a secondary system type for this bat: `secondary_system_type = expected_system_type_from_Table_G3_1_1(bat,num_floors,list_building_area_types_and_zones[bat]["AREA"],climate_zone)`
