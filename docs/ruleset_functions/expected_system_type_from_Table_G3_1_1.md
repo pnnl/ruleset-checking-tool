@@ -103,7 +103,7 @@
 		- otherwise, for CZ_3b_3c_or_4_to_8: `if climate_zone_category == "CZ_3b_3c_or_4_to_8":`
 			- the expected system is System 8: `system_type = "SYS-8"
 
-- create the string that holds details about how the system was selected.  This string will need to match the expected string in 18-1 to 18-16 rule tests: `details_of_system_selection = climate_zone_category + area_of_BAT_string + number_of_floors_string`
+- create the string that holds details about how the system was selected.  This string will need to match the expected string in 18-1 to 18-16 rule tests: `details_of_system_selection = building_area_type + " " + climate_zone_category + area_of_BAT_string + number_of_floors_string`
 - set result equal to a list of the system_type and details_of_system_selection: `result = [system_type, details_of_system_selection]`
 
 **Returns** `result`
