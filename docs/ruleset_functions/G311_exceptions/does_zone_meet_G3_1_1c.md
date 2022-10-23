@@ -11,9 +11,10 @@ for the peak W/sf calculation I've assumed:
 **Inputs:** 
 - **B_RMD**
 - **zone**
+- **starting_system_type** - this is the expected system type that was selected prior to checking G3_1_1c exception
 
 **Returns:**  
-- **result**: a string - either "C" or "No"
+- **result**: an enum - either YES or NO
  
 **Function Call:**
 - **get_baseline_system_types**
@@ -22,25 +23,14 @@ for the peak W/sf calculation I've assumed:
 - **get_hvac_zone_list_w_area**
 - **find_zone**
 - **get_zone_eflh**
+- **zones_with_computer_room_dict_x**
 
 ## Logic:
-- set the result variable to "No" - only a positive test can give it a different value: `result = "No"`
-- use the function get_list_hvac_systems_associated_with_zone to get a list of all HVAC systems associated with the zone and make a list of hvac system ids:
-`relevant_systems = [a.id for a in get_list_hvac_systems_associated_with_zone(B_RMD,zone.id)]`
-
-
+- set the result variable to "No" - only a positive test can give it a different value: `result = NO`
 
 - first check if the system type is one of the following:
 `eligible_primary_system_types = ["SYS-5","SYS-5b","Sys-6","Sys-6b","Sys-7","Sys-7a","Sys-7b","Sys-7c","Sys-8","Sys-8a","Sys-8b","Sys-8c","Sys-8d","Sys-9","Sys-9b","Sys-10","Sys-11.1","Sys-11.1a","Sys-11b","Sys-11c","Sys-12","Sys-12a","Sys-12b","Sys-12c","Sys-13","Sys-13a"]`
-- get the dict of get_baseline_system_types:
-`system_types_b = get_baseline_system_types(B_RMD)`
-- create a sub-list of system_types_b that includes only the system types and id references in the serving the zone:
-`segment_system_types_b = {key: system_types_b[0] for key in system_types_b if(len(set(system_types_b[key])&set(relevant_systems)) > 0)`
-
-- create set of system types that are eligible for this rule AND serve the zone:
-`eligible_systems_in_zone = (set(segment_system_types_b) & set(eligible_primary_system_types))`
-- check if any of the eligible_primary_system_types is in the system_types_b:
-`if((len(eligible_systems_in_zone)) > 0):`
+- check if the starting_system_type is in the list of eligible system types: `if starting_system_type in eligible_primary_system_types:`
 	- get the list of all systems and the zones they serve in the RMD by calling get_hvac_zone_list_w_area: `hvac_zone_list_w_area = get_hvac_zone_list_w_area(B_RMD)`
 	- loop through each system in eligible_systems_in_zone: `for eligible_system in eligible_systems_in_zone:`
 		- create a variable to hold the sum total of all peak loads in the system:
@@ -65,11 +55,15 @@ for the peak W/sf calculation I've assumed:
 		- now do the rule checks:
 		- if the zone peak differs by more than 10 btu/hr/sf from the average, then it meets the exception:
 		`if(abs(internal_loads[0]/internal_loads[1] - avg_internal_load) > 10):
-			- it meets the exception: `result = "C"`
+			- it meets the exception: `result = YES`
 		- OR if the eflh differs by more than 40, then the zone meets this exception:
 		`if(abs(internal_loads[2] - eflh) > 40):
-			- it meets the exception: `result = "C"`
-		- at this point, if the result is not equal to "C", the zone doesn't meet the requirements and we should return the negative result without checking other systems: `return result`
+			- it meets the exception: `result = YES`
+		- if the zone is still eligible, check if it is a computer room zone (computer room zones are not eligible for this exception): `if result == YES:`
+			- use the function zones_with_computer_room_dict_x to get a list of zones including computer rooms: `computer_room_zones_dict = zones_with_computer_room_dict_x(B_RMD)`
+			- if the zone.id is in the computer_room_zones_dict, then this is a computer room zone and it is not eligible: `if zone.id in computer_room_zones_dict:`
+				- set the result to NO: `result = NO`
+		- at this point, if the result is not equal to YES, the zone doesn't meet the requirements and we should return the negative result without checking other systems: `return result`
 
 
 **Returns** `result`
