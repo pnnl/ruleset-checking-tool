@@ -12,11 +12,11 @@
  
 **Function Call:**
 - **get_HVAC_building_area_types_and_zones**
-- **zone_meets_G3_1_1b**
-- **zone_meets_G3_1_1c**
-- **zone_meets_G3_1_1e**
-- **zone_meets_G3_1_1f**
-- **zone_meets_G3_1_1g**
+- **does_zone_meet_G3_1_1b**
+- **does_zone_meet_G3_1_1c**
+- **does_zone_meet_G3_1_1e**
+- **does_zone_meet_G3_1_1f**
+- **does_zone_meet_G3_1_1g**
 - **get_predominant_HVAC_building_area_type**
 - **get_number_of_floors**
 - **expected_system_type_from_Table_G3_1_1**
@@ -55,14 +55,12 @@
 				- change the system type to: [secondary_system_type[0], "G3_1_1b"] - remember that expected_system_type_from_Table_G3_1_1 gives both the expected system type and a string explaining how that system type was chosen.  For the rule testing G3_1_1b, it is only asking whether the system was chosen from Table G3.1.1, not exactly how it got there: `zones_and_systems[zone] = [secondary_system_type[0], "G3_1_1b"]`
 
 - G3.1.1c "If the baseline HVAC system type is 5, 6, 7, 8, 9, 10, 11, 12, or 13 use separate single-zone systems conforming with the requirements of system 3 or system 4 for any HVAC zones that have occupancy, internal gains, or schedules that differ significantly from the rest of the HVAC zones served by the system. The total peak internal gains that differ by 10 Btu/h·ft2 or more from the average of other HVAC zones served by the system, or schedules that differ by more than 40 equivalent full-load hours per week from other spaces served by the system, are considered to differ significantly. Examples where this exception may be applicable include but are not limited to natatoriums and continually occupied security areas. This exception does not apply to computer rooms."
-- create a list of the baseline system types specified in G3.1.1c: `c_system_types = ["SYS-5","SYS-6","SYS-7","SYS-8","SYS-9","SYS-10","SYS-11","SYS-12","SYS-13"]
-- loop through the zones_and_systems to see if any of the zones have one of the above systems: `for zone in zones_and_systems:`
-	- check to see if the expected system type is one of the above: `if zones_and_systems[zone][0] in c_system_types:`
-		- use the function zone_meets_G3_1_1c to see if the zone meets the requirements: `if zone_meets_G3_1_1c(B-RMR,zone) == "C":`
-			- the zone meets the G3_1_1c requirements, choose system 3 or 4 based on climate zone: `if is_CZ_0_to_3a(climate_zone):`
-				- set the system to "SYS-3" and source to "G3_1_1c": `zones_and_systems[zone] = ["SYS-3","G3_1_1c"]`
-			- else if the climate zone is_CZ_3b_3c_and_4_to_8: `elsif is_CZ_3b_3c_and_4_to_8(climate_zone):`
-				- set the system to "SYS-4" and source to "G3_1_1c": `zones_and_systems[zone] = ["SYS-4","G3_1_1c"]`
+- loop through the zones_and_systems to see if any of the zones meets Ge.1.1.c: `for zone in zones_and_systems:`
+	- use the function does_zone_meet_G3_1_1c to determine if this zone meets this requirement: `if does_zone_meet_G3_1_1c(B_RMI,zone,zones_and_systems[zone][0] == YES):`
+		- the zone meets the G3_1_1c requirements, choose system 3 or 4 based on climate zone: `if is_CZ_0_to_3a(climate_zone):`
+			- set the system to "SYS-3" and source to "G3_1_1c": `zones_and_systems[zone] = ["SYS-3",zones_and_systems[zone][0] + " G3_1_1c"]`
+		- else if the climate zone is_CZ_3b_3c_and_4_to_8: `elsif is_CZ_3b_3c_and_4_to_8(climate_zone):`
+			- set the system to "SYS-4" and source to "G3_1_1c": `zones_and_systems[zone] = ["SYS-4",zones_and_systems[zone][0] + " G3_1_1c"]`
 				
 - G3.1.1d "For laboratory spaces in a building having a total laboratory exhaust rate greater than 15,000 cfm, use a single system of type 5 or 7 serving only those spaces.  The lab exhaust fan shall be modeled as constant horsepower reflecting constantvolume stack discharge with outdoor air bypass."
 - not sure how to apply this one
@@ -70,7 +68,7 @@
 
 - G3.1.1e "Thermal zones designed with heating-only systems in the proposed design serving storage rooms, stairwells, vestibules, electrical/mechanical rooms, and restrooms not exhausting or transferring air from mechanically cooled thermal zones in the proposed design shall use system type 9 or 10 in the baseline building design."
 	- loop through the zones_and_systems to see if any of the zones meets this requirement: `for zone in zones_and_systems:`
-		- use the function zone_meets_G3_1_1e to determine whether to change the system type.  Note that this function can return "E" - meaning it mees the requirements of G3.1.1e, or "UNDEFINED" or "E_T" - which indicates that there is transfer air in the zone.  For assigning expected systems, only "E" will be used.  The other cases will be picked up in the rules related to G3.1.1e: `if zone_meets_G3_1_1e(P-RMR,B-RMR,zone) == "E":`
+		- use the function zone_meets_G3_1_1e to determine whether to change the system type (we are using != NO instead of YES, because the function can return MAYBE_VESTIBULE or LIKELY_VESTIBULE.  Here we will assign any "maybe's or "likelies" to the new system type.  The rule itself will deal with the uncertainty of vestibules using the function is_zone_a_vestibule): `if zone_meets_G3_1_1e(P-RMR,B-RMR,zone) != NO:`
 			- choose system 9 or 10 based on climate zone: `if is_CZ_0_to_3a(climate_zone):`
 				- set the system to "SYS-9" and source to "G3_1_1e": `zones_and_systems[zone] = ["SYS-9","G3_1_1e"]`
 			- else if the climate zone is_CZ_3b_3c_and_4_to_8: `elsif is_CZ_3b_3c_and_4_to_8(climate_zone):`
