@@ -9,17 +9,17 @@ from rct229.utils.jsonpath_utils import find_all
 FLUID_LOOP = schema_enums["FluidLoopOptions"]
 
 APPLICABLE_SYS_TYPES = [
-    HVAC_SYS.SYS_7",
-    HVAC_SYS.SYS_8",
-    HVAC_SYS.SYS_11_1",
-    HVAC_SYS.SYS_11_2",
-    HVAC_SYS.SYS_12",
-    HVAC_SYS.SYS_13",
-    HVAC_SYS.SYS_7B",
-    HVAC_SYS.SYS_8B",
-    HVAC_SYS.SYS_11B",
-    HVAC_SYS.SYS_12B",
-    HVAC_SYS.SYS_13B",
+    HVAC_SYS.SYS_7,
+    HVAC_SYS.SYS_8,
+    HVAC_SYS.SYS_11_1,
+    HVAC_SYS.SYS_11_2,
+    HVAC_SYS.SYS_12,
+    HVAC_SYS.SYS_13,
+    HVAC_SYS.SYS_7B,
+    HVAC_SYS.SYS_8B,
+    HVAC_SYS.SYS_11B,
+    HVAC_SYS.SYS_12B,
+    HVAC_SYS.SYS_13B,
 ]
 
 
