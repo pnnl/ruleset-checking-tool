@@ -1,9 +1,11 @@
-from rct229.ruleset_functions.baseline_systems.baseline_system_util import HVAC_SYS
-from rct229.ruleset_functions.baseline_systems.is_baseline_system_11_2 import (
-    is_baseline_system_11_2,
+from rct229.ruleset_functions.get_hw_loop_zone_list_w_area_dict import (
+    get_hw_loop_zone_list_w_area,
 )
+from rct229.schema.config import ureg
+from rct229.schema.schema_utils import quantify_rmr
+from rct229.schema.validate import schema_validate_rmr
 
-SYS_11_2_TEST_RMD = {
+GET_HW_LOOP_ZONE_LIST_W_AREA_RMD = {
     "id": "ASHRAE229 1",
     "ruleset_model_instances": [
         {
@@ -24,37 +26,64 @@ SYS_11_2_TEST_RMD = {
                                         {
                                             "id": "VAV Air Terminal 1",
                                             "is_supply_ducted": True,
+                                            "heating_from_loop": "Boiler Loop 1",
+                                            "heating_source": "HOT_WATER",
                                             "type": "VARIABLE_AIR_VOLUME",
-                                            "served_by_heating_ventilation_air_conditioning_system": "System Type 11.2",
+                                            "served_by_heating_ventilation_air_conditioning_system": "System 7",
                                         }
                                     ],
+                                    "spaces": [{"id": "Space 1", "floor_area": 10}],
                                 },
                                 {
-                                    "id": "Thermal Zone 1A",
+                                    "id": "Thermal Zone 2",
                                     "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
                                     "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                     "terminals": [
                                         {
-                                            "id": "VAV Air Terminal 1A",
+                                            "id": "VAV Air Terminal 2",
                                             "is_supply_ducted": True,
-                                            "type": "VARIABLE_AIR_VOLUME",
-                                            "served_by_heating_ventilation_air_conditioning_system": "System Type 11.2A",
+                                            "type": "CONSTANT_VOLUME",
+                                            "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                        }
+                                    ],
+                                    "spaces": [
+                                        {
+                                            "id": "Space 2",
+                                            "floor_area": 20,
+                                        }
+                                    ],
+                                },
+                                {
+                                    "id": "Thermal Zone 3",
+                                    "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                    "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                    "terminals": [
+                                        {
+                                            "id": "VAV Air Terminal 3",
+                                            "is_supply_ducted": True,
+                                            "served_by_heating_ventilation_air_conditioning_system": "PTAC 1",
+                                        }
+                                    ],
+                                    "spaces": [
+                                        {
+                                            "id": "Space 3",
+                                            "floor_area": 30,
                                         }
                                     ],
                                 },
                             ],
                             "heating_ventilation_air_conditioning_systems": [
                                 {
-                                    "id": "System Type 11.2",
-                                    "cooling_system": {
-                                        "id": "CHW Coil 1",
-                                        "cooling_system_type": "FLUID_LOOP",
-                                        "chilled_water_loop": "Chiller Loop 1",
-                                    },
-                                    "heating_system": {
-                                        "id": "HHW Coil 1",
+                                    "id": "System 7",
+                                    "preheat_system": {
+                                        "id": "Preheat Coil 1",
                                         "heating_system_type": "FLUID_LOOP",
                                         "hot_water_loop": "Boiler Loop 1",
+                                    },
+                                    "cooling_system": {
+                                        "id": "Cooling Coil 1",
+                                        "cooling_system_type": "FLUID_LOOP",
+                                        "chilled_water_loop": "Chiller Loop 1",
                                     },
                                     "fan_system": {
                                         "id": "VAV Fan System 1",
@@ -64,22 +93,20 @@ SYS_11_2_TEST_RMD = {
                                     },
                                 },
                                 {
-                                    "id": "System Type 11.2A",
+                                    "id": "PTAC 1",
                                     "cooling_system": {
-                                        "id": "CHW Coil 1A",
-                                        "cooling_system_type": "FLUID_LOOP",
-                                        "chilled_water_loop": "Purchased CHW Loop 1",
+                                        "id": "DX Coil 1",
+                                        "cooling_system_type": "DIRECT_EXPANSION",
                                     },
                                     "heating_system": {
-                                        "id": "HHW Coil 1A",
+                                        "id": "HHW Coil 1",
                                         "heating_system_type": "FLUID_LOOP",
                                         "hot_water_loop": "Boiler Loop 1",
                                     },
                                     "fan_system": {
-                                        "id": "VAV Fan System 1A",
-                                        "fan_control": "VARIABLE_SPEED_DRIVE",
-                                        "supply_fans": [{"id": "Supply Fan 1A"}],
-                                        "return_fans": [{"id": "Return Fan 1A"}],
+                                        "id": "CAV Fan System 1",
+                                        "fan_control": "CONSTANT",
+                                        "supply_fans": [{"id": "Supply Fan 1"}],
                                     },
                                 },
                             ],
@@ -94,32 +121,6 @@ SYS_11_2_TEST_RMD = {
                     "design_capacity": 117228.44444444445,
                 }
             ],
-            "chillers": [
-                {
-                    "id": "Chiller 1",
-                    "cooling_loop": "Chiller Loop 1",
-                    "energy_source_type": "ELECTRICITY",
-                }
-            ],
-            "external_fluid_source": [
-                {
-                    "id": "Purchased CHW 1",
-                    "loop": "Purchased CHW Loop 1",
-                    "type": "CHILLED_WATER",
-                }
-            ],
-            "pumps": [
-                {
-                    "id": "HW Pump 1",
-                    "loop_or_piping": "Boiler Loop 1",
-                    "speed_control": "FIXED_SPEED",
-                },
-                {
-                    "id": "Chiller Pump 1",
-                    "loop_or_piping": "Chiller Loop 1",
-                    "speed_control": "FIXED_SPEED",
-                },
-            ],
             "fluid_loops": [
                 {
                     "id": "Boiler Loop 1",
@@ -129,33 +130,18 @@ SYS_11_2_TEST_RMD = {
                         "minimum_flow_fraction": 0.25,
                     },
                 },
-                {"id": "Chiller Loop 1", "type": "COOLING"},
-                {"id": "Purchased CHW Loop 1", "type": "COOLING"},
             ],
         }
     ],
 }
 
-
-def test_is_baseline_system__11_2():
-    assert (
-        is_baseline_system_11_2(
-            SYS_11_2_TEST_RMD["ruleset_model_instances"][0],
-            "System Type 11.2",
-            ["VAV Air Terminal 1"],
-            ["Thermal Zone 1"],
-        )
-        == HVAC_SYS.SYS_11_2
-    )
+TEST_RMI = quantify_rmr(GET_HW_LOOP_ZONE_LIST_W_AREA_RMD)["ruleset_model_instances"][0]
 
 
-def test_is_baseline_system__11_2A():
-    assert (
-        is_baseline_system_11_2(
-            SYS_11_2_TEST_RMD["ruleset_model_instances"][0],
-            "System Type 11.2A",
-            ["VAV Air Terminal 1A"],
-            ["Thermal Zone 1A"],
-        )
-        == HVAC_SYS.SYS_11_2A
-    )
+def test__get_hw_loop_zone_list_w_area__true():
+    assert get_hw_loop_zone_list_w_area(TEST_RMI) == {
+        "Boiler Loop 1": {
+            "zone_list": ["Thermal Zone 1", "Thermal Zone 2", "Thermal Zone 3"],
+            "total_area": 60 * ureg.m2,
+        }
+    }
