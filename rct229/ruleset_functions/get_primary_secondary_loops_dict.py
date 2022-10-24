@@ -1,26 +1,25 @@
-from itertools import chain
-
 from rct229.data.schema_enums import schema_enums
 from rct229.ruleset_functions.baseline_systems.baseline_system_util import (
     find_exactly_one_fluid_loop,
 )
+from rct229.ruleset_functions.get_baseline_system_types import get_baseline_system_types
 from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all
 
 FLUID_LOOP = schema_enums["FluidLoopOptions"]
 
 APPLICABLE_SYS_TYPES = [
-    "SYS-7",
-    "SYS-8",
-    "SYS-11.1",
-    "SYS-11.2",
-    "SYS-12",
-    "SYS-13",
-    "SYS-7B",
-    "SYS-8B",
-    "SYS-11B",
-    "SYS-12B",
-    "SYS-13B",
+    HVAC_SYS.SYS_7",
+    HVAC_SYS.SYS_8",
+    HVAC_SYS.SYS_11_1",
+    HVAC_SYS.SYS_11_2",
+    HVAC_SYS.SYS_12",
+    HVAC_SYS.SYS_13",
+    HVAC_SYS.SYS_7B",
+    HVAC_SYS.SYS_8B",
+    HVAC_SYS.SYS_11B",
+    HVAC_SYS.SYS_12B",
+    HVAC_SYS.SYS_13B",
 ]
 
 
@@ -46,8 +45,8 @@ def get_primary_secondary_loops_dict(rmi_b):
 
     applicable_hvac_ids = [
         hvac_id
-        for hvac_id in baseline_hvac_system_dict[sys_type]
         for sys_type in APPLICABLE_SYS_TYPES
+        for hvac_id in baseline_hvac_system_dict[sys_type]
     ]
     applicable_hvac_systems = [
         hvac
@@ -69,9 +68,9 @@ def get_primary_secondary_loops_dict(rmi_b):
 
     # This flag will be set if the for loop breaks prematurely
     for_break_flag = False
-    # Interate through cooling type fluid loops
+    # Iterate through cooling type fluid loops
     for chilled_fluid_loop in find_all(
-        f'fluid_loops[*][?(@.type="{FLUID_LOOP.COOLING}")]'
+        f'fluid_loops[*][?(@.type="{FLUID_LOOP.COOLING}")]', rmi_b
     ):
         cfl_id = chilled_fluid_loop["id"]
         if cfl_id in chiller_loop_ids and cfl_id in non_process_chw_coil_loop_ids:
@@ -96,16 +95,16 @@ def get_primary_secondary_loops_dict(rmi_b):
             else:
                 secondary_loop_ids.append(cfl_id)
 
-    # Use set() to avoid the possiblity of duplicates in child_loop_ids
+    # Use set() to avoid the possibility of duplicates in child_loop_ids
     if for_break_flag or set(child_loop_ids) != set(secondary_loop_ids):
         primary_secondary_loop_dict = {}
     else:
         primary_secondary_loop_dict = {
             primary_loop_id: [
                 secondary_loop_id
-                for secondary_loop_id in find_exactly_one_fluid_loop(primary_loop_id)[
-                    "child_loops"
-                ]
+                for secondary_loop_id in find_exactly_one_fluid_loop(
+                    primary_loop_id, rmi_b
+                )["child_loops"]
             ]
             for primary_loop_id in primary_loop_ids
         }
