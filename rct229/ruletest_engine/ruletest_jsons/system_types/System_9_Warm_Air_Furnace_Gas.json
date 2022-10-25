@@ -27,10 +27,11 @@
                             ],
                             "heating_ventilation_air_conditioning_systems": [
                                 {
+                                    "id": "System 9",
                                     "heating_system": {
                                         "id": "Furnace Coil 1",
-                                        "heating_system_type": "FLUID_LOOP",
-                                        "hot_water_loop": "Purchased HW Loop 1"
+                                        "heating_system_type": "FURNACE",
+                                        "energy_source_type": "NATURAL_GAS"
                                     },
                                     "fan_system": {
                                         "id": "CAV Fan System 1",
@@ -50,26 +51,6 @@
                             ]
                         }
                     ]
-                }
-            ],
-            "external_fluid_source": [
-                {
-                    "id": "Purchased HW 1",
-                    "loop": "Purchased HW Loop 1",
-                    "type": "HOT_WATER"
-                }
-            ],
-            "pumps": [
-                {
-                    "id": "HW Pump 1",
-                    "loop_or_piping": "Purchased HW Loop 1",
-                    "speed_control": "FIXED_SPEED"
-                }
-            ],
-            "fluid_loops": [
-                {
-                    "id": "Purchased HW Loop 1",
-                    "type": "HEATING"
                 }
             ]
         }
