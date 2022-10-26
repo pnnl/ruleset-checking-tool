@@ -115,7 +115,7 @@ def get_zone_conditioning_category_dict(climate_zone, building):
                 else ZERO.POWER
             )
             + (
-                hvac_systems_dict[hvac_sys_id]["preheat_system"]["heat_capacity"]
+                hvac_systems_dict[hvac_sys_id]["preheat_system"]["design_capacity"]
                 if "preheat_system" in hvac_systems_dict[hvac_sys_id]
                 # Handle missing preheat_system
                 else ZERO.POWER

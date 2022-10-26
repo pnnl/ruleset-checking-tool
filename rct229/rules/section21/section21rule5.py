@@ -4,8 +4,15 @@ from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedB
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 from rct229.ruleset_functions.baseline_systems.baseline_system_util import HVAC_SYS
 from rct229.ruleset_functions.get_baseline_system_types import get_baseline_system_types
-from rct229.ruleset_functions.get_hw_loop_zone_list_w_area_dict import get_hw_loop_zone_list_w_area
-from rct229.ruleset_functions.get_zone_conditioning_category_dict import (get_zone_conditioning_category_dict, ZoneConditioningCategory as ZCC)
+from rct229.ruleset_functions.get_hw_loop_zone_list_w_area_dict import (
+    get_hw_loop_zone_list_w_area,
+)
+from rct229.ruleset_functions.get_zone_conditioning_category_dict import (
+    ZoneConditioningCategory as ZCC,
+)
+from rct229.ruleset_functions.get_zone_conditioning_category_dict import (
+    get_zone_conditioning_category_dict,
+)
 from rct229.schema.config import ureg
 from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all, find_exactly_one_with_field_value
@@ -20,7 +27,7 @@ APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_1A,
     HVAC_SYS.SYS_7A,
     HVAC_SYS.SYS_11_2A,
-    HVAC_SYS.SYS_12A
+    HVAC_SYS.SYS_12A,
 ]
 
 FLUID_LOOP = schema_enums["FluidLoopOptions"]
@@ -29,6 +36,7 @@ HEATING_LOOP_CONDITIONED_AREA_THRESHOLD = 15000 * ureg("ft2")
 
 class Section21Rule5(RuleDefinitionListIndexedBase):
     """Rule 5 of ASHRAE 90.1-2019 Appendix G Section 21 (Hot water loop)"""
+
     def __init__(self):
         super(Section21Rule5, self).__init__(
             rmrs_used=UserBaselineProposedVals(False, True, False),
@@ -46,7 +54,7 @@ class Section21Rule5(RuleDefinitionListIndexedBase):
                 rmrs_used=UserBaselineProposedVals(False, True, False),
                 each_rule=Section21Rule5.RulesetModelInstanceRule.BoilerLoop(),
                 index_rmr="baseline",
-                list_path="$fluid_loops[*]",
+                list_path="$.fluid_loops[*]",
             )
 
         def is_applicable(self, context, data=None):
@@ -70,12 +78,15 @@ class Section21Rule5(RuleDefinitionListIndexedBase):
             climate_zone = data["climate_zone"]
             # join multiple dicts as temp solution. zone_cond_cat function may upgrade to rmi level
             zone_conditioning_category_dict = {}
-            for bldg in find_all("$buildings[*]", rmi_b):
-                zone_conditioning_category_dict = {**zone_conditioning_category_dict, **get_zone_conditioning_category_dict(climate_zone, bldg)}
+            for bldg in find_all("$.buildings[*]", rmi_b):
+                zone_conditioning_category_dict = {
+                    **zone_conditioning_category_dict,
+                    **get_zone_conditioning_category_dict(climate_zone, bldg),
+                }
             loop_zone_list_w_area_dict = get_hw_loop_zone_list_w_area(rmi_b)
             # boiler to loop dict
             loop_attach_boiler_dict = {}
-            for boiler in find_all("$boilers[*]", rmi_b):
+            for boiler in find_all("$.boilers[*]", rmi_b):
                 loop_id = getattr_(boiler, "boiler", "loop")
                 if loop_id not in loop_attach_boiler_dict.keys():
                     loop_attach_boiler_dict[loop_id] = list()
@@ -83,13 +94,26 @@ class Section21Rule5(RuleDefinitionListIndexedBase):
             # boiler capacity dict
             boiler_capacity_dict = {
                 boiler["id"]: getattr_(boiler, "boiler", "rated_capacity")
-                for boiler in find_all("$boilers[*]", rmi_b)
+                for boiler in find_all("$.boilers[*]", rmi_b)
             }
             # calculate zone area map based on the zone's conditioning category
             zone_area_dict = {
-                zone_id: pint_sum(find_all("$..floor_area", find_exactly_one_with_field_value("$..zones[*]", "id", zone_id, rmi_b)), ZERO.AREA)
+                zone_id: pint_sum(
+                    find_all(
+                        "$..floor_area",
+                        find_exactly_one_with_field_value(
+                            "$..zones[*]", "id", zone_id, rmi_b
+                        ),
+                    ),
+                    ZERO.AREA,
+                )
                 for zone_id in zone_conditioning_category_dict.keys()
-                if zone_conditioning_category_dict[zone_id] in [ZCC.CONDITIONED_MIXED, ZCC.CONDITIONED_RESIDENTIAL, ZCC.CONDITIONED_NON_RESIDENTIAL]
+                if zone_conditioning_category_dict[zone_id]
+                in [
+                    ZCC.CONDITIONED_MIXED,
+                    ZCC.CONDITIONED_RESIDENTIAL,
+                    ZCC.CONDITIONED_NON_RESIDENTIAL,
+                ]
             }
             return {
                 **data,
@@ -97,14 +121,17 @@ class Section21Rule5(RuleDefinitionListIndexedBase):
                 "loop_zone_list_w_area_dict": loop_zone_list_w_area_dict,
                 "loop_attach_boiler_dict": loop_attach_boiler_dict,
                 "boiler_capacity_dict": boiler_capacity_dict,
-                "zone_area_dict": zone_area_dict
+                "zone_area_dict": zone_area_dict,
             }
 
         def list_filter(self, context_item, data):
             fluid_loop = context_item.baseline
             loop_attach_boiler_dict = data["loop_attach_boiler_dict"]
             # Only applies to heating loop with boilers
-            return getattr_(fluid_loop, "fluid_loop", "type") == FLUID_LOOP.HEATING and fluid_loop["id"] in loop_attach_boiler_dict.keys()
+            return (
+                getattr_(fluid_loop, "fluid_loops", "type") == FLUID_LOOP.HEATING
+                and fluid_loop["id"] in loop_attach_boiler_dict.keys()
+            )
 
         class BoilerLoop(RuleDefinitionBase):
             def __init__(self):
@@ -118,36 +145,57 @@ class Section21Rule5(RuleDefinitionListIndexedBase):
             def get_calc_vals(self, context, data=None):
                 boiler_loop = context.baseline
                 boiler_loop_id = boiler_loop["id"]
-                zone_conditioning_category_dict = data["zone_conditioning_category_dict"]
+                zone_conditioning_category_dict = data[
+                    "zone_conditioning_category_dict"
+                ]
                 loop_zone_list_w_area_dict = data["loop_zone_list_w_area_dict"]
                 loop_attach_boiler_dict = data["loop_attach_boiler_dict"]
                 boiler_capacity_dict = data["boiler_capacity_dict"]
                 zone_area_dict = data["zone_area_dict"]
 
                 loop_zone_list = loop_zone_list_w_area_dict[boiler_loop_id]["zone_list"]
-                heating_loop_conditioned_zone_area = loop_zone_list_w_area_dict[boiler_loop_id]["zone_list"]
+                heating_loop_conditioned_zone_area = loop_zone_list_w_area_dict[
+                    boiler_loop_id
+                ]["total_area"]
 
                 # check indirectly conditioned zones, add them to the total area
                 for zone_id in zone_conditioning_category_dict.keys():
-                    if zone_conditioning_category_dict[zone_id] in [ZCC.CONDITIONED_MIXED, ZCC.CONDITIONED_RESIDENTIAL, ZCC.CONDITIONED_NON_RESIDENTIAL] and zone_id not in loop_zone_list:
+                    if (
+                        zone_conditioning_category_dict[zone_id]
+                        in [
+                            ZCC.CONDITIONED_MIXED,
+                            ZCC.CONDITIONED_RESIDENTIAL,
+                            ZCC.CONDITIONED_NON_RESIDENTIAL,
+                        ]
+                        and zone_id not in loop_zone_list
+                    ):
                         heating_loop_conditioned_zone_area += zone_area_dict[zone_id]
 
                 # check number of boilers attach to this loop
                 num_boilers = len(loop_attach_boiler_dict[boiler_loop_id])
-                boiler_capacity_list = [boiler_capacity_dict[boiler_id] for boiler_id in boiler_capacity_dict.keys() if boiler_id in loop_attach_boiler_dict[boiler_loop_id]]
+                boiler_capacity_list = [
+                    boiler_capacity_dict[boiler_id]
+                    for boiler_id in boiler_capacity_dict.keys()
+                    if boiler_id in loop_attach_boiler_dict[boiler_loop_id]
+                ]
 
                 return {
                     "heating_loop_conditioned_zone_area": heating_loop_conditioned_zone_area,
                     "num_boilers": num_boilers,
-                    "boiler_capacity_list": boiler_capacity_list
+                    "boiler_capacity_list": boiler_capacity_list,
                 }
 
             def rule_check(self, context, calc_vals=None, data=None):
-                heating_loop_conditioned_zone_area = calc_vals["heating_loop_conditioned_zone_area"]
+                heating_loop_conditioned_zone_area = calc_vals[
+                    "heating_loop_conditioned_zone_area"
+                ]
                 num_boilers = calc_vals["num_boilers"]
                 boiler_capacity_list = calc_vals["boiler_capacity_list"]
-                return{
-                    heating_loop_conditioned_zone_area <= HEATING_LOOP_CONDITIONED_AREA_THRESHOLD and num_boilers == 1
-                    or
-                    num_boilers == 2 and len(boiler_capacity_list) == 2 and boiler_capacity_list[0] == boiler_capacity_list[1]
+                return {
+                    heating_loop_conditioned_zone_area
+                    <= HEATING_LOOP_CONDITIONED_AREA_THRESHOLD
+                    and num_boilers == 1
+                    or num_boilers == 2
+                    and len(boiler_capacity_list) == 2
+                    and boiler_capacity_list[0] == boiler_capacity_list[1]
                 }
