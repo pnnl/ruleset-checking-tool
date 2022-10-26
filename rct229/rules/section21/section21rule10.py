@@ -4,10 +4,11 @@ from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedB
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 from rct229.ruleset_functions.baseline_systems.baseline_system_util import HVAC_SYS
 from rct229.ruleset_functions.get_baseline_system_types import get_baseline_system_types
-from rct229.ruleset_functions.get_hw_loop_zone_list_w_area_dict import get_hw_loop_zone_list_w_area
+from rct229.ruleset_functions.get_hw_loop_zone_list_w_area_dict import (
+    get_hw_loop_zone_list_w_area,
+)
 from rct229.schema.config import ureg
 from rct229.utils.assertions import getattr_
-
 
 APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_1,
@@ -49,8 +50,8 @@ class Section21Rule10(RuleDefinitionListIndexedBase):
             index_rmr="baseline",
             id="21-10",
             description="When the building is modeled with HHW plant (served by either boiler(s) or purchased hot "
-                        "water/steam), the hot water pump shall be modeled as riding the pump curve if the hot water "
-                        "system serves less than 120,000 ft^2 otherwise it shall be modeled with a VFD.",
+            "water/steam), the hot water pump shall be modeled as riding the pump curve if the hot water "
+            "system serves less than 120,000 ft^2 otherwise it shall be modeled with a VFD.",
             rmr_context="ruleset_model_instances/0",
             list_path="pumps[*]",
         )
@@ -76,9 +77,7 @@ class Section21Rule10(RuleDefinitionListIndexedBase):
         # to avoid pumps in service water heating system
         loop_zone_list_w_area_dict = get_hw_loop_zone_list_w_area(rmi_b)
 
-        return {
-            "loop_zone_list_w_area_dict": loop_zone_list_w_area_dict
-        }
+        return {"loop_zone_list_w_area_dict": loop_zone_list_w_area_dict}
 
     def list_filter(self, context_item, data):
         pump = context_item.baseline
@@ -104,14 +103,10 @@ class Section21Rule10(RuleDefinitionListIndexedBase):
 
             return {
                 "pump_speed_control_type": getattr_(pump_b, "Pump", "speed_control"),
-                "target_speed_control_type": target_pump_type
+                "target_speed_control_type": target_pump_type,
             }
 
         def rule_check(self, context, calc_vals=None, data=None):
             pump_speed_control_type = calc_vals["pump_speed_control_type"]
             target_speed_control_type = calc_vals["target_speed_control_type"]
             return pump_speed_control_type == target_speed_control_type
-
-
-
-
