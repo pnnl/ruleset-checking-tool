@@ -13,7 +13,7 @@ APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_13,
     HVAC_SYS.SYS_7B,
     HVAC_SYS.SYS_8B,
-    HVAC_SYS.SYS_11B,
+    HVAC_SYS.SYS_11_1B,
     HVAC_SYS.SYS_12B,
     HVAC_SYS.SYS_13B,
 ]
@@ -48,7 +48,9 @@ class Section22Rule33(RuleDefinitionListIndexedBase):
                 if len(baseline_system_types_dict[hvac_type]) > 0
             ]
             # primary_secondary_loop_dictionary = get_primary_secondary_loops(rmi_b) # TODO this should be updated!!
-            len_primary_secondary_loop_dictionary = 1
+            primary_secondary_loop_dictionary = {
+                "Chiller Loop 1": ["Cooling Child Loop 1"]
+            }  # TODO this should be removed after get_primary_secondary_loops is used
             return (
                 any(
                     [
@@ -57,23 +59,25 @@ class Section22Rule33(RuleDefinitionListIndexedBase):
                     ]
                 )
                 and True
-                if len(len_primary_secondary_loop_dictionary) != 0
+                if len(primary_secondary_loop_dictionary) != 0
                 else False
             )
 
         def get_calc_vals(self, context, data=None):
             rmi_b = context.baseline
             # primary_secondary_loop_dictionary = get_primary_secondary_loops(rmi_b) # TODO this should be updated!!
-            primary_secondary_loop_dictionary = {"Primary1": ["secondary1", "secondary2"]}
+            primary_secondary_loop_dictionary = {
+                "Chiller Loop 1": ["Cooling Child Loop 1"]
+            }  # TODO this should be removed after get_primary_secondary_loops is used
             num_primary_loops = len(primary_secondary_loop_dictionary)
             num_secondary_loops = sum(
                 [
-                    primary_secondary_loop_dictionary[primary_loop]
+                    len(primary_secondary_loop_dictionary[primary_loop])
                     for primary_loop in primary_secondary_loop_dictionary.keys()
                 ]
             )
             return {
-                "num_primary_loops ": num_primary_loops,
+                "num_primary_loops": num_primary_loops,
                 "num_secondary_loops": num_secondary_loops,
             }
 
