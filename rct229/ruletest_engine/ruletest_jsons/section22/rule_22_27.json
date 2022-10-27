@@ -3,12 +3,12 @@
         "Section": 22,
         "Rule": 27,
         "Test": "a",
-        "test_description": "Baseline building is system type 11 and is correctly modeled with the is_condenser_water_pump_interlocked key",
+        "test_description": "Baseline building is system type 7 and is correctly modeled with the is_condenser_water_pump_interlocked key",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-27",
-            "ruleset_reference": "G3.1.3.9",
-            "rule_description": "For chilled-water systems served by chiller(s) and serves baseline System-11, the baseline building constant-volume primary pump power shall be modeled as 12 W/gpm.",
+            "ruleset_reference": "G3.1.3.11",
+            "rule_description": "Each baseline chiller shall be modeled with separate condenser-water pump interlocked to operate with the associated chiller.",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
@@ -84,6 +84,11 @@
                                                             "id": "Return Fan 1"
                                                         }
                                                     ]
+                                                },
+                                                "preheat_system": {
+                                                    "id": "Preheat Coil 1",
+                                                    "heating_system_type": "FLUID_LOOP",
+                                                    "hot_water_loop": "Boiler Loop 1"
                                                 }
                                             }
                                         ]
@@ -136,12 +141,12 @@
         "Section": 22,
         "Rule": 27,
         "Test": "b",
-        "test_description": "Baseline building is system type 11 and is incorrectly modeled with the is_condenser_water_pump_interlocked key",
+        "test_description": "Baseline building is system type 7 and is incorrectly modeled with the is_condenser_water_pump_interlocked key",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-27",
-            "ruleset_reference": "G3.1.3.9",
-            "rule_description": "For chilled-water systems served by chiller(s) and serves baseline System-11, the baseline building constant-volume primary pump power shall be modeled as 12 W/gpm.",
+            "ruleset_reference": "G3.1.3.11",
+            "rule_description": "Each baseline chiller shall be modeled with separate condenser-water pump interlocked to operate with the associated chiller.",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
@@ -217,6 +222,11 @@
                                                             "id": "Return Fan 1"
                                                         }
                                                     ]
+                                                },
+                                                "preheat_system": {
+                                                    "id": "Preheat Coil 1",
+                                                    "heating_system_type": "FLUID_LOOP",
+                                                    "hot_water_loop": "Boiler Loop 1"
                                                 }
                                             }
                                         ]

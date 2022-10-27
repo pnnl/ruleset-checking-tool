@@ -48,6 +48,7 @@ class Section22Rule27(RuleDefinitionListIndexedBase):
                 for available_type in available_type_lists
             ]
         )
+
     class ChillerRule(RuleDefinitionBase):
         def __init__(self):
             super(Section22Rule27.ChillerRule, self).__init__(
