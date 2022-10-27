@@ -4,7 +4,7 @@
 **Description:** Determines whether the building is in climate zone 0 to 3a - used for Appendix G Table G3.1.1-3
 
 **Inputs:**
-- **climate_zone**
+- **climate_zone:** `ClimateZoneOptions2019ASHRAE901`  # or is it: ASHRAE229.weather.climate_zone?
 
 **Returns:**  
 - **result**: a boolean TRUE or FALSE
