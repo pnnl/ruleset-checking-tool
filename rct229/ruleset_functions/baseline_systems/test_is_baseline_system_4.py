@@ -1,6 +1,6 @@
-from rct229.schema.validate import schema_validate_rmr
+# hvac_id = "System 4" => Sys_3, [Thermal Zone 1], [Air Terminal]
 
-SYS_2_RMD = {
+SYS_4_RMD = {
     "id": "ASHRAE229 1",
     "ruleset_model_instances": [
         {
@@ -19,29 +19,30 @@ SYS_2_RMD = {
                                     "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                     "terminals": [
                                         {
-                                            "id": "PTHP Terminal 1",
+                                            "id": "Air Terminal",
                                             "is_supply_ducted": True,
                                             "type": "CONSTANT_AIR_VOLUME",
-                                            "served_by_heating_ventilation_air_conditioning_system": "PTHP 1",
+                                            "served_by_heating_ventilation_air_conditioning_system": "System Type 4",
                                         }
                                     ],
                                 }
                             ],
                             "heating_ventilation_air_conditioning_systems": [
                                 {
-                                    "id": "PTHP 1",
+                                    "id": "System Type 4",
                                     "cooling_system": {
-                                        "id": "HP Cooling Coil 1",
+                                        "id": "DX Coil 1",
                                         "cooling_system_type": "DIRECT_EXPANSION",
                                     },
                                     "heating_system": {
-                                        "id": "HP Heating Coil 1",
+                                        "id": "HP Coil 1",
                                         "heating_system_type": "HEAT_PUMP",
                                     },
                                     "fan_system": {
                                         "id": "CAV Fan System 1",
                                         "fan_control": "CONSTANT",
                                         "supply_fans": [{"id": "Supply Fan 1"}],
+                                        "return_fans": [{"id": "Return Fan 1"}],
                                     },
                                 }
                             ],
@@ -52,10 +53,3 @@ SYS_2_RMD = {
         }
     ],
 }
-
-
-def test__TEST_RMD_baseline_system_2__is_valid():
-    schema_validation_result = schema_validate_rmr(SYS_2_RMD)
-    assert schema_validation_result[
-        "passed"
-    ], f"Schema error: {schema_validation_result['error']}"
