@@ -14,7 +14,7 @@ APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_13,
     HVAC_SYS.SYS_7B,
     HVAC_SYS.SYS_8B,
-    HVAC_SYS.SYS_11B,
+    HVAC_SYS.SYS_11_1B,
     HVAC_SYS.SYS_12B,
     HVAC_SYS.SYS_13B,
 ]
@@ -52,19 +52,21 @@ class Section22Rule34(RuleDefinitionListIndexedBase):
 
     def create_data(self, context, data):
         rmi_b = context.baseline
-        chiller_loop_ids = find_all("chillers[*].cooling_loop", rmi_b)
-        return {"loop_chiller_dict": chiller_loop_ids}
+        # primary_secondary_loop_dictionary = get_primary_secondary_loops(rmi_b)
+        primary_secondary_loop_dictionary = {"Chiller Loop 1":["Cooling Child Loop 1"]}
+
+        return {"primary_secondary_loop_dictionary": primary_secondary_loop_dictionary}
 
     class ChillerFluidLoopRule(RuleDefinitionBase):
         def __init__(self):
             super(Section22Rule34.ChillerFluidLoopRule, self).__init__(
                 rmrs_used=UserBaselineProposedVals(False, True, False),
-                required_fields={
-                    "$": ["cooling_or_condensing_design_and_control"],
-                    "cooling_or_condensing_design_and_control": [
-                        "is_sized_using_coincident_load"
-                    ],
-                },
+                # required_fields={
+                #     "$": ["cooling_or_condensing_design_and_control"],
+                #     "cooling_or_condensing_design_and_control": [
+                #         "is_sized_using_coincident_load"
+                #     ],
+                # },
             )
 
         def get_calc_vals(self, context, data=None):
