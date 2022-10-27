@@ -2,7 +2,7 @@ import json
 from enum import Enum
 from os.path import dirname, join
 
-from jsonpath_ng import parse
+from rct229.utils.jsonpath_utils import create_jsonpath_value_dict
 
 """This module exports the dictionary schema_enums that provides access to the
 enumerations in the schema files.
@@ -36,20 +36,30 @@ with open(_enum_schema_path) as json_file:
     _enum_schema_obj = json.load(json_file)
 
 # Load the schema file
-schema_path = join(dirname(__file__), "..", "schema", "ASHRAE229.schema.json")
-with open(schema_path) as json_file:
+_schema_path = join(dirname(__file__), "..", "schema", "ASHRAE229.schema.json")
+with open(_schema_path) as json_file:
     _schema_obj = json.load(json_file)
 
 # Query for all objects having an enum field
-# See jsonpath docs for parse syntax: https://pypi.org/project/jsonpath-ng/
-_enum_schema_matches = parse("$..* where enum").find(_enum_schema_obj)
-_schema_matches = parse("$..* where enum").find(_schema_obj)
-# Concatinate the two match lists
-_match_list = [*_enum_schema_matches, *_schema_matches]
+# See jsonpath2 docs for parse syntax: https://jsonpath2.readthedocs.io/en/latest/exampleusage.html
+_enum_schema_enum_jsonpath_value_dict = create_jsonpath_value_dict(
+    "$..*[?(@.enum)]", _enum_schema_obj
+)
+_schema_enum_jsonpath_value_dict = create_jsonpath_value_dict(
+    "$..*[?(@.enum)]", _schema_obj
+)
+# Merge the two dictionaries
+enum_jsonpath_value_dict = {
+    **_enum_schema_enum_jsonpath_value_dict,
+    **_schema_enum_jsonpath_value_dict,
+}
 
 # Create a dictionary of all the enumerations as dictionaries
 _enums_dict = {
-    str(match.full_path).split(".")[-1]: match.value["enum"] for match in _match_list
+    # NOTE: The jsonpath() has the form '$["a"]...["b"]' so
+    # .split('"')[-2] will pick out the 'b' from the path in this example
+    enum_jsonpath.split('"')[-2]: value["enum"]
+    for (enum_jsonpath, value) in enum_jsonpath_value_dict.items()
 }
 
 # Convert the enumerations as dictionaries to classess for easier access
