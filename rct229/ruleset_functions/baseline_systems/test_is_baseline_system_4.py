@@ -22,9 +22,9 @@ SYS_4_RMD = {
                                             "id": "Air Terminal",
                                             "is_supply_ducted": True,
                                             "type": "CONSTANT_AIR_VOLUME",
-                                            "served_by_heating_ventilation_air_conditioning_system": "System Type 4"
+                                            "served_by_heating_ventilation_air_conditioning_system": "System Type 4",
                                         }
-                                    ]
+                                    ],
                                 }
                             ],
                             "heating_ventilation_air_conditioning_systems": [
@@ -32,32 +32,24 @@ SYS_4_RMD = {
                                     "id": "System Type 4",
                                     "cooling_system": {
                                         "id": "DX Coil 1",
-                                        "cooling_system_type": "DIRECT_EXPANSION"
+                                        "cooling_system_type": "DIRECT_EXPANSION",
                                     },
                                     "heating_system": {
                                         "id": "HP Coil 1",
-                                        "heating_system_type": "HEAT_PUMP"
+                                        "heating_system_type": "HEAT_PUMP",
                                     },
                                     "fan_system": {
                                         "id": "CAV Fan System 1",
                                         "fan_control": "CONSTANT",
-                                        "supply_fans": [
-                                            {
-                                                "id": "Supply Fan 1"
-                                            }
-                                        ],
-                                        "return_fans": [
-                                            {
-                                                "id": "Return Fan 1"
-                                            }
-                                        ]
-                                    }
+                                        "supply_fans": [{"id": "Supply Fan 1"}],
+                                        "return_fans": [{"id": "Return Fan 1"}],
+                                    },
                                 }
-                            ]
+                            ],
                         }
-                    ]
+                    ],
                 }
-            ]
+            ],
         }
-    ]
+    ],
 }
