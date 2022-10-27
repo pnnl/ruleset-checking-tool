@@ -18,6 +18,9 @@
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "weather": {
+                    "climate_zone": "CZ4A"
+                },
                 "ruleset_model_instances": [
                     {
                         "id": "RMD 1",
@@ -156,6 +159,9 @@
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "weather": {
+                    "climate_zone": "CZ4A"
+                },
                 "ruleset_model_instances": [
                     {
                         "id": "RMD 1",
