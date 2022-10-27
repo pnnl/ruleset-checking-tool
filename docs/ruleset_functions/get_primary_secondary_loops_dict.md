@@ -27,15 +27,15 @@ Logic:
 
   - Check if loop type is cooling: `if fluid_loop.type == "COOLING":`
 
-    - Check if loop is connected to both chiller(s) and non-process cooling coil(s), break logic and return an empty dictionary: `if ( fluid_loop.id in chiller_loop_array ) AND ( fluid_loop in non_process_chw_coil_loop_array ): BREAK and return primary_secondary_loop_dictionary = {}`
+    - Check if loop is connected to both chiller(s) and non-process cooling coil(s), break logic and return an empty dictionary: `if ( fluid_loop in chiller_loop_array ) AND ( fluid_loop in non_process_chw_coil_loop_array ): BREAK and return primary_secondary_loop_dictionary = {}`
 
-    - Else if loop is connected to chiller(s) only: `else if fluid_loop.id in chiller_loop_array:`
+    - Else if loop is connected to chiller(s) only: `else if fluid_loop in chiller_loop_array:`
 
-      - Check if all child loops of loop serve baseline system Type-7, 8, 11.1, 11.2, 12, 13, 7b, 8b, 11.1b, 12b only (to exclude CHW loop served by process chiller(s)): `if child_loop_id in non_process_chw_coil_loop_array for child_loop_id in fluid_loop.child_loops:`
+      - Check if all child loops of loop serve baseline system Type-7, 8, 11.1, 11.2, 12, 13, 7b, 8b, 11.1b, 12b only (to exclude CHW loop served by process chiller(s)): `if child_loop in non_process_chw_coil_loop_array for child_loop in fluid_loop.child_loops:`
 
         - Save loop to primary loop array: `primary_loop_array.append(fluid_loop.id)`
 
-        - Save all child loops to child loop array: `child_loop_array.append(child_loop_id for child_loop_id in fluid_loop.child_loops)`
+        - Save all child loops to child loop array: `child_loop_array.append(child_loop_id for child_loop_id in fluid_loop.child_loops.id)`
 
     - Else if loop is connected to baseline system cooling coil(s) only: `else if fluid_loop in non_process_chw_coil_loop_array:`
 
