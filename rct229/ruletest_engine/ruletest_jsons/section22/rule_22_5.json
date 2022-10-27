@@ -1,14 +1,14 @@
 {
-    "rule-22-3-a": {
+    "rule-22-5-a": {
         "Section": 22,
-        "Rule": 3,
+        "Rule": 5,
         "Test": "a",
-        "test_description": "Baseline building is system type 7 with type 11.1 air-side system and is correctly modeled with a temperature reset type ",
+        "test_description": "Baseline building is system type 11.1 air-side system and is correctly modeled with temperature_reset_type",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "22-3",
+            "rule_id": "22-5",
             "ruleset_reference": "G3.1.3.9",
-            "rule_description": "For Baseline chilled water loop that is not purchased cooling, chilled-water supply temperature shall be reset based on outdoor dry-bulb temperature if loop does not serve any Baseline System Type-11.",
+            "rule_description": "For Baseline chilled water loop that is not purchased chilled water and serves computer room HVAC systems (Baseline   System Type-11), chilled-water supply temperature shall be reset higher based on the HVAC system requiring the most cooling.",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
@@ -18,9 +18,6 @@
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
-                "weather": {
-                    "climate_zone": "CZ4A"
-                },
                 "ruleset_model_instances": [
                     {
                         "id": "RMD 1",
@@ -40,37 +37,23 @@
                                                     {
                                                         "id": "VAV Air Terminal 1",
                                                         "is_supply_ducted": true,
-                                                        "heating_source": "HOT_WATER",
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "VAV System 1",
-                                                        "heating_from_loop": "Boiler Loop 1",
-                                                        "cooling_source": "CHILLED_WATER"
-                                                    }
-                                                ]
-                                            },
-                                            {
-                                                "id": "Thermal Zone 2",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
-                                                "terminals": [
-                                                    {
-                                                        "id": "VAV Air Terminal 2",
-                                                        "is_supply_ducted": true,
-                                                        "heating_source": "HOT_WATER",
-                                                        "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
-                                                        "heating_from_loop": "Boiler Loop 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "System 11"
                                                     }
                                                 ]
                                             }
                                         ],
                                         "heating_ventilation_air_conditioning_systems": [
                                             {
-                                                "id": "System 7",
+                                                "id": "System 11",
                                                 "cooling_system": {
                                                     "id": "CHW Coil 1",
                                                     "cooling_system_type": "FLUID_LOOP",
                                                     "chilled_water_loop": "Chiller Loop 1"
+                                                },
+                                                "heating_system": {
+                                                    "id": "Heating Coil 1",
+                                                    "heating_system_type": "ELECTRIC_RESISTANCE"
                                                 },
                                                 "fan_system": {
                                                     "id": "VAV Fan System 1",
@@ -85,23 +68,11 @@
                                                             "id": "Return Fan 1"
                                                         }
                                                     ]
-                                                },
-                                                "preheat_system": {
-                                                    "id": "Preheat Coil 1",
-                                                    "heating_system_type": "FLUID_LOOP",
-                                                    "hot_water_loop": "Boiler Loop 1"
                                                 }
                                             }
                                         ]
                                     }
                                 ]
-                            }
-                        ],
-                        "boilers": [
-                            {
-                                "id": "Boiler 1",
-                                "loop": "Boiler Loop 1",
-                                "energy_source_type": "NATURAL_GAS"
                             }
                         ],
                         "chillers": [
@@ -112,11 +83,6 @@
                         ],
                         "pumps": [
                             {
-                                "id": "Boiler Pump 1",
-                                "loop_or_piping": "Boiler Loop 1",
-                                "speed_control": "FIXED_SPEED"
-                            },
-                            {
                                 "id": "Chiller Pump 1",
                                 "loop_or_piping": "Chiller Loop 1",
                                 "speed_control": "FIXED_SPEED"
@@ -124,15 +90,11 @@
                         ],
                         "fluid_loops": [
                             {
-                                "id": "Boiler Loop 1",
-                                "type": "HEATING"
-                            },
-                            {
                                 "id": "Chiller Loop 1",
                                 "type": "COOLING",
                                 "cooling_or_condensing_design_and_control": {
                                     "id": "CCDC 1",
-                                    "temperature_reset_type": "OUTSIDE_AIR_RESET"
+                                    "temperature_reset_type": "LOAD_RESET"
                                 }
                             }
                         ]
@@ -141,16 +103,16 @@
             }
         }
     },
-    "rule-22-3-b": {
+    "rule-22-5-b": {
         "Section": 22,
-        "Rule": 3,
+        "Rule": 5,
         "Test": "b",
-        "test_description": "Baseline building is system type 7 with type 11.1 air-side system and is incorrectly modeled with a temperature reset type ",
+        "test_description": "Baseline building is system type 11.1 air-side system and is incorrectly modeled with temperature_reset_type",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "22-3",
+            "rule_id": "22-5",
             "ruleset_reference": "G3.1.3.9",
-            "rule_description": "For Baseline chilled water loop that is not purchased cooling, chilled-water supply temperature shall be reset based on outdoor dry-bulb temperature if loop does not serve any Baseline System Type-11.",
+            "rule_description": "For Baseline chilled water loop that is not purchased chilled water and serves computer room HVAC systems (Baseline   System Type-11), chilled-water supply temperature shall be reset higher based on the HVAC system requiring the most cooling.",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
@@ -160,9 +122,6 @@
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
-                "weather": {
-                    "climate_zone": "CZ4A"
-                },
                 "ruleset_model_instances": [
                     {
                         "id": "RMD 1",
@@ -182,37 +141,23 @@
                                                     {
                                                         "id": "VAV Air Terminal 1",
                                                         "is_supply_ducted": true,
-                                                        "heating_source": "HOT_WATER",
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "VAV System 1",
-                                                        "heating_from_loop": "Boiler Loop 1",
-                                                        "cooling_source": "CHILLED_WATER"
-                                                    }
-                                                ]
-                                            },
-                                            {
-                                                "id": "Thermal Zone 2",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
-                                                "terminals": [
-                                                    {
-                                                        "id": "VAV Air Terminal 2",
-                                                        "is_supply_ducted": true,
-                                                        "heating_source": "HOT_WATER",
-                                                        "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
-                                                        "heating_from_loop": "Boiler Loop 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "System 11"
                                                     }
                                                 ]
                                             }
                                         ],
                                         "heating_ventilation_air_conditioning_systems": [
                                             {
-                                                "id": "System 7",
+                                                "id": "System 11",
                                                 "cooling_system": {
                                                     "id": "CHW Coil 1",
                                                     "cooling_system_type": "FLUID_LOOP",
                                                     "chilled_water_loop": "Chiller Loop 1"
+                                                },
+                                                "heating_system": {
+                                                    "id": "Heating Coil 1",
+                                                    "heating_system_type": "ELECTRIC_RESISTANCE"
                                                 },
                                                 "fan_system": {
                                                     "id": "VAV Fan System 1",
@@ -227,23 +172,11 @@
                                                             "id": "Return Fan 1"
                                                         }
                                                     ]
-                                                },
-                                                "preheat_system": {
-                                                    "id": "Preheat Coil 1",
-                                                    "heating_system_type": "FLUID_LOOP",
-                                                    "hot_water_loop": "Boiler Loop 1"
                                                 }
                                             }
                                         ]
                                     }
                                 ]
-                            }
-                        ],
-                        "boilers": [
-                            {
-                                "id": "Boiler 1",
-                                "loop": "Boiler Loop 1",
-                                "energy_source_type": "NATURAL_GAS"
                             }
                         ],
                         "chillers": [
@@ -254,11 +187,6 @@
                         ],
                         "pumps": [
                             {
-                                "id": "Boiler Pump 1",
-                                "loop_or_piping": "Boiler Loop 1",
-                                "speed_control": "FIXED_SPEED"
-                            },
-                            {
                                 "id": "Chiller Pump 1",
                                 "loop_or_piping": "Chiller Loop 1",
                                 "speed_control": "FIXED_SPEED"
@@ -266,15 +194,11 @@
                         ],
                         "fluid_loops": [
                             {
-                                "id": "Boiler Loop 1",
-                                "type": "HEATING"
-                            },
-                            {
                                 "id": "Chiller Loop 1",
                                 "type": "COOLING",
                                 "cooling_or_condensing_design_and_control": {
                                     "id": "CCDC 1",
-                                    "temperature_reset_type": "CONSTANT"
+                                    "temperature_reset_type": "OUTSIDE_AIR_RESET"
                                 }
                             }
                         ]
