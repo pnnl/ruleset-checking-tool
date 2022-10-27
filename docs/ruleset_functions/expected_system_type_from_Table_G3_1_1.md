@@ -5,25 +5,23 @@
 
 **Inputs:**
 - **building_area_type** - ("RESIDENTIAL", "PUBLIC_ASSEMBLY", "RETAIL", "HOSPITAL", "OTHER_NON_RESIDENTIAL", "HEATED-ONLY_STORAGE")
-- **number_of_floors** - this is the bumber of floors in the building integer greater than 0
-- **area_of_BAT** - this is the total area of the building area type, including
-- **climate_zone** - this is a string - one of the options given by ClimateZoneOptions2019ASHRAE901
+- **number_of_floors** - this is the number of floors in the building integer greater than 0
+- **area_of_BAT** - this is the total area of the building area type
 
 **Returns:**  
-- **result**: a list indicating the expected system type from table G3_1_1 ("SYS-1", "SYS-2", etc) and a string that indicates how the system was chosen, for example "Buildings in CZ 0-3A with predominant HVAC BAT = public assembly, <120,000 ft2 have baseline HVAC system type 4 (PSZ HP)" - does not take into account G3.1.1 b-g
+- **result**: a dict indicating the expected system type from table G3_1_1 ("SYS-1", "SYS-2", etc) and a string that indicates how the system was chosen, for example: {"EXPECTED_SYSTEM_TYPE": "SYS-4", "SYSTEM_ORIGIN": "PUBLIC_ASSEMBLY CZ_0_to_3a < 120,000 ft2"} - does not take into account G3.1.1 b-g
  
 **Function Call:**
 - **is_CZ_0_to_3a**
-- **is_CZ_3b_3c_and_4_to_8**
 
 ## Logic:
 - create area_of_BAT_string, which will be appended to the details_of_system_selection string: `area_of_BAT_string = ""`
 - create number_of_floors_string, which will be appended to the details_of_system_selection string: `number_of_floors_string = ""`
 
-- get the climate zone category using the functions is_CZ_0_to_3a and is_CZ_3b_3c_and_4_to_8: `if is_CZ_0_to_3a(climate_zone):`
+- get the climate zone category using the functions is_CZ_0_to_3a and is_CZ_3b_3c_and_4_to_8: `if is_CZ_0_to_3a():`
 	- set climate_zone_category to CZ_0_to_3a: `climate_zone_category = "CZ_0_to_3a"
 
-- else if the climate zone is 3b, 3c or 4 to 8: `if is_CZ_3b_3c_and_4_to_8(climate_zone):`
+- else (the climate zone is 3b, 3c or 4 to 8): `else:`
 	- set climate_zone_category to CZ_3b_3c_or_4_to_8: `climate_zone_category = "CZ_3b_3c_or_4_to_8"
 
 - check if the building area type is residential: `if building_area_type == "RESIDENTIAL":`
