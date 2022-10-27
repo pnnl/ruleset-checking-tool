@@ -16,6 +16,7 @@ from rct229.ruleset_functions.baseline_systems.is_baseline_system_11_2 import (
 from rct229.ruleset_functions.get_dict_of_zones_and_terminal_units_served_by_hvac_sys import (
     get_dict_of_zones_and_terminal_units_served_by_hvac_sys,
 )
+from rct229.utils.assertions import RCTFailureException
 from rct229.utils.jsonpath_utils import find_all
 
 
@@ -86,5 +87,22 @@ def get_baseline_system_types(rmi_b):
             if hvac_sys != HVAC_SYS.UNMATCHED:
                 baseline_hvac_system_dict[hvac_sys].append(hvac_b_id)
                 continue
+
+            # Add error handling
+            hvac_sys_count = len(
+                [
+                    hvac_b_id
+                    for hvac_sys_key in baseline_hvac_system_dict.keys()
+                    if hvac_b_id in baseline_hvac_system_dict[hvac_sys_key]
+                ]
+            )
+            if hvac_sys_count == 0:
+                raise RCTFailureException(
+                    f"Error: HVAC {hvac_b_id} does not match any baseline system type."
+                )
+            elif hvac_sys_count > 1:
+                raise RCTFailureException(
+                    f"Error: HVAC {hvac_b_id} matches to multiple baseline system types - check your RMD models"
+                )
 
     return baseline_hvac_system_dict
