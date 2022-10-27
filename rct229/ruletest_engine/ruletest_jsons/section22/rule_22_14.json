@@ -18,6 +18,9 @@
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "weather": {
+                    "climate_zone": "CZ4A"
+                },
                 "ruleset_model_instances": [
                     {
                         "id": "RMD 1",
@@ -130,7 +133,7 @@
                             {
                                 "id": "Heat Rejection 1",
                                 "loop": "Chiller Loop 1",
-                                "range": -12.222222222222172
+                                "range": 10
                             }
                         ]
                     }
@@ -157,6 +160,9 @@
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
+                "weather": {
+                    "climate_zone": "CZ4A"
+                },
                 "ruleset_model_instances": [
                     {
                         "id": "RMD 1",
@@ -269,7 +275,7 @@
                             {
                                 "id": "Heat Rejection 1",
                                 "loop": "Chiller Loop 1",
-                                "range": -9.4444444444444
+                                "range": 15
                             }
                         ]
                     }
