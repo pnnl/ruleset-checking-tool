@@ -29,10 +29,7 @@ class HVAC_SYS:
     SYS_9 = "Sys-9"
     SYS_9B = "Sys-9b"
     SYS_10 = "Sys-10"
-    SYS_11B = "Sys-11b"
-    SYS_11C = "Sys-11c"
     SYS_11_1 = "Sys-11.1"
-    SYS_11_2 = "Sys-11.2"
     SYS_11_1A = "Sys-11.1a"
     SYS_11_1B = "Sys-11.1b"
     SYS_11_1C = "Sys-11.1c"
@@ -44,8 +41,6 @@ class HVAC_SYS:
     SYS_12C = "Sys-12c"
     SYS_13 = "Sys-13"
     SYS_13A = "Sys-13a"
-    SYS_13B = "Sys-13b"
-    SYS_13C = "Sys-13c"
     UNMATCHED = "Not_Sys"
 
 

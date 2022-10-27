@@ -11,8 +11,8 @@ APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_11_2,
     HVAC_SYS.SYS_11_1A,
     HVAC_SYS.SYS_11_2A,
-    HVAC_SYS.SYS_11B,
-    HVAC_SYS.SYS_11C,
+    HVAC_SYS.SYS_11_1B,
+    HVAC_SYS.SYS_11_1C,
 ]
 TEMP_RESET = schema_enums["TemperatureResetOptions"]
 
