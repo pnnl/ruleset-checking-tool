@@ -37,7 +37,7 @@
 - set area equal to the area of the predominant building area type: `area = list_building_area_types_and_zones[predominant_building_area_type]["AREA"]`
 - loop through the building area types: `for bat in list_building_area_types_and_zones:`
 	- if the bat is not equal to the predominant building area type: `if bat != predominant_building_area_type:`
-		- and if the area of this bat < 20,000 ft2: `if list_building_area_types_and_zones[bat]["AREA"] <= 20000:`
+		- and if the area of this bat <= 20,000 ft2: `if list_building_area_types_and_zones[bat]["AREA"] <= 20000:`
 			- add this area to the area value for determining predominant HVAC system type: `area = area + list_building_area_types_and_zones[bat]["AREA"]`
 - expected_system_type_list = expected_system_type_from_Table_G3_1_1(predominant_building_area_type,num_floors,area)
 - fill the zones_and_systems list with the expected system and description string for all zones (we'll overwrite the other zones in the next step): `for zone in zones_and_systems:`
