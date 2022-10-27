@@ -35,7 +35,8 @@ Logic:
 
         - Save loop to primary loop array: `primary_loop_array.append(fluid_loop.id)`
 
-        - Save all child loops to child loop array: `child_loop_array.append(child_loop_id for child_loop_id in fluid_loop.child_loops.id)`
+        - Save all child loop objects to child loop array: `child_loop_object_array.extend(list(fluid_loop.child_loops))`
+        - Save all child loop fluid loop IDs to child loop array: `child_loop_array.append(child_loop_id for child_loop_id in child_loop_object_array.id )`
 
     - Else if loop is connected to baseline system cooling coil(s) only: `else if fluid_loop in non_process_chw_coil_loop_array:`
 
