@@ -25,54 +25,59 @@ class Section22Rule33(RuleDefinitionListIndexedBase):
     def __init__(self):
         super(Section22Rule33, self).__init__(
             rmrs_used=UserBaselineProposedVals(False, True, False),
-            each_rule=Section22Rule33.ChillerFluidLoopRule(),
+            each_rule=Section22Rule33.RulesetModelInstanceRule(),
             index_rmr="baseline",
             id="22-33",
             description="Baseline chilled water system that does not use purchased chilled water must only have no more than one CHW plant.",
-            rmr_context="ruleset_model_instances/0",
-            list_path="fluid_loops[*]",
+            list_path="ruleset_model_instances[*]",
         )
 
-    def is_applicable(self, context, data=None):
-        rmi_b = context.baseline
-        baseline_system_types_dict = get_baseline_system_types(rmi_b)
-        # create a list contains all HVAC systems that are modeled in the rmi_b
-        available_type_lists = [
-            hvac_type
-            for hvac_type in baseline_system_types_dict.keys()
-            if len(baseline_system_types_dict[hvac_type]) > 0
-        ]
-        # primary_secondary_loop_dictionary = get_primary_secondary_loops(rmi_b) # TODO this should be updated!!
-        len_primary_secondary_loop_dictionary = 1
-        return (
-            any(
+    class RulesetModelInstanceRule(RuleDefinitionBase):
+        def __init__(self):
+            super(Section22Rule33.RulesetModelInstanceRule, self).__init__(
+                rmrs_used=UserBaselineProposedVals(False, True, False),
+            )
+
+        def is_applicable(self, context, data=None):
+            rmi_b = context.baseline
+            baseline_system_types_dict = get_baseline_system_types(rmi_b)
+            # create a list contains all HVAC systems that are modeled in the rmi_b
+            available_type_lists = [
+                hvac_type
+                for hvac_type in baseline_system_types_dict.keys()
+                if len(baseline_system_types_dict[hvac_type]) > 0
+            ]
+            # primary_secondary_loop_dictionary = get_primary_secondary_loops(rmi_b) # TODO this should be updated!!
+            len_primary_secondary_loop_dictionary = 1
+            return (
+                any(
+                    [
+                        available_type in APPLICABLE_SYS_TYPES
+                        for available_type in available_type_lists
+                    ]
+                )
+                and True
+                if len(len_primary_secondary_loop_dictionary) != 0
+                else False
+            )
+
+        def get_calc_vals(self, context, data=None):
+            rmi_b = context.baseline
+            # primary_secondary_loop_dictionary = get_primary_secondary_loops(rmi_b) # TODO this should be updated!!
+            primary_secondary_loop_dictionary = {"Primary1": ["secondary1", "secondary2"]}
+            num_primary_loops = len(primary_secondary_loop_dictionary)
+            num_secondary_loops = sum(
                 [
-                    available_type in APPLICABLE_SYS_TYPES
-                    for available_type in available_type_lists
+                    primary_secondary_loop_dictionary[primary_loop]
+                    for primary_loop in primary_secondary_loop_dictionary.keys()
                 ]
             )
-            and True
-            if len(len_primary_secondary_loop_dictionary) != 0
-            else False
-        )
+            return {
+                "num_primary_loops ": num_primary_loops,
+                "num_secondary_loops": num_secondary_loops,
+            }
 
-    def get_calc_vals(self, context, data=None):
-        rmi_b = context.baseline
-        # primary_secondary_loop_dictionary = get_primary_secondary_loops(rmi_b) # TODO this should be updated!!
-        primary_secondary_loop_dictionary = {"Primary1": ["secondary1", "secondary2"]}
-        num_primary_loops = len(primary_secondary_loop_dictionary)
-        num_secondary_loops = sum(
-            [
-                primary_secondary_loop_dictionary[primary_loop]
-                for primary_loop in primary_secondary_loop_dictionary.keys()
-            ]
-        )
-        return {
-            "num_primary_loops ": num_primary_loops,
-            "num_secondary_loops": num_secondary_loops,
-        }
-
-    def rule_check(self, context, calc_vals=None, data=None):
-        num_primary_loops = calc_vals["num_primary_loops"]
-        num_secondary_loops = calc_vals["num_secondary_loops"]
-        return num_primary_loops == 1 and num_secondary_loops == 1
+        def rule_check(self, context, calc_vals=None, data=None):
+            num_primary_loops = calc_vals["num_primary_loops"]
+            num_secondary_loops = calc_vals["num_secondary_loops"]
+            return num_primary_loops == 1 and num_secondary_loops == 1
