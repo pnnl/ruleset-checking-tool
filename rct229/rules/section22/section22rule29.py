@@ -66,7 +66,9 @@ class Section22Rule29(RuleDefinitionBase):
 
     def rule_check(self, context, calc_vals=None, data=None):
         condenser_loop_pump_power_list = calc_vals["condenser_loop_pump_power_list"]
-        return all([
-            std_equal(pump_power, REQUIRED_PUMP_POWER)
-            for pump_power in condenser_loop_pump_power_list
-        ])
+        return all(
+            [
+                std_equal(pump_power, REQUIRED_PUMP_POWER)
+                for pump_power in condenser_loop_pump_power_list
+            ]
+        )
