@@ -3566,6 +3566,11 @@
                     "type": "number",
                     "units": "L/s",
                     "notes": "At rating conditions."
+                },
+                "leaving_water_setpoint_temperature": {
+                    "description": "leaving water setpoint temperature",
+                    "type": "number",
+                    "units": "C"
                 }
             },
             "required": [
