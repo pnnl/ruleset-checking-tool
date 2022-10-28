@@ -93,8 +93,10 @@ class Section21Rule5(RuleDefinitionListIndexedBase):
                 loop_attach_boiler_dict[loop_id].append(boiler["id"])
 
             # Initialize the variables
+            # The heating_loop_conditioned_zone_area will include sum of all connected zones and indirectly zone areas.
             heating_loop_conditioned_zone_area = ZERO.AREA
-            indirectly_conditioned_zone_list = []
+            # The connected zones list, zones in this list can be residential, nonresidential, mixed or semi-heated
+            loop_zone_list = []
 
             for fluid_loop in find_all("$.fluid_loops[*]", rmi_b):
                 # Make sure heating loop, and its heating is supplied by a boiler(s)
@@ -103,36 +105,33 @@ class Section21Rule5(RuleDefinitionListIndexedBase):
                     and fluid_loop["id"] in loop_attach_boiler_dict.keys()
                 ):
                     boiler_loop_id = fluid_loop["id"]
-                    loop_zone_list = loop_zone_list_w_area_dict[boiler_loop_id][
-                        "zone_list"
-                    ]
+                    loop_zone_list.extend(
+                        loop_zone_list_w_area_dict[boiler_loop_id]["zone_list"]
+                    )
                     heating_loop_conditioned_zone_area += loop_zone_list_w_area_dict[
                         boiler_loop_id
                     ]["total_area"]
 
-                    # check indirectly conditioned zones, add them to the total area
-                    for zone_id in zone_conditioning_category_dict.keys():
-                        if (
-                            zone_conditioning_category_dict[zone_id]
-                            in [
-                                ZCC.CONDITIONED_MIXED,
-                                ZCC.CONDITIONED_RESIDENTIAL,
-                                ZCC.CONDITIONED_NON_RESIDENTIAL,
-                            ]
-                            and zone_id not in loop_zone_list
-                            # to avoid adding multiple times
-                            and zone_id not in indirectly_conditioned_zone_list
-                        ):
-                            heating_loop_conditioned_zone_area += pint_sum(
-                                find_all(
-                                    "$..floor_area",
-                                    find_exactly_one_with_field_value(
-                                        "$..zones[*]", "id", zone_id, rmi_b
-                                    ),
-                                ),
-                                ZERO.AREA,
-                            )
-                            indirectly_conditioned_zone_list.append(zone_id)
+            # check indirectly conditioned zones, add them to the total area
+            for zone_id in zone_conditioning_category_dict.keys():
+                if (
+                    zone_conditioning_category_dict[zone_id]
+                    in [
+                        ZCC.CONDITIONED_MIXED,
+                        ZCC.CONDITIONED_RESIDENTIAL,
+                        ZCC.CONDITIONED_NON_RESIDENTIAL,
+                    ]
+                    and zone_id not in loop_zone_list
+                ):
+                    heating_loop_conditioned_zone_area += pint_sum(
+                        find_all(
+                            "$..floor_area",
+                            find_exactly_one_with_field_value(
+                                "$..zones[*]", "id", zone_id, rmi_b
+                            ),
+                        ),
+                        ZERO.AREA,
+                    )
 
             num_boilers = len(find_all(".boilers[*]", rmi_b))
             boiler_capacity_list = [
