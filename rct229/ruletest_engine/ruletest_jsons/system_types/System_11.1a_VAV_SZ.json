@@ -34,9 +34,8 @@
                                         "chilled_water_loop": "Chiller Loop 1"
                                     },
                                     "heating_system": {
-                                        "id": "Boiler Coil 1",
-                                        "heating_system_type": "FLUID_LOOP",
-                                        "hot_water_loop": "Boiler Loop 1"
+                                        "id": "Heating Coil 1",
+                                        "heating_system_type": "ELECTRIC_RESISTANCE"
                                     },
                                     "fan_system": {
                                         "id": "VAV Fan System 1",
@@ -58,38 +57,23 @@
                     ]
                 }
             ],
-            "boilers": [
+            "external_fluid_source": [
                 {
-                    "id": "Boiler 1",
-                    "loop": "Boiler Loop 1",
-                    "energy_source_type": "NATURAL_GAS"
-                }
-            ],
-            "chillers": [
-                {
-                    "id": "Chiller 1",
-                    "cooling_loop": "Chiller Loop 1"
+                    "id": "Purchased CW 1",
+                    "loop": "Chilled Water Loop 1",
+                    "type": "CHILLED_WATER"
                 }
             ],
             "pumps": [
                 {
-                    "id": "Boiler Pump 1",
-                    "loop_or_piping": "Boiler Loop 1",
-                    "speed_control": "FIXED_SPEED"
-                },
-                {
-                    "id": "Chiller Pump 1",
-                    "loop_or_piping": "Chiller Loop 1",
+                    "id": "CHW Pump 1",
+                    "loop_or_piping": "Chilled Water Loop 1",
                     "speed_control": "FIXED_SPEED"
                 }
             ],
             "fluid_loops": [
                 {
-                    "id": "Boiler Loop 1",
-                    "type": "HEATING"
-                },
-                {
-                    "id": "Chiller Loop 1",
+                    "id": "Chilled Water Loop 1",
                     "type": "COOLING"
                 }
             ]

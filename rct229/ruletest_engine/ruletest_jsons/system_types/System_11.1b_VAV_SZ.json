@@ -31,11 +31,12 @@
                                     "cooling_system": {
                                         "id": "CHW Coil 1",
                                         "cooling_system_type": "FLUID_LOOP",
-                                        "chilled_water_loop": "Chiller Loop 1"
+                                        "chilled_water_loop": "Secondary CHW Loop 1"
                                     },
                                     "heating_system": {
-                                        "id": "Heating Coil 1",
-                                        "heating_system_type": "ELECTRIC_RESISTANCE"
+                                        "id": "HHW Coil 1",
+                                        "heating_system_type": "FLUID_LOOP",
+                                        "hot_water_loop": "Purchased HW Loop 1"
                                     },
                                     "fan_system": {
                                         "id": "VAV Fan System 1",
@@ -63,17 +64,44 @@
                     "cooling_loop": "Chiller Loop 1"
                 }
             ],
+            "external_fluid_source": [
+                {
+                    "id": "Purchased HW 1",
+                    "loop": "Purchased HW Loop 1",
+                    "type": "HOT_WATER"
+                }
+            ],
             "pumps": [
+                {
+                    "id": "HW Pump 1",
+                    "loop_or_piping": "Purchased HW Loop 1",
+                    "speed_control": "FIXED_SPEED"
+                },
                 {
                     "id": "Chiller Pump 1",
                     "loop_or_piping": "Chiller Loop 1",
                     "speed_control": "FIXED_SPEED"
+                },
+                {
+                    "id": "Secondary CHW Pump",
+                    "loop_or_piping": "Secondary CHW Loop 1",
+                    "speed_control": "VARIABLE_SPEED"
                 }
             ],
             "fluid_loops": [
                 {
+                    "id": "Purchased HW Loop 1",
+                    "type": "HEATING"
+                },
+                {
                     "id": "Chiller Loop 1",
-                    "type": "COOLING"
+                    "type": "COOLING",
+                    "child_loops": [
+                        {
+                            "id": "Secondary CHW Loop 1",
+                            "type": "COOLING"
+                        }
+                    ]
                 }
             ]
         }
