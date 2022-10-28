@@ -1,8 +1,10 @@
-from jsonpath2.path import Path
-from jsonpath_ng.ext import parse
+from jsonpath2 import match
 
-# NOTE: jsonpath_ng.ext is used to get support for filtering
-# and other extensions
+
+def create_jsonpath_value_dict(jpath, obj):
+    return {
+        m.node.tojsonpath(): m.current_value for m in match(ensure_root(jpath), obj)
+    }
 
 
 def ensure_root(jpath):
@@ -10,13 +12,14 @@ def ensure_root(jpath):
 
 
 def find_all(jpath, obj):
-    p = Path.parse_str(ensure_root(jpath))
-    return [m.current_value for m in p.match(obj)]
+    return [m.current_value for m in match(ensure_root(jpath), obj)]
 
 
 def find_all_with_field_value(jpath, field, value, obj):
-    p = Path.parse_str(ensure_root(f'{jpath}[?(@.{field}="{value}")]'))
-    return [m.current_value for m in p.match(obj)]
+    return [
+        m.current_value
+        for m in match(ensure_root(f'{jpath}[?(@.{field}="{value}")]'), obj)
+    ]
 
 
 def find_one(jpath, obj):

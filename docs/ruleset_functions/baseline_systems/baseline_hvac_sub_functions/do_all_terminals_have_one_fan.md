@@ -16,7 +16,7 @@
 - Set do_all_terminals_have_one_fan = TRUE: `do_all_terminals_have_one_fan = TRUE`  
 - For each terminal_b in the list of terminal units: `For terminal_b in terminal_unit_id_list:`  
     - Create an object for the terminal unit: `terminal_b = terminal_b.id`  
-    - Check if the length of the list of fans associated with the terminal unit does not equal one: `if len(terminal_b.fan) != 1:`
+    - Check if there is a fan associated with the terminal unit : `if terminal_b.fan != None:`
         - Set do_all_terminals_have_one_fan = FALSE: `do_all_terminals_have_one_fan = FALSE`  
         - Leave the loop: `break`  
 
