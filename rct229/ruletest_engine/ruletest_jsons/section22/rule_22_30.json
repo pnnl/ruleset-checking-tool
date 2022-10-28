@@ -3,12 +3,12 @@
         "Section": 22,
         "Rule": 30,
         "Test": "a",
-        "test_description": "Baseline building is system type 11 and is correctly modeled with the is_condenser_water_pump_interlocked key",
+        "test_description": "Baseline building is system type 11 and is correctly modeled with the pump_power_per_flow_rate value",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-30",
-            "ruleset_reference": "G3.1.3.9",
-            "rule_description": "For chilled-water systems served by chiller(s) and does not serve baseline System-11, condenser-water pump power shall be 19 W/gpm.",
+            "ruleset_reference": "G3.1.3.11",
+            "rule_description": "For chilled-water systems served by chiller(s) and serves baseline System-11, condenser-water pump power shall be 22 W/gpm.",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
@@ -37,24 +37,23 @@
                                                     {
                                                         "id": "VAV Air Terminal 1",
                                                         "is_supply_ducted": true,
-                                                        "heating_source": "HOT_WATER",
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "VAV System 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "System 11"
                                                     }
                                                 ]
                                             }
                                         ],
                                         "heating_ventilation_air_conditioning_systems": [
                                             {
-                                                "id": "System Type 11",
+                                                "id": "System 11",
                                                 "cooling_system": {
                                                     "id": "CHW Coil 1",
-                                                    "cooling_system_type": "FLUID_LOOP"
+                                                    "cooling_system_type": "FLUID_LOOP",
+                                                    "chilled_water_loop": "Chiller Loop 1"
                                                 },
                                                 "heating_system": {
-                                                    "id": "HHW Coil 1",
-                                                    "heating_system_type": "FLUID_LOOP",
-                                                    "hot_water_loop": "Boiler Loop 1"
+                                                    "id": "Heating Coil 1",
+                                                    "heating_system_type": "ELECTRIC_RESISTANCE"
                                                 },
                                                 "fan_system": {
                                                     "id": "VAV Fan System 1",
@@ -76,27 +75,14 @@
                                 ]
                             }
                         ],
-                        "boilers": [
-                            {
-                                "id": "Boiler 1",
-                                "loop": "Boiler Loop 1",
-                                "energy_source_type": "NATURAL_GAS"
-                            }
-                        ],
                         "chillers": [
                             {
                                 "id": "Chiller 1",
                                 "cooling_loop": "Chiller Loop 1",
-                                "energy_source_type": "ELECTRICITY",
-                                "condensing_loop": "Chiller Loop 1"
+                                "condensing_loop": "Condensing Loop 1"
                             }
                         ],
                         "pumps": [
-                            {
-                                "id": "Boiler Pump 1",
-                                "loop_or_piping": "Boiler Loop 1",
-                                "speed_control": "FIXED_SPEED"
-                            },
                             {
                                 "id": "Chiller Pump 1",
                                 "loop_or_piping": "Chiller Loop 1",
@@ -105,12 +91,11 @@
                         ],
                         "fluid_loops": [
                             {
-                                "id": "Boiler Loop 1",
-                                "type": "HEATING"
+                                "id": "Chiller Loop 1",
+                                "type": "COOLING"
                             },
                             {
-                                "id": "Chiller Loop 1",
-                                "type": "COOLING",
+                                "id": "Condensing Loop 1",
                                 "pump_power_per_flow_rate": 348.7450462351387
                             }
                         ]
@@ -123,12 +108,12 @@
         "Section": 22,
         "Rule": 30,
         "Test": "b",
-        "test_description": "Baseline building is system type 11 and is incorrectly modeled with the is_condenser_water_pump_interlocked key",
+        "test_description": "Baseline building is system type 11 and is incorrectly modeled with the pump_power_per_flow_rate value",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-30",
-            "ruleset_reference": "G3.1.3.9",
-            "rule_description": "For chilled-water systems served by chiller(s) and does not serve baseline System-11, condenser-water pump power shall be 19 W/gpm.",
+            "ruleset_reference": "G3.1.3.11",
+            "rule_description": "For chilled-water systems served by chiller(s) and serves baseline System-11, condenser-water pump power shall be 22 W/gpm.",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
@@ -157,24 +142,23 @@
                                                     {
                                                         "id": "VAV Air Terminal 1",
                                                         "is_supply_ducted": true,
-                                                        "heating_source": "HOT_WATER",
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "VAV System 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "System 11"
                                                     }
                                                 ]
                                             }
                                         ],
                                         "heating_ventilation_air_conditioning_systems": [
                                             {
-                                                "id": "System Type 11",
+                                                "id": "System 11",
                                                 "cooling_system": {
                                                     "id": "CHW Coil 1",
-                                                    "cooling_system_type": "FLUID_LOOP"
+                                                    "cooling_system_type": "FLUID_LOOP",
+                                                    "chilled_water_loop": "Chiller Loop 1"
                                                 },
                                                 "heating_system": {
-                                                    "id": "HHW Coil 1",
-                                                    "heating_system_type": "FLUID_LOOP",
-                                                    "hot_water_loop": "Boiler Loop 1"
+                                                    "id": "Heating Coil 1",
+                                                    "heating_system_type": "ELECTRIC_RESISTANCE"
                                                 },
                                                 "fan_system": {
                                                     "id": "VAV Fan System 1",
@@ -196,27 +180,14 @@
                                 ]
                             }
                         ],
-                        "boilers": [
-                            {
-                                "id": "Boiler 1",
-                                "loop": "Boiler Loop 1",
-                                "energy_source_type": "NATURAL_GAS"
-                            }
-                        ],
                         "chillers": [
                             {
                                 "id": "Chiller 1",
                                 "cooling_loop": "Chiller Loop 1",
-                                "energy_source_type": "ELECTRICITY",
-                                "condensing_loop": "Chiller Loop 1"
+                                "condensing_loop": "Condensing Loop 1"
                             }
                         ],
                         "pumps": [
-                            {
-                                "id": "Boiler Pump 1",
-                                "loop_or_piping": "Boiler Loop 1",
-                                "speed_control": "FIXED_SPEED"
-                            },
                             {
                                 "id": "Chiller Pump 1",
                                 "loop_or_piping": "Chiller Loop 1",
@@ -225,12 +196,11 @@
                         ],
                         "fluid_loops": [
                             {
-                                "id": "Boiler Loop 1",
-                                "type": "HEATING"
+                                "id": "Chiller Loop 1",
+                                "type": "COOLING"
                             },
                             {
-                                "id": "Chiller Loop 1",
-                                "type": "COOLING",
+                                "id": "Condensing Loop 1",
                                 "pump_power_per_flow_rate": 396.3011889035667
                             }
                         ]
