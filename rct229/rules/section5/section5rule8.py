@@ -53,7 +53,11 @@ class Section5Rule8(RuleDefinitionListIndexedBase):
 
         def list_filter(self, context_item, data=None):
             surface_b = context_item.baseline
-            return get_opaque_surface_type(surface_b) == OST.BELOW_GRADE_WALL
+            scc = data["surface_conditioning_category_dict"][surface_b["id"]]
+            return (
+                get_opaque_surface_type(surface_b) == OST.BELOW_GRADE_WALL
+                and scc is not SCC.UNREGULATED
+            )
 
         class BelowGradeWallRule(RuleDefinitionBase):
             def __init__(self):

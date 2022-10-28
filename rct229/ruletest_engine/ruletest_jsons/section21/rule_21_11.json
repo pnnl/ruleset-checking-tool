@@ -123,8 +123,12 @@
                         ],
                         "fluid_loops": [
                             {
-                                "id": "FluidLoop 1",
+                                "id": "Boiler Loop 1",
                                 "type": "HEATING"
+                            },
+                            {
+                                "id": "Chiller Loop 1",
+                                "type": "COOLING"
                             }
                         ]
                     }
@@ -256,7 +260,7 @@
                         ],
                         "fluid_loops": [
                             {
-                                "id": "FluidLoop 1",
+                                "id": "Boiler Loop 1",
                                 "type": "HEATING",
                                 "child_loops": [
                                     {

@@ -3,7 +3,7 @@ from rct229.ruleset_functions.baseline_systems.is_baseline_system_7 import (
     is_baseline_system_7,
 )
 
-rmd_model = {
+SYS_7_TEST_RMD = {
     "id": "ASHRAE229 1",
     "ruleset_model_instances": [
         {
@@ -227,7 +227,7 @@ rmd_model = {
 def test_is_baseline_system_7_true():
     assert (
         is_baseline_system_7(
-            rmd_model["ruleset_model_instances"][0],
+            SYS_7_TEST_RMD["ruleset_model_instances"][0],
             "System 7",
             ["VAV Air Terminal 1"],
             ["Thermal Zone 1"],
@@ -239,7 +239,7 @@ def test_is_baseline_system_7_true():
 def test_is_baseline_system_7a_true():
     assert (
         is_baseline_system_7(
-            rmd_model["ruleset_model_instances"][0],
+            SYS_7_TEST_RMD["ruleset_model_instances"][0],
             "System 7a",
             ["VAV Air Terminal 2"],
             ["Thermal Zone 2"],
@@ -251,7 +251,7 @@ def test_is_baseline_system_7a_true():
 def test_is_baseline_system_7b_true():
     assert (
         is_baseline_system_7(
-            rmd_model["ruleset_model_instances"][0],
+            SYS_7_TEST_RMD["ruleset_model_instances"][0],
             "System 7b",
             ["VAV Air Terminal 3"],
             ["Thermal Zone 3"],
@@ -263,7 +263,7 @@ def test_is_baseline_system_7b_true():
 def test_is_baseline_system_7c_true():
     assert (
         is_baseline_system_7(
-            rmd_model["ruleset_model_instances"][0],
+            SYS_7_TEST_RMD["ruleset_model_instances"][0],
             "System 7c",
             ["VAV Air Terminal 4"],
             ["Thermal Zone 4"],
