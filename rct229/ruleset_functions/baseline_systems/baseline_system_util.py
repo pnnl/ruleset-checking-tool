@@ -42,7 +42,6 @@ class HVAC_SYS:
     SYS_13 = "Sys-13"
     SYS_13A = "Sys-13a"
     SYS_13A = "Sys-13A"
-    SYS_13B = "Sys-13B"
     UNMATCHED = "Not_Sys"
 
 
