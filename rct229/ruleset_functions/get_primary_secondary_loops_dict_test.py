@@ -27,7 +27,7 @@ TEST_RMD = {
                                     "terminals": [
                                         {
                                             "id": "VAV Air Terminal 1",
-                                            "is_supply_ducted": true,
+                                            "is_supply_ducted": True,
                                             "heating_source": "HOT_WATER",
                                             "type": "VARIABLE_AIR_VOLUME",
                                             "served_by_heating_ventilation_air_conditioning_system": "VAV System 1",
@@ -42,7 +42,7 @@ TEST_RMD = {
                                     "terminals": [
                                         {
                                             "id": "VAV Air Terminal 2",
-                                            "is_supply_ducted": true,
+                                            "is_supply_ducted": True,
                                             "heating_source": "HOT_WATER",
                                             "type": "VARIABLE_AIR_VOLUME",
                                             "served_by_heating_ventilation_air_conditioning_system": "System 7",
