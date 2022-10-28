@@ -1,6 +1,6 @@
 import pytest
 
-from rct229.data_fns.table_3_5_3_fns import table_G3_5_3_lookup
+from rct229.data_fns.table_G3_5_3_fns import table_G3_5_3_lookup
 from rct229.schema.config import ureg
 
 kw_per_ton = ureg("kilowatt / ton")
