@@ -37,7 +37,7 @@ APPLICABLE_SYS_TYPES = [
 ]
 
 PUMP_SPEED_CONTROL = schema_enums["PumpSpeedControlOptions"]
-PUMP_CONFIGURATION_THRESHOLD = 120000 * ureg("ft2")
+PUMP_CONFIGURATION_THRESHOLD = 120_000 * ureg("ft2")
 
 
 class Section21Rule10(RuleDefinitionListIndexedBase):
