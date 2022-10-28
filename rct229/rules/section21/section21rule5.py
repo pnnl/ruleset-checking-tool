@@ -44,7 +44,7 @@ class Section21Rule5(RuleDefinitionListIndexedBase):
             index_rmr="baseline",
             id="21-5",
             description="The baseline building design boiler plant shall be modeled as having a single boiler if the baseline building design plant serves a conditioned floor area of 15,000sq.ft. or less, and as having two equally sized boilers for plants serving more than 15,000sq.ft.",
-            list_path="ruleset_model_instances[*]",
+            list_path="ruleset_model_instances[0]",
             data_items={"climate_zone": ("baseline", "weather/climate_zone")},
         )
 
