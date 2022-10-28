@@ -23,7 +23,7 @@ minimum_capacity_threshold_list = [0, 150, 300]
 maximum_capacity_threshold_list = [9999.99, 300, 150]
 
 
-def table_3_5_3_lookup(compressor_type, capacity):
+def table_G3_5_3_lookup(compressor_type, capacity):
     """Returns the chiller data based on compressor type and capacity
     required by ASHRAE 90.1 Table 3.2
     Parameters
