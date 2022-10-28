@@ -27,7 +27,7 @@ Logic:
 
   - Check if loop type is cooling: `if fluid_loop.type == "COOLING":`
 
-    - Check if loop is connected to both chiller(s) and non-process cooling coil(s), break logic and return an empty dictionary: `if ( fluid_loop.id in chiller_loop_array ) AND ( fluid_loop in non_process_chw_coil_loop_array ): BREAK and return primary_secondary_loop_dictionary = {}`
+    - Check if loop is connected to both chiller(s) and non-process cooling coil(s), break logic and return an empty dictionary (this would be if the system was not modeled as primary-seconday, a fluid_loop will never be connected to a cooling_system.chilled_water_loop): `if ( fluid_loop.id in chiller_loop_array ) AND ( fluid_loop in non_process_chw_coil_loop_array ): BREAK and return primary_secondary_loop_dictionary = {}`
 
     - Else if loop is connected to chiller(s) only: `else if fluid_loop.id in chiller_loop_array:`
 
@@ -35,18 +35,8 @@ Logic:
 
         - Save loop to primary loop array: `primary_loop_array.append(fluid_loop.id)`
 
-        - Save all child loops to child loop array: `child_loop_array.append(child_loop_id for child_loop_id in fluid_loop.child_loops)`
-
-    - Else if loop is connected to baseline system cooling coil(s) only: `else if fluid_loop in non_process_chw_coil_loop_array:`
-
-      - Check if loop has any child loop, break logic and return an empty dictionary: `if fluid_loop.child_loops != NULL: BREAK and return primary_secondary_loop_dictionary = {}`
-
-      - Else, save loop to secondary loop array: `else: secondary_loop_array.append(fluid_loop.id)`
-
-- Check if child loop array and secondary loop array is not the same, break logic and return an empty dictionary: `if child_loop_array.sort() != secondary_loop_array.sort(): BREAK and return primary_secondary_loop_dictionary = {}`
-
-- Else, B-RMR is modeled with primary-secondary configuration: `else:`
-
+        - Save all child loops to secondary loop array: `secondary_loop_array.append(child_loop_id for child_loop_id in fluid_loop.child_loops)`  
+  
   - For each primary loop: `for primary_loop_id in primary_loop_array:`
   
     - Save primary and secondary loop(s) pair to output dictionary: `primary_secondary_loop_dictionary[primary_loop_id].append(secondary_loop_id for secondary_loop_id in primary_loop.child_loops)`
@@ -58,8 +48,7 @@ Logic:
 1. Primary secondary configuration is correct if:
 1). a cooling loop is either connected to chiller or cooling coil, but not both
 2). if a cooling loop is connected to chiller, it shall have child loop(s)
-3). if a cooling loop is connected to cooling coil, it shall not have any child loops
-4). the collection of child loops of all of 2) shall be the same as all of 3)
+3). if a cooling loop is connected to cooling coil, it shall not have any child loops (AND will not be in the fluid_loop array)
 
 2. B-RMR might have process chiller(s). Process chiller(s) and its associated loop(s) should be excluded from the primary-secondary loop check. Hence the logic only returns primary loops that serves standard baseline systems with chilled water coils.
 
