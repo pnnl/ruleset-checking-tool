@@ -33,9 +33,7 @@ Logic:
 
       - Check if all child loops of loop serve baseline system Type-7, 8, 11.1, 11.2, 12, 13, 7b, 8b, 11b, 12b, 13b only (to exclude CHW loop served by process chiller(s)): `if child_loop_id in non_process_chw_coil_loop_array for child_loop_id in fluid_loop.child_loops:`
 
-        - Save loop to primary loop array: `primary_loop_array.append(fluid_loop.id)`
-
-        - Save all child loops to secondary loop array: `secondary_loop_array.append(child_loop_id for child_loop_id in fluid_loop.child_loops)`  
+        - Save loop to primary loop array: `primary_loop_array.append(fluid_loop.id)`  
   
   - For each primary loop: `for primary_loop_id in primary_loop_array:`
   
