@@ -31,7 +31,7 @@ Logic:
 
     - Else if loop is connected to chiller(s) only: `else if fluid_loop.id in chiller_loop_array:`
 
-      - Check if all child loops of loop serve baseline system Type-7, 8, 11.1, 11.2, 12, 13, 7b, 8b, 11b, 12b, 13b only (to exclude CHW loop served by process chiller(s)): `if child_loop_id in non_process_chw_coil_loop_array for child_loop_id in fluid_loop.child_loops:`
+      - Check if all child loops of loop serve baseline system Type-7, 8, 11.1, 11.2, 12, 13, 7b, 8b, 11b, 12b, 13b only (to exclude CHW loop served by process chiller(s)): `if any(child_loop_id in non_process_chw_coil_loop_array for child_loop_id in fluid_loop.child_loops):`
 
         - Save loop to primary loop array: `primary_loop_array.append(fluid_loop.id)`  
   
