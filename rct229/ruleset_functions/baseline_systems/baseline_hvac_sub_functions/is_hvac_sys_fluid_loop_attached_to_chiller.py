@@ -39,7 +39,7 @@ def is_hvac_sys_fluid_loop_attached_to_chiller(rmi_b, hvac_b_id):
     # Get the hvac system
     hvac_b = find_exactly_one_hvac_system(rmi_b, hvac_b_id)
 
-    # Allow single loop and primary/secondary loop configuration for this function as true.
+    # Allow single loop and primary/secondary loop configuration as true.
     chilled_water_loop_id = find_one("cooling_system.chilled_water_loop", hvac_b)
     water_loop = None
     if chilled_water_loop_id in primary_cooling_loop_ids:

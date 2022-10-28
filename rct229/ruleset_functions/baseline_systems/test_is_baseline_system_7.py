@@ -88,7 +88,7 @@ SYS_7_TEST_RMD = {
                                     "cooling_system": {
                                         "id": "Cooling Coil 1",
                                         "cooling_system_type": "FLUID_LOOP",
-                                        "chilled_water_loop": "Chiller Loop 1",
+                                        "chilled_water_loop": "Secondary Loop 1",
                                     },
                                     "fan_system": {
                                         "id": "VAV Fan System 1",
@@ -126,7 +126,7 @@ SYS_7_TEST_RMD = {
                                     "cooling_system": {
                                         "id": "Cooling Coil 3",
                                         "cooling_system_type": "FLUID_LOOP",
-                                        "chilled_water_loop": "Chiller Loop 1",
+                                        "chilled_water_loop": "Secondary Loop 1",
                                     },
                                     "fan_system": {
                                         "id": "VAV Fan System 3",
@@ -197,6 +197,12 @@ SYS_7_TEST_RMD = {
                 {
                     "id": "Chiller Loop 1",
                     "type": "COOLING",
+                    "child_loops": [
+                        {
+                            "id": "Secondary Loop 1",
+                            "type": "COOLING"
+                        }
+                    ]
                 },
                 {
                     "id": "Purchased HW Loop 1",
