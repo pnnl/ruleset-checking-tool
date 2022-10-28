@@ -37,7 +37,7 @@ APPLICABLE_SYS_TYPES = [
 ]
 
 PUMP_SPEED_CONTROL = schema_enums["PumpSpeedControlOptions"]
-PUMP_CONFIGURATION_THRESHOLD = 12000 * ureg("ft2")
+PUMP_CONFIGURATION_THRESHOLD = 120000 * ureg("ft2")
 
 
 class Section21Rule10(RuleDefinitionListIndexedBase):
@@ -59,8 +59,8 @@ class Section21Rule10(RuleDefinitionListIndexedBase):
     def is_applicable(self, context, data=None):
         rmi_b = context.baseline
         baseline_system_types_dict = get_baseline_system_types(rmi_b)
-        # create a list contains all HVAC systems that are modeled in the rmi_b
-        available_type_lists = [
+        # create a list containing all HVAC systems that are modeled in the rmi_b
+        available_types_list = [
             hvac_type
             for hvac_type in baseline_system_types_dict.keys()
             if len(baseline_system_types_dict[hvac_type]) > 0
@@ -68,7 +68,7 @@ class Section21Rule10(RuleDefinitionListIndexedBase):
         return any(
             [
                 available_type in APPLICABLE_SYS_TYPES
-                for available_type in available_type_lists
+                for available_type in available_types_list
             ]
         )
 
@@ -81,9 +81,9 @@ class Section21Rule10(RuleDefinitionListIndexedBase):
 
     def list_filter(self, context_item, data):
         pump = context_item.baseline
-        loop_or_piping = getattr_(pump, "Pump", "loop_or_piping")
         loop_zone_list_w_area_dict = data["loop_zone_list_w_area_dict"]
-        return loop_or_piping in loop_zone_list_w_area_dict.keys()
+        # filter and select pumps with heating loops (loop_zone_list_w_area_dict keys are heating loops)
+        return pump["loop_or_piping"] in loop_zone_list_w_area_dict.keys()
 
     class PumpRule(RuleDefinitionBase):
         def __init__(self):
@@ -93,13 +93,17 @@ class Section21Rule10(RuleDefinitionListIndexedBase):
 
         def get_calc_vals(self, context, data=None):
             pump_b = context.baseline
-            # list_filter has checked the data
-            pump_loop_or_piping = pump_b["loop_or_piping"]
+            pump_loop_or_piping_id = pump_b["loop_or_piping"]
             loop_zone_list_w_area_dict = data["loop_zone_list_w_area_dict"]
-            total_area = loop_zone_list_w_area_dict[pump_loop_or_piping]["total_area"]
-            target_pump_type = PUMP_SPEED_CONTROL.VARIABLE_SPEED
-            if total_area < PUMP_CONFIGURATION_THRESHOLD:
-                target_pump_type = PUMP_SPEED_CONTROL.FIXED_SPEED
+            total_area = loop_zone_list_w_area_dict[pump_loop_or_piping_id][
+                "total_area"
+            ]
+
+            target_pump_type = (
+                PUMP_SPEED_CONTROL.VARIABLE_SPEED
+                if total_area < PUMP_CONFIGURATION_THRESHOLD
+                else PUMP_SPEED_CONTROL.FIXED_SPEED
+            )
 
             return {
                 "pump_speed_control_type": getattr_(pump_b, "Pump", "speed_control"),
