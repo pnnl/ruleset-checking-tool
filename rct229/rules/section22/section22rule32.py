@@ -21,14 +21,13 @@ APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_13,
     HVAC_SYS.SYS_7B,
     HVAC_SYS.SYS_8B,
-    HVAC_SYS.SYS_11B,  # TODO: Change to SYS_11_1B??
+    HVAC_SYS.SYS_11_1B,
     HVAC_SYS.SYS_12B,
-    HVAC_SYS.SYS_13B,  # TODO: Remove??
 ]
 
 
 class Section22Rule32(RuleDefinitionListIndexedBase):
-    """Rule 19 of ASHRAE 90.1-2019 Appendix G Section 22 (Chilled water loop)"""
+    """Rule 32 of ASHRAE 90.1-2019 Appendix G Section 22 (Chilled water loop)"""
 
     def __init__(self):
         super(Section22Rule32, self).__init__(
