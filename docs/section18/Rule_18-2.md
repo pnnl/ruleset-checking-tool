@@ -10,10 +10,11 @@
 **Applicability:** All required data elements exist for B_RMR  
 **Applicability Checks:**  
 
-1. Buildings in CZ 0-3A
-2. predominant HVAC BAT = public assembly
-3. building area >= 120,0000 ft2
-4. the zone does not meet one if the G3.1.1.1 exceptions
+1. the target string matches, which indicates:
+	a. the space type is PUBLIC_ASSEMBLY
+	b. climate zone CZ_0_to_3a
+	c. area >= 120,000 ft2
+	d. none of the G3.1.1 exceptions apply
 
 **Manual Check:** Yes  
 **Evaluation Context:** Evaluate whether each Zone is served by the correct HVAC system type  
@@ -30,25 +31,18 @@
 ## Rule Logic:  
 - This function uses get_zone_target_baseline_system and looks through the list to find any zones that match the target string for this system.
 - The target string is: `target_string = "PUBLIC_ASSEMBLY CZ_0_to_3a >= 120,000 ft2"`
-- get the list of zones, their expected systems and the source string: `zones_expected_system_types = get_zone_target_baseline_system(P-RMD,B-RMD)`
+- the expected system type is "SYS-13": `expected_system_type = "SYS-13"`
 
 - loop through building segments: `for segment in RMR.building_segments:`
 	- loop through zones in the segments: `for zone in segment.zones:`
-		- check whether the description string in zones_expected_system_types matches the target_string: `if zones_expected_system_types[zone]["SYSTEM_ORIGIN"] == target_string:`
-			- now check whether the system(s) serving this zone match the expected system.  Start by getting the list of HVAC systems that serve the zone: `hvac_systems_serving_zone = get_list_hvac_systems_associated_with_zone(B-RMD)`
-			- loop through these systems: `for system in hvac_systems_serving_zone:`
-				- create a boolean that indicates whether all systems pass: `all_systems_in_zone_pass = TRUE`
-				- now check that system_b is "SYS-13" by using the is_hvac_system_of_type() function: `if is_hvac_system_of_type(B-RMI,system.id,"SYS-13"):`
-					- this system passes, no need to do anything (in the python code, the check above can be `not in` instead of `in`)
-				- otherwise, this system is not compliant: `else:`
-					- set the boolean to false, this zone will fail: `all_systems_in_zone_pass = FALSE`
+		- use the section_18_rule_test function to determine whether the zone meets the requirements: `zone_result = section_18_rule_test(P-RMD,B-RMD,zone.id,target_string,expected_system_type)`
 
   **Rule Assertion - Zone:**
 
-  - Case 1: All terminals in the zone are System-13 (there should only be one terminal in the zone, but this rule doesn't check number of terminals):`if all_systems_in_zone_pass == TRUE: PASS`
+  - Case 1: the target strings don't match, so it is not applicable to this zone: `if zone_result == NOT_APPLICABLE: NOT_APPLICABLE`
+  - Case 2: All terminals in the zone are System-4 (there should only be one terminal in the zone, but this rule doesn't check number of terminals):`if zone_result == PASS: PASS`
 
-  - Case 2: Else: `else: FAIL`
-
+  - Case 3: Else: `else: FAIL`
 **Notes:**
 
 **[Back](../_toc.md)**
