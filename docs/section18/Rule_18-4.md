@@ -1,16 +1,12 @@
 # HVAC_SystemZoneAssignment - Rule 18-4
 **Schema Version:** 0.0.22  
-
+**Mandatory Rule:** True
 **Rule ID:** 18-4
 **Rule Description:** Buildings in CZ 3B, 3C, 4-8 with  predominant HVAC BAT = public assembly, >=120,000 ft2 have baseline HVAC system type 12 (SZ-CV-HW)
-**Rule Assertion:** B-RMR = expected value  
-**Appendix G Section:** Section 18 HVAC_SystemZoneAssignment  
+**Rule Assertion:** Options are PASS/FAIL/NOT_APPLICABLE
 **Appendix G Section Reference:** Table G3.1.1.3
 
-**Applicability:** All required data elements exist for B_RMR  
-
-**Manual Check:** Yes  
-**Evaluation Context:** Evaluate whether each Zone is served by the correct HVAC system type  
+**Evaluation Context:** Each Zone Data Group
 **Data Lookup:**   
 **Function Call:** 
 
