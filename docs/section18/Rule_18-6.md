@@ -21,7 +21,7 @@
 
 ## Rule Logic:  
 - This function uses get_zone_target_baseline_system and looks through the list to find any zones that match the target string for this system.
-- The target string is: `target_string = "HOSPITAL > 150,000 ft2 or > 5 floors"
+- The target string is: `target_string = "HOSPITAL > 150,000 ft2 or > 5 floors"`
 - the expected system type is "SYS-7": `expected_system_type = "SYS-7"`
 
 - loop through building segments: `for segment in RMR.building_segments:`
