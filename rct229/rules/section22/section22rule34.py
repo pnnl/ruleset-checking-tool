@@ -1,9 +1,9 @@
+from rct229.data.schema_enums import schema_enums
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 from rct229.ruleset_functions.baseline_systems.baseline_system_util import HVAC_SYS
 from rct229.ruleset_functions.get_baseline_system_types import get_baseline_system_types
-from rct229.utils.jsonpath_utils import find_all
 
 APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_7,
@@ -16,8 +16,8 @@ APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_8B,
     HVAC_SYS.SYS_11_1B,
     HVAC_SYS.SYS_12B,
-    HVAC_SYS.SYS_13B,
 ]
+FLUID_LOOP = schema_enums["FluidLoopOptions"]
 
 
 class Section22Rule34(RuleDefinitionListIndexedBase):
@@ -26,7 +26,7 @@ class Section22Rule34(RuleDefinitionListIndexedBase):
     def __init__(self):
         super(Section22Rule34, self).__init__(
             rmrs_used=UserBaselineProposedVals(False, True, False),
-            each_rule=Section22Rule34.ChillerFluidLoopRule(),
+            each_rule=Section22Rule34.CoolingFluidLoopRule(),
             index_rmr="baseline",
             id="22-34",
             description="For baseline cooling chilled water plant that is served by chiller(s), the capacity shall be based on coincident loads.",
@@ -53,20 +53,26 @@ class Section22Rule34(RuleDefinitionListIndexedBase):
     def create_data(self, context, data):
         rmi_b = context.baseline
         # primary_secondary_loop_dictionary = get_primary_secondary_loops(rmi_b)
-        primary_secondary_loop_dictionary = {"Chiller Loop 1":["Cooling Child Loop 1"]}
+        primary_secondary_loop_dictionary = {
+            "Chiller Loop 1": ["Cooling Child Loop 1"]
+        }  # TODO should be updated
 
         return {"primary_secondary_loop_dictionary": primary_secondary_loop_dictionary}
 
-    class ChillerFluidLoopRule(RuleDefinitionBase):
+    def list_filter(self, context_item, data):
+        fluid_loops_b = context_item.baseline
+        return fluid_loops_b["type"] == FLUID_LOOP.COOLING
+
+    class CoolingFluidLoopRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section22Rule34.ChillerFluidLoopRule, self).__init__(
+            super(Section22Rule34.CoolingFluidLoopRule, self).__init__(
                 rmrs_used=UserBaselineProposedVals(False, True, False),
-                # required_fields={
-                #     "$": ["cooling_or_condensing_design_and_control"],
-                #     "cooling_or_condensing_design_and_control": [
-                #         "is_sized_using_coincident_load"
-                #     ],
-                # },
+                required_fields={
+                    "$": ["cooling_or_condensing_design_and_control"],
+                    "cooling_or_condensing_design_and_control": [
+                        "is_sized_using_coincident_load"
+                    ],
+                },
             )
 
         def get_calc_vals(self, context, data=None):
@@ -75,7 +81,7 @@ class Section22Rule34(RuleDefinitionListIndexedBase):
                 "cooling_or_condensing_design_and_control"
             ]["is_sized_using_coincident_load"]
             return {
-                "is_sized_using_coincident_load": is_sized_using_coincident_load_bool
+                "is_sized_using_coincident_load_bool": is_sized_using_coincident_load_bool
             }
 
         def rule_check(self, context, calc_vals=None, data=None):
