@@ -1,0 +1,70 @@
+from rct229.rule_engine.rule_base import RuleDefinitionBase
+from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
+from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
+from rct229.ruleset_functions.baseline_systems.baseline_system_util import HVAC_SYS
+from rct229.ruleset_functions.get_baseline_system_types import get_baseline_system_types
+from rct229.utils.assertions import RCTException
+
+APPLICABLE_SYS_TYPES = [
+    HVAC_SYS.SYS_7,
+    HVAC_SYS.SYS_8,
+    HVAC_SYS.SYS_11_1,
+    HVAC_SYS.SYS_11_2,
+    HVAC_SYS.SYS_12,
+    HVAC_SYS.SYS_13,
+    HVAC_SYS.SYS_7B,
+    HVAC_SYS.SYS_8B,
+    HVAC_SYS.SYS_11_1B,
+    HVAC_SYS.SYS_12B,
+]
+
+class Section22Rule36(RuleDefinitionListIndexedBase):
+    """Rule 20 of ASHRAE 90.1-2019 Appendix G Section 22 (Chilled water loop)"""
+
+    def __init__(self):
+        super(Section22Rule36, self).__init__(
+            rmrs_used=UserBaselineProposedVals(False, True, False),
+            each_rule=Section22Rule36.PrimaryFluidlLoop(),
+            index_rmr="baseline",
+            id="22-36",
+            description="Baseline chilled water system that does not use purchased chilled water shall be modeled with constant flow primary loop and variable flow secondary loop.",
+            list_path="ruleset_model_instances[0].fluid_loops[*]",
+            rmr_context="ruleset_model_instances/0",
+        )
+
+    def is_applicable(self, context, data=None):
+        rmi_b = context.baseline
+        baseline_system_types_dict = get_baseline_system_types(rmi_b)
+        # create a list contains all HVAC systems that are modeled in the rmi_b
+        available_type_lists = [
+            hvac_type
+            for hvac_type in baseline_system_types_dict.keys()
+            if len(baseline_system_types_dict[hvac_type]) > 0
+        ]
+        # primary secondary loop
+        return any(
+            [
+                available_type in APPLICABLE_SYS_TYPES
+                for available_type in available_type_lists
+            ]
+        )
+
+    def create_data(self, context, data):
+        rmi_b = context.baseline
+        # create primary secondary loop
+        # NOTE: I did not want to call the same function twice in the process so
+        # the second applicable check I put in here as raise error. - Not sure if this is desired.
+        primary_secondary_loop_dict = get_primary_secondary_loop(rmi_b)
+        if len(primary_secondary_loop_dict.keys()) == 0:
+            raise RCTException("No fluid loop is configured as primary secondary loops in the RMD")
+        return {
+            "primary_secondary_loop_dict": primary_secondary_loop_dict
+        }
+
+    def list_filter(self, context_item, data):
+        fluid_loop_b = context_item.baseline
+        primary_secondary_loop_dict = data["primary_secondary_loop_dict"]
+        return fluid_loop_b["id"] in primary_secondary_loop_dict.keys()
+
+    class PrimaryFluidlLoop(RuleDefinitionBase):
+
