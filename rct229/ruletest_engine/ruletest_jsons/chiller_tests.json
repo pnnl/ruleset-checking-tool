@@ -1949,7 +1949,7 @@
                             {
                                 "id": "Heat Rejection 1",
                                 "loop": "Chiller Loop 1",
-                                "range": -12.222222222222172
+                                "range": 5.555555555555555
                             }
                         ]
                     }
@@ -2096,7 +2096,7 @@
                             {
                                 "id": "Heat Rejection 1",
                                 "loop": "Chiller Loop 1",
-                                "range": -9.4444444444444
+                                "range": 8.333333333333334
                             }
                         ]
                     }
@@ -2245,7 +2245,7 @@
                                 "id": "Heat Rejection 1",
                                 "loop": "Chiller Loop 1",
                                 "design_wetbulb_temperature": 12.777777777777828,
-                                "approach": -14.999999999999943
+                                "approach": 2.7777777777777777
                             }
                         ]
                     }
@@ -2394,7 +2394,7 @@
                                 "id": "Heat Rejection 1",
                                 "loop": "Chiller Loop 1",
                                 "design_wetbulb_temperature": 12.777777777777828,
-                                "approach": -12.222222222222172
+                                "approach": 5.555555555555555
                             }
                         ]
                     }
@@ -4692,10 +4692,82 @@
         },
         "rmr_transformations": {
             "baseline": {
+                "id": "ASHRAE229 1",
                 "ruleset_model_instances": [
                     {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_open_schedule": "Required Building Schedule 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                                "terminals": [
+                                                    {
+                                                        "id": "VAV Air Terminal 1",
+                                                        "is_supply_ducted": true,
+                                                        "type": "VARIABLE_AIR_VOLUME",
+                                                        "served_by_heating_ventilation_air_conditioning_system": "System 11"
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilation_air_conditioning_systems": [
+                                            {
+                                                "id": "System 11",
+                                                "cooling_system": {
+                                                    "id": "CHW Coil 1",
+                                                    "cooling_system_type": "FLUID_LOOP",
+                                                    "chilled_water_loop": "Chiller Loop 1"
+                                                },
+                                                "heating_system": {
+                                                    "id": "Heating Coil 1",
+                                                    "heating_system_type": "ELECTRIC_RESISTANCE"
+                                                },
+                                                "fan_system": {
+                                                    "id": "VAV Fan System 1",
+                                                    "fan_control": "VARIABLE_SPEED_DRIVE",
+                                                    "supply_fans": [
+                                                        {
+                                                            "id": "Supply Fan 1"
+                                                        }
+                                                    ],
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "Return Fan 1"
+                                                        }
+                                                    ]
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "chillers": [
+                            {
+                                "id": "Chiller 1",
+                                "cooling_loop": "Chiller Loop 1"
+                            }
+                        ],
+                        "pumps": [
+                            {
+                                "id": "Chiller Pump 1",
+                                "loop_or_piping": "Chiller Loop 1",
+                                "speed_control": "FIXED_SPEED"
+                            }
+                        ],
                         "fluid_loops": [
-                            {},
+                            {
+                                "id": "Chiller Loop 1",
+                                "type": "COOLING"
+                            },
                             {
                                 "pump_power_per_flow_rate": 190.22457067371204,
                                 "child_loops": [
@@ -4731,10 +4803,82 @@
         },
         "rmr_transformations": {
             "baseline": {
+                "id": "ASHRAE229 1",
                 "ruleset_model_instances": [
                     {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_open_schedule": "Required Building Schedule 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                                "terminals": [
+                                                    {
+                                                        "id": "VAV Air Terminal 1",
+                                                        "is_supply_ducted": true,
+                                                        "type": "VARIABLE_AIR_VOLUME",
+                                                        "served_by_heating_ventilation_air_conditioning_system": "System 11"
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilation_air_conditioning_systems": [
+                                            {
+                                                "id": "System 11",
+                                                "cooling_system": {
+                                                    "id": "CHW Coil 1",
+                                                    "cooling_system_type": "FLUID_LOOP",
+                                                    "chilled_water_loop": "Chiller Loop 1"
+                                                },
+                                                "heating_system": {
+                                                    "id": "Heating Coil 1",
+                                                    "heating_system_type": "ELECTRIC_RESISTANCE"
+                                                },
+                                                "fan_system": {
+                                                    "id": "VAV Fan System 1",
+                                                    "fan_control": "VARIABLE_SPEED_DRIVE",
+                                                    "supply_fans": [
+                                                        {
+                                                            "id": "Supply Fan 1"
+                                                        }
+                                                    ],
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "Return Fan 1"
+                                                        }
+                                                    ]
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "chillers": [
+                            {
+                                "id": "Chiller 1",
+                                "cooling_loop": "Chiller Loop 1"
+                            }
+                        ],
+                        "pumps": [
+                            {
+                                "id": "Chiller Pump 1",
+                                "loop_or_piping": "Chiller Loop 1",
+                                "speed_control": "FIXED_SPEED"
+                            }
+                        ],
                         "fluid_loops": [
-                            {},
+                            {
+                                "id": "Chiller Loop 1",
+                                "type": "COOLING"
+                            },
                             {
                                 "pump_power_per_flow_rate": 237.78071334214002,
                                 "child_loops": [
@@ -4756,7 +4900,7 @@
         "Section": 22,
         "Rule": 27,
         "Test": "a",
-        "test_description": "Baseline building is system type 11 and is correctly modeled with the is_condenser_water_pump_interlocked key",
+        "test_description": "Baseline building is system type 7 and is correctly modeled with the is_condenser_water_pump_interlocked key",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-27",
@@ -4894,7 +5038,7 @@
         "Section": 22,
         "Rule": 27,
         "Test": "b",
-        "test_description": "Baseline building is system type 11 and is incorrectly modeled with the is_condenser_water_pump_interlocked key",
+        "test_description": "Baseline building is system type 7 and is incorrectly modeled with the is_condenser_water_pump_interlocked key",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-27",
@@ -5136,7 +5280,7 @@
                             {
                                 "id": "Chiller 1",
                                 "cooling_loop": "Chiller Loop 1",
-                                "condensing_loop": "Chiller Loop 1"
+                                "condensing_loop": "Condensing Loop 1"
                             }
                         ],
                         "pumps": [
@@ -5158,7 +5302,10 @@
                             },
                             {
                                 "id": "Chiller Loop 1",
-                                "type": "COOLING",
+                                "type": "COOLING"
+                            },
+                            {
+                                "id": "Condensing Loop 1",
                                 "pump_power_per_flow_rate": 301.1889035667107
                             }
                         ]
@@ -5275,7 +5422,7 @@
                             {
                                 "id": "Chiller 1",
                                 "cooling_loop": "Chiller Loop 1",
-                                "condensing_loop": "Chiller Loop 1"
+                                "condensing_loop": "Condensing Loop 1"
                             }
                         ],
                         "pumps": [
@@ -5297,7 +5444,10 @@
                             },
                             {
                                 "id": "Chiller Loop 1",
-                                "type": "COOLING",
+                                "type": "COOLING"
+                            },
+                            {
+                                "id": "Condensing Loop 1",
                                 "pump_power_per_flow_rate": 332.89299867899604
                             }
                         ]
@@ -5386,7 +5536,7 @@
                             {
                                 "id": "Chiller 1",
                                 "cooling_loop": "Chiller Loop 1",
-                                "condensing_loop": "Chiller Loop 1"
+                                "condensing_loop": "Condensing Loop 1"
                             }
                         ],
                         "pumps": [
@@ -5402,6 +5552,7 @@
                                 "type": "COOLING"
                             },
                             {
+                                "id": "Condensing Loop 1",
                                 "pump_power_per_flow_rate": 348.7450462351387
                             }
                         ]
@@ -5490,7 +5641,7 @@
                             {
                                 "id": "Chiller 1",
                                 "cooling_loop": "Chiller Loop 1",
-                                "condensing_loop": "Chiller Loop 1"
+                                "condensing_loop": "Condensing Loop 1"
                             }
                         ],
                         "pumps": [
@@ -5506,6 +5657,7 @@
                                 "type": "COOLING"
                             },
                             {
+                                "id": "Condensing Loop 1",
                                 "pump_power_per_flow_rate": 396.3011889035667
                             }
                         ]

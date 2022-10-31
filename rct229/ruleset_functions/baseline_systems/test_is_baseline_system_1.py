@@ -2,6 +2,7 @@
 # hvac_id = "PTAC 1a" => Sys_1a, [Thermal Zone 1a], [PTAC Terminal 1a]
 # hvac_id = "PTAC 1b" => Sys_1b, [Thermal Zone 1b], [PTAC Terminal 1b]
 # hvac_id = "PTAC 1c" => Sys_1c, [Thermal Zone 1c], [PTAC Terminal 1c]
+from rct229.schema.validate import schema_validate_rmr
 
 SYS_1_RMD = {
     "id": "ASHRAE229 1",
@@ -132,7 +133,7 @@ SYS_1_RMD = {
             "chillers": [
                 {
                     "id": "Chiller 1",
-                    "loop": "Chiller Loop 1",
+                    "cooling_loop": "Chiller Loop 1",
                     "condensing_loop": "Condenser Loop 1",
                 }
             ],
@@ -180,3 +181,10 @@ SYS_1_RMD = {
         }
     ],
 }
+
+
+def test__TEST_RMD_baseline_system_1__is_valid():
+    schema_validation_result = schema_validate_rmr(SYS_1_RMD)
+    assert schema_validation_result[
+        "passed"
+    ], f"Schema error: {schema_validation_result['error']}"

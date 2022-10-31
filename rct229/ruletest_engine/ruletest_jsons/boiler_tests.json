@@ -35,12 +35,9 @@
                                                 "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                                 "terminals": [
                                                     {
-                                                        "id": "VAV Air Terminal 1",
-                                                        "is_supply_ducted": true,
-                                                        "heating_source": "HOT_WATER",
-                                                        "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
-                                                        "heating_from_loop": "Boiler Loop 1"
+                                                        "id": "Terminal 1",
+                                                        "is_supply_ducted": false,
+                                                        "served_by_heating_ventilation_air_conditioning_system": "AHU_HW_System1"
                                                     }
                                                 ]
                                             },
@@ -50,42 +47,20 @@
                                                 "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                                 "terminals": [
                                                     {
-                                                        "id": "VAV Air Terminal 2",
-                                                        "is_supply_ducted": true,
-                                                        "heating_source": "HOT_WATER",
-                                                        "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
-                                                        "heating_from_loop": "Boiler Loop 1"
+                                                        "id": "Terminal 2",
+                                                        "is_supply_ducted": false,
+                                                        "served_by_heating_ventilation_air_conditioning_system": "AHU_HW_System1"
                                                     }
                                                 ]
                                             }
                                         ],
                                         "heating_ventilation_air_conditioning_systems": [
                                             {
-                                                "id": "System 7",
-                                                "preheat_system": {
-                                                    "id": "Preheat Coil 1",
+                                                "id": "AHU_HW_System1",
+                                                "heating_system": {
+                                                    "id": "HHW Coil 1",
                                                     "heating_system_type": "FLUID_LOOP",
-                                                    "hot_water_loop": "Boiler Loop 1"
-                                                },
-                                                "fan_system": {
-                                                    "id": "VAV Fan System 1",
-                                                    "fan_control": "VARIABLE_SPEED_DRIVE",
-                                                    "supply_fans": [
-                                                        {
-                                                            "id": "Supply Fan 1"
-                                                        }
-                                                    ],
-                                                    "return_fans": [
-                                                        {
-                                                            "id": "Return Fan 1"
-                                                        }
-                                                    ]
-                                                },
-                                                "cooling_system": {
-                                                    "id": "CHW Coil 1",
-                                                    "cooling_system_type": "FLUID_LOOP",
-                                                    "chilled_water_loop": "Chiller Loop 1"
+                                                    "hot_water_loop": "Purchased HW Loop 1"
                                                 }
                                             }
                                         ]
@@ -93,46 +68,21 @@
                                 ]
                             }
                         ],
-                        "boilers": [
+                        "external_fluid_source": [
                             {
-                                "id": "Boiler 1",
-                                "loop": "Boiler Loop 1",
-                                "rated_capacity": 117228.44444444445,
-                                "efficiency": 0.75,
-                                "efficiency_metric": "THERMAL",
-                                "energy_source_type": "NATURAL_GAS"
-                            }
-                        ],
-                        "chillers": [
-                            {
-                                "id": "Chiller 1",
-                                "cooling_loop": "Chiller Loop 1"
-                            }
-                        ],
-                        "pumps": [
-                            {
-                                "id": "Boiler Pump 1",
-                                "loop_or_piping": "Boiler Loop 1",
-                                "speed_control": "FIXED_SPEED"
-                            },
-                            {
-                                "id": "Chiller Pump 1",
-                                "loop_or_piping": "Chiller Loop 1",
-                                "speed_control": "FIXED_SPEED"
+                                "id": "Purchased HW 1",
+                                "loop": "Purchased HW Loop 1",
+                                "type": "HOT_WATER"
                             }
                         ],
                         "fluid_loops": [
                             {
-                                "id": "Boiler Loop 1",
+                                "id": "Purchased HW Loop 1",
                                 "type": "HEATING",
                                 "heating_design_and_control": {
                                     "id": "DAC 1",
                                     "is_sized_using_coincident_load": true
                                 }
-                            },
-                            {
-                                "id": "Chiller Loop 1",
-                                "type": "COOLING"
                             }
                         ]
                     }
@@ -176,12 +126,9 @@
                                                 "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                                 "terminals": [
                                                     {
-                                                        "id": "VAV Air Terminal 1",
-                                                        "is_supply_ducted": true,
-                                                        "heating_source": "HOT_WATER",
-                                                        "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
-                                                        "heating_from_loop": "Boiler Loop 1"
+                                                        "id": "Terminal 1",
+                                                        "is_supply_ducted": false,
+                                                        "served_by_heating_ventilation_air_conditioning_system": "AHU_HW_System1"
                                                     }
                                                 ]
                                             },
@@ -191,42 +138,20 @@
                                                 "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                                 "terminals": [
                                                     {
-                                                        "id": "VAV Air Terminal 2",
-                                                        "is_supply_ducted": true,
-                                                        "heating_source": "HOT_WATER",
-                                                        "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
-                                                        "heating_from_loop": "Boiler Loop 1"
+                                                        "id": "Terminal 2",
+                                                        "is_supply_ducted": false,
+                                                        "served_by_heating_ventilation_air_conditioning_system": "AHU_HW_System1"
                                                     }
                                                 ]
                                             }
                                         ],
                                         "heating_ventilation_air_conditioning_systems": [
                                             {
-                                                "id": "System 7",
-                                                "preheat_system": {
-                                                    "id": "Preheat Coil 1",
+                                                "id": "AHU_HW_System1",
+                                                "heating_system": {
+                                                    "id": "HHW Coil 1",
                                                     "heating_system_type": "FLUID_LOOP",
-                                                    "hot_water_loop": "Boiler Loop 1"
-                                                },
-                                                "fan_system": {
-                                                    "id": "VAV Fan System 1",
-                                                    "fan_control": "VARIABLE_SPEED_DRIVE",
-                                                    "supply_fans": [
-                                                        {
-                                                            "id": "Supply Fan 1"
-                                                        }
-                                                    ],
-                                                    "return_fans": [
-                                                        {
-                                                            "id": "Return Fan 1"
-                                                        }
-                                                    ]
-                                                },
-                                                "cooling_system": {
-                                                    "id": "CHW Coil 1",
-                                                    "cooling_system_type": "FLUID_LOOP",
-                                                    "chilled_water_loop": "Chiller Loop 1"
+                                                    "hot_water_loop": "Purchased HW Loop 1"
                                                 }
                                             }
                                         ]
@@ -234,46 +159,21 @@
                                 ]
                             }
                         ],
-                        "boilers": [
+                        "external_fluid_source": [
                             {
-                                "id": "Boiler 1",
-                                "loop": "Boiler Loop 1",
-                                "rated_capacity": 117228.44444444445,
-                                "efficiency": 0.75,
-                                "efficiency_metric": "THERMAL",
-                                "energy_source_type": "NATURAL_GAS"
-                            }
-                        ],
-                        "chillers": [
-                            {
-                                "id": "Chiller 1",
-                                "cooling_loop": "Chiller Loop 1"
-                            }
-                        ],
-                        "pumps": [
-                            {
-                                "id": "Boiler Pump 1",
-                                "loop_or_piping": "Boiler Loop 1",
-                                "speed_control": "FIXED_SPEED"
-                            },
-                            {
-                                "id": "Chiller Pump 1",
-                                "loop_or_piping": "Chiller Loop 1",
-                                "speed_control": "FIXED_SPEED"
+                                "id": "Purchased HW 1",
+                                "loop": "Purchased HW Loop 1",
+                                "type": "HOT_WATER"
                             }
                         ],
                         "fluid_loops": [
                             {
-                                "id": "Boiler Loop 1",
+                                "id": "Purchased HW Loop 1",
                                 "type": "HEATING",
                                 "heating_design_and_control": {
                                     "id": "DAC 1",
                                     "is_sized_using_coincident_load": false
                                 }
-                            },
-                            {
-                                "id": "Chiller Loop 1",
-                                "type": "COOLING"
                             }
                         ]
                     }
@@ -321,8 +221,7 @@
                                                         "is_supply_ducted": true,
                                                         "heating_source": "HOT_WATER",
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
-                                                        "heating_from_loop": "Boiler Loop 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7"
                                                     }
                                                 ]
                                             },
@@ -336,8 +235,7 @@
                                                         "is_supply_ducted": true,
                                                         "heating_source": "HOT_WATER",
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
-                                                        "heating_from_loop": "Boiler Loop 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7"
                                                     }
                                                 ]
                                             }
@@ -345,6 +243,11 @@
                                         "heating_ventilation_air_conditioning_systems": [
                                             {
                                                 "id": "System 7",
+                                                "heating_system": {
+                                                    "id": "HHW Coil 1",
+                                                    "heating_system_type": "FLUID_LOOP",
+                                                    "hot_water_loop": "Boiler Loop 1"
+                                                },
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 1",
                                                     "heating_system_type": "FLUID_LOOP",
@@ -363,11 +266,6 @@
                                                             "id": "Return Fan 1"
                                                         }
                                                     ]
-                                                },
-                                                "cooling_system": {
-                                                    "id": "CHW Coil 1",
-                                                    "cooling_system_type": "FLUID_LOOP",
-                                                    "chilled_water_loop": "Chiller Loop 1"
                                                 }
                                             }
                                         ]
@@ -379,17 +277,11 @@
                             {
                                 "id": "Boiler 1",
                                 "loop": "Boiler Loop 1",
-                                "rated_capacity": 117228.44444444445,
+                                "design_capacity": 117228.44444444445,
                                 "efficiency": 0.75,
                                 "efficiency_metric": "THERMAL",
                                 "energy_source_type": "NATURAL_GAS",
                                 "draft_type": "NATURAL"
-                            }
-                        ],
-                        "chillers": [
-                            {
-                                "id": "Chiller 1",
-                                "cooling_loop": "Chiller Loop 1"
                             }
                         ],
                         "pumps": [
@@ -408,10 +300,6 @@
                             {
                                 "id": "Boiler Loop 1",
                                 "type": "HEATING"
-                            },
-                            {
-                                "id": "Chiller Loop 1",
-                                "type": "COOLING"
                             }
                         ]
                     }
@@ -459,8 +347,7 @@
                                                         "is_supply_ducted": true,
                                                         "heating_source": "HOT_WATER",
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
-                                                        "heating_from_loop": "Boiler Loop 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7"
                                                     }
                                                 ]
                                             },
@@ -474,8 +361,7 @@
                                                         "is_supply_ducted": true,
                                                         "heating_source": "HOT_WATER",
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
-                                                        "heating_from_loop": "Boiler Loop 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7"
                                                     }
                                                 ]
                                             }
@@ -483,6 +369,11 @@
                                         "heating_ventilation_air_conditioning_systems": [
                                             {
                                                 "id": "System 7",
+                                                "heating_system": {
+                                                    "id": "HHW Coil 1",
+                                                    "heating_system_type": "FLUID_LOOP",
+                                                    "hot_water_loop": "Boiler Loop 1"
+                                                },
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 1",
                                                     "heating_system_type": "FLUID_LOOP",
@@ -501,11 +392,6 @@
                                                             "id": "Return Fan 1"
                                                         }
                                                     ]
-                                                },
-                                                "cooling_system": {
-                                                    "id": "CHW Coil 1",
-                                                    "cooling_system_type": "FLUID_LOOP",
-                                                    "chilled_water_loop": "Chiller Loop 1"
                                                 }
                                             }
                                         ]
@@ -517,17 +403,11 @@
                             {
                                 "id": "Boiler 1",
                                 "loop": "Boiler Loop 1",
-                                "rated_capacity": 117228.44444444445,
+                                "design_capacity": 117228.44444444445,
                                 "efficiency": 0.75,
                                 "efficiency_metric": "THERMAL",
                                 "energy_source_type": "NATURAL_GAS",
                                 "draft_type": "FORCED"
-                            }
-                        ],
-                        "chillers": [
-                            {
-                                "id": "Chiller 1",
-                                "cooling_loop": "Chiller Loop 1"
                             }
                         ],
                         "pumps": [
@@ -546,10 +426,6 @@
                             {
                                 "id": "Boiler Loop 1",
                                 "type": "HEATING"
-                            },
-                            {
-                                "id": "Chiller Loop 1",
-                                "type": "COOLING"
                             }
                         ]
                     }
@@ -606,18 +482,6 @@
                                                         "type": "VARIABLE_AIR_VOLUME",
                                                         "served_by_heating_ventilation_air_conditioning_system": "System 7"
                                                     }
-                                                ],
-                                                "surfaces": [
-                                                    {
-                                                        "id": "Surface 1",
-                                                        "adjacent_to": "EXTERIOR",
-                                                        "tilt": 0,
-                                                        "area": 92.90303999999999,
-                                                        "construction": {
-                                                            "id": "Construction 1",
-                                                            "u_factor": 0.35773064046128095
-                                                        }
-                                                    }
                                                 ]
                                             },
                                             {
@@ -668,10 +532,6 @@
                                                             "id": "Return Fan 1"
                                                         }
                                                     ]
-                                                },
-                                                "cooling_system": {
-                                                    "id": "Cooling System 1",
-                                                    "rated_sensible_cool_capacity": 24619.0
                                                 }
                                             }
                                         ]
@@ -683,7 +543,7 @@
                             {
                                 "id": "Boiler 1",
                                 "loop": "Boiler Loop 1",
-                                "rated_capacity": 117228.44444444445
+                                "design_capacity": 117228.44444444445
                             }
                         ],
                         "pumps": [
@@ -705,10 +565,7 @@
                             }
                         ]
                     }
-                ],
-                "weather": {
-                    "climate_zone": "CZ4A"
-                }
+                ]
             }
         }
     },
@@ -761,18 +618,6 @@
                                                         "type": "VARIABLE_AIR_VOLUME",
                                                         "served_by_heating_ventilation_air_conditioning_system": "System 7"
                                                     }
-                                                ],
-                                                "surfaces": [
-                                                    {
-                                                        "id": "Surface 1",
-                                                        "adjacent_to": "EXTERIOR",
-                                                        "tilt": 0,
-                                                        "area": 92.90303999999999,
-                                                        "construction": {
-                                                            "id": "Construction 1",
-                                                            "u_factor": 0.35773064046128095
-                                                        }
-                                                    }
                                                 ]
                                             },
                                             {
@@ -823,10 +668,6 @@
                                                             "id": "Return Fan 1"
                                                         }
                                                     ]
-                                                },
-                                                "cooling_system": {
-                                                    "id": "Cooling System 1",
-                                                    "rated_sensible_cool_capacity": 24619.0
                                                 }
                                             }
                                         ]
@@ -838,7 +679,7 @@
                             {
                                 "id": "Boiler 1",
                                 "loop": "Boiler Loop 1",
-                                "rated_capacity": 117228.44444444445
+                                "design_capacity": 117228.44444444445
                             },
                             {
                                 "id": "Boiler 2",
@@ -865,10 +706,7 @@
                             }
                         ]
                     }
-                ],
-                "weather": {
-                    "climate_zone": "CZ4A"
-                }
+                ]
             }
         }
     },
@@ -921,18 +759,6 @@
                                                         "type": "VARIABLE_AIR_VOLUME",
                                                         "served_by_heating_ventilation_air_conditioning_system": "System 7"
                                                     }
-                                                ],
-                                                "surfaces": [
-                                                    {
-                                                        "id": "Surface 1",
-                                                        "adjacent_to": "EXTERIOR",
-                                                        "tilt": 0,
-                                                        "area": 92.90303999999999,
-                                                        "construction": {
-                                                            "id": "Construction 1",
-                                                            "u_factor": 0.35773064046128095
-                                                        }
-                                                    }
                                                 ]
                                             },
                                             {
@@ -983,10 +809,6 @@
                                                             "id": "Return Fan 1"
                                                         }
                                                     ]
-                                                },
-                                                "cooling_system": {
-                                                    "id": "Cooling System 1",
-                                                    "rated_sensible_cool_capacity": 24619.0
                                                 }
                                             }
                                         ]
@@ -998,7 +820,7 @@
                             {
                                 "id": "Boiler 1",
                                 "loop": "Boiler Loop 1",
-                                "rated_capacity": 117228.44444444445
+                                "design_capacity": 117228.44444444445
                             }
                         ],
                         "pumps": [
@@ -1020,10 +842,7 @@
                             }
                         ]
                     }
-                ],
-                "weather": {
-                    "climate_zone": "CZ4A"
-                }
+                ]
             }
         }
     },
@@ -1076,18 +895,6 @@
                                                         "type": "VARIABLE_AIR_VOLUME",
                                                         "served_by_heating_ventilation_air_conditioning_system": "System 7"
                                                     }
-                                                ],
-                                                "surfaces": [
-                                                    {
-                                                        "id": "Surface 1",
-                                                        "adjacent_to": "EXTERIOR",
-                                                        "tilt": 0,
-                                                        "area": 92.90303999999999,
-                                                        "construction": {
-                                                            "id": "Construction 1",
-                                                            "u_factor": 0.35773064046128095
-                                                        }
-                                                    }
                                                 ]
                                             },
                                             {
@@ -1138,10 +945,6 @@
                                                             "id": "Return Fan 1"
                                                         }
                                                     ]
-                                                },
-                                                "cooling_system": {
-                                                    "id": "Cooling System 1",
-                                                    "rated_sensible_cool_capacity": 24619.0
                                                 }
                                             }
                                         ]
@@ -1153,7 +956,7 @@
                             {
                                 "id": "Boiler 1",
                                 "loop": "Boiler Loop 1",
-                                "rated_capacity": 117228.44444444445
+                                "design_capacity": 117228.44444444445
                             },
                             {
                                 "id": "Boiler 2",
@@ -1180,10 +983,7 @@
                             }
                         ]
                     }
-                ],
-                "weather": {
-                    "climate_zone": "CZ4A"
-                }
+                ]
             }
         }
     },
@@ -1236,18 +1036,6 @@
                                                         "type": "VARIABLE_AIR_VOLUME",
                                                         "served_by_heating_ventilation_air_conditioning_system": "System 7"
                                                     }
-                                                ],
-                                                "surfaces": [
-                                                    {
-                                                        "id": "Surface 1",
-                                                        "adjacent_to": "EXTERIOR",
-                                                        "tilt": 0,
-                                                        "area": 92.90303999999999,
-                                                        "construction": {
-                                                            "id": "Construction 1",
-                                                            "u_factor": 0.35773064046128095
-                                                        }
-                                                    }
                                                 ]
                                             },
                                             {
@@ -1298,10 +1086,6 @@
                                                             "id": "Return Fan 1"
                                                         }
                                                     ]
-                                                },
-                                                "cooling_system": {
-                                                    "id": "Cooling System 1",
-                                                    "rated_sensible_cool_capacity": 24619.0
                                                 }
                                             }
                                         ]
@@ -1313,7 +1097,7 @@
                             {
                                 "id": "Boiler 1",
                                 "loop": "Boiler Loop 1",
-                                "rated_capacity": 117228.44444444445
+                                "design_capacity": 117228.44444444445
                             },
                             {
                                 "id": "Boiler 2",
@@ -1340,10 +1124,7 @@
                             }
                         ]
                     }
-                ],
-                "weather": {
-                    "climate_zone": "CZ4A"
-                }
+                ]
             }
         }
     },
@@ -1387,8 +1168,7 @@
                                                         "is_supply_ducted": true,
                                                         "heating_source": "HOT_WATER",
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
-                                                        "heating_from_loop": "Boiler Loop 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7"
                                                     }
                                                 ]
                                             },
@@ -1402,8 +1182,7 @@
                                                         "is_supply_ducted": true,
                                                         "heating_source": "HOT_WATER",
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
-                                                        "heating_from_loop": "Boiler Loop 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7"
                                                     }
                                                 ]
                                             }
@@ -1411,6 +1190,11 @@
                                         "heating_ventilation_air_conditioning_systems": [
                                             {
                                                 "id": "System 7",
+                                                "heating_system": {
+                                                    "id": "HHW Coil 1",
+                                                    "heating_system_type": "FLUID_LOOP",
+                                                    "hot_water_loop": "Boiler Loop 1"
+                                                },
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 1",
                                                     "heating_system_type": "FLUID_LOOP",
@@ -1429,11 +1213,6 @@
                                                             "id": "Return Fan 1"
                                                         }
                                                     ]
-                                                },
-                                                "cooling_system": {
-                                                    "id": "CHW Coil 1",
-                                                    "cooling_system_type": "FLUID_LOOP",
-                                                    "chilled_water_loop": "Chiller Loop 1"
                                                 }
                                             }
                                         ]
@@ -1445,7 +1224,7 @@
                             {
                                 "id": "Boiler 1",
                                 "loop": "Boiler Loop 1",
-                                "rated_capacity": 117228.44444444445,
+                                "design_capacity": 117228.44444444445,
                                 "efficiency": 0.75,
                                 "efficiency_metric": "THERMAL",
                                 "energy_source_type": "NATURAL_GAS",
@@ -1455,15 +1234,9 @@
                             {
                                 "id": "Boiler 2",
                                 "loop": "Boiler Loop 1",
-                                "rated_capacity": 10257.488888888889,
+                                "design_capacity": 10257.488888888889,
                                 "operation_lower_limit": 35000,
                                 "operation_upper_limit": 70000
-                            }
-                        ],
-                        "chillers": [
-                            {
-                                "id": "Chiller 1",
-                                "cooling_loop": "Chiller Loop 1"
                             }
                         ],
                         "pumps": [
@@ -1482,10 +1255,6 @@
                             {
                                 "id": "Boiler Loop 1",
                                 "type": "HEATING"
-                            },
-                            {
-                                "id": "Chiller Loop 1",
-                                "type": "COOLING"
                             }
                         ]
                     }
@@ -1533,8 +1302,7 @@
                                                         "is_supply_ducted": true,
                                                         "heating_source": "HOT_WATER",
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
-                                                        "heating_from_loop": "Boiler Loop 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7"
                                                     }
                                                 ]
                                             },
@@ -1548,8 +1316,7 @@
                                                         "is_supply_ducted": true,
                                                         "heating_source": "HOT_WATER",
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
-                                                        "heating_from_loop": "Boiler Loop 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7"
                                                     }
                                                 ]
                                             }
@@ -1557,6 +1324,11 @@
                                         "heating_ventilation_air_conditioning_systems": [
                                             {
                                                 "id": "System 7",
+                                                "heating_system": {
+                                                    "id": "HHW Coil 1",
+                                                    "heating_system_type": "FLUID_LOOP",
+                                                    "hot_water_loop": "Boiler Loop 1"
+                                                },
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 1",
                                                     "heating_system_type": "FLUID_LOOP",
@@ -1575,11 +1347,6 @@
                                                             "id": "Return Fan 1"
                                                         }
                                                     ]
-                                                },
-                                                "cooling_system": {
-                                                    "id": "CHW Coil 1",
-                                                    "cooling_system_type": "FLUID_LOOP",
-                                                    "chilled_water_loop": "Chiller Loop 1"
                                                 }
                                             }
                                         ]
@@ -1591,7 +1358,7 @@
                             {
                                 "id": "Boiler 1",
                                 "loop": "Boiler Loop 1",
-                                "rated_capacity": 117228.44444444445,
+                                "design_capacity": 117228.44444444445,
                                 "efficiency": 0.75,
                                 "efficiency_metric": "THERMAL",
                                 "energy_source_type": "NATURAL_GAS",
@@ -1601,15 +1368,9 @@
                             {
                                 "id": "Boiler 2",
                                 "loop": "Boiler Loop 1",
-                                "rated_capacity": 10257.488888888889,
+                                "design_capacity": 10257.488888888889,
                                 "operation_lower_limit": 0,
                                 "operation_upper_limit": 35000
-                            }
-                        ],
-                        "chillers": [
-                            {
-                                "id": "Chiller 1",
-                                "cooling_loop": "Chiller Loop 1"
                             }
                         ],
                         "pumps": [
@@ -1628,10 +1389,6 @@
                             {
                                 "id": "Boiler Loop 1",
                                 "type": "HEATING"
-                            },
-                            {
-                                "id": "Chiller Loop 1",
-                                "type": "COOLING"
                             }
                         ]
                     }
@@ -1679,8 +1436,7 @@
                                                         "is_supply_ducted": true,
                                                         "heating_source": "HOT_WATER",
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
-                                                        "heating_from_loop": "Boiler Loop 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7"
                                                     }
                                                 ]
                                             },
@@ -1694,8 +1450,7 @@
                                                         "is_supply_ducted": true,
                                                         "heating_source": "HOT_WATER",
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
-                                                        "heating_from_loop": "Boiler Loop 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7"
                                                     }
                                                 ]
                                             }
@@ -1703,6 +1458,11 @@
                                         "heating_ventilation_air_conditioning_systems": [
                                             {
                                                 "id": "System 7",
+                                                "heating_system": {
+                                                    "id": "HHW Coil 1",
+                                                    "heating_system_type": "FLUID_LOOP",
+                                                    "hot_water_loop": "Boiler Loop 1"
+                                                },
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 1",
                                                     "heating_system_type": "FLUID_LOOP",
@@ -1721,11 +1481,6 @@
                                                             "id": "Return Fan 1"
                                                         }
                                                     ]
-                                                },
-                                                "cooling_system": {
-                                                    "id": "CHW Coil 1",
-                                                    "cooling_system_type": "FLUID_LOOP",
-                                                    "chilled_water_loop": "Chiller Loop 1"
                                                 }
                                             }
                                         ]
@@ -1737,7 +1492,7 @@
                             {
                                 "id": "Boiler 1",
                                 "loop": "Boiler Loop 1",
-                                "rated_capacity": 117228.44444444445,
+                                "design_capacity": 117228.44444444445,
                                 "efficiency": 0.75,
                                 "efficiency_metric": "THERMAL",
                                 "energy_source_type": "NATURAL_GAS",
@@ -1747,15 +1502,9 @@
                             {
                                 "id": "Boiler 2",
                                 "loop": "Boiler Loop 1",
-                                "rated_capacity": 10257.488888888889,
+                                "design_capacity": 10257.488888888889,
                                 "operation_lower_limit": 0,
                                 "operation_upper_limit": 35000
-                            }
-                        ],
-                        "chillers": [
-                            {
-                                "id": "Chiller 1",
-                                "cooling_loop": "Chiller Loop 1"
                             }
                         ],
                         "pumps": [
@@ -1774,10 +1523,6 @@
                             {
                                 "id": "Boiler Loop 1",
                                 "type": "HEATING"
-                            },
-                            {
-                                "id": "Chiller Loop 1",
-                                "type": "COOLING"
                             }
                         ]
                     }
@@ -1825,8 +1570,7 @@
                                                         "is_supply_ducted": true,
                                                         "heating_source": "HOT_WATER",
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
-                                                        "heating_from_loop": "Boiler Loop 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7"
                                                     }
                                                 ]
                                             },
@@ -1840,8 +1584,7 @@
                                                         "is_supply_ducted": true,
                                                         "heating_source": "HOT_WATER",
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
-                                                        "heating_from_loop": "Boiler Loop 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7"
                                                     }
                                                 ]
                                             }
@@ -1849,6 +1592,11 @@
                                         "heating_ventilation_air_conditioning_systems": [
                                             {
                                                 "id": "System 7",
+                                                "heating_system": {
+                                                    "id": "HHW Coil 1",
+                                                    "heating_system_type": "FLUID_LOOP",
+                                                    "hot_water_loop": "Boiler Loop 1"
+                                                },
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 1",
                                                     "heating_system_type": "FLUID_LOOP",
@@ -1867,11 +1615,6 @@
                                                             "id": "Return Fan 1"
                                                         }
                                                     ]
-                                                },
-                                                "cooling_system": {
-                                                    "id": "CHW Coil 1",
-                                                    "cooling_system_type": "FLUID_LOOP",
-                                                    "chilled_water_loop": "Chiller Loop 1"
                                                 }
                                             }
                                         ]
@@ -1883,16 +1626,10 @@
                             {
                                 "id": "Boiler 1",
                                 "loop": "Boiler Loop 1",
-                                "rated_capacity": 117228.44444444445,
+                                "design_capacity": 117228.44444444445,
                                 "efficiency": 0.75,
                                 "efficiency_metric": "THERMAL",
                                 "energy_source_type": "NATURAL_GAS"
-                            }
-                        ],
-                        "chillers": [
-                            {
-                                "id": "Chiller 1",
-                                "cooling_loop": "Chiller Loop 1"
                             }
                         ],
                         "pumps": [
@@ -1916,10 +1653,6 @@
                                     "design_supply_temperature": 82.22222222222229,
                                     "design_return_temperature": 54.44444444444446
                                 }
-                            },
-                            {
-                                "id": "Chiller Loop 1",
-                                "type": "COOLING"
                             }
                         ]
                     }
@@ -1967,8 +1700,7 @@
                                                         "is_supply_ducted": true,
                                                         "heating_source": "HOT_WATER",
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
-                                                        "heating_from_loop": "Boiler Loop 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7"
                                                     }
                                                 ]
                                             },
@@ -1982,8 +1714,7 @@
                                                         "is_supply_ducted": true,
                                                         "heating_source": "HOT_WATER",
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
-                                                        "heating_from_loop": "Boiler Loop 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7"
                                                     }
                                                 ]
                                             }
@@ -1991,6 +1722,11 @@
                                         "heating_ventilation_air_conditioning_systems": [
                                             {
                                                 "id": "System 7",
+                                                "heating_system": {
+                                                    "id": "HHW Coil 1",
+                                                    "heating_system_type": "FLUID_LOOP",
+                                                    "hot_water_loop": "Boiler Loop 1"
+                                                },
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 1",
                                                     "heating_system_type": "FLUID_LOOP",
@@ -2009,11 +1745,6 @@
                                                             "id": "Return Fan 1"
                                                         }
                                                     ]
-                                                },
-                                                "cooling_system": {
-                                                    "id": "CHW Coil 1",
-                                                    "cooling_system_type": "FLUID_LOOP",
-                                                    "chilled_water_loop": "Chiller Loop 1"
                                                 }
                                             }
                                         ]
@@ -2025,16 +1756,10 @@
                             {
                                 "id": "Boiler 1",
                                 "loop": "Boiler Loop 1",
-                                "rated_capacity": 117228.44444444445,
+                                "design_capacity": 117228.44444444445,
                                 "efficiency": 0.75,
                                 "efficiency_metric": "THERMAL",
                                 "energy_source_type": "NATURAL_GAS"
-                            }
-                        ],
-                        "chillers": [
-                            {
-                                "id": "Chiller 1",
-                                "cooling_loop": "Chiller Loop 1"
                             }
                         ],
                         "pumps": [
@@ -2058,10 +1783,6 @@
                                     "design_supply_temperature": 93.33333333333337,
                                     "design_return_temperature": 65.5555555555556
                                 }
-                            },
-                            {
-                                "id": "Chiller Loop 1",
-                                "type": "COOLING"
                             }
                         ]
                     }
@@ -2109,8 +1830,7 @@
                                                         "is_supply_ducted": true,
                                                         "heating_source": "HOT_WATER",
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
-                                                        "heating_from_loop": "Boiler Loop 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7"
                                                     }
                                                 ]
                                             },
@@ -2124,8 +1844,7 @@
                                                         "is_supply_ducted": true,
                                                         "heating_source": "HOT_WATER",
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
-                                                        "heating_from_loop": "Boiler Loop 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7"
                                                     }
                                                 ]
                                             }
@@ -2133,6 +1852,11 @@
                                         "heating_ventilation_air_conditioning_systems": [
                                             {
                                                 "id": "System 7",
+                                                "heating_system": {
+                                                    "id": "HHW Coil 1",
+                                                    "heating_system_type": "FLUID_LOOP",
+                                                    "hot_water_loop": "Boiler Loop 1"
+                                                },
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 1",
                                                     "heating_system_type": "FLUID_LOOP",
@@ -2151,11 +1875,6 @@
                                                             "id": "Return Fan 1"
                                                         }
                                                     ]
-                                                },
-                                                "cooling_system": {
-                                                    "id": "CHW Coil 1",
-                                                    "cooling_system_type": "FLUID_LOOP",
-                                                    "chilled_water_loop": "Chiller Loop 1"
                                                 }
                                             }
                                         ]
@@ -2167,16 +1886,10 @@
                             {
                                 "id": "Boiler 1",
                                 "loop": "Boiler Loop 1",
-                                "rated_capacity": 117228.44444444445,
+                                "design_capacity": 117228.44444444445,
                                 "efficiency": 0.75,
                                 "efficiency_metric": "THERMAL",
                                 "energy_source_type": "NATURAL_GAS"
-                            }
-                        ],
-                        "chillers": [
-                            {
-                                "id": "Chiller 1",
-                                "cooling_loop": "Chiller Loop 1"
                             }
                         ],
                         "pumps": [
@@ -2196,10 +1909,6 @@
                                 "id": "Boiler Loop 1",
                                 "type": "HEATING",
                                 "pump_power_per_flow_rate": 301.1889035667107
-                            },
-                            {
-                                "id": "Chiller Loop 1",
-                                "type": "COOLING"
                             }
                         ]
                     }
@@ -2247,8 +1956,7 @@
                                                         "is_supply_ducted": true,
                                                         "heating_source": "HOT_WATER",
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
-                                                        "heating_from_loop": "Boiler Loop 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7"
                                                     }
                                                 ]
                                             },
@@ -2262,8 +1970,7 @@
                                                         "is_supply_ducted": true,
                                                         "heating_source": "HOT_WATER",
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
-                                                        "heating_from_loop": "Boiler Loop 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7"
                                                     }
                                                 ]
                                             }
@@ -2271,6 +1978,11 @@
                                         "heating_ventilation_air_conditioning_systems": [
                                             {
                                                 "id": "System 7",
+                                                "heating_system": {
+                                                    "id": "HHW Coil 1",
+                                                    "heating_system_type": "FLUID_LOOP",
+                                                    "hot_water_loop": "Boiler Loop 1"
+                                                },
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 1",
                                                     "heating_system_type": "FLUID_LOOP",
@@ -2289,11 +2001,6 @@
                                                             "id": "Return Fan 1"
                                                         }
                                                     ]
-                                                },
-                                                "cooling_system": {
-                                                    "id": "CHW Coil 1",
-                                                    "cooling_system_type": "FLUID_LOOP",
-                                                    "chilled_water_loop": "Chiller Loop 1"
                                                 }
                                             }
                                         ]
@@ -2305,16 +2012,10 @@
                             {
                                 "id": "Boiler 1",
                                 "loop": "Boiler Loop 1",
-                                "rated_capacity": 117228.44444444445,
+                                "design_capacity": 117228.44444444445,
                                 "efficiency": 0.75,
                                 "efficiency_metric": "THERMAL",
                                 "energy_source_type": "NATURAL_GAS"
-                            }
-                        ],
-                        "chillers": [
-                            {
-                                "id": "Chiller 1",
-                                "cooling_loop": "Chiller Loop 1"
                             }
                         ],
                         "pumps": [
@@ -2334,10 +2035,6 @@
                                 "id": "Boiler Loop 1",
                                 "type": "HEATING",
                                 "pump_power_per_flow_rate": 332.89299867899604
-                            },
-                            {
-                                "id": "Chiller Loop 1",
-                                "type": "COOLING"
                             }
                         ]
                     }
@@ -2379,18 +2076,18 @@
                                                 "id": "Thermal Zone 1",
                                                 "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
-                                                "spaces": [
-                                                    {
-                                                        "id": "Space 1",
-                                                        "occupant_multiplier_schedule": "Required Schedule 1",
-                                                        "floor_area": 5574.1824
-                                                    }
-                                                ],
                                                 "terminals": [
                                                     {
-                                                        "id": "Terminal 1",
-                                                        "is_supply_ducted": false,
-                                                        "served_by_heating_ventilation_air_conditioning_system": "AHU_HW_System1"
+                                                        "id": "VAV Air Terminal 1",
+                                                        "is_supply_ducted": true,
+                                                        "heating_source": "HOT_WATER",
+                                                        "type": "VARIABLE_AIR_VOLUME",
+                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7"
+                                                    }
+                                                ],
+                                                "spaces": [
+                                                    {
+                                                        "floor_area": 60000
                                                     }
                                                 ]
                                             },
@@ -2398,29 +2095,48 @@
                                                 "id": "Thermal Zone 2",
                                                 "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
-                                                "spaces": [
-                                                    {
-                                                        "id": "Space 2",
-                                                        "occupant_multiplier_schedule": "Required Schedule 1",
-                                                        "floor_area": 3716.1215999999995
-                                                    }
-                                                ],
                                                 "terminals": [
                                                     {
-                                                        "id": "Terminal 2",
-                                                        "is_supply_ducted": false,
-                                                        "served_by_heating_ventilation_air_conditioning_system": "AHU_HW_System1"
+                                                        "id": "VAV Air Terminal 2",
+                                                        "is_supply_ducted": true,
+                                                        "heating_source": "HOT_WATER",
+                                                        "type": "VARIABLE_AIR_VOLUME",
+                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7"
+                                                    }
+                                                ],
+                                                "spaces": [
+                                                    {
+                                                        "floor_area": 40000
                                                     }
                                                 ]
                                             }
                                         ],
                                         "heating_ventilation_air_conditioning_systems": [
                                             {
-                                                "id": "AHU_HW_System1",
+                                                "id": "System 7",
                                                 "heating_system": {
                                                     "id": "HHW Coil 1",
                                                     "heating_system_type": "FLUID_LOOP",
                                                     "hot_water_loop": "Boiler Loop 1"
+                                                },
+                                                "preheat_system": {
+                                                    "id": "Preheat Coil 1",
+                                                    "heating_system_type": "FLUID_LOOP",
+                                                    "hot_water_loop": "Boiler Loop 1"
+                                                },
+                                                "fan_system": {
+                                                    "id": "VAV Fan System 1",
+                                                    "fan_control": "VARIABLE_SPEED_DRIVE",
+                                                    "supply_fans": [
+                                                        {
+                                                            "id": "Supply Fan 1"
+                                                        }
+                                                    ],
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "Return Fan 1"
+                                                        }
+                                                    ]
                                                 }
                                             }
                                         ]
@@ -2431,17 +2147,22 @@
                         "boilers": [
                             {
                                 "id": "Boiler 1",
-                                "loop": "Boiler Loop 1"
-                            },
-                            {
-                                "id": "Boiler 2",
-                                "loop": "Boiler Loop 1"
+                                "loop": "Boiler Loop 1",
+                                "design_capacity": 117228.44444444445,
+                                "efficiency": 0.75,
+                                "efficiency_metric": "THERMAL",
+                                "energy_source_type": "NATURAL_GAS"
                             }
                         ],
                         "pumps": [
                             {
-                                "id": "HW Pump 1",
+                                "id": "Boiler Pump 1",
                                 "loop_or_piping": "Boiler Loop 1",
+                                "speed_control": "FIXED_SPEED"
+                            },
+                            {
+                                "id": "Chiller Pump 1",
+                                "loop_or_piping": "Chiller Loop 1",
                                 "speed_control": "FIXED_SPEED"
                             }
                         ],
@@ -2490,18 +2211,18 @@
                                                 "id": "Thermal Zone 1",
                                                 "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
-                                                "spaces": [
-                                                    {
-                                                        "id": "Space 1",
-                                                        "occupant_multiplier_schedule": "Required Schedule 1",
-                                                        "floor_area": 5574.1824
-                                                    }
-                                                ],
                                                 "terminals": [
                                                     {
-                                                        "id": "Terminal 1",
-                                                        "is_supply_ducted": false,
-                                                        "served_by_heating_ventilation_air_conditioning_system": "AHU_HW_System1"
+                                                        "id": "VAV Air Terminal 1",
+                                                        "is_supply_ducted": true,
+                                                        "heating_source": "HOT_WATER",
+                                                        "type": "VARIABLE_AIR_VOLUME",
+                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7"
+                                                    }
+                                                ],
+                                                "spaces": [
+                                                    {
+                                                        "floor_area": 60000
                                                     }
                                                 ]
                                             },
@@ -2509,29 +2230,48 @@
                                                 "id": "Thermal Zone 2",
                                                 "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
-                                                "spaces": [
-                                                    {
-                                                        "id": "Space 2",
-                                                        "occupant_multiplier_schedule": "Required Schedule 1",
-                                                        "floor_area": 3716.1215999999995
-                                                    }
-                                                ],
                                                 "terminals": [
                                                     {
-                                                        "id": "Terminal 2",
-                                                        "is_supply_ducted": false,
-                                                        "served_by_heating_ventilation_air_conditioning_system": "AHU_HW_System1"
+                                                        "id": "VAV Air Terminal 2",
+                                                        "is_supply_ducted": true,
+                                                        "heating_source": "HOT_WATER",
+                                                        "type": "VARIABLE_AIR_VOLUME",
+                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7"
+                                                    }
+                                                ],
+                                                "spaces": [
+                                                    {
+                                                        "floor_area": 40000
                                                     }
                                                 ]
                                             }
                                         ],
                                         "heating_ventilation_air_conditioning_systems": [
                                             {
-                                                "id": "AHU_HW_System1",
+                                                "id": "System 7",
                                                 "heating_system": {
                                                     "id": "HHW Coil 1",
                                                     "heating_system_type": "FLUID_LOOP",
                                                     "hot_water_loop": "Boiler Loop 1"
+                                                },
+                                                "preheat_system": {
+                                                    "id": "Preheat Coil 1",
+                                                    "heating_system_type": "FLUID_LOOP",
+                                                    "hot_water_loop": "Boiler Loop 1"
+                                                },
+                                                "fan_system": {
+                                                    "id": "VAV Fan System 1",
+                                                    "fan_control": "VARIABLE_SPEED_DRIVE",
+                                                    "supply_fans": [
+                                                        {
+                                                            "id": "Supply Fan 1"
+                                                        }
+                                                    ],
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "Return Fan 1"
+                                                        }
+                                                    ]
                                                 }
                                             }
                                         ]
@@ -2542,22 +2282,23 @@
                         "boilers": [
                             {
                                 "id": "Boiler 1",
-                                "loop": "Boiler Loop 1"
-                            },
-                            {
-                                "id": "Boiler 2",
-                                "loop": "Boiler Loop 1"
+                                "loop": "Boiler Loop 1",
+                                "design_capacity": 117228.44444444445,
+                                "efficiency": 0.75,
+                                "efficiency_metric": "THERMAL",
+                                "energy_source_type": "NATURAL_GAS"
                             }
                         ],
                         "pumps": [
                             {
-                                "id": "HW Pump 1",
+                                "id": "Boiler Pump 1",
                                 "loop_or_piping": "Boiler Loop 1",
                                 "speed_control": "VARIABLE_SPEED"
                             },
                             {
-                                "id": "HW Pump 2",
-                                "loop_or_piping": "VARIABLE_SPEED"
+                                "id": "Chiller Pump 1",
+                                "loop_or_piping": "Chiller Loop 1",
+                                "speed_control": "VARIABLE_SPEED"
                             }
                         ],
                         "fluid_loops": [
@@ -2605,18 +2346,18 @@
                                                 "id": "Thermal Zone 1",
                                                 "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
-                                                "spaces": [
-                                                    {
-                                                        "id": "Space 1",
-                                                        "occupant_multiplier_schedule": "Required Schedule 1",
-                                                        "floor_area": 6503.212799999999
-                                                    }
-                                                ],
                                                 "terminals": [
                                                     {
-                                                        "id": "Terminal 1",
-                                                        "is_supply_ducted": false,
-                                                        "served_by_heating_ventilation_air_conditioning_system": "AHU_HW_System1"
+                                                        "id": "VAV Air Terminal 1",
+                                                        "is_supply_ducted": true,
+                                                        "heating_source": "HOT_WATER",
+                                                        "type": "VARIABLE_AIR_VOLUME",
+                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7"
+                                                    }
+                                                ],
+                                                "spaces": [
+                                                    {
+                                                        "floor_area": 70000
                                                     }
                                                 ]
                                             },
@@ -2624,29 +2365,48 @@
                                                 "id": "Thermal Zone 2",
                                                 "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
-                                                "spaces": [
-                                                    {
-                                                        "id": "Space 2",
-                                                        "occupant_multiplier_schedule": "Required Schedule 1",
-                                                        "floor_area": 5574.1824
-                                                    }
-                                                ],
                                                 "terminals": [
                                                     {
-                                                        "id": "Terminal 2",
-                                                        "is_supply_ducted": false,
-                                                        "served_by_heating_ventilation_air_conditioning_system": "AHU_HW_System1"
+                                                        "id": "VAV Air Terminal 2",
+                                                        "is_supply_ducted": true,
+                                                        "heating_source": "HOT_WATER",
+                                                        "type": "VARIABLE_AIR_VOLUME",
+                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7"
+                                                    }
+                                                ],
+                                                "spaces": [
+                                                    {
+                                                        "floor_area": 60000
                                                     }
                                                 ]
                                             }
                                         ],
                                         "heating_ventilation_air_conditioning_systems": [
                                             {
-                                                "id": "AHU_HW_System1",
+                                                "id": "System 7",
                                                 "heating_system": {
                                                     "id": "HHW Coil 1",
                                                     "heating_system_type": "FLUID_LOOP",
                                                     "hot_water_loop": "Boiler Loop 1"
+                                                },
+                                                "preheat_system": {
+                                                    "id": "Preheat Coil 1",
+                                                    "heating_system_type": "FLUID_LOOP",
+                                                    "hot_water_loop": "Boiler Loop 1"
+                                                },
+                                                "fan_system": {
+                                                    "id": "VAV Fan System 1",
+                                                    "fan_control": "VARIABLE_SPEED_DRIVE",
+                                                    "supply_fans": [
+                                                        {
+                                                            "id": "Supply Fan 1"
+                                                        }
+                                                    ],
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "Return Fan 1"
+                                                        }
+                                                    ]
                                                 }
                                             }
                                         ]
@@ -2657,22 +2417,23 @@
                         "boilers": [
                             {
                                 "id": "Boiler 1",
-                                "loop": "Boiler Loop 1"
-                            },
-                            {
-                                "id": "Boiler 2",
-                                "loop": "Boiler Loop 1"
+                                "loop": "Boiler Loop 1",
+                                "design_capacity": 117228.44444444445,
+                                "efficiency": 0.75,
+                                "efficiency_metric": "THERMAL",
+                                "energy_source_type": "NATURAL_GAS"
                             }
                         ],
                         "pumps": [
                             {
-                                "id": "HW Pump 1",
+                                "id": "Boiler Pump 1",
                                 "loop_or_piping": "Boiler Loop 1",
                                 "speed_control": "VARIABLE_SPEED"
                             },
                             {
-                                "id": "HW Pump 2",
-                                "loop_or_piping": "VARIABLE_SPEED"
+                                "id": "Chiller Pump 1",
+                                "loop_or_piping": "Chiller Loop 1",
+                                "speed_control": "VARIABLE_SPEED"
                             }
                         ],
                         "fluid_loops": [
@@ -2720,18 +2481,18 @@
                                                 "id": "Thermal Zone 1",
                                                 "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
-                                                "spaces": [
-                                                    {
-                                                        "id": "Space 1",
-                                                        "occupant_multiplier_schedule": "Required Schedule 1",
-                                                        "floor_area": 6503.212799999999
-                                                    }
-                                                ],
                                                 "terminals": [
                                                     {
-                                                        "id": "Terminal 1",
-                                                        "is_supply_ducted": false,
-                                                        "served_by_heating_ventilation_air_conditioning_system": "AHU_HW_System1"
+                                                        "id": "VAV Air Terminal 1",
+                                                        "is_supply_ducted": true,
+                                                        "heating_source": "HOT_WATER",
+                                                        "type": "VARIABLE_AIR_VOLUME",
+                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7"
+                                                    }
+                                                ],
+                                                "spaces": [
+                                                    {
+                                                        "floor_area": 70000
                                                     }
                                                 ]
                                             },
@@ -2739,29 +2500,48 @@
                                                 "id": "Thermal Zone 2",
                                                 "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
-                                                "spaces": [
-                                                    {
-                                                        "id": "Space 2",
-                                                        "occupant_multiplier_schedule": "Required Schedule 1",
-                                                        "floor_area": 5574.1824
-                                                    }
-                                                ],
                                                 "terminals": [
                                                     {
-                                                        "id": "Terminal 2",
-                                                        "is_supply_ducted": false,
-                                                        "served_by_heating_ventilation_air_conditioning_system": "AHU_HW_System1"
+                                                        "id": "VAV Air Terminal 2",
+                                                        "is_supply_ducted": true,
+                                                        "heating_source": "HOT_WATER",
+                                                        "type": "VARIABLE_AIR_VOLUME",
+                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7"
+                                                    }
+                                                ],
+                                                "spaces": [
+                                                    {
+                                                        "floor_area": 60000
                                                     }
                                                 ]
                                             }
                                         ],
                                         "heating_ventilation_air_conditioning_systems": [
                                             {
-                                                "id": "AHU_HW_System1",
+                                                "id": "System 7",
                                                 "heating_system": {
                                                     "id": "HHW Coil 1",
                                                     "heating_system_type": "FLUID_LOOP",
                                                     "hot_water_loop": "Boiler Loop 1"
+                                                },
+                                                "preheat_system": {
+                                                    "id": "Preheat Coil 1",
+                                                    "heating_system_type": "FLUID_LOOP",
+                                                    "hot_water_loop": "Boiler Loop 1"
+                                                },
+                                                "fan_system": {
+                                                    "id": "VAV Fan System 1",
+                                                    "fan_control": "VARIABLE_SPEED_DRIVE",
+                                                    "supply_fans": [
+                                                        {
+                                                            "id": "Supply Fan 1"
+                                                        }
+                                                    ],
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "Return Fan 1"
+                                                        }
+                                                    ]
                                                 }
                                             }
                                         ]
@@ -2772,17 +2552,22 @@
                         "boilers": [
                             {
                                 "id": "Boiler 1",
-                                "loop": "Boiler Loop 1"
-                            },
-                            {
-                                "id": "Boiler 2",
-                                "loop": "Boiler Loop 1"
+                                "loop": "Boiler Loop 1",
+                                "design_capacity": 117228.44444444445,
+                                "efficiency": 0.75,
+                                "efficiency_metric": "THERMAL",
+                                "energy_source_type": "NATURAL_GAS"
                             }
                         ],
                         "pumps": [
                             {
-                                "id": "HW Pump 1",
+                                "id": "Boiler Pump 1",
                                 "loop_or_piping": "Boiler Loop 1",
+                                "speed_control": "FIXED_SPEED"
+                            },
+                            {
+                                "id": "Chiller Pump 1",
+                                "loop_or_piping": "Chiller Loop 1",
                                 "speed_control": "FIXED_SPEED"
                             }
                         ],
@@ -2837,8 +2622,7 @@
                                                         "is_supply_ducted": true,
                                                         "heating_source": "HOT_WATER",
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
-                                                        "heating_from_loop": "Boiler Loop 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7"
                                                     }
                                                 ]
                                             },
@@ -2852,8 +2636,7 @@
                                                         "is_supply_ducted": true,
                                                         "heating_source": "HOT_WATER",
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
-                                                        "heating_from_loop": "Boiler Loop 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7"
                                                     }
                                                 ]
                                             }
@@ -2861,6 +2644,11 @@
                                         "heating_ventilation_air_conditioning_systems": [
                                             {
                                                 "id": "System 7",
+                                                "heating_system": {
+                                                    "id": "HHW Coil 1",
+                                                    "heating_system_type": "FLUID_LOOP",
+                                                    "hot_water_loop": "Boiler Loop 1"
+                                                },
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 1",
                                                     "heating_system_type": "FLUID_LOOP",
@@ -2879,11 +2667,6 @@
                                                             "id": "Return Fan 1"
                                                         }
                                                     ]
-                                                },
-                                                "cooling_system": {
-                                                    "id": "CHW Coil 1",
-                                                    "cooling_system_type": "FLUID_LOOP",
-                                                    "chilled_water_loop": "Chiller Loop 1"
                                                 }
                                             }
                                         ]
@@ -2895,16 +2678,10 @@
                             {
                                 "id": "Boiler 1",
                                 "loop": "Boiler Loop 1",
-                                "rated_capacity": 117228.44444444445,
+                                "design_capacity": 117228.44444444445,
                                 "efficiency": 0.75,
                                 "efficiency_metric": "THERMAL",
                                 "energy_source_type": "NATURAL_GAS"
-                            }
-                        ],
-                        "chillers": [
-                            {
-                                "id": "Chiller 1",
-                                "cooling_loop": "Chiller Loop 1"
                             }
                         ],
                         "pumps": [
@@ -2921,12 +2698,8 @@
                         ],
                         "fluid_loops": [
                             {
-                                "id": "Boiler Loop 1",
+                                "id": "FluidLoop 1",
                                 "type": "HEATING"
-                            },
-                            {
-                                "id": "Chiller Loop 1",
-                                "type": "COOLING"
                             }
                         ]
                     }
@@ -2974,8 +2747,7 @@
                                                         "is_supply_ducted": true,
                                                         "heating_source": "HOT_WATER",
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
-                                                        "heating_from_loop": "Boiler Loop 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7"
                                                     }
                                                 ]
                                             },
@@ -2989,8 +2761,7 @@
                                                         "is_supply_ducted": true,
                                                         "heating_source": "HOT_WATER",
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
-                                                        "heating_from_loop": "Boiler Loop 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7"
                                                     }
                                                 ]
                                             }
@@ -2998,6 +2769,11 @@
                                         "heating_ventilation_air_conditioning_systems": [
                                             {
                                                 "id": "System 7",
+                                                "heating_system": {
+                                                    "id": "HHW Coil 1",
+                                                    "heating_system_type": "FLUID_LOOP",
+                                                    "hot_water_loop": "Boiler Loop 1"
+                                                },
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 1",
                                                     "heating_system_type": "FLUID_LOOP",
@@ -3016,11 +2792,6 @@
                                                             "id": "Return Fan 1"
                                                         }
                                                     ]
-                                                },
-                                                "cooling_system": {
-                                                    "id": "CHW Coil 1",
-                                                    "cooling_system_type": "FLUID_LOOP",
-                                                    "chilled_water_loop": "Chiller Loop 1"
                                                 }
                                             }
                                         ]
@@ -3032,16 +2803,10 @@
                             {
                                 "id": "Boiler 1",
                                 "loop": "Boiler Loop 1",
-                                "rated_capacity": 117228.44444444445,
+                                "design_capacity": 117228.44444444445,
                                 "efficiency": 0.75,
                                 "efficiency_metric": "THERMAL",
                                 "energy_source_type": "NATURAL_GAS"
-                            }
-                        ],
-                        "chillers": [
-                            {
-                                "id": "Chiller 1",
-                                "cooling_loop": "Chiller Loop 1"
                             }
                         ],
                         "pumps": [
@@ -3058,7 +2823,7 @@
                         ],
                         "fluid_loops": [
                             {
-                                "id": "Boiler Loop 1",
+                                "id": "FluidLoop 1",
                                 "type": "HEATING",
                                 "child_loops": [
                                     {
@@ -3116,8 +2881,7 @@
                                                         "is_supply_ducted": true,
                                                         "heating_source": "HOT_WATER",
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
-                                                        "heating_from_loop": "Boiler Loop 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7"
                                                     }
                                                 ]
                                             },
@@ -3131,8 +2895,7 @@
                                                         "is_supply_ducted": true,
                                                         "heating_source": "HOT_WATER",
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
-                                                        "heating_from_loop": "Boiler Loop 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7"
                                                     }
                                                 ]
                                             }
@@ -3140,6 +2903,11 @@
                                         "heating_ventilation_air_conditioning_systems": [
                                             {
                                                 "id": "System 7",
+                                                "heating_system": {
+                                                    "id": "HHW Coil 1",
+                                                    "heating_system_type": "FLUID_LOOP",
+                                                    "hot_water_loop": "Boiler Loop 1"
+                                                },
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 1",
                                                     "heating_system_type": "FLUID_LOOP",
@@ -3158,11 +2926,6 @@
                                                             "id": "Return Fan 1"
                                                         }
                                                     ]
-                                                },
-                                                "cooling_system": {
-                                                    "id": "CHW Coil 1",
-                                                    "cooling_system_type": "FLUID_LOOP",
-                                                    "chilled_water_loop": "Chiller Loop 1"
                                                 }
                                             }
                                         ]
@@ -3174,16 +2937,10 @@
                             {
                                 "id": "Boiler 1",
                                 "loop": "Boiler Loop 1",
-                                "rated_capacity": 117228.44444444445,
+                                "design_capacity": 117228.44444444445,
                                 "efficiency": 0.75,
                                 "efficiency_metric": "THERMAL",
                                 "energy_source_type": "NATURAL_GAS"
-                            }
-                        ],
-                        "chillers": [
-                            {
-                                "id": "Chiller 1",
-                                "cooling_loop": "Chiller Loop 1"
                             }
                         ],
                         "pumps": [
@@ -3207,10 +2964,6 @@
                                     "flow_control": "VARIABLE_FLOW",
                                     "operation": "CONTINUOUS"
                                 }
-                            },
-                            {
-                                "id": "Chiller Loop 1",
-                                "type": "COOLING"
                             }
                         ]
                     }
@@ -3258,8 +3011,7 @@
                                                         "is_supply_ducted": true,
                                                         "heating_source": "HOT_WATER",
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
-                                                        "heating_from_loop": "Boiler Loop 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7"
                                                     }
                                                 ]
                                             },
@@ -3273,8 +3025,7 @@
                                                         "is_supply_ducted": true,
                                                         "heating_source": "HOT_WATER",
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
-                                                        "heating_from_loop": "Boiler Loop 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7"
                                                     }
                                                 ]
                                             }
@@ -3282,6 +3033,11 @@
                                         "heating_ventilation_air_conditioning_systems": [
                                             {
                                                 "id": "System 7",
+                                                "heating_system": {
+                                                    "id": "HHW Coil 1",
+                                                    "heating_system_type": "FLUID_LOOP",
+                                                    "hot_water_loop": "Boiler Loop 1"
+                                                },
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 1",
                                                     "heating_system_type": "FLUID_LOOP",
@@ -3300,11 +3056,6 @@
                                                             "id": "Return Fan 1"
                                                         }
                                                     ]
-                                                },
-                                                "cooling_system": {
-                                                    "id": "CHW Coil 1",
-                                                    "cooling_system_type": "FLUID_LOOP",
-                                                    "chilled_water_loop": "Chiller Loop 1"
                                                 }
                                             }
                                         ]
@@ -3316,16 +3067,10 @@
                             {
                                 "id": "Boiler 1",
                                 "loop": "Boiler Loop 1",
-                                "rated_capacity": 117228.44444444445,
+                                "design_capacity": 117228.44444444445,
                                 "efficiency": 0.75,
                                 "efficiency_metric": "THERMAL",
                                 "energy_source_type": "NATURAL_GAS"
-                            }
-                        ],
-                        "chillers": [
-                            {
-                                "id": "Chiller 1",
-                                "cooling_loop": "Chiller Loop 1"
                             }
                         ],
                         "pumps": [
@@ -3349,10 +3094,6 @@
                                     "flow_control": "FIXED_FLOW",
                                     "operation": "INTERMITTENT"
                                 }
-                            },
-                            {
-                                "id": "Chiller Loop 1",
-                                "type": "COOLING"
                             }
                         ]
                     }
@@ -3400,8 +3141,7 @@
                                                         "is_supply_ducted": true,
                                                         "heating_source": "HOT_WATER",
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
-                                                        "heating_from_loop": "Boiler Loop 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7"
                                                     }
                                                 ]
                                             },
@@ -3415,8 +3155,7 @@
                                                         "is_supply_ducted": true,
                                                         "heating_source": "HOT_WATER",
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
-                                                        "heating_from_loop": "Boiler Loop 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7"
                                                     }
                                                 ]
                                             }
@@ -3424,6 +3163,11 @@
                                         "heating_ventilation_air_conditioning_systems": [
                                             {
                                                 "id": "System 7",
+                                                "heating_system": {
+                                                    "id": "HHW Coil 1",
+                                                    "heating_system_type": "FLUID_LOOP",
+                                                    "hot_water_loop": "Boiler Loop 1"
+                                                },
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 1",
                                                     "heating_system_type": "FLUID_LOOP",
@@ -3442,11 +3186,6 @@
                                                             "id": "Return Fan 1"
                                                         }
                                                     ]
-                                                },
-                                                "cooling_system": {
-                                                    "id": "CHW Coil 1",
-                                                    "cooling_system_type": "FLUID_LOOP",
-                                                    "chilled_water_loop": "Chiller Loop 1"
                                                 }
                                             }
                                         ]
@@ -3458,16 +3197,10 @@
                             {
                                 "id": "Boiler 1",
                                 "loop": "Boiler Loop 1",
-                                "rated_capacity": 117228.44444444445,
+                                "design_capacity": 117228.44444444445,
                                 "efficiency": 0.75,
                                 "efficiency_metric": "THERMAL",
                                 "energy_source_type": "NATURAL_GAS"
-                            }
-                        ],
-                        "chillers": [
-                            {
-                                "id": "Chiller 1",
-                                "cooling_loop": "Chiller Loop 1"
                             }
                         ],
                         "pumps": [
@@ -3490,10 +3223,6 @@
                                     "id": "DAC 1",
                                     "minimum_flow_fraction": 0.25
                                 }
-                            },
-                            {
-                                "id": "Chiller Loop 1",
-                                "type": "COOLING"
                             }
                         ]
                     }
@@ -3541,8 +3270,7 @@
                                                         "is_supply_ducted": true,
                                                         "heating_source": "HOT_WATER",
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
-                                                        "heating_from_loop": "Boiler Loop 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7"
                                                     }
                                                 ]
                                             },
@@ -3556,8 +3284,7 @@
                                                         "is_supply_ducted": true,
                                                         "heating_source": "HOT_WATER",
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
-                                                        "heating_from_loop": "Boiler Loop 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7"
                                                     }
                                                 ]
                                             }
@@ -3565,6 +3292,11 @@
                                         "heating_ventilation_air_conditioning_systems": [
                                             {
                                                 "id": "System 7",
+                                                "heating_system": {
+                                                    "id": "HHW Coil 1",
+                                                    "heating_system_type": "FLUID_LOOP",
+                                                    "hot_water_loop": "Boiler Loop 1"
+                                                },
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 1",
                                                     "heating_system_type": "FLUID_LOOP",
@@ -3583,11 +3315,6 @@
                                                             "id": "Return Fan 1"
                                                         }
                                                     ]
-                                                },
-                                                "cooling_system": {
-                                                    "id": "CHW Coil 1",
-                                                    "cooling_system_type": "FLUID_LOOP",
-                                                    "chilled_water_loop": "Chiller Loop 1"
                                                 }
                                             }
                                         ]
@@ -3599,16 +3326,10 @@
                             {
                                 "id": "Boiler 1",
                                 "loop": "Boiler Loop 1",
-                                "rated_capacity": 117228.44444444445,
+                                "design_capacity": 117228.44444444445,
                                 "efficiency": 0.75,
                                 "efficiency_metric": "THERMAL",
                                 "energy_source_type": "NATURAL_GAS"
-                            }
-                        ],
-                        "chillers": [
-                            {
-                                "id": "Chiller 1",
-                                "cooling_loop": "Chiller Loop 1"
                             }
                         ],
                         "pumps": [
@@ -3631,10 +3352,6 @@
                                     "id": "DAC 1",
                                     "minimum_flow_fraction": 0.3
                                 }
-                            },
-                            {
-                                "id": "Chiller Loop 1",
-                                "type": "COOLING"
                             }
                         ]
                     }
@@ -3682,8 +3399,7 @@
                                                         "is_supply_ducted": true,
                                                         "heating_source": "HOT_WATER",
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
-                                                        "heating_from_loop": "Boiler Loop 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7"
                                                     }
                                                 ]
                                             },
@@ -3697,8 +3413,7 @@
                                                         "is_supply_ducted": true,
                                                         "heating_source": "HOT_WATER",
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
-                                                        "heating_from_loop": "Boiler Loop 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7"
                                                     }
                                                 ]
                                             }
@@ -3706,6 +3421,11 @@
                                         "heating_ventilation_air_conditioning_systems": [
                                             {
                                                 "id": "System 7",
+                                                "heating_system": {
+                                                    "id": "HHW Coil 1",
+                                                    "heating_system_type": "FLUID_LOOP",
+                                                    "hot_water_loop": "Boiler Loop 1"
+                                                },
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 1",
                                                     "heating_system_type": "FLUID_LOOP",
@@ -3724,11 +3444,6 @@
                                                             "id": "Return Fan 1"
                                                         }
                                                     ]
-                                                },
-                                                "cooling_system": {
-                                                    "id": "CHW Coil 1",
-                                                    "cooling_system_type": "FLUID_LOOP",
-                                                    "chilled_water_loop": "Chiller Loop 1"
                                                 }
                                             }
                                         ]
@@ -3740,16 +3455,10 @@
                             {
                                 "id": "Boiler 1",
                                 "loop": "Boiler Loop 1",
-                                "rated_capacity": 117228.44444444445,
+                                "design_capacity": 117228.44444444445,
                                 "efficiency": 0.75,
                                 "efficiency_metric": "THERMAL",
                                 "energy_source_type": "NATURAL_GAS"
-                            }
-                        ],
-                        "chillers": [
-                            {
-                                "id": "Chiller 1",
-                                "cooling_loop": "Chiller Loop 1"
                             }
                         ],
                         "pumps": [
@@ -3768,10 +3477,6 @@
                             {
                                 "id": "Boiler Loop 1",
                                 "type": "HEATING"
-                            },
-                            {
-                                "id": "Chiller Loop 1",
-                                "type": "COOLING"
                             }
                         ]
                     }
@@ -3819,8 +3524,7 @@
                                                         "is_supply_ducted": true,
                                                         "heating_source": "HOT_WATER",
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
-                                                        "heating_from_loop": "Boiler Loop 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7"
                                                     }
                                                 ]
                                             },
@@ -3834,8 +3538,7 @@
                                                         "is_supply_ducted": true,
                                                         "heating_source": "HOT_WATER",
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
-                                                        "heating_from_loop": "Boiler Loop 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7"
                                                     }
                                                 ]
                                             }
@@ -3843,6 +3546,11 @@
                                         "heating_ventilation_air_conditioning_systems": [
                                             {
                                                 "id": "System 7",
+                                                "heating_system": {
+                                                    "id": "HHW Coil 1",
+                                                    "heating_system_type": "FLUID_LOOP",
+                                                    "hot_water_loop": "Boiler Loop 1"
+                                                },
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 1",
                                                     "heating_system_type": "FLUID_LOOP",
@@ -3861,11 +3569,6 @@
                                                             "id": "Return Fan 1"
                                                         }
                                                     ]
-                                                },
-                                                "cooling_system": {
-                                                    "id": "CHW Coil 1",
-                                                    "cooling_system_type": "FLUID_LOOP",
-                                                    "chilled_water_loop": "Chiller Loop 1"
                                                 }
                                             }
                                         ]
@@ -3877,16 +3580,10 @@
                             {
                                 "id": "Boiler 1",
                                 "loop": "Boiler Loop 1",
-                                "rated_capacity": 117228.44444444445,
+                                "design_capacity": 117228.44444444445,
                                 "efficiency": 0.75,
                                 "efficiency_metric": "THERMAL",
                                 "energy_source_type": "NATURAL_GAS"
-                            }
-                        ],
-                        "chillers": [
-                            {
-                                "id": "Chiller 1",
-                                "cooling_loop": "Chiller Loop 1"
                             }
                         ],
                         "pumps": [
@@ -3905,10 +3602,6 @@
                             {
                                 "id": "Boiler Loop 1",
                                 "type": "HEATING"
-                            },
-                            {
-                                "id": "Chiller Loop 1",
-                                "type": "COOLING"
                             },
                             {
                                 "id": "Boiler Loop 2",
@@ -3960,8 +3653,7 @@
                                                         "is_supply_ducted": true,
                                                         "heating_source": "HOT_WATER",
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
-                                                        "heating_from_loop": "Boiler Loop 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7"
                                                     }
                                                 ]
                                             },
@@ -3975,8 +3667,7 @@
                                                         "is_supply_ducted": true,
                                                         "heating_source": "HOT_WATER",
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
-                                                        "heating_from_loop": "Boiler Loop 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7"
                                                     }
                                                 ]
                                             }
@@ -3984,6 +3675,11 @@
                                         "heating_ventilation_air_conditioning_systems": [
                                             {
                                                 "id": "System 7",
+                                                "heating_system": {
+                                                    "id": "HHW Coil 1",
+                                                    "heating_system_type": "FLUID_LOOP",
+                                                    "hot_water_loop": "Boiler Loop 1"
+                                                },
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 1",
                                                     "heating_system_type": "FLUID_LOOP",
@@ -4002,11 +3698,6 @@
                                                             "id": "Return Fan 1"
                                                         }
                                                     ]
-                                                },
-                                                "cooling_system": {
-                                                    "id": "CHW Coil 1",
-                                                    "cooling_system_type": "FLUID_LOOP",
-                                                    "chilled_water_loop": "Chiller Loop 1"
                                                 }
                                             }
                                         ]
@@ -4018,16 +3709,10 @@
                             {
                                 "id": "Boiler 1",
                                 "loop": "Boiler Loop 1",
-                                "rated_capacity": 73267.77777777778,
+                                "design_capacity": 73267.77777777778,
                                 "efficiency": 0.8,
                                 "efficiency_metric": "ANNUAL_FUEL_UTILIZATION",
                                 "energy_source_type": "NATURAL_GAS"
-                            }
-                        ],
-                        "chillers": [
-                            {
-                                "id": "Chiller 1",
-                                "cooling_loop": "Chiller Loop 1"
                             }
                         ],
                         "pumps": [
@@ -4046,10 +3731,6 @@
                             {
                                 "id": "Boiler Loop 1",
                                 "type": "HEATING"
-                            },
-                            {
-                                "id": "Chiller Loop 1",
-                                "type": "COOLING"
                             }
                         ]
                     }
@@ -4097,8 +3778,7 @@
                                                         "is_supply_ducted": true,
                                                         "heating_source": "HOT_WATER",
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
-                                                        "heating_from_loop": "Boiler Loop 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7"
                                                     }
                                                 ]
                                             },
@@ -4112,8 +3792,7 @@
                                                         "is_supply_ducted": true,
                                                         "heating_source": "HOT_WATER",
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
-                                                        "heating_from_loop": "Boiler Loop 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7"
                                                     }
                                                 ]
                                             }
@@ -4121,6 +3800,11 @@
                                         "heating_ventilation_air_conditioning_systems": [
                                             {
                                                 "id": "System 7",
+                                                "heating_system": {
+                                                    "id": "HHW Coil 1",
+                                                    "heating_system_type": "FLUID_LOOP",
+                                                    "hot_water_loop": "Boiler Loop 1"
+                                                },
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 1",
                                                     "heating_system_type": "FLUID_LOOP",
@@ -4139,11 +3823,6 @@
                                                             "id": "Return Fan 1"
                                                         }
                                                     ]
-                                                },
-                                                "cooling_system": {
-                                                    "id": "CHW Coil 1",
-                                                    "cooling_system_type": "FLUID_LOOP",
-                                                    "chilled_water_loop": "Chiller Loop 1"
                                                 }
                                             }
                                         ]
@@ -4155,16 +3834,10 @@
                             {
                                 "id": "Boiler 1",
                                 "loop": "Boiler Loop 1",
-                                "rated_capacity": 73267.77777777778,
-                                "efficiency": 0.75,
+                                "design_capacity": 73267.77777777778,
+                                "efficiency": 0.8,
                                 "efficiency_metric": "ANNUAL_FUEL_UTILIZATION",
                                 "energy_source_type": "NATURAL_GAS"
-                            }
-                        ],
-                        "chillers": [
-                            {
-                                "id": "Chiller 1",
-                                "cooling_loop": "Chiller Loop 1"
                             }
                         ],
                         "pumps": [
@@ -4183,10 +3856,6 @@
                             {
                                 "id": "Boiler Loop 1",
                                 "type": "HEATING"
-                            },
-                            {
-                                "id": "Chiller Loop 1",
-                                "type": "COOLING"
                             }
                         ]
                     }
@@ -4234,8 +3903,7 @@
                                                         "is_supply_ducted": true,
                                                         "heating_source": "HOT_WATER",
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
-                                                        "heating_from_loop": "Boiler Loop 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7"
                                                     }
                                                 ]
                                             },
@@ -4249,8 +3917,7 @@
                                                         "is_supply_ducted": true,
                                                         "heating_source": "HOT_WATER",
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
-                                                        "heating_from_loop": "Boiler Loop 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7"
                                                     }
                                                 ]
                                             }
@@ -4258,6 +3925,11 @@
                                         "heating_ventilation_air_conditioning_systems": [
                                             {
                                                 "id": "System 7",
+                                                "heating_system": {
+                                                    "id": "HHW Coil 1",
+                                                    "heating_system_type": "FLUID_LOOP",
+                                                    "hot_water_loop": "Boiler Loop 1"
+                                                },
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 1",
                                                     "heating_system_type": "FLUID_LOOP",
@@ -4276,11 +3948,6 @@
                                                             "id": "Return Fan 1"
                                                         }
                                                     ]
-                                                },
-                                                "cooling_system": {
-                                                    "id": "CHW Coil 1",
-                                                    "cooling_system_type": "FLUID_LOOP",
-                                                    "chilled_water_loop": "Chiller Loop 1"
                                                 }
                                             }
                                         ]
@@ -4292,16 +3959,10 @@
                             {
                                 "id": "Boiler 1",
                                 "loop": "Boiler Loop 1",
-                                "rated_capacity": 146535.55555555556,
+                                "design_capacity": 146535.55555555556,
                                 "efficiency": 0.75,
                                 "efficiency_metric": "THERMAL",
                                 "energy_source_type": "NATURAL_GAS"
-                            }
-                        ],
-                        "chillers": [
-                            {
-                                "id": "Chiller 1",
-                                "cooling_loop": "Chiller Loop 1"
                             }
                         ],
                         "pumps": [
@@ -4320,10 +3981,6 @@
                             {
                                 "id": "Boiler Loop 1",
                                 "type": "HEATING"
-                            },
-                            {
-                                "id": "Chiller Loop 1",
-                                "type": "COOLING"
                             }
                         ]
                     }
@@ -4371,8 +4028,7 @@
                                                         "is_supply_ducted": true,
                                                         "heating_source": "HOT_WATER",
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
-                                                        "heating_from_loop": "Boiler Loop 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7"
                                                     }
                                                 ]
                                             },
@@ -4386,8 +4042,7 @@
                                                         "is_supply_ducted": true,
                                                         "heating_source": "HOT_WATER",
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
-                                                        "heating_from_loop": "Boiler Loop 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7"
                                                     }
                                                 ]
                                             }
@@ -4395,6 +4050,11 @@
                                         "heating_ventilation_air_conditioning_systems": [
                                             {
                                                 "id": "System 7",
+                                                "heating_system": {
+                                                    "id": "HHW Coil 1",
+                                                    "heating_system_type": "FLUID_LOOP",
+                                                    "hot_water_loop": "Boiler Loop 1"
+                                                },
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 1",
                                                     "heating_system_type": "FLUID_LOOP",
@@ -4413,11 +4073,6 @@
                                                             "id": "Return Fan 1"
                                                         }
                                                     ]
-                                                },
-                                                "cooling_system": {
-                                                    "id": "CHW Coil 1",
-                                                    "cooling_system_type": "FLUID_LOOP",
-                                                    "chilled_water_loop": "Chiller Loop 1"
                                                 }
                                             }
                                         ]
@@ -4429,16 +4084,10 @@
                             {
                                 "id": "Boiler 1",
                                 "loop": "Boiler Loop 1",
-                                "rated_capacity": 146535.55555555556,
-                                "efficiency": 0.7,
+                                "design_capacity": 146535.55555555556,
+                                "efficiency": 0.75,
                                 "efficiency_metric": "THERMAL",
                                 "energy_source_type": "NATURAL_GAS"
-                            }
-                        ],
-                        "chillers": [
-                            {
-                                "id": "Chiller 1",
-                                "cooling_loop": "Chiller Loop 1"
                             }
                         ],
                         "pumps": [
@@ -4457,10 +4106,6 @@
                             {
                                 "id": "Boiler Loop 1",
                                 "type": "HEATING"
-                            },
-                            {
-                                "id": "Chiller Loop 1",
-                                "type": "COOLING"
                             }
                         ]
                     }
@@ -4508,8 +4153,7 @@
                                                         "is_supply_ducted": true,
                                                         "heating_source": "HOT_WATER",
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
-                                                        "heating_from_loop": "Boiler Loop 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7"
                                                     }
                                                 ]
                                             },
@@ -4523,8 +4167,7 @@
                                                         "is_supply_ducted": true,
                                                         "heating_source": "HOT_WATER",
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
-                                                        "heating_from_loop": "Boiler Loop 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7"
                                                     }
                                                 ]
                                             }
@@ -4532,6 +4175,11 @@
                                         "heating_ventilation_air_conditioning_systems": [
                                             {
                                                 "id": "System 7",
+                                                "heating_system": {
+                                                    "id": "HHW Coil 1",
+                                                    "heating_system_type": "FLUID_LOOP",
+                                                    "hot_water_loop": "Boiler Loop 1"
+                                                },
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 1",
                                                     "heating_system_type": "FLUID_LOOP",
@@ -4550,11 +4198,6 @@
                                                             "id": "Return Fan 1"
                                                         }
                                                     ]
-                                                },
-                                                "cooling_system": {
-                                                    "id": "CHW Coil 1",
-                                                    "cooling_system_type": "FLUID_LOOP",
-                                                    "chilled_water_loop": "Chiller Loop 1"
                                                 }
                                             }
                                         ]
@@ -4566,16 +4209,10 @@
                             {
                                 "id": "Boiler 1",
                                 "loop": "Boiler Loop 1",
-                                "rated_capacity": 879213.3333333334,
+                                "design_capacity": 879213.3333333334,
                                 "efficiency": 0.8,
                                 "efficiency_metric": "COMBUSTION",
                                 "energy_source_type": "NATURAL_GAS"
-                            }
-                        ],
-                        "chillers": [
-                            {
-                                "id": "Chiller 1",
-                                "cooling_loop": "Chiller Loop 1"
                             }
                         ],
                         "pumps": [
@@ -4594,10 +4231,6 @@
                             {
                                 "id": "Boiler Loop 1",
                                 "type": "HEATING"
-                            },
-                            {
-                                "id": "Chiller Loop 1",
-                                "type": "COOLING"
                             }
                         ]
                     }
@@ -4645,8 +4278,7 @@
                                                         "is_supply_ducted": true,
                                                         "heating_source": "HOT_WATER",
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
-                                                        "heating_from_loop": "Boiler Loop 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7"
                                                     }
                                                 ]
                                             },
@@ -4660,8 +4292,7 @@
                                                         "is_supply_ducted": true,
                                                         "heating_source": "HOT_WATER",
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
-                                                        "heating_from_loop": "Boiler Loop 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7"
                                                     }
                                                 ]
                                             }
@@ -4669,6 +4300,11 @@
                                         "heating_ventilation_air_conditioning_systems": [
                                             {
                                                 "id": "System 7",
+                                                "heating_system": {
+                                                    "id": "HHW Coil 1",
+                                                    "heating_system_type": "FLUID_LOOP",
+                                                    "hot_water_loop": "Boiler Loop 1"
+                                                },
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 1",
                                                     "heating_system_type": "FLUID_LOOP",
@@ -4687,11 +4323,6 @@
                                                             "id": "Return Fan 1"
                                                         }
                                                     ]
-                                                },
-                                                "cooling_system": {
-                                                    "id": "CHW Coil 1",
-                                                    "cooling_system_type": "FLUID_LOOP",
-                                                    "chilled_water_loop": "Chiller Loop 1"
                                                 }
                                             }
                                         ]
@@ -4703,16 +4334,10 @@
                             {
                                 "id": "Boiler 1",
                                 "loop": "Boiler Loop 1",
-                                "rated_capacity": 879213.3333333334,
-                                "efficiency": 0.85,
+                                "design_capacity": 879213.3333333334,
+                                "efficiency": 0.8,
                                 "efficiency_metric": "COMBUSTION",
                                 "energy_source_type": "NATURAL_GAS"
-                            }
-                        ],
-                        "chillers": [
-                            {
-                                "id": "Chiller 1",
-                                "cooling_loop": "Chiller Loop 1"
                             }
                         ],
                         "pumps": [
@@ -4731,10 +4356,6 @@
                             {
                                 "id": "Boiler Loop 1",
                                 "type": "HEATING"
-                            },
-                            {
-                                "id": "Chiller Loop 1",
-                                "type": "COOLING"
                             }
                         ]
                     }
@@ -4782,8 +4403,7 @@
                                                         "is_supply_ducted": true,
                                                         "heating_source": "HOT_WATER",
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
-                                                        "heating_from_loop": "Boiler Loop 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7"
                                                     }
                                                 ]
                                             },
@@ -4797,8 +4417,7 @@
                                                         "is_supply_ducted": true,
                                                         "heating_source": "HOT_WATER",
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
-                                                        "heating_from_loop": "Boiler Loop 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7"
                                                     }
                                                 ]
                                             }
@@ -4806,6 +4425,11 @@
                                         "heating_ventilation_air_conditioning_systems": [
                                             {
                                                 "id": "System 7",
+                                                "heating_system": {
+                                                    "id": "HHW Coil 1",
+                                                    "heating_system_type": "FLUID_LOOP",
+                                                    "hot_water_loop": "Boiler Loop 1"
+                                                },
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 1",
                                                     "heating_system_type": "FLUID_LOOP",
@@ -4824,11 +4448,6 @@
                                                             "id": "Return Fan 1"
                                                         }
                                                     ]
-                                                },
-                                                "cooling_system": {
-                                                    "id": "CHW Coil 1",
-                                                    "cooling_system_type": "FLUID_LOOP",
-                                                    "chilled_water_loop": "Chiller Loop 1"
                                                 }
                                             }
                                         ]
@@ -4840,16 +4459,10 @@
                             {
                                 "id": "Boiler 1",
                                 "loop": "Boiler Loop 1",
-                                "rated_capacity": 117228.44444444445,
+                                "design_capacity": 117228.44444444445,
                                 "efficiency": 0.75,
                                 "efficiency_metric": "THERMAL",
                                 "energy_source_type": "NATURAL_GAS"
-                            }
-                        ],
-                        "chillers": [
-                            {
-                                "id": "Chiller 1",
-                                "cooling_loop": "Chiller Loop 1"
                             }
                         ],
                         "pumps": [
@@ -4868,10 +4481,6 @@
                             {
                                 "id": "Boiler Loop 1",
                                 "type": "HEATING"
-                            },
-                            {
-                                "id": "Chiller Loop 1",
-                                "type": "COOLING"
                             }
                         ]
                     }
@@ -4919,8 +4528,7 @@
                                                         "is_supply_ducted": true,
                                                         "heating_source": "HOT_WATER",
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
-                                                        "heating_from_loop": "Boiler Loop 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7"
                                                     }
                                                 ]
                                             },
@@ -4934,8 +4542,7 @@
                                                         "is_supply_ducted": true,
                                                         "heating_source": "HOT_WATER",
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
-                                                        "heating_from_loop": "Boiler Loop 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7"
                                                     }
                                                 ]
                                             }
@@ -4943,6 +4550,11 @@
                                         "heating_ventilation_air_conditioning_systems": [
                                             {
                                                 "id": "System 7",
+                                                "heating_system": {
+                                                    "id": "HHW Coil 1",
+                                                    "heating_system_type": "FLUID_LOOP",
+                                                    "hot_water_loop": "Boiler Loop 1"
+                                                },
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 1",
                                                     "heating_system_type": "FLUID_LOOP",
@@ -4961,11 +4573,6 @@
                                                             "id": "Return Fan 1"
                                                         }
                                                     ]
-                                                },
-                                                "cooling_system": {
-                                                    "id": "CHW Coil 1",
-                                                    "cooling_system_type": "FLUID_LOOP",
-                                                    "chilled_water_loop": "Chiller Loop 1"
                                                 }
                                             }
                                         ]
@@ -4977,16 +4584,10 @@
                             {
                                 "id": "Boiler 1",
                                 "loop": "Boiler Loop 1",
-                                "rated_capacity": 117228.44444444445,
+                                "design_capacity": 117228.44444444445,
                                 "efficiency": 0.75,
                                 "efficiency_metric": "THERMAL",
                                 "energy_source_type": "ELECTRICITY"
-                            }
-                        ],
-                        "chillers": [
-                            {
-                                "id": "Chiller 1",
-                                "cooling_loop": "Chiller Loop 1"
                             }
                         ],
                         "pumps": [
@@ -5005,10 +4606,6 @@
                             {
                                 "id": "Boiler Loop 1",
                                 "type": "HEATING"
-                            },
-                            {
-                                "id": "Chiller Loop 1",
-                                "type": "COOLING"
                             }
                         ]
                     }
