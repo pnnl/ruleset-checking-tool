@@ -1,7 +1,7 @@
-# HVAC_SystemZoneAssignment - Rule 18-1  
+# HVAC_SystemZoneAssignment - Rule 18-1
 **Schema Version:** 0.0.22  
 **Mandatory Rule:** True
-**Rule ID:** 18-1  
+**Rule ID:** 18-1
 **Rule Description:** Buildings in CZ 0-3A with predominant HVAC BAT = public assembly, <120,000 ft2 have baseline HVAC system type 4 (PSZ HP)
 **Rule Assertion:** Options are PASS/FAIL/NOT_APPLICABLE
 **Appendix G Section Reference:** Table G3.1.1.3
@@ -22,7 +22,7 @@
 
 ## Rule Logic:  
 - This function uses get_zone_target_baseline_system and looks through the list to find any zones that match the target string for this system.
-- The target string is: `target_string = "PUBLIC_ASSEMBLY CZ_0_to_3a < 120,000 ft2"
+- The target string is: `target_string = "PUBLIC_ASSEMBLY CZ_0_to_3a < 120,000 ft2"`
 - the expected system type is "SYS-4": `expected_system_type = "SYS-4"`
 
 - loop through building segments: `for segment in RMR.building_segments:`
