@@ -29,7 +29,10 @@ def are_all_terminal_types_cav(rmi_b, terminal_unit_id_list):
 
     for terminal_b_id in terminal_unit_id_list:
         terminal_b = find_exactly_one_terminal_unit(rmi_b, terminal_b_id)
-        if terminal_b.get("type") != TERMINAL_TYPE.CONSTANT_AIR_VOLUME:
+        if (
+            terminal_b.get("type") is not None
+            and terminal_b["type"] != TERMINAL_TYPE.CONSTANT_AIR_VOLUME
+        ):
             are_all_terminal_types_cav_flag = False
             break
 

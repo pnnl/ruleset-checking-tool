@@ -1,3 +1,5 @@
+from rct229.schema.validate import schema_validate_rmr
+
 SYS_2_RMD = {
     "id": "ASHRAE229 1",
     "ruleset_model_instances": [
@@ -50,3 +52,10 @@ SYS_2_RMD = {
         }
     ],
 }
+
+
+def test__TEST_RMD_baseline_system_2__is_valid():
+    schema_validation_result = schema_validate_rmr(SYS_2_RMD)
+    assert schema_validation_result[
+        "passed"
+    ], f"Schema error: {schema_validation_result['error']}"
