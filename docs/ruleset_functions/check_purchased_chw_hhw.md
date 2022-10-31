@@ -30,9 +30,7 @@ Logic:
 
       - For each HVAC system in building segment: `for hvac_sys in building_segment.heating_ventilation_air_conditioning_systems:`
 
-        - For each cooling system in HVAC system: `for cooling_system in hvac_sys.cooling_system:`
-
-          - Check if cooling system is connected to any loop in purchased cooling loop array: `if cooling_system.chilled_water_loop in purchased_chw_loop_array`
+          - Check if cooling system is connected to any loop in purchased cooling loop array: `if cooling_system.chilled_water_loop.chilled_water_loop in purchased_chw_loop_array`
 
             - Set purchased cooling flag as True and break logic loop #1: `purchased_chw_hhw_status_dict["PURCHASED_COOLING"] = TRUE, BREAK` (Note XC, under the assumption that there is no orphan hvac system not serving any zones.)
 
@@ -46,9 +44,7 @@ Logic:
 
       - For each HVAC system in building segment: `for hvac_sys in building_segment.heating_ventilation_air_conditioning_systems:`
 
-        - For each heating system in HVAC system: `for heating_system in hvac_sys.heating_system:`
-
-          - Check if heating system is connected to any loop in purchased heating loop array: `if heating_system.hot_water_loop in purchased_hhw_loop_array`
+          - Check if heating system is connected to any loop in purchased heating loop array: `if hvac_sys.heating_system.hot_water_loop in purchased_hhw_loop_array`
 
             - Set purchased heating flag as True and break logic loop #2: `purchased_chw_hhw_status_dict["PURCHASED_HEATING"] = TRUE, BREAK`
 
