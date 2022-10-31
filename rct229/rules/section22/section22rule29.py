@@ -1,4 +1,5 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
+from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 from rct229.ruleset_functions.baseline_systems.baseline_system_util import (
     HVAC_SYS,
@@ -22,15 +23,18 @@ NOT_APPLICABLE_SYS_TYPES = [HVAC_SYS.SYS_11_1, HVAC_SYS.SYS_11_2, HVAC_SYS.SYS_1
 REQUIRED_PUMP_POWER = 19 * ureg("W/gpm")
 
 
-class Section22Rule29(RuleDefinitionBase):
+class Section22Rule29(RuleDefinitionListIndexedBase):
     """Rule 29 of ASHRAE 90.1-2019 Appendix G Section 22 (Chilled water loop)"""
 
     def __init__(self):
         super(Section22Rule29, self).__init__(
             rmrs_used=UserBaselineProposedVals(False, True, False),
+            each_rule=Section22Rule29.CondensingFluidLoopRule(),
+            index_rmr="baseline",
             id="22-29",
             description="For chilled-water systems served by chiller(s) and does not serve baseline System-11, condenser-water pump power shall be 19 W/gpm.",
             rmr_context="ruleset_model_instances/0",
+            list_path="fluid_loops[*]",
         )
 
     def is_applicable(self, context, data=None):
@@ -54,21 +58,31 @@ class Section22Rule29(RuleDefinitionBase):
             ]
         )
 
-    def get_calc_vals(self, context, data=None):
+    def create_data(self, context, data):
         rmi_b = context.baseline
-        condenser_loop_pump_power_list = [
-            find_exactly_one_loop(rmi_b, condenser_loop_id).get(
-                "pump_power_per_flow_rate"
-            )
-            for condenser_loop_id in find_all("chillers[*].condensing_loop", rmi_b)
-        ]
-        return {"condenser_loop_pump_power_list": condenser_loop_pump_power_list}
+        condenser_loop_pump_power_dict = {
+            chiller["condensing_loop"]: find_exactly_one_loop(
+                rmi_b, chiller["condensing_loop"]
+            ).get("pump_power_per_flow_rate")
+            for chiller in find_all("chillers[*]", rmi_b)
+        }
+        return {"condenser_loop_pump_power_dict": condenser_loop_pump_power_dict}
 
-    def rule_check(self, context, calc_vals=None, data=None):
-        condenser_loop_pump_power_list = calc_vals["condenser_loop_pump_power_list"]
-        return all(
-            [
-                std_equal(pump_power, REQUIRED_PUMP_POWER)
-                for pump_power in condenser_loop_pump_power_list
-            ]
-        )
+    def list_filter(self, context_item, data):
+        fluid_loops_b = context_item.baseline
+        return fluid_loops_b.get("pump_power_per_flow_rate")
+
+    class CondensingFluidLoopRule(RuleDefinitionBase):
+        def __init__(self):
+            super(Section22Rule29.CondensingFluidLoopRule, self).__init__(
+                rmrs_used=UserBaselineProposedVals(False, True, False),
+            )
+
+        def get_calc_vals(self, context, data=None):
+            fluid_loop_b = context.baseline
+            pump_power_per_flow_rate = fluid_loop_b["pump_power_per_flow_rate"]
+            return {"pump_power_per_flow_rate": pump_power_per_flow_rate}
+
+        def rule_check(self, context, calc_vals=None, data=None):
+            pump_power_per_flow_rate = calc_vals["pump_power_per_flow_rate"]
+            return std_equal(pump_power_per_flow_rate, REQUIRED_PUMP_POWER)
