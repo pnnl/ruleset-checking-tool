@@ -6,7 +6,7 @@ Description: Check if RMD is modeled with purchased chilled water as space cooli
 Inputs:  
 - **RMD**: The RMD that needs to be checked.
 
-Returns: 
+Returns:
 - **purchased_chw_hhw_status_dictionary**: A dictionary that saves whether RMD is modeled with purchased chilled water as space cooling source or purchased hot water/steam as space heating source, i.e. {"PURCHASED_COOLING": TRUE, "PURCHASED_HEATING": FALSE}.
 
 Function Call:
@@ -20,7 +20,7 @@ Logic:
 
 - Else, for each external fluid source in RMD: `for external_fluid_source in RMD.ASHRAE229.external_fluid_source:`
 
-  - Check if external fluid source is cooling type: `if external_fluid_source.type == "COOLING"`
+  - Check if external fluid source is chilled water type: `if external_fluid_source.type == "CHILLED_WATER"`
 
     - Get fluid loop served by external fluid source: `cooling_loop = GET_COMPONENT_BY_ID(external_fluid_source.loop)`
 
