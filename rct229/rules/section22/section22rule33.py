@@ -15,7 +15,6 @@ APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_8B,
     HVAC_SYS.SYS_11_1B,
     HVAC_SYS.SYS_12B,
-    HVAC_SYS.SYS_13B,
 ]
 
 
@@ -58,9 +57,7 @@ class Section22Rule33(RuleDefinitionListIndexedBase):
                         for available_type in available_type_lists
                     ]
                 )
-                and True
-                if len(primary_secondary_loop_dictionary) != 0
-                else False
+                and len(primary_secondary_loop_dictionary) != 0
             )
 
         def get_calc_vals(self, context, data=None):
