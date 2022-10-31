@@ -1,14 +1,14 @@
 # HVAC_SystemZoneAssignment - Rule 18-3
 **Schema Version:** 0.0.22  
-
+**Mandatory Rule:** True
 **Rule ID:** 18-3
 **Rule Description:** Buildings in CZ 3B, 3C, 4-8, with predominant HVAC BAT = public assembly, <120,000 ft2 have baseline HVAC system type 2 (PTHP)
-**Rule Assertion:** B-RMR = expected value  
+**Rule Assertion:** Options are PASS/FAIL/NOT_APPLICABLE
 **Appendix G Section:** Section 18 HVAC_SystemZoneAssignment  
 **Appendix G Section Reference:** Table G3.1.1.3
 
-**Applicability:** All required data elements exist for B_RMR  
-
+**Evaluation Context:** Each Zone Data Group
+**Data Lookup:**   
 **Function Call:** 
 
 1. section_18_rule_test()
