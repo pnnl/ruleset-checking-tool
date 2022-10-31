@@ -1,16 +1,12 @@
 # HVAC_SystemZoneAssignment - Rule 18-5
 **Schema Version:** 0.0.22  
-
+**Mandatory Rule:** True
 **Rule ID:** 18-5 
 **Rule Description:** Buildings in any CZ with predominant HVAC BAT = Hospital, <=150,000 ft2 or <=5 floors have baseline HVAC system type 5(P-VAV with HW Reheat)
 **Rule Assertion:** B-RMR = expected value  
-**Appendix G Section:** Section 18 HVAC_SystemZoneAssignment  
 **Appendix G Section Reference:** Table G3.1.1.3
 
-**Applicability:** All required data elements exist for B_RMR  
-
-**Manual Check:** Yes  
-**Evaluation Context:** Evaluate whether each Zone is served by the correct HVAC system type  
+**Evaluation Context:** Each Zone Data Group
 **Data Lookup:**   
 **Function Call:** 
 
