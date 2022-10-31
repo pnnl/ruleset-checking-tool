@@ -3,16 +3,16 @@
         "Section": 22,
         "Rule": 29,
         "Test": "a",
-        "test_description": "Baseline building is system type 11 and is correctly modeled with the is_condenser_water_pump_interlocked key",
+        "test_description": "Baseline building is system type 7 and is correctly modeled with the pump_power_per_flow_rate value",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-29",
-            "ruleset_reference": "G3.1.3.9",
-            "rule_description": "The baseline building design condenser-water pump shall be modeled as constant volume.",
+            "ruleset_reference": "G3.1.3.11",
+            "rule_description": "For chilled-water systems served by chiller(s) and does not serve baseline System-11, condenser-water pump power shall be 19 W/gpm.",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "No",
+            "primary_rule": "Yes",
             "schema_version": 0.018
         },
         "rmr_transformations": {
@@ -84,6 +84,11 @@
                                                             "id": "Return Fan 1"
                                                         }
                                                     ]
+                                                },
+                                                "preheat_system": {
+                                                    "id": "Preheat Coil 1",
+                                                    "heating_system_type": "FLUID_LOOP",
+                                                    "hot_water_loop": "Boiler Loop 1"
                                                 }
                                             }
                                         ]
@@ -102,7 +107,7 @@
                             {
                                 "id": "Chiller 1",
                                 "cooling_loop": "Chiller Loop 1",
-                                "condensing_loop": "Chiller Loop 1"
+                                "condensing_loop": "Condensing Loop 1"
                             }
                         ],
                         "pumps": [
@@ -124,7 +129,10 @@
                             },
                             {
                                 "id": "Chiller Loop 1",
-                                "type": "COOLING",
+                                "type": "COOLING"
+                            },
+                            {
+                                "id": "Condensing Loop 1",
                                 "pump_power_per_flow_rate": 301.1889035667107
                             }
                         ]
@@ -137,16 +145,16 @@
         "Section": 22,
         "Rule": 29,
         "Test": "b",
-        "test_description": "Baseline building is system type 11 and is incorrectly modeled with the is_condenser_water_pump_interlocked key",
+        "test_description": "Baseline building is system type 7 and is incorrectly modeled with the pump_power_per_flow_rate value",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-29",
-            "ruleset_reference": "G3.1.3.9",
-            "rule_description": "The baseline building design condenser-water pump shall be modeled as constant volume.",
+            "ruleset_reference": "G3.1.3.11",
+            "rule_description": "For chilled-water systems served by chiller(s) and does not serve baseline System-11, condenser-water pump power shall be 19 W/gpm.",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "No",
+            "primary_rule": "Yes",
             "schema_version": 0.018
         },
         "rmr_transformations": {
@@ -218,6 +226,11 @@
                                                             "id": "Return Fan 1"
                                                         }
                                                     ]
+                                                },
+                                                "preheat_system": {
+                                                    "id": "Preheat Coil 1",
+                                                    "heating_system_type": "FLUID_LOOP",
+                                                    "hot_water_loop": "Boiler Loop 1"
                                                 }
                                             }
                                         ]
@@ -236,7 +249,7 @@
                             {
                                 "id": "Chiller 1",
                                 "cooling_loop": "Chiller Loop 1",
-                                "condensing_loop": "Chiller Loop 1"
+                                "condensing_loop": "Condensing Loop 1"
                             }
                         ],
                         "pumps": [
@@ -258,8 +271,11 @@
                             },
                             {
                                 "id": "Chiller Loop 1",
-                                "type": "COOLING",
-                                "pump_power_per_flow_rate": 348.7450462351387
+                                "type": "COOLING"
+                            },
+                            {
+                                "id": "Condensing Loop 1",
+                                "pump_power_per_flow_rate": 332.89299867899604
                             }
                         ]
                     }
