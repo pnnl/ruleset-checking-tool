@@ -60,8 +60,8 @@
 			- the expected system is System 3: `system_type = "SYS-4"`
 		- otherwise, it's CZ_3b_3c_or_4_to_8: `else:`
 			- the expected system is System 4: `system_type = "SYS-3"
-- otherwise, WHAT HAPPENS WHEN RETAIL IS IN A BUILDING THAT IS MORE THAN 2 FLOORS?  FOR NOW, I'LL RECLASSIFY AS OTHER_NON_RESIDENTIAL: `else:`
-	- check if the space area is less than 120,000 ft2: `building_area_type = "OTHER_NON_RESIDENTIAL"
+	- otherwise, WHAT HAPPENS WHEN RETAIL IS IN A BUILDING THAT IS MORE THAN 2 FLOORS?  FOR NOW, I'LL RECLASSIFY AS OTHER_NON_RESIDENTIAL: `else:`
+		- check if the space area is less than 120,000 ft2: `building_area_type = "OTHER_NON_RESIDENTIAL"
 
 
 - check if the building area type is Hospital: `if building_area_type == "HOSPITAL":`
@@ -89,19 +89,20 @@
 				- the expected system is System 5: `system_type = "SYS-6"`
 			- otherwise, it's CZ_3b_3c_or_4_to_8: `else:`
 				- the expected system is System 6: `system_type = "SYS-5"
-	- else if the space area is between 25,000 and 150,000 ft2 AND in a building that is fewer than 6 floors: `if((area_of_BAT >= 25000) && (area_of_BAT < 150000) &&& (number_of_floors < 6)):`
-		- set area_of_BAT_string to " >=25,000 ft2 AND <=150,000 ft2": `area_of_BAT_string = " >=25,000 ft2 AND <=150,000 ft2"`
-		- check if the climate zone is CZ_0_to_3a: `if is_CZ_0_to_3a():`
-			- the expected system is System 5: `system_type = "SYS-6"`
-		- otherwise, it's CZ_3b_3c_or_4_to_8: `else:`
-			- the expected system is System 6: `system_type = "SYS-5"
-	- else if the area_of_BAT is greater than 150,000 ft2 OR the building has more than 5 floors: `if((area_of_BAT > 150000) || (number_of_floors > 5)):`
-		- set area_of_BAT_string to " >150,000 ft2 or > 5 floors": `area_of_BAT_string to " >150,000 ft2 or > 5 floors"`
-		- set number_of_floors_string to "" - this is because the area_of_BAT_string contains floor information, and we because we re-assigned "RETAIL" to "OTHER_NON_RESIDENTIAL" above, we need to overwriate any data currently in the number_of_floors_string: `number_of_floors_string = ""`
-		- check if the climate zone is CZ_0_to_3a: `if is_CZ_0_to_3a():`
-			- the expected system is System 7: `system_type = "SYS-8"`
-		- otherwise, it's CZ_3b_3c_or_4_to_8: `else:`
-			- the expected system is System 8: `system_type = "SYS-7"
+		- else if the space area is between 25,000 and 150,000 ft2 AND in a building that is fewer than 6 floors: `if((area_of_BAT >= 25000) && (area_of_BAT < 150000) &&& (number_of_floors < 6)):`
+			- set area_of_BAT_string to " >=25,000 ft2 AND <=150,000 ft2": `area_of_BAT_string = " >=25,000 ft2 AND <=150,000 ft2"`
+			- set number_of_floors_string to " < 6 floors": `number_of_floors_string = " < 6 floors"`
+			- check if the climate zone is CZ_0_to_3a: `if is_CZ_0_to_3a():`
+				- the expected system is System 5: `system_type = "SYS-6"`
+			- otherwise, it's CZ_3b_3c_or_4_to_8: `else:`
+				- the expected system is System 6: `system_type = "SYS-5"
+		- else if the area_of_BAT is greater than 150,000 ft2 OR the building has more than 5 floors: `if((area_of_BAT > 150000) || (number_of_floors > 5)):`
+			- set area_of_BAT_string to " >150,000 ft2 or > 5 floors": `area_of_BAT_string to " >150,000 ft2 or > 5 floors"`
+			- set number_of_floors_string to "" - this is because the area_of_BAT_string contains floor information, and we because we re-assigned "RETAIL" to "OTHER_NON_RESIDENTIAL" above, we need to overwriate any data currently in the number_of_floors_string: `number_of_floors_string = ""`
+			- check if the climate zone is CZ_0_to_3a: `if is_CZ_0_to_3a():`
+				- the expected system is System 7: `system_type = "SYS-8"`
+			- otherwise, it's CZ_3b_3c_or_4_to_8: `else:`
+				- the expected system is System 8: `system_type = "SYS-7"
 
 - create the string that holds details about how the system was selected.  This string will need to match the expected string in 18-1 to 18-16 rule tests: `details_of_system_selection = building_area_type + climate_zone_category + area_of_BAT_string + number_of_floors_string`
 - set result equal to a list of the system_type and details_of_system_selection: `result = [system_type, details_of_system_selection]`
