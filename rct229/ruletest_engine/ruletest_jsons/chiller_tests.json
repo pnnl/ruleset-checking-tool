@@ -1949,7 +1949,7 @@
                             {
                                 "id": "Heat Rejection 1",
                                 "loop": "Chiller Loop 1",
-                                "range": -267.59444444444443
+                                "range": 5.555555555555555
                             }
                         ]
                     }
@@ -2096,7 +2096,7 @@
                             {
                                 "id": "Heat Rejection 1",
                                 "loop": "Chiller Loop 1",
-                                "range": -264.81666666666666
+                                "range": 8.333333333333334
                             }
                         ]
                     }
@@ -2245,7 +2245,7 @@
                                 "id": "Heat Rejection 1",
                                 "loop": "Chiller Loop 1",
                                 "design_wetbulb_temperature": 12.777777777777828,
-                                "approach": -270.3722222222222
+                                "approach": 2.7777777777777777
                             }
                         ]
                     }
@@ -2394,7 +2394,7 @@
                                 "id": "Heat Rejection 1",
                                 "loop": "Chiller Loop 1",
                                 "design_wetbulb_temperature": 12.777777777777828,
-                                "approach": -267.59444444444443
+                                "approach": 5.555555555555555
                             }
                         ]
                     }
