@@ -1,7 +1,7 @@
 from rct229.data.schema_enums import schema_enums
 from rct229.ruleset_functions.baseline_systems.baseline_system_util import (
-    find_exactly_one_fluid_loop,
     HVAC_SYS,
+    find_exactly_one_fluid_loop,
 )
 from rct229.ruleset_functions.get_baseline_system_types import get_baseline_system_types
 from rct229.utils.assertions import getattr_
@@ -84,5 +84,7 @@ def get_primary_secondary_loops_dict(rmi_b):
                 primary_loops.append(chilled_fluid_loop)
 
     for primary_loop in primary_loops:
-        tmp_primary_secondary_loops_dict[primary_loop["id"]] = find_all("$.child_loops[*].id", primary_loop)
+        tmp_primary_secondary_loops_dict[primary_loop["id"]] = find_all(
+            "$.child_loops[*].id", primary_loop
+        )
     return tmp_primary_secondary_loops_dict
