@@ -75,7 +75,7 @@ SYS_11_1_TEST_RMD = {
                                     "cooling_system": {
                                         "id": "CHW Coil 1B",
                                         "cooling_system_type": "FLUID_LOOP",
-                                        "chilled_water_loop": "Chiller Loop 1",
+                                        "chilled_water_loop": "Secondary Loop 1",
                                     },
                                     "heating_system": {
                                         "id": "HHW Coil 1B",
@@ -94,7 +94,7 @@ SYS_11_1_TEST_RMD = {
                                     "cooling_system": {
                                         "id": "CHW Coil 1",
                                         "cooling_system_type": "FLUID_LOOP",
-                                        "chilled_water_loop": "Chiller Loop 1",
+                                        "chilled_water_loop": "Secondary Loop 1",
                                     },
                                     "heating_system": {
                                         "id": "HHW Coil 1",
@@ -182,7 +182,11 @@ SYS_11_1_TEST_RMD = {
             ],
             "fluid_loops": [
                 {"id": "Purchased HW Loop 1", "type": "HEATING"},
-                {"id": "Chiller Loop 1", "type": "COOLING"},
+                {
+                    "id": "Chiller Loop 1",
+                    "type": "COOLING",
+                    "child_loops": [{"id": "Secondary Loop 1", "type": "COOLING"}],
+                },
                 {
                     "id": "Purchased CHW Loop 1",
                     "type": "COOLING",
