@@ -76,14 +76,13 @@ def get_primary_secondary_loops_dict(rmi_b):
             break
         elif cfl_id in chiller_loop_ids:
             if any(
-                child_loop_id in non_process_chw_coil_loop_ids
-                for child_loop_id in getattr_(
+                child_loop["id"] in non_process_chw_coil_loop_ids
+                for child_loop in getattr_(
                     chilled_fluid_loop, "FluidLoop", "child_loops"
                 )
             ):
                 primary_loops.append(chilled_fluid_loop)
 
     for primary_loop in primary_loops:
-        tmp_primary_secondary_loops_dict[primary_loop["id"]] = find_all("$.child_loops[*]", primary_loop)
-
+        tmp_primary_secondary_loops_dict[primary_loop["id"]] = find_all("$.child_loops[*].id", primary_loop)
     return tmp_primary_secondary_loops_dict

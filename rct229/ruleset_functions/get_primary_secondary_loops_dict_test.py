@@ -101,7 +101,7 @@ TEST_RMD = {
                 {
                     "id": "Chiller Loop 1",
                     "type": "COOLING",
-                    "child_loops": [{"id": "Chilled Water Loop 1"}],
+                    "child_loops": [{"id": "Chilled Water Loop 1", "type": "COOLING"}],
                 },
             ],
         }
