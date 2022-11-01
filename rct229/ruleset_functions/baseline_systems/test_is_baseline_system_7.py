@@ -197,12 +197,7 @@ SYS_7_TEST_RMD = {
                 {
                     "id": "Chiller Loop 1",
                     "type": "COOLING",
-                    "child_loops": [
-                        {
-                            "id": "Secondary Loop 1",
-                            "type": "COOLING"
-                        }
-                    ]
+                    "child_loops": [{"id": "Secondary Loop 1", "type": "COOLING"}],
                 },
                 {
                     "id": "Purchased HW Loop 1",

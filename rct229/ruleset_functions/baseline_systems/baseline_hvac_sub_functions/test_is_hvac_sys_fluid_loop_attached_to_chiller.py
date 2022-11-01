@@ -49,12 +49,7 @@ TEST_RMD = {
         {
             "id": "CHW_Loop_1",
             "type": "COOLING",
-            "child_loops": [
-                {
-                    "id": "Secondary_Loop_1",
-                    "type": "COOLING"
-                }
-            ]
+            "child_loops": [{"id": "Secondary_Loop_1", "type": "COOLING"}],
         },
         {"id": "CHW_Loop_2"},
     ],

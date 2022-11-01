@@ -109,17 +109,17 @@ def find_exactly_one_zone(rmi, zone_id):
 
 def find_exactly_one_child_loop(rmi, child_loop_id):
     """
-       Search for a child loop data group (secondary loop) in a ruleset model instance by matching child_loop_id
-       Raise exception if no matching zone
-       Parameters
-       ----------
-       rmi: json
-       child_loop_id: str
+    Search for a child loop data group (secondary loop) in a ruleset model instance by matching child_loop_id
+    Raise exception if no matching zone
+    Parameters
+    ----------
+    rmi: json
+    child_loop_id: str
 
-       Returns: json
-       -------
+    Returns: json
+    -------
 
-       """
+    """
     return find_exactly_one_with_field_value(
         "$.fluid_loops[*].child_loops[*]",
         "id",
@@ -128,7 +128,7 @@ def find_exactly_one_child_loop(rmi, child_loop_id):
     )
 
 
-def find_exactly_one_loop(rmi, loop_id):
+def find_exactly_one_fluid_loop(rmi, loop_id):
     """
     Search for the loop data group in a ruleset model instance by matching loop_id
     Raise exception if no matching zone

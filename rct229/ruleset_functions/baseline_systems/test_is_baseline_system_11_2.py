@@ -129,7 +129,11 @@ SYS_11_2_TEST_RMD = {
                         "minimum_flow_fraction": 0.25,
                     },
                 },
-                {"id": "Chiller Loop 1", "type": "COOLING", "child_loops": [{"id": "Secondary Loop 1", "type": "COOLING"}]},
+                {
+                    "id": "Chiller Loop 1",
+                    "type": "COOLING",
+                    "child_loops": [{"id": "Secondary Loop 1", "type": "COOLING"}],
+                },
                 {"id": "Purchased CHW Loop 1", "type": "COOLING"},
             ],
         }

@@ -182,7 +182,11 @@ SYS_11_1_TEST_RMD = {
             ],
             "fluid_loops": [
                 {"id": "Purchased HW Loop 1", "type": "HEATING"},
-                {"id": "Chiller Loop 1", "type": "COOLING", "child_loops": [{"id": "Secondary Loop 1", "type": "COOLING"}]},
+                {
+                    "id": "Chiller Loop 1",
+                    "type": "COOLING",
+                    "child_loops": [{"id": "Secondary Loop 1", "type": "COOLING"}],
+                },
                 {
                     "id": "Purchased CHW Loop 1",
                     "type": "COOLING",
