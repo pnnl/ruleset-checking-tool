@@ -61,52 +61,29 @@ def get_primary_secondary_loops_dict(rmi_b):
         getattr_(hvac, "hvac system", "cooling_system", "chilled_water_loop")
         for hvac in applicable_hvac_systems
     ]
+    # Initialize variables
+    primary_loops = []
+    tmp_primary_secondary_loops_dict = dict()
 
-    primary_loop_ids = []
-    child_loop_ids = []
-    secondary_loop_ids = []
-
-    # This flag will be set if the for loop breaks prematurely
-    for_break_flag = False
     # Iterate through cooling type fluid loops
     for chilled_fluid_loop in find_all(
         f'fluid_loops[*][?(@.type="{FLUID_LOOP.COOLING}")]', rmi_b
     ):
         cfl_id = chilled_fluid_loop["id"]
         if cfl_id in chiller_loop_ids and cfl_id in non_process_chw_coil_loop_ids:
-            for_break_flag = True
+            # No loop in baseline shall be
+            tmp_primary_secondary_loops_dict = dict()
             break
         elif cfl_id in chiller_loop_ids:
-            if all(
+            if any(
                 child_loop_id in non_process_chw_coil_loop_ids
                 for child_loop_id in getattr_(
                     chilled_fluid_loop, "FluidLoop", "child_loops"
                 )
             ):
-                primary_loop_ids.append(cfl_id)
-                # NOTE: child_loop_ids could contain duplicates (though it may not make physical sense)
-                child_loop_ids = [*child_loop_ids, *chilled_fluid_loop["child_loops"]]
-        elif cfl_id in non_process_chw_coil_loop_ids:
-            # NOTE: this condition will fail if either child_loops does not exist or
-            # if the list is empty
-            if chilled_fluid_loop.get("child_loops"):
-                for_break_flag = True
-                break
-            else:
-                secondary_loop_ids.append(cfl_id)
+                primary_loops.append(chilled_fluid_loop)
 
-    # Use set() to avoid the possibility of duplicates in child_loop_ids
-    if for_break_flag or set(child_loop_ids) != set(secondary_loop_ids):
-        primary_secondary_loop_dict = {}
-    else:
-        primary_secondary_loop_dict = {
-            primary_loop_id: [
-                secondary_loop_id
-                for secondary_loop_id in find_exactly_one_fluid_loop(
-                    primary_loop_id, rmi_b
-                )["child_loops"]
-            ]
-            for primary_loop_id in primary_loop_ids
-        }
+    for primary_loop in primary_loops:
+        tmp_primary_secondary_loops_dict[primary_loop["id"]] = find_all("$.child_loops[*]", primary_loop)
 
-    return primary_secondary_loop_dict
+    return tmp_primary_secondary_loops_dict

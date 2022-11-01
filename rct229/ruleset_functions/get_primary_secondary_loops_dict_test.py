@@ -30,7 +30,7 @@ TEST_RMD = {
                                             "is_supply_ducted": True,
                                             "heating_source": "HOT_WATER",
                                             "type": "VARIABLE_AIR_VOLUME",
-                                            "served_by_heating_ventilation_air_conditioning_system": "VAV System 1",
+                                            "served_by_heating_ventilation_air_conditioning_system": "System 7",
                                             "heating_from_loop": "Boiler Loop 1",
                                         }
                                     ],
@@ -54,6 +54,11 @@ TEST_RMD = {
                             "heating_ventilation_air_conditioning_systems": [
                                 {
                                     "id": "System 7",
+                                    "preheat_system": {
+                                        "id": "Preheat Coil 1",
+                                        "heating_system_type": "FLUID_LOOP",
+                                        "hot_water_loop": "Boiler Loop 1",
+                                    },
                                     "cooling_system": {
                                         "id": "CHW Coil 1",
                                         "cooling_system_type": "FLUID_LOOP",
@@ -116,5 +121,5 @@ def test__TEST_RMD__is_valid():
 
 def test__get_primary_secondary_loops_dict():
     assert get_primary_secondary_loops_dict(TEST_RMI) == {
-        "hvac_1_1": {"zone_list": ["zone_1_1"], "total_area": 1500 * ureg.m2}
+        "Chiller Loop 1": ["Chilled Water Loop 1"]
     }
