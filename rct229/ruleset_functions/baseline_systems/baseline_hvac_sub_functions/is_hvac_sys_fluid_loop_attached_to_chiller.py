@@ -35,7 +35,8 @@ def is_hvac_sys_fluid_loop_attached_to_chiller(rmi_b, hvac_b_id):
         secondary_loop["id"]
         for primary_cooling_loop_id in primary_cooling_loop_ids
         for secondary_loop in find_all(
-            "$.child_loops[*]", find_exactly_one_fluid_loop(rmi_b, primary_cooling_loop_id)
+            "$.child_loops[*]",
+            find_exactly_one_fluid_loop(rmi_b, primary_cooling_loop_id),
         )
     ]
 
