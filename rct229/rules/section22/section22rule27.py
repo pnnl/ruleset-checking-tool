@@ -3,9 +3,6 @@ from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedB
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 from rct229.ruleset_functions.baseline_systems.baseline_system_util import HVAC_SYS
 from rct229.ruleset_functions.get_baseline_system_types import get_baseline_system_types
-from rct229.schema.config import ureg
-from rct229.utils.pint_utils import CalcQ
-from rct229.utils.std_comparisons import std_equal
 
 APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_7,
@@ -19,21 +16,20 @@ APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_11_1B,
     HVAC_SYS.SYS_12B,
 ]
-REQUIRED_TEMP_RANGE = ureg("10 degF")
 
 
-class Section22Rule14(RuleDefinitionListIndexedBase):
-    """Rule 14 of ASHRAE 90.1-2019 Appendix G Section 22 (Chilled water loop)"""
+class Section22Rule27(RuleDefinitionListIndexedBase):
+    """Rule 27 of ASHRAE 90.1-2019 Appendix G Section 22 (Hot water loop)"""
 
     def __init__(self):
-        super(Section22Rule14, self).__init__(
+        super(Section22Rule27, self).__init__(
             rmrs_used=UserBaselineProposedVals(False, True, False),
-            each_rule=Section22Rule14.HeatRejectionRule(),
+            each_rule=Section22Rule27.ChillerRule(),
             index_rmr="baseline",
-            id="22-14",
-            description="The baseline heat-rejection device shall have a design temperature rise of 10°F.",
+            id="22-27",
+            description="Each baseline chiller shall be modeled with separate condenser-water pump interlocked to operate with the associated chiller.",
             rmr_context="ruleset_model_instances/0",
-            list_path="heat_rejections[*]",
+            list_path="chillers[*]",
         )
 
     def is_applicable(self, context, data=None):
@@ -52,23 +48,26 @@ class Section22Rule14(RuleDefinitionListIndexedBase):
             ]
         )
 
-    class HeatRejectionRule(RuleDefinitionBase):
+    class ChillerRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section22Rule14.HeatRejectionRule, self).__init__(
+            super(Section22Rule27.ChillerRule, self).__init__(
                 rmrs_used=UserBaselineProposedVals(False, True, False),
                 required_fields={
-                    "$": ["range"],
+                    "$": ["is_condenser_water_pump_interlocked"],
                 },
             )
 
         def get_calc_vals(self, context, data=None):
-            heat_rejection_b = context.baseline
-            heat_rejection_range = heat_rejection_b["range"]
-            return {"heat_rejection_range": CalcQ("temperature", heat_rejection_range)}
+            chiller_b = context.baseline
+            is_condenser_water_pump_interlocked = chiller_b[
+                "is_condenser_water_pump_interlocked"
+            ]
+            return {
+                "is_condenser_water_pump_interlocked": is_condenser_water_pump_interlocked
+            }
 
         def rule_check(self, context, calc_vals=None, data=None):
-            heat_rejection_range = calc_vals["heat_rejection_range"]
-            return std_equal(
-                heat_rejection_range.to(ureg.kelvin),
-                REQUIRED_TEMP_RANGE.to(ureg.kelvin),
-            )
+            is_condenser_water_pump_interlocked = calc_vals[
+                "is_condenser_water_pump_interlocked"
+            ]
+            return is_condenser_water_pump_interlocked

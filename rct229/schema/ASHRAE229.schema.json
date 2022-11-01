@@ -3534,12 +3534,12 @@
                 "range": {
                     "description": "Heat rejection Range",
                     "type": "number",
-                    "units": "C"
+                    "units": "K"
                 },
                 "approach": {
                     "description": "Heat rejection Approach",
                     "type": "number",
-                    "units": "C"
+                    "units": "K"
                 },
                 "fan_power": {
                     "description": "Fan Power",

@@ -86,9 +86,10 @@
                                                         }
                                                     ]
                                                 },
-                                                "heating_system": {
-                                                    "id": "Electric Resistance 1",
-                                                    "heating_system_type": "ELECTRIC_RESISTANCE"
+                                                "preheat_system": {
+                                                    "id": "Preheat Coil 1",
+                                                    "heating_system_type": "FLUID_LOOP",
+                                                    "hot_water_loop": "Boiler Loop 1"
                                                 }
                                             }
                                         ]
@@ -230,9 +231,10 @@
                                                         }
                                                     ]
                                                 },
-                                                "heating_system": {
-                                                    "id": "Electric Resistance 1",
-                                                    "heating_system_type": "ELECTRIC_RESISTANCE"
+                                                "preheat_system": {
+                                                    "id": "Preheat Coil 1",
+                                                    "heating_system_type": "FLUID_LOOP",
+                                                    "hot_water_loop": "Boiler Loop 1"
                                                 }
                                             }
                                         ]
