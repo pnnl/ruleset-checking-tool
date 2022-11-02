@@ -7,6 +7,8 @@ from rct229.ruleset_functions.get_primary_secondary_loops_dict import (
     get_primary_secondary_loops_dict,
 )
 from rct229.schema.config import ureg
+from rct229.utils.jsonpath_utils import find_all
+from rct229.utils.std_comparisons import std_equal
 
 APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_11_1,
@@ -23,12 +25,12 @@ class Section22Rule26(RuleDefinitionListIndexedBase):
     def __init__(self):
         super(Section22Rule26, self).__init__(
             rmrs_used=UserBaselineProposedVals(False, True, False),
-            each_rule=Section22Rule26.PrimaryPumpRule(),
+            each_rule=Section22Rule26.PrimaryCoolingFluidLoop(),
             index_rmr="baseline",
             id="22-26",
             description="For chilled-water systems served by chiller(s) and serves baseline System-11, the baseline building constant-volume primary pump power shall be modeled as 12 W/gpm.",
             rmr_context="ruleset_model_instances/0",
-            list_path="pumps[*]",
+            list_path="fluid_loops[*]",
         )
 
     def is_applicable(self, context, data=None):
@@ -58,16 +60,16 @@ class Section22Rule26(RuleDefinitionListIndexedBase):
         return {"primary_secondary_loops_dict": primary_secondary_loops_dict}
 
     def list_filter(self, context_item, data):
-        pump_b = context_item.baseline
+        fluid_loop = context_item.baseline
         primary_secondary_loops_dict = data["primary_secondary_loops_dict"]
-        return pump_b["loop_or_piping"] in primary_secondary_loops_dict.keys()
+        return fluid_loop["id"] in primary_secondary_loops_dict.keys()
 
-    class PrimaryPumpRule(RuleDefinitionBase):
+    class PrimaryCoolingFluidLoop(RuleDefinitionBase):
         def __init__(self):
-            super(Section22Rule26.PrimaryPumpRule, self).__init__(
+            super(Section22Rule26.PrimaryCoolingFluidLoop, self).__init__(
                 rmrs_used=UserBaselineProposedVals(False, True, False),
                 required_fields={
-                    "$": ["speed_control"],
+                    "$": ["pump_power_per_flow_rate"],
                 },
             )
 
@@ -77,11 +79,17 @@ class Section22Rule26(RuleDefinitionListIndexedBase):
                 "pump_power_per_flow_rate"
             ]
             return {
-                "primary_pump_power_per_flow_rate": primary_pump_power_per_flow_rate
+                "primary_pump_power_per_flow_rate": primary_pump_power_per_flow_rate,
+                "required_pump_power_per_flow_rate": REQUIRED_PUMP_POWER_PER_FLOW_RATE,
             }
 
         def rule_check(self, context, calc_vals=None, data=None):
             primary_pump_power_per_flow_rate = calc_vals[
                 "primary_pump_power_per_flow_rate"
             ]
-            return primary_pump_power_per_flow_rate == REQUIRED_PUMP_POWER_PER_FLOW_RATE
+            required_pump_power_per_flow_rate = calc_vals[
+                "required_pump_power_per_flow_rate"
+            ]
+            return std_equal(
+                required_pump_power_per_flow_rate, primary_pump_power_per_flow_rate
+            )
