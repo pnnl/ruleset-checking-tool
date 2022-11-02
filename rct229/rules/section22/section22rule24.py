@@ -4,7 +4,9 @@ from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedB
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 from rct229.ruleset_functions.baseline_systems.baseline_system_util import HVAC_SYS
 from rct229.ruleset_functions.get_baseline_system_types import get_baseline_system_types
-from rct229.ruleset_functions.get_primary_secondary_loops_dict import get_primary_secondary_loops_dict
+from rct229.ruleset_functions.get_primary_secondary_loops_dict import (
+    get_primary_secondary_loops_dict,
+)
 from rct229.utils.assertions import RCTException
 
 APPLICABLE_SYS_TYPES = [
@@ -48,12 +50,15 @@ class Section22Rule24(RuleDefinitionListIndexedBase):
         ]
         primary_secondary_loop_dict = get_primary_secondary_loops_dict(rmi_b)
 
-        return any(
-            [
-                available_type in APPLICABLE_SYS_TYPES
-                for available_type in available_type_lists
-            ]
-        ) and primary_secondary_loop_dict
+        return (
+            any(
+                [
+                    available_type in APPLICABLE_SYS_TYPES
+                    for available_type in available_type_lists
+                ]
+            )
+            and primary_secondary_loop_dict
+        )
 
     def create_data(self, context, data):
         rmi_b = context.baseline
@@ -77,11 +82,8 @@ class Section22Rule24(RuleDefinitionListIndexedBase):
         def get_calc_vals(self, context, data=None):
             primary_pump_b = context.baseline
             primary_pump_speed_control = primary_pump_b["speed_control"]
-            return {
-                "primary_pump_speed_control": primary_pump_speed_control
-            }
+            return {"primary_pump_speed_control": primary_pump_speed_control}
 
         def rule_check(self, context, calc_vals=None, data=None):
             primary_pump_speed_control = calc_vals["primary_pump_speed_control"]
             return primary_pump_speed_control == PumpSpeedControl.FIXED_SPEED
-
