@@ -10,7 +10,7 @@ for the peak W/sf calculation I've assumed:
 
 **Inputs:** 
 - **B_RMD**
-- **zone**
+- **zone_id**
 - **starting_system_type** - this is the expected system type that was selected prior to checking G3_1_1c exception
 
 **Returns:**  
