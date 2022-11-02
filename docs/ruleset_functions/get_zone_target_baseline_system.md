@@ -12,7 +12,6 @@
  
 **Function Call:**
 - **get_HVAC_building_area_types_and_zones**
-- **does_zone_meet_G3_1_1b**
 - **does_zone_meet_G3_1_1c**
 - **does_zone_meet_G3_1_1e**
 - **does_zone_meet_G3_1_1f**
@@ -75,7 +74,7 @@
 
 - G3.1.1e "Thermal zones designed with heating-only systems in the proposed design serving storage rooms, stairwells, vestibules, electrical/mechanical rooms, and restrooms not exhausting or transferring air from mechanically cooled thermal zones in the proposed design shall use system type 9 or 10 in the baseline building design."
 - loop through the zones_and_systems to see if any of the zones meets this requirement: `for zone in zones_and_systems:`
-	- use the function zone_meets_G3_1_1e to determine whether to change the system type (we are using != NO instead of YES, because the function can return MAYBE_VESTIBULE or LIKELY_VESTIBULE.  Here we will assign any "maybe's or "likelies" to the new system type.  The rule itself will deal with the uncertainty of vestibules using the function is_zone_a_vestibule): `if zone_meets_G3_1_1e(P-RMR,B-RMR,zone) != NO:`
+	- use the function does_zone_meet_G3_1_1e to determine whether to change the system type (we are using != NO instead of YES, because the function can return MAYBE_VESTIBULE or LIKELY_VESTIBULE.  Here we will assign any "maybe's or "likelies" to the new system type.  The rule itself will deal with the uncertainty of vestibules using the function is_zone_a_vestibule): `if does_zone_meet_G3_1_1e(P-RMR,B-RMR,zone) != NO:`
 		- - change the system origin string: `zones_and_systems[zone]["SYSTEM_ORIGIN"] = "G3_1_1e"`
 		- choose system 9 or 10 based on climate zone: `if is_CZ_0_to_3a():`
 			- set the system to "SYS-10"": `zones_and_systems[zone]["EXPECTED_SYSTEM_TYPE"] = "SYS-10"`
@@ -86,7 +85,7 @@
 - G3.1.1f "If the baseline HVAC system type is 9 or 10, use additional system types for all HVAC zones that are mechanically cooled in the proposed design."
 - loop through the zones and systems, check only the zones that are SYS-9 or 10: `for zone in zones_and_systems:`
 	- check if it is SYS-9 or SYS-10: `if zones_and_systems[zone]["EXPECTED_SYSTEM_TYPE"] in ["SYS-9", "SYS-10"]:`
-		- use the function zone_meets_G3_1_1f to see if the zone meets the requirements of G3_1_1f: `if zone_meets_G3_1_1f(P-RMR,B-RMR,zone.id) == "F":`
+		- use the function does_zone_meet_G3_1_1f to see if the zone meets the requirements of G3_1_1f: `if does_zone_meet_G3_1_1f(P-RMR,B-RMR,zone.id) == "F":`
 			- change the system origin string: `zones_and_systems[zone]["SYSTEM_ORIGIN"] = "G3_1_1f"`
 			- the zone meets the G3_1_1f requirements, choose system 3 or 4 based on climate zone: `if is_CZ_0_to_3a():`
 				- set the system to "SYS-4": `zones_and_systems[zone]["EXPECTED_SYSTEM_TYPE"] = "SYS-4"
@@ -97,9 +96,9 @@
 	- part 1: "If the baseline HVAC system serves HVAC zones that includes computer rooms,  baseline system 11 shall be used where the baseline HVAC system type is 7 or 8 and the total computer room peak cooling load is greater than 600,000 BTU/h (175 kW)."
 	- part 2: "If the baseline HVAC system serves HVAC zones that includes computer rooms,  Baseline System 11 shall be used for such HVAC zones in buildings with a total computer room peak cooling load >greater than 3,000,000 Btu/h."
 	- part 3: "If the baseline HVAC system serves HVAC zones that includes computer rooms,  baseline system 3 or 4 shall be used for all HVAC zones where the computer room peak cooling load is= <600,000 Btu/h"
-	- the function `zone_meets_G3_1_1g` will return enum G1, G2, G3, or FALSE
+	- the function `does_zone_meet_G3_1_1g` will return enum G1, G2, G3, or FALSE
 - loop through the zones and systems: `for zone in zones_and_systems:`
-	- use the function zone_meets_G3_1_1g to determine which (if any) of the requirements the zone meets: `does_zone_meet_G =  zone_meets_G3_1_1g_part2(B-RMI,zone.id)`
+	- use the function does_zone_meet_G3_1_1g to determine which (if any) of the requirements the zone meets: `does_zone_meet_G =  does_zone_meet_G3_1_1g(B-RMI,zone.id)`
 		- if the zone meets G1: `if does_zone_meet_G == G1:`
 			- set the system to "SYS-11" and source to "G3_1_1g_part1": `zones_and_systems[zone]["EXPECTED_SYSTEM_TYPE"] = "SYS-11"
 			- change the system origin string: `zones_and_systems[zone]["SYSTEM_ORIGIN"] = "G3_1_1g_part1"`
