@@ -97,7 +97,7 @@ class Section22Rule25(RuleDefinitionListIndexedBase):
             ]
             return {
                 "primary_pump_power_per_flow_rate": primary_pump_power_per_flow_rate,
-                "required_pump_power_per_flow_rate": REQUIRED_PUMP_POWER_PER_FLOW_RATE
+                "required_pump_power_per_flow_rate": REQUIRED_PUMP_POWER_PER_FLOW_RATE,
             }
 
         def rule_check(self, context, calc_vals=None, data=None):
@@ -107,4 +107,6 @@ class Section22Rule25(RuleDefinitionListIndexedBase):
             required_pump_power_per_flow_rate = calc_vals[
                 "required_pump_power_per_flow_rate"
             ]
-            return std_equal(required_pump_power_per_flow_rate, primary_pump_power_per_flow_rate)
+            return std_equal(
+                required_pump_power_per_flow_rate, primary_pump_power_per_flow_rate
+            )
