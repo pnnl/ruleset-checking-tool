@@ -3,7 +3,7 @@ from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedB
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 from rct229.ruleset_functions.baseline_systems.baseline_system_util import (
     HVAC_SYS,
-    find_exactly_one_loop,
+    find_exactly_one_fluid_loop,
 )
 from rct229.ruleset_functions.get_baseline_system_types import get_baseline_system_types
 from rct229.schema.config import ureg
@@ -48,7 +48,7 @@ class Section22Rule30(RuleDefinitionListIndexedBase):
     def create_data(self, context, data):
         rmi_b = context.baseline
         condenser_loop_pump_power_dict = {
-            chiller["condensing_loop"]: find_exactly_one_loop(
+            chiller["condensing_loop"]: find_exactly_one_fluid_loop(
                 rmi_b, chiller["condensing_loop"]
             ).get("pump_power_per_flow_rate")
             for chiller in find_all("chillers[*]", rmi_b)
