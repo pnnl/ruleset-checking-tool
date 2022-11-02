@@ -17,7 +17,7 @@
 **Function Calls:**  
 
 1. get_baseline_system_types()
-2. get_primary_secondary_loops()
+2. get_primary_secondary_loops_dict()
 
 **Applicability Checks:**  
 
@@ -29,7 +29,7 @@
 
 ## Rule Logic:  
 
-- Get primary and secondary loops for B-RMR: `primary_secondary_loop_dictionary = get_primary_secondary_loops(B_RMR, "COOLING")`
+- Get primary and secondary loops for B-RMR: `primary_secondary_loop_dictionary = get_primary_secondary_loops_dict(B_RMR)`
 
 **Rule Assertion - Component:**
 
