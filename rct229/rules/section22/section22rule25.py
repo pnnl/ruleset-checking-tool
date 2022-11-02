@@ -7,6 +7,7 @@ from rct229.ruleset_functions.get_primary_secondary_loops_dict import (
     get_primary_secondary_loops_dict,
 )
 from rct229.schema.config import ureg
+from rct229.utils.std_comparisons import std_equal
 
 APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_7,
@@ -35,12 +36,12 @@ class Section22Rule25(RuleDefinitionListIndexedBase):
     def __init__(self):
         super(Section22Rule25, self).__init__(
             rmrs_used=UserBaselineProposedVals(False, True, False),
-            each_rule=Section22Rule25.PrimaryPumpRule(),
+            each_rule=Section22Rule25.PrimaryCoolingFluidLoop(),
             index_rmr="baseline",
             id="22-25",
             description="For chilled-water systems served by chiller(s) and does not serve baseline System-11, the baseline building constant-volume primary pump power shall be modeled as 9 W/gpm.",
             rmr_context="ruleset_model_instances/0",
-            list_path="pumps[*]",
+            list_path="fluid_loops[*]",
         )
 
     def is_applicable(self, context, data=None):
@@ -76,13 +77,13 @@ class Section22Rule25(RuleDefinitionListIndexedBase):
         return {"primary_secondary_loops_dict": primary_secondary_loops_dict}
 
     def list_filter(self, context_item, data):
-        pump_b = context_item.baseline
+        fluid_loop = context_item.baseline
         primary_secondary_loops_dict = data["primary_secondary_loops_dict"]
-        return pump_b["loop_or_piping"] in primary_secondary_loops_dict.keys()
+        return fluid_loop["id"] in primary_secondary_loops_dict.keys()
 
-    class PrimaryPumpRule(RuleDefinitionBase):
+    class PrimaryCoolingFluidLoop(RuleDefinitionBase):
         def __init__(self):
-            super(Section22Rule25.PrimaryPumpRule, self).__init__(
+            super(Section22Rule25.PrimaryCoolingFluidLoop, self).__init__(
                 rmrs_used=UserBaselineProposedVals(False, True, False),
                 required_fields={
                     "$": ["pump_power_per_flow_rate"],
@@ -90,16 +91,20 @@ class Section22Rule25(RuleDefinitionListIndexedBase):
             )
 
         def get_calc_vals(self, context, data=None):
-            primary_pump_b = context.baseline
-            primary_pump_power_per_flow_rate = primary_pump_b[
+            primary_cooling_loop = context.baseline
+            primary_pump_power_per_flow_rate = primary_cooling_loop[
                 "pump_power_per_flow_rate"
             ]
             return {
-                "primary_pump_power_per_flow_rate": primary_pump_power_per_flow_rate
+                "primary_pump_power_per_flow_rate": primary_pump_power_per_flow_rate,
+                "required_pump_power_per_flow_rate": REQUIRED_PUMP_POWER_PER_FLOW_RATE
             }
 
         def rule_check(self, context, calc_vals=None, data=None):
             primary_pump_power_per_flow_rate = calc_vals[
                 "primary_pump_power_per_flow_rate"
             ]
-            return primary_pump_power_per_flow_rate == REQUIRED_PUMP_POWER_PER_FLOW_RATE
+            required_pump_power_per_flow_rate = calc_vals[
+                "required_pump_power_per_flow_rate"
+            ]
+            return std_equal(required_pump_power_per_flow_rate, primary_pump_power_per_flow_rate)
