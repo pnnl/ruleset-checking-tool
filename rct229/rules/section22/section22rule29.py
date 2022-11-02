@@ -8,6 +8,7 @@ from rct229.ruleset_functions.baseline_systems.baseline_system_util import (
 from rct229.ruleset_functions.get_baseline_system_types import get_baseline_system_types
 from rct229.schema.config import ureg
 from rct229.utils.jsonpath_utils import find_all
+from rct229.utils.pint_utils import CalcQ
 from rct229.utils.std_comparisons import std_equal
 
 APPLICABLE_SYS_TYPES = [
@@ -81,8 +82,19 @@ class Section22Rule29(RuleDefinitionListIndexedBase):
         def get_calc_vals(self, context, data=None):
             fluid_loop_b = context.baseline
             pump_power_per_flow_rate = fluid_loop_b["pump_power_per_flow_rate"]
-            return {"pump_power_per_flow_rate": pump_power_per_flow_rate}
+            required_pump_power = REQUIRED_PUMP_POWER
+
+            return {
+                "pump_power_per_flow_rate": CalcQ(
+                    "power_per_flow_rate", pump_power_per_flow_rate
+                ),
+                "required_pump_power": CalcQ(
+                    "power_per_flow_rate", required_pump_power
+                ),
+            }
 
         def rule_check(self, context, calc_vals=None, data=None):
             pump_power_per_flow_rate = calc_vals["pump_power_per_flow_rate"]
-            return std_equal(pump_power_per_flow_rate, REQUIRED_PUMP_POWER)
+            required_pump_power = calc_vals["required_pump_power"]
+
+            return std_equal(pump_power_per_flow_rate, required_pump_power)
