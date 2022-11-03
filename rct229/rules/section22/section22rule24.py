@@ -7,7 +7,6 @@ from rct229.ruleset_functions.get_baseline_system_types import get_baseline_syst
 from rct229.ruleset_functions.get_primary_secondary_loops_dict import (
     get_primary_secondary_loops_dict,
 )
-from rct229.utils.assertions import RCTException
 
 APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_7,
