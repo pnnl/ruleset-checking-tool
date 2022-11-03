@@ -8,6 +8,7 @@ from rct229.ruleset_functions.get_primary_secondary_loops_dict import (
 )
 from rct229.schema.config import ureg
 from rct229.utils.jsonpath_utils import find_all
+from rct229.utils.pint_utils import CalcQ
 from rct229.utils.std_comparisons import std_equal
 
 APPLICABLE_SYS_TYPES = [
@@ -79,8 +80,12 @@ class Section22Rule26(RuleDefinitionListIndexedBase):
                 "pump_power_per_flow_rate"
             ]
             return {
-                "primary_pump_power_per_flow_rate": primary_pump_power_per_flow_rate,
-                "required_pump_power_per_flow_rate": REQUIRED_PUMP_POWER_PER_FLOW_RATE,
+                "primary_pump_power_per_flow_rate": CalcQ(
+                    "power_per_flow_rate", primary_pump_power_per_flow_rate
+                ),
+                "required_pump_power_per_flow_rate": CalcQ(
+                    "power_per_flow_rate", REQUIRED_PUMP_POWER_PER_FLOW_RATE
+                ),
             }
 
         def rule_check(self, context, calc_vals=None, data=None):
