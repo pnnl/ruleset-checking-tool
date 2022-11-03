@@ -13,7 +13,7 @@
  
 **Function Call:**
 - **is_a_vestibule**
-- **is_zone_mechanically_cooled**
+- **is_zone_mechanically_heated_and_not_cooled**
 - **get_zone** - Weili mentioned a get_zone function, but I don't see it in the docs, I'm assuming we can pass an RMD and zone_id and get a zone?
 
 ## Logic:
@@ -32,7 +32,7 @@
 		- set eligible to true: `eligible = TRUE`
 
 - if the zone is still eligible: `if eligible:`
-	- check if the proposed has a heating-only system by using the is_zone_mechanically_cooled function: `if is_zone_mechanically_cooled(P-RMD,zone_p)`
+	- check if the proposed has a heating-only system by using the is_zone_mechanically_heated_and_not_cooled function: `if not is_zone_mechanically_heated_and_not_cooled(P-RMD,zone_p)`
 		- mechanically cooled zones are not eligible: `eligible = FALSE`
 
 - if the zone is still eligible: `if eligible:`
