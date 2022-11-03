@@ -4,7 +4,7 @@
 - used to verify the correct type of HVAC baseline system (or systems)
 
 **Inputs:**  
-- **U-RMR or P-RMR or B-RMR**: The U-RMR, P-RMR or B-RMR
+- **B-RMI**: The baseline ruleset model instance
 
 **Returns:**  
 - **list_buildiung_area_types_with_total_area_and_zones**: A dict that saves all the HVAC building area types in the file and includes a list of all the zone ids associated with area type as well as the total area of each building area type
@@ -94,18 +94,18 @@
 	- `lighting_space_lookup["LOBBY_PERFORMING_ARTS_THEATER"] = "PUBLIC_ASSEMBLY"`
 	- `lighting_space_lookup["LOBBY_ALL_OTHERS"] = "OTHER_NON_RESIDENTIAL"`
 	- `lighting_space_lookup["LOCKER_ROOM"] = "OTHER_NON_RESIDENTIAL"`
-	- `lighting_space_lookup["LOUNGE_BREAKROOM_HEALTH_CARE_FACILITY"] = "HOSPITAL"
+	- `lighting_space_lookup["LOUNGE_BREAKROOM_HEALTH_CARE_FACILITY"] = "HOSPITAL"`
 	- `lighting_space_lookup["LOUNGE_BREAKROOM_ALL_OTHERS"] = "OTHER_NON_RESIDENTIAL"`
 	- `lighting_space_lookup["OFFICE_ENCLOSED"] = "OTHER_NON_RESIDENTIAL"`
 	- `lighting_space_lookup["OFFICE_OPEN_PLAN"] = "OTHER_NON_RESIDENTIAL"`
-	- `lighting_space_lookup["PARKING_AREA_INTERIOR"] = "HEATED-ONLY_STORAGE"
+	- `lighting_space_lookup["PARKING_AREA_INTERIOR"] = "HEATED-ONLY_STORAGE"`
 	- `lighting_space_lookup["PHARMACY_AREA"] = "OTHER_NON_RESIDENTIAL"` # OR RETAIL??? OR HOSPITAL???
 	- `lighting_space_lookup["RESTROOM_FACILITY_FOR_THE_VISUALLY_IMPAIRED"] = "OTHER_NON_RESIDENTIAL"`
 	- `lighting_space_lookup["RESTROOM_ALL_OTHERS"] = "OTHER_NON_RESIDENTIAL"`
 	- `lighting_space_lookup["SALES_AREA"] = "RETAIL"`
 	- `lighting_space_lookup["SEATING_AREA_GENERAL"] = "PUBLIC_ASSEMBLY"`
 	- `lighting_space_lookup["STAIRWELL"] = "OTHER_NON_RESIDENTIAL"`
-	- `lighting_space_lookup["STORAGE_ROOM_HOSPITAL"] = "HOSPITAL"
+	- `lighting_space_lookup["STORAGE_ROOM_HOSPITAL"] = "HOSPITAL"`
 	- `lighting_space_lookup["STORAGE_ROOM_SMALL"] = "OTHER_NON_RESIDENTIAL"`
 	- `lighting_space_lookup["STORAGE_ROOM_LARGE"] = "OTHER_NON_RESIDENTIAL"`
 	- `lighting_space_lookup["VEHICULAR_MAINTENANCE_AREA"] = "HEATED-ONLY_STORAGE"
@@ -149,6 +149,7 @@
 	- `lighting_space_lookup["WAREHOUSE_STORAGE_AREA_MEDIUM_TO_BULKY_PALLETIZED_ITEMS"] = "HEATED-ONLY_STORAGE"
 	- `lighting_space_lookup["WAREHOUSE_STORAGE_AREA_SMALLER_HAND_CARRIED_ITEMS"] = "HEATED-ONLY_STORAGE"
 
+- create dict `list_buildiung_area_types_with_total_area_and_zones`: `list_buildiung_area_types_with_total_area_and_zones = {}`
 - For each building segment in RMR: `for building_segment in RMR.building.building_segments:`
 	- Create list_of_zones for storing zone_ids `list_of_zones = []`
 	- For each zone in building_segment: `for zone in building_segment.zones:`
@@ -159,14 +160,20 @@
 		- else:
 			- look for a lighting_building_area_type: `if building_segment.lighting_building_area_type != "Null":`
 				- set space_area_type based on the lookup table: `space_area_type = lighting_space_lookup[building_segment.lighting_building_area_type`
+		- check if the space_area_type still equals "None": `if space_area_type == "None":`
+			- we need to look at all the spaces, map lighting space types to HVAC building area types, and find the largest floor area.  The zone will get assigned the HVAC_BAT associated with the largest floor area.
+			- create a dict of space area types: `zone_space_area_types = {}`
+			- loop through the spaces: `for space in zone.spaces:`
+				- look up the area type using `lighting_space_lookup`: `area_type = lighting_space_lookup[space.lighting_space_type]`
+				- create the integer for this space area type if it doesn't exist yet: `zone_space_area_types[area_type] = zone_space_area_types[area_type] or 0
+				- add the space area to the dict under `area_type`: `zone_space_area_types[area_type] = zone_space_area_types[area_type] + space.floor_area
+			- assign the key with the maximum floor area to `space_area_type`: `space_area_type = max(zone_space_area_types, key = zone_space_area_types.get)`
 		- For each space in zone: `for space in zone.spaces:`
-			- check if there is a value in space_area_type: `if space_area_type != "None":`
-				- add space area: `list_buildiung_area_types_with_total_area_and_zones[space_area_type]["AREA"] += space.floor_area`
-			- otherwise, we'll need to map the building area type off of the ligthing category: `else:`
-				- set the space area type based on lighting space area: `space_area_type = lighting_space_lookup[space.lighting_space_type]`
-				- add space to the area based on space.lighting_space_type: `list_buildiung_area_types_with_total_area_and_zones[space_area_type]["AREA"] += space.floor_area`
+			- create the integer for `list_buildiung_area_types_with_total_area_and_zones[space_area_type]["AREA"]` if it doesn't yet exist: `list_buildiung_area_types_with_total_area_and_zones[space_area_type]["AREA"] = list_buildiung_area_types_with_total_area_and_zones[space_area_type]["AREA"] or 0
+			- create the list for `list_buildiung_area_types_with_total_area_and_zones[space_area_type]["ZONE_IDS"]` if it doesn't already exist: `list_buildiung_area_types_with_total_area_and_zones[space_area_type]["ZONE_IDS"] = list_buildiung_area_types_with_total_area_and_zones[space_area_type]["ZONE_IDS"] or []
+			- add space area: `list_buildiung_area_types_with_total_area_and_zones[space_area_type]["AREA"] += space.floor_area`
 
-	- Append zone_ids to the dict: `list_buildiung_area_types_with_total_area_and_zones[space_area_type]["ZONE_IDS"] = list_of_zones`
+	- Append zone_ids to the dict: `list_buildiung_area_types_with_total_area_and_zones[space_area_type]["ZONE_IDS"].append(list_of_zones)`
 	
 	 **Returns** `return list_buildiung_area_types_with_total_area_and_zones`  
 
