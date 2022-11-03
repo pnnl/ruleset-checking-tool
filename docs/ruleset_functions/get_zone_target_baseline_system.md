@@ -98,7 +98,7 @@
 	- part 3: "If the baseline HVAC system serves HVAC zones that includes computer rooms,  baseline system 3 or 4 shall be used for all HVAC zones where the computer room peak cooling load is= <600,000 Btu/h"
 	- the function `does_zone_meet_G3_1_1g` will return enum G1, G2, G3, or FALSE
 - loop through the zones and systems: `for zone in zones_and_systems:`
-	- use the function does_zone_meet_G3_1_1g to determine which (if any) of the requirements the zone meets: `does_zone_meet_G =  does_zone_meet_G3_1_1g(B-RMI,zone.id)`
+	- use the function does_zone_meet_G3_1_1g to determine which (if any) of the requirements the zone meets: `does_zone_meet_G =  does_zone_meet_G3_1_1g(B-RMI,zone.id,zones_and_systems[zone]["EXPECTED_SYSTEM_TYPE"])`
 		- if the zone meets G1: `if does_zone_meet_G == G1:`
 			- set the system to "SYS-11" and source to "G3_1_1g_part1": `zones_and_systems[zone]["EXPECTED_SYSTEM_TYPE"] = "SYS-11"
 			- change the system origin string: `zones_and_systems[zone]["SYSTEM_ORIGIN"] = "G3_1_1g_part1"`
