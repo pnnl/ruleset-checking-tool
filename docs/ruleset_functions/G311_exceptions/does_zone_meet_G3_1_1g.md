@@ -9,20 +9,21 @@
 **Inputs:** 
 - **B_RMI**
 - **zone_id**
+- **starting_system_type**
 
 **Returns:**  
 - **result**: an enum - either NO or G1, G2, G3 for the 3 parts
 
 **Function Call:**
-- **find_zone**
-- **zones_with_computer_room_dict_x**
+- **get_component_by_id**
+- **get_zones_computer_rooms**
 
 ## Logic:
 - set the result variable to NO - only a positive test can give it a different value: `result = NO`
-- determine whether the zone is a computer room using the function zones_with_computer_room_dict_x to get a list of zones including computer rooms: `computer_room_zones_dict = zones_with_computer_room_dict_x(B_RMI)`
+- determine whether the zone is a computer room using the function get_zones_computer_rooms to get a list of zones including computer rooms: `computer_room_zones_dict = get_zones_computer_rooms(B_RMI)`
   - if the zone.id is in the computer_room_zones_dict, then this is a computer room zone and it is not eligible: `if zone.id in computer_room_zones_dict:`
-   - set result to G3: `result = G3`
-   - get the zone: `zone = get_zone(zone_id)`
+   - set result to G3 only if the starting_system_type is SYS-7 or SYS-8: `result = G3 if starting_system_type in ["SYS-7","SYS-8"]`
+   - get the zone: `zone = get_component_by_id(zone_id)`
    - now determine whether the peak cooling load is above the threshold of 3,000,000 btu/hr: `if zone.peak_cooling_load > 3000000:`
     - set result to G1: `result = G1`
    - else, if the load is greater than 600,000, it's G2: `elsif zone.peak_cooling_load > 600000:`
