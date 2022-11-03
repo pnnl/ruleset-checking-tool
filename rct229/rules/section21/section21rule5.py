@@ -16,7 +16,7 @@ from rct229.ruleset_functions.get_zone_conditioning_category_dict import (
 from rct229.schema.config import ureg
 from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all, find_exactly_one_with_field_value
-from rct229.utils.pint_utils import ZERO, pint_sum
+from rct229.utils.pint_utils import ZERO, CalcQ, pint_sum
 
 APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_1,
@@ -133,7 +133,7 @@ class Section21Rule5(RuleDefinitionListIndexedBase):
 
             num_boilers = len(find_all(".boilers[*]", rmi_b))
             boiler_capacity_list = [
-                getattr_(boiler, "boiler", "rated_capacity")
+                CalcQ("capacity", getattr_(boiler, "boiler", "rated_capacity"))
                 for boiler in find_all(".boilers[*]", rmi_b)
             ]
 

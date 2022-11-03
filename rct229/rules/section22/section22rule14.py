@@ -64,11 +64,17 @@ class Section22Rule14(RuleDefinitionListIndexedBase):
         def get_calc_vals(self, context, data=None):
             heat_rejection_b = context.baseline
             heat_rejection_range = heat_rejection_b["range"]
-            return {"heat_rejection_range": CalcQ("temperature", heat_rejection_range)}
+            return {
+                "heat_rejection_range": CalcQ("temperature", heat_rejection_range),
+                "required_heat_rejection_range": CalcQ(
+                    "temperature", REQUIRED_TEMP_RANGE
+                ),
+            }
 
         def rule_check(self, context, calc_vals=None, data=None):
             heat_rejection_range = calc_vals["heat_rejection_range"]
+            required_heat_rejection_range = calc_vals["required_heat_rejection_range"]
             return std_equal(
                 heat_rejection_range.to(ureg.kelvin),
-                REQUIRED_TEMP_RANGE.to(ureg.kelvin),
+                required_heat_rejection_range.to(ureg.kelvin),
             )

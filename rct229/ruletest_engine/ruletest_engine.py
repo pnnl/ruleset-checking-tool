@@ -526,7 +526,7 @@ def run_boiler_tests():
 
     Results of boiler test are spit out to console
     """
-    boiler_test_json = "section21/rule_21_3.json"
+    boiler_test_json = "section21/rule_21_6.json"
     return run_section_tests(boiler_test_json)
 
 
