@@ -84,9 +84,12 @@ class Section21Rule13(RuleDefinitionListIndexedBase):
             minimum_flow_fraction = heating_fluid_loop_b["heating_design_and_control"][
                 "minimum_flow_fraction"
             ]
-            return {"minimum_flow_fraction": minimum_flow_fraction}
+            return {
+                "minimum_flow_fraction": minimum_flow_fraction,
+                "required_minimum_flow_fraction": MINIMUM_TURNDOWN_RATIO,
+            }
 
         def rule_check(self, context, calc_vals=None, data=None):
             minimum_flow_fraction = calc_vals["minimum_flow_fraction"]
-
-            return minimum_flow_fraction == MINIMUM_TURNDOWN_RATIO
+            required_minimum_flow_fraction = calc_vals["required_minimum_flow_fraction"]
+            return minimum_flow_fraction == required_minimum_flow_fraction
