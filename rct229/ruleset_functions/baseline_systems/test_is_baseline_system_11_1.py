@@ -3,7 +3,7 @@ from rct229.ruleset_functions.baseline_systems.is_baseline_system_11_1 import (
     is_baseline_system_11_1,
 )
 
-rmd_model = {
+SYS_11_1_TEST_RMD = {
     "id": "ASHRAE229 1",
     "ruleset_model_instances": [
         {
@@ -75,7 +75,7 @@ rmd_model = {
                                     "cooling_system": {
                                         "id": "CHW Coil 1B",
                                         "cooling_system_type": "FLUID_LOOP",
-                                        "chilled_water_loop": "Chiller Loop 1",
+                                        "chilled_water_loop": "Secondary Loop 1",
                                     },
                                     "heating_system": {
                                         "id": "HHW Coil 1B",
@@ -94,7 +94,7 @@ rmd_model = {
                                     "cooling_system": {
                                         "id": "CHW Coil 1",
                                         "cooling_system_type": "FLUID_LOOP",
-                                        "chilled_water_loop": "Chiller Loop 1",
+                                        "chilled_water_loop": "Secondary Loop 1",
                                     },
                                     "heating_system": {
                                         "id": "HHW Coil 1",
@@ -182,7 +182,11 @@ rmd_model = {
             ],
             "fluid_loops": [
                 {"id": "Purchased HW Loop 1", "type": "HEATING"},
-                {"id": "Chiller Loop 1", "type": "COOLING"},
+                {
+                    "id": "Chiller Loop 1",
+                    "type": "COOLING",
+                    "child_loops": [{"id": "Secondary Loop 1", "type": "COOLING"}],
+                },
                 {
                     "id": "Purchased CHW Loop 1",
                     "type": "COOLING",
@@ -196,7 +200,7 @@ rmd_model = {
 def test_is_baseline__system_11_1():
     assert (
         is_baseline_system_11_1(
-            rmd_model["ruleset_model_instances"][0],
+            SYS_11_1_TEST_RMD["ruleset_model_instances"][0],
             "System Type 11",
             ["VAV Air Terminal 1"],
             ["Thermal Zone 1"],
@@ -208,7 +212,7 @@ def test_is_baseline__system_11_1():
 def test_is_baseline__system__11_1A():
     assert (
         is_baseline_system_11_1(
-            rmd_model["ruleset_model_instances"][0],
+            SYS_11_1_TEST_RMD["ruleset_model_instances"][0],
             "System Type 11A",
             ["VAV Air Terminal 1A"],
             ["Thermal Zone 1A"],
@@ -220,7 +224,7 @@ def test_is_baseline__system__11_1A():
 def test_is_baseline__system_11_1B():
     assert (
         is_baseline_system_11_1(
-            rmd_model["ruleset_model_instances"][0],
+            SYS_11_1_TEST_RMD["ruleset_model_instances"][0],
             "System Type 11B",
             ["VAV Air Terminal 1B"],
             ["Thermal Zone 1B"],
@@ -232,7 +236,7 @@ def test_is_baseline__system_11_1B():
 def test_is_baseline__system_11_1C():
     assert (
         is_baseline_system_11_1(
-            rmd_model["ruleset_model_instances"][0],
+            SYS_11_1_TEST_RMD["ruleset_model_instances"][0],
             "System Type 11C",
             ["VAV Air Terminal 1C"],
             ["Thermal Zone 1C"],
