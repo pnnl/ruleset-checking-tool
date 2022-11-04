@@ -1,7 +1,6 @@
 from rct229.ruleset_functions.baseline_systems.baseline_system_util import (
     find_exactly_one_terminal_unit,
 )
-from rct229.utils.jsonpath_utils import find_exactly_one_with_field_value
 
 
 def are_all_terminal_supplies_ducted(rmi_b, terminal_unit_id_list):
