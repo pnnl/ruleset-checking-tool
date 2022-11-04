@@ -5,6 +5,8 @@ from rct229.ruleset_functions.baseline_systems.baseline_system_util import HVAC_
 from rct229.ruleset_functions.get_baseline_system_types import get_baseline_system_types
 from rct229.schema.config import ureg
 from rct229.utils.jsonpath_utils import find_all
+from rct229.utils.pint_utils import CalcQ
+from rct229.utils.std_comparisons import std_equal
 
 APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_1,
@@ -73,9 +75,19 @@ class Section21Rule9(RuleDefinitionListIndexedBase):
             fluid_loop_b = context.baseline
             pump_power_per_flow_rate = fluid_loop_b["pump_power_per_flow_rate"]
             return {
-                "pump_power_per_flow_rate": pump_power_per_flow_rate,
+                "pump_power_per_flow_rate": CalcQ(
+                    "power_per_flow_rate", pump_power_per_flow_rate
+                ),
+                "required_pump_power_per_flow_rate": CalcQ(
+                    "power_per_flow_rate", REQUIRED_PUMP_POWER_PER_FLOW_RATE
+                ),
             }
 
         def rule_check(self, context, calc_vals=None, data=None):
             pump_power_per_flow_rate = calc_vals["pump_power_per_flow_rate"]
-            return pump_power_per_flow_rate == REQUIRED_PUMP_POWER_PER_FLOW_RATE
+            required_pump_power_per_flow_rate = calc_vals[
+                "required_pump_power_per_flow_rate"
+            ]
+            return std_equal(
+                required_pump_power_per_flow_rate, pump_power_per_flow_rate
+            )
