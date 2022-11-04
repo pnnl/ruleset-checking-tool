@@ -19,7 +19,7 @@
 **Function Calls:**  
 
 1. get_baseline_system_types()
-2. get_primary_secondary_loops()
+2. get_primary_secondary_loops_dict()
 3. get_component_by_id()
 
 **Applicability Checks:**  
@@ -30,7 +30,7 @@
 
   - Else, rule is not applicable to B-RMR: `else: RULE_NOT_APPLICABLE`
 
-- **Check 2:** Get primary and secondary loops for B-RMR: `primary_secondary_loop_dictionary = get_primary_secondary_loops(B_RMR)`
+- **Check 2:** Get primary and secondary loops for B-RMR: `primary_secondary_loop_dictionary = get_primary_secondary_loops_dict(B_RMR)`
 
   - Check if B-RMR is modeled with primary-secondary configuration, continue to rule logic: `if LEN(primary_secondary_loop_dictionary) != 0: CHECK_RULE_LOGIC`
 

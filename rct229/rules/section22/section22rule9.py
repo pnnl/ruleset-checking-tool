@@ -22,7 +22,7 @@ APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_12B,
 ]
 MIN_FLOW_FRACTION = 0.25
-TOTAL_COOLING_CAP_REQ = 300 * ureg("Ton")
+MIN_CHW_PRIMARY_LOOP_COOLING_CAPACITY = 300.0 * ureg("ton")
 
 
 class Section22Rule9(RuleDefinitionListIndexedBase):
@@ -49,6 +49,7 @@ class Section22Rule9(RuleDefinitionListIndexedBase):
             if len(baseline_system_types_dict[hvac_type]) > 0
         ]
         primary_secondary_loop_dictionary = get_primary_secondary_loops_dict(rmi_b)
+
         return (
             any(
                 [
@@ -56,39 +57,50 @@ class Section22Rule9(RuleDefinitionListIndexedBase):
                     for available_type in available_type_lists
                 ]
             )
-            and len(primary_secondary_loop_dictionary) != 0
+            and primary_secondary_loop_dictionary
         )
 
     def create_data(self, context, data):
         rmi_b = context.baseline
         chw_loop_capacity_dict = {}
         for chiller in find_all("chillers[*]", rmi_b):
-            chw_loop_capacity_dict["cooling_loop"] += chiller["rated_capacity"]
+            if chiller["cooling_loop"] not in chw_loop_capacity_dict.keys():
+                chw_loop_capacity_dict[chiller["cooling_loop"]] = 0.0 * ureg("W")
+                chw_loop_capacity_dict[chiller["cooling_loop"]] += chiller[
+                    "rated_capacity"
+                ]
 
-        return {"chw_loop_capacity_dict": chw_loop_capacity_dict}
+        primary_secondary_loop_dictionary = get_primary_secondary_loops_dict(rmi_b)
+
+        return {
+            "chw_loop_capacity_dict": chw_loop_capacity_dict,
+            "primary_secondary_loop_dictionary": primary_secondary_loop_dictionary,
+        }
 
     def list_filter(self, context_item, data):
         fluid_loop_b = context_item.baseline
-        chw_loop_capacity_dict = data["chiller_loop_ids_list"]
-        return chw_loop_capacity_dict[fluid_loop_b["id"]] >= TOTAL_COOLING_CAP_REQ
+        primary_secondary_loop_dictionary = data["primary_secondary_loop_dictionary"]
+        chw_loop_capacity_dict = data["chw_loop_capacity_dict"]
+
+        return (
+            fluid_loop_b["id"] in primary_secondary_loop_dictionary.keys()
+            and chw_loop_capacity_dict[fluid_loop_b["id"]]
+            >= MIN_CHW_PRIMARY_LOOP_COOLING_CAPACITY
+        )
 
     class ChillerFluidLoopRule(RuleDefinitionBase):
         def __init__(self):
             super(Section22Rule9.ChillerFluidLoopRule, self).__init__(
                 rmrs_used=UserBaselineProposedVals(False, True, False),
-                required_fields={
-                    "$": ["cooling_or_condensing_design_and_control"],
-                    "cooling_or_condensing_design_and_control": [
-                        "temperature_reset_type",
-                    ],
-                },
             )
 
         def get_calc_vals(self, context, data=None):
             fluid_loop_b = context.baseline
-            secondary_loop_min_flow_rate = fluid_loop_b[
-                "cooling_or_condensing_design_and_control"
-            ]["temperature_reset_type"]
+
+            for secondary_loop_id_b in fluid_loop_b["child_loops"]:
+                secondary_loop_min_flow_rate = secondary_loop_id_b[
+                    "cooling_or_condensing_design_and_control"
+                ]["minimum_flow_fraction"]
 
             return {"secondary_loop_min_flow_rate": secondary_loop_min_flow_rate}
 
