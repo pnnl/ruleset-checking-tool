@@ -1,4 +1,3 @@
-from rct229.data.schema_enums import schema_enums
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
@@ -20,7 +19,6 @@ APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_11_1B,
     HVAC_SYS.SYS_12B,
 ]
-FLUID_LOOP = schema_enums["FluidLoopOptions"]
 
 
 class Section22Rule34(RuleDefinitionListIndexedBase):
@@ -61,8 +59,9 @@ class Section22Rule34(RuleDefinitionListIndexedBase):
 
     def list_filter(self, context_item, data):
         fluid_loops_b = context_item.baseline
+        primary_secondary_loop_dictionary = data["primary_secondary_loop_dictionary"]
 
-        return fluid_loops_b["type"] == FLUID_LOOP.COOLING
+        return fluid_loops_b["id"] in primary_secondary_loop_dictionary.keys()
 
     class CoolingFluidLoopRule(RuleDefinitionBase):
         def __init__(self):
