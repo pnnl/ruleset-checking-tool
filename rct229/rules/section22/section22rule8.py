@@ -23,7 +23,7 @@ APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_12B,
 ]
 PUMP_SPPED_CONTROL = schema_enums["PumpSpeedControlOptions"]
-
+MIN_CHW_PRIMARY_LOOP_COOLING_CAPACITY = 300.0 * ureg("ton")
 
 class Section22Rule8(RuleDefinitionListIndexedBase):
     """Rule 8 of ASHRAE 90.1-2019 Appendix G Section 22 (Chilled water loop)"""
@@ -78,7 +78,7 @@ class Section22Rule8(RuleDefinitionListIndexedBase):
 
         child_loop_speed_control_dict = {}
         for loop_b_id in primary_secondary_loop_dictionary.keys():
-            if chw_loop_capacity_dict[loop_b_id] >= 300.0 * ureg("W"):
+            if chw_loop_capacity_dict[loop_b_id] >= MIN_CHW_PRIMARY_LOOP_COOLING_CAPACITY:
                 for child_loop in find_one_with_field_value(
                     "fluid_loops[*]", "id", loop_b_id, rmi_b
                 )["child_loops"]:

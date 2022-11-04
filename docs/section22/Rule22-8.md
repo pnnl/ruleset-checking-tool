@@ -12,7 +12,7 @@
 **Evaluation Context:** Building  
 **Applicability Checks:**  
 
-1. B-RMR is modeled with at least one air-side system that is Type-7, 8, 11, 12, 13, 7b, 8b, 11b, 12b, 13b.
+1. B-RMR is modeled with at least one air-side system that is Type-7, 8, 11, 12, 13, 7b, 8b, 11b, 12b.
 2. Primary and secondary CHW loops are modeled correctly in B-RMR.
 3. B-RMR chilled water system cooling capacity is 300 tons or more.
 
