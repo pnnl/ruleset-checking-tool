@@ -77,7 +77,10 @@ def normalize_interior_lighting_schedules(
 
         schedule_hourly_value = getattr_(
             find_exactly_one_with_field_value(
-                "$", "id", interior_lighting["lighting_multiplier_schedule"], schedules
+                "$[*]",
+                "id",
+                interior_lighting["lighting_multiplier_schedule"],
+                schedules,
             ),
             "schedule",
             "hourly_values",

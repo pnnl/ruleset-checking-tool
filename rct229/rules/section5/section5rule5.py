@@ -54,7 +54,11 @@ class Section5Rule5(RuleDefinitionListIndexedBase):
 
         def list_filter(self, context_item, data=None):
             surface_b = context_item.baseline
-            return get_opaque_surface_type(surface_b) == OST.ROOF
+            scc = data["surface_conditioning_category_dict"][surface_b["id"]]
+            return (
+                get_opaque_surface_type(surface_b) == OST.ROOF
+                and scc is not SCC.UNREGULATED
+            )
 
         class RoofRule(RuleDefinitionBase):
             def __init__(self):
@@ -119,4 +123,4 @@ class Section5Rule5(RuleDefinitionListIndexedBase):
                 roof_u_factor = calc_vals["roof_u_factor"]
                 target_u_factor = calc_vals["target_u_factor"]
 
-                return std_equal(roof_u_factor, target_u_factor)
+                return std_equal(target_u_factor, roof_u_factor)

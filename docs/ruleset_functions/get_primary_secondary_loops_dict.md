@@ -19,7 +19,7 @@ Logic:
 
   - For each HVAC system in building segment: `for hvac in building_segment.heating_ventilation_air_conditioning_systems`
 
-    - Check if HVAC system is baseline system Type-7, 8, 11.1, 11.2, 12, 13, 7b, 8b, 11b, 12b, 13b: `if any(hvac.id in baseline_hvac_system_dict[sys_type] for sys_type in ["SYS-7", "SYS-8", "SYS-11.1", "SYS-11.2", "SYS-12", "SYS-13", "SYS-7B", "SYS-8B", "SYS-11B", "SYS-12B", "SYS-13B"]):`
+    - Check if HVAC system is baseline system Type-7, 8, 11.1, 11.2, 12, 13, 7b, 8b, 11.1b, 12b: `if any(hvac.id in baseline_hvac_system_dict[sys_type] for sys_type in ["SYS-7", "SYS-8", "SYS-11.1", "SYS-11.2", "SYS-12", "SYS-13", "SYS-7B", "SYS-8B", "SYS-11B", "SYS-12B", "SYS-13B"]):`
 
       - Save chilled water loop that serves cooling systems to non-process CHW coil loop array (array for all loops connected to cooling coils): `non_process_chw_coil_loop_array.append(hvac.cooling_system.chilled_water_loop)`
 
@@ -31,7 +31,7 @@ Logic:
 
     - Else if loop is connected to chiller(s) only: `else if fluid_loop.id in chiller_loop_array:`
 
-      - Check if all child loops of loop serve baseline system Type-7, 8, 11.1, 11.2, 12, 13, 7b, 8b, 11b, 12b, 13b only (to exclude CHW loop served by process chiller(s)): `if any(child_loop_id in non_process_chw_coil_loop_array for child_loop_id in fluid_loop.child_loops):`
+      - Check if all child loops of loop serve baseline system Type-7, 8, 11.1, 11.2, 12, 13, 7b, 8b, 11.1b, 12b only (to exclude CHW loop served by process chiller(s)): `if all(child_loop_id in non_process_chw_coil_loop_array for child_loop_id in fluid_loop.child_loops):`
 
         - Save loop to primary loop array: `primary_loop_array.append(fluid_loop.id)`  
   
