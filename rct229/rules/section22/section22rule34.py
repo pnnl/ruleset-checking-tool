@@ -4,6 +4,9 @@ from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedB
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 from rct229.ruleset_functions.baseline_systems.baseline_system_util import HVAC_SYS
 from rct229.ruleset_functions.get_baseline_system_types import get_baseline_system_types
+from rct229.ruleset_functions.get_primary_secondary_loops_dict import (
+    get_primary_secondary_loops_dict,
+)
 
 APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_7,
@@ -52,15 +55,13 @@ class Section22Rule34(RuleDefinitionListIndexedBase):
 
     def create_data(self, context, data):
         rmi_b = context.baseline
-        # primary_secondary_loop_dictionary = get_primary_secondary_loops(rmi_b)
-        primary_secondary_loop_dictionary = {
-            "Chiller Loop 1": ["Cooling Child Loop 1"]
-        }  # TODO should be updated
+        primary_secondary_loop_dictionary = get_primary_secondary_loops_dict(rmi_b)
 
         return {"primary_secondary_loop_dictionary": primary_secondary_loop_dictionary}
 
     def list_filter(self, context_item, data):
         fluid_loops_b = context_item.baseline
+
         return fluid_loops_b["type"] == FLUID_LOOP.COOLING
 
     class CoolingFluidLoopRule(RuleDefinitionBase):
@@ -80,6 +81,7 @@ class Section22Rule34(RuleDefinitionListIndexedBase):
             is_sized_using_coincident_load_bool = fluid_loop_b[
                 "cooling_or_condensing_design_and_control"
             ]["is_sized_using_coincident_load"]
+
             return {
                 "is_sized_using_coincident_load_bool": is_sized_using_coincident_load_bool
             }
@@ -88,4 +90,5 @@ class Section22Rule34(RuleDefinitionListIndexedBase):
             is_sized_using_coincident_load_bool = calc_vals[
                 "is_sized_using_coincident_load_bool"
             ]
+
             return is_sized_using_coincident_load_bool
