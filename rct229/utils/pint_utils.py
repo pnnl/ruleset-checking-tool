@@ -27,6 +27,7 @@ _UNIT_CONVENTIONS = {
         "capacity": "W",
         "volumetric_flow_rate": "m3/s",
         "temperature": "C",
+        "power_per_flow_rate": "W-s/L",
     },
     UNIT_SYSTEM.IP: {
         "transformer_capacity": "V*A",
@@ -40,6 +41,7 @@ _UNIT_CONVENTIONS = {
         "capacity": "Btu/hr",
         "volumetric_flow_rate": "cfm",
         "temperature": "F",
+        "power_per_flow_rate": "W/gpm",
     },
 }
 

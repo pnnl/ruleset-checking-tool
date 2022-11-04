@@ -80,15 +80,21 @@ class Section22Rule6(RuleDefinitionListIndexedBase):
             return {
                 "loop_supply_temperature_at_low_load": CalcQ(
                     "temperature", loop_supply_temperature_at_low_load
-                )
+                ),
+                "required_loop_supply_temperature_at_low_load": CalcQ(
+                    "temperature", REQUIRED_LOOP_SUPPLY_TEMP_AT_LOW_LOAD
+                ),
             }
 
         def rule_check(self, context, calc_vals=None, data=None):
             loop_supply_temperature_at_low_load = calc_vals[
                 "loop_supply_temperature_at_low_load"
             ]
+            required_loop_supply_temperature_at_low_load = calc_vals[
+                "required_loop_supply_temperature_at_low_load"
+            ]
 
             return std_equal(
                 loop_supply_temperature_at_low_load.to(ureg.kelvin),
-                REQUIRED_LOOP_SUPPLY_TEMP_AT_LOW_LOAD.to(ureg.kelvin),
+                required_loop_supply_temperature_at_low_load.to(ureg.kelvin),
             )
