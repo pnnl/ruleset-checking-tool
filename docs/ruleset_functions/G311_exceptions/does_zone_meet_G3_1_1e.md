@@ -14,14 +14,15 @@
 **Function Call:**
 - **is_a_vestibule**
 - **is_zone_mechanically_heated_and_not_cooled**
-- **get_zone** - Weili mentioned a get_zone function, but I don't see it in the docs, I'm assuming we can pass an RMD and zone_id and get a zone?
+- **get_component_by_id**
+- **does_zone_get_cooled_transfer_air** - placeholder function
 
 ## Logic:
 - create list of eligible space types: `eligible_space_types = ["STORAGE_ROOM_HOSPITAL", "STORAGE_ROOM_SMALL", "STORAGE_ROOM_LARGE", "WAREHOUSE_STORAGE_AREA_MEDIUM_TO_BULKY_PALLETIZED_ITEMS", "WAREHOUSE_STORAGE_AREA_SMALLER_HAND_CARRIED_ITEMS", "STAIRWELL", "ELECTRICAL_MECHANICAL_ROOM", "RESTROOM_FACILITY_FOR_THE_VISUALLY_IMPAIRED", "RESTROOM_ALL_OTHERS"]
 - set the result variable to No - only a positive test can give it a different value: `result = NO`
 - set eligibility boolean to False: `eligible = TRUE`
-- get the zone in the P-RMD: `zone_p = get_zone(P-RMD,zone_id)`
-- get the zone in the B-RMD: `zone_b = get_zone(B-RMD,zone_id)`
+- get the zone in the P-RMD: `zone_p = get_component_by_id(P-RMD,zone_id)`
+- get the zone in the B-RMD: `zone_b = get_component_by_id(B-RMD,zone_id)`
 - For each space in zone_b: `for space_p in zone_b.Spaces:`
 	- check if the space has an eligible lighting type: `if space_p.lighting_space_type not in eligible_space_types:`
 		- set eligibility to False - any non-compliant space type will result in a non-eligible zone: `eligible = FALSE`
@@ -41,10 +42,8 @@
 		- set result to LIKELY_VESTIBULE: result = `LIKELY_VESTIBULE`
 	- otherwise, if the zone is MAYBE a vestibule: `if is_a_vestibule == MAYBE:`
 		- - set result to MAYBE_VESTIBULE: result = `MAYBE_VESTIBULE`
-	- however, if there is transfer air into the space from an air conditioned zone, it is not eligible, so look for transfer air into the space: `if zone_p.transfer_airflow_rate > 0:`
-		- if the transfer air source zone is air conditioned, the zone is not eligible.  Find the transfer air source zone - THIS IS NOT YET INCLUDED IN THE SCHEMA AND WILL NEED TO BE UPDATED WITH THE CORRECT VARIABLE NAMES WHEN IT IS INCLUDED: `transfer_air_source_zone = zone_p.transfer_airflow_source_zone`
-		- if the source is air conditioned, the zone is not eligible.  Use the is_zone_mechanically_cooled to determine if the source zone is mechanically cooled: `if is_zone_mechanically_cooled(P-RMD,source_zone)`:
-			- set result to NO: `result = NO`
+	- however, if there is transfer air into the space from an air conditioned zone, it is not eligible, so use the function does_zone_get_cooled_transfer_air to determine if the zone is passively cooled through transfer air: `if does_zone_get_cooled_transfer_air(B-RMI,zone_p.id):`
+		- set result to NO: `result = NO`
 
 
 
