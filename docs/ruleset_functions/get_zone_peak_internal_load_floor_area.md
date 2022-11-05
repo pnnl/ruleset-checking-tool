@@ -7,7 +7,7 @@
 - **zone**
 
 **Returns:**  
-- **result**: an array giving 2 values: [total peak btu/h/ft2 in the zone, total zone area] the total peak btu/sf is the internal coincident peak loads in all spaces in the zone
+- **result**: an dict giving 2 values: {"PEAK":total peak btu/h/ft2 in the zone, "AREA":total zone area} the total peak btu/sf is the internal coincident peak loads in all spaces in the zone
  
 **Function Call:**
 - **normalize_interior_lighting_schedules**
@@ -39,7 +39,7 @@
 	- check if internal_loads_this_hour is greater than max_internal_load: `if internal_loads_this_hour > max_internal_load:`
 		- reset max_internal_load to internal_loads_this_hour: `max_internal_load = internal_loads_this_hour`
 
-- create the result array: `result = [max_internal_load, area]`
+- create the result array: `result = {"PEAK":max_internal_load, "AREA":area}`
 
 
 **Returns** `result`
