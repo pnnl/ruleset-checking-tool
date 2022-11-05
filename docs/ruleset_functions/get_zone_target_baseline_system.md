@@ -85,7 +85,7 @@
 - G3.1.1f "If the baseline HVAC system type is 9 or 10, use additional system types for all HVAC zones that are mechanically cooled in the proposed design."
 - loop through the zones and systems, check only the zones that are SYS-9 or 10: `for zone in zones_and_systems:`
 	- check if it is SYS-9 or SYS-10: `if zones_and_systems[zone]["EXPECTED_SYSTEM_TYPE"] in ["SYS-9", "SYS-10"]:`
-		- use the function does_zone_meet_G3_1_1f to see if the zone meets the requirements of G3_1_1f: `if does_zone_meet_G3_1_1f(P-RMR,B-RMR,zone.id) == "F":`
+		- use the function does_zone_meet_G3_1_1f to see if the zone meets the requirements of G3_1_1f: `if does_zone_meet_G3_1_1f(P-RMR,B-RMR,zone.id) == YES:`
 			- change the system origin string: `zones_and_systems[zone]["SYSTEM_ORIGIN"] = "G3_1_1f"`
 			- the zone meets the G3_1_1f requirements, choose system 3 or 4 based on climate zone: `if is_CZ_0_to_3a():`
 				- set the system to "SYS-4": `zones_and_systems[zone]["EXPECTED_SYSTEM_TYPE"] = "SYS-4"
