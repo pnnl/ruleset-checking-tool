@@ -95,7 +95,7 @@
 - G3.1.1g is broken down into three parts:
 	- part 1: "If the baseline HVAC system serves HVAC zones that includes computer rooms,  baseline system 11 shall be used where the baseline HVAC system type is 7 or 8 and the total computer room peak cooling load is greater than 600,000 BTU/h (175 kW)."
 	- part 2: "If the baseline HVAC system serves HVAC zones that includes computer rooms,  Baseline System 11 shall be used for such HVAC zones in buildings with a total computer room peak cooling load >greater than 3,000,000 Btu/h."
-	- part 3: "If the baseline HVAC system serves HVAC zones that includes computer rooms,  baseline system 3 or 4 shall be used for all HVAC zones where the computer room peak cooling load is= <600,000 Btu/h"
+	- part 3: "If the baseline HVAC system serves HVAC zones that includes computer rooms,  baseline system 3 or 4 shall be used for all other conditions where the HVAC system serves computer room zones"
 	- the function `does_zone_meet_G3_1_1g` will return enum G1, G2, G3, or FALSE
 - loop through the zones and systems: `for zone in zones_and_systems:`
 	- use the function does_zone_meet_G3_1_1g to determine which (if any) of the requirements the zone meets: `does_zone_meet_G =  does_zone_meet_G3_1_1g(B-RMI,zone.id,zones_and_systems[zone]["EXPECTED_SYSTEM_TYPE"])`
