@@ -126,6 +126,7 @@
                                 "id": "Boiler Loop 1",
                                 "type": "HEATING",
                                 "heating_design_and_control": {
+                                    "id": "DAC 1",
                                     "is_sized_using_coincident_load": true
                                 }
                             },
@@ -266,6 +267,7 @@
                                 "id": "Boiler Loop 1",
                                 "type": "HEATING",
                                 "heating_design_and_control": {
+                                    "id": "DAC 1",
                                     "is_sized_using_coincident_load": false
                                 }
                             },
