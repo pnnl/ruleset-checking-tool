@@ -4,7 +4,9 @@
 **Description:** returns a boolean value indicating whether the zone meets G3_1_1g:
  
 **part1:** "If the baseline HVAC system serves HVAC zones that includes computer rooms,  baseline system 11 shall be used where the baseline HVAC system type is 7 or 8 and the total computer room peak cooling load is greater than 600,000 BTU/h (175 kW) AND <= 3,000,000"
+
 **part 2:** If the baseline HVAC system serves HVAC zones that includes computer rooms,  Baseline System 11 shall be used for such HVAC zones in buildings with a total computer room peak cooling load greater than 3,000,000 Btu/h.
+
 **part 3:** If the baseline HVAC system serves HVAC zones that includes computer rooms,  baseline system 3 or 4 shall be used for all HVAC other zones - that is zones where the computer room peak cooling load is= <600,000 Btu/h, and when the peak cooling load is between 600,000 btu/hr and 3,000,000 btu/hr and the baseline system type is not system 7 or 8.
 
 **Inputs:** 
