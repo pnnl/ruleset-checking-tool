@@ -5,6 +5,7 @@ from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedB
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 from rct229.ruleset_functions.baseline_systems.baseline_system_util import HVAC_SYS
 from rct229.ruleset_functions.get_baseline_system_types import get_baseline_system_types
+from rct229.schema.config import ureg
 from rct229.utils.assertions import getattr_
 from rct229.utils.std_comparisons import std_equal
 
@@ -60,22 +61,23 @@ class Section22Rule32(RuleDefinitionListIndexedBase):
 
         def get_calc_vals(self, context, data=None):
             chiller_b = context.baseline
-            rated_capacity_b = getattr_(chiller_b, "Chiller", "rated_capacity")
+            rated_capacity_b = (
+                getattr_(chiller_b, "Chiller", "rated_capacity").to(ureg.ton).m
+            )
             compressor_type_b = getattr_(chiller_b, "Chiller", "compressor_type")
-            part_load_efficiency = getattr_(
+            chiller_part_load_efficiency = getattr_(
                 chiller_b, "Chiller", "part_load_efficiency"
             )
             part_load_efficiency_metric = getattr_(
                 chiller_b, "Chiller", "part_load_efficiency_metric"
             )
-            # TODO: What does "IPLV" mean in the RDS - it doesn't seem to be needed for the lookup
-            # TODO: Is this a good variable name for the lookup result?
+
             target_part_load_efficiency = table_G3_5_3_lookup(
                 compressor_type_b, rated_capacity_b
-            )
+            )["minimum_integrated_part_load_kw_per_ton"]
 
             return {
-                "part_load_efficiency": part_load_efficiency,
+                "chiller_part_load_efficiency": chiller_part_load_efficiency,
                 "target_part_load_efficiency": target_part_load_efficiency,
                 "part_load_efficiency_metric": part_load_efficiency_metric,
             }
