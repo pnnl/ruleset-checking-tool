@@ -5,6 +5,7 @@ from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedV
 from rct229.ruleset_functions.baseline_systems.baseline_system_util import HVAC_SYS
 from rct229.ruleset_functions.get_baseline_system_types import get_baseline_system_types
 from rct229.schema.config import ureg
+from rct229.utils.pint_utils import CalcQ
 
 APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_1,
@@ -71,7 +72,7 @@ class Section21Rule17(RuleDefinitionListIndexedBase):
             boiler_efficiency_b = boiler_b["efficiency"]
 
             return {
-                "boiler_rated_capacity_b": boiler_rated_capacity_b,
+                "boiler_rated_capacity_b": CalcQ("capacity", boiler_rated_capacity_b),
                 "boiler_efficiency_metric_b": boiler_efficiency_metric_b,
                 "boiler_efficiency_b": boiler_efficiency_b,
             }

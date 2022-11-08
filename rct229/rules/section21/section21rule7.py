@@ -92,15 +92,19 @@ class Section21Rule7(RuleDefinitionListIndexedBase):
                 "design_return_temperature": CalcQ(
                     "temperature", design_return_temperature
                 ),
+                "required_supply_temperature": CalcQ("temperature", DESIGN_SUPPLY_TEMP),
+                "required_return_temperature": CalcQ("temperature", DESIGN_RETURN_TEMP),
             }
 
         def rule_check(self, context, calc_vals=None, data=None):
             design_supply_temperature = calc_vals["design_supply_temperature"]
             design_return_temperature = calc_vals["design_return_temperature"]
+            required_supply_temperature = calc_vals["required_supply_temperature"]
+            required_return_temperature = calc_vals["required_return_temperature"]
             return std_equal(
                 design_supply_temperature.to(ureg.kelvin),
-                DESIGN_SUPPLY_TEMP.to(ureg.kelvin),
+                required_supply_temperature.to(ureg.kelvin),
             ) and std_equal(
                 design_return_temperature.to(ureg.kelvin),
-                DESIGN_RETURN_TEMP.to(ureg.kelvin),
+                required_return_temperature.to(ureg.kelvin),
             )
