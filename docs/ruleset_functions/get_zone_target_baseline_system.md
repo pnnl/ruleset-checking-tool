@@ -62,7 +62,7 @@
 - G3.1.1c "If the baseline HVAC system type is 5, 6, 7, 8, 9, 10, 11, 12, or 13 use separate single-zone systems conforming with the requirements of system 3 or system 4 for any HVAC zones that have occupancy, internal gains, or schedules that differ significantly from the rest of the HVAC zones served by the system. The total peak internal gains that differ by 10 Btu/h·ft2 or more from the average of other HVAC zones served by the system, or schedules that differ by more than 40 equivalent full-load hours per week from other spaces served by the system, are considered to differ significantly. Examples where this exception may be applicable include but are not limited to natatoriums and continually occupied security areas. This exception does not apply to computer rooms."
 - loop through the zones_and_systems to see if any of the zones meets Ge.1.1.c: `for zone in zones_and_systems:`
 	- use the function does_zone_meet_G3_1_1c to determine if this zone meets this requirement: `if does_zone_meet_G3_1_1c(B_RMI,zone,zones_and_systems[zone]["EXPECTED_SYSTEM_TYPE"] == YES):`
-		- change the system origin string: `zones_and_systems[zone]["SYSTEM_ORIGIN"] = zones_and_systems[zone]["EXPECTED_SYSTEM_TYPE"] + " G3_1_1c"` 
+		- change the system origin string: `zones_and_systems[zone]["SYSTEM_ORIGIN"] = "G3_1_1c"` 
 		- the zone meets the G3_1_1c requirements, choose system 3 or 4 based on climate zone: `if is_CZ_0_to_3a():`
 			- set the system to "SYS-4": `zones_and_systems[zone]["EXPECTED_SYSTEM_TYPE"] = "SYS-4"`
 		- else (the climate zone is_CZ_3b_3c_and_4_to_8): `else:`
