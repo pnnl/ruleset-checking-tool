@@ -108,9 +108,9 @@
 		- else if the zone meets G3: `elsif does_zone_meet_G == G3:`
 			- - change the system origin string: `zones_and_systems[zone]["SYSTEM_ORIGIN"] = "G3_1_1g_part3"`
 			- the zone meets the G3_1_1g_part3 requirements, choose system 3 or 4 based on climate zone: `if is_CZ_0_to_3a():`
-				- set the system to "SYS-4": `zones_and_systems[zone]["EXPECTED_SYSTEM_TYPE"] = "SYS-4"
+				- set the system to "SYS-4": `zones_and_systems[zone]["EXPECTED_SYSTEM_TYPE"] = "SYS-4"`
 			- else (the climate zone is_CZ_3b_3c_and_4_to_8): `else:`
-				- set the system to "SYS-3": `zones_and_systems[zone]["EXPECTED_SYSTEM_TYPE"] = "SYS-3"
+				- set the system to "SYS-3": `zones_and_systems[zone]["EXPECTED_SYSTEM_TYPE"] = "SYS-3"`
 
 
 
