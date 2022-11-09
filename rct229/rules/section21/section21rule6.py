@@ -6,7 +6,7 @@ from rct229.ruleset_functions.baseline_systems.baseline_system_util import HVAC_
 from rct229.ruleset_functions.get_baseline_system_types import get_baseline_system_types
 from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all
-from rct229.utils.pint_utils import ZERO
+from rct229.utils.pint_utils import ZERO, CalcQ
 
 APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_1,
@@ -86,23 +86,23 @@ class Section21Rule6(RuleDefinitionListIndexedBase):
             boiler_2 = boiler_list[1]
 
             return {
-                "boiler_1_operation_lower_limit": getattr_(
-                    boiler_1, "boiler", "operation_lower_limit"
+                "boiler_1_operation_lower_limit": CalcQ(
+                    "capacity", getattr_(boiler_1, "boiler", "operation_lower_limit")
                 ),
-                "boiler_1_operation_upper_limit": getattr_(
-                    boiler_1, "boiler", "operation_upper_limit"
+                "boiler_1_operation_upper_limit": CalcQ(
+                    "capacity", getattr_(boiler_1, "boiler", "operation_upper_limit")
                 ),
-                "boiler_1_rated_capacity": getattr_(
-                    boiler_1, "boiler", "rated_capacity"
+                "boiler_1_rated_capacity": CalcQ(
+                    "capacity", getattr_(boiler_1, "boiler", "rated_capacity")
                 ),
-                "boiler_2_operation_lower_limit": getattr_(
-                    boiler_2, "boiler", "operation_lower_limit"
+                "boiler_2_operation_lower_limit": CalcQ(
+                    "capacity", getattr_(boiler_2, "boiler", "operation_lower_limit")
                 ),
-                "boiler_2_operation_upper_limit": getattr_(
-                    boiler_2, "boiler", "operation_upper_limit"
+                "boiler_2_operation_upper_limit": CalcQ(
+                    "capacity", getattr_(boiler_2, "boiler", "operation_upper_limit")
                 ),
-                "boiler_2_rated_capacity": getattr_(
-                    boiler_2, "boiler", "rated_capacity"
+                "boiler_2_rated_capacity": CalcQ(
+                    "capacity", getattr_(boiler_2, "boiler", "rated_capacity")
                 ),
             }
 
