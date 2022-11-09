@@ -2,6 +2,7 @@ from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 from rct229.ruleset_functions.baseline_systems.baseline_system_util import HVAC_SYS
 from rct229.ruleset_functions.check_purchased_chw_hhw import check_purchased_chw_hhw
+from rct229.ruleset_functions.get_baseline_system_types import get_baseline_system_types
 
 AIR_SIDE_SYSTEMS_USING_COOLING_SOURCE_OTHER_THAN_PURCHASED_CHILLED_WATER = [
     HVAC_SYS.SYS_1,
@@ -60,7 +61,6 @@ class Section22Rule40(RuleDefinitionBase):
         baseline_hvac_system_types = calc_vals["baseline_hvac_system_types"]
 
         return not any(
-            sys_type
-            in AIR_SIDE_SYSTEMS_USING_COOLING_SOURCE_OTHER_THAN_PURCHASED_CHILLED_WATER
-            for sys_type in baseline_system_types
+            sys_type in baseline_hvac_system_types
+            for sys_type in AIR_SIDE_SYSTEMS_USING_COOLING_SOURCE_OTHER_THAN_PURCHASED_CHILLED_WATER
         )
