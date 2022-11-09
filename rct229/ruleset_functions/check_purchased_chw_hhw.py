@@ -1,5 +1,8 @@
 from rct229.data.schema_enums import schema_enums
-from rct229.utils.jsonpath_utils import find_all, find_exactly_one_with_field_value
+from rct229.ruleset_functions.baseline_systems.baseline_system_util import (
+    find_exactly_one_fluid_loop,
+)
+from rct229.utils.jsonpath_utils import find_all, find_one
 
 EXTERNAL_FLUID_SOURCE = schema_enums["ExternalFluidSourceOptions"]
 
@@ -12,10 +15,13 @@ def check_purchased_chw_hhw(rmi_b):
 
     Parameters
     ----------
-    rmi_b:
+    rmi_b: json
+        RMD at RuleSetModelInstance level
 
     Returns
     -------
+    purchased_chw_hhw_status_dictionary: A dictionary that saves whether RMD is modeled with purchased chilled water as space cooling source or purchased hot water/steam as space heating source,
+    i.e. {"PURCHASED_COOLING": TRUE, "PURCHASED_HEATING": FALSE}.
 
     """
     purchased_chw_hhw_status_dict = {
@@ -28,71 +34,60 @@ def check_purchased_chw_hhw(rmi_b):
 
     for external_fluid_source in find_all("$..external_fluid_source[*]", rmi_b):
         if external_fluid_source["type"] == EXTERNAL_FLUID_SOURCE.CHILLED_WATER:
-            cooling_loop = find_exactly_one_with_field_value(
-                "$..fluid_loops[*]", "id", external_fluid_source["loop"], rmi_b
+            cooling_loop = find_exactly_one_fluid_loop(
+                rmi_b, external_fluid_source["loop"]
             )
-            purchased_chw_loop_array = [
-                loop["id"] for loop in cooling_loop["child_loops"]
-            ]
-            purchased_chw_loop_array.append(cooling_loop["id"])
+            for loop in find_one("$.child_loops[*]", cooling_loop):
+                print(loop)
 
-            for building_segment in find_all("$..building_segments[*]", rmi_b):
-                for hvac_sys in building_segment[
-                    "heating_ventilation_air_conditioning_systems"
-                ]:
-                    if (
-                        hvac_sys["cooling_system"]["chilled_water_loop"]
-                        in purchased_chw_loop_array
-                    ):
-                        purchased_chw_hhw_status_dict["purchased_cooling"] = True
-                        break
+            purchased_chw_loop_array = [
+                find_one("$.child_loops[*]", cooling_loop)["id"]
+            ]
+            purchased_chw_loop_array.append(find_one("$.id", cooling_loop))
+
+            for hvac_sys in find_all(
+                "$..heating_ventilation_air_conditioning_systems[*]", rmi_b
+            ):
+                if (
+                    find_one("$.cooling_system.chilled_water_loop", hvac_sys)
+                    in purchased_chw_loop_array
+                ):
+                    purchased_chw_hhw_status_dict["purchased_cooling"] = True
+                    break
 
         else:  # HOT_WATER or STEAM type
-            heating_loop = find_exactly_one_with_field_value(
-                "$..fluid_loops[*]", "id", external_fluid_source["loop"], rmi_b
+            heating_loop = find_exactly_one_fluid_loop(
+                rmi_b, external_fluid_source["loop"]
             )
 
             purchased_hhw_loop_array = [
-                loop["id"] for loop in heating_loop["child_loops"]
+                find_one("$.child_loops[*]", heating_loop)["id"]
             ]
-            purchased_hhw_loop_array.append(heating_loop["id"])
+            purchased_hhw_loop_array.append(find_one("$.id", heating_loop))
 
-            for building_segment in find_all("$..building_segments[*]", rmi_b):
-                for hvac_sys in building_segment[
-                    "heating_ventilation_air_conditioning_systems"
-                ]:
-                    if (
-                        hvac_sys["heating_system"]["hot_water_loop"]
-                        in purchased_hhw_loop_array
-                    ):
-                        purchased_chw_hhw_status_dict["purchased_heating"] = True
-                        break
-                    if hvac_sys.get(
-                        "preheat_system"
-                    ):  # Prevent an error when preheat system doesn't exist
-                        for preheat_system in hvac_sys["preheat_system"]:
-                            if (
-                                preheat_system["hot_water_loop"]
-                                in purchased_hhw_loop_array
-                            ):
-                                purchased_chw_hhw_status_dict[
-                                    "purchased_heating"
-                                ] = True
-                                break
-
-                for zone in building_segment["zones"]:
-                    for terminal in zone["terminals"]:
-                        if (
-                            terminal.get("heating_from_loop")
-                            in purchased_hhw_loop_array
-                        ):
+            for hvac_sys in find_all(
+                "$..heating_ventilation_air_conditioning_systems[*]", rmi_b
+            ):
+                if (
+                    find_one("$.heating_system.hot_water_loop", hvac_sys)
+                    in purchased_hhw_loop_array
+                ):
+                    purchased_chw_hhw_status_dict["purchased_heating"] = True
+                    break
+                if hvac_sys.get(
+                    "preheat_system"
+                ):  # Prevent an error when preheat system doesn't exist
+                    for preheat_system in hvac_sys["preheat_system"]:
+                        if preheat_system["hot_water_loop"] in purchased_hhw_loop_array:
                             purchased_chw_hhw_status_dict["purchased_heating"] = True
                             break
-                        if (
-                            terminal.get("cooling_from_loop")
-                            in purchased_chw_loop_array
-                        ):
-                            purchased_chw_hhw_status_dict["purchased_cooling"] = True
-                            break
+
+            for terminal in find_all("$..terminals[*]", rmi_b):
+                if terminal.get("heating_from_loop") in purchased_hhw_loop_array:
+                    purchased_chw_hhw_status_dict["purchased_heating"] = True
+                    break
+                if terminal.get("cooling_from_loop") in purchased_chw_loop_array:
+                    purchased_chw_hhw_status_dict["purchased_cooling"] = True
+                    break
 
     return purchased_chw_hhw_status_dict

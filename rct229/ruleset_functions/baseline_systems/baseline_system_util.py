@@ -142,7 +142,7 @@ def find_exactly_one_fluid_loop(rmi, loop_id):
 
     """
     return find_exactly_one_with_field_value(
-        "$.fluid_loops[*]",
+        "$..fluid_loops[*]",
         "id",
         loop_id,
         rmi,

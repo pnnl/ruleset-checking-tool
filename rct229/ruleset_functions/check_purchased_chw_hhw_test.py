@@ -88,18 +88,12 @@ TEST_RMD = {
                 {
                     "id": "Chilled Water Loop 1",
                     "type": "COOLING",
-                    "child_loops": [
-                        {"id": "CHW1 Child Loop 1"},
-                        {"id": "CHW1 Child Loop 2"},
-                    ],
+                    "child_loops": [{"id": "CHW1 Child Loop 1"}],
                 },
                 {
                     "id": "Boiler Loop 1",
                     "type": "HEATING",
-                    "child_loops": [
-                        {"id": "HW1 Child Loop 1"},
-                        {"id": "HW1 Child Loop 2"},
-                    ],
+                    "child_loops": [{"id": "HW1 Child Loop 1"}],
                 },
             ],
         }
