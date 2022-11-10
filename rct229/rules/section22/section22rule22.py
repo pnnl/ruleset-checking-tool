@@ -5,6 +5,7 @@ from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedV
 from rct229.ruleset_functions.baseline_systems.baseline_system_util import HVAC_SYS
 from rct229.ruleset_functions.get_baseline_system_types import get_baseline_system_types
 from rct229.schema.config import ureg
+from rct229.utils.pint_utils import CalcQ
 from rct229.utils.std_comparisons import std_equal
 
 APPLICABLE_SYS_TYPES = [
@@ -16,7 +17,7 @@ APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_13,
     HVAC_SYS.SYS_7B,
     HVAC_SYS.SYS_8B,
-    HVAC_SYS.SYS_11B,
+    HVAC_SYS.SYS_11_1B,
     HVAC_SYS.SYS_12B,
 ]
 
@@ -56,26 +57,32 @@ class Section22Rule22(RuleDefinitionListIndexedBase):
             super(Section22Rule22.ChillerRule, self).__init__(
                 rmrs_used=UserBaselineProposedVals(False, True, False),
                 required_fields={
-                    "$": ["compressor_type", "rated_capacity"],
+                    "$": ["compressor_type", "rated_capacity", "full_load_efficiency"],
                 },
             )
 
         def get_calc_vals(self, context, data=None):
             chiller_b = context.baseline
+            full_load_efficiency_b = chiller_b["full_load_efficiency"] * ureg("W/W")
+
             compressor_type_b = chiller_b["compressor_type"]
             rated_capacity_b = chiller_b["rated_capacity"].to(ureg.ton).m
 
-            kW_ton_full_load_b = table_3_5_3_lookup(
+            required_kw_ton_full_load_b = table_3_5_3_lookup(
                 compressor_type_b, rated_capacity_b
             )["minimum_full_load_efficiency_kw_per_ton"]
 
             return {
-                "kW_ton_full_load_b": kW_ton_full_load_b,
+                "full_load_efficiency_b": CalcQ(
+                    "cooling_efficiency", full_load_efficiency_b
+                ),
+                "required_kw_ton_full_load_b": CalcQ(
+                    "cooling_efficiency", required_kw_ton_full_load_b
+                ),
             }
 
         def rule_check(self, context, calc_vals=None, data=None):
-            chiller_b = context.baseline
-            full_load_efficiency_b = chiller_b["full_load_efficiency"]
-            kW_ton_full_load_b = calc_vals["kW_ton_full_load_b"]
+            full_load_efficiency_b = calc_vals["full_load_efficiency_b"]
+            required_kw_ton_full_load_b = calc_vals["required_kw_ton_full_load_b"]
 
-            return std_equal(full_load_efficiency_b, kW_ton_full_load_b * ureg(""))
+            return std_equal(full_load_efficiency_b, required_kw_ton_full_load_b)
