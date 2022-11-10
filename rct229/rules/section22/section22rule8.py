@@ -90,7 +90,6 @@ class Section22Rule8(RuleDefinitionListIndexedBase):
                 child_loop_speed_control_dict[child_loop["id"]] = loop_pump_dictionary[
                     child_loop["id"]
                 ]["speed_control"]
-
         return {
             "loop_pump_dictionary": loop_pump_dictionary,
             "chw_loop_capacity_dict": chw_loop_capacity_dict,
@@ -100,7 +99,6 @@ class Section22Rule8(RuleDefinitionListIndexedBase):
     def list_filter(self, context_item, data):
         fluid_loop_b = context_item.baseline
         chw_loop_capacity_dict = data["chw_loop_capacity_dict"]
-
         return (
             fluid_loop_b["type"] == FLUID_LOOP.COOLING
             and chw_loop_capacity_dict[fluid_loop_b["id"]]
@@ -133,10 +131,8 @@ class Section22Rule8(RuleDefinitionListIndexedBase):
                 secondary_pump_speed_control = child_loop_speed_control_dict[
                     child_loop_b["id"]
                 ]
-
                 return {"secondary_pump_speed_control": secondary_pump_speed_control}
 
             def rule_check(self, context, calc_vals=None, data=None):
                 secondary_pump_speed_control = calc_vals["secondary_pump_speed_control"]
-
                 return secondary_pump_speed_control == PUMP_SPPED_CONTROL.VARIABLE_SPEED
