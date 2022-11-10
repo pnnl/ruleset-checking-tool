@@ -20,7 +20,7 @@
 - get the zone object: `zone = get_component_by_id(RMI,zone_id)`
 - look for transfer air into the space: `if zone.transfer_airflow_rate > 0:`
     - set result to TRUE, we are assuming that the transfer airflow is air conditioned until proven otherwise: `result = TRUE` 
-    - Find the transfer air source zone to determine if this zone has air conditioning - THIS IS NOT YET INCLUDED IN THE SCHEMA AND WILL NEED TO BE UPDATED WITH THE CORRECT VARIABLE NAMES WHEN IT IS INCLUDED: `transfer_air_source_zone_id = zone.transfer_airflow_source_zone`
+    - Find the transfer air source zone to determine if this zone has air conditioning: `transfer_air_source_zone_id = zone.transfer_airflow_source_zone`
     - get the transfer source zone: `transfer_source_zone = get_component_by_id(RMI,transfer_air_source_zone_id)`
     - get the hvac systems serving the zone by using the get_list_hvac_systems_associated_with_zone function: `list_hvac_systems = get_list_hvac_systems_associated_with_zone(RMI,transfer_source_zone)`
   	- loop through each HeatingVentilatingAirconditionsSystem system: `for system in list_hvac_systems:`
