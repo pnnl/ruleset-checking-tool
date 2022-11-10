@@ -90,6 +90,7 @@ class Section22Rule8(RuleDefinitionListIndexedBase):
                 child_loop_speed_control_dict[child_loop["id"]] = loop_pump_dictionary[
                     child_loop["id"]
                 ]["speed_control"]
+
         return {
             "loop_pump_dictionary": loop_pump_dictionary,
             "chw_loop_capacity_dict": chw_loop_capacity_dict,
@@ -109,7 +110,7 @@ class Section22Rule8(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section22Rule8.ChillerFluidLoopRule, self).__init__(
                 rmrs_used=UserBaselineProposedVals(False, True, False),
-                each_rule=Section22Rule8.ChillerFluidLoopRule.SecondaryChildLoop(),
+                each_rule=Section22Rule8.ChillerFluidLoopRule.SecondaryChildLoopRule(),
                 index_rmr="baseline",
                 list_path="$..child_loops[*]",
                 required_fields={
@@ -117,10 +118,10 @@ class Section22Rule8(RuleDefinitionListIndexedBase):
                 },
             )
 
-        class SecondaryChildLoop(RuleDefinitionBase):
+        class SecondaryChildLoopRule(RuleDefinitionBase):
             def __init__(self):
                 super(
-                    Section22Rule8.ChillerFluidLoopRule.SecondaryChildLoop, self
+                    Section22Rule8.ChillerFluidLoopRule.SecondaryChildLoopRule, self
                 ).__init__(
                     rmrs_used=UserBaselineProposedVals(False, True, False),
                 )
@@ -131,8 +132,10 @@ class Section22Rule8(RuleDefinitionListIndexedBase):
                 secondary_pump_speed_control = child_loop_speed_control_dict[
                     child_loop_b["id"]
                 ]
+
                 return {"secondary_pump_speed_control": secondary_pump_speed_control}
 
             def rule_check(self, context, calc_vals=None, data=None):
                 secondary_pump_speed_control = calc_vals["secondary_pump_speed_control"]
+
                 return secondary_pump_speed_control == PUMP_SPPED_CONTROL.VARIABLE_SPEED
