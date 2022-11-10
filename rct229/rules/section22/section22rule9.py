@@ -20,7 +20,7 @@ APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_13,
     HVAC_SYS.SYS_7B,
     HVAC_SYS.SYS_8B,
-    HVAC_SYS.SYS_11B,
+    HVAC_SYS.SYS_11_1B,
     HVAC_SYS.SYS_12B,
 ]
 MIN_FLOW_FRACTION = 0.25
@@ -101,12 +101,6 @@ class Section22Rule9(RuleDefinitionListIndexedBase):
                 each_rule=Section22Rule9.ChillerFluidLoopRule.SecondaryChildLoopRule(),
                 index_rmr="baseline",
                 list_path="$..child_loops[*]",
-                required_fields={
-                    "$": ["cooling_or_condensing_design_and_control"],
-                    "cooling_or_condensing_design_and_control": [
-                        "minimum_flow_fraction"
-                    ],
-                },
             )
 
         class SecondaryChildLoopRule(RuleDefinitionBase):
@@ -115,19 +109,23 @@ class Section22Rule9(RuleDefinitionListIndexedBase):
                     Section22Rule9.ChillerFluidLoopRule.SecondaryChildLoopRule, self
                 ).__init__(
                     rmrs_used=UserBaselineProposedVals(False, True, False),
+                    required_fields={
+                        "$": ["cooling_or_condensing_design_and_control"],
+                        "cooling_or_condensing_design_and_control": [
+                            "minimum_flow_fraction"
+                        ],
+                    },
                 )
 
-        def get_calc_vals(self, context, data=None):
-            child_loop_b = context.baseline
-            place = 1
-            # for secondary_loop_id_b in child_loop_b["child_loops"]:
-            #     secondary_loop_min_flow_rate = secondary_loop_id_b[
-            #         "cooling_or_condensing_design_and_control"
-            #     ]["minimum_flow_fraction"]
-            secondary_loop_min_flow_rate = 1
-            return {"secondary_loop_min_flow_rate": secondary_loop_min_flow_rate}
+            def get_calc_vals(self, context, data=None):
+                child_loop_b = context.baseline
+                secondary_loop_min_flow_rate = child_loop_b[
+                    "cooling_or_condensing_design_and_control"
+                ]["minimum_flow_fraction"]
 
-        def rule_check(self, context, calc_vals=None, data=None):
-            secondary_loop_min_flow_rate = calc_vals["secondary_loop_min_flow_rate"]
+                return {"secondary_loop_min_flow_rate": secondary_loop_min_flow_rate}
 
-            return secondary_loop_min_flow_rate == MIN_FLOW_FRACTION
+            def rule_check(self, context, calc_vals=None, data=None):
+                secondary_loop_min_flow_rate = calc_vals["secondary_loop_min_flow_rate"]
+
+                return secondary_loop_min_flow_rate == MIN_FLOW_FRACTION
