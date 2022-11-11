@@ -101,9 +101,6 @@ class Section22Rule10(RuleDefinitionListIndexedBase):
                 each_rule=Section22Rule10.ChillerFluidLoopRule.SecondaryChildLoopRule(),
                 index_rmr="baseline",
                 list_path="$..child_loops[*]",
-                required_fields={
-                    "$": ["type"],
-                },
             )
 
         def create_data(self, context, data):
@@ -120,6 +117,12 @@ class Section22Rule10(RuleDefinitionListIndexedBase):
 
             return {**data, "target_secondary_pump_type": target_secondary_pump_type}
 
+        def list_filter(self, context_item, data):
+            child_loop_b = context_item.baseline
+            loop_pump_dictionary = data["loop_pump_dictionary"]
+
+            return child_loop_b["id"] in loop_pump_dictionary.keys()
+
         class SecondaryChildLoopRule(RuleDefinitionBase):
             def __init__(self):
                 super(
@@ -130,8 +133,9 @@ class Section22Rule10(RuleDefinitionListIndexedBase):
 
             def get_calc_vals(self, context, data=None):
                 child_loop_b = context.baseline
-                secondary_pump_speed_control = child_loop_b["loop_pump_dictionary"][
-                    "speed_control "
+                loop_pump_dictionary = data["loop_pump_dictionary"]
+                secondary_pump_speed_control = loop_pump_dictionary[child_loop_b["id"]][
+                    "speed_control"
                 ]
 
                 return {"secondary_pump_speed_control": secondary_pump_speed_control}
