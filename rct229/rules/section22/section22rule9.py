@@ -53,7 +53,7 @@ class Section22Rule9(RuleDefinitionListIndexedBase):
             if len(baseline_system_types_dict[hvac_type]) > 0
         ]
 
-        primary_secondary_loop_dictionary = get_primary_secondary_loops_dict(rmi_b)
+        primary_secondary_loop_dict = get_primary_secondary_loops_dict(rmi_b)
 
         return (
             any(
@@ -62,7 +62,7 @@ class Section22Rule9(RuleDefinitionListIndexedBase):
                     for available_type in available_type_list
                 ]
             )
-            and primary_secondary_loop_dictionary
+            and len(primary_secondary_loop_dict) > 0
         )
 
     def create_data(self, context, data):
