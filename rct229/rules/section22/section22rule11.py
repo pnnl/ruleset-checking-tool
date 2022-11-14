@@ -40,37 +40,37 @@ class Section22Rule11(RuleDefinitionListIndexedBase):
 
         baseline_system_types_dict = get_baseline_system_types(rmi_b)
         # create a list contains all HVAC systems that are modeled in the rmi_b
-        available_type_lists = [
+        available_type_list = [
             hvac_type
             for hvac_type in baseline_system_types_dict.keys()
             if len(baseline_system_types_dict[hvac_type]) > 0
         ]
 
-        primary_secondary_loop_dictionary = get_primary_secondary_loops_dict(rmi_b)
+        primary_secondary_loop_dict = get_primary_secondary_loops_dict(rmi_b)
 
         return (
             any(
                 [
                     available_type in APPLICABLE_SYS_TYPES
-                    for available_type in available_type_lists
+                    for available_type in available_type_list
                 ]
             )
-            and primary_secondary_loop_dictionary
+            and primary_secondary_loop_dict
         )
 
     def create_data(self, context, data):
         rmr_baseline = context.baseline
         rmi_b = rmr_baseline["ruleset_model_instances"][0]
 
-        primary_secondary_loop_dictionary = get_primary_secondary_loops_dict(rmi_b)
+        primary_secondary_loop_dict = get_primary_secondary_loops_dict(rmi_b)
 
-        return {"primary_secondary_loop_dictionary": primary_secondary_loop_dictionary}
+        return {"primary_secondary_loop_dict": primary_secondary_loop_dict}
 
     def list_filter(self, context_item, data):
         fluid_loop_b = context_item.baseline
-        primary_secondary_loop_dictionary = data["primary_secondary_loop_dictionary"]
+        primary_secondary_loop_dict = data["primary_secondary_loop_dict"]
 
-        return fluid_loop_b["id"] in primary_secondary_loop_dictionary.keys()
+        return fluid_loop_b["id"] in primary_secondary_loop_dict.keys()
 
     class ChillerFluidLoopRule(RuleDefinitionListIndexedBase):
         def __init__(self):
