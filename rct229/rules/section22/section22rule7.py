@@ -34,8 +34,8 @@ class Section22Rule7(RuleDefinitionBase):
     def is_applicable(self, context, data=None):
         rmi_b = context.baseline
         baseline_system_types_dict = get_baseline_system_types(rmi_b)
-        # create a list contains all HVAC systems that are modeled in the rmi_b
-        available_type_lists = [
+        # create a list containing all HVAC systems that are modeled in the rmi_b
+        available_types_list = [
             hvac_type
             for hvac_type in baseline_system_types_dict.keys()
             if len(baseline_system_types_dict[hvac_type]) > 0
@@ -43,19 +43,17 @@ class Section22Rule7(RuleDefinitionBase):
         return any(
             [
                 available_type in APPLICABLE_SYS_TYPES
-                for available_type in available_type_lists
+                for available_type in available_types_list
             ]
         )
 
     def get_calc_vals(self, context, data=None):
         rmi_b = context.baseline
-        primary_secondary_loop_dictionary = get_primary_secondary_loops_dict(rmi_b)
+        num_primary_loops = len(get_primary_secondary_loops_dict(rmi_b))
 
-        return {"primary_secondary_loop_dictionary": primary_secondary_loop_dictionary}
+        return {"num_primary_loops": num_primary_loops}
 
     def rule_check(self, context, calc_vals=None, data=None):
-        primary_secondary_loop_dictionary = calc_vals[
-            "primary_secondary_loop_dictionary"
-        ]
+        num_primary_loops = calc_vals["num_primary_loops"]
 
-        return len(primary_secondary_loop_dictionary) != 0
+        return num_primary_loops != 0
