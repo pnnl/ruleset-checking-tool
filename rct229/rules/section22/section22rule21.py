@@ -20,7 +20,7 @@ APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_12B,
 ]
 CHILLER_COMPRESSOR = schema_enums["ChillerCompressorOptions"]
-BUILDING_PEAK_COOLING_LOAD = 600 * ureg("Btu/hr")
+BUILDING_PEAK_COOLING_LOAD = 600 * ureg("ton")
 
 
 class Section22Rule21(RuleDefinitionListIndexedBase):
