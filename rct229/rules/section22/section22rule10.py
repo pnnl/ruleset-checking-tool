@@ -24,7 +24,7 @@ APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_11_1B,
     HVAC_SYS.SYS_12B,
 ]
-PUMP_SPPED_CONTROL = schema_enums["PumpSpeedControlOptions"]
+PUMP_SPEED_CONTROL = schema_enums["PumpSpeedControlOptions"]
 MAX_FIXED_SPEED_CHW_LOOP_COOLING_CAPACITY = 300.0 * ureg("ton")
 
 
@@ -99,7 +99,7 @@ class Section22Rule10(RuleDefinitionListIndexedBase):
                 rmrs_used=UserBaselineProposedVals(False, True, False),
                 each_rule=Section22Rule10.PrimaryFluidLoopRule.SecondaryChildLoopRule(),
                 index_rmr="baseline",
-                list_path="$..child_loops[*]",
+                list_path="$.child_loops[*]",
             )
 
         def create_data(self, context, data):
@@ -110,9 +110,9 @@ class Section22Rule10(RuleDefinitionListIndexedBase):
                 chw_loop_capacity_dict[fluid_loop_b["id"]]
                 < MAX_FIXED_SPEED_CHW_LOOP_COOLING_CAPACITY
             ):
-                target_secondary_pump_type = PUMP_SPPED_CONTROL.FIXED_SPEED
+                target_secondary_pump_type = PUMP_SPEED_CONTROL.FIXED_SPEED
             else:
-                target_secondary_pump_type = PUMP_SPPED_CONTROL.VARIABLE_SPEED
+                target_secondary_pump_type = PUMP_SPEED_CONTROL.VARIABLE_SPEED
 
             return {**data, "target_secondary_pump_type": target_secondary_pump_type}
 
@@ -133,9 +133,11 @@ class Section22Rule10(RuleDefinitionListIndexedBase):
             def get_calc_vals(self, context, data=None):
                 child_loop_b = context.baseline
                 loop_pump_dictionary = data["loop_pump_dictionary"]
-                secondary_pump_speed_control = loop_pump_dictionary[child_loop_b["id"]][
-                    "speed_control"
-                ]
+                secondary_pump_speed_control = getattr_(
+                    loop_pump_dictionary[child_loop_b["id"]],
+                    "speed_control",
+                    "speed_control",
+                )
 
                 return {"secondary_pump_speed_control": secondary_pump_speed_control}
 
