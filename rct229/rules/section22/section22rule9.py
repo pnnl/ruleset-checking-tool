@@ -100,7 +100,7 @@ class Section22Rule9(RuleDefinitionListIndexedBase):
                 rmrs_used=UserBaselineProposedVals(False, True, False),
                 each_rule=Section22Rule9.ChillerFluidLoopRule.SecondaryChildLoopRule(),
                 index_rmr="baseline",
-                list_path="$..child_loops[*]",
+                list_path="$.child_loops[*]",
             )
 
         class SecondaryChildLoopRule(RuleDefinitionBase):
