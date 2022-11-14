@@ -4,8 +4,19 @@ import importlib
 __all__ = [
     "section22rule1",
     "section22rule2",
-    "section22rule3",
+    "section22rule3"
+    "section22rule4",
+    "section22rule5",
+    "section22rule6",
+    "section22rule7",
+    "section22rule14",
+    "section22rule16",
+    "section22rule19",
     "section22rule21",
+    "section22rule20",
+    "section22rule27",
+    "section22rule29",
+    "section22rule30",
 ]
 
 

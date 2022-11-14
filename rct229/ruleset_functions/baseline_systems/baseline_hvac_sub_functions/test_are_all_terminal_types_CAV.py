@@ -1,6 +1,9 @@
 from rct229.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.are_all_terminal_types_CAV import (
     are_all_terminal_types_cav,
 )
+from rct229.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.are_all_terminal_types_CAV_with_none_equal_to_null import (
+    are_all_terminal_types_cav_with_none_equal_to_null,
+)
 
 TEST_RMD = {
     "id": "test_rmd",
@@ -38,4 +41,25 @@ def test__not_all_terminal_type_CAV():
 
 
 def test__none_terminal_type_CAV():
-    assert are_all_terminal_types_cav(TEST_RMD, ["terminal_3"]) == False
+    assert are_all_terminal_types_cav(TEST_RMD, ["terminal_3"]) == True
+
+
+def test__all_terminal_type_CAV_none_equal_null():
+    assert (
+        are_all_terminal_types_cav_with_none_equal_to_null(TEST_RMD, ["terminal_1"])
+        == True
+    )
+
+
+def test__not_all_terminal_type_CAV_none_equal_null():
+    assert (
+        are_all_terminal_types_cav_with_none_equal_to_null(TEST_RMD, ["terminal_2"])
+        == False
+    )
+
+
+def test__none_terminal_type_CAV_none_equal_null():
+    assert (
+        are_all_terminal_types_cav_with_none_equal_to_null(TEST_RMD, ["terminal_3"])
+        == False
+    )
