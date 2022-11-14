@@ -20,7 +20,6 @@ APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_12B,
 ]
 CHILLER_COMPRESSOR = schema_enums["ChillerCompressorOptions"]
-BUILDING_PEAK_COOLING_LOAD = 600 * ureg("ton")
 
 
 class Section22Rule21(RuleDefinitionListIndexedBase):
@@ -58,7 +57,7 @@ class Section22Rule21(RuleDefinitionListIndexedBase):
         building_peak_load_b = getattr_(rmi_b, "output", "peak_cooling_load")
         target_chiller_type = (
             CHILLER_COMPRESSOR.SCREW
-            if building_peak_load_b < 600 * ureg("Btu/hr")
+            if building_peak_load_b < 600 * ureg("ton")
             else CHILLER_COMPRESSOR.CENTRIFUGAL
         )
 
