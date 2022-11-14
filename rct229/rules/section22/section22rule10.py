@@ -34,18 +34,18 @@ class Section22Rule10(RuleDefinitionListIndexedBase):
     def __init__(self):
         super(Section22Rule10, self).__init__(
             rmrs_used=UserBaselineProposedVals(False, True, False),
-            each_rule=Section22Rule10.ChillerFluidLoopRule(),
+            each_rule=Section22Rule10.PrimaryFluidLoopRule(),
             index_rmr="baseline",
             id="22-10",
             description="For Baseline chilled water system with cooling capacity less than 300ton, the secondary pump shall be modeled as riding the pump curve. For Baseline chilled water system with cooling capacity of 300 tons or more, the secondary pump shall be modeled with variable-speed drives.",
-            list_path="ruleset_model_instances[0].fluid_loops[*]",
+            rmr_context="ruleset_model_instances/0",
+            list_path="$.fluid_loops[*]",
         )
 
     def is_applicable(self, context, data=None):
-        rmr_baseline = context.baseline
-        rmi_b = rmr_baseline["ruleset_model_instances"][0]
+        rmi_b = context.baseline
         baseline_system_types_dict = get_baseline_system_types(rmi_b)
-        # create a list contains all HVAC systems that are modeled in the rmi_b
+        # create a list containing all HVAC systems that are modeled in the rmi_b
         available_type_list = [
             hvac_type
             for hvac_type in baseline_system_types_dict.keys()
@@ -61,19 +61,18 @@ class Section22Rule10(RuleDefinitionListIndexedBase):
                     for available_type in available_type_list
                 ]
             )
-            and primary_secondary_loop_dict
+            and len(primary_secondary_loop_dict) > 0
         )
 
     def create_data(self, context, data):
-        rmr_baseline = context.baseline
-        rmi_b = rmr_baseline["ruleset_model_instances"][0]
+        rmi_b = context.baseline
 
         loop_pump_dictionary = {
-            pump["loop_or_piping"]: pump for pump in find_all("pumps[*]", rmi_b)
+            pump["loop_or_piping"]: pump for pump in find_all("$.pumps[*]", rmi_b)
         }
 
         chw_loop_capacity_dict = {}
-        for chiller in find_all("chillers[*]", rmi_b):
+        for chiller in find_all("$.chillers[*]", rmi_b):
             if chiller["cooling_loop"] not in chw_loop_capacity_dict.keys():
                 chw_loop_capacity_dict[chiller["cooling_loop"]] = ZERO.POWER
             chw_loop_capacity_dict[chiller["cooling_loop"]] += getattr_(
@@ -94,11 +93,11 @@ class Section22Rule10(RuleDefinitionListIndexedBase):
 
         return fluid_loop_b["id"] in chw_loop_capacity_dict.keys()
 
-    class ChillerFluidLoopRule(RuleDefinitionListIndexedBase):
+    class PrimaryFluidLoopRule(RuleDefinitionListIndexedBase):
         def __init__(self):
-            super(Section22Rule10.ChillerFluidLoopRule, self).__init__(
+            super(Section22Rule10.PrimaryFluidLoopRule, self).__init__(
                 rmrs_used=UserBaselineProposedVals(False, True, False),
-                each_rule=Section22Rule10.ChillerFluidLoopRule.SecondaryChildLoopRule(),
+                each_rule=Section22Rule10.PrimaryFluidLoopRule.SecondaryChildLoopRule(),
                 index_rmr="baseline",
                 list_path="$..child_loops[*]",
             )
@@ -126,7 +125,7 @@ class Section22Rule10(RuleDefinitionListIndexedBase):
         class SecondaryChildLoopRule(RuleDefinitionBase):
             def __init__(self):
                 super(
-                    Section22Rule10.ChillerFluidLoopRule.SecondaryChildLoopRule, self
+                    Section22Rule10.PrimaryFluidLoopRule.SecondaryChildLoopRule, self
                 ).__init__(
                     rmrs_used=UserBaselineProposedVals(False, True, False),
                 )
