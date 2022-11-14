@@ -23,7 +23,7 @@ APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_11_1B,
     HVAC_SYS.SYS_12B,
 ]
-MIN_FLOW_FRACTION = 0.25
+REQUIRED_MIN_FLOW_FRACTION = 0.25
 MIN_CHW_PRIMARY_LOOP_COOLING_CAPACITY = 300.0 * ureg("ton")
 
 
@@ -37,16 +37,17 @@ class Section22Rule9(RuleDefinitionListIndexedBase):
             index_rmr="baseline",
             id="22-9",
             description="For Baseline chilled water system with cooling capacity of 300 tons or more, the secondary loop shall be modeled with a minimum flow of 25% of the design flow rate.",
-            list_path="ruleset_model_instances[0].fluid_loops[*]",
+            # list_path="ruleset_model_instances[0].fluid_loops[*]",
+            rmr_context="ruleset_model_instances/0",
+            list_path="$.fluid_loops[*]",
         )
 
     def is_applicable(self, context, data=None):
-        rmr_baseline = context.baseline
-        rmi_b = rmr_baseline["ruleset_model_instances"][0]
+        rmi_b = context.baseline
 
         baseline_system_types_dict = get_baseline_system_types(rmi_b)
-        # create a list contains all HVAC systems that are modeled in the rmi_b
-        available_type_lists = [
+        # create a list containing all HVAC systems that are modeled in the rmi_b
+        available_type_list = [
             hvac_type
             for hvac_type in baseline_system_types_dict.keys()
             if len(baseline_system_types_dict[hvac_type]) > 0
@@ -58,15 +59,14 @@ class Section22Rule9(RuleDefinitionListIndexedBase):
             any(
                 [
                     available_type in APPLICABLE_SYS_TYPES
-                    for available_type in available_type_lists
+                    for available_type in available_type_list
                 ]
             )
             and primary_secondary_loop_dictionary
         )
 
     def create_data(self, context, data):
-        rmr_baseline = context.baseline
-        rmi_b = rmr_baseline["ruleset_model_instances"][0]
+        rmi_b = context.baseline
 
         chw_loop_capacity_dict = {}
         for chiller in find_all("chillers[*]", rmi_b):
@@ -76,20 +76,20 @@ class Section22Rule9(RuleDefinitionListIndexedBase):
                 chiller, "chiller", "rated_capacity"
             )
 
-        primary_secondary_loop_dictionary = get_primary_secondary_loops_dict(rmi_b)
+        primary_secondary_loop_dict = get_primary_secondary_loops_dict(rmi_b)
 
         return {
             "chw_loop_capacity_dict": chw_loop_capacity_dict,
-            "primary_secondary_loop_dictionary": primary_secondary_loop_dictionary,
+            "primary_secondary_loop_dict": primary_secondary_loop_dict,
         }
 
     def list_filter(self, context_item, data):
         fluid_loop_b = context_item.baseline
-        primary_secondary_loop_dictionary = data["primary_secondary_loop_dictionary"]
+        primary_secondary_loop_dict = data["primary_secondary_loop_dict"]
         chw_loop_capacity_dict = data["chw_loop_capacity_dict"]
 
         return (
-            fluid_loop_b["id"] in primary_secondary_loop_dictionary.keys()
+            fluid_loop_b["id"] in primary_secondary_loop_dict.keys()
             and chw_loop_capacity_dict[fluid_loop_b["id"]]
             >= MIN_CHW_PRIMARY_LOOP_COOLING_CAPACITY
         )
@@ -119,13 +119,13 @@ class Section22Rule9(RuleDefinitionListIndexedBase):
 
             def get_calc_vals(self, context, data=None):
                 child_loop_b = context.baseline
-                secondary_loop_min_flow_rate = child_loop_b[
+                min_flow_fraction = child_loop_b[
                     "cooling_or_condensing_design_and_control"
                 ]["minimum_flow_fraction"]
 
-                return {"secondary_loop_min_flow_rate": secondary_loop_min_flow_rate}
+                return {"min_flow_fraction": min_flow_fraction}
 
             def rule_check(self, context, calc_vals=None, data=None):
-                secondary_loop_min_flow_rate = calc_vals["secondary_loop_min_flow_rate"]
+                min_flow_fraction = calc_vals["min_flow_fraction"]
 
-                return secondary_loop_min_flow_rate == MIN_FLOW_FRACTION
+                return min_flow_fraction == REQUIRED_MIN_FLOW_FRACTION
