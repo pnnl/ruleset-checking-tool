@@ -69,7 +69,7 @@
                                                 "cooling_system": {
                                                     "id": "CHW Coil 1",
                                                     "cooling_system_type": "FLUID_LOOP",
-                                                    "chilled_water_loop": "Chiller Loop 1"
+                                                    "chilled_water_loop": "Cooling Child Loop 1"
                                                 },
                                                 "fan_system": {
                                                     "id": "VAV Fan System 1",
@@ -131,7 +131,8 @@
                                 "type": "COOLING",
                                 "child_loops": [
                                     {
-                                        "id": "Cooling Child Loop 1"
+                                        "id": "Cooling Child Loop 1",
+                                        "type": "COOLING"
                                     }
                                 ]
                             }
@@ -211,7 +212,7 @@
                                                 "cooling_system": {
                                                     "id": "CHW Coil 1",
                                                     "cooling_system_type": "FLUID_LOOP",
-                                                    "chilled_water_loop": "Chiller Loop 1"
+                                                    "chilled_water_loop": "Cooling Child Loop 1"
                                                 },
                                                 "fan_system": {
                                                     "id": "VAV Fan System 1",
@@ -273,10 +274,12 @@
                                 "type": "COOLING",
                                 "child_loops": [
                                     {
-                                        "id": "Cooling Child Loop 1"
+                                        "id": "Cooling Child Loop 1",
+                                        "type": "COOLING"
                                     },
                                     {
-                                        "id": "Cooling Child Loop 2"
+                                        "id": "Cooling Child Loop 2",
+                                        "type": "COOLING"
                                     }
                                 ]
                             }
