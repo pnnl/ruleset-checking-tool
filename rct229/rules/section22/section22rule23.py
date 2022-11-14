@@ -32,8 +32,8 @@ class Section22Rule23(RuleDefinitionBase):
     def is_applicable(self, context, data=None):
         rmi_b = context.baseline
         baseline_system_types_dict = get_baseline_system_types(rmi_b)
-        # create a list contains all HVAC systems that are modeled in the rmi_b
-        available_type_lists = [
+        # create a list containing all HVAC systems that are modeled in the rmi_b
+        available_type_list = [
             hvac_type
             for hvac_type in baseline_system_types_dict.keys()
             if len(baseline_system_types_dict[hvac_type]) > 0
@@ -41,32 +41,35 @@ class Section22Rule23(RuleDefinitionBase):
         return any(
             [
                 available_type in APPLICABLE_SYS_TYPES
-                for available_type in available_type_lists
+                for available_type in available_type_list
             ]
         )
 
     def get_calc_vals(self, context, data=None):
         rmi_b = context.baseline
-        no_of_chillers_b = len(find_all("chillers[*]", rmi_b))
+        num_of_chillers_b = len(find_all("chillers[*]", rmi_b))
         primary_chw_loop_id_array = find_all("chillers[*].cooling_loop", rmi_b)
         interlock_flag = all(
             find_all("chillers[*].is_chilled_water_pump_interlocked", rmi_b)
         )
 
-        primary_chw_loop_pump_num = 0
-        for pump_b in find_all("pumps[*]", rmi_b):
-            if pump_b["loop_or_piping"] in primary_chw_loop_id_array:
-                primary_chw_loop_pump_num += 1
+        primary_chw_loop_pump_num = len(
+            [
+                pump_b
+                for pump_b in find_all("pumps[*]", rmi_b)
+                if pump_b["loop_or_piping"] in primary_chw_loop_id_array
+            ]
+        )
 
         return {
-            "no_of_chillers_b": no_of_chillers_b,
+            "num_of_chillers_b": num_of_chillers_b,
             "primary_chw_loop_pump_num": primary_chw_loop_pump_num,
             "interlock_flag": interlock_flag,
         }
 
     def rule_check(self, context, calc_vals=None, data=None):
-        no_of_chillers_b = calc_vals["no_of_chillers_b"]
+        num_of_chillers_b = calc_vals["num_of_chillers_b"]
         primary_chw_loop_pump_num = calc_vals["primary_chw_loop_pump_num"]
         interlock_flag = calc_vals["interlock_flag"]
 
-        return no_of_chillers_b == primary_chw_loop_pump_num and interlock_flag
+        return num_of_chillers_b == primary_chw_loop_pump_num and interlock_flag
