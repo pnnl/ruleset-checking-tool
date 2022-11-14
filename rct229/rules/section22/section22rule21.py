@@ -1,21 +1,26 @@
+from rct229.data.schema_enums import schema_enums
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
+from rct229.ruleset_functions.baseline_systems.baseline_system_util import HVAC_SYS
+from rct229.ruleset_functions.get_baseline_system_types import get_baseline_system_types
 from rct229.schema.config import ureg
+from rct229.utils.assertions import getattr_
 
 APPLICABLE_SYS_TYPES = [
-    "SYS-7",
-    "SYS-8",
-    "SYS-11.1",
-    "SYS-11.2",
-    "SYS-12",
-    "SYS-13",
-    "SYS-7B",
-    "SYS-8B",
-    "SYS-11B",
-    "SYS-12B",
-    "SYS-13B",
+    HVAC_SYS.SYS_7,
+    HVAC_SYS.SYS_8,
+    HVAC_SYS.SYS_11_1,
+    HVAC_SYS.SYS_11_2,
+    HVAC_SYS.SYS_12,
+    HVAC_SYS.SYS_13,
+    HVAC_SYS.SYS_7B,
+    HVAC_SYS.SYS_8B,
+    HVAC_SYS.SYS_11_1B,
+    HVAC_SYS.SYS_12B,
 ]
+CHILLER_COMPRESSOR = schema_enums["ChillerCompressorOptions"]
+BUILDING_PEAK_COOLING_LOAD = 600 * ureg("Btu/hr")
 
 
 class Section22Rule21(RuleDefinitionListIndexedBase):
@@ -34,23 +39,29 @@ class Section22Rule21(RuleDefinitionListIndexedBase):
 
     def is_applicable(self, context, data=None):
         rmi_b = context.baseline
-        # FIXME: replace with baseline_system_types = get_baseline_system_types(rmi_b) when get_baseline_system_types
-        #  is ready.
-        baseline_system_types = {
-            "SYS-7": ["hvac_sys_7"],
-            "SYS-11-a": ["hvac_sys_11_a"],
-        }
-        # if any system type found in the APPLICABLE_SYS_TYPES then return applicable.
+        baseline_system_types_dict = get_baseline_system_types(rmi_b)
+        # create a list containing all HVAC systems that are modeled in the rmi_b
+        available_type_list = [
+            hvac_type
+            for hvac_type in baseline_system_types_dict.keys()
+            if len(baseline_system_types_dict[hvac_type]) > 0
+        ]
         return any(
-            [key in APPLICABLE_SYS_TYPES for key in baseline_system_types.keys()]
+            [
+                available_type in APPLICABLE_SYS_TYPES
+                for available_type in available_type_list
+            ]
         )
 
     def create_data(self, context, data):
         rmi_b = context.baseline
-        building_peak_load_b = 1
+        building_peak_load_b = getattr_(rmi_b, "output", "peak_cooling_load")
         target_chiller_type = (
-            "SCREW" if building_peak_load_b < 600 * ureg("Btu/hr") else "CENTRIFUGAL"
+            CHILLER_COMPRESSOR.SCREW
+            if building_peak_load_b < 600 * ureg("Btu/hr")
+            else CHILLER_COMPRESSOR.CENTRIFUGAL
         )
+
         return {"target_chiller_type": target_chiller_type}
 
     class ChillerRule(RuleDefinitionBase):
@@ -65,9 +76,11 @@ class Section22Rule21(RuleDefinitionListIndexedBase):
         def get_calc_vals(self, context, data=None):
             chiller_b = context.baseline
             compressor_type = chiller_b["compressor_type"]
+
             return {"compressor_type": compressor_type}
 
         def rule_check(self, context, calc_vals=None, data=None):
             compressor_type = calc_vals["compressor_type"]
             target_chiller_type = data["target_chiller_type"]
+
             return compressor_type == target_chiller_type
