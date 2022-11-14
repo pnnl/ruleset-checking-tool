@@ -37,7 +37,6 @@ class Section22Rule9(RuleDefinitionListIndexedBase):
             index_rmr="baseline",
             id="22-9",
             description="For Baseline chilled water system with cooling capacity of 300 tons or more, the secondary loop shall be modeled with a minimum flow of 25% of the design flow rate.",
-            # list_path="ruleset_model_instances[0].fluid_loops[*]",
             rmr_context="ruleset_model_instances/0",
             list_path="$.fluid_loops[*]",
         )
