@@ -47,16 +47,16 @@ class Section22Rule23(RuleDefinitionBase):
 
     def get_calc_vals(self, context, data=None):
         rmi_b = context.baseline
-        num_of_chillers_b = len(find_all("chillers[*]", rmi_b))
-        primary_chw_loop_id_array = find_all("chillers[*].cooling_loop", rmi_b)
+        num_of_chillers_b = len(find_all("$.chillers[*]", rmi_b))
+        primary_chw_loop_id_array = find_all("$.chillers[*].cooling_loop", rmi_b)
         interlock_flag = all(
-            find_all("chillers[*].is_chilled_water_pump_interlocked", rmi_b)
+            find_all("$.chillers[*].is_chilled_water_pump_interlocked", rmi_b)
         )
 
         primary_chw_loop_pump_num = len(
             [
                 pump_b
-                for pump_b in find_all("pumps[*]", rmi_b)
+                for pump_b in find_all("$.pumps[*]", rmi_b)
                 if pump_b["loop_or_piping"] in primary_chw_loop_id_array
             ]
         )
