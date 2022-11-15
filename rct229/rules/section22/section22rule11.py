@@ -19,6 +19,7 @@ APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_8B,
     HVAC_SYS.SYS_12B,
 ]
+REQUIRED_PUMP_FLOW_RATE = 13 * ureg("W/gpm")
 
 
 class Section22Rule11(RuleDefinitionListIndexedBase):
@@ -31,12 +32,12 @@ class Section22Rule11(RuleDefinitionListIndexedBase):
             index_rmr="baseline",
             id="22-11",
             description="For Baseline chilled-water system that does not use purchased chilled water, variable-flow secondary pump shall be modeled as 13W/gpm at design conditions.",
-            list_path="ruleset_model_instances[0].fluid_loops[*]",
+            rmr_context="ruleset_model_instances/0",
+            list_path="$.fluid_loops[*]",
         )
 
     def is_applicable(self, context, data=None):
-        rmr_baseline = context.baseline
-        rmi_b = rmr_baseline["ruleset_model_instances"][0]
+        rmi_b = context.baseline
 
         baseline_system_types_dict = get_baseline_system_types(rmi_b)
         # create a list contains all HVAC systems that are modeled in the rmi_b
@@ -59,8 +60,7 @@ class Section22Rule11(RuleDefinitionListIndexedBase):
         )
 
     def create_data(self, context, data):
-        rmr_baseline = context.baseline
-        rmi_b = rmr_baseline["ruleset_model_instances"][0]
+        rmi_b = context.baseline
 
         primary_secondary_loop_dict = get_primary_secondary_loops_dict(rmi_b)
 
@@ -78,7 +78,7 @@ class Section22Rule11(RuleDefinitionListIndexedBase):
                 rmrs_used=UserBaselineProposedVals(False, True, False),
                 each_rule=Section22Rule11.ChillerFluidLoopRule.SecondaryChildLoopRule(),
                 index_rmr="baseline",
-                list_path="$..child_loops[*]",
+                list_path="$.child_loops[*]",
             )
 
         class SecondaryChildLoopRule(RuleDefinitionBase):
@@ -97,7 +97,7 @@ class Section22Rule11(RuleDefinitionListIndexedBase):
                 secondary_loop_pump_power_per_flow_rate = child_loop_b[
                     "pump_power_per_flow_rate"
                 ]
-                req_pump_flow_rate = 13 * ureg("W/gpm")
+                req_pump_flow_rate = REQUIRED_PUMP_FLOW_RATE
 
                 return {
                     "secondary_loop_pump_power_per_flow_rate": CalcQ(
