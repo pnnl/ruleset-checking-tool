@@ -1,10 +1,9 @@
-from rct229.data_fns.table_3_5_3_fns import table_3_5_3_lookup
+from rct229.data_fns.table_G3_5_3_fns import table_G3_5_3_lookup
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 from rct229.ruleset_functions.baseline_systems.baseline_system_util import HVAC_SYS
 from rct229.ruleset_functions.get_baseline_system_types import get_baseline_system_types
-from rct229.schema.config import ureg
 from rct229.utils.pint_utils import CalcQ
 from rct229.utils.std_comparisons import std_equal
 
@@ -39,8 +38,8 @@ class Section22Rule22(RuleDefinitionListIndexedBase):
     def is_applicable(self, context, data=None):
         rmi_b = context.baseline
         baseline_system_types_dict = get_baseline_system_types(rmi_b)
-        # create a list contains all HVAC systems that are modeled in the rmi_b
-        available_type_lists = [
+        # create a list containing all HVAC systems that are modeled in the rmi_b
+        available_type_list = [
             hvac_type
             for hvac_type in baseline_system_types_dict.keys()
             if len(baseline_system_types_dict[hvac_type]) > 0
@@ -48,7 +47,7 @@ class Section22Rule22(RuleDefinitionListIndexedBase):
         return any(
             [
                 available_type in APPLICABLE_SYS_TYPES
-                for available_type in available_type_lists
+                for available_type in available_type_list
             ]
         )
 
@@ -66,11 +65,11 @@ class Section22Rule22(RuleDefinitionListIndexedBase):
             full_load_efficiency_b = chiller_b["full_load_efficiency"]
 
             compressor_type_b = chiller_b["compressor_type"]
-            rated_capacity_b = chiller_b["rated_capacity"].to(ureg.ton).m
+            rated_capacity_b = chiller_b["rated_capacity"]
 
-            required_kw_ton_full_load_b = table_3_5_3_lookup(
+            required_kw_ton_full_load_b = table_G3_5_3_lookup(
                 compressor_type_b, rated_capacity_b
-            )["minimum_full_load_efficiency_kw_per_ton"]
+            )["minimum_full_load_efficiency"]
 
             return {
                 "full_load_efficiency_b": CalcQ(

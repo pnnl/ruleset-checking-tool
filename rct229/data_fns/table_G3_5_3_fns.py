@@ -23,7 +23,7 @@ minimum_capacity_threshold_list = [0, 150, 300]
 maximum_capacity_threshold_list = [9999.99, 300, 150]
 
 
-def table_3_5_3_lookup(compressor_type, capacity):
+def table_G3_5_3_lookup(compressor_type, capacity):
     """Returns the chiller data based on compressor type and capacity
     required by ASHRAE 90.1 Table 3.2
     Parameters
@@ -43,19 +43,19 @@ def table_3_5_3_lookup(compressor_type, capacity):
 
     minimum_capacity = 0
     for min_threshold in minimum_capacity_threshold_list:
-        if capacity > min_threshold:
-            minimum_capacity = min_threshold
+        if capacity > min_threshold * ureg("ton"):
+            minimum_capacity = min_threshold * ureg("ton")
 
     maximum_capacity = maximum_capacity_threshold_list[0]
     for max_threshold in maximum_capacity_threshold_list:
-        if capacity < max_threshold:
-            maximum_capacity = max_threshold
+        if capacity < max_threshold * ureg("ton"):
+            maximum_capacity = max_threshold * ureg("ton")
 
     osstd_entry = find_osstd_table_entry(
         [
             ("equipment_type", compressor_category),
-            ("inclusive_minimum_capacity_tons", minimum_capacity),
-            ("exclusive_maximum_capacity_tons", maximum_capacity),
+            ("inclusive_minimum_capacity_tons", minimum_capacity.m),
+            ("exclusive_maximum_capacity_tons", maximum_capacity.m),
         ],
         osstd_table=data["ashrae_90_1_table_G3_5_3"],
     )
@@ -74,6 +74,6 @@ def table_3_5_3_lookup(compressor_type, capacity):
     )
 
     return {
-        "minimum_full_load_efficiency_kw_per_ton": minimum_full_load_efficiency,
-        "minimum_integrated_part_load_kw_per_ton": minimum_integrated_part_load,
+        "minimum_full_load_efficiency": minimum_full_load_efficiency,
+        "minimum_integrated_part_load": minimum_integrated_part_load,
     }
