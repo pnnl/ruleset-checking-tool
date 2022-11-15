@@ -68,7 +68,7 @@ class Section22Rule9(RuleDefinitionListIndexedBase):
         rmi_b = context.baseline
 
         chw_loop_capacity_dict = {}
-        for chiller in find_all("chillers[*]", rmi_b):
+        for chiller in find_all("$.chillers[*]", rmi_b):
             if chiller["cooling_loop"] not in chw_loop_capacity_dict.keys():
                 chw_loop_capacity_dict[chiller["cooling_loop"]] = ZERO.POWER
             chw_loop_capacity_dict[chiller["cooling_loop"]] += getattr_(
