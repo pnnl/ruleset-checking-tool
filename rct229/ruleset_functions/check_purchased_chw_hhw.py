@@ -29,7 +29,7 @@ def check_purchased_chw_hhw(rmi_b):
         "purchased_cooling": False,
         "purchased_heating": False,
     }
-    # rmi_b = rmi_b["ruleset_model_instances"][0]
+
     external_fluid_sources = find_all("$..external_fluid_source[*]", rmi_b)
     if not external_fluid_sources:
         return purchased_chw_hhw_status_dict
