@@ -76,11 +76,15 @@ class Section22Rule21(RuleDefinitionListIndexedBase):
         def get_calc_vals(self, context, data=None):
             chiller_b = context.baseline
             compressor_type = chiller_b["compressor_type"]
+            target_chiller_type = data["target_chiller_type"]
 
-            return {"compressor_type": compressor_type}
+            return {
+                "compressor_type": compressor_type,
+                "target_chiller_type": target_chiller_type,
+            }
 
         def rule_check(self, context, calc_vals=None, data=None):
             compressor_type = calc_vals["compressor_type"]
-            target_chiller_type = data["target_chiller_type"]
+            target_chiller_type = calc_vals["target_chiller_type"]
 
             return compressor_type == target_chiller_type
