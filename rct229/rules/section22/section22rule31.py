@@ -76,11 +76,15 @@ class Section22Rule31(RuleDefinitionListIndexedBase):
         def get_calc_vals(self, context, data=None):
             chiller_b = context.baseline
             num_chiller = len(chiller_b)
+            target_chiller_number = data["target_chiller_number"]
 
-            return {"num_chiller": num_chiller}
+            return {
+                "num_chiller": num_chiller,
+                "target_chiller_number": target_chiller_number,
+            }
 
         def rule_check(self, context, calc_vals=None, data=None):
             num_chiller = calc_vals["num_chiller"]
-            target_chiller_number = data["target_chiller_number"]
+            target_chiller_number = calc_vals["target_chiller_number"]
 
             return num_chiller == target_chiller_number
