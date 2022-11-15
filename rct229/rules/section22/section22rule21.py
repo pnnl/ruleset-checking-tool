@@ -24,7 +24,7 @@ REQUIRED_BUILDING_PEAK_LOAD_600 = 600 * ureg("ton")
 
 
 class Section22Rule21(RuleDefinitionListIndexedBase):
-    """Rule 21 of ASHRAE 90.1-2019 Appendix G Section 22 (Hot water loop)"""
+    """Rule 21 of ASHRAE 90.1-2019 Appendix G Section 22 (Chilled water loop)"""
 
     def __init__(self):
         super(Section22Rule21, self).__init__(
