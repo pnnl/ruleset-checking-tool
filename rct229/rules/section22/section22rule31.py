@@ -22,16 +22,16 @@ APPLICABLE_SYS_TYPES = [
 ]
 
 
-class Section22Rule21(RuleDefinitionListIndexedBase):
-    """Rule 21 of ASHRAE 90.1-2019 Appendix G Section 22 (Hot water loop)"""
+class Section22Rule31(RuleDefinitionListIndexedBase):
+    """Rule 31 of ASHRAE 90.1-2019 Appendix G Section 22 (Hot water loop)"""
 
     def __init__(self):
-        super(Section22Rule21, self).__init__(
+        super(Section22Rule31, self).__init__(
             rmrs_used=UserBaselineProposedVals(False, True, False),
-            each_rule=Section22Rule21.ChillerRule(),
+            each_rule=Section22Rule31.ChillerRule(),
             index_rmr="baseline",
-            id="22-21",
-            description="The baseline building design’s chiller plant shall be modeled with chillers having the type as indicated in Table G3.1.3.7 as a function of building peak cooling load.",
+            id="22-31",
+            description="The baseline building design’s chiller plant shall be modeled with chillers having the number as indicated in Table G3.1.3.7 as a function of building peak cooling load.",
             rmr_context="ruleset_model_instances/0",
             list_path="chillers[*]",
         )
@@ -67,7 +67,7 @@ class Section22Rule21(RuleDefinitionListIndexedBase):
 
     class ChillerRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section22Rule21.ChillerRule, self).__init__(
+            super(Section22Rule31.ChillerRule, self).__init__(
                 rmrs_used=UserBaselineProposedVals(False, True, False),
             )
 
