@@ -73,7 +73,7 @@ class Section22Rule8(RuleDefinitionListIndexedBase):
         }
 
         chw_loop_capacity_dict = {}
-        for chiller in find_all("chillers[*]", rmi_b):
+        for chiller in find_all("$.chillers[*]", rmi_b):
             cooling_loop_id = chiller["cooling_loop"]
             if chiller["cooling_loop"] not in chw_loop_capacity_dict.keys():
                 chw_loop_capacity_dict[cooling_loop_id] = ZERO.POWER
