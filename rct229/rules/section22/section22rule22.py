@@ -63,7 +63,7 @@ class Section22Rule22(RuleDefinitionListIndexedBase):
 
         def get_calc_vals(self, context, data=None):
             chiller_b = context.baseline
-            full_load_efficiency_b = chiller_b["full_load_efficiency"] * ureg("W/W")
+            full_load_efficiency_b = chiller_b["full_load_efficiency"]
 
             compressor_type_b = chiller_b["compressor_type"]
             rated_capacity_b = chiller_b["rated_capacity"].to(ureg.ton).m
