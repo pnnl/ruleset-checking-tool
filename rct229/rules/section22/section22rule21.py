@@ -20,7 +20,7 @@ APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_12B,
 ]
 CHILLER_COMPRESSOR = schema_enums["ChillerCompressorOptions"]
-
+REQUIRED_BUILDING_PEAK_LOAD_600 = 600 * ureg("ton")
 
 class Section22Rule21(RuleDefinitionListIndexedBase):
     """Rule 21 of ASHRAE 90.1-2019 Appendix G Section 22 (Hot water loop)"""
@@ -57,7 +57,7 @@ class Section22Rule21(RuleDefinitionListIndexedBase):
         building_peak_load_b = getattr_(rmi_b, "output", "peak_cooling_load")
         target_chiller_type = (
             CHILLER_COMPRESSOR.SCREW
-            if building_peak_load_b < 600 * ureg("ton")
+            if building_peak_load_b < REQUIRED_BUILDING_PEAK_LOAD_600
             else CHILLER_COMPRESSOR.CENTRIFUGAL
         )
 
