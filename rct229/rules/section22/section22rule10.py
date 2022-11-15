@@ -89,9 +89,9 @@ class Section22Rule10(RuleDefinitionListIndexedBase):
 
     def list_filter(self, context_item, data):
         fluid_loop_b = context_item.baseline
-        chw_loop_capacity_dict = data["chw_loop_capacity_dict"]
+        primary_secondary_loop_dict = data["primary_secondary_loop_dict"]
 
-        return fluid_loop_b["id"] in chw_loop_capacity_dict.keys()
+        return fluid_loop_b["id"] in primary_secondary_loop_dict.keys()
 
     class PrimaryFluidLoopRule(RuleDefinitionListIndexedBase):
         def __init__(self):
@@ -114,7 +114,7 @@ class Section22Rule10(RuleDefinitionListIndexedBase):
             else:
                 target_secondary_pump_type = PUMP_SPEED_CONTROL.VARIABLE_SPEED
 
-            return {**data, "target_secondary_pump_type": target_secondary_pump_type}
+            return {"target_secondary_pump_type": target_secondary_pump_type}
 
         def list_filter(self, context_item, data):
             child_loop_b = context_item.baseline
@@ -138,11 +138,15 @@ class Section22Rule10(RuleDefinitionListIndexedBase):
                     "speed_control",
                     "speed_control",
                 )
+                target_secondary_pump_type = data["target_secondary_pump_type"]
 
-                return {"secondary_pump_speed_control": secondary_pump_speed_control}
+                return {
+                    "secondary_pump_speed_control": secondary_pump_speed_control,
+                    "target_secondary_pump_type": target_secondary_pump_type,
+                }
 
             def rule_check(self, context, calc_vals=None, data=None):
                 secondary_pump_speed_control = calc_vals["secondary_pump_speed_control"]
-                target_secondary_pump_type = data["target_secondary_pump_type"]
+                target_secondary_pump_type = calc_vals["target_secondary_pump_type"]
 
                 return secondary_pump_speed_control == target_secondary_pump_type
