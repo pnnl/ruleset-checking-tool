@@ -20,6 +20,8 @@ APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_11_1B,
     HVAC_SYS.SYS_12B,
 ]
+REQUIRED_BUILDING_PEAK_LOAD_300 = 300 * ureg("ton")
+REQUIRED_BUILDING_PEAK_LOAD_600 = 600 * ureg("ton")
 
 
 class Section22Rule31(RuleDefinitionListIndexedBase):
@@ -56,9 +58,9 @@ class Section22Rule31(RuleDefinitionListIndexedBase):
         rmi_b = context.baseline
         building_peak_load_b = getattr_(rmi_b, "output", "peak_cooling_load")
 
-        if building_peak_load_b <= 300 * ureg("ton"):
+        if building_peak_load_b <= REQUIRED_BUILDING_PEAK_LOAD_300:
             target_chiller_number = 1
-        elif building_peak_load_b < 600 * ureg("ton"):
+        elif building_peak_load_b < REQUIRED_BUILDING_PEAK_LOAD_600:
             target_chiller_number = 2
         else:
             target_chiller_number = max(2, int(math.ceil(building_peak_load_b / 800)))
