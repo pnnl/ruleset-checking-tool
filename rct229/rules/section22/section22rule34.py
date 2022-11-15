@@ -53,15 +53,15 @@ class Section22Rule34(RuleDefinitionListIndexedBase):
 
     def create_data(self, context, data):
         rmi_b = context.baseline
-        primary_secondary_loop_dictionary = get_primary_secondary_loops_dict(rmi_b)
+        primary_secondary_loop_dict = get_primary_secondary_loops_dict(rmi_b)
 
-        return {"primary_secondary_loop_dictionary": primary_secondary_loop_dictionary}
+        return {"primary_secondary_loop_dict": primary_secondary_loop_dict}
 
     def list_filter(self, context_item, data):
         fluid_loops_b = context_item.baseline
-        primary_secondary_loop_dictionary = data["primary_secondary_loop_dictionary"]
+        primary_secondary_loop_dict = data["primary_secondary_loop_dict"]
 
-        return fluid_loops_b["id"] in primary_secondary_loop_dictionary.keys()
+        return fluid_loops_b["id"] in primary_secondary_loop_dict.keys()
 
     class CoolingFluidLoopRule(RuleDefinitionBase):
         def __init__(self):
