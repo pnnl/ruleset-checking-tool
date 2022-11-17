@@ -8,7 +8,7 @@ from rct229.utils.jsonpath_utils import find_all, find_one
 EXTERNAL_FLUID_SOURCE = schema_enums["ExternalFluidSourceOptions"]
 
 
-def check_purchased_chw_hhw(rmi_b):
+def check_purchased_chw_hhw_status_dict(rmi_b):
     """
     Check if RMI is modeled with purchased chilled water as space cooling source or purchased hot water/steam as space heating source.
     If any system in RMI uses purchased chilled water, function shall return True for purchased chilled water as space cooling source.
@@ -40,7 +40,7 @@ def check_purchased_chw_hhw(rmi_b):
             == EXTERNAL_FLUID_SOURCE.CHILLED_WATER
         ):
             cooling_loop = find_exactly_one_fluid_loop(
-                rmi_b, getattr_(external_fluid_source, "external_fluid_source", "loop")
+                rmi_b, external_fluid_source["loop"]
             )
 
             purchased_chw_loop_array = find_all("$.child_loops[*].id", cooling_loop) + [
@@ -61,10 +61,10 @@ def check_purchased_chw_hhw(rmi_b):
             assert external_fluid_source["type"] in [
                 EXTERNAL_FLUID_SOURCE.HOT_WATER,
                 EXTERNAL_FLUID_SOURCE.STEAM,
-            ]
+            ]  # needs to add more heating types if new types are added in the schema
 
             heating_loop = find_exactly_one_fluid_loop(
-                rmi_b, getattr_(external_fluid_source, "external_fluid_source", "loop")
+                rmi_b, external_fluid_source["loop"]
             )
 
             purchased_hhw_loop_array = find_all("$.child_loops[*].id", heating_loop) + [

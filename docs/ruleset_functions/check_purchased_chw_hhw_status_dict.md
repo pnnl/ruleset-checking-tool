@@ -1,5 +1,5 @@
 
-## check_purchased_chw_hhw
+## check_purchased_chw_hhw_status_dict
 
 Description: Check if RMI is modeled with purchased chilled water as space cooling source or purchased hot water/steam as space heating source. If any system in RMI uses purchased chilled water, function shall return True for purchased chilled water as space cooling source. Similarly, if any system in RMI uses purchased hot water or steam, function shall return True for purchased hot water/steam as space heating source.
 

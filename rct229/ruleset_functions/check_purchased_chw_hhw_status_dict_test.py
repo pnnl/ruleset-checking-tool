@@ -1,4 +1,6 @@
-from rct229.ruleset_functions.check_purchased_chw_hhw import check_purchased_chw_hhw
+from rct229.ruleset_functions.check_purchased_chw_hhw_status_dict import (
+    check_purchased_chw_hhw_status_dict,
+)
 from rct229.schema.validate import schema_validate_rmr
 
 TEST_RMD = {
@@ -97,7 +99,7 @@ TEST_RMD = {
 
 
 def test_check_purchased_chw_hhw():
-    assert check_purchased_chw_hhw(TEST_RMD) == {
+    assert check_purchased_chw_hhw_status_dict(TEST_RMD) == {
         "purchased_cooling": True,
         "purchased_heating": True,
     }
