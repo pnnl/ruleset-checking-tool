@@ -35,6 +35,9 @@ class Section22Rule21(RuleDefinitionListIndexedBase):
             description="The baseline building design’s chiller plant shall be modeled with chillers having the type as indicated in Table G3.1.3.7 as a function of building peak cooling load.",
             rmr_context="ruleset_model_instances/0",
             list_path="chillers[*]",
+            required_fields={
+                "$": ["output"],
+            },
         )
 
     def is_applicable(self, context, data=None):
@@ -55,8 +58,13 @@ class Section22Rule21(RuleDefinitionListIndexedBase):
 
     def create_data(self, context, data):
         rmi_b = context.baseline
+
+        output_b = rmi_b["output"][0]
         building_cooling_peak_load = getattr_(
-            rmi_b, "peak_cooling_load", "output", "output_instance", "peak_cooling_load"
+            output_b,
+            "building_peak_cooling_load",
+            "output_instance",
+            "building_peak_cooling_load",
         )
 
         return {"building_cooling_peak_load": building_cooling_peak_load}
