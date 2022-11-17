@@ -27,7 +27,7 @@ class Section22Rule33(RuleDefinitionBase):
         super(Section22Rule33, self).__init__(
             rmrs_used=UserBaselineProposedVals(False, True, False),
             id="22-33",
-            description="Baseline chilled water system that does not use purchased chilled water must only have no more than one CHW plant.",
+            description="Baseline chilled water system that does not use purchased chilled water must have no more than one CHW plant.",
             rmr_context="ruleset_model_instances/0",
         )
 
