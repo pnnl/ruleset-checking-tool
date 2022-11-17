@@ -55,14 +55,9 @@ class Section22Rule21(RuleDefinitionListIndexedBase):
 
     def create_data(self, context, data):
         rmi_b = context.baseline
-        building_peak_load_b = getattr_(rmi_b, "output", "peak_cooling_load")
-        target_chiller_type = (
-            CHILLER_COMPRESSOR.SCREW
-            if building_peak_load_b < REQUIRED_BUILDING_PEAK_LOAD_600
-            else CHILLER_COMPRESSOR.CENTRIFUGAL
-        )
+        building_cooling_peak_load = getattr_(rmi_b, "output", "peak_cooling_load")
 
-        return {"target_chiller_type": target_chiller_type}
+        return {"building_cooling_peak_load": building_cooling_peak_load}
 
     class ChillerRule(RuleDefinitionBase):
         def __init__(self):
@@ -76,7 +71,13 @@ class Section22Rule21(RuleDefinitionListIndexedBase):
         def get_calc_vals(self, context, data=None):
             chiller_b = context.baseline
             compressor_type = chiller_b["compressor_type"]
-            target_chiller_type = data["target_chiller_type"]
+
+            building_cooling_peak_load = data["building_cooling_peak_load"]
+            target_chiller_type = (
+                CHILLER_COMPRESSOR.SCREW
+                if building_cooling_peak_load < REQUIRED_BUILDING_PEAK_LOAD_600
+                else CHILLER_COMPRESSOR.CENTRIFUGAL
+            )
 
             return {
                 "compressor_type": compressor_type,
