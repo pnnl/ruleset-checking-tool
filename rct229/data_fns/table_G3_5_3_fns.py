@@ -18,9 +18,8 @@ water_chiller_compressor_type_map = {
     "OTHER": "displacement",
 }
 
-# minimum capacity and maximum capacity in the ashrae_90_1_table_3_5_3
-minimum_capacity_threshold_list = [0, 150, 300]
-maximum_capacity_threshold_list = [9999.99, 300, 150]
+# Make sure this line is a sorted (ascending order) list
+capacity_threshold_list = [0, 150, 300, 9999.99]
 
 
 def table_G3_5_3_lookup(compressor_type, capacity):
@@ -41,15 +40,16 @@ def table_G3_5_3_lookup(compressor_type, capacity):
     """
     compressor_category = water_chiller_compressor_type_map[compressor_type]
 
-    minimum_capacity = 0
-    for min_threshold in minimum_capacity_threshold_list:
-        if capacity > min_threshold * ureg("ton"):
-            minimum_capacity = min_threshold * ureg("ton")
-
-    maximum_capacity = maximum_capacity_threshold_list[0]
-    for max_threshold in maximum_capacity_threshold_list:
-        if capacity < max_threshold * ureg("ton"):
-            maximum_capacity = max_threshold * ureg("ton")
+    # this line converts the list to list of quantities.
+    capacity_threshold_list_ton = list(map(lambda ct: ct * ureg("ton"), capacity_threshold_list))
+    minimum_capacity = min(capacity_threshold_list_ton)
+    maximum_capacity = max(capacity_threshold_list_ton)
+    for capacity_threshold_ton in capacity_threshold_list_ton:
+        if capacity > capacity_threshold_ton:
+            minimum_capacity = capacity_threshold_ton
+        if capacity < capacity_threshold_ton:
+            maximum_capacity = capacity_threshold_ton
+            break
 
     osstd_entry = find_osstd_table_entry(
         [
