@@ -55,7 +55,9 @@ class Section22Rule21(RuleDefinitionListIndexedBase):
 
     def create_data(self, context, data):
         rmi_b = context.baseline
-        building_cooling_peak_load = getattr_(rmi_b, "output", "peak_cooling_load")
+        building_cooling_peak_load = getattr_(
+            rmi_b, "peak_cooling_load", "output", "output_instance", "peak_cooling_load"
+        )
 
         return {"building_cooling_peak_load": building_cooling_peak_load}
 
