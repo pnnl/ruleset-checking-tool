@@ -107,8 +107,20 @@ class Section5Rule28(RuleDefinitionListIndexedBase):
 
                 def rule_check(self, context, calc_vals=None, data=None):
                     return (
-                        std_equal(calc_vals["subsurface_u_factor_b"], calc_vals["subsurface_u_factor_p"])
-                        and std_equal(calc_vals["subsurface_shgc_b"], calc_vals["subsurface_shgc_p"])
-                        and std_equal(calc_vals["subsurface_glazed_area_b"], calc_vals["subsurface_glazed_area_p"])
-                        and std_equal(calc_vals["subsurface_opaque_area_b"], calc_vals["subsurface_opaque_area_p"])
+                        std_equal(
+                            calc_vals["subsurface_u_factor_b"],
+                            calc_vals["subsurface_u_factor_p"],
+                        )
+                        and std_equal(
+                            calc_vals["subsurface_shgc_b"],
+                            calc_vals["subsurface_shgc_p"],
+                        )
+                        and std_equal(
+                            calc_vals["subsurface_glazed_area_b"],
+                            calc_vals["subsurface_glazed_area_p"],
+                        )
+                        and std_equal(
+                            calc_vals["subsurface_opaque_area_b"],
+                            calc_vals["subsurface_opaque_area_p"],
+                        )
                     )
