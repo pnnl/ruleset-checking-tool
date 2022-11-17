@@ -67,9 +67,11 @@ class Section22Rule10(RuleDefinitionListIndexedBase):
     def create_data(self, context, data):
         rmi_b = context.baseline
 
-        loop_pump_dictionary = {
-            pump["loop_or_piping"]: pump for pump in find_all("$.pumps[*]", rmi_b)
-        }
+        loop_pump_dictionary = {}
+        for pump in find_all("$.pumps[*]", rmi_b):
+            if pump["loop_or_piping"] not in loop_pump_dictionary.keys():
+                loop_pump_dictionary[pump["loop_or_piping"]] = []
+            loop_pump_dictionary[pump["loop_or_piping"]].append(pump)
 
         chw_loop_capacity_dict = {}
         for chiller in find_all("$.chillers[*]", rmi_b):
@@ -134,7 +136,7 @@ class Section22Rule10(RuleDefinitionListIndexedBase):
                 child_loop_b = context.baseline
                 loop_pump_dictionary = data["loop_pump_dictionary"]
                 secondary_pump_speed_control = getattr_(
-                    loop_pump_dictionary[child_loop_b["id"]],
+                    loop_pump_dictionary[child_loop_b["id"]][0],
                     "speed_control",
                     "speed_control",
                 )
