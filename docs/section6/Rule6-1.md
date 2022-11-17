@@ -32,7 +32,7 @@
 
         - If building segment specifies lighting building area type , add space floor area to the total building segment floor area: `if allowable_LPD_BAM: total_building_segment_area_p += space_p.floor_area`  
 
-        - Check if any space does not specify lighting space type, flag for Building Area Method: `if NOT space_p.lighting_space_type in table_G3_7: check_BAM_flag = TRUE`  
+        - Check if any space does not specify lighting space type, flag for Building Area Method: `if NOT space_p.lighting_space_type: check_BAM_flag = TRUE`  
 
         - Else, get the allowable lighting power density from Table G3-7: `else: allowable_LPD_space = data_lookup(table_G3_7, space_p.lighting_space_type)`  
 

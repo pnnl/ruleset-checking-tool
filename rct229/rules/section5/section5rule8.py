@@ -11,6 +11,7 @@ from rct229.ruleset_functions.get_surface_conditioning_category_dict import (
     get_surface_conditioning_category_dict,
 )
 from rct229.utils.jsonpath_utils import find_all
+from rct229.utils.pint_utils import CalcQ
 from rct229.utils.std_comparisons import std_equal
 
 
@@ -52,7 +53,11 @@ class Section5Rule8(RuleDefinitionListIndexedBase):
 
         def list_filter(self, context_item, data=None):
             surface_b = context_item.baseline
-            return get_opaque_surface_type(surface_b) == OST.BELOW_GRADE_WALL
+            scc = data["surface_conditioning_category_dict"][surface_b["id"]]
+            return (
+                get_opaque_surface_type(surface_b) == OST.BELOW_GRADE_WALL
+                and scc is not SCC.UNREGULATED
+            )
 
         class BelowGradeWallRule(RuleDefinitionBase):
             def __init__(self):
@@ -96,10 +101,16 @@ class Section5Rule8(RuleDefinitionListIndexedBase):
                         target_c_factor = target_c_factor_res
 
                 return {
-                    "below_grade_wall_c_factor": wall_c_factor,
-                    "target_c_factor": target_c_factor,
-                    "target_c_factor_res": target_c_factor_res,
-                    "target_c_factor_nonres": target_c_factor_nonres,
+                    "below_grade_wall_c_factor": CalcQ(
+                        "thermal_transmittance", wall_c_factor
+                    ),
+                    "target_c_factor": CalcQ("thermal_transmittance", target_c_factor),
+                    "target_c_factor_res": CalcQ(
+                        "thermal_transmittance", target_c_factor_res
+                    ),
+                    "target_c_factor_nonres": CalcQ(
+                        "thermal_transmittance", target_c_factor_nonres
+                    ),
                 }
 
             def manual_check_required(self, context, calc_vals=None, data=None):

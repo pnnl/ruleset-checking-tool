@@ -12,6 +12,7 @@ from rct229.rules.section6 import *
 from rct229.rules.section12 import *
 from rct229.rules.section15 import *
 from rct229.rules.section21 import *
+from rct229.rules.section22 import *
 from rct229.ruletest_engine.ruletest_jsons.scripts.json_generation_utilities import (
     merge_nested_dictionary,
 )
@@ -149,12 +150,14 @@ def process_test_result(test_result, test_dict, test_id):
 
         if test_result == "pass":
             # f"SUCCESS: Test {test_id} passed as expected. The following condition was identified: {description}"
-            outcome_text = None
+            outcome_text = "PASS"
         elif test_result == "fail":
             # f"SUCCESS: Test {test_id} failed as expected. The following condition was identified: {description}"
-            outcome_text = None
+            outcome_text = "FAIL"
         elif test_result == "undetermined":
-            outcome_text = None
+            outcome_text = "UNDETERMINED"
+        elif test_result == "not_applicable":
+            outcome_text = "NOT_APPLICABLE"
 
     else:
 
@@ -523,5 +526,18 @@ def run_boiler_tests():
 
     Results of boiler test are spit out to console
     """
-    boiler_test_json = "section21/rule_21_3.json"
+    boiler_test_json = "section21/rule_21_6.json"
     return run_section_tests(boiler_test_json)
+
+
+def run_chiller_tests():
+    """Runs all tests found in the chiller tests JSON
+
+    Returns
+    -------
+    None
+
+    Results of chiller test are spit out to console
+    """
+    chiller_test_json = "section22/rule_22_1.json"
+    return run_section_tests(chiller_test_json)
