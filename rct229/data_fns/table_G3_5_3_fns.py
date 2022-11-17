@@ -41,7 +41,9 @@ def table_G3_5_3_lookup(compressor_type, capacity):
     compressor_category = water_chiller_compressor_type_map[compressor_type]
 
     # this line converts the list to list of quantities.
-    capacity_threshold_list_ton = list(map(lambda ct: ct * ureg("ton"), capacity_threshold_list))
+    capacity_threshold_list_ton = list(
+        map(lambda ct: ct * ureg("ton"), capacity_threshold_list)
+    )
     minimum_capacity = min(capacity_threshold_list_ton)
     maximum_capacity = max(capacity_threshold_list_ton)
     for capacity_threshold_ton in capacity_threshold_list_ton:
