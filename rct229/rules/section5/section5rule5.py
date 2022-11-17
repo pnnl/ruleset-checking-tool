@@ -125,4 +125,3 @@ class Section5Rule5(RuleDefinitionListIndexedBase):
                 target_u_factor = calc_vals["target_u_factor"]
 
                 return std_le(val=roof_u_factor, std_val=target_u_factor)
-

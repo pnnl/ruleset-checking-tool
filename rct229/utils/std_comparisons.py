@@ -9,7 +9,7 @@ RDS definition of conservative design for u factor is less equal (<=)
 If AHJ_RA_COMPARE = False, baseline_u_factor == standard_u_factor -> False (baseline_u_factor is out of range of standard_u_factor with 0.05% tolerance)
 If AHJ_RA_COMPARE = True, baseline_u_factor == standard_u_factor -> True (Because conservative allows baseline_u_factor less or equal than the standard_u_factor)
 """
-AHJ_RA_COMPARE = True
+AHJ_RA_COMPARE = False
 
 
 def std_equal(
