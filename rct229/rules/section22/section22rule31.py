@@ -1,7 +1,6 @@
 import math
 
 from rct229.rule_engine.rule_base import RuleDefinitionBase
-from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 from rct229.ruleset_functions.baseline_systems.baseline_system_util import HVAC_SYS
 from rct229.ruleset_functions.get_baseline_system_types import get_baseline_system_types
@@ -24,18 +23,15 @@ REQUIRED_BUILDING_PEAK_LOAD_300 = 300 * ureg("ton")
 REQUIRED_BUILDING_PEAK_LOAD_600 = 600 * ureg("ton")
 
 
-class Section22Rule31(RuleDefinitionListIndexedBase):
+class Section22Rule31(RuleDefinitionBase):
     """Rule 31 of ASHRAE 90.1-2019 Appendix G Section 22 (Chilled water loop)"""
 
     def __init__(self):
         super(Section22Rule31, self).__init__(
             rmrs_used=UserBaselineProposedVals(False, True, False),
-            each_rule=Section22Rule31.ChillerRule(),
-            index_rmr="baseline",
             id="22-31",
             description="The baseline building design’s chiller plant shall be modeled with chillers having the number as indicated in Table G3.1.3.7 as a function of building peak cooling load.",
             rmr_context="ruleset_model_instances/0",
-            list_path="chillers[*]",
         )
 
     def is_applicable(self, context, data=None):
@@ -54,37 +50,28 @@ class Section22Rule31(RuleDefinitionListIndexedBase):
             ]
         )
 
-    def create_data(self, context, data):
+    def get_calc_vals(self, context, data=None):
         rmi_b = context.baseline
-        building_peak_load_b = getattr_(rmi_b, "output", "peak_cooling_load")
+        chiller_number = len(rmi_b["chillers"])
+
+        building_peak_load_b = getattr_(
+            rmi_b, "peak_cooling_load", "output", "output_instance", "peak_cooling_load"
+        )
 
         if building_peak_load_b <= REQUIRED_BUILDING_PEAK_LOAD_300:
             target_chiller_number = 1
         elif building_peak_load_b < REQUIRED_BUILDING_PEAK_LOAD_600:
             target_chiller_number = 2
         else:
-            target_chiller_number = max(2, int(math.ceil(building_peak_load_b / 800)))
+            target_chiller_number = max(2, math.ceil(building_peak_load_b / 800))
 
-        return {"target_chiller_number": target_chiller_number}
+        return {
+            "chiller_number": chiller_number,
+            "target_chiller_number": target_chiller_number,
+        }
 
-    class ChillerRule(RuleDefinitionBase):
-        def __init__(self):
-            super(Section22Rule31.ChillerRule, self).__init__(
-                rmrs_used=UserBaselineProposedVals(False, True, False),
-            )
+    def rule_check(self, context, calc_vals=None, data=None):
+        chiller_number = calc_vals["chiller_number"]
+        target_chiller_number = calc_vals["target_chiller_number"]
 
-        def get_calc_vals(self, context, data=None):
-            chiller_b = context.baseline
-            chiller_number = len(chiller_b)
-            target_chiller_number = data["target_chiller_number"]
-
-            return {
-                "chiller_number": chiller_number,
-                "target_chiller_number": target_chiller_number,
-            }
-
-        def rule_check(self, context, calc_vals=None, data=None):
-            chiller_number = calc_vals["chiller_number"]
-            target_chiller_number = calc_vals["target_chiller_number"]
-
-            return chiller_number == target_chiller_number
+        return chiller_number == target_chiller_number
