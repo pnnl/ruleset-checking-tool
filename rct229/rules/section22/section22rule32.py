@@ -44,12 +44,17 @@ class Section22Rule32(RuleDefinitionListIndexedBase):
 
     def is_applicable(self, context, data=None):
         rmi_b = context.baseline
-        baseline_system_types = get_baseline_system_types(rmi_b)
-        # if any system type found in the APPLICABLE_SYS_TYPES then return applicable.
+        baseline_system_types_dict = get_baseline_system_types(rmi_b)
+        # create a list containing all HVAC systems that are modeled in the rmi_b
+        available_type_list = [
+            hvac_type
+            for hvac_type in baseline_system_types_dict.keys()
+            if len(baseline_system_types_dict[hvac_type]) > 0
+        ]
         return any(
             [
-                sys_type in APPLICABLE_SYS_TYPES
-                for sys_type in baseline_system_types.keys()
+                available_type in APPLICABLE_SYS_TYPES
+                for available_type in available_type_list
             ]
         )
 
@@ -61,9 +66,7 @@ class Section22Rule32(RuleDefinitionListIndexedBase):
 
         def get_calc_vals(self, context, data=None):
             chiller_b = context.baseline
-            rated_capacity_b = (
-                getattr_(chiller_b, "Chiller", "rated_capacity").to(ureg.ton).m
-            )
+            rated_capacity_b = getattr_(chiller_b, "Chiller", "rated_capacity")
             compressor_type_b = getattr_(chiller_b, "Chiller", "compressor_type")
             chiller_part_load_efficiency = getattr_(
                 chiller_b, "Chiller", "part_load_efficiency"
@@ -74,7 +77,7 @@ class Section22Rule32(RuleDefinitionListIndexedBase):
 
             target_part_load_efficiency = table_G3_5_3_lookup(
                 compressor_type_b, rated_capacity_b
-            )["minimum_integrated_part_load_kw_per_ton"]
+            )["minimum_integrated_part_load"]
 
             return {
                 "chiller_part_load_efficiency": chiller_part_load_efficiency,
