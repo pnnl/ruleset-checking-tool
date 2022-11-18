@@ -1,7 +1,9 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 from rct229.ruleset_functions.baseline_systems.baseline_system_util import HVAC_SYS
-from rct229.ruleset_functions.check_purchased_chw_hhw import check_purchased_chw_hhw
+from rct229.ruleset_functions.check_purchased_chw_hhw_status_dict import (
+    check_purchased_chw_hhw_status_dict,
+)
 from rct229.ruleset_functions.get_baseline_system_types import get_baseline_system_types
 
 AIR_SIDE_SYSTEMS_USING_COOLING_SOURCE_OTHER_THAN_PURCHASED_CHILLED_WATER = [
@@ -47,9 +49,9 @@ class Section22Rule40(RuleDefinitionBase):
 
     def is_applicable(self, context, data=None):
         rmi_p = context.proposed
-        purchased_chw_hhw_status_dict_p = check_purchased_chw_hhw(rmi_p)
+        purchased_chw_hhw_status_dict_p = check_purchased_chw_hhw_status_dict(rmi_p)
 
-        return len(purchased_chw_hhw_status_dict_p["purchased_cooling"]) > 0
+        return purchased_chw_hhw_status_dict_p["purchased_cooling"]
 
     def get_calc_vals(self, context, data=None):
         rmi_b = context.baseline
