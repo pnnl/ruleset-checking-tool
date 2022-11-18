@@ -19,7 +19,7 @@
 - Else if, fan specification method equals detailed and input_power and motor_efficiency is defined : `Elif fan_spec_method == "DETAILED" AND (fan_obj.input_power != Null or fan_obj.input_power != 0) AND (fan_obj.motor_efficiency != Null or fan_obj.motor_efficiency != 0):`  
     - Calculate the electric power (schema says input power is equivalent in concept to brakehorsepower so divided by the motor efficiency to get input power): `fan_elec_power = fan_obj.input_power/fan_obj.motor_efficiency`  
 - Else if, fan specification method equals detailed and design_pressure_rise is defined and total fan efficiency is defined: `Elif fan_spec_method == "DETAILED" AND (fan_obj.design_pressure_rise != Null or fan_obj.design_pressure_rise != 0) AND (fan_obj.total_efficiency != Null or fan_obj.total_efficiency != 0) :`
-    - Calculate the electric power: `fan_elec_power = fan_obj.design_pressure_rise/(8520*fan_obj.total_efficiency)`    
+    - Calculate the electric power (assumes pressure rise is fan total static pressure in units of in. w.g. ): `fan_elec_power = (fan_obj.design_pressure_rise/(8520*fan_obj.total_efficiency)) * 1000`    
 
 - Set the function equal to the calculated fan_elec_power: `get_fan_object_electric_power = fan_elec_power`
 
