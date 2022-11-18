@@ -3,7 +3,7 @@
         "Section": 22,
         "Rule": 40,
         "Test": "a",
-        "test_description": "Baseline building is system type 7 and is correctly modeled with primary/secondary flow_control keys",
+        "test_description": "Baseline building is system type 7 and is correctly modeled with primary/secondary flow_control keys. However, since the RDS states if the system falls into system type 7, the rule fails. Thus, this RMD is set to fail.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-40",
@@ -265,7 +265,7 @@
         "Section": 22,
         "Rule": 40,
         "Test": "b",
-        "test_description": "Baseline building is system type 7 and is incorrectly modeled with primary/secondary flow_control keys",
+        "test_description": "Baseline building is system type 7 and is not modeled external fluid sources. Thus, this RMD falls into not_applicable case.",
         "expected_rule_outcome": "manual_check",
         "standard": {
             "rule_id": "22-40",
