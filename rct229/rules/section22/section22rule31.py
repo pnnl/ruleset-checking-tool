@@ -21,6 +21,7 @@ APPLICABLE_SYS_TYPES = [
 ]
 REQUIRED_BUILDING_PEAK_LOAD_300 = 300 * ureg("ton")
 REQUIRED_BUILDING_PEAK_LOAD_600 = 600 * ureg("ton")
+CHILLER_SIZE_800 = 800 * ureg("ton")
 
 
 class Section22Rule31(RuleDefinitionBase):
@@ -32,6 +33,9 @@ class Section22Rule31(RuleDefinitionBase):
             id="22-31",
             description="The baseline building design’s chiller plant shall be modeled with chillers having the number as indicated in Table G3.1.3.7 as a function of building peak cooling load.",
             rmr_context="ruleset_model_instances/0",
+            required_fields={
+                "$": ["output"],
+            },
         )
 
     def is_applicable(self, context, data=None):
@@ -54,8 +58,12 @@ class Section22Rule31(RuleDefinitionBase):
         rmi_b = context.baseline
         chiller_number = len(rmi_b["chillers"])
 
+        output_b = rmi_b["output"][0]
         building_peak_load_b = getattr_(
-            rmi_b, "peak_cooling_load", "output", "output_instance", "peak_cooling_load"
+            output_b,
+            "building_peak_cooling_load",
+            "output_instance",
+            "building_peak_cooling_load",
         )
 
         if building_peak_load_b <= REQUIRED_BUILDING_PEAK_LOAD_300:
@@ -63,7 +71,9 @@ class Section22Rule31(RuleDefinitionBase):
         elif building_peak_load_b < REQUIRED_BUILDING_PEAK_LOAD_600:
             target_chiller_number = 2
         else:
-            target_chiller_number = max(2, math.ceil(building_peak_load_b / 800))
+            target_chiller_number = max(
+                2, math.ceil(building_peak_load_b / CHILLER_SIZE_800)
+            )
 
         return {
             "chiller_number": chiller_number,
