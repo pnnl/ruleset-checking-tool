@@ -1,24 +1,24 @@
 
-## check_purchased_chw_hhw
+## check_purchased_chw_hhw_status_dict
 
-Description: Check if RMD is modeled with purchased chilled water as space cooling source or purchased hot water/steam as space heating source. If any system in RMD uses purchased chilled water, function shall return True for purchased chilled water as space cooling source. Similarly, if any system in RMD uses purchased hot water or steam, function shall return True for purchased hot water/steam as space heating source.
+Description: Check if RMI is modeled with purchased chilled water as space cooling source or purchased hot water/steam as space heating source. If any system in RMI uses purchased chilled water, function shall return True for purchased chilled water as space cooling source. Similarly, if any system in RMI uses purchased hot water or steam, function shall return True for purchased hot water/steam as space heating source.
 
 Inputs:  
-- **RMD**: The RMD that needs to be checked.
+- **RMI**: The RMI that needs to be checked.
 
 Returns:
-- **purchased_chw_hhw_status_dictionary**: A dictionary that saves whether RMD is modeled with purchased chilled water as space cooling source or purchased hot water/steam as space heating source, i.e. {"PURCHASED_COOLING": TRUE, "PURCHASED_HEATING": FALSE}.
+- **purchased_chw_hhw_status_dictionary**: A dictionary that saves whether RMI is modeled with purchased chilled water as space cooling source or purchased hot water/steam as space heating source, i.e. {"PURCHASED_COOLING": TRUE, "PURCHASED_HEATING": FALSE}.
 
 Function Call:
 - GET_COMPONENT_BY_ID()
 
 Logic:  
 
-- Check if RMD is not modeled with external fluid source: `if NOT RMD.ASHRAE229.external_fluid_source:`
+- Check if RMI is not modeled with external fluid source: `if NOT RMI.ASHRAE229.external_fluid_source:`
 
   - Set purchased cooling and purchased heating flag as False: `purchased_chw_hhw_status_dict["PURCHASED_COOLING"] = FALSE, purchased_chw_hhw_status_dict["PURCHASED_HEATING"] = FALSE`
 
-- Else, for each external fluid source in RMD: `for external_fluid_source in RMD.ASHRAE229.external_fluid_source:`
+- Else, for each external fluid source in RMI: `for external_fluid_source in RMI.ASHRAE229.external_fluid_source:`
 
   - Check if external fluid source is chilled water type: `if external_fluid_source.type == "CHILLED_WATER"`
 
@@ -26,7 +26,7 @@ Logic:
 
       - Save fluid loop and its child loops in purchased cooling loop array: `purchased_chw_loop_array.append(cooling_loop.id), purchased_chw_loop_array.append(loop.id for loop in cooling_loop.child_loops)`
 
-    - For each building segment in RMD (logic loop #1): `for building_segment in RMD...building_segments:`
+    - For each building segment in RMI (logic loop #1): `for building_segment in RMI...building_segments:`
 
       - For each HVAC system in building segment: `for hvac_sys in building_segment.heating_ventilation_air_conditioning_systems:`
 
@@ -40,15 +40,13 @@ Logic:
 
       - Save fluid loop and its child loops in purchased heating loop array: `purchased_hhw_loop_array.append(heating_loop.id), purchased_hhw_loop_array.append(loop.id for loop in heating_loop.child_loops)`
 
-    - For each building segment in RMD (logic loop #2): `for building_segment in RMD...building_segments:`
+    - For each building segment in RMI (logic loop #2): `for building_segment in RMI...building_segments:`
 
       - For each HVAC system in building segment: `for hvac_sys in building_segment.heating_ventilation_air_conditioning_systems:`
 
           - Check if heating system is connected to any loop in purchased heating loop array: `if hvac_sys.heating_system.hot_water_loop in purchased_hhw_loop_array`
 
             - Set purchased heating flag as True and break logic loop #2: `purchased_chw_hhw_status_dict["PURCHASED_HEATING"] = TRUE, BREAK`
-
-        - For each preheat system in HVAC system: `for preheat_system in hvac_sys.preheat_system:`
 
           - Check if heating system is connected to any loop in purchased heating loop array: `if preheat_system.hot_water_loop in purchased_hhw_loop_array`
 
@@ -70,6 +68,6 @@ Logic:
 
 **Notes:**
 
-1. For purchased heating, another option is to check if SHW uses purchased heating. If not and RMD has external fluid source, then assume purchased heating is used for space heating.
+1. For purchased heating, another option is to check if SHW uses purchased heating. If not and RMI has external fluid source, then assume purchased heating is used for space heating.
 
 2. Pending question on baseboard, radiant system, whether these are terminal or an HVAC system.

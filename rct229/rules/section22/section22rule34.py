@@ -1,41 +1,36 @@
-from rct229.data.schema_enums import schema_enums
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 from rct229.ruleset_functions.baseline_systems.baseline_system_util import HVAC_SYS
 from rct229.ruleset_functions.get_baseline_system_types import get_baseline_system_types
-from rct229.utils.jsonpath_utils import find_all, find_one
+from rct229.ruleset_functions.get_primary_secondary_loops_dict import (
+    get_primary_secondary_loops_dict,
+)
 
 APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_7,
     HVAC_SYS.SYS_8,
+    HVAC_SYS.SYS_11_1,
+    HVAC_SYS.SYS_11_2,
     HVAC_SYS.SYS_12,
     HVAC_SYS.SYS_13,
     HVAC_SYS.SYS_7B,
     HVAC_SYS.SYS_8B,
+    HVAC_SYS.SYS_11_1B,
     HVAC_SYS.SYS_12B,
 ]
-NOT_APPLICABLE_SYS_TYPES = [
-    HVAC_SYS.SYS_11_1,
-    HVAC_SYS.SYS_11_2,
-    HVAC_SYS.SYS_11_1A,
-    HVAC_SYS.SYS_11_2A,
-    HVAC_SYS.SYS_11_1B,
-    HVAC_SYS.SYS_11_1C,
-]
-TEMP_RESET_TYPE = schema_enums["TemperatureResetOptions"]
 
 
-class Section22Rule3(RuleDefinitionListIndexedBase):
-    """Rule 3 of ASHRAE 90.1-2019 Appendix G Section 22 (Chilled water loop)"""
+class Section22Rule34(RuleDefinitionListIndexedBase):
+    """Rule 34 of ASHRAE 90.1-2019 Appendix G Section 22 (Chilled water loop)"""
 
     def __init__(self):
-        super(Section22Rule3, self).__init__(
+        super(Section22Rule34, self).__init__(
             rmrs_used=UserBaselineProposedVals(False, True, False),
-            each_rule=Section22Rule3.ChillerFluidLoopRule(),
+            each_rule=Section22Rule34.CoolingFluidLoopRule(),
             index_rmr="baseline",
-            id="22-3",
-            description="For Baseline chilled water loop that is not purchased cooling, chilled-water supply temperature shall be reset based on outdoor dry-bulb temperature if loop does not serve any Baseline System Type-11.",
+            id="22-34",
+            description="For baseline cooling chilled water plant that is served by chiller(s), the capacity shall be based on coincident loads.",
             rmr_context="ruleset_model_instances/0",
             list_path="fluid_loops[*]",
         )
@@ -54,40 +49,41 @@ class Section22Rule3(RuleDefinitionListIndexedBase):
                 available_type in APPLICABLE_SYS_TYPES
                 for available_type in available_type_list
             ]
-        ) and any(
-            [
-                available_type not in NOT_APPLICABLE_SYS_TYPES
-                for available_type in available_type_list
-            ]
         )
 
     def create_data(self, context, data):
         rmi_b = context.baseline
-        chiller_loop_ids_list = find_all("chillers[*].cooling_loop", rmi_b)
-        return {"chiller_loop_ids": chiller_loop_ids_list}
+        primary_secondary_loop_dict = get_primary_secondary_loops_dict(rmi_b)
+
+        return {"primary_secondary_loop_dict": primary_secondary_loop_dict}
 
     def list_filter(self, context_item, data):
-        fluid_loop_b = context_item.baseline
-        loop_chiller_ids_list = data["chiller_loop_ids"]
-        return fluid_loop_b["id"] in loop_chiller_ids_list
+        fluid_loops_b = context_item.baseline
+        primary_secondary_loop_dict = data["primary_secondary_loop_dict"]
 
-    class ChillerFluidLoopRule(RuleDefinitionBase):
+        return fluid_loops_b["id"] in primary_secondary_loop_dict.keys()
+
+    class CoolingFluidLoopRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section22Rule3.ChillerFluidLoopRule, self).__init__(
+            super(Section22Rule34.CoolingFluidLoopRule, self).__init__(
                 rmrs_used=UserBaselineProposedVals(False, True, False),
                 required_fields={
                     "$": ["cooling_or_condensing_design_and_control"],
+                    "cooling_or_condensing_design_and_control": [
+                        "is_sized_using_coincident_load"
+                    ],
                 },
             )
 
         def get_calc_vals(self, context, data=None):
             fluid_loop_b = context.baseline
-            temperature_reset_type = find_one(
-                "$..cooling_or_condensing_design_and_control.temperature_reset_type",
-                fluid_loop_b,
-            )
-            return {"temperature_reset_type": temperature_reset_type}
+            is_sized_using_coincident_load = fluid_loop_b[
+                "cooling_or_condensing_design_and_control"
+            ]["is_sized_using_coincident_load"]
+
+            return {"is_sized_using_coincident_load": is_sized_using_coincident_load}
 
         def rule_check(self, context, calc_vals=None, data=None):
-            temperature_reset_type = calc_vals["temperature_reset_type"]
-            return temperature_reset_type == TEMP_RESET_TYPE.OUTSIDE_AIR_RESET
+            is_sized_using_coincident_load = calc_vals["is_sized_using_coincident_load"]
+
+            return is_sized_using_coincident_load

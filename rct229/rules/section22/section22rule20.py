@@ -48,8 +48,8 @@ class Section22Rule20(RuleDefinitionListIndexedBase):
         )
         rmi_b = rmd_b["ruleset_model_instances"][0]
         baseline_system_types_dict = get_baseline_system_types(rmi_b)
-        # create a list contains all HVAC systems that are modeled in the rmi_b
-        available_type_lists = [
+        # create a list containing all HVAC systems that are modeled in the rmi_b
+        available_type_list = [
             hvac_type
             for hvac_type in baseline_system_types_dict.keys()
             if len(baseline_system_types_dict[hvac_type]) > 0
@@ -57,7 +57,7 @@ class Section22Rule20(RuleDefinitionListIndexedBase):
         return any(
             [
                 available_type in APPLICABLE_SYS_TYPES
-                for available_type in available_type_lists
+                for available_type in available_type_list
             ]
         )
 

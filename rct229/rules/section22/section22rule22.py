@@ -1,8 +1,11 @@
+from rct229.data_fns.table_G3_5_3_fns import table_G3_5_3_lookup
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 from rct229.ruleset_functions.baseline_systems.baseline_system_util import HVAC_SYS
 from rct229.ruleset_functions.get_baseline_system_types import get_baseline_system_types
+from rct229.utils.pint_utils import CalcQ
+from rct229.utils.std_comparisons import std_equal
 
 APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_7,
@@ -18,16 +21,16 @@ APPLICABLE_SYS_TYPES = [
 ]
 
 
-class Section22Rule27(RuleDefinitionListIndexedBase):
-    """Rule 27 of ASHRAE 90.1-2019 Appendix G Section 22 (Hot water loop)"""
+class Section22Rule22(RuleDefinitionListIndexedBase):
+    """Rule 22 of ASHRAE 90.1-2019 Appendix G Section 22 (Chilled water loop)"""
 
     def __init__(self):
-        super(Section22Rule27, self).__init__(
+        super(Section22Rule22, self).__init__(
             rmrs_used=UserBaselineProposedVals(False, True, False),
-            each_rule=Section22Rule27.ChillerRule(),
+            each_rule=Section22Rule22.ChillerRule(),
             index_rmr="baseline",
-            id="22-27",
-            description="Each baseline chiller shall be modeled with separate condenser-water pump interlocked to operate with the associated chiller.",
+            id="22-22",
+            description="The baseline chiller efficiencies shall be modeled at the minimum efficiency levels for full load, in accordance with Tables G3.5.3.",
             rmr_context="ruleset_model_instances/0",
             list_path="chillers[*]",
         )
@@ -50,24 +53,35 @@ class Section22Rule27(RuleDefinitionListIndexedBase):
 
     class ChillerRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section22Rule27.ChillerRule, self).__init__(
+            super(Section22Rule22.ChillerRule, self).__init__(
                 rmrs_used=UserBaselineProposedVals(False, True, False),
                 required_fields={
-                    "$": ["is_condenser_water_pump_interlocked"],
+                    "$": ["compressor_type", "rated_capacity", "full_load_efficiency"],
                 },
             )
 
         def get_calc_vals(self, context, data=None):
             chiller_b = context.baseline
-            is_condenser_water_pump_interlocked = chiller_b[
-                "is_condenser_water_pump_interlocked"
-            ]
+            full_load_efficiency_b = chiller_b["full_load_efficiency"]
+
+            compressor_type_b = chiller_b["compressor_type"]
+            rated_capacity_b = chiller_b["rated_capacity"]
+
+            required_kw_ton_full_load_b = table_G3_5_3_lookup(
+                compressor_type_b, rated_capacity_b
+            )["minimum_full_load_efficiency"]
+
             return {
-                "is_condenser_water_pump_interlocked": is_condenser_water_pump_interlocked
+                "full_load_efficiency_b": CalcQ(
+                    "cooling_efficiency", full_load_efficiency_b
+                ),
+                "required_kw_ton_full_load_b": CalcQ(
+                    "cooling_efficiency", required_kw_ton_full_load_b
+                ),
             }
 
         def rule_check(self, context, calc_vals=None, data=None):
-            is_condenser_water_pump_interlocked = calc_vals[
-                "is_condenser_water_pump_interlocked"
-            ]
-            return is_condenser_water_pump_interlocked
+            full_load_efficiency_b = calc_vals["full_load_efficiency_b"]
+            required_kw_ton_full_load_b = calc_vals["required_kw_ton_full_load_b"]
+
+            return std_equal(full_load_efficiency_b, required_kw_ton_full_load_b)
