@@ -68,9 +68,16 @@ class Section22Rule8(RuleDefinitionListIndexedBase):
     def create_data(self, context, data):
         rmr_baseline = context.baseline
         rmi_b = rmr_baseline["ruleset_model_instances"][0]
-        loop_pump_dict = {
-            pump["loop_or_piping"]: pump for pump in find_all("$.pumps[*]", rmi_b)
-        }
+
+        loop_pump_dict = {}
+        for pump in find_all("$.pumps[*]", rmi_b):
+            if pump["loop_or_piping"] not in loop_pump_dict.keys():
+                loop_pump_dict[pump["loop_or_piping"]] = []
+            loop_pump_dict[pump["loop_or_piping"]].append(pump)
+
+        # loop_pump_dict = {
+        #     pump["loop_or_piping"]: pump for pump in find_all("$.pumps[*]", rmi_b)
+        # }
 
         chw_loop_capacity_dict = {}
         for chiller in find_all("$.chillers[*]", rmi_b):
@@ -84,21 +91,9 @@ class Section22Rule8(RuleDefinitionListIndexedBase):
         primary_secondary_loop_dict = get_primary_secondary_loops_dict(rmi_b)
         primary_loop_ids = primary_secondary_loop_dict.keys()
 
-        child_loop_speed_control_dict = {}
-        for primary_loop_id in primary_loop_ids:
-            for child_loop in find_all(
-                f'$.fluid_loops[*][?(@.id="{primary_loop_id}")].child_loops[*]', rmi_b
-            ):
-                child_loop_speed_control_dict[child_loop["id"]] = getattr_(
-                    loop_pump_dict[child_loop["id"]],
-                    "speed_control",
-                    "speed_control",
-                )
-
         return {
             "loop_pump_dict": loop_pump_dict,
             "chw_loop_capacity_dict": chw_loop_capacity_dict,
-            "child_loop_speed_control_dict": child_loop_speed_control_dict,
             "primary_loop_ids": primary_loop_ids,
         }
 
@@ -119,7 +114,7 @@ class Section22Rule8(RuleDefinitionListIndexedBase):
                 rmrs_used=UserBaselineProposedVals(False, True, False),
                 each_rule=Section22Rule8.PrimaryFluidLoopRule.SecondaryChildLoopRule(),
                 index_rmr="baseline",
-                list_path="$..child_loops[*]",
+                list_path="$.child_loops[*]",
             )
 
         class SecondaryChildLoopRule(RuleDefinitionBase):
@@ -132,9 +127,9 @@ class Section22Rule8(RuleDefinitionListIndexedBase):
 
             def get_calc_vals(self, context, data=None):
                 child_loop_b = context.baseline
-                child_loop_speed_control_dict = data["child_loop_speed_control_dict"]
-                secondary_pump_speed_control = child_loop_speed_control_dict[
-                    child_loop_b["id"]
+                loop_pump_dict = data["loop_pump_dict"]
+                secondary_pump_speed_control = loop_pump_dict[child_loop_b["id"]][
+                    "speed_control"
                 ]
 
                 return {"secondary_pump_speed_control": secondary_pump_speed_control}
