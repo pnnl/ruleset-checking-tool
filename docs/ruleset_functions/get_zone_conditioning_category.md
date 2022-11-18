@@ -25,7 +25,7 @@ Logic:
 
   - Get total central sensible cooling capacity for HVAC system:
   **[CH: The hvac system has at most one cooling_system, one heating_system, and one preheat_system. Also, I think we need to handle any of these systems missing.]**
-   `total_central_sensible_cool_capacity = SUM(cooling_system.sensible_cool_capacity for cooling_system in GET_COMPONENT_BY_ID(hvac_sys_id).cooling_system)`
+   `total_central_sensible_cool_capacity = SUM(cooling_system.rated_sensible_cool_capacity for cooling_system in GET_COMPONENT_BY_ID(hvac_sys_id).cooling_system)`
 
   - Get total central heating capacity for HVAC system: `total_central_heat_capacity = SUM(heating_system.heat_capacity for heating_system in GET_COMPONENT_BY_ID(hvac_sys_id).heating_system) + SUM(preheat_system.heat_capacity for preheat_system in GET_COMPONENT_BY_ID(hvac_sys_id).preheat_system)`
 
