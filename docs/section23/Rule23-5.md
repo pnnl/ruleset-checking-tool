@@ -1,7 +1,7 @@
 
 # Airside System - Rule 23-5  
 
-**Schema Version:** 0.0.10  
+**Schema Version:** 0.0.23  
 **Mandatory Rule:** True  
 **Rule ID:** 23-5  
 **Rule Description:** For baseline systems 6 and 8, Fans in parallel VAV fan-powered boxes shall be sized for 50% of the peak design primary air (from the VAV air-handling unit) flow rate and shall be modeled with 0.35 W/cfm fan power.  
@@ -34,7 +34,7 @@
 
   - For each terminal in zone: `for terminal_b in zone_b.terminals:`
 
-    - Get HVAC system serving terminal: `hvac_b = terminal_b.served_by_heating_ventilation_air_conditioning_systems`
+    - Get HVAC system serving terminal: `hvac_b = terminal_b.served_by_heating_ventilating_air_conditioning_system`
   
       - Check if HVAC system is type 6, 8, 8a, 6b, 8b: `if any(is_baseline_system_type(hvac_b, sys_type) == TRUE for sys_type in ["SYS-6", "SYS-8", "SYS-8A", "SYS-6B", "SYS-8B"]):`
 
