@@ -41,7 +41,7 @@
 
     - Get HVAC system serving terminal: `hvac_b = terminal_b.served_by_heating_ventilating_air_conditioning_system`
   
-      - Check if HVAC system is type 6, 8, 8a, 6b, 8b: `if hvac_b in eligible_systems:`
+      - Check if HVAC system is type 6, 8, 8a, 6b, 8b: `if hvac_b.id in eligible_systems:`
 
         **Rule Assertion:**
 
