@@ -16,12 +16,19 @@
     - Create a fan system object: `fan_system_p = hvac_p.fan_system`  
     - Get list of relief fan fan objects: `fan_sys_relief_list = list(fan_system_p.relief_fans)`  
     - Get list of exhaust fan fan objects: `fan_sys_exhaust_list = list(fan_system_p.exhaust_fans)`  
+    - Reset the total fan cfm variable: `total_fan_cfm = 0` 
+    - Reset the fan cfm variable: `fan_cfm = 0` 
     - Cycle through the list of relief fans: `for fan_p in fan_sys_relief_list:`  
         - Get the fan cfm: `fan_cfm = fan_p.design_airflow`  
-        - Check if the cfm is greater than the current value of Get_largest_exhaust_source_cfm, if it is then set Get_largest_exhaust_source_cfm equal to the cfm: `if fan_cfm > Get_largest_exhaust_source_cfm: Get_largest_exhaust_source_cfm = fan_cfm`  
+        - Total the fan cfm across the multiple fans: `total_fan_cfm = total_fan_cfm + fan_cfm`  
+    - Check if the total fan cfm is greater than the current value of Get_largest_exhaust_source_cfm, if it is then set Get_largest_exhaust_source_cfm equal to the cfm: `if total_fan_cfm > Get_largest_exhaust_source_cfm: Get_largest_exhaust_source_cfm = total_fan_cfm`  
+    - Reset the total fan cfm variable: `total_fan_cfm = 0`  
+    - Reset the fan cfm variable: `fan_cfm = 0` 
     - Cycle through the list of exhaust fans: `for fan_p in fan_sys_exhaust_list:`  
         - Get the fan cfm: `fan_cfm = fan_p.design_airflow`  
-        - Check if the cfm is greater than the current value of Get_largest_exhaust_source_cfm, if it is then set Get_largest_exhaust_source_cfm equal to the cfm: `if fan_cfm > Get_largest_exhaust_source_cfm: Get_largest_exhaust_source_cfm = fan_cfm`  
+        - Total the fan cfm across the multiple fans: `total_fan_cfm = total_fan_cfm + fan_cfm`  
+        - Check if the total fan cfm is greater than the current value of Get_largest_exhaust_source_cfm, if it is then set Get_largest_exhaust_source_cfm equal to the cfm: `if total_fan_cfm > Get_largest_exhaust_source_cfm: Get_largest_exhaust_source_cfm = total_fan_cfm`  
+- Reset the fan cfm variable: `fan_cfm = 0` 
 - Cycle through each zone in the P_RMI: `for zone_p in P_RMI...Zone:`  
     - Check if there are any exhaust fan objects associated with the zone: `if zone_b_obj.zonal_exhaust_fan != Null:`  
         - Get the fan cfm: `fan_cfm = zone_b_obj.zonal_exhaust_fan.design_airflow`    
