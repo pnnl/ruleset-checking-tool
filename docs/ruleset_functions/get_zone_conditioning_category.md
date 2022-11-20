@@ -1,6 +1,8 @@
 
 ## get_zone_conditioning_category
 
+**Schema Version:** 0.0.23
+
 Description: Determine the Zone Conditioning Category for each zone. This function would cycle through each zone in an RMR and categorize it as ‘conditioned’, 'semi-heated’, 'unenclosed' or ‘unconditioned’.  If ‘conditioned’ it will also categorize the space as ‘residential’ or ‘non-residential’.  
 
 Inputs:  
