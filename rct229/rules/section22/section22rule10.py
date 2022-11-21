@@ -124,31 +124,48 @@ class Section22Rule10(RuleDefinitionListIndexedBase):
 
             return child_loop_b["id"] in loop_pump_dictionary.keys()
 
-        class SecondaryChildLoopRule(RuleDefinitionBase):
+        class SecondaryChildLoopRule(RuleDefinitionListIndexedBase):
             def __init__(self):
                 super(
                     Section22Rule10.PrimaryFluidLoopRule.SecondaryChildLoopRule, self
                 ).__init__(
                     rmrs_used=UserBaselineProposedVals(False, True, False),
+                    index_rmr="baseline",
+                    each_rule=Section22Rule10.PrimaryFluidLoopRule.SecondaryChildLoopRule.PumpTypeRule(),
                 )
 
-            def get_calc_vals(self, context, data=None):
+            def create_context_list(self, context, data=None):
                 child_loop_b = context.baseline
                 loop_pump_dictionary = data["loop_pump_dictionary"]
-                secondary_pump_speed_control = getattr_(
-                    loop_pump_dictionary[child_loop_b["id"]][0],
-                    "speed_control",
-                    "speed_control",
-                )
-                target_secondary_pump_type = data["target_secondary_pump_type"]
 
-                return {
-                    "secondary_pump_speed_control": secondary_pump_speed_control,
-                    "target_secondary_pump_type": target_secondary_pump_type,
-                }
+                return [
+                    UserBaselineProposedVals(None, pump_type, None)
+                    for pump_type in loop_pump_dictionary[child_loop_b["id"]]
+                ]
 
-            def rule_check(self, context, calc_vals=None, data=None):
-                secondary_pump_speed_control = calc_vals["secondary_pump_speed_control"]
-                target_secondary_pump_type = calc_vals["target_secondary_pump_type"]
+            class PumpTypeRule(RuleDefinitionBase):
+                def __init__(self):
+                    super(
+                        Section22Rule10.PrimaryFluidLoopRule.SecondaryChildLoopRule.PumpTypeRule,
+                        self,
+                    ).__init__(
+                        rmrs_used=UserBaselineProposedVals(False, True, False),
+                    )
 
-                return secondary_pump_speed_control == target_secondary_pump_type
+                def get_calc_vals(self, context, data=None):
+                    pump_type_b = context.baseline
+                    secondary_pump_speed_control = pump_type_b["speed_control"]
+                    target_secondary_pump_type = data["target_secondary_pump_type"]
+
+                    return {
+                        "secondary_pump_speed_control": secondary_pump_speed_control,
+                        "target_secondary_pump_type": target_secondary_pump_type,
+                    }
+
+                def rule_check(self, context, calc_vals=None, data=None):
+                    secondary_pump_speed_control = calc_vals[
+                        "secondary_pump_speed_control"
+                    ]
+                    target_secondary_pump_type = calc_vals["target_secondary_pump_type"]
+
+                    return secondary_pump_speed_control == target_secondary_pump_type
