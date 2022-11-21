@@ -1,14 +1,14 @@
 {
-    "rule-22-14-a": {
+    "rule-22-11-a": {
         "Section": 22,
-        "Rule": 14,
+        "Rule": 11,
         "Test": "a",
-        "test_description": "Baseline building is system type 7 and is correctly modeled with the design temperature rise range",
+        "test_description": "Baseline building is system type 7 and is correctly modeled with the pump power per flow rate",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "22-14",
-            "ruleset_reference": "G3.1.3.11",
-            "rule_description": "The baseline heat-rejection device shall have a design temperature rise of 10\u00b0F.",
+            "rule_id": "22-11",
+            "ruleset_reference": "G3.1.3.10",
+            "rule_description": "For Baseline chilled-water system that does not use purchased chilled water, variable-flow secondary pump shall be modeled as 13W/gpm at design conditions.",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
@@ -69,7 +69,7 @@
                                                 "cooling_system": {
                                                     "id": "CHW Coil 1",
                                                     "cooling_system_type": "FLUID_LOOP",
-                                                    "chilled_water_loop": "Chiller Loop 1"
+                                                    "chilled_water_loop": "Cooling Child Loop 1"
                                                 },
                                                 "fan_system": {
                                                     "id": "VAV Fan System 1",
@@ -129,16 +129,13 @@
                             {
                                 "id": "Chiller Loop 1",
                                 "type": "COOLING",
-                                "cooling_or_condensing_design_and_control": {
-                                    "id": "CCDC 1"
-                                }
-                            }
-                        ],
-                        "heat_rejections": [
-                            {
-                                "id": "Heat Rejection 1",
-                                "loop": "Chiller Loop 1",
-                                "range": 5.555555555555555
+                                "child_loops": [
+                                    {
+                                        "id": "Cooling Child Loop 1",
+                                        "pump_power_per_flow_rate": 206.0766182298547,
+                                        "type": "COOLING"
+                                    }
+                                ]
                             }
                         ]
                     }
@@ -146,16 +143,16 @@
             }
         }
     },
-    "rule-22-14-b": {
+    "rule-22-11-b": {
         "Section": 22,
-        "Rule": 14,
+        "Rule": 11,
         "Test": "b",
-        "test_description": "Baseline building is system type 7 and is incorrectly modeled with the design temperature rise range",
+        "test_description": "Baseline building is system type 7 and is incorrectly modeled with the pump power per flow rate",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "22-14",
-            "ruleset_reference": "G3.1.3.11",
-            "rule_description": "The baseline heat-rejection device shall have a design temperature rise of 10\u00b0F.",
+            "rule_id": "22-11",
+            "ruleset_reference": "G3.1.3.10",
+            "rule_description": "For Baseline chilled-water system that does not use purchased chilled water, variable-flow secondary pump shall be modeled as 13W/gpm at design conditions.",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
@@ -216,7 +213,7 @@
                                                 "cooling_system": {
                                                     "id": "CHW Coil 1",
                                                     "cooling_system_type": "FLUID_LOOP",
-                                                    "chilled_water_loop": "Chiller Loop 1"
+                                                    "chilled_water_loop": "Cooling Child Loop 1"
                                                 },
                                                 "fan_system": {
                                                     "id": "VAV Fan System 1",
@@ -276,16 +273,13 @@
                             {
                                 "id": "Chiller Loop 1",
                                 "type": "COOLING",
-                                "cooling_or_condensing_design_and_control": {
-                                    "id": "CCDC 1"
-                                }
-                            }
-                        ],
-                        "heat_rejections": [
-                            {
-                                "id": "Heat Rejection 1",
-                                "loop": "Chiller Loop 1",
-                                "range": 8.333333333333334
+                                "child_loops": [
+                                    {
+                                        "id": "Cooling Child Loop 1",
+                                        "pump_power_per_flow_rate": 237.78071334214002,
+                                        "type": "COOLING"
+                                    }
+                                ]
                             }
                         ]
                     }

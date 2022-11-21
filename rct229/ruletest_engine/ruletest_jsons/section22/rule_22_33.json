@@ -1,14 +1,14 @@
 {
-    "rule-22-14-a": {
+    "rule-22-33-a": {
         "Section": 22,
-        "Rule": 14,
+        "Rule": 33,
         "Test": "a",
-        "test_description": "Baseline building is system type 7 and is correctly modeled with the design temperature rise range",
+        "test_description": "Baseline building is system type 7 and is correctly modeled with the number of primary/secondary loops",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "22-14",
-            "ruleset_reference": "G3.1.3.11",
-            "rule_description": "The baseline heat-rejection device shall have a design temperature rise of 10\u00b0F.",
+            "rule_id": "22-33",
+            "ruleset_reference": "Section G3.1.3.2",
+            "rule_description": "Baseline chilled water system that does not use purchased chilled water must only have no more than one CHW plant.",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
@@ -69,7 +69,7 @@
                                                 "cooling_system": {
                                                     "id": "CHW Coil 1",
                                                     "cooling_system_type": "FLUID_LOOP",
-                                                    "chilled_water_loop": "Chiller Loop 1"
+                                                    "chilled_water_loop": "Cooling Child Loop 1"
                                                 },
                                                 "fan_system": {
                                                     "id": "VAV Fan System 1",
@@ -129,16 +129,12 @@
                             {
                                 "id": "Chiller Loop 1",
                                 "type": "COOLING",
-                                "cooling_or_condensing_design_and_control": {
-                                    "id": "CCDC 1"
-                                }
-                            }
-                        ],
-                        "heat_rejections": [
-                            {
-                                "id": "Heat Rejection 1",
-                                "loop": "Chiller Loop 1",
-                                "range": 5.555555555555555
+                                "child_loops": [
+                                    {
+                                        "id": "Cooling Child Loop 1",
+                                        "type": "COOLING"
+                                    }
+                                ]
                             }
                         ]
                     }
@@ -146,16 +142,16 @@
             }
         }
     },
-    "rule-22-14-b": {
+    "rule-22-33-b": {
         "Section": 22,
-        "Rule": 14,
+        "Rule": 33,
         "Test": "b",
-        "test_description": "Baseline building is system type 7 and is incorrectly modeled with the design temperature rise range",
+        "test_description": "Baseline building is system type 7 and is incorrectly modeled with the number of primary/secondary loops",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "22-14",
-            "ruleset_reference": "G3.1.3.11",
-            "rule_description": "The baseline heat-rejection device shall have a design temperature rise of 10\u00b0F.",
+            "rule_id": "22-33",
+            "ruleset_reference": "Section G3.1.3.2",
+            "rule_description": "Baseline chilled water system that does not use purchased chilled water must only have no more than one CHW plant.",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
@@ -216,7 +212,7 @@
                                                 "cooling_system": {
                                                     "id": "CHW Coil 1",
                                                     "cooling_system_type": "FLUID_LOOP",
-                                                    "chilled_water_loop": "Chiller Loop 1"
+                                                    "chilled_water_loop": "Cooling Child Loop 1"
                                                 },
                                                 "fan_system": {
                                                     "id": "VAV Fan System 1",
@@ -276,16 +272,16 @@
                             {
                                 "id": "Chiller Loop 1",
                                 "type": "COOLING",
-                                "cooling_or_condensing_design_and_control": {
-                                    "id": "CCDC 1"
-                                }
-                            }
-                        ],
-                        "heat_rejections": [
-                            {
-                                "id": "Heat Rejection 1",
-                                "loop": "Chiller Loop 1",
-                                "range": 8.333333333333334
+                                "child_loops": [
+                                    {
+                                        "id": "Cooling Child Loop 1",
+                                        "type": "COOLING"
+                                    },
+                                    {
+                                        "id": "Cooling Child Loop 2",
+                                        "type": "COOLING"
+                                    }
+                                ]
                             }
                         ]
                     }
