@@ -48,8 +48,8 @@ class Section22Rule4(RuleDefinitionListIndexedBase):
     def is_applicable(self, context, data=None):
         rmi_b = context.baseline
         baseline_system_types_dict = get_baseline_system_types(rmi_b)
-        # create a list contains all HVAC systems that are modeled in the rmi_b
-        available_type_lists = [
+        # create a list containing all HVAC systems that are modeled in the rmi_b
+        available_type_list = [
             hvac_type
             for hvac_type in baseline_system_types_dict.keys()
             if len(baseline_system_types_dict[hvac_type]) > 0
@@ -57,12 +57,12 @@ class Section22Rule4(RuleDefinitionListIndexedBase):
         return any(
             [
                 available_type in APPLICABLE_SYS_TYPES
-                for available_type in available_type_lists
+                for available_type in available_type_list
             ]
         ) and any(
             [
                 available_type not in NOT_APPLICABLE_SYS_TYPES
-                for available_type in available_type_lists
+                for available_type in available_type_list
             ]
         )
 
@@ -110,14 +110,26 @@ class Section22Rule4(RuleDefinitionListIndexedBase):
                 "outdoor_high_for_loop_supply_temperature_reset": CalcQ(
                     "temperature", outdoor_high_for_loop_supply_temperature_reset
                 ),
+                "required_outdoor_high_for_loop_supply_temperature_reset": CalcQ(
+                    "temperature", REQUIRED_OUTDOOR_HIGH_LOOP_SUPPLY_TEMP_RESET
+                ),
                 "outdoor_low_for_loop_supply_temperature_reset": CalcQ(
                     "temperature", outdoor_low_for_loop_supply_temperature_reset
+                ),
+                "required_outdoor_low_for_loop_supply_temperature_reset": CalcQ(
+                    "temperature", REQUIRED_OUTDOOR_LOW_LOOP_SUPPLY_TEMP_RESET
                 ),
                 "loop_supply_temperature_at_outdoor_high": CalcQ(
                     "temperature", loop_supply_temperature_at_outdoor_high
                 ),
+                "required_loop_supply_temperature_at_outdoor_high": CalcQ(
+                    "temperature", REQUIRED_LOOP_SUPPLY_TEMP_OUTDOOR_HIGH
+                ),
                 "loop_supply_temperature_at_outdoor_low": CalcQ(
                     "temperature", loop_supply_temperature_at_outdoor_low
+                ),
+                "required_loop_supply_temperature_at_outdoor_low": CalcQ(
+                    "temperature", REQUIRED_LOOP_SUPPLY_TEMP_OUTDOOR_LOW
                 ),
             }
 
@@ -125,31 +137,47 @@ class Section22Rule4(RuleDefinitionListIndexedBase):
             outdoor_high_for_loop_supply_temperature_reset = calc_vals[
                 "outdoor_high_for_loop_supply_temperature_reset"
             ]
+            required_outdoor_high_for_loop_supply_temperature_reset = calc_vals[
+                "required_outdoor_high_for_loop_supply_temperature_reset"
+            ]
             outdoor_low_for_loop_supply_temperature_reset = calc_vals[
                 "outdoor_low_for_loop_supply_temperature_reset"
+            ]
+            required_outdoor_low_for_loop_supply_temperature_reset = calc_vals[
+                "required_outdoor_low_for_loop_supply_temperature_reset"
             ]
             loop_supply_temperature_at_outdoor_high = calc_vals[
                 "loop_supply_temperature_at_outdoor_high"
             ]
+            required_loop_supply_temperature_at_outdoor_high = calc_vals[
+                "required_loop_supply_temperature_at_outdoor_high"
+            ]
             loop_supply_temperature_at_outdoor_low = calc_vals[
                 "loop_supply_temperature_at_outdoor_low"
+            ]
+            required_loop_supply_temperature_at_outdoor_low = calc_vals[
+                "requried_loop_supply_temperature_at_outdoor_low"
             ]
 
             return (
                 std_equal(
                     outdoor_high_for_loop_supply_temperature_reset.to(ureg.kelvin),
-                    REQUIRED_OUTDOOR_HIGH_LOOP_SUPPLY_TEMP_RESET.to(ureg.kelvin),
+                    required_outdoor_high_for_loop_supply_temperature_reset.to(
+                        ureg.kelvin
+                    ),
                 )
                 and std_equal(
                     outdoor_low_for_loop_supply_temperature_reset.to(ureg.kelvin),
-                    REQUIRED_OUTDOOR_LOW_LOOP_SUPPLY_TEMP_RESET.to(ureg.kelvin),
+                    required_outdoor_low_for_loop_supply_temperature_reset.to(
+                        ureg.kelvin
+                    ),
                 )
                 and std_equal(
                     loop_supply_temperature_at_outdoor_high.to(ureg.kelvin),
-                    REQUIRED_LOOP_SUPPLY_TEMP_OUTDOOR_HIGH.to(ureg.kelvin),
+                    required_loop_supply_temperature_at_outdoor_high.to(ureg.kelvin),
                 )
                 and std_equal(
                     loop_supply_temperature_at_outdoor_low.to(ureg.kelvin),
-                    REQUIRED_LOOP_SUPPLY_TEMP_OUTDOOR_LOW.to(ureg.kelvin),
+                    required_loop_supply_temperature_at_outdoor_low.to(ureg.kelvin),
                 )
             )

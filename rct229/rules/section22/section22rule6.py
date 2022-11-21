@@ -36,8 +36,8 @@ class Section22Rule6(RuleDefinitionListIndexedBase):
     def is_applicable(self, context, data=None):
         rmi_b = context.baseline
         baseline_system_types_dict = get_baseline_system_types(rmi_b)
-        # create a list contains all HVAC systems that are modeled in the rmi_b
-        available_type_lists = [
+        # create a list containing all HVAC systems that are modeled in the rmi_b
+        available_type_list = [
             hvac_type
             for hvac_type in baseline_system_types_dict.keys()
             if len(baseline_system_types_dict[hvac_type]) > 0
@@ -45,7 +45,7 @@ class Section22Rule6(RuleDefinitionListIndexedBase):
         return any(
             [
                 available_type in APPLICABLE_SYS_TYPES
-                for available_type in available_type_lists
+                for available_type in available_type_list
             ]
         )
 
@@ -80,15 +80,21 @@ class Section22Rule6(RuleDefinitionListIndexedBase):
             return {
                 "loop_supply_temperature_at_low_load": CalcQ(
                     "temperature", loop_supply_temperature_at_low_load
-                )
+                ),
+                "required_loop_supply_temperature_at_low_load": CalcQ(
+                    "temperature", REQUIRED_LOOP_SUPPLY_TEMP_AT_LOW_LOAD
+                ),
             }
 
         def rule_check(self, context, calc_vals=None, data=None):
             loop_supply_temperature_at_low_load = calc_vals[
                 "loop_supply_temperature_at_low_load"
             ]
+            required_loop_supply_temperature_at_low_load = calc_vals[
+                "required_loop_supply_temperature_at_low_load"
+            ]
 
             return std_equal(
                 loop_supply_temperature_at_low_load.to(ureg.kelvin),
-                REQUIRED_LOOP_SUPPLY_TEMP_AT_LOW_LOAD.to(ureg.kelvin),
+                required_loop_supply_temperature_at_low_load.to(ureg.kelvin),
             )
