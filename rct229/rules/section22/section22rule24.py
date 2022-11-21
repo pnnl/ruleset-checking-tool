@@ -42,7 +42,7 @@ class Section22Rule24(RuleDefinitionListIndexedBase):
         rmi_b = context.baseline
         baseline_system_types_dict = get_baseline_system_types(rmi_b)
         # create a list contains all HVAC systems that are modeled in the rmi_b
-        available_type_lists = [
+        available_type_list = [
             hvac_type
             for hvac_type in baseline_system_types_dict.keys()
             if len(baseline_system_types_dict[hvac_type]) > 0
@@ -53,7 +53,7 @@ class Section22Rule24(RuleDefinitionListIndexedBase):
             any(
                 [
                     available_type in APPLICABLE_SYS_TYPES
-                    for available_type in available_type_lists
+                    for available_type in available_type_list
                 ]
             )
             and primary_secondary_loop_dict
@@ -64,10 +64,11 @@ class Section22Rule24(RuleDefinitionListIndexedBase):
         primary_secondary_loops_dict = get_primary_secondary_loops_dict(rmi_b)
         return {"primary_secondary_loops_dict": primary_secondary_loops_dict}
 
+    # filter to only keep loops that have secondary loop(s)
     def list_filter(self, context_item, data):
         pump_b = context_item.baseline
-        primary_secondary_loops_dict = data["primary_secondary_loops_dict"]
-        return pump_b["loop_or_piping"] in primary_secondary_loops_dict.keys()
+        primary_loop_ids = data["primary_secondary_loops_dict"].keys()
+        return pump_b["loop_or_piping"] in primary_loop_ids
 
     class PrimaryPumpRule(RuleDefinitionBase):
         def __init__(self):
