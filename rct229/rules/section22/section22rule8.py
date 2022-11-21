@@ -75,10 +75,6 @@ class Section22Rule8(RuleDefinitionListIndexedBase):
                 loop_pump_dict[pump["loop_or_piping"]] = []
             loop_pump_dict[pump["loop_or_piping"]].append(pump)
 
-        # loop_pump_dict = {
-        #     pump["loop_or_piping"]: pump for pump in find_all("$.pumps[*]", rmi_b)
-        # }
-
         chw_loop_capacity_dict = {}
         for chiller in find_all("$.chillers[*]", rmi_b):
             cooling_loop_id = chiller["cooling_loop"]
@@ -117,24 +113,48 @@ class Section22Rule8(RuleDefinitionListIndexedBase):
                 list_path="$.child_loops[*]",
             )
 
-        class SecondaryChildLoopRule(RuleDefinitionBase):
+        class SecondaryChildLoopRule(RuleDefinitionListIndexedBase):
             def __init__(self):
                 super(
                     Section22Rule8.PrimaryFluidLoopRule.SecondaryChildLoopRule, self
                 ).__init__(
                     rmrs_used=UserBaselineProposedVals(False, True, False),
+                    index_rmr="baseline",
+                    each_rule=Section22Rule8.PrimaryFluidLoopRule.SecondaryChildLoopRule.PumpTypeRule(),
                 )
 
-            def get_calc_vals(self, context, data=None):
+            def create_context_list(self, context, data=None):
                 child_loop_b = context.baseline
                 loop_pump_dict = data["loop_pump_dict"]
-                secondary_pump_speed_control = loop_pump_dict[child_loop_b["id"]][
-                    "speed_control"
+
+                return [
+                    UserBaselineProposedVals(None, pump_type, None)
+                    for pump_type in loop_pump_dict[child_loop_b["id"]]
                 ]
 
-                return {"secondary_pump_speed_control": secondary_pump_speed_control}
+            class PumpTypeRule(RuleDefinitionBase):
+                def __init__(self):
+                    super(
+                        Section22Rule8.PrimaryFluidLoopRule.SecondaryChildLoopRule.PumpTypeRule,
+                        self,
+                    ).__init__(
+                        rmrs_used=UserBaselineProposedVals(False, True, False),
+                    )
 
-            def rule_check(self, context, calc_vals=None, data=None):
-                secondary_pump_speed_control = calc_vals["secondary_pump_speed_control"]
+                def get_calc_vals(self, context, data=None):
+                    pump_type_b = context.baseline
+                    secondary_pump_speed_control = pump_type_b["speed_control"]
 
-                return secondary_pump_speed_control == PUMP_SPEED_CONTROL.VARIABLE_SPEED
+                    return {
+                        "secondary_pump_speed_control": secondary_pump_speed_control
+                    }
+
+                def rule_check(self, context, calc_vals=None, data=None):
+                    secondary_pump_speed_control = calc_vals[
+                        "secondary_pump_speed_control"
+                    ]
+
+                    return (
+                        secondary_pump_speed_control
+                        == PUMP_SPEED_CONTROL.VARIABLE_SPEED
+                    )
