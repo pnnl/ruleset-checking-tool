@@ -67,11 +67,11 @@ class Section22Rule10(RuleDefinitionListIndexedBase):
     def create_data(self, context, data):
         rmi_b = context.baseline
 
-        loop_pump_dictionary = {}
+        loop_pump_dict = {}
         for pump in find_all("$.pumps[*]", rmi_b):
-            if pump["loop_or_piping"] not in loop_pump_dictionary.keys():
-                loop_pump_dictionary[pump["loop_or_piping"]] = []
-            loop_pump_dictionary[pump["loop_or_piping"]].append(pump)
+            if pump["loop_or_piping"] not in loop_pump_dict.keys():
+                loop_pump_dict[pump["loop_or_piping"]] = []
+            loop_pump_dict[pump["loop_or_piping"]].append(pump)
 
         chw_loop_capacity_dict = {}
         for chiller in find_all("$.chillers[*]", rmi_b):
@@ -84,7 +84,7 @@ class Section22Rule10(RuleDefinitionListIndexedBase):
         primary_secondary_loop_dict = get_primary_secondary_loops_dict(rmi_b)
 
         return {
-            "loop_pump_dictionary": loop_pump_dictionary,
+            "loop_pump_dict": loop_pump_dict,
             "chw_loop_capacity_dict": chw_loop_capacity_dict,
             "primary_secondary_loop_dict": primary_secondary_loop_dict,
         }
@@ -120,9 +120,9 @@ class Section22Rule10(RuleDefinitionListIndexedBase):
 
         def list_filter(self, context_item, data):
             child_loop_b = context_item.baseline
-            loop_pump_dictionary = data["loop_pump_dictionary"]
+            loop_pump_dict = data["loop_pump_dict"]
 
-            return child_loop_b["id"] in loop_pump_dictionary.keys()
+            return child_loop_b["id"] in loop_pump_dict.keys()
 
         class SecondaryChildLoopRule(RuleDefinitionListIndexedBase):
             def __init__(self):
@@ -136,11 +136,11 @@ class Section22Rule10(RuleDefinitionListIndexedBase):
 
             def create_context_list(self, context, data=None):
                 child_loop_b = context.baseline
-                loop_pump_dictionary = data["loop_pump_dictionary"]
+                loop_pump_dict = data["loop_pump_dict"]
 
                 return [
                     UserBaselineProposedVals(None, pump_type, None)
-                    for pump_type in loop_pump_dictionary[child_loop_b["id"]]
+                    for pump_type in loop_pump_dict[child_loop_b["id"]]
                 ]
 
             class PumpTypeRule(RuleDefinitionBase):
