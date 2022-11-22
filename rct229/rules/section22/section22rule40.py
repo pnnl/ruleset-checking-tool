@@ -61,7 +61,6 @@ class Section22Rule40(RuleDefinitionBase):
 
     def rule_check(self, context, calc_vals=None, data=None):
         baseline_system_types_dict = calc_vals["baseline_system_types_dict"]
-
         available_type_list = [
             hvac_type
             for hvac_type in baseline_system_types_dict.keys()
@@ -69,14 +68,8 @@ class Section22Rule40(RuleDefinitionBase):
         ]
         return not any(
             [
-                available_type in AIR_SIDE_SYSTEMS_USING_COOLING_SOURCE_OTHER_THAN_PURCHASED_CHILLED_WATER
+                available_type
+                in AIR_SIDE_SYSTEMS_USING_COOLING_SOURCE_OTHER_THAN_PURCHASED_CHILLED_WATER
                 for available_type in available_type_list
             ]
         )
-
-
-        #
-        # return not any(
-        #     sys_type in baseline_hvac_system_types
-        #     for sys_type in AIR_SIDE_SYSTEMS_USING_COOLING_SOURCE_OTHER_THAN_PURCHASED_CHILLED_WATER
-        # )
