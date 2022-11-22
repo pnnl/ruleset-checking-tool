@@ -138,7 +138,7 @@
                             {
                                 "id": "Heat Rejection 1",
                                 "loop": "Chiller Loop 1",
-                                "range": -12.222222222222172
+                                "range": 5.555555555555555
                             }
                         ]
                     }
@@ -285,7 +285,7 @@
                             {
                                 "id": "Heat Rejection 1",
                                 "loop": "Chiller Loop 1",
-                                "range": -9.4444444444444
+                                "range": 8.333333333333334
                             }
                         ]
                     }
