@@ -50,12 +50,15 @@ class Section22Rule36(RuleDefinitionListIndexedBase):
         ]
         primary_secondary_loop_dict = get_primary_secondary_loops_dict(rmi_b)
         # primary secondary loop
-        return any(
-            [
-                available_type in APPLICABLE_SYS_TYPES
-                for available_type in available_sys_types
-            ]
-        ) and len(primary_secondary_loop_dict.keys()) > 0
+        return (
+            any(
+                [
+                    available_type in APPLICABLE_SYS_TYPES
+                    for available_type in available_sys_types
+                ]
+            )
+            and len(primary_secondary_loop_dict.keys()) > 0
+        )
 
     def create_data(self, context, data):
         rmi_b = context.baseline
