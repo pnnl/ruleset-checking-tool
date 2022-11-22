@@ -37,7 +37,7 @@ class Section22Rule25(RuleDefinitionListIndexedBase):
     def __init__(self):
         super(Section22Rule25, self).__init__(
             rmrs_used=UserBaselineProposedVals(False, True, False),
-            each_rule=Section22Rule25.PrimaryCoolingFluidLoop(),
+            each_rule=Section22Rule25.PrimaryCoolingFluidLoopRule(),
             index_rmr="baseline",
             id="22-25",
             description="For chilled-water systems served by chiller(s) and does not serve baseline System-11, the baseline building constant-volume primary pump power shall be modeled as 9 W/gpm.",
@@ -48,8 +48,8 @@ class Section22Rule25(RuleDefinitionListIndexedBase):
     def is_applicable(self, context, data=None):
         rmi_b = context.baseline
         baseline_system_types_dict = get_baseline_system_types(rmi_b)
-        # create a list contains all HVAC systems that are modeled in the rmi_b
-        available_type_lists = [
+        # create a list containing all HVAC systems that are modeled in the rmi_b
+        available_sys_types = [
             hvac_type
             for hvac_type in baseline_system_types_dict.keys()
             if len(baseline_system_types_dict[hvac_type]) > 0
@@ -60,13 +60,13 @@ class Section22Rule25(RuleDefinitionListIndexedBase):
             any(
                 [
                     available_type in APPLICABLE_SYS_TYPES
-                    for available_type in available_type_lists
+                    for available_type in available_sys_types
                 ]
             )
-            and any(
+            and not any(
                 [
-                    available_type not in NOT_APPLICABLE_SYS_TYPES
-                    for available_type in available_type_lists
+                    available_type in NOT_APPLICABLE_SYS_TYPES
+                    for available_type in available_sys_types
                 ]
             )
             and primary_secondary_loop_dict
@@ -80,11 +80,12 @@ class Section22Rule25(RuleDefinitionListIndexedBase):
     def list_filter(self, context_item, data):
         fluid_loop = context_item.baseline
         primary_secondary_loops_dict = data["primary_secondary_loops_dict"]
-        return fluid_loop["id"] in primary_secondary_loops_dict.keys()
+        primary_loop_ids = primary_secondary_loops_dict.keys()
+        return fluid_loop["id"] in primary_loop_ids
 
-    class PrimaryCoolingFluidLoop(RuleDefinitionBase):
+    class PrimaryCoolingFluidLoopRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section22Rule25.PrimaryCoolingFluidLoop, self).__init__(
+            super(Section22Rule25.PrimaryCoolingFluidLoopRule, self).__init__(
                 rmrs_used=UserBaselineProposedVals(False, True, False),
                 required_fields={
                     "$": ["pump_power_per_flow_rate"],
