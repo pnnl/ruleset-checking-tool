@@ -1,6 +1,6 @@
-from rct229.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.are_all_terminal_chw_loops_purcahsed_cooling import \
-    are_all_terminal_chw_loops_purchased_cooling
-
+from rct229.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.are_all_terminal_chw_loops_purcahsed_cooling import (
+    are_all_terminal_chw_loops_purchased_cooling,
+)
 
 TEST_RMD = {
     "id": "test_rmd",
@@ -40,8 +40,7 @@ TEST_RMD_FULL = {"id": "229_01", "ruleset_model_instances": [TEST_RMD]}
 
 def test__all_terminal_cooling_loops_purchased_cooling_all_are_cooling():
     assert (
-        are_all_terminal_chw_loops_purchased_cooling(TEST_RMD, ["terminal_1"])
-        == True
+        are_all_terminal_chw_loops_purchased_cooling(TEST_RMD, ["terminal_1"]) == True
     )
 
 
@@ -56,8 +55,5 @@ def test__all_terminal_cooling_loops_purchased_cooling_not_all_are():
 
 def test__all_terminal_cooling_loops_purchased_cooling_null():
     assert (
-        are_all_terminal_chw_loops_purchased_cooling(
-            TEST_RMD, ["terminal_3"]
-        )
-        == False
+        are_all_terminal_chw_loops_purchased_cooling(TEST_RMD, ["terminal_3"]) == False
     )

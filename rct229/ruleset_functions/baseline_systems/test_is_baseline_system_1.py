@@ -3,7 +3,9 @@
 # hvac_id = "PTAC 1b" => Sys_1b, [Thermal Zone 1b], [PTAC Terminal 1b]
 # hvac_id = "PTAC 1c" => Sys_1c, [Thermal Zone 1c], [PTAC Terminal 1c]
 from rct229.ruleset_functions.baseline_systems.baseline_system_util import HVAC_SYS
-from rct229.ruleset_functions.baseline_systems.is_baseline_system_1 import is_baseline_system_1
+from rct229.ruleset_functions.baseline_systems.is_baseline_system_1 import (
+    is_baseline_system_1,
+)
 from rct229.schema.validate import schema_validate_rmr
 
 SYS_1_RMD = {
@@ -54,9 +56,7 @@ SYS_1_RMD = {
                                             "id": "PTAC Terminal 1a",
                                             "is_supply_ducted": False,
                                             "type": "CONSTANT_AIR_VOLUME",
-                                            "fan": {
-                                              "id": "fan 1a"
-                                            },
+                                            "fan": {"id": "fan 1a"},
                                             "heating_source": "HOT_WATER",
                                             "heating_from_loop": "Boiler Loop 1",
                                             "cooling_source": "CHILLED_WATER",
@@ -77,9 +77,7 @@ SYS_1_RMD = {
                                             "id": "PTAC Terminal 1c",
                                             "is_supply_ducted": False,
                                             "type": "CONSTANT_AIR_VOLUME",
-                                            "fan": {
-                                                "id": "fan 1c"
-                                            },
+                                            "fan": {"id": "fan 1c"},
                                             "heating_source": "HOT_WATER",
                                             "heating_from_loop": "Purchased HW Loop 1",
                                             "cooling_source": "CHILLED_WATER",
@@ -196,7 +194,6 @@ def test__TEST_RMD_baseline_system_1__is_valid():
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"
-
 
 
 def test_is_baseline_system_1_true():

@@ -19,4 +19,9 @@ def do_all_terminals_have_one_fan(rmi_b, terminal_unit_id_list):
         False: any terminal unit a no fan data.
     """
 
-    return all([find_exactly_one_terminal_unit(rmi_b, terminal_b_id).get("fan") is not None for terminal_b_id in terminal_unit_id_list])
+    return all(
+        [
+            find_exactly_one_terminal_unit(rmi_b, terminal_b_id).get("fan") is not None
+            for terminal_b_id in terminal_unit_id_list
+        ]
+    )

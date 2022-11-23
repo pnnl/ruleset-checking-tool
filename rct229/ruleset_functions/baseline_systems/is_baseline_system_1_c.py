@@ -1,21 +1,31 @@
 from rct229.data.schema_enums import schema_enums
-from rct229.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.are_all_terminal_chw_loops_purcahsed_cooling import \
-    are_all_terminal_chw_loops_purchased_cooling
-from rct229.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.are_all_terminal_cool_sources_chilled_water import \
-    are_all_terminal_cool_sources_chilled_water
-from rct229.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.are_all_terminal_heat_sources_hot_water import \
-    are_all_terminal_heat_sources_hot_water
-from rct229.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.are_all_terminal_heating_loops_purchased_heating import \
-    are_all_terminal_heating_loops_purchased_heating
-from rct229.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.are_all_terminal_types_CAV_with_none_equal_to_null import \
-    are_all_terminal_types_cav_with_none_equal_to_null
-from rct229.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.do_all_terminals_have_one_fan import \
-    do_all_terminals_have_one_fan
-from rct229.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.does_each_zone_have_only_one_terminal import \
-    does_each_zone_have_only_one_terminal
-from rct229.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.is_hvac_sys_cooling_type_none import \
-    is_hvac_sys_cooling_type_none
-from rct229.ruleset_functions.baseline_systems.baseline_system_util import find_exactly_one_hvac_system
+from rct229.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.are_all_terminal_chw_loops_purcahsed_cooling import (
+    are_all_terminal_chw_loops_purchased_cooling,
+)
+from rct229.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.are_all_terminal_cool_sources_chilled_water import (
+    are_all_terminal_cool_sources_chilled_water,
+)
+from rct229.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.are_all_terminal_heat_sources_hot_water import (
+    are_all_terminal_heat_sources_hot_water,
+)
+from rct229.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.are_all_terminal_heating_loops_purchased_heating import (
+    are_all_terminal_heating_loops_purchased_heating,
+)
+from rct229.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.are_all_terminal_types_CAV_with_none_equal_to_null import (
+    are_all_terminal_types_cav_with_none_equal_to_null,
+)
+from rct229.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.do_all_terminals_have_one_fan import (
+    do_all_terminals_have_one_fan,
+)
+from rct229.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.does_each_zone_have_only_one_terminal import (
+    does_each_zone_have_only_one_terminal,
+)
+from rct229.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.is_hvac_sys_cooling_type_none import (
+    is_hvac_sys_cooling_type_none,
+)
+from rct229.ruleset_functions.baseline_systems.baseline_system_util import (
+    find_exactly_one_hvac_system,
+)
 
 HEATING_SYSTEM = schema_enums["HeatingSystemOptions"]
 
@@ -45,26 +55,32 @@ def is_baseline_system_1_c(rmi_b, hvac_b_id, terminal_unit_id_list, zone_id_list
 
     # check if the hvac system has the required sub systems for system type 1 c
     has_required_sys = (
-        hvac_b.get("preheat_system") is None
-        or hvac_b["preheat_system"].get("heating_system_type") is None
-        or hvac_b["preheat_system"]["heating_system_type"] == HEATING_SYSTEM.NONE
-    ) and (
-        hvac_b.get("heating_system") is None
-        or hvac_b["heating_system"].get("heating_system_type") is None
-        or hvac_b["heating_system"]["heating_system_type"] == HEATING_SYSTEM.NONE
-    ) and (
-        hvac_b.get("fan_system") is None
+        (
+            hvac_b.get("preheat_system") is None
+            or hvac_b["preheat_system"].get("heating_system_type") is None
+            or hvac_b["preheat_system"]["heating_system_type"] == HEATING_SYSTEM.NONE
+        )
+        and (
+            hvac_b.get("heating_system") is None
+            or hvac_b["heating_system"].get("heating_system_type") is None
+            or hvac_b["heating_system"]["heating_system_type"] == HEATING_SYSTEM.NONE
+        )
+        and (hvac_b.get("fan_system") is None)
     )
 
     return (
-            has_required_sys
-            # sub functions handles missing required sys, and return False.
-            and is_hvac_sys_cooling_type_none(rmi_b, hvac_b_id)
-            and does_each_zone_have_only_one_terminal(rmi_b, zone_id_list)
-            and are_all_terminal_heat_sources_hot_water(rmi_b, terminal_unit_id_list)
-            and are_all_terminal_cool_sources_chilled_water(rmi_b, terminal_unit_id_list)
-            and do_all_terminals_have_one_fan(rmi_b, terminal_unit_id_list)
-            and are_all_terminal_types_cav_with_none_equal_to_null(rmi_b, terminal_unit_id_list)
-            and are_all_terminal_heating_loops_purchased_heating(rmi_b, terminal_unit_id_list)
-            and are_all_terminal_chw_loops_purchased_cooling(rmi_b, terminal_unit_id_list)
+        has_required_sys
+        # sub functions handles missing required sys, and return False.
+        and is_hvac_sys_cooling_type_none(rmi_b, hvac_b_id)
+        and does_each_zone_have_only_one_terminal(rmi_b, zone_id_list)
+        and are_all_terminal_heat_sources_hot_water(rmi_b, terminal_unit_id_list)
+        and are_all_terminal_cool_sources_chilled_water(rmi_b, terminal_unit_id_list)
+        and do_all_terminals_have_one_fan(rmi_b, terminal_unit_id_list)
+        and are_all_terminal_types_cav_with_none_equal_to_null(
+            rmi_b, terminal_unit_id_list
+        )
+        and are_all_terminal_heating_loops_purchased_heating(
+            rmi_b, terminal_unit_id_list
+        )
+        and are_all_terminal_chw_loops_purchased_cooling(rmi_b, terminal_unit_id_list)
     )
