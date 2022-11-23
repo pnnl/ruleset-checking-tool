@@ -7,7 +7,7 @@ from rct229.ruleset_functions.get_baseline_system_types import get_baseline_syst
 from rct229.ruleset_functions.get_primary_secondary_loops_dict import (
     get_primary_secondary_loops_dict,
 )
-from rct229.utils.assertions import RCTException, getattr_
+from rct229.utils.assertions import getattr_
 
 APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_7,
@@ -26,7 +26,7 @@ FluidLoopFlowControl = schema_enums["FluidLoopFlowControlOptions"]
 
 
 class Section22Rule36(RuleDefinitionListIndexedBase):
-    """Rule 20 of ASHRAE 90.1-2019 Appendix G Section 22 (Chilled water loop)"""
+    """Rule 36 of ASHRAE 90.1-2019 Appendix G Section 22 (Chilled water loop)"""
 
     def __init__(self):
         super(Section22Rule36, self).__init__(
@@ -35,29 +35,31 @@ class Section22Rule36(RuleDefinitionListIndexedBase):
             index_rmr="baseline",
             id="22-36",
             description="Baseline chilled water system that does not use purchased chilled water shall be modeled with constant flow primary loop and variable flow secondary loop.",
-            list_path="ruleset_model_instances[0].fluid_loops[*]",
             rmr_context="ruleset_model_instances/0",
+            list_path="fluid_loops[*]",
         )
 
     def is_applicable(self, context, data=None):
         rmi_b = context.baseline
         baseline_system_types_dict = get_baseline_system_types(rmi_b)
-        # create a list contains all HVAC systems that are modeled in the rmi_b
-        available_sys_types = [
+        # create a list containing all HVAC systems that are modeled in the rmi_b
+        available_type_list = [
             hvac_type
             for hvac_type in baseline_system_types_dict.keys()
             if len(baseline_system_types_dict[hvac_type]) > 0
         ]
-        primary_secondary_loop_dict = get_primary_secondary_loops_dict(rmi_b)
+
         # primary secondary loop
+        primary_secondary_loop_dict = get_primary_secondary_loops_dict(rmi_b)
+
         return (
             any(
                 [
                     available_type in APPLICABLE_SYS_TYPES
-                    for available_type in available_sys_types
+                    for available_type in available_type_list
                 ]
             )
-            and len(primary_secondary_loop_dict.keys()) > 0
+            and primary_secondary_loop_dict
         )
 
     def create_data(self, context, data):
