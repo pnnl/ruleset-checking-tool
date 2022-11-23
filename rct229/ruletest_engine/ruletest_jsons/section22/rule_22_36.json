@@ -133,7 +133,7 @@
                                 "type": "COOLING",
                                 "child_loops": [
                                     {
-                                        "id": "Cooling Child Loop 1",
+                                        "id": "Secondary CHW Loop 1",
                                         "type": "COOLING",
                                         "cooling_or_condensing_design_and_control": {
                                             "id": "CCDC 2",
@@ -286,7 +286,7 @@
                                 "type": "COOLING",
                                 "child_loops": [
                                     {
-                                        "id": "Cooling Child Loop 1",
+                                        "id": "Secondary CHW Loop 1",
                                         "type": "COOLING",
                                         "cooling_or_condensing_design_and_control": {
                                             "id": "CCDC 2",
