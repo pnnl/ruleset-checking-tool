@@ -12,25 +12,25 @@
 **Evaluation Context:** Building  
 **Applicability Checks:**  
 
-1. B-RMR is modeled with at least one air-side system that is Type-7, 8, 11, 12, 13, 7b, 8b, 11b, 12b, 13b.
+1. B-RMR is modeled with at least one air-side system that is Type-7, 8, 11, 12, 13, 7b, 8b, 11.1b, 12b.
 2. B-RMR is modeled with primary-secondary configuration.
 3. B-RMR chilled water system cooling capacity is 300 tons or more.
 
 **Function Calls:**  
 
 1. get_baseline_system_types()
-2. get_primary_secondary_loops()
+2. get_primary_secondary_loops_dict()
 3. get_component_by_id()
 
 **Applicability Checks:**  
 
 - **Check 1:** Get B-RMR system types: `baseline_hvac_system_dict = get_baseline_system_types(B-RMR)`
 
-  - Check if B-RMR is modeled with at least one air-side system that is Type-7, 8, 11.1, 11.2, 12, 13, 7b, 8b, 11b, 12b, 13b, i.e. with air-side system served by chiller(s), continue to the next applicability check: `if any(sys_type in baseline_hvac_system_dict.keys() for sys_type in ["SYS-7", "SYS-8", "SYS-11.1", "SYS-11.2", "SYS-12", "SYS-13", "SYS-7B", "SYS-8B", "SYS-11B", "SYS-12B", "SYS-13B"]): NEXT_APPLICABILITY_CHECK`
+  - Check if B-RMR is modeled with at least one air-side system that is Type-7, 8, 11.1, 11.2, 12, 13, 7b, 8b, 11.1b, 12b, i.e. with air-side system served by chiller(s), continue to the next applicability check: `if any(sys_type in baseline_hvac_system_dict.keys() for sys_type in ["SYS-7", "SYS-8", "SYS-11.1", "SYS-11.2", "SYS-12", "SYS-13", "SYS-7B", "SYS-8B", "SYS-11.1B", "SYS-12B"]): NEXT_APPLICABILITY_CHECK`
 
   - Else, rule is not applicable to B-RMR: `else: RULE_NOT_APPLICABLE`
 
-- **Check 2:** Get primary and secondary loops for B-RMR: `primary_secondary_loop_dictionary = get_primary_secondary_loops(B_RMR)`
+- **Check 2:** Get primary and secondary loops for B-RMR: `primary_secondary_loop_dictionary = get_primary_secondary_loops_dict(B_RMR)`
 
   - Check if B-RMR is modeled with primary-secondary configuration, continue to rule logic: `if LEN(primary_secondary_loop_dictionary) != 0: CHECK_RULE_LOGIC`
 

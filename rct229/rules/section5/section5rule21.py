@@ -15,10 +15,10 @@ from rct229.ruleset_functions.get_surface_conditioning_category_dict import (
 )
 from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all
-from rct229.utils.pint_utils import ZERO
+from rct229.utils.pint_utils import ZERO, CalcQ
 from rct229.utils.std_comparisons import std_equal
 
-DOOR = schema_enums["SubsurfaceClassificationType"].DOOR
+DOOR = schema_enums["SubsurfaceClassificationOptions"].DOOR
 FAIL_MSG = "The vertical fenestration is not distributed across baseline opaque surfaces in the same proportion as in the proposed design. Verify if envelope is existing or altered and can be excluded from this check."
 
 
@@ -128,14 +128,18 @@ class Section5Rule21(RuleDefinitionListIndexedBase):
                     )
 
                 return {
-                    "total_fenestration_area_surface_b": _helper_calc_val(
-                        above_grade_wall_b
+                    "total_fenestration_area_surface_b": CalcQ(
+                        "area", _helper_calc_val(above_grade_wall_b)
                     ),
-                    "total_fenestration_area_b": data["total_fenestration_area_b"],
-                    "total_fenestration_area_surface_p": _helper_calc_val(
-                        above_grade_wall_p
+                    "total_fenestration_area_b": CalcQ(
+                        "area", data["total_fenestration_area_b"]
                     ),
-                    "total_fenestration_area_p": data["total_fenestration_area_p"],
+                    "total_fenestration_area_surface_p": CalcQ(
+                        "area", _helper_calc_val(above_grade_wall_p)
+                    ),
+                    "total_fenestration_area_p": CalcQ(
+                        "area", data["total_fenestration_area_p"]
+                    ),
                 }
 
             def rule_check(self, context, calc_vals=None, data=None):

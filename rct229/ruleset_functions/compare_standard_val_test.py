@@ -1,5 +1,6 @@
-import pytest
 import operator
+
+import pytest
 
 from rct229.ruleset_functions.compare_standard_val import compare_standard_val
 from rct229.schema.config import ureg
@@ -8,7 +9,7 @@ _M2 = ureg("m2")
 
 
 def test__compare_standard_val_stringent_compare_gt():
-        assert compare_standard_val(True, 1.5 * _M2, 1.0 * _M2, operator.gt)
+    assert compare_standard_val(True, 1.5 * _M2, 1.0 * _M2, operator.gt)
 
 
 def test__compare_standard_val_stringent_compare_lt():

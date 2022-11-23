@@ -13,10 +13,10 @@ pytest = "*"
 isort = "5.10.1"
 icecream = "*"
 pytest-watch = "*"
+jsonpath-ng = "*"
 
 [packages]
 rct229 = {editable = true, path = "."}
-jsonpath-ng = "*"
 jsonschema="*"
 pyyaml="*"
 jsonpointer="*"
@@ -26,3 +26,6 @@ numpy = "*"
 pint = "*"
 click = "==8.0.4"
 regex = "==2022.1.18"
+black = "~=22.6.0"
+jsonpath2 = "*"
+jsonpath-ng = "*"
