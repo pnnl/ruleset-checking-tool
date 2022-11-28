@@ -34,7 +34,7 @@
 
   - Get HVAC system: `hvac_b = building_segment_b.heating_ventilation_air_conditioning_systems`
 
-    - Check if HVAC system is type 5, 6, 7, 8, 11.1, 11.2, 7a, 8a, 11.1a, 11.2a, 5b, 6b, 7b, 8b, 11b, 7c, 11c: ``if any(is_baseline_system_type(hvac_b, sys_type) == TRUE for sys_type in ["SYS-5", "SYS-6", "SYS-7", "SYS-8", "SYS-11.1", "SYS-11.2", "SYS-7A", "SYS-8A", "SYS-11.1A", "SYS-11.2A", "SYS-5B", "SYS-6B", "SYS-7B", "SYS-8B", "SYS-11B", "SYS-7C", "SYS-11C"]):`
+    - Check if HVAC system is type 5, 6, 7, 8, 11.1, 11.2, 7a, 8a, 11.1a, 11.2a, 5b, 6b, 7b, 8b, 11b, 7c, 11c: `if any(is_baseline_system_type(hvac_b, sys_type) == TRUE for sys_type in ["SYS-5", "SYS-6", "SYS-7", "SYS-8", "SYS-11.1", "SYS-11.2", "SYS-7A", "SYS-8A", "SYS-11.1A", "SYS-11.2A", "SYS-5B", "SYS-6B", "SYS-7B", "SYS-8B", "SYS-11B", "SYS-7C", "SYS-11C"]):`
 
       - Get fan system serving HVAC system: `fan_system_b = hvac_b.fan_system`
 
