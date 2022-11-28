@@ -3,7 +3,7 @@
         "Section": 22,
         "Rule": 14,
         "Test": "a",
-        "test_description": "Baseline building is system type 7 and is correctly modeled with the design temperature rise range",
+        "test_description": "Baseline building is system type 7 and is correctly modeled with the design temperature rise range of 10 F",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-14",
@@ -158,7 +158,7 @@
         "Section": 22,
         "Rule": 14,
         "Test": "b",
-        "test_description": "Baseline building is system type 7 and is incorrectly modeled with the design temperature rise range",
+        "test_description": "Baseline building is system type 7 and is incorrectly modeled with the design temperature rise range of 15 F",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-14",

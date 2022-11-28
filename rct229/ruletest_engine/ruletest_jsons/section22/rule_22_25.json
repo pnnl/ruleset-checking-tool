@@ -3,7 +3,7 @@
         "Section": 22,
         "Rule": 25,
         "Test": "a",
-        "test_description": "Baseline building is system type 7 and is correctly modeled with the pump_power_per_flow_rate key",
+        "test_description": "Baseline building is system type 7 and is correctly modeled with the 9 w/gpm",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-25",
@@ -149,7 +149,7 @@
         "Section": 22,
         "Rule": 25,
         "Test": "b",
-        "test_description": "Baseline building is system type 7 and is incorrectly modeled with the pump_power_per_flow_rate key",
+        "test_description": "Baseline building is system type 7 and is incorrectly modeled with the 11 w/gpm",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-25",

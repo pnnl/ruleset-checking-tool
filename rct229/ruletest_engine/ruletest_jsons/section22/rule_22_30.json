@@ -3,7 +3,7 @@
         "Section": 22,
         "Rule": 30,
         "Test": "a",
-        "test_description": "Baseline building is system type 11 and is correctly modeled with the pump_power_per_flow_rate value",
+        "test_description": "Baseline building is system type 11 and is correctly modeled with the condenser pump value of 22 W/gpm",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-30",
@@ -119,7 +119,7 @@
         "Section": 22,
         "Rule": 30,
         "Test": "b",
-        "test_description": "Baseline building is system type 11 and is incorrectly modeled with the pump_power_per_flow_rate value",
+        "test_description": "Baseline building is system type 11 and is incorrectly modeled with the condenser pump value of 25 W/gpm",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-30",
