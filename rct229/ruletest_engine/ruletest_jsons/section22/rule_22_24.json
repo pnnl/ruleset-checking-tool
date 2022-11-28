@@ -18,9 +18,6 @@
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
-                "weather": {
-                    "climate_zone": "CZ4A"
-                },
                 "ruleset_model_instances": [
                     {
                         "id": "RMD 1",
@@ -40,9 +37,9 @@
                                                     {
                                                         "id": "VAV Air Terminal 1",
                                                         "is_supply_ducted": true,
-                                                        "heating_source": "HOT_WATER",
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "VAV System 1",
+                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
                                                 ]
@@ -55,9 +52,9 @@
                                                     {
                                                         "id": "VAV Air Terminal 2",
                                                         "is_supply_ducted": true,
-                                                        "heating_source": "HOT_WATER",
                                                         "type": "VARIABLE_AIR_VOLUME",
                                                         "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
                                                 ]
@@ -70,6 +67,11 @@
                                                     "id": "CHW Coil 1",
                                                     "cooling_system_type": "FLUID_LOOP",
                                                     "chilled_water_loop": "Cooling Child Loop 1"
+                                                },
+                                                "preheat_system": {
+                                                    "id": "Preheat Coil 1",
+                                                    "heating_system_type": "FLUID_LOOP",
+                                                    "hot_water_loop": "Boiler Loop 1"
                                                 },
                                                 "fan_system": {
                                                     "id": "VAV Fan System 1",
@@ -84,11 +86,6 @@
                                                             "id": "Return Fan 1"
                                                         }
                                                     ]
-                                                },
-                                                "preheat_system": {
-                                                    "id": "Preheat Coil 1",
-                                                    "heating_system_type": "FLUID_LOOP",
-                                                    "hot_water_loop": "Boiler Loop 1"
                                                 }
                                             }
                                         ]
@@ -116,13 +113,13 @@
                                 "speed_control": "FIXED_SPEED"
                             },
                             {
-                                "id": "Chiller Primary Pump 1",
+                                "id": "Chiller Pump 1",
                                 "loop_or_piping": "Chiller Loop 1",
                                 "speed_control": "FIXED_SPEED"
                             },
                             {
-                                "id": "Chiller Secondary Pump 1",
-                                "loop_or_piping": "Cooling Child Loop 1",
+                                "id": "Secondary CHW Pump",
+                                "loop_or_piping": "Secondary CHW Loop 1",
                                 "speed_control": "VARIABLE_SPEED"
                             }
                         ],
@@ -137,10 +134,6 @@
                                 "child_loops": [
                                     {
                                         "id": "Cooling Child Loop 1",
-                                        "type": "COOLING"
-                                    },
-                                    {
-                                        "id": "Cooling Child Loop 2",
                                         "type": "COOLING"
                                     }
                                 ]
@@ -170,9 +163,6 @@
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
-                "weather": {
-                    "climate_zone": "CZ4A"
-                },
                 "ruleset_model_instances": [
                     {
                         "id": "RMD 1",
@@ -192,9 +182,9 @@
                                                     {
                                                         "id": "VAV Air Terminal 1",
                                                         "is_supply_ducted": true,
-                                                        "heating_source": "HOT_WATER",
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "VAV System 1",
+                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
                                                 ]
@@ -207,9 +197,9 @@
                                                     {
                                                         "id": "VAV Air Terminal 2",
                                                         "is_supply_ducted": true,
-                                                        "heating_source": "HOT_WATER",
                                                         "type": "VARIABLE_AIR_VOLUME",
                                                         "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
                                                 ]
@@ -222,6 +212,11 @@
                                                     "id": "CHW Coil 1",
                                                     "cooling_system_type": "FLUID_LOOP",
                                                     "chilled_water_loop": "Cooling Child Loop 1"
+                                                },
+                                                "preheat_system": {
+                                                    "id": "Preheat Coil 1",
+                                                    "heating_system_type": "FLUID_LOOP",
+                                                    "hot_water_loop": "Boiler Loop 1"
                                                 },
                                                 "fan_system": {
                                                     "id": "VAV Fan System 1",
@@ -236,11 +231,6 @@
                                                             "id": "Return Fan 1"
                                                         }
                                                     ]
-                                                },
-                                                "preheat_system": {
-                                                    "id": "Preheat Coil 1",
-                                                    "heating_system_type": "FLUID_LOOP",
-                                                    "hot_water_loop": "Boiler Loop 1"
                                                 }
                                             }
                                         ]
@@ -265,11 +255,16 @@
                             {
                                 "id": "Boiler Pump 1",
                                 "loop_or_piping": "Boiler Loop 1",
-                                "speed_control": "VARIABLE_SPEED"
+                                "speed_control": "FIXED_SPEED"
                             },
                             {
                                 "id": "Chiller Pump 1",
                                 "loop_or_piping": "Chiller Loop 1",
+                                "speed_control": "VARIABLE_SPEED"
+                            },
+                            {
+                                "id": "Secondary CHW Pump",
+                                "loop_or_piping": "Secondary CHW Loop 1",
                                 "speed_control": "VARIABLE_SPEED"
                             }
                         ],
@@ -285,9 +280,6 @@
                                     {
                                         "id": "Cooling Child Loop 1",
                                         "type": "COOLING"
-                                    },
-                                    {
-                                        "id": "Cooling Child Loop 2"
                                     }
                                 ]
                             }
