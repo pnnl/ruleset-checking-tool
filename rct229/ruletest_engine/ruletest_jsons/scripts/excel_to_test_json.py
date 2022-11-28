@@ -12,7 +12,7 @@ from rct229.schema.schema_utils import *
 
 # ---------------------------------------USER INPUTS---------------------------------------
 
-spreadsheet_name = "envelope_tcd_master.xlsx"
+spreadsheet_name = "envelope_tcd_master_schema_0023.xlsx"
 json_name = "envelope_tests.json"
 sheet_name = "TCDs"
 
