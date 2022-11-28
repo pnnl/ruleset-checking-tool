@@ -1,9 +1,9 @@
 
-# Airside System - Rule 23-9  
+# Airside System - Rule 23-7  
 
 **Schema Version:** 0.0.12  
 **Mandatory Rule:** True  
-**Rule ID:** 23-9  
+**Rule ID:** 23-7  
 **Rule Description:** Systems 6&8: Supply air temperature setpoint shall be constant at the design condition.  
 **Rule Assertion:** B-RMR = expected value  
 **Appendix G Section:** Section 23 Air-side  
@@ -41,5 +41,9 @@
       - Case 1: For each HVAC system that is Type-6, 8, 8a, 6b, 8b, if supply temperature setpoint is constant: `if ( hvac_b.fan_system.temperature_control == "CONSTANT" ): PASS`
 
       - Case 2: Else: `else: FAIL`
+
+**Notes:**
+1. Updated the Rule ID from 23-9 to 23-7 on 11/28/2022
+
 
 **[Back](../_toc.md)**
