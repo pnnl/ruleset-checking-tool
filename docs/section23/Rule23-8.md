@@ -1,9 +1,9 @@
 
-# Airside System - Rule 23-10  
+# Airside System - Rule 23-8  
 
 **Schema Version:** 0.0.10  
 **Mandatory Rule:** True  
-**Rule ID:** 23-10  
+**Rule ID:** 23-8  
 **Rule Description:** System 5-8 and 11 - part load VAV fan power shall be modeled using either method 1 or 2 in Table G3.1.3.15. This rule will only validate data points from Method-1 Part-load Fan Power Data. However, both methods are equivalent. When modeling inputs are based on Method 2, values should be converted to Method 1 when writing to RMD.  
 **Rule Assertion:** B-RMR = expected value  
 **Appendix G Section:** Section 23 Air-side  
@@ -46,3 +46,10 @@
             - Case 1: For supply fan in fan system, if fan part-load VAV is modeled as per Table G3.1.3.15: `if fan_system_b.supply_fan.output_validation_points == target_validation_points: PASS`
 
             - Case 2: Else: `else: FAIL`
+            
+**Notes:**
+1. Updated the Rule ID from 23-10 to 23-8 on 11/28/2022
+
+
+**[Back](../_toc.md)**
+
