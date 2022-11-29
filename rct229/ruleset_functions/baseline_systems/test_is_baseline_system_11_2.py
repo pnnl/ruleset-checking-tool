@@ -43,7 +43,7 @@ SYS_11_2_TEST_RMD = {
                                     ],
                                 },
                             ],
-                            "heating_ventilation_air_conditioning_systems": [
+                            "heating_ventilating_air_conditioning_systems": [
                                 {
                                     "id": "System Type 11.2",
                                     "cooling_system": {

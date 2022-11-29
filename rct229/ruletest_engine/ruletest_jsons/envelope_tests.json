@@ -7,11 +7,12 @@
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-2",
-            "ruleset_reference": "Table G3.1(5) Proposed Building Performance (a) ",
+            "ruleset_reference": "G3.1 #1 (a) The simulation model of the proposed design shall be consistent\nwith the design documents\u2026",
             "rule_description": "Orientation is the same in user model and proposed model",
             "applicable_rmr": "Proposed RMR",
             "rule_assertion": "=",
             "comparison_value": "User RMR",
+            "rule_dependency": "None",
             "primary_rule": "N",
             "schema_version": "0.0.18"
         },
@@ -98,11 +99,12 @@
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-2",
-            "ruleset_reference": "Table G3.1(5) Proposed Building Performance (a) ",
+            "ruleset_reference": "G3.1 #1 (a) The simulation model of the proposed design shall be consistent\nwith the design documents\u2026",
             "rule_description": "Orientation is the same in user model and proposed model",
             "applicable_rmr": "Proposed RMR",
             "rule_assertion": "=",
             "comparison_value": "User RMR",
+            "rule_dependency": "None",
             "primary_rule": "N",
             "schema_version": "0.0.18"
         },
@@ -189,13 +191,14 @@
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-3",
-            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (a)",
+            "ruleset_reference": "G3.1 #5(a), baseline column: The building shall be modeled so that it does not shade itself.",
             "rule_description": "Baseline building must be modeled so that it doesn't shade itself",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
+            "rule_dependency": "None",
             "primary_rule": "N",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "baseline": {
@@ -267,13 +270,14 @@
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-3",
-            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (a)",
+            "ruleset_reference": "G3.1 #5(a), baseline column: The building shall be modeled so that it does not shade itself.",
             "rule_description": "Baseline building must be modeled so that it doesn't shade itself",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
+            "rule_dependency": "None",
             "primary_rule": "N",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "baseline": {
@@ -345,13 +349,14 @@
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-5",
-            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b)",
+            "ruleset_reference": "G3.1 #5 (b) Opaque assemblies used for new buildings, existing buildings, or additions ... shall match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8:",
             "rule_description": "Baseline roof assemblies must match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
+            "rule_dependency": "None",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "baseline": {
@@ -386,7 +391,7 @@
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -432,13 +437,14 @@
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-5",
-            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b)",
+            "ruleset_reference": "G3.1 #5 (b) Opaque assemblies used for new buildings, existing buildings, or additions ... shall match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8:",
             "rule_description": "Baseline roof assemblies must match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
+            "rule_dependency": "None",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "baseline": {
@@ -473,7 +479,7 @@
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -519,13 +525,14 @@
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-5",
-            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b)",
+            "ruleset_reference": "G3.1 #5 (b) Opaque assemblies used for new buildings, existing buildings, or additions ... shall match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8:",
             "rule_description": "Baseline roof assemblies must match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
+            "rule_dependency": "None",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "baseline": {
@@ -560,7 +567,7 @@
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -606,13 +613,14 @@
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-5",
-            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b)",
+            "ruleset_reference": "G3.1 #5 (b) Opaque assemblies used for new buildings, existing buildings, or additions ... shall match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8:",
             "rule_description": "Baseline roof assemblies must match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
+            "rule_dependency": "None",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "baseline": {
@@ -647,7 +655,7 @@
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -693,13 +701,14 @@
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-5",
-            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b)",
+            "ruleset_reference": "G3.1 #5 (b) Opaque assemblies used for new buildings, existing buildings, or additions ... shall match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8:",
             "rule_description": "Baseline roof assemblies must match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
+            "rule_dependency": "None",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "baseline": {
@@ -734,7 +743,7 @@
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -780,13 +789,14 @@
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-5",
-            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b)",
+            "ruleset_reference": "G3.1 #5 (b) Opaque assemblies used for new buildings, existing buildings, or additions ... shall match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8:",
             "rule_description": "Baseline roof assemblies must match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
+            "rule_dependency": "None",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "baseline": {
@@ -821,7 +831,7 @@
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -868,13 +878,14 @@
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-5",
-            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b)",
+            "ruleset_reference": "G3.1 #5 (b) Opaque assemblies used for new buildings, existing buildings, or additions ... shall match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8:",
             "rule_description": "Baseline roof assemblies must match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
+            "rule_dependency": "None",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "baseline": {
@@ -909,7 +920,7 @@
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -956,13 +967,14 @@
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-8",
-            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b) ",
+            "ruleset_reference": "G3.1 #5 (b) Opaque assemblies used for new buildings, existing buildings, or additions ... shall match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8:",
             "rule_description": "Baseline below-grade walls shall match the appropriate assembly maximum C-factors in Tables G3.4-1 through G3.4-8",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
+            "rule_dependency": "None",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "baseline": {
@@ -997,7 +1009,7 @@
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -1043,13 +1055,14 @@
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-8",
-            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b) ",
+            "ruleset_reference": "G3.1 #5 (b) Opaque assemblies used for new buildings, existing buildings, or additions ... shall match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8:",
             "rule_description": "Baseline below-grade walls shall match the appropriate assembly maximum C-factors in Tables G3.4-1 through G3.4-8",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
+            "rule_dependency": "None",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "baseline": {
@@ -1084,7 +1097,7 @@
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -1130,13 +1143,14 @@
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-8",
-            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b) ",
+            "ruleset_reference": "G3.1 #5 (b) Opaque assemblies used for new buildings, existing buildings, or additions ... shall match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8:",
             "rule_description": "Baseline below-grade walls shall match the appropriate assembly maximum C-factors in Tables G3.4-1 through G3.4-8",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
+            "rule_dependency": "None",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "baseline": {
@@ -1171,7 +1185,7 @@
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -1217,13 +1231,14 @@
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-8",
-            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b) ",
+            "ruleset_reference": "G3.1 #5 (b) Opaque assemblies used for new buildings, existing buildings, or additions ... shall match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8:",
             "rule_description": "Baseline below-grade walls shall match the appropriate assembly maximum C-factors in Tables G3.4-1 through G3.4-8",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
+            "rule_dependency": "None",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "baseline": {
@@ -1258,7 +1273,7 @@
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -1304,13 +1319,14 @@
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-8",
-            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b) ",
+            "ruleset_reference": "G3.1 #5 (b) Opaque assemblies used for new buildings, existing buildings, or additions ... shall match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8:",
             "rule_description": "Baseline below-grade walls shall match the appropriate assembly maximum C-factors in Tables G3.4-1 through G3.4-8",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
+            "rule_dependency": "None",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "baseline": {
@@ -1345,7 +1361,7 @@
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -1392,13 +1408,14 @@
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-8",
-            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b) ",
+            "ruleset_reference": "G3.1 #5 (b) Opaque assemblies used for new buildings, existing buildings, or additions ... shall match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8:",
             "rule_description": "Baseline below-grade walls shall match the appropriate assembly maximum C-factors in Tables G3.4-1 through G3.4-8",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
+            "rule_dependency": "None",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "baseline": {
@@ -1433,7 +1450,7 @@
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -1480,13 +1497,14 @@
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-11",
-            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b) ",
+            "ruleset_reference": "G3.1 #5 (b) Opaque assemblies used for new buildings, existing buildings, or additions ... shall match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8:",
             "rule_description": "Baseline above-grade wall assemblies must match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
+            "rule_dependency": "Baseline heating and cooling capacities are established correctly (air-side HVAC rule TBD). This affects baseline space conditioning categories",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "baseline": {
@@ -1521,7 +1539,7 @@
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -1567,13 +1585,14 @@
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-11",
-            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b) ",
+            "ruleset_reference": "G3.1 #5 (b) Opaque assemblies used for new buildings, existing buildings, or additions ... shall match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8:",
             "rule_description": "Baseline above-grade wall assemblies must match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
+            "rule_dependency": "Baseline heating and cooling capacities are established correctly (air-side HVAC rule TBD). This affects baseline space conditioning categories",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "baseline": {
@@ -1608,7 +1627,7 @@
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -1654,13 +1673,14 @@
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-11",
-            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b) ",
+            "ruleset_reference": "G3.1 #5 (b) Opaque assemblies used for new buildings, existing buildings, or additions ... shall match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8:",
             "rule_description": "Baseline above-grade wall assemblies must match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
+            "rule_dependency": "Baseline heating and cooling capacities are established correctly (air-side HVAC rule TBD). This affects baseline space conditioning categories",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "baseline": {
@@ -1695,7 +1715,7 @@
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -1741,13 +1761,14 @@
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-11",
-            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b) ",
+            "ruleset_reference": "G3.1 #5 (b) Opaque assemblies used for new buildings, existing buildings, or additions ... shall match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8:",
             "rule_description": "Baseline above-grade wall assemblies must match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
+            "rule_dependency": "Baseline heating and cooling capacities are established correctly (air-side HVAC rule TBD). This affects baseline space conditioning categories",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "baseline": {
@@ -1782,7 +1803,7 @@
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -1828,13 +1849,14 @@
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-11",
-            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b) ",
+            "ruleset_reference": "G3.1 #5 (b) Opaque assemblies used for new buildings, existing buildings, or additions ... shall match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8:",
             "rule_description": "Baseline above-grade wall assemblies must match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
+            "rule_dependency": "Baseline heating and cooling capacities are established correctly (air-side HVAC rule TBD). This affects baseline space conditioning categories",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "baseline": {
@@ -1869,7 +1891,7 @@
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -1915,13 +1937,14 @@
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-11",
-            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b) ",
+            "ruleset_reference": "G3.1 #5 (b) Opaque assemblies used for new buildings, existing buildings, or additions ... shall match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8:",
             "rule_description": "Baseline above-grade wall assemblies must match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
+            "rule_dependency": "Baseline heating and cooling capacities are established correctly (air-side HVAC rule TBD). This affects baseline space conditioning categories",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "baseline": {
@@ -1956,7 +1979,7 @@
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -2003,13 +2026,14 @@
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-11",
-            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b) ",
+            "ruleset_reference": "G3.1 #5 (b) Opaque assemblies used for new buildings, existing buildings, or additions ... shall match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8:",
             "rule_description": "Baseline above-grade wall assemblies must match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
+            "rule_dependency": "Baseline heating and cooling capacities are established correctly (air-side HVAC rule TBD). This affects baseline space conditioning categories",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "baseline": {
@@ -2044,7 +2068,7 @@
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -2091,13 +2115,14 @@
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-13",
-            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b) ",
+            "ruleset_reference": "G3.1 #5 (b) Opaque assemblies used for new buildings, existing buildings, or additions ... shall match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8:",
             "rule_description": "Baseline floor assemblies must  match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-9",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
+            "rule_dependency": "Baseline heating and cooling capacities are established correctly (air-side HVAC rule TBD). This affects baseline space conditioning categories",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "baseline": {
@@ -2132,7 +2157,7 @@
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -2178,13 +2203,14 @@
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-13",
-            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b) ",
+            "ruleset_reference": "G3.1 #5 (b) Opaque assemblies used for new buildings, existing buildings, or additions ... shall match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8:",
             "rule_description": "Baseline floor assemblies must  match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-9",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
+            "rule_dependency": "Baseline heating and cooling capacities are established correctly (air-side HVAC rule TBD). This affects baseline space conditioning categories",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "baseline": {
@@ -2219,7 +2245,7 @@
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -2265,13 +2291,14 @@
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-13",
-            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b) ",
+            "ruleset_reference": "G3.1 #5 (b) Opaque assemblies used for new buildings, existing buildings, or additions ... shall match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8:",
             "rule_description": "Baseline floor assemblies must  match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-9",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
+            "rule_dependency": "Baseline heating and cooling capacities are established correctly (air-side HVAC rule TBD). This affects baseline space conditioning categories",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "baseline": {
@@ -2306,7 +2333,7 @@
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -2352,13 +2379,14 @@
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-13",
-            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b) ",
+            "ruleset_reference": "G3.1 #5 (b) Opaque assemblies used for new buildings, existing buildings, or additions ... shall match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8:",
             "rule_description": "Baseline floor assemblies must  match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-9",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
+            "rule_dependency": "Baseline heating and cooling capacities are established correctly (air-side HVAC rule TBD). This affects baseline space conditioning categories",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "baseline": {
@@ -2393,7 +2421,7 @@
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -2439,13 +2467,14 @@
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-13",
-            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b) ",
+            "ruleset_reference": "G3.1 #5 (b) Opaque assemblies used for new buildings, existing buildings, or additions ... shall match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8:",
             "rule_description": "Baseline floor assemblies must  match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-9",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
+            "rule_dependency": "Baseline heating and cooling capacities are established correctly (air-side HVAC rule TBD). This affects baseline space conditioning categories",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "baseline": {
@@ -2480,7 +2509,7 @@
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -2526,13 +2555,14 @@
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-13",
-            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b) ",
+            "ruleset_reference": "G3.1 #5 (b) Opaque assemblies used for new buildings, existing buildings, or additions ... shall match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8:",
             "rule_description": "Baseline floor assemblies must  match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-9",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
+            "rule_dependency": "Baseline heating and cooling capacities are established correctly (air-side HVAC rule TBD). This affects baseline space conditioning categories",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "baseline": {
@@ -2567,7 +2597,7 @@
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -2614,13 +2644,14 @@
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-13",
-            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b) ",
+            "ruleset_reference": "G3.1 #5 (b) Opaque assemblies used for new buildings, existing buildings, or additions ... shall match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8:",
             "rule_description": "Baseline floor assemblies must  match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-9",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
+            "rule_dependency": "Baseline heating and cooling capacities are established correctly (air-side HVAC rule TBD). This affects baseline space conditioning categories",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "baseline": {
@@ -2655,7 +2686,7 @@
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -2702,13 +2733,14 @@
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-15",
-            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b)",
+            "ruleset_reference": "G3.1 #5 (b) Opaque assemblies used for new buildings, existing buildings, or additions ... shall match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8:",
             "rule_description": "Baseline slab-on-grade assemblies must match the appropriate assembly maximum F-factors in Tables G3.4-1 through G3.4-9",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
+            "rule_dependency": "Baseline heating and cooling capacities are established correctly (air-side HVAC rule TBD). This affects baseline space conditioning categories",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "baseline": {
@@ -2743,7 +2775,7 @@
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -2790,13 +2822,14 @@
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-15",
-            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b)",
+            "ruleset_reference": "G3.1 #5 (b) Opaque assemblies used for new buildings, existing buildings, or additions ... shall match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8:",
             "rule_description": "Baseline slab-on-grade assemblies must match the appropriate assembly maximum F-factors in Tables G3.4-1 through G3.4-9",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
+            "rule_dependency": "Baseline heating and cooling capacities are established correctly (air-side HVAC rule TBD). This affects baseline space conditioning categories",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "baseline": {
@@ -2831,7 +2864,7 @@
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -2878,13 +2911,14 @@
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-15",
-            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b)",
+            "ruleset_reference": "G3.1 #5 (b) Opaque assemblies used for new buildings, existing buildings, or additions ... shall match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8:",
             "rule_description": "Baseline slab-on-grade assemblies must match the appropriate assembly maximum F-factors in Tables G3.4-1 through G3.4-9",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
+            "rule_dependency": "Baseline heating and cooling capacities are established correctly (air-side HVAC rule TBD). This affects baseline space conditioning categories",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "baseline": {
@@ -2919,7 +2953,7 @@
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -2966,13 +3000,14 @@
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-15",
-            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b)",
+            "ruleset_reference": "G3.1 #5 (b) Opaque assemblies used for new buildings, existing buildings, or additions ... shall match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8:",
             "rule_description": "Baseline slab-on-grade assemblies must match the appropriate assembly maximum F-factors in Tables G3.4-1 through G3.4-9",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
+            "rule_dependency": "Baseline heating and cooling capacities are established correctly (air-side HVAC rule TBD). This affects baseline space conditioning categories",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "baseline": {
@@ -3007,7 +3042,7 @@
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -3054,13 +3089,14 @@
         "expected_rule_outcome": "manual_check",
         "standard": {
             "rule_id": "5-15",
-            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b)",
+            "ruleset_reference": "G3.1 #5 (b) Opaque assemblies used for new buildings, existing buildings, or additions ... shall match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8:",
             "rule_description": "Baseline slab-on-grade assemblies must match the appropriate assembly maximum F-factors in Tables G3.4-1 through G3.4-9",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
+            "rule_dependency": "Baseline heating and cooling capacities are established correctly (air-side HVAC rule TBD). This affects baseline space conditioning categories",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "baseline": {
@@ -3095,7 +3131,7 @@
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -3142,13 +3178,14 @@
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-15",
-            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b)",
+            "ruleset_reference": "G3.1 #5 (b) Opaque assemblies used for new buildings, existing buildings, or additions ... shall match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8:",
             "rule_description": "Baseline slab-on-grade assemblies must match the appropriate assembly maximum F-factors in Tables G3.4-1 through G3.4-9",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
+            "rule_dependency": "Baseline heating and cooling capacities are established correctly (air-side HVAC rule TBD). This affects baseline space conditioning categories",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "baseline": {
@@ -3183,7 +3220,7 @@
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -3230,13 +3267,14 @@
         "expected_rule_outcome": "manual_check",
         "standard": {
             "rule_id": "5-15",
-            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b)",
+            "ruleset_reference": "G3.1 #5 (b) Opaque assemblies used for new buildings, existing buildings, or additions ... shall match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8:",
             "rule_description": "Baseline slab-on-grade assemblies must match the appropriate assembly maximum F-factors in Tables G3.4-1 through G3.4-9",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
+            "rule_dependency": "Baseline heating and cooling capacities are established correctly (air-side HVAC rule TBD). This affects baseline space conditioning categories",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "baseline": {
@@ -3271,7 +3309,7 @@
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -3318,13 +3356,14 @@
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-17",
-            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b)",
+            "ruleset_reference": "Table G3.1 #1, Baseline column: The baseline building design shall be developed by modifying the proposed design as described in Section G3. Except as specifically instructed, all building systems and equipment shall be modeled identically in the proposed design and baseline building design.",
             "rule_description": "Opaque surfaces that are not regulated (not part of opaque building envelope) must be modeled the same U/C/F-factor in the baseline as in the proposed design",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Proposed RMR",
+            "rule_dependency": "None",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "proposed": {
@@ -3437,13 +3476,14 @@
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-17",
-            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b)",
+            "ruleset_reference": "Table G3.1 #1, Baseline column: The baseline building design shall be developed by modifying the proposed design as described in Section G3. Except as specifically instructed, all building systems and equipment shall be modeled identically in the proposed design and baseline building design.",
             "rule_description": "Opaque surfaces that are not regulated (not part of opaque building envelope) must be modeled the same U/C/F-factor in the baseline as in the proposed design",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Proposed RMR",
+            "rule_dependency": "None",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "proposed": {
@@ -3556,13 +3596,14 @@
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-17",
-            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b)",
+            "ruleset_reference": "Table G3.1 #1, Baseline column: The baseline building design shall be developed by modifying the proposed design as described in Section G3. Except as specifically instructed, all building systems and equipment shall be modeled identically in the proposed design and baseline building design.",
             "rule_description": "Opaque surfaces that are not regulated (not part of opaque building envelope) must be modeled the same U/C/F-factor in the baseline as in the proposed design",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Proposed RMR",
+            "rule_dependency": "None",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "proposed": {
@@ -3703,13 +3744,14 @@
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-17",
-            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b)",
+            "ruleset_reference": "Table G3.1 #1, Baseline column: The baseline building design shall be developed by modifying the proposed design as described in Section G3. Except as specifically instructed, all building systems and equipment shall be modeled identically in the proposed design and baseline building design.",
             "rule_description": "Opaque surfaces that are not regulated (not part of opaque building envelope) must be modeled the same U/C/F-factor in the baseline as in the proposed design",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Proposed RMR",
+            "rule_dependency": "None",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "proposed": {
@@ -3850,13 +3892,14 @@
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-17",
-            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b)",
+            "ruleset_reference": "Table G3.1 #1, Baseline column: The baseline building design shall be developed by modifying the proposed design as described in Section G3. Except as specifically instructed, all building systems and equipment shall be modeled identically in the proposed design and baseline building design.",
             "rule_description": "Opaque surfaces that are not regulated (not part of opaque building envelope) must be modeled the same U/C/F-factor in the baseline as in the proposed design",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Proposed RMR",
+            "rule_dependency": "None",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "proposed": {
@@ -3969,13 +4012,14 @@
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-17",
-            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b)",
+            "ruleset_reference": "Table G3.1 #1, Baseline column: The baseline building design shall be developed by modifying the proposed design as described in Section G3. Except as specifically instructed, all building systems and equipment shall be modeled identically in the proposed design and baseline building design.",
             "rule_description": "Opaque surfaces that are not regulated (not part of opaque building envelope) must be modeled the same U/C/F-factor in the baseline as in the proposed design",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Proposed RMR",
+            "rule_dependency": "None",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "proposed": {
@@ -4088,13 +4132,14 @@
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-17",
-            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b)",
+            "ruleset_reference": "Table G3.1 #1, Baseline column: The baseline building design shall be developed by modifying the proposed design as described in Section G3. Except as specifically instructed, all building systems and equipment shall be modeled identically in the proposed design and baseline building design.",
             "rule_description": "Opaque surfaces that are not regulated (not part of opaque building envelope) must be modeled the same U/C/F-factor in the baseline as in the proposed design",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Proposed RMR",
+            "rule_dependency": "None",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "proposed": {
@@ -4235,13 +4280,14 @@
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-17",
-            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b)",
+            "ruleset_reference": "Table G3.1 #1, Baseline column: The baseline building design shall be developed by modifying the proposed design as described in Section G3. Except as specifically instructed, all building systems and equipment shall be modeled identically in the proposed design and baseline building design.",
             "rule_description": "Opaque surfaces that are not regulated (not part of opaque building envelope) must be modeled the same U/C/F-factor in the baseline as in the proposed design",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Proposed RMR",
+            "rule_dependency": "None",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "proposed": {
@@ -4382,13 +4428,14 @@
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-17",
-            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b)",
+            "ruleset_reference": "Table G3.1 #1, Baseline column: The baseline building design shall be developed by modifying the proposed design as described in Section G3. Except as specifically instructed, all building systems and equipment shall be modeled identically in the proposed design and baseline building design.",
             "rule_description": "Opaque surfaces that are not regulated (not part of opaque building envelope) must be modeled the same U/C/F-factor in the baseline as in the proposed design",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Proposed RMR",
+            "rule_dependency": "None",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "proposed": {
@@ -4501,13 +4548,14 @@
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-17",
-            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b)",
+            "ruleset_reference": "Table G3.1 #1, Baseline column: The baseline building design shall be developed by modifying the proposed design as described in Section G3. Except as specifically instructed, all building systems and equipment shall be modeled identically in the proposed design and baseline building design.",
             "rule_description": "Opaque surfaces that are not regulated (not part of opaque building envelope) must be modeled the same U/C/F-factor in the baseline as in the proposed design",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Proposed RMR",
+            "rule_dependency": "None",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "proposed": {
@@ -4620,13 +4668,14 @@
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-17",
-            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b)",
+            "ruleset_reference": "Table G3.1 #1, Baseline column: The baseline building design shall be developed by modifying the proposed design as described in Section G3. Except as specifically instructed, all building systems and equipment shall be modeled identically in the proposed design and baseline building design.",
             "rule_description": "Opaque surfaces that are not regulated (not part of opaque building envelope) must be modeled the same U/C/F-factor in the baseline as in the proposed design",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Proposed RMR",
+            "rule_dependency": "None",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "proposed": {
@@ -4741,13 +4790,14 @@
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-17",
-            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b)",
+            "ruleset_reference": "Table G3.1 #1, Baseline column: The baseline building design shall be developed by modifying the proposed design as described in Section G3. Except as specifically instructed, all building systems and equipment shall be modeled identically in the proposed design and baseline building design.",
             "rule_description": "Opaque surfaces that are not regulated (not part of opaque building envelope) must be modeled the same U/C/F-factor in the baseline as in the proposed design",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Proposed RMR",
+            "rule_dependency": "None",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "proposed": {
@@ -4862,13 +4912,14 @@
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-18",
-            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (c) ",
-            "rule_description": "For building area types included in Table Table G3.1.1-1, vertical fenestration areas for new buildings and additions shall equal that in Table Table G3.1.1-1 based on the area of gross above-grade walls that separate conditioned spaces and semiheated spaces from the exterior. \n",
+            "ruleset_reference": "Table G3.1 #5 baseline column #c: For building area types included in Table G3.1.1-1, vertical fenestration areas for new buildings and additions shall equal that in Table G3.1.1-1\nbased on the area of gross above-grade walls that separate conditioned spaces and semiheated spaces from the exterior.",
+            "rule_description": "For building area types included in Table G3.1.1-1, vertical fenestration areas for new buildings and additions shall equal that in Table G3.1.1-1 based on the area of gross above-grade walls that separate conditioned spaces and semiheated spaces from the exterior. \n",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
+            "rule_dependency": "None",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "baseline": {
@@ -4905,7 +4956,7 @@
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -4972,13 +5023,14 @@
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-18",
-            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (c) ",
-            "rule_description": "For building area types included in Table Table G3.1.1-1, vertical fenestration areas for new buildings and additions shall equal that in Table Table G3.1.1-1 based on the area of gross above-grade walls that separate conditioned spaces and semiheated spaces from the exterior. \n",
+            "ruleset_reference": "Table G3.1 #5 baseline column #c: For building area types included in Table G3.1.1-1, vertical fenestration areas for new buildings and additions shall equal that in Table G3.1.1-1\nbased on the area of gross above-grade walls that separate conditioned spaces and semiheated spaces from the exterior.",
+            "rule_description": "For building area types included in Table G3.1.1-1, vertical fenestration areas for new buildings and additions shall equal that in Table G3.1.1-1 based on the area of gross above-grade walls that separate conditioned spaces and semiheated spaces from the exterior. \n",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
+            "rule_dependency": "None",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "baseline": {
@@ -5015,7 +5067,7 @@
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -5082,13 +5134,14 @@
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-18",
-            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (c) ",
-            "rule_description": "For building area types included in Table Table G3.1.1-1, vertical fenestration areas for new buildings and additions shall equal that in Table Table G3.1.1-1 based on the area of gross above-grade walls that separate conditioned spaces and semiheated spaces from the exterior. \n",
+            "ruleset_reference": "Table G3.1 #5 baseline column #c: For building area types included in Table G3.1.1-1, vertical fenestration areas for new buildings and additions shall equal that in Table G3.1.1-1\nbased on the area of gross above-grade walls that separate conditioned spaces and semiheated spaces from the exterior.",
+            "rule_description": "For building area types included in Table G3.1.1-1, vertical fenestration areas for new buildings and additions shall equal that in Table G3.1.1-1 based on the area of gross above-grade walls that separate conditioned spaces and semiheated spaces from the exterior. \n",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
+            "rule_dependency": "None",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "baseline": {
@@ -5125,7 +5178,7 @@
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -5200,13 +5253,14 @@
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-18",
-            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (c) ",
-            "rule_description": "For building area types included in Table Table G3.1.1-1, vertical fenestration areas for new buildings and additions shall equal that in Table Table G3.1.1-1 based on the area of gross above-grade walls that separate conditioned spaces and semiheated spaces from the exterior. \n",
+            "ruleset_reference": "Table G3.1 #5 baseline column #c: For building area types included in Table G3.1.1-1, vertical fenestration areas for new buildings and additions shall equal that in Table G3.1.1-1\nbased on the area of gross above-grade walls that separate conditioned spaces and semiheated spaces from the exterior.",
+            "rule_description": "For building area types included in Table G3.1.1-1, vertical fenestration areas for new buildings and additions shall equal that in Table G3.1.1-1 based on the area of gross above-grade walls that separate conditioned spaces and semiheated spaces from the exterior. \n",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
+            "rule_dependency": "None",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "baseline": {
@@ -5243,7 +5297,7 @@
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -5318,13 +5372,14 @@
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-21",
-            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (c)",
+            "ruleset_reference": "Table G3.1 #5 baseline column #c: The vertical fenestration shall be distributed on each face of the building in the same proportion as in the proposed design.",
             "rule_description": "The vertical fenestration shall be distributed on each face of the building in the same proportion as in the proposed design",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Proposed RMR",
+            "rule_dependency": "None",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "proposed": {
@@ -5358,7 +5413,7 @@
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -5461,7 +5516,7 @@
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -5543,13 +5598,14 @@
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-21",
-            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (c)",
+            "ruleset_reference": "Table G3.1 #5 baseline column #c: The vertical fenestration shall be distributed on each face of the building in the same proportion as in the proposed design.",
             "rule_description": "The vertical fenestration shall be distributed on each face of the building in the same proportion as in the proposed design",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Proposed RMR",
+            "rule_dependency": "None",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "proposed": {
@@ -5583,7 +5639,7 @@
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -5686,7 +5742,7 @@
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -5768,13 +5824,14 @@
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-24",
-            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (d)",
+            "ruleset_reference": "Table G3.1 #5Baseline column #d: Vertical Fenestration Assemblies. Fenestration for new\nbuildings, existing buildings, and additions shall comply with the following: \n\u2022 Fenestration U-factors shall match the appropriate requirements in Tables G3.4-1 through G3.4-8 for the applicable glazing percentage for Uall.",
             "rule_description": "Vertical fenestration U-factors for residential, non-residential and semiheated spaces in the baseline model must match the appropriate requirements in Table G3.4-1 through G3.4-8 for the appropriate WWR in the baseline RMR.",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
+            "rule_dependency": "1. Baseline heating and cooling capacities are established correctly (air-side HVAC rule TBD). This affects baseline space conditioning categories\n2. Baseline fenestration area is established correctly (Rules 18, 19, 20)",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "baseline": {
@@ -5810,7 +5867,7 @@
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -5862,13 +5919,14 @@
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-24",
-            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (d)",
+            "ruleset_reference": "Table G3.1 #5Baseline column #d: Vertical Fenestration Assemblies. Fenestration for new\nbuildings, existing buildings, and additions shall comply with the following: \n\u2022 Fenestration U-factors shall match the appropriate requirements in Tables G3.4-1 through G3.4-8 for the applicable glazing percentage for Uall.",
             "rule_description": "Vertical fenestration U-factors for residential, non-residential and semiheated spaces in the baseline model must match the appropriate requirements in Table G3.4-1 through G3.4-8 for the appropriate WWR in the baseline RMR.",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
+            "rule_dependency": "1. Baseline heating and cooling capacities are established correctly (air-side HVAC rule TBD). This affects baseline space conditioning categories\n2. Baseline fenestration area is established correctly (Rules 18, 19, 20)",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "baseline": {
@@ -5904,7 +5962,7 @@
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -5956,13 +6014,14 @@
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-24",
-            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (d)",
+            "ruleset_reference": "Table G3.1 #5Baseline column #d: Vertical Fenestration Assemblies. Fenestration for new\nbuildings, existing buildings, and additions shall comply with the following: \n\u2022 Fenestration U-factors shall match the appropriate requirements in Tables G3.4-1 through G3.4-8 for the applicable glazing percentage for Uall.",
             "rule_description": "Vertical fenestration U-factors for residential, non-residential and semiheated spaces in the baseline model must match the appropriate requirements in Table G3.4-1 through G3.4-8 for the appropriate WWR in the baseline RMR.",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
+            "rule_dependency": "1. Baseline heating and cooling capacities are established correctly (air-side HVAC rule TBD). This affects baseline space conditioning categories\n2. Baseline fenestration area is established correctly (Rules 18, 19, 20)",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "baseline": {
@@ -5998,7 +6057,7 @@
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -6050,13 +6109,14 @@
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-24",
-            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (d)",
+            "ruleset_reference": "Table G3.1 #5Baseline column #d: Vertical Fenestration Assemblies. Fenestration for new\nbuildings, existing buildings, and additions shall comply with the following: \n\u2022 Fenestration U-factors shall match the appropriate requirements in Tables G3.4-1 through G3.4-8 for the applicable glazing percentage for Uall.",
             "rule_description": "Vertical fenestration U-factors for residential, non-residential and semiheated spaces in the baseline model must match the appropriate requirements in Table G3.4-1 through G3.4-8 for the appropriate WWR in the baseline RMR.",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
+            "rule_dependency": "1. Baseline heating and cooling capacities are established correctly (air-side HVAC rule TBD). This affects baseline space conditioning categories\n2. Baseline fenestration area is established correctly (Rules 18, 19, 20)",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "baseline": {
@@ -6092,7 +6152,7 @@
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -6144,13 +6204,14 @@
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-24",
-            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (d)",
+            "ruleset_reference": "Table G3.1 #5Baseline column #d: Vertical Fenestration Assemblies. Fenestration for new\nbuildings, existing buildings, and additions shall comply with the following: \n\u2022 Fenestration U-factors shall match the appropriate requirements in Tables G3.4-1 through G3.4-8 for the applicable glazing percentage for Uall.",
             "rule_description": "Vertical fenestration U-factors for residential, non-residential and semiheated spaces in the baseline model must match the appropriate requirements in Table G3.4-1 through G3.4-8 for the appropriate WWR in the baseline RMR.",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
+            "rule_dependency": "1. Baseline heating and cooling capacities are established correctly (air-side HVAC rule TBD). This affects baseline space conditioning categories\n2. Baseline fenestration area is established correctly (Rules 18, 19, 20)",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "baseline": {
@@ -6186,7 +6247,7 @@
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -6242,13 +6303,14 @@
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-24",
-            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (d)",
+            "ruleset_reference": "Table G3.1 #5Baseline column #d: Vertical Fenestration Assemblies. Fenestration for new\nbuildings, existing buildings, and additions shall comply with the following: \n\u2022 Fenestration U-factors shall match the appropriate requirements in Tables G3.4-1 through G3.4-8 for the applicable glazing percentage for Uall.",
             "rule_description": "Vertical fenestration U-factors for residential, non-residential and semiheated spaces in the baseline model must match the appropriate requirements in Table G3.4-1 through G3.4-8 for the appropriate WWR in the baseline RMR.",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
+            "rule_dependency": "1. Baseline heating and cooling capacities are established correctly (air-side HVAC rule TBD). This affects baseline space conditioning categories\n2. Baseline fenestration area is established correctly (Rules 18, 19, 20)",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "baseline": {
@@ -6284,7 +6346,7 @@
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -6340,13 +6402,14 @@
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-26",
-            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (d)",
+            "ruleset_reference": "Table G3.1 #5 Baseline column #d: Vertical Fenestration Assemblies. Fenestration for new\nbuildings, existing buildings, and additions shall comply with the following: \n\u2022 Fenestration SHGCs shall match the appropriate requirements in Tables G3.4-1 through G3.4-8 using the value for SHGCall for the applicable vertical glazing percentage.",
             "rule_description": "Vertical fenestration SHGC shall match the appropriate requirements in Tables G3.4-1 through G3.4-8",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
+            "rule_dependency": "None",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "baseline": {
@@ -6382,7 +6445,7 @@
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -6439,13 +6502,14 @@
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-26",
-            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (d)",
+            "ruleset_reference": "Table G3.1 #5 Baseline column #d: Vertical Fenestration Assemblies. Fenestration for new\nbuildings, existing buildings, and additions shall comply with the following: \n\u2022 Fenestration SHGCs shall match the appropriate requirements in Tables G3.4-1 through G3.4-8 using the value for SHGCall for the applicable vertical glazing percentage.",
             "rule_description": "Vertical fenestration SHGC shall match the appropriate requirements in Tables G3.4-1 through G3.4-8",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
+            "rule_dependency": "None",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "baseline": {
@@ -6481,7 +6545,7 @@
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -6538,13 +6602,14 @@
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-26",
-            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (d)",
+            "ruleset_reference": "Table G3.1 #5 Baseline column #d: Vertical Fenestration Assemblies. Fenestration for new\nbuildings, existing buildings, and additions shall comply with the following: \n\u2022 Fenestration SHGCs shall match the appropriate requirements in Tables G3.4-1 through G3.4-8 using the value for SHGCall for the applicable vertical glazing percentage.",
             "rule_description": "Vertical fenestration SHGC shall match the appropriate requirements in Tables G3.4-1 through G3.4-8",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
+            "rule_dependency": "None",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "baseline": {
@@ -6580,7 +6645,7 @@
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -6637,13 +6702,14 @@
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-26",
-            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (d)",
+            "ruleset_reference": "Table G3.1 #5 Baseline column #d: Vertical Fenestration Assemblies. Fenestration for new\nbuildings, existing buildings, and additions shall comply with the following: \n\u2022 Fenestration SHGCs shall match the appropriate requirements in Tables G3.4-1 through G3.4-8 using the value for SHGCall for the applicable vertical glazing percentage.",
             "rule_description": "Vertical fenestration SHGC shall match the appropriate requirements in Tables G3.4-1 through G3.4-8",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
+            "rule_dependency": "None",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "baseline": {
@@ -6679,7 +6745,7 @@
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -6736,13 +6802,14 @@
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-26",
-            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (d)",
+            "ruleset_reference": "Table G3.1 #5 Baseline column #d: Vertical Fenestration Assemblies. Fenestration for new\nbuildings, existing buildings, and additions shall comply with the following: \n\u2022 Fenestration SHGCs shall match the appropriate requirements in Tables G3.4-1 through G3.4-8 using the value for SHGCall for the applicable vertical glazing percentage.",
             "rule_description": "Vertical fenestration SHGC shall match the appropriate requirements in Tables G3.4-1 through G3.4-8",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
+            "rule_dependency": "None",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "baseline": {
@@ -6778,7 +6845,7 @@
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -6835,13 +6902,14 @@
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-26",
-            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (d)",
+            "ruleset_reference": "Table G3.1 #5 Baseline column #d: Vertical Fenestration Assemblies. Fenestration for new\nbuildings, existing buildings, and additions shall comply with the following: \n\u2022 Fenestration SHGCs shall match the appropriate requirements in Tables G3.4-1 through G3.4-8 using the value for SHGCall for the applicable vertical glazing percentage.",
             "rule_description": "Vertical fenestration SHGC shall match the appropriate requirements in Tables G3.4-1 through G3.4-8",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
+            "rule_dependency": "None",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "baseline": {
@@ -6877,7 +6945,7 @@
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -6934,13 +7002,14 @@
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-28",
-            "ruleset_reference": "Table G3.1(1), Baseline Building Performance",
+            "ruleset_reference": "Table G3.1 #1, Baseline column: The baseline building design shall be developed by modifying the proposed design as described in Section G3. Except as specifically instructed, all building systems and equipment shall be modeled identically in the proposed design and baseline building design.",
             "rule_description": "Fenestration that is not regulated (not part of building envelope) must be modeled with the same area, U-factor and SHGC in the baseline as in the proposed design",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Proposed RMR",
+            "rule_dependency": "1. Baseline heating and cooling capacities are established correctly (air-side HVAC rule TBD). This affects baseline space conditioning categories",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "proposed": {
@@ -6975,7 +7044,7 @@
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -7054,7 +7123,7 @@
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -7111,13 +7180,14 @@
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-28",
-            "ruleset_reference": "Table G3.1(1), Baseline Building Performance",
+            "ruleset_reference": "Table G3.1 #1, Baseline column: The baseline building design shall be developed by modifying the proposed design as described in Section G3. Except as specifically instructed, all building systems and equipment shall be modeled identically in the proposed design and baseline building design.",
             "rule_description": "Fenestration that is not regulated (not part of building envelope) must be modeled with the same area, U-factor and SHGC in the baseline as in the proposed design",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Proposed RMR",
+            "rule_dependency": "1. Baseline heating and cooling capacities are established correctly (air-side HVAC rule TBD). This affects baseline space conditioning categories",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "proposed": {
@@ -7152,7 +7222,7 @@
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -7231,7 +7301,7 @@
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -7288,13 +7358,14 @@
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-28",
-            "ruleset_reference": "Table G3.1(1), Baseline Building Performance",
+            "ruleset_reference": "Table G3.1 #1, Baseline column: The baseline building design shall be developed by modifying the proposed design as described in Section G3. Except as specifically instructed, all building systems and equipment shall be modeled identically in the proposed design and baseline building design.",
             "rule_description": "Fenestration that is not regulated (not part of building envelope) must be modeled with the same area, U-factor and SHGC in the baseline as in the proposed design",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Proposed RMR",
+            "rule_dependency": "1. Baseline heating and cooling capacities are established correctly (air-side HVAC rule TBD). This affects baseline space conditioning categories",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "proposed": {
@@ -7329,7 +7400,7 @@
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -7408,7 +7479,7 @@
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -7465,13 +7536,14 @@
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-28",
-            "ruleset_reference": "Table G3.1(1), Baseline Building Performance",
+            "ruleset_reference": "Table G3.1 #1, Baseline column: The baseline building design shall be developed by modifying the proposed design as described in Section G3. Except as specifically instructed, all building systems and equipment shall be modeled identically in the proposed design and baseline building design.",
             "rule_description": "Fenestration that is not regulated (not part of building envelope) must be modeled with the same area, U-factor and SHGC in the baseline as in the proposed design",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Proposed RMR",
+            "rule_dependency": "1. Baseline heating and cooling capacities are established correctly (air-side HVAC rule TBD). This affects baseline space conditioning categories",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "proposed": {
@@ -7506,7 +7578,7 @@
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -7585,7 +7657,7 @@
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -7642,13 +7714,14 @@
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-31",
-            "ruleset_reference": "Table G3.1(5) Proposed Building Performance a.4 \nTable G3.1(5) Baseline Building Performance (d)",
+            "ruleset_reference": "Table G3.1 #5 Proposed column a.4: Manual fenestration shading devices, such as blinds or shades, shall be modeled or not modeled the same as in the baseline building design. \nTable G3.1#5 baseline column (d) Manual window shading devices such as blinds or shades are not required to be modeled.",
             "rule_description": "Manual fenestration shading devices, such as blinds or shades, shall be modeled or not modeled the same as in the baseline building design.",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Proposed RMR",
+            "rule_dependency": "None",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "proposed": {
@@ -7735,13 +7808,14 @@
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-31",
-            "ruleset_reference": "Table G3.1(5) Proposed Building Performance a.4 \nTable G3.1(5) Baseline Building Performance (d)",
+            "ruleset_reference": "Table G3.1 #5 Proposed column a.4: Manual fenestration shading devices, such as blinds or shades, shall be modeled or not modeled the same as in the baseline building design. \nTable G3.1#5 baseline column (d) Manual window shading devices such as blinds or shades are not required to be modeled.",
             "rule_description": "Manual fenestration shading devices, such as blinds or shades, shall be modeled or not modeled the same as in the baseline building design.",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Proposed RMR",
+            "rule_dependency": "None",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "proposed": {
@@ -7828,13 +7902,14 @@
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-34",
-            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (e) ",
+            "ruleset_reference": "Table G3.1#5 baselnid column e. e. Skylights and Glazed Smoke Vents. Skylight area shall be\nequal to that in the proposed design or 3%, whichever is smaller.",
             "rule_description": "If skylight area in the proposed desing is 3% or less of the roof surface, the skylight area shall be equal to that in the proposed design.",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Proposed RMR",
+            "rule_dependency": "None",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "proposed": {
@@ -7869,7 +7944,7 @@
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -7949,7 +8024,7 @@
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -8007,13 +8082,14 @@
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-34",
-            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (e) ",
+            "ruleset_reference": "Table G3.1#5 baselnid column e. e. Skylights and Glazed Smoke Vents. Skylight area shall be\nequal to that in the proposed design or 3%, whichever is smaller.",
             "rule_description": "If skylight area in the proposed desing is 3% or less of the roof surface, the skylight area shall be equal to that in the proposed design.",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Proposed RMR",
+            "rule_dependency": "None",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "proposed": {
@@ -8048,7 +8124,7 @@
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -8128,7 +8204,7 @@
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -8186,13 +8262,14 @@
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-35",
-            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (e)",
+            "ruleset_reference": "Table G3.1#5 baselnid column e: If the skylight area of the proposed design is greater than 3%, baseline skylight area shall be decreased by an\nidentical percentage in all roof components in which skylights are located to reach 3%.",
             "rule_description": " If the skylight area of the proposed design is greater than 3%, baseline skylight area shall be decreased by an identical percentage in all roof components in which skylights are located to reach 3%.",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Proposed RMR",
+            "rule_dependency": "None",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "proposed": {
@@ -8227,7 +8304,7 @@
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -8307,7 +8384,7 @@
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -8365,13 +8442,14 @@
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-35",
-            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (e)",
+            "ruleset_reference": "Table G3.1#5 baselnid column e: If the skylight area of the proposed design is greater than 3%, baseline skylight area shall be decreased by an\nidentical percentage in all roof components in which skylights are located to reach 3%.",
             "rule_description": " If the skylight area of the proposed design is greater than 3%, baseline skylight area shall be decreased by an identical percentage in all roof components in which skylights are located to reach 3%.",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Proposed RMR",
+            "rule_dependency": "None",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "proposed": {
@@ -8406,7 +8484,7 @@
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -8486,7 +8564,7 @@
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -8544,13 +8622,14 @@
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-36",
-            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (e)",
+            "ruleset_reference": "Table G3.1#5 baselnid column e: Skylight orientation and tilt shall be the same as in the proposed design.",
             "rule_description": "Skylight area must be allocated to surfaces in the same proportion in the baseline as in the proposed design; Skylight orientation and tilt shall be the same as in the proposed design.",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Proposed RMR",
+            "rule_dependency": "None",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "proposed": {
@@ -8585,7 +8664,7 @@
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -8674,7 +8753,7 @@
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -8741,13 +8820,14 @@
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-36",
-            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (e)",
+            "ruleset_reference": "Table G3.1#5 baselnid column e: Skylight orientation and tilt shall be the same as in the proposed design.",
             "rule_description": "Skylight area must be allocated to surfaces in the same proportion in the baseline as in the proposed design; Skylight orientation and tilt shall be the same as in the proposed design.",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Proposed RMR",
+            "rule_dependency": "None",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "proposed": {
@@ -8782,7 +8862,7 @@
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -8871,7 +8951,7 @@
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -8938,13 +9018,14 @@
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-37",
-            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (e)",
+            "ruleset_reference": "Table G3.1#5 baseline column e: Skylight U-factor \u2026 shall match the appropriate requirements in Tables G3.4-1 through G3.4-8 using the value and the applicable skylight percentage.",
             "rule_description": "Skylight U-factors for residential, non-residential and semiheated spaces in the baseline model must match the appropriate requirements in Table G3.4-1 through G3.4-8",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
+            "rule_dependency": "1. Baseline heating and cooling capacities are established correctly (air-side HVAC rule TBD). This affects baseline space conditioning categories\n2. Baseline skylight area is established correctly (Rules 34,35)",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "baseline": {
@@ -8980,7 +9061,7 @@
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -9032,13 +9113,14 @@
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-37",
-            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (e)",
+            "ruleset_reference": "Table G3.1#5 baseline column e: Skylight U-factor \u2026 shall match the appropriate requirements in Tables G3.4-1 through G3.4-8 using the value and the applicable skylight percentage.",
             "rule_description": "Skylight U-factors for residential, non-residential and semiheated spaces in the baseline model must match the appropriate requirements in Table G3.4-1 through G3.4-8",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
+            "rule_dependency": "1. Baseline heating and cooling capacities are established correctly (air-side HVAC rule TBD). This affects baseline space conditioning categories\n2. Baseline skylight area is established correctly (Rules 34,35)",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "baseline": {
@@ -9074,7 +9156,7 @@
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -9126,13 +9208,14 @@
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-37",
-            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (e)",
+            "ruleset_reference": "Table G3.1#5 baseline column e: Skylight U-factor \u2026 shall match the appropriate requirements in Tables G3.4-1 through G3.4-8 using the value and the applicable skylight percentage.",
             "rule_description": "Skylight U-factors for residential, non-residential and semiheated spaces in the baseline model must match the appropriate requirements in Table G3.4-1 through G3.4-8",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
+            "rule_dependency": "1. Baseline heating and cooling capacities are established correctly (air-side HVAC rule TBD). This affects baseline space conditioning categories\n2. Baseline skylight area is established correctly (Rules 34,35)",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "baseline": {
@@ -9168,7 +9251,7 @@
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -9220,13 +9303,14 @@
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-37",
-            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (e)",
+            "ruleset_reference": "Table G3.1#5 baseline column e: Skylight U-factor \u2026 shall match the appropriate requirements in Tables G3.4-1 through G3.4-8 using the value and the applicable skylight percentage.",
             "rule_description": "Skylight U-factors for residential, non-residential and semiheated spaces in the baseline model must match the appropriate requirements in Table G3.4-1 through G3.4-8",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
+            "rule_dependency": "1. Baseline heating and cooling capacities are established correctly (air-side HVAC rule TBD). This affects baseline space conditioning categories\n2. Baseline skylight area is established correctly (Rules 34,35)",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "baseline": {
@@ -9262,7 +9346,7 @@
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -9310,17 +9394,18 @@
         "Section": 5,
         "Rule": 37,
         "Test": "e",
-        "test_description": "Building is located in climate zone 4A. It includes a semiheated zone based on heating and cooling capacity of the HVAC system that servies it. Skylight area in the building is 0%-2.0%. The baseline skylight U-factor is established correctly.",
+        "test_description": "Building is located in climate zone 4A. It includes a semiheated zone based on heating and cooling capacity of the HVAC system that servies it. Skylight area in the building is 0%-2.0%. The baseline skylight U-factor is not established correctly.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-37",
-            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (e)",
+            "ruleset_reference": "Table G3.1#5 baseline column e: Skylight U-factor \u2026 shall match the appropriate requirements in Tables G3.4-1 through G3.4-8 using the value and the applicable skylight percentage.",
             "rule_description": "Skylight U-factors for residential, non-residential and semiheated spaces in the baseline model must match the appropriate requirements in Table G3.4-1 through G3.4-8",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
+            "rule_dependency": "1. Baseline heating and cooling capacities are established correctly (air-side HVAC rule TBD). This affects baseline space conditioning categories\n2. Baseline skylight area is established correctly (Rules 34,35)",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "baseline": {
@@ -9349,13 +9434,14 @@
                                                     {
                                                         "id": "Space 1",
                                                         "occupant_multiplier_schedule": "Required Occupancy Sched 1",
+                                                        "lighting_space_type": "WAREHOUSE_STORAGE_AREA_SMALLER_HAND_CARRIED_ITEMS",
                                                         "floor_area": 23.225759999999998
                                                     }
                                                 ],
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -9411,13 +9497,14 @@
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-37",
-            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (e)",
+            "ruleset_reference": "Table G3.1#5 baseline column e: Skylight U-factor \u2026 shall match the appropriate requirements in Tables G3.4-1 through G3.4-8 using the value and the applicable skylight percentage.",
             "rule_description": "Skylight U-factors for residential, non-residential and semiheated spaces in the baseline model must match the appropriate requirements in Table G3.4-1 through G3.4-8",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
+            "rule_dependency": "1. Baseline heating and cooling capacities are established correctly (air-side HVAC rule TBD). This affects baseline space conditioning categories\n2. Baseline skylight area is established correctly (Rules 34,35)",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "baseline": {
@@ -9452,7 +9539,7 @@
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -9508,13 +9595,14 @@
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-40",
-            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (f)",
+            "ruleset_reference": "Table G3.1 #5 baseline column: The exterior roof surfaces shall be modeled using ... a thermal emittance of 0.90.",
             "rule_description": "The  baseline roof surfaces shall be modeled using a thermal emittance of 0.9",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
+            "rule_dependency": "None",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "baseline": {
@@ -9549,7 +9637,7 @@
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -9595,13 +9683,14 @@
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-40",
-            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (f)",
+            "ruleset_reference": "Table G3.1 #5 baseline column: The exterior roof surfaces shall be modeled using ... a thermal emittance of 0.90.",
             "rule_description": "The  baseline roof surfaces shall be modeled using a thermal emittance of 0.9",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
+            "rule_dependency": "None",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "baseline": {
@@ -9636,7 +9725,7 @@
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -9682,13 +9771,14 @@
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-44",
-            "ruleset_reference": "Table G3.1(5) Proposed Building Performance (b)",
+            "ruleset_reference": "Table G3.1 #5 (b) proposed column: Infiltration shall be modeled using... adjustments for weather and building operation. These adjustments shall be made for each simulation time step and must account for but not be limited to weather conditions and HVAC system operation, including strategies that are\nintended to positively pressurize the building.",
             "rule_description": "The  infiltration modeling method in the baseline includes adjustment for weather and building operation. ",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
+            "rule_dependency": "1. Baseline heating and cooling capacities are established correctly (air-side HVAC rule TBD). This affects baseline space conditioning categories",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "baseline": {
@@ -9731,13 +9821,14 @@
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-44",
-            "ruleset_reference": "Table G3.1(5) Proposed Building Performance (b)",
+            "ruleset_reference": "Table G3.1 #5 (b) proposed column: Infiltration shall be modeled using... adjustments for weather and building operation. These adjustments shall be made for each simulation time step and must account for but not be limited to weather conditions and HVAC system operation, including strategies that are\nintended to positively pressurize the building.",
             "rule_description": "The  infiltration modeling method in the baseline includes adjustment for weather and building operation. ",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
+            "rule_dependency": "1. Baseline heating and cooling capacities are established correctly (air-side HVAC rule TBD). This affects baseline space conditioning categories",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "baseline": {
@@ -9780,13 +9871,14 @@
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-44",
-            "ruleset_reference": "Table G3.1(5) Proposed Building Performance (b)",
+            "ruleset_reference": "Table G3.1 #5 (b) proposed column: Infiltration shall be modeled using... adjustments for weather and building operation. These adjustments shall be made for each simulation time step and must account for but not be limited to weather conditions and HVAC system operation, including strategies that are\nintended to positively pressurize the building.",
             "rule_description": "The  infiltration modeling method in the baseline includes adjustment for weather and building operation. ",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
+            "rule_dependency": "1. Baseline heating and cooling capacities are established correctly (air-side HVAC rule TBD). This affects baseline space conditioning categories",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "baseline": {
@@ -9829,13 +9921,14 @@
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-45",
-            "ruleset_reference": "Table G3.1(5) Proposed Building Performance (b)",
+            "ruleset_reference": "Table G3.1 #1, Baseline column: The baseline building design shall be developed by modifying the proposed design as described in Section G3. Except as specifically instructed, all building systems and equipment shall be modeled identically in the proposed design and baseline building design.",
             "rule_description": "The  infiltration modeling method in the baseline includes adjustment for weather and building operation. ",
             "applicable_rmr": "Proposed RMR",
             "rule_assertion": "=",
             "comparison_value": "Baseline RMR",
+            "rule_dependency": "None",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "proposed": {
@@ -27448,13 +27541,14 @@
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-45",
-            "ruleset_reference": "Table G3.1(5) Proposed Building Performance (b)",
+            "ruleset_reference": "Table G3.1 #1, Baseline column: The baseline building design shall be developed by modifying the proposed design as described in Section G3. Except as specifically instructed, all building systems and equipment shall be modeled identically in the proposed design and baseline building design.",
             "rule_description": "The  infiltration modeling method in the baseline includes adjustment for weather and building operation. ",
             "applicable_rmr": "Proposed RMR",
             "rule_assertion": "=",
             "comparison_value": "Baseline RMR",
+            "rule_dependency": "None",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "proposed": {
@@ -45067,13 +45161,14 @@
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-46",
-            "ruleset_reference": "Table G3.1(5) Proposed Building Performance (b)",
+            "ruleset_reference": "Table G3.1 #5 (b) proposed column: Infiltration shall be modeled using the same methodology\nand adjustments for weather and building operation in both the proposed design and the baseline building design. ",
             "rule_description": "The Infiltration shall be modeled using the same methodology and adjustments for weather and building operation in both the proposed design and the baseline building design.",
             "applicable_rmr": "Proposed RMR",
             "rule_assertion": "=",
             "comparison_value": "Baseline RMR",
+            "rule_dependency": "None",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "proposed": {
@@ -45148,13 +45243,14 @@
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-46",
-            "ruleset_reference": "Table G3.1(5) Proposed Building Performance (b)",
+            "ruleset_reference": "Table G3.1 #5 (b) proposed column: Infiltration shall be modeled using the same methodology\nand adjustments for weather and building operation in both the proposed design and the baseline building design. ",
             "rule_description": "The Infiltration shall be modeled using the same methodology and adjustments for weather and building operation in both the proposed design and the baseline building design.",
             "applicable_rmr": "Proposed RMR",
             "rule_assertion": "=",
             "comparison_value": "Baseline RMR",
+            "rule_dependency": "None",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "proposed": {
@@ -45229,13 +45325,14 @@
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-47",
-            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (h)",
-            "rule_description": "The baseline air leakage rate of the building envelope (I75Pa) at a fixed building pressure differential of 0.3 in. of water shall be 1 cfm/ft2.  The air leakage rate of the building envelope shall be converted to appropriate units for the simulation program using one of the methods in Section Table G3.1.1.4.  ",
+            "ruleset_reference": "Table G3.1 #5 baseline column (h): The air leakage rate of the building envelope (I75Pa) at a fixed building pressure differential of 0.3 in. of water shall be 1.0 cfm/ft2.",
+            "rule_description": "The baseline air leakage rate of the building envelope (I75Pa) at a fixed building pressure differential of 0.3 in. of water shall be 1 cfm/ft2.  The air leakage rate of the building envelope shall be converted to appropriate units for the simulation program using one of the methods in Section G3.1.1.4.  ",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
+            "rule_dependency": "1. Baseline heating and cooling capacities are established correctly (air-side HVAC rule TBD). This affects baseline space conditioning categories",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "baseline": {
@@ -45272,12 +45369,13 @@
                                                 "infiltration": {
                                                     "id": "Infiltration 1",
                                                     "multiplier_schedule": "Infiltration Schedule 1",
-                                                    "infiltration_flow_rate": 0.5285811363839998
+                                                    "infiltration_flow_rate": 0.5285811363839998,
+                                                    "measured_air_leakage_rate": 4.719474431999998
                                                 },
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -45327,13 +45425,14 @@
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-47",
-            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (h)",
-            "rule_description": "The baseline air leakage rate of the building envelope (I75Pa) at a fixed building pressure differential of 0.3 in. of water shall be 1 cfm/ft2.  The air leakage rate of the building envelope shall be converted to appropriate units for the simulation program using one of the methods in Section Table G3.1.1.4.  ",
+            "ruleset_reference": "Table G3.1 #5 baseline column (h): The air leakage rate of the building envelope (I75Pa) at a fixed building pressure differential of 0.3 in. of water shall be 1.0 cfm/ft2.",
+            "rule_description": "The baseline air leakage rate of the building envelope (I75Pa) at a fixed building pressure differential of 0.3 in. of water shall be 1 cfm/ft2.  The air leakage rate of the building envelope shall be converted to appropriate units for the simulation program using one of the methods in Section G3.1.1.4.  ",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
+            "rule_dependency": "1. Baseline heating and cooling capacities are established correctly (air-side HVAC rule TBD). This affects baseline space conditioning categories",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "baseline": {
@@ -45370,12 +45469,13 @@
                                                 "infiltration": {
                                                     "id": "Infiltration 1",
                                                     "multiplier_schedule": "Infiltration Schedule 1",
-                                                    "infiltration_flow_rate": 2.359737215999999
+                                                    "infiltration_flow_rate": 1.0571622727679997,
+                                                    "measured_air_leakage_rate": 2.359737215999999
                                                 },
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -45425,13 +45525,14 @@
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-47",
-            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (h)",
-            "rule_description": "The baseline air leakage rate of the building envelope (I75Pa) at a fixed building pressure differential of 0.3 in. of water shall be 1 cfm/ft2.  The air leakage rate of the building envelope shall be converted to appropriate units for the simulation program using one of the methods in Section Table G3.1.1.4.  ",
+            "ruleset_reference": "Table G3.1 #5 baseline column (h): The air leakage rate of the building envelope (I75Pa) at a fixed building pressure differential of 0.3 in. of water shall be 1.0 cfm/ft2.",
+            "rule_description": "The baseline air leakage rate of the building envelope (I75Pa) at a fixed building pressure differential of 0.3 in. of water shall be 1 cfm/ft2.  The air leakage rate of the building envelope shall be converted to appropriate units for the simulation program using one of the methods in Section G3.1.1.4.  ",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
+            "rule_dependency": "1. Baseline heating and cooling capacities are established correctly (air-side HVAC rule TBD). This affects baseline space conditioning categories",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "baseline": {
@@ -45472,7 +45573,7 @@
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -45521,13 +45622,14 @@
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-47",
-            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (h)",
-            "rule_description": "The baseline air leakage rate of the building envelope (I75Pa) at a fixed building pressure differential of 0.3 in. of water shall be 1 cfm/ft2.  The air leakage rate of the building envelope shall be converted to appropriate units for the simulation program using one of the methods in Section Table G3.1.1.4.  ",
+            "ruleset_reference": "Table G3.1 #5 baseline column (h): The air leakage rate of the building envelope (I75Pa) at a fixed building pressure differential of 0.3 in. of water shall be 1.0 cfm/ft2.",
+            "rule_description": "The baseline air leakage rate of the building envelope (I75Pa) at a fixed building pressure differential of 0.3 in. of water shall be 1 cfm/ft2.  The air leakage rate of the building envelope shall be converted to appropriate units for the simulation program using one of the methods in Section G3.1.1.4.  ",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
+            "rule_dependency": "1. Baseline heating and cooling capacities are established correctly (air-side HVAC rule TBD). This affects baseline space conditioning categories",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "baseline": {
@@ -45568,7 +45670,7 @@
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -45617,13 +45719,14 @@
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-47",
-            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (h)",
-            "rule_description": "The baseline air leakage rate of the building envelope (I75Pa) at a fixed building pressure differential of 0.3 in. of water shall be 1 cfm/ft2.  The air leakage rate of the building envelope shall be converted to appropriate units for the simulation program using one of the methods in Section Table G3.1.1.4.  ",
+            "ruleset_reference": "Table G3.1 #5 baseline column (h): The air leakage rate of the building envelope (I75Pa) at a fixed building pressure differential of 0.3 in. of water shall be 1.0 cfm/ft2.",
+            "rule_description": "The baseline air leakage rate of the building envelope (I75Pa) at a fixed building pressure differential of 0.3 in. of water shall be 1 cfm/ft2.  The air leakage rate of the building envelope shall be converted to appropriate units for the simulation program using one of the methods in Section G3.1.1.4.  ",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
+            "rule_dependency": "1. Baseline heating and cooling capacities are established correctly (air-side HVAC rule TBD). This affects baseline space conditioning categories",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "baseline": {
@@ -45665,7 +45768,7 @@
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -45723,13 +45826,14 @@
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-47",
-            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (h)",
-            "rule_description": "The baseline air leakage rate of the building envelope (I75Pa) at a fixed building pressure differential of 0.3 in. of water shall be 1 cfm/ft2.  The air leakage rate of the building envelope shall be converted to appropriate units for the simulation program using one of the methods in Section Table G3.1.1.4.  ",
+            "ruleset_reference": "Table G3.1 #5 baseline column (h): The air leakage rate of the building envelope (I75Pa) at a fixed building pressure differential of 0.3 in. of water shall be 1.0 cfm/ft2.",
+            "rule_description": "The baseline air leakage rate of the building envelope (I75Pa) at a fixed building pressure differential of 0.3 in. of water shall be 1 cfm/ft2.  The air leakage rate of the building envelope shall be converted to appropriate units for the simulation program using one of the methods in Section G3.1.1.4.  ",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
+            "rule_dependency": "1. Baseline heating and cooling capacities are established correctly (air-side HVAC rule TBD). This affects baseline space conditioning categories",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "baseline": {
@@ -45771,7 +45875,7 @@
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -45829,13 +45933,14 @@
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-47",
-            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (h)",
-            "rule_description": "The baseline air leakage rate of the building envelope (I75Pa) at a fixed building pressure differential of 0.3 in. of water shall be 1 cfm/ft2.  The air leakage rate of the building envelope shall be converted to appropriate units for the simulation program using one of the methods in Section Table G3.1.1.4.  ",
+            "ruleset_reference": "Table G3.1 #5 baseline column (h): The air leakage rate of the building envelope (I75Pa) at a fixed building pressure differential of 0.3 in. of water shall be 1.0 cfm/ft2.",
+            "rule_description": "The baseline air leakage rate of the building envelope (I75Pa) at a fixed building pressure differential of 0.3 in. of water shall be 1 cfm/ft2.  The air leakage rate of the building envelope shall be converted to appropriate units for the simulation program using one of the methods in Section G3.1.1.4.  ",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
+            "rule_dependency": "1. Baseline heating and cooling capacities are established correctly (air-side HVAC rule TBD). This affects baseline space conditioning categories",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "baseline": {
@@ -45874,7 +45979,7 @@
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -45931,13 +46036,14 @@
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-47",
-            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (h)",
-            "rule_description": "The baseline air leakage rate of the building envelope (I75Pa) at a fixed building pressure differential of 0.3 in. of water shall be 1 cfm/ft2.  The air leakage rate of the building envelope shall be converted to appropriate units for the simulation program using one of the methods in Section Table G3.1.1.4.  ",
+            "ruleset_reference": "Table G3.1 #5 baseline column (h): The air leakage rate of the building envelope (I75Pa) at a fixed building pressure differential of 0.3 in. of water shall be 1.0 cfm/ft2.",
+            "rule_description": "The baseline air leakage rate of the building envelope (I75Pa) at a fixed building pressure differential of 0.3 in. of water shall be 1 cfm/ft2.  The air leakage rate of the building envelope shall be converted to appropriate units for the simulation program using one of the methods in Section G3.1.1.4.  ",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
+            "rule_dependency": "1. Baseline heating and cooling capacities are established correctly (air-side HVAC rule TBD). This affects baseline space conditioning categories",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "baseline": {
@@ -45976,7 +46082,7 @@
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -46033,13 +46139,14 @@
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-48",
-            "ruleset_reference": "Table G3.1(5) Proposed Building Performance (b)",
+            "ruleset_reference": "Table G3.1 #1, Baseline column: The baseline building design shall be developed by modifying the proposed design as described in Section G3. Except as specifically instructed, all building systems and equipment shall be modeled identically in the proposed design and baseline building design.",
             "rule_description": "The air leakage rate in unconditioned and unenclosed spaces must be the same in the baseline and proposed design",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Proposed RMR",
+            "rule_dependency": "1. Baseline heating and cooling capacities are established correctly (air-side HVAC rule TBD). This affects baseline space conditioning categories",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "proposed": {
@@ -46160,13 +46267,14 @@
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-48",
-            "ruleset_reference": "Table G3.1(5) Proposed Building Performance (b)",
+            "ruleset_reference": "Table G3.1 #1, Baseline column: The baseline building design shall be developed by modifying the proposed design as described in Section G3. Except as specifically instructed, all building systems and equipment shall be modeled identically in the proposed design and baseline building design.",
             "rule_description": "The air leakage rate in unconditioned and unenclosed spaces must be the same in the baseline and proposed design",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Proposed RMR",
+            "rule_dependency": "1. Baseline heating and cooling capacities are established correctly (air-side HVAC rule TBD). This affects baseline space conditioning categories",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "proposed": {
@@ -46287,13 +46395,14 @@
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-49",
-            "ruleset_reference": "Table G3.1(5) Proposed Building Performance (b)",
-            "rule_description": "The proposed air leakage rate of the building envelope (I75Pa) at a fixed building pressure differential of 0.3 in. of water shall be 0.6 cfm/ft2 for buildings providing verification in accordance with Section 5.9.1.2. The air leakage rate of the building envelope shall be converted to appropriate units for the simulation program using one of the methods in Section Table G3.1.1.4. \nExceptions: When whole-building air leakage testing, in accordance with Section 5.4.3.1.1, is specified during design and completed after construction, the proposed design air leakage rate of the building envelope shall be as measured.",
+            "ruleset_reference": "Table G3.1 #5 Proposed column (b): The proposed air leakage rate of the building envelope (I75Pa) at a fixed building pressure differential of 0.3 in. of water shall be 0.6 cfm/ft2 for buildings providing verification in accordance with Section 5.9.1.2. The air leakage rate of the building envelope shall be converted to appropriate units for the simulation program using one of the methods in Section G3.1.1.4. \nExceptions: When whole-building air leakage testing, in accordance with Section 5.4.3.1.1, is specified during design and completed after construction, the proposed design air leakage rate of the building envelope shall be as measured. ",
+            "rule_description": "The proposed air leakage rate of the building envelope (I75Pa) at a fixed building pressure differential of 0.3 in. of water shall be 0.6 cfm/ft2 for buildings providing verification in accordance with Section 5.9.1.2. The air leakage rate of the building envelope shall be converted to appropriate units for the simulation program using one of the methods in Section G3.1.1.4. \nExceptions: When whole-building air leakage testing, in accordance with Section 5.4.3.1.1, is specified during design and completed after construction, the proposed design air leakage rate of the building envelope shall be as measured.",
             "applicable_rmr": "Proposed RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
+            "rule_dependency": "None",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "proposed": {
@@ -46335,7 +46444,7 @@
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -46385,13 +46494,14 @@
         "expected_rule_outcome": "manual_check",
         "standard": {
             "rule_id": "5-49",
-            "ruleset_reference": "Table G3.1(5) Proposed Building Performance (b)",
-            "rule_description": "The proposed air leakage rate of the building envelope (I75Pa) at a fixed building pressure differential of 0.3 in. of water shall be 0.6 cfm/ft2 for buildings providing verification in accordance with Section 5.9.1.2. The air leakage rate of the building envelope shall be converted to appropriate units for the simulation program using one of the methods in Section Table G3.1.1.4. \nExceptions: When whole-building air leakage testing, in accordance with Section 5.4.3.1.1, is specified during design and completed after construction, the proposed design air leakage rate of the building envelope shall be as measured.",
+            "ruleset_reference": "Table G3.1 #5 Proposed column (b): The proposed air leakage rate of the building envelope (I75Pa) at a fixed building pressure differential of 0.3 in. of water shall be 0.6 cfm/ft2 for buildings providing verification in accordance with Section 5.9.1.2. The air leakage rate of the building envelope shall be converted to appropriate units for the simulation program using one of the methods in Section G3.1.1.4. \nExceptions: When whole-building air leakage testing, in accordance with Section 5.4.3.1.1, is specified during design and completed after construction, the proposed design air leakage rate of the building envelope shall be as measured. ",
+            "rule_description": "The proposed air leakage rate of the building envelope (I75Pa) at a fixed building pressure differential of 0.3 in. of water shall be 0.6 cfm/ft2 for buildings providing verification in accordance with Section 5.9.1.2. The air leakage rate of the building envelope shall be converted to appropriate units for the simulation program using one of the methods in Section G3.1.1.4. \nExceptions: When whole-building air leakage testing, in accordance with Section 5.4.3.1.1, is specified during design and completed after construction, the proposed design air leakage rate of the building envelope shall be as measured.",
             "applicable_rmr": "Proposed RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
+            "rule_dependency": "None",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "proposed": {
@@ -46433,7 +46543,7 @@
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -46483,13 +46593,14 @@
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-49",
-            "ruleset_reference": "Table G3.1(5) Proposed Building Performance (b)",
-            "rule_description": "The proposed air leakage rate of the building envelope (I75Pa) at a fixed building pressure differential of 0.3 in. of water shall be 0.6 cfm/ft2 for buildings providing verification in accordance with Section 5.9.1.2. The air leakage rate of the building envelope shall be converted to appropriate units for the simulation program using one of the methods in Section Table G3.1.1.4. \nExceptions: When whole-building air leakage testing, in accordance with Section 5.4.3.1.1, is specified during design and completed after construction, the proposed design air leakage rate of the building envelope shall be as measured.",
+            "ruleset_reference": "Table G3.1 #5 Proposed column (b): The proposed air leakage rate of the building envelope (I75Pa) at a fixed building pressure differential of 0.3 in. of water shall be 0.6 cfm/ft2 for buildings providing verification in accordance with Section 5.9.1.2. The air leakage rate of the building envelope shall be converted to appropriate units for the simulation program using one of the methods in Section G3.1.1.4. \nExceptions: When whole-building air leakage testing, in accordance with Section 5.4.3.1.1, is specified during design and completed after construction, the proposed design air leakage rate of the building envelope shall be as measured. ",
+            "rule_description": "The proposed air leakage rate of the building envelope (I75Pa) at a fixed building pressure differential of 0.3 in. of water shall be 0.6 cfm/ft2 for buildings providing verification in accordance with Section 5.9.1.2. The air leakage rate of the building envelope shall be converted to appropriate units for the simulation program using one of the methods in Section G3.1.1.4. \nExceptions: When whole-building air leakage testing, in accordance with Section 5.4.3.1.1, is specified during design and completed after construction, the proposed design air leakage rate of the building envelope shall be as measured.",
             "applicable_rmr": "Proposed RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
+            "rule_dependency": "None",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "proposed": {
@@ -46531,7 +46642,7 @@
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -46581,13 +46692,14 @@
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-49",
-            "ruleset_reference": "Table G3.1(5) Proposed Building Performance (b)",
-            "rule_description": "The proposed air leakage rate of the building envelope (I75Pa) at a fixed building pressure differential of 0.3 in. of water shall be 0.6 cfm/ft2 for buildings providing verification in accordance with Section 5.9.1.2. The air leakage rate of the building envelope shall be converted to appropriate units for the simulation program using one of the methods in Section Table G3.1.1.4. \nExceptions: When whole-building air leakage testing, in accordance with Section 5.4.3.1.1, is specified during design and completed after construction, the proposed design air leakage rate of the building envelope shall be as measured.",
+            "ruleset_reference": "Table G3.1 #5 Proposed column (b): The proposed air leakage rate of the building envelope (I75Pa) at a fixed building pressure differential of 0.3 in. of water shall be 0.6 cfm/ft2 for buildings providing verification in accordance with Section 5.9.1.2. The air leakage rate of the building envelope shall be converted to appropriate units for the simulation program using one of the methods in Section G3.1.1.4. \nExceptions: When whole-building air leakage testing, in accordance with Section 5.4.3.1.1, is specified during design and completed after construction, the proposed design air leakage rate of the building envelope shall be as measured. ",
+            "rule_description": "The proposed air leakage rate of the building envelope (I75Pa) at a fixed building pressure differential of 0.3 in. of water shall be 0.6 cfm/ft2 for buildings providing verification in accordance with Section 5.9.1.2. The air leakage rate of the building envelope shall be converted to appropriate units for the simulation program using one of the methods in Section G3.1.1.4. \nExceptions: When whole-building air leakage testing, in accordance with Section 5.4.3.1.1, is specified during design and completed after construction, the proposed design air leakage rate of the building envelope shall be as measured.",
             "applicable_rmr": "Proposed RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
+            "rule_dependency": "None",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.18"
         },
         "rmr_transformations": {
             "proposed": {
@@ -46629,7 +46741,7 @@
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [

@@ -72,7 +72,7 @@ GET_HW_LOOP_ZONE_LIST_W_AREA_RMD = {
                                     ],
                                 },
                             ],
-                            "heating_ventilation_air_conditioning_systems": [
+                            "heating_ventilating_air_conditioning_systems": [
                                 {
                                     "id": "System 7",
                                     "preheat_system": {

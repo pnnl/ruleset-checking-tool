@@ -27,7 +27,7 @@ TEST_RMD = {
                             ],
                         }
                     ],
-                    "heating_ventilation_air_conditioning_systems": [
+                    "heating_ventilating_air_conditioning_systems": [
                         {
                             "id": "System 12",
                             "cooling_system": {

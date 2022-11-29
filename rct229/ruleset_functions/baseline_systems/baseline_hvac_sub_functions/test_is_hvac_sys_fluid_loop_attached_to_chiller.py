@@ -10,7 +10,7 @@ TEST_RMD = {
             "building_segments": [
                 {
                     "id": "building_segment_1",
-                    "heating_ventilation_air_conditioning_systems": [
+                    "heating_ventilating_air_conditioning_systems": [
                         {
                             "id": "hvac_1",
                             "cooling_system": {

@@ -38,7 +38,7 @@ TEST_RMR = {
                     "id": "bldg_seg_1",
                     "lighting_building_area_type": "MULTIFAMILY",
                     "area_type_vertical_fenestration": "HOTEL_MOTEL_SMALL",
-                    "heating_ventilation_air_conditioning_systems": [
+                    "heating_ventilating_air_conditioning_systems": [
                         # Used for zone_1_2, directly conditioned zone
                         {
                             "id": "hvac_1_2",
