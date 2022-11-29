@@ -1,3 +1,8 @@
+# hvac_id = "System 8" => Sys_8, [Thermal Zone 8], [Air Terminal 8]
+# hvac_id = "System 8a" => Sys_8a, [Thermal Zone 8a], [Air Terminal 8a]
+# hvac_id = "System 8b" => Sys_8b, [Thermal Zone 8b], [Air Terminal 8b]
+# hvac_id = "System 8c" => Sys_8c, [Thermal Zone 8c], [Air Terminal 8c]
+
 from rct229.schema.validate import schema_validate_rmr
 
 SYS_8_RMD = {
@@ -23,14 +28,14 @@ SYS_8_RMD = {
                                             "is_supply_ducted": True,
                                             "type": "VARIABLE_AIR_VOLUME",
                                             "served_by_heating_ventilation_air_conditioning_system": "System 8",
-                                            "heating_source": "HOT_WATER",
+                                            "heating_source": "ELECTRIC",
                                             "heating_from_loop": "Boiler Loop 1",
                                             "fan_configuration": "PARALLEL",
                                         }
                                     ],
                                 },
                                 {
-                                    "id": "Thermal Zone 2",
+                                    "id": "Thermal Zone 8a",
                                     "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
                                     "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                     "terminals": [
@@ -39,14 +44,14 @@ SYS_8_RMD = {
                                             "is_supply_ducted": True,
                                             "type": "VARIABLE_AIR_VOLUME",
                                             "served_by_heating_ventilation_air_conditioning_system": "System 8a",
-                                            "heating_source": "HOT_WATER",
+                                            "heating_source": "ELECTRIC",
                                             "heating_from_loop": "Boiler Loop 1",
                                             "fan_configuration": "PARALLEL",
                                         }
                                     ],
                                 },
                                 {
-                                    "id": "Thermal Zone 3",
+                                    "id": "Thermal Zone 8b",
                                     "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
                                     "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                     "terminals": [
@@ -56,13 +61,13 @@ SYS_8_RMD = {
                                             "type": "VARIABLE_AIR_VOLUME",
                                             "served_by_heating_ventilation_air_conditioning_system": "System 8b",
                                             "heating_source": "HOT_WATER",
-                                            "heating_from_loop": "Boiler Loop 1",
+                                            "heating_from_loop": "Purchased HW Loop 1",
                                             "fan_configuration": "PARALLEL",
                                         }
                                     ],
                                 },
                                 {
-                                    "id": "Thermal Zone 4",
+                                    "id": "Thermal Zone 8c",
                                     "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
                                     "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                     "terminals": [
@@ -72,7 +77,7 @@ SYS_8_RMD = {
                                             "type": "VARIABLE_AIR_VOLUME",
                                             "served_by_heating_ventilation_air_conditioning_system": "System 8c",
                                             "heating_source": "HOT_WATER",
-                                            "heating_from_loop": "Boiler Loop 1",
+                                            "heating_from_loop": "Purchased HW Loop 1",
                                             "fan_configuration": "PARALLEL",
                                         }
                                     ],
@@ -178,8 +183,8 @@ SYS_8_RMD = {
                     "type": "HOT_WATER",
                 },
                 {
-                    "id": "Purchased CW 1",
-                    "loop": "Chilled Water Loop 1",
+                    "id": "Purchased CW 2",
+                    "loop": "Chilled Water Loop 2",
                     "type": "CHILLED_WATER",
                 },
             ],
