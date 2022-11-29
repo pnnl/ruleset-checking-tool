@@ -48,7 +48,7 @@
 												"terminals": [
                                                     {
                                                         "id": "Terminal 1",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
+                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -140,7 +140,7 @@
 												"terminals": [
                                                     {
                                                         "id": "Terminal 1",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
+                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
