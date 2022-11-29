@@ -18,13 +18,14 @@
 **Function Calls:**  
 
 1. get_baseline_system_types()
+2. baseline_system_type_string_compare
 
 
 **Applicability Checks:**  
 
 - Get B-RMR system types: `baseline_hvac_system_dict = get_baseline_system_types(B-RMI)`
 
-  - Check if B-RMI is modeled with at least one air-side system that is Type-6, 8, 8a, 6b, 8b, continue to rule logic: `if any(sys_type in baseline_hvac_system_dict.keys() for sys_type in ["SYS-6", "SYS-8", "SYS-8A", "SYS-6B", "SYS-8B"]): CHECK_RULE_LOGIC`
+  - Check if B-RMI is modeled with at least one air-side system that is Type-6, 8, 8a, 6b, 8b, continue to rule logic: `if any(baseline_system_type_string_compare(system_type, sys_type, false) == TRUE for sys_type in ["SYS-6","SYS-8"]): CHECK_RULE_LOGIC`
 
   - Else, rule is not applicable to B-RMR: `else: RULE_NOT_APPLICABLE`
 
