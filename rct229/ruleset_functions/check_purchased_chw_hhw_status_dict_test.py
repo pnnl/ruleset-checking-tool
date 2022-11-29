@@ -22,7 +22,7 @@ TEST_RMD = {
                                     "id": "CAV Air Terminal 1",
                                     "is_supply_ducted": True,
                                     "type": "CONSTANT_AIR_VOLUME",
-                                    "served_by_heating_ventilation_air_conditioning_system": "System 12",
+                                    "served_by_heating_ventilating_air_conditioning_system": "System 12",
                                 }
                             ],
                         }

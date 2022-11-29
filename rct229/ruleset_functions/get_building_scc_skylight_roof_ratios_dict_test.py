@@ -123,7 +123,7 @@ TEST_RMR = {
                             "terminals": [
                                 {
                                     "id": "terminal_1_1_1",
-                                    "served_by_heating_ventilation_air_conditioning_system": "hvac_1_1",
+                                    "served_by_heating_ventilating_air_conditioning_system": "hvac_1_1",
                                 }
                             ],
                         },
@@ -167,7 +167,7 @@ TEST_RMR = {
                             "terminals": [
                                 {
                                     "id": "terminal_1_2_1",
-                                    "served_by_heating_ventilation_air_conditioning_system": "hvac_1_2",
+                                    "served_by_heating_ventilating_air_conditioning_system": "hvac_1_2",
                                 }
                             ],
                         },
@@ -211,7 +211,7 @@ TEST_RMR = {
                             "terminals": [
                                 {
                                     "id": "terminal_1_3_1",
-                                    "served_by_heating_ventilation_air_conditioning_system": "hvac_1_3",
+                                    "served_by_heating_ventilating_air_conditioning_system": "hvac_1_3",
                                 }
                             ],
                         },
@@ -255,7 +255,7 @@ TEST_RMR = {
                             "terminals": [
                                 {
                                     "id": "terminal_1_4_1",
-                                    "served_by_heating_ventilation_air_conditioning_system": "hvac_1_4",
+                                    "served_by_heating_ventilating_air_conditioning_system": "hvac_1_4",
                                 }
                             ],
                         },
@@ -328,7 +328,7 @@ TEST_RMR = {
                             "terminals": [
                                 {
                                     "id": "terminal_2_1_1",
-                                    "served_by_heating_ventilation_air_conditioning_system": "hvac_2_1",
+                                    "served_by_heating_ventilating_air_conditioning_system": "hvac_2_1",
                                 }
                             ],
                         },
@@ -374,7 +374,7 @@ TEST_RMR = {
                             "terminals": [
                                 {
                                     "id": "terminal_2_2_1",
-                                    "served_by_heating_ventilation_air_conditioning_system": "hvac_2_2",
+                                    "served_by_heating_ventilating_air_conditioning_system": "hvac_2_2",
                                 }
                             ],
                         },
@@ -456,7 +456,7 @@ TEST_RMR = {
                             "terminals": [
                                 {
                                     "id": "terminal_3_1_1",
-                                    "served_by_heating_ventilation_air_conditioning_system": "hvac_3_1",
+                                    "served_by_heating_ventilating_air_conditioning_system": "hvac_3_1",
                                 }
                             ],
                         },
@@ -513,7 +513,7 @@ TEST_RMR = {
                             "terminals": [
                                 {
                                     "id": "terminal_3_2_1",
-                                    "served_by_heating_ventilation_air_conditioning_system": "hvac_3_2",
+                                    "served_by_heating_ventilating_air_conditioning_system": "hvac_3_2",
                                 }
                             ],
                         },
