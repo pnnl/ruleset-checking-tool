@@ -156,7 +156,7 @@ class Section22Rule4(RuleDefinitionListIndexedBase):
                 "loop_supply_temperature_at_outdoor_low"
             ]
             required_loop_supply_temperature_at_outdoor_low = calc_vals[
-                "requried_loop_supply_temperature_at_outdoor_low"
+                "required_loop_supply_temperature_at_outdoor_low"
             ]
 
             return (
