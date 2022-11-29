@@ -13,7 +13,7 @@
             "rule_assertion": "=",
             "comparison_value": "Baseline RMR",
             "primary_rule": "Y",
-            "schema_version": "0.0.18"
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "proposed": {
@@ -17632,7 +17632,7 @@
             "rule_assertion": "=",
             "comparison_value": "Baseline RMR",
             "primary_rule": "Y",
-            "schema_version": "0.0.18"
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "proposed": {
