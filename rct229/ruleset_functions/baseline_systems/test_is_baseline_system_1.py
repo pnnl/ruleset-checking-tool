@@ -84,7 +84,7 @@ SYS_1_RMD = {
                                     ],
                                 },
                             ],
-                            "heating_ventilation_air_conditioning_systems": [
+                            "heating_ventilating_air_conditioning_systems": [
                                 {
                                     "id": "PTAC 1",
                                     "cooling_system": {

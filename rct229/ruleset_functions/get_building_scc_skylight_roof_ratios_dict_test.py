@@ -44,7 +44,7 @@ TEST_RMR = {
                     "id": "bldg_seg_1",
                     "lighting_building_area_type": "MULTIFAMILY",
                     "area_type_vertical_fenestration": "HOTEL_MOTEL_SMALL",
-                    "heating_ventilation_air_conditioning_systems": [
+                    "heating_ventilating_air_conditioning_systems": [
                         # Use for zone_1_1, directly conditioned zone
                         {
                             "id": "hvac_1_1",
@@ -267,7 +267,7 @@ TEST_RMR = {
                     "id": "bldg_seg_2",
                     "lighting_building_area_type": "FIRE_STATION",
                     "area_type_vertical_fenestration": "RETAIL_STAND_ALONE",
-                    "heating_ventilation_air_conditioning_systems": [
+                    "heating_ventilating_air_conditioning_systems": [
                         # Used for semi-heated zone
                         {
                             "id": "hvac_2_1",
@@ -383,7 +383,7 @@ TEST_RMR = {
                 {
                     "id": "bldg_seg_3",
                     "lighting_building_area_type": "MULTIFAMILY",
-                    "heating_ventilation_air_conditioning_systems": [
+                    "heating_ventilating_air_conditioning_systems": [
                         # Use for zone_3_1, directly conditioned zone
                         {
                             "id": "hvac_3_1",

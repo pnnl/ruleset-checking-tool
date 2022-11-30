@@ -44,7 +44,7 @@ SYS_3_RMD = {
                                     ],
                                 },
                             ],
-                            "heating_ventilation_air_conditioning_systems": [
+                            "heating_ventilating_air_conditioning_systems": [
                                 {
                                     "id": "System Type 3",
                                     "cooling_system": {

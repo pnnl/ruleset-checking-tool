@@ -15,9 +15,9 @@
 
 **Logic:**
 - Create an object from the RMR that was input to the function: `X_RMR = RMR`
-- Get list of the hvac systems serving the zone in the X_RMR: `heating_ventilation_air_conditioning_systems_list_x = get_list_hvac_systems_associated_with_zone(X_RMR, zone_x.id)`
-- Get the number of hvac systems serving the zone: `num_hvac_systems_x = len(heating_ventilation_air_conditioning_systems_list_x)`
-- Loop through each hvac system and create a list of fan system operating schedule 8760 hourly values (this is basically a list containing lists of 8760 values for each fan system) for each fan system: `for hvac_x in heating_ventilation_air_conditioning_systems_list_x:`
+- Get list of the hvac systems serving the zone in the X_RMR: `heating_ventilating_air_conditioning_systems_list_x = get_list_hvac_systems_associated_with_zone(X_RMR, zone_x.id)`
+- Get the number of hvac systems serving the zone: `num_hvac_systems_x = len(heating_ventilating_air_conditioning_systems_list_x)`
+- Loop through each hvac system and create a list of fan system operating schedule 8760 hourly values (this is basically a list containing lists of 8760 values for each fan system) for each fan system: `for hvac_x in heating_ventilating_air_conditioning_systems_list_x:`
     - Get the fan system associated with the hvac system: `fan_systems_x = hvac_x.fan_system[0].id`
     - Get he fan schedule associated with the fan system: `fan_schedule_x = fan_system_x.operating_schedule`
     - Get the list of hourly values associated with the fan schedule (convert to an 8760 schedule using a function if needed): `fan_schedule_hourly_values_x = fan_schedule_x.hourly_values`

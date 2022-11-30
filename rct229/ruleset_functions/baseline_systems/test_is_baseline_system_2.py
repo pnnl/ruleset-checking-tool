@@ -27,7 +27,7 @@ SYS_2_RMD = {
                                     ],
                                 }
                             ],
-                            "heating_ventilation_air_conditioning_systems": [
+                            "heating_ventilating_air_conditioning_systems": [
                                 {
                                     "id": "PTHP 1",
                                     "cooling_system": {
