@@ -6,8 +6,13 @@ from rct229.reports.project_report import (
     print_summary_report,
 )
 from rct229.rule_engine.engine import evaluate_all_rules
-from rct229.ruletest_engine.ruletest_engine import run_envelope_tests, run_lighting_tests, run_transformer_tests, \
-    run_boiler_tests, run_chiller_tests
+from rct229.ruletest_engine.ruletest_engine import (
+    run_envelope_tests,
+    run_lighting_tests,
+    run_transformer_tests,
+    run_boiler_tests,
+    run_chiller_tests,
+)
 from rct229.schema.validate import validate_rmr
 from rct229.utils.file import deserialize_rmr_file
 
@@ -27,11 +32,15 @@ def cli():
 
 
 # Software Test Workflow
-test_short_help_text = "Software test workflow, add sections to do test. argument (optional): section string, " \
-                       "currently available: section5, section6, section 21, section 22 "
+test_short_help_text = (
+    "Software test workflow, add sections to do test. argument (optional): section string, "
+    "currently available: section5, section6, section 21, section 22 "
+)
 
 
-@cli.command("test", short_help=test_short_help_text, help=test_short_help_text, hidden=True)
+@cli.command(
+    "test", short_help=test_short_help_text, help=test_short_help_text, hidden=True
+)
 @click.argument("section", type=click.STRING, required=False)
 def run_test(section=None):
     if section:

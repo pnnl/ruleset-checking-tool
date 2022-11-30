@@ -327,7 +327,7 @@ def run_section_tests(test_json_name):
     # Return whether or not all tests in this test JSON received their expected outcome as a boolean
     all_tests_successful = all(test_result_dict["results"])
 
-    return all_tests_successful
+    return all_tests_pass
 
 
 def validate_test_json_schema(test_json_path):
@@ -526,7 +526,7 @@ def run_boiler_tests():
 
     Results of boiler test are spit out to console
     """
-    boiler_test_json = "section21/rule_21_6.json"
+    boiler_test_json = "boiler_tests.json"
     return run_section_tests(boiler_test_json)
 
 
@@ -539,5 +539,5 @@ def run_chiller_tests():
 
     Results of chiller test are spit out to console
     """
-    chiller_test_json = "section22/rule_22_1.json"
+    chiller_test_json = "chiller_tests.json"
     return run_section_tests(chiller_test_json)
