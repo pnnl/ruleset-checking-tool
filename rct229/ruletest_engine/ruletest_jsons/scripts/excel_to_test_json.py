@@ -4,6 +4,7 @@ import math
 import os
 
 import pandas as pd
+import pint
 
 from rct229.ruletest_engine.ruletest_jsons.scripts.json_generation_utilities import *
 from rct229.schema.config import ureg
@@ -11,9 +12,9 @@ from rct229.schema.schema_utils import *
 
 # ---------------------------------------USER INPUTS---------------------------------------
 
-spreadsheet_name = "example_rmrs.xlsx"
-json_name = "envelope_examples.json"
-sheet_name = "Envelope"
+spreadsheet_name = "envelope_tcd_master.xlsx"
+json_name = "envelope_tests.json"
+sheet_name = "TCDs"
 
 # --------------------------------------SCRIPT STARTS--------------------------------------
 
@@ -84,6 +85,9 @@ def convert_units_from_tcd_to_rmr_schema(tcd_value, tcd_units, key_list):
         The converted TCD value into the units required by the ASHRAE229 schema
 
     """
+    # if the value is bool type - then return the value
+    if isinstance(tcd_value, bool):
+        return tcd_value
 
     # Clean TCD units to something pint can understand
     tcd_units = clean_schema_units(tcd_units)
@@ -96,7 +100,11 @@ def convert_units_from_tcd_to_rmr_schema(tcd_value, tcd_units, key_list):
     if isinstance(tcd_value, str):
         tcd_value = float(tcd_value)
 
-    tcd_quantity = tcd_value * ureg(tcd_units)
+    # Set TCD quantity and catch issues with non-multiplicative units, e.g., temperatures
+    try:
+        tcd_quantity = tcd_value * ureg(tcd_units)
+    except pint.errors.OffsetUnitCalculusError:
+        tcd_quantity = ureg.Quantity(tcd_value, tcd_units)
 
     # Convert TCD quantity to units required by schema
     rmr_quantity = tcd_quantity.to(rmr_pint_units)
