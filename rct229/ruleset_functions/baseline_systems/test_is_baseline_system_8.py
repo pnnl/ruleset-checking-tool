@@ -27,7 +27,7 @@ SYS_8_RMD = {
                                             "id": "VAV Air Terminal 8",
                                             "is_supply_ducted": True,
                                             "type": "VARIABLE_AIR_VOLUME",
-                                            "served_by_heating_ventilation_air_conditioning_system": "System 8",
+                                            "served_by_heating_ventilating_air_conditioning_system": "System 8",
                                             "heating_source": "ELECTRIC",
                                             "heating_from_loop": "Boiler Loop 1",
                                             "fan_configuration": "PARALLEL",
@@ -43,7 +43,7 @@ SYS_8_RMD = {
                                             "id": "VAV Air Terminal 8a",
                                             "is_supply_ducted": True,
                                             "type": "VARIABLE_AIR_VOLUME",
-                                            "served_by_heating_ventilation_air_conditioning_system": "System 8a",
+                                            "served_by_heating_ventilating_air_conditioning_system": "System 8a",
                                             "heating_source": "ELECTRIC",
                                             "heating_from_loop": "Boiler Loop 1",
                                             "fan_configuration": "PARALLEL",
@@ -59,7 +59,7 @@ SYS_8_RMD = {
                                             "id": "VAV Air Terminal 8b",
                                             "is_supply_ducted": True,
                                             "type": "VARIABLE_AIR_VOLUME",
-                                            "served_by_heating_ventilation_air_conditioning_system": "System 8b",
+                                            "served_by_heating_ventilating_air_conditioning_system": "System 8b",
                                             "heating_source": "HOT_WATER",
                                             "heating_from_loop": "Purchased HW Loop 1",
                                             "fan_configuration": "PARALLEL",
@@ -75,7 +75,7 @@ SYS_8_RMD = {
                                             "id": "VAV Air Terminal 8c",
                                             "is_supply_ducted": True,
                                             "type": "VARIABLE_AIR_VOLUME",
-                                            "served_by_heating_ventilation_air_conditioning_system": "System 8c",
+                                            "served_by_heating_ventilating_air_conditioning_system": "System 8c",
                                             "heating_source": "HOT_WATER",
                                             "heating_from_loop": "Purchased HW Loop 1",
                                             "fan_configuration": "PARALLEL",
@@ -83,7 +83,7 @@ SYS_8_RMD = {
                                     ],
                                 },
                             ],
-                            "heating_ventilation_air_conditioning_systems": [
+                            "heating_ventilating_air_conditioning_systems": [
                                 {
                                     "id": "System 8",
                                     "cooling_system": {
