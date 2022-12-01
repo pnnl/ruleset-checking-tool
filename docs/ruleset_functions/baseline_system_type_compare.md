@@ -1,4 +1,4 @@
-# baseline_system_type_string_compare
+# baseline_system_type_compare
 
 **Schema Version:** 0.0.23
 
