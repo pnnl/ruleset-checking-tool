@@ -157,7 +157,7 @@
 		- create space_area_type variable and set equal to "None": `space_area_type = "None"`
 		- check if there is an HVAC Building Area Type: `if building_segment.area_type_heating_ventilation_air_conditioning_system != "Null":`
 			- set space_area_type equal to HVAC BAT: `space_area_type = building_segment.area_type_heating_ventilation_air_conditioning_system`
-		- else:
+		- `else:`
 			- look for a lighting_building_area_type: `if building_segment.lighting_building_area_type != "Null":`
 				- set space_area_type based on the lookup table: `space_area_type = lighting_space_lookup[building_segment.lighting_building_area_type`
 		- check if the space_area_type still equals "None": `if space_area_type == "None":`
@@ -165,7 +165,7 @@
 			- create a dict of space area types: `zone_space_area_types = {}`
 			- loop through the spaces: `for space in zone.spaces:`
 				- look up the area type using `lighting_space_lookup`: `area_type = lighting_space_lookup[space.lighting_space_type]`
-				- create the integer for this space area type if it doesn't exist yet: `zone_space_area_types[area_type] = zone_space_area_types[area_type] or 0
+				- create the integer for this space area type if it doesn't exist yet: `zone_space_area_types[area_type] = zone_space_area_types[area_type] or 0`
 				- add the space area to the dict under `area_type`: `zone_space_area_types[area_type] = zone_space_area_types[area_type] + space.floor_area`
 			- assign the key with the maximum floor area to `space_area_type`: `space_area_type = max(zone_space_area_types, key = zone_space_area_types.get)`
 		- For each space in zone: `for space in zone.spaces:`
