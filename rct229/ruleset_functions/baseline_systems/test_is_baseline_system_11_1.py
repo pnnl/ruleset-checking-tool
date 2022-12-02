@@ -25,7 +25,7 @@ SYS_11_1_TEST_RMD = {
                                             "id": "VAV Air Terminal 1B",
                                             "is_supply_ducted": True,
                                             "type": "VARIABLE_AIR_VOLUME",
-                                            "served_by_heating_ventilation_air_conditioning_system": "System Type 11B",
+                                            "served_by_heating_ventilating_air_conditioning_system": "System Type 11B",
                                         }
                                     ],
                                 },
@@ -38,7 +38,7 @@ SYS_11_1_TEST_RMD = {
                                             "id": "VAV Air Terminal 1",
                                             "is_supply_ducted": True,
                                             "type": "VARIABLE_AIR_VOLUME",
-                                            "served_by_heating_ventilation_air_conditioning_system": "System Type 11",
+                                            "served_by_heating_ventilating_air_conditioning_system": "System Type 11",
                                         }
                                     ],
                                 },
@@ -51,7 +51,7 @@ SYS_11_1_TEST_RMD = {
                                             "id": "VAV Air Terminal 1A",
                                             "is_supply_ducted": True,
                                             "type": "VARIABLE_AIR_VOLUME",
-                                            "served_by_heating_ventilation_air_conditioning_system": "System Type 11A",
+                                            "served_by_heating_ventilating_air_conditioning_system": "System Type 11A",
                                         }
                                     ],
                                 },
@@ -64,7 +64,7 @@ SYS_11_1_TEST_RMD = {
                                             "id": "VAV Air Terminal 1C",
                                             "is_supply_ducted": True,
                                             "type": "VARIABLE_AIR_VOLUME",
-                                            "served_by_heating_ventilation_air_conditioning_system": "System Type 11C",
+                                            "served_by_heating_ventilating_air_conditioning_system": "System Type 11C",
                                         }
                                     ],
                                 },

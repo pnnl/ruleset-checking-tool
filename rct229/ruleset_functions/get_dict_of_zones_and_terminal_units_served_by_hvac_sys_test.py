@@ -17,15 +17,15 @@ TEST_BUILDING = {
                             "terminals": [
                                 {
                                     "id": "terminal_1",
-                                    "served_by_heating_ventilation_air_conditioning_system": "hvac_1",
+                                    "served_by_heating_ventilating_air_conditioning_system": "hvac_1",
                                 },
                                 {
                                     "id": "terminal_2",
-                                    "served_by_heating_ventilation_air_conditioning_system": "hvac_2",
+                                    "served_by_heating_ventilating_air_conditioning_system": "hvac_2",
                                 },
                                 {
                                     "id": "terminal_3",
-                                    "served_by_heating_ventilation_air_conditioning_system": "hvac_3",
+                                    "served_by_heating_ventilating_air_conditioning_system": "hvac_3",
                                 },
                             ],
                         },
@@ -34,15 +34,15 @@ TEST_BUILDING = {
                             "terminals": [
                                 {
                                     "id": "terminal_4",
-                                    "served_by_heating_ventilation_air_conditioning_system": "hvac_4",
+                                    "served_by_heating_ventilating_air_conditioning_system": "hvac_4",
                                 },
                                 {
                                     "id": "terminal_5",
-                                    "served_by_heating_ventilation_air_conditioning_system": "hvac_2",
+                                    "served_by_heating_ventilating_air_conditioning_system": "hvac_2",
                                 },
                                 {
                                     "id": "terminal_6",
-                                    "served_by_heating_ventilation_air_conditioning_system": "hvac_4",
+                                    "served_by_heating_ventilating_air_conditioning_system": "hvac_4",
                                 },
                             ],
                         },

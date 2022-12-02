@@ -39,7 +39,7 @@ TEST_RMR = {
                             "terminals": [
                                 {
                                     "id": "terminal_1_1_1",
-                                    "served_by_heating_ventilation_air_conditioning_system": "hvac_1_1",
+                                    "served_by_heating_ventilating_air_conditioning_system": "hvac_1_1",
                                 }
                             ],
                         },

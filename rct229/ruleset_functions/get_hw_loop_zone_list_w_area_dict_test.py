@@ -29,7 +29,7 @@ GET_HW_LOOP_ZONE_LIST_W_AREA_RMD = {
                                             "heating_from_loop": "Boiler Loop 1",
                                             "heating_source": "HOT_WATER",
                                             "type": "VARIABLE_AIR_VOLUME",
-                                            "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                            "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                         }
                                     ],
                                     "spaces": [{"id": "Space 1", "floor_area": 10}],
@@ -43,7 +43,7 @@ GET_HW_LOOP_ZONE_LIST_W_AREA_RMD = {
                                             "id": "VAV Air Terminal 2",
                                             "is_supply_ducted": True,
                                             "type": "CONSTANT_VOLUME",
-                                            "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                            "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                         }
                                     ],
                                     "spaces": [
@@ -61,7 +61,7 @@ GET_HW_LOOP_ZONE_LIST_W_AREA_RMD = {
                                         {
                                             "id": "VAV Air Terminal 3",
                                             "is_supply_ducted": True,
-                                            "served_by_heating_ventilation_air_conditioning_system": "PTAC 1",
+                                            "served_by_heating_ventilating_air_conditioning_system": "PTAC 1",
                                         }
                                     ],
                                     "spaces": [

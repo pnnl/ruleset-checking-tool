@@ -26,7 +26,7 @@ rmd_model = {
                                             "heating_from_loop": "Boiler Loop 1",
                                             "heating_source": "HOT_WATER",
                                             "type": "VARIABLE_AIR_VOLUME",
-                                            "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                            "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                         }
                                     ],
                                 },
@@ -41,7 +41,7 @@ rmd_model = {
                                             "heating_from_loop": "Boiler Loop 1",
                                             "heating_source": "HOT_WATER",
                                             "type": "VARIABLE_AIR_VOLUME",
-                                            "served_by_heating_ventilation_air_conditioning_system": "System 7a",
+                                            "served_by_heating_ventilating_air_conditioning_system": "System 7a",
                                         }
                                     ],
                                 },
@@ -56,7 +56,7 @@ rmd_model = {
                                             "heating_from_loop": "Purchased HW Loop 1",
                                             "heating_source": "HOT_WATER",
                                             "type": "VARIABLE_AIR_VOLUME",
-                                            "served_by_heating_ventilation_air_conditioning_system": "System 7b",
+                                            "served_by_heating_ventilating_air_conditioning_system": "System 7b",
                                         }
                                     ],
                                 },
@@ -71,7 +71,7 @@ rmd_model = {
                                             "heating_from_loop": "Purchased HW Loop 1",
                                             "heating_source": "HOT_WATER",
                                             "type": "VARIABLE_AIR_VOLUME",
-                                            "served_by_heating_ventilation_air_conditioning_system": "System 7c",
+                                            "served_by_heating_ventilating_air_conditioning_system": "System 7c",
                                         }
                                     ],
                                 },
