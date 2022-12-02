@@ -10,8 +10,10 @@ TEST_RMR = {
     "id": "building_1",
     "buildings": [
         {
+            "id": "building 1",
             "building_segments": [
                 {
+                    "id": "building_segment 1",
                     "zones": [
                         {
                             "id": "zone_1",

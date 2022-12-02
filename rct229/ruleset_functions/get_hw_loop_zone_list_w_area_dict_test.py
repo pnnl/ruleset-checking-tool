@@ -42,7 +42,7 @@ GET_HW_LOOP_ZONE_LIST_W_AREA_RMD = {
                                         {
                                             "id": "VAV Air Terminal 2",
                                             "is_supply_ducted": True,
-                                            "type": "CONSTANT_VOLUME",
+                                            "type": "CONSTANT_AIR_VOLUME",
                                             "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                         }
                                     ],
