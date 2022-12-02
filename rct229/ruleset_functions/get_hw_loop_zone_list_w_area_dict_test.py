@@ -144,6 +144,7 @@ def test__TEST_RMD__is_valid():
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"
 
+
 def test__get_hw_loop_zone_list_w_area__true():
     assert get_hw_loop_zone_list_w_area(TEST_RMI) == {
         "Boiler Loop 1": {

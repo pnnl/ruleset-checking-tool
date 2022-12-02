@@ -61,4 +61,3 @@ def test__TEST_RMD_baseline_system_4__is_valid():
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"
-
