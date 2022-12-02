@@ -166,11 +166,11 @@
 			- loop through the spaces: `for space in zone.spaces:`
 				- look up the area type using `lighting_space_lookup`: `area_type = lighting_space_lookup[space.lighting_space_type]`
 				- create the integer for this space area type if it doesn't exist yet: `zone_space_area_types[area_type] = zone_space_area_types[area_type] or 0
-				- add the space area to the dict under `area_type`: `zone_space_area_types[area_type] = zone_space_area_types[area_type] + space.floor_area
+				- add the space area to the dict under `area_type`: `zone_space_area_types[area_type] = zone_space_area_types[area_type] + space.floor_area`
 			- assign the key with the maximum floor area to `space_area_type`: `space_area_type = max(zone_space_area_types, key = zone_space_area_types.get)`
 		- For each space in zone: `for space in zone.spaces:`
-			- create the integer for `list_buildiung_area_types_with_total_area_and_zones[space_area_type]["AREA"]` if it doesn't yet exist: `list_buildiung_area_types_with_total_area_and_zones[space_area_type]["AREA"] = list_buildiung_area_types_with_total_area_and_zones[space_area_type]["AREA"] or 0
-			- create the list for `list_buildiung_area_types_with_total_area_and_zones[space_area_type]["ZONE_IDS"]` if it doesn't already exist: `list_buildiung_area_types_with_total_area_and_zones[space_area_type]["ZONE_IDS"] = list_buildiung_area_types_with_total_area_and_zones[space_area_type]["ZONE_IDS"] or []
+			- create the integer for `list_buildiung_area_types_with_total_area_and_zones[space_area_type]["AREA"]` if it doesn't yet exist: `list_buildiung_area_types_with_total_area_and_zones[space_area_type]["AREA"] = list_buildiung_area_types_with_total_area_and_zones[space_area_type]["AREA"] or 0`
+			- create the list for `list_buildiung_area_types_with_total_area_and_zones[space_area_type]["ZONE_IDS"]` if it doesn't already exist: `list_buildiung_area_types_with_total_area_and_zones[space_area_type]["ZONE_IDS"] = list_buildiung_area_types_with_total_area_and_zones[space_area_type]["ZONE_IDS"] or []`
 			- add space area: `list_buildiung_area_types_with_total_area_and_zones[space_area_type]["AREA"] += space.floor_area`
 
 	- Append zone_ids to the dict: `list_buildiung_area_types_with_total_area_and_zones[space_area_type]["ZONE_IDS"].append(list_of_zones)`
