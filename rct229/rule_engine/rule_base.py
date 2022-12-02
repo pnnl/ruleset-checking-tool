@@ -106,7 +106,7 @@ class RuleDefinitionBase:
         if self.rmr_context:
             outcome["rmr_context"] = self.rmr_context
 
-        # context will be a string if the context does not exist for any of the RMR used
+        # context will be a string if the context does not exist for any of the RMD used
         context_or_string = self.get_context(rmrs, data)
         if isinstance(context_or_string, UserBaselineProposedVals):
             context = context_or_string
@@ -167,9 +167,10 @@ class RuleDefinitionBase:
                     outcome["result"] = "FAILED"
                     outcome["message"] = str(fe)
             else:
-                outcome["result"] = context_validity_dict
+                outcome["result"] = "UNDETERMINED"
+                outcome["message"] = context_validity_dict
         else:
-            # context should be a string indicating the RMRs that are missing
+            # context should be a string indicating the RMDs that are missing
             # such as "MISSING_BASELINE"
             outcome["result"] = context_or_string
 
