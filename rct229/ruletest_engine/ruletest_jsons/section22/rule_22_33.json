@@ -3,7 +3,7 @@
         "Section": 22,
         "Rule": 33,
         "Test": "a",
-        "test_description": "Baseline building is system type 7 and is correctly modeled with the number of primary/secondary loops",
+        "test_description": "Baseline building is system type 7 and is correctly modeled with the correct number of primary/secondary loops",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-33",
@@ -148,7 +148,7 @@
         "Section": 22,
         "Rule": 33,
         "Test": "b",
-        "test_description": "Baseline building is system type 7 and is incorrectly modeled with the number of primary/secondary loops",
+        "test_description": "Baseline building is system type 7 and is incorrectly modeled with the an secondary chilled water plant loop",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-33",

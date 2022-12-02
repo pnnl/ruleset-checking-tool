@@ -3,7 +3,7 @@
         "Section": 22,
         "Rule": 22,
         "Test": "a",
-        "test_description": "Baseline building is system type 7 and is correctly modeled with the chiller rated capacity and full load efficiency",
+        "test_description": "Baseline building is system type 7 and is correctly modeled with the chiller rated capacity and full load efficiency in accordance with Table G3.5.3",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-22",
@@ -151,7 +151,7 @@
         "Section": 22,
         "Rule": 22,
         "Test": "b",
-        "test_description": "Baseline building is system type 7 and is incorrectly modeled with the full load efficiency",
+        "test_description": "Baseline building is system type 7 and is incorrectly modeled with the chiller rated capacity and full load efficiency not in accordance with Table G3.5.3",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-22",
@@ -299,7 +299,7 @@
         "Section": 22,
         "Rule": 22,
         "Test": "c",
-        "test_description": "Baseline building is system type 7 and is correctly modeled with the chiller rated capacity and full load efficiency",
+        "test_description": "Baseline building is system type 7 and is correctly modeled with the chiller rated capacity and full load efficiency in accordance with Table G3.5.3",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-22",
@@ -447,7 +447,7 @@
         "Section": 22,
         "Rule": 22,
         "Test": "d",
-        "test_description": "Baseline building is system type 7 and is incorrectly modeled with the full load efficiency",
+        "test_description": "Baseline building is system type 7 and is incorrectly modeled with the chiller rated capacity and full load efficiency not in accordance with Table G3.5.3",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-22",

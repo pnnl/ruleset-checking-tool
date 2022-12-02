@@ -3,7 +3,7 @@
         "Section": 22,
         "Rule": 21,
         "Test": "a",
-        "test_description": "Baseline building is system type 7 and is correctly modeled with the target chiller type",
+        "test_description": "Baseline building is system type 7 with < 600 ton chiller and is correctly modeled with a screw chiller",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-21",
@@ -162,7 +162,7 @@
         "Section": 22,
         "Rule": 21,
         "Test": "b",
-        "test_description": "Baseline building is system type 7 and is incorrectly modeled with the target chiller type",
+        "test_description": "Baseline building is system type 7 with < 600 ton chiller and is not correctly modeled with a screw chiller",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-21",
@@ -321,7 +321,7 @@
         "Section": 22,
         "Rule": 21,
         "Test": "c",
-        "test_description": "Baseline building is system type 7 and is correctly modeled with the target chiller type",
+        "test_description": "Baseline building is system type 7 with > 600 ton chiller and is correctly modeled with a centrifugal chiller",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-21",
@@ -480,7 +480,7 @@
         "Section": 22,
         "Rule": 21,
         "Test": "d",
-        "test_description": "Baseline building is system type 7 and is incorrectly modeled with the target chiller type",
+        "test_description": "Baseline building is system type 7 with > 600 ton chiller and is not correctly modeled with a centrifugal chiller",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-21",

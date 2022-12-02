@@ -3,7 +3,7 @@
         "Section": 22,
         "Rule": 24,
         "Test": "a",
-        "test_description": "Baseline building is system type 7 and is correctly modeled with the child_loop setup and speed_control keys",
+        "test_description": "Baseline building is system type 7 and is correctly modeled with primary pump set to constant volume",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-24",
@@ -148,7 +148,7 @@
         "Section": 22,
         "Rule": 24,
         "Test": "b",
-        "test_description": "Baseline building is system type 7 and is incorrectly modeled with the child_loop setup and speed_control keys",
+        "test_description": "Baseline building is system type 7 and is incorrectly modeled with primary pump set to variable volume",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-24",
