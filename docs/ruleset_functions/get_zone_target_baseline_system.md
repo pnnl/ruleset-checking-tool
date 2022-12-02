@@ -8,7 +8,7 @@
 - **B-RMD**
 
 **Returns:**  
-- **zones_and_systems**: a dictionary with zone / list pairs where the first value in the list is the expected system type (ex "SYS-3") and the second value is the rule used to choose the system, (eg "G3_1_1e"): zones_and_systems[zone]["EXPECTED_SYSTEM_TYPE"] = "SYS-3"; zones_and_systems[zone]["SYSTEM_ORIGIN"] =  "G3_1_1e"
+- **zones_and_systems**: a dictionary with zone / list pairs where the first value in the list is the expected system type (ex SYS_3) and the second value is the rule used to choose the system, (eg "G3_1_1e"): zones_and_systems[zone]["EXPECTED_SYSTEM_TYPE"] = SYS_3; zones_and_systems[zone]["SYSTEM_ORIGIN"] =  "G3_1_1e"
  
 **Function Call:**
 - **get_HVAC_building_area_types_and_zones**
@@ -64,9 +64,9 @@
 	- use the function does_zone_meet_G3_1_1c to determine if this zone meets this requirement: `if does_zone_meet_G3_1_1c(B_RMI,zone,zones_and_systems[zone]["EXPECTED_SYSTEM_TYPE"] == YES):`
 		- change the system origin string: `zones_and_systems[zone]["SYSTEM_ORIGIN"] = "G3_1_1c"` 
 		- the zone meets the G3_1_1c requirements, choose system 3 or 4 based on climate zone: `if is_CZ_0_to_3a():`
-			- set the system to "SYS-4": `zones_and_systems[zone]["EXPECTED_SYSTEM_TYPE"] = "SYS-4"`
+			- set the system to SYS_4: `zones_and_systems[zone]["EXPECTED_SYSTEM_TYPE"] = SYS_4`
 		- else (the climate zone is_CZ_3b_3c_and_4_to_8): `else:`
-			- set the system to "SYS-3": `zones_and_systems[zone]["EXPECTED_SYSTEM_TYPE"] = "SYS-3"`
+			- set the system to SYS_3: `zones_and_systems[zone]["EXPECTED_SYSTEM_TYPE"] = SYS_3`
 				
 - G3.1.1d "For laboratory spaces in a building having a total laboratory exhaust rate greater than 15,000 cfm, use a single system of type 5 or 7 serving only those spaces.  The lab exhaust fan shall be modeled as constant horsepower reflecting constantvolume stack discharge with outdoor air bypass."
 	- not sure how to apply this one
@@ -77,20 +77,20 @@
 	- use the function does_zone_meet_G3_1_1e to determine whether to change the system type (we are using != NO instead of YES, because the function can return MAYBE_VESTIBULE or LIKELY_VESTIBULE.  Here we will assign any "maybe's or "likelies" to the new system type.  The rule itself will deal with the uncertainty of vestibules using the function is_zone_a_vestibule): `if does_zone_meet_G3_1_1e(P-RMR,B-RMR,zone) != NO:`
 		- - change the system origin string: `zones_and_systems[zone]["SYSTEM_ORIGIN"] = "G3_1_1e"`
 		- choose system 9 or 10 based on climate zone: `if is_CZ_0_to_3a():`
-			- set the system to "SYS-10"": `zones_and_systems[zone]["EXPECTED_SYSTEM_TYPE"] = "SYS-10"`
+			- set the system to SYS_10: `zones_and_systems[zone]["EXPECTED_SYSTEM_TYPE"] = SYS_10`
 		- else (the climate zone is_CZ_3b_3c_and_4_to_8): `else:`
-			- set the system to "SYS-9": `zones_and_systems[zone]["EXPECTED_SYSTEM_TYPE"] = "SYS-9"`
+			- set the system to SYS_9: `zones_and_systems[zone]["EXPECTED_SYSTEM_TYPE"] = SYS_9`
 
 
 - G3.1.1f "If the baseline HVAC system type is 9 or 10, use additional system types for all HVAC zones that are mechanically cooled in the proposed design."
 - loop through the zones and systems, check only the zones that are SYS-9 or 10: `for zone in zones_and_systems:`
-	- check if it is SYS-9 or SYS-10: `if zones_and_systems[zone]["EXPECTED_SYSTEM_TYPE"] in ["SYS-9", "SYS-10"]:`
+	- check if it is SYS-9 or SYS-10: `if zones_and_systems[zone]["EXPECTED_SYSTEM_TYPE"] in [SYS_9, SYS_10]:`
 		- use the function does_zone_meet_G3_1_1f to see if the zone meets the requirements of G3_1_1f: `if does_zone_meet_G3_1_1f(P-RMR,B-RMR,zone.id) == YES:`
 			- change the system origin string: `zones_and_systems[zone]["SYSTEM_ORIGIN"] = "G3_1_1f"`
 			- the zone meets the G3_1_1f requirements, choose system 3 or 4 based on climate zone: `if is_CZ_0_to_3a():`
-				- set the system to "SYS-4": `zones_and_systems[zone]["EXPECTED_SYSTEM_TYPE"] = "SYS-4"
+				- set the system to SYS_4: `zones_and_systems[zone]["EXPECTED_SYSTEM_TYPE"] = SYS_4
 			- else (the climate zone is_CZ_3b_3c_and_4_to_8): `else:`
-				- set the system to "SYS-3": `zones_and_systems[zone]["EXPECTED_SYSTEM_TYPE"] = "SYS-3"
+				- set the system to SYS_3: `zones_and_systems[zone]["EXPECTED_SYSTEM_TYPE"] = SYS_3`
 
 - G3.1.1g is broken down into three parts:
 	- part 1: "If the baseline HVAC system serves HVAC zones that includes computer rooms,  baseline system 11 shall be used where the baseline HVAC system type is 7 or 8 and the total computer room peak cooling load is greater than 600,000 BTU/h (175 kW)."
@@ -100,17 +100,17 @@
 - loop through the zones and systems: `for zone in zones_and_systems:`
 	- use the function does_zone_meet_G3_1_1g to determine which (if any) of the requirements the zone meets: `does_zone_meet_G =  does_zone_meet_G3_1_1g(B-RMI,zone.id,zones_and_systems[zone]["EXPECTED_SYSTEM_TYPE"])`
 		- if the zone meets G1: `if does_zone_meet_G == G1:`
-			- set the system to "SYS-11" and source to "G3_1_1g_part1": `zones_and_systems[zone]["EXPECTED_SYSTEM_TYPE"] = "SYS-11"
+			- set the system to SYS_11 and source to "G3_1_1g_part1": `zones_and_systems[zone]["EXPECTED_SYSTEM_TYPE"] = SYS_11`
 			- change the system origin string: `zones_and_systems[zone]["SYSTEM_ORIGIN"] = "G3_1_1g_part1"`
 		- else if the zone meets G2: `elsif does_zone_meet_G == G2:
-			- set the system to "SYS-11" and source to "G3_1_1g_part2": `zones_and_systems[zone]["EXPECTED_SYSTEM_TYPE"] = "SYS-11"
+			- set the system to SYS_11 and source to "G3_1_1g_part2": `zones_and_systems[zone]["EXPECTED_SYSTEM_TYPE"] = SYS_11`
 			- change the system origin string: `zones_and_systems[zone]["SYSTEM_ORIGIN"] = "G3_1_1g_part2"`
 		- else if the zone meets G3: `elsif does_zone_meet_G == G3:`
 			- - change the system origin string: `zones_and_systems[zone]["SYSTEM_ORIGIN"] = "G3_1_1g_part3"`
 			- the zone meets the G3_1_1g_part3 requirements, choose system 3 or 4 based on climate zone: `if is_CZ_0_to_3a():`
-				- set the system to "SYS-4": `zones_and_systems[zone]["EXPECTED_SYSTEM_TYPE"] = "SYS-4"`
+				- set the system to SYS_4: `zones_and_systems[zone]["EXPECTED_SYSTEM_TYPE"] = SYS_4`
 			- else (the climate zone is_CZ_3b_3c_and_4_to_8): `else:`
-				- set the system to "SYS-3": `zones_and_systems[zone]["EXPECTED_SYSTEM_TYPE"] = "SYS-3"`
+				- set the system to SYS_3: `zones_and_systems[zone]["EXPECTED_SYSTEM_TYPE"] = SYS_3`
 
 
 
