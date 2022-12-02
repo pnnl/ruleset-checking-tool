@@ -25,7 +25,7 @@ SYS_11_2_TEST_RMD = {
                                             "id": "VAV Air Terminal 1",
                                             "is_supply_ducted": True,
                                             "type": "VARIABLE_AIR_VOLUME",
-                                            "served_by_heating_ventilation_air_conditioning_system": "System Type 11.2",
+                                            "served_by_heating_ventilating_air_conditioning_system": "System Type 11.2",
                                         }
                                     ],
                                 },
@@ -38,12 +38,12 @@ SYS_11_2_TEST_RMD = {
                                             "id": "VAV Air Terminal 1A",
                                             "is_supply_ducted": True,
                                             "type": "VARIABLE_AIR_VOLUME",
-                                            "served_by_heating_ventilation_air_conditioning_system": "System Type 11.2A",
+                                            "served_by_heating_ventilating_air_conditioning_system": "System Type 11.2A",
                                         }
                                     ],
                                 },
                             ],
-                            "heating_ventilation_air_conditioning_systems": [
+                            "heating_ventilating_air_conditioning_systems": [
                                 {
                                     "id": "System Type 11.2",
                                     "cooling_system": {

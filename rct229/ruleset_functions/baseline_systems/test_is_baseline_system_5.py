@@ -47,7 +47,7 @@ SYS_5_RMD = {
                                     ],
                                 },
                             ],
-                            "heating_ventilation_air_conditioning_systems": [
+                            "heating_ventilating_air_conditioning_systems": [
                                 {
                                     "id": "System 5",
                                     "cooling_system": {
