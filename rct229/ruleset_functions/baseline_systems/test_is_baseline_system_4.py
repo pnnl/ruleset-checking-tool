@@ -22,7 +22,7 @@ SYS_4_RMD = {
                                             "id": "Air Terminal",
                                             "is_supply_ducted": True,
                                             "type": "CONSTANT_AIR_VOLUME",
-                                            "served_by_heating_ventilation_air_conditioning_system": "System Type 4",
+                                            "served_by_heating_ventilating_air_conditioning_system": "System Type 4",
                                         }
                                     ],
                                 }
