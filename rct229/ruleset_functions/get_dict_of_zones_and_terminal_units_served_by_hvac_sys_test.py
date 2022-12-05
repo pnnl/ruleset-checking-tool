@@ -1,8 +1,9 @@
 from rct229.ruleset_functions.get_dict_of_zones_and_terminal_units_served_by_hvac_sys import (
     get_dict_of_zones_and_terminal_units_served_by_hvac_sys,
 )
+from rct229.schema.validate import schema_validate_rmr
 
-TEST_RMD = {
+TEST_BUILDING = {
     "id": "test_rmd",
     "buildings": [
         {
@@ -52,10 +53,19 @@ TEST_RMD = {
     ],
 }
 
+TEST_RMD = {"id": "ASHRAE229", "ruleset_model_instances": [TEST_BUILDING]}
+
+
+def test__TEST_RMD__is_valid():
+    schema_validation_result = schema_validate_rmr(TEST_RMD)
+    assert schema_validation_result[
+        "passed"
+    ], f"Schema error: {schema_validation_result['error']}"
+
 
 def test_get_hvac_zone_terminals():
     assert ordered(
-        get_dict_of_zones_and_terminal_units_served_by_hvac_sys(TEST_RMD)
+        get_dict_of_zones_and_terminal_units_served_by_hvac_sys(TEST_BUILDING)
     ) == ordered(
         {
             "hvac_1": {"terminal_unit_list": ["terminal_1"], "zone_list": ["zone_1"]},
