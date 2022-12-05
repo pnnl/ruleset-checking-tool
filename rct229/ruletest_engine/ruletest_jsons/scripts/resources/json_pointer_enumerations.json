@@ -27,5 +27,6 @@
 	"surfaces": "ruleset_model_instances[0]/buildings[0]/building_segments[0]/zones[0]/surfaces",
 	"surface_optics": "ruleset_model_instances[0]/buildings[0]/building_segments[0]/zones[0]/surfaces[0]/surface_optics",
 	"terminals": "ruleset_model_instances[0]/buildings[0]/building_segments[0]/zones[0]/terminals",
+	"transformers": "ruleset_model_instances[0]/transformers",
 	"zones": "ruleset_model_instances[0]/buildings[0]/building_segments[0]/zones"
 }
