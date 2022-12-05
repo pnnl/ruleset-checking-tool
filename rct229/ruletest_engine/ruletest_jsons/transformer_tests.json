@@ -14,34 +14,44 @@
             "comparison_value": "User RMR",
             "rule_dependency": "none",
             "mandatory_rule": "Yes",
-            "schema_version": "0.0.1"
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "user": {
                 "id": "ashrae229",
-                "transformers": [
+                "ruleset_model_instances": [
                     {
-                        "id": "Transformer_1"
-                    },
-                    {
-                        "id": "Transformer_2"
-                    },
-                    {
-                        "id": "Transformer_3"
+                        "id": "RMD 1",
+                        "transformers": [
+                            {
+                                "id": "Transformer_1"
+                            },
+                            {
+                                "id": "Transformer_2"
+                            },
+                            {
+                                "id": "Transformer_3"
+                            }
+                        ]
                     }
                 ]
             },
             "baseline": {
                 "id": "ashrae229",
-                "transformers": [
+                "ruleset_model_instances": [
                     {
-                        "id": "Transformer_1"
-                    },
-                    {
-                        "id": "Transformer_2"
-                    },
-                    {
-                        "id": "Transformer_3"
+                        "id": "RMD 1",
+                        "transformers": [
+                            {
+                                "id": "Transformer_1"
+                            },
+                            {
+                                "id": "Transformer_2"
+                            },
+                            {
+                                "id": "Transformer_3"
+                            }
+                        ]
                     }
                 ]
             }
@@ -62,31 +72,41 @@
             "comparison_value": "User RMR",
             "rule_dependency": "none",
             "mandatory_rule": "Yes",
-            "schema_version": "0.0.1"
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "user": {
                 "id": "ashrae229",
-                "transformers": [
+                "ruleset_model_instances": [
                     {
-                        "id": "Transformer_1"
-                    },
-                    {
-                        "id": "Transformer_2"
-                    },
-                    {
-                        "id": "Transformer_3"
+                        "id": "RMD 1",
+                        "transformers": [
+                            {
+                                "id": "Transformer_1"
+                            },
+                            {
+                                "id": "Transformer_2"
+                            },
+                            {
+                                "id": "Transformer_3"
+                            }
+                        ]
                     }
                 ]
             },
             "baseline": {
                 "id": "ashrae229",
-                "transformers": [
+                "ruleset_model_instances": [
                     {
-                        "id": "Transformer_1"
-                    },
-                    {
-                        "id": "Transformer_2"
+                        "id": "RMD 1",
+                        "transformers": [
+                            {
+                                "id": "Transformer_1"
+                            },
+                            {
+                                "id": "Transformer_2"
+                            }
+                        ]
                     }
                 ]
             }
@@ -107,31 +127,41 @@
             "comparison_value": "User RMR",
             "rule_dependency": "none",
             "mandatory_rule": "Yes",
-            "schema_version": "0.0.1"
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "user": {
                 "id": "ashrae229",
-                "transformers": [
+                "ruleset_model_instances": [
                     {
-                        "id": "Transformer_1"
-                    },
-                    {
-                        "id": "Transformer_2"
+                        "id": "RMD 1",
+                        "transformers": [
+                            {
+                                "id": "Transformer_1"
+                            },
+                            {
+                                "id": "Transformer_2"
+                            }
+                        ]
                     }
                 ]
             },
             "baseline": {
                 "id": "ashrae229",
-                "transformers": [
+                "ruleset_model_instances": [
                     {
-                        "id": "Transformer_1"
-                    },
-                    {
-                        "id": "Transformer_2"
-                    },
-                    {
-                        "id": "Transformer_3"
+                        "id": "RMD 1",
+                        "transformers": [
+                            {
+                                "id": "Transformer_1"
+                            },
+                            {
+                                "id": "Transformer_2"
+                            },
+                            {
+                                "id": "Transformer_3"
+                            }
+                        ]
                     }
                 ]
             }
@@ -152,34 +182,44 @@
             "comparison_value": "User RMR",
             "rule_dependency": "none",
             "mandatory_rule": "Yes",
-            "schema_version": "0.0.1"
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "user": {
                 "id": "ashrae229",
-                "transformers": [
+                "ruleset_model_instances": [
                     {
-                        "id": "Transformer_1"
-                    },
-                    {
-                        "id": "Transformer_2"
-                    },
-                    {
-                        "id": "Transformer_3"
+                        "id": "RMD 1",
+                        "transformers": [
+                            {
+                                "id": "Transformer_1"
+                            },
+                            {
+                                "id": "Transformer_2"
+                            },
+                            {
+                                "id": "Transformer_3"
+                            }
+                        ]
                     }
                 ]
             },
             "proposed": {
                 "id": "ashrae229",
-                "transformers": [
+                "ruleset_model_instances": [
                     {
-                        "id": "Transformer_1"
-                    },
-                    {
-                        "id": "Transformer_2"
-                    },
-                    {
-                        "id": "Transformer_3"
+                        "id": "RMD 1",
+                        "transformers": [
+                            {
+                                "id": "Transformer_1"
+                            },
+                            {
+                                "id": "Transformer_2"
+                            },
+                            {
+                                "id": "Transformer_3"
+                            }
+                        ]
                     }
                 ]
             }
@@ -200,31 +240,41 @@
             "comparison_value": "User RMR",
             "rule_dependency": "none",
             "mandatory_rule": "Yes",
-            "schema_version": "0.0.1"
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "user": {
                 "id": "ashrae229",
-                "transformers": [
+                "ruleset_model_instances": [
                     {
-                        "id": "Transformer_1"
-                    },
-                    {
-                        "id": "Transformer_2"
-                    },
-                    {
-                        "id": "Transformer_3"
+                        "id": "RMD 1",
+                        "transformers": [
+                            {
+                                "id": "Transformer_1"
+                            },
+                            {
+                                "id": "Transformer_2"
+                            },
+                            {
+                                "id": "Transformer_3"
+                            }
+                        ]
                     }
                 ]
             },
             "proposed": {
                 "id": "ashrae229",
-                "transformers": [
+                "ruleset_model_instances": [
                     {
-                        "id": "Transformer_1"
-                    },
-                    {
-                        "id": "Transformer_2"
+                        "id": "RMD 1",
+                        "transformers": [
+                            {
+                                "id": "Transformer_1"
+                            },
+                            {
+                                "id": "Transformer_2"
+                            }
+                        ]
                     }
                 ]
             }
@@ -245,31 +295,41 @@
             "comparison_value": "User RMR",
             "rule_dependency": "none",
             "mandatory_rule": "Yes",
-            "schema_version": "0.0.1"
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "user": {
                 "id": "ashrae229",
-                "transformers": [
+                "ruleset_model_instances": [
                     {
-                        "id": "Transformer_1"
-                    },
-                    {
-                        "id": "Transformer_2"
+                        "id": "RMD 1",
+                        "transformers": [
+                            {
+                                "id": "Transformer_1"
+                            },
+                            {
+                                "id": "Transformer_2"
+                            }
+                        ]
                     }
                 ]
             },
             "proposed": {
                 "id": "ashrae229",
-                "transformers": [
+                "ruleset_model_instances": [
                     {
-                        "id": "Transformer_1"
-                    },
-                    {
-                        "id": "Transformer_2"
-                    },
-                    {
-                        "id": "Transformer_3"
+                        "id": "RMD 1",
+                        "transformers": [
+                            {
+                                "id": "Transformer_1"
+                            },
+                            {
+                                "id": "Transformer_2"
+                            },
+                            {
+                                "id": "Transformer_3"
+                            }
+                        ]
                     }
                 ]
             }
@@ -290,28 +350,38 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "User RMR Transformer Count > 0",
             "mandatory_rule": 0,
-            "schema_version": "0.0.1"
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "user": {
                 "id": "ashrae229",
-                "transformers": [
+                "ruleset_model_instances": [
                     {
-                        "id": "Transformer_1"
-                    },
-                    {
-                        "id": "Transformer_2"
+                        "id": "RMD 1",
+                        "transformers": [
+                            {
+                                "id": "Transformer_1"
+                            },
+                            {
+                                "id": "Transformer_2"
+                            }
+                        ]
                     }
                 ]
             },
             "proposed": {
                 "id": "ashrae229",
-                "transformers": [
+                "ruleset_model_instances": [
                     {
-                        "id": "Transformer_1"
-                    },
-                    {
-                        "id": "Transformer_2"
+                        "id": "RMD 1",
+                        "transformers": [
+                            {
+                                "id": "Transformer_1"
+                            },
+                            {
+                                "id": "Transformer_2"
+                            }
+                        ]
                     }
                 ]
             }
@@ -332,28 +402,38 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "User RMR Transformer Count > 0",
             "mandatory_rule": 0,
-            "schema_version": "0.0.1"
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "user": {
                 "id": "ashrae229",
-                "transformers": [
+                "ruleset_model_instances": [
                     {
-                        "id": "Transformer_1"
-                    },
-                    {
-                        "id": "Transformer_2"
+                        "id": "RMD 1",
+                        "transformers": [
+                            {
+                                "id": "Transformer_1"
+                            },
+                            {
+                                "id": "Transformer_2"
+                            }
+                        ]
                     }
                 ]
             },
             "proposed": {
                 "id": "ashrae229",
-                "transformers": [
+                "ruleset_model_instances": [
                     {
-                        "id": "Transformer_1"
-                    },
-                    {
-                        "id": "Transformer_4"
+                        "id": "RMD 1",
+                        "transformers": [
+                            {
+                                "id": "Transformer_1"
+                            },
+                            {
+                                "id": "Transformer_4"
+                            }
+                        ]
                     }
                 ]
             }
@@ -374,28 +454,38 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "User RMR Transformer Count > 0",
             "mandatory_rule": 0,
-            "schema_version": "0.0.1"
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "user": {
                 "id": "ashrae229",
-                "transformers": [
+                "ruleset_model_instances": [
                     {
-                        "id": "Transformer_1"
-                    },
-                    {
-                        "id": "Transformer_2"
+                        "id": "RMD 1",
+                        "transformers": [
+                            {
+                                "id": "Transformer_1"
+                            },
+                            {
+                                "id": "Transformer_2"
+                            }
+                        ]
                     }
                 ]
             },
             "baseline": {
                 "id": "ashrae229",
-                "transformers": [
+                "ruleset_model_instances": [
                     {
-                        "id": "Transformer_1"
-                    },
-                    {
-                        "id": "Transformer_2"
+                        "id": "RMD 1",
+                        "transformers": [
+                            {
+                                "id": "Transformer_1"
+                            },
+                            {
+                                "id": "Transformer_2"
+                            }
+                        ]
                     }
                 ]
             }
@@ -416,28 +506,38 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "User RMR Transformer Count > 0",
             "mandatory_rule": 0,
-            "schema_version": "0.0.1"
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "user": {
                 "id": "ashrae229",
-                "transformers": [
+                "ruleset_model_instances": [
                     {
-                        "id": "Transformer_1"
-                    },
-                    {
-                        "id": "Transformer_2"
+                        "id": "RMD 1",
+                        "transformers": [
+                            {
+                                "id": "Transformer_1"
+                            },
+                            {
+                                "id": "Transformer_2"
+                            }
+                        ]
                     }
                 ]
             },
             "baseline": {
                 "id": "ashrae229",
-                "transformers": [
+                "ruleset_model_instances": [
                     {
-                        "id": "Transformer_1"
-                    },
-                    {
-                        "id": "Transformer_4"
+                        "id": "RMD 1",
+                        "transformers": [
+                            {
+                                "id": "Transformer_1"
+                            },
+                            {
+                                "id": "Transformer_4"
+                            }
+                        ]
                     }
                 ]
             }
@@ -458,30 +558,40 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "Rule 15-3 = true and xfrm_type = drytype and xfrm_efficiency in User RMR is greater than Table 8.4.4",
             "mandatory_rule": 0,
-            "schema_version": "0.0.1"
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "user": {
                 "id": "ashrae229",
-                "transformers": [
+                "ruleset_model_instances": [
                     {
-                        "id": "Transformer_1",
-                        "type": "DRY_TYPE",
-                        "phase": "SINGLE_PHASE",
-                        "capacity": 25000,
-                        "efficiency": 0.99
+                        "id": "RMD 1",
+                        "transformers": [
+                            {
+                                "id": "Transformer_1",
+                                "type": "DRY_TYPE",
+                                "phase": "SINGLE_PHASE",
+                                "capacity": 25000,
+                                "efficiency": 0.99
+                            }
+                        ]
                     }
                 ]
             },
             "baseline": {
                 "id": "ashrae229",
-                "transformers": [
+                "ruleset_model_instances": [
                     {
-                        "id": "Transformer_1",
-                        "type": "DRY_TYPE",
-                        "phase": "SINGLE_PHASE",
-                        "capacity": 25000,
-                        "efficiency": 0.98
+                        "id": "RMD 1",
+                        "transformers": [
+                            {
+                                "id": "Transformer_1",
+                                "type": "DRY_TYPE",
+                                "phase": "SINGLE_PHASE",
+                                "capacity": 25000,
+                                "efficiency": 0.98
+                            }
+                        ]
                     }
                 ]
             }
@@ -502,30 +612,40 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "Rule 15-3 = true and xfrm_type = drytype and xfrm_efficiency in User RMR is greater than Table 8.4.4",
             "mandatory_rule": 0,
-            "schema_version": "0.0.1"
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "user": {
                 "id": "ashrae229",
-                "transformers": [
+                "ruleset_model_instances": [
                     {
-                        "id": "Transformer_1",
-                        "type": "DRY_TYPE",
-                        "phase": "SINGLE_PHASE",
-                        "capacity": 25000,
-                        "efficiency": 0.99
+                        "id": "RMD 1",
+                        "transformers": [
+                            {
+                                "id": "Transformer_1",
+                                "type": "DRY_TYPE",
+                                "phase": "SINGLE_PHASE",
+                                "capacity": 25000,
+                                "efficiency": 0.99
+                            }
+                        ]
                     }
                 ]
             },
             "baseline": {
                 "id": "ashrae229",
-                "transformers": [
+                "ruleset_model_instances": [
                     {
-                        "id": "Transformer_1",
-                        "type": "DRY_TYPE",
-                        "phase": "SINGLE_PHASE",
-                        "capacity": 25000,
-                        "efficiency": 0.99
+                        "id": "RMD 1",
+                        "transformers": [
+                            {
+                                "id": "Transformer_1",
+                                "type": "DRY_TYPE",
+                                "phase": "SINGLE_PHASE",
+                                "capacity": 25000,
+                                "efficiency": 0.99
+                            }
+                        ]
                     }
                 ]
             }
@@ -546,30 +666,40 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "Rule 15-3 = true and xfrm_type = drytype and xfrm_efficiency in User RMR is greater than Table 8.4.4",
             "mandatory_rule": 0,
-            "schema_version": "0.0.1"
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "user": {
                 "id": "ashrae229",
-                "transformers": [
+                "ruleset_model_instances": [
                     {
-                        "id": "Transformer_1",
-                        "type": "DRY_TYPE",
-                        "phase": "THREE_PHASE",
-                        "capacity": 30000,
-                        "efficiency": 0.99
+                        "id": "RMD 1",
+                        "transformers": [
+                            {
+                                "id": "Transformer_1",
+                                "type": "DRY_TYPE",
+                                "phase": "THREE_PHASE",
+                                "capacity": 30000,
+                                "efficiency": 0.99
+                            }
+                        ]
                     }
                 ]
             },
             "baseline": {
                 "id": "ashrae229",
-                "transformers": [
+                "ruleset_model_instances": [
                     {
-                        "id": "Transformer_1",
-                        "type": "DRY_TYPE",
-                        "phase": "THREE_PHASE",
-                        "capacity": 30000,
-                        "efficiency": 0.9823
+                        "id": "RMD 1",
+                        "transformers": [
+                            {
+                                "id": "Transformer_1",
+                                "type": "DRY_TYPE",
+                                "phase": "THREE_PHASE",
+                                "capacity": 30000,
+                                "efficiency": 0.9823
+                            }
+                        ]
                     }
                 ]
             }
@@ -590,30 +720,40 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "Rule 15-3 = true and xfrm_type = drytype and xfrm_efficiency in User RMR is greater than Table 8.4.4",
             "mandatory_rule": 0,
-            "schema_version": "0.0.1"
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "user": {
                 "id": "ashrae229",
-                "transformers": [
+                "ruleset_model_instances": [
                     {
-                        "id": "Transformer_1",
-                        "type": "DRY_TYPE",
-                        "phase": "THREE_PHASE",
-                        "capacity": 30000,
-                        "efficiency": 0.99
+                        "id": "RMD 1",
+                        "transformers": [
+                            {
+                                "id": "Transformer_1",
+                                "type": "DRY_TYPE",
+                                "phase": "THREE_PHASE",
+                                "capacity": 30000,
+                                "efficiency": 0.99
+                            }
+                        ]
                     }
                 ]
             },
             "baseline": {
                 "id": "ashrae229",
-                "transformers": [
+                "ruleset_model_instances": [
                     {
-                        "id": "Transformer_1",
-                        "type": "DRY_TYPE",
-                        "phase": "THREE_PHASE",
-                        "capacity": 30000,
-                        "efficiency": 0.98
+                        "id": "RMD 1",
+                        "transformers": [
+                            {
+                                "id": "Transformer_1",
+                                "type": "DRY_TYPE",
+                                "phase": "THREE_PHASE",
+                                "capacity": 30000,
+                                "efficiency": 0.98
+                            }
+                        ]
                     }
                 ]
             }
@@ -634,18 +774,23 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "Rule 15-3 = true and xfrm_type = drytype and xfrm_efficiency in User RMR is greater than Table 8.4.4",
             "mandatory_rule": 0,
-            "schema_version": "0.0.1"
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "user": {
                 "id": "ashrae229",
-                "transformers": [
+                "ruleset_model_instances": [
                     {
-                        "id": "Transformer_1",
-                        "type": "DRY_TYPE",
-                        "phase": "SINGLE_PHASE",
-                        "capacity": 25000,
-                        "efficiency": 0.98
+                        "id": "RMD 1",
+                        "transformers": [
+                            {
+                                "id": "Transformer_1",
+                                "type": "DRY_TYPE",
+                                "phase": "SINGLE_PHASE",
+                                "capacity": 25000,
+                                "efficiency": 0.98
+                            }
+                        ]
                     }
                 ]
             }
@@ -666,18 +811,23 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "Rule 15-3 = true and xfrm_type = drytype and xfrm_efficiency in User RMR is greater than Table 8.4.4",
             "mandatory_rule": 0,
-            "schema_version": "0.0.1"
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "user": {
                 "id": "ashrae229",
-                "transformers": [
+                "ruleset_model_instances": [
                     {
-                        "id": "Transformer_1",
-                        "type": "DRY_TYPE",
-                        "phase": "SINGLE_PHASE",
-                        "capacity": 25000,
-                        "efficiency": 0.97
+                        "id": "RMD 1",
+                        "transformers": [
+                            {
+                                "id": "Transformer_1",
+                                "type": "DRY_TYPE",
+                                "phase": "SINGLE_PHASE",
+                                "capacity": 25000,
+                                "efficiency": 0.97
+                            }
+                        ]
                     }
                 ]
             }
@@ -698,18 +848,23 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "Rule 15-3 = true and xfrm_type = drytype and xfrm_efficiency in User RMR is greater than Table 8.4.4",
             "mandatory_rule": 0,
-            "schema_version": "0.0.1"
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "user": {
                 "id": "ashrae229",
-                "transformers": [
+                "ruleset_model_instances": [
                     {
-                        "id": "Transformer_1",
-                        "type": "DRY_TYPE",
-                        "phase": "THREE_PHASE",
-                        "capacity": 25000,
-                        "efficiency": 0.983
+                        "id": "RMD 1",
+                        "transformers": [
+                            {
+                                "id": "Transformer_1",
+                                "type": "DRY_TYPE",
+                                "phase": "THREE_PHASE",
+                                "capacity": 25000,
+                                "efficiency": 0.983
+                            }
+                        ]
                     }
                 ]
             }
@@ -730,18 +885,23 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "Rule 15-3 = true and xfrm_type = drytype and xfrm_efficiency in User RMR is greater than Table 8.4.4",
             "mandatory_rule": 0,
-            "schema_version": "0.0.1"
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "user": {
                 "id": "ashrae229",
-                "transformers": [
+                "ruleset_model_instances": [
                     {
-                        "id": "Transformer_1",
-                        "type": "DRY_TYPE",
-                        "phase": "THREE_PHASE",
-                        "capacity": 25000,
-                        "efficiency": 0.98
+                        "id": "RMD 1",
+                        "transformers": [
+                            {
+                                "id": "Transformer_1",
+                                "type": "DRY_TYPE",
+                                "phase": "THREE_PHASE",
+                                "capacity": 25000,
+                                "efficiency": 0.98
+                            }
+                        ]
                     }
                 ]
             }
@@ -762,30 +922,40 @@
             "comparison_value": "User RMR",
             "rule_dependency": "Rule 15-3 = true and (xfrm_type <> drytype or (xfrm_eff <= Table 8.4.4 and xfrm_type = drytype))",
             "mandatory_rule": 0,
-            "schema_version": "0.0.1"
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "user": {
                 "id": "ashrae229",
-                "transformers": [
+                "ruleset_model_instances": [
                     {
-                        "id": "Transformer_1",
-                        "type": "FLUID_FILLED",
-                        "phase": "THREE_PHASE",
-                        "capacity": 30000,
-                        "efficiency": 0.98
+                        "id": "RMD 1",
+                        "transformers": [
+                            {
+                                "id": "Transformer_1",
+                                "type": "FLUID_FILLED",
+                                "phase": "THREE_PHASE",
+                                "capacity": 30000,
+                                "efficiency": 0.98
+                            }
+                        ]
                     }
                 ]
             },
             "baseline": {
                 "id": "ashrae229",
-                "transformers": [
+                "ruleset_model_instances": [
                     {
-                        "id": "Transformer_1",
-                        "type": "FLUID_FILLED",
-                        "phase": "THREE_PHASE",
-                        "capacity": 30000,
-                        "efficiency": 0.98
+                        "id": "RMD 1",
+                        "transformers": [
+                            {
+                                "id": "Transformer_1",
+                                "type": "FLUID_FILLED",
+                                "phase": "THREE_PHASE",
+                                "capacity": 30000,
+                                "efficiency": 0.98
+                            }
+                        ]
                     }
                 ]
             }
@@ -806,30 +976,40 @@
             "comparison_value": "User RMR",
             "rule_dependency": "Rule 15-3 = true and (xfrm_type <> drytype or (xfrm_eff <= Table 8.4.4 and xfrm_type = drytype))",
             "mandatory_rule": 0,
-            "schema_version": "0.0.1"
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "user": {
                 "id": "ashrae229",
-                "transformers": [
+                "ruleset_model_instances": [
                     {
-                        "id": "Transformer_1",
-                        "type": "FLUID_FILLED",
-                        "phase": "THREE_PHASE",
-                        "capacity": 30000,
-                        "efficiency": 0.98
+                        "id": "RMD 1",
+                        "transformers": [
+                            {
+                                "id": "Transformer_1",
+                                "type": "FLUID_FILLED",
+                                "phase": "THREE_PHASE",
+                                "capacity": 30000,
+                                "efficiency": 0.98
+                            }
+                        ]
                     }
                 ]
             },
             "baseline": {
                 "id": "ashrae229",
-                "transformers": [
+                "ruleset_model_instances": [
                     {
-                        "id": "Transformer_1",
-                        "type": "FLUID_FILLED",
-                        "phase": "THREE_PHASE",
-                        "capacity": 30000,
-                        "efficiency": 0.975
+                        "id": "RMD 1",
+                        "transformers": [
+                            {
+                                "id": "Transformer_1",
+                                "type": "FLUID_FILLED",
+                                "phase": "THREE_PHASE",
+                                "capacity": 30000,
+                                "efficiency": 0.975
+                            }
+                        ]
                     }
                 ]
             }
@@ -850,30 +1030,40 @@
             "comparison_value": "User RMR",
             "rule_dependency": "Rule 15-3 = true and (xfrm_type <> drytype or (xfrm_eff <= Table 8.4.4 and xfrm_type = drytype))",
             "mandatory_rule": 0,
-            "schema_version": "0.0.1"
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "user": {
                 "id": "ashrae229",
-                "transformers": [
+                "ruleset_model_instances": [
                     {
-                        "id": "Transformer_1",
-                        "type": "DRY_TYPE",
-                        "phase": "SINGLE_PHASE",
-                        "capacity": 25000,
-                        "efficiency": 0.98
+                        "id": "RMD 1",
+                        "transformers": [
+                            {
+                                "id": "Transformer_1",
+                                "type": "DRY_TYPE",
+                                "phase": "SINGLE_PHASE",
+                                "capacity": 25000,
+                                "efficiency": 0.98
+                            }
+                        ]
                     }
                 ]
             },
             "baseline": {
                 "id": "ashrae229",
-                "transformers": [
+                "ruleset_model_instances": [
                     {
-                        "id": "Transformer_1",
-                        "type": "DRY_TYPE",
-                        "phase": "SINGLE_PHASE",
-                        "capacity": 25000,
-                        "efficiency": 0.98
+                        "id": "RMD 1",
+                        "transformers": [
+                            {
+                                "id": "Transformer_1",
+                                "type": "DRY_TYPE",
+                                "phase": "SINGLE_PHASE",
+                                "capacity": 25000,
+                                "efficiency": 0.98
+                            }
+                        ]
                     }
                 ]
             }
@@ -894,30 +1084,40 @@
             "comparison_value": "User RMR",
             "rule_dependency": "Rule 15-3 = true and (xfrm_type <> drytype or (xfrm_eff <= Table 8.4.4 and xfrm_type = drytype))",
             "mandatory_rule": 0,
-            "schema_version": "0.0.1"
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "user": {
                 "id": "ashrae229",
-                "transformers": [
+                "ruleset_model_instances": [
                     {
-                        "id": "Transformer_1",
-                        "type": "DRY_TYPE",
-                        "phase": "SINGLE_PHASE",
-                        "capacity": 25000,
-                        "efficiency": 0.98
+                        "id": "RMD 1",
+                        "transformers": [
+                            {
+                                "id": "Transformer_1",
+                                "type": "DRY_TYPE",
+                                "phase": "SINGLE_PHASE",
+                                "capacity": 25000,
+                                "efficiency": 0.98
+                            }
+                        ]
                     }
                 ]
             },
             "baseline": {
                 "id": "ashrae229",
-                "transformers": [
+                "ruleset_model_instances": [
                     {
-                        "id": "Transformer_1",
-                        "type": "DRY_TYPE",
-                        "phase": "SINGLE_PHASE",
-                        "capacity": 25000,
-                        "efficiency": 0.983
+                        "id": "RMD 1",
+                        "transformers": [
+                            {
+                                "id": "Transformer_1",
+                                "type": "DRY_TYPE",
+                                "phase": "SINGLE_PHASE",
+                                "capacity": 25000,
+                                "efficiency": 0.983
+                            }
+                        ]
                     }
                 ]
             }
@@ -938,30 +1138,40 @@
             "comparison_value": "User RMR",
             "rule_dependency": "Rule 15-3 = true",
             "mandatory_rule": 0,
-            "schema_version": "0.0.1"
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "user": {
                 "id": "ashrae229",
-                "transformers": [
+                "ruleset_model_instances": [
                     {
-                        "id": "Transformer_1",
-                        "type": "FLUID_FILLED",
-                        "phase": "THREE_PHASE",
-                        "capacity": 30000,
-                        "efficiency": 0.98
+                        "id": "RMD 1",
+                        "transformers": [
+                            {
+                                "id": "Transformer_1",
+                                "type": "FLUID_FILLED",
+                                "phase": "THREE_PHASE",
+                                "capacity": 30000,
+                                "efficiency": 0.98
+                            }
+                        ]
                     }
                 ]
             },
             "proposed": {
                 "id": "ashrae229",
-                "transformers": [
+                "ruleset_model_instances": [
                     {
-                        "id": "Transformer_1",
-                        "type": "FLUID_FILLED",
-                        "phase": "THREE_PHASE",
-                        "capacity": 30000,
-                        "efficiency": 0.98
+                        "id": "RMD 1",
+                        "transformers": [
+                            {
+                                "id": "Transformer_1",
+                                "type": "FLUID_FILLED",
+                                "phase": "THREE_PHASE",
+                                "capacity": 30000,
+                                "efficiency": 0.98
+                            }
+                        ]
                     }
                 ]
             }
@@ -982,30 +1192,40 @@
             "comparison_value": "User RMR",
             "rule_dependency": "Rule 15-3 = true",
             "mandatory_rule": 0,
-            "schema_version": "0.0.1"
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "user": {
                 "id": "ashrae229",
-                "transformers": [
+                "ruleset_model_instances": [
                     {
-                        "id": "Transformer_1",
-                        "type": "FLUID_FILLED",
-                        "phase": "THREE_PHASE",
-                        "capacity": 30000,
-                        "efficiency": 0.98
+                        "id": "RMD 1",
+                        "transformers": [
+                            {
+                                "id": "Transformer_1",
+                                "type": "FLUID_FILLED",
+                                "phase": "THREE_PHASE",
+                                "capacity": 30000,
+                                "efficiency": 0.98
+                            }
+                        ]
                     }
                 ]
             },
             "proposed": {
                 "id": "ashrae229",
-                "transformers": [
+                "ruleset_model_instances": [
                     {
-                        "id": "Transformer_1",
-                        "type": "FLUID_FILLED",
-                        "phase": "THREE_PHASE",
-                        "capacity": 30000,
-                        "efficiency": 0.975
+                        "id": "RMD 1",
+                        "transformers": [
+                            {
+                                "id": "Transformer_1",
+                                "type": "FLUID_FILLED",
+                                "phase": "THREE_PHASE",
+                                "capacity": 30000,
+                                "efficiency": 0.975
+                            }
+                        ]
                     }
                 ]
             }
@@ -1026,30 +1246,40 @@
             "comparison_value": "User RMR",
             "rule_dependency": "Rule 15-3 = true",
             "mandatory_rule": 0,
-            "schema_version": "0.0.1"
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "user": {
                 "id": "ashrae229",
-                "transformers": [
+                "ruleset_model_instances": [
                     {
-                        "id": "Transformer_1",
-                        "type": "DRY_TYPE",
-                        "phase": "SINGLE_PHASE",
-                        "capacity": 25000,
-                        "efficiency": 0.99
+                        "id": "RMD 1",
+                        "transformers": [
+                            {
+                                "id": "Transformer_1",
+                                "type": "DRY_TYPE",
+                                "phase": "SINGLE_PHASE",
+                                "capacity": 25000,
+                                "efficiency": 0.99
+                            }
+                        ]
                     }
                 ]
             },
             "proposed": {
                 "id": "ashrae229",
-                "transformers": [
+                "ruleset_model_instances": [
                     {
-                        "id": "Transformer_1",
-                        "type": "DRY_TYPE",
-                        "phase": "SINGLE_PHASE",
-                        "capacity": 25000,
-                        "efficiency": 0.99
+                        "id": "RMD 1",
+                        "transformers": [
+                            {
+                                "id": "Transformer_1",
+                                "type": "DRY_TYPE",
+                                "phase": "SINGLE_PHASE",
+                                "capacity": 25000,
+                                "efficiency": 0.99
+                            }
+                        ]
                     }
                 ]
             }
@@ -1070,30 +1300,40 @@
             "comparison_value": "User RMR",
             "rule_dependency": "Rule 15-3 = true",
             "mandatory_rule": 0,
-            "schema_version": "0.0.1"
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "user": {
                 "id": "ashrae229",
-                "transformers": [
+                "ruleset_model_instances": [
                     {
-                        "id": "Transformer_1",
-                        "type": "DRY_TYPE",
-                        "phase": "THREE_PHASE",
-                        "capacity": 25000,
-                        "efficiency": 0.99
+                        "id": "RMD 1",
+                        "transformers": [
+                            {
+                                "id": "Transformer_1",
+                                "type": "DRY_TYPE",
+                                "phase": "THREE_PHASE",
+                                "capacity": 25000,
+                                "efficiency": 0.99
+                            }
+                        ]
                     }
                 ]
             },
             "proposed": {
                 "id": "ashrae229",
-                "transformers": [
+                "ruleset_model_instances": [
                     {
-                        "id": "Transformer_1",
-                        "type": "DRY_TYPE",
-                        "phase": "THREE_PHASE",
-                        "capacity": 25000,
-                        "efficiency": 0.98
+                        "id": "RMD 1",
+                        "transformers": [
+                            {
+                                "id": "Transformer_1",
+                                "type": "DRY_TYPE",
+                                "phase": "THREE_PHASE",
+                                "capacity": 25000,
+                                "efficiency": 0.98
+                            }
+                        ]
                     }
                 ]
             }
@@ -1114,30 +1354,40 @@
             "comparison_value": "User RMR",
             "rule_dependency": "Rule 15-3 = true",
             "mandatory_rule": 0,
-            "schema_version": "0.0.1"
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "user": {
                 "id": "ashrae229",
-                "transformers": [
+                "ruleset_model_instances": [
                     {
-                        "id": "Transformer_1",
-                        "type": "DRY_TYPE",
-                        "phase": "THREE_PHASE",
-                        "capacity": 25000,
-                        "efficiency": 0.99
+                        "id": "RMD 1",
+                        "transformers": [
+                            {
+                                "id": "Transformer_1",
+                                "type": "DRY_TYPE",
+                                "phase": "THREE_PHASE",
+                                "capacity": 25000,
+                                "efficiency": 0.99
+                            }
+                        ]
                     }
                 ]
             },
             "proposed": {
                 "id": "ashrae229",
-                "transformers": [
+                "ruleset_model_instances": [
                     {
-                        "id": "Transformer_1",
-                        "type": "DRY_TYPE",
-                        "phase": "THREE_PHASE",
-                        "capacity": 25000,
-                        "efficiency": 0.99
+                        "id": "RMD 1",
+                        "transformers": [
+                            {
+                                "id": "Transformer_1",
+                                "type": "DRY_TYPE",
+                                "phase": "THREE_PHASE",
+                                "capacity": 25000,
+                                "efficiency": 0.99
+                            }
+                        ]
                     }
                 ]
             }
@@ -1158,30 +1408,40 @@
             "comparison_value": "User RMR",
             "rule_dependency": "Rule 15-3 = true",
             "mandatory_rule": 0,
-            "schema_version": "0.0.1"
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "user": {
                 "id": "ashrae229",
-                "transformers": [
+                "ruleset_model_instances": [
                     {
-                        "id": "Transformer_1",
-                        "type": "DRY_TYPE",
-                        "phase": "THREE_PHASE",
-                        "capacity": 25000,
-                        "efficiency": 0.99
+                        "id": "RMD 1",
+                        "transformers": [
+                            {
+                                "id": "Transformer_1",
+                                "type": "DRY_TYPE",
+                                "phase": "THREE_PHASE",
+                                "capacity": 25000,
+                                "efficiency": 0.99
+                            }
+                        ]
                     }
                 ]
             },
             "proposed": {
                 "id": "ashrae229",
-                "transformers": [
+                "ruleset_model_instances": [
                     {
-                        "id": "Transformer_1",
-                        "type": "DRY_TYPE",
-                        "phase": "THREE_PHASE",
-                        "capacity": 25000,
-                        "efficiency": 0.983
+                        "id": "RMD 1",
+                        "transformers": [
+                            {
+                                "id": "Transformer_1",
+                                "type": "DRY_TYPE",
+                                "phase": "THREE_PHASE",
+                                "capacity": 25000,
+                                "efficiency": 0.983
+                            }
+                        ]
                     }
                 ]
             }
@@ -1202,30 +1462,40 @@
             "comparison_value": "User RMR",
             "rule_dependency": "Rule 15-3 = true",
             "mandatory_rule": 0,
-            "schema_version": "0.0.1"
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "user": {
                 "id": "ashrae229",
-                "transformers": [
+                "ruleset_model_instances": [
                     {
-                        "id": "Transformer_1",
-                        "type": "DRY_TYPE",
-                        "capacity": 25000,
-                        "efficiency": 0.98,
-                        "phase": "THREE_PHASE"
+                        "id": "RMD 1",
+                        "transformers": [
+                            {
+                                "id": "Transformer_1",
+                                "type": "DRY_TYPE",
+                                "capacity": 25000,
+                                "efficiency": 0.98,
+                                "phase": "THREE_PHASE"
+                            }
+                        ]
                     }
                 ]
             },
             "proposed": {
                 "id": "ashrae229",
-                "transformers": [
+                "ruleset_model_instances": [
                     {
-                        "id": "Transformer_1",
-                        "type": "DRY_TYPE",
-                        "capacity": 25000,
-                        "efficiency": 0.98,
-                        "phase": "SINGLE_PHASE"
+                        "id": "RMD 1",
+                        "transformers": [
+                            {
+                                "id": "Transformer_1",
+                                "type": "DRY_TYPE",
+                                "capacity": 25000,
+                                "efficiency": 0.98,
+                                "phase": "SINGLE_PHASE"
+                            }
+                        ]
                     }
                 ]
             }
