@@ -38,7 +38,7 @@
                                                         "id": "VAV Air Terminal 1",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -53,14 +53,14 @@
                                                         "id": "VAV Air Terminal 2",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
                                                 ]
                                             }
                                         ],
-                                        "heating_ventilation_air_conditioning_systems": [
+                                        "heating_ventilating_air_conditioning_systems": [
                                             {
                                                 "id": "System 7",
                                                 "cooling_system": {
@@ -139,8 +139,8 @@
                                 ],
                                 "cooling_or_condensing_design_and_control": {
                                     "id": "CCDC 1",
-                                    "outdoor_high_for_loop_supply_temperature_reset": 26.666666666666686,
-                                    "outdoor_low_for_loop_supply_temperature_reset": 15.5555555555556,
+                                    "outdoor_high_for_loop_supply_reset_temperature": 26.666666666666686,
+                                    "outdoor_low_for_loop_supply_reset_temperature": 15.5555555555556,
                                     "loop_supply_temperature_at_outdoor_high": 6.666666666666686,
                                     "loop_supply_temperature_at_outdoor_low": 12.222222222222285
                                 }
@@ -190,7 +190,7 @@
                                                         "id": "VAV Air Terminal 1",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -205,14 +205,14 @@
                                                         "id": "VAV Air Terminal 2",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
                                                 ]
                                             }
                                         ],
-                                        "heating_ventilation_air_conditioning_systems": [
+                                        "heating_ventilating_air_conditioning_systems": [
                                             {
                                                 "id": "System 7",
                                                 "cooling_system": {
@@ -291,8 +291,8 @@
                                 ],
                                 "cooling_or_condensing_design_and_control": {
                                     "id": "CCDC 1",
-                                    "outdoor_high_for_loop_supply_temperature_reset": 32.222222222222285,
-                                    "outdoor_low_for_loop_supply_temperature_reset": 26.111111111111143,
+                                    "outdoor_high_for_loop_supply_reset_temperature": 32.222222222222285,
+                                    "outdoor_low_for_loop_supply_reset_temperature": 26.111111111111143,
                                     "loop_supply_temperature_at_outdoor_high": 12.222222222222285,
                                     "loop_supply_temperature_at_outdoor_low": 17.77777777777783
                                 }

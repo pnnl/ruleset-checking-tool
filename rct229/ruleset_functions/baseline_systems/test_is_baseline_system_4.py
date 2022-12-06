@@ -1,4 +1,5 @@
 # hvac_id = "System 4" => Sys_3, [Thermal Zone 1], [Air Terminal]
+from rct229.schema.validate import schema_validate_rmr
 
 SYS_4_RMD = {
     "id": "ASHRAE229 1",
@@ -22,12 +23,12 @@ SYS_4_RMD = {
                                             "id": "Air Terminal",
                                             "is_supply_ducted": True,
                                             "type": "CONSTANT_AIR_VOLUME",
-                                            "served_by_heating_ventilation_air_conditioning_system": "System Type 4",
+                                            "served_by_heating_ventilating_air_conditioning_system": "System Type 4",
                                         }
                                     ],
                                 }
                             ],
-                            "heating_ventilation_air_conditioning_systems": [
+                            "heating_ventilating_air_conditioning_systems": [
                                 {
                                     "id": "System Type 4",
                                     "cooling_system": {
@@ -53,3 +54,10 @@ SYS_4_RMD = {
         }
     ],
 }
+
+
+def test__TEST_RMD_baseline_system_4__is_valid():
+    schema_validation_result = schema_validate_rmr(SYS_4_RMD)
+    assert schema_validation_result[
+        "passed"
+    ], f"Schema error: {schema_validation_result['error']}"
