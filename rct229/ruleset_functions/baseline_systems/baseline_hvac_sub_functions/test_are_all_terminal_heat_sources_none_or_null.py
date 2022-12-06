@@ -1,6 +1,7 @@
 from rct229.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.are_all_terminal_heat_sources_none_or_null import (
     are_all_terminal_heat_sources_none_or_null,
 )
+from rct229.schema.validate import schema_validate_rmr
 
 TEST_RMD = {
     "id": "test_rmd",
@@ -27,6 +28,13 @@ TEST_RMD = {
 }
 
 TEST_RMD_FULL = {"id": "229_01", "ruleset_model_instances": [TEST_RMD]}
+
+
+def test__TEST_RMD__is_valid():
+    schema_validation_result = schema_validate_rmr(TEST_RMD_FULL)
+    assert schema_validation_result[
+        "passed"
+    ], f"Schema error: {schema_validation_result['error']}"
 
 
 def test__all_terminal_heat_source__none_or_null():
