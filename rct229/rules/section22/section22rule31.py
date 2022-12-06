@@ -58,7 +58,7 @@ class Section22Rule31(RuleDefinitionBase):
         rmi_b = context.baseline
         chiller_number = len(rmi_b["chillers"])
 
-        output_b = rmi_b["output"][0]
+        output_b = rmi_b["output"]
         building_peak_load_b = getattr_(
             output_b,
             "building_peak_cooling_load",

@@ -33,7 +33,7 @@
 
   - For each terminal in zone: `for terminal_b in zone_b.terminals:`
 
-    - Get HVAC system serving terminal: `hvac_b = terminal_b.served_by_heating_ventilation_air_conditioning_systems`
+    - Get HVAC system serving terminal: `hvac_b = terminal_b.served_by_heating_ventilating_air_conditioning_systems`
   
       - Check if HVAC system is type 5, 7, 7a, 5b, 7b, 7c, 6, 8, 8a, 6b, 8b: `if any(is_baseline_system_type(hvac_b, sys_type) == TRUE for sys_type in ["SYS-5", "SYS-7", "SYS-7A", "SYS-5B", "SYS-7B", "SYS-7C", "SYS-6", "SYS-8", "SYS-8A", "SYS-6B", "SYS-8B"]):`
 

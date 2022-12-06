@@ -2,6 +2,7 @@ from rct229.ruleset_functions.baseline_systems.baseline_system_util import HVAC_
 from rct229.ruleset_functions.baseline_systems.is_baseline_system_11_1 import (
     is_baseline_system_11_1,
 )
+from rct229.schema.validate import schema_validate_rmr
 
 SYS_11_1_TEST_RMD = {
     "id": "ASHRAE229 1",
@@ -195,6 +196,13 @@ SYS_11_1_TEST_RMD = {
         }
     ],
 }
+
+
+def test__TEST_RMD_baseline_system_11_1__is_valid():
+    schema_validation_result = schema_validate_rmr(SYS_11_1_TEST_RMD)
+    assert schema_validation_result[
+        "passed"
+    ], f"Schema error: {schema_validation_result['error']}"
 
 
 def test_is_baseline__system_11_1():

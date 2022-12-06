@@ -32,13 +32,13 @@ class ZoneConditioningCategory:
 # Intended for internal use
 GET_ZONE_CONDITIONING_CATEGORY_DICT__REQUIRED_FIELDS = {
     "building": {
-        "building_segments[*].heating_ventilation_air_conditioning_systems[*].cooling_system": [
+        "building_segments[*].heating_ventilating_air_conditioning_systems[*].cooling_system": [
             "design_sensible_cool_capacity"
         ],
-        "building_segments[*].heating_ventilation_air_conditioning_systems[*].heating_system": [
+        "building_segments[*].heating_ventilating_air_conditioning_systems[*].heating_system": [
             "design_capacity"
         ],
-        "building_segments[*].heating_ventilation_air_conditioning_systems[*].preheat_system": [
+        "building_segments[*].heating_ventilating_air_conditioning_systems[*].preheat_system": [
             "design_capacity"
         ],
         "building_segments[*].zones[*].spaces[*]": [
@@ -81,7 +81,7 @@ def get_zone_conditioning_category_dict(climate_zone, building):
     hvac_systems_dict = {
         hvac_system["id"]: hvac_system
         for hvac_system in find_all(
-            "building_segments[*].heating_ventilation_air_conditioning_systems[*]",
+            "building_segments[*].heating_ventilating_air_conditioning_systems[*]",
             building,
         )
     }
