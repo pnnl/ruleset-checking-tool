@@ -8,6 +8,7 @@ from rct229.ruleset_functions.get_surface_conditioning_category_dict import (
     get_surface_conditioning_category_dict,
 )
 from rct229.utils.pint_utils import CalcQ
+from rct229.utils.std_comparisons import std_equal
 
 FAIL_MSG = "Subsurface that is not regulated (Not part of building envelope) is not modeled with the same area, U-factor and SHGC in the baseline as in the propsoed design."
 
@@ -104,14 +105,22 @@ class Section5Rule28(RuleDefinitionListIndexedBase):
                         ),
                     }
 
-                def rule_check(self, context, calc_vals, data=None):
+                def rule_check(self, context, calc_vals=None, data=None):
                     return (
-                        calc_vals["subsurface_u_factor_b"]
-                        == calc_vals["subsurface_u_factor_p"]
-                        and calc_vals["subsurface_shgc_b"]
-                        == calc_vals["subsurface_shgc_p"]
-                        and calc_vals["subsurface_glazed_area_b"]
-                        == calc_vals["subsurface_glazed_area_p"]
-                        and calc_vals["subsurface_opaque_area_b"]
-                        == calc_vals["subsurface_opaque_area_p"]
+                        std_equal(
+                            calc_vals["subsurface_u_factor_b"],
+                            calc_vals["subsurface_u_factor_p"],
+                        )
+                        and std_equal(
+                            calc_vals["subsurface_shgc_b"],
+                            calc_vals["subsurface_shgc_p"],
+                        )
+                        and std_equal(
+                            calc_vals["subsurface_glazed_area_b"],
+                            calc_vals["subsurface_glazed_area_p"],
+                        )
+                        and std_equal(
+                            calc_vals["subsurface_opaque_area_b"],
+                            calc_vals["subsurface_opaque_area_p"],
+                        )
                     )
