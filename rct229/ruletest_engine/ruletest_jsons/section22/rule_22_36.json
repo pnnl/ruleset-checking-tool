@@ -3,7 +3,7 @@
         "Section": 22,
         "Rule": 36,
         "Test": "a",
-        "test_description": "Baseline building is system type 7 and is correctly modeled with primary/secondary flow_control keys",
+        "test_description": "Baseline building is system type 7 and is correctly modeled with constant  primary/ variable secondary flow_control keys",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-36",
@@ -38,7 +38,7 @@
                                                         "id": "VAV Air Terminal 1",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -53,7 +53,7 @@
                                                         "id": "VAV Air Terminal 2",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -156,7 +156,7 @@
         "Section": 22,
         "Rule": 36,
         "Test": "b",
-        "test_description": "Baseline building is system type 7 and is incorrectly modeled with primary/secondary flow_control keys",
+        "test_description": "Baseline building is system type 7 and is incorrectly modeled with variable primary/ constant secondary flow_control keys",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-36",
@@ -191,7 +191,7 @@
                                                         "id": "VAV Air Terminal 1",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -206,7 +206,7 @@
                                                         "id": "VAV Air Terminal 2",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }

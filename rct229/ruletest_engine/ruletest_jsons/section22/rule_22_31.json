@@ -38,7 +38,7 @@
                                                         "id": "VAV Air Terminal 1",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -53,7 +53,7 @@
                                                         "id": "VAV Air Terminal 2",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -139,19 +139,17 @@
                                 ]
                             }
                         ],
-                        "output": [
-                            {
-                                "id": "Output 1",
-                                "output_instance": {
-                                    "id": "Output Instance 1",
-                                    "unmet_load_hours_heating": 0,
-                                    "unmet_occupied_load_hours_heating": 0,
-                                    "unmet_load_hours_cooling": 0,
-                                    "unmet_occupied_load_hours_cooling": 0,
-                                    "building_peak_cooling_load": 703400.0
-                                }
+                        "output": {
+                            "id": "Output 1",
+                            "output_instance": {
+                                "id": "Output Instance 1",
+                                "unmet_load_hours_heating": 0,
+                                "unmet_occupied_load_hours_heating": 0,
+                                "unmet_load_hours_cooling": 0,
+                                "unmet_occupied_load_hours_cooling": 0,
+                                "building_peak_cooling_load": 703400.0
                             }
-                        ]
+                        }
                     }
                 ]
             }
@@ -196,7 +194,7 @@
                                                         "id": "VAV Air Terminal 1",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -211,7 +209,7 @@
                                                         "id": "VAV Air Terminal 2",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -301,19 +299,17 @@
                                 ]
                             }
                         ],
-                        "output": [
-                            {
-                                "id": "Output 1",
-                                "output_instance": {
-                                    "id": "Output Instance 1",
-                                    "unmet_load_hours_heating": 0,
-                                    "unmet_occupied_load_hours_heating": 0,
-                                    "unmet_load_hours_cooling": 0,
-                                    "unmet_occupied_load_hours_cooling": 0,
-                                    "building_peak_cooling_load": 703400.0
-                                }
+                        "output": {
+                            "id": "Output 1",
+                            "output_instance": {
+                                "id": "Output Instance 1",
+                                "unmet_load_hours_heating": 0,
+                                "unmet_occupied_load_hours_heating": 0,
+                                "unmet_load_hours_cooling": 0,
+                                "unmet_occupied_load_hours_cooling": 0,
+                                "building_peak_cooling_load": 703400.0
                             }
-                        ]
+                        }
                     }
                 ]
             }
@@ -358,7 +354,7 @@
                                                         "id": "VAV Air Terminal 1",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -373,7 +369,7 @@
                                                         "id": "VAV Air Terminal 2",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -463,19 +459,17 @@
                                 ]
                             }
                         ],
-                        "output": [
-                            {
-                                "id": "Output 1",
-                                "output_instance": {
-                                    "id": "Output Instance 1",
-                                    "unmet_load_hours_heating": 0,
-                                    "unmet_occupied_load_hours_heating": 0,
-                                    "unmet_load_hours_cooling": 0,
-                                    "unmet_occupied_load_hours_cooling": 0,
-                                    "building_peak_cooling_load": 1582650.0
-                                }
+                        "output": {
+                            "id": "Output 1",
+                            "output_instance": {
+                                "id": "Output Instance 1",
+                                "unmet_load_hours_heating": 0,
+                                "unmet_occupied_load_hours_heating": 0,
+                                "unmet_load_hours_cooling": 0,
+                                "unmet_occupied_load_hours_cooling": 0,
+                                "building_peak_cooling_load": 1582650.0
                             }
-                        ]
+                        }
                     }
                 ]
             }
@@ -520,7 +514,7 @@
                                                         "id": "VAV Air Terminal 1",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -535,7 +529,7 @@
                                                         "id": "VAV Air Terminal 2",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -621,19 +615,17 @@
                                 ]
                             }
                         ],
-                        "output": [
-                            {
-                                "id": "Output 1",
-                                "output_instance": {
-                                    "id": "Output Instance 1",
-                                    "unmet_load_hours_heating": 0,
-                                    "unmet_occupied_load_hours_heating": 0,
-                                    "unmet_load_hours_cooling": 0,
-                                    "unmet_occupied_load_hours_cooling": 0,
-                                    "building_peak_cooling_load": 1582650.0
-                                }
+                        "output": {
+                            "id": "Output 1",
+                            "output_instance": {
+                                "id": "Output Instance 1",
+                                "unmet_load_hours_heating": 0,
+                                "unmet_occupied_load_hours_heating": 0,
+                                "unmet_load_hours_cooling": 0,
+                                "unmet_occupied_load_hours_cooling": 0,
+                                "building_peak_cooling_load": 1582650.0
                             }
-                        ]
+                        }
                     }
                 ]
             }
@@ -678,7 +670,7 @@
                                                         "id": "VAV Air Terminal 1",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -693,7 +685,7 @@
                                                         "id": "VAV Air Terminal 2",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -787,19 +779,17 @@
                                 ]
                             }
                         ],
-                        "output": [
-                            {
-                                "id": "Output 1",
-                                "output_instance": {
-                                    "id": "Output Instance 1",
-                                    "unmet_load_hours_heating": 0,
-                                    "unmet_occupied_load_hours_heating": 0,
-                                    "unmet_load_hours_cooling": 0,
-                                    "unmet_occupied_load_hours_cooling": 0,
-                                    "building_peak_cooling_load": 8440800.0
-                                }
+                        "output": {
+                            "id": "Output 1",
+                            "output_instance": {
+                                "id": "Output Instance 1",
+                                "unmet_load_hours_heating": 0,
+                                "unmet_occupied_load_hours_heating": 0,
+                                "unmet_load_hours_cooling": 0,
+                                "unmet_occupied_load_hours_cooling": 0,
+                                "building_peak_cooling_load": 8440800.0
                             }
-                        ]
+                        }
                     }
                 ]
             }
@@ -844,7 +834,7 @@
                                                         "id": "VAV Air Terminal 1",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -859,7 +849,7 @@
                                                         "id": "VAV Air Terminal 2",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -949,19 +939,17 @@
                                 ]
                             }
                         ],
-                        "output": [
-                            {
-                                "id": "Output 1",
-                                "output_instance": {
-                                    "id": "Output Instance 1",
-                                    "unmet_load_hours_heating": 0,
-                                    "unmet_occupied_load_hours_heating": 0,
-                                    "unmet_load_hours_cooling": 0,
-                                    "unmet_occupied_load_hours_cooling": 0,
-                                    "building_peak_cooling_load": 8440800.0
-                                }
+                        "output": {
+                            "id": "Output 1",
+                            "output_instance": {
+                                "id": "Output Instance 1",
+                                "unmet_load_hours_heating": 0,
+                                "unmet_occupied_load_hours_heating": 0,
+                                "unmet_load_hours_cooling": 0,
+                                "unmet_occupied_load_hours_cooling": 0,
+                                "building_peak_cooling_load": 8440800.0
                             }
-                        ]
+                        }
                     }
                 ]
             }

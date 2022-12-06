@@ -38,7 +38,7 @@
                                                         "id": "VAV Air Terminal 1",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -53,7 +53,7 @@
                                                         "id": "VAV Air Terminal 2",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -187,7 +187,7 @@
                                                         "id": "VAV Air Terminal 1",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -202,7 +202,7 @@
                                                         "id": "VAV Air Terminal 2",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -336,7 +336,7 @@
                                                         "id": "VAV Air Terminal 1",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -351,7 +351,7 @@
                                                         "id": "VAV Air Terminal 2",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -485,7 +485,7 @@
                                                         "id": "VAV Air Terminal 1",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -500,7 +500,7 @@
                                                         "id": "VAV Air Terminal 2",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -634,7 +634,7 @@
                                                         "id": "VAV Air Terminal 1",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -649,7 +649,7 @@
                                                         "id": "VAV Air Terminal 2",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -783,7 +783,7 @@
                                                         "id": "VAV Air Terminal 1",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -798,7 +798,7 @@
                                                         "id": "VAV Air Terminal 2",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -932,7 +932,7 @@
                                                         "id": "VAV Air Terminal 1",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -947,7 +947,7 @@
                                                         "id": "VAV Air Terminal 2",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -1084,7 +1084,7 @@
                                                         "id": "VAV Air Terminal 1",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -1099,7 +1099,7 @@
                                                         "id": "VAV Air Terminal 2",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -1236,7 +1236,7 @@
                                                         "id": "VAV Air Terminal 1",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 11"
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 11"
                                                     }
                                                 ]
                                             }
@@ -1351,7 +1351,7 @@
                                                         "id": "VAV Air Terminal 1",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 11"
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 11"
                                                     }
                                                 ]
                                             }
@@ -1466,7 +1466,7 @@
                                                         "id": "VAV Air Terminal 1",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 11"
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 11"
                                                     }
                                                 ]
                                             }
@@ -1581,7 +1581,7 @@
                                                         "id": "VAV Air Terminal 1",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 11"
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 11"
                                                     }
                                                 ]
                                             }
@@ -1696,7 +1696,7 @@
                                                         "id": "VAV Air Terminal 1",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -1711,7 +1711,7 @@
                                                         "id": "VAV Air Terminal 2",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -1841,7 +1841,7 @@
                                                         "id": "VAV Air Terminal 1",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -1856,7 +1856,7 @@
                                                         "id": "VAV Air Terminal 2",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -1980,7 +1980,7 @@
                                                         "id": "VAV Air Terminal 1",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -1995,7 +1995,7 @@
                                                         "id": "VAV Air Terminal 2",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -2126,7 +2126,7 @@
                                                         "id": "VAV Air Terminal 1",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -2141,7 +2141,7 @@
                                                         "id": "VAV Air Terminal 2",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -2272,7 +2272,7 @@
                                                         "id": "VAV Air Terminal 1",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -2287,7 +2287,7 @@
                                                         "id": "VAV Air Terminal 2",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -2422,7 +2422,7 @@
                                                         "id": "VAV Air Terminal 1",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -2437,7 +2437,7 @@
                                                         "id": "VAV Air Terminal 2",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -2572,7 +2572,7 @@
                                                         "id": "VAV Air Terminal 1",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -2587,7 +2587,7 @@
                                                         "id": "VAV Air Terminal 2",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -2722,7 +2722,7 @@
                                                         "id": "VAV Air Terminal 1",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -2737,7 +2737,7 @@
                                                         "id": "VAV Air Terminal 2",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -2868,7 +2868,7 @@
                                                         "id": "VAV Air Terminal 1",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -2883,7 +2883,7 @@
                                                         "id": "VAV Air Terminal 2",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -3014,7 +3014,7 @@
                                                         "id": "VAV Air Terminal 1",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -3029,7 +3029,7 @@
                                                         "id": "VAV Air Terminal 2",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -3160,7 +3160,7 @@
                                                         "id": "VAV Air Terminal 1",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -3175,7 +3175,7 @@
                                                         "id": "VAV Air Terminal 2",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -3271,7 +3271,7 @@
         "Section": 22,
         "Rule": 11,
         "Test": "a",
-        "test_description": "Baseline building is system type 7 and is correctly modeled with the pump power per flow rate",
+        "test_description": "Baseline building is system type 7 and is correctly modeled with the secondary pump power per flow rate of 13 W/GPM",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-11",
@@ -3306,7 +3306,7 @@
                                                         "id": "VAV Air Terminal 1",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -3321,7 +3321,7 @@
                                                         "id": "VAV Air Terminal 2",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -3417,7 +3417,7 @@
         "Section": 22,
         "Rule": 11,
         "Test": "b",
-        "test_description": "Baseline building is system type 7 and is incorrectly modeled with the pump power per flow rate",
+        "test_description": "Baseline building is system type 7 and is incorrectly modeled with the secondary pump power per flow rate of 15 W/GPM",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-11",
@@ -3452,7 +3452,7 @@
                                                         "id": "VAV Air Terminal 1",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -3467,7 +3467,7 @@
                                                         "id": "VAV Air Terminal 2",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -3563,7 +3563,7 @@
         "Section": 22,
         "Rule": 14,
         "Test": "a",
-        "test_description": "Baseline building is system type 7 and is correctly modeled with the design temperature rise range",
+        "test_description": "Baseline building is system type 7 and is correctly modeled with the design temperature rise range of 10 F",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-14",
@@ -3598,7 +3598,7 @@
                                                         "id": "VAV Air Terminal 1",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -3613,7 +3613,7 @@
                                                         "id": "VAV Air Terminal 2",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -3718,7 +3718,7 @@
         "Section": 22,
         "Rule": 14,
         "Test": "b",
-        "test_description": "Baseline building is system type 7 and is incorrectly modeled with the design temperature rise range",
+        "test_description": "Baseline building is system type 7 and is incorrectly modeled with the design temperature rise range of 15 F",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-14",
@@ -3753,7 +3753,7 @@
                                                         "id": "VAV Air Terminal 1",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -3768,7 +3768,7 @@
                                                         "id": "VAV Air Terminal 2",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -3908,7 +3908,7 @@
                                                         "id": "VAV Air Terminal 1",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -3923,7 +3923,7 @@
                                                         "id": "VAV Air Terminal 2",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -4065,7 +4065,7 @@
                                                         "id": "VAV Air Terminal 1",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -4080,7 +4080,7 @@
                                                         "id": "VAV Air Terminal 2",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -4222,7 +4222,7 @@
                                                         "id": "VAV Air Terminal 1",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -4237,7 +4237,7 @@
                                                         "id": "VAV Air Terminal 2",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -4377,7 +4377,7 @@
                                                         "id": "VAV Air Terminal 1",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -4392,7 +4392,7 @@
                                                         "id": "VAV Air Terminal 2",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -4532,7 +4532,7 @@
                                                         "id": "VAV Air Terminal 1",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -4547,7 +4547,7 @@
                                                         "id": "VAV Air Terminal 2",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -4687,7 +4687,7 @@
                                                         "id": "VAV Air Terminal 1",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -4702,7 +4702,7 @@
                                                         "id": "VAV Air Terminal 2",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -4807,7 +4807,7 @@
         "Section": 22,
         "Rule": 21,
         "Test": "a",
-        "test_description": "Baseline building is system type 7 and is correctly modeled with the target chiller type",
+        "test_description": "Baseline building is system type 7 with < 600 ton chiller and is correctly modeled with a screw chiller",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-21",
@@ -4842,7 +4842,7 @@
                                                         "id": "VAV Air Terminal 1",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -4857,7 +4857,7 @@
                                                         "id": "VAV Air Terminal 2",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -4944,19 +4944,17 @@
                                 ]
                             }
                         ],
-                        "output": [
-                            {
-                                "id": "Output 1",
-                                "output_instance": {
-                                    "id": "Output Instance 1",
-                                    "unmet_load_hours_heating": 0,
-                                    "unmet_occupied_load_hours_heating": 0,
-                                    "unmet_load_hours_cooling": 0,
-                                    "unmet_occupied_load_hours_cooling": 0,
-                                    "building_peak_cooling_load": 703400.0
-                                }
+                        "output": {
+                            "id": "Output 1",
+                            "output_instance": {
+                                "id": "Output Instance 1",
+                                "unmet_load_hours_heating": 0,
+                                "unmet_occupied_load_hours_heating": 0,
+                                "unmet_load_hours_cooling": 0,
+                                "unmet_occupied_load_hours_cooling": 0,
+                                "building_peak_cooling_load": 703400.0
                             }
-                        ]
+                        }
                     }
                 ]
             }
@@ -4966,7 +4964,7 @@
         "Section": 22,
         "Rule": 21,
         "Test": "b",
-        "test_description": "Baseline building is system type 7 and is incorrectly modeled with the target chiller type",
+        "test_description": "Baseline building is system type 7 with < 600 ton chiller and is not correctly modeled with a screw chiller",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-21",
@@ -5001,7 +4999,7 @@
                                                         "id": "VAV Air Terminal 1",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -5016,7 +5014,7 @@
                                                         "id": "VAV Air Terminal 2",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -5103,19 +5101,17 @@
                                 ]
                             }
                         ],
-                        "output": [
-                            {
-                                "id": "Output 1",
-                                "output_instance": {
-                                    "id": "Output Instance 1",
-                                    "unmet_load_hours_heating": 0,
-                                    "unmet_occupied_load_hours_heating": 0,
-                                    "unmet_load_hours_cooling": 0,
-                                    "unmet_occupied_load_hours_cooling": 0,
-                                    "building_peak_cooling_load": 703400.0
-                                }
+                        "output": {
+                            "id": "Output 1",
+                            "output_instance": {
+                                "id": "Output Instance 1",
+                                "unmet_load_hours_heating": 0,
+                                "unmet_occupied_load_hours_heating": 0,
+                                "unmet_load_hours_cooling": 0,
+                                "unmet_occupied_load_hours_cooling": 0,
+                                "building_peak_cooling_load": 703400.0
                             }
-                        ]
+                        }
                     }
                 ]
             }
@@ -5125,7 +5121,7 @@
         "Section": 22,
         "Rule": 21,
         "Test": "c",
-        "test_description": "Baseline building is system type 7 and is correctly modeled with the target chiller type",
+        "test_description": "Baseline building is system type 7 with > 600 ton chiller and is correctly modeled with a centrifugal chiller",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-21",
@@ -5160,7 +5156,7 @@
                                                         "id": "VAV Air Terminal 1",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -5175,7 +5171,7 @@
                                                         "id": "VAV Air Terminal 2",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -5262,19 +5258,17 @@
                                 ]
                             }
                         ],
-                        "output": [
-                            {
-                                "id": "Output 1",
-                                "output_instance": {
-                                    "id": "Output Instance 1",
-                                    "unmet_load_hours_heating": 0,
-                                    "unmet_occupied_load_hours_heating": 0,
-                                    "unmet_load_hours_cooling": 0,
-                                    "unmet_occupied_load_hours_cooling": 0,
-                                    "building_peak_cooling_load": 2813600.0
-                                }
+                        "output": {
+                            "id": "Output 1",
+                            "output_instance": {
+                                "id": "Output Instance 1",
+                                "unmet_load_hours_heating": 0,
+                                "unmet_occupied_load_hours_heating": 0,
+                                "unmet_load_hours_cooling": 0,
+                                "unmet_occupied_load_hours_cooling": 0,
+                                "building_peak_cooling_load": 2813600.0
                             }
-                        ]
+                        }
                     }
                 ]
             }
@@ -5284,7 +5278,7 @@
         "Section": 22,
         "Rule": 21,
         "Test": "d",
-        "test_description": "Baseline building is system type 7 and is incorrectly modeled with the target chiller type",
+        "test_description": "Baseline building is system type 7 with > 600 ton chiller and is not correctly modeled with a centrifugal chiller",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-21",
@@ -5319,7 +5313,7 @@
                                                         "id": "VAV Air Terminal 1",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -5334,7 +5328,7 @@
                                                         "id": "VAV Air Terminal 2",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -5421,19 +5415,17 @@
                                 ]
                             }
                         ],
-                        "output": [
-                            {
-                                "id": "Output 1",
-                                "output_instance": {
-                                    "id": "Output Instance 1",
-                                    "unmet_load_hours_heating": 0,
-                                    "unmet_occupied_load_hours_heating": 0,
-                                    "unmet_load_hours_cooling": 0,
-                                    "unmet_occupied_load_hours_cooling": 0,
-                                    "building_peak_cooling_load": 2813600.0
-                                }
+                        "output": {
+                            "id": "Output 1",
+                            "output_instance": {
+                                "id": "Output Instance 1",
+                                "unmet_load_hours_heating": 0,
+                                "unmet_occupied_load_hours_heating": 0,
+                                "unmet_load_hours_cooling": 0,
+                                "unmet_occupied_load_hours_cooling": 0,
+                                "building_peak_cooling_load": 2813600.0
                             }
-                        ]
+                        }
                     }
                 ]
             }
@@ -5443,7 +5435,7 @@
         "Section": 22,
         "Rule": 22,
         "Test": "a",
-        "test_description": "Baseline building is system type 7 and is correctly modeled with the chiller rated capacity and full load efficiency",
+        "test_description": "Baseline building is system type 7 and is correctly modeled with the chiller rated capacity and full load efficiency in accordance with Table G3.5.3",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-22",
@@ -5478,7 +5470,7 @@
                                                         "id": "VAV Air Terminal 1",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -5493,7 +5485,7 @@
                                                         "id": "VAV Air Terminal 2",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -5591,7 +5583,7 @@
         "Section": 22,
         "Rule": 22,
         "Test": "b",
-        "test_description": "Baseline building is system type 7 and is incorrectly modeled with the full load efficiency",
+        "test_description": "Baseline building is system type 7 and is incorrectly modeled with the chiller rated capacity and full load efficiency not in accordance with Table G3.5.3",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-22",
@@ -5626,7 +5618,7 @@
                                                         "id": "VAV Air Terminal 1",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -5641,7 +5633,7 @@
                                                         "id": "VAV Air Terminal 2",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -5739,7 +5731,7 @@
         "Section": 22,
         "Rule": 22,
         "Test": "c",
-        "test_description": "Baseline building is system type 7 and is correctly modeled with the chiller rated capacity and full load efficiency",
+        "test_description": "Baseline building is system type 7 and is correctly modeled with the chiller rated capacity and full load efficiency in accordance with Table G3.5.3",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-22",
@@ -5774,7 +5766,7 @@
                                                         "id": "VAV Air Terminal 1",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -5789,7 +5781,7 @@
                                                         "id": "VAV Air Terminal 2",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -5887,7 +5879,7 @@
         "Section": 22,
         "Rule": 22,
         "Test": "d",
-        "test_description": "Baseline building is system type 7 and is incorrectly modeled with the full load efficiency",
+        "test_description": "Baseline building is system type 7 and is incorrectly modeled with the chiller rated capacity and full load efficiency not in accordance with Table G3.5.3",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-22",
@@ -5922,7 +5914,7 @@
                                                         "id": "VAV Air Terminal 1",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -5937,7 +5929,7 @@
                                                         "id": "VAV Air Terminal 2",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -6035,7 +6027,7 @@
         "Section": 22,
         "Rule": 23,
         "Test": "a",
-        "test_description": "Baseline building is system type 7 and is correctly modeled with the is_chilled_water_pump_interlocked and primary loop pump keys",
+        "test_description": "Baseline building is system type 7 and is correctly modeled with the is_chilled_water_pump_interlocked set to true  and one pump per chiller",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-23",
@@ -6070,7 +6062,7 @@
                                                         "id": "VAV Air Terminal 1",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -6085,7 +6077,7 @@
                                                         "id": "VAV Air Terminal 2",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -6181,7 +6173,7 @@
         "Section": 22,
         "Rule": 23,
         "Test": "b",
-        "test_description": "Baseline building is system type 7 and is incorrectly modeled with the is_chilled_water_pump_interlocked and primary loop pump keys",
+        "test_description": "Baseline building is system type 7 and is incorrectly modeled with the is_chilled_water_pump_interlocked set to false for associated chiller pump",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-23",
@@ -6216,7 +6208,7 @@
                                                         "id": "VAV Air Terminal 1",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -6231,7 +6223,7 @@
                                                         "id": "VAV Air Terminal 2",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -6327,7 +6319,7 @@
         "Section": 22,
         "Rule": 24,
         "Test": "a",
-        "test_description": "Baseline building is system type 7 and is correctly modeled with the child_loop setup and speed_control keys",
+        "test_description": "Baseline building is system type 7 and is correctly modeled with primary pump set to constant volume",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-24",
@@ -6362,7 +6354,7 @@
                                                         "id": "VAV Air Terminal 1",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -6377,7 +6369,7 @@
                                                         "id": "VAV Air Terminal 2",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -6472,7 +6464,7 @@
         "Section": 22,
         "Rule": 24,
         "Test": "b",
-        "test_description": "Baseline building is system type 7 and is incorrectly modeled with the child_loop setup and speed_control keys",
+        "test_description": "Baseline building is system type 7 and is incorrectly modeled with primary pump set to variable volume",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-24",
@@ -6507,7 +6499,7 @@
                                                         "id": "VAV Air Terminal 1",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -6522,7 +6514,7 @@
                                                         "id": "VAV Air Terminal 2",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -6617,7 +6609,7 @@
         "Section": 22,
         "Rule": 25,
         "Test": "a",
-        "test_description": "Baseline building is system type 7 and is correctly modeled with the pump_power_per_flow_rate key",
+        "test_description": "Baseline building is system type 7 and is correctly modeled with the 9 w/gpm",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-25",
@@ -6652,7 +6644,7 @@
                                                         "id": "VAV Air Terminal 1",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -6667,7 +6659,7 @@
                                                         "id": "VAV Air Terminal 2",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -6763,7 +6755,7 @@
         "Section": 22,
         "Rule": 25,
         "Test": "b",
-        "test_description": "Baseline building is system type 7 and is incorrectly modeled with the pump_power_per_flow_rate key",
+        "test_description": "Baseline building is system type 7 and is incorrectly modeled with the 11 w/gpm",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-25",
@@ -6798,7 +6790,7 @@
                                                         "id": "VAV Air Terminal 1",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -6813,7 +6805,7 @@
                                                         "id": "VAV Air Terminal 2",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -6909,7 +6901,7 @@
         "Section": 22,
         "Rule": 26,
         "Test": "a",
-        "test_description": "Baseline building is system type 11 and is correctly modeled with the pump_power_per_flow_rate key",
+        "test_description": "Baseline building is system type 11 and is correctly modeled with a 12 W/gpm primary pump",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-26",
@@ -6944,7 +6936,7 @@
                                                         "id": "VAV Air Terminal 1",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 11"
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 11"
                                                     }
                                                 ]
                                             }
@@ -6955,7 +6947,7 @@
                                                 "cooling_system": {
                                                     "id": "CHW Coil 1",
                                                     "cooling_system_type": "FLUID_LOOP",
-                                                    "chilled_water_loop": "Cooling Child Loop 1"
+                                                    "chilled_water_loop": "Secondary CHW Loop 1"
                                                 },
                                                 "heating_system": {
                                                     "id": "Heating Coil 1",
@@ -7005,7 +6997,7 @@
                                 "type": "COOLING",
                                 "child_loops": [
                                     {
-                                        "id": "Cooling Child Loop 1",
+                                        "id": "Secondary CHW Loop 1",
                                         "type": "COOLING"
                                     }
                                 ],
@@ -7021,7 +7013,7 @@
         "Section": 22,
         "Rule": 26,
         "Test": "b",
-        "test_description": "Baseline building is system type 11 and is incorrectly modeled with the pump_power_per_flow_rate key",
+        "test_description": "Baseline building is system type 11 and is incorrectly modeled with a 15 W/gpm primary pump",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-26",
@@ -7056,7 +7048,7 @@
                                                         "id": "VAV Air Terminal 1",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 11"
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 11"
                                                     }
                                                 ]
                                             }
@@ -7067,7 +7059,7 @@
                                                 "cooling_system": {
                                                     "id": "CHW Coil 1",
                                                     "cooling_system_type": "FLUID_LOOP",
-                                                    "chilled_water_loop": "Cooling Child Loop 1"
+                                                    "chilled_water_loop": "Secondary CHW Loop 1"
                                                 },
                                                 "heating_system": {
                                                     "id": "Heating Coil 1",
@@ -7117,7 +7109,7 @@
                                 "type": "COOLING",
                                 "child_loops": [
                                     {
-                                        "id": "Cooling Child Loop 1",
+                                        "id": "Secondary CHW Loop 1",
                                         "type": "COOLING"
                                     }
                                 ],
@@ -7133,7 +7125,7 @@
         "Section": 22,
         "Rule": 27,
         "Test": "a",
-        "test_description": "Baseline building is system type 7 and is correctly modeled with the is_condenser_water_pump_interlocked key",
+        "test_description": "Baseline building is system type 7 and is correctly modeled with the is_condenser_water_pump_interlocked key set to true",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-27",
@@ -7168,7 +7160,7 @@
                                                         "id": "VAV Air Terminal 1",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -7183,7 +7175,7 @@
                                                         "id": "VAV Air Terminal 2",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -7279,7 +7271,7 @@
         "Section": 22,
         "Rule": 27,
         "Test": "b",
-        "test_description": "Baseline building is system type 7 and is incorrectly modeled with the is_condenser_water_pump_interlocked key",
+        "test_description": "Baseline building is system type 7 and is incorrectly modeled with the is_condenser_water_pump_interlocked key set to false",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-27",
@@ -7314,7 +7306,7 @@
                                                         "id": "VAV Air Terminal 1",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -7329,7 +7321,7 @@
                                                         "id": "VAV Air Terminal 2",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -7425,7 +7417,7 @@
         "Section": 22,
         "Rule": 29,
         "Test": "a",
-        "test_description": "Baseline building is system type 7 and is correctly modeled with the pump_power_per_flow_rate value",
+        "test_description": "Baseline building is system type 7 and is correctly modeled with a condenser pump value of 19 W/GPM",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-29",
@@ -7460,7 +7452,7 @@
                                                         "id": "VAV Air Terminal 1",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -7475,7 +7467,7 @@
                                                         "id": "VAV Air Terminal 2",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -7575,7 +7567,7 @@
         "Section": 22,
         "Rule": 29,
         "Test": "b",
-        "test_description": "Baseline building is system type 7 and is incorrectly modeled with the pump_power_per_flow_rate value",
+        "test_description": "Baseline building is system type 7 and is incorrectly modeled with a condenser pump value of 21 W/GPM",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-29",
@@ -7610,7 +7602,7 @@
                                                         "id": "VAV Air Terminal 1",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -7625,7 +7617,7 @@
                                                         "id": "VAV Air Terminal 2",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -7725,7 +7717,7 @@
         "Section": 22,
         "Rule": 30,
         "Test": "a",
-        "test_description": "Baseline building is system type 11 and is correctly modeled with the pump_power_per_flow_rate value",
+        "test_description": "Baseline building is system type 11 and is correctly modeled with the condenser pump value of 22 W/gpm",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-30",
@@ -7760,7 +7752,7 @@
                                                         "id": "VAV Air Terminal 1",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 11"
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 11"
                                                     }
                                                 ]
                                             }
@@ -7841,7 +7833,7 @@
         "Section": 22,
         "Rule": 30,
         "Test": "b",
-        "test_description": "Baseline building is system type 11 and is incorrectly modeled with the pump_power_per_flow_rate value",
+        "test_description": "Baseline building is system type 11 and is incorrectly modeled with the condenser pump value of 25 W/gpm",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-30",
@@ -7876,7 +7868,7 @@
                                                         "id": "VAV Air Terminal 1",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 11"
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 11"
                                                     }
                                                 ]
                                             }
@@ -7992,7 +7984,7 @@
                                                         "id": "VAV Air Terminal 1",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -8007,7 +7999,7 @@
                                                         "id": "VAV Air Terminal 2",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -8093,19 +8085,17 @@
                                 ]
                             }
                         ],
-                        "output": [
-                            {
-                                "id": "Output 1",
-                                "output_instance": {
-                                    "id": "Output Instance 1",
-                                    "unmet_load_hours_heating": 0,
-                                    "unmet_occupied_load_hours_heating": 0,
-                                    "unmet_load_hours_cooling": 0,
-                                    "unmet_occupied_load_hours_cooling": 0,
-                                    "building_peak_cooling_load": 703400.0
-                                }
+                        "output": {
+                            "id": "Output 1",
+                            "output_instance": {
+                                "id": "Output Instance 1",
+                                "unmet_load_hours_heating": 0,
+                                "unmet_occupied_load_hours_heating": 0,
+                                "unmet_load_hours_cooling": 0,
+                                "unmet_occupied_load_hours_cooling": 0,
+                                "building_peak_cooling_load": 703400.0
                             }
-                        ]
+                        }
                     }
                 ]
             }
@@ -8150,7 +8140,7 @@
                                                         "id": "VAV Air Terminal 1",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -8165,7 +8155,7 @@
                                                         "id": "VAV Air Terminal 2",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -8255,19 +8245,17 @@
                                 ]
                             }
                         ],
-                        "output": [
-                            {
-                                "id": "Output 1",
-                                "output_instance": {
-                                    "id": "Output Instance 1",
-                                    "unmet_load_hours_heating": 0,
-                                    "unmet_occupied_load_hours_heating": 0,
-                                    "unmet_load_hours_cooling": 0,
-                                    "unmet_occupied_load_hours_cooling": 0,
-                                    "building_peak_cooling_load": 703400.0
-                                }
+                        "output": {
+                            "id": "Output 1",
+                            "output_instance": {
+                                "id": "Output Instance 1",
+                                "unmet_load_hours_heating": 0,
+                                "unmet_occupied_load_hours_heating": 0,
+                                "unmet_load_hours_cooling": 0,
+                                "unmet_occupied_load_hours_cooling": 0,
+                                "building_peak_cooling_load": 703400.0
                             }
-                        ]
+                        }
                     }
                 ]
             }
@@ -8312,7 +8300,7 @@
                                                         "id": "VAV Air Terminal 1",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -8327,7 +8315,7 @@
                                                         "id": "VAV Air Terminal 2",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -8417,19 +8405,17 @@
                                 ]
                             }
                         ],
-                        "output": [
-                            {
-                                "id": "Output 1",
-                                "output_instance": {
-                                    "id": "Output Instance 1",
-                                    "unmet_load_hours_heating": 0,
-                                    "unmet_occupied_load_hours_heating": 0,
-                                    "unmet_load_hours_cooling": 0,
-                                    "unmet_occupied_load_hours_cooling": 0,
-                                    "building_peak_cooling_load": 1582650.0
-                                }
+                        "output": {
+                            "id": "Output 1",
+                            "output_instance": {
+                                "id": "Output Instance 1",
+                                "unmet_load_hours_heating": 0,
+                                "unmet_occupied_load_hours_heating": 0,
+                                "unmet_load_hours_cooling": 0,
+                                "unmet_occupied_load_hours_cooling": 0,
+                                "building_peak_cooling_load": 1582650.0
                             }
-                        ]
+                        }
                     }
                 ]
             }
@@ -8474,7 +8460,7 @@
                                                         "id": "VAV Air Terminal 1",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -8489,7 +8475,7 @@
                                                         "id": "VAV Air Terminal 2",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -8575,19 +8561,17 @@
                                 ]
                             }
                         ],
-                        "output": [
-                            {
-                                "id": "Output 1",
-                                "output_instance": {
-                                    "id": "Output Instance 1",
-                                    "unmet_load_hours_heating": 0,
-                                    "unmet_occupied_load_hours_heating": 0,
-                                    "unmet_load_hours_cooling": 0,
-                                    "unmet_occupied_load_hours_cooling": 0,
-                                    "building_peak_cooling_load": 1582650.0
-                                }
+                        "output": {
+                            "id": "Output 1",
+                            "output_instance": {
+                                "id": "Output Instance 1",
+                                "unmet_load_hours_heating": 0,
+                                "unmet_occupied_load_hours_heating": 0,
+                                "unmet_load_hours_cooling": 0,
+                                "unmet_occupied_load_hours_cooling": 0,
+                                "building_peak_cooling_load": 1582650.0
                             }
-                        ]
+                        }
                     }
                 ]
             }
@@ -8632,7 +8616,7 @@
                                                         "id": "VAV Air Terminal 1",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -8647,7 +8631,7 @@
                                                         "id": "VAV Air Terminal 2",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -8741,19 +8725,17 @@
                                 ]
                             }
                         ],
-                        "output": [
-                            {
-                                "id": "Output 1",
-                                "output_instance": {
-                                    "id": "Output Instance 1",
-                                    "unmet_load_hours_heating": 0,
-                                    "unmet_occupied_load_hours_heating": 0,
-                                    "unmet_load_hours_cooling": 0,
-                                    "unmet_occupied_load_hours_cooling": 0,
-                                    "building_peak_cooling_load": 8440800.0
-                                }
+                        "output": {
+                            "id": "Output 1",
+                            "output_instance": {
+                                "id": "Output Instance 1",
+                                "unmet_load_hours_heating": 0,
+                                "unmet_occupied_load_hours_heating": 0,
+                                "unmet_load_hours_cooling": 0,
+                                "unmet_occupied_load_hours_cooling": 0,
+                                "building_peak_cooling_load": 8440800.0
                             }
-                        ]
+                        }
                     }
                 ]
             }
@@ -8798,7 +8780,7 @@
                                                         "id": "VAV Air Terminal 1",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -8813,7 +8795,7 @@
                                                         "id": "VAV Air Terminal 2",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -8903,19 +8885,17 @@
                                 ]
                             }
                         ],
-                        "output": [
-                            {
-                                "id": "Output 1",
-                                "output_instance": {
-                                    "id": "Output Instance 1",
-                                    "unmet_load_hours_heating": 0,
-                                    "unmet_occupied_load_hours_heating": 0,
-                                    "unmet_load_hours_cooling": 0,
-                                    "unmet_occupied_load_hours_cooling": 0,
-                                    "building_peak_cooling_load": 8440800.0
-                                }
+                        "output": {
+                            "id": "Output 1",
+                            "output_instance": {
+                                "id": "Output Instance 1",
+                                "unmet_load_hours_heating": 0,
+                                "unmet_occupied_load_hours_heating": 0,
+                                "unmet_load_hours_cooling": 0,
+                                "unmet_occupied_load_hours_cooling": 0,
+                                "building_peak_cooling_load": 8440800.0
                             }
-                        ]
+                        }
                     }
                 ]
             }
@@ -8960,7 +8940,7 @@
                                                         "id": "VAV Air Terminal 1",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -8975,7 +8955,7 @@
                                                         "id": "VAV Air Terminal 2",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -9109,7 +9089,7 @@
                                                         "id": "VAV Air Terminal 1",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -9124,7 +9104,7 @@
                                                         "id": "VAV Air Terminal 2",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -9223,7 +9203,7 @@
         "Section": 22,
         "Rule": 33,
         "Test": "a",
-        "test_description": "Baseline building is system type 7 and is correctly modeled with the number of primary/secondary loops",
+        "test_description": "Baseline building is system type 7 and is correctly modeled with the correct number of primary/secondary loops",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-33",
@@ -9258,7 +9238,7 @@
                                                         "id": "VAV Air Terminal 1",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -9273,7 +9253,7 @@
                                                         "id": "VAV Air Terminal 2",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -9368,7 +9348,7 @@
         "Section": 22,
         "Rule": 33,
         "Test": "b",
-        "test_description": "Baseline building is system type 7 and is incorrectly modeled with the number of primary/secondary loops",
+        "test_description": "Baseline building is system type 7 and is incorrectly modeled with the an secondary chilled water plant loop",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-33",
@@ -9403,7 +9383,7 @@
                                                         "id": "VAV Air Terminal 1",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -9418,7 +9398,7 @@
                                                         "id": "VAV Air Terminal 2",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7_1",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7_1",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -9544,7 +9524,7 @@
         "Section": 22,
         "Rule": 34,
         "Test": "a",
-        "test_description": "Baseline building is system type 7 and is correctly modeled with the is_sized_using_coincident_load key",
+        "test_description": "Baseline building is system type 7 and is correctly modeled with coincident loads",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-34",
@@ -9579,7 +9559,7 @@
                                                         "id": "VAV Air Terminal 1",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -9594,7 +9574,7 @@
                                                         "id": "VAV Air Terminal 2",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -9693,7 +9673,7 @@
         "Section": 22,
         "Rule": 34,
         "Test": "b",
-        "test_description": "Baseline building is system type 7 and is incorrectly modeled with the is_sized_using_coincident_load key",
+        "test_description": "Baseline building is system type 7 and is incorrectly modeled without coincident loads",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-34",
@@ -9728,7 +9708,7 @@
                                                         "id": "VAV Air Terminal 1",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -9743,7 +9723,7 @@
                                                         "id": "VAV Air Terminal 2",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -9842,7 +9822,7 @@
         "Section": 22,
         "Rule": 36,
         "Test": "a",
-        "test_description": "Baseline building is system type 7 and is correctly modeled with primary/secondary flow_control keys",
+        "test_description": "Baseline building is system type 7 and is correctly modeled with constant  primary/ variable secondary flow_control keys",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-36",
@@ -9877,7 +9857,7 @@
                                                         "id": "VAV Air Terminal 1",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -9892,7 +9872,7 @@
                                                         "id": "VAV Air Terminal 2",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -9995,7 +9975,7 @@
         "Section": 22,
         "Rule": 36,
         "Test": "b",
-        "test_description": "Baseline building is system type 7 and is incorrectly modeled with primary/secondary flow_control keys",
+        "test_description": "Baseline building is system type 7 and is incorrectly modeled with variable primary/ constant secondary flow_control keys",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-36",
@@ -10030,7 +10010,7 @@
                                                         "id": "VAV Air Terminal 1",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -10045,7 +10025,7 @@
                                                         "id": "VAV Air Terminal 2",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
@@ -10183,7 +10163,7 @@
                                                         "id": "VAV Air Terminal 1",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Purchased HW Loop 1"
                                                     }
@@ -10198,7 +10178,7 @@
                                                         "id": "VAV Air Terminal 2",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Purchased HW Loop 1"
                                                     }
@@ -10297,7 +10277,7 @@
                                                         "id": "VAV Air Terminal 1",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Purchased HW Loop 1"
                                                     }
@@ -10312,7 +10292,7 @@
                                                         "id": "VAV Air Terminal 2",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Purchased HW Loop 1"
                                                     }
@@ -10430,7 +10410,7 @@
                                                         "id": "VAV Air Terminal 1",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 5",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 5",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Purchased HW Loop 1"
                                                     }
@@ -10445,7 +10425,7 @@
                                                         "id": "VAV Air Terminal 2",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 5",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 5",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Purchased HW 1"
                                                     }
@@ -10534,7 +10514,7 @@
                                                         "id": "VAV Air Terminal 1",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 5",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 5",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Purchased HW Loop 1"
                                                     }
@@ -10549,7 +10529,7 @@
                                                         "id": "VAV Air Terminal 2",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 5",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 5",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Purchased HW 1"
                                                     }
