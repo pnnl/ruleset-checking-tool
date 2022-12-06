@@ -5,7 +5,7 @@ from pathlib import Path
 from rct229.schema.schema_utils import quantify_rmr
 
 SYSTEM_TYPE_TEST_FILE_PATH = os.path.join(
-    Path(os.path.dirname(__file__)).parent.parent,
+    Path(os.path.dirname(__file__)).parent.parent.absolute(),
     "ruletest_engine",
     "ruletest_jsons",
     "system_types",
