@@ -30,7 +30,7 @@ SYS_1_RMD = {
                                             "id": "PTAC Terminal 1",
                                             "is_supply_ducted": False,
                                             "type": "CONSTANT_AIR_VOLUME",
-                                            "served_by_heating_ventilation_air_conditioning_system": "PTAC 1",
+                                            "served_by_heating_ventilating_air_conditioning_system": "PTAC 1",
                                         }
                                     ],
                                 },
@@ -43,7 +43,7 @@ SYS_1_RMD = {
                                             "id": "PTAC Terminal 1b",
                                             "is_supply_ducted": False,
                                             "type": "CONSTANT_AIR_VOLUME",
-                                            "served_by_heating_ventilation_air_conditioning_system": "PTAC 1b",
+                                            "served_by_heating_ventilating_air_conditioning_system": "PTAC 1b",
                                         }
                                     ],
                                 },
@@ -64,7 +64,7 @@ SYS_1_RMD = {
                                             # this is necessary in the current setup.
                                             # This parameter connects hvac_b with specific terminal so that the
                                             # function is_baseline_system_1 can execute within the correct zone list.
-                                            "served_by_heating_ventilation_air_conditioning_system": "PTAC 1a",
+                                            "served_by_heating_ventilating_air_conditioning_system": "PTAC 1a",
                                         }
                                     ],
                                 },
@@ -85,12 +85,12 @@ SYS_1_RMD = {
                                             # this is necessary in the current setup.
                                             # This parameter connects hvac_b with specific terminal so that the
                                             # function is_baseline_system_1 can execute within the correct zone list.
-                                            "served_by_heating_ventilation_air_conditioning_system": "PTAC 1c",
+                                            "served_by_heating_ventilating_air_conditioning_system": "PTAC 1c",
                                         }
                                     ],
                                 },
                             ],
-                            "heating_ventilation_air_conditioning_systems": [
+                            "heating_ventilating_air_conditioning_systems": [
                                 {
                                     "id": "PTAC 1",
                                     "cooling_system": {

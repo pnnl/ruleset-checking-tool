@@ -1,6 +1,7 @@
 from rct229.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.is_hvac_sys_fluid_loop_attached_to_chiller import (
     is_hvac_sys_fluid_loop_attached_to_chiller,
 )
+from rct229.schema.validate import schema_validate_rmr
 
 TEST_RMD = {
     "id": "test_rmd",
@@ -10,7 +11,7 @@ TEST_RMD = {
             "building_segments": [
                 {
                     "id": "building_segment_1",
-                    "heating_ventilation_air_conditioning_systems": [
+                    "heating_ventilating_air_conditioning_systems": [
                         {
                             "id": "hvac_1",
                             "cooling_system": {
@@ -56,6 +57,13 @@ TEST_RMD = {
 }
 
 TEST_RMD_FULL = {"id": "229_01", "ruleset_model_instances": [TEST_RMD]}
+
+
+def test__TEST_RMD__is_valid():
+    schema_validation_result = schema_validate_rmr(TEST_RMD_FULL)
+    assert schema_validation_result[
+        "passed"
+    ], f"Schema error: {schema_validation_result['error']}"
 
 
 def test__cooling_attached_to_chiller():
