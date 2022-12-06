@@ -2,6 +2,7 @@ from rct229.ruleset_functions.baseline_systems.baseline_system_util import HVAC_
 from rct229.ruleset_functions.baseline_systems.is_baseline_system_11_2 import (
     is_baseline_system_11_2,
 )
+from rct229.schema.validate import schema_validate_rmr
 
 SYS_11_2_TEST_RMD = {
     "id": "ASHRAE229 1",
@@ -25,7 +26,7 @@ SYS_11_2_TEST_RMD = {
                                             "id": "VAV Air Terminal 1",
                                             "is_supply_ducted": True,
                                             "type": "VARIABLE_AIR_VOLUME",
-                                            "served_by_heating_ventilation_air_conditioning_system": "System Type 11.2",
+                                            "served_by_heating_ventilating_air_conditioning_system": "System Type 11.2",
                                         }
                                     ],
                                 },
@@ -38,12 +39,12 @@ SYS_11_2_TEST_RMD = {
                                             "id": "VAV Air Terminal 1A",
                                             "is_supply_ducted": True,
                                             "type": "VARIABLE_AIR_VOLUME",
-                                            "served_by_heating_ventilation_air_conditioning_system": "System Type 11.2A",
+                                            "served_by_heating_ventilating_air_conditioning_system": "System Type 11.2A",
                                         }
                                     ],
                                 },
                             ],
-                            "heating_ventilation_air_conditioning_systems": [
+                            "heating_ventilating_air_conditioning_systems": [
                                 {
                                     "id": "System Type 11.2",
                                     "cooling_system": {
@@ -139,6 +140,13 @@ SYS_11_2_TEST_RMD = {
         }
     ],
 }
+
+
+def test__TEST_RMD_baseline_system_11_2__is_valid():
+    schema_validation_result = schema_validate_rmr(SYS_11_2_TEST_RMD)
+    assert schema_validation_result[
+        "passed"
+    ], f"Schema error: {schema_validation_result['error']}"
 
 
 def test_is_baseline_system__11_2():
