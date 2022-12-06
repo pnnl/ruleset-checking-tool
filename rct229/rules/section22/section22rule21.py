@@ -59,7 +59,7 @@ class Section22Rule21(RuleDefinitionListIndexedBase):
     def create_data(self, context, data):
         rmi_b = context.baseline
 
-        output_b = rmi_b["output"][0]
+        output_b = rmi_b["output"]
         building_cooling_peak_load = getattr_(
             output_b,
             "building_peak_cooling_load",

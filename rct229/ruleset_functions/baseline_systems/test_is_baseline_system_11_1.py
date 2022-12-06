@@ -2,6 +2,7 @@ from rct229.ruleset_functions.baseline_systems.baseline_system_util import HVAC_
 from rct229.ruleset_functions.baseline_systems.is_baseline_system_11_1 import (
     is_baseline_system_11_1,
 )
+from rct229.schema.validate import schema_validate_rmr
 
 SYS_11_1_TEST_RMD = {
     "id": "ASHRAE229 1",
@@ -25,7 +26,7 @@ SYS_11_1_TEST_RMD = {
                                             "id": "VAV Air Terminal 1B",
                                             "is_supply_ducted": True,
                                             "type": "VARIABLE_AIR_VOLUME",
-                                            "served_by_heating_ventilation_air_conditioning_system": "System Type 11B",
+                                            "served_by_heating_ventilating_air_conditioning_system": "System Type 11B",
                                         }
                                     ],
                                 },
@@ -38,7 +39,7 @@ SYS_11_1_TEST_RMD = {
                                             "id": "VAV Air Terminal 1",
                                             "is_supply_ducted": True,
                                             "type": "VARIABLE_AIR_VOLUME",
-                                            "served_by_heating_ventilation_air_conditioning_system": "System Type 11",
+                                            "served_by_heating_ventilating_air_conditioning_system": "System Type 11",
                                         }
                                     ],
                                 },
@@ -51,7 +52,7 @@ SYS_11_1_TEST_RMD = {
                                             "id": "VAV Air Terminal 1A",
                                             "is_supply_ducted": True,
                                             "type": "VARIABLE_AIR_VOLUME",
-                                            "served_by_heating_ventilation_air_conditioning_system": "System Type 11A",
+                                            "served_by_heating_ventilating_air_conditioning_system": "System Type 11A",
                                         }
                                     ],
                                 },
@@ -64,12 +65,12 @@ SYS_11_1_TEST_RMD = {
                                             "id": "VAV Air Terminal 1C",
                                             "is_supply_ducted": True,
                                             "type": "VARIABLE_AIR_VOLUME",
-                                            "served_by_heating_ventilation_air_conditioning_system": "System Type 11C",
+                                            "served_by_heating_ventilating_air_conditioning_system": "System Type 11C",
                                         }
                                     ],
                                 },
                             ],
-                            "heating_ventilation_air_conditioning_systems": [
+                            "heating_ventilating_air_conditioning_systems": [
                                 {
                                     "id": "System Type 11B",
                                     "cooling_system": {
@@ -195,6 +196,13 @@ SYS_11_1_TEST_RMD = {
         }
     ],
 }
+
+
+def test__TEST_RMD_baseline_system_11_1__is_valid():
+    schema_validation_result = schema_validate_rmr(SYS_11_1_TEST_RMD)
+    assert schema_validation_result[
+        "passed"
+    ], f"Schema error: {schema_validation_result['error']}"
 
 
 def test_is_baseline__system_11_1():

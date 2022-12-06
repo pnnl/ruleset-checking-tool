@@ -14,7 +14,7 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "None",
             "mandatory_rule": "Yes",
-            "schema_version": "0.0.18"
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "proposed": {
@@ -90,7 +90,7 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "None",
             "mandatory_rule": "Yes",
-            "schema_version": "0.0.18"
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "proposed": {
@@ -166,7 +166,7 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "None",
             "mandatory_rule": "Yes",
-            "schema_version": "0.0.18"
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "proposed": {
@@ -241,7 +241,7 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "None",
             "mandatory_rule": "Yes",
-            "schema_version": "0.0.18"
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "proposed": {
@@ -316,7 +316,7 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "None",
             "mandatory_rule": "Yes",
-            "schema_version": "0.0.18"
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "proposed": {
@@ -390,7 +390,7 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "None",
             "mandatory_rule": "Yes",
-            "schema_version": "0.0.18"
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "proposed": {
@@ -464,7 +464,7 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "None",
             "mandatory_rule": "Yes",
-            "schema_version": "0.0.18"
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "proposed": {
