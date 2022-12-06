@@ -99,18 +99,18 @@ def find_schema_unit_for_json_path(key_list):
 def get_secondary_schema_root_dictionary(secondary_json_string):
     """Returns schema definition JSON object other than ASHRAE229 as a dictionary at root level
 
-        Parameters
-        ----------
-        secondary_json_string : str
-        String representing a JSON schema definition file other than ASHRAE 229 E.g., 'Output2019ASHRAE901.schema.json'
+    Parameters
+    ----------
+    secondary_json_string : str
+    String representing a JSON schema definition file other than ASHRAE 229 E.g., 'Output2019ASHRAE901.schema.json'
 
 
-         Returns
-        -------
-        schema_dictionary: dict
-            Alternative schema definition JSON object as a dictionary
+     Returns
+    -------
+    schema_dictionary: dict
+        Alternative schema definition JSON object as a dictionary
 
-        """
+    """
 
     file_dir = os.path.dirname(__file__)
     json_schema_path = os.path.join(file_dir, secondary_json_string)
@@ -233,9 +233,13 @@ def return_json_schema_reference(object_dict, key):
                 return secondary_json
 
             else:
-                raise ValueError(f"OUTCOME: Secondary json '{secondary_json}' not found in {secondary_schema_files}")
+                raise ValueError(
+                    f"OUTCOME: Secondary json '{secondary_json}' not found in {secondary_schema_files}"
+                )
 
-        raise ValueError(f"OUTCOME: Could not find a $ref key inside 'oneOf' key {properties_dict} ")
+        raise ValueError(
+            f"OUTCOME: Could not find a $ref key inside 'oneOf' key {properties_dict} "
+        )
 
     else:
 
