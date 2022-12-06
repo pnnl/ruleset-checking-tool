@@ -20,7 +20,7 @@
                                             "id": "PTAC Terminal 1",
                                             "is_supply_ducted": false,
                                             "type": "CONSTANT_AIR_VOLUME",
-                                            "served_by_heating_ventilation_air_conditioning_system": "PTAC 1"
+                                            "served_by_heating_ventilating_air_conditioning_system": "PTAC 1"
                                         }
                                     ]
                                 }
