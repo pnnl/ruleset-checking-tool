@@ -3,7 +3,7 @@ from rct229.data_fns.table_9_5_1_fns import table_9_5_1_lookup
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.std_comparisons import std_equal
 
-NONE = schema_enums["LightingSpaceOptions2019ASHRAE901T951TG38"].NONE
+NONE = schema_enums["LightingBuildingAreaOptions2019ASHRAE901T951TG38"].NONE
 
 # Intended for export and internal use
 class LightingStatusType:

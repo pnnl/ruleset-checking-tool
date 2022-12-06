@@ -1,9 +1,9 @@
 
-# Airside System - Rule 23-10  
+# Airside System - Rule 23-8  
 
 **Schema Version:** 0.0.10  
 **Mandatory Rule:** True  
-**Rule ID:** 23-10  
+**Rule ID:** 23-8  
 **Rule Description:** System 5-8 and 11 - part load VAV fan power shall be modeled using either method 1 or 2 in Table G3.1.3.15. This rule will only validate data points from Method-1 Part-load Fan Power Data. However, both methods are equivalent. When modeling inputs are based on Method 2, values should be converted to Method 1 when writing to RMD.  
 **Rule Assertion:** B-RMR = expected value  
 **Appendix G Section:** Section 23 Air-side  
@@ -32,9 +32,9 @@
 
 - For each building segment in B_RMR: `for building_segment_b in B_RMR...building_segments:`
 
-  - Get HVAC system: `hvac_b = building_segment_b.heating_ventilation_air_conditioning_systems`
+  - Get HVAC system: `hvac_b = building_segment_b.heating_ventilating_air_conditioning_systems`
 
-    - Check if HVAC system is type 5, 6, 7, 8, 11.1, 11.2, 7a, 8a, 11.1a, 11.2a, 5b, 6b, 7b, 8b, 11b, 7c, 11c: ``if any(is_baseline_system_type(hvac_b, sys_type) == TRUE for sys_type in ["SYS-5", "SYS-6", "SYS-7", "SYS-8", "SYS-11.1", "SYS-11.2", "SYS-7A", "SYS-8A", "SYS-11.1A", "SYS-11.2A", "SYS-5B", "SYS-6B", "SYS-7B", "SYS-8B", "SYS-11B", "SYS-7C", "SYS-11C"]):`
+    - Check if HVAC system is type 5, 6, 7, 8, 11.1, 11.2, 7a, 8a, 11.1a, 11.2a, 5b, 6b, 7b, 8b, 11b, 7c, 11c: `if any(is_baseline_system_type(hvac_b, sys_type) == TRUE for sys_type in ["SYS-5", "SYS-6", "SYS-7", "SYS-8", "SYS-11.1", "SYS-11.2", "SYS-7A", "SYS-8A", "SYS-11.1A", "SYS-11.2A", "SYS-5B", "SYS-6B", "SYS-7B", "SYS-8B", "SYS-11B", "SYS-7C", "SYS-11C"]):`
 
       - Get fan system serving HVAC system: `fan_system_b = hvac_b.fan_system`
 
@@ -46,3 +46,10 @@
             - Case 1: For supply fan in fan system, if fan part-load VAV is modeled as per Table G3.1.3.15: `if fan_system_b.supply_fan.output_validation_points == target_validation_points: PASS`
 
             - Case 2: Else: `else: FAIL`
+            
+**Notes:**
+1. Updated the Rule ID from 23-10 to 23-8 on 11/28/2022
+
+
+**[Back](../_toc.md)**
+
