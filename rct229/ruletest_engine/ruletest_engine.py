@@ -533,12 +533,12 @@ def run_boiler_tests():
 def run_receptacle_tests():
     """Runs all tests found in the receptacle tests JSON
 
-        Returns
-        -------
-        None
+    Returns
+    -------
+    None
 
-        Results of receptacle test are spit out to console
-        """
+    Results of receptacle test are spit out to console
+    """
     receptacle_test_json = "receptacle_tests.json"
     return run_section_tests(receptacle_test_json)
 
