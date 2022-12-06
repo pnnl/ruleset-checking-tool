@@ -17,31 +17,37 @@
                                     "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                     "terminals": [
                                         {
-                                            "id": "PTHP Terminal 1",
+                                            "id": "VAV Air Terminal 1",
                                             "is_supply_ducted": true,
-                                            "type": "CONSTANT_AIR_VOLUME",
-                                            "served_by_heating_ventilating_air_conditioning_system": "PTHP 1"
+                                            "type": "VARIABLE_AIR_VOLUME",
+                                            "served_by_heating_ventilating_air_conditioning_system": "System 11"
                                         }
                                     ]
                                 }
                             ],
                             "heating_ventilating_air_conditioning_systems": [
                                 {
-                                    "id": "PTHP 1",
+                                    "id": "System 11",
                                     "cooling_system": {
-                                        "id": "HP Cooling Coil 1",
-                                        "cooling_system_type": "DIRECT_EXPANSION"
+                                        "id": "CHW Coil 1",
+                                        "cooling_system_type": "FLUID_LOOP",
+                                        "chilled_water_loop": "Chiller Loop 1"
                                     },
                                     "heating_system": {
-                                        "id": "HP Heating Coil 1",
-                                        "heating_system_type": "HEAT_PUMP"
+                                        "id": "Heating Coil 1",
+                                        "heating_system_type": "ELECTRIC_RESISTANCE"
                                     },
                                     "fan_system": {
-                                        "id": "CAV Fan System 1",
-                                        "fan_control": "CONSTANT",
+                                        "id": "VAV Fan System 1",
+                                        "fan_control": "VARIABLE_SPEED_DRIVE",
                                         "supply_fans": [
                                             {
                                                 "id": "Supply Fan 1"
+                                            }
+                                        ],
+                                        "return_fans": [
+                                            {
+                                                "id": "Return Fan 1"
                                             }
                                         ]
                                     }
@@ -49,6 +55,26 @@
                             ]
                         }
                     ]
+                }
+            ],
+            "external_fluid_source": [
+                {
+                    "id": "Purchased CW 1",
+                    "loop": "Chilled Water Loop 1",
+                    "type": "CHILLED_WATER"
+                }
+            ],
+            "pumps": [
+                {
+                    "id": "CHW Pump 1",
+                    "loop_or_piping": "Chilled Water Loop 1",
+                    "speed_control": "FIXED_SPEED"
+                }
+            ],
+            "fluid_loops": [
+                {
+                    "id": "Chilled Water Loop 1",
+                    "type": "COOLING"
                 }
             ]
         }
