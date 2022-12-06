@@ -7,12 +7,12 @@
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-19",
-            "ruleset_reference": "G3.1.3.9",
-            "rule_description": "The baseline heat rejection device shall be modeled with variable speed fan control",
+            "ruleset_reference": "G3.1.3.11",
+            "rule_description": "The baaseline cooling tower shall be controlled to maintain a leaving water temperature, where weather permits, as specified in Table G3.1.3.11",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "No",
+            "primary_rule": "Yes",
             "schema_version": 0.018
         },
         "rmr_transformations": {
@@ -37,9 +37,9 @@
                                                     {
                                                         "id": "VAV Air Terminal 1",
                                                         "is_supply_ducted": true,
-                                                        "heating_source": "HOT_WATER",
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "VAV System 1",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
+                                                        "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
                                                 ]
@@ -52,21 +52,26 @@
                                                     {
                                                         "id": "VAV Air Terminal 2",
                                                         "is_supply_ducted": true,
-                                                        "heating_source": "HOT_WATER",
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
+                                                        "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
                                                 ]
                                             }
                                         ],
-                                        "heating_ventilation_air_conditioning_systems": [
+                                        "heating_ventilating_air_conditioning_systems": [
                                             {
                                                 "id": "System 7",
                                                 "cooling_system": {
                                                     "id": "CHW Coil 1",
                                                     "cooling_system_type": "FLUID_LOOP",
-                                                    "chilled_water_loop": "Chiller Loop 1"
+                                                    "chilled_water_loop": "Secondary CHW Loop 1"
+                                                },
+                                                "preheat_system": {
+                                                    "id": "Preheat Coil 1",
+                                                    "heating_system_type": "FLUID_LOOP",
+                                                    "hot_water_loop": "Boiler Loop 1"
                                                 },
                                                 "fan_system": {
                                                     "id": "VAV Fan System 1",
@@ -111,6 +116,11 @@
                                 "id": "Chiller Pump 1",
                                 "loop_or_piping": "Chiller Loop 1",
                                 "speed_control": "FIXED_SPEED"
+                            },
+                            {
+                                "id": "Secondary CHW Pump",
+                                "loop_or_piping": "Secondary CHW Loop 1",
+                                "speed_control": "VARIABLE_SPEED"
                             }
                         ],
                         "fluid_loops": [
@@ -121,6 +131,12 @@
                             {
                                 "id": "Chiller Loop 1",
                                 "type": "COOLING",
+                                "child_loops": [
+                                    {
+                                        "id": "Secondary CHW Loop 1",
+                                        "type": "COOLING"
+                                    }
+                                ],
                                 "cooling_or_condensing_design_and_control": {
                                     "id": "CCDC 1",
                                     "temperature_reset_type": "CONSTANT"
@@ -146,12 +162,12 @@
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-19",
-            "ruleset_reference": "G3.1.3.9",
-            "rule_description": "The baseline heat rejection device shall be modeled with variable speed fan control",
+            "ruleset_reference": "G3.1.3.11",
+            "rule_description": "The baaseline cooling tower shall be controlled to maintain a leaving water temperature, where weather permits, as specified in Table G3.1.3.11",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "No",
+            "primary_rule": "Yes",
             "schema_version": 0.018
         },
         "rmr_transformations": {
@@ -176,9 +192,9 @@
                                                     {
                                                         "id": "VAV Air Terminal 1",
                                                         "is_supply_ducted": true,
-                                                        "heating_source": "HOT_WATER",
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "VAV System 1",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
+                                                        "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
                                                 ]
@@ -191,21 +207,26 @@
                                                     {
                                                         "id": "VAV Air Terminal 2",
                                                         "is_supply_ducted": true,
-                                                        "heating_source": "HOT_WATER",
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
+                                                        "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
                                                 ]
                                             }
                                         ],
-                                        "heating_ventilation_air_conditioning_systems": [
+                                        "heating_ventilating_air_conditioning_systems": [
                                             {
                                                 "id": "System 7",
                                                 "cooling_system": {
                                                     "id": "CHW Coil 1",
                                                     "cooling_system_type": "FLUID_LOOP",
-                                                    "chilled_water_loop": "Chiller Loop 1"
+                                                    "chilled_water_loop": "Secondary CHW Loop 1"
+                                                },
+                                                "preheat_system": {
+                                                    "id": "Preheat Coil 1",
+                                                    "heating_system_type": "FLUID_LOOP",
+                                                    "hot_water_loop": "Boiler Loop 1"
                                                 },
                                                 "fan_system": {
                                                     "id": "VAV Fan System 1",
@@ -250,6 +271,11 @@
                                 "id": "Chiller Pump 1",
                                 "loop_or_piping": "Chiller Loop 1",
                                 "speed_control": "FIXED_SPEED"
+                            },
+                            {
+                                "id": "Secondary CHW Pump",
+                                "loop_or_piping": "Secondary CHW Loop 1",
+                                "speed_control": "VARIABLE_SPEED"
                             }
                         ],
                         "fluid_loops": [
@@ -260,6 +286,12 @@
                             {
                                 "id": "Chiller Loop 1",
                                 "type": "COOLING",
+                                "child_loops": [
+                                    {
+                                        "id": "Secondary CHW Loop 1",
+                                        "type": "COOLING"
+                                    }
+                                ],
                                 "cooling_or_condensing_design_and_control": {
                                     "id": "CCDC 1",
                                     "temperature_reset_type": "OUTSIDE_AIR_RESET"

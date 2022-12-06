@@ -3,6 +3,7 @@ from rct229.data_fns.table_G3_4_fns import table_G34_lookup
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
+from rct229.ruleset_functions.compare_standard_val import std_le
 from rct229.ruleset_functions.get_building_scc_window_wall_ratios_dict import (
     get_building_scc_window_wall_ratios_dict,
 )
@@ -16,7 +17,6 @@ from rct229.ruleset_functions.get_surface_conditioning_category_dict import (
 )
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.pint_utils import ZERO, CalcQ
-from rct229.utils.std_comparisons import std_equal
 
 DOOR = schema_enums["SubsurfaceClassificationOptions"].DOOR
 MANUAL_CHECK_REQUIRED_MSG = "Manual review is requested to verify vertical fenestration meets U-factor requirement as per Table G3.4. "
@@ -279,4 +279,4 @@ class Section5Rule24(RuleDefinitionListIndexedBase):
                 def rule_check(self, context, calc_vals=None, data=None):
                     target_u_factor = calc_vals["target_u_factor"]
                     subsurface_u_factor = calc_vals["subsurface_u_factor"]
-                    return std_equal(target_u_factor, subsurface_u_factor)
+                    return std_le(std_val=target_u_factor, val=subsurface_u_factor)
