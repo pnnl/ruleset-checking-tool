@@ -21,6 +21,7 @@ Also, it would be great if, as keys, this function could accept a reference.id. 
 **Function Call:**
 - **get_component_by_id**
 - **compare_schedules**
+- **compare_same_field_in_different_objects**
 
 ## Logic:
 - set the result to true: `result = TRUE`
@@ -29,7 +30,7 @@ Also, it would be great if, as keys, this function could accept a reference.id. 
 - if either object is null, set result to false and return: `if(obj_1 == NULL || obj_2 == NULL): result = FALSE; return result`
   - create a variable `index` to iterate through the fields in fields_list: `index = 0`
   - loop through the fields in fields_list, and while result == TRUE, continue matching fields: `while result == TRUE and index < len(fields_list):`
-    - check if the values in obj_1 and obj_2: `if obj_1.fields_list[index] == obj_2.fields_list[index]:`
+    - check if the values in obj_1 and obj_2 are the SAME using `compare_same_field_in_different_objects`: `if compare_same_field_in_different_objects(obj_1, obj_2, fields_list[index]):`
       - the values match, increment tank_index: `index += 1`
     - else the values don't match, set result to FALSE: `else: all_match = FALSE; break`
   - reset index to zero: `index = 0`
