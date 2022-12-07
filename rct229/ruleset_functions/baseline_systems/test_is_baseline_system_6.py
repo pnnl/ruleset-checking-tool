@@ -25,7 +25,7 @@ SYS_6_RMD = {
                                             "id": "VAV Air Terminal 1",
                                             "is_supply_ducted": True,
                                             "type": "VARIABLE_AIR_VOLUME",
-                                            "served_by_heating_ventilation_air_conditioning_system": "System 6",
+                                            "served_by_heating_ventilating_air_conditioning_system": "System 6",
                                             "heating_source": "ELECTRIC",
                                             "fan": {
                                                 "id": "Terminal Fan 1",
@@ -43,7 +43,7 @@ SYS_6_RMD = {
                                             "id": "VAV Air Terminal 2",
                                             "is_supply_ducted": True,
                                             "type": "VARIABLE_AIR_VOLUME",
-                                            "served_by_heating_ventilation_air_conditioning_system": "System 6B",
+                                            "served_by_heating_ventilating_air_conditioning_system": "System 6B",
                                             "heating_source": "HOT_WATER",
                                             "heating_from_loop": "Purchased HW 1",
                                             "fan": {
@@ -54,7 +54,7 @@ SYS_6_RMD = {
                                     ],
                                 },
                             ],
-                            "heating_ventilation_air_conditioning_systems": [
+                            "heating_ventilating_air_conditioning_systems": [
                                 {
                                     "id": "System 6",
                                     "cooling_system": {
