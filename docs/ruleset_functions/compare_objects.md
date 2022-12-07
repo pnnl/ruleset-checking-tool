@@ -2,7 +2,7 @@
 
 **Schema Version:** 0.0.23
 
-**Description:** compares two objects in different RMIs based on a list of field names
+**Description:** compares two objects in different RMIs based on a list of field names 
 **IMPORTANT NOTE TO RCT TEAM:** caution with using getattr_ - the absence of the a key in obj_1 or obj_2 should not result in an error.  Rather if both objects do not have the key, we want the comparison to continue.  If only one object has one of the keys, we want the function to return FALSE.
 
 Also, it would be great if, as keys, this function could accept a reference.id.  For example, if we are comparing two Tanks, we could pass in `[location_zone.id]`
