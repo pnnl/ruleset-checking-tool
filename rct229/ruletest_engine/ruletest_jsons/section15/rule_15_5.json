@@ -45,7 +45,7 @@
                                 "type": "DRY_TYPE",
                                 "phase": "SINGLE_PHASE",
                                 "capacity": 25000,
-                                "efficiency": 0.98
+                                "efficiency": 0.989
                             }
                         ]
                     }
@@ -136,7 +136,7 @@
                                 "type": "DRY_TYPE",
                                 "phase": "THREE_PHASE",
                                 "capacity": 30000,
-                                "efficiency": 0.99
+                                "efficiency": 0.9928
                             }
                         ]
                     }
@@ -190,7 +190,7 @@
                                 "type": "DRY_TYPE",
                                 "phase": "THREE_PHASE",
                                 "capacity": 30000,
-                                "efficiency": 0.99
+                                "efficiency": 0.9928
                             }
                         ]
                     }
