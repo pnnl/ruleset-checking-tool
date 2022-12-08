@@ -45,10 +45,15 @@ def test__TEST_RMD__is_valid():
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"
 
+
 def test__all_terminal_have_one_fan():
     assert do_all_terminals_have_one_fan(TEST_RMD, ["terminal_1", "terminal_2"]) == True
 
+
 def test__none_terminal_have_one_fan():
-    assert do_all_terminals_have_one_fan(TEST_RMD, ["terminal_1", "terminal_2", "terminal_3"]) == False
-
-
+    assert (
+        do_all_terminals_have_one_fan(
+            TEST_RMD, ["terminal_1", "terminal_2", "terminal_3"]
+        )
+        == False
+    )
