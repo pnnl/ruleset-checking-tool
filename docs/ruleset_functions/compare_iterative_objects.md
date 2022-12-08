@@ -17,7 +17,7 @@ Also, it would be great if, as keys, this function could accept a reference.id. 
 - **iterative_field**: the name of the field in which the iterative object (or list of objects) exists
 
 **Returns:**  
-- **result**: TRUE or FALSE, indicating whether the fields are the same in both files
+- **result**: an array with the first value being TRUE or FALSE, indicating whether the fields are the same in both files.  The second value is a list of the ids of all matching objects: [TRUE, loop_1, loop_2]
  
 **Function Call:**
 - **get_component_by_id**
@@ -26,23 +26,24 @@ Also, it would be great if, as keys, this function could accept a reference.id. 
 - **compare_same_field_in_different_objects**
 
 ## Logic:
+- create the object id list: `object_id_list = []
 - call `compare_objects` and continue only if the function is true: `if not compare_objects(RMI_1,RMI_2,object_id,fields_list,schedules_list):`
-  - set the result to false and return: `result = FALSE; return result;`
+  - set the result to false and return: `result = FALSE; return [result, object_id_list];`
 - get the two objects from each RMI: `obj_1 = get_component_by_id(RMI_1,object_id); obj_2 = get_component_by_id(RMI_2,object_id)`
 
 - call compare_same_field_in_different_objects on the iterative field: `if not compare_same_field_in_different_objects(obj_1, obj_2, iterative_field) == SAME:`
-  - set the result to false and return: `result = FALSE; return result;`
+  - set the result to false and return: `result = FALSE; return [result, object_id_list];`
+- at this point we are sure that the two original objects are equal, add the object_id to object_id_list: `object_id_list.append(object_id)`
 - check whether the iterative field points to a list: `if type(obj_1.iterative_field) == list):`
   - create a list of object ids for the objects in the list of obj_1: `obj_1_sub_ids = [] for sub_1 in obj_1.iterative_field: obj_1_sub_ids.append(sub_1.id)`
     - iterate through each sub in obj_2: `for sub_2 in obj_2.iterative_field:`
       - check whether the sub_2.id is in the list of subs for obj_1: `if sub_2.id in obj_1_sub_ids:`
-        - compare the two subs using compare_iterative_objects: `if not compare_iterative_objects(P_RMI,U_RMI,sub_2.id,fields_list,schedules_list,iterative_field):`
-
-
-
-  
+        - compare the two subs using compare_iterative_objects: `sub_comparison_result = compare_iterative_objects(P_RMI,U_RMI,sub_2.id,fields_list,schedules_list,iterative_field)`
+        - if the sub comparison was sucessful, we add the list of ids to object_id_list: `if sub_comparison_result[0]: object_id_list += sub_comparison_result[1]`
 - otherwise, the iterative field points to an object, not a list: `else:`
+ - the field should be pointing to a string (id).  Compare the two subs using compare_iterative_objects: `sub_comparison_result = compare_iterative_objects(P_RMI, U_RMI, obj_1.iterative_field, fields_list, schedules_list, iterative_field)`
+ - if the sub comparison was sucessful, we add the list of ids to object_id_list: `if sub_comparison_result[0]: object_id_list += sub_comparison_result[1]`
 
-**Returns**  `return result`
+**Returns**  `return [result, object_id_list]`
 
 **[Back](../_toc.md)**
