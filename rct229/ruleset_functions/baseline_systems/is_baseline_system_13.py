@@ -42,6 +42,8 @@ HEATING_SYSTEM = schema_enums["HeatingSystemOptions"]
 
 def is_baseline_system_13(rmi_b, hvac_b_id, terminal_unit_id_list, zone_id_list):
     """
+    Get either Sys-13, Sys-13a, or Not_Sys_13 string output which indicates whether the HVAC system is ASHRAE 90.1 2019 Appendix G system 13
+    (Single Zone Constant Volume System with CHW and Electric Resistance) or system 13a (system 13 with purchased CHW).
 
     Parameters
     ----------
