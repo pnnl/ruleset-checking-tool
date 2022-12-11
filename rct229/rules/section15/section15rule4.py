@@ -19,7 +19,7 @@ class Section15Rule4(RuleDefinitionListIndexedBase):
 
     def create_data(self, context, data):
         transformers_b = context.baseline
-        return {"transformer_ids_b": find_all("[*].id", transformers_b)}
+        return {"transformer_ids_b": find_all("$[*].id", transformers_b)}
         # Get the Baseline transformer ids
         return find_all("[*].id", context.baseline)
 

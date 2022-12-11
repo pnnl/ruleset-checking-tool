@@ -32,7 +32,7 @@
 
 - For each building segment in baseline ruleset model instance: `for building_segment_b in ASHRAE229.ruleset_model_instance[baseline]...building_segments:`
 
-  - For each HVAC system in building segment: `for hvac_b in building_segment_b.heating_ventilation_air_conditioning_systems:`
+  - For each HVAC system in building segment: `for hvac_b in building_segment_b.heating_ventilating_air_conditioning_systems:`
   
     - Check if HVAC system is type 6, 8, 8a, 6b, 8b: `if any(is_baseline_system_type(hvac_b, sys_type)) == TRUE for sys_type in ["SYS-6", "SYS-8", "SYS-8A", "SYS-6B", "SYS-8B"]):`
 
