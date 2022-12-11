@@ -14,10 +14,7 @@
 **Evaluation Context:** P-RMI
 **Data Lookup:**   
 **Function Call:** 
-- **compare_objects**
 - **get_component_by_id**
-- **compare_same_field_in_different_objects**
-- **compare_iterative_objects**
 
 **Applicability Checks:**
 - no logic here, applies to all P-RMDs
