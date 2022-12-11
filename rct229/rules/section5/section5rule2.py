@@ -1,8 +1,6 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
-from rct229.rule_engine.rule_list_indexed_base import \
-    RuleDefinitionListIndexedBase
-from rct229.rule_engine.user_baseline_proposed_vals import \
-    UserBaselineProposedVals
+from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
+from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.match_lists import match_lists_by_id
 

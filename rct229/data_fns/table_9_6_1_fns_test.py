@@ -2,10 +2,14 @@ import pytest
 
 from rct229.data import data
 from rct229.data.schema_enums import schema_enums
-from rct229.data_fns.table_9_6_1_fns import (space_type_enumeration_to_lpd_map,
-                                             table_9_6_1_lookup)
+from rct229.data_fns.table_9_6_1_fns import (
+    space_type_enumeration_to_lpd_map,
+    table_9_6_1_lookup,
+)
 from rct229.data_fns.table_utils import (
-    check_enumeration_to_osstd_match_field_value_map, find_osstd_table_entry)
+    check_enumeration_to_osstd_match_field_value_map,
+    find_osstd_table_entry,
+)
 from rct229.schema.config import ureg
 
 watts_per_ft2 = ureg("watt / foot**2")

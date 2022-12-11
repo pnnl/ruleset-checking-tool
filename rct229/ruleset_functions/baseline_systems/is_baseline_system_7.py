@@ -1,34 +1,50 @@
 from rct229.data.schema_enums import schema_enums
-from rct229.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.are_all_terminal_cool_sources_none_or_null import \
-    are_all_terminal_cool_sources_none_or_null
-from rct229.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.are_all_terminal_fans_null import \
-    are_all_terminal_fans_null
-from rct229.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.are_all_terminal_heat_sources_hot_water import \
-    are_all_terminal_heat_sources_hot_water
-from rct229.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.are_all_terminal_heating_loops_attached_to_boiler import \
-    are_all_terminal_heating_loops_attached_to_boiler
-from rct229.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.are_all_terminal_heating_loops_purchased_heating import \
-    are_all_terminal_heating_loops_purchased_heating
-from rct229.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.are_all_terminal_types_VAV import \
-    are_all_terminal_types_VAV
-from rct229.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.does_each_zone_have_only_one_terminal import \
-    does_each_zone_have_only_one_terminal
-from rct229.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.is_hvac_sys_cooling_type_fluid_loop import \
-    is_hvac_sys_cooling_type_fluid_loop
-from rct229.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.is_hvac_sys_fan_sys_VSD import \
-    is_hvac_sys_fan_sys_vsd
-from rct229.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.is_hvac_sys_fluid_loop_attached_to_chiller import \
-    is_hvac_sys_fluid_loop_attached_to_chiller
-from rct229.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.is_hvac_sys_fluid_loop_purchased_CHW import \
-    is_hvac_sys_fluid_loop_purchased_chw
-from rct229.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.is_hvac_sys_preheat_fluid_loop_attached_to_boiler import \
-    is_hvac_sys_preheat_fluid_loop_attached_to_boiler
-from rct229.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.is_hvac_sys_preheat_fluid_loop_purchased_heating import \
-    is_hvac_sys_preheat_fluid_loop_purchased_heating
-from rct229.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.is_hvac_sys_preheating_type_fluid_loop import \
-    is_hvac_sys_preheating_type_fluid_loop
+from rct229.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.are_all_terminal_cool_sources_none_or_null import (
+    are_all_terminal_cool_sources_none_or_null,
+)
+from rct229.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.are_all_terminal_fans_null import (
+    are_all_terminal_fans_null,
+)
+from rct229.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.are_all_terminal_heat_sources_hot_water import (
+    are_all_terminal_heat_sources_hot_water,
+)
+from rct229.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.are_all_terminal_heating_loops_attached_to_boiler import (
+    are_all_terminal_heating_loops_attached_to_boiler,
+)
+from rct229.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.are_all_terminal_heating_loops_purchased_heating import (
+    are_all_terminal_heating_loops_purchased_heating,
+)
+from rct229.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.are_all_terminal_types_VAV import (
+    are_all_terminal_types_VAV,
+)
+from rct229.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.does_each_zone_have_only_one_terminal import (
+    does_each_zone_have_only_one_terminal,
+)
+from rct229.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.is_hvac_sys_cooling_type_fluid_loop import (
+    is_hvac_sys_cooling_type_fluid_loop,
+)
+from rct229.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.is_hvac_sys_fan_sys_VSD import (
+    is_hvac_sys_fan_sys_vsd,
+)
+from rct229.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.is_hvac_sys_fluid_loop_attached_to_chiller import (
+    is_hvac_sys_fluid_loop_attached_to_chiller,
+)
+from rct229.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.is_hvac_sys_fluid_loop_purchased_CHW import (
+    is_hvac_sys_fluid_loop_purchased_chw,
+)
+from rct229.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.is_hvac_sys_preheat_fluid_loop_attached_to_boiler import (
+    is_hvac_sys_preheat_fluid_loop_attached_to_boiler,
+)
+from rct229.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.is_hvac_sys_preheat_fluid_loop_purchased_heating import (
+    is_hvac_sys_preheat_fluid_loop_purchased_heating,
+)
+from rct229.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.is_hvac_sys_preheating_type_fluid_loop import (
+    is_hvac_sys_preheating_type_fluid_loop,
+)
 from rct229.ruleset_functions.baseline_systems.baseline_system_util import (
-    HVAC_SYS, find_exactly_one_hvac_system)
+    HVAC_SYS,
+    find_exactly_one_hvac_system,
+)
 from rct229.utils.jsonpath_utils import find_one
 
 HEATING_SYSTEM = schema_enums["HeatingSystemOptions"]

@@ -1,8 +1,10 @@
 import click
 
-from rct229.reports.project_report import (print_json_report,
-                                           print_rule_report,
-                                           print_summary_report)
+from rct229.reports.project_report import (
+    print_json_report,
+    print_rule_report,
+    print_summary_report,
+)
 from rct229.rule_engine.engine import evaluate_all_rules
 from rct229.schema.validate import validate_rmr
 from rct229.utils.file import deserialize_rmr_file

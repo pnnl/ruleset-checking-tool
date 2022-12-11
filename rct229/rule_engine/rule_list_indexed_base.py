@@ -1,6 +1,5 @@
 from rct229.rule_engine.rule_list_base import RuleDefinitionListBase
-from rct229.rule_engine.user_baseline_proposed_vals import \
-    UserBaselineProposedVals
+from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 from rct229.utils.json_utils import slash_prefix_guarantee
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.match_lists import match_lists

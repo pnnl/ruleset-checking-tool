@@ -1,5 +1,6 @@
-from rct229.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.are_all_terminal_heat_sources_none_or_null import \
-    are_all_terminal_heat_sources_none_or_null
+from rct229.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.are_all_terminal_heat_sources_none_or_null import (
+    are_all_terminal_heat_sources_none_or_null,
+)
 from rct229.schema.validate import schema_validate_rmr
 
 TEST_RMD = {

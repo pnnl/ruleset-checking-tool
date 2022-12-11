@@ -1,16 +1,11 @@
 from rct229.data.schema_enums import schema_enums
 from rct229.rule_engine.rule_base import RuleDefinitionBase
-from rct229.rule_engine.rule_list_indexed_base import \
-    RuleDefinitionListIndexedBase
-from rct229.rule_engine.user_baseline_proposed_vals import \
-    UserBaselineProposedVals
-from rct229.ruleset_functions.baseline_systems.baseline_system_util import \
-    HVAC_SYS
-from rct229.ruleset_functions.get_baseline_system_types import \
-    get_baseline_system_types
+from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
+from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
+from rct229.ruleset_functions.baseline_systems.baseline_system_util import HVAC_SYS
+from rct229.ruleset_functions.get_baseline_system_types import get_baseline_system_types
 from rct229.utils.assertions import getattr_
-from rct229.utils.jsonpath_utils import (find_all,
-                                         find_exactly_one_with_field_value)
+from rct229.utils.jsonpath_utils import find_all, find_exactly_one_with_field_value
 
 APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_7,

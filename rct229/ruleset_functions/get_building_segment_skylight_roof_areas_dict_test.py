@@ -1,10 +1,12 @@
 import pytest
 
 from rct229.data_fns.table_3_2_fns import table_3_2_lookup
-from rct229.ruleset_functions.get_building_segment_skylight_roof_areas_dict import \
-    get_building_segment_skylight_roof_areas_dict
-from rct229.ruleset_functions.get_zone_conditioning_category_dict import \
-    CRAWLSPACE_HEIGHT_THRESHOLD as CRAWLSPACE_HEIGHT_THRESHOLD_QUANTITY
+from rct229.ruleset_functions.get_building_segment_skylight_roof_areas_dict import (
+    get_building_segment_skylight_roof_areas_dict,
+)
+from rct229.ruleset_functions.get_zone_conditioning_category_dict import (
+    CRAWLSPACE_HEIGHT_THRESHOLD as CRAWLSPACE_HEIGHT_THRESHOLD_QUANTITY,
+)
 from rct229.schema.config import ureg
 from rct229.schema.schema_utils import quantify_rmr
 from rct229.schema.validate import schema_validate_rmr

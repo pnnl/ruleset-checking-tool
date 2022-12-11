@@ -1,11 +1,8 @@
 from rct229.data.schema_enums import schema_enums
-from rct229.data_fns.table_8_4_4_fns import (table_8_4_4_in_range,
-                                             table_8_4_4_lookup)
+from rct229.data_fns.table_8_4_4_fns import table_8_4_4_in_range, table_8_4_4_lookup
 from rct229.rule_engine.rule_base import RuleDefinitionBase
-from rct229.rule_engine.rule_list_indexed_base import \
-    RuleDefinitionListIndexedBase
-from rct229.rule_engine.user_baseline_proposed_vals import \
-    UserBaselineProposedVals
+from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
+from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 
 _DRY_TYPE = schema_enums["TransformerOptions"].DRY_TYPE
 

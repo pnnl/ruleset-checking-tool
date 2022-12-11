@@ -1,5 +1,6 @@
-from rct229.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.are_all_terminal_fan_configs_parallel import \
-    are_all_terminal_fan_configs_parallel
+from rct229.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.are_all_terminal_fan_configs_parallel import (
+    are_all_terminal_fan_configs_parallel,
+)
 from rct229.schema.validate import schema_validate_rmr
 
 TEST_RMD = {

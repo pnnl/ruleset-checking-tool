@@ -1,8 +1,9 @@
 from rct229.data.schema_enums import schema_enums
 from rct229.ruleset_functions.baseline_systems.baseline_system_util import (
-    HVAC_SYS, find_exactly_one_fluid_loop)
-from rct229.ruleset_functions.get_baseline_system_types import \
-    get_baseline_system_types
+    HVAC_SYS,
+    find_exactly_one_fluid_loop,
+)
+from rct229.ruleset_functions.get_baseline_system_types import get_baseline_system_types
 from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all
 

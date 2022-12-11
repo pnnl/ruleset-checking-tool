@@ -1,8 +1,7 @@
 import pytest
 
 from rct229.rule_engine.rule_base import RuleDefinitionBase
-from rct229.rule_engine.user_baseline_proposed_vals import \
-    UserBaselineProposedVals
+from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 
 # Constants ###############################################
 # Note: It is important that these constants are not mutated by any of the tests

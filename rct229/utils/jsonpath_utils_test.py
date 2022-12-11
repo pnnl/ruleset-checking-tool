@@ -1,7 +1,10 @@
 import pytest
-from jsonpath_utils import (create_jsonpath_value_dict, find_all,
-                            find_all_with_field_value,
-                            find_one_with_field_value)
+from jsonpath_utils import (
+    create_jsonpath_value_dict,
+    find_all,
+    find_all_with_field_value,
+    find_one_with_field_value,
+)
 
 # Testing find_all()
 test_obj1 = {"transformers": [{"name": "tr1"}, {"name": "tr2"}, {"name": "tr3"}]}

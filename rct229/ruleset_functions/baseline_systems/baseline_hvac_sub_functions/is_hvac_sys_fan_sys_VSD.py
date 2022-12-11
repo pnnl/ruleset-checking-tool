@@ -1,6 +1,7 @@
 from rct229.data.schema_enums import schema_enums
-from rct229.ruleset_functions.baseline_systems.baseline_system_util import \
-    find_exactly_one_hvac_system
+from rct229.ruleset_functions.baseline_systems.baseline_system_util import (
+    find_exactly_one_hvac_system,
+)
 
 FAN_SYSTEM_SUPPLY_FAN_CONTROL = schema_enums["FanSystemSupplyFanControlOptions"]
 

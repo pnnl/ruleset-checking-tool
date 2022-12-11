@@ -1,7 +1,13 @@
-from rct229.data_fns.table_G3_7_fns import (MANUAL_ON, NONE, OTHER,
-                                            PARTIAL_AUTO_ON, table_G3_7_lookup)
+from rct229.data_fns.table_G3_7_fns import (
+    MANUAL_ON,
+    NONE,
+    OTHER,
+    PARTIAL_AUTO_ON,
+    table_G3_7_lookup,
+)
 from rct229.utils.assertions import assert_, assert_required_fields, getattr_
 from rct229.utils.jsonpath_utils import find_exactly_one_with_field_value
+
 # Intended for internal use
 from rct229.utils.pint_utils import ZERO
 

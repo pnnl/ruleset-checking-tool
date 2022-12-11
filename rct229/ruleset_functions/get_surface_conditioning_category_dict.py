@@ -1,10 +1,12 @@
 import pandas as pd
 
 from rct229.data.schema_enums import schema_enums
-from rct229.ruleset_functions.get_zone_conditioning_category_dict import \
-    ZoneConditioningCategory as ZCC
-from rct229.ruleset_functions.get_zone_conditioning_category_dict import \
-    get_zone_conditioning_category_dict
+from rct229.ruleset_functions.get_zone_conditioning_category_dict import (
+    ZoneConditioningCategory as ZCC,
+)
+from rct229.ruleset_functions.get_zone_conditioning_category_dict import (
+    get_zone_conditioning_category_dict,
+)
 from rct229.utils.assertions import assert_required_fields, getattr_
 from rct229.utils.jsonpath_utils import find_all
 

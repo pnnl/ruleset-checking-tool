@@ -1,7 +1,8 @@
 import pytest
 
-from rct229.ruleset_functions.get_primary_secondary_loops_dict import \
-    get_primary_secondary_loops_dict
+from rct229.ruleset_functions.get_primary_secondary_loops_dict import (
+    get_primary_secondary_loops_dict,
+)
 from rct229.schema.config import ureg
 from rct229.schema.schema_utils import quantify_rmr
 from rct229.schema.validate import schema_validate_rmr
