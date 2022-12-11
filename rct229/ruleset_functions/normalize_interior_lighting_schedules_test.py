@@ -1,8 +1,7 @@
 import pytest
 
-from rct229.ruleset_functions.normalize_interior_lighting_schedules import (
-    normalize_interior_lighting_schedules,
-)
+from rct229.ruleset_functions.normalize_interior_lighting_schedules import \
+    normalize_interior_lighting_schedules
 from rct229.schema.schema_utils import quantify_rmr
 from rct229.schema.validate import schema_validate_rmr
 

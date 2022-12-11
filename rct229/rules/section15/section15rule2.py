@@ -1,5 +1,6 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
-from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
+from rct229.rule_engine.user_baseline_proposed_vals import \
+    UserBaselineProposedVals
 
 
 class Section15Rule2(RuleDefinitionBase):

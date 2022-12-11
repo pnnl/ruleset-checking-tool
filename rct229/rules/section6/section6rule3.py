@@ -1,11 +1,11 @@
 from rct229.data.schema_enums import schema_enums
 from rct229.rule_engine.rule_base import RuleDefinitionBase
-from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
+from rct229.rule_engine.rule_list_indexed_base import \
+    RuleDefinitionListIndexedBase
+from rct229.rule_engine.user_baseline_proposed_vals import \
+    UserBaselineProposedVals
 from rct229.ruleset_functions.get_building_segment_lighting_status_type_dict import (
-    LightingStatusType,
-    get_building_segment_lighting_status_type_dict,
-)
+    LightingStatusType, get_building_segment_lighting_status_type_dict)
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.pint_utils import CalcQ
 from rct229.utils.std_comparisons import std_equal

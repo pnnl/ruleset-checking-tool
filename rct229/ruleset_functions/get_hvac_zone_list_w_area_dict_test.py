@@ -1,8 +1,7 @@
 import pytest
 
-from rct229.ruleset_functions.get_hvac_zone_list_w_area_dict import (
-    get_hvac_zone_list_w_area_dict,
-)
+from rct229.ruleset_functions.get_hvac_zone_list_w_area_dict import \
+    get_hvac_zone_list_w_area_dict
 from rct229.schema.config import ureg
 from rct229.schema.schema_utils import quantify_rmr
 from rct229.schema.validate import schema_validate_rmr

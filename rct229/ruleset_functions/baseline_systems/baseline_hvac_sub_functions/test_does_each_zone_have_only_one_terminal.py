@@ -1,6 +1,5 @@
-from rct229.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.does_each_zone_have_only_one_terminal import (
-    does_each_zone_have_only_one_terminal,
-)
+from rct229.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.does_each_zone_have_only_one_terminal import \
+    does_each_zone_have_only_one_terminal
 from rct229.schema.validate import schema_validate_rmr
 
 TEST_RMD = {

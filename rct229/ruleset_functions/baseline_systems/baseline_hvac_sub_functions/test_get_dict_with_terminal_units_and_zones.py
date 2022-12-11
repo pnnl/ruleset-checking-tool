@@ -1,6 +1,5 @@
-from rct229.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.get_dict_with_terminal_units_and_zones import (
-    get_dict_with_terminal_units_and_zones,
-)
+from rct229.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.get_dict_with_terminal_units_and_zones import \
+    get_dict_with_terminal_units_and_zones
 from rct229.schema.validate import schema_validate_rmr
 
 rmd_model = {

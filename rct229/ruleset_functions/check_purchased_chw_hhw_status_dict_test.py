@@ -1,6 +1,5 @@
-from rct229.ruleset_functions.check_purchased_chw_hhw_status_dict import (
-    check_purchased_chw_hhw_status_dict,
-)
+from rct229.ruleset_functions.check_purchased_chw_hhw_status_dict import \
+    check_purchased_chw_hhw_status_dict
 from rct229.schema.validate import schema_validate_rmr
 
 TEST_BUILDING = {

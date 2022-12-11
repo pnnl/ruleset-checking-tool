@@ -1,12 +1,12 @@
 from rct229.data.schema_enums import schema_enums
-from rct229.ruleset_functions.get_opaque_surface_type import OpaqueSurfaceType as OST
-from rct229.ruleset_functions.get_opaque_surface_type import get_opaque_surface_type
-from rct229.ruleset_functions.get_surface_conditioning_category_dict import (
-    SurfaceConditioningCategory as SCC,
-)
-from rct229.ruleset_functions.get_surface_conditioning_category_dict import (
-    get_surface_conditioning_category_dict,
-)
+from rct229.ruleset_functions.get_opaque_surface_type import \
+    OpaqueSurfaceType as OST
+from rct229.ruleset_functions.get_opaque_surface_type import \
+    get_opaque_surface_type
+from rct229.ruleset_functions.get_surface_conditioning_category_dict import \
+    SurfaceConditioningCategory as SCC
+from rct229.ruleset_functions.get_surface_conditioning_category_dict import \
+    get_surface_conditioning_category_dict
 from rct229.utils.assertions import assert_required_fields
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.pint_utils import ZERO

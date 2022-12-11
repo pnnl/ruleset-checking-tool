@@ -2,7 +2,8 @@ import io
 import os
 
 from rct229.rule_engine.engine import evaluate_all_rules, evaluate_rule
-from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
+from rct229.rule_engine.user_baseline_proposed_vals import \
+    UserBaselineProposedVals
 from rct229.utils.file import deserialize_rmr_file
 
 SCRIPT_DIR = os.path.dirname(__file__)  # <-- absolute dir the script is in

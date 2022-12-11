@@ -1,10 +1,12 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
-from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
-from rct229.ruleset_functions.baseline_systems.baseline_system_util import HVAC_SYS
-from rct229.ruleset_functions.check_purchased_chw_hhw_status_dict import (
-    check_purchased_chw_hhw_status_dict,
-)
-from rct229.ruleset_functions.get_baseline_system_types import get_baseline_system_types
+from rct229.rule_engine.user_baseline_proposed_vals import \
+    UserBaselineProposedVals
+from rct229.ruleset_functions.baseline_systems.baseline_system_util import \
+    HVAC_SYS
+from rct229.ruleset_functions.check_purchased_chw_hhw_status_dict import \
+    check_purchased_chw_hhw_status_dict
+from rct229.ruleset_functions.get_baseline_system_types import \
+    get_baseline_system_types
 
 AIR_SIDE_SYSTEMS_USING_COOLING_SOURCE_OTHER_THAN_PURCHASED_CHILLED_WATER = [
     HVAC_SYS.SYS_1,

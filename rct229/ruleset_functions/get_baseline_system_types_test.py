@@ -1,14 +1,13 @@
-from rct229.ruleset_functions.baseline_systems.baseline_system_util import HVAC_SYS
-from rct229.ruleset_functions.baseline_systems.test_is_baseline_system_7 import (
-    SYS_7_TEST_RMD,
-)
-from rct229.ruleset_functions.baseline_systems.test_is_baseline_system_11_1 import (
-    SYS_11_1_TEST_RMD,
-)
-from rct229.ruleset_functions.baseline_systems.test_is_baseline_system_11_2 import (
-    SYS_11_2_TEST_RMD,
-)
-from rct229.ruleset_functions.get_baseline_system_types import get_baseline_system_types
+from rct229.ruleset_functions.baseline_systems.baseline_system_util import \
+    HVAC_SYS
+from rct229.ruleset_functions.baseline_systems.test_is_baseline_system_7 import \
+    SYS_7_TEST_RMD
+from rct229.ruleset_functions.baseline_systems.test_is_baseline_system_11_1 import \
+    SYS_11_1_TEST_RMD
+from rct229.ruleset_functions.baseline_systems.test_is_baseline_system_11_2 import \
+    SYS_11_2_TEST_RMD
+from rct229.ruleset_functions.get_baseline_system_types import \
+    get_baseline_system_types
 
 
 def test_get_baseline_system_types__system_7():

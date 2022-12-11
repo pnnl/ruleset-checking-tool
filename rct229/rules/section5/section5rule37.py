@@ -1,20 +1,21 @@
 from rct229.data.schema_enums import schema_enums
 from rct229.data_fns.table_G3_4_fns import table_G34_lookup
 from rct229.rule_engine.rule_base import RuleDefinitionBase
-from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
+from rct229.rule_engine.rule_list_indexed_base import \
+    RuleDefinitionListIndexedBase
+from rct229.rule_engine.user_baseline_proposed_vals import \
+    UserBaselineProposedVals
 from rct229.ruleset_functions.compare_standard_val import std_le
-from rct229.ruleset_functions.get_building_scc_skylight_roof_ratios_dict import (
-    get_building_scc_skylight_roof_ratios_dict,
-)
-from rct229.ruleset_functions.get_opaque_surface_type import OpaqueSurfaceType as OST
-from rct229.ruleset_functions.get_opaque_surface_type import get_opaque_surface_type
-from rct229.ruleset_functions.get_surface_conditioning_category_dict import (
-    SurfaceConditioningCategory as SCC,
-)
-from rct229.ruleset_functions.get_surface_conditioning_category_dict import (
-    get_surface_conditioning_category_dict,
-)
+from rct229.ruleset_functions.get_building_scc_skylight_roof_ratios_dict import \
+    get_building_scc_skylight_roof_ratios_dict
+from rct229.ruleset_functions.get_opaque_surface_type import \
+    OpaqueSurfaceType as OST
+from rct229.ruleset_functions.get_opaque_surface_type import \
+    get_opaque_surface_type
+from rct229.ruleset_functions.get_surface_conditioning_category_dict import \
+    SurfaceConditioningCategory as SCC
+from rct229.ruleset_functions.get_surface_conditioning_category_dict import \
+    get_surface_conditioning_category_dict
 from rct229.utils.pint_utils import ZERO, CalcQ
 
 MANUAL_CHECK_MSG = "Manual review is required to verify skylight meets U-factor requirement as per table G3.4."

@@ -2,13 +2,12 @@ from unittest.mock import patch
 
 import pytest
 
-from rct229.ruleset_functions.get_building_scc_window_wall_ratios_dict import (
-    get_building_scc_window_wall_ratios_dict,
-)
-from rct229.ruleset_functions.get_opaque_surface_type import OpaqueSurfaceType as OST
-from rct229.ruleset_functions.get_surface_conditioning_category_dict import (
-    SurfaceConditioningCategory as SCC,
-)
+from rct229.ruleset_functions.get_building_scc_window_wall_ratios_dict import \
+    get_building_scc_window_wall_ratios_dict
+from rct229.ruleset_functions.get_opaque_surface_type import \
+    OpaqueSurfaceType as OST
+from rct229.ruleset_functions.get_surface_conditioning_category_dict import \
+    SurfaceConditioningCategory as SCC
 from rct229.schema.schema_utils import quantify_rmr
 from rct229.schema.validate import schema_validate_rmr
 

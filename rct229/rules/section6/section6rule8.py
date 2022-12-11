@@ -1,12 +1,14 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
-from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
+from rct229.rule_engine.rule_list_indexed_base import \
+    RuleDefinitionListIndexedBase
+from rct229.rule_engine.user_baseline_proposed_vals import \
+    UserBaselineProposedVals
 from rct229.ruleset_functions.compare_schedules import compare_schedules
-from rct229.ruleset_functions.normalize_interior_lighting_schedules import (
-    normalize_interior_lighting_schedules,
-)
+from rct229.ruleset_functions.normalize_interior_lighting_schedules import \
+    normalize_interior_lighting_schedules
 from rct229.utils.assertions import getattr_
-from rct229.utils.jsonpath_utils import find_all, find_exactly_one_with_field_value
+from rct229.utils.jsonpath_utils import (find_all,
+                                         find_exactly_one_with_field_value)
 from rct229.utils.pint_utils import ZERO, pint_sum
 
 MANUAL_CHECK_MSG = (

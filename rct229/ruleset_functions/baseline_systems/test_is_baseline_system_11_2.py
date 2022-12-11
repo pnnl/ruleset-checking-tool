@@ -1,7 +1,7 @@
-from rct229.ruleset_functions.baseline_systems.baseline_system_util import HVAC_SYS
-from rct229.ruleset_functions.baseline_systems.is_baseline_system_11_2 import (
-    is_baseline_system_11_2,
-)
+from rct229.ruleset_functions.baseline_systems.baseline_system_util import \
+    HVAC_SYS
+from rct229.ruleset_functions.baseline_systems.is_baseline_system_11_2 import \
+    is_baseline_system_11_2
 from rct229.schema.validate import schema_validate_rmr
 
 SYS_11_2_TEST_RMD = {

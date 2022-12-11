@@ -5,13 +5,9 @@ from copy import deepcopy
 import pytest
 
 from rct229.schema.validate import (
-    check_unique_ids_in_ruleset_model_instances,
-    json_paths_to_lists,
-    json_paths_to_lists_from_dict,
-    json_paths_to_lists_from_list,
-    non_schema_validate_rmr,
-    validate_rmr,
-)
+    check_unique_ids_in_ruleset_model_instances, json_paths_to_lists,
+    json_paths_to_lists_from_dict, json_paths_to_lists_from_list,
+    non_schema_validate_rmr, validate_rmr)
 
 EXAMPLES_PATH = "examples"
 

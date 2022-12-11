@@ -1,6 +1,5 @@
-from rct229.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.is_hvac_sys_fan_sys_VSD import (
-    is_hvac_sys_fan_sys_vsd,
-)
+from rct229.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.is_hvac_sys_fan_sys_VSD import \
+    is_hvac_sys_fan_sys_vsd
 from rct229.schema.validate import schema_validate_rmr
 
 TEST_RMD = {

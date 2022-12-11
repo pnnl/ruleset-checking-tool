@@ -1,7 +1,7 @@
-from rct229.ruleset_functions.baseline_systems.baseline_system_util import HVAC_SYS
-from rct229.ruleset_functions.baseline_systems.is_baseline_system_7 import (
-    is_baseline_system_7,
-)
+from rct229.ruleset_functions.baseline_systems.baseline_system_util import \
+    HVAC_SYS
+from rct229.ruleset_functions.baseline_systems.is_baseline_system_7 import \
+    is_baseline_system_7
 from rct229.schema.validate import schema_validate_rmr
 
 SYS_7_TEST_RMD = {

@@ -1,6 +1,5 @@
-from rct229.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.is_hvac_sys_fluid_loop_purchased_heating import (
-    is_hvac_sys_fluid_loop_purchased_heating,
-)
+from rct229.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.is_hvac_sys_fluid_loop_purchased_heating import \
+    is_hvac_sys_fluid_loop_purchased_heating
 from rct229.schema.validate import schema_validate_rmr
 
 TEST_RMD = {

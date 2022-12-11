@@ -1,11 +1,11 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
-from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
-from rct229.ruleset_functions.compare_schedules import (
-    LEAP_YEAR_HOURS,
-    REGULAR_YEAR_HOURS,
-    compare_schedules,
-)
+from rct229.rule_engine.rule_list_indexed_base import \
+    RuleDefinitionListIndexedBase
+from rct229.rule_engine.user_baseline_proposed_vals import \
+    UserBaselineProposedVals
+from rct229.ruleset_functions.compare_schedules import (LEAP_YEAR_HOURS,
+                                                        REGULAR_YEAR_HOURS,
+                                                        compare_schedules)
 from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_one_with_field_value
 

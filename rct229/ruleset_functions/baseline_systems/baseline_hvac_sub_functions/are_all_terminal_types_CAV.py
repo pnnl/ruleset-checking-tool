@@ -1,7 +1,6 @@
 from rct229.data.schema_enums import schema_enums
-from rct229.ruleset_functions.baseline_systems.baseline_system_util import (
-    find_exactly_one_terminal_unit,
-)
+from rct229.ruleset_functions.baseline_systems.baseline_system_util import \
+    find_exactly_one_terminal_unit
 
 TERMINAL_TYPE = schema_enums["TerminalOptions"]
 

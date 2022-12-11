@@ -1,18 +1,16 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
-from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
-from rct229.ruleset_functions.get_surface_conditioning_category_dict import (
-    SurfaceConditioningCategory as SCC,
-)
-from rct229.ruleset_functions.get_surface_conditioning_category_dict import (
-    get_surface_conditioning_category_dict,
-)
-from rct229.ruleset_functions.get_zone_conditioning_category_dict import (
-    ZoneConditioningCategory as ZCC,
-)
-from rct229.ruleset_functions.get_zone_conditioning_category_dict import (
-    get_zone_conditioning_category_dict,
-)
+from rct229.rule_engine.rule_list_indexed_base import \
+    RuleDefinitionListIndexedBase
+from rct229.rule_engine.user_baseline_proposed_vals import \
+    UserBaselineProposedVals
+from rct229.ruleset_functions.get_surface_conditioning_category_dict import \
+    SurfaceConditioningCategory as SCC
+from rct229.ruleset_functions.get_surface_conditioning_category_dict import \
+    get_surface_conditioning_category_dict
+from rct229.ruleset_functions.get_zone_conditioning_category_dict import \
+    ZoneConditioningCategory as ZCC
+from rct229.ruleset_functions.get_zone_conditioning_category_dict import \
+    get_zone_conditioning_category_dict
 from rct229.schema.config import ureg
 from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all
