@@ -22,77 +22,43 @@
 **Applicability Checks:**
 - no logic here, applies to all P-RMDs
 
-## Setup:
-- create a list of relevant fields for each of the object types that we are checking
-- ServiceWaterHeatingDistributionSystem fields to compare: `service_weater_heating_distribution_system_field_list = [
-    design_supply_temperature,
-    design_supply_temperature_difference,
-    is_central_system,
-    distribution_compactness,
-    control_type,
-    configuration_type,
-    is_recovered_heat_from_drain_used_by_water_heater,
-    drain_heat_recovery_efficiency,
-    drain_heat_recovery_type,
-    is_ground_temperature_used_for_entering_water
-]
 
-- ServiceWaterHeatingDistributionSystem schedules to compare: `service_weater_heating_distribution_system_schedules_field_list = [
-    flow_multiplier_schedule,
-    entering_water_mains_temperature_schedule
-]
-    
-- Tank: `tank_field_list = [
-    storage_capacity,
-    type,
-    height,
-    interior_insulation,
-    exterior_insulation,
-    location,
-    location_zone.id
-]
-- tanks, flow_multiplier_schedule, entering_water_mains_temperature_schedule
 
 ## Rule Logic: 
-- we need to check that the service water heating systems in the P-RMD and U-RMD match.  For each item, if there is a list of objects, we will first check that there are the same number of elements, then we will check that the elements match.
-- first create a boolean `all_match` and set to TRUE: `all_match = TRUE` 
-- create a list of the tanks in the project: `tank_list = []`
-- create a list of ServiceWaterPiping in the project: `service_water_piping_list = []`
-- check if there are the same number of Service Water Heating Distribution Systems: `if len(P_RMI.service_water_heating_distribution_systems) == len(U_RMI.service_water_heating_distribution_systems):`
-  - loop through the Service Water Heating Distribution Systems and check whether they are the same: `for service_water_heating_distribution_system_p in P_RMI.service_water_heating_distribution_systems:`
-    - use the compare_objects function to compare the service water heating systems in P_RMI and U_RMI: `if compare_objects(P_RMI,U_RMI,service_water_heating_distribution_system_p.id,service_weater_heating_distribution_system_schedules_field_list,service_weater_heating_distribution_system_schedules_field_list):`
-      - get the equivalent user service_water_heating_distribution_system: `service_water_heating_distribution_system_u = get_component_by_id(U_RMI, service_water_heating_distribution_system_p.id)`
-      - compare the tanks field using the function compare_same_field_in_different_objects.  A SAME result tells us that both fields are not NULL and that they have the same contents.  Because this field is a list field, we know that both objects contain lists of the same length: `if compare_same_field_in_different_objects(service_water_heating_distribution_system_p, service_water_heating_distribution_system_u, tanks) == SAME:`
-        - create a list of tank ids for service_water_heating_distribution_system_u: `tank_u_ids = []; for tank_u in service_water_heating_distribution_system_u.tanks: tank_u_ids.append(tank_u.id)`
-        - iterate through each tank in service_water_heating_distribution_system_p: `for tank_p in service_water_heating_distribution_system_p.tanks:`
-          - check whether the tank_p.id is in the list of tanks for service_water_heating_distribution_system_u: `if tank_p.id in tank_u_ids:`
-            - compare the two tanks using compare_objects: `if not compare_objects(P_RMI,U_RMI,tank_p.id,tank_field_list,[]):`
-              - set all_match to false, break out of the loop: `all_match = FALSE; break`
-          - else the tank is not attached to the system in the user_model: `else:`
-            - set all_match to false, break out of the loop: `all_match = FALSE; break`
-      - compare the service_water_piping field using the function compare_same_field_in_different_objects.  A SAME result tells us that both fields are lists of the same length: `if compare_same_field_in_different_objects(service_water_heating_distribution_system_p, service_water_heating_distribution_system_u, service_water_piping) == SAME:`
-        - create a list of service water piping ids for service_water_heating_distribution_system_u: `service_water_piping_ids = []: for swp_u in service_water_heating_distribution_system_u.service_water_piping: service_water_piping_ids.append(swp_u.id)`
-        - iterate through each service_water_piping in service_water_heating_distribution_system_p: `for swp_p in service_water_heating_distribution_system_p.service_water_piping:`
-          - check whether the swp_p.id is in the list of swp's for service_water_heating_distribution_system_u: `if swp_p.id in service_water_piping_ids:`
-            - compare the two piping systems using compare_iterative_objects: `if not compare_iterative_objects(P_RMI,U_RMI,spw_p.id,service_water_piping_field_list,[],child_service_water_piping):`
-              - set all_match to false, break out of the loop: `all_match = FALSE; break`
-          - else the service water piping system is not attached to the system in the user_model: `else:`
-            - set all_match to false, break out of the loop: `all_match = FALSE; break`
-    - otherwise, the systems are not the same, set all_match to FALSE and break out of the loop: `else: all_match = FALSE; break;`
+- create a boolean to keep track of whether everything matches: `all_match = TRUE`
+- all ServiceWaterHeatingDistributionSystems match in the proposed and user models: `if not P_RMI = U_RMI for ServiceWaterHeatingDistributionSystem: all_match = FALSE`
+- all ServiceWaterHeatingEquipment matches in the proposed and user models: `if not P_RMI = U_RMI for ServiceWaterHeatingEquipment: all_match = FALSE`
+- all DHW tanks match in the proposed and user models **question:** in rare cases, there could be a tank connected to a solar hot water system that does not match in the two models.  Returning FAIL in this case will only trigger a manual review (& these tanks will likely be the same between user and proposed models anyway), so I don't think it's a major issue.  thoughts?: `if not P_RMI = U_RMI for Tank: all_match = FALSE`
+- all ServiceWaterPiping matches in the proposed and user models: `if not P_RMI = U_RMI for ServiceWaterPiping: all_match = FALSE`
 
-TODO: 
-  ServiceWaterHeatingEquipment
-  Pump
+- we also need to compare the pumps connected to the DHW system, but not all pumps in the models are DHW pumps.  Create a list of the SHW pumps `shw_pumps_list = []`
+- Iterate through the pumps in the proposed model: `for pump_p in P_RMI.pumps:`
+    - check that the pump is connected to a ServiceWaterPiping object: `if type(pump_p.loop_or_piping) == ServiceWaterPiping:`
+        - add the pump to the SHW pumps list: `shw_pumps_list.append(pump_p.id)`
+- Iterate through the pumps in the user model: `for pump_u in U_RMI.pumps:`
+    - check that the pump is connected to a ServiceWaterPiping object: `if type(pump_u.loop_or_piping) == ServiceWaterPiping:`
+        - add the pump to the SHW pumps list: `shw_pumps_list.append(pump_u.id)`
+- Iterate through the pump ids in the shw pumps list: `for pump_id in set(shw_pumps_list):`
+    - find the pump in the proposed model: `pump_p = get_component_by_id(pump_id, P_RMI)`
+    - find the pump in the user model: `pump_u = get_component_by_id(pump_id, U_RMI)`
+    - if both pump_p and pump_u exist, we compare the inputs: `if type(pump_u) == Pump && type(pump_p) == Pump:`
+        - check that the loop_or_piping is the same: `if not pump_p.loop_or_piping.id == pump_u.loop_or_piping.id: all_match = FALSE`
+        - check that the specification method is the same: `if not pump_p.specification_method == pump_u.specification_method: all_match = FALSE`
+        - check that the design electric power is the same: `if not pump_p.design_electric_power == pump_u.design_electric_power: all_match = FALSE`
+        - check that the design speed control is the same: `if not pump_p.speed_control == pump_u.speed_control: all_match = FALSE`
+
+    - otherwise, the pump exists in only one of the two models, set all_match to false: `all_match = FALSE`
+
 
 
 
 
 
   **Rule Assertion:**
+  - if all_match is TRUE, then return PASS: `if all_match: return PASS`
+  - if all_match is FALSE, return FAIL, one of the elements does not match: `if not all_match: return FAIL`
+  
   
   **Notes:**
-  1.  This logic assumes that equal elements in the P-RMD and U-RMD have the same id.
-  2.  Is there an automatic way to get all the fields associated with an object instead of listing them?  Manually creating a list means that errors will be introduced when the schema changes
-  3.  would there ever be a valid reason that flow_multiplier_schedule or entering_water_mains_temperature_schedule
 
 **[Back](../_toc.md)**
