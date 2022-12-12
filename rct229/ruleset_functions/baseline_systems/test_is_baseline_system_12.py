@@ -245,7 +245,7 @@ def test_is_baseline_system_12_test_json_true():
     )
 
 
-def test_is_baseline_system_12a_true():
+def test_is_baseline_system_12A_true():
     assert (
         is_baseline_system_12(
             SYS_12_TEST_RMD["ruleset_model_instances"][0],
@@ -257,7 +257,7 @@ def test_is_baseline_system_12a_true():
     )
 
 
-def test_is_baseline_system_12a_test_json_true():
+def test_is_baseline_system_12A_test_json_true():
     assert is_baseline_system_12(
         load_system_test_file("System 12a_CAV_SZ_HW.json")["ruleset_model_instances"][
             0
@@ -268,7 +268,7 @@ def test_is_baseline_system_12a_test_json_true():
     )
 
 
-def test_is_baseline_system_12b_true():
+def test_is_baseline_system_12B_true():
     assert (
         is_baseline_system_12(
             SYS_12_TEST_RMD["ruleset_model_instances"][0],
@@ -280,7 +280,7 @@ def test_is_baseline_system_12b_true():
     )
 
 
-def test_is_baseline_system_12b_test_json_true():
+def test_is_baseline_system_12B_test_json_true():
     assert is_baseline_system_12(
         load_system_test_file("System 12b_CAV_SZ_HW.json")["ruleset_model_instances"][
             0
@@ -291,7 +291,7 @@ def test_is_baseline_system_12b_test_json_true():
     )
 
 
-def test_is_baseline_system_12c_true():
+def test_is_baseline_system_12C_true():
     assert (
         is_baseline_system_12(
             SYS_12_TEST_RMD["ruleset_model_instances"][0],
@@ -303,7 +303,7 @@ def test_is_baseline_system_12c_true():
     )
 
 
-def test_is_baseline_system_12c_test_json_true():
+def test_is_baseline_system_12C_test_json_true():
     assert is_baseline_system_12(
         load_system_test_file("System 12c_CAV_SZ_HW.json")["ruleset_model_instances"][
             0
