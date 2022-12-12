@@ -20,12 +20,7 @@ def do_all_terminals_have_one_fan(rmi_b, terminal_unit_id_list):
         False: any terminal unit has a fan data element not equal to one (i.e., there is NOT only one fan associated with the terminal unit).
     """
 
-    do_all_terminals_have_one_fan = True
-
-    for terminal_b_id in terminal_unit_id_list:
-        terminal_b = find_exactly_one_terminal_unit(rmi_b, terminal_b_id)
-        if terminal_b.get("fan") == None:
-            do_all_terminals_have_one_fan = False
-            break
-
-    return do_all_terminals_have_one_fan
+    return all(
+        find_exactly_one_terminal_unit(rmi_b, terminal_b_id).get("fan") != None
+        for terminal_b_id in terminal_unit_id_list
+    )
