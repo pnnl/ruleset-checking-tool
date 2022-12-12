@@ -1,3 +1,6 @@
+from rct229.ruleset_functions.baseline_systems.baseline_hvac_test_util import (
+    load_system_test_file,
+)
 from rct229.ruleset_functions.baseline_systems.baseline_system_util import HVAC_SYS
 from rct229.ruleset_functions.baseline_systems.is_baseline_system_4 import (
     is_baseline_system_4,
@@ -75,4 +78,13 @@ def test_is_baseline_system_4_true():
             ["Thermal Zone 1"],
         )
         == HVAC_SYS.SYS_4
+    )
+
+
+def test_is_baseline_system_4_testing_json_true():
+    assert is_baseline_system_4(
+        load_system_test_file("System_4_PSZ_HP.json")["ruleset_model_instances"][0],
+        "System Type 4",
+        ["Air Terminal"],
+        ["Thermal Zone 1"],
     )
