@@ -151,7 +151,7 @@ def test_is_baseline_system_13_test_json_true():
     )
 
 
-def test_is_baseline_system_13a_true():
+def test_is_baseline_system_13A_true():
     assert (
         is_baseline_system_13(
             SYS_13_TEST_RMD["ruleset_model_instances"][0],
@@ -163,7 +163,7 @@ def test_is_baseline_system_13a_true():
     )
 
 
-def test_is_baseline_system_13a_test_json_true():
+def test_is_baseline_system_13A_test_json_true():
     assert is_baseline_system_13(
         load_system_test_file("System 13a_CAV_SZ_ER.json")["ruleset_model_instances"][
             0
