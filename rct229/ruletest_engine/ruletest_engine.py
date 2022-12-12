@@ -208,15 +208,15 @@ def run_section_tests(test_json_name):
 
     # Print banner messages
     banner_text = f"TESTS RESULTS FOR: {test_json_name}".center(50)
-    banner = [
-        "-----------------------------------------------------------------------------------------",
-        f"--------------------{banner_text}-------------------",
-        "-----------------------------------------------------------------------------------------",
-        "",
-    ]
+#    banner = [
+#        "-----------------------------------------------------------------------------------------",
+#        f"--------------------{banner_text}-------------------",
+#        "-----------------------------------------------------------------------------------------",
+#        "",
+#    ]
 
-    for line in banner:
-        print(line)
+#    for line in banner:
+#        print(line)
 
     # Open
     with open(test_json_path) as f:
@@ -472,85 +472,3 @@ def evaluate_outcome_object(outcome_dict, test_result_dict, test_dict, test_id):
         test_result_dict[f"{test_id}"].append(received_expected_outcome)
 
 
-def run_transformer_tests():
-    """Runs all tests found in the transformer tests JSON.
-
-    Returns
-    -------
-    None
-
-    Results of transformer test are spit out to console
-    """
-
-    transformer_rule_json = "transformer_tests.json"
-
-    return run_section_tests(transformer_rule_json)
-
-
-def run_lighting_tests():
-    """Runs all tests found in the lighting tests JSON.
-
-    Returns
-    -------
-    None
-
-    Results of lighting test are spit out to console
-    """
-
-    lighting_test_json = "lighting_tests.json"
-
-    return run_section_tests(lighting_test_json)
-
-
-def run_envelope_tests():
-    """Runs all tests found in the envelope tests JSON.
-
-    Returns
-    -------
-    None
-
-    Results of envelope stest are spit out to console
-    """
-
-    envelope_test_json = "envelope_tests.json"
-
-    return run_section_tests(envelope_test_json)
-
-
-def run_boiler_tests():
-    """Runs all tests found in the boiler tests JSON
-
-    Returns
-    -------
-    None
-
-    Results of boiler test are spit out to console
-    """
-    boiler_test_json = "boiler_tests.json"
-    return run_section_tests(boiler_test_json)
-
-
-def run_receptacle_tests():
-    """Runs all tests found in the receptacle tests JSON
-
-    Returns
-    -------
-    None
-
-    Results of receptacle test are spit out to console
-    """
-    receptacle_test_json = "receptacle_tests.json"
-    return run_section_tests(receptacle_test_json)
-
-
-def run_chiller_tests():
-    """Runs all tests found in the chiller tests JSON
-
-    Returns
-    -------
-    None
-
-    Results of chiller test are spit out to console
-    """
-    chiller_test_json = "chiller_tests.json"
-    return run_section_tests(chiller_test_json)
