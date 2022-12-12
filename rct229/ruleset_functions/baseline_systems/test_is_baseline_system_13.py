@@ -1,3 +1,6 @@
+from rct229.ruleset_functions.baseline_systems.baseline_hvac_test_util import (
+    load_system_test_file,
+)
 from rct229.ruleset_functions.baseline_systems.baseline_system_util import HVAC_SYS
 from rct229.ruleset_functions.baseline_systems.is_baseline_system_13 import (
     is_baseline_system_13,
@@ -69,7 +72,7 @@ SYS_13_TEST_RMD = {
                                     "cooling_system": {
                                         "id": "CHW Coil 1",
                                         "cooling_system_type": "FLUID_LOOP",
-                                        "chilled_water_loop": "Chilled Water Loop 1",
+                                        "chilled_water_loop": "Purchased CHW Loop 1",
                                     },
                                     "heating_system": {
                                         "id": "Heating Coil 1",
@@ -90,7 +93,7 @@ SYS_13_TEST_RMD = {
             "external_fluid_source": [
                 {
                     "id": "Purchased CW 1",
-                    "loop": "Chilled Water Loop 1",
+                    "loop": "Purchased CHW Loop 1",
                     "type": "CHILLED_WATER",
                 }
             ],
@@ -113,7 +116,7 @@ SYS_13_TEST_RMD = {
                     "type": "COOLING",
                     "child_loops": [{"id": "Secondary CHW Loop 1", "type": "COOLING"}],
                 },
-                {"id": "Chilled Water Loop 1", "type": "COOLING"},
+                {"id": "Purchased CHW Loop 1", "type": "COOLING"},
             ],
         }
     ],
@@ -139,6 +142,15 @@ def test_is_baseline_system_13_true():
     )
 
 
+def test_is_baseline_system_13_test_json_true():
+    assert is_baseline_system_13(
+        load_system_test_file("System 13_CAV_SZ_ER.json")["ruleset_model_instances"][0],
+        "System 13",
+        ["CAV Air Terminal 1"],
+        ["Thermal Zone 1"],
+    )
+
+
 def test_is_baseline_system_13a_true():
     assert (
         is_baseline_system_13(
@@ -148,4 +160,15 @@ def test_is_baseline_system_13a_true():
             ["Thermal Zone 2"],
         )
         == HVAC_SYS.SYS_13A
+    )
+
+
+def test_is_baseline_system_13a_test_json_true():
+    assert is_baseline_system_13(
+        load_system_test_file("System 13a_CAV_SZ_ER.json")["ruleset_model_instances"][
+            0
+        ],
+        "System 13",
+        ["CAV Air Terminal 1"],
+        ["Thermal Zone 1"],
     )
