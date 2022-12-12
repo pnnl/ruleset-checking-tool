@@ -6,12 +6,11 @@ from rct229.reports.project_report import (
     print_summary_report,
 )
 from rct229.rule_engine.engine import evaluate_all_rules
-from rct229.ruletest_engine.ruletest_engine import (
-    run_envelope_tests,
-    run_lighting_tests,
-    run_transformer_tests,
+from rct229.ruletest_engine.run_ruletests import (
     run_boiler_tests,
     run_chiller_tests,
+    run_envelope_tests,
+    run_lighting_tests,
 )
 from rct229.schema.validate import validate_rmr
 from rct229.utils.file import deserialize_rmr_file

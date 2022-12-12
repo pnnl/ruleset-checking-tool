@@ -22,5 +22,4 @@ def natural_keys(text):
     Returns sorted list
     -------
     """
-    return [atoi(c) for c in re.split(r'(\d+)', text)]
-
+    return [atoi(c) for c in re.split(r"(\d+)", text)]

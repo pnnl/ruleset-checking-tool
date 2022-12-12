@@ -34,7 +34,15 @@ def run_lighting_tests():
     Results of lighting test are spit out to console
     """
 
-    json_tests = [os.path.join(SECTION_6_LIGHTING_TEST_PATH, pos_json) for pos_json in os.listdir(os.path.join(TEST_PATH, SECTION_6_LIGHTING_TEST_PATH)) if pos_json.endswith('.json')]
+    json_tests = [
+        os.path.join(SECTION_6_LIGHTING_TEST_PATH, pos_json)
+        for pos_json in os.listdir(
+            os.path.join(
+                os.path.dirname(__file__), TEST_PATH, SECTION_6_LIGHTING_TEST_PATH
+            )
+        )
+        if pos_json.endswith(".json")
+    ]
     return run_test_helper(json_tests)
 
 
@@ -48,7 +56,15 @@ def run_envelope_tests():
     Results of envelope stest are spit out to console
     """
 
-    json_tests = [os.path.join(SECTION_5_ENVELOPE_TEST_PATH, pos_json) for pos_json in os.listdir(os.path.join(TEST_PATH, SECTION_5_ENVELOPE_TEST_PATH)) if pos_json.endswith('.json')]
+    json_tests = [
+        os.path.join(SECTION_5_ENVELOPE_TEST_PATH, pos_json)
+        for pos_json in os.listdir(
+            os.path.join(
+                os.path.dirname(__file__), TEST_PATH, SECTION_5_ENVELOPE_TEST_PATH
+            )
+        )
+        if pos_json.endswith(".json")
+    ]
     return run_test_helper(json_tests)
 
 
@@ -61,7 +77,15 @@ def run_boiler_tests():
 
     Results of boiler test are spit out to console
     """
-    json_tests = [os.path.join(SECTION_21_BOILER_TEST_PATH, pos_json) for pos_json in os.listdir(os.path.join(TEST_PATH, SECTION_21_BOILER_TEST_PATH)) if pos_json.endswith('.json')]
+    json_tests = [
+        os.path.join(SECTION_21_BOILER_TEST_PATH, pos_json)
+        for pos_json in os.listdir(
+            os.path.join(
+                os.path.dirname(__file__), TEST_PATH, SECTION_21_BOILER_TEST_PATH
+            )
+        )
+        if pos_json.endswith(".json")
+    ]
     return run_test_helper(json_tests)
 
 
@@ -87,7 +111,15 @@ def run_chiller_tests():
 
     Results of chiller test are spit out to console
     """
-    json_tests = [os.path.join(SECTION_22_CHILLER_TEST_PATH, pos_json) for pos_json in os.listdir(os.path.join(TEST_PATH, SECTION_22_CHILLER_TEST_PATH)) if pos_json.endswith('.json')]
+    json_tests = [
+        os.path.join(SECTION_22_CHILLER_TEST_PATH, pos_json)
+        for pos_json in os.listdir(
+            os.path.join(
+                os.path.dirname(__file__), TEST_PATH, SECTION_22_CHILLER_TEST_PATH
+            )
+        )
+        if pos_json.endswith(".json")
+    ]
     return run_test_helper(json_tests)
 
 

@@ -208,15 +208,15 @@ def run_section_tests(test_json_name):
 
     # Print banner messages
     banner_text = f"TESTS RESULTS FOR: {test_json_name}".center(50)
-#    banner = [
-#        "-----------------------------------------------------------------------------------------",
-#        f"--------------------{banner_text}-------------------",
-#        "-----------------------------------------------------------------------------------------",
-#        "",
-#    ]
+    #    banner = [
+    #        "-----------------------------------------------------------------------------------------",
+    #        f"--------------------{banner_text}-------------------",
+    #        "-----------------------------------------------------------------------------------------",
+    #        "",
+    #    ]
 
-#    for line in banner:
-#        print(line)
+    #    for line in banner:
+    #        print(line)
 
     # Open
     with open(test_json_path) as f:
@@ -470,5 +470,3 @@ def evaluate_outcome_object(outcome_dict, test_result_dict, test_dict, test_id):
             )
 
         test_result_dict[f"{test_id}"].append(received_expected_outcome)
-
-
