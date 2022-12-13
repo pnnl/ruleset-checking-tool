@@ -2,6 +2,9 @@ from rct229.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.do_al
     do_all_terminals_have_one_fan,
 )
 
+from rct229.schema.validate import schema_validate_rmr
+
+
 TEST_RMD = {
     "id": "test_rmd",
     "buildings": [
@@ -14,9 +17,17 @@ TEST_RMD = {
                         {
                             "id": "zone 1",
                             "terminals": [
-                                {"id": "terminal_1", "fan": "fan_1"},
-                                {"id": "terminal_2"},
-                                {"id": "terminal_3", "fan": "fan_2"},
+                                {
+                                    "id": "terminal_1",
+                                    "fan": {"id": "fan 1"},
+                                },
+                                {
+                                    "id": "terminal_2",
+                                    "fan": {"id": "fan 2"},
+                                },
+                                {
+                                    "id": "terminal_3",
+                                },
                             ],
                         },
                     ],
@@ -29,11 +40,18 @@ TEST_RMD = {
 TEST_RMD_FULL = {"id": "229_01", "ruleset_model_instances": [TEST_RMD]}
 
 
-def test__do_all_terminals_have_one_fan__all_have():
-    assert do_all_terminals_have_one_fan(TEST_RMD, ["terminal_1", "terminal_3"]) == True
+def test__TEST_RMD__is_valid():
+    schema_validation_result = schema_validate_rmr(TEST_RMD_FULL)
+    assert schema_validation_result[
+        "passed"
+    ], f"Schema error: {schema_validation_result['error']}"
 
 
-def test__do_all_terminals_have_one_fan__not_all_have():
+def test__all_terminal_have_one_fan():
+    assert do_all_terminals_have_one_fan(TEST_RMD, ["terminal_1", "terminal_2"]) == True
+
+
+def test__not_all_terminal_have_one_fan():
     assert (
         do_all_terminals_have_one_fan(
             TEST_RMD, ["terminal_1", "terminal_2", "terminal_3"]
