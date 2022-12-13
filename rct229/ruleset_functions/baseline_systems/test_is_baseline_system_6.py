@@ -1,9 +1,14 @@
+from rct229.ruleset_functions.baseline_systems.baseline_hvac_test_util import (
+    load_system_test_file,
+)
+from rct229.ruleset_functions.baseline_systems.baseline_system_util import HVAC_SYS
+from rct229.ruleset_functions.baseline_systems.is_baseline_system_6 import (
+    is_baseline_system_6,
+)
 from rct229.schema.validate import schema_validate_rmr
 
-# hvac_id = "System 6" => Sys_6, [Thermal Zone 1], [VAV Air Terminal 1]
-# hvac_id = "System 6b" => Sys_6b, [Thermal Zone 2], [VAV Air Terminal 2]
 
-SYS_6_RMD = {
+SYS_6_TEST_RMD = {
     "id": "ASHRAE229 1",
     "ruleset_model_instances": [
         {
@@ -45,7 +50,7 @@ SYS_6_RMD = {
                                             "type": "VARIABLE_AIR_VOLUME",
                                             "served_by_heating_ventilating_air_conditioning_system": "System 6B",
                                             "heating_source": "HOT_WATER",
-                                            "heating_from_loop": "Purchased HW 1",
+                                            "heating_from_loop": "Purchased HW Loop 1",
                                             "fan": {
                                                 "id": "Terminal Fan 2",
                                             },
@@ -81,7 +86,7 @@ SYS_6_RMD = {
                                     "preheat_system": {
                                         "id": "Preheat Coil 2",
                                         "heating_system_type": "FLUID_LOOP",
-                                        "hot_water_loop": "Purchased HW 1",
+                                        "hot_water_loop": "Purchased HW Loop 1",
                                     },
                                     "fan_system": {
                                         "id": "VAV Fan System 2",
@@ -116,7 +121,53 @@ SYS_6_RMD = {
 
 
 def test__TEST_RMD_baseline_system_6__is_valid():
-    schema_validation_result = schema_validate_rmr(SYS_6_RMD)
+    schema_validation_result = schema_validate_rmr(SYS_6_TEST_RMD)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"
+
+
+def test_is_baseline_system_6_true():
+    assert (
+        is_baseline_system_6(
+            SYS_6_TEST_RMD["ruleset_model_instances"][0],
+            "System 6",
+            ["VAV Air Terminal 1"],
+            ["Thermal Zone 1"],
+        )
+        == HVAC_SYS.SYS_6
+    )
+
+
+def test_is_baseline_system_6_test_json_true():
+    assert is_baseline_system_6(
+        load_system_test_file("System_6_PVAV_Elec_Reheat.json")[
+            "ruleset_model_instances"
+        ][0],
+        "System 6",
+        ["VAV Air Terminal 1"],
+        ["Thermal Zone 1"],
+    )
+
+
+def test_is_baseline_system_6B_true():
+    assert (
+        is_baseline_system_6(
+            SYS_6_TEST_RMD["ruleset_model_instances"][0],
+            "System 6B",
+            ["VAV Air Terminal 2"],
+            ["Thermal Zone 2"],
+        )
+        == HVAC_SYS.SYS_6B
+    )
+
+
+def test_is_baseline_system_6_test_json_true():
+    assert is_baseline_system_6(
+        load_system_test_file("System_6b_PVAV_Elec_Reheat.json")[
+            "ruleset_model_instances"
+        ][0],
+        "System 6",
+        ["VAV Air Terminal 1"],
+        ["Thermal Zone 1"],
+    )

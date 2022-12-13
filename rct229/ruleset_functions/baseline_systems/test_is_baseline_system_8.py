@@ -1,11 +1,13 @@
-# hvac_id = "System 8" => Sys_8, [Thermal Zone 8], [Air Terminal 8]
-# hvac_id = "System 8a" => Sys_8a, [Thermal Zone 8a], [Air Terminal 8a]
-# hvac_id = "System 8b" => Sys_8b, [Thermal Zone 8b], [Air Terminal 8b]
-# hvac_id = "System 8c" => Sys_8c, [Thermal Zone 8c], [Air Terminal 8c]
-
+from rct229.ruleset_functions.baseline_systems.baseline_hvac_test_util import (
+    load_system_test_file,
+)
+from rct229.ruleset_functions.baseline_systems.baseline_system_util import HVAC_SYS
+from rct229.ruleset_functions.baseline_systems.is_baseline_system_8 import (
+    is_baseline_system_8,
+)
 from rct229.schema.validate import schema_validate_rmr
 
-SYS_8_RMD = {
+SYS_8_TEST_RMD = {
     "id": "ASHRAE229 1",
     "ruleset_model_instances": [
         {
@@ -19,7 +21,7 @@ SYS_8_RMD = {
                             "id": "Building Segment 1",
                             "zones": [
                                 {
-                                    "id": "Thermal Zone 1",
+                                    "id": "Thermal Zone 8",
                                     "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
                                     "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                     "terminals": [
@@ -30,6 +32,7 @@ SYS_8_RMD = {
                                             "served_by_heating_ventilating_air_conditioning_system": "System 8",
                                             "heating_source": "ELECTRIC",
                                             "heating_from_loop": "Boiler Loop 1",
+                                            "fan": {"id": "fan 8"},
                                             "fan_configuration": "PARALLEL",
                                         }
                                     ],
@@ -46,6 +49,7 @@ SYS_8_RMD = {
                                             "served_by_heating_ventilating_air_conditioning_system": "System 8a",
                                             "heating_source": "ELECTRIC",
                                             "heating_from_loop": "Boiler Loop 1",
+                                            "fan": {"id": "fan 8a"},
                                             "fan_configuration": "PARALLEL",
                                         }
                                     ],
@@ -62,6 +66,7 @@ SYS_8_RMD = {
                                             "served_by_heating_ventilating_air_conditioning_system": "System 8b",
                                             "heating_source": "HOT_WATER",
                                             "heating_from_loop": "Purchased HW Loop 1",
+                                            "fan": {"id": "fan 8b"},
                                             "fan_configuration": "PARALLEL",
                                         }
                                     ],
@@ -78,6 +83,7 @@ SYS_8_RMD = {
                                             "served_by_heating_ventilating_air_conditioning_system": "System 8c",
                                             "heating_source": "HOT_WATER",
                                             "heating_from_loop": "Purchased HW Loop 1",
+                                            "fan": {"id": "fan 8c"},
                                             "fan_configuration": "PARALLEL",
                                         }
                                     ],
@@ -107,12 +113,11 @@ SYS_8_RMD = {
                                     "cooling_system": {
                                         "id": "CHW Coil 8a",
                                         "cooling_system_type": "FLUID_LOOP",
-                                        "chilled_water_loop": "Chilled Water Loop 1",
+                                        "chilled_water_loop": "Purchased Chilled Water Loop 1",
                                     },
                                     "preheat_system": {
                                         "id": "Preheat Coil 8a",
-                                        "heating_system_type": "FLUID_LOOP",
-                                        "hot_water_loop": "Boiler Loop 1",
+                                        "heating_system_type": "ELECTRIC_RESISTANCE",
                                     },
                                     "fan_system": {
                                         "id": "VAV Fan System 8a",
@@ -141,11 +146,11 @@ SYS_8_RMD = {
                                     },
                                 },
                                 {
-                                    "id": "System 8C",
+                                    "id": "System 8c",
                                     "cooling_system": {
                                         "id": "CHW Coil 8C",
                                         "cooling_system_type": "FLUID_LOOP",
-                                        "chilled_water_loop": "Chilled Water Loop 1",
+                                        "chilled_water_loop": "Purchased Chilled Water Loop 1",
                                     },
                                     "preheat_system": {
                                         "id": "Preheat Coil 8C",
@@ -174,7 +179,7 @@ SYS_8_RMD = {
             "external_fluid_source": [
                 {
                     "id": "Purchased CW 1",
-                    "loop": "Chilled Water Loop 1",
+                    "loop": "Purchased Chilled Water Loop 1",
                     "type": "CHILLED_WATER",
                 },
                 {
@@ -214,7 +219,7 @@ SYS_8_RMD = {
                     "type": "COOLING",
                     "child_loops": [{"id": "Secondary CHW Loop 1", "type": "COOLING"}],
                 },
-                {"id": "Chilled Water Loop 1", "type": "COOLING"},
+                {"id": "Purchased Chilled Water Loop 1", "type": "COOLING"},
             ],
         }
     ],
@@ -222,7 +227,97 @@ SYS_8_RMD = {
 
 
 def test__TEST_RMD_baseline_system_8__is_valid():
-    schema_validation_result = schema_validate_rmr(SYS_8_RMD)
+    schema_validation_result = schema_validate_rmr(SYS_8_TEST_RMD)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"
+
+
+def test_is_baseline_system_8_true():
+    assert (
+        is_baseline_system_8(
+            SYS_8_TEST_RMD["ruleset_model_instances"][0],
+            "System 8",
+            ["VAV Air Terminal 8"],
+            ["Thermal Zone 8"],
+        )
+        == HVAC_SYS.SYS_8
+    )
+
+
+def test_is_baseline_system_8_test_json_true():
+    assert is_baseline_system_8(
+        load_system_test_file("System_8_PFP_Reheat.json")["ruleset_model_instances"][0],
+        "System 8",
+        ["VAV Air Terminal 1"],
+        ["Thermal Zone 1"],
+    )
+
+
+def test_is_baseline_system_8A_true():
+    assert (
+        is_baseline_system_8(
+            SYS_8_TEST_RMD["ruleset_model_instances"][0],
+            "System 8a",
+            ["VAV Air Terminal 8a"],
+            ["Thermal Zone 8a"],
+        )
+        == HVAC_SYS.SYS_8A
+    )
+
+
+def test_is_baseline_system_8A_test_json_true():
+    assert is_baseline_system_8(
+        load_system_test_file("System_8a_PFP_Reheat.json")["ruleset_model_instances"][
+            0
+        ],
+        "System 8",
+        ["VAV Air Terminal 1"],
+        ["Thermal Zone 1"],
+    )
+
+
+def test_is_baseline_system_8B_true():
+    assert (
+        is_baseline_system_8(
+            SYS_8_TEST_RMD["ruleset_model_instances"][0],
+            "System 8b",
+            ["VAV Air Terminal 8b"],
+            ["Thermal Zone 8b"],
+        )
+        == HVAC_SYS.SYS_8B
+    )
+
+
+def test_is_baseline_system_8B_test_json_true():
+    assert is_baseline_system_8(
+        load_system_test_file("System_8b_PFP_Reheat.json")["ruleset_model_instances"][
+            0
+        ],
+        "System 8",
+        ["VAV Air Terminal 1"],
+        ["Thermal Zone 1"],
+    )
+
+
+def test_is_baseline_system_8C_true():
+    assert (
+        is_baseline_system_8(
+            SYS_8_TEST_RMD["ruleset_model_instances"][0],
+            "System 8c",
+            ["VAV Air Terminal 8c"],
+            ["Thermal Zone 8c"],
+        )
+        == HVAC_SYS.SYS_8C
+    )
+
+
+def test_is_baseline_system_8C_test_json_true():
+    assert is_baseline_system_8(
+        load_system_test_file("System_8c_PFP_Reheat.json")["ruleset_model_instances"][
+            0
+        ],
+        "System 8",
+        ["VAV Air Terminal 1"],
+        ["Thermal Zone 1"],
+    )

@@ -10,8 +10,8 @@
 
 **Returns:**  
 - **is_baseline_system_6**: The function returns either Sys-6, Sys-6b, or Not_Sys_6 string output which indicates whether the HVAC system is ASHRAE 90.1 2019 Appendix G system 6 (Package VAV with PFP Boxes) or system 6b (system 6 with purchased heating).   
- 
-**Function Call:** 
+
+**Function Call:**
 1. does_each_zone_have_only_one_terminal()     
 3. is_hvac_sys_cooling_type_DX()
 4. is_hvac_sys_fan_sys_VSD()  
@@ -22,16 +22,15 @@
 9. are_all_terminal_heating_loops_purchased_heating()
 10. are_all_terminal_heat_sources_electric()
 11. are_all_terminal_fan_configs_parallel()
-12. do_all_terminals_have_one_fan() 
+12. do_all_terminals_have_one_fan()
 13. are_all_terminal_cool_sources_none_or_null() 
 14. are_all_terminal_types_VAV()  
-15. is_there_only_one_hvac_sys_cooling_system ()  
 
 
 ## Logic:    
 - Create an object associated with the hvac system: `hvac_b = hvac_b.id`  
 - Set is_baseline_system_6 = Not_Sys_6: `is_baseline_system_6 = "Not_Sys_6"`    
-- Check that there is no heating system, if there is none then carry on: `if len(hvac_b.heating_system) == Null or hvac_b.heating_system.heating_system_type == "NONE":` 
+- Check that there is no heating system, if there is none then carry on: `if len(hvac_b.heating_system) == Null or hvac_b.heating_system.heating_system_type == "NONE":`
 - Check that there is one preheat system per G3.1.3.19, if there is then carry on: `if Len(hvac_b.preheat_system) == 1:`   
     - Check that there is a cooling system: `if hvac_b.cooling_system != Null or hvac_b.cooling_system.cooling_system_type != "NONE":`  
         - Check if the cooling system type is DX, if yes then carry on: `if is_hvac_sys_cooling_type_DX(B_RMR, hvac_b.id) == TRUE:`  
@@ -46,7 +45,7 @@
 **Returns** `is_baseline_system_6`  
 
 **Notes**  
-1. In the current graphical depiction it has electric reheat for when there is purchased heating at the HVAC system level but based on G3.1.1.3.1 it appears that all heating coils should be purchased heating when there is purchased heating in the building providing space heating.  If others disagree I can of course modify this but just wanted to highlight the assumption used in the logic above. 
+1. In the current graphical depiction it has electric reheat for when there is purchased heating at the HVAC system level but based on G3.1.1.3.1 it appears that all heating coils should be purchased heating when there is purchased heating in the building providing space heating.  If others disagree I can of course modify this but just wanted to highlight the assumption used in the logic above.
 
 
 **[Back](../../_toc.md)**
