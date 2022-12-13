@@ -2,6 +2,9 @@
 # hvac_id = "PTAC 1a" => Sys_1a, [Thermal Zone 1a], [PTAC Terminal 1a]
 # hvac_id = "PTAC 1b" => Sys_1b, [Thermal Zone 1b], [PTAC Terminal 1b]
 # hvac_id = "PTAC 1c" => Sys_1c, [Thermal Zone 1c], [PTAC Terminal 1c]
+from rct229.ruleset_functions.baseline_systems.baseline_hvac_test_util import (
+    load_system_test_file,
+)
 from rct229.ruleset_functions.baseline_systems.baseline_system_util import HVAC_SYS
 from rct229.ruleset_functions.baseline_systems.is_baseline_system_1 import (
     is_baseline_system_1,
@@ -241,4 +244,40 @@ def test_is_baseline_system_1c_true():
             ["Thermal Zone 1c"],
         )
         == HVAC_SYS.SYS_1C
+    )
+
+
+def test_is_baseline_system_1_test_json_true():
+    assert is_baseline_system_1(
+        load_system_test_file("System_1_PTAC.json")["ruleset_model_instances"][0],
+        "PTAC 1",
+        ["PTAC Terminal 1"],
+        ["Thermal Zone 1"],
+    )
+
+
+def test_is_baseline_system_1_a_test_json_true():
+    assert is_baseline_system_1(
+        load_system_test_file("System_1a_PTAC.json")["ruleset_model_instances"][0],
+        "PTAC 1",
+        ["PTAC Terminal 1"],
+        ["Thermal Zone 1"],
+    )
+
+
+def test_is_baseline_system_1_b_test_json_true():
+    assert is_baseline_system_1(
+        load_system_test_file("System_1b_PTAC.json")["ruleset_model_instances"][0],
+        "PTAC 1",
+        ["PTAC Terminal 1"],
+        ["Thermal Zone 1"],
+    )
+
+
+def test_is_baseline_system_1_c_test_json_true():
+    assert is_baseline_system_1(
+        load_system_test_file("System_1c_PTAC.json")["ruleset_model_instances"][0],
+        "PTAC 1",
+        ["PTAC Terminal 1"],
+        ["Thermal Zone 1"],
     )
