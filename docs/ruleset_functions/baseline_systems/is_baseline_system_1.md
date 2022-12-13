@@ -30,7 +30,7 @@
  
 ## Logic:    
 - Create an object associated with the hvac system: `hvac_b = hvac_b.id`  
-- Set is_baseline_system_1 = Not_Sys_1: `is_baseline_system_1 = "Not_Sys_1"`    
+- Set is_baseline_system_1 = Not_Sys_1: `is_baseline_system_1 = "UNMATCHED"`    
 - Check that there is no preheat system, if there is none then carry on: `if len(hvac_b.preheat_system) == Null or hvac_b.preheat_system[0].heating_system_type == "NONE" :`    
     - Check if the system is system 1c, else carry on with logic: `if is_baseline_system_1c(B_RMR, hvac_b.id,terminal_unit_id_list,zone_id_list) == TRUE: is_baseline_system_1 = "SYS-1c"`   
     - Else, carry on: `Else:`     

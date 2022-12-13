@@ -1,4 +1,7 @@
 from rct229.data.schema_enums import schema_enums
+from rct229.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.are_all_terminal_cool_sources_none_or_null import (
+    are_all_terminal_cool_sources_none_or_null,
+)
 from rct229.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.are_all_terminal_fans_null import (
     are_all_terminal_fans_null,
 )
@@ -89,6 +92,7 @@ def is_baseline_system_1(rmi_b, hvac_b_id, terminal_unit_id_list, zone_id_list):
             and does_hvac_system_serve_single_zone(rmi_b, zone_id_list)
             and does_each_zone_have_only_one_terminal(rmi_b, zone_id_list)
             and are_all_terminal_heat_sources_none_or_null(rmi_b, terminal_unit_id_list)
+            and are_all_terminal_cool_sources_none_or_null(rmi_b, terminal_unit_id_list)
             and are_all_terminal_fans_null(rmi_b, terminal_unit_id_list)
             and are_all_terminal_types_cav(rmi_b, terminal_unit_id_list)
             and is_hvac_sys_cooling_type_dx(rmi_b, hvac_b_id)

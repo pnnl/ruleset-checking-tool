@@ -53,7 +53,7 @@ def is_baseline_system_1_a(rmi_b, hvac_b_id, terminal_unit_id_list, zone_id_list
     # Get the hvac system
     hvac_b = find_exactly_one_hvac_system(rmi_b, hvac_b_id)
 
-    # check if the hvac system has the required sub systems for system type 1 c
+    # check if the hvac system has the required sub systems for system type 1 a
     has_required_sys = (
         (
             hvac_b.get("preheat_system") is None

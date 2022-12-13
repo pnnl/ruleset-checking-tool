@@ -1,9 +1,7 @@
 from rct229.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.do_all_terminals_have_one_fan import (
     do_all_terminals_have_one_fan,
 )
-
 from rct229.schema.validate import schema_validate_rmr
-
 
 TEST_RMD = {
     "id": "test_rmd",
@@ -58,7 +56,3 @@ def test__not_all_terminal_have_one_fan():
         )
         == False
     )
-
-
-def test__do_all_terminals_have_one_fan__none_have():
-    assert do_all_terminals_have_one_fan(TEST_RMD, ["terminal_2"]) == False
