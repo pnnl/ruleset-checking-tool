@@ -25,7 +25,7 @@ from rct229.ruleset_functions.baseline_systems.baseline_system_util import (
 HEATING_SYSTEM = schema_enums["HeatingSystemOptions"]
 
 
-def is_baseline_system_7(rmi_b, hvac_b_id, terminal_unit_id_list, zone_id_list):
+def is_baseline_system_9b(rmi_b, hvac_b_id, terminal_unit_id_list, zone_id_list):
     """
     Returns true or false to whether the baseline system type is 9b (system 9 with purchased HW).
 
