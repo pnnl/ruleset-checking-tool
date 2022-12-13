@@ -1,3 +1,6 @@
+from rct229.ruleset_functions.baseline_systems.baseline_hvac_test_util import (
+    load_system_test_file,
+)
 from rct229.ruleset_functions.baseline_systems.baseline_system_util import HVAC_SYS
 from rct229.ruleset_functions.baseline_systems.is_baseline_system_3 import (
     is_baseline_system_3,
@@ -190,6 +193,17 @@ def test_is_baseline_system_3_true():
     )
 
 
+def test_is_baseline_system_3_test_json_true():
+    assert is_baseline_system_3(
+        load_system_test_file("System_3_PSZ_AC_Gas_Furnace.json")[
+            "ruleset_model_instances"
+        ][0],
+        "System Type 3",
+        ["Air Terminal"],
+        ["Thermal Zone 1"],
+    )
+
+
 def test_is_baseline_system_3A_true():
     assert (
         is_baseline_system_3(
@@ -199,6 +213,17 @@ def test_is_baseline_system_3A_true():
             ["Thermal Zone 3a"],
         )
         == HVAC_SYS.SYS_3A
+    )
+
+
+def test_is_baseline_system_3A_test_json_true():
+    assert is_baseline_system_3(
+        load_system_test_file("System_3a_PSZ_AC_Gas_Furnace.json")[
+            "ruleset_model_instances"
+        ][0],
+        "System Type 3",
+        ["Air Terminal"],
+        ["Thermal Zone 1"],
     )
 
 
@@ -214,6 +239,17 @@ def test_is_baseline_system_3B_true():
     )
 
 
+def test_is_baseline_system_3B_test_json_true():
+    assert is_baseline_system_3(
+        load_system_test_file("System_3b_PSZ_AC_Gas_Furnace.json")[
+            "ruleset_model_instances"
+        ][0],
+        "System Type 3",
+        ["Air Terminal"],
+        ["Thermal Zone 1"],
+    )
+
+
 def test_is_baseline_system_3C_true():
     assert (
         is_baseline_system_3(
@@ -223,4 +259,15 @@ def test_is_baseline_system_3C_true():
             ["Thermal Zone 3c"],
         )
         == HVAC_SYS.SYS_3C
+    )
+
+
+def test_is_baseline_system_3C_test_json_true():
+    assert is_baseline_system_3(
+        load_system_test_file("System_3c_PSZ_AC_Gas_Furnace.json")[
+            "ruleset_model_instances"
+        ][0],
+        "System Type 3",
+        ["Air Terminal"],
+        ["Thermal Zone 1"],
     )
