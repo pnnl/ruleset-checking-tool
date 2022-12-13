@@ -503,7 +503,7 @@
     "System_3a_PSZ_AC_Gas_Furnace": {
         "Section": 21,
         "Rule": 1,
-        "Test": 7,
+        "Test": 8,
         "test_description": "System_3a_PSZ_AC_Gas_Furnace",
         "expected_rule_outcome": "not_applicable",
         "standard": {
@@ -597,7 +597,7 @@
     "System_3b_PSZ_AC_Gas_Furnace": {
         "Section": 21,
         "Rule": 1,
-        "Test": 8,
+        "Test": 9,
         "test_description": "System_3b_PSZ_AC_Gas_Furnace",
         "expected_rule_outcome": "not_applicable",
         "standard": {
@@ -691,7 +691,7 @@
     "System_3c_PSZ_AC_Gas_Furnace": {
         "Section": 21,
         "Rule": 1,
-        "Test": 9,
+        "Test": 10,
         "test_description": "System_3c_PSZ_AC_Gas_Furnace",
         "expected_rule_outcome": "not_applicable",
         "standard": {
@@ -780,11 +780,13 @@
                         "fluid_loops": [
                             {
                                 "id": "Purchased CHW Loop 1",
-                                "type": "COOLING"
-                            },
-                            {
-                                "id": "Purchased HW Loop 1",
-                                "type": "HEATING"
+                                "type": "COOLING",
+                                "child_loops": [
+                                    {
+                                        "id": "Purchased HW Loop 1",
+                                        "type": "HEATING"
+                                    }
+                                ]
                             }
                         ]
                     }
@@ -795,7 +797,7 @@
     "System_4_PSZ_HP": {
         "Section": 21,
         "Rule": 1,
-        "Test": 10,
+        "Test": 11,
         "test_description": "System_4_PSZ_HP",
         "expected_rule_outcome": "not_applicable",
         "standard": {
@@ -875,7 +877,7 @@
     "System_5_PVAV_HW_Reheat": {
         "Section": 21,
         "Rule": 1,
-        "Test": 11,
+        "Test": 12,
         "test_description": "System_5_PVAV_HW_Reheat",
         "expected_rule_outcome": "not_applicable",
         "standard": {
@@ -993,7 +995,7 @@
     "System_5b_PVAV_HW_Reheat": {
         "Section": 21,
         "Rule": 1,
-        "Test": 12,
+        "Test": 13,
         "test_description": "System_5b_PVAV_HW_Reheat",
         "expected_rule_outcome": "not_applicable",
         "standard": {
@@ -1111,7 +1113,7 @@
     "System_6_PVAV_Elec_Reheat": {
         "Section": 21,
         "Rule": 1,
-        "Test": 13,
+        "Test": 14,
         "test_description": "System_6_PVAV_Elec_Reheat",
         "expected_rule_outcome": "not_applicable",
         "standard": {
@@ -1206,7 +1208,7 @@
     "System_6b_PVAV_Elec_Reheat": {
         "Section": 21,
         "Rule": 1,
-        "Test": 14,
+        "Test": 15,
         "test_description": "System_6b_PVAV_Elec_Reheat",
         "expected_rule_outcome": "not_applicable",
         "standard": {
@@ -1323,7 +1325,7 @@
     "System_7_VAV_HW_Reheat": {
         "Section": 21,
         "Rule": 1,
-        "Test": 15,
+        "Test": 16,
         "test_description": "System_7_VAV_HW_Reheat",
         "expected_rule_outcome": "not_applicable",
         "standard": {
@@ -1387,7 +1389,7 @@
                                                 "cooling_system": {
                                                     "id": "CHW Coil 1",
                                                     "cooling_system_type": "FLUID_LOOP",
-                                                    "chilled_water_loop": "Chiller Loop 1"
+                                                    "chilled_water_loop": "Secondary CHW Loop 1"
                                                 },
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 1",
@@ -1437,6 +1439,11 @@
                                 "id": "Chiller Pump 1",
                                 "loop_or_piping": "Chiller Loop 1",
                                 "speed_control": "FIXED_SPEED"
+                            },
+                            {
+                                "id": "Secondary CHW Pump",
+                                "loop_or_piping": "Secondary CHW Loop 1",
+                                "speed_control": "VARIABLE_SPEED"
                             }
                         ],
                         "fluid_loops": [
@@ -1446,7 +1453,13 @@
                             },
                             {
                                 "id": "Chiller Loop 1",
-                                "type": "COOLING"
+                                "type": "COOLING",
+                                "child_loops": [
+                                    {
+                                        "id": "Secondary CHW Loop 1",
+                                        "type": "COOLING"
+                                    }
+                                ]
                             }
                         ]
                     }
@@ -1457,7 +1470,7 @@
     "System_7a_VAV_HW_Reheat": {
         "Section": 21,
         "Rule": 1,
-        "Test": 16,
+        "Test": 17,
         "test_description": "System_7a_VAV_HW_Reheat",
         "expected_rule_outcome": "not_applicable",
         "standard": {
@@ -1592,7 +1605,7 @@
     "System_7b_VAV_HW_Reheat": {
         "Section": 21,
         "Rule": 1,
-        "Test": 17,
+        "Test": 18,
         "test_description": "System_7b_VAV_HW_Reheat",
         "expected_rule_outcome": "not_applicable",
         "standard": {
@@ -1656,7 +1669,7 @@
                                                 "cooling_system": {
                                                     "id": "CHW Coil 1",
                                                     "cooling_system_type": "FLUID_LOOP",
-                                                    "chilled_water_loop": "Chiller Loop 1"
+                                                    "chilled_water_loop": "Secondary CHW Loop 1"
                                                 },
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 1",
@@ -1706,6 +1719,11 @@
                                 "id": "Chiller Pump 1",
                                 "loop_or_piping": "Chiller Loop 1",
                                 "speed_control": "FIXED_SPEED"
+                            },
+                            {
+                                "id": "Secondary CHW Pump",
+                                "loop_or_piping": "Secondary CHW Loop 1",
+                                "speed_control": "VARIABLE_SPEED"
                             }
                         ],
                         "fluid_loops": [
@@ -1715,7 +1733,13 @@
                             },
                             {
                                 "id": "Chiller Loop 1",
-                                "type": "COOLING"
+                                "type": "COOLING",
+                                "child_loops": [
+                                    {
+                                        "id": "Secondary CHW Loop 1",
+                                        "type": "COOLING"
+                                    }
+                                ]
                             }
                         ]
                     }
@@ -1726,7 +1750,7 @@
     "System_7c_VAV_HW_Reheat": {
         "Section": 21,
         "Rule": 1,
-        "Test": 18,
+        "Test": 19,
         "test_description": "System_7c_VAV_HW_Reheat",
         "expected_rule_outcome": "not_applicable",
         "standard": {
@@ -1859,7 +1883,7 @@
     "System_8_PFP_Reheat": {
         "Section": 21,
         "Rule": 1,
-        "Test": 19,
+        "Test": 20,
         "test_description": "System_8_PFP_Reheat",
         "expected_rule_outcome": "not_applicable",
         "standard": {
@@ -1925,7 +1949,7 @@
                                                 "cooling_system": {
                                                     "id": "CHW Coil 1",
                                                     "cooling_system_type": "FLUID_LOOP",
-                                                    "chilled_water_loop": "Chiller Loop 1"
+                                                    "chilled_water_loop": "Secondary CHW Loop 1"
                                                 },
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 1",
@@ -1974,6 +1998,11 @@
                                 "id": "Chiller Pump 1",
                                 "loop_or_piping": "Chiller Loop 1",
                                 "speed_control": "FIXED_SPEED"
+                            },
+                            {
+                                "id": "Secondary CHW Pump",
+                                "loop_or_piping": "Secondary CHW Loop 1",
+                                "speed_control": "VARIABLE_SPEED"
                             }
                         ],
                         "fluid_loops": [
@@ -1983,7 +2012,13 @@
                             },
                             {
                                 "id": "Chiller Loop 1",
-                                "type": "COOLING"
+                                "type": "COOLING",
+                                "child_loops": [
+                                    {
+                                        "id": "Secondary CHW Loop 1",
+                                        "type": "COOLING"
+                                    }
+                                ]
                             }
                         ]
                     }
@@ -1994,7 +2029,7 @@
     "System_8a_PFP_Reheat": {
         "Section": 21,
         "Rule": 1,
-        "Test": 20,
+        "Test": 21,
         "test_description": "System_8a_PFP_Reheat",
         "expected_rule_outcome": "not_applicable",
         "standard": {
@@ -2131,7 +2166,7 @@
     "System_8b_PFP_Reheat": {
         "Section": 21,
         "Rule": 1,
-        "Test": 21,
+        "Test": 22,
         "test_description": "System_8b_PFP_Reheat",
         "expected_rule_outcome": "not_applicable",
         "standard": {
@@ -2197,7 +2232,7 @@
                                                 "cooling_system": {
                                                     "id": "CHW Coil 1",
                                                     "cooling_system_type": "FLUID_LOOP",
-                                                    "chilled_water_loop": "Chiller Loop 1"
+                                                    "chilled_water_loop": "Secondary CHW Loop 1"
                                                 },
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 1",
@@ -2247,6 +2282,11 @@
                                 "id": "Chiller Pump 1",
                                 "loop_or_piping": "Chiller Loop 1",
                                 "speed_control": "FIXED_SPEED"
+                            },
+                            {
+                                "id": "Secondary CHW Pump",
+                                "loop_or_piping": "Secondary CHW Loop 1",
+                                "speed_control": "VARIABLE_SPEED"
                             }
                         ],
                         "fluid_loops": [
@@ -2256,7 +2296,13 @@
                             },
                             {
                                 "id": "Chiller Loop 1",
-                                "type": "COOLING"
+                                "type": "COOLING",
+                                "child_loops": [
+                                    {
+                                        "id": "Secondary CHW Loop 1",
+                                        "type": "COOLING"
+                                    }
+                                ]
                             }
                         ]
                     }
@@ -2267,7 +2313,7 @@
     "System_8c_PFP_Reheat": {
         "Section": 21,
         "Rule": 1,
-        "Test": 22,
+        "Test": 23,
         "test_description": "System_8c_PFP_Reheat",
         "expected_rule_outcome": "not_applicable",
         "standard": {
@@ -2402,7 +2448,7 @@
     "System_9_Warm_Air_Furnace_Gas": {
         "Section": 21,
         "Rule": 1,
-        "Test": 23,
+        "Test": 24,
         "test_description": "System_9_Warm_Air_Furnace_Gas",
         "expected_rule_outcome": "not_applicable",
         "standard": {
@@ -2479,7 +2525,7 @@
     "System_9b_Warm_Air_Furnace_Gas": {
         "Section": 21,
         "Rule": 1,
-        "Test": 24,
+        "Test": 25,
         "test_description": "System_9b_Warm_Air_Furnace_Gas",
         "expected_rule_outcome": "not_applicable",
         "standard": {
@@ -2515,7 +2561,9 @@
                                                         "id": "Air Terminal",
                                                         "is_supply_ducted": true,
                                                         "type": "CONSTANT_AIR_VOLUME",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "System 9"
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 9",
+                                                        "heating_source": "HOT_WATER",
+                                                        "heating_from_loop": "Purchased HW Loop 1"
                                                     }
                                                 ]
                                             }
@@ -2576,7 +2624,7 @@
     "System_10_Warm_Air_Furnace_Elec": {
         "Section": 21,
         "Rule": 1,
-        "Test": 25,
+        "Test": 26,
         "test_description": "System_10_Warm_Air_Furnace_Elec",
         "expected_rule_outcome": "not_applicable",
         "standard": {
@@ -2642,7 +2690,7 @@
     "System_11.1_VAV_SZ": {
         "Section": 21,
         "Rule": 1,
-        "Test": 26,
+        "Test": 27,
         "test_description": "System_11.1_VAV_SZ",
         "expected_rule_outcome": "not_applicable",
         "standard": {
@@ -2689,7 +2737,7 @@
                                                 "cooling_system": {
                                                     "id": "CHW Coil 1",
                                                     "cooling_system_type": "FLUID_LOOP",
-                                                    "chilled_water_loop": "Chiller Loop 1"
+                                                    "chilled_water_loop": "Secondary CHW Loop 1"
                                                 },
                                                 "heating_system": {
                                                     "id": "Heating Coil 1",
@@ -2726,12 +2774,23 @@
                                 "id": "Chiller Pump 1",
                                 "loop_or_piping": "Chiller Loop 1",
                                 "speed_control": "FIXED_SPEED"
+                            },
+                            {
+                                "id": "Secondary CHW Pump",
+                                "loop_or_piping": "Secondary CHW Loop 1",
+                                "speed_control": "VARIABLE_SPEED"
                             }
                         ],
                         "fluid_loops": [
                             {
                                 "id": "Chiller Loop 1",
-                                "type": "COOLING"
+                                "type": "COOLING",
+                                "child_loops": [
+                                    {
+                                        "id": "Secondary CHW Loop 1",
+                                        "type": "COOLING"
+                                    }
+                                ]
                             }
                         ]
                     }
@@ -2742,7 +2801,7 @@
     "System_11.1a_VAV_SZ": {
         "Section": 21,
         "Rule": 1,
-        "Test": 27,
+        "Test": 28,
         "test_description": "System_11.1a_VAV_SZ",
         "expected_rule_outcome": "not_applicable",
         "standard": {
@@ -2815,6 +2874,13 @@
                                 ]
                             }
                         ],
+                        "external_fluid_source": [
+                            {
+                                "id": "Purchased CW 1",
+                                "loop": "Chilled Water Loop 1",
+                                "type": "CHILLED_WATER"
+                            }
+                        ],
                         "pumps": [
                             {
                                 "id": "CHW Pump 1",
@@ -2836,7 +2902,7 @@
     "System_11.1b_VAV_SZ": {
         "Section": 21,
         "Rule": 1,
-        "Test": 28,
+        "Test": 29,
         "test_description": "System_11.1b_VAV_SZ",
         "expected_rule_outcome": "not_applicable",
         "standard": {
@@ -2883,7 +2949,7 @@
                                                 "cooling_system": {
                                                     "id": "CHW Coil 1",
                                                     "cooling_system_type": "FLUID_LOOP",
-                                                    "chilled_water_loop": "Chiller Loop 1"
+                                                    "chilled_water_loop": "Secondary CHW Loop 1"
                                                 },
                                                 "heating_system": {
                                                     "id": "HHW Coil 1",
@@ -2933,6 +2999,11 @@
                                 "id": "Chiller Pump 1",
                                 "loop_or_piping": "Chiller Loop 1",
                                 "speed_control": "FIXED_SPEED"
+                            },
+                            {
+                                "id": "Secondary CHW Pump",
+                                "loop_or_piping": "Secondary CHW Loop 1",
+                                "speed_control": "VARIABLE_SPEED"
                             }
                         ],
                         "fluid_loops": [
@@ -2942,7 +3013,13 @@
                             },
                             {
                                 "id": "Chiller Loop 1",
-                                "type": "COOLING"
+                                "type": "COOLING",
+                                "child_loops": [
+                                    {
+                                        "id": "Secondary CHW Loop 1",
+                                        "type": "COOLING"
+                                    }
+                                ]
                             }
                         ]
                     }
@@ -2953,7 +3030,7 @@
     "System_11.1c_VAV_SZ": {
         "Section": 21,
         "Rule": 1,
-        "Test": 29,
+        "Test": 30,
         "test_description": "System_11.1c_VAV_SZ",
         "expected_rule_outcome": "not_applicable",
         "standard": {
@@ -3069,7 +3146,7 @@
     "System_11.2_VAV_SZ": {
         "Section": 21,
         "Rule": 1,
-        "Test": 30,
+        "Test": 31,
         "test_description": "System_11.2_VAV_SZ",
         "expected_rule_outcome": "not_applicable",
         "standard": {
@@ -3116,7 +3193,7 @@
                                                 "cooling_system": {
                                                     "id": "CHW Coil 1",
                                                     "cooling_system_type": "FLUID_LOOP",
-                                                    "chilled_water_loop": "Chiller Loop 1"
+                                                    "chilled_water_loop": "Secondary CHW Loop 1"
                                                 },
                                                 "heating_system": {
                                                     "id": "Boiler Coil 1",
@@ -3166,6 +3243,11 @@
                                 "id": "Chiller Pump 1",
                                 "loop_or_piping": "Chiller Loop 1",
                                 "speed_control": "FIXED_SPEED"
+                            },
+                            {
+                                "id": "Secondary CHW Pump",
+                                "loop_or_piping": "Secondary CHW Loop 1",
+                                "speed_control": "VARIABLE_SPEED"
                             }
                         ],
                         "fluid_loops": [
@@ -3175,7 +3257,13 @@
                             },
                             {
                                 "id": "Chiller Loop 1",
-                                "type": "COOLING"
+                                "type": "COOLING",
+                                "child_loops": [
+                                    {
+                                        "id": "Secondary CHW Loop 1",
+                                        "type": "COOLING"
+                                    }
+                                ]
                             }
                         ]
                     }
@@ -3186,7 +3274,7 @@
     "System_11.2a_VAV_SZ": {
         "Section": 21,
         "Rule": 1,
-        "Test": 31,
+        "Test": 32,
         "test_description": "System_11.2a_VAV_SZ",
         "expected_rule_outcome": "not_applicable",
         "standard": {
@@ -3304,7 +3392,7 @@
     "System 12_CAV_SZ_HW": {
         "Section": 21,
         "Rule": 1,
-        "Test": 32,
+        "Test": 33,
         "test_description": "System 12_CAV_SZ_HW",
         "expected_rule_outcome": "not_applicable",
         "standard": {
@@ -3351,7 +3439,7 @@
                                                 "cooling_system": {
                                                     "id": "CHW Coil 1",
                                                     "cooling_system_type": "FLUID_LOOP",
-                                                    "chilled_water_loop": "Chiller Loop 1"
+                                                    "chilled_water_loop": "Secondary CHW Loop 1"
                                                 },
                                                 "heating_system": {
                                                     "id": "Boiler Coil 1",
@@ -3401,6 +3489,11 @@
                                 "id": "Chiller Pump 1",
                                 "loop_or_piping": "Chiller Loop 1",
                                 "speed_control": "FIXED_SPEED"
+                            },
+                            {
+                                "id": "Secondary CHW Pump",
+                                "loop_or_piping": "Secondary CHW Loop 1",
+                                "speed_control": "VARIABLE_SPEED"
                             }
                         ],
                         "fluid_loops": [
@@ -3410,7 +3503,13 @@
                             },
                             {
                                 "id": "Chiller Loop 1",
-                                "type": "COOLING"
+                                "type": "COOLING",
+                                "child_loops": [
+                                    {
+                                        "id": "Secondary CHW Loop 1",
+                                        "type": "COOLING"
+                                    }
+                                ]
                             }
                         ]
                     }
@@ -3421,7 +3520,7 @@
     "System 12a_CAV_SZ_HW": {
         "Section": 21,
         "Rule": 1,
-        "Test": 33,
+        "Test": 34,
         "test_description": "System 12a_CAV_SZ_HW",
         "expected_rule_outcome": "not_applicable",
         "standard": {
@@ -3539,7 +3638,7 @@
     "System 12b_CAV_SZ_HW": {
         "Section": 21,
         "Rule": 1,
-        "Test": 34,
+        "Test": 35,
         "test_description": "System 12b_CAV_SZ_HW",
         "expected_rule_outcome": "not_applicable",
         "standard": {
@@ -3586,7 +3685,7 @@
                                                 "cooling_system": {
                                                     "id": "CHW Coil 1",
                                                     "cooling_system_type": "FLUID_LOOP",
-                                                    "chilled_water_loop": "Chiller Loop 1"
+                                                    "chilled_water_loop": "Secondary CHW Loop 1"
                                                 },
                                                 "heating_system": {
                                                     "id": "HHW Coil 1",
@@ -3636,6 +3735,11 @@
                                 "id": "Chiller Pump 1",
                                 "loop_or_piping": "Chiller Loop 1",
                                 "speed_control": "FIXED_SPEED"
+                            },
+                            {
+                                "id": "Secondary CHW Pump",
+                                "loop_or_piping": "Secondary CHW Loop 1",
+                                "speed_control": "VARIABLE_SPEED"
                             }
                         ],
                         "fluid_loops": [
@@ -3645,7 +3749,13 @@
                             },
                             {
                                 "id": "Chiller Loop 1",
-                                "type": "COOLING"
+                                "type": "COOLING",
+                                "child_loops": [
+                                    {
+                                        "id": "Secondary CHW Loop 1",
+                                        "type": "COOLING"
+                                    }
+                                ]
                             }
                         ]
                     }
@@ -3656,7 +3766,7 @@
     "System 12c_CAV_SZ_HW": {
         "Section": 21,
         "Rule": 1,
-        "Test": 35,
+        "Test": 36,
         "test_description": "System 12c_CAV_SZ_HW",
         "expected_rule_outcome": "not_applicable",
         "standard": {
@@ -3703,7 +3813,7 @@
                                                 "cooling_system": {
                                                     "id": "CHW Coil 1",
                                                     "cooling_system_type": "FLUID_LOOP",
-                                                    "chilled_water_loop": "Chilled Water Loop 1"
+                                                    "chilled_water_loop": "Secondary CHW Loop 1"
                                                 },
                                                 "heating_system": {
                                                     "id": "HHW Coil 1",
@@ -3772,7 +3882,7 @@
     "System 13_CAV_SZ_ER": {
         "Section": 21,
         "Rule": 1,
-        "Test": 36,
+        "Test": 37,
         "test_description": "System 13_CAV_SZ_ER",
         "expected_rule_outcome": "not_applicable",
         "standard": {
@@ -3819,7 +3929,7 @@
                                                 "cooling_system": {
                                                     "id": "CHW Coil 1",
                                                     "cooling_system_type": "FLUID_LOOP",
-                                                    "chilled_water_loop": "Chiller Loop 1"
+                                                    "chilled_water_loop": "Secondary CHW Loop 1"
                                                 },
                                                 "heating_system": {
                                                     "id": "Heating Coil 1",
@@ -3856,12 +3966,23 @@
                                 "id": "Chiller Pump 1",
                                 "loop_or_piping": "Chiller Loop 1",
                                 "speed_control": "FIXED_SPEED"
+                            },
+                            {
+                                "id": "Secondary CHW Pump",
+                                "loop_or_piping": "Secondary CHW Loop 1",
+                                "speed_control": "VARIABLE_SPEED"
                             }
                         ],
                         "fluid_loops": [
                             {
                                 "id": "Chiller Loop 1",
-                                "type": "COOLING"
+                                "type": "COOLING",
+                                "child_loops": [
+                                    {
+                                        "id": "Secondary CHW Loop 1",
+                                        "type": "COOLING"
+                                    }
+                                ]
                             }
                         ]
                     }
@@ -3872,7 +3993,7 @@
     "System 13a_CAV_SZ_ER": {
         "Section": 21,
         "Rule": 1,
-        "Test": 37,
+        "Test": 38,
         "test_description": "System 13a_CAV_SZ_ER",
         "expected_rule_outcome": "not_applicable",
         "standard": {

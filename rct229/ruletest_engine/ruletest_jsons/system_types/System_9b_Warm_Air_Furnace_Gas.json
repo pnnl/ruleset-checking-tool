@@ -20,7 +20,9 @@
                                             "id": "Air Terminal",
                                             "is_supply_ducted": true,
                                             "type": "CONSTANT_AIR_VOLUME",
-                                            "served_by_heating_ventilating_air_conditioning_system": "System 9"
+                                            "served_by_heating_ventilating_air_conditioning_system": "System 9",
+                                            "heating_source": "HOT_WATER",
+                                            "heating_from_loop": "Purchased HW Loop 1"
                                         }
                                     ]
                                 }
