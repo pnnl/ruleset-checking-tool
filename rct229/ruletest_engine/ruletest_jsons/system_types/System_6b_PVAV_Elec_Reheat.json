@@ -51,7 +51,7 @@
                                     "preheat_system": {
                                         "id": "Preheat Coil 1",
                                         "heating_system_type": "FLUID_LOOP",
-                                        "hot_water_loop": "Purchased HW 1"
+                                        "hot_water_loop": "Purchased HW Loop 1"
                                     },
                                     "fan_system": {
                                         "id": "VAV Fan System 1",

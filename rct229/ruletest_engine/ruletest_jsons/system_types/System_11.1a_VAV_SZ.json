@@ -57,13 +57,6 @@
                     ]
                 }
             ],
-            "external_fluid_source": [
-                {
-                    "id": "Purchased CW 1",
-                    "loop": "Chilled Water Loop 1",
-                    "type": "CHILLED_WATER"
-                }
-            ],
             "pumps": [
                 {
                     "id": "CHW Pump 1",

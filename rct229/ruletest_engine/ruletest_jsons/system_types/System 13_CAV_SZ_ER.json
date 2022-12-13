@@ -31,7 +31,7 @@
                                     "cooling_system": {
                                         "id": "CHW Coil 1",
                                         "cooling_system_type": "FLUID_LOOP",
-                                        "chilled_water_loop": "Secondary CHW Loop 1"
+                                        "chilled_water_loop": "Chiller Loop 1"
                                     },
                                     "heating_system": {
                                         "id": "Heating Coil 1",
@@ -68,23 +68,12 @@
                     "id": "Chiller Pump 1",
                     "loop_or_piping": "Chiller Loop 1",
                     "speed_control": "FIXED_SPEED"
-                },
-                {
-                    "id": "Secondary CHW Pump",
-                    "loop_or_piping": "Secondary CHW Loop 1",
-                    "speed_control": "VARIABLE_SPEED"
                 }
             ],
             "fluid_loops": [
                 {
                     "id": "Chiller Loop 1",
-                    "type": "COOLING",
-                    "child_loops": [
-                        {
-                            "id": "Secondary CHW Loop 1",
-                            "type": "COOLING"
-                        }
-                    ]
+                    "type": "COOLING"
                 }
             ]
         }
