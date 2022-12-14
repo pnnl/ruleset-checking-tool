@@ -20,33 +20,19 @@
                                             "id": "Air Terminal",
                                             "is_supply_ducted": true,
                                             "type": "CONSTANT_AIR_VOLUME",
-                                            "served_by_heating_ventilating_air_conditioning_system": "System 9"
+                                            "served_by_heating_ventilating_air_conditioning_system": "System 9B",
+                                            "heating_source": "HOT_WATER",
+                                            "heating_from_loop": "Purchased HW Loop 1",
+                                            "fan": {
+                                                "id": "fan 1"
+                                            }
                                         }
                                     ]
                                 }
                             ],
                             "heating_ventilating_air_conditioning_systems": [
                                 {
-                                    "id": "System 9",
-                                    "heating_system": {
-                                        "id": "Furnace Coil 1",
-                                        "heating_system_type": "FLUID_LOOP",
-                                        "hot_water_loop": "Purchased HW Loop 1"
-                                    },
-                                    "fan_system": {
-                                        "id": "CAV Fan System 1",
-                                        "fan_control": "CONSTANT",
-                                        "supply_fans": [
-                                            {
-                                                "id": "Supply Fan 1"
-                                            }
-                                        ],
-                                        "return_fans": [
-                                            {
-                                                "id": "Return Fan 1"
-                                            }
-                                        ]
-                                    }
+                                    "id": "System 9B"
                                 }
                             ]
                         }

@@ -64,7 +64,7 @@ def is_baseline_system_9b(rmi_b, hvac_b_id, terminal_unit_id_list, zone_id_list)
 
     has_required_fan_sys = hvac_b.get("fan_system") is None
 
-    are_sys_data_matched = (
+    return (
         has_required_preheat_sys
         and has_required_heating_sys
         and has_required_fan_sys
@@ -76,7 +76,7 @@ def is_baseline_system_9b(rmi_b, hvac_b_id, terminal_unit_id_list, zone_id_list)
         and are_all_terminal_types_cav_with_none_equal_to_null(
             rmi_b, terminal_unit_id_list
         )
-        and are_all_terminal_heating_loops_purchased_heating(rmi_b, hvac_b_id)
+        and are_all_terminal_heating_loops_purchased_heating(
+            rmi_b, terminal_unit_id_list
+        )
     )
-
-    return is_baseline_system_9b
