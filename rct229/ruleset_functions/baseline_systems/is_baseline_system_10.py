@@ -131,6 +131,5 @@ def is_baseline_system_10(rmi_b, hvac_b_id, terminal_unit_id_list, zone_id_list)
 
     if are_sys_10_data_matched:
         is_baseline_system_10 = HVAC_SYS.SYS_10
-        return is_baseline_system_10
-    else:
-        return is_baseline_system_10
+
+    return is_baseline_system_10
