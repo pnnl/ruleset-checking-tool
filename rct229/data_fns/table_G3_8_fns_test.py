@@ -45,7 +45,7 @@ def test__lighting_space_enumeration_to_lpd_space_type_map():
     # when a check fails
     check_enumeration_to_osstd_match_field_value_map(
         match_field_name="lpd_space_type",
-        enum_type="LightingSpaceOptions2019ASHRAE901T951TG38",
+        enum_type="LightingBuildingAreaOptions2019ASHRAE901T951TG38",
         osstd_table=data["ashrae_90_1_prm_2019.prm_interior_lighting"],
         enumeration_to_match_field_value_map=lighting_space_enumeration_to_lpd_space_type_map,
         exclude_enum_names=["NONE"],

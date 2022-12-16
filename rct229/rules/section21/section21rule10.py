@@ -100,9 +100,9 @@ class Section21Rule10(RuleDefinitionListIndexedBase):
             ]
 
             target_pump_type = (
-                PUMP_SPEED_CONTROL.VARIABLE_SPEED
+                PUMP_SPEED_CONTROL.FIXED_SPEED
                 if total_area < PUMP_CONFIGURATION_THRESHOLD
-                else PUMP_SPEED_CONTROL.FIXED_SPEED
+                else PUMP_SPEED_CONTROL.VARIABLE_SPEED
             )
 
             return {
