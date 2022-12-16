@@ -32,13 +32,13 @@ class ZoneConditioningCategory:
 # Intended for internal use
 GET_ZONE_CONDITIONING_CATEGORY_DICT__REQUIRED_FIELDS = {
     "building": {
-        "building_segments[*].heating_ventilation_air_conditioning_systems[*].cooling_system": [
+        "building_segments[*].heating_ventilating_air_conditioning_systems[*].cooling_system": [
             "design_sensible_cool_capacity"
         ],
-        "building_segments[*].heating_ventilation_air_conditioning_systems[*].heating_system": [
+        "building_segments[*].heating_ventilating_air_conditioning_systems[*].heating_system": [
             "design_capacity"
         ],
-        "building_segments[*].heating_ventilation_air_conditioning_systems[*].preheat_system": [
+        "building_segments[*].heating_ventilating_air_conditioning_systems[*].preheat_system": [
             "design_capacity"
         ],
         "building_segments[*].zones[*].spaces[*]": [
@@ -48,7 +48,7 @@ GET_ZONE_CONDITIONING_CATEGORY_DICT__REQUIRED_FIELDS = {
             "u_factor",
         ],
         "building_segments[*].zones[*].terminals[*]": [
-            "served_by_heating_ventilation_air_conditioning_system"
+            "served_by_heating_ventilating_air_conditioning_system"
         ],
     }
 }
@@ -81,7 +81,7 @@ def get_zone_conditioning_category_dict(climate_zone, building):
     hvac_systems_dict = {
         hvac_system["id"]: hvac_system
         for hvac_system in find_all(
-            "building_segments[*].heating_ventilation_air_conditioning_systems[*]",
+            "building_segments[*].heating_ventilating_air_conditioning_systems[*]",
             building,
         )
     }
@@ -115,7 +115,7 @@ def get_zone_conditioning_category_dict(climate_zone, building):
                 else ZERO.POWER
             )
             + (
-                hvac_systems_dict[hvac_sys_id]["preheat_system"]["heat_capacity"]
+                hvac_systems_dict[hvac_sys_id]["preheat_system"]["design_capacity"]
                 if "preheat_system" in hvac_systems_dict[hvac_sys_id]
                 # Handle missing preheat_system
                 else ZERO.POWER
@@ -147,7 +147,7 @@ def get_zone_conditioning_category_dict(climate_zone, building):
             # Note: there is only one hvac system even though the field name is plural
             # This will change to singular in schema version 0.0.8
             hvac_sys_id = terminal[
-                "served_by_heating_ventilation_air_conditioning_system"
+                "served_by_heating_ventilating_air_conditioning_system"
             ]
 
             # Add cooling and heating capacites for the terminal

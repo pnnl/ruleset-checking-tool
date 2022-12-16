@@ -20,6 +20,7 @@ class RuleDefinitionBase:
         must_match_by_ids=[],
         manual_check_required_msg="",
         fail_msg="",
+        pass_msg="",
         not_applicable_msg="",
     ):
         """Base class for all Rule definitions
@@ -59,6 +60,7 @@ class RuleDefinitionBase:
         self.manual_check_required_msg = manual_check_required_msg
         self.not_applicable_msg = not_applicable_msg
         self.fail_msg = fail_msg
+        self.pass_msg = pass_msg
 
     def evaluate(self, rmrs, data={}):
         """Generates the outcome dictionary for the rule
@@ -104,7 +106,7 @@ class RuleDefinitionBase:
         if self.rmr_context:
             outcome["rmr_context"] = self.rmr_context
 
-        # context will be a string if the context does not exist for any of the RMR used
+        # context will be a string if the context does not exist for any of the RMD used
         context_or_string = self.get_context(rmrs, data)
         if isinstance(context_or_string, UserBaselineProposedVals):
             context = context_or_string
@@ -145,6 +147,9 @@ class RuleDefinitionBase:
                             # Assume result type is bool
                             elif result:
                                 outcome["result"] = "PASSED"
+                                pass_msg = self.get_pass_msg(context, calc_vals, data)
+                                if pass_msg:
+                                    outcome["message"] = pass_msg
                             else:
                                 outcome["result"] = "FAILED"
                                 fail_msg = self.get_fail_msg(context, calc_vals, data)
@@ -162,11 +167,13 @@ class RuleDefinitionBase:
                     outcome["result"] = "FAILED"
                     outcome["message"] = str(fe)
             else:
-                outcome["result"] = context_validity_dict
+                outcome["result"] = "UNDETERMINED"
+                outcome["message"] = context_validity_dict
         else:
-            # context should be a string indicating the RMRs that are missing
+            # context should be a string indicating the RMDs that are missing
             # such as "MISSING_BASELINE"
-            outcome["result"] = context_or_string
+            outcome["result"] = "UNDETERMINED"
+            outcome["message"] = context_or_string
 
         return outcome
 
@@ -609,3 +616,29 @@ class RuleDefinitionBase:
         """
 
         return self.fail_msg
+
+    def get_pass_msg(self, context, calc_vals=None, data=None):
+        """Gets the message to include in the outcome for the PASS case.
+
+        This base implementation simply returns the value of
+        self.pass_msg, which defaults to the empty string.
+
+        This method should only be overridden if there is more than one string
+        used for the PASS or PASS case. A fixed string can be given in the
+        `pass_msg` field passed to the initializer.
+
+        Parameters
+        ----------
+        context : UserBaselineProposedVals
+            Object containing the contexts for the user, baseline, and proposed RMRs
+        calc_vals : dict or None
+
+        data : An optional data object. It is ignored by this base implementation.
+
+        Returns
+        -------
+        str
+            The message associated with the Pass case
+        """
+
+        return self.pass_msg
