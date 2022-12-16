@@ -1,6 +1,8 @@
 
 ## get_hvac_zone_list_w_area
 
+**Schema Version:** 0.0.23
+
 Description: Get the list of zones and their total floor area served by each HVAC system in a RMD.
 
 Inputs:  
@@ -19,7 +21,7 @@ Logic:
 
     - For each terminal serving zone: `for terminal in zone.terminals:`
 
-      - Get HVAC system connected to terminal: `hvac_sys_id = terminal.served_by_heating_ventilation_air_conditioning_system`
+      - Get HVAC system connected to terminal: `hvac_sys_id = terminal.served_by_heating_ventilating_air_conditioning_system`
 
         - Check if zone is not already saved in HVAC system dictionary: `if NOT zone.id in hvac_zone_list_w_area_dict[hvac_sys_id]["ZONE_LIST"]:`
 
