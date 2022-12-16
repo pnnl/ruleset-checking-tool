@@ -17,7 +17,7 @@ Logic:
 
 - For each building segment in B-RMR: `for building_segment in B-RMR...building_segments:`
 
-  - For each HVAC system in building segment: `for hvac in building_segment.heating_ventilation_air_conditioning_systems`
+  - For each HVAC system in building segment: `for hvac in building_segment.heating_ventilating_air_conditioning_systems`
 
     - Check if HVAC system is baseline system Type-7, 8, 11.1, 11.2, 12, 13, 7b, 8b, 11.1b, 12b: `if any(hvac.id in baseline_hvac_system_dict[sys_type] for sys_type in ["SYS-7", "SYS-8", "SYS-11.1", "SYS-11.2", "SYS-12", "SYS-13", "SYS-7B", "SYS-8B", "SYS-11B", "SYS-12B", "SYS-13B"]):`
 

@@ -45,7 +45,7 @@ class Section21Rule11(RuleDefinitionListIndexedBase):
             id="21-11",
             description="The baseline building design uses boilers or purchased hot water, the hot water pumping system shall be modeled as primary-only.",
             rmr_context="ruleset_model_instances/0",
-            list_path="ruleset_model_instances[0].fluid_loops[*]",
+            list_path="fluid_loops[*]",
         )
 
     def is_applicable(self, context, data=None):

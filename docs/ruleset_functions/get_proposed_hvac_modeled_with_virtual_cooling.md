@@ -1,5 +1,6 @@
 # get_proposed_hvac_modeled_with_virtual_cooling  
 
+**Schema Version:** 0.0.23
 **Description:** Get the list of HeatingVentilationAirAconditioningSystem in which Appendix G Table G3.1 #10 d is applicable (i.e. space cooling is modeled in the P_RMR but not the U_RMR).  Table G3.1 #10 d states that "where no cooling system exists or no cooling system has
 been submitted with design documents, the cooling system type shall be the same in the proposed as modeled in the baseline building design and shall comply with the requirements of Section 6."   
 
@@ -16,7 +17,7 @@ been submitted with design documents, the cooling system type shall be the same 
 2. match_data_element_exist()  
 
 ## Logic:  
-- For each hvac_p in the P_RMR: `for hvac_p in P_RMR...HeatingVentilationAirConditioningSystem:`    
+- For each hvac_p in the P_RMR: `for hvac_p in P_RMR...HeatingVentilatingAirConditioningSystem:`    
     - Reset has_virtual_cooling_p boolean variable: `has_virtual_cooling_p = FALSE`   
     - Check if there are any cooling_systems associated with hvac_p, if not skip indented code in the P_RMR: `if hvac_p.cooling_system != Null:`
         Below compares the cooling systems associated with the hvac system across the P_RMR and U_RMR only if cooling was modeled in the proposed. If cooling was modeled in the proposed and NOT in the U_RMR (the cooling system type is None [or cooling_system = Null] in the U_RMR) then this means virtual cooling was modeled in the proposed. 
