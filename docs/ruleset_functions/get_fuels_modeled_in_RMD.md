@@ -1,5 +1,6 @@
-# get_fuels_modeled_in_RMR
+# get_fuels_modeled_in_RMD
 
+**Schema Version:** 0.0.23
 **Description:** Get a list of the fuels used in the RMR.  Includes fuels used by HVAC systems including terminal units, chillers, boilers, ExternalFluidSources, and SWHs.
 
 **Inputs:**
@@ -43,7 +44,7 @@ Set boolean variables to FALSE. Default is fuel is not used for space or SWH hea
     - Check else if the energy source is electricity, if so then set boolean variable to true: `elif energy_source_type_x in ["ELECTRICITY"]:fuels_electricity_x = TRUE`
     - Check else if the energy source is fuel oil, if so then set boolean variable to true: `elif energy_source_type_x in ["FUEL_OIL"]:fuels_oil_x = TRUE`
     - Else, set other boolean variable to true: `Else:fuels_other_x = TRUE`  
-- Loop through all HVAC systems in the X_RMR and check which fuels are used for heating. Boolean variables are set to TRUE accordingly, for each hvac_x in the X_RMR: `for hvac_x in X_RMR...HeatingVentilationAirConditioningSystem:`  
+- Loop through all HVAC systems in the X_RMR and check which fuels are used for heating. Boolean variables are set to TRUE accordingly, for each hvac_x in the X_RMR: `for hvac_x in X_RMR...HeatingVentilatingAirConditioningSystem:`  
     - Loop through the heating systems associated with the hvac system, for each heating system in hvac_x: `For heating_systems_x in hvac_x.heating_system:`
         - Reset energy source variable: `energy_source_type_x = ""`
         - Get the energy_source_type: `energy_source_type_x = heating_systems_x.energy_source_type`

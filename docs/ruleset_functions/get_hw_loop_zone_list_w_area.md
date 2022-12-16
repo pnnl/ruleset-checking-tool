@@ -1,6 +1,8 @@
 
 ## get_hw_loop_zone_list_w_area
 
+**Schema Version:** 0.0.23
+
 Description: Get the list of zones and their total floor area served by each HHW loop in a baseline ruleset model instance.  
 
 Inputs:  
@@ -26,7 +28,7 @@ Functions:
           - Save zone id and total floor area to loop dictionary: `hw_loop_zone_list_w_area_dict[hhw_loop_id]["ZONE_LIST"].append(zone.id), hw_loop_zone_list_w_area_dict[hhw_loop_id]["TOTAL_AREA"] += zone_area`
           - Set zone_HHW_loop_found = TRUE: `zone_HHW_loop_found = TRUE`  
       - Check if the hot water loop serving the zone has been found, if it has not then carry on: `if zone_HHW_loop_found == FALSE:`
-        - Get HVAC system serving terminal: `hvacID = terminal.served_by_heating_ventilation_air_conditioning_system`
+        - Get HVAC system serving terminal: `hvacID = terminal.served_by_heating_ventilating_air_conditioning_system`
         - Create HVAC system object from the ID (however the RCT team decides to do this): `hvac = HeatingVentilationAirConditioningSystem.hvacID`
           - Check that the preheat coil is a fluid_loop: `if is_hvac_sys_preheating_type_fluid_loop(B-RMI, hvac.id) == TRUE:`   
             - Get heating hot water loop serving preheat coil: `hhw_loop_id = hvac.preheat_system.hot_water_loop`
