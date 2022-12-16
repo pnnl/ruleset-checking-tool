@@ -2,9 +2,9 @@
 # Airside System - Rule 23-6  
 
 **Schema Version:** 0.0.23  
-**Mandatory Rule:** True  
-**Rule ID:** 23-5  
-**Rule Description:** For baseline systems 6 and 8, Fans in parallel VAV fan-powered boxes shall be sized for 50% of the peak design primary air (from the VAV air-handling unit) flow rate and shall be modeled with 0.35 W/cfm fan power. 
+**Mandatory Rule:** True
+**Rule ID:** 23-6  
+**Rule Description:** For baseline systems 6 and 8, Fans in parallel VAV fan-powered boxes shall be sized for 50% of the peak design primary air (from the VAV air-handling unit) flow rate and shall be modeled with 0.35 W/cfm fan power.  
 **Rule Assertion:** B-RMR = expected value  
 **Appendix G Section:** Section 23 Air-side  
 **90.1 Section Reference:** Section G3.1.3.14 Fan Power and Control (Systems 6 and 8)  
@@ -50,5 +50,9 @@
         - Case 1: For each terminal that is served by HVAC system that is Type-6, 8, 8a, 6b, 8b, if fan in parallel VAV-powered box is sized for 50% of the peak design primary air (from the VAV air-handling unit) flow rate (CFM) and is modeled with 0.35W/cfm fan power: `if ( terminal_b.fan.design_airflow == terminal_b.primary_airflow * 0.5 ) AND ( terminal_b.fan.design_electric_power == 0.35 * terminal_b.fan.design_airflow ): PASS`
 
         - Case 2: Else: `else: FAIL`
+        
+**Notes:**
+1. Updated the Rule ID from 23-5 to 23-6 on 11/28/2022
+
 
 **[Back](../_toc.md)**
