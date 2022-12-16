@@ -1,7 +1,7 @@
 
 # get_baseline_system_types
 
-
+**Schema Version:** 0.0.23
 **Description:**  Identify all the baseline system types modeled in a B-RMR.
 
 **Inputs:**
@@ -73,7 +73,7 @@ Declare empty lists of the hvac_b.id associated with each system type in the B_R
 - Declare a list for SYS-13a, PCHW with and Electric Heat: `SYS-13a = []`  
 
 
-- For each HVAC system in the B_RMR: `hvac_b in B_RMR..HeatingVentilationAirConditioningSystem:`   
+- For each HVAC system in the B_RMR: `hvac_b in B_RMR..HeatingVentilatingAirConditioningSystem:`   
     - Get list of terminal units associated with the hvac system from the dictionary input to the function: `terminal_unit_id_list = dict_of_zones_and_terminal_units_served_by_hvac_sys[hvac_b.id]["Terminal_Unit_List"]`  
     - Get list of zone ids associated with the hvac system from the dictionary input to the function: `zone_id_list = dict_of_zones_and_terminal_units_served_by_hvac_sys[hvac_b.id]["Zone_List"]` 
     - Reset HVAC system type found boolean variable to FALSE: `hvac_sys_type_found = FALSE`  
