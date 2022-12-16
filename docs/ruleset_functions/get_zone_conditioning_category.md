@@ -44,8 +44,8 @@ Logic:
   - Get zone total floor area: `zone_area = SUM(space.floor_area for space in zone.spaces)`
 
   - For each terminal serving zone: `for terminal in zone.terminals:`
-
-    - Get HVAC system connected to terminal: `hvac_sys = terminal.served_by_heating_ventilating_air_conditioning_systemss` (Note XC, will there be more than one HVAC system connecting to a terminal?)
+  
+    - Get HVAC system connected to terminal: `hvac_sys = terminal.served_by_heating_ventilating_air_conditioning_system` (Note XC, will there be more than one HVAC system connecting to a terminal?)
 
     - Add central cooling capacity per floor area to zone capacity dictionary: `zone_capacity_dict[zone.id]["SENSIBLE_COOLING"] += hvac_cool_capacity_dict[hvac_sys.id]`
 

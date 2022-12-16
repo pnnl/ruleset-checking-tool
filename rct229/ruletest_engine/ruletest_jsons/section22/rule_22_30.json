@@ -3,7 +3,7 @@
         "Section": 22,
         "Rule": 30,
         "Test": "a",
-        "test_description": "Baseline building is system type 11 and is correctly modeled with the pump_power_per_flow_rate value",
+        "test_description": "Baseline building is system type 11 and is correctly modeled with the condenser pump value of 22 W/gpm",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-30",
@@ -38,18 +38,18 @@
                                                         "id": "VAV Air Terminal 1",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 11"
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 11"
                                                     }
                                                 ]
                                             }
                                         ],
-                                        "heating_ventilation_air_conditioning_systems": [
+                                        "heating_ventilating_air_conditioning_systems": [
                                             {
                                                 "id": "System 11",
                                                 "cooling_system": {
                                                     "id": "CHW Coil 1",
                                                     "cooling_system_type": "FLUID_LOOP",
-                                                    "chilled_water_loop": "Chiller Loop 1"
+                                                    "chilled_water_loop": "Secondary CHW Loop 1"
                                                 },
                                                 "heating_system": {
                                                     "id": "Heating Coil 1",
@@ -87,12 +87,23 @@
                                 "id": "Chiller Pump 1",
                                 "loop_or_piping": "Chiller Loop 1",
                                 "speed_control": "FIXED_SPEED"
+                            },
+                            {
+                                "id": "Secondary CHW Pump",
+                                "loop_or_piping": "Secondary CHW Loop 1",
+                                "speed_control": "VARIABLE_SPEED"
                             }
                         ],
                         "fluid_loops": [
                             {
                                 "id": "Chiller Loop 1",
-                                "type": "COOLING"
+                                "type": "COOLING",
+                                "child_loops": [
+                                    {
+                                        "id": "Secondary CHW Loop 1",
+                                        "type": "COOLING"
+                                    }
+                                ]
                             },
                             {
                                 "id": "Condensing Loop 1",
@@ -108,7 +119,7 @@
         "Section": 22,
         "Rule": 30,
         "Test": "b",
-        "test_description": "Baseline building is system type 11 and is incorrectly modeled with the pump_power_per_flow_rate value",
+        "test_description": "Baseline building is system type 11 and is incorrectly modeled with the condenser pump value of 25 W/gpm",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-30",
@@ -143,18 +154,18 @@
                                                         "id": "VAV Air Terminal 1",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 11"
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 11"
                                                     }
                                                 ]
                                             }
                                         ],
-                                        "heating_ventilation_air_conditioning_systems": [
+                                        "heating_ventilating_air_conditioning_systems": [
                                             {
                                                 "id": "System 11",
                                                 "cooling_system": {
                                                     "id": "CHW Coil 1",
                                                     "cooling_system_type": "FLUID_LOOP",
-                                                    "chilled_water_loop": "Chiller Loop 1"
+                                                    "chilled_water_loop": "Secondary CHW Loop 1"
                                                 },
                                                 "heating_system": {
                                                     "id": "Heating Coil 1",
@@ -192,12 +203,23 @@
                                 "id": "Chiller Pump 1",
                                 "loop_or_piping": "Chiller Loop 1",
                                 "speed_control": "FIXED_SPEED"
+                            },
+                            {
+                                "id": "Secondary CHW Pump",
+                                "loop_or_piping": "Secondary CHW Loop 1",
+                                "speed_control": "VARIABLE_SPEED"
                             }
                         ],
                         "fluid_loops": [
                             {
                                 "id": "Chiller Loop 1",
-                                "type": "COOLING"
+                                "type": "COOLING",
+                                "child_loops": [
+                                    {
+                                        "id": "Secondary CHW Loop 1",
+                                        "type": "COOLING"
+                                    }
+                                ]
                             },
                             {
                                 "id": "Condensing Loop 1",

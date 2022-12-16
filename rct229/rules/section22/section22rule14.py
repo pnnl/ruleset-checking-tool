@@ -19,7 +19,7 @@ APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_11_1B,
     HVAC_SYS.SYS_12B,
 ]
-REQUIRED_TEMP_RANGE = ureg("10 degF")
+REQUIRED_TEMP_RANGE = 10 * ureg("degR")
 
 
 class Section22Rule14(RuleDefinitionListIndexedBase):
