@@ -7,14 +7,13 @@
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-31",
-            "ruleset_reference": "Table G3.1 #5 Proposed column a.4: Manual fenestration shading devices, such as blinds or shades, shall be modeled or not modeled the same as in the baseline building design. \nTable G3.1#5 baseline column (d) Manual window shading devices such as blinds or shades are not required to be modeled.",
+            "ruleset_reference": "Table G3.1(5) Proposed Building Performance a.4 \nTable G3.1(5) Baseline Building Performance (d)",
             "rule_description": "Manual fenestration shading devices, such as blinds or shades, shall be modeled or not modeled the same as in the baseline building design.",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Proposed RMR",
-            "rule_dependency": "None",
             "primary_rule": "Y",
-            "schema_version": "0.0.18"
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "proposed": {
@@ -101,14 +100,13 @@
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-31",
-            "ruleset_reference": "Table G3.1 #5 Proposed column a.4: Manual fenestration shading devices, such as blinds or shades, shall be modeled or not modeled the same as in the baseline building design. \nTable G3.1#5 baseline column (d) Manual window shading devices such as blinds or shades are not required to be modeled.",
+            "ruleset_reference": "Table G3.1(5) Proposed Building Performance a.4 \nTable G3.1(5) Baseline Building Performance (d)",
             "rule_description": "Manual fenestration shading devices, such as blinds or shades, shall be modeled or not modeled the same as in the baseline building design.",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Proposed RMR",
-            "rule_dependency": "None",
             "primary_rule": "Y",
-            "schema_version": "0.0.18"
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "proposed": {

@@ -1,6 +1,8 @@
 
 ## get_zone_conditioning_category
 
+**Schema Version:** 0.0.23
+
 Description: Determine the Zone Conditioning Category for each zone. This function would cycle through each zone in an RMR and categorize it as ‘conditioned’, 'semi-heated’, 'unenclosed' or ‘unconditioned’.  If ‘conditioned’ it will also categorize the space as ‘residential’ or ‘non-residential’.  
 
 Inputs:  
@@ -25,7 +27,7 @@ Logic:
 
   - Get total central sensible cooling capacity for HVAC system:
   **[CH: The hvac system has at most one cooling_system, one heating_system, and one preheat_system. Also, I think we need to handle any of these systems missing.]**
-   `total_central_sensible_cool_capacity = SUM(cooling_system.sensible_cool_capacity for cooling_system in GET_COMPONENT_BY_ID(hvac_sys_id).cooling_system)`
+   `total_central_sensible_cool_capacity = SUM(cooling_system.rated_sensible_cool_capacity for cooling_system in GET_COMPONENT_BY_ID(hvac_sys_id).cooling_system)`
 
   - Get total central heating capacity for HVAC system: `total_central_heat_capacity = SUM(heating_system.heat_capacity for heating_system in GET_COMPONENT_BY_ID(hvac_sys_id).heating_system) + SUM(preheat_system.heat_capacity for preheat_system in GET_COMPONENT_BY_ID(hvac_sys_id).preheat_system)`
 
@@ -42,8 +44,8 @@ Logic:
   - Get zone total floor area: `zone_area = SUM(space.floor_area for space in zone.spaces)`
 
   - For each terminal serving zone: `for terminal in zone.terminals:`
-
-    - Get HVAC system connected to terminal: `hvac_sys = terminal.served_by_heating_ventilation_air_conditioning_systems` (Note XC, will there be more than one HVAC system connecting to a terminal?)
+  
+    - Get HVAC system connected to terminal: `hvac_sys = terminal.served_by_heating_ventilating_air_conditioning_system` (Note XC, will there be more than one HVAC system connecting to a terminal?)
 
     - Add central cooling capacity per floor area to zone capacity dictionary: `zone_capacity_dict[zone.id]["SENSIBLE_COOLING"] += hvac_cool_capacity_dict[hvac_sys.id]`
 
