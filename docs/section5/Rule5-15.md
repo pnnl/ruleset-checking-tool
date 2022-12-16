@@ -51,6 +51,8 @@
           Case 1: If zone has both residential and non-residential spaces and the construction requirements for slab-on-grade floor are different, request manual review: `if manual_review_flag == TRUE: CAUTION and raise_warning "ZONE HAS BOTH RESIDENTIAL AND NON-RESIDENTIAL SPACES AND THE CONSTRUCTION REQUIREMENTS FOR SLAB-ON-GRADE FLOOR ARE DIFFERENT. VERIFY CONSTRUCTION IS MODELED CORRECTLY."`  
 
           Case 2: Else if slab-on-grade floor F-factor matches Table G3.4: `else if surface_construction_b.f_factor == target_f_factor: PASS`  
+          
+              - Conservative comparison less equal: ```if AHJ_RA_compare == True and surface_construction_b.f_factor <= target_f_factor: PASS```
 
           Case 3: Else: `else: FAIL and raise_warning: "BASELINE SLAB F-FACTOR IS NOT AS EXPECTED FOR SLABS THAT ARE LESS THAN 24" BELOW GRADE. VERIFY THAT THE SLAB IS MORE THAN 24" BELOW GRADE AND IS UNREGULATED."`  
 
