@@ -1,4 +1,4 @@
-# get_fuels_modeled_in_RMR
+# get_fuels_modeled_in_RMD
 
 **Schema Version:** 0.0.23
 **Description:** Get a list of the fuels used in the RMR.  Includes fuels used by HVAC systems including terminal units, chillers, boilers, ExternalFluidSources, and SWHs.
