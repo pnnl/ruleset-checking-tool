@@ -19,7 +19,7 @@ class Section15Rule3(RuleDefinitionListIndexedBase):
 
     def create_data(self, context, data):
         transformers_p = context.proposed
-        return {"transformer_ids_p": find_all("[*].id", transformers_p)}
+        return {"transformer_ids_p": find_all("$[*].id", transformers_p)}
 
     class TransformerRule(RuleDefinitionBase):
         def __init__(self):

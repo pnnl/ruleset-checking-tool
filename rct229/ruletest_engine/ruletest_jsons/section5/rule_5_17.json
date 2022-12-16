@@ -7,14 +7,13 @@
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-17",
-            "ruleset_reference": "Table G3.1 #1, Baseline column: The baseline building design shall be developed by modifying the proposed design as described in Section G3. Except as specifically instructed, all building systems and equipment shall be modeled identically in the proposed design and baseline building design.",
+            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b)",
             "rule_description": "Opaque surfaces that are not regulated (not part of opaque building envelope) must be modeled the same U/C/F-factor in the baseline as in the proposed design",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Proposed RMR",
-            "rule_dependency": "None",
             "primary_rule": "Y",
-            "schema_version": "0.0.18"
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "proposed": {
@@ -127,14 +126,13 @@
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-17",
-            "ruleset_reference": "Table G3.1 #1, Baseline column: The baseline building design shall be developed by modifying the proposed design as described in Section G3. Except as specifically instructed, all building systems and equipment shall be modeled identically in the proposed design and baseline building design.",
+            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b)",
             "rule_description": "Opaque surfaces that are not regulated (not part of opaque building envelope) must be modeled the same U/C/F-factor in the baseline as in the proposed design",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Proposed RMR",
-            "rule_dependency": "None",
             "primary_rule": "Y",
-            "schema_version": "0.0.18"
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "proposed": {
@@ -247,14 +245,13 @@
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-17",
-            "ruleset_reference": "Table G3.1 #1, Baseline column: The baseline building design shall be developed by modifying the proposed design as described in Section G3. Except as specifically instructed, all building systems and equipment shall be modeled identically in the proposed design and baseline building design.",
+            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b)",
             "rule_description": "Opaque surfaces that are not regulated (not part of opaque building envelope) must be modeled the same U/C/F-factor in the baseline as in the proposed design",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Proposed RMR",
-            "rule_dependency": "None",
             "primary_rule": "Y",
-            "schema_version": "0.0.18"
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "proposed": {
@@ -301,7 +298,7 @@
                                                 ]
                                             }
                                         ],
-                                        "heating_ventilation_air_conditioning_systems": [
+                                        "heating_ventilating_air_conditioning_systems": [
                                             {
                                                 "id": "HVAC 1",
                                                 "cooling_system": {
@@ -365,7 +362,7 @@
                                                 ]
                                             }
                                         ],
-                                        "heating_ventilation_air_conditioning_systems": [
+                                        "heating_ventilating_air_conditioning_systems": [
                                             {
                                                 "id": "HVAC 1",
                                                 "cooling_system": {
@@ -395,14 +392,13 @@
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-17",
-            "ruleset_reference": "Table G3.1 #1, Baseline column: The baseline building design shall be developed by modifying the proposed design as described in Section G3. Except as specifically instructed, all building systems and equipment shall be modeled identically in the proposed design and baseline building design.",
+            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b)",
             "rule_description": "Opaque surfaces that are not regulated (not part of opaque building envelope) must be modeled the same U/C/F-factor in the baseline as in the proposed design",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Proposed RMR",
-            "rule_dependency": "None",
             "primary_rule": "Y",
-            "schema_version": "0.0.18"
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "proposed": {
@@ -449,7 +445,7 @@
                                                 ]
                                             }
                                         ],
-                                        "heating_ventilation_air_conditioning_systems": [
+                                        "heating_ventilating_air_conditioning_systems": [
                                             {
                                                 "id": "HVAC 1",
                                                 "cooling_system": {
@@ -513,7 +509,7 @@
                                                 ]
                                             }
                                         ],
-                                        "heating_ventilation_air_conditioning_systems": [
+                                        "heating_ventilating_air_conditioning_systems": [
                                             {
                                                 "id": "HVAC 1",
                                                 "cooling_system": {
@@ -543,14 +539,13 @@
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-17",
-            "ruleset_reference": "Table G3.1 #1, Baseline column: The baseline building design shall be developed by modifying the proposed design as described in Section G3. Except as specifically instructed, all building systems and equipment shall be modeled identically in the proposed design and baseline building design.",
+            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b)",
             "rule_description": "Opaque surfaces that are not regulated (not part of opaque building envelope) must be modeled the same U/C/F-factor in the baseline as in the proposed design",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Proposed RMR",
-            "rule_dependency": "None",
             "primary_rule": "Y",
-            "schema_version": "0.0.18"
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "proposed": {
@@ -663,14 +658,13 @@
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-17",
-            "ruleset_reference": "Table G3.1 #1, Baseline column: The baseline building design shall be developed by modifying the proposed design as described in Section G3. Except as specifically instructed, all building systems and equipment shall be modeled identically in the proposed design and baseline building design.",
+            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b)",
             "rule_description": "Opaque surfaces that are not regulated (not part of opaque building envelope) must be modeled the same U/C/F-factor in the baseline as in the proposed design",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Proposed RMR",
-            "rule_dependency": "None",
             "primary_rule": "Y",
-            "schema_version": "0.0.18"
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "proposed": {
@@ -783,14 +777,13 @@
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-17",
-            "ruleset_reference": "Table G3.1 #1, Baseline column: The baseline building design shall be developed by modifying the proposed design as described in Section G3. Except as specifically instructed, all building systems and equipment shall be modeled identically in the proposed design and baseline building design.",
+            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b)",
             "rule_description": "Opaque surfaces that are not regulated (not part of opaque building envelope) must be modeled the same U/C/F-factor in the baseline as in the proposed design",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Proposed RMR",
-            "rule_dependency": "None",
             "primary_rule": "Y",
-            "schema_version": "0.0.18"
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "proposed": {
@@ -837,7 +830,7 @@
                                                 ]
                                             }
                                         ],
-                                        "heating_ventilation_air_conditioning_systems": [
+                                        "heating_ventilating_air_conditioning_systems": [
                                             {
                                                 "id": "HVAC 1",
                                                 "cooling_system": {
@@ -901,7 +894,7 @@
                                                 ]
                                             }
                                         ],
-                                        "heating_ventilation_air_conditioning_systems": [
+                                        "heating_ventilating_air_conditioning_systems": [
                                             {
                                                 "id": "HVAC 1",
                                                 "cooling_system": {
@@ -931,14 +924,13 @@
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-17",
-            "ruleset_reference": "Table G3.1 #1, Baseline column: The baseline building design shall be developed by modifying the proposed design as described in Section G3. Except as specifically instructed, all building systems and equipment shall be modeled identically in the proposed design and baseline building design.",
+            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b)",
             "rule_description": "Opaque surfaces that are not regulated (not part of opaque building envelope) must be modeled the same U/C/F-factor in the baseline as in the proposed design",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Proposed RMR",
-            "rule_dependency": "None",
             "primary_rule": "Y",
-            "schema_version": "0.0.18"
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "proposed": {
@@ -985,7 +977,7 @@
                                                 ]
                                             }
                                         ],
-                                        "heating_ventilation_air_conditioning_systems": [
+                                        "heating_ventilating_air_conditioning_systems": [
                                             {
                                                 "id": "HVAC 1",
                                                 "cooling_system": {
@@ -1049,7 +1041,7 @@
                                                 ]
                                             }
                                         ],
-                                        "heating_ventilation_air_conditioning_systems": [
+                                        "heating_ventilating_air_conditioning_systems": [
                                             {
                                                 "id": "HVAC 1",
                                                 "cooling_system": {
@@ -1079,14 +1071,13 @@
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-17",
-            "ruleset_reference": "Table G3.1 #1, Baseline column: The baseline building design shall be developed by modifying the proposed design as described in Section G3. Except as specifically instructed, all building systems and equipment shall be modeled identically in the proposed design and baseline building design.",
+            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b)",
             "rule_description": "Opaque surfaces that are not regulated (not part of opaque building envelope) must be modeled the same U/C/F-factor in the baseline as in the proposed design",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Proposed RMR",
-            "rule_dependency": "None",
             "primary_rule": "Y",
-            "schema_version": "0.0.18"
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "proposed": {
@@ -1199,14 +1190,13 @@
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-17",
-            "ruleset_reference": "Table G3.1 #1, Baseline column: The baseline building design shall be developed by modifying the proposed design as described in Section G3. Except as specifically instructed, all building systems and equipment shall be modeled identically in the proposed design and baseline building design.",
+            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b)",
             "rule_description": "Opaque surfaces that are not regulated (not part of opaque building envelope) must be modeled the same U/C/F-factor in the baseline as in the proposed design",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Proposed RMR",
-            "rule_dependency": "None",
             "primary_rule": "Y",
-            "schema_version": "0.0.18"
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "proposed": {
@@ -1319,14 +1309,13 @@
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-17",
-            "ruleset_reference": "Table G3.1 #1, Baseline column: The baseline building design shall be developed by modifying the proposed design as described in Section G3. Except as specifically instructed, all building systems and equipment shall be modeled identically in the proposed design and baseline building design.",
+            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b)",
             "rule_description": "Opaque surfaces that are not regulated (not part of opaque building envelope) must be modeled the same U/C/F-factor in the baseline as in the proposed design",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Proposed RMR",
-            "rule_dependency": "None",
             "primary_rule": "Y",
-            "schema_version": "0.0.18"
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "proposed": {
@@ -1441,14 +1430,13 @@
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-17",
-            "ruleset_reference": "Table G3.1 #1, Baseline column: The baseline building design shall be developed by modifying the proposed design as described in Section G3. Except as specifically instructed, all building systems and equipment shall be modeled identically in the proposed design and baseline building design.",
+            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b)",
             "rule_description": "Opaque surfaces that are not regulated (not part of opaque building envelope) must be modeled the same U/C/F-factor in the baseline as in the proposed design",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Proposed RMR",
-            "rule_dependency": "None",
             "primary_rule": "Y",
-            "schema_version": "0.0.18"
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "proposed": {

@@ -134,7 +134,7 @@ class Section21Rule5(RuleDefinitionListIndexedBase):
             num_boilers = len(find_all(".boilers[*]", rmi_b))
             boiler_capacity_list = [
                 CalcQ("capacity", getattr_(boiler, "boiler", "rated_capacity"))
-                for boiler in find_all(".boilers[*]", rmi_b)
+                for boiler in find_all("$.boilers[*]", rmi_b)
             ]
 
             return {
@@ -149,15 +149,12 @@ class Section21Rule5(RuleDefinitionListIndexedBase):
             ]
             num_boilers = calc_vals["num_boilers"]
             boiler_capacity_list = calc_vals["boiler_capacity_list"]
-            return {
-                (
-                    heating_loop_conditioned_zone_area
-                    <= HEATING_LOOP_CONDITIONED_AREA_THRESHOLD
-                    and num_boilers == 1
-                )
-                or (
-                    num_boilers == 2
-                    and len(boiler_capacity_list) == 2
-                    and boiler_capacity_list[0] == boiler_capacity_list[1]
-                )
-            }
+            return (
+                heating_loop_conditioned_zone_area
+                <= HEATING_LOOP_CONDITIONED_AREA_THRESHOLD
+                and num_boilers == 1
+            ) or (
+                num_boilers == 2
+                and len(boiler_capacity_list) == 2
+                and boiler_capacity_list[0] == boiler_capacity_list[1]
+            )

@@ -20,7 +20,7 @@
                                             "id": "VAV Air Terminal 1",
                                             "is_supply_ducted": true,
                                             "type": "VARIABLE_AIR_VOLUME",
-                                            "served_by_heating_ventilation_air_conditioning_system": "System 6",
+                                            "served_by_heating_ventilating_air_conditioning_system": "System 6",
                                             "heating_source": "ELECTRIC"
                                         }
                                     ]
@@ -34,13 +34,13 @@
                                             "id": "VAV Air Terminal 2",
                                             "is_supply_ducted": true,
                                             "type": "VARIABLE_AIR_VOLUME",
-                                            "served_by_heating_ventilation_air_conditioning_system": "System 6",
+                                            "served_by_heating_ventilating_air_conditioning_system": "System 6",
                                             "heating_source": "ELECTRIC"
                                         }
                                     ]
                                 }
                             ],
-                            "heating_ventilation_air_conditioning_systems": [
+                            "heating_ventilating_air_conditioning_systems": [
                                 {
                                     "id": "System 6",
                                     "cooling_system": {
