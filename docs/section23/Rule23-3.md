@@ -40,7 +40,7 @@
 
   - For each terminal in zone: `for terminal_b in zone_b.terminals:`
 
-    - Get HVAC system serving terminal: `hvac_b = terminal_b.served_by_heating_ventilation_air_conditioning_systems`
+    - Get HVAC system serving terminal: `hvac_b = terminal_b.served_by_heating_ventilating_air_conditioning_systems`
   
       - Check if HVAC system is one of the eligible systems: `if hvac_b.id in eligible_hvac_system_ids:`
 
