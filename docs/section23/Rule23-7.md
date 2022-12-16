@@ -37,7 +37,7 @@
 
 - For each building segment in baseline ruleset model instance: `for building_segment_b in ASHRAE229.ruleset_model_instance[baseline]...building_segments:`
 
-  - For each HVAC system in building segment: `for hvac_b in building_segment_b.heating_ventilation_air_conditioning_systems:`
+  - For each HVAC system in building segment: `for hvac_b in building_segment_b.heating_ventilating_air_conditioning_systems:`
   
     - Check if HVAC system is one of the eligible systems: `if hvac_b.id in eligible_hvac_system_ids:`
 

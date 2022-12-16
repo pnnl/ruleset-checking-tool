@@ -1,7 +1,7 @@
 
 # CHW&CW - Rule 23-2  
 
-**Schema Version:** 0.0.12  
+**Schema Version:** 0.0.23  
 **Mandatory Rule:** True  
 **Rule ID:** 23-2  
 **Rule Description:** For baseline systems 5-8 and 11, the SAT is reset higher by 5F under minimum cooling load conditions.  
@@ -31,11 +31,11 @@
 
 - For each building segment in B_RMR: `for building_segment_b in B_RMR...building_segments:`
 
-  - For each HVAC system in building segment: `for hvac_b in building_segment_b.heating_ventilation_air_conditioning_systems:`
+  - For each HVAC system in building segment: `for hvac_b in building_segment_b.heating_ventilating_air_conditioning_systems:`
 
-    - Check if HVAC system is type 5, 6, 7, 8, 11.1, 11.2, 7a, 8a, 11.1a, 11.2a, 5b, 6b, 7b, 8b, 11b, 7c, 11c: `if any(is_baseline_system_type(hvac_b, sys_type) == TRUE for sys_type in ["SYS-5", "SYS-6", "SYS-7", "SYS-8", "SYS-11.1", "SYS-11.2", "SYS-7A", "SYS-8A", "SYS-11.1A", "SYS-11.2A", "SYS-5B", "SYS-6B", "SYS-7B", "SYS-8B", "SYS-11B", "SYS-7C", "SYS-11C"]):`
-
-      - For each fan system in HVAC system: `for fan_system_b in hvac_b.fan_systems:`
+    - Get HVAC system serving terminal: `hvac_b = terminal_b.served_by_heating_ventilating_air_conditioning_system`
+  
+      - Check if HVAC system is type 5, 7, 7a, 5b, 7b, 7c, 6, 8, 8a, 6b, 8b: `if any(is_baseline_system_type(hvac_b, sys_type) == TRUE for sys_type in ["SYS-5", "SYS-7", "SYS-7A", "SYS-5B", "SYS-7B", "SYS-7C", "SYS-6", "SYS-8", "SYS-8A", "SYS-6B", "SYS-8B"]):`
 
         **Rule Assertion:**
 

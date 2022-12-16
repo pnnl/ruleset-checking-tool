@@ -29,7 +29,7 @@ GET_HW_LOOP_ZONE_LIST_W_AREA_RMD = {
                                             "heating_from_loop": "Boiler Loop 1",
                                             "heating_source": "HOT_WATER",
                                             "type": "VARIABLE_AIR_VOLUME",
-                                            "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                            "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                         }
                                     ],
                                     "spaces": [{"id": "Space 1", "floor_area": 10}],
@@ -42,8 +42,8 @@ GET_HW_LOOP_ZONE_LIST_W_AREA_RMD = {
                                         {
                                             "id": "VAV Air Terminal 2",
                                             "is_supply_ducted": True,
-                                            "type": "CONSTANT_VOLUME",
-                                            "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                            "type": "CONSTANT_AIR_VOLUME",
+                                            "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                         }
                                     ],
                                     "spaces": [
@@ -61,7 +61,7 @@ GET_HW_LOOP_ZONE_LIST_W_AREA_RMD = {
                                         {
                                             "id": "VAV Air Terminal 3",
                                             "is_supply_ducted": True,
-                                            "served_by_heating_ventilation_air_conditioning_system": "PTAC 1",
+                                            "served_by_heating_ventilating_air_conditioning_system": "PTAC 1",
                                         }
                                     ],
                                     "spaces": [
@@ -72,7 +72,7 @@ GET_HW_LOOP_ZONE_LIST_W_AREA_RMD = {
                                     ],
                                 },
                             ],
-                            "heating_ventilation_air_conditioning_systems": [
+                            "heating_ventilating_air_conditioning_systems": [
                                 {
                                     "id": "System 7",
                                     "preheat_system": {
@@ -136,6 +136,13 @@ GET_HW_LOOP_ZONE_LIST_W_AREA_RMD = {
 }
 
 TEST_RMI = quantify_rmr(GET_HW_LOOP_ZONE_LIST_W_AREA_RMD)["ruleset_model_instances"][0]
+
+
+def test__TEST_RMD__is_valid():
+    schema_validation_result = schema_validate_rmr(GET_HW_LOOP_ZONE_LIST_W_AREA_RMD)
+    assert schema_validation_result[
+        "passed"
+    ], f"Schema error: {schema_validation_result['error']}"
 
 
 def test__get_hw_loop_zone_list_w_area__true():
