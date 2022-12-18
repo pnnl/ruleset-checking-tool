@@ -1,7 +1,7 @@
 
 # Envelope - Rule 5-14  
 
-**Schema Version:** 0.0.23
+**Schema Version:** 0.0.23  
 **Rule ID:** 5-14  
 **Rule Description:**  Baseline slab-on-grade assemblies must conform with assemblies detailed in Appendix A ( Slab-on-grade floors shall match the F-factor for unheated slabs from the same tables (A6).).  
 **Appendix G Section:** Section G3.1-5(b) Building Envelope Modeling Requirements for the Baseline building  
