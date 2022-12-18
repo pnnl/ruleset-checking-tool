@@ -1,7 +1,7 @@
 
 # Envelope - Rule 5-23  
 
-**Schema Version:** 0.0.23
+**Schema Version:** 0.0.23  
 **Rule ID:** 5-23  
 **Rule Description:** Subsurface area in the proposed design must be as-designed.  
 **Rule Assertion:** P-RMR subsurface on each surface (subsurface.glazed_area+subsurface.opaque_area) = U-RMR (subsurface.glazed_area+subsurface.opaque_area)  
