@@ -54,7 +54,7 @@ def is_baseline_system_6(rmi_b, hvac_b_id, terminal_unit_id_list, zone_id_list):
     Parameters
     ----------
     rmi_b json
-         To evaluate if the hvac system is modeled as either Sys-11.1, Sys-11.1a, Sys-11b, Sys-11c, or Not_Sys_11.1 in the B_RMI.
+         To evaluate if the hvac system is modeled as either Sys-6, Sys-6b, or Not_Sys_6 in the B_RMI.
      hvac_b_id list
          The id of the hvac system to evaluate.
      terminal_unit_id_list
