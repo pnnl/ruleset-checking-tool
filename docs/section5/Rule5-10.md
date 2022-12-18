@@ -1,7 +1,7 @@
 
 # Envelope - Rule 5-10  
 
-**Schema Version:** 0.0.23
+**Schema Version:** 0.0.23  
 **Rule ID:** 5-10  
 **Rule Description:** Baseline above-grade wall assemblies must conform with assemblies detailed in  Appendix A (Steel-framed A3.3).  
 **Appendix G Section:** Section G3.1-5(b) Building Envelope Modeling Requirements for the Baseline building  
