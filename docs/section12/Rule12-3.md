@@ -1,7 +1,7 @@
 
 # Receptacle - Rule 12-3
 
-**Schema Version:** 0.0.23
+**Schema Version:** 0.0.23  
 **Rule ID:** 12-3  
 **Rule Description:** User RMR Space ID in Proposed RMR?  
 **Rule Assertion:** Proposed RMR = User RMR  
