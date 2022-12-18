@@ -1,7 +1,7 @@
 
 # Envelope - Rule 5-16  
 
-**Schema Version:** 0.0.23
+**Schema Version:** 0.0.23  
 **Rule ID:** 5-16  
 **Rule Description:** Slab-on-grade F-factor in the proposed design must be modeled as-designed  
 **Appendix G Section:** Section G3.1-5(a) Building Envelope Modeling Requirements for the Proposed building  
