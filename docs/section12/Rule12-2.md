@@ -1,7 +1,7 @@
 
 # Receptacle - Rule 12-2
 
-**Schema Version:** 0.0.23
+**Schema Version:** 0.0.23  
 **Rule ID:** 12-2  
 **Rule Description:** Number of spaces modeled in User RMR and Proposed RMR are the same  
 **Rule Assertion:** Proposed RMR = User RMR  
