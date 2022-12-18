@@ -3,7 +3,7 @@
 **Description:** Get either Sys-1, Sys-1a, Sys-1b, Sys-1c, or Not_Sys_1 string output which indicates whether the HVAC system is ASHRAE 90.1 2019 Appendix G system 1 (PTAC), system 1a (system 1 with purchased CHW), system 1b (system 1 with purchased heating), system 1c (system 1 with purchased CHW and purchased HW).  
 
 **Inputs:**  
-- **B-RMR**: To evaluate if the hvac system is modeled as either Sys-1, Sys-1a, Sys-1b, Sys-1c, or Not_Sys_1 in the B_RMR.   
+- **B-RMR**: To evaluate if the hvac system is modeled as either Sys-1, Sys-1a, Sys-1b, Sys-1c, or Not_Sys_1 in the B_RMD.   
 - **hvac_b.id**: The id of the hvac system to evaluate.  
 - **terminal_unit_id_list**: list of terminal unit IDs associated with the HVAC system to be evaluated. These are sent to this function from the mater get_baseline_system_types function.
 - **zone_id_list**: list of zone IDs associated with the HVAC system to be evaluated. These are sent to this function from the mater get_baseline_system_types function.
@@ -30,7 +30,7 @@
  
 ## Logic:    
 - Create an object associated with the hvac system: `hvac_b = hvac_b.id`  
-- Set is_baseline_system_1 = Not_Sys_1: `is_baseline_system_1 = "Not_Sys_1"`    
+- Set is_baseline_system_1 = Not_Sys_1: `is_baseline_system_1 = "UNMATCHED"`    
 - Check that there is no preheat system, if there is none then carry on: `if len(hvac_b.preheat_system) == Null or hvac_b.preheat_system[0].heating_system_type == "NONE" :`    
     - Check if the system is system 1c, else carry on with logic: `if is_baseline_system_1c(B_RMR, hvac_b.id,terminal_unit_id_list,zone_id_list) == TRUE: is_baseline_system_1 = "SYS-1c"`   
     - Else, carry on: `Else:`     
