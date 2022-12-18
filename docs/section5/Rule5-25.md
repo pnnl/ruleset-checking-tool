@@ -1,7 +1,7 @@
 
 # Envelope - Rule 5-25  
-
-**Schema Version:** 0.0.23
+  
+**Schema Version:** 0.0.23  
 **Rule ID:** 5-25  
 **Rule Description:** Fenestration (window and skylight) U-factors in the proposed model must match the user model.  
 **Rule Assertion:** P-RMR subsurface:U_factor = U-RMR subsurface:U_factor  
