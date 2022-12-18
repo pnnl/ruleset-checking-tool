@@ -18,7 +18,7 @@
 4. is_hvac_sys_fluid_loop_attached_to_chiller()
 5. is_hvac_sys_fan_sys_CV()  
 6. are_all_terminal_heat_sources_none_or_null()  
-7. are_all_terminal_cool_sources_none_or_null() 
+7. are_all_terminal_cool_sources_none_or_null()
 8. are_all_terminal_fans_null()  
 9. are_all_terminal_types_CAV()  
 10. does_each_zone_have_only_one_terminal()    
@@ -27,7 +27,7 @@
 ## Logic:    
 - Create an object associated with the hvac system: `hvac_b = hvac_b.id`  
 - Set is_baseline_system_13 = Not_Sys_13: `is_baseline_system_13 = "Not_Sys_13"`    
-- Check that there is no preheat system, if there is none then carry on: `if len(hvac_b.preheat_system) == Null or hvac_b.preheat_system[0].heating_system_type = "NONE" :`    
+- Check that there is no preheat system, if there is none then carry on: `if hvac_b.preheat_system == "NONE" or hvac_b.preheat_system[0].heating_system_type = "NONE" :`    
     - Check if heatingsystem is a electric resistance, if it is then carry on: `if is_hvac_sys_heating_type_elec_resistance(B_RMI, hvac_b.id) == TRUE:`     
         - Check if coolingsystem is a fluid_loop, if it is then carry on: `if is_hvac_sys_cooling_type_fluid_loop(B_RMI, hvac_b.id) == TRUE:`  
             - Check if fansystem is constant volume, if yes then carry on: `if is_hvac_sys_fan_sys_CV(B_RMI, hvac_b.id) == TRUE:`  
