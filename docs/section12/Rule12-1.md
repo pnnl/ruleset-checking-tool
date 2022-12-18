@@ -1,6 +1,6 @@
 
 # Receptacle - Rule 12-1
-**Schema Version:** 0.0.23
+**Schema Version:** 0.0.23  
 **Rule ID:** 12-1  
 **Rule Description:** Number of spaces modeled in User RMR and Baseline RMR are the same  
 **Rule Assertion:** Baseline RMR = User RMR  
