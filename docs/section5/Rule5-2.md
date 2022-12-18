@@ -1,7 +1,7 @@
 
 # Envelope - Rule 5-2  
 
-**Schema Version:** 0.0.23
+**Schema Version:** 0.0.23  
 **Rule ID:** 5-2  
 **Rule Description:** Orientation is the same in user model and proposed model.  
 **Appendix G Section:** Section G3.1-5(a) Building Envelope Modeling Requirements for the Proposed building  
