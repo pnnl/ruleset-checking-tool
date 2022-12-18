@@ -21,7 +21,7 @@
 
 - For each building segment in the Proposed model: `for building_segment_p in P_RMR.building.building_segments:`
 
-  - For each zone in thermal block: `for zone_p in thermal_block_p.zones:`  
+  - For each zone in thermal block: `for zone_p in building_segment_p.zones:`  
 
     - For each surface in zone: `for surface_p in zone_p.surfaces:`  
 
