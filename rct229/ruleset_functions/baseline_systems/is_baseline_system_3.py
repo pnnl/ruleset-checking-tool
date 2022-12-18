@@ -54,7 +54,7 @@ def is_baseline_system_3(rmi_b, hvac_b_id, terminal_unit_id_list, zone_id_list):
     Parameters
     ----------
     rmi_b json
-        To evaluate if the hvac system is modeled as either Sys-11.1, Sys-11.1a, Sys-11b, Sys-11c, or Not_Sys_11.1 in the B_RMI.
+        To evaluate if the hvac system is modeled as either Sys-3, Sys-3a, Sys-3b, Sys-3c, or Not_Sys_3 in the B_RMI.
 
     hvac_b_id list
         The id of the hvac system to evaluate.
@@ -97,7 +97,9 @@ def is_baseline_system_3(rmi_b, hvac_b_id, terminal_unit_id_list, zone_id_list):
         if is_hvac_sys_cooling_type_dx(rmi_b, hvac_b_id):
             if is_hvac_sys_heating_type_furnace(rmi_b, hvac_b_id):
                 is_baseline_system_3 = HVAC_SYS.SYS_3
-            elif is_hvac_sys_heating_type_fluid_loop(rmi_b, hvac_b_id):
+            elif is_hvac_sys_heating_type_fluid_loop(
+                rmi_b, hvac_b_id
+            ) and is_hvac_sys_fluid_loop_purchased_heating(rmi_b, hvac_b_id):
                 is_baseline_system_3 = HVAC_SYS.SYS_3B
         elif is_hvac_sys_cooling_type_fluid_loop(
             rmi_b, hvac_b_id

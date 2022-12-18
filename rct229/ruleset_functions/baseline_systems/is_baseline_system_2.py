@@ -44,7 +44,7 @@ def is_baseline_system_2(rmi_b, hvac_b_id, terminal_unit_id_list, zone_id_list):
     Parameters
     ----------
     rmi_b json
-        To evaluate if the hvac system is modeled as either Sys-11.1, Sys-11.1a, Sys-11b, Sys-11c, or Not_Sys_11.1 in the B_RMI.
+        To evaluate if the hvac system is modeled as Sys-2 in the B_RMI.
 
     hvac_b_id list
         The id of the hvac system to evaluate.
@@ -85,7 +85,4 @@ def is_baseline_system_2(rmi_b, hvac_b_id, terminal_unit_id_list, zone_id_list):
         and are_all_terminal_types_cav(rmi_b, terminal_unit_id_list)
     )
 
-    if are_sys_data_matched:
-        is_baseline_system_2 = HVAC_SYS.SYS_2
-
-    return is_baseline_system_2
+    return HVAC_SYS.SYS_2 if are_sys_data_matched else HVAC_SYS.UNMATCHED
