@@ -72,19 +72,21 @@ def is_baseline_system_6(rmi_b, hvac_b_id, terminal_unit_id_list, zone_id_list):
     # Get the hvac system
     hvac_b = find_exactly_one_hvac_system(rmi_b, hvac_b_id)
 
-    # check if the hvac system has the required sub systems for system type 11.1
+    # check if the hvac system has the required sub systems for system type 6
+    heating_system = hvac_b.get("heating_system")
     has_required_heating_sys = (
-        hvac_b.get("heating_system") is None
-        or hvac_b["heating_system"].get("heating_system_type") is None
-        or hvac_b["heating_system"]["heating_system_type"] == HEATING_SYSTEM.NONE
+        heating_system is None
+        or heating_system.get("heating_system_type") is None
+        or heating_system["heating_system_type"] == HEATING_SYSTEM.NONE
     )
 
     has_required_preheat_sys = hvac_b.get("preheat_system") is not None
 
+    cooling_system = hvac_b.get("cooling_system")
     has_required_cooling_sys = (
-        hvac_b.get("cooling_system") is not None
-        or hvac_b["cooling_system"].get("cooling_system_type") is not None
-        or hvac_b["cooling_system"]["cooling_system_type"] != COOLING_SYSTEM.NONE
+            cooling_system is not None
+            or cooling_system.get("cooling_system_type") is not None
+            or cooling_system["cooling_system_type"] != COOLING_SYSTEM.NONE
     )
 
     are_sys_data_matched = (
