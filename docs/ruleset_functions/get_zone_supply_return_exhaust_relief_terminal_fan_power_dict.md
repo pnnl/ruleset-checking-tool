@@ -24,6 +24,8 @@
     - Reset the zone total relief fan power variable: `zone_total_relief_fan_power = 0`
     - Reset the zone total terminal fan power variable: `zone_total_terminal_fan_power = 0`  
 
+
+    - Add zonal exhaust fan power to zone_total_exhaust_fan_power: `zone_total_exhaust_fan_power = get_fan_object_electric_power(P_RMI,zone.zonal_exhaust_fan)`  
     - Get a list of HVAC systems serving the zone: `hvac_sys_list_serving_zone_x =  get_list_hvac_systems_associated_with_zone(RMI,zone.id)`  
     - For each hvac system serving the zone: `for hvac in hvac_sys_list_serving_zone_x:`  
         - Reset total_terminal_air_flow variable to 0 (total across all zones served): `total_terminal_air_flow = 0`  
