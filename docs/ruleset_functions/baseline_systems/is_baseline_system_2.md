@@ -27,7 +27,7 @@
 ## Logic:    
 - Set is_baseline_system_2 = Not_Sys_2: `is_baseline_system_2 = "Not_Sys_2"`  
 - Create an object associated with the hvac system: `hvac_b = hvac_b.id`  
-- Check that there is no preheat system, if there is none then carry on: `if hvac_b.preheat_system == "NONE" or hvac_b.preheat_system[0].heating_system_type == "NONE" :`    
+- Check that there is no preheat system, if there is none then carry on: `if hvac_b.preheat_system == "NONE" or hvac_b.preheat_system.heating_system_type == "NONE" :`    
     - Check if heatingsystem is a heat pump, if it is then carry on: `if is_hvac_sys_heating_type_heat_pump(B_RMI, hvac_b.id) == TRUE:`     
         - Check if the coolingsystem is DX, if it is then carry on: `if is_hvac_sys_cooling_type_DX(B_RMI, hvac_b.id) == TRUE:`      
             - Check if fansystem is constant volume, if yes then carry on: `if is_hvac_sys_fan_sys_CV(B_RMI, hvac_b.id) == TRUE:`  
