@@ -1,6 +1,7 @@
 
 # Envelope - Rule 5-30  
 
+**Schema Version:** 0.0.23  
 **Rule ID:** 5-30  
 **Rule Description:** Proposed fenestration has the same shading projections as the user model.  
 **Rule Assertion:** P-RMR subsurface:has_shading_overhang = U-RMR subsurface:has_shading_overhang; P-RMR subsurface:has_shading_sidefins = U-RMR subsurface:has_shading_sidefins  
@@ -22,22 +23,20 @@
 
 - For each building segment in the Proposed model: `for building_segment_p in P_RMR.building.building_segments:`
 
-  - For each thermal block in building segment: `for thermal_block_p in building_segment_p.thermal_blocks:`
+  - For each zone in building segment: `for zone_p in building_segment_p.zones:`
 
-    - For each zone in thermal block: `for zone_p in thermal_block_p.zones:`
+    - For each surface in zone: `for surface_p in zone_p.surfaces:`
 
-      - For each surface in zone: `for surface_p in zone_p.surfaces:`
+      - Check if surface is above-grade wall or roof: `if get_opaque_surface_type(surface_p) in ["ABOVE-GRADE WALL", "ROOF"]:`
 
-        - Check if surface is above-grade wall or roof: `if get_opaque_surface_type(surface_p) in ["ABOVE-GRADE WALL", "ROOF"]:`
+        - For each subsurface in surface: `for subsurface_p in surface_p:`
 
-          - For each subsurface in surface: `for subsurface_p in surface_p:`
+          - Get matching subsurface in U_RMR: `subsurface_u = match_data_element(U_RMR, Subsurfaces, surface_p.id)`
 
-            - Get matching subsurface in U_RMR: `subsurface_u = match_data_element(U_RMR, Subsurfaces, surface_p.id)`
+            **Rule Assertion:**
 
-              **Rule Assertion:**
+            - Case 1: For each subsurface, if subsurface shading projections in P_RMR are the same as in U_RMR: `if ( subsurface_p.has_shading_overhang == subsurface_u.has_shading_overhang ) AND ( subsurface_p.has_shading_sidefins == subsurface_u.has_shading_sidefins ): PASS`
 
-              - Case 1: For each subsurface, if subsurface shading projections in P_RMR are the same as in U_RMR: `if ( subsurface_p.has_shading_overhang == subsurface_u.has_shading_overhang ) AND ( subsurface_p.has_shading_sidefins == subsurface_u.has_shading_sidefins ): PASS`
-
-              - Case 2: Else: `else: FAIL and raise_warning "FENESTRATION IN THE PROPOSED DESIGN DOES NOT HAVE THE SAME SHADING PROJECTIONS AS IN THE USER MODEL."`
+            - Case 2: Else: `else: FAIL and raise_warning "FENESTRATION IN THE PROPOSED DESIGN DOES NOT HAVE THE SAME SHADING PROJECTIONS AS IN THE USER MODEL."`
 
 **[Back](../_toc.md)**
