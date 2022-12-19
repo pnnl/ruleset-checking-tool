@@ -22,7 +22,7 @@
 ## Logic:    
 - Create an object associated with the hvac system: `hvac_b = hvac_b.id`  
 - Set is_baseline_system_9b = FALSE: `is_baseline_system_9b == FALSE`    
-- Check that there is no preheat system, if there is none then carry on: `if hvac_b.preheat_system == "NONE" or hvac_b.preheat_system[0].heating_system_type == "NONE" :`    
+- Check that there is no preheat system, if there is none then carry on: `if hvac_b.preheat_system == "NONE" or hvac_b.preheat_system.heating_system_type == "NONE" :`    
     - Check that there is no heating system, if there is none then carry on: `if hvac_b.heating_system == "NONE" or hvac_b.heating_system[0].heating_system_type == "NONE":`     
         - Check that there is no cooling system if there is none then carry on: `is_hvac_sys_cooling_type_none(B_RMI, hvac_b.id) == TRUE`  
         - Check that there is no fan system, if there is none then carry on: `if len(hvac_b.fan_system) == Null:`     
