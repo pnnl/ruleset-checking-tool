@@ -1,12 +1,12 @@
 # get_zone_supply_return_exhaust_relief_terminal_fan_power_dict
 
-**Description:** Get the supply, return, exhaust, relief, and terminal total fan power for each zone. The function returns a dictionary that saves each zone's supply, return, exhaust, relief  and terminal unit fan power as a list {zone.id: {"Fan_Power": [supply fan power kW, return fan power kW, exhaust fan power kW, relief fan power kW, terminal fan power]}}. Values will be equal to zero where not defined for a fan system.
+**Description:** Get the supply, return, exhaust, relief, and terminal total fan power for each zone. The function returns a dictionary that saves each zone's supply, return, exhaust, relief  and terminal unit fan power as a list {zone.id: [supply fan power kW, return fan power kW, exhaust fan power kW, relief fan power kW, terminal fan power]}. Values will be equal to zero where not defined for a fan system.
 
 **Inputs:**  
 - **B-RMI,P-RMI**: To calculate the supply, return, exhaust, relief, and terminal unit total fan power for each zone in the ruleset model instance.   
 
 **Returns:**  
-- **get_zone_supply_return_exhaust_relief_terminal_fan_power_dict**: The function returns a dictionary that saves each zone's supply, return, exhaust, relief and terminal fan power as a list {zone.id: {"Fan_Power": [supply fan power kW, return fan power kW, exhaust fan power kW, relief fan power kW, terminal fan power]}}. Values will be equal to zero where not defined for a fan system.
+- **get_zone_supply_return_exhaust_relief_terminal_fan_power_dict**: The function returns a dictionary that saves each zone's supply, return, exhaust, relief and terminal fan power as a list {zone.id: [supply fan power kW, return fan power kW, exhaust fan power kW, relief fan power kW, terminal fan power]}. Values will be equal to zero where not defined for a fan system.
  
 **Function Call:**  
 1. get_dict_of_zones_and_terminal_units_served_by_hvac_sys()   
