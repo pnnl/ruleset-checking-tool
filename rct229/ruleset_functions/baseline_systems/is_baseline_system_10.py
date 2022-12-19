@@ -68,16 +68,18 @@ def is_baseline_system_10(rmi_b, hvac_b_id, terminal_unit_id_list, zone_id_list)
     hvac_b = find_exactly_one_hvac_system(rmi_b, hvac_b_id)
 
     # check if the hvac system has the required sub systems for system type 10
+    preheat_system = hvac_b.get("preheat_system")
     has_required_preheat_sys = (
-        hvac_b.get("preheat_system") is None
-        or hvac_b["preheat_system"].get("heating_system_type") is None
-        or hvac_b["preheat_system"]["heating_system_type"] == HEATING_SYSTEM.NONE
+        preheat_system is None
+        or preheat_system.get("heating_system_type") is None
+        or preheat_system["heating_system_type"] == HEATING_SYSTEM.NONE
     )
 
+    heating_system = hvac_b.get("heating_system")
     has_required_heating_sys = (
-        hvac_b.get("heating_system") is None
-        or hvac_b["heating_system"].get("heating_system_type") is None
-        or hvac_b["heating_system"]["heating_system_type"] == HEATING_SYSTEM.NONE
+        heating_system is None
+        or heating_system.get("heating_system_type") is None
+        or heating_system["heating_system_type"] == HEATING_SYSTEM.NONE
     )
 
     has_required_fan_sys = hvac_b.get("fan_system") is None
