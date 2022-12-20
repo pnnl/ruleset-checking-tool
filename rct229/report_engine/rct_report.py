@@ -43,7 +43,6 @@ class RCTReport:
         outcomes = rct_outcome["outcomes"]
         if invalid_msg:
             print(f"Invalid RMDs: {str(invalid_msg)}\n")
-            pass
         else:
             ruleset_report = self.initialize_ruleset_report()
             for outcome in outcomes:
@@ -70,8 +69,9 @@ class RCTReport:
         rule_outcome: json contains a rule's raw report
         outcome_dict: outcome dictionary, default is
 
-        Returns: rule re
+        Returns:
         -------
+        rule_outcome: a data structure contains the rule outcome
 
         """
         return rule_outcome
@@ -85,11 +85,11 @@ class RCTReport:
         -------
 
         """
-        return list()
+        return []
 
     def add_rule_to_ruleset_report(self, ruleset_report, rule_report, rule_outcome):
         """
-        Add rule to the ruleset report
+        Add rule to the ruleset report - Subclass must implement this function
 
         Parameters
         ----------
@@ -99,7 +99,7 @@ class RCTReport:
         -------
 
         """
-        pass
+        raise NotImplementedError()
 
     def calculate_rule_outcome(self, outcome_dict):
         """
@@ -125,7 +125,7 @@ class RCTReport:
 
     def save_ruleset_report(self, ruleset_report, report_dir):
         """
-        Save the ruleset report to a file.
+        Save the ruleset report to a file. Subclass must implement this function
 
         Parameters
         ----------
@@ -136,4 +136,4 @@ class RCTReport:
         -------
 
         """
-        pass
+        raise NotImplementedError()
