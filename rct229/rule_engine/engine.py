@@ -10,7 +10,6 @@ from rct229.schema.validate import validate_rmr
 from rct229.utils.pint_utils import UNIT_SYSTEM, calcq_to_str
 
 
-
 def get_available_rules():
     modules = [
         f for f in inspect.getmembers(rules, inspect.ismodule) if f in rules.__all__
