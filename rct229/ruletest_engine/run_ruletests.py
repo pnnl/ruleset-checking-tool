@@ -9,6 +9,7 @@ SECTION_21_BOILER_TEST_PATH = "section21"
 SECTION_22_CHILLER_TEST_PATH = "section22"
 SECTION_23_AIRSIDE_TEST_PATH = "section23"
 
+
 def run_transformer_tests():
     """Runs all tests found in the transformer tests JSON.
 
@@ -122,6 +123,7 @@ def run_chiller_tests():
     ]
     return run_test_helper(json_tests)
 
+
 def run_airside_tests():
     """Runs all tests found in the airside tests JSON.
 
@@ -142,6 +144,7 @@ def run_airside_tests():
         if pos_json.endswith(".json")
     ]
     return run_test_helper(json_tests)
+
 
 def run_test_helper(test_list):
     # sort the list in a human order
