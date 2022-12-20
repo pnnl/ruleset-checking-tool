@@ -4,7 +4,6 @@ from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedV
 from rct229.ruleset_functions.baseline_systems.baseline_system_util import HVAC_SYS
 from rct229.ruleset_functions.get_baseline_system_types import get_baseline_system_types
 from rct229.utils.pint_utils import CalcQ
-from rct229.utils.std_comparisons import std_equal
 
 APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_5,
@@ -12,7 +11,6 @@ APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_7,
     HVAC_SYS.SYS_8,
     HVAC_SYS.SYS_11_1,
-
 ]
 
 
@@ -52,7 +50,11 @@ class Section23Rule3(RuleDefinitionListIndexedBase):
             super(Section23Rule3.TerminalRule, self).__init__(
                 rmrs_used=UserBaselineProposedVals(False, True, False),
                 required_fields={
-                    "$": ["minimum_airflow", "minimum_outdoor_airflow", "primary_airflow"],
+                    "$": [
+                        "minimum_airflow",
+                        "minimum_outdoor_airflow",
+                        "primary_airflow",
+                    ],
                 },
             )
 
