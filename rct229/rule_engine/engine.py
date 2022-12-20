@@ -1,9 +1,6 @@
 import inspect
 
 import rct229.rules as rules
-from rct229.reports.ashrae901_2019_detail_report import ASHRAE9012019DetailReport
-from rct229.reports.engine_raw_output import EngineRawOutput
-from rct229.reports.engine_raw_summary import EngineRawSummary
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 from rct229.schema.schema_utils import quantify_rmr
 from rct229.schema.validate import validate_rmr
@@ -23,15 +20,6 @@ def get_available_rules():
 
     return available_rules
 
-
-# def get_base_class(rule_def_class):
-#     rule_def_base = rule_def_class.__bases__[0]
-#     base_class_name = [f[0] for f in inspect.getmembers(base_classes, inspect.isclass) if f[1] == rule_def_base][0]
-#
-#     return base_class_name
-#
-# def check_rule_definition_format():
-#     pass
 
 # Functions for evaluating rules
 def evaluate_all_rules(user_rmr, baseline_rmr, proposed_rmr):
