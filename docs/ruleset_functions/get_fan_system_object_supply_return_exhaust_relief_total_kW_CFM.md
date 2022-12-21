@@ -1,13 +1,13 @@
 # get_fan_system_object_supply_return_exhaust_relief_total_kW_CFM
 
-**Description:** Get the supply, return, exhaust, and relief total fan power and CFM associated with a fan system object.   The function returns a dictionary that saves the supply, return, exhaust, and relief fan power has a list and the saves the supply, return, exhaust, and relief cfm as a list {"Fan_Power": [supply fan power kW, return fan power kW, exhaust fan power kW, relief fan power kW], "Fan_CFM": [supply fan power CFM, return fan power CFM, exhaust fan power CFM, relief fan power CFM]}. Values will be equal to zero where not defined for a fan system.
+**Description:** Get the supply, return, exhaust, and relief total fan power and CFM associated with a fan system object.   The function returns a dictionary that saves the supply, return, exhaust, and relief fan power has a list and the saves the supply, return, exhaust, and relief cfm as a list {"Fan_Power": [supply fan power kW, return fan power kW, exhaust fan power kW, relief fan power kW], "Fan_CFM": [supply fan power CFM, return fan power CFM, exhaust fan power CFM, relief fan power CFM]}. Values will be equal to zero where not defined for a fan system. For CFM values this function assumes that all fans associated with the supply_fans object are in parallel (i.e., if multiple fans the cfm is additive.).
 
 **Inputs:**  
 - **B-RMI,P-RMI**: To calculate the supply, return, exhaust, and relief total fan power and CFM associated with a fan system object sent to this function.   
 - **fan_system_obj**: The fan system object sent to this function.  
 
 **Returns:**  
-- **get_fan_system_object_supply_return_exhaust_relief_total_kW_CFM**: The function calculates and return the supply, return, exhaust, and relief total fan power and CFM associated with the fan system object sent to this function. The function returns a dictionary that saves the supply, return, exhaust, and relief fan power has a list and the saves the supply, return, exhaust, and relief cfm as a list {"Fan_Power": [supply fan power kW, return fan power kW, exhaust fan power kW, relief fan power kW], "Fan_CFM": [supply fan power CFM, return fan power CFM, exhaust fan power CFM, relief fan power CFM]}. Values will be equal to zero where not defined for a fan system.
+- **get_fan_system_object_supply_return_exhaust_relief_total_kW_CFM**: The function calculates and return the supply, return, exhaust, and relief total fan power and CFM associated with the fan system object sent to this function. The function returns a dictionary that saves the supply, return, exhaust, and relief fan power has a list and the saves the supply, return, exhaust, and relief cfm as a list {"Fan_Power": [supply fan power kW, return fan power kW, exhaust fan power kW, relief fan power kW], "Fan_CFM": [supply fan power CFM, return fan power CFM, exhaust fan power CFM, relief fan power CFM]}. Values will be equal to zero where not defined for a fan system. For CFM values this function assumes that all fans associated with the supply_fans object are in parallel (i.e., if multiple fans the cfm is additive.).
  
 **Function Call:**  
 1. get_fan_object_electric_power 
@@ -70,6 +70,7 @@
 
 **Returns** `get_fan_system_object_supply_return_exhaust_relief_total_kW_CFM`  
 
-**Questions:**  None  
+**Questions:**  
+1. For CFM values this function assumes that all fans associated with the supply_fans object are in parallel (i.e., if multiple fans the cfm is additive.).  
 
 **[Back](../_toc.md)**
