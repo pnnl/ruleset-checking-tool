@@ -40,7 +40,9 @@ class RCTReport:
 
         """
         invalid_msg = rct_outcome["invalid_rmrs"]
-        outcomes = rct_outcome["outcomes"]
+        outcomes = sorted(
+            rct_outcome["outcomes"], key=lambda x: [int(y) for y in x["id"].split("-")]
+        )  # sorting allows to organize rules in order
         if invalid_msg:
             print(f"Invalid RMDs: {str(invalid_msg)}\n")
         else:
