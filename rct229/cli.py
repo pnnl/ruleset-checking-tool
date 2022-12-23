@@ -1,6 +1,7 @@
 import click
 
 from rct229.reports.ashrae901_2019_detail_report import ASHRAE9012019DetailReport
+from rct229.reports.ashrae901_2019_summary_report import ASHRAE9012019SummaryReport
 from rct229.reports.engine_raw_output import EngineRawOutput
 from rct229.reports.engine_raw_summary import EngineRawSummary
 from rct229.rule_engine.engine import evaluate_all_rules
@@ -11,6 +12,7 @@ REPORT_MODULE = {
     "RAW_OUTPUT": EngineRawOutput,
     "RAW_SUMMARY": EngineRawSummary,
     "ASHRAE9012019_DETAIL": ASHRAE9012019DetailReport,
+    "ASHRAE9012019_SUMMARY": ASHRAE9012019SummaryReport,
 }
 
 
@@ -44,7 +46,7 @@ def evaluate(user_rmd, baseline_rmd, proposed_rmd, reports):
     # have report attached.
     for report_type in reports:
         report_module = REPORT_MODULE[report_type]()
-        report_module.generate(report, "../examples/output/")
+        report_module.generate(report, "examples/output/")
 
 
 def evaluate_rmr_triplet(user_rmr, baseline_rmr, proposed_rmr):
