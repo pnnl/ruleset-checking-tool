@@ -97,7 +97,9 @@ def evaluate_outcome_enumeration_str(outcome_enumeration_str):
         test_result = "pass"
     elif outcome_enumeration_str == RCTOutcomeLabel.FAILED:
         test_result = "fail"
-    elif outcome_enumeration_str == RCTOutcomeLabel.UNDETERMINED:  # previously used for manual_check
+    elif (
+        outcome_enumeration_str == RCTOutcomeLabel.UNDETERMINED
+    ):  # previously used for manual_check
         test_result = "undetermined"
     elif outcome_enumeration_str == RCTOutcomeLabel.NOT_APPLICABLE:
         test_result = "not_applicable"
