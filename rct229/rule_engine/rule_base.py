@@ -1,5 +1,6 @@
 from jsonpointer import resolve_pointer
 
+from rct229.rule_engine.rct_outcome_label import RCTOutcomeLabel
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 from rct229.utils.assertions import MissingKeyException, RCTFailureException
 from rct229.utils.json_utils import slash_prefix_guarantee
@@ -130,7 +131,7 @@ class RuleDefinitionBase:
 
                         # Determine if manual check is required
                         if self.manual_check_required(context, calc_vals, data):
-                            outcome["result"] = "UNDETERMINED"
+                            outcome["result"] = RCTOutcomeLabel.UNDETERMINED
                             manual_check_required_msg = (
                                 self.get_manual_check_required_msg(
                                     context, calc_vals, data
@@ -146,25 +147,25 @@ class RuleDefinitionBase:
                                 outcome["result"] = result
                             # Assume result type is bool
                             elif result:
-                                outcome["result"] = "PASSED"
+                                outcome["result"] = RCTOutcomeLabel.PASS
                                 pass_msg = self.get_pass_msg(context, calc_vals, data)
                                 if pass_msg:
                                     outcome["message"] = pass_msg
                             else:
-                                outcome["result"] = "FAILED"
+                                outcome["result"] = RCTOutcomeLabel.FAILED
                                 fail_msg = self.get_fail_msg(context, calc_vals, data)
                                 if fail_msg:
                                     outcome["message"] = fail_msg
                     else:
-                        outcome["result"] = "NOT_APPLICABLE"
+                        outcome["result"] = RCTOutcomeLabel.NOT_APPLICABLE
                         not_applicable_msg = self.get_not_applicable_msg(context, data)
                         if not_applicable_msg:
                             outcome["message"] = not_applicable_msg
                 except MissingKeyException as ke:
-                    outcome["result"] = "UNDETERMINED"
+                    outcome["result"] = RCTOutcomeLabel.UNDETERMINED
                     outcome["message"] = str(ke)
                 except RCTFailureException as fe:
-                    outcome["result"] = "FAILED"
+                    outcome["result"] = RCTOutcomeLabel.FAILED
                     outcome["message"] = str(fe)
             else:
                 outcome["result"] = "UNDETERMINED"
