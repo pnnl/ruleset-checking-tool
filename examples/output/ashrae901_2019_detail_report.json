@@ -2,7 +2,7 @@
     "title": "ASHRAE STD 229P RULESET CHECKING TOOL",
     "purpose": "Project Testing Report",
     "ruleset": "ASHRAE 90.1-2019 Performance Rating Method (Appendix G)",
-    "date_run": "2022-10-19 04:21:35.352457",
+    "date_run": "2022-12-27 23:02:01.357209",
     "schema_version": "0.0.18",
     "rules": {
         "5-11": {
@@ -13,13 +13,51 @@
             "standard_section": "G12345",
             "evaluations": [
                 {
-                    "id": "building 1",
-                    "outcome": "UNDETERMINED",
-                    "messages": "surface:CORE_ZN_FLOOR is missing construction",
-                    "calculated_values": ""
+                    "id": "PERIMETER_ZN_1_WALL_SOUTH",
+                    "outcome": "PASS",
+                    "messages": "",
+                    "calculated_values": {
+                        "above_grade_wall_u_factor": "0.08400454588192477 Btu/(hr*ft2*R)",
+                        "target_u_factor": "0.084 Btu/(hr*ft2*R)",
+                        "target_u_factor_res": "None",
+                        "target_u_factor_nonres": "None"
+                    }
+                },
+                {
+                    "id": "PERIMETER_ZN_2_WALL_EAST",
+                    "outcome": "PASS",
+                    "messages": "",
+                    "calculated_values": {
+                        "above_grade_wall_u_factor": "0.08400454588192477 Btu/(hr*ft2*R)",
+                        "target_u_factor": "0.084 Btu/(hr*ft2*R)",
+                        "target_u_factor_res": "None",
+                        "target_u_factor_nonres": "None"
+                    }
+                },
+                {
+                    "id": "PERIMETER_ZN_3_WALL_NORTH",
+                    "outcome": "PASS",
+                    "messages": "",
+                    "calculated_values": {
+                        "above_grade_wall_u_factor": "0.08400454588192477 Btu/(hr*ft2*R)",
+                        "target_u_factor": "0.084 Btu/(hr*ft2*R)",
+                        "target_u_factor_res": "None",
+                        "target_u_factor_nonres": "None"
+                    }
+                },
+                {
+                    "id": "PERIMETER_ZN_4_WALL_WEST",
+                    "outcome": "PASS",
+                    "messages": "",
+                    "calculated_values": {
+                        "above_grade_wall_u_factor": "0.08400454588192477 Btu/(hr*ft2*R)",
+                        "target_u_factor": "0.084 Btu/(hr*ft2*R)",
+                        "target_u_factor_res": "None",
+                        "target_u_factor_nonres": "None"
+                    }
                 }
             ],
-            "rule_evaluation_outcome": "UNDETERMINED"
+            "rule_evaluation_outcome": "PASS"
         },
         "5-13": {
             "rule_id": "5-13",
@@ -29,13 +67,117 @@
             "standard_section": "G12345",
             "evaluations": [
                 {
-                    "id": "building 1",
-                    "outcome": "UNDETERMINED",
-                    "messages": "surface:CORE_ZN_FLOOR is missing construction",
-                    "calculated_values": ""
+                    "id": "ATTIC_FLOOR_CORE",
+                    "outcome": "FAILED",
+                    "messages": "",
+                    "calculated_values": {
+                        "floor_u_factor": "0.06022967440590833 Btu/(hr*ft2*R)",
+                        "target_u_factor": "0.052 Btu/(hr*ft2*R)",
+                        "target_u_factor_res": "None",
+                        "target_u_factor_nonres": "None"
+                    }
+                },
+                {
+                    "id": "ATTIC_FLOOR_PERIMETER_EAST",
+                    "outcome": "FAILED",
+                    "messages": "",
+                    "calculated_values": {
+                        "floor_u_factor": "0.06022967440590833 Btu/(hr*ft2*R)",
+                        "target_u_factor": "0.052 Btu/(hr*ft2*R)",
+                        "target_u_factor_res": "None",
+                        "target_u_factor_nonres": "None"
+                    }
+                },
+                {
+                    "id": "ATTIC_FLOOR_PERIMETER_NORTH",
+                    "outcome": "FAILED",
+                    "messages": "",
+                    "calculated_values": {
+                        "floor_u_factor": "0.06022967440590833 Btu/(hr*ft2*R)",
+                        "target_u_factor": "0.052 Btu/(hr*ft2*R)",
+                        "target_u_factor_res": "None",
+                        "target_u_factor_nonres": "None"
+                    }
+                },
+                {
+                    "id": "ATTIC_FLOOR_PERIMETER_SOUTH",
+                    "outcome": "FAILED",
+                    "messages": "",
+                    "calculated_values": {
+                        "floor_u_factor": "0.06022967440590833 Btu/(hr*ft2*R)",
+                        "target_u_factor": "0.052 Btu/(hr*ft2*R)",
+                        "target_u_factor_res": "None",
+                        "target_u_factor_nonres": "None"
+                    }
+                },
+                {
+                    "id": "ATTIC_FLOOR_PERIMETER_WEST",
+                    "outcome": "FAILED",
+                    "messages": "",
+                    "calculated_values": {
+                        "floor_u_factor": "0.06022967440590833 Btu/(hr*ft2*R)",
+                        "target_u_factor": "0.052 Btu/(hr*ft2*R)",
+                        "target_u_factor_res": "None",
+                        "target_u_factor_nonres": "None"
+                    }
+                },
+                {
+                    "id": "CORE_ZN_FLOOR",
+                    "outcome": "FAILED",
+                    "messages": "",
+                    "calculated_values": {
+                        "floor_u_factor": "0.0010566609544896198 Btu/(hr*ft2*R)",
+                        "target_u_factor": "0.052 Btu/(hr*ft2*R)",
+                        "target_u_factor_res": "None",
+                        "target_u_factor_nonres": "None"
+                    }
+                },
+                {
+                    "id": "PERIMETER_ZN_1_FLOOR",
+                    "outcome": "FAILED",
+                    "messages": "",
+                    "calculated_values": {
+                        "floor_u_factor": "0.054241928997133815 Btu/(hr*ft2*R)",
+                        "target_u_factor": "0.052 Btu/(hr*ft2*R)",
+                        "target_u_factor_res": "None",
+                        "target_u_factor_nonres": "None"
+                    }
+                },
+                {
+                    "id": "PERIMETER_ZN_2_FLOOR",
+                    "outcome": "FAILED",
+                    "messages": "",
+                    "calculated_values": {
+                        "floor_u_factor": "0.060934115042234734 Btu/(hr*ft2*R)",
+                        "target_u_factor": "0.052 Btu/(hr*ft2*R)",
+                        "target_u_factor_res": "None",
+                        "target_u_factor_nonres": "None"
+                    }
+                },
+                {
+                    "id": "PERIMETER_ZN_3_FLOOR",
+                    "outcome": "FAILED",
+                    "messages": "",
+                    "calculated_values": {
+                        "floor_u_factor": "0.054241928997133815 Btu/(hr*ft2*R)",
+                        "target_u_factor": "0.052 Btu/(hr*ft2*R)",
+                        "target_u_factor_res": "None",
+                        "target_u_factor_nonres": "None"
+                    }
+                },
+                {
+                    "id": "PERIMETER_ZN_4_FLOOR",
+                    "outcome": "FAILED",
+                    "messages": "",
+                    "calculated_values": {
+                        "floor_u_factor": "0.060934115042234734 Btu/(hr*ft2*R)",
+                        "target_u_factor": "0.052 Btu/(hr*ft2*R)",
+                        "target_u_factor_res": "None",
+                        "target_u_factor_nonres": "None"
+                    }
                 }
             ],
-            "rule_evaluation_outcome": "UNDETERMINED"
+            "rule_evaluation_outcome": "FAILED"
         },
         "5-15": {
             "rule_id": "5-15",
@@ -43,15 +185,8 @@
             "ruleset_section_title": "Temp section",
             "primary_rule": "Y",
             "standard_section": "G12345",
-            "evaluations": [
-                {
-                    "id": "building 1",
-                    "outcome": "UNDETERMINED",
-                    "messages": "surface:CORE_ZN_FLOOR is missing construction",
-                    "calculated_values": ""
-                }
-            ],
-            "rule_evaluation_outcome": "UNDETERMINED"
+            "evaluations": [],
+            "rule_evaluation_outcome": "NOT_APPLICABLE"
         },
         "5-17": {
             "rule_id": "5-17",
@@ -61,271 +196,13 @@
             "standard_section": "G12345",
             "evaluations": [
                 {
-                    "id": "ATTIC_ROOF_EAST",
-                    "outcome": "FAILED",
-                    "messages": "",
-                    "calculated_values": {
-                        "baseline_surface_type": "ROOF",
-                        "proposed_surface_type": "ROOF",
-                        "baseline_surface_u_factor": "0.358 watt / kelvin / m2",
-                        "proposed_surface_u_factor": "2.858 watt / kelvin / m2"
-                    }
-                },
-                {
-                    "id": "ATTIC_ROOF_NORTH",
-                    "outcome": "FAILED",
-                    "messages": "",
-                    "calculated_values": {
-                        "baseline_surface_type": "ROOF",
-                        "proposed_surface_type": "ROOF",
-                        "baseline_surface_u_factor": "0.358 watt / kelvin / m2",
-                        "proposed_surface_u_factor": "2.858 watt / kelvin / m2"
-                    }
-                },
-                {
-                    "id": "ATTIC_ROOF_SOUTH",
-                    "outcome": "FAILED",
-                    "messages": "",
-                    "calculated_values": {
-                        "baseline_surface_type": "ROOF",
-                        "proposed_surface_type": "ROOF",
-                        "baseline_surface_u_factor": "0.358 watt / kelvin / m2",
-                        "proposed_surface_u_factor": "2.858 watt / kelvin / m2"
-                    }
-                },
-                {
-                    "id": "ATTIC_ROOF_WEST",
-                    "outcome": "FAILED",
-                    "messages": "",
-                    "calculated_values": {
-                        "baseline_surface_type": "ROOF",
-                        "proposed_surface_type": "ROOF",
-                        "baseline_surface_u_factor": "0.358 watt / kelvin / m2",
-                        "proposed_surface_u_factor": "2.858 watt / kelvin / m2"
-                    }
-                },
-                {
-                    "id": "ATTIC_SOFFIT_EAST",
-                    "outcome": "FAILED",
-                    "messages": "",
-                    "calculated_values": {
-                        "baseline_surface_type": "FLOOR",
-                        "proposed_surface_type": "FLOOR",
-                        "baseline_surface_u_factor": "2.21 watt / kelvin / m2",
-                        "proposed_surface_u_factor": "3.082 watt / kelvin / m2"
-                    }
-                },
-                {
-                    "id": "ATTIC_SOFFIT_NORTH",
-                    "outcome": "FAILED",
-                    "messages": "",
-                    "calculated_values": {
-                        "baseline_surface_type": "FLOOR",
-                        "proposed_surface_type": "FLOOR",
-                        "baseline_surface_u_factor": "2.21 watt / kelvin / m2",
-                        "proposed_surface_u_factor": "3.082 watt / kelvin / m2"
-                    }
-                },
-                {
-                    "id": "ATTIC_SOFFIT_SOUTH",
-                    "outcome": "FAILED",
-                    "messages": "",
-                    "calculated_values": {
-                        "baseline_surface_type": "FLOOR",
-                        "proposed_surface_type": "FLOOR",
-                        "baseline_surface_u_factor": "2.21 watt / kelvin / m2",
-                        "proposed_surface_u_factor": "3.082 watt / kelvin / m2"
-                    }
-                },
-                {
-                    "id": "ATTIC_SOFFIT_WEST",
-                    "outcome": "FAILED",
-                    "messages": "",
-                    "calculated_values": {
-                        "baseline_surface_type": "FLOOR",
-                        "proposed_surface_type": "FLOOR",
-                        "baseline_surface_u_factor": "2.21 watt / kelvin / m2",
-                        "proposed_surface_u_factor": "3.082 watt / kelvin / m2"
-                    }
-                },
-                {
-                    "id": "CORE_ZN_WALL_EAST",
-                    "outcome": "PASS",
-                    "messages": "",
-                    "calculated_values": {
-                        "baseline_surface_type": "ABOVE-GRADE WALL",
-                        "proposed_surface_type": "ABOVE-GRADE WALL",
-                        "baseline_surface_u_factor": "2.511 watt / kelvin / m2",
-                        "proposed_surface_u_factor": "2.511 watt / kelvin / m2"
-                    }
-                },
-                {
-                    "id": "CORE_ZN_WALL_NORTH",
-                    "outcome": "PASS",
-                    "messages": "",
-                    "calculated_values": {
-                        "baseline_surface_type": "ABOVE-GRADE WALL",
-                        "proposed_surface_type": "ABOVE-GRADE WALL",
-                        "baseline_surface_u_factor": "2.511 watt / kelvin / m2",
-                        "proposed_surface_u_factor": "2.511 watt / kelvin / m2"
-                    }
-                },
-                {
-                    "id": "CORE_ZN_WALL_SOUTH",
-                    "outcome": "PASS",
-                    "messages": "",
-                    "calculated_values": {
-                        "baseline_surface_type": "ABOVE-GRADE WALL",
-                        "proposed_surface_type": "ABOVE-GRADE WALL",
-                        "baseline_surface_u_factor": "2.511 watt / kelvin / m2",
-                        "proposed_surface_u_factor": "2.511 watt / kelvin / m2"
-                    }
-                },
-                {
-                    "id": "CORE_ZN_WALL_WEST",
-                    "outcome": "PASS",
-                    "messages": "",
-                    "calculated_values": {
-                        "baseline_surface_type": "ABOVE-GRADE WALL",
-                        "proposed_surface_type": "ABOVE-GRADE WALL",
-                        "baseline_surface_u_factor": "2.511 watt / kelvin / m2",
-                        "proposed_surface_u_factor": "2.511 watt / kelvin / m2"
-                    }
-                },
-                {
-                    "id": "PERIMETER_ZN_1_WALL_EAST",
-                    "outcome": "PASS",
-                    "messages": "",
-                    "calculated_values": {
-                        "baseline_surface_type": "ABOVE-GRADE WALL",
-                        "proposed_surface_type": "ABOVE-GRADE WALL",
-                        "baseline_surface_u_factor": "2.511 watt / kelvin / m2",
-                        "proposed_surface_u_factor": "2.511 watt / kelvin / m2"
-                    }
-                },
-                {
-                    "id": "PERIMETER_ZN_1_WALL_NORTH",
-                    "outcome": "PASS",
-                    "messages": "",
-                    "calculated_values": {
-                        "baseline_surface_type": "ABOVE-GRADE WALL",
-                        "proposed_surface_type": "ABOVE-GRADE WALL",
-                        "baseline_surface_u_factor": "2.511 watt / kelvin / m2",
-                        "proposed_surface_u_factor": "2.511 watt / kelvin / m2"
-                    }
-                },
-                {
-                    "id": "PERIMETER_ZN_1_WALL_WEST",
-                    "outcome": "PASS",
-                    "messages": "",
-                    "calculated_values": {
-                        "baseline_surface_type": "ABOVE-GRADE WALL",
-                        "proposed_surface_type": "ABOVE-GRADE WALL",
-                        "baseline_surface_u_factor": "2.511 watt / kelvin / m2",
-                        "proposed_surface_u_factor": "2.511 watt / kelvin / m2"
-                    }
-                },
-                {
-                    "id": "PERIMETER_ZN_2_WALL_NORTH",
-                    "outcome": "PASS",
-                    "messages": "",
-                    "calculated_values": {
-                        "baseline_surface_type": "ABOVE-GRADE WALL",
-                        "proposed_surface_type": "ABOVE-GRADE WALL",
-                        "baseline_surface_u_factor": "2.511 watt / kelvin / m2",
-                        "proposed_surface_u_factor": "2.511 watt / kelvin / m2"
-                    }
-                },
-                {
-                    "id": "PERIMETER_ZN_2_WALL_SOUTH",
-                    "outcome": "PASS",
-                    "messages": "",
-                    "calculated_values": {
-                        "baseline_surface_type": "ABOVE-GRADE WALL",
-                        "proposed_surface_type": "ABOVE-GRADE WALL",
-                        "baseline_surface_u_factor": "2.511 watt / kelvin / m2",
-                        "proposed_surface_u_factor": "2.511 watt / kelvin / m2"
-                    }
-                },
-                {
-                    "id": "PERIMETER_ZN_2_WALL_WEST",
-                    "outcome": "PASS",
-                    "messages": "",
-                    "calculated_values": {
-                        "baseline_surface_type": "ABOVE-GRADE WALL",
-                        "proposed_surface_type": "ABOVE-GRADE WALL",
-                        "baseline_surface_u_factor": "2.511 watt / kelvin / m2",
-                        "proposed_surface_u_factor": "2.511 watt / kelvin / m2"
-                    }
-                },
-                {
-                    "id": "PERIMETER_ZN_3_WALL_EAST",
-                    "outcome": "PASS",
-                    "messages": "",
-                    "calculated_values": {
-                        "baseline_surface_type": "ABOVE-GRADE WALL",
-                        "proposed_surface_type": "ABOVE-GRADE WALL",
-                        "baseline_surface_u_factor": "2.511 watt / kelvin / m2",
-                        "proposed_surface_u_factor": "2.511 watt / kelvin / m2"
-                    }
-                },
-                {
-                    "id": "PERIMETER_ZN_3_WALL_SOUTH",
-                    "outcome": "PASS",
-                    "messages": "",
-                    "calculated_values": {
-                        "baseline_surface_type": "ABOVE-GRADE WALL",
-                        "proposed_surface_type": "ABOVE-GRADE WALL",
-                        "baseline_surface_u_factor": "2.511 watt / kelvin / m2",
-                        "proposed_surface_u_factor": "2.511 watt / kelvin / m2"
-                    }
-                },
-                {
-                    "id": "PERIMETER_ZN_3_WALL_WEST",
-                    "outcome": "PASS",
-                    "messages": "",
-                    "calculated_values": {
-                        "baseline_surface_type": "ABOVE-GRADE WALL",
-                        "proposed_surface_type": "ABOVE-GRADE WALL",
-                        "baseline_surface_u_factor": "2.511 watt / kelvin / m2",
-                        "proposed_surface_u_factor": "2.511 watt / kelvin / m2"
-                    }
-                },
-                {
-                    "id": "PERIMETER_ZN_4_WALL_EAST",
-                    "outcome": "PASS",
-                    "messages": "",
-                    "calculated_values": {
-                        "baseline_surface_type": "ABOVE-GRADE WALL",
-                        "proposed_surface_type": "ABOVE-GRADE WALL",
-                        "baseline_surface_u_factor": "2.511 watt / kelvin / m2",
-                        "proposed_surface_u_factor": "2.511 watt / kelvin / m2"
-                    }
-                },
-                {
-                    "id": "PERIMETER_ZN_4_WALL_NORTH",
-                    "outcome": "PASS",
-                    "messages": "",
-                    "calculated_values": {
-                        "baseline_surface_type": "ABOVE-GRADE WALL",
-                        "proposed_surface_type": "ABOVE-GRADE WALL",
-                        "baseline_surface_u_factor": "2.511 watt / kelvin / m2",
-                        "proposed_surface_u_factor": "2.511 watt / kelvin / m2"
-                    }
-                },
-                {
-                    "id": "PERIMETER_ZN_4_WALL_SOUTH",
-                    "outcome": "PASS",
-                    "messages": "",
-                    "calculated_values": {
-                        "baseline_surface_type": "ABOVE-GRADE WALL",
-                        "proposed_surface_type": "ABOVE-GRADE WALL",
-                        "baseline_surface_u_factor": "2.511 watt / kelvin / m2",
-                        "proposed_surface_u_factor": "2.511 watt / kelvin / m2"
-                    }
+                    "id": "90.1-PRM-2019--ASHRAE 169-2013-5B PRM baseline created: 2022-10-17 12:32:14 -0700",
+                    "outcome": "UNDETERMINED",
+                    "messages": "MISSING_PROPOSED",
+                    "calculated_values": ""
                 }
             ],
-            "rule_evaluation_outcome": "FAILED"
+            "rule_evaluation_outcome": "UNDETERMINED"
         },
         "5-18": {
             "rule_id": "5-18",
@@ -335,9 +212,11 @@
             "standard_section": "G12345",
             "evaluations": [
                 {
-                    "id": "building 1",
+                    "id": "90.1-PRM-2019--ASHRAE 169-2013-5B PRM baseline created: 2022-10-17 12:32:14 -0700",
                     "outcome": "UNDETERMINED",
-                    "messages": "surface:CORE_ZN_FLOOR is missing construction",
+                    "messages": {
+                        "INVALID_BASELINE_CONTEXT": "id:segment 1 missing:is_all_new,area_type_vertical_fenestration"
+                    },
                     "calculated_values": ""
                 }
             ],
@@ -351,29 +230,13 @@
             "standard_section": "G12345",
             "evaluations": [
                 {
-                    "id": "building 1",
+                    "id": "90.1-PRM-2019--ASHRAE 169-2013-5B PRM baseline created: 2022-10-17 12:32:14 -0700",
                     "outcome": "UNDETERMINED",
-                    "messages": "surface:CORE_ZN_FLOOR is missing construction",
+                    "messages": "MISSING_PROPOSED",
                     "calculated_values": ""
                 }
             ],
             "rule_evaluation_outcome": "UNDETERMINED"
-        },
-        "5-2": {
-            "rule_id": "5-2",
-            "description": "Orientation is the same in user model and proposed model",
-            "ruleset_section_title": "Temp section",
-            "primary_rule": "Y",
-            "standard_section": "G12345",
-            "evaluations": [
-                {
-                    "id": "building 1",
-                    "outcome": "MISSING_USER",
-                    "messages": "",
-                    "calculated_values": ""
-                }
-            ],
-            "rule_evaluation_outcome": "NOT_APPLICABLE"
         },
         "5-21": {
             "rule_id": "5-21",
@@ -383,9 +246,9 @@
             "standard_section": "G12345",
             "evaluations": [
                 {
-                    "id": "building 1",
+                    "id": "90.1-PRM-2019--ASHRAE 169-2013-5B PRM baseline created: 2022-10-17 12:32:14 -0700",
                     "outcome": "UNDETERMINED",
-                    "messages": "surface:CORE_ZN_FLOOR is missing construction",
+                    "messages": "MISSING_PROPOSED",
                     "calculated_values": ""
                 }
             ],
@@ -399,13 +262,43 @@
             "standard_section": "G12345",
             "evaluations": [
                 {
-                    "id": "5-24",
-                    "outcome": "UNDETERMINED",
-                    "messages": "surface:CORE_ZN_FLOOR is missing construction",
-                    "calculated_values": ""
+                    "id": "SUB SURFACE 1",
+                    "outcome": "FAILED",
+                    "messages": "",
+                    "calculated_values": {
+                        "target_u_factor": "0.57 Btu/(hr*ft2*R)",
+                        "subsurface_u_factor": "0.5707730255834763 Btu/(hr*ft2*R)"
+                    }
+                },
+                {
+                    "id": "SUB SURFACE 4",
+                    "outcome": "FAILED",
+                    "messages": "",
+                    "calculated_values": {
+                        "target_u_factor": "0.57 Btu/(hr*ft2*R)",
+                        "subsurface_u_factor": "0.5707730255834763 Btu/(hr*ft2*R)"
+                    }
+                },
+                {
+                    "id": "SUB SURFACE 3",
+                    "outcome": "FAILED",
+                    "messages": "",
+                    "calculated_values": {
+                        "target_u_factor": "0.57 Btu/(hr*ft2*R)",
+                        "subsurface_u_factor": "0.5707730255834763 Btu/(hr*ft2*R)"
+                    }
+                },
+                {
+                    "id": "SUB SURFACE 2",
+                    "outcome": "FAILED",
+                    "messages": "",
+                    "calculated_values": {
+                        "target_u_factor": "0.57 Btu/(hr*ft2*R)",
+                        "subsurface_u_factor": "0.5707730255834763 Btu/(hr*ft2*R)"
+                    }
                 }
             ],
-            "rule_evaluation_outcome": "UNDETERMINED"
+            "rule_evaluation_outcome": "FAILED"
         },
         "5-26": {
             "rule_id": "5-26",
@@ -415,13 +308,43 @@
             "standard_section": "G12345",
             "evaluations": [
                 {
-                    "id": "5-26",
-                    "outcome": "UNDETERMINED",
-                    "messages": "surface:CORE_ZN_FLOOR is missing construction",
-                    "calculated_values": ""
+                    "id": "SUB SURFACE 1",
+                    "outcome": "FAILED",
+                    "messages": "",
+                    "calculated_values": {
+                        "subsurface_shgc": "0.391",
+                        "target_shgc": "0.39"
+                    }
+                },
+                {
+                    "id": "SUB SURFACE 4",
+                    "outcome": "FAILED",
+                    "messages": "",
+                    "calculated_values": {
+                        "subsurface_shgc": "0.391",
+                        "target_shgc": "0.39"
+                    }
+                },
+                {
+                    "id": "SUB SURFACE 3",
+                    "outcome": "FAILED",
+                    "messages": "",
+                    "calculated_values": {
+                        "subsurface_shgc": "0.391",
+                        "target_shgc": "0.39"
+                    }
+                },
+                {
+                    "id": "SUB SURFACE 2",
+                    "outcome": "FAILED",
+                    "messages": "",
+                    "calculated_values": {
+                        "subsurface_shgc": "0.391",
+                        "target_shgc": "0.39"
+                    }
                 }
             ],
-            "rule_evaluation_outcome": "UNDETERMINED"
+            "rule_evaluation_outcome": "FAILED"
         },
         "5-28": {
             "rule_id": "5-28",
@@ -429,8 +352,15 @@
             "ruleset_section_title": "Temp section",
             "primary_rule": "Y",
             "standard_section": "G12345",
-            "evaluations": [],
-            "rule_evaluation_outcome": "NOT_APPLICABLE"
+            "evaluations": [
+                {
+                    "id": "90.1-PRM-2019--ASHRAE 169-2013-5B PRM baseline created: 2022-10-17 12:32:14 -0700",
+                    "outcome": "UNDETERMINED",
+                    "messages": "MISSING_PROPOSED",
+                    "calculated_values": ""
+                }
+            ],
+            "rule_evaluation_outcome": "UNDETERMINED"
         },
         "5-3": {
             "rule_id": "5-3",
@@ -440,7 +370,7 @@
             "standard_section": "G12345",
             "evaluations": [
                 {
-                    "id": "building 1",
+                    "id": "90.1-PRM-2019--ASHRAE 169-2013-5B PRM baseline created: 2022-10-17 12:32:14 -0700",
                     "outcome": "FAILED",
                     "messages": "",
                     "calculated_values": {
@@ -458,67 +388,10 @@
             "standard_section": "G12345",
             "evaluations": [
                 {
-                    "invalid_msg": "id:PERIMETER_ZN_1_WALL_SOUTH_DOOR missing:has_manual_interior_shades"
-                },
-                {
-                    "invalid_msg": "id:PERIMETER_ZN_1_WALL_SOUTH_WINDOW_1 missing:has_manual_interior_shades"
-                },
-                {
-                    "invalid_msg": "id:PERIMETER_ZN_1_WALL_SOUTH_WINDOW_2 missing:has_manual_interior_shades"
-                },
-                {
-                    "invalid_msg": "id:PERIMETER_ZN_1_WALL_SOUTH_WINDOW_3 missing:has_manual_interior_shades"
-                },
-                {
-                    "invalid_msg": "id:PERIMETER_ZN_1_WALL_SOUTH_WINDOW_4 missing:has_manual_interior_shades"
-                },
-                {
-                    "invalid_msg": "id:PERIMETER_ZN_1_WALL_SOUTH_WINDOW_5 missing:has_manual_interior_shades"
-                },
-                {
-                    "invalid_msg": "id:PERIMETER_ZN_1_WALL_SOUTH_WINDOW_6 missing:has_manual_interior_shades"
-                },
-                {
-                    "invalid_msg": "id:PERIMETER_ZN_2_WALL_EAST_WINDOW_1 missing:has_manual_interior_shades"
-                },
-                {
-                    "invalid_msg": "id:PERIMETER_ZN_2_WALL_EAST_WINDOW_2 missing:has_manual_interior_shades"
-                },
-                {
-                    "invalid_msg": "id:PERIMETER_ZN_2_WALL_EAST_WINDOW_3 missing:has_manual_interior_shades"
-                },
-                {
-                    "invalid_msg": "id:PERIMETER_ZN_2_WALL_EAST_WINDOW_4 missing:has_manual_interior_shades"
-                },
-                {
-                    "invalid_msg": "id:PERIMETER_ZN_3_WALL_NORTH_WINDOW_1 missing:has_manual_interior_shades"
-                },
-                {
-                    "invalid_msg": "id:PERIMETER_ZN_3_WALL_NORTH_WINDOW_2 missing:has_manual_interior_shades"
-                },
-                {
-                    "invalid_msg": "id:PERIMETER_ZN_3_WALL_NORTH_WINDOW_3 missing:has_manual_interior_shades"
-                },
-                {
-                    "invalid_msg": "id:PERIMETER_ZN_3_WALL_NORTH_WINDOW_4 missing:has_manual_interior_shades"
-                },
-                {
-                    "invalid_msg": "id:PERIMETER_ZN_3_WALL_NORTH_WINDOW_5 missing:has_manual_interior_shades"
-                },
-                {
-                    "invalid_msg": "id:PERIMETER_ZN_3_WALL_NORTH_WINDOW_6 missing:has_manual_interior_shades"
-                },
-                {
-                    "invalid_msg": "id:PERIMETER_ZN_4_WALL_WEST_WINDOW_1 missing:has_manual_interior_shades"
-                },
-                {
-                    "invalid_msg": "id:PERIMETER_ZN_4_WALL_WEST_WINDOW_2 missing:has_manual_interior_shades"
-                },
-                {
-                    "invalid_msg": "id:PERIMETER_ZN_4_WALL_WEST_WINDOW_3 missing:has_manual_interior_shades"
-                },
-                {
-                    "invalid_msg": "id:PERIMETER_ZN_4_WALL_WEST_WINDOW_4 missing:has_manual_interior_shades"
+                    "id": "90.1-PRM-2019--ASHRAE 169-2013-5B PRM baseline created: 2022-10-17 12:32:14 -0700",
+                    "outcome": "UNDETERMINED",
+                    "messages": "MISSING_PROPOSED",
+                    "calculated_values": ""
                 }
             ],
             "rule_evaluation_outcome": "UNDETERMINED"
@@ -531,9 +404,9 @@
             "standard_section": "G12345",
             "evaluations": [
                 {
-                    "id": "building 1",
+                    "id": "90.1-PRM-2019--ASHRAE 169-2013-5B PRM baseline created: 2022-10-17 12:32:14 -0700",
                     "outcome": "UNDETERMINED",
-                    "messages": "surface:CORE_ZN_FLOOR is missing construction",
+                    "messages": "MISSING_PROPOSED",
                     "calculated_values": ""
                 }
             ],
@@ -547,9 +420,9 @@
             "standard_section": "G12345",
             "evaluations": [
                 {
-                    "id": "building 1",
+                    "id": "90.1-PRM-2019--ASHRAE 169-2013-5B PRM baseline created: 2022-10-17 12:32:14 -0700",
                     "outcome": "UNDETERMINED",
-                    "messages": "surface:CORE_ZN_FLOOR is missing construction",
+                    "messages": "MISSING_PROPOSED",
                     "calculated_values": ""
                 }
             ],
@@ -563,9 +436,9 @@
             "standard_section": "G12345",
             "evaluations": [
                 {
-                    "id": "building 1",
+                    "id": "90.1-PRM-2019--ASHRAE 169-2013-5B PRM baseline created: 2022-10-17 12:32:14 -0700",
                     "outcome": "UNDETERMINED",
-                    "messages": "surface:CORE_ZN_FLOOR is missing construction",
+                    "messages": "MISSING_PROPOSED",
                     "calculated_values": ""
                 }
             ],
@@ -577,15 +450,8 @@
             "ruleset_section_title": "Temp section",
             "primary_rule": "Y",
             "standard_section": "G12345",
-            "evaluations": [
-                {
-                    "id": "building 1",
-                    "outcome": "UNDETERMINED",
-                    "messages": "surface:CORE_ZN_FLOOR is missing construction",
-                    "calculated_values": ""
-                }
-            ],
-            "rule_evaluation_outcome": "UNDETERMINED"
+            "evaluations": [],
+            "rule_evaluation_outcome": "NOT_APPLICABLE"
         },
         "5-40": {
             "rule_id": "5-40",
@@ -595,9 +461,43 @@
             "standard_section": "G12345",
             "evaluations": [
                 {
-                    "id": "building 1",
+                    "id": "CORE_ZN_CEILING",
                     "outcome": "UNDETERMINED",
-                    "messages": "surface:CORE_ZN_FLOOR is missing construction",
+                    "messages": {
+                        "INVALID_BASELINE_CONTEXT": "id:CORE_ZN_CEILING missing:surface_optical_properties"
+                    },
+                    "calculated_values": ""
+                },
+                {
+                    "id": "PERIMETER_ZN_1_CEILING",
+                    "outcome": "UNDETERMINED",
+                    "messages": {
+                        "INVALID_BASELINE_CONTEXT": "id:PERIMETER_ZN_1_CEILING missing:surface_optical_properties"
+                    },
+                    "calculated_values": ""
+                },
+                {
+                    "id": "PERIMETER_ZN_2_CEILING",
+                    "outcome": "UNDETERMINED",
+                    "messages": {
+                        "INVALID_BASELINE_CONTEXT": "id:PERIMETER_ZN_2_CEILING missing:surface_optical_properties"
+                    },
+                    "calculated_values": ""
+                },
+                {
+                    "id": "PERIMETER_ZN_3_CEILING",
+                    "outcome": "UNDETERMINED",
+                    "messages": {
+                        "INVALID_BASELINE_CONTEXT": "id:PERIMETER_ZN_3_CEILING missing:surface_optical_properties"
+                    },
+                    "calculated_values": ""
+                },
+                {
+                    "id": "PERIMETER_ZN_4_CEILING",
+                    "outcome": "UNDETERMINED",
+                    "messages": {
+                        "INVALID_BASELINE_CONTEXT": "id:PERIMETER_ZN_4_CEILING missing:surface_optical_properties"
+                    },
                     "calculated_values": ""
                 }
             ],
@@ -611,9 +511,43 @@
             "standard_section": "G12345",
             "evaluations": [
                 {
-                    "id": "building 1",
+                    "id": "CORE_ZN_CEILING",
                     "outcome": "UNDETERMINED",
-                    "messages": "surface:CORE_ZN_FLOOR is missing construction",
+                    "messages": {
+                        "INVALID_BASELINE_CONTEXT": "id:CORE_ZN_CEILING missing:surface_optical_properties"
+                    },
+                    "calculated_values": ""
+                },
+                {
+                    "id": "PERIMETER_ZN_1_CEILING",
+                    "outcome": "UNDETERMINED",
+                    "messages": {
+                        "INVALID_BASELINE_CONTEXT": "id:PERIMETER_ZN_1_CEILING missing:surface_optical_properties"
+                    },
+                    "calculated_values": ""
+                },
+                {
+                    "id": "PERIMETER_ZN_2_CEILING",
+                    "outcome": "UNDETERMINED",
+                    "messages": {
+                        "INVALID_BASELINE_CONTEXT": "id:PERIMETER_ZN_2_CEILING missing:surface_optical_properties"
+                    },
+                    "calculated_values": ""
+                },
+                {
+                    "id": "PERIMETER_ZN_3_CEILING",
+                    "outcome": "UNDETERMINED",
+                    "messages": {
+                        "INVALID_BASELINE_CONTEXT": "id:PERIMETER_ZN_3_CEILING missing:surface_optical_properties"
+                    },
+                    "calculated_values": ""
+                },
+                {
+                    "id": "PERIMETER_ZN_4_CEILING",
+                    "outcome": "UNDETERMINED",
+                    "messages": {
+                        "INVALID_BASELINE_CONTEXT": "id:PERIMETER_ZN_4_CEILING missing:surface_optical_properties"
+                    },
                     "calculated_values": ""
                 }
             ],
@@ -627,7 +561,7 @@
             "standard_section": "G12345",
             "evaluations": [
                 {
-                    "id": "building 1",
+                    "id": "90.1-PRM-2019--ASHRAE 169-2013-5B PRM baseline created: 2022-10-17 12:32:14 -0700",
                     "outcome": "PASS",
                     "messages": "",
                     "calculated_values": {
@@ -645,10 +579,20 @@
             "standard_section": "G12345",
             "evaluations": [
                 {
-                    "invalid_msg": "id:ATTIC ZN missing:infiltration"
+                    "id": "ATTIC ZN",
+                    "outcome": "UNDETERMINED",
+                    "messages": {
+                        "INVALID_BASELINE_CONTEXT": "id:ATTIC ZN missing:infiltration"
+                    },
+                    "calculated_values": ""
                 },
                 {
-                    "invalid_msg": "id:CORE_ZN ZN missing:infiltration"
+                    "id": "CORE_ZN ZN",
+                    "outcome": "UNDETERMINED",
+                    "messages": {
+                        "INVALID_PROPOSED_CONTEXT": "id:CORE_ZN ZN missing:infiltration"
+                    },
+                    "calculated_values": ""
                 },
                 {
                     "id": "PERIMETER_ZN_1 ZN",
@@ -701,7 +645,10 @@
             "standard_section": "G12345",
             "evaluations": [
                 {
-                    "invalid_msg": "id:ATTIC ZN missing:infiltrationid:CORE_ZN ZN missing:infiltration"
+                    "id": "-SmallOffice-ASHRAE 169-2013-5B created: 2022-10-17 12:32:02 -0700",
+                    "outcome": "UNDETERMINED",
+                    "messages": "MISSING_BASELINE",
+                    "calculated_values": ""
                 }
             ],
             "rule_evaluation_outcome": "UNDETERMINED"
@@ -714,11 +661,11 @@
             "standard_section": "G12345",
             "evaluations": [
                 {
-                    "id": "building 1",
+                    "id": "90.1-PRM-2019--ASHRAE 169-2013-5B PRM baseline created: 2022-10-17 12:32:14 -0700",
                     "outcome": "FAILED",
                     "messages": "",
                     "calculated_values": {
-                        "building_total_air_leakage_rate": "1576.446722447251 cfm",
+                        "building_total_air_leakage_rate": "1576.4467224472503 cfm",
                         "target_air_leakage_rate_75pa_b": "19536.28212811982 cfm"
                     }
                 }
@@ -733,7 +680,10 @@
             "standard_section": "G12345",
             "evaluations": [
                 {
-                    "invalid_msg": "id:ATTIC ZN missing:infiltration"
+                    "id": "90.1-PRM-2019--ASHRAE 169-2013-5B PRM baseline created: 2022-10-17 12:32:14 -0700",
+                    "outcome": "UNDETERMINED",
+                    "messages": "MISSING_PROPOSED",
+                    "calculated_values": ""
                 }
             ],
             "rule_evaluation_outcome": "UNDETERMINED"
@@ -746,13 +696,62 @@
             "standard_section": "G12345",
             "evaluations": [
                 {
-                    "id": "building 1",
-                    "outcome": "UNDETERMINED",
-                    "messages": "surface:CORE_ZN_FLOOR is missing construction",
-                    "calculated_values": ""
+                    "id": "CORE_ZN_CEILING",
+                    "outcome": "FAILED",
+                    "messages": "",
+                    "calculated_values": {
+                        "roof_u_factor": "0.06022967440590833 Btu/(hr*ft2*R)",
+                        "target_u_factor": "0.063 Btu/(hr*ft2*R)",
+                        "target_u_factor_res": "None",
+                        "target_u_factor_nonres": "None"
+                    }
+                },
+                {
+                    "id": "PERIMETER_ZN_1_CEILING",
+                    "outcome": "FAILED",
+                    "messages": "",
+                    "calculated_values": {
+                        "roof_u_factor": "0.06022967440590833 Btu/(hr*ft2*R)",
+                        "target_u_factor": "0.063 Btu/(hr*ft2*R)",
+                        "target_u_factor_res": "None",
+                        "target_u_factor_nonres": "None"
+                    }
+                },
+                {
+                    "id": "PERIMETER_ZN_2_CEILING",
+                    "outcome": "FAILED",
+                    "messages": "",
+                    "calculated_values": {
+                        "roof_u_factor": "0.06022967440590833 Btu/(hr*ft2*R)",
+                        "target_u_factor": "0.063 Btu/(hr*ft2*R)",
+                        "target_u_factor_res": "None",
+                        "target_u_factor_nonres": "None"
+                    }
+                },
+                {
+                    "id": "PERIMETER_ZN_3_CEILING",
+                    "outcome": "FAILED",
+                    "messages": "",
+                    "calculated_values": {
+                        "roof_u_factor": "0.06022967440590833 Btu/(hr*ft2*R)",
+                        "target_u_factor": "0.063 Btu/(hr*ft2*R)",
+                        "target_u_factor_res": "None",
+                        "target_u_factor_nonres": "None"
+                    }
+                },
+                {
+                    "id": "PERIMETER_ZN_4_CEILING",
+                    "outcome": "FAILED",
+                    "messages": "",
+                    "calculated_values": {
+                        "roof_u_factor": "0.06022967440590833 Btu/(hr*ft2*R)",
+                        "target_u_factor": "0.063 Btu/(hr*ft2*R)",
+                        "target_u_factor_res": "None",
+                        "target_u_factor_nonres": "None"
+                    }
                 }
             ],
-            "rule_evaluation_outcome": "UNDETERMINED"
+            "rule_evaluation_outcome": "FAILED"
         },
         "5-8": {
             "rule_id": "5-8",
@@ -760,11 +759,295 @@
             "ruleset_section_title": "Temp section",
             "primary_rule": "Y",
             "standard_section": "G12345",
+            "evaluations": [],
+            "rule_evaluation_outcome": "NOT_APPLICABLE"
+        },
+        "6-1": {
+            "rule_id": "6-1",
+            "description": "The total building interior lighting power shall not exceed the interior lighting power allowance determined using either Table G3.7 or G3.8",
+            "ruleset_section_title": "Temp section",
+            "primary_rule": "Y",
+            "standard_section": "G12345",
             "evaluations": [
                 {
-                    "id": "building 1",
+                    "id": "segment 1",
+                    "outcome": "PASS",
+                    "messages": "Project passes based on space-by-space method. Verify if project sues space-by-space method.",
+                    "calculated_values": {
+                        "allowable_LPD_BAM": "None",
+                        "building_segment_design_lighting_wattage": "3521.3301240000005 W",
+                        "check_BAM_flag": "False",
+                        "total_building_segment_area_p": "0.0 ft2",
+                        "allowable_lighting_wattage_SBS": "11748.377663421994 W"
+                    }
+                }
+            ],
+            "rule_evaluation_outcome": "PASS"
+        },
+        "6-2": {
+            "rule_id": "6-2",
+            "description": "Spaces in proposed building with hardwired lighting, including Hotel/Motel Guest Rooms, Dormitory Living Quarters, Interior Lighting Power >= Table 9.6.1; For Dwelling Units, Interior Lighting Power >= 0.6W/sq.ft.",
+            "ruleset_section_title": "Temp section",
+            "primary_rule": "Y",
+            "standard_section": "G12345",
+            "evaluations": [],
+            "rule_evaluation_outcome": "NOT_APPLICABLE"
+        },
+        "6-3": {
+            "rule_id": "6-3",
+            "description": "Where a complete lighting system exists, the actual lighting power for each building_segment shall be used in the model. Where a lighting system has been designed and submitted with design documents, lighting power shall be determined in accordance with Sections 9.1.3 and 9.1.4. Where lighting neither exists nor is submitted with design documents, lighting shall comply with but not exceed the requirements of Section 9. Lighting power shall be determined in accordance with the Building Area Method (Section 9.5.1).",
+            "ruleset_section_title": "Temp section",
+            "primary_rule": "Y",
+            "standard_section": "G12345",
+            "evaluations": [
+                {
+                    "id": "ATTIC_SPACE",
+                    "outcome": "PASS",
+                    "messages": "",
+                    "calculated_values": {
+                        "total_space_lpd_u": "0",
+                        "total_space_lpd_p": "0",
+                        "space_lighting_status_type_p": "AS-DESIGNED OR AS-EXISTING"
+                    }
+                },
+                {
+                    "id": "CORE_SPACE",
+                    "outcome": "PASS",
+                    "messages": "",
+                    "calculated_values": {
+                        "total_space_lpd_u": "0.6399997522559999 W/ft2",
+                        "total_space_lpd_p": "0.6399997522559999 W/ft2",
+                        "space_lighting_status_type_p": "AS-DESIGNED OR AS-EXISTING"
+                    }
+                },
+                {
+                    "id": "PERIMETER-1_SPACE",
+                    "outcome": "PASS",
+                    "messages": "",
+                    "calculated_values": {
+                        "total_space_lpd_u": "0.6399997522559999 W/ft2",
+                        "total_space_lpd_p": "0.6399997522559999 W/ft2",
+                        "space_lighting_status_type_p": "AS-DESIGNED OR AS-EXISTING"
+                    }
+                },
+                {
+                    "id": "PERIMETER-2_SPACE",
+                    "outcome": "PASS",
+                    "messages": "",
+                    "calculated_values": {
+                        "total_space_lpd_u": "0.6399997522559999 W/ft2",
+                        "total_space_lpd_p": "0.6399997522559999 W/ft2",
+                        "space_lighting_status_type_p": "AS-DESIGNED OR AS-EXISTING"
+                    }
+                },
+                {
+                    "id": "PERIMETER-3_SPACE",
+                    "outcome": "PASS",
+                    "messages": "",
+                    "calculated_values": {
+                        "total_space_lpd_u": "0.6399997522559999 W/ft2",
+                        "total_space_lpd_p": "0.6399997522559999 W/ft2",
+                        "space_lighting_status_type_p": "AS-DESIGNED OR AS-EXISTING"
+                    }
+                },
+                {
+                    "id": "PERIMETER-4_SPACE",
+                    "outcome": "PASS",
+                    "messages": "",
+                    "calculated_values": {
+                        "total_space_lpd_u": "0.6399997522559999 W/ft2",
+                        "total_space_lpd_p": "0.6399997522559999 W/ft2",
+                        "space_lighting_status_type_p": "AS-DESIGNED OR AS-EXISTING"
+                    }
+                }
+            ],
+            "rule_evaluation_outcome": "PASS"
+        },
+        "6-4": {
+            "rule_id": "6-4",
+            "description": "Where a complete lighting system exists and where a lighting system has been designed and submitted with design documents, the baseline LPD is equal to expected value in Table G3.7. Where lighting neither exists nor is submitted with design documents, baseline LPD shall be determined in accordance with Table G3-7 for \"Office-Open Plan\" space type.",
+            "ruleset_section_title": "Temp section",
+            "primary_rule": "Y",
+            "standard_section": "G12345",
+            "evaluations": [
+                {
+                    "id": "ATTIC_SPACE",
+                    "outcome": "FAILED",
+                    "messages": "",
+                    "calculated_values": {
+                        "total_space_lpd_b": "0.0 W/ft2",
+                        "space_lighting_status_type_p": "AS-DESIGNED OR AS-EXISTING",
+                        "lpd_allowance_b": "0.8000000000000003 W/ft2"
+                    }
+                },
+                {
+                    "id": "CORE_SPACE",
+                    "outcome": "PASS",
+                    "messages": "",
+                    "calculated_values": {
+                        "total_space_lpd_b": "1.099999864512 W/ft2",
+                        "space_lighting_status_type_p": "AS-DESIGNED OR AS-EXISTING",
+                        "lpd_allowance_b": "1.1000000000000003 W/ft2"
+                    }
+                },
+                {
+                    "id": "PERIMETER-1_SPACE",
+                    "outcome": "PASS",
+                    "messages": "",
+                    "calculated_values": {
+                        "total_space_lpd_b": "1.699995567744 W/ft2",
+                        "space_lighting_status_type_p": "AS-DESIGNED OR AS-EXISTING",
+                        "lpd_allowance_b": "1.7000000000000004 W/ft2"
+                    }
+                },
+                {
+                    "id": "PERIMETER-2_SPACE",
+                    "outcome": "PASS",
+                    "messages": "",
+                    "calculated_values": {
+                        "total_space_lpd_b": "1.099999864512 W/ft2",
+                        "space_lighting_status_type_p": "AS-DESIGNED OR AS-EXISTING",
+                        "lpd_allowance_b": "1.1000000000000003 W/ft2"
+                    }
+                },
+                {
+                    "id": "PERIMETER-3_SPACE",
+                    "outcome": "PASS",
+                    "messages": "",
+                    "calculated_values": {
+                        "total_space_lpd_b": "1.099999864512 W/ft2",
+                        "space_lighting_status_type_p": "AS-DESIGNED OR AS-EXISTING",
+                        "lpd_allowance_b": "1.1000000000000003 W/ft2"
+                    }
+                },
+                {
+                    "id": "PERIMETER-4_SPACE",
+                    "outcome": "PASS",
+                    "messages": "",
+                    "calculated_values": {
+                        "total_space_lpd_b": "1.200000696768 W/ft2",
+                        "space_lighting_status_type_p": "AS-DESIGNED OR AS-EXISTING",
+                        "lpd_allowance_b": "1.2000000000000002 W/ft2"
+                    }
+                }
+            ],
+            "rule_evaluation_outcome": "FAILED"
+        },
+        "6-5": {
+            "rule_id": "6-5",
+            "description": "Baseline building is modeled with automatic shutoff controls in buildings >5000 sq.ft.",
+            "ruleset_section_title": "Temp section",
+            "primary_rule": "Y",
+            "standard_section": "G12345",
+            "evaluations": [
+                {
+                    "id": "90.1-PRM-2019--ASHRAE 169-2013-5B PRM baseline created: 2022-10-17 12:32:14 -0700",
                     "outcome": "UNDETERMINED",
-                    "messages": "surface:CORE_ZN_FLOOR is missing construction",
+                    "messages": "MISSING_PROPOSED",
+                    "calculated_values": ""
+                }
+            ],
+            "rule_evaluation_outcome": "UNDETERMINED"
+        },
+        "6-11": {
+            "rule_id": "6-11",
+            "description": "Baseline building is not modeled with daylighting control",
+            "ruleset_section_title": "Temp section",
+            "primary_rule": "Y",
+            "standard_section": "G12345",
+            "evaluations": [
+                {
+                    "id": "90.1-PRM-2019--ASHRAE 169-2013-5B PRM baseline created: 2022-10-17 12:32:14 -0700",
+                    "outcome": "PASS",
+                    "messages": "",
+                    "calculated_values": {
+                        "ids_for_interior_lighting_instances_with_daylighting_control": "[]"
+                    }
+                }
+            ],
+            "rule_evaluation_outcome": "PASS"
+        },
+        "6-7": {
+            "rule_id": "6-7",
+            "description": "Proposed building is modeled with daylighting controls directly or through schedule adjustments.",
+            "ruleset_section_title": "Temp section",
+            "primary_rule": "Y",
+            "standard_section": "G12345",
+            "evaluations": [
+                {
+                    "id": "ATTIC ZN",
+                    "outcome": "PASS",
+                    "messages": "",
+                    "calculated_values": {
+                        "daylight_flag_p": "False",
+                        "has_daylight_control_flag": "False",
+                        "daylight_schedule_adjustment_flag": "False"
+                    }
+                },
+                {
+                    "id": "CORE_ZN ZN",
+                    "outcome": "PASS",
+                    "messages": "",
+                    "calculated_values": {
+                        "daylight_flag_p": "False",
+                        "has_daylight_control_flag": "False",
+                        "daylight_schedule_adjustment_flag": "False"
+                    }
+                },
+                {
+                    "id": "PERIMETER_ZN_1 ZN",
+                    "outcome": "UNDETERMINED",
+                    "messages": "Some of the spaces in zone are modeled with window(s) and/or skylight(s) and have daylighting controls modeled explicitly in the simulation tool. Verify that the mandatory lighting control requirements are met.",
+                    "calculated_values": {
+                        "daylight_flag_p": "True",
+                        "has_daylight_control_flag": "True",
+                        "daylight_schedule_adjustment_flag": "False"
+                    }
+                },
+                {
+                    "id": "PERIMETER_ZN_2 ZN",
+                    "outcome": "UNDETERMINED",
+                    "messages": "Some of the spaces in zone are modeled with window(s) and/or skylight(s) and have daylighting controls modeled explicitly in the simulation tool. Verify that the mandatory lighting control requirements are met.",
+                    "calculated_values": {
+                        "daylight_flag_p": "True",
+                        "has_daylight_control_flag": "True",
+                        "daylight_schedule_adjustment_flag": "False"
+                    }
+                },
+                {
+                    "id": "PERIMETER_ZN_3 ZN",
+                    "outcome": "UNDETERMINED",
+                    "messages": "Some of the spaces in zone are modeled with window(s) and/or skylight(s) and have daylighting controls modeled explicitly in the simulation tool. Verify that the mandatory lighting control requirements are met.",
+                    "calculated_values": {
+                        "daylight_flag_p": "True",
+                        "has_daylight_control_flag": "True",
+                        "daylight_schedule_adjustment_flag": "False"
+                    }
+                },
+                {
+                    "id": "PERIMETER_ZN_4 ZN",
+                    "outcome": "UNDETERMINED",
+                    "messages": "Some of the spaces in zone are modeled with window(s) and/or skylight(s) and have daylighting controls modeled explicitly in the simulation tool. Verify that the mandatory lighting control requirements are met.",
+                    "calculated_values": {
+                        "daylight_flag_p": "True",
+                        "has_daylight_control_flag": "True",
+                        "daylight_schedule_adjustment_flag": "False"
+                    }
+                }
+            ],
+            "rule_evaluation_outcome": "UNDETERMINED"
+        },
+        "6-8": {
+            "rule_id": "6-8",
+            "description": "Additional occupancy sensor controls in the proposed building are modeled through schedule adjustments based on factors defined in Table G3.7.",
+            "ruleset_section_title": "Temp section",
+            "primary_rule": "Y",
+            "standard_section": "G12345",
+            "evaluations": [
+                {
+                    "id": "-SmallOffice-ASHRAE 169-2013-5B created: 2022-10-17 12:32:02 -0700",
+                    "outcome": "UNDETERMINED",
+                    "messages": "MISSING_BASELINE",
                     "calculated_values": ""
                 }
             ],

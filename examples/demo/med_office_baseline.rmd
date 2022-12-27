@@ -16,7 +16,7 @@
             {
               "id": "segment 1",
               "lighting_building_area_type": "OFFICE",
-              "heating_ventilation_air_conditioning_systems": [
+              "heating_ventilating_air_conditioning_systems": [
                 {
                   "id": "BUILDING STORY 1 PVAV_REHEAT (SYS5)",
                   "cooling_system": {
@@ -238,7 +238,7 @@
                   "terminals": [
                     {
                       "id": "CORE_BOTTOM ZN-terminal",
-                      "served_by_heating_ventilation_air_conditioning_system": "BUILDING STORY 1 PVAV_REHEAT (SYS5)",
+                      "served_by_heating_ventilating_air_conditioning_system": "BUILDING STORY 1 PVAV_REHEAT (SYS5)",
                       "heating_capacity": 20255.801
                     }
                   ],
@@ -491,7 +491,7 @@
                   "terminals": [
                     {
                       "id": "CORE_MID ZN-terminal",
-                      "served_by_heating_ventilation_air_conditioning_system": "BUILDING STORY 2 PVAV_REHEAT (SYS5)",
+                      "served_by_heating_ventilating_air_conditioning_system": "BUILDING STORY 2 PVAV_REHEAT (SYS5)",
                       "heating_capacity": 26537.756
                     }
                   ],
@@ -720,7 +720,7 @@
                   "terminals": [
                     {
                       "id": "CORE_TOP ZN-terminal",
-                      "served_by_heating_ventilation_air_conditioning_system": "BUILDING STORY 3 PVAV_REHEAT (SYS5)",
+                      "served_by_heating_ventilating_air_conditioning_system": "BUILDING STORY 3 PVAV_REHEAT (SYS5)",
                       "heating_capacity": 64044.932
                     }
                   ],
@@ -1840,7 +1840,7 @@
                   "terminals": [
                     {
                       "id": "PERIMETER_BOT_ZN_1 ZN-terminal",
-                      "served_by_heating_ventilation_air_conditioning_system": "BUILDING STORY 1 PVAV_REHEAT (SYS5)",
+                      "served_by_heating_ventilating_air_conditioning_system": "BUILDING STORY 1 PVAV_REHEAT (SYS5)",
                       "heating_capacity": 23457.161
                     }
                   ],
@@ -2072,7 +2072,7 @@
                   "terminals": [
                     {
                       "id": "PERIMETER_BOT_ZN_2 ZN-terminal",
-                      "served_by_heating_ventilation_air_conditioning_system": "BUILDING STORY 1 PVAV_REHEAT (SYS5)",
+                      "served_by_heating_ventilating_air_conditioning_system": "BUILDING STORY 1 PVAV_REHEAT (SYS5)",
                       "heating_capacity": 15495.626
                     }
                   ],
@@ -2304,7 +2304,7 @@
                   "terminals": [
                     {
                       "id": "PERIMETER_BOT_ZN_3 ZN-terminal",
-                      "served_by_heating_ventilation_air_conditioning_system": "BUILDING STORY 1 PVAV_REHEAT (SYS5)",
+                      "served_by_heating_ventilating_air_conditioning_system": "BUILDING STORY 1 PVAV_REHEAT (SYS5)",
                       "heating_capacity": 23141.815
                     }
                   ],
@@ -2536,7 +2536,7 @@
                   "terminals": [
                     {
                       "id": "PERIMETER_BOT_ZN_4 ZN-terminal",
-                      "served_by_heating_ventilation_air_conditioning_system": "BUILDING STORY 1 PVAV_REHEAT (SYS5)",
+                      "served_by_heating_ventilating_air_conditioning_system": "BUILDING STORY 1 PVAV_REHEAT (SYS5)",
                       "heating_capacity": 15495.379
                     }
                   ],
@@ -2787,7 +2787,7 @@
                   "terminals": [
                     {
                       "id": "PERIMETER_MID_ZN_1 ZN-terminal",
-                      "served_by_heating_ventilation_air_conditioning_system": "BUILDING STORY 2 PVAV_REHEAT (SYS5)",
+                      "served_by_heating_ventilating_air_conditioning_system": "BUILDING STORY 2 PVAV_REHEAT (SYS5)",
                       "heating_capacity": 25082.54
                     }
                   ],
@@ -3038,7 +3038,7 @@
                   "terminals": [
                     {
                       "id": "PERIMETER_MID_ZN_2 ZN-terminal",
-                      "served_by_heating_ventilation_air_conditioning_system": "BUILDING STORY 2 PVAV_REHEAT (SYS5)",
+                      "served_by_heating_ventilating_air_conditioning_system": "BUILDING STORY 2 PVAV_REHEAT (SYS5)",
                       "heating_capacity": 16606.492
                     }
                   ],
@@ -3289,7 +3289,7 @@
                   "terminals": [
                     {
                       "id": "PERIMETER_MID_ZN_3 ZN-terminal",
-                      "served_by_heating_ventilation_air_conditioning_system": "BUILDING STORY 2 PVAV_REHEAT (SYS5)",
+                      "served_by_heating_ventilating_air_conditioning_system": "BUILDING STORY 2 PVAV_REHEAT (SYS5)",
                       "heating_capacity": 24751.299
                     }
                   ],
@@ -3540,7 +3540,7 @@
                   "terminals": [
                     {
                       "id": "PERIMETER_MID_ZN_4 ZN-terminal",
-                      "served_by_heating_ventilation_air_conditioning_system": "BUILDING STORY 2 PVAV_REHEAT (SYS5)",
+                      "served_by_heating_ventilating_air_conditioning_system": "BUILDING STORY 2 PVAV_REHEAT (SYS5)",
                       "heating_capacity": 16606.211
                     }
                   ],
@@ -3791,7 +3791,7 @@
                   "terminals": [
                     {
                       "id": "PERIMETER_TOP_ZN_1 ZN-terminal",
-                      "served_by_heating_ventilation_air_conditioning_system": "BUILDING STORY 3 PVAV_REHEAT (SYS5)",
+                      "served_by_heating_ventilating_air_conditioning_system": "BUILDING STORY 3 PVAV_REHEAT (SYS5)",
                       "heating_capacity": 33109.264
                     }
                   ],
@@ -4042,7 +4042,7 @@
                   "terminals": [
                     {
                       "id": "PERIMETER_TOP_ZN_2 ZN-terminal",
-                      "served_by_heating_ventilation_air_conditioning_system": "BUILDING STORY 3 PVAV_REHEAT (SYS5)",
+                      "served_by_heating_ventilating_air_conditioning_system": "BUILDING STORY 3 PVAV_REHEAT (SYS5)",
                       "heating_capacity": 21712.254
                     }
                   ],
@@ -4293,7 +4293,7 @@
                   "terminals": [
                     {
                       "id": "PERIMETER_TOP_ZN_3 ZN-terminal",
-                      "served_by_heating_ventilation_air_conditioning_system": "BUILDING STORY 3 PVAV_REHEAT (SYS5)",
+                      "served_by_heating_ventilating_air_conditioning_system": "BUILDING STORY 3 PVAV_REHEAT (SYS5)",
                       "heating_capacity": 32764.7
                     }
                   ],
@@ -4544,7 +4544,7 @@
                   "terminals": [
                     {
                       "id": "PERIMETER_TOP_ZN_4 ZN-terminal",
-                      "served_by_heating_ventilation_air_conditioning_system": "BUILDING STORY 3 PVAV_REHEAT (SYS5)",
+                      "served_by_heating_ventilating_air_conditioning_system": "BUILDING STORY 3 PVAV_REHEAT (SYS5)",
                       "heating_capacity": 21711.69
                     }
                   ],

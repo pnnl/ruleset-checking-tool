@@ -34,7 +34,7 @@ class Section6Rule6(RuleDefinitionListIndexedBase):
 
         def get_calc_vals(self, context, data=None):
             interior_lighting_instances_with_daylighting_control = find_all(
-                "$..spaces[*].interior_lighting[?daylighting_control_type!='NONE']",
+                '$..spaces[*].interior_lighting[*][?(@.daylighting_control_type!="NONE")]',
                 context.baseline,
             )
             ids_for_interior_lighting_instances_with_daylighting_control = [
