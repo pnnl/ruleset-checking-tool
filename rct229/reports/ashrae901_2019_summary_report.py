@@ -16,4 +16,3 @@ class ASHRAE9012019SummaryReport(RCTReport):
         
         
         """
-

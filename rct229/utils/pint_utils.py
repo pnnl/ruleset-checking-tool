@@ -75,7 +75,11 @@ class CalcQ:
 
     def to_str(self, unit_system=UNIT_SYSTEM.IP) -> str:
         units = _UNIT_CONVENTIONS[unit_system][self.q_type]
-        return f"{self.q.to(units).magnitude} {units}" if isinstance(self.q, Quantity) else str(self.q)
+        return (
+            f"{self.q.to(units).magnitude} {units}"
+            if isinstance(self.q, Quantity)
+            else str(self.q)
+        )
 
 
 def calcq_to_q(obj):
