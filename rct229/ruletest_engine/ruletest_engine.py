@@ -16,6 +16,8 @@ from rct229.rules.section22 import *
 from rct229.ruletest_engine.ruletest_jsons.scripts.json_generation_utilities import (
     merge_nested_dictionary,
 )
+from rct229.rule_engine.rct_outcome_label import RCTOutcomeLabel
+from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 from rct229.schema.validate import validate_rmr
 from rct229.utils.json_utils import slash_prefix_guarantee
 
@@ -91,13 +93,13 @@ def evaluate_outcome_enumeration_str(outcome_enumeration_str):
     """
 
     # Check result of rule evaluation against known string constants
-    if outcome_enumeration_str == "PASSED":
+    if outcome_enumeration_str == RCTOutcomeLabel.PASS:
         test_result = "pass"
-    elif outcome_enumeration_str == "FAILED":
+    elif outcome_enumeration_str == RCTOutcomeLabel.FAILED:
         test_result = "fail"
-    elif outcome_enumeration_str == "UNDETERMINED":  # previously used for manual_check
+    elif outcome_enumeration_str == RCTOutcomeLabel.UNDETERMINED:  # previously used for manual_check
         test_result = "undetermined"
-    elif outcome_enumeration_str == "NOT_APPLICABLE":
+    elif outcome_enumeration_str == RCTOutcomeLabel.NOT_APPLICABLE:
         test_result = "not_applicable"
     else:
         raise ValueError(
@@ -245,7 +247,6 @@ def run_section_tests(test_json_name):
             f"{test_id}"
         ] = []  # Initialize log of this tests multiple results
         print_errors = False
-
         # Pull in rule, if written. If not found, fail the test and log which Section and Rule could not be found.
         try:
             rule = getattr(globals()[section_name], function_name)()
