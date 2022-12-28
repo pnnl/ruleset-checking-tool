@@ -58,7 +58,6 @@ Replace-Undetermined
         """
 
     def generate_rule_report(self, rule_outcome, outcome_dict):
-        # generate a report for one rule
         def _parse_result_helper(result):
             if isinstance(result, str):
                 return result
@@ -108,7 +107,6 @@ Replace-Undetermined
         )
 
     def add_rule_to_ruleset_report(self, ruleset_report, rule_report, rule_outcome):
-        #  append the rule outcome to the ruleset report
         self.summary_report = "".join([self.summary_report, rule_report])
 
     def save_ruleset_report(self, ruleset_report, report_dir):
@@ -195,18 +193,13 @@ Replace-Undetermined
 
         if section_no == "5":
             _ruleset_outcome_count_helper("Envelope", rule_outcome_result)
-
         elif section_no == "6":
             _ruleset_outcome_count_helper("Lighting", rule_outcome_result)
-
         elif section_no == "12":
             _ruleset_outcome_count_helper("Receptacles", rule_outcome_result)
-
         elif section_no == "15":
             _ruleset_outcome_count_helper("Transformers", rule_outcome_result)
-
         elif section_no in ["21", "22"]:
             _ruleset_outcome_count_helper("HVAC-WaterSide", rule_outcome_result)
-
         elif section_no == "23":
             _ruleset_outcome_count_helper("HVAC-AirSide", rule_outcome_result)
