@@ -4,9 +4,9 @@
 ##### Date: 06-25-2022
 
 ### RMD Files
-- user: user_rmd.json
-- proposed: proposed_rmd.json
-- baseline: baseline_rmd.json
+- user: user_rmd.rmd
+- proposed: proposed_rmd.rmd
+- baseline: baseline_rmd.rmd
 
 ### Summary: All Rules
 

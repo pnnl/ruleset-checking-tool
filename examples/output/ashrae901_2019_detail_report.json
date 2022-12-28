@@ -2,891 +2,9 @@
     "title": "ASHRAE STD 229P RULESET CHECKING TOOL",
     "purpose": "Project Testing Report",
     "ruleset": "ASHRAE 90.1-2019 Performance Rating Method (Appendix G)",
-    "date_run": "2022-12-22 19:31:30.737622",
+    "date_run": "2022-12-27 23:02:01.357209",
     "schema_version": "0.0.18",
     "rules": {
-        "12-1": {
-            "rule_id": "12-1",
-            "description": "Number of spaces modeled in User RMR and Baseline RMR are the same",
-            "ruleset_section_title": "Temp section",
-            "primary_rule": "Y",
-            "standard_section": "G12345",
-            "evaluations": [
-                {
-                    "id": "0",
-                    "outcome": "PASS",
-                    "messages": "",
-                    "calculated_values": {
-                        "num_user_spaces": "2",
-                        "num_baseline_spaces": "2"
-                    }
-                }
-            ],
-            "rule_evaluation_outcome": "PASS"
-        },
-        "12-2": {
-            "rule_id": "12-2",
-            "description": "Number of spaces modeled in User RMR and Proposed RMR are the same",
-            "ruleset_section_title": "Temp section",
-            "primary_rule": "Y",
-            "standard_section": "G12345",
-            "evaluations": [
-                {
-                    "id": "0",
-                    "outcome": "PASS",
-                    "messages": "",
-                    "calculated_values": {
-                        "num_user_spaces": "2",
-                        "num_proposed_spaces": "2"
-                    }
-                }
-            ],
-            "rule_evaluation_outcome": "PASS"
-        },
-        "12-3": {
-            "rule_id": "12-3",
-            "description": "User RMR Space ID in Proposed RMR",
-            "ruleset_section_title": "Temp section",
-            "primary_rule": "Y",
-            "standard_section": "G12345",
-            "evaluations": [
-                {
-                    "id": "1",
-                    "outcome": "PASS",
-                    "messages": "",
-                    "calculated_values": {
-                        "user_space_id": "1"
-                    }
-                },
-                {
-                    "id": "2",
-                    "outcome": "PASS",
-                    "messages": "",
-                    "calculated_values": {
-                        "user_space_id": "2"
-                    }
-                }
-            ],
-            "rule_evaluation_outcome": "PASS"
-        },
-        "15-1": {
-            "rule_id": "15-1",
-            "description": "Number of transformers modeled in User RMR and Baseline RMR are the same",
-            "ruleset_section_title": "Temp section",
-            "primary_rule": "Y",
-            "standard_section": "G12345",
-            "evaluations": [
-                {
-                    "id": "15-1",
-                    "outcome": "PASS",
-                    "messages": "",
-                    "calculated_values": {
-                        "num_user_transformers": "2",
-                        "num_baseline_transformers": "2"
-                    }
-                }
-            ],
-            "rule_evaluation_outcome": "PASS"
-        },
-        "15-2": {
-            "rule_id": "15-2",
-            "description": "Number of transformers modeled in User RMR and Proposed RMR are the same",
-            "ruleset_section_title": "Temp section",
-            "primary_rule": "Y",
-            "standard_section": "G12345",
-            "evaluations": [
-                {
-                    "id": "15-2",
-                    "outcome": "PASS",
-                    "messages": "",
-                    "calculated_values": {
-                        "num_user_transformers": "2",
-                        "num_proposed_transformers": "2"
-                    }
-                }
-            ],
-            "rule_evaluation_outcome": "PASS"
-        },
-        "15-3": {
-            "rule_id": "15-3",
-            "description": "User RMR transformer id in Proposed RMR",
-            "ruleset_section_title": "Temp section",
-            "primary_rule": "Y",
-            "standard_section": "G12345",
-            "evaluations": [
-                {
-                    "id": "1",
-                    "outcome": "PASS",
-                    "messages": "",
-                    "calculated_values": {
-                        "user_transformer_id": "1",
-                        "transformer_ids_p": "['1', '2']"
-                    }
-                },
-                {
-                    "id": "2",
-                    "outcome": "PASS",
-                    "messages": "",
-                    "calculated_values": {
-                        "user_transformer_id": "2",
-                        "transformer_ids_p": "['1', '2']"
-                    }
-                }
-            ],
-            "rule_evaluation_outcome": "PASS"
-        },
-        "15-4": {
-            "rule_id": "15-4",
-            "description": "User RMR transformer id in Baseline RMR",
-            "ruleset_section_title": "Temp section",
-            "primary_rule": "Y",
-            "standard_section": "G12345",
-            "evaluations": [
-                {
-                    "id": "1",
-                    "outcome": "PASS",
-                    "messages": "",
-                    "calculated_values": {
-                        "user_transformer_id": "1",
-                        "transformer_ids_b": "['1', '2']"
-                    }
-                },
-                {
-                    "id": "2",
-                    "outcome": "PASS",
-                    "messages": "",
-                    "calculated_values": {
-                        "user_transformer_id": "2",
-                        "transformer_ids_b": "['1', '2']"
-                    }
-                }
-            ],
-            "rule_evaluation_outcome": "PASS"
-        },
-        "15-5": {
-            "rule_id": "15-5",
-            "description": "Transformer efficiency reported in Baseline RMR equals Table 8.4.4",
-            "ruleset_section_title": "Temp section",
-            "primary_rule": "Y",
-            "standard_section": "G12345",
-            "evaluations": [
-                {
-                    "id": "1",
-                    "outcome": "NOT_APPLICABLE",
-                    "messages": "",
-                    "calculated_values": ""
-                },
-                {
-                    "id": "2",
-                    "outcome": "NOT_APPLICABLE",
-                    "messages": "",
-                    "calculated_values": ""
-                }
-            ],
-            "rule_evaluation_outcome": "NOT_APPLICABLE"
-        },
-        "15-6": {
-            "rule_id": "15-6",
-            "description": "Transformer efficiency reported in User RMR equals Table 8.4.4",
-            "ruleset_section_title": "Temp section",
-            "primary_rule": "Y",
-            "standard_section": "G12345",
-            "evaluations": [
-                {
-                    "id": "1",
-                    "outcome": "FAILED",
-                    "messages": "",
-                    "calculated_values": {
-                        "user_transformer_efficiency": "0.986",
-                        "required_user_transformer_min_efficiency": "0.989"
-                    }
-                },
-                {
-                    "id": "2",
-                    "outcome": "FAILED",
-                    "messages": "",
-                    "calculated_values": {
-                        "user_transformer_efficiency": "0.988",
-                        "required_user_transformer_min_efficiency": "0.9928"
-                    }
-                }
-            ],
-            "rule_evaluation_outcome": "FAILED"
-        },
-        "21-10": {
-            "rule_id": "21-10",
-            "description": "When the building is modeled with HHW plant (served by either boiler(s) or purchased hot water/steam), the hot water pump shall be modeled as riding the pump curve if the hot water system serves less than 120,000 ft^2 otherwise it shall be modeled with a VFD.",
-            "ruleset_section_title": "Temp section",
-            "primary_rule": "Y",
-            "standard_section": "G12345",
-            "evaluations": [
-                {
-                    "id": "21-10",
-                    "outcome": "FAILED",
-                    "messages": "Error: HVAC HVAC 1 does not match any baseline system type.",
-                    "calculated_values": ""
-                }
-            ],
-            "rule_evaluation_outcome": "FAILED"
-        },
-        "21-11": {
-            "rule_id": "21-11",
-            "description": "The baseline building design uses boilers or purchased hot water, the hot water pumping system shall be modeled as primary-only.",
-            "ruleset_section_title": "Temp section",
-            "primary_rule": "Y",
-            "standard_section": "G12345",
-            "evaluations": [
-                {
-                    "id": "21-11",
-                    "outcome": "FAILED",
-                    "messages": "Error: HVAC HVAC 1 does not match any baseline system type.",
-                    "calculated_values": ""
-                }
-            ],
-            "rule_evaluation_outcome": "FAILED"
-        },
-        "21-12": {
-            "rule_id": "21-12",
-            "description": "The baseline building design uses boilers or purchased hot water, the hot water pumping system shall be modeled with continuous variable flow.",
-            "ruleset_section_title": "Temp section",
-            "primary_rule": "Y",
-            "standard_section": "G12345",
-            "evaluations": [
-                {
-                    "id": "21-12",
-                    "outcome": "FAILED",
-                    "messages": "Error: HVAC HVAC 1 does not match any baseline system type.",
-                    "calculated_values": ""
-                }
-            ],
-            "rule_evaluation_outcome": "FAILED"
-        },
-        "21-13": {
-            "rule_id": "21-13",
-            "description": "The baseline building design uses boilers or purchased hot water, the hot water pumping system shall be modeled with a minimum turndown ratio of 0.25.",
-            "ruleset_section_title": "Temp section",
-            "primary_rule": "Y",
-            "standard_section": "G12345",
-            "evaluations": [
-                {
-                    "id": "21-13",
-                    "outcome": "FAILED",
-                    "messages": "Error: HVAC HVAC 1 does not match any baseline system type.",
-                    "calculated_values": ""
-                }
-            ],
-            "rule_evaluation_outcome": "FAILED"
-        },
-        "21-16": {
-            "rule_id": "21-16",
-            "description": "Baseline shall have only one heating hot water plant.",
-            "ruleset_section_title": "Temp section",
-            "primary_rule": "Y",
-            "standard_section": "G12345",
-            "evaluations": [
-                {
-                    "id": "21-16",
-                    "outcome": "FAILED",
-                    "messages": "Error: HVAC HVAC 1 does not match any baseline system type.",
-                    "calculated_values": ""
-                }
-            ],
-            "rule_evaluation_outcome": "FAILED"
-        },
-        "21-17": {
-            "rule_id": "21-17",
-            "description": "All boilers in the baseline building design shall be modeled at the minimum efficiency levels, both part load and full load, in accordance with Tables G3.5.6.",
-            "ruleset_section_title": "Temp section",
-            "primary_rule": "Y",
-            "standard_section": "G12345",
-            "evaluations": [
-                {
-                    "id": "21-17",
-                    "outcome": "FAILED",
-                    "messages": "Error: HVAC HVAC 1 does not match any baseline system type.",
-                    "calculated_values": ""
-                }
-            ],
-            "rule_evaluation_outcome": "FAILED"
-        },
-        "21-18": {
-            "rule_id": "21-18",
-            "description": "For baseline building, fossil fuel systems shall be modeled using natural gas as their fuel source. Exception: For fossil fuel systems where natural gas is not available for the proposed building site as determined by the rating authority, the baseline HVAC systems shall be modeled using propane as their fuel.",
-            "ruleset_section_title": "Temp section",
-            "primary_rule": "Y",
-            "standard_section": "G12345",
-            "evaluations": [
-                {
-                    "id": "21-18",
-                    "outcome": "FAILED",
-                    "messages": "Error: HVAC HVAC 1 does not match any baseline system type.",
-                    "calculated_values": ""
-                }
-            ],
-            "rule_evaluation_outcome": "FAILED"
-        },
-        "21-3": {
-            "rule_id": "21-3",
-            "description": "Heating hot water plant capacity shall be based on coincident loads.",
-            "ruleset_section_title": "Temp section",
-            "primary_rule": "Y",
-            "standard_section": "G12345",
-            "evaluations": [
-                {
-                    "id": "21-3",
-                    "outcome": "FAILED",
-                    "messages": "Error: HVAC HVAC 1 does not match any baseline system type.",
-                    "calculated_values": ""
-                }
-            ],
-            "rule_evaluation_outcome": "FAILED"
-        },
-        "21-4": {
-            "rule_id": "21-4",
-            "description": "When baseline building does not use purchased heat, baseline systems 1,5,7,11,12 shall be modeled with natural draft boilers.",
-            "ruleset_section_title": "Temp section",
-            "primary_rule": "Y",
-            "standard_section": "G12345",
-            "evaluations": [
-                {
-                    "id": "21-4",
-                    "outcome": "FAILED",
-                    "messages": "Error: HVAC HVAC 1 does not match any baseline system type.",
-                    "calculated_values": ""
-                }
-            ],
-            "rule_evaluation_outcome": "FAILED"
-        },
-        "21-5": {
-            "rule_id": "21-5",
-            "description": "The baseline building design boiler plant shall be modeled as having a single boiler if the baseline building design plant serves a conditioned floor area of 15,000sq.ft. or less, and as having two equally sized boilers for plants serving more than 15,000sq.ft.",
-            "ruleset_section_title": "Temp section",
-            "primary_rule": "Y",
-            "standard_section": "G12345",
-            "evaluations": [
-                {
-                    "id": "987",
-                    "outcome": "FAILED",
-                    "messages": "Error: HVAC HVAC 1 does not match any baseline system type.",
-                    "calculated_values": ""
-                }
-            ],
-            "rule_evaluation_outcome": "FAILED"
-        },
-        "21-6": {
-            "rule_id": "21-6",
-            "description": "When baseline building includes two boilers each shall stage as required by load.",
-            "ruleset_section_title": "Temp section",
-            "primary_rule": "Y",
-            "standard_section": "G12345",
-            "evaluations": [
-                {
-                    "id": "21-6",
-                    "outcome": "FAILED",
-                    "messages": "Error: HVAC HVAC 1 does not match any baseline system type.",
-                    "calculated_values": ""
-                }
-            ],
-            "rule_evaluation_outcome": "FAILED"
-        },
-        "21-7": {
-            "rule_id": "21-7",
-            "description": "When baseline building requires boilers, systems 1,5,7,11 and 12 - Model HWST = 180F and return design temp = 130F.",
-            "ruleset_section_title": "Temp section",
-            "primary_rule": "Y",
-            "standard_section": "G12345",
-            "evaluations": [
-                {
-                    "id": "21-7",
-                    "outcome": "FAILED",
-                    "messages": "Error: HVAC HVAC 1 does not match any baseline system type.",
-                    "calculated_values": ""
-                }
-            ],
-            "rule_evaluation_outcome": "FAILED"
-        },
-        "21-9": {
-            "rule_id": "21-9",
-            "description": "When baseline building includes boilers, Hot Water Pump Power = 19W/gpm.",
-            "ruleset_section_title": "Temp section",
-            "primary_rule": "Y",
-            "standard_section": "G12345",
-            "evaluations": [
-                {
-                    "id": "21-9",
-                    "outcome": "FAILED",
-                    "messages": "Error: HVAC HVAC 1 does not match any baseline system type.",
-                    "calculated_values": ""
-                }
-            ],
-            "rule_evaluation_outcome": "FAILED"
-        },
-        "22-1": {
-            "rule_id": "22-1",
-            "description": "Baseline chilled water design supply temperature shall be modeled at 44F.",
-            "ruleset_section_title": "Temp section",
-            "primary_rule": "Y",
-            "standard_section": "G12345",
-            "evaluations": [
-                {
-                    "id": "22-1",
-                    "outcome": "FAILED",
-                    "messages": "Error: HVAC HVAC 1 does not match any baseline system type.",
-                    "calculated_values": ""
-                }
-            ],
-            "rule_evaluation_outcome": "FAILED"
-        },
-        "22-10": {
-            "rule_id": "22-10",
-            "description": "For Baseline chilled water system with cooling capacity less than 300ton, the secondary pump shall be modeled as riding the pump curve. For Baseline chilled water system with cooling capacity of 300 tons or more, the secondary pump shall be modeled with variable-speed drives.",
-            "ruleset_section_title": "Temp section",
-            "primary_rule": "Y",
-            "standard_section": "G12345",
-            "evaluations": [
-                {
-                    "id": "22-10",
-                    "outcome": "FAILED",
-                    "messages": "Error: HVAC HVAC 1 does not match any baseline system type.",
-                    "calculated_values": ""
-                }
-            ],
-            "rule_evaluation_outcome": "FAILED"
-        },
-        "22-11": {
-            "rule_id": "22-11",
-            "description": "For Baseline chilled-water system that does not use purchased chilled water, variable-flow secondary pump shall be modeled as 13W/gpm at design conditions.",
-            "ruleset_section_title": "Temp section",
-            "primary_rule": "Y",
-            "standard_section": "G12345",
-            "evaluations": [
-                {
-                    "id": "22-11",
-                    "outcome": "FAILED",
-                    "messages": "Error: HVAC HVAC 1 does not match any baseline system type.",
-                    "calculated_values": ""
-                }
-            ],
-            "rule_evaluation_outcome": "FAILED"
-        },
-        "22-14": {
-            "rule_id": "22-14",
-            "description": "The baseline heat-rejection device shall have a design temperature rise of 10\u00b0F.",
-            "ruleset_section_title": "Temp section",
-            "primary_rule": "Y",
-            "standard_section": "G12345",
-            "evaluations": [
-                {
-                    "id": "22-14",
-                    "outcome": "FAILED",
-                    "messages": "Error: HVAC HVAC 1 does not match any baseline system type.",
-                    "calculated_values": ""
-                }
-            ],
-            "rule_evaluation_outcome": "FAILED"
-        },
-        "22-16": {
-            "rule_id": "22-16",
-            "description": "The baseline condenser-water design supply temperature shall be calculated using the cooling tower approach to the 0.4% evaporation design wet-bulb temperature, valid for wet-bulbs from 55\u00b0F to 90\u00b0F.",
-            "ruleset_section_title": "Temp section",
-            "primary_rule": "Y",
-            "standard_section": "G12345",
-            "evaluations": [
-                {
-                    "id": "22-16",
-                    "outcome": "FAILED",
-                    "messages": "Error: HVAC HVAC 1 does not match any baseline system type.",
-                    "calculated_values": ""
-                }
-            ],
-            "rule_evaluation_outcome": "FAILED"
-        },
-        "22-19": {
-            "rule_id": "22-19",
-            "description": "The tower shall be controlled to maintain a leaving water temperature, where weather permits.",
-            "ruleset_section_title": "Temp section",
-            "primary_rule": "Y",
-            "standard_section": "G12345",
-            "evaluations": [
-                {
-                    "id": "22-19",
-                    "outcome": "FAILED",
-                    "messages": "Error: HVAC HVAC 1 does not match any baseline system type.",
-                    "calculated_values": ""
-                }
-            ],
-            "rule_evaluation_outcome": "FAILED"
-        },
-        "22-2": {
-            "rule_id": "22-2",
-            "description": "Baseline chilled water design return temperature shall be modeled at 56F.",
-            "ruleset_section_title": "Temp section",
-            "primary_rule": "Y",
-            "standard_section": "G12345",
-            "evaluations": [
-                {
-                    "id": "22-2",
-                    "outcome": "FAILED",
-                    "messages": "Error: HVAC HVAC 1 does not match any baseline system type.",
-                    "calculated_values": ""
-                }
-            ],
-            "rule_evaluation_outcome": "FAILED"
-        },
-        "22-20": {
-            "rule_id": "22-20",
-            "description": "The baseline minimum condenser water reset temperature is per Table G3.1.3.11.",
-            "ruleset_section_title": "Temp section",
-            "primary_rule": "Y",
-            "standard_section": "G12345",
-            "evaluations": [
-                {
-                    "id": "22-20",
-                    "outcome": "FAILED",
-                    "messages": "Error: HVAC HVAC 1 does not match any baseline system type.",
-                    "calculated_values": ""
-                }
-            ],
-            "rule_evaluation_outcome": "FAILED"
-        },
-        "22-21": {
-            "rule_id": "22-21",
-            "description": "The baseline building design\u2019s chiller plant shall be modeled with chillers having the type as indicated in Table G3.1.3.7 as a function of building peak cooling load.",
-            "ruleset_section_title": "Temp section",
-            "primary_rule": "Y",
-            "standard_section": "G12345",
-            "evaluations": [
-                {
-                    "id": "22-21",
-                    "outcome": "UNDETERMINED",
-                    "messages": {
-                        "INVALID_BASELINE_CONTEXT": "id:987 missing:output"
-                    },
-                    "calculated_values": ""
-                }
-            ],
-            "rule_evaluation_outcome": "UNDETERMINED"
-        },
-        "22-22": {
-            "rule_id": "22-22",
-            "description": "The baseline chiller efficiencies shall be modeled at the minimum efficiency levels for full load, in accordance with Tables G3.5.3.",
-            "ruleset_section_title": "Temp section",
-            "primary_rule": "Y",
-            "standard_section": "G12345",
-            "evaluations": [
-                {
-                    "id": "22-22",
-                    "outcome": "FAILED",
-                    "messages": "Error: HVAC HVAC 1 does not match any baseline system type.",
-                    "calculated_values": ""
-                }
-            ],
-            "rule_evaluation_outcome": "FAILED"
-        },
-        "22-23": {
-            "rule_id": "22-23",
-            "description": "Each baseline chiller shall be modeled with separate chilled water pump interlocked to operate with the associated chiller.",
-            "ruleset_section_title": "Temp section",
-            "primary_rule": "Y",
-            "standard_section": "G12345",
-            "evaluations": [
-                {
-                    "id": "22-23",
-                    "outcome": "FAILED",
-                    "messages": "Error: HVAC HVAC 1 does not match any baseline system type.",
-                    "calculated_values": ""
-                }
-            ],
-            "rule_evaluation_outcome": "FAILED"
-        },
-        "22-24": {
-            "rule_id": "22-24",
-            "description": "For baseline chilled-water systems served by chiller(s), the primary pump shall be modeled as constant volume.",
-            "ruleset_section_title": "Temp section",
-            "primary_rule": "Y",
-            "standard_section": "G12345",
-            "evaluations": [
-                {
-                    "id": "22-24",
-                    "outcome": "FAILED",
-                    "messages": "Error: HVAC HVAC 1 does not match any baseline system type.",
-                    "calculated_values": ""
-                }
-            ],
-            "rule_evaluation_outcome": "FAILED"
-        },
-        "22-25": {
-            "rule_id": "22-25",
-            "description": "For chilled-water systems served by chiller(s) and does not serve baseline System-11, the baseline building constant-volume primary pump power shall be modeled as 9 W/gpm.",
-            "ruleset_section_title": "Temp section",
-            "primary_rule": "Y",
-            "standard_section": "G12345",
-            "evaluations": [
-                {
-                    "id": "22-25",
-                    "outcome": "FAILED",
-                    "messages": "Error: HVAC HVAC 1 does not match any baseline system type.",
-                    "calculated_values": ""
-                }
-            ],
-            "rule_evaluation_outcome": "FAILED"
-        },
-        "22-26": {
-            "rule_id": "22-26",
-            "description": "For chilled-water systems served by chiller(s) and serves baseline System-11, the baseline building constant-volume primary pump power shall be modeled as 12 W/gpm.",
-            "ruleset_section_title": "Temp section",
-            "primary_rule": "Y",
-            "standard_section": "G12345",
-            "evaluations": [
-                {
-                    "id": "22-26",
-                    "outcome": "FAILED",
-                    "messages": "Error: HVAC HVAC 1 does not match any baseline system type.",
-                    "calculated_values": ""
-                }
-            ],
-            "rule_evaluation_outcome": "FAILED"
-        },
-        "22-27": {
-            "rule_id": "22-27",
-            "description": "Each baseline chiller shall be modeled with separate condenser-water pump interlocked to operate with the associated chiller.",
-            "ruleset_section_title": "Temp section",
-            "primary_rule": "Y",
-            "standard_section": "G12345",
-            "evaluations": [
-                {
-                    "id": "22-27",
-                    "outcome": "FAILED",
-                    "messages": "Error: HVAC HVAC 1 does not match any baseline system type.",
-                    "calculated_values": ""
-                }
-            ],
-            "rule_evaluation_outcome": "FAILED"
-        },
-        "22-29": {
-            "rule_id": "22-29",
-            "description": "For chilled-water systems served by chiller(s) and does not serve baseline System-11, condenser-water pump power shall be 19 W/gpm.",
-            "ruleset_section_title": "Temp section",
-            "primary_rule": "Y",
-            "standard_section": "G12345",
-            "evaluations": [
-                {
-                    "id": "22-29",
-                    "outcome": "FAILED",
-                    "messages": "Error: HVAC HVAC 1 does not match any baseline system type.",
-                    "calculated_values": ""
-                }
-            ],
-            "rule_evaluation_outcome": "FAILED"
-        },
-        "22-3": {
-            "rule_id": "22-3",
-            "description": "For Baseline chilled water loop that is not purchased cooling, chilled-water supply temperature shall be reset based on outdoor dry-bulb temperature if loop does not serve any Baseline System Type-11.",
-            "ruleset_section_title": "Temp section",
-            "primary_rule": "Y",
-            "standard_section": "G12345",
-            "evaluations": [
-                {
-                    "id": "22-3",
-                    "outcome": "FAILED",
-                    "messages": "Error: HVAC HVAC 1 does not match any baseline system type.",
-                    "calculated_values": ""
-                }
-            ],
-            "rule_evaluation_outcome": "FAILED"
-        },
-        "22-30": {
-            "rule_id": "22-30",
-            "description": "For chilled-water systems served by chiller(s) and serves baseline System-11, condenser-water pump power shall be 22 W/gpm.",
-            "ruleset_section_title": "Temp section",
-            "primary_rule": "Y",
-            "standard_section": "G12345",
-            "evaluations": [
-                {
-                    "id": "22-30",
-                    "outcome": "FAILED",
-                    "messages": "Error: HVAC HVAC 1 does not match any baseline system type.",
-                    "calculated_values": ""
-                }
-            ],
-            "rule_evaluation_outcome": "FAILED"
-        },
-        "22-32": {
-            "rule_id": "22-32",
-            "description": "The baseline chiller efficiencies shall be modeled at the minimum efficiency levels for part load, in accordance with Tables G3.5.3.",
-            "ruleset_section_title": "Temp section",
-            "primary_rule": "Y",
-            "standard_section": "G12345",
-            "evaluations": [
-                {
-                    "id": "22-32",
-                    "outcome": "FAILED",
-                    "messages": "Error: HVAC HVAC 1 does not match any baseline system type.",
-                    "calculated_values": ""
-                }
-            ],
-            "rule_evaluation_outcome": "FAILED"
-        },
-        "22-33": {
-            "rule_id": "22-33",
-            "description": "Baseline chilled water system that does not use purchased chilled water must have no more than one CHW plant.",
-            "ruleset_section_title": "Temp section",
-            "primary_rule": "Y",
-            "standard_section": "G12345",
-            "evaluations": [
-                {
-                    "id": "22-33",
-                    "outcome": "FAILED",
-                    "messages": "Error: HVAC HVAC 1 does not match any baseline system type.",
-                    "calculated_values": ""
-                }
-            ],
-            "rule_evaluation_outcome": "FAILED"
-        },
-        "22-34": {
-            "rule_id": "22-34",
-            "description": "For baseline cooling chilled water plant that is served by chiller(s), the capacity shall be based on coincident loads.",
-            "ruleset_section_title": "Temp section",
-            "primary_rule": "Y",
-            "standard_section": "G12345",
-            "evaluations": [
-                {
-                    "id": "22-34",
-                    "outcome": "FAILED",
-                    "messages": "Error: HVAC HVAC 1 does not match any baseline system type.",
-                    "calculated_values": ""
-                }
-            ],
-            "rule_evaluation_outcome": "FAILED"
-        },
-        "22-36": {
-            "rule_id": "22-36",
-            "description": "Baseline chilled water system that does not use purchased chilled water shall be modeled with constant flow primary loop and variable flow secondary loop.",
-            "ruleset_section_title": "Temp section",
-            "primary_rule": "Y",
-            "standard_section": "G12345",
-            "evaluations": [
-                {
-                    "id": "22-36",
-                    "outcome": "FAILED",
-                    "messages": "Error: HVAC HVAC 1 does not match any baseline system type.",
-                    "calculated_values": ""
-                }
-            ],
-            "rule_evaluation_outcome": "FAILED"
-        },
-        "22-4": {
-            "rule_id": "22-4",
-            "description": "For Baseline chilled water loop that is not purchased chilled water and does not serve any computer room HVAC systems, chilled-water supply temperature shall be reset using the following schedule: 44F at outdoor dry-bulb temperature of 80F and above, 54F at 60F and below, and ramped linearly between 44F and 54F at temperature between 80F and 60F.",
-            "ruleset_section_title": "Temp section",
-            "primary_rule": "Y",
-            "standard_section": "G12345",
-            "evaluations": [
-                {
-                    "id": "22-4",
-                    "outcome": "FAILED",
-                    "messages": "Error: HVAC HVAC 1 does not match any baseline system type.",
-                    "calculated_values": ""
-                }
-            ],
-            "rule_evaluation_outcome": "FAILED"
-        },
-        "22-40": {
-            "rule_id": "22-40",
-            "description": "For systems using purchased chilled water, the cooling source shall be modeled as purchased chilled water in both the proposed design and baseline building design. If any system in the proposed design uses purchased chilled water, all baseline systems with chilled water coils shall use purchased chilled water. On-site chillers and direct expansion equipment shall not be modeled in the baseline building design.",
-            "ruleset_section_title": "Temp section",
-            "primary_rule": "Y",
-            "standard_section": "G12345",
-            "evaluations": [
-                {
-                    "id": "22-40",
-                    "outcome": "NOT_APPLICABLE",
-                    "messages": "",
-                    "calculated_values": ""
-                }
-            ],
-            "rule_evaluation_outcome": "NOT_APPLICABLE"
-        },
-        "22-5": {
-            "rule_id": "22-5",
-            "description": "For Baseline chilled water loop that is not purchased chilled water and serves computer room HVAC systems (System Type-11), chilled-water supply temperature shall be reset higher based on the HVAC system requiring the most cooling.",
-            "ruleset_section_title": "Temp section",
-            "primary_rule": "Y",
-            "standard_section": "G12345",
-            "evaluations": [
-                {
-                    "id": "22-5",
-                    "outcome": "FAILED",
-                    "messages": "Error: HVAC HVAC 1 does not match any baseline system type.",
-                    "calculated_values": ""
-                }
-            ],
-            "rule_evaluation_outcome": "FAILED"
-        },
-        "22-6": {
-            "rule_id": "22-6",
-            "description": "For Baseline chilled water loop that is not purchased chilled water and serves computer room HVAC systems (System Type-11), The maximum reset chilled-water supply temperature shall be 54F.",
-            "ruleset_section_title": "Temp section",
-            "primary_rule": "Y",
-            "standard_section": "G12345",
-            "evaluations": [
-                {
-                    "id": "22-6",
-                    "outcome": "FAILED",
-                    "messages": "Error: HVAC HVAC 1 does not match any baseline system type.",
-                    "calculated_values": ""
-                }
-            ],
-            "rule_evaluation_outcome": "FAILED"
-        },
-        "22-7": {
-            "rule_id": "22-7",
-            "description": "Baseline chilled water system that does not use purchased chilled water shall be modeled as primary/secondary systems.",
-            "ruleset_section_title": "Temp section",
-            "primary_rule": "Y",
-            "standard_section": "G12345",
-            "evaluations": [
-                {
-                    "id": "22-7",
-                    "outcome": "FAILED",
-                    "messages": "Error: HVAC HVAC 1 does not match any baseline system type.",
-                    "calculated_values": ""
-                }
-            ],
-            "rule_evaluation_outcome": "FAILED"
-        },
-        "22-8": {
-            "rule_id": "22-8",
-            "description": "For Baseline chilled water system with cooling capacity of 300 tons or more, the secondary pump shall be modeled with variable-speed drives.",
-            "ruleset_section_title": "Temp section",
-            "primary_rule": "Y",
-            "standard_section": "G12345",
-            "evaluations": [
-                {
-                    "id": "22-8",
-                    "outcome": "FAILED",
-                    "messages": "Error: HVAC HVAC 1 does not match any baseline system type.",
-                    "calculated_values": ""
-                }
-            ],
-            "rule_evaluation_outcome": "FAILED"
-        },
-        "22-9": {
-            "rule_id": "22-9",
-            "description": "For Baseline chilled water system with cooling capacity of 300 tons or more, the secondary loop shall be modeled with a minimum flow of 25% of the design flow rate.",
-            "ruleset_section_title": "Temp section",
-            "primary_rule": "Y",
-            "standard_section": "G12345",
-            "evaluations": [
-                {
-                    "id": "22-9",
-                    "outcome": "FAILED",
-                    "messages": "Error: HVAC HVAC 1 does not match any baseline system type.",
-                    "calculated_values": ""
-                }
-            ],
-            "rule_evaluation_outcome": "FAILED"
-        },
         "5-11": {
             "rule_id": "5-11",
             "description": "Baseline above-grade wall assemblies must match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8.",
@@ -895,40 +13,51 @@
             "standard_section": "G12345",
             "evaluations": [
                 {
-                    "id": "1",
-                    "outcome": "UNDETERMINED",
+                    "id": "PERIMETER_ZN_1_WALL_SOUTH",
+                    "outcome": "PASS",
                     "messages": "",
                     "calculated_values": {
-                        "above_grade_wall_u_factor": "0.06400000000000002 Btu/(hr*ft2*R)",
-                        "target_u_factor": "None",
-                        "target_u_factor_res": "0.064 Btu/(hr*ft2*R)",
-                        "target_u_factor_nonres": "0.124 Btu/(hr*ft2*R)"
+                        "above_grade_wall_u_factor": "0.08400454588192477 Btu/(hr*ft2*R)",
+                        "target_u_factor": "0.084 Btu/(hr*ft2*R)",
+                        "target_u_factor_res": "None",
+                        "target_u_factor_nonres": "None"
                     }
                 },
                 {
-                    "id": "2",
-                    "outcome": "UNDETERMINED",
+                    "id": "PERIMETER_ZN_2_WALL_EAST",
+                    "outcome": "PASS",
                     "messages": "",
                     "calculated_values": {
-                        "above_grade_wall_u_factor": "0.06400000000000002 Btu/(hr*ft2*R)",
-                        "target_u_factor": "None",
-                        "target_u_factor_res": "0.064 Btu/(hr*ft2*R)",
-                        "target_u_factor_nonres": "0.124 Btu/(hr*ft2*R)"
+                        "above_grade_wall_u_factor": "0.08400454588192477 Btu/(hr*ft2*R)",
+                        "target_u_factor": "0.084 Btu/(hr*ft2*R)",
+                        "target_u_factor_res": "None",
+                        "target_u_factor_nonres": "None"
                     }
                 },
                 {
-                    "id": "3",
-                    "outcome": "UNDETERMINED",
+                    "id": "PERIMETER_ZN_3_WALL_NORTH",
+                    "outcome": "PASS",
                     "messages": "",
                     "calculated_values": {
-                        "above_grade_wall_u_factor": "0.06400000000000002 Btu/(hr*ft2*R)",
-                        "target_u_factor": "None",
-                        "target_u_factor_res": "0.064 Btu/(hr*ft2*R)",
-                        "target_u_factor_nonres": "0.124 Btu/(hr*ft2*R)"
+                        "above_grade_wall_u_factor": "0.08400454588192477 Btu/(hr*ft2*R)",
+                        "target_u_factor": "0.084 Btu/(hr*ft2*R)",
+                        "target_u_factor_res": "None",
+                        "target_u_factor_nonres": "None"
+                    }
+                },
+                {
+                    "id": "PERIMETER_ZN_4_WALL_WEST",
+                    "outcome": "PASS",
+                    "messages": "",
+                    "calculated_values": {
+                        "above_grade_wall_u_factor": "0.08400454588192477 Btu/(hr*ft2*R)",
+                        "target_u_factor": "0.084 Btu/(hr*ft2*R)",
+                        "target_u_factor_res": "None",
+                        "target_u_factor_nonres": "None"
                     }
                 }
             ],
-            "rule_evaluation_outcome": "UNDETERMINED"
+            "rule_evaluation_outcome": "PASS"
         },
         "5-13": {
             "rule_id": "5-13",
@@ -936,8 +65,119 @@
             "ruleset_section_title": "Temp section",
             "primary_rule": "Y",
             "standard_section": "G12345",
-            "evaluations": [],
-            "rule_evaluation_outcome": "NOT_APPLICABLE"
+            "evaluations": [
+                {
+                    "id": "ATTIC_FLOOR_CORE",
+                    "outcome": "FAILED",
+                    "messages": "",
+                    "calculated_values": {
+                        "floor_u_factor": "0.06022967440590833 Btu/(hr*ft2*R)",
+                        "target_u_factor": "0.052 Btu/(hr*ft2*R)",
+                        "target_u_factor_res": "None",
+                        "target_u_factor_nonres": "None"
+                    }
+                },
+                {
+                    "id": "ATTIC_FLOOR_PERIMETER_EAST",
+                    "outcome": "FAILED",
+                    "messages": "",
+                    "calculated_values": {
+                        "floor_u_factor": "0.06022967440590833 Btu/(hr*ft2*R)",
+                        "target_u_factor": "0.052 Btu/(hr*ft2*R)",
+                        "target_u_factor_res": "None",
+                        "target_u_factor_nonres": "None"
+                    }
+                },
+                {
+                    "id": "ATTIC_FLOOR_PERIMETER_NORTH",
+                    "outcome": "FAILED",
+                    "messages": "",
+                    "calculated_values": {
+                        "floor_u_factor": "0.06022967440590833 Btu/(hr*ft2*R)",
+                        "target_u_factor": "0.052 Btu/(hr*ft2*R)",
+                        "target_u_factor_res": "None",
+                        "target_u_factor_nonres": "None"
+                    }
+                },
+                {
+                    "id": "ATTIC_FLOOR_PERIMETER_SOUTH",
+                    "outcome": "FAILED",
+                    "messages": "",
+                    "calculated_values": {
+                        "floor_u_factor": "0.06022967440590833 Btu/(hr*ft2*R)",
+                        "target_u_factor": "0.052 Btu/(hr*ft2*R)",
+                        "target_u_factor_res": "None",
+                        "target_u_factor_nonres": "None"
+                    }
+                },
+                {
+                    "id": "ATTIC_FLOOR_PERIMETER_WEST",
+                    "outcome": "FAILED",
+                    "messages": "",
+                    "calculated_values": {
+                        "floor_u_factor": "0.06022967440590833 Btu/(hr*ft2*R)",
+                        "target_u_factor": "0.052 Btu/(hr*ft2*R)",
+                        "target_u_factor_res": "None",
+                        "target_u_factor_nonres": "None"
+                    }
+                },
+                {
+                    "id": "CORE_ZN_FLOOR",
+                    "outcome": "FAILED",
+                    "messages": "",
+                    "calculated_values": {
+                        "floor_u_factor": "0.0010566609544896198 Btu/(hr*ft2*R)",
+                        "target_u_factor": "0.052 Btu/(hr*ft2*R)",
+                        "target_u_factor_res": "None",
+                        "target_u_factor_nonres": "None"
+                    }
+                },
+                {
+                    "id": "PERIMETER_ZN_1_FLOOR",
+                    "outcome": "FAILED",
+                    "messages": "",
+                    "calculated_values": {
+                        "floor_u_factor": "0.054241928997133815 Btu/(hr*ft2*R)",
+                        "target_u_factor": "0.052 Btu/(hr*ft2*R)",
+                        "target_u_factor_res": "None",
+                        "target_u_factor_nonres": "None"
+                    }
+                },
+                {
+                    "id": "PERIMETER_ZN_2_FLOOR",
+                    "outcome": "FAILED",
+                    "messages": "",
+                    "calculated_values": {
+                        "floor_u_factor": "0.060934115042234734 Btu/(hr*ft2*R)",
+                        "target_u_factor": "0.052 Btu/(hr*ft2*R)",
+                        "target_u_factor_res": "None",
+                        "target_u_factor_nonres": "None"
+                    }
+                },
+                {
+                    "id": "PERIMETER_ZN_3_FLOOR",
+                    "outcome": "FAILED",
+                    "messages": "",
+                    "calculated_values": {
+                        "floor_u_factor": "0.054241928997133815 Btu/(hr*ft2*R)",
+                        "target_u_factor": "0.052 Btu/(hr*ft2*R)",
+                        "target_u_factor_res": "None",
+                        "target_u_factor_nonres": "None"
+                    }
+                },
+                {
+                    "id": "PERIMETER_ZN_4_FLOOR",
+                    "outcome": "FAILED",
+                    "messages": "",
+                    "calculated_values": {
+                        "floor_u_factor": "0.060934115042234734 Btu/(hr*ft2*R)",
+                        "target_u_factor": "0.052 Btu/(hr*ft2*R)",
+                        "target_u_factor_res": "None",
+                        "target_u_factor_nonres": "None"
+                    }
+                }
+            ],
+            "rule_evaluation_outcome": "FAILED"
         },
         "5-15": {
             "rule_id": "5-15",
@@ -954,8 +194,15 @@
             "ruleset_section_title": "Temp section",
             "primary_rule": "Y",
             "standard_section": "G12345",
-            "evaluations": [],
-            "rule_evaluation_outcome": "NOT_APPLICABLE"
+            "evaluations": [
+                {
+                    "id": "90.1-PRM-2019--ASHRAE 169-2013-5B PRM baseline created: 2022-10-17 12:32:14 -0700",
+                    "outcome": "UNDETERMINED",
+                    "messages": "MISSING_PROPOSED",
+                    "calculated_values": ""
+                }
+            ],
+            "rule_evaluation_outcome": "UNDETERMINED"
         },
         "5-18": {
             "rule_id": "5-18",
@@ -965,18 +212,15 @@
             "standard_section": "G12345",
             "evaluations": [
                 {
-                    "id": "HOTEL_MOTEL_SMALL",
-                    "outcome": "FAILED",
-                    "messages": "",
-                    "calculated_values": {
-                        "area_type": "HOTEL_MOTEL_SMALL",
-                        "is_all_new": "True",
-                        "area_type_wwr": "0.0 dimensionless",
-                        "area_type_target_wwr": "0.24"
-                    }
+                    "id": "90.1-PRM-2019--ASHRAE 169-2013-5B PRM baseline created: 2022-10-17 12:32:14 -0700",
+                    "outcome": "UNDETERMINED",
+                    "messages": {
+                        "INVALID_BASELINE_CONTEXT": "id:segment 1 missing:is_all_new,area_type_vertical_fenestration"
+                    },
+                    "calculated_values": ""
                 }
             ],
-            "rule_evaluation_outcome": "FAILED"
+            "rule_evaluation_outcome": "UNDETERMINED"
         },
         "5-19": {
             "rule_id": "5-19",
@@ -986,31 +230,13 @@
             "standard_section": "G12345",
             "evaluations": [
                 {
-                    "id": "0",
-                    "outcome": "NOT_APPLICABLE",
-                    "messages": "",
+                    "id": "90.1-PRM-2019--ASHRAE 169-2013-5B PRM baseline created: 2022-10-17 12:32:14 -0700",
+                    "outcome": "UNDETERMINED",
+                    "messages": "MISSING_PROPOSED",
                     "calculated_values": ""
                 }
             ],
-            "rule_evaluation_outcome": "NOT_APPLICABLE"
-        },
-        "5-2": {
-            "rule_id": "5-2",
-            "description": "Orientation is the same in user model and proposed model",
-            "ruleset_section_title": "Temp section",
-            "primary_rule": "Y",
-            "standard_section": "G12345",
-            "evaluations": [
-                {
-                    "id": "0",
-                    "outcome": "PASS",
-                    "messages": "",
-                    "calculated_values": {
-                        "failing_surface_ids": "[]"
-                    }
-                }
-            ],
-            "rule_evaluation_outcome": "PASS"
+            "rule_evaluation_outcome": "UNDETERMINED"
         },
         "5-21": {
             "rule_id": "5-21",
@@ -1020,40 +246,13 @@
             "standard_section": "G12345",
             "evaluations": [
                 {
-                    "id": "1",
-                    "outcome": "PASS",
-                    "messages": "",
-                    "calculated_values": {
-                        "total_fenestration_area_surface_b": "0.0 ft2",
-                        "total_fenestration_area_b": "0.0 ft2",
-                        "total_fenestration_area_surface_p": "0.0 ft2",
-                        "total_fenestration_area_p": "0.0 ft2"
-                    }
-                },
-                {
-                    "id": "2",
-                    "outcome": "PASS",
-                    "messages": "",
-                    "calculated_values": {
-                        "total_fenestration_area_surface_b": "0.0 ft2",
-                        "total_fenestration_area_b": "0.0 ft2",
-                        "total_fenestration_area_surface_p": "0.0 ft2",
-                        "total_fenestration_area_p": "0.0 ft2"
-                    }
-                },
-                {
-                    "id": "3",
-                    "outcome": "PASS",
-                    "messages": "",
-                    "calculated_values": {
-                        "total_fenestration_area_surface_b": "0.0 ft2",
-                        "total_fenestration_area_b": "0.0 ft2",
-                        "total_fenestration_area_surface_p": "0.0 ft2",
-                        "total_fenestration_area_p": "0.0 ft2"
-                    }
+                    "id": "90.1-PRM-2019--ASHRAE 169-2013-5B PRM baseline created: 2022-10-17 12:32:14 -0700",
+                    "outcome": "UNDETERMINED",
+                    "messages": "MISSING_PROPOSED",
+                    "calculated_values": ""
                 }
             ],
-            "rule_evaluation_outcome": "PASS"
+            "rule_evaluation_outcome": "UNDETERMINED"
         },
         "5-24": {
             "rule_id": "5-24",
@@ -1061,8 +260,45 @@
             "ruleset_section_title": "Temp section",
             "primary_rule": "Y",
             "standard_section": "G12345",
-            "evaluations": [],
-            "rule_evaluation_outcome": "NOT_APPLICABLE"
+            "evaluations": [
+                {
+                    "id": "SUB SURFACE 1",
+                    "outcome": "FAILED",
+                    "messages": "",
+                    "calculated_values": {
+                        "target_u_factor": "0.57 Btu/(hr*ft2*R)",
+                        "subsurface_u_factor": "0.5707730255834763 Btu/(hr*ft2*R)"
+                    }
+                },
+                {
+                    "id": "SUB SURFACE 4",
+                    "outcome": "FAILED",
+                    "messages": "",
+                    "calculated_values": {
+                        "target_u_factor": "0.57 Btu/(hr*ft2*R)",
+                        "subsurface_u_factor": "0.5707730255834763 Btu/(hr*ft2*R)"
+                    }
+                },
+                {
+                    "id": "SUB SURFACE 3",
+                    "outcome": "FAILED",
+                    "messages": "",
+                    "calculated_values": {
+                        "target_u_factor": "0.57 Btu/(hr*ft2*R)",
+                        "subsurface_u_factor": "0.5707730255834763 Btu/(hr*ft2*R)"
+                    }
+                },
+                {
+                    "id": "SUB SURFACE 2",
+                    "outcome": "FAILED",
+                    "messages": "",
+                    "calculated_values": {
+                        "target_u_factor": "0.57 Btu/(hr*ft2*R)",
+                        "subsurface_u_factor": "0.5707730255834763 Btu/(hr*ft2*R)"
+                    }
+                }
+            ],
+            "rule_evaluation_outcome": "FAILED"
         },
         "5-26": {
             "rule_id": "5-26",
@@ -1070,8 +306,45 @@
             "ruleset_section_title": "Temp section",
             "primary_rule": "Y",
             "standard_section": "G12345",
-            "evaluations": [],
-            "rule_evaluation_outcome": "NOT_APPLICABLE"
+            "evaluations": [
+                {
+                    "id": "SUB SURFACE 1",
+                    "outcome": "FAILED",
+                    "messages": "",
+                    "calculated_values": {
+                        "subsurface_shgc": "0.391",
+                        "target_shgc": "0.39"
+                    }
+                },
+                {
+                    "id": "SUB SURFACE 4",
+                    "outcome": "FAILED",
+                    "messages": "",
+                    "calculated_values": {
+                        "subsurface_shgc": "0.391",
+                        "target_shgc": "0.39"
+                    }
+                },
+                {
+                    "id": "SUB SURFACE 3",
+                    "outcome": "FAILED",
+                    "messages": "",
+                    "calculated_values": {
+                        "subsurface_shgc": "0.391",
+                        "target_shgc": "0.39"
+                    }
+                },
+                {
+                    "id": "SUB SURFACE 2",
+                    "outcome": "FAILED",
+                    "messages": "",
+                    "calculated_values": {
+                        "subsurface_shgc": "0.391",
+                        "target_shgc": "0.39"
+                    }
+                }
+            ],
+            "rule_evaluation_outcome": "FAILED"
         },
         "5-28": {
             "rule_id": "5-28",
@@ -1079,8 +352,15 @@
             "ruleset_section_title": "Temp section",
             "primary_rule": "Y",
             "standard_section": "G12345",
-            "evaluations": [],
-            "rule_evaluation_outcome": "NOT_APPLICABLE"
+            "evaluations": [
+                {
+                    "id": "90.1-PRM-2019--ASHRAE 169-2013-5B PRM baseline created: 2022-10-17 12:32:14 -0700",
+                    "outcome": "UNDETERMINED",
+                    "messages": "MISSING_PROPOSED",
+                    "calculated_values": ""
+                }
+            ],
+            "rule_evaluation_outcome": "UNDETERMINED"
         },
         "5-3": {
             "rule_id": "5-3",
@@ -1090,11 +370,11 @@
             "standard_section": "G12345",
             "evaluations": [
                 {
-                    "id": "0",
+                    "id": "90.1-PRM-2019--ASHRAE 169-2013-5B PRM baseline created: 2022-10-17 12:32:14 -0700",
                     "outcome": "FAILED",
                     "messages": "",
                     "calculated_values": {
-                        "baseline_surfaces_casting_shade_ids": "['1', '3']"
+                        "baseline_surfaces_casting_shade_ids": "['ATTIC_ROOF_EAST', 'ATTIC_ROOF_NORTH', 'ATTIC_ROOF_SOUTH', 'ATTIC_ROOF_WEST', 'ATTIC_SOFFIT_EAST', 'ATTIC_SOFFIT_NORTH', 'ATTIC_SOFFIT_SOUTH', 'ATTIC_SOFFIT_WEST', 'CORE_ZN_FLOOR', 'PERIMETER_ZN_1_FLOOR', 'PERIMETER_ZN_1_WALL_SOUTH', 'PERIMETER_ZN_2_FLOOR', 'PERIMETER_ZN_2_WALL_EAST', 'PERIMETER_ZN_3_FLOOR', 'PERIMETER_ZN_3_WALL_NORTH', 'PERIMETER_ZN_4_FLOOR', 'PERIMETER_ZN_4_WALL_WEST']"
                     }
                 }
             ],
@@ -1106,8 +386,15 @@
             "ruleset_section_title": "Temp section",
             "primary_rule": "Y",
             "standard_section": "G12345",
-            "evaluations": [],
-            "rule_evaluation_outcome": "NOT_APPLICABLE"
+            "evaluations": [
+                {
+                    "id": "90.1-PRM-2019--ASHRAE 169-2013-5B PRM baseline created: 2022-10-17 12:32:14 -0700",
+                    "outcome": "UNDETERMINED",
+                    "messages": "MISSING_PROPOSED",
+                    "calculated_values": ""
+                }
+            ],
+            "rule_evaluation_outcome": "UNDETERMINED"
         },
         "5-34": {
             "rule_id": "5-34",
@@ -1117,13 +404,13 @@
             "standard_section": "G12345",
             "evaluations": [
                 {
-                    "id": "0",
-                    "outcome": "NOT_APPLICABLE",
-                    "messages": "",
+                    "id": "90.1-PRM-2019--ASHRAE 169-2013-5B PRM baseline created: 2022-10-17 12:32:14 -0700",
+                    "outcome": "UNDETERMINED",
+                    "messages": "MISSING_PROPOSED",
                     "calculated_values": ""
                 }
             ],
-            "rule_evaluation_outcome": "NOT_APPLICABLE"
+            "rule_evaluation_outcome": "UNDETERMINED"
         },
         "5-35": {
             "rule_id": "5-35",
@@ -1133,13 +420,13 @@
             "standard_section": "G12345",
             "evaluations": [
                 {
-                    "id": "0",
-                    "outcome": "NOT_APPLICABLE",
-                    "messages": "",
+                    "id": "90.1-PRM-2019--ASHRAE 169-2013-5B PRM baseline created: 2022-10-17 12:32:14 -0700",
+                    "outcome": "UNDETERMINED",
+                    "messages": "MISSING_PROPOSED",
                     "calculated_values": ""
                 }
             ],
-            "rule_evaluation_outcome": "NOT_APPLICABLE"
+            "rule_evaluation_outcome": "UNDETERMINED"
         },
         "5-36": {
             "rule_id": "5-36",
@@ -1147,8 +434,15 @@
             "ruleset_section_title": "Temp section",
             "primary_rule": "Y",
             "standard_section": "G12345",
-            "evaluations": [],
-            "rule_evaluation_outcome": "NOT_APPLICABLE"
+            "evaluations": [
+                {
+                    "id": "90.1-PRM-2019--ASHRAE 169-2013-5B PRM baseline created: 2022-10-17 12:32:14 -0700",
+                    "outcome": "UNDETERMINED",
+                    "messages": "MISSING_PROPOSED",
+                    "calculated_values": ""
+                }
+            ],
+            "rule_evaluation_outcome": "UNDETERMINED"
         },
         "5-37": {
             "rule_id": "5-37",
@@ -1165,8 +459,49 @@
             "ruleset_section_title": "Temp section",
             "primary_rule": "Y",
             "standard_section": "G12345",
-            "evaluations": [],
-            "rule_evaluation_outcome": "NOT_APPLICABLE"
+            "evaluations": [
+                {
+                    "id": "CORE_ZN_CEILING",
+                    "outcome": "UNDETERMINED",
+                    "messages": {
+                        "INVALID_BASELINE_CONTEXT": "id:CORE_ZN_CEILING missing:surface_optical_properties"
+                    },
+                    "calculated_values": ""
+                },
+                {
+                    "id": "PERIMETER_ZN_1_CEILING",
+                    "outcome": "UNDETERMINED",
+                    "messages": {
+                        "INVALID_BASELINE_CONTEXT": "id:PERIMETER_ZN_1_CEILING missing:surface_optical_properties"
+                    },
+                    "calculated_values": ""
+                },
+                {
+                    "id": "PERIMETER_ZN_2_CEILING",
+                    "outcome": "UNDETERMINED",
+                    "messages": {
+                        "INVALID_BASELINE_CONTEXT": "id:PERIMETER_ZN_2_CEILING missing:surface_optical_properties"
+                    },
+                    "calculated_values": ""
+                },
+                {
+                    "id": "PERIMETER_ZN_3_CEILING",
+                    "outcome": "UNDETERMINED",
+                    "messages": {
+                        "INVALID_BASELINE_CONTEXT": "id:PERIMETER_ZN_3_CEILING missing:surface_optical_properties"
+                    },
+                    "calculated_values": ""
+                },
+                {
+                    "id": "PERIMETER_ZN_4_CEILING",
+                    "outcome": "UNDETERMINED",
+                    "messages": {
+                        "INVALID_BASELINE_CONTEXT": "id:PERIMETER_ZN_4_CEILING missing:surface_optical_properties"
+                    },
+                    "calculated_values": ""
+                }
+            ],
+            "rule_evaluation_outcome": "UNDETERMINED"
         },
         "5-42": {
             "rule_id": "5-42",
@@ -1174,8 +509,49 @@
             "ruleset_section_title": "Temp section",
             "primary_rule": "Y",
             "standard_section": "G12345",
-            "evaluations": [],
-            "rule_evaluation_outcome": "NOT_APPLICABLE"
+            "evaluations": [
+                {
+                    "id": "CORE_ZN_CEILING",
+                    "outcome": "UNDETERMINED",
+                    "messages": {
+                        "INVALID_BASELINE_CONTEXT": "id:CORE_ZN_CEILING missing:surface_optical_properties"
+                    },
+                    "calculated_values": ""
+                },
+                {
+                    "id": "PERIMETER_ZN_1_CEILING",
+                    "outcome": "UNDETERMINED",
+                    "messages": {
+                        "INVALID_BASELINE_CONTEXT": "id:PERIMETER_ZN_1_CEILING missing:surface_optical_properties"
+                    },
+                    "calculated_values": ""
+                },
+                {
+                    "id": "PERIMETER_ZN_2_CEILING",
+                    "outcome": "UNDETERMINED",
+                    "messages": {
+                        "INVALID_BASELINE_CONTEXT": "id:PERIMETER_ZN_2_CEILING missing:surface_optical_properties"
+                    },
+                    "calculated_values": ""
+                },
+                {
+                    "id": "PERIMETER_ZN_3_CEILING",
+                    "outcome": "UNDETERMINED",
+                    "messages": {
+                        "INVALID_BASELINE_CONTEXT": "id:PERIMETER_ZN_3_CEILING missing:surface_optical_properties"
+                    },
+                    "calculated_values": ""
+                },
+                {
+                    "id": "PERIMETER_ZN_4_CEILING",
+                    "outcome": "UNDETERMINED",
+                    "messages": {
+                        "INVALID_BASELINE_CONTEXT": "id:PERIMETER_ZN_4_CEILING missing:surface_optical_properties"
+                    },
+                    "calculated_values": ""
+                }
+            ],
+            "rule_evaluation_outcome": "UNDETERMINED"
         },
         "5-44": {
             "rule_id": "5-44",
@@ -1185,7 +561,7 @@
             "standard_section": "G12345",
             "evaluations": [
                 {
-                    "id": "0",
+                    "id": "90.1-PRM-2019--ASHRAE 169-2013-5B PRM baseline created: 2022-10-17 12:32:14 -0700",
                     "outcome": "PASS",
                     "messages": "",
                     "calculated_values": {
@@ -1203,13 +579,60 @@
             "standard_section": "G12345",
             "evaluations": [
                 {
-                    "id": "5-45",
+                    "id": "ATTIC ZN",
                     "outcome": "UNDETERMINED",
                     "messages": {
-                        "INVALID_BASELINE_CONTEXT": "id:ashrae_229_1 missing:calendar",
-                        "INVALID_PROPOSED_CONTEXT": "id:ashrae_229_1 missing:calendar"
+                        "INVALID_BASELINE_CONTEXT": "id:ATTIC ZN missing:infiltration"
                     },
                     "calculated_values": ""
+                },
+                {
+                    "id": "CORE_ZN ZN",
+                    "outcome": "UNDETERMINED",
+                    "messages": {
+                        "INVALID_PROPOSED_CONTEXT": "id:CORE_ZN ZN missing:infiltration"
+                    },
+                    "calculated_values": ""
+                },
+                {
+                    "id": "PERIMETER_ZN_1 ZN",
+                    "outcome": "PASS",
+                    "messages": "",
+                    "calculated_values": {
+                        "total_hours_compared": "8760",
+                        "total_hours_matched": "8760",
+                        "eflh_difference": "0.0"
+                    }
+                },
+                {
+                    "id": "PERIMETER_ZN_2 ZN",
+                    "outcome": "PASS",
+                    "messages": "",
+                    "calculated_values": {
+                        "total_hours_compared": "8760",
+                        "total_hours_matched": "8760",
+                        "eflh_difference": "0.0"
+                    }
+                },
+                {
+                    "id": "PERIMETER_ZN_3 ZN",
+                    "outcome": "PASS",
+                    "messages": "",
+                    "calculated_values": {
+                        "total_hours_compared": "8760",
+                        "total_hours_matched": "8760",
+                        "eflh_difference": "0.0"
+                    }
+                },
+                {
+                    "id": "PERIMETER_ZN_4 ZN",
+                    "outcome": "PASS",
+                    "messages": "",
+                    "calculated_values": {
+                        "total_hours_compared": "8760",
+                        "total_hours_matched": "8760",
+                        "eflh_difference": "0.0"
+                    }
                 }
             ],
             "rule_evaluation_outcome": "UNDETERMINED"
@@ -1222,15 +645,13 @@
             "standard_section": "G12345",
             "evaluations": [
                 {
-                    "id": "0",
-                    "outcome": "PASS",
-                    "messages": "",
-                    "calculated_values": {
-                        "failing_infiltration_zone_ids": "[]"
-                    }
+                    "id": "-SmallOffice-ASHRAE 169-2013-5B created: 2022-10-17 12:32:02 -0700",
+                    "outcome": "UNDETERMINED",
+                    "messages": "MISSING_BASELINE",
+                    "calculated_values": ""
                 }
             ],
-            "rule_evaluation_outcome": "PASS"
+            "rule_evaluation_outcome": "UNDETERMINED"
         },
         "5-47": {
             "rule_id": "5-47",
@@ -1240,12 +661,12 @@
             "standard_section": "G12345",
             "evaluations": [
                 {
-                    "id": "0",
+                    "id": "90.1-PRM-2019--ASHRAE 169-2013-5B PRM baseline created: 2022-10-17 12:32:14 -0700",
                     "outcome": "FAILED",
                     "messages": "",
                     "calculated_values": {
-                        "building_total_air_leakage_rate": "8494.999999999996 cfm",
-                        "target_air_leakage_rate_75pa_b": "3229.173125012917 cfm"
+                        "building_total_air_leakage_rate": "1576.4467224472503 cfm",
+                        "target_air_leakage_rate_75pa_b": "19536.28212811982 cfm"
                     }
                 }
             ],
@@ -1257,26 +678,12 @@
             "ruleset_section_title": "Temp section",
             "primary_rule": "Y",
             "standard_section": "G12345",
-            "evaluations": [],
-            "rule_evaluation_outcome": "NOT_APPLICABLE"
-        },
-        "5-49": {
-            "rule_id": "5-49",
-            "description": "The proposed air leakage rate of the building envelope (I75Pa) at a fixed building pressure differential of 0.3 in. of water shall be 0.6 cfm/ft2 for buildings providing verification in accordance with Section 5.9.1.2. The air leakage rate of the building envelope shall be converted to appropriate units for the simulation program using one of the methods in Section G3.1.1.4. Exceptions: When whole-building air leakage testing, in accordance with Section 5.4.3.1.1, is specified during design and completed after construction, the proposed design air leakage rate of the building envelope shall be as measured.",
-            "ruleset_section_title": "Temp section",
-            "primary_rule": "Y",
-            "standard_section": "G12345",
             "evaluations": [
                 {
-                    "id": "0",
+                    "id": "90.1-PRM-2019--ASHRAE 169-2013-5B PRM baseline created: 2022-10-17 12:32:14 -0700",
                     "outcome": "UNDETERMINED",
-                    "messages": "",
-                    "calculated_values": {
-                        "building_total_air_leakage_rate": "8494.999999999996 cfm",
-                        "building_total_measured_air_leakage_rate": "0.0 cfm",
-                        "target_air_leakage_rate_75pa_p": "1937.5038750077501 cfm",
-                        "empty_measured_air_leakage_rate_flow_flag": "True"
-                    }
+                    "messages": "MISSING_PROPOSED",
+                    "calculated_values": ""
                 }
             ],
             "rule_evaluation_outcome": "UNDETERMINED"
@@ -1287,8 +694,64 @@
             "ruleset_section_title": "Temp section",
             "primary_rule": "Y",
             "standard_section": "G12345",
-            "evaluations": [],
-            "rule_evaluation_outcome": "NOT_APPLICABLE"
+            "evaluations": [
+                {
+                    "id": "CORE_ZN_CEILING",
+                    "outcome": "FAILED",
+                    "messages": "",
+                    "calculated_values": {
+                        "roof_u_factor": "0.06022967440590833 Btu/(hr*ft2*R)",
+                        "target_u_factor": "0.063 Btu/(hr*ft2*R)",
+                        "target_u_factor_res": "None",
+                        "target_u_factor_nonres": "None"
+                    }
+                },
+                {
+                    "id": "PERIMETER_ZN_1_CEILING",
+                    "outcome": "FAILED",
+                    "messages": "",
+                    "calculated_values": {
+                        "roof_u_factor": "0.06022967440590833 Btu/(hr*ft2*R)",
+                        "target_u_factor": "0.063 Btu/(hr*ft2*R)",
+                        "target_u_factor_res": "None",
+                        "target_u_factor_nonres": "None"
+                    }
+                },
+                {
+                    "id": "PERIMETER_ZN_2_CEILING",
+                    "outcome": "FAILED",
+                    "messages": "",
+                    "calculated_values": {
+                        "roof_u_factor": "0.06022967440590833 Btu/(hr*ft2*R)",
+                        "target_u_factor": "0.063 Btu/(hr*ft2*R)",
+                        "target_u_factor_res": "None",
+                        "target_u_factor_nonres": "None"
+                    }
+                },
+                {
+                    "id": "PERIMETER_ZN_3_CEILING",
+                    "outcome": "FAILED",
+                    "messages": "",
+                    "calculated_values": {
+                        "roof_u_factor": "0.06022967440590833 Btu/(hr*ft2*R)",
+                        "target_u_factor": "0.063 Btu/(hr*ft2*R)",
+                        "target_u_factor_res": "None",
+                        "target_u_factor_nonres": "None"
+                    }
+                },
+                {
+                    "id": "PERIMETER_ZN_4_CEILING",
+                    "outcome": "FAILED",
+                    "messages": "",
+                    "calculated_values": {
+                        "roof_u_factor": "0.06022967440590833 Btu/(hr*ft2*R)",
+                        "target_u_factor": "0.063 Btu/(hr*ft2*R)",
+                        "target_u_factor_res": "None",
+                        "target_u_factor_nonres": "None"
+                    }
+                }
+            ],
+            "rule_evaluation_outcome": "FAILED"
         },
         "5-8": {
             "rule_id": "5-8",
@@ -1307,15 +770,15 @@
             "standard_section": "G12345",
             "evaluations": [
                 {
-                    "id": "0",
+                    "id": "segment 1",
                     "outcome": "PASS",
-                    "messages": "Project passes based on building area method. Verify if project uses building area method.",
+                    "messages": "Project passes based on space-by-space method. Verify if project sues space-by-space method.",
                     "calculated_values": {
-                        "allowable_LPD_BAM": "1.0900000000000003 W/ft2",
-                        "building_segment_design_lighting_wattage": "1141.0000000000002 W",
+                        "allowable_LPD_BAM": "None",
+                        "building_segment_design_lighting_wattage": "3521.3301240000005 W",
                         "check_BAM_flag": "False",
-                        "total_building_segment_area_p": "11840.301458380694 ft2",
-                        "allowable_lighting_wattage_SBS": "13067.387245885604 W"
+                        "total_building_segment_area_p": "0.0 ft2",
+                        "allowable_lighting_wattage_SBS": "11748.377663421994 W"
                     }
                 }
             ],
@@ -1327,19 +790,8 @@
             "ruleset_section_title": "Temp section",
             "primary_rule": "Y",
             "standard_section": "G12345",
-            "evaluations": [
-                {
-                    "id": "1",
-                    "outcome": "FAILED",
-                    "messages": "",
-                    "calculated_values": {
-                        "lighting_power_allowance_p": "0.4100000000000001 W/ft2",
-                        "space_lighting_power_per_area_p": "0.03809024639999999 W/ft2",
-                        "space_lighting_power_per_area_u": "0.03809024639999999 W/ft2"
-                    }
-                }
-            ],
-            "rule_evaluation_outcome": "FAILED"
+            "evaluations": [],
+            "rule_evaluation_outcome": "NOT_APPLICABLE"
         },
         "6-3": {
             "rule_id": "6-3",
@@ -1349,22 +801,62 @@
             "standard_section": "G12345",
             "evaluations": [
                 {
-                    "id": "1",
+                    "id": "ATTIC_SPACE",
                     "outcome": "PASS",
                     "messages": "",
                     "calculated_values": {
-                        "total_space_lpd_u": "0.03809024639999999 W/ft2",
-                        "total_space_lpd_p": "0.03809024639999999 W/ft2",
+                        "total_space_lpd_u": "0",
+                        "total_space_lpd_p": "0",
                         "space_lighting_status_type_p": "AS-DESIGNED OR AS-EXISTING"
                     }
                 },
                 {
-                    "id": "2",
+                    "id": "CORE_SPACE",
                     "outcome": "PASS",
                     "messages": "",
                     "calculated_values": {
-                        "total_space_lpd_u": "0.102193344 W/ft2",
-                        "total_space_lpd_p": "0.102193344 W/ft2",
+                        "total_space_lpd_u": "0.6399997522559999 W/ft2",
+                        "total_space_lpd_p": "0.6399997522559999 W/ft2",
+                        "space_lighting_status_type_p": "AS-DESIGNED OR AS-EXISTING"
+                    }
+                },
+                {
+                    "id": "PERIMETER-1_SPACE",
+                    "outcome": "PASS",
+                    "messages": "",
+                    "calculated_values": {
+                        "total_space_lpd_u": "0.6399997522559999 W/ft2",
+                        "total_space_lpd_p": "0.6399997522559999 W/ft2",
+                        "space_lighting_status_type_p": "AS-DESIGNED OR AS-EXISTING"
+                    }
+                },
+                {
+                    "id": "PERIMETER-2_SPACE",
+                    "outcome": "PASS",
+                    "messages": "",
+                    "calculated_values": {
+                        "total_space_lpd_u": "0.6399997522559999 W/ft2",
+                        "total_space_lpd_p": "0.6399997522559999 W/ft2",
+                        "space_lighting_status_type_p": "AS-DESIGNED OR AS-EXISTING"
+                    }
+                },
+                {
+                    "id": "PERIMETER-3_SPACE",
+                    "outcome": "PASS",
+                    "messages": "",
+                    "calculated_values": {
+                        "total_space_lpd_u": "0.6399997522559999 W/ft2",
+                        "total_space_lpd_p": "0.6399997522559999 W/ft2",
+                        "space_lighting_status_type_p": "AS-DESIGNED OR AS-EXISTING"
+                    }
+                },
+                {
+                    "id": "PERIMETER-4_SPACE",
+                    "outcome": "PASS",
+                    "messages": "",
+                    "calculated_values": {
+                        "total_space_lpd_u": "0.6399997522559999 W/ft2",
+                        "total_space_lpd_p": "0.6399997522559999 W/ft2",
                         "space_lighting_status_type_p": "AS-DESIGNED OR AS-EXISTING"
                     }
                 }
@@ -1379,23 +871,63 @@
             "standard_section": "G12345",
             "evaluations": [
                 {
-                    "id": "1",
+                    "id": "ATTIC_SPACE",
                     "outcome": "FAILED",
                     "messages": "",
                     "calculated_values": {
-                        "total_space_lpd_b": "0.03809024639999999 W/ft2",
+                        "total_space_lpd_b": "0.0 W/ft2",
                         "space_lighting_status_type_p": "AS-DESIGNED OR AS-EXISTING",
-                        "lpd_allowance_b": "1.1400000000000001 W/ft2"
+                        "lpd_allowance_b": "0.8000000000000003 W/ft2"
                     }
                 },
                 {
-                    "id": "2",
-                    "outcome": "FAILED",
+                    "id": "CORE_SPACE",
+                    "outcome": "PASS",
                     "messages": "",
                     "calculated_values": {
-                        "total_space_lpd_b": "0.102193344 W/ft2",
+                        "total_space_lpd_b": "1.099999864512 W/ft2",
                         "space_lighting_status_type_p": "AS-DESIGNED OR AS-EXISTING",
                         "lpd_allowance_b": "1.1000000000000003 W/ft2"
+                    }
+                },
+                {
+                    "id": "PERIMETER-1_SPACE",
+                    "outcome": "PASS",
+                    "messages": "",
+                    "calculated_values": {
+                        "total_space_lpd_b": "1.699995567744 W/ft2",
+                        "space_lighting_status_type_p": "AS-DESIGNED OR AS-EXISTING",
+                        "lpd_allowance_b": "1.7000000000000004 W/ft2"
+                    }
+                },
+                {
+                    "id": "PERIMETER-2_SPACE",
+                    "outcome": "PASS",
+                    "messages": "",
+                    "calculated_values": {
+                        "total_space_lpd_b": "1.099999864512 W/ft2",
+                        "space_lighting_status_type_p": "AS-DESIGNED OR AS-EXISTING",
+                        "lpd_allowance_b": "1.1000000000000003 W/ft2"
+                    }
+                },
+                {
+                    "id": "PERIMETER-3_SPACE",
+                    "outcome": "PASS",
+                    "messages": "",
+                    "calculated_values": {
+                        "total_space_lpd_b": "1.099999864512 W/ft2",
+                        "space_lighting_status_type_p": "AS-DESIGNED OR AS-EXISTING",
+                        "lpd_allowance_b": "1.1000000000000003 W/ft2"
+                    }
+                },
+                {
+                    "id": "PERIMETER-4_SPACE",
+                    "outcome": "PASS",
+                    "messages": "",
+                    "calculated_values": {
+                        "total_space_lpd_b": "1.200000696768 W/ft2",
+                        "space_lighting_status_type_p": "AS-DESIGNED OR AS-EXISTING",
+                        "lpd_allowance_b": "1.2000000000000002 W/ft2"
                     }
                 }
             ],
@@ -1409,16 +941,31 @@
             "standard_section": "G12345",
             "evaluations": [
                 {
-                    "id": "6-5",
+                    "id": "90.1-PRM-2019--ASHRAE 169-2013-5B PRM baseline created: 2022-10-17 12:32:14 -0700",
                     "outcome": "UNDETERMINED",
-                    "messages": {
-                        "INVALID_BASELINE_CONTEXT": "id:ashrae_229_1 missing:calendar",
-                        "INVALID_PROPOSED_CONTEXT": "id:ashrae_229_1 missing:calendar"
-                    },
+                    "messages": "MISSING_PROPOSED",
                     "calculated_values": ""
                 }
             ],
             "rule_evaluation_outcome": "UNDETERMINED"
+        },
+        "6-11": {
+            "rule_id": "6-11",
+            "description": "Baseline building is not modeled with daylighting control",
+            "ruleset_section_title": "Temp section",
+            "primary_rule": "Y",
+            "standard_section": "G12345",
+            "evaluations": [
+                {
+                    "id": "90.1-PRM-2019--ASHRAE 169-2013-5B PRM baseline created: 2022-10-17 12:32:14 -0700",
+                    "outcome": "PASS",
+                    "messages": "",
+                    "calculated_values": {
+                        "ids_for_interior_lighting_instances_with_daylighting_control": "[]"
+                    }
+                }
+            ],
+            "rule_evaluation_outcome": "PASS"
         },
         "6-7": {
             "rule_id": "6-7",
@@ -1428,7 +975,7 @@
             "standard_section": "G12345",
             "evaluations": [
                 {
-                    "id": "0",
+                    "id": "ATTIC ZN",
                     "outcome": "PASS",
                     "messages": "",
                     "calculated_values": {
@@ -1436,9 +983,59 @@
                         "has_daylight_control_flag": "False",
                         "daylight_schedule_adjustment_flag": "False"
                     }
+                },
+                {
+                    "id": "CORE_ZN ZN",
+                    "outcome": "PASS",
+                    "messages": "",
+                    "calculated_values": {
+                        "daylight_flag_p": "False",
+                        "has_daylight_control_flag": "False",
+                        "daylight_schedule_adjustment_flag": "False"
+                    }
+                },
+                {
+                    "id": "PERIMETER_ZN_1 ZN",
+                    "outcome": "UNDETERMINED",
+                    "messages": "Some of the spaces in zone are modeled with window(s) and/or skylight(s) and have daylighting controls modeled explicitly in the simulation tool. Verify that the mandatory lighting control requirements are met.",
+                    "calculated_values": {
+                        "daylight_flag_p": "True",
+                        "has_daylight_control_flag": "True",
+                        "daylight_schedule_adjustment_flag": "False"
+                    }
+                },
+                {
+                    "id": "PERIMETER_ZN_2 ZN",
+                    "outcome": "UNDETERMINED",
+                    "messages": "Some of the spaces in zone are modeled with window(s) and/or skylight(s) and have daylighting controls modeled explicitly in the simulation tool. Verify that the mandatory lighting control requirements are met.",
+                    "calculated_values": {
+                        "daylight_flag_p": "True",
+                        "has_daylight_control_flag": "True",
+                        "daylight_schedule_adjustment_flag": "False"
+                    }
+                },
+                {
+                    "id": "PERIMETER_ZN_3 ZN",
+                    "outcome": "UNDETERMINED",
+                    "messages": "Some of the spaces in zone are modeled with window(s) and/or skylight(s) and have daylighting controls modeled explicitly in the simulation tool. Verify that the mandatory lighting control requirements are met.",
+                    "calculated_values": {
+                        "daylight_flag_p": "True",
+                        "has_daylight_control_flag": "True",
+                        "daylight_schedule_adjustment_flag": "False"
+                    }
+                },
+                {
+                    "id": "PERIMETER_ZN_4 ZN",
+                    "outcome": "UNDETERMINED",
+                    "messages": "Some of the spaces in zone are modeled with window(s) and/or skylight(s) and have daylighting controls modeled explicitly in the simulation tool. Verify that the mandatory lighting control requirements are met.",
+                    "calculated_values": {
+                        "daylight_flag_p": "True",
+                        "has_daylight_control_flag": "True",
+                        "daylight_schedule_adjustment_flag": "False"
+                    }
                 }
             ],
-            "rule_evaluation_outcome": "PASS"
+            "rule_evaluation_outcome": "UNDETERMINED"
         },
         "6-8": {
             "rule_id": "6-8",
@@ -1448,12 +1045,9 @@
             "standard_section": "G12345",
             "evaluations": [
                 {
-                    "id": "6-8",
+                    "id": "-SmallOffice-ASHRAE 169-2013-5B created: 2022-10-17 12:32:02 -0700",
                     "outcome": "UNDETERMINED",
-                    "messages": {
-                        "INVALID_BASELINE_CONTEXT": "id:ashrae_229_1 missing:calendar",
-                        "INVALID_PROPOSED_CONTEXT": "id:ashrae_229_1 missing:calendar"
-                    },
+                    "messages": "MISSING_BASELINE",
                     "calculated_values": ""
                 }
             ],
