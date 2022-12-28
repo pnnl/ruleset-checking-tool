@@ -82,13 +82,13 @@ Replace-Undetermined
         fail_rate = 0
         undetermined_rate = 0
         not_applicable_rate = 0
-        if rule_outcome_result == "PASS":
+        if rule_outcome_result == RCTOutcomeLabel.PASS:
             pass_rate = 100
-        elif rule_outcome_result == "FAILED":
+        elif rule_outcome_result == RCTOutcomeLabel.FAILED:
             fail_rate = 100
-        elif rule_outcome_result == "UNDETERMINED":
+        elif rule_outcome_result == RCTOutcomeLabel.UNDETERMINED:
             undetermined_rate = 100
-        else:
+        elif rule_outcome_result == RCTOutcomeLabel.NOT_APPLICABLE:
             not_applicable_rate = 100
 
         one_rule_report = f"""
@@ -178,16 +178,16 @@ Replace-Undetermined
         section_no = rule_outcome.split("-")[0]
 
         def _ruleset_outcome_count_helper(section_name, rule_outcome_result):
-            if rule_outcome_result == "PASS":
+            if rule_outcome_result == RCTOutcomeLabel.PASS:
                 self.ruleset_outcome[section_name][RCTOutcomeLabel.PASS] += 1
                 self.ruleset_outcome["All"][RCTOutcomeLabel.PASS] += 1
-            elif rule_outcome_result == "FAILED":
+            elif rule_outcome_result == RCTOutcomeLabel.FAILED:
                 self.ruleset_outcome[section_name][RCTOutcomeLabel.FAILED] += 1
                 self.ruleset_outcome["All"][RCTOutcomeLabel.FAILED] += 1
-            elif rule_outcome_result == "UNDETERMINED":
+            elif rule_outcome_result == RCTOutcomeLabel.UNDETERMINED:
                 self.ruleset_outcome[section_name][RCTOutcomeLabel.UNDETERMINED] += 1
                 self.ruleset_outcome["All"][RCTOutcomeLabel.UNDETERMINED] += 1
-            elif rule_outcome_result == "NOT_APPLICABLE":
+            elif rule_outcome_result == RCTOutcomeLabel.NOT_APPLICABLE:
                 self.ruleset_outcome[section_name][RCTOutcomeLabel.NOT_APPLICABLE] += 1
                 self.ruleset_outcome["All"][RCTOutcomeLabel.NOT_APPLICABLE] += 1
 
