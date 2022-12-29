@@ -70,7 +70,9 @@ Replace-Undetermined
                     try:
                         return _parse_result_helper(result["result"][0])
                     except IndexError:
-                        return "UNDETERMINED"  # if 'result' is empty, return undetermined for now
+                        return (
+                            RCTOutcomeLabel.UNDETERMINED
+                        )  # if 'result' is empty, return undetermined for now
                 elif isinstance(result["result"], dict):
                     return _parse_result_helper(result["result"])
 
