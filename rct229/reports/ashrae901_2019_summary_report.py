@@ -62,7 +62,12 @@ Replace-Undetermined
             if isinstance(result, str):
                 return result
             elif isinstance(result, list):
-                return _parse_result_helper(result[0])
+                try:
+                    return _parse_result_helper(result[0])
+                except IndexError:
+                    return (
+                        RCTOutcomeLabel.UNDETERMINED
+                    )  # if result is missing (error), return UNDETERMINED (for now)
             elif isinstance(result, dict):
                 if isinstance(result["result"], str):
                     return result["result"]
