@@ -1,18 +1,39 @@
 # is_zone_a_vestibule
-**Schema Version:** 0.0.22  
+**Schema Version:** 0.0.23  
 
-**Description:** following the guidelines in ASHRAE that a vestibule is defined as a sapce with at least one exterior door and with a surface area of no more than the greater of 50ft2 or 2% of the total area of the floor.  There is no 100% check for a vestibule, so a space that meets these requirements and also has only 6 surfaces (floor, ceiling and 4 walls) will return "LIKELY" - one that meets the official requirements but has more surfaces will return "POSSIBLY"
+**Description:** following the guidelines in ASHRAE that a vestibule is defined as a sapce with at least one exterior door and with a surface area of no more than the greater of 50ft2 or 2% of the total area of the floor.  There is no 100% check for a vestibule, so a space that meets these requirements and also has only 6 surfaces (floor, ceiling and 4 walls) will return "MAYBE"
+
+We will also check that the lighting space type is in agreement with the space use as a vestibule.  If there is no lighting space type or one of the following lighting space types AND the zone meets the other checks then we return MAYBE:
+	- CORRIDOR_FACILITY_FOR_THE_VISUALLY_IMPAIRED
+	- CORRIDOR_HOSPITAL
+	- CORRIDOR_ALL_OTHERS
+	- LOBBY_FACILITY_FOR_THE_VISUALLY_IMPAIRED
+	- LOBBY_HOTEL
+	- LOBBY_MOTION_PICTURE_THEATER
+	- LOBBY_PERFORMING_ARTS_THEATER
+	- LOBBY_ALL_OTHERS
+	- STAIRWELL
+	
 
 **Inputs:**  
 - **zone**: the zone to be tested
 - **RMR**: the building
 
 **Returns:**  
-- **vestibule_check**: An ENUM with either NO or LIKELY OR MAYBE
+- **vestibule_check**: An ENUM with either NO or MAYBE
  
 **Function Call:** None
 
-## Logic:  
+ 
+## setup for all function calls:
+- make a list of the allowable space types: `allowable_space_lighting_types = [CORRIDOR_FACILITY_FOR_THE_VISUALLY_IMPAIRED, CORRIDOR_HOSPITAL, CORRIDOR_ALL_OTHERS, LOBBY_FACILITY_FOR_THE_VISUALLY_IMPAIRED, LOBBY_HOTEL, LOBBY_MOTION_PICTURE_THEATER, LOBBY_PERFORMING_ARTS_THEATER, LOBBY_ALL_OTHERS, STAIRWELL]
+
+## Logic: 
+- check if the zone spaces have either no lighting space type, or a lighting space type on the allowable_space_lighting_types list.  Start by looping through the spaces in the zone: `for space in zone.spaces:`
+	- check if the space lighting type is NOT either Null or one of the allowable types in the list: `if not(space.lighting_space_type == Null  space.lighting_space_type in allowable_space_lighting_types):`
+		- this is not an eligible space type, the function can return NO right away: `return NO`
+
+- if the function makes it this far, the zone contained only vestibule-compatible spaces and we continue with the rest of the vestibule check below
 
 - make a list of the surface adjacencies that would qualify a space as exterior: `surface_adjacencies = [SurfaceAdjacentToOptions.EXTERIOR]
 - set result to NO: `vestibule_check = NO`
@@ -35,17 +56,14 @@
 		- add the space's floor area to zone_area: `zone_area = zone_area + space.area`
 	- create a variable that equals that maximum vestibule floor area, which is the larger of 50ft2 or 2% of the floor area: `max_vestibule_area = max(50,0.02*floor_area)`
 	- if the zone_area is less than or equal to max_vestibule_area, then this could be a vestibule: `if zone_area <= max_vestibule_area:`
-		- now do the check to see if this is LIKELY a vestibule, or only MAYBE.  We will determine the difference by calculating the ratio between the exterior door area and the floor area.  This check is based on data from projects we've worked on and not an official definition from ASHRAE.  We have set (for now) the threshold between LIKELY and MAYBE at a ratio of 0.25: `if (exterior_door_surface_area/zone_area) > 0.25:`
-			- vestibule_check = LIKELY
-		- otherwise, this could be a long corridor (for a 40,000 ft2 floor, at 2% suface area & 10 ft wide, it would be 80ft long): `else:`
-			- vestibule_check = MAYBE
+		- this zone is possibly a vestibule.  Set vestibule check to MAYBE: `vestibule_check = MAYBE`
 
 
 	 **Returns** `return vestibule_check`  
 
 **Notes/Questions:**  
 1. Do any of the adjacency options from AdditionalSurfaceAdjacentToOptions2019ASHRAE901 need to be included in the list?
-2. added a check for ratio between exterior door area and floor area - based on a limited selection of buildings I've worked on, most projects had a ratio of 0.28 - 0.8, with one large school having very large vesitbules and relatively few doors (only half the exerior wall is operable) with a ratio of 0.11.  I think it is reasonable to set a threshold between LIKELY and MAYBE at a ratio of 0.25.
+
 
 
 **[Back](../_toc.md)**
