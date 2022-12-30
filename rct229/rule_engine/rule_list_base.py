@@ -39,7 +39,7 @@ class RuleDefinitionListBase(RuleDefinitionBase):
             not_applicable_msg=not_applicable_msg,
             ruleset_section_title=ruleset_section_title,
             standard_section=standard_section,
-            is_primary_rule=is_primary_rule
+            is_primary_rule=is_primary_rule,
         )
 
     def create_context_list(self, context, data):
