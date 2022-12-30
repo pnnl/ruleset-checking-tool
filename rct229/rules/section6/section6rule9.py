@@ -26,6 +26,9 @@ class Section6Rule9(RuleDefinitionListIndexedBase):
             id="6-9",
             description="Proposed building is modeled with other programmable lighting controls through a 10% "
             "schedule reduction in buildings less than 5,000sq.ft.",
+            ruleset_section_title="Lighting",
+            standard_section="Section G3.1-6(i) Modeling Requirements for the Proposed design",
+            is_primary_rule=True,
             list_path="ruleset_model_instances[0]",
             required_fields={"$": ["calendar"], "calendar": ["is_leap_year"]},
             data_items={"is_leap_year": ("proposed", "calendar/is_leap_year")},

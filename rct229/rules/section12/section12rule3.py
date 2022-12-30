@@ -13,7 +13,10 @@ class Section12Rule3(RuleDefinitionListIndexedBase):
             each_rule=Section12Rule3.BuildingRule(),
             index_rmr="user",
             id="12-3",
-            description=("User RMR Space ID in Proposed RMR"),
+            description="User RMR Space ID in Proposed RMR",
+            ruleset_section_title="Receptacle",
+            standard_section="Section Table G3.1-12 Receptacles: Modeling Requirements for the Proposed design",
+            is_primary_rule=True,
             rmr_context="ruleset_model_instances/0/buildings",
         )
 
