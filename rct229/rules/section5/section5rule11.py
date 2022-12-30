@@ -28,6 +28,9 @@ class Section5Rule11(RuleDefinitionListIndexedBase):
             index_rmr="baseline",
             id="5-11",
             description="Baseline above-grade wall assemblies must match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8.",
+            ruleset_section_title="Envelope",
+            standard_section="Section G3.1-5(b) Building Envelope Modeling Requirements for the Baseline building",
+            is_primary_rule=True,
             list_path="ruleset_model_instances[0].buildings[*]",
             data_items={"climate_zone": ("baseline", "weather/climate_zone")},
         )

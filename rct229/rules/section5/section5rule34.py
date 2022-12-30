@@ -24,6 +24,9 @@ class Section5Rule34(RuleDefinitionListIndexedBase):
             index_rmr="baseline",
             id="5-34",
             description="If skylight area in the proposed design is 3% or less of the roof surface, the skylight area in baseline shall be equal to that in the proposed design.",
+            ruleset_section_title="Envelope",
+            standard_section="Section G3.1-5(e) Building Envelope Modeling Requirements for the Baseline building",
+            is_primary_rule=True,
             list_path="ruleset_model_instances[0].buildings[*]",
             data_items={"climate_zone": ("baseline", "weather/climate_zone")},
         )

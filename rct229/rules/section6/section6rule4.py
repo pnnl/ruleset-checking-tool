@@ -29,6 +29,9 @@ class Section6Rule4(RuleDefinitionListIndexedBase):
             index_rmr="baseline",
             id="6-4",
             description='Where a complete lighting system exists and where a lighting system has been designed and submitted with design documents, the baseline LPD is equal to expected value in Table G3.7. Where lighting neither exists nor is submitted with design documents, baseline LPD shall be determined in accordance with Table G3-7 for "Office-Open Plan" space type.',
+            ruleset_section_title="Lighting",
+            standard_section="Section G3.1-6 Modeling Requirements for the Baseline",
+            is_primary_rule=True,
             list_path="ruleset_model_instances[0].buildings[*].building_segments[*]",
         )
 
