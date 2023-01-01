@@ -41,12 +41,14 @@
 - get a dictionary of hvac systems, their zones and terminal units using the function get_dict_of_zones_and_terminal_units_served_by_hvac_sys : `dict_of_zones_and_terminal_units_served_by_hvac_sys = get_dict_of_zones_and_terminal_units_served_by_hvac_sys(B_RMI)`
 - loop through the hvac systems in the dictionary: `for hvac_b_id in dict_of_zones_and_terminal_units_served_by_hvac_sys:`
   - Check if HVAC system is type 6, 8, 8a, 6b, 8b: `if hvac_b_id in eligible_systems:`
+    - we do the rule check for each terminal: `for terminal_b_id in dict_of_zones_and_terminal_units_served_by_hvac_sys[hvac_b_id]["Terminal_Unit_List"]:`
+      - get the terminal unit associated with the id: `terminal_b = match_data_element(B_RMI,Terminal,terminal_b_id)`
 
-        **Rule Assertion:**
+**Rule Assertion:**
 
-    - Case 1: For each terminal that is served by HVAC system that is Type-6, 8, 8a, 6b, 8b, if fan in parallel VAV-powered box is sized for 50% of the peak design primary air (from the VAV air-handling unit) flow rate (CFM) and is modeled with 0.35W/cfm fan power: `if ( terminal_b.fan.design_airflow == terminal_b.primary_airflow * 0.5 ) AND ( terminal_b.fan.design_electric_power == 0.35 * terminal_b.fan.design_airflow ): PASS`
+      - Case 1: For each terminal that is served by HVAC system that is Type-6, 8, 8a, 6b, 8b, if fan in parallel VAV-powered box is sized for 50% of the peak design primary air (from the VAV air-handling unit) flow rate (CFM) and is modeled with 0.35W/cfm fan power: `if ( terminal_b.fan.design_airflow == terminal_b.primary_airflow * 0.5 ) AND ( terminal_b.fan.design_electric_power == 0.35 * terminal_b.fan.design_airflow ): PASS`
 
-    - Case 2: Else: `else: FAIL`
+      - Case 2: Else: `else: FAIL`
         
 **Notes:**
 1. Updated the Rule ID from 23-5 to 23-6 on 11/28/2022
