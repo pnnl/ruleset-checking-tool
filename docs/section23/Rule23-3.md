@@ -19,6 +19,7 @@
 1. get_baseline_system_types()
 2. is_baseline_system_type()
 3. baseline_system_type_compare()
+4. get_dict_of_zones_and_terminal_units_served_by_hvac_sys()
 
 **Applicability Checks:**  
 - create a list of the target system types: `target_system_types = [HVAC_SYS.SYS_5,HVAC_SYS.SYS_6,HVAC_SYS.SYS_7,HVAC_SYS.SYS_8]`
@@ -36,19 +37,17 @@
   - check if it is one of the applicable systems (5-8, or 11): `if any(baseline_system_type_compare(baseline_system_type, target_system_type, false) for target_system_type in target_system_types):`
     - add the ids to the list of eligible systems: `eligible_hvac_system_ids = eligible_hvac_system_ids + baseline_hvac_system_dict[baseline_system_type]`
 
-- For each zone in B_RMR: `for zone_b in B_RMR...zones:`
+- get a dictionary of hvac systems, their zones and terminal units using the function get_dict_of_zones_and_terminal_units_served_by_hvac_sys : `dict_of_zones_and_terminal_units_served_by_hvac_sys = get_dict_of_zones_and_terminal_units_served_by_hvac_sys(B_RMI)`
+- loop through the hvac systems in the dictionary: `for hvac_b_id in dict_of_zones_and_terminal_units_served_by_hvac_sys:`
+  - Check if HVAC system is one of the eligible systems: `if hvac_b_id in eligible_hvac_system_ids:`
+    - we do the rule check for each terminal: `for terminal_b_id in dict_of_zones_and_terminal_units_served_by_hvac_sys[hvac_b_id]["Terminal_Unit_List"]:`
+      - get the terminal unit associated with the id: `terminal_b = match_data_element(B_RMI,Terminal,terminal_b_id)`
 
-  - For each terminal in zone: `for terminal_b in zone_b.terminals:`
+      **Rule Assertion:**
 
-    - Get HVAC system serving terminal: `hvac_b = terminal_b.served_by_heating_ventilating_air_conditioning_systems`
-  
-      - Check if HVAC system is one of the eligible systems: `if hvac_b.id in eligible_hvac_system_ids:`
+      - Case 1: For each terminal that is served by HVAC system that is Type-5, 7, 7a, 5b, 7b, 7c, 6, 8, 8a, 6b, 8b, if minimum volume setpoint is equal to 30% of peak primary design airflow or the rate required for minimum outside air, whichever is larger: `if terminal_b.minimum_airflow == MAX(terminal_b.primary_airflow * 0.3, terminal_b.minimum_outdoor_airflow): PASS`
 
-        **Rule Assertion:**
-
-        - Case 1: For each terminal that is served by HVAC system that is Type-5, 7, 7a, 5b, 7b, 7c, 6, 8, 8a, 6b, 8b, if minimum volume setpoint is equal to 30% of peak primary design airflow or the rate required for minimum outside air, whichever is larger: `if terminal_b.minimum_airflow == MAX(terminal_b.primary_airflow * 0.3, terminal_b.minimum_outdoor_airflow): PASS`
-
-        - Case 2: Else, minimum volume setpoint is not equal to 30% of peak primary design airflow or the rate required for minimum outside air, whichever is larger: `else: FAIL`
+      - Case 2: Else, minimum volume setpoint is not equal to 30% of peak primary design airflow or the rate required for minimum outside air, whichever is larger: `else: FAIL`
 
 **Notes:**
 1. Updated the Rule ID from 23-2 to 23-3 on 11/28/2022
