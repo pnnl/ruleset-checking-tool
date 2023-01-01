@@ -30,15 +30,15 @@
 ## Rule Logic:  
 
 - For each hvac system type in the building: `for baseline_system_type in baseline_hvac_system_dict:`
-  - for each hvac system in the building: `for hvac_b_id in baseline_hvac_system_dict[baseline_system_type]:`
-    - check if it is one of the eligible system types: `if any(baseline_system_type_compare(baseline_system_type, target_system_type, false) for target_system_type in target_system_types):`
-    - get the hvac system: `hvac_b = get_component_by_id(B_RMI, hvac_id)`
-      - For each fan system in HVAC system: `for fan_system_b in hvac_b.fan_systems:`
-        **Rule Assertion:**
+  - check if it is one of the eligible system types: `if any(baseline_system_type_compare(baseline_system_type, target_system_type, false) for target_system_type in target_system_types):`
+    - for each hvac system in the building: `for hvac_b_id in baseline_hvac_system_dict[baseline_system_type]:`
+      - get the hvac system: `hvac_b = match_data_element(B_RMI, HeatingVentilatingAirConditioningSystem, hvac_b_id)`
+        - For each fan system in HVAC system: `for fan_system_b in hvac_b.fan_systems:`
+          **Rule Assertion:**
 
-        - Case 1: For each HVAC system that is Type-5, 6, 7, 8, 11.1, 11.2, 7a, 8a, 11.1a, 11.2a, 5b, 6b, 7b, 8b, 11b, 7c, 11c, if supply air temperature is reset higher by 5F under minimum cooling load condition: `if ( fan_system_b.temperature_control == "ZONE_RESET" ) AND ( fan_system_b.reset_differential_temperature == 5 ): PASS`
+          - Case 1: For each HVAC system that is Type-5, 6, 7, 8, 11.1, 11.2, 7a, 8a, 11.1a, 11.2a, 5b, 6b, 7b, 8b, 11b, 7c, 11c, if supply air temperature is reset higher by 5F under minimum cooling load condition: `if ( fan_system_b.temperature_control == "ZONE_RESET" ) AND ( fan_system_b.reset_differential_temperature == 5 ): PASS`
 
-        - Case 2: Else: `else: FAIL`
+          - Case 2: Else: `else: FAIL`
 
 **Notes:**
 1. Updated the Rule ID from 23-1 to 23-2 on 11/28/2022
