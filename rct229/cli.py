@@ -85,7 +85,9 @@ def evaluate(user_rmd, baseline_rmd, proposed_rmd, reports):
     report = evaluate_rmr_triplet(user_rmd, baseline_rmd, proposed_rmd)
     # have report attached.
     for report_type in reports:
-        report_module = REPORT_MODULE[report_type]()
+        report_module = REPORT_MODULE[report_type](
+            user_rmd.name, proposed_rmd.name, baseline_rmd.name
+        )
         report_module.generate(report, "./examples/output/")
 
 

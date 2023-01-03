@@ -6,7 +6,7 @@ from rct229.rule_engine.rct_outcome_label import RCTOutcomeLabel
 
 
 class RCTReport:
-    def __init__(self):
+    def __init__(self, user_rmd, proposed_rmd, baseline_rmd):
         self.title = "Ruleset Checking Tool"
         self.purpose = "report"
         self.ruleset = "ruleset"
@@ -19,6 +19,9 @@ class RCTReport:
             RCTOutcomeLabel.UNDETERMINED: 0,
             RCTOutcomeLabel.NOT_APPLICABLE: 0,
         }
+        self.user_rmd = user_rmd
+        self.proposed_rmd = proposed_rmd
+        self.baseline_rmd = baseline_rmd
 
     def generate(self, rct_outcome, report_dir):
         """
@@ -42,23 +45,24 @@ class RCTReport:
         invalid_msg = rct_outcome["invalid_rmrs"]
         outcomes = sorted(
             rct_outcome["outcomes"], key=lambda x: [int(y) for y in x["id"].split("-")]
-        )  # sorting allows to organize rules in order
+        )
         if invalid_msg:
             print(f"Invalid RMDs: {str(invalid_msg)}\n")
         else:
             ruleset_report = self.initialize_ruleset_report()
             for outcome in outcomes:
-                rule_outcome_dict = {
-                    RCTOutcomeLabel.PASS: 0,
-                    RCTOutcomeLabel.FAILED: 0,
-                    RCTOutcomeLabel.UNDETERMINED: 0,
-                    RCTOutcomeLabel.NOT_APPLICABLE: 0,
-                }
-                rule_report = self.generate_rule_report(outcome, rule_outcome_dict)
-                rule_outcome = self.calculate_rule_outcome(rule_outcome_dict)
-                self.add_rule_to_ruleset_report(
-                    ruleset_report, rule_report, rule_outcome
-                )
+                if outcome["primary_rule"]:
+                    rule_outcome_dict = {
+                        RCTOutcomeLabel.PASS: 0,
+                        RCTOutcomeLabel.FAILED: 0,
+                        RCTOutcomeLabel.UNDETERMINED: 0,
+                        RCTOutcomeLabel.NOT_APPLICABLE: 0,
+                    }
+                    rule_report = self.generate_rule_report(outcome, rule_outcome_dict)
+                    rule_outcome = self.calculate_rule_outcome(rule_outcome_dict)
+                    self.add_rule_to_ruleset_report(
+                        ruleset_report, rule_report, rule_outcome
+                    )
             report_dir = os.path.join(report_dir, self.ruleset_report_file)
             self.save_ruleset_report(ruleset_report, report_dir)
 

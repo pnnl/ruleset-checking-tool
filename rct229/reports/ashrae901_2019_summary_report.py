@@ -5,8 +5,10 @@ from rct229.rule_engine.rct_outcome_label import RCTOutcomeLabel
 
 
 class ASHRAE9012019SummaryReport(RCTReport):
-    def __init__(self):
-        super(ASHRAE9012019SummaryReport, self).__init__()
+    def __init__(self, user_rmd, proposed_rmd, baseline_rmd):
+        super(ASHRAE9012019SummaryReport, self).__init__(
+            user_rmd, proposed_rmd, baseline_rmd
+        )
         self.title = "ASHRAE STD 229P RULESET CHECKING TOOL"
         self.purpose = "Summary Report"
         self.ruleset = "ASHRAE 90.1-2019 Performance Rating Method (Appendix G)"
@@ -20,9 +22,8 @@ class ASHRAE9012019SummaryReport(RCTReport):
             "Lighting",
             "Receptacles",
             "Transformers",
-            "HVAC-General",
-            "HVAC-AirSide",
             "HVAC-WaterSide",
+            "HVAC-Chiller",
         ]
         self.ruleset_outcome = {
             name: {
@@ -41,13 +42,13 @@ class ASHRAE9012019SummaryReport(RCTReport):
 ##### Schema version: {self.schema_version}
 
 ### RMD Files
-- user: {'TO BE UPDATED!!'}
-- proposed: {'TO BE UPDATED!!'}
-- baseline: {'TO BE UPDATED!!'}
+- user: {self.user_rmd.split('/')[-1]}
+- proposed: {self.proposed_rmd.split('/')[-1]}
+- baseline: {self.baseline_rmd.split('/')[-1]}
 
 ### Summary: All Rules
-|                              | All | Envelope | Lighting | Receptacles | Transformers | HVAC-General | HVAC-AirSide | HVAC-WaterSide |
-|:----------------------------:|:---:|:--------:|:--------:|:-----------:|:------------:|:------------:|:------------:|:--------------:|
+|                              | All | Envelope | Lighting | Receptacles | Transformers | HVAC-WaterSide | HVAC - Chiller |
+|:----------------------------:|:---:|:--------:|:--------:|:-----------:|:------------:|:--------------:|:--------------:|
 Replace-Rules
 Replace-Pass
 Replace-Fail
@@ -101,7 +102,7 @@ Replace-Undetermined
         one_rule_report = f"""
   - **Rule Id**: {rule_outcome["id"]}
     - **Description**: {rule_outcome["description"]}
-    - **90.1-2019 Section**: {'TO BE UPDATED!!'}
+    - **90.1-2019 Section**: {rule_outcome['standard_section']}
     - **Overall Rule Evaluation Outcome**: {rule_outcome_result}
     - **Number of applicable components**: {'TO BE UPDATED!!'} 
       | Pass %: {pass_rate} | Fail %: {fail_rate} | Not applicable %: {undetermined_rate} | Undetermined %: {not_applicable_rate} | 
@@ -128,11 +129,11 @@ Replace-Undetermined
             ]:
                 overall_rules_count[key] += self.ruleset_outcome[key][outcome]
 
-        rules_line = f"| Rules |{overall_rules_count['All']}|{overall_rules_count['Envelope']}|{overall_rules_count['Lighting']}|{overall_rules_count['Receptacles']}|{overall_rules_count['Transformers']}|{overall_rules_count['HVAC-General']}|{overall_rules_count['HVAC-AirSide']}|{overall_rules_count['HVAC-WaterSide']}|"
-        pass_line = f"| Pass |{self.ruleset_outcome['All'][RCTOutcomeLabel.PASS]}|{self.ruleset_outcome['Envelope'][RCTOutcomeLabel.PASS]}|{self.ruleset_outcome['Lighting'][RCTOutcomeLabel.PASS]}|{self.ruleset_outcome['Receptacles'][RCTOutcomeLabel.PASS]}|{self.ruleset_outcome['Transformers'][RCTOutcomeLabel.PASS]}|{self.ruleset_outcome['HVAC-General'][RCTOutcomeLabel.PASS]}|{self.ruleset_outcome['HVAC-AirSide'][RCTOutcomeLabel.PASS]}|{self.ruleset_outcome['HVAC-WaterSide'][RCTOutcomeLabel.PASS]}|"
-        fail_line = f"| Fail |{self.ruleset_outcome['All'][RCTOutcomeLabel.FAILED]}|{self.ruleset_outcome['Envelope'][RCTOutcomeLabel.FAILED]}|{self.ruleset_outcome['Lighting'][RCTOutcomeLabel.FAILED]}|{self.ruleset_outcome['Receptacles'][RCTOutcomeLabel.FAILED]}|{self.ruleset_outcome['Transformers'][RCTOutcomeLabel.FAILED]}|{self.ruleset_outcome['HVAC-General'][RCTOutcomeLabel.FAILED]}|{self.ruleset_outcome['HVAC-AirSide'][RCTOutcomeLabel.FAILED]}|{self.ruleset_outcome['HVAC-WaterSide'][RCTOutcomeLabel.FAILED]}|"
-        not_applicable_line = f"| Not Applicable |{self.ruleset_outcome['All'][RCTOutcomeLabel.NOT_APPLICABLE]}|{self.ruleset_outcome['Envelope'][RCTOutcomeLabel.NOT_APPLICABLE]}|{self.ruleset_outcome['Lighting'][RCTOutcomeLabel.NOT_APPLICABLE]}|{self.ruleset_outcome['Receptacles'][RCTOutcomeLabel.NOT_APPLICABLE]}|{self.ruleset_outcome['Transformers'][RCTOutcomeLabel.NOT_APPLICABLE]}|{self.ruleset_outcome['HVAC-General'][RCTOutcomeLabel.NOT_APPLICABLE]}|{self.ruleset_outcome['HVAC-AirSide'][RCTOutcomeLabel.NOT_APPLICABLE]}|{self.ruleset_outcome['HVAC-WaterSide'][RCTOutcomeLabel.NOT_APPLICABLE]}|"
-        undetermined_line = f"| Undetermined (manual review) |{self.ruleset_outcome['All'][RCTOutcomeLabel.UNDETERMINED]}|{self.ruleset_outcome['Envelope'][RCTOutcomeLabel.UNDETERMINED]}|{self.ruleset_outcome['Lighting'][RCTOutcomeLabel.UNDETERMINED]}|{self.ruleset_outcome['Receptacles'][RCTOutcomeLabel.UNDETERMINED]}|{self.ruleset_outcome['Transformers'][RCTOutcomeLabel.UNDETERMINED]}|{self.ruleset_outcome['HVAC-General'][RCTOutcomeLabel.UNDETERMINED]}|{self.ruleset_outcome['HVAC-AirSide'][RCTOutcomeLabel.UNDETERMINED]}|{self.ruleset_outcome['HVAC-WaterSide'][RCTOutcomeLabel.UNDETERMINED]}|"
+        rules_line = f"|Rules|{overall_rules_count['All']}|{overall_rules_count['Envelope']}|{overall_rules_count['Lighting']}|{overall_rules_count['Receptacles']}|{overall_rules_count['Transformers']}|{overall_rules_count['HVAC-WaterSide']}|{overall_rules_count['HVAC-Chiller']}|"
+        pass_line = f"|Pass|{self.ruleset_outcome['All'][RCTOutcomeLabel.PASS]}|{self.ruleset_outcome['Envelope'][RCTOutcomeLabel.PASS]}|{self.ruleset_outcome['Lighting'][RCTOutcomeLabel.PASS]}|{self.ruleset_outcome['Receptacles'][RCTOutcomeLabel.PASS]}|{self.ruleset_outcome['Transformers'][RCTOutcomeLabel.PASS]}|{self.ruleset_outcome['HVAC-WaterSide'][RCTOutcomeLabel.PASS]}|{self.ruleset_outcome['HVAC-Chiller'][RCTOutcomeLabel.PASS]}|"
+        fail_line = f"|Fail|{self.ruleset_outcome['All'][RCTOutcomeLabel.FAILED]}|{self.ruleset_outcome['Envelope'][RCTOutcomeLabel.FAILED]}|{self.ruleset_outcome['Lighting'][RCTOutcomeLabel.FAILED]}|{self.ruleset_outcome['Receptacles'][RCTOutcomeLabel.FAILED]}|{self.ruleset_outcome['Transformers'][RCTOutcomeLabel.FAILED]}|{self.ruleset_outcome['HVAC-WaterSide'][RCTOutcomeLabel.FAILED]}|{self.ruleset_outcome['HVAC-Chiller'][RCTOutcomeLabel.FAILED]}|"
+        not_applicable_line = f"|Not Applicable|{self.ruleset_outcome['All'][RCTOutcomeLabel.NOT_APPLICABLE]}|{self.ruleset_outcome['Envelope'][RCTOutcomeLabel.NOT_APPLICABLE]}|{self.ruleset_outcome['Lighting'][RCTOutcomeLabel.NOT_APPLICABLE]}|{self.ruleset_outcome['Receptacles'][RCTOutcomeLabel.NOT_APPLICABLE]}|{self.ruleset_outcome['Transformers'][RCTOutcomeLabel.NOT_APPLICABLE]}|{self.ruleset_outcome['HVAC-WaterSide'][RCTOutcomeLabel.NOT_APPLICABLE]}|{self.ruleset_outcome['HVAC-Chiller'][RCTOutcomeLabel.NOT_APPLICABLE]}|"
+        undetermined_line = f"|Undetermined (manual review)|{self.ruleset_outcome['All'][RCTOutcomeLabel.UNDETERMINED]}|{self.ruleset_outcome['Envelope'][RCTOutcomeLabel.UNDETERMINED]}|{self.ruleset_outcome['Lighting'][RCTOutcomeLabel.UNDETERMINED]}|{self.ruleset_outcome['Receptacles'][RCTOutcomeLabel.UNDETERMINED]}|{self.ruleset_outcome['Transformers'][RCTOutcomeLabel.UNDETERMINED]}|{self.ruleset_outcome['HVAC-WaterSide'][RCTOutcomeLabel.UNDETERMINED]}|{self.ruleset_outcome['HVAC-Chiller'][RCTOutcomeLabel.UNDETERMINED]}|"
 
         self.summary_report = re.sub("Replace-Rules", rules_line, self.summary_report)
         self.summary_report = re.sub("Replace-Pass", pass_line, self.summary_report)
@@ -166,17 +167,16 @@ Replace-Undetermined
 #### Section: Transformers
         """
         elif (
-            section_no in ["21", "22"]
-            and "Section: HVAC-WaterSide" not in self.summary_report
+            section_no == "21" and "Section: HVAC-WaterSide" not in self.summary_report
         ):
             return """
-#### Section: HVAC-WaterSide
+#### Section: HVAC - WaterSide
         """
         elif (
-            section_no == "23" and "Section: Air-side system" not in self.summary_report
+            section_no == "22" and "Section: HVAC - Chiller" not in self.summary_report
         ):
             return """
-#### Section: HVAC-AirSide
+#### Section: HVAC - Chiller
         """
         else:
             return None
@@ -206,7 +206,7 @@ Replace-Undetermined
             _ruleset_outcome_count_helper("Receptacles", rule_outcome_result)
         elif section_no == "15":
             _ruleset_outcome_count_helper("Transformers", rule_outcome_result)
-        elif section_no in ["21", "22"]:
+        elif section_no == "21":
             _ruleset_outcome_count_helper("HVAC-WaterSide", rule_outcome_result)
-        elif section_no == "23":
-            _ruleset_outcome_count_helper("HVAC-AirSide", rule_outcome_result)
+        elif section_no == "22":
+            _ruleset_outcome_count_helper("HVAC-Chiller", rule_outcome_result)
