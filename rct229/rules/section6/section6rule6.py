@@ -14,6 +14,9 @@ class Section6Rule6(RuleDefinitionListIndexedBase):
             index_rmr="baseline",
             id="6-6",
             description="Baseline building is not modeled with daylighting control",
+            ruleset_section_title="Lighting",
+            standard_section="Section G3.1-6 Modeling Requirements for the baseline building",
+            is_primary_rule=True,
             rmr_context="ruleset_model_instances/0/buildings",
         )
 

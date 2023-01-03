@@ -16,6 +16,9 @@ class RuleDefinitionBase:
         rmrs_used,
         id=None,
         description=None,
+        ruleset_section_title=None,
+        standard_section=None,
+        is_primary_rule=False,
         rmr_context="",
         required_fields=None,
         must_match_by_ids=[],
@@ -52,6 +55,9 @@ class RuleDefinitionBase:
         self.rmrs_used = rmrs_used
         self.id = id
         self.description = description
+        self.ruleset_section_title = ruleset_section_title
+        self.standard_section = standard_section
+        self.is_primary_rule = is_primary_rule
         # rmr_context is a jsonpointer string
         # As a convenience, any leading '/' should not be included and will
         # be inserted when the pointer is used in _get_context().
@@ -104,6 +110,11 @@ class RuleDefinitionBase:
             outcome["id"] = self.id
         if self.description:
             outcome["description"] = self.description
+        if self.ruleset_section_title:
+            outcome["ruleset_section_title"] = self.ruleset_section_title
+        if self.standard_section:
+            outcome["standard_section"] = self.standard_section
+        outcome["primary_rule"] = True if self.is_primary_rule else False
         if self.rmr_context:
             outcome["rmr_context"] = self.rmr_context
 

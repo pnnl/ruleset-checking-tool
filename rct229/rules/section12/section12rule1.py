@@ -16,6 +16,9 @@ class Section12Rule1(RuleDefinitionListIndexedBase):
             description=(
                 "Number of spaces modeled in User RMR and Baseline RMR are the same"
             ),
+            ruleset_section_title="Receptacle",
+            standard_section="Section Table G3.1-12 Modeling Requirements for the Proposed design",
+            is_primary_rule=True,
             rmr_context="ruleset_model_instances/0/buildings",
         )
 

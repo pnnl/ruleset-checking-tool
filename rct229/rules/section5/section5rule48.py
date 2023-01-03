@@ -24,6 +24,9 @@ class Section5Rule48(RuleDefinitionListIndexedBase):
             index_rmr="baseline",
             id="5-48",
             description="The air leakage rate in unconditioned and unenclosed spaces must be the same the baseline and proposed design.",
+            ruleset_section_title="Envelope",
+            standard_section="Section G3.1-1 Building Envelope Modeling Requirements for the Proposed design and Baseline building",
+            is_primary_rule=True,
             list_path="ruleset_model_instances[0].buildings[*]",
         )
 

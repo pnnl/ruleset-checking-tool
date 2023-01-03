@@ -15,6 +15,9 @@ class Section5Rule2(RuleDefinitionListIndexedBase):
             index_rmr="proposed",
             id="5-2",
             description="Orientation is the same in user model and proposed model",
+            ruleset_section_title="Envelope",
+            standard_section="Section G3.1-5(a) Building Envelope Modeling Requirements for the Proposed building",
+            is_primary_rule=False,
             rmr_context="ruleset_model_instances/0/buildings",
         )
 

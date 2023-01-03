@@ -27,6 +27,9 @@ class Section5Rule28(RuleDefinitionListIndexedBase):
             index_rmr="baseline",
             id="5-28",
             description="Subsurface that is not regulated (not part of building envelope) must be modeled with the same area, U-factor and SHGC in the baseline as in the proposed design.",
+            ruleset_section_title="Envelope",
+            standard_section="Section G3.1-5(a) Building Envelope Modeling Requirements for the Baseline building",
+            is_primary_rule=True,
             list_path="ruleset_model_instances[0].buildings[*]",
             data_items={"climate_zone": ("baseline", "weather/climate_zone")},
         )
