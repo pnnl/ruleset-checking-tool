@@ -6,8 +6,8 @@ from rct229.report_engine.rct_report import RCTReport
 
 
 class EngineRawOutput(RCTReport):
-    def __init__(self, user_rmd, proposed_rmd, baseline_rmd):
-        super(EngineRawOutput, self).__init__(user_rmd, proposed_rmd, baseline_rmd)
+    def __init__(self):
+        super(EngineRawOutput, self).__init__()
         self.ruleset_report_file = "raw_output.json"
 
     def generate_rule_report(self, rule_outcome, outcome_dict):

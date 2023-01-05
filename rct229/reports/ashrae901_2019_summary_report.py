@@ -5,15 +5,16 @@ from rct229.rule_engine.rct_outcome_label import RCTOutcomeLabel
 
 
 class ASHRAE9012019SummaryReport(RCTReport):
-    def __init__(self, user_rmd, proposed_rmd, baseline_rmd):
-        super(ASHRAE9012019SummaryReport, self).__init__(
-            user_rmd, proposed_rmd, baseline_rmd
-        )
+    def __init__(self, input_dict):
+        super(ASHRAE9012019SummaryReport, self).__init__()
         self.title = "ASHRAE STD 229P RULESET CHECKING TOOL"
         self.purpose = "Summary Report"
         self.ruleset = "ASHRAE 90.1-2019 Performance Rating Method (Appendix G)"
         self.schema_version = "0.0.23"
         self.ruleset_report_file = "ashrae901_2019_summary_report.md"
+        self.user_rmd = input_dict["user_rmd"]
+        self.proposed_rmd = input_dict["proposed_rmd"]
+        self.baseline_rmd = input_dict["baseline_rmd"]
 
     def initialize_ruleset_report(self):
         self.section_list = [
@@ -108,7 +109,7 @@ Replace-Undetermined
     - **90.1-2019 Section**: {rule_outcome['standard_section']}
     - **Overall Rule Evaluation Outcome**: {overall_result}
     - **Number of applicable components**: {no_of_applicable_component} 
-      | Pass %: {pass_rate}| Fail %: {fail_rate}| Not applicable %: {undetermined_rate}| Undetermined %: {not_applicable_rate}| 
+      | Pass %: {pass_rate}| Fail %: {fail_rate}| Not applicable %: {not_applicable_rate}| Undetermined %: {undetermined_rate}| 
       |:--------------:|:--------------:|:--------------:|:--------------:|
         """
         return "".join(

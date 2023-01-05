@@ -3,8 +3,8 @@ from rct229.report_engine.rct_report import RCTReport
 
 
 class EngineRawSummary(RCTReport):
-    def __init__(self, user_rmd, proposed_rmd, baseline_rmd):
-        super(EngineRawSummary, self).__init__(user_rmd, proposed_rmd, baseline_rmd)
+    def __init__(self):
+        super(EngineRawSummary, self).__init__()
         self.ruleset_report_file = "raw_summary.txt"
         self.num_evaluation = 0
 

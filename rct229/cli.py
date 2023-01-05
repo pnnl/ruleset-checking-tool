@@ -77,17 +77,20 @@ help_text = short_help_text
 
 
 @cli.command("evaluate", short_help=short_help_text, help=help_text, hidden=True)
-@click.argument("user_rmd", type=click.File("rb"))
-@click.argument("baseline_rmd", type=click.File("rb"))
-@click.argument("proposed_rmd", type=click.File("rb"))
+@click.argument("user_rmd", type=click.File("r"))
+@click.argument("baseline_rmd", type=click.File("r"))
+@click.argument("proposed_rmd", type=click.File("r"))
 @click.option("--reports", "-r", multiple=True, default=["RAW_OUTPUT"])
 def evaluate(user_rmd, baseline_rmd, proposed_rmd, reports):
     report = evaluate_rmr_triplet(user_rmd, baseline_rmd, proposed_rmd)
     # have report attached.
+
+    props = {"user_rmd": user_rmd.name, "proposed_rmd": proposed_rmd.name, "baseline_rmd": baseline_rmd.name}
     for report_type in reports:
-        report_module = REPORT_MODULE[report_type](
-            user_rmd.name, proposed_rmd.name, baseline_rmd.name
-        )
+        if report_type == "ASHRAE9012019_SUMMARY":
+            report_module = REPORT_MODULE[report_type](props)
+        else:
+            report_module = REPORT_MODULE[report_type]()
         report_module.generate(report, "./examples/output/")
 
 

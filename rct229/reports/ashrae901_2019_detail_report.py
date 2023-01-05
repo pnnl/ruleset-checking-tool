@@ -6,10 +6,8 @@ from rct229.report_engine.rct_report import RCTReport
 
 
 class ASHRAE9012019DetailReport(RCTReport):
-    def __init__(self, user_rmd, proposed_rmd, baseline_rmd):
-        super(ASHRAE9012019DetailReport, self).__init__(
-            user_rmd, proposed_rmd, baseline_rmd
-        )
+    def __init__(self):
+        super(ASHRAE9012019DetailReport, self).__init__()
         self.title = "ASHRAE STD 229P RULESET CHECKING TOOL"
         self.purpose = "Project Testing Report"
         self.ruleset = "ASHRAE 90.1-2019 Performance Rating Method (Appendix G)"

@@ -6,7 +6,7 @@ from rct229.rule_engine.rct_outcome_label import RCTOutcomeLabel
 
 
 class RCTReport:
-    def __init__(self, user_rmd, proposed_rmd, baseline_rmd):
+    def __init__(self):
         self.title = "Ruleset Checking Tool"
         self.purpose = "report"
         self.ruleset = "ruleset"
@@ -19,9 +19,7 @@ class RCTReport:
             RCTOutcomeLabel.UNDETERMINED: 0,
             RCTOutcomeLabel.NOT_APPLICABLE: 0,
         }
-        self.user_rmd = user_rmd
-        self.proposed_rmd = proposed_rmd
-        self.baseline_rmd = baseline_rmd
+
 
     def generate(self, rct_outcome, report_dir):
         """
@@ -43,7 +41,9 @@ class RCTReport:
 
         """
         invalid_msg = rct_outcome["invalid_rmrs"]
+        # Sort the outcomes by id
         outcomes = sorted(
+            # The key used below splits the id on "-" and ensures the outcomes are sorted by the first components of the ids, then the second components, and so on
             rct_outcome["outcomes"], key=lambda x: [int(y) for y in x["id"].split("-")]
         )
         if invalid_msg:
