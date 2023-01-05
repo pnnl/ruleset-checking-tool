@@ -17,6 +17,7 @@ To be developed by RCT team. Need the function to return the list of hourly valu
 
 **Returns** `get_most_used_weekday_hourly_schedule`  
 
-**Questions:**  None
+**Questions:**  
+1. Is there a way to get the RMD objects from the rulesetmodel instances? In other words is it necessary to send both to this function?
 
 **[Back](../_toc.md)**
