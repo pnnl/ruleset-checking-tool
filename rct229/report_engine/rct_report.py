@@ -51,7 +51,7 @@ class RCTReport:
         else:
             ruleset_report = self.initialize_ruleset_report()
             for outcome in outcomes:
-                if outcome["primary_rule"]:
+                if outcome["primary_rule"]: # output only primary rules
                     rule_outcome_dict = {
                         RCTOutcomeLabel.PASS: 0,
                         RCTOutcomeLabel.FAILED: 0,

@@ -25,6 +25,14 @@ class ASHRAE9012019SummaryReport(RCTReport):
             "HVAC-WaterSide",
             "HVAC-Chiller",
         ]
+        self.section_dict = {
+            "5": "Envelope",
+            "6": "Lighting",
+            "12": "Receptacle",
+            "15": "Transformers",
+            "21": "HVAC-WaterSide",
+            "22": "HVAC-Chiller",
+        }
         self.ruleset_outcome = {
             name: {
                 RCTOutcomeLabel.PASS: 0,
@@ -39,7 +47,6 @@ class ASHRAE9012019SummaryReport(RCTReport):
 ### {self.purpose} 
 ##### {self.ruleset}
 ##### Date: {self.date_run}
-##### Schema version: {self.schema_version}
 
 ### RMD Files
 - user: {self.user_rmd.split('/')[-1]}
@@ -61,51 +68,47 @@ Replace-Undetermined
     def generate_rule_report(self, rule_outcome, outcome_dict):
         def _parse_result_helper(result):
             if isinstance(result, str):
-                return result
+                outcome_dict[result] += 1
+                return outcome_dict
             elif isinstance(result, list):
-                try:
-                    return _parse_result_helper(result[0])
-                except IndexError:
-                    return (
-                        RCTOutcomeLabel.UNDETERMINED
-                    )  # if result is missing (error), return UNDETERMINED (for now)
+                for element in result:
+                    _parse_result_helper(element)
+                if (
+                    sum(outcome_dict.values()) == 0
+                ):  # if result is empty, fill up with `UNDETERMINED` (for now) # TODO check whether empty result is resolved
+                    outcome_dict[RCTOutcomeLabel.UNDETERMINED] = 1
+                return outcome_dict
             elif isinstance(result, dict):
-                if isinstance(result["result"], str):
-                    return result["result"]
-                elif isinstance(result["result"], list):
-                    try:
-                        return _parse_result_helper(result["result"][0])
-                    except IndexError:
-                        return (
-                            RCTOutcomeLabel.UNDETERMINED
-                        )  # if 'result' is empty, return undetermined for now
-                elif isinstance(result["result"], dict):
-                    return _parse_result_helper(result["result"])
+                _parse_result_helper(result["result"])
 
-        rule_outcome_result = _parse_result_helper(rule_outcome["result"])
+        # count each rule's pass/fail/undetermined/not_applicable
+        rule_outcome_result_dict = _parse_result_helper(rule_outcome["result"])
 
-        self.ruleset_outcome_count_helper(rule_outcome["id"], rule_outcome_result)
+        # sum up overall rule numbers
+        self.ruleset_outcome_count_helper(rule_outcome["id"], rule_outcome_result_dict)
 
-        pass_rate = 0
-        fail_rate = 0
-        undetermined_rate = 0
-        not_applicable_rate = 0
-        if rule_outcome_result == RCTOutcomeLabel.PASS:
-            pass_rate = 100
-        elif rule_outcome_result == RCTOutcomeLabel.FAILED:
-            fail_rate = 100
-        elif rule_outcome_result == RCTOutcomeLabel.UNDETERMINED:
-            undetermined_rate = 100
-        elif rule_outcome_result == RCTOutcomeLabel.NOT_APPLICABLE:
-            not_applicable_rate = 100
+        # determine whether overall outcome is pass/fail/undetermined/not_applicable
+        overall_result = self.calculate_rule_outcome(rule_outcome_result_dict)
+
+        # calculate pass/fail/undetermined/not applicable rate
+        no_of_applicable_component = sum(rule_outcome_result_dict.values())
+        multiplier = 100 / no_of_applicable_component
+        pass_rate = int(rule_outcome_result_dict[RCTOutcomeLabel.PASS] * multiplier)
+        fail_rate = int(rule_outcome_result_dict[RCTOutcomeLabel.FAILED] * multiplier)
+        undetermined_rate = int(
+            rule_outcome_result_dict[RCTOutcomeLabel.UNDETERMINED] * multiplier
+        )
+        not_applicable_rate = int(
+            rule_outcome_result_dict[RCTOutcomeLabel.NOT_APPLICABLE] * multiplier
+        )
 
         one_rule_report = f"""
   - **Rule Id**: {rule_outcome["id"]}
     - **Description**: {rule_outcome["description"]}
     - **90.1-2019 Section**: {rule_outcome['standard_section']}
-    - **Overall Rule Evaluation Outcome**: {rule_outcome_result}
-    - **Number of applicable components**: {'TO BE UPDATED!!'} 
-      | Pass %: {pass_rate} | Fail %: {fail_rate} | Not applicable %: {undetermined_rate} | Undetermined %: {not_applicable_rate} | 
+    - **Overall Rule Evaluation Outcome**: {overall_result}
+    - **Number of applicable components**: {no_of_applicable_component} 
+      | Pass %: {pass_rate}| Fail %: {fail_rate}| Not applicable %: {undetermined_rate}| Undetermined %: {not_applicable_rate}| 
       |:--------------:|:--------------:|:--------------:|:--------------:|
         """
         return "".join(
@@ -150,53 +153,27 @@ Replace-Undetermined
 
     def _section_name_helper(self, rule_outcome):
         section_no = rule_outcome.split("-")[0]
-        if section_no == "5" and "Section: Envelope" not in self.summary_report:
-            return """
-#### Section: Envelope
-        """
-        elif section_no == "6" and "Section: Lighting" not in self.summary_report:
-            return """
-#### Section: Lighting
-        """
-        elif section_no == "12" and "Section: Receptacle" not in self.summary_report:
-            return """
-#### Section: Receptacle
-        """
-        elif section_no == "15" and "Section: Transformers" not in self.summary_report:
-            return """
-#### Section: Transformers
-        """
-        elif (
-            section_no == "21" and "Section: HVAC-WaterSide" not in self.summary_report
-        ):
-            return """
-#### Section: HVAC - WaterSide
-        """
-        elif (
-            section_no == "22" and "Section: HVAC - Chiller" not in self.summary_report
-        ):
-            return """
-#### Section: HVAC - Chiller
-        """
+        if f"Section: {self.section_dict[section_no]}" not in self.summary_report:
+            return f"""
+### Section: {self.section_dict[section_no]}
+            """
         else:
             return None
 
-    def ruleset_outcome_count_helper(self, rule_outcome, rule_outcome_result):
-        section_no = rule_outcome.split("-")[0]
+    def ruleset_outcome_count_helper(self, rule_outcome_id, rule_outcome_result):
+        section_no = rule_outcome_id.split("-")[0]
 
-        def _ruleset_outcome_count_helper(section_name, rule_outcome_result):
-            if rule_outcome_result == RCTOutcomeLabel.PASS:
-                self.ruleset_outcome[section_name][RCTOutcomeLabel.PASS] += 1
-                self.ruleset_outcome["All"][RCTOutcomeLabel.PASS] += 1
-            elif rule_outcome_result == RCTOutcomeLabel.FAILED:
-                self.ruleset_outcome[section_name][RCTOutcomeLabel.FAILED] += 1
-                self.ruleset_outcome["All"][RCTOutcomeLabel.FAILED] += 1
-            elif rule_outcome_result == RCTOutcomeLabel.UNDETERMINED:
-                self.ruleset_outcome[section_name][RCTOutcomeLabel.UNDETERMINED] += 1
-                self.ruleset_outcome["All"][RCTOutcomeLabel.UNDETERMINED] += 1
-            elif rule_outcome_result == RCTOutcomeLabel.NOT_APPLICABLE:
-                self.ruleset_outcome[section_name][RCTOutcomeLabel.NOT_APPLICABLE] += 1
-                self.ruleset_outcome["All"][RCTOutcomeLabel.NOT_APPLICABLE] += 1
+        def _ruleset_outcome_count_helper(section_number, rule_outcome_result):
+            for result in [
+                RCTOutcomeLabel.PASS,
+                RCTOutcomeLabel.FAILED,
+                RCTOutcomeLabel.UNDETERMINED,
+                RCTOutcomeLabel.NOT_APPLICABLE,
+            ]:
+                self.ruleset_outcome[section_number][result] += rule_outcome_result[
+                    result
+                ]
+                self.ruleset_outcome["All"][result] += rule_outcome_result[result]
 
         if section_no == "5":
             _ruleset_outcome_count_helper("Envelope", rule_outcome_result)
