@@ -85,7 +85,11 @@ def evaluate(user_rmd, baseline_rmd, proposed_rmd, reports):
     report = evaluate_rmr_triplet(user_rmd, baseline_rmd, proposed_rmd)
     # have report attached.
 
-    props = {"user_rmd": user_rmd.name, "proposed_rmd": proposed_rmd.name, "baseline_rmd": baseline_rmd.name}
+    props = {
+        "user_rmd": user_rmd.name,
+        "proposed_rmd": proposed_rmd.name,
+        "baseline_rmd": baseline_rmd.name,
+    }
     for report_type in reports:
         if report_type == "ASHRAE9012019_SUMMARY":
             report_module = REPORT_MODULE[report_type](props)

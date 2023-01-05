@@ -20,7 +20,6 @@ class RCTReport:
             RCTOutcomeLabel.NOT_APPLICABLE: 0,
         }
 
-
     def generate(self, rct_outcome, report_dir):
         """
         generate rule report. - do not modify/override this function
@@ -44,14 +43,15 @@ class RCTReport:
         # Sort the outcomes by id
         outcomes = sorted(
             # The key used below splits the id on "-" and ensures the outcomes are sorted by the first components of the ids, then the second components, and so on
-            rct_outcome["outcomes"], key=lambda x: [int(y) for y in x["id"].split("-")]
+            rct_outcome["outcomes"],
+            key=lambda x: [int(y) for y in x["id"].split("-")],
         )
         if invalid_msg:
             print(f"Invalid RMDs: {str(invalid_msg)}\n")
         else:
             ruleset_report = self.initialize_ruleset_report()
             for outcome in outcomes:
-                if outcome["primary_rule"]: # output only primary rules
+                if outcome["primary_rule"]:  # output only primary rules
                     rule_outcome_dict = {
                         RCTOutcomeLabel.PASS: 0,
                         RCTOutcomeLabel.FAILED: 0,
