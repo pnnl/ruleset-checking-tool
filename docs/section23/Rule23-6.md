@@ -20,6 +20,7 @@
 1. get_baseline_system_types()
 2. baseline_system_type_compare()
 3. get_dict_of_zones_and_terminal_units_served_by_hvac_sys() 
+4. baseline_system_type_compare() 
 
 
 **Applicability Checks:**  
