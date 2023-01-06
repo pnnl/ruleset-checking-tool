@@ -19,7 +19,7 @@ APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_11_1B,
     HVAC_SYS.SYS_12B,
 ]
-REQUIRED_TEMP_RANGE = ureg("10 degF")
+REQUIRED_TEMP_RANGE = 10 * ureg("degR")
 
 
 class Section22Rule14(RuleDefinitionListIndexedBase):
@@ -32,6 +32,9 @@ class Section22Rule14(RuleDefinitionListIndexedBase):
             index_rmr="baseline",
             id="22-14",
             description="The baseline heat-rejection device shall have a design temperature rise of 10°F.",
+            ruleset_section_title="HVAC - Chiller",
+            standard_section="Section G3.1.3.11 Heat Rejection (System 7, 8, 11, 12 and 13)",
+            is_primary_rule=True,
             rmr_context="ruleset_model_instances/0",
             list_path="heat_rejections[*]",
         )

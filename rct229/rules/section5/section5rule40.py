@@ -28,6 +28,9 @@ class Section5Rule40(RuleDefinitionListIndexedBase):
             index_rmr="baseline",
             id="5-40",
             description="The baseline roof surfaces shall be modeled using a thermal emittance of 0.9",
+            ruleset_section_title="Envelope",
+            standard_section="Section G3.1-5(f) Building Envelope Modeling Requirements for the Baseline building",
+            is_primary_rule=True,
             list_path="ruleset_model_instances[0].buildings[*]",
             data_items={"climate_zone": ("baseline", "weather/climate_zone")},
         )

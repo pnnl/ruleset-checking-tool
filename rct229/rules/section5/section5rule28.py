@@ -8,6 +8,7 @@ from rct229.ruleset_functions.get_surface_conditioning_category_dict import (
     get_surface_conditioning_category_dict,
 )
 from rct229.utils.pint_utils import CalcQ
+from rct229.utils.std_comparisons import std_equal
 
 FAIL_MSG = "Subsurface that is not regulated (Not part of building envelope) is not modeled with the same area, U-factor and SHGC in the baseline as in the propsoed design."
 
@@ -26,6 +27,9 @@ class Section5Rule28(RuleDefinitionListIndexedBase):
             index_rmr="baseline",
             id="5-28",
             description="Subsurface that is not regulated (not part of building envelope) must be modeled with the same area, U-factor and SHGC in the baseline as in the proposed design.",
+            ruleset_section_title="Envelope",
+            standard_section="Section G3.1-5(a) Building Envelope Modeling Requirements for the Baseline building",
+            is_primary_rule=True,
             list_path="ruleset_model_instances[0].buildings[*]",
             data_items={"climate_zone": ("baseline", "weather/climate_zone")},
         )
@@ -104,14 +108,22 @@ class Section5Rule28(RuleDefinitionListIndexedBase):
                         ),
                     }
 
-                def rule_check(self, context, calc_vals, data=None):
+                def rule_check(self, context, calc_vals=None, data=None):
                     return (
-                        calc_vals["subsurface_u_factor_b"]
-                        == calc_vals["subsurface_u_factor_p"]
-                        and calc_vals["subsurface_shgc_b"]
-                        == calc_vals["subsurface_shgc_p"]
-                        and calc_vals["subsurface_glazed_area_b"]
-                        == calc_vals["subsurface_glazed_area_p"]
-                        and calc_vals["subsurface_opaque_area_b"]
-                        == calc_vals["subsurface_opaque_area_p"]
+                        std_equal(
+                            calc_vals["subsurface_u_factor_b"],
+                            calc_vals["subsurface_u_factor_p"],
+                        )
+                        and std_equal(
+                            calc_vals["subsurface_shgc_b"],
+                            calc_vals["subsurface_shgc_p"],
+                        )
+                        and std_equal(
+                            calc_vals["subsurface_glazed_area_b"],
+                            calc_vals["subsurface_glazed_area_p"],
+                        )
+                        and std_equal(
+                            calc_vals["subsurface_opaque_area_b"],
+                            calc_vals["subsurface_opaque_area_p"],
+                        )
                     )

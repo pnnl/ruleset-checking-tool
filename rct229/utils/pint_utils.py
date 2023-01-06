@@ -27,6 +27,8 @@ _UNIT_CONVENTIONS = {
         "capacity": "W",
         "volumetric_flow_rate": "m3/s",
         "temperature": "C",
+        "cooling_efficiency": "W/W",
+        "power_per_volumetric_flow_rate": "W-s/L",
         "power_per_flow_rate": "W-s/L",
     },
     UNIT_SYSTEM.IP: {
@@ -41,6 +43,8 @@ _UNIT_CONVENTIONS = {
         "capacity": "Btu/hr",
         "volumetric_flow_rate": "cfm",
         "temperature": "F",
+        "cooling_efficiency": "kW/ton",
+        "power_per_volumetric_flow_rate": "W/gpm",
         "power_per_flow_rate": "W/gpm",
     },
 }
@@ -71,7 +75,11 @@ class CalcQ:
 
     def to_str(self, unit_system=UNIT_SYSTEM.IP) -> str:
         units = _UNIT_CONVENTIONS[unit_system][self.q_type]
-        return f"{self.q.to(units).magnitude} {units}"
+        return (
+            f"{self.q.to(units).magnitude} {units}"
+            if isinstance(self.q, Quantity)
+            else str(self.q)
+        )
 
 
 def calcq_to_q(obj):

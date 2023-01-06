@@ -24,21 +24,22 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
 
 ### General ruleset functions
   * [get_lighting_status_type](ruleset_functions/get_lighting_status_type.md): This function would determine whether the space lighting status type is 1). not-yet designed or match Table 9_5_1, 2). as-designed or as-existing.  
-  * [get_opaque_surface_type.md](ruleset_functions/get_opaque_surface_type.md): This function would determine whether it is a wall, ceiling or floor.  
-  * [get_surface_conditioning_category.md](ruleset_functions/get_surface_conditioning_category.md): This function would cycle through each surface in  a zone and categorize it as exterior res, exterior non res, exterior mixed, semi-exterior or unregulated.  
-  * [get_wwr.md](ruleset_functions/get_wwr.md): This function would determine window wall ratio for a building segment.  
+  * [get_opaque_surface_type](ruleset_functions/get_opaque_surface_type.md): This function would determine whether it is a wall, ceiling or floor.  
+  * [get_surface_conditioning_category](ruleset_functions/get_surface_conditioning_category.md): This function would cycle through each surface in  a zone and categorize it as exterior res, exterior non res, exterior mixed, semi-exterior or unregulated.  
+  * [get_wwr](ruleset_functions/get_wwr.md): This function would determine window wall ratio for a building segment.  
   * [get_zone_conditioning_category.md](ruleset_functions/get_zone_conditioning_category.md): Determine the Zone Conditioning Category for each zone. This function would cycle through each zone in an RMD and categorize it as ‘conditioned’, 'semi-heated’, 'unenclosed' or ‘unconditioned’.  If ‘conditioned’ it will also categorize the space as ‘residential’ or ‘non-residential’.  
-  * [normalize_interior_lighting_schedules.md](ruleset_functions/normalize_interior_lighting_schedules.md):This function would determine a normalized schedule for a data element in space.
+  * [normalize_interior_lighting_schedules](ruleset_functions/normalize_interior_lighting_schedules.md):This function would determine a normalized schedule for a data element in space.
   * [compare_schedules](ruleset_functions/compare_schedules.md): This function would compare two schedules and determine if they match with or without a comparison factor when applicable.  
-  * [get_fuels_modeled_in_RMD.md](ruleset_functions/get_fuels_modeled_in_RMD.md): Get a list of the fuels used in the RMD.  Includes fuels used by HVAC systems including terminal units, chillers, boilers, ExternalFluidSources, and SWHs.
-  * [get_primary_secondary_loops.md](ruleset_functions/get_primary_secondary_loops.md): Get the list of primary and secondary loops for CHW for a B-RMD.
+  * [get_fuels_modeled_in_RMD](ruleset_functions/get_fuels_modeled_in_RMD.md): Get a list of the fuels used in the RMD.  Includes fuels used by HVAC systems including terminal units, chillers, boilers, ExternalFluidSources, and SWHs.
+  * [get_primary_secondary_loops_dict](ruleset_functions/get_primary_secondary_loops_dict.md): Get the list of primary and secondary loops for CHW for a B-RMD.
   * [get_hvac_systems_5_6_serving_multiple_floors_b](ruleset_functions/get_hvac_systems_5_6_serving_multiple_floors_b.md): Get a dictionary of the system 5, 5a, 5b, 6, 6a, 6b hvac system IDs that are modeled as serving more than one floor in the baseline design model.  The dictionary consists of the hvac system ids as the key and the number of floors served as the value associated with the key.
   * [get_zones_computer_rooms](ruleset_functions/get_zones_computer_rooms.md): Returns a dictionary with the zones that have at least one computer room space associated with them in the RMD as the keys. The values associated with each key are in a list form. The list associated with each key contains the computer room floor area as the first item in the list and the total zone floor area as the second item in the list.
   * [get_HVAC_systems_primarily_serving_comp_rooms](ruleset_functions/get_HVAC_systems_primarily_serving_comp_rooms.md): Returns a list of HVAC systems in which greater than 50% of the area served by the HVAC system is computer room space.
   * [get_dict_of_zones_and_terminal_units_served_by_hvac_sys](ruleset_functions/get_dict_of_zones_and_terminal_units_served_by_hvac_sys.md): Returns a dictionary of zones and terminal unit IDs associated with each HVAC system in the RMD.
   * [get_baseline_system_type](ruleset_functions/get_baseline_system_types.md): Identify all the baseline system types modeled in a B-RMD.
   * [get_hvac_zone_list_w_area](ruleset_functions/get_hvac_zone_list_w_area.md): Get the list of zones and their total floor area served by each HVAC system in a RMD.
-  * [check_purchased_chw_hhw](ruleset_functions/check_purchased_chw_hhw.md): Check if RMD is modeled with purchased chilled water as space cooling source or purchased hot water/steam as space heating source. If any system in RMD uses purchased chilled water, function shall return True for purchased chilled water as space cooling source. Similarly, if any system in RMD uses purchased hot water or steam, function shall return True for purchased hot water/steam as space heating source.
+  * [check_purchased_chw_hhw_status_dict](ruleset_functions/check_purchased_chw_hhw_status_dict.md): Check if RMI is modeled with purchased chilled water as space cooling source or purchased hot water/steam as space heating source. If any system in RMI uses purchased chilled water, function shall return True for purchased chilled water as space cooling source. Similarly, if any system in RMI uses purchased hot water or steam, function shall return True for purchased hot water/steam as space heating source.
+  * [get_proposed_hvac_modeled_with_virtual_heating](ruleset_functions/get_proposed_hvac_modeled_with_virtual_heating.md): Get the list of HeatingVentilationAirAconditioningSystem in which Appendix G Table G3.1 #10 c is applicable (i.e. space heating is modeled in the P_RMR but not the U_RMR).  Table G3.1 #10 c states that "where no heating system exists or no heating system has been submitted with design documents, the system type shall be the same system as modeled in the baseline building design and shall comply with but not exceed the requirements of Section 6."
 
 ### HVAC type functions
   * [is_baseline_system_1](ruleset_functions/baseline_systems/is_baseline_system_1.md): Get either Sys-1, Sys-1a, Sys-1b, Sys-1c, or Not_Sys_1 string output which indicates whether the HVAC system is ASHRAE 90.1 2019 Appendix G system 1 (PTAC), system 1a (system 1 with purchased CHW), system 1b (system 1 with purchased heating), system 1c (system 1 with purchased CHW and purchased HW).
@@ -95,6 +96,7 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   * [is_hvac_sys_fluid_loop_purchased_heating](ruleset_functions/baseline_systems/baseline_hvac_sub_functions/is_hvac_sys_fluid_loop_purchased_heating.md): Returns TRUE if the fluid loop associated with the heating system associated with the HVAC system is attached to an external purchased heating loop. Returns FALSE if this is not the case.
   * [are_all_terminal_types_CAV_With_None_Equal_to_Null](ruleset_functions/baseline_systems/baseline_hvac_sub_functions/are_all_terminal_types_CAV_With_None_Equal_to_Null.md): Returns TRUE if all of the terminal unit types input to this function are constant air volume (CAV). It returns FALSE if any of the terminal units are of a type other than constant air volume (CAV).
   * [get_dict_with_terminal_units_and_zones](ruleset_functions/baseline_systems/baseline_hvac_sub_functions/get_dict_with_terminal_units_and_zones.md): Returns a dictionary of zone IDs associated with each terminal unit in the RMD.
+  * [are_all_terminal_CHW_loops_purchased_cooling](ruleset_functions/baseline_systems/baseline_hvac_sub_functions/are_all_terminal_CHW_loops_purchased_cooling.md): Returns TRUE if the fluid loop associated with the cooling_from_loop associated with each terminal unit is purchased CHW. Returns FALSE if this is not the case.
 
 ## Data Tables
   * [8.4.4](data_tables/Table8-4-4.md): Minimum Nominal Efficiency Levels for Low-Voltage Dry-Type Distribution Transformers  
@@ -238,7 +240,12 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
 
 ## Section 17 - Refrigeration
 
-## Section 18 - Central Chilled Water Systems
+## Section 18 - Air Side
+
+## Section 19 - Air Side Baseline HVAC System
+  * [19-1](section19/Rule19-1.md): HVAC system coil capacities for the baseline building design shall be oversized by 15% for cooling and 25% for heating.
+  * [19-2](section19/Rule19-2.md): Baseline building plant capacities shall be based on coincident loads.
+  * [19-9](section19/Rule19-9.md): Air economizers shall not be included in baseline HVAC Systems 1, 2, 9, and 10.
 
 ## Section 21 - Central Heating Hot Water Systems
   * [21-1](section21/Rule21-1.md): For systems using purchased hot water or steam, the heating source shall be modeled as purchased hot water or steam in both the proposed design and baseline building design. If any system in the proposed design uses purchased hot water or steam, all baseline systems with hot water coils shall use the same type of purchased hot water or steam.
@@ -290,9 +297,9 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   * [22-41](section22/Rule22-41.md): Purchased CHW systems must be modeled with only one external fluid loop in the baseline design.
 
 ## Section 23 - Chilled Water Systems and Condenser Water Systems
-  * [23-1](section23/Rule23-1.md): For baseline systems 5-8 and 11, the SAT is reset higher by 5F under minimum cooling load conditions.
-  * [23-2](section23/Rule23-2.md): System 5, 6, 7 and 8 minimum volume setpoint shall be 30% of zone peak airflow, minimum outdoor airflow, or rate required to comply with minimum accreditation standards whichever is larger.
-  * [23-5](section23/Rule23-5.md): For baseline systems 6 and 8, Fans in parallel VAV fan-powered boxes shall be sized for 50% of the peak design primary air (from the VAV air-handling unit) flow rate and shall be modeled with 0.35 W/cfm fan power.
-  * [23-9](section23/Rule23-9.md): Systems 6&8: Supply air temperature setpoint shall be constant at the design condition.
-  * [23-10](section23/Rule23-10.md): System 5-8 and 11 - part load VAV fan power shall be modeled using either method 1 or 2 in Table G3.1.3.15. This rule will only validate data points from Method-1 Part-load Fan Power Data. However, both methods are equivalent. When modeling inputs are based on Method 2, values should be converted to Method 1 when writing to RMD.
-  * [23-19](section23/Rule23-19.md): Systems 5 - 8, the baseline system shall be modeled with preheat coils controlled to a fixed set point 20F less than the design room heating temperature setpoint.
+  * [23-2](section23/Rule23-2.md): For baseline systems 5-8 and 11, the SAT is reset higher by 5F under minimum cooling load conditions.
+  * [23-3](section23/Rule23-3.md): System 5, 6, 7 and 8 minimum volume setpoint shall be 30% of zone peak airflow, minimum outdoor airflow, or rate required to comply with minimum accreditation standards whichever is larger.
+  * [23-6](section23/Rule23-6.md): For baseline systems 6 and 8, Fans in parallel VAV fan-powered boxes shall be sized for 50% of the peak design primary air (from the VAV air-handling unit) flow rate and shall be modeled with 0.35 W/cfm fan power.
+  * [23-7](section23/Rule23-7.md): Systems 6&8: Supply air temperature setpoint shall be constant at the design condition.
+  * [23-8](section23/Rule23-8.md): System 5-8 and 11 - part load VAV fan power shall be modeled using either method 1 or 2 in Table G3.1.3.15. This rule will only validate data points from Method-1 Part-load Fan Power Data. However, both methods are equivalent. When modeling inputs are based on Method 2, values should be converted to Method 1 when writing to RMD.
+  * [23-16](section23/Rule23-16.md): Systems 5 - 8, the baseline system shall be modeled with preheat coils controlled to a fixed set point 20F less than the design room heating temperature setpoint.

@@ -7,14 +7,13 @@
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-34",
-            "ruleset_reference": "Table G3.1#5 baselnid column e. e. Skylights and Glazed Smoke Vents. Skylight area shall be\nequal to that in the proposed design or 3%, whichever is smaller.",
+            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (e) ",
             "rule_description": "If skylight area in the proposed desing is 3% or less of the roof surface, the skylight area shall be equal to that in the proposed design.",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Proposed RMR",
-            "rule_dependency": "None",
             "primary_rule": "Y",
-            "schema_version": "0.0.18"
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "proposed": {
@@ -49,7 +48,7 @@
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
+                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -77,7 +76,7 @@
                                                 ]
                                             }
                                         ],
-                                        "heating_ventilation_air_conditioning_systems": [
+                                        "heating_ventilating_air_conditioning_systems": [
                                             {
                                                 "id": "HVAC 1",
                                                 "cooling_system": {
@@ -129,7 +128,7 @@
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
+                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -157,7 +156,7 @@
                                                 ]
                                             }
                                         ],
-                                        "heating_ventilation_air_conditioning_systems": [
+                                        "heating_ventilating_air_conditioning_systems": [
                                             {
                                                 "id": "HVAC 1",
                                                 "cooling_system": {
@@ -187,14 +186,13 @@
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-34",
-            "ruleset_reference": "Table G3.1#5 baselnid column e. e. Skylights and Glazed Smoke Vents. Skylight area shall be\nequal to that in the proposed design or 3%, whichever is smaller.",
+            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (e) ",
             "rule_description": "If skylight area in the proposed desing is 3% or less of the roof surface, the skylight area shall be equal to that in the proposed design.",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Proposed RMR",
-            "rule_dependency": "None",
             "primary_rule": "Y",
-            "schema_version": "0.0.18"
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "proposed": {
@@ -229,7 +227,7 @@
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
+                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -257,7 +255,7 @@
                                                 ]
                                             }
                                         ],
-                                        "heating_ventilation_air_conditioning_systems": [
+                                        "heating_ventilating_air_conditioning_systems": [
                                             {
                                                 "id": "HVAC 1",
                                                 "cooling_system": {
@@ -309,7 +307,7 @@
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
+                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -337,7 +335,7 @@
                                                 ]
                                             }
                                         ],
-                                        "heating_ventilation_air_conditioning_systems": [
+                                        "heating_ventilating_air_conditioning_systems": [
                                             {
                                                 "id": "HVAC 1",
                                                 "cooling_system": {

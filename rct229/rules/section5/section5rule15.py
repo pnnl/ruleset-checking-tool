@@ -2,6 +2,7 @@ from rct229.data_fns.table_G3_4_fns import table_G34_lookup
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
+from rct229.ruleset_functions.compare_standard_val import std_le
 from rct229.ruleset_functions.get_opaque_surface_type import OpaqueSurfaceType as OST
 from rct229.ruleset_functions.get_opaque_surface_type import get_opaque_surface_type
 from rct229.ruleset_functions.get_surface_conditioning_category_dict import (
@@ -38,6 +39,9 @@ class Section5Rule15(RuleDefinitionListIndexedBase):
             index_rmr="baseline",
             id="5-15",
             description="Baseline slab-on-grade floor assemblies must match the appropriate assembly maximum F-factors in Tables G3.4-1 through G3.4-9.",
+            ruleset_section_title="Envelope",
+            standard_section="Section G3.1-5(b) Building Envelope Modeling Requirements for the Baseline building",
+            is_primary_rule=True,
             list_path="ruleset_model_instances[0].buildings[*]",
             data_items={"climate_zone": ("baseline", "weather/climate_zone")},
         )
@@ -137,4 +141,4 @@ class Section5Rule15(RuleDefinitionListIndexedBase):
                 target_f_factor = calc_vals["target_f_factor"]
                 slab_on_grade_floor_f_factor = calc_vals["slab_on_grade_floor_f_factor"]
 
-                return std_equal(target_f_factor, slab_on_grade_floor_f_factor)
+                return std_le(std_val=target_f_factor, val=slab_on_grade_floor_f_factor)

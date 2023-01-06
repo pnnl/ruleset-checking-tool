@@ -25,7 +25,7 @@ SYS_5_RMD = {
                                             "id": "VAV Air Terminal 1",
                                             "is_supply_ducted": True,
                                             "type": "VARIABLE_AIR_VOLUME",
-                                            "served_by_heating_ventilation_air_conditioning_system": "System 5",
+                                            "served_by_heating_ventilating_air_conditioning_system": "System 5",
                                             "heating_source": "HOT_WATER",
                                             "heating_from_loop": "Boiler Loop 1",
                                         }
@@ -40,14 +40,14 @@ SYS_5_RMD = {
                                             "id": "VAV Air Terminal 2",
                                             "is_supply_ducted": True,
                                             "type": "VARIABLE_AIR_VOLUME",
-                                            "served_by_heating_ventilation_air_conditioning_system": "System 5B",
+                                            "served_by_heating_ventilating_air_conditioning_system": "System 5B",
                                             "heating_source": "HOT_WATER",
                                             "heating_from_loop": "Purchased HW Loop 1",
                                         }
                                     ],
                                 },
                             ],
-                            "heating_ventilation_air_conditioning_systems": [
+                            "heating_ventilating_air_conditioning_systems": [
                                 {
                                     "id": "System 5",
                                     "cooling_system": {

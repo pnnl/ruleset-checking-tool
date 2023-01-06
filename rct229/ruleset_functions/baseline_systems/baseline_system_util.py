@@ -60,7 +60,7 @@ def find_exactly_one_hvac_system(rmi, hvac_id):
 
     """
     return find_exactly_one_with_field_value(
-        "$.buildings[*].building_segments[*].heating_ventilation_air_conditioning_systems[*]",
+        "$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*]",
         "id",
         hvac_id,
         rmi,

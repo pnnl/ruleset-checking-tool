@@ -104,7 +104,9 @@ DERIVED_RULE_outcome_base = {**BASE_RULE_1_OUTCOME_BASE, "calc_vals": [{"a": 0},
 def test__rule_definition_base__evaluate__with_missing_baseline():
     assert BASE_RULE_1.evaluate(DERIVED_RULE_OUTCOME_BASE) == {
         **BASE_RULE_1_OUTCOME_BASE,
-        "result": "MISSING_BASELINE",
+        "result": "UNDETERMINED",
+        "message": "MISSING_BASELINE",
+        "primary_rule": False,
     }
 
 
@@ -113,6 +115,7 @@ def test__rule_definition_base__evaluate__with_false_is_applicable():
         **BASE_RULE_1_OUTCOME_BASE,
         "result": "NOT_APPLICABLE",
         "message": "Not applicable message",
+        "primary_rule": False,
     }
 
 
@@ -123,6 +126,7 @@ def test__rule_definition_base__evaluate__with_true_manual_check_required():
         **DERIVED_RULE_outcome_base,
         "result": "UNDETERMINED",
         "message": "Manual check required message",
+        "primary_rule": False,
     }
 
 
@@ -130,6 +134,7 @@ def test__rule_definition_base__evaluate__with_true_rule_check():
     assert DERIVED_RULE.evaluate(RMRS_WITH_MATCHING_USER_AND_BASELINE, data=True) == {
         **DERIVED_RULE_outcome_base,
         "result": "PASSED",
+        "primary_rule": False,
     }
 
 
@@ -137,6 +142,7 @@ def test__rule_definition_base__evaluate__with_true_rule_check():
     assert DERIVED_RULE.evaluate(RMRS_WITH_MATCHING_USER_AND_BASELINE, data=False) == {
         **DERIVED_RULE_outcome_base,
         "result": "FAILED",
+        "primary_rule": False,
     }
 
 
