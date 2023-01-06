@@ -30,6 +30,9 @@ class Section21Rule3(RuleDefinitionListIndexedBase):
             index_rmr="baseline",
             id="21-3",
             description="Heating hot water plant capacity shall be based on coincident loads.",
+            ruleset_section_title="HVAC - Water Side",
+            standard_section="Section G3.1.2.2 Building System-Specific Modeling Requirements for the Baseline model",
+            is_primary_rule=True,
             rmr_context="ruleset_model_instances/0",
             list_path="fluid_loops[*]",
         )

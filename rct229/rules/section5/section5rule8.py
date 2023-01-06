@@ -25,6 +25,9 @@ class Section5Rule8(RuleDefinitionListIndexedBase):
             list_path="ruleset_model_instances[0].buildings[*]",
             id="5-8",
             description="Baseline below-grade walls shall match the appropriate assembly maximum C-factors in Table G3.4-1 through G3.4-8.",
+            ruleset_section_title="Envelope",
+            standard_section="Section G3.1-5(b) Building Envelope Modeling Requirements for the Baseline building",
+            is_primary_rule=True,
             required_fields={
                 "$": ["weather"],
                 "weather": ["climate_zone"],

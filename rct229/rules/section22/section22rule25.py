@@ -41,6 +41,9 @@ class Section22Rule25(RuleDefinitionListIndexedBase):
             index_rmr="baseline",
             id="22-25",
             description="For chilled-water systems served by chiller(s) and does not serve baseline System-11, the baseline building constant-volume primary pump power shall be modeled as 9 W/gpm.",
+            ruleset_section_title="HVAC - Chiller",
+            standard_section="Section G3.1.3.10 Chilled-water pumps (Systems 7, 8, 11, 12, and 13)",
+            is_primary_rule=True,
             rmr_context="ruleset_model_instances/0",
             list_path="fluid_loops[*]",
         )
