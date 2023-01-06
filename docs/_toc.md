@@ -244,6 +244,7 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
 
 ## Section 19 - Air Side Baseline HVAC System
   * [19-1](section19/Rule19-1.md): HVAC system coil capacities for the baseline building design shall be oversized by 15% for cooling and 25% for heating.
+  * [19-2](section19/Rule19-2.md): Baseline building plant capacities shall be based on coincident loads.
   * [19-9](section19/Rule19-9.md): Air economizers shall not be included in baseline HVAC Systems 1, 2, 9, and 10.
 
 ## Section 21 - Central Heating Hot Water Systems
