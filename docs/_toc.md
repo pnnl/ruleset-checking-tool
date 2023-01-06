@@ -244,6 +244,7 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
 
 ## Section 19 - Air Side Baseline HVAC System
   * [19-1](section19/Rule19-1.md): HVAC system coil capacities for the baseline building design shall be oversized by 15% for cooling and 25% for heating.
+  * [19-2](section19/Rule19-2.md): Baseline building plant capacities shall be based on coincident loads.
 
 ## Section 21 - Central Heating Hot Water Systems
   * [21-1](section21/Rule21-1.md): For systems using purchased hot water or steam, the heating source shall be modeled as purchased hot water or steam in both the proposed design and baseline building design. If any system in the proposed design uses purchased hot water or steam, all baseline systems with hot water coils shall use the same type of purchased hot water or steam.
