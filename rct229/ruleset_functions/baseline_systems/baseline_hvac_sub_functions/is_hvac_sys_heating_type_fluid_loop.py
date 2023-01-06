@@ -1,6 +1,8 @@
 from rct229.data.schema_enums import schema_enums
-from rct229.utils.assertions import getattr_
-from rct229.utils.jsonpath_utils import find_exactly_one_with_field_value, find_one
+from rct229.ruleset_functions.baseline_systems.baseline_system_util import (
+    find_exactly_one_hvac_system,
+)
+from rct229.utils.jsonpath_utils import find_one
 
 HEATING_SYSTEM = schema_enums["HeatingSystemOptions"]
 
@@ -19,15 +21,10 @@ def is_hvac_sys_heating_type_fluid_loop(rmi_b, hvac_b_id):
     Returns
     -------
     bool
-        True: HVAC system heating system has fluid loop as the heating type AND only one heating system is associated with the HVAC system
-        False: HVAC system has a heating system type other than fluid loop or if it has more than one heating system.
+        True: HVAC system heating system has fluid loop as the heating type
+        False: HVAC system has a heating system type other than fluid loop
     """
-    hvac_b = find_exactly_one_with_field_value(
-        "$.buildings[*].building_segments[*].heating_ventilation_air_conditioning_systems[*]",
-        "id",
-        hvac_b_id,
-        rmi_b,
-    )
+    hvac_b = find_exactly_one_hvac_system(rmi_b, hvac_b_id)
     heating_system = hvac_b.get("heating_system")
     is_hvac_sys_heating_type_fluid_loop_flag = (
         heating_system is not None

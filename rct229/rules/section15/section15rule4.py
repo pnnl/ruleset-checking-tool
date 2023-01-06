@@ -14,12 +14,15 @@ class Section15Rule4(RuleDefinitionListIndexedBase):
             index_rmr="user",
             id="15-4",
             description="User RMR transformer id in Baseline RMR",
+            ruleset_section_title="Transformer",
+            standard_section="Transformers",
+            is_primary_rule=False,
             rmr_context="ruleset_model_instances/0/transformers",
         )
 
     def create_data(self, context, data):
         transformers_b = context.baseline
-        return {"transformer_ids_b": find_all("[*].id", transformers_b)}
+        return {"transformer_ids_b": find_all("$[*].id", transformers_b)}
         # Get the Baseline transformer ids
         return find_all("[*].id", context.baseline)
 

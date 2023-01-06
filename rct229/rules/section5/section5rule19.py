@@ -28,6 +28,9 @@ class Section5Rule19(RuleDefinitionListIndexedBase):
             index_rmr="baseline",
             id="5-19",
             description="For building areas not shown in Table G3.1.1-1, vertical fenestration areas for new buildings and additions shall equal that in the proposed design or 40% of gross above-grade wall area, whichever is smaller.",
+            ruleset_section_title="Envelope",
+            standard_section="Section G3.1-5(c) Building Envelope Modeling Requirements for the Baseline building",
+            is_primary_rule=True,
             list_path="ruleset_model_instances[0].buildings[*]",
             data_items={"climate_zone": ("baseline", "weather/climate_zone")},
         )

@@ -3,6 +3,7 @@ from rct229.data_fns.table_G3_4_fns import table_G34_lookup
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
+from rct229.ruleset_functions.compare_standard_val import std_le
 from rct229.ruleset_functions.get_building_scc_window_wall_ratios_dict import (
     get_building_scc_window_wall_ratios_dict,
 )
@@ -36,6 +37,9 @@ class Section5Rule26(RuleDefinitionListIndexedBase):
             index_rmr="baseline",
             id="5-26",
             description="Vertical fenestration SHGC shall match the appropriate requirements in Tables G3.4-1 through G3.4-8.",
+            ruleset_section_title="Envelope",
+            standard_section="Section G3.1-5(d) Building Envelope Modeling Requirements for the Baseline building",
+            is_primary_rule=True,
             list_path="ruleset_model_instances[0].buildings[*]",
         )
 
@@ -269,6 +273,6 @@ class Section5Rule26(RuleDefinitionListIndexedBase):
                 def rule_check(self, context, calc_vals=None, data=None):
                     target_shgc = calc_vals["target_shgc"]
                     subsurface_shgc = calc_vals["subsurface_shgc"]
-                    return target_shgc is not None and std_equal(
-                        target_shgc, subsurface_shgc
+                    return target_shgc is not None and std_le(
+                        std_val=target_shgc, val=subsurface_shgc
                     )

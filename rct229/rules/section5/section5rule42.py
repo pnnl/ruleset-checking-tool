@@ -28,6 +28,9 @@ class Section5Rule42(RuleDefinitionListIndexedBase):
             index_rmr="baseline",
             id="5-42",
             description=" The baseline roof surfaces shall be modeled using a solar reflectance of 0.30",
+            ruleset_section_title="Envelope",
+            standard_section="Section G3.1-5(g) Building Envelope Modeling Requirements for the Baseline building",
+            is_primary_rule=True,
             list_path="ruleset_model_instances[0].buildings[*]",
             data_items={"climate_zone": ("baseline", "weather/climate_zone")},
         )

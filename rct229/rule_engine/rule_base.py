@@ -1,5 +1,6 @@
 from jsonpointer import resolve_pointer
 
+from rct229.rule_engine.rct_outcome_label import RCTOutcomeLabel
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 from rct229.utils.assertions import MissingKeyException, RCTFailureException
 from rct229.utils.json_utils import slash_prefix_guarantee
@@ -15,11 +16,15 @@ class RuleDefinitionBase:
         rmrs_used,
         id=None,
         description=None,
+        ruleset_section_title=None,
+        standard_section=None,
+        is_primary_rule=False,
         rmr_context="",
         required_fields=None,
         must_match_by_ids=[],
         manual_check_required_msg="",
         fail_msg="",
+        pass_msg="",
         not_applicable_msg="",
     ):
         """Base class for all Rule definitions
@@ -50,6 +55,9 @@ class RuleDefinitionBase:
         self.rmrs_used = rmrs_used
         self.id = id
         self.description = description
+        self.ruleset_section_title = ruleset_section_title
+        self.standard_section = standard_section
+        self.is_primary_rule = is_primary_rule
         # rmr_context is a jsonpointer string
         # As a convenience, any leading '/' should not be included and will
         # be inserted when the pointer is used in _get_context().
@@ -59,6 +67,7 @@ class RuleDefinitionBase:
         self.manual_check_required_msg = manual_check_required_msg
         self.not_applicable_msg = not_applicable_msg
         self.fail_msg = fail_msg
+        self.pass_msg = pass_msg
 
     def evaluate(self, rmrs, data={}):
         """Generates the outcome dictionary for the rule
@@ -101,10 +110,15 @@ class RuleDefinitionBase:
             outcome["id"] = self.id
         if self.description:
             outcome["description"] = self.description
+        if self.ruleset_section_title:
+            outcome["ruleset_section_title"] = self.ruleset_section_title
+        if self.standard_section:
+            outcome["standard_section"] = self.standard_section
+        outcome["primary_rule"] = True if self.is_primary_rule else False
         if self.rmr_context:
             outcome["rmr_context"] = self.rmr_context
 
-        # context will be a string if the context does not exist for any of the RMR used
+        # context will be a string if the context does not exist for any of the RMD used
         context_or_string = self.get_context(rmrs, data)
         if isinstance(context_or_string, UserBaselineProposedVals):
             context = context_or_string
@@ -128,7 +142,7 @@ class RuleDefinitionBase:
 
                         # Determine if manual check is required
                         if self.manual_check_required(context, calc_vals, data):
-                            outcome["result"] = "UNDETERMINED"
+                            outcome["result"] = RCTOutcomeLabel.UNDETERMINED
                             manual_check_required_msg = (
                                 self.get_manual_check_required_msg(
                                     context, calc_vals, data
@@ -144,29 +158,34 @@ class RuleDefinitionBase:
                                 outcome["result"] = result
                             # Assume result type is bool
                             elif result:
-                                outcome["result"] = "PASSED"
+                                outcome["result"] = RCTOutcomeLabel.PASS
+                                pass_msg = self.get_pass_msg(context, calc_vals, data)
+                                if pass_msg:
+                                    outcome["message"] = pass_msg
                             else:
-                                outcome["result"] = "FAILED"
+                                outcome["result"] = RCTOutcomeLabel.FAILED
                                 fail_msg = self.get_fail_msg(context, calc_vals, data)
                                 if fail_msg:
                                     outcome["message"] = fail_msg
                     else:
-                        outcome["result"] = "NOT_APPLICABLE"
+                        outcome["result"] = RCTOutcomeLabel.NOT_APPLICABLE
                         not_applicable_msg = self.get_not_applicable_msg(context, data)
                         if not_applicable_msg:
                             outcome["message"] = not_applicable_msg
                 except MissingKeyException as ke:
-                    outcome["result"] = "UNDETERMINED"
+                    outcome["result"] = RCTOutcomeLabel.UNDETERMINED
                     outcome["message"] = str(ke)
                 except RCTFailureException as fe:
-                    outcome["result"] = "FAILED"
+                    outcome["result"] = RCTOutcomeLabel.FAILED
                     outcome["message"] = str(fe)
             else:
-                outcome["result"] = context_validity_dict
+                outcome["result"] = "UNDETERMINED"
+                outcome["message"] = context_validity_dict
         else:
-            # context should be a string indicating the RMRs that are missing
+            # context should be a string indicating the RMDs that are missing
             # such as "MISSING_BASELINE"
-            outcome["result"] = context_or_string
+            outcome["result"] = "UNDETERMINED"
+            outcome["message"] = context_or_string
 
         return outcome
 
@@ -609,3 +628,29 @@ class RuleDefinitionBase:
         """
 
         return self.fail_msg
+
+    def get_pass_msg(self, context, calc_vals=None, data=None):
+        """Gets the message to include in the outcome for the PASS case.
+
+        This base implementation simply returns the value of
+        self.pass_msg, which defaults to the empty string.
+
+        This method should only be overridden if there is more than one string
+        used for the PASS or PASS case. A fixed string can be given in the
+        `pass_msg` field passed to the initializer.
+
+        Parameters
+        ----------
+        context : UserBaselineProposedVals
+            Object containing the contexts for the user, baseline, and proposed RMRs
+        calc_vals : dict or None
+
+        data : An optional data object. It is ignored by this base implementation.
+
+        Returns
+        -------
+        str
+            The message associated with the Pass case
+        """
+
+        return self.pass_msg

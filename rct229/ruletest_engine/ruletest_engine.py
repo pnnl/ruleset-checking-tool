@@ -16,6 +16,8 @@ from rct229.rules.section22 import *
 from rct229.ruletest_engine.ruletest_jsons.scripts.json_generation_utilities import (
     merge_nested_dictionary,
 )
+from rct229.rule_engine.rct_outcome_label import RCTOutcomeLabel
+from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 from rct229.schema.validate import validate_rmr
 from rct229.utils.json_utils import slash_prefix_guarantee
 
@@ -91,13 +93,15 @@ def evaluate_outcome_enumeration_str(outcome_enumeration_str):
     """
 
     # Check result of rule evaluation against known string constants
-    if outcome_enumeration_str == "PASSED":
+    if outcome_enumeration_str == RCTOutcomeLabel.PASS:
         test_result = "pass"
-    elif outcome_enumeration_str == "FAILED":
+    elif outcome_enumeration_str == RCTOutcomeLabel.FAILED:
         test_result = "fail"
-    elif outcome_enumeration_str == "UNDETERMINED":  # previously used for manual_check
+    elif (
+        outcome_enumeration_str == RCTOutcomeLabel.UNDETERMINED
+    ):  # previously used for manual_check
         test_result = "undetermined"
-    elif outcome_enumeration_str == "NOT_APPLICABLE":
+    elif outcome_enumeration_str == RCTOutcomeLabel.NOT_APPLICABLE:
         test_result = "not_applicable"
     else:
         raise ValueError(
@@ -150,12 +154,14 @@ def process_test_result(test_result, test_dict, test_id):
 
         if test_result == "pass":
             # f"SUCCESS: Test {test_id} passed as expected. The following condition was identified: {description}"
-            outcome_text = None
+            outcome_text = "PASS"
         elif test_result == "fail":
             # f"SUCCESS: Test {test_id} failed as expected. The following condition was identified: {description}"
-            outcome_text = None
+            outcome_text = "FAIL"
         elif test_result == "undetermined":
-            outcome_text = None
+            outcome_text = "UNDETERMINED"
+        elif test_result == "not_applicable":
+            outcome_text = "NOT_APPLICABLE"
 
     else:
 
@@ -206,15 +212,15 @@ def run_section_tests(test_json_name):
 
     # Print banner messages
     banner_text = f"TESTS RESULTS FOR: {test_json_name}".center(50)
-    banner = [
-        "-----------------------------------------------------------------------------------------",
-        f"--------------------{banner_text}-------------------",
-        "-----------------------------------------------------------------------------------------",
-        "",
-    ]
+    #    banner = [
+    #        "-----------------------------------------------------------------------------------------",
+    #        f"--------------------{banner_text}-------------------",
+    #        "-----------------------------------------------------------------------------------------",
+    #        "",
+    #    ]
 
-    for line in banner:
-        print(line)
+    #    for line in banner:
+    #        print(line)
 
     # Open
     with open(test_json_path) as f:
@@ -243,7 +249,6 @@ def run_section_tests(test_json_name):
             f"{test_id}"
         ] = []  # Initialize log of this tests multiple results
         print_errors = False
-
         # Pull in rule, if written. If not found, fail the test and log which Section and Rule could not be found.
         try:
             rule = getattr(globals()[section_name], function_name)()
@@ -325,7 +330,7 @@ def run_section_tests(test_json_name):
     # Return whether or not all tests in this test JSON received their expected outcome as a boolean
     all_tests_successful = all(test_result_dict["results"])
 
-    return all_tests_successful
+    return all_tests_pass
 
 
 def validate_test_json_schema(test_json_path):
@@ -468,74 +473,3 @@ def evaluate_outcome_object(outcome_dict, test_result_dict, test_dict, test_id):
             )
 
         test_result_dict[f"{test_id}"].append(received_expected_outcome)
-
-
-def run_transformer_tests():
-    """Runs all tests found in the transformer tests JSON.
-
-    Returns
-    -------
-    None
-
-    Results of transformer test are spit out to console
-    """
-
-    transformer_rule_json = "transformer_tests.json"
-
-    return run_section_tests(transformer_rule_json)
-
-
-def run_lighting_tests():
-    """Runs all tests found in the lighting tests JSON.
-
-    Returns
-    -------
-    None
-
-    Results of lighting test are spit out to console
-    """
-
-    lighting_test_json = "lighting_tests.json"
-
-    return run_section_tests(lighting_test_json)
-
-
-def run_envelope_tests():
-    """Runs all tests found in the envelope tests JSON.
-
-    Returns
-    -------
-    None
-
-    Results of envelope stest are spit out to console
-    """
-
-    envelope_test_json = "envelope_tests.json"
-
-    return run_section_tests(envelope_test_json)
-
-
-def run_boiler_tests():
-    """Runs all tests found in the boiler tests JSON
-
-    Returns
-    -------
-    None
-
-    Results of boiler test are spit out to console
-    """
-    boiler_test_json = "section21/rule_21_3.json"
-    return run_section_tests(boiler_test_json)
-
-
-def run_chiller_tests():
-    """Runs all tests found in the chiller tests JSON
-
-    Returns
-    -------
-    None
-
-    Results of chiller test are spit out to console
-    """
-    boiler_test_json = "section22/rule_22_1.json"
-    return run_section_tests(boiler_test_json)

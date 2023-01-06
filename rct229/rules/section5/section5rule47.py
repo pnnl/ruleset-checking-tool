@@ -37,6 +37,9 @@ class Section5Rule47(RuleDefinitionListIndexedBase):
             index_rmr="baseline",
             id="5-47",
             description="The baseline air leakage rate of the building envelope (I_75Pa) at a fixed building pressure differential of 0.3 in. of water shall be 1 cfm/ft2. The air leakage rate of the building envelope shall be converted to appropriate units for the simulation program using one of the methods in Section G3.1.1.4.",
+            ruleset_section_title="Envelope",
+            standard_section="Section G3.1-5(h) Building Envelope Modeling Requirements for the Baseline building",
+            is_primary_rule=True,
             list_path="ruleset_model_instances[0].buildings[*]",
             data_items={"climate_zone": ("baseline", "weather/climate_zone")},
         )

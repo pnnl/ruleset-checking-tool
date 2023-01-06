@@ -13,25 +13,39 @@
  
 **Function Call:** 
 1. is_hvac_sys_cooling_type_none()
-2. is_hvac_sys_fan_sys_CV()  
-3. is_hvac_sys_heating_type_elec_resistance()
-4. are_all_terminal_heat_sources_none_or_null()  
-5. are_all_terminal_cool_sources_none_or_null() 
-6. are_all_terminal_fans_null()  
-7. are_all_terminal_types_CAV()   
-8. does_each_zone_have_only_one_terminal()    
-9. does_hvac_system_serve_single_zone()  
-10. is_there_only_one_hvac_sys_heating_system ()  
- 
+2. are_all_terminal_heat_sources_electric()  
+3. are_all_terminal_cool_sources_none_or_null() 
+4. do_all_terminals_have_one_fan()    
+6. are_all_terminal_types_CAV_With_None_Equal_to_Null()
+7. does_each_zone_have_only_one_terminal()    
+8. does_hvac_system_serve_single_zone()  
+9. is_hvac_sys_fan_sys_CV()  
+10. is_hvac_sys_heating_type_elec_resistance()
+11. are_all_terminal_heat_sources_none_or_null()  
+12. are_all_terminal_cool_sources_none_or_null() 
+13. are_all_terminal_fans_null()  
+14. are_all_terminal_types_CAV()   
+15. does_each_zone_have_only_one_terminal()    
+16. does_hvac_system_serve_single_zone()  
+
+
 ## Logic:    
 - Create an object associated with the hvac system: `hvac_b = hvac_b.id`  
 - Set is_baseline_system_10 = Not_Sys_10: `is_baseline_system_10 = "Not_Sys_10"`    
-- Check that there is one heating system, if there is then carry on: `if is_there_only_one_hvac_sys_heating_system(B_RMR, hvac_b.id) == TRUE:`   
-    - Check that there is no preheat system, if there is none then carry on: `if len(hvac_b.preheat_system) == Null or hvac_b.preheat_system[0].heating_system_type = "NONE" :`    
-        - Check if fansystem is constant volume, if yes then carry on: `if is_hvac_sys_fan_sys_CV(B_RMR, hvac_b.id) == TRUE:`  
-            - Check if the hvac system serves a single zone and that the zone only has one terminal unit: `if does_hvac_system_serve_single_zone(B_RMR, zone_id_list) == TRUE AND does_each_zone_have_only_one_terminal(B_RMR,zone_id_list) == TRUE:`     
-                - Check that the data elements associated with the terminal unit align with system 10: `if are_all_terminal_heat_sources_none_or_null(B_RMR,terminal_unit_id_list) == TRUE AND are_all_terminal_cool_sources_none_or_null(B_RMR,terminal_unit_id_list) == TRUE And are_all_terminal_fans_null(B_RMR,terminal_unit_id_list) == TRUE AND are_all_terminal_types_CAV(B_RMR,terminal_unit_id_list) == TRUE:`        
-                    - if coolingsystem is None and the heating type is a electric then Sys-10: `if is_hvac_sys_cooling_type_none(B_RMR, hvac_b.id) == TRUE AND is_hvac_sys_heating_type_elec_resistance(B_RMR, hvac_b.id) == TRUE: is_baseline_system_10 = "Sys-10"`  
+- Check that there is no preheat system, if there is none then carry on: `if len(hvac_b.preheat_system) == Null or hvac_b.preheat_system.heating_system_type == "NONE" :`    
+    - Check that there is no heating system, if there is none then carry on: `if len(hvac_b.heating_system) == Null or hvac_b.heating_system.heating_system_type == "NONE":`     
+        - Check that there is no cooling system if there is none then carry on: `is_hvac_sys_cooling_type_none(B_RMR, hvac_b.id) == TRUE`  
+            - Check that there is no fan system, if there is none then carry on: `if len(hvac_b.fan_system) == Null:`     
+                - Check if the zone only has one terminal unit: `if does_each_zone_have_only_one_terminal(B_RMR,zone_id_list) == TRUE:`   
+                    - Check that the data elements associated with the terminal unit align with system 10: `if are_all_terminal_heat_sources_electric(B_RMR,terminal_unit_id_list) == TRUE AND are_all_terminal_cool_sources_none_or_null(B_RMR,terminal_unit_id_list) == TRUE And do_all_terminals_have_one_fan(B_RMR,terminal_unit_id_list) == TRUE AND are_all_terminal_types_CAV_With_None_Equal_to_Null(B_RMR,terminal_unit_id_list) == TRUE: is_baseline_system_10 = "Sys-10"`      
+- Check if is_baseline_system_10 equals "Not_Sys_10", if it does then perform logic below: `if is_baseline_system_10 == "Not_Sys_10:"`  
+    - Check that there is a heating system, if there is then carry on: `if hvac_b.heating_system != Null and hvac_b.heating_system.heating_system_type != "NONE":`   
+        - Check that there is no preheat system, if there is none then carry on: `if len(hvac_b.preheat_system) == Null or hvac_b.preheat_system.heating_system_type == "NONE" :`    
+            - Check if fansystem is constant volume, if yes then carry on: `if is_hvac_sys_fan_sys_CV(B_RMR, hvac_b.id) == TRUE:`  
+                - Check if the hvac system serves a single zone and that the zone only has one terminal unit: `if does_hvac_system_serve_single_zone(B_RMR, zone_id_list) == TRUE AND does_each_zone_have_only_one_terminal(B_RMR,zone_id_list) == TRUE:`     
+                    - Check that the data elements associated with the terminal unit align with system 10: `if are_all_terminal_heat_sources_none_or_null(B_RMR,terminal_unit_id_list) == TRUE AND are_all_terminal_cool_sources_none_or_null(B_RMR,terminal_unit_id_list) == TRUE And are_all_terminal_fans_null(B_RMR,terminal_unit_id_list) == TRUE AND are_all_terminal_types_CAV(B_RMR,terminal_unit_id_list) == TRUE:`        
+                        - if coolingsystem is None and the heating type is a electric then Sys-10: `if is_hvac_sys_cooling_type_none(B_RMR, hvac_b.id) == TRUE AND is_hvac_sys_heating_type_elec_resistance(B_RMR, hvac_b.id) == TRUE: is_baseline_system_10 = "Sys-10"`  
+
 
 **Returns** `is_baseline_system_10`  
 

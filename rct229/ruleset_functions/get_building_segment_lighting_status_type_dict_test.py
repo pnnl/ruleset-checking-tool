@@ -109,7 +109,7 @@ TEST_BUILDING = quantify_rmr(TEST_RMR)["ruleset_model_instances"][0]["buildings"
 test_building_segments = TEST_BUILDING["building_segments"]
 
 
-def test__TEST_RMR__is_valid():
+def test__TEST_RMD__is_valid():
     schema_validation_result = schema_validate_rmr(TEST_RMR)
     assert schema_validation_result[
         "passed"

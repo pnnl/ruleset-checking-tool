@@ -2,21 +2,23 @@ from rct229.data.schema_enums import schema_enums
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
+from rct229.ruleset_functions.baseline_systems.baseline_system_util import HVAC_SYS
+from rct229.ruleset_functions.get_baseline_system_types import get_baseline_system_types
 from rct229.schema.config import ureg
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.pint_utils import CalcQ
 from rct229.utils.std_comparisons import std_equal
 
 APPLICABLE_SYS_TYPES = [
-    "SYS-1",
-    "SYS-5",
-    "SYS-7",
-    "SYS-11.2",
-    "SYS-12",
-    "SYS-1A",
-    "SYS-7A",
-    "SYS-11.2A",
-    "SYS-12A",
+    HVAC_SYS.SYS_1,
+    HVAC_SYS.SYS_1A,
+    HVAC_SYS.SYS_5,
+    HVAC_SYS.SYS_7,
+    HVAC_SYS.SYS_7A,
+    HVAC_SYS.SYS_11_2,
+    HVAC_SYS.SYS_11_2A,
+    HVAC_SYS.SYS_12,
+    HVAC_SYS.SYS_12A,
 ]
 DESIGN_SUPPLY_TEMP = 180 * ureg("degF")
 DESIGN_RETURN_TEMP = 130 * ureg("degF")
@@ -32,21 +34,27 @@ class Section21Rule7(RuleDefinitionListIndexedBase):
             index_rmr="baseline",
             id="21-7",
             description="When baseline building requires boilers, systems 1,5,7,11 and 12 - Model HWST = 180F and return design temp = 130F.",
+            ruleset_section_title="HVAC - Water Side",
+            standard_section="Section G3.1.3.3 Building System-Specific Modeling Requirements for the Baseline model",
+            is_primary_rule=True,
             rmr_context="ruleset_model_instances/0",
             list_path="fluid_loops[*]",
         )
 
     def is_applicable(self, context, data=None):
         rmi_b = context.baseline
-        # FIXME: replace with baseline_system_types = get_baseline_system_types(rmi_b) when get_baseline_system_types
-        #  is ready.
-        baseline_system_types = {
-            "SYS-7A": ["hvac_sys_7_a"],
-            "SYS-12": ["hvac_sys_12"],
-        }
-        # if any system type found in the APPLICABLE_SYS_TYPES then return applicable.
+        baseline_system_types_dict = get_baseline_system_types(rmi_b)
+        # create a list containing all HVAC systems that are modeled in the rmi_b
+        available_type_list = [
+            hvac_type
+            for hvac_type in baseline_system_types_dict.keys()
+            if len(baseline_system_types_dict[hvac_type]) > 0
+        ]
         return any(
-            [key in APPLICABLE_SYS_TYPES for key in baseline_system_types.keys()]
+            [
+                available_type in APPLICABLE_SYS_TYPES
+                for available_type in available_type_list
+            ]
         )
 
     def create_data(self, context, data):
@@ -87,15 +95,19 @@ class Section21Rule7(RuleDefinitionListIndexedBase):
                 "design_return_temperature": CalcQ(
                     "temperature", design_return_temperature
                 ),
+                "required_supply_temperature": CalcQ("temperature", DESIGN_SUPPLY_TEMP),
+                "required_return_temperature": CalcQ("temperature", DESIGN_RETURN_TEMP),
             }
 
         def rule_check(self, context, calc_vals=None, data=None):
             design_supply_temperature = calc_vals["design_supply_temperature"]
             design_return_temperature = calc_vals["design_return_temperature"]
+            required_supply_temperature = calc_vals["required_supply_temperature"]
+            required_return_temperature = calc_vals["required_return_temperature"]
             return std_equal(
                 design_supply_temperature.to(ureg.kelvin),
-                DESIGN_SUPPLY_TEMP.to(ureg.kelvin),
+                required_supply_temperature.to(ureg.kelvin),
             ) and std_equal(
                 design_return_temperature.to(ureg.kelvin),
-                DESIGN_RETURN_TEMP.to(ureg.kelvin),
+                required_return_temperature.to(ureg.kelvin),
             )
