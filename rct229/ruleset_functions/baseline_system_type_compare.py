@@ -12,7 +12,7 @@ def baseline_system_type_compare(system_type, target_system_type, exact_match=Tr
 
     Returns
     -------
-    True or False, indicating whether the hvac system type matches the hvac_system_type
+    True or False, indicating whether the hvac system type matches the hvac_system_type.
     """
 
     return (
