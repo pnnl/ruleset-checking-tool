@@ -6,6 +6,7 @@ import os
 import pprint
 
 from rct229.rule_engine.engine import evaluate_rule
+from rct229.rule_engine.rct_outcome_label import RCTOutcomeLabel
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 from rct229.rules.section5 import *
 from rct229.rules.section6 import *
@@ -16,8 +17,6 @@ from rct229.rules.section22 import *
 from rct229.ruletest_engine.ruletest_jsons.scripts.json_generation_utilities import (
     merge_nested_dictionary,
 )
-from rct229.rule_engine.rct_outcome_label import RCTOutcomeLabel
-from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 from rct229.schema.validate import validate_rmr
 from rct229.utils.json_utils import slash_prefix_guarantee
 

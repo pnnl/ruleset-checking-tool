@@ -44,6 +44,22 @@ class HVAC_SYS:
     SYS_13A = "Sys-13a"
     UNMATCHED = "Not_Sys"
 
+    HVAC_SYSTEM_TYPE_DICTIONARY = {
+        SYS_1: [SYS_1, SYS_1A, SYS_1B, SYS_1C],
+        SYS_2: [SYS_2],
+        SYS_3: [SYS_3, SYS_3A, SYS_3B, SYS_3C],
+        SYS_4: [SYS_4],
+        SYS_5: [SYS_5, SYS_5B],
+        SYS_6: [SYS_6, SYS_6B],
+        SYS_7: [SYS_7, SYS_7A, SYS_7B, SYS_7C],
+        SYS_8: [SYS_8, SYS_8A, SYS_8B, SYS_8C],
+        SYS_9: [SYS_9, SYS_9B],
+        SYS_10: [SYS_10],
+        SYS_11_1: [SYS_11_1, SYS_11_1A, SYS_11_1B, SYS_11_1C, SYS_11_2, SYS_11_2A],
+        SYS_12: [SYS_12, SYS_12A, SYS_12B, SYS_12C],
+        SYS_13: [SYS_13, SYS_13A],
+    }
+
 
 def find_exactly_one_hvac_system(rmi, hvac_id):
     """
