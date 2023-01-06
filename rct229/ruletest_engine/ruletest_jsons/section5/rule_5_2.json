@@ -7,12 +7,11 @@
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-2",
-            "ruleset_reference": "G3.1 #1 (a) The simulation model of the proposed design shall be consistent\nwith the design documents\u2026",
+            "ruleset_reference": "Table G3.1(5) Proposed Building Performance (a) ",
             "rule_description": "Orientation is the same in user model and proposed model",
             "applicable_rmr": "Proposed RMR",
             "rule_assertion": "=",
             "comparison_value": "User RMR",
-            "rule_dependency": "None",
             "primary_rule": "N",
             "schema_version": "0.0.18"
         },
@@ -99,12 +98,11 @@
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-2",
-            "ruleset_reference": "G3.1 #1 (a) The simulation model of the proposed design shall be consistent\nwith the design documents\u2026",
+            "ruleset_reference": "Table G3.1(5) Proposed Building Performance (a) ",
             "rule_description": "Orientation is the same in user model and proposed model",
             "applicable_rmr": "Proposed RMR",
             "rule_assertion": "=",
             "comparison_value": "User RMR",
-            "rule_dependency": "None",
             "primary_rule": "N",
             "schema_version": "0.0.18"
         },

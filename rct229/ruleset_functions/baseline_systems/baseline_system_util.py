@@ -29,6 +29,7 @@ class HVAC_SYS:
     SYS_9 = "Sys-9"
     SYS_9B = "Sys-9b"
     SYS_10 = "Sys-10"
+    SYS_11B = "Sys-11b"
     SYS_11_1 = "Sys-11.1"
     SYS_11_1A = "Sys-11.1a"
     SYS_11_1B = "Sys-11.1b"
@@ -40,7 +41,7 @@ class HVAC_SYS:
     SYS_12B = "Sys-12b"
     SYS_12C = "Sys-12c"
     SYS_13 = "Sys-13"
-    SYS_13A = "Sys-13A"
+    SYS_13A = "Sys-13a"
     UNMATCHED = "Not_Sys"
 
 
@@ -59,7 +60,7 @@ def find_exactly_one_hvac_system(rmi, hvac_id):
 
     """
     return find_exactly_one_with_field_value(
-        "$.buildings[*].building_segments[*].heating_ventilation_air_conditioning_systems[*]",
+        "$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*]",
         "id",
         hvac_id,
         rmi,
@@ -106,7 +107,28 @@ def find_exactly_one_zone(rmi, zone_id):
     )
 
 
-def find_exactly_one_loop(rmi, loop_id):
+def find_exactly_one_child_loop(rmi, child_loop_id):
+    """
+    Search for a child loop data group (secondary loop) in a ruleset model instance by matching child_loop_id
+    Raise exception if no matching zone
+    Parameters
+    ----------
+    rmi: json
+    child_loop_id: str
+
+    Returns: json
+    -------
+
+    """
+    return find_exactly_one_with_field_value(
+        "$.fluid_loops[*].child_loops[*]",
+        "id",
+        child_loop_id,
+        rmi,
+    )
+
+
+def find_exactly_one_fluid_loop(rmi, loop_id):
     """
     Search for the loop data group in a ruleset model instance by matching loop_id
     Raise exception if no matching zone

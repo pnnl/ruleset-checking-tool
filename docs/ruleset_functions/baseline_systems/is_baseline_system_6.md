@@ -31,9 +31,9 @@
 ## Logic:    
 - Create an object associated with the hvac system: `hvac_b = hvac_b.id`  
 - Set is_baseline_system_6 = Not_Sys_6: `is_baseline_system_6 = "Not_Sys_6"`    
-- Check that there is no heating system, if there is none then carry on: `if len(hvac_b.heating_system) == Null or hvac_b.heating_system[0].heating_system_type == "NONE":` 
+- Check that there is no heating system, if there is none then carry on: `if len(hvac_b.heating_system) == Null or hvac_b.heating_system.heating_system_type == "NONE":` 
 - Check that there is one preheat system per G3.1.3.19, if there is then carry on: `if Len(hvac_b.preheat_system) == 1:`   
-    - Check that there is only one cooling system: `if is_there_only_one_hvac_sys_cooling_system (B_RMR, hvac_b.id) == TRUE:`  
+    - Check that there is a cooling system: `if hvac_b.cooling_system != Null or hvac_b.cooling_system.cooling_system_type != "NONE":`  
         - Check if the cooling system type is DX, if yes then carry on: `if is_hvac_sys_cooling_type_DX(B_RMR, hvac_b.id) == TRUE:`  
             - Check if fansystem is variable speed drive controlled, if yes then carry on: `if is_hvac_sys_fan_sys_VSD(B_RMR, hvac_b.id) == TRUE:`  
                 - Check that each zone only has one terminal unit: `if does_each_zone_have_only_one_terminal(B_RMR,zone_id_list) == TRUE:`     

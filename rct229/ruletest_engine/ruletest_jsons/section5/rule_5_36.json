@@ -7,14 +7,13 @@
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-36",
-            "ruleset_reference": "Table G3.1#5 baselnid column e: Skylight orientation and tilt shall be the same as in the proposed design.",
+            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (e)",
             "rule_description": "Skylight area must be allocated to surfaces in the same proportion in the baseline as in the proposed design; Skylight orientation and tilt shall be the same as in the proposed design.",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Proposed RMR",
-            "rule_dependency": "None",
             "primary_rule": "Y",
-            "schema_version": "0.0.18"
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "proposed": {
@@ -49,7 +48,7 @@
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
+                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -86,7 +85,7 @@
                                                 ]
                                             }
                                         ],
-                                        "heating_ventilation_air_conditioning_systems": [
+                                        "heating_ventilating_air_conditioning_systems": [
                                             {
                                                 "id": "HVAC 1",
                                                 "cooling_system": {
@@ -138,7 +137,7 @@
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
+                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -175,7 +174,7 @@
                                                 ]
                                             }
                                         ],
-                                        "heating_ventilation_air_conditioning_systems": [
+                                        "heating_ventilating_air_conditioning_systems": [
                                             {
                                                 "id": "HVAC 1",
                                                 "cooling_system": {
@@ -205,14 +204,13 @@
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-36",
-            "ruleset_reference": "Table G3.1#5 baselnid column e: Skylight orientation and tilt shall be the same as in the proposed design.",
+            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (e)",
             "rule_description": "Skylight area must be allocated to surfaces in the same proportion in the baseline as in the proposed design; Skylight orientation and tilt shall be the same as in the proposed design.",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Proposed RMR",
-            "rule_dependency": "None",
             "primary_rule": "Y",
-            "schema_version": "0.0.18"
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "proposed": {
@@ -247,7 +245,7 @@
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
+                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -284,7 +282,7 @@
                                                 ]
                                             }
                                         ],
-                                        "heating_ventilation_air_conditioning_systems": [
+                                        "heating_ventilating_air_conditioning_systems": [
                                             {
                                                 "id": "HVAC 1",
                                                 "cooling_system": {
@@ -336,7 +334,7 @@
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
+                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -373,7 +371,7 @@
                                                 ]
                                             }
                                         ],
-                                        "heating_ventilation_air_conditioning_systems": [
+                                        "heating_ventilating_air_conditioning_systems": [
                                             {
                                                 "id": "HVAC 1",
                                                 "cooling_system": {

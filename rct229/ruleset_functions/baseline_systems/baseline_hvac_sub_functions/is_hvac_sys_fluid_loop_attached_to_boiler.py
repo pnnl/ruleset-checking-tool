@@ -1,7 +1,7 @@
 from rct229.data.schema_enums import schema_enums
 from rct229.ruleset_functions.baseline_systems.baseline_system_util import (
+    find_exactly_one_fluid_loop,
     find_exactly_one_hvac_system,
-    find_exactly_one_loop,
 )
 from rct229.utils.jsonpath_utils import find_all, find_one
 
@@ -30,7 +30,7 @@ def is_hvac_sys_fluid_loop_attached_to_boiler(rmi_b, hvac_b_id):
     hvac_b = find_exactly_one_hvac_system(rmi_b, hvac_b_id)
     hot_water_loop_id = find_one("heating_system.hot_water_loop", hvac_b)
     if hot_water_loop_id in boiler_loop_ids:
-        hot_water_loop = find_exactly_one_loop(rmi_b, hot_water_loop_id)
+        hot_water_loop = find_exactly_one_fluid_loop(rmi_b, hot_water_loop_id)
         is_hvac_sys_fluid_loop_attached_to_boiler_flag = (
             find_one("type", hot_water_loop) == FLUID_LOOP.HEATING
         )

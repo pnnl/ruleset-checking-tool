@@ -7,14 +7,13 @@
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-15",
-            "ruleset_reference": "G3.1 #5 (b) Opaque assemblies used for new buildings, existing buildings, or additions ... shall match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8:",
+            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b)",
             "rule_description": "Baseline slab-on-grade assemblies must match the appropriate assembly maximum F-factors in Tables G3.4-1 through G3.4-9",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "rule_dependency": "Baseline heating and cooling capacities are established correctly (air-side HVAC rule TBD). This affects baseline space conditioning categories",
             "primary_rule": "Y",
-            "schema_version": "0.0.18"
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "baseline": {
@@ -49,7 +48,7 @@
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
+                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -66,7 +65,7 @@
                                                 ]
                                             }
                                         ],
-                                        "heating_ventilation_air_conditioning_systems": [
+                                        "heating_ventilating_air_conditioning_systems": [
                                             {
                                                 "id": "HVAC 1",
                                                 "cooling_system": {
@@ -96,14 +95,13 @@
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-15",
-            "ruleset_reference": "G3.1 #5 (b) Opaque assemblies used for new buildings, existing buildings, or additions ... shall match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8:",
+            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b)",
             "rule_description": "Baseline slab-on-grade assemblies must match the appropriate assembly maximum F-factors in Tables G3.4-1 through G3.4-9",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "rule_dependency": "Baseline heating and cooling capacities are established correctly (air-side HVAC rule TBD). This affects baseline space conditioning categories",
             "primary_rule": "Y",
-            "schema_version": "0.0.18"
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "baseline": {
@@ -138,7 +136,7 @@
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
+                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -155,7 +153,7 @@
                                                 ]
                                             }
                                         ],
-                                        "heating_ventilation_air_conditioning_systems": [
+                                        "heating_ventilating_air_conditioning_systems": [
                                             {
                                                 "id": "HVAC 1",
                                                 "cooling_system": {
@@ -185,14 +183,13 @@
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-15",
-            "ruleset_reference": "G3.1 #5 (b) Opaque assemblies used for new buildings, existing buildings, or additions ... shall match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8:",
+            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b)",
             "rule_description": "Baseline slab-on-grade assemblies must match the appropriate assembly maximum F-factors in Tables G3.4-1 through G3.4-9",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "rule_dependency": "Baseline heating and cooling capacities are established correctly (air-side HVAC rule TBD). This affects baseline space conditioning categories",
             "primary_rule": "Y",
-            "schema_version": "0.0.18"
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "baseline": {
@@ -227,7 +224,7 @@
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
+                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -244,7 +241,7 @@
                                                 ]
                                             }
                                         ],
-                                        "heating_ventilation_air_conditioning_systems": [
+                                        "heating_ventilating_air_conditioning_systems": [
                                             {
                                                 "id": "HVAC 1",
                                                 "cooling_system": {
@@ -274,14 +271,13 @@
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-15",
-            "ruleset_reference": "G3.1 #5 (b) Opaque assemblies used for new buildings, existing buildings, or additions ... shall match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8:",
+            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b)",
             "rule_description": "Baseline slab-on-grade assemblies must match the appropriate assembly maximum F-factors in Tables G3.4-1 through G3.4-9",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "rule_dependency": "Baseline heating and cooling capacities are established correctly (air-side HVAC rule TBD). This affects baseline space conditioning categories",
             "primary_rule": "Y",
-            "schema_version": "0.0.18"
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "baseline": {
@@ -316,7 +312,7 @@
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
+                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -333,7 +329,7 @@
                                                 ]
                                             }
                                         ],
-                                        "heating_ventilation_air_conditioning_systems": [
+                                        "heating_ventilating_air_conditioning_systems": [
                                             {
                                                 "id": "HVAC 1",
                                                 "cooling_system": {
@@ -363,14 +359,13 @@
         "expected_rule_outcome": "manual_check",
         "standard": {
             "rule_id": "5-15",
-            "ruleset_reference": "G3.1 #5 (b) Opaque assemblies used for new buildings, existing buildings, or additions ... shall match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8:",
+            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b)",
             "rule_description": "Baseline slab-on-grade assemblies must match the appropriate assembly maximum F-factors in Tables G3.4-1 through G3.4-9",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "rule_dependency": "Baseline heating and cooling capacities are established correctly (air-side HVAC rule TBD). This affects baseline space conditioning categories",
             "primary_rule": "Y",
-            "schema_version": "0.0.18"
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "baseline": {
@@ -405,7 +400,7 @@
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
+                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -422,7 +417,7 @@
                                                 ]
                                             }
                                         ],
-                                        "heating_ventilation_air_conditioning_systems": [
+                                        "heating_ventilating_air_conditioning_systems": [
                                             {
                                                 "id": "HVAC 1",
                                                 "cooling_system": {
@@ -452,14 +447,13 @@
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-15",
-            "ruleset_reference": "G3.1 #5 (b) Opaque assemblies used for new buildings, existing buildings, or additions ... shall match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8:",
+            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b)",
             "rule_description": "Baseline slab-on-grade assemblies must match the appropriate assembly maximum F-factors in Tables G3.4-1 through G3.4-9",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "rule_dependency": "Baseline heating and cooling capacities are established correctly (air-side HVAC rule TBD). This affects baseline space conditioning categories",
             "primary_rule": "Y",
-            "schema_version": "0.0.18"
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "baseline": {
@@ -494,7 +488,7 @@
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
+                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -511,7 +505,7 @@
                                                 ]
                                             }
                                         ],
-                                        "heating_ventilation_air_conditioning_systems": [
+                                        "heating_ventilating_air_conditioning_systems": [
                                             {
                                                 "id": "HVAC 1",
                                                 "cooling_system": {
@@ -541,14 +535,13 @@
         "expected_rule_outcome": "manual_check",
         "standard": {
             "rule_id": "5-15",
-            "ruleset_reference": "G3.1 #5 (b) Opaque assemblies used for new buildings, existing buildings, or additions ... shall match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8:",
+            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b)",
             "rule_description": "Baseline slab-on-grade assemblies must match the appropriate assembly maximum F-factors in Tables G3.4-1 through G3.4-9",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "rule_dependency": "Baseline heating and cooling capacities are established correctly (air-side HVAC rule TBD). This affects baseline space conditioning categories",
             "primary_rule": "Y",
-            "schema_version": "0.0.18"
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "baseline": {
@@ -583,7 +576,7 @@
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
+                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -600,7 +593,7 @@
                                                 ]
                                             }
                                         ],
-                                        "heating_ventilation_air_conditioning_systems": [
+                                        "heating_ventilating_air_conditioning_systems": [
                                             {
                                                 "id": "HVAC 1",
                                                 "cooling_system": {

@@ -5,6 +5,7 @@ from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedV
 from rct229.ruleset_functions.baseline_systems.baseline_system_util import HVAC_SYS
 from rct229.ruleset_functions.get_baseline_system_types import get_baseline_system_types
 from rct229.schema.config import ureg
+from rct229.utils.pint_utils import CalcQ
 
 APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_1,
@@ -35,6 +36,9 @@ class Section21Rule17(RuleDefinitionListIndexedBase):
             index_rmr="baseline",
             id="21-17",
             description="All boilers in the baseline building design shall be modeled at the minimum efficiency levels, both part load and full load, in accordance with Tables G3.5.6.",
+            ruleset_section_title="HVAC - Water Side",
+            standard_section="Section G3.1.2.1 General Baseline HVAC System Requirements - Equipment Efficiencies",
+            is_primary_rule=True,
             rmr_context="ruleset_model_instances/0",
             list_path="boilers[*]",
         )
@@ -42,8 +46,8 @@ class Section21Rule17(RuleDefinitionListIndexedBase):
     def is_applicable(self, context, data=None):
         rmi_b = context.baseline
         baseline_system_types_dict = get_baseline_system_types(rmi_b)
-        # create a list contains all HVAC systems that are modeled in the rmi_b
-        available_type_lists = [
+        # create a list containing all HVAC systems that are modeled in the rmi_b
+        available_type_list = [
             hvac_type
             for hvac_type in baseline_system_types_dict.keys()
             if len(baseline_system_types_dict[hvac_type]) > 0
@@ -51,7 +55,7 @@ class Section21Rule17(RuleDefinitionListIndexedBase):
         return any(
             [
                 available_type in APPLICABLE_SYS_TYPES
-                for available_type in available_type_lists
+                for available_type in available_type_list
             ]
         )
 
@@ -71,7 +75,7 @@ class Section21Rule17(RuleDefinitionListIndexedBase):
             boiler_efficiency_b = boiler_b["efficiency"]
 
             return {
-                "boiler_rated_capacity_b": boiler_rated_capacity_b,
+                "boiler_rated_capacity_b": CalcQ("capacity", boiler_rated_capacity_b),
                 "boiler_efficiency_metric_b": boiler_efficiency_metric_b,
                 "boiler_efficiency_b": boiler_efficiency_b,
             }

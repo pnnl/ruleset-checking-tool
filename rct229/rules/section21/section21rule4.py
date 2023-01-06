@@ -29,6 +29,9 @@ class Section21Rule4(RuleDefinitionListIndexedBase):
             index_rmr="baseline",
             id="21-4",
             description="When baseline building does not use purchased heat, baseline systems 1,5,7,11,12 shall be modeled with natural draft boilers.",
+            ruleset_section_title="HVAC - Water Side",
+            standard_section="Section G3.1.3.2 Building System-Specific Modeling Requirements for the Baseline model",
+            is_primary_rule=True,
             rmr_context="ruleset_model_instances/0",
             list_path="boilers[*]",
         )
@@ -36,8 +39,8 @@ class Section21Rule4(RuleDefinitionListIndexedBase):
     def is_applicable(self, context, data=None):
         rmi_b = context.baseline
         baseline_system_types_dict = get_baseline_system_types(rmi_b)
-        # create a list contains all HVAC systems that are modeled in the rmi_b
-        available_type_lists = [
+        # create a list containing all HVAC systems that are modeled in the rmi_b
+        available_type_list = [
             hvac_type
             for hvac_type in baseline_system_types_dict.keys()
             if len(baseline_system_types_dict[hvac_type]) > 0
@@ -45,7 +48,7 @@ class Section21Rule4(RuleDefinitionListIndexedBase):
         return any(
             [
                 available_type in APPLICABLE_SYS_TYPES
-                for available_type in available_type_lists
+                for available_type in available_type_list
             ]
         )
 

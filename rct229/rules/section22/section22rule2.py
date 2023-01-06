@@ -1,37 +1,37 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
+from rct229.ruleset_functions.baseline_systems.baseline_system_util import HVAC_SYS
+from rct229.ruleset_functions.get_baseline_system_types import get_baseline_system_types
 from rct229.schema.config import ureg
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.pint_utils import CalcQ
 from rct229.utils.std_comparisons import std_equal
 
 APPLICABLE_SYS_TYPES = [
-    "SYS-7",
-    "SYS-8",
-    "SYS-11.1",
-    "SYS-11.2",
-    "SYS-12",
-    "SYS-13",
-    "SYS-1A",
-    "SYS-3A",
-    "SYS-7A",
-    "SYS-8A",
-    "SYS-11.1A",
-    "SYS-11.2A",
-    "SYS-12A",
-    "SYS-13A",
-    "SYS-7B",
-    "SYS-8B",
-    "SYS-11B",
-    "SYS-12B",
-    "SYS-13B",
-    "SYS-1C",
-    "SYS-3C",
-    "SYS-7C",
-    "SYS-11C",
-    "SYS-12C",
-    "SYS-13C",
+    HVAC_SYS.SYS_7,
+    HVAC_SYS.SYS_8,
+    HVAC_SYS.SYS_11_1,
+    HVAC_SYS.SYS_11_2,
+    HVAC_SYS.SYS_12,
+    HVAC_SYS.SYS_13,
+    HVAC_SYS.SYS_1A,
+    HVAC_SYS.SYS_3A,
+    HVAC_SYS.SYS_7A,
+    HVAC_SYS.SYS_8A,
+    HVAC_SYS.SYS_11_1A,
+    HVAC_SYS.SYS_11_2A,
+    HVAC_SYS.SYS_12A,
+    HVAC_SYS.SYS_13A,
+    HVAC_SYS.SYS_7B,
+    HVAC_SYS.SYS_8B,
+    HVAC_SYS.SYS_11_1B,
+    HVAC_SYS.SYS_12B,
+    HVAC_SYS.SYS_1C,
+    HVAC_SYS.SYS_3C,
+    HVAC_SYS.SYS_7C,
+    HVAC_SYS.SYS_11_1C,
+    HVAC_SYS.SYS_12C,
 ]
 DESIGN_RETURN_TEMP = 56 * ureg("degF")
 
@@ -46,21 +46,27 @@ class Section22Rule2(RuleDefinitionListIndexedBase):
             index_rmr="baseline",
             id="22-2",
             description="Baseline chilled water design return temperature shall be modeled at 56F.",
+            ruleset_section_title="HVAC - Chiller",
+            standard_section="Section G3.1.3.8 Chilled-water design supply temperature (System 7, 8, 11, 12 and 13)",
+            is_primary_rule=True,
             rmr_context="ruleset_model_instances/0",
             list_path="fluid_loops[*]",
         )
 
     def is_applicable(self, context, data=None):
         rmi_b = context.baseline
-        # FIXME: replace with baseline_system_types = get_baseline_system_types(rmi_b) when get_baseline_system_types
-        #  is ready.
-        baseline_system_types = {
-            "SYS-7": ["hvac_sys_7"],
-            "SYS-11": ["hvac_sys_11"],
-        }
-        # if any system type found in the APPLICABLE_SYS_TYPES then return applicable.
+        baseline_system_types_dict = get_baseline_system_types(rmi_b)
+        # create a list containing all HVAC systems that are modeled in the rmi_b
+        available_type_list = [
+            hvac_type
+            for hvac_type in baseline_system_types_dict.keys()
+            if len(baseline_system_types_dict[hvac_type]) > 0
+        ]
         return any(
-            [key in APPLICABLE_SYS_TYPES for key in baseline_system_types.keys()]
+            [
+                available_type in APPLICABLE_SYS_TYPES
+                for available_type in available_type_list
+            ]
         )
 
     def create_data(self, context, data):
@@ -94,12 +100,14 @@ class Section22Rule2(RuleDefinitionListIndexedBase):
             return {
                 "design_return_temperature": CalcQ(
                     "temperature", design_return_temperature
-                )
+                ),
+                "required_return_temperature": CalcQ("temperature", DESIGN_RETURN_TEMP),
             }
 
         def rule_check(self, context, calc_vals=None, data=None):
             design_return_temperature = calc_vals["design_return_temperature"]
+            required_return_temperature = calc_vals["required_return_temperature"]
             return std_equal(
                 design_return_temperature.to(ureg.kelvin),
-                DESIGN_RETURN_TEMP.to(ureg.kelvin),
+                required_return_temperature.to(ureg.kelvin),
             )

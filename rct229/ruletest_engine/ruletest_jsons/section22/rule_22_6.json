@@ -37,25 +37,23 @@
                                                     {
                                                         "id": "VAV Air Terminal 1",
                                                         "is_supply_ducted": true,
-                                                        "heating_source": "HOT_WATER",
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "VAV System 1",
-                                                        "cooling_source": "CHILLED_WATER"
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 11"
                                                     }
                                                 ]
                                             }
                                         ],
-                                        "heating_ventilation_air_conditioning_systems": [
+                                        "heating_ventilating_air_conditioning_systems": [
                                             {
-                                                "id": "System Type 11",
+                                                "id": "System 11",
                                                 "cooling_system": {
                                                     "id": "CHW Coil 1",
-                                                    "cooling_system_type": "FLUID_LOOP"
+                                                    "cooling_system_type": "FLUID_LOOP",
+                                                    "chilled_water_loop": "Secondary CHW Loop 1"
                                                 },
                                                 "heating_system": {
-                                                    "id": "Electric Resistance 1",
-                                                    "heating_system_type": "ELECTRIC_RESISTANCE",
-                                                    "hot_water_loop": "Boiler Loop 1"
+                                                    "id": "Heating Coil 1",
+                                                    "heating_system_type": "ELECTRIC_RESISTANCE"
                                                 },
                                                 "fan_system": {
                                                     "id": "VAV Fan System 1",
@@ -77,40 +75,34 @@
                                 ]
                             }
                         ],
-                        "boilers": [
-                            {
-                                "id": "Boiler 1",
-                                "loop": "Boiler Loop 1",
-                                "energy_source_type": "NATURAL_GAS"
-                            }
-                        ],
                         "chillers": [
                             {
                                 "id": "Chiller 1",
-                                "cooling_loop": "Chiller Loop 1",
-                                "energy_source_type": "ELECTRICITY"
+                                "cooling_loop": "Chiller Loop 1"
                             }
                         ],
                         "pumps": [
                             {
-                                "id": "Boiler Pump 1",
-                                "loop_or_piping": "Boiler Loop 1",
-                                "speed_control": "FIXED_SPEED"
-                            },
-                            {
                                 "id": "Chiller Pump 1",
                                 "loop_or_piping": "Chiller Loop 1",
                                 "speed_control": "FIXED_SPEED"
+                            },
+                            {
+                                "id": "Secondary CHW Pump",
+                                "loop_or_piping": "Secondary CHW Loop 1",
+                                "speed_control": "VARIABLE_SPEED"
                             }
                         ],
                         "fluid_loops": [
                             {
-                                "id": "Boiler Loop 1",
-                                "type": "HEATING"
-                            },
-                            {
                                 "id": "Chiller Loop 1",
                                 "type": "COOLING",
+                                "child_loops": [
+                                    {
+                                        "id": "Secondary CHW Loop 1",
+                                        "type": "COOLING"
+                                    }
+                                ],
                                 "cooling_or_condensing_design_and_control": {
                                     "id": "CCDC 1",
                                     "loop_supply_temperature_at_low_load": 12.222222222222285
@@ -160,25 +152,23 @@
                                                     {
                                                         "id": "VAV Air Terminal 1",
                                                         "is_supply_ducted": true,
-                                                        "heating_source": "HOT_WATER",
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "VAV System 1",
-                                                        "cooling_source": "CHILLED_WATER"
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 11"
                                                     }
                                                 ]
                                             }
                                         ],
-                                        "heating_ventilation_air_conditioning_systems": [
+                                        "heating_ventilating_air_conditioning_systems": [
                                             {
-                                                "id": "System Type 11",
+                                                "id": "System 11",
                                                 "cooling_system": {
                                                     "id": "CHW Coil 1",
-                                                    "cooling_system_type": "FLUID_LOOP"
+                                                    "cooling_system_type": "FLUID_LOOP",
+                                                    "chilled_water_loop": "Secondary CHW Loop 1"
                                                 },
                                                 "heating_system": {
-                                                    "id": "Electric Resistance 1",
-                                                    "heating_system_type": "ELECTRIC_RESISTANCE",
-                                                    "hot_water_loop": "Boiler Loop 1"
+                                                    "id": "Heating Coil 1",
+                                                    "heating_system_type": "ELECTRIC_RESISTANCE"
                                                 },
                                                 "fan_system": {
                                                     "id": "VAV Fan System 1",
@@ -200,40 +190,34 @@
                                 ]
                             }
                         ],
-                        "boilers": [
-                            {
-                                "id": "Boiler 1",
-                                "loop": "Boiler Loop 1",
-                                "energy_source_type": "NATURAL_GAS"
-                            }
-                        ],
                         "chillers": [
                             {
                                 "id": "Chiller 1",
-                                "cooling_loop": "Chiller Loop 1",
-                                "energy_source_type": "ELECTRICITY"
+                                "cooling_loop": "Chiller Loop 1"
                             }
                         ],
                         "pumps": [
                             {
-                                "id": "Boiler Pump 1",
-                                "loop_or_piping": "Boiler Loop 1",
-                                "speed_control": "FIXED_SPEED"
-                            },
-                            {
                                 "id": "Chiller Pump 1",
                                 "loop_or_piping": "Chiller Loop 1",
                                 "speed_control": "FIXED_SPEED"
+                            },
+                            {
+                                "id": "Secondary CHW Pump",
+                                "loop_or_piping": "Secondary CHW Loop 1",
+                                "speed_control": "VARIABLE_SPEED"
                             }
                         ],
                         "fluid_loops": [
                             {
-                                "id": "Boiler Loop 1",
-                                "type": "HEATING"
-                            },
-                            {
                                 "id": "Chiller Loop 1",
                                 "type": "COOLING",
+                                "child_loops": [
+                                    {
+                                        "id": "Secondary CHW Loop 1",
+                                        "type": "COOLING"
+                                    }
+                                ],
                                 "cooling_or_condensing_design_and_control": {
                                     "id": "CCDC 1",
                                     "loop_supply_temperature_at_low_load": 17.77777777777783

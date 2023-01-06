@@ -1,6 +1,7 @@
 from rct229.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.get_dict_with_terminal_units_and_zones import (
     get_dict_with_terminal_units_and_zones,
 )
+from rct229.schema.validate import schema_validate_rmr
 
 rmd_model = {
     "id": "ASHRAE229 1",
@@ -26,7 +27,7 @@ rmd_model = {
                                             "heating_from_loop": "Boiler Loop 1",
                                             "heating_source": "HOT_WATER",
                                             "type": "VARIABLE_AIR_VOLUME",
-                                            "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                            "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                         }
                                     ],
                                 },
@@ -41,7 +42,7 @@ rmd_model = {
                                             "heating_from_loop": "Boiler Loop 1",
                                             "heating_source": "HOT_WATER",
                                             "type": "VARIABLE_AIR_VOLUME",
-                                            "served_by_heating_ventilation_air_conditioning_system": "System 7a",
+                                            "served_by_heating_ventilating_air_conditioning_system": "System 7a",
                                         }
                                     ],
                                 },
@@ -56,7 +57,7 @@ rmd_model = {
                                             "heating_from_loop": "Purchased HW Loop 1",
                                             "heating_source": "HOT_WATER",
                                             "type": "VARIABLE_AIR_VOLUME",
-                                            "served_by_heating_ventilation_air_conditioning_system": "System 7b",
+                                            "served_by_heating_ventilating_air_conditioning_system": "System 7b",
                                         }
                                     ],
                                 },
@@ -71,12 +72,12 @@ rmd_model = {
                                             "heating_from_loop": "Purchased HW Loop 1",
                                             "heating_source": "HOT_WATER",
                                             "type": "VARIABLE_AIR_VOLUME",
-                                            "served_by_heating_ventilation_air_conditioning_system": "System 7c",
+                                            "served_by_heating_ventilating_air_conditioning_system": "System 7c",
                                         }
                                     ],
                                 },
                             ],
-                            "heating_ventilation_air_conditioning_systems": [
+                            "heating_ventilating_air_conditioning_systems": [
                                 {
                                     "id": "System 7",
                                     "preheat_system": {
@@ -221,6 +222,13 @@ rmd_model = {
         }
     ],
 }
+
+
+def test__TEST_RMD__is_valid():
+    schema_validation_result = schema_validate_rmr(rmd_model)
+    assert schema_validation_result[
+        "passed"
+    ], f"Schema error: {schema_validation_result['error']}"
 
 
 def test_get_dict_with_terminal_units_and_zones():

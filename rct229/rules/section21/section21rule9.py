@@ -5,6 +5,8 @@ from rct229.ruleset_functions.baseline_systems.baseline_system_util import HVAC_
 from rct229.ruleset_functions.get_baseline_system_types import get_baseline_system_types
 from rct229.schema.config import ureg
 from rct229.utils.jsonpath_utils import find_all
+from rct229.utils.pint_utils import CalcQ
+from rct229.utils.std_comparisons import std_equal
 
 APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_1,
@@ -30,6 +32,9 @@ class Section21Rule9(RuleDefinitionListIndexedBase):
             index_rmr="baseline",
             id="21-9",
             description="When baseline building includes boilers, Hot Water Pump Power = 19W/gpm.",
+            ruleset_section_title="HVAC - Water Side",
+            standard_section="Section G3.1.3.5 Building System-Specific Modeling Requirements for the Baseline model",
+            is_primary_rule=True,
             rmr_context="ruleset_model_instances/0",
             list_path="fluid_loops[*]",
         )
@@ -37,8 +42,8 @@ class Section21Rule9(RuleDefinitionListIndexedBase):
     def is_applicable(self, context, data=None):
         rmi_b = context.baseline
         baseline_system_types_dict = get_baseline_system_types(rmi_b)
-        # create a list contains all HVAC systems that are modeled in the rmi_b
-        available_type_lists = [
+        # create a list containing all HVAC systems that are modeled in the rmi_b
+        available_type_list = [
             hvac_type
             for hvac_type in baseline_system_types_dict.keys()
             if len(baseline_system_types_dict[hvac_type]) > 0
@@ -46,7 +51,7 @@ class Section21Rule9(RuleDefinitionListIndexedBase):
         return any(
             [
                 available_type in APPLICABLE_SYS_TYPES
-                for available_type in available_type_lists
+                for available_type in available_type_list
             ]
         )
 
@@ -73,9 +78,19 @@ class Section21Rule9(RuleDefinitionListIndexedBase):
             fluid_loop_b = context.baseline
             pump_power_per_flow_rate = fluid_loop_b["pump_power_per_flow_rate"]
             return {
-                "pump_power_per_flow_rate": pump_power_per_flow_rate,
+                "pump_power_per_flow_rate": CalcQ(
+                    "power_per_flow_rate", pump_power_per_flow_rate
+                ),
+                "required_pump_power_per_flow_rate": CalcQ(
+                    "power_per_flow_rate", REQUIRED_PUMP_POWER_PER_FLOW_RATE
+                ),
             }
 
         def rule_check(self, context, calc_vals=None, data=None):
             pump_power_per_flow_rate = calc_vals["pump_power_per_flow_rate"]
-            return pump_power_per_flow_rate == REQUIRED_PUMP_POWER_PER_FLOW_RATE
+            required_pump_power_per_flow_rate = calc_vals[
+                "required_pump_power_per_flow_rate"
+            ]
+            return std_equal(
+                required_pump_power_per_flow_rate, pump_power_per_flow_rate
+            )

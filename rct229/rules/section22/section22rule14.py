@@ -1,24 +1,25 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
+from rct229.ruleset_functions.baseline_systems.baseline_system_util import HVAC_SYS
+from rct229.ruleset_functions.get_baseline_system_types import get_baseline_system_types
 from rct229.schema.config import ureg
 from rct229.utils.pint_utils import CalcQ
 from rct229.utils.std_comparisons import std_equal
 
 APPLICABLE_SYS_TYPES = [
-    "SYS-7",
-    "SYS-8",
-    "SYS-11.1",
-    "SYS-11.2",
-    "SYS-12",
-    "SYS-13",
-    "SYS-7B",
-    "SYS-8B",
-    "SYS-11B",
-    "SYS-12B",
-    "SYS-13B",
+    HVAC_SYS.SYS_7,
+    HVAC_SYS.SYS_8,
+    HVAC_SYS.SYS_11_1,
+    HVAC_SYS.SYS_11_2,
+    HVAC_SYS.SYS_12,
+    HVAC_SYS.SYS_13,
+    HVAC_SYS.SYS_7B,
+    HVAC_SYS.SYS_8B,
+    HVAC_SYS.SYS_11_1B,
+    HVAC_SYS.SYS_12B,
 ]
-REQUIRED_TEMP_RANGE = ureg("10 degF")
+REQUIRED_TEMP_RANGE = 10 * ureg("degR")
 
 
 class Section22Rule14(RuleDefinitionListIndexedBase):
@@ -31,21 +32,27 @@ class Section22Rule14(RuleDefinitionListIndexedBase):
             index_rmr="baseline",
             id="22-14",
             description="The baseline heat-rejection device shall have a design temperature rise of 10°F.",
+            ruleset_section_title="HVAC - Chiller",
+            standard_section="Section G3.1.3.11 Heat Rejection (System 7, 8, 11, 12 and 13)",
+            is_primary_rule=True,
             rmr_context="ruleset_model_instances/0",
             list_path="heat_rejections[*]",
         )
 
     def is_applicable(self, context, data=None):
         rmi_b = context.baseline
-        # FIXME: replace with baseline_system_types = get_baseline_system_types(rmi_b) when get_baseline_system_types
-        #  is ready.
-        baseline_system_types = {
-            "SYS-7": ["hvac_sys_7"],
-            "SYS-11B": ["hvac_sys_11_b"],
-        }
-        # if any system type found in the APPLICABLE_SYS_TYPES then return applicable.
+        baseline_system_types_dict = get_baseline_system_types(rmi_b)
+        # create a list containing all HVAC systems that are modeled in the rmi_b
+        available_type_list = [
+            hvac_type
+            for hvac_type in baseline_system_types_dict.keys()
+            if len(baseline_system_types_dict[hvac_type]) > 0
+        ]
         return any(
-            [key in APPLICABLE_SYS_TYPES for key in baseline_system_types.keys()]
+            [
+                available_type in APPLICABLE_SYS_TYPES
+                for available_type in available_type_list
+            ]
         )
 
     class HeatRejectionRule(RuleDefinitionBase):
@@ -60,11 +67,17 @@ class Section22Rule14(RuleDefinitionListIndexedBase):
         def get_calc_vals(self, context, data=None):
             heat_rejection_b = context.baseline
             heat_rejection_range = heat_rejection_b["range"]
-            return {"heat_rejection_range": CalcQ("temperature", heat_rejection_range)}
+            return {
+                "heat_rejection_range": CalcQ("temperature", heat_rejection_range),
+                "required_heat_rejection_range": CalcQ(
+                    "temperature", REQUIRED_TEMP_RANGE
+                ),
+            }
 
         def rule_check(self, context, calc_vals=None, data=None):
             heat_rejection_range = calc_vals["heat_rejection_range"]
+            required_heat_rejection_range = calc_vals["required_heat_rejection_range"]
             return std_equal(
                 heat_rejection_range.to(ureg.kelvin),
-                REQUIRED_TEMP_RANGE.to(ureg.kelvin),
+                required_heat_rejection_range.to(ureg.kelvin),
             )

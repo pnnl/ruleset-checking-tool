@@ -7,9 +7,16 @@ from rct229.ruleset_functions.baseline_systems.baseline_system_util import HVAC_
 from rct229.ruleset_functions.baseline_systems.is_baseline_system_7 import (
     is_baseline_system_7,
 )
+from rct229.ruleset_functions.baseline_systems.is_baseline_system_11_1 import (
+    is_baseline_system_11_1,
+)
+from rct229.ruleset_functions.baseline_systems.is_baseline_system_11_2 import (
+    is_baseline_system_11_2,
+)
 from rct229.ruleset_functions.get_dict_of_zones_and_terminal_units_served_by_hvac_sys import (
     get_dict_of_zones_and_terminal_units_served_by_hvac_sys,
 )
+from rct229.utils.assertions import RCTFailureException
 from rct229.utils.jsonpath_utils import find_all
 
 
@@ -44,7 +51,7 @@ def get_baseline_system_types(rmi_b):
     )
     dict_with_terminal_units_and_zones = get_dict_with_terminal_units_and_zones(rmi_b)
 
-    for hvac_b in find_all("$..heating_ventilation_air_conditioning_systems[*]", rmi_b):
+    for hvac_b in find_all("$..heating_ventilating_air_conditioning_systems[*]", rmi_b):
         hvac_b_id = hvac_b["id"]
         terminal_unit_id_list = dict_of_zones_and_terminal_units_served_by_hvac_sys[
             hvac_b_id
@@ -64,5 +71,38 @@ def get_baseline_system_types(rmi_b):
                 baseline_hvac_system_dict[hvac_sys].append(hvac_b_id)
                 # added to the dictionary, move to next iteration
                 continue
+
+            # HVAC system type 11.1
+            hvac_sys = is_baseline_system_11_1(
+                rmi_b, hvac_b_id, terminal_unit_id_list, zone_id_list
+            )
+            if hvac_sys != HVAC_SYS.UNMATCHED:
+                baseline_hvac_system_dict[hvac_sys].append(hvac_b_id)
+                continue
+
+            # HVAC system type 11.2
+            hvac_sys = is_baseline_system_11_2(
+                rmi_b, hvac_b_id, terminal_unit_id_list, zone_id_list
+            )
+            if hvac_sys != HVAC_SYS.UNMATCHED:
+                baseline_hvac_system_dict[hvac_sys].append(hvac_b_id)
+                continue
+
+            # Add error handling
+            hvac_sys_count = len(
+                [
+                    hvac_b_id
+                    for hvac_sys_key in baseline_hvac_system_dict.keys()
+                    if hvac_b_id in baseline_hvac_system_dict[hvac_sys_key]
+                ]
+            )
+            if hvac_sys_count == 0:
+                raise RCTFailureException(
+                    f"Error: HVAC {hvac_b_id} does not match any baseline system type."
+                )
+            elif hvac_sys_count > 1:
+                raise RCTFailureException(
+                    f"Error: HVAC {hvac_b_id} matches to multiple baseline system types - check your RMD models"
+                )
 
     return baseline_hvac_system_dict
