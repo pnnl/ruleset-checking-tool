@@ -44,6 +44,9 @@ class Section21Rule5(RuleDefinitionListIndexedBase):
             index_rmr="baseline",
             id="21-5",
             description="The baseline building design boiler plant shall be modeled as having a single boiler if the baseline building design plant serves a conditioned floor area of 15,000sq.ft. or less, and as having two equally sized boilers for plants serving more than 15,000sq.ft.",
+            ruleset_section_title="HVAC - Water Side",
+            standard_section="Section G3.1.3.2 Building System-Specific Modeling Requirements for the Baseline model",
+            is_primary_rule=True,
             list_path="ruleset_model_instances[0]",
             data_items={"climate_zone": ("baseline", "weather/climate_zone")},
         )
@@ -134,7 +137,7 @@ class Section21Rule5(RuleDefinitionListIndexedBase):
             num_boilers = len(find_all(".boilers[*]", rmi_b))
             boiler_capacity_list = [
                 CalcQ("capacity", getattr_(boiler, "boiler", "rated_capacity"))
-                for boiler in find_all(".boilers[*]", rmi_b)
+                for boiler in find_all("$.boilers[*]", rmi_b)
             ]
 
             return {
@@ -149,15 +152,12 @@ class Section21Rule5(RuleDefinitionListIndexedBase):
             ]
             num_boilers = calc_vals["num_boilers"]
             boiler_capacity_list = calc_vals["boiler_capacity_list"]
-            return {
-                (
-                    heating_loop_conditioned_zone_area
-                    <= HEATING_LOOP_CONDITIONED_AREA_THRESHOLD
-                    and num_boilers == 1
-                )
-                or (
-                    num_boilers == 2
-                    and len(boiler_capacity_list) == 2
-                    and boiler_capacity_list[0] == boiler_capacity_list[1]
-                )
-            }
+            return (
+                heating_loop_conditioned_zone_area
+                <= HEATING_LOOP_CONDITIONED_AREA_THRESHOLD
+                and num_boilers == 1
+            ) or (
+                num_boilers == 2
+                and len(boiler_capacity_list) == 2
+                and boiler_capacity_list[0] == boiler_capacity_list[1]
+            )

@@ -21,6 +21,9 @@ class Section5Rule31(RuleDefinitionListIndexedBase):
             index_rmr="baseline",
             id="5-31",
             description="Manual fenestration shading devices, such as blinds or shades, shall be modeled or not modeled the same as in the baseline building design.",
+            ruleset_section_title="Envelope",
+            standard_section="Section G3.1-5(a)(4) Building Modeling Requirements for the Proposed design and G3.1-5(d) Building Modeling Requirements for Baseline building",
+            is_primary_rule=True,
             list_path="ruleset_model_instances[0].buildings[*]",
         )
 

@@ -36,6 +36,9 @@ class Section5Rule21(RuleDefinitionListIndexedBase):
             index_rmr="baseline",
             id="5-21",
             description="The vertical fenestration shall be distributed on each face of the building in the same proportion as in the proposed design.",
+            ruleset_section_title="Envelope",
+            standard_section="Section G3.1-5(c) Building Envelope Modeling Requirements for the Baseline building",
+            is_primary_rule=True,
             list_path="ruleset_model_instances[0].buildings[*]",
             data_items={"climate_zone": ("baseline", "weather/climate_zone")},
         )

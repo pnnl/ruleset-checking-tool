@@ -48,7 +48,7 @@ def check_purchased_chw_hhw_status_dict(rmi_b):
             ]
 
             for hvac_sys in find_all(
-                "$..heating_ventilation_air_conditioning_systems[*]", rmi_b
+                "$..heating_ventilating_air_conditioning_systems[*]", rmi_b
             ):
                 if (
                     find_one("$.cooling_system.chilled_water_loop", hvac_sys)
@@ -72,7 +72,7 @@ def check_purchased_chw_hhw_status_dict(rmi_b):
             ]
 
             for hvac_sys in find_all(
-                "$..heating_ventilation_air_conditioning_systems[*]", rmi_b
+                "$..heating_ventilating_air_conditioning_systems[*]", rmi_b
             ):
                 if (
                     find_one("$.heating_system.hot_water_loop", hvac_sys)

@@ -45,9 +45,9 @@ def get_hw_loop_zone_list_w_area(rmi_b):
                 # If a terminal heating source is hot water, then it must have a heating_from_loop
                 # Otherwise, raise exception
                 hhw_loop_id = getattr_(terminal, "terminal", "heating_from_loop")
-            elif terminal.get("served_by_heating_ventilation_air_conditioning_system"):
+            elif terminal.get("served_by_heating_ventilating_air_conditioning_system"):
                 hvac_id = terminal[
-                    "served_by_heating_ventilation_air_conditioning_system"
+                    "served_by_heating_ventilating_air_conditioning_system"
                 ]
                 if is_hvac_sys_preheating_type_fluid_loop(rmi_b, hvac_id):
                     # check the case the terminal is connected with an HVAC, whose preheating system is supplied

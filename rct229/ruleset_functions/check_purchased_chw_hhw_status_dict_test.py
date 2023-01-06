@@ -3,7 +3,7 @@ from rct229.ruleset_functions.check_purchased_chw_hhw_status_dict import (
 )
 from rct229.schema.validate import schema_validate_rmr
 
-TEST_RMD = {
+TEST_BUILDING = {
     "id": "RMD 1",
     "buildings": [
         {
@@ -22,12 +22,12 @@ TEST_RMD = {
                                     "id": "CAV Air Terminal 1",
                                     "is_supply_ducted": True,
                                     "type": "CONSTANT_AIR_VOLUME",
-                                    "served_by_heating_ventilation_air_conditioning_system": "System 12",
+                                    "served_by_heating_ventilating_air_conditioning_system": "System 12",
                                 }
                             ],
                         }
                     ],
-                    "heating_ventilation_air_conditioning_systems": [
+                    "heating_ventilating_air_conditioning_systems": [
                         {
                             "id": "System 12",
                             "cooling_system": {
@@ -97,9 +97,18 @@ TEST_RMD = {
     ],
 }
 
+TEST_RMD = {"id": "ASHRAE229", "ruleset_model_instances": [TEST_BUILDING]}
+
+
+def test__TEST_RMD__is_valid():
+    schema_validation_result = schema_validate_rmr(TEST_RMD)
+    assert schema_validation_result[
+        "passed"
+    ], f"Schema error: {schema_validation_result['error']}"
+
 
 def test_check_purchased_chw_hhw():
-    assert check_purchased_chw_hhw_status_dict(TEST_RMD) == {
+    assert check_purchased_chw_hhw_status_dict(TEST_BUILDING) == {
         "purchased_cooling": True,
         "purchased_heating": True,
     }

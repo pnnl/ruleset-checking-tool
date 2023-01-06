@@ -20,12 +20,12 @@
                                             "id": "PTAC Terminal 1",
                                             "is_supply_ducted": false,
                                             "type": "CONSTANT_AIR_VOLUME",
-                                            "served_by_heating_ventilation_air_conditioning_system": "PTAC 1"
+                                            "served_by_heating_ventilating_air_conditioning_system": "PTAC 1"
                                         }
                                     ]
                                 }
                             ],
-                            "heating_ventilation_air_conditioning_systems": [
+                            "heating_ventilating_air_conditioning_systems": [
                                 {
                                     "id": "PTAC 1",
                                     "cooling_system": {
@@ -50,6 +50,12 @@
                             ]
                         }
                     ]
+                }
+            ],
+            "fluid_loops": [
+                {
+                    "id": "Purchased HW Loop 1",
+                    "type": "HEATING"
                 }
             ],
             "external_fluid_source": [

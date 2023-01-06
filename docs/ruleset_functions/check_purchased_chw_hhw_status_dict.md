@@ -28,7 +28,7 @@ Logic:
 
     - For each building segment in RMI (logic loop #1): `for building_segment in RMI...building_segments:`
 
-      - For each HVAC system in building segment: `for hvac_sys in building_segment.heating_ventilation_air_conditioning_systems:`
+      - For each HVAC system in building segment: `for hvac_sys in building_segment.heating_ventilating_air_conditioning_systems:`
 
           - Check if cooling system is connected to any loop in purchased cooling loop array: `if cooling_system.chilled_water_loop.chilled_water_loop in purchased_chw_loop_array`
 
@@ -42,7 +42,7 @@ Logic:
 
     - For each building segment in RMI (logic loop #2): `for building_segment in RMI...building_segments:`
 
-      - For each HVAC system in building segment: `for hvac_sys in building_segment.heating_ventilation_air_conditioning_systems:`
+      - For each HVAC system in building segment: `for hvac_sys in building_segment.heating_ventilating_air_conditioning_systems:`
 
           - Check if heating system is connected to any loop in purchased heating loop array: `if hvac_sys.heating_system.hot_water_loop in purchased_hhw_loop_array`
 

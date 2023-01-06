@@ -15,7 +15,7 @@
 ## Logic:   
 - Create RMR object from RMR function input (RMR = function input): `X_RMR = RMR`
 - Get dictionary list of zones and the total floor area served by each HVAC system: `hvac_zone_list_w_area_dict_x = get_hvac_zone_list_w_area (X_RMR)`
-- For each hvac_x in the X_RMR: `for hvac_x in X_RMR...HeatingVentilationAirConditioningSystem:`
+- For each hvac_x in the X_RMR: `for hvac_x in X_RMR...HeatingVentilatingAirConditioningSystem:`
     - Get the total floor area served by the hvac system: `hvac_sys_total_floor_area_x = hvac_zone_list_w_area_dict_x[hvac_x.id]["TOTAL_AREA"]`
     - Reset hvac system includes computer room boolean variable: `hvac_system_serves_computer_room_space = FALSE` 
     - Reset hvac_sys_computer_room_floor_area variable: `hvac_sys_computer_room_floor_area = 0`

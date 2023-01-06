@@ -44,6 +44,9 @@ class Section22Rule40(RuleDefinitionBase):
             "uses purchased chilled water, all baseline systems with chilled water "
             "coils shall use purchased chilled water. On-site chillers and direct "
             "expansion equipment shall not be modeled in the baseline building design.",
+            ruleset_section_title="HVAC - Chiller",
+            standard_section="Section G3.1.1.1 & G3.1.1.3.1 Building System-Specific Modeling Requirements for the Baseline model",
+            is_primary_rule=True,
             rmr_context="ruleset_model_instances/0",
         )
 
@@ -55,14 +58,21 @@ class Section22Rule40(RuleDefinitionBase):
 
     def get_calc_vals(self, context, data=None):
         rmi_b = context.baseline
-        baseline_hvac_system_types = get_baseline_system_types(rmi_b).keys()
+        baseline_system_types_dict = get_baseline_system_types(rmi_b)
 
-        return {"baseline_hvac_system_types": baseline_hvac_system_types}
+        return {"baseline_system_types_dict": baseline_system_types_dict}
 
     def rule_check(self, context, calc_vals=None, data=None):
-        baseline_hvac_system_types = calc_vals["baseline_hvac_system_types"]
-
+        baseline_system_types_dict = calc_vals["baseline_system_types_dict"]
+        available_type_list = [
+            hvac_type
+            for hvac_type in baseline_system_types_dict.keys()
+            if len(baseline_system_types_dict[hvac_type]) > 0
+        ]
         return not any(
-            sys_type in baseline_hvac_system_types
-            for sys_type in AIR_SIDE_SYSTEMS_USING_COOLING_SOURCE_OTHER_THAN_PURCHASED_CHILLED_WATER
+            [
+                available_type
+                in AIR_SIDE_SYSTEMS_USING_COOLING_SOURCE_OTHER_THAN_PURCHASED_CHILLED_WATER
+                for available_type in available_type_list
+            ]
         )
