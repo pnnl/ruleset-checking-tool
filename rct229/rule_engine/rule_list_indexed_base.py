@@ -58,6 +58,9 @@ class RuleDefinitionListIndexedBase(RuleDefinitionListBase):
         index_rmr,
         id=None,
         description=None,
+        ruleset_section_title=None,
+        standard_section=None,
+        is_primary_rule=False,
         rmr_context="",
         list_path="$[*]",
         match_by="id",
@@ -79,6 +82,9 @@ class RuleDefinitionListIndexedBase(RuleDefinitionListBase):
             manual_check_required_msg=manual_check_required_msg,
             not_applicable_msg=not_applicable_msg,
             data_items=data_items,
+            ruleset_section_title=ruleset_section_title,
+            standard_section=standard_section,
+            is_primary_rule=is_primary_rule,
         )
 
     def create_context_list(self, context, data):
