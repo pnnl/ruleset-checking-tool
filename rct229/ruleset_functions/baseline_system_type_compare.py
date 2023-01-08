@@ -1,4 +1,7 @@
+import inspect
+
 from rct229.ruleset_functions.baseline_systems.baseline_system_util import HVAC_SYS
+from rct229.utils.assertions import RCTException
 
 
 def baseline_system_type_compare(system_type, target_system_type, exact_match=True):
@@ -14,6 +17,21 @@ def baseline_system_type_compare(system_type, target_system_type, exact_match=Tr
     -------
     True or False, indicating whether the hvac system type matches the hvac_system_type.
     """
+
+    # A list of the attribute values from the HVAC_SYS class
+    hvac_sys_list = [
+        i[1]
+        for i in inspect.getmembers(HVAC_SYS)
+        if type(i[0]) is str and i[0].startswith("SYS")
+    ]
+    if system_type not in hvac_sys_list:
+        raise RCTException(
+            f"{system_type} does not match to any baseline HVAC " f"system type"
+        )
+    if target_system_type not in hvac_sys_list:
+        raise RCTException(
+            f"{target_system_type} does not match to any " f"baseline HVAC system type"
+        )
 
     return (
         system_type == target_system_type
