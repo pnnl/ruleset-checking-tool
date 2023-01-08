@@ -14,6 +14,9 @@ class Section6Rule6(RuleDefinitionListIndexedBase):
             index_rmr="baseline",
             id="6-11",
             description="Baseline building is not modeled with daylighting control",
+            ruleset_section_title="Lighting",
+            standard_section="Section G3.1-6 Modeling Requirements for the baseline building",
+            is_primary_rule=True,
             rmr_context="ruleset_model_instances/0/buildings",
         )
 
@@ -34,7 +37,7 @@ class Section6Rule6(RuleDefinitionListIndexedBase):
 
         def get_calc_vals(self, context, data=None):
             interior_lighting_instances_with_daylighting_control = find_all(
-                "$..spaces[*].interior_lighting[?daylighting_control_type!='NONE']",
+                '$..spaces[*].interior_lighting[*][?(@.daylighting_control_type!="NONE")]',
                 context.baseline,
             )
             ids_for_interior_lighting_instances_with_daylighting_control = [

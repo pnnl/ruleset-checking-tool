@@ -23,6 +23,9 @@ class Section6Rule7(RuleDefinitionListIndexedBase):
             index_rmr="proposed",
             id="6-7",
             description="Proposed building is modeled with daylighting controls directly or through schedule adjustments.",
+            ruleset_section_title="Lighting",
+            standard_section="Section G3.1-6(h) Lighting: Modeling Requirements for the Proposed design",
+            is_primary_rule=True,
             list_path="ruleset_model_instances[0].buildings[*].building_segments[*].zones[*]",
         )
 
