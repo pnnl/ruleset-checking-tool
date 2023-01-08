@@ -29,7 +29,7 @@
 - Set is_baseline_system_9 = Not_Sys_9: `is_baseline_system_9 = "Not_Sys_9"`    
 - Check if the system is system 9b, else carry on with logic: `if is_baseline_system_9b(B_RMI, hvac_b.id,terminal_unit_id_list,zone_id_list) == TRUE: is_baseline_system_9 = "SYS-9b"`
 - Else: `Else:`    
-    - Check that there is no preheat system, if there is none then carry on: `if hvac_b.preheat_system == "NONE" or hvac_b.preheat_system.heating_system_type = "NONE" :`     
+    - Check that there is no preheat system, if there is none then carry on: `if(hvac_b.preheat_system) == Null or hvac_b.preheat_system.heating_system_type = "NONE" :`     
         - Check if fansystem is constant volume, if yes then carry on: `if is_hvac_sys_fan_sys_CV(B_RMI, hvac_b.id) == TRUE:`  
             - Check if the hvac system serves a single zone and that the zone only has one terminal unit: `if does_hvac_system_serve_single_zone(B_RMI, zone_id_list) == TRUE AND does_each_zone_have_only_one_terminal(B_RMI, zone_id_list) == TRUE:`     
                 - Check that the data elements associated with the terminal unit align with system 9: `if are_all_terminal_heat_sources_none_or_null(B_RMI, terminal_unit_id_list) == TRUE AND are_all_terminal_cool_sources_none_or_null(B_RMI, terminal_unit_id_list) == TRUE And are_all_terminal_fans_null(B_RMI, terminal_unit_id_list) == TRUE AND are_all_terminal_types_CAV(B_RMI, terminal_unit_id_list) == TRUE:`        
