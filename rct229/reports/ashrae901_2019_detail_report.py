@@ -30,9 +30,9 @@ class ASHRAE9012019DetailReport(RCTReport):
         rule_report = dict()
         rule_report["rule_id"] = rule_id
         rule_report["description"] = rule_outcome["description"]
-        rule_report["ruleset_section_title"] = "Temp section"
-        rule_report["primary_rule"] = "Y"
-        rule_report["standard_section"] = "G12345"
+        rule_report["ruleset_section_title"] = rule_outcome["ruleset_section_title"]
+        rule_report["primary_rule"] = "Yes" if rule_outcome["primary_rule"] else "No"
+        rule_report["standard_section"] = rule_outcome["standard_section"]
         rule_report_list = []
         self._rule_outcome_helper(rule_outcome, rule_report_list, outcome_dict)
         rule_report["evaluations"] = rule_report_list
