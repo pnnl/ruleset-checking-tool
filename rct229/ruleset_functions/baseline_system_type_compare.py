@@ -26,11 +26,11 @@ def baseline_system_type_compare(system_type, target_system_type, exact_match=Tr
     ]
     if system_type not in hvac_sys_list:
         raise RCTException(
-            f"{system_type} does not match to any baseline HVAC " f"system type"
+            f"{system_type} does not match to any baseline HVAC system type"
         )
     if target_system_type not in hvac_sys_list:
         raise RCTException(
-            f"{target_system_type} does not match to any " f"baseline HVAC system type"
+            f"{target_system_type} does not match to any baseline HVAC system type"
         )
 
     return (
