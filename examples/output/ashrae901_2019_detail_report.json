@@ -2,15 +2,204 @@
     "title": "ASHRAE STD 229P RULESET CHECKING TOOL",
     "purpose": "Project Testing Report",
     "ruleset": "ASHRAE 90.1-2019 Performance Rating Method (Appendix G)",
-    "date_run": "2022-12-27 23:02:01.357209",
+    "date_run": "2023-01-06 06:34:45.606964",
     "schema_version": "0.0.18",
     "rules": {
+        "12-1": {
+            "rule_id": "12-1",
+            "description": "Number of spaces modeled in User RMR and Baseline RMR are the same",
+            "ruleset_section_title": "Receptacle",
+            "primary_rule": "Yes",
+            "standard_section": "Section Table G3.1-12 Modeling Requirements for the Proposed design",
+            "evaluations": [
+                {
+                    "id": "-SmallOffice-ASHRAE 169-2013-5B created: 2022-10-17 12:32:02 -0700",
+                    "outcome": "UNDETERMINED",
+                    "messages": "MISSING_BASELINE",
+                    "calculated_values": ""
+                }
+            ],
+            "rule_evaluation_outcome": "UNDETERMINED"
+        },
+        "12-2": {
+            "rule_id": "12-2",
+            "description": "Number of spaces modeled in User RMR and Proposed RMR are the same",
+            "ruleset_section_title": "Receptacle",
+            "primary_rule": "Yes",
+            "standard_section": "Section Table G3.1-12 Modeling Requirements for the Proposed design",
+            "evaluations": [
+                {
+                    "id": "-SmallOffice-ASHRAE 169-2013-5B created: 2022-10-17 12:32:02 -0700",
+                    "outcome": "PASS",
+                    "messages": "",
+                    "calculated_values": {
+                        "num_user_spaces": "6",
+                        "num_proposed_spaces": "6"
+                    }
+                }
+            ],
+            "rule_evaluation_outcome": "PASS"
+        },
+        "12-3": {
+            "rule_id": "12-3",
+            "description": "User RMR Space ID in Proposed RMR",
+            "ruleset_section_title": "Receptacle",
+            "primary_rule": "Yes",
+            "standard_section": "Section Table G3.1-12 Receptacles: Modeling Requirements for the Proposed design",
+            "evaluations": [
+                {
+                    "id": "ATTIC_SPACE",
+                    "outcome": "PASS",
+                    "messages": "",
+                    "calculated_values": {
+                        "user_space_id": "ATTIC_SPACE"
+                    }
+                },
+                {
+                    "id": "CORE_SPACE",
+                    "outcome": "PASS",
+                    "messages": "",
+                    "calculated_values": {
+                        "user_space_id": "CORE_SPACE"
+                    }
+                },
+                {
+                    "id": "PERIMETER-1_SPACE",
+                    "outcome": "PASS",
+                    "messages": "",
+                    "calculated_values": {
+                        "user_space_id": "PERIMETER-1_SPACE"
+                    }
+                },
+                {
+                    "id": "PERIMETER-2_SPACE",
+                    "outcome": "PASS",
+                    "messages": "",
+                    "calculated_values": {
+                        "user_space_id": "PERIMETER-2_SPACE"
+                    }
+                },
+                {
+                    "id": "PERIMETER-3_SPACE",
+                    "outcome": "PASS",
+                    "messages": "",
+                    "calculated_values": {
+                        "user_space_id": "PERIMETER-3_SPACE"
+                    }
+                },
+                {
+                    "id": "PERIMETER-4_SPACE",
+                    "outcome": "PASS",
+                    "messages": "",
+                    "calculated_values": {
+                        "user_space_id": "PERIMETER-4_SPACE"
+                    }
+                }
+            ],
+            "rule_evaluation_outcome": "PASS"
+        },
+        "15-1": {
+            "rule_id": "15-1",
+            "description": "Number of transformers modeled in User RMR and Baseline RMR are the same",
+            "ruleset_section_title": "Transformer",
+            "primary_rule": "No",
+            "standard_section": "Transformers",
+            "evaluations": [
+                {
+                    "id": "15-1",
+                    "outcome": "UNDETERMINED",
+                    "messages": "MISSING_USER_BASELINE",
+                    "calculated_values": ""
+                }
+            ],
+            "rule_evaluation_outcome": "UNDETERMINED"
+        },
+        "15-2": {
+            "rule_id": "15-2",
+            "description": "Number of transformers modeled in User RMR and Proposed RMR are the same",
+            "ruleset_section_title": "Transformer",
+            "primary_rule": "No",
+            "standard_section": "Transformers",
+            "evaluations": [
+                {
+                    "id": "15-2",
+                    "outcome": "UNDETERMINED",
+                    "messages": "MISSING_USER_PROPOSED",
+                    "calculated_values": ""
+                }
+            ],
+            "rule_evaluation_outcome": "UNDETERMINED"
+        },
+        "15-3": {
+            "rule_id": "15-3",
+            "description": "User RMR transformer id in Proposed RMR",
+            "ruleset_section_title": "Transformer",
+            "primary_rule": "No",
+            "standard_section": "Transformers",
+            "evaluations": [
+                {
+                    "id": "15-3",
+                    "outcome": "UNDETERMINED",
+                    "messages": "MISSING_USER_PROPOSED",
+                    "calculated_values": ""
+                }
+            ],
+            "rule_evaluation_outcome": "UNDETERMINED"
+        },
+        "15-4": {
+            "rule_id": "15-4",
+            "description": "User RMR transformer id in Baseline RMR",
+            "ruleset_section_title": "Transformer",
+            "primary_rule": "No",
+            "standard_section": "Transformers",
+            "evaluations": [
+                {
+                    "id": "15-4",
+                    "outcome": "UNDETERMINED",
+                    "messages": "MISSING_USER_BASELINE",
+                    "calculated_values": ""
+                }
+            ],
+            "rule_evaluation_outcome": "UNDETERMINED"
+        },
+        "15-5": {
+            "rule_id": "15-5",
+            "description": "Transformer efficiency reported in Baseline RMR equals Table 8.4.4",
+            "ruleset_section_title": "Transformer",
+            "primary_rule": "No",
+            "standard_section": "Transformers",
+            "evaluations": [
+                {
+                    "id": "15-5",
+                    "outcome": "UNDETERMINED",
+                    "messages": "MISSING_USER_BASELINE",
+                    "calculated_values": ""
+                }
+            ],
+            "rule_evaluation_outcome": "UNDETERMINED"
+        },
+        "15-6": {
+            "rule_id": "15-6",
+            "description": "Transformer efficiency reported in User RMR equals Table 8.4.4",
+            "ruleset_section_title": "Transformer",
+            "primary_rule": "No",
+            "standard_section": "Transformers",
+            "evaluations": [
+                {
+                    "id": "15-6",
+                    "outcome": "UNDETERMINED",
+                    "messages": "MISSING_USER",
+                    "calculated_values": ""
+                }
+            ],
+            "rule_evaluation_outcome": "UNDETERMINED"
+        },
         "5-11": {
             "rule_id": "5-11",
             "description": "Baseline above-grade wall assemblies must match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8.",
-            "ruleset_section_title": "Temp section",
-            "primary_rule": "Y",
-            "standard_section": "G12345",
+            "ruleset_section_title": "Envelope",
+            "primary_rule": "Yes",
+            "standard_section": "Section G3.1-5(b) Building Envelope Modeling Requirements for the Baseline building",
             "evaluations": [
                 {
                     "id": "PERIMETER_ZN_1_WALL_SOUTH",
@@ -62,9 +251,9 @@
         "5-13": {
             "rule_id": "5-13",
             "description": "Baseline floor assemblies must match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-9.",
-            "ruleset_section_title": "Temp section",
-            "primary_rule": "Y",
-            "standard_section": "G12345",
+            "ruleset_section_title": "Envelope",
+            "primary_rule": "Yes",
+            "standard_section": "Section G3.1-5(b) Building Envelope Modeling Requirements for the Baseline building",
             "evaluations": [
                 {
                     "id": "ATTIC_FLOOR_CORE",
@@ -182,18 +371,18 @@
         "5-15": {
             "rule_id": "5-15",
             "description": "Baseline slab-on-grade floor assemblies must match the appropriate assembly maximum F-factors in Tables G3.4-1 through G3.4-9.",
-            "ruleset_section_title": "Temp section",
-            "primary_rule": "Y",
-            "standard_section": "G12345",
+            "ruleset_section_title": "Envelope",
+            "primary_rule": "Yes",
+            "standard_section": "Section G3.1-5(b) Building Envelope Modeling Requirements for the Baseline building",
             "evaluations": [],
             "rule_evaluation_outcome": "NOT_APPLICABLE"
         },
         "5-17": {
             "rule_id": "5-17",
             "description": "Opaque surfaces that are not regulated (not part of opaque building envelope) must be modeled the same in the baseline as in the proposed design. ",
-            "ruleset_section_title": "Temp section",
-            "primary_rule": "Y",
-            "standard_section": "G12345",
+            "ruleset_section_title": "Envelope",
+            "primary_rule": "Yes",
+            "standard_section": "Section G3.1-5 Building Envelope Modeling Requirements for the Baseline building",
             "evaluations": [
                 {
                     "id": "90.1-PRM-2019--ASHRAE 169-2013-5B PRM baseline created: 2022-10-17 12:32:14 -0700",
@@ -207,9 +396,9 @@
         "5-18": {
             "rule_id": "5-18",
             "description": "For building area types included in Table G3.1.1-1, vertical fenestration areas for new buildings and additions shall equal that in Table G3.1.1-1 based on the area of gross above-grade walls that separate conditioned spaces and semi-heated spaces from the exterior.",
-            "ruleset_section_title": "Temp section",
-            "primary_rule": "Y",
-            "standard_section": "G12345",
+            "ruleset_section_title": "Envelope",
+            "primary_rule": "Yes",
+            "standard_section": "Section G3.1-5(c) Building Envelope Modeling Requirements for the Baseline building",
             "evaluations": [
                 {
                     "id": "90.1-PRM-2019--ASHRAE 169-2013-5B PRM baseline created: 2022-10-17 12:32:14 -0700",
@@ -225,9 +414,9 @@
         "5-19": {
             "rule_id": "5-19",
             "description": "For building areas not shown in Table G3.1.1-1, vertical fenestration areas for new buildings and additions shall equal that in the proposed design or 40% of gross above-grade wall area, whichever is smaller.",
-            "ruleset_section_title": "Temp section",
-            "primary_rule": "Y",
-            "standard_section": "G12345",
+            "ruleset_section_title": "Envelope",
+            "primary_rule": "Yes",
+            "standard_section": "Section G3.1-5(c) Building Envelope Modeling Requirements for the Baseline building",
             "evaluations": [
                 {
                     "id": "90.1-PRM-2019--ASHRAE 169-2013-5B PRM baseline created: 2022-10-17 12:32:14 -0700",
@@ -241,9 +430,9 @@
         "5-21": {
             "rule_id": "5-21",
             "description": "The vertical fenestration shall be distributed on each face of the building in the same proportion as in the proposed design.",
-            "ruleset_section_title": "Temp section",
-            "primary_rule": "Y",
-            "standard_section": "G12345",
+            "ruleset_section_title": "Envelope",
+            "primary_rule": "Yes",
+            "standard_section": "Section G3.1-5(c) Building Envelope Modeling Requirements for the Baseline building",
             "evaluations": [
                 {
                     "id": "90.1-PRM-2019--ASHRAE 169-2013-5B PRM baseline created: 2022-10-17 12:32:14 -0700",
@@ -257,9 +446,9 @@
         "5-24": {
             "rule_id": "5-24",
             "description": "Vertical fenestration U-factors for residential, non-residential and semi-heated spaces in the baseline model must match the appropriate requirements in Table G3.4-1 through G3.4-8 for the appropriate WWR in the baseline RMD.",
-            "ruleset_section_title": "Temp section",
-            "primary_rule": "Y",
-            "standard_section": "G12345",
+            "ruleset_section_title": "Envelope",
+            "primary_rule": "Yes",
+            "standard_section": "Section G3.1-5(d) Building Envelope Modeling Requirements for the Baseline building",
             "evaluations": [
                 {
                     "id": "SUB SURFACE 1",
@@ -303,9 +492,9 @@
         "5-26": {
             "rule_id": "5-26",
             "description": "Vertical fenestration SHGC shall match the appropriate requirements in Tables G3.4-1 through G3.4-8.",
-            "ruleset_section_title": "Temp section",
-            "primary_rule": "Y",
-            "standard_section": "G12345",
+            "ruleset_section_title": "Envelope",
+            "primary_rule": "Yes",
+            "standard_section": "Section G3.1-5(d) Building Envelope Modeling Requirements for the Baseline building",
             "evaluations": [
                 {
                     "id": "SUB SURFACE 1",
@@ -349,9 +538,9 @@
         "5-28": {
             "rule_id": "5-28",
             "description": "Subsurface that is not regulated (not part of building envelope) must be modeled with the same area, U-factor and SHGC in the baseline as in the proposed design.",
-            "ruleset_section_title": "Temp section",
-            "primary_rule": "Y",
-            "standard_section": "G12345",
+            "ruleset_section_title": "Envelope",
+            "primary_rule": "Yes",
+            "standard_section": "Section G3.1-5(a) Building Envelope Modeling Requirements for the Baseline building",
             "evaluations": [
                 {
                     "id": "90.1-PRM-2019--ASHRAE 169-2013-5B PRM baseline created: 2022-10-17 12:32:14 -0700",
@@ -365,9 +554,9 @@
         "5-3": {
             "rule_id": "5-3",
             "description": "The building shall be modeled so that it does not shade itself",
-            "ruleset_section_title": "Temp section",
-            "primary_rule": "Y",
-            "standard_section": "G12345",
+            "ruleset_section_title": "Envelope",
+            "primary_rule": "No",
+            "standard_section": "Section G3.1-5(b) Building Envelope Modeling Requirements for the Baseline building",
             "evaluations": [
                 {
                     "id": "90.1-PRM-2019--ASHRAE 169-2013-5B PRM baseline created: 2022-10-17 12:32:14 -0700",
@@ -383,9 +572,9 @@
         "5-31": {
             "rule_id": "5-31",
             "description": "Manual fenestration shading devices, such as blinds or shades, shall be modeled or not modeled the same as in the baseline building design.",
-            "ruleset_section_title": "Temp section",
-            "primary_rule": "Y",
-            "standard_section": "G12345",
+            "ruleset_section_title": "Envelope",
+            "primary_rule": "Yes",
+            "standard_section": "Section G3.1-5(a)(4) Building Modeling Requirements for the Proposed design and G3.1-5(d) Building Modeling Requirements for Baseline building",
             "evaluations": [
                 {
                     "id": "90.1-PRM-2019--ASHRAE 169-2013-5B PRM baseline created: 2022-10-17 12:32:14 -0700",
@@ -399,9 +588,9 @@
         "5-34": {
             "rule_id": "5-34",
             "description": "If skylight area in the proposed design is 3% or less of the roof surface, the skylight area in baseline shall be equal to that in the proposed design.",
-            "ruleset_section_title": "Temp section",
-            "primary_rule": "Y",
-            "standard_section": "G12345",
+            "ruleset_section_title": "Envelope",
+            "primary_rule": "Yes",
+            "standard_section": "Section G3.1-5(e) Building Envelope Modeling Requirements for the Baseline building",
             "evaluations": [
                 {
                     "id": "90.1-PRM-2019--ASHRAE 169-2013-5B PRM baseline created: 2022-10-17 12:32:14 -0700",
@@ -415,9 +604,9 @@
         "5-35": {
             "rule_id": "5-35",
             "description": "If the skylight area of the proposed design is greater than 3%, baseline skylight area shall be decreased in all roof components in which skylights are located to reach 3%.",
-            "ruleset_section_title": "Temp section",
-            "primary_rule": "Y",
-            "standard_section": "G12345",
+            "ruleset_section_title": "Envelope",
+            "primary_rule": "Yes",
+            "standard_section": "Section G3.1-5(e) Building Envelope Modeling Requirements for the Baseline building",
             "evaluations": [
                 {
                     "id": "90.1-PRM-2019--ASHRAE 169-2013-5B PRM baseline created: 2022-10-17 12:32:14 -0700",
@@ -431,9 +620,9 @@
         "5-36": {
             "rule_id": "5-36",
             "description": "Skylight area must be allocated to surfaces in the same proportion in the baseline as in the proposed design.",
-            "ruleset_section_title": "Temp section",
-            "primary_rule": "Y",
-            "standard_section": "G12345",
+            "ruleset_section_title": "Envelope",
+            "primary_rule": "Yes",
+            "standard_section": "Section G3.1-5(e) Building Envelope Modeling Requirements for the Baseline building",
             "evaluations": [
                 {
                     "id": "90.1-PRM-2019--ASHRAE 169-2013-5B PRM baseline created: 2022-10-17 12:32:14 -0700",
@@ -447,18 +636,18 @@
         "5-37": {
             "rule_id": "5-37",
             "description": "Skylight U-factors for residential, non-residential and semi-heated spaces in the baseline model must match the appropriate requirements in Table G3.4-1 through G3.4-8.",
-            "ruleset_section_title": "Temp section",
-            "primary_rule": "Y",
-            "standard_section": "G12345",
+            "ruleset_section_title": "Envelope",
+            "primary_rule": "Yes",
+            "standard_section": "Section G3.1-5(e) Building Envelope Modeling Requirements for the Baseline building",
             "evaluations": [],
             "rule_evaluation_outcome": "NOT_APPLICABLE"
         },
         "5-40": {
             "rule_id": "5-40",
             "description": "The baseline roof surfaces shall be modeled using a thermal emittance of 0.9",
-            "ruleset_section_title": "Temp section",
-            "primary_rule": "Y",
-            "standard_section": "G12345",
+            "ruleset_section_title": "Envelope",
+            "primary_rule": "Yes",
+            "standard_section": "Section G3.1-5(f) Building Envelope Modeling Requirements for the Baseline building",
             "evaluations": [
                 {
                     "id": "CORE_ZN_CEILING",
@@ -506,9 +695,9 @@
         "5-42": {
             "rule_id": "5-42",
             "description": " The baseline roof surfaces shall be modeled using a solar reflectance of 0.30",
-            "ruleset_section_title": "Temp section",
-            "primary_rule": "Y",
-            "standard_section": "G12345",
+            "ruleset_section_title": "Envelope",
+            "primary_rule": "Yes",
+            "standard_section": "Section G3.1-5(g) Building Envelope Modeling Requirements for the Baseline building",
             "evaluations": [
                 {
                     "id": "CORE_ZN_CEILING",
@@ -556,9 +745,9 @@
         "5-44": {
             "rule_id": "5-44",
             "description": "The infiltration modeling method in the baseline includes adjustment for weather and building operation.",
-            "ruleset_section_title": "Temp section",
-            "primary_rule": "Y",
-            "standard_section": "G12345",
+            "ruleset_section_title": "Envelope",
+            "primary_rule": "Yes",
+            "standard_section": "Section G3.1-5(b) Building Envelope Modeling Requirements for the Proposed design and Baseline",
             "evaluations": [
                 {
                     "id": "90.1-PRM-2019--ASHRAE 169-2013-5B PRM baseline created: 2022-10-17 12:32:14 -0700",
@@ -574,9 +763,9 @@
         "5-45": {
             "rule_id": "5-45",
             "description": "The infiltration schedules are the same in the proposed RMR as in the baseline RMR.",
-            "ruleset_section_title": "Temp section",
-            "primary_rule": "Y",
-            "standard_section": "G12345",
+            "ruleset_section_title": "Envelope",
+            "primary_rule": "Yes",
+            "standard_section": "Section G3.1-5(b) Building Envelope Modeling Requirements for the Proposed design and Baseline",
             "evaluations": [
                 {
                     "id": "ATTIC ZN",
@@ -640,9 +829,9 @@
         "5-46": {
             "rule_id": "5-46",
             "description": "The infiltration shall be modeled using the same methodology and adjustments for weather and building operation in both the proposed design and the baseline building design.",
-            "ruleset_section_title": "Temp section",
-            "primary_rule": "Y",
-            "standard_section": "G12345",
+            "ruleset_section_title": "Envelope",
+            "primary_rule": "Yes",
+            "standard_section": "Section G3.1-5(b) Building Envelope Modeling Requirements for the Proposed design and Baseline",
             "evaluations": [
                 {
                     "id": "-SmallOffice-ASHRAE 169-2013-5B created: 2022-10-17 12:32:02 -0700",
@@ -656,16 +845,16 @@
         "5-47": {
             "rule_id": "5-47",
             "description": "The baseline air leakage rate of the building envelope (I_75Pa) at a fixed building pressure differential of 0.3 in. of water shall be 1 cfm/ft2. The air leakage rate of the building envelope shall be converted to appropriate units for the simulation program using one of the methods in Section G3.1.1.4.",
-            "ruleset_section_title": "Temp section",
-            "primary_rule": "Y",
-            "standard_section": "G12345",
+            "ruleset_section_title": "Envelope",
+            "primary_rule": "Yes",
+            "standard_section": "Section G3.1-5(h) Building Envelope Modeling Requirements for the Baseline building",
             "evaluations": [
                 {
                     "id": "90.1-PRM-2019--ASHRAE 169-2013-5B PRM baseline created: 2022-10-17 12:32:14 -0700",
                     "outcome": "FAILED",
                     "messages": "",
                     "calculated_values": {
-                        "building_total_air_leakage_rate": "1576.4467224472503 cfm",
+                        "building_total_air_leakage_rate": "1576.446722447251 cfm",
                         "target_air_leakage_rate_75pa_b": "19536.28212811982 cfm"
                     }
                 }
@@ -675,9 +864,9 @@
         "5-48": {
             "rule_id": "5-48",
             "description": "The air leakage rate in unconditioned and unenclosed spaces must be the same the baseline and proposed design.",
-            "ruleset_section_title": "Temp section",
-            "primary_rule": "Y",
-            "standard_section": "G12345",
+            "ruleset_section_title": "Envelope",
+            "primary_rule": "Yes",
+            "standard_section": "Section G3.1-1 Building Envelope Modeling Requirements for the Proposed design and Baseline building",
             "evaluations": [
                 {
                     "id": "90.1-PRM-2019--ASHRAE 169-2013-5B PRM baseline created: 2022-10-17 12:32:14 -0700",
@@ -691,9 +880,9 @@
         "5-5": {
             "rule_id": "5-5",
             "description": "Baseline roof assemblies must match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8.",
-            "ruleset_section_title": "Temp section",
-            "primary_rule": "Y",
-            "standard_section": "G12345",
+            "ruleset_section_title": "Envelope",
+            "primary_rule": "Yes",
+            "standard_section": "Section G3.1-5(b) Building Envelope Modeling Requirements for the Baseline building",
             "evaluations": [
                 {
                     "id": "CORE_ZN_CEILING",
@@ -756,18 +945,18 @@
         "5-8": {
             "rule_id": "5-8",
             "description": "Baseline below-grade walls shall match the appropriate assembly maximum C-factors in Table G3.4-1 through G3.4-8.",
-            "ruleset_section_title": "Temp section",
-            "primary_rule": "Y",
-            "standard_section": "G12345",
+            "ruleset_section_title": "Envelope",
+            "primary_rule": "Yes",
+            "standard_section": "Section G3.1-5(b) Building Envelope Modeling Requirements for the Baseline building",
             "evaluations": [],
             "rule_evaluation_outcome": "NOT_APPLICABLE"
         },
         "6-1": {
             "rule_id": "6-1",
             "description": "The total building interior lighting power shall not exceed the interior lighting power allowance determined using either Table G3.7 or G3.8",
-            "ruleset_section_title": "Temp section",
-            "primary_rule": "Y",
-            "standard_section": "G12345",
+            "ruleset_section_title": "Lighting",
+            "primary_rule": "Yes",
+            "standard_section": "Section G1.2.1(b) Mandatory Provisions related to interior lighting power",
             "evaluations": [
                 {
                     "id": "segment 1",
@@ -787,18 +976,18 @@
         "6-2": {
             "rule_id": "6-2",
             "description": "Spaces in proposed building with hardwired lighting, including Hotel/Motel Guest Rooms, Dormitory Living Quarters, Interior Lighting Power >= Table 9.6.1; For Dwelling Units, Interior Lighting Power >= 0.6W/sq.ft.",
-            "ruleset_section_title": "Temp section",
-            "primary_rule": "Y",
-            "standard_section": "G12345",
+            "ruleset_section_title": "Lighting",
+            "primary_rule": "Yes",
+            "standard_section": "Table G3.1 Part 6 Lighting under Proposed Building Performance paragraph (e)",
             "evaluations": [],
             "rule_evaluation_outcome": "NOT_APPLICABLE"
         },
         "6-3": {
             "rule_id": "6-3",
             "description": "Where a complete lighting system exists, the actual lighting power for each building_segment shall be used in the model. Where a lighting system has been designed and submitted with design documents, lighting power shall be determined in accordance with Sections 9.1.3 and 9.1.4. Where lighting neither exists nor is submitted with design documents, lighting shall comply with but not exceed the requirements of Section 9. Lighting power shall be determined in accordance with the Building Area Method (Section 9.5.1).",
-            "ruleset_section_title": "Temp section",
-            "primary_rule": "Y",
-            "standard_section": "G12345",
+            "ruleset_section_title": "Lighting",
+            "primary_rule": "Yes",
+            "standard_section": "Section G3.1-6(a)(b)(c) Modeling Requirements for the Proposed Design",
             "evaluations": [
                 {
                     "id": "ATTIC_SPACE",
@@ -866,9 +1055,9 @@
         "6-4": {
             "rule_id": "6-4",
             "description": "Where a complete lighting system exists and where a lighting system has been designed and submitted with design documents, the baseline LPD is equal to expected value in Table G3.7. Where lighting neither exists nor is submitted with design documents, baseline LPD shall be determined in accordance with Table G3-7 for \"Office-Open Plan\" space type.",
-            "ruleset_section_title": "Temp section",
-            "primary_rule": "Y",
-            "standard_section": "G12345",
+            "ruleset_section_title": "Lighting",
+            "primary_rule": "Yes",
+            "standard_section": "Section G3.1-6 Modeling Requirements for the Baseline",
             "evaluations": [
                 {
                     "id": "ATTIC_SPACE",
@@ -936,9 +1125,9 @@
         "6-5": {
             "rule_id": "6-5",
             "description": "Baseline building is modeled with automatic shutoff controls in buildings >5000 sq.ft.",
-            "ruleset_section_title": "Temp section",
-            "primary_rule": "Y",
-            "standard_section": "G12345",
+            "ruleset_section_title": "Lighting",
+            "primary_rule": "Yes",
+            "standard_section": "Section G3.1-6 Modeling Requirements for the Baseline building",
             "evaluations": [
                 {
                     "id": "90.1-PRM-2019--ASHRAE 169-2013-5B PRM baseline created: 2022-10-17 12:32:14 -0700",
@@ -952,9 +1141,9 @@
         "6-11": {
             "rule_id": "6-11",
             "description": "Baseline building is not modeled with daylighting control",
-            "ruleset_section_title": "Temp section",
-            "primary_rule": "Y",
-            "standard_section": "G12345",
+            "ruleset_section_title": "Lighting",
+            "primary_rule": "Yes",
+            "standard_section": "Section G3.1-6 Modeling Requirements for the baseline building",
             "evaluations": [
                 {
                     "id": "90.1-PRM-2019--ASHRAE 169-2013-5B PRM baseline created: 2022-10-17 12:32:14 -0700",
@@ -970,9 +1159,9 @@
         "6-7": {
             "rule_id": "6-7",
             "description": "Proposed building is modeled with daylighting controls directly or through schedule adjustments.",
-            "ruleset_section_title": "Temp section",
-            "primary_rule": "Y",
-            "standard_section": "G12345",
+            "ruleset_section_title": "Lighting",
+            "primary_rule": "Yes",
+            "standard_section": "Section G3.1-6(h) Lighting: Modeling Requirements for the Proposed design",
             "evaluations": [
                 {
                     "id": "ATTIC ZN",
@@ -1040,9 +1229,9 @@
         "6-8": {
             "rule_id": "6-8",
             "description": "Additional occupancy sensor controls in the proposed building are modeled through schedule adjustments based on factors defined in Table G3.7.",
-            "ruleset_section_title": "Temp section",
-            "primary_rule": "Y",
-            "standard_section": "G12345",
+            "ruleset_section_title": "Lighting",
+            "primary_rule": "Yes",
+            "standard_section": "Section G3.1-6(i) Modeling Requirements for the Proposed design",
             "evaluations": [
                 {
                     "id": "-SmallOffice-ASHRAE 169-2013-5B created: 2022-10-17 12:32:02 -0700",
