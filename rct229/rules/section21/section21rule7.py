@@ -34,6 +34,9 @@ class Section21Rule7(RuleDefinitionListIndexedBase):
             index_rmr="baseline",
             id="21-7",
             description="When baseline building requires boilers, systems 1,5,7,11 and 12 - Model HWST = 180F and return design temp = 130F.",
+            ruleset_section_title="HVAC - Water Side",
+            standard_section="Section G3.1.3.3 Building System-Specific Modeling Requirements for the Baseline model",
+            is_primary_rule=True,
             rmr_context="ruleset_model_instances/0",
             list_path="fluid_loops[*]",
         )

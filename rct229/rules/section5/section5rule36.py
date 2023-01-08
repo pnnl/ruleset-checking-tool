@@ -31,6 +31,9 @@ class Section5Rule36(RuleDefinitionListIndexedBase):
             index_rmr="baseline",
             id="5-36",
             description="Skylight area must be allocated to surfaces in the same proportion in the baseline as in the proposed design.",
+            ruleset_section_title="Envelope",
+            standard_section="Section G3.1-5(e) Building Envelope Modeling Requirements for the Baseline building",
+            is_primary_rule=True,
             list_path="ruleset_model_instances[0].buildings[*]",
             data_items={"climate_zone": ("baseline", "weather/climate_zone")},
         )

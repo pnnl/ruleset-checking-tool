@@ -28,6 +28,9 @@ class Section22Rule33(RuleDefinitionBase):
             rmrs_used=UserBaselineProposedVals(False, True, False),
             id="22-33",
             description="Baseline chilled water system that does not use purchased chilled water must have no more than one CHW plant.",
+            ruleset_section_title="HVAC - Chiller",
+            standard_section="Section G3.1.3.2 Building System-Specific Modeling Requirements for the Baseline model",
+            is_primary_rule=True,
             rmr_context="ruleset_model_instances/0",
         )
 

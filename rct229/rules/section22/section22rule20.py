@@ -33,6 +33,9 @@ class Section22Rule20(RuleDefinitionListIndexedBase):
             index_rmr="baseline",
             id="22-20",
             description="The baseline minimum condenser water reset temperature is per Table G3.1.3.11.",
+            ruleset_section_title="HVAC - Chiller",
+            standard_section="Section G3.1.3.11 Heat Rejection (System 7, 8, 11, 12 and 13)",
+            is_primary_rule=True,
             list_path="ruleset_model_instances[0].heat_rejections[*]",
             required_fields={
                 "$": ["ruleset_model_instances", "weather"],
