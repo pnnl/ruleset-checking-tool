@@ -85,7 +85,7 @@ class Section23Rule8(RuleDefinitionListIndexedBase):
         def rule_check(self, context, calc_vals=None, data=None):
             design_airflow_b = calc_vals["design_airflow_b"]
             design_electric_power_b = calc_vals["design_electric_power_b"]
-            target_validation_points = data["target_validation_points"]
+            output_validation_points = data["output_validation_points"]
 
             target_validation_points = [
                 [
@@ -95,4 +95,4 @@ class Section23Rule8(RuleDefinitionListIndexedBase):
                 for constant in range(0, 11)
             ]
 
-            return target_validation_points == target_validation_points
+            return target_validation_points == output_validation_points
