@@ -30,8 +30,8 @@
 ## Logic:    
 - Create an object associated with the hvac system: `hvac_b = hvac_b.id`  
 - Set is_baseline_system_6 = Not_Sys_6: `is_baseline_system_6 = "Not_Sys_6"`    
-- Check that there is no heating system, if there is none then carry on: `if hvac_b.heating_system == "NONE" or hvac_b.heating_system.heating_system_type == "NONE":`
-- Check that there is preheat system per G3.1.3.19, if there is then carry on: `if hvac_b.preheat_system != "NONE":`   
+- Check that there is no heating system, if there is none then carry on: `if(hvac_b.heating_system) == Null or hvac_b.heating_system.heating_system_type == "NONE":`
+- Check that there is preheat system per G3.1.3.19, if there is then carry on: `if(hvac_b.preheat_system) != Null or hvac_b.preheat_system.heating_system_type == "NONE":`  
     - Check that there is a cooling system: `if hvac_b.cooling_system != Null or hvac_b.cooling_system.cooling_system_type != "NONE":`  
         - Check if the cooling system type is DX, if yes then carry on: `if is_hvac_sys_cooling_type_DX(B_RMI, hvac_b.id) == TRUE:`  
             - Check if fansystem is variable speed drive controlled, if yes then carry on: `if is_hvac_sys_fan_sys_VSD(B_RMI, hvac_b.id) == TRUE:`  

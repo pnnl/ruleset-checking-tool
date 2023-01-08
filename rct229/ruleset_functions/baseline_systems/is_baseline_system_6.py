@@ -80,7 +80,11 @@ def is_baseline_system_6(rmi_b, hvac_b_id, terminal_unit_id_list, zone_id_list):
         or heating_system["heating_system_type"] == HEATING_SYSTEM.NONE
     )
 
-    has_required_preheat_sys = hvac_b.get("preheat_system") is not None
+    preheat_system = hvac_b.get("preheat_system")
+    has_required_preheat_sys = (
+        preheat_system is not None
+        or preheat_system["heating_system_type"] != HEATING_SYSTEM.NONE
+    )
 
     cooling_system = hvac_b.get("cooling_system")
     has_required_cooling_sys = (
