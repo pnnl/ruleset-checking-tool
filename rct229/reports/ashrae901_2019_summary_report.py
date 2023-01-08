@@ -29,7 +29,7 @@ class ASHRAE9012019SummaryReport(RCTReport):
         self.section_dict = {
             "5": "Envelope",
             "6": "Lighting",
-            "12": "Receptacle",
+            "12": "Receptacles",
             "15": "Transformers",
             "21": "HVAC-WaterSide",
             "22": "HVAC-Chiller",
@@ -162,8 +162,6 @@ Replace-Undetermined
             return None
 
     def ruleset_outcome_count_helper(self, rule_outcome_id, rule_outcome_result):
-        section_no = rule_outcome_id.split("-")[0]
-
         def _ruleset_outcome_count_helper(section_number, rule_outcome_result):
             for result in [
                 RCTOutcomeLabel.PASS,
@@ -176,15 +174,7 @@ Replace-Undetermined
                 ]
                 self.ruleset_outcome["All"][result] += rule_outcome_result[result]
 
-        if section_no == "5":
-            _ruleset_outcome_count_helper("Envelope", rule_outcome_result)
-        elif section_no == "6":
-            _ruleset_outcome_count_helper("Lighting", rule_outcome_result)
-        elif section_no == "12":
-            _ruleset_outcome_count_helper("Receptacles", rule_outcome_result)
-        elif section_no == "15":
-            _ruleset_outcome_count_helper("Transformers", rule_outcome_result)
-        elif section_no == "21":
-            _ruleset_outcome_count_helper("HVAC-WaterSide", rule_outcome_result)
-        elif section_no == "22":
-            _ruleset_outcome_count_helper("HVAC-Chiller", rule_outcome_result)
+        section_no = rule_outcome_id.split("-")[0]
+        _ruleset_outcome_count_helper(
+            self.section_dict[section_no], rule_outcome_result
+        )

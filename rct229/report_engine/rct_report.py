@@ -51,18 +51,18 @@ class RCTReport:
         else:
             ruleset_report = self.initialize_ruleset_report()
             for outcome in outcomes:
-                if outcome["primary_rule"]:  # output only primary rules
-                    rule_outcome_dict = {
-                        RCTOutcomeLabel.PASS: 0,
-                        RCTOutcomeLabel.FAILED: 0,
-                        RCTOutcomeLabel.UNDETERMINED: 0,
-                        RCTOutcomeLabel.NOT_APPLICABLE: 0,
-                    }
-                    rule_report = self.generate_rule_report(outcome, rule_outcome_dict)
-                    rule_outcome = self.calculate_rule_outcome(rule_outcome_dict)
-                    self.add_rule_to_ruleset_report(
-                        ruleset_report, rule_report, rule_outcome
-                    )
+                # if outcome["primary_rule"]:  #  TODO Do we output ONLY primary rules?
+                rule_outcome_dict = {
+                    RCTOutcomeLabel.PASS: 0,
+                    RCTOutcomeLabel.FAILED: 0,
+                    RCTOutcomeLabel.UNDETERMINED: 0,
+                    RCTOutcomeLabel.NOT_APPLICABLE: 0,
+                }
+                rule_report = self.generate_rule_report(outcome, rule_outcome_dict)
+                rule_outcome = self.calculate_rule_outcome(rule_outcome_dict)
+                self.add_rule_to_ruleset_report(
+                    ruleset_report, rule_report, rule_outcome
+                )
             report_dir = os.path.join(report_dir, self.ruleset_report_file)
             self.save_ruleset_report(ruleset_report, report_dir)
 
