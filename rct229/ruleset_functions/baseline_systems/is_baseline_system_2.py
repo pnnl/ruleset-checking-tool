@@ -59,7 +59,6 @@ def is_baseline_system_2(rmi_b, hvac_b_id, terminal_unit_id_list, zone_id_list):
     -------
     The function returns either Sys-2 or Not_Sys_2 string output which indicates whether the HVAC system is ASHRAE 90.1 2019 Appendix G system 2 (PTHP).
     """
-    is_baseline_system_2 = HVAC_SYS.UNMATCHED
 
     hvac_b = find_exactly_one_hvac_system(rmi_b, hvac_b_id)
     # check if the hvac system has the required sub systems for system type 2
