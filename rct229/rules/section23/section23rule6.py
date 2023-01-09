@@ -25,6 +25,9 @@ class Section23Rule6(RuleDefinitionListIndexedBase):
             index_rmr="baseline",
             id="23-6",
             description="For baseline systems 6 and 8, Fans in parallel VAV fan-powered boxes shall be sized for 50% of the peak design primary air (from the VAV air-handling unit) flow rate and shall be modeled with 0.35 W/cfm fan power.",
+            ruleset_section_title="HVAC - Airside",
+            standard_section="Section G3.1.3.14 Fan Power and Control (Systems 6 and 8)",
+            is_primary_rule=True,
             rmr_context="ruleset_model_instances/0",
             list_path="$..terminals[*]",
         )
