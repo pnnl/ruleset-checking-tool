@@ -29,6 +29,9 @@ class Section5Rule17(RuleDefinitionListIndexedBase):
             index_rmr="baseline",
             id="5-17",
             description="Opaque surfaces that are not regulated (not part of opaque building envelope) must be modeled the same in the baseline as in the proposed design. ",
+            ruleset_section_title="Envelope",
+            standard_section="Section G3.1-5 Building Envelope Modeling Requirements for the Baseline building",
+            is_primary_rule=True,
             list_path="ruleset_model_instances[0].buildings[*]",
             data_items={"climate_zone": ("baseline", "weather/climate_zone")},
         )
