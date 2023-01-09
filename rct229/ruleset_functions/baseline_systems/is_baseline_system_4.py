@@ -57,8 +57,6 @@ def is_baseline_system_4(rmi_b, hvac_b_id, terminal_unit_id_list, zone_id_list):
      The function returns either Sys-4 or Not_Sys_4 string output which indicates whether the HVAC system is ASHRAE 90.1 2019 Appendix G system 4 (PSZ-HP).
     """
 
-    is_baseline_system_4 = HVAC_SYS.UNMATCHED
-
     # Get the hvac system
     hvac_b = find_exactly_one_hvac_system(rmi_b, hvac_b_id)
 
