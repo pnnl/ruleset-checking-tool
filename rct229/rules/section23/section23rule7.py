@@ -33,7 +33,47 @@ class Section23Rule7(RuleDefinitionListIndexedBase):
 
     def is_applicable(self, context, data=None):
         rmi_b = context.baseline
-        baseline_system_types_dict = get_baseline_system_types(rmi_b)
+        # baseline_system_types_dict = get_baseline_system_types(rmi_b)
+        baseline_system_types_dict = {
+            "Sys-1": [],
+            "Sys-10": [],
+            "Sys-11b": [],
+            "Sys-11.1": [],
+            "Sys-11.1a": [],
+            "Sys-11.1b": [],
+            "Sys-11.1c": [],
+            "Sys-11.2": [],
+            "Sys-11.2a": [],
+            "Sys-12": [],
+            "Sys-12a": [],
+            "Sys-12b": [],
+            "Sys-12c": [],
+            "Sys-13": [],
+            "Sys-13a": [],
+            "Sys-1a": [],
+            "Sys-1b": [],
+            "Sys-1c": [],
+            "Sys-2": [],
+            "Sys-3": [],
+            "Sys-3a": [],
+            "Sys-3b": [],
+            "Sys-3c": [],
+            "Sys-4": [],
+            "Sys-5": [],
+            "Sys-5b": [],
+            "Sys-6": ["System 6"],
+            "Sys-6b": [],
+            "Sys-7": [],
+            "Sys-7a": [],
+            "Sys-7b": [],
+            "Sys-7c": [],
+            "Sys_8": [],
+            "Sys_8a": [],
+            "Sys-8b": [],
+            "Sys-8c": [],
+            "Sys-9": [],
+            "Sys-9b": [],
+        }
         # create a list contains all HVAC systems that are modeled in the rmi_b
         available_sys_types = [
             hvac_type

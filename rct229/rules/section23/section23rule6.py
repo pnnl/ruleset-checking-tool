@@ -31,7 +31,47 @@ class Section23Rule6(RuleDefinitionListIndexedBase):
 
     def is_applicable(self, context, data=None):
         rmi_b = context.baseline
-        baseline_system_types_dict = get_baseline_system_types(rmi_b)
+        # baseline_system_types_dict = get_baseline_system_types(rmi_b)
+        baseline_system_types_dict = {
+            "Sys-1": [],
+            "Sys-10": [],
+            "Sys-11b": [],
+            "Sys-11.1": [],
+            "Sys-11.1a": [],
+            "Sys-11.1b": [],
+            "Sys-11.1c": [],
+            "Sys-11.2": [],
+            "Sys-11.2a": [],
+            "Sys-12": [],
+            "Sys-12a": [],
+            "Sys-12b": [],
+            "Sys-12c": [],
+            "Sys-13": [],
+            "Sys-13a": [],
+            "Sys-1a": [],
+            "Sys-1b": [],
+            "Sys-1c": [],
+            "Sys-2": [],
+            "Sys-3": [],
+            "Sys-3a": [],
+            "Sys-3b": [],
+            "Sys-3c": [],
+            "Sys-4": [],
+            "Sys-5": [],
+            "Sys-5b": [],
+            "Sys-6": ["System 6"],
+            "Sys-6b": [],
+            "Sys-7": [],
+            "Sys-7a": [],
+            "Sys-7b": [],
+            "Sys-7c": [],
+            "Sys_8": [],
+            "Sys_8a": [],
+            "Sys-8b": [],
+            "Sys-8c": [],
+            "Sys-9": [],
+            "Sys-9b": [],
+        }
         # create a list contains all HVAC systems that are modeled in the rmi_b
         available_sys_types = [
             hvac_type
@@ -51,10 +91,9 @@ class Section23Rule6(RuleDefinitionListIndexedBase):
             super(Section23Rule6.TerminalRule, self).__init__(
                 rmrs_used=UserBaselineProposedVals(False, True, False),
                 required_fields={
-                    "$": ["fan"],
+                    "$": ["primary_airflow"],
                     "fan": [
                         "design_airflow",
-                        "primary_airflow",
                         "design_electric_power",
                     ],
                 },
@@ -62,23 +101,25 @@ class Section23Rule6(RuleDefinitionListIndexedBase):
 
         def get_calc_vals(self, context, data=None):
             terminal_b = context.baseline
-            design_airflow_b = terminal_b["design_airflow"]
+            design_airflow_b = terminal_b["fan"]["design_airflow"]
             primary_airflow_b = terminal_b["primary_airflow"]
-            design_electric_power_b = terminal_b["design_electric_power"]
+            design_electric_power_b = terminal_b["fan"]["design_electric_power"]
 
             return {
-                "design_airflow_b": CalcQ("volumetric_flow_rate", design_airflow_b),
-                "primary_airflow_b": CalcQ("volumetric_flow_rate", primary_airflow_b),
+                "design_airflow_b": CalcQ("volumetric_flow_rate_Ls", design_airflow_b),
+                "primary_airflow_b": CalcQ(
+                    "volumetric_flow_rate_Ls", primary_airflow_b
+                ),
                 "design_electric_power_b": CalcQ(
-                    "volumetric_flow_rate", design_electric_power_b
+                    "electric_power", design_electric_power_b
                 ),
             }
 
         def rule_check(self, context, calc_vals=None, data=None):
-            design_airflow_b = calc_vals["design_airflow"]
-            primary_airflow_b = calc_vals["primary_airflow"]
-            design_electric_power_b = calc_vals["design_electric_power"]
+            design_airflow_b = calc_vals["design_airflow_b"]
+            primary_airflow_b = calc_vals["primary_airflow_b"]
+            design_electric_power_b = calc_vals["design_electric_power_b"]
 
             return std_equal(design_airflow_b, 0.5 * primary_airflow_b) and std_equal(
-                design_electric_power_b, 0.35 * design_airflow_b
+                design_electric_power_b.m, 0.35 * design_airflow_b.to("cfm").m
             )
