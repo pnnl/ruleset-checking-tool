@@ -22,6 +22,9 @@ class Section5Rule3(RuleDefinitionListIndexedBase):
             index_rmr="baseline",
             id="5-3",
             description="The building shall be modeled so that it does not shade itself",
+            ruleset_section_title="Envelope",
+            standard_section="Section G3.1-5(b) Building Envelope Modeling Requirements for the Baseline building",
+            is_primary_rule=False,
             rmr_context="ruleset_model_instances/0/buildings",
         )
 

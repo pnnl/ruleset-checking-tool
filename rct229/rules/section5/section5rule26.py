@@ -37,6 +37,9 @@ class Section5Rule26(RuleDefinitionListIndexedBase):
             index_rmr="baseline",
             id="5-26",
             description="Vertical fenestration SHGC shall match the appropriate requirements in Tables G3.4-1 through G3.4-8.",
+            ruleset_section_title="Envelope",
+            standard_section="Section G3.1-5(d) Building Envelope Modeling Requirements for the Baseline building",
+            is_primary_rule=True,
             list_path="ruleset_model_instances[0].buildings[*]",
         )
 
