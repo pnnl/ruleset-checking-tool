@@ -32,6 +32,9 @@ class Section21Rule9(RuleDefinitionListIndexedBase):
             index_rmr="baseline",
             id="21-9",
             description="When baseline building includes boilers, Hot Water Pump Power = 19W/gpm.",
+            ruleset_section_title="HVAC - Water Side",
+            standard_section="Section G3.1.3.5 Building System-Specific Modeling Requirements for the Baseline model",
+            is_primary_rule=True,
             rmr_context="ruleset_model_instances/0",
             list_path="fluid_loops[*]",
         )

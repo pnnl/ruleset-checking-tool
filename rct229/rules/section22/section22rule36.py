@@ -35,6 +35,9 @@ class Section22Rule36(RuleDefinitionListIndexedBase):
             index_rmr="baseline",
             id="22-36",
             description="Baseline chilled water system that does not use purchased chilled water shall be modeled with constant flow primary loop and variable flow secondary loop.",
+            ruleset_section_title="HVAC - Chiller",
+            standard_section="Section G3.1.3.10 Chilled-Water Pumps (Systems 7, 8, 11, 12, and 13)",
+            is_primary_rule=True,
             rmr_context="ruleset_model_instances/0",
             list_path="fluid_loops[*]",
         )
