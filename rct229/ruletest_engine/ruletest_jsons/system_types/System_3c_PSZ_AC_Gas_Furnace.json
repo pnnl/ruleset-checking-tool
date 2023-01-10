@@ -73,13 +73,11 @@
             "fluid_loops": [
                 {
                     "id": "Purchased CHW Loop 1",
-                    "type": "COOLING",
-                    "child_loops": [
-                        {
-                            "id": "Purchased HW Loop 1",
-                            "type": "HEATING"
-                        }
-                    ]
+                    "type": "COOLING"
+                },
+                {
+                    "id": "Purchased HW Loop 1",
+                    "type": "HEATING"
                 }
             ]
         }

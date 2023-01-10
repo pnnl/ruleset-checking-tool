@@ -16,6 +16,9 @@ class RuleDefinitionListBase(RuleDefinitionBase):
         each_rule,
         id=None,
         description=None,
+        ruleset_section_title=None,
+        standard_section=None,
+        is_primary_rule=False,
         rmr_context="",
         required_fields=None,
         manual_check_required_msg="Manual Check Required",
@@ -34,6 +37,9 @@ class RuleDefinitionListBase(RuleDefinitionBase):
             required_fields=required_fields,
             manual_check_required_msg=manual_check_required_msg,
             not_applicable_msg=not_applicable_msg,
+            ruleset_section_title=ruleset_section_title,
+            standard_section=standard_section,
+            is_primary_rule=is_primary_rule,
         )
 
     def create_context_list(self, context, data):

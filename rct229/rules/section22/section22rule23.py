@@ -26,6 +26,9 @@ class Section22Rule23(RuleDefinitionBase):
             rmrs_used=UserBaselineProposedVals(False, True, False),
             id="22-23",
             description="Each baseline chiller shall be modeled with separate chilled water pump interlocked to operate with the associated chiller.",
+            ruleset_section_title="HVAC - Chiller",
+            standard_section="Section G3.1.3.11 Heat Rejection (Systems 7, 8, 11, 12, and 13)",
+            is_primary_rule=True,
             rmr_context="ruleset_model_instances/0",
         )
 

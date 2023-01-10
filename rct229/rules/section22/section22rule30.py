@@ -25,6 +25,9 @@ class Section22Rule30(RuleDefinitionListIndexedBase):
             index_rmr="baseline",
             id="22-30",
             description="For chilled-water systems served by chiller(s) and serves baseline System-11, condenser-water pump power shall be 22 W/gpm.",
+            ruleset_section_title="HVAC - Chiller",
+            standard_section="Section G3.1.3.11 Heat Rejection (Systems 7, 8, 11, 12, and 13)",
+            is_primary_rule=True,
             rmr_context="ruleset_model_instances/0",
             list_path="fluid_loops[*]",
         )

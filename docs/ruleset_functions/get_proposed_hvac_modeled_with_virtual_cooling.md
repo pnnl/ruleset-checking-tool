@@ -1,5 +1,6 @@
 # get_proposed_hvac_modeled_with_virtual_cooling  
 
+**Schema Version:** 0.0.23
 **Description:** Get the list of HeatingVentilationAirAconditioningSystem in which Appendix G Table G3.1 #10 d is applicable (i.e. space cooling is modeled in the P_RMR but not the U_RMR).  Table G3.1 #10 d states that "where no cooling system exists or no cooling system has
 been submitted with design documents, the cooling system type shall be the same in the proposed as modeled in the baseline building design and shall comply with the requirements of Section 6."   
 
