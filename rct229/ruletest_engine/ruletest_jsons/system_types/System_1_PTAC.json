@@ -58,6 +58,12 @@
                     "loop": "Boiler Loop 1",
                     "energy_source_type": "NATURAL_GAS"
                 }
+            ],
+            "fluid_loops": [
+                {
+                    "id": "Boiler Loop 1",
+                    "type": "HEATING"
+                }
             ]
         }
     ]
