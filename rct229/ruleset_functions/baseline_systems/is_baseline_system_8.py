@@ -88,7 +88,7 @@ def is_baseline_system_8(rmi_b, hvac_b_id, terminal_unit_id_list, zone_id_list):
     preheat_system = hvac_b.get("preheat_system")
     has_required_preheat_sys = (
         preheat_system is not None
-        or preheat_system["heating_system_type"] != HEATING_SYSTEM.NONE
+        and preheat_system["heating_system_type"] != HEATING_SYSTEM.NONE
     )
 
     are_sys_data_matched = (
