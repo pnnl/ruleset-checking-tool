@@ -1,4 +1,9 @@
+from rct229.data.schema_enums import schema_enums
 from rct229.utils.jsonpath_utils import find_exactly_one_with_field_value
+
+
+HEATING_SYSTEM = schema_enums["HeatingSystemOptions"]
+COOLING_SYSTEM = schema_enums["CoolingSystemOptions"]
 
 
 class HVAC_SYS:
@@ -147,3 +152,101 @@ def find_exactly_one_fluid_loop(rmi, loop_id):
         loop_id,
         rmi,
     )
+
+
+def has_heating_system(rmi_b, hvac_b_id):
+    """
+    Check whether heating system exists or not.
+
+    Parameters
+    ----------
+    rmi_b json
+        To evaluate if the hvac system is modeled as Sys-2 in the B_RMI.
+
+    hvac_b_id list
+        The id of the hvac system to evaluate.
+
+    Returns
+    -------
+    If heating system exists, it passes. Otherwise, it fails.
+    """
+    hvac_b = find_exactly_one_hvac_system(rmi_b, hvac_b_id)
+    heating_system = hvac_b.get("heating_system")
+
+    return (
+        heating_system is not None
+        and heating_system.get("heating_system_type") is not None
+        and heating_system["heating_system_type"] != HEATING_SYSTEM.NONE
+    )
+
+
+def has_cooling_system(rmi_b, hvac_b_id):
+    """
+    Check whether cooling system exists or not.
+
+    Parameters
+    ----------
+    rmi_b json
+        To evaluate if the hvac system is modeled as Sys-2 in the B_RMI.
+
+    hvac_b_id list
+        The id of the hvac system to evaluate.
+
+    Returns
+    -------
+    If cooling system exists, it passes. Otherwise, it fails.
+    """
+    hvac_b = find_exactly_one_hvac_system(rmi_b, hvac_b_id)
+    cooling_system = hvac_b.get("cooling_system")
+
+    return (
+        cooling_system is not None
+        and cooling_system.get("cooling_system_type") is not None
+        and cooling_system["cooling_system_type"] != COOLING_SYSTEM.NONE
+    )
+
+
+def has_preheat_system(rmi_b, hvac_b_id):
+    """
+    Check whether preheat system exists or not.
+
+    Parameters
+    ----------
+    rmi_b json
+        To evaluate if the hvac system is modeled as Sys-2 in the B_RMI.
+
+    hvac_b_id list
+        The id of the hvac system to evaluate.
+
+    Returns
+    -------
+    If preheat system exists, it passes. Otherwise, it fails.
+    """
+    hvac_b = find_exactly_one_hvac_system(rmi_b, hvac_b_id)
+    preheat_system = hvac_b.get("preheat_system")
+
+    return (
+        preheat_system is not None
+        and preheat_system.get("heating_system_type") is not None
+        and preheat_system["heating_system_type"] != HEATING_SYSTEM.NONE
+    )
+
+
+def has_fan_system(rmi_b, hvac_b_id):
+    """
+    Check whether fan system exists or not.
+
+    Parameters
+    ----------
+    rmi_b json
+        To evaluate if the hvac system is modeled as Sys-2 in the B_RMI.
+
+    hvac_b_id list
+        The id of the hvac system to evaluate.
+
+    Returns
+    -------
+    If fan system exists, it passes. Otherwise, it fails.
+    """
+
+    return find_exactly_one_hvac_system(rmi_b, hvac_b_id).get("fan_system") is not None
