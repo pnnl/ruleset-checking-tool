@@ -170,8 +170,9 @@ def has_heating_system(rmi_b, hvac_b_id):
     -------
     If heating system exists, it returns true. Otherwise, it returns false.
     """
-    hvac_b = find_exactly_one_hvac_system(rmi_b, hvac_b_id)
-    heating_system = hvac_b.get("heating_system")
+    heating_system = find_exactly_one_hvac_system(rmi_b, hvac_b_id).get(
+        "heating_system"
+    )
 
     return (
         heating_system is not None
@@ -196,8 +197,9 @@ def has_cooling_system(rmi_b, hvac_b_id):
     -------
     If cooling system exists, it returns true. Otherwise, it returns false.
     """
-    hvac_b = find_exactly_one_hvac_system(rmi_b, hvac_b_id)
-    cooling_system = hvac_b.get("cooling_system")
+    cooling_system = find_exactly_one_hvac_system(rmi_b, hvac_b_id).get(
+        "cooling_system"
+    )
 
     return (
         cooling_system is not None
@@ -222,8 +224,9 @@ def has_preheat_system(rmi_b, hvac_b_id):
     -------
     If preheat system exists, it returns true. Otherwise, it returns false.
     """
-    hvac_b = find_exactly_one_hvac_system(rmi_b, hvac_b_id)
-    preheat_system = hvac_b.get("preheat_system")
+    preheat_system = find_exactly_one_hvac_system(rmi_b, hvac_b_id).get(
+        "preheat_system"
+    )
 
     return (
         preheat_system is not None
