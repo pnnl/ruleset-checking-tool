@@ -34,7 +34,7 @@ from rct229.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.is_hv
 )
 from rct229.ruleset_functions.baseline_systems.baseline_system_util import (
     HVAC_SYS,
-    find_exactly_one_hvac_system,
+    has_preheat_system,
 )
 
 HEATING_SYSTEM = schema_enums["HeatingSystemOptions"]
@@ -60,20 +60,12 @@ def is_baseline_system_11_2(rmi_b, hvac_b_id, terminal_unit_id_list, zone_id_lis
     Boiler)) or system 11.2a (system 11.2 with purchased CHW). -------
     """
     is_baseline_system_11_2_str = HVAC_SYS.UNMATCHED
-    # Get the hvac system
-    hvac_b = find_exactly_one_hvac_system(rmi_b, hvac_b_id)
 
-    has_required_data = (
-        # preheat system is none
-        hvac_b.get("preheat_system") is None
-        # preheat_system.heating_system_type is None (short-circuit ensures preheat_system exists)
-        or hvac_b["preheat_system"].get("heating_system_type") is None
-        # preheat_system.heating_system_type == NONE
-        or hvac_b["preheat_system"]["heating_system_type"] == HEATING_SYSTEM.NONE
-    )
+    # Get the hvac system
+    has_required_sys = not has_preheat_system(rmi_b, hvac_b_id)
 
     are_sys_data_matched = (
-        has_required_data
+        has_required_sys
         and is_hvac_sys_cooling_type_fluid_loop(rmi_b, hvac_b_id)
         and is_hvac_sys_fan_sys_vsd(rmi_b, hvac_b_id)
         and does_hvac_system_serve_single_zone(rmi_b, zone_id_list)
