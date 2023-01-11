@@ -68,7 +68,6 @@ def is_baseline_system_1(rmi_b, hvac_b_id, terminal_unit_id_list, zone_id_list):
     """
 
     is_baseline_system_1_str = HVAC_SYS.UNMATCHED
-    # Get the hvac system
 
     if is_baseline_system_1_c(rmi_b, hvac_b_id, terminal_unit_id_list, zone_id_list):
         is_baseline_system_1_str = HVAC_SYS.SYS_1C
@@ -79,6 +78,7 @@ def is_baseline_system_1(rmi_b, hvac_b_id, terminal_unit_id_list, zone_id_list):
         has_required_sys = not has_preheat_system(rmi_b, hvac_b_id)
 
         are_sys_data_matched = (
+            # short-circuit the logic if no required data is found.
             has_required_sys
             # sub functions handles missing required sys, and return False.
             and is_hvac_sys_heating_type_fluid_loop(rmi_b, hvac_b_id)

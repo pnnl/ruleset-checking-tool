@@ -74,7 +74,7 @@ def is_baseline_system_5(rmi_b, hvac_b_id, terminal_unit_id_list, zone_id_list):
         and not has_heating_system(rmi_b, hvac_b_id)
         and has_cooling_system(rmi_b, hvac_b_id)
     )
-    palce = 1
+
     are_sys_data_matched = (
         # short-circuit the logic if no required data is found.
         has_required_sys

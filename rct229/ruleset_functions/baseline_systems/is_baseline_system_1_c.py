@@ -60,6 +60,7 @@ def is_baseline_system_1_c(rmi_b, hvac_b_id, terminal_unit_id_list, zone_id_list
     )
 
     return (
+        # short-circuit the logic if no required data is found.
         has_required_sys
         # sub functions handles missing required sys, and return False.
         and is_hvac_sys_cooling_type_none(rmi_b, hvac_b_id)

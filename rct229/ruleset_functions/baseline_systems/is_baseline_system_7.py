@@ -43,12 +43,10 @@ from rct229.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.is_hv
 )
 from rct229.ruleset_functions.baseline_systems.baseline_system_util import (
     HVAC_SYS,
-    find_exactly_one_hvac_system,
     has_cooling_system,
     has_heating_system,
     has_preheat_system,
 )
-from rct229.utils.jsonpath_utils import find_one
 
 HEATING_SYSTEM = schema_enums["HeatingSystemOptions"]
 
@@ -75,9 +73,6 @@ def is_baseline_system_7(rmi_b, hvac_b_id, terminal_unit_id_list, zone_id_list):
     """
     is_baseline_system_7_str = HVAC_SYS.UNMATCHED
 
-    # Get the hvac system
-    hvac_b = find_exactly_one_hvac_system(rmi_b, hvac_b_id)
-
     # check if the hvac system has the required sub systems for system type 7
     has_required_sys = (
         has_preheat_system(rmi_b, hvac_b_id)
@@ -86,6 +81,7 @@ def is_baseline_system_7(rmi_b, hvac_b_id, terminal_unit_id_list, zone_id_list):
     )
 
     are_sys_data_matched = (
+        # short-circuit the logic if no required data is found.
         has_required_sys
         # sub functions handles missing required sys, and return False.
         and is_hvac_sys_preheating_type_fluid_loop(rmi_b, hvac_b_id)
