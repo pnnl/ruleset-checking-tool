@@ -20,8 +20,9 @@
                                             "id": "VAV Air Terminal 1",
                                             "is_supply_ducted": true,
                                             "type": "VARIABLE_AIR_VOLUME",
-                                            "served_by_heating_ventilating_air_conditioning_system": "System 6",
-                                            "heating_source": "ELECTRIC",
+                                            "served_by_heating_ventilating_air_conditioning_system": "System 8",
+                                            "heating_source": "HOT_WATER",
+                                            "heating_from_loop": "Boiler Loop 1",
                                             "fan_configuration": "PARALLEL"
                                         }
                                     ]
@@ -35,8 +36,9 @@
                                             "id": "VAV Air Terminal 2",
                                             "is_supply_ducted": true,
                                             "type": "VARIABLE_AIR_VOLUME",
-                                            "served_by_heating_ventilating_air_conditioning_system": "System 6",
-                                            "heating_source": "ELECTRIC",
+                                            "served_by_heating_ventilating_air_conditioning_system": "System 8",
+                                            "heating_source": "HOT_WATER",
+                                            "heating_from_loop": "Boiler Loop 1",
                                             "fan_configuration": "PARALLEL"
                                         }
                                     ]
@@ -44,10 +46,11 @@
                             ],
                             "heating_ventilating_air_conditioning_systems": [
                                 {
-                                    "id": "System 6",
+                                    "id": "System 8",
                                     "cooling_system": {
-                                        "id": "DX Coil 1",
-                                        "cooling_system_type": "DIRECT_EXPANSION"
+                                        "id": "CHW Coil 1",
+                                        "cooling_system_type": "FLUID_LOOP",
+                                        "chilled_water_loop": "Secondary CHW Loop 1"
                                     },
                                     "preheat_system": {
                                         "id": "Preheat Coil 1",
@@ -69,6 +72,52 @@
                                     }
                                 }
                             ]
+                        }
+                    ]
+                }
+            ],
+            "boilers": [
+                {
+                    "id": "Boiler 1",
+                    "loop": "Boiler Loop 1",
+                    "energy_source_type": "NATURAL_GAS"
+                }
+            ],
+            "chillers": [
+                {
+                    "id": "Chiller 1",
+                    "cooling_loop": "Chiller Loop 1"
+                }
+            ],
+            "pumps": [
+                {
+                    "id": "Boiler Pump 1",
+                    "loop_or_piping": "Boiler Loop 1",
+                    "speed_control": "FIXED_SPEED"
+                },
+                {
+                    "id": "Chiller Pump 1",
+                    "loop_or_piping": "Chiller Loop 1",
+                    "speed_control": "FIXED_SPEED"
+                },
+                {
+                    "id": "Secondary CHW Pump",
+                    "loop_or_piping": "Secondary CHW Loop 1",
+                    "speed_control": "VARIABLE_SPEED"
+                }
+            ],
+            "fluid_loops": [
+                {
+                    "id": "Boiler Loop 1",
+                    "type": "HEATING"
+                },
+                {
+                    "id": "Chiller Loop 1",
+                    "type": "COOLING",
+                    "child_loops": [
+                        {
+                            "id": "Secondary CHW Loop 1",
+                            "type": "COOLING"
                         }
                     ]
                 }

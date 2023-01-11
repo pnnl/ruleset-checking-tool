@@ -31,7 +31,7 @@
                                     "cooling_system": {
                                         "id": "CHW Coil 1",
                                         "cooling_system_type": "FLUID_LOOP",
-                                        "chilled_water_loop": "Purchased CHW Loop 1"
+                                        "chilled_water_loop": "Purchased CHW 1"
                                     },
                                     "heating_system": {
                                         "id": "HHW Coil 1",
@@ -51,16 +51,6 @@
                             ]
                         }
                     ]
-                }
-            ],
-            "fluid_loops": [
-                {
-                    "id": "Purchased HW Loop 1",
-                    "type": "HEATING"
-                },
-                {
-                    "id": "Purchased CHW Loop 1",
-                    "type": "COOLING"
                 }
             ],
             "external_fluid_source": [
