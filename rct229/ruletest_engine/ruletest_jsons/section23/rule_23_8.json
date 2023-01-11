@@ -46,47 +46,47 @@
                                                             "id": "Fan 1",
                                                             "output_validation_points": [
                                                                 {
-                                                                    "airflow": 0,
+                                                                    "airflow": 0.0,
                                                                     "result": 0
                                                                 },
                                                                 {
-                                                                    "airflow": 10,
+                                                                    "airflow": 4.719474431999998,
                                                                     "result": 3
                                                                 },
                                                                 {
-                                                                    "airflow": 20,
+                                                                    "airflow": 9.438948863999997,
                                                                     "result": 7
                                                                 },
                                                                 {
-                                                                    "airflow": 30,
+                                                                    "airflow": 14.158423295999995,
                                                                     "result": 13
                                                                 },
                                                                 {
-                                                                    "airflow": 40,
+                                                                    "airflow": 18.877897727999994,
                                                                     "result": 21
                                                                 },
                                                                 {
-                                                                    "airflow": 50,
+                                                                    "airflow": 23.597372159999992,
                                                                     "result": 30
                                                                 },
                                                                 {
-                                                                    "airflow": 60,
+                                                                    "airflow": 28.31684659199999,
                                                                     "result": 41
                                                                 },
                                                                 {
-                                                                    "airflow": 70,
+                                                                    "airflow": 33.03632102399999,
                                                                     "result": 54
                                                                 },
                                                                 {
-                                                                    "airflow": 80,
+                                                                    "airflow": 37.75579545599999,
                                                                     "result": 68
                                                                 },
                                                                 {
-                                                                    "airflow": 90,
+                                                                    "airflow": 42.475269887999985,
                                                                     "result": 83
                                                                 },
                                                                 {
-                                                                    "airflow": 100,
+                                                                    "airflow": 47.194744319999984,
                                                                     "result": 100
                                                                 }
                                                             ]
@@ -241,47 +241,47 @@
                                                             "id": "Fan 1",
                                                             "output_validation_points": [
                                                                 {
-                                                                    "airflow": 0,
+                                                                    "airflow": 0.0,
                                                                     "result": 0
                                                                 },
                                                                 {
-                                                                    "airflow": 10,
+                                                                    "airflow": 4.719474431999998,
                                                                     "result": 10
                                                                 },
                                                                 {
-                                                                    "airflow": 20,
+                                                                    "airflow": 9.438948863999997,
                                                                     "result": 20
                                                                 },
                                                                 {
-                                                                    "airflow": 30,
+                                                                    "airflow": 14.158423295999995,
                                                                     "result": 30
                                                                 },
                                                                 {
-                                                                    "airflow": 40,
+                                                                    "airflow": 18.877897727999994,
                                                                     "result": 40
                                                                 },
                                                                 {
-                                                                    "airflow": 50,
+                                                                    "airflow": 23.597372159999992,
                                                                     "result": 50
                                                                 },
                                                                 {
-                                                                    "airflow": 60,
+                                                                    "airflow": 28.31684659199999,
                                                                     "result": 60
                                                                 },
                                                                 {
-                                                                    "airflow": 70,
+                                                                    "airflow": 33.03632102399999,
                                                                     "result": 70
                                                                 },
                                                                 {
-                                                                    "airflow": 80,
+                                                                    "airflow": 37.75579545599999,
                                                                     "result": 80
                                                                 },
                                                                 {
-                                                                    "airflow": 90,
+                                                                    "airflow": 42.475269887999985,
                                                                     "result": 90
                                                                 },
                                                                 {
-                                                                    "airflow": 100,
+                                                                    "airflow": 47.194744319999984,
                                                                     "result": 100
                                                                 }
                                                             ]
