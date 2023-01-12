@@ -52,12 +52,6 @@
                     ]
                 }
             ],
-            "fluid_loops": [
-                {
-                    "id": "Purchased HW Loop 1",
-                    "type": "HEATING"
-                }
-            ],
             "external_fluid_source": [
                 {
                     "id": "Purchased HW 1",

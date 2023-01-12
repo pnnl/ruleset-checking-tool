@@ -1,6 +1,7 @@
 import click
 
 from rct229.reports.ashrae901_2019_detail_report import ASHRAE9012019DetailReport
+from rct229.reports.ashrae901_2019_summary_report import ASHRAE9012019SummaryReport
 from rct229.reports.engine_raw_output import EngineRawOutput
 from rct229.reports.engine_raw_summary import EngineRawSummary
 from rct229.rule_engine.engine import evaluate_all_rules
@@ -18,6 +19,7 @@ REPORT_MODULE = {
     "RAW_OUTPUT": EngineRawOutput,
     "RAW_SUMMARY": EngineRawSummary,
     "ASHRAE9012019_DETAIL": ASHRAE9012019DetailReport,
+    "ASHRAE9012019_SUMMARY": ASHRAE9012019SummaryReport,
 }
 
 
@@ -75,15 +77,24 @@ help_text = short_help_text
 
 
 @cli.command("evaluate", short_help=short_help_text, help=help_text, hidden=True)
-@click.argument("user_rmd", type=click.File("rb"))
-@click.argument("baseline_rmd", type=click.File("rb"))
-@click.argument("proposed_rmd", type=click.File("rb"))
+@click.argument("user_rmd", type=click.File("r"))
+@click.argument("baseline_rmd", type=click.File("r"))
+@click.argument("proposed_rmd", type=click.File("r"))
 @click.option("--reports", "-r", multiple=True, default=["RAW_OUTPUT"])
 def evaluate(user_rmd, baseline_rmd, proposed_rmd, reports):
     report = evaluate_rmr_triplet(user_rmd, baseline_rmd, proposed_rmd)
     # have report attached.
+
+    props = {
+        "user_rmd": user_rmd.name,
+        "proposed_rmd": proposed_rmd.name,
+        "baseline_rmd": baseline_rmd.name,
+    }
     for report_type in reports:
-        report_module = REPORT_MODULE[report_type]()
+        if report_type == "ASHRAE9012019_SUMMARY":
+            report_module = REPORT_MODULE[report_type](props)
+        else:
+            report_module = REPORT_MODULE[report_type]()
         report_module.generate(report, "./examples/output/")
 
 
