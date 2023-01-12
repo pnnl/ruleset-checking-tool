@@ -6,7 +6,6 @@ from rct229.ruleset_functions.baseline_systems.is_baseline_system_9b import (
 )
 from rct229.schema.validate import schema_validate_rmr
 
-
 SYS_9B_TEST_RMD = {
     "id": "ASHRAE229 1",
     "ruleset_model_instances": [
