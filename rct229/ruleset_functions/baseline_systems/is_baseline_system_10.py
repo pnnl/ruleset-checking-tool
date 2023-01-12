@@ -94,6 +94,7 @@ def is_baseline_system_10(rmi_b, hvac_b_id, terminal_unit_id_list, zone_id_list)
         return is_baseline_system_10
 
     # When the first logic of are_sys_10_data_matched is false
+    # if preheat system DOESN'T exist and heating/fan systems exist, has_required_sys=True, else, False
     has_required_sys = (
         not has_preheat_system(rmi_b, hvac_b_id)
         and has_heating_system(rmi_b, hvac_b_id)
