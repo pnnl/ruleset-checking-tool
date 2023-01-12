@@ -53,10 +53,11 @@ def is_baseline_system_1_a(rmi_b, hvac_b_id, terminal_unit_id_list, zone_id_list
     """
 
     # check if the hvac system has the required sub systems for system type 1 a
-    has_required_sys = (
-        not has_preheat_system(rmi_b, hvac_b_id)
-        and not has_heating_system(rmi_b, hvac_b_id)
-        and not has_fan_system(rmi_b, hvac_b_id)
+    # if preheat, heating, and fan systems DON'T exist, has_required_sys=True, else, False
+    has_required_sys = not (
+        has_preheat_system(rmi_b, hvac_b_id)
+        and has_heating_system(rmi_b, hvac_b_id)
+        and has_fan_system(rmi_b, hvac_b_id)
     )
 
     return (

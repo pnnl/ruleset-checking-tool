@@ -67,6 +67,7 @@ def is_baseline_system_13(rmi_b, hvac_b_id, terminal_unit_id_list, zone_id_list)
     is_baseline_system_13 = HVAC_SYS.UNMATCHED
 
     # check if the hvac system has the required sub systems for system type 13
+    # if preheat system DOESN'T exist, has_required_sys=True, else, False
     has_required_sys = not has_preheat_system(rmi_b, hvac_b_id)
 
     are_sys_data_matched = (

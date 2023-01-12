@@ -61,6 +61,7 @@ def is_baseline_system_2(rmi_b, hvac_b_id, terminal_unit_id_list, zone_id_list):
     """
 
     # check if the hvac system has the required sub systems for system type 2
+    # if preheat DOESN'T exist, has_required_sys=True, else, False
     has_required_sys = not has_preheat_system(rmi_b, hvac_b_id)
 
     are_sys_data_matched = (
