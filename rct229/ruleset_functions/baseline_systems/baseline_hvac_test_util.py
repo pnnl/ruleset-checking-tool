@@ -29,7 +29,7 @@ def load_system_test_file(file_name: str):
     return quantify_rmr(system_test_json)
 
 
-TEST_RMD = {
+TEST_RMD_PASS = {
     "id": "ASHRAE229 1",
     "ruleset_model_instances": [
         {
@@ -86,25 +86,101 @@ TEST_RMD = {
     ],
 }
 
+TEST_RMD_FAIL = {
+    "id": "ASHRAE229 1",
+    "ruleset_model_instances": [
+        {
+            "id": "RMD 1",
+            "buildings": [
+                {
+                    "id": "Building 1",
+                    "building_open_schedule": "Required Building Schedule 1",
+                    "building_segments": [
+                        {
+                            "id": "Building Segment 1",
+                            "zones": [
+                                {
+                                    "id": "Thermal Zone 1",
+                                    "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                    "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                    "terminals": [
+                                        {
+                                            "id": "PTHP Terminal 1",
+                                            "is_supply_ducted": True,
+                                            "type": "CONSTANT_AIR_VOLUME",
+                                            "served_by_heating_ventilating_air_conditioning_system": "PTHP 1",
+                                        }
+                                    ],
+                                }
+                            ],
+                            "heating_ventilating_air_conditioning_systems": [
+                                {
+                                    "id": "PTHP 1",
+                                }
+                            ],
+                        }
+                    ],
+                }
+            ],
+        }
+    ],
+}
+
 
 def test__TEST_RMD__is_valid():
-    schema_validation_result = schema_validate_rmr(TEST_RMD)
+    schema_validation_result = schema_validate_rmr(TEST_RMD_PASS)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"
 
 
 def test_has_heating_system_true():
-    assert has_heating_system(TEST_RMD["ruleset_model_instances"][0], "PTHP 1") == True
+    assert (
+        has_heating_system(TEST_RMD_PASS["ruleset_model_instances"][0], "PTHP 1")
+        == True
+    )
+
+
+def test_has_heating_system_fail():
+    assert (
+        has_heating_system(TEST_RMD_FAIL["ruleset_model_instances"][0], "PTHP 1")
+        == False
+    )
 
 
 def test_has_cooling_system_true():
-    assert has_cooling_system(TEST_RMD["ruleset_model_instances"][0], "PTHP 1") == True
+    assert (
+        has_cooling_system(TEST_RMD_PASS["ruleset_model_instances"][0], "PTHP 1")
+        == True
+    )
+
+
+def test_has_cooling_system_true():
+    assert (
+        has_cooling_system(TEST_RMD_FAIL["ruleset_model_instances"][0], "PTHP 1")
+        == False
+    )
 
 
 def test_has_preheat_system_true():
-    assert has_preheat_system(TEST_RMD["ruleset_model_instances"][0], "PTHP 1") == True
+    assert (
+        has_preheat_system(TEST_RMD_PASS["ruleset_model_instances"][0], "PTHP 1")
+        == True
+    )
+
+
+def test_has_preheat_system_fail():
+    assert (
+        has_preheat_system(TEST_RMD_FAIL["ruleset_model_instances"][0], "PTHP 1")
+        == False
+    )
 
 
 def test_has_fan_system_true():
-    assert has_fan_system(TEST_RMD["ruleset_model_instances"][0], "PTHP 1") == True
+    assert has_fan_system(TEST_RMD_PASS["ruleset_model_instances"][0], "PTHP 1") == True
+
+
+def test_has_fan_system_fail():
+    assert (
+        has_fan_system(TEST_RMD_FAIL["ruleset_model_instances"][0], "PTHP 1") == False
+    )
