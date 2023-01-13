@@ -18,7 +18,7 @@ class RuleDefinitionBase:
         description=None,
         ruleset_section_title=None,
         standard_section=None,
-        is_primary_rule=False,
+        is_primary_rule=None,
         rmr_context="",
         required_fields=None,
         must_match_by_ids=[],
@@ -114,7 +114,8 @@ class RuleDefinitionBase:
             outcome["ruleset_section_title"] = self.ruleset_section_title
         if self.standard_section:
             outcome["standard_section"] = self.standard_section
-        outcome["primary_rule"] = True if self.is_primary_rule else False
+        if self.is_primary_rule is not None:
+            outcome["primary_rule"] = True if self.is_primary_rule else False
         if self.rmr_context:
             outcome["rmr_context"] = self.rmr_context
 
