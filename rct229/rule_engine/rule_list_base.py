@@ -18,7 +18,7 @@ class RuleDefinitionListBase(RuleDefinitionBase):
         description=None,
         ruleset_section_title=None,
         standard_section=None,
-        is_primary_rule=False,
+        is_primary_rule=None,
         rmr_context="",
         required_fields=None,
         manual_check_required_msg="Manual Check Required",
