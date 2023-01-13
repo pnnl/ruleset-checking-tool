@@ -701,7 +701,7 @@
                           "are_schedules_used_for_modeling_daylighting_control": false
                         }
                       ],
-                      "lighting_space_type": "OFFICE_OPEN_PLAN",
+                      "lighting_space_type": "OFFICE_ENCLOSED",
                       "miscellaneous_equipment": [
                         {
                           "id": "CORE_SPACE OFFICE WHOLEBUILDING - SM OFFICE ELEC EQUIP 5",
@@ -942,14 +942,14 @@
                       "interior_lighting": [
                         {
                           "id": "PERIMETER-1_SPACE OFFICE WHOLEBUILDING - SM OFFICE LIGHTS 1",
-                          "power_per_area": 18.2986,
+                          "power_per_area": 10.763910,
                           "lighting_multiplier_schedule": "OFFICESMALL BLDG_LIGHT_SCH_2013_0.1250",
                           "daylighting_control_type": "NONE",
                           "are_schedules_used_for_modeling_occupancy_control": true,
                           "are_schedules_used_for_modeling_daylighting_control": false
                         }
                       ],
-                      "lighting_space_type": "RETAIL_FACILITIES_MALL_CONCOURSE",
+                      "lighting_space_type": "OFFICE_ENCLOSED",
                       "miscellaneous_equipment": [
                         {
                           "id": "PERIMETER-1_SPACE OFFICE WHOLEBUILDING - SM OFFICE ELEC EQUIP 1",
@@ -1190,7 +1190,7 @@
                       "interior_lighting": [
                         {
                           "id": "PERIMETER-2_SPACE OFFICE WHOLEBUILDING - SM OFFICE LIGHTS 2",
-                          "power_per_area": 11.8403,
+                          "power_per_area": 10.763910,
                           "lighting_multiplier_schedule": "OFFICESMALL BLDG_LIGHT_SCH_2013_0.3750",
                           "daylighting_control_type": "NONE",
                           "are_schedules_used_for_modeling_occupancy_control": true,
@@ -1438,7 +1438,7 @@
                       "interior_lighting": [
                         {
                           "id": "PERIMETER-3_SPACE OFFICE WHOLEBUILDING - SM OFFICE LIGHTS 3",
-                          "power_per_area": 11.8403,
+                          "power_per_area": 10.763910,
                           "lighting_multiplier_schedule": "OFFICESMALL BLDG_LIGHT_SCH_2013_0.3750",
                           "daylighting_control_type": "NONE",
                           "are_schedules_used_for_modeling_occupancy_control": true,
@@ -1686,14 +1686,14 @@
                       "interior_lighting": [
                         {
                           "id": "PERIMETER-4_SPACE OFFICE WHOLEBUILDING - SM OFFICE LIGHTS 4",
-                          "power_per_area": 12.9167,
+                          "power_per_area": 10.763910,
                           "lighting_multiplier_schedule": "OFFICESMALL BLDG_LIGHT_SCH_2013_0.3750",
                           "daylighting_control_type": "NONE",
                           "are_schedules_used_for_modeling_occupancy_control": true,
                           "are_schedules_used_for_modeling_daylighting_control": false
                         }
                       ],
-                      "lighting_space_type": "FOOD_PREPARATION_AREA",
+                      "lighting_space_type": "OFFICE_ENCLOSED",
                       "miscellaneous_equipment": [
                         {
                           "id": "PERIMETER-4_SPACE OFFICE WHOLEBUILDING - SM OFFICE ELEC EQUIP 4",

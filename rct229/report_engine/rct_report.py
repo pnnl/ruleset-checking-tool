@@ -40,12 +40,18 @@ class RCTReport:
 
         """
         invalid_msg = rct_outcome["invalid_rmrs"]
-        outcomes = rct_outcome["outcomes"]
+        # Sort the outcomes by id
+        outcomes = sorted(
+            # The key used below splits the id on "-" and ensures the outcomes are sorted by the first components of the ids, then the second components, and so on
+            rct_outcome["outcomes"],
+            key=lambda x: [int(y) for y in x["id"].split("-")],
+        )
         if invalid_msg:
             print(f"Invalid RMDs: {str(invalid_msg)}\n")
         else:
             ruleset_report = self.initialize_ruleset_report()
             for outcome in outcomes:
+                # if outcome["primary_rule"]:  #  TODO Do we output ONLY primary rules?
                 rule_outcome_dict = {
                     RCTOutcomeLabel.PASS: 0,
                     RCTOutcomeLabel.FAILED: 0,
