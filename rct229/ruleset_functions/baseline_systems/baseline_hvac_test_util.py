@@ -11,8 +11,6 @@ SYSTEM_TYPE_TEST_FILE_PATH = os.path.join(
     "system_types",
 )
 
-print(SYSTEM_TYPE_TEST_FILE_PATH)
-
 
 def load_system_test_file(file_name: str):
     with open(os.path.join(SYSTEM_TYPE_TEST_FILE_PATH, file_name)) as f:

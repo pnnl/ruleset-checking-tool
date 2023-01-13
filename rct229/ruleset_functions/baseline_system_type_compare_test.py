@@ -9,16 +9,17 @@ from rct229.utils.assertions import RCTException
 
 def test_baseline_system_type_compare_test_exact_match__exception_sys_type():
     with pytest.raises(
-        RCTException, match="SYS123 does not match to any baseline HVAC system type"
+        RCTException, match="SYS123 does not match any baseline HVAC system type"
     ):
         baseline_system_type_compare("SYS123", HVAC_SYS.SYS_1)
 
 
 def test_baseline_system_type_compare_test_exact_match__exception_target_sys_type():
     with pytest.raises(
-        RCTException, match="SYS123 does not match to any baseline HVAC system type"
+        RCTException,
+        match="Sys-1a does not match any primary baseline HVAC system type",
     ):
-        baseline_system_type_compare(HVAC_SYS.SYS_1, "SYS123")
+        baseline_system_type_compare(HVAC_SYS.SYS_1, HVAC_SYS.SYS_1A)
 
 
 def test_baseline_system_type_compare_test_exact_match__matched():
@@ -31,7 +32,7 @@ def test_baseline_system_type_compare_test_exact_match__mismatched():
 
 def test_baseline_system_type_compare_test_not_exact_match__matched():
     assert baseline_system_type_compare(
-        HVAC_SYS.SYS_1, HVAC_SYS.SYS_1C, exact_match=False
+        HVAC_SYS.SYS_1C, HVAC_SYS.SYS_1, exact_match=False
     )
 
 
