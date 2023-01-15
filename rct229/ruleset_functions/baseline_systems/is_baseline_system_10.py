@@ -106,8 +106,8 @@ def is_baseline_system_10(rmi_b, hvac_b_id, terminal_unit_id_list, zone_id_list)
     # When the first logic of are_sys_10_data_matched is false
     has_required_heating_sys = (
         hvac_b.get("heating_system") is not None
-        or hvac_b["heating_system"].get("heating_system_type") is not None
-        or hvac_b["heating_system"]["heating_system_type"] != HEATING_SYSTEM.NONE
+        and hvac_b["heating_system"].get("heating_system_type") is not None
+        and hvac_b["heating_system"]["heating_system_type"] != HEATING_SYSTEM.NONE
     )
 
     has_required_preheat_sys = (
