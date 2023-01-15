@@ -106,6 +106,7 @@ def get_baseline_system_types(rmi_b):
             )
             if hvac_sys != HVAC_SYS.UNMATCHED:
                 baseline_hvac_system_dict[hvac_sys].append(hvac_b_id)
+                # added to the dictionary, move to next iteration
                 continue
 
             # HVAC system type 2
