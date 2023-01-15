@@ -76,10 +76,10 @@ def is_baseline_system_10(rmi_b, hvac_b_id, terminal_unit_id_list, zone_id_list)
     )
 
     heating_system = hvac_b.get("heating_system")
-    has_required_heating_sys = (
-        heating_system is None
-        or heating_system.get("heating_system_type") is None
-        or heating_system["heating_system_type"] == HEATING_SYSTEM.NONE
+    has_required_heating_sys = not (
+        heating_system is not None
+        and heating_system.get("heating_system_type") is not None
+        and heating_system["heating_system_type"] != HEATING_SYSTEM.NONE
     )
 
     has_required_fan_sys = hvac_b.get("fan_system") is None
