@@ -27,7 +27,7 @@ SYS_2_TEST_RMD = {
                                     "terminals": [
                                         {
                                             "id": "PTHP Terminal 1",
-                                            "is_supply_ducted": True,
+                                            "is_supply_ducted": False,
                                             "type": "CONSTANT_AIR_VOLUME",
                                             "served_by_heating_ventilating_air_conditioning_system": "PTHP 1",
                                         }

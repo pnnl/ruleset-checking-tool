@@ -83,8 +83,8 @@ def is_baseline_system_5(rmi_b, hvac_b_id, terminal_unit_id_list, zone_id_list):
     cooling_system = hvac_b.get("cooling_system")
     has_required_cooling_sys = (
         cooling_system is not None
-        or cooling_system.get("cooling_system_type") is not None
-        or cooling_system["cooling_system_type"] != COOLING_SYSTEM.NONE
+        and cooling_system.get("cooling_system_type") is not None
+        and cooling_system["cooling_system_type"] != COOLING_SYSTEM.NONE
     )
 
     are_sys_data_matched = (

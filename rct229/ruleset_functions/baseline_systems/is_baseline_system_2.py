@@ -81,7 +81,7 @@ def is_baseline_system_2(rmi_b, hvac_b_id, terminal_unit_id_list, zone_id_list):
         and are_all_terminal_heat_sources_none_or_null(rmi_b, terminal_unit_id_list)
         and are_all_terminal_cool_sources_none_or_null(rmi_b, terminal_unit_id_list)
         and are_all_terminal_fans_null(rmi_b, terminal_unit_id_list)
-        and are_all_terminal_supplies_ducted(rmi_b, terminal_unit_id_list)
+        and not are_all_terminal_supplies_ducted(rmi_b, terminal_unit_id_list)
         and are_all_terminal_types_cav(rmi_b, terminal_unit_id_list)
     )
 
