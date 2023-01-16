@@ -34,7 +34,7 @@ from rct229.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.is_hv
 )
 from rct229.ruleset_functions.baseline_systems.baseline_system_util import (
     HVAC_SYS,
-    find_exactly_one_hvac_system,
+    has_preheat_system,
 )
 from rct229.ruleset_functions.baseline_systems.is_baseline_system_1_a import (
     is_baseline_system_1_a,
@@ -68,23 +68,18 @@ def is_baseline_system_1(rmi_b, hvac_b_id, terminal_unit_id_list, zone_id_list):
     """
 
     is_baseline_system_1_str = HVAC_SYS.UNMATCHED
-    # Get the hvac system
 
     if is_baseline_system_1_c(rmi_b, hvac_b_id, terminal_unit_id_list, zone_id_list):
         is_baseline_system_1_str = HVAC_SYS.SYS_1C
     elif is_baseline_system_1_a(rmi_b, hvac_b_id, terminal_unit_id_list, zone_id_list):
         is_baseline_system_1_str = HVAC_SYS.SYS_1A
     else:
-        hvac_b = find_exactly_one_hvac_system(rmi_b, hvac_b_id)
-
         # check if the hvac system has the required sub systems for system type 1
-        has_required_sys = (
-            hvac_b.get("preheat_system") is None
-            or hvac_b["preheat_system"].get("heating_system_type") is None
-            or hvac_b["preheat_system"]["heating_system_type"] == HEATING_SYSTEM.NONE
-        )
+        # if preheat system DOESN'T exist, has_required_sys=True, else, False
+        has_required_sys = not has_preheat_system(rmi_b, hvac_b_id)
 
         are_sys_data_matched = (
+            # short-circuit the logic if no required data is found.
             has_required_sys
             # sub functions handles missing required sys, and return False.
             and is_hvac_sys_heating_type_fluid_loop(rmi_b, hvac_b_id)
