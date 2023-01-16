@@ -40,6 +40,7 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   * [get_hvac_zone_list_w_area](ruleset_functions/get_hvac_zone_list_w_area.md): Get the list of zones and their total floor area served by each HVAC system in a RMD.
   * [check_purchased_chw_hhw_status_dict](ruleset_functions/check_purchased_chw_hhw_status_dict.md): Check if RMI is modeled with purchased chilled water as space cooling source or purchased hot water/steam as space heating source. If any system in RMI uses purchased chilled water, function shall return True for purchased chilled water as space cooling source. Similarly, if any system in RMI uses purchased hot water or steam, function shall return True for purchased hot water/steam as space heating source.
   * [get_proposed_hvac_modeled_with_virtual_heating](ruleset_functions/get_proposed_hvac_modeled_with_virtual_heating.md): Get the list of HeatingVentilationAirAconditioningSystem in which Appendix G Table G3.1 #10 c is applicable (i.e. space heating is modeled in the P_RMR but not the U_RMR).  Table G3.1 #10 c states that "where no heating system exists or no heating system has been submitted with design documents, the system type shall be the same system as modeled in the baseline building design and shall comply with but not exceed the requirements of Section 6."
+  * [get_fan_object_electric_power](ruleset_functions/get_fan_object_electric_power.md): Get the fan power associated with a fan object.
 
 ### HVAC type functions
   * [is_baseline_system_1](ruleset_functions/baseline_systems/is_baseline_system_1.md): Get either Sys-1, Sys-1a, Sys-1b, Sys-1c, or Not_Sys_1 string output which indicates whether the HVAC system is ASHRAE 90.1 2019 Appendix G system 1 (PTAC), system 1a (system 1 with purchased CHW), system 1b (system 1 with purchased heating), system 1c (system 1 with purchased CHW and purchased HW).
@@ -244,6 +245,9 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
 
 ## Section 19 - Air Side Baseline HVAC System
   * [19-1](section19/Rule19-1.md): HVAC system coil capacities for the baseline building design shall be oversized by 15% for cooling and 25% for heating.
+  * [19-2](section19/Rule19-2.md): Baseline building plant capacities shall be based on coincident loads.
+  * [19-9](section19/Rule19-9.md): Air economizers shall not be included in baseline HVAC Systems 1, 2, 9, and 10.
+  * [19-18](section19/Rule19-18.md): For baseline system 1 and 2, the total fan electrical power (Pfan) for supply, return, exhaust, and relief shall be = CFMs × 0.3, where, CFMs = the baseline system maximum design supply fan airflow rate, cfm.
 
 ## Section 21 - Central Heating Hot Water Systems
   * [21-1](section21/Rule21-1.md): For systems using purchased hot water or steam, the heating source shall be modeled as purchased hot water or steam in both the proposed design and baseline building design. If any system in the proposed design uses purchased hot water or steam, all baseline systems with hot water coils shall use the same type of purchased hot water or steam.

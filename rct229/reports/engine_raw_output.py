@@ -1,8 +1,8 @@
 import json
 
+from rct229.report_engine.rct_report import RCTReport
 from rct229.reports.utils import calc_vals_converter
 from rct229.rule_engine.rct_outcome_label import RCTOutcomeLabel
-from rct229.report_engine.rct_report import RCTReport
 
 
 class EngineRawOutput(RCTReport):

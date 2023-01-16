@@ -642,14 +642,14 @@
                       "interior_lighting": [
                         {
                           "id": "CORE_SPACE OFFICE WHOLEBUILDING - SM OFFICE LIGHTS",
-                          "power_per_area": 6.8889,
+                          "power_per_area": 8.826407,
                           "lighting_multiplier_schedule": "OFFICESMALL BLDG_LIGHT_SCH_2013",
                           "daylighting_control_type": "NONE",
                           "are_schedules_used_for_modeling_occupancy_control": true,
                           "are_schedules_used_for_modeling_daylighting_control": false
                         }
                       ],
-                      "lighting_space_type": "OFFICE_OPEN_PLAN",
+                      "lighting_space_type": "OFFICE_ENCLOSED",
                       "miscellaneous_equipment": [
                         {
                           "id": "CORE_SPACE OFFICE WHOLEBUILDING - SM OFFICE ELEC EQUIP",
@@ -883,14 +883,14 @@
                       "interior_lighting": [
                         {
                           "id": "PERIMETER-1_SPACE OFFICE WHOLEBUILDING - SM OFFICE LIGHTS",
-                          "power_per_area": 6.8889,
+                          "power_per_area": 8.826407,
                           "lighting_multiplier_schedule": "OFFICESMALL BLDG_LIGHT_SCH_2013",
                           "daylighting_control_type": "CONTINUOUS_DIMMING",
                           "are_schedules_used_for_modeling_occupancy_control": true,
                           "are_schedules_used_for_modeling_daylighting_control": false
                         }
                       ],
-                      "lighting_space_type": "RETAIL_FACILITIES_MALL_CONCOURSE",
+                      "lighting_space_type": "OFFICE_ENCLOSED",
                       "miscellaneous_equipment": [
                         {
                           "id": "PERIMETER-1_SPACE OFFICE WHOLEBUILDING - SM OFFICE ELEC EQUIP",
@@ -1124,7 +1124,7 @@
                       "interior_lighting": [
                         {
                           "id": "PERIMETER-2_SPACE OFFICE WHOLEBUILDING - SM OFFICE LIGHTS",
-                          "power_per_area": 6.8889,
+                          "power_per_area": 8.826407,
                           "lighting_multiplier_schedule": "OFFICESMALL BLDG_LIGHT_SCH_2013",
                           "daylighting_control_type": "CONTINUOUS_DIMMING",
                           "are_schedules_used_for_modeling_occupancy_control": true,
@@ -1365,7 +1365,7 @@
                       "interior_lighting": [
                         {
                           "id": "PERIMETER-3_SPACE OFFICE WHOLEBUILDING - SM OFFICE LIGHTS",
-                          "power_per_area": 6.8889,
+                          "power_per_area": 8.826407,
                           "lighting_multiplier_schedule": "OFFICESMALL BLDG_LIGHT_SCH_2013",
                           "daylighting_control_type": "CONTINUOUS_DIMMING",
                           "are_schedules_used_for_modeling_occupancy_control": true,
@@ -1606,14 +1606,14 @@
                       "interior_lighting": [
                         {
                           "id": "PERIMETER-4_SPACE OFFICE WHOLEBUILDING - SM OFFICE LIGHTS",
-                          "power_per_area": 6.8889,
+                          "power_per_area": 8.826407,
                           "lighting_multiplier_schedule": "OFFICESMALL BLDG_LIGHT_SCH_2013",
                           "daylighting_control_type": "CONTINUOUS_DIMMING",
                           "are_schedules_used_for_modeling_occupancy_control": true,
                           "are_schedules_used_for_modeling_daylighting_control": false
                         }
                       ],
-                      "lighting_space_type": "FOOD_PREPARATION_AREA",
+                      "lighting_space_type": "OFFICE_ENCLOSED",
                       "miscellaneous_equipment": [
                         {
                           "id": "PERIMETER-4_SPACE OFFICE WHOLEBUILDING - SM OFFICE ELEC EQUIP",
