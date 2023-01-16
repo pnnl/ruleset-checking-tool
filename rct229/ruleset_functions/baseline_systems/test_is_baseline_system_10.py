@@ -2,12 +2,13 @@ from rct229.ruleset_functions.baseline_systems.baseline_hvac_test_util import (
     load_system_test_file,
 )
 from rct229.ruleset_functions.baseline_systems.baseline_system_util import HVAC_SYS
-from rct229.ruleset_functions.baseline_systems.is_baseline_system_2 import (
-    is_baseline_system_2,
+from rct229.ruleset_functions.baseline_systems.is_baseline_system_10 import (
+    is_baseline_system_10,
 )
 from rct229.schema.validate import schema_validate_rmr
 
-SYS_2_TEST_RMD = {
+
+SYS_10_TEST_RMD = {
     "id": "ASHRAE229 1",
     "ruleset_model_instances": [
         {
@@ -26,30 +27,19 @@ SYS_2_TEST_RMD = {
                                     "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                     "terminals": [
                                         {
-                                            "id": "PTHP Terminal 1",
+                                            "id": "Air Terminal",
                                             "is_supply_ducted": True,
                                             "type": "CONSTANT_AIR_VOLUME",
-                                            "served_by_heating_ventilating_air_conditioning_system": "PTHP 1",
+                                            "served_by_heating_ventilating_air_conditioning_system": "System 10",
+                                            "heating_source": "ELECTRIC",
+                                            "fan": {"id": "Terminal Fan 1"},
                                         }
                                     ],
                                 }
                             ],
                             "heating_ventilating_air_conditioning_systems": [
                                 {
-                                    "id": "PTHP 1",
-                                    "cooling_system": {
-                                        "id": "HP Cooling Coil 1",
-                                        "cooling_system_type": "DIRECT_EXPANSION",
-                                    },
-                                    "heating_system": {
-                                        "id": "HP Heating Coil 1",
-                                        "heating_system_type": "HEAT_PUMP",
-                                    },
-                                    "fan_system": {
-                                        "id": "CAV Fan System 1",
-                                        "fan_control": "CONSTANT",
-                                        "supply_fans": [{"id": "Supply Fan 1"}],
-                                    },
+                                    "id": "System 10",
                                 }
                             ],
                         }
@@ -61,29 +51,31 @@ SYS_2_TEST_RMD = {
 }
 
 
-def test__TEST_RMD_baseline_system_2__is_valid():
-    schema_validation_result = schema_validate_rmr(SYS_2_TEST_RMD)
+def test__TEST_RMD_baseline_system_10_is_valid():
+    schema_validation_result = schema_validate_rmr(SYS_10_TEST_RMD)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"
 
 
-def test_is_baseline_system_2_true():
+def test_is_baseline__system_10():
     assert (
-        is_baseline_system_2(
-            SYS_2_TEST_RMD["ruleset_model_instances"][0],
-            "PTHP 1",
-            ["PTHP Terminal 1"],
+        is_baseline_system_10(
+            SYS_10_TEST_RMD["ruleset_model_instances"][0],
+            "System 10",
+            ["Air Terminal"],
             ["Thermal Zone 1"],
         )
-        == HVAC_SYS.SYS_2
+        == HVAC_SYS.SYS_10
     )
 
 
-def test_is_baseline_system_2_test_json_true():
-    assert is_baseline_system_2(
-        load_system_test_file("System_2_PTHP.json")["ruleset_model_instances"][0],
-        "PTHP 1",
-        ["PTHP Terminal 1"],
+def test_is_baseline_system_10_test_json_true():
+    assert is_baseline_system_10(
+        load_system_test_file("System_10_Warm_Air_Furnace_Elec.json")[
+            "ruleset_model_instances"
+        ][0],
+        "System 10",
+        ["Air Terminal"],
         ["Thermal Zone 1"],
     )

@@ -1,8 +1,8 @@
 import json
 
+from rct229.report_engine.rct_report import RCTReport
 from rct229.reports.utils import calc_vals_converter
 from rct229.rule_engine.rct_outcome_label import RCTOutcomeLabel
-from rct229.report_engine.rct_report import RCTReport
 
 
 class ASHRAE9012019DetailReport(RCTReport):
@@ -11,7 +11,7 @@ class ASHRAE9012019DetailReport(RCTReport):
         self.title = "ASHRAE STD 229P RULESET CHECKING TOOL"
         self.purpose = "Project Testing Report"
         self.ruleset = "ASHRAE 90.1-2019 Performance Rating Method (Appendix G)"
-        self.schema_version = "0.0.18"
+        self.schema_version = "0.0.23"
         self.ruleset_report_file = "ashrae901_2019_detail_report.json"
 
     def initialize_ruleset_report(self):
