@@ -1,4 +1,8 @@
+from rct229.data.schema_enums import schema_enums
 from rct229.utils.jsonpath_utils import find_exactly_one_with_field_value
+
+HEATING_SYSTEM = schema_enums["HeatingSystemOptions"]
+COOLING_SYSTEM = schema_enums["CoolingSystemOptions"]
 
 
 class HVAC_SYS:
@@ -176,3 +180,98 @@ def find_exactly_one_fluid_loop(rmi, loop_id):
         loop_id,
         rmi,
     )
+
+
+def has_heating_system(rmi, hvac_id):
+    """
+    Check whether the specified hvac system has a heating system.
+
+    Parameters
+    ----------
+    rmi json
+        A ruleset model instance for a RMD.
+
+    hvac_id str
+        The id of the hvac system to evaluate.
+
+    Returns
+    -------
+    If heating system exists, it returns true. Otherwise, it returns false.
+    """
+    heating_system = find_exactly_one_hvac_system(rmi, hvac_id).get("heating_system")
+
+    return (
+        heating_system is not None
+        and heating_system.get("heating_system_type") is not None
+        and heating_system["heating_system_type"] != HEATING_SYSTEM.NONE
+    )
+
+
+def has_cooling_system(rmi, hvac_id):
+    """
+    Check whether the specified hvac system has a cooling system.
+
+    Parameters
+    ----------
+    rmi json
+        A ruleset model instance for a RMD.
+
+    hvac_id str
+        The id of the hvac system to evaluate.
+
+    Returns
+    -------
+    If cooling system exists, it returns true. Otherwise, it returns false.
+    """
+    cooling_system = find_exactly_one_hvac_system(rmi, hvac_id).get("cooling_system")
+
+    return (
+        cooling_system is not None
+        and cooling_system.get("cooling_system_type") is not None
+        and cooling_system["cooling_system_type"] != COOLING_SYSTEM.NONE
+    )
+
+
+def has_preheat_system(rmi, hvac_id):
+    """
+    Check whether the specified hvac system has a preheat system.
+
+    Parameters
+    ----------
+    rmi json
+        A ruleset model instance for a RMD.
+
+    hvac_id str
+        The id of the hvac system to evaluate.
+
+    Returns
+    -------
+    If preheat system exists, it returns true. Otherwise, it returns false.
+    """
+    preheat_system = find_exactly_one_hvac_system(rmi, hvac_id).get("preheat_system")
+
+    return (
+        preheat_system is not None
+        and preheat_system.get("heating_system_type") is not None
+        and preheat_system["heating_system_type"] != HEATING_SYSTEM.NONE
+    )
+
+
+def has_fan_system(rmi, hvac_id):
+    """
+    Check whether the specified hvac system has a fan system.
+
+    Parameters
+    ----------
+    rmi json
+        A ruleset model instance for a RMD.
+
+    hvac_id str
+        The id of the hvac system to evaluate.
+
+    Returns
+    -------
+    If fan system exists, it returns true. Otherwise, it returns false.
+    """
+
+    return find_exactly_one_hvac_system(rmi, hvac_id).get("fan_system") is not None
