@@ -59,7 +59,8 @@
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
-                                                ]
+                                                ],
+												"design_thermostat_heating_setpoint": 20.000000000000057
                                             }
                                         ],
                                         "heating_ventilating_air_conditioning_systems": [

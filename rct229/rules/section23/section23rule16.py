@@ -2,6 +2,9 @@ from rct229.data.schema_enums import schema_enums
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
+from rct229.ruleset_functions.baseline_system_type_compare import (
+    baseline_system_type_compare,
+)
 from rct229.ruleset_functions.baseline_systems.baseline_system_util import (
     HVAC_SYS,
     find_exactly_one_fluid_loop,
@@ -32,7 +35,7 @@ class Section23Rule16(RuleDefinitionListIndexedBase):
     def __init__(self):
         super(Section23Rule16, self).__init__(
             rmrs_used=UserBaselineProposedVals(False, True, False),
-            each_rule=Section23Rule16.HeatingVentilatingAirConditioningRule(),
+            each_rule=Section23Rule16.HVACRule(),
             index_rmr="baseline",
             id="23-16",
             description="Systems 5 - 8, the baseline system shall be modeled with preheat coils controlled to a fixed set point 20F less than the design room heating temperature setpoint.",
@@ -46,17 +49,12 @@ class Section23Rule16(RuleDefinitionListIndexedBase):
     def is_applicable(self, context, data=None):
         rmi_b = context.baseline
         baseline_system_types_dict = get_baseline_system_types(rmi_b)
-        # create a list contains all HVAC systems that are modeled in the rmi_b
-        available_sys_types = [
-            hvac_type
-            for hvac_type in baseline_system_types_dict.keys()
-            if len(baseline_system_types_dict[hvac_type]) > 0
-        ]
 
         return any(
             [
-                available_type in APPLICABLE_SYS_TYPES
-                for available_type in available_sys_types
+                baseline_system_type_compare(system_type, applicable_sys_type, False)
+                for system_type in baseline_system_types_dict.keys()
+                for applicable_sys_type in APPLICABLE_SYS_TYPES
             ]
         )
 
@@ -99,70 +97,53 @@ class Section23Rule16(RuleDefinitionListIndexedBase):
             "hot_water_loop_type_dict": hot_water_loop_type_dict,
         }
 
-    class HeatingVentilatingAirConditioningRule(RuleDefinitionListIndexedBase):
+    class HVACRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section23Rule16.HeatingVentilatingAirConditioningRule, self).__init__(
+            super(Section23Rule16.HVACRule, self,).__init__(
                 rmrs_used=UserBaselineProposedVals(False, True, False),
-                each_rule=Section23Rule16.HeatingVentilatingAirConditioningRule.PreheatSystemRule(),
-                index_rmr="baseline",
-                list_path="$.preheat_system",
+                required_fields={
+                    "$": ["id", "preheat_system"],
+                    "preheat_system": [
+                        "heating_system_type",
+                        "hot_water_loop",
+                        "heating_coil_setpoint",
+                    ],
+                },
             )
 
-        def create_data(self, context, data):
+        def get_calc_vals(self, context, data=None):
             heating_ventilating_air_conditioning_systems_b = context.baseline
 
-            return {"system_id": heating_ventilating_air_conditioning_systems_b["id"]}
+            hvac_id = heating_ventilating_air_conditioning_systems_b["id"]
+            preheat_system_b = heating_ventilating_air_conditioning_systems_b[
+                "preheat_system"
+            ]
+            heating_system_type = preheat_system_b["heating_system_type"]
+            hot_water_loop_type = data["hot_water_loop_type_dict"][
+                preheat_system_b["hot_water_loop"]
+            ]
+            heating_coil_setpoint = preheat_system_b["heating_coil_setpoint"]
+            hvac_max_zone_setpoint = data["hvac_max_zone_setpoint_dict"][hvac_id]
 
-        class PreheatSystemRule(RuleDefinitionBase):
-            def __init__(self):
-                super(
-                    Section23Rule16.HeatingVentilatingAirConditioningRule.PreheatSystemRule,
-                    self,
-                ).__init__(
-                    rmrs_used=UserBaselineProposedVals(False, True, False),
-                    required_fields={
-                        "$": [
-                            "heating_system_type",
-                            "hot_water_loop",
-                            "heating_coil_setpoint",
-                        ],
-                    },
+            return {
+                "hvac_id": hvac_id,
+                "heating_system_type_b": heating_system_type,
+                "hot_water_loop_type": hot_water_loop_type,
+                "heating_coil_setpoint": CalcQ("temperature", heating_coil_setpoint),
+                "hvac_max_zone_setpoint": CalcQ("temperature", hvac_max_zone_setpoint),
+            }
+
+        def rule_check(self, context, calc_vals=None, data=None):
+            heating_system_type_b = calc_vals["heating_system_type_b"]
+            hot_water_loop_type = calc_vals["hot_water_loop_type"]
+            heating_coil_setpoint = calc_vals["heating_coil_setpoint"]
+            hvac_max_zone_setpoint = calc_vals["hvac_max_zone_setpoint"]
+
+            return (
+                heating_system_type_b == HEATING_SYSTEM.FLUID_LOOP
+                and hot_water_loop_type == Fluid_Loop.HEATING
+                and std_equal(
+                    heating_coil_setpoint,
+                    hvac_max_zone_setpoint - TENP_20_degF,
                 )
-
-            def get_calc_vals(self, context, data=None):
-                preheat_system_b = context.baseline
-
-                heating_system_type = preheat_system_b["heating_system_type"]
-                hot_water_loop_type = data["hot_water_loop_type_dict"][
-                    preheat_system_b["hot_water_loop"]
-                ]
-                heating_coil_setpoint = preheat_system_b["heating_coil_setpoint"]
-                hvac_max_zone_setpoint = data["hvac_max_zone_setpoint_dict"][
-                    data["system_id"]
-                ]
-
-                return {
-                    "heating_system_type_b": heating_system_type,
-                    "hot_water_loop_type": hot_water_loop_type,
-                    "heating_coil_setpoint": CalcQ(
-                        "temperature", heating_coil_setpoint
-                    ),
-                    "hvac_max_zone_setpoint": CalcQ(
-                        "temperature", hvac_max_zone_setpoint
-                    ),
-                }
-
-            def rule_check(self, context, calc_vals=None, data=None):
-                heating_system_type_b = calc_vals["heating_system_type_b"]
-                hot_water_loop_type = calc_vals["hot_water_loop_type"]
-                heating_coil_setpoint = calc_vals["heating_coil_setpoint"]
-                hvac_max_zone_setpoint = calc_vals["hvac_max_zone_setpoint"]
-
-                return (
-                    heating_system_type_b == HEATING_SYSTEM.FLUID_LOOP
-                    and hot_water_loop_type == Fluid_Loop.HEATING
-                    and std_equal(
-                        heating_coil_setpoint,
-                        hvac_max_zone_setpoint - TENP_20_degF,
-                    )
-                )
+            )
