@@ -155,7 +155,7 @@ def test_has_cooling_system_true():
     )
 
 
-def test_has_cooling_system_true():
+def test_has_cooling_system_fail():
     assert (
         has_cooling_system(TEST_RMD_FAIL["ruleset_model_instances"][0], "PTHP 1")
         == False

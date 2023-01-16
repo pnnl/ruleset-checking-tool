@@ -153,23 +153,23 @@ def find_exactly_one_fluid_loop(rmi, loop_id):
     )
 
 
-def has_heating_system(rmi_b, hvac_b_id):
+def has_heating_system(rmi, hvac_id):
     """
-    Check whether heating system exists or not.
+    Check whether the specified hvac system has a heating system.
 
     Parameters
     ----------
-    rmi_b json
-        To evaluate if the hvac system is modeled as Sys-2 in the B_RMI.
+    rmi json
+        A ruleset model instance for a RMD.
 
-    hvac_b_id list
+    hvac_id str
         The id of the hvac system to evaluate.
 
     Returns
     -------
     If heating system exists, it returns true. Otherwise, it returns false.
     """
-    heating_system = find_exactly_one_hvac_system(rmi_b, hvac_b_id).get(
+    heating_system = find_exactly_one_hvac_system(rmi, hvac_id).get(
         "heating_system"
     )
 
@@ -180,23 +180,23 @@ def has_heating_system(rmi_b, hvac_b_id):
     )
 
 
-def has_cooling_system(rmi_b, hvac_b_id):
+def has_cooling_system(rmi, hvac_id):
     """
-    Check whether cooling system exists or not.
+    Check whether the specified hvac system has a cooling system.
 
     Parameters
     ----------
-    rmi_b json
-        To evaluate if the hvac system is modeled as Sys-2 in the B_RMI.
+    rmi json
+        A ruleset model instance for a RMD.
 
-    hvac_b_id list
+    hvac_id str
         The id of the hvac system to evaluate.
 
     Returns
     -------
     If cooling system exists, it returns true. Otherwise, it returns false.
     """
-    cooling_system = find_exactly_one_hvac_system(rmi_b, hvac_b_id).get(
+    cooling_system = find_exactly_one_hvac_system(rmi, hvac_id).get(
         "cooling_system"
     )
 
@@ -207,23 +207,23 @@ def has_cooling_system(rmi_b, hvac_b_id):
     )
 
 
-def has_preheat_system(rmi_b, hvac_b_id):
+def has_preheat_system(rmi, hvac_id):
     """
-    Check whether preheat system exists or not.
+    Check whether the specified hvac system has a preheat system.
 
     Parameters
     ----------
-    rmi_b json
-        To evaluate if the hvac system is modeled as Sys-2 in the B_RMI.
+    rmi json
+        A ruleset model instance for a RMD.
 
-    hvac_b_id list
+    hvac_id str
         The id of the hvac system to evaluate.
 
     Returns
     -------
     If preheat system exists, it returns true. Otherwise, it returns false.
     """
-    preheat_system = find_exactly_one_hvac_system(rmi_b, hvac_b_id).get(
+    preheat_system = find_exactly_one_hvac_system(rmi, hvac_id).get(
         "preheat_system"
     )
 
@@ -234,16 +234,16 @@ def has_preheat_system(rmi_b, hvac_b_id):
     )
 
 
-def has_fan_system(rmi_b, hvac_b_id):
+def has_fan_system(rmi, hvac_id):
     """
-    Check whether fan system exists or not.
+    Check whether the specified hvac system has a fan system.
 
     Parameters
     ----------
-    rmi_b json
-        To evaluate if the hvac system is modeled as Sys-2 in the B_RMI.
+    rmi json
+        A ruleset model instance for a RMD.
 
-    hvac_b_id list
+    hvac_id str
         The id of the hvac system to evaluate.
 
     Returns
@@ -251,4 +251,4 @@ def has_fan_system(rmi_b, hvac_b_id):
     If fan system exists, it returns true. Otherwise, it returns false.
     """
 
-    return find_exactly_one_hvac_system(rmi_b, hvac_b_id).get("fan_system") is not None
+    return find_exactly_one_hvac_system(rmi, hvac_id).get("fan_system") is not None
