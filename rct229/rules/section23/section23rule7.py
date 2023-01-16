@@ -23,7 +23,7 @@ class Section23Rule7(RuleDefinitionListIndexedBase):
     def __init__(self):
         super(Section23Rule7, self).__init__(
             rmrs_used=UserBaselineProposedVals(False, True, False),
-            each_rule=Section23Rule7.HeatingVentilatingAirConditioningSystemRule(),
+            each_rule=Section23Rule7.HVACRule(),
             index_rmr="baseline",
             id="23-7",
             description="Systems 6&8: Supply air temperature setpoint shall be constant at the design condition.",
@@ -49,18 +49,16 @@ class Section23Rule7(RuleDefinitionListIndexedBase):
             ]
         )
 
-    class HeatingVentilatingAirConditioningSystemRule(RuleDefinitionBase):
+    class HVACRule(RuleDefinitionBase):
         def __init__(self):
-            super(
-                Section23Rule7.HeatingVentilatingAirConditioningSystemRule, self
-            ).__init__(
+            super(Section23Rule7.HVACRule, self).__init__(
                 rmrs_used=UserBaselineProposedVals(False, True, False),
-                # required_fields={
-                #     "$": ["fan_system"],
-                #     "fan_system": [
-                #         "temperature_control",
-                #     ],
-                # },
+                required_fields={
+                    "$": ["fan_system"],
+                    "fan_system": [
+                        "temperature_control",
+                    ],
+                },
             )
 
         def get_calc_vals(self, context, data=None):
