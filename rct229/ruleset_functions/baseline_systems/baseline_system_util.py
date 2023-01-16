@@ -29,7 +29,6 @@ class HVAC_SYS:
     SYS_9 = "Sys-9"
     SYS_9B = "Sys-9b"
     SYS_10 = "Sys-10"
-    SYS_11B = "Sys-11b"
     SYS_11_1 = "Sys-11.1"
     SYS_11_1A = "Sys-11.1a"
     SYS_11_1B = "Sys-11.1b"

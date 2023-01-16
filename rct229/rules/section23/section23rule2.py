@@ -2,6 +2,9 @@ from rct229.data.schema_enums import schema_enums
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
+from rct229.ruleset_functions.baseline_system_type_compare import (
+    baseline_system_type_compare,
+)
 from rct229.ruleset_functions.baseline_systems.baseline_system_util import HVAC_SYS
 from rct229.ruleset_functions.get_baseline_system_types import get_baseline_system_types
 from rct229.schema.config import ureg
@@ -40,27 +43,27 @@ class Section23Rule2(RuleDefinitionListIndexedBase):
     def is_applicable(self, context, data=None):
         rmi_b = context.baseline
         baseline_system_types_dict = get_baseline_system_types(rmi_b)
-        # create a list containing all HVAC systems that are modeled in the rmi_b
-        available_sys_types = [
-            hvac_type
-            for hvac_type in baseline_system_types_dict.keys()
-            if len(baseline_system_types_dict[hvac_type]) > 0
-        ]
 
         return any(
             [
-                available_type in APPLICABLE_SYS_TYPES
-                for available_type in available_sys_types
+                baseline_system_type_compare(system_type, applicable_sys_type, False)
+                for system_type in baseline_system_types_dict.keys()
+                for applicable_sys_type in APPLICABLE_SYS_TYPES
             ]
         )
 
     class HeatingVentilatingAirConditioningSystemRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section23Rule2.HeatingVentilatingAirConditioningSystemRule, self).__init__(
+            super(
+                Section23Rule2.HeatingVentilatingAirConditioningSystemRule, self
+            ).__init__(
                 rmrs_used=UserBaselineProposedVals(False, True, False),
                 required_fields={
                     "$": ["fan_system"],
-                    "fan_system": ["temperature_control", "reset_differential_temperature"],
+                    "fan_system": [
+                        "temperature_control",
+                        "reset_differential_temperature",
+                    ],
                 },
             )
 
