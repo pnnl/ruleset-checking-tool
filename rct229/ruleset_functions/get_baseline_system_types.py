@@ -34,6 +34,9 @@ from rct229.ruleset_functions.baseline_systems.is_baseline_system_7 import (
 from rct229.ruleset_functions.baseline_systems.is_baseline_system_8 import (
     is_baseline_system_8,
 )
+from rct229.ruleset_functions.baseline_systems.is_baseline_system_9 import (
+    is_baseline_system_9,
+)
 from rct229.ruleset_functions.baseline_systems.is_baseline_system_10 import (
     is_baseline_system_10,
 )
@@ -159,6 +162,14 @@ def get_baseline_system_types(rmi_b):
 
             # HVAC system type 8
             hvac_sys = is_baseline_system_8(
+                rmi_b, hvac_b_id, terminal_unit_id_list, zone_id_list
+            )
+            if hvac_sys != HVAC_SYS.UNMATCHED:
+                baseline_hvac_system_dict[hvac_sys].append(hvac_b_id)
+                continue
+
+            # HVAC system type 9
+            hvac_sys = is_baseline_system_9(
                 rmi_b, hvac_b_id, terminal_unit_id_list, zone_id_list
             )
             if hvac_sys != HVAC_SYS.UNMATCHED:

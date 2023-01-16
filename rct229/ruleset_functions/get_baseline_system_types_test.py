@@ -23,6 +23,9 @@ from rct229.ruleset_functions.baseline_systems.test_is_baseline_system_7 import 
 from rct229.ruleset_functions.baseline_systems.test_is_baseline_system_8 import (
     SYS_8_TEST_RMD,
 )
+from rct229.ruleset_functions.baseline_systems.test_is_baseline_system_9 import (
+    SYS_9_TEST_RMD,
+)
 from rct229.ruleset_functions.baseline_systems.test_is_baseline_system_10 import (
     SYS_10_TEST_RMD,
 )
@@ -165,6 +168,23 @@ def test_get_baseline_system_types__system_8():
     ]
 
     test_types = [HVAC_SYS.SYS_8, HVAC_SYS.SYS_8A, HVAC_SYS.SYS_8B, HVAC_SYS.SYS_8C]
+
+    assert any(
+        [available_type in test_types for available_type in available_type_lists]
+    )
+
+
+def test_get_baseline_system_types__system_9():
+    baseline_system_types_dict = get_baseline_system_types(
+        SYS_9_TEST_RMD["ruleset_model_instances"][0]
+    )
+    available_type_lists = [
+        hvac_type
+        for hvac_type in baseline_system_types_dict.keys()
+        if len(baseline_system_types_dict[hvac_type]) > 0
+    ]
+
+    test_types = [HVAC_SYS.SYS_9, HVAC_SYS.SYS_9B]
 
     assert any(
         [available_type in test_types for available_type in available_type_lists]
