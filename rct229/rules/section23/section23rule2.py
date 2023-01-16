@@ -29,7 +29,7 @@ class Section23Rule2(RuleDefinitionListIndexedBase):
     def __init__(self):
         super(Section23Rule2, self).__init__(
             rmrs_used=UserBaselineProposedVals(False, True, False),
-            each_rule=Section23Rule2.HeatingVentilatingAirConditioningSystemRule(),
+            each_rule=Section23Rule2.HVACRule(),
             index_rmr="baseline",
             id="23-2",
             description="For baseline systems 5-8 and 11, the SAT is reset higher by 5F under minimum cooling load conditions.",
@@ -52,11 +52,9 @@ class Section23Rule2(RuleDefinitionListIndexedBase):
             ]
         )
 
-    class HeatingVentilatingAirConditioningSystemRule(RuleDefinitionBase):
+    class HVACRule(RuleDefinitionBase):
         def __init__(self):
-            super(
-                Section23Rule2.HeatingVentilatingAirConditioningSystemRule, self
-            ).__init__(
+            super(Section23Rule2.HVACRule, self).__init__(
                 rmrs_used=UserBaselineProposedVals(False, True, False),
                 required_fields={
                     "$": ["fan_system"],
