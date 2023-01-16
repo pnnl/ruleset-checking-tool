@@ -37,7 +37,9 @@ from rct229.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.is_hv
 )
 from rct229.ruleset_functions.baseline_systems.baseline_system_util import (
     HVAC_SYS,
-    find_exactly_one_hvac_system,
+    has_cooling_system,
+    has_heating_system,
+    has_preheat_system,
 )
 
 HEATING_SYSTEM = schema_enums["HeatingSystemOptions"]
@@ -66,32 +68,17 @@ def is_baseline_system_5(rmi_b, hvac_b_id, terminal_unit_id_list, zone_id_list):
 
     is_baseline_system_5 = HVAC_SYS.UNMATCHED
 
-    hvac_b = find_exactly_one_hvac_system(rmi_b, hvac_b_id)
     # check if the hvac system has the required sub systems for system type 5
-    heating_system = hvac_b.get("heating_system")
-    has_required_heating_sys = (
-        heating_system is None
-        or heating_system.get("heating_system_type") is None
-        or heating_system["heating_system_type"] == HEATING_SYSTEM.NONE
-    )
-
-    has_required_preheat_sys = (
-        hvac_b.get("preheat_system")
-        is not None  # if preheat system exists, the number must be 1.
-    )
-
-    cooling_system = hvac_b.get("cooling_system")
-    has_required_cooling_sys = (
-        cooling_system is not None
-        and cooling_system.get("cooling_system_type") is not None
-        and cooling_system["cooling_system_type"] != COOLING_SYSTEM.NONE
+    # if heating system DOESN'T exist and preheat/cooling systems exist,  has_required_sys=True, else, False
+    has_required_sys = (
+        has_preheat_system(rmi_b, hvac_b_id)
+        and not has_heating_system(rmi_b, hvac_b_id)
+        and has_cooling_system(rmi_b, hvac_b_id)
     )
 
     are_sys_data_matched = (
         # short-circuit the logic if no required data is found.
-        has_required_heating_sys
-        and has_required_preheat_sys
-        and has_required_cooling_sys
+        has_required_sys
         # sub functions handles missing required sys, and return False.
         and is_hvac_sys_preheating_type_fluid_loop(rmi_b, hvac_b_id)
         and is_hvac_sys_cooling_type_dx(rmi_b, hvac_b_id)

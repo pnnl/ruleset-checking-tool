@@ -37,7 +37,9 @@ from rct229.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.is_hv
 )
 from rct229.ruleset_functions.baseline_systems.baseline_system_util import (
     HVAC_SYS,
-    find_exactly_one_hvac_system,
+    has_fan_system,
+    has_heating_system,
+    has_preheat_system,
 )
 
 HEATING_SYSTEM = schema_enums["HeatingSystemOptions"]
@@ -65,29 +67,17 @@ def is_baseline_system_10(rmi_b, hvac_b_id, terminal_unit_id_list, zone_id_list)
 
     is_baseline_system_10 = HVAC_SYS.UNMATCHED
 
-    hvac_b = find_exactly_one_hvac_system(rmi_b, hvac_b_id)
-
     # check if the hvac system has the required sub systems for system type 10
-    preheat_system = hvac_b.get("preheat_system")
-    has_required_preheat_sys = (
-        preheat_system is None
-        or preheat_system.get("heating_system_type") is None
-        or preheat_system["heating_system_type"] == HEATING_SYSTEM.NONE
+    # if preheat, heating, and fan systems DON'T exist, has_required_sys=True, else, False
+    has_required_sys = not (
+        has_preheat_system(rmi_b, hvac_b_id)
+        and has_heating_system(rmi_b, hvac_b_id)
+        and has_fan_system(rmi_b, hvac_b_id)
     )
-
-    heating_system = hvac_b.get("heating_system")
-    has_required_heating_sys = not (
-        heating_system is not None
-        and heating_system.get("heating_system_type") is not None
-        and heating_system["heating_system_type"] != HEATING_SYSTEM.NONE
-    )
-
-    has_required_fan_sys = hvac_b.get("fan_system") is None
 
     are_sys_10_data_matched = (
-        has_required_preheat_sys
-        and has_required_heating_sys
-        and has_required_fan_sys
+        # short-circuit the logic if no required data is found.
+        has_required_sys
         # sub functions handles missing required sys, and return False.
         and is_hvac_sys_cooling_type_none(rmi_b, hvac_b_id)
         and does_each_zone_have_only_one_terminal(rmi_b, zone_id_list)
@@ -104,21 +94,15 @@ def is_baseline_system_10(rmi_b, hvac_b_id, terminal_unit_id_list, zone_id_list)
         return is_baseline_system_10
 
     # When the first logic of are_sys_10_data_matched is false
-    has_required_heating_sys = (
-        hvac_b.get("heating_system") is not None
-        and hvac_b["heating_system"].get("heating_system_type") is not None
-        and hvac_b["heating_system"]["heating_system_type"] != HEATING_SYSTEM.NONE
-    )
-
-    has_required_preheat_sys = (
-        hvac_b.get("preheat_system") is None
-        or hvac_b["preheat_system"].get("heating_system_type") is None
-        or hvac_b["preheat_system"]["heating_system_type"] == HEATING_SYSTEM.NONE
+    # if preheat system DOESN'T exist and heating/fan systems exist, has_required_sys=True, else, False
+    has_required_sys = (
+        not has_preheat_system(rmi_b, hvac_b_id)
+        and has_heating_system(rmi_b, hvac_b_id)
+        and has_fan_system(rmi_b, hvac_b_id)
     )
 
     are_sys_10_data_matched = (
-        has_required_heating_sys
-        and has_required_preheat_sys
+        has_required_sys
         # sub functions handles missing required sys, and return False.
         and is_hvac_sys_fan_sys_cv(rmi_b, hvac_b_id)
         and does_hvac_system_serve_single_zone(rmi_b, zone_id_list)
