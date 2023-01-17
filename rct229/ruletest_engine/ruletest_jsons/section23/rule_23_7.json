@@ -54,7 +54,8 @@
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 6",
-                                                        "heating_source": "ELECTRIC"
+                                                        "heating_source": "ELECTRIC",
+                                                        "fan_configuration": "PARALLEL"
                                                     }
                                                 ]
                                             }
@@ -151,7 +152,8 @@
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 6",
-                                                        "heating_source": "ELECTRIC"
+                                                        "heating_source": "ELECTRIC",
+                                                        "fan_configuration": "PARALLEL"
                                                     }
                                                 ]
                                             }
