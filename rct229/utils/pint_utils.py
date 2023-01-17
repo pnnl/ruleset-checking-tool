@@ -30,6 +30,7 @@ _UNIT_CONVENTIONS = {
         "cooling_efficiency": "W/W",
         "power_per_volumetric_flow_rate": "W-s/L",
         "power_per_flow_rate": "W-s/L",
+        "air_flow_rate": "L/s",
     },
     UNIT_SYSTEM.IP: {
         "transformer_capacity": "V*A",
@@ -46,6 +47,7 @@ _UNIT_CONVENTIONS = {
         "cooling_efficiency": "kW/ton",
         "power_per_volumetric_flow_rate": "W/gpm",
         "power_per_flow_rate": "W/gpm",
+        "air_flow_rate": "cfm",
     },
 }
 
