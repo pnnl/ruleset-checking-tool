@@ -19,6 +19,8 @@
 
 1. get_baseline_system_types()
 2. baseline_system_type_compare()
+3. get_dict_of_zones_and_terminal_units_served_by_hvac_sys() 
+4. baseline_system_type_compare() 
 
 
 **Applicability Checks:**  
@@ -37,19 +39,17 @@
     - add the hvac_ids for this system type to the list of eligible_systems: `eligible_systems += baseline_hvac_system_dict[baseline_system_type]`
 
 
-- For each zone in B_RMR: `for zone_b in B_RMI...zones:`
+- get a dictionary of hvac systems, their zones and terminal units using the function get_dict_of_zones_and_terminal_units_served_by_hvac_sys : `dict_of_zones_and_terminal_units_served_by_hvac_sys = get_dict_of_zones_and_terminal_units_served_by_hvac_sys(B_RMI)`
+- loop through the hvac systems in the dictionary: `for hvac_b_id in dict_of_zones_and_terminal_units_served_by_hvac_sys:`
+  - Check if HVAC system is type 6, 8, 8a, 6b, 8b: `if hvac_b_id in eligible_systems:`
+    - we do the rule check for each terminal: `for terminal_b_id in dict_of_zones_and_terminal_units_served_by_hvac_sys[hvac_b_id]["Terminal_Unit_List"]:`
+      - get the terminal unit associated with the id: `terminal_b = match_data_element(B_RMI,Terminal,terminal_b_id)`
 
-  - For each terminal in zone: `for terminal_b in zone_b.terminals:`
+**Rule Assertion:**
 
-    - Get HVAC system serving terminal: `hvac_b = terminal_b.served_by_heating_ventilating_air_conditioning_system`
-  
-      - Check if HVAC system is type 6, 8, 8a, 6b, 8b: `if hvac_b.id in eligible_systems:`
+      - Case 1: For each terminal that is served by HVAC system that is Type-6, 8, 8a, 6b, 8b, if fan in parallel VAV-powered box is sized for 50% of the peak design primary air (from the VAV air-handling unit) flow rate (CFM) and is modeled with 0.35W/cfm fan power: `if ( terminal_b.fan.design_airflow == terminal_b.primary_airflow * 0.5 ) AND ( terminal_b.fan.design_electric_power == 0.35 * terminal_b.fan.design_airflow ): PASS`
 
-        **Rule Assertion:**
-
-        - Case 1: For each terminal that is served by HVAC system that is Type-6, 8, 8a, 6b, 8b, if fan in parallel VAV-powered box is sized for 50% of the peak design primary air (from the VAV air-handling unit) flow rate (CFM) and is modeled with 0.35W/cfm fan power: `if ( terminal_b.fan.design_airflow == terminal_b.primary_airflow * 0.5 ) AND ( terminal_b.fan.design_electric_power == 0.35 * terminal_b.fan.design_airflow ): PASS`
-
-        - Case 2: Else: `else: FAIL`
+      - Case 2: Else: `else: FAIL`
         
 **Notes:**
 1. Updated the Rule ID from 23-5 to 23-6 on 11/28/2022
