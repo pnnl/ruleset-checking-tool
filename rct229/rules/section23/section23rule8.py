@@ -96,12 +96,19 @@ class Section23Rule8(RuleDefinitionListIndexedBase):
                 for idx in range(11)
             ]
 
-            for output, target in zip(
-                output_validation_points, target_validation_points
-            ):
-                if (
-                    std_equal(output[0], target[0]) == False
-                    or std_equal(output[1], target[1]) == False
-                ):
-                    return False
-            return True
+            return all(
+                list(
+                    map(
+                        lambda x, y: std_equal(x[0], y[0]),
+                        output_validation_points,
+                        target_validation_points,
+                    )
+                )
+                and list(
+                    map(
+                        lambda x, y: std_equal(x[1], y[1]),
+                        output_validation_points,
+                        target_validation_points,
+                    )
+                )
+            )
