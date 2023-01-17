@@ -61,6 +61,7 @@
                                                         "type": "VARIABLE_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 6",
                                                         "heating_source": "ELECTRIC",
+                                                        "fan_configuration": "PARALLEL",
                                                         "primary_airflow": 188.77897727999994,
                                                         "fan": {
                                                             "id": "Fan 2",
@@ -169,6 +170,7 @@
                                                         "type": "VARIABLE_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 6",
                                                         "heating_source": "ELECTRIC",
+                                                        "fan_configuration": "PARALLEL",
                                                         "primary_airflow": 160.46213068799995,
                                                         "fan": {
                                                             "id": "Fan 2",
