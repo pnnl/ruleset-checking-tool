@@ -7,12 +7,6 @@ from rct229.ruleset_functions.baseline_systems.baseline_system_util import HVAC_
 from rct229.ruleset_functions.baseline_systems.is_baseline_system_1 import (
     is_baseline_system_1,
 )
-from rct229.ruleset_functions.baseline_systems.is_baseline_system_1_a import (
-    is_baseline_system_1_a,
-)
-from rct229.ruleset_functions.baseline_systems.is_baseline_system_1_c import (
-    is_baseline_system_1_c,
-)
 from rct229.ruleset_functions.baseline_systems.is_baseline_system_2 import (
     is_baseline_system_2,
 )
@@ -76,6 +70,24 @@ def get_baseline_system_types(rmi_b):
     i.e. {"SYS-3": ["hvac_id_1", "hvac_id_10"], "SYS-7A": ["hvac_id_3", "hvac_id_17", "hvac_id_6], "SYS-9": ["hvac_id_2"]}
     -------
     """
+
+    baseline_system_type_checks = [
+        is_baseline_system_1,
+        is_baseline_system_2,
+        is_baseline_system_3,
+        is_baseline_system_4,
+        is_baseline_system_5,
+        is_baseline_system_6,
+        is_baseline_system_7,
+        is_baseline_system_8,
+        is_baseline_system_9,
+        is_baseline_system_10,
+        is_baseline_system_11_1,
+        is_baseline_system_11_2,
+        is_baseline_system_12,
+        is_baseline_system_13,
+    ]
+
     # A list of the attribute values from the HVAC_SYS class
     hvac_sys_list = [
         i[1]
@@ -103,134 +115,32 @@ def get_baseline_system_types(rmi_b):
             len(dict_with_terminal_units_and_zones[terminal_id]) == 1
             for terminal_id in terminal_unit_id_list
         ):
-            # HVAC system type 1
-            hvac_sys = is_baseline_system_1(
-                rmi_b, hvac_b_id, terminal_unit_id_list, zone_id_list
-            )
-            if hvac_sys != HVAC_SYS.UNMATCHED:
-                baseline_hvac_system_dict[hvac_sys].append(hvac_b_id)
-                # added to the dictionary, move to next iteration
-                continue
+            for sys_check in baseline_system_type_checks:
+                hvac_sys = sys_check(
+                    rmi_b, hvac_b_id, terminal_unit_id_list, zone_id_list
+                )
 
-            # HVAC system type 2
-            hvac_sys = is_baseline_system_2(
-                rmi_b, hvac_b_id, terminal_unit_id_list, zone_id_list
-            )
-            if hvac_sys != HVAC_SYS.UNMATCHED:
-                baseline_hvac_system_dict[hvac_sys].append(hvac_b_id)
-                continue
-
-            # HVAC system type 3
-            hvac_sys = is_baseline_system_3(
-                rmi_b, hvac_b_id, terminal_unit_id_list, zone_id_list
-            )
-            if hvac_sys != HVAC_SYS.UNMATCHED:
-                baseline_hvac_system_dict[hvac_sys].append(hvac_b_id)
-                continue
-
-            # HVAC system type 4
-            hvac_sys = is_baseline_system_4(
-                rmi_b, hvac_b_id, terminal_unit_id_list, zone_id_list
-            )
-            if hvac_sys != HVAC_SYS.UNMATCHED:
-                baseline_hvac_system_dict[hvac_sys].append(hvac_b_id)
-                continue
-
-            # HVAC system type 5
-            hvac_sys = is_baseline_system_5(
-                rmi_b, hvac_b_id, terminal_unit_id_list, zone_id_list
-            )
-            if hvac_sys != HVAC_SYS.UNMATCHED:
-                baseline_hvac_system_dict[hvac_sys].append(hvac_b_id)
-                continue
-
-            # HVAC system type 6
-            hvac_sys = is_baseline_system_6(
-                rmi_b, hvac_b_id, terminal_unit_id_list, zone_id_list
-            )
-            if hvac_sys != HVAC_SYS.UNMATCHED:
-                baseline_hvac_system_dict[hvac_sys].append(hvac_b_id)
-                continue
-
-            # HVAC system type 7
-            hvac_sys = is_baseline_system_7(
-                rmi_b, hvac_b_id, terminal_unit_id_list, zone_id_list
-            )
-            if hvac_sys != HVAC_SYS.UNMATCHED:
-                baseline_hvac_system_dict[hvac_sys].append(hvac_b_id)
-                continue
-
-            # HVAC system type 8
-            hvac_sys = is_baseline_system_8(
-                rmi_b, hvac_b_id, terminal_unit_id_list, zone_id_list
-            )
-            if hvac_sys != HVAC_SYS.UNMATCHED:
-                baseline_hvac_system_dict[hvac_sys].append(hvac_b_id)
-                continue
-
-            # HVAC system type 9
-            hvac_sys = is_baseline_system_9(
-                rmi_b, hvac_b_id, terminal_unit_id_list, zone_id_list
-            )
-            if hvac_sys != HVAC_SYS.UNMATCHED:
-                baseline_hvac_system_dict[hvac_sys].append(hvac_b_id)
-                continue
-
-            # HVAC system type 10
-            hvac_sys = is_baseline_system_10(
-                rmi_b, hvac_b_id, terminal_unit_id_list, zone_id_list
-            )
-            if hvac_sys != HVAC_SYS.UNMATCHED:
-                baseline_hvac_system_dict[hvac_sys].append(hvac_b_id)
-                continue
-
-            # HVAC system type 11.1
-            hvac_sys = is_baseline_system_11_1(
-                rmi_b, hvac_b_id, terminal_unit_id_list, zone_id_list
-            )
-            if hvac_sys != HVAC_SYS.UNMATCHED:
-                baseline_hvac_system_dict[hvac_sys].append(hvac_b_id)
-                continue
-
-            # HVAC system type 11.2
-            hvac_sys = is_baseline_system_11_2(
-                rmi_b, hvac_b_id, terminal_unit_id_list, zone_id_list
-            )
-            if hvac_sys != HVAC_SYS.UNMATCHED:
-                baseline_hvac_system_dict[hvac_sys].append(hvac_b_id)
-                continue
-
-            # HVAC system type 12
-            hvac_sys = is_baseline_system_12(
-                rmi_b, hvac_b_id, terminal_unit_id_list, zone_id_list
-            )
-            if hvac_sys != HVAC_SYS.UNMATCHED:
-                baseline_hvac_system_dict[hvac_sys].append(hvac_b_id)
-                continue
-
-            # HVAC system type 13
-            hvac_sys = is_baseline_system_13(
-                rmi_b, hvac_b_id, terminal_unit_id_list, zone_id_list
-            )
-            if hvac_sys != HVAC_SYS.UNMATCHED:
-                baseline_hvac_system_dict[hvac_sys].append(hvac_b_id)
-                continue
+                if hvac_sys != HVAC_SYS.UNMATCHED:
+                    baseline_hvac_system_dict[hvac_sys].append(hvac_b_id)
+                    sys_found = True
+                    break
 
             # Add error handling
-            hvac_sys_count = len(
-                [
-                    hvac_b_id
-                    for hvac_sys_key in baseline_hvac_system_dict.keys()
-                    if hvac_b_id in baseline_hvac_system_dict[hvac_sys_key]
-                ]
-            )
-            if hvac_sys_count == 0:
-                raise RCTFailureException(
-                    f"Error: HVAC {hvac_b_id} does not match any baseline system type."
+            if not sys_found:
+                hvac_sys_count = len(
+                    [
+                        hvac_b_id
+                        for hvac_sys_key in baseline_hvac_system_dict.keys()
+                        if hvac_b_id in baseline_hvac_system_dict[hvac_sys_key]
+                    ]
                 )
-            elif hvac_sys_count > 1:
-                raise RCTFailureException(
-                    f"Error: HVAC {hvac_b_id} matches to multiple baseline system types - check your RMD models"
-                )
+                if hvac_sys_count == 0:
+                    raise RCTFailureException(
+                        f"Error: HVAC {hvac_b_id} does not match any baseline system type."
+                    )
+                elif hvac_sys_count > 1:
+                    raise RCTFailureException(
+                        f"Error: HVAC {hvac_b_id} matches to multiple baseline system types - check your RMD models"
+                    )
 
     return baseline_hvac_system_dict
