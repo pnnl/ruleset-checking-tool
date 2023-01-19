@@ -115,6 +115,7 @@ def get_baseline_system_types(rmi_b):
             len(dict_with_terminal_units_and_zones[terminal_id]) == 1
             for terminal_id in terminal_unit_id_list
         ):
+            sys_found = False
             for sys_check in baseline_system_type_checks:
                 hvac_sys = sys_check(
                     rmi_b, hvac_b_id, terminal_unit_id_list, zone_id_list
