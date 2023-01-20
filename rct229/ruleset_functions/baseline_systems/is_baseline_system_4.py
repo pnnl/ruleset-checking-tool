@@ -31,7 +31,7 @@ from rct229.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.is_hv
 )
 from rct229.ruleset_functions.baseline_systems.baseline_system_util import (
     HVAC_SYS,
-    find_exactly_one_hvac_system,
+    has_preheat_system,
 )
 
 HEATING_SYSTEM = schema_enums["HeatingSystemOptions"]
@@ -57,16 +57,9 @@ def is_baseline_system_4(rmi_b, hvac_b_id, terminal_unit_id_list, zone_id_list):
      The function returns either Sys-4 or Not_Sys_4 string output which indicates whether the HVAC system is ASHRAE 90.1 2019 Appendix G system 4 (PSZ-HP).
     """
 
-    # Get the hvac system
-    hvac_b = find_exactly_one_hvac_system(rmi_b, hvac_b_id)
-
     # check if the hvac system has the required sub systems for system type 4
-    preheat_system = hvac_b.get("preheat_system")
-    has_required_sys = (
-        preheat_system is None
-        or preheat_system.get("heating_system_type") is None
-        or preheat_system["heating_system_type"] == HEATING_SYSTEM.NONE
-    )
+    # if preheat DOESN'T exist, has_required_sys=True, else, False
+    has_required_sys = not has_preheat_system(rmi_b, hvac_b_id)
 
     are_sys_data_matched = (
         # short-circuit the logic if no required data is found.
