@@ -125,7 +125,10 @@ def get_baseline_system_types(rmi_b):
                     baseline_hvac_system_dict[hvac_sys].append(hvac_b_id)
                     sys_found = True
                     break
-                
-            assert_(sys_found, f"Error: HVAC {hvac_b_id} does not match any baseline system type.")
+
+            assert_(
+                sys_found,
+                f"Error: HVAC {hvac_b_id} does not match any baseline system type.",
+            )
 
     return baseline_hvac_system_dict
