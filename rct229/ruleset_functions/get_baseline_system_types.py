@@ -49,13 +49,8 @@ from rct229.ruleset_functions.baseline_systems.is_baseline_system_13 import (
 from rct229.ruleset_functions.get_dict_of_zones_and_terminal_units_served_by_hvac_sys import (
     get_dict_of_zones_and_terminal_units_served_by_hvac_sys,
 )
-from rct229.utils.assertions import RCTFailureException, assert_
+from rct229.utils.assertions import assert_
 from rct229.utils.jsonpath_utils import find_all
-
-
-def mock_get_baseline_system_types(rmd):
-    # dummy function - more will be added.
-    return {"SYS-7A": ["hvac_sys_7_a"], "SYS-11A": ["hvac_sys_11_a"]}
 
 
 def get_baseline_system_types(rmi_b):
