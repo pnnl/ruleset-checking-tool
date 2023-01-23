@@ -83,7 +83,8 @@ INIITIALS refers to the initials of the owner of the branch or PR.
 Before committing changes you should run the following commands from the `ruleset-checking-tool` directory.
 1. `pipenv run isort .` to sort imports according to PEP8 https://www.python.org/dev/peps/pep-0008/
 2. `pipenv run black .` to otherwise format code according to PEP8
-3. `pipenv run pytest` to run all unit tests
+3. `pipenv run pytest --cov` to run all unit tests for functions.
+4. `pipenv run rct229 test` to run all rule definition tests.
 
 #### Mocking functions for pytests:
 - For an explanation of how to specify `<module>` in `patch("<module>.<imported_thing>")` see: https://medium.com/@durgaswaroop/writing-better-tests-in-python-with-pytest-mock-part-2-92b828e1453c
