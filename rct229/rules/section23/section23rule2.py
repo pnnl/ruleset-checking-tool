@@ -17,6 +17,7 @@ APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_7,
     HVAC_SYS.SYS_8,
     HVAC_SYS.SYS_11_1,
+    HVAC_SYS.SYS_11_2,
 ]
 
 FanSystemTemperatureControl = schema_enums["FanSystemTemperatureControlOptions"]
@@ -52,6 +53,22 @@ class Section23Rule2(RuleDefinitionListIndexedBase):
             ]
         )
 
+    def create_data(self, context, data):
+        rmi_b = context.baseline
+        baseline_system_types_dict = get_baseline_system_types(rmi_b)
+        applicable_hvac_sys_ids = [
+            hvac_id
+            for sys_type in APPLICABLE_SYS_TYPES
+            for hvac_id in baseline_system_types_dict[sys_type]
+        ]
+
+        return {"applicable_hvac_sys_ids": applicable_hvac_sys_ids}
+
+    def list_filter(self, context_item, data):
+        applicable_hvac_sys_ids = data["applicable_hvac_sys_ids"]
+
+        return context_item.baseline["id"] in applicable_hvac_sys_ids
+
     class HVACRule(RuleDefinitionBase):
         def __init__(self):
             super(Section23Rule2.HVACRule, self).__init__(
@@ -66,11 +83,14 @@ class Section23Rule2(RuleDefinitionListIndexedBase):
             )
 
         def get_calc_vals(self, context, data=None):
-            fan_system_b = context.baseline["fan_system"]
+            hvac_b = context.baseline
+
+            fan_system_b = hvac_b["fan_system"]
             temperature_control_b = fan_system_b["temperature_control"]
             reset_differential_temperature_b = fan_system_b[
                 "reset_differential_temperature"
             ]
+
             return {
                 "temperature_control_b": temperature_control_b,
                 "reset_differential_temperature_b": CalcQ(
@@ -83,6 +103,7 @@ class Section23Rule2(RuleDefinitionListIndexedBase):
             reset_differential_temperature_b = calc_vals[
                 "reset_differential_temperature_b"
             ]
+
             return (
                 temperature_control_b == FanSystemTemperatureControl.ZONE_RESET
                 and std_equal(

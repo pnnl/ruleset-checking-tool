@@ -7,6 +7,7 @@ from rct229.ruleset_functions.baseline_system_type_compare import (
 from rct229.ruleset_functions.baseline_systems.baseline_system_util import HVAC_SYS
 from rct229.ruleset_functions.get_baseline_system_types import get_baseline_system_types
 from rct229.utils.pint_utils import CalcQ
+from rct229.utils.std_comparisons import std_equal
 
 APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_5,
@@ -46,6 +47,22 @@ class Section23Rule3(RuleDefinitionListIndexedBase):
             ]
         )
 
+    def create_data(self, context, data):
+        rmi_b = context.baseline
+        baseline_system_types_dict = get_baseline_system_types(rmi_b)
+        applicable_hvac_sys_ids = [
+            hvac_id
+            for sys_type in APPLICABLE_SYS_TYPES
+            for hvac_id in baseline_system_types_dict[sys_type]
+        ]
+
+        return {"applicable_hvac_sys_ids": applicable_hvac_sys_ids}
+
+    def list_filter(self, context_item, data):
+        applicable_hvac_sys_ids = data["applicable_hvac_sys_ids"]
+
+        return context_item.baseline["id"] in applicable_hvac_sys_ids
+
     class TerminalRule(RuleDefinitionBase):
         def __init__(self):
             super(Section23Rule3.TerminalRule, self).__init__(
@@ -78,6 +95,7 @@ class Section23Rule3(RuleDefinitionListIndexedBase):
             primary_airflow_b = calc_vals["primary_airflow_b"]
             minimum_outdoor_airflow_b = calc_vals["minimum_outdoor_airflow_b"]
 
-            return minimum_airflow_b == max(
-                primary_airflow_b * 0.3, minimum_outdoor_airflow_b
+            return std_equal(
+                minimum_airflow_b,
+                max(primary_airflow_b * 0.3, minimum_outdoor_airflow_b),
             )

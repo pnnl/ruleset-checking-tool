@@ -60,6 +60,8 @@ HVAC_SYSTEM_TYPE_DICTIONARY = {
         HVAC_SYS.SYS_11_1A,
         HVAC_SYS.SYS_11_1B,
         HVAC_SYS.SYS_11_1C,
+    ],
+    HVAC_SYS.SYS_11_2: [
         HVAC_SYS.SYS_11_2,
         HVAC_SYS.SYS_11_2A,
     ],
