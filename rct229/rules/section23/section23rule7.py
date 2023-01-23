@@ -39,6 +39,7 @@ class Section23Rule7(RuleDefinitionListIndexedBase):
         # baseline_system_types_dict = get_baseline_system_types(rmi_b)
         baseline_system_types_dict = {
             "Sys-6": ["System 6"],
+            "Sys-8": [],
         }  # This will be removed once PR #899 is merged
 
         return any(
@@ -48,6 +49,26 @@ class Section23Rule7(RuleDefinitionListIndexedBase):
                 for applicable_sys_type in APPLICABLE_SYS_TYPES
             ]
         )
+
+    def create_data(self, context, data):
+        rmi_b = context.baseline
+        # baseline_system_types_dict = get_baseline_system_types(rmi_b)
+        baseline_system_types_dict = {
+            "Sys-6": ["System 6"],
+            "Sys-8": [],
+        }  # This will be removed once PR #899 is merged
+        applicable_hvac_sys_ids = [
+            hvac_id
+            for sys_type in APPLICABLE_SYS_TYPES
+            for hvac_id in baseline_system_types_dict[sys_type]
+        ]
+
+        return {"applicable_hvac_sys_ids": applicable_hvac_sys_ids}
+
+    def list_filter(self, context_item, data):
+        applicable_hvac_sys_ids = data["applicable_hvac_sys_ids"]
+
+        return context_item.baseline["id"] in applicable_hvac_sys_ids
 
     class HVACRule(RuleDefinitionBase):
         def __init__(self):
@@ -62,7 +83,9 @@ class Section23Rule7(RuleDefinitionListIndexedBase):
             )
 
         def get_calc_vals(self, context, data=None):
-            fan_system_b = context.baseline["fan_system"]
+            hvac_b = context.baseline
+
+            fan_system_b = hvac_b["fan_system"]
             temperature_control_b = fan_system_b["temperature_control"]
 
             return {

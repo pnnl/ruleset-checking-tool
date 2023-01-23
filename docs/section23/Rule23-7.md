@@ -29,15 +29,23 @@
   - Else, rule is not applicable to B-RMR: `else: RULE_NOT_APPLICABLE`
 
 ## Rule Logic:  
+- create a list of eligible hvac system ids: `eligible_hvac_system_ids = []`
+- for each baseline system type: `for baseline_system_type in baseline_hvac_system_dict:`
+  - check if it is one of the eligible system types: `if any(target_sys_type in baseline_hvac_system_dict.keys() for target_sys_type in target_system_types):`
+    - add the hvac_ids for this sytem type to the list of eligible systems: `eligible_hvac_system_ids = eligible_hvac_system_ids + baseline_hvac_system_dict[baseline_system_type]`
+
+
 - For each building segment in baseline ruleset model instance: `for building_segment_b in ASHRAE229.ruleset_model_instance[baseline]...building_segments:`
 
-- For each HVAC system in building segment: `for hvac_b in building_segment_b.heating_ventilating_air_conditioning_systems:`
+  - For each HVAC system in building segment: `for hvac_b in building_segment_b.heating_ventilating_air_conditioning_systems:`
+  
+    - Check if HVAC system is one of the eligible systems: `if hvac_b.id in eligible_hvac_system_ids:`
 
-    **Rule Assertion:**
+      **Rule Assertion:**
 
-    - Case 1: For each HVAC system that is Type-6, 8, 8a, 6b, 8b, if supply temperature setpoint is constant: `if ( hvac_b.fan_system.temperature_control == "CONSTANT" ): PASS`
+      - Case 1: For each HVAC system that is Type-6, 8, 8a, 6b, 8b, if supply temperature setpoint is constant: `if ( hvac_b.fan_system.temperature_control == "CONSTANT" ): PASS`
 
-    - Case 2: Else: `else: FAIL`
+      - Case 2: Else: `else: FAIL`
 
 **Notes:**
 1. Updated the Rule ID from 23-9 to 23-7 on 11/28/2022
