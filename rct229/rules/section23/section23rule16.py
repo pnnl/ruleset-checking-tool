@@ -21,7 +21,6 @@ APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_6,
     HVAC_SYS.SYS_7,
     HVAC_SYS.SYS_8,
-    HVAC_SYS.SYS_11_1,
 ]
 
 HEATING_SYSTEM = schema_enums["HeatingSystemOptions"]
@@ -92,10 +91,23 @@ class Section23Rule16(RuleDefinitionListIndexedBase):
                 rmi_b, hot_water_loop
             )["type"]
 
+        baseline_system_types_dict = get_baseline_system_types(rmi_b)
+        applicable_hvac_sys_ids = [
+            hvac_id
+            for sys_type in APPLICABLE_SYS_TYPES
+            for hvac_id in baseline_system_types_dict[sys_type]
+        ]
+
         return {
             "hvac_max_zone_setpoint_dict": hvac_max_zone_setpoint_dict,
             "hot_water_loop_type_dict": hot_water_loop_type_dict,
+            "applicable_hvac_sys_ids": applicable_hvac_sys_ids,
         }
+
+    def list_filter(self, context_item, data):
+        applicable_hvac_sys_ids = data["applicable_hvac_sys_ids"]
+
+        return context_item.baseline["id"] in applicable_hvac_sys_ids
 
     class HVACRule(RuleDefinitionBase):
         def __init__(self):
