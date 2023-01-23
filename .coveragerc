@@ -1,0 +1,8 @@
+[run]
+branch = True
+omit = **/test_*, **/*_test*.*, **/__init__.py
+
+[report]
+skip_empty = True
+skip_covered = True
+sort = Cover
