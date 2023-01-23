@@ -29,6 +29,11 @@
    - Else, rule is not applicable to B-RMI: `else: RULE_NOT_APPLICABLE`
 
  ## Rule Logic:  
+ - create a list of eligible hvac systems: `eligible_hvac_system_ids = []`
+
+- For each hvac system type in the baseline_hvac_system_dict: `for baseline_system_type in baseline_hvac_system_dict:`
+  - check if it is one of the applicable systems (5-8, or 11): `if any(sys_type in baseline_hvac_system_dict.keys() for sys_type in target_system_types):`
+    - add the ids to the list of eligible systems: `eligible_hvac_system_ids = eligible_hvac_system_ids + baseline_hvac_system_dict[baseline_system_type]`    
 
  - For each hvac system type in the baseline_hvac_system_dict: `for supply_fan_b in B_RMI...heating_ventilating_air_conditioning_systems:`
 

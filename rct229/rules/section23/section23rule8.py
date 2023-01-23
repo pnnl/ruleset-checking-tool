@@ -27,7 +27,7 @@ class Section23Rule8(RuleDefinitionListIndexedBase):
     def __init__(self):
         super(Section23Rule8, self).__init__(
             rmrs_used=UserBaselineProposedVals(False, True, False),
-            each_rule=Section23Rule8.SupplyFanRule(),
+            each_rule=Section23Rule8.HVACRule(),
             index_rmr="baseline",
             id="23-8",
             description="System 5-8 and 11 - part load VAV fan power shall be modeled using either method 1 or 2 in Table G3.1.3.15. This rule will only validate data points from Method-1 Part-load Fan Power Data. However, both methods are equivalent. When modeling inputs are based on Method 2, values should be converted to Method 1 when writing to RMD.",
@@ -35,7 +35,7 @@ class Section23Rule8(RuleDefinitionListIndexedBase):
             standard_section="Section G3.1.3.15 VAV Fan Part-Load Performance (Systems 5 through 8 and 11)",
             is_primary_rule=False,
             rmr_context="ruleset_model_instances/0",
-            list_path="$..supply_fans[*]",
+            list_path="$..heating_ventilating_air_conditioning_systems[*]",
         )
 
     def is_applicable(self, context, data=None):
@@ -50,65 +50,90 @@ class Section23Rule8(RuleDefinitionListIndexedBase):
             ]
         )
 
-    class SupplyFanRule(RuleDefinitionBase):
+    def create_data(self, context, data):
+        rmi_b = context.baseline
+        baseline_system_types_dict = get_baseline_system_types(rmi_b)
+        applicable_hvac_sys_ids = [
+            hvac_id
+            for sys_type in APPLICABLE_SYS_TYPES
+            for hvac_id in baseline_system_types_dict[sys_type]
+        ]
+
+        return {"applicable_hvac_sys_ids": applicable_hvac_sys_ids}
+
+    def list_filter(self, context_item, data):
+        applicable_hvac_sys_ids = data["applicable_hvac_sys_ids"]
+
+        return context_item.baseline["id"] in applicable_hvac_sys_ids
+
+    class HVACRule(RuleDefinitionListIndexedBase):
         def __init__(self):
-            super(Section23Rule8.SupplyFanRule, self).__init__(
+            super(Section23Rule8.HVACRule, self).__init__(
                 rmrs_used=UserBaselineProposedVals(False, True, False),
-                required_fields={
-                    "$": [
-                        "design_airflow",
-                        "design_electric_power",
-                        "output_validation_points",
-                    ],
-                },
+                each_rule=Section23Rule8.HVACRule.SupplyFanRule(),
+                index_rmr="baseline",
+                list_path="$..supply_fans[*]",
             )
 
-        def get_calc_vals(self, context, data=None):
-            supply_fan_b = context.baseline
+        class SupplyFanRule(RuleDefinitionBase):
+            def __init__(self):
+                super(Section23Rule8.HVACRule.SupplyFanRule, self).__init__(
+                    rmrs_used=UserBaselineProposedVals(False, True, False),
+                    required_fields={
+                        "$": [
+                            "design_airflow",
+                            "design_electric_power",
+                            "output_validation_points",
+                        ],
+                    },
+                )
 
-            design_airflow_b = supply_fan_b["design_airflow"]
-            design_electric_power_b = supply_fan_b["design_electric_power"]
-            output_validation_points_b = supply_fan_b["output_validation_points"]
+            def get_calc_vals(self, context, data=None):
+                supply_fan_b = context.baseline
 
-            return {
-                "design_airflow_b": CalcQ("air_flow_rate", design_airflow_b),
-                "design_electric_power_b": CalcQ(
-                    "electric_power", design_electric_power_b
-                ),
-                "output_validation_points_b": output_validation_points_b,
-            }
+                design_airflow_b = supply_fan_b["design_airflow"]
+                design_electric_power_b = supply_fan_b["design_electric_power"]
+                output_validation_points_b = supply_fan_b["output_validation_points"]
 
-        def rule_check(self, context, calc_vals=None, data=None):
-            design_airflow_b = calc_vals["design_airflow_b"]
-            design_electric_power_b = calc_vals["design_electric_power_b"]
-            output_validation_points_b = calc_vals["output_validation_points_b"]
+                return {
+                    "design_airflow_b": CalcQ("air_flow_rate", design_airflow_b),
+                    "design_electric_power_b": CalcQ(
+                        "electric_power", design_electric_power_b
+                    ),
+                    "output_validation_points_b": output_validation_points_b,
+                }
 
-            output_validation_points = [
-                [output["airflow"], output["result"]]
-                for output in output_validation_points_b
-            ]
+            def rule_check(self, context, calc_vals=None, data=None):
+                design_airflow_b = calc_vals["design_airflow_b"]
+                design_electric_power_b = calc_vals["design_electric_power_b"]
+                output_validation_points_b = calc_vals["output_validation_points_b"]
 
-            target_validation_points = [
-                [
-                    SUPPLY_AIRFLOW_COEFF[idx] * design_airflow_b,
-                    DESIGN_POWER_COEFF[idx] * design_electric_power_b,
+                output_validation_points = [
+                    [output["airflow"], output["result"]]
+                    for output in output_validation_points_b
                 ]
-                for idx in range(11)
-            ]
 
-            return all(
-                list(
-                    map(
-                        lambda x, y: std_equal(x[0], y[0]),
-                        output_validation_points,
-                        target_validation_points,
+                target_validation_points = [
+                    [
+                        SUPPLY_AIRFLOW_COEFF[idx] * design_airflow_b,
+                        DESIGN_POWER_COEFF[idx] * design_electric_power_b,
+                    ]
+                    for idx in range(11)
+                ]
+                place = 1
+                return all(
+                    list(
+                        map(
+                            lambda x, y: std_equal(x[0], y[0]),
+                            output_validation_points,
+                            target_validation_points,
+                        )
+                    )
+                    and list(
+                        map(
+                            lambda x, y: std_equal(x[1], y[1]),
+                            output_validation_points,
+                            target_validation_points,
+                        )
                     )
                 )
-                and list(
-                    map(
-                        lambda x, y: std_equal(x[1], y[1]),
-                        output_validation_points,
-                        target_validation_points,
-                    )
-                )
-            )

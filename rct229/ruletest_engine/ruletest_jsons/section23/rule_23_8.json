@@ -80,6 +80,8 @@
                                                     "supply_fans": [
                                                         {
                                                             "id": "Supply Fan 1",
+															"design_airflow": 47.194744319999984,
+															"design_electric_power": 100,
                                                             "output_validation_points": [
                                                                 {
                                                                     "airflow": 0.0,
@@ -272,6 +274,8 @@
                                                     "supply_fans": [
                                                         {
                                                             "id": "Supply Fan 1",
+															"design_airflow": 42.475269887999985,
+															"design_electric_power": 90, 
                                                             "output_validation_points": [
                                                                 {
                                                                     "airflow": 0.0,
