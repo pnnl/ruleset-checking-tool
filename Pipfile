@@ -12,6 +12,7 @@ pylint = "*"
 pytest = "*"
 isort = "5.10.1"
 icecream = "*"
+pytest-cov = "*"
 pytest-watch = "*"
 jsonpath-ng = "*"
 
