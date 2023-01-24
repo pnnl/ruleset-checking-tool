@@ -175,7 +175,7 @@ TEST_RMR = {
                             "cooling_system": {
                                 "id": "csys_1_2_1_1",
                                 "design_sensible_cool_capacity": 2 * POWER_THRESHOLD_100
-                                                                 + POWER_DELTA,
+                                + POWER_DELTA,
                             },
                         },
                         # Used for zone_1_2_2, directly conditioned zone
@@ -184,7 +184,7 @@ TEST_RMR = {
                             "heating_system": {
                                 "id": "hsys_1_2_2_1",
                                 "design_capacity": SYSTEM_MIN_HEATING_OUTPUT
-                                                   + POWER_DELTA,
+                                + POWER_DELTA,
                             },
                         },
                     ],
