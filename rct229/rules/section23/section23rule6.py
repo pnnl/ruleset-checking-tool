@@ -6,6 +6,7 @@ from rct229.ruleset_functions.baseline_system_type_compare import (
 )
 from rct229.ruleset_functions.baseline_systems.baseline_system_util import HVAC_SYS
 from rct229.ruleset_functions.get_baseline_system_types import get_baseline_system_types
+from rct229.utils.jsonpath_utils import find_exactly_one
 from rct229.utils.pint_utils import CalcQ
 from rct229.utils.std_comparisons import std_equal
 
@@ -61,19 +62,24 @@ class Section23Rule6(RuleDefinitionListIndexedBase):
             for hvac_id in baseline_system_types_dict[sys_type]
         ]
 
-        return {"applicable_hvac_sys_ids": applicable_hvac_sys_ids}
+        hvac_id = find_exactly_one(
+            "$..heating_ventilating_air_conditioning_systems[*].id", rmi_b
+        )
+
+        return {"hvac_id": hvac_id, "applicable_hvac_sys_ids": applicable_hvac_sys_ids}
 
     def list_filter(self, context_item, data):
+        hvac_id = data["hvac_id"]
         applicable_hvac_sys_ids = data["applicable_hvac_sys_ids"]
 
-        return context_item.baseline["id"] in applicable_hvac_sys_ids
+        return hvac_id in applicable_hvac_sys_ids
 
     class TerminalRule(RuleDefinitionBase):
         def __init__(self):
             super(Section23Rule6.TerminalRule, self).__init__(
                 rmrs_used=UserBaselineProposedVals(False, True, False),
                 required_fields={
-                    "$": ["primary_airflow"],
+                    "$": ["primary_airflow", "fan"],
                     "fan": [
                         "design_airflow",
                         "design_electric_power",
