@@ -82,7 +82,7 @@ def check_purchased_chw_hhw_status_dict(rmi_b):
                     break
                 if (
                     hvac_sys.get("preheat_system")
-                    and hvac_sys["preheat_system"]["heating_system_type"]
+                    and hvac_sys["preheat_system"]["hot_water_loop"]
                     in purchased_hhw_loop_array
                 ):
                     purchased_chw_hhw_status_dict["purchased_heating"] = True
