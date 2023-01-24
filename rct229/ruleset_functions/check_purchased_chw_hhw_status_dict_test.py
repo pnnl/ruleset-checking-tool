@@ -276,15 +276,26 @@ TEST_BUILDING_FALSE = {
 }
 
 
-TEST_RMD_TRUE = {
+TEST_RMD_HEATING_SYS = {
     "id": "ASHRAE229",
     "ruleset_model_instances": [TEST_BUILDING_HEATING_SYS],
+}
+TEST_RMD_PREHEAT_SYS = {
+    "id": "ASHRAE229",
+    "ruleset_model_instances": [TEST_BUILDING_PREHEAT_SYS],
 }
 TEST_RMD_FALSE = {"id": "ASHRAE229", "ruleset_model_instances": [TEST_BUILDING_FALSE]}
 
 
-def test__TEST_RMD_TRUE__is_valid():
-    schema_validation_result = schema_validate_rmr(TEST_RMD_TRUE)
+def test__TEST_RMD_HEATING_TRUE__is_valid():
+    schema_validation_result = schema_validate_rmr(TEST_RMD_HEATING_SYS)
+    assert schema_validation_result[
+        "passed"
+    ], f"Schema error: {schema_validation_result['error']}"
+
+
+def test__TEST_RMD_PREHEAT_TRUE__is_valid():
+    schema_validation_result = schema_validate_rmr(TEST_RMD_PREHEAT_SYS)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"
