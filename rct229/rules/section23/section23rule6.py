@@ -6,7 +6,7 @@ from rct229.ruleset_functions.baseline_system_type_compare import (
 )
 from rct229.ruleset_functions.baseline_systems.baseline_system_util import HVAC_SYS
 from rct229.ruleset_functions.get_baseline_system_types import get_baseline_system_types
-from rct229.utils.jsonpath_utils import find_exactly_one
+from rct229.schema.config import ureg
 from rct229.utils.pint_utils import CalcQ
 from rct229.utils.std_comparisons import std_equal
 
@@ -58,21 +58,23 @@ class Section23Rule6(RuleDefinitionListIndexedBase):
         }  # This will be removed once PR #899 is merged
         applicable_hvac_sys_ids = [
             hvac_id
-            for sys_type in APPLICABLE_SYS_TYPES
+            for sys_type in baseline_system_types_dict.keys()
+            for target_sys_type in APPLICABLE_SYS_TYPES
+            if baseline_system_type_compare(sys_type, target_sys_type, False)
             for hvac_id in baseline_system_types_dict[sys_type]
         ]
 
-        hvac_id = find_exactly_one(
-            "$..heating_ventilating_air_conditioning_systems[*].id", rmi_b
-        )
-
-        return {"hvac_id": hvac_id, "applicable_hvac_sys_ids": applicable_hvac_sys_ids}
+        return {"applicable_hvac_sys_ids": applicable_hvac_sys_ids}
 
     def list_filter(self, context_item, data):
-        hvac_id = data["hvac_id"]
         applicable_hvac_sys_ids = data["applicable_hvac_sys_ids"]
 
-        return hvac_id in applicable_hvac_sys_ids
+        return (
+            context_item.baseline[
+                "served_by_heating_ventilating_air_conditioning_system"
+            ]
+            in applicable_hvac_sys_ids
+        )
 
     class TerminalRule(RuleDefinitionBase):
         def __init__(self):
@@ -107,5 +109,5 @@ class Section23Rule6(RuleDefinitionListIndexedBase):
             design_electric_power_b = calc_vals["design_electric_power_b"]
 
             return std_equal(design_airflow_b, 0.5 * primary_airflow_b) and std_equal(
-                design_electric_power_b.m, 0.35 * design_airflow_b.to("cfm").m
+                design_electric_power_b / design_airflow_b, 0.35 * ureg("W/cfm")
             )

@@ -59,7 +59,9 @@ class Section23Rule7(RuleDefinitionListIndexedBase):
         }  # This will be removed once PR #899 is merged
         applicable_hvac_sys_ids = [
             hvac_id
-            for sys_type in APPLICABLE_SYS_TYPES
+            for sys_type in baseline_system_types_dict.keys()
+            for target_sys_type in APPLICABLE_SYS_TYPES
+            if baseline_system_type_compare(sys_type, target_sys_type, False)
             for hvac_id in baseline_system_types_dict[sys_type]
         ]
 

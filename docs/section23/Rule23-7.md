@@ -30,10 +30,12 @@
 
 ## Rule Logic:  
 - create a list of eligible hvac system ids: `eligible_hvac_system_ids = []`
-- for each baseline system type: `for baseline_system_type in baseline_hvac_system_dict:`
-  - check if it is one of the eligible system types: `if any(target_sys_type in baseline_hvac_system_dict.keys() for target_sys_type in target_system_types):`
-    - add the hvac_ids for this sytem type to the list of eligible systems: `eligible_hvac_system_ids = eligible_hvac_system_ids + baseline_hvac_system_dict[baseline_system_type]`
 
+- for each baseline system type: `for baseline_system_type in baseline_hvac_system_dict:`
+
+  - check if it is one of the eligible system types: `if any(baseline_system_type_compare(baseline_system_type, target_system_type, false) for target_system_type in target_system_types):`
+
+    - add the hvac_ids for this sytem type to the list of eligible systems: `eligible_hvac_system_ids = eligible_hvac_system_ids + baseline_hvac_system_dict[baseline_system_type]`
 
 - For each building segment in baseline ruleset model instance: `for building_segment_b in ASHRAE229.ruleset_model_instance[baseline]...building_segments:`
 
