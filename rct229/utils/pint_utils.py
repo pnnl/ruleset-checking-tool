@@ -67,6 +67,7 @@ class ZERO:
 
     TEMPERATURE = 0 * ureg("degC")
 
+
 @dataclass(frozen=True)
 class CalcQ:
     """Class that encodes the type of quantity along with a pint Quantity"""
