@@ -14,7 +14,6 @@ APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_6,
     HVAC_SYS.SYS_7,
     HVAC_SYS.SYS_8,
-    HVAC_SYS.SYS_11_1,
 ]
 
 
@@ -52,7 +51,9 @@ class Section23Rule3(RuleDefinitionListIndexedBase):
         baseline_system_types_dict = get_baseline_system_types(rmi_b)
         applicable_hvac_sys_ids = [
             hvac_id
-            for sys_type in APPLICABLE_SYS_TYPES
+            for sys_type in baseline_system_types_dict.keys()
+            for target_sys_type in APPLICABLE_SYS_TYPES
+            if baseline_system_type_compare(sys_type, target_sys_type, False)
             for hvac_id in baseline_system_types_dict[sys_type]
         ]
 
@@ -61,7 +62,12 @@ class Section23Rule3(RuleDefinitionListIndexedBase):
     def list_filter(self, context_item, data):
         applicable_hvac_sys_ids = data["applicable_hvac_sys_ids"]
 
-        return context_item.baseline["id"] in applicable_hvac_sys_ids
+        return (
+            context_item.baseline[
+                "served_by_heating_ventilating_air_conditioning_system"
+            ]
+            in applicable_hvac_sys_ids
+        )
 
     class TerminalRule(RuleDefinitionBase):
         def __init__(self):

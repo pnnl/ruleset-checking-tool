@@ -58,7 +58,9 @@ class Section23Rule2(RuleDefinitionListIndexedBase):
         baseline_system_types_dict = get_baseline_system_types(rmi_b)
         applicable_hvac_sys_ids = [
             hvac_id
-            for sys_type in APPLICABLE_SYS_TYPES
+            for sys_type in baseline_system_types_dict.keys()
+            for target_sys_type in APPLICABLE_SYS_TYPES
+            if baseline_system_type_compare(sys_type, target_sys_type, False)
             for hvac_id in baseline_system_types_dict[sys_type]
         ]
 
@@ -86,12 +88,14 @@ class Section23Rule2(RuleDefinitionListIndexedBase):
             hvac_b = context.baseline
 
             fan_system_b = hvac_b["fan_system"]
+            fan_system_id_b = fan_system_b["id"]
             temperature_control_b = fan_system_b["temperature_control"]
             reset_differential_temperature_b = fan_system_b[
                 "reset_differential_temperature"
             ]
 
             return {
+                "fan_system_id": fan_system_id_b,
                 "temperature_control_b": temperature_control_b,
                 "reset_differential_temperature_b": CalcQ(
                     "temperature", reset_differential_temperature_b

@@ -33,7 +33,7 @@
 - create a list of eligible hvac systems: `eligible_hvac_system_ids = []`
 
 - For each hvac system type in the baseline_hvac_system_dict: `for baseline_system_type in baseline_hvac_system_dict:`
-  - check if it is one of the applicable systems (5-8, or 11): `if any(sys_type in baseline_hvac_system_dict.keys() for sys_type in target_system_types):`
+  - check if it is one of the applicable systems (5, 6, 7, 8): `if any(baseline_system_type_compare(baseline_system_type, target_system_type, false) for target_system_type in target_system_types):`
     - add the ids to the list of eligible systems: `eligible_hvac_system_ids = eligible_hvac_system_ids + baseline_hvac_system_dict[baseline_system_type]`
 
 - For each zone in B_RMR: `for zone_b in B_RMR...zones:`
@@ -43,8 +43,8 @@
     - Get HVAC system serving terminal: `hvac_b = terminal_b.served_by_heating_ventilating_air_conditioning_systems`
   
       - Check if HVAC system is one of the eligible systems: `if hvac_b.id in eligible_hvac_system_ids:`
-
-        **Rule Assertion:**
+      
+        **Rule Assertion:**    
 
         - Case 1: For each terminal that is served by HVAC system that is Type-5, 7, 7a, 5b, 7b, 7c, 6, 8, 8a, 6b, 8b, if minimum volume setpoint is equal to 30% of peak primary design airflow or the rate required for minimum outside air, whichever is larger: `if terminal_b.minimum_airflow == MAX(terminal_b.primary_airflow * 0.3, terminal_b.minimum_outdoor_airflow): PASS`
 
