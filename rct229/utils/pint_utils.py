@@ -65,6 +65,7 @@ class ZERO:
     UA = U_FACTOR * AREA
     FLOW = VOLUME / ureg("minute")
 
+    TEMPERATURE = 0 * ureg("degC")
 
 @dataclass(frozen=True)
 class CalcQ:
