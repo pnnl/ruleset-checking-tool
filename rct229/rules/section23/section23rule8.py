@@ -55,7 +55,9 @@ class Section23Rule8(RuleDefinitionListIndexedBase):
         baseline_system_types_dict = get_baseline_system_types(rmi_b)
         applicable_hvac_sys_ids = [
             hvac_id
-            for sys_type in APPLICABLE_SYS_TYPES
+            for sys_type in baseline_system_types_dict.keys()
+            for target_sys_type in APPLICABLE_SYS_TYPES
+            if baseline_system_type_compare(sys_type, target_sys_type, False)
             for hvac_id in baseline_system_types_dict[sys_type]
         ]
 
@@ -95,19 +97,6 @@ class Section23Rule8(RuleDefinitionListIndexedBase):
                 design_electric_power_b = supply_fan_b["design_electric_power"]
                 output_validation_points_b = supply_fan_b["output_validation_points"]
 
-                return {
-                    "design_airflow_b": CalcQ("air_flow_rate", design_airflow_b),
-                    "design_electric_power_b": CalcQ(
-                        "electric_power", design_electric_power_b
-                    ),
-                    "output_validation_points_b": output_validation_points_b,
-                }
-
-            def rule_check(self, context, calc_vals=None, data=None):
-                design_airflow_b = calc_vals["design_airflow_b"]
-                design_electric_power_b = calc_vals["design_electric_power_b"]
-                output_validation_points_b = calc_vals["output_validation_points_b"]
-
                 output_validation_points = [
                     [output["airflow"], output["result"]]
                     for output in output_validation_points_b
@@ -120,20 +109,27 @@ class Section23Rule8(RuleDefinitionListIndexedBase):
                     ]
                     for idx in range(11)
                 ]
-                place = 1
-                return all(
-                    list(
-                        map(
-                            lambda x, y: std_equal(x[0], y[0]),
-                            output_validation_points,
-                            target_validation_points,
+
+                return {
+                    "design_airflow_b": CalcQ("air_flow_rate", design_airflow_b),
+                    "design_electric_power_b": CalcQ(
+                        "electric_power", design_electric_power_b
+                    ),
+                    "output_validation_points": output_validation_points,
+                    "target_validation_points": target_validation_points,
+                }
+
+            def rule_check(self, context, calc_vals=None, data=None):
+                output_validation_points = calc_vals["output_validation_points"]
+                target_validation_points = calc_vals["target_validation_points"]
+
+                return len(output_validation_points) == len(
+                    target_validation_points
+                ) and all(
+                    [
+                        std_equal(x[0], y[0]) and std_equal(x[1], y[1])
+                        for x, y in zip(
+                            output_validation_points, target_validation_points
                         )
-                    )
-                    and list(
-                        map(
-                            lambda x, y: std_equal(x[1], y[1]),
-                            output_validation_points,
-                            target_validation_points,
-                        )
-                    )
+                    ]
                 )
