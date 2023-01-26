@@ -181,7 +181,7 @@
 	- check if the dict has a length of 1, this means that there are ONLY OTHER_UDETERMINED spaces in the RMI: `if len(building_area_types_with_total_area_and_zones_dict) == 1:`
 		- change the key from OTHER_UNDETERMINED to OTHER_NON_RESIDENTIAL: `building_area_types_with_total_area_and_zones_dict[OTHER_NON_RESIDENTIAL] = building_area_types_with_total_area_and_zones_dict.pop(OTHER_UNDETERMINED)`
 	- otherwise, we need to reclassify the undetermined zones as part of the largest space area type in the building: `else:`
-		- create a variable to hold list of OTHER_UNDETERMINED zones: `other_undetermined_zones_list = building_area_types_with_total_area_and_zones_dict[OTHER_UNDETERMINED]["ZONE_IDS"]
+		- create a variable to hold list of OTHER_UNDETERMINED zones: `other_undetermined_zones_list = building_area_types_with_total_area_and_zones_dict[OTHER_UNDETERMINED]["ZONE_IDS"]`
 		- create a variable to hold the area of OTHER_UNDETERMINED zones: `other_undetermined_zones_area = building_area_types_with_total_area_and_zones_dict[OTHER_UNDETERMINED]["AREA"]`
 		- now remove OTHER_UNDETERMINED from  building_area_types_with_total_area_and_zones_dict: `building_area_types_with_total_area_and_zones_dict.pop(OTHER_UNDETERMINED)`
 		
