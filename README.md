@@ -11,7 +11,7 @@ ASHRAE Standard 229P is a proposed standard entitled, "Protocols for Evaluating 
 ## Introduction
 The Ruleset Checking Tool (RCT) is a Python package providing a command line tool for evaluating whether baseline and proposed Building Energy Models (BEM) meet the requirements of ANSI/ASHRAE/IES Standard 90.1-2019 Appendix G.  The tool accepts Ruleset Model Report (RMR) files representing the User, Baseline, and Proposed models as inputs, and generates an output report describing the RMR evalaution.
 
-**This is an early alpha version and is highly unstable!** 
+**This is an early alpha version and is highly unstable!**
 
 **This package will change significantly during the next several versions.**
 
@@ -54,6 +54,7 @@ Install `pipenv` using `pip`
 Now tests can be run by first installing dependencies and then running pytest.
 1. `pipenv install --dev`
 2. `pipenv run pytest`
+    - To see a coverage report, use `pipenv run pytest --cov`
 
 You can also package with pipenv to test the CLI tool.
 1. `pipenv install '-e .'`
@@ -83,7 +84,8 @@ INIITIALS refers to the initials of the owner of the branch or PR.
 Before committing changes you should run the following commands from the `ruleset-checking-tool` directory.
 1. `pipenv run isort .` to sort imports according to PEP8 https://www.python.org/dev/peps/pep-0008/
 2. `pipenv run black .` to otherwise format code according to PEP8
-3. `pipenv run pytest` to run all unit tests
+3. `pipenv run pytest --cov` to run all unit tests for functions.
+4. `pipenv run rct229 test` to run all rule definition tests.
 
 #### Mocking functions for pytests:
 - For an explanation of how to specify `<module>` in `patch("<module>.<imported_thing>")` see: https://medium.com/@durgaswaroop/writing-better-tests-in-python-with-pytest-mock-part-2-92b828e1453c
