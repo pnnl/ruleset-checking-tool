@@ -8,6 +8,9 @@ from rct229.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.are_a
 from rct229.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.are_all_terminal_heat_sources_none_or_null import (
     are_all_terminal_heat_sources_none_or_null,
 )
+from rct229.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.are_all_terminal_supplies_ducted import (
+    are_all_terminal_supplies_ducted,
+)
 from rct229.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.are_all_terminal_types_CAV import (
     are_all_terminal_types_cav,
 )
@@ -87,6 +90,7 @@ def is_baseline_system_3(rmi_b, hvac_b_id, terminal_unit_id_list, zone_id_list):
         and are_all_terminal_cool_sources_none_or_null(rmi_b, terminal_unit_id_list)
         and are_all_terminal_fans_null(rmi_b, terminal_unit_id_list)
         and are_all_terminal_types_cav(rmi_b, terminal_unit_id_list)
+        and are_all_terminal_supplies_ducted(rmi_b, terminal_unit_id_list)
     )
 
     if are_sys_data_matched:
