@@ -9,7 +9,7 @@
 - **B-RMI**: The baseline ruleset model instance
 
 **Returns:**  
-- **building_area_types_with_total_area_and_zones_dict**: A dict that saves all the HVAC building area types and includes a list of all the zone ids associated with area type as well as the total area of each building area type: {OTHER_NON_RESIDENTIAL: ["zone_1","zone_5"], PUBLIC_ASSEMBLY: ["zone_2, "zone_3", "zone_4"]}
+- **building_area_types_with_total_area_and_zones_dict**: A dict that saves all the HVAC building area types and includes a list of all the zone ids associated with area type as well as the total area of each building area type: {OTHER_NON_RESIDENTIAL: {"ZONE_IDS": ["zone_1","zone_5"], "AREA": 1234}, PUBLIC_ASSEMBLY: {"ZONE_IDS": ["zone_2, "zone_3", "zone_4"], "AREA": 34567}
  
 **Function Call:** None
 
