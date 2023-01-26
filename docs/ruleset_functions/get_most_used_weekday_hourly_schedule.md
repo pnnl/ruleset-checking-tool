@@ -8,7 +8,7 @@
 - **schedule_obj**: The schedule object sent to this function.  
 
 **Returns:**  
-- **get_most_used_weekday_hourly_schedule**: The function calculates and returns the most used weekday hourly schedule from an annual 8760 schedule as list of hourly values for a 24 hour period (Based on 24 matching hourly values (not just the sum across the day)).
+- **get_most_used_weekday_hourly_schedule**: The function calculates and returns the most used weekday hourly schedule from an annual 8760 schedule as list of hourly values for a 24 hour period (Not looking for average just looking for the most common schedule used on the weekdays in a year, even minor differences in schedules make the schedules considered different, this should be based on 24 hourly values (not just the sum across the day)). Count the number of unique weekday schedules and the one that is used the most times is the winner.
  
 **Function Call:**  None
 
