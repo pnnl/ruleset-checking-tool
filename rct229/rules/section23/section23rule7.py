@@ -36,11 +36,7 @@ class Section23Rule7(RuleDefinitionListIndexedBase):
 
     def is_applicable(self, context, data=None):
         rmi_b = context.baseline
-        # baseline_system_types_dict = get_baseline_system_types(rmi_b)
-        baseline_system_types_dict = {
-            "Sys-6": ["System 6"],
-            "Sys-8": [],
-        }  # This will be removed once PR #899 is merged
+        baseline_system_types_dict = get_baseline_system_types(rmi_b)
 
         return any(
             [
@@ -52,11 +48,7 @@ class Section23Rule7(RuleDefinitionListIndexedBase):
 
     def create_data(self, context, data):
         rmi_b = context.baseline
-        # baseline_system_types_dict = get_baseline_system_types(rmi_b)
-        baseline_system_types_dict = {
-            "Sys-6": ["System 6"],
-            "Sys-8": [],
-        }  # This will be removed once PR #899 is merged
+        baseline_system_types_dict = get_baseline_system_types(rmi_b)
         applicable_hvac_sys_ids = [
             hvac_id
             for sys_type in baseline_system_types_dict.keys()
