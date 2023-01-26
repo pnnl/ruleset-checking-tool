@@ -1,14 +1,14 @@
 {
-    "rule-23-6-a": {
+    "rule-23-7-a": {
         "Section": 23,
-        "Rule": 6,
+        "Rule": 7,
         "Test": "a",
-        "test_description": "VAV fans in system 6 are correctly sized to 50% of peak design load  with a performance efficiency of 0.35 W/cfm",
+        "test_description": "System 6's fan system correctly specified temperature control as constant",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "23-6",
+            "rule_id": "23-7",
             "ruleset_reference": "G3.1.3.14",
-            "rule_description": "For baseline systems 6 and 8, Fans in parallel VAV fan-powered boxes shall be sized for 50% of the peak design primary air (from the VAV air-handling unit) flow rate and shall be modeled with 0.35 W/cfm fan power.",
+            "rule_description": "For baseline systems 6 and 8,  supply air temperature setpoint shall be constant at the design condition",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
@@ -41,13 +41,10 @@
                                                         "type": "VARIABLE_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 6",
                                                         "heating_source": "ELECTRIC",
-                                                        "primary_airflow": 283.1684659199999,
                                                         "fan_configuration": "PARALLEL",
                                                         "fan": {
-                                                            "id": "Fan 1",
-                                                            "design_airflow": 141.58423295999995,
-                                                            "design_electric_power": 105
-                                                        }
+                                                            "id": "Fan 1"
+                                                        }													
                                                     }
                                                 ]
                                             },
@@ -63,12 +60,9 @@
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 6",
                                                         "heating_source": "ELECTRIC",
                                                         "fan_configuration": "PARALLEL",
-                                                        "primary_airflow": 188.77897727999994,
-                                                        "fan": {
-                                                            "id": "Fan 2",
-                                                            "design_airflow": 94.38948863999997,
-                                                            "design_electric_power": 70
-                                                        }
+														"fan": {
+                                                            "id": "Fan 2"
+                                                        }	
                                                     }
                                                 ]
                                             }
@@ -96,7 +90,8 @@
                                                         {
                                                             "id": "Return Fan 1"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "temperature_control": "CONSTANT"
                                                 }
                                             }
                                         ]
@@ -109,16 +104,16 @@
             }
         }
     },
-    "rule-23-6-b": {
+    "rule-23-7-b": {
         "Section": 23,
-        "Rule": 6,
+        "Rule": 7,
         "Test": "b",
-        "test_description": "VAV fans in system 6 are neither sized to 50% of peak design load  nor and have performance efficiency of greater than 0.35 W/cfm",
+        "test_description": "System 6's fan system incorrectly specified temperature control as outside air reset",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "23-6",
+            "rule_id": "23-7",
             "ruleset_reference": "G3.1.3.14",
-            "rule_description": "For baseline systems 6 and 8, Fans in parallel VAV fan-powered boxes shall be sized for 50% of the peak design primary air (from the VAV air-handling unit) flow rate and shall be modeled with 0.35 W/cfm fan power.",
+            "rule_description": "For baseline systems 6 and 8,  supply air temperature setpoint shall be constant at the design condition",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
@@ -151,13 +146,10 @@
                                                         "type": "VARIABLE_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 6",
                                                         "heating_source": "ELECTRIC",
-                                                        "primary_airflow": 212.37634943999993,
                                                         "fan_configuration": "PARALLEL",
-                                                        "fan": {
-                                                            "id": "Fan 1",
-                                                            "design_airflow": 141.58423295999995,
-                                                            "design_electric_power": 150
-                                                        }
+														"fan": {
+                                                            "id": "Fan 1"
+                                                        }	
                                                     }
                                                 ]
                                             },
@@ -173,12 +165,9 @@
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 6",
                                                         "heating_source": "ELECTRIC",
                                                         "fan_configuration": "PARALLEL",
-                                                        "primary_airflow": 160.46213068799995,
-                                                        "fan": {
-                                                            "id": "Fan 2",
-                                                            "design_airflow": 94.38948863999997,
-                                                            "design_electric_power": 80
-                                                        }
+														"fan": {
+                                                            "id": "Fan 2"
+                                                        }	
                                                     }
                                                 ]
                                             }
@@ -206,7 +195,8 @@
                                                         {
                                                             "id": "Return Fan 1"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "temperature_control": "OUTDOOR_AIR_RESET"
                                                 }
                                             }
                                         ]
