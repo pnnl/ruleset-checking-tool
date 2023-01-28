@@ -17,7 +17,8 @@ APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_11_1,
     HVAC_SYS.SYS_11_2,
 ]
-SUPPLY_AIRFLOW_COEFF = [0.1 * i for i in range(11)]
+VALIDATION_POINTS_LENGTH = 11
+SUPPLY_AIRFLOW_COEFF = [0.1 * i for i in range(VALIDATION_POINTS_LENGTH)]
 DESIGN_POWER_COEFF = [0.0, 0.03, 0.07, 0.13, 0.21, 0.30, 0.41, 0.54, 0.68, 0.83, 1.0]
 
 
@@ -107,7 +108,7 @@ class Section23Rule8(RuleDefinitionListIndexedBase):
                         SUPPLY_AIRFLOW_COEFF[idx] * design_airflow_b,
                         DESIGN_POWER_COEFF[idx] * design_electric_power_b,
                     ]
-                    for idx in range(11)
+                    for idx in range(VALIDATION_POINTS_LENGTH)
                 ]
 
                 return {
@@ -123,9 +124,9 @@ class Section23Rule8(RuleDefinitionListIndexedBase):
                 output_validation_points = calc_vals["output_validation_points"]
                 target_validation_points = calc_vals["target_validation_points"]
 
-                return len(output_validation_points) == len(
-                    target_validation_points
-                ) and all(
+                return len(
+                    output_validation_points
+                ) == VALIDATION_POINTS_LENGTH and all(
                     [
                         std_equal(x[0], y[0]) and std_equal(x[1], y[1])
                         for x, y in zip(
