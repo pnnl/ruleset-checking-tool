@@ -3,7 +3,24 @@
     "title": "Enumerations from RESNET",
     "description": "Schema addition for ASHRAE 229 related to enumerations found in RESNET publications.",
     "definitions": {
-        "AdditionalSurfaceAdjacentToRESNET": {
+        "RulesetModelOptionsRESNET": {
+            "type": "string",
+            "enum": [
+                "USER",
+                "RATED",
+                "REFERENCE",
+                "INDEX_ADJUSTMENT_DESIGN",
+                "INDEX_ADJUSTMENT_DESIGN_REFERENCE"
+            ],
+            "descriptions": [
+                "The building model as described without consideration of the ruleset",
+                "The rated model",
+                "The reference model",
+                "The index adjustment design model",
+                "The index adjustment design reference model"
+            ]
+        },
+        "AdditionalSurfaceAdjacentToOptionsRESNET": {
             "type": "string",
             "enum": [
                 "MULTIFAMILY_BUFFER_SPACE",
@@ -12,6 +29,17 @@
             "descriptions": [
                 "Multifamily Buffer Space",
                 "Common Wall"
+            ]
+        },
+        "OutputSchemaOptionsRESNET": {
+            "type": "string",
+            "enum": [
+                "OUTPUT_SCHEMA_RESNET",
+                "OTHER"
+            ],
+            "descriptions": [
+                "Output schema for RESNET",
+                "other"
             ]
         }
     }

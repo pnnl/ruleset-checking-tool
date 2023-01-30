@@ -2,9 +2,9 @@
 # Receptacle - Rule 12-3
 
 **Rule ID:** 12-3  
-**Rule Description:** User RMR Space Name in Proposed RMR?  
+**Rule Description:** User RMR Space ID in Proposed RMR?  
 **Rule Assertion:** Proposed RMR = User RMR  
-**Appendix G Section:** Receptacle  
+**Appendix G Section:** Section Table G3.1-12 Receptacles: Modeling Requirements for the Proposed design  
 **Appendix G Section Reference:** None  
 
 **Applicability:** All required data elements exist for P_RMR and U_RMR  
@@ -18,19 +18,21 @@
 
 ## Rule Logic:  
 
-- **Applicability Check 1:** ```length( for _space in U_RMR ) > 0:```
-- Get the name of each space in the building segment in the User model: ```For building_segment in U_RMR.building.building_segments:```  
-  - Get thermal_block from building segment: ```thermal_block in building_segment.thermal_blocks:```
-  - Get thermal_zone from thermal block: ```thermal_zone in thermal_block.zones:```
-  - Get space from thermal zone: ```space in thermal_zone.spaces:```  
-    - Get the name of the space: ```space_name = space.name```
-    - Add to the list of space names in the User model: ```space_names_user.append(space_name)```
+- **Applicability Check 1:** ```sum(length(zone.spaces in U_RMR)) > 0:```
+- Get the ID of each space in the building segment in the User model: ```for building_segment_user in U_RMR.building.building_segments:```  
+  - For each thermal_block in building segment: ```thermal_block_user in building_segment_user.thermal_blocks:```
+  - For each zone in thermal block: ```zone_user in thermal_block_user.zones:```
+  - For each space in zone: ```space_user in zone_user.spaces:```  
+    - Get the ID of the space: ```space_ID_user = space_user.ID```
+    - Add to the list of space IDs in the User model: ```space_IDs_user_list.append(space_ID_user)```
 
-- Get the name of each space in the building segment in the Proposed model: ```For building_segment in P_RMR.building.building_segments:```  
-  - Get thermal_block from building segment: ```thermal_block in building_segment.thermal_blocks:```
-  - Get thermal_zone from thermal block: ```thermal_zone in thermal_block.zones:```
-  - Get space from thermal zone: ```space in thermal_zone.spaces:```  
-    - Get the name of the space: ```space_name = space.name```
-    - Add to the list of space names in the Proposed model: ```space_names_proposed.append(space_name)```
+- Get the ID of each space in the building segment in the Proposed model: ```for building_segment_proposed in P_RMR.building.building_segments:```  
+  - For each thermal_block in building segment: ```thermal_block_proposed in building_segment_proposed.thermal_blocks:```
+  - For each zone in thermal block: ```zone_proposed in thermal_block_proposed.zones:```
+  - For each space in thermal zone: ```space_proposed in zone_proposed.spaces:```  
+    - Get the ID of the space: ```space_ID_proposed = space_proposed.ID```
+    - Add to the list of space IDs in the Proposed model: ```space_IDs_proposed_list.append(space_ID_proposed)```
 
-**Rule Assertion:** ```space_names_user == space_names_proposed```  
+**Rule Assertion:** ```sorted(space_IDs_user_list) == sorted(space_IDs_proposed_list)```  
+
+**[Back](../_toc.md)**

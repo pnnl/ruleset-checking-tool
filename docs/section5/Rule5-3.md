@@ -2,42 +2,30 @@
 # Envelope - Rule 5-3  
 
 **Rule ID:** 5-3  
-**Rule Description:** Opaque Assemblies used for new buildings, existing buildings, or additions shall conform with assemblies detailed in Appendix A and shall match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8: Below-grade walls—Concrete block (A4).  
-**Rule Assertion:** Baseline RMR Surface:U_factor = expected value  
+**Rule Description:** The building shall be modeled so that it does not shade itself.  
+**Rule Assertion:** Baseline RMR Building: surface.does_cast_shade = expected value  
 **Appendix G Section:** Section G3.1-5(b) Building Envelope Modeling Requirements for the Baseline building  
-**Appendix G Section Reference:** Tables G3.4-1 to G3.4-8  
+**Appendix G Section Reference:** Table G3.1 Section 5a  
 
 **Applicability:** All required data elements exist for B_RMR  
-**Applicability Checks:**  
-
-  1. Baseline space conditioning category (conditioned, semiheated, unconditioned), residential vs non-residential occupancy type and surface type (wall vs floor vs roof) are determined correctly  
+**Applicability Checks:**  None  
 
 **Manual Check:** None  
 **Evaluation Context:** Each Data Element  
-**Data Lookup:** Tables G3.4-1 to G3.4-8  
+**Data Lookup:** None  
 
 ## Rule Logic:  
 
-- **Applicability Check 1:** Baseline space conditioning category (conditioned, semiheated, unconditioned), residential vs non-residential occupancy type and surface type (wall vs floor vs roof) are determined correctly.  
+- For each building segment in the Baseline model: ```for building_segment_b in B_RMR.building.building_segments:```  
+ 
+  - For each zone in building segment: ```zone_b in building_segment_b.zones:```  
 
-- Get building climate zone: ```climate_zone = B_RMR.weather.climate_zone```  
+      - For each surface in zone: ```for surface_b in zone_b.surfaces:```  
 
-- For each building segment in the Baseline model: ```for building_segment_baseline in B_RMR.building.building_segments:```  
+        - Check that surface is exterior: ```if ( surface_b.adjacent_to == "EXTERIOR" ): exterior_vertical_surface_b = surface_b```  
 
-  - For each thermal_block from building segment: ```for thermal_block_baseline in building_segment_baseline.thermal_blocks:```  
+        **Rule Assertion:** Baseline exterior surface does not cast shade:  
 
-  - For each zone in thermal block: ```zone_baseline in thermal_block_baseline.zones:```  
+        - Case 1: ```exterior_vertical_surface_b.does_cast_shade == FALSE: PASS```  
 
-  - For each space in thermal zone: ```space_baseline in zone_baseline.spaces:```  
-
-    - Get space conditioning type: ```space_conditioning_type_baseline = space_baseline.conditioning_type```  
-
-      - Get baseline contruction from Table G3.4-1 to G3.4-8 based on space conditioning type, status type and function type: ```surface_performance_target = data_lookup(climate_zone,space_conditioning_type_baseline,"Walls, Below-Grade")```  
-
-    - For each surface in space: ```for surface_baseline in space_baseline.surfaces:```  
-
-      - Get the surface construction if the surface is below-grade wall: ```if ( surface_baseline.classification == "WALL" ) AND ( surface_baseline.adjacent_to == "GROUND" ): surface_construction_baseline = surface_baseline.construction```  
-
-      - Get the performance values for the construction: ```surface_performance_value_baseline = surface_construction_baseline.c_factor```  (Note XC, assumes for below-grade wall, RMR reports C-factor)
-
-    **Rule Assertion:** Baseline above-grade wall consruction modeled matches Table G3.4-1 to G3.4-8: ```surface_performance_value_baseline == surface_performance_target```  
+        - Case 2: ```exterior_vertical_surface_b.does_cast_shade == TRUE: FAIL```  

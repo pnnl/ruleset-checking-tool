@@ -9,24 +9,52 @@ This package provides a reference implementation of a Ruleset Checking Tool (RCT
 ASHRAE Standard 229P is a proposed standard entitled, "Protocols for Evaluating Ruleset Implementation in Building Performance Modeling Software". To learn more about the title/scope/purpose and status of the proposed standard development visit the standards project committee site at [ASHRAE SPC 229](http://spc229.ashraepcs.org/).
 
 ## Introduction
-The Ruleset Checking Tool is a Python package providing a command line tool for evaluating whether baseline and proposed Building Energy Models (BEM) meet the requirements of ANSI/ASHRAE/IES Standard 90.1-2019 Appendix G.  The tool accepts Ruleset Model Report (RMR) files representing the User, Baseline, and Proposed models as inputs, and generates an output report describing the RMR evalaution.
+The Ruleset Checking Tool (RCT) is a Python package providing a command line tool for evaluating whether baseline and proposed Building Energy Models (BEM) meet the requirements of ANSI/ASHRAE/IES Standard 90.1-2019 Appendix G.  The tool accepts Ruleset Model Report (RMR) files representing the User, Baseline, and Proposed models as inputs, and generates an output report describing the RMR evalaution.
 
 **This is an early alpha version and is highly unstable!**
 
 **This package will change significantly during the next several versions.**
 
-## Commands
-The following provides some useful commands as you get started using the package.
+## ASHRAE Standard 229P Workflows
+The RCT can be used for two different workflows within ASHRAE Standard 229P.  The first workflow is the *Project Testing Workflow*.  This workflow is used to evaluate RMR triplets for a design project to determine whether a ruleset is applied correctly in a building energy model.  The second workflow is the *Software Testing Workflow*.  This workflow consists of validation and verification software tests that ensure the ruleset is correctly evaluated by a RCT.
 
-This package is developed using Pipenv to manage packages during the build process.  First, make sure Pipenv is installed on your system using the following commands. Any new dependencies that are added to the package must be included in the Pipfile.
+### Project Testing Workflow
+
+A project RMR triplet is evaluated by running the *evaluate* command in the RCT.  The User, Baseline, and Proposed RMR file paths are provided as the input arguments to the *evaluate* command.  The output of this command is a JSON report defining the outcome of the rule evaluation on the provided RMR triplet.
+
+`rct229 evaluate user_rmr.json baseline_rmr.json proposed_rmr.json`  
+
+#### RMR Schema
+The RCT data model used by the RCT is based on the [RMR schema](https://github.com/open229/ruleset-model-report-schema).  All RMRs must comply with the version of the RMR schema corresponding to the RCT.  The RMR schema files used by the RCT are located within the [rct229/schema](rct229/schema) directory.  
+
+#### Rule Definition Strategy
+
+The definition of each of the individual rules contained with the RCT are documented in [Rule Definition Strategy](docs/_toc.md) (RDS) documents.  The purpose of the RDS is to act as a bridge between the narrative form of the ruleset document and the logical form of a programming language, allowing non-programmers to evaluate how the rules are implemented in the Python programming language.  The RDS documents provide a description of the specific intrepretation of a rule coded into the RCT.  In addition to the description of the each rule, the RDS describes how data from ruleset tables are handled and defines frequently used functions.  
+
+#### Rule Definition
+The core functionality of the RCT is the evaluation of logic defining each rule within a ruleset.  The rules are defined within the RCT by a Rule Definition.  The Rule Definition is a Python class that contains the logic necessary to evaluate the rule within the context of the RMR schema.  The Rule Definition files are are located in the [rct229/rules](rct229/rules) directory.
+
+### Software Testing Workflow
+
+The RCT validation and verification software test suite is run using the *<ADD IN FUTURE>* command.  This command composes RMR triplets for each of the Rule Tests and then evaluates each RMR triplet for the corresponding Rule Definition using the same rule engine as the Project Testing Workflow.  A report is provided that details any Rule Tests that provided unexpected results.
+
+#### Rule Tests
+The test cases for the Software Testing Workflow are defined in the Rule Test JSON files.  These files are located in the [rct229/ruletest_engine/ruletest_jsons](rct229/ruletest_engine/ruletest_jsons) directory.  The Rule Tests are contained within JSON files that define the related Rule Definition, the RMR transformation to apply, and the expected outcome of the test evaluation.  The JSON files can be generated using an Excel spreadsheet and Python scripts.  This process is described in the [Rule Test JSON Generation Guide](rct229/ruletest_engine/Ruletest_JSON_Generation_Guide.md).
+
+## Developing the RCT
+
+### Commands
+The following provides some useful commands as you get started developing the RCT package.
+
+This package is developed using Pipenv to manage packages during the build process.  First, make sure Pipenv is installed on your system using the following commands. Any new dependencies that are added to the package must be included in the Pipfile.  The package is currently being developed for Python 3.7.  This version of Python must be installed on your machine for Pipenv to work properly.
 
 Install `pipenv` using `pip`
 `pip install pipenv`
 
 Now tests can be run by first installing dependencies and then running pytest.
-1. `pipenv install --dev --skip-lock`
-2. `pipemv lock --pre`
+1. `pipenv install --dev`
 2. `pipenv run pytest`
+    - To see a coverage report, use `pipenv run pytest --cov`
 
 You can also package with pipenv to test the CLI tool.
 1. `pipenv install '-e .'`
@@ -36,11 +64,31 @@ Run with example RMRs
 1. `pipenv run rct229 evaluate examples\user_rmr.json examples\baseline_rmr.json examples\proposed_rmr.json`
 
 
-## Developer Notes
+### Developer Notes
+
+#### Branch and Pull Request naming convention:
+The branch or PR name should have the form:
+```
+CODE/INITIALS/DESCRIPTIVE_NAME
+```
+
+CODE is one of the following:
+- RCT:  for generic, high-level changes to the ruleset checking tool. Examples include updates to README.md, and the schema files
+- RDS:  for changes related to the RDS files
+- RS:  for changes to the ruleset code (the actual rules)
+- RT:  for changes to the rule test engine
+
+INIITIALS refers to the initials of the owner of the branch or PR.
+
+#### Commit procedure:
 Before committing changes you should run the following commands from the `ruleset-checking-tool` directory.
 1. `pipenv run isort .` to sort imports according to PEP8 https://www.python.org/dev/peps/pep-0008/
 2. `pipenv run black .` to otherwise format code according to PEP8
-3. `pipenv run pytest` to run all unit tests
+3. `pipenv run pytest --cov` to run all unit tests for functions.
+4. `pipenv run rct229 test` to run all rule definition tests.
+
+#### Mocking functions for pytests:
+- For an explanation of how to specify `<module>` in `patch("<module>.<imported_thing>")` see: https://medium.com/@durgaswaroop/writing-better-tests-in-python-with-pytest-mock-part-2-92b828e1453c
 
 
 ## Disclaimer Notice      

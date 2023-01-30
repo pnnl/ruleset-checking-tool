@@ -3,7 +3,26 @@
     "title": "Enumerations from ASHRAE 90.1-2019",
     "description": "Schema addition for ASHRAE 229 related to enumerations found in ASHRAE Standard 90.1-2019",
     "definitions": {
-        "CompliancePathType2019ASHRAE901": {
+        "RulesetModelOptions2019ASHRAE901": {
+            "type": "string",
+            "enum": [
+                "USER",
+                "PROPOSED",
+                "BASELINE_0",
+                "BASELINE_90",
+                "BASELINE_180",
+                "BASELINE_270"
+            ],
+            "descriptions": [
+                "The building model as described without consideration of the ruleset",
+                "The building model that corresponds with the Proposed Buildings Performance column of Appendix G Table G3.1",
+                "The building model that corresponds with the Baseline Buildings Performance column of Appendix G Table G3.1 with no rotation",
+                "The building model that corresponds with the Baseline Buildings Performance column of Appendix G Table G3.1 with 90 degree rotation",
+                "The building model that corresponds with the Baseline Buildings Performance column of Appendix G Table G3.1 with 180 degree rotation",
+                "The building model that corresponds with the Baseline Buildings Performance column of Appendix G Table G3.1 with 270 degree rotation"
+            ]
+        },
+        "CompliancePathOptions2019ASHRAE901": {
             "type": "string",
             "enum": [
                 "CODE_COMPLIANT",
@@ -14,7 +33,7 @@
                 "Beyond Code"
             ]
         },
-        "LightingSpaceType2019ASHRAE901T951TG38": {
+        "LightingBuildingAreaOptions2019ASHRAE901T951TG38": {
             "type": "string",
             "enum": [
                 "AUTOMOTIVE_FACILITY",
@@ -122,7 +141,7 @@
                 "Indicates that building area method is not used and instead the space-by-space method is used."
             ]
         },
-        "LightingSpaceType2019ASHRAE901TG37": {
+        "LightingSpaceOptions2019ASHRAE901TG37": {
             "type": "string",
             "enum": [
                 "ATRIUM_LOW_MEDIUM",
@@ -163,8 +182,7 @@
                 "GUEST_ROOM",
                 "JUDGES_CHAMBERS",
                 "DWELLING_UNIT",
-                "LABORATORY_IN_OR_AS_A_CLASSROOM",
-                "LABORATORY_ALL_OTHERS",
+                "LABORATORY_EXCEPT_IN_OR_AS_A_CLASSROOM",
                 "LAUNDRY_WASHING_AREA",
                 "LOADING_DOCK_INTERIOR",
                 "LOBBY_FACILITY_FOR_THE_VISUALLY_IMPAIRED",
@@ -269,8 +287,7 @@
                 "Guest Room",
                 "Judges Chambers",
                 "Dwelling Unit",
-                "Laboratory - In or as a classroom",
-                "Laboratory - All others",
+                "Laboratory - Except in or as a classroom",
                 "Laundry/Washing Area",
                 "Loading Dock, Interior",
                 "Lobby - Facility for the visually impaired (and not used primarily by the staff)",
@@ -439,11 +456,10 @@
                 null,
                 null,
                 null,
-                null,
                 null
             ]
         },
-        "LightingPurposeType2019ASHRAE901": {
+        "LightingPurposeOptions2019ASHRAE901": {
             "type": "string",
             "enum": [
                 "GENERAL",
@@ -458,7 +474,7 @@
                 "Unregulated"
             ]
         },
-        "ExteriorLightingAreas2019ASHRAE901TableG36": {
+        "ExteriorLightingAreaOptions2019ASHRAE901TableG36": {
             "type": "string",
             "enum": [
                 "UNCOVERED_PARKING_LOTS_AND_DRIVES",
@@ -472,7 +488,15 @@
                 "EXTERIOR_CANOPIES",
                 "OUTDOOR_SALES_OPEN_AREAS",
                 "STREET_FRONTAGE",
-                "NON_TRADABLE_FACADE"
+                "BUILDING_FACADE",
+                "AUTOMATED_TELLER_MACHINES",
+                "NIGHT_DEPOSITORIES",
+                "ENTRANCE_AND_GATEHOUSE",
+                "EMERGENCY_VEHICLE_LOADING_AREA",
+                "DRIVE_UP_WINDOWS_FAST_FOOD",
+                "PARKING_NEAR_24HR_RETAIL_ENTRANCES",
+                "MISCELLANEOUS_TRADABLE",
+                "MISCELLANEOUS_NON_TRADABLE"
             ],
             "descriptions": [
                 "Uncovered parking lots and drives",
@@ -486,7 +510,15 @@
                 "Exterior canopies",
                 "Outdoor sales - open areas",
                 "Street frontage",
-                "Non-tradable facade"
+                "Building facade",
+                "Automated teller machines",
+                "Night depositories",
+                "Entrance and gatehouses",
+                "Emergency vehicle loading area",
+                "Drive-up windows at fast-food restaurants",
+                "Parking near 24-hour retail entrances",
+                "Miscellaneous tradable",
+                "Miscellaneous non-tradable"
             ],
             "notes": [
                 null,
@@ -500,10 +532,18 @@
                 null,
                 null,
                 null,
-                null
+                null,
+                null,
+                null,
+                "Entrances and gatehouse inspection stations at guarded facilities.",
+                "Loading areas for law enforcement, fire, ambulance and other emergency service vehicles",
+                null,
+                null,
+                "This option would most often be used by software that does not support entire schema and doesn't know if exterior lighting is in a specific type but does know if it is tradable",
+                "This option would most often be used by software that does not support entire schema and doesn't know if exterior lighting is in a specific type but does know if it is non-tradable"
             ]
         },
-        "ExteriorLightingZones2019ASHRAE901": {
+        "ExteriorLightingZoneOptions2019ASHRAE901": {
             "type": "string",
             "enum": [
                 "ZONE_0_UNDEVELOPED",
@@ -527,7 +567,7 @@
                 "High-activity commercial districts in major metropolitan areas as designated by the local jurisdiction"
             ]
         },
-        "VentilationSpaceType2019ASHRAE901": {
+        "VentilationSpaceOptions2019ASHRAE901": {
             "type": "string",
             "enum": [
                 "ANIMAL_FACILITIES_ANIMAL_EXAM_ROOM_VETERINARY_OFFICE",
@@ -752,7 +792,7 @@
                 "Transient Residential - Dwelling unit"
             ]
         },
-        "ServiceWaterHeatingSpaceType2019ASHRAE901": {
+        "ServiceWaterHeatingSpaceOptions2019ASHRAE901": {
             "type": "string",
             "enum": [
                 "AUTOMOTIVE_FACILITY",
@@ -829,7 +869,7 @@
                 "All others"
             ]
         },
-        "ClimateZone2019ASHRAE901": {
+        "ClimateZoneOptions2019ASHRAE901": {
             "type": "string",
             "enum": [
                 "CZ0A",
@@ -874,7 +914,7 @@
                 "Subarctic/arctic"
             ]
         },
-        "VerticalFenestrationBuildingAreaType2019ASHRAE901": {
+        "VerticalFenestrationBuildingAreaOptions2019ASHRAE901": {
             "type": "string",
             "enum": [
                 "GROCERY_STORE",
@@ -891,7 +931,8 @@
                 "RETAIL_STRIP_MALL",
                 "SCHOOL_PRIMARY",
                 "SCHOOL_SECONDARY_AND_UNIVERSITY",
-                "WAREHOUSE_NONREFRIGERATED"
+                "WAREHOUSE_NONREFRIGERATED",
+                "OTHER"
             ],
             "descriptions": [
                 "Grocery store",
@@ -908,10 +949,11 @@
                 "Retail (strip mall)",
                 "School (primary)",
                 "School (secondary and university)",
-                "Warehouse (nonrefrigerated)"
+                "Warehouse (nonrefrigerated)",
+                "Other"
             ]
         },
-        "FenestrationFrameType2019ASHRAE901": {
+        "SubsurfaceFrameOptions2019ASHRAE901": {
             "type": "string",
             "enum": [
                 "ALUMINUM_WITHOUT_BREAK",
@@ -940,113 +982,7 @@
                 "Other"
             ]
         },
-        "RefrigerationType2019ASHRAE901": {
-            "type": "string",
-            "enum": [
-                "COMMERCIAL_REFRIGERATION",
-                "COMMERCIAL_REFRIGERATOR_SOLID_DOOR",
-                "COMMERCIAL_REFRIGERATOR_TRANSPARENT_DOOR",
-                "COMMERCIAL_FREEZER_SOLID_DOOR",
-                "COMMERCIAL_FREEZER_TRANSPARENT_DOOR",
-                "COMMERCIAL_PULLDOWN_REFRIGERATOR",
-                "COMMERCIAL_REFRIGERATOR_FREEZER_SOLID_DOOR",
-                "OTHER"
-            ],
-            "descriptions": [
-                "Commercial refrigeration",
-                "Commercial refrigerator solid door",
-                "Commercial refrigerator transparent door",
-                "Commercial freezer solid door",
-                "Commercial freezer transparent door",
-                "Commercial pulldown refrigerator",
-                "Commercial refrigerator freezer solid door",
-                "Other"
-            ]
-        },
-        "RefrigerationClass2019ASHRAE901": {
-            "type": "string",
-            "enum": [
-                "VOP_RC_M",
-                "SVO_RC_M",
-                "HZO_RC_M",
-                "VOP_RC_L",
-                "HZO_RC_L",
-                "VCT_RC_M",
-                "VCT_RC_L",
-                "SOC_RC_M",
-                "VOP_SC_M",
-                "SVO_SC_M",
-                "HZO_SC_M",
-                "HZO_SC_L",
-                "VCT_SC_I",
-                "VCS_SC_I",
-                "HCT_SC_I",
-                "SVO_RC_L",
-                "VOP_RC_I",
-                "SVO_RC_I",
-                "HZO_RC_I",
-                "VCT_RC_I",
-                "HCT_RC_M",
-                "HCT_RC_L",
-                "HCT_RC_I",
-                "VCS_RC_M",
-                "VCS_RC_L",
-                "VCS_RC_I",
-                "HCS_RC_M",
-                "HCS_RC_L",
-                "HCS_RC_I",
-                "SOC_RC_L",
-                "SOC_RC_I",
-                "VOP_SC_L",
-                "VOP_SC_I",
-                "SVO_SC_L",
-                "SVO_SC_I",
-                "HZO_SC_I",
-                "SOC_SC_I",
-                "HCS_SC_I"
-            ],
-            "descriptions": [
-                "Vertical open - Remote condensing - Medium temperature",
-                "Semivertical open - Remote condensing - Medium temperature",
-                "Horizontal open  -Remote condensing - Medium temperature",
-                "Vertical open - Remote condensing - Low temperature",
-                "Horizontal open - Remote condensing - Low temperature",
-                "Vertical transparent door - Remote condensing - Medium temperature",
-                "Vertical transparent door - Remote condensing - Low temperature",
-                "Service over counter - Remote condensing - Medium temperature",
-                "Vertical open - Self-contained - Medium temperature",
-                "Semivertical open - Self-contained - Medium temperature",
-                "Horizontal open - Self-contained - Medium temperature",
-                "Horizontal open - Self-contained - Low temperature",
-                "Vertical transparent door - Self-contained - Ice cream",
-                "Vertical solid door - Self-contained - Ice cream",
-                "Horizontal transparent door - Self-contained - Ice cream",
-                "Semivertical open - Remote condensing - Low temperature",
-                "Vertical open - Remote condensing - Ice cream",
-                "Semivertical open - Remote condensing - Ice cream",
-                "Horizontal open - Remote condensing - Ice cream",
-                "Vertical transparent door - Remote condensing - Ice cream",
-                "Horizontal transparent door - Remote condensing - Medium temperature",
-                "Horizontal transparent door - Remote condensing - Low temperature",
-                "Horizontal transparent door - Remote condensing - Ice cream",
-                "Vertical solid door - Remote condensing - Medium temperature",
-                "Vertical solid door - Remote condensing - Low temperature",
-                "Vertical solid door - Remote condensing - Ice cream",
-                "Horizontal solid door - Remote condensing - Medium temperature",
-                "Horizontal solid door - Remote condensing - Low temperature",
-                "Horizontal solid door - Remote condensing - Ice cream",
-                "Service over counter - Remote condensing - Low temperature",
-                "Service over counter - Remote condensing - Ice cream",
-                "Vertical open - Self contained - Low temperature",
-                "Vertical open - Self-contained - Ice cream",
-                "Semivertical open - Self-contained - Low temperature",
-                "Semivertical open - Self-contained - Ice cream",
-                "Horizontal open - Self-contained - Ice cream",
-                "Service over counter - Self-contained - Ice cream",
-                "Horizontal solid door - Self-contained - Ice cream"
-            ]
-        },
-        "PrescribedSchedules2019ASHRAE901": {
+        "PrescribedScheduleOptions2019ASHRAE901": {
             "type": "string",
             "enum": [
                 "NOT_APPLICABLE"
@@ -1055,19 +991,79 @@
                 "No prescribed schedules for Appendix G of ASHRAE Standard 90.1-2019. This field may be relavent for other rulesets."
             ]
         },
-        "SpaceStatusType2019ASHRAE901": {
+        "SpaceStatusOptions2019ASHRAE901": {
             "type": "string",
             "enum": [
                 "NEW",
-                "EXISTING",
-                "ADDITION",
-                "ALTERATION"
+                "EXISTING"
             ],
             "descriptions": [
                 "New",
-                "Existing",
-                "Addition",
-                "Alteration"
+                "Existing"
+            ]
+        },
+        "AdditionalSurfaceAdjacentToOptions2019ASHRAE901": {
+            "type": "string",
+            "enum": [
+                "UNENCLOSED",
+                "UNCONDITIONED",
+                "UNHEATED",
+                "SEMIHEATED"
+            ],
+            "descriptions": [
+                "The space on the other side of the surface is assumed to be unenclosed. The space on the other side of the surface is not explicity modeled.",
+                "The space on the other side of the surface is assumed to be unconditioned. The space on the other side of the surface is not explicity modeled.",
+                "Surface adjacent to a environment that is not heated but enclosed. The space on the other side of the surface is not explicity modeled.",
+                "Surface adjacent to a environment that is semi-heated. The space on the other side of the surface is not explicity modeled."
+            ]
+        },
+        "SubsurfaceSubclassificationOptions2019ASHRAE901": {
+            "type": "string",
+            "enum": [
+                "METAL_COILING_DOOR",
+                "NONSWINGING_DOOR",
+                "SECTIONAL_GARAGE_DOOR",
+                "SWINGING_DOOR",
+                "SPANDREL_GLASS",
+                "GLASS_BLOCK",
+                "OTHER"
+            ],
+            "descriptions": [
+                "an upward-acting, nonswinging door assembly consisting of interlocking horizontal slats or sheets that, upon opening the door, roll up around a horizontal barrel above the door opening.",
+                "roll-up, metal coiling, sliding, and any other door that is not a swinging door.",
+                "an upward-acting, nonswinging door assembly made of two or more horizontal panels hinged together vertically.",
+                "a door having an operable opaque panel with hinges or pivots on one side.",
+                "opaque glass that conceals structural building components from being visible from the exterior of the building",
+                "a translucent, hollow or solid block of glass for glazing openings or constructing partitions",
+                "other subclassifications"
+            ]
+        },
+        "HeatingVentilatingAirConditioningBuildingAreaOptions2019ASHRAE901": {
+            "type": "string",
+            "enum": [
+                "RESIDENTIAL",
+                "PUBLIC_ASSEMBLY",
+                "RETAIL",
+                "HOSPITAL",
+                "OTHER_NON_RESIDENTIAL"
+            ],
+            "descriptions": [
+                "Residential",
+                "Public assembly",
+                "Retail",
+                "Hospital",
+                "Other non-residential"
+            ]
+        },
+        "OutputSchemaOptions2019ASHRAE901": {
+            "type": "string",
+            "enum": [
+                "OUTPUT_SCHEMA_ASHRAE901_2019",
+                "OTHER"
+            ],
+            "descriptions": [
+                "Output schema for ASHRAE 90.1 2019",
+                "other"
             ]
         }
     }

@@ -1,0 +1,46 @@
+{
+  "prm_water_chiller_min_efficiency": [
+    {
+      "equipment_type": "displacement",
+      "inclusive_minimum_capacity_tons": 0.0,
+      "exclusive_maximum_capacity_tons": 150.0,
+      "minimum_full_load_efficiency_kw_per_ton": 0.790,
+      "minimum_integrated_part_load_kw_per_ton": 0.676
+    },
+    {
+      "equipment_type": "displacement",
+      "inclusive_minimum_capacity_tons": 150.0,
+      "exclusive_maximum_capacity_tons": 300.0,
+      "minimum_full_load_efficiency_kw_per_ton": 0.718,
+      "minimum_integrated_part_load_kw_per_ton": 0.629
+    },
+    {
+      "equipment_type": "displacement",
+      "inclusive_minimum_capacity_tons": 300.0,
+      "exclusive_maximum_capacity_tons": 9999.99,
+      "minimum_full_load_efficiency_kw_per_ton": 0.639,
+      "minimum_integrated_part_load_kw_per_ton": 0.572
+    },
+    {
+      "equipment_type": "centrifugal",
+      "inclusive_minimum_capacity_tons": 0.0,
+      "exclusive_maximum_capacity_tons": 150.0,
+      "minimum_full_load_efficiency_kw_per_ton": 0.703,
+      "minimum_integrated_part_load_kw_per_ton": 0.670
+    },
+    {
+      "equipment_type": "centrifugal",
+      "inclusive_minimum_capacity_tons": 150.0,
+      "exclusive_maximum_capacity_tons": 300.0,
+      "minimum_full_load_efficiency_kw_per_ton": 0.634,
+      "minimum_integrated_part_load_kw_per_ton": 0.596
+    },
+    {
+      "equipment_type": "centrifugal",
+      "inclusive_minimum_capacity_tons": 300.0,
+      "exclusive_maximum_capacity_tons": 9999.99,
+      "minimum_full_load_efficiency_kw_per_ton": 0.576,
+      "minimum_integrated_part_load_kw_per_ton": 0.549
+    }
+  ]
+}
