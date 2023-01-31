@@ -20,12 +20,13 @@
   1. get_baseline_system_types()
   2. get_zone_conditioning_category()
   3. get_loop_zone_list_w_area()
+  4. baseline_system_type_compare()
 
 **Applicability Check:**
 
 - Get B-RMR system types: `baseline_hvac_system_dict = get_baseline_system_types(B-RMR)`
   
-  - Check if B-RMR is modeled with at least one air-side system that is Type-1, 5, 7, 11.2, 12, 1a, 7a, 11.2a, 12a, continue to rule logic: `if any(sys_type in baseline_hvac_system_dict.keys() for sys_type in ["SYS-1", "SYS-5", "SYS-7", "SYS-11.2", "SYS-12", "SYS-1A", "SYS-7A", "SYS-11.2A", "SYS-12A"]): CHECK_RULE_LOGIC`
+  - Check if B-RMR is modeled with at least one air-side system that is Type-1, 5, 7, 11.2, 12, 1a, 7a, 11.2a, 12a, continue to rule logic: `if any(baseline_system_type_compare(sys_type, target_system_type, true) for sys_type in baseline_hvac_system_dict.keys() for target_system_type in [HVAC.SYS_1, HVAC.SYS_5, HVAC.SYS_7, HVAC.SYS_11_2, HVAC.SYS_12, HVAC.SYS_1A, HVAC.SYS_7A, HVAC.SYS_11_2A, HVAC.SYS_12A]): CHECK_RULE_LOGIC`
 
   - Else, rule is not applicable to B-RMR: `else: RULE_NOT_APPLICABLE`
 
