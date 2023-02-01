@@ -18,7 +18,7 @@ class RuleDefinitionListBase(RuleDefinitionBase):
         description=None,
         ruleset_section_title=None,
         standard_section=None,
-        is_primary_rule=False,
+        is_primary_rule=None,
         rmr_context="",
         required_fields=None,
         manual_check_required_msg="Manual Check Required",
@@ -130,10 +130,9 @@ class RuleDefinitionListBase(RuleDefinitionBase):
 
         Returns
         -------
-        list of UserBaselineProposedVals
-            A filtered list of context trios
+        bool True iff context_item should passed through the filter.
         """
-        return context_item
+        return True
 
     def rule_check(self, context, calc_vals=None, data={}):
         """Overrides the base implementation to apply a rule to each entry in

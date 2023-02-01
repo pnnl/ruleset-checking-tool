@@ -13,7 +13,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Yes",
-            "schema_version": 0.018
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "baseline": {
@@ -162,7 +162,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Yes",
-            "schema_version": 0.018
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "baseline": {
@@ -311,7 +311,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Yes",
-            "schema_version": 0.018
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "baseline": {
@@ -460,7 +460,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Yes",
-            "schema_version": 0.018
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "baseline": {
@@ -609,7 +609,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Yes",
-            "schema_version": 0.018
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "baseline": {
@@ -758,7 +758,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Yes",
-            "schema_version": 0.018
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "baseline": {
@@ -907,7 +907,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Yes",
-            "schema_version": 0.018
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "baseline": {
@@ -1059,7 +1059,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Yes",
-            "schema_version": 0.018
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "baseline": {
@@ -1211,7 +1211,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Yes",
-            "schema_version": 0.018
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "baseline": {
@@ -1326,7 +1326,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Yes",
-            "schema_version": 0.018
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "baseline": {
@@ -1441,7 +1441,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Yes",
-            "schema_version": 0.018
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "baseline": {
@@ -1556,7 +1556,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Yes",
-            "schema_version": 0.018
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "baseline": {
@@ -1671,7 +1671,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Yes",
-            "schema_version": 0.018
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "baseline": {
@@ -1816,7 +1816,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Yes",
-            "schema_version": 0.018
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "baseline": {
@@ -1955,7 +1955,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Yes",
-            "schema_version": 0.018
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "baseline": {
@@ -2101,7 +2101,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Yes",
-            "schema_version": 0.018
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "baseline": {
@@ -2247,7 +2247,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Yes",
-            "schema_version": 0.018
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "baseline": {
@@ -2397,7 +2397,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Yes",
-            "schema_version": 0.018
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "baseline": {
@@ -2547,7 +2547,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Yes",
-            "schema_version": 0.018
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "baseline": {
@@ -2697,7 +2697,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Yes",
-            "schema_version": 0.018
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "baseline": {
@@ -2843,7 +2843,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Yes",
-            "schema_version": 0.018
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "baseline": {
@@ -2989,7 +2989,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Yes",
-            "schema_version": 0.018
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "baseline": {
@@ -3135,7 +3135,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Yes",
-            "schema_version": 0.018
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "baseline": {
@@ -3281,7 +3281,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Yes",
-            "schema_version": 0.018
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "baseline": {
@@ -3427,7 +3427,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Yes",
-            "schema_version": 0.018
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "baseline": {
@@ -3573,7 +3573,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Yes",
-            "schema_version": 0.018
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "baseline": {
@@ -3728,7 +3728,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Yes",
-            "schema_version": 0.018
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "baseline": {
@@ -3883,7 +3883,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Yes",
-            "schema_version": 0.018
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "baseline": {
@@ -4040,7 +4040,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Yes",
-            "schema_version": 0.018
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "baseline": {
@@ -4197,7 +4197,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Yes",
-            "schema_version": 0.018
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "baseline": {
@@ -4352,7 +4352,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Yes",
-            "schema_version": 0.018
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "baseline": {
@@ -4507,7 +4507,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Yes",
-            "schema_version": 0.018
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "baseline": {
@@ -4662,7 +4662,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Yes",
-            "schema_version": 0.018
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "baseline": {
@@ -4817,7 +4817,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Yes",
-            "schema_version": 0.018
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "baseline": {
@@ -4974,7 +4974,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Yes",
-            "schema_version": 0.018
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "baseline": {
@@ -5131,7 +5131,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Yes",
-            "schema_version": 0.018
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "baseline": {
@@ -5288,7 +5288,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Yes",
-            "schema_version": 0.018
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "baseline": {
@@ -5445,7 +5445,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Yes",
-            "schema_version": 0.018
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "baseline": {
@@ -5593,7 +5593,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Yes",
-            "schema_version": 0.018
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "baseline": {
@@ -5741,7 +5741,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Yes",
-            "schema_version": 0.018
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "baseline": {
@@ -5889,7 +5889,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Yes",
-            "schema_version": 0.018
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "baseline": {
@@ -6037,7 +6037,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Yes",
-            "schema_version": 0.018
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "baseline": {
@@ -6183,7 +6183,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Yes",
-            "schema_version": 0.018
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "baseline": {
@@ -6329,7 +6329,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Yes",
-            "schema_version": 0.018
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "baseline": {
@@ -6474,7 +6474,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Yes",
-            "schema_version": 0.018
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "baseline": {
@@ -6619,7 +6619,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Yes",
-            "schema_version": 0.018
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "baseline": {
@@ -6765,7 +6765,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Yes",
-            "schema_version": 0.018
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "baseline": {
@@ -6911,7 +6911,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Yes",
-            "schema_version": 0.018
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "baseline": {
@@ -7023,7 +7023,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Yes",
-            "schema_version": 0.018
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "baseline": {
@@ -7135,7 +7135,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Yes",
-            "schema_version": 0.018
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "baseline": {
@@ -7281,7 +7281,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Yes",
-            "schema_version": 0.018
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "baseline": {
@@ -7427,7 +7427,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Yes",
-            "schema_version": 0.018
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "baseline": {
@@ -7577,7 +7577,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Yes",
-            "schema_version": 0.018
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "baseline": {
@@ -7727,7 +7727,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Yes",
-            "schema_version": 0.018
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "baseline": {
@@ -7843,7 +7843,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Yes",
-            "schema_version": 0.018
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "baseline": {
@@ -7959,7 +7959,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Yes",
-            "schema_version": 0.018
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "baseline": {
@@ -8115,7 +8115,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Yes",
-            "schema_version": 0.018
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "baseline": {
@@ -8275,7 +8275,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Yes",
-            "schema_version": 0.018
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "baseline": {
@@ -8435,7 +8435,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Yes",
-            "schema_version": 0.018
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "baseline": {
@@ -8591,7 +8591,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Yes",
-            "schema_version": 0.018
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "baseline": {
@@ -8755,7 +8755,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Yes",
-            "schema_version": 0.018
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "baseline": {
@@ -8915,7 +8915,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Yes",
-            "schema_version": 0.018
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "baseline": {
@@ -9064,7 +9064,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Yes",
-            "schema_version": 0.018
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "baseline": {
@@ -9213,7 +9213,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Yes",
-            "schema_version": 0.018
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "baseline": {
@@ -9358,7 +9358,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Yes",
-            "schema_version": 0.018
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "baseline": {
@@ -9534,7 +9534,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Yes",
-            "schema_version": 0.018
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "baseline": {
@@ -9683,7 +9683,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Yes",
-            "schema_version": 0.018
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "baseline": {
@@ -9832,7 +9832,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "No",
-            "schema_version": 0.018
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "baseline": {
@@ -9985,7 +9985,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "No",
-            "schema_version": 0.018
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "baseline": {
@@ -10138,7 +10138,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Yes",
-            "schema_version": 0.018
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "proposed": {
@@ -10385,7 +10385,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Yes",
-            "schema_version": 0.018
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "proposed": {
@@ -10410,9 +10410,9 @@
                                                         "id": "VAV Air Terminal 1",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "System 5",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
-                                                        "heating_from_loop": "Purchased HW Loop 1"
+                                                        "heating_from_loop": "Boiler Loop 1"
                                                     }
                                                 ]
                                             },
@@ -10425,25 +10425,25 @@
                                                         "id": "VAV Air Terminal 2",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "System 5",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
-                                                        "heating_from_loop": "Purchased HW 1"
+                                                        "heating_from_loop": "Boiler Loop 1"
                                                     }
                                                 ]
                                             }
                                         ],
                                         "heating_ventilating_air_conditioning_systems": [
                                             {
-                                                "id": "System 5",
+                                                "id": "System 7",
                                                 "cooling_system": {
-                                                    "id": "DX Coil 1",
-                                                    "cooling_system_type": "DIRECT_EXPANSION",
+                                                    "id": "CHW Coil 1",
+                                                    "cooling_system_type": "FLUID_LOOP",
                                                     "chilled_water_loop": "Chilled Water Loop 1"
                                                 },
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 1",
                                                     "heating_system_type": "FLUID_LOOP",
-                                                    "hot_water_loop": "Purchased HW Loop 1"
+                                                    "hot_water_loop": "Boiler Loop 1"
                                                 },
                                                 "fan_system": {
                                                     "id": "VAV Fan System 1",
@@ -10465,28 +10465,57 @@
                                 ]
                             }
                         ],
+                        "boilers": [
+                            {
+                                "id": "Boiler 1",
+                                "loop": "Boiler Loop 1",
+                                "energy_source_type": "NATURAL_GAS"
+                            }
+                        ],
+                        "chillers": [
+                            {
+                                "id": "Chiller 1",
+                                "cooling_loop": "Chiller Loop 1"
+                            }
+                        ],
+                        "pumps": [
+                            {
+                                "id": "Boiler Pump 1",
+                                "loop_or_piping": "Boiler Loop 1",
+                                "speed_control": "FIXED_SPEED"
+                            },
+                            {
+                                "id": "Chiller Pump 1",
+                                "loop_or_piping": "Chiller Loop 1",
+                                "speed_control": "FIXED_SPEED"
+                            },
+                            {
+                                "id": "Secondary CHW Pump",
+                                "loop_or_piping": "Secondary CHW Loop 1",
+                                "speed_control": "VARIABLE_SPEED"
+                            }
+                        ],
+                        "fluid_loops": [
+                            {
+                                "id": "Boiler Loop 1",
+                                "type": "HEATING"
+                            },
+                            {
+                                "id": "Chilled Water Loop 1",
+                                "type": "COOLING",
+                                "child_loops": [
+                                    {
+                                        "id": "Secondary CHW Loop 1",
+                                        "type": "COOLING"
+                                    }
+                                ]
+                            }
+                        ],
                         "external_fluid_source": [
                             {
                                 "id": "Purchased CW 1",
                                 "loop": "Chilled Water Loop 1",
                                 "type": "CHILLED_WATER"
-                            }
-                        ],
-                        "pumps": [
-                            {
-                                "id": "HW Pump 1",
-                                "loop_or_piping": "Purchased HW Loop 1",
-                                "speed_control": "FIXED_SPEED"
-                            }
-                        ],
-                        "fluid_loops": [
-                            {
-                                "id": "Purchased HW Loop 1",
-                                "type": "HEATING"
-                            },
-                            {
-                                "id": "Chilled Water Loop 1",
-                                "type": "COOLING"
                             }
                         ]
                     }
@@ -10514,9 +10543,9 @@
                                                         "id": "VAV Air Terminal 1",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "System 5",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
-                                                        "heating_from_loop": "Purchased HW Loop 1"
+                                                        "heating_from_loop": "Boiler Loop 1"
                                                     }
                                                 ]
                                             },
@@ -10529,24 +10558,25 @@
                                                         "id": "VAV Air Terminal 2",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "System 5",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
-                                                        "heating_from_loop": "Purchased HW 1"
+                                                        "heating_from_loop": "Boiler Loop 1"
                                                     }
                                                 ]
                                             }
                                         ],
                                         "heating_ventilating_air_conditioning_systems": [
                                             {
-                                                "id": "System 5",
+                                                "id": "System 7",
                                                 "cooling_system": {
-                                                    "id": "DX Coil 1",
-                                                    "cooling_system_type": "DIRECT_EXPANSION"
+                                                    "id": "CHW Coil 1",
+                                                    "cooling_system_type": "FLUID_LOOP",
+                                                    "chilled_water_loop": "Secondary CHW Loop 1"
                                                 },
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 1",
                                                     "heating_system_type": "FLUID_LOOP",
-                                                    "hot_water_loop": "Purchased HW Loop 1"
+                                                    "hot_water_loop": "Boiler Loop 1"
                                                 },
                                                 "fan_system": {
                                                     "id": "VAV Fan System 1",
@@ -10568,24 +10598,50 @@
                                 ]
                             }
                         ],
-                        "external_fluid_source": [
+                        "boilers": [
                             {
-                                "id": "Purchased HW 1",
-                                "loop": "Purchased HW Loop 1",
-                                "type": "HOT_WATER"
+                                "id": "Boiler 1",
+                                "loop": "Boiler Loop 1",
+                                "energy_source_type": "NATURAL_GAS"
+                            }
+                        ],
+                        "chillers": [
+                            {
+                                "id": "Chiller 1",
+                                "cooling_loop": "Chiller Loop 1"
                             }
                         ],
                         "pumps": [
                             {
-                                "id": "HW Pump 1",
-                                "loop_or_piping": "Purchased HW Loop 1",
+                                "id": "Boiler Pump 1",
+                                "loop_or_piping": "Boiler Loop 1",
                                 "speed_control": "FIXED_SPEED"
+                            },
+                            {
+                                "id": "Chiller Pump 1",
+                                "loop_or_piping": "Chiller Loop 1",
+                                "speed_control": "FIXED_SPEED"
+                            },
+                            {
+                                "id": "Secondary CHW Pump",
+                                "loop_or_piping": "Secondary CHW Loop 1",
+                                "speed_control": "VARIABLE_SPEED"
                             }
                         ],
                         "fluid_loops": [
                             {
-                                "id": "Purchased HW Loop 1",
+                                "id": "Boiler Loop 1",
                                 "type": "HEATING"
+                            },
+                            {
+                                "id": "Chiller Loop 1",
+                                "type": "COOLING",
+                                "child_loops": [
+                                    {
+                                        "id": "Secondary CHW Loop 1",
+                                        "type": "COOLING"
+                                    }
+                                ]
                             }
                         ]
                     }

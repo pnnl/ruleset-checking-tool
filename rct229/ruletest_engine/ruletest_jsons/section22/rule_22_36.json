@@ -13,7 +13,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "No",
-            "schema_version": 0.018
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "baseline": {
@@ -166,7 +166,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "No",
-            "schema_version": 0.018
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "baseline": {
