@@ -35,6 +35,7 @@ def check_purchased_chw_hhw_status_dict(rmi_b):
         return purchased_chw_hhw_status_dict
 
     hvac_systems = find_all("$..heating_ventilating_air_conditioning_systems[*]", rmi_b)
+    terminals = find_all("$..terminals[*]", rmi_b)
     for external_fluid_source in external_fluid_sources:
         if (
             getattr_(external_fluid_source, "external_fluid_source", "type")
@@ -53,6 +54,13 @@ def check_purchased_chw_hhw_status_dict(rmi_b):
                     not purchased_chw_hhw_status_dict["purchased_cooling"]
                     and find_one("$.cooling_system.chilled_water_loop", hvac_sys)
                     in purchased_chw_loop_array
+                ):
+                    purchased_chw_hhw_status_dict["purchased_cooling"] = True
+
+            for terminal in terminals:
+                if (
+                    not purchased_chw_hhw_status_dict["purchased_cooling"]
+                    and terminal.get("cooling_from_loop") in purchased_chw_loop_array
                 ):
                     purchased_chw_hhw_status_dict["purchased_cooling"] = True
 
@@ -82,16 +90,11 @@ def check_purchased_chw_hhw_status_dict(rmi_b):
                     ):
                         purchased_chw_hhw_status_dict["purchased_heating"] = True
 
-            for terminal in find_all("$..terminals[*]", rmi_b):
+            for terminal in terminals:
                 if (
                     not purchased_chw_hhw_status_dict["purchased_heating"]
                     and terminal.get("heating_from_loop") in purchased_hhw_loop_array
                 ):
                     purchased_chw_hhw_status_dict["purchased_heating"] = True
-                if (
-                    not purchased_chw_hhw_status_dict["purchased_cooling"]
-                    and terminal.get("cooling_from_loop") in purchased_chw_loop_array
-                ):
-                    purchased_chw_hhw_status_dict["purchased_cooling"] = True
 
     return purchased_chw_hhw_status_dict
