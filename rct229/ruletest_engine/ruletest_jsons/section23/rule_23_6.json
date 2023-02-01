@@ -42,6 +42,7 @@
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 6",
                                                         "heating_source": "ELECTRIC",
                                                         "primary_airflow": 283.1684659199999,
+                                                        "fan_configuration": "PARALLEL",
                                                         "fan": {
                                                             "id": "Fan 1",
                                                             "design_airflow": 141.58423295999995,
@@ -151,6 +152,7 @@
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 6",
                                                         "heating_source": "ELECTRIC",
                                                         "primary_airflow": 212.37634943999993,
+                                                        "fan_configuration": "PARALLEL",
                                                         "fan": {
                                                             "id": "Fan 1",
                                                             "design_airflow": 141.58423295999995,
