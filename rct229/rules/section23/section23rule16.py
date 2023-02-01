@@ -25,7 +25,7 @@ APPLICABLE_SYS_TYPES = [
 
 HEATING_SYSTEM = schema_enums["HeatingSystemOptions"]
 FLUID_LOOP = schema_enums["FluidLoopOptions"]
-TENP_20_degF = 20.0 * ureg("delta_degF")
+REQUIRED_SET_POINT_REDUCTION = 20.0 * ureg("delta_degF")
 
 
 class Section23Rule16(RuleDefinitionListIndexedBase):
@@ -64,12 +64,12 @@ class Section23Rule16(RuleDefinitionListIndexedBase):
         hvac_max_zone_setpoint_dict = {}
         for zone in find_all("$..zones[*]", rmi_b):
             zone_design_heating_setpoint = getattr_(
-                zone, "design_heating_setpoint", "design_thermostat_heating_setpoint"
+                zone, "zone", "design_thermostat_heating_setpoint"
             )
             for terminal in find_all("$..terminals[*]", zone):
                 hvac_id = getattr_(
                     terminal,
-                    "system",
+                    "terminal",
                     "served_by_heating_ventilating_air_conditioning_system",
                 )
                 hvac_max_zone_setpoint_dict = {
@@ -84,12 +84,12 @@ class Section23Rule16(RuleDefinitionListIndexedBase):
                 }
 
         # find preheat_system's hot water loop type
-        hot_water_loop_type_dict = {}
-        for preheat_system in find_all("$..preheat_system", rmi_b):
-            hot_water_loop = preheat_system["hot_water_loop"]
-            hot_water_loop_type_dict[hot_water_loop] = find_exactly_one_fluid_loop(
-                rmi_b, hot_water_loop
+        hot_water_loop_type_dict = {
+            preheat_system["hot_water_loop"]: find_exactly_one_fluid_loop(
+                rmi_b, preheat_system["hot_water_loop"]
             )["type"]
+            for preheat_system in find_all("$..preheat_system", rmi_b)
+        }
 
         # find applicable hvac sys ids
         baseline_system_types_dict = get_baseline_system_types(rmi_b)
@@ -108,9 +108,10 @@ class Section23Rule16(RuleDefinitionListIndexedBase):
         }
 
     def list_filter(self, context_item, data):
+        hvac_sys_b = context_item.baseline
         applicable_hvac_sys_ids = data["applicable_hvac_sys_ids"]
 
-        return context_item.baseline["id"] in applicable_hvac_sys_ids
+        return hvac_sys_b["id"] in applicable_hvac_sys_ids
 
     class HVACRule(RuleDefinitionBase):
         def __init__(self):
@@ -159,6 +160,6 @@ class Section23Rule16(RuleDefinitionListIndexedBase):
                 and hot_water_loop_type == FLUID_LOOP.HEATING
                 and std_equal(
                     heating_coil_setpoint,
-                    hvac_max_zone_setpoint - TENP_20_degF,
+                    hvac_max_zone_setpoint - REQUIRED_SET_POINT_REDUCTION,
                 )
             )
