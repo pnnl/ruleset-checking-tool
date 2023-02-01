@@ -11,7 +11,7 @@ from rct229.ruleset_functions.baseline_systems.is_baseline_system_1 import (
 )
 from rct229.schema.validate import schema_validate_rmr
 
-SYS_1_RMD = {
+SYS_1_TEST_RMD = {
     "id": "ASHRAE229 1",
     "ruleset_model_instances": [
         {
@@ -193,7 +193,7 @@ SYS_1_RMD = {
 
 
 def test__TEST_RMD_baseline_system_1__is_valid():
-    schema_validation_result = schema_validate_rmr(SYS_1_RMD)
+    schema_validation_result = schema_validate_rmr(SYS_1_TEST_RMD)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"
@@ -202,7 +202,7 @@ def test__TEST_RMD_baseline_system_1__is_valid():
 def test_is_baseline_system_1_true():
     assert (
         is_baseline_system_1(
-            SYS_1_RMD["ruleset_model_instances"][0],
+            SYS_1_TEST_RMD["ruleset_model_instances"][0],
             "PTAC 1",
             ["PTAC Terminal 1"],
             ["Thermal Zone 1"],
@@ -214,7 +214,7 @@ def test_is_baseline_system_1_true():
 def test_is_baseline_system_1a_true():
     assert (
         is_baseline_system_1(
-            SYS_1_RMD["ruleset_model_instances"][0],
+            SYS_1_TEST_RMD["ruleset_model_instances"][0],
             "PTAC 1a",
             ["PTAC Terminal 1a"],
             ["Thermal Zone 1a"],
@@ -226,7 +226,7 @@ def test_is_baseline_system_1a_true():
 def test_is_baseline_system_1b_true():
     assert (
         is_baseline_system_1(
-            SYS_1_RMD["ruleset_model_instances"][0],
+            SYS_1_TEST_RMD["ruleset_model_instances"][0],
             "PTAC 1b",
             ["PTAC Terminal 1b"],
             ["Thermal Zone 1b"],
@@ -238,7 +238,7 @@ def test_is_baseline_system_1b_true():
 def test_is_baseline_system_1c_true():
     assert (
         is_baseline_system_1(
-            SYS_1_RMD["ruleset_model_instances"][0],
+            SYS_1_TEST_RMD["ruleset_model_instances"][0],
             "PTAC 1c",
             ["PTAC Terminal 1c"],
             ["Thermal Zone 1c"],
