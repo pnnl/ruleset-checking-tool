@@ -4,10 +4,10 @@ import importlib
 __all__ = [
     "section23rule2",
     "section23rule3",
-    # "section23rule6",
-    # "section23rule7",
+    "section23rule6",
+    "section23rule7",
     "section23rule8",
-    # "section23rule16",
+    "section23rule16",
 ]
 
 
