@@ -119,7 +119,7 @@ def get_baseline_system_types(rmi_b):
                 if hvac_sys != HVAC_SYS.UNMATCHED:
                     baseline_hvac_system_dict[hvac_sys].append(hvac_b_id)
                     sys_found = True
-                    break
+                    # break # TODO: This line must be uncommented before we ship the software. The reason why we commented this line is because an edge case HVAC system could (potentially) match multiple HVAC basseline systems, which require RCT developers to refine the `is_baseline_system` logic.
 
             assert_(
                 sys_found,

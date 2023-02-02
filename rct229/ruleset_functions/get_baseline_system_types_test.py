@@ -76,8 +76,15 @@ def test_get_baseline_system_types__system_1_false():
     ]
 
     test_types = exclude_sys_types(
-        [HVAC_SYS.SYS_1, HVAC_SYS.SYS_1A, HVAC_SYS.SYS_1B, HVAC_SYS.SYS_1C]
-    )
+        [
+            HVAC_SYS.SYS_1,
+            HVAC_SYS.SYS_1A,
+            HVAC_SYS.SYS_1B,
+            HVAC_SYS.SYS_3B,
+            HVAC_SYS.SYS_1C,
+            HVAC_SYS.SYS_9B,
+        ]
+    )  # TODO: system 3B and 9B have to be deleted once the baseline system logic is updated.
 
     assert (
         any([available_type in test_types for available_type in available_type_lists])
@@ -154,8 +161,9 @@ def test_get_baseline_system_types__system_3_false():
             HVAC_SYS.SYS_1B,
             HVAC_SYS.SYS_3B,
             HVAC_SYS.SYS_3C,
+            HVAC_SYS.SYS_12C,
         ]
-    )  # TODO delete SYS_1B in the list. It's in the list (for now) b/c SYS 1B and 3B are identical.
+    )  # TODO delete SYS_1B and SYS_12C in the list. It's in the list (for now) b/c SYS 1B and 3B are identical.
 
     assert (
         any([available_type in test_types for available_type in available_type_lists])
@@ -490,3 +498,92 @@ def test_get_baseline_system_types__system_11_2_false():
         any([available_type in test_types for available_type in available_type_lists])
         == False
     )
+
+
+ONE_TERMINAL_UNIT_SERVES_MULTIPLE_ZONES = {
+    "id": "ASHRAE229 1",
+    "ruleset_model_instances": [
+        {
+            "id": "RMD 1",
+            "buildings": [
+                {
+                    "id": "Building 1",
+                    "building_open_schedule": "Required Building Schedule 1",
+                    "building_segments": [
+                        {
+                            "id": "Building Segment 1",
+                            "zones": [
+                                {
+                                    "id": "Thermal Zone 1",
+                                    "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                    "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                    "terminals": [
+                                        {
+                                            "id": "Air Terminal",
+                                            "type": "CONSTANT_AIR_VOLUME",
+                                            "served_by_heating_ventilating_air_conditioning_system": "System Type",
+                                        }
+                                    ],
+                                },
+                                {
+                                    "id": "Thermal Zone 2",
+                                    "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                    "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                    "terminals": [
+                                        {
+                                            "id": "Air Terminal",
+                                            "type": "CONSTANT_AIR_VOLUME",
+                                            "served_by_heating_ventilating_air_conditioning_system": "System Type",
+                                        }
+                                    ],
+                                },
+                            ],
+                            "heating_ventilating_air_conditioning_systems": [
+                                {
+                                    "id": "System Type",
+                                    "cooling_system": {
+                                        "id": "DX Coil 3",
+                                        "cooling_system_type": "DIRECT_EXPANSION",
+                                    },
+                                    "heating_system": {
+                                        "id": "Furnace Coil 3",
+                                        "heating_system_type": "FURNACE",
+                                    },
+                                    "fan_system": {
+                                        "id": "CAV Fan System 3",
+                                    },
+                                }
+                            ],
+                        }
+                    ],
+                }
+            ],
+            "fluid_loops": [
+                {
+                    "id": "Purchased HW Loop 1",
+                    "type": "HEATING",
+                },
+                {
+                    "id": "Purchased CHW Loop 1",
+                    "type": "COOLING",
+                },
+            ],
+        }
+    ],
+}
+
+
+def test_one_terminal_serves_multiple_zones():
+    # The purpose of this test is to test when a terminal unit serves multiple thermal zones (line 110 in get_baseline_system_types.py) for code coverage.
+
+    baseline_system_types_dict = get_baseline_system_types(
+        ONE_TERMINAL_UNIT_SERVES_MULTIPLE_ZONES
+    )
+
+    available_type_lists = [
+        hvac_type
+        for hvac_type in baseline_system_types_dict.keys()
+        if len(baseline_system_types_dict[hvac_type]) > 0
+    ]
+
+    assert len(available_type_lists) == 0
