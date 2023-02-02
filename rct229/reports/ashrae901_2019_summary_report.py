@@ -76,8 +76,8 @@ Replace-Undetermined
                     _parse_result_helper(element)
                 if (
                     sum(outcome_dict.values()) == 0
-                ):  # if result is empty, fill up with `UNDETERMINED` (for now) # TODO check whether empty result is resolved
-                    outcome_dict[RCTOutcomeLabel.UNDETERMINED] = 1
+                ):  # if result is empty, fill up with `NOT_APPLICABLE` (for now) # TODO check whether empty result is resolved
+                    outcome_dict[RCTOutcomeLabel.NOT_APPLICABLE] = 1
                 return outcome_dict
             elif isinstance(result, dict):
                 _parse_result_helper(result["result"])
@@ -109,6 +109,7 @@ Replace-Undetermined
     - **90.1-2019 Section**: {rule_outcome['standard_section']}
     - **Overall Rule Evaluation Outcome**: {overall_result}
     - **Number of applicable components**: {no_of_applicable_component} 
+      
       | Pass %: {pass_rate}| Fail %: {fail_rate}| Not applicable %: {not_applicable_rate}| Undetermined %: {undetermined_rate}| 
       |:--------------:|:--------------:|:--------------:|:--------------:|
         """
