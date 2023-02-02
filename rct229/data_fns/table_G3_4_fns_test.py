@@ -31,29 +31,42 @@ def test__table_G34_CZ3A_ABOVE_GRADE_WALL_EXTERIOR_RESIDENTIAL():
         "u_value": 0.084 * ip_u_value_units
     }
 
+
 def test__table_G34_CZ3A_WWR_EXTERIOR_RESIDENTIAL():
-    assert table_G34_lookup("CZ3A", "EXTERIOR RESIDENTIAL", "VERTICAL GLAZING", 0.09) == {
+    assert table_G34_lookup(
+        "CZ3A", "EXTERIOR RESIDENTIAL", "VERTICAL GLAZING", 0.09
+    ) == {
         "u_value": 0.57 * ip_u_value_units,
         "solar_heat_gain_coefficient": 0.39,
     }
 
+
 def test__table_G34_CZ3C_WWR_EXTERIOR_RESIDENTIAL():
-    assert table_G34_lookup("CZ3C", "EXTERIOR RESIDENTIAL", "VERTICAL GLAZING", 0.09) == {
+    assert table_G34_lookup(
+        "CZ3C", "EXTERIOR RESIDENTIAL", "VERTICAL GLAZING", 0.09
+    ) == {
         "u_value": 1.22 * ip_u_value_units,
         "solar_heat_gain_coefficient": 0.61,
     }
 
+
 def test__table_G34_CZ3C_WWR_40_EXTERIOR_RESIDENTIAL():
-    assert table_G34_lookup("CZ3C", "EXTERIOR RESIDENTIAL", "VERTICAL GLAZING", 0.39) == {
+    assert table_G34_lookup(
+        "CZ3C", "EXTERIOR RESIDENTIAL", "VERTICAL GLAZING", 0.39
+    ) == {
         "u_value": 1.22 * ip_u_value_units,
         "solar_heat_gain_coefficient": 0.34,
     }
 
+
 def test__table_G34_CZ4A_WWR_EXTERIOR_RESIDENTIAL():
-    assert table_G34_lookup("CZ4A", "EXTERIOR RESIDENTIAL", "VERTICAL GLAZING", 0.09) == {
+    assert table_G34_lookup(
+        "CZ4A", "EXTERIOR RESIDENTIAL", "VERTICAL GLAZING", 0.09
+    ) == {
         "u_value": 0.57 * ip_u_value_units,
         "solar_heat_gain_coefficient": 0.39,
     }
+
 
 def test__table_G34_CZ4A_ABOVE_GRADE_WALL_EXTERIOR_RESIDENTIAL():
     assert table_G34_lookup("CZ4A", "EXTERIOR RESIDENTIAL", "ABOVE-GRADE WALL") == {
