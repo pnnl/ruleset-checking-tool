@@ -112,7 +112,7 @@ def table_G34_lookup(
         { assembly_maximum_u_value: Quantity - The assembly maximum u value given by Table G3.4-1 }
 
     """
-    climate_zone_set = CLIMATE_ZONE_ENUMERATION_TO_CLIMATE_ZONE_SET_MAP[climate_zone]
+    climate_zone_set = climate_zone_adjustment_for_fenestration_data(climate_zone, CLIMATE_ZONE_ENUMERATION_TO_CLIMATE_ZONE_SET_MAP[climate_zone], wwr or skylit_wwr)
     building_category = SURFACE_CONDITIONING_CATEGORY_TO_BUILDING_CATEGORY_MAP[
         surface_conditioning_category
     ]
@@ -166,3 +166,20 @@ def table_G34_lookup(
         ]
     # TODO need to add fenestration properties
     return search_results
+
+
+def climate_zone_adjustment_for_fenestration_data(rct_climate_zone:str, osstd_climate_zone: str, fenestration_request: bool):
+    """
+    Helper function to adjust climate zone string:
+
+    Parameters
+    ----------
+    rct_climate_zone
+    osstd_climate_zone
+    fenestration_request
+
+    Returns
+    -------
+
+    """
+    return osstd_climate_zone + rct_climate_zone[-1] if fenestration_request and osstd_climate_zone.endswith("3") else osstd_climate_zone
