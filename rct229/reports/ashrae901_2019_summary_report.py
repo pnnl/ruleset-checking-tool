@@ -90,7 +90,9 @@ Replace-Undetermined
 
         # determine whether overall outcome is pass/fail/undetermined/not_applicable
         overall_result = self.calculate_rule_outcome(rule_outcome_result_dict)
-        self.ruleset_outcome[self.section_dict[rule_outcome["id"].split("-")[0]]][overall_result] += 1
+        self.ruleset_outcome[self.section_dict[rule_outcome["id"].split("-")[0]]][
+            overall_result
+        ] += 1
         self.ruleset_outcome["All"][overall_result] += 1
 
         # calculate pass/fail/undetermined/not applicable rate
