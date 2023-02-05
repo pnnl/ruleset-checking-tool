@@ -18,8 +18,8 @@ APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_11_2,
 ]
 VALIDATION_POINTS_LENGTH = 11
-SUPPLY_AIRFLOW_COEFF = [0.1 * i for i in range(VALIDATION_POINTS_LENGTH)]
-DESIGN_POWER_COEFF = [0.0, 0.03, 0.07, 0.13, 0.21, 0.30, 0.41, 0.54, 0.68, 0.83, 1.0]
+SUPPLY_AIRFLOW_COEFFS = [0.1 * i for i in range(VALIDATION_POINTS_LENGTH)]
+DESIGN_POWER_COEFFS = [0.0, 0.03, 0.07, 0.13, 0.21, 0.30, 0.41, 0.54, 0.68, 0.83, 1.0]
 
 
 class Section23Rule8(RuleDefinitionListIndexedBase):
@@ -106,8 +106,8 @@ class Section23Rule8(RuleDefinitionListIndexedBase):
 
                 target_validation_points = [
                     [
-                        SUPPLY_AIRFLOW_COEFF[idx] * design_airflow_b,
-                        DESIGN_POWER_COEFF[idx] * design_electric_power_b,
+                        SUPPLY_AIRFLOW_COEFFS[idx] * design_airflow_b,
+                        DESIGN_POWER_COEFFS[idx] * design_electric_power_b,
                     ]
                     for idx in range(VALIDATION_POINTS_LENGTH)
                 ]
@@ -129,8 +129,8 @@ class Section23Rule8(RuleDefinitionListIndexedBase):
                     output_validation_points
                 ) == VALIDATION_POINTS_LENGTH and all(
                     [
-                        std_equal(x[0], y[0]) and std_equal(x[1], y[1])
-                        for x, y in zip(
+                        std_equal(ovp[0], tvp[0]) and std_equal(ovp[1], tvp[1])
+                        for ovp, tvp in zip(
                             output_validation_points, target_validation_points
                         )
                     ]
