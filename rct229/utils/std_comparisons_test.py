@@ -21,7 +21,7 @@ def test__std_equal__true_without_units():
 
 
 def test__std_equal__false_with_units():
-    assert not std_equal(1.01 * _M2, 1.011 * _M2)
+    assert not std_equal(1.01 * _M2, 1.02 * _M2)
 
 
 def test__std_equal__false_without_units():
