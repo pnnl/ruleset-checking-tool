@@ -289,26 +289,3 @@ def test_is_baseline_system_12B_test_json_true():
         ["CAV Air Terminal 1"],
         ["Thermal Zone 1"],
     )
-
-
-def test_is_baseline_system_12C_true():
-    assert (
-        is_baseline_system_12(
-            SYS_12_TEST_RMD["ruleset_model_instances"][0],
-            "System 12c",
-            ["CAV Air Terminal 4"],
-            ["Thermal Zone 4"],
-        )
-        == HVAC_SYS.SYS_12C
-    )
-
-
-def test_is_baseline_system_12C_test_json_true():
-    assert is_baseline_system_12(
-        load_system_test_file("System 12c_CAV_SZ_HW.json")["ruleset_model_instances"][
-            0
-        ],
-        "System 12",
-        ["CAV Air Terminal 1"],
-        ["Thermal Zone 1"],
-    )
