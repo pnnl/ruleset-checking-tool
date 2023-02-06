@@ -29,10 +29,10 @@ TEST_BUILDING = {
                                 },
                                 {
                                     "id": "terminal_4",
-                                    # intentionally omit `served_by_heating_ventilating_air_conditioning_system` key to test 'if hvac_sys_id:' condition in in get_dict_of_zones_and_terminal_units_served_by_hvac_sys.py
+                                    # intentionally omit `served_by_heating_ventilating_air_conditioning_system` key to test 'if hvac_sys_id:' condition in get_dict_of_zones_and_terminal_units_served_by_hvac_sys.py
                                 },
                                 {
-                                    # intentionally added to test 'if terminal_id not in terminal_unit_list:' condition in get_dict_of_zones_and_terminal_units_served_by_hvac_sys.py
+                                    # intentionally added the duplicate to test 'if terminal_id not in terminal_unit_list:' condition in get_dict_of_zones_and_terminal_units_served_by_hvac_sys.py
                                     "id": "terminal_1",
                                     "served_by_heating_ventilating_air_conditioning_system": "hvac_1",
                                 },
