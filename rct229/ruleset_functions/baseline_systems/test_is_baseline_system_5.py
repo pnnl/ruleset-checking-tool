@@ -143,13 +143,16 @@ def test_is_baseline_system_5_true():
 
 
 def test_is_baseline_system_5_test_json_true():
-    assert is_baseline_system_5(
-        load_system_test_file("System_5_PVAV_HW_Reheat.json")[
-            "ruleset_model_instances"
-        ][0],
-        "System 5",
-        ["VAV Air Terminal 1"],
-        ["Thermal Zone 1"],
+    assert (
+        is_baseline_system_5(
+            load_system_test_file("System_5_PVAV_HW_Reheat.json")[
+                "ruleset_model_instances"
+            ][0],
+            "System 5",
+            ["VAV Air Terminal 1"],
+            ["Thermal Zone 1"],
+        )
+        == HVAC_SYS.SYS_5
     )
 
 
@@ -166,11 +169,14 @@ def test_is_baseline_system_5B_true():
 
 
 def test_is_baseline_system_5B_test_json_true():
-    assert is_baseline_system_5(
-        load_system_test_file("System_5b_PVAV_HW_Reheat.json")[
-            "ruleset_model_instances"
-        ][0],
-        "System 5",
-        ["VAV Air Terminal 1"],
-        ["Thermal Zone 1"],
+    assert (
+        is_baseline_system_5(
+            load_system_test_file("System_5b_PVAV_HW_Reheat.json")[
+                "ruleset_model_instances"
+            ][0],
+            "System 5",
+            ["VAV Air Terminal 1"],
+            ["Thermal Zone 1"],
+        )
+        == HVAC_SYS.SYS_5B
     )

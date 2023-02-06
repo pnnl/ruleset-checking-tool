@@ -79,11 +79,14 @@ def test_is_baseline_system_9_true():
 
 
 def test_is_baseline_system_9_test_json_true():
-    assert is_baseline_system_9(
-        load_system_test_file("System_9_Warm_Air_Furnace_Gas.json")[
-            "ruleset_model_instances"
-        ][0],
-        "System 9",
-        ["Air Terminal"],
-        ["Thermal Zone 1"],
+    assert (
+        is_baseline_system_9(
+            load_system_test_file("System_9_Warm_Air_Furnace_Gas.json")[
+                "ruleset_model_instances"
+            ][0],
+            "System 9",
+            ["Air Terminal"],
+            ["Thermal Zone 1"],
+        )
+        == HVAC_SYS.SYS_9
     )

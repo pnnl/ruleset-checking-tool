@@ -1,6 +1,7 @@
 from rct229.ruleset_functions.baseline_systems.baseline_hvac_test_util import (
     load_system_test_file,
 )
+from rct229.ruleset_functions.baseline_systems.baseline_system_util import HVAC_SYS
 from rct229.ruleset_functions.baseline_systems.is_baseline_system_9b import (
     is_baseline_system_9b,
 )
@@ -80,16 +81,19 @@ def test_is_baseline_system_9B_true():
             ["Constant Air Terminal 9B"],
             ["Thermal Zone 9B"],
         )
-        == True
+        == HVAC_SYS.SYS_9B
     )
 
 
 def test_is_baseline_system_9B_test_json_true():
-    assert is_baseline_system_9b(
-        load_system_test_file("System_9b_Warm_Air_Furnace_Gas.json")[
-            "ruleset_model_instances"
-        ][0],
-        "System 9B",
-        ["Air Terminal"],
-        ["Thermal Zone 1"],
+    assert (
+        is_baseline_system_9b(
+            load_system_test_file("System_9b_Warm_Air_Furnace_Gas.json")[
+                "ruleset_model_instances"
+            ][0],
+            "System 9B",
+            ["Air Terminal"],
+            ["Thermal Zone 1"],
+        )
+        == HVAC_SYS.SYS_9B
     )

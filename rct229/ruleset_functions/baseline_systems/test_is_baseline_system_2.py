@@ -81,9 +81,12 @@ def test_is_baseline_system_2_true():
 
 
 def test_is_baseline_system_2_test_json_true():
-    assert is_baseline_system_2(
-        load_system_test_file("System_2_PTHP.json")["ruleset_model_instances"][0],
-        "PTHP 1",
-        ["PTHP Terminal 1"],
-        ["Thermal Zone 1"],
+    assert (
+        is_baseline_system_2(
+            load_system_test_file("System_2_PTHP.json")["ruleset_model_instances"][0],
+            "PTHP 1",
+            ["PTHP Terminal 1"],
+            ["Thermal Zone 1"],
+        )
+        == HVAC_SYS.SYS_2
     )

@@ -248,11 +248,14 @@ def test_is_baseline_system_1c_true():
 
 
 def test_is_baseline_system_1_test_json_true():
-    assert is_baseline_system_1(
-        load_system_test_file("System_1_PTAC.json")["ruleset_model_instances"][0],
-        "PTAC 1",
-        ["PTAC Terminal 1"],
-        ["Thermal Zone 1"],
+    assert (
+        is_baseline_system_1(
+            load_system_test_file("System_1_PTAC.json")["ruleset_model_instances"][0],
+            "PTAC 1",
+            ["PTAC Terminal 1"],
+            ["Thermal Zone 1"],
+        )
+        == HVAC_SYS.SYS_1
     )
 
 
@@ -266,18 +269,33 @@ def test_is_baseline_system_1_a_test_json_true():
 
 
 def test_is_baseline_system_1_b_test_json_true():
-    assert is_baseline_system_1(
-        load_system_test_file("System_1b_PTAC.json")["ruleset_model_instances"][0],
+    assert (
+        is_baseline_system_1(
+            load_system_test_file("System_1b_PTAC.json")["ruleset_model_instances"][0],
+            "PTAC 1",
+            ["PTAC Terminal 1"],
+            ["Thermal Zone 1"],
+        )
+        == HVAC_SYS.SYS_1B
+    )
+
+
+def test_is_baseline_system_1_c_test_json_true():
+    a = load_system_test_file("System_1c_PTAC.json")["ruleset_model_instances"][0]
+
+    b = is_baseline_system_1(
+        a,
         "PTAC 1",
         ["PTAC Terminal 1"],
         ["Thermal Zone 1"],
     )
 
-
-def test_is_baseline_system_1_c_test_json_true():
-    assert is_baseline_system_1(
-        load_system_test_file("System_1c_PTAC.json")["ruleset_model_instances"][0],
-        "PTAC 1",
-        ["PTAC Terminal 1"],
-        ["Thermal Zone 1"],
+    assert (
+        is_baseline_system_1(
+            load_system_test_file("System_1c_PTAC.json")["ruleset_model_instances"][0],
+            "PTAC 1",
+            ["PTAC Terminal 1"],
+            ["Thermal Zone 1"],
+        )
+        == HVAC_SYS.SYS_1C
     )
