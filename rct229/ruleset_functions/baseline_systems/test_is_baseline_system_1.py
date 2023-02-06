@@ -281,15 +281,6 @@ def test_is_baseline_system_1_b_test_json_true():
 
 
 def test_is_baseline_system_1_c_test_json_true():
-    a = load_system_test_file("System_1c_PTAC.json")["ruleset_model_instances"][0]
-
-    b = is_baseline_system_1(
-        a,
-        "PTAC 1",
-        ["PTAC Terminal 1"],
-        ["Thermal Zone 1"],
-    )
-
     assert (
         is_baseline_system_1(
             load_system_test_file("System_1c_PTAC.json")["ruleset_model_instances"][0],
@@ -299,3 +290,6 @@ def test_is_baseline_system_1_c_test_json_true():
         )
         == HVAC_SYS.SYS_1C
     )
+
+# YJ: Need to check the following systems
+# 1C, 8, 9B, 10, 11.1A
