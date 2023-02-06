@@ -21,6 +21,7 @@ __all__ = [
     "section5rule35",
     "section5rule36",
     "section5rule37",
+    "section5rule38",
     "section5rule40",
     "section5rule42",
     "section5rule44",
