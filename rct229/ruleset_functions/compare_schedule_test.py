@@ -1,5 +1,4 @@
 import pytest
-
 from rct229.ruleset_functions.compare_schedules import compare_schedules
 from rct229.utils.assertions import RCTFailureException
 

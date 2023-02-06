@@ -1,7 +1,6 @@
 import operator
 
 import pytest
-
 from rct229.ruleset_functions.compare_standard_val import compare_standard_val
 from rct229.schema.config import ureg
 
