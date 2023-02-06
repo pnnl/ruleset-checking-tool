@@ -1,3 +1,6 @@
+from rct229.ruleset_functions.baseline_systems.baseline_hvac_test_util import (
+    load_system_test_file,
+)
 from rct229.ruleset_functions.baseline_systems.baseline_system_util import HVAC_SYS
 from rct229.ruleset_functions.baseline_systems.is_baseline_system_11_2 import (
     is_baseline_system_11_2,
@@ -161,6 +164,20 @@ def test_is_baseline_system__11_2():
     )
 
 
+def test_is_baseline_system__11_2_test_json_true():
+    assert (
+        is_baseline_system_11_2(
+            load_system_test_file("System_11.2_VAV_SZ.json")["ruleset_model_instances"][
+                0
+            ],
+            "System 11",
+            ["VAV Air Terminal 1"],
+            ["Thermal Zone 1"],
+        )
+        == HVAC_SYS.SYS_11_2
+    )
+
+
 def test_is_baseline_system__11_2A():
     assert (
         is_baseline_system_11_2(
@@ -168,6 +185,20 @@ def test_is_baseline_system__11_2A():
             "System Type 11.2A",
             ["VAV Air Terminal 1A"],
             ["Thermal Zone 1A"],
+        )
+        == HVAC_SYS.SYS_11_2A
+    )
+
+
+def test_is_baseline_system__11_2A_test_json_true():
+    assert (
+        is_baseline_system_11_2(
+            load_system_test_file("System_11.2a_VAV_SZ.json")[
+                "ruleset_model_instances"
+            ][0],
+            "System 11",
+            ["VAV Air Terminal 1"],
+            ["Thermal Zone 1"],
         )
         == HVAC_SYS.SYS_11_2A
     )

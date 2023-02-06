@@ -1,3 +1,6 @@
+from rct229.ruleset_functions.baseline_systems.baseline_hvac_test_util import (
+    load_system_test_file,
+)
 from rct229.ruleset_functions.baseline_systems.baseline_system_util import HVAC_SYS
 from rct229.ruleset_functions.baseline_systems.is_baseline_system_7 import (
     is_baseline_system_7,
@@ -245,6 +248,20 @@ def test_is_baseline_system_7_true():
     )
 
 
+def test_is_baseline_system_7_test_json_true():
+    assert (
+        is_baseline_system_7(
+            load_system_test_file("System_7_VAV_HW_Reheat.json")[
+                "ruleset_model_instances"
+            ][0],
+            "System 7",
+            ["VAV Air Terminal 1"],
+            ["Thermal Zone 1"],
+        )
+        == HVAC_SYS.SYS_7
+    )
+
+
 def test_is_baseline_system_7a_true():
     assert (
         is_baseline_system_7(
@@ -252,6 +269,20 @@ def test_is_baseline_system_7a_true():
             "System 7a",
             ["VAV Air Terminal 2"],
             ["Thermal Zone 2"],
+        )
+        == HVAC_SYS.SYS_7A
+    )
+
+
+def test_is_baseline_system_7a_test_json_true():
+    assert (
+        is_baseline_system_7(
+            load_system_test_file("System_7a_VAV_HW_Reheat.json")[
+                "ruleset_model_instances"
+            ][0],
+            "System 7",
+            ["VAV Air Terminal 1"],
+            ["Thermal Zone 1"],
         )
         == HVAC_SYS.SYS_7A
     )
@@ -269,6 +300,20 @@ def test_is_baseline_system_7b_true():
     )
 
 
+def test_is_baseline_system_7b_test_json_true():
+    assert (
+        is_baseline_system_7(
+            load_system_test_file("System_7b_VAV_HW_Reheat.json")[
+                "ruleset_model_instances"
+            ][0],
+            "System 7",
+            ["VAV Air Terminal 1"],
+            ["Thermal Zone 1"],
+        )
+        == HVAC_SYS.SYS_7B
+    )
+
+
 def test_is_baseline_system_7c_true():
     assert (
         is_baseline_system_7(
@@ -276,6 +321,20 @@ def test_is_baseline_system_7c_true():
             "System 7c",
             ["VAV Air Terminal 4"],
             ["Thermal Zone 4"],
+        )
+        == HVAC_SYS.SYS_7C
+    )
+
+
+def test_is_baseline_system_7c_test_json_true():
+    assert (
+        is_baseline_system_7(
+            load_system_test_file("System_7c_VAV_HW_Reheat.json")[
+                "ruleset_model_instances"
+            ][0],
+            "System 7",
+            ["VAV Air Terminal 1"],
+            ["Thermal Zone 1"],
         )
         == HVAC_SYS.SYS_7C
     )
