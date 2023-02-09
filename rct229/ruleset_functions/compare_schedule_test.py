@@ -36,6 +36,23 @@ def test__Test_Schedule_Compare_Success_2():
     )
 
 
+def test__Test_Schedule_Compare_Success_3():
+    """
+    Test that will not compare 100 hours between two schedules.
+    Expect 8760.0 compared and match with eflh difference = 100.0
+    """
+    schedule_1 = [1.0] * 8760
+    # `schedule_2` has different schedules with `schedule_1` for the first 100 hrs to test out the `if schedule_1[index] == schedule_2[index]:` logic
+    schedule_2 = [0.0] * 100 + [1.0] * 8660
+    mask_schedule = [1] * 8760
+    results = compare_schedules(schedule_1, schedule_2, mask_schedule, False)
+    assert (
+        results["total_hours_compared"] == 8760.0
+        and results["total_hours_matched"] == 8660.0
+        and results["eflh_difference"] == 100.0
+    )
+
+
 def test__Test_Schedule_Compare_Failed_1():
     """
     Test that will apply multiplier to schedule_2 to match schedule_1.
