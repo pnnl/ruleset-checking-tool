@@ -38,7 +38,7 @@ def test__Test_Schedule_Compare_Success_2():
 
 def test__Test_Schedule_Compare_Success_3():
     """
-    Test that will not compare 100 hours between two schedules.
+    Test when two schedules are not identical.
     Expect 8760.0 compared and match with eflh difference = 100.0
     """
     schedule_1 = [1.0] * 8760
