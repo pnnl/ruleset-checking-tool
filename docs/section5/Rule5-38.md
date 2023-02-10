@@ -30,7 +30,7 @@
 
 - Check if B_RMR has exterior mixed type skylight: `if rmr_scc_skylight_roof_ratios_dictionary["EXTERIOR MIXED"] > 0:`
 
-  - Check if residential and non-residential type skylight SHGC requirements for different skylight-roof-ratio are the same, get skylight SHGC requirements: `if ( data_lookup(table_G3_4, climate_zone, "RESIDENTIAL, "SKYLIGHT", "0%-2.0%", "ASSEMBLY MAX. SHGC") == data_lookup(table_G3_4, climate_zone, "RESIDENTIAL, "SKYLIGHT", "2.1%+", "ASSEMBLY MAX. SHGC") ) AND ( data_lookup(table_G3_4, climate_zone, "NON-RESIDENTIAL, "SKYLIGHT", "0%-2.0%", "ASSEMBLY MAX. SHGC") == data_lookup(table_G3_4, climate_zone, "NON-RESIDENTIAL, "SKYLIGHT", "2.1%+", "ASSEMBLY MAX. SHGC") ) AND ( data_lookup(table_G3_4, climate_zone, "RESIDENTIAL, "SKYLIGHT", "0%-2.0%", "ASSEMBLY MAX. SHGC") == data_lookup(table_G3_4, climate_zone, "NON-RESIDENTIAL, "SKYLIGHT", "0%-2.0%", "ASSEMBLY MAX. SHGC") ): target_shgc_mixed = data_lookup(table_G3_4, climate_zone, "RESIDENTIAL, "SKYLIGHT", "0%-2.0%", "ASSEMBLY MAX. SHGC")`
+  - Check if residential and non-residential type skylight SHGC requirements for different skylight-roof-ratio are the same, get skylight SHGC requirements: `if (data_lookup(table_G3_4, climate_zone, "EXTERIOR RESIDENTIAL, "SKYLIGHT", 0, "ASSEMBLY MAX. SHGC")["solar_heat_gain_coefficient"] == data_lookup(table_G3_4, climate_zone, "EXTERIOR RESIDENTIAL, "SKYLIGHT", 0.021, "ASSEMBLY MAX. SHGC")["solar_heat_gain_coefficient"]) AND (data_lookup(table_G3_4, climate_zone, "EXTERIOR NON-RESIDENTIAL", "SKYLIGHT", 0, "ASSEMBLY MAX. SHGC")["solar_heat_gain_coefficient"] == data_lookup(table_G3_4, climate_zone, "EXTERIOR NON-RESIDENTIAL", "SKYLIGHT", 0.021, "ASSEMBLY MAX. SHGC")["solar_heat_gain_coefficient"]) AND (data_lookup(table_G3_4, climate_zone, "RESIDENTIAL, "SKYLIGHT", 0, "ASSEMBLY MAX. SHGC")["solar_heat_gain_coefficient"] == data_lookup(table_G3_4, climate_zone, "NON-RESIDENTIAL, "SKYLIGHT", 0, "ASSEMBLY MAX. SHGC")["solar_heat_gain_coefficient"]): target_shgc_mixed = data_lookup(table_G3_4, climate_zone, "EXTERIOR RESIDENTIAL, "SKYLIGHT", 0, "ASSEMBLY MAX. SHGC")["solar_heat_gain_coefficient"]`
 
   - Else, request manual review: `else: manual_review_flag = TRUE`
 
@@ -38,21 +38,21 @@
 
   - Get skylight-roof-ratio for residential type roofs: `srr_res = rmr_scc_skylight_roof_ratios_dictionary["EXTERIOR RESIDENTIAL"]`
 
-    - If skylight-roof-ratio is greater than 2.0%, get baseline skylight construction requirement: `if srr_res > 0.02: target_shgc_res = data_lookup(table_G3_4, climate_zone, "RESIDENTIAL", "SKYLIGHT", "2.1%+", "ASSEMBLY MAX. SHGC")`
+    - If skylight-roof-ratio is greater than 2.0%, get baseline skylight construction requirement: `if srr_res > 0.02: target_shgc_res = data_lookup(table_G3_4, climate_zone, "RESIDENTIAL", "SKYLIGHT", 0.021, "ASSEMBLY MAX. SHGC")["solar_heat_gain_coefficient"]`
 
-    - Else, skylight-roof-ratio is 0% to 2.0%, get baseline skylight construction requirement: `else: target_shgc_res = data_lookup(table_G3_4, climate_zone, "RESIDENTIAL", "SKYLIGHT", "0%-2.0%", "ASSEMBLY MAX. SHGC")`
+    - Else, skylight-roof-ratio is 0% to 2.0%, get baseline skylight construction requirement: `else: target_shgc_res = data_lookup(table_G3_4, climate_zone, "RESIDENTIAL", "SKYLIGHT", 0, "ASSEMBLY MAX. SHGC")["solar_heat_gain_coefficient"]`
 
-  - Get skylight-roof-ratio for non-residential type roofs: `srr_nonres = rmr_scc_skylight_roof_ratios_dictionary["NON-RESIDENTIAL"]`
+  - Get skylight-roof-ratio for non-residential type roofs: `srr_nonres = rmr_scc_skylight_roof_ratios_dictionary["NON-RESIDENTIAL"]["solar_heat_gain_coefficient"]`
 
-    - If skylight-roof-ratio is greater than 2.0%, get baseline skylight construction requirement: `if srr_nonres > 0.02: target_shgc_nonres = data_lookup(table_G3_4, climate_zone, "NON-RESIDENTIAL", "SKYLIGHT", "2.1%+", "ASSEMBLY MAX. SHGC")`
+    - If skylight-roof-ratio is greater than 2.0%, get baseline skylight construction requirement: `if srr_nonres > 0.02: target_shgc_nonres = data_lookup(table_G3_4, climate_zone, "NON-RESIDENTIAL", "SKYLIGHT", 0.021)["solar_heat_gain_coefficient"]`
 
-    - Else, skylight-roof-ratio is 0% to 2.0%, get baseline skylight construction requirement: `else: target_shgc_nonres = data_lookup(table_G3_4, climate_zone, "NON-RESIDENTIAL", "SKYLIGHT", "0%-2.0%", "ASSEMBLY MAX. SHGC")`
+    - Else, skylight-roof-ratio is 0% to 2.0%, get baseline skylight construction requirement: `else: target_shgc_nonres = data_lookup(table_G3_4, climate_zone, "NON-RESIDENTIAL", "SKYLIGHT", 0)["solar_heat_gain_coefficient"]`
 
 - Get skylight-roof-ratio for semi-exterior type roofs: `srr_semi_exterior = rmr_scc_skylight_roof_ratios_dictionary["SEMI-EXTERIOR"]`
 
-  - If skylight-roof-ratio is greater than 2.0%, get baseline skylight construction requirement: `if srr_semi_exterior > 0.02: target_shgc_semiheated = data_lookup(table_G3_4, climate_zone, "SEMIHEATED, "SKYLIGHT", "2.1%+", "ASSEMBLY MAX. SHGC")`
+  - If skylight-roof-ratio is greater than 2.0%, get baseline skylight construction requirement: `if srr_semi_exterior > 0.02: target_shgc_semiheated = data_lookup(table_G3_4, climate_zone, "SEMIHEATED, "SKYLIGHT", 0.021)["solar_heat_gain_coefficient"]`
 
-  - Else, skylight-roof-ratio is 0% to 2.0%, get baseline skylight construction requirement: `else: target_shgc_semiheated = data_lookup(table_G3_4, climate_zone, "SEMIHEATED", "SKYLIGHT", "0%-2.0%", "ASSEMBLY MAX. SHGC")`
+  - Else, skylight-roof-ratio is 0% to 2.0%, get baseline skylight construction requirement: `else: target_shgc_semiheated = data_lookup(table_G3_4, climate_zone, "SEMIHEATED", "SKYLIGHT", 0)["solar_heat_gain_coefficient"]`
 
 - For each zone in B_RMR: `for zone_b in B_RMR...zones:`
 

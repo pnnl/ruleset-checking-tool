@@ -2,6 +2,7 @@ from rct229.data import data
 from rct229.data_fns.table_utils import find_osstd_table_entry
 from rct229.ruleset_functions.get_opaque_surface_type import OpaqueSurfaceType as OST
 from rct229.schema.config import ureg
+from rct229.utils.assertions import assert_
 
 # This dictionary maps the opaque surface types that are returned from get_opaque_surface_type()
 # to the corresponding construction values in ashrae_90_1_prm_2019.construction_properties.json
@@ -75,15 +76,17 @@ def wwr_to_search_criteria(wwr):
     return wwr_search_list
 
 
-# Helper funciton to add WWR to the search criteria for getting the correct
+# Helper function to add WWR to the search criteria for getting the correct
 # Exterior skylight
-def skylit_to_search_criteria(wwr, search_criteria):
+def skylit_to_search_criteria(wwr):
+    skylit_search_list = []
     if wwr <= 0.02:
-        search_criteria.append(("minimum_percent_of_surface", 0))
-        search_criteria.append(("maximum_percent_of_surface", 2.0))
+        skylit_search_list.append(("minimum_percent_of_surface", 0))
+        skylit_search_list.append(("maximum_percent_of_surface", 2.0))
     else:
-        search_criteria.append(("minimum_percent_of_surface", 2.0))
-        search_criteria.append(("maximum_percent_of_surface", None))
+        skylit_search_list.append(("minimum_percent_of_surface", 2.0))
+        skylit_search_list.append(("maximum_percent_of_surface", None))
+    return skylit_search_list
 
 
 def table_G34_lookup(
@@ -139,11 +142,15 @@ def table_G34_lookup(
         ("building_category", building_category),
     ]
 
-    if wwr:
+    assert_(
+        wwr is None or skylit_wwr is None,
+        "One of the `wwr` or `skylit_wwr` argument must be None.",
+    )
+    if wwr is not None:  # when `wwr == 0.0`, `if wwr:` becomes False
         search_criteria.extend(wwr_to_search_criteria(wwr))
 
-    if skylit_wwr:
-        skylit_to_search_criteria(skylit_wwr, search_criteria)
+    if skylit_wwr is not None:  # when `skylit_wwr ==0`, `if skylit_wwr:` becomes False
+        search_criteria.extend(skylit_to_search_criteria(skylit_wwr))
 
     osstd_entry = find_osstd_table_entry(
         search_criteria,
