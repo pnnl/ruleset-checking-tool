@@ -4,7 +4,7 @@ from rct229.ruleset_functions.compare_schedules import compare_schedules
 from rct229.utils.assertions import RCTFailureException
 
 
-def test__Test_Schedule_Compare_Success_1():
+def test__compare_schedules__identical_compare_all_hours():
     """
     Test that will apply multiplier to schedule_2 to match schedule_1.
     Expect 8760 compared and match with eflh difference = 0.0
@@ -20,7 +20,7 @@ def test__Test_Schedule_Compare_Success_1():
     )
 
 
-def test__Test_Schedule_Compare_Success_2():
+def test__compare_schedules__identical_compare_no_hours():
     """
     Test that will not compare any hours between two schedules.
     Expect 0.0 compared and match with eflh difference = 0.0
@@ -36,7 +36,7 @@ def test__Test_Schedule_Compare_Success_2():
     )
 
 
-def test__Test_Schedule_Compare_Success_3():
+def test__compare_schedules__not_identical_compare_all_hours():
     """
     Test when two schedules are not identical.
     Expect 8760.0 compared and match with eflh difference = 100.0
@@ -53,7 +53,7 @@ def test__Test_Schedule_Compare_Success_3():
     )
 
 
-def test__Test_Schedule_Compare_Failed_1():
+def test__compare_schedules__identical_compare_all_hours_leap_year():
     """
     Test that will apply multiplier to schedule_2 to match schedule_1.
     Expect 8784 compared and 8784 match with eflh difference = 1.0,
