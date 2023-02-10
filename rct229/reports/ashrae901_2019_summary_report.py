@@ -54,7 +54,7 @@ class ASHRAE9012019SummaryReport(RCTReport):
 - proposed: {self.proposed_rmd.split('/')[-1]}
 - baseline: {self.baseline_rmd.split('/')[-1]}
 
-### Summary: All Rules
+### Summary: All Primary Rules
 |                              | All | Envelope | Lighting | Receptacles | Transformers | HVAC-WaterSide | HVAC - Chiller |
 |:----------------------------:|:---:|:--------:|:--------:|:-----------:|:------------:|:--------------:|:--------------:|
 Replace-Rules
@@ -86,10 +86,14 @@ Replace-Undetermined
         rule_outcome_result_dict = _parse_result_helper(rule_outcome["result"])
 
         # sum up overall rule numbers
-        self.ruleset_outcome_count_helper(rule_outcome["id"], rule_outcome_result_dict)
+        # self.ruleset_outcome_count_helper(rule_outcome["id"], rule_outcome_result_dict)
 
         # determine whether overall outcome is pass/fail/undetermined/not_applicable
         overall_result = self.calculate_rule_outcome(rule_outcome_result_dict)
+        self.ruleset_outcome[self.section_dict[rule_outcome["id"].split("-")[0]]][
+            overall_result
+        ] += 1
+        self.ruleset_outcome["All"][overall_result] += 1
 
         # calculate pass/fail/undetermined/not applicable rate
         no_of_applicable_component = sum(rule_outcome_result_dict.values())
@@ -161,21 +165,3 @@ Replace-Undetermined
             """
         else:
             return None
-
-    def ruleset_outcome_count_helper(self, rule_outcome_id, rule_outcome_result):
-        def _ruleset_outcome_count_helper(section_number, rule_outcome_result):
-            for result in [
-                RCTOutcomeLabel.PASS,
-                RCTOutcomeLabel.FAILED,
-                RCTOutcomeLabel.UNDETERMINED,
-                RCTOutcomeLabel.NOT_APPLICABLE,
-            ]:
-                self.ruleset_outcome[section_number][result] += rule_outcome_result[
-                    result
-                ]
-                self.ruleset_outcome["All"][result] += rule_outcome_result[result]
-
-        section_no = rule_outcome_id.split("-")[0]
-        _ruleset_outcome_count_helper(
-            self.section_dict[section_no], rule_outcome_result
-        )
