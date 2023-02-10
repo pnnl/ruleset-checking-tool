@@ -26,7 +26,7 @@ def test__compare_standard_val_non_stringent_code_compare():
     assert compare_standard_val(False, 0.9999 * _M2, 1.0 * _M2)
 
 
-def test__compare_standard_val_strict_compare_gt():
+def test__compare_standard_val_strict_compare__gt():
     assert compare_standard_val_strict(True, 1.2 * _M2, 1.0 * _M2, operator.gt)
 
 
