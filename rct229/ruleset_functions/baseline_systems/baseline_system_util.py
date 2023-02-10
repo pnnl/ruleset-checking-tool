@@ -42,7 +42,6 @@ class HVAC_SYS:
     SYS_12 = "Sys-12"
     SYS_12A = "Sys-12a"
     SYS_12B = "Sys-12b"
-    SYS_12C = "Sys-12c"
     SYS_13 = "Sys-13"
     SYS_13A = "Sys-13a"
     UNMATCHED = "Not_Sys"
@@ -73,7 +72,6 @@ HVAC_SYSTEM_TYPE_DICTIONARY = {
         HVAC_SYS.SYS_12,
         HVAC_SYS.SYS_12A,
         HVAC_SYS.SYS_12B,
-        HVAC_SYS.SYS_12C,
     ],
     HVAC_SYS.SYS_13: [HVAC_SYS.SYS_13, HVAC_SYS.SYS_13A],
 }

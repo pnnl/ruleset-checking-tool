@@ -1,4 +1,10 @@
 from rct229.data.schema_enums import schema_enums
+from rct229.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.are_all_terminal_chw_loops_purcahsed_cooling import (
+    are_all_terminal_chw_loops_purchased_cooling,
+)
+from rct229.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.are_all_terminal_cool_sources_chilled_water import (
+    are_all_terminal_cool_sources_chilled_water,
+)
 from rct229.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.are_all_terminal_heat_sources_hot_water import (
     are_all_terminal_heat_sources_hot_water,
 )
@@ -68,6 +74,12 @@ def is_baseline_system_9b(rmi_b, hvac_b_id, terminal_unit_id_list, zone_id_list)
             rmi_b, terminal_unit_id_list
         )
         and are_all_terminal_heating_loops_purchased_heating(
+            rmi_b, terminal_unit_id_list
+        )
+        and not are_all_terminal_cool_sources_chilled_water(
+            rmi_b, terminal_unit_id_list
+        )
+        and not are_all_terminal_chw_loops_purchased_cooling(
             rmi_b, terminal_unit_id_list
         )
     )

@@ -63,7 +63,6 @@ def get_area_type_window_wall_area_dict(climate_zone, building):
                     SCC.SEMI_EXTERIOR,
                 ]
             ):
-
                 window_wall_areas_dictionary[area_type]["total_wall_area"] += getattr_(
                     surface, "surface", "area"
                 )

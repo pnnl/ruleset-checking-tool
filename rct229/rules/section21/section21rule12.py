@@ -29,7 +29,6 @@ APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_3C,
     HVAC_SYS.SYS_7C,
     HVAC_SYS.SYS_11_1C,
-    HVAC_SYS.SYS_12C,
 ]
 FLUID_LOOP = schema_enums["FluidLoopOptions"]
 FLUID_LOOP_FLOW_CONTROL = schema_enums["FluidLoopFlowControlOptions"]
