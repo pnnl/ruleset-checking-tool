@@ -39,6 +39,10 @@ TEST_RMR = {
                                 {
                                     "id": "terminal_1_1_1",
                                     "served_by_heating_ventilating_air_conditioning_system": "hvac_1_1",
+                                },
+                                {
+                                    "id": "terminal_1_1_2",
+                                    "served_by_heating_ventilating_air_conditioning_system": "hvac_1_1",
                                 }
                             ],
                         },
@@ -69,6 +73,3 @@ def test__get_hvac_zone_list_w_area_dict():
     assert get_hvac_zone_list_w_area_dict(TEST_BUILDING) == {
         "hvac_1_1": {"zone_list": ["zone_1_1"], "total_area": 1500 * ureg.m2}
     }
-
-
-# get_hvac_zone_list_w_area_dict(TEST_BUILDING)
