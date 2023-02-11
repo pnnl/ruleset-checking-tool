@@ -7,6 +7,7 @@ MAX_FLOOR_TILT = 180 * DEGREES
 MIN_ROOF_TILT = 0 * DEGREES
 MAX_ROOF_TILT = 60 * DEGREES
 
+
 # Intended for export and internal use
 class OpaqueSurfaceType:
     """Enumeration class for opaque surface types"""

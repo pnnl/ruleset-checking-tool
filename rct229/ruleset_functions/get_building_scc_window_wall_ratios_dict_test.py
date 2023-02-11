@@ -1,7 +1,6 @@
 from unittest.mock import patch
 
 import pytest
-
 from rct229.ruleset_functions.get_building_scc_window_wall_ratios_dict import (
     get_building_scc_window_wall_ratios_dict,
 )

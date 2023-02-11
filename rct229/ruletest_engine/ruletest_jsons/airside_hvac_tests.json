@@ -941,12 +941,13 @@
                                                         "type": "VARIABLE_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 6",
                                                         "heating_source": "ELECTRIC",
-                                                        "primary_airflow": 283.1684659199999,
                                                         "fan": {
                                                             "id": "Fan 1",
                                                             "design_airflow": 141.58423295999995,
                                                             "design_electric_power": 105
-                                                        }
+                                                        },
+                                                        "fan_configuration": "PARALLEL",
+                                                        "primary_airflow": 283.1684659199999
                                                     }
                                                 ]
                                             },
@@ -961,12 +962,13 @@
                                                         "type": "VARIABLE_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 6",
                                                         "heating_source": "ELECTRIC",
-                                                        "primary_airflow": 188.77897727999994,
                                                         "fan": {
                                                             "id": "Fan 2",
                                                             "design_airflow": 94.38948863999997,
                                                             "design_electric_power": 70
-                                                        }
+                                                        },
+                                                        "fan_configuration": "PARALLEL",
+                                                        "primary_airflow": 188.77897727999994
                                                     }
                                                 ]
                                             }
@@ -1049,12 +1051,13 @@
                                                         "type": "VARIABLE_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 6",
                                                         "heating_source": "ELECTRIC",
-                                                        "primary_airflow": 212.37634943999993,
                                                         "fan": {
                                                             "id": "Fan 1",
                                                             "design_airflow": 141.58423295999995,
                                                             "design_electric_power": 150
-                                                        }
+                                                        },
+                                                        "fan_configuration": "PARALLEL",
+                                                        "primary_airflow": 212.37634943999993
                                                     }
                                                 ]
                                             },
@@ -1069,12 +1072,13 @@
                                                         "type": "VARIABLE_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 6",
                                                         "heating_source": "ELECTRIC",
-                                                        "primary_airflow": 160.46213068799995,
                                                         "fan": {
                                                             "id": "Fan 2",
                                                             "design_airflow": 94.38948863999997,
                                                             "design_electric_power": 80
-                                                        }
+                                                        },
+                                                        "fan_configuration": "PARALLEL",
+                                                        "primary_airflow": 160.46213068799995
                                                     }
                                                 ]
                                             }
@@ -1156,7 +1160,11 @@
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 6",
-                                                        "heating_source": "ELECTRIC"
+                                                        "heating_source": "ELECTRIC",
+                                                        "fan": {
+                                                            "id": "Fan 1"
+                                                        },
+                                                        "fan_configuration": "PARALLEL"
                                                     }
                                                 ]
                                             },
@@ -1170,7 +1178,11 @@
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 6",
-                                                        "heating_source": "ELECTRIC"
+                                                        "heating_source": "ELECTRIC",
+                                                        "fan": {
+                                                            "id": "Fan 2"
+                                                        },
+                                                        "fan_configuration": "PARALLEL"
                                                     }
                                                 ]
                                             }
@@ -1253,7 +1265,11 @@
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 6",
-                                                        "heating_source": "ELECTRIC"
+                                                        "heating_source": "ELECTRIC",
+                                                        "fan": {
+                                                            "id": "Fan 1"
+                                                        },
+                                                        "fan_configuration": "PARALLEL"
                                                     }
                                                 ]
                                             },
@@ -1267,7 +1283,11 @@
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 6",
-                                                        "heating_source": "ELECTRIC"
+                                                        "heating_source": "ELECTRIC",
+                                                        "fan": {
+                                                            "id": "Fan 2"
+                                                        },
+                                                        "fan_configuration": "PARALLEL"
                                                     }
                                                 ]
                                             }
@@ -1351,9 +1371,47 @@
                                                         "type": "VARIABLE_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
-                                                        "heating_from_loop": "Boiler Loop 1",
-                                                        "fan": {
-                                                            "id": "Fan 1",
+                                                        "heating_from_loop": "Boiler Loop 1"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "id": "Thermal Zone 2",
+                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                                "terminals": [
+                                                    {
+                                                        "id": "VAV Air Terminal 2",
+                                                        "is_supply_ducted": true,
+                                                        "type": "VARIABLE_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
+                                                        "heating_source": "HOT_WATER",
+                                                        "heating_from_loop": "Boiler Loop 1"
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "System 7",
+                                                "cooling_system": {
+                                                    "id": "CHW Coil 1",
+                                                    "cooling_system_type": "FLUID_LOOP",
+                                                    "chilled_water_loop": "Secondary CHW Loop 1"
+                                                },
+                                                "preheat_system": {
+                                                    "id": "Preheat Coil 1",
+                                                    "heating_system_type": "FLUID_LOOP",
+                                                    "hot_water_loop": "Boiler Loop 1"
+                                                },
+                                                "fan_system": {
+                                                    "id": "VAV Fan System 1",
+                                                    "fan_control": "VARIABLE_SPEED_DRIVE",
+                                                    "supply_fans": [
+                                                        {
+                                                            "id": "Supply Fan 1",
+                                                            "design_airflow": 47.194744319999984,
+                                                            "design_electric_power": 100,
                                                             "output_validation_points": [
                                                                 {
                                                                     "airflow": 0.0,
@@ -1400,45 +1458,6 @@
                                                                     "result": 100
                                                                 }
                                                             ]
-                                                        }
-                                                    }
-                                                ]
-                                            },
-                                            {
-                                                "id": "Thermal Zone 2",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
-                                                "terminals": [
-                                                    {
-                                                        "id": "VAV Air Terminal 2",
-                                                        "is_supply_ducted": true,
-                                                        "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
-                                                        "heating_source": "HOT_WATER",
-                                                        "heating_from_loop": "Boiler Loop 1"
-                                                    }
-                                                ]
-                                            }
-                                        ],
-                                        "heating_ventilating_air_conditioning_systems": [
-                                            {
-                                                "id": "System 7",
-                                                "cooling_system": {
-                                                    "id": "CHW Coil 1",
-                                                    "cooling_system_type": "FLUID_LOOP",
-                                                    "chilled_water_loop": "Secondary CHW Loop 1"
-                                                },
-                                                "preheat_system": {
-                                                    "id": "Preheat Coil 1",
-                                                    "heating_system_type": "FLUID_LOOP",
-                                                    "hot_water_loop": "Boiler Loop 1"
-                                                },
-                                                "fan_system": {
-                                                    "id": "VAV Fan System 1",
-                                                    "fan_control": "VARIABLE_SPEED_DRIVE",
-                                                    "supply_fans": [
-                                                        {
-                                                            "id": "Supply Fan 1"
                                                         }
                                                     ],
                                                     "return_fans": [
@@ -1546,9 +1565,47 @@
                                                         "type": "VARIABLE_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
-                                                        "heating_from_loop": "Boiler Loop 1",
-                                                        "fan": {
-                                                            "id": "Fan 1",
+                                                        "heating_from_loop": "Boiler Loop 1"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "id": "Thermal Zone 2",
+                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                                "terminals": [
+                                                    {
+                                                        "id": "VAV Air Terminal 2",
+                                                        "is_supply_ducted": true,
+                                                        "type": "VARIABLE_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
+                                                        "heating_source": "HOT_WATER",
+                                                        "heating_from_loop": "Boiler Loop 1"
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "System 7",
+                                                "cooling_system": {
+                                                    "id": "CHW Coil 1",
+                                                    "cooling_system_type": "FLUID_LOOP",
+                                                    "chilled_water_loop": "Secondary CHW Loop 1"
+                                                },
+                                                "preheat_system": {
+                                                    "id": "Preheat Coil 1",
+                                                    "heating_system_type": "FLUID_LOOP",
+                                                    "hot_water_loop": "Boiler Loop 1"
+                                                },
+                                                "fan_system": {
+                                                    "id": "VAV Fan System 1",
+                                                    "fan_control": "VARIABLE_SPEED_DRIVE",
+                                                    "supply_fans": [
+                                                        {
+                                                            "id": "Supply Fan 1",
+                                                            "design_airflow": 47.194744319999984,
+                                                            "design_electric_power": 100,
                                                             "output_validation_points": [
                                                                 {
                                                                     "airflow": 0.0,
@@ -1595,45 +1652,6 @@
                                                                     "result": 100
                                                                 }
                                                             ]
-                                                        }
-                                                    }
-                                                ]
-                                            },
-                                            {
-                                                "id": "Thermal Zone 2",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
-                                                "terminals": [
-                                                    {
-                                                        "id": "VAV Air Terminal 2",
-                                                        "is_supply_ducted": true,
-                                                        "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
-                                                        "heating_source": "HOT_WATER",
-                                                        "heating_from_loop": "Boiler Loop 1"
-                                                    }
-                                                ]
-                                            }
-                                        ],
-                                        "heating_ventilating_air_conditioning_systems": [
-                                            {
-                                                "id": "System 7",
-                                                "cooling_system": {
-                                                    "id": "CHW Coil 1",
-                                                    "cooling_system_type": "FLUID_LOOP",
-                                                    "chilled_water_loop": "Secondary CHW Loop 1"
-                                                },
-                                                "preheat_system": {
-                                                    "id": "Preheat Coil 1",
-                                                    "heating_system_type": "FLUID_LOOP",
-                                                    "hot_water_loop": "Boiler Loop 1"
-                                                },
-                                                "fan_system": {
-                                                    "id": "VAV Fan System 1",
-                                                    "fan_control": "VARIABLE_SPEED_DRIVE",
-                                                    "supply_fans": [
-                                                        {
-                                                            "id": "Supply Fan 1"
                                                         }
                                                     ],
                                                     "return_fans": [
@@ -1759,7 +1777,8 @@
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
-                                                ]
+                                                ],
+                                                "design_thermostat_heating_setpoint": 20.000000000000057
                                             }
                                         ],
                                         "heating_ventilating_air_conditioning_systems": [
@@ -1907,7 +1926,8 @@
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
-                                                ]
+                                                ],
+                                                "design_thermostat_heating_setpoint": 20.000000000000057
                                             }
                                         ],
                                         "heating_ventilating_air_conditioning_systems": [

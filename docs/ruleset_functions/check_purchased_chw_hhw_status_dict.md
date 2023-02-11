@@ -33,6 +33,14 @@ Logic:
           - Check if cooling system is connected to any loop in purchased cooling loop array: `if cooling_system.chilled_water_loop.chilled_water_loop in purchased_chw_loop_array`
 
             - Set purchased cooling flag as True and break logic loop #1: `purchased_chw_hhw_status_dict["PURCHASED_COOLING"] = TRUE, BREAK` (Note XC, under the assumption that there is no orphan hvac system not serving any zones.)
+      
+      - For each zone in building segment: `for zone in building_segment.zones:`
+
+        - For each terminal in zone: `for terminal in zone.terminals:`
+
+          - Check if zonal cooling coil is connected to any loop in purchased cooling loop array: `if terminal.cooling_from_loop in purchased_chw_loop_array`
+
+            - Set purchased cooling flag as True and break logic loop #2: `purchased_chw_hhw_status_dict["PURCHASED_COOLING"] = TRUE, BREAK`
 
   - Else, external fluid source is heating type: `else:` (Note XC, under the assumption that the type field input is correct, i.e. only three inputs are valid, cooling, hot water or steam)
 
@@ -59,11 +67,6 @@ Logic:
           - Check if zonal heating coil is connected to any loop in purchased heating loop array: `if terminal.heating_from_loop in purchased_hhw_loop_array`
 
             - Set purchased heating flag as True and break logic loop #2: `purchased_chw_hhw_status_dict["PURCHASED_HEATING"] = TRUE, BREAK`
-
-          - Check if zonal cooling coil is connected to any loop in purchased cooling loop array: `if terminal.cooling_from_loop in purchased_chw_loop_array`
-
-            - Set purchased cooling flag as True and break logic loop #2: `purchased_chw_hhw_status_dict["PURCHASED_COOLING"] = TRUE, BREAK`
-
 **Returns** `return purchased_chw_hhw_status_dict`  
 
 **Notes:**

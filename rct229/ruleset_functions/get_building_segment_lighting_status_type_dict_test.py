@@ -1,5 +1,4 @@
 import pytest
-
 from rct229.ruleset_functions.get_building_segment_lighting_status_type_dict import (
     LightingStatusType as LST,
 )

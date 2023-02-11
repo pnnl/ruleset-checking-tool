@@ -41,10 +41,10 @@
                                                         "type": "VARIABLE_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 6",
                                                         "heating_source": "ELECTRIC",
-                                                        "fan_configuration": "PARALLEL",
                                                         "fan": {
                                                             "id": "Fan 1"
-                                                        }													
+                                                        },
+                                                        "fan_configuration": "PARALLEL"
                                                     }
                                                 ]
                                             },
@@ -59,10 +59,10 @@
                                                         "type": "VARIABLE_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 6",
                                                         "heating_source": "ELECTRIC",
-                                                        "fan_configuration": "PARALLEL",
-														"fan": {
+                                                        "fan": {
                                                             "id": "Fan 2"
-                                                        }	
+                                                        },
+                                                        "fan_configuration": "PARALLEL"
                                                     }
                                                 ]
                                             }
@@ -146,10 +146,10 @@
                                                         "type": "VARIABLE_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 6",
                                                         "heating_source": "ELECTRIC",
-                                                        "fan_configuration": "PARALLEL",
-														"fan": {
+                                                        "fan": {
                                                             "id": "Fan 1"
-                                                        }	
+                                                        },
+                                                        "fan_configuration": "PARALLEL"
                                                     }
                                                 ]
                                             },
@@ -164,10 +164,10 @@
                                                         "type": "VARIABLE_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 6",
                                                         "heating_source": "ELECTRIC",
-                                                        "fan_configuration": "PARALLEL",
-														"fan": {
+                                                        "fan": {
                                                             "id": "Fan 2"
-                                                        }	
+                                                        },
+                                                        "fan_configuration": "PARALLEL"
                                                     }
                                                 ]
                                             }

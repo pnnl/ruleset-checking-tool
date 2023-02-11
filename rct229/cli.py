@@ -10,6 +10,7 @@ from rct229.ruletest_engine.run_ruletests import (
     run_chiller_tests,
     run_envelope_tests,
     run_lighting_tests,
+    run_airside_tests,
 )
 from rct229.schema.validate import validate_rmr
 from rct229.utils.file import deserialize_rmr_file
@@ -59,6 +60,8 @@ def run_test(section=None):
             assert run_boiler_tests(), "Failed section 21 tests"
         elif section == "section22":
             assert run_chiller_tests(), "Failed section 22 tests"
+        elif section == "section23":
+            assert run_airside_tests(), "Failed section 23 tests"
     else:
         print(f"software test workflow for all tests")
         # assert run_transformer_tests(), "Failed section 15 tests"
@@ -66,6 +69,7 @@ def run_test(section=None):
         assert run_envelope_tests(), "Failed section 5 tests"
         assert run_boiler_tests(), "Failed section 21 tests"
         assert run_chiller_tests(), "Failed section 22 tests"
+        assert run_airside_tests(), "Failed section 23 tests"
 
 
 # Evaluate RMR Triplet
