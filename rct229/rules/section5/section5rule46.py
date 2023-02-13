@@ -15,6 +15,9 @@ class Section5Rule46(RuleDefinitionListIndexedBase):
             index_rmr="proposed",
             id="5-46",
             description="The infiltration shall be modeled using the same methodology and adjustments for weather and building operation in both the proposed design and the baseline building design.",
+            ruleset_section_title="Envelope",
+            standard_section="Section G3.1-5(b) Building Envelope Modeling Requirements for the Proposed design and Baseline",
+            is_primary_rule=True,
             rmr_context="ruleset_model_instances/0/buildings",
         )
 

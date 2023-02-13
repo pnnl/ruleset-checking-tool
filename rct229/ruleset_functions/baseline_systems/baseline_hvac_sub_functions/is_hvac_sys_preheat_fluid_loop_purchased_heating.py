@@ -1,5 +1,8 @@
 from rct229.data.schema_enums import schema_enums
-from rct229.utils.jsonpath_utils import find_all, find_exactly_one_with_field_value
+from rct229.ruleset_functions.baseline_systems.baseline_system_util import (
+    find_exactly_one_hvac_system,
+)
+from rct229.utils.jsonpath_utils import find_all
 
 EXTERNAL_FLUID_SOURCE = schema_enums["ExternalFluidSourceOptions"]
 
@@ -29,12 +32,7 @@ def is_hvac_sys_preheat_fluid_loop_purchased_heating(rmi_b, hvac_b_id):
     ]
 
     # Get the hvac system
-    hvac_b = find_exactly_one_with_field_value(
-        "$.buildings[*].building_segments[*].heating_ventilation_air_conditioning_systems[*]",
-        "id",
-        hvac_b_id,
-        rmi_b,
-    )
+    hvac_b = find_exactly_one_hvac_system(rmi_b, hvac_b_id)
     # Check if hvac_b has preheat system
     preheat_system = hvac_b.get("preheat_system")
     is_hvac_sys_preheat_fluid_loop_purchased_heating_flag = (

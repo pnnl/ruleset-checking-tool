@@ -1,5 +1,7 @@
 from rct229.data.schema_enums import schema_enums
-from rct229.utils.jsonpath_utils import find_exactly_one_with_field_value
+from rct229.ruleset_functions.baseline_systems.baseline_system_util import (
+    find_exactly_one_terminal_unit,
+)
 
 COOLING_SOURCE = schema_enums["CoolingSourceOptions"]
 
@@ -19,12 +21,7 @@ def are_all_terminal_cool_sources_none_or_null(rmi_b, terminal_unit_id_list):
     """
     are_all_terminal_cool_sources_none_or_null_flag = True
     for terminal_b_id in terminal_unit_id_list:
-        terminal_b = find_exactly_one_with_field_value(
-            "$.buildings[*].building_segments[*].zones[*].terminals[*]",
-            "id",
-            terminal_b_id,
-            rmi_b,
-        )
+        terminal_b = find_exactly_one_terminal_unit(rmi_b, terminal_b_id)
         if terminal_b.get("cooling_source") not in [None, COOLING_SOURCE.NONE]:
             are_all_terminal_cool_sources_none_or_null_flag = False
             break

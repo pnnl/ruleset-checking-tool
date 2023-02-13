@@ -4,6 +4,7 @@ from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 from rct229.schema.config import ureg
+from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.pint_utils import ZERO, CalcQ, pint_sum
 
@@ -26,12 +27,15 @@ class Section6Rule2(RuleDefinitionListIndexedBase):
             index_rmr="proposed",
             id="6-2",
             description="Spaces in proposed building with hardwired lighting, including Hotel/Motel Guest Rooms, Dormitory Living Quarters, Interior Lighting Power >= Table 9.6.1; For Dwelling Units, Interior Lighting Power >= 0.6W/sq.ft.",
+            ruleset_section_title="Lighting",
+            standard_section="Table G3.1 Part 6 Lighting under Proposed Building Performance paragraph (e)",
+            is_primary_rule=True,
             list_path="ruleset_model_instances[0]..spaces[*]",
         )
 
     def list_filter(self, context_item, data=None):
         space_p = context_item.proposed
-        lighting_space_type_p = space_p["lighting_space_type"]
+        lighting_space_type_p = getattr_(space_p, space_p["id"], "lighting_space_type")
 
         return lighting_space_type_p in [
             GUEST_ROOM,

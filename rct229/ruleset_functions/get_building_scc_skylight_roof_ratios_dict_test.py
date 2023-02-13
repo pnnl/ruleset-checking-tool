@@ -1,5 +1,4 @@
 import pytest
-
 from rct229.data_fns.table_3_2_fns import table_3_2_lookup
 from rct229.ruleset_functions.get_building_scc_skylight_roof_ratios_dict import (
     get_building_scc_skylight_roof_ratios_dict,
@@ -44,7 +43,7 @@ TEST_RMR = {
                     "id": "bldg_seg_1",
                     "lighting_building_area_type": "MULTIFAMILY",
                     "area_type_vertical_fenestration": "HOTEL_MOTEL_SMALL",
-                    "heating_ventilation_air_conditioning_systems": [
+                    "heating_ventilating_air_conditioning_systems": [
                         # Use for zone_1_1, directly conditioned zone
                         {
                             "id": "hvac_1_1",
@@ -123,7 +122,7 @@ TEST_RMR = {
                             "terminals": [
                                 {
                                     "id": "terminal_1_1_1",
-                                    "served_by_heating_ventilation_air_conditioning_system": "hvac_1_1",
+                                    "served_by_heating_ventilating_air_conditioning_system": "hvac_1_1",
                                 }
                             ],
                         },
@@ -167,7 +166,7 @@ TEST_RMR = {
                             "terminals": [
                                 {
                                     "id": "terminal_1_2_1",
-                                    "served_by_heating_ventilation_air_conditioning_system": "hvac_1_2",
+                                    "served_by_heating_ventilating_air_conditioning_system": "hvac_1_2",
                                 }
                             ],
                         },
@@ -211,7 +210,7 @@ TEST_RMR = {
                             "terminals": [
                                 {
                                     "id": "terminal_1_3_1",
-                                    "served_by_heating_ventilation_air_conditioning_system": "hvac_1_3",
+                                    "served_by_heating_ventilating_air_conditioning_system": "hvac_1_3",
                                 }
                             ],
                         },
@@ -255,7 +254,7 @@ TEST_RMR = {
                             "terminals": [
                                 {
                                     "id": "terminal_1_4_1",
-                                    "served_by_heating_ventilation_air_conditioning_system": "hvac_1_4",
+                                    "served_by_heating_ventilating_air_conditioning_system": "hvac_1_4",
                                 }
                             ],
                         },
@@ -267,7 +266,7 @@ TEST_RMR = {
                     "id": "bldg_seg_2",
                     "lighting_building_area_type": "FIRE_STATION",
                     "area_type_vertical_fenestration": "RETAIL_STAND_ALONE",
-                    "heating_ventilation_air_conditioning_systems": [
+                    "heating_ventilating_air_conditioning_systems": [
                         # Used for semi-heated zone
                         {
                             "id": "hvac_2_1",
@@ -328,7 +327,7 @@ TEST_RMR = {
                             "terminals": [
                                 {
                                     "id": "terminal_2_1_1",
-                                    "served_by_heating_ventilation_air_conditioning_system": "hvac_2_1",
+                                    "served_by_heating_ventilating_air_conditioning_system": "hvac_2_1",
                                 }
                             ],
                         },
@@ -374,7 +373,7 @@ TEST_RMR = {
                             "terminals": [
                                 {
                                     "id": "terminal_2_2_1",
-                                    "served_by_heating_ventilation_air_conditioning_system": "hvac_2_2",
+                                    "served_by_heating_ventilating_air_conditioning_system": "hvac_2_2",
                                 }
                             ],
                         },
@@ -383,7 +382,7 @@ TEST_RMR = {
                 {
                     "id": "bldg_seg_3",
                     "lighting_building_area_type": "MULTIFAMILY",
-                    "heating_ventilation_air_conditioning_systems": [
+                    "heating_ventilating_air_conditioning_systems": [
                         # Use for zone_3_1, directly conditioned zone
                         {
                             "id": "hvac_3_1",
@@ -456,7 +455,7 @@ TEST_RMR = {
                             "terminals": [
                                 {
                                     "id": "terminal_3_1_1",
-                                    "served_by_heating_ventilation_air_conditioning_system": "hvac_3_1",
+                                    "served_by_heating_ventilating_air_conditioning_system": "hvac_3_1",
                                 }
                             ],
                         },
@@ -513,7 +512,7 @@ TEST_RMR = {
                             "terminals": [
                                 {
                                     "id": "terminal_3_2_1",
-                                    "served_by_heating_ventilation_air_conditioning_system": "hvac_3_2",
+                                    "served_by_heating_ventilating_air_conditioning_system": "hvac_3_2",
                                 }
                             ],
                         },
@@ -529,7 +528,7 @@ TEST_RMR_12 = {"id": "229_01", "ruleset_model_instances": [TEST_RMR]}
 TEST_BUILDING = quantify_rmr(TEST_RMR_12)["ruleset_model_instances"][0]["buildings"][0]
 
 
-def test__TEST_RMR__is_valid():
+def test__TEST_RMD__is_valid():
     schema_validation_result = schema_validate_rmr(TEST_RMR_12)
     assert schema_validation_result[
         "passed"
