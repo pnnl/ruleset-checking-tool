@@ -1,5 +1,4 @@
 import pandas as pd
-
 from rct229.data.schema_enums import schema_enums
 from rct229.ruleset_functions.get_zone_conditioning_category_dict import (
     ZoneConditioningCategory as ZCC,

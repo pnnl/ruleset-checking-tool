@@ -1,16 +1,18 @@
 import pytest
-
 from rct229.ruleset_functions.normalize_interior_lighting_schedules import (
     normalize_interior_lighting_schedules,
 )
 from rct229.schema.schema_utils import quantify_rmr
+from rct229.schema.validate import schema_validate_rmr
 
 TEST_RMR = {
     "id": "building_1",
     "buildings": [
         {
+            "id": "building 1",
             "building_segments": [
                 {
+                    "id": "building_segment 1",
                     "zones": [
                         {
                             "id": "zone_1",
@@ -49,9 +51,9 @@ TEST_RMR = {
                                 }
                             ],
                         }
-                    ]
+                    ],
                 }
-            ]
+            ],
         }
     ],
 }
@@ -66,6 +68,13 @@ ZONE_HEIGHT = 10.0
 TEST_SPACES = quantify_rmr(TEST_SPACE_RMR)["ruleset_model_instances"][0]["buildings"][
     0
 ]["building_segments"][0]["zones"][0]["spaces"][0]
+
+
+def test__TEST_RMD__is_valid():
+    schema_validation_result = schema_validate_rmr(TEST_SPACE_RMR)
+    assert schema_validation_result[
+        "passed"
+    ], f"Schema error: {schema_validation_result['error']}"
 
 
 def test__normalize_space_schedules_success_1():

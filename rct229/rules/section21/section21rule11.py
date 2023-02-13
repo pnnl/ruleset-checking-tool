@@ -2,35 +2,33 @@ from rct229.data.schema_enums import schema_enums
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
+from rct229.ruleset_functions.baseline_systems.baseline_system_util import HVAC_SYS
 from rct229.ruleset_functions.get_baseline_system_types import get_baseline_system_types
 from rct229.utils.assertions import getattr_
 
 APPLICABLE_SYS_TYPES = [
-    "SYS-1",
-    "SYS-5",
-    "SYS-7",
-    "SYS-11.2",
-    "SYS-12",
-    "SYS-1A",
-    "SYS-7A",
-    "SYS-11.2A",
-    "SYS-12A",
-    "SYS-1B",
-    "SYS-3B",
-    "SYS-5B",
-    "SYS-6B",
-    "SYS-7B",
-    "SYS-8B",
-    "SYS-9B",
-    "SYS-11B",
-    "SYS-12B",
-    "SYS-13B",
-    "SYS-1C",
-    "SYS-3C",
-    "SYS-7C",
-    "SYS-11C",
-    "SYS-12C",
-    "SYS-13C",
+    HVAC_SYS.SYS_1,
+    HVAC_SYS.SYS_5,
+    HVAC_SYS.SYS_7,
+    HVAC_SYS.SYS_11_2,
+    HVAC_SYS.SYS_12,
+    HVAC_SYS.SYS_1A,
+    HVAC_SYS.SYS_7A,
+    HVAC_SYS.SYS_11_2A,
+    HVAC_SYS.SYS_12A,
+    HVAC_SYS.SYS_1B,
+    HVAC_SYS.SYS_3B,
+    HVAC_SYS.SYS_5B,
+    HVAC_SYS.SYS_6B,
+    HVAC_SYS.SYS_7B,
+    HVAC_SYS.SYS_8B,
+    HVAC_SYS.SYS_9B,
+    HVAC_SYS.SYS_11_1B,
+    HVAC_SYS.SYS_12B,
+    HVAC_SYS.SYS_1C,
+    HVAC_SYS.SYS_3C,
+    HVAC_SYS.SYS_7C,
+    HVAC_SYS.SYS_11_1C,
 ]
 FLUID_LOOP = schema_enums["FluidLoopOptions"]
 
@@ -45,20 +43,27 @@ class Section21Rule11(RuleDefinitionListIndexedBase):
             index_rmr="baseline",
             id="21-11",
             description="The baseline building design uses boilers or purchased hot water, the hot water pumping system shall be modeled as primary-only.",
-            list_path="ruleset_model_instances[0].fluid_loops[*]",
+            ruleset_section_title="HVAC - Water Side",
+            standard_section="Section G3.1.3.5 Building System-Specific Modeling Requirements for the Baseline model",
+            is_primary_rule=True,
+            rmr_context="ruleset_model_instances/0",
+            list_path="fluid_loops[*]",
         )
 
     def is_applicable(self, context, data=None):
-        rmd_b = context.baseline
-        # FIXME: replace with baseline_system_types = get_baseline_system_types(rmd_b) when get_baseline_system_types
-        #  is ready.
-        baseline_system_types = {
-            "SYS-7": ["hvac_sys_7"],
-            "SYS-11B": ["hvac_sys_11_b"],
-        }
-        # if any system type found in the APPLICABLE_SYS_TYPES then return applicable.
+        rmi_b = context.baseline
+        baseline_system_types_dict = get_baseline_system_types(rmi_b)
+        # create a list containing all HVAC systems that are modeled in the rmi_b
+        available_type_list = [
+            hvac_type
+            for hvac_type in baseline_system_types_dict.keys()
+            if len(baseline_system_types_dict[hvac_type]) > 0
+        ]
         return any(
-            [key in APPLICABLE_SYS_TYPES for key in baseline_system_types.keys()]
+            [
+                available_type in APPLICABLE_SYS_TYPES
+                for available_type in available_type_list
+            ]
         )
 
     def list_filter(self, context_item, data):
