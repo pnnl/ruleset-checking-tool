@@ -98,6 +98,8 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   * [are_all_terminal_types_CAV_With_None_Equal_to_Null](ruleset_functions/baseline_systems/baseline_hvac_sub_functions/are_all_terminal_types_CAV_With_None_Equal_to_Null.md): Returns TRUE if all of the terminal unit types input to this function are constant air volume (CAV). It returns FALSE if any of the terminal units are of a type other than constant air volume (CAV).
   * [get_dict_with_terminal_units_and_zones](ruleset_functions/baseline_systems/baseline_hvac_sub_functions/get_dict_with_terminal_units_and_zones.md): Returns a dictionary of zone IDs associated with each terminal unit in the RMD.
   * [are_all_terminal_CHW_loops_purchased_cooling](ruleset_functions/baseline_systems/baseline_hvac_sub_functions/are_all_terminal_CHW_loops_purchased_cooling.md): Returns TRUE if the fluid loop associated with the cooling_from_loop associated with each terminal unit is purchased CHW. Returns FALSE if this is not the case.
+  * [get_most_used_weekday_hourly_schedule](ruleset_functions/get_most_used_weekday_hourly_schedule.md): Get the most used weekday hourly schedule from an annual 8760 schedule as list of hourly values for a 24 hour period.
+
 
 ## Data Tables
   * [8.4.4](data_tables/Table8-4-4.md): Minimum Nominal Efficiency Levels for Low-Voltage Dry-Type Distribution Transformers  
