@@ -29,7 +29,6 @@ APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_3C,
     HVAC_SYS.SYS_7C,
     HVAC_SYS.SYS_11_1C,
-    HVAC_SYS.SYS_12C,
 ]
 HEATING = schema_enums["FluidLoopOptions"].HEATING
 
@@ -42,6 +41,9 @@ class Section21Rule16(RuleDefinitionBase):
             rmrs_used=UserBaselineProposedVals(False, True, False),
             id="21-16",
             description="Baseline shall have only one heating hot water plant.",
+            ruleset_section_title="HVAC - Water Side",
+            standard_section="Section G3.1.3.2 Building System-Specific Modeling Requirements for the Baseline model",
+            is_primary_rule=True,
             rmr_context="ruleset_model_instances/0",
         )
 

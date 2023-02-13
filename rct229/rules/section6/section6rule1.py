@@ -24,6 +24,9 @@ class Section6Rule1(RuleDefinitionListIndexedBase):
             id="6-1",
             description="The total building interior lighting power shall not exceed the interior lighting power "
             "allowance determined using either Table G3.7 or G3.8",
+            ruleset_section_title="Lighting",
+            standard_section="Section G1.2.1(b) Mandatory Provisions related to interior lighting power",
+            is_primary_rule=True,
             rmr_context="ruleset_model_instances/0/buildings/0/building_segments",
         )
 

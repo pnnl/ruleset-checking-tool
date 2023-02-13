@@ -31,7 +31,6 @@ APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_3C,
     HVAC_SYS.SYS_7C,
     HVAC_SYS.SYS_11_1C,
-    HVAC_SYS.SYS_12C,
 ]
 DESIGN_SUPPLY_TEMP = 44 * ureg("degF")
 
@@ -46,6 +45,9 @@ class Section22Rule1(RuleDefinitionListIndexedBase):
             index_rmr="baseline",
             id="22-1",
             description="Baseline chilled water design supply temperature shall be modeled at 44F.",
+            ruleset_section_title="HVAC - Chiller",
+            standard_section="Section G3.1.3.8 Chilled-water design supply temperature (System 7, 8, 11, 12 and 13)",
+            is_primary_rule=True,
             rmr_context="ruleset_model_instances/0",
             list_path="fluid_loops[*]",
         )

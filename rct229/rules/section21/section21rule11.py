@@ -29,7 +29,6 @@ APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_3C,
     HVAC_SYS.SYS_7C,
     HVAC_SYS.SYS_11_1C,
-    HVAC_SYS.SYS_12C,
 ]
 FLUID_LOOP = schema_enums["FluidLoopOptions"]
 
@@ -44,6 +43,9 @@ class Section21Rule11(RuleDefinitionListIndexedBase):
             index_rmr="baseline",
             id="21-11",
             description="The baseline building design uses boilers or purchased hot water, the hot water pumping system shall be modeled as primary-only.",
+            ruleset_section_title="HVAC - Water Side",
+            standard_section="Section G3.1.3.5 Building System-Specific Modeling Requirements for the Baseline model",
+            is_primary_rule=True,
             rmr_context="ruleset_model_instances/0",
             list_path="fluid_loops[*]",
         )

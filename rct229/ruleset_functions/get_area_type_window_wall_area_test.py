@@ -1,5 +1,4 @@
 import pytest
-
 from rct229.data_fns.table_3_2_fns import table_3_2_lookup
 from rct229.ruleset_functions.get_area_type_window_wall_area_dict import (
     get_area_type_window_wall_area_dict,
@@ -157,6 +156,132 @@ TEST_RMR = {
                                 {
                                     "id": "terminal_1_2_1",
                                     "served_by_heating_ventilating_air_conditioning_system": "hvac_1_2",
+                                }
+                            ],
+                        },
+                    ],
+                },
+                # area_type_vertical_fenestration is nonresidential type
+                # In total this building segment has 10m2 windows and 20m2 walls.
+                {
+                    "id": "bldg_seg_1_2",
+                    "lighting_building_area_type": "MULTIFAMILY",
+                    "area_type_vertical_fenestration": "HOTEL_MOTEL_SMALL",
+                    "heating_ventilating_air_conditioning_systems": [
+                        # Use for zone_1_2_1, directly conditioned zone
+                        {
+                            "id": "hvac_1_2_1",
+                            "cooling_system": {
+                                "id": "csys_1_2_1_1",
+                                "design_sensible_cool_capacity": 2 * POWER_THRESHOLD_100
+                                + POWER_DELTA,
+                            },
+                        },
+                        # Used for zone_1_2_2, directly conditioned zone
+                        {
+                            "id": "hvac_1_2_2",
+                            "heating_system": {
+                                "id": "hsys_1_2_2_1",
+                                "design_capacity": SYSTEM_MIN_HEATING_OUTPUT
+                                + POWER_DELTA,
+                            },
+                        },
+                    ],
+                    "zones": [
+                        # hvac_1_1 => directly_conditioned_zone
+                        # zone has a space with a residential lighting_space_type
+                        #   => zone_has_residential_spaces
+                        # zone has a space with a nonresidential lighting_space_type
+                        #   => zone_has_nonresidential_spaces
+                        # zone_has_nonresidential_spaces AND zone_has_nonresidential_spaces
+                        #   => zone_conditioning_category is "CONDITIONED MIXED"
+                        {
+                            "id": "zone_1_2_1",
+                            "spaces": [
+                                {
+                                    # Residential
+                                    "id": "space_1_2_1_1",
+                                    "floor_area": 100,  # m2
+                                    "lighting_space_type": "DORMITORY_LIVING_QUARTERS",
+                                    "occupant_multiplier_schedule": "om_sched_1",
+                                },
+                                {
+                                    # Non-residential
+                                    "id": "space_1_2_1_2",
+                                    "floor_area": 100,  # m2
+                                    "lighting_space_type": "COMPUTER_ROOM",
+                                    "occupant_multiplier_schedule": "om_sched_1",
+                                },
+                            ],
+                            "surfaces": [
+                                # Adds to zone_other_ua
+                                {
+                                    "id": "surface_1_2_1_1",
+                                    "adjacent_to": "EXTERIOR",
+                                    "adjacent_zone": "zone_1_2_2",
+                                    "area": 10,  # m2
+                                    "tilt": 90,  # above grade wall
+                                    "subsurfaces": [
+                                        {
+                                            "id": "subsurface_1_2_1_1_1",
+                                            "classification": "WINDOW",
+                                            "glazed_area": 5,
+                                            "opaque_area": 0,  # m2
+                                            "u_factor": 2.4,  # W/(m2 * K)
+                                        }
+                                    ],
+                                }
+                            ],
+                            "thermostat_cooling_setpoint_schedule": "tcs_sched_1",
+                            "thermostat_heating_setpoint_schedule": "ths_sched_1",
+                            "terminals": [
+                                {
+                                    "id": "terminal_1_2_1_1",
+                                    "served_by_heating_ventilating_air_conditioning_system": "hvac_1_2_1",
+                                }
+                            ],
+                        },
+                        # hvac_1_2 => directly_conditioned_zone
+                        # zone has no residential spaces but a space has a lighting_space_type
+                        #   => zone_has_nonresidential_spaces
+                        # Not zone_has_residential_spaces and zone_has_nonesidential_spaces
+                        #  => zone_conditioning_category is "CONDITIONED NON-RESIDENTIAL"
+                        {
+                            "id": "zone_1_2_2",
+                            "spaces": [
+                                {
+                                    # Non-residential
+                                    "id": "space_1_2_2_1",
+                                    "floor_area": 100,  # m2
+                                    "lighting_space_type": "COMPUTER_ROOM",
+                                    "occupant_multiplier_schedule": "om_sched_1",
+                                }
+                            ],
+                            "surfaces": [
+                                # Adds to zone_other_ua
+                                {
+                                    "id": "surface_1_2_2_1",
+                                    "adjacent_to": "EXTERIOR",
+                                    "adjacent_zone": "zone_1_2_1",
+                                    "area": 10,  # m2
+                                    "tilt": 90,  # above grade wall
+                                    "subsurfaces": [
+                                        {
+                                            "id": "subsurface_1_2_2_1_1",
+                                            "classification": "WINDOW",
+                                            "glazed_area": 5,
+                                            "opaque_area": 0,  # m2
+                                            "u_factor": 2.4,  # W/(m2 * K)
+                                        }
+                                    ],
+                                }
+                            ],
+                            "thermostat_cooling_setpoint_schedule": "tcs_sched_1",
+                            "thermostat_heating_setpoint_schedule": "ths_sched_1",
+                            "terminals": [
+                                {
+                                    "id": "terminal_1_2_2_1",
+                                    "served_by_heating_ventilating_air_conditioning_system": "hvac_1_2_2",
                                 }
                             ],
                         },
@@ -400,8 +525,8 @@ def test__TEST_RMD__is_valid():
 def test__get_area_type_window_wall_area():
     assert get_area_type_window_wall_area_dict(CLIMATE_ZONE, TEST_BUILDING) == {
         "HOTEL_MOTEL_SMALL": {
-            "total_wall_area": 20 * ureg("m2"),
-            "total_window_area": 10 * ureg("m2"),
+            "total_wall_area": 40 * ureg("m2"),
+            "total_window_area": 20 * ureg("m2"),
         },
         "RETAIL_STAND_ALONE": {
             "total_wall_area": 20 * ureg("m2"),

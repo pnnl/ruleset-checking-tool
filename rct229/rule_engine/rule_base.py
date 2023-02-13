@@ -1,5 +1,6 @@
 from jsonpointer import resolve_pointer
 
+from rct229.rule_engine.rct_outcome_label import RCTOutcomeLabel
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 from rct229.utils.assertions import MissingKeyException, RCTFailureException
 from rct229.utils.json_utils import slash_prefix_guarantee
@@ -15,6 +16,9 @@ class RuleDefinitionBase:
         rmrs_used,
         id=None,
         description=None,
+        ruleset_section_title=None,
+        standard_section=None,
+        is_primary_rule=None,
         rmr_context="",
         required_fields=None,
         must_match_by_ids=[],
@@ -51,6 +55,9 @@ class RuleDefinitionBase:
         self.rmrs_used = rmrs_used
         self.id = id
         self.description = description
+        self.ruleset_section_title = ruleset_section_title
+        self.standard_section = standard_section
+        self.is_primary_rule = is_primary_rule
         # rmr_context is a jsonpointer string
         # As a convenience, any leading '/' should not be included and will
         # be inserted when the pointer is used in _get_context().
@@ -103,6 +110,12 @@ class RuleDefinitionBase:
             outcome["id"] = self.id
         if self.description:
             outcome["description"] = self.description
+        if self.ruleset_section_title:
+            outcome["ruleset_section_title"] = self.ruleset_section_title
+        if self.standard_section:
+            outcome["standard_section"] = self.standard_section
+        if self.is_primary_rule is not None:
+            outcome["primary_rule"] = True if self.is_primary_rule else False
         if self.rmr_context:
             outcome["rmr_context"] = self.rmr_context
 
@@ -130,7 +143,7 @@ class RuleDefinitionBase:
 
                         # Determine if manual check is required
                         if self.manual_check_required(context, calc_vals, data):
-                            outcome["result"] = "UNDETERMINED"
+                            outcome["result"] = RCTOutcomeLabel.UNDETERMINED
                             manual_check_required_msg = (
                                 self.get_manual_check_required_msg(
                                     context, calc_vals, data
@@ -146,25 +159,25 @@ class RuleDefinitionBase:
                                 outcome["result"] = result
                             # Assume result type is bool
                             elif result:
-                                outcome["result"] = "PASSED"
+                                outcome["result"] = RCTOutcomeLabel.PASS
                                 pass_msg = self.get_pass_msg(context, calc_vals, data)
                                 if pass_msg:
                                     outcome["message"] = pass_msg
                             else:
-                                outcome["result"] = "FAILED"
+                                outcome["result"] = RCTOutcomeLabel.FAILED
                                 fail_msg = self.get_fail_msg(context, calc_vals, data)
                                 if fail_msg:
                                     outcome["message"] = fail_msg
                     else:
-                        outcome["result"] = "NOT_APPLICABLE"
+                        outcome["result"] = RCTOutcomeLabel.NOT_APPLICABLE
                         not_applicable_msg = self.get_not_applicable_msg(context, data)
                         if not_applicable_msg:
                             outcome["message"] = not_applicable_msg
                 except MissingKeyException as ke:
-                    outcome["result"] = "UNDETERMINED"
+                    outcome["result"] = RCTOutcomeLabel.UNDETERMINED
                     outcome["message"] = str(ke)
                 except RCTFailureException as fe:
-                    outcome["result"] = "FAILED"
+                    outcome["result"] = RCTOutcomeLabel.FAILED
                     outcome["message"] = str(fe)
             else:
                 outcome["result"] = "UNDETERMINED"

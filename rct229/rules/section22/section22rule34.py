@@ -31,6 +31,9 @@ class Section22Rule34(RuleDefinitionListIndexedBase):
             index_rmr="baseline",
             id="22-34",
             description="For baseline cooling chilled water plant that is served by chiller(s), the capacity shall be based on coincident loads.",
+            ruleset_section_title="HVAC - Chiller",
+            standard_section="Section G3.1.2.2 Building System-Specific Modeling Requirements for the Baseline model",
+            is_primary_rule=True,
             rmr_context="ruleset_model_instances/0",
             list_path="fluid_loops[*]",
         )

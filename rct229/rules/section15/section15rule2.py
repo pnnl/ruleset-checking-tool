@@ -6,13 +6,15 @@ class Section15Rule2(RuleDefinitionBase):
     """Rule 2 of ASHRAE 90.1-2019 Appendix G Section 15 (Transformers)."""
 
     def __init__(self):
-        rmrs_used = UserBaselineProposedVals(True, False, True)
-        id = "15-2"
-        description = (
-            "Number of transformers modeled in User RMR and Proposed RMR are the same"
+        super(Section15Rule2, self).__init__(
+            rmrs_used=UserBaselineProposedVals(True, False, True),
+            id="15-2",
+            description="Number of transformers modeled in User RMR and Proposed RMR are the same",
+            ruleset_section_title="Transformer",
+            standard_section="Transformers",
+            is_primary_rule=False,
+            rmr_context="ruleset_model_instances/0/transformers",
         )
-        rmr_context = "ruleset_model_instances/0/transformers"
-        super(Section15Rule2, self).__init__(rmrs_used, id, description, rmr_context)
 
     def is_applicable(self, context, data=None):
         return len(context.user) > 0

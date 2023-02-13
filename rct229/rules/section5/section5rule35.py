@@ -24,6 +24,9 @@ class Section5Rule35(RuleDefinitionListIndexedBase):
             index_rmr="baseline",
             id="5-35",
             description="If the skylight area of the proposed design is greater than 3%, baseline skylight area shall be decreased in all roof components in which skylights are located to reach 3%.",
+            ruleset_section_title="Envelope",
+            standard_section="Section G3.1-5(e) Building Envelope Modeling Requirements for the Baseline building",
+            is_primary_rule=True,
             list_path="ruleset_model_instances[0].buildings[*]",
             data_items={"climate_zone": ("baseline", "weather/climate_zone")},
         )
