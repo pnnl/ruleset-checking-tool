@@ -1,6 +1,7 @@
 import click
 
 from rct229.reports.ashrae901_2019_detail_report import ASHRAE9012019DetailReport
+from rct229.reports.ashrae901_2019_summary_report import ASHRAE9012019SummaryReport
 from rct229.reports.engine_raw_output import EngineRawOutput
 from rct229.reports.engine_raw_summary import EngineRawSummary
 from rct229.rule_engine.engine import evaluate_all_rules
@@ -9,6 +10,7 @@ from rct229.ruletest_engine.run_ruletests import (
     run_chiller_tests,
     run_envelope_tests,
     run_lighting_tests,
+    run_airside_tests,
 )
 from rct229.schema.validate import validate_rmr
 from rct229.utils.file import deserialize_rmr_file
@@ -18,6 +20,7 @@ REPORT_MODULE = {
     "RAW_OUTPUT": EngineRawOutput,
     "RAW_SUMMARY": EngineRawSummary,
     "ASHRAE9012019_DETAIL": ASHRAE9012019DetailReport,
+    "ASHRAE9012019_SUMMARY": ASHRAE9012019SummaryReport,
 }
 
 
@@ -57,6 +60,8 @@ def run_test(section=None):
             assert run_boiler_tests(), "Failed section 21 tests"
         elif section == "section22":
             assert run_chiller_tests(), "Failed section 22 tests"
+        elif section == "section23":
+            assert run_airside_tests(), "Failed section 23 tests"
     else:
         print(f"software test workflow for all tests")
         # assert run_transformer_tests(), "Failed section 15 tests"
@@ -64,27 +69,41 @@ def run_test(section=None):
         assert run_envelope_tests(), "Failed section 5 tests"
         assert run_boiler_tests(), "Failed section 21 tests"
         assert run_chiller_tests(), "Failed section 22 tests"
+        assert run_airside_tests(), "Failed section 23 tests"
 
 
 # Evaluate RMR Triplet
 short_help_text = """
     Test RMD triplet. arguments are user_rmd, baseline_rmd, proposed_rmd
-    --reports or -r: reports. Default is RAW_OUTPUT, available options include RAW_OUTPUT, RAW_SUMMARY, ASHRAE9012019_DETAIL, multiple allowed.
+    --reports or -r: reports. Default is RAW_OUTPUT, available options include RAW_OUTPUT, RAW_SUMMARY, ASHRAE9012019_DETAIL, ASHRAE9012019_SUMMARY, multiple allowed.
     """
 help_text = short_help_text
 
 
 @cli.command("evaluate", short_help=short_help_text, help=help_text, hidden=True)
-@click.argument("user_rmd", type=click.File("rb"))
-@click.argument("baseline_rmd", type=click.File("rb"))
-@click.argument("proposed_rmd", type=click.File("rb"))
+@click.argument("user_rmd", type=click.File("r"))
+@click.argument("baseline_rmd", type=click.File("r"))
+@click.argument("proposed_rmd", type=click.File("r"))
 @click.option("--reports", "-r", multiple=True, default=["RAW_OUTPUT"])
-def evaluate(user_rmd, baseline_rmd, proposed_rmd, reports):
+@click.option(
+    "--reports_directory", "-rd", multiple=False, default="./examples/output/"
+)
+def evaluate(user_rmd, baseline_rmd, proposed_rmd, reports, reports_directory):
     report = evaluate_rmr_triplet(user_rmd, baseline_rmd, proposed_rmd)
     # have report attached.
+
+    props = {
+        "user_rmd": user_rmd.name,
+        "proposed_rmd": proposed_rmd.name,
+        "baseline_rmd": baseline_rmd.name,
+    }
+    print(f"Saving reports to: {reports_directory}......")
     for report_type in reports:
-        report_module = REPORT_MODULE[report_type]()
-        report_module.generate(report, "./examples/output/")
+        if report_type == "ASHRAE9012019_SUMMARY":
+            report_module = REPORT_MODULE[report_type](props)
+        else:
+            report_module = REPORT_MODULE[report_type]()
+        report_module.generate(report, reports_directory)
 
 
 def evaluate_rmr_triplet(user_rmr, baseline_rmr, proposed_rmr):
@@ -99,17 +118,17 @@ def evaluate_rmr_triplet(user_rmr, baseline_rmr, proposed_rmr):
         user_rmr_obj = deserialize_rmr_file(user_rmr)
     except:
         rmr_are_valid_json = False
-        print("User RMR is not a valid JSON file")
+        print("User RMD is not a valid JSON file")
     try:
         baseline_rmr_obj = deserialize_rmr_file(baseline_rmr)
     except:
         rmr_are_valid_json = False
-        print("Baseline RMR is not a valid JSON file")
+        print("Baseline RMD is not a valid JSON file")
     try:
         proposed_rmr_obj = deserialize_rmr_file(proposed_rmr)
     except:
         rmr_are_valid_json = False
-        print("Proposed RMR is not a valid JSON file")
+        print("Proposed RMD is not a valid JSON file")
 
     if not rmr_are_valid_json:
         print("")

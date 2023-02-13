@@ -17,24 +17,23 @@
                                     "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                     "terminals": [
                                         {
-                                            "id": "CAV Air Terminal 1",
+                                            "id": "Air Terminal",
                                             "is_supply_ducted": true,
                                             "type": "CONSTANT_AIR_VOLUME",
-                                            "served_by_heating_ventilating_air_conditioning_system": "System 12"
+                                            "served_by_heating_ventilating_air_conditioning_system": "System Type 3"
                                         }
                                     ]
                                 }
                             ],
                             "heating_ventilating_air_conditioning_systems": [
                                 {
-                                    "id": "System 12",
+                                    "id": "System Type 3",
                                     "cooling_system": {
-                                        "id": "CHW Coil 1",
-                                        "cooling_system_type": "FLUID_LOOP",
-                                        "chilled_water_loop": "Secondary CHW Loop 1"
+                                        "id": "DX Coil 1",
+                                        "cooling_system_type": "DIRECT_EXPANSION"
                                     },
                                     "heating_system": {
-                                        "id": "HHW Coil 1",
+                                        "id": "Furnace Coil 1",
                                         "heating_system_type": "FLUID_LOOP",
                                         "hot_water_loop": "Purchased HW Loop 1"
                                     },
@@ -60,36 +59,15 @@
             ],
             "external_fluid_source": [
                 {
-                    "id": "Purchased HW 1",
+                    "id": "Purchased HW",
                     "loop": "Purchased HW Loop 1",
                     "type": "HOT_WATER"
-                },
-                {
-                    "id": "Purchased CW 1",
-                    "loop": "Chilled Water Loop 1",
-                    "type": "CHILLED_WATER"
-                }
-            ],
-            "pumps": [
-                {
-                    "id": "HW Pump 1",
-                    "loop_or_piping": "Purchased HW Loop 1",
-                    "speed_control": "FIXED_SPEED"
-                },
-                {
-                    "id": "CHW Pump 1",
-                    "loop_or_piping": "Chilled Water Loop 1",
-                    "speed_control": "FIXED_SPEED"
                 }
             ],
             "fluid_loops": [
                 {
                     "id": "Purchased HW Loop 1",
                     "type": "HEATING"
-                },
-                {
-                    "id": "Chilled Water Loop 1",
-                    "type": "COOLING"
                 }
             ]
         }
