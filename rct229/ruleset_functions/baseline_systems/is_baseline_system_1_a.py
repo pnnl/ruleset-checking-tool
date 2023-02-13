@@ -24,7 +24,9 @@ from rct229.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.is_hv
     is_hvac_sys_cooling_type_none,
 )
 from rct229.ruleset_functions.baseline_systems.baseline_system_util import (
-    find_exactly_one_hvac_system,
+    has_fan_system,
+    has_heating_system,
+    has_preheat_system,
 )
 
 HEATING_SYSTEM = schema_enums["HeatingSystemOptions"]
@@ -50,25 +52,16 @@ def is_baseline_system_1_a(rmi_b, hvac_b_id, terminal_unit_id_list, zone_id_list
      -------
     """
 
-    # Get the hvac system
-    hvac_b = find_exactly_one_hvac_system(rmi_b, hvac_b_id)
-
     # check if the hvac system has the required sub systems for system type 1 a
-    has_required_sys = (
-        (
-            hvac_b.get("preheat_system") is None
-            or hvac_b["preheat_system"].get("heating_system_type") is None
-            or hvac_b["preheat_system"]["heating_system_type"] == HEATING_SYSTEM.NONE
-        )
-        and (
-            hvac_b.get("heating_system") is None
-            or hvac_b["heating_system"].get("heating_system_type") is None
-            or hvac_b["heating_system"]["heating_system_type"] == HEATING_SYSTEM.NONE
-        )
-        and (hvac_b.get("fan_system") is None)
+    # if preheat, heating, and fan systems DON'T exist, has_required_sys=True, else, False
+    has_required_sys = not (
+        has_preheat_system(rmi_b, hvac_b_id)
+        and has_heating_system(rmi_b, hvac_b_id)
+        and has_fan_system(rmi_b, hvac_b_id)
     )
 
     return (
+        # short-circuit the logic if no required data is found.
         has_required_sys
         # sub functions handles missing required sys, and return False.
         and is_hvac_sys_cooling_type_none(rmi_b, hvac_b_id)

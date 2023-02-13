@@ -40,7 +40,7 @@ from rct229.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.is_hv
 )
 from rct229.ruleset_functions.baseline_systems.baseline_system_util import (
     HVAC_SYS,
-    find_exactly_one_hvac_system,
+    has_preheat_system,
 )
 
 HEATING_SYSTEM = schema_enums["HeatingSystemOptions"]
@@ -72,15 +72,10 @@ def is_baseline_system_12(rmi_b, hvac_b_id, terminal_unit_id_list, zone_id_list)
     """
 
     is_baseline_system_12 = HVAC_SYS.UNMATCHED
-    hvac_b = find_exactly_one_hvac_system(rmi_b, hvac_b_id)
 
     # check if the hvac system has the required sub systems for system type 12
-    preheat_system = hvac_b.get("preheat_system")
-    has_required_sys = (
-        preheat_system is None
-        or preheat_system.get("heating_system_type") is None
-        or preheat_system["heating_system_type"] == HEATING_SYSTEM.NONE
-    )
+    # if preheat system DOESN'T exist, has_required_sys=True, else, False
+    has_required_sys = not has_preheat_system(rmi_b, hvac_b_id)
 
     are_sys_data_matched = (
         # short-circuit the logic if no required data is found.
@@ -103,10 +98,9 @@ def is_baseline_system_12(rmi_b, hvac_b_id, terminal_unit_id_list, zone_id_list)
                 is_baseline_system_12 = HVAC_SYS.SYS_12
             elif is_hvac_sys_fluid_loop_purchased_heating(rmi_b, hvac_b_id):
                 is_baseline_system_12 = HVAC_SYS.SYS_12B
-        elif is_hvac_sys_fluid_loop_purchased_chw(rmi_b, hvac_b_id):
-            if is_hvac_sys_fluid_loop_attached_to_boiler(rmi_b, hvac_b_id):
-                is_baseline_system_12 = HVAC_SYS.SYS_12A
-            elif is_hvac_sys_fluid_loop_purchased_heating(rmi_b, hvac_b_id):
-                is_baseline_system_12 = HVAC_SYS.SYS_12C
+        elif is_hvac_sys_fluid_loop_purchased_chw(
+            rmi_b, hvac_b_id
+        ) and is_hvac_sys_fluid_loop_attached_to_boiler(rmi_b, hvac_b_id):
+            is_baseline_system_12 = HVAC_SYS.SYS_12A
 
     return is_baseline_system_12

@@ -7,6 +7,7 @@ SECTION_5_ENVELOPE_TEST_PATH = "section5"
 SECTION_6_LIGHTING_TEST_PATH = "section6"
 SECTION_21_BOILER_TEST_PATH = "section21"
 SECTION_22_CHILLER_TEST_PATH = "section22"
+SECTION_23_AIRSIDE_TEST_PATH = "section23"
 
 
 def run_transformer_tests():
@@ -123,6 +124,28 @@ def run_chiller_tests():
     return run_test_helper(json_tests)
 
 
+def run_airside_tests():
+    """Runs all tests found in the airside tests JSON.
+
+    Returns
+    -------
+    None
+
+    Results of lighting test are spit out to console
+    """
+
+    json_tests = [
+        os.path.join(SECTION_23_AIRSIDE_TEST_PATH, pos_json)
+        for pos_json in os.listdir(
+            os.path.join(
+                os.path.dirname(__file__), TEST_PATH, SECTION_23_AIRSIDE_TEST_PATH
+            )
+        )
+        if pos_json.endswith(".json")
+    ]
+    return run_test_helper(json_tests)
+
+
 def run_test_helper(test_list):
     # sort the list in a human order
     test_list.sort(key=natural_keys)
@@ -135,5 +158,6 @@ def run_test_helper(test_list):
 # run_lighting_tests()
 # run_boiler_tests()
 # run_chiller_tests()
-run_envelope_tests()
+# run_envelope_tests()
 # run_receptacle_tests()
+run_airside_tests()

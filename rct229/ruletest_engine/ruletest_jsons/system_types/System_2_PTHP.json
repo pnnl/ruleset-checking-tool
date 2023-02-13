@@ -18,7 +18,7 @@
                                     "terminals": [
                                         {
                                             "id": "PTHP Terminal 1",
-                                            "is_supply_ducted": true,
+                                            "is_supply_ducted": false,
                                             "type": "CONSTANT_AIR_VOLUME",
                                             "served_by_heating_ventilating_air_conditioning_system": "PTHP 1"
                                         }

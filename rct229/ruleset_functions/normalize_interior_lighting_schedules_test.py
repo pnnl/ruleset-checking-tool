@@ -1,5 +1,4 @@
 import pytest
-
 from rct229.ruleset_functions.normalize_interior_lighting_schedules import (
     normalize_interior_lighting_schedules,
 )
