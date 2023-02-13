@@ -20,7 +20,7 @@ def get_dict_of_zones_and_terminal_units_served_by_hvac_sys(rmi):
         for terminal in find_all("$.terminals[*]", zone):
             terminal_id = terminal["id"]
             hvac_sys_id = terminal.get(
-                "served_by_heating_ventilation_air_conditioning_system"
+                "served_by_heating_ventilating_air_conditioning_system"
             )
             if hvac_sys_id:
                 if (

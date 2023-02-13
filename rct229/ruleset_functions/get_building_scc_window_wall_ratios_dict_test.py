@@ -1,7 +1,6 @@
 from unittest.mock import patch
 
 import pytest
-
 from rct229.ruleset_functions.get_building_scc_window_wall_ratios_dict import (
     get_building_scc_window_wall_ratios_dict,
 )
@@ -124,7 +123,7 @@ TEST_RMR_12 = {"id": "229_01", "ruleset_model_instances": [TEST_RMR]}
 TEST_BUILDING = quantify_rmr(TEST_RMR_12)["ruleset_model_instances"][0]["buildings"][0]
 
 
-def test__TEST_RMR__is_valid():
+def test__TEST_RMD__is_valid():
     schema_validation_result = schema_validate_rmr(TEST_RMR_12)
     assert schema_validation_result[
         "passed"

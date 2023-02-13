@@ -1,6 +1,13 @@
+from rct229.ruleset_functions.baseline_systems.baseline_hvac_test_util import (
+    load_system_test_file,
+)
+from rct229.ruleset_functions.baseline_systems.baseline_system_util import HVAC_SYS
+from rct229.ruleset_functions.baseline_systems.is_baseline_system_2 import (
+    is_baseline_system_2,
+)
 from rct229.schema.validate import schema_validate_rmr
 
-SYS_2_RMD = {
+SYS_2_TEST_RMD = {
     "id": "ASHRAE229 1",
     "ruleset_model_instances": [
         {
@@ -20,14 +27,14 @@ SYS_2_RMD = {
                                     "terminals": [
                                         {
                                             "id": "PTHP Terminal 1",
-                                            "is_supply_ducted": True,
+                                            "is_supply_ducted": False,
                                             "type": "CONSTANT_AIR_VOLUME",
-                                            "served_by_heating_ventilation_air_conditioning_system": "PTHP 1",
+                                            "served_by_heating_ventilating_air_conditioning_system": "PTHP 1",
                                         }
                                     ],
                                 }
                             ],
-                            "heating_ventilation_air_conditioning_systems": [
+                            "heating_ventilating_air_conditioning_systems": [
                                 {
                                     "id": "PTHP 1",
                                     "cooling_system": {
@@ -55,7 +62,28 @@ SYS_2_RMD = {
 
 
 def test__TEST_RMD_baseline_system_2__is_valid():
-    schema_validation_result = schema_validate_rmr(SYS_2_RMD)
+    schema_validation_result = schema_validate_rmr(SYS_2_TEST_RMD)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"
+
+
+def test_is_baseline_system_2_true():
+    assert (
+        is_baseline_system_2(
+            SYS_2_TEST_RMD["ruleset_model_instances"][0],
+            "PTHP 1",
+            ["PTHP Terminal 1"],
+            ["Thermal Zone 1"],
+        )
+        == HVAC_SYS.SYS_2
+    )
+
+
+def test_is_baseline_system_2_test_json_true():
+    assert is_baseline_system_2(
+        load_system_test_file("System_2_PTHP.json")["ruleset_model_instances"][0],
+        "PTHP 1",
+        ["PTHP Terminal 1"],
+        ["Thermal Zone 1"],
+    )

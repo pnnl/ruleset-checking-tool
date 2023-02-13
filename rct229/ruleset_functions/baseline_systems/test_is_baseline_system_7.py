@@ -2,6 +2,7 @@ from rct229.ruleset_functions.baseline_systems.baseline_system_util import HVAC_
 from rct229.ruleset_functions.baseline_systems.is_baseline_system_7 import (
     is_baseline_system_7,
 )
+from rct229.schema.validate import schema_validate_rmr
 
 SYS_7_TEST_RMD = {
     "id": "ASHRAE229 1",
@@ -27,7 +28,7 @@ SYS_7_TEST_RMD = {
                                             "heating_from_loop": "Boiler Loop 1",
                                             "heating_source": "HOT_WATER",
                                             "type": "VARIABLE_AIR_VOLUME",
-                                            "served_by_heating_ventilation_air_conditioning_system": "System 7",
+                                            "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                         }
                                     ],
                                 },
@@ -42,7 +43,7 @@ SYS_7_TEST_RMD = {
                                             "heating_from_loop": "Boiler Loop 1",
                                             "heating_source": "HOT_WATER",
                                             "type": "VARIABLE_AIR_VOLUME",
-                                            "served_by_heating_ventilation_air_conditioning_system": "System 7a",
+                                            "served_by_heating_ventilating_air_conditioning_system": "System 7a",
                                         }
                                     ],
                                 },
@@ -57,7 +58,7 @@ SYS_7_TEST_RMD = {
                                             "heating_from_loop": "Purchased HW Loop 1",
                                             "heating_source": "HOT_WATER",
                                             "type": "VARIABLE_AIR_VOLUME",
-                                            "served_by_heating_ventilation_air_conditioning_system": "System 7b",
+                                            "served_by_heating_ventilating_air_conditioning_system": "System 7b",
                                         }
                                     ],
                                 },
@@ -72,12 +73,12 @@ SYS_7_TEST_RMD = {
                                             "heating_from_loop": "Purchased HW Loop 1",
                                             "heating_source": "HOT_WATER",
                                             "type": "VARIABLE_AIR_VOLUME",
-                                            "served_by_heating_ventilation_air_conditioning_system": "System 7c",
+                                            "served_by_heating_ventilating_air_conditioning_system": "System 7c",
                                         }
                                     ],
                                 },
                             ],
-                            "heating_ventilation_air_conditioning_systems": [
+                            "heating_ventilating_air_conditioning_systems": [
                                 {
                                     "id": "System 7",
                                     "preheat_system": {
@@ -88,7 +89,7 @@ SYS_7_TEST_RMD = {
                                     "cooling_system": {
                                         "id": "Cooling Coil 1",
                                         "cooling_system_type": "FLUID_LOOP",
-                                        "chilled_water_loop": "Chiller Loop 1",
+                                        "chilled_water_loop": "Secondary Loop 1",
                                     },
                                     "fan_system": {
                                         "id": "VAV Fan System 1",
@@ -126,7 +127,7 @@ SYS_7_TEST_RMD = {
                                     "cooling_system": {
                                         "id": "Cooling Coil 3",
                                         "cooling_system_type": "FLUID_LOOP",
-                                        "chilled_water_loop": "Chiller Loop 1",
+                                        "chilled_water_loop": "Secondary Loop 1",
                                     },
                                     "fan_system": {
                                         "id": "VAV Fan System 3",
@@ -197,6 +198,7 @@ SYS_7_TEST_RMD = {
                 {
                     "id": "Chiller Loop 1",
                     "type": "COOLING",
+                    "child_loops": [{"id": "Secondary Loop 1", "type": "COOLING"}],
                 },
                 {
                     "id": "Purchased HW Loop 1",
@@ -222,6 +224,13 @@ SYS_7_TEST_RMD = {
         }
     ],
 }
+
+
+def test__TEST_RMD_baseline_system_7__is_valid():
+    schema_validation_result = schema_validate_rmr(SYS_7_TEST_RMD)
+    assert schema_validation_result[
+        "passed"
+    ], f"Schema error: {schema_validation_result['error']}"
 
 
 def test_is_baseline_system_7_true():

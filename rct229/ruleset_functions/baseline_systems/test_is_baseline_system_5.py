@@ -1,9 +1,13 @@
+from rct229.ruleset_functions.baseline_systems.baseline_hvac_test_util import (
+    load_system_test_file,
+)
+from rct229.ruleset_functions.baseline_systems.baseline_system_util import HVAC_SYS
+from rct229.ruleset_functions.baseline_systems.is_baseline_system_5 import (
+    is_baseline_system_5,
+)
 from rct229.schema.validate import schema_validate_rmr
 
-# hvac_id = "System 5" => Sys_5, [Thermal Zone 1], [VAV Air Terminal 1]
-# hvac_id = "System 5b" => Sys_5a, [Thermal Zone 2], [VAV Air Terminal 2]
-
-SYS_5_RMD = {
+SYS_5_TEST_RMD = {
     "id": "ASHRAE229 1",
     "ruleset_model_instances": [
         {
@@ -25,7 +29,7 @@ SYS_5_RMD = {
                                             "id": "VAV Air Terminal 1",
                                             "is_supply_ducted": True,
                                             "type": "VARIABLE_AIR_VOLUME",
-                                            "served_by_heating_ventilation_air_conditioning_system": "System 5",
+                                            "served_by_heating_ventilating_air_conditioning_system": "System 5",
                                             "heating_source": "HOT_WATER",
                                             "heating_from_loop": "Boiler Loop 1",
                                         }
@@ -40,14 +44,14 @@ SYS_5_RMD = {
                                             "id": "VAV Air Terminal 2",
                                             "is_supply_ducted": True,
                                             "type": "VARIABLE_AIR_VOLUME",
-                                            "served_by_heating_ventilation_air_conditioning_system": "System 5B",
+                                            "served_by_heating_ventilating_air_conditioning_system": "System 5B",
                                             "heating_source": "HOT_WATER",
                                             "heating_from_loop": "Purchased HW Loop 1",
                                         }
                                     ],
                                 },
                             ],
-                            "heating_ventilation_air_conditioning_systems": [
+                            "heating_ventilating_air_conditioning_systems": [
                                 {
                                     "id": "System 5",
                                     "cooling_system": {
@@ -120,7 +124,53 @@ SYS_5_RMD = {
 
 
 def test__TEST_RMD_baseline_system_5__is_valid():
-    schema_validation_result = schema_validate_rmr(SYS_5_RMD)
+    schema_validation_result = schema_validate_rmr(SYS_5_TEST_RMD)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"
+
+
+def test_is_baseline_system_5_true():
+    assert (
+        is_baseline_system_5(
+            SYS_5_TEST_RMD["ruleset_model_instances"][0],
+            "System 5",
+            ["VAV Air Terminal 1"],
+            ["Thermal Zone 1"],
+        )
+        == HVAC_SYS.SYS_5
+    )
+
+
+def test_is_baseline_system_5_test_json_true():
+    assert is_baseline_system_5(
+        load_system_test_file("System_5_PVAV_HW_Reheat.json")[
+            "ruleset_model_instances"
+        ][0],
+        "System 5",
+        ["VAV Air Terminal 1"],
+        ["Thermal Zone 1"],
+    )
+
+
+def test_is_baseline_system_5B_true():
+    assert (
+        is_baseline_system_5(
+            SYS_5_TEST_RMD["ruleset_model_instances"][0],
+            "System 5B",
+            ["VAV Air Terminal 2"],
+            ["Thermal Zone 2"],
+        )
+        == HVAC_SYS.SYS_5B
+    )
+
+
+def test_is_baseline_system_5B_test_json_true():
+    assert is_baseline_system_5(
+        load_system_test_file("System_5b_PVAV_HW_Reheat.json")[
+            "ruleset_model_instances"
+        ][0],
+        "System 5",
+        ["VAV Air Terminal 1"],
+        ["Thermal Zone 1"],
+    )

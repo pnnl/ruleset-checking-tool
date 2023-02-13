@@ -3,6 +3,7 @@ from rct229.data_fns.table_G3_4_fns import table_G34_lookup
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
+from rct229.ruleset_functions.compare_standard_val import std_le
 from rct229.ruleset_functions.get_building_scc_skylight_roof_ratios_dict import (
     get_building_scc_skylight_roof_ratios_dict,
 )
@@ -15,7 +16,6 @@ from rct229.ruleset_functions.get_surface_conditioning_category_dict import (
     get_surface_conditioning_category_dict,
 )
 from rct229.utils.pint_utils import ZERO, CalcQ
-from rct229.utils.std_comparisons import std_equal
 
 MANUAL_CHECK_MSG = "Manual review is required to verify skylight meets U-factor requirement as per table G3.4."
 MANUAL_CHECK_APPLICABLE = (
@@ -38,6 +38,9 @@ class Section5Rule37(RuleDefinitionListIndexedBase):
             index_rmr="baseline",
             id="5-37",
             description="Skylight U-factors for residential, non-residential and semi-heated spaces in the baseline model must match the appropriate requirements in Table G3.4-1 through G3.4-8.",
+            ruleset_section_title="Envelope",
+            standard_section="Section G3.1-5(e) Building Envelope Modeling Requirements for the Baseline building",
+            is_primary_rule=True,
             list_path="ruleset_model_instances[0].buildings[*]",
             data_items={"climate_zone": ("baseline", "weather/climate_zone")},
         )
@@ -251,4 +254,4 @@ class Section5Rule37(RuleDefinitionListIndexedBase):
                 def rule_check(self, context, calc_vals=None, data=None):
                     subsurface_b_u_factor = calc_vals["subsurface_b_u_factor"]
                     target_u_factor = calc_vals["target_u_factor"]
-                    return std_equal(target_u_factor, subsurface_b_u_factor)
+                    return std_le(std_val=target_u_factor, val=subsurface_b_u_factor)

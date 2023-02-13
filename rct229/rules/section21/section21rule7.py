@@ -34,6 +34,9 @@ class Section21Rule7(RuleDefinitionListIndexedBase):
             index_rmr="baseline",
             id="21-7",
             description="When baseline building requires boilers, systems 1,5,7,11 and 12 - Model HWST = 180F and return design temp = 130F.",
+            ruleset_section_title="HVAC - Water Side",
+            standard_section="Section G3.1.3.3 Building System-Specific Modeling Requirements for the Baseline model",
+            is_primary_rule=True,
             rmr_context="ruleset_model_instances/0",
             list_path="fluid_loops[*]",
         )
@@ -41,8 +44,8 @@ class Section21Rule7(RuleDefinitionListIndexedBase):
     def is_applicable(self, context, data=None):
         rmi_b = context.baseline
         baseline_system_types_dict = get_baseline_system_types(rmi_b)
-        # create a list contains all HVAC systems that are modeled in the rmi_b
-        available_type_lists = [
+        # create a list containing all HVAC systems that are modeled in the rmi_b
+        available_type_list = [
             hvac_type
             for hvac_type in baseline_system_types_dict.keys()
             if len(baseline_system_types_dict[hvac_type]) > 0
@@ -50,7 +53,7 @@ class Section21Rule7(RuleDefinitionListIndexedBase):
         return any(
             [
                 available_type in APPLICABLE_SYS_TYPES
-                for available_type in available_type_lists
+                for available_type in available_type_list
             ]
         )
 
@@ -92,15 +95,19 @@ class Section21Rule7(RuleDefinitionListIndexedBase):
                 "design_return_temperature": CalcQ(
                     "temperature", design_return_temperature
                 ),
+                "required_supply_temperature": CalcQ("temperature", DESIGN_SUPPLY_TEMP),
+                "required_return_temperature": CalcQ("temperature", DESIGN_RETURN_TEMP),
             }
 
         def rule_check(self, context, calc_vals=None, data=None):
             design_supply_temperature = calc_vals["design_supply_temperature"]
             design_return_temperature = calc_vals["design_return_temperature"]
+            required_supply_temperature = calc_vals["required_supply_temperature"]
+            required_return_temperature = calc_vals["required_return_temperature"]
             return std_equal(
                 design_supply_temperature.to(ureg.kelvin),
-                DESIGN_SUPPLY_TEMP.to(ureg.kelvin),
+                required_supply_temperature.to(ureg.kelvin),
             ) and std_equal(
                 design_return_temperature.to(ureg.kelvin),
-                DESIGN_RETURN_TEMP.to(ureg.kelvin),
+                required_return_temperature.to(ureg.kelvin),
             )
