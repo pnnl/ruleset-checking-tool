@@ -7,14 +7,13 @@
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-26",
-            "ruleset_reference": "Table G3.1 #5 Baseline column #d: Vertical Fenestration Assemblies. Fenestration for new\nbuildings, existing buildings, and additions shall comply with the following: \n\u2022 Fenestration SHGCs shall match the appropriate requirements in Tables G3.4-1 through G3.4-8 using the value for SHGCall for the applicable vertical glazing percentage.",
+            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (d)",
             "rule_description": "Vertical fenestration SHGC shall match the appropriate requirements in Tables G3.4-1 through G3.4-8",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "rule_dependency": "None",
             "primary_rule": "Y",
-            "schema_version": "0.0.18"
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "baseline": {
@@ -50,7 +49,7 @@
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
+                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -77,7 +76,7 @@
                                                 ]
                                             }
                                         ],
-                                        "heating_ventilation_air_conditioning_systems": [
+                                        "heating_ventilating_air_conditioning_systems": [
                                             {
                                                 "id": "HVAC 1",
                                                 "cooling_system": {
@@ -107,14 +106,13 @@
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-26",
-            "ruleset_reference": "Table G3.1 #5 Baseline column #d: Vertical Fenestration Assemblies. Fenestration for new\nbuildings, existing buildings, and additions shall comply with the following: \n\u2022 Fenestration SHGCs shall match the appropriate requirements in Tables G3.4-1 through G3.4-8 using the value for SHGCall for the applicable vertical glazing percentage.",
+            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (d)",
             "rule_description": "Vertical fenestration SHGC shall match the appropriate requirements in Tables G3.4-1 through G3.4-8",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "rule_dependency": "None",
             "primary_rule": "Y",
-            "schema_version": "0.0.18"
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "baseline": {
@@ -150,7 +148,7 @@
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
+                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -177,7 +175,7 @@
                                                 ]
                                             }
                                         ],
-                                        "heating_ventilation_air_conditioning_systems": [
+                                        "heating_ventilating_air_conditioning_systems": [
                                             {
                                                 "id": "HVAC 1",
                                                 "cooling_system": {
@@ -207,14 +205,13 @@
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-26",
-            "ruleset_reference": "Table G3.1 #5 Baseline column #d: Vertical Fenestration Assemblies. Fenestration for new\nbuildings, existing buildings, and additions shall comply with the following: \n\u2022 Fenestration SHGCs shall match the appropriate requirements in Tables G3.4-1 through G3.4-8 using the value for SHGCall for the applicable vertical glazing percentage.",
+            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (d)",
             "rule_description": "Vertical fenestration SHGC shall match the appropriate requirements in Tables G3.4-1 through G3.4-8",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "rule_dependency": "None",
             "primary_rule": "Y",
-            "schema_version": "0.0.18"
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "baseline": {
@@ -250,7 +247,7 @@
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
+                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -277,7 +274,7 @@
                                                 ]
                                             }
                                         ],
-                                        "heating_ventilation_air_conditioning_systems": [
+                                        "heating_ventilating_air_conditioning_systems": [
                                             {
                                                 "id": "HVAC 1",
                                                 "cooling_system": {
@@ -307,14 +304,13 @@
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-26",
-            "ruleset_reference": "Table G3.1 #5 Baseline column #d: Vertical Fenestration Assemblies. Fenestration for new\nbuildings, existing buildings, and additions shall comply with the following: \n\u2022 Fenestration SHGCs shall match the appropriate requirements in Tables G3.4-1 through G3.4-8 using the value for SHGCall for the applicable vertical glazing percentage.",
+            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (d)",
             "rule_description": "Vertical fenestration SHGC shall match the appropriate requirements in Tables G3.4-1 through G3.4-8",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "rule_dependency": "None",
             "primary_rule": "Y",
-            "schema_version": "0.0.18"
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "baseline": {
@@ -350,7 +346,7 @@
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
+                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -377,7 +373,7 @@
                                                 ]
                                             }
                                         ],
-                                        "heating_ventilation_air_conditioning_systems": [
+                                        "heating_ventilating_air_conditioning_systems": [
                                             {
                                                 "id": "HVAC 1",
                                                 "cooling_system": {
@@ -407,14 +403,13 @@
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-26",
-            "ruleset_reference": "Table G3.1 #5 Baseline column #d: Vertical Fenestration Assemblies. Fenestration for new\nbuildings, existing buildings, and additions shall comply with the following: \n\u2022 Fenestration SHGCs shall match the appropriate requirements in Tables G3.4-1 through G3.4-8 using the value for SHGCall for the applicable vertical glazing percentage.",
+            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (d)",
             "rule_description": "Vertical fenestration SHGC shall match the appropriate requirements in Tables G3.4-1 through G3.4-8",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "rule_dependency": "None",
             "primary_rule": "Y",
-            "schema_version": "0.0.18"
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "baseline": {
@@ -450,7 +445,7 @@
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
+                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -477,7 +472,7 @@
                                                 ]
                                             }
                                         ],
-                                        "heating_ventilation_air_conditioning_systems": [
+                                        "heating_ventilating_air_conditioning_systems": [
                                             {
                                                 "id": "HVAC 1",
                                                 "cooling_system": {
@@ -507,14 +502,13 @@
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-26",
-            "ruleset_reference": "Table G3.1 #5 Baseline column #d: Vertical Fenestration Assemblies. Fenestration for new\nbuildings, existing buildings, and additions shall comply with the following: \n\u2022 Fenestration SHGCs shall match the appropriate requirements in Tables G3.4-1 through G3.4-8 using the value for SHGCall for the applicable vertical glazing percentage.",
+            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (d)",
             "rule_description": "Vertical fenestration SHGC shall match the appropriate requirements in Tables G3.4-1 through G3.4-8",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "rule_dependency": "None",
             "primary_rule": "Y",
-            "schema_version": "0.0.18"
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "baseline": {
@@ -550,7 +544,7 @@
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
+                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
@@ -577,7 +571,7 @@
                                                 ]
                                             }
                                         ],
-                                        "heating_ventilation_air_conditioning_systems": [
+                                        "heating_ventilating_air_conditioning_systems": [
                                             {
                                                 "id": "HVAC 1",
                                                 "cooling_system": {

@@ -2,19 +2,21 @@ from rct229.data.schema_enums import schema_enums
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
+from rct229.ruleset_functions.baseline_systems.baseline_system_util import HVAC_SYS
 from rct229.ruleset_functions.get_baseline_system_types import get_baseline_system_types
 from rct229.schema.config import ureg
+from rct229.utils.pint_utils import CalcQ
 
 APPLICABLE_SYS_TYPES = [
-    "SYS-1",
-    "SYS-5",
-    "SYS-7",
-    "SYS-11.2",
-    "SYS-12",
-    "SYS-1A",
-    "SYS-7A",
-    "SYS-11.2A",
-    "SYS-12A",
+    HVAC_SYS.SYS_1,
+    HVAC_SYS.SYS_1A,
+    HVAC_SYS.SYS_5,
+    HVAC_SYS.SYS_7,
+    HVAC_SYS.SYS_7A,
+    HVAC_SYS.SYS_11_2,
+    HVAC_SYS.SYS_11_2A,
+    HVAC_SYS.SYS_12,
+    HVAC_SYS.SYS_12A,
 ]
 
 BOILER_RATED_CAPACITY_LOW_LIMIT = 300000 * ureg("Btu/hr")
@@ -34,21 +36,27 @@ class Section21Rule17(RuleDefinitionListIndexedBase):
             index_rmr="baseline",
             id="21-17",
             description="All boilers in the baseline building design shall be modeled at the minimum efficiency levels, both part load and full load, in accordance with Tables G3.5.6.",
+            ruleset_section_title="HVAC - Water Side",
+            standard_section="Section G3.1.2.1 General Baseline HVAC System Requirements - Equipment Efficiencies",
+            is_primary_rule=True,
             rmr_context="ruleset_model_instances/0",
             list_path="boilers[*]",
         )
 
     def is_applicable(self, context, data=None):
         rmi_b = context.baseline
-        # FIXME: replace with baseline_system_types = get_baseline_system_types(rmi_b) when get_baseline_system_types
-        #  is ready.
-        baseline_system_types = {
-            "SYS-7": ["hvac_sys_7"],
-            "SYS-12A": ["hvac_sys_12_a"],
-        }
-        # if any system type found in the APPLICABLE_SYS_TYPES then return applicable.
+        baseline_system_types_dict = get_baseline_system_types(rmi_b)
+        # create a list containing all HVAC systems that are modeled in the rmi_b
+        available_type_list = [
+            hvac_type
+            for hvac_type in baseline_system_types_dict.keys()
+            if len(baseline_system_types_dict[hvac_type]) > 0
+        ]
         return any(
-            [key in APPLICABLE_SYS_TYPES for key in baseline_system_types.keys()]
+            [
+                available_type in APPLICABLE_SYS_TYPES
+                for available_type in available_type_list
+            ]
         )
 
     class BoilerRule(RuleDefinitionBase):
@@ -67,7 +75,7 @@ class Section21Rule17(RuleDefinitionListIndexedBase):
             boiler_efficiency_b = boiler_b["efficiency"]
 
             return {
-                "boiler_rated_capacity_b": boiler_rated_capacity_b,
+                "boiler_rated_capacity_b": CalcQ("capacity", boiler_rated_capacity_b),
                 "boiler_efficiency_metric_b": boiler_efficiency_metric_b,
                 "boiler_efficiency_b": boiler_efficiency_b,
             }

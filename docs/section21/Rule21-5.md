@@ -35,9 +35,11 @@
 
 - Get dictionary that saves the list of zones and the total floor area served by each CHW or HHW loop: `loop_zone_list_w_area_dict = get_loop_zone_list_w_area(B_RMR)`
 
+- Get a list of loops attached to boilers `boiler_loop_ids = [boiler.loop for boiler in B_RMR.RulesetModelInstance.boilers]`
+
 - For each fluid loop in B_RMR: `for fluid_loop_b in B_RMR.RulesetModelInstance.fluid_loops:`
 
-  - Check if fluid loop is heating type: `if fluid_loop_b.type == "HEATING":`
+  - Check if fluid loop is heating type and the fluid is attached to a boiler: `if fluid_loop_b.type == "HEATING" and fluid_loop_b.id in boiler_loop_ids:`
 
     - Add to the list of zones with their total floor area served by heating loop: `heating_loop_zone_list.append(loop_zone_list_w_area_dict[fluid_loop_b.id]["ZONE_LIST"]), heating_loop_conditioned_zone_area += loop_zone_list_w_area_dict[fluid_loop_b.id]["TOTAL_AREA"]`
 

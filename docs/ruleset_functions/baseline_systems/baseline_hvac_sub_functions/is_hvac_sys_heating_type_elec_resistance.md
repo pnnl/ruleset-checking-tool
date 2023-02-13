@@ -13,7 +13,7 @@
 
 ## Logic:   
 - Set is_hvac_sys_heating_type_elec_resistance = FALSE: `is_hvac_sys_heating_type_elec_resistance = FALSE`  
-- Create an object associate with the heating_system associated with hvac_b: `heating_system_b = hvac_b.heating_system[0]`
+- Create an object associate with the heating_system associated with hvac_b: `heating_system_b = hvac_b.heating_system`
 - Check if the system type is ELECTRIC_RESISTANCE, if yes then is_hvac_sys_heating_type_elec_resistance equals TRUE: `if heating_system_b.heating_system_type == "ELECTRIC_RESISTANCE": is_hvac_sys_heating_type_elec_resistance = TRUE`  
 
 **Returns** `return is_hvac_sys_heating_type_elec_resistance`  

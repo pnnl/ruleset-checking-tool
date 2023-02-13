@@ -2,6 +2,7 @@ from rct229.data_fns.table_G3_4_fns import table_G34_lookup
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
+from rct229.ruleset_functions.compare_standard_val import std_le
 from rct229.ruleset_functions.get_opaque_surface_type import OpaqueSurfaceType as OST
 from rct229.ruleset_functions.get_opaque_surface_type import get_opaque_surface_type
 from rct229.ruleset_functions.get_surface_conditioning_category_dict import (
@@ -29,6 +30,9 @@ class Section5Rule5(RuleDefinitionListIndexedBase):
             index_rmr="baseline",
             id="5-5",
             description="Baseline roof assemblies must match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8.",
+            ruleset_section_title="Envelope",
+            standard_section="Section G3.1-5(b) Building Envelope Modeling Requirements for the Baseline building",
+            is_primary_rule=True,
             list_path="ruleset_model_instances[0].buildings[*]",
             data_items={"climate_zone": ("baseline", "weather/climate_zone")},
         )
@@ -54,7 +58,11 @@ class Section5Rule5(RuleDefinitionListIndexedBase):
 
         def list_filter(self, context_item, data=None):
             surface_b = context_item.baseline
-            return get_opaque_surface_type(surface_b) == OST.ROOF
+            scc = data["surface_conditioning_category_dict"][surface_b["id"]]
+            return (
+                get_opaque_surface_type(surface_b) == OST.ROOF
+                and scc is not SCC.UNREGULATED
+            )
 
         class RoofRule(RuleDefinitionBase):
             def __init__(self):
@@ -105,7 +113,7 @@ class Section5Rule5(RuleDefinitionListIndexedBase):
                     ),
                 }
 
-            def manual_check_required(self, context, calc_vals=None, data=None):
+            def manual_check_required(self, context=None, calc_vals=None, data=None):
                 target_u_factor_res = calc_vals["target_u_factor_res"]
                 target_u_factor_nonres = calc_vals["target_u_factor_nonres"]
 
@@ -115,8 +123,8 @@ class Section5Rule5(RuleDefinitionListIndexedBase):
                     and target_u_factor_res != target_u_factor_nonres
                 )
 
-            def rule_check(self, context, calc_vals=None, data=None):
+            def rule_check(self, context=None, calc_vals=None, data=None):
                 roof_u_factor = calc_vals["roof_u_factor"]
                 target_u_factor = calc_vals["target_u_factor"]
 
-                return std_equal(roof_u_factor, target_u_factor)
+                return std_le(val=roof_u_factor, std_val=target_u_factor)

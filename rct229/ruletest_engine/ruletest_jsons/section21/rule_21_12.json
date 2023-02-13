@@ -13,7 +13,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Yes",
-            "schema_version": "0.0.18"
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "baseline": {
@@ -39,7 +39,8 @@
                                                         "is_supply_ducted": true,
                                                         "heating_source": "HOT_WATER",
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7"
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
+                                                        "heating_from_loop": "Boiler Loop 1"
                                                     }
                                                 ]
                                             },
@@ -53,19 +54,15 @@
                                                         "is_supply_ducted": true,
                                                         "heating_source": "HOT_WATER",
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7"
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
+                                                        "heating_from_loop": "Boiler Loop 1"
                                                     }
                                                 ]
                                             }
                                         ],
-                                        "heating_ventilation_air_conditioning_systems": [
+                                        "heating_ventilating_air_conditioning_systems": [
                                             {
                                                 "id": "System 7",
-                                                "heating_system": {
-                                                    "id": "HHW Coil 1",
-                                                    "heating_system_type": "FLUID_LOOP",
-                                                    "hot_water_loop": "Boiler Loop 1"
-                                                },
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 1",
                                                     "heating_system_type": "FLUID_LOOP",
@@ -84,6 +81,11 @@
                                                             "id": "Return Fan 1"
                                                         }
                                                     ]
+                                                },
+                                                "cooling_system": {
+                                                    "id": "CHW Coil 1",
+                                                    "cooling_system_type": "FLUID_LOOP",
+                                                    "chilled_water_loop": "Secondary CHW Loop 1"
                                                 }
                                             }
                                         ]
@@ -95,7 +97,13 @@
                             {
                                 "id": "Boiler 1",
                                 "loop": "Boiler Loop 1",
-                                "design_capacity": 117228.44444444445
+                                "energy_source_type": "NATURAL_GAS"
+                            }
+                        ],
+                        "chillers": [
+                            {
+                                "id": "Chiller 1",
+                                "cooling_loop": "Chiller Loop 1"
                             }
                         ],
                         "pumps": [
@@ -108,6 +116,11 @@
                                 "id": "Chiller Pump 1",
                                 "loop_or_piping": "Chiller Loop 1",
                                 "speed_control": "FIXED_SPEED"
+                            },
+                            {
+                                "id": "Secondary CHW Pump",
+                                "loop_or_piping": "Secondary CHW Loop 1",
+                                "speed_control": "VARIABLE_SPEED"
                             }
                         ],
                         "fluid_loops": [
@@ -115,10 +128,20 @@
                                 "id": "Boiler Loop 1",
                                 "type": "HEATING",
                                 "heating_design_and_control": {
-                                    "id": "DAC1",
+                                    "id": "DAC 1",
                                     "flow_control": "VARIABLE_FLOW",
                                     "operation": "CONTINUOUS"
                                 }
+                            },
+                            {
+                                "id": "Chiller Loop 1",
+                                "type": "COOLING",
+                                "child_loops": [
+                                    {
+                                        "id": "Secondary CHW Loop 1",
+                                        "type": "COOLING"
+                                    }
+                                ]
                             }
                         ]
                     }
@@ -140,7 +163,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Yes",
-            "schema_version": "0.0.18"
+            "schema_version": "0.0.23"
         },
         "rmr_transformations": {
             "baseline": {
@@ -166,7 +189,8 @@
                                                         "is_supply_ducted": true,
                                                         "heating_source": "HOT_WATER",
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7"
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
+                                                        "heating_from_loop": "Boiler Loop 1"
                                                     }
                                                 ]
                                             },
@@ -180,19 +204,15 @@
                                                         "is_supply_ducted": true,
                                                         "heating_source": "HOT_WATER",
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilation_air_conditioning_system": "System 7"
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
+                                                        "heating_from_loop": "Boiler Loop 1"
                                                     }
                                                 ]
                                             }
                                         ],
-                                        "heating_ventilation_air_conditioning_systems": [
+                                        "heating_ventilating_air_conditioning_systems": [
                                             {
                                                 "id": "System 7",
-                                                "heating_system": {
-                                                    "id": "HHW Coil 1",
-                                                    "heating_system_type": "FLUID_LOOP",
-                                                    "hot_water_loop": "Boiler Loop 1"
-                                                },
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 1",
                                                     "heating_system_type": "FLUID_LOOP",
@@ -211,6 +231,11 @@
                                                             "id": "Return Fan 1"
                                                         }
                                                     ]
+                                                },
+                                                "cooling_system": {
+                                                    "id": "CHW Coil 1",
+                                                    "cooling_system_type": "FLUID_LOOP",
+                                                    "chilled_water_loop": "Secondary CHW Loop 1"
                                                 }
                                             }
                                         ]
@@ -222,7 +247,13 @@
                             {
                                 "id": "Boiler 1",
                                 "loop": "Boiler Loop 1",
-                                "design_capacity": 117228.44444444445
+                                "energy_source_type": "NATURAL_GAS"
+                            }
+                        ],
+                        "chillers": [
+                            {
+                                "id": "Chiller 1",
+                                "cooling_loop": "Chiller Loop 1"
                             }
                         ],
                         "pumps": [
@@ -235,6 +266,11 @@
                                 "id": "Chiller Pump 1",
                                 "loop_or_piping": "Chiller Loop 1",
                                 "speed_control": "FIXED_SPEED"
+                            },
+                            {
+                                "id": "Secondary CHW Pump",
+                                "loop_or_piping": "Secondary CHW Loop 1",
+                                "speed_control": "VARIABLE_SPEED"
                             }
                         ],
                         "fluid_loops": [
@@ -242,10 +278,20 @@
                                 "id": "Boiler Loop 1",
                                 "type": "HEATING",
                                 "heating_design_and_control": {
-                                    "id": "DAC1",
+                                    "id": "DAC 1",
                                     "flow_control": "FIXED_FLOW",
                                     "operation": "INTERMITTENT"
                                 }
+                            },
+                            {
+                                "id": "Chiller Loop 1",
+                                "type": "COOLING",
+                                "child_loops": [
+                                    {
+                                        "id": "Secondary CHW Loop 1",
+                                        "type": "COOLING"
+                                    }
+                                ]
                             }
                         ]
                     }

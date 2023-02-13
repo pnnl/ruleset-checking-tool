@@ -17,6 +17,9 @@ class Section15Rule5(RuleDefinitionListIndexedBase):
             index_rmr="user",
             id="15-5",
             description="Transformer efficiency reported in Baseline RMR equals Table 8.4.4",
+            ruleset_section_title="Transformer",
+            standard_section="Transformers",
+            is_primary_rule=False,
             rmr_context="ruleset_model_instances/0/transformers",
         )
 

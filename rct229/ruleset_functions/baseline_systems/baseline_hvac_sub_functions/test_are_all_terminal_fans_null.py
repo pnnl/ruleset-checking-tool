@@ -1,6 +1,7 @@
 from rct229.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.are_all_terminal_fans_null import (
     are_all_terminal_fans_null,
 )
+from rct229.schema.validate import schema_validate_rmr
 
 TEST_RMD = {
     "id": "test_rmd",
@@ -14,9 +15,9 @@ TEST_RMD = {
                         {
                             "id": "zone 1",
                             "terminals": [
-                                {"id": "terminal_1", "fan": "fan_1"},
+                                {"id": "terminal_1", "fan": {"id": "fan_1"}},
                                 {"id": "terminal_2"},
-                                {"id": "terminal_3", "fan": "fan_2"},
+                                {"id": "terminal_3", "fan": {"id": "fan_2"}},
                             ],
                         },
                     ],
@@ -29,16 +30,23 @@ TEST_RMD = {
 TEST_RMD_FULL = {"id": "229_01", "ruleset_model_instances": [TEST_RMD]}
 
 
-def test__all_terminal_fans_not_null():
+def test__TEST_RMD__is_valid():
+    schema_validation_result = schema_validate_rmr(TEST_RMD_FULL)
+    assert schema_validation_result[
+        "passed"
+    ], f"Schema error: {schema_validation_result['error']}"
+
+
+def test__all_terminal_fans__not_null():
     assert are_all_terminal_fans_null(TEST_RMD, ["terminal_1"]) == False
 
 
-def test__one_terminal_fans_not_null():
+def test__one_terminal_fans__not_null():
     assert (
         are_all_terminal_fans_null(TEST_RMD, ["terminal_1", "terminal_2", "terminal_3"])
         == False
     )
 
 
-def test__all_terminal_fans_null():
+def test__all_terminal_fans__null():
     assert are_all_terminal_fans_null(TEST_RMD, ["terminal_2"]) == True
