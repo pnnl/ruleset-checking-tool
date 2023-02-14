@@ -23,9 +23,6 @@
                                             "served_by_heating_ventilating_air_conditioning_system": "System 6",
                                             "heating_source": "HOT_WATER",
                                             "heating_from_loop": "Purchased HW Loop 1",
-                                            "fan": {
-                                                "id": "Fan 1"
-                                            },
                                             "fan_configuration": "PARALLEL"
                                         }
                                     ]
@@ -42,9 +39,6 @@
                                             "served_by_heating_ventilating_air_conditioning_system": "System 6",
                                             "heating_source": "HOT_WATER",
                                             "heating_from_loop": "Purchased HW Loop 1",
-                                            "fan": {
-                                                "id": "Fan 2"
-                                            },
                                             "fan_configuration": "PARALLEL"
                                         }
                                     ]
