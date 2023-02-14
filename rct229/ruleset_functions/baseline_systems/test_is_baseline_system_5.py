@@ -130,7 +130,7 @@ def test__TEST_RMD_baseline_system_5__is_valid():
     ], f"Schema error: {schema_validation_result['error']}"
 
 
-def test_is_baseline_system_5_true():
+def test_is_baseline_system_5__true():
     assert (
         is_baseline_system_5(
             SYS_5_TEST_RMD["ruleset_model_instances"][0],
@@ -142,7 +142,7 @@ def test_is_baseline_system_5_true():
     )
 
 
-def test_is_baseline_system_5_test_json_true():
+def test_is_baseline_system_5__test_json_true():
     assert (
         is_baseline_system_5(
             load_system_test_file("System_5_PVAV_HW_Reheat.json")[
@@ -156,7 +156,7 @@ def test_is_baseline_system_5_test_json_true():
     )
 
 
-def test_is_baseline_system_5B_true():
+def test_is_baseline_system_5B__true():
     assert (
         is_baseline_system_5(
             SYS_5_TEST_RMD["ruleset_model_instances"][0],
@@ -168,7 +168,7 @@ def test_is_baseline_system_5B_true():
     )
 
 
-def test_is_baseline_system_5B_test_json_true():
+def test_is_baseline_system_5B_test__json_true():
     assert (
         is_baseline_system_5(
             load_system_test_file("System_5b_PVAV_HW_Reheat.json")[

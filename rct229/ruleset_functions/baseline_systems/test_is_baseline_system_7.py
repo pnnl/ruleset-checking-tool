@@ -236,7 +236,7 @@ def test__TEST_RMD_baseline_system_7__is_valid():
     ], f"Schema error: {schema_validation_result['error']}"
 
 
-def test_is_baseline_system_7_true():
+def test_is_baseline_system_7__true():
     assert (
         is_baseline_system_7(
             SYS_7_TEST_RMD["ruleset_model_instances"][0],
@@ -248,7 +248,7 @@ def test_is_baseline_system_7_true():
     )
 
 
-def test_is_baseline_system_7_test_json_true():
+def test_is_baseline_system_7__test_json_true():
     assert (
         is_baseline_system_7(
             load_system_test_file("System_7_VAV_HW_Reheat.json")[
@@ -262,7 +262,7 @@ def test_is_baseline_system_7_test_json_true():
     )
 
 
-def test_is_baseline_system_7a_true():
+def test_is_baseline_system_7A__true():
     assert (
         is_baseline_system_7(
             SYS_7_TEST_RMD["ruleset_model_instances"][0],
@@ -274,7 +274,7 @@ def test_is_baseline_system_7a_true():
     )
 
 
-def test_is_baseline_system_7a_test_json_true():
+def test_is_baseline_system_7A__test_json_true():
     assert (
         is_baseline_system_7(
             load_system_test_file("System_7a_VAV_HW_Reheat.json")[
@@ -288,7 +288,7 @@ def test_is_baseline_system_7a_test_json_true():
     )
 
 
-def test_is_baseline_system_7b_true():
+def test_is_baseline_system_7B__true():
     assert (
         is_baseline_system_7(
             SYS_7_TEST_RMD["ruleset_model_instances"][0],
@@ -300,7 +300,7 @@ def test_is_baseline_system_7b_true():
     )
 
 
-def test_is_baseline_system_7b_test_json_true():
+def test_is_baseline_system__7B_test_json_true():
     assert (
         is_baseline_system_7(
             load_system_test_file("System_7b_VAV_HW_Reheat.json")[
@@ -314,7 +314,7 @@ def test_is_baseline_system_7b_test_json_true():
     )
 
 
-def test_is_baseline_system_7c_true():
+def test_is_baseline_system__7C_true():
     assert (
         is_baseline_system_7(
             SYS_7_TEST_RMD["ruleset_model_instances"][0],
@@ -326,7 +326,7 @@ def test_is_baseline_system_7c_true():
     )
 
 
-def test_is_baseline_system_7c_test_json_true():
+def test_is_baseline_system_7C__test_json_true():
     assert (
         is_baseline_system_7(
             load_system_test_file("System_7c_VAV_HW_Reheat.json")[

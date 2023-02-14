@@ -31,7 +31,7 @@
                                     "cooling_system": {
                                         "id": "CHW Coil 1",
                                         "cooling_system_type": "FLUID_LOOP",
-                                        "chilled_water_loop": "Chiller Loop 1"
+                                        "chilled_water_loop": "Chilled Water Loop 1"
                                     },
                                     "heating_system": {
                                         "id": "Heating Coil 1",

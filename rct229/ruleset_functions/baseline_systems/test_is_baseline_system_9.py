@@ -58,6 +58,64 @@ SYS_9_TEST_RMD = {
     ],
 }
 
+SYS_9B_TEST_RMD = {
+    "id": "ASHRAE229 1",
+    "ruleset_model_instances": [
+        {
+            "id": "RMD 1",
+            "buildings": [
+                {
+                    "id": "Building 1",
+                    "building_open_schedule": "Required Building Schedule 1",
+                    "building_segments": [
+                        {
+                            "id": "Building Segment 1",
+                            "zones": [
+                                {
+                                    "id": "Thermal Zone 9B",
+                                    "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                    "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                    "terminals": [
+                                        {
+                                            "id": "Constant Air Terminal 9B",
+                                            "is_supply_ducted": True,
+                                            "type": "CONSTANT_AIR_VOLUME",
+                                            "heating_source": "HOT_WATER",
+                                            "fan": {"id": "fan 1"},
+                                            "heating_from_loop": "Purchased HW Loop 1",
+                                            "served_by_heating_ventilating_air_conditioning_system": "System 9B",
+                                        }
+                                    ],
+                                }
+                            ],
+                            "heating_ventilating_air_conditioning_systems": [
+                                {
+                                    "id": "System 9B",
+                                }
+                            ],
+                        }
+                    ],
+                }
+            ],
+            "external_fluid_source": [
+                {
+                    "id": "Purchased HW 1",
+                    "loop": "Purchased HW Loop 1",
+                    "type": "HOT_WATER",
+                }
+            ],
+            "pumps": [
+                {
+                    "id": "HW Pump 1",
+                    "loop_or_piping": "Purchased HW Loop 1",
+                    "speed_control": "FIXED_SPEED",
+                }
+            ],
+            "fluid_loops": [{"id": "Purchased HW Loop 1", "type": "HEATING"}],
+        }
+    ],
+}
+
 
 def test__TEST_RMD_baseline_system_9__is_valid():
     schema_validation_result = schema_validate_rmr(SYS_9_TEST_RMD)
@@ -66,7 +124,7 @@ def test__TEST_RMD_baseline_system_9__is_valid():
     ], f"Schema error: {schema_validation_result['error']}"
 
 
-def test_is_baseline_system_9_true():
+def test_is_baseline_system_9__true():
     assert (
         is_baseline_system_9(
             SYS_9_TEST_RMD["ruleset_model_instances"][0],
@@ -78,7 +136,7 @@ def test_is_baseline_system_9_true():
     )
 
 
-def test_is_baseline_system_9_test_json_true():
+def test_is_baseline_system_9__test_json_true():
     assert (
         is_baseline_system_9(
             load_system_test_file("System_9_Warm_Air_Furnace_Gas.json")[
@@ -89,4 +147,30 @@ def test_is_baseline_system_9_test_json_true():
             ["Thermal Zone 1"],
         )
         == HVAC_SYS.SYS_9
+    )
+
+
+def test_is_baseline_system_9B_true():
+    assert (
+        is_baseline_system_9(
+            SYS_9B_TEST_RMD["ruleset_model_instances"][0],
+            "System 9B",
+            ["Constant Air Terminal 9B"],
+            ["Thermal Zone 9B"],
+        )
+        == HVAC_SYS.SYS_9B
+    )
+
+
+def test_is_baseline_system_9B__test_json_true():
+    assert (
+        is_baseline_system_9(
+            load_system_test_file("System_9b_Warm_Air_Furnace_Gas.json")[
+                "ruleset_model_instances"
+            ][0],
+            "System 9B",
+            ["Air Terminal"],
+            ["Thermal Zone 1"],
+        )
+        == HVAC_SYS.SYS_9B
     )

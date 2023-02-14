@@ -129,7 +129,7 @@ def test__TEST_RMD_baseline_system_13__is_valid():
     ], f"Schema error: {schema_validation_result['error']}"
 
 
-def test_is_baseline_system_13_true():
+def test__is_baseline_system_13__true():
     assert (
         is_baseline_system_13(
             SYS_13_TEST_RMD["ruleset_model_instances"][0],
@@ -141,7 +141,7 @@ def test_is_baseline_system_13_true():
     )
 
 
-def test_is_baseline_system_13_test_json_true():
+def test__is_baseline_system_13__test_json_true():
     assert (
         is_baseline_system_13(
             load_system_test_file("System 13_CAV_SZ_ER.json")[
@@ -155,7 +155,7 @@ def test_is_baseline_system_13_test_json_true():
     )
 
 
-def test_is_baseline_system_13A_true():
+def test__is_baseline_system_13A__true():
     assert (
         is_baseline_system_13(
             SYS_13_TEST_RMD["ruleset_model_instances"][0],
@@ -167,7 +167,7 @@ def test_is_baseline_system_13A_true():
     )
 
 
-def test_is_baseline_system_13A_test_json_true():
+def test__is_baseline_system_13A__test_json_true():
     assert (
         is_baseline_system_13(
             load_system_test_file("System 13a_CAV_SZ_ER.json")[

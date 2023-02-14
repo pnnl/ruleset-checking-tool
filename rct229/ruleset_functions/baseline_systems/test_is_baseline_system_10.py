@@ -69,7 +69,7 @@ def test_is_baseline__system_10():
     )
 
 
-def test_is_baseline_system_10_test_json_true():
+def test_is_baseline_system_10__test_json_true():
     assert (
         is_baseline_system_10(
             load_system_test_file("System_10_Warm_Air_Furnace_Elec.json")[

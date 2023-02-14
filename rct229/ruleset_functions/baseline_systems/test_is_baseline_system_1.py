@@ -199,7 +199,7 @@ def test__TEST_RMD_baseline_system_1__is_valid():
     ], f"Schema error: {schema_validation_result['error']}"
 
 
-def test_is_baseline_system_1_true():
+def test_is_baseline_system_1__true():
     assert (
         is_baseline_system_1(
             SYS_1_TEST_RMD["ruleset_model_instances"][0],
@@ -211,7 +211,7 @@ def test_is_baseline_system_1_true():
     )
 
 
-def test_is_baseline_system_1a_true():
+def test_is_baseline_system_1A__true():
     assert (
         is_baseline_system_1(
             SYS_1_TEST_RMD["ruleset_model_instances"][0],
@@ -223,7 +223,19 @@ def test_is_baseline_system_1a_true():
     )
 
 
-def test_is_baseline_system_1b_true():
+def test_is_baseline_system_1A__test_json_true():
+    assert (
+        is_baseline_system_1(
+            load_system_test_file("System_1a_PTAC.json")["ruleset_model_instances"][0],
+            "PTAC 1",
+            ["PTAC Terminal 1"],
+            ["Thermal Zone 1"],
+        )
+        == HVAC_SYS.SYS_1A
+    )
+
+
+def test_is_baseline_system_1B__true():
     assert (
         is_baseline_system_1(
             SYS_1_TEST_RMD["ruleset_model_instances"][0],
@@ -235,40 +247,7 @@ def test_is_baseline_system_1b_true():
     )
 
 
-def test_is_baseline_system_1c_true():
-    assert (
-        is_baseline_system_1(
-            SYS_1_TEST_RMD["ruleset_model_instances"][0],
-            "PTAC 1c",
-            ["PTAC Terminal 1c"],
-            ["Thermal Zone 1c"],
-        )
-        == HVAC_SYS.SYS_1C
-    )
-
-
-def test_is_baseline_system_1_test_json_true():
-    assert (
-        is_baseline_system_1(
-            load_system_test_file("System_1_PTAC.json")["ruleset_model_instances"][0],
-            "PTAC 1",
-            ["PTAC Terminal 1"],
-            ["Thermal Zone 1"],
-        )
-        == HVAC_SYS.SYS_1
-    )
-
-
-def test_is_baseline_system_1_a_test_json_true():
-    assert is_baseline_system_1(
-        load_system_test_file("System_1a_PTAC.json")["ruleset_model_instances"][0],
-        "PTAC 1",
-        ["PTAC Terminal 1"],
-        ["Thermal Zone 1"],
-    )
-
-
-def test_is_baseline_system_1_b_test_json_true():
+def test_is_baseline_system_1B__test_json_true():
     assert (
         is_baseline_system_1(
             load_system_test_file("System_1b_PTAC.json")["ruleset_model_instances"][0],
@@ -280,7 +259,31 @@ def test_is_baseline_system_1_b_test_json_true():
     )
 
 
-def test_is_baseline_system_1_c_test_json_true():
+def test_is_baseline_system_1C__true():
+    assert (
+        is_baseline_system_1(
+            SYS_1_TEST_RMD["ruleset_model_instances"][0],
+            "PTAC 1c",
+            ["PTAC Terminal 1c"],
+            ["Thermal Zone 1c"],
+        )
+        == HVAC_SYS.SYS_1C
+    )
+
+
+def test_is_baseline_system_1__test_json_true():
+    assert (
+        is_baseline_system_1(
+            load_system_test_file("System_1_PTAC.json")["ruleset_model_instances"][0],
+            "PTAC 1",
+            ["PTAC Terminal 1"],
+            ["Thermal Zone 1"],
+        )
+        == HVAC_SYS.SYS_1
+    )
+
+
+def test_is_baseline_system_1C__test_json_true():
     assert (
         is_baseline_system_1(
             load_system_test_file("System_1c_PTAC.json")["ruleset_model_instances"][0],
@@ -290,6 +293,3 @@ def test_is_baseline_system_1_c_test_json_true():
         )
         == HVAC_SYS.SYS_1C
     )
-
-# YJ: Need to check the following systems
-# 1C, 8, 9B, 10, 11.1A

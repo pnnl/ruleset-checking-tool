@@ -40,7 +40,7 @@
                                     },
                                     "fan_system": {
                                         "id": "VAV Fan System 1",
-                                        "fan_control": "VARIABLE_SPEED_DRIVE",
+                                        "fan_control": "CONSTANT",
                                         "supply_fans": [
                                             {
                                                 "id": "Supply Fan 1"

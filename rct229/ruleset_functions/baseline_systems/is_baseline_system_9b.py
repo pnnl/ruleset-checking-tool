@@ -53,8 +53,6 @@ def is_baseline_system_9b(rmi_b, hvac_b_id, terminal_unit_id_list, zone_id_list)
      Returns true or false to whether the baseline system type is 9b (system 9 with purchased HW).
     """
 
-    is_baseline_system_9b = HVAC_SYS.UNMATCHED
-
     # if preheat, heating, and fan systems DON'T exist, has_required_sys=True, else, False
     has_required_sys = not (
         has_preheat_system(rmi_b, hvac_b_id)
