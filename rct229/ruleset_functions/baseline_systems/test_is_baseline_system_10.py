@@ -57,7 +57,7 @@ def test__TEST_RMD_baseline_system_10_is_valid():
     ], f"Schema error: {schema_validation_result['error']}"
 
 
-def test_is_baseline__system_10():
+def test__is_baseline_system_10__true():
     assert (
         is_baseline_system_10(
             SYS_10_TEST_RMD["ruleset_model_instances"][0],
@@ -69,7 +69,7 @@ def test_is_baseline__system_10():
     )
 
 
-def test_is_baseline_system_10__test_json_true():
+def test__is_baseline_system_10__test_json_true():
     assert (
         is_baseline_system_10(
             load_system_test_file("System_10_Warm_Air_Furnace_Elec.json")[

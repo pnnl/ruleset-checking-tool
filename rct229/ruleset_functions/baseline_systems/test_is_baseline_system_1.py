@@ -199,7 +199,7 @@ def test__TEST_RMD_baseline_system_1__is_valid():
     ], f"Schema error: {schema_validation_result['error']}"
 
 
-def test_is_baseline_system_1__true():
+def test__is_baseline_system_1__true():
     assert (
         is_baseline_system_1(
             SYS_1_TEST_RMD["ruleset_model_instances"][0],
@@ -211,7 +211,7 @@ def test_is_baseline_system_1__true():
     )
 
 
-def test_is_baseline_system_1A__true():
+def test__is_baseline_system_1A__true():
     assert (
         is_baseline_system_1(
             SYS_1_TEST_RMD["ruleset_model_instances"][0],
@@ -223,7 +223,7 @@ def test_is_baseline_system_1A__true():
     )
 
 
-def test_is_baseline_system_1A__test_json_true():
+def test__is_baseline_system_1A__test_json_true():
     assert (
         is_baseline_system_1(
             load_system_test_file("System_1a_PTAC.json")["ruleset_model_instances"][0],
@@ -235,7 +235,7 @@ def test_is_baseline_system_1A__test_json_true():
     )
 
 
-def test_is_baseline_system_1B__true():
+def test__is_baseline_system_1B__true():
     assert (
         is_baseline_system_1(
             SYS_1_TEST_RMD["ruleset_model_instances"][0],
@@ -247,7 +247,7 @@ def test_is_baseline_system_1B__true():
     )
 
 
-def test_is_baseline_system_1B__test_json_true():
+def test__is_baseline_system_1B__test_json_true():
     assert (
         is_baseline_system_1(
             load_system_test_file("System_1b_PTAC.json")["ruleset_model_instances"][0],
@@ -259,7 +259,7 @@ def test_is_baseline_system_1B__test_json_true():
     )
 
 
-def test_is_baseline_system_1C__true():
+def test__is_baseline_system_1C__true():
     assert (
         is_baseline_system_1(
             SYS_1_TEST_RMD["ruleset_model_instances"][0],
@@ -271,7 +271,7 @@ def test_is_baseline_system_1C__true():
     )
 
 
-def test_is_baseline_system_1__test_json_true():
+def test__is_baseline_system_1__test_json_true():
     assert (
         is_baseline_system_1(
             load_system_test_file("System_1_PTAC.json")["ruleset_model_instances"][0],
@@ -283,7 +283,7 @@ def test_is_baseline_system_1__test_json_true():
     )
 
 
-def test_is_baseline_system_1C__test_json_true():
+def test__is_baseline_system_1C__test_json_true():
     assert (
         is_baseline_system_1(
             load_system_test_file("System_1c_PTAC.json")["ruleset_model_instances"][0],

@@ -124,7 +124,7 @@ def test__TEST_RMD_baseline_system_9__is_valid():
     ], f"Schema error: {schema_validation_result['error']}"
 
 
-def test_is_baseline_system_9__true():
+def test__is_baseline_system_9__true():
     assert (
         is_baseline_system_9(
             SYS_9_TEST_RMD["ruleset_model_instances"][0],
@@ -136,7 +136,7 @@ def test_is_baseline_system_9__true():
     )
 
 
-def test_is_baseline_system_9__test_json_true():
+def test__is_baseline_system_9__test_json_true():
     assert (
         is_baseline_system_9(
             load_system_test_file("System_9_Warm_Air_Furnace_Gas.json")[
@@ -150,7 +150,7 @@ def test_is_baseline_system_9__test_json_true():
     )
 
 
-def test_is_baseline_system_9B_true():
+def test__is_baseline_system_9B_true():
     assert (
         is_baseline_system_9(
             SYS_9B_TEST_RMD["ruleset_model_instances"][0],
@@ -162,7 +162,7 @@ def test_is_baseline_system_9B_true():
     )
 
 
-def test_is_baseline_system_9B__test_json_true():
+def test__is_baseline_system_9B__test_json_true():
     assert (
         is_baseline_system_9(
             load_system_test_file("System_9b_Warm_Air_Furnace_Gas.json")[

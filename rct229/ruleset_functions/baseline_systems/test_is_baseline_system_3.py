@@ -181,7 +181,7 @@ def test__TEST_RMD_baseline_system_3__is_valid():
     ], f"Schema error: {schema_validation_result['error']}"
 
 
-def test_is_baseline_system_3__true():
+def test__is_baseline_system_3__true():
     assert (
         is_baseline_system_3(
             SYS_3_TEST_RMD["ruleset_model_instances"][0],
@@ -193,7 +193,7 @@ def test_is_baseline_system_3__true():
     )
 
 
-def test_is_baseline_system_3__test_json_true():
+def test__is_baseline_system_3__test_json_true():
     assert (
         is_baseline_system_3(
             load_system_test_file("System_3_PSZ_AC_Gas_Furnace.json")[
@@ -207,7 +207,7 @@ def test_is_baseline_system_3__test_json_true():
     )
 
 
-def test_is_baseline_system_3A__true():
+def test__is_baseline_system_3A__true():
     assert (
         is_baseline_system_3(
             SYS_3_TEST_RMD["ruleset_model_instances"][0],
@@ -219,7 +219,7 @@ def test_is_baseline_system_3A__true():
     )
 
 
-def test_is_baseline_system_3A__test_json_true():
+def test__is_baseline_system_3A__test_json_true():
     assert (
         is_baseline_system_3(
             load_system_test_file("System_3a_PSZ_AC_Gas_Furnace.json")[
@@ -233,7 +233,7 @@ def test_is_baseline_system_3A__test_json_true():
     )
 
 
-def test_is_baseline_system_3B__true():
+def test__is_baseline_system_3B__true():
     assert (
         is_baseline_system_3(
             SYS_3_TEST_RMD["ruleset_model_instances"][0],
@@ -245,7 +245,7 @@ def test_is_baseline_system_3B__true():
     )
 
 
-def test_is_baseline_system_3B__test_json_true():
+def test__is_baseline_system_3B__test_json_true():
     assert (
         is_baseline_system_3(
             load_system_test_file("System_3b_PSZ_AC_Gas_Furnace.json")[
@@ -259,7 +259,7 @@ def test_is_baseline_system_3B__test_json_true():
     )
 
 
-def test_is_baseline_system_3C__true():
+def test__is_baseline_system_3C__true():
     assert (
         is_baseline_system_3(
             SYS_3_TEST_RMD["ruleset_model_instances"][0],
@@ -271,7 +271,7 @@ def test_is_baseline_system_3C__true():
     )
 
 
-def test_is_baseline_system_3C_test__json_true():
+def test__is_baseline_system_3C_test__json_true():
     assert (
         is_baseline_system_3(
             load_system_test_file("System_3c_PSZ_AC_Gas_Furnace.json")[
