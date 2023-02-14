@@ -5,6 +5,7 @@ from rct229.utils.std_comparisons import std_equal
 
 NONE = schema_enums["LightingBuildingAreaOptions2019ASHRAE901T951TG38"].NONE
 
+
 # Intended for export and internal use
 class LightingStatusType:
     """Enumeration class for lighting status types"""

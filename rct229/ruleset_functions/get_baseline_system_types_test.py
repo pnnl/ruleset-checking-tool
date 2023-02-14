@@ -48,20 +48,24 @@ def exclude_sys_types(exclude_type: list) -> list:
     ]
 
 
-def test_get_baseline_system_types__system_1_true():
-    baseline_system_types_dict = get_baseline_system_types(
-        SYS_1_TEST_RMD["ruleset_model_instances"][0]
-    )
-    available_type_lists = [
+def available_type_lists(baseline_system_types_dict: dict) -> list:
+    return [
         hvac_type
         for hvac_type in baseline_system_types_dict.keys()
         if len(baseline_system_types_dict[hvac_type]) > 0
     ]
 
-    test_types = [HVAC_SYS.SYS_1, HVAC_SYS.SYS_1A, HVAC_SYS.SYS_1B, HVAC_SYS.SYS_1C]
 
+def test_get_baseline_system_types__system_1_true():
+    baseline_system_types_dict = get_baseline_system_types(
+        SYS_1_TEST_RMD["ruleset_model_instances"][0]
+    )
+    test_types = [HVAC_SYS.SYS_1, HVAC_SYS.SYS_1A, HVAC_SYS.SYS_1B, HVAC_SYS.SYS_1C]
     assert any(
-        [available_type in test_types for available_type in available_type_lists]
+        [
+            available_type in test_types
+            for available_type in available_type_lists(baseline_system_types_dict)
+        ]
     )
 
 
@@ -69,18 +73,21 @@ def test_get_baseline_system_types__system_1_false():
     baseline_system_types_dict = get_baseline_system_types(
         SYS_1_TEST_RMD["ruleset_model_instances"][0]
     )
-    available_type_lists = [
-        hvac_type
-        for hvac_type in baseline_system_types_dict.keys()
-        if len(baseline_system_types_dict[hvac_type]) > 0
-    ]
-
     test_types = exclude_sys_types(
-        [HVAC_SYS.SYS_1, HVAC_SYS.SYS_1A, HVAC_SYS.SYS_1B, HVAC_SYS.SYS_1C]
+        [
+            HVAC_SYS.SYS_1,
+            HVAC_SYS.SYS_1A,
+            HVAC_SYS.SYS_1B,
+            HVAC_SYS.SYS_1C,
+        ]
     )
-
     assert (
-        any([available_type in test_types for available_type in available_type_lists])
+        any(
+            [
+                available_type in test_types
+                for available_type in available_type_lists(baseline_system_types_dict)
+            ]
+        )
         == False
     )
 
@@ -89,16 +96,12 @@ def test_get_baseline_system_types__system_2_true():
     baseline_system_types_dict = get_baseline_system_types(
         SYS_2_TEST_RMD["ruleset_model_instances"][0]
     )
-    available_type_lists = [
-        hvac_type
-        for hvac_type in baseline_system_types_dict.keys()
-        if len(baseline_system_types_dict[hvac_type]) > 0
-    ]
-
     test_types = [HVAC_SYS.SYS_2]
-
     assert any(
-        [available_type in test_types for available_type in available_type_lists]
+        [
+            available_type in test_types
+            for available_type in available_type_lists(baseline_system_types_dict)
+        ]
     )
 
 
@@ -106,16 +109,14 @@ def test_get_baseline_system_types__system_2_false():
     baseline_system_types_dict = get_baseline_system_types(
         SYS_2_TEST_RMD["ruleset_model_instances"][0]
     )
-    available_type_lists = [
-        hvac_type
-        for hvac_type in baseline_system_types_dict.keys()
-        if len(baseline_system_types_dict[hvac_type]) > 0
-    ]
-
     test_types = exclude_sys_types([HVAC_SYS.SYS_2])
-
     assert (
-        any([available_type in test_types for available_type in available_type_lists])
+        any(
+            [
+                available_type in test_types
+                for available_type in available_type_lists(baseline_system_types_dict)
+            ]
+        )
         == False
     )
 
@@ -124,16 +125,12 @@ def test_get_baseline_system_types__system_3_true():
     baseline_system_types_dict = get_baseline_system_types(
         SYS_3_TEST_RMD["ruleset_model_instances"][0]
     )
-    available_type_lists = [
-        hvac_type
-        for hvac_type in baseline_system_types_dict.keys()
-        if len(baseline_system_types_dict[hvac_type]) > 0
-    ]
-
     test_types = [HVAC_SYS.SYS_3, HVAC_SYS.SYS_3A, HVAC_SYS.SYS_3B, HVAC_SYS.SYS_3C]
-
     assert any(
-        [available_type in test_types for available_type in available_type_lists]
+        [
+            available_type in test_types
+            for available_type in available_type_lists(baseline_system_types_dict)
+        ]
     )
 
 
@@ -141,24 +138,21 @@ def test_get_baseline_system_types__system_3_false():
     baseline_system_types_dict = get_baseline_system_types(
         SYS_3_TEST_RMD["ruleset_model_instances"][0]
     )
-    available_type_lists = [
-        hvac_type
-        for hvac_type in baseline_system_types_dict.keys()
-        if len(baseline_system_types_dict[hvac_type]) > 0
-    ]
-
     test_types = exclude_sys_types(
         [
             HVAC_SYS.SYS_3,
             HVAC_SYS.SYS_3A,
-            HVAC_SYS.SYS_1B,
             HVAC_SYS.SYS_3B,
             HVAC_SYS.SYS_3C,
         ]
-    )  # TODO delete SYS_1B in the list. It's in the list (for now) b/c SYS 1B and 3B are identical.
-
+    )
     assert (
-        any([available_type in test_types for available_type in available_type_lists])
+        any(
+            [
+                available_type in test_types
+                for available_type in available_type_lists(baseline_system_types_dict)
+            ]
+        )
         == False
     )
 
@@ -167,16 +161,12 @@ def test_get_baseline_system_types__system_4_true():
     baseline_system_types_dict = get_baseline_system_types(
         SYS_4_TEST_RMD["ruleset_model_instances"][0]
     )
-    available_type_lists = [
-        hvac_type
-        for hvac_type in baseline_system_types_dict.keys()
-        if len(baseline_system_types_dict[hvac_type]) > 0
-    ]
-
     test_types = [HVAC_SYS.SYS_4]
-
     assert any(
-        [available_type in test_types for available_type in available_type_lists]
+        [
+            available_type in test_types
+            for available_type in available_type_lists(baseline_system_types_dict)
+        ]
     )
 
 
@@ -184,16 +174,14 @@ def test_get_baseline_system_types__system_4_false():
     baseline_system_types_dict = get_baseline_system_types(
         SYS_4_TEST_RMD["ruleset_model_instances"][0]
     )
-    available_type_lists = [
-        hvac_type
-        for hvac_type in baseline_system_types_dict.keys()
-        if len(baseline_system_types_dict[hvac_type]) > 0
-    ]
-
     test_types = exclude_sys_types([HVAC_SYS.SYS_4])
-
     assert (
-        any([available_type in test_types for available_type in available_type_lists])
+        any(
+            [
+                available_type in test_types
+                for available_type in available_type_lists(baseline_system_types_dict)
+            ]
+        )
         == False
     )
 
@@ -202,16 +190,12 @@ def test_get_baseline_system_types__system_5_true():
     baseline_system_types_dict = get_baseline_system_types(
         SYS_5_TEST_RMD["ruleset_model_instances"][0]
     )
-    available_type_lists = [
-        hvac_type
-        for hvac_type in baseline_system_types_dict.keys()
-        if len(baseline_system_types_dict[hvac_type]) > 0
-    ]
-
     test_types = [HVAC_SYS.SYS_5, HVAC_SYS.SYS_5B]
-
     assert any(
-        [available_type in test_types for available_type in available_type_lists]
+        [
+            available_type in test_types
+            for available_type in available_type_lists(baseline_system_types_dict)
+        ]
     )
 
 
@@ -219,16 +203,14 @@ def test_get_baseline_system_types__system_5_false():
     baseline_system_types_dict = get_baseline_system_types(
         SYS_5_TEST_RMD["ruleset_model_instances"][0]
     )
-    available_type_lists = [
-        hvac_type
-        for hvac_type in baseline_system_types_dict.keys()
-        if len(baseline_system_types_dict[hvac_type]) > 0
-    ]
-
     test_types = exclude_sys_types([HVAC_SYS.SYS_5, HVAC_SYS.SYS_5B])
-
     assert (
-        any([available_type in test_types for available_type in available_type_lists])
+        any(
+            [
+                available_type in test_types
+                for available_type in available_type_lists(baseline_system_types_dict)
+            ]
+        )
         == False
     )
 
@@ -237,16 +219,12 @@ def test_get_baseline_system_types__system_6_true():
     baseline_system_types_dict = get_baseline_system_types(
         SYS_6_TEST_RMD["ruleset_model_instances"][0]
     )
-    available_type_lists = [
-        hvac_type
-        for hvac_type in baseline_system_types_dict.keys()
-        if len(baseline_system_types_dict[hvac_type]) > 0
-    ]
-
     test_types = [HVAC_SYS.SYS_6, HVAC_SYS.SYS_6B]
-
     assert any(
-        [available_type in test_types for available_type in available_type_lists]
+        [
+            available_type in test_types
+            for available_type in available_type_lists(baseline_system_types_dict)
+        ]
     )
 
 
@@ -254,16 +232,14 @@ def test_get_baseline_system_types__system_6_false():
     baseline_system_types_dict = get_baseline_system_types(
         SYS_6_TEST_RMD["ruleset_model_instances"][0]
     )
-    available_type_lists = [
-        hvac_type
-        for hvac_type in baseline_system_types_dict.keys()
-        if len(baseline_system_types_dict[hvac_type]) > 0
-    ]
-
     test_types = exclude_sys_types([HVAC_SYS.SYS_6, HVAC_SYS.SYS_6B])
-
     assert (
-        any([available_type in test_types for available_type in available_type_lists])
+        any(
+            [
+                available_type in test_types
+                for available_type in available_type_lists(baseline_system_types_dict)
+            ]
+        )
         == False
     )
 
@@ -272,16 +248,12 @@ def test_get_baseline_system_types__system_7_true():
     baseline_system_types_dict = get_baseline_system_types(
         SYS_7_TEST_RMD["ruleset_model_instances"][0]
     )
-    available_type_lists = [
-        hvac_type
-        for hvac_type in baseline_system_types_dict.keys()
-        if len(baseline_system_types_dict[hvac_type]) > 0
-    ]
-
     test_types = [HVAC_SYS.SYS_7, HVAC_SYS.SYS_7A, HVAC_SYS.SYS_7B, HVAC_SYS.SYS_7C]
-
     assert any(
-        [available_type in test_types for available_type in available_type_lists]
+        [
+            available_type in test_types
+            for available_type in available_type_lists(baseline_system_types_dict)
+        ]
     )
 
 
@@ -289,18 +261,16 @@ def test_get_baseline_system_types__system_7_false():
     baseline_system_types_dict = get_baseline_system_types(
         SYS_7_TEST_RMD["ruleset_model_instances"][0]
     )
-    available_type_lists = [
-        hvac_type
-        for hvac_type in baseline_system_types_dict.keys()
-        if len(baseline_system_types_dict[hvac_type]) > 0
-    ]
-
     test_types = exclude_sys_types(
         [HVAC_SYS.SYS_7, HVAC_SYS.SYS_7A, HVAC_SYS.SYS_7B, HVAC_SYS.SYS_7C]
     )
-
     assert (
-        any([available_type in test_types for available_type in available_type_lists])
+        any(
+            [
+                available_type in test_types
+                for available_type in available_type_lists(baseline_system_types_dict)
+            ]
+        )
         == False
     )
 
@@ -309,16 +279,12 @@ def test_get_baseline_system_types__system_8_true():
     baseline_system_types_dict = get_baseline_system_types(
         SYS_8_TEST_RMD["ruleset_model_instances"][0]
     )
-    available_type_lists = [
-        hvac_type
-        for hvac_type in baseline_system_types_dict.keys()
-        if len(baseline_system_types_dict[hvac_type]) > 0
-    ]
-
     test_types = [HVAC_SYS.SYS_8, HVAC_SYS.SYS_8A, HVAC_SYS.SYS_8B, HVAC_SYS.SYS_8C]
-
     assert any(
-        [available_type in test_types for available_type in available_type_lists]
+        [
+            available_type in test_types
+            for available_type in available_type_lists(baseline_system_types_dict)
+        ]
     )
 
 
@@ -326,18 +292,16 @@ def test_get_baseline_system_types__system_8_false():
     baseline_system_types_dict = get_baseline_system_types(
         SYS_8_TEST_RMD["ruleset_model_instances"][0]
     )
-    available_type_lists = [
-        hvac_type
-        for hvac_type in baseline_system_types_dict.keys()
-        if len(baseline_system_types_dict[hvac_type]) > 0
-    ]
-
     test_types = exclude_sys_types(
         [HVAC_SYS.SYS_8, HVAC_SYS.SYS_8A, HVAC_SYS.SYS_8B, HVAC_SYS.SYS_8C]
     )
-
     assert (
-        any([available_type in test_types for available_type in available_type_lists])
+        any(
+            [
+                available_type in test_types
+                for available_type in available_type_lists(baseline_system_types_dict)
+            ]
+        )
         == False
     )
 
@@ -346,16 +310,12 @@ def test_get_baseline_system_types__system_9_true():
     baseline_system_types_dict = get_baseline_system_types(
         SYS_9_TEST_RMD["ruleset_model_instances"][0]
     )
-    available_type_lists = [
-        hvac_type
-        for hvac_type in baseline_system_types_dict.keys()
-        if len(baseline_system_types_dict[hvac_type]) > 0
-    ]
-
     test_types = [HVAC_SYS.SYS_9, HVAC_SYS.SYS_9B]
-
     assert any(
-        [available_type in test_types for available_type in available_type_lists]
+        [
+            available_type in test_types
+            for available_type in available_type_lists(baseline_system_types_dict)
+        ]
     )
 
 
@@ -363,16 +323,14 @@ def test_get_baseline_system_types__system_9_false():
     baseline_system_types_dict = get_baseline_system_types(
         SYS_9_TEST_RMD["ruleset_model_instances"][0]
     )
-    available_type_lists = [
-        hvac_type
-        for hvac_type in baseline_system_types_dict.keys()
-        if len(baseline_system_types_dict[hvac_type]) > 0
-    ]
-
     test_types = exclude_sys_types([HVAC_SYS.SYS_9, HVAC_SYS.SYS_9B])
-
     assert (
-        any([available_type in test_types for available_type in available_type_lists])
+        any(
+            [
+                available_type in test_types
+                for available_type in available_type_lists(baseline_system_types_dict)
+            ]
+        )
         == False
     )
 
@@ -381,16 +339,12 @@ def test_get_baseline_system_types__system_10_true():
     baseline_system_types_dict = get_baseline_system_types(
         SYS_10_TEST_RMD["ruleset_model_instances"][0]
     )
-    available_type_lists = [
-        hvac_type
-        for hvac_type in baseline_system_types_dict.keys()
-        if len(baseline_system_types_dict[hvac_type]) > 0
-    ]
-
     test_types = [HVAC_SYS.SYS_10]
-
     assert any(
-        [available_type in test_types for available_type in available_type_lists]
+        [
+            available_type in test_types
+            for available_type in available_type_lists(baseline_system_types_dict)
+        ]
     )
 
 
@@ -398,30 +352,22 @@ def test_get_baseline_system_types__system_10_false():
     baseline_system_types_dict = get_baseline_system_types(
         SYS_10_TEST_RMD["ruleset_model_instances"][0]
     )
-    available_type_lists = [
-        hvac_type
-        for hvac_type in baseline_system_types_dict.keys()
-        if len(baseline_system_types_dict[hvac_type]) > 0
-    ]
-
     test_types = exclude_sys_types([HVAC_SYS.SYS_10])
-
     assert (
-        any([available_type in test_types for available_type in available_type_lists])
+        any(
+            [
+                available_type in test_types
+                for available_type in available_type_lists(baseline_system_types_dict)
+            ]
+        )
         == False
     )
 
 
 def test_get_baseline_system_types__system_11_1_true():
-    baseline_system_type_dict = get_baseline_system_types(
+    baseline_system_types_dict = get_baseline_system_types(
         SYS_11_1_TEST_RMD["ruleset_model_instances"][0]
     )
-    available_type_lists = [
-        hvac_type
-        for hvac_type in baseline_system_type_dict.keys()
-        if len(baseline_system_type_dict[hvac_type]) > 0
-    ]
-
     test_types = [
         HVAC_SYS.SYS_11_1,
         HVAC_SYS.SYS_11_1A,
@@ -429,7 +375,10 @@ def test_get_baseline_system_types__system_11_1_true():
         HVAC_SYS.SYS_11_1C,
     ]
     assert any(
-        [available_type in test_types for available_type in available_type_lists]
+        [
+            available_type in test_types
+            for available_type in available_type_lists(baseline_system_types_dict)
+        ]
     )
 
 
@@ -437,12 +386,6 @@ def test_get_baseline_system_types__system_11_1_false():
     baseline_system_types_dict = get_baseline_system_types(
         SYS_11_1_TEST_RMD["ruleset_model_instances"][0]
     )
-    available_type_lists = [
-        hvac_type
-        for hvac_type in baseline_system_types_dict.keys()
-        if len(baseline_system_types_dict[hvac_type]) > 0
-    ]
-
     test_types = exclude_sys_types(
         [
             HVAC_SYS.SYS_11_1,
@@ -451,26 +394,27 @@ def test_get_baseline_system_types__system_11_1_false():
             HVAC_SYS.SYS_11_1C,
         ]
     )
-
     assert (
-        any([available_type in test_types for available_type in available_type_lists])
+        any(
+            [
+                available_type in test_types
+                for available_type in available_type_lists(baseline_system_types_dict)
+            ]
+        )
         == False
     )
 
 
 def test_get_baseline_system_types__system_11_2_true():
-    baseline_system_type_dict = get_baseline_system_types(
+    baseline_system_types_dict = get_baseline_system_types(
         SYS_11_2_TEST_RMD["ruleset_model_instances"][0]
     )
-    available_type_lists = [
-        hvac_type
-        for hvac_type in baseline_system_type_dict.keys()
-        if len(baseline_system_type_dict[hvac_type]) > 0
-    ]
-
     test_types = [HVAC_SYS.SYS_11_2, HVAC_SYS.SYS_11_2A]
     assert any(
-        [available_type in test_types for available_type in available_type_lists]
+        [
+            available_type in test_types
+            for available_type in available_type_lists(baseline_system_types_dict)
+        ]
     )
 
 
@@ -478,15 +422,95 @@ def test_get_baseline_system_types__system_11_2_false():
     baseline_system_types_dict = get_baseline_system_types(
         SYS_11_2_TEST_RMD["ruleset_model_instances"][0]
     )
-    available_type_lists = [
-        hvac_type
-        for hvac_type in baseline_system_types_dict.keys()
-        if len(baseline_system_types_dict[hvac_type]) > 0
-    ]
-
     test_types = exclude_sys_types([HVAC_SYS.SYS_11_2, HVAC_SYS.SYS_11_2A])
-
     assert (
-        any([available_type in test_types for available_type in available_type_lists])
+        any(
+            [
+                available_type in test_types
+                for available_type in available_type_lists(baseline_system_types_dict)
+            ]
+        )
         == False
     )
+
+
+ONE_TERMINAL_UNIT_SERVES_MULTIPLE_ZONES = {
+    "id": "ASHRAE229 1",
+    "ruleset_model_instances": [
+        {
+            "id": "RMD 1",
+            "buildings": [
+                {
+                    "id": "Building 1",
+                    "building_open_schedule": "Required Building Schedule 1",
+                    "building_segments": [
+                        {
+                            "id": "Building Segment 1",
+                            "zones": [
+                                {
+                                    "id": "Thermal Zone 1",
+                                    "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                    "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                    "terminals": [
+                                        {
+                                            "id": "Air Terminal",
+                                            "type": "CONSTANT_AIR_VOLUME",
+                                            "served_by_heating_ventilating_air_conditioning_system": "System Type",
+                                        }
+                                    ],
+                                },
+                                {
+                                    "id": "Thermal Zone 2",
+                                    "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                    "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                    "terminals": [
+                                        {
+                                            "id": "Air Terminal",
+                                            "type": "CONSTANT_AIR_VOLUME",
+                                            "served_by_heating_ventilating_air_conditioning_system": "System Type",
+                                        }
+                                    ],
+                                },
+                            ],
+                            "heating_ventilating_air_conditioning_systems": [
+                                {
+                                    "id": "System Type",
+                                    "cooling_system": {
+                                        "id": "DX Coil 3",
+                                        "cooling_system_type": "DIRECT_EXPANSION",
+                                    },
+                                    "heating_system": {
+                                        "id": "Furnace Coil 3",
+                                        "heating_system_type": "FURNACE",
+                                    },
+                                    "fan_system": {
+                                        "id": "CAV Fan System 3",
+                                    },
+                                }
+                            ],
+                        }
+                    ],
+                }
+            ],
+            "fluid_loops": [
+                {
+                    "id": "Purchased HW Loop 1",
+                    "type": "HEATING",
+                },
+                {
+                    "id": "Purchased CHW Loop 1",
+                    "type": "COOLING",
+                },
+            ],
+        }
+    ],
+}
+
+
+def test_one_terminal_serves_multiple_zones():
+    # The purpose of this test is to test when a terminal unit serves multiple thermal zones (line 110 in get_baseline_system_types.py) for code coverage.
+
+    baseline_system_types_dict = get_baseline_system_types(
+        ONE_TERMINAL_UNIT_SERVES_MULTIPLE_ZONES
+    )
+    assert len(available_type_lists(baseline_system_types_dict)) == 0

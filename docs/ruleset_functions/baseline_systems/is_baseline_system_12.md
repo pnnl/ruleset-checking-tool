@@ -38,7 +38,6 @@
                         - if coolingsystem is attached to a chiller and the heating fluid loop is served by a boiler then system 12: `if is_hvac_sys_fluid_loop_attached_to_chiller(B_RMI, hvac_b.id) == TRUE AND is_hvac_sys_fluid_loop_attached_to_boiler(B_RMI, hvac_b.id) == TRUE: is_baseline_system_12 = "Sys-12"`
                         - elif coolingsystem is purchased CHW and the heating fluid loop is served by a boiler then Sys-12a: `elif is_hvac_sys_fluid_loop_purchased_CHW(B_RMI, hvac_b.id) == TRUE AND is_hvac_sys_fluid_loop_attached_to_boiler(B_RMI, hvac_b.id) == TRUE: is_baseline_system_12 = "Sys-12a"`
                         - elif the coolingsystem is attached to a chiller and the heating system is purchased heating then Sys-12b: `elif is_hvac_sys_fluid_loop_attached_to_chiller(B_RMI, hvac_b.id) == TRUE AND is_hvac_sys_fluid_loop_purchased_heating(B_RMI, hvac_b.id) == TRUE: is_baseline_system_12 = "Sys-12b"`  
-                        - elif coolingsystem is purchased CHW and and the heating system is purchased heating then Sys-12c: `elif is_hvac_sys_fluid_loop_purchased_CHW(B_RMI, hvac_b.id) == TRUE AND is_hvac_sys_fluid_loop_purchased_heating(B_RMI, hvac_b.id) == TRUE: is_baseline_system_12 = "Sys-12c"`  
 
 
 **Returns** `is_baseline_system_12`  
