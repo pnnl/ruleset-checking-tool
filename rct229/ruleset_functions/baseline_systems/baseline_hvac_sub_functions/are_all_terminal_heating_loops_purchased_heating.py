@@ -36,16 +36,14 @@ def are_all_terminal_heating_loops_purchased_heating(rmi_b, terminal_unit_id_lis
     for terminal_b_id in terminal_unit_id_list:
         terminal_b = find_exactly_one_terminal_unit(rmi_b, terminal_b_id)
         heating_from_loop_id = terminal_b.get("heating_from_loop")
-        if heating_from_loop_id:
+        if are_all_terminal_heating_loops_purchased_heating_flag and heating_from_loop_id:
             fluid_loop = find_exactly_one_fluid_loop(rmi_b, heating_from_loop_id)
             if (
                 getattr_(fluid_loop, "fluid loop", "type") != FLUID_LOOP_TYPE.HEATING
                 or heating_from_loop_id not in purchased_heating_loop_id_list_b
             ):
                 are_all_terminal_heating_loops_purchased_heating_flag = False
-                break
         else:
             are_all_terminal_heating_loops_purchased_heating_flag = False
-            break
 
     return are_all_terminal_heating_loops_purchased_heating_flag

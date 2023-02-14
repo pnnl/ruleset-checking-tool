@@ -20,6 +20,14 @@ TEST_RMD = {
                                 {"id": "terminal_3"},
                             ],
                         },
+                        {
+                            "id": "zone 2",
+                            "terminals": [
+                                {
+                                    "id": "terminal_4"
+                                },  # intentionally omit `heating_from_loop` key to test out `if are_all_terminal_heating_loops_purchased_heating_flag and heating_from_loop_id:` false case.
+                            ],
+                        },
                     ],
                 }
             ],
@@ -46,14 +54,14 @@ def test__TEST_RMD__is_valid():
     ], f"Schema error: {schema_validation_result['error']}"
 
 
-def test__all_terminal_heating_loops_purchased_heating():
+def test__are_all_terminal_heating_loops_purchased_heating__all_terminal_heating_loops_purchased_heating():
     assert (
         are_all_terminal_heating_loops_purchased_heating(TEST_RMD, ["terminal_1"])
         == True
     )
 
 
-def test__all_terminal_heating_source_not_purchased_heating():
+def test__are_all_terminal_heating_loops_purchased_heating__all_terminal_heating_source_not_purchased_heating():
     assert (
         are_all_terminal_heating_loops_purchased_heating(
             TEST_RMD, ["terminal_2", "terminal_3"]
@@ -62,7 +70,7 @@ def test__all_terminal_heating_source_not_purchased_heating():
     )
 
 
-def test__not_all_terminal_heating_source_purchased_heating():
+def test__are_all_terminal_heating_loops_purchased_heating__not_all_terminal_heating_source_purchased_heating():
     assert (
         are_all_terminal_heating_loops_purchased_heating(
             TEST_RMD, ["terminal_1", "terminal_2"]
