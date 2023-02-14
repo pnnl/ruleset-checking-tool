@@ -46,6 +46,14 @@ TEST_RMR = {
                                             # control credit: 0.0
                                             "are_schedules_used_for_modeling_occupancy_control": False,
                                         },
+                                        {
+                                            "id": "light_3",
+                                            "power_per_area": 4.0,
+                                            "lighting_multiplier_schedule": "light_multiplier_sched_1",
+                                            "occupancy_control_type": "NONE",
+                                            # control credit: 0.0
+                                            "are_schedules_used_for_modeling_occupancy_control": True,
+                                        },
                                     ],
                                     "floor_area": 23.25,
                                 }
@@ -77,7 +85,7 @@ def test__TEST_RMD__is_valid():
     ], f"Schema error: {schema_validation_result['error']}"
 
 
-def test__normalize_space_schedules_success_1():
+def test__normalize_space_schedules__success_1():
     """
     Test to test three sets of interior lighting in a space
     the total power per area is: 2.3 + 5.5 + 2.3
@@ -88,8 +96,16 @@ def test__normalize_space_schedules_success_1():
     """
 
     test_space_normalized_schedule_array = [
-        (0.8 * (1 / (1 - 0.375) * 2.3 + 1 / (1 - 0.3) * 5.5 + 1 / (1 - 0.0) * 2.3))
-        / (2.3 + 5.5 + 2.3)
+        (
+            0.8
+            * (
+                1 / (1 - 0.375) * 2.3
+                + 1 / (1 - 0.3) * 5.5
+                + 1 / (1 - 0.0) * 2.3
+                + 1 / (1 - 0.0) * 4.0
+            )
+        )
+        / (2.3 + 5.5 + 2.3 + 4.0)
     ] * 8760
 
     results = normalize_interior_lighting_schedules(
