@@ -88,10 +88,11 @@ def test__TEST_RMD__is_valid():
 def test__normalize_space_schedules__success_1():
     """
     Test to test three sets of interior lighting in a space
-    the total power per area is: 2.3 + 5.5 + 2.3
+    the total power per area is: 2.3 + 5.5 + 2.3 + 4.0
     light_1, 2.3 W/m2, MANUAL_ON => control credit: 0.375,
     light_2, 5.5 W/m2, FULL_AUTO_ON => control credit: 0.3,
-    light_3. 2.3 W/m2, No control => control credit: 0.0
+    light_3. 2.3 W/m2, No control => control credit: 0.0,
+    light_4. 4.0 W/m2, No control => control credit: 0.0
     hourly value 0.8
     """
 
