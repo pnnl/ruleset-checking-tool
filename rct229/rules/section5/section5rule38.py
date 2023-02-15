@@ -16,7 +16,7 @@ from rct229.ruleset_functions.get_surface_conditioning_category_dict import (
 )
 from rct229.utils.std_comparisons import std_equal
 
-MANUAL_CHECK_MSG = "Manual review is required to verify skylight meets U-factor requirement as per table G3.4."
+MANUAL_CHECK_MSG = "MANUAL REVIEW IS REQUESTED TO VERIFY SKYLIGHT MEETS SHGC REQUIREMENT AS PER TABLE G3.4."
 
 
 SURFACE_CLASSIFICATION = schema_enums["SubsurfaceClassificationOptions"]
