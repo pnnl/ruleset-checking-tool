@@ -36,6 +36,7 @@
 - iterate through each fluid loop: `for heating_fluid_loop in heat_fluid_loops_set:`
 
 **Rule Assertion:**
+- 
   - check the tempearture reset is outdoor air reset 180F at 20F and 150F at 50F: `if heating_fluid_loop.heating_design_and_control.temperature_reset_type == OUTDOOR_AIR_RESET`
   - `AND heating_fluid_loop.heating_design_and_control.loop_supply_temperature_at_outdoor_high == 150`
   - `AND heating_fluid_loop.heating_design_and_control.loop_supply_temperature_at_outdoor_low == 180`
