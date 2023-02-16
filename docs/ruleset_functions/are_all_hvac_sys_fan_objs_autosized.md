@@ -1,13 +1,13 @@
 # are_all_hvac_sys_fan_objs_autosized  
 
-**Description:** Returns true or false. The function returns true if all fans objects associated with an hvac system are autosized. 
+**Description:** Returns true or false. The function returns true if all supply fan objects associated with an hvac system are autosized.  
 
 **Inputs:**  
 - **U,P,or B-RMI**: The RMR in which the fan system object is defined. 
 - **hvac_sys_obj**: The hvac object in which the associated fan objects will be assessed.
 
 **Returns:**  
-- **are_all_hvac_sys_fan_objs_autosized**: Returns true or false. The function returns true if all fans objects associated with an hvac system are autosized.   
+- **are_all_hvac_sys_fan_objs_autosized**: Returns true or false. The function returns true if all supply fan objects associated with an hvac system are autosized.   
  
 **Function Call:** 
 1. get_dict_of_zones_and_terminal_units_served_by_hvac_sys()    
