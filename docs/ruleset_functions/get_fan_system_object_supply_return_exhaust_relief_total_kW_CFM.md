@@ -24,7 +24,7 @@ Supply:
   - Loop through the supply fan: `for fan_obj in fan_system_obj.supply_fans:`  
     - Set the fan_elec_power equal to zero: `fan_elec_power = 0`
     - Set the fan_cfm equal to zero: `fan_cfm = 0`
-    - Get the fan objects total kW: `fan_elec_power = get_fan_object_electric_power(P_RMI, fan_obj)`  
+    - Get the fan objects total kW: `fan_elec_power = get_fan_object_electric_power(RMI, fan_obj)`  
     - Add to the total associated with this fan system: `total_fan_power = total_fan_power + fan_elec_power`  
     - Get the fan cfm: `fan_cfm = fan_obj.design_airflow`  
     - Add to the total associated with this fan system: `total_fan_cfm = total_fan_cfm + fan_cfm`   
@@ -53,7 +53,7 @@ Return:
   - Loop through the return fan: `for fan_obj in fan_system_obj.return_fans:`  
     - Set the fan_elec_power equal to zero: `fan_elec_power = 0`
     - Set the fan_cfm equal to zero: `fan_cfm = 0`
-    - Get the fan objects total kW: `fan_elec_power = get_fan_object_electric_power(P_RMI, fan_obj)`  
+    - Get the fan objects total kW: `fan_elec_power = get_fan_object_electric_power(RMI, fan_obj)`  
     - Add to the total associated with this fan system: `total_fan_power = total_fan_power + fan_elec_power`  
     - Get the fan cfm: `fan_cfm = fan_obj.design_airflow`  
     - Add to the total associated with this fan system: `total_fan_cfm = total_fan_cfm + fan_cfm`   
@@ -82,7 +82,7 @@ Exhaust:
   - Loop through the exhaust fan: `for fan_obj in fan_system_obj.exhaust_fans:`  
     - Set the fan_elec_power equal to zero: `fan_elec_power = 0`
     - Set the fan_cfm equal to zero: `fan_cfm = 0`
-    - Get the fan objects total kW: `fan_elec_power = get_fan_object_electric_power(P_RMI, fan_obj)`  
+    - Get the fan objects total kW: `fan_elec_power = get_fan_object_electric_power(RMI, fan_obj)`  
     - Add to the total associated with this fan system: `total_fan_power = total_fan_power + fan_elec_power`  
     - Get the fan cfm: `fan_cfm = fan_obj.design_airflow`  
     - Add to the total associated with this fan system: `total_fan_cfm = total_fan_cfm + fan_cfm`   
@@ -111,7 +111,7 @@ Relief:
   - Loop through the relief fan: `for fan_obj in fan_system_obj.relief_fans:`  
     - Set the fan_elec_power equal to zero: `fan_elec_power = 0`
     - Set the fan_cfm equal to zero: `fan_cfm = 0`
-    - Get the fan objects total kW: `fan_elec_power = get_fan_object_electric_power(P_RMI, fan_obj)`  
+    - Get the fan objects total kW: `fan_elec_power = get_fan_object_electric_power(RMI, fan_obj)`  
     - Add to the total associated with this fan system: `total_fan_power = total_fan_power + fan_elec_power`  
     - Get the fan cfm: `fan_cfm = fan_obj.design_airflow`  
     - Add to the total associated with this fan system: `total_fan_cfm = total_fan_cfm + fan_cfm`   
