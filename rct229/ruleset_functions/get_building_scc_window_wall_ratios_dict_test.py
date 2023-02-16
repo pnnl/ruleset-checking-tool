@@ -113,8 +113,8 @@ TEST_RMR = {
                                 # Mock for SCC.UNREGULATED and OST.ROOF
                                 {
                                     "id": "surface_1_1_6",
-                                    "area": 10,  # m2
-                                    "tilt": 30,  # degrees
+                                    "area": 100,  # m2
+                                    "tilt": 0,  # degrees
                                 },
                             ],
                             "thermostat_cooling_setpoint_schedule": "tcs_sched_1",
