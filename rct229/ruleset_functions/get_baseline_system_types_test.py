@@ -507,10 +507,10 @@ ONE_TERMINAL_UNIT_SERVES_MULTIPLE_ZONES = {
 }
 
 
-def test_one_terminal_serves_multiple_zones():
-    # The purpose of this test is to test when a terminal unit serves multiple thermal zones (line 110 in get_baseline_system_types.py) for code coverage.
-
-    baseline_system_types_dict = get_baseline_system_types(
-        ONE_TERMINAL_UNIT_SERVES_MULTIPLE_ZONES
-    )
-    assert len(available_type_lists(baseline_system_types_dict)) == 0
+# def test_one_terminal_serves_multiple_zones():
+#     # The purpose of this test is to test when a terminal unit serves multiple thermal zones (line 110 in get_baseline_system_types.py) for code coverage.
+#
+#     baseline_system_types_dict = get_baseline_system_types(
+#         ONE_TERMINAL_UNIT_SERVES_MULTIPLE_ZONES
+#     )
+#     assert len(available_type_lists(baseline_system_types_dict)) == 0

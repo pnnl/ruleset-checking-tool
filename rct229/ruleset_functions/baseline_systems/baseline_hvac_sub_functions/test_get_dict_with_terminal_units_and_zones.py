@@ -232,7 +232,9 @@ def test__TEST_RMD__is_valid():
 
 
 def test_get_dict_with_terminal_units_and_zones():
-    assert get_dict_with_terminal_units_and_zones(rmd_model) == {
+    assert get_dict_with_terminal_units_and_zones(
+        rmd_model["ruleset_model_instances"][0]
+    ) == {
         "VAV Air Terminal 1": ["Thermal Zone 1"],
         "VAV Air Terminal 2": ["Thermal Zone 2"],
         "VAV Air Terminal 3": ["Thermal Zone 3"],
