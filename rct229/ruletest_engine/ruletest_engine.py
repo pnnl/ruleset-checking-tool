@@ -175,7 +175,7 @@ def process_test_result(test_result, test_dict, test_id):
     return outcome_text, received_expected_outcome
 
 
-def run_section_tests(test_json_name, ruleset_doc):
+def run_section_tests(test_json_name: str, ruleset_doc: str):
     """Runs all tests found in a given test JSON and prints results to console. Returns true/false describing whether
     or not all tests in the JSON result in the expected outcome.
 
@@ -184,6 +184,10 @@ def run_section_tests(test_json_name, ruleset_doc):
     test_json_name : string
 
         Name of test JSON in 'test_jsons' directory. (e.g., transformer_tests.json)
+
+    ruleset_doc: string
+
+        Name of the ruleset
 
     Returns
     -------

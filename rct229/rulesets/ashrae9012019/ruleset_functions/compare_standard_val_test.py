@@ -2,8 +2,6 @@ import operator
 
 from rct229.rulesets.ashrae9012019.ruleset_functions.compare_standard_val import (
     compare_standard_val,
-)
-from rct229.rulesets.ashrae9012019.ruleset_functions.compare_standard_val import (
     compare_standard_val_strict,
 )
 from rct229.schema.config import ureg

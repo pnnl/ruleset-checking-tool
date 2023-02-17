@@ -6,9 +6,13 @@ import rct229.rule_engine.rule_list_base as base_list_classes
 import rct229.rule_engine.rule_list_indexed_base as base_list_indexed_classes
 import rct229.rulesets as rulesets
 from rct229.rule_engine.rule_base import RuleDefinitionBase
+from rct229.rule_engine.rulesets import RuleSet
 
-__all__ = ["ashrae9012019"]
 
+# All list for registering a ruleset.
+__all__ = [RuleSet.ASHRAE9012019_RULESET]
+
+# Added to remove the sub-module that are not rules.
 MODULE_EXCEPTION_LIST = ["math"]
 
 
