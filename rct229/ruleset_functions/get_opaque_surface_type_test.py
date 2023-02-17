@@ -1,4 +1,5 @@
 import pytest
+
 from rct229.ruleset_functions.get_opaque_surface_type import get_opaque_surface_type
 from rct229.schema.config import ureg
 

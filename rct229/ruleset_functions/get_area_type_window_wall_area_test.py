@@ -1,4 +1,5 @@
 import pytest
+
 from rct229.data_fns.table_3_2_fns import table_3_2_lookup
 from rct229.ruleset_functions.get_area_type_window_wall_area_dict import (
     get_area_type_window_wall_area_dict,

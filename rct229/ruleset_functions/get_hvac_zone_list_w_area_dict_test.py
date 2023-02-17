@@ -1,4 +1,5 @@
 import pytest
+
 from rct229.ruleset_functions.get_hvac_zone_list_w_area_dict import (
     get_hvac_zone_list_w_area_dict,
 )

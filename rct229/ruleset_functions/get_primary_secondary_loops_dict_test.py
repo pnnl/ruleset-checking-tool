@@ -1,4 +1,5 @@
 import pytest
+
 from rct229.ruleset_functions.get_primary_secondary_loops_dict import (
     get_primary_secondary_loops_dict,
 )
