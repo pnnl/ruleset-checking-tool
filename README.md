@@ -22,7 +22,7 @@ The RCT can be used for two different workflows within ASHRAE Standard 229P.  Th
 
 A project RMR triplet is evaluated by running the *evaluate* command in the RCT.  The User, Baseline, and Proposed RMR file paths are provided as the input arguments to the *evaluate* command.  The output of this command is a JSON report defining the outcome of the rule evaluation on the provided RMR triplet.
 
-`rct229 evaluate user_rmr.json baseline_rmr.json proposed_rmr.json`  
+`rct229 evaluate user_rmr.json baseline_rmr.json proposed_rmr.json`
 
 #### RMR Schema
 The RCT data model used by the RCT is based on the [RMR schema](https://github.com/open229/ruleset-model-report-schema).  All RMRs must comply with the version of the RMR schema corresponding to the RCT.  The RMR schema files used by the RCT are located within the [rct229/schema](rct229/schema) directory.  
@@ -61,7 +61,8 @@ You can also package with pipenv to test the CLI tool.
 2. `pipenv run rct229`
 
 Run with example RMRs
-1. `pipenv run rct229 evaluate examples\user_rmr.json examples\baseline_rmr.json examples\proposed_rmr.json`
+1. `pipenv run rct229 evaluate examples\user_rmr.json examples\baseline_rmr.json examples\proposed_rmr.json` or
+2. `pipenv run rct229 evaluate examples\proposed_model.json examples\baseline_model.json examples\proposed_model.json`
 
 
 ### Developer Notes
@@ -90,6 +91,10 @@ Before committing changes you should run the following commands from the `rulese
 #### Mocking functions for pytests:
 - For an explanation of how to specify `<module>` in `patch("<module>.<imported_thing>")` see: https://medium.com/@durgaswaroop/writing-better-tests-in-python-with-pytest-mock-part-2-92b828e1453c
 
+#### Profiling:
+- To profile a file: `pipenv run pyinstrument --renderer=html path_to_file`
+- To profile the RCT command line: `pipenv run pyinstrument --renderer=html rct229/cli.py  evaluate examples/proposed_model.rmd examples/baseline_model.rmd examples/proposed_model.rmd`
+- For detailed info on pyinstrument: https://pyinstrument.readthedocs.io/en/latest/home.html 
 
 ## Disclaimer Notice      
 This material was prepared as an account of work sponsored by an agency of the United States Government.  Neither the United States Government nor the United States Department of Energy, nor Battelle, nor any of their employees, nor any jurisdiction or organization that has cooperated in the development of these materials, makes any warranty, express or implied, or assumes any legal liability or responsibility for the accuracy, completeness, or usefulness or any information, apparatus, product, software, or process disclosed, or represents that its use would not infringe privately owned rights.
