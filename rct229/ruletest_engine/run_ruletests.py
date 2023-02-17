@@ -154,10 +154,12 @@ def run_test_helper(test_list):
     return all(test_results)
 
 
-# run_transformer_tests()
-# run_lighting_tests()
-# run_boiler_tests()
-# run_chiller_tests()
-# run_envelope_tests()
-# run_receptacle_tests()
-run_airside_tests()
+if __name__ == "__main__":
+    # run_transformer_tests()
+    # run_lighting_tests()
+    # run_boiler_tests()
+    # run_chiller_tests()
+    # run_envelope_tests()
+    # run_receptacle_tests()
+    run_airside_tests()
+    pass
