@@ -1,4 +1,4 @@
-from rct229.data_fns.table_3_2_fns import table_3_2_lookup
+from rct229.rulesets.ashrae9012019.data_fns.table_3_2_fns import table_3_2_lookup
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_zone_conditioning_category_dict import (
     CAPACITY_THRESHOLD as CAPACITY_THRESHOLD_QUANTITY,
 )

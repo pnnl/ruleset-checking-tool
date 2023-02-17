@@ -1,13 +1,10 @@
-import pytest
-
-from rct229.data import data
-from rct229.data_fns.table_9_5_1_fns import (
+from rct229.rulesets.ashrae9012019.data import data
+from rct229.rulesets.ashrae9012019.data_fns.table_9_5_1_fns import (
     lighting_space_type_enumeration_to_lpd_map,
     table_9_5_1_lookup,
 )
-from rct229.data_fns.table_utils import (
+from rct229.rulesets.ashrae9012019.data_fns.table_utils import (
     check_enumeration_to_osstd_match_field_value_map,
-    find_osstd_table_entry,
 )
 from rct229.schema.config import ureg
 

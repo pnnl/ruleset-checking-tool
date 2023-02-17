@@ -1,4 +1,4 @@
-from rct229.data.schema_enums import schema_enums
+from rct229.rulesets.ashrae9012019.data.schema_enums import schema_enums
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.are_all_terminal_chw_loops_purcahsed_cooling import (
     are_all_terminal_chw_loops_purchased_cooling,
 )

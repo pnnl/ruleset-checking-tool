@@ -1,7 +1,7 @@
 from numpy import interp
 
-from rct229.data import data
-from rct229.data.schema_enums import schema_enums
+from rct229.rulesets.ashrae9012019.data import data
+from rct229.rulesets.ashrae9012019.data.schema_enums import schema_enums
 from rct229.schema.config import ureg
 
 ElectricalPhase = schema_enums["ElectricalPhaseOptions"]

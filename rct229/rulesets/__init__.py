@@ -8,7 +8,6 @@ import rct229.rulesets as rulesets
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rulesets import RuleSet
 
-
 # All list for registering a ruleset.
 __all__ = [RuleSet.ASHRAE9012019_RULESET]
 

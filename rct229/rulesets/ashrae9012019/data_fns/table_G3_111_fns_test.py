@@ -1,13 +1,10 @@
-import pytest
-
-from rct229.data import data
-from rct229.data_fns.table_G3_111_fns import (
+from rct229.rulesets.ashrae9012019.data import data
+from rct229.rulesets.ashrae9012019.data_fns.table_G3_111_fns import (
     VERTICAL_FENESTRATION_BUILDING_AREA_TYPE_TO_WWR_BUILDING_TYPE_MAP,
     table_G3_1_1_1_lookup,
 )
-from rct229.data_fns.table_utils import (
+from rct229.rulesets.ashrae9012019.data_fns.table_utils import (
     check_enumeration_to_osstd_match_field_value_map,
-    find_osstd_table_entry,
 )
 
 

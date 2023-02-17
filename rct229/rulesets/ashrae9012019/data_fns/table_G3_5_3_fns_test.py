@@ -1,6 +1,4 @@
-import pytest
-
-from rct229.data_fns.table_G3_5_3_fns import table_G3_5_3_lookup
+from rct229.rulesets.ashrae9012019.data_fns.table_G3_5_3_fns import table_G3_5_3_lookup
 from rct229.schema.config import ureg
 
 ton = ureg("ton")

@@ -57,7 +57,9 @@ def run_test(ruleset, section=None):
         else:
             assert all(outcome_list), f"{section} failed in the test"
     else:
-        print(f"ruleset document {ruleset} is not currently supported by the RCT. Please select one from the following: ashrae9012019")
+        print(
+            f"ruleset document {ruleset} is not currently supported by the RCT. Please select one from the following: ashrae9012019"
+        )
 
 
 # Evaluate RMR Triplet

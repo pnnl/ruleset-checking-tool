@@ -7,7 +7,8 @@ from rct229.rule_engine.rulesets import RuleSet
 
 def test___get_rules___returns_rules():
     available_rules = [
-        rule_tuple[1] for rule_tuple in ruleset.__getrules__(RuleSet.ASHRAE9012019_RULESET)
+        rule_tuple[1]
+        for rule_tuple in ruleset.__getrules__(RuleSet.ASHRAE9012019_RULESET)
     ]
     assert all(
         [

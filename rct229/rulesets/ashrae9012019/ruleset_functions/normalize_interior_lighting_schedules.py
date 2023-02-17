@@ -1,4 +1,4 @@
-from rct229.data_fns.table_G3_7_fns import (
+from rct229.rulesets.ashrae9012019.data_fns.table_G3_7_fns import (
     MANUAL_ON,
     NONE,
     OTHER,

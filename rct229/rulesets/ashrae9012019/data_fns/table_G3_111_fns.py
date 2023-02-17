@@ -1,6 +1,5 @@
-import rct229
-from rct229.data import data
-from rct229.data_fns.table_utils import find_osstd_table_entry
+from rct229.rulesets.ashrae9012019.data import data
+from rct229.rulesets.ashrae9012019.data_fns.table_utils import find_osstd_table_entry
 
 # This dictionary maps the VerticalFenestrationBuildingAreaOptions2019ASHRAE901 enumerations to
 # the corresponding wwr_building_type in the OSSTD file
