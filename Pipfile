@@ -14,7 +14,7 @@ isort = "5.10.1"
 icecream = "*"
 pytest-cov = "*"
 pytest-watch = "*"
-jsonpath-ng = "*"
+pyinstrument = "*"
 
 [packages]
 rct229 = {editable = true, path = "."}
