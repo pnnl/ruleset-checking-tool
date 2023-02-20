@@ -58,10 +58,10 @@ Now tests can be run by first installing dependencies and then running pytest.
 
 You can also package with pipenv to test the CLI tool.
 1. `pipenv install '-e .'`
-2. `pipenv run rct229`
+2. `pipenv run rct229 -evaluate`
 
-Run with example RMRs
-1. `pipenv run rct229 evaluate examples\user_rmr.json examples\baseline_rmr.json examples\proposed_rmr.json`
+Run with example ASHRAE 90.1 2019 RMDs.
+1. `pipenv run rct229 evaluate -rs ashrae9012019 examples\user_rmr.json examples\baseline_rmr.json examples\proposed_rmr.json`
 
 
 ### Developer Notes
@@ -85,7 +85,8 @@ Before committing changes you should run the following commands from the `rulese
 1. `pipenv run isort .` to sort imports according to PEP8 https://www.python.org/dev/peps/pep-0008/
 2. `pipenv run black .` to otherwise format code according to PEP8
 3. `pipenv run pytest --cov` to run all unit tests for functions.
-4. `pipenv run rct229 test` to run all rule definition tests.
+4. `pipenv run rct229 test` to run rule definition tests.
+   1. use `-rs ashrae9012019` to run all 90.1 2019 rule definition tests.
 
 #### Mocking functions for pytests:
 - For an explanation of how to specify `<module>` in `patch("<module>.<imported_thing>")` see: https://medium.com/@durgaswaroop/writing-better-tests-in-python-with-pytest-mock-part-2-92b828e1453c
