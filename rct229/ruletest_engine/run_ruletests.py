@@ -134,8 +134,7 @@ def run_test_helper(test_list, ruleset_doc):
     return all(test_results)
 
 
-outcome = run_ashrae9012019_tests()
-print(outcome)
+outcome = run_ashrae9012019_tests(section="section6")
 
 # run_transformer_tests()
 # run_lighting_tests()

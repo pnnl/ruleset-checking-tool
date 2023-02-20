@@ -43,7 +43,7 @@ test_short_help_text = (
 @cli.command(
     "test", short_help=test_short_help_text, help=test_short_help_text, hidden=True
 )
-@click.option("--ruleset", "-s", multiple=False, default="ashrae9012019")
+@click.option("--ruleset", "-rs", multiple=False, default="ashrae9012019")
 @click.argument("section", type=click.STRING, required=False)
 def run_test(ruleset, section=None):
     print(f"software test workflow for section {section}")
@@ -75,7 +75,7 @@ help_text = short_help_text
 @click.argument("user_rmd", type=click.File("r"))
 @click.argument("baseline_rmd", type=click.File("r"))
 @click.argument("proposed_rmd", type=click.File("r"))
-@click.option("--ruleset", "-s", multiple=False, default="ashrae9012019")
+@click.option("--ruleset", "-rs", multiple=False, default="ashrae9012019")
 @click.option("--reports", "-r", multiple=True, default=["RAW_OUTPUT"])
 @click.option(
     "--reports_directory", "-rd", multiple=False, default="./examples/output/"
