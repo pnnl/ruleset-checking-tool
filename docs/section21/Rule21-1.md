@@ -7,6 +7,7 @@ purchased hot water or steam in both the proposed design and baseline building d
 **Rule Assertion:** B-RMR = expected value  
 **Appendix G Section:** Section 21 Boiler  
 **Appendix G Section Reference:** Section G3.1.1.1 & G3.1.1.3.1 Building System-Specific Modeling Requirements for the Baseline model  
+**Schema Version:** 0.0.25
 
 **Applicability:** All required data elements exist for B_RMR  
 **Applicability Checks:**  
