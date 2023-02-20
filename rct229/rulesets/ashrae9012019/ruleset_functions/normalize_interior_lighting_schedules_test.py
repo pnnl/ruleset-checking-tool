@@ -45,6 +45,14 @@ TEST_RMR = {
                                             # control credit: 0.0
                                             "are_schedules_used_for_modeling_occupancy_control": False,
                                         },
+                                        {
+                                            "id": "light_3",
+                                            "power_per_area": 4.0,
+                                            "lighting_multiplier_schedule": "light_multiplier_sched_1",
+                                            "occupancy_control_type": "NONE",
+                                            # control credit: 0.0
+                                            "are_schedules_used_for_modeling_occupancy_control": True,
+                                        },
                                     ],
                                     "floor_area": 23.25,
                                 }
@@ -76,19 +84,28 @@ def test__TEST_RMD__is_valid():
     ], f"Schema error: {schema_validation_result['error']}"
 
 
-def test__normalize_space_schedules_success_1():
+def test__normalize_space_schedules__success_1():
     """
     Test to test three sets of interior lighting in a space
-    the total power per area is: 2.3 + 5.5 + 2.3
+    the total power per area is: 2.3 + 5.5 + 2.3 + 4.0
     light_1, 2.3 W/m2, MANUAL_ON => control credit: 0.375,
     light_2, 5.5 W/m2, FULL_AUTO_ON => control credit: 0.3,
-    light_3. 2.3 W/m2, No control => control credit: 0.0
+    light_3. 2.3 W/m2, No control => control credit: 0.0,
+    light_4. 4.0 W/m2, No control => control credit: 0.0
     hourly value 0.8
     """
 
     test_space_normalized_schedule_array = [
-        (0.8 * (1 / (1 - 0.375) * 2.3 + 1 / (1 - 0.3) * 5.5 + 1 / (1 - 0.0) * 2.3))
-        / (2.3 + 5.5 + 2.3)
+        (
+            0.8
+            * (
+                1 / (1 - 0.375) * 2.3
+                + 1 / (1 - 0.3) * 5.5
+                + 1 / (1 - 0.0) * 2.3
+                + 1 / (1 - 0.0) * 4.0
+            )
+        )
+        / (2.3 + 5.5 + 2.3 + 4.0)
     ] * 8760
 
     results = normalize_interior_lighting_schedules(
