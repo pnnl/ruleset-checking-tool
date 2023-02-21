@@ -98,6 +98,9 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   * [are_all_terminal_types_CAV_With_None_Equal_to_Null](ruleset_functions/baseline_systems/baseline_hvac_sub_functions/are_all_terminal_types_CAV_With_None_Equal_to_Null.md): Returns TRUE if all of the terminal unit types input to this function are constant air volume (CAV). It returns FALSE if any of the terminal units are of a type other than constant air volume (CAV).
   * [get_dict_with_terminal_units_and_zones](ruleset_functions/baseline_systems/baseline_hvac_sub_functions/get_dict_with_terminal_units_and_zones.md): Returns a dictionary of zone IDs associated with each terminal unit in the RMD.
   * [are_all_terminal_CHW_loops_purchased_cooling](ruleset_functions/baseline_systems/baseline_hvac_sub_functions/are_all_terminal_CHW_loops_purchased_cooling.md): Returns TRUE if the fluid loop associated with the cooling_from_loop associated with each terminal unit is purchased CHW. Returns FALSE if this is not the case.
+  * [get_most_used_weekday_hourly_schedule](ruleset_functions/get_most_used_weekday_hourly_schedule.md): Get the most used weekday hourly schedule from an annual 8760 schedule as list of hourly values for a 24 hour period.
+  * [get_aggregated_zone_hvac_fan_operating_schedule](ruleset_functions/get_aggregated_zone_hvac_fan_operating_schedule.md): This function loops through all of the HVAC system fan operating schedules associated with a specific zone and creates an aggregated fan operating schedule for the zone. More specifically, if any of the fan operating schedules associated with any of the hvac systems serving the zone have a 1 for a particular hour of the year then the aggregated schedule will equal 1 for that particular hour of the year. The function will check this for each hour of the year and return an 8760 aggregated fan operating schedule.
+
 
 ## Data Tables
   * [8.4.4](data_tables/Table8-4-4.md): Minimum Nominal Efficiency Levels for Low-Voltage Dry-Type Distribution Transformers  
@@ -247,7 +250,12 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
 ## Section 19 - Air Side Baseline HVAC System
   * [19-1](section19/Rule19-1.md): HVAC system coil capacities for the baseline building design shall be oversized by 15% for cooling and 25% for heating.
   * [19-2](section19/Rule19-2.md): Baseline building plant capacities shall be based on coincident loads.
+  * [19-4](section19/Rule19-4.md): For baseline cooling sizing runs in residential dwelling units, the infiltration, occupants, lighting, gas and electricity using equipment hourly schedule shall be the same as the most used hourly weekday schedule from the annual simulation.
+  * [19-5](section19/Rule19-5.md): Unmet load hours for the proposed design shall not exceed 300 (of the 8760 hours simulated).
+  * [19-6](section19/Rule19-6.md): Unmet load hours for the baseline design shall not exceed 300 (of the 8760 hours simulated).
   * [19-9](section19/Rule19-9.md): Air economizers shall not be included in baseline HVAC Systems 1, 2, 9, and 10.
+  * [19-11](section19/Rule19-11.md): For systems that serve computer rooms, if the  baseline system is HVAC System 11, it shall include an integrated fluid economizer meeting the requirements of Section 6.5.1.2 in the baseline building design.
+  * [19-12](section19/Rule19-12.md): Demand control ventilation is modeled in the baseline design in systems with outdoor air capacity greater than 3000 cfm serving areas with an average occupant design capacity greater than 100 people per 1000 ft^2.
   * [19-18](section19/Rule19-18.md): For baseline system 1 and 2, the total fan electrical power (Pfan) for supply, return, exhaust, and relief shall be = CFMs × 0.3, where, CFMs = the baseline system maximum design supply fan airflow rate, cfm.
 
 ## Section 21 - Central Heating Hot Water Systems
