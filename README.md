@@ -93,7 +93,7 @@ Before committing changes you should run the following commands from the `rulese
 
 #### Profiling:
 - To profile a file: `pipenv run pyinstrument --renderer=html path_to_file`
-- To profile the RCT command line: `pipenv run pyinstrument --renderer=html rct229/cli.py evaluate -rs ashrae9012019 examples\user_rmr.json examples\baseline_rmr.json examples\proposed_rmr.json`
+- To profile the RCT command line: `pipenv run pyinstrument --renderer=html rct229/cli.py  evaluate examples/proposed_model.rmd examples/baseline_model.rmd examples/proposed_model.rmd`
 - Note: Aborting the run with Ctrl C will cause the profiler to output the profile up to the abort.
 - For detailed info on pyinstrument: https://pyinstrument.readthedocs.io/en/latest/home.html
 
