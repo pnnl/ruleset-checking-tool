@@ -55,7 +55,7 @@ class Section5Rule37(RuleDefinitionListIndexedBase):
                 rmrs_used=UserBaselineProposedVals(False, True, False),
                 each_rule=Section5Rule37.BuildingRule.RoofRule(),
                 index_rmr="baseline",
-                list_path="ruleset_model_instances[0].buildings[*].building_segments[*].zones[*].surfaces[*]",
+                list_path="$.building_segments[*].zones[*].surfaces[*]",
                 manual_check_required_msg=MANUAL_CHECK_MSG,
             )
 
