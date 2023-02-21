@@ -99,6 +99,7 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   * [get_dict_with_terminal_units_and_zones](ruleset_functions/baseline_systems/baseline_hvac_sub_functions/get_dict_with_terminal_units_and_zones.md): Returns a dictionary of zone IDs associated with each terminal unit in the RMD.
   * [are_all_terminal_CHW_loops_purchased_cooling](ruleset_functions/baseline_systems/baseline_hvac_sub_functions/are_all_terminal_CHW_loops_purchased_cooling.md): Returns TRUE if the fluid loop associated with the cooling_from_loop associated with each terminal unit is purchased CHW. Returns FALSE if this is not the case.
   * [get_most_used_weekday_hourly_schedule](ruleset_functions/get_most_used_weekday_hourly_schedule.md): Get the most used weekday hourly schedule from an annual 8760 schedule as list of hourly values for a 24 hour period.
+  * [get_aggregated_zone_hvac_fan_operating_schedule](ruleset_functions/get_aggregated_zone_hvac_fan_operating_schedule.md): This function loops through all of the HVAC system fan operating schedules associated with a specific zone and creates an aggregated fan operating schedule for the zone. More specifically, if any of the fan operating schedules associated with any of the hvac systems serving the zone have a 1 for a particular hour of the year then the aggregated schedule will equal 1 for that particular hour of the year. The function will check this for each hour of the year and return an 8760 aggregated fan operating schedule.
 
 
 ## Data Tables
