@@ -110,25 +110,19 @@ def get_baseline_system_types(rmi_b):
         zone_id_list = dict_of_zones_and_terminal_units_served_by_hvac_sys[hvac_b_id][
             "zone_list"
         ]
-        # one terminal per zone for all baseline systems
-        if all(
-            len(dict_with_terminal_units_and_zones[terminal_id]) == 1
-            for terminal_id in terminal_unit_id_list
-        ):
-            sys_found = False
-            for sys_check in baseline_system_type_checks:
-                hvac_sys = sys_check(
-                    rmi_b, hvac_b_id, terminal_unit_id_list, zone_id_list
-                )
 
-                if hvac_sys != HVAC_SYS.UNMATCHED:
-                    baseline_hvac_system_dict[hvac_sys].append(hvac_b_id)
-                    sys_found = True
-                    # break # TODO: This line must be uncommented before we ship the software. The reason why we commented this line is because an edge case HVAC system could (potentially) match multiple HVAC basseline systems, which require RCT developers to refine the `is_baseline_system` logic.
+        sys_found = False
+        for sys_check in baseline_system_type_checks:
+            hvac_sys = sys_check(rmi_b, hvac_b_id, terminal_unit_id_list, zone_id_list)
 
-            assert_(
-                sys_found,
-                f"Error: HVAC {hvac_b_id} does not match any baseline system type.",
-            )
+            if hvac_sys != HVAC_SYS.UNMATCHED:
+                baseline_hvac_system_dict[hvac_sys].append(hvac_b_id)
+                sys_found = True
+                # break # TODO: This line must be uncommented before we ship the software. The reason why we commented this line is because an edge case HVAC system could (potentially) match multiple HVAC basseline systems, which require RCT developers to refine the `is_baseline_system` logic.
+
+        assert_(
+            sys_found,
+            f"Error: HVAC {hvac_b_id} does not match any baseline system type.",
+        )
 
     return baseline_hvac_system_dict
