@@ -46,7 +46,7 @@ test_short_help_text = (
 @click.option("--ruleset", "-rs", multiple=False, default="ashrae9012019")
 @click.argument("section", type=click.STRING, required=False)
 def run_test(ruleset, section=None):
-    print(f"software test workflow for section {section}")
+    print(f"software test workflow for ruleset {ruleset}")
     if ruleset == RuleSet.ASHRAE9012019_RULESET:
         outcome_list = run_ashrae9012019_tests(section)
         if section is None:
