@@ -65,7 +65,7 @@ def get_building_scc_window_wall_ratios_dict(climate_zone, building):
     total_semi_exterior_wall_area = ZERO.AREA
 
     # Loop through all the surfaces in the building
-    for surface in find_all("$..surfaces[*]", building):
+    for surface in find_all("$.building_segments[*].zones[*].surfaces[*]", building):
         # surface conditioning category
         scc = scc_dict[surface["id"]]
 
