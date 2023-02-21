@@ -12,70 +12,73 @@
 
 1. get_hvac_zone_list_w_area()  
 2. zones_with_computer_room_dict_x()  
-3. normalize_interior_lighting_schedules()  
-4. normalize_misc_equipment_schedules()  
 
 ## Logic:   
 - Create RMI object from RMI function input (RMI = function input): `X_RMI = RMI` 
 - Create dictionary incuding all zones with at least one computer room: `zone_computer_room_dict = zones_with_computer_room_dict_x(X_RMI)`  
-- Create list of zones with at least one computer room: `zone_with_computer_room_list = zone_computer_room_dict.keys()`  
+- Create list of zones with at least one computer room: `zone_with_computer_room_list = list(zone_computer_room_dict.keys())`    
 - Get dictionary list of zones and the total floor area served by each HVAC system: `hvac_zone_list_w_area_dict_x = get_hvac_zone_list_w_area (X_RMI)`
 - For each hvac_x in the X_RMI: `for hvac_x in X_RMI...HeatingVentilationAirConditioningSystem:`
-    - Get the total floor area served by the hvac system: `hvac_sys_total_floor_area_x = hvac_zone_list_w_area_dict_x[hvac_x.id]["TOTAL_AREA"]`
     - Reset hvac system includes computer room boolean variable: `hvac_system_serves_computer_room_space = FALSE` 
-    - Reset hvac_sys_computer_room_floor_area variable: `hvac_sys_computer_room_floor_area = 0`
-    - Get list of zones served by hvac_x: `hvac_zone_list_x = hvac_zone_list_w_area_dict_x[hvac_x.id]["ZONE_LIST"]`
+    - Reset total_Wattage_across_hvac_sys: `total_Wattage_across_hvac_sys = 0`  
+    - Reset total_Wattage_across_hvac_sys_for_computer_room: `total_Wattage_across_hvac_sys_for_computer_room = 0`  
+    - Get list of zones served by hvac_x: `hvac_zone_list_x = hvac_zone_list_w_area_dict_x[hvac_x.id]["ZONE_LIST"]`  
     - For each zone_x in hvac_zone_list_x: `for zone_x in hvac_zone_list_x:`
         - Check if the zone is in the list of zones with at least one computer room, if not loop to next zone: `if zone_x in zone_with_computer_room_list:`  
             - Set hvac system serves computer room boolean variable to true: `hvac_system_serves_computer_room_space = TRUE`  
+            - Reset total_Wattage_zone: `total_Wattage_zone = 0`  
             - For each space in zone: `for space_x in zone_x.Spaces:`        
+                - Reset space_is_a_computer_room to false: `space_is_a_computer_room = false`  
+                - Reset total_Wattage_space: `total_Wattage_space = 0`  
                 - Get the area (ft^2) of the space: `area = space.floor_area`  
-                - Check if space is of type computer room, if yes then set the hvac system has computer room boolean variable to true and add the floor area to the total computer room floor area variable for the hvac system: `if space_x.lighting_space_type in ["COMPUTER_ROOM"]:`
+                - Check if space is of type computer room, if yes then set the space is a computer room boolean variable to true (if lighting space type is undefined it will always be false - maybe we should check is misc is above 20 W/sf if this is undefined?): `if space_x.lighting_space_type in ["COMPUTER_ROOM"]: space_is_a_computer_room = true`  
                 
-                We should actually probably be looking at the design day schedules for this. 
-                
-                Occupany schedule check:  
+                NOTE: Design day schedules used, these should have the same value for all hours (except for dwelling units which are irrelevant here) so no need to find the coincident peak across the schedules. No need to even find the peak but did just in case there is an odd value in the schedule.
+
+                Occupany Wattage calculation: 
                 - Get the multiplier schedule: `multiplier_sch = get_component_by_id(B_RMI,space.occupant_multiplier_schedule)`    
-                - Get the maximum value in the mulitplier schedule: `max_sch = max(multiplier_sch)`  
+                - Get the design_cooling_multiplier_schedule: `design_cooling_multiplier_sch = multiplier_sch.cooling_design_day_sequence`  
+                - Get the maximum value in the schedule (the schedule should have this value for every hour): `max_sch = max(design_cooling_multiplier_sch)`  
                 - Get the number of occupant: `num_occ = space.number_of_occupants`  
                 - Get the occupant sensible heat gain per occupant: `occ_gain (Watts per occupant) = space.occupant_sensible_heat_gain`  
-                - Calculate the peak Wattage heat gain: `peak_occ_heat_gain = max_sch * num_occ * occ_gain`  
-
-                Conduct checks for the interior lighting objects:  
+                - Calculate the peak design Wattage heat gain: `peak_occ_heat_gain = max_sch * num_occ * occ_gain`  
+                - Add to the running Wattage total for the space: `total_Wattage_space = total_Wattage_space + peak_occ_heat_gain`  
+                    
+                Interior lighting Wattage calculation: 
                 - Get list of interior lighting objects: `lgting_obj_list = list(space.interior_lighting)`   
-                - Get a normalized interior lighitng schedule for the space (do not adjust for controls): `norm_sch = normalize_interior_lighting_schedules(space_x,False)`  
-                - Get the maximum value in the schedule, W/ft^2 (please check if I understoof the normalize_interior_lighting_schedules function correctly): `max_W_sf = max(norm_sch)`  
-                - Calcuate max Wattage
+                - Reset the temp_total_power variable: `temp_total_power = 0`  
+                - For each interior lighting object: `for int_lgt in lgting_obj_list:`  
+                    - Get the multiplier schedule: `multiplier_sch = get_component_by_id(B_RMI,int_lgt.lighting_multiplier_schedule)`  
+                    - Get the design_cooling_multiplier_schedule: `design_cooling_multiplier_sch = multiplier_sch.cooling_design_day_sequence`  
+                    - Get the maximum value in the schedule (the schedule should have this value for every hour): `max_sch = max(design_cooling_multiplier_sch)`  
+                    - Get the power per area for the lighting object: `lgt_W_sf = int_lgt.power_per_area`  
+                    - Calculate the power for the lighting object including schedule fraction: `lgt_W = lgt_W_sf * area * max_sch `  
+                    - Add to total across the space: `temp_total_power = temp_total_power + lgt_W`  
+                - Add to the running Wattage total for the space: `total_Wattage_space = total_Wattage_space + temp_total_power`  
                     
-                    
-
-
-
-                Conduct checks for the miscellaneous objects:  
-                - Get list of misc equipment objects: `misc_obj_list = list(space.miscellaneous_equipment)`      
-                - Reset misc_pass_cooling boolean variable: `misc_pass_cooling = true`   
+                Miscellaneous Wattage calculation:  
+                - Get list of misc equipment objects: `misc_obj_list = list(space.miscellaneous_equipment)`        
+                - Reset the temp_total_power variable: `temp_total_power = 0`                  
                 - For each misc equipment object: `for misc in misc_obj_list:`  
                     - Get the multiplier schedule: `multiplier_sch = get_component_by_id(B_RMI,misc.multiplier_schedule)`  
                     - Get the design_cooling_multiplier_schedule: `design_cooling_multiplier_sch = multiplier_sch.cooling_design_day_sequence`  
-                    - Get the get_most_used_weekday_hourly_schedule (this will be a list with 24 values for each hour of a day): `most_used_weekday_hourly_schedule = get_most_used_weekday_hourly_schedule(B_RMI, ASHRAE229,multiplier_sch)`  
-                    - Reset y = 0: `y = 0`
-                    - Check if each value in the design_cooling_multiplier_sch matches the corresponding hourly value in the get_most_used_weekday_hourly_schedule: `for x in list(design_cooling_multiplier_sch):`
-                        - Check if the hourly values are equal between the design_cooling_multiplier_sch and the get_most_used_weekday_hourly_schedule : `if most_used_weekday_hourly_schedule[y] != x: misc_pass_cooling = false`  
-                        - Add 1 to y: `y = y +1`  
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    - Get space floor_area: `space_floor_area = space_x.floor_area`
-                    - Add floor area to hvac_sys_computer_room_floor_area: `hvac_sys_computer_room_floor_area = hvac_sys_computer_room_floor_area + space_floor_area`   
-        - Check if the hvac system serves computer room boolean variable equals TRUE, if true then proceed otherwise loop to next hvac system: `if hvac_system_serves_computer_room_space == TRUE:`
-            - Check if computer room floor area is greater than 50% of the total floor area served by the hvac system, if yes then carry on with the check: `if hvac_sys_computer_room_floor_area/hvac_sys_total_floor_area_x > 0.5:` 
-                - Add to the list of hvac systems, hvac_systems_primarily_serving_comp_rooms_list_x: `hvac_systems_primarily_serving_comp_rooms_list_x = hvac_systems_primarily_serving_comp_rooms_list_x.append(hvac_x)`          
+                    - Get the maximum value in the schedule (the schedule should have this value for every hour): `max_sch = max(design_cooling_multiplier_sch)`  
+                    - Get the power for the misc object: `misc_power = misc.power`  
+                    - Calculate the power for the misc object including schedule fraction and sensible fraction: `misc_W = misc_power * max_sch * misc.sensible_fraction `  
+                    - Add to total across the space: `temp_total_power = temp_total_power + misc_W`  
+                - Add to the running Wattage total for the space: `total_Wattage_space = total_Wattage_space + temp_total_power`  
+            
+            - Add to the total Wattage across all spaces serving zone: `total_Wattage_zone = total_Wattage_zone + total_Wattage_space`    
+            - Check if the space serves a computer room: `if space_is_a_computer_room == true: total_Wattage_including_computer_rooms_only_zone = total_Wattage_including_computer_rooms_only_zone + total_Wattage_space`                     
+        
+        - Add to the total Wattage across all zones: `hvac_system_serves_computer_room_space = total_Wattage_across_hvac_sys + total_Wattage_zone`  
+        - Add to the total Wattage across all zones including only computer rooms spaces: `total_Wattage_across_hvac_sys_for_computer_room = total_Wattage_across_hvac_sys_for_computer_room + total_Wattage_including_computer_rooms_only_zone`  
+    - Check if the hvac system is associated with a computer room and if so that the computer room Wattage is more than 50% of the total Wattage: `if hvac_system_serves_computer_room_space == true and total_Wattage_across_hvac_sys_for_computer_room/hvac_system_serves_computer_room_space > 50%:         hvac_systems_primarily_serving_comp_rooms_list_x.append(hvac_x)`          
 
 **Returns** `return hvac_systems_primarily_serving_comp_rooms_list_x`
+
+**Notes/Questions:**   
+1. Interpretation: When computer rooms account for more than 50% of the cooling load of an HVAC system, such HVAC system is considered “primarily serving computer rooms” and is subject to the exception 3 to Table G3.1#4, Proposed Building Performance column HVAC Fans Schedules rule. 
+2. Jason plans to add .cooling_design_day_sequence to the schema.  
 
 **[Back](../_toc.md)**
