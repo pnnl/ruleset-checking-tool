@@ -1,12 +1,12 @@
 # get_HVAC_systems_primarily_serving_comp_rooms  
 
-**Description:** Returns a list of HVAC systems in which the computer room space loads are the dominant loads for an HVAC system serving multiple spaces including computer rooms and non computer rooms.  
+**Description:** Returns a list of HVAC systems in which the computer room space loads are the dominant loads for an HVAC system serving multiple spaces including computer rooms and non computer rooms (i.e., computer room spaces accounr for greater than 50% of cooling load).  
 
 **Inputs:**  
-- **U,B, or P-RMI**: To develop a list of HVAC systems in which greater than 50% of the area served by the HVAC system is computer room space.    
+- **U,B, or P-RMI**: To develop a list of HVAC systems in which the computer room space loads are the dominant loads for an HVAC system serving multiple spaces including computer rooms and non computer rooms (i.e., computer room spaces accounr for greater than 50% of cooling load). 
 
 **Returns:**  
-- **hvac_systems_primarily_serving_comp_rooms_list_x**: A list of hvac systems in which greater than 50% of the area served by the HVAC system is computer room space.    
+- **hvac_systems_primarily_serving_comp_rooms_list_x**: A list of hvac systems in which the computer room space loads are the dominant loads for an HVAC system serving multiple spaces including computer rooms and non computer rooms (i.e., computer room spaces accounr for greater than 50% of cooling load). 
  
 **Function Call:**  
 
