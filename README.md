@@ -55,6 +55,7 @@ Now tests can be run by first installing dependencies and then running pytest.
 1. `pipenv install --dev`
 2. `pipenv run pytest`
     - To see a coverage report, use `pipenv run pytest --cov`
+    - To have pytest watch for file changes, use `pipenv run ptw`
 
 You can also package with pipenv to test the CLI tool.
 1. `pipenv install '-e .'`
