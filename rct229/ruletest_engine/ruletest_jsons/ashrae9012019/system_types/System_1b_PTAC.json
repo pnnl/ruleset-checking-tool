@@ -58,6 +58,12 @@
                     "loop": "Purchased HW Loop 1",
                     "type": "HOT_WATER"
                 }
+            ],
+            "fluid_loops": [
+                {
+                    "id": "Purchased HW Loop 1",
+                    "type": "HEATING"
+                }
             ]
         }
     ]

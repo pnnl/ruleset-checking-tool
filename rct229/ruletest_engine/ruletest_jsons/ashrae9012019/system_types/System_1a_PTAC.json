@@ -66,6 +66,16 @@
                     "loop": "Purchased CHW Loop 1",
                     "type": "CHILLED_WATER"
                 }
+            ],
+            "fluid_loops": [
+                {
+                    "id": "Boiler Loop 1",
+                    "type": "HEATING"
+                },
+                {
+                    "id": "Purchased CHW 1",
+                    "type": "COOLING"
+                }
             ]
         }
     ]
