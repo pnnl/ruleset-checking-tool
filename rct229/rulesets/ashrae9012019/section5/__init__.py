@@ -1,8 +1,9 @@
 # Add all available rule modules in __all__
 import importlib
 
+# TODO: Fix section5rule2 and section5rule49 - they currently cause exceptions
 __all__ = [
-    "section5rule2",
+    # "section5rule2",
     "section5rule3",
     "section5rule5",
     "section5rule8",
@@ -28,7 +29,7 @@ __all__ = [
     "section5rule46",
     "section5rule47",
     "section5rule48",
-    "section5rule49",
+    # "section5rule49",
 ]
 
 
