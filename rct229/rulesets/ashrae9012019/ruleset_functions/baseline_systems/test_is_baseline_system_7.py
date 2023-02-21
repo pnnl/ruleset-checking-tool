@@ -1,15 +1,10 @@
-<<<<<<< HEAD:rct229/ruleset_functions/baseline_systems/test_is_baseline_system_7.py
-from rct229.ruleset_functions.baseline_systems.baseline_hvac_test_util import (
+from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_hvac_test_util import (
     load_system_test_file,
 )
-from rct229.ruleset_functions.baseline_systems.baseline_system_util import HVAC_SYS
-from rct229.ruleset_functions.baseline_systems.is_baseline_system_7 import (
-=======
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_system_util import (
     HVAC_SYS,
 )
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.is_baseline_system_7 import (
->>>>>>> 41cdcccec60138acd75aa98a66005df81aa3cfe6:rct229/rulesets/ashrae9012019/ruleset_functions/baseline_systems/test_is_baseline_system_7.py
     is_baseline_system_7,
 )
 from rct229.schema.validate import schema_validate_rmr
