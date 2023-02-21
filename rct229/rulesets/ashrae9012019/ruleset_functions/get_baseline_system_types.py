@@ -99,7 +99,10 @@ def get_baseline_system_types(rmi_b):
     )
     dict_with_terminal_units_and_zones = get_dict_with_terminal_units_and_zones(rmi_b)
 
-    for hvac_b in find_all("$..heating_ventilating_air_conditioning_systems[*]", rmi_b):
+    for hvac_b in find_all(
+        "$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*]",
+        rmi_b,
+    ):
         hvac_b_id = hvac_b["id"]
         terminal_unit_id_list = dict_of_zones_and_terminal_units_served_by_hvac_sys[
             hvac_b_id
