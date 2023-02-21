@@ -3,9 +3,6 @@ from unittest.mock import patch
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_building_scc_window_wall_ratios_dict import (
     get_building_scc_window_wall_ratios_dict,
 )
-from rct229.rulesets.ashrae9012019.ruleset_functions.get_opaque_surface_type import (
-    OpaqueSurfaceType as OST,
-)
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_surface_conditioning_category_dict import (
     SurfaceConditioningCategory as SCC,
 )
@@ -150,15 +147,7 @@ def test__TEST_RMD__is_valid():
 
 
 @patch(
-<<<<<<< HEAD:rct229/ruleset_functions/get_building_scc_window_wall_ratios_dict_test.py
-    "rct229.ruleset_functions.get_building_scc_window_wall_ratios_dict.get_surface_conditioning_category_dict",
-=======
-    "rct229.rulesets.ashrae9012019.ruleset_functions.get_building_scc_window_wall_ratios_dict.get_opaque_surface_type",
-    return_value=OST.ABOVE_GRADE_WALL,
-)
-@patch(
     "rct229.rulesets.ashrae9012019.ruleset_functions.get_building_scc_window_wall_ratios_dict.get_surface_conditioning_category_dict",
->>>>>>> 41cdcccec60138acd75aa98a66005df81aa3cfe6:rct229/rulesets/ashrae9012019/ruleset_functions/get_building_scc_window_wall_ratios_dict_test.py
     return_value=TEST_SCC_DICT,
 )
 def test__get_building_scc_skylight_roof_ratios_dict(mock_get_opaque_surface_type):
