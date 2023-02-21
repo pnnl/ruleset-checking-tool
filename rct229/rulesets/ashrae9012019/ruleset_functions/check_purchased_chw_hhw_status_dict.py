@@ -30,12 +30,17 @@ def check_purchased_chw_hhw_status_dict(rmi_b):
         "purchased_heating": False,
     }
 
-    external_fluid_sources = find_all("$..external_fluid_source[*]", rmi_b)
+    external_fluid_sources = find_all("$.external_fluid_source[*]", rmi_b)
     if not external_fluid_sources:
         return purchased_chw_hhw_status_dict
 
-    hvac_systems = find_all("$..heating_ventilating_air_conditioning_systems[*]", rmi_b)
-    terminals = find_all("$..terminals[*]", rmi_b)
+    hvac_systems = find_all(
+        "$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*]",
+        rmi_b,
+    )
+    terminals = find_all(
+        "$.buildings[*].building_segments[*].zones[*].terminals[*]", rmi_b
+    )
     for external_fluid_source in external_fluid_sources:
         if (
             getattr_(external_fluid_source, "external_fluid_source", "type")
