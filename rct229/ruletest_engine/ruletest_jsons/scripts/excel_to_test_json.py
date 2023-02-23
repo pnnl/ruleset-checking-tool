@@ -12,8 +12,8 @@ from rct229.schema.schema_utils import *
 
 # ---------------------------------------USER INPUTS---------------------------------------
 
-spreadsheet_name = "envelope_tcd_master.xlsx"
-json_name = "envelope_tests.json"
+spreadsheet_name = "boiler_tcd_master.xlsx"
+json_name = "boiler_tests.json"
 sheet_name = "TCDs"
 
 # --------------------------------------SCRIPT STARTS--------------------------------------
