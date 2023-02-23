@@ -12,9 +12,10 @@ from rct229.schema.schema_utils import *
 
 # ---------------------------------------USER INPUTS---------------------------------------
 
-spreadsheet_name = "envelope_tcd_master.xlsx"
-json_name = "envelope_tests.json"
+spreadsheet_name = "boiler_tcd_master.xlsx"
+json_name = "boiler_tests.json"
 sheet_name = "TCDs"
+ruleset_doc = "ashrae9012019"
 
 # --------------------------------------SCRIPT STARTS--------------------------------------
 
@@ -328,7 +329,7 @@ def create_dictionary_from_excel(spreadsheet_name, sheet_name):
     return json_dict
 
 
-def create_test_json_from_excel(spreadsheet_name, sheet_name, json_name):
+def create_test_json_from_excel(spreadsheet_name, sheet_name, json_name, ruleset_doc):
     """Converts a ruletest JSON spreadsheet into a ruletest JSON. The generated JSON is output to
     ./rct229/ruletest_engine/ruletest_jsons directory
 
@@ -347,12 +348,16 @@ def create_test_json_from_excel(spreadsheet_name, sheet_name, json_name):
 
         The name of the resulting ruletest JSON file
 
+    ruleset_doc : str
+
+        The name of the ruleset folder
+
     """
 
     file_dir = os.path.dirname(__file__)
 
     # Define output json file path
-    json_file_path = os.path.join(file_dir, "..", json_name)
+    json_file_path = os.path.join(file_dir, "..", ruleset_doc, json_name)
 
     json_dict = create_dictionary_from_excel(spreadsheet_name, sheet_name)
 
@@ -525,7 +530,7 @@ def update_unit_convention_record(spreadsheet_name, sheet_name):
 
 
 # Create a test JSON for a given ruletest spreadsheet
-create_test_json_from_excel(spreadsheet_name, sheet_name, json_name)
+create_test_json_from_excel(spreadsheet_name, sheet_name, json_name, ruleset_doc)
 
 # Parse ruletest spreadsheet for unit types and update the unit conventions in unit_convention.json for:
 # -RMR (typically SI)

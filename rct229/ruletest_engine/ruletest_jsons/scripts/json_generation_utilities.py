@@ -383,7 +383,7 @@ def disaggregate_master_ruletest_json(master_json_name, ruleset_doc):
         # Initialize ruletest json name
         json_name = f"rule_{section}_{rule}.json"
         ruletest_json_name = os.path.join(f"section{section}", f"{json_name}")
-        json_file_path = os.path.join(file_dir, "..", ruletest_json_name)
+        json_file_path = os.path.join(file_dir, "..", ruleset_doc, ruletest_json_name)
 
         # Dump JSON to string for writing
         json_string = json.dumps(rule_dictionary, indent=4)
