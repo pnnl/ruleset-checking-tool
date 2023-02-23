@@ -3,9 +3,6 @@ from unittest.mock import patch
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_building_scc_window_wall_ratios_dict import (
     get_building_scc_window_wall_ratios_dict,
 )
-from rct229.rulesets.ashrae9012019.ruleset_functions.get_opaque_surface_type import (
-    OpaqueSurfaceType as OST,
-)
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_surface_conditioning_category_dict import (
     SurfaceConditioningCategory as SCC,
 )
@@ -32,6 +29,7 @@ TEST_RMR = {
                                 {
                                     "id": "surface_1_1_1",
                                     "area": 16,  # m2
+                                    "tilt": 90,  # degrees
                                     "subsurfaces": [
                                         # DOOR with not (glazed_area > opaque_area)
                                         # window_area = 0
@@ -63,6 +61,7 @@ TEST_RMR = {
                                 {
                                     "id": "surface_1_1_2",
                                     "area": 12,  # m2
+                                    "tilt": 90,  # degrees
                                     "subsurfaces": [
                                         # Not a DOOR
                                         # window_area = 3
@@ -77,6 +76,7 @@ TEST_RMR = {
                                 {
                                     "id": "surface_1_1_3",
                                     "area": 12,  # m2
+                                    "tilt": 90,  # degrees
                                     "subsurfaces": [
                                         # Not a DOOR
                                         # window_area = 3
@@ -91,6 +91,7 @@ TEST_RMR = {
                                 {
                                     "id": "surface_1_1_4",
                                     "area": 12,  # m2
+                                    "tilt": 90,  # degrees
                                     "subsurfaces": [
                                         # Not a DOOR
                                         # window_area = 3
@@ -100,6 +101,18 @@ TEST_RMR = {
                                             "glazed_area": 3,
                                         },
                                     ],
+                                },
+                                # Mock for SCC.UNREGULATED and OST.ABOVE_GRADE_WALL
+                                {
+                                    "id": "surface_1_1_5",
+                                    "area": 100,  # m2
+                                    "tilt": 90,  # degrees
+                                },
+                                # Mock for SCC.UNREGULATED and OST.ROOF
+                                {
+                                    "id": "surface_1_1_6",
+                                    "area": 100,  # m2
+                                    "tilt": 0,  # degrees
                                 },
                             ],
                             "thermostat_cooling_setpoint_schedule": "tcs_sched_1",
@@ -117,6 +130,8 @@ TEST_SCC_DICT = {
     "surface_1_1_2": SCC.EXTERIOR_NON_RESIDENTIAL,
     "surface_1_1_3": SCC.EXTERIOR_MIXED,
     "surface_1_1_4": SCC.SEMI_EXTERIOR,
+    "surface_1_1_5": SCC.UNREGULATED,
+    "surface_1_1_6": SCC.UNREGULATED,
 }
 
 TEST_RMR_12 = {"id": "229_01", "ruleset_model_instances": [TEST_RMR]}
@@ -132,16 +147,10 @@ def test__TEST_RMD__is_valid():
 
 
 @patch(
-    "rct229.rulesets.ashrae9012019.ruleset_functions.get_building_scc_window_wall_ratios_dict.get_opaque_surface_type",
-    return_value=OST.ABOVE_GRADE_WALL,
-)
-@patch(
     "rct229.rulesets.ashrae9012019.ruleset_functions.get_building_scc_window_wall_ratios_dict.get_surface_conditioning_category_dict",
     return_value=TEST_SCC_DICT,
 )
-def test__get_building_scc_skylight_roof_ratios_dict(
-    mock_get_surface_conditioning_category_dict, mock_get_opaque_surface_type
-):
+def test__get_building_scc_skylight_roof_ratios_dict(mock_get_opaque_surface_type):
     assert get_building_scc_window_wall_ratios_dict(CLIMATE_ZONE, TEST_BUILDING) == {
         SCC.EXTERIOR_RESIDENTIAL: 0.5,
         SCC.EXTERIOR_NON_RESIDENTIAL: 0.25,
