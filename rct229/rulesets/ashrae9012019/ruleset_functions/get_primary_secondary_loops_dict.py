@@ -64,18 +64,14 @@ def get_primary_secondary_loops_dict(rmi_b):
     ]
     # Initialize variables
     primary_loops = []
-    tmp_primary_secondary_loops_dict = dict()
+    tmp_primary_secondary_loops_dict = {}
 
     # Iterate through cooling type fluid loops
     for chilled_fluid_loop in find_all(
         f'fluid_loops[*][?(@.type="{FLUID_LOOP.COOLING}")]', rmi_b
     ):
         cfl_id = chilled_fluid_loop["id"]
-        if cfl_id in chiller_loop_ids and cfl_id in non_process_chw_coil_loop_ids:
-            # No loop in baseline shall be
-            tmp_primary_secondary_loops_dict = dict()
-            break
-        elif cfl_id in chiller_loop_ids:
+        if cfl_id in chiller_loop_ids:
             if all(
                 child_loop["id"] in non_process_chw_coil_loop_ids
                 for child_loop in getattr_(
@@ -83,6 +79,8 @@ def get_primary_secondary_loops_dict(rmi_b):
                 )
             ):
                 primary_loops.append(chilled_fluid_loop)
+        else:
+            tmp_primary_secondary_loops_dict = {}
 
     for primary_loop in primary_loops:
         tmp_primary_secondary_loops_dict[primary_loop["id"]] = find_all(
