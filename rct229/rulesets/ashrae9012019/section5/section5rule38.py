@@ -65,46 +65,42 @@ class Section5Rule38(RuleDefinitionListIndexedBase):
                 get_building_scc_skylight_roof_ratios_dict(climate_zone, building_b)
             )
 
-            target_exterior_2per_residential = table_G34_lookup(
+            target_shgc_2per_residential = table_G34_lookup(
                 climate_zone,
                 "EXTERIOR RESIDENTIAL",
                 "SKYLIGHT",
                 skylit_wwr=0.0,
             )["solar_heat_gain_coefficient"]
 
-            target_exterior_above2_residential = table_G34_lookup(
+            target_shgc_above2_residential = table_G34_lookup(
                 climate_zone,
                 "EXTERIOR RESIDENTIAL",
                 "SKYLIGHT",
                 skylit_wwr=0.021,
             )["solar_heat_gain_coefficient"]
 
-            target_exterior_2per_nonresidential = table_G34_lookup(
+            target_shgc_2per_nonresidential = table_G34_lookup(
                 climate_zone,
                 "EXTERIOR NON-RESIDENTIAL",
                 "SKYLIGHT",
                 skylit_wwr=0.021,
             )["solar_heat_gain_coefficient"]
 
-            target_exterior_above2_nonresidential = table_G34_lookup(
+            target_shgc_above2_nonresidential = table_G34_lookup(
                 climate_zone,
                 "EXTERIOR NON-RESIDENTIAL",
                 "SKYLIGHT",
                 skylit_wwr=0.021,
             )["solar_heat_gain_coefficient"]
 
-            return building_scc_skylight_roof_ratios_dict_b[
-                SCC.EXTERIOR_MIXED
-            ] > 0 and (
-                (target_exterior_2per_residential != target_exterior_above2_residential)
-                or (
-                    target_exterior_2per_nonresidential
-                    != target_exterior_above2_nonresidential
-                )
-                or (
-                    target_exterior_2per_residential
-                    != target_exterior_2per_nonresidential
-                )
+            return all(
+                [
+                    building_scc_skylight_roof_ratios_dict_b[SCC.EXTERIOR_MIXED] > 0,
+                    target_shgc_2per_residential == target_shgc_above2_residential,
+                    target_shgc_2per_nonresidential
+                    == target_shgc_above2_nonresidential,
+                    target_shgc_2per_residential == target_shgc_2per_nonresidential,
+                ]
             )
 
         def create_data(self, context, data=None):
@@ -209,17 +205,13 @@ class Section5Rule38(RuleDefinitionListIndexedBase):
                     subsurface_b = context.baseline
 
                     return (
-                        subsurface_b.get("classification")
-                        == SURFACE_CLASSIFICATION.DOOR
-                        and subsurface_b.get("glazed_area")
-                        > subsurface_b.get("opaque_area")
-                    ) or subsurface_b.get(
-                        "classification"
-                    ) != SURFACE_CLASSIFICATION.DOOR
+                        subsurface_b["classification"] == SURFACE_CLASSIFICATION.DOOR
+                        and subsurface_b["glazed_area"] > subsurface_b["opaque_area"]
+                    ) or subsurface_b["classification"] != SURFACE_CLASSIFICATION.DOOR
 
                 def get_calc_vals(self, context, data=None):
                     subsurface_b = context.baseline
-                    subsurface_b_shgc = subsurface_b["solar_heat_gain_coefficient"]
+                    subsurface_shgc_b = subsurface_b["solar_heat_gain_coefficient"]
 
                     subsuface_type_b = data["surface_conditioning_category_dict"][
                         data["surface_id_b"]
@@ -240,12 +232,12 @@ class Section5Rule38(RuleDefinitionListIndexedBase):
                         target_shgc = target_shgc_semiheated_b
 
                     return {
-                        "subsurface_b_shgc": subsurface_b_shgc,
+                        "subsurface_shgc_b": subsurface_shgc_b,
                         "target_shgc": target_shgc,
                     }
 
                 def rule_check(self, context, calc_vals=None, data=None):
-                    subsurface_b_shgc = calc_vals["subsurface_b_shgc"]
                     target_shgc = calc_vals["target_shgc"]
+                    subsurface_shgc_b = calc_vals["subsurface_shgc_b"]
 
-                    return std_equal(subsurface_b_shgc, target_shgc)
+                    return std_equal(target_shgc, subsurface_shgc_b)
