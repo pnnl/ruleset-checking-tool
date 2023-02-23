@@ -3,15 +3,15 @@
 
 **Rule ID:** 21-2  
 **Rule Description:** For purchased HW/steam in the proposed model, the baseline shall have the same number of pumps as proposed
-**Rule Assertion:** B-RMR = expected value  
+**Rule Assertion:** B-RMI = expected value  
 **Appendix G Section:** Section 21 Boiler  
-**Appendix G Section Reference:** Section G3.1.1.1 & G3.1.1.3.1 Building System-Specific Modeling Requirements for the Baseline model  
-**Schema Version:** 0.0.25
+**Appendix G Section Reference:** Section G.3.1.1.3.4 On-Site Distribution Pumps  
+**Schema Version:** 0.0.25 
 
-**Applicability:** All required data elements exist for B_RMR  
+**Applicability:** All required data elements exist for B_RMI  
 **Applicability Checks:**  
 
-1. P-RMR is modeled with purchased hot water or steam.
+1. P-RMI is modeled with purchased hot water or steam.
 
 **Manual Check:** Yes  
 **Evaluation Context:** Building  
@@ -23,17 +23,17 @@
 
 **Applicability Checks:**
 
-- Check if P-RMR is modeled with purchased chilled water or purchased hot water/steam: `purchased_chw_hhw_status_dict = check_purchased_chw_hhw(P_RMR)`
+- Check if P-RMI is modeled with purchased chilled water or purchased hot water/steam: `purchased_chw_hhw_status_dict = check_purchased_chw_hhw(P_RMI)`
 
-  - If P-RMR is not modeled with purchased hot water/steam, rule is not applicable to B-RMR: `if NOT purchased_chw_hhw_status_dict["PURCHASED_HEATING"]: RULE_NOT_APPLICABLE`
+  - If P-RMI is not modeled with purchased hot water/steam, rule is not applicable to B-RMI: `if NOT purchased_chw_hhw_status_dict["PURCHASED_HEATING"]: RULE_NOT_APPLICABLE`
 
-  - Else, P-RMR is modeled with purchased hot water/steam, continue to rule logic: `else: CHECK_RULE_LOGIC`
+  - Else, P-RMI is modeled with purchased hot water/steam, continue to rule logic: `else: CHECK_RULE_LOGIC`
 
 ## Rule Logic:  
 
 
 **Rule Assertion:**
 
-- Case 1:  `UNDETERMINED and raise_message "P-RMR IS MODELED WITH PURCHASED HOT WATER OR STEAM. VERIFY B-RMR HAS THE SAME NUMBER OF PUMPS AS THE PROPOSED."`
+- Case 1:  `UNDETERMINED and raise_message "P-RMI IS MODELED WITH PURCHASED HOT WATER OR STEAM. VERIFY B-RMI HAS THE SAME NUMBER OF PUMPS AS THE PROPOSED."`
 
 **[Back](../_toc.md)**
