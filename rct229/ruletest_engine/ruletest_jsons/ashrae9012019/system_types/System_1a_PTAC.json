@@ -20,33 +20,21 @@
                                             "id": "PTAC Terminal 1",
                                             "is_supply_ducted": false,
                                             "type": "CONSTANT_AIR_VOLUME",
-                                            "served_by_heating_ventilating_air_conditioning_system": "PTAC 1"
+                                            "served_by_heating_ventilating_air_conditioning_system": "PTAC 1",
+                                            "heating_source": "HOT_WATER",
+                                            "heating_from_loop": "Boiler Loop 1",
+                                            "cooling_source": "CHILLED_WATER",
+                                            "cooling_from_loop": "Purchased CHW Loop 1",
+                                            "fan": {
+                                                "id": "Fan 1"
+                                            }
                                         }
                                     ]
                                 }
                             ],
                             "heating_ventilating_air_conditioning_systems": [
                                 {
-                                    "id": "PTAC 1",
-                                    "cooling_system": {
-                                        "id": "CHW Coil 1",
-                                        "cooling_system_type": "FLUID_LOOP",
-                                        "chilled_water_loop": "Purchased CHW 1"
-                                    },
-                                    "heating_system": {
-                                        "id": "HHW Coil 1",
-                                        "heating_system_type": "FLUID_LOOP",
-                                        "hot_water_loop": "Boiler Loop 1"
-                                    },
-                                    "fan_system": {
-                                        "id": "CAV Fan System 1",
-                                        "fan_control": "CONSTANT",
-                                        "supply_fans": [
-                                            {
-                                                "id": "Supply Fan 1"
-                                            }
-                                        ]
-                                    }
+                                    "id": "PTAC 1"
                                 }
                             ]
                         }
@@ -65,6 +53,16 @@
                     "id": "Purchased CHW 1",
                     "loop": "Purchased CHW Loop 1",
                     "type": "CHILLED_WATER"
+                }
+            ],
+            "fluid_loops": [
+                {
+                    "id": "Boiler Loop 1",
+                    "type": "HEATING"
+                },
+                {
+                    "id": "Purchased CHW Loop 1",
+                    "type": "COOLING"
                 }
             ]
         }
