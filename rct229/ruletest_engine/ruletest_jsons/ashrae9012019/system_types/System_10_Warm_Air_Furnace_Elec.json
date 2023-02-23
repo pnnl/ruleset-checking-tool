@@ -21,6 +21,7 @@
                                             "is_supply_ducted": true,
                                             "type": "CONSTANT_AIR_VOLUME",
                                             "served_by_heating_ventilating_air_conditioning_system": "System 10",
+                                            "heating_source": "ELECTRIC",
                                             "fan": {
                                                 "id": "Terminal Fan 1"
                                             }

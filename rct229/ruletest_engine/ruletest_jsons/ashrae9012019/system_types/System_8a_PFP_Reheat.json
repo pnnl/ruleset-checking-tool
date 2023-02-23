@@ -21,8 +21,11 @@
                                             "is_supply_ducted": true,
                                             "type": "VARIABLE_AIR_VOLUME",
                                             "served_by_heating_ventilating_air_conditioning_system": "System 8",
-                                            "heating_source": "HOT_WATER",
+                                            "heating_source": "ELECTRIC",
                                             "heating_from_loop": "Boiler Loop 1",
+                                            "fan": {
+                                                "id": "Fan 1"
+                                            },
                                             "fan_configuration": "PARALLEL"
                                         }
                                     ]
@@ -37,8 +40,11 @@
                                             "is_supply_ducted": true,
                                             "type": "VARIABLE_AIR_VOLUME",
                                             "served_by_heating_ventilating_air_conditioning_system": "System 8",
-                                            "heating_source": "HOT_WATER",
+                                            "heating_source": "ELECTRIC",
                                             "heating_from_loop": "Boiler Loop 1",
+                                            "fan": {
+                                                "id": "Fan 2"
+                                            },
                                             "fan_configuration": "PARALLEL"
                                         }
                                     ]
@@ -54,8 +60,7 @@
                                     },
                                     "preheat_system": {
                                         "id": "Preheat Coil 1",
-                                        "heating_system_type": "FLUID_LOOP",
-                                        "hot_water_loop": "Boiler Loop 1"
+                                        "heating_system_type": "ELECTRIC_RESISTANCE"
                                     },
                                     "fan_system": {
                                         "id": "VAV Fan System 1",

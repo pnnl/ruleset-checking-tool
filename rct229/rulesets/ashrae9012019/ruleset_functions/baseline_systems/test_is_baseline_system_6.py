@@ -128,7 +128,7 @@ def test__TEST_RMD_baseline_system_6__is_valid():
     ], f"Schema error: {schema_validation_result['error']}"
 
 
-def test_is_baseline_system_6_true():
+def test__is_baseline_system_6__true():
     assert (
         is_baseline_system_6(
             SYS_6_TEST_RMD["ruleset_model_instances"][0],
@@ -140,18 +140,21 @@ def test_is_baseline_system_6_true():
     )
 
 
-def test_is_baseline_system_6_test_json_true():
-    assert is_baseline_system_6(
-        load_system_test_file("System_6_PVAV_Elec_Reheat.json")[
-            "ruleset_model_instances"
-        ][0],
-        "System 6",
-        ["VAV Air Terminal 1"],
-        ["Thermal Zone 1"],
+def test__is_baseline_system_6_test_json__true():
+    assert (
+        is_baseline_system_6(
+            load_system_test_file("System_6_PVAV_Elec_Reheat.json")[
+                "ruleset_model_instances"
+            ][0],
+            "System 6",
+            ["VAV Air Terminal 1"],
+            ["Thermal Zone 1"],
+        )
+        == HVAC_SYS.SYS_6
     )
 
 
-def test_is_baseline_system_6B_true():
+def test__is_baseline_system_6B__true():
     assert (
         is_baseline_system_6(
             SYS_6_TEST_RMD["ruleset_model_instances"][0],
@@ -163,12 +166,15 @@ def test_is_baseline_system_6B_true():
     )
 
 
-def test_is_baseline_system_6_test_json_true():
-    assert is_baseline_system_6(
-        load_system_test_file("System_6b_PVAV_Elec_Reheat.json")[
-            "ruleset_model_instances"
-        ][0],
-        "System 6",
-        ["VAV Air Terminal 1"],
-        ["Thermal Zone 1"],
+def test_is_baseline_system_6__test_json_true():
+    assert (
+        is_baseline_system_6(
+            load_system_test_file("System_6b_PVAV_Elec_Reheat.json")[
+                "ruleset_model_instances"
+            ][0],
+            "System 6",
+            ["VAV Air Terminal 1"],
+            ["Thermal Zone 1"],
+        )
+        == HVAC_SYS.SYS_6B
     )
