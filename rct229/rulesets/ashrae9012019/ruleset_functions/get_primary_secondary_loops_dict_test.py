@@ -67,7 +67,7 @@ TEST_RMD = {
                                         "supply_fans": [{"id": "Supply Fan 1"}],
                                         "return_fans": [{"id": "Return Fan 1"}],
                                     },
-                                }
+                                },
                             ],
                         }
                     ],
@@ -99,6 +99,12 @@ TEST_RMD = {
                     "id": "Chiller Loop 1",
                     "type": "COOLING",
                     "child_loops": [{"id": "Chilled Water Loop 1", "type": "COOLING"}],
+                },
+                {
+                    # Below loop is for testing when chiller fluid loop and non-process chw coil loop are not in the `chiller_loop_ids` and `non_process_chw_coil_loop_ids`
+                    "id": "Chiller Loop 2",
+                    "type": "COOLING",
+                    "child_loops": [{"id": "Chilled Water Loop 2", "type": "COOLING"}],
                 },
             ],
         }

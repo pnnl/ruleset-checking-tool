@@ -71,14 +71,11 @@ def get_primary_secondary_loops_dict(rmi_b):
         f'fluid_loops[*][?(@.type="{FLUID_LOOP.COOLING}")]', rmi_b
     ):
         cfl_id = chilled_fluid_loop["id"]
-        if cfl_id in chiller_loop_ids:
-            if all(
-                child_loop["id"] in non_process_chw_coil_loop_ids
-                for child_loop in getattr_(
-                    chilled_fluid_loop, "FluidLoop", "child_loops"
-                )
-            ):
-                primary_loops.append(chilled_fluid_loop)
+        if cfl_id in chiller_loop_ids and all(
+            child_loop["id"] in non_process_chw_coil_loop_ids
+            for child_loop in getattr_(chilled_fluid_loop, "FluidLoop", "child_loops")
+        ):
+            primary_loops.append(chilled_fluid_loop)
         else:
             tmp_primary_secondary_loops_dict = {}
 
