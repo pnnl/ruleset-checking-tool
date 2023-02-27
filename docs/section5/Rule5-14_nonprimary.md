@@ -33,4 +33,3 @@
       outcome = "UNDETERMINED" and raise_message "<Insert surface_b.id> is a regulated slab-on-grade surface. Conduct a manual check to confirm that Baseline slab-on-grade assemblies conform with assemblies detailed in Appendix A."```  
 
       Case 2: Else; outcome is NOT_APPLICABLE: ```else: outcome = NOT_APPLICABLE```
-
