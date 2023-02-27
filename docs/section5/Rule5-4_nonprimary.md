@@ -8,9 +8,8 @@
 
 **Applicability:** All required data elements exist for B_RMR  
 **Applicability Checks:**
-1. Surfaces that are a regulated roof
+  1. Surfaces that are a regulated roof
 
-**Manual Check:** None  
 **Evaluation Context:** Each Data Element  
 **Data Lookup:** None  
 **Function Call:**
