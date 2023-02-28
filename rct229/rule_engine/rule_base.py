@@ -159,16 +159,25 @@ class RuleDefinitionBase:
                                 outcome["result"] = result
                             # Assume result type is bool
                             # using is False to include the None case.
-                            elif self.is_primary_rule is False or data.get("is_primary_rule") is False:
+                            elif (
+                                self.is_primary_rule is False
+                                or data.get("is_primary_rule") is False
+                            ):
                                 # secondary rule applicability check true-> undetermined, false -> not_applicable
                                 if result:
                                     outcome["result"] = RCTOutcomeLabel.UNDETERMINED
-                                    undetermined_msg = self.get_manual_check_required_msg(context, calc_vals, data)
+                                    undetermined_msg = (
+                                        self.get_manual_check_required_msg(
+                                            context, calc_vals, data
+                                        )
+                                    )
                                     if undetermined_msg:
                                         outcome["message"] = undetermined_msg
                                 else:
                                     outcome["result"] = RCTOutcomeLabel.NOT_APPLICABLE
-                                    undetermined_msg = self.get_not_applicable_msg(context, data)
+                                    undetermined_msg = self.get_not_applicable_msg(
+                                        context, data
+                                    )
                                     if undetermined_msg:
                                         outcome["message"] = undetermined_msg
                             elif result:
@@ -183,7 +192,9 @@ class RuleDefinitionBase:
                                     outcome["message"] = fail_msg
                     else:
                         outcome["result"] = RCTOutcomeLabel.NOT_APPLICABLE
-                        not_applicable_msg = self.get_not_applicable_msg(context, data=data)
+                        not_applicable_msg = self.get_not_applicable_msg(
+                            context, data=data
+                        )
                         if not_applicable_msg:
                             outcome["message"] = not_applicable_msg
                 except MissingKeyException as ke:
