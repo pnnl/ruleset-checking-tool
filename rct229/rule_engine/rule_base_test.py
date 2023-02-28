@@ -90,7 +90,7 @@ class _DerivedRule(RuleDefinitionBase):
         return data == "MANUAL_CHECK_REQUIRED"
 
     def rule_check(self, context, calc_vals=None, data=None):
-        return type(data) is bool and data
+        return data["outcome"] is True
 
 
 DERIVED_RULE = _DerivedRule()
@@ -128,18 +128,33 @@ def test__rule_definition_base__evaluate__with_true_manual_check_required():
 
 
 def test__rule_definition_base__evaluate__with_true_rule_check():
-    assert DERIVED_RULE.evaluate(RMRS_WITH_MATCHING_USER_AND_BASELINE, data=True) == {
+    assert DERIVED_RULE.evaluate(RMRS_WITH_MATCHING_USER_AND_BASELINE, data={"outcome": True, "is_primary_rule": True}) == {
         **DERIVED_RULE_outcome_base,
-        "result": "PASSED",
+        "result": "PASS",
     }
 
 
-def test__rule_definition_base__evaluate__with_true_rule_check():
-    assert DERIVED_RULE.evaluate(RMRS_WITH_MATCHING_USER_AND_BASELINE, data=False) == {
+def test__rule_definition_base__evaluate__with_false_rule_check():
+    assert DERIVED_RULE.evaluate(RMRS_WITH_MATCHING_USER_AND_BASELINE, data={"outcome": False, "is_primary_rule": True}) == {
         **DERIVED_RULE_outcome_base,
         "result": "FAILED",
     }
 
+
+def test__rule_definition_base__evaluate__with_true_secondary_rule_check():
+    assert DERIVED_RULE.evaluate(RMRS_WITH_MATCHING_USER_AND_BASELINE, data={"outcome": True, "is_primary_rule": False})== {
+        **DERIVED_RULE_outcome_base,
+        "result": "UNDETERMINED",
+        "message": "Manual check required message",
+    }
+
+
+def test__rule_definition_base__evaluate__with_false_secondary_rule_check():
+    assert DERIVED_RULE.evaluate(RMRS_WITH_MATCHING_USER_AND_BASELINE, data={"outcome": False, "is_primary_rule": False})== {
+        **DERIVED_RULE_outcome_base,
+        "result": "NOT_APPLICABLE",
+        "message": "Not applicable message",
+    }
 
 # Testing RuleDefinitionBase get_context method ------------------
 def test__rule_definition_base__get_context__with_missing_rmrs():

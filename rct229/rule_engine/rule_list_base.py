@@ -157,6 +157,8 @@ class RuleDefinitionListBase(RuleDefinitionBase):
         """
         # Merge in new data to be passed to the subrule indicated by each_rule
         data = {**data, **self.create_data(context, data)}
+        if "is_primary_rule" not in data.keys():
+            data["is_primary_rule"] = self.is_primary_rule
 
         # Create the context list
         # Note: create_context_list has access to the new data included just above
