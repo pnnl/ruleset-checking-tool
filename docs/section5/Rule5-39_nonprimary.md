@@ -33,7 +33,7 @@
 
               **Rule Assertion:**
 
-              - Case 1: If dynamic glazing in P-RMR is manually controlled, outcome is UNDETERMINED: ```if rule_applicability_check: outcome = UNDETERMINED and raise_warning "THE SUBSURFACES LISTED BELOW INCLUDE MANUALLY CONTROLLED DYNAMIC GLAZING IN THE PROPOSED DESIGN. VERIFY THAT SHGC AND VT WERE MODELED AS THE AVERAGE OF THE MINIMUM AND MAXIMUM SHGC AND VT. ${undetermined_subsurface_list}"```
+              - Case 1: If dynamic glazing in P-RMR is manually controlled, outcome is UNDETERMINED: ```if rule_applicability_check: outcome = UNDETERMINED and raise_message "THE SUBSURFACES LISTED BELOW INCLUDE MANUALLY CONTROLLED DYNAMIC GLAZING IN THE PROPOSED DESIGN. VERIFY THAT SHGC AND VT WERE MODELED AS THE AVERAGE OF THE MINIMUM AND MAXIMUM SHGC AND VT. ${undetermined_subsurface_list}"```
 
               - Case 2: For each building, if no subsurface in building has dynamic glazing, outcome is NOT_APPLICABLE: ```if NOT rule_applicability_check: outcome = NOT_APPLICABLE```
 
