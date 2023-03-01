@@ -1,5 +1,6 @@
 import pytest
 
+from rct229.rule_engine.partial_rule_definition import PartialRuleDefinition
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 
@@ -90,10 +91,22 @@ class _DerivedRule(RuleDefinitionBase):
         return data == "MANUAL_CHECK_REQUIRED"
 
     def rule_check(self, context, calc_vals=None, data=None):
-        return data["outcome"] is True
+        return type(data) is bool and data
+
+
+class _PartilaRule(PartialRuleDefinition):
+    def __init__(self, data=None):
+        super(_PartilaRule, self).__init__(**BASE_RULE_ARGS)
+
+    def get_calc_vals(self, context, data=None):
+        return [{"a": 0}, 1]
+
+    def applicability_check(self, context, calc_vals, data):
+        return data["outcome"]
 
 
 DERIVED_RULE = _DerivedRule()
+PARTIAL_RULE = _PartilaRule()
 
 DERIVED_RULE_outcome_base = {**BASE_RULE_1_OUTCOME_BASE, "calc_vals": [{"a": 0}, 1]}
 
@@ -128,43 +141,39 @@ def test__rule_definition_base__evaluate__with_true_manual_check_required():
 
 
 def test__rule_definition_base__evaluate__with_true_rule_check():
-    assert DERIVED_RULE.evaluate(
-        RMRS_WITH_MATCHING_USER_AND_BASELINE,
-        data={"outcome": True, "is_primary_rule": True},
-    ) == {
+    assert DERIVED_RULE.evaluate(RMRS_WITH_MATCHING_USER_AND_BASELINE, data=True) == {
         **DERIVED_RULE_outcome_base,
-        "result": "PASS",
+        "result": "PASSED",
     }
 
 
-def test__rule_definition_base__evaluate__with_false_rule_check():
-    assert DERIVED_RULE.evaluate(
-        RMRS_WITH_MATCHING_USER_AND_BASELINE,
-        data={"outcome": False, "is_primary_rule": True},
-    ) == {
+def test__rule_definition_base__evaluate__with_true_rule_check():
+    assert DERIVED_RULE.evaluate(RMRS_WITH_MATCHING_USER_AND_BASELINE, data=False) == {
         **DERIVED_RULE_outcome_base,
         "result": "FAILED",
     }
 
 
 def test__rule_definition_base__evaluate__with_true_secondary_rule_check():
-    assert DERIVED_RULE.evaluate(
+    assert PARTIAL_RULE.evaluate(
         RMRS_WITH_MATCHING_USER_AND_BASELINE,
-        data={"outcome": True, "is_primary_rule": False},
+        data={"outcome": True},
     ) == {
         **DERIVED_RULE_outcome_base,
         "result": "UNDETERMINED",
+        "primary_rule": False,
         "message": "Manual check required message",
     }
 
 
 def test__rule_definition_base__evaluate__with_false_secondary_rule_check():
-    assert DERIVED_RULE.evaluate(
+    assert PARTIAL_RULE.evaluate(
         RMRS_WITH_MATCHING_USER_AND_BASELINE,
-        data={"outcome": False, "is_primary_rule": False},
+        data={"outcome": False},
     ) == {
         **DERIVED_RULE_outcome_base,
         "result": "NOT_APPLICABLE",
+        "primary_rule": False,
         "message": "Not applicable message",
     }
 

@@ -157,12 +157,8 @@ class RuleDefinitionBase:
                             if isinstance(result, list):
                                 # The result is a list of outcomes
                                 outcome["result"] = result
-                            # Assume result type is bool
                             # using is False to include the None case.
-                            elif (
-                                self.is_primary_rule is False
-                                or data.get("is_primary_rule") is False
-                            ):
+                            elif self.is_primary_rule is False:
                                 # secondary rule applicability check true-> undetermined, false -> not_applicable
                                 if result:
                                     outcome["result"] = RCTOutcomeLabel.UNDETERMINED
@@ -192,9 +188,7 @@ class RuleDefinitionBase:
                                     outcome["message"] = fail_msg
                     else:
                         outcome["result"] = RCTOutcomeLabel.NOT_APPLICABLE
-                        not_applicable_msg = self.get_not_applicable_msg(
-                            context, data=data
-                        )
+                        not_applicable_msg = self.get_not_applicable_msg(context, data)
                         if not_applicable_msg:
                             outcome["message"] = not_applicable_msg
                 except MissingKeyException as ke:
@@ -510,7 +504,7 @@ class RuleDefinitionBase:
 
         return True
 
-    def get_not_applicable_msg(self, context, calc_vals=None, data=None):
+    def get_not_applicable_msg(self, context, data=None):
         """Gets the message to include in the outcome for the NOT_APPLICABLE case.
 
         This base implementation simply returns the value of
