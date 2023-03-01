@@ -21,18 +21,20 @@
 
   - For each zone in building segment: ```for zone_p in building_segment_p.zones:```
 
-    - For each surface in zone: ```for surface_p in zone_p.surfaces:```
+    - For each space in zone: ```for space_p in zone_p.spaces:```
+    
+      - For each surface in space: ```for surface_p in space_p.surfaces:```
 
-      - For each subsurface in surface: ```for subsurface_p in surface_p.subsurfaces:```
+        - For each subsurface in surface: ```for subsurface_p in surface_p.subsurfaces:```
 
-        - Check if subsurface has manual dynamic glazing, set rule applicability check to True: ```if subsurface_p.dynamic_glazing_type == "MANUAL_DYNAMIC: rule_applicability_check = TRUE```
+          - Check if subsurface has manual dynamic glazing, set rule applicability check to True: ```if subsurface_p.dynamic_glazing_type == "MANUAL_DYNAMIC: rule_applicability_check = TRUE```
 
-          - Add to array of subsurfaces with manual dynamic glazing if not already saved: ```if NOT subsurface_p in undetermined_subsurface_list: undetermined_subsurface_list.append(subsurface_p)```
+            - Add to array of subsurfaces with manual dynamic glazing if not already saved: ```if NOT subsurface_p in undetermined_subsurface_list: undetermined_subsurface_list.append(subsurface_p)```
 
-            **Rule Assertion:**
+              **Rule Assertion:**
 
-            - Case 1: If dynamic glazing in P-RMR is manually controlled, outcome is UNDETERMINED: ```if rule_applicability_check: outcome = UNDETERMINED and raise_warning "THE SUBSURFACES LISTED BELOW INCLUDE MANUALLY CONTROLLED DYNAMIC GLAZING IN THE PROPOSED DESIGN. VERIFY THAT SHGC AND VT WERE MODELED AS THE AVERAGE OF THE MINIMUM AND MAXIMUM SHGC AND VT. ${undetermined_subsurface_list}"```
+              - Case 1: If dynamic glazing in P-RMR is manually controlled, outcome is UNDETERMINED: ```if rule_applicability_check: outcome = UNDETERMINED and raise_warning "THE SUBSURFACES LISTED BELOW INCLUDE MANUALLY CONTROLLED DYNAMIC GLAZING IN THE PROPOSED DESIGN. VERIFY THAT SHGC AND VT WERE MODELED AS THE AVERAGE OF THE MINIMUM AND MAXIMUM SHGC AND VT. ${undetermined_subsurface_list}"```
 
-            - Case 2: For each building, if no subsurface in building has dynamic glazing, outcome is NOT_APPLICABLE: ```if NOT rule_applicability_check: outcome = NOT_APPLICABLE```
+              - Case 2: For each building, if no subsurface in building has dynamic glazing, outcome is NOT_APPLICABLE: ```if NOT rule_applicability_check: outcome = NOT_APPLICABLE```
 
 **[Back](../_toc.md)**
