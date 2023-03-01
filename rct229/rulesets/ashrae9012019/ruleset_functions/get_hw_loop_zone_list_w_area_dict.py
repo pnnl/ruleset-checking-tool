@@ -30,7 +30,7 @@ def get_hw_loop_zone_list_w_area(rmi_b):
     -------
     """
     hw_loop_zone_list_w_area_dict = dict()
-    for zone in find_all("$..building_segments[*].zones[*]", rmi_b):
+    for zone in find_all("$.buildings[*].building_segments[*].zones[*]", rmi_b):
         zone_area = pint_sum(
             [
                 space.get("floor_area", ZERO.AREA)
