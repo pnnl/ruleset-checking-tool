@@ -1,5 +1,4 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
-from rct229.utils.json_utils import slash_prefix_guarantee
 
 
 class PartialRuleDefinition(RuleDefinitionBase):
@@ -13,7 +12,6 @@ class PartialRuleDefinition(RuleDefinitionBase):
         is_primary_rule=False,
         rmr_context="",
         required_fields=None,
-        must_match_by_ids=[],
         manual_check_required_msg="",
         not_applicable_msg="",
     ):
@@ -22,25 +20,32 @@ class PartialRuleDefinition(RuleDefinitionBase):
         Parameters
         ----------
         rmrs_used : UserBaselineProposedVals
-            A trio of boolen values indicating which RMRs are required by the
-            rule
+            A trio of boolean values indicating which RMDs are required by the rule
         id : string
             Unique id for the rule
             Usually unspecified for nested rules
         description : string
             Rule description
             Usually unspecified for nested rules
-        rmr_context : string
-            A json pointer into each RMR, or RMR fragment, provided to the rule.
-            For better human readability, the leading "/" may be ommitted.
+        ruleset_section_title : string
+            Ruleset section title
+            e.g., Envelope
+        standard_section: string
+            The section id in the standard (ruleset)
+            e.g., Section G3.1-5(b) Building Envelope Modeling Requirements for the Baseline building
+        is_primary_rule: boolean
+            Indicate whether this rule is primary rule (True) or secondary rule (False)
         required_fields : dict
             A dictionary of the form
             {
                 "<json path>": [<required field names>],
                 ...
             },
-            where the json path should resolve to a list of dectionaries.
-
+            where the json path should resolve to a list of dictionaries.
+        manual_check_required_msg: string
+            default message for UNDETERMINED outcome
+        not_applicable_msg: string
+            default message for NOT_APPLICABLE outcome
         """
         super(PartialRuleDefinition, self).__init__(
             rmrs_used=rmrs_used,
@@ -56,15 +61,14 @@ class PartialRuleDefinition(RuleDefinitionBase):
         )
 
     def rule_check(self, context, calc_vals=None, data={}):
-        """Overrides the base implementation to apply a rule to each entry in
-        a list
-
-        This should not be overridden. Override create_context_list() instead.
+        """Overrides the base implementation to apply applicability check
 
         Parameters
         ----------
         context : UserBaselineProposedVals
-            Object containing the contexts for the user, baseline, and proposed RMRs
+            Object containing the contexts for the user, baseline, and proposed RMDs
+        calc_vals: dictionary
+            Dictionary contains calculated values for rule check and reporting.
         data : dict
             An optional dictionary. New data, based on data_pointers, data_paths, or
             create_data() will be merged into this data dictionary and passed to each
@@ -72,9 +76,8 @@ class PartialRuleDefinition(RuleDefinitionBase):
 
         Returns
         -------
-        list
-            A list of rule outcomes. The each outcome in the list is augmented
-            with a name field that is the name of the entry in the context list.
+        boolean
+            True if the rule UNDETERMINED and NOT_APPLICABLE if the rule fails
         """
         return self.applicability_check(context=context, calc_vals=calc_vals, data=data)
 

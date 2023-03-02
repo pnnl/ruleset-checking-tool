@@ -21,7 +21,6 @@ class RuleDefinitionBase:
         is_primary_rule=None,
         rmr_context="",
         required_fields=None,
-        must_match_by_ids=[],
         manual_check_required_msg="",
         fail_msg="",
         pass_msg="",
@@ -40,6 +39,14 @@ class RuleDefinitionBase:
         description : string
             Rule description
             Usually unspecified for nested rules
+        ruleset_section_title : string
+            Ruleset section title
+            e.g., Envelope
+        standard_section: string
+            The section id in the standard (ruleset)
+            e.g., Section G3.1-5(b) Building Envelope Modeling Requirements for the Baseline building
+        is_primary_rule: boolean
+            Indicate whether this rule is primary rule (True) or secondary rule (False)
         rmr_context : string
             A json pointer into each RMR, or RMR fragment, provided to the rule.
             For better human readability, the leading "/" may be ommitted.
@@ -50,7 +57,14 @@ class RuleDefinitionBase:
                 ...
             },
             where the json path should resolve to a list of dectionaries.
-
+        manual_check_required_msg: string
+            default message for UNDETERMINED outcome
+        fail_msg: string
+            default message for FAILED outcome
+        pass_msg: string
+            default message for PASS outcome
+        not_applicable_msg: string
+            default message for NOT_APPLICABLE outcome
         """
         self.rmrs_used = rmrs_used
         self.id = id
@@ -612,6 +626,8 @@ class RuleDefinitionBase:
         ----------
         context : UserBaselineProposedVals
             Object containing the contexts for the user, baseline, and proposed RMRs
+        calc_vals: dictionary
+            Dictionary contains calculated values for rule check and reporting.
         data : An optional data object. It is ignored by this base implementation.
 
         Returns

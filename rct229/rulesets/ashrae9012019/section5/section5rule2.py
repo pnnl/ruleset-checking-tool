@@ -28,8 +28,6 @@ class Section5Rule2(RuleDefinitionListIndexedBase):
                 required_fields={
                     "$..surfaces[*]": ["azimuth"],
                 },
-                # TODO: add this to RuleDefinitionBase
-                must_match_by_ids=["$..surfaces[*]"],
             )
 
         def get_calc_vals(self, context, data=None):
