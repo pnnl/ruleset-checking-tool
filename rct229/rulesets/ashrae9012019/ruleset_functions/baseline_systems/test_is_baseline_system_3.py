@@ -176,6 +176,84 @@ SYS_3_TEST_RMD = {
 }
 
 
+SYS_3_TEST_UNMATCHED_RMD = {
+    "id": "ASHRAE229 1",
+    "ruleset_model_instances": [
+        {
+            "id": "RMD 1",
+            "buildings": [
+                {
+                    "id": "Building 1",
+                    "building_open_schedule": "Required Building Schedule 1",
+                    "building_segments": [
+                        {
+                            "id": "Building Segment 1",
+                            "zones": [
+                                {
+                                    "id": "Thermal Zone 3",
+                                    "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                    "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                    "terminals": [
+                                        {
+                                            "id": "Air Terminal 3",
+                                            "is_supply_ducted": True,
+                                            "type": "CONSTANT_AIR_VOLUME",
+                                            "served_by_heating_ventilating_air_conditioning_system": "System Type 3c",
+                                        }
+                                    ],
+                                },
+                            ],
+                            "heating_ventilating_air_conditioning_systems": [
+                                {
+                                    "id": "System Type Unmatched",
+                                    "cooling_system": {
+                                        "id": "Cooling Coil",
+                                        "cooling_system_type": "FLUID_LOOP",
+                                        "chilled_water_loop": "Purchased CHW Loop 1",
+                                    },
+                                    "heating_system": {
+                                        "id": "Heating Coil",
+                                        "heating_system_type": "OTHER",
+                                        # "hot_water_loop": "Purchased HW Loop 1",
+                                    },
+                                    "fan_system": {
+                                        "id": "CAV Fan System",
+                                        "fan_control": "CONSTANT",
+                                        "supply_fans": [{"id": "Supply Fan 3c"}],
+                                    },
+                                },
+                            ],
+                        }
+                    ],
+                }
+            ],
+            "fluid_loops": [
+                # {
+                #     "id": "Purchased HW Loop 1",
+                #     "type": "HEATING",
+                # },
+                {
+                    "id": "Purchased CHW Loop 1",
+                    "type": "COOLING",
+                },
+            ],
+            "external_fluid_source": [
+                # {
+                #     "id": "Purchased HW",
+                #     "loop": "Purchased HW Loop 1",
+                #     "type": "HOT_WATER",
+                # },
+                {
+                    "id": "Purchased CHW",
+                    "loop": "Purchased CHW Loop 1",
+                    "type": "CHILLED_WATER",
+                },
+            ],
+        }
+    ],
+}
+
+
 def test__TEST_RMD_baseline_system_3__is_valid():
     schema_validation_result = schema_validate_rmr(SYS_3_TEST_RMD)
     assert schema_validation_result[
@@ -284,4 +362,16 @@ def test__is_baseline_system_3C_test__json_true():
             ["Thermal Zone 1"],
         )
         == HVAC_SYS.SYS_3C
+    )
+
+
+def test__is_baseline_system_unmatched__true():
+    assert (
+        is_baseline_system_3(
+            SYS_3_TEST_UNMATCHED_RMD["ruleset_model_instances"][0],
+            "System Type Unmatched",
+            ["Air Terminal 3"],
+            ["Thermal Zone 3"],
+        )
+        == HVAC_SYS.UNMATCHED
     )
