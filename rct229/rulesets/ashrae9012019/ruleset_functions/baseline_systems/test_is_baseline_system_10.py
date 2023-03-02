@@ -9,7 +9,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.is_baselin
 )
 from rct229.schema.validate import schema_validate_rmr
 
-SYS_10_TEST_RMD = {
+SYS_10_FIRST_LOGIC_TEST_RMD = {
     "id": "ASHRAE229 1",
     "ruleset_model_instances": [
         {
@@ -31,12 +31,40 @@ SYS_10_TEST_RMD = {
                                             "id": "Air Terminal 1",
                                             "is_supply_ducted": True,
                                             "type": "CONSTANT_AIR_VOLUME",
-                                            "served_by_heating_ventilating_air_conditioning_system": "System 10_1",
+                                            "served_by_heating_ventilating_air_conditioning_system": "System 10",
                                             "heating_source": "ELECTRIC",
                                             "fan": {"id": "Terminal Fan 1"},
                                         }
                                     ],
                                 },
+                            ],
+                            "heating_ventilating_air_conditioning_systems": [
+                                {
+                                    "id": "System 10",
+                                },
+                            ],
+                        }
+                    ],
+                }
+            ],
+        }
+    ],
+}
+
+
+SYS_10_SECOND_LOGIC_TEST_RMD = {
+    "id": "ASHRAE229 1",
+    "ruleset_model_instances": [
+        {
+            "id": "RMD 1",
+            "buildings": [
+                {
+                    "id": "Building 1",
+                    "building_open_schedule": "Required Building Schedule 1",
+                    "building_segments": [
+                        {
+                            "id": "Building Segment 1",
+                            "zones": [
                                 {
                                     "id": "Thermal Zone 2",
                                     "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
@@ -46,17 +74,14 @@ SYS_10_TEST_RMD = {
                                             "id": "Air Terminal 2",
                                             "is_supply_ducted": True,
                                             "type": "CONSTANT_AIR_VOLUME",
-                                            "served_by_heating_ventilating_air_conditioning_system": "System 10_1",
+                                            "served_by_heating_ventilating_air_conditioning_system": "System 10",
                                         }
                                     ],
                                 },
                             ],
                             "heating_ventilating_air_conditioning_systems": [
                                 {
-                                    "id": "System 10_1",
-                                },
-                                {
-                                    "id": "System 10_2",
+                                    "id": "System 10",
                                     "cooling_system": {
                                         "id": "Cooling Coil 1",
                                         "cooling_system_type": "NONE",
@@ -83,7 +108,7 @@ SYS_10_TEST_RMD = {
 
 
 def test__TEST_RMD_baseline_system_10_is_valid():
-    schema_validation_result = schema_validate_rmr(SYS_10_TEST_RMD)
+    schema_validation_result = schema_validate_rmr(SYS_10_FIRST_LOGIC_TEST_RMD)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"
@@ -92,8 +117,8 @@ def test__TEST_RMD_baseline_system_10_is_valid():
 def test__is_baseline_system_10__first_logic_true():
     assert (
         is_baseline_system_10(
-            SYS_10_TEST_RMD["ruleset_model_instances"][0],
-            "System 10_1",
+            SYS_10_FIRST_LOGIC_TEST_RMD["ruleset_model_instances"][0],
+            "System 10",
             ["Air Terminal 1"],
             ["Thermal Zone 1"],
         )
@@ -104,8 +129,8 @@ def test__is_baseline_system_10__first_logic_true():
 def test__is_baseline_system_10__second_logic_true():
     assert (
         is_baseline_system_10(
-            SYS_10_TEST_RMD["ruleset_model_instances"][0],
-            "System 10_2",
+            SYS_10_SECOND_LOGIC_TEST_RMD["ruleset_model_instances"][0],
+            "System 10",
             ["Air Terminal 2"],
             ["Thermal Zone 2"],
         )

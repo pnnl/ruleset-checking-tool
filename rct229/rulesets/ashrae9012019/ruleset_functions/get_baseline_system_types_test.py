@@ -31,7 +31,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.test_is_ba
     SYS_9_TEST_RMD,
 )
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.test_is_baseline_system_10 import (
-    SYS_10_TEST_RMD,
+    SYS_10_FIRST_LOGIC_TEST_RMD, SYS_10_SECOND_LOGIC_TEST_RMD
 )
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.test_is_baseline_system_11_1 import (
     SYS_11_1_TEST_RMD,
@@ -339,9 +339,9 @@ def test_get_baseline_system_types__system_9_false():
     )
 
 
-def test_get_baseline_system_types__system_10_true():
+def test_get_baseline_system_types__system_10_first_logic_true():
     baseline_system_types_dict = get_baseline_system_types(
-        SYS_10_TEST_RMD["ruleset_model_instances"][0]
+        SYS_10_FIRST_LOGIC_TEST_RMD["ruleset_model_instances"][0]
     )
     test_types = [HVAC_SYS.SYS_10]
     assert any(
@@ -352,9 +352,38 @@ def test_get_baseline_system_types__system_10_true():
     )
 
 
-def test_get_baseline_system_types__system_10_false():
+def test_get_baseline_system_types__system_10_first_logic_false():
     baseline_system_types_dict = get_baseline_system_types(
-        SYS_10_TEST_RMD["ruleset_model_instances"][0]
+        SYS_10_FIRST_LOGIC_TEST_RMD["ruleset_model_instances"][0]
+    )
+    test_types = exclude_sys_types([HVAC_SYS.SYS_10])
+    assert (
+        any(
+            [
+                available_type in test_types
+                for available_type in available_type_lists(baseline_system_types_dict)
+            ]
+        )
+        == False
+    )
+
+
+def test_get_baseline_system_types__system_10_second_logic_true():
+    baseline_system_types_dict = get_baseline_system_types(
+        SYS_10_SECOND_LOGIC_TEST_RMD["ruleset_model_instances"][0]
+    )
+    test_types = [HVAC_SYS.SYS_10]
+    assert any(
+        [
+            available_type in test_types
+            for available_type in available_type_lists(baseline_system_types_dict)
+        ]
+    )
+
+
+def test_get_baseline_system_types__system_10_second_logic_false():
+    baseline_system_types_dict = get_baseline_system_types(
+        SYS_10_SECOND_LOGIC_TEST_RMD["ruleset_model_instances"][0]
     )
     test_types = exclude_sys_types([HVAC_SYS.SYS_10])
     assert (
