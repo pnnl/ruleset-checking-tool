@@ -26,7 +26,7 @@
       
       **Rule Assertion:**
         
-      Case 1: Surface is a slab-on-grade: ```if get_opaque_surface_type(surface_p) in ["HEATED SLAB-ON-GRADE", "UNHEATED SLAB-ON-GRADE"]:
+      Case 1: Surface is a slab-on-grade, outcome is UNDETERMINED: ```if get_opaque_surface_type(surface_p) in ["HEATED SLAB-ON-GRADE", "UNHEATED SLAB-ON-GRADE"]:
       outcome = "UNDETERMINED" and raise_message "<Insert surface_b.id> is a slab-on-grade surface. Conduct a manual check to confirm that Proposed slab-on-grade assemblies are modeled as-designed."```
 
       Case 2: Else; outcome is NOT_APPLICABLE: ```else: outcome = NOT_APPLICABLE```  
