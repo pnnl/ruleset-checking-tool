@@ -28,20 +28,50 @@ SYS_10_TEST_RMD = {
                                     "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                     "terminals": [
                                         {
-                                            "id": "Air Terminal",
+                                            "id": "Air Terminal 1",
                                             "is_supply_ducted": True,
                                             "type": "CONSTANT_AIR_VOLUME",
-                                            "served_by_heating_ventilating_air_conditioning_system": "System 10",
+                                            "served_by_heating_ventilating_air_conditioning_system": "System 10_1",
                                             "heating_source": "ELECTRIC",
                                             "fan": {"id": "Terminal Fan 1"},
                                         }
                                     ],
-                                }
+                                },
+                                {
+                                    "id": "Thermal Zone 2",
+                                    "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                    "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                    "terminals": [
+                                        {
+                                            "id": "Air Terminal 2",
+                                            "is_supply_ducted": True,
+                                            "type": "CONSTANT_AIR_VOLUME",
+                                            "served_by_heating_ventilating_air_conditioning_system": "System 10_1",
+                                        }
+                                    ],
+                                },
                             ],
                             "heating_ventilating_air_conditioning_systems": [
                                 {
-                                    "id": "System 10",
-                                }
+                                    "id": "System 10_1",
+                                },
+                                {
+                                    "id": "System 10_2",
+                                    "cooling_system": {
+                                        "id": "Cooling Coil 1",
+                                        "cooling_system_type": "NONE",
+                                    },
+                                    "heating_system": {
+                                        "id": "HHW Coil 1A",
+                                        "heating_system_type": "ELECTRIC_RESISTANCE",
+                                    },
+                                    "fan_system": {
+                                        "id": "VAV Fan System 1",
+                                        "fan_control": "CONSTANT",
+                                        "supply_fans": [{"id": "Supply Fan 1"}],
+                                        "return_fans": [{"id": "Return Fan 1"}],
+                                    },
+                                },
                             ],
                         }
                     ],
@@ -59,13 +89,25 @@ def test__TEST_RMD_baseline_system_10_is_valid():
     ], f"Schema error: {schema_validation_result['error']}"
 
 
-def test__is_baseline_system_10__true():
+def test__is_baseline_system_10__first_logic_true():
     assert (
         is_baseline_system_10(
             SYS_10_TEST_RMD["ruleset_model_instances"][0],
-            "System 10",
-            ["Air Terminal"],
+            "System 10_1",
+            ["Air Terminal 1"],
             ["Thermal Zone 1"],
+        )
+        == HVAC_SYS.SYS_10
+    )
+
+
+def test__is_baseline_system_10__second_logic_true():
+    assert (
+        is_baseline_system_10(
+            SYS_10_TEST_RMD["ruleset_model_instances"][0],
+            "System 10_2",
+            ["Air Terminal 2"],
+            ["Thermal Zone 2"],
         )
         == HVAC_SYS.SYS_10
     )
