@@ -272,6 +272,7 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   * [21-12](section21/Rule21-12.md): When the system uses boilers the hot water system shall be modeled with continuous variable flow.  
   * [21-13](section21/Rule21-13.md): When the system uses boilers the hot water system shall be modeled with a minimum turndown ratio of 0.25.
   * [21-14](section21/Rule21-14.md): When the baseline building is modeled with a hot water plant, served by purchased HW system, hot water supply temperature reset is not modeled.
+  * [21-15](section21/Rule21-15.md): When the baseline building is modeled with a hot water plant, served by purchased HW system, the hot water pump power shall be 14 W/gpm.
   * [21-16](section21/Rule21-16.md): Baseline shall have only one heating hot water plant.
   * [21-17](section21/Rule21-17.md): All boilers in the baseline building design shall be modeled at the minimum efficiency levels, both part load and full load, in accordance with Tables G3.5.6.
   * [21-18](section21/Rule21-18.md): For baseline building, fossil fuel systems shall be modeled using natural gas as their fuel source.
