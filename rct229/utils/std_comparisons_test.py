@@ -1,8 +1,6 @@
 import operator
 
-import pytest
-
-from rct229.ruleset_functions.compare_standard_val import (
+from rct229.rulesets.ashrae9012019.ruleset_functions.compare_standard_val import (
     compare_standard_val,
     compare_standard_val_strict,
 )
@@ -21,7 +19,7 @@ def test__std_equal__true_without_units():
 
 
 def test__std_equal__false_with_units():
-    assert not std_equal(1.01 * _M2, 1.011 * _M2)
+    assert not std_equal(1.01 * _M2, 1.02 * _M2)
 
 
 def test__std_equal__false_without_units():

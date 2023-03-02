@@ -343,7 +343,7 @@ def remove_index_references_from_key(key):
     return clean_key
 
 
-def disaggregate_master_ruletest_json(master_json_name):
+def disaggregate_master_ruletest_json(master_json_name, ruleset_doc):
 
     """Ingests a string representing a JSON file name from rct229/ruletest_engine/ruletest_jsons. JSONs in that
     directory contain ALL ruletests for a particular grouping of rules (e.g., 'envelope_tests.json' has every test case
@@ -354,7 +354,8 @@ def disaggregate_master_ruletest_json(master_json_name):
          ----------
          master_json_name : str
              String representing a name of master JSON file in rct229/ruletest_engine/ruletest_jsons
-             E.g., 'envelope_tests.json'
+             E.g., 'envelope_tests.json''
+         ruleset_doc : str
 
 
     """
@@ -363,7 +364,7 @@ def disaggregate_master_ruletest_json(master_json_name):
     file_dir = os.path.dirname(__file__)
 
     # master JSON should be in the ruletest_jsons directory
-    master_json_path = os.path.join(file_dir, "..", master_json_name)
+    master_json_path = os.path.join(file_dir, "..", ruleset_doc, master_json_name)
 
     # Initialize master JSON dictionary
     with open(master_json_path) as f:
