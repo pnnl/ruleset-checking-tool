@@ -71,7 +71,7 @@ def test__TEST_RMD_baseline_system_4__is_valid():
     ], f"Schema error: {schema_validation_result['error']}"
 
 
-def test_is_baseline_system_4_true():
+def test__is_baseline_system_4__true():
     assert (
         is_baseline_system_4(
             SYS_4_TEST_RMD["ruleset_model_instances"][0],
@@ -83,10 +83,13 @@ def test_is_baseline_system_4_true():
     )
 
 
-def test_is_baseline_system_4_testing_json_true():
-    assert is_baseline_system_4(
-        load_system_test_file("System_4_PSZ_HP.json")["ruleset_model_instances"][0],
-        "System Type 4",
-        ["Air Terminal"],
-        ["Thermal Zone 1"],
+def test__is_baseline_system_4_testing_json__true():
+    assert (
+        is_baseline_system_4(
+            load_system_test_file("System_4_PSZ_HP.json")["ruleset_model_instances"][0],
+            "System Type 4",
+            ["Air Terminal"],
+            ["Thermal Zone 1"],
+        )
+        == HVAC_SYS.SYS_4
     )

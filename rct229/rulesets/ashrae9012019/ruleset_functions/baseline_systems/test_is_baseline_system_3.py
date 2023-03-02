@@ -183,7 +183,7 @@ def test__TEST_RMD_baseline_system_3__is_valid():
     ], f"Schema error: {schema_validation_result['error']}"
 
 
-def test_is_baseline_system_3_true():
+def test__is_baseline_system_3__true():
     assert (
         is_baseline_system_3(
             SYS_3_TEST_RMD["ruleset_model_instances"][0],
@@ -195,18 +195,21 @@ def test_is_baseline_system_3_true():
     )
 
 
-def test_is_baseline_system_3_test_json_true():
-    assert is_baseline_system_3(
-        load_system_test_file("System_3_PSZ_AC_Gas_Furnace.json")[
-            "ruleset_model_instances"
-        ][0],
-        "System Type 3",
-        ["Air Terminal"],
-        ["Thermal Zone 1"],
+def test__is_baseline_system_3__test_json_true():
+    assert (
+        is_baseline_system_3(
+            load_system_test_file("System_3_PSZ_AC_Gas_Furnace.json")[
+                "ruleset_model_instances"
+            ][0],
+            "System Type 3",
+            ["Air Terminal"],
+            ["Thermal Zone 1"],
+        )
+        == HVAC_SYS.SYS_3
     )
 
 
-def test_is_baseline_system_3A_true():
+def test__is_baseline_system_3A__true():
     assert (
         is_baseline_system_3(
             SYS_3_TEST_RMD["ruleset_model_instances"][0],
@@ -218,18 +221,21 @@ def test_is_baseline_system_3A_true():
     )
 
 
-def test_is_baseline_system_3A_test_json_true():
-    assert is_baseline_system_3(
-        load_system_test_file("System_3a_PSZ_AC_Gas_Furnace.json")[
-            "ruleset_model_instances"
-        ][0],
-        "System Type 3",
-        ["Air Terminal"],
-        ["Thermal Zone 1"],
+def test__is_baseline_system_3A__test_json_true():
+    assert (
+        is_baseline_system_3(
+            load_system_test_file("System_3a_PSZ_AC_Gas_Furnace.json")[
+                "ruleset_model_instances"
+            ][0],
+            "System Type 3",
+            ["Air Terminal"],
+            ["Thermal Zone 1"],
+        )
+        == HVAC_SYS.SYS_3A
     )
 
 
-def test_is_baseline_system_3B_true():
+def test__is_baseline_system_3B__true():
     assert (
         is_baseline_system_3(
             SYS_3_TEST_RMD["ruleset_model_instances"][0],
@@ -241,18 +247,21 @@ def test_is_baseline_system_3B_true():
     )
 
 
-def test_is_baseline_system_3B_test_json_true():
-    assert is_baseline_system_3(
-        load_system_test_file("System_3b_PSZ_AC_Gas_Furnace.json")[
-            "ruleset_model_instances"
-        ][0],
-        "System Type 3",
-        ["Air Terminal"],
-        ["Thermal Zone 1"],
+def test__is_baseline_system_3B__test_json_true():
+    assert (
+        is_baseline_system_3(
+            load_system_test_file("System_3b_PSZ_AC_Gas_Furnace.json")[
+                "ruleset_model_instances"
+            ][0],
+            "System Type 3",
+            ["Air Terminal"],
+            ["Thermal Zone 1"],
+        )
+        == HVAC_SYS.SYS_3B
     )
 
 
-def test_is_baseline_system_3C_true():
+def test__is_baseline_system_3C__true():
     assert (
         is_baseline_system_3(
             SYS_3_TEST_RMD["ruleset_model_instances"][0],
@@ -264,12 +273,15 @@ def test_is_baseline_system_3C_true():
     )
 
 
-def test_is_baseline_system_3C_test_json_true():
-    assert is_baseline_system_3(
-        load_system_test_file("System_3c_PSZ_AC_Gas_Furnace.json")[
-            "ruleset_model_instances"
-        ][0],
-        "System Type 3",
-        ["Air Terminal"],
-        ["Thermal Zone 1"],
+def test__is_baseline_system_3C_test__json_true():
+    assert (
+        is_baseline_system_3(
+            load_system_test_file("System_3c_PSZ_AC_Gas_Furnace.json")[
+                "ruleset_model_instances"
+            ][0],
+            "System Type 3",
+            ["Air Terminal"],
+            ["Thermal Zone 1"],
+        )
+        == HVAC_SYS.SYS_3C
     )
