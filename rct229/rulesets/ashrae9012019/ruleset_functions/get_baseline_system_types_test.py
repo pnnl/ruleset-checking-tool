@@ -31,7 +31,8 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.test_is_ba
     SYS_9_TEST_RMD,
 )
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.test_is_baseline_system_10 import (
-    SYS_10_FIRST_LOGIC_TEST_RMD, SYS_10_SECOND_LOGIC_TEST_RMD
+    SYS_10_FIRST_LOGIC_TEST_RMD,
+    SYS_10_SECOND_LOGIC_TEST_RMD,
 )
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.test_is_baseline_system_11_1 import (
     SYS_11_1_TEST_RMD,
