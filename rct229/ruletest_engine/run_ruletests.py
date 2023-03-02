@@ -135,10 +135,14 @@ def run_test_helper(test_list, ruleset_doc):
 
 
 def run_test_one_jsontest(test_json):
+    """
+    Test function developed to facilitate running a single rule test json
+    """
     return run_section_tests(test_json, RuleSet.ASHRAE9012019_RULESET)
 
 
-# outcome = run_ashrae9012019_tests(section="section6")
+if __name__ == "__main__":
+    outcome = run_ashrae9012019_tests(section="section6")
 
 # run_transformer_tests()
 # run_lighting_tests()

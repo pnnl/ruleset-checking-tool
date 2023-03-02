@@ -141,7 +141,6 @@ class Section5Rule36(RuleDefinitionListIndexedBase):
                     }
 
                 def rule_check(self, context, calc_vals=None, data=None):
-
                     total_skylight_area_b = calc_vals["total_skylight_area_b"]
                     total_skylight_area_p = calc_vals["total_skylight_area_p"]
                     total_skylight_area_surface_b = calc_vals[

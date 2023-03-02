@@ -31,7 +31,7 @@ def get_building_segment_lighting_status_type_dict(building_segment):
         }
     """
     lighting_building_area_type = building_segment.get("lighting_building_area_type")
-    spaces = find_all("$..spaces[*]", building_segment)
+    spaces = find_all("$.zones[*].spaces[*]", building_segment)
 
     # The return value dict
     building_segment_lighting_status_type_dict = {}

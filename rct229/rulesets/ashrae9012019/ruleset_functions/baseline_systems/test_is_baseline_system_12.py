@@ -226,7 +226,7 @@ def test__TEST_RMD_baseline_system_12__is_valid():
     ], f"Schema error: {schema_validation_result['error']}"
 
 
-def test_is_baseline_system_12_true():
+def test__is_baseline_system_12__true():
     assert (
         is_baseline_system_12(
             SYS_12_TEST_RMD["ruleset_model_instances"][0],
@@ -238,16 +238,21 @@ def test_is_baseline_system_12_true():
     )
 
 
-def test_is_baseline_system_12_test_json_true():
-    assert is_baseline_system_12(
-        load_system_test_file("System 12_CAV_SZ_HW.json")["ruleset_model_instances"][0],
-        "System 12",
-        ["CAV Air Terminal 1"],
-        ["Thermal Zone 1"],
+def test__is_baseline_system_12__test_json_true():
+    assert (
+        is_baseline_system_12(
+            load_system_test_file("System 12_CAV_SZ_HW.json")[
+                "ruleset_model_instances"
+            ][0],
+            "System 12",
+            ["CAV Air Terminal 1"],
+            ["Thermal Zone 1"],
+        )
+        == HVAC_SYS.SYS_12
     )
 
 
-def test_is_baseline_system_12A_true():
+def test__is_baseline_system_12A__true():
     assert (
         is_baseline_system_12(
             SYS_12_TEST_RMD["ruleset_model_instances"][0],
@@ -259,18 +264,21 @@ def test_is_baseline_system_12A_true():
     )
 
 
-def test_is_baseline_system_12A_test_json_true():
-    assert is_baseline_system_12(
-        load_system_test_file("System 12a_CAV_SZ_HW.json")["ruleset_model_instances"][
-            0
-        ],
-        "System 12",
-        ["CAV Air Terminal 1"],
-        ["Thermal Zone 1"],
+def test__is_baseline_system_12A__test_json_true():
+    assert (
+        is_baseline_system_12(
+            load_system_test_file("System 12a_CAV_SZ_HW.json")[
+                "ruleset_model_instances"
+            ][0],
+            "System 12",
+            ["CAV Air Terminal 1"],
+            ["Thermal Zone 1"],
+        )
+        == HVAC_SYS.SYS_12A
     )
 
 
-def test_is_baseline_system_12B_true():
+def test__is_baseline_system_12B__true():
     assert (
         is_baseline_system_12(
             SYS_12_TEST_RMD["ruleset_model_instances"][0],
@@ -282,12 +290,15 @@ def test_is_baseline_system_12B_true():
     )
 
 
-def test_is_baseline_system_12B_test_json_true():
-    assert is_baseline_system_12(
-        load_system_test_file("System 12b_CAV_SZ_HW.json")["ruleset_model_instances"][
-            0
-        ],
-        "System 12",
-        ["CAV Air Terminal 1"],
-        ["Thermal Zone 1"],
+def test__is_baseline_system_12B__test_json_true():
+    assert (
+        is_baseline_system_12(
+            load_system_test_file("System 12b_CAV_SZ_HW.json")[
+                "ruleset_model_instances"
+            ][0],
+            "System 12",
+            ["CAV Air Terminal 1"],
+            ["Thermal Zone 1"],
+        )
+        == HVAC_SYS.SYS_12B
     )

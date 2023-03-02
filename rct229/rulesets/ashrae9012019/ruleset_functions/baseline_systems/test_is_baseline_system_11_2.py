@@ -1,3 +1,6 @@
+from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_hvac_test_util import (
+    load_system_test_file,
+)
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_system_util import (
     HVAC_SYS,
 )
@@ -151,7 +154,7 @@ def test__TEST_RMD_baseline_system_11_2__is_valid():
     ], f"Schema error: {schema_validation_result['error']}"
 
 
-def test_is_baseline_system__11_2():
+def test__is_baseline_system_11_2__true():
     assert (
         is_baseline_system_11_2(
             SYS_11_2_TEST_RMD["ruleset_model_instances"][0],
@@ -163,13 +166,41 @@ def test_is_baseline_system__11_2():
     )
 
 
-def test_is_baseline_system__11_2A():
+def test__is_baseline_system_11_2__test_json_true():
+    assert (
+        is_baseline_system_11_2(
+            load_system_test_file("System_11.2_VAV_SZ.json")["ruleset_model_instances"][
+                0
+            ],
+            "System 11",
+            ["VAV Air Terminal 1"],
+            ["Thermal Zone 1"],
+        )
+        == HVAC_SYS.SYS_11_2
+    )
+
+
+def test__is_baseline_system_11_2A__true():
     assert (
         is_baseline_system_11_2(
             SYS_11_2_TEST_RMD["ruleset_model_instances"][0],
             "System Type 11.2A",
             ["VAV Air Terminal 1A"],
             ["Thermal Zone 1A"],
+        )
+        == HVAC_SYS.SYS_11_2A
+    )
+
+
+def test__is_baseline_system_11_2A__test_json_true():
+    assert (
+        is_baseline_system_11_2(
+            load_system_test_file("System_11.2a_VAV_SZ.json")[
+                "ruleset_model_instances"
+            ][0],
+            "System 11",
+            ["VAV Air Terminal 1"],
+            ["Thermal Zone 1"],
         )
         == HVAC_SYS.SYS_11_2A
     )

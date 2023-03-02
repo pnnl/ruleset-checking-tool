@@ -235,7 +235,7 @@ def test__TEST_RMD_baseline_system_8__is_valid():
     ], f"Schema error: {schema_validation_result['error']}"
 
 
-def test_is_baseline_system_8_true():
+def test__is_baseline_system_8__true():
     assert (
         is_baseline_system_8(
             SYS_8_TEST_RMD["ruleset_model_instances"][0],
@@ -247,16 +247,21 @@ def test_is_baseline_system_8_true():
     )
 
 
-def test_is_baseline_system_8_test_json_true():
-    assert is_baseline_system_8(
-        load_system_test_file("System_8_PFP_Reheat.json")["ruleset_model_instances"][0],
-        "System 8",
-        ["VAV Air Terminal 1"],
-        ["Thermal Zone 1"],
+def test__is_baseline_system_8__test_json_true():
+    assert (
+        is_baseline_system_8(
+            load_system_test_file("System_8_PFP_Reheat.json")[
+                "ruleset_model_instances"
+            ][0],
+            "System 8",
+            ["VAV Air Terminal 1"],
+            ["Thermal Zone 1"],
+        )
+        == HVAC_SYS.SYS_8
     )
 
 
-def test_is_baseline_system_8A_true():
+def test__is_baseline_system_8A__true():
     assert (
         is_baseline_system_8(
             SYS_8_TEST_RMD["ruleset_model_instances"][0],
@@ -268,18 +273,21 @@ def test_is_baseline_system_8A_true():
     )
 
 
-def test_is_baseline_system_8A_test_json_true():
-    assert is_baseline_system_8(
-        load_system_test_file("System_8a_PFP_Reheat.json")["ruleset_model_instances"][
-            0
-        ],
-        "System 8",
-        ["VAV Air Terminal 1"],
-        ["Thermal Zone 1"],
+def test__is_baseline_system_8A__test_json_true():
+    assert (
+        is_baseline_system_8(
+            load_system_test_file("System_8a_PFP_Reheat.json")[
+                "ruleset_model_instances"
+            ][0],
+            "System 8",
+            ["VAV Air Terminal 1"],
+            ["Thermal Zone 1"],
+        )
+        == HVAC_SYS.SYS_8A
     )
 
 
-def test_is_baseline_system_8B_true():
+def test__is_baseline_system_8B__true():
     assert (
         is_baseline_system_8(
             SYS_8_TEST_RMD["ruleset_model_instances"][0],
@@ -291,18 +299,21 @@ def test_is_baseline_system_8B_true():
     )
 
 
-def test_is_baseline_system_8B_test_json_true():
-    assert is_baseline_system_8(
-        load_system_test_file("System_8b_PFP_Reheat.json")["ruleset_model_instances"][
-            0
-        ],
-        "System 8",
-        ["VAV Air Terminal 1"],
-        ["Thermal Zone 1"],
+def test__is_baseline_system_8B__test_json_true():
+    assert (
+        is_baseline_system_8(
+            load_system_test_file("System_8b_PFP_Reheat.json")[
+                "ruleset_model_instances"
+            ][0],
+            "System 8",
+            ["VAV Air Terminal 1"],
+            ["Thermal Zone 1"],
+        )
+        == HVAC_SYS.SYS_8B
     )
 
 
-def test_is_baseline_system_8C_true():
+def test__is_baseline_system_8C__true():
     assert (
         is_baseline_system_8(
             SYS_8_TEST_RMD["ruleset_model_instances"][0],
@@ -314,12 +325,15 @@ def test_is_baseline_system_8C_true():
     )
 
 
-def test_is_baseline_system_8C_test_json_true():
-    assert is_baseline_system_8(
-        load_system_test_file("System_8c_PFP_Reheat.json")["ruleset_model_instances"][
-            0
-        ],
-        "System 8",
-        ["VAV Air Terminal 1"],
-        ["Thermal Zone 1"],
+def test__is_baseline_system_8C__test_json_true():
+    assert (
+        is_baseline_system_8(
+            load_system_test_file("System_8c_PFP_Reheat.json")[
+                "ruleset_model_instances"
+            ][0],
+            "System 8",
+            ["VAV Air Terminal 1"],
+            ["Thermal Zone 1"],
+        )
+        == HVAC_SYS.SYS_8C
     )
