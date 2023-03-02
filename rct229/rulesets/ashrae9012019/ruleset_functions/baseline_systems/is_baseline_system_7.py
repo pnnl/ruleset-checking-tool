@@ -71,7 +71,7 @@ def is_baseline_system_7(rmi_b, hvac_b_id, terminal_unit_id_list, zone_id_list):
     purchased CHW), system 7b (system 7 with purchased heating), pr system 7c (system 7 with purchased heating and
     purchased CHW). -------
     """
-    is_baseline_system_7_str = HVAC_SYS.UNMATCHED
+    is_baseline_system_7 = HVAC_SYS.UNMATCHED
 
     # check if the hvac system has the required sub systems for system type 7
     # if heating system DOESN'T exist and preheat/cooling systems exist, has_required_sys=True, else, False.
@@ -94,7 +94,7 @@ def is_baseline_system_7(rmi_b, hvac_b_id, terminal_unit_id_list, zone_id_list):
         and are_all_terminal_fans_null(rmi_b, terminal_unit_id_list)
         and are_all_terminal_types_VAV(rmi_b, terminal_unit_id_list)
     )
-
+    stop = 1
     if are_sys_data_matched:
         # Confirm required data for Sys-7, now to decide which system type 7
         is_hvac_sys_fluid_loop_attached_to_chiller_flag = (
@@ -109,17 +109,17 @@ def is_baseline_system_7(rmi_b, hvac_b_id, terminal_unit_id_list, zone_id_list):
             rmi_b, terminal_unit_id_list
         ):
             if is_hvac_sys_fluid_loop_attached_to_chiller_flag:
-                is_baseline_system_7_str = HVAC_SYS.SYS_7
+                is_baseline_system_7 = HVAC_SYS.SYS_7
             elif is_hvac_sys_fluid_loop_purchased_chw_flag:
-                is_baseline_system_7_str = HVAC_SYS.SYS_7A
+                is_baseline_system_7 = HVAC_SYS.SYS_7A
         elif is_hvac_sys_preheat_fluid_loop_purchased_heating(
             rmi_b, hvac_b_id
         ) and are_all_terminal_heating_loops_purchased_heating(
             rmi_b, terminal_unit_id_list
         ):
             if is_hvac_sys_fluid_loop_attached_to_chiller_flag:
-                is_baseline_system_7_str = HVAC_SYS.SYS_7B
+                is_baseline_system_7 = HVAC_SYS.SYS_7B
             elif is_hvac_sys_fluid_loop_purchased_chw_flag:
-                is_baseline_system_7_str = HVAC_SYS.SYS_7C
+                is_baseline_system_7 = HVAC_SYS.SYS_7C
 
-    return is_baseline_system_7_str
+    return is_baseline_system_7
