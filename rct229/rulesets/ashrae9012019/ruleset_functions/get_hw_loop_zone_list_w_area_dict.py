@@ -67,21 +67,23 @@ def get_hw_loop_zone_list_w_area(rmi_b):
                     hhw_loop_id = find_exactly_one_hvac_system(rmi_b, hvac_id)[
                         "heating_system"
                     ]["hot_water_loop"]
-            if type(hhw_loop_id) is str:
-                if hhw_loop_id not in hw_loop_zone_list_w_area_dict.keys():
-                    hw_loop_zone_list_w_area_dict[hhw_loop_id] = {
-                        "zone_list": [],
-                        "total_area": ZERO.AREA,
-                    }
-                # prevent double counting
-                if (
+
+            if (
+                hhw_loop_id is not None
+                and hhw_loop_id not in hw_loop_zone_list_w_area_dict.keys()
+            ):
+                hw_loop_zone_list_w_area_dict[hhw_loop_id] = {
+                    "zone_list": [],
+                    "total_area": ZERO.AREA,
+                }
+            # prevent double counting
+            if (
+                hhw_loop_id is not None
+                and zone["id"]
+                not in hw_loop_zone_list_w_area_dict[hhw_loop_id]["zone_list"]
+            ):
+                hw_loop_zone_list_w_area_dict[hhw_loop_id]["zone_list"].append(
                     zone["id"]
-                    not in hw_loop_zone_list_w_area_dict[hhw_loop_id]["zone_list"]
-                ):
-                    hw_loop_zone_list_w_area_dict[hhw_loop_id]["zone_list"].append(
-                        zone["id"]
-                    )
-                    hw_loop_zone_list_w_area_dict[hhw_loop_id][
-                        "total_area"
-                    ] += zone_area
+                )
+                hw_loop_zone_list_w_area_dict[hhw_loop_id]["total_area"] += zone_area
     return hw_loop_zone_list_w_area_dict
