@@ -214,6 +214,13 @@ def test__TEST_RMD_baseline_system_13__is_valid():
     ], f"Schema error: {schema_validation_result['error']}"
 
 
+def test__TEST_RMD_baseline_system_13__is_unmatched_valid():
+    schema_validation_result = schema_validate_rmr(SYS_13_TEST_UNMATCHED_RMD)
+    assert schema_validation_result[
+        "passed"
+    ], f"Schema error: {schema_validation_result['error']}"
+
+
 def test__is_baseline_system_13__true():
     assert (
         is_baseline_system_13(

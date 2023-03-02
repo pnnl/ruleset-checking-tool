@@ -120,7 +120,6 @@ SYS_6_TEST_RMD = {
     ],
 }
 
-# The purpose of below system is to test out when the test RMD doesn't meet sys 6 and 6B requirements. This is added for branch coverage.
 SYS_6_TEST_UNMATCHED_RMD = {
     "id": "ASHRAE229 1",
     "ruleset_model_instances": [
@@ -183,6 +182,13 @@ SYS_6_TEST_UNMATCHED_RMD = {
 
 def test__TEST_RMD_baseline_system_6__is_valid():
     schema_validation_result = schema_validate_rmr(SYS_6_TEST_RMD)
+    assert schema_validation_result[
+        "passed"
+    ], f"Schema error: {schema_validation_result['error']}"
+
+
+def test__TEST_RMD_baseline_system_6__is_unmatched_valid():
+    schema_validation_result = schema_validate_rmr(SYS_6_TEST_UNMATCHED_RMD)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"
