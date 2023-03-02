@@ -260,6 +260,7 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
 
 ## Section 21 - Central Heating Hot Water Systems
   * [21-1](section21/Rule21-1.md): For systems using purchased hot water or steam, the heating source shall be modeled as purchased hot water or steam in both the proposed design and baseline building design. If any system in the proposed design uses purchased hot water or steam, all baseline systems with hot water coils shall use the same type of purchased hot water or steam.
+  * [21-2](section21/Rule21-2.md): For purchased HW/steam in the proposed model, the baseline shall have the same number of pumps as proposed
   * [21-3](section21/Rule21-3.md): Heating hot water plant capacity shall be based on coincident loads.  
   * [21-4](section21/Rule21-4.md): When baseline building does not use purchased heat, baseline systems 1,5,7,11,12 shall be modeled with natural draft boilers.
   * [21-5](section21/Rule21-5.md): The baseline building design boiler plant shall be modeled as having a single boiler if the baseline building design plant serves a conditioned floor area of 15,000sq.ft. or less, and as having two equally sized boilers for plants serving more than 15,000sq.ft.

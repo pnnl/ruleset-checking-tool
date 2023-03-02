@@ -15,6 +15,7 @@ icecream = "*"
 pytest-cov = "*"
 pytest-watch = "*"
 jsonpath-ng = "*"
+pyinstrument = "*"
 
 [packages]
 rct229 = {editable = true, path = "."}
@@ -30,3 +31,4 @@ regex = "==2022.1.18"
 black = "~=22.6.0"
 jsonpath2 = "*"
 jsonpath-ng = "*"
+pyinstrument = "*"

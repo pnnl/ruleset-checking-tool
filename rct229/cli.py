@@ -5,13 +5,8 @@ from rct229.reports.ashrae901_2019_summary_report import ASHRAE9012019SummaryRep
 from rct229.reports.engine_raw_output import EngineRawOutput
 from rct229.reports.engine_raw_summary import EngineRawSummary
 from rct229.rule_engine.engine import evaluate_all_rules
-from rct229.ruletest_engine.run_ruletests import (
-    run_boiler_tests,
-    run_chiller_tests,
-    run_envelope_tests,
-    run_lighting_tests,
-    run_airside_tests,
-)
+from rct229.rule_engine.rulesets import RuleSet, RuleSetTest
+from rct229.ruletest_engine.run_ruletests import run_ashrae9012019_tests
 from rct229.schema.validate import validate_rmr
 from rct229.utils.file import deserialize_rmr_file
 
@@ -38,7 +33,9 @@ def cli():
 
 # Software Test Workflow
 test_short_help_text = (
-    "Software test workflow, add sections to do test. argument (optional): section string, "
+    "Software test workflow, add sections to do test. "
+    "--ruleset or -s: default is ashrae9012019, available: ashrae9012019"
+    "argument (optional): section string, "
     "currently available: section5, section6, section 21, section 22 "
 )
 
@@ -46,36 +43,30 @@ test_short_help_text = (
 @cli.command(
     "test", short_help=test_short_help_text, help=test_short_help_text, hidden=True
 )
+@click.option("--ruleset", "-rs", multiple=False, default="ashrae9012019")
 @click.argument("section", type=click.STRING, required=False)
-def run_test(section=None):
-    if section:
-        print(f"software test workflow for section {section}")
-        if section == "section5":
-            assert run_envelope_tests(), "Failed section 5 tests"
-        elif section == "section6":
-            assert run_lighting_tests(), "Failed section 6 tests"
-        # elif section == "section15":
-        #    assert run_transformer_tests(), "Failed section 15 tests"
-        elif section == "section21":
-            assert run_boiler_tests(), "Failed section 21 tests"
-        elif section == "section22":
-            assert run_chiller_tests(), "Failed section 22 tests"
-        elif section == "section23":
-            assert run_airside_tests(), "Failed section 23 tests"
+def run_test(ruleset, section=None):
+    print(f"software test workflow for section {section}")
+    if ruleset == RuleSet.ASHRAE9012019_RULESET:
+        outcome_list = run_ashrae9012019_tests(section)
+        if section is None:
+            for idx, outcome in enumerate(outcome_list):
+                assert (
+                    outcome
+                ), f"{RuleSetTest.ASHRAE9012019_TEST_LIST[idx]} failed in the test"
+        else:
+            assert all(outcome_list), f"{section} failed in the test"
     else:
-        print(f"software test workflow for all tests")
-        # assert run_transformer_tests(), "Failed section 15 tests"
-        assert run_lighting_tests(), "Failed section 6 tests"
-        assert run_envelope_tests(), "Failed section 5 tests"
-        assert run_boiler_tests(), "Failed section 21 tests"
-        assert run_chiller_tests(), "Failed section 22 tests"
-        assert run_airside_tests(), "Failed section 23 tests"
+        print(
+            f"ruleset document {ruleset} is not currently supported by the RCT. Please select one from the following: ashrae9012019"
+        )
 
 
 # Evaluate RMR Triplet
 short_help_text = """
-    Test RMD triplet. arguments are user_rmd, baseline_rmd, proposed_rmd
-    --reports or -r: reports. Default is RAW_OUTPUT, available options include RAW_OUTPUT, RAW_SUMMARY, ASHRAE9012019_DETAIL, ASHRAE9012019_SUMMARY, multiple allowed.
+    Test RMD triplet. arguments are user_rmd, baseline_rmd, proposed_rmd,
+    --ruleset or -s: ruleset name. Default is ashrae9012019, available options include: ashrae9012019
+    --reports or -r: reports. Default is RAW_OUTPUT, available options include: RAW_OUTPUT, RAW_SUMMARY, ASHRAE9012019_DETAIL, ASHRAE9012019_SUMMARY, multiple allowed.
     """
 help_text = short_help_text
 
@@ -84,12 +75,13 @@ help_text = short_help_text
 @click.argument("user_rmd", type=click.File("r"))
 @click.argument("baseline_rmd", type=click.File("r"))
 @click.argument("proposed_rmd", type=click.File("r"))
+@click.option("--ruleset", "-rs", multiple=False, default="ashrae9012019")
 @click.option("--reports", "-r", multiple=True, default=["RAW_OUTPUT"])
 @click.option(
     "--reports_directory", "-rd", multiple=False, default="./examples/output/"
 )
-def evaluate(user_rmd, baseline_rmd, proposed_rmd, reports, reports_directory):
-    report = evaluate_rmr_triplet(user_rmd, baseline_rmd, proposed_rmd)
+def evaluate(user_rmd, baseline_rmd, proposed_rmd, ruleset, reports, reports_directory):
+    report = evaluate_rmr_triplet(user_rmd, baseline_rmd, proposed_rmd, ruleset)
     # have report attached.
 
     props = {
@@ -106,7 +98,7 @@ def evaluate(user_rmd, baseline_rmd, proposed_rmd, reports, reports_directory):
         report_module.generate(report, reports_directory)
 
 
-def evaluate_rmr_triplet(user_rmr, baseline_rmr, proposed_rmr):
+def evaluate_rmr_triplet(user_rmr, baseline_rmr, proposed_rmr, ruleset_doc):
     print("Test implementation of rule engine for ASHRAE Std 229 RCT.")
     print("")
 
@@ -137,7 +129,9 @@ def evaluate_rmr_triplet(user_rmr, baseline_rmr, proposed_rmr):
         print("Processing rules...")
         print("")
 
-        return evaluate_all_rules(user_rmr_obj, baseline_rmr_obj, proposed_rmr_obj)
+        return evaluate_all_rules(
+            user_rmr_obj, baseline_rmr_obj, proposed_rmr_obj, ruleset_doc
+        )
 
 
 if __name__ == "__main__":

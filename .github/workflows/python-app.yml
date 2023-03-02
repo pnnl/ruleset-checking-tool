@@ -38,4 +38,4 @@ jobs:
         # This will halt the action if any of the tests fail
         run: pipenv run pytest -v
       - name: Run rule tests
-        run: pipenv run rct229 test
+        run: pipenv run rct229 test -rs ashrae9012019
