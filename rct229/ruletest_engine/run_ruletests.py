@@ -134,6 +134,13 @@ def run_test_helper(test_list, ruleset_doc):
     return all(test_results)
 
 
+def run_test_one_jsontest(test_json):
+    """
+    Test function developed to facilitate running a single rule test json
+    """
+    return run_section_tests(test_json, RuleSet.ASHRAE9012019_RULESET)
+
+
 if __name__ == "__main__":
     outcome = run_ashrae9012019_tests(section="section6")
 
@@ -144,3 +151,5 @@ if __name__ == "__main__":
 # run_envelope_tests()
 # run_receptacle_tests()
 # run_airside_tests()
+
+# run_test_one_jsontest("ashrae9012019/section5/rule_5_3.json")
