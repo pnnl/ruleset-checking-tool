@@ -214,7 +214,6 @@ SYS_3_TEST_UNMATCHED_RMD = {
                                     "heating_system": {
                                         "id": "Heating Coil",
                                         "heating_system_type": "OTHER",
-                                        # "hot_water_loop": "Purchased HW Loop 1",
                                     },
                                     "fan_system": {
                                         "id": "CAV Fan System",
@@ -228,21 +227,12 @@ SYS_3_TEST_UNMATCHED_RMD = {
                 }
             ],
             "fluid_loops": [
-                # {
-                #     "id": "Purchased HW Loop 1",
-                #     "type": "HEATING",
-                # },
                 {
                     "id": "Purchased CHW Loop 1",
                     "type": "COOLING",
                 },
             ],
             "external_fluid_source": [
-                # {
-                #     "id": "Purchased HW",
-                #     "loop": "Purchased HW Loop 1",
-                #     "type": "HOT_WATER",
-                # },
                 {
                     "id": "Purchased CHW",
                     "loop": "Purchased CHW Loop 1",
