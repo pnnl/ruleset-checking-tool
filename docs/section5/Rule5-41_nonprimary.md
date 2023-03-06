@@ -23,9 +23,7 @@
 
   - For each zone in building segment: ```for zone_p in building_segment_p.zones:```
 
-    - For each space in zone: ```for space_p in zone_p.spaces:``` 
-
-      - For each surface in space: ```for surface_p in space_p.surfaces;```
+    - For each surface in zone: ```for surface_p in zone_p.surfaces:```
 
         - Check if surface is roof, set rule applicability check to True: ```if get_opaque_surface_type(surface_p.id) == "ROOF": rule_applicability_check = TRUE```
 
