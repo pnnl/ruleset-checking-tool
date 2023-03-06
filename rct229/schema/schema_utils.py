@@ -45,7 +45,7 @@ def clean_schema_units(schema_unit_str):
 
 
 def find_schema_unit_for_json_path(key_list):
-    """Ingests a JSON path that has associated units the ASHRAE229 schema. This function returns the units for that
+    """Ingests a JSON path that has associated units int the ASHRAE229 schema. This function returns the units for that
     JSON path as defined by the ASHRAE229 schema.
     For example: ['transformers','capacity'] => 'V-A'
 
@@ -186,9 +186,9 @@ def quantify_rmr(rmr):
 
 
 def return_json_schema_reference(object_dict, key):
-    """This function takes an schema object's dictionary, passes it a key, and returns it's respective reference
+    """This function takes a schema object's dictionary, passes it a key, and returns it's respective reference
     definition dictionary. For example, the Building object in ASHRAE229.schema.json dictionary has a
-    "building_segments" key. Passing in the Building dictionary with the "building_segments" key would return a
+    "building_segments" key. Passing in the Building dictionary with the "building_segments" key would return
     the definition for the BuildingSegment element in the ASHRAE229 schema.
 
     Parameters
