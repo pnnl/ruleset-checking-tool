@@ -26,36 +26,34 @@
 
   - For each zone in building_segment: ```for zone_b in building_segment_b.zones:```
 
-    - For each space in zone: ```for space_b in zone_b.spaces:```
+    - For each surface in zone: ```for surface_b in zone_b.surfaces:```
 
-      - For each surface in space: ```for surface_b in space_b.surfaces:```
+      - Get surface conditioning category: ```scc_b = scc_dictionary_b[surface_b.id]```
 
-        - Get surface conditioning category: ```scc_b = scc_dictionary_b[surface_b.id]```
+      - For each subsurface in surface: ```for subsurface_b in surface_b.subsurfaces:```
 
-        - For each subsurface in surface: ```for subsurface_b in surface_b.subsurfaces:```
+        - Check if subsurface is opaque door: ```if ( subsurface_b.classification == "DOOR" ) AND ( subsurface_b.glazed_area < subsurface.opaque_area )```
 
-          - Check if subsurface is opaque door: ```if ( subsurface_b.classification == "DOOR" ) AND ( subsurface_b.glazed_area < subsurface.opaque_area )```
+          - Set rule applicability check to True: ```rule_applicability_check = TRUE```
 
-            - Set rule applicability check to True: ```rule_applicability_check = TRUE```
+          - Get subsurface subclassification: ```subclassification_b = subsurface_b.subclassification```
 
-            - Get subsurface subclassification: ```subclassification_b = subsurface_b.subclassification```
+          - If surface is exterior residential, exterior non-residential, or semi-exterior, get baseline construction from Table G3.4-1 to G3.4-8 based on climate zone, surface conditioning category and door type: `if ( ( scc_b == "EXTERIOR RESIDENTIAL" ) OR ( scc_b == "EXTERIOR NON-RESIDENTIAL" ) OR ( scc_b == "SEMI-EXTERIOR" ) ): target_u_factor = data_lookup(table_G3_4, climate_zone, scc_b, "DOOR", subclassification_b)`
 
-            - If surface is exterior residential, exterior non-residential, or semi-exterior, get baseline construction from Table G3.4-1 to G3.4-8 based on climate zone, surface conditioning category and door type: `if ( ( scc_b == "EXTERIOR RESIDENTIAL" ) OR ( scc_b == "EXTERIOR NON-RESIDENTIAL" ) OR ( scc_b == "SEMI-EXTERIOR" ) ): target_u_factor = data_lookup(table_G3_4, climate_zone, scc_b, "DOOR", subclassification_b)`
+          - Else if surface is exterior mixed, get baseline construction for both residential and non-residential type door: ```else if ( scc_b == "EXTERIOR MIXED" ): target_u_factor_res = data_lookup(table_G3_4, climate_zone, "EXTERIOR RESIDENTIAL", "DOOR", subclassification_b), target_u_factor_nonres = data_lookup(table_G3_4, climate_zone, "EXTERIOR NON-RESIDENTIAL", "DOOR", subclassification_b)```
 
-            - Else if surface is exterior mixed, get baseline construction for both residential and non-residential type door: ```else if ( scc_b == "EXTERIOR MIXED" ): target_u_factor_res = data_lookup(table_G3_4, climate_zone, "EXTERIOR RESIDENTIAL", "DOOR", subclassification_b), target_u_factor_nonres = data_lookup(table_G3_4, climate_zone, "EXTERIOR NON-RESIDENTIAL", "DOOR", subclassification_b)```
+            - If residential and non-residential type door construction requirements are the same, save as baseline construction: ```if target_u_factor_res == target_u_factor_nonres: target_u_factor = target_u_factor_res```
 
-              - If residential and non-residential type door construction requirements are the same, save as baseline construction: ```if target_u_factor_res == target_u_factor_nonres: target_u_factor = target_u_factor_res```
+            - Else, outcome is UNDETERMINED: ```manual_review_flag = TRUE```
 
-              - Else, outcome is UNDETERMINED: ```manual_review_flag = TRUE```
+            **Rule Assertion:**  
 
-              **Rule Assertion:**  
+            - Case 1: For each opaque door, if the door's parent zone has both residential and non-residential spaces and the construction requirements for door are different, outcome is UNDETERMINED: ```if manual_review_flag == TRUE:
+              outcome = UNDETERMINED and raise_message "ZONE HAS BOTH RESIDENTIAL AND NON-RESIDENTIAL TYPE SPACES AND THE REQUIREMENT FOR U-FACTOR FOR DOORS ARE DIFFERENT. VERIFY DOOR U-FACTOR IS MODELED CORRECTLY."```
 
-              - Case 1: For each opaque door, if the door's parent zone has both residential and non-residential spaces and the construction requirements for door are different, outcome is UNDETERMINED: ```if manual_review_flag == TRUE:
-                outcome = UNDETERMINED and raise_message "ZONE HAS BOTH RESIDENTIAL AND NON-RESIDENTIAL TYPE SPACES AND THE REQUIREMENT FOR U-FACTOR FOR DOORS ARE DIFFERENT. VERIFY DOOR U-FACTOR IS MODELED CORRECTLY."```
+            - Case 2: Else if door U-factor matches Table G3.4, outcome is PASS: ```else if subsurface_b.u_factor == target_u_factor: outcome = PASS```
 
-              - Case 2: Else if door U-factor matches Table G3.4, outcome is PASS: ```else if subsurface_b.u_factor == target_u_factor: outcome = PASS```
-
-              - Case 3: Else, outcome is FAIL: ```else: outcome = FAIL```
+            - Case 3: Else, outcome is FAIL: ```else: outcome = FAIL```
 
 - Case 4: If building has no opaque door, outcome is NOT_APPLICABLE: ```if NOT rule_applicability_check: outcome = NOT_APPLICABLE```
 
