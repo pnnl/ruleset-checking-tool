@@ -2,10 +2,9 @@ import json
 import os
 import re
 from copy import deepcopy
-from pydash.objects import set_
 
 from jsonpath_ng.ext import parse as parse_jsonpath
-
+from pydash.objects import set_
 
 import rct229.schema.config as config
 
