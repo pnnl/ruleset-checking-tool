@@ -23,18 +23,16 @@
 
   - For each zone in building segment: ```for zone_b in building_segment_b.zones:```
 
-    - For each space in zone: ```for space_b in zone_b.spaces:```
+    - For each surface in zone: ```for surface_b in zone_b.surfaces:```
 
-      - For each surface in space: ```for surface_b in space_b.surfaces:```
+      - Check if surface is above-grade wall or roof and is exterior: ```if ( get_opaque_surface_type(surface_b) == "ABOVE-GRADE WALL" ) AND ( scc_dictionary_b[surface_b.id] != "UNREGULATED" ):```
 
-        - Check if surface is above-grade wall or roof and is exterior: ```if ( get_opaque_surface_type(surface_b) == "ABOVE-GRADE WALL" ) AND ( scc_dictionary_b[surface_b.id] != "UNREGULATED" ):```
+        - For each subsurface in surface: ```for subsurface_b in surface_b.subsurfaces:```
 
-          - For each subsurface in surface: ```for subsurface_b in surface_b.subsurfaces:```
+          **Rule Assertion:**
 
-            **Rule Assertion:**
+          - Case 1: For each subsurface, if subsurface is flush with the exterior wall, and no shading projections are modeled, outcome is PASS: ```if ( NOT subsurface_b.has_shading_overhang ) AND ( NOT subsurface_b.has_shading_sidefins ): outcome = PASS```
 
-            - Case 1: For each subsurface, if subsurface is flush with the exterior wall, and no shading projections are modeled, outcome is PASS: ```if ( NOT subsurface_b.has_shading_overhang ) AND ( NOT subsurface_b.has_shading_sidefins ): outcome = PASS```
-
-            - Case 2: Else, outcome is FAIL: ```else: outcome = FAIL and raise_warning "BASELINE FENESTRATION WAS MODELED WITH SHADING PROJECTIONS AND/OR OVERHANGS, WHICH IS INCORRECT."```
+          - Case 2: Else, outcome is FAIL: ```else: outcome = FAIL and raise_warning "BASELINE FENESTRATION WAS MODELED WITH SHADING PROJECTIONS AND/OR OVERHANGS, WHICH IS INCORRECT."```
 
 **[Back](../_toc.md)**
