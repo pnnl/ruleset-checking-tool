@@ -2,8 +2,10 @@ import json
 import os
 import re
 from copy import deepcopy
+from pydash.objects import set_
 
 from jsonpath_ng.ext import parse as parse_jsonpath
+
 
 import rct229.schema.config as config
 
@@ -179,8 +181,7 @@ def quantify_rmr(rmr):
             pint_qty = number_rmr_item_match.value * config.ureg(pint_unit_str)
 
             # Replace the number with the appropriate pint quantity
-            jsonpath_expr = parse_jsonpath(str(number_rmr_item_match.full_path))
-            jsonpath_expr.update(rmr, pint_qty)
+            set_(rmr, full_path, pint_qty)
 
     return rmr
 
