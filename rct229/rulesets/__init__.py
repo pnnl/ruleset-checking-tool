@@ -1,10 +1,10 @@
 import importlib
 import inspect
 
+import rct229.rule_engine.partial_rule_definition as base_partial_rule_classes
 import rct229.rule_engine.rule_base as base_classes
 import rct229.rule_engine.rule_list_base as base_list_classes
 import rct229.rule_engine.rule_list_indexed_base as base_list_indexed_classes
-import rct229.rule_engine.partial_rule_definition as base_partial_rule_classes
 import rct229.rulesets as rulesets
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rulesets import RuleSet

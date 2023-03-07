@@ -1,8 +1,9 @@
 from rct229.rule_engine.partial_rule_definition import PartialRuleDefinition
+
 from .rule_base_test import (
-    DERIVED_RULE_outcome_base,
     BASE_RULE_ARGS,
     RMRS_WITH_MATCHING_USER_AND_BASELINE,
+    DERIVED_RULE_outcome_base,
 )
 
 
