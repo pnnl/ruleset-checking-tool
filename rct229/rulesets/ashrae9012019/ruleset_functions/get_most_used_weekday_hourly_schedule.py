@@ -5,7 +5,6 @@ from rct229.rule_engine.rulesets import LeapYear
 from rct229.utils.assertions import RCTFailureException, assert_
 
 HOURS_IN_DAY = 24
-NUM_DAYS_WEEKDAYS = 5
 
 
 def get_most_used_weekday_hourly_schedule(hourly_data: list, year: int):
@@ -43,21 +42,18 @@ def get_most_used_weekday_hourly_schedule(hourly_data: list, year: int):
     start_datetime = datetime.datetime(year, 1, 1, 0)
 
     # create a list to store the 24-hour schedules for each day of the week
-    schedules_by_day_of_week = [[] for _ in range(NUM_DAYS_WEEKDAYS)]
+    schedules_by_day_of_week = [[] for _ in range(5)]
 
-    # loop over each hour in the year
     for i in range(0, len(hourly_data), HOURS_IN_DAY):
-        # calculate the datetime for the current hour
         current_datetime = start_datetime + datetime.timedelta(hours=i)
         # get the weekday (Monday is 0, Friday is 4)
         weekday = current_datetime.weekday()
         # We only need weekdays, excluding weekends
-        if weekday < NUM_DAYS_WEEKDAYS:
+        if weekday < 5:
             # get the 24-hour schedule for the current day
             day_schedule = tuple(hourly_data[i : i + HOURS_IN_DAY])
             schedules_by_day_of_week[weekday].append(day_schedule)
 
-    # create a Counter object to count the occurrences of each 24-hour schedule
     schedule_counts = Counter(
         schedule for schedules in schedules_by_day_of_week for schedule in schedules
     )
