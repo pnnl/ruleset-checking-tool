@@ -18,7 +18,7 @@ class Section5Rule14(RuleDefinitionListIndexedBase):
             },
             each_rule=Section5Rule14.BuildingRule(),
             index_rmr="baseline",
-            id="5-12",
+            id="5-14",
             description=" Baseline slab-on-grade assemblies must conform with assemblies detailed in Appendix A (Unheated Slabs A6).",
             ruleset_section_title="Envelope",
             standard_section="Section G3.1-5(b) Building Envelope Modeling Requirements for the Baseline building",
