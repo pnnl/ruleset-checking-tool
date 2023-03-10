@@ -9,6 +9,9 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_building_scc_skylight_r
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_opaque_surface_type import (
     OpaqueSurfaceType as OST,
 )
+from rct229.rulesets.ashrae9012019.ruleset_functions.get_building_segment_skylight_roof_areas_dict import (
+    get_building_segment_skylight_roof_areas_dict,
+)
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_opaque_surface_type import (
     get_opaque_surface_type,
 )
@@ -19,6 +22,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_surface_conditioning_ca
     get_surface_conditioning_category_dict,
 )
 from rct229.utils.std_comparisons import std_equal
+from rct229.utils.pint_utils import ZERO
 
 MANUAL_CHECK_MSG = "MANUAL REVIEW IS REQUESTED TO VERIFY SKYLIGHT MEETS SHGC REQUIREMENT AS PER TABLE G3.4."
 
@@ -31,7 +35,7 @@ class Section5Rule38(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section5Rule38, self).__init__(
-            rmrs_used=UserBaselineProposedVals(False, True, False),
+            rmrs_used=UserBaselineProposedVals(False, True, True),
             each_rule=Section5Rule38.BuildingRule(),
             index_rmr="baseline",
             id="5-38",
@@ -50,9 +54,9 @@ class Section5Rule38(RuleDefinitionListIndexedBase):
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section5Rule38.BuildingRule, self).__init__(
-                rmrs_used=UserBaselineProposedVals(False, True, False),
-                list_path="$..surfaces[*]",
-                each_rule=Section5Rule38.BuildingRule.RoofRule(),
+                rmrs_used=UserBaselineProposedVals(False, True, True),
+                list_path="$.building_segments[*]",
+                each_rule=Section5Rule38.BuildingRule.BuildingSegmentRule(),
                 index_rmr="baseline",
                 manual_check_required_msg=MANUAL_CHECK_MSG,
             )
@@ -164,80 +168,103 @@ class Section5Rule38(RuleDefinitionListIndexedBase):
                 "target_shgc_semiheated": target_shgc_semiheated,
             }
 
-        def list_filter(self, context_item, data=None):
-            surface_b = context_item.baseline
-            scc = data["surface_conditioning_category_dict"][surface_b["id"]]
-
-            return (
-                get_opaque_surface_type(surface_b) == OST.ROOF
-                and surface_b.get("subsurfaces")
-                and scc != SCC.UNREGULATED
-            )
-
-        class RoofRule(RuleDefinitionListIndexedBase):
+        class BuildingSegmentRule(RuleDefinitionListIndexedBase):
             def __init__(self):
-                super(Section5Rule38.BuildingRule.RoofRule, self).__init__(
-                    rmrs_used=UserBaselineProposedVals(False, True, False),
-                    each_rule=Section5Rule38.BuildingRule.RoofRule.SubsurfaceRule(),
+                super(Section5Rule38.BuildingRule.BuildingSegmentRule, self).__init__(
+                    rmrs_used=UserBaselineProposedVals(False, True, True),
+                    each_rule=Section5Rule38.BuildingRule.BuildingSegmentRule.RoofRule(),
                     index_rmr="baseline",
-                    list_path="subsurfaces[*]",
-                    manual_check_required_msg=MANUAL_CHECK_MSG,
+                    list_path="$.zones[*].surfaces[*]",
                 )
 
-            def create_data(self, context, data=None):
-                surface_b = context.baseline
-                surface_id_b = surface_b["id"]
+            def is_applicable(self, context, data=None):
+                building_segment_p = context.proposed
+                skylight_roof_areas_dictionary_p = (
+                    get_building_segment_skylight_roof_areas_dict(
+                        data["climate_zone"], building_segment_p
+                    ),
+                )
+                # Add applicability check to make sure the building segment contains
+                # skylight elements
+                total_skylight_area_p = skylight_roof_areas_dictionary_p[
+                    building_segment_p["id"]
+                ]["total_skylight_area"]
+                return total_skylight_area_p > ZERO.AREA
 
-                return {"surface_id_b": surface_id_b}
+            def list_filter(self, context_item, data=None):
+                surface_b = context_item.baseline
+                scc = data["surface_conditioning_category_dict"][surface_b["id"]]
 
-            class SubsurfaceRule(RuleDefinitionBase):
+                return (
+                        get_opaque_surface_type(surface_b) == OST.ROOF
+                        and surface_b.get("subsurfaces")
+                        and scc != SCC.UNREGULATED
+                )
+
+            class RoofRule(RuleDefinitionListIndexedBase):
                 def __init__(self):
-                    super(
-                        Section5Rule38.BuildingRule.RoofRule.SubsurfaceRule, self
-                    ).__init__(
+                    super(Section5Rule38.BuildingRule.BuildingSegmentRule.RoofRule, self).__init__(
                         rmrs_used=UserBaselineProposedVals(False, True, False),
-                        required_fields={
-                            "$": ["classification", "glazed_area", "opaque_area"]
-                        },
+                        each_rule=Section5Rule38.BuildingRule.BuildingSegmentRule.RoofRule.SubsurfaceRule(),
+                        index_rmr="baseline",
+                        list_path="subsurfaces[*]",
+                        manual_check_required_msg=MANUAL_CHECK_MSG,
                     )
 
-                def is_applicable(self, context, data=None):
-                    subsurface_b = context.baseline
+                def create_data(self, context, data=None):
+                    surface_b = context.baseline
+                    surface_id_b = surface_b["id"]
 
-                    return (
-                        subsurface_b["classification"] == SURFACE_CLASSIFICATION.DOOR
-                        and subsurface_b["glazed_area"] > subsurface_b["opaque_area"]
-                    ) or subsurface_b["classification"] != SURFACE_CLASSIFICATION.DOOR
+                    return {"surface_id_b": surface_id_b}
 
-                def get_calc_vals(self, context, data=None):
-                    subsurface_b = context.baseline
-                    subsurface_shgc_b = subsurface_b["solar_heat_gain_coefficient"]
+                class SubsurfaceRule(RuleDefinitionBase):
+                    def __init__(self):
+                        super(
+                            Section5Rule38.BuildingRule.BuildingSegmentRule.RoofRule.SubsurfaceRule, self
+                        ).__init__(
+                            rmrs_used=UserBaselineProposedVals(False, True, False),
+                            required_fields={
+                                "$": ["classification", "glazed_area", "opaque_area"]
+                            },
+                        )
 
-                    subsuface_type_b = data["surface_conditioning_category_dict"][
-                        data["surface_id_b"]
-                    ]
-                    target_shgc_res_b = data["target_shgc_res"]
-                    target_shgc_nonres_b = data["target_shgc_nonres"]
-                    target_shgc_semiheated_b = data["target_shgc_semiheated"]
-                    target_shgc = 0.0
+                    def is_applicable(self, context, data=None):
+                        subsurface_b = context.baseline
 
-                    if (
-                        subsuface_type_b == SCC.EXTERIOR_MIXED
-                        or subsuface_type_b == SCC.EXTERIOR_RESIDENTIAL
-                    ):
-                        target_shgc = target_shgc_res_b
-                    elif subsuface_type_b == SCC.EXTERIOR_NON_RESIDENTIAL:
-                        target_shgc = target_shgc_nonres_b
-                    else:
-                        target_shgc = target_shgc_semiheated_b
+                        return (
+                            subsurface_b["classification"] == SURFACE_CLASSIFICATION.DOOR
+                            and subsurface_b["glazed_area"] > subsurface_b["opaque_area"]
+                        ) or subsurface_b["classification"] != SURFACE_CLASSIFICATION.DOOR
 
-                    return {
-                        "subsurface_shgc_b": subsurface_shgc_b,
-                        "target_shgc": target_shgc,
-                    }
+                    def get_calc_vals(self, context, data=None):
+                        subsurface_b = context.baseline
+                        subsurface_shgc_b = subsurface_b["solar_heat_gain_coefficient"]
 
-                def rule_check(self, context, calc_vals=None, data=None):
-                    target_shgc = calc_vals["target_shgc"]
-                    subsurface_shgc_b = calc_vals["subsurface_shgc_b"]
+                        subsuface_type_b = data["surface_conditioning_category_dict"][
+                            data["surface_id_b"]
+                        ]
+                        target_shgc_res_b = data["target_shgc_res"]
+                        target_shgc_nonres_b = data["target_shgc_nonres"]
+                        target_shgc_semiheated_b = data["target_shgc_semiheated"]
+                        target_shgc = 0.0
 
-                    return std_equal(target_shgc, subsurface_shgc_b)
+                        if (
+                            subsuface_type_b == SCC.EXTERIOR_MIXED
+                            or subsuface_type_b == SCC.EXTERIOR_RESIDENTIAL
+                        ):
+                            target_shgc = target_shgc_res_b
+                        elif subsuface_type_b == SCC.EXTERIOR_NON_RESIDENTIAL:
+                            target_shgc = target_shgc_nonres_b
+                        else:
+                            target_shgc = target_shgc_semiheated_b
+
+                        return {
+                            "subsurface_shgc_b": subsurface_shgc_b,
+                            "target_shgc": target_shgc,
+                        }
+
+                    def rule_check(self, context, calc_vals=None, data=None):
+                        target_shgc = calc_vals["target_shgc"]
+                        subsurface_shgc_b = calc_vals["subsurface_shgc_b"]
+
+                        return std_equal(target_shgc, subsurface_shgc_b)
