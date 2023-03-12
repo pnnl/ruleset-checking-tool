@@ -123,6 +123,7 @@ def run_airside_tests():
     )
     return run_test_helper(json_tests, RuleSet.ASHRAE9012019_RULESET)
 
+
 def run_hvac_general_tests():
     """Runs all tests found in the hvac general tests JSON.
     Returns

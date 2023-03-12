@@ -364,7 +364,7 @@ def disaggregate_master_ruletest_json(master_json_name, ruleset_doc):
     file_dir = os.path.dirname(__file__)
 
     # master JSON should be in the ruletest_jsons directory
-    master_json_path = os.path.join(file_dir, "..", ruleset_doc, master_json_name)
+    master_json_path = os.path.join(file_dir, "..", master_json_name) # os.path.join(file_dir, "..", ruleset_doc, master_json_name)
 
     # Initialize master JSON dictionary
     with open(master_json_path) as f:
@@ -378,12 +378,12 @@ def disaggregate_master_ruletest_json(master_json_name, ruleset_doc):
     prev_rule = ""
 
     # Inner function used for writing out ruletest JSONs
-    def write_ruletest_json(section, rule):
+    def write_ruletest_json(section, rule, ruleset_doc):
 
         # Initialize ruletest json name
         json_name = f"rule_{section}_{rule}.json"
         ruletest_json_name = os.path.join(f"section{section}", f"{json_name}")
-        json_file_path = os.path.join(file_dir, "..", ruletest_json_name)
+        json_file_path = os.path.join(file_dir, "..", ruleset_doc,  ruletest_json_name)
 
         # Dump JSON to string for writing
         json_string = json.dumps(rule_dictionary, indent=4)
@@ -416,7 +416,7 @@ def disaggregate_master_ruletest_json(master_json_name, ruleset_doc):
             if rule_id != prev_rule_id:
 
                 # Write out previous rule dictionary, then initialize a new one
-                write_ruletest_json(prev_section, prev_rule)
+                write_ruletest_json(prev_section, prev_rule, ruleset_doc)
 
                 # Wipe and reinitailize rule_dictionary for new section + rule
                 rule_dictionary = {}
@@ -429,7 +429,7 @@ def disaggregate_master_ruletest_json(master_json_name, ruleset_doc):
         prev_rule = rule
 
     # Write out final rule dictionary
-    write_ruletest_json(prev_section, prev_rule)
+    write_ruletest_json(prev_section, prev_rule, ruleset_doc)
 
 
 def disaggregate_master_rmd_json(master_json_name, output_dir):
