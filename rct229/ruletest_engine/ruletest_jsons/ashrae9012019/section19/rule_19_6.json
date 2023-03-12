@@ -73,13 +73,7 @@
                                     }
                                 ]
                             }
-                        ]
-                    }
-                ]
-            },
-            "proposed": {
-                "ruleset_model_instances": [
-                    {
+                        ],
                         "output": {
                             "OutputInstance": {
                                 "id": "Output 1",
@@ -170,13 +164,7 @@
                                     }
                                 ]
                             }
-                        ]
-                    }
-                ]
-            },
-            "proposed": {
-                "ruleset_model_instances": [
-                    {
+                        ],
                         "output": {
                             "OutputInstance": {
                                 "id": "Output 1",
@@ -267,13 +255,7 @@
                                     }
                                 ]
                             }
-                        ]
-                    }
-                ]
-            },
-            "proposed": {
-                "ruleset_model_instances": [
-                    {
+                        ],
                         "output": {
                             "OutputInstance": {
                                 "id": "Output 1",
@@ -364,13 +346,7 @@
                                     }
                                 ]
                             }
-                        ]
-                    }
-                ]
-            },
-            "proposed": {
-                "ruleset_model_instances": [
-                    {
+                        ],
                         "output": {
                             "OutputInstance": {
                                 "id": "Output 1",
