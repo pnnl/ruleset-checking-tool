@@ -51,7 +51,8 @@ class Section19Rule1(RuleDefinitionListIndexedBase):
     def create_data(self, context, data):
         rmi_b = context.baseline
         hvac_id = find_one(
-            "$..heating_ventilating_air_conditioning_systems[*].id", rmi_b
+            "$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*].id",
+            rmi_b,
         )
 
         return {
