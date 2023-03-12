@@ -8,7 +8,7 @@
 
 **Applicability:** All required data elements exist for B_RMR  
 **Applicability Checks:**
-  1. The baseline building has a door subsurface
+  1. The surface has an opaque door subsurface
 
 **Evaluation Context:** Each Data Element  
 **Data Lookup:** Tables G3.4-1 to G3.4-8  
@@ -55,6 +55,6 @@
 
             - Case 3: Else, outcome is FAIL: ```else: outcome = FAIL```
 
-- Case 4: If building has no opaque door, outcome is NOT_APPLICABLE: ```if NOT rule_applicability_check: outcome = NOT_APPLICABLE```
+        - Case 4: If subsurface is not an opaque door, outcome is NOT_APPLICABLE: ```if NOT rule_applicability_check: outcome = NOT_APPLICABLE```
 
 **[Back](../_toc.md)**
