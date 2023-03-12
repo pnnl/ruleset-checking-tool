@@ -1,0 +1,82 @@
+from rct229.rule_engine.rule_base import RuleDefinitionBase
+from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
+from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
+from rct229.rulesets.ashrae9012019.data.schema_enums import schema_enums
+from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_system_type_compare import (
+    baseline_system_type_compare,
+)
+from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_system_util import (
+    HVAC_SYS,
+)
+from rct229.rulesets.ashrae9012019.ruleset_functions.get_baseline_system_types import (
+    get_baseline_system_types,
+)
+
+
+APPLICABLE_SYS_TYPES = [HVAC_SYS.SYS_1, HVAC_SYS.SYS_2, HVAC_SYS.SYS_9, HVAC_SYS.SYS_10]
+
+AIR_ECONOMIZER = schema_enums["AirEconomizerOptions"]
+
+
+class Section19Rule9(RuleDefinitionListIndexedBase):
+    """Rule 9 of ASHRAE 90.1-2019 Appendix G Section 19 (HVAC - General)"""
+
+    def __init__(self):
+        super(Section19Rule9, self).__init__(
+            rmrs_used=UserBaselineProposedVals(False, True, False),
+            each_rule=Section19Rule9.HVACRule(),
+            index_rmr="baseline",
+            id="19-9",
+            description="Air economizers shall not be included in baseline HVAC Systems 1, 2, 9, and 10.",
+            ruleset_section_title="HVAC - General",
+            standard_section="G3.1.2.6",
+            is_primary_rule=True,
+            rmr_context="ruleset_model_instances/0",
+            list_path="$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*]",
+        )
+
+    def is_applicable(self, context, data=None):
+        rmi_b = context.baseline
+        baseline_system_types_dict = get_baseline_system_types(rmi_b)
+
+        return any(
+            [
+                baseline_system_type_compare(system_type, applicable_sys_type, False)
+                for system_type in baseline_system_types_dict.keys()
+                for applicable_sys_type in APPLICABLE_SYS_TYPES
+            ]
+        )
+
+    class HVACRule(RuleDefinitionBase):
+        def __init__(self):
+            super(Section19Rule9.HVACRule, self).__init__(
+                rmrs_used=UserBaselineProposedVals(False, True, False),
+                required_fields={
+                    "$": [
+                        "fan_system",
+                    ],
+                },
+            )
+
+        def get_calc_vals(self, context, data=None):
+            hvac_b = context.baseline
+            fan_system_b = hvac_b["fan_system"]
+
+            air_economizer_b = fan_system_b.get("air_economizer")
+            air_economizer_type_b = (
+                air_economizer_b.get("type") if air_economizer_b else None
+            )
+
+            return {
+                "air_economizer_b": air_economizer_b,
+                "air_economizer_type_b": air_economizer_type_b,
+            }
+
+        def rule_check(self, context, calc_vals=None, data=None):
+            air_economizer_b = calc_vals["air_economizer_b"]
+            air_economizer_type_b = calc_vals["air_economizer_type_b"]
+
+            return (
+                air_economizer_b is None
+                or air_economizer_type_b == AIR_ECONOMIZER.FIXED_FRACTION
+            )
