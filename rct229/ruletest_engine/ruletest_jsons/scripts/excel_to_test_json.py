@@ -20,7 +20,6 @@ sheet_name = "TCDs"
 
 
 def get_rmr_key_list_from_tcd_key_list(tcd_key_list):
-
     """Ingests a python list of 'keys' from the test JSON spreadsheet and returns the relevant ASHRAE229 key list
     Without the extra specifications used in TCD spreadsheet.
     For example ['rmr_transformations', 'user', 'schedules[0]', 'hourly_values'] -> ['schedules', 'hourly_values'].
@@ -61,7 +60,6 @@ def get_rmr_key_list_from_tcd_key_list(tcd_key_list):
 
 
 def convert_units_from_tcd_to_rmr_schema(tcd_value, tcd_units, key_list):
-
     """Converts a quantity defined in the test case description's (TCD) to units compatible with the ASHRAE229 value.
 
     Parameters
@@ -226,8 +224,7 @@ def create_dictionary_from_excel(spreadsheet_name, sheet_name):
     invalid_first_keys = ["Notes", "template_lookup"]
 
     # Iterate column by column through values_df
-    for (test_id, columnData) in tests_df.iteritems():
-
+    for test_id, columnData in tests_df.iteritems():
         # List of this rule's column data
         rule_value_list = columnData.values
 
@@ -242,10 +239,8 @@ def create_dictionary_from_excel(spreadsheet_name, sheet_name):
 
         # If test_id has not yet been added, add it's content to json_dict
         else:
-
             # Iterate through both keys and rule values
             for row_i in range(rule_value_list.size):
-
                 # row_value = what will be set to the dictionary's key/value pair
                 row_value = rule_value_list[row_i]
 
@@ -260,7 +255,6 @@ def create_dictionary_from_excel(spreadsheet_name, sheet_name):
                 for key in keys:
                     key_value = keys_df[key][row_i]
                     if isinstance(key_value, str):
-
                         # If the key includes a JSON_PATH, parse for the short hand enumeration name and adjust the key list
                         if "JSON_PATH" in key_value:
                             # Inject elements to key_list based on shorthand JSON_PATH enumeration
@@ -282,19 +276,15 @@ def create_dictionary_from_excel(spreadsheet_name, sheet_name):
 
                 # If this is a template definition, store the template for the RMR transformations
                 if "rmr_template" in key_list:
-
                     # If a JSON template, set the values for flagged RMR triplets
                     if "json_template" in key_list:
-
                         # Iterate through triplets and set values from template if flagged for it
                         for rmr_triplet in triplet_strs:
-
                             # Only copy the template for RMR triplets flagged as being included
                             if (
                                 rmr_triplet
                                 in rmr_template_dict[test_id]["rmr_template"]
                             ):
-
                                 # If anything other than True used to flag the triplet (e.g., False), skip it
                                 if (
                                     rmr_template_dict[test_id]["rmr_template"][
@@ -317,7 +307,6 @@ def create_dictionary_from_excel(spreadsheet_name, sheet_name):
                         set_nested_dict(rmr_template_dict, key_list, row_value)
 
                 else:
-
                     # Skip irrelevant rows (e.g., "Notes")
                     if key_list[1] in invalid_first_keys:
                         continue
@@ -429,7 +418,6 @@ def update_unit_convention_record(spreadsheet_name, sheet_name):
 
     # Iterate row by row through units DF (not ideal by Pandas standards but these are small data frames)
     for index, row in units_df.iterrows():
-
         # Grab row values
         unit_type = row["unit_type"]
         tcd_unit = row["units"]
@@ -448,7 +436,6 @@ def update_unit_convention_record(spreadsheet_name, sheet_name):
         for key in keys:
             key_value = keys_df[key][index]
             if isinstance(key_value, str):
-
                 # If the key includes a JSON_PATH, parse for the short hand enumeration name and adjust the key list
                 if "JSON_PATH" in key_value:
                     # Inject elements to key_list based on shorthand JSON_PATH enumeration
@@ -475,7 +462,6 @@ def update_unit_convention_record(spreadsheet_name, sheet_name):
         # this TCD spreadsheet. Update the unit conventions if not, raise warning if there's a conflict with an existing
         # unit convention type
         if unit_type in unit_def_dict[tcd_key]:
-
             # Get existing definition
             existing_unit = unit_def_dict[tcd_key][unit_type]
 
@@ -494,7 +480,6 @@ def update_unit_convention_record(spreadsheet_name, sheet_name):
 
         # Update RMR units too
         if unit_type in unit_def_dict[rmr_key]:
-
             # Get existing definition
             existing_unit = unit_def_dict[rmr_key][unit_type]
 
@@ -512,7 +497,6 @@ def update_unit_convention_record(spreadsheet_name, sheet_name):
             requires_update = True
 
     if requires_update:
-
         # Dump JSON to string for writing
         json_string = json.dumps(unit_def_dict, indent=4)
 
