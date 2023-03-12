@@ -1,21 +1,17 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
-from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_system_type_compare import (
-    baseline_system_type_compare,
+from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.is_hvac_sys_cooling_type_DX import (
+    is_hvac_sys_cooling_type_dx,
 )
-
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.is_hvac_sys_heating_type_furnace import (
     is_hvac_sys_heating_type_furnace,
 )
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.is_hvac_sys_heating_type_heat_pump import (
     is_hvac_sys_heating_type_heat_pump,
 )
-from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.is_hvac_sys_cooling_type_DX import (
-    is_hvac_sys_cooling_type_dx,
-)
 from rct229.utils.assertions import getattr_
-from rct229.utils.pint_utils import CalcQ
+from rct229.utils.jsonpath_utils import find_one
 from rct229.utils.std_comparisons import std_equal
 
 REQ_HEATING_OVERSIZING_FACTOR = 0.25
@@ -36,12 +32,15 @@ class Section19Rule1(RuleDefinitionListIndexedBase):
             standard_section=" Section G3.1.2.2",
             is_primary_rule=True,
             rmr_context="ruleset_model_instances/0",
-            list_path="$..heating_ventilating_air_conditioning_systems[*]",
+            list_path="$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*]",
         )
 
     def is_applicable(self, context, data=None):
         rmi_b = context.baseline
-        hvac_id = rmi_b["heating_ventilating_air_conditioning_systems"]["id"]
+        hvac_id = find_one(
+            "$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*].id",
+            rmi_b,
+        )
 
         return (
             is_hvac_sys_heating_type_furnace(rmi_b, hvac_id)
@@ -49,18 +48,24 @@ class Section19Rule1(RuleDefinitionListIndexedBase):
             or is_hvac_sys_cooling_type_dx(rmi_b, hvac_id)
         )
 
-    # def create_data(self, context, data):
-    #     rmi_b = context.baseline
-    #     baseline_system_types_dict = get_baseline_system_types(rmi_b)
-    #     applicable_hvac_sys_ids = [
-    #         hvac_id
-    #         for sys_type in baseline_system_types_dict.keys()
-    #         for target_sys_type in APPLICABLE_SYS_TYPES
-    #         if baseline_system_type_compare(sys_type, target_sys_type, False)
-    #         for hvac_id in baseline_system_types_dict[sys_type]
-    #     ]
-    #
-    #     return {"applicable_hvac_sys_ids": applicable_hvac_sys_ids}
+    def create_data(self, context, data):
+        rmi_b = context.baseline
+        hvac_id = find_one(
+            "$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*].id",
+            rmi_b,
+        )
+
+        return {
+            "is_hvac_sys_heating_type_furnace_flag": is_hvac_sys_heating_type_furnace(
+                rmi_b, hvac_id
+            ),
+            "is_hvac_sys_heating_type_heat_pump_flag": is_hvac_sys_heating_type_heat_pump(
+                rmi_b, hvac_id
+            ),
+            "is_hvac_sys_cooling_type_dx_flag": is_hvac_sys_cooling_type_dx(
+                rmi_b, hvac_id
+            ),
+        }
 
     class HVACRule(RuleDefinitionBase):
         def __init__(self):
@@ -70,7 +75,13 @@ class Section19Rule1(RuleDefinitionListIndexedBase):
 
         def get_calc_vals(self, context, data=None):
             hvac_b = context.baseline
-            hvac_id_b = hvac_b["id"]
+            is_hvac_sys_heating_type_furnace_flag = data[
+                "is_hvac_sys_heating_type_furnace_flag"
+            ]
+            is_hvac_sys_heating_type_heat_pump_flag = data[
+                "is_hvac_sys_heating_type_heat_pump_flag"
+            ]
+            is_hvac_sys_cooling_type_dx_flag = data["is_hvac_sys_cooling_type_dx_flag"]
 
             heating_oversizing_factor = 0.0
             cooling_oversizing_factor = 0.0
@@ -78,9 +89,10 @@ class Section19Rule1(RuleDefinitionListIndexedBase):
             cooling_is_autosized = False
             heating_oversizing_applicable = True
             cooling_oversizing_applicable = True
-            if is_hvac_sys_heating_type_furnace(
-                hvac_b, hvac_id_b
-            ) or is_hvac_sys_heating_type_heat_pump(hvac_b, hvac_id_b):
+            if (
+                is_hvac_sys_heating_type_furnace_flag
+                or is_hvac_sys_heating_type_heat_pump_flag
+            ):
                 heating_oversizing_factor = getattr_(
                     hvac_b, "oversizing_factor", "heating_system", "oversizing_factor"
                 )
@@ -90,7 +102,7 @@ class Section19Rule1(RuleDefinitionListIndexedBase):
             else:
                 heating_oversizing_applicable = False
 
-            if is_hvac_sys_cooling_type_dx(hvac_b, hvac_id_b):
+            if is_hvac_sys_cooling_type_dx_flag:
                 cooling_oversizing_factor = getattr_(
                     hvac_b, "oversizing_factor", "cooling_system", "oversizing_factor"
                 )
