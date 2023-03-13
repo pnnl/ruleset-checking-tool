@@ -75,8 +75,9 @@
                             }
                         ],
                         "output": {
-                            "OutputInstance": {
-                                "id": "Output 1",
+                            "id": "Output 1",
+                            "output_instance": {
+                                "id": "Output Instance 1",
                                 "unmet_load_hours_heating": 0,
                                 "unmet_load_hours_cooling": 0,
                                 "unmet_load_hours": 200,
@@ -166,8 +167,9 @@
                             }
                         ],
                         "output": {
-                            "OutputInstance": {
-                                "id": "Output 1",
+                            "id": "Output 1",
+                            "output_instance": {
+                                "id": "Output Instance 1",
                                 "unmet_load_hours_heating": 50,
                                 "unmet_load_hours_cooling": 100,
                                 "unmet_load_hours": 350,
@@ -257,8 +259,9 @@
                             }
                         ],
                         "output": {
-                            "OutputInstance": {
-                                "id": "Output 1",
+                            "id": "Output 1",
+                            "output_instance": {
+                                "id": "Output Instance 1",
                                 "unmet_load_hours_heating": 400,
                                 "unmet_load_hours_cooling": 400,
                                 "unmet_load_hours": 350,
@@ -348,8 +351,9 @@
                             }
                         ],
                         "output": {
-                            "OutputInstance": {
-                                "id": "Output 1",
+                            "id": "Output 1",
+                            "output_instance": {
+                                "id": "Output Instance 1",
                                 "unmet_load_hours_heating": 200,
                                 "unmet_load_hours_cooling": 500,
                                 "unmet_load_hours": 350,
