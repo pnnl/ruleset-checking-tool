@@ -13,8 +13,6 @@ class Section19Rule5(RuleDefinitionBase):
     def __init__(self):
         super(Section19Rule5, self).__init__(
             rmrs_used=UserBaselineProposedVals(False, False, True),
-            # each_rule=Section19Rule5.OutputRule(),
-            # index_rmr="proposed",
             id="19-5",
             description="Unmet load hours for the proposed design shall not exceed 300 (of the 8760 hours simulated).",
             ruleset_section_title="HVAC - General",
@@ -34,7 +32,7 @@ class Section19Rule5(RuleDefinitionBase):
         unmet_load_hours_heating_p = output_instance_p["unmet_load_hours_heating"]
         unmet_load_hours_cooling_p = output_instance_p["unmet_load_hours_cooling"]
         coincident_unmet_load_hours_p = output_instance_p["unmet_load_hours"]
-        stop = 1
+
         return {
             "unmet_load_hours_heating_p": unmet_load_hours_heating_p,
             "unmet_load_hours_cooling_p": unmet_load_hours_cooling_p,
