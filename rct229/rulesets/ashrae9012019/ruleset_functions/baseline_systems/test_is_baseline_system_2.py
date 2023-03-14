@@ -70,7 +70,7 @@ def test__TEST_RMD_baseline_system_2__is_valid():
     ], f"Schema error: {schema_validation_result['error']}"
 
 
-def test_is_baseline_system_2_true():
+def test__is_baseline_system_2__true():
     assert (
         is_baseline_system_2(
             SYS_2_TEST_RMD["ruleset_model_instances"][0],
@@ -82,10 +82,13 @@ def test_is_baseline_system_2_true():
     )
 
 
-def test_is_baseline_system_2_test_json_true():
-    assert is_baseline_system_2(
-        load_system_test_file("System_2_PTHP.json")["ruleset_model_instances"][0],
-        "PTHP 1",
-        ["PTHP Terminal 1"],
-        ["Thermal Zone 1"],
+def test__is_baseline_system_2__test_json_true():
+    assert (
+        is_baseline_system_2(
+            load_system_test_file("System_2_PTHP.json")["ruleset_model_instances"][0],
+            "PTHP 1",
+            ["PTHP Terminal 1"],
+            ["Thermal Zone 1"],
+        )
+        == HVAC_SYS.SYS_2
     )

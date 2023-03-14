@@ -1,6 +1,7 @@
 import importlib
 import inspect
 
+import rct229.rule_engine.partial_rule_definition as base_partial_rule_classes
 import rct229.rule_engine.rule_base as base_classes
 import rct229.rule_engine.rule_list_base as base_list_classes
 import rct229.rule_engine.rule_list_indexed_base as base_list_indexed_classes
@@ -21,9 +22,13 @@ def __getrules__(ruleset_doc: str):
     for ruleset in ruleset_list:
         if ruleset[0] == ruleset_doc:
             __getrules_module__helper(rulesets, modules)
+    # Adding the module names that should be excluded from the available rules. Such as RuleDefinitionBase
     base_class_names = [f[0] for f in inspect.getmembers(base_classes, inspect.isclass)]
     base_class_names = base_class_names + [
         f[0] for f in inspect.getmembers(base_list_classes, inspect.isclass)
+    ]
+    base_class_names = base_class_names + [
+        f[0] for f in inspect.getmembers(base_partial_rule_classes, inspect.isclass)
     ]
     base_class_names = list(
         set(
@@ -34,6 +39,7 @@ def __getrules__(ruleset_doc: str):
             ]
         )
     )
+    # --- End adding base class names
     available_rules = []
     for module in modules:
         available_rules += [

@@ -73,7 +73,8 @@ class Section5Rule34(RuleDefinitionListIndexedBase):
                 # avoid zero division
                 return (
                     total_envelope_roof_area_p > ZERO.AREA
-                    and total_skylight_area_p / total_envelope_roof_area_p
+                    and 0
+                    < total_skylight_area_p / total_envelope_roof_area_p
                     <= SKYLIGHT_THRESHOLD
                 )
 

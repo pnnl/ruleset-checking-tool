@@ -20,8 +20,10 @@ DOOR = schema_enums["SubsurfaceClassificationOptions"].DOOR
 # Intended for internal use
 GET_BUILDING_SCC_WINDOW_WALL_RATIO_DICT__REQUIRED_FIELDS = {
     "building": {
-        "$..surfaces[*]": ["area"],
-        "$..subsurfaces[*]": ["classification"],
+        "$.building_segments[*].zones[*].surfaces[*]": ["area"],
+        "$.building_segments[*].zones[*].surfaces[*].subsurfaces[*]": [
+            "classification"
+        ],
     }
 }
 
@@ -63,7 +65,7 @@ def get_building_scc_window_wall_ratios_dict(climate_zone, building):
     total_semi_exterior_wall_area = ZERO.AREA
 
     # Loop through all the surfaces in the building
-    for surface in find_all("$..surfaces[*]", building):
+    for surface in find_all("$.building_segments[*].zones[*].surfaces[*]", building):
         # surface conditioning category
         scc = scc_dict[surface["id"]]
 
