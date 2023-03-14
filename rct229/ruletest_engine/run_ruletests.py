@@ -143,3 +143,5 @@ outcome = run_ashrae9012019_tests(section="section6")
 # run_envelope_tests()
 # run_receptacle_tests()
 # run_airside_tests()
+
+run_section_tests('section21/rule_21_7.json')
