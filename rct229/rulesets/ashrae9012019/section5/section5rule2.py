@@ -28,8 +28,6 @@ class Section5Rule2(RuleDefinitionListIndexedBase):
                 required_fields={
                     "$..surfaces[*]": ["azimuth"],
                 },
-                # TODO: add this to RuleDefinitionBase
-                must_match_by_ids=["$..surfaces[*]"],
             )
 
         def get_calc_vals(self, context, data=None):
@@ -40,7 +38,7 @@ class Section5Rule2(RuleDefinitionListIndexedBase):
             # This assumes that the surfaces all match
             matched_user_surfaces = match_lists_by_id(proposed_surfaces, user_surfaces)
             proposed_user_surface_pairs = zip(proposed_surfaces, matched_user_surfaces)
-            for (p_surface, u_surface) in proposed_user_surface_pairs:
+            for p_surface, u_surface in proposed_user_surface_pairs:
                 if p_surface["azimuth"] != u_surface["azimuth"]:
                     failing_surface_ids.append(p_surface["id"])
 

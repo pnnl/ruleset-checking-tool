@@ -17,8 +17,10 @@ def get_dict_with_terminal_units_and_zones(rmi):
         terminal["id"]: find_all(
             # search all zones that have terminal(s) match to this terminal id
             # and return them in a list.
-            f'$..zones[*][?(@.terminals[*].id="{terminal["id"]}")].id',
+            f'$.buildings[*].building_segments[*].zones[*][?(@.terminals[*].id="{terminal["id"]}")].id',
             rmi,
         )
-        for terminal in find_all("$..terminals[*]", rmi)
+        for terminal in find_all(
+            "$.buildings[*].building_segments[*].zones[*].terminals[*]", rmi
+        )
     }
