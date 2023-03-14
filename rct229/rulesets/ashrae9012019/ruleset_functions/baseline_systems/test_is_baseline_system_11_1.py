@@ -446,7 +446,8 @@ def test__is_baseline_system_11_1C__test_json_true():
     )
 
 
-def test__is_baseline_system_unmatched1__true():
+def test__is_baseline_system_11_1__no_ays_true():
+    # `no_sys` means there is no matched system and this is for testing when there is no matching system (11.1, 11.1A, 11.1B, 11.1C)
     assert (
         is_baseline_system_11_1(
             SYS_11_1_TEST_UNMATCHED_RMD["ruleset_model_instances"][0],
@@ -458,7 +459,8 @@ def test__is_baseline_system_unmatched1__true():
     )
 
 
-def test__is_baseline_system_unmatched2__true():
+def test__is_baseline_system_11_1__no_ays_true():
+    # `no_sys` means there is no matched system and this is for testing when there is no matching system (11.1, 11.1A, 11.1B, 11.1C)
     assert (
         is_baseline_system_11_1(
             SYS_11_1_TEST_UNMATCHED_RMD["ruleset_model_instances"][0],
