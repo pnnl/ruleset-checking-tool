@@ -1,4 +1,6 @@
-from rct229.rulesets.ashrae9012019.ruleset_functions.get_fan_object_electric_power import get_fan_object_electric_power
+from rct229.rulesets.ashrae9012019.ruleset_functions.get_fan_object_electric_power import (
+    get_fan_object_electric_power,
+)
 from rct229.schema.config import ureg
 from rct229.schema.schema_utils import quantify_rmr
 from rct229.schema.validate import schema_validate_rmr
@@ -65,22 +67,29 @@ TEST_RMD = {
                                         "id": "VAV Fan System 1",
                                         "fan_control": "VARIABLE_SPEED_DRIVE",
                                         "supply_fans": [
-                                            {"id": "Supply Fan 1",
-                                             "specification_method": "SIMPLE",
-                                             "design_electric_power": 100
-                                             },
-                                            {"id": "Supply Fan 2",
-                                             "specification_method": "DETAILED",
-                                             "input_power": 100,
-                                             "motor_efficiency": 0.5},
+                                            {
+                                                "id": "Supply Fan 1",
+                                                "specification_method": "SIMPLE",
+                                                "design_electric_power": 100,
+                                            },
+                                            {
+                                                "id": "Supply Fan 2",
+                                                "specification_method": "DETAILED",
+                                                "input_power": 100,
+                                                "motor_efficiency": 0.5,
+                                            },
                                             # 0.00397677575 Btu/hr -> 0.00116620989 watt
-                                            {"id": "Supply Fan 3",
-                                             "specification_method": "DETAILED",
-                                             "design_pressure_rise": 5,
-                                             "total_efficiency": 0.5},
-                                            {"id": "Supply Fan 4",
-                                             "specification_method": "DETAILED",
-                                             "total_efficiency": 0.5},
+                                            {
+                                                "id": "Supply Fan 3",
+                                                "specification_method": "DETAILED",
+                                                "design_pressure_rise": 5,
+                                                "total_efficiency": 0.5,
+                                            },
+                                            {
+                                                "id": "Supply Fan 4",
+                                                "specification_method": "DETAILED",
+                                                "total_efficiency": 0.5,
+                                            },
                                         ],
                                     },
                                 }
@@ -133,27 +142,50 @@ def test__TEST_RMD__is_valid():
 
 
 def test__FAN_SIMPLE__success():
-    fan = find_exactly_one_with_field_value("$.buildings[0].building_segments["
-                                            "0].heating_ventilating_air_conditioning_systems["
-                                            "0].fan_system.supply_fans[*]", "id", "Supply Fan 1", TEST_RMI)
+    fan = find_exactly_one_with_field_value(
+        "$.buildings[0].building_segments["
+        "0].heating_ventilating_air_conditioning_systems["
+        "0].fan_system.supply_fans[*]",
+        "id",
+        "Supply Fan 1",
+        TEST_RMI,
+    )
     assert get_fan_object_electric_power(fan) == 100 * ureg("watt")
 
+
 def test__FAN_DETAIL_motor_efficiency__success():
-    fan = find_exactly_one_with_field_value("$.buildings[0].building_segments["
-                                            "0].heating_ventilating_air_conditioning_systems["
-                                            "0].fan_system.supply_fans[*]", "id", "Supply Fan 2", TEST_RMI)
+    fan = find_exactly_one_with_field_value(
+        "$.buildings[0].building_segments["
+        "0].heating_ventilating_air_conditioning_systems["
+        "0].fan_system.supply_fans[*]",
+        "id",
+        "Supply Fan 2",
+        TEST_RMI,
+    )
     assert get_fan_object_electric_power(fan) == 200 * ureg("watt")
 
 
 def test__FAN_DETAIL_total_efficiency__success():
-    fan = find_exactly_one_with_field_value("$.buildings[0].building_segments["
-                                            "0].heating_ventilating_air_conditioning_systems["
-                                            "0].fan_system.supply_fans[*]", "id", "Supply Fan 3", TEST_RMI)
-    assert abs(get_fan_object_electric_power(fan) - 0.00116 * ureg("watt")) < 0.000006 * ureg("watt")
+    fan = find_exactly_one_with_field_value(
+        "$.buildings[0].building_segments["
+        "0].heating_ventilating_air_conditioning_systems["
+        "0].fan_system.supply_fans[*]",
+        "id",
+        "Supply Fan 3",
+        TEST_RMI,
+    )
+    assert abs(
+        get_fan_object_electric_power(fan) - 0.00116 * ureg("watt")
+    ) < 0.000006 * ureg("watt")
 
 
 def test_FAN_MISSING_DATA_FAILED():
-    fan = find_exactly_one_with_field_value("$.buildings[0].building_segments["
-                                            "0].heating_ventilating_air_conditioning_systems["
-                                            "0].fan_system.supply_fans[*]", "id", "Supply Fan 4", TEST_RMI)
+    fan = find_exactly_one_with_field_value(
+        "$.buildings[0].building_segments["
+        "0].heating_ventilating_air_conditioning_systems["
+        "0].fan_system.supply_fans[*]",
+        "id",
+        "Supply Fan 4",
+        TEST_RMI,
+    )
     assert get_fan_object_electric_power(fan) == None
