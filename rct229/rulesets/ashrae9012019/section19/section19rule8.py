@@ -6,6 +6,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_hvac_zone_list_w_area_d
     get_hvac_zone_list_w_area_dict,
 )
 from rct229.schema.config import ureg
+from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all
 
 MIN_OA_CFM = 3000 * ureg("cfm")
@@ -53,6 +54,9 @@ class Section19Rule8(RuleDefinitionListIndexedBase):
                     each_rule=Section19Rule8.BuildingRule.BuildingSegmentRule.HVACRule(),
                     index_rmr="baseline",
                     list_path="$.heating_ventilating_air_conditioning_systems[*]",
+                    required_fields={
+                        "$": ["zones"],
+                    },
                 )
 
             def create_data(self, context, data=None):
@@ -62,7 +66,7 @@ class Section19Rule8(RuleDefinitionListIndexedBase):
                 for zone_b in find_all("$.zones[*]", building_segment_b):
                     zone_id_b = zone_b["id"]
                     zone_space_b[zone_id_b] = []
-                    for space_b in zone_b["spaces"]:
+                    for space_b in getattr_(zone_b, "zone", "spaces"):
                         zone_space_b[zone_id_b].append(space_b)
 
                 return {"zone_space_b": zone_space_b}
@@ -80,6 +84,10 @@ class Section19Rule8(RuleDefinitionListIndexedBase):
                         Section19Rule8.BuildingRule.BuildingSegmentRule.HVACRule, self
                     ).__init__(
                         rmrs_used=UserBaselineProposedVals(False, True, False),
+                        required_fields={
+                            "$": ["fan_system"],
+                            "fan_system": ["minimum_outdoor_airflow"],
+                        },
                     )
 
                 def get_calc_vals(self, context, data=None):
