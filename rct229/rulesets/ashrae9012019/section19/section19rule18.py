@@ -13,18 +13,21 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_baseline_system_types i
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_dict_of_zones_and_terminal_units_served_by_hvac_sys import (
     get_dict_of_zones_and_terminal_units_served_by_hvac_sys,
 )
+from rct229.rulesets.ashrae9012019.ruleset_functions.get_fan_object_electric_power import (
+    get_fan_object_electric_power,
+)
+from rct229.schema.config import ureg
 from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.std_comparisons import std_equal
-from rct229.schema.config import ureg
 
 APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_1,
     HVAC_SYS.SYS_2,
 ]
 
-FAN_POWER_LIMIT = 0.3 * ureg("")
-AHJ_RA_compare = False
+FAN_POWER_LIMIT = 0.3 * ureg("W/cfm")
+AHJ_RA_compare = True
 
 
 class Section19Rule18(RuleDefinitionListIndexedBase):
@@ -62,8 +65,14 @@ class Section19Rule18(RuleDefinitionListIndexedBase):
             get_dict_of_zones_and_terminal_units_served_by_hvac_sys(rmi_b)
         )
 
+        zone_data_b = {
+            zone["id"]: zone
+            for zone in find_all("$.buildings[*].building_segments[*].zones[*]", rmi_b)
+        }
+
         return {
-            "dict_of_zones_and_terminal_units_served_by_hvac_sys": dict_of_zones_and_terminal_units_served_by_hvac_sys
+            "dict_of_zones_and_terminal_units_served_by_hvac_sys": dict_of_zones_and_terminal_units_served_by_hvac_sys,
+            "zone_data_b": zone_data_b,
         }
 
     class HVACRule(RuleDefinitionBase):
@@ -78,46 +87,38 @@ class Section19Rule18(RuleDefinitionListIndexedBase):
             dict_of_zones_and_terminal_units_served_by_hvac_sys = data[
                 "dict_of_zones_and_terminal_units_served_by_hvac_sys"
             ]
-            zone_list = dict_of_zones_and_terminal_units_served_by_hvac_sys[hvac_id_b][
-                "zone_list"
-            ]
+            zone_data_b = data["zone_data_b"]
 
             fan_system_b = hvac_b["fan_system"]
 
             supply_cfm_b = 0.0 * ureg("cfm")
-            return_cfm_b = 0.0 * ureg("cfm")
-            relief_cfm_b = 0.0 * ureg("cfm")
-            exhaust_cfm_b = 0.0 * ureg("cfm")
             total_fan_power = 0.0 * ureg("W")
             for supply_fan_b in find_all("$.supply_fans[*]", fan_system_b):
-                supply_cfm_b += supply_fan_b["design_airflow"]
-                # TODO add `get_fan_object_electric_power`
-                total_fan_power += 1
+                supply_cfm_b += getattr_(supply_fan_b, "supply_fans", "design_airflow")
+                supply_fan_elec_power = get_fan_object_electric_power(supply_fan_b)
+                total_fan_power += supply_fan_elec_power
 
             for return_fan_b in find_all("$.return_fans[*]", fan_system_b):
-                return_cfm_b += return_fan_b["design_airflow"]
-                # TODO add `get_fan_object_electric_power`
-                total_fan_power += 1
+                return_fan_elec_power = get_fan_object_electric_power(return_fan_b)
+                total_fan_power += return_fan_elec_power
 
             for relief_fan_b in find_all("$.relief_fans[*]", fan_system_b):
-                relief_cfm_b += relief_fan_b["design_airflow"]
-                # TODO add `get_fan_object_electric_power`
-                total_fan_power += 1
-
-            for relief_fan_b in find_all("$.relief_fans[*]", fan_system_b):
-                relief_cfm_b += relief_fan_b["design_airflow"]
-                # TODO add `get_fan_object_electric_power`
-                total_fan_power += 1
+                relief_fan_elec_power = get_fan_object_electric_power(relief_fan_b)
+                total_fan_power += relief_fan_elec_power
 
             for exhaust_fan_b in find_all("$.exhaust_fans[*]", fan_system_b):
-                exhaust_cfm_b += exhaust_fan_b["design_airflow"]
-                # TODO add `get_fan_object_electric_power`
-                total_fan_power += 1
+                exhaust_fan_elec_power = get_fan_object_electric_power(exhaust_fan_b)
+                total_fan_power += exhaust_fan_elec_power
 
-            fan_elec_power = 0.0
-            for zone_b in zone_list:
-                if zone_b["zonal_exhaust_fan"]:
-                    total_fan_power += fan_elec_power
+            for zone in dict_of_zones_and_terminal_units_served_by_hvac_sys[hvac_id_b][
+                "zone_list"
+            ]:
+                zone_b = zone_data_b[zone]
+                if zone_b.get("zonal_exhaust_fan"):
+                    zone_fan_elec_power = get_fan_object_electric_power(
+                        getattr_(zone_b, "zone", "zonal_exhaust_fan")
+                    )
+                    total_fan_power += zone_fan_elec_power
 
             fan_power_W_CFM = total_fan_power / supply_cfm_b
 
@@ -125,6 +126,7 @@ class Section19Rule18(RuleDefinitionListIndexedBase):
 
         def rule_check(self, context, calc_vals=None, data=None):
             fan_power_W_CFM = calc_vals["fan_power_W_CFM"]
+           
             return std_equal(FAN_POWER_LIMIT, fan_power_W_CFM) or (
                 AHJ_RA_compare and fan_power_W_CFM <= FAN_POWER_LIMIT
             )
