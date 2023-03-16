@@ -126,7 +126,7 @@ class Section19Rule18(RuleDefinitionListIndexedBase):
 
         def rule_check(self, context, calc_vals=None, data=None):
             fan_power_W_CFM = calc_vals["fan_power_W_CFM"]
-           
+
             return std_equal(FAN_POWER_LIMIT, fan_power_W_CFM) or (
                 AHJ_RA_compare and fan_power_W_CFM <= FAN_POWER_LIMIT
             )
