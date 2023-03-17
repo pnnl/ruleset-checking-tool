@@ -4,7 +4,7 @@ The following is an example of a JSON output file produced by the RCT software t
 {
 	"title": "RULESET CHECKING TOOL",
 	"purpose": "RCT Ruleset Testing Report",
-	"ruleset": "ASHRAE 90.1-2019 Performanec Rating Method (Appendix G)",
+	"ruleset": "ASHRAE 90.1-2019 Performance Rating Method (Appendix G)",
 	"date_run": "2023-03-16T14:45:33-05:00",
 	"schema_version": "0.0.23",
 	"rule_tests":{
@@ -29,7 +29,7 @@ The following is an example of a JSON output file produced by the RCT software t
 					}
 				},
 				{
-					"id": "Surface 1",
+					"id": "Surface 2",
 					"expected_test_outcome": "FAILED",
 					"test_outcome": "FAILED",
 					"messages": "message",
@@ -41,13 +41,13 @@ The following is an example of a JSON output file produced by the RCT software t
 					}
 				},
 				{
-					"id": "Surface 1",
+					"id": "Surface 3",
 					"expected_test_outcome": "NOT_APPLICABLE",
 					"test_outcome": "NOT_APPLICABLE",
 					"messages": "message"
 				},
 				{
-					"id": "Surface 1",
+					"id": "Surface 4",
 					"expected_test_outcome": "UNDETERMINED",
 					"test_outcome": "UNDETERMINED",
 					"messages": "message",
