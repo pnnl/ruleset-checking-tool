@@ -18,14 +18,14 @@
 - Get the list of zones associated with the hvac system: `zone_list = dict_of_zones_and_terminal_units_served_by_hvac_sys[hvac_sys.id]["ZONE_LIST"]`  
 - Set largest zone exhaust source cfm equal to zero: `maximum_zone_exhaust = 0`  
 - Set largest hvac exhaust cfm equal to zero: `maximum_hvac_exhaust = 0`  
-- Create a fan system object: `fan_system_p = sys.fan_system`   
-- Get list of exhaust fan fan objects: `fan_sys_exhaust_list = list(fan_system_p.exhaust_fans)`  
+- Create a fan system object: `fan_system_b = sys.fan_system`   
+- Get list of exhaust fan fan objects: `fan_sys_exhaust_list = list(fan_system_b.exhaust_fans)`  
 - Get the number of exhaust fans associated with the hvac system: `num_hvac_exhaust_fans = len(fan_sys_exhaust_list)`  
 - Reset the total fan cfm variable: `total_fan_cfm = 0` 
 - Reset the fan cfm variable: `fan_cfm = 0` 
 - Check if the num_hvac_exhaust_fans is greater than 0: `if num_hvac_exhaust_fans > 0:`  
-    - Cycle through the list of exhaust fans: `for fan_p in fan_sys_exhaust_list:`  
-        - Get the fan cfm: `fan_cfm = fan_p.design_airflow`  
+    - Cycle through the list of exhaust fans: `for fan_b in fan_sys_exhaust_list:`  
+        - Get the fan cfm: `fan_cfm = fan_b.design_airflow`  
         - Total the fan cfm across the multiple fans: `total_fan_cfm = total_fan_cfm + fan_cfm`  
         - Check if the fan cfm is greater than maximum_hvac_exhaust, if it is then set the maximum_hvac_exhaust equal to the fan cfm: `if fan_cfm > maximum_hvac_exhaust: maximum_hvac_exhaust = fan_cfm`  
 - Set hvac_sys_exhaust_cfm_sum equal to the sum of hvac system exhaust fan cfm (this assumes the hvac system exhaust fans are collectively considered one source and sums them as if they were in paraellel): `hvac_sys_exhaust_cfm_sum = total_fan_cfm`  
