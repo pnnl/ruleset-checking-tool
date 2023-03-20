@@ -13,18 +13,9 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_surface_conditioning_ca
 )
 
 DOOR = schema_enums["SubsurfaceClassificationOptions"].DOOR
-METAL_COILING_DOOR = schema_enums[
+SUBSURFACE_SUBCLASSIFICATION_OPTIONS = schema_enums[
     "SubsurfaceSubclassificationOptions2019ASHRAE901"
-].METAL_COILING_DOOR
-NONSWINGING_DOOR = schema_enums[
-    "SubsurfaceSubclassificationOptions2019ASHRAE901"
-].NONSWINGING_DOOR
-SECTIONAL_GARAGE_DOOR = schema_enums[
-    "SubsurfaceSubclassificationOptions2019ASHRAE901"
-].SECTIONAL_GARAGE_DOOR
-SWINGING_DOOR = schema_enums[
-    "SubsurfaceSubclassificationOptions2019ASHRAE901"
-].SWINGING_DOOR
+]
 
 MANUAL_CHECK_MSG = (
     "Zone has both residential and non-residential type spaces and the requirement for U-factor for "
@@ -64,8 +55,7 @@ class Section5Rule53(RuleDefinitionListIndexedBase):
             )
 
         def is_applicable(self, context, data=None):
-            # It is unclear which level the rule checks for applicability.
-            # This implementation follows the Applicability Check in the RDS
+            # Building level check if any doors in the building
             building_p = context.baseline
             subsurfaces = find_all(
                 "$.building_segments[*].zones[*].surfaces[*].subsurfaces[*]", building_p
@@ -141,6 +131,32 @@ class Section5Rule53(RuleDefinitionListIndexedBase):
                         manual_check_required_msg=MANUAL_CHECK_MSG,
                     )
 
+                def is_applicable(self, context, data=None):
+                    subsurface_b = context.baseline
+                    surface_conditioning_category_b = data[
+                        "surface_conditioning_category_b"
+                    ]
+                    climate_zone = data["climate_zone"]
+                    target_u_factor_nonres = table_G34_lookup(
+                        climate_zone,
+                        SCC.EXTERIOR_NON_RESIDENTIAL,
+                        DOOR,
+                        subsurface_b["subclassification"],
+                    )
+
+                    target_u_factor_res = table_G34_lookup(
+                        climate_zone,
+                        SCC.EXTERIOR_RESIDENTIAL,
+                        DOOR,
+                        subsurface_b["subclassification"],
+                    )
+
+                    return surface_conditioning_category_b == SCC.EXTERIOR_MIXED and target_u_factor_nonres != target_u_factor_res
+
+                def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
+                    subsurface_b = context.baseline
+                    return subsurface_b["subclassification"] in [SUBSURFACE_SUBCLASSIFICATION_OPTIONS.SPANDREL_GLASS, SUBSURFACE_SUBCLASSIFICATION_OPTIONS.GLASS_BLOCK, SUBSURFACE_SUBCLASSIFICATION_OPTIONS.OTHER]
+
                 def get_calc_vals(self, context, data=None):
                     subsurface_b = context.baseline
                     surface_conditioning_category_b = data[
@@ -152,21 +168,21 @@ class Section5Rule53(RuleDefinitionListIndexedBase):
 
                     target_u_factor_nonres = table_G34_lookup(
                         climate_zone,
-                        surface_conditioning_category_b,
+                        SCC.EXTERIOR_NON_RESIDENTIAL,
                         DOOR,
                         subsurface_b["subclassification"],
                     )
 
                     target_u_factor_res = table_G34_lookup(
                         climate_zone,
-                        surface_conditioning_category_b,
+                        SCC.EXTERIOR_RESIDENTIAL,
                         DOOR,
                         subsurface_b["subclassification"],
                     )
 
                     target_u_factor_semiheated = table_G34_lookup(
                         climate_zone,
-                        surface_conditioning_category_b,
+                        SCC.SEMI_EXTERIOR,
                         DOOR,
                         subsurface_b["subclassification"],
                     )
