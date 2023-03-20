@@ -94,7 +94,7 @@ def is_baseline_system_7(rmi_b, hvac_b_id, terminal_unit_id_list, zone_id_list):
         and are_all_terminal_fans_null(rmi_b, terminal_unit_id_list)
         and are_all_terminal_types_VAV(rmi_b, terminal_unit_id_list)
     )
-    stop = 1
+
     if are_sys_data_matched:
         # Confirm required data for Sys-7, now to decide which system type 7
         is_hvac_sys_fluid_loop_attached_to_chiller_flag = (
