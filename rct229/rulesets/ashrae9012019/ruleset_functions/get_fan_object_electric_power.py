@@ -26,7 +26,6 @@ def get_fan_object_electric_power(fan):
     fan_elec_power = None
     fan_spec_method = getattr_(fan, "fan", "specification_method")
     if fan_spec_method == FAN_SPECIFICATION_METHOD.SIMPLE:
-        # fan_elec_power = getattr_(fan, "fan", "design_electric_power")
         fan_elec_power = fan.get("design_electric_power", None)
     elif fan_spec_method == FAN_SPECIFICATION_METHOD.DETAILED:
         design_pressure_rise = fan.get("design_pressure_rise", ZERO.LENGTH)
