@@ -10,9 +10,11 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_h
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.is_hvac_sys_heating_type_heat_pump import (
     is_hvac_sys_heating_type_heat_pump,
 )
+from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_system_util import (
+    find_exactly_one_hvac_system,
+)
 from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_one
-from rct229.utils.std_comparisons import std_equal
 
 REQ_HEATING_OVERSIZING_FACTOR = 0.25
 REQ_COOLING_OVERSIZING_FACTOR = 0.15
@@ -131,20 +133,18 @@ class Section19Rule1(RuleDefinitionListIndexedBase):
 
             return (
                 (
-                    std_equal(REQ_HEATING_OVERSIZING_FACTOR, heating_oversizing_factor)
-                    and std_equal(
-                        REQ_COOLING_OVERSIZING_FACTOR, cooling_oversizing_factor
-                    )
+                    REQ_HEATING_OVERSIZING_FACTOR == heating_oversizing_factor
+                    and REQ_COOLING_OVERSIZING_FACTOR == cooling_oversizing_factor
                     and heating_is_autosized
                     and cooling_is_autosized
                 )
                 or (
-                    std_equal(REQ_HEATING_OVERSIZING_FACTOR, heating_oversizing_factor)
+                    REQ_HEATING_OVERSIZING_FACTOR == heating_oversizing_factor
                     and heating_is_autosized
                     and not cooling_oversizing_applicable
                 )
                 or (
-                    std_equal(REQ_COOLING_OVERSIZING_FACTOR, cooling_oversizing_factor)
+                    REQ_COOLING_OVERSIZING_FACTOR == cooling_oversizing_factor
                     and cooling_is_autosized
                     and not heating_oversizing_applicable
                 )
