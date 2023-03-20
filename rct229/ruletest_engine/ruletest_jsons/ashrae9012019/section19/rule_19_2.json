@@ -3,7 +3,7 @@
         "Section": 19,
         "Rule": 2,
         "Test": "a",
-        "test_description": "testing",
+        "test_description": "System 7a with is_sized_using_coincident_load set to true.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "19-2",
@@ -146,7 +146,7 @@
         "Section": 19,
         "Rule": 2,
         "Test": "b",
-        "test_description": "testing",
+        "test_description": "System 7a with is_sized_using_coincident_load set to false.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "19-2",
