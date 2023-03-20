@@ -151,11 +151,20 @@ class Section5Rule53(RuleDefinitionListIndexedBase):
                         subsurface_b["subclassification"],
                     )
 
-                    return surface_conditioning_category_b == SCC.EXTERIOR_MIXED and target_u_factor_nonres != target_u_factor_res
+                    return (
+                        surface_conditioning_category_b == SCC.EXTERIOR_MIXED
+                        and target_u_factor_nonres != target_u_factor_res
+                    )
 
-                def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
+                def get_manual_check_required_msg(
+                    self, context, calc_vals=None, data=None
+                ):
                     subsurface_b = context.baseline
-                    return subsurface_b["subclassification"] in [SUBSURFACE_SUBCLASSIFICATION_OPTIONS.SPANDREL_GLASS, SUBSURFACE_SUBCLASSIFICATION_OPTIONS.GLASS_BLOCK, SUBSURFACE_SUBCLASSIFICATION_OPTIONS.OTHER]
+                    return subsurface_b["subclassification"] in [
+                        SUBSURFACE_SUBCLASSIFICATION_OPTIONS.SPANDREL_GLASS,
+                        SUBSURFACE_SUBCLASSIFICATION_OPTIONS.GLASS_BLOCK,
+                        SUBSURFACE_SUBCLASSIFICATION_OPTIONS.OTHER,
+                    ]
 
                 def get_calc_vals(self, context, data=None):
                     subsurface_b = context.baseline
