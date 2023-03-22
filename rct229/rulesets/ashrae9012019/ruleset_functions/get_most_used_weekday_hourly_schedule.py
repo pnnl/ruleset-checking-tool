@@ -1,13 +1,23 @@
-import datetime
-from collections import Counter
+import pydash
 
-from rct229.rule_engine.rulesets import LeapYear
-from rct229.utils.assertions import RCTFailureException, assert_
+from rct229.rulesets.ashrae9012019.data.schema_enums import schema_enums
 
 HOURS_IN_DAY = 24
 
+DAY_OF_WEEK = schema_enums["DayOfWeekOptions"]
 
-def get_most_used_weekday_hourly_schedule(hourly_data: list, year: int):
+DATE_NUMBER_MAP = {
+    DAY_OF_WEEK.MONDAY: 0,
+    DAY_OF_WEEK.TUESDAY: 1,
+    DAY_OF_WEEK.WEDNESDAY: 2,
+    DAY_OF_WEEK.THURSDAY: 3,
+    DAY_OF_WEEK.FRIDAY: 4,
+    DAY_OF_WEEK.SATURDAY: 5,
+    DAY_OF_WEEK.SUNDAY: 6
+}
+
+
+def get_most_used_weekday_hourly_schedule(hourly_data: list, day_of_week_for_jan_first):
     """
     Get the most used weekday hourly schedule from an annual 8760/8784 schedule as list of hourly values for a 24
     hour period.
@@ -15,47 +25,22 @@ def get_most_used_weekday_hourly_schedule(hourly_data: list, year: int):
     Parameters
     ----------
     hourly_data: list of data - hourly values
-    year: int, years, need to be four digits
+    day_of_week_for_jan_first: schema day of week option
 
     Returns
     -------
     most_used_schedule: list contains 24 hours data.
     """
-    # validate the year argument - might need to add a smaller range for the year
-    if not isinstance(year, int) or year < 1 or year > 9999:
-        raise RCTFailureException(
-            f"Invalid year {year}. Year needs to be an integer, greater than 1 and smaller than 9999"
-        )
+    assert len(hourly_data) == 8760, f"Insufficient data, expected 8760 hours data, but got {len(hourly_data)} instead."
+    # verified this is 8760 hours
+    number_of_days = int(len(hourly_data) / HOURS_IN_DAY)
+    daily_data = pydash.chunk(hourly_data, HOURS_IN_DAY)
+    days_of_week = [(i + DATE_NUMBER_MAP[day_of_week_for_jan_first]) % 7 for i in range(number_of_days)]
+    weekdays_data = [day for i, day in enumerate(daily_data) if days_of_week[i] < 5]
+    # Calculate the frequency of each 24-hour schedule
+    schedule_frequencies = [tuple(day) for day in weekdays_data]
+    schedule_counts = pydash.count_by(schedule_frequencies)
 
-    # check if the year is a leap year - perfectly divisible by four -
-    # but not 100, unless it's divisible by 400
-    is_leap_year = year % 4 == 0 and (year % 100 != 0 or year % 400 == 0)
+    return list(max(schedule_counts, key=schedule_counts.get))
 
-    # Verify the list has the correct number of hours for the year type
-    assert_(
-        (is_leap_year and len(hourly_data) == LeapYear.LEAP_YEAR_HOURS)
-        or (not is_leap_year and len(hourly_data) == LeapYear.REGULAR_YEAR_HOURS),
-        f"The number of hours does not match to the year. Year: {year}, number of hours: {len(hourly_data)}",
-    )
 
-    # create a datetime object for the first hour of the year
-    start_datetime = datetime.datetime(year, 1, 1, 0)
-
-    # create a list to store the 24-hour schedules for each day of the week
-    schedules_by_day_of_week = [[] for _ in range(5)]
-
-    for i in range(0, len(hourly_data), HOURS_IN_DAY):
-        current_datetime = start_datetime + datetime.timedelta(hours=i)
-        # get the weekday (Monday is 0, Friday is 4)
-        weekday = current_datetime.weekday()
-        # We only need weekdays, excluding weekends
-        if weekday < 5:
-            # get the 24-hour schedule for the current day
-            day_schedule = tuple(hourly_data[i : i + HOURS_IN_DAY])
-            schedules_by_day_of_week[weekday].append(day_schedule)
-
-    schedule_counts = Counter(
-        schedule for schedules in schedules_by_day_of_week for schedule in schedules
-    )
-    most_common_schedule, count = schedule_counts.most_common(1)[0]
-    return list(most_common_schedule)

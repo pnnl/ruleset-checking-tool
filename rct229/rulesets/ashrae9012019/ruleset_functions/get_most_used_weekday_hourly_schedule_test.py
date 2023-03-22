@@ -4,7 +4,6 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_most_used_weekday_hourl
     get_most_used_weekday_hourly_schedule,
 )
 
-
 def test__get_most_used_weekday_hourly_schedule__success_1():
     year = 2015
     week = [
@@ -23,7 +22,7 @@ def test__get_most_used_weekday_hourly_schedule__success_1():
         weekday = current_datetime.weekday()
         hour = current_datetime.hour
         hourly_value[i] = week[weekday][hour]
-    most_used_schedule = get_most_used_weekday_hourly_schedule(hourly_value, year)
+    most_used_schedule = get_most_used_weekday_hourly_schedule(hourly_value, "THURSDAY")
     assert most_used_schedule == [0.8] * 24
 
 
@@ -51,7 +50,7 @@ def test__get_most_used_weekday_hourly_schedule__success_2():
         weekday = current_datetime.weekday()
         hour = current_datetime.hour
         hourly_value[i] = week[weekday][hour]
-    most_used_schedule = get_most_used_weekday_hourly_schedule(hourly_value, year)
+    most_used_schedule = get_most_used_weekday_hourly_schedule(hourly_value, "THURSDAY")
     assert most_used_schedule == [0.8] * 24
 
 
@@ -79,7 +78,7 @@ def test__get_most_used_weekday_hourly_schedule__success_3():
         weekday = current_datetime.weekday()
         hour = current_datetime.hour
         hourly_value[i] = week[weekday][hour]
-    most_used_schedule = get_most_used_weekday_hourly_schedule(hourly_value, year)
+    most_used_schedule = get_most_used_weekday_hourly_schedule(hourly_value, "THURSDAY")
     assert most_used_schedule == [0.9] * 24
 
 
@@ -106,5 +105,5 @@ def test__get_most_used_weekday_hourly_schedule__no_repeated_4():
         weekday = current_datetime.weekday()
         hour = current_datetime.hour
         hourly_value[i] = week[weekday][hour]
-    most_used_schedule = get_most_used_weekday_hourly_schedule(hourly_value, year)
+    most_used_schedule = get_most_used_weekday_hourly_schedule(hourly_value, "THURSDAY")
     assert most_used_schedule == [0.4] * 24
