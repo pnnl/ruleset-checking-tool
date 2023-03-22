@@ -4,6 +4,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_most_used_weekday_hourl
     get_most_used_weekday_hourly_schedule,
 )
 
+
 def test__get_most_used_weekday_hourly_schedule__success_1():
     year = 2015
     week = [
