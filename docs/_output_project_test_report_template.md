@@ -6,22 +6,20 @@ The following is an example of a JSON output file produced by the RCT.
     "purpose": "Project Testing Report",
     "ruleset": "ASHRAE 90.1-2019 Performance Rating Method (Appendix G)",
     "date_run": "2022-02-01T18:25:43-05:00",
-    "rmr_files": [
+    "rmd_files": [
         "user_rmr.json",
         "baseline_rmr.json",
         "proposed_rmr.json"
     ],
     "rules": {
-        "rule_name1": {
-            "rule_id": 1-1,
+        "1-1": {
+            "rule_id": "1-1",
             "description": "Description of rule 1-1.",
-            "source_value_name": "USER_RMR",
-            "expected_value_name": "PROPOSED_RMR",
-            "assertion": "EQUALS",
-            "primary_rule": "Y",
+            "ruleset_section_title": "Envelope",
+            "evaluation": "Full / Applicability",
             "standard_section": "G3.1.2.2",
             "rule_evaluation_outcome": "PASS",
-            "evaluations": [
+            "rule_evaluations": [
                 {
                     "id": 1,
                     "outcome": "PASS",
