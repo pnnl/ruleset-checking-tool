@@ -8,17 +8,17 @@ The following is an example of a JSON output file produced by the RCT software t
 	"date_run": "2023-03-16T14:45:33-05:00",
 	"schema_version": "0.0.23",
 	"rule_tests":{
-		"rule_test_name": {
+		"5-5-a": {
 			"rule_id": "5-5",
-			"test_id": "5-5-a / a",
+			"test_id": "a",
 			"test_description": "Building is located in climate zone 4A and includes a space that has residential occupancy type and is conditioned based on heating capacity of the HVAC system that servies the parent zone. The baseline roof U-factor for the space is established correctly.",
 			"ruleset_section": "Table G3.1(5) Baseline Building Performance (b)",
 			"ruleset_section_title": "Envelope",
             "evaluation": "Full / Applicability",
-            "aggregated_test_outcome_agreement": false,
-            "expected_aggregated_test_outcome": "PASS",
-            "actual_aggregated_test_outcome": "UNDETERMINED",
-			"test_evaluation": [
+            "rule_unit_test_outcome_agreement": false,
+            "expected_rule_unit_test_evaluation_outcome": "PASS",
+            "actual_rule_unit_test_evaluation_outcome": "UNDETERMINED",
+			"rule_unit_test_evaluation": [
 				{
 					"id": "Surface 1",
 					"messages": "message",
