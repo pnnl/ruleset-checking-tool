@@ -27,7 +27,7 @@ purchased hot water or steam in both the proposed design and baseline building d
 
 - Check if P-RMR is modeled with purchased chilled water or purchased hot water/steam: `purchased_chw_hhw_status_dict = check_purchased_chw_hhw(P_RMR)`
 
-  - If P-RMR is not modeled with purchased hot water/steam, rule is not applicable to B-RMR: `if NOT purchased_chw_hhw_status_dict["PURCHASED_HEATING"]: RULE_NOT_APPLICABLE`
+  - If P-RMR is not modeled with purchased hot water/steam, rule is not applicable to B-RMR: `if NOT purchased_chw_hhw_status_dict["PURCHASED_HEATING"]: NOT_APPLICABLE`
 
   - Else, P-RMR is modeled with purchased hot water/steam, continue to rule logic: `else: CHECK_RULE_LOGIC`
 
@@ -38,7 +38,7 @@ purchased hot water or steam in both the proposed design and baseline building d
 
 **Rule Assertion:**
 
-- Case 1: If check flag is True: `if check_flag: FAIL`
+- Case 1: If check flag is True: `if check_flag: NOT_APPLICABLE`
 
 - Case 2: Else: `else: UNDETERMINED and raise_message "P-RMR IS MODELED WITH PURCHASED HOT WATER OR STEAM. VERIFY B-RMR HEATING SOURCE IS MODELED CORRECTLY."`
 
