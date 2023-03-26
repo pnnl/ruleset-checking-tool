@@ -5,10 +5,9 @@ from rct229.rulesets.ashrae9012019.data.schema_enums import schema_enums
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_most_used_weekday_hourly_schedule import (
     get_most_used_weekday_hourly_schedule,
 )
-from rct229.utils.assertions import getattr_
-from rct229.utils.jsonpath_utils import find_one, find_exactly_one_with_field_value
 
-# LIGHTING_SPACE = schema_enums["LightingSpaceType2019ASHRAE901TG37"]
+
+LIGHTING_SPACE = schema_enums["LightingSpaceOptions2019ASHRAE901TG37"]
 VENTILATION_SPACE = schema_enums["VentilationSpaceOptions2019ASHRAE901"]
 LIGHTING_BUILDING_AREA = schema_enums[
     "LightingBuildingAreaOptions2019ASHRAE901T951TG38"
@@ -156,8 +155,7 @@ class Section19Rule4(RuleDefinitionListIndexedBase):
                         ventilation_space_type = space_b["ventilation_space_type"]
 
                         return (
-                            lighting_space_type_b
-                            == "DWELLING_UNIT"  ## TODO check this out
+                            lighting_space_type_b == LIGHTING_SPACE.DWELLING_UNIT
                             or ventilation_space_type
                             == VENTILATION_SPACE.TRANSIENT_RESIDENTIAL_DWELLING_UNIT
                         )
