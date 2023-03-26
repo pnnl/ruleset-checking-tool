@@ -83,7 +83,7 @@
                                 "unmet_load_hours": 200,
                                 "unmet_occupied_load_hours_heating": 0,
                                 "unmet_occupied_load_hours_cooling": 0,
-                                "building_peak_cooling_load": 200
+                                "building_peak_cooling_load": 703400.0
                             }
                         }
                     }
@@ -175,7 +175,7 @@
                                 "unmet_load_hours": 350,
                                 "unmet_occupied_load_hours_heating": 0,
                                 "unmet_occupied_load_hours_cooling": 0,
-                                "building_peak_cooling_load": 200
+                                "building_peak_cooling_load": 703400.0
                             }
                         }
                     }
@@ -267,7 +267,7 @@
                                 "unmet_load_hours": 350,
                                 "unmet_occupied_load_hours_heating": 0,
                                 "unmet_occupied_load_hours_cooling": 0,
-                                "building_peak_cooling_load": 200
+                                "building_peak_cooling_load": 703400.0
                             }
                         }
                     }
@@ -359,7 +359,7 @@
                                 "unmet_load_hours": 350,
                                 "unmet_occupied_load_hours_heating": 0,
                                 "unmet_occupied_load_hours_cooling": 0,
-                                "building_peak_cooling_load": 200
+                                "building_peak_cooling_load": 703400.0
                             }
                         }
                     }
