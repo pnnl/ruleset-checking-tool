@@ -3,7 +3,7 @@
         "Section": 19,
         "Rule": 18,
         "Test": "a",
-        "test_description": "System 3 with `SIMPLE` specification method for supply/return/exhaust/relief fans and each fans have 35 W design electric power with 1400 cfm design supply airflow.",
+        "test_description": "System 1 with `SIMPLE` specification method for supply/return/exhaust/relief fans and each fans have 35 W design electric power with 1400 cfm design supply airflow.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "19-18",
@@ -35,26 +35,30 @@
                                                 "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                                 "terminals": [
                                                     {
-                                                        "id": "Air Terminal",
-                                                        "is_supply_ducted": true,
+                                                        "id": "PTAC Terminal 1",
+                                                        "is_supply_ducted": false,
                                                         "type": "CONSTANT_AIR_VOLUME",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "System 9"
+                                                        "served_by_heating_ventilating_air_conditioning_system": "PTAC 1"
                                                     }
                                                 ],
                                                 "zonal_exhaust_fan": {
                                                     "id": "Zone exhaust fan 1",
                                                     "specification_method": "SIMPLE",
-                                                    "design_electric_power": 35
+                                                    "design_electric_power": 200
                                                 }
                                             }
                                         ],
                                         "heating_ventilating_air_conditioning_systems": [
                                             {
-                                                "id": "System 9",
+                                                "id": "PTAC 1",
+                                                "cooling_system": {
+                                                    "id": "DX Coil 1",
+                                                    "cooling_system_type": "DIRECT_EXPANSION"
+                                                },
                                                 "heating_system": {
-                                                    "id": "Furnace Coil 1",
-                                                    "heating_system_type": "FURNACE",
-                                                    "energy_source_type": "NATURAL_GAS"
+                                                    "id": "HHW Coil 1",
+                                                    "heating_system_type": "FLUID_LOOP",
+                                                    "hot_water_loop": "Boiler Loop 1"
                                                 },
                                                 "fan_system": {
                                                     "id": "CAV Fan System 1",
@@ -62,21 +66,14 @@
                                                     "supply_fans": [
                                                         {
                                                             "id": "Supply Fan 1",
-                                                            "design_airflow": 660.7264204799998,
-                                                            "specification_method": "SIMPLE",
-                                                            "design_electric_power": 35
-                                                        }
-                                                    ],
-                                                    "return_fans": [
-                                                        {
-                                                            "id": "Return Fan 1",
+                                                            "design_airflow": 534.7164531455998,
                                                             "specification_method": "SIMPLE",
                                                             "design_electric_power": 35
                                                         }
                                                     ],
                                                     "relief_fans": [
                                                         {
-                                                            "id": "Return fan 1",
+                                                            "id": "Relief fan 1",
                                                             "specification_method": "SIMPLE",
                                                             "design_electric_power": 35
                                                         }
@@ -87,12 +84,32 @@
                                                             "specification_method": "SIMPLE",
                                                             "design_electric_power": 35
                                                         }
+                                                    ],
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "Return fan 1",
+                                                            "specification_method": "SIMPLE",
+                                                            "design_electric_power": 35
+                                                        }
                                                     ]
                                                 }
                                             }
                                         ]
                                     }
                                 ]
+                            }
+                        ],
+                        "boilers": [
+                            {
+                                "id": "Boiler 1",
+                                "loop": "Boiler Loop 1",
+                                "energy_source_type": "NATURAL_GAS"
+                            }
+                        ],
+                        "fluid_loops": [
+                            {
+                                "id": "Boiler Loop 1",
+                                "type": "HEATING"
                             }
                         ]
                     }
@@ -104,7 +121,7 @@
         "Section": 19,
         "Rule": 18,
         "Test": "b",
-        "test_description": "System 3 with `SIMPLE` specification method for supply/return/exhaust/relief fans and each fans have 80 W design electric power with 800 cfm design supply airflow.",
+        "test_description": "System 1 with `SIMPLE` specification method for supply/return/exhaust/relief fans and each fans have 80 W design electric power with 800 cfm design supply airflow.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "19-18",
@@ -136,10 +153,10 @@
                                                 "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                                 "terminals": [
                                                     {
-                                                        "id": "Air Terminal",
-                                                        "is_supply_ducted": true,
+                                                        "id": "PTAC Terminal 1",
+                                                        "is_supply_ducted": false,
                                                         "type": "CONSTANT_AIR_VOLUME",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "System 9"
+                                                        "served_by_heating_ventilating_air_conditioning_system": "PTAC 1"
                                                     }
                                                 ],
                                                 "zonal_exhaust_fan": {
@@ -151,11 +168,15 @@
                                         ],
                                         "heating_ventilating_air_conditioning_systems": [
                                             {
-                                                "id": "System 9",
+                                                "id": "PTAC 1",
+                                                "cooling_system": {
+                                                    "id": "DX Coil 1",
+                                                    "cooling_system_type": "DIRECT_EXPANSION"
+                                                },
                                                 "heating_system": {
-                                                    "id": "Furnace Coil 1",
-                                                    "heating_system_type": "FURNACE",
-                                                    "energy_source_type": "NATURAL_GAS"
+                                                    "id": "HHW Coil 1",
+                                                    "heating_system_type": "FLUID_LOOP",
+                                                    "hot_water_loop": "Boiler Loop 1"
                                                 },
                                                 "fan_system": {
                                                     "id": "CAV Fan System 1",
@@ -168,16 +189,9 @@
                                                             "design_electric_power": 80
                                                         }
                                                     ],
-                                                    "return_fans": [
-                                                        {
-                                                            "id": "Return Fan 1",
-                                                            "specification_method": "SIMPLE",
-                                                            "design_electric_power": 80
-                                                        }
-                                                    ],
                                                     "relief_fans": [
                                                         {
-                                                            "id": "Return fan 1",
+                                                            "id": "Relief fan 1",
                                                             "specification_method": "SIMPLE",
                                                             "design_electric_power": 80
                                                         }
@@ -188,12 +202,32 @@
                                                             "specification_method": "SIMPLE",
                                                             "design_electric_power": 80
                                                         }
+                                                    ],
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "Return fan 1",
+                                                            "specification_method": "SIMPLE",
+                                                            "design_electric_power": 80
+                                                        }
                                                     ]
                                                 }
                                             }
                                         ]
                                     }
                                 ]
+                            }
+                        ],
+                        "boilers": [
+                            {
+                                "id": "Boiler 1",
+                                "loop": "Boiler Loop 1",
+                                "energy_source_type": "NATURAL_GAS"
+                            }
+                        ],
+                        "fluid_loops": [
+                            {
+                                "id": "Boiler Loop 1",
+                                "type": "HEATING"
                             }
                         ]
                     }
