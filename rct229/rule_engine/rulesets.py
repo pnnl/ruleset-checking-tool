@@ -11,3 +11,8 @@ class RuleSetTest:
         "section22",
         "section23",
     ]
+
+
+class LeapYear:
+    LEAP_YEAR_HOURS = 8784
+    REGULAR_YEAR_HOURS = 8760
