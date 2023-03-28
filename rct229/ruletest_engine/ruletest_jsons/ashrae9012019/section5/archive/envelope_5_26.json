@@ -1,0 +1,710 @@
+{
+    "rule-5-26-a": {
+        "Section": 5,
+        "Rule": 26,
+        "Test": "a",
+        "test_description": "A space has residential occupancy type and is conditioned based on heating and cooling capacity of the HVAC system that servies it. Building is located in climate zone 4A. The baseline vertical fenestrationSHGC is established correctly.",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "5-26",
+            "ruleset_reference": "Table G3.1 #5 Baseline column #d: Vertical Fenestration Assemblies. Fenestration for new\nbuildings, existing buildings, and additions shall comply with the following: \n\u2022 Fenestration SHGCs shall match the appropriate requirements in Tables G3.4-1 through G3.4-8 using the value for SHGCall for the applicable vertical glazing percentage.",
+            "rule_description": "Vertical fenestration SHGC shall match the appropriate requirements in Tables G3.4-1 through G3.4-8",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": "None",
+            "mandatory_rule": 0,
+            "schema_version": "0.0.5"
+        },
+        "rmr_transformations": {
+            "user": {
+                "id": "ashrae_229",
+                "buildings": [
+                    {
+                        "id": "building_1",
+                        "building_open_schedule": "schedule_1",
+                        "building_segments": [
+                            {
+                                "id": "segment_1",
+                                "zones": [
+                                    {
+                                        "id": "zone_1",
+                                        "thermostat_cooling_setpoint_schedule": "schedule_1",
+                                        "thermostat_heating_setpoint_schedule": "schedule_1",
+                                        "surfaces": [
+                                            {
+                                                "id": "surface_1",
+                                                "adjacent_to": "EXTERIOR",
+                                                "tilt": 90,
+                                                "subsurfaces": [
+                                                    {
+                                                        "id": "subsurface_1",
+                                                        "solar_heat_gain_coefficient": 0.39
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "spaces": [
+                                            {
+                                                "id": "space_1",
+                                                "lighting_space_type": "DWELLING_UNIT",
+                                                "occupant_multiplier_schedule": "occupant_multiplier_schedule_1"
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "heating_ventilating_air_conditioning_systems": [
+                                    {
+                                        "id": "heating_ventilating_air_conditioning_systems_1"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                "weather": {
+                    "climate_zone": "CZ4A"
+                }
+            },
+            "baseline": {
+                "id": "ashrae_229",
+                "buildings": [
+                    {
+                        "id": "building_1",
+                        "building_open_schedule": "schedule_1",
+                        "building_segments": [
+                            {
+                                "id": "segment_1",
+                                "zones": [
+                                    {
+                                        "id": "zone_1",
+                                        "thermostat_cooling_setpoint_schedule": "schedule_1",
+                                        "thermostat_heating_setpoint_schedule": "schedule_1",
+                                        "surfaces": [
+                                            {
+                                                "id": "surface_1",
+                                                "adjacent_to": "EXTERIOR",
+                                                "tilt": 90,
+                                                "subsurfaces": [
+                                                    {
+                                                        "id": "subsurface_1",
+                                                        "solar_heat_gain_coefficient": 0.39
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "spaces": [
+                                            {
+                                                "id": "space_1",
+                                                "lighting_space_type": "DWELLING_UNIT",
+                                                "occupant_multiplier_schedule": "occupant_multiplier_schedule_1"
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "heating_ventilating_air_conditioning_systems": [
+                                    {
+                                        "id": "heating_ventilating_air_conditioning_systems_1"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                "weather": {
+                    "climate_zone": "CZ4A"
+                }
+            }
+        }
+    },
+    "rule-5-26-b": {
+        "Section": 5,
+        "Rule": 26,
+        "Test": "b",
+        "test_description": "A space has residential occupancy type and is conditioned based on heating and cooling capacity of the HVAC system that servies it. Building is located in climate zone 4A. The baseline vertical fenestration SHGC is established correctly.\n",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "5-26",
+            "ruleset_reference": "Table G3.1 #5 Baseline column #d: Vertical Fenestration Assemblies. Fenestration for new\nbuildings, existing buildings, and additions shall comply with the following: \n\u2022 Fenestration SHGCs shall match the appropriate requirements in Tables G3.4-1 through G3.4-8 using the value for SHGCall for the applicable vertical glazing percentage.",
+            "rule_description": "Vertical fenestration SHGC shall match the appropriate requirements in Tables G3.4-1 through G3.4-8",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": "None",
+            "mandatory_rule": 0,
+            "schema_version": "0.0.5"
+        },
+        "rmr_transformations": {
+            "user": {
+                "id": "ashrae_229",
+                "buildings": [
+                    {
+                        "id": "building_1",
+                        "building_open_schedule": "schedule_1",
+                        "building_segments": [
+                            {
+                                "id": "segment_1",
+                                "zones": [
+                                    {
+                                        "id": "zone_1",
+                                        "thermostat_cooling_setpoint_schedule": "schedule_1",
+                                        "thermostat_heating_setpoint_schedule": "schedule_1",
+                                        "surfaces": [
+                                            {
+                                                "id": "surface_1",
+                                                "adjacent_to": "EXTERIOR",
+                                                "tilt": 90,
+                                                "subsurfaces": [
+                                                    {
+                                                        "id": "subsurface_1",
+                                                        "solar_heat_gain_coefficient": 0.4
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "spaces": [
+                                            {
+                                                "id": "space_1",
+                                                "lighting_space_type": "DWELLING_UNIT",
+                                                "occupant_multiplier_schedule": "occupant_multiplier_schedule_1"
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "heating_ventilating_air_conditioning_systems": [
+                                    {
+                                        "id": "heating_ventilating_air_conditioning_systems_1"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                "weather": {
+                    "climate_zone": "CZ4A"
+                }
+            },
+            "baseline": {
+                "id": "ashrae_229",
+                "buildings": [
+                    {
+                        "id": "building_1",
+                        "building_open_schedule": "schedule_1",
+                        "building_segments": [
+                            {
+                                "id": "segment_1",
+                                "zones": [
+                                    {
+                                        "id": "zone_1",
+                                        "thermostat_cooling_setpoint_schedule": "schedule_1",
+                                        "thermostat_heating_setpoint_schedule": "schedule_1",
+                                        "surfaces": [
+                                            {
+                                                "id": "surface_1",
+                                                "adjacent_to": "EXTERIOR",
+                                                "tilt": 90,
+                                                "subsurfaces": [
+                                                    {
+                                                        "id": "subsurface_1",
+                                                        "solar_heat_gain_coefficient": 0.4
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "spaces": [
+                                            {
+                                                "id": "space_1",
+                                                "lighting_space_type": "DWELLING_UNIT",
+                                                "occupant_multiplier_schedule": "occupant_multiplier_schedule_1"
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "heating_ventilating_air_conditioning_systems": [
+                                    {
+                                        "id": "heating_ventilating_air_conditioning_systems_1"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                "weather": {
+                    "climate_zone": "CZ4A"
+                }
+            }
+        }
+    },
+    "rule-5-26-c": {
+        "Section": 5,
+        "Rule": 26,
+        "Test": "c",
+        "test_description": "A space has non-residential occupancy type and is conditioned based on heating and cooling capacity of the HVAC system that servies it. Building is located in climate zone 4A. The baseline vertical fenestration SHGC is established correctly.\n",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "5-26",
+            "ruleset_reference": "Table G3.1 #5 Baseline column #d: Vertical Fenestration Assemblies. Fenestration for new\nbuildings, existing buildings, and additions shall comply with the following: \n\u2022 Fenestration SHGCs shall match the appropriate requirements in Tables G3.4-1 through G3.4-8 using the value for SHGCall for the applicable vertical glazing percentage.",
+            "rule_description": "Vertical fenestration SHGC shall match the appropriate requirements in Tables G3.4-1 through G3.4-8",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": "None",
+            "mandatory_rule": 0,
+            "schema_version": "0.0.5"
+        },
+        "rmr_transformations": {
+            "user": {
+                "id": "ashrae_229",
+                "buildings": [
+                    {
+                        "id": "building_1",
+                        "building_open_schedule": "schedule_1",
+                        "building_segments": [
+                            {
+                                "id": "segment_1",
+                                "zones": [
+                                    {
+                                        "id": "zone_1",
+                                        "thermostat_cooling_setpoint_schedule": "schedule_1",
+                                        "thermostat_heating_setpoint_schedule": "schedule_1",
+                                        "surfaces": [
+                                            {
+                                                "id": "surface_1",
+                                                "adjacent_to": "EXTERIOR",
+                                                "tilt": 90,
+                                                "subsurfaces": [
+                                                    {
+                                                        "id": "subsurface_1",
+                                                        "solar_heat_gain_coefficient": 0.39
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "spaces": [
+                                            {
+                                                "id": "space_1",
+                                                "lighting_space_type": "STAIRWELL",
+                                                "occupant_multiplier_schedule": "occupant_multiplier_schedule_1"
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "heating_ventilating_air_conditioning_systems": [
+                                    {
+                                        "id": "heating_ventilating_air_conditioning_systems_1"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                "weather": {
+                    "climate_zone": "CZ4A"
+                }
+            },
+            "baseline": {
+                "id": "ashrae_229",
+                "buildings": [
+                    {
+                        "id": "building_1",
+                        "building_open_schedule": "schedule_1",
+                        "building_segments": [
+                            {
+                                "id": "segment_1",
+                                "zones": [
+                                    {
+                                        "id": "zone_1",
+                                        "thermostat_cooling_setpoint_schedule": "schedule_1",
+                                        "thermostat_heating_setpoint_schedule": "schedule_1",
+                                        "surfaces": [
+                                            {
+                                                "id": "surface_1",
+                                                "adjacent_to": "EXTERIOR",
+                                                "tilt": 90,
+                                                "subsurfaces": [
+                                                    {
+                                                        "id": "subsurface_1",
+                                                        "solar_heat_gain_coefficient": 0.39
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "spaces": [
+                                            {
+                                                "id": "space_1",
+                                                "lighting_space_type": "STAIRWELL",
+                                                "occupant_multiplier_schedule": "occupant_multiplier_schedule_1"
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "heating_ventilating_air_conditioning_systems": [
+                                    {
+                                        "id": "heating_ventilating_air_conditioning_systems_1"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                "weather": {
+                    "climate_zone": "CZ4A"
+                }
+            }
+        }
+    },
+    "rule-5-26-d": {
+        "Section": 5,
+        "Rule": 26,
+        "Test": "d",
+        "test_description": "A space has non-residential occupancy type and is conditioned based on heating and cooling capacity of the HVAC system that servies it. Building is located in climate zone 4A. The baseline vertical fenestration SHGC is established correctly.\n",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "5-26",
+            "ruleset_reference": "Table G3.1 #5 Baseline column #d: Vertical Fenestration Assemblies. Fenestration for new\nbuildings, existing buildings, and additions shall comply with the following: \n\u2022 Fenestration SHGCs shall match the appropriate requirements in Tables G3.4-1 through G3.4-8 using the value for SHGCall for the applicable vertical glazing percentage.",
+            "rule_description": "Vertical fenestration SHGC shall match the appropriate requirements in Tables G3.4-1 through G3.4-8",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": "None",
+            "mandatory_rule": 0,
+            "schema_version": "0.0.5"
+        },
+        "rmr_transformations": {
+            "user": {
+                "id": "ashrae_229",
+                "buildings": [
+                    {
+                        "id": "building_1",
+                        "building_open_schedule": "schedule_1",
+                        "building_segments": [
+                            {
+                                "id": "segment_1",
+                                "zones": [
+                                    {
+                                        "id": "zone_1",
+                                        "thermostat_cooling_setpoint_schedule": "schedule_1",
+                                        "thermostat_heating_setpoint_schedule": "schedule_1",
+                                        "surfaces": [
+                                            {
+                                                "id": "surface_1",
+                                                "adjacent_to": "EXTERIOR",
+                                                "tilt": 90,
+                                                "subsurfaces": [
+                                                    {
+                                                        "id": "subsurface_1",
+                                                        "solar_heat_gain_coefficient": 0.4
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "spaces": [
+                                            {
+                                                "id": "space_1",
+                                                "lighting_space_type": "STAIRWELL",
+                                                "occupant_multiplier_schedule": "occupant_multiplier_schedule_1"
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "heating_ventilating_air_conditioning_systems": [
+                                    {
+                                        "id": "heating_ventilating_air_conditioning_systems_1"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                "weather": {
+                    "climate_zone": "CZ4A"
+                }
+            },
+            "baseline": {
+                "id": "ashrae_229",
+                "buildings": [
+                    {
+                        "id": "building_1",
+                        "building_open_schedule": "schedule_1",
+                        "building_segments": [
+                            {
+                                "id": "segment_1",
+                                "zones": [
+                                    {
+                                        "id": "zone_1",
+                                        "thermostat_cooling_setpoint_schedule": "schedule_1",
+                                        "thermostat_heating_setpoint_schedule": "schedule_1",
+                                        "surfaces": [
+                                            {
+                                                "id": "surface_1",
+                                                "adjacent_to": "EXTERIOR",
+                                                "tilt": 90,
+                                                "subsurfaces": [
+                                                    {
+                                                        "id": "subsurface_1",
+                                                        "solar_heat_gain_coefficient": 0.4
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "spaces": [
+                                            {
+                                                "id": "space_1",
+                                                "lighting_space_type": "STAIRWELL",
+                                                "occupant_multiplier_schedule": "occupant_multiplier_schedule_1"
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "heating_ventilating_air_conditioning_systems": [
+                                    {
+                                        "id": "heating_ventilating_air_conditioning_systems_1"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                "weather": {
+                    "climate_zone": "CZ4A"
+                }
+            }
+        }
+    },
+    "rule-5-26-e": {
+        "Section": 5,
+        "Rule": 26,
+        "Test": "e",
+        "test_description": "A space has non-residential occupancy type and is conditioned based on heating and cooling capacity of the HVAC system that servies it. Building is located in climate zone 4A. The baseline vertical fenestration SHGC is established correctly.\n",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "5-26",
+            "ruleset_reference": "Table G3.1 #5 Baseline column #d: Vertical Fenestration Assemblies. Fenestration for new\nbuildings, existing buildings, and additions shall comply with the following: \n\u2022 Fenestration SHGCs shall match the appropriate requirements in Tables G3.4-1 through G3.4-8 using the value for SHGCall for the applicable vertical glazing percentage.",
+            "rule_description": "Vertical fenestration SHGC shall match the appropriate requirements in Tables G3.4-1 through G3.4-8",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": "None",
+            "mandatory_rule": 0,
+            "schema_version": "0.0.5"
+        },
+        "rmr_transformations": {
+            "user": {
+                "id": "ashrae_229",
+                "buildings": [
+                    {
+                        "id": "building_1",
+                        "building_open_schedule": "schedule_1",
+                        "building_segments": [
+                            {
+                                "id": "segment_1",
+                                "zones": [
+                                    {
+                                        "id": "zone_1",
+                                        "thermostat_cooling_setpoint_schedule": "schedule_1",
+                                        "thermostat_heating_setpoint_schedule": "schedule_1",
+                                        "surfaces": [
+                                            {
+                                                "id": "surface_1",
+                                                "adjacent_to": "EXTERIOR",
+                                                "tilt": 90,
+                                                "subsurfaces": [
+                                                    {
+                                                        "id": "subsurface_1",
+                                                        "solar_heat_gain_coefficient": 0.4
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "spaces": [
+                                            {
+                                                "id": "space_1",
+                                                "lighting_space_type": "STAIRWELL",
+                                                "occupant_multiplier_schedule": "occupant_multiplier_schedule_1"
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "heating_ventilating_air_conditioning_systems": [
+                                    {
+                                        "id": "heating_ventilating_air_conditioning_systems_1"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                "weather": {
+                    "climate_zone": "CZ4A"
+                }
+            },
+            "baseline": {
+                "id": "ashrae_229",
+                "buildings": [
+                    {
+                        "id": "building_1",
+                        "building_open_schedule": "schedule_1",
+                        "building_segments": [
+                            {
+                                "id": "segment_1",
+                                "zones": [
+                                    {
+                                        "id": "zone_1",
+                                        "thermostat_cooling_setpoint_schedule": "schedule_1",
+                                        "thermostat_heating_setpoint_schedule": "schedule_1",
+                                        "surfaces": [
+                                            {
+                                                "id": "surface_1",
+                                                "adjacent_to": "EXTERIOR",
+                                                "tilt": 90,
+                                                "subsurfaces": [
+                                                    {
+                                                        "id": "subsurface_1",
+                                                        "solar_heat_gain_coefficient": 0.4
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "spaces": [
+                                            {
+                                                "id": "space_1",
+                                                "lighting_space_type": "STAIRWELL",
+                                                "occupant_multiplier_schedule": "occupant_multiplier_schedule_1"
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "heating_ventilating_air_conditioning_systems": [
+                                    {
+                                        "id": "heating_ventilating_air_conditioning_systems_1"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                "weather": {
+                    "climate_zone": "CZ4A"
+                }
+            }
+        }
+    },
+    "rule-5-26-f": {
+        "Section": 5,
+        "Rule": 26,
+        "Test": "f",
+        "test_description": "A space has non-residential occupancy type and is conditioned based on heating and cooling capacity of the HVAC system that servies it. Building is located in climate zone 4A. The baseline vertical fenestration SHGC is established correctly.\n",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "5-26",
+            "ruleset_reference": "Table G3.1 #5 Baseline column #d: Vertical Fenestration Assemblies. Fenestration for new\nbuildings, existing buildings, and additions shall comply with the following: \n\u2022 Fenestration SHGCs shall match the appropriate requirements in Tables G3.4-1 through G3.4-8 using the value for SHGCall for the applicable vertical glazing percentage.",
+            "rule_description": "Vertical fenestration SHGC shall match the appropriate requirements in Tables G3.4-1 through G3.4-8",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": "None",
+            "mandatory_rule": 0,
+            "schema_version": "0.0.5"
+        },
+        "rmr_transformations": {
+            "user": {
+                "id": "ashrae_229",
+                "buildings": [
+                    {
+                        "id": "building_1",
+                        "building_open_schedule": "schedule_1",
+                        "building_segments": [
+                            {
+                                "id": "segment_1",
+                                "zones": [
+                                    {
+                                        "id": "zone_1",
+                                        "thermostat_cooling_setpoint_schedule": "schedule_1",
+                                        "thermostat_heating_setpoint_schedule": "schedule_1",
+                                        "surfaces": [
+                                            {
+                                                "id": "surface_1",
+                                                "adjacent_to": "EXTERIOR",
+                                                "tilt": 90,
+                                                "subsurfaces": [
+                                                    {
+                                                        "id": "subsurface_1",
+                                                        "solar_heat_gain_coefficient": 0.39
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "spaces": [
+                                            {
+                                                "id": "space_1",
+                                                "lighting_space_type": "STAIRWELL",
+                                                "occupant_multiplier_schedule": "occupant_multiplier_schedule_1"
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "heating_ventilating_air_conditioning_systems": [
+                                    {
+                                        "id": "heating_ventilating_air_conditioning_systems_1"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                "weather": {
+                    "climate_zone": "CZ4A"
+                }
+            },
+            "baseline": {
+                "id": "ashrae_229",
+                "buildings": [
+                    {
+                        "id": "building_1",
+                        "building_open_schedule": "schedule_1",
+                        "building_segments": [
+                            {
+                                "id": "segment_1",
+                                "zones": [
+                                    {
+                                        "id": "zone_1",
+                                        "thermostat_cooling_setpoint_schedule": "schedule_1",
+                                        "thermostat_heating_setpoint_schedule": "schedule_1",
+                                        "surfaces": [
+                                            {
+                                                "id": "surface_1",
+                                                "adjacent_to": "EXTERIOR",
+                                                "tilt": 90,
+                                                "subsurfaces": [
+                                                    {
+                                                        "id": "subsurface_1",
+                                                        "solar_heat_gain_coefficient": 0.39
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "spaces": [
+                                            {
+                                                "id": "space_1",
+                                                "lighting_space_type": "STAIRWELL",
+                                                "occupant_multiplier_schedule": "occupant_multiplier_schedule_1"
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "heating_ventilating_air_conditioning_systems": [
+                                    {
+                                        "id": "heating_ventilating_air_conditioning_systems_1"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                "weather": {
+                    "climate_zone": "CZ4A"
+                }
+            }
+        }
+    }
+}

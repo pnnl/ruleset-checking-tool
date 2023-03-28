@@ -343,7 +343,7 @@ def remove_index_references_from_key(key):
     return clean_key
 
 
-def disaggregate_master_ruletest_json(master_json_name):
+def disaggregate_master_ruletest_json(master_json_name, ruleset_doc):
 
     """Ingests a string representing a JSON file name from rct229/ruletest_engine/ruletest_jsons. JSONs in that
     directory contain ALL ruletests for a particular grouping of rules (e.g., 'envelope_tests.json' has every test case
@@ -354,7 +354,8 @@ def disaggregate_master_ruletest_json(master_json_name):
          ----------
          master_json_name : str
              String representing a name of master JSON file in rct229/ruletest_engine/ruletest_jsons
-             E.g., 'envelope_tests.json'
+             E.g., 'envelope_tests.json''
+         ruleset_doc : str
 
 
     """
@@ -363,7 +364,7 @@ def disaggregate_master_ruletest_json(master_json_name):
     file_dir = os.path.dirname(__file__)
 
     # master JSON should be in the ruletest_jsons directory
-    master_json_path = os.path.join(file_dir, "..", master_json_name)
+    master_json_path = os.path.join(file_dir, "..", ruleset_doc, master_json_name)
 
     # Initialize master JSON dictionary
     with open(master_json_path) as f:
@@ -429,3 +430,61 @@ def disaggregate_master_ruletest_json(master_json_name):
 
     # Write out final rule dictionary
     write_ruletest_json(prev_section, prev_rule)
+
+
+def disaggregate_master_rmd_json(master_json_name, output_dir):
+
+    """Ingests a string representing a JSON file name from rct229/ruletest_engine/ruletest_jsons. JSONs in that
+    directory contain either ALL ruletests for a particular grouping of rules (e.g., 'envelope_tests.json' has every
+    test case for envelope based rules) or sometimes just RMDs. This scripts breaks out master JSONs without test
+    case information (i.e., those that are multiple copies of 229 JSON RMDs)
+
+         Parameters
+         ----------
+         master_json_name : str
+             String representing a name of master JSON file in rct229/ruletest_engine/ruletest_jsons
+             E.g., 'system_types.json'
+
+                output_dir : str
+                        String representing the output directory (e.g., 'system_types')
+
+
+    """
+
+    # Get this file's directory
+    file_dir = os.path.dirname(__file__)
+
+    # master JSON should be in the ruletest_jsons directory
+    master_json_path = os.path.join(file_dir, "..", master_json_name)
+
+    # Initialize master JSON dictionary
+    with open(master_json_path) as f:
+        master_dict = json.load(f)
+
+    # Inner function used for writing out ruletest JSONs
+    def write_ruletest_json(rmd_dict, json_name, output_dir):
+
+        # Initialize json name and pathing
+        json_name = os.path.join(f"{output_dir}", f"{json_name}")
+        json_file_path = os.path.join(file_dir, "..", json_name)
+
+        # Dump JSON to string for writing
+        json_string = json.dumps(rmd_dict, indent=4)
+
+        # Write JSON string to file
+        with open(json_file_path, "w") as json_file:
+            json_file.write(json_string)
+            print(
+                f"RMD for {json_name} complete and written to directory: {output_dir}"
+            )
+
+    # Iterate through each key (i.e., ruletest), checking if a subsequent ruletest matches the section and rule number
+    # of the previous key. Ruletests of the same section and rule should go in their own JSON.
+    for rmd_name in master_dict:
+
+        # Initialize this RMD's dictionary and JSON name
+        rmd_dict = master_dict[rmd_name]
+        json_name = f"{rmd_name}.json"
+
+        # New section + rule. Write out last rule test dictionary before creating a new one
+        write_ruletest_json(rmd_dict, json_name, output_dir)
