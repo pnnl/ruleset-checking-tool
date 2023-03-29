@@ -47,9 +47,9 @@ class Section19Rule12(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section19Rule12.HVACRule, self).__init__(
                 rmrs_used=UserBaselineProposedVals(False, True, False),
-                # required_fields={
-                #     "$": ["fan_system"],
-                # },
+                required_fields={
+                    "$": ["fan_system"],
+                },
             )
 
         def is_applicable(self, context, data=None):
@@ -67,7 +67,7 @@ class Section19Rule12(RuleDefinitionListIndexedBase):
             hvac_b = context.baseline
             climate_zone_b = data["climate_zone"]
             fan_system_b = hvac_b["fan_system"]
-            stop = 1
+
             high_limit_temp_b = getattr_(
                 fan_system_b,
                 "high_limit_shutoff_temperature",
