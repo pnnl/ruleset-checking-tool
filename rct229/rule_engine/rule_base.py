@@ -1,5 +1,6 @@
 from jsonpointer import resolve_pointer
 
+from rct229.rule_engine.rct_outcome_label import RCTOutcomeLabel
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 from rct229.utils.assertions import MissingKeyException, RCTFailureException
 from rct229.utils.json_utils import slash_prefix_guarantee
@@ -15,9 +16,11 @@ class RuleDefinitionBase:
         rmrs_used,
         id=None,
         description=None,
+        ruleset_section_title=None,
+        standard_section=None,
+        is_primary_rule=None,
         rmr_context="",
         required_fields=None,
-        must_match_by_ids=[],
         manual_check_required_msg="",
         fail_msg="",
         pass_msg="",
@@ -36,6 +39,14 @@ class RuleDefinitionBase:
         description : string
             Rule description
             Usually unspecified for nested rules
+        ruleset_section_title : string
+            Ruleset section title
+            e.g., Envelope
+        standard_section: string
+            The section id in the standard (ruleset)
+            e.g., Section G3.1-5(b) Building Envelope Modeling Requirements for the Baseline building
+        is_primary_rule: boolean
+            Indicate whether this rule is primary rule (True) or secondary rule (False)
         rmr_context : string
             A json pointer into each RMR, or RMR fragment, provided to the rule.
             For better human readability, the leading "/" may be ommitted.
@@ -46,11 +57,21 @@ class RuleDefinitionBase:
                 ...
             },
             where the json path should resolve to a list of dectionaries.
-
+        manual_check_required_msg: string
+            default message for UNDETERMINED outcome
+        fail_msg: string
+            default message for FAILED outcome
+        pass_msg: string
+            default message for PASS outcome
+        not_applicable_msg: string
+            default message for NOT_APPLICABLE outcome
         """
         self.rmrs_used = rmrs_used
         self.id = id
         self.description = description
+        self.ruleset_section_title = ruleset_section_title
+        self.standard_section = standard_section
+        self.is_primary_rule = is_primary_rule
         # rmr_context is a jsonpointer string
         # As a convenience, any leading '/' should not be included and will
         # be inserted when the pointer is used in _get_context().
@@ -103,10 +124,16 @@ class RuleDefinitionBase:
             outcome["id"] = self.id
         if self.description:
             outcome["description"] = self.description
+        if self.ruleset_section_title:
+            outcome["ruleset_section_title"] = self.ruleset_section_title
+        if self.standard_section:
+            outcome["standard_section"] = self.standard_section
+        if self.is_primary_rule is not None:
+            outcome["primary_rule"] = True if self.is_primary_rule else False
         if self.rmr_context:
             outcome["rmr_context"] = self.rmr_context
 
-        # context will be a string if the context does not exist for any of the RMR used
+        # context will be a string if the context does not exist for any of the RMD used
         context_or_string = self.get_context(rmrs, data)
         if isinstance(context_or_string, UserBaselineProposedVals):
             context = context_or_string
@@ -130,7 +157,7 @@ class RuleDefinitionBase:
 
                         # Determine if manual check is required
                         if self.manual_check_required(context, calc_vals, data):
-                            outcome["result"] = "UNDETERMINED"
+                            outcome["result"] = RCTOutcomeLabel.UNDETERMINED
                             manual_check_required_msg = (
                                 self.get_manual_check_required_msg(
                                     context, calc_vals, data
@@ -144,34 +171,54 @@ class RuleDefinitionBase:
                             if isinstance(result, list):
                                 # The result is a list of outcomes
                                 outcome["result"] = result
-                            # Assume result type is bool
+                            # using is False to include the None case.
+                            elif self.is_primary_rule is False:
+                                # secondary rule applicability check true-> undetermined, false -> not_applicable
+                                if result:
+                                    outcome["result"] = RCTOutcomeLabel.UNDETERMINED
+                                    undetermined_msg = (
+                                        self.get_manual_check_required_msg(
+                                            context, calc_vals, data
+                                        )
+                                    )
+                                    if undetermined_msg:
+                                        outcome["message"] = undetermined_msg
+                                else:
+                                    outcome["result"] = RCTOutcomeLabel.NOT_APPLICABLE
+                                    undetermined_msg = self.get_not_applicable_msg(
+                                        context, data
+                                    )
+                                    if undetermined_msg:
+                                        outcome["message"] = undetermined_msg
                             elif result:
-                                outcome["result"] = "PASSED"
+                                outcome["result"] = RCTOutcomeLabel.PASS
                                 pass_msg = self.get_pass_msg(context, calc_vals, data)
                                 if pass_msg:
                                     outcome["message"] = pass_msg
                             else:
-                                outcome["result"] = "FAILED"
+                                outcome["result"] = RCTOutcomeLabel.FAILED
                                 fail_msg = self.get_fail_msg(context, calc_vals, data)
                                 if fail_msg:
                                     outcome["message"] = fail_msg
                     else:
-                        outcome["result"] = "NOT_APPLICABLE"
+                        outcome["result"] = RCTOutcomeLabel.NOT_APPLICABLE
                         not_applicable_msg = self.get_not_applicable_msg(context, data)
                         if not_applicable_msg:
                             outcome["message"] = not_applicable_msg
                 except MissingKeyException as ke:
-                    outcome["result"] = "UNDETERMINED"
+                    outcome["result"] = RCTOutcomeLabel.UNDETERMINED
                     outcome["message"] = str(ke)
                 except RCTFailureException as fe:
-                    outcome["result"] = "FAILED"
+                    outcome["result"] = RCTOutcomeLabel.FAILED
                     outcome["message"] = str(fe)
             else:
-                outcome["result"] = context_validity_dict
+                outcome["result"] = "UNDETERMINED"
+                outcome["message"] = context_validity_dict
         else:
-            # context should be a string indicating the RMRs that are missing
+            # context should be a string indicating the RMDs that are missing
             # such as "MISSING_BASELINE"
-            outcome["result"] = context_or_string
+            outcome["result"] = "UNDETERMINED"
+            outcome["message"] = context_or_string
 
         return outcome
 
@@ -579,6 +626,8 @@ class RuleDefinitionBase:
         ----------
         context : UserBaselineProposedVals
             Object containing the contexts for the user, baseline, and proposed RMRs
+        calc_vals: dictionary
+            Dictionary contains calculated values for rule check and reporting.
         data : An optional data object. It is ignored by this base implementation.
 
         Returns
