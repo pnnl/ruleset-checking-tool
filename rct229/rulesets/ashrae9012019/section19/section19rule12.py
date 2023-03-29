@@ -3,7 +3,7 @@ from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedB
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 from rct229.rulesets.ashrae9012019.data.schema_enums import schema_enums
 from rct229.schema.config import ureg
-from rct229.utils.assertions import assert_, getattr_
+from rct229.utils.assertions import getattr_
 from rct229.utils.std_comparisons import std_equal
 
 AIR_ECONOMIZER = schema_enums["AirEconomizerOptions"]
@@ -35,8 +35,7 @@ class Section19Rule12(RuleDefinitionListIndexedBase):
             ruleset_section_title="HVAC - General",
             standard_section=" Section G3.1.2.7",
             is_primary_rule=True,
-            rmr_context="ruleset_model_instances/0",
-            list_path="$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*]",
+            list_path="$.ruleset_model_instances[*].buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*]",
             required_fields={
                 "$": ["weather"],
                 "weather": ["climate_zone"],
@@ -48,9 +47,9 @@ class Section19Rule12(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section19Rule12.HVACRule, self).__init__(
                 rmrs_used=UserBaselineProposedVals(False, True, False),
-                required_fields={
-                    "$": ["fan_system"],
-                },
+                # required_fields={
+                #     "$": ["fan_system"],
+                # },
             )
 
         def is_applicable(self, context, data=None):
@@ -68,7 +67,7 @@ class Section19Rule12(RuleDefinitionListIndexedBase):
             hvac_b = context.baseline
             climate_zone_b = data["climate_zone"]
             fan_system_b = hvac_b["fan_system"]
-
+            stop = 1
             high_limit_temp_b = getattr_(
                 fan_system_b,
                 "high_limit_shutoff_temperature",
@@ -80,13 +79,13 @@ class Section19Rule12(RuleDefinitionListIndexedBase):
                 fan_system_b,
                 "air economizer type",
                 "air_economizer",
-                "type ",
+                "type",
             )
 
             if climate_zone_b in CLIMATE_ZONE_70F:
-                req_high_limit_temp = 70 * ureg("degF")
+                req_high_limit_temp = 70 * ureg("degR")
             elif climate_zone_b in CLIMATE_ZONE_75F:
-                req_high_limit_temp = 75 * ureg("degF")
+                req_high_limit_temp = 75 * ureg("degR")
 
             return {
                 "high_limit_temp_b": high_limit_temp_b,
@@ -95,8 +94,8 @@ class Section19Rule12(RuleDefinitionListIndexedBase):
             }
 
         def rule_check(self, context, calc_vals=None, data=None):
-            req_high_limit_temp = data["req_high_limit_temp"]
-            high_limit_temp_b = data["high_limit_temp_b"]
+            req_high_limit_temp = calc_vals["req_high_limit_temp"]
+            high_limit_temp_b = calc_vals["high_limit_temp_b"]
             air_economizer_type_b = calc_vals["air_economizer_type_b"]
 
             return (
