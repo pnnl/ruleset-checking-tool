@@ -1,7 +1,7 @@
 
 # get_baseline_system_types
 
-
+**Schema Version:** 0.0.23
 **Description:**  Identify all the baseline system types modeled in a B-RMR.
 
 **Inputs:**

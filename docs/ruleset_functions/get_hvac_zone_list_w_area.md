@@ -1,6 +1,8 @@
 
 ## get_hvac_zone_list_w_area
 
+**Schema Version:** 0.0.23
+
 Description: Get the list of zones and their total floor area served by each HVAC system in a RMD.
 
 Inputs:  
