@@ -6,13 +6,9 @@ import os
 import pprint
 
 from rct229.rule_engine.engine import evaluate_rule
+from rct229.rule_engine.rct_outcome_label import RCTOutcomeLabel
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
-from rct229.rules.section5 import *
-from rct229.rules.section6 import *
-from rct229.rules.section12 import *
-from rct229.rules.section15 import *
-from rct229.rules.section21 import *
-from rct229.rules.section22 import *
+from rct229.rulesets import rulesets
 from rct229.ruletest_engine.ruletest_jsons.scripts.json_generation_utilities import (
     merge_nested_dictionary,
 )
@@ -91,13 +87,15 @@ def evaluate_outcome_enumeration_str(outcome_enumeration_str):
     """
 
     # Check result of rule evaluation against known string constants
-    if outcome_enumeration_str == "PASSED":
+    if outcome_enumeration_str == RCTOutcomeLabel.PASS:
         test_result = "pass"
-    elif outcome_enumeration_str == "FAILED":
+    elif outcome_enumeration_str == RCTOutcomeLabel.FAILED:
         test_result = "fail"
-    elif outcome_enumeration_str == "UNDETERMINED":  # previously used for manual_check
+    elif (
+        outcome_enumeration_str == RCTOutcomeLabel.UNDETERMINED
+    ):  # previously used for manual_check
         test_result = "undetermined"
-    elif outcome_enumeration_str == "NOT_APPLICABLE":
+    elif outcome_enumeration_str == RCTOutcomeLabel.NOT_APPLICABLE:
         test_result = "not_applicable"
     else:
         raise ValueError(
@@ -177,7 +175,7 @@ def process_test_result(test_result, test_dict, test_id):
     return outcome_text, received_expected_outcome
 
 
-def run_section_tests(test_json_name):
+def run_section_tests(test_json_name: str, ruleset_doc: str):
     """Runs all tests found in a given test JSON and prints results to console. Returns true/false describing whether
     or not all tests in the JSON result in the expected outcome.
 
@@ -186,6 +184,10 @@ def run_section_tests(test_json_name):
     test_json_name : string
 
         Name of test JSON in 'test_jsons' directory. (e.g., transformer_tests.json)
+
+    ruleset_doc: string
+
+        Name of the ruleset
 
     Returns
     -------
@@ -222,6 +224,12 @@ def run_section_tests(test_json_name):
     with open(test_json_path) as f:
         test_list_dictionary = json.load(f)
 
+    # get all rules in the ruleset.
+    available_rule_definitions = rulesets.__getrules__(ruleset_doc)
+    available_rule_definitions_dict = {
+        rule_class[0]: rule_class[1] for rule_class in available_rule_definitions
+    }
+
     # Cycle through tests in test JSON and run each individually
     for test_id in test_list_dictionary:
 
@@ -237,7 +245,7 @@ def run_section_tests(test_json_name):
         rule = test_dict["Rule"]
 
         # Construction function name for Section and rule
-        section_name = f"section{section}rule{rule}"
+        # section_name = f"section{section}rule{rule}"
         function_name = f"Section{section}Rule{rule}"
 
         test_result_dict["log"] = []  # Initialize log for this test result
@@ -245,10 +253,9 @@ def run_section_tests(test_json_name):
             f"{test_id}"
         ] = []  # Initialize log of this tests multiple results
         print_errors = False
-
         # Pull in rule, if written. If not found, fail the test and log which Section and Rule could not be found.
         try:
-            rule = getattr(globals()[section_name], function_name)()
+            rule = available_rule_definitions_dict[function_name]()
         except KeyError:
 
             # Print message communicating that a rule cannot be found
