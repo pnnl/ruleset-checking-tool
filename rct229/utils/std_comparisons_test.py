@@ -1,8 +1,6 @@
 import operator
 
-import pytest
-
-from rct229.ruleset_functions.compare_standard_val import (
+from rct229.rulesets.ashrae9012019.ruleset_functions.compare_standard_val import (
     compare_standard_val,
     compare_standard_val_strict,
 )

@@ -25,7 +25,6 @@ def get_nested_dict(dic, keys):
 
     # Generate a nested dictionary, slowly building on a reference nested dictionary each iteration through the loop.
     for key in keys:
-
         # Parse key and determine if this key references a list or a value. If list_index returns an integer (i.e., a
         # reference index in a list) this key represents a list in the dictionary and needs to be set differently
         # EXAMPLE: The key "buildings[0]" implies the "buildings" key represents a list. We set the value at
@@ -44,7 +43,6 @@ def get_nested_dict(dic, keys):
 
         # If the final key, return the referenced final, nested dictionary
         elif key == last_key:
-
             if key not in reference_dict:
                 # If this is a dictionary, the last index on the last key parse will be None
                 if last_index == None:
@@ -140,7 +138,6 @@ def set_nested_dict(dic, keys, value):
 
 
 def inject_json_path_from_enumeration(key_list, json_path_ref_string):
-
     """A few JSON paths are shorthanded with an enumeration. This function appends the key_list with the list of keys
     found in this shorthand enumeration. These are found in json_pointer_enumerations.json.
      Example: JSON_PATH:spaces = ["buildings","building_segments","thermal_blocks","zones","spaces"]
@@ -199,7 +196,6 @@ def clean_value(value):
     if isinstance(value, dict) or isinstance(value, list):
         return value
     else:
-
         # If value is neither a list or dict, and a string, process it
         if isinstance(value, str):
             # Set value as boolean if possible
@@ -293,14 +289,12 @@ def create_schedule_list(schedule_str):
     schedule_parameter = parsed_strings[1]
 
     if schedule_name == "CONSTANT":
-
         # Return the schedule parameter 8760 times
         schedule_list = [float(schedule_parameter)] * 8760
         return schedule_list
 
     # If utilizing a predefined schedule from the schedule library, load it here
     elif schedule_name == "LIBRARY":
-
         # Load schedule JSON
         file_dir = os.path.dirname(__file__)
 
@@ -316,7 +310,6 @@ def create_schedule_list(schedule_str):
         return schedule_list
 
     else:
-
         raise Exception(f"Schedule named: {schedule_name} is not a valid schedule name")
 
 
@@ -343,8 +336,7 @@ def remove_index_references_from_key(key):
     return clean_key
 
 
-def disaggregate_master_ruletest_json(master_json_name):
-
+def disaggregate_master_ruletest_json(master_json_name, ruleset_doc):
     """Ingests a string representing a JSON file name from rct229/ruletest_engine/ruletest_jsons. JSONs in that
     directory contain ALL ruletests for a particular grouping of rules (e.g., 'envelope_tests.json' has every test case
     for envelope based rules). This scripts breaks out test cases into individual section + rule JSONs.
@@ -354,7 +346,8 @@ def disaggregate_master_ruletest_json(master_json_name):
          ----------
          master_json_name : str
              String representing a name of master JSON file in rct229/ruletest_engine/ruletest_jsons
-             E.g., 'envelope_tests.json'
+             E.g., 'envelope_tests.json''
+         ruleset_doc : str
 
 
     """
@@ -363,7 +356,9 @@ def disaggregate_master_ruletest_json(master_json_name):
     file_dir = os.path.dirname(__file__)
 
     # master JSON should be in the ruletest_jsons directory
-    master_json_path = os.path.join(file_dir, "..", master_json_name)
+    master_json_path = os.path.join(
+        file_dir, "..", master_json_name
+    )  # os.path.join(file_dir, "..", ruleset_doc, master_json_name)
 
     # Initialize master JSON dictionary
     with open(master_json_path) as f:
@@ -377,12 +372,11 @@ def disaggregate_master_ruletest_json(master_json_name):
     prev_rule = ""
 
     # Inner function used for writing out ruletest JSONs
-    def write_ruletest_json(section, rule):
-
+    def write_ruletest_json(section, rule, ruleset_doc):
         # Initialize ruletest json name
         json_name = f"rule_{section}_{rule}.json"
         ruletest_json_name = os.path.join(f"section{section}", f"{json_name}")
-        json_file_path = os.path.join(file_dir, "..", ruletest_json_name)
+        json_file_path = os.path.join(file_dir, "..", ruleset_doc, ruletest_json_name)
 
         # Dump JSON to string for writing
         json_string = json.dumps(rule_dictionary, indent=4)
@@ -397,7 +391,6 @@ def disaggregate_master_ruletest_json(master_json_name):
     # Iterate through each key (i.e., ruletest), checking if a subsequent ruletest matches the section and rule number
     # of the previous key. Ruletests of the same section and rule should go in their own JSON.
     for ruletest in master_dict:
-
         # Initialize this ruletest's dictionary
         ruletest_dict = master_dict[ruletest]
 
@@ -413,9 +406,8 @@ def disaggregate_master_ruletest_json(master_json_name):
         # New section + rule. Write out last rule test dictionary before creating a new one
         if prev_section != "":
             if rule_id != prev_rule_id:
-
                 # Write out previous rule dictionary, then initialize a new one
-                write_ruletest_json(prev_section, prev_rule)
+                write_ruletest_json(prev_section, prev_rule, ruleset_doc)
 
                 # Wipe and reinitailize rule_dictionary for new section + rule
                 rule_dictionary = {}
@@ -428,11 +420,10 @@ def disaggregate_master_ruletest_json(master_json_name):
         prev_rule = rule
 
     # Write out final rule dictionary
-    write_ruletest_json(prev_section, prev_rule)
+    write_ruletest_json(prev_section, prev_rule, ruleset_doc)
 
 
 def disaggregate_master_rmd_json(master_json_name, output_dir):
-
     """Ingests a string representing a JSON file name from rct229/ruletest_engine/ruletest_jsons. JSONs in that
     directory contain either ALL ruletests for a particular grouping of rules (e.g., 'envelope_tests.json' has every
     test case for envelope based rules) or sometimes just RMDs. This scripts breaks out master JSONs without test
@@ -462,7 +453,6 @@ def disaggregate_master_rmd_json(master_json_name, output_dir):
 
     # Inner function used for writing out ruletest JSONs
     def write_ruletest_json(rmd_dict, json_name, output_dir):
-
         # Initialize json name and pathing
         json_name = os.path.join(f"{output_dir}", f"{json_name}")
         json_file_path = os.path.join(file_dir, "..", json_name)
@@ -480,7 +470,6 @@ def disaggregate_master_rmd_json(master_json_name, output_dir):
     # Iterate through each key (i.e., ruletest), checking if a subsequent ruletest matches the section and rule number
     # of the previous key. Ruletests of the same section and rule should go in their own JSON.
     for rmd_name in master_dict:
-
         # Initialize this RMD's dictionary and JSON name
         rmd_dict = master_dict[rmd_name]
         json_name = f"{rmd_name}.json"
