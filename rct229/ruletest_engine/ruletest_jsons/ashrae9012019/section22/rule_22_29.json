@@ -405,7 +405,6 @@
                                     }
                                 ]
                             },
-                            {},
                             {
                                 "id": "Condensing Loop 1",
                                 "pump_power_per_flow_rate": 301.1889035667107
@@ -522,7 +521,6 @@
                                     }
                                 ]
                             },
-                            {},
                             {
                                 "id": "Condensing Loop 1",
                                 "pump_power_per_flow_rate": 332.89299867899604

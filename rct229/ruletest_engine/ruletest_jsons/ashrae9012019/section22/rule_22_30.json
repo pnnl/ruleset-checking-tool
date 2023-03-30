@@ -345,14 +345,17 @@
                                 "type": "HEATING"
                             },
                             {
-                                "id": "Condensing Loop 1",
+                                "id": "Chiller Loop 1",
                                 "type": "COOLING",
                                 "child_loops": [
                                     {
                                         "id": "Secondary CHW Loop 1",
                                         "type": "COOLING"
                                     }
-                                ],
+                                ]
+                            },
+                            {
+                                "id": "Condensing Loop 1",
                                 "pump_power_per_flow_rate": 348.7450462351387
                             }
                         ]
@@ -475,14 +478,17 @@
                                 "type": "HEATING"
                             },
                             {
-                                "id": "Condensing Loop 1",
+                                "id": "Chiller Loop 1",
                                 "type": "COOLING",
                                 "child_loops": [
                                     {
                                         "id": "Secondary CHW Loop 1",
                                         "type": "COOLING"
                                     }
-                                ],
+                                ]
+                            },
+                            {
+                                "id": "Condensing Loop 1",
                                 "pump_power_per_flow_rate": 396.3011889035667
                             }
                         ]

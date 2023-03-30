@@ -107,6 +107,7 @@ def run_chiller_tests():
     json_tests = _helper_get_all_test_file_by_section(
         RuleSet.ASHRAE9012019_RULESET, "section22"
     )
+
     return run_test_helper(json_tests, RuleSet.ASHRAE9012019_RULESET)
 
 
@@ -134,7 +135,7 @@ def run_test_helper(test_list, ruleset_doc):
     return all(test_results)
 
 
-outcome = run_ashrae9012019_tests(section="section6")
+#outcome = run_ashrae9012019_tests(section="section6")
 
 # run_transformer_tests()
 # run_lighting_tests()
@@ -144,4 +145,7 @@ outcome = run_ashrae9012019_tests(section="section6")
 # run_receptacle_tests()
 # run_airside_tests()
 
-run_section_tests('section21/rule_21_7.json')
+#ruleset_doc = "ashrae9012019"
+
+#run_section_tests('section22/rule_22_2.json', ruleset_doc)
+run_test_helper(['ashrae9012019\\section22\\rule_22_1.json'], RuleSet.ASHRAE9012019_RULESET)

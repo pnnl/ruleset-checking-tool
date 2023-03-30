@@ -403,20 +403,14 @@
                             {
                                 "id": "Chiller Loop 1",
                                 "type": "COOLING",
-                                "child_loops": [
-                                    {
-                                        "id": "Secondary CHW Loop 1",
-                                        "type": "COOLING"
-                                    }
-                                ]
-                            },
-                            {
                                 "cooling_or_condensing_design_and_control": {
                                     "id": "CCDC 1",
                                     "flow_control": "FIXED_FLOW"
                                 },
                                 "child_loops": [
                                     {
+                                        "id": "Secondary CHW Loop 1",
+                                        "type": "COOLING",
                                         "cooling_or_condensing_design_and_control": {
                                             "id": "CCDC 2",
                                             "flow_control": "VARIABLE_FLOW"
@@ -528,20 +522,14 @@
                             {
                                 "id": "Chiller Loop 1",
                                 "type": "COOLING",
-                                "child_loops": [
-                                    {
-                                        "id": "Secondary CHW Loop 1",
-                                        "type": "COOLING"
-                                    }
-                                ]
-                            },
-                            {
                                 "cooling_or_condensing_design_and_control": {
                                     "id": "CCDC 1",
                                     "flow_control": "FIXED_FLOW"
                                 },
                                 "child_loops": [
                                     {
+                                        "id": "Secondary CHW Loop 1",
+                                        "type": "COOLING",
                                         "cooling_or_condensing_design_and_control": {
                                             "id": "CCDC 2",
                                             "flow_control": "FIXED_FLOW"
@@ -609,19 +597,6 @@
                                                 }
                                             }
                                         ]
-                                    }
-                                ]
-                            }
-                        ],
-                        "fluid_loops": [
-                            {},
-                            {
-                                "child_loops": [
-                                    {
-                                        "cooling_or_condensing_design_and_control": {
-                                            "id": "CCDC 2",
-                                            "flow_control": "FIXED_FLOW"
-                                        }
                                     }
                                 ]
                             }

@@ -715,7 +715,7 @@
                                     "id": "CCDC 1",
                                     "outdoor_high_for_loop_supply_reset_temperature": 26.666666666666686,
                                     "outdoor_low_for_loop_supply_reset_temperature": 15.5555555555556,
-                                    "loop_supply_temperature_at_outdoor_high": 6.111111111111143,
+                                    "loop_supply_temperature_at_outdoor_high": 5,
                                     "loop_supply_temperature_at_outdoor_low": 12.222222222222285
                                 }
                             }
@@ -851,7 +851,7 @@
                                     "outdoor_high_for_loop_supply_reset_temperature": 26.666666666666686,
                                     "outdoor_low_for_loop_supply_reset_temperature": 15.5555555555556,
                                     "loop_supply_temperature_at_outdoor_high": 6.666666666666686,
-                                    "loop_supply_temperature_at_outdoor_low": 12.777777777777828
+                                    "loop_supply_temperature_at_outdoor_low": 13.88888888888889
                                 }
                             }
                         ]

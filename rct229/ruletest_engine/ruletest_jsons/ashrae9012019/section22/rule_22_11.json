@@ -392,13 +392,7 @@
                                 "child_loops": [
                                     {
                                         "id": "Secondary CHW Loop 1",
-                                        "type": "COOLING"
-                                    }
-                                ]
-                            },
-                            {
-                                "child_loops": [
-                                    {
+                                        "type": "COOLING",
                                         "pump_power_per_flow_rate": 206.0766182298547
                                     }
                                 ]
@@ -510,13 +504,7 @@
                                 "child_loops": [
                                     {
                                         "id": "Secondary CHW Loop 1",
-                                        "type": "COOLING"
-                                    }
-                                ]
-                            },
-                            {
-                                "child_loops": [
-                                    {
+                                        "type": "COOLING",
                                         "pump_power_per_flow_rate": 237.78071334214002
                                     }
                                 ]
@@ -581,16 +569,6 @@
                                                 }
                                             }
                                         ]
-                                    }
-                                ]
-                            }
-                        ],
-                        "fluid_loops": [
-                            {},
-                            {
-                                "child_loops": [
-                                    {
-                                        "pump_power_per_flow_rate": 237.78071334214002
                                     }
                                 ]
                             }

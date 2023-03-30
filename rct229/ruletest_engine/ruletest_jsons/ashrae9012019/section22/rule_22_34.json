@@ -339,6 +339,9 @@
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 8",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Purchased HW Loop 1",
+                                                        "fan": {
+                                                                "id": "VAV Air Terminal 1 Fan"
+                                                            },
                                                         "fan_configuration": "PARALLEL"
                                                     }
                                                 ]
@@ -355,6 +358,9 @@
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 8",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Purchased HW Loop 1",
+                                                        "fan": {
+                                                                "id": "VAV Air Terminal 2 Fan"
+                                                            },
                                                         "fan_configuration": "PARALLEL"
                                                     }
                                                 ]
@@ -490,6 +496,9 @@
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 8",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Purchased HW Loop 1",
+                                                        "fan": {
+                                                                "id": "VAV Air Terminal 1 Fan"
+                                                            },
                                                         "fan_configuration": "PARALLEL"
                                                     }
                                                 ]
@@ -506,6 +515,9 @@
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 8",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Purchased HW Loop 1",
+                                                        "fan": {
+                                                                "id": "VAV Air Terminal 2 Fan"
+                                                            },
                                                         "fan_configuration": "PARALLEL"
                                                     }
                                                 ]
@@ -664,23 +676,9 @@
                                                             "id": "Return Fan 1"
                                                         }
                                                     ]
-                                                },
-                                                "cooling_system": {
-                                                    "chilled_water_loop": "Cooling Child Loop 1"
                                                 }
                                             }
                                         ]
-                                    }
-                                ]
-                            }
-                        ],
-                        "fluid_loops": [
-                            {},
-                            {
-                                "child_loops": [
-                                    {
-                                        "id": "Cooling Child Loop 1",
-                                        "type": "COOLING"
                                     }
                                 ]
                             }

@@ -124,5 +124,4 @@ def get_baseline_system_types(rmi_b):
             sys_found,
             f"Error: HVAC {hvac_b_id} does not match any baseline system type.",
         )
-
     return baseline_hvac_system_dict

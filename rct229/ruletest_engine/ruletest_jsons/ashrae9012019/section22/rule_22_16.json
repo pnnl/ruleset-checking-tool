@@ -593,7 +593,7 @@
                                 ],
                                 "cooling_or_condensing_design_and_control": {
                                     "id": "CCDC 1",
-                                    "design_supply_temperature": 37.222222222222285
+                                    "design_supply_temperature": 35
                                 }
                             }
                         ],
@@ -601,7 +601,7 @@
                             {
                                 "id": "Heat Rejection 1",
                                 "loop": "Chiller Loop 1",
-                                "design_wetbulb_temperature": 34.44444444444446,
+                                "design_wetbulb_temperature": 32.22222,
                                 "approach": 2.7777777777777777
                             }
                         ]
@@ -614,7 +614,7 @@
         "Section": 22,
         "Rule": 16,
         "Test": "e",
-        "test_description": "Baseline building has two zones.  HVAC is system type 7 and the HeatRejection is modeled with the incorrect wet-bulb and approach temperatures.  Expected result: FAIL",
+        "test_description": "Baseline building has two zones.  HVAC is system type 11.2 and the HeatRejection is modeled with the incorrect wet-bulb and approach temperatures.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-16",
@@ -733,7 +733,7 @@
                                 ],
                                 "cooling_or_condensing_design_and_control": {
                                     "id": "CCDC 1",
-                                    "design_supply_temperature": 37.222222222222285
+                                    "design_supply_temperature": 35
                                 }
                             }
                         ],
@@ -741,7 +741,7 @@
                             {
                                 "id": "Heat Rejection 1",
                                 "loop": "Chiller Loop 1",
-                                "design_wetbulb_temperature": 34.44444444444446,
+                                "design_wetbulb_temperature": 32.22222,
                                 "approach": 5.555555555555555
                             }
                         ]
@@ -754,7 +754,7 @@
         "Section": 22,
         "Rule": 16,
         "Test": "f",
-        "test_description": "Baseline building has two zones.  HVAC is system type 7 and the HeatRejection design_wetbulb_temperature > 95.  Expected result: Not Applicable",
+        "test_description": "Baseline building has two zones.  HVAC is system type 11.2 and the HeatRejection design_wetbulb_temperature > 95.  Expected result: Not Applicable",
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "22-16",

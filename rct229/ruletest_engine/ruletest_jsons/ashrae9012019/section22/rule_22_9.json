@@ -499,7 +499,7 @@
                                                 "cooling_system": {
                                                     "id": "CHW Coil 1",
                                                     "cooling_system_type": "FLUID_LOOP",
-                                                    "chilled_water_loop": "Cooling Child Loop 1"
+                                                    "chilled_water_loop": "Secondary CHW Loop 1"
                                                 },
                                                 "heating_system": {
                                                     "id": "Heating Coil 1",
@@ -551,19 +551,11 @@
                                 "child_loops": [
                                     {
                                         "id": "Secondary CHW Loop 1",
-                                        "type": "COOLING"
-                                    }
-                                ]
-                            },
-                            {
-                                "child_loops": [
-                                    {
-                                        "id": "Cooling Child Loop 1",
+                                        "type": "COOLING",
                                         "cooling_or_condensing_design_and_control": {
                                             "id": "CCDC 1",
                                             "minimum_flow_fraction": 0.25
-                                        },
-                                        "type": "COOLING"
+                                        }
                                     }
                                 ]
                             }
@@ -623,7 +615,7 @@
                                                 "cooling_system": {
                                                     "id": "CHW Coil 1",
                                                     "cooling_system_type": "FLUID_LOOP",
-                                                    "chilled_water_loop": "Cooling Child Loop 1"
+                                                    "chilled_water_loop": "Secondary CHW Loop 1"
                                                 },
                                                 "heating_system": {
                                                     "id": "Heating Coil 1",
@@ -675,19 +667,11 @@
                                 "child_loops": [
                                     {
                                         "id": "Secondary CHW Loop 1",
-                                        "type": "COOLING"
-                                    }
-                                ]
-                            },
-                            {
-                                "child_loops": [
-                                    {
-                                        "id": "Cooling Child Loop 1",
+                                        "type": "COOLING",
                                         "cooling_or_condensing_design_and_control": {
                                             "id": "CCDC 1",
                                             "minimum_flow_fraction": 0.35
-                                        },
-                                        "type": "COOLING"
+                                        }
                                     }
                                 ]
                             }

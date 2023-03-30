@@ -13,7 +13,7 @@ from rct229.schema.schema_utils import *
 # ---------------------------------------USER INPUTS---------------------------------------
 
 spreadsheet_name = "chiller_tcd_master.xlsx"
-json_name = "chiller_tests1.json"
+json_name = "chiller_tests.json"
 sheet_name = "TCDs"
 ruleset_doc = "ashrae9012019"
 

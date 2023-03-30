@@ -337,8 +337,10 @@
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 8",
-                                                        "heating_source": "HOT_WATER",
-                                                        "heating_from_loop": "Boiler Loop 1",
+                                                        "heating_source": "ELECTRIC",
+                                                        "fan": {
+                                                            "id": "VAV Terminal 1 Fan"
+                                                        },
                                                         "fan_configuration": "PARALLEL"
                                                     }
                                                 ]
@@ -353,8 +355,10 @@
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 8",
-                                                        "heating_source": "HOT_WATER",
-                                                        "heating_from_loop": "Boiler Loop 1",
+                                                        "heating_source": "ELECTRIC",
+                                                        "fan": {
+                                                            "id": "VAV Terminal 2 Fan"
+                                                        },
                                                         "fan_configuration": "PARALLEL"
                                                     }
                                                 ]
@@ -392,13 +396,6 @@
                                 ]
                             }
                         ],
-                        "boilers": [
-                            {
-                                "id": "Boiler 1",
-                                "loop": "Boiler Loop 1",
-                                "energy_source_type": "NATURAL_GAS"
-                            }
-                        ],
                         "chillers": [
                             {
                                 "id": "Chiller 1",
@@ -406,11 +403,6 @@
                             }
                         ],
                         "pumps": [
-                            {
-                                "id": "Boiler Pump 1",
-                                "loop_or_piping": "Boiler Loop 1",
-                                "speed_control": "FIXED_SPEED"
-                            },
                             {
                                 "id": "Chiller Pump 1",
                                 "loop_or_piping": "Chiller Loop 1",
@@ -423,10 +415,6 @@
                             }
                         ],
                         "fluid_loops": [
-                            {
-                                "id": "Boiler Loop 1",
-                                "type": "HEATING"
-                            },
                             {
                                 "id": "Chiller Loop 1",
                                 "type": "COOLING",
@@ -486,9 +474,12 @@
                                                         "id": "VAV Air Terminal 1",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
-                                                        "heating_source": "HOT_WATER",
-                                                        "heating_from_loop": "Boiler Loop 1"
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 8",
+                                                        "heating_source": "ELECTRIC",
+                                                        "fan": {
+                                                            "id": "VAV Terminal 1 Fan"
+                                                        },
+                                                        "fan_configuration": "PARALLEL"
                                                     }
                                                 ]
                                             },
@@ -501,16 +492,19 @@
                                                         "id": "VAV Air Terminal 2",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
-                                                        "heating_source": "HOT_WATER",
-                                                        "heating_from_loop": "Boiler Loop 1"
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 8",
+                                                        "heating_source": "ELECTRIC",
+                                                        "fan": {
+                                                            "id": "VAV Terminal 2 Fan"
+                                                        },
+                                                        "fan_configuration": "PARALLEL"
                                                     }
                                                 ]
                                             }
                                         ],
                                         "heating_ventilating_air_conditioning_systems": [
                                             {
-                                                "id": "System 7",
+                                                "id": "System 8",
                                                 "cooling_system": {
                                                     "id": "CHW Coil 1",
                                                     "cooling_system_type": "FLUID_LOOP",
@@ -518,8 +512,7 @@
                                                 },
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 1",
-                                                    "heating_system_type": "FLUID_LOOP",
-                                                    "hot_water_loop": "Boiler Loop 1"
+                                                    "heating_system_type": "ELECTRIC_RESISTANCE"
                                                 },
                                                 "fan_system": {
                                                     "id": "VAV Fan System 1",
@@ -541,13 +534,6 @@
                                 ]
                             }
                         ],
-                        "boilers": [
-                            {
-                                "id": "Boiler 1",
-                                "loop": "Boiler Loop 1",
-                                "energy_source_type": "NATURAL_GAS"
-                            }
-                        ],
                         "chillers": [
                             {
                                 "id": "Chiller 1",
@@ -555,11 +541,6 @@
                             }
                         ],
                         "pumps": [
-                            {
-                                "id": "Boiler Pump 1",
-                                "loop_or_piping": "Boiler Loop 1",
-                                "speed_control": "FIXED_SPEED"
-                            },
                             {
                                 "id": "Chiller Pump 1",
                                 "loop_or_piping": "Chiller Loop 1",
@@ -572,10 +553,6 @@
                             }
                         ],
                         "fluid_loops": [
-                            {
-                                "id": "Boiler Loop 1",
-                                "type": "HEATING"
-                            },
                             {
                                 "id": "Chiller Loop 1",
                                 "type": "COOLING",

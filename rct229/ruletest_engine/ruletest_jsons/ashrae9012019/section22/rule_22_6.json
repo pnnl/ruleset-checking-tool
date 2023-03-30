@@ -339,15 +339,15 @@
                         "fluid_loops": [
                             {
                                 "id": "Purchased HW Loop 1",
-                                "type": "HEATING",
-                                "cooling_or_condensing_design_and_control": {
-                                    "id": "CCDC 1",
-                                    "loop_supply_temperature_at_low_load": 12.222222222222285
-                                }
+                                "type": "HEATING"
                             },
                             {
                                 "id": "Chiller Loop 1",
                                 "type": "COOLING",
+                                "cooling_or_condensing_design_and_control": {
+                                    "id": "CCDC 1",
+                                    "loop_supply_temperature_at_low_load": 12.222222222222285
+                                },
                                 "child_loops": [
                                     {
                                         "id": "Secondary CHW Loop 1",
@@ -471,15 +471,15 @@
                         "fluid_loops": [
                             {
                                 "id": "Purchased HW Loop 1",
-                                "type": "HEATING",
-                                "cooling_or_condensing_design_and_control": {
-                                    "id": "CCDC 1",
-                                    "loop_supply_temperature_at_low_load": 17.77777777777783
-                                }
+                                "type": "HEATING"
                             },
                             {
                                 "id": "Chiller Loop 1",
                                 "type": "COOLING",
+                                "cooling_or_condensing_design_and_control": {
+                                    "id": "CCDC 1",
+                                    "loop_supply_temperature_at_low_load": 17.77777777777783
+                                },
                                 "child_loops": [
                                     {
                                         "id": "Secondary CHW Loop 1",

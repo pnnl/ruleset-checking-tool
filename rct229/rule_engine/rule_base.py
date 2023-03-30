@@ -163,6 +163,7 @@ class RuleDefinitionBase:
                                     context, calc_vals, data
                                 )
                             )
+                            a = 1
                             if manual_check_required_msg:
                                 outcome["message"] = manual_check_required_msg
                         else:
@@ -190,6 +191,7 @@ class RuleDefinitionBase:
                                     )
                                     if undetermined_msg:
                                         outcome["message"] = undetermined_msg
+                                        a = 1
                             elif result:
                                 outcome["result"] = RCTOutcomeLabel.PASS
                                 pass_msg = self.get_pass_msg(context, calc_vals, data)
@@ -219,7 +221,6 @@ class RuleDefinitionBase:
             # such as "MISSING_BASELINE"
             outcome["result"] = "UNDETERMINED"
             outcome["message"] = context_or_string
-
         return outcome
 
     def _get_context(self, rmrs, rmr_context=None):
