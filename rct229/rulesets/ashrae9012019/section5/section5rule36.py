@@ -75,6 +75,25 @@ class Section5Rule36(RuleDefinitionListIndexedBase):
                     list_path="$..surfaces[*]",
                 )
 
+            def is_applicable(self, context, data=None):
+                building_segment_p = context.proposed
+                skylight_roof_areas_dictionary_p = data[
+                    "skylight_roof_areas_dictionary_p"
+                ]
+                # Add applicability check to make sure the building segment contains
+                # skylight elements
+                total_skylight_area_p = skylight_roof_areas_dictionary_p[
+                    building_segment_p["id"]
+                ]["total_skylight_area"]
+                total_envelope_roof_area_p = skylight_roof_areas_dictionary_p[
+                    building_segment_p["id"]
+                ]["total_envelope_roof_area"]
+                # avoid zero division
+                return (
+                    total_envelope_roof_area_p > ZERO.AREA
+                    and total_skylight_area_p / total_envelope_roof_area_p > 0
+                )
+
             def create_data(self, context, data=None):
                 building_segment_b = context.baseline
                 building_segment_p = context.proposed
