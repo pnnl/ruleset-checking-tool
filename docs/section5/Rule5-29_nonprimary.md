@@ -1,6 +1,6 @@
 # Envelope - Rule 5-29  
 **Schema Version** 0.0.23  
-**Primary Rule:** False
+**Primary Rule:** True
 **Rule ID:** 5-29  
 **Rule Description:** Baseline fenestration shall be assumed to be flush with the exterior wall, and no shading projections shall be modeled.
 **Appendix G Section:** Section G3.1-5(d) Building Modeling Requirements for the Baseline building  
@@ -25,7 +25,7 @@
 
     - For each surface in zone: ```for surface_b in zone_b.surfaces:```
 
-      - Check if surface is above-grade wall or roof and is exterior: ```if ( get_opaque_surface_type(surface_b) == "ABOVE-GRADE WALL" ) AND ( scc_dictionary_b[surface_b.id] != "UNREGULATED" ):```
+      - Check if surface is above-grade wall and is exterior: ```if ( get_opaque_surface_type(surface_b) == "ABOVE-GRADE WALL" ) AND ( scc_dictionary_b[surface_b.id] != "UNREGULATED" ):```
 
         - For each subsurface in surface: ```for subsurface_b in surface_b.subsurfaces:```
 
