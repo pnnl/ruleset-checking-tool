@@ -1,3 +1,22 @@
+def calc_vals_converter(calc_vals):
+    """
+    Utility function that converts a calc_vals raw output
+    to a json compatible dictionary.
+
+    Parameters
+    ----------
+    calc_vals: dict raw output calc_vals value that contains quantity object.
+
+    Returns
+    -------
+
+    """
+    calc_vals_dict = dict()
+    for key in calc_vals.keys():
+        calc_vals_dict[key] = str(calc_vals[key])
+    return calc_vals_dict
+
+
 def aggregate_outcomes(outcomes):
     def _count_results(outcomes):
         for outcome in outcomes:
