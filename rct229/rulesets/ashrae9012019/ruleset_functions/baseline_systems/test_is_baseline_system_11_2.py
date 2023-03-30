@@ -146,9 +146,114 @@ SYS_11_2_TEST_RMD = {
     ],
 }
 
+SYS_11_2_TEST_UNMATCHED_RMD = {
+    "id": "ASHRAE229 1",
+    "ruleset_model_instances": [
+        {
+            "id": "RMD 1",
+            "buildings": [
+                {
+                    "id": "Building 1",
+                    "building_open_schedule": "Required Building Schedule 1",
+                    "building_segments": [
+                        {
+                            "id": "Building Segment 1",
+                            "zones": [
+                                {
+                                    "id": "Thermal Zone 1",
+                                    "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                    "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                    "terminals": [
+                                        {
+                                            "id": "Air Terminal 1",
+                                            "is_supply_ducted": True,
+                                            "type": "VARIABLE_AIR_VOLUME",
+                                            "served_by_heating_ventilating_air_conditioning_system": "System Type Unmatched",
+                                        }
+                                    ],
+                                },
+                            ],
+                            "heating_ventilating_air_conditioning_systems": [
+                                {
+                                    "id": "System Type Unmatched",
+                                    "cooling_system": {
+                                        "id": "CHW Coil 1A",
+                                        "cooling_system_type": "FLUID_LOOP",
+                                        "chilled_water_loop": "CHW Loop 1",
+                                    },
+                                    "heating_system": {
+                                        "id": "HHW Coil 1A",
+                                        "heating_system_type": "FLUID_LOOP",
+                                        "hot_water_loop": "Boiler Loop 1",
+                                    },
+                                    "fan_system": {
+                                        "id": "VAV Fan System 1",
+                                        "fan_control": "VARIABLE_SPEED_DRIVE",
+                                        "supply_fans": [{"id": "Supply Fan 1"}],
+                                        "return_fans": [{"id": "Return Fan 1"}],
+                                    },
+                                },
+                            ],
+                        }
+                    ],
+                }
+            ],
+            "boilers": [
+                {
+                    "id": "Boiler 1",
+                    "loop": "Boiler Loop 1",
+                    "design_capacity": 117228.44444444445,
+                }
+            ],
+            "chillers": [
+                {
+                    "id": "Chiller 1",
+                    "cooling_loop": "Chiller Loop 1",
+                    "energy_source_type": "ELECTRICITY",
+                }
+            ],
+            "pumps": [
+                {
+                    "id": "HW Pump 1",
+                    "loop_or_piping": "Boiler Loop 1",
+                    "speed_control": "FIXED_SPEED",
+                },
+                {
+                    "id": "Chiller Pump 1",
+                    "loop_or_piping": "Chiller Loop 1",
+                    "speed_control": "FIXED_SPEED",
+                },
+            ],
+            "fluid_loops": [
+                {
+                    "id": "Boiler Loop 1",
+                    "type": "HEATING",
+                    "heating_design_and_control": {
+                        "id": "DAC1",
+                        "minimum_flow_fraction": 0.25,
+                    },
+                },
+                {
+                    "id": "Chiller Loop 1",
+                    "type": "COOLING",
+                    "child_loops": [{"id": "Secondary Loop 1", "type": "COOLING"}],
+                },
+                {"id": "CHW Loop 1", "type": "COOLING"},
+            ],
+        }
+    ],
+}
+
 
 def test__TEST_RMD_baseline_system_11_2__is_valid():
     schema_validation_result = schema_validate_rmr(SYS_11_2_TEST_RMD)
+    assert schema_validation_result[
+        "passed"
+    ], f"Schema error: {schema_validation_result['error']}"
+
+
+def test__TEST_RMD_baseline_system_11_2__is_unmatched_valid():
+    schema_validation_result = schema_validate_rmr(SYS_11_2_TEST_UNMATCHED_RMD)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"
@@ -203,4 +308,16 @@ def test__is_baseline_system_11_2A__test_json_true():
             ["Thermal Zone 1"],
         )
         == HVAC_SYS.SYS_11_2A
+    )
+
+
+def test__is_baseline_system_unmatched__true():
+    assert (
+        is_baseline_system_11_2(
+            SYS_11_2_TEST_UNMATCHED_RMD["ruleset_model_instances"][0],
+            "System Type Unmatched",
+            ["Air Terminal 1"],
+            ["Thermal Zone 1"],
+        )
+        == HVAC_SYS.UNMATCHED
     )
