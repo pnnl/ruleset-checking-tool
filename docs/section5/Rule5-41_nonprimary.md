@@ -1,6 +1,6 @@
 # Envelope - Rule 5-41  
 **Schema Version** 0.0.23  
-**Primary Rule:** False
+**Primary Rule:** True
 **Rule ID:** 5-41  
 **Rule Description:** The proposed roof surfaces shall be modeled using the same thermal emittance as in the user model if the aged test data are available, or equal to 0.9 default emittance.
 **Appendix G Section:** Section G3.1-1(a) Building Envelope Modeling Requirements for the Proposed design  
@@ -40,6 +40,5 @@
             outcome = UNDETERMINED and raise_message "ROOF THERMAL EMITTANCE IS EQUAL TO THE PRESCRIBED DEFAULT VALUE OF 0.9 BUT DIFFERS FROM THE THERMAL EMITTANCE IN THE USER MODEL (${surface_u.surface_optical_properties.absorptance_thermal_exterior})."```
 
           - Case 4: Else, roof surface thermal emittance in P_RMR does not match that in U_RMR and is not equal to 0.9, outcome is FAIL: ```Else: outcome = FAIL```
-          
-- Case 5: If no surface in building is roof, outcome is NOT_APPLICABLE: ```if NOT rule_applicability_check: outcome = NOT_APPLICABLE```
+
 **[Back](../_toc.md)**
