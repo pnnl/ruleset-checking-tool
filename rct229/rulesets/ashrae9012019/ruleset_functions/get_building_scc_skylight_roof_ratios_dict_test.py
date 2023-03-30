@@ -526,6 +526,167 @@ TEST_RMR_12 = {"id": "229_01", "ruleset_model_instances": [TEST_RMR]}
 
 TEST_BUILDING = quantify_rmr(TEST_RMR_12)["ruleset_model_instances"][0]["buildings"][0]
 
+# The purpose of below is to test out when all the summed areas equal 0.
+TEST_RMR_BRANCH_COVERAGE = {
+    "id": "test_rmr_branch_coverage",
+    "buildings": [
+        {
+            "id": "bldg_1",
+            "building_open_schedule": "bldg_open_sched_1",
+            "building_segments": [
+                # area_type_vertical_fenestration is residential type
+                {
+                    "id": "bldg_seg_1",
+                    "lighting_building_area_type": "MULTIFAMILY",
+                    "area_type_vertical_fenestration": "HOTEL_MOTEL_SMALL",
+                    "heating_ventilating_air_conditioning_systems": [
+                        # Use for zone_1, directly conditioned zone
+                        {
+                            "id": "hvac_1",
+                            "cooling_system": {
+                                "id": "csys_1",
+                                "design_sensible_cool_capacity": 2 * POWER_THRESHOLD_100
+                                + POWER_DELTA,
+                            },
+                        },
+                    ],
+                    "zones": [
+                        # hvac_1 => directly_conditioned_zone
+                        #   => zone_conditioning_category is "CONDITIONED RESIDENTIAL"
+                        #   => window type subsurface
+                        {
+                            "id": "zone_1",
+                            "spaces": [
+                                {
+                                    # Residential
+                                    "id": "space_1",
+                                    "floor_area": 100,  # m2
+                                    "lighting_space_type": "DORMITORY_LIVING_QUARTERS",
+                                    "occupant_multiplier_schedule": "om_sched_1",
+                                },
+                            ],
+                            "surfaces": [
+                                {
+                                    "id": "surface_1",
+                                    "adjacent_to": "EXTERIOR",
+                                    "adjacent_zone": "zone_1",
+                                    "area": 10,  # m2
+                                    "tilt": 90,  # wall
+                                    "subsurfaces": [
+                                        {
+                                            "id": "subsurface_1_1_1_1",
+                                            "classification": "WINDOW",
+                                            "glazed_area": 1,
+                                            "opaque_area": 3,  # m2
+                                            "u_factor": 2.4,  # W/(m2 * K)
+                                        }
+                                    ],
+                                }
+                            ],
+                            "thermostat_cooling_setpoint_schedule": "tcs_sched_1",
+                            "thermostat_heating_setpoint_schedule": "ths_sched_1",
+                            "terminals": [
+                                {
+                                    "id": "terminal_1",
+                                    "served_by_heating_ventilating_air_conditioning_system": "hvac_1",
+                                }
+                            ],
+                        },
+                    ],
+                },
+            ],
+        }
+    ],
+}
+
+TEST_RMR_BRANCH_COVERAGE = {
+    "id": "229_01",
+    "ruleset_model_instances": [TEST_RMR_BRANCH_COVERAGE],
+}
+
+TEST_BUILDING_BRANCH_COVERAGE = quantify_rmr(TEST_RMR_BRANCH_COVERAGE)[
+    "ruleset_model_instances"
+][0]["buildings"][0]
+
+
+TEST_RMR_BRANCH_COVERAGE2 = {
+    "id": "test_rmr_branch_coverage2",
+    "buildings": [
+        {
+            "id": "bldg_1",
+            "building_open_schedule": "bldg_open_sched_1",
+            "building_segments": [
+                {
+                    "id": "bldg_seg_1",
+                    "lighting_building_area_type": "MULTIFAMILY",
+                    "area_type_vertical_fenestration": "HOTEL_MOTEL_SMALL",
+                    "heating_ventilating_air_conditioning_systems": [
+                        {
+                            "id": "hvac_1_1",
+                            "cooling_system": {
+                                "id": "csys_1_1_1",
+                                "design_sensible_cool_capacity": 2 * POWER_THRESHOLD_100
+                                + POWER_DELTA,
+                            },
+                        },
+                    ],
+                    "zones": [
+                        # hvac_1_1 => directly_conditioned_zone
+                        #   => zone_conditioning_category is "UNREGULATED"
+                        # total_res_roof_area = 10
+                        # total_res_skylight_area = 4
+                        {
+                            "id": "zone_1_1",
+                            "volume": 300,  # m3
+                            "spaces": [
+                                {
+                                    # Residential
+                                    "id": "space_1_1_1",
+                                    "floor_area": 100,  # m2
+                                    "lighting_space_type": "DORMITORY_LIVING_QUARTERS",
+                                    "occupant_multiplier_schedule": "om_sched_1",
+                                },
+                            ],
+                            "surfaces": [
+                                {
+                                    "id": "surface_1_1_1",
+                                    "adjacent_to": "EXTERIOR",
+                                    "adjacent_zone": "zone_1_2",
+                                    "area": 10,  # m2
+                                    "tilt": 30,  # roof
+                                    "construction": {
+                                        "id": "Construction 1",
+                                        "u_factor": 0.35773064046128095,
+                                    },
+                                    "subsurfaces": [
+                                        {
+                                            "id": "subsurface_1_1_1_1",
+                                            "classification": "WINDOW",
+                                            "glazed_area": 1,
+                                            "opaque_area": 3,  # m2
+                                            "u_factor": 2.4,  # W/(m2 * K)
+                                        }
+                                    ],
+                                }
+                            ],
+                        },
+                    ],
+                },
+            ],
+        }
+    ],
+}
+
+
+TEST_RMR_BRANCH_COVERAGE2 = {
+    "id": "229_01",
+    "ruleset_model_instances": [TEST_RMR_BRANCH_COVERAGE2],
+}
+
+TEST_BUILDING_BRANCH_COVERAGE2 = quantify_rmr(TEST_RMR_BRANCH_COVERAGE2)[
+    "ruleset_model_instances"
+][0]["buildings"][0]
+
 
 def test__TEST_RMD__is_valid():
     schema_validation_result = schema_validate_rmr(TEST_RMR_12)
@@ -540,4 +701,26 @@ def test__get_building_scc_skylight_roof_ratios_dict():
         SCC.EXTERIOR_NON_RESIDENTIAL: 0.2,
         SCC.SEMI_EXTERIOR: 0.2,
         SCC.EXTERIOR_MIXED: 0.2,
+    }
+
+
+def test__get_building_scc_skylight_roof_ratios_dict__branch_coverage():
+    assert get_building_scc_skylight_roof_ratios_dict(
+        CLIMATE_ZONE, TEST_BUILDING_BRANCH_COVERAGE
+    ) == {
+        SCC.EXTERIOR_RESIDENTIAL: 0.0,
+        SCC.EXTERIOR_NON_RESIDENTIAL: 0.0,
+        SCC.SEMI_EXTERIOR: 0.0,
+        SCC.EXTERIOR_MIXED: 0.0,
+    }
+
+
+def test__get_building_scc_skylight_roof_ratios_dict__branch_coverage2():
+    assert get_building_scc_skylight_roof_ratios_dict(
+        CLIMATE_ZONE, TEST_BUILDING_BRANCH_COVERAGE2
+    ) == {
+        SCC.EXTERIOR_RESIDENTIAL: 0.0,
+        SCC.EXTERIOR_NON_RESIDENTIAL: 0.0,
+        SCC.SEMI_EXTERIOR: 0.0,
+        SCC.EXTERIOR_MIXED: 0.0,
     }
