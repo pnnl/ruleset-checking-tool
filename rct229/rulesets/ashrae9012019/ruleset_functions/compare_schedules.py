@@ -1,8 +1,5 @@
+from rct229.rule_engine.rulesets import LeapYear
 from rct229.utils.assertions import assert_
-from rct229.utils.std_comparisons import std_equal
-
-REGULAR_YEAR_HOURS = 8760
-LEAP_YEAR_HOURS = 8784
 
 
 def compare_schedules(schedule_1, schedule_2, mask_schedule, is_leap_year: bool):
@@ -31,7 +28,9 @@ def compare_schedules(schedule_1, schedule_2, mask_schedule, is_leap_year: bool)
         "eflh_difference: EFLH_difference
         }
     """
-    num_hours = LEAP_YEAR_HOURS if is_leap_year else REGULAR_YEAR_HOURS
+    num_hours = (
+        LeapYear.LEAP_YEAR_HOURS if is_leap_year else LeapYear.REGULAR_YEAR_HOURS
+    )
 
     assert_(
         (

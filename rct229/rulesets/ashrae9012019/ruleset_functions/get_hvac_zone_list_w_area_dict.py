@@ -41,7 +41,7 @@ def get_hvac_zone_list_w_area_dict(building):
 
     hvac_zone_list_w_area_dict = {}
 
-    for zone in find_all("$..zones[*]", building):
+    for zone in find_all("$.building_segments[*].zones[*]", building):
         terminals = zone.get("terminals")
         # Note: None and [] are falsey; zone.terminals is optional
         if terminals:

@@ -15,7 +15,7 @@ def get_dict_of_zones_and_terminal_units_served_by_hvac_sys(rmi):
     "terminal_unit_list": [terminal_10.id, terminal_20.id, terminal_30.id]}}
     """
     dict_of_zones_and_terminal_units_served_by_hvac_sys = {}
-    for zone in find_all("$..zones[*]", rmi):
+    for zone in find_all("$.buildings[*].building_segments[*].zones[*]", rmi):
         zone_id = zone["id"]
         for terminal in find_all("$.terminals[*]", zone):
             terminal_id = terminal["id"]
