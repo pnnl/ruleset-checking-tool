@@ -1,6 +1,6 @@
 # Envelope - Rule 5-53  
 **Schema Version** 0.0.23
-**Primary Rule** False
+**Primary Rule** True
 **Rule ID:** 5-53  
 **Rule Description:** U-factor of the baseline door is based on Tables G3.4-1 through G3.4-8 for the applicable door type (swinging or non-swinging) and envelope conditioning category.
 **Appendix G Section:** Section 5 Envelope  
