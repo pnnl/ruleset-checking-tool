@@ -18,6 +18,7 @@
 	"interior_lighting": "ruleset_model_instances[0]/buildings[0]/building_segments[0]/zones[0]/spaces[0]/interior_lighting",
 	"miscellaneous_equipment": "ruleset_model_instances[0]/buildings[0]/building_segments[0]/zones[0]/spaces[0]/miscellaneous_equipment",
 	"output": "ruleset_model_instances[0]/output",
+	"output_validation_points": "ruleset_model_instances[0]/buildings[0]/building_segments[0]/zones[0]/terminals[0]/fan/output_validation_points",
 	"preheat_system": "ruleset_model_instances[0]/buildings[0]/building_segments[0]/heating_ventilating_air_conditioning_systems[0]/preheat_system",
 	"pumps": "ruleset_model_instances[0]/pumps",
 	"sensible_cool_capacity": "ruleset_model_instances[0]/buildings[0]/building_segments[0]/heating_ventilating_air_conditioning_systems[0]/cooling_system/sensible_cool_capacity",

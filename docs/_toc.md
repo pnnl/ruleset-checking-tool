@@ -40,7 +40,8 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   * [get_hvac_zone_list_w_area](ruleset_functions/get_hvac_zone_list_w_area.md): Get the list of zones and their total floor area served by each HVAC system in a RMD.
   * [check_purchased_chw_hhw_status_dict](ruleset_functions/check_purchased_chw_hhw_status_dict.md): Check if RMI is modeled with purchased chilled water as space cooling source or purchased hot water/steam as space heating source. If any system in RMI uses purchased chilled water, function shall return True for purchased chilled water as space cooling source. Similarly, if any system in RMI uses purchased hot water or steam, function shall return True for purchased hot water/steam as space heating source.
   * [get_proposed_hvac_modeled_with_virtual_heating](ruleset_functions/get_proposed_hvac_modeled_with_virtual_heating.md): Get the list of HeatingVentilationAirAconditioningSystem in which Appendix G Table G3.1 #10 c is applicable (i.e. space heating is modeled in the P_RMR but not the U_RMR).  Table G3.1 #10 c states that "where no heating system exists or no heating system has been submitted with design documents, the system type shall be the same system as modeled in the baseline building design and shall comply with but not exceed the requirements of Section 6."
-
+  * [get_fan_object_electric_power](ruleset_functions/get_fan_object_electric_power.md): Get the fan power associated with a fan object.
+  * [get_fan_system_object_supply_return_exhaust_relief_total_kW_CFM](ruleset_functions/get_fan_system_object_supply_return_exhaust_relief_total_kW_CFM.md): Get the supply, return, exhaust, and relief total fan power, CFM, quantity, and information about whether the pressure drop is consistent across the fans if more than one for a fan system object.   The function returns a dictionary that saves the supply, return, exhaust, and relief fan power as a list, saves the supply, return, exhaust, and relief cfm as a list, saves the supply, return, exhaust, and relief quantity as a list, and saves for each fan whether the pressure drop is undefined, identical, or different across fans (if only one it will return undefined or identical) but returns the quantity and information about the pressure drop across fans to help assess whether series or parallel.
 ### HVAC type functions
   * [is_baseline_system_1](ruleset_functions/baseline_systems/is_baseline_system_1.md): Get either Sys-1, Sys-1a, Sys-1b, Sys-1c, or Not_Sys_1 string output which indicates whether the HVAC system is ASHRAE 90.1 2019 Appendix G system 1 (PTAC), system 1a (system 1 with purchased CHW), system 1b (system 1 with purchased heating), system 1c (system 1 with purchased CHW and purchased HW).
   * [is_baseline_system_1a](ruleset_functions/baseline_systems/is_baseline_system_1a.md): Returns true or false to whether the baseline system type is 1a (system 1 with purchased CHW and HW served by a boiler). 
@@ -97,6 +98,9 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   * [are_all_terminal_types_CAV_With_None_Equal_to_Null](ruleset_functions/baseline_systems/baseline_hvac_sub_functions/are_all_terminal_types_CAV_With_None_Equal_to_Null.md): Returns TRUE if all of the terminal unit types input to this function are constant air volume (CAV). It returns FALSE if any of the terminal units are of a type other than constant air volume (CAV).
   * [get_dict_with_terminal_units_and_zones](ruleset_functions/baseline_systems/baseline_hvac_sub_functions/get_dict_with_terminal_units_and_zones.md): Returns a dictionary of zone IDs associated with each terminal unit in the RMD.
   * [are_all_terminal_CHW_loops_purchased_cooling](ruleset_functions/baseline_systems/baseline_hvac_sub_functions/are_all_terminal_CHW_loops_purchased_cooling.md): Returns TRUE if the fluid loop associated with the cooling_from_loop associated with each terminal unit is purchased CHW. Returns FALSE if this is not the case.
+  * [get_most_used_weekday_hourly_schedule](ruleset_functions/get_most_used_weekday_hourly_schedule.md): Get the most used weekday hourly schedule from an annual 8760 schedule as list of hourly values for a 24 hour period.
+  * [get_aggregated_zone_hvac_fan_operating_schedule](ruleset_functions/get_aggregated_zone_hvac_fan_operating_schedule.md): This function loops through all of the HVAC system fan operating schedules associated with a specific zone and creates an aggregated fan operating schedule for the zone. More specifically, if any of the fan operating schedules associated with any of the hvac systems serving the zone have a 1 for a particular hour of the year then the aggregated schedule will equal 1 for that particular hour of the year. The function will check this for each hour of the year and return an 8760 aggregated fan operating schedule.
+
 
 ## Data Tables
   * [8.4.4](data_tables/Table8-4-4.md): Minimum Nominal Efficiency Levels for Low-Voltage Dry-Type Distribution Transformers  
@@ -186,6 +190,7 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   * [5-34](section5/Rule5-34.md): If skylight area in the proposed design is 3% or less of the roof surface, the skylight area in baseline shall be equal to that in the proposed design.  
   * [5-35](section5/Rule5-35.md): If the skylight area of the proposed design is greater than 3%, baseline skylight area shall be decreased by an identical percentage in all roof components in which skylights are located to reach 3%.  
   * [5-36](section5/Rule5-36.md): Skylight area must be allocated to surfaces in the same proportion in the baseline as in the proposed design; Skylight orientation and tilt shall be the same as in the proposed design.  
+  * [5-38](section5/Rule5-38.md): Skylight SHGC properties shall match the appropriate requirements in Tables G3.4-1 through G3.4-8 using the value and the applicable skylight percentage.
   * [5-37](section5/Rule5-37.md): Skylight U-factors for residential, non-residential and semi-heated spaces in the baseline model must match the appropriate requirements in Table G3.4-1 through G3.4-8.  
   * [5-39](section5/Rule5-39.md): Automatically controlled dynamic glazing may be modeled. Manually controlled dynamic glazing shall use the average of the minimum and maximum SHGC and VT.  
   * [5-40](section5/Rule5-40.md): The baseline roof surfaces shall be modeled using a thermal emittance of 0.9.
@@ -198,7 +203,7 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   * [5-48](section5/Rule5-48.md): The air leakage rate in unconditioned and unenclosed spaces must be the same the baseline and proposed design.  
   * [5-50](section5/Rule5-50.md): Shading by adjacent structures and terrain is the same in the baseline and proposed.  
   * [5-51](section5/Rule5-51.md): Shading by adjacent structures and terrain is the same in the proposed design as in user model.  
-  * [5-52](section5/Rule5-52.md): It is acceptable to use either an annual average ground temperature or monthly average ground temperatures for calculation of heat loss through basement floors.  
+  * [5-52](section5/Rule5-52.md): It is acceptable to use either an annual average ground temperature or monthly average ground temperatures for calculation of heat loss through basement floors.
 
 ## Section 6 - Lighting
   * [6-1](section6/Rule6-1.md): Proposed building interior lighting power shall not exceel total interior lighting power allowance determined using either G3.7 or G3.8
@@ -244,9 +249,26 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
 
 ## Section 19 - Air Side Baseline HVAC System
   * [19-1](section19/Rule19-1.md): HVAC system coil capacities for the baseline building design shall be oversized by 15% for cooling and 25% for heating.
+  * [19-2](section19/Rule19-2.md): Baseline building plant capacities shall be based on coincident loads.
+  * [19-4](section19/Rule19-4.md): For baseline cooling sizing runs in residential dwelling units, the infiltration, occupants, lighting, gas and electricity using equipment hourly schedule shall be the same as the most used hourly weekday schedule from the annual simulation.
+  * [19-5](section19/Rule19-5.md): Unmet load hours for the proposed design shall not exceed 300 (of the 8760 hours simulated).
+  * [19-6](section19/Rule19-6.md): Unmet load hours for the baseline design shall not exceed 300 (of the 8760 hours simulated).
+  * [19-7](section19/Rule19-7.md): Minimum ventilation system outdoor air intake flow shall be the same for the proposed design and baseline building design except when any of the 4 exceptions defined in Section G3.1.2.5 are met.
+  * [19-8](section19/Rule19-8.md): Demand control ventilation is modeled in the baseline design in systems with outdoor air capacity greater than 3000 cfm serving areas with an average occupant design capacity greater than 100 people per 1000 ft^2.
+  * [19-9](section19/Rule19-9.md): Air economizers shall not be included in baseline HVAC Systems 1, 2, 9, and 10.
+  * [19-10](section19/Rule19-10.md): Air economizers shall be included in baseline HVAC Systems 3 through 8, and 11, 12, and 13 based on climate as specified in Section G3.1.2.6 with exceptions.
+  * [19-11](section19/Rule19-11.md): For systems that serve computer rooms, if the  baseline system is HVAC System 11, it shall include an integrated fluid economizer meeting the requirements of Section 6.5.1.2 in the baseline building design.
+  * [19-12](section19/Rule19-12.md): The baseline system economizer high-limit shutoff shall be a dry-bulb fixed switch with set-point temperatures in accordance with the values in Table G3.1.2.7.
+  * [19-13](section19/Rule19-13.md): For baseline system types 1-8 and 11-13, system design supply airflow rates shall be based on a supply-air-to-room temperature set-point difference of 20°F or the minimum outdoor airflow rate, or the airflow rate required to comply with applicable codes or accreditation standards, whichever is greater. For systems with multiple zone thermostat setpoints, use the design set point that will result in the lowest supply air cooling set point or highest supply air heating set point.
+  * [19-14](section19/Rule19-14.md): For baseline system types 1-8 and 11-13, if return or relief fans are specified in the proposed design, the baseline building design shall also be modeled with fans serving the same functions and sized for the baseline system supply fan air quantity less the minimum outdoor air, or 90% of the supply fan air quantity, whichever is larger.
+  * [19-17](section19/Rule19-17.md): For baseline system types 9 & 10, the system design supply airflow rates shall be based on the temperature difference between a supply air temperature set point of 105°F and the design space-heating temperature set point, the minimum outdoor airflow rate, or the airflow rate required to comply with applicable codes or accreditation standards, whichever is greater.
+  * [19-18](section19/Rule19-18.md): For baseline system 1 and 2, the total fan electrical power (Pfan) for supply, return, exhaust, and relief shall be = CFMs × 0.3, where, CFMs = the baseline system maximum design supply fan airflow rate, cfm.
+  * [19-20](section19/Rule19-20.md): For baseline systems 9 and 10 the system fan electrical power (Pfan) for supply, return, exhaust, and relief shall be  CFMs × 0.3, where, CFMs = the baseline system maximum design supply fan airflow rate, cfm. If modeling a non-mechanical cooling fan is required by Section G3.1.2.8.2, there is a fan power allowance of Pfan = CFMnmc × 0.054, where, CFMnmc = the baseline non-mechanical cooling fan airflow, cfm for the non-mechanical cooling.
+  * [19-22](section19/Rule19-22.md): For zones served by baseline system types 9 & 10, if the proposed design includes a fan or fans sized and controlled to provide non-mechanical cooling, the baseline building design shall include a separate fan to provide nonmechanical cooling, sized and controlled the same as the proposed design.
 
 ## Section 21 - Central Heating Hot Water Systems
   * [21-1](section21/Rule21-1.md): For systems using purchased hot water or steam, the heating source shall be modeled as purchased hot water or steam in both the proposed design and baseline building design. If any system in the proposed design uses purchased hot water or steam, all baseline systems with hot water coils shall use the same type of purchased hot water or steam.
+  * [21-2](section21/Rule21-2.md): For purchased HW/steam in the proposed model, the baseline shall have the same number of pumps as proposed
   * [21-3](section21/Rule21-3.md): Heating hot water plant capacity shall be based on coincident loads.  
   * [21-4](section21/Rule21-4.md): When baseline building does not use purchased heat, baseline systems 1,5,7,11,12 shall be modeled with natural draft boilers.
   * [21-5](section21/Rule21-5.md): The baseline building design boiler plant shall be modeled as having a single boiler if the baseline building design plant serves a conditioned floor area of 15,000sq.ft. or less, and as having two equally sized boilers for plants serving more than 15,000sq.ft.
@@ -257,6 +279,8 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   * [21-11](section21/Rule21-11.md): When the system uses boilers the hot water system shall be modeled as primary only.  
   * [21-12](section21/Rule21-12.md): When the system uses boilers the hot water system shall be modeled with continuous variable flow.  
   * [21-13](section21/Rule21-13.md): When the system uses boilers the hot water system shall be modeled with a minimum turndown ratio of 0.25.
+  * [21-14](section21/Rule21-14.md): When the baseline building is modeled with a hot water plant, served by purchased HW system, hot water supply temperature reset is not modeled.
+  * [21-15](section21/Rule21-15.md): When the baseline building is modeled with a hot water plant, served by purchased HW system, the hot water pump power shall be 14 W/gpm.
   * [21-16](section21/Rule21-16.md): Baseline shall have only one heating hot water plant.
   * [21-17](section21/Rule21-17.md): All boilers in the baseline building design shall be modeled at the minimum efficiency levels, both part load and full load, in accordance with Tables G3.5.6.
   * [21-18](section21/Rule21-18.md): For baseline building, fossil fuel systems shall be modeled using natural gas as their fuel source.

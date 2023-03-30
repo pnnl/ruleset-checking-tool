@@ -82,11 +82,19 @@
 
           - Case 2: Else if wall is exterior mixed type and vertical fenestration U-factor matches Table G3.4 requirement: `else if ( scc_dictionary_b[surface_b] == "EXTERIOR MIXED" ) AND ( subsurface_b.u_factor == target_u_factor_mixed ): PASS`
 
+              - Conservative comparison less equal: `else if (AHJ_RA_compare) AND ( scc_dictionary_b[surface_b] == "EXTERIOR MIXED" ) AND ( subsurface_b.u_factor <= target_u_factor_mixed ): PASS`
+
           - Case 3: Else if wall is exterior residential type and vertical fenestration U-factor matches Table G3.4 requirement: `else if ( scc_dictionary_b[surface_b] == "EXTERIOR RESIDENTIAL" ) AND ( subsurface_b.u_factor == target_u_factor_res ): PASS`
+
+              - Conservative comparison less equal: `else if (AHJ_RA_compare) AND ( scc_dictionary_b[surface_b] == "EXTERIOR RESIDENTIAL" ) AND ( subsurface_b.u_factor <= target_u_factor_res ): PASS`
 
           - Case 4: Else if wall is exterior non-residential type and vertical fenestration U-factor matches Table G3.4 requirement: `else if ( scc_dictionary_b[surface_b] == "EXTERIOR NON-RESIDENTIAL" ) AND ( subsurface_b.u_factor == target_u_factor_nonres ): PASS`
 
+              - Conservative comparison less equal: `else if (AHJ_RA_compare) AND ( scc_dictionary_b[surface_b] == "EXTERIOR NON-RESIDENTIAL" ) AND ( subsurface_b.u_factor <= target_u_factor_nonres ): PASS`
+
           - Case 5: Else if wall is semi-exterior type and skylight U-factor matches Table G3.4 requirement: `else if ( scc_dictionary_b[surface_b] == "SEMI-EXTERIOR" ) AND ( subsurface_b.u_factor == target_u_factor_semiheated ): PASS`
+
+              - Conservative comparison less equal: `else if (AHJ_RA_compare) AND ( scc_dictionary_b[surface_b] == "SEMI-EXTERIOR" ) AND ( subsurface_b.u_factor <= target_u_factor_semiheated ): PASS`
 
           - Case 6: Else: `else: FAIL`
 
