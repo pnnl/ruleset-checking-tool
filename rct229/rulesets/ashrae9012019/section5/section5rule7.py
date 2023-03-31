@@ -1,10 +1,15 @@
 from rct229.rule_engine.partial_rule_definition import PartialRuleDefinition
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
-from rct229.rulesets.ashrae9012019.ruleset_functions.get_opaque_surface_type import (get_opaque_surface_type, OpaqueSurfaceType as OST)
-from rct229.rulesets.ashrae9012019.ruleset_functions.get_surface_conditioning_category_dict import \
+from rct229.rulesets.ashrae9012019.ruleset_functions.get_opaque_surface_type import (
+    get_opaque_surface_type, OpaqueSurfaceType as OST
+)
+from rct229.rulesets.ashrae9012019.ruleset_functions.get_surface_conditioning_category_dict import (
     get_surface_conditioning_category_dict
-
+)
+from rct229.rulesets.ashrae9012019.ruleset_functions.get_surface_conditioning_category_dict import (
+    SurfaceConditioningCategory as SCC,
+)
 
 class Section5Rule7(RuleDefinitionListIndexedBase):
     """Rule 7 of ASHRAE 90.1-2019 Appendix G Section 5 (Envelope)"""
@@ -31,23 +36,23 @@ class Section5Rule7(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section5Rule7.BuildingRule, self).__init__(
                 rmrs_used=UserBaselineProposedVals(False, True, False),
-                required_fields={"$": "building_segments"},
+                required_fields={},
                 each_rule=Section5Rule7.BuildingRule.SurfaceRule(),
                 index_rmr="baseline",
-                list_path="$..surfaces[*]",
+                list_path="$.building_segments[*].zones[*].surfaces[*]",
             )
 
         def create_data(self, context, data=None):
-            building = context.baseline
+            building_b = context.baseline
             return {
                 "surface_conditioning_category_dict": get_surface_conditioning_category_dict(
-                    data["climate_zone"], building
+                    data["climate_zone"], building_b
                 ),
             }
 
         def list_filter(self, context_item, data):
-            surface = context_item.baseline
-            return get_opaque_surface_type(surface) == OST.BELOW_GRADE_WALL
+            surface_b = context_item.baseline
+            return get_opaque_surface_type(surface_b) == OST.BELOW_GRADE_WALL
 
         class SurfaceRule(PartialRuleDefinition):
             def __init__(self):
@@ -57,15 +62,13 @@ class Section5Rule7(RuleDefinitionListIndexedBase):
                 )
 
             def get_calc_vals(self, context, data=None):
-                surface = context.baseline
+                surface_b = context.baseline
                 surface_conditioning_category_dict = data["surface_conditioning_category_dict"]
-                surface_category = surface_conditioning_category_dict[surface["id"]]
-                surface_type = get_opaque_surface_type(surface)
+                surface_category = surface_conditioning_category_dict[surface_b["id"]]
                 return {
                     "surface_category": surface_category,
-                    "surface_type": surface_type
                 }
 
             def applicability_check(self, context, calc_vals, data):
                 surface_category = calc_vals["surface_category"]
-                return surface_category != "UNREGULATED"
+                return surface_category != SCC.UNREGULATED
