@@ -2,7 +2,6 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_dict_of_zones_and_termi
     get_dict_of_zones_and_terminal_units_served_by_hvac_sys,
 )
 from rct229.utils.assertions import getattr_
-from rct229.utils.assertions import assert_
 from rct229.utils.jsonpath_utils import find_all, find_one_with_field_value
 
 
