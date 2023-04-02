@@ -2,7 +2,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_dict_of_zones_and_termi
     get_dict_of_zones_and_terminal_units_served_by_hvac_sys,
 )
 from rct229.utils.assertions import getattr_
-from rct229.utils.jsonpath_utils import find_all, find_one_with_field_value
+from rct229.utils.jsonpath_utils import find_all
 
 
 def are_all_hvac_sys_fan_objs_autosized(rmi):
@@ -42,19 +42,22 @@ def are_all_hvac_sys_fan_objs_autosized(rmi):
             for terminal_id in zones_and_terminal_units_served_by_hvac_sys_dict[
                 hvac["id"]
             ]["terminal_unit_list"]:
-                terminal = find_one_with_field_value(
-                    "$.buildings[*].building_segments[*].zones[*].terminals[*]",
-                    "id",
-                    terminal_id,
+                terminals = find_all(
+                    f'$.buildings[*].building_segments[*].zones[*].terminals[*][?(@.id="{terminal_id}")]',
                     rmi,
                 )
-                if (
-                    getattr_(
-                        terminal, "is_airflow_autosized", "fan", "is_airflow_autosized"
-                    )
-                    == False
-                ):
-                    are_all_hvac_sys_fan_objs_autosized = False
-                    return are_all_hvac_sys_fan_objs_autosized
+
+                for terminal in terminals:
+                    if (
+                        getattr_(
+                            terminal,
+                            "is_airflow_autosized",
+                            "fan",
+                            "is_airflow_autosized",
+                        )
+                        == False
+                    ):
+                        are_all_hvac_sys_fan_objs_autosized = False
+                        return are_all_hvac_sys_fan_objs_autosized
 
     return are_all_hvac_sys_fan_objs_autosized
