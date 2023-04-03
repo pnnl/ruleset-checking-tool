@@ -11,7 +11,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_s
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_baseline_system_types import (
     get_baseline_system_types,
 )
-
+from rct229.utils.jsonpath_utils import find_one
 
 APPLICABLE_SYS_TYPES = [HVAC_SYS.SYS_1, HVAC_SYS.SYS_2, HVAC_SYS.SYS_9, HVAC_SYS.SYS_10]
 
@@ -47,6 +47,18 @@ class Section19Rule9(RuleDefinitionListIndexedBase):
             ]
         )
 
+    def create_data(self, context, data):
+        rmi_b = context.baseline
+        baseline_system_types_dict = get_baseline_system_types(rmi_b)
+
+        return {
+            "baseline_system_types_dict": {
+                k: v
+                for k, v in baseline_system_types_dict.items()
+                if k in APPLICABLE_SYS_TYPES and v
+            }
+        }
+
     class HVACRule(RuleDefinitionBase):
         def __init__(self):
             super(Section19Rule9.HVACRule, self).__init__(
@@ -58,25 +70,30 @@ class Section19Rule9(RuleDefinitionListIndexedBase):
                 },
             )
 
+        def is_applicable(self, context, data=None):
+            hvac_b = context.baseline
+            hvac_id_b = hvac_b["id"]
+            baseline_system_types_dict = data["baseline_system_types_dict"]
+
+            for key, value in baseline_system_types_dict.items():
+                if hvac_id_b in value:
+                    return True
+            return False
+
         def get_calc_vals(self, context, data=None):
             hvac_b = context.baseline
             fan_system_b = hvac_b["fan_system"]
 
-            air_economizer_b = fan_system_b.get("air_economizer")
-            air_economizer_type_b = (
-                air_economizer_b.get("type") if air_economizer_b else None
-            )
+            air_economizer_type_b = find_one("$.air_economizer.type", fan_system_b)
 
             return {
-                "air_economizer_b": air_economizer_b,
                 "air_economizer_type_b": air_economizer_type_b,
             }
 
         def rule_check(self, context, calc_vals=None, data=None):
-            air_economizer_b = calc_vals["air_economizer_b"]
             air_economizer_type_b = calc_vals["air_economizer_type_b"]
 
             return (
-                air_economizer_b is None
+                air_economizer_type_b is None
                 or air_economizer_type_b == AIR_ECONOMIZER.FIXED_FRACTION
             )
