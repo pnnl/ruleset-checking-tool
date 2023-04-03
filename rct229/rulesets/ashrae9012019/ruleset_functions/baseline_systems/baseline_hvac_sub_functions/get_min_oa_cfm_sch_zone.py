@@ -1,5 +1,3 @@
-from operator import add
-
 from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all, find_exactly_one_with_field_value
 
@@ -19,41 +17,49 @@ def get_min_oa_cfm_sch_zone(rmi, zone_id):
     list: An aggregated OA CFM hourly schedule for the zone (for each hour of the year, for each terminal unit, Terminal.minimum_outdoor_airflow is multiplied by Terminal.minimum_outdoor_airflow_multiplier_schedule, this product is summed across the terminal units for each hour of the year) .
     """
 
-    for terminal in find_all(
-        f'$.buildings[*].building_segments[*].zones[*][?(@.id = "{zone_id}")].terminals[*]',
-        rmi,
+    for idx, terminal in enumerate(
+        find_all(
+            f'$.buildings[*].building_segments[*].zones[*][?(@.id = "{zone_id}")].terminals[*]',
+            rmi,
+        )
     ):
         minimum_outdoor_airflow = getattr_(
             terminal, "minimum_outdoor_airflow", "minimum_outdoor_airflow"
         )
 
-        minimum_outdoor_airflow_multiplier_schedule = find_exactly_one_with_field_value(
-            "$.schedules[*]",
-            "id",
-            getattr_(
-                terminal,
-                "minimum_outdoor_airflow_multiplier_schedule",
-                "minimum_outdoor_airflow_multiplier_schedule",
-            ),
-            rmi,
+        minimum_outdoor_airflow_multiplier_schedule_id = terminal.get(
+            "minimum_outdoor_airflow_multiplier_schedule"
         )
 
-        try:
-            min_OA_CFM_schedule_for_zone = list(
-                map(
-                    add,
-                    min_OA_CFM_schedule_for_zone,
-                    map(
-                        lambda x: x * minimum_outdoor_airflow,
-                        minimum_outdoor_airflow_multiplier_schedule["hourly_values"],
-                    ),
-                )
+        if minimum_outdoor_airflow_multiplier_schedule_id:
+            minimum_outdoor_airflow_multiplier_schedule = getattr_(
+                find_exactly_one_with_field_value(
+                    "$.schedules[*]",
+                    "id",
+                    minimum_outdoor_airflow_multiplier_schedule_id,
+                    rmi,
+                ),
+                "hourly_values",
+                "hourly_values",
             )
-        except NameError:
+
+            if idx == 0:
+                min_OA_CFM_schedule_for_zone = [0] * len(
+                    minimum_outdoor_airflow_multiplier_schedule
+                )
+
+            assert len(minimum_outdoor_airflow_multiplier_schedule) in (
+                8760,
+                8784,
+            ) and len(min_OA_CFM_schedule_for_zone) == len(
+                minimum_outdoor_airflow_multiplier_schedule
+            ), f"The length of schedule has to be either 8760 or 8784, but is {len(minimum_outdoor_airflow_multiplier_schedule)}."
+
             min_OA_CFM_schedule_for_zone = list(
                 map(
-                    lambda x: x * minimum_outdoor_airflow,
-                    minimum_outdoor_airflow_multiplier_schedule["hourly_values"],
+                    lambda x, y: x + y * minimum_outdoor_airflow,
+                    min_OA_CFM_schedule_for_zone,
+                    minimum_outdoor_airflow_multiplier_schedule,
                 )
             )
 
