@@ -86,7 +86,7 @@ TEST_RMD = {
                                                 "id": "Supply Fan 3",
                                                 "specification_method": "DETAILED",
                                                 "design_airflow": 2288.9451325,  # L/S => 4850 CFM
-                                                "design_pressure_rise": 0.091648788,  # m => 3.60882 inches
+                                                "design_pressure_rise": 898.0187688,  # pa
                                                 "total_efficiency": 0.55,
                                             },
                                             {
@@ -179,7 +179,7 @@ def test__FAN_DETAIL_total_efficiency__success():
         TEST_RMI,
     )
     assert abs(
-        get_fan_object_electric_power(fan) - 3734.5 * ureg("watt")
+        get_fan_object_electric_power(fan) - 3737.3 * ureg("watt")
     ) < 0.05 * ureg("watt")
 
 
