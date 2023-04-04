@@ -22,7 +22,7 @@ def get_fan_object_electric_power(fan):
     None if missing key parameters for calculating the fan power
 
     """
-    fan_elec_power = None
+    fan_elec_power = 0.0
     fan_spec_method = getattr_(fan, "fan", "specification_method")
     if fan_spec_method == FAN_SPECIFICATION_METHOD.SIMPLE:
         fan_elec_power = fan.get("design_electric_power", None)
