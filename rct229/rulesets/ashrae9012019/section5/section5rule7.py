@@ -38,7 +38,6 @@ class Section5Rule7(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section5Rule7.BuildingRule, self).__init__(
                 rmrs_used=UserBaselineProposedVals(False, True, False),
-                required_fields={},
                 each_rule=Section5Rule7.BuildingRule.SurfaceRule(),
                 index_rmr="baseline",
                 list_path="$.building_segments[*].zones[*].surfaces[*]",
@@ -60,7 +59,6 @@ class Section5Rule7(RuleDefinitionListIndexedBase):
             def __init__(self):
                 super(Section5Rule7.BuildingRule.SurfaceRule, self).__init__(
                     rmrs_used=UserBaselineProposedVals(False, True, False),
-                    required_fields={},
                 )
 
             def get_calc_vals(self, context, data=None):
