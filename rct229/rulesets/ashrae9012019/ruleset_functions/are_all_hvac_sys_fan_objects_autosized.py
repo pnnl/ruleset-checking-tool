@@ -11,13 +11,15 @@ from rct229.utils.jsonpath_utils import find_all
 
 def are_all_hvac_sys_fan_objs_autosized(rmi, hvac_id):
     """
+    The function returns true if all supply fan objects associated with an hvac system are autosized.
 
     Parameters
     ----------
-    rmi
-    hvac_id
+    rmi: dict RMI at RuleSetModelInstance level
+    hvac_id: str HVAC id string
 
-    Returns
+    Returns: bool True if all supply fan objects associate with an HVAC system are autosized, False otherwise,
+    MissingKey Exception if missing critcal keys
     -------
 
     """
