@@ -36,6 +36,8 @@ def get_fan_object_electric_power(fan):
         if input_power > 0.0 and motor_efficiency > 0.0:
             fan_elec_power = input_power / motor_efficiency
         elif total_efficiency > 0.0 and design_pressure_rise > 0.0:
-            fan_elec_power = (design_pressure_rise * design_air_flow / total_efficiency).to("watt")
+            fan_elec_power = (
+                design_pressure_rise * design_air_flow / total_efficiency
+            ).to("watt")
 
     return fan_elec_power

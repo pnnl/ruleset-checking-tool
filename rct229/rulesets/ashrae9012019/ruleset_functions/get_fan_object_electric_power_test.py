@@ -192,4 +192,4 @@ def test_FAN_MISSING_DATA_FAILED():
         "Supply Fan 4",
         TEST_RMI,
     )
-    assert get_fan_object_electric_power(fan) == None
+    assert get_fan_object_electric_power(fan) == 0.0
