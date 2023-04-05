@@ -47,6 +47,19 @@ TEST_RMD = {
                                         }
                                     ],
                                 },
+                                {
+                                    "id": "Thermal Zone 3",
+                                    "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                    "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                    "terminals": [
+                                        {
+                                            "id": "Air Terminal",
+                                            "is_supply_ducted": True,
+                                            "type": "CONSTANT_AIR_VOLUME",
+                                            "served_by_heating_ventilating_air_conditioning_system": "System Type 3a",
+                                        }
+                                    ],
+                                },
                             ],
                             "heating_ventilating_air_conditioning_systems": [
                                 {
@@ -68,6 +81,24 @@ TEST_RMD = {
                                         "return_fans": [{"id": "Return Fan 1"}],
                                     },
                                 },
+                                {
+                                    "id": "System Type 3a",
+                                    "cooling_system": {
+                                        "id": "Cooling Coil 1",
+                                        "cooling_system_type": "FLUID_LOOP",
+                                        "chilled_water_loop": "Purchased CHW Loop 1",
+                                    },
+                                    "heating_system": {
+                                        "id": "Furnace Coil 1",
+                                        "heating_system_type": "FURNACE",
+                                    },
+                                    "fan_system": {
+                                        "id": "CAV Fan System 1",
+                                        "fan_control": "CONSTANT",
+                                        "supply_fans": [{"id": "Supply Fan 1"}],
+                                        "return_fans": [{"id": "Return Fan 1"}],
+                                    },
+                                },
                             ],
                         }
                     ],
@@ -80,7 +111,17 @@ TEST_RMD = {
                     "energy_source_type": "NATURAL_GAS",
                 }
             ],
-            "chillers": [{"id": "Chiller 1", "cooling_loop": "Chiller Loop 1"}],
+            "external_fluid_source": [
+                {
+                    "id": "Purchased CHW 1",
+                    "loop": "Purchased CHW Loop 1",
+                    "type": "CHILLED_WATER",
+                }
+            ],
+            "chillers": [
+                {"id": "Chiller 1", "cooling_loop": "Chiller Loop 1"},
+                {"id": "Chiller 2", "cooling_loop": "Chilled Water Loop 1"},
+            ],
             "pumps": [
                 {
                     "id": "Boiler Pump 1",
@@ -106,6 +147,8 @@ TEST_RMD = {
                     "type": "COOLING",
                     "child_loops": [{"id": "Chilled Water Loop 2", "type": "COOLING"}],
                 },
+                {"id": "Purchased CHW 1", "type": "COOLING"},
+                {"id": "Chilled Water Loop 1", "type": "COOLING"},
             ],
         }
     ],
