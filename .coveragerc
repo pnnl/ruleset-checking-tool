@@ -1,6 +1,6 @@
 [run]
 branch = True
-omit = **/test_*, **/*_test*.*, **/__init__.py, **/section/**
+omit = **/test_*, **/*_test*.*, **/__init__.py, /section/*
 
 [report]
 show_missing = True
