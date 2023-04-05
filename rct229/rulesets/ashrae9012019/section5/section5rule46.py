@@ -39,7 +39,7 @@ class Section5Rule46(RuleDefinitionListIndexedBase):
             # This assumes that the surfaces all match
             matched_baseline_zones = match_lists_by_id(proposed_zones, baseline_zones)
             proposed_baseline_zone_pairs = zip(proposed_zones, matched_baseline_zones)
-            for (p_zone, b_zone) in proposed_baseline_zone_pairs:
+            for p_zone, b_zone in proposed_baseline_zone_pairs:
                 # need a method like match object
                 p_zone_infiltration = p_zone["infiltration"]
                 # b_zone could be NONE - add a check.
