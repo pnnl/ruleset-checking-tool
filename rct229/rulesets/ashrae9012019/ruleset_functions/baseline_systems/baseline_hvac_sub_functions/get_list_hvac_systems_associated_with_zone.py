@@ -15,18 +15,20 @@ def get_list_hvac_systems_associated_with_zone(rmi, zone_id):
     -------
 
     """
-    return list(
-        set(
-            [
-                getattr_(
-                    terminal,
-                    "served_by_heating_ventilating_air_conditioning_system",
-                    "served_by_heating_ventilating_air_conditioning_system",
-                )
-                for terminal in find_all(
-                    f'$.buildings[*].building_segments[*].zones[*][?(@.id="{zone_id}")].terminals[*]',
-                    rmi,
-                )
-            ]
+    return sorted(
+        list(
+            set(
+                [
+                    getattr_(
+                        terminal,
+                        "served_by_heating_ventilating_air_conditioning_system",
+                        "served_by_heating_ventilating_air_conditioning_system",
+                    )
+                    for terminal in find_all(
+                        f'$.buildings[*].building_segments[*].zones[*][?(@.id="{zone_id}")].terminals[*]',
+                        rmi,
+                    )
+                ]
+            )
         )
     )
