@@ -1,5 +1,5 @@
 import pytest
-from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.aggregate_min_OA_schedule_across_zones import (
+from rct229.rulesets.ashrae9012019.ruleset_functions.aggregate_min_OA_schedule_across_zones import (
     aggregate_min_OA_schedule_across_zones,
 )
 from rct229.utils.assertions import RCTFailureException
