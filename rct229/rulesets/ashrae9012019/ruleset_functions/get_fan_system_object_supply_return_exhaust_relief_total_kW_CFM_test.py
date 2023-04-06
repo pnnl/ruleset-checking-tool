@@ -1,5 +1,5 @@
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_fan_system_object_supply_return_exhaust_relief_total_kW_CFM import (
-    get_fan_system_object_supply_return_exhaust_relief_total_kW_CFM,
+    get_fan_system_object_supply_return_exhaust_relief_total_kw_cfm,
 )
 from rct229.schema.config import ureg
 

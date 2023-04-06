@@ -5,7 +5,7 @@ from rct229.schema.config import ureg
 from rct229.utils.jsonpath_utils import find_all
 
 
-def get_fan_system_object_supply_return_exhaust_relief_total_kW_CFM(fan_system):
+def get_fan_system_object_supply_return_exhaust_relief_total_kw_cfm(fan_system):
     """
     Get the supply, return, exhaust, and relief total fan power, CFM, quantity, and information about whether the pressure drop is consistent across the fans if more than one for a fan system object.
 
