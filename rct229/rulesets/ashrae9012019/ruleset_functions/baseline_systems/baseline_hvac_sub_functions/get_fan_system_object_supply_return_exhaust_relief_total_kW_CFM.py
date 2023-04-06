@@ -1,11 +1,8 @@
+from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.get_fan_object_electric_power import (
+    get_fan_object_electric_power,
+)
 from rct229.schema.config import ureg
 from rct229.utils.jsonpath_utils import find_all
-from rct229.utils.assertions import assert_
-from rct229.utils.assertions import getattr_
-
-
-def get_fan_object_electric_power():
-    return 1
 
 
 def get_fan_system_object_supply_return_exhaust_relief_total_kW_CFM(fan_system):
@@ -29,8 +26,7 @@ def get_fan_system_object_supply_return_exhaust_relief_total_kW_CFM(fan_system):
             if fan_cfm > 0.0 * ureg("cfm"):  # TODO check if this > can be omitted
                 fan_qty += 1
 
-            fan_design_pressure_rise = fan.get("design_pressure_rise")
-            design_pressure_rise_tempo.append(fan_design_pressure_rise)
+            design_pressure_rise_tempo.append(fan.get("design_pressure_rise"))
 
         if None in design_pressure_rise_tempo:
             fan_pressure_drop = "UNDEFINED"
