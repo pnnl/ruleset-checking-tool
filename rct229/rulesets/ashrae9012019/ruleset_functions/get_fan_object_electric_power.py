@@ -5,7 +5,6 @@ from rct229.utils.pint_utils import ZERO
 
 
 FAN_SPECIFICATION_METHOD = schema_enums["FanSpecificationMethodOptions"]
-CONVERSION_FACTOR = 8250 * ureg("hr*ft/Btu")
 
 
 def get_fan_object_electric_power(fan):
@@ -23,13 +22,13 @@ def get_fan_object_electric_power(fan):
     None if missing key parameters for calculating the fan power
 
     """
-    fan_elec_power = None
+    fan_elec_power = 0.0
     fan_spec_method = getattr_(fan, "fan", "specification_method")
     if fan_spec_method == FAN_SPECIFICATION_METHOD.SIMPLE:
-        # fan_elec_power = getattr_(fan, "fan", "design_electric_power")
         fan_elec_power = fan.get("design_electric_power", None)
     elif fan_spec_method == FAN_SPECIFICATION_METHOD.DETAILED:
         design_pressure_rise = fan.get("design_pressure_rise", ZERO.LENGTH)
+        design_air_flow = fan.get("design_airflow", ZERO.FLOW)
         total_efficiency = fan.get("total_efficiency", 0.0)
         input_power = fan.get("input_power", ZERO.POWER)
         motor_efficiency = fan.get("motor_efficiency", 0.0)
@@ -37,8 +36,8 @@ def get_fan_object_electric_power(fan):
         if input_power > 0.0 and motor_efficiency > 0.0:
             fan_elec_power = input_power / motor_efficiency
         elif total_efficiency > 0.0 and design_pressure_rise > 0.0:
-            fan_elec_power = design_pressure_rise / (
-                CONVERSION_FACTOR * total_efficiency
-            )
+            fan_elec_power = (
+                design_pressure_rise * design_air_flow / total_efficiency
+            ).to("watt")
 
     return fan_elec_power

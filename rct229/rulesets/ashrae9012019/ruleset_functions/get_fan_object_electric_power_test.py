@@ -78,12 +78,16 @@ TEST_RMD = {
                                                 "input_power": 100,
                                                 "motor_efficiency": 0.5,
                                             },
-                                            # 0.00397677575 Btu/hr -> 0.00116620989 watt
+                                            # 3.73 kilowatt -> 3734 watt
+                                            # reference: NYSERDA energy modeling guideline
+                                            # https://portal.nyserda.ny.gov/servlet/servlet.FileDownload?file=00Pt0000005uXvoEAE
+                                            # page 12-14
                                             {
                                                 "id": "Supply Fan 3",
                                                 "specification_method": "DETAILED",
-                                                "design_pressure_rise": 5,
-                                                "total_efficiency": 0.5,
+                                                "design_airflow": 2288.9451325,  # L/S => 4850 CFM
+                                                "design_pressure_rise": 898.0187688,  # pa
+                                                "total_efficiency": 0.55,
                                             },
                                             {
                                                 "id": "Supply Fan 4",
@@ -175,8 +179,8 @@ def test__FAN_DETAIL_total_efficiency__success():
         TEST_RMI,
     )
     assert abs(
-        get_fan_object_electric_power(fan) - 0.00116 * ureg("watt")
-    ) < 0.000006 * ureg("watt")
+        get_fan_object_electric_power(fan) - 3737.3 * ureg("watt")
+    ) < 0.05 * ureg("watt")
 
 
 def test_FAN_MISSING_DATA_FAILED():
@@ -188,4 +192,4 @@ def test_FAN_MISSING_DATA_FAILED():
         "Supply Fan 4",
         TEST_RMI,
     )
-    assert get_fan_object_electric_power(fan) == None
+    assert get_fan_object_electric_power(fan) == 0.0
