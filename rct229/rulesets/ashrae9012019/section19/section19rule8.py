@@ -6,8 +6,8 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_hvac_zone_list_w_area_d
     get_hvac_zone_list_w_area_dict,
 )
 from rct229.schema.config import ureg
-from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all
+from rct229.utils.pint_utils import pint_sum
 
 MIN_OA_CFM = 3000 * ureg("cfm")
 OCCUPANT_DENSITY_LIMIT = 0.1 / ureg("ft2")
@@ -45,16 +45,17 @@ class Section19Rule8(RuleDefinitionListIndexedBase):
             building_b = context.baseline
             hvac_zone_list_w_area_dict_b = get_hvac_zone_list_w_area_dict(building_b)
 
-            zone_space_b = {}
-            for zone_b in find_all("$.building_segments[*].zones[*]", building_b):
-                zone_id_b = zone_b["id"]
-                zone_space_b[zone_id_b] = []
-                for space_b in getattr_(zone_b, "zone", "spaces"):
-                    zone_space_b[zone_id_b].append(space_b)
+            zone_total_occupant_dict_b = {
+                zone_b["id"]: pint_sum(
+                    find_all("$.spaces[*].number_of_occupants", zone_b),
+                    0,
+                )
+                for zone_b in find_all("$.building_segments[*].zones[*]", building_b)
+            }
 
             return {
                 "hvac_zone_list_w_area_dict_b": hvac_zone_list_w_area_dict_b,
-                "zone_space_b": zone_space_b,
+                "zone_total_occupant_dict_b": zone_total_occupant_dict_b,
             }
 
         def list_filter(self, context_item, data=None):
@@ -77,7 +78,7 @@ class Section19Rule8(RuleDefinitionListIndexedBase):
             def get_calc_vals(self, context, data=None):
                 hvac_b = context.baseline
                 hvac_zone_list_w_area_dict_b = data["hvac_zone_list_w_area_dict_b"]
-                zone_space_b = data["zone_space_b"]
+                zone_total_occupant_dict_b = data["zone_total_occupant_dict_b"]
 
                 hvac_id_b = hvac_b["id"]
                 fan_system_b = hvac_b["fan_system"]
@@ -106,9 +107,8 @@ class Section19Rule8(RuleDefinitionListIndexedBase):
                         avg_occ_density = (
                             sum(
                                 [
-                                    space["number_of_occupants"]
+                                    zone_total_occupant_dict_b[zone_id_b]
                                     for zone_id_b in zone_id_list_b
-                                    for space in zone_space_b[zone_id_b]
                                 ]
                             )
                             / hvac_area_b
