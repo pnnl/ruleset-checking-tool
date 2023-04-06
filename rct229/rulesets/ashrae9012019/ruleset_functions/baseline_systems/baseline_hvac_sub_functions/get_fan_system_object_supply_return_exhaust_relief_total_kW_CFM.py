@@ -20,9 +20,7 @@ def get_fan_system_object_supply_return_exhaust_relief_total_kW_CFM(fan_system):
             #     total_fan_power += fan_elec_power
 
             fan_cfm = fan.get("design_airflow")
-            if fan_cfm is not None and fan_cfm > 0.0 * ureg(
-                "cfm"
-            ):  # TODO check if this > can be omitted
+            if fan_cfm is not None and fan_cfm > 0.0 * ureg("cfm"):
                 total_fan_cfm += fan_cfm
                 fan_qty += 1
 
