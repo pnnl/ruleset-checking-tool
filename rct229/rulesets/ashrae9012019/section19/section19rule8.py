@@ -36,115 +36,101 @@ class Section19Rule8(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section19Rule8.BuildingRule, self).__init__(
                 rmrs_used=UserBaselineProposedVals(False, True, False),
-                each_rule=Section19Rule8.BuildingRule.BuildingSegmentRule(),
+                each_rule=Section19Rule8.BuildingRule.HVACRule(),
                 index_rmr="baseline",
-                list_path="$.building_segments[*]",
+                list_path="$.building_segments[*].heating_ventilating_air_conditioning_systems[*]",
             )
 
         def create_data(self, context, data=None):
             building_b = context.baseline
             hvac_zone_list_w_area_dict_b = get_hvac_zone_list_w_area_dict(building_b)
 
-            return {"hvac_zone_list_w_area_dict_b": hvac_zone_list_w_area_dict_b}
+            zone_space_b = {}
+            for zone_b in find_all("$.building_segments[*].zones[*]", building_b):
+                zone_id_b = zone_b["id"]
+                zone_space_b[zone_id_b] = []
+                for space_b in getattr_(zone_b, "zone", "spaces"):
+                    zone_space_b[zone_id_b].append(space_b)
 
-        class BuildingSegmentRule(RuleDefinitionListIndexedBase):
+            return {
+                "hvac_zone_list_w_area_dict_b": hvac_zone_list_w_area_dict_b,
+                "zone_space_b": zone_space_b,
+            }
+
+        def list_filter(self, context_item, data=None):
+            hvac_b = context_item.baseline
+            hvac_id_b = hvac_b["id"]
+            hvac_zone_list_w_area_dict_b = data["hvac_zone_list_w_area_dict_b"]
+
+            return hvac_id_b in hvac_zone_list_w_area_dict_b
+
+        class HVACRule(RuleDefinitionBase):
             def __init__(self):
-                super(Section19Rule8.BuildingRule.BuildingSegmentRule, self).__init__(
+                super(Section19Rule8.BuildingRule.HVACRule, self).__init__(
                     rmrs_used=UserBaselineProposedVals(False, True, False),
-                    each_rule=Section19Rule8.BuildingRule.BuildingSegmentRule.HVACRule(),
-                    index_rmr="baseline",
-                    list_path="$.heating_ventilating_air_conditioning_systems[*]",
                     required_fields={
-                        "$": ["zones"],
+                        "$": ["fan_system"],
+                        "fan_system": ["minimum_outdoor_airflow"],
                     },
                 )
 
-            def create_data(self, context, data=None):
-                building_segment_b = context.baseline
-
-                zone_space_b = {}
-                for zone_b in find_all("$.zones[*]", building_segment_b):
-                    zone_id_b = zone_b["id"]
-                    zone_space_b[zone_id_b] = []
-                    for space_b in getattr_(zone_b, "zone", "spaces"):
-                        zone_space_b[zone_id_b].append(space_b)
-
-                return {"zone_space_b": zone_space_b}
-
-            def list_filter(self, context_item, data=None):
-                hvac_b = context_item.baseline
-                hvac_id_b = hvac_b["id"]
+            def get_calc_vals(self, context, data=None):
+                hvac_b = context.baseline
                 hvac_zone_list_w_area_dict_b = data["hvac_zone_list_w_area_dict_b"]
+                zone_space_b = data["zone_space_b"]
 
-                return True if hvac_id_b in hvac_zone_list_w_area_dict_b else False
+                hvac_id_b = hvac_b["id"]
+                fan_system_b = hvac_b["fan_system"]
 
-            class HVACRule(RuleDefinitionBase):
-                def __init__(self):
-                    super(
-                        Section19Rule8.BuildingRule.BuildingSegmentRule.HVACRule, self
-                    ).__init__(
-                        rmrs_used=UserBaselineProposedVals(False, True, False),
-                        required_fields={
-                            "$": ["fan_system"],
-                            "fan_system": ["minimum_outdoor_airflow"],
-                        },
-                    )
+                is_DCV_modeled_b = False
+                avg_occ_density = 0.0 / ureg("ft2")
+                hvac_min_OA_flow = fan_system_b["minimum_outdoor_airflow"]
 
-                def get_calc_vals(self, context, data=None):
-                    hvac_b = context.baseline
-                    hvac_zone_list_w_area_dict_b = data["hvac_zone_list_w_area_dict_b"]
-                    zone_space_b = data["zone_space_b"]
+                demand_control_ventilation_control_b = fan_system_b.get(
+                    "demand_control_ventilation_control"
+                )
 
-                    hvac_id_b = hvac_b["id"]
-                    fan_system_b = hvac_b["fan_system"]
+                if (
+                    demand_control_ventilation_control_b
+                    and demand_control_ventilation_control_b
+                    != DEMAND_CONTROL_VENTILATION_CONTROL.NONE
+                ):
+                    is_DCV_modeled_b = True
+                    if hvac_min_OA_flow > MIN_OA_CFM:
+                        zone_id_list_b = hvac_zone_list_w_area_dict_b[hvac_id_b][
+                            "zone_list"
+                        ]
+                        hvac_area_b = hvac_zone_list_w_area_dict_b[hvac_id_b][
+                            "total_area"
+                        ]
+                        avg_occ_density = (
+                            sum(
+                                [
+                                    space["number_of_occupants"]
+                                    for zone_id_b in zone_id_list_b
+                                    for space in zone_space_b[zone_id_b]
+                                ]
+                            )
+                            / hvac_area_b
+                        )
 
-                    is_DCV_modeled_b = False
-                    avg_occ_density = 0.0 / ureg("ft2")
-                    hvac_min_OA_flow = fan_system_b["minimum_outdoor_airflow"]
+                return {
+                    "hvac_min_OA_flow": hvac_min_OA_flow,
+                    "is_DCV_modeled_b": is_DCV_modeled_b,
+                    "avg_occ_density": avg_occ_density,
+                }
 
-                    demand_control_ventilation_control_b = fan_system_b.get(
-                        "demand_control_ventilation_control"
-                    )
+            def rule_check(self, context, calc_vals=None, data=None):
+                hvac_min_OA_flow = calc_vals["hvac_min_OA_flow"]
+                avg_occ_density = calc_vals["avg_occ_density"]
+                is_DCV_modeled_b = calc_vals["is_DCV_modeled_b"]
 
-                    if (
-                        demand_control_ventilation_control_b
-                        and demand_control_ventilation_control_b
-                        != DEMAND_CONTROL_VENTILATION_CONTROL.NONE
-                    ):
-                        is_DCV_modeled_b = True
-                        if hvac_min_OA_flow > MIN_OA_CFM:
-                            zone_list_b = hvac_zone_list_w_area_dict_b[hvac_id_b][
-                                "zone_list"
-                            ]
-                            hvac_area_b = hvac_zone_list_w_area_dict_b[hvac_id_b][
-                                "total_area"
-                            ]
-                            total_hvac_sys_occupants_b = 0.0
-                            for zone_b in zone_list_b:
-                                for space_b in zone_space_b[zone_b]:
-                                    total_hvac_sys_occupants_b += space_b[
-                                        "number_of_occupants"
-                                    ]
-
-                            avg_occ_density = total_hvac_sys_occupants_b / hvac_area_b
-
-                    return {
-                        "hvac_min_OA_flow": hvac_min_OA_flow,
-                        "is_DCV_modeled_b": is_DCV_modeled_b,
-                        "avg_occ_density": avg_occ_density,
-                    }
-
-                def rule_check(self, context, calc_vals=None, data=None):
-                    hvac_min_OA_flow = calc_vals["hvac_min_OA_flow"]
-                    avg_occ_density = calc_vals["avg_occ_density"]
-                    is_DCV_modeled_b = calc_vals["is_DCV_modeled_b"]
-
-                    return (
-                        hvac_min_OA_flow > MIN_OA_CFM
-                        and avg_occ_density > OCCUPANT_DENSITY_LIMIT
-                        and is_DCV_modeled_b
-                    ) or (
-                        hvac_min_OA_flow <= MIN_OA_CFM
-                        and avg_occ_density >= OCCUPANT_DENSITY_LIMIT
-                        and not is_DCV_modeled_b
-                    )
+                return (
+                    hvac_min_OA_flow > MIN_OA_CFM
+                    and avg_occ_density > OCCUPANT_DENSITY_LIMIT
+                    and is_DCV_modeled_b
+                ) or (
+                    hvac_min_OA_flow <= MIN_OA_CFM
+                    and avg_occ_density >= OCCUPANT_DENSITY_LIMIT
+                    and not is_DCV_modeled_b
+                )
