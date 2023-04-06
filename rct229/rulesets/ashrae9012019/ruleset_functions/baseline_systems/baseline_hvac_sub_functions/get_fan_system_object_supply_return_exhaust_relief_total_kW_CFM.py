@@ -1,6 +1,6 @@
-from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.get_fan_object_electric_power import (
-    get_fan_object_electric_power,
-)
+# from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.get_fan_object_electric_power import (
+#     get_fan_object_electric_power,
+# )
 from rct229.schema.config import ureg
 from rct229.utils.jsonpath_utils import find_all
 
@@ -8,22 +8,22 @@ from rct229.utils.jsonpath_utils import find_all
 def get_fan_system_object_supply_return_exhaust_relief_total_kW_CFM(fan_system):
     all_fan_info = {}
 
-    for fan_type in ["supply_fans", "return_fans", "exhaust_fans", "relief_fans"]:
+    for fan_type in ("supply_fans", "return_fans", "exhaust_fans", "relief_fans"):
         total_fan_power = 0.0 * ureg("W")
         total_fan_cfm = 0.0 * ureg("cfm")
         fan_qty = 0
         design_pressure_rise_tempo = []
 
         for fan in find_all(f"$.{fan_type}[*]", fan_system):
-            fan_elec_power = get_fan_object_electric_power(fan)
-            if fan_elec_power:
-                total_fan_power += fan_elec_power
+            # fan_elec_power = get_fan_object_electric_power(fan)
+            # if fan_elec_power:
+            #     total_fan_power += fan_elec_power
 
             fan_cfm = fan.get("design_airflow")
-            if fan_cfm:
+            if fan_cfm is not None and fan_cfm > 0.0 * ureg(
+                "cfm"
+            ):  # TODO check if this > can be omitted
                 total_fan_cfm += fan_cfm
-
-            if fan_cfm > 0.0 * ureg("cfm"):  # TODO check if this > can be omitted
                 fan_qty += 1
 
             design_pressure_rise_tempo.append(fan.get("design_pressure_rise"))
