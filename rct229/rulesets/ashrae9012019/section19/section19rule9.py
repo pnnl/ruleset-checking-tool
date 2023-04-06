@@ -53,9 +53,9 @@ class Section19Rule9(RuleDefinitionListIndexedBase):
 
         return {
             "baseline_system_types_dict": {
-                k: v
-                for k, v in baseline_system_types_dict.items()
-                if k in APPLICABLE_SYS_TYPES and v
+                system_type: system_list
+                for system_type, system_list in baseline_system_types_dict.items()
+                if system_type in APPLICABLE_SYS_TYPES and system_list
             }
         }
 
@@ -75,10 +75,10 @@ class Section19Rule9(RuleDefinitionListIndexedBase):
             hvac_id_b = hvac_b["id"]
             baseline_system_types_dict = data["baseline_system_types_dict"]
 
-            for key, value in baseline_system_types_dict.items():
-                if hvac_id_b in value:
-                    return True
-            return False
+            return any(
+                hvac_id_b in baseline_system_types_dict[system_type]
+                for system_type in baseline_system_types_dict.keys()
+            )
 
         def get_calc_vals(self, context, data=None):
             hvac_b = context.baseline
