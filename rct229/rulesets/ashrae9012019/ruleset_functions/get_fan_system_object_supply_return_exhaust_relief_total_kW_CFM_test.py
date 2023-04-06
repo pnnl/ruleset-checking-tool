@@ -129,7 +129,7 @@ TEST_RMD = {
 
 
 def test__get_fan_system_object_supply_return_exhaust_relief_total_kW_CFM():
-    assert get_fan_system_object_supply_return_exhaust_relief_total_kW_CFM(
+    assert get_fan_system_object_supply_return_exhaust_relief_total_kw_cfm(
         TEST_RMD["buildings"][0]["building_segments"][0][
             "heating_ventilating_air_conditioning_systems"
         ][0]["fan_system"]
