@@ -1,0 +1,184 @@
+{
+    "rule-5-2-a": {
+        "Section": 5,
+        "Rule": 2,
+        "Test": "a",
+        "test_description": "U-RMR includes two surfaces. Azimuth of each surface in P-RMR is the same as in U-RMR.",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "5-2",
+            "ruleset_reference": "Table G3.1(5) Proposed Building Performance (a) ",
+            "rule_description": "Orientation is the same in user model and proposed model",
+            "applicable_rmr": "Proposed RMR",
+            "rule_assertion": "=",
+            "comparison_value": "User RMR",
+            "primary_rule": "N",
+            "schema_version": "0.0.18"
+        },
+        "rmr_transformations": {
+            "user": {
+                "id": "ASHRAE229",
+                "ruleset_model_instances": [
+                    {
+                        "id": "RMR 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_open_schedule": "Required Schedule 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Zone 1",
+                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
+                                                "surfaces": [
+                                                    {
+                                                        "id": "Surface 1",
+                                                        "azimuth": 20
+                                                    },
+                                                    {
+                                                        "id": "Surface 2",
+                                                        "azimuth": 190
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            "proposed": {
+                "id": "ASHRAE229",
+                "ruleset_model_instances": [
+                    {
+                        "id": "RMR 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_open_schedule": "Required Schedule 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Zone 1",
+                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
+                                                "surfaces": [
+                                                    {
+                                                        "id": "Surface 1",
+                                                        "azimuth": 20
+                                                    },
+                                                    {
+                                                        "id": "Surface 2",
+                                                        "azimuth": 190
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    },
+    "rule-5-2-b": {
+        "Section": 5,
+        "Rule": 2,
+        "Test": "b",
+        "test_description": "U-RMR includes two surfaces. Azimuth of one surface in P-RMR is different U-RMR.",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "5-2",
+            "ruleset_reference": "Table G3.1(5) Proposed Building Performance (a) ",
+            "rule_description": "Orientation is the same in user model and proposed model",
+            "applicable_rmr": "Proposed RMR",
+            "rule_assertion": "=",
+            "comparison_value": "User RMR",
+            "primary_rule": "N",
+            "schema_version": "0.0.18"
+        },
+        "rmr_transformations": {
+            "user": {
+                "id": "ASHRAE229",
+                "ruleset_model_instances": [
+                    {
+                        "id": "RMR 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_open_schedule": "Required Schedule 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Zone 1",
+                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
+                                                "surfaces": [
+                                                    {
+                                                        "id": "Surface 1",
+                                                        "azimuth": 20
+                                                    },
+                                                    {
+                                                        "id": "Surface 2",
+                                                        "azimuth": 190
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            "proposed": {
+                "id": "ASHRAE229",
+                "ruleset_model_instances": [
+                    {
+                        "id": "RMR 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_open_schedule": "Required Schedule 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Zone 1",
+                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
+                                                "surfaces": [
+                                                    {
+                                                        "id": "Surface 1",
+                                                        "azimuth": 30
+                                                    },
+                                                    {
+                                                        "id": "Surface 2",
+                                                        "azimuth": 190
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    }
+}
