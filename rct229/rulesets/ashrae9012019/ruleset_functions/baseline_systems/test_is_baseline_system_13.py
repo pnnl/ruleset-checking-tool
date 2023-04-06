@@ -123,9 +123,99 @@ SYS_13_TEST_RMD = {
     ],
 }
 
+SYS_13_TEST_UNMATCHED_RMD = {
+    "id": "ASHRAE229 1",
+    "ruleset_model_instances": [
+        {
+            "id": "RMD 1",
+            "buildings": [
+                {
+                    "id": "Building 1",
+                    "building_open_schedule": "Required Building Schedule 1",
+                    "building_segments": [
+                        {
+                            "id": "Building Segment 1",
+                            "zones": [
+                                {
+                                    "id": "Thermal Zone 2",
+                                    "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                    "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                    "terminals": [
+                                        {
+                                            "id": "Air Terminal 2",
+                                            "is_supply_ducted": True,
+                                            "type": "CONSTANT_AIR_VOLUME",
+                                            "served_by_heating_ventilating_air_conditioning_system": "System 13s",
+                                        },
+                                    ],
+                                },
+                            ],
+                            "heating_ventilating_air_conditioning_systems": [
+                                {
+                                    "id": "System Type Unmatched",
+                                    "cooling_system": {
+                                        "id": "CHW Coil 1",
+                                        "cooling_system_type": "FLUID_LOOP",
+                                        "chilled_water_loop": "CHW Loop 1",
+                                    },
+                                    "heating_system": {
+                                        "id": "Heating Coil 1",
+                                        "heating_system_type": "ELECTRIC_RESISTANCE",
+                                    },
+                                    "fan_system": {
+                                        "id": "CAV Fan System 1",
+                                        "fan_control": "CONSTANT",
+                                        "supply_fans": [{"id": "Supply Fan 1"}],
+                                        "return_fans": [{"id": "Return Fan 1"}],
+                                    },
+                                },
+                            ],
+                        }
+                    ],
+                }
+            ],
+            # "external_fluid_source": [
+            #     {
+            #         "id": "Purchased CW 1",
+            #         "loop": "Purchased CHW Loop 1",
+            #         "type": "CHILLED_WATER",
+            #     }
+            # ],
+            "chillers": [{"id": "Chiller 1", "cooling_loop": "Chiller Loop 1"}],
+            "pumps": [
+                {
+                    "id": "Chiller Pump 1",
+                    "loop_or_piping": "Chiller Loop 1",
+                    "speed_control": "FIXED_SPEED",
+                },
+                {
+                    "id": "Secondary CHW Pump",
+                    "loop_or_piping": "Secondary CHW Loop 1",
+                    "speed_control": "VARIABLE_SPEED",
+                },
+            ],
+            "fluid_loops": [
+                {
+                    "id": "Chiller Loop 1",
+                    "type": "COOLING",
+                    "child_loops": [{"id": "Secondary CHW Loop 1", "type": "COOLING"}],
+                },
+                {"id": "CHW Loop 1", "type": "COOLING"},
+            ],
+        }
+    ],
+}
+
 
 def test__TEST_RMD_baseline_system_13__is_valid():
     schema_validation_result = schema_validate_rmr(SYS_13_TEST_RMD)
+    assert schema_validation_result[
+        "passed"
+    ], f"Schema error: {schema_validation_result['error']}"
+
+
+def test__TEST_RMD_baseline_system_13__is_unmatched_valid():
+    schema_validation_result = schema_validate_rmr(SYS_13_TEST_UNMATCHED_RMD)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"
@@ -180,4 +270,16 @@ def test__is_baseline_system_13A__test_json_true():
             ["Thermal Zone 1"],
         )
         == HVAC_SYS.SYS_13A
+    )
+
+
+def test__is_baseline_system_unmatched__true():
+    assert (
+        is_baseline_system_13(
+            SYS_13_TEST_UNMATCHED_RMD["ruleset_model_instances"][0],
+            "System Type Unmatched",
+            ["Air Terminal 2"],
+            ["Thermal Zone 2"],
+        )
+        == HVAC_SYS.UNMATCHED
     )
