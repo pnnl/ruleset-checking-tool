@@ -281,6 +281,7 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   * [19-33](section19/Rule19-33.md): For Systems 6 and 8, only the terminal-unit fan and reheat coil shall be energized to meet heating set point during unoccupied hours in the baseline design.
   * [19-34](section19/Rule19-34.md): HVAC fans in the proposed design model shall remain on during unoccupied hours in systems primarily serving computer rooms.
   * [19-35](section19/Rule19-35.md): HVAC fans in the baseline design model shall remain on during unoccupied hours in systems primarily serving computer rooms in the B_RMR.
+  * [19-36](section19/Rule19-36.md): Where no heating and/or cooling system is to be installed, and a heating or cooling system is being simulated only to meet the requirements described in Section G3.1-10 HVAC Systems proposed column c and d, heating and/or cooling system fans shall simulated to be cycled ON and OFF to meet heating and cooling loads during occupied hours in the proposed design.
 
 ## Section 21 - Central Heating Hot Water Systems
   * [21-1](section21/Rule21-1.md): For systems using purchased hot water or steam, the heating source shall be modeled as purchased hot water or steam in both the proposed design and baseline building design. If any system in the proposed design uses purchased hot water or steam, all baseline systems with hot water coils shall use the same type of purchased hot water or steam.
