@@ -327,6 +327,7 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   * [22-33](section22/Rule22-33.md): Baseline chilled water system that does not use purchased chilled water must only have no more than one CHW plant.
   * [22-34](section22/Rule22-34.md): For baseline cooling chilled water plant that is served by chiller(s), the capacity shall be based on coincident loads.
   * [22-36](section22/Rule22-36.md): Baseline chilled water system that does not use purchased chilled water shall be modeled with constant flow primary loop and variable flow secondary loop.
+  * [22-37](section22/Rule22-37.md): Baseline systems served by purchased chilled water loop shall be modeled with a distribution pump with a variable speed drive.
   * [22-38](section22/Rule22-38.md): Baseline systems served by purchased chilled water loop shall have a minimum flow setpoint of 25%.
   * [22-39](section22/Rule22-39.md): Baseline systems served by purchased chilled water loop shall be modeled with a distribution pump whose pump power is 16W/gpm.
   * [22-40](section22/Rule22-40.md): For systems using purchased chilled water, the cooling source shall be modeled as purchased chilled water in both the proposed design and baseline building design. If any system in the proposed design uses purchased chilled water, all baseline systems with chilled water coils shall use purchased chilled water. On-site chillers and direct expansion equipment shall not be modeled in the baseline building design.
