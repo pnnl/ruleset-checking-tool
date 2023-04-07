@@ -11,7 +11,7 @@ ASHRAE Standard 229P is a proposed standard entitled, "Protocols for Evaluating 
 ## Introduction
 The Ruleset Checking Tool (RCT) is a Python package providing a command line tool for evaluating whether baseline and proposed Building Energy Models (BEM) meet the requirements of ANSI/ASHRAE/IES Standard 90.1-2019 Appendix G.  The tool accepts Ruleset Model Report (RMR) files representing the User, Baseline, and Proposed models as inputs, and generates an output report describing the RMR evalaution.
 
-**This is an early alpha version and is highly unstable!** 
+**This is an early alpha version and is highly unstable!**
 
 **This package will change significantly during the next several versions.**
 
@@ -54,13 +54,15 @@ Install `pipenv` using `pip`
 Now tests can be run by first installing dependencies and then running pytest.
 1. `pipenv install --dev`
 2. `pipenv run pytest`
+    - To see a coverage report, use `pipenv run pytest --cov`
+    - To have pytest watch for file changes, use `pipenv run ptw`
 
 You can also package with pipenv to test the CLI tool.
 1. `pipenv install '-e .'`
-2. `pipenv run rct229`
+2. `pipenv run rct229 -evaluate`
 
-Run with example RMRs
-1. `pipenv run rct229 evaluate examples\user_rmr.json examples\baseline_rmr.json examples\proposed_rmr.json`
+Run with example ASHRAE 90.1 2019 RMDs.
+1. `pipenv run rct229 evaluate -rs ashrae9012019 examples\user_rmr.json examples\baseline_rmr.json examples\proposed_rmr.json`
 
 
 ### Developer Notes
@@ -83,11 +85,18 @@ INIITIALS refers to the initials of the owner of the branch or PR.
 Before committing changes you should run the following commands from the `ruleset-checking-tool` directory.
 1. `pipenv run isort .` to sort imports according to PEP8 https://www.python.org/dev/peps/pep-0008/
 2. `pipenv run black .` to otherwise format code according to PEP8
-3. `pipenv run pytest` to run all unit tests
+3. `pipenv run pytest --cov` to run all unit tests for functions.
+4. `pipenv run rct229 test` to run rule definition tests.
+   1. use `-rs ashrae9012019` to run all 90.1 2019 rule definition tests.
 
 #### Mocking functions for pytests:
 - For an explanation of how to specify `<module>` in `patch("<module>.<imported_thing>")` see: https://medium.com/@durgaswaroop/writing-better-tests-in-python-with-pytest-mock-part-2-92b828e1453c
 
+#### Profiling:
+- To profile a file: `pipenv run pyinstrument --renderer=html path_to_file`
+- To profile the RCT command line: `pipenv run pyinstrument --renderer=html rct229/cli.py  evaluate examples/proposed_model.rmd examples/baseline_model.rmd examples/proposed_model.rmd`
+- Note: Aborting the run with Ctrl C will cause the profiler to output the profile up to the abort.
+- For detailed info on pyinstrument: https://pyinstrument.readthedocs.io/en/latest/home.html
 
 ## Disclaimer Notice      
 This material was prepared as an account of work sponsored by an agency of the United States Government.  Neither the United States Government nor the United States Department of Energy, nor Battelle, nor any of their employees, nor any jurisdiction or organization that has cooperated in the development of these materials, makes any warranty, express or implied, or assumes any legal liability or responsibility for the accuracy, completeness, or usefulness or any information, apparatus, product, software, or process disclosed, or represents that its use would not infringe privately owned rights.
