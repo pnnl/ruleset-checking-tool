@@ -272,6 +272,7 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   * [19-24](section19/Rule19-24.md): Baseline systems with >= 5,000 CFM supply air and >= 70 %OA shall have energy recovery modeled in the baseline design model (this RDS does not check the modeled value for the enthalpy recovery ratio).
   * [19-25](section19/Rule19-25.md): Baseline systems modeled with exhaust air energy recovery shall allow bypass or control heat recovery system to permit air economizer operation.
   * [19-27](section19/Rule19-27.md): Schedules for HVAC fans that provide outdoor air for ventilation shall run continuously whenever spaces are occupied in the proposed design.
+  * [19-28](section19/Rule19-28.md): Schedules for HVAC fans that provide outdoor air for ventilation shall run continuously whenever spaces are occupied in the baseline design.
 
 ## Section 21 - Central Heating Hot Water Systems
   * [21-1](section21/Rule21-1.md): For systems using purchased hot water or steam, the heating source shall be modeled as purchased hot water or steam in both the proposed design and baseline building design. If any system in the proposed design uses purchased hot water or steam, all baseline systems with hot water coils shall use the same type of purchased hot water or steam.
