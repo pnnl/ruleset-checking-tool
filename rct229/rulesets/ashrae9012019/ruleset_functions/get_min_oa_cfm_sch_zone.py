@@ -16,10 +16,9 @@ def get_min_oa_cfm_sch_zone(rmi, zone_id, is_leap_year: bool = False):
 
     Returns
     -------
-    list: An aggregated OA CFM hourly schedule for the zone (for each hour of the year, for each terminal unit, Terminal.minimum_outdoor_airflow is multiplied by Terminal.minimum_outdoor_airflow_multiplier_schedule, this product is summed across the terminal units for each hour of the year) .
+    list: An aggregated OA CFM hourly schedule for the zone (for each hour of the year, for each terminal unit, Terminal.minimum_outdoor_airflow is multiplied by Terminal.minimum_outdoor_airflow_multiplier_schedule, this product is summed across the terminal units for each hour of the year).
+          None if the zone has no terminal or every terminal in the zone do not use minimum_outdoor_airflow_multiplier_schedule.
     """
-
-    min_OA_CFM_schedule_for_zone = None  # Returns None if the zone has no terminal or every terminal in the zone do not use minimum_outdoor_airflow_multiplier_schedule
 
     if is_leap_year:
         min_OA_CFM_schedule_for_zone = [0] * 8784
