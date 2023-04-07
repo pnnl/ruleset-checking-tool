@@ -28,8 +28,7 @@ schedule_df = pd.read_excel(spreadsheet_path, sheet_name=schedule_set_name)
 schedule_dict = {}
 
 # Iterate column by column through values_df
-for (schedule_name, column_data) in schedule_df.iteritems():
-
+for schedule_name, column_data in schedule_df.iteritems():
     # Skip Hour column, not relevant
     if schedule_name == "Hour":
         continue
@@ -41,7 +40,6 @@ for (schedule_name, column_data) in schedule_df.iteritems():
 
 # Cycle through each schedule type and stitch together weekdays, Saturday, and Sunday schedules
 for schedule_type in schedule_types:
-
     year_schedule_name = f"{schedule_set_name}_{schedule_type}"
 
     # Initialize the three week day types

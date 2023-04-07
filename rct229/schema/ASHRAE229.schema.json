@@ -2661,7 +2661,7 @@
                 "design_pressure_rise": {
                     "description": "Pressure rise through fan at design flow conditions",
                     "type": "number",
-                    "units": "m",
+                    "units": "Pa",
                     "notes": "Only used when specification_method is set to Detailed"
                 },
                 "nameplate_power": {
