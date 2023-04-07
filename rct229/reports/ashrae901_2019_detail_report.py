@@ -39,7 +39,7 @@ class ASHRAE9012019DetailReport(RCTReport):
         return rule_report
 
     def add_rule_to_ruleset_report(self, ruleset_report, rule_report, rule_outcome):
-        rule_report["rule_evaluation_outcome"] = rule_outcome
+        # rule_report["rule_evaluation_outcome"] = rule_outcome
         ruleset_report["rules"][rule_report["rule_id"]] = rule_report
 
     def save_ruleset_report(self, ruleset_report, report_dir):
