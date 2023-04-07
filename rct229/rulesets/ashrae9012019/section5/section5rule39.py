@@ -1,7 +1,9 @@
-from rct229.rulesets.ashrae9012019.data.schema_enums import schema_enums
 from rct229.rule_engine.partial_rule_definition import PartialRuleDefinition
-from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
+from rct229.rule_engine.rule_list_indexed_base import \
+    RuleDefinitionListIndexedBase
+from rct229.rule_engine.user_baseline_proposed_vals import \
+    UserBaselineProposedVals
+from rct229.rulesets.ashrae9012019.data.schema_enums import schema_enums
 
 SUBSURFACE_DYNAMIC_GLAZING = schema_enums["SubsurfaceDynamicGlazingOptions"]
 
