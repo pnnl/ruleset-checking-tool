@@ -4,7 +4,6 @@ from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedB
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 
 SUBSURFACE_DYNAMIC_GLAZING = schema_enums["SubsurfaceDynamicGlazingOptions"]
-UNDETERMINED_MSG = "SUBSURFACE INCLUDES MANUALLY CONTROLLED DYNAMIC GLAZING IN THE PROPOSED DESIGN. VERIFY THAT SHGC AND VT WERE MODELED AS THE AVERAGE OF THE MINIMUM AND MAXIMUM SHGC AND VT."
 
 
 class Section5Rule39(RuleDefinitionListIndexedBase):
@@ -28,7 +27,6 @@ class Section5Rule39(RuleDefinitionListIndexedBase):
             super(Section5Rule39.SubsurfaceRule, self).__init__(
                 rmrs_used=UserBaselineProposedVals(False, False, True),
                 required_fields={"$": ["dynamic_glazing_type"]},
-                manual_check_required_msg=UNDETERMINED_MSG,
             )
 
         def get_calc_vals(self, context, data=None):
@@ -37,6 +35,10 @@ class Section5Rule39(RuleDefinitionListIndexedBase):
             return {
                 "subsurface_dynamic_glazing_type_p": subsurface_dynamic_glazing_type_p
             }
+
+        def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
+            subsurface_p = context.proposed
+            return f'SUBSURFACE {subsurface_p["id"]} INCLUDES MANUALLY CONTROLLED DYNAMIC GLAZING IN THE PROPOSED DESIGN. VERIFY THAT SHGC AND VT WERE MODELED AS THE AVERAGE OF THE MINIMUM AND MAXIMUM SHGC AND VT.'
 
         def applicability_check(self, context, calc_vals, data):
             subsurface_dynamic_glazing_type_p = calc_vals[
