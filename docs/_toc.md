@@ -326,6 +326,7 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   * [22-32](section22/Rule22-32.md): The baseline chiller efficiencies shall be modeled at the minimum efficiency levels for part load, in accordance with Tables G3.5.3.
   * [22-33](section22/Rule22-33.md): Baseline chilled water system that does not use purchased chilled water must only have no more than one CHW plant.
   * [22-34](section22/Rule22-34.md): For baseline cooling chilled water plant that is served by chiller(s), the capacity shall be based on coincident loads.
+  * [22-35](section22/Rule22-35.md): Baseline systems served by purchased chilled water shall not be modeled with chilled water reset.
   * [22-36](section22/Rule22-36.md): Baseline chilled water system that does not use purchased chilled water shall be modeled with constant flow primary loop and variable flow secondary loop.
   * [22-37](section22/Rule22-37.md): Baseline systems served by purchased chilled water loop shall be modeled with a distribution pump with a variable speed drive.
   * [22-38](section22/Rule22-38.md): Baseline systems served by purchased chilled water loop shall have a minimum flow setpoint of 25%.
