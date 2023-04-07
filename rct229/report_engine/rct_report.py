@@ -121,10 +121,10 @@ class RCTReport:
 
         """
         outcome_label = RCTOutcomeLabel.NOT_APPLICABLE
-        if outcome_dict[RCTOutcomeLabel.UNDETERMINED] > 0:
-            outcome_label = RCTOutcomeLabel.UNDETERMINED
-        elif outcome_dict[RCTOutcomeLabel.FAILED] > 0:
+        if outcome_dict[RCTOutcomeLabel.FAILED] > 0:
             outcome_label = RCTOutcomeLabel.FAILED
+        elif outcome_dict[RCTOutcomeLabel.UNDETERMINED] > 0:
+            outcome_label = RCTOutcomeLabel.UNDETERMINED
         elif outcome_dict[RCTOutcomeLabel.PASS] > 0:
             outcome_label = RCTOutcomeLabel.PASS
         return outcome_label
