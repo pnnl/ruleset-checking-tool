@@ -10,7 +10,7 @@ class Section21Rule1(PartialRuleDefinition):
 
     def __init__(self):
         super(Section21Rule1, self).__init__(
-            rmrs_used=UserBaselineProposedVals(False, True, False),
+            rmrs_used=UserBaselineProposedVals(False, False, True),
             id="21-1",
             description="For systems using purchased hot water or steam, the heating source shall be "
                         "modeled as purchased hot water or steam in both the proposed design and "
@@ -30,4 +30,4 @@ class Section21Rule1(PartialRuleDefinition):
     def applicability_check(self, context, calc_vals, data):
         rmi_p = context.proposed
         purchased_chw_hhw_status_dict_p = check_purchased_chw_hhw_status_dict(rmi_p)
-        return purchased_chw_hhw_status_dict_p["purchased_cooling"]
+        return purchased_chw_hhw_status_dict_p["purchased_heating"]
