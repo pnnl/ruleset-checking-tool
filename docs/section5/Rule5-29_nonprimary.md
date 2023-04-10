@@ -31,7 +31,7 @@
 
           **Rule Assertion:**
 
-          - Case 1: For each subsurface, if subsurface is flush with the exterior wall, and no shading projections are modeled, outcome is PASS: ```if ( NOT (subsurface_b.has_shading_overhang OR subsurface_b.depth_of_overhang != 0)) AND ( NOT subsurface_b.has_shading_sidefins ): outcome = PASS```
+          - Case 1: For each subsurface, if subsurface is flush with the exterior wall, and no shading projections are modeled or projection depth is 0, outcome is PASS: ```if ( NOT (subsurface_b.has_shading_overhang OR subsurface_b.depth_of_overhang != 0)) AND ( NOT subsurface_b.has_shading_sidefins ): outcome = PASS```
 
           - Case 2: Else, outcome is FAIL: ```else: outcome = FAIL and raise_warning "BASELINE FENESTRATION WAS MODELED WITH SHADING PROJECTIONS AND/OR OVERHANGS, WHICH IS INCORRECT."```
 
