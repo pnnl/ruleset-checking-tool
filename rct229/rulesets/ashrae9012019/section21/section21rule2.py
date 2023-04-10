@@ -10,7 +10,7 @@ class Section21Rule2(PartialRuleDefinition):
 
     def __init__(self):
         super(Section21Rule2, self).__init__(
-            rmrs_used=UserBaselineProposedVals(False, True, False),
+            rmrs_used=UserBaselineProposedVals(False, False, True),
             id="21-2",
             description="For purchased HW/steam in the proposed model, the baseline shall have the same number of "
                         "pumps as proposed.",
@@ -27,4 +27,4 @@ class Section21Rule2(PartialRuleDefinition):
     def applicability_check(self, context, calc_vals, data):
         rmi_p = context.proposed
         purchased_chw_hhw_status_dict_p = check_purchased_chw_hhw_status_dict(rmi_p)
-        return purchased_chw_hhw_status_dict_p["purchased_cooling"]
+        return purchased_chw_hhw_status_dict_p["purchased_heating"]
