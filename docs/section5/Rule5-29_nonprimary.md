@@ -2,7 +2,7 @@
 **Schema Version** 0.0.23  
 **Primary Rule:** True
 **Rule ID:** 5-29  
-**Rule Description:** Baseline fenestration shall be assumed to be flush with the exterior wall, and no shading projections shall be modeled.
+**Rule Description:** Baseline vertical fenestration shall be assumed to be flush with the exterior wall, and no shading projections shall be modeled.
 **Appendix G Section:** Section G3.1-5(d) Building Modeling Requirements for the Baseline building  
 **Appendix G Section Reference:**  None  
 
@@ -31,7 +31,7 @@
 
           **Rule Assertion:**
 
-          - Case 1: For each subsurface, if subsurface is flush with the exterior wall, and no shading projections are modeled, outcome is PASS: ```if ( NOT subsurface_b.has_shading_overhang ) AND ( NOT subsurface_b.has_shading_sidefins ): outcome = PASS```
+          - Case 1: For each subsurface, if subsurface is flush with the exterior wall, and no shading projections are modeled, outcome is PASS: ```if ( NOT (subsurface_b.has_shading_overhang OR subsurface_b.depth_of_overhang != 0)) AND ( NOT subsurface_b.has_shading_sidefins ): outcome = PASS```
 
           - Case 2: Else, outcome is FAIL: ```else: outcome = FAIL and raise_warning "BASELINE FENESTRATION WAS MODELED WITH SHADING PROJECTIONS AND/OR OVERHANGS, WHICH IS INCORRECT."```
 
