@@ -1,0 +1,30 @@
+from rct229.rule_engine.partial_rule_definition import PartialRuleDefinition
+from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
+from rct229.rulesets.ashrae9012019.ruleset_functions.check_purchased_chw_hhw_status_dict import (
+    check_purchased_chw_hhw_status_dict,
+)
+
+
+class Section21Rule14(PartialRuleDefinition):
+    """Rule 1 of ASHRAE 90.1-2019 Appendix G Section 21 (HVAC - Water Side)"""
+
+    def __init__(self):
+        super(Section21Rule14, self).__init__(
+            rmrs_used=UserBaselineProposedVals(False, True, False),
+            id="21-14",
+            description="When the baseline building is modeled with a hot water plant, served by purchased HW "
+                        "system, hot water supply temperature reset is not modeled.",
+            ruleset_section_title="HVAC - Water Side",
+            standard_section="Section G3.1.1.3 Baseline HVAC System Requirements for Systems Utilizing Purchased "
+                             "Chilled Water and/or Purchased Heat",
+            is_primary_rule=False,
+            rmr_context="ruleset_model_instances/0",
+            manual_check_required_msg="Manual Check Required - Baseline is modeled with purchased hot water or steam.  Make "
+                                      "sure that a hot water supply reset temperature is not modeled.",
+            not_applicable_msg="Rule 21-14 Not Applicable - the baseline is not modeled with Purchased Hot Water or Steam"
+        )
+
+    def applicability_check(self, context, calc_vals, data):
+        rmi_p = context.proposed
+        purchased_chw_hhw_status_dict_p = check_purchased_chw_hhw_status_dict(rmi_p)
+        return purchased_chw_hhw_status_dict_p["purchased_heating"]
