@@ -17,6 +17,12 @@ TEST_RMD_FIXED_TYPE = {
                             "id": "Thermal Zone 1",
                             "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
                             "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                            "spaces": [
+                                {
+                                    "id": "Space 1",
+                                    "floor_area": 100,
+                                }
+                            ],
                             "terminals": [
                                 {
                                     "id": "Air Terminal",
@@ -65,8 +71,10 @@ TEST_RMD_ENTHALPY_TYPE = {
                     "zones": [
                         {
                             "id": "Thermal Zone 1",
+                            "floor_area": 200,
                             "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
                             "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                            "spaces": [{"id": "Space 1", "floor_area": 100}],
                             "terminals": [
                                 {
                                     "id": "Air Terminal",
@@ -117,6 +125,7 @@ TEST_RMD_NO_ECONOMIZER_TYPE = {
                             "id": "Thermal Zone 1",
                             "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
                             "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                            "spaces": [{"id": "Space 1", "floor_area": 100}],
                             "terminals": [
                                 {
                                     "id": "Air Terminal",

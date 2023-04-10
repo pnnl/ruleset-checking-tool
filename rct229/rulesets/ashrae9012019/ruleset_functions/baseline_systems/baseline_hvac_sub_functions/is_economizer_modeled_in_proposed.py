@@ -28,6 +28,8 @@ def is_economizer_modeled_in_proposed(rmi_b, rmi_p):
 
     """
 
+    hvac_zone_list_w_area_dict = get_hvac_zone_list_w_area_dict(rmi_b["buildings"][0])
+
     is_economizer_modeled_in_proposed = False
     for hvac_b in find_all(
         "$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*]",
