@@ -29,20 +29,23 @@ def is_economizer_modeled_in_proposed(rmi_b, rmi_p):
     """
 
     hvac_zone_list_w_area_dict = get_hvac_zone_list_w_area_dict(rmi_b["buildings"][0])
-
     is_economizer_modeled_in_proposed = False
-    for hvac_b in find_all(
-        "$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*]",
+    for hvac_id_b in find_all(
+        "$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*].id",
         rmi_b,
     ):
-        hvac_id_b = hvac_b["id"]
-        hvac_p = find_exactly_one_hvac_system(rmi_p, hvac_id_b)
-        air_economizer_type_p = find_one("$.fan_system.air_economizer.type", hvac_p)
-        if (
-            air_economizer_type_p is not None
-            and air_economizer_type_p != Air_Economizer.FIXED_FRACTION
-        ):
-            is_economizer_modeled_in_proposed = True
-            return is_economizer_modeled_in_proposed
+        for zone_id_b in hvac_zone_list_w_area_dict[hvac_id_b]["zone_list"]:
+            hvac_list_p = get_list_hvac_systems_associated_with_zone(rmi_p, zone_id_b)
+            for hvac_id_p in hvac_list_p:
+                hvac_p = find_exactly_one_hvac_system(rmi_p, hvac_id_p)
+                air_economizer_type_p = find_one(
+                    "$.fan_system.air_economizer.type", hvac_p
+                )
+                if (
+                    air_economizer_type_p is not None
+                    and air_economizer_type_p != Air_Economizer.FIXED_FRACTION
+                ):
+                    is_economizer_modeled_in_proposed = True
+                    return is_economizer_modeled_in_proposed
 
-    return is_economizer_modeled_in_proposed
+        return is_economizer_modeled_in_proposed
