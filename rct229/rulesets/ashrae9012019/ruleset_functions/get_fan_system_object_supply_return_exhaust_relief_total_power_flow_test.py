@@ -1,6 +1,6 @@
-from rct229.rulesets.ashrae9012019.ruleset_functions.get_fan_system_object_supply_return_exhaust_relief_total_kW_CFM import (
+from rct229.rulesets.ashrae9012019.ruleset_functions.get_fan_system_object_supply_return_exhaust_relief_total_power_flow import (
     FanPressureDropCompareCategory,
-    get_fan_system_object_supply_return_exhaust_relief_total_kw_cfm,
+    get_fan_system_object_supply_return_exhaust_relief_total_power_flow,
 )
 from rct229.schema.config import ureg
 from rct229.schema.schema_utils import quantify_rmr
@@ -149,118 +149,86 @@ def test__TEST_RMD__is_valid():
 
 
 def test__get_fan_system_object_supply_return_exhaust_relief_total_kW_CFM():
+    all_fan_info = get_fan_system_object_supply_return_exhaust_relief_total_power_flow(
+        TEST_FAN_SYSTEM
+    )
     # check supply fans
     assert std_equal(
-        get_fan_system_object_supply_return_exhaust_relief_total_kw_cfm(
-            TEST_FAN_SYSTEM
-        )["supply_fans_power"],
+        all_fan_info["supply_fans_power"],
         135 * ureg("W"),
     )
 
     assert std_equal(
-        get_fan_system_object_supply_return_exhaust_relief_total_kw_cfm(
-            TEST_FAN_SYSTEM
-        )["supply_fans_airflow"],
+        all_fan_info["supply_fans_airflow"],
         1200 * ureg("L/s"),
     )
 
     assert std_equal(
-        get_fan_system_object_supply_return_exhaust_relief_total_kw_cfm(
-            TEST_FAN_SYSTEM
-        )["supply_fans_qty"],
+        all_fan_info["supply_fans_qty"],
         3,
     )
 
     assert (
-        get_fan_system_object_supply_return_exhaust_relief_total_kw_cfm(
-            TEST_FAN_SYSTEM
-        )["supply_fans_pressure"]
-        == FanPressureDropCompareCategory.UNDEFINED
+        all_fan_info["supply_fans_pressure"] == FanPressureDropCompareCategory.UNDEFINED
     )
 
     # return fans
     assert std_equal(
-        get_fan_system_object_supply_return_exhaust_relief_total_kw_cfm(
-            TEST_FAN_SYSTEM
-        )["return_fans_power"],
+        all_fan_info["return_fans_power"],
         35 * ureg("W"),
     )
 
     assert std_equal(
-        get_fan_system_object_supply_return_exhaust_relief_total_kw_cfm(
-            TEST_FAN_SYSTEM
-        )["return_fans_airflow"],
+        all_fan_info["return_fans_airflow"],
         760 * ureg("L/s"),
     )
 
     assert std_equal(
-        get_fan_system_object_supply_return_exhaust_relief_total_kw_cfm(
-            TEST_FAN_SYSTEM
-        )["return_fans_qty"],
+        all_fan_info["return_fans_qty"],
         2,
     )
 
     assert (
-        get_fan_system_object_supply_return_exhaust_relief_total_kw_cfm(
-            TEST_FAN_SYSTEM
-        )["return_fans_pressure"]
-        == FanPressureDropCompareCategory.IDENTICAL
+        all_fan_info["return_fans_pressure"] == FanPressureDropCompareCategory.IDENTICAL
     )
 
     # relief fans
     assert std_equal(
-        get_fan_system_object_supply_return_exhaust_relief_total_kw_cfm(
-            TEST_FAN_SYSTEM
-        )["relief_fans_power"],
+        all_fan_info["relief_fans_power"],
         50 * ureg("W"),
     )
 
     assert std_equal(
-        get_fan_system_object_supply_return_exhaust_relief_total_kw_cfm(
-            TEST_FAN_SYSTEM
-        )["relief_fans_airflow"],
+        all_fan_info["relief_fans_airflow"],
         300 * ureg("L/s"),
     )
 
     assert std_equal(
-        get_fan_system_object_supply_return_exhaust_relief_total_kw_cfm(
-            TEST_FAN_SYSTEM
-        )["relief_fans_qty"],
+        all_fan_info["relief_fans_qty"],
         2,
     )
 
     assert (
-        get_fan_system_object_supply_return_exhaust_relief_total_kw_cfm(
-            TEST_FAN_SYSTEM
-        )["relief_fans_pressure"]
-        == FanPressureDropCompareCategory.DIFFERENT
+        all_fan_info["relief_fans_pressure"] == FanPressureDropCompareCategory.DIFFERENT
     )
 
     # exhaust fans
     assert std_equal(
-        get_fan_system_object_supply_return_exhaust_relief_total_kw_cfm(
-            TEST_FAN_SYSTEM
-        )["exhaust_fans_power"],
+        all_fan_info["exhaust_fans_power"],
         60 * ureg("W"),
     )
 
     assert std_equal(
-        get_fan_system_object_supply_return_exhaust_relief_total_kw_cfm(
-            TEST_FAN_SYSTEM
-        )["exhaust_fans_airflow"],
+        all_fan_info["exhaust_fans_airflow"],
         150 * ureg("L/s"),
     )
 
     assert std_equal(
-        get_fan_system_object_supply_return_exhaust_relief_total_kw_cfm(
-            TEST_FAN_SYSTEM
-        )["exhaust_fans_qty"],
+        all_fan_info["exhaust_fans_qty"],
         2,
     )
 
     assert (
-        get_fan_system_object_supply_return_exhaust_relief_total_kw_cfm(
-            TEST_FAN_SYSTEM
-        )["exhaust_fans_pressure"]
+        all_fan_info["exhaust_fans_pressure"]
         == FanPressureDropCompareCategory.UNDEFINED
     )
