@@ -12,6 +12,7 @@
 
 1. get_hvac_zone_list_w_area()  
 2. zones_with_computer_room_dict_x()  
+3. is_space_a_computer_room()  
 
 ## Logic:   
 - Create RMI object from RMI function input (RMI = function input): `X_RMI = RMI` 
@@ -31,7 +32,7 @@
                 - Reset space_is_a_computer_room to false: `space_is_a_computer_room = false`  
                 - Reset total_Wattage_space: `total_Wattage_space = 0`  
                 - Get the area (ft^2) of the space: `area = space.floor_area`  
-                - Check if space is of type computer room, if yes then set the space is a computer room boolean variable to true (if lighting space type is undefined it will always be false - maybe we should check is misc is above 20 W/sf if this is undefined?): `if space_x.lighting_space_type in ["COMPUTER_ROOM"]: space_is_a_computer_room = true`  
+                - Check if space is of type computer room, if yes then set the space is a computer room boolean variable to true: `if is_space_a_computer_room(RMI,space_x) == true: space_is_a_computer_room = true`  
                 
                 NOTE: Design day schedules used, these should have the same value for all hours (except for dwelling units which are irrelevant here) so no need to find the coincident peak across the schedules. No need to even find the peak but did just in case there is an odd value in the schedule.
 
@@ -69,10 +70,10 @@
                 - Add to the running Wattage total for the space: `total_Wattage_space = total_Wattage_space + temp_total_power`  
             
             - Add to the total Wattage across all spaces serving zone: `total_Wattage_zone = total_Wattage_zone + total_Wattage_space`    
-            - Check if the space serves a computer room: `if space_is_a_computer_room == true: total_Wattage_including_computer_rooms_only_zone = total_Wattage_including_computer_rooms_only_zone + total_Wattage_space`                     
+            - Check if the space serves a computer room: `if space_is_a_computer_room == true: total_zone_Wattage_of_computer_rooms_only = total_zone_Wattage_of_computer_rooms_only + total_Wattage_space`                     
         
         - Add to the total Wattage across all zones: `hvac_system_serves_computer_room_space = total_Wattage_across_hvac_sys + total_Wattage_zone`  
-        - Add to the total Wattage across all zones including only computer rooms spaces: `total_Wattage_across_hvac_sys_for_computer_room = total_Wattage_across_hvac_sys_for_computer_room + total_Wattage_including_computer_rooms_only_zone`  
+        - Add to the total Wattage across all zones including only computer rooms spaces: `total_Wattage_across_hvac_sys_for_computer_room = total_Wattage_across_hvac_sys_for_computer_room + total_zone_Wattage_of_computer_rooms_only`  
     - Check if the hvac system is associated with a computer room and if so that the computer room Wattage is more than 50% of the total Wattage: `if hvac_system_serves_computer_room_space == true and total_Wattage_across_hvac_sys_for_computer_room/hvac_system_serves_computer_room_space > 50%:         hvac_systems_primarily_serving_comp_rooms_list_x.append(hvac_x)`          
 
 **Returns** `return hvac_systems_primarily_serving_comp_rooms_list_x`
