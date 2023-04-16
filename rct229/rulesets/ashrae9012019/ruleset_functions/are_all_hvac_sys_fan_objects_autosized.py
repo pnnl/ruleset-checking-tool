@@ -32,10 +32,10 @@ def are_all_hvac_sys_fan_objs_autosized(rmi, hvac_id):
         all(
             [
                 getattr_(supply_fan, "supply_fan", "is_airflow_autosized")
-                for supply_fan in find_all("$.supply_fans[*]", hvac["fan_system"])
+                for supply_fan in find_all("$.fan_system.supply_fans[*]", hvac)
             ]
         )
-        if hvac.get("fan_system")
+        if find_all("$.fan_system.supply_fans[*]", hvac)
         else all(
             [
                 getattr_(
