@@ -13,15 +13,15 @@ class Section21Rule2(PartialRuleDefinition):
             rmrs_used=UserBaselineProposedVals(False, False, True),
             id="21-2",
             description="For purchased HW/steam in the proposed model, the baseline shall have the same number of "
-                        "pumps as proposed.",
+            "pumps as proposed.",
             ruleset_section_title="HVAC - Water Side",
             standard_section="Section G3.1.1.3 Baseline HVAC System Requirements for Systems Utilizing Purchased "
-                             "Chilled Water and/or Purchased Heat",
+            "Chilled Water and/or Purchased Heat",
             is_primary_rule=False,
             rmr_context="ruleset_model_instances/0",
             manual_check_required_msg="Manual Check Required - Proposed is modeled with purchased hot water or steam.  Make "
-                                      "sure the baseline model uses the same number of pumps for the heating loop.",
-            not_applicable_msg="Rule 21-1 Not Applicable - the proposed is not modeled with Purchased Hot Water or Steam"
+            "sure the baseline model uses the same number of pumps for the heating loop.",
+            not_applicable_msg="Rule 21-1 Not Applicable - the proposed is not modeled with Purchased Hot Water or Steam",
         )
 
     def applicability_check(self, context, calc_vals, data):
