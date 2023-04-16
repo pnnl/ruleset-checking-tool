@@ -13,14 +13,14 @@ class Section22Rule39(PartialRuleDefinition):
             rmrs_used=UserBaselineProposedVals(False, True, False),
             id="22-39",
             description="Baseline systems served by purchased chilled water loop shall be modeled "
-                        "with a distribution pump whose pump power is 16W/gpm",
+            "with a distribution pump whose pump power is 16W/gpm",
             ruleset_section_title="HVAC - Chiller",
             standard_section="Section G3.1.3.10 Chilled-Water Pumps (Systems 7, 8, 11, 12, and 13)",
             is_primary_rule=False,
             rmr_context="ruleset_model_instances/0",
-            manual_check_required_msg="Manual Check Required - Baseline is modeled with purchased chilled water.  Make sure " 
-               "baseline systems served by purchased chilled water are modeled with a distribution pump whose pump ower is 16W/gpm.",
-            not_applicable_msg="Rule 22-39 Not Applicable - the baseline is not modeled with Purchased Chilled Water"
+            manual_check_required_msg="Manual Check Required - Baseline is modeled with purchased chilled water.  Make sure "
+            "baseline systems served by purchased chilled water are modeled with a distribution pump whose pump ower is 16W/gpm.",
+            not_applicable_msg="Rule 22-39 Not Applicable - the baseline is not modeled with Purchased Chilled Water",
         )
 
     def applicability_check(self, context, calc_vals, data):
