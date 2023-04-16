@@ -6,7 +6,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.check_purchased_chw_hhw_sta
 
 
 class Section21Rule14(PartialRuleDefinition):
-    """Rule 1 of ASHRAE 90.1-2019 Appendix G Section 21 (HVAC - Water Side)"""
+    """Rule 14 of ASHRAE 90.1-2019 Appendix G Section 21 (HVAC - Water Side)"""
 
     def __init__(self):
         super(Section21Rule14, self).__init__(
