@@ -7,7 +7,7 @@
 - **hvac_sys**: The hvac system object for which the largest exhaust source is being determined.
 
 **Returns:**  
-- **get_hvac_sys_and_assoc_zones_largest_exhaust_source**: Returns a list with the sum of the hvac fan system exhaust fan cfm values, the maximum zone level exhaust source across the zones associated with the HVAC system, the number of exhaust fans associated with the hvac fan system, and the maximum cfm of all of the exhaust fans associated with the hvac system fan system [hvac_sys_exhaust_cfm_sum, maximum_zone_exhaust, num_hvac_exhaust_fans, maximum_hvac_exhaust]. This is for evaluating G3.1.2.10 exception 6 which states "Where the largest exhaust source is less than 75% of the design outdoor airflow. This exception shall only be used if exhaust air energy recovery is not used in the proposed design. "  
+- **get_hvac_sys_and_assoc_zones_largest_exhaust_source**: Returns a dict with the sum of the hvac fan system exhaust fan cfm values, the maximum zone level exhaust source across the zones associated with the HVAC system, the number of exhaust fans associated with the hvac fan system, and the maximum cfm of all of the exhaust fans associated with the hvac system fan system {"hvac_sys_exhaust_cfm_sum": 3000, "maximum_zone_exhaust": 500, "num_hvac_exhaust_fans": 2, "maximum_hvac_exhaust": 1000}. This is for evaluating G3.1.2.10 exception 6 which states "Where the largest exhaust source is less than 75% of the design outdoor airflow. This exception shall only be used if exhaust air energy recovery is not used in the proposed design. "  
  
 **Function Call:**   
 1. get_dict_of_zones_and_terminal_units_served_by_hvac_sys()   
@@ -28,13 +28,13 @@
         - Get the fan cfm: `fan_cfm = fan_b.design_airflow`  
         - Total the fan cfm across the multiple fans: `total_fan_cfm = total_fan_cfm + fan_cfm`  
         - Check if the fan cfm is greater than maximum_hvac_exhaust, if it is then set the maximum_hvac_exhaust equal to the fan cfm: `if fan_cfm > maximum_hvac_exhaust: maximum_hvac_exhaust = fan_cfm`  
-- Set hvac_sys_exhaust_cfm_sum equal to the sum of hvac system exhaust fan cfm (this assumes the hvac system exhaust fans are collectively considered one source and sums them as if they were in paraellel): `hvac_sys_exhaust_cfm_sum = total_fan_cfm`  
+- Set hvac_sys_exhaust_cfm_sum equal to the sum of hvac system exhaust fan cfm (this assumes the hvac system exhaust fans are collectively considered one source and sums them as if they were in paraellel): `hvac_fan_sys_exhaust_sum = total_fan_cfm`  
 - Reset the fan cfm variable: `fan_cfm = 0` 
 - Cycle through each zone associated with the HVAC system in the B_RMI: `for zone_b in zone_list:`  
     - Check if there are any exhaust fan objects associated with the zone: `if zone_b_obj.zonal_exhaust_fan != Null:`  
         - Get the fan cfm: `fan_cfm = zone_b_obj.zonal_exhaust_fan.design_airflow`    
         - Check if the cfm is greater than the current value of maximum_zone_exhaust, if it is then set maximum_zone_exhaust equal to the cfm: `if fan_cfm > maximum_zone_exhaust: maximum_zone_exhaust = fan_cfm`  
-- Create list to be returned by function: `get_hvac_sys_and_assoc_zones_largest_exhaust_source  = [hvac_sys_exhaust_cfm_sum, maximum_zone_exhaust,num_hvac_exhaust_fans, maximum_hvac_exhaust]`  
+- Create list to be returned by function: `get_hvac_sys_and_assoc_zones_largest_exhaust_source  = {"hvac_fan_sys_exhaust_sum": hvac_fan_sys_exhaust_sum, "maximum_zone_exhaust": maximum_zone_exhaust, "num_hvac_exhaust_fans": num_hvac_exhaust_fans, "maximum_hvac_exhaust": maximum_hvac_exhaust}`  
 
 **Returns** `return get_hvac_sys_and_assoc_zones_largest_exhaust_source`  
 
