@@ -1,5 +1,6 @@
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_system_util import (
-    find_exactly_one_terminal_unit, find_exactly_one_hvac_system,
+    find_exactly_one_terminal_unit,
+    find_exactly_one_hvac_system,
 )
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_dict_of_zones_and_terminal_units_served_by_hvac_sys import (
     get_dict_of_zones_and_terminal_units_served_by_hvac_sys,
@@ -86,7 +87,11 @@ def get_zone_supply_return_exhaust_relief_terminal_fan_power_dict(rmi):
             )
 
             # find terminals in the zone that matches to the HVAC terminal list, and calculate the terminal fan power
-            zone_hvac_terminal_intersection_list = list(set(hvac_system_terminal_id_list).intersection(set(find_all("$.terminals[*].id", zone))))
+            zone_hvac_terminal_intersection_list = list(
+                set(hvac_system_terminal_id_list).intersection(
+                    set(find_all("$.terminals[*].id", zone))
+                )
+            )
             # Convert terminal id list to terminal data list
             zone_hvac_intersection_terminals = [
                 find_exactly_one_terminal_unit(rmi, zone_terminal_id)
@@ -149,7 +154,8 @@ def get_zone_supply_return_exhaust_relief_terminal_fan_power_dict(rmi):
                     fan_system_powers["return_fans_power"] * zone_to_hvac_air_flow_ratio
                 )
                 zone_total_exhaust_fan_power += (
-                    fan_system_powers["exhaust_fans_power"] * zone_to_hvac_air_flow_ratio
+                    fan_system_powers["exhaust_fans_power"]
+                    * zone_to_hvac_air_flow_ratio
                 )
                 zone_total_relief_fan_power += (
                     fan_system_powers["relief_fans_power"] * zone_to_hvac_air_flow_ratio
