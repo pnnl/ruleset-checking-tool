@@ -56,10 +56,11 @@ class Section19Rule15(RuleDefinitionListIndexedBase):
         baseline_system_types_dict = get_baseline_system_types(rmi_b)
 
         hvac_info_dict_b = {}
-        for hvac_id_b in find_all(
-            "$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*].id",
+        for hvac_b in find_all(
+            "$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*]",
             rmi_b,
         ):
+            hvac_id_b = hvac_b["id"]
             hvac_info_dict_b[hvac_id_b] = {}
             hvac_info_dict_b[hvac_id_b]["all_design_setpoints_105"] = True
             hvac_info_dict_b[hvac_id_b]["proposed_supply_cfm"] = ZERO.FLOW
