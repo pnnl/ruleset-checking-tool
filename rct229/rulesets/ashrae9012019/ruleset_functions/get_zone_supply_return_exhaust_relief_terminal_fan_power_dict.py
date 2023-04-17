@@ -97,7 +97,7 @@ def get_zone_supply_return_exhaust_relief_terminal_fan_power_dict(rmi):
                 find_exactly_one_terminal_unit(rmi, zone_terminal_id)
                 for zone_terminal_id in zone_hvac_terminal_intersection_list
             ]
-            # calculate the total terminal fan power from a union list of zone
+            # calculate the total terminal fan power from an intersection list of zone
             zone_hvac_total_terminal_fan_power = sum(
                 [
                     get_fan_object_electric_power(terminal["fan"])
