@@ -1,12 +1,12 @@
 {
     "rule-19-18-a": {
         "Section": 19,
-        "Rule": 18,
+        "Rule": 17,
         "Test": "a",
         "test_description": "System 1 with `SIMPLE` specification method for supply/return/exhaust/relief fans and each fans have 35 W design electric power with 1400 cfm design supply airflow.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "19-18",
+            "rule_id": "19-17",
             "ruleset_reference": "G3.1.2.9",
             "rule_description": "For baseline system 1 and 2, the total fan electrical power (Pfan) for supply, return, exhaust, and relief shall be = CFMs \u00d7 0.3, where, CFMs = the baseline system maximum design supply fan airflow rate, cfm",
             "applicable_rmr": "Baseline RMR",
@@ -119,12 +119,12 @@
     },
     "rule-19-18-b": {
         "Section": 19,
-        "Rule": 18,
+        "Rule": 17,
         "Test": "b",
         "test_description": "System 1 with `SIMPLE` specification method for supply/return/exhaust/relief fans and each fans have 80 W design electric power with 800 cfm design supply airflow.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "19-18",
+            "rule_id": "19-17",
             "ruleset_reference": "G3.1.2.9",
             "rule_description": "For baseline system 1 and 2, the total fan electrical power (Pfan) for supply, return, exhaust, and relief shall be = CFMs \u00d7 0.3, where, CFMs = the baseline system maximum design supply fan airflow rate, cfm",
             "applicable_rmr": "Baseline RMR",
