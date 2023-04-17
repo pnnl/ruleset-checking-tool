@@ -1,6 +1,9 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
+from rct229.rulesets.ashrae9012019.ruleset_functions.are_all_hvac_sys_fan_objects_autosized import (
+    are_all_hvac_sys_fan_objs_autosized,
+)
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_system_type_compare import (
     baseline_system_type_compare,
 )
@@ -13,10 +16,14 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_baseline_system_types i
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_dict_of_zones_and_terminal_units_served_by_hvac_sys import (
     get_dict_of_zones_and_terminal_units_served_by_hvac_sys,
 )
+from rct229.rulesets.ashrae9012019.ruleset_functions.get_fan_system_object_supply_return_exhaust_relief_total_power_flow import (
+    get_fan_system_object_supply_return_exhaust_relief_total_power_flow,
+)
 from rct229.schema.config import ureg
 from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all, find_one
 from rct229.utils.pint_utils import ZERO
+from rct229.utils.std_comparisons import std_equal
 
 APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_9,
@@ -53,14 +60,18 @@ class Section19Rule17(RuleDefinitionListIndexedBase):
             "$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*].id",
             rmi_b,
         ):
-            hvac_info_dict_b[hvac_b["id"]] = {}
+            hvac_id_b = hvac_b["id"]
+            hvac_info_dict_b[hvac_id_b] = {}
+            hvac_info_dict_b[hvac_id_b]["all_design_setpoints_105"] = True
+            hvac_info_dict_b[hvac_id_b]["proposed_supply_cfm"] = ZERO.FLOW
+            hvac_info_dict_b[hvac_id_b][
+                "are_all_hvac_sys_fan_objs_autosized"
+            ] = are_all_hvac_sys_fan_objs_autosized(rmi_b, hvac_id_b)
 
             zones_and_terminal_units_served_by_hvac_sys_dict = (
                 get_dict_of_zones_and_terminal_units_served_by_hvac_sys(hvac_b)
             )
 
-            all_design_setpoints_105 = True
-            proposed_supply_cfm = ZERO.FLOW
             for terminal_b in zones_and_terminal_units_served_by_hvac_sys_dict[
                 "terminal_unit_list"
             ]:
@@ -76,19 +87,20 @@ class Section19Rule17(RuleDefinitionListIndexedBase):
                         )
                         != REQ_DESIGN_SUPPLY_AIR_TEMP_SETPOINT
                     ):
-                        all_design_setpoints_105 = False
+                        hvac_info_dict_b[hvac_id_b]["all_design_setpoints_105"] = False
 
-            for zone_b in zones_and_terminal_units_served_by_hvac_sys_dict["zone_lsit"]:
+            for zone_b in zones_and_terminal_units_served_by_hvac_sys_dict["zone_list"]:
                 for terminal_p in find_one(
-                    f"$.buildings[*].building_segments[*].zones[?(@.id == {zone_b})].terminals[*]",
+                    f'$.buildings[*].building_segments[*].zones[?(@.id == "{zone_b}")].terminals[*]',
                     rmi_p,
                 ):
-                    proposed_supply_cfm += getattr_(
+                    hvac_info_dict_b[hvac_id_b]["proposed_supply_cfm"] += getattr_(
                         terminal_p, "Terminal", "primary_airflow"
                     )
 
         return {
             "baseline_system_types_dict": baseline_system_types_dict,
+            "hvac_info_dict_b": hvac_info_dict_b,
         }
 
     def is_applicable(self, context, data=None):
@@ -107,6 +119,10 @@ class Section19Rule17(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section19Rule17.HVACRule, self).__init__(
                 rmrs_used=UserBaselineProposedVals(False, True, True),
+                required_fields={
+                    "$": ["fan_system"],
+                    "fan_system": ["minimum_outdoor_airflow"],
+                },
             )
 
         def is_applicable(self, context, data=None):
@@ -123,7 +139,75 @@ class Section19Rule17(RuleDefinitionListIndexedBase):
             hvac_b = context.baseline
             hvac_id_b = hvac_b["id"]
 
-            return {}
+            fan_system_b = hvac_b["fan_system"]
+
+            fan_info_b = (
+                get_fan_system_object_supply_return_exhaust_relief_total_power_flow(
+                    fan_system_b
+                )
+            )
+
+            supply_fan_qty_b = fan_info_b["supply_fans_qty"]
+            supply_fan_airflow_b = fan_info_b["supply_fans_airflow"]
+
+            minimum_outdoor_airflow_b = fan_system_b["minimum_outdoor_airflow"]
+
+            return {
+                "hvac_id_b": hvac_id_b,
+                "supply_fan_qty_b": supply_fan_qty_b,
+                "supply_fan_airflow_b": supply_fan_airflow_b,
+                "minimum_outdoor_airflow_b": minimum_outdoor_airflow_b,
+            }
+
+        def manual_check_required(self, context, calc_vals=None, data=None):
+            hvac_id_b = calc_vals["hvac_id_b"]
+            supply_fan_qty_b = calc_vals["supply_fan_qty_b"]
+            supply_fan_airflow_b = calc_vals["supply_fan_airflow_b"]
+            hvac_info_dict_b = data["hvac_info_dict_b"][hvac_id_b]
+
+            return (
+                supply_fan_qty_b == 1
+                and not hvac_info_dict_b["all_design_setpoints_105"]
+                and std_equal(
+                    hvac_info_dict_b["proposed_supply_cfm"],
+                    supply_fan_airflow_b,
+                )
+            ) and (supply_fan_qty_b != 1)
+
+        def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
+            hvac_id_b = calc_vals["hvac_id_b"]
+            supply_fan_qty_b = calc_vals["supply_fan_qty_b"]
+            supply_fan_airflow_b = calc_vals["supply_fan_airflow_b"]
+            hvac_info_dict_b = data["hvac_info_dict_b"]["hvac_id_b"]
+
+            if (
+                supply_fan_qty_b == 1
+                and not hvac_info_dict_b["all_design_setpoints_105"]
+                and std_equal(
+                    hvac_info_dict_b["proposed_supply_cfm"],
+                    supply_fan_airflow_b,
+                )
+            ):
+                undetermined_msg = f"{hvac_id_b} was not modeled with a supply air temperature set point of 105°F. The baseline and proposed supply cfm was modeled identically at {hvac_info_dict_b['proposed_supply_cfm']} CFM. Manual review is required to determine if the airflow rate was modeled to comply with applicable codes or accreditation standards. If not, fail."
+            elif supply_fan_qty_b != 1:
+                undetermined_msg = f"{hvac_id_b} has more than one supply fan associated with the HVAC system in the baseline and therefore this check could not be conducted for this HVAC sytem. Conduct manual check for compliance with G3.1.2.8.2."
+
+            return undetermined_msg
 
         def rule_check(self, context, calc_vals=None, data=None):
-            return ()
+            hvac_id_b = calc_vals["hvac_id_b"]
+            supply_fan_qty_b = calc_vals["supply_fan_qty_b"]
+            supply_fan_airflow_b = calc_vals["supply_fan_airflow_b"]
+            minimum_outdoor_airflow_b = calc_vals["minimum_outdoor_airflow_b"]
+            hvac_info_dict_b = data["hvac_info_dict_b"][hvac_id_b]
+
+            return (
+                supply_fan_qty_b == 1
+                and hvac_info_dict_b["all_design_setpoints_105"]
+                and supply_fan_airflow_b >= minimum_outdoor_airflow_b
+                and hvac_info_dict_b["are_all_hvac_sys_fan_objs_autosized"]
+            ) and (
+                supply_fan_qty_b == 1
+                and not hvac_info_dict_b["all_design_setpoints_105"]
+                and std_equal(minimum_outdoor_airflow_b, supply_fan_airflow_b)
+            )
