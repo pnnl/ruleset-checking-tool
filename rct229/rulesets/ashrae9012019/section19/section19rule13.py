@@ -1,6 +1,10 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
+from rct229.rulesets.ashrae9012019.data.schema_enums import schema_enums
+from rct229.rulesets.ashrae9012019.ruleset_functions.are_all_hvac_sys_fan_objects_autosized import (
+    are_all_hvac_sys_fan_objs_autosized,
+)
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_system_type_compare import (
     baseline_system_type_compare,
 )
@@ -13,8 +17,14 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_baseline_system_types i
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_dict_of_zones_and_terminal_units_served_by_hvac_sys import (
     get_dict_of_zones_and_terminal_units_served_by_hvac_sys,
 )
+from rct229.rulesets.ashrae9012019.ruleset_functions.get_fan_system_object_supply_return_exhaust_relief_total_power_flow import (
+    get_fan_system_object_supply_return_exhaust_relief_total_power_flow,
+)
+from rct229.schema.config import ureg
 from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all
+from rct229.utils.pint_utils import ZERO
+from rct229.utils.std_comparisons import std_equal
 
 APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_1,
@@ -30,6 +40,10 @@ APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_13,
 ]
 
+LIGHTING_SPACE = schema_enums["LightingSpaceOptions2019ASHRAE901TG37"]
+TEMP_DELTA_17F = 17.0 * ureg("R")
+TEMP_DELTA_20F = 20.0 * ureg("R")
+
 
 class Section19Rule13(RuleDefinitionListIndexedBase):
     """Rule 13 of ASHRAE 90.1-2019 Appendix G Section 19 (HVAC - General)"""
@@ -42,7 +56,7 @@ class Section19Rule13(RuleDefinitionListIndexedBase):
             id="19-13",
             description="For baseline system types 1-8 and 11-13, system design supply airflow rates shall be based on a supply-air-to-room temperature set-point difference of 20°F or the minimum outdoor airflow rate, or the airflow rate required to comply with applicable codes or accreditation standards, whichever is greater. For systems with multiple zone thermostat setpoints, use the design set point that will result in the lowest supply air cooling set point or highest supply air heating set point.",
             ruleset_section_title="HVAC - General",
-            standard_section="G3.1.2.8.1 and Exception 1",
+            standard_section="Section G3.1.2.8.1 and Exception 1",
             is_primary_rule=True,
             rmr_context="ruleset_model_instances/0",
             list_path="$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*]",
@@ -50,27 +64,105 @@ class Section19Rule13(RuleDefinitionListIndexedBase):
 
     def create_data(self, context, data):
         rmi_b = context.baseline
-        get_dict_of_zones_and_terminal_units_served_by_hvac_sys = 1
+        rmi_p = context.proposed
 
-        design_thermostat_cooling_setpoint = min(
-            find_all(
-                "$.buildings[*].building_segments[*].zones[*].design_thermostat_cooling_setpoint",
-                rmi_b,
-            )
+        dict_of_zones_and_terminal_units_served_by_hvac_sys_b = (
+            get_dict_of_zones_and_terminal_units_served_by_hvac_sys(rmi_b)
         )
-        design_thermostat_heating_setpoint = max(
-            find_all(
-                "$.buildings[*].building_segments[*].zones[*].design_thermostat_heating_setpoint",
-                rmi_b,
-            )
-        )
+
+        zone_info = {}
+        for hvac_id_b in dict_of_zones_and_terminal_units_served_by_hvac_sys_b:
+            for zone_id_b in dict_of_zones_and_terminal_units_served_by_hvac_sys_b[
+                hvac_id_b
+            ]["zone_list"]:
+                zone_info[zone_id_b] = {}
+                zone_info[zone_id_b][
+                    "are_all_hvac_sys_fan_objs_autosized"
+                ] = are_all_hvac_sys_fan_objs_autosized(rmi_b, hvac_id_b)
+                zone_info[zone_id_b]["proposed_supply_airflow"] = ZERO.FLOW
+                zone_info[zone_id_b][
+                    "all_design_setpoints_delta_Ts_are_per_reqs"
+                ] = ZERO.TEMPERATURE
+
+                # get `design_thermostat_cooling_setpoint` and `design_thermostat_heating_setpoint`
+                for zone_b in find_all(
+                    '$.buildings[*].building_segments[*].zones[?(@.id == "{zone_id_b}")]',
+                    rmi_b,
+                ):
+                    zone_info[zone_id_b]["design_thermostat_cooling_setpoint"] = min(
+                        find_all(
+                            f'$.buildings[*].building_segments[*].zones[?(@.id == "{zone_id_b}")].design_thermostat_cooling_setpoint',
+                            rmi_b,
+                        )
+                    )
+                    zone_info[zone_id_b]["design_thermostat_heating_setpoint"] = max(
+                        find_all(
+                            f'$.buildings[*].building_segments[*].zones[?(@.id == "{zone_id_b}")].design_thermostat_heating_setpoint',
+                            rmi_b,
+                        )
+                    )
+
+                    for space_b in getattr_(zone_b, "Zone", "spaces"):
+                        zone_has_lab_space = (
+                            True
+                            if (
+                                getattr_(space_b, "Space", "lighting_space_type")
+                                == LIGHTING_SPACE.LABORATORY_EXCEPT_IN_OR_AS_A_CLASSROOM
+                            )
+                            else False
+                        )
+
+                    # calculate proposed_supply_airflow
+                    for terminal_p in find_all(
+                        '$.buildings[*].building_segments[*].zones[?(@.id == "{zone_id_b}")].terminals[*]',
+                        rmi_p,
+                    ):
+                        zone_info[zone_id_b]["proposed_supply_airflow"] += getattr_(
+                            terminal_p, "Terminal", "primary_airflow"
+                        )
+
+                for terminal_b in dict_of_zones_and_terminal_units_served_by_hvac_sys_b[
+                    hvac_id_b
+                ]["terminal_unit_list"]:
+                    design_heating_supply_air_temp_setpoint = getattr_(
+                        terminal_b,
+                        "Terminal",
+                        "supply_design_heating_setpoint_temperature",
+                    )
+                    design_cooling_supply_air_temp_setpoint = getattr_(
+                        terminal_b,
+                        "Terminal",
+                        "supply_design_cooling_setpoint_temperature",
+                    )
+
+                    if zone_has_lab_space:
+                        zone_info[zone_id_b][
+                            "all_design_setpoints_delta_Ts_are_per_reqs"
+                        ] = (
+                            True
+                            if (
+                                design_heating_supply_air_temp_setpoint
+                                - design_cooling_supply_air_temp_setpoint
+                            )
+                            != TEMP_DELTA_17F
+                            else False
+                        )
+
+                    else:
+                        zone_info[zone_id_b][
+                            "all_design_setpoints_delta_Ts_are_per_reqs"
+                        ] = (
+                            True
+                            if (
+                                design_heating_supply_air_temp_setpoint
+                                - design_cooling_supply_air_temp_setpoint
+                            )
+                            != TEMP_DELTA_20F
+                            else False
+                        )
 
         return {
-            "dict_of_zones_and_terminal_units_served_by_hvac_sys_b": get_dict_of_zones_and_terminal_units_served_by_hvac_sys(
-                rmi_b
-            ),
-            "design_thermostat_cooling_setpoint": design_thermostat_cooling_setpoint,
-            "design_thermostat_heating_setpoint": design_thermostat_heating_setpoint,
+            "zone_info": zone_info,
         }
 
     def is_applicable(self, context, data=None):
@@ -89,28 +181,75 @@ class Section19Rule13(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section19Rule13.HVACRule, self).__init__(
                 rmrs_used=UserBaselineProposedVals(False, True, True),
+                required_fields={
+                    "$": ["fan_system"],
+                    "fan_system": ["minimum_outdoor_airflow"],
+                },
             )
 
         def get_calc_vals(self, context, data=None):
             hvac_b = context.baseline
-            dict_of_zones_and_terminal_units_served_by_hvac_sys_b = data[
-                "dict_of_zones_and_terminal_units_served_by_hvac_sys_b"
+            hvac_id_b = hvac_b["id"]
+            zone_info = data["zone_info"][hvac_id_b]
+            all_design_setpoints_delta_Ts_are_per_reqs_b = zone_info[
+                "all_design_setpoints_delta_Ts_are_per_reqs"
+            ]
+            are_all_hvac_sys_fan_objs_autosized_b = zone_info[
+                "are_all_hvac_sys_fan_objs_autosized"
             ]
 
+            fan_sys_b = hvac_b["fan_system"]
+            supply_fans_airflow_b = (
+                get_fan_system_object_supply_return_exhaust_relief_total_power_flow(
+                    fan_sys_b
+                )
+            )
+            fan_minimum_outdoor_airflow_b = fan_sys_b["minimum_outdoor_airflow"]
+
+            return {
+                "all_design_setpoints_delta_Ts_are_per_reqs_b": all_design_setpoints_delta_Ts_are_per_reqs_b,
+                "are_all_hvac_sys_fan_objs_autosized_b": are_all_hvac_sys_fan_objs_autosized_b,
+                "supply_fans_airflow_b": supply_fans_airflow_b,
+                "fan_minimum_outdoor_airflow_b": fan_minimum_outdoor_airflow_b,
+            }
+
+        def manual_check_required(self, context, calc_vals=None, data=None):
+            hvac_b = context.baseline
+            hvac_id_b = hvac_b["id"]
+            zone_info = data["zone_info"][hvac_id_b]
+            supply_fans_airflow_b = calc_vals["supply_fans_airflow_b"]
+
+            all_design_setpoints_delta_Ts_are_per_reqs_b = calc_vals[
+                "all_design_setpoints_delta_Ts_are_per_reqs_b"
+            ]
+
+            return not all_design_setpoints_delta_Ts_are_per_reqs_b and std_equal(
+                zone_info["proposed_supply_airflow"], supply_fans_airflow_b
+            )
+
+        def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
+            hvac_b = context.baseline
             hvac_id_b = hvac_b["id"]
 
-            zones_list_hvac_sys_b = (
-                dict_of_zones_and_terminal_units_served_by_hvac_sys_b[hvac_id_b][
-                    "zone_list"
-                ]
-            )
-            terminal_list_hvac_sys_b = (
-                dict_of_zones_and_terminal_units_served_by_hvac_sys_b[hvac_id_b][
-                    "terminal_list"
-                ]
-            )
-
-            return True
+            return f"{hvac_id_b} was not modeled based on a supply-air-to-room temperature set-point difference of 20°F (or 17°F, if lab). The baseline and proposed supply cfm was modeled identically at <insert proposed_supply_airflow> CFM. Manual review is required to determine if the airflow rate was modeled to comply with applicable codes or accreditation standards. If not, fail."
 
         def rule_check(self, context, calc_vals=None, data=None):
-            return True
+            all_design_setpoints_delta_Ts_are_per_reqs_b = calc_vals[
+                "all_design_setpoints_delta_Ts_are_per_reqs_b"
+            ]
+            are_all_hvac_sys_fan_objs_autosized_b = calc_vals[
+                "are_all_hvac_sys_fan_objs_autosized_b"
+            ]
+            supply_fans_airflow_b = calc_vals["supply_fans_airflow_b"]
+            fan_minimum_outdoor_airflow_b = calc_vals["fan_minimum_outdoor_airflow_b"]
+
+            return (
+                all_design_setpoints_delta_Ts_are_per_reqs_b
+                and are_all_hvac_sys_fan_objs_autosized_b
+                and supply_fans_airflow_b >= fan_minimum_outdoor_airflow_b
+            ) or (
+                (
+                    not all_design_setpoints_delta_Ts_are_per_reqs_b
+                    and std_equal(fan_minimum_outdoor_airflow_b, supply_fans_airflow_b)
+                )
+            )
