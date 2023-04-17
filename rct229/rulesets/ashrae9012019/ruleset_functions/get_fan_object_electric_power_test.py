@@ -4,7 +4,9 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_fan_object_electric_pow
 from rct229.schema.config import ureg
 from rct229.schema.schema_utils import quantify_rmr
 from rct229.schema.validate import schema_validate_rmr
+from rct229.utils.assertions import RCTFailureException
 from rct229.utils.jsonpath_utils import find_exactly_one_with_field_value
+import pytest
 
 TEST_RMD = {
     "id": "ASHRAE229 1",
@@ -184,12 +186,17 @@ def test__FAN_DETAIL_total_efficiency__success():
 
 
 def test_FAN_MISSING_DATA_FAILED():
-    fan = find_exactly_one_with_field_value(
-        "$.buildings[0].building_segments["
-        "0].heating_ventilating_air_conditioning_systems["
-        "0].fan_system.supply_fans[*]",
-        "id",
-        "Supply Fan 4",
-        TEST_RMI,
-    )
-    assert get_fan_object_electric_power(fan) == 0.0
+    with pytest.raises(
+        RCTFailureException,
+        match="Check Fan: Supply Fan 4, Data missing: input_power or motor_efficiency are missing or equal to 0.0, "
+        "and total_efficiency or design_pressure_rise are missing or equal to 0.0",
+    ):
+        fan = find_exactly_one_with_field_value(
+            "$.buildings[0].building_segments["
+            "0].heating_ventilating_air_conditioning_systems["
+            "0].fan_system.supply_fans[*]",
+            "id",
+            "Supply Fan 4",
+            TEST_RMI,
+        )
+        get_fan_object_electric_power(fan)
