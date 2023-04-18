@@ -31,19 +31,16 @@ def get_hvac_systems_primarily_serving_comp_room(rmi):
 
     for hvac in find_all(
         "$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*]",
-        rmi
+        rmi,
     ):
         hvac_sys_total_floor_area = hvac_zone_list_w_area_dict[hvac["id"]]["total_area"]
         hvac_sys_zone_id_list = hvac_zone_list_w_area_dict[hvac["id"]]["zone_list"]
 
         hvac_zones_list = [
-            find_exactly_one_zone(rmi, zone_id)
-            for zone_id in hvac_sys_zone_id_list
+            find_exactly_one_zone(rmi, zone_id) for zone_id in hvac_sys_zone_id_list
         ]
         hvac_spaces_list = [
-            space
-            for zone in hvac_zones_list
-            for space in find_all("$.spaces[*]", zone)
+            space for zone in hvac_zones_list for space in find_all("$.spaces[*]", zone)
         ]
 
         hvac_system_computer_room_floor_area = pint_sum(
@@ -53,7 +50,7 @@ def get_hvac_systems_primarily_serving_comp_room(rmi):
                 if space.get("lighting_space_type")
                 == LightingSpaceOptionsG37.COMPUTER_ROOM
             ],
-            ZERO.AREA
+            ZERO.AREA,
         )
 
         if hvac_system_computer_room_floor_area / hvac_sys_total_floor_area > 0.5:

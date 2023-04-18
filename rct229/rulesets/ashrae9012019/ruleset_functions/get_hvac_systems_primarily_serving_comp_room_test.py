@@ -1,5 +1,6 @@
-from rct229.rulesets.ashrae9012019.ruleset_functions.get_hvac_systems_primarily_serving_comp_room import \
-    get_hvac_systems_primarily_serving_comp_room
+from rct229.rulesets.ashrae9012019.ruleset_functions.get_hvac_systems_primarily_serving_comp_room import (
+    get_hvac_systems_primarily_serving_comp_room,
+)
 from rct229.schema.schema_utils import quantify_rmr
 from rct229.schema.validate import schema_validate_rmr
 
@@ -14,7 +15,7 @@ TEST_RMI = {
                     "id": "bldg_seg_1",
                     "heating_ventilating_air_conditioning_systems": [
                         {"id": "hvac_1"},
-                        {"id": "hvac_2"}
+                        {"id": "hvac_2"},
                     ],
                     "zones": [
                         {
