@@ -86,7 +86,7 @@ def get_zone_supply_return_exhaust_relief_terminal_fan_power_dict(rmi):
                 f"No terminal connected with the HVAC {hvac_id}. Check inputs!",
             )
 
-            # find terminals in the zone that matches to the HVAC terminal list, and calculate the terminal fan power
+            # Find terminals in the zone that matches to the HVAC terminal list, and calculate the terminal fan power
             zone_hvac_terminal_intersection_list = list(
                 set(hvac_system_terminal_id_list).intersection(
                     set(find_all("$.terminals[*].id", zone))
