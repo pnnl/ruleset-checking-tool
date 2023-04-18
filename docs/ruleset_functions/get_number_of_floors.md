@@ -1,7 +1,7 @@
 # get_number_of_floors
 **Schema Version:** 0.0.23  
 
-**Description:** gets the number of floors in the building
+**Description:** gets the number of floors in the building - logic is based on looking at the elevation of zones.  Parking Garages are not counted
 
 **Inputs:**
 - **zone_input_list** - the list of the zones for which we want to get the number of floors (changed from RMI to this so that we can get the number of floors for a limited list of zones, for example for the function get_hvac_systems_5_6_serving_multiple_floors_b)
