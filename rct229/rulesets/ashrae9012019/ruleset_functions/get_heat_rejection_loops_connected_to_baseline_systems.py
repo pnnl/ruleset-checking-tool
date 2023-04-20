@@ -1,5 +1,6 @@
-from rct229.rulesets.ashrae9012019.ruleset_functions.get_primary_secondary_loops_dict import \
-    get_primary_secondary_loops_dict
+from rct229.rulesets.ashrae9012019.ruleset_functions.get_primary_secondary_loops_dict import (
+    get_primary_secondary_loops_dict,
+)
 from rct229.utils.jsonpath_utils import find_all, find_one
 
 
@@ -22,6 +23,7 @@ def get_heat_rejection_loops_connected_to_baseline_systems(rmi):
     heat_rejection_loop_list = [
         chiller["condensing_loop"]
         for chiller in find_all("$.chillers[*]", rmi)
-        if find_one("$.cooling_loop", chiller) in primary_secondary_loops_dict.keys() and chiller.get("condensing_loop")
+        if find_one("$.cooling_loop", chiller) in primary_secondary_loops_dict.keys()
+        and chiller.get("condensing_loop")
     ]
     return list(set(heat_rejection_loop_list))

@@ -1,5 +1,6 @@
-from rct229.rulesets.ashrae9012019.ruleset_functions.get_heat_rejection_loops_connected_to_baseline_systems import \
-    get_heat_rejection_loops_connected_to_baseline_systems
+from rct229.rulesets.ashrae9012019.ruleset_functions.get_heat_rejection_loops_connected_to_baseline_systems import (
+    get_heat_rejection_loops_connected_to_baseline_systems,
+)
 from rct229.schema.schema_utils import quantify_rmr
 from rct229.schema.validate import schema_validate_rmr
 
@@ -85,7 +86,7 @@ TEST_RMD = {
                                         "supply_fans": [{"id": "Supply Fan 2"}],
                                         "return_fans": [{"id": "Return Fan 2"}],
                                     },
-                                }
+                                },
                             ],
                         }
                     ],
@@ -99,8 +100,15 @@ TEST_RMD = {
                 }
             ],
             "chillers": [
-                {"id": "Chiller 1", "cooling_loop": "Chiller Loop 1", "condensing_loop": "Condensing Loop 1"},
-                {"id": "Chiller 2", "cooling_loop": "Chiller Loop 2", }
+                {
+                    "id": "Chiller 1",
+                    "cooling_loop": "Chiller Loop 1",
+                    "condensing_loop": "Condensing Loop 1",
+                },
+                {
+                    "id": "Chiller 2",
+                    "cooling_loop": "Chiller Loop 2",
+                },
             ],
             "pumps": [
                 {
@@ -126,8 +134,8 @@ TEST_RMD = {
                     "type": "COOLING",
                     "child_loops": [
                         {"id": "Chilled Water Loop 2", "type": "COOLING"},
-                    ]
-                }
+                    ],
+                },
             ],
         }
     ],
@@ -145,4 +153,6 @@ def test__TEST_RMD__is_valid():
 
 
 def test__get_heat_rejection_loops_connected_to_baseline_systems_success():
-    assert get_heat_rejection_loops_connected_to_baseline_systems(TEST_RMI) == ["Condensing Loop 1"]
+    assert get_heat_rejection_loops_connected_to_baseline_systems(TEST_RMI) == [
+        "Condensing Loop 1"
+    ]
