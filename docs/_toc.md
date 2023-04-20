@@ -317,6 +317,7 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   * [22-10](section22/Rule22-10.md): For Baseline chilled water system with cooling capacity less than 300ton, the secondary pump shall be modeled as riding the pump curve. For Baseline chilled water system with cooling capacity of 300 tons or more, the secondary pump shall be modeled with variable-speed drives. 
   * [22-11](section22/Rule22-11.md): For Baseline chilled-water system that does not use purchased chilled water, variable-flow secondary pump shall be modeled as 13W/gpm at design conditions. 
   * [22-12](section22/Rule22-12.md): The heat rejection system shall be a single loop, modeled with a single cooling tower.
+  * [22-13](section22/Rule22-13.md): The baseline heat rejection loop shall be an axial-fan open circuit cooling tower.
   * [22-14](section22/Rule22-14.md): The baseline heat-rejection device shall have a design temperature rise of 10°F. 
   * [22-16](section22/Rule22-16.md): The baseline condenser-water design supply temperature shall be calculated using the cooling tower approach to the 0.4% evaporation design wet-bulb temperature, valid for wet-bulbs from 55°F to 90°F. 
   * [22-18](section22/Rule22-18.md): The baseline heat rejection device shall be modeled with variable speed fan control.
