@@ -14,7 +14,7 @@
 ## Logic:
 - make a list of eligible zones in the building: `zone_list = []`
 	- loop through each zone in the input list: `for zone in zone_input_list: `
-		- eligible zones are zones with ceiling height greater than 7.5 (2.286m)': `if zone.ceiling_height > 2.286`
+		- eligible zones are zones with ceiling height greater than 7.5' (2.286m): `if zone.ceiling_height > 2.286`
 			- loop throught the spaces in the zone: `for space in zone:`
 				- eligible zones are zones that are not parking garage zones if any of the spaces are not PARKING_GARAGE, then this zone is not exclusively a parking garage space: `if space.lighting_space_type != PARKING_GARAGE:`
 					- add the zone to the zone_list: `zone_list.append(zone)`
