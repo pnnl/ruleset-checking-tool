@@ -81,7 +81,24 @@ TEST_RMR = {
                                             "u_factor": 2.4,  # W/(m2 * K)
                                         }
                                     ],
-                                }
+                                },
+                                # wall surface to verify the roof type check condition for branch coverage
+                                {
+                                    "id": "surface_1_2_2",
+                                    "adjacent_to": "EXTERIOR",
+                                    "adjacent_zone": "zone_1_1",
+                                    "area": 10,  # m2
+                                    "tilt": 90,  # wall
+                                    "subsurfaces": [
+                                        {
+                                            "id": "subsurface_1_2_2_1",
+                                            "classification": "WINDOW",
+                                            "glazed_area": 5,
+                                            "opaque_area": 0,  # m2
+                                            "u_factor": 2.4,  # W/(m2 * K)
+                                        }
+                                    ],
+                                },
                             ],
                             "thermostat_cooling_setpoint_schedule": "tcs_sched_1",
                             "thermostat_heating_setpoint_schedule": "ths_sched_1",
@@ -89,6 +106,34 @@ TEST_RMR = {
                                 {
                                     "id": "terminal_1_2_1",
                                     "served_by_heating_ventilating_air_conditioning_system": "hvac_1_2",
+                                }
+                            ],
+                        },
+                        # below zone is a `UNCONDITIONED` zone for verifying zone type condition for branch coverage
+                        {
+                            "id": "zone_1_3",
+                            "volume": 300,  # m3
+                            "spaces": [
+                                {
+                                    # Non-residential
+                                    "id": "space_1_2_1",
+                                    "floor_area": 100,  # m2
+                                    "lighting_space_type": "COMPUTER_ROOM",
+                                    "occupant_multiplier_schedule": "om_sched_1",
+                                },
+                            ],
+                            "surfaces": [
+                                # Adds to zone_other_ua
+                                {
+                                    "id": "surface_1_3_1",
+                                    "adjacent_to": "EXTERIOR",
+                                    "adjacent_zone": "zone_1_1",
+                                    "area": 10,  # m2
+                                    "tilt": 90,  # wall
+                                    "construction": {
+                                        "id": "construction_1",
+                                        "u_factor": 3.2366105565544463,
+                                    },
                                 }
                             ],
                         },
