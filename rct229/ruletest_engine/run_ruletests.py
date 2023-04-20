@@ -124,6 +124,20 @@ def run_airside_tests():
     return run_test_helper(json_tests, RuleSet.ASHRAE9012019_RULESET)
 
 
+def run_hvac_general_tests():
+    """Runs all tests found in the hvac general tests JSON.
+    Returns
+    -------
+    None
+    Results of lighting test are spit out to console
+    """
+
+    json_tests = _helper_get_all_test_file_by_section(
+        RuleSet.ASHRAE9012019_RULESET, "section19"
+    )
+    return run_test_helper(json_tests, RuleSet.ASHRAE9012019_RULESET)
+
+
 def run_test_helper(test_list, ruleset_doc):
     # sort the list in a human order
     test_list.sort(key=natural_keys)
@@ -142,7 +156,7 @@ def run_test_one_jsontest(test_json):
 
 
 if __name__ == "__main__":
-    outcome = run_ashrae9012019_tests(section="section6")
+    outcome = run_ashrae9012019_tests(section="section19")
 
 # run_transformer_tests()
 # run_lighting_tests()
@@ -151,5 +165,6 @@ if __name__ == "__main__":
 # run_envelope_tests()
 # run_receptacle_tests()
 # run_airside_tests()
+# run_hvac_general_tests()
 
 # run_test_one_jsontest("ashrae9012019/section5/rule_5_3.json")
