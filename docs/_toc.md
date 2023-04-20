@@ -318,6 +318,7 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   * [22-11](section22/Rule22-11.md): For Baseline chilled-water system that does not use purchased chilled water, variable-flow secondary pump shall be modeled as 13W/gpm at design conditions. 
   * [22-14](section22/Rule22-14.md): The baseline heat-rejection device shall have a design temperature rise of 10°F. 
   * [22-16](section22/Rule22-16.md): The baseline condenser-water design supply temperature shall be calculated using the cooling tower approach to the 0.4% evaporation design wet-bulb temperature, valid for wet-bulbs from 55°F to 90°F. 
+  * [22-18](section22/Rule22-18.md): The baseline heat rejection device shall be modeled with variable speed fan control.
   * [22-19](section22/Rule22-19.md): The tower shall be controlled to maintain a leaving water temperature, where weather permits.
   * [22-20](section22/Rule22-20.md): The baseline minimum condenser water reset temperature is per Table G3.1.3.11.
   * [22-21](section22/Rule22-21.md): The baseline building design’s chiller plant shall be modeled with chillers having the type as indicated in Table G3.1.3.7 as a function of building peak cooling load. 
