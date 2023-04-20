@@ -321,6 +321,7 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   * [22-14](section22/Rule22-14.md): The baseline heat-rejection device shall have a design temperature rise of 10°F. 
   * [22-15](section22/Rule22-15.md): Heat Rejection Device Approach calaculated correctly (T/F), Approach = 25.72-(0.24*WB).
   * [22-16](section22/Rule22-16.md): The baseline condenser-water design supply temperature shall be calculated using the cooling tower approach to the 0.4% evaporation design wet-bulb temperature, valid for wet-bulbs from 55°F to 90°F. 
+  * [22-17](section22/Rule22-17.md): The baseline heat rejection device shall have an efficiency of 38.2 gpm/hp.
   * [22-18](section22/Rule22-18.md): The baseline heat rejection device shall be modeled with variable speed fan control.
   * [22-19](section22/Rule22-19.md): The tower shall be controlled to maintain a leaving water temperature, where weather permits.
   * [22-20](section22/Rule22-20.md): The baseline minimum condenser water reset temperature is per Table G3.1.3.11.
