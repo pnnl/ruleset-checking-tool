@@ -10,7 +10,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_surface_conditioning_ca
     SurfaceConditioningCategory as SCC,
 )
 
-ABSORPTION_SOLAR_EXTERIOR = 0.7
+ABSORPTANCE_SOLAR_EXTERIOR = 0.7
 
 PASS_NOT_EQUAL_MSG = (
     "Roof surface solar reflectance in P-RMD matches that in U-RMD but is not equal to 0.3. Verify "
@@ -37,6 +37,7 @@ class Section5Rule43(RuleDefinitionListIndexedBase):
             standard_section="Section G3.1-1(a) Building Envelope Modeling Requirements for the Proposed design",
             is_primary_rule=True,
             list_path="ruleset_model_instances[0].buildings[*]",
+            data_items={"climate_zone": ("baseline", "weather/climate_zone")},
         )
 
     class BuildingRule(RuleDefinitionListIndexedBase):
@@ -73,7 +74,7 @@ class Section5Rule43(RuleDefinitionListIndexedBase):
             def get_calc_vals(self, context, data=None):
                 roof_p = context.proposed
                 roof_u = context.user
-                surface_conditioning_category_p = data["scc_dict_p"]
+                scc_dict_p = data["scc_dict_p"]
 
                 return {
                     "absorptance_solar_exterior_p": roof_p[
@@ -82,9 +83,7 @@ class Section5Rule43(RuleDefinitionListIndexedBase):
                     "absorptance_solar_exterior_u": roof_u[
                         "surface_optical_properties"
                     ]["absorptance_solar_exterior"],
-                    "surface_conditioning_category_p": surface_conditioning_category_p[
-                        roof_p["id"]
-                    ],
+                    "surface_conditioning_category_p": scc_dict_p[roof_p["id"]],
                 }
 
             def rule_check(self, context, calc_vals=None, data=None):
@@ -92,7 +91,7 @@ class Section5Rule43(RuleDefinitionListIndexedBase):
                     calc_vals["absorptance_solar_exterior_p"]
                     == calc_vals["absorptance_solar_exterior_u"]
                     or calc_vals["absorptance_solar_exterior_p"]
-                    == ABSORPTION_SOLAR_EXTERIOR
+                    == ABSORPTANCE_SOLAR_EXTERIOR
                 )
 
             def get_pass_msg(self, context, calc_vals=None, data=None):
@@ -107,14 +106,13 @@ class Section5Rule43(RuleDefinitionListIndexedBase):
                     "surface_conditioning_category_p"
                 ]
                 pass_msg = ""
-                if absorptance_thermal_exterior_p != ABSORPTION_SOLAR_EXTERIOR:
+                if absorptance_thermal_exterior_p != ABSORPTANCE_SOLAR_EXTERIOR:
                     # this condition only applies when P-RMD = U-RMD
                     pass_msg = PASS_NOT_EQUAL_MSG
-                if absorptance_thermal_exterior_u != absorptance_thermal_exterior_p:
+                elif (
+                    absorptance_thermal_exterior_u != absorptance_thermal_exterior_p
+                    and surface_conditioning_category_p != SCC.UNREGULATED
+                ):
                     # this condition only applies when P-RMD = 0.7 and P-RMD surface is regulated.
-                    pass_msg = (
-                        PASS_DIFFERS_MSG_REGULATED
-                        if surface_conditioning_category_p != SCC.UNREGULATED
-                        else ""
-                    )
+                    pass_msg = PASS_DIFFERS_MSG_REGULATED
                 return pass_msg
