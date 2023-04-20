@@ -1,13 +1,14 @@
 # get_zone_supply_return_exhaust_relief_terminal_fan_power_dict
 
-**Description:** Get the supply, return, exhaust, relief, and terminal total fan power for each zone. The function returns a dictionary that saves each zone's supply, return, exhaust, relief  and terminal unit fan power as a list {zone.id: [supply fan power kW, return fan power kW, exhaust fan power kW, relief fan power kW, terminal fan power]}. Values will be equal to zero where not defined for a fan system.
+**Description:** Get the supply, return, exhaust, relief, and terminal total fan power for each zone. The function returns a dictionary that saves each zone's supply, return, exhaust, relief  and terminal unit fan power as a list {zone.id: [supply fan power kW, return fan power kW, exhaust fan power kW, relief fan power kW, terminal fan power]}. Values will be equal to zero where not defined for a fan system. Zonal exhaust and non-mechanical cooling is not included.
+This function first identifies if a HVAC system is serving more than one zone, in which case the fan power is apportioned to the zone based on the fraction of airflow to that zone. For single zone systems, the fan power associated with the hvac system is added to the zone fan power. For systems defined at the terminal, such as FPFCU, it sums up the fan power specified at the terminal and assigns it to the zone.
 
 **Inputs:**  
 - **B-RMI,P-RMI**: To calculate the supply, return, exhaust, relief, and terminal unit total fan power for each zone in the ruleset model instance.   
 
 **Returns:**  
-- **get_zone_supply_return_exhaust_relief_terminal_fan_power_dict**: The function returns a dictionary that saves each zone's supply, return, exhaust, relief and terminal fan power as a list {zone.id: [supply fan power kW, return fan power kW, exhaust fan power kW, relief fan power kW, terminal fan power]}. Values will be equal to zero where not defined for a fan system.
- 
+- **get_zone_supply_return_exhaust_relief_terminal_fan_power_dict**: The function returns a dictionary that saves each zone's supply, return, exhaust, relief and terminal fan power as a list {zone.id: [supply fan power kW, return fan power kW, exhaust fan power kW, relief fan power kW, terminal fan power]}. Values will be equal to zero where not defined for a fan system. Zonal exhaust and non-mechanical cooling is not included.
+
 **Function Call:**  
 1. get_dict_of_zones_and_terminal_units_served_by_hvac_sys()   
 2. get_list_hvac_systems_associated_with_zone()   
@@ -23,7 +24,8 @@
     - Reset the zone total exhaust fan power variable: `zone_total_exhaust_fan_power = 0`  
     - Reset the zone total relief fan power variable: `zone_total_relief_fan_power = 0`
     - Reset the zone total terminal fan power variable: `zone_total_terminal_fan_power = 0`  
-
+    
+    - Add zonal exhaust fan power to zone_total_exhaust_fan_power: `zone_total_exhaust_fan_power = get_fan_object_electric_power(P_RMI,zone.zonal_exhaust_fan)`
     - Get a list of HVAC systems serving the zone: `hvac_sys_list_serving_zone_x =  get_list_hvac_systems_associated_with_zone(RMI,zone.id)`  
     - For each hvac system serving the zone: `for hvac in hvac_sys_list_serving_zone_x:`  
         - Reset total_terminal_air_flow variable to 0 (total across all zones served): `total_terminal_air_flow = 0`  
@@ -76,7 +78,7 @@
                     - Add to the total terminal kW for this zone: `zone_total_terminal_fan_power = zone_total_terminal_fan_power + terminal_fan_power`
                     - Add to the zone total supply fan power since it is a supply fan defined at the terminal: `zone_total_supply_fan_power = zone_total_supply_fan_power + terminal_fan_power`  
 
-  - Add the zone as a key and the supply, return, exhaust, relief, terminal fan powers as a list of values to a dictionary: `zone_supply_return_exhaust_relief_terminal_fan_power_dict[zone.id] = [zone_total_supply_fan_power,zone_total_return_fan_power,zone_total_exhaust_fan_power,zone_total_relief_fan_power,zone_total_terminal_fan_power]`  
+  - Add the zone as a key and the supply, return, exhaust, relief, terminal fan powers as a list of values to a dictionary: `zone_supply_return_exhaust_relief_terminal_fan_power_dict[zone.id] = [zone_total_supply_fan_power,zone_total_return_fan_power,zone_total_exhaust_fan_power,zone_total_relief_fan_power,zone_total_terminal_fan_power]`
 
 **Returns** `get_zone_supply_return_exhaust_relief_terminal_fan_power_dict`  
 

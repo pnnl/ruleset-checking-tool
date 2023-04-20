@@ -3,7 +3,7 @@
 **Description:** Returns true or false. The function returns true if all supply fan objects associated with an hvac system are autosized.  
 
 **Inputs:**  
-- **U,P,or B-RMI**: The RMR in which the fan system object is defined. 
+- **U,P,or B-RMI**: The RMD in which the fan system object is defined. 
 - **hvac_sys_obj**: The hvac object in which the associated fan objects will be assessed.
 
 **Returns:**  
