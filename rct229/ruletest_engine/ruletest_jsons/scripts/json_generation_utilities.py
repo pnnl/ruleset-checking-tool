@@ -357,7 +357,7 @@ def disaggregate_master_ruletest_json(master_json_name, ruleset_doc):
 
     # master JSON should be in the ruletest_jsons directory
     master_json_path = os.path.join(
-        file_dir, "..", master_json_name
+        file_dir, "..", ruleset_doc, master_json_name
     )  # os.path.join(file_dir, "..", ruleset_doc, master_json_name)
 
     # Initialize master JSON dictionary
