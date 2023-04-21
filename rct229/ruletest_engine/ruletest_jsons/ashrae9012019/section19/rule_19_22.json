@@ -69,6 +69,7 @@
                                                         }
                                                     ],
                                                     "air_energy_recovery": {
+                                                        "id": "Air Energy Recovery 1",
                                                         "energy_recovery_operation": "WHEN_MINIMUM_OUTSIDE_AIR"
                                                     }
                                                 }
@@ -183,6 +184,7 @@
                                                         }
                                                     ],
                                                     "air_energy_recovery": {
+                                                        "id": "Air Energy Recovery 1",
                                                         "energy_recovery_operation": "WHEN_FANS_ON"
                                                     }
                                                 }
