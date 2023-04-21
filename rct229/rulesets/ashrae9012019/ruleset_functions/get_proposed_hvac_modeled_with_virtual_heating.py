@@ -46,7 +46,7 @@ def get_proposed_hvac_modeled_with_virtual_heating(rmi_u, rmi_p):
             # heating system type is found, the hvac_p must have heating system
             heating_system_id = hvac_p["heating_system"]["id"]
             heating_system_type_u = find_one(
-                f'$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*][?('
+                f"$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*][?("
                 f'@.heating_system.id="{heating_system_id}")].heating_system.heating_system_type',
                 rmi_u,
             )
@@ -60,7 +60,7 @@ def get_proposed_hvac_modeled_with_virtual_heating(rmi_u, rmi_p):
             # preheat system type is found, the hvac_p must have preheat system
             preheat_system_id = hvac_p["preheat_system"]["id"]
             preheat_system_type_u = find_one(
-                f'$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*][?('
+                f"$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*][?("
                 f'@.preheat_system.id="{preheat_system_id}")].preheat_system.heating_system_type',
                 rmi_u,
             )
