@@ -205,6 +205,7 @@ def inject_json_path_from_enumeration(key_list, json_path_ref_string):
     # Inject enumeration list into keylist
     key_list.extend(enumeration_list)
 
+
 def get_json_path_key_list_from_enumeration(json_path_enumeration):
 
     # JSON path enumerations. Used to simplify JSON path references in test spreadsheets
@@ -217,7 +218,6 @@ def get_json_path_key_list_from_enumeration(json_path_enumeration):
         # Construct dictionary to map shorthand names for JSON Paths
         # (e.g., path_enum_dict['spaces] = 'buildings/building_segments/thermal_blocks/zones/spaces')
         path_enum_dict = json.load(f)
-
 
     # Split enumeration path into a list and append it to existing key_list
     # (e.g. 'buildings/building_segments/thermal_blocks/zones/spaces' ->
