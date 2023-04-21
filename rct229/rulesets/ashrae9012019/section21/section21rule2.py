@@ -31,7 +31,7 @@ class Section21Rule2(RuleDefinitionListIndexedBase):
     class RulesetModelInstanceRule(PartialRuleDefinition):
         def __init__(self):
             super(Section21Rule2.RulesetModelInstanceRule, self,).__init__(
-                rmrs_used=UserBaselineProposedVals(False, True, False),
+                rmrs_used=UserBaselineProposedVals(False, False, True),
             )
 
         def applicability_check(self, context, calc_vals, data):
