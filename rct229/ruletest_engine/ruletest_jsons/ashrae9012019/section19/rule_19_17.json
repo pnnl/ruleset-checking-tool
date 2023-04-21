@@ -1,5 +1,5 @@
 {
-    "rule-19-18-a": {
+    "rule-19-17-a": {
         "Section": 19,
         "Rule": 17,
         "Test": "a",
@@ -117,7 +117,7 @@
             }
         }
     },
-    "rule-19-18-b": {
+    "rule-19-17-b": {
         "Section": 19,
         "Rule": 17,
         "Test": "b",
