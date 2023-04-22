@@ -2,6 +2,8 @@
 import importlib
 
 __all__ = [
+    "section21rule1",
+    "section21rule2",
     "section21rule3",
     "section21rule4",
     "section21rule5",
@@ -12,6 +14,7 @@ __all__ = [
     "section21rule11",
     "section21rule12",
     "section21rule13",
+    "section21rule14",
     "section21rule15",
     "section21rule16",
     "section21rule17",

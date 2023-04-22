@@ -1,0 +1,402 @@
+{
+    "rule-19-1-a": {
+        "Section": 19,
+        "Rule": 1,
+        "Test": "a",
+        "test_description": "System 3 correctly utilizes autosized furnace with 25% oversizing and autosized DX coil with 15% oversizing",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "19-1",
+            "ruleset_reference": "G3.1.2.2",
+            "rule_description": "HVAC system coil capacities for the baseline building design shall be oversized by 15% for cooling and 25% for heating.",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "primary_rule": "Yes",
+            "schema_version": "0.0.23"
+        },
+        "rmr_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_instances": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_open_schedule": "Required Building Schedule 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                                "terminals": [
+                                                    {
+                                                        "id": "Air Terminal",
+                                                        "is_supply_ducted": true,
+                                                        "type": "CONSTANT_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System Type 3"
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "System Type 3",
+                                                "cooling_system": {
+                                                    "id": "DX Coil 1",
+                                                    "cooling_system_type": "DIRECT_EXPANSION",
+                                                    "is_autosized": true,
+                                                    "oversizing_factor": 0.15
+                                                },
+                                                "heating_system": {
+                                                    "id": "Furnace Coil 1",
+                                                    "heating_system_type": "FURNACE",
+                                                    "is_autosized": true,
+                                                    "oversizing_factor": 0.25
+                                                },
+                                                "fan_system": {
+                                                    "id": "CAV Fan System 1",
+                                                    "fan_control": "CONSTANT",
+                                                    "supply_fans": [
+                                                        {
+                                                            "id": "Supply Fan 1"
+                                                        }
+                                                    ],
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "Return Fan 1"
+                                                        }
+                                                    ]
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    },
+    "rule-19-1-b": {
+        "Section": 19,
+        "Rule": 1,
+        "Test": "b",
+        "test_description": "Airside HVAC has no cooling coil. It correctly utilizes an autosized furnace with 25% oversizing. Cooling side oversizing is not applicable",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "19-1",
+            "ruleset_reference": "G3.1.2.2",
+            "rule_description": "HVAC system coil capacities for the baseline building design shall be oversized by 15% for cooling and 25% for heating.",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "primary_rule": "Yes",
+            "schema_version": "0.0.23"
+        },
+        "rmr_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_instances": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_open_schedule": "Required Building Schedule 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "terminals": [
+                                                    {
+                                                        "id": "Air Terminal",
+                                                        "is_supply_ducted": true,
+                                                        "type": "CONSTANT_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "Airside System 1"
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "Airside System 1",
+                                                "cooling_system": {
+                                                    "id": "Cooling System 1"
+                                                },
+                                                "heating_system": {
+                                                    "id": "Heating System 1",
+                                                    "is_autosized": true,
+                                                    "oversizing_factor": 0.25,
+                                                    "heating_system_type": "FURNACE"
+                                                },
+                                                "fan_system": {
+                                                    "id": "Fan System 1",
+                                                    "supply_fans": [
+                                                        {
+                                                            "id": "Supply Fan 1"
+                                                        }
+                                                    ],
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "Return Fan 1"
+                                                        }
+                                                    ]
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    },
+    "rule-19-1-c": {
+        "Section": 19,
+        "Rule": 1,
+        "Test": "c",
+        "test_description": "Airside HVAC has no heating coil. It correctly utilizes an autosized DX coil with 15% oversizing. Heating side oversizing is not applicable",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "19-1",
+            "ruleset_reference": "G3.1.2.2",
+            "rule_description": "HVAC system coil capacities for the baseline building design shall be oversized by 15% for cooling and 25% for heating.",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "primary_rule": "Yes",
+            "schema_version": "0.0.23"
+        },
+        "rmr_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_instances": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_open_schedule": "Required Building Schedule 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "terminals": [
+                                                    {
+                                                        "id": "Air Terminal",
+                                                        "is_supply_ducted": true,
+                                                        "type": "CONSTANT_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "Airside System 1"
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "Airside System 1",
+                                                "cooling_system": {
+                                                    "id": "Cooling System 1",
+                                                    "is_autosized": true,
+                                                    "oversizing_factor": 0.15,
+                                                    "cooling_system_type": "DIRECT_EXPANSION"
+                                                },
+                                                "heating_system": {
+                                                    "id": "Heating System 1"
+                                                },
+                                                "fan_system": {
+                                                    "id": "Fan System 1",
+                                                    "supply_fans": [
+                                                        {
+                                                            "id": "Supply Fan 1"
+                                                        }
+                                                    ],
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "Return Fan 1"
+                                                        }
+                                                    ]
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    },
+    "rule-19-1-d": {
+        "Section": 19,
+        "Rule": 1,
+        "Test": "d",
+        "test_description": "System 3 incorrectly utilizes autosized furnace with no oversizing and autosized DX coil with no oversizing",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "19-1",
+            "ruleset_reference": "G3.1.2.2",
+            "rule_description": "HVAC system coil capacities for the baseline building design shall be oversized by 15% for cooling and 25% for heating.",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "primary_rule": "Yes",
+            "schema_version": "0.0.23"
+        },
+        "rmr_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_instances": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_open_schedule": "Required Building Schedule 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                                "terminals": [
+                                                    {
+                                                        "id": "Air Terminal",
+                                                        "is_supply_ducted": true,
+                                                        "type": "CONSTANT_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System Type 3"
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "System Type 3",
+                                                "cooling_system": {
+                                                    "id": "DX Coil 1",
+                                                    "cooling_system_type": "DIRECT_EXPANSION",
+                                                    "is_autosized": true,
+                                                    "oversizing_factor": 0
+                                                },
+                                                "heating_system": {
+                                                    "id": "Furnace Coil 1",
+                                                    "heating_system_type": "FURNACE",
+                                                    "is_autosized": true,
+                                                    "oversizing_factor": 0
+                                                },
+                                                "fan_system": {
+                                                    "id": "CAV Fan System 1",
+                                                    "fan_control": "CONSTANT",
+                                                    "supply_fans": [
+                                                        {
+                                                            "id": "Supply Fan 1"
+                                                        }
+                                                    ],
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "Return Fan 1"
+                                                        }
+                                                    ]
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    },
+    "rule-19-1-e": {
+        "Section": 19,
+        "Rule": 1,
+        "Test": "e",
+        "test_description": "Airside HVAC has no cooling coil. This RMD falls into NOT APPLICABLE case since it has OTHER heating system type.",
+        "expected_rule_outcome": "not_applicable",
+        "standard": {
+            "rule_id": "19-1",
+            "ruleset_reference": "G3.1.2.2",
+            "rule_description": "HVAC system coil capacities for the baseline building design shall be oversized by 15% for cooling and 25% for heating.",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "primary_rule": "Yes",
+            "schema_version": "0.0.23"
+        },
+        "rmr_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_instances": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_open_schedule": "Required Building Schedule 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "terminals": [
+                                                    {
+                                                        "id": "Air Terminal",
+                                                        "is_supply_ducted": true,
+                                                        "type": "CONSTANT_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "Airside System 1"
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "Airside System 1",
+                                                "cooling_system": {
+                                                    "id": "Cooling System 1"
+                                                },
+                                                "heating_system": {
+                                                    "id": "Heating System 1",
+                                                    "heating_system_type": "OTHER"
+                                                },
+                                                "fan_system": {
+                                                    "id": "Fan System 1",
+                                                    "supply_fans": [
+                                                        {
+                                                            "id": "Supply Fan 1"
+                                                        }
+                                                    ],
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "Return Fan 1"
+                                                        }
+                                                    ]
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    }
+}

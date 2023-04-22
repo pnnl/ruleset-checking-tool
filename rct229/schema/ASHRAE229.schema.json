@@ -2648,6 +2648,10 @@
                     "type": "number",
                     "units": "L/s"
                 },
+                "is_airflow_autosized": {
+                    "description": "True if the airflow is automatically sized by the simulation software",
+                    "type": "boolean"
+                },
                 "specification_method": {
                     "description": "Options for how the fan is specified",
                     "$ref": "ASHRAE229.schema.json#/definitions/FanSpecificationMethodOptions"
@@ -2661,7 +2665,7 @@
                 "design_pressure_rise": {
                     "description": "Pressure rise through fan at design flow conditions",
                     "type": "number",
-                    "units": "m",
+                    "units": "Pa",
                     "notes": "Only used when specification_method is set to Detailed"
                 },
                 "nameplate_power": {

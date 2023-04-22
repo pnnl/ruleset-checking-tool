@@ -319,7 +319,7 @@ def get_zone_conditioning_category_dict(climate_zone, building):
                     zone_conditioning_category_dict[
                         zone_id
                     ] = ZoneConditioningCategory.CONDITIONED_RESIDENTIAL  # zone_1_4
-                elif zone_has_nonresidential_spaces:
+                else:  # using else is fine b/c `zone_has_residential_spaces` and `zone_has_nonresidential_spaces` can't be False at the same time
                     zone_conditioning_category_dict[
                         zone_id
                     ] = (
