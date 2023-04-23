@@ -1,37 +1,80 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
+from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
+from rct229.rulesets.ashrae9012019.data.schema_enums import schema_enums
+from rct229.rulesets.ashrae9012019.ruleset_functions.get_hvac_systems_serving_zone_health_safety_vent_reqs import (
+    get_hvac_systems_serving_zone_health_safety_vent_reqs,
+)
 from rct229.utils.assertions import getattr_
-from rct229.utils.jsonpath_utils import find_all
+from rct229.utils.pint_utils import ZERO
 
-REQ_HEATING_OVERSIZING_FACTOR = 0.25
-REQ_COOLING_OVERSIZING_FACTOR = 0.15
+FAN_SYSTEM_OPERATION = schema_enums["FanSystemOperationOptions"]
 
 
-class Section19Rule26(RuleDefinitionBase):
+class Section19Rule26(RuleDefinitionListIndexedBase):
     """Rule 26 of ASHRAE 90.1-2019 Appendix G Section 19 (HVAC - General)"""
 
     def __init__(self):
         super(Section19Rule26, self).__init__(
             rmrs_used=UserBaselineProposedVals(False, False, True),
+            each_rule=Section19Rule26.HVACRule(),
+            index_rmr="proposed",
             id="19-26",
             description="HVAC fans shall remain on during unoccupied hours in spaces that have health and safety mandated minimum ventilation requirements during unoccupied hours in the proposed design.",
             ruleset_section_title="HVAC - General",
             standard_section="Section G3.1-4 Schedules exception #2 for the proposed building and Section G3.1.2.4 Appendix G Section Reference: None",
             is_primary_rule=True,
             rmr_context="ruleset_model_instances/0",
+            list_path="$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*]",
         )
 
+    def create_data(self, context, data):
+        rmi_p = context.proposed
+        applicable_hvac_systems_list_p = (
+            get_hvac_systems_serving_zone_health_safety_vent_reqs(rmi_p)
+        )
+
+        return {"applicable_hvac_systems_list_p": applicable_hvac_systems_list_p}
 
     def is_applicable(self, context, data=None):
-        rmi_p = context.proposed
+        hvac_p = context.proposed
+        hvac_id_p = hvac_p["id"]
+        applicable_hvac_systems_list_p = data["applicable_hvac_systems_list_p"]
 
-    def get_calc_vals(self, context, data=None):
-        hvac_b = context.baseline
+        return hvac_id_p in applicable_hvac_systems_list_p
 
+    class HVACRule(RuleDefinitionBase):
+        def __init__(self):
+            super(Section19Rule26.HVACRule, self).__init__(
+                rmrs_used=UserBaselineProposedVals(False, False, True),
+            )
 
-        return True
+        def get_calc_vals(self, context, data=None):
+            hvac_p = context.proposed
 
-    def rule_check(self, context, calc_vals=None, data=None):
+            operation_during_unoccupied_p = getattr_(
+                hvac_p, "HVAC", "fan_system", "operation_during_unoccupied"
+            )
+            minimum_outdoor_airflow_p = getattr_(
+                hvac_p, "HVAC", "fan_system", "minimum_outdoor_airflow"
+            )
 
+            return {
+                "operation_during_unoccupied_p": operation_during_unoccupied_p,
+                "minimum_outdoor_airflow_p": minimum_outdoor_airflow_p,
+            }
 
-        return True
+        def rule_check(self, context, calc_vals=None, data=None):
+            operation_during_unoccupied_p = calc_vals["operation_during_unoccupied_p"]
+            minimum_outdoor_airflow_p = calc_vals["minimum_outdoor_airflow_p"]
+
+            return (
+                operation_during_unoccupied_p == FAN_SYSTEM_OPERATION.CONTINUOUS
+                and minimum_outdoor_airflow_p > ZERO.FLOW
+            )
+
+        def get_fail_msg(self, context, calc_vals=None, data=None):
+            hvac_p = context.proposed
+            hvac_id_p = hvac_p["id"]
+
+            return f"{hvac_id_p} SERVES ZONE(S) THAT APPEAR LIKELY TO HAVE HEALTH AND SAFETY MANDATED MINIMUM VENTILATION REQUIREMENTS DURING UNOCCUPIED HOURS AND THEREFORE (IF THE HVAC SYSTEM SUPPLIES OA CFM) MAY WARRANT CONTINUOUS OPERATION DURING UNOCCUPIED HOURS PER SECTION G3.1-4 SCHEDULES EXCEPTION #2 FOR THE PROPOSED BUILDING AND PER SECTION G3.1.2.4."
