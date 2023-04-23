@@ -24,7 +24,10 @@ class Section19Rule28(RuleDefinitionListIndexedBase):
             id="19-28",
             description="",
             ruleset_section_title="HVAC - General",
-            standard_section="Table G3.1-4 Schedules for the proposed building excluding exceptions #s 2 and 3 and Section G3.1.2.4.",
+            standard_section="Schedules for HVAC fans in the baseline design model that provide outdoor air for ventilation shall be cycled ON and OFF "
+            "to meet heating and cooling loads during unoccupied hours excluding HVAC systems that meet Table G3.1-4 Schedules per the proposed column exceptions #s 2 and 3."
+            "#2 HVAC fans shall remain on during occupied and unoccupied hours in spaces that have health- and safety mandated minimum ventilation requirements during unoccupied hours."
+            "#3 HVAC fans shall remain on during occupied and unoccupied hours in systems primarily serving computer rooms.",
             is_primary_rule=True,
             rmr_context="ruleset_model_instances/0",
             list_path="$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*]",
