@@ -11,8 +11,8 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_s
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_baseline_system_types import (
     get_baseline_system_types,
 )
-from rct229.rulesets.ashrae9012019.ruleset_functions.get_HVAC_systems_primarily_serving_comp_room import (
-    get_HVAC_systems_primarily_serving_comp_room,
+from rct229.rulesets.ashrae9012019.ruleset_functions.get_hvac_systems_primarily_serving_comp_room import (
+    get_hvac_systems_primarily_serving_comp_room,
 )
 from rct229.rulesets.ashrae9012019.ruleset_functions.is_economizer_modeled_in_proposed import (
     is_economizer_modeled_in_proposed,
