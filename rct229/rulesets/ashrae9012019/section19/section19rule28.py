@@ -20,7 +20,7 @@ class Section19Rule28(RuleDefinitionListIndexedBase):
         super(Section19Rule28, self).__init__(
             rmrs_used=UserBaselineProposedVals(False, False, True),
             each_rule=Section19Rule28.HVACRule(),
-            index_rmr="baseline",
+            index_rmr="proposed",
             id="19-28",
             description="Schedules for HVAC fans in the baseline design model that provide outdoor air for ventilation shall be cycled ON and OFF "
             "to meet heating and cooling loads during unoccupied hours excluding HVAC systems that meet Table G3.1-4 Schedules per the proposed column exceptions #s 2 and 3."
