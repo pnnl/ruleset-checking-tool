@@ -11,15 +11,13 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_s
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_baseline_system_types import (
     get_baseline_system_types,
 )
+from rct229.rulesets.ashrae9012019.ruleset_functions.get_HVAC_systems_primarily_serving_comp_room import (
+    get_HVAC_systems_primarily_serving_comp_room,
+)
 from rct229.rulesets.ashrae9012019.ruleset_functions.is_economizer_modeled_in_proposed import (
     is_economizer_modeled_in_proposed,
 )
-from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all, find_one
-
-# from rct229.rulesets.ashrae9012019.ruleset_functions.get_HVAC_systems_primarily_serving_comp_rooms import (
-#     get_HVAC_systems_primarily_serving_comp_rooms,
-# ) # This will be uncommented once the function is added
 
 NOT_APPLICABLE_CLIMATE_ZONE = ["CZ0A", "CZ0B", "CZ1A", "CZ1B", "CZ2A", "CZ3A", "CZ4A"]
 APPLICABLE_SYS_TYPES = [
