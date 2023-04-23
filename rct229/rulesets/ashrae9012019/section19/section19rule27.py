@@ -46,7 +46,7 @@ class Section19Rule27(RuleDefinitionListIndexedBase):
     class HVACRule(RuleDefinitionBase):
         def __init__(self):
             super(Section19Rule27.HVACRule, self).__init__(
-                rmrs_used=UserBaselineProposedVals(False, False, True),
+                rmrs_used=UserBaselineProposedVals(False, True, False),
             )
 
         def get_calc_vals(self, context, data=None):
