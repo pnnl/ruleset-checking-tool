@@ -8,9 +8,6 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_dict_of_zones_and_termi
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_fan_object_electric_power import (
     get_fan_object_electric_power,
 )
-from rct229.rulesets.ashrae9012019.ruleset_functions.get_fan_system_object_supply_return_exhaust_relief_total_power_flow import (
-    get_fan_system_object_supply_return_exhaust_relief_total_power_flow,
-)
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_list_hvac_systems_associated_with_zone import (
     get_list_hvac_systems_associated_with_zone,
 )
