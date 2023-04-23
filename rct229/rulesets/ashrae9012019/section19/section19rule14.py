@@ -13,18 +13,16 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_baseline_system_types i
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_dict_of_zones_and_terminal_units_served_by_hvac_sys import (
     get_dict_of_zones_and_terminal_units_served_by_hvac_sys,
 )
+from rct229.rulesets.ashrae9012019.ruleset_functions.get_fan_system_object_supply_return_exhaust_relief_total_power_flow import (
+    get_fan_system_object_supply_return_exhaust_relief_total_power_flow,
+)
+from rct229.rulesets.ashrae9012019.ruleset_functions.get_zone_supply_return_exhaust_relief_terminal_fan_power_dict import (
+    get_zone_supply_return_exhaust_relief_terminal_fan_power_dict,
+)
 from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all, find_one
 from rct229.utils.pint_utils import ZERO
 from rct229.utils.std_comparisons import std_equal
-
-# from rct229.rulesets.ashrae9012019.ruleset_functions.get_fan_system_object_supply_return_exhaust_relief_total_power_flow import (
-#     get_fan_system_object_supply_return_exhaust_relief_total_power_flow,
-# ) # will be uncommented after this function is added to `develop`
-# from rct229.rulesets.ashrae9012019.ruleset_functions.get_zone_supply_return_exhaust_relief_terminal_fan_power_dict import (
-#     get_zone_supply_return_exhaust_relief_terminal_fan_power_dict,
-# ) # will be uncommented after this function is added to `develop`
-
 
 APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_1,
@@ -113,12 +111,16 @@ class Section19Rule14(RuleDefinitionListIndexedBase):
                         modeled_fan_power_list_p["zone_total_return_fan_power"]
                         > ZERO.POWER
                     ):
-                        hvac_info[hvac_id_b]["is_modeled_with_return_fan_in_proposed"] = True
+                        hvac_info[hvac_id_b][
+                            "is_modeled_with_return_fan_in_proposed"
+                        ] = True
                     if (
                         modeled_fan_power_list_p["zone_total_exhaust_fan_power"]
                         > ZERO.POWER
                     ):
-                        hvac_info[hvac_id_b]["is_modeled_with_relief_fan_in_proposed"] = False
+                        hvac_info[hvac_id_b][
+                            "is_modeled_with_relief_fan_in_proposed"
+                        ] = False
 
         return {
             "baseline_system_types_dict": get_baseline_system_types(rmi_b),
@@ -184,7 +186,11 @@ class Section19Rule14(RuleDefinitionListIndexedBase):
 
             return_fans_airflow = fan_sys_cfm["return_fans_airflow"]
             relief_fans_airflow = fan_sys_cfm["relief_fans_airflow"]
-            modeled_cfm = return_fans_airflow + relief_fans_airflow if is_modeled_with_return_fan_p and is_modeled_with_relief_fan_p else ZERO.FLOW
+            modeled_cfm = (
+                return_fans_airflow + relief_fans_airflow
+                if is_modeled_with_return_fan_p and is_modeled_with_relief_fan_p
+                else ZERO.FLOW
+            )
 
             baseline_modeled_return_as_expected = False
             baseline_modeled_relief_as_expected = False
