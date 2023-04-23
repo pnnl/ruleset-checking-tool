@@ -85,7 +85,7 @@ TEST_RMI_UNIT = quantify_rmr(TEST_RMD)["ruleset_model_instances"][0]
 
 
 def test__TEST_RMD__is_valid():
-    schema_validation_result = schema_validate_rmr(TEST_RMI_UNIT)
+    schema_validation_result = schema_validate_rmr(TEST_RMD)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"
