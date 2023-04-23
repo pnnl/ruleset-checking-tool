@@ -33,7 +33,7 @@ class Section19Rule31(RuleDefinitionListIndexedBase):
 
         inapplicable_hvac_sys_list_p = get_hvac_systems_primarily_serving_comp_room(
             rmi_p
-        ) + get_hvac_systems_serving_zone_health_safety_vent_reqs(rmi_p)
+        )
 
         return {"inapplicable_hvac_sys_list_p": inapplicable_hvac_sys_list_p}
 
