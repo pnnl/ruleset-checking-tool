@@ -40,6 +40,13 @@ class Section19Rule27(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section19Rule27.HVACRule, self).__init__(
                 rmrs_used=UserBaselineProposedVals(False, True, False),
+                required_fields={
+                    "$": ["fan_system"],
+                    "fan_system": [
+                        "operation_during_occupied",
+                        "minimum_outdoor_airflow",
+                    ],
+                },
             )
 
         def is_applicable(self, context, data=None):
@@ -52,12 +59,10 @@ class Section19Rule27(RuleDefinitionListIndexedBase):
         def get_calc_vals(self, context, data=None):
             hvac_b = context.baseline
 
-            operation_during_unoccupied_b = getattr_(
-                hvac_b, "HVAC", "fan_system", "operation_during_unoccupied"
-            )
-            minimum_outdoor_airflow_b = getattr_(
-                hvac_b, "HVAC", "fan_system", "minimum_outdoor_airflow"
-            )
+            operation_during_unoccupied_b = hvac_b["fan_system"][
+                "operation_during_unoccupied"
+            ]
+            minimum_outdoor_airflow_b = hvac_b["fan_system"]["minimum_outdoor_airflow"]
 
             return {
                 "operation_during_unoccupied_b": operation_during_unoccupied_b,
