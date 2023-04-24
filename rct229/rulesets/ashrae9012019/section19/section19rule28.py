@@ -8,7 +8,6 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_hvac_systems_primarily_
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_hvac_systems_serving_zone_health_safety_vent_reqs import (
     get_hvac_systems_serving_zone_health_safety_vent_reqs,
 )
-from rct229.utils.assertions import getattr_
 
 FAN_SYSTEM_OPERATION = schema_enums["FanSystemOperationOptions"]
 
@@ -49,6 +48,12 @@ class Section19Rule28(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section19Rule28.HVACRule, self).__init__(
                 rmrs_used=UserBaselineProposedVals(False, False, True),
+                required_fields={
+                    "$": ["fan_system"],
+                    "fan_system": [
+                        "operation_during_occupied",
+                    ],
+                },
             )
 
         def is_applicable(self, context, data=None):
@@ -61,9 +66,9 @@ class Section19Rule28(RuleDefinitionListIndexedBase):
         def get_calc_vals(self, context, data=None):
             hvac_p = context.proposed
 
-            operation_during_unoccupied_p = getattr_(
-                hvac_p, "HVAC", "fan_system", "operation_during_unoccupied"
-            )
+            operation_during_unoccupied_p = hvac_p["fan_system"][
+                "operation_during_unoccupied"
+            ]
 
             return {"operation_during_unoccupied_p": operation_during_unoccupied_p}
 
