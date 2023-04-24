@@ -36,24 +36,27 @@ class Section19Rule29(RuleDefinitionListIndexedBase):
     def create_data(self, context, data):
         rmi_b = context.baseline
 
-        inapplicable_hvac_sys_list_b = get_hvac_systems_primarily_serving_comp_room(
-            rmi_b
-        ) + get_hvac_systems_serving_zone_health_safety_vent_reqs(rmi_b)
+        inapplicable_hvac_sys_list_b = list(
+            set(
+                get_hvac_systems_primarily_serving_comp_room(rmi_b)
+                + get_hvac_systems_serving_zone_health_safety_vent_reqs(rmi_b)
+            )
+        )
 
         return {"inapplicable_hvac_sys_list_b": inapplicable_hvac_sys_list_b}
-
-    def is_applicable(self, context, data=None):
-        hvac_b = context.baseline
-        hvac_id_b = hvac_b["id"]
-        inapplicable_hvac_sys_list_b = data["inapplicable_hvac_sys_list_b"]
-
-        return hvac_id_b not in inapplicable_hvac_sys_list_b
 
     class HVACRule(RuleDefinitionBase):
         def __init__(self):
             super(Section19Rule29.HVACRule, self).__init__(
                 rmrs_used=UserBaselineProposedVals(False, True, False),
             )
+
+        def is_applicable(self, context, data=None):
+            hvac_b = context.baseline
+            hvac_id_b = hvac_b["id"]
+            inapplicable_hvac_sys_list_b = data["inapplicable_hvac_sys_list_b"]
+
+            return hvac_id_b not in inapplicable_hvac_sys_list_b
 
         def get_calc_vals(self, context, data=None):
             hvac_b = context.baseline
