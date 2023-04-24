@@ -5,7 +5,6 @@ from rct229.rulesets.ashrae9012019.data.schema_enums import schema_enums
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_hvac_systems_serving_zone_health_safety_vent_reqs import (
     get_hvac_systems_serving_zone_health_safety_vent_reqs,
 )
-from rct229.utils.assertions import getattr_
 from rct229.utils.pint_utils import ZERO
 
 FAN_SYSTEM_OPERATION = schema_enums["FanSystemOperationOptions"]
