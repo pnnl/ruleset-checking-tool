@@ -36,18 +36,18 @@ class Section19Rule26(RuleDefinitionListIndexedBase):
 
         return {"applicable_hvac_systems_list_p": applicable_hvac_systems_list_p}
 
-    def is_applicable(self, context, data=None):
-        hvac_p = context.proposed
-        hvac_id_p = hvac_p["id"]
-        applicable_hvac_systems_list_p = data["applicable_hvac_systems_list_p"]
-
-        return hvac_id_p in applicable_hvac_systems_list_p
-
     class HVACRule(RuleDefinitionBase):
         def __init__(self):
             super(Section19Rule26.HVACRule, self).__init__(
                 rmrs_used=UserBaselineProposedVals(False, False, True),
             )
+
+        def is_applicable(self, context, data=None):
+            hvac_p = context.proposed
+            hvac_id_p = hvac_p["id"]
+            applicable_hvac_systems_list_p = data["applicable_hvac_systems_list_p"]
+
+            return hvac_id_p in applicable_hvac_systems_list_p
 
         def get_calc_vals(self, context, data=None):
             hvac_p = context.proposed
