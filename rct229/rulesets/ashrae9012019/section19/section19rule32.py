@@ -5,7 +5,6 @@ from rct229.rulesets.ashrae9012019.data.schema_enums import schema_enums
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_hvac_systems_primarily_serving_comp_room import (
     get_hvac_systems_primarily_serving_comp_room,
 )
-from rct229.utils.assertions import getattr_
 from rct229.utils.pint_utils import ZERO
 
 FAN_SYSTEM_OPERATION = schema_enums["FanSystemOperationOptions"]
@@ -57,12 +56,10 @@ class Section19Rule32(RuleDefinitionListIndexedBase):
         def get_calc_vals(self, context, data=None):
             hvac_b = context.baseline
 
-            operation_during_unoccupied_b = getattr_(
-                hvac_b, "HVAC", "fan_system", "operation_during_unoccupied"
-            )
-            minimum_outdoor_airflow_b = getattr_(
-                hvac_b, "HVAC", "fan_system", "minimum_outdoor_airflow"
-            )
+            operation_during_unoccupied_b = hvac_b["fan_system"][
+                "operation_during_unoccupied"
+            ]
+            minimum_outdoor_airflow_b = hvac_b["fan_system"]["minimum_outdoor_airflow"]
 
             return {
                 "operation_during_unoccupied_b": operation_during_unoccupied_b,
