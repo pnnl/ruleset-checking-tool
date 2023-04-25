@@ -31,7 +31,7 @@
 			- `zones_and_systems[zone] = {}`
 - get the list of HVAC building area types and zones: `list_building_area_types_and_zones = get_HVAC_building_area_types_and_zones(B-RMR)`
 - get the predominant building area type: `predominant_building_area_type = get_predominant_HVAC_building_area_type(list_building_area_types_and_zones)`
-- get the total number of floors for the building: `num_floors = get_number_of_floors(B-RMR)`
+- get the total number of floors for the building: `num_floors = get_number_of_floors(B-RMI)`
 - first get the expected system type for the predominant building area type.  To do this, we need the total area of the predominant building area type, which includes all BAT's less than 20000 ft2
 - set area equal to the area of the predominant building area type: `area = list_building_area_types_and_zones[predominant_building_area_type]["AREA"]`
 - loop through the building area types: `for bat in list_building_area_types_and_zones:`
@@ -120,6 +120,5 @@
 **Notes/Questions:**  
 1.  Unresolved how to handle G3.1.1d
 2.  For G3.1.1f - which system type should be assigned when the zone meets the requirements?
-3.  What to do with G3.1.1g???
 
 **[Back](../_toc.md)**
