@@ -3,7 +3,7 @@
 
 **Description:** Get the hvac_ids associated with each building area type associated with U_RMR, P_RMR, or B_RMR. Also returns the total floor area of each building area type
 - used to verify the correct type of HVAC baseline system (or systems)
-- HVAC building area type is determined first by looking at the space lighting type and then by looking at the building segment HVAC building area type.  Support spaces such as corridors, stairwells and other support spaces will inherit the predominant building area type EXCEPT in buildings where the predominant HVAC_BAT is residential.  In residential buildings, support spaces such as corridors and stairwells will be classified as Other Non-Residential.
+- HVAC building area type is determined first by looking at the building segment HVAC_BAT.  If this variable does not exist, the function next looks at building segment lighting_building_area_type.  If this variable doesn't exist, the function will look at the space lighting type.  Support spaces such as corridors, stairwells and other support spaces will inherit the predominant building area type EXCEPT in buildings where the predominant HVAC_BAT is residential.  In residential buildings, support spaces such as corridors and stairwells will be classified as Other Non-Residential.
 
 **Inputs:**  
 - **B-RMI**: The baseline ruleset model instance
@@ -155,44 +155,33 @@
 
 - create dict `building_area_types_with_total_area_and_zones_dict`: `building_area_types_with_total_area_and_zones_dict = {}`
 - For each building segment in RMR: `for building_segment in RMR.building.building_segments:`
-	- Create list_of_zones for storing zone_ids `list_of_zones = []`
-	- For each zone in building_segment: `for zone in building_segment.zones:`
-		- add zone_id to list_of_zones: `list_of_zones.append(zone.id)`
-		- create space_area_type variable and set equal to "None": `space_area_type = NONE`
-		- we need to look at all the spaces, map lighting space types to HVAC building area types, and find the largest floor area.  The zone will get assigned the HVAC_BAT associated with the largest floor area.
-		- create a dict of space area types: `zone_space_area_types = {}`
-		- create a variable for the total floor area of the zone: `zone_total_floor_area = 0`
-		- loop through the spaces: `for space in zone.spaces:`
-			- add the space floor area to the zone total floor area: `zone_total_floor_area += space.floor_area
-			- look up the area type using `lighting_space_lookup`: `area_type = lighting_space_lookup[space.lighting_space_type]`
-			- create the integer for this space area type if it doesn't exist yet: `zone_space_area_types[area_type] = zone_space_area_types[area_type] or 0`
-			- add the space area to the dict under `area_type`: `zone_space_area_types[area_type] = zone_space_area_types[area_type] + space.floor_area`
-		- assign the key with the maximum floor area to `space_area_type`: `space_area_type = max(zone_space_area_types, key = zone_space_area_types.get)`
-		- if the space_area_type is NONE, we look at the building_segment.area_type_heating_ventilating_air_conditioning_system: `space_area_type = building_segment.area_type_heating_ventilating_air_conditioning_system`
-		
-		- now we need to add the data about the zone to the building_area_types_with_total_area_and_zones_dict.  If this is the first time we are seeing the space area type, we need to create the dictionary entries for this space area type.  Create the sub-dictionary: `building_area_types_with_total_area_and_zones_dict[space_area_type = {}`
-		- create the integer for `building_area_types_with_total_area_and_zones_dict[space_area_type]["AREA"]` if it doesn't yet exist: `building_area_types_with_total_area_and_zones_dict[space_area_type]["AREA"] = building_area_types_with_total_area_and_zones_dict[space_area_type]["AREA"] or 0`
-		- create the list for `building_area_types_with_total_area_and_zones_dict[space_area_type]["ZONE_IDS"]` if it doesn't already exist: `building_area_types_with_total_area_and_zones_dict[space_area_type]["ZONE_IDS"] = building_area_types_with_total_area_and_zones_dict[space_area_type]["ZONE_IDS"] or []`
-		- add zone area: `building_area_types_with_total_area_and_zones_dict[space_area_type]["AREA"] += zone_total_floor_area`
-
-		- Append zone_id to the dict: `building_area_types_with_total_area_and_zones_dict[space_area_type]["ZONE_IDS"].append(zone.id)`
-
-- now we need to reclasify any spaces that we clasified as OTHER_UNDETERMINED and remove OTHER_UNDETERMINED from the dict.  Check if OTHER_UNDETERMINED is in the dict: `if OTHER_UNDETERMINED in building_area_types_with_total_area_and_zones_dict:`
-	- check if the dict has a length of 1, this means that there are ONLY OTHER_UDETERMINED spaces in the RMI: `if len(building_area_types_with_total_area_and_zones_dict) == 1:`
-		- change the key from OTHER_UNDETERMINED to OTHER_NON_RESIDENTIAL: `building_area_types_with_total_area_and_zones_dict[OTHER_NON_RESIDENTIAL] = building_area_types_with_total_area_and_zones_dict.pop(OTHER_UNDETERMINED)`
-	- otherwise, we need to reclassify the undetermined zones as part of the largest space area type in the building: `else:`
-		- create a variable to hold list of OTHER_UNDETERMINED zones: `other_undetermined_zones_list = building_area_types_with_total_area_and_zones_dict[OTHER_UNDETERMINED]["ZONE_IDS"]`
-		- create a variable to hold the area of OTHER_UNDETERMINED zones: `other_undetermined_zones_area = building_area_types_with_total_area_and_zones_dict[OTHER_UNDETERMINED]["AREA"]`
-		- now remove OTHER_UNDETERMINED from  building_area_types_with_total_area_and_zones_dict: `building_area_types_with_total_area_and_zones_dict.pop(OTHER_UNDETERMINED)`
-		
-		- now that we have saved the information about OTHER_UNDETERMINED zones, and we have removed it from the dict, we determine the predominant building area type based on the remaining information.  We start by sorting the dict into a sorted list: sorted_list = sorted(building_area_types_with_total_area_and_zones_dict.items(), key=lambda x: x[1]["AREA"], reverse = True)
-		- the first item in the list will be the predominant building area type: `predominant_HVAC_building_area_type = sorted_list[0][0]`
-		- if the predominant_HVAC_building_area_type is RESIDENTIAL, the OTHER_UNDETERMINED zones will be added to the next largest building area type if it exists: `if predominant_HVAC_building_area_type == RESIDENTIAL:`
-			- check if there is another building area type, by checking the length of building_area_types_with_total_area_and_zones_dict: `if len(sorted_list) > 1:`
-				- set predominant_HVAC_building_area_type to the second item in the sorted_list: `predominant_HVAC_building_area_type = sorted_list[1][0]`
-		- add the zone ids from OTHER_UNDETERMINED to the predominant_HVAC_building_area_type: `building_area_types_with_total_area_and_zones_dict[predominant_HVAC_building_area_type]["ZONE_IDS"].append(other_undetermined_zones_list)`
-		- add the area from OTHER_UNDETERMINED to the predominant_HVAC_building_area_type: `building_area_types_with_total_area_and_zones_dict[predominant_HVAC_building_area_type]["AREA"] += other_undetermined_zones_area`
-
+	- if the building segment has a HVAC_BAT assigned, assign all zones in that building segment to the HVAC_BAT: `if building_segment.area_type_heating_ventilating_air_conditioning_system != NULL:`
+		- assign the HVAC_BAT to be the building_segment_HVAC_BAT: `building_segment_HVAC_BAT = building_segment.area_type_heating_ventilating_air_conditioning_system`
+	- else if there is no HVAC_BAT assigned, look in the building_segment lighting_building_area_type: `elif building_segment.lighting_building_area_type != NULL`
+		- assign the HVAC_BAT to the building_segment_HVAC_BAT using the lighting_space_lookup: `building_segment_HVAC_BAT = lighting_space_lookup[building_segment.lighting_building_area_type]`
+	- else look at each zone, and then each space and determine the building_segment_HVAC_BAT using the largest space.lighting_space_type: `else:`
+		- create a dictionary to keep track of the space types and areas: `building_segment_space_types_areas_dict = {}`
+		- look at each zone: `for zone in building_segment.zones:`
+			- look at each space: `for space in zone.spaces:`
+				- look up the HVAC_BAT for the space using the lighting_space_lookup: `space_HVAC_BAT = lighting_space_lookup[space.lighting_space_type]`
+				- add this space type to the building_segment_space_types_areas_dict if it doesn't exist yet: `building_segment_space_types_areas_dict[space_HVAC_BAT] = building_segment_space_types_areas_dict[space_HVAC_BAT] or 0`
+				- add the space area: `building_segment_space_types_areas_dict[space_HVAC_BAT] += space.floor_area`
+		- get the HVAC_BAT with the largest floor area from building_segment_space_types_areas_dict: `building_segment_HVAC_BAT = max(building_segment_space_types_areas_dict, key=building_segment_space_types_areas_dict.get)`
+	- at this point, the building_segment_HVAC_BAT has been defined by one of the three approaches, add a list for this type of HVAC_BAT to the building_area_types_with_total_area_and_zones_dict if it doesn't exist already: `building_area_types_with_total_area_and_zones_dict[building_segment_HVAC_BAT] = building_area_types_with_total_area_and_zones_dict[building_segment_HVAC_BAT] or {"ZONE_IDS":[], "AREA":0}`
+	- loop through each zone: `for zone in building_segment.zones:`
+		- add the zone to the building_area_types_with_total_area_and_zones_dict: `building_area_types_with_total_area_and_zones_dict[building_segment_HVAC_BAT]["ZONE_IDS"].append(zone.id)`
+			- loop through each space: `for space in zone.spaces:`
+				- add the space area to the building_area_types_with_total_area_and_zones_dict: `building_area_types_with_total_area_and_zones_dict[building_segment_HVAC_BAT]["AREA"] += space.floor_area`
+- we still need to deal with the possibility that there are spaces classified as OTHER_UNDETERMINED: `if OTHER_UNDETERMINED in building_area_types_with_total_area_and_zones_dict:`
+	- determine what the largest space type is: `predominate_HVAC_BAT = sorted(building_area_types_with_total_area_and_zones_dict.items(), key=lambda x: x[1]["AREA"], reverse = True)[0][0]`
+	- if RESIDENTIAL or OTHER_UNDETERMINED is the largest space area: `if predominate_HVAC_BAT == OTHER_UNDETERMINED or predominate_HVAC_BAT == RESIDENTIAL:`
+		- we re-classify all OTHER_UNDETERMINED spaces as OTHER_NON_RESIDENTIAL: `building_area_types_with_total_area_and_zones_dict[OTHER_NON_RESIDENTIAL] = building_area_types_with_total_area_and_zones_dict[OTHER_NON_RESIDENTIAL] or {"ZONE_IDS":[], "AREA":0}`
+		- add the zones from the OTHER_UNDETERMINED list to the OTHER_NON_RESIDENTIAL list: `building_area_types_with_total_area_and_zones_dict[OTHER_NON_RESIDENTIAL]["ZONE_IDS"] += building_area_types_with_total_area_and_zones_dict[OTHER_UNDETERMINED]["ZONE_IDS"]`
+		- add the area from the OTHER_UNDETERMIEND list to the OTHER_NON_RESIDENTIAL area: `building_area_types_with_total_area_and_zones_dict[OTHER_NON_RESIDENTIAL]["AREA"] += building_area_types_with_total_area_and_zones_dict[OTHER_UNDETERMINED]["AREA"]
+	- otherwise, we can add the are and zones from OTHER_UNDETERMINED to the predominate_HVAC_BAT: `else:`
+		- add the zones from the OTHER_UNDETERMINED list to the predominate_HVAC_BAT list: `building_area_types_with_total_area_and_zones_dict[predominate_HVAC_BAT]["ZONE_IDS"] += building_area_types_with_total_area_and_zones_dict[OTHER_UNDETERMINED]["ZONE_IDS"]`
+		- add the area from the OTHER_UNDETERMIEND list to the predominate_HVAC_BAT area: `building_area_types_with_total_area_and_zones_dict[predominate_HVAC_BAT]["AREA"] += building_area_types_with_total_area_and_zones_dict[OTHER_UNDETERMINED]["AREA"]
+	- remove the key OTHER_UNDETERMINED from building_area_types_with_total_area_and_zones_dict: `del building_area_types_with_total_area_and_zones_dict[OTHER_UNDETERMINED]`
 
 	 **Returns** `return buildiung_area_types_with_total_area_and_zones_dict`  
 
