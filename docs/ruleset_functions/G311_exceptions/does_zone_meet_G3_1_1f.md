@@ -11,7 +11,6 @@
 - **result**: an enum - either YES or NO
  
 **Function Call:**
-- **get_list_hvac_systems_associated_with_zone**
 - **is_zone_mechanically_cooled**
 
 ## Logic:
