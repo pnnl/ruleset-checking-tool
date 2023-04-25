@@ -4,8 +4,8 @@
 **Description:** Following G3.1.1, determines the baseline system type for each zone in a building
 
 **Inputs:**
-- **P-RMD**
-- **B-RMD**
+- **P-RMI**
+- **B-RMI**
 
 **Returns:**  
 - **zones_and_systems**: a dictionary with zone / list pairs where the first value in the list is the expected system type (ex SYS_3) and the second value is the rule used to choose the system, (eg "G3_1_1e"): zones_and_systems[zone]["EXPECTED_SYSTEM_TYPE"] = SYS_3; zones_and_systems[zone]["SYSTEM_ORIGIN"] =  "G3_1_1e"
@@ -74,7 +74,7 @@
 
 - G3.1.1e "Thermal zones designed with heating-only systems in the proposed design serving storage rooms, stairwells, vestibules, electrical/mechanical rooms, and restrooms not exhausting or transferring air from mechanically cooled thermal zones in the proposed design shall use system type 9 or 10 in the baseline building design."
 - loop through the zones_and_systems to see if any of the zones meets this requirement: `for zone in zones_and_systems:`
-	- use the function does_zone_meet_G3_1_1e to determine whether to change the system type (we are using != NO instead of YES, because the function can return MAYBE_VESTIBULE or LIKELY_VESTIBULE.  Here we will assign any "maybe's or "likelies" to the new system type.  The rule itself will deal with the uncertainty of vestibules using the function is_zone_a_vestibule): `if does_zone_meet_G3_1_1e(P-RMR,B-RMR,zone) != NO:`
+	- use the function does_zone_meet_G3_1_1e to determine whether to change the system type (we are using != NO instead of YES, because the function can return MAYBE_VESTIBULE or LIKELY_VESTIBULE.  Here we will assign any "maybe's or "likelies" to the new system type.  The rule itself will deal with the uncertainty of vestibules using the function is_zone_a_vestibule): `if does_zone_meet_G3_1_1e(P-RMI,B-RMI,zone) != NO:`
 		- - change the system origin string: `zones_and_systems[zone]["SYSTEM_ORIGIN"] = "G3_1_1e"`
 		- choose system 9 or 10 based on climate zone: `if is_CZ_0_to_3a():`
 			- set the system to SYS_10: `zones_and_systems[zone]["EXPECTED_SYSTEM_TYPE"] = SYS_10`
@@ -85,7 +85,7 @@
 - G3.1.1f "If the baseline HVAC system type is 9 or 10, use additional system types for all HVAC zones that are mechanically cooled in the proposed design."
 - loop through the zones and systems, check only the zones that are SYS-9 or 10: `for zone in zones_and_systems:`
 	- check if it is SYS-9 or SYS-10: `if zones_and_systems[zone]["EXPECTED_SYSTEM_TYPE"] in [SYS_9, SYS_10]:`
-		- use the function does_zone_meet_G3_1_1f to see if the zone meets the requirements of G3_1_1f: `if does_zone_meet_G3_1_1f(P-RMR,B-RMR,zone.id) == YES:`
+		- use the function does_zone_meet_G3_1_1f to see if the zone meets the requirements of G3_1_1f: `if does_zone_meet_G3_1_1f(P-RMI,B-RMI,zone.id) == YES:`
 			- change the system origin string: `zones_and_systems[zone]["SYSTEM_ORIGIN"] = "G3_1_1f"`
 			- the zone meets the G3_1_1f requirements, choose system 3 or 4 based on climate zone: `if is_CZ_0_to_3a():`
 				- set the system to SYS_4: `zones_and_systems[zone]["EXPECTED_SYSTEM_TYPE"] = SYS_4
