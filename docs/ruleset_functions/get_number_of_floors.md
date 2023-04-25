@@ -26,7 +26,7 @@
 
 - when we find floors, we'll remove the zones from the zone_list, until there are no more zones in the list, so we create a loop using `while` and the condition `len(zone_list) > 0`: `while len(zone_list) > 0:`
 	- the first zone in the list will be the one with the lowest elevation, create variable elevation equal to this first zone's elevation: `elevation = zone_list[0].elevation`
-	- until we find a zone with an elevation greater than 7.5' (2.286m) higher than this base elevation, count the zones as being on the same floor - this step insures that zones that have a slightly different elevation, such as a signle step up or down do not get counted as being on different floors: `while zone_list[0].elevation <= elevation + 2.286:`
+	- until we find a zone with an elevation greater than 7.5' higher than this base elevation, count the zones as being on the same floor - this step insures that zones that have a slightly different elevation, such as a single step up or down do not get counted as being on different floors: `while zone_list[0].elevation <= elevation + 7.5:`
 		- remove the first zone on the list from the master zone_list: `zone_list.remove(zone_list[0])`
 		- break out of the loop if there are no more zones in the list: `if len(zone_list) == 0: break`
 	- increment the number of floors: `num_of_floors += 1`
