@@ -48,7 +48,7 @@ We will also check that the lighting space type is in agreement with the space u
 	- create a variable for the total floor area: `floor_area = 0`	
 	- loop through the building adding the floor area of all zones on the same floor as the zone: `for building_segment in RMR.building_segments:`
 		- loop through the zones: `for z in building_segment:`
-			- check of z is on the same floor as the zone: `if z.floor_name == zone.floor_name:`
+			- check of z is on the same floor as the zone by checking whether the zone elevation is within 7.5' / 2 (3.25') of our zone - this is more or less the same logic used in the function get_number_of_floors: `if zone.elevation - 3.25 < z.elevation < zone.elevation + 3.25:`
 				- loop through the z spaces adding the area to the floor_area: `for space in z.spaces:`
 					- add space area to floor_area: `floor_area = floor_area + space.floor_area`
 	- create a variable for the target zone's area: `zone_area = 0`
