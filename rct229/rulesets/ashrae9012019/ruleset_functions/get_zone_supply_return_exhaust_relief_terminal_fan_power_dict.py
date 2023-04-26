@@ -43,7 +43,7 @@ def get_zone_supply_return_exhaust_relief_terminal_fan_power_dict(rmi):
     return fan power kW, exhaust fan power kW, relief fan power kW, terminal fan power]}. Values will be equal to
     zero where not defined for a fan system. Zonal exhaust and non-mechanical cooling is not included.
     """
-    zone_supply_return_exhaust_relief_terminal_fan_power_dict = dict()
+    zone_supply_return_exhaust_relief_terminal_fan_power_dict = {}
     dict_of_zones_and_terminal_units_served_by_hvac_sys = (
         get_dict_of_zones_and_terminal_units_served_by_hvac_sys(rmi)
     )
@@ -59,13 +59,13 @@ def get_zone_supply_return_exhaust_relief_terminal_fan_power_dict(rmi):
         zone_total_relief_fan_power = ZERO.POWER
         zone_total_terminal_fan_power = ZERO.POWER
 
-        hvac_sys_list_serving_zone_dict = get_list_hvac_systems_associated_with_zone(
+        hvac_sys_list_serving_zone = get_list_hvac_systems_associated_with_zone(
             rmi, zone["id"]
         )
-        for hvac_id in hvac_sys_list_serving_zone_dict:
+        for hvac_id in hvac_sys_list_serving_zone:
             hvac = find_exactly_one_hvac_system(rmi, hvac_id)
             hvac_system_zone_ids_list = (
-                dict_of_zones_and_terminal_units_served_by_hvac_sys[hvac["id"]][
+                dict_of_zones_and_terminal_units_served_by_hvac_sys[hvac_id][
                     "zone_list"
                 ]
             )
@@ -78,12 +78,12 @@ def get_zone_supply_return_exhaust_relief_terminal_fan_power_dict(rmi):
             # Make sure the HVAC system has more than one zone
             assert_(
                 hvac_system_zone_ids_list,
-                f"No zone connected with the HVAC {hvac_id}. Check inputs!",
+                f"No zone associated with the HVAC {hvac_id}. Check inputs!",
             )
             # Make sure the HVAC system has more than one terminal
             assert_(
                 hvac_system_terminal_id_list,
-                f"No terminal connected with the HVAC {hvac_id}. Check inputs!",
+                f"No terminal associated with the HVAC {hvac_id}. Check inputs!",
             )
 
             # Find terminals in the zone that matches to the HVAC terminal list, and calculate the terminal fan power
@@ -114,7 +114,7 @@ def get_zone_supply_return_exhaust_relief_terminal_fan_power_dict(rmi):
                     find_exactly_one_terminal_unit(rmi, terminal_id)
                     for terminal_id in hvac_system_terminal_id_list
                 ]
-                hvac_total_terminal_air_flow = pint_sum(
+                hvac_total_terminal_air_flow = sum(
                     [
                         terminal.get("primary_airflow", ZERO.FLOW)
                         for terminal in hvac_system_terminal_list
@@ -123,7 +123,7 @@ def get_zone_supply_return_exhaust_relief_terminal_fan_power_dict(rmi):
                 )
                 # Make sure hvac_total_terminal_air_flow is greater than 0.0 to avoid 0 division error
                 assert_(
-                    hvac_total_terminal_air_flow > 0.0,
+                    hvac_total_terminal_air_flow > ZERO.FLOW,
                     f"Terminals connected with HVAC {hvac['id']} have 0.0 total air flow. Check inputs!",
                 )
 
