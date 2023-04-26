@@ -23,7 +23,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_fan_system_object_suppl
 from rct229.schema.config import ureg
 from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all
-from rct229.utils.pint_utils import ZERO, pint_sum
+from rct229.utils.pint_utils import ZERO
 from rct229.utils.std_comparisons import std_equal
 
 APPLICABLE_SYS_TYPES = [
@@ -89,7 +89,7 @@ class Section19Rule15(RuleDefinitionListIndexedBase):
                 ]
             )
 
-            hvac_info_dict_b[hvac_id_b]["proposed_supply_flow"] = pint_sum(
+            hvac_info_dict_b[hvac_id_b]["proposed_supply_flow"] = sum(
                 [
                     terminal_p.get("primary_airflow", ZERO.FLOW)
                     for terminal_p in find_all(
