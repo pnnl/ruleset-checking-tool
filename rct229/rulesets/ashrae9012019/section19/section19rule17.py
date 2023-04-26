@@ -100,24 +100,17 @@ class Section19Rule17(RuleDefinitionListIndexedBase):
                 "dict_of_zones_and_terminal_units_served_by_hvac_sys"
             ]
             zone_data_b = data["zone_data_b"]
-            fan_system_b = hvac_b["fan_system"]
+            fan_sys_b = hvac_b["fan_system"]
 
             supply_airflow_b = ZERO.FLOW
             total_fan_power = ZERO.POWER
-            for supply_fan_b in find_all("$.supply_fans[*]", fan_system_b):
-                supply_airflow_b += getattr_(
-                    supply_fan_b, "supply_fans", "design_airflow"
-                )
-                total_fan_power += get_fan_object_electric_power(supply_fan_b)
-
-            for return_fan_b in find_all("$.return_fans[*]", fan_system_b):
-                total_fan_power += get_fan_object_electric_power(return_fan_b)
-
-            for relief_fan_b in find_all("$.relief_fans[*]", fan_system_b):
-                total_fan_power += get_fan_object_electric_power(relief_fan_b)
-
-            for exhaust_fan_b in find_all("$.exhaust_fans[*]", fan_system_b):
-                total_fan_power += get_fan_object_electric_power(exhaust_fan_b)
+            for fan_type_b in ("supply", "return", "relief", "exhaust"):
+                for fan_b in find_all(f"$.{fan_type_b}_fans[*]", fan_sys_b):
+                    if fan_b == "supply_fans":
+                        supply_airflow_b += getattr_(
+                            fan_b, "Supply fans", "design_airflow"
+                        )
+                    total_fan_power += get_fan_object_electric_power(fan_b)
 
             for zone_id_b in dict_of_zones_and_terminal_units_served_by_hvac_sys[
                 hvac_id_b
