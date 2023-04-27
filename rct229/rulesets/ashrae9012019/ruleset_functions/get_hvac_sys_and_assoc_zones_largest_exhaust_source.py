@@ -7,7 +7,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_dict_of_zones_and_termi
 )
 from rct229.utils.assertions import assert_
 from rct229.utils.jsonpath_utils import find_all, find_one
-from rct229.utils.pint_utils import ZERO, pint_sum
+from rct229.utils.pint_utils import ZERO
 
 
 def get_hvac_sys_and_assoc_zones_largest_exhaust_source(rmi, hvac_sys_id):
@@ -66,19 +66,21 @@ def get_hvac_sys_and_assoc_zones_largest_exhaust_source(rmi, hvac_sys_id):
     zone_id_list = zones_and_terminal_units_served_by_hvac_sys_dict[hvac_sys_id][
         "zone_list"
     ]
-    zone_list = [find_exactly_one_zone(rmi, zone_id) for zone_id in zone_id_list]
     zone_fan_exhaust_flow_list = list(
         filter(
             None,
             [
-                find_one("$.zonal_exhaust_fan.design_airflow", zone)
-                for zone in zone_list
+                find_one(
+                    "$.zonal_exhaust_fan.design_airflow",
+                    find_exactly_one_zone(rmi, zone_id),
+                )
+                for zone_id in zone_id_list
             ],
         )
     )
 
     return {
-        "hvac_fan_sys_exhaust_sum": pint_sum(hvac_fan_sys_exhaust_flow_list, ZERO.FLOW),
+        "hvac_fan_sys_exhaust_sum": sum(hvac_fan_sys_exhaust_flow_list, ZERO.FLOW),
         "maximum_zone_exhaust": max(zone_fan_exhaust_flow_list)
         if zone_fan_exhaust_flow_list
         else ZERO.FLOW,
