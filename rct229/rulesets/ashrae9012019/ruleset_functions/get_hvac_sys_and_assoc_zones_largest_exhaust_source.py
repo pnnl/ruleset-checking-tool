@@ -50,7 +50,7 @@ def get_hvac_sys_and_assoc_zones_largest_exhaust_source(rmi, hvac_sys_id):
     assert_(
         hvac_sys_id in zones_and_terminal_units_served_by_hvac_sys_dict.keys(),
         f"HVAC {hvac_sys_id} does not "
-        f"have terminals and zones "
+        f"associated terminals and zones "
         f"connected with. Check inputs!",
     )
 
@@ -81,11 +81,7 @@ def get_hvac_sys_and_assoc_zones_largest_exhaust_source(rmi, hvac_sys_id):
 
     return {
         "hvac_fan_sys_exhaust_sum": sum(hvac_fan_sys_exhaust_flow_list, ZERO.FLOW),
-        "maximum_zone_exhaust": max(zone_fan_exhaust_flow_list)
-        if zone_fan_exhaust_flow_list
-        else ZERO.FLOW,
+        "maximum_zone_exhaust": max(zone_fan_exhaust_flow_list, default=ZERO.FLOW),
         "num_hvac_exhaust_fans": len(hvac_fan_sys_exhaust_list),
-        "maximum_hvac_exhaust": max(hvac_fan_sys_exhaust_flow_list)
-        if hvac_fan_sys_exhaust_list
-        else ZERO.FLOW,
+        "maximum_hvac_exhaust": max(hvac_fan_sys_exhaust_flow_list, default=ZERO.FLOW),
     }
