@@ -27,7 +27,6 @@ APPLICABLE_SYS_TYPES = [
 ]
 
 FAN_POWER_LIMIT = 0.3 * ureg("W/cfm")
-AHJ_RA_COMPARE = True
 
 
 class Section19Rule17(RuleDefinitionListIndexedBase):
@@ -66,8 +65,13 @@ class Section19Rule17(RuleDefinitionListIndexedBase):
             "dict_of_zones_and_terminal_units_served_by_hvac_sys": (
                 get_dict_of_zones_and_terminal_units_served_by_hvac_sys(rmi_b)
             ),
-            "zone_data_b": {
-                zone["id"]: zone
+            "zone_exhaust_fan_power_dict_b": {
+                zone["id"]: sum(
+                    [
+                        get_fan_object_electric_power(exhaust_fan)
+                        for exhaust_fan in find_all("$.zonal_exhaust_fan", zone)
+                    ]
+                )
                 for zone in find_all(
                     "$.buildings[*].building_segments[*].zones[*]", rmi_b
                 )
@@ -99,7 +103,7 @@ class Section19Rule17(RuleDefinitionListIndexedBase):
             dict_of_zones_and_terminal_units_served_by_hvac_sys = data[
                 "dict_of_zones_and_terminal_units_served_by_hvac_sys"
             ]
-            zone_data_b = data["zone_data_b"]
+            zone_exhaust_fan_power_dict_b = data["zone_exhaust_fan_power_dict_b"]
             fan_sys_b = hvac_b["fan_system"]
 
             supply_airflow_b = ZERO.FLOW
@@ -115,19 +119,13 @@ class Section19Rule17(RuleDefinitionListIndexedBase):
             for zone_id_b in dict_of_zones_and_terminal_units_served_by_hvac_sys[
                 hvac_id_b
             ]["zone_list"]:
-                zone_b = zone_data_b[zone_id_b]
-                if zone_b.get("zonal_exhaust_fan"):
-                    total_fan_power += get_fan_object_electric_power(
-                        getattr_(zone_b, "zone", "zonal_exhaust_fan")
-                    )
+                total_fan_power += zone_exhaust_fan_power_dict_b[zone_id_b]
 
-            fan_power_airflow = total_fan_power / (supply_airflow_b * ureg("cfm"))
+            fan_power_airflow = total_fan_power / (supply_airflow_b.to(ureg.cfm))
 
             return {"fan_power_airflow": fan_power_airflow}
 
         def rule_check(self, context, calc_vals=None, data=None):
             fan_power_airflow = calc_vals["fan_power_airflow"]
 
-            return fan_power_airflow == FAN_POWER_LIMIT or (
-                AHJ_RA_COMPARE and fan_power_airflow <= FAN_POWER_LIMIT
-            )
+            return fan_power_airflow <= FAN_POWER_LIMIT
