@@ -27,7 +27,7 @@ class Section19Rule20(RuleDefinitionListIndexedBase):
         rmi_p = context.proposed
 
         return {
-            "zone_supply_return_exhaust_relief_terminal_fan_power_dict": get_zone_supply_return_exhaust_relief_terminal_fan_power_dict(
+            "zone_supply_return_exhaust_relief_terminal_fan_power_dict_p": get_zone_supply_return_exhaust_relief_terminal_fan_power_dict_p(
                 rmi_p
             ),
             "dict_of_zones_and_terminal_units_served_by_hvac_sys_b": get_dict_of_zones_and_terminal_units_served_by_hvac_sys(
@@ -47,8 +47,8 @@ class Section19Rule20(RuleDefinitionListIndexedBase):
         def get_calc_vals(self, context, data=None):
             hvac_b = context.baseline
             hvac_id_b = hvac_b["id"]
-            zone_supply_return_exhaust_relief_terminal_fan_power_dict = data[
-                "zone_supply_return_exhaust_relief_terminal_fan_power_dict"
+            zone_supply_return_exhaust_relief_terminal_fan_power_dict_p = data[
+                "zone_supply_return_exhaust_relief_terminal_fan_power_dict_p"
             ]
             list_zones_served_b = data[
                 "dict_of_zones_and_terminal_units_served_by_hvac_sys_b"
@@ -88,22 +88,22 @@ class Section19Rule20(RuleDefinitionListIndexedBase):
             proposed_total_relief_fan_power = ZERO.POWER
             for zone_id_b in list_zones_served_b:
                 proposed_total_supply_fan_power += (
-                    zone_supply_return_exhaust_relief_terminal_fan_power_dict[
+                    zone_supply_return_exhaust_relief_terminal_fan_power_dict_p[
                         zone_id_b
                     ]["zone_supply_fan_power"]
                 )
                 proposed_total_return_fan_power += (
-                    zone_supply_return_exhaust_relief_terminal_fan_power_dict[
+                    zone_supply_return_exhaust_relief_terminal_fan_power_dict_p[
                         zone_id_b
                     ]["zone_return_fan_power"]
                 )
                 proposed_total_exhaust_fan_power += (
-                    zone_supply_return_exhaust_relief_terminal_fan_power_dict[
+                    zone_supply_return_exhaust_relief_terminal_fan_power_dict_p[
                         zone_id_b
                     ]["zone_exhaust_fan_power"]
                 )
                 proposed_total_relief_fan_power += (
-                    zone_supply_return_exhaust_relief_terminal_fan_power_dict[
+                    zone_supply_return_exhaust_relief_terminal_fan_power_dict_p[
                         zone_id_b
                     ]["zone_relief_fan_power"]
                 )
