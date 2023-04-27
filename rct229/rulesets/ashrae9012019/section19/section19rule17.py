@@ -60,8 +60,10 @@ class Section19Rule17(RuleDefinitionListIndexedBase):
 
     def create_data(self, context, data):
         rmi_b = context.baseline
+        baseline_system_types_dict = get_baseline_system_types(rmi_b)
 
         return {
+            "baseline_system_types_dict": baseline_system_types_dict,
             "dict_of_zones_and_terminal_units_served_by_hvac_sys": (
                 get_dict_of_zones_and_terminal_units_served_by_hvac_sys(rmi_b)
             ),
