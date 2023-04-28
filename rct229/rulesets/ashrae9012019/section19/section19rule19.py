@@ -252,3 +252,11 @@ class Section19Rule19(RuleDefinitionListIndexedBase):
                 not more_than_one_supply_fan_b,
                 fan_power_per_flow_b <= REQ_FAN_POWER_FLOW_RATIO,
             )
+
+        def get_fail_msg(self, context, calc_vals=None, data=None):
+            hvac_b = context.baseline
+            hvac_id_b = hvac_b["id"]
+            fan_power_per_flow_b = calc_vals["fan_power_per_flow_b"]
+            fan_power_per_flow_b = fan_power_per_flow_b.to(ureg("W/cfm"))
+
+            return f"The fan power airflow (W/cfm) for {hvac_id_b} is modeled as {fan_power_per_flow_b} W/cfm which is less than the expected W/cfm."
