@@ -72,6 +72,15 @@ class Section19Rule19(RuleDefinitionListIndexedBase):
         rmi_b = context.baseline
         rmi_p = context.proposed
 
+        baseline_system_types_dict = get_baseline_system_types(rmi_b)
+        applicable_hvac_sys_ids = [
+            hvac_id
+            for sys_type in baseline_system_types_dict.keys()
+            for target_sys_type in APPLICABLE_SYS_TYPES
+            if baseline_system_type_compare(sys_type, target_sys_type, False)
+            for hvac_id in baseline_system_types_dict[sys_type]
+        ]
+
         dict_of_zones_and_terminal_units_served_by_hvac_sys = (
             get_dict_of_zones_and_terminal_units_served_by_hvac_sys(rmi_b)
         )
@@ -124,6 +133,7 @@ class Section19Rule19(RuleDefinitionListIndexedBase):
                 )
 
         return {
+            "applicable_hvac_sys_ids": applicable_hvac_sys_ids,
             "zonal_exhaust_fan_elec_power_b": zonal_exhaust_fan_elec_power_b,
             "zones_served_by_hvac_has_non_mech_cooling_bool_p": zones_served_by_hvac_has_non_mech_cooling_bool_p,
             "zone_hvac_in_has_non_mech_cooling_p": zone_hvac_in_has_non_mech_cooling_p,
@@ -146,6 +156,9 @@ class Section19Rule19(RuleDefinitionListIndexedBase):
         def is_applicable(self, context, data=None):
             hvac_b = context.baseline
             hvac_id_b = hvac_b["id"]
+            applicable_hvac_sys_ids = data["applicable_hvac_sys_ids"]
+
+            return hvac_id_b in applicable_hvac_sys_ids
 
         def get_calc_vals(self, context, data=None):
             hvac_b = context.baseline
