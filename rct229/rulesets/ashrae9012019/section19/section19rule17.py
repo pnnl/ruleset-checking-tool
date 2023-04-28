@@ -26,7 +26,7 @@ APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_2,
 ]
 
-FAN_POWER_LIMIT = 0.3 * ureg("W/cfm")
+FAN_POWER_AIRFLOW_LIMIT = 0.3 * ureg("W/cfm")
 
 
 class Section19Rule17(RuleDefinitionListIndexedBase):
@@ -112,7 +112,7 @@ class Section19Rule17(RuleDefinitionListIndexedBase):
             total_fan_power = ZERO.POWER
             for fan_type_b in ("supply", "return", "relief", "exhaust"):
                 for fan_b in find_all(f"$.{fan_type_b}_fans[*]", fan_sys_b):
-                    if fan_b == "supply_fans":
+                    if fan_type_b == "supply":
                         supply_airflow_b += getattr_(
                             fan_b, "Supply fans", "design_airflow"
                         )
@@ -123,11 +123,15 @@ class Section19Rule17(RuleDefinitionListIndexedBase):
             ]["zone_list"]:
                 total_fan_power += zone_exhaust_fan_power_dict_b[zone_id_b]
 
-            fan_power_airflow = total_fan_power / (supply_airflow_b.to(ureg.cfm))
+            fan_power_airflow = (
+                total_fan_power / (supply_airflow_b.to(ureg("cfm")))
+                if supply_airflow_b != ZERO.FLOW
+                else 0 * ureg("W/cfm")
+            )
 
             return {"fan_power_airflow": fan_power_airflow}
 
         def rule_check(self, context, calc_vals=None, data=None):
             fan_power_airflow = calc_vals["fan_power_airflow"]
 
-            return fan_power_airflow <= FAN_POWER_LIMIT
+            return fan_power_airflow <= FAN_POWER_AIRFLOW_LIMIT
