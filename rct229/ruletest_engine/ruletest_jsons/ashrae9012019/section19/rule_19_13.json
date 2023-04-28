@@ -49,6 +49,7 @@
                                                 "design_thermostat_heating_setpoint": 70,
                                                 "spaces": [
                                                     {
+                                                        "id": "Space 1",
                                                         "lighting_space_type": "OFFICE_ENCLOSED"
                                                     }
                                                 ]
@@ -202,6 +203,7 @@
                                                 "design_thermostat_heating_setpoint": 68,
                                                 "spaces": [
                                                     {
+                                                        "id": "Space 1",
                                                         "lighting_space_type": "LABORATORY_EXCEPT_IN_OR_AS_A_CLASSROOM"
                                                     }
                                                 ]
@@ -324,6 +326,7 @@
                                                 "design_thermostat_heating_setpoint": 70,
                                                 "spaces": [
                                                     {
+                                                        "id": "Space 1",
                                                         "lighting_space_type": "OFFICE_ENCLOSED"
                                                     }
                                                 ]
@@ -446,6 +449,7 @@
                                                 "design_thermostat_heating_setpoint": 68,
                                                 "spaces": [
                                                     {
+                                                        "id": "Space 1",
                                                         "lighting_space_type": "LABORATORY_EXCEPT_IN_OR_AS_A_CLASSROOM"
                                                     }
                                                 ]
