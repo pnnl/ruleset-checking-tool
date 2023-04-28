@@ -27,6 +27,7 @@ from rct229.schema.config import ureg
 from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all, find_one
 from rct229.utils.pint_utils import ZERO
+from rct229.utils.std_comparisons import std_equal
 
 APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_9,
@@ -44,7 +45,7 @@ class Section19Rule19(RuleDefinitionListIndexedBase):
     def __init__(self):
         super(Section19Rule19, self).__init__(
             rmrs_used=UserBaselineProposedVals(False, True, True),
-            each_rule=Section19Rule19.ZoneRule(),
+            each_rule=Section19Rule19.HVACRule(),
             index_rmr="baseline",
             id="19-19",
             description="For baseline systems 9 and 10 the system fan electrical power (Pfan) for supply, return, exhaust, and relief shall be CFMs × 0.3, where, CFMs = the baseline system maximum design supply fan airflow rate, cfm. If modeling a non-mechanical cooling fan is required by Section G3.1.2.8.2, there is a fan power allowance of Pfan = CFMnmc × 0.054, where, CFMnmc = the baseline non-mechanical cooling fan airflow, cfm for the non-mechanical cooling.",
@@ -52,7 +53,7 @@ class Section19Rule19(RuleDefinitionListIndexedBase):
             standard_section="Section G3.1.2.9",
             is_primary_rule=True,
             rmr_context="ruleset_model_instances/0",
-            list_path="$.buildings[*].building_segments[*].zones[*]",
+            list_path="$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*]",
         )
 
     def is_applicable(self, context, data=None):
@@ -69,31 +70,63 @@ class Section19Rule19(RuleDefinitionListIndexedBase):
 
     def create_data(self, context, data):
         rmi_b = context.baseline
+        rmi_p = context.proposed
 
-        fan_power_per_flow_b = {}
-        for hvac_b in find_all(
-            "$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*]",
+        dict_of_zones_and_terminal_units_served_by_hvac_sys = (
+            get_dict_of_zones_and_terminal_units_served_by_hvac_sys(rmi_b)
+        )
+
+        zonal_exhaust_fan_elec_power_b = ZERO.POWER
+        for hvac_id_b in find_all(
+            "$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*].id",
             rmi_b,
         ):
-            fan_sys_info_b = (
-                get_fan_system_object_supply_return_exhaust_relief_total_power_flow(
-                    getattr_(hvac_b, "HVAC", "fan_system")
+            for zone_id_b in dict_of_zones_and_terminal_units_served_by_hvac_sys[
+                hvac_id_b
+            ]["zone_list"]:
+                zonal_exhaust_fan_elec_power_b += get_fan_object_electric_power(
+                    find_one(
+                        f"$.buildings[*].building_segments[*].zones[?(@.id == {zone_id_b})].zonal_exhaust_fan",
+                        rmi_b,
+                    )
                 )
-            )
 
-            total_fan_power_b = (
-                fan_sys_info_b["supply_fans_total_fan_power"]
-                + fan_sys_info_b["return_fans_total_fan_power"]
-                + fan_sys_info_b["exhaust_fans_total_fan_power"]
-                + fan_sys_info_b["relief_fans_total_fan_power"]
-            )
+                zone_p = find_one(
+                    f"$.buildings[*].building_segments[*].zones[?(@.id == {zone_id_b})].non_mechanical_cooling_fan_airflow",
+                    rmi_p,
+                )
 
-            supply_fan_flow_b = fan_sys_info_b["supply_fans_airflow"]
+                zones_served_by_hvac_has_non_mech_cooling_bool_p = (
+                    True
+                    if (
+                        zone_p.get("non_mechanical_cooling_fan_airflow") is not None
+                        and zone_p["non_mechanical_cooling_fan_airflow"] > ZERO.FLOW
+                    )
+                    else False
+                )
 
-            fan_power_per_flow_b[hvac_b["id"]] = total_fan_power_b / supply_fan_flow_b
+                zone_hvac_in_has_non_mech_cooling_p = any(
+                    [
+                        getattr_(
+                            find_one(
+                                f"$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[?(@.id == {hvac_id_p})]",
+                                rmi_p,
+                            ),
+                            "HVAC",
+                            "cooling_system",
+                            "cooling_system_type",
+                        )
+                        == COOLING_SYSTEM.NON_MECHANICAL
+                        for hvac_id_p in get_list_hvac_systems_associated_with_zone(
+                            rmi_p, zone_p["id"]
+                        )
+                    ]
+                )
 
         return {
-            "fan_power_per_flow_b": fan_power_per_flow_b,
+            "zonal_exhaust_fan_elec_power_b": zonal_exhaust_fan_elec_power_b,
+            "zones_served_by_hvac_has_non_mech_cooling_bool_p": zones_served_by_hvac_has_non_mech_cooling_bool_p,
+            "zone_hvac_in_has_non_mech_cooling_p": zone_hvac_in_has_non_mech_cooling_p,
         }
 
     def list_filter(self, context_item, data):
@@ -101,9 +134,9 @@ class Section19Rule19(RuleDefinitionListIndexedBase):
 
         return context_item.baseline["id"] in applicable_hvac_sys_ids
 
-    class ZoneRule(RuleDefinitionBase):
+    class HVACRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section19Rule19.ZoneRule, self).__init__(
+            super(Section19Rule19.HVACRule, self).__init__(
                 rmrs_used=UserBaselineProposedVals(False, True, True),
                 required_fields={
                     "$": ["fan_system"],
@@ -116,7 +149,14 @@ class Section19Rule19(RuleDefinitionListIndexedBase):
 
         def get_calc_vals(self, context, data=None):
             hvac_b = context.baseline
-            hvac_id_b = hvac_b["id"]
+
+            zonal_exhaust_fan_elec_power_b = data["zonal_exhaust_fan_elec_power_b"]
+            zones_served_by_hvac_has_non_mech_cooling_bool_p = data[
+                "zones_served_by_hvac_has_non_mech_cooling_bool_p"
+            ]
+            zone_hvac_in_has_non_mech_cooling_p = data[
+                "zone_hvac_in_has_non_mech_cooling_p"
+            ]
 
             fan_sys_b = hvac_b["fan_system"]
 
@@ -126,19 +166,76 @@ class Section19Rule19(RuleDefinitionListIndexedBase):
                 )
             )
 
+            more_than_one_supply_fan_b = (
+                True if fan_sys_info_b["supply_fans_qty"] == 1 else False
+            )
+
             total_fan_power_b = (
                 fan_sys_info_b["supply_fans_total_fan_power"]
                 + fan_sys_info_b["return_fans_total_fan_power"]
                 + fan_sys_info_b["exhaust_fans_total_fan_power"]
                 + fan_sys_info_b["relief_fans_total_fan_power"]
+                + zonal_exhaust_fan_elec_power_b
             )
 
             supply_fan_flow_b = fan_sys_info_b["supply_fans_airflow"]
 
+            fan_power_per_flow_b = (
+                total_fan_power_b / supply_fan_flow_b
+                if supply_fan_flow_b != ZERO.FLOW
+                else 0 * ureg("W/CFM")
+            )
+
             return {
-                "total_fan_power": total_fan_power_b,
-                "supply_fan_flow_b": supply_fan_flow_b,
+                "zones_served_by_hvac_has_non_mech_cooling_bool_p": zones_served_by_hvac_has_non_mech_cooling_bool_p,
+                "zone_hvac_in_has_non_mech_cooling_p": zone_hvac_in_has_non_mech_cooling_p,
+                "more_than_one_supply_fan_b": more_than_one_supply_fan_b,
+                "fan_power_per_flow_b": fan_power_per_flow_b,
             }
 
+        def manual_check_required(self, context, calc_vals=None, data=None):
+            more_than_one_supply_fan_b = calc_vals["more_than_one_supply_fan_b"]
+            zone_hvac_in_has_non_mech_cooling_p = calc_vals[
+                "zone_hvac_in_has_non_mech_cooling_p"
+            ]
+            zones_served_by_hvac_has_non_mech_cooling_bool_p = calc_vals[
+                "zones_served_by_hvac_has_non_mech_cooling_bool_p"
+            ]
+
+            return (
+                more_than_one_supply_fan_b
+                or zone_hvac_in_has_non_mech_cooling_p
+                or zones_served_by_hvac_has_non_mech_cooling_bool_p
+            )
+
+        def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
+            hvac_b = context.baseline
+            hvac_id_b = hvac_b["id"]
+            more_than_one_supply_fan = data["more_than_one_supply_fan"]
+
+            if more_than_one_supply_fan:
+                UNDERMINED_MSG = f"{hvac_id_b} has more than one supply fan associated with the HVAC system in the baseline and therefore this check could not be conducted for this HVAC sytem. Conduct manual check for compliance with G3.1.2.9."
+            else:
+                UNDERMINED_MSG = f"{hvac_id_b} has zone(s) with non-mechanical cooling in the proposed design, conduct a manual check that the baseline building design includes a fan power allowance of <insert IP or SI version as applicable Pfan = CFMnmc × 0.054, where, CFMnmc = the baseline non-mechanical cooling fan airflow, cfm for the non-mechanical cooling fan in additional to the 0.3 W/CFM allowance for the HVAC system>."
+
+            return UNDERMINED_MSG
+
         def rule_check(self, context, calc_vals=None, data=None):
-            return True
+            more_than_one_supply_fan_b = calc_vals["more_than_one_supply_fan_b"]
+            zones_served_by_hvac_has_non_mech_cooling_bool_p = calc_vals[
+                "zones_served_by_hvac_has_non_mech_cooling_bool_p"
+            ]
+            zone_hvac_in_has_non_mech_cooling_p = calc_vals[
+                "zone_hvac_in_has_non_mech_cooling_p"
+            ]
+            fan_power_per_flow_b = calc_vals["fan_power_per_flow_b"]
+
+            return (
+                more_than_one_supply_fan_b
+                and not zone_hvac_in_has_non_mech_cooling_p
+                and not zones_served_by_hvac_has_non_mech_cooling_bool_p
+                and std_equal(REQ_FAN_POWER_FLOW_RATIO, fan_power_per_flow_b)
+            ) or (
+                not more_than_one_supply_fan_b,
+                fan_power_per_flow_b <= REQ_FAN_POWER_FLOW_RATIO,
+            )
