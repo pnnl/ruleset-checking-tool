@@ -40,15 +40,13 @@
                                                         "type": "CONSTANT_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 10",
                                                         "heating_source": "ELECTRIC",
-                                                        "fan": {
-                                                            "id": "Terminal Fan 1"
-                                                        },
                                                         "supply_design_heating_setpoint_temperature": 105
                                                     }
                                                 ],
                                                 "design_thermostat_heating_setpoint": 65,
                                                 "spaces": [
                                                     {
+                                                        "id": "Space 1",
                                                         "lighting_space_type": "STAIRWELL"
                                                     }
                                                 ]
@@ -63,12 +61,15 @@
                                                     "energy_source_type": "ELECTRICITY"
                                                 },
                                                 "fan_system": {
-                                                    "minimum_outdoor_airflow": 0.0,
+                                                    "id": "CAV Fan System 1",
+                                                    "fan_control": "CONSTANT",
                                                     "supply_fans": [
                                                         {
-                                                            "design_airflow": 471.94744319999984
+                                                            "id": "Supply Fan 1",
+                                                            "design_airflow": 250
                                                         }
-                                                    ]
+                                                    ],
+                                                    "minimum_outdoor_airflow": 0.0
                                                 }
                                             }
                                         ]
@@ -122,15 +123,13 @@
                                                         "type": "CONSTANT_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 10",
                                                         "heating_source": "ELECTRIC",
-                                                        "fan": {
-                                                            "id": "Terminal Fan 1"
-                                                        },
                                                         "supply_design_heating_setpoint_temperature": 85
                                                     }
                                                 ],
                                                 "design_thermostat_heating_setpoint": 65,
                                                 "spaces": [
                                                     {
+                                                        "id": "Space 1",
                                                         "lighting_space_type": "STAIRWELL"
                                                     }
                                                 ]
@@ -145,12 +144,15 @@
                                                     "energy_source_type": "ELECTRICITY"
                                                 },
                                                 "fan_system": {
-                                                    "minimum_outdoor_airflow": 0.0,
+                                                    "id": "CAV Fan System 1",
+                                                    "fan_control": "CONSTANT",
                                                     "supply_fans": [
                                                         {
-                                                            "design_airflow": 471.94744319999984
+                                                            "id": "Supply Fan 1",
+                                                            "design_airflow": 250
                                                         }
-                                                    ]
+                                                    ],
+                                                    "minimum_outdoor_airflow": 0.0
                                                 }
                                             }
                                         ]
@@ -209,6 +211,7 @@
                                                 "design_thermostat_heating_setpoint": 65,
                                                 "spaces": [
                                                     {
+                                                        "id": "Space 1",
                                                         "lighting_space_type": "STAIRWELL"
                                                     }
                                                 ]
@@ -228,12 +231,7 @@
                                                     "supply_fans": [
                                                         {
                                                             "id": "Supply Fan 1",
-                                                            "design_airflow": 141.58423295999995
-                                                        }
-                                                    ],
-                                                    "return_fans": [
-                                                        {
-                                                            "id": "Return Fan 1"
+                                                            "design_airflow": 300
                                                         }
                                                     ],
                                                     "minimum_outdoor_airflow": 141.58423295999995
@@ -295,6 +293,7 @@
                                                 "design_thermostat_heating_setpoint": 65,
                                                 "spaces": [
                                                     {
+                                                        "id": "Space 1",
                                                         "lighting_space_type": "STAIRWELL"
                                                     }
                                                 ]
@@ -314,12 +313,7 @@
                                                     "supply_fans": [
                                                         {
                                                             "id": "Supply Fan 1",
-                                                            "design_airflow": 117.98686079999996
-                                                        }
-                                                    ],
-                                                    "return_fans": [
-                                                        {
-                                                            "id": "Return Fan 1"
+                                                            "design_airflow": 250
                                                         }
                                                     ],
                                                     "minimum_outdoor_airflow": 141.58423295999995
