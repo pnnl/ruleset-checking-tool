@@ -27,7 +27,6 @@ been submitted with design documents, the cooling system type shall be the same 
                     - Get analogous cooling system in U_RMI: `cooling_system_u = match_data_element(U_RMI,CoolingSystem,cooling_system_p.id)`
                     - Check if analogous cooling system is modeled with cooling in the U_RMI: `if cooling_system_u.cooling_system_type == "None": has_virtual_cooling_p = TRUE`  
                 - Else, if analogous cooling system does not exist in the U_RMI then virtual cooling is being modeled in the proposed: `Else:has_virtual_cooling_p = TRUE`
-                    
     - Check if cooling was modeled in the proposed via has_virtual_cooling_p boolean variable (and not in the U_RMI) add hvac system to list: `if has_virtual_cooling_p == TRUE: proposed_hvac_modeled_with_virtual_cooling_list_p = proposed_hvac_modeled_with_virtual_cooling_list_p.append(hvac_p.id)`  
 
 **Returns** `return proposed_hvac_modeled_with_virtual_cooling_list_p`  
