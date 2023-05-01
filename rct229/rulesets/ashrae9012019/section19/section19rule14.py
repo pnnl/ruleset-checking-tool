@@ -13,6 +13,9 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_baseline_system_types i
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_dict_of_zones_and_terminal_units_served_by_hvac_sys import (
     get_dict_of_zones_and_terminal_units_served_by_hvac_sys,
 )
+from rct229.rulesets.ashrae9012019.ruleset_functions.get_fan_system_object_supply_return_exhaust_relief_total_power_flow import (
+    get_fan_system_object_supply_return_exhaust_relief_total_power_flow,
+)
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_zone_supply_return_exhaust_relief_terminal_fan_power_dict import (
     get_zone_supply_return_exhaust_relief_terminal_fan_power_dict,
 )
