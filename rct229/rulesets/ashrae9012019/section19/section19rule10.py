@@ -49,7 +49,10 @@ class Section19Rule10(RuleDefinitionListIndexedBase):
             each_rule=Section19Rule10.HVACRule(),
             index_rmr="baseline",
             id="19-10",
-            description="Air economizers shall be included in baseline HVAC Systems 3 through 8, and 11, 12, and 13 based on climate as specified in Section G3.1.2.6 with exceptions.",
+            description="Air economizers shall be included in baseline HVAC Systems 3 through 8, and 11, 12, and 13 based on climate as specified in Section G3.1.2.6 with exceptions."
+            "1. Systems that include gas-phase air cleaning to meet the requirements of Standard 62.1, Section 6.1.2. This exception shall be used only if the system in the proposed design does not match the building design."
+            "2. Where the use of outdoor air for cooling will affect supermarket open refrigerated case-work systems. This exception shall only be used if the system in the proposed design does not use an economizer. If the exception is used, an economizer shall not be included in the baseline building design."
+            "3. Systems that serve computer rooms complying with Section G3.1.2.6.1.",
             ruleset_section_title="HVAC - General",
             standard_section="Section G3.1.2.6 including exceptions 1-3",
             is_primary_rule=True,
@@ -79,10 +82,14 @@ class Section19Rule10(RuleDefinitionListIndexedBase):
                     rmi_b,
                 )
             ]
+        HVAC_systems_primarily_serving_comp_rooms_list = (
+            get_hvac_systems_primarily_serving_comp_room(rmi_b)
+        )
 
         return {
             "proposed_has_economizer": proposed_has_economizer,
             "hvac_system_exception_2_list": hvac_system_exception_2_list,
+            "HVAC_systems_primarily_serving_comp_rooms_list": HVAC_systems_primarily_serving_comp_rooms_list,
         }
 
     def is_applicable(self, context, data=None):
@@ -125,6 +132,10 @@ class Section19Rule10(RuleDefinitionListIndexedBase):
             hvac_b = context.baseline
             hvac_id_b = hvac_b["id"]
 
+            HVAC_systems_primarily_serving_comp_rooms_list = data[
+                "HVAC_systems_primarily_serving_comp_rooms_list"
+            ]
+
             fan_sys_b = hvac_b["fan_system"]
             fan_air_economizer_b = find_one("$.air_economizer", fan_sys_b)
 
@@ -134,6 +145,7 @@ class Section19Rule10(RuleDefinitionListIndexedBase):
                 "hvac_id_b": hvac_id_b,
                 "fan_air_economizer_b": fan_air_economizer_b,
                 "fan_air_economizer_type_b": fan_air_economizer_type_b,
+                "HVAC_systems_primarily_serving_comp_rooms_list": HVAC_systems_primarily_serving_comp_rooms_list,
             }
 
         def manual_check_required(self, context, calc_vals=None, data=None):
@@ -191,11 +203,14 @@ class Section19Rule10(RuleDefinitionListIndexedBase):
             fan_air_economizer_b = calc_vals["fan_air_economizer_b"]
             fan_air_economizer_type_b = calc_vals["fan_air_economizer_type_b"]
             proposed_has_economizer = data["proposed_has_economizer"]
+            HVAC_systems_primarily_serving_comp_rooms_list = calc_vals[
+                "HVAC_systems_primarily_serving_comp_rooms_list"
+            ]
 
             if (
                 fan_air_economizer_b is not None
                 and fan_air_economizer_type_b != AIR_ECONOMIZER.FIXED_FRACTION
-                and HVAC_SYS.SYS_3 in SYSTEM_3_4_TYPES  # TODO Test this part
+                and hvac_id_b in HVAC_systems_primarily_serving_comp_rooms_list
             ):
                 # Case 3 msg
                 fail_msg = f"This system {hvac_id_b} appears to meet the criteria associated with Section G3.1.2.6 exception #3 which is that an economizer shall not be modeled in the baseline for systems that serve computer rooms complying with Section G3.1.2.6.1."
