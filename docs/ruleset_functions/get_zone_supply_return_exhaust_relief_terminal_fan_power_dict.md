@@ -7,7 +7,7 @@ This function first identifies if a HVAC system is serving more than one zone, i
 - **B-RMI,P-RMI**: To calculate the supply, return, exhaust, relief, and terminal unit total fan power for each zone in the ruleset model instance.   
 
 **Returns:**  
-- **get_zone_supply_return_exhaust_relief_terminal_fan_power_dict**: The function returns a dictionary that saves each zone's supply, return, exhaust, relief and terminal fan power as a list {zone.id: [supply fan power kW, return fan power kW, exhaust fan power kW, relief fan power kW, terminal fan power]}. Values will be equal to zero where not defined for a fan system. Zonal exhaust and non-mechanical cooling is not included.
+- **get_zone_supply_return_exhaust_relief_terminal_fan_power_dict**: The function returns a dictionary that saves each zone's supply, return, exhaust, relief and terminal fan power as a list {zone.id: {supply_fans_power: value, return_fans_power: value, exhaust_fans_power: value, relief_fans_power: value, terminal_fans_power: value}}. Values will be equal to zero where not defined for a fan system. Zonal exhaust and non-mechanical cooling is not included.
 
 **Function Call:**  
 1. get_dict_of_zones_and_terminal_units_served_by_hvac_sys()   

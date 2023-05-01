@@ -3,7 +3,6 @@
 **Description:** Get the supply, return, exhaust, and relief total fan power, CFM, quantity, and information about whether the pressure drop is consistent across the fans if more than one for a fan system object.   The function returns a dictionary that saves the supply, return, exhaust, and relief fan power, saves the supply, return, exhaust, and relief cfm, saves the supply, return, exhaust, and relief quantity, and saves for each fan whether the pressure drop is undefined, identical, or different across fans (if only one it will return undefined or identical) {"{fan_type}_fans_Power": value, "{fan_type}_fans_airflow": value, "{fan_type}_fans_qty": value, "{fan_type}_pressure": enums of ("IDENTICAL", "UNDEFINED", "DIFFERENT"). Values will be equal to zero where not defined for a fan system or as otherwise specified above. For airflow values this function assumes that all fans associated with the supply_fans object are in parallel (i.e., if multiple fans the cfm is additive.) but returns the quantity and information about the pressure drop across fans to help assess whether series or parallel.
 
 **Inputs:**  
-- **B-RMI,P-RMI**: To calculate the supply, return, exhaust, and relief total fan power, CFM, quantity, and to determine the consistency of pressure drop across fans (if there are multiple associated with a specific category (supply, return, exhaust, relief) for a fan system object sent to this function.   
 - **fan_system_obj**: The fan system object sent to this function.  
 
 **Returns:**  
