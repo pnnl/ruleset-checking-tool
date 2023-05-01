@@ -36,10 +36,6 @@ APPLICABLE_SYS_TYPES = [
 ]
 
 
-def get_zone_supply_return_exhaust_relief_terminal_fan_power_dict():
-    return True
-
-
 class Section19Rule14(RuleDefinitionListIndexedBase):
     """Rule 14 of ASHRAE 90.1-2019 Appendix G Section 19 (HVAC - General)"""
 
