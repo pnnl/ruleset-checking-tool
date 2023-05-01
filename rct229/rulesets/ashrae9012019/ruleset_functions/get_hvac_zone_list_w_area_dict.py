@@ -17,7 +17,7 @@ GET_HVAC_ZONE_LIST_W_AREA_DICT__REQUIRED_FIELDS = {
 
 def get_hvac_zone_list_w_area_by_rmi_dict(rmi):
     """
-    RMI version of the get_hvac_zone_list_w_area_dict
+    RMI version of the get_hvac_zone_list_w_area_dict function
 
     Parameters
     ----------
