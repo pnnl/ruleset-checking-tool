@@ -50,7 +50,7 @@ class Section19Rule14(RuleDefinitionListIndexedBase):
             id="19-14",
             description="For baseline system types 1-8 and 11-13, if return or relief fans are specified in the proposed design, the baseline building design shall also be modeled with fans serving the same functions and sized for the baseline system supply fan air quantity less the minimum outdoor air, or 90% of the supply fan air quantity, whichever is larger.",
             ruleset_section_title="HVAC - General",
-            standard_section="3.1.2.8.1 Excluding Exceptions 1 and 2",
+            standard_section="Section G3.1.2.8.1 Excluding Exceptions 1 and 2",
             is_primary_rule=True,
             rmr_context="ruleset_model_instances/0",
             list_path="$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*]",
@@ -74,49 +74,51 @@ class Section19Rule14(RuleDefinitionListIndexedBase):
         ):
             hvac_id_b = hvac_b["id"]
             hvac_info[hvac_id_b] = {}
-            hvac_info[hvac_id_b]["more_than_one_supply_or_return_fan"] = True
-            hvac_info[hvac_id_b]["is_modeled_with_return_fan_in_proposed"] = False
-            hvac_info[hvac_id_b]["is_modeled_with_relief_fan_in_proposed"] = True
 
             fan_system_info_b = (
                 get_zone_supply_return_exhaust_relief_terminal_fan_power_dict(
                     getattr_(hvac_b, "HVAC", "fan_system")
                 )
             )
-            if (
-                fan_system_info_b["supply_fans_qty"] == 1
-                and fan_system_info_b["return_fans_qty"] == 1
-            ):
-                hvac_info[hvac_id_b]["more_than_one_supply_or_return_fan"] = False
 
-                for zone_b in dict_of_zones_and_terminal_units_served_by_hvac_sys_b[
-                    hvac_id_b
-                ]["zone_list"]:
-                    zone_p = find_one(
-                        f'$.buildings[*].building_segments[*].zones[?(@.id == "{zone_b}")]',
-                        rmi_p,
-                    )
+            hvac_info[hvac_id_b]["more_than_one_supply_or_return_fan"] = (
+                False
+                if (
+                    fan_system_info_b["supply_fans_qty"] == 1
+                    and fan_system_info_b["return_fans_qty"] == 1
+                )
+                else True
+            )
 
-                    modeled_fan_power_list_p = list(
-                        zone_supply_return_exhaust_relief_terminal_fan_power_dict[
-                            zone_p["id"]
-                        ]
-                    )
+            for zone_b in dict_of_zones_and_terminal_units_served_by_hvac_sys_b[
+                hvac_id_b
+            ]["zone_list"]:
+                modeled_fan_power_list_p = list(
+                    zone_supply_return_exhaust_relief_terminal_fan_power_dict[
+                        find_one(
+                            f'$.buildings[*].building_segments[*].zones[?(@.id == "{zone_b}")]',
+                            rmi_p,
+                        )["id"]
+                    ]
+                )
 
+                hvac_info[hvac_id_b]["is_modeled_with_return_fan_in_proposed"] = (
+                    True
                     if (
                         modeled_fan_power_list_p["zone_total_return_fan_power"]
                         > ZERO.POWER
-                    ):
-                        hvac_info[hvac_id_b][
-                            "is_modeled_with_return_fan_in_proposed"
-                        ] = True
+                    )
+                    else False
+                )
+
+                hvac_info[hvac_id_b]["is_modeled_with_relief_fan_in_proposed"] = (
+                    False
                     if (
                         modeled_fan_power_list_p["zone_total_exhaust_fan_power"]
                         > ZERO.POWER
-                    ):
-                        hvac_info[hvac_id_b][
-                            "is_modeled_with_relief_fan_in_proposed"
-                        ] = False
+                    )
+                    else True
+                )
 
         return {
             "baseline_system_types_dict": get_baseline_system_types(rmi_b),
@@ -176,7 +178,7 @@ class Section19Rule14(RuleDefinitionListIndexedBase):
 
             hvac_sys_total_supply_fan_cfm_b = fan_sys_cfm["supply_fans_airflow"]
             supply_cfm_90_percent = 0.9 * hvac_sys_total_supply_fan_cfm_b
-            supply_minus_OA_cfm = hvac_sys_total_supply_fan_cfm_b - getattr_(
+            supply_minus_OA_flow = hvac_sys_total_supply_fan_cfm_b - getattr_(
                 fan_sys_b, "Fan System", "minimum_outdoor_airflow"
             )
 
@@ -188,27 +190,35 @@ class Section19Rule14(RuleDefinitionListIndexedBase):
                 else ZERO.FLOW
             )
 
-            baseline_modeled_return_as_expected = False
-            baseline_modeled_relief_as_expected = False
-            if (is_modeled_with_return_fan_p and return_fans_airflow > ZERO.FLOW) and (
-                not is_modeled_with_relief_fan_p and return_fans_airflow == ZERO.FLOW
-            ):
-                baseline_modeled_return_as_expected = True
-            if (
-                baseline_modeled_relief_as_expected and relief_fans_airflow > ZERO.FLOW
-            ) and (
-                not baseline_modeled_relief_as_expected
-                and relief_fans_airflow == ZERO.FLOW
-            ):
-                baseline_modeled_return_as_expected = True
+            baseline_modeled_return_as_expected = (
+                True
+                if (is_modeled_with_return_fan_p and return_fans_airflow > ZERO.FLOW)
+                or (
+                    not is_modeled_with_return_fan_p
+                    and return_fans_airflow == ZERO.FLOW
+                )
+                else False
+            )
+
+            baseline_modeled_relief_as_expected = (
+                True
+                if (
+                    (is_modeled_with_relief_fan_p and relief_fans_airflow > ZERO.FLOW)
+                    or (
+                        not is_modeled_with_relief_fan_p
+                        and relief_fans_airflow == ZERO.FLOW
+                    )
+                )
+                else False
+            )
 
             return {
                 "return_fans_airflow": return_fans_airflow,
                 "relief_fans_airflow": relief_fans_airflow,
                 "baseline_modeled_return_as_expected": baseline_modeled_return_as_expected,
-                "baseline_modeled_return_as_expected": baseline_modeled_return_as_expected,
+                "baseline_modeled_relief_as_expected": baseline_modeled_relief_as_expected,
                 "modeled_cfm": modeled_cfm,
-                "supply_minus_OA_cfm": supply_minus_OA_cfm,
+                "supply_minus_OA_flow": supply_minus_OA_flow,
                 "supply_cfm_90_percent": supply_cfm_90_percent,
             }
 
@@ -231,7 +241,7 @@ class Section19Rule14(RuleDefinitionListIndexedBase):
                 "baseline_modeled_relief_as_expected"
             ]
             modeled_cfm = calc_vals["modeled_cfm"]
-            supply_minus_OA_cfm = calc_vals["supply_minus_OA_cfm"]
+            supply_minus_OA_flow = calc_vals["supply_minus_OA_flow"]
             supply_cfm_90_percent = calc_vals["supply_cfm_90_percent"]
 
             more_than_one_supply_or_return_fan = data[
@@ -253,7 +263,7 @@ class Section19Rule14(RuleDefinitionListIndexedBase):
                     or is_modeled_with_relief_fan_in_proposed
                 )
                 and std_equal(
-                    modeled_cfm, max(supply_minus_OA_cfm, supply_cfm_90_percent)
+                    modeled_cfm, max(supply_minus_OA_flow, supply_cfm_90_percent)
                 )
             ) and (
                 not is_modeled_with_return_fan_in_proposed
