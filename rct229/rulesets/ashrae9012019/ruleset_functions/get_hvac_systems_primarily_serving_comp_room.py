@@ -6,7 +6,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_hvac_zone_list_w_area_d
     get_hvac_zone_list_w_area_by_rmi_dict,
 )
 from rct229.utils.jsonpath_utils import find_all
-from rct229.utils.pint_utils import ZERO, pint_sum
+from rct229.utils.pint_utils import ZERO
 
 LightingSpaceOptionsG37 = schema_enums["LightingSpaceOptions2019ASHRAE901TG37"]
 
@@ -43,7 +43,7 @@ def get_hvac_systems_primarily_serving_comp_room(rmi):
             space for zone in hvac_zones_list for space in find_all("$.spaces[*]", zone)
         ]
 
-        hvac_system_computer_room_floor_area = pint_sum(
+        hvac_system_computer_room_floor_area = sum(
             [
                 space.get("floor_area", ZERO.AREA)
                 for space in hvac_spaces_list
