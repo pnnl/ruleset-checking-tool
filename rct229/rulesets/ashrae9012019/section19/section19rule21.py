@@ -17,6 +17,9 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_dict_of_zones_and_termi
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_list_hvac_systems_associated_with_zone import (
     get_list_hvac_systems_associated_with_zone,
 )
+from rct229.rulesets.ashrae9012019.ruleset_functions.get_hvac_sys_and_assoc_zones_largest_exhaust_source import (
+    get_hvac_sys_and_assoc_zones_largest_exhaust_source,
+)
 from rct229.schema.config import ureg
 from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all, find_one
@@ -69,7 +72,7 @@ class Section19Rule21(RuleDefinitionListIndexedBase):
             "6. Where the largest exhaust source is less than 75% of the design outdoor airflow. This exception shall only be used if exhaust air energy recovery is not used in the proposed design."
             "7. Systems requiring dehumidification that employ energy recovery in series with the cooling coil. This exception shall only be used if exhaust air energy recovery and series-style energy recovery coils are not used in the proposed design.",
             ruleset_section_title="HVAC - General",
-            standard_section=" Section G3.1.2.10 and exceptions 1-7",
+            standard_section="Section G3.1.2.10 and exceptions 1-7",
             is_primary_rule=True,
             rmr_context="ruleset_model_instances/0",
             list_path="$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*]",
@@ -186,6 +189,13 @@ class Section19Rule21(RuleDefinitionListIndexedBase):
             else False
         )
 
+        exception_1_applies = True if sys_type_heating_only and not serves_zones_heated_to_60_or_higher_in_proposed else False
+        exception_2_applies = True if not ER_modeled_in_proposed  and serves_zones_with_systems_likely_exhausting_toxic_etc  else False
+        hvac_sys_and_assoc_zones_largest_exhaust_source = get_hvac_sys_and_assoc_zones_largest_exhaust_source()
+
+        if not ER_modeled_in_proposed and
+
+
         return {
             "ER_not_req_for_heating_sys": ER_not_req_for_heating_sys,
             "serves_zones_with_systems_likely_exhausting_toxic_etc": serves_zones_with_systems_likely_exhausting_toxic_etc,
@@ -203,7 +213,7 @@ class Section19Rule21(RuleDefinitionListIndexedBase):
                 rmrs_used=UserBaselineProposedVals(False, True, True),
                 required_fields={
                     "$": ["fan_system"],
-                    "fan_system": ["supply_fans", "minimum_outdoor_airflow"],
+                    "fan_system": ["supply_fans", "minimum_min_outdoor_airflow_b", "maximum_outdoor_airflow"],
                 },
             )
 
@@ -232,10 +242,11 @@ class Section19Rule21(RuleDefinitionListIndexedBase):
             for supply_fan_b in fan_sys_b["fan_sys_b"]:
                 supply_airflow_b += supply_fan_b.get("design_airflow", ZERO.FLOW)
 
-            outdoor_airflow = fan_sys_b["minimum_outdoor_airflow"]
+            min_outdoor_airflow_b = fan_sys_b["minimum_outdoor_airflow"]
+            max_outdoor_airflow_b = fan_sys_b["maximum_outdoor_airflow"]
 
             OA_fraction = (
-                outdoor_airflow / supply_airflow_b
+                min_outdoor_airflow_b / supply_airflow_b
                 if supply_airflow_b != ZERO.FLOW
                 else 0.0
             )
@@ -258,9 +269,10 @@ class Section19Rule21(RuleDefinitionListIndexedBase):
                 "serves_zones_that_have_dehumid_heat_recovery": serves_zones_that_have_dehumid_heat_recovery,
                 "sys_type_heating_only": sys_type_heating_only,
                 "supply_airflow_b": CalcQ("air_flow_rate", supply_airflow_b),
-                "outdoor_airflow": CalcQ("air_flow_rate", outdoor_airflow),
+                "min_outdoor_airflow_b": CalcQ("air_flow_rate", min_outdoor_airflow_b),
                 "OA_fraction ": OA_fraction,
                 "ER_modeled": ER_modeled,
+                "max_outdoor_airflow_b": max_outdoor_airflow_b,
             }
 
         def manual_check_required(self, context, calc_vals=None, data=None):
@@ -269,6 +281,7 @@ class Section19Rule21(RuleDefinitionListIndexedBase):
             ER_modeled = calc_vals["ER_modeled"]
             ER_modeled_in_proposed = calc_vals["ER_modeled_in_proposed"]
             serves_kitchen_space = calc_vals["serves_kitchen_space"]
+            max_outdoor_airflow_b = calc_vals["max_outdoor_airflow_b"]
 
             return (
                 OA_fraction >= OA_FRACTION_70
@@ -283,13 +296,14 @@ class Section19Rule21(RuleDefinitionListIndexedBase):
             )  ## TODO add more
 
         def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
+            hvac_b = context.baseline
+            hvac_id_b = hvac_b["id"]
+
             OA_fraction = calc_vals["OA_fraction"]
             supply_airflow_b = calc_vals["supply_airflow_b"]
             ER_modeled = calc_vals["ER_modeled"]
             ER_modeled_in_proposed = calc_vals["ER_modeled_in_proposed"]
             serves_kitchen_space = calc_vals["serves_kitchen_space"]
-            hvac_b = context.baseline
-            hvac_id_b = hvac_b["id"]
 
             if (
                 OA_fraction >= OA_FRACTION_70
@@ -313,7 +327,6 @@ class Section19Rule21(RuleDefinitionListIndexedBase):
             exception_2_applies = calc_vals["exception_2_applies"]
             exception_6_applies = calc_vals["exception_6_applies"]
             exception_7_applies = calc_vals["exception_7_applies"]
-
             ER_not_req_for_heating_sys = calc_vals["ER_not_req_for_heating_sys"]
             sys_type_heating_only = calc_vals["sys_type_heating_only"]
 
