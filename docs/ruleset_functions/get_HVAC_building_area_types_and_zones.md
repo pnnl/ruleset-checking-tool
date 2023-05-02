@@ -1,9 +1,9 @@
 # get_HVAC_building_area_types_and_zones
-**Scheme Version:** 0.0.23  
+**Schema Version:** 0.0.23  
 
-**Description:** Get the hvac_ids associated with each building area type associated with U_RMR, P_RMR, or B_RMR. Also returns the total floor area of each building area type
+**Description:** Get a dictionary of the zone_ids associated with each building area type associated with U_RMR, P_RMR, or B_RMR. Also returns the total floor area of each building area type and the source of the information (BUILDING_SEGMENT_HVAC_BAT, BUILDING_SEGMENT_LIGHTING or SPACE_LIGHTING)
 - used to verify the correct type of HVAC baseline system (or systems)
-- HVAC building area type is determined first by looking at the building segment HVAC_BAT.  If this variable does not exist, the function next looks at building segment lighting_building_area_type.  If this variable doesn't exist, the function will look at the space lighting type.  Support spaces such as corridors, stairwells and other support spaces will inherit the predominant building area type EXCEPT in buildings where the predominant HVAC_BAT is residential.  In residential buildings, support spaces such as corridors and stairwells will be classified as Other Non-Residential.
+- HVAC building area type is determined first by looking at the building segment HVAC_BAT.  If this variable does not exist, the function next looks at building segment lighting_building_area_type.  If this variable doesn't exist, the function will look at the space lighting type.  Support spaces such as corridors, stairwells and other support spaces will inherit the predominant building area type EXCEPT in buildings where the predominant HVAC_BAT is residential.  If corridors and stairwells will are not classified by the HVAC_BAT, they will be classified as Other Non-Residential.
 - the entry "CLASSIFICATION_SOURCE" in the **building_area_types_with_total_area_and_zones_dict** passes information about how the HVAC_BAT was determined for each segment along
 
 **Inputs:**  
