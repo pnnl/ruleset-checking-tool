@@ -15,6 +15,32 @@ GET_HVAC_ZONE_LIST_W_AREA_DICT__REQUIRED_FIELDS = {
 }
 
 
+def get_hvac_zone_list_w_area_by_rmi_dict(rmi):
+    """
+    RMI version of the get_hvac_zone_list_w_area_dict function
+
+    Parameters
+    ----------
+    rmi dict
+        A dictionary representing a ruleset model instance as defined by the ASHRAE229 schema
+
+    Returns
+    -------
+    dict
+        A dictionary of the form
+        {
+            <hvac_system id>: {
+                "zone_list": [<zones served by the hvac system>],
+                "total_area": <total area served by the hvac system>
+            }
+        }
+    """
+    hvac_zone_list_w_area_dict = {}
+    for building in find_all("$.buildings[*]", rmi):
+        hvac_zone_list_w_area_dict.update(get_hvac_zone_list_w_area_dict(building))
+    return hvac_zone_list_w_area_dict
+
+
 def get_hvac_zone_list_w_area_dict(building):
     """Gets the list of zones and their total floor area served by each HVAC system
     in a building
@@ -41,7 +67,7 @@ def get_hvac_zone_list_w_area_dict(building):
 
     hvac_zone_list_w_area_dict = {}
 
-    for zone in find_all("$..zones[*]", building):
+    for zone in find_all("$.building_segments[*].zones[*]", building):
         terminals = zone.get("terminals")
         # Note: None and [] are falsey; zone.terminals is optional
         if terminals:
