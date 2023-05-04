@@ -187,7 +187,7 @@
 		- add the area from the OTHER_UNDETERMIEND list to the predominate_HVAC_BAT area: `building_area_types_with_total_area_and_zones_dict[predominate_HVAC_BAT]["AREA"] += building_area_types_with_total_area_and_zones_dict[OTHER_UNDETERMINED]["AREA"]
 	- remove the key OTHER_UNDETERMINED from building_area_types_with_total_area_and_zones_dict: `del building_area_types_with_total_area_and_zones_dict[OTHER_UNDETERMINED]`
 
-	 **Returns** `return buildiung_area_types_with_total_area_and_zones_dict`  
+	 **Returns** `return building_area_types_with_total_area_and_zones_dict`  
 
 **Notes/Questions:**  
 1. "Heated-Only Storage" was not listed in the schema under HeatingVentilatingAirConditioningBuildingAreaOptions2019ASHRAE901 when this function was written - double check spelling
