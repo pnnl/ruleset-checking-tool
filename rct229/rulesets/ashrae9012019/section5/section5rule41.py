@@ -7,10 +7,11 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_opaque_surface_type imp
 )
 
 ABSORPTION_THERMAL_EXTERIOR = 0.9
-PASS_NOT_EQUAL_MSG = (
-    "Roof surface emittance in P-RMD matches that in U-RMD but is not equal to 0.9"
-)
-PASS_DIFFERS_MSG = "Roof thermal emittance is equal to the prescribed default value of 0.9 but differs from the thermal emittance in the user model"
+UNDETERMINED_MSG = "Roof surface emittance in the proposed model {absorptance_thermal_exterior} matches that in the " \
+                   "user model but is not equal to the prescribed default value of 0.9. Verify that the modeled value " \
+                   "is based on testing in accordance with section 5.5.3.1.1(a). "
+PASS_DIFFERS_MSG = "Roof thermal emittance is equal to the prescribed default value of 0.9 but differs from the " \
+                   "thermal emittance in the user model {absorptance_thermal_exterior} "
 
 
 class Section5Rule41(RuleDefinitionListIndexedBase):
@@ -65,11 +66,29 @@ class Section5Rule41(RuleDefinitionListIndexedBase):
                     ]["absorptance_thermal_exterior"],
                 }
 
+            def manual_check_required(self, context, calc_vals=None, data=None):
+                absorptance_thermal_exterior_p = calc_vals[
+                    "absorptance_thermal_exterior_p"
+                ]
+                absorptance_thermal_exterior_u = calc_vals[
+                    "absorptance_thermal_exterior_u"
+                ]
+                return (
+                    absorptance_thermal_exterior_p == absorptance_thermal_exterior_u
+                    and absorptance_thermal_exterior_p != ABSORPTION_THERMAL_EXTERIOR
+                )
+
+            def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
+                absorptance_thermal_exterior_p = calc_vals[
+                    "absorptance_thermal_exterior_p"
+                ]
+                return UNDETERMINED_MSG.format(
+                    absorptance_thermal_exterior=absorptance_thermal_exterior_p
+                )
+
             def rule_check(self, context, calc_vals=None, data=None):
                 return (
                     calc_vals["absorptance_thermal_exterior_p"]
-                    == calc_vals["absorptance_thermal_exterior_u"]
-                    or calc_vals["absorptance_thermal_exterior_p"]
                     == ABSORPTION_THERMAL_EXTERIOR
                 )
 
@@ -81,9 +100,13 @@ class Section5Rule41(RuleDefinitionListIndexedBase):
                 absorptance_thermal_exterior_u = calc_vals[
                     "absorptance_thermal_exterior_u"
                 ]
-                pass_msg = ""
-                if absorptance_thermal_exterior_p != ABSORPTION_THERMAL_EXTERIOR:
-                    pass_msg = PASS_NOT_EQUAL_MSG
-                if absorptance_thermal_exterior_u != absorptance_thermal_exterior_p:
-                    pass_msg = PASS_DIFFERS_MSG
+
+                pass_msg = (
+                    PASS_DIFFERS_MSG.format(
+                        absorptance_thermal_exterior=absorptance_thermal_exterior_u
+                    )
+                    if absorptance_thermal_exterior_p != absorptance_thermal_exterior_u
+                    else ""
+                )
+
                 return pass_msg
