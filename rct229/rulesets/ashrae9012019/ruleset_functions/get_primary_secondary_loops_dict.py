@@ -52,7 +52,7 @@ def get_primary_secondary_loops_dict(rmi_b):
     applicable_hvac_systems = [
         hvac
         for hvac in find_all(
-            "$..building_segments[*].heating_ventilating_air_conditioning_systems[*]",
+            "$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*]",
             rmi_b,
         )
         if hvac["id"] in applicable_hvac_ids

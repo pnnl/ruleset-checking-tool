@@ -71,6 +71,42 @@ GET_HW_LOOP_ZONE_LIST_W_AREA_RMD = {
                                         }
                                     ],
                                 },
+                                {
+                                    "id": "Thermal Zone 4",
+                                    "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                    "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                    "terminals": [
+                                        {
+                                            "id": "VAV Air Terminal 4",
+                                            "is_supply_ducted": True,
+                                            # intentionally omitted `served_by_heating_ventilating_air_conditioning_system` key to test the `elif terminal.get("served_by_heating_ventilating_air_conditioning_system"):` condition
+                                        }
+                                    ],
+                                    "spaces": [
+                                        {
+                                            "id": "Space 4",
+                                            "floor_area": 30,
+                                        }
+                                    ],
+                                },
+                                {
+                                    "id": "Thermal Zone 5",
+                                    "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                    "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                    "terminals": [
+                                        {
+                                            "id": "VAV Air Terminal 5",
+                                            "is_supply_ducted": True,
+                                            "served_by_heating_ventilating_air_conditioning_system": "Electric Resistance System",
+                                        }
+                                    ],
+                                    "spaces": [
+                                        {
+                                            "id": "Space 5",
+                                            "floor_area": 30,
+                                        }
+                                    ],
+                                },
                             ],
                             "heating_ventilating_air_conditioning_systems": [
                                 {
@@ -107,6 +143,13 @@ GET_HW_LOOP_ZONE_LIST_W_AREA_RMD = {
                                         "id": "CAV Fan System 1",
                                         "fan_control": "CONSTANT",
                                         "supply_fans": [{"id": "Supply Fan 1"}],
+                                    },
+                                },
+                                {
+                                    "id": "Electric Resistance System",
+                                    "heating_system": {
+                                        "id": "Resistance 1",
+                                        "heating_system_type": "ELECTRIC_RESISTANCE",
                                     },
                                 },
                             ],
