@@ -74,7 +74,7 @@
 
 - G3.1.1e "Thermal zones designed with heating-only systems in the proposed design serving storage rooms, stairwells, vestibules, electrical/mechanical rooms, and restrooms not exhausting or transferring air from mechanically cooled thermal zones in the proposed design shall use system type 9 or 10 in the baseline building design."
 - loop through the zones_and_systems to see if any of the zones meets this requirement: `for zone in zones_and_systems:`
-	- use the function does_zone_meet_G3_1_1e to determine whether to change the system type (we are using != NO instead of YES, because the function can return MAYBE_VESTIBULE or LIKELY_VESTIBULE.  Here we will assign any "maybe's or "likelies" to the new system type.  The rule itself will deal with the uncertainty of vestibules using the function is_zone_a_vestibule): `if does_zone_meet_G3_1_1e(P-RMI,B-RMI,zone) != NO:`
+	- use the function does_zone_meet_G3_1_1e to determine whether to change the system type (we are using != NO instead of YES, because the function can return MAYBE.  Here we will assign any "maybe's to the new system type.  The rule itself will deal with the uncertainty of vestibules using the function is_zone_a_vestibule): `if does_zone_meet_G3_1_1e(P-RMI,B-RMI,zone) != NO:`
 		- - change the system origin string: `zones_and_systems[zone]["SYSTEM_ORIGIN"] = "G3_1_1e"`
 		- choose system 9 or 10 based on climate zone: `if is_CZ_0_to_3a():`
 			- set the system to SYS_10: `zones_and_systems[zone]["EXPECTED_SYSTEM_TYPE"] = SYS_10`
