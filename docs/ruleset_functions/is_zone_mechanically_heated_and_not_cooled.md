@@ -14,25 +14,40 @@
 - **get_list_hvac_systems_associated_with_zone**
 
 ## Logic:
-- set a boolean has_heating_system to false: `has_heating_system = FALSE`
-- set a boolean has_cooling_system to false: `has_cooling_system = FALSE`
-- set result to FALSE: `result = FALSE`
+- set a boolean is_heated to false: `is_heated = FALSE`
+- set a boolean is_cooled to false: `is_cooled = FALSE`
 - get the hvac systems serving the zone by using the get_list_hvac_systems_associated_with_zone function: `list_hvac_systems = get_list_hvac_systems_associated_with_zone(RMI,zone)`
 	- loop through each HeatingVentilatingAirconditionsSystem system: `for system in list_hvac_systems:`
-		- check for a heating system: `if system.heating_system != NULL or system.heating_system.type != NONE:`
-			- set the boolean has_heating_system to true: `has_heating_system = TRUE`
-		- look for a cooling system: `if system.cooling_system != NULL or system.cooling_system != NONE:`
-			- there is a cooling system: `has_cooling_system = TRUE`
-- at this point, if there is no cooling system, continue looking in the zone terminals for a cooling system (if there is a cooling system at this level, the function should return false regardless of what is in the zone terminals, and we can skip to the end): `if !has_cooling_system:`
+		- check for a heating system: `if system.heating_system != NULL:`
+			- `if system.heating_system.type != NONE:`
+				- set the boolean is_heated to true: `is_heated = TRUE`
+		- look for a cooling system: `if system.cooling_system != NULL:`
+			- `if system.cooling_system != NONE:`
+				- there is a cooling system: `is_cooled = TRUE`
+- at this point, if there is no cooling system, continue looking in the zone terminals for a cooling system (if there is a cooling system at this level, the function should return false regardless of what is in the zone terminals, and we can skip to the end): `if !is_cooled:`
 	- look at each terminal in the zone: `for terminal in zone.terminals:`
-		- check if there is a terminal.heating_source specified: `if terminal.heating_source != NULL or terminal.heating_source != NONE:`
-			- there is a terminal heat source, set has_heating_system equal to true: `has_heating_system = TRUE`
-		- check if there is a terminal.cooling_source specified: `if terminal.cooling_source != NULL or terminal.cooling_source != NONE:`
-			- there is a terminal cooling source, set has_cooling_system equal to true: `has_cooling_system = TRUE`
-- now, if has_heating_system is true and has_cooling_system is false, set result equal to true: `if has_heating_system and !has_cooling_system: result = TRUE`
-- if result is FALSE, check if the zone receives transfer air from a cooled zone: `if !result:`
+		- check if there is a terminal.heating_source specified: `if terminal.heating_source != NULL:`
+			- `if terminal.heating_source != NONE:`
+				- there is a terminal heat source, set is_heated equal to true: `is_heated = TRUE`
+		- check if there is a terminal.cooling_source specified: `if terminal.cooling_source != NULL:`
+			-  `if terminal.cooling_source != NONE:`
+				- there is a terminal cooling source, set is_cooled equal to true: `is_cooled = TRUE`
+- if the zone is heated, but not cooled, check if the zone receives transfer air from a cooled zone: `if is_heated && !is_cooled:`
 	- if the zone has transfer air: `if zone.transfer_airflow_rate > 0:`
-		- set result equal to the result of is_zone_mechanically_heated_and_not_cooled for the transfer air source zone: `result = is_zone_mechanically_heated_and_not_cooled(RMI, zone.transfer_airflow_source_zone)
+		- set transfer_source_zone equal to the zone.transfer_airflow_source_zone: `transfer_source_zone = zone.transfer_airflow_source_zone`
+		- get the hvac systems serving the transfer airflow source zone: `transfer_source_zone_list_hvac_systems = get_list_hvac_systems_associated_with_zone(RMI,transfer_source_zone)`
+		- loop through heach HVAC system: `for transfer_system in transfer_source_zone_list_hvac_systems:`
+			- look for a cooling system: `if transfer_system.cooling_system != NULL:`
+				- `if transfer_system.cooling_system != NONE:`
+					- there is a cooling system: `is_cooled = TRUE`
+		- if there is no cooling system, look through the zone terminals of the transfer_source_zone for a cooling system: `if !is_cooled:`
+			- look at each terminal in the transfer_source_zone: `for transfer_terminal in transfer_source_zone.terminals:`
+				- check if there is a transfer_terminal.cooling_source specified: `if transfer_terminal.cooling_source != NULL:`
+					-  `if transfer_terminal.cooling_source != NONE:`
+						- there is a terminal cooling source, set is_cooled equal to true: `is_cooled = TRUE`
+
+
+- set result equal to is_heated and !is_cooled: `result = is_heated and !is_cooled`
 
 **Returns** `result`
 
