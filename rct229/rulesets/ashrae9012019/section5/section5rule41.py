@@ -5,13 +5,21 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_opaque_surface_type imp
     get_opaque_surface_type,
     OpaqueSurfaceType as OST,
 )
+from rct229.rulesets.ashrae9012019.ruleset_functions.get_surface_conditioning_category_dict import (
+    get_surface_conditioning_category_dict,
+    SurfaceConditioningCategory as SCC,
+)
 
 ABSORPTION_THERMAL_EXTERIOR = 0.9
-UNDETERMINED_MSG = "Roof surface emittance in the proposed model {absorptance_thermal_exterior} matches that in the " \
-                   "user model but is not equal to the prescribed default value of 0.9. Verify that the modeled value " \
-                   "is based on testing in accordance with section 5.5.3.1.1(a). "
-PASS_DIFFERS_MSG = "Roof thermal emittance is equal to the prescribed default value of 0.9 but differs from the " \
-                   "thermal emittance in the user model {absorptance_thermal_exterior} "
+UNDETERMINED_MSG = (
+    "Roof surface emittance in the proposed model {absorptance_thermal_exterior} matches that in the "
+    "user model but is not equal to the prescribed default value of 0.9. Verify that the modeled value "
+    "is based on testing in accordance with section 5.5.3.1.1(a). "
+)
+PASS_DIFFERS_MSG = (
+    "Roof thermal emittance is equal to the prescribed default value of 0.9 but differs from the "
+    "thermal emittance in the user model {absorptance_thermal_exterior} "
+)
 
 
 class Section5Rule41(RuleDefinitionListIndexedBase):
@@ -39,9 +47,21 @@ class Section5Rule41(RuleDefinitionListIndexedBase):
                 list_path="$.building_segments[*].zones[*].surfaces[*]",
             )
 
+        def create_data(self, context, data=None):
+            building_p = context.proposed
+            return {
+                "scc_dict_p": get_surface_conditioning_category_dict(
+                    data["climate_zone"], building_p
+                ),
+            }
+
         def list_filter(self, context_item, data=None):
             surface_p = context_item.proposed
-            return get_opaque_surface_type(surface_p) == OST.ROOF
+            scc = data["scc_dict_p"][surface_p["id"]]
+            return (
+                get_opaque_surface_type(surface_p) == OST.ROOF
+                and scc is not SCC.UNREGULATED
+            )
 
         class RoofRule(RuleDefinitionBase):
             def __init__(self):
