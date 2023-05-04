@@ -3,6 +3,9 @@
 
 **Description:** gets the number of floors in the building.  Parking Garages are not counted
 
+**Inputs:**  
+- **RMI**: The baseline ruleset model instance
+
 **Returns:**  
 - **result**: an integer indicating the number of floors
  
