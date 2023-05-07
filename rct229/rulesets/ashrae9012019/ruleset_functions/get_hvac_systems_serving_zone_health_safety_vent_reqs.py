@@ -4,7 +4,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_list_hvac_systems_assoc
 )
 from rct229.utils.jsonpath_utils import find_all
 from functools import reduce
-from operator import add
+from operator import concat
 
 LightingSpaceOptionsG37 = schema_enums["LightingSpaceOptions2019ASHRAE901TG37"]
 VentilationSpaceOptions = schema_enums["VentilationSpaceOptions2019ASHRAE901"]
@@ -69,4 +69,4 @@ def get_hvac_systems_serving_zone_health_safety_vent_reqs(rmi):
     ]
     # len(hvac_lists) > 0 This does not guarantee the result won't be an empty list
     # e.g., [[]] -> []
-    return list(set(reduce(add, hvac_lists))) if len(hvac_lists) > 0 else []
+    return list(set(reduce(concat, hvac_lists))) if len(hvac_lists) > 0 else []
