@@ -28,7 +28,7 @@ class Section19Rule32(RuleDefinitionListIndexedBase):
         )
 
     def create_data(self, context, data):
-        rmi_b = context.proposed
+        rmi_b = context.baseline
 
         hvac_systems_primarily_serving_comp_room_b = (
             get_hvac_systems_primarily_serving_comp_room(rmi_b)
