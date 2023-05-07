@@ -18,7 +18,7 @@ class Section19Rule24(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section19Rule24, self).__init__(
-            rmrs_used=UserBaselineProposedVals(False, False, True),
+            rmrs_used=UserBaselineProposedVals(True, False, True),
             each_rule=Section19Rule24.HVACRule(),
             index_rmr="proposed",
             id="19-24",
@@ -31,12 +31,13 @@ class Section19Rule24(RuleDefinitionListIndexedBase):
         )
 
     def create_data(self, context, data):
+        user_p = context.user
         rmi_p = context.proposed
 
         inapplicable_hvac_sys_list_p = list(
             set(
-                get_proposed_hvac_modeled_with_virtual_cooling(rmi_p)
-                + get_proposed_hvac_modeled_with_virtual_heating(rmi_p)
+                get_proposed_hvac_modeled_with_virtual_cooling(user_p, rmi_p)
+                + get_proposed_hvac_modeled_with_virtual_heating(user_p, rmi_p)
             )
         )
 
@@ -45,7 +46,7 @@ class Section19Rule24(RuleDefinitionListIndexedBase):
     class HVACRule(RuleDefinitionBase):
         def __init__(self):
             super(Section19Rule24.HVACRule, self).__init__(
-                rmrs_used=UserBaselineProposedVals(False, False, True),
+                rmrs_used=UserBaselineProposedVals(True, False, True),
                 required_fields={
                     "$": ["fan_system"],
                     "fan_system": [
