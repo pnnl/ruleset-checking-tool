@@ -1,0 +1,168 @@
+{
+    "rule-19-32-a": {
+        "Section": 19,
+        "Rule": 32,
+        "Test": "a",
+        "test_description": "Project contains a computer room served by a baseline system 2. HVAC fans correctly operate continuously during unoccupied hours. ",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "19-32",
+            "ruleset_reference": "Table G3.1 Section 4 Exception #3",
+            "rule_description": "HVAC fans shall remain on during unoccupied hours in systems primarily serving computer rooms in the baseline design.",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "primary_rule": "Yes",
+            "schema_version": "0.0.23"
+        },
+        "rmr_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_instances": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_open_schedule": "Required Building Schedule 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                                "terminals": [
+                                                    {
+                                                        "id": "PTHP Terminal 1",
+                                                        "is_supply_ducted": false,
+                                                        "type": "CONSTANT_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "PTHP 1"
+                                                    }
+                                                ],
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "lighting_space_type": "COMPUTER_ROOM"
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "PTHP 1",
+                                                "cooling_system": {
+                                                    "id": "HP Cooling Coil 1",
+                                                    "cooling_system_type": "DIRECT_EXPANSION"
+                                                },
+                                                "heating_system": {
+                                                    "id": "HP Heating Coil 1",
+                                                    "heating_system_type": "HEAT_PUMP"
+                                                },
+                                                "fan_system": {
+                                                    "id": "CAV Fan System 1",
+                                                    "fan_control": "CONSTANT",
+                                                    "supply_fans": [
+                                                        {
+                                                            "id": "Supply Fan 1"
+                                                        }
+                                                    ],
+                                                    "operation_during_unoccupied": "CONTINUOUS",
+                                                    "minimum_outdoor_airflow": 47.194744319999984
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    },
+    "rule-19-32-b": {
+        "Section": 19,
+        "Rule": 32,
+        "Test": "b",
+        "test_description": "Project contains a computer room served by a baseline system 2. HVAC fans incorrectly cycle on and off during unoccupied hours. ",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "19-32",
+            "ruleset_reference": "Table G3.1 Section 4 Exception #3",
+            "rule_description": "HVAC fans shall remain on during unoccupied hours in systems primarily serving computer rooms in the baseline design.",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "primary_rule": "Yes",
+            "schema_version": "0.0.23"
+        },
+        "rmr_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_instances": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_open_schedule": "Required Building Schedule 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                                "terminals": [
+                                                    {
+                                                        "id": "PTHP Terminal 1",
+                                                        "is_supply_ducted": false,
+                                                        "type": "CONSTANT_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "PTHP 1"
+                                                    }
+                                                ],
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "lighting_space_type": "COMPUTER_ROOM"
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "PTHP 1",
+                                                "cooling_system": {
+                                                    "id": "HP Cooling Coil 1",
+                                                    "cooling_system_type": "DIRECT_EXPANSION"
+                                                },
+                                                "heating_system": {
+                                                    "id": "HP Heating Coil 1",
+                                                    "heating_system_type": "HEAT_PUMP"
+                                                },
+                                                "fan_system": {
+                                                    "id": "CAV Fan System 1",
+                                                    "fan_control": "CONSTANT",
+                                                    "supply_fans": [
+                                                        {
+                                                            "id": "Supply Fan 1"
+                                                        }
+                                                    ],
+                                                    "operation_during_unoccupied": "CYCLING",
+                                                    "minimum_outdoor_airflow": 47.194744319999984
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    }
+}
