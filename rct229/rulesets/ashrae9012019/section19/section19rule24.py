@@ -64,24 +64,24 @@ class Section19Rule24(RuleDefinitionListIndexedBase):
         def get_calc_vals(self, context, data=None):
             hvac_p = context.proposed
 
-            operation_during_unoccupied_p = hvac_p["fan_system"][
-                "operation_during_unoccupied"
+            operation_during_occupied_p = hvac_p["fan_system"][
+                "operation_during_occupied"
             ]
             minimum_outdoor_airflow_p = hvac_p["fan_system"]["minimum_outdoor_airflow"]
 
             return {
-                "operation_during_unoccupied_p": operation_during_unoccupied_p,
+                "operation_during_occupied_p": operation_during_occupied_p,
                 "minimum_outdoor_airflow_p": minimum_outdoor_airflow_p,
             }
 
         def rule_check(self, context, calc_vals=None, data=None):
-            operation_during_unoccupied_p = calc_vals["operation_during_unoccupied_p"]
+            operation_during_occupied_p = calc_vals["operation_during_occupied_p"]
             minimum_outdoor_airflow_p = calc_vals["minimum_outdoor_airflow_p"]
 
             return (
-                operation_during_unoccupied_p == FAN_SYSTEM_OPERATION.CONTINUOUS
+                operation_during_occupied_p == FAN_SYSTEM_OPERATION.CONTINUOUS
                 and minimum_outdoor_airflow_p > ZERO.FLOW
             ) or (
-                operation_during_unoccupied_p == FAN_SYSTEM_OPERATION.CYCLING
+                operation_during_occupied_p == FAN_SYSTEM_OPERATION.CYCLING
                 and minimum_outdoor_airflow_p == ZERO.FLOW
             )
