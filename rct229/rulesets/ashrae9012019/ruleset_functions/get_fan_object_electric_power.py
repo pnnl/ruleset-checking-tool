@@ -19,7 +19,7 @@ def get_fan_object_electric_power(fan):
     Returns
     -------
     fan_elec_power: a pint quantity object with a unit of Btu/hr.
-    None if missing key parameters for calculating the fan power
+    Raise exception if missing key parameters for calculating the fan power
 
     """
     fan_elec_power = ZERO.POWER
