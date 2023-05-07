@@ -5,7 +5,7 @@ from rct229.schema.schema_utils import quantify_rmr
 from rct229.schema.validate import schema_validate_rmr
 
 TEST_RMI = {
-    "id": "test_rmr",
+    "id": "test_rmi",
     "buildings": [
         {
             "id": "bldg_1",
