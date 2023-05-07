@@ -51,7 +51,7 @@ class Section19Rule28(RuleDefinitionListIndexedBase):
                 required_fields={
                     "$": ["fan_system"],
                     "fan_system": [
-                        "operation_during_occupied",
+                        "operation_during_unoccupied",
                     ],
                 },
             )
