@@ -19,7 +19,7 @@
 
 - Get building climate zone: ```climate_zone = B_RMR.weather.climate_zone```
 
-- Get surface conditioning category dictionary for B_RMR: ```scc_dictionary_b = get_surface_conditioning_category(B_RMR)```
+- Get surface conditioning category dictionary for B_RMR: ```scc_dictionary_b = get_surface_conditioning_category_dict(climate_zone, B_RMR.building)```
 
 - For each building segment in the Proposed model: ```for building_segment_b in B_RMR.building.building_segments:```
 
@@ -28,6 +28,8 @@
     - For each surface in zone: ```for surface_b in zone_b.surfaces:```
 
       - Get surface conditioning category: ```scc_b = scc_dictionary_b[surface_b.id]```
+
+      - Skip over unregulated surfaces: ```if (scc_b == "UNREGULATED"): continue```
 
       - For each subsurface in surface: ```for subsurface_b in surface_b.subsurfaces:```
 
@@ -41,7 +43,7 @@
 
             - If subclassification is swinging or nonswinging (surface must be exterior mixed): append the residential and nonresidential U-factor requirements for the subclassification to the list of U-factor options: ```if (subclassification_b in ["SWINGING_DOOR", "NONSWINGING_DOOR"]): target_u_factor_options.extend([data_lookup(table_G3_4, climate_zone, "EXTERIOR RESIDENTIAL", "DOOR", subclassification_b), data_lookup(table_G3_4, climate_zone, "EXTERIOR NON-RESIDENTIAL", "DOOR", subclassification_b)])```
 
-            - Else if surface is exterior residential, exterior non-residential, or semi-exterior: append the swinging and nonswinging U-factor requirements for the surface conditioning category to the list of U-factor options: ```if (scc_b in ["EXTERIOR RESIDENTIAL", "EXTERIOR NON-RESIDENTIAL", "SEMI-EXTERIOR"]): target_u_factor_options.extend([data_lookup(table_G3_4, climate_zone, scc_b, "DOOR", "SWINGING_DOOR"), data_lookup(table_G3_4, climate_zone, scc_b, "DOOR", "NONSWINGING_DOOR")])```
+            - Else if surface is exterior residential, exterior non-residential, or semi-exterior: append the swinging and nonswinging U-factor requirements for the surface conditioning category to the list of U-factor options: ```else if (scc_b in ["EXTERIOR RESIDENTIAL", "EXTERIOR NON-RESIDENTIAL", "SEMI-EXTERIOR"]): target_u_factor_options.extend([data_lookup(table_G3_4, climate_zone, scc_b, "DOOR", "SWINGING_DOOR"), data_lookup(table_G3_4, climate_zone, scc_b, "DOOR", "NONSWINGING_DOOR")])```
 
             - Else, (surface is exterior mixed AND subclassification is not swinging or nonswinging): append the residential swinging, residential nonswinging, nonresidential swinging, and nonresidential nonswinging U-factor requirements to the list of U-factor options: ```else: target_u_factor_options.extend([data_lookup(table_G3_4, climate_zone, "EXTERIOR RESIDENTIAL", "DOOR", "SWINGING_DOOR"), data_lookup(table_G3_4, climate_zone, "EXTERIOR RESIDENTIAL", "DOOR", "NONSWINGING_DOOR"), data_lookup(table_G3_4, climate_zone, "EXTERIOR NON-RESIDENTIAL", "DOOR", "SWINGING_DOOR"), data_lookup(table_G3_4, climate_zone, "EXTERIOR NON-RESIDENTIAL", "DOOR", "NONSWINGING_DOOR")]```
             
