@@ -19,7 +19,7 @@ class Section19Rule20(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section19Rule20, self).__init__(
-            rmrs_used=UserBaselineProposedVals(False, True, False),
+            rmrs_used=UserBaselineProposedVals(False, True, True),
             each_rule=Section19Rule20.HVACRule(),
             index_rmr="baseline",
             id="19-20",
@@ -47,7 +47,7 @@ class Section19Rule20(RuleDefinitionListIndexedBase):
     class HVACRule(RuleDefinitionBase):
         def __init__(self):
             super(Section19Rule20.HVACRule, self).__init__(
-                rmrs_used=UserBaselineProposedVals(False, True, False),
+                rmrs_used=UserBaselineProposedVals(False, True, True),
                 required_fields={
                     "$": ["fan_system"],
                 },
@@ -99,22 +99,22 @@ class Section19Rule20(RuleDefinitionListIndexedBase):
                 proposed_total_supply_fan_power += (
                     zone_supply_return_exhaust_relief_terminal_fan_power_dict_p[
                         zone_id_b
-                    ]["zone_supply_fan_power"]
+                    ]["supply_fans_power"]
                 )
                 proposed_total_return_fan_power += (
                     zone_supply_return_exhaust_relief_terminal_fan_power_dict_p[
                         zone_id_b
-                    ]["zone_return_fan_power"]
+                    ]["return_fans_power"]
                 )
                 proposed_total_exhaust_fan_power += (
                     zone_supply_return_exhaust_relief_terminal_fan_power_dict_p[
                         zone_id_b
-                    ]["zone_exhaust_fan_power"]
+                    ]["exhaust_fans_power"]
                 )
                 proposed_total_relief_fan_power += (
                     zone_supply_return_exhaust_relief_terminal_fan_power_dict_p[
                         zone_id_b
-                    ]["zone_relief_fan_power"]
+                    ]["relief_fans_power"]
                 )
 
             total_modeled_fan_power_p = (
@@ -211,4 +211,4 @@ class Section19Rule20(RuleDefinitionListIndexedBase):
                 "expected_baseline_fan_power_relief"
             ]
 
-            return f"The calculated system fan power does appear to be distributed to the supply, return, exhaust, and relief fans in the same proportion as the proposed design for {hvac_id_b}.The expected modeled baseline supply, return, exhaust, and relief kW is {expected_baseline_fan_power_supply}, {expected_baseline_fan_power_return}, {expected_baseline_fan_power_exhaust}, {expected_baseline_fan_power_relief} respectively."
+            return f"The calculated system fan power doesn't appear to be distributed to the supply, return, exhaust, and relief fans in the same proportion as the proposed design for {hvac_id_b}.The expected modeled baseline supply, return, exhaust, and relief kW is {expected_baseline_fan_power_supply}, {expected_baseline_fan_power_return}, {expected_baseline_fan_power_exhaust}, {expected_baseline_fan_power_relief} respectively."
