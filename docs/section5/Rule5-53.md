@@ -53,7 +53,7 @@
             
             **Rule Assertion:**  
             
-            - Case 1: If the door was flagged for manual review, and the baseline U-factor equals one of the target U-factor options; outcome is UNDETERMINED: ```if (manual_review_flag == TRUE) and (subsurface_b.u_factor in target_u_factor_options): outcome = UNDETERMINED```
+            - Case 1: If the door was flagged for manual review, and the baseline U-factor equals one of the target U-factor options; outcome is UNDETERMINED: ```if (manual_review_flag == TRUE) and (subsurface_b.u_factor in target_u_factor_options): outcome = UNDETERMINED and raise_message "PRESCRIBED U-FACTOR REQUIREMENT COULD NOT BE DETERMINED. VERIFY THE BASELINE DOOR U-FACTOR (${subsurface_b.u_factor}) IS MODELED CORRECTLY."```
             
             - Case 2: If the door was flagged for manual review, and the baseline U-factor does not equal any of the target U-factor options; outcome is FAIL: ```if (manual_review_flag == TRUE) and (subsurface_b.u_factor not in target_u_factor_options): outcome = FAIL```
 
