@@ -17,6 +17,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_hvac_systems_primarily_
 from rct229.rulesets.ashrae9012019.ruleset_functions.is_economizer_modeled_in_proposed import (
     is_economizer_modeled_in_proposed,
 )
+from rct229.utils.assertions import assert_
 from rct229.utils.jsonpath_utils import find_all, find_one
 
 NOT_APPLICABLE_CLIMATE_ZONE = ["CZ0A", "CZ0B", "CZ1A", "CZ1B", "CZ2A", "CZ3A", "CZ4A"]
@@ -46,6 +47,10 @@ class Section19Rule10(RuleDefinitionListIndexedBase):
     def __init__(self):
         super(Section19Rule10, self).__init__(
             rmrs_used=UserBaselineProposedVals(False, True, True),
+            required_fields={
+                "$": ["weather"],
+                "weather": ["climate_zone"],
+            },
             each_rule=Section19Rule10.HVACRule(),
             index_rmr="baseline",
             id="19-10",
@@ -56,45 +61,19 @@ class Section19Rule10(RuleDefinitionListIndexedBase):
             ruleset_section_title="HVAC - General",
             standard_section="Section G3.1.2.6 including exceptions 1-3",
             is_primary_rule=True,
-            rmr_context="ruleset_model_instances/0",
-            list_path="$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*]",
-            required_fields={
-                "$": ["weather"],
-                "weather": ["climate_zone"],
-            },
-            data_items={"climate_zone": ("baseline", "weather/climate_zone")},
+            list_path="$.ruleset_model_instances[*].buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*]",
         )
-
-    def create_data(self, context, data):
-        rmi_b = context.baseline
-        rmi_p = context.proposed
-
-        proposed_has_economizer = is_economizer_modeled_in_proposed(rmi_b, rmi_p)
-
-        hvac_system_exception_2_list = []
-        if rmi_b.get(
-            "refrigerated_cases"
-        ) is not None and not is_economizer_modeled_in_proposed(rmi_b, rmi_p):
-            hvac_system_exception_2_list = [
-                hvac_id_b
-                for hvac_id_b in find_all(
-                    f'$.buildings[*].building_segments[?(@.lighting_building_area_type == "{LIGHTING_BUILDING_AREA.RETAIL}")].heating_ventilating_air_conditioning_systems[*].id',
-                    rmi_b,
-                )
-            ]
-        HVAC_systems_primarily_serving_comp_rooms_list = (
-            get_hvac_systems_primarily_serving_comp_room(rmi_b)
-        )
-
-        return {
-            "proposed_has_economizer": proposed_has_economizer,
-            "hvac_system_exception_2_list": hvac_system_exception_2_list,
-            "HVAC_systems_primarily_serving_comp_rooms_list": HVAC_systems_primarily_serving_comp_rooms_list,
-        }
 
     def is_applicable(self, context, data=None):
-        rmi_b = context.baseline
-        climate_zone = data["climate_zone"]
+        rmr_b = context.baseline
+
+        assert_(
+            rmr_b["ruleset_model_instances"],
+            "Please make sure `ruleset_model_instances` exists in the `baseline`.",
+        )
+        rmi_b = rmr_b["ruleset_model_instances"]
+
+        climate_zone = rmr_b["weather"]["climate_zone"]
 
         baseline_system_types_dict = get_baseline_system_types(rmi_b)
 
@@ -105,6 +84,44 @@ class Section19Rule10(RuleDefinitionListIndexedBase):
                 for applicable_sys_type in APPLICABLE_SYS_TYPES
             ]
         )
+
+    def create_data(self, context, data):
+        rmr_b = context.baseline
+        rmi_b = rmr_b["ruleset_model_instances"][0]
+
+        rmr_p = context.proposed
+        assert_(
+            rmr_p["ruleset_model_instances"],
+            "Please make sure `ruleset_model_instances` exists in the `proposed`.",
+        )
+        rmi_p = rmr_p["ruleset_model_instances"][0]
+
+        proposed_has_economizer = is_economizer_modeled_in_proposed(rmi_b, rmi_p)
+
+        hvac_system_exception_2_list = []
+        if rmi_b.get("refrigerated_cases") is not None and not proposed_has_economizer:
+            hvac_system_exception_2_list = [
+                hvac_id_b
+                for hvac_id_b in find_all(
+                    f'$.buildings[*].building_segments[*][?(@.lighting_building_area_type = "{LIGHTING_BUILDING_AREA.RETAIL}")].heating_ventilating_air_conditioning_systems[*].id',
+                    rmi_b,
+                )
+            ]
+
+        baseline_system_types_dict = get_baseline_system_types(rmi_b)
+
+        return {
+            "proposed_has_economizer": proposed_has_economizer,
+            "hvac_system_exception_2_list": hvac_system_exception_2_list,
+            "HVAC_systems_primarily_serving_comp_rooms_list": get_hvac_systems_primarily_serving_comp_room(
+                rmi_b
+            ),
+            "baseline_system_types_dict": {
+                system_type: system_list
+                for system_type, system_list in baseline_system_types_dict.items()
+                if system_type in APPLICABLE_SYS_TYPES and system_list
+            },
+        }
 
     class HVACRule(RuleDefinitionBase):
         def __init__(self):
@@ -118,14 +135,11 @@ class Section19Rule10(RuleDefinitionListIndexedBase):
         def is_applicable(self, context, data=None):
             hvac_b = context.baseline
             hvac_id_b = hvac_b["id"]
-            hvac_id_to_flags = data["hvac_id_to_flags"]
+            baseline_system_types_dict = data["baseline_system_types_dict"]
 
-            return (
-                hvac_id_to_flags[hvac_id_b]["is_hvac_sys_heating_type_furnace_flag"]
-                or hvac_id_to_flags[hvac_id_b][
-                    "is_hvac_sys_heating_type_heat_pump_flag"
-                ]
-                or hvac_id_to_flags[hvac_id_b]["is_hvac_sys_cooling_type_dx_flag"]
+            return any(
+                hvac_id_b in baseline_system_types_dict[system_type]
+                for system_type in baseline_system_types_dict.keys()
             )
 
         def get_calc_vals(self, context, data=None):
@@ -186,13 +200,17 @@ class Section19Rule10(RuleDefinitionListIndexedBase):
             return undetermined_msg
 
         def rule_check(self, context, calc_vals=None, data=None):
+            hvac_id_b = calc_vals["hvac_id_b"]
             fan_air_economizer_b = calc_vals["fan_air_economizer_b"]
             fan_air_economizer_type_b = calc_vals["fan_air_economizer_type_b"]
+            HVAC_systems_primarily_serving_comp_rooms_list = calc_vals[
+                "HVAC_systems_primarily_serving_comp_rooms_list"
+            ]
 
             return (
                 fan_air_economizer_b is None
                 or fan_air_economizer_type_b == AIR_ECONOMIZER.FIXED_FRACTION
-                and HVAC_SYS.SYS_3 in SYSTEM_3_4_TYPES  # TODO Test this part
+                and hvac_id_b in HVAC_systems_primarily_serving_comp_rooms_list
             ) or (
                 fan_air_economizer_b is not None
                 and fan_air_economizer_type_b != AIR_ECONOMIZER.FIXED_FRACTION
