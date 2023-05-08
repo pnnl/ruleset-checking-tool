@@ -45,7 +45,7 @@ class Section19Rule31(RuleDefinitionListIndexedBase):
                 required_fields={
                     "$": ["fan_system"],
                     "fan_system": [
-                        "operation_during_occupied",
+                        "operation_during_unoccupied",
                         "minimum_outdoor_airflow",
                     ],
                 },
