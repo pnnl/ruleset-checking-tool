@@ -43,6 +43,7 @@
                                                 ],
                                                 "spaces": [
                                                     {
+                                                        "floor_area": 1000,
                                                         "id": "Space 1",
                                                         "lighting_space_type": "OFFICE_ENCLOSED"
                                                     }
@@ -141,6 +142,12 @@
                                                 "id": "Thermal Zone 1",
                                                 "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 1000
+                                                    }
+                                                ],
                                                 "terminals": [
                                                     {
                                                         "id": "VAV Air Terminal 1",
@@ -263,6 +270,7 @@
                                                 ],
                                                 "spaces": [
                                                     {
+                                                        "floor_area": 1000,
                                                         "id": "Space 1",
                                                         "lighting_space_type": "OFFICE_ENCLOSED"
                                                     }
@@ -362,6 +370,12 @@
                                                 "id": "Thermal Zone 1",
                                                 "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 1000
+                                                    }
+                                                ],
                                                 "terminals": [
                                                     {
                                                         "id": "VAV Air Terminal 1",
@@ -482,6 +496,7 @@
                                                 ],
                                                 "spaces": [
                                                     {
+                                                        "floor_area": 1000,
                                                         "id": "Space 1",
                                                         "lighting_space_type": "COMPUTER_ROOM"
                                                     }
@@ -545,6 +560,12 @@
                                                 "id": "Thermal Zone 1",
                                                 "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 1000
+                                                    }
+                                                ],
                                                 "terminals": [
                                                     {
                                                         "id": "VAV Air Terminal 1",
@@ -661,6 +682,7 @@
                                                 ],
                                                 "spaces": [
                                                     {
+                                                        "floor_area": 1000,
                                                         "id": "Space 1",
                                                         "lighting_space_type": "COMPUTER_ROOM"
                                                     }
@@ -728,6 +750,12 @@
                                                 "id": "Thermal Zone 1",
                                                 "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 1000
+                                                    }
+                                                ],
                                                 "terminals": [
                                                     {
                                                         "id": "VAV Air Terminal 1",
@@ -841,6 +869,13 @@
                                                         "type": "CONSTANT_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System Type 3"
                                                     }
+                                                ],
+                                                "spaces": [
+                                                    {
+                                                        "floor_area": 1000,
+                                                        "id": "Space 1",
+                                                        "lighting_space_type": "OFFICE_ENCLOSED"
+                                                    }
                                                 ]
                                             }
                                         ],
@@ -901,6 +936,12 @@
                                                 "id": "Thermal Zone 1",
                                                 "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 1000
+                                                    }
+                                                ],
                                                 "terminals": [
                                                     {
                                                         "id": "VAV Air Terminal 1",
@@ -1016,6 +1057,13 @@
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
+                                                ],
+                                                "spaces": [
+                                                    {
+                                                        "floor_area": 1000,
+                                                        "id": "Space 1",
+                                                        "lighting_space_type": "OFFICE_ENCLOSED"
+                                                    }
                                                 ]
                                             },
                                             {
@@ -1112,6 +1160,12 @@
                                                 "id": "Thermal Zone 1",
                                                 "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 1000
+                                                    }
+                                                ],
                                                 "terminals": [
                                                     {
                                                         "id": "VAV Air Terminal 1",
@@ -1225,6 +1279,13 @@
                                                         "type": "CONSTANT_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 9"
                                                     }
+                                                ],
+                                                "spaces": [
+                                                    {
+                                                        "floor_area": 1000,
+                                                        "id": "Space 1",
+                                                        "lighting_space_type": "OFFICE_ENCLOSED"
+                                                    }
                                                 ]
                                             }
                                         ],
@@ -1277,6 +1338,12 @@
                                                 "id": "Thermal Zone 1",
                                                 "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 1000
+                                                    }
+                                                ],
                                                 "terminals": [
                                                     {
                                                         "id": "VAV Air Terminal 1",
@@ -1392,6 +1459,12 @@
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
+                                                ],
+                                                "spaces": [
+                                                    {
+                                                        "floor_area": 1000,
+                                                        "id": "Space 1"
+                                                    }
                                                 ]
                                             },
                                             {
@@ -1495,6 +1568,12 @@
                                                 "id": "Thermal Zone 1",
                                                 "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 1000
+                                                    }
+                                                ],
                                                 "terminals": [
                                                     {
                                                         "id": "VAV Air Terminal 1",
@@ -1610,6 +1689,12 @@
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
+                                                ],
+                                                "spaces": [
+                                                    {
+                                                        "floor_area": 1000,
+                                                        "id": "Space 1"
+                                                    }
                                                 ]
                                             },
                                             {
@@ -1717,6 +1802,12 @@
                                                 "id": "Thermal Zone 1",
                                                 "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
                                                 "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 1000
+                                                    }
+                                                ],
                                                 "terminals": [
                                                     {
                                                         "id": "VAV Air Terminal 1",
