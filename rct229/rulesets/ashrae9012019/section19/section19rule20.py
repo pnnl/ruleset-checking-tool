@@ -1,6 +1,15 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
+from rct229.rulesets.ashrae9012019.ruleset_functions.get_dict_of_zones_and_terminal_units_served_by_hvac_sys import (
+    get_dict_of_zones_and_terminal_units_served_by_hvac_sys,
+)
+from rct229.rulesets.ashrae9012019.ruleset_functions.get_fan_system_object_supply_return_exhaust_relief_total_power_flow import (
+    get_fan_system_object_supply_return_exhaust_relief_total_power_flow,
+)
+from rct229.rulesets.ashrae9012019.ruleset_functions.get_zone_supply_return_exhaust_relief_terminal_fan_power_dict import (
+    get_zone_supply_return_exhaust_relief_terminal_fan_power_dict,
+)
 from rct229.utils.pint_utils import ZERO
 from rct229.utils.std_comparisons import std_equal
 
@@ -27,7 +36,7 @@ class Section19Rule20(RuleDefinitionListIndexedBase):
         rmi_p = context.proposed
 
         return {
-            "zone_supply_return_exhaust_relief_terminal_fan_power_dict_p": get_zone_supply_return_exhaust_relief_terminal_fan_power_dict_p(
+            "zone_supply_return_exhaust_relief_terminal_fan_power_dict_p": get_zone_supply_return_exhaust_relief_terminal_fan_power_dict(
                 rmi_p
             ),
             "dict_of_zones_and_terminal_units_served_by_hvac_sys_b": get_dict_of_zones_and_terminal_units_served_by_hvac_sys(
@@ -149,6 +158,9 @@ class Section19Rule20(RuleDefinitionListIndexedBase):
             hvac_sys_total_return_fan_power_b = calc_vals[
                 "hvac_sys_total_return_fan_power_b"
             ]
+            hvac_sys_total_exhaust_fan_power_b = calc_vals[
+                "hvac_sys_total_exhaust_fan_power_b"
+            ]
             hvac_sys_total_relief_fan_power_b = calc_vals[
                 "hvac_sys_total_relief_fan_power_b"
             ]
@@ -157,6 +169,9 @@ class Section19Rule20(RuleDefinitionListIndexedBase):
             ]
             expected_baseline_fan_power_return = calc_vals[
                 "expected_baseline_fan_power_return"
+            ]
+            expected_baseline_fan_power_exhaust = calc_vals[
+                "expected_baseline_fan_power_exhaust"
             ]
             expected_baseline_fan_power_relief = calc_vals[
                 "expected_baseline_fan_power_relief"
