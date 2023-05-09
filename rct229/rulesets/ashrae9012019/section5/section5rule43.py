@@ -37,7 +37,7 @@ class Section5Rule43(RuleDefinitionListIndexedBase):
             standard_section="Section G3.1-1(a) Building Envelope Modeling Requirements for the Proposed design",
             is_primary_rule=True,
             list_path="ruleset_model_instances[0].buildings[*]",
-            data_items={"climate_zone": ("baseline", "weather/climate_zone")},
+            data_items={"climate_zone": ("proposed", "weather/climate_zone")},
         )
 
     class BuildingRule(RuleDefinitionListIndexedBase):
@@ -45,7 +45,7 @@ class Section5Rule43(RuleDefinitionListIndexedBase):
             super(Section5Rule43.BuildingRule, self).__init__(
                 rmrs_used=UserBaselineProposedVals(True, False, True),
                 each_rule=Section5Rule43.BuildingRule.RoofRule(),
-                index_rmr="baseline",
+                index_rmr="proposed",
                 list_path="$.building_segments[*].zones[*].surfaces[*]",
             )
 
