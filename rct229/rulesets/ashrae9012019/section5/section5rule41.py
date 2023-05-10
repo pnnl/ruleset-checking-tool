@@ -5,6 +5,12 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_opaque_surface_type imp
     get_opaque_surface_type,
     OpaqueSurfaceType as OST,
 )
+from rct229.rulesets.ashrae9012019.ruleset_functions.get_surface_conditioning_category_dict import (
+    get_surface_conditioning_category_dict,
+)
+from rct229.rulesets.ashrae9012019.ruleset_functions.get_surface_conditioning_category_dict import (
+    SurfaceConditioningCategory as SCC,
+)
 
 ABSORPTION_THERMAL_EXTERIOR = 0.9
 PASS_NOT_EQUAL_MSG = (
@@ -38,9 +44,20 @@ class Section5Rule41(RuleDefinitionListIndexedBase):
                 list_path="$.building_segments[*].zones[*].surfaces[*]",
             )
 
+        def create_data(self, context, data=None):
+            building_b = context.baseline
+            return {
+                "scc_dict_b": get_surface_conditioning_category_dict(
+                    data["climate_zone"], building_b
+                ),
+            }
+
         def list_filter(self, context_item, data=None):
             surface_p = context_item.proposed
-            return get_opaque_surface_type(surface_p) == OST.ROOF
+            return (
+                get_opaque_surface_type(surface_p) == OST.ROOF
+                and data["scc_dict_b"][surface_p["id"]] != SCC.UNREGULATED
+            )
 
         class RoofRule(RuleDefinitionBase):
             def __init__(self):
