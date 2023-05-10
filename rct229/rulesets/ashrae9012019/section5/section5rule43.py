@@ -96,12 +96,8 @@ class Section5Rule43(RuleDefinitionListIndexedBase):
 
             def get_pass_msg(self, context, calc_vals=None, data=None):
                 """Pre-condition: see rule_check"""
-                absorptance_solar_exterior_p = calc_vals[
-                    "absorptance_solar_exterior_p"
-                ]
-                absorptance_solar_exterior_u = calc_vals[
-                    "absorptance_solar_exterior_u"
-                ]
+                absorptance_solar_exterior_p = calc_vals["absorptance_solar_exterior_p"]
+                absorptance_solar_exterior_u = calc_vals["absorptance_solar_exterior_u"]
                 surface_conditioning_category_p = calc_vals[
                     "surface_conditioning_category_p"
                 ]
