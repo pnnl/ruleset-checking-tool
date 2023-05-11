@@ -38,12 +38,12 @@
 		- get the hvac systems serving the transfer airflow source zone: `transfer_source_zone_list_hvac_systems = get_list_hvac_systems_associated_with_zone(RMI,transfer_source_zone)`
 		- loop through heach HVAC system: `for transfer_system in transfer_source_zone_list_hvac_systems:`
 			- look for a cooling system: `if transfer_system.cooling_system != NULL:`
-				- `if transfer_system.cooling_system != NONE:`
+				- `if transfer_system.cooling_system.type != NONE:`
 					- there is a cooling system: `is_cooled = TRUE`
 		- if there is no cooling system, look through the zone terminals of the transfer_source_zone for a cooling system: `if !is_cooled:`
 			- look at each terminal in the transfer_source_zone: `for transfer_terminal in transfer_source_zone.terminals:`
 				- check if there is a transfer_terminal.cooling_source specified: `if transfer_terminal.cooling_source != NULL:`
-					-  `if transfer_terminal.cooling_source != NONE:`
+					-  `if transfer_terminal.cooling_source.type != NONE:`
 						- there is a terminal cooling source, set is_cooled equal to true: `is_cooled = TRUE`
 
 
