@@ -110,7 +110,6 @@
 
 
 **Notes/Questions:**  
-1. WHAT HAPPENS WHEN RETAIL IS IN A BUILDING THAT IS MORE THAN 2 FLOORS?  Seems like there is a hole in Table G3.1.1
-2. I will check the text strings for correctness as I write each individual rule
+1. I will check the text strings for correctness as I write each individual rule
 
 **[Back](../_toc.md)**
