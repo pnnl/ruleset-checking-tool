@@ -76,7 +76,7 @@ class Section5Rule40(RuleDefinitionListIndexedBase):
             def get_calc_vals(self, context, data=None):
                 roof_b = context.baseline
                 return {
-                    "obsorptance_thermal_exterior": roof_b[
+                    "absorptance_thermal_exterior": roof_b[
                         "surface_optical_properties"
                     ]["absorptance_thermal_exterior"]
                 }
@@ -84,5 +84,5 @@ class Section5Rule40(RuleDefinitionListIndexedBase):
             def rule_check(self, context, calc_vals=None, data=None):
                 return std_equal(
                     TARGET_ABSORPTANCE_THERMAL_EXTERIOR,
-                    calc_vals["obsorptance_thermal_exterior"],
+                    calc_vals["absorptance_thermal_exterior"],
                 )
