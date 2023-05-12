@@ -9,6 +9,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_baseline_system_types i
     get_baseline_system_types,
 )
 from rct229.schema.config import ureg
+from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.pint_utils import CalcQ
 from rct229.utils.std_comparisons import std_equal
@@ -68,7 +69,7 @@ class Section22Rule29(RuleDefinitionListIndexedBase):
         rmi_b = context.baseline
         condenser_loop_pump_power_dict = {
             chiller["condensing_loop"]: find_exactly_one_fluid_loop(
-                rmi_b, chiller["condensing_loop"]
+                rmi_b, getattr_(chiller, "Chiller", "condensing_loop")
             ).get("pump_power_per_flow_rate")
             for chiller in find_all("chillers[*]", rmi_b)
         }
