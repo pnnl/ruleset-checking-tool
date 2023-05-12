@@ -25,29 +25,33 @@ from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all, find_one
 from rct229.utils.pint_utils import ZERO, CalcQ
 
-APPLICABLE_CZ_ZONES = [
-    "CZ0A",
-    "CZ0B",
-    "CZ1A",
-    "CZ1B",
-    "CZ2A",
-    "CZ2B",
-    "CZ3A",
-    "CZ3B",
-    "CZ3C",
-]
+
+ENERGY_RECOVERY = schema_enums["EnergyRecoveryOptions"]
+LIGHTING_SPACE = schema_enums["LightingSpaceOptions2019ASHRAE901TG37"]
+DEHUMIDIFICATION = schema_enums["DehumidificationOptions"]
+ClimateZoneOption = schema_enums["ClimateZoneOptions2019ASHRAE901"]
+OA_FRACTION_70 = 0.7
+SUPPLY_AIRFLOW_5000CFM = 5000 * ureg("cfm")
+CASE12_FAIL_MSG = "Not all lighting or ventilation space types were defined in the RMD and therefore the potential applicability of exceptions 2 and 3 could not be fully assessed. Fail unless exceptions 2 and 3 are applicable. Exception 2 is that systems exhausting toxic, flammable, or corrosive fumes or paint or dust shall not require exhaust air energy recovery to be modeled in the baseline if it is not included in the proposed design. Exception 3 is that commercial kitchen hoods (grease) classified as Type 1 by NFPA 96 shall not require exhaust air energy recovery to be modeled in the baseline if it is not included in the proposed design."
+
+
 APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_9,
     HVAC_SYS.SYS_9B,
     HVAC_SYS.SYS_10,
 ]
 
-ENERGY_RECOVERY = schema_enums["EnergyRecoveryOptions"]
-LIGHTING_SPACE = schema_enums["LightingSpaceOptions2019ASHRAE901TG37"]
-DEHUMIDIFICATION = schema_enums["DehumidificationOptions"]
-OA_FRACTION_70 = 0.7
-SUPPLY_AIRFLOW_5000CFM = 5000 * ureg("cfm")
-CASE12_FAIL_MSG = "Not all lighting or ventilation space types were defined in the RMD and therefore the potential applicability of exceptions 2 and 3 could not be fully assessed. Fail unless exceptions 2 and 3 are applicable. Exception 2 is that systems exhausting toxic, flammable, or corrosive fumes or paint or dust shall not require exhaust air energy recovery to be modeled in the baseline if it is not included in the proposed design. Exception 3 is that commercial kitchen hoods (grease) classified as Type 1 by NFPA 96 shall not require exhaust air energy recovery to be modeled in the baseline if it is not included in the proposed design."
+APPLICABLE_CZ_ZONES = [
+    ClimateZoneOption.CZ0A,
+    ClimateZoneOption.CZ0B,
+    ClimateZoneOption.CZ1A,
+    ClimateZoneOption.CZ1B,
+    ClimateZoneOption.CZ2A,
+    ClimateZoneOption.CZ2B,
+    ClimateZoneOption.CZ3A,
+    ClimateZoneOption.CZ3B,
+    ClimateZoneOption.CZ3C,
+]
 
 
 class Section19Rule21(RuleDefinitionListIndexedBase):
@@ -93,16 +97,19 @@ class Section19Rule21(RuleDefinitionListIndexedBase):
             True if climate_zone in APPLICABLE_CZ_ZONES else False
         )
 
-        dict_of_zones_and_terminal_units_served_by_hvac_sys = (
+        dict_of_zones_and_terminal_units_served_by_hvac_sys_b = (
             get_dict_of_zones_and_terminal_units_served_by_hvac_sys(rmi_b)
         )
 
-        hvac_sys_and_assoc_zones_largest_exhaust_source = {}
+        hvac_systems_and_assoc_zones_largest_exhaust_source = {}
+        serves_zones_with_systems_likely_exhausting_toxic_etc = False
+        serves_kitchen_space = False
+        all_lighting_space_types_defined = True
         for hvac_id_b in find_all(
             "$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*]",
             rmi_b,
         ):
-            for zone_id_b in dict_of_zones_and_terminal_units_served_by_hvac_sys[
+            for zone_id_b in dict_of_zones_and_terminal_units_served_by_hvac_sys_b[
                 hvac_id_b
             ]["zone_list"]:
                 space_p = find_one(
@@ -111,86 +118,70 @@ class Section19Rule21(RuleDefinitionListIndexedBase):
                 )
                 if space_p.get("lighting_space_type") is not None:
                     lighting_space_type_p = space_p["lighting_space_type"]
-                    serves_zones_with_systems_likely_exhausting_toxic_etc = (
-                        True
-                        if lighting_space_type_p
+                    if (
+                        lighting_space_type_p
                         == LIGHTING_SPACE.LABORATORY_EXCEPT_IN_OR_AS_A_CLASSROOM
-                        else False
-                    )
-                    serves_kitchen_space = (
-                        True
-                        if lighting_space_type_p == LIGHTING_SPACE.FOOD_PREPARATION_AREA
-                        else False
-                    )
+                    ):
+                        serves_zones_with_systems_likely_exhausting_toxic_etc = True
+
+                    if lighting_space_type_p == LIGHTING_SPACE.FOOD_PREPARATION_AREA:
+                        serves_kitchen_space = True
+
                 else:
                     all_lighting_space_types_defined = False
 
                 if space_p.get("ventilation_space_type") is not None:
                     ventilation_space_type_p = space_p["ventilation_space_type"]
-                    serves_zones_with_systems_likely_exhausting_toxic_etc = (
-                        True
-                        if ventilation_space_type_p
+                    if (
+                        ventilation_space_type_p
                         == LIGHTING_SPACE.MISCELLANEOUS_SPACES_MANUFACTURING_WHERE_HAZARDOUS_MATERIALS_ARE_USED_EXCLUDES_HEAVY_INDUSTRIAL_AND_CHEMICAL_PROCESSES
-                        else False
-                    )
+                    ):
+                        serves_zones_with_systems_likely_exhausting_toxic_etc = True
 
-                    serves_kitchen_space = (
-                        True
-                        if ventilation_space_type_p
+                    if (
+                        ventilation_space_type_p
                         == LIGHTING_SPACE.FOOD_AND_BEVERAGE_SERVICE_KITCHEN_COOKING
-                        else False
-                    )
+                    ):
+                        serves_kitchen_space = True
+
                 else:
                     all_ventilation_space_types_defined = False
 
-            hvac_sys_and_assoc_zones_largest_exhaust_source[
-                hvac_id_b
-            ] = get_hvac_sys_and_assoc_zones_largest_exhaust_source(rmi_b, hvac_id_b)
-
-        for hvac_id_p in get_list_hvac_systems_associated_with_zone(rmi_p, zone_id_b):
-            hvac_p = find_one(
-                f"$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[?(@.id == {hvac_id_p})]",
-                rmi_p,
-            )
-            ER_modeled_in_proposed = (
-                True
-                if (
-                    getattr_(hvac_p, "HVAC", "fan_system").get("air_energy_recovery")
-                    is not None
-                    and getattr_(
-                        hvac_p,
-                        "HVAC",
-                        "fan_system",
-                        "air_energy_recovery",
-                        "energy_recovery_type",
+                for hvac_id_p in get_list_hvac_systems_associated_with_zone(
+                    rmi_p, zone_id_b
+                ):
+                    hvac_p = find_one(
+                        f"$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[?(@.id == {hvac_id_p})]",
+                        rmi_p,
                     )
-                    != ENERGY_RECOVERY.NONE
-                )
-                else False
-            )
+                    ER_modeled_in_proposed = find_one(
+                        "$.fan_system.air_energy_recovery.energy_recovery_type", hvac_p
+                    ) in [
+                        ENERGY_RECOVERY.SENSIBLE_HEAT_EXHANGE,
+                        ENERGY_RECOVERY.ENTHALPY_HEAT_EXHANGE,
+                        ENERGY_RECOVERY.SENSIBLE_HEAT_WHEEL,
+                        ENERGY_RECOVERY.ENTHALPY_HEAT_WHEEL,
+                        ENERGY_RECOVERY.HEAT_PIPE,
+                        ENERGY_RECOVERY.OTHER,
+                    ]
 
-            serves_zones_that_have_dehumid_heat_recovery = (
-                True
-                if (
-                    hvac_p.get("cooling_system") is not None
-                    and hvac_p["cooling_system"].get("dehumidification_type")
-                    == DEHUMIDIFICATION.SERIES_HEAT_RECOVERY
-                )
-                else False
-            )
-
-        sys_type_heating_only = (
-            True
-            if any(
-                [
-                    baseline_system_type_compare(
-                        system_type, applicable_sys_type, False
+                    serves_zones_that_have_dehumid_heat_recovery = (
+                        find_one("$.cooling_system.dehumidification_type", hvac_p)
+                        == DEHUMIDIFICATION.SERIES_HEAT_RECOVERY
                     )
-                    for system_type in get_baseline_system_types(rmi_b).keys()
-                    for applicable_sys_type in APPLICABLE_SYS_TYPES
-                ]
-            )
-            else False
+
+                hvac_systems_and_assoc_zones_largest_exhaust_source[
+                    hvac_id_b
+                ] = get_hvac_sys_and_assoc_zones_largest_exhaust_source(
+                    rmi_b, hvac_id_b
+                )
+
+        baseline_system_types = get_baseline_system_types(rmi_b)
+        sys_type_heating_only = any(
+            [
+                hvac_id_p in baseline_system_types
+                for applicable_sys_type in APPLICABLE_SYS_TYPES
+            ]
         )
 
         max_thermostat_heating_setpoint_schedule_p = max(
@@ -206,6 +197,7 @@ class Section19Rule21(RuleDefinitionListIndexedBase):
                 )
             ]
         )
+
         serves_zones_heated_to_60_or_higher_in_proposed = (
             True
             if max_thermostat_heating_setpoint_schedule_p > 60 * ureg("F")
@@ -221,7 +213,7 @@ class Section19Rule21(RuleDefinitionListIndexedBase):
             "ER_modeled_in_proposed": ER_modeled_in_proposed,
             "serves_zones_that_have_dehumid_heat_recovery": serves_zones_that_have_dehumid_heat_recovery,
             "sys_type_heating_only": sys_type_heating_only,
-            "hvac_sys_and_assoc_zones_largest_exhaust_source": hvac_sys_and_assoc_zones_largest_exhaust_source,
+            "hvac_systems_and_assoc_zones_largest_exhaust_source": hvac_systems_and_assoc_zones_largest_exhaust_source,
             "serves_zones_heated_to_60_or_higher_in_proposed": serves_zones_heated_to_60_or_higher_in_proposed,
         }
 
@@ -258,8 +250,8 @@ class Section19Rule21(RuleDefinitionListIndexedBase):
                 "serves_zones_that_have_dehumid_heat_recovery"
             ]
             sys_type_heating_only = data["sys_type_heating_only"]
-            hvac_sys_and_assoc_zones_largest_exhaust_source = data[
-                "hvac_sys_and_assoc_zones_largest_exhaust_source"
+            hvac_systems_and_assoc_zones_largest_exhaust_source = data[
+                "hvac_systems_and_assoc_zones_largest_exhaust_source"
             ][hvac_id_b]
             serves_zones_heated_to_60_or_higher_in_proposed = data[
                 "serves_zones_heated_to_60_or_higher_in_proposed"
@@ -303,10 +295,10 @@ class Section19Rule21(RuleDefinitionListIndexedBase):
                 True
                 if not ER_modeled_in_proposed
                 and max(
-                    hvac_sys_and_assoc_zones_largest_exhaust_source[
+                    hvac_systems_and_assoc_zones_largest_exhaust_source[
                         "hvac_fan_sys_exhaust_sum"
                     ],
-                    hvac_sys_and_assoc_zones_largest_exhaust_source[
+                    hvac_systems_and_assoc_zones_largest_exhaust_source[
                         "maximum_zone_exhaust"
                     ],
                 )
@@ -335,7 +327,7 @@ class Section19Rule21(RuleDefinitionListIndexedBase):
                 "OA_fraction ": OA_fraction,
                 "ER_modeled": ER_modeled,
                 "max_outdoor_airflow_b": max_outdoor_airflow_b,
-                "hvac_sys_and_assoc_zones_largest_exhaust_source": hvac_sys_and_assoc_zones_largest_exhaust_source,
+                "hvac_systems_and_assoc_zones_largest_exhaust_source": hvac_systems_and_assoc_zones_largest_exhaust_source,
                 "exception_1_applies": exception_1_applies,
                 "exception_2_applies": exception_2_applies,
                 "exception_6_applies": exception_6_applies,
@@ -349,8 +341,8 @@ class Section19Rule21(RuleDefinitionListIndexedBase):
             ER_modeled_in_proposed = calc_vals["ER_modeled_in_proposed"]
             serves_kitchen_space = calc_vals["serves_kitchen_space"]
             max_outdoor_airflow_b = calc_vals["max_outdoor_airflow_b"]
-            hvac_sys_and_assoc_zones_largest_exhaust_source = calc_vals[
-                "hvac_sys_and_assoc_zones_largest_exhaust_source"
+            hvac_systems_and_assoc_zones_largest_exhaust_source = calc_vals[
+                "hvac_systems_and_assoc_zones_largest_exhaust_source"
             ]
 
             return (
@@ -363,15 +355,15 @@ class Section19Rule21(RuleDefinitionListIndexedBase):
                 OA_fraction >= OA_FRACTION_70
                 and supply_airflow_b >= SUPPLY_AIRFLOW_5000CFM
                 and not ER_modeled
-                and hvac_sys_and_assoc_zones_largest_exhaust_source[
+                and hvac_systems_and_assoc_zones_largest_exhaust_source[
                     "num_hvac_exhaust_fans"
                 ]
                 > 1
                 and max(
-                    hvac_sys_and_assoc_zones_largest_exhaust_source[
+                    hvac_systems_and_assoc_zones_largest_exhaust_source[
                         "hvac_fan_sys_exhaust_sum"
                     ],
-                    hvac_sys_and_assoc_zones_largest_exhaust_source[
+                    hvac_systems_and_assoc_zones_largest_exhaust_source[
                         "maximum_hvac_exhaust"
                     ],
                 )
