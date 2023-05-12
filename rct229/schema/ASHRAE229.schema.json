@@ -2826,6 +2826,22 @@
                     "type": "number",
                     "units": "L/s"
                 },
+				"max_heating_airflow": {
+                    "description": "Zone terminal maximum heating airflow",
+                    "type": "number",
+                    "units": "L/s",
+                    "notes": "Entry only needed if maximum heating airflow is different than the pimary airflow such as when describing a dual maximum VAV box control."
+                },
+                "supply_design_heating_setpoint_temperature": {
+                    "description": "Zone terminal supply design heating temperature setpoint",
+                    "type": "number",
+                    "units": "C"
+                },
+                "supply_design_cooling_setpoint_temperature": {
+                    "description": "Zone terminal supply design cooling temperature setpoint",
+                    "type": "number",
+                    "units": "C"
+                },
                 "supply_setpoint_temperature": {
                     "description": "Zone terminal supply temperature setpoint",
                     "type": "number",
