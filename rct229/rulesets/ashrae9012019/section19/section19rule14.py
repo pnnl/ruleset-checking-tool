@@ -265,7 +265,7 @@ class Section19Rule14(RuleDefinitionListIndexedBase):
                 and std_equal(
                     modeled_cfm, max(supply_minus_OA_flow, supply_cfm_90_percent)
                 )
-            ) and (
+            ) or (
                 not is_modeled_with_return_fan_in_proposed
                 and not is_modeled_with_relief_fan_in_proposed
                 and std_equal(ZERO.FLOW, return_fans_airflow)
