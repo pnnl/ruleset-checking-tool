@@ -43,7 +43,7 @@ class Section5Rule41(RuleDefinitionListIndexedBase):
             super(Section5Rule41.BuildingRule, self).__init__(
                 rmrs_used=UserBaselineProposedVals(True, False, True),
                 each_rule=Section5Rule41.BuildingRule.RoofRule(),
-                index_rmr="baseline",
+                index_rmr="proposed",
                 list_path="$.building_segments[*].zones[*].surfaces[*]",
             )
 
