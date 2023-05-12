@@ -44,6 +44,7 @@
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
+                                                        "floor_area": 1000,
                                                         "lighting_space_type": "AUDIENCE_SEATING_AREA_GYMNASIUM"
                                                     }
                                                 ]
@@ -129,6 +130,7 @@
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
+                                                        "floor_area": 1000,
                                                         "lighting_space_type": "CLASSROOM_LECTURE_HALL_TRAINING_ROOM_ALL_OTHER"
                                                     }
                                                 ]
