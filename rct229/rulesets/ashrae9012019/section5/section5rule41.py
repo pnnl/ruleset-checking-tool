@@ -7,16 +7,19 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_opaque_surface_type imp
 )
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_surface_conditioning_category_dict import (
     get_surface_conditioning_category_dict,
-)
-from rct229.rulesets.ashrae9012019.ruleset_functions.get_surface_conditioning_category_dict import (
     SurfaceConditioningCategory as SCC,
 )
 
 ABSORPTION_THERMAL_EXTERIOR = 0.9
-PASS_NOT_EQUAL_MSG = (
-    "Roof surface emittance in P-RMD matches that in U-RMD but is not equal to 0.9"
+UNDETERMINED_MSG = (
+    "Roof surface emittance in the proposed model {absorptance_thermal_exterior} matches that in the "
+    "user model but is not equal to the prescribed default value of 0.9. Verify that the modeled value "
+    "is based on testing in accordance with section 5.5.3.1.1(a). "
 )
-PASS_DIFFERS_MSG = "Roof thermal emittance is equal to the prescribed default value of 0.9 but differs from the thermal emittance in the user model"
+PASS_DIFFERS_MSG = (
+    "Roof thermal emittance is equal to the prescribed default value of 0.9 but differs from the "
+    "thermal emittance in the user model {absorptance_thermal_exterior} "
+)
 
 
 class Section5Rule41(RuleDefinitionListIndexedBase):
@@ -45,18 +48,19 @@ class Section5Rule41(RuleDefinitionListIndexedBase):
             )
 
         def create_data(self, context, data=None):
-            building_b = context.baseline
+            building_p = context.proposed
             return {
-                "scc_dict_b": get_surface_conditioning_category_dict(
-                    data["climate_zone"], building_b
+                "scc_dict_p": get_surface_conditioning_category_dict(
+                    data["climate_zone"], building_p
                 ),
             }
 
         def list_filter(self, context_item, data=None):
             surface_p = context_item.proposed
+            scc = data["scc_dict_p"][surface_p["id"]]
             return (
                 get_opaque_surface_type(surface_p) == OST.ROOF
-                and data["scc_dict_b"][surface_p["id"]] != SCC.UNREGULATED
+                and scc is not SCC.UNREGULATED
             )
 
         class RoofRule(RuleDefinitionBase):
@@ -82,11 +86,29 @@ class Section5Rule41(RuleDefinitionListIndexedBase):
                     ]["absorptance_thermal_exterior"],
                 }
 
+            def manual_check_required(self, context, calc_vals=None, data=None):
+                absorptance_thermal_exterior_p = calc_vals[
+                    "absorptance_thermal_exterior_p"
+                ]
+                absorptance_thermal_exterior_u = calc_vals[
+                    "absorptance_thermal_exterior_u"
+                ]
+                return (
+                    absorptance_thermal_exterior_p == absorptance_thermal_exterior_u
+                    and absorptance_thermal_exterior_p != ABSORPTION_THERMAL_EXTERIOR
+                )
+
+            def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
+                absorptance_thermal_exterior_p = calc_vals[
+                    "absorptance_thermal_exterior_p"
+                ]
+                return UNDETERMINED_MSG.format(
+                    absorptance_thermal_exterior=absorptance_thermal_exterior_p
+                )
+
             def rule_check(self, context, calc_vals=None, data=None):
                 return (
                     calc_vals["absorptance_thermal_exterior_p"]
-                    == calc_vals["absorptance_thermal_exterior_u"]
-                    or calc_vals["absorptance_thermal_exterior_p"]
                     == ABSORPTION_THERMAL_EXTERIOR
                 )
 
@@ -98,9 +120,13 @@ class Section5Rule41(RuleDefinitionListIndexedBase):
                 absorptance_thermal_exterior_u = calc_vals[
                     "absorptance_thermal_exterior_u"
                 ]
-                pass_msg = ""
-                if absorptance_thermal_exterior_p != ABSORPTION_THERMAL_EXTERIOR:
-                    pass_msg = PASS_NOT_EQUAL_MSG
-                if absorptance_thermal_exterior_u != absorptance_thermal_exterior_p:
-                    pass_msg = PASS_DIFFERS_MSG
+
+                pass_msg = (
+                    PASS_DIFFERS_MSG.format(
+                        absorptance_thermal_exterior=absorptance_thermal_exterior_u
+                    )
+                    if absorptance_thermal_exterior_p != absorptance_thermal_exterior_u
+                    else ""
+                )
+
                 return pass_msg
