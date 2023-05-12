@@ -35,12 +35,14 @@ class Section6Rule2(RuleDefinitionListIndexedBase):
 
     def list_filter(self, context_item, data=None):
         space_p = context_item.proposed
-        lighting_space_type_p = getattr_(space_p, space_p["id"], "lighting_space_type")
+        # skip spaces has no lighting_space_type
+        lighting_space_type_p = space_p.get("lighting_space_type")
 
         return lighting_space_type_p in [
             GUEST_ROOM,
             DWELLING_UNIT,
             DORMITORY_LIVING_QUARTERS,
+            None,
         ]
 
     class SpaceRule(RuleDefinitionBase):
@@ -48,10 +50,15 @@ class Section6Rule2(RuleDefinitionListIndexedBase):
             super(Section6Rule2.SpaceRule, self).__init__(
                 rmrs_used=UserBaselineProposedVals(True, False, True),
                 required_fields={
-                    "$": ["lighting_space_type", "interior_lighting"],
+                    "$": ["interior_lighting"],
                     "interior_lighting[*]": ["power_per_area"],
                 },
             )
+
+        def is_applicable(self, context, data=None):
+            # Set space not applicable if no lighting space type
+            space_p = context.proposed
+            return space_p.get("lighting_space_type") is not None
 
         def get_calc_vals(self, context, data=None):
             space_p = context.proposed
