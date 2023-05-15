@@ -115,7 +115,7 @@ class Section19Rule14(RuleDefinitionListIndexedBase):
     def is_applicable(self, context, data=None):
         rmi_b = context.baseline
         baseline_system_types_dict = get_baseline_system_types(rmi_b)
-        stop = 1
+
         return any(
             [
                 baseline_system_type_compare(system_type, applicable_sys_type, False)
@@ -137,7 +137,7 @@ class Section19Rule14(RuleDefinitionListIndexedBase):
             hvac_b = context.baseline
             hvac_id_b = hvac_b["id"]
             baseline_system_types_dict = data["baseline_system_types_dict"]
-            stop = 1
+
             return any(
                 hvac_id_b in baseline_system_types_dict[system_type]
                 for system_type in baseline_system_types_dict.keys()
