@@ -66,7 +66,8 @@
                                                             "design_electric_power": 100,
                                                             "design_airflow": 1000
                                                         }
-                                                    ]
+                                                    ],
+                                                    "minimum_outdoor_airflow": 200
                                                 }
                                             }
                                         ]
@@ -247,7 +248,8 @@
                                                             "design_electric_power": 100,
                                                             "design_airflow": 1000
                                                         }
-                                                    ]
+                                                    ],
+                                                    "minimum_outdoor_airflow": 200
                                                 }
                                             }
                                         ]
