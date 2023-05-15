@@ -60,8 +60,7 @@ class Section5Rule29(RuleDefinitionListIndexedBase):
             surface_b = context_item.baseline
             return (
                 get_opaque_surface_type(surface_b) == OST.ABOVE_GRADE_WALL
-                and data["surface_conditioning_category_dict_b"][surface_b["id"]]
-                != SCC.UNREGULATED
+                and data["scc_dict_b"][surface_b["id"]] != SCC.UNREGULATED
             )
 
         class AboveGradeWallRule(RuleDefinitionListIndexedBase):
