@@ -61,7 +61,10 @@
                                                     "fan_control": "VARIABLE_SPEED_DRIVE",
                                                     "supply_fans": [
                                                         {
-                                                            "id": "Supply Fan 1"
+                                                            "id": "Supply Fan 1",
+                                                            "specification_method": "SIMPLE",
+                                                            "design_electric_power": 100,
+                                                            "design_airflow": 1000
                                                         }
                                                     ]
                                                 }
@@ -139,7 +142,10 @@
                                                     "fan_control": "VARIABLE_SPEED_DRIVE",
                                                     "supply_fans": [
                                                         {
-                                                            "id": "Supply Fan 1"
+                                                            "id": "Supply Fan 1",
+                                                            "specification_method": "SIMPLE",
+                                                            "design_electric_power": 100,
+                                                            "design_airflow": 471.94744319999984
                                                         }
                                                     ]
                                                 }
@@ -225,7 +231,7 @@
                                                 "cooling_system": {
                                                     "id": "CHW Coil 1",
                                                     "cooling_system_type": "FLUID_LOOP",
-                                                    "chilled_water_loop": "Secondary CHW Loop 1"
+                                                    "chilled_water_loop": "Chilled Water Loop 1"
                                                 },
                                                 "heating_system": {
                                                     "id": "Heating Coil 1",
@@ -236,12 +242,10 @@
                                                     "fan_control": "VARIABLE_SPEED_DRIVE",
                                                     "supply_fans": [
                                                         {
-                                                            "id": "Supply Fan 1"
-                                                        }
-                                                    ],
-                                                    "return_fans": [
-                                                        {
-                                                            "id": "Return Fan 1"
+                                                            "id": "Supply Fan 1",
+                                                            "specification_method": "SIMPLE",
+                                                            "design_electric_power": 100,
+                                                            "design_airflow": 1000
                                                         }
                                                     ]
                                                 }
@@ -251,34 +255,24 @@
                                 ]
                             }
                         ],
-                        "chillers": [
+                        "external_fluid_source": [
                             {
-                                "id": "Chiller 1",
-                                "cooling_loop": "Chiller Loop 1"
+                                "id": "Purchased CW 1",
+                                "loop": "Chilled Water Loop 1",
+                                "type": "CHILLED_WATER"
                             }
                         ],
                         "pumps": [
                             {
-                                "id": "Chiller Pump 1",
-                                "loop_or_piping": "Chiller Loop 1",
+                                "id": "CHW Pump 1",
+                                "loop_or_piping": "Chilled Water Loop 1",
                                 "speed_control": "FIXED_SPEED"
-                            },
-                            {
-                                "id": "Secondary CHW Pump",
-                                "loop_or_piping": "Secondary CHW Loop 1",
-                                "speed_control": "VARIABLE_SPEED"
                             }
                         ],
                         "fluid_loops": [
                             {
-                                "id": "Chiller Loop 1",
-                                "type": "COOLING",
-                                "child_loops": [
-                                    {
-                                        "id": "Secondary CHW Loop 1",
-                                        "type": "COOLING"
-                                    }
-                                ]
+                                "id": "Chilled Water Loop 1",
+                                "type": "COOLING"
                             }
                         ]
                     }
@@ -318,7 +312,7 @@
                                                 "cooling_system": {
                                                     "id": "CHW Coil 1",
                                                     "cooling_system_type": "FLUID_LOOP",
-                                                    "chilled_water_loop": "Secondary CHW Loop 1"
+                                                    "chilled_water_loop": "Chilled Water Loop 1"
                                                 },
                                                 "heating_system": {
                                                     "id": "Heating Coil 1",
@@ -329,12 +323,18 @@
                                                     "fan_control": "VARIABLE_SPEED_DRIVE",
                                                     "supply_fans": [
                                                         {
-                                                            "id": "Supply Fan 1"
+                                                            "id": "Supply Fan 1",
+                                                            "specification_method": "SIMPLE",
+                                                            "design_electric_power": 100,
+                                                            "design_airflow": 471.94744319999984
                                                         }
                                                     ],
                                                     "return_fans": [
                                                         {
-                                                            "id": "Return Fan 1"
+                                                            "id": "Return Fan 1",
+                                                            "specification_method": "SIMPLE",
+                                                            "design_electric_power": 90,
+                                                            "design_airflow": 900
                                                         }
                                                     ]
                                                 }
@@ -344,34 +344,24 @@
                                 ]
                             }
                         ],
-                        "chillers": [
+                        "external_fluid_source": [
                             {
-                                "id": "Chiller 1",
-                                "cooling_loop": "Chiller Loop 1"
+                                "id": "Purchased CW 1",
+                                "loop": "Chilled Water Loop 1",
+                                "type": "CHILLED_WATER"
                             }
                         ],
                         "pumps": [
                             {
-                                "id": "Chiller Pump 1",
-                                "loop_or_piping": "Chiller Loop 1",
+                                "id": "CHW Pump 1",
+                                "loop_or_piping": "Chilled Water Loop 1",
                                 "speed_control": "FIXED_SPEED"
-                            },
-                            {
-                                "id": "Secondary CHW Pump",
-                                "loop_or_piping": "Secondary CHW Loop 1",
-                                "speed_control": "VARIABLE_SPEED"
                             }
                         ],
                         "fluid_loops": [
                             {
-                                "id": "Chiller Loop 1",
-                                "type": "COOLING",
-                                "child_loops": [
-                                    {
-                                        "id": "Secondary CHW Loop 1",
-                                        "type": "COOLING"
-                                    }
-                                ]
+                                "id": "Chilled Water Loop 1",
+                                "type": "COOLING"
                             }
                         ]
                     }
@@ -459,6 +449,8 @@
                                                     "supply_fans": [
                                                         {
                                                             "id": "Supply Fan 1",
+                                                            "specification_method": "SIMPLE",
+                                                            "design_electric_power": 100,
                                                             "design_airflow": 1000
                                                         }
                                                     ],
@@ -562,12 +554,16 @@
                                                     "supply_fans": [
                                                         {
                                                             "id": "Supply Fan 1",
+                                                            "specification_method": "SIMPLE",
+                                                            "design_electric_power": 100,
                                                             "design_airflow": 471.94744319999984
                                                         }
                                                     ],
                                                     "return_fans": [
                                                         {
                                                             "id": "Return Fan 1",
+                                                            "specification_method": "SIMPLE",
+                                                            "design_electric_power": 90,
                                                             "design_airflow": 900
                                                         }
                                                     ],
@@ -684,6 +680,8 @@
                                                     "supply_fans": [
                                                         {
                                                             "id": "Supply Fan 1",
+                                                            "specification_method": "SIMPLE",
+                                                            "design_electric_power": 100,
                                                             "design_airflow": 1000
                                                         }
                                                     ],
@@ -787,12 +785,16 @@
                                                     "supply_fans": [
                                                         {
                                                             "id": "Supply Fan 1",
+                                                            "specification_method": "SIMPLE",
+                                                            "design_electric_power": 100,
                                                             "design_airflow": 471.94744319999984
                                                         }
                                                     ],
                                                     "return_fans": [
                                                         {
                                                             "id": "Return Fan 1",
+                                                            "specification_method": "SIMPLE",
+                                                            "design_electric_power": 92,
                                                             "design_airflow": 950
                                                         }
                                                     ],
@@ -909,6 +911,8 @@
                                                     "supply_fans": [
                                                         {
                                                             "id": "Supply Fan 1",
+                                                            "specification_method": "SIMPLE",
+                                                            "design_electric_power": 100,
                                                             "design_airflow": 1000
                                                         }
                                                     ],
@@ -1012,12 +1016,16 @@
                                                     "supply_fans": [
                                                         {
                                                             "id": "Supply Fan 1",
+                                                            "specification_method": "SIMPLE",
+                                                            "design_electric_power": 100,
                                                             "design_airflow": 471.94744319999984
                                                         }
                                                     ],
                                                     "return_fans": [
                                                         {
                                                             "id": "Return Fan 1",
+                                                            "specification_method": "SIMPLE",
+                                                            "design_electric_power": 85,
                                                             "design_airflow": 800
                                                         }
                                                     ],
@@ -1233,20 +1241,23 @@
                                                     "fan_control": "VARIABLE_SPEED_DRIVE",
                                                     "supply_fans": [
                                                         {
-                                                            "id": "Supply Fan 1"
+                                                            "id": "Supply Fan 1",
+                                                            "specification_method": "SIMPLE",
+                                                            "design_electric_power": 100,
+                                                            "design_airflow": 471.94744319999984
                                                         }
                                                     ],
                                                     "return_fans": [
                                                         {
                                                             "id": "Return Fan 1",
                                                             "specification_method": "SIMPLE",
-                                                            "design_electric_power": 0.03,
+                                                            "design_electric_power": 30,
                                                             "design_airflow": 100
                                                         },
                                                         {
                                                             "id": "Return Fan 2",
                                                             "specification_method": "SIMPLE",
-                                                            "design_electric_power": 0.03,
+                                                            "design_electric_power": 30,
                                                             "design_airflow": 100
                                                         }
                                                     ]
