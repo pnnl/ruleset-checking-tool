@@ -109,6 +109,11 @@ class Section6Rule5(RuleDefinitionListIndexedBase):
                             rmrs_used=UserBaselineProposedVals(False, True, True)
                         )
 
+                    def is_applicable(self, context, data=None):
+                        # set space has no lighting space type to not applicable
+                        space_b = context.baseline
+                        return space_b.get("lighting_space_type") is not None
+
                     def get_calc_vals(self, context, data=None):
                         schedules_b = data["schedules_b"]
                         space_b = context.baseline
