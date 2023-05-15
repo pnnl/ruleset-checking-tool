@@ -20,7 +20,23 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.is_economizer_modeled_in_pr
 from rct229.utils.assertions import assert_
 from rct229.utils.jsonpath_utils import find_all, find_one
 
-NOT_APPLICABLE_CLIMATE_ZONE = ["CZ0A", "CZ0B", "CZ1A", "CZ1B", "CZ2A", "CZ3A", "CZ4A"]
+
+ClimateZoneOption = schema_enums["ClimateZoneOptions2019ASHRAE901"]
+AIR_ECONOMIZER = schema_enums["AirEconomizerOptions"]
+LIGHTING_BUILDING_AREA = schema_enums[
+    "LightingBuildingAreaOptions2019ASHRAE901T951TG38"
+]
+
+
+NOT_APPLICABLE_CLIMATE_ZONE = [
+    ClimateZoneOption.CZ0A,
+    ClimateZoneOption.CZ0B,
+    ClimateZoneOption.CZ1A,
+    ClimateZoneOption.CZ1B,
+    ClimateZoneOption.CZ2A,
+    ClimateZoneOption.CZ3A,
+    ClimateZoneOption.CZ4A,
+]
 APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_3,
     HVAC_SYS.SYS_4,
@@ -34,11 +50,6 @@ APPLICABLE_SYS_TYPES = [
 ]
 
 SYSTEM_3_4_TYPES = [HVAC_SYS.SYS_3, HVAC_SYS.SYS_4]
-
-AIR_ECONOMIZER = schema_enums["AirEconomizerOptions"]
-LIGHTING_BUILDING_AREA = schema_enums[
-    "LightingBuildingAreaOptions2019ASHRAE901T951TG38"
-]
 
 
 class Section19Rule10(RuleDefinitionListIndexedBase):
@@ -75,12 +86,12 @@ class Section19Rule10(RuleDefinitionListIndexedBase):
 
         climate_zone = rmr_b["weather"]["climate_zone"]
 
-        baseline_system_types_dict = get_baseline_system_types(rmi_b)
+        baseline_system_types_dict_b = get_baseline_system_types(rmi_b)
 
         return (climate_zone not in NOT_APPLICABLE_CLIMATE_ZONE) and any(
             [
                 baseline_system_type_compare(system_type, applicable_sys_type, False)
-                for system_type in baseline_system_types_dict.keys()
+                for system_type in baseline_system_types_dict_b.keys()
                 for applicable_sys_type in APPLICABLE_SYS_TYPES
             ]
         )
@@ -116,7 +127,7 @@ class Section19Rule10(RuleDefinitionListIndexedBase):
             "HVAC_systems_primarily_serving_comp_rooms_list": get_hvac_systems_primarily_serving_comp_room(
                 rmi_b
             ),
-            "baseline_system_types_dict": {
+            "baseline_system_types_dict_b": {
                 system_type: system_list
                 for system_type, system_list in baseline_system_types_dict.items()
                 if system_type in APPLICABLE_SYS_TYPES and system_list
@@ -135,11 +146,11 @@ class Section19Rule10(RuleDefinitionListIndexedBase):
         def is_applicable(self, context, data=None):
             hvac_b = context.baseline
             hvac_id_b = hvac_b["id"]
-            baseline_system_types_dict = data["baseline_system_types_dict"]
+            baseline_system_types_dict_b = data["baseline_system_types_dict_b"]
 
             return any(
-                hvac_id_b in baseline_system_types_dict[system_type]
-                for system_type in baseline_system_types_dict.keys()
+                hvac_id_b in baseline_system_types_dict_b[system_type]
+                for system_type in baseline_system_types_dict_b.keys()
             )
 
         def get_calc_vals(self, context, data=None):
@@ -149,6 +160,9 @@ class Section19Rule10(RuleDefinitionListIndexedBase):
             HVAC_systems_primarily_serving_comp_rooms_list = data[
                 "HVAC_systems_primarily_serving_comp_rooms_list"
             ]
+            baseline_system_types_b = list(data["baseline_system_types_dict_b"].keys())[
+                0
+            ]
 
             fan_sys_b = hvac_b["fan_system"]
             fan_air_economizer_b = find_one("$.air_economizer", fan_sys_b)
@@ -157,6 +171,7 @@ class Section19Rule10(RuleDefinitionListIndexedBase):
 
             return {
                 "hvac_id_b": hvac_id_b,
+                "baseline_system_types_b": baseline_system_types_b,
                 "fan_air_economizer_b": fan_air_economizer_b,
                 "fan_air_economizer_type_b": fan_air_economizer_type_b,
                 "HVAC_systems_primarily_serving_comp_rooms_list": HVAC_systems_primarily_serving_comp_rooms_list,
@@ -167,10 +182,13 @@ class Section19Rule10(RuleDefinitionListIndexedBase):
             fan_air_economizer_b = calc_vals["fan_air_economizer_b"]
             fan_air_economizer_type_b = calc_vals["fan_air_economizer_type_b"]
             hvac_system_exception_2_list = data["hvac_system_exception_2_list"]
-
+            stop = 1
             return (
-                fan_air_economizer_b is None
-                or fan_air_economizer_type_b == AIR_ECONOMIZER.FIXED_FRACTION
+                (
+                    fan_air_economizer_b is None
+                    or fan_air_economizer_type_b == AIR_ECONOMIZER.FIXED_FRACTION
+                )
+                and hvac_id_b in hvac_system_exception_2_list
             ) or (
                 fan_air_economizer_b is not None
                 and fan_air_economizer_type_b != AIR_ECONOMIZER.FIXED_FRACTION
@@ -179,6 +197,7 @@ class Section19Rule10(RuleDefinitionListIndexedBase):
 
         def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
             hvac_id_b = calc_vals["hvac_id_b"]
+            baseline_system_types_b = calc_vals["baseline_system_types_b"]
             fan_air_economizer_b = calc_vals["fan_air_economizer_b"]
             fan_air_economizer_type_b = calc_vals["fan_air_economizer_type_b"]
             hvac_system_exception_2_list = data["hvac_system_exception_2_list"]
@@ -186,7 +205,7 @@ class Section19Rule10(RuleDefinitionListIndexedBase):
             if (
                 fan_air_economizer_b is None
                 or fan_air_economizer_type_b == AIR_ECONOMIZER.FIXED_FRACTION
-            ):
+            ) and baseline_system_types_b in hvac_system_exception_2_list:
                 # Case 2 msg
                 undetermined_msg = f"Fail unless any of the zones served by the baseline system {hvac_id_b} in the proposed design include supermarket open refrigerated case-work systems that will be affected by using outdoor air for cooling (G3.1.2.6 exception #2)."
             elif (
@@ -201,23 +220,30 @@ class Section19Rule10(RuleDefinitionListIndexedBase):
 
         def rule_check(self, context, calc_vals=None, data=None):
             hvac_id_b = calc_vals["hvac_id_b"]
+            baseline_system_types_b = calc_vals["baseline_system_types_b"]
             fan_air_economizer_b = calc_vals["fan_air_economizer_b"]
             fan_air_economizer_type_b = calc_vals["fan_air_economizer_type_b"]
             HVAC_systems_primarily_serving_comp_rooms_list = calc_vals[
                 "HVAC_systems_primarily_serving_comp_rooms_list"
             ]
-
+            stop = 1
             return (
-                fan_air_economizer_b is None
-                or fan_air_economizer_type_b == AIR_ECONOMIZER.FIXED_FRACTION
+                (
+                    fan_air_economizer_b is None
+                    or fan_air_economizer_type_b == AIR_ECONOMIZER.FIXED_FRACTION
+                )
+                and baseline_system_types_b in SYSTEM_3_4_TYPES
                 and hvac_id_b in HVAC_systems_primarily_serving_comp_rooms_list
             ) or (
                 fan_air_economizer_b is not None
                 and fan_air_economizer_type_b != AIR_ECONOMIZER.FIXED_FRACTION
+                and baseline_system_types_b not in SYSTEM_3_4_TYPES
+                and hvac_id_b not in HVAC_systems_primarily_serving_comp_rooms_list
             )
 
         def get_fail_msg(self, context, calc_vals=None, data=None):
             hvac_id_b = calc_vals["hvac_id_b"]
+            baseline_system_types_b = calc_vals["baseline_system_types_b"]
             fan_air_economizer_b = calc_vals["fan_air_economizer_b"]
             fan_air_economizer_type_b = calc_vals["fan_air_economizer_type_b"]
             proposed_has_economizer = data["proposed_has_economizer"]
@@ -228,6 +254,7 @@ class Section19Rule10(RuleDefinitionListIndexedBase):
             if (
                 fan_air_economizer_b is not None
                 and fan_air_economizer_type_b != AIR_ECONOMIZER.FIXED_FRACTION
+                and baseline_system_types_b in SYSTEM_3_4_TYPES
                 and hvac_id_b in HVAC_systems_primarily_serving_comp_rooms_list
             ):
                 # Case 3 msg
@@ -239,5 +266,6 @@ class Section19Rule10(RuleDefinitionListIndexedBase):
             ) and not proposed_has_economizer:
                 # case 6 msg
                 fail_msg = f"Fail unless any of the zones served by the baseline system {hvac_id_b} are served in the proposed design by systems with a gas-phase air cleaning where such air cleaning is requirements of Standard 62.1, Section 6.1.2 (G3.1.2.6 exception #1) or where the use of outdoor air for cooling will affect supermarket open refrigerated case-work systems (G3.1.2.6 exception #2)."
-
+            else:
+                fail_msg = ""
             return fail_msg
