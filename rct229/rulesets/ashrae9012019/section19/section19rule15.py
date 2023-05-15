@@ -93,7 +93,7 @@ class Section19Rule15(RuleDefinitionListIndexedBase):
                 [
                     terminal_p.get("primary_airflow", ZERO.FLOW)
                     for terminal_p in find_all(
-                        f'$.buildings[*].building_segments[*].zones[?(@.id == "{zone_id_b}")].terminals[*]',
+                        f'$.buildings[*].building_segments[*].zones[*][?(@.id = "{zone_id_b}")].terminals[*]',
                         rmi_p,
                     )
                     for zone_id_b in zones_and_terminal_units_served_by_hvac_sys_dict[
