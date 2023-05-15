@@ -68,6 +68,7 @@ class Section19Rule14(RuleDefinitionListIndexedBase):
         )
 
         hvac_info = {}
+        fan_system_info_b = {}
         for hvac_b in find_all(
             "$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*]",
             rmi_b,
@@ -75,36 +76,35 @@ class Section19Rule14(RuleDefinitionListIndexedBase):
             hvac_id_b = hvac_b["id"]
             hvac_info[hvac_id_b] = {}
 
-            fan_system_info_b = (
-                get_zone_supply_return_exhaust_relief_terminal_fan_power_dict(
-                    getattr_(hvac_b, "HVAC", "fan_system")
+            fan_system_info_b[hvac_id_b] = getattr_(hvac_b, "HVAC", "fan_system")
+
+            fan_sys_info_b = (
+                get_fan_system_object_supply_return_exhaust_relief_total_power_flow(
+                    fan_system_info_b[hvac_id_b]
                 )
             )
 
             hvac_info[hvac_id_b]["more_than_one_supply_or_return_fan"] = (
-                fan_system_info_b["supply_fans_qty"] == 1
-                and fan_system_info_b["return_fans_qty"] == 1
+                fan_sys_info_b["supply_fans_qty"] == 1
+                and fan_sys_info_b["return_fans_qty"] == 1
             )
 
             for zone_b in dict_of_zones_and_terminal_units_served_by_hvac_sys_b[
                 hvac_id_b
             ]["zone_list"]:
-                modeled_fan_power_list_p = list(
-                    zone_supply_return_exhaust_relief_terminal_fan_power_dict[
-                        find_one(
-                            f'$.buildings[*].building_segments[*].zones[?(@.id == "{zone_b}")]',
-                            rmi_p,
-                        )["id"]
-                    ]
-                )
+                modeled_fan_power_list_p = zone_supply_return_exhaust_relief_terminal_fan_power_dict[
+                    find_one(
+                        f'$.buildings[*].building_segments[*].zones[*][?(@.id = "{zone_b}")]',
+                        rmi_p,
+                    )["id"]
+                ]
 
                 hvac_info[hvac_id_b]["is_modeled_with_return_fan_in_proposed"] = (
-                    modeled_fan_power_list_p["zone_total_return_fan_power"] > ZERO.POWER
+                    modeled_fan_power_list_p["return_fans_power"] > ZERO.POWER
                 )
 
                 hvac_info[hvac_id_b]["is_modeled_with_relief_fan_in_proposed"] = (
-                    modeled_fan_power_list_p["zone_total_exhaust_fan_power"]
-                    > ZERO.POWER
+                    modeled_fan_power_list_p["exhaust_fans_power"] > ZERO.POWER
                 )
 
         return {
@@ -115,7 +115,7 @@ class Section19Rule14(RuleDefinitionListIndexedBase):
     def is_applicable(self, context, data=None):
         rmi_b = context.baseline
         baseline_system_types_dict = get_baseline_system_types(rmi_b)
-
+        stop = 1
         return any(
             [
                 baseline_system_type_compare(system_type, applicable_sys_type, False)
@@ -137,7 +137,7 @@ class Section19Rule14(RuleDefinitionListIndexedBase):
             hvac_b = context.baseline
             hvac_id_b = hvac_b["id"]
             baseline_system_types_dict = data["baseline_system_types_dict"]
-
+            stop = 1
             return any(
                 hvac_id_b in baseline_system_types_dict[system_type]
                 for system_type in baseline_system_types_dict.keys()
