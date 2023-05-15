@@ -48,8 +48,8 @@
                                             {
                                                 "id": "System 10",
                                                 "heating_system": {
-                                                    "id": "Furnace Coil 1",
-                                                    "heating_system_type": "FURNACE",
+                                                    "id": "Heating Coil 1",
+                                                    "heating_system_type": "ELECTRIC_RESISTANCE",
                                                     "energy_source_type": "ELECTRICITY"
                                                 },
                                                 "fan_system": {
@@ -111,8 +111,8 @@
                                             {
                                                 "id": "System 10",
                                                 "heating_system": {
-                                                    "id": "Furnace Coil 1",
-                                                    "heating_system_type": "FURNACE",
+                                                    "id": "Heating Coil 1",
+                                                    "heating_system_type": "ELECTRIC_RESISTANCE",
                                                     "energy_source_type": "ELECTRICITY"
                                                 },
                                                 "fan_system": {
@@ -121,7 +121,8 @@
                                                     "supply_fans": [
                                                         {
                                                             "id": "Supply Fan 1",
-                                                            "design_airflow": 117.98686079999996
+                                                            "design_airflow": 117.98686079999996,
+                                                            "is_airflow_autosized": true
                                                         }
                                                     ],
                                                     "minimum_outdoor_airflow": 0.0
@@ -186,8 +187,8 @@
                                             {
                                                 "id": "System 10",
                                                 "heating_system": {
-                                                    "id": "Furnace Coil 1",
-                                                    "heating_system_type": "FURNACE",
+                                                    "id": "Heating Coil 1",
+                                                    "heating_system_type": "ELECTRIC_RESISTANCE",
                                                     "energy_source_type": "ELECTRICITY"
                                                 },
                                                 "fan_system": {
@@ -249,8 +250,8 @@
                                             {
                                                 "id": "System 10",
                                                 "heating_system": {
-                                                    "id": "Furnace Coil 1",
-                                                    "heating_system_type": "FURNACE",
+                                                    "id": "Heating Coil 1",
+                                                    "heating_system_type": "ELECTRIC_RESISTANCE",
                                                     "energy_source_type": "ELECTRICITY"
                                                 },
                                                 "fan_system": {
@@ -259,7 +260,8 @@
                                                     "supply_fans": [
                                                         {
                                                             "id": "Supply Fan 1",
-                                                            "design_airflow": 117.98686079999996
+                                                            "design_airflow": 117.98686079999996,
+                                                            "is_airflow_autosized": true
                                                         }
                                                     ],
                                                     "minimum_outdoor_airflow": 0.0
@@ -395,7 +397,8 @@
                                                     "supply_fans": [
                                                         {
                                                             "id": "Supply Fan 1",
-                                                            "design_airflow": 141.58423295999995
+                                                            "design_airflow": 141.58423295999995,
+                                                            "is_airflow_autosized": true
                                                         }
                                                     ],
                                                     "minimum_outdoor_airflow": 141.58423295999995
@@ -531,7 +534,8 @@
                                                     "supply_fans": [
                                                         {
                                                             "id": "Supply Fan 1",
-                                                            "design_airflow": 117.98686079999996
+                                                            "design_airflow": 117.98686079999996,
+                                                            "is_airflow_autosized": true
                                                         }
                                                     ],
                                                     "minimum_outdoor_airflow": 141.58423295999995
