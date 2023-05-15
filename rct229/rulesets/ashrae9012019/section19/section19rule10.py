@@ -182,7 +182,7 @@ class Section19Rule10(RuleDefinitionListIndexedBase):
             fan_air_economizer_b = calc_vals["fan_air_economizer_b"]
             fan_air_economizer_type_b = calc_vals["fan_air_economizer_type_b"]
             hvac_system_exception_2_list = data["hvac_system_exception_2_list"]
-            stop = 1
+
             return (
                 (
                     fan_air_economizer_b is None
@@ -226,7 +226,7 @@ class Section19Rule10(RuleDefinitionListIndexedBase):
             HVAC_systems_primarily_serving_comp_rooms_list = calc_vals[
                 "HVAC_systems_primarily_serving_comp_rooms_list"
             ]
-            stop = 1
+
             return (
                 (
                     fan_air_economizer_b is None
