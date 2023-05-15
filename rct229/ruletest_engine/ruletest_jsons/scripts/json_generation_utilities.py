@@ -22,6 +22,7 @@ def get_nested_dict(dic, keys):
     """
 
     last_key, last_index = parse_key_string(keys[-1])
+    first_key, first_index = parse_key_string(keys[0])
 
     # Generate a nested dictionary, slowly building on a reference nested dictionary each iteration through the loop.
     for key in keys:
@@ -35,11 +36,18 @@ def get_nested_dict(dic, keys):
 
         # If this is the first key, set the reference dictionary to the highest level dictionary and work down from
         # there.
-        if key == keys[0]:
+        if key == first_key:
             # If first key isnt initialized, set it as a dictionary
             if key not in dic:
-                dic[key] = {}
-            reference_dict = dic[key]
+                if first_index == None:
+                    dic[key] = {}
+                else:
+                    dic[key] = []
+
+            if is_list:
+                reference_dict = dic[key][first_index]
+            else:
+                reference_dict = dic[key]
 
         # If the final key, return the referenced final, nested dictionary
         elif key == last_key:
@@ -70,6 +78,22 @@ def get_nested_dict(dic, keys):
                 reference_dict = reference_dict[key][list_index]
             else:
                 reference_dict = reference_dict[key]
+
+
+def get_nested_dic_from_key_list(dic, keys):
+
+    nested_dict = get_nested_dict(dic, keys)
+
+    # Parse final key to see if it's a list or dictionary/key value
+    key, list_index = parse_key_string(keys[-1])
+
+    # Set value. If list_index is None, this is just a key/value pair
+    if list_index == None:
+        return nested_dict[key]
+
+    # If list_index is not None, return element, not list
+    else:
+        return nested_dict[key][list_index]
 
 
 def parse_key_string(key_string):
@@ -180,6 +204,27 @@ def inject_json_path_from_enumeration(key_list, json_path_ref_string):
 
     # Inject enumeration list into keylist
     key_list.extend(enumeration_list)
+
+
+def get_json_path_key_list_from_enumeration(json_path_enumeration):
+
+    # JSON path enumerations. Used to simplify JSON path references in test spreadsheets
+    file_dir = os.path.dirname(__file__)
+    json_path_enums_file_path = os.path.join(
+        file_dir, "resources", "json_pointer_enumerations.json"
+    )
+
+    with open(json_path_enums_file_path) as f:
+        # Construct dictionary to map shorthand names for JSON Paths
+        # (e.g., path_enum_dict['spaces] = 'buildings/building_segments/thermal_blocks/zones/spaces')
+        path_enum_dict = json.load(f)
+
+    # Split enumeration path into a list and append it to existing key_list
+    # (e.g. 'buildings/building_segments/thermal_blocks/zones/spaces' ->
+    #       ['buildings', 'building_segments', 'thermal_blocks', 'zones', 'spaces']
+    enumeration_list = path_enum_dict[json_path_enumeration].split("/")
+
+    return enumeration_list
 
 
 def clean_value(value):
@@ -357,7 +402,7 @@ def disaggregate_master_ruletest_json(master_json_name, ruleset_doc):
 
     # master JSON should be in the ruletest_jsons directory
     master_json_path = os.path.join(
-        file_dir, "..", master_json_name
+        file_dir, "..", ruleset_doc, master_json_name
     )  # os.path.join(file_dir, "..", ruleset_doc, master_json_name)
 
     # Initialize master JSON dictionary
