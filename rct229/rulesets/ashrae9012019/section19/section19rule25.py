@@ -76,13 +76,13 @@ class Section19Rule25(RuleDefinitionListIndexedBase):
         )
 
         return {
-            "inapplicable_hvac_with_virtual_heating_cooling_list_b ": inapplicable_hvac_with_virtual_heating_cooling_list_b
+            "inapplicable_hvac_with_virtual_heating_cooling_list_b": inapplicable_hvac_with_virtual_heating_cooling_list_b
         }
 
     class HVACRule(RuleDefinitionBase):
         def __init__(self):
             super(Section19Rule25.HVACRule, self).__init__(
-                rmrs_used=UserBaselineProposedVals(True, True, True),
+                rmrs_used=UserBaselineProposedVals(False, True, False),
                 required_fields={
                     "$": ["fan_system"],
                     "fan_system": [
