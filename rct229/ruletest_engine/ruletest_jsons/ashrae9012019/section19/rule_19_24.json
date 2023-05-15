@@ -171,6 +171,7 @@
                                                 "fan_system": {
                                                     "id": "VAV Fan System 1",
                                                     "fan_control": "VARIABLE_SPEED_DRIVE",
+                                                    "operation_during_occupied": "CONTINUOUS",
                                                     "supply_fans": [
                                                         {
                                                             "id": "Supply Fan 1"
@@ -410,6 +411,7 @@
                                                 "fan_system": {
                                                     "id": "VAV Fan System 1",
                                                     "fan_control": "VARIABLE_SPEED_DRIVE",
+                                                    "operation_during_occupied": "CYCLING",
                                                     "supply_fans": [
                                                         {
                                                             "id": "Supply Fan 1"
@@ -598,6 +600,7 @@
                                                 "fan_system": {
                                                     "id": "CAV Fan System 1",
                                                     "fan_control": "CONSTANT",
+                                                    "operation_during_occupied": "CYCLING",
                                                     "supply_fans": [
                                                         {
                                                             "id": "Supply Fan 1"
@@ -741,6 +744,7 @@
                                                 "fan_system": {
                                                     "id": "CAV Fan System 1",
                                                     "fan_control": "CONSTANT",
+                                                    "operation_during_occupied": "KEEP_OFF",
                                                     "supply_fans": [
                                                         {
                                                             "id": "Supply Fan 1"
