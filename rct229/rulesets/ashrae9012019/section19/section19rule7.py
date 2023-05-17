@@ -156,7 +156,7 @@ class Section19Rule7(RuleDefinitionBase):
         modeled_baseline_total_zone_min_OA_CFM = sum(
             aggregated_min_OA_schedule_across_zones_b
         )
-        aggregated_min_OA_schedule_across_zones_p = sum(
+        modeled_proposed_total_zone_min_OA_CFM = sum(
             aggregated_min_OA_schedule_across_zones_p
         )
 
@@ -165,11 +165,10 @@ class Section19Rule7(RuleDefinitionBase):
             "OA_CFM_schedule_match": OA_CFM_schedule_match,
             "zone_air_distribution_effectiveness_greater_than_1": zone_air_distribution_effectiveness_greater_than_1,
             "modeled_baseline_total_zone_min_OA_CFM": modeled_baseline_total_zone_min_OA_CFM,
-            "aggregated_min_OA_schedule_across_zones_p": aggregated_min_OA_schedule_across_zones_p,
+            "modeled_proposed_total_zone_min_OA_CFM": modeled_proposed_total_zone_min_OA_CFM,
         }
 
     def manual_check_required(self, context, calc_vals=None, data=None):
-        hvac_system_serves_only_labs = calc_vals["hvac_system_serves_only_labs"]
         zone_air_distribution_effectiveness_greater_than_1 = calc_vals[
             "zone_air_distribution_effectiveness_greater_than_1"
         ]
