@@ -34,14 +34,11 @@ def is_economizer_modeled_in_proposed(rmi_b, rmi_p, hvac_id_b):
         hvac_list_p = get_list_hvac_systems_associated_with_zone(rmi_p, zone_id_b)
         for hvac_id_p in hvac_list_p:
             hvac_p = find_exactly_one_hvac_system(rmi_p, hvac_id_p)
-            air_economizer_type_p = find_one(
-                "$.fan_system.air_economizer.type", hvac_p
-            )
+            air_economizer_type_p = find_one("$.fan_system.air_economizer.type", hvac_p)
             if (
-                    air_economizer_type_p is not None
-                    and air_economizer_type_p != Air_Economizer.FIXED_FRACTION
+                air_economizer_type_p is not None
+                and air_economizer_type_p != Air_Economizer.FIXED_FRACTION
             ):
                 is_economizer_modeled = True
 
     return is_economizer_modeled
-
