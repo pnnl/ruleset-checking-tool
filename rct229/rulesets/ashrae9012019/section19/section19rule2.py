@@ -24,10 +24,11 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_h
     is_hvac_sys_preheating_type_fluid_loop,
 )
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_system_util import (
+    find_exactly_one_child_loop,
     find_exactly_one_hvac_system,
 )
 from rct229.utils.assertions import getattr_
-from rct229.utils.jsonpath_utils import find_all
+from rct229.utils.jsonpath_utils import find_all, find_all_with_field_value
 
 HEATING_SOURCE = schema_enums["HeatingSourceOptions"]
 FLUID_LOOP = schema_enums["FluidLoopOptions"]
@@ -53,15 +54,18 @@ class Section19Rule2(RuleDefinitionListIndexedBase):
     def create_data(self, context, data):
         rmi_b = context.baseline
 
-        hvac_ids_b = find_all(
-            "$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*].id",
-            rmi_b,
+        chiller_cooling_loop_b = find_all(
+            "$.buildings[*].chillers[*].cooling_loop", rmi_b
         )
 
         HW_fluid_loop_list = []
         CW_fluid_loop_list = []
         CHW_fluid_loop_list = []
-        for hvac_id_b in hvac_ids_b:
+        for hvac_b in find_all(
+            "$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*]",
+            rmi_b,
+        ):
+            hvac_id_b = hvac_b["id"]
             if is_hvac_sys_heating_type_fluid_loop(
                 rmi_b, hvac_id_b
             ) and is_hvac_sys_fluid_loop_attached_to_boiler(rmi_b, hvac_id_b):
@@ -89,14 +93,29 @@ class Section19Rule2(RuleDefinitionListIndexedBase):
             if is_hvac_sys_cooling_type_fluid_loop(
                 rmi_b, hvac_id_b
             ) and is_hvac_sys_fluid_loop_attached_to_chiller(rmi_b, hvac_id_b):
-                CW_fluid_loop_list.append(
-                    getattr_(
-                        find_exactly_one_hvac_system(rmi_b, hvac_id_b),
-                        "chilled_water_loop",
-                        "cooling_system",
-                        "chilled_water_loop",
-                    )
+                chilled_water_loop_b = getattr_(
+                    find_exactly_one_hvac_system(rmi_b, hvac_id_b),
+                    "chilled_water_loop",
+                    "cooling_system",
+                    "chilled_water_loop",
                 )
+                CHW_fluid_loop_list.append(chilled_water_loop_b)
+                if chilled_water_loop_b in chiller_cooling_loop_b:
+                    chiller_b = find_all_with_field_value(
+                        "$.chillers[*]",
+                        "cooling_loop",
+                        getattr_(
+                            hvac_b, "HVAC", "cooling_system", "chilled_water_loop"
+                        ),
+                        rmi_b,
+                    )
+                    if chiller_b.get("condensing_loop"):
+                        CW_fluid_loop_list.append(chiller_b["condensing_loop"])
+                else:
+                    primary_loop_b = find_exactly_one_child_loop(
+                        rmi_b, chilled_water_loop_b
+                    )
+                    CHW_fluid_loop_list.append(primary_loop_b["id"])
 
         for CHW_child_loop in find_all(
             "$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*].cooling_system.chilled_water_loop",
