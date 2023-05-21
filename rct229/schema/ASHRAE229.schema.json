@@ -1500,6 +1500,16 @@
                     },
                     "notes": "Used when schedule_sequence_type is HOURLY. Can also use functions like EFLH(), MAX(), MIN() to determine overall characteristics for the list of schedule values."
                 },
+				"hourly_cooling_design_day": {
+                    "description": "Hourly values for cooling design day",
+                    "type": "array",
+                    "minItems": 0,
+                    "maxItems": 24,
+                    "items": {
+                        "type": "number"
+                    },
+                    "notes": "Used when schedule_sequence_type is HOURLY."
+                },
                 "event_times": {
                     "description": "Event times when the schedule changes",
                     "type": "array",
