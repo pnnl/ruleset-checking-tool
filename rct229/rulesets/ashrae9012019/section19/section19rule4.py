@@ -5,17 +5,13 @@ from rct229.rulesets.ashrae9012019.data.schema_enums import schema_enums
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_most_used_weekday_hourly_schedule import (
     get_most_used_weekday_hourly_schedule,
 )
-from rct229.utils.jsonpath_utils import find_all
+from rct229.utils.assertions import getattr_
 
 LIGHTING_SPACE = schema_enums["LightingSpaceOptions2019ASHRAE901TG37"]
 VENTILATION_SPACE = schema_enums["VentilationSpaceOptions2019ASHRAE901"]
 LIGHTING_BUILDING_AREA = schema_enums[
     "LightingBuildingAreaOptions2019ASHRAE901T951TG38"
 ]
-
-
-UNDETERMINED_MSG = "It is not clear from the RMD if <insert space.id> is a dwelling unit. If it is a dwelling unit it is required that it be modeled following the rule that for baseline cooling sizing runs in residential dwelling units, the infiltration, occupants, lighting, gas and electricity design day cooling schedules shalled be modeled using an equipment hourly schedule that is the same as the most used hourly weekday schedule from the annual simulation. This rule <insert 'was' if all(inf_pass_cooling,occ_pass_cooling,int_lgt_pass_cooling,misc_pass_cooling) == true and insert 'was not' if all(inf_pass_cooling,occ_pass_cooling,int_lgt_pass_cooling,misc_pass_cooling) == false> followed for this space if applicable."
-FAIL_MSG = "<insert space.id> does not appear to have been modeled following the rule that for baseline cooling sizing runs in residential dwelling units hourly schedules shall be the same as the most used hourly weekday schedule from the annual simulation for the following schedules: <include 'infiltration' if inf_pass_cooling == false> , <include 'occupants' if occ_pass_cooling == false>, <include 'lighting' if int_lgt_pass_cooling == false>, <include 'gas and/or electricity miscellaneous' if misc_pass_cooling ==  false>."
 
 
 class Section19Rule4(RuleDefinitionListIndexedBase):
@@ -48,230 +44,277 @@ class Section19Rule4(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section19Rule4.RuleSetModelInstanceRule, self).__init__(
                 rmrs_used=UserBaselineProposedVals(False, True, False),
-                each_rule=Section19Rule4.RuleSetModelInstanceRule.BuildingSegmentRule(),
+                each_rule=Section19Rule4.RuleSetModelInstanceRule.ZoneRule(),
                 index_rmr="baseline",
-                list_path="buildings[*].building_segments[*]",
+                list_path="buildings[*].building_segments[*].zones[*]",
                 required_fields={
-                    "$": ["schedules"],
+                    "$": ["buildings", "building_segments", "schedules"],
                 },
             )
 
         def create_data(self, context, data):
             rmi_b = context.baseline
-            schedule_b = rmi_b["schedules"]
+            schedules_b = rmi_b["schedules"]
+            schedule_b = {schedule["id"]: schedule for schedule in schedules_b}
 
-            return {schedule["id"]: schedule for schedule in schedule_b}
+            building_segment_b = rmi_b["buildings"]["building_segments"]
 
-        class BuildingSegmentRule(RuleDefinitionListIndexedBase):
+            is_lighting_bldg_area_defined = False
+            is_building_area_MF_dormitory_or_hotel = False
+            lighting_bldg_type_b = building_segment_b.get("lighting_building_area_type")
+            if lighting_bldg_type_b is not None:
+                is_lighting_bldg_area_defined = True
+            if lighting_bldg_type_b in [
+                LIGHTING_BUILDING_AREA.DORMITORY,
+                LIGHTING_BUILDING_AREA.HOTEL_MOTEL,
+                LIGHTING_BUILDING_AREA.MULTIFAMILY,
+            ]:
+                is_building_area_MF_dormitory_or_hotel = True
+
+            return {
+                "schedule_b": schedule_b,
+                "is_lighting_bldg_area_defined": is_lighting_bldg_area_defined,
+                "is_building_area_MF_dormitory_or_hotel": is_building_area_MF_dormitory_or_hotel,
+            }
+
+        class ZoneRule(RuleDefinitionListIndexedBase):
             def __init__(self):
                 super(
-                    Section19Rule4.RuleSetModelInstanceRule.BuildingSegmentRule, self
+                    Section19Rule4.RuleSetModelInstanceRule.ZoneRule,
+                    self,
                 ).__init__(
                     rmrs_used=UserBaselineProposedVals(False, True, False),
-                    each_rule=Section19Rule4.RuleSetModelInstanceRule.BuildingSegmentRule.ZoneRule(),
+                    each_rule=Section19Rule4.RuleSetModelInstanceRule.ZoneRule.SpaceRule(),
                     index_rmr="baseline",
-                    list_path="$.zones[*]",
+                    list_path="$.spaces[*]",
+                    required_fields={
+                        "$": ["infiltration"],
+                        "infiltration": ["multiplier_schedule"],
+                    },
                 )
 
             def create_data(self, context, data):
-                building_segment_b = context.baseline
+                day_of_week_for_january_1 = data["day_of_week_for_january_1"]
+                schedule_b = data["schedule_b"]
+                zone_b = context.baseline
 
-                lighting_bldg_type_b = building_segment_b.get(
-                    "lighting_building_area_type"
+                # check infiltration
+                multiplier_sch_inf_b = zone_b["infiltration"]["multiplier_schedule"]
+                multiplier_sch_hourly_value_b = schedule_b[multiplier_sch_inf_b][
+                    "hourly_values"
+                ]
+                design_cooling_multiplier_sch_b = schedule_b[multiplier_sch_inf_b][
+                    "hourly_cooling_design_day"
+                ]
+
+                most_used_weekday_hourly_schedule = (
+                    get_most_used_weekday_hourly_schedule(
+                        multiplier_sch_hourly_value_b, day_of_week_for_january_1
+                    )
+                )
+                inf_pass_cooling = (
+                    design_cooling_multiplier_sch_b == most_used_weekday_hourly_schedule
                 )
 
-                is_lighting_bldg_area_defined = False
-                is_building_area_MF_dormitory_or_hotel = False
-                if not lighting_bldg_type_b:
-                    is_lighting_bldg_area_defined = True
-                elif lighting_bldg_type_b in [
-                    LIGHTING_BUILDING_AREA.DORMITORY,
-                    LIGHTING_BUILDING_AREA.HOTEL_MOTEL,
-                    LIGHTING_BUILDING_AREA.MULTIFAMILY,
-                ]:
-                    is_building_area_MF_dormitory_or_hotel = True
+                return {"inf_pass_cooling": inf_pass_cooling}
 
-                return {
-                    "is_lighting_bldg_area_defined": is_lighting_bldg_area_defined,
-                    "is_building_area_MF_dormitory_or_hotel": is_building_area_MF_dormitory_or_hotel,
-                }
-
-            class ZoneRule(RuleDefinitionListIndexedBase):
+            class SpaceRule(RuleDefinitionBase):
                 def __init__(self):
                     super(
-                        Section19Rule4.RuleSetModelInstanceRule.BuildingSegmentRule.ZoneRule,
+                        Section19Rule4.RuleSetModelInstanceRule.ZoneRule.SpaceRule,
                         self,
                     ).__init__(
                         rmrs_used=UserBaselineProposedVals(False, True, False),
-                        each_rule=Section19Rule4.RuleSetModelInstanceRule.BuildingSegmentRule.ZoneRule.SpaceRule(),
-                        index_rmr="baseline",
-                        list_path="$.spaces[*]",
                         required_fields={
-                            "$": ["infiltration"],
+                            "$": [
+                                "lighting_space_type",
+                                "ventilation_space_type",
+                                "occupant_multiplier_schedule",
+                                "interior_lighting",
+                                "miscellaneous_equipment",
+                            ],
                         },
                     )
 
-                def create_data(self, context, data):
-                    day_of_week_for_january_1 = data["day_of_week_for_january_1"]
-                    zone_b = context.baseline
+                def is_applicable(self, context, data=None):
+                    space_b = context.baseline
+                    lighting_space_type_b = space_b["lighting_space_type"]
+                    ventilation_space_type = space_b["ventilation_space_type"]
 
-                    # check infiltration
-                    inf_pass_cooling = True
-                    multiplier_schedule_infiltration = zone_b["infiltration"][
-                        "multiplier_schedule"
+                    return (
+                        lighting_space_type_b == LIGHTING_SPACE.DWELLING_UNIT
+                        or ventilation_space_type
+                        == VENTILATION_SPACE.TRANSIENT_RESIDENTIAL_DWELLING_UNIT
+                    )
+
+                def get_calc_vals(self, context, data=None):
+                    inf_pass_cooling = data["inf_pass_cooling"]
+                    day_of_week_for_january_1 = data["day_of_week_for_january_1"]
+                    schedule_b = data["schedule_b"]
+                    space_b = context.baseline
+
+                    # check occupancy schedule
+                    multiplier_sch_occ_b = schedule_b[
+                        space_b["occupant_multiplier_schedule"]
                     ]
-                    multiplier_sch = data[multiplier_schedule_infiltration]
-                    hourly_values = multiplier_sch["hourly_values"]
+                    multiplier_sch_occ_hourly_value_b = multiplier_sch_occ_b[
+                        "hourly_values"
+                    ]
+                    design_cooling_multiplier_sch_b = multiplier_sch_occ_b[
+                        "hourly_cooling_design_day"
+                    ]
 
                     most_used_weekday_hourly_schedule = (
                         get_most_used_weekday_hourly_schedule(
-                            hourly_values, day_of_week_for_january_1
+                            multiplier_sch_occ_hourly_value_b, day_of_week_for_january_1
                         )
                     )
-                    for x in range(0, int(len(hourly_values) / 24), 24):
-                        if (
-                            most_used_weekday_hourly_schedule
-                            != hourly_values[x : x + 24]
-                        ):
-                            inf_pass_cooling = False
-                            break
+                    occ_pass_cooling = (
+                        most_used_weekday_hourly_schedule
+                        == design_cooling_multiplier_sch_b
+                    )
 
-                    return {"inf_pass_cooling": inf_pass_cooling}
-
-                class SpaceRule(RuleDefinitionBase):
-                    def __init__(self):
-                        super(
-                            Section19Rule4.RuleSetModelInstanceRule.BuildingSegmentRule.ZoneRule.SpaceRule,
-                            self,
-                        ).__init__(
-                            rmrs_used=UserBaselineProposedVals(False, True, False),
-                            required_fields={
-                                "$": ["lighting_space_type", "ventilation_space_type"],
-                            },
-                            manual_check_required_msg=UNDETERMINED_MSG,
-                            fail_msg=FAIL_MSG,
-                        )
-
-                    def are_two_schedules_same_helper(
-                        self, hourly_values, most_used_weekday_hourly_schedule
-                    ):
-                        for x in range(0, int(len(hourly_values) / 24), 24):
-                            if (
-                                most_used_weekday_hourly_schedule
-                                != hourly_values[x : x + 24]
-                            ):
-                                return False
-                        return True
-
-                    def is_applicable(self, context, data=None):
-                        space_b = context.baseline
-                        lighting_space_type_b = space_b["lighting_space_type"]
-                        ventilation_space_type = space_b["ventilation_space_type"]
-
-                        return (
-                            lighting_space_type_b == LIGHTING_SPACE.DWELLING_UNIT
-                            or ventilation_space_type
-                            == VENTILATION_SPACE.TRANSIENT_RESIDENTIAL_DWELLING_UNIT
-                        )
-
-                    def get_calc_vals(self, context, data=None):
-                        day_of_week_for_january_1 = data["day_of_week_for_january_1"]
-                        space_b = context.baseline
-
-                        # check occupancy schedule
-                        multiplier_sch = data[space_b["occupant_multiplier_schedule"]]
-                        hourly_values = multiplier_sch["hourly_values"]
-
-                        most_used_weekday_hourly_schedule = (
-                            get_most_used_weekday_hourly_schedule(
-                                hourly_values, day_of_week_for_january_1
+                    # check interior lighting
+                    int_lgt_pass_cooling = False
+                    for interior_lighting_b in space_b["interior_lighting"]:
+                        if not int_lgt_pass_cooling:
+                            multiplier_sch_light_b = getattr_(
+                                interior_lighting_b,
+                                "Interior Lighting",
+                                "lighting_multiplier_schedule",
                             )
-                        )
-                        occ_pass_cooling = self.are_two_schedules_same_helper(
-                            hourly_values, most_used_weekday_hourly_schedule
-                        )
+                            multiplier_sch_hourly_value_b = schedule_b[
+                                multiplier_sch_light_b
+                            ]["hourly_values"]
+                            design_cooling_multiplier_sch_b = schedule_b[
+                                multiplier_sch_light_b
+                            ]["hourly_cooling_design_day"]
 
-                        # check interior lighting
-                        int_lgt_pass_cooling = True
-                        for interior_lighting_b in find_all(
-                            "$.interior_lighting[*]", space_b
-                        ):
-                            if not int_lgt_pass_cooling:
-                                multiplier_sch = data[
-                                    interior_lighting_b["lighting_multiplier_schedule"]
-                                ]
-                                hourly_values = multiplier_sch["hourly_values"]
-
-                                most_used_weekday_hourly_schedule = (
-                                    get_most_used_weekday_hourly_schedule(
-                                        hourly_values, day_of_week_for_january_1
-                                    )
+                            most_used_weekday_hourly_schedule = (
+                                get_most_used_weekday_hourly_schedule(
+                                    multiplier_sch_hourly_value_b,
+                                    day_of_week_for_january_1,
                                 )
-                                int_lgt_pass_cooling = (
-                                    self.are_two_schedules_same_helper(
-                                        hourly_values, most_used_weekday_hourly_schedule
-                                    )
+                            )
+                            int_lgt_pass_cooling = (
+                                design_cooling_multiplier_sch_b
+                                == most_used_weekday_hourly_schedule
+                            )
+
+                    # check misc equipment
+                    misc_pass_cooling = False
+                    for misc_equip_b in space_b["miscellaneous_equipment"]:
+                        if not misc_pass_cooling:
+                            multiplier_sch_light_b = getattr_(
+                                misc_equip_b,
+                                "Miscellaneous Equipment",
+                                "multiplier_schedule",
+                            )
+                            multiplier_sch_hourly_value_b = schedule_b[
+                                multiplier_sch_light_b
+                            ]["hourly_values"]
+                            design_cooling_multiplier_sch_b = schedule_b[
+                                multiplier_sch_light_b
+                            ]["hourly_cooling_design_day"]
+
+                            most_used_weekday_hourly_schedule = (
+                                get_most_used_weekday_hourly_schedule(
+                                    multiplier_sch_hourly_value_b,
+                                    day_of_week_for_january_1,
                                 )
+                            )
+                            misc_pass_cooling = (
+                                design_cooling_multiplier_sch_b
+                                == most_used_weekday_hourly_schedule
+                            )
 
-                        # check misc equipment
-                        misc_pass_cooling = True
-                        for miscellaneous_equipment_b in find_all(
-                            "$.miscellaneous_equipment[*]", space_b
-                        ):
-                            if not misc_pass_cooling:
-                                multiplier_sch = data[
-                                    miscellaneous_equipment_b["multiplier_schedule"]
-                                ]
-                                hourly_values = multiplier_sch["hourly_values"]
+                    return {
+                        "inf_pass_cooling": inf_pass_cooling,
+                        "occ_pass_cooling": occ_pass_cooling,
+                        "int_lgt_pass_cooling": int_lgt_pass_cooling,
+                        "misc_pass_cooling": misc_pass_cooling,
+                    }
 
-                                most_used_weekday_hourly_schedule = (
-                                    get_most_used_weekday_hourly_schedule(
-                                        hourly_values, day_of_week_for_january_1
-                                    )
-                                )
-                                misc_pass_cooling = self.are_two_schedules_same_helper(
-                                    hourly_values, most_used_weekday_hourly_schedule
-                                )
+                def manual_check_required(self, context, calc_vals=None, data=None):
+                    space_b = context.baseline
 
-                        return {
-                            "occ_pass_cooling": occ_pass_cooling,
-                            "int_lgt_pass_cooling": int_lgt_pass_cooling,
-                            "misc_pass_cooling": misc_pass_cooling,
-                        }
+                    is_lighting_bldg_area_defined = data[
+                        "is_lighting_bldg_area_defined"
+                    ]
+                    is_building_area_MF_dormitory_or_hotel = data[
+                        "is_building_area_MF_dormitory_or_hotel"
+                    ]
 
-                    def manual_check_required(self, context, calc_vals=None, data=None):
-                        space_b = context.baseline
+                    space_lighting_or_vent_space_type_is_defined = not (
+                        space_b.get("lighting_space_type") is None
+                        and space_b.get("ventilation_space_type") is None
+                    )
 
-                        is_lighting_bldg_area_defined = data[
-                            "is_lighting_bldg_area_defined"
+                    return not space_lighting_or_vent_space_type_is_defined and (
+                        not is_lighting_bldg_area_defined
+                        or is_building_area_MF_dormitory_or_hotel
+                    )
+
+                def get_manual_check_required_msg(
+                    self, context, calc_vals=None, data=None
+                ):
+                    space_b = context.baseline
+                    space_id_b = space_b["id"]
+
+                    inf_pass_cooling = calc_vals["inf_pass_cooling"]
+                    occ_pass_cooling = calc_vals["occ_pass_cooling"]
+                    int_lgt_pass_cooling = calc_vals["int_lgt_pass_cooling"]
+                    misc_pass_cooling = calc_vals["misc_pass_cooling"]
+
+                    if all(
+                        [
+                            inf_pass_cooling,
+                            occ_pass_cooling,
+                            int_lgt_pass_cooling,
+                            misc_pass_cooling,
                         ]
-                        is_building_area_MF_dormitory_or_hotel = data[
-                            "is_building_area_MF_dormitory_or_hotel"
+                    ):
+                        be_verb = "was"
+                    else:
+                        be_verb = " was not"
+
+                    return f"It is not clear from the RMD if {space_id_b} is a dwelling unit. If it is a dwelling unit it is required that it be modeled following the rule that for baseline cooling sizing runs in residential dwelling units, the infiltration, occupants, lighting, gas and electricity design day cooling schedules shalled be modeled using an equipment hourly schedule that is the same as the most used hourly weekday schedule from the annual simulation. This rule {be_verb} followed for this space if applicable."
+
+                def rule_check(self, context, calc_vals=None, data=None):
+                    inf_pass_cooling = calc_vals["inf_pass_cooling"]
+                    occ_pass_cooling = calc_vals["occ_pass_cooling"]
+                    int_lgt_pass_cooling = calc_vals["int_lgt_pass_cooling"]
+                    misc_pass_cooling = calc_vals["misc_pass_cooling"]
+
+                    return all(
+                        [
+                            inf_pass_cooling,
+                            occ_pass_cooling,
+                            int_lgt_pass_cooling,
+                            misc_pass_cooling,
                         ]
+                    )
 
-                        space_lighting_or_vent_space_type_is_defined = True
-                        if (
-                            space_b.get("lighting_space_type") is None
-                            and space_b.get("ventilation_space_type") is None
-                        ):
-                            space_lighting_or_vent_space_type_is_defined = False
+                def get_fail_msg(self, context, calc_vals=None, data=None):
+                    space_b = context.baseline
+                    space_id_b = space_b["id"]
 
-                        return not space_lighting_or_vent_space_type_is_defined and (
-                            not is_lighting_bldg_area_defined
-                            or is_building_area_MF_dormitory_or_hotel
-                        )
+                    inf_pass_cooling = calc_vals["inf_pass_cooling"]
+                    occ_pass_cooling = calc_vals["occ_pass_cooling"]
+                    int_lgt_pass_cooling = calc_vals["int_lgt_pass_cooling"]
+                    misc_pass_cooling = calc_vals["misc_pass_cooling"]
 
-                    def rule_check(self, context, calc_vals=None, data=None):
-                        inf_pass_cooling = data["inf_pass_cooling"]
-                        occ_pass_cooling = calc_vals["occ_pass_cooling"]
-                        int_lgt_pass_cooling = calc_vals["int_lgt_pass_cooling"]
-                        misc_pass_cooling = calc_vals["misc_pass_cooling"]
+                    inf_msg = None if inf_pass_cooling else "infiltration"
+                    occ_msg = None if occ_pass_cooling else "occupants"
+                    light_msg = None if int_lgt_pass_cooling else "lighting"
+                    misc_msg = (
+                        None
+                        if misc_pass_cooling
+                        else "gas and/or electricity miscellaneous"
+                    )
 
-                        return all(
-                            [
-                                inf_pass_cooling,
-                                occ_pass_cooling,
-                                int_lgt_pass_cooling,
-                                misc_pass_cooling,
-                            ]
-                        )
+                    agg_msg = " ".join([inf_msg, occ_msg, light_msg, misc_msg]).replace(
+                        " ", ", "
+                    )
+
+                    return f"{space_id_b} does not appear to have been modeled following the rule that for baseline cooling sizing runs in residential dwelling units hourly schedules shall be the same as the most used hourly weekday schedule from the annual simulation for the following schedules: {agg_msg}."
