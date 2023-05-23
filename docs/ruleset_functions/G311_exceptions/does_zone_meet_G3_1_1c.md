@@ -6,7 +6,7 @@
 "average" is not particularly well defined in this exception. 
 for the peak W/sf calculation I've assumed:
 	1. the zone being tested is not included
- 	2. the average: (each space coincident peak W) / total_area
+ 	2. the average: (each space non-coincident peak W) / total_area
 
 **Inputs:** 
 - **B_RMD**
@@ -24,34 +24,36 @@ for the peak W/sf calculation I've assumed:
 - **find_zone**
 - **get_zone_eflh**
 - **zones_with_computer_room_dict_x**
+- **get_zones_on_same_floor**
 
 ## Logic:
 - set the result variable to "No" - only a positive test can give it a different value: `result = NO`
 
 - first check if the system type is one of the following: `eligible_primary_system_types = ["SYS-5","SYS-6","SYS-7","SYS-8"]`
 - check if the starting_system_type is in the list of eligible system types: `if zones_and_systems[zone]["EXPECTED_SYSTEM_TYPE"] in eligible_primary_system_types:`
+	- get a list of zones that are on the same floor: `zones_on_same_floor = get_zones_on_same_floor(B_RMI,zone)`
 	- create a list of zones that are on the same floor that have the same system type: `zones_on_same_system = []`
 	- create a variable to hold the sum total of the system area:	`system_total_area = 0`
 	- create a list of the EFLH's for each zone `eflh = []`
 	- create a variable to hold the sum total of all peak loads in the system: `system_total_peak_load = 0`
 	- loop through the zones in the zones_and_systems list: `for z in zones_and_systems:`
 		- make sure that we don't include the original zone: `if z != zone:`
-			- determine whether it has the same floor: `if z.floor_name == zone.floor_name:`
+			- determine whether it is on the same floor: `if z in zones_on_same_floor:`
 				- determine whether it has the same system type: `if zones_and_systems[z]["EXPECTED_SYSTEM_TYPE"] == zones_and_systems[zone]["EXPECTED_SYSTEM_TYPE"]:`
 					- add the zone internal loads to the system_total_peaks: `a = get_zone_peak_internal_load(z)`
 					`system_total_peak += a["PEAK"]`
 					- get the zone eflh by using the get_zone_eflh function.  This returns eflh for the year, so we need to convert to weeks by dividing by 52.1428: `zone_eflh = get_zone_eflh(z)/52.1428`
-					- add the eflh to the eflh list.  We are multiplying the schedule by the zone area so that later we can divide the total by the total area.  Otherwise small zones with very different schedules have too great an impact
+					- add the eflh to the eflh list.  We are multiplying by the zone area so that later we can divide the total by the total area.  Otherwise small zones have too great an impact
 					`eflh.append(zone_eflh * a["AREA"])`
 		- now calculate the average internal load: `avg_internal_load = system_total_peak / system_total_area`
-		- and calculate the averge eflh: `avg_eflh = sum(eflh)/len(eflh)`
+		- and calculate the averge eflh: `avg_eflh = sum(eflh)/system_total_area`
 		- get the internal load of the reference zone: `internal_loads = get_zone_peak_internal_load(zone)`
 		- now do the rule checks:
 		- if the zone peak differs by more than 10 btu/hr/sf from the average, then it meets the exception:
 		`if(abs(internal_loads["PEAK"]/internal_loads["AREA"] - avg_internal_load) > 10):
 			- it meets the exception: `result = YES`
 		- OR if the eflh differs by more than 40, then the zone meets this exception:
-		`if(abs(get_zone_eflh(zone) - eflh) > 40):
+		`if(abs(get_zone_eflh(zone) - avg_eflh) > 40):
 			- it meets the exception: `result = YES`
 		- if the zone is still eligible, check if it is a computer room zone (computer room zones are not eligible for this exception): `if result == YES:`
 			- use the function zones_with_computer_room_dict_x to get a list of zones including computer rooms: `computer_room_zones_dict = zones_with_computer_room_dict_x(B_RMD)`
