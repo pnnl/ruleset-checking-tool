@@ -22,7 +22,8 @@ We will also check that the lighting space type is in agreement with the space u
 **Returns:**  
 - **vestibule_check**: An ENUM with either NO or MAYBE
  
-**Function Call:** None
+**Function Call:** 
+- **get_zones_on_same_floor**
 
  
 ## setup for all function calls:
@@ -46,9 +47,10 @@ We will also check that the lighting space type is in agreement with the space u
 				
 - if there were exterior doors, the exterior_door_surface_area will be greater than 0: `if exterior_door_surface_area > 0:`
 	- create a variable for the total floor area: `floor_area = 0`	
+	- get a list of zones on the same floor: `zones_on_same_floor = get_zones_on_same_floor(B_RMI, zone)`
 	- loop through the building adding the floor area of all zones on the same floor as the zone: `for building_segment in RMR.building_segments:`
 		- loop through the zones: `for z in building_segment:`
-			- check of z is on the same floor as the zone by checking whether the zone elevation is within 7.5' / 2 (3.25') of our zone - this is more or less the same logic used in the function get_number_of_floors: `if zone.elevation - 3.25 < z.elevation < zone.elevation + 3.25:`
+			- check of z is on the same floor by checking whether it is in the list of zones on the same floor: `if z in zones_on_same_floor:`
 				- loop through the z spaces adding the area to the floor_area: `for space in z.spaces:`
 					- add space area to floor_area: `floor_area = floor_area + space.floor_area`
 	- create a variable for the target zone's area: `zone_area = 0`
