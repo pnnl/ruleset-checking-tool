@@ -25,5 +25,9 @@
 
 **Comments/Questions**  Finalization of this function is awaiting guidance on the methodology used to group zones by floor (ie by floor_name, or by elevation, or by another metric)
 
+**alternate logic based on zone elevation**
+
+as the zone by checking whether the zone elevation is within 7.5' / 2 (3.25') of our zone - this is more or less the same logic used in the function get_number_of_floors: `if zone.elevation - 3.25 < z.elevation < zone.elevation + 3.25:`
+
 
 **[Back](../_toc.md)**
