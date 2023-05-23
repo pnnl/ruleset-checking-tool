@@ -13,6 +13,7 @@
 **Function Call:**
 - **get_HVAC_building_area_types_and_zones**
 - **does_zone_meet_G3_1_1c**
+- **does_zone_meet_G3_1_1d**
 - **does_zone_meet_G3_1_1e**
 - **does_zone_meet_G3_1_1f**
 - **does_zone_meet_G3_1_1g**
@@ -32,12 +33,10 @@
 - get the list of HVAC building area types and zones: `list_building_area_types_and_zones = get_HVAC_building_area_types_and_zones(B-RMR)`
 - get the predominant building area type: `predominant_building_area_type = get_predominant_HVAC_building_area_type(list_building_area_types_and_zones)`
 - get the total number of floors for the building: `num_floors = get_number_of_floors(B-RMI)`
-- first get the expected system type for the predominant building area type.  To do this, we need the total area of the predominant building area type, which includes all BAT's less than 20000 ft2
+- first get the expected system type for the predominant building area type.  To do this, we need the total area of the building
 - set area equal to the area of the predominant building area type: `area = list_building_area_types_and_zones[predominant_building_area_type]["AREA"]`
 - loop through the building area types: `for bat in list_building_area_types_and_zones:`
-	- if the bat is not equal to the predominant building area type: `if bat != predominant_building_area_type:`
-		- and if the area of this bat <= 20,000 ft2: `if list_building_area_types_and_zones[bat]["AREA"] <= 20000:`
-			- add this area to the area value for determining predominant HVAC system type: `area = area + list_building_area_types_and_zones[bat]["AREA"]`
+	- add this area to the area value for determining predominant HVAC system type: `area = area + list_building_area_types_and_zones[bat]["AREA"]`
 - expected_system_type_list = expected_system_type_from_Table_G3_1_1(predominant_building_area_type,num_floors,area)
 - fill the zones_and_systems list with the expected system and description string for all zones (we'll overwrite the other zones in the next step): `for zone in zones_and_systems:`
 	- set the value to expected_system_type_list: `zones_and_systems[zone] = expected_system_type_list`
@@ -53,7 +52,7 @@
 		- skip this loop using continue: `continue`
 	- loop throught the building area types: `for bat in list_building_area_types_and_zones:`
 		- look for any bat's that have more than 20000 ft2 area: `if list_building_area_types_and_zones[bat]["AREA"] >=20000:`
-			- we select a secondary system type for this bat: `secondary_system_type = expected_system_type_from_Table_G3_1_1(bat,num_floors,list_building_area_types_and_zones[bat]["AREA"])`
+			- we select a secondary system type for this bat: `secondary_system_type = expected_system_type_from_Table_G3_1_1(bat,num_floors,area)`
 			- change the system type for any zone in this bat: `for zone in zones_and_systems:`
 				- check if this zone is in the list of zone_ids associated with this bat: `if zone.id in list_building_area_types_and_zones[bat]["ZONE_IDS"]:`
 					- change the system type to: [secondary_system_type[0], "G3_1_1b"] - remember that expected_system_type_from_Table_G3_1_1 gives both the expected system type and a string explaining how that system type was chosen.  For the rule testing G3_1_1b, it is only asking whether the system was chosen from Table G3.1.1, not exactly how it got there: `zones_and_systems[zone]["EXPECTED_SYSTEM_TYPE"] = secondary_system_type[0]`
@@ -72,8 +71,17 @@
 		- set the system to SYS_3: `zones_and_systems[zone]["EXPECTED_SYSTEM_TYPE"] = SYS_3`
 				
 - G3.1.1d "For laboratory spaces in a building having a total laboratory exhaust rate greater than 15,000 cfm, use a single system of type 5 or 7 serving only those spaces.  The lab exhaust fan shall be modeled as constant horsepower reflecting constantvolume stack discharge with outdoor air bypass."
-	- not sure how to apply this one
-
+- select assigned system type based on total building area and principal occupancy type.
+- if the building is OTHER_NON_RESIDENTIAL and 4-5 floors, and < 25,000 sf: `if( predominant_building_area_type == OTHER_NON_RESIDENTIAL && num_floors > 3 && num_floors < 6 && area < 25000 ):`
+	- then the system type is SYS-5: `G3_1_1d_expected_system_type = SYS_5`
+- otherwise if the building is 5 floors or fewer and between 25,000 and 150,000 sf: `elif( num_floors < 6 && area >= 25000 && area <= 150000 ):`
+	- then the system type is also SYS-5: `G3_1_1d_expected_system_type = SYS_5`
+- all other cases: `else:`
+	- the system type is SYS-7: `G3_1_1d_expected_system_type = SYS_7`
+- loop through the zones_and_systems to see if any of the zones meets G3.1.1.d: `for zone in zones_and_systems:`
+	- use the function does_zone_meet_G3_1_1d to determine if this zone meets this requirement: `if does_zone_meet_G3_1_1d(B_RMI,zone,zones_and_systems[zone]["EXPECTED_SYSTEM_TYPE"] == YES):`
+		- change the system origin string: `zones_and_systems[zone]["SYSTEM_ORIGIN"] = "G3_1_1d"` 
+		- set the system to SYS_4: `zones_and_systems[zone]["EXPECTED_SYSTEM_TYPE"] = G3_1_1d_expected_system_type`
 
 - G3.1.1e "Thermal zones designed with heating-only systems in the proposed design serving storage rooms, stairwells, vestibules, electrical/mechanical rooms, and restrooms not exhausting or transferring air from mechanically cooled thermal zones in the proposed design shall use system type 9 or 10 in the baseline building design."
 - loop through the zones_and_systems to see if any of the zones meets this requirement: `for zone in zones_and_systems:`
