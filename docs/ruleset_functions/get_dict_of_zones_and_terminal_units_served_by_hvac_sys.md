@@ -1,6 +1,7 @@
 # get_dict_of_zones_and_terminal_units_served_by_hvac_sys    
 
-**Description:** Returns a dictionary of zones and terminal unit IDs associated with each HVAC system in the RMR.   
+**Schema Version:** 0.0.23
+**Description:** Returns a dictionary of zones and terminal unit IDs associated with each HVAC system in the RMD.   
 
 **Inputs:**  
 - **RMR**: The RMR to evalute (B-RMR or P-RMR or U-RMR).    
@@ -16,7 +17,7 @@
         - Get zone ID: `zone_id = zone.id`
         - For each terminal unit serving the zone: `for terminal in zone.terminals:`
             - Get terminal ID: `terminal_id = terminal.id`  
-            - Get HVAC system connected to the terminal: `hvac_sys_id = terminal.served_by_heating_ventilation_air_conditioning_systems` 
+            - Get HVAC system connected to the terminal: `hvac_sys_id = terminal.served_by_heating_ventilating_air_conditioning_system`
             - Check if the zone is not already saved in HVAC system dictionary: `if NOT zone_id in dict_of_zones_and_terminal_units_served_by_hvac_sys[hvac_sys_id]["ZONE_LIST"]:`
                 - Add zone id to the HVAC system dictionary: `dict_of_zones_and_terminal_units_served_by_hvac_sys[hvac_sys_id]["ZONE_LIST"].append(zone_id)`
             - Add the terminal id to the HVAC system dictionary: `dict_of_zones_and_terminal_units_served_by_hvac_sys[hvac_sys_id]["Terminal_Unit_LIST"].append(terminal_id)`  
