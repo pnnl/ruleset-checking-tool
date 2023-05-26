@@ -139,6 +139,23 @@ def find_exactly_one_zone(rmi, zone_id):
     )
 
 
+def find_exactly_one_schedule(rmi, schedule_id):
+    """
+    Search for the schedule data group in a ruleset model instance by mathcing schedule_id
+    Raise exception if no matching schedule
+
+    Parameters
+    ----------
+    rmi: json
+    scheduel_id: str
+
+    Returns: json
+    -------
+
+    """
+    return find_exactly_one_with_field_value("$.schedules[*]", "id", schedule_id, rmi)
+
+
 def find_exactly_one_child_loop(rmi, child_loop_id):
     """
     Search for a child loop data group (secondary loop) in a ruleset model instance by matching child_loop_id

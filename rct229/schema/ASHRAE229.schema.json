@@ -590,6 +590,12 @@
                     "minimum": 0.0,
                     "units": "W"
                 },
+                "occupant_latent_heat_gain": {
+                    "description": "Latent heat gain of each occupant.",
+                    "type": "number",
+                    "minimum": 0.0,
+                    "units": "W"
+                },
                 "status_type": {
                     "description": "Choice of new, existing, addition, alteration, etc. for each ruleset.",
                     "oneOf": [
@@ -1486,7 +1492,7 @@
                     "type": "string",
                     "notes": "Describe the purpose of the schedule and how it can be used. Not an enumerations. The purpose assigned by BEM tool should match across RMDs. Examples include thermostat, multiplier for lighting, availability for equipment."
                 },
-                "schedule_sequence_type": {
+                "sequence_type": {
                     "description": "Schedule sequence type",
                     "$ref": "ASHRAE229.schema.json#/definitions/ScheduleSequenceOptions"
                 },
@@ -1494,11 +1500,31 @@
                     "description": "Hourly Values of Schedule",
                     "type": "array",
                     "minItems": 0,
-                    "maxItems": 8760,
+                    "maxItems": 8784,
                     "items": {
                         "type": "number"
                     },
                     "notes": "Used when schedule_sequence_type is HOURLY. Can also use functions like EFLH(), MAX(), MIN() to determine overall characteristics for the list of schedule values."
+                },
+                "hourly_heating_design_day": {
+                    "description": "Hourly values for heating design day",
+                    "type": "array",
+                    "minItems": 0,
+                    "maxItems": 24,
+                    "items": {
+                        "type": "number"
+                    },
+                    "notes": "Used when schedule_sequence_type is HOURLY."
+                },
+                "hourly_cooling_design_day": {
+                    "description": "Hourly values for cooling design day",
+                    "type": "array",
+                    "minItems": 0,
+                    "maxItems": 24,
+                    "items": {
+                        "type": "number"
+                    },
+                    "notes": "Used when schedule_sequence_type is HOURLY."
                 },
                 "event_times": {
                     "description": "Event times when the schedule changes",
@@ -1517,16 +1543,50 @@
                     },
                     "notes": "Used when schedule_sequence_type is EVENT. New values starting at corresponding to the event time until following event time minus one second. Can also use functions like EFLH(), MAX(), MIN() to determine overall characteristics for the list of schedule values."
                 },
+                "event_times_heating_design_day": {
+                    "description": "Event times when the schedule changes for heating design day",
+                    "type": "array",
+                    "items": {
+                        "type": "number"
+                    },
+                    "units": "s",
+                    "notes": "Used when schedule_sequence_type is EVENT."
+                },
+                "event_values_heating_design_day": {
+                    "description": "Event value at corresponding event time for heating design day",
+                    "type": "array",
+                    "items": {
+                        "type": "number"
+                    },
+                    "notes": "Used when schedule_sequence_type is EVENT. New values starting at corresponding to the event time until following event time minus one second."
+                },
+                "event_times_cooling_design_day": {
+                    "description": "Event times when the schedule changes for cooling design day",
+                    "type": "array",
+                    "items": {
+                        "type": "number"
+                    },
+                    "units": "s",
+                    "notes": "Used when schedule_sequence_type is EVENT."
+                },
+                "event_values_cooling_design_day": {
+                    "description": "Event value at corresponding event time for cooling design day",
+                    "type": "array",
+                    "items": {
+                        "type": "number"
+                    },
+                    "notes": "Used when schedule_sequence_type is EVENT. New values starting at corresponding to the event time until following event time minus one second."
+                },
                 "type": {
                     "description": "The type of schedule",
                     "$ref": "ASHRAE229.schema.json#/definitions/ScheduleOptions",
                     "notes": "Primarily indicates if the values may be represented by units such as C for temperature or W for power or m3/s for flow rate or are dimensionless multipliers."
                 },
-                "prescribed_schedule": {
-                    "description": "True if any schedule values have changed from what appears in the schedule library",
+                "prescribed_type": {
+                    "description": "Options when any schedule values have changed from what appears in the schedule library",
                     "$ref": "Enumerations2019ASHRAE901.schema.json#/definitions/PrescribedScheduleOptions2019ASHRAE901"
                 },
-                "is_schedule_modified_for_workaround": {
+                "is_modified_for_workaround": {
                     "description": "True if any schedule has been modified for a workaround",
                     "type": "boolean"
                 }
