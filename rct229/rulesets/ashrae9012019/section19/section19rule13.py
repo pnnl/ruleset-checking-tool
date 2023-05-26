@@ -45,6 +45,13 @@ TEMP_DELTA_17F = 17.0 * ureg("R")
 TEMP_DELTA_20F = 20.0 * ureg("R")
 
 
+# zone_info => should be hvac_info -> should have hvac id
+# line 88 - seperate for loop
+# another zone_info => deswgn thermostat
+# termianl -> part of hvac system
+# section 5 - 18
+# save all the zones and take them in the next level.
+
 class Section19Rule13(RuleDefinitionListIndexedBase):
     """Rule 13 of ASHRAE 90.1-2019 Appendix G Section 19 (HVAC - General)"""
 
