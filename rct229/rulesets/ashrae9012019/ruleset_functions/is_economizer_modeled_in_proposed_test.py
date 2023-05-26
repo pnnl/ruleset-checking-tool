@@ -223,17 +223,17 @@ def test__PROPOSED_TEST_RMD_NO_ECONOMIZER_TYPE__is_valid():
 
 def test__is_economizer_modeled_in_proposed_fixed_fraction_economizer_type():
     assert not is_economizer_modeled_in_proposed(
-        TEST_RMI_FIXED_TYPE_UNIT, TEST_RMI_FIXED_TYPE_UNIT
+        TEST_RMI_FIXED_TYPE_UNIT, TEST_RMI_FIXED_TYPE_UNIT, "System 9"
     )
 
 
 def test__is_economizer_modeled_in_proposed__enthalpy_economizer_type():
     assert is_economizer_modeled_in_proposed(
-        TEST_RMI_FIXED_TYPE_UNIT, TEST_RMI_ENTHALPY_TYPE_UNIT
+        TEST_RMI_FIXED_TYPE_UNIT, TEST_RMI_ENTHALPY_TYPE_UNIT, "System 9"
     )
 
 
 def test__is_economizer_modeled_in_proposed__no_economizer_type():
     assert not is_economizer_modeled_in_proposed(
-        TEST_RMI_FIXED_TYPE_UNIT, TEST_RMI_NO_ECONOMIZER_TYPE_UNIT
+        TEST_RMI_FIXED_TYPE_UNIT, TEST_RMI_NO_ECONOMIZER_TYPE_UNIT, "System 9"
     )
