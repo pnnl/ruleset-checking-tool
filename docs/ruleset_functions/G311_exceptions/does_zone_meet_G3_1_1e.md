@@ -15,7 +15,6 @@
 - **is_a_vestibule**
 - **is_zone_mechanically_heated_and_not_cooled**
 - **get_component_by_id**
-- **does_zone_get_cooled_transfer_air** - placeholder function
 
 ## Logic:
 - create list of eligible space types: `eligible_space_types = ["STORAGE_ROOM_HOSPITAL", "STORAGE_ROOM_SMALL", "STORAGE_ROOM_LARGE", "WAREHOUSE_STORAGE_AREA_MEDIUM_TO_BULKY_PALLETIZED_ITEMS", "WAREHOUSE_STORAGE_AREA_SMALLER_HAND_CARRIED_ITEMS", "STAIRWELL", "ELECTRICAL_MECHANICAL_ROOM", "RESTROOM_FACILITY_FOR_THE_VISUALLY_IMPAIRED", "RESTROOM_ALL_OTHERS"]
@@ -40,9 +39,6 @@
 	- set result to YES: `result = YES`
 	- we still need to signal if the zone is MAYBE a vestible.  We only do this if the zone is eligible in all the other checks.  So if the proposed zone is mechanically cooled, it doesn't matter if this is a vestibule or not: `if is_a_vestibule == MAYBE:`
 		- set result to MAYBE_VESTIBULE: result = `MAYBE_VESTIBULE`
-	- however, if there is transfer air into the space from an air conditioned zone, it is not eligible, so use the function does_zone_get_cooled_transfer_air to determine if the zone is passively cooled through transfer air: `if does_zone_get_cooled_transfer_air(B-RMI,zone_p.id):`
-		- set result to NO: `result = NO`
-
 
 
 **Returns** `result`
