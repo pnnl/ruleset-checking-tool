@@ -87,6 +87,7 @@ class Section19Rule19(RuleDefinitionListIndexedBase):
             get_dict_of_zones_and_terminal_units_served_by_hvac_sys(rmi_b)
         )
 
+        zones_served_by_hvac_has_non_mech_cooling_bool_p = False
         for hvac_id_b in find_all(
             "$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*].id",
             rmi_b,
