@@ -39,7 +39,8 @@
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 11",
-                                                        "primary_airflow": 1000
+                                                        "primary_airflow": 1000,
+                                                        "minimum_outdoor_airflow": 200
                                                     }
                                                 ]
                                             }
@@ -121,7 +122,8 @@
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 11",
-                                                        "primary_airflow": 1000
+                                                        "primary_airflow": 1000,
+                                                        "minimum_outdoor_airflow": 200
                                                     }
                                                 ]
                                             }
@@ -148,7 +150,8 @@
                                                             "design_electric_power": 100,
                                                             "design_airflow": 471.94744319999984
                                                         }
-                                                    ]
+                                                    ],
+                                                    "minimum_outdoor_airflow": 94.38948863999997
                                                 }
                                             }
                                         ]
@@ -221,7 +224,8 @@
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 11",
-                                                        "primary_airflow": 1000
+                                                        "primary_airflow": 1000,
+                                                        "minimum_outdoor_airflow": 200
                                                     }
                                                 ]
                                             }
@@ -303,7 +307,8 @@
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 11",
-                                                        "primary_airflow": 1000
+                                                        "primary_airflow": 1000,
+                                                        "minimum_outdoor_airflow": 200
                                                     }
                                                 ]
                                             }
@@ -331,6 +336,7 @@
                                                             "design_airflow": 471.94744319999984
                                                         }
                                                     ],
+                                                    "minimum_outdoor_airflow": 94.38948863999997,
                                                     "return_fans": [
                                                         {
                                                             "id": "Return Fan 1",
@@ -413,7 +419,8 @@
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 5",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1",
-                                                        "primary_airflow": 1000
+                                                        "primary_airflow": 1000,
+                                                        "minimum_outdoor_airflow": 200
                                                     }
                                                 ]
                                             },
@@ -518,7 +525,8 @@
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 5",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1",
-                                                        "primary_airflow": 1000
+                                                        "primary_airflow": 1000,
+                                                        "minimum_outdoor_airflow": 200
                                                     }
                                                 ]
                                             },
@@ -644,7 +652,8 @@
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 5",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1",
-                                                        "primary_airflow": 1000
+                                                        "primary_airflow": 1000,
+                                                        "minimum_outdoor_airflow": 50
                                                     }
                                                 ]
                                             },
@@ -749,7 +758,8 @@
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 5",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1",
-                                                        "primary_airflow": 1000
+                                                        "primary_airflow": 1000,
+                                                        "minimum_outdoor_airflow": 50
                                                     }
                                                 ]
                                             },
@@ -875,7 +885,8 @@
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 5",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1",
-                                                        "primary_airflow": 1000
+                                                        "primary_airflow": 1000,
+                                                        "minimum_outdoor_airflow": 200
                                                     }
                                                 ]
                                             },
@@ -980,7 +991,8 @@
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 5",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1",
-                                                        "primary_airflow": 1000
+                                                        "primary_airflow": 1000,
+                                                        "minimum_outdoor_airflow": 200
                                                     }
                                                 ]
                                             },
@@ -1106,7 +1118,8 @@
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 5",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1",
-                                                        "primary_airflow": 1000
+                                                        "primary_airflow": 1000,
+                                                        "minimum_outdoor_airflow": 200
                                                     }
                                                 ]
                                             },
@@ -1150,7 +1163,8 @@
                                                         {
                                                             "id": "Return Fan 1"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "minimum_outdoor_airflow": 200
                                                 }
                                             }
                                         ]
@@ -1206,7 +1220,8 @@
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 5",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1",
-                                                        "primary_airflow": 1000
+                                                        "primary_airflow": 1000,
+                                                        "minimum_outdoor_airflow": 200
                                                     }
                                                 ]
                                             },
@@ -1262,7 +1277,8 @@
                                                             "design_electric_power": 30,
                                                             "design_airflow": 100
                                                         }
-                                                    ]
+                                                    ],
+                                                    "minimum_outdoor_airflow": 94.38948863999997
                                                 }
                                             }
                                         ]
