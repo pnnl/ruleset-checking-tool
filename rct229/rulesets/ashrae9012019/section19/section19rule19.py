@@ -7,6 +7,8 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_system_type_compar
 )
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_system_util import (
     HVAC_SYS,
+    find_exactly_one_hvac_system,
+    find_exactly_one_zone,
 )
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_baseline_system_types import (
     get_baseline_system_types,
@@ -24,7 +26,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_list_hvac_systems_assoc
     get_list_hvac_systems_associated_with_zone,
 )
 from rct229.schema.config import ureg
-from rct229.utils.assertions import getattr_
+from rct229.utils.assertions import assert_, getattr_
 from rct229.utils.jsonpath_utils import find_all, find_one
 from rct229.utils.pint_utils import ZERO
 from rct229.utils.std_comparisons import std_equal
@@ -75,52 +77,40 @@ class Section19Rule19(RuleDefinitionListIndexedBase):
         baseline_system_types_dict = get_baseline_system_types(rmi_b)
         applicable_hvac_sys_ids = [
             hvac_id
-            for sys_type in baseline_system_types_dict.keys()
+            for sys_type in baseline_system_types_dict
             for target_sys_type in APPLICABLE_SYS_TYPES
             if baseline_system_type_compare(sys_type, target_sys_type, False)
             for hvac_id in baseline_system_types_dict[sys_type]
         ]
 
-        dict_of_zones_and_terminal_units_served_by_hvac_sys = (
+        dict_of_zones_and_terminal_units_served_by_hvac_sys_b = (
             get_dict_of_zones_and_terminal_units_served_by_hvac_sys(rmi_b)
         )
 
-        zonal_exhaust_fan_elec_power_b = ZERO.POWER
         for hvac_id_b in find_all(
             "$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*].id",
             rmi_b,
         ):
-            for zone_id_b in dict_of_zones_and_terminal_units_served_by_hvac_sys[
+            zonal_exhaust_fan_elec_power_b = ZERO.POWER
+            for zone_id_b in dict_of_zones_and_terminal_units_served_by_hvac_sys_b[
                 hvac_id_b
             ]["zone_list"]:
+                zone_p = find_exactly_one_zone(zone_id_b, rmi_p)
+
                 zonal_exhaust_fan_elec_power_b += get_fan_object_electric_power(
-                    find_one(
-                        f"$.buildings[*].building_segments[*].zones[?(@.id == {zone_id_b})].zonal_exhaust_fan",
-                        rmi_b,
-                    )
+                    zone_p.get("zonal_exhaust_fan")
                 )
 
-                zone_p = find_one(
-                    f"$.buildings[*].building_segments[*].zones[?(@.id == {zone_id_b})].non_mechanical_cooling_fan_airflow",
-                    rmi_p,
-                )
-
-                zones_served_by_hvac_has_non_mech_cooling_bool_p = (
-                    True
-                    if (
-                        zone_p.get("non_mechanical_cooling_fan_airflow") is not None
-                        and zone_p["non_mechanical_cooling_fan_airflow"] > ZERO.FLOW
-                    )
-                    else False
-                )
+                if (
+                    zone_p.get("non_mechanical_cooling_fan_airflow") is not None
+                    and zone_p["non_mechanical_cooling_fan_airflow"] > ZERO.FLOW
+                ):
+                    zones_served_by_hvac_has_non_mech_cooling_bool_p = True
 
                 zone_hvac_in_has_non_mech_cooling_p = any(
                     [
                         getattr_(
-                            find_one(
-                                f"$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[?(@.id == {hvac_id_p})]",
-                                rmi_p,
-                            ),
+                            find_exactly_one_hvac_system(rmi_p, hvac_id_p),
                             "HVAC",
                             "cooling_system",
                             "cooling_system_type",
@@ -162,6 +152,7 @@ class Section19Rule19(RuleDefinitionListIndexedBase):
 
         def get_calc_vals(self, context, data=None):
             hvac_b = context.baseline
+            hvac_id_b = hvac_b["id"]
 
             zonal_exhaust_fan_elec_power_b = data["zonal_exhaust_fan_elec_power_b"]
             zones_served_by_hvac_has_non_mech_cooling_bool_p = data[
@@ -178,9 +169,12 @@ class Section19Rule19(RuleDefinitionListIndexedBase):
                     fan_sys_b
                 )
             )
+            supply_fans_qty_b = fan_sys_info_b["supply_fans_qty"]
+            more_than_one_supply_fan_b = True if supply_fans_qty_b > 1 else False
 
-            more_than_one_supply_fan_b = (
-                True if fan_sys_info_b["supply_fans_qty"] == 1 else False
+            assert_(
+                supply_fans_qty_b < 1,
+                f"No supply fan is found in HVAC {hvac_id_b} fan system.",
             )
 
             total_fan_power_b = (
@@ -193,10 +187,14 @@ class Section19Rule19(RuleDefinitionListIndexedBase):
 
             supply_fan_flow_b = fan_sys_info_b["supply_fans_airflow"]
 
+            assert_(
+                supply_fan_flow_b > 0, f"Supply fan air flow in HVAC {hvac_id_b} is 0."
+            )
+
             fan_power_per_flow_b = (
                 total_fan_power_b / supply_fan_flow_b
                 if supply_fan_flow_b != ZERO.FLOW
-                else 0 * ureg("W/CFM")
+                else ZERO.POWER_PER_FLOW
             )
 
             return {

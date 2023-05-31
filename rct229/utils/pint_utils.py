@@ -69,6 +69,8 @@ class ZERO:
 
     TEMPERATURE = 0 * ureg("K")
 
+    POWER_PER_FLOW = POWER / FLOW
+
 
 @dataclass(frozen=True)
 class CalcQ:
