@@ -62,14 +62,13 @@ class ZERO:
     POWER = 0 * ureg("Btu/hr")
     THERMAL_CAPACITY = POWER / ureg("ft2")
     POWER_PER_AREA = THERMAL_CAPACITY
+    POWER_PER_FLOW = 0 * ureg("Btu/hr/cfm")
 
     U_FACTOR = ureg("Btu/(hr*ft2*degR)")
     UA = U_FACTOR * AREA
     FLOW = VOLUME / ureg("minute")
 
     TEMPERATURE = 0 * ureg("K")
-
-    POWER_PER_FLOW = POWER / FLOW
 
 
 @dataclass(frozen=True)

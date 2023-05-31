@@ -87,12 +87,33 @@ class Section19Rule19(RuleDefinitionListIndexedBase):
             get_dict_of_zones_and_terminal_units_served_by_hvac_sys(rmi_b)
         )
 
-        zones_served_by_hvac_has_non_mech_cooling_bool_p = False
+        zone_hvac_non_mech_cooling_map = {}
+        for zone_id_p in find_all(
+            "$.buildings[*].building_segments[*].zones[*]", rmi_p
+        ):
+            zone_hvac_non_mech_cooling_map[zone_id_p] = any(
+                [
+                    getattr_(
+                        find_exactly_one_hvac_system(rmi_p, hvac_id_p),
+                        "HVAC",
+                        "cooling_system",
+                        "cooling_system_type",
+                    )
+                    == COOLING_SYSTEM.NON_MECHANICAL
+                    for hvac_id_p in get_list_hvac_systems_associated_with_zone(
+                        rmi_p, zone_id_p
+                    )
+                ]
+            )
+
+        hvac_map = {}
         for hvac_id_b in find_all(
             "$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*].id",
             rmi_b,
         ):
             zonal_exhaust_fan_elec_power_b = ZERO.POWER
+            zones_served_by_hvac_has_non_mech_cooling_bool_p = False
+
             for zone_id_b in dict_of_zones_and_terminal_units_served_by_hvac_sys_b[
                 hvac_id_b
             ]["zone_list"]:
@@ -108,26 +129,17 @@ class Section19Rule19(RuleDefinitionListIndexedBase):
                 ):
                     zones_served_by_hvac_has_non_mech_cooling_bool_p = True
 
-                zone_hvac_in_has_non_mech_cooling_p = any(
-                    [
-                        getattr_(
-                            find_exactly_one_hvac_system(rmi_p, hvac_id_p),
-                            "HVAC",
-                            "cooling_system",
-                            "cooling_system_type",
-                        )
-                        == COOLING_SYSTEM.NON_MECHANICAL
-                        for hvac_id_p in get_list_hvac_systems_associated_with_zone(
-                            rmi_p, zone_p["id"] # TODO: Can I just use find_all here and then move the for loop outside?
-                        )
-                    ]
-                )
+                if zone_hvac_non_mech_cooling_map[zone_id_b]:
+                    zones_served_by_hvac_has_non_mech_cooling_bool_p = True
+
+            hvac_map[hvac_id_b] = {
+                "zones_served_by_hvac_has_non_mech_cooling_bool_p": zones_served_by_hvac_has_non_mech_cooling_bool_p
+            }
 
         return {
             "applicable_hvac_sys_ids": applicable_hvac_sys_ids,
             "zonal_exhaust_fan_elec_power_b": zonal_exhaust_fan_elec_power_b,
-            "zones_served_by_hvac_has_non_mech_cooling_bool_p": zones_served_by_hvac_has_non_mech_cooling_bool_p,
-            "zone_hvac_in_has_non_mech_cooling_p": zone_hvac_in_has_non_mech_cooling_p,
+            "hvac_map": hvac_map,
         }
 
     def list_filter(self, context_item, data):
@@ -155,8 +167,10 @@ class Section19Rule19(RuleDefinitionListIndexedBase):
             hvac_b = context.baseline
             hvac_id_b = hvac_b["id"]
 
-            zonal_exhaust_fan_elec_power_b = data["zonal_exhaust_fan_elec_power_b"]
-            zones_served_by_hvac_has_non_mech_cooling_bool_p = data[
+            hvac_map = data["hvac_map"][hvac_id_b]
+
+            zonal_exhaust_fan_elec_power_b = hvac_map["zonal_exhaust_fan_elec_power_b"]
+            zones_served_by_hvac_has_non_mech_cooling_bool_p = hvac_map[
                 "zones_served_by_hvac_has_non_mech_cooling_bool_p"
             ]
             zone_hvac_in_has_non_mech_cooling_p = data[
