@@ -138,8 +138,8 @@ class Section19Rule14(RuleDefinitionListIndexedBase):
 
             fan_system_info_b = hvac_info_b["fan_system_info_b"]
             more_than_one_supply_and_return_fan = (
-                fan_system_info_b["supply_fans_qty"] == 1
-                and fan_system_info_b["return_fans_qty"] == 1
+                fan_system_info_b["supply_fans_qty"] > 1
+                or fan_system_info_b["return_fans_qty"] > 1
             )
 
             dict_of_zones_and_terminal_units_served_by_hvac_sys_b = data[
@@ -212,7 +212,7 @@ class Section19Rule14(RuleDefinitionListIndexedBase):
             hvac_b = context.baseline
             hvac_id_b = hvac_b["id"]
 
-            return f"{hvac_id_b} has more than one supply or return fan associated with the HVAC system in the baseline and therefore this check could not be conducted for this HVAC sytem. Conduct manual check for compliance with G3.1.2.8.1."
+            return f"{hvac_id_b} has more than one supply or return fan associated with the HVAC system in the baseline and therefore this check could not be conducted for this HVAC system. Conduct manual check for compliance with G3.1.2.8.1."
 
         def rule_check(self, context, calc_vals=None, data=None):
             return_fans_airflow = calc_vals["return_fans_airflow"]
@@ -226,9 +226,8 @@ class Section19Rule14(RuleDefinitionListIndexedBase):
             modeled_cfm = calc_vals["modeled_cfm"]
             supply_minus_OA_flow = calc_vals["supply_minus_OA_flow"]
             supply_cfm_90_percent = calc_vals["supply_cfm_90_percent"]
+            is_modeled_with_return_fan_in_p = calc_vals["is_modeled_with_return_fan_p"]
             is_modeled_with_relief_fan_p = calc_vals["is_modeled_with_relief_fan_p"]
-
-            is_modeled_with_return_fan_in_p = data["is_modeled_with_return_fan_in_p"]
 
             return (
                 baseline_modeled_return_as_expected
