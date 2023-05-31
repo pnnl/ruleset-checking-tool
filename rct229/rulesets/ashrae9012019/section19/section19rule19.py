@@ -27,7 +27,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_list_hvac_systems_assoc
 )
 from rct229.schema.config import ureg
 from rct229.utils.assertions import assert_, getattr_
-from rct229.utils.jsonpath_utils import find_all, find_one
+from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.pint_utils import ZERO
 from rct229.utils.std_comparisons import std_equal
 
@@ -117,7 +117,7 @@ class Section19Rule19(RuleDefinitionListIndexedBase):
                         )
                         == COOLING_SYSTEM.NON_MECHANICAL
                         for hvac_id_p in get_list_hvac_systems_associated_with_zone(
-                            rmi_p, zone_p["id"]
+                            rmi_p, zone_p["id"] # TODO: Can I just use find_all here and then move the for loop outside?
                         )
                     ]
                 )
