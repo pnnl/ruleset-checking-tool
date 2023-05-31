@@ -162,9 +162,10 @@ class Section19Rule10(RuleDefinitionListIndexedBase):
                 HVAC_systems_primarily_serving_comp_rooms_list = data[
                     "HVAC_systems_primarily_serving_comp_rooms_list"
                 ]
-                baseline_system_types_b = list(baseline_system_types_dict.keys())[
-                    list(baseline_system_types_dict.values()).index(hvac_id_b)
-                ]  # TODO double check
+
+                for sys_type, sys_list in baseline_system_types_dict.items():
+                    if hvac_id_b in baseline_system_types_dict[sys_type]:
+                        baseline_system_types_b = sys_type
 
                 fan_sys_b = hvac_b["fan_system"]
                 fan_air_economizer_b = find_one("$.air_economizer", fan_sys_b)
@@ -229,7 +230,7 @@ class Section19Rule10(RuleDefinitionListIndexedBase):
                 HVAC_systems_primarily_serving_comp_rooms_list = calc_vals[
                     "HVAC_systems_primarily_serving_comp_rooms_list"
                 ]
-
+                stop = 1
                 return (
                     (
                         fan_air_economizer_b is None
