@@ -84,7 +84,7 @@ class Section19Rule14(RuleDefinitionListIndexedBase):
                 )
             )
 
-            hvac_info[hvac_id_b]["more_than_one_supply_or_return_fan"] = (
+            hvac_info[hvac_id_b]["has_one_supply_and_return_fan"] = (
                 fan_sys_info_b["supply_fans_qty"] == 1
                 and fan_sys_info_b["return_fans_qty"] == 1
             )
@@ -99,11 +99,11 @@ class Section19Rule14(RuleDefinitionListIndexedBase):
                     )["id"]
                 ]
 
-                hvac_info[hvac_id_b]["is_modeled_with_return_fan_in_proposed"] = (
+                hvac_info[hvac_id_b]["is_modeled_with_return_fan_p"] = (
                     modeled_fan_power_list_p["return_fans_power"] > ZERO.POWER
                 )
 
-                hvac_info[hvac_id_b]["is_modeled_with_relief_fan_in_proposed"] = (
+                hvac_info[hvac_id_b]["is_modeled_with_relief_fan_p"] = (
                     modeled_fan_power_list_p["exhaust_fans_power"] > ZERO.POWER
                 )
 
@@ -149,12 +149,9 @@ class Section19Rule14(RuleDefinitionListIndexedBase):
 
             hvac_info = data["hvac_info"][hvac_id_b]
 
-            is_modeled_with_return_fan_p = hvac_info[
-                "is_modeled_with_return_fan_in_proposed"
-            ]
-            is_modeled_with_relief_fan_p = hvac_info[
-                "is_modeled_with_relief_fan_in_proposed"
-            ]
+            has_one_supply_and_return_fan = hvac_info["has_one_supply_and_return_fan"]
+            is_modeled_with_return_fan_p = hvac_info["is_modeled_with_return_fan_p"]
+            is_modeled_with_relief_fan_p = hvac_info["is_modeled_with_relief_fan_p"]
 
             fan_sys_b = hvac_b["fan_system"]
             fan_sys_airflow = (
@@ -186,6 +183,9 @@ class Section19Rule14(RuleDefinitionListIndexedBase):
             ) or (not is_modeled_with_relief_fan_p and relief_fans_airflow == ZERO.FLOW)
 
             return {
+                "has_one_supply_and_return_fan": has_one_supply_and_return_fan,
+                "is_modeled_with_return_fan_p": is_modeled_with_return_fan_p,
+                "is_modeled_with_relief_fan_p": is_modeled_with_relief_fan_p,
                 "return_fans_airflow": return_fans_airflow,
                 "relief_fans_airflow": relief_fans_airflow,
                 "baseline_modeled_return_as_expected": baseline_modeled_return_as_expected,
@@ -196,7 +196,7 @@ class Section19Rule14(RuleDefinitionListIndexedBase):
             }
 
         def manual_check_required(self, context, calc_vals=None, data=None):
-            return calc_vals["more_than_one_supply_or_return_fan"]
+            return not calc_vals["has_one_supply_and_return_fan"]
 
         def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
             hvac_b = context.baseline
@@ -217,31 +217,22 @@ class Section19Rule14(RuleDefinitionListIndexedBase):
             supply_minus_OA_flow = calc_vals["supply_minus_OA_flow"]
             supply_airflow_90_percent = calc_vals["supply_airflow_90_percent"]
 
-            more_than_one_supply_or_return_fan = data[
-                "more_than_one_supply_or_return_fan"
-            ]
-            is_modeled_with_return_fan_in_proposed = data[
-                "is_modeled_with_return_fan_in_proposed"
-            ]
-            is_modeled_with_relief_fan_in_proposed = data[
-                "is_modeled_with_relief_fan_in_proposed "
-            ]
-
+            has_one_supply_and_return_fan = calc_vals["has_one_supply_and_return_fan"]
+            is_modeled_with_return_fan_p = calc_vals["is_modeled_with_return_fan_p"]
+            is_modeled_with_relief_fan_p = calc_vals["is_modeled_with_relief_fan_p"]
+            stop = 1
             return (
-                not more_than_one_supply_or_return_fan
+                has_one_supply_and_return_fan
                 and baseline_modeled_return_as_expected
                 and baseline_modeled_relief_as_expected
-                and (
-                    is_modeled_with_return_fan_in_proposed
-                    or is_modeled_with_relief_fan_in_proposed
-                )
+                and (is_modeled_with_return_fan_p or is_modeled_with_relief_fan_p)
                 and std_equal(
                     modeled_airflow,
                     max(supply_minus_OA_flow, supply_airflow_90_percent),
                 )
             ) and (
-                not is_modeled_with_return_fan_in_proposed
-                and not is_modeled_with_relief_fan_in_proposed
+                not is_modeled_with_return_fan_p
+                and not is_modeled_with_relief_fan_p
                 and std_equal(ZERO.FLOW, return_fans_airflow)
                 and std_equal(ZERO.FLOW, relief_fans_airflow)
             )
