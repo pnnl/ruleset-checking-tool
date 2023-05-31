@@ -23,22 +23,14 @@ class Section6Rule6(RuleDefinitionListIndexedBase):
     class BuildingRule(RuleDefinitionBase):
         def __init__(self):
             super(Section6Rule6.BuildingRule, self).__init__(
-                required_fields={
-                    "$": ["building_segments"],
-                    "$.building_segments[*]": ["zones"],
-                    "$.building_segments[*].zones[*]": ["spaces"],
-                    "$.building_segments[*].zones[*].spaces[*]": ["interior_lighting"],
-                    "$.building_segments[*].zones[*].spaces[*].interior_lighting[*]": [
-                        "daylighting_control_type"
-                    ],
-                },
                 rmrs_used=UserBaselineProposedVals(False, True, False),
             )
 
         def get_calc_vals(self, context, data=None):
+            building_p = context.baseline
             interior_lighting_instances_with_daylighting_control = find_all(
-                f'$..spaces[*].interior_lighting[*][?(@.daylighting_control_type != "NONE")]',
-                context.baseline,
+                f'$.building_segments[*].zones[*].spaces[*].interior_lighting[*][?(@.daylighting_control_type != "NONE")]',
+                building_p,
             )
             ids_for_interior_lighting_instances_with_daylighting_control = [
                 instance["id"]
