@@ -30,7 +30,7 @@
     - loop through the computer room zones: `for computer_room_zone_id in computer_room_zones_dict:`
         - get the zone: `computer_room_zone = get_component_by_id(computer_room_zone_id)`
         - get the peak internal load for the computer_room_zone by calling the function get_zone_peak_internal_load (units are btu/sf/hr): `zone_peak_internal_load = get_zone_peak_internal_load_floor_area(B_RMI, computer_room_zone)["PEAK"]`
-        - add the zone_peak_internal_load to the total_computer_peak_cooling_load`: `total_computer_peak_cooling_load += zone_peak_internal_load`
+        - add the zone_peak_internal_load to the total_computer_peak_cooling_load: `total_computer_peak_cooling_load += zone_peak_internal_load`
     - now determine which threshold (G1,G2,G3) the building meets
     - check if the total building peak computer cooling load is greater than 3,000,000 btu/hr: `if total_computer_peak_cooling_load > 3000000:`
         - set the result to G2: `result = G2`
