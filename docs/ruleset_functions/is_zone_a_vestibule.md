@@ -64,7 +64,6 @@ We will also check that the lighting space type is in agreement with the space u
 	 **Returns** `return vestibule_check`  
 
 **Notes/Questions:**  
-1. Do any of the adjacency options from AdditionalSurfaceAdjacencyOptions2019ASHRAE901 need to be included in the list? - call on 230518 determined we only need to look for exterior
 
 
 
