@@ -31,7 +31,7 @@ class ASHRAE9012019DetailReport(RCTReport):
         rule_report["rule_id"] = rule_id
         rule_report["description"] = rule_outcome["description"]
         rule_report["ruleset_section_title"] = rule_outcome["ruleset_section_title"]
-        rule_report["primary_rule"] = "Yes" if rule_outcome["primary_rule"] else "No"
+        rule_report["evaluation_type"] = "FULL" if rule_outcome["primary_rule"] else "APPLICABILITY"
         rule_report["standard_section"] = rule_outcome["standard_section"]
         rule_report_list = []
         self._rule_outcome_helper(rule_outcome, rule_report_list, outcome_dict)

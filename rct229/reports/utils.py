@@ -11,10 +11,13 @@ def calc_vals_converter(calc_vals):
     -------
 
     """
-    calc_vals_dict = dict()
+    calc_vals_list = []
     for key in calc_vals.keys():
-        calc_vals_dict[key] = str(calc_vals[key])
-    return calc_vals_dict
+        calc_val_dict = dict()
+        calc_val_dict["variable"] = key
+        calc_val_dict["value"] = str(calc_vals[key])
+        calc_vals_list.append(calc_val_dict)
+    return calc_vals_list
 
 
 def aggregate_outcomes(outcomes):
