@@ -36,6 +36,7 @@ class Section5Rule41(RuleDefinitionListIndexedBase):
             standard_section="Section G3.1-1(a) Building Envelope Modeling Requirements for the Proposed design",
             is_primary_rule=True,
             list_path="ruleset_model_instances[0].buildings[*]",
+            data_items={"climate_zone": ("proposed", "weather/climate_zone")},
         )
 
     class BuildingRule(RuleDefinitionListIndexedBase):
