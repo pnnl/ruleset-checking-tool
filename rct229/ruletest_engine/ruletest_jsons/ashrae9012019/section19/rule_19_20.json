@@ -97,14 +97,14 @@
                                                         {
                                                             "id": "Relief fan 1",
                                                             "specification_method": "SIMPLE",
-                                                            "design_electric_power": 50
+                                                            "design_electric_power": 0
                                                         }
                                                     ],
                                                     "exhaust_fans": [
                                                         {
                                                             "id": "Exhaust fan 1",
                                                             "specification_method": "SIMPLE",
-                                                            "design_electric_power": 0
+                                                            "design_electric_power": 50
                                                         }
                                                     ]
                                                 }
@@ -407,14 +407,14 @@
                                                         {
                                                             "id": "Relief fan 1",
                                                             "specification_method": "SIMPLE",
-                                                            "design_electric_power": 50
+                                                            "design_electric_power": 0
                                                         }
                                                     ],
                                                     "exhaust_fans": [
                                                         {
                                                             "id": "Exhaust fan 1",
                                                             "specification_method": "SIMPLE",
-                                                            "design_electric_power": 0
+                                                            "design_electric_power": 50
                                                         }
                                                     ]
                                                 }
