@@ -31,5 +31,6 @@
 **[Back](../_toc.md)**
 
 **Notes**
-1.  function get_hvac_systems_5_6_serving_multiple_floors_b() also relies on logic to determine the number of floors.  Suggest modifying to call get_number_of_floors
-2.  function depends on adding `number_of_floors_above_grade` and `number_of_floors_below_grade` at the Building level.  Issue #185 was created to address this.
+1.  NOTE TO DEV TEAM - if there are not entries for either (Building.number_of_floors_above_grade AND Building.number_of_floors_below_grade) or (floor_names for every zone and space.lighting_space_type for all spaces), then we cannot evaluate with certainty the number of floors and none of the rules that rely on this function can be evaluated.
+2.  function get_hvac_systems_5_6_serving_multiple_floors_b() also relies on logic to determine the number of floors.  Suggest modifying to call get_number_of_floors
+3.  function depends on adding `number_of_floors_above_grade` and `number_of_floors_below_grade` at the Building level.  Issue #185 was created to address this.
