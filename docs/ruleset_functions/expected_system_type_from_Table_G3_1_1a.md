@@ -37,7 +37,7 @@
 		- check if the climate zone is CZ_0_to_3a: `if is_CZ_0_to_3a():`
 			- the expected system is System 4: `expected_system_type = "SYS-4"`
 		- otherwise, it's CZ_3b_3c_or_4_to_8: `else:`
-			- the expected system is System 3: `expected_system_type = "SYS-3"
+			- the expected system is System 3: `expected_system_type = "SYS-3"`
 	- otherwise, the space area is greater than 120,000 ft2: `else:`
 		- set building_area_string to ">= 120,000": `building_area_string = " >= 120,000 ft2"`
 		- check if the climate zone is CZ_0_to_3a: `if is_CZ_0_to_3a():`
@@ -59,7 +59,7 @@
 		- check if the climate zone is CZ_0_to_3a: `if is_CZ_0_to_3a():`
 			- the expected system is System 4: `expected_system_type = "SYS-4"`
 		- otherwise, it's CZ_3b_3c_or_4_to_8: `else:`
-			- the expected system is System 3: `expected_system_type = "SYS-3"
+			- the expected system is System 3: `expected_system_type = "SYS-3"`
 	- otherwise reclasify the building area type to OTHER_NON_RESIDENTIAL: `else: building_area_type = "OTHER_NON_RESIDENTIAL"`
 
 
@@ -76,12 +76,12 @@
 - check if the building area type is other non-residential: `if building_area_type == "OTHER_NON_RESIDENTIAL":`
 	- check if the space area is less than 25,000: `if building_area < 25000:`
 		- set building_area_string to "< 25,000": `building_area_string = " < 25,000 ft2"`
-		- check if the building is fewer than 4 floors: `if number_of_floors < 4:
+		- check if the building is fewer than 4 floors: `if number_of_floors < 4:`
 			- set number_of_floors_string to " 3 floors or fewer": `number_of_floors_string = " 3 floors or fewer"`
 			- check if the climate zone is CZ_0_to_3a: `if is_CZ_0_to_3a():`
 				- the expected system is System 4: `expected_system_type = "SYS-4"`
 			- otherwise, it's CZ_3b_3c_or_4_to_8: `if else:`
-				- the expected system is System 3: `expected_system_type = "SYS-3"
+				- the expected system is System 3: `expected_system_type = "SYS-3"`
 		- else this is still < 25000 ft2, check if it is in a building less than 6 floors: `if number_of_floors < 6:`
 			- set number_of_floors_string to " 4-5 floors": `number_of_floors_string = " 4-5 floors"`
 			- check if the climate zone is CZ_0_to_3a: `if is_CZ_0_to_3a():`
@@ -94,7 +94,7 @@
 			- check if the climate zone is CZ_0_to_3a: `if is_CZ_0_to_3a():`
 				- the expected system is System 6: `expected_system_type = "SYS-6"`
 			- otherwise, it's CZ_3b_3c_or_4_to_8: `else:`
-				- the expected system is System 5: `expected_system_type = "SYS-5"
+				- the expected system is System 5: `expected_system_type = "SYS-5"`
 		- else if the building_area is greater than 150,000 ft2 OR the building has more than 5 floors: `if((building_area > 150000) || (number_of_floors > 5)):`
 			- set building_area_string to " >150,000 ft2 or > 5 floors": `building_area_string to " >150,000 ft2 or > 5 floors"`
 			- set number_of_floors_string to "" - this is because the building_area_string contains floor information, and we because we re-assigned "RETAIL" to "OTHER_NON_RESIDENTIAL" above, we need to overwriate any data currently in the number_of_floors_string: `number_of_floors_string = ""`
