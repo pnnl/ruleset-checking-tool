@@ -19,10 +19,10 @@
 - create number_of_floors_string, which will be appended to the details_of_system_selection string: `number_of_floors_string = ""`
 
 - get the climate zone category using the functions is_CZ_0_to_3a: `if is_CZ_0_to_3a():`
-	- set climate_zone_category to CZ_0_to_3a: `climate_zone_category = " CZ_0_to_3a"
+	- set climate_zone_category to CZ_0_to_3a: `climate_zone_category = " CZ_0_to_3a"`
 
 - else (the climate zone is 3b, 3c or 4 to 8): `else:`
-	- set climate_zone_category to CZ_3b_3c_or_4_to_8: `climate_zone_category = " CZ_3b_3c_or_4_to_8"
+	- set climate_zone_category to CZ_3b_3c_or_4_to_8: `climate_zone_category = " CZ_3b_3c_or_4_to_8"`
 
 - check if the building area type is residential: `if building_area_type == "RESIDENTIAL":`
 	- check if the climate zone is CZ_0_to_3a: `if is_CZ_0_to_3a():`
