@@ -123,16 +123,16 @@ class Section19Rule20(RuleDefinitionListIndexedBase):
                 + proposed_total_exhaust_fan_power
                 + proposed_total_relief_fan_power
             )
-            percent_of_total_supply_p = (
+            fraction_of_total_supply_p = (
                 proposed_total_supply_fan_power / total_modeled_fan_power_p
             )
-            percent_of_total_return_p = (
+            fraction_of_total_return_p = (
                 proposed_total_return_fan_power / total_modeled_fan_power_p
             )
-            percent_of_total_exhaust_p = (
+            fraction_of_total_exhaust_p = (
                 proposed_total_exhaust_fan_power / total_modeled_fan_power_p
             )
-            percent_of_total_relief_p = (
+            fraction_of_total_relief_p = (
                 proposed_total_relief_fan_power / total_modeled_fan_power_p
             )
             return {
@@ -141,13 +141,13 @@ class Section19Rule20(RuleDefinitionListIndexedBase):
                 "hvac_sys_total_exhaust_fan_power_b": hvac_sys_total_exhaust_fan_power_b,
                 "hvac_sys_total_relief_fan_power_b": hvac_sys_total_relief_fan_power_b,
                 "expected_baseline_fan_power_supply": total_modeled_fan_power_b
-                * percent_of_total_supply_p,
+                * fraction_of_total_supply_p,
                 "expected_baseline_fan_power_return": total_modeled_fan_power_b
-                * percent_of_total_return_p,
+                * fraction_of_total_return_p,
                 "expected_baseline_fan_power_exhaust": total_modeled_fan_power_b
-                * percent_of_total_exhaust_p,
+                * fraction_of_total_exhaust_p,
                 "expected_baseline_fan_power_relief": total_modeled_fan_power_b
-                * percent_of_total_relief_p,
+                * fraction_of_total_relief_p,
             }
 
         def rule_check(self, context, calc_vals=None, data=None):
