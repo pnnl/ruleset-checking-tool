@@ -21,7 +21,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_zone_supply_return_exha
 )
 from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all, find_one
-from rct229.utils.pint_utils import ZERO
+from rct229.utils.pint_utils import ZERO, CalcQ
 from rct229.utils.std_comparisons import std_equal
 
 APPLICABLE_SYS_TYPES = [
@@ -186,13 +186,15 @@ class Section19Rule14(RuleDefinitionListIndexedBase):
                 "has_one_supply_and_return_fan": has_one_supply_and_return_fan,
                 "is_modeled_with_return_fan_p": is_modeled_with_return_fan_p,
                 "is_modeled_with_relief_fan_p": is_modeled_with_relief_fan_p,
-                "return_fans_airflow": return_fans_airflow,
-                "relief_fans_airflow": relief_fans_airflow,
+                "return_fans_airflow": CalcQ("air_flow_rate", return_fans_airflow),
+                "relief_fans_airflow": CalcQ("air_flow_rate", relief_fans_airflow),
                 "baseline_modeled_return_as_expected": baseline_modeled_return_as_expected,
                 "baseline_modeled_relief_as_expected": baseline_modeled_relief_as_expected,
-                "modeled_airflow": modeled_airflow,
-                "supply_minus_OA_flow": supply_minus_OA_flow,
-                "supply_airflow_90_percent": supply_airflow_90_percent,
+                "modeled_airflow": CalcQ("air_flow_rate", modeled_airflow),
+                "supply_minus_OA_flow": CalcQ("air_flow_rate", supply_minus_OA_flow),
+                "supply_airflow_90_percent": CalcQ(
+                    "air_flow_rate", supply_airflow_90_percent
+                ),
             }
 
         def manual_check_required(self, context, calc_vals=None, data=None):
@@ -220,7 +222,7 @@ class Section19Rule14(RuleDefinitionListIndexedBase):
             has_one_supply_and_return_fan = calc_vals["has_one_supply_and_return_fan"]
             is_modeled_with_return_fan_p = calc_vals["is_modeled_with_return_fan_p"]
             is_modeled_with_relief_fan_p = calc_vals["is_modeled_with_relief_fan_p"]
-            stop = 1
+
             return (
                 has_one_supply_and_return_fan
                 and baseline_modeled_return_as_expected
