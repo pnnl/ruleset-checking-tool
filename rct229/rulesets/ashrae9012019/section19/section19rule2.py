@@ -72,7 +72,7 @@ class Section19Rule2(RuleDefinitionListIndexedBase):
                 HW_fluid_loop_list.append(
                     getattr_(
                         find_exactly_one_hvac_system(rmi_b, hvac_id_b),
-                        "hot_water_loop",
+                        "HVAC",
                         "heating_system",
                         "hot_water_loop",
                     )
@@ -84,7 +84,7 @@ class Section19Rule2(RuleDefinitionListIndexedBase):
                 HW_fluid_loop_list.append(
                     getattr_(
                         find_exactly_one_hvac_system(rmi_b, hvac_id_b),
-                        "hot_water_loop",
+                        "HVAC",
                         "preheat_system",
                         "hot_water_loop",
                     )
@@ -95,7 +95,7 @@ class Section19Rule2(RuleDefinitionListIndexedBase):
             ) and is_hvac_sys_fluid_loop_attached_to_chiller(rmi_b, hvac_id_b):
                 chilled_water_loop_b = getattr_(
                     find_exactly_one_hvac_system(rmi_b, hvac_id_b),
-                    "chilled_water_loop",
+                    "HVAC",
                     "cooling_system",
                     "chilled_water_loop",
                 )
@@ -162,10 +162,8 @@ class Section19Rule2(RuleDefinitionListIndexedBase):
             CHW_fluid_loop_list = data["CHW_fluid_loop_list"]
             CW_fluid_loop_list = data["CW_fluid_loop_list"]
 
-            return (
-                fluid_loop_id_b in HW_fluid_loop_list
-                or fluid_loop_id_b in CHW_fluid_loop_list
-                or CW_fluid_loop_list in CW_fluid_loop_list
+            return fluid_loop_id_b in (
+                HW_fluid_loop_list + CHW_fluid_loop_list + CW_fluid_loop_list
             )
 
         def get_calc_vals(self, context, data=None):
@@ -184,7 +182,7 @@ class Section19Rule2(RuleDefinitionListIndexedBase):
             ):
                 is_sized_using_coincident_load = getattr_(
                     fluid_loop_b,
-                    "is_sized_using_coincident_load",
+                    "Fluid Loop",
                     "cooling_or_condensing_design_and_control",
                     "is_sized_using_coincident_load",
                 )
@@ -194,7 +192,7 @@ class Section19Rule2(RuleDefinitionListIndexedBase):
             ):
                 is_sized_using_coincident_load = getattr_(
                     fluid_loop_b,
-                    "is_sized_using_coincident_load",
+                    "Fluid Loop",
                     "heating_design_and_control",
                     "is_sized_using_coincident_load",
                 )
