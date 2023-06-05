@@ -28,7 +28,7 @@
 	- check if the climate zone is CZ_0_to_3a: `if is_CZ_0_to_3a():`
 		- the expected system is System 2: `system_type = "SYS-2"`
 	- otherwise, it's  CZ_3b_3c_or_4_to_8: `else:`
-		- the expected system is System 1: `expected_system_type = "SYS-1"
+		- the expected system is System 1: `expected_system_type = "SYS-1"`
 
 
 - check if the building area type is Public Assembly: `if building_area_type == "PUBLIC_ASSEMBLY":`
