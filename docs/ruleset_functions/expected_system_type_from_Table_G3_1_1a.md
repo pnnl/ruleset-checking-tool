@@ -43,14 +43,14 @@
 		- check if the climate zone is CZ_0_to_3a: `if is_CZ_0_to_3a():`
 			- the expected system is System 13: `expected_system_type = "SYS-13"`
 		- otherwise, it's CZ_3b_3c_or_4_to_8: `else:`
-			- the expected system is System 12: `expected_system_type = "SYS-12"
+			- the expected system is System 12: `expected_system_type = "SYS-12"`
 
 
 - check if the building area type is heated-only storage: `if building_area_type == "HEATED-ONLY_STORAGE":`
 	- check if the climate zone is CZ_0_to_3a: `if is_CZ_0_to_3a():`
 		- the expected system is System 10: `expected_system_type = "SYS-10"`
 	- otherwise, it's CZ_3b_3c_or_4_to_8: `else:`
-		- the expected system is System 9: `expected_system_type = "SYS-9"
+		- the expected system is System 9: `expected_system_type = "SYS-9"`
 
 
 - check if the building area type is Retail: `if building_area_type == "RETAIL":`
