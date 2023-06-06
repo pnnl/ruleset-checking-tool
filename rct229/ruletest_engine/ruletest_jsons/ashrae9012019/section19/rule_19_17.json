@@ -3,7 +3,7 @@
         "Section": 19,
         "Rule": 17,
         "Test": "a",
-        "test_description": "System 1 with `SIMPLE` specification method for supply/return/exhaust/relief fans and each fans have 35 W design electric power with 1400 cfm design supply airflow.",
+        "test_description": "System 1 with `SIMPLE` specification method for supply/return/exhaust/relief fans and each of 5 fans have 60 W design electric power for a total of 300 W with 1000 cfm design supply airflow.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "19-17",
@@ -44,7 +44,7 @@
                                                 "zonal_exhaust_fan": {
                                                     "id": "Zone exhaust fan 1",
                                                     "specification_method": "SIMPLE",
-                                                    "design_electric_power": 200
+                                                    "design_electric_power": 60
                                                 }
                                             }
                                         ],
@@ -66,30 +66,30 @@
                                                     "supply_fans": [
                                                         {
                                                             "id": "Supply Fan 1",
-                                                            "design_airflow": 534.7164531455998,
                                                             "specification_method": "SIMPLE",
-                                                            "design_electric_power": 35
-                                                        }
-                                                    ],
-                                                    "relief_fans": [
-                                                        {
-                                                            "id": "Relief fan 1",
-                                                            "specification_method": "SIMPLE",
-                                                            "design_electric_power": 35
-                                                        }
-                                                    ],
-                                                    "exhaust_fans": [
-                                                        {
-                                                            "id": "Exhaust fan 1",
-                                                            "specification_method": "SIMPLE",
-                                                            "design_electric_power": 35
+                                                            "design_electric_power": 60,
+                                                            "design_airflow": 471.94744319999984
                                                         }
                                                     ],
                                                     "return_fans": [
                                                         {
                                                             "id": "Return fan 1",
                                                             "specification_method": "SIMPLE",
-                                                            "design_electric_power": 35
+                                                            "design_electric_power": 60
+                                                        }
+                                                    ],
+                                                    "relief_fans": [
+                                                        {
+                                                            "id": "Relief fan 1",
+                                                            "specification_method": "SIMPLE",
+                                                            "design_electric_power": 60
+                                                        }
+                                                    ],
+                                                    "exhaust_fans": [
+                                                        {
+                                                            "id": "Exhaust fan 1",
+                                                            "specification_method": "SIMPLE",
+                                                            "design_electric_power": 60
                                                         }
                                                     ]
                                                 }
@@ -184,7 +184,14 @@
                                                     "supply_fans": [
                                                         {
                                                             "id": "Supply Fan 1",
-                                                            "design_airflow": 377.55795455999987,
+                                                            "specification_method": "SIMPLE",
+                                                            "design_electric_power": 80,
+                                                            "design_airflow": 377.55795455999987
+                                                        }
+                                                    ],
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "Return fan 1",
                                                             "specification_method": "SIMPLE",
                                                             "design_electric_power": 80
                                                         }
@@ -199,13 +206,6 @@
                                                     "exhaust_fans": [
                                                         {
                                                             "id": "Exhaust fan 1",
-                                                            "specification_method": "SIMPLE",
-                                                            "design_electric_power": 80
-                                                        }
-                                                    ],
-                                                    "return_fans": [
-                                                        {
-                                                            "id": "Return fan 1",
                                                             "specification_method": "SIMPLE",
                                                             "design_electric_power": 80
                                                         }
