@@ -17,11 +17,7 @@ for the peak W/sf calculation I've assumed:
 - **result**: an enum - either YES or NO
  
 **Function Call:**
-- **get_baseline_system_types**
 - **get_zone_peak_internal_load**
-- **get_list_hvac_systems_associated_with_zone**
-- **get_hvac_zone_list_w_area**
-- **find_zone**
 - **get_zone_eflh**
 - **zones_with_computer_room_dict_x**
 - **get_zones_on_same_floor**
