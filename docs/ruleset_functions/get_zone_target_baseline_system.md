@@ -29,7 +29,7 @@
 - pre-fill the list with an empty string:
 	- `for building_segment in RMR.building.building_segments:`
 		- `for zone in building_segment.zones:`
-			- `zones_and_systems[zone] = {}`
+			- add all zones that are conditioned: `if zone.conditioning_type != UNCONDITIONED: zones_and_systems[zone] = {}`
 - get the list of HVAC building area types and zones: `list_building_area_types_and_zones = get_HVAC_building_area_types_and_zones(B-RMR)`
 - get the predominant building area type: `predominant_building_area_type = get_predominant_HVAC_building_area_type(list_building_area_types_and_zones)`
 - get the total number of floors for the building: `num_floors = get_number_of_floors(B-RMI)`
