@@ -3,8 +3,7 @@
 **Schema Version:** 0.0.28
 
 **Description:** determines whether a given zone meets the G3_1_1d exception "For laboratory spaces in a building having a total laboratory 
-exhaust rate greater than 15,000 cfm, use a single system of type 5 or 7 serving only those spaces.  The lab exhaust fan shall be modeled 
-as constant horsepower reflecting constantvolume stack discharge with outdoor air bypass."
+exhaust rate greater than 15,000 cfm, use a single system of type 5 or 7 serving only those spaces."
 
 This function gets the system-wide exhaust airflow rate following the same logic as the function **get_zone_supply_return_exhaust_relief_terminal_fan_power_dict**
 
@@ -62,10 +61,9 @@ design_airflow
                        - Check if the terminal unit is associated with this zone: `if terminal in zone.terminals:`   
                            - Add to the primary flow for the zone for this hvac system:  `zone_primary_air_flow = zone_primary_air_flow + primary_air_flow_terminal`  
                    - Get the HVAC system's FanSystem: `fan_system = hvac.fan_system`
-                   - Apportion the exhaust airflow to the zone based on the terminal unit primary flow for the zone if hvac_system_total_exhaust_airflow > 0 and zone_primary_air_flow > 0: `if( zone_primary_air_flow > 0 && hvac_system_total_exhaust_airflow > 0 ): zone_total_exhaust += hvac_system_total_exhaust_airflow / zone_primary_air_flow`
+                   - Apportion the exhaust airflow to the zone based on the terminal unit primary flow for the zone if hvac_system_total_exhaust_airflow > 0 and zone_primary_air_flow > 0: `if( zone_primary_air_flow > 0 && hvac_system_total_exhaust_airflow > 0 ): zone_total_exhaust += hvac_system_total_exhaust_airflow * (zone_primary_air_flow/total_terminal_air_flow)`
                - Else, the HVAC system serves a single zone: `Else:`  
                    - Add the hvac system exhaust flow to zone_total_exhaust: `zone_total_exhaust += hvac_system_total_exhaust_airflow`  
-       - now check whether this zone meets the threshold of having greater than 15,000 cfm exhaust flow: `if zone_total_exhaust > 15000:`
        - add the zone_total_exhaust to building_total_lab_exhaust: `building_total_lab_exhaust = building_total_lab_exhaust + zone_total_exhaust`
      - now check whether the building wide total lab exhaust is greater than 15,000 cfm: `if building_total_lab_exhaust > 15000:`
        - set the result to YES: `result = YES`
@@ -76,6 +74,7 @@ design_airflow
 
 **Notes**
 1.  This function determines whether the zone is a lab zone, and whether the building has total lab exhaust greater than 15,000 cfm.  We can determine with precision when there is less than 15,000cfm of lab exhaust, but not necessarily all air that is exhausted from a lab zone is classified as lab exhaust.  Therefore, when we do rule evaluation, we can only give a 100% positive identification of a lab zone when the lab zones have a total of more than 15,000 cfm of zone exhaust.
+2.  when a lab zone is served by HVAC system with exhaust fans serving both lab and non-lab zones, we assume that exhaust flow rate is allocated to the lab zones in proportion to the primary air flow delivered to these zones comared to the total primary air flow delivered to all zones by this system.
 
 
 **[Back](../_toc.md)**
