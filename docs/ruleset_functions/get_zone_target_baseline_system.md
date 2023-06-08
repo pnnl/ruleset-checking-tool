@@ -69,10 +69,8 @@
 				
 - G3.1.1d "For laboratory spaces in a building having a total laboratory exhaust rate greater than 15,000 cfm, use a single system of type 5 or 7 serving only those spaces.  The lab exhaust fan shall be modeled as constant horsepower reflecting constant volume stack discharge with outdoor air bypass."
 - select assigned system type based on total building area and number of floors - for less than 5 floors and less than 150,000 sf we use system 5, anything else is system 7.
-- if the building is OTHER_NON_RESIDENTIAL and 4-5 floors, and < 25,000 sf: `if( predominant_building_area_type == OTHER_NON_RESIDENTIAL && num_floors > 3 && num_floors < 6 && area < 25000 ):`
+- if the building is less than 6 floors, and < 150,000 sf: `if( num_floors < 6 && area < 150000 ):`
 	- then the system type is SYS-5: `G3_1_1d_expected_system_type = SYS_5`
-- otherwise if the building is 5 floors or fewer and between 25,000 and 150,000 sf: `elif( num_floors < 6 && area >= 25000 && area <= 150000 ):`
-	- then the system type is also SYS-5: `G3_1_1d_expected_system_type = SYS_5`
 - all other cases: `else:`
 	- the system type is SYS-7: `G3_1_1d_expected_system_type = SYS_7`
 - loop through the zones_and_systems to see if any of the zones meets G3.1.1.d: `for zone in zones_and_systems:`
