@@ -1,0 +1,300 @@
+{
+    "rule-12-2-a": {
+        "Section": 12,
+        "Rule": 2,
+        "Test": "a",
+        "test_description": "Space count in Proposed RMR = User RMR",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "12-2",
+            "ruleset_reference": "-",
+            "rule_description": "Number of spaces modeled in User RMR and Proposed RMR are the same",
+            "applicable_rmr": "Proposed RMR",
+            "rule_assertion": "=",
+            "comparison_value": "User RMR",
+            "rule_dependency": "none",
+            "mandatory_rule": "Yes",
+            "schema_version": "0.0.23"
+        },
+        "rmr_transformations": {
+            "user": {
+                "id": "ashrae_229_name",
+                "ruleset_model_instances": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "building_name",
+                                "building_open_schedule": "Required Schedule 1",
+                                "building_segments": [
+                                    {
+                                        "id": "building_segment",
+                                        "is_all_new": true,
+                                        "zones": [
+                                            {
+                                                "id": "zone_name",
+                                                "thermostat_cooling_setpoint_schedule": "Required Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Required Schedule 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "space_name_1",
+                                                        "occupant_multiplier_schedule": "Required Schedule 1"
+                                                    },
+                                                    {
+                                                        "id": "space_name_2",
+                                                        "occupant_multiplier_schedule": "Required Schedule 1"
+                                                    },
+                                                    {
+                                                        "id": "space_name_3",
+                                                        "occupant_multiplier_schedule": "Required Schedule 1"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            "proposed": {
+                "id": "ashrae_229_name",
+                "ruleset_model_instances": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "building_name",
+                                "building_open_schedule": "Required Schedule 1",
+                                "building_segments": [
+                                    {
+                                        "id": "building_segment",
+                                        "is_all_new": true,
+                                        "zones": [
+                                            {
+                                                "id": "zone_name",
+                                                "thermostat_cooling_setpoint_schedule": "Required Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Required Schedule 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "space_name_1",
+                                                        "occupant_multiplier_schedule": "Required Schedule 1"
+                                                    },
+                                                    {
+                                                        "id": "space_name_2",
+                                                        "occupant_multiplier_schedule": "Required Schedule 1"
+                                                    },
+                                                    {
+                                                        "id": "space_name_3",
+                                                        "occupant_multiplier_schedule": "Required Schedule 1"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    },
+    "rule-12-2-b": {
+        "Section": 12,
+        "Rule": 2,
+        "Test": "b",
+        "test_description": "Space count in Proposed RMR > User RMR",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "12-2",
+            "ruleset_reference": "-",
+            "rule_description": "Number of spaces modeled in User RMR and Proposed RMR are the same",
+            "applicable_rmr": "Proposed RMR",
+            "rule_assertion": "=",
+            "comparison_value": "User RMR",
+            "rule_dependency": "none",
+            "mandatory_rule": "Yes",
+            "schema_version": "0.0.23"
+        },
+        "rmr_transformations": {
+            "user": {
+                "id": "ashrae_229_name",
+                "ruleset_model_instances": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "building_name",
+                                "building_open_schedule": "Required Schedule 1",
+                                "building_segments": [
+                                    {
+                                        "id": "building_segment",
+                                        "is_all_new": true,
+                                        "zones": [
+                                            {
+                                                "id": "zone_name",
+                                                "thermostat_cooling_setpoint_schedule": "Required Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Required Schedule 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "space_name_1",
+                                                        "occupant_multiplier_schedule": "Required Schedule 1"
+                                                    },
+                                                    {
+                                                        "id": "space_name_2",
+                                                        "occupant_multiplier_schedule": "Required Schedule 1"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            "proposed": {
+                "id": "ashrae_229_name",
+                "ruleset_model_instances": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "building_name",
+                                "building_open_schedule": "Required Schedule 1",
+                                "building_segments": [
+                                    {
+                                        "id": "building_segment",
+                                        "is_all_new": true,
+                                        "zones": [
+                                            {
+                                                "id": "zone_name",
+                                                "thermostat_cooling_setpoint_schedule": "Required Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Required Schedule 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "space_name_1",
+                                                        "occupant_multiplier_schedule": "Required Schedule 1"
+                                                    },
+                                                    {
+                                                        "id": "space_name_2",
+                                                        "occupant_multiplier_schedule": "Required Schedule 1"
+                                                    },
+                                                    {
+                                                        "id": "space_name_3",
+                                                        "occupant_multiplier_schedule": "Required Schedule 1"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    },
+    "rule-12-2-c": {
+        "Section": 12,
+        "Rule": 2,
+        "Test": "c",
+        "test_description": "Space count in Proposed RMR < User RMR",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "12-2",
+            "ruleset_reference": "-",
+            "rule_description": "Number of spaces modeled in User RMR and Proposed RMR are the same",
+            "applicable_rmr": "Proposed RMR",
+            "rule_assertion": "=",
+            "comparison_value": "User RMR",
+            "rule_dependency": "none",
+            "mandatory_rule": "Yes",
+            "schema_version": "0.0.23"
+        },
+        "rmr_transformations": {
+            "user": {
+                "id": "ashrae_229_name",
+                "ruleset_model_instances": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "building_name",
+                                "building_open_schedule": "Required Schedule 1",
+                                "building_segments": [
+                                    {
+                                        "id": "building_segment",
+                                        "is_all_new": true,
+                                        "zones": [
+                                            {
+                                                "id": "zone_name",
+                                                "thermostat_cooling_setpoint_schedule": "Required Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Required Schedule 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "space_name_1",
+                                                        "occupant_multiplier_schedule": "Required Schedule 1"
+                                                    },
+                                                    {
+                                                        "id": "space_name_2",
+                                                        "occupant_multiplier_schedule": "Required Schedule 1"
+                                                    },
+                                                    {
+                                                        "id": "space_name_3",
+                                                        "occupant_multiplier_schedule": "Required Schedule 1"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            "proposed": {
+                "id": "ashrae_229_name",
+                "ruleset_model_instances": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "building_name",
+                                "building_open_schedule": "Required Schedule 1",
+                                "building_segments": [
+                                    {
+                                        "id": "building_segment",
+                                        "is_all_new": true,
+                                        "zones": [
+                                            {
+                                                "id": "zone_name",
+                                                "thermostat_cooling_setpoint_schedule": "Required Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Required Schedule 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "space_name_1",
+                                                        "occupant_multiplier_schedule": "Required Schedule 1"
+                                                    },
+                                                    {
+                                                        "id": "space_name_2",
+                                                        "occupant_multiplier_schedule": "Required Schedule 1"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    }
+}
