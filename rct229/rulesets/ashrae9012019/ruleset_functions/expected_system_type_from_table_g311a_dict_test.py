@@ -140,7 +140,7 @@ def test__expect_system_type_8_other_non_residential_cz1a_6_floors__success():
         "OTHER_NON_RESIDENTIAL", "CZ1A", 6, 30_000 * ureg("ft2")
     ) == {
         "expected_system_type": HVAC_SYS.SYS_8,
-        "system_origin": "OTHER_NON_RESIDENTIAL CZ_0_to_3a >150,000 ft2 or > 5 floors"
+        "system_origin": "OTHER_NON_RESIDENTIAL CZ_0_to_3a >150,000 ft2 or > 5 floors",
     }
 
 
@@ -151,7 +151,7 @@ def test__expect_system_type_8_other_non_residential_cz1a_4_floors__success():
         "OTHER_NON_RESIDENTIAL", "CZ1A", 4, 230_000 * ureg("ft2")
     ) == {
         "expected_system_type": HVAC_SYS.SYS_8,
-        "system_origin": "OTHER_NON_RESIDENTIAL CZ_0_to_3a >150,000 ft2 or > 5 floors"
+        "system_origin": "OTHER_NON_RESIDENTIAL CZ_0_to_3a >150,000 ft2 or > 5 floors",
     }
 
 
@@ -162,7 +162,5 @@ def test__expect_system_type_7_other_non_residential_cz3b_6_floors__success():
         "OTHER_NON_RESIDENTIAL", "CZ3B", 6, 30_000 * ureg("ft2")
     ) == {
         "expected_system_type": HVAC_SYS.SYS_7,
-        "system_origin": "OTHER_NON_RESIDENTIAL CZ_3b_3c_or_4_to_8 >150,000 ft2 or > 5 floors"
+        "system_origin": "OTHER_NON_RESIDENTIAL CZ_3b_3c_or_4_to_8 >150,000 ft2 or > 5 floors",
     }
-
-
