@@ -16,21 +16,31 @@ TEST_RMI = {
             "building_segments": [
                 {
                     "id": "Building Segment 1",
-                    "lighting_building_area_type": "ATRIUM_LOW_MEDIUM",
                     "zones": [
                         {
                             "id": "Thermal Zone 1",
-                            "spaces": [{"id": "Space 1", "floor_area": 100}],
+                            "spaces": [
+                                {
+                                    "id": "Space 1",
+                                    "floor_area": 100,
+                                    "lighting_space_type": "ATRIUM_LOW_MEDIUM",
+                                }
+                            ],
                         },
                     ],
                 },
                 {
                     "id": "Building Segment 2",
-                    "lighting_building_area_type": "ATRIUM_LOW_MEDIUM",
                     "zones": [
                         {
                             "id": "Thermal Zone 2",
-                            "spaces": [{"id": "Space 2", "floor_area": 200}],
+                            "spaces": [
+                                {
+                                    "id": "Space 2",
+                                    "floor_area": 200,
+                                    "lighting_space_type": "ATRIUM_LOW_MEDIUM",
+                                }
+                            ],
                         },
                     ],
                 },
