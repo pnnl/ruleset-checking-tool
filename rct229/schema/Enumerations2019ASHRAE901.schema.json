@@ -1045,6 +1045,7 @@
                 "PUBLIC_ASSEMBLY",
                 "RETAIL",
                 "HOSPITAL",
+                "HEATED_ONLY_STORAGE",
                 "OTHER_NON_RESIDENTIAL"
             ],
             "descriptions": [
@@ -1052,6 +1053,7 @@
                 "Public assembly",
                 "Retail",
                 "Hospital",
+                "Heated-only storage",
                 "Other non-residential"
             ]
         },
