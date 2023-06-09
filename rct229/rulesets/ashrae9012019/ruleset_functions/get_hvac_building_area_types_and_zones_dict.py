@@ -1,36 +1,145 @@
-from rct229.utils.assertions import getattr_, assert_
-from rct229.utils.jsonpath_utils import find_all, find_one
+import logging
+
+import pydash
+from pydash import flow
+
+from rct229.rulesets.ashrae9012019.data.schema_enums import schema_enums
+from rct229.rulesets.ashrae9012019.data_fns.table_lighting_to_hvac_bat_map_fns import (
+    lighting_to_hvac_bat,
+)
+from rct229.utils.assertions import assert_
+from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.pint_utils import ZERO
+
+
+OTHER_UNDETERMINED = "OTHER_UNDETERMINED"
+HVAC_BUILDING_AREA_TYPE_OPTIONS = schema_enums[
+    "HeatingVentilatingAirConditioningBuildingAreaOptions2019ASHRAE901"
+]
 
 
 class ClassificationSource:
     BUILDING_SEGMENT_HVAC_BAT = "BUILDING_SEGMENT_HVAC_BAT"
-    BUILDING_SEGMENT_LIGHTING = "BUILDING-SEGMENT_LIGHTING"
+    BUILDING_SEGMENT_LIGHTING = "BUILDING_SEGMENT_LIGHTING"
     SPACE_LIGHTING = "SPACE_LIGHTING"
+
+
+logger = logging.getLogger(__name__)
+# create currier that merges two building area type values
+bat_val_merge_curry = pydash.curry(
+    lambda a, b: {
+        "zone_ids": [*a["zone_ids"], *b["zone_ids"]],
+        "floor_area": a["floor_area"] + b["floor_area"],
+    }
+)
+# create currier that retrieves a data form a dictionary with
+# default handling of non-existence errors.
+get_bat_val_func_curry = pydash.curry(
+    lambda bat_dict, key: bat_dict.get(key, {"zone_ids": [], "floor_area": ZERO.AREA})
+)
 
 
 def get_hvac_building_area_types_and_zones_dict(rmi):
     building_area_types_with_total_area_and_zones_dict = {}
+    # create a new currier to get building area type value from building_area_types_with_total_area_and_zones_dict
+    bat_dict_currier = get_bat_val_func_curry(
+        building_area_types_with_total_area_and_zones_dict
+    )
+
     for building_segment in find_all("$.buildings[*].building_segments[*]", rmi):
-        if building_segment.get("area_type_heating_ventilating_air_conditioning_system"):
-            building_segment_hvac_bat = building_segment["area_type_heating_ventilating_air_conditioning_system"]
+        if building_segment.get(
+            "area_type_heating_ventilating_air_conditioning_system"
+        ):
+            building_segment_hvac_bat = building_segment[
+                "area_type_heating_ventilating_air_conditioning_system"
+            ]
             classification_source = ClassificationSource.BUILDING_SEGMENT_HVAC_BAT
         elif building_segment.get("lighting_building_area_type"):
-            building_segment_hvac_bat = building_segment["lighting_building_area_type"]
+            building_segment_hvac_bat = lighting_to_hvac_bat(
+                building_segment["lighting_building_area_type"]
+            )
             classification_source = ClassificationSource.BUILDING_SEGMENT_LIGHTING
         else:
             building_segment_space_types_areas_dict = {}
             for space in find_all("$.zones[*].spaces[*]", building_segment):
                 space_hvac_bat = space.get("lighting_space_type")
                 if space_hvac_bat:
-                    building_segment_space_types_areas_dict[space_hvac_bat] = building_area_types_with_total_area_and_zones_dict.get(space_hvac_bat, ZERO.AREA) + space.get("floor_area", ZERO.AREA)
-            # Raise assertion if no space type matched from data.
-            assert_(building_segment_space_types_areas_dict, f"Building segment: {building_segment['id']} is missing one of the three data: area_type_heating_ventilating_air_conditioning_system, lighting_building_area_type and the lighting_space_type in the spaces.")
-            building_segment_hvac_bat = max(building_segment_space_types_areas_dict,
-                                            key=building_segment_space_types_areas_dict.get)
+                    building_segment_space_types_areas_dict[
+                        space_hvac_bat
+                    ] = building_segment_space_types_areas_dict.get(
+                        space_hvac_bat, ZERO.AREA
+                    ) + space.get(
+                        "floor_area", ZERO.AREA
+                    )
+
+            # Raise assertion if no space type matched from data (empty dictionary)
+            assert_(
+                building_segment_space_types_areas_dict,
+                f"Failed to determine hvac area type for building segment: {building_segment['id']}. Verify the model inputs and make sure it contains either of area_type_heating_ventilating_air_conditioning_system, lighting_building_area_type or space.lighting_space_type.",
+            )
+
+            building_segment_hvac_bat = lighting_to_hvac_bat(
+                max(
+                    building_segment_space_types_areas_dict,
+                    key=building_segment_space_types_areas_dict.get,
+                )
+            )
             classification_source = ClassificationSource.SPACE_LIGHTING
 
-        if building_segment_hvac_bat not in building_area_types_with_total_area_and_zones_dict:
-            building_area_types_with_total_area_and_zones_dict[building_segment_hvac_bat] = {"zone_id": [], "floor_area": ZERO.AREA, classification_source: classification_source}
+        # Log the data for debug purpose
+        logger.info(
+            f"building segment {building_segment['id']} is determined as {building_segment_hvac_bat}. The classification source is {classification_source}"
+        )
 
+        # add new hvac bat val to the existing/new hvac bat
+        building_area_types_with_total_area_and_zones_dict[
+            building_segment_hvac_bat
+        ] = flow(
+            bat_dict_currier,
+            bat_val_merge_curry(
+                {
+                    "zone_ids": find_all("$.zones[*].id", building_segment),
+                    "floor_area": sum(
+                        find_all("$.zones[*].spaces[*].floor_area", building_segment),
+                        ZERO.AREA,
+                    ),
+                }
+            ),
+        )(
+            building_segment_hvac_bat
+        )
 
+    if OTHER_UNDETERMINED in building_area_types_with_total_area_and_zones_dict:
+        predominate_hvac_bat = sorted(
+            building_area_types_with_total_area_and_zones_dict.items(),
+            key=lambda x: x[1]["floor_area"],
+            reverse=True,
+        )[0][0]
+        # pop the OTHER UNDETERMINED val
+        other_undetermined_val = building_area_types_with_total_area_and_zones_dict.pop(
+            OTHER_UNDETERMINED
+        )
+        # create currier for building area types value merge with other undetermined data
+        other_undetermined_bat_val_merge_currier = bat_val_merge_curry(
+            other_undetermined_val
+        )
+        # create a new flow to add/update building area types value
+        assign_bat_val_flow = flow(
+            bat_dict_currier, other_undetermined_bat_val_merge_currier
+        )
+
+        if (
+            predominate_hvac_bat == OTHER_UNDETERMINED
+            or predominate_hvac_bat == HVAC_BUILDING_AREA_TYPE_OPTIONS.RESIDENTIAL
+        ):
+            building_area_types_with_total_area_and_zones_dict[
+                HVAC_BUILDING_AREA_TYPE_OPTIONS.OTHER_NON_RESIDENTIAL
+            ] = assign_bat_val_flow(
+                HVAC_BUILDING_AREA_TYPE_OPTIONS.OTHER_NON_RESIDENTIAL
+            )
+        else:
+            building_area_types_with_total_area_and_zones_dict[
+                predominate_hvac_bat
+            ] = assign_bat_val_flow(predominate_hvac_bat)
+
+    return building_area_types_with_total_area_and_zones_dict
