@@ -5,6 +5,7 @@
 
 **Inputs:**
 - **building_area_type** - ("RESIDENTIAL", "PUBLIC_ASSEMBLY", "RETAIL", "HOSPITAL", "OTHER_NON_RESIDENTIAL", "HEATED-ONLY_STORAGE")
+- **climate_zone** - schema enum, refer to ClimateZoneOptions2019ASHRAE901
 - **number_of_floors** - this is the number of floors in the building (should be an integer greater than 0)
 - **building_area** - this is the total area of the building
 
@@ -18,11 +19,22 @@
 - create building_area_string, which will be appended to the details_of_system_selection string: `building_area_string = ""`
 - create number_of_floors_string, which will be appended to the details_of_system_selection string: `number_of_floors_string = ""`
 
-- get the climate zone category using the functions is_CZ_0_to_3a: `if is_CZ_0_to_3a():`
+- get the climate zone category using the functions is_CZ_0_to_3a: `if is_CZ_0_to_3a(climate_zone):`
 	- set climate_zone_category to CZ_0_to_3a: `climate_zone_category = " CZ_0_to_3a"`
 
 - else (the climate zone is 3b, 3c or 4 to 8): `else:`
 	- set climate_zone_category to CZ_3b_3c_or_4_to_8: `climate_zone_category = " CZ_3b_3c_or_4_to_8"`
+
+
+- check if the building area type is Retail: `if building_area_type == "RETAIL":`
+	- check if there are fewer than 3 floors in the building: `if number_of_floors < 3:`
+		- set number_of_floors_string to " 1 or 2 floors": `number_of_floors_string = " 1 or 2 floors"`
+		- check if the climate zone is CZ_0_to_3a: `if is_CZ_0_to_3a():`
+			- the expected system is System 4: `expected_system_type = "SYS-4"`
+		- otherwise, it's CZ_3b_3c_or_4_to_8: `else:`
+			- the expected system is System 3: `expected_system_type = "SYS-3"`
+	- otherwise reclasify the building area type to OTHER_NON_RESIDENTIAL: `else: building_area_type = "OTHER_NON_RESIDENTIAL"`
+
 
 - check if the building area type is residential: `if building_area_type == "RESIDENTIAL":`
 	- check if the climate zone is CZ_0_to_3a: `if is_CZ_0_to_3a():`
@@ -53,16 +65,6 @@
 		- the expected system is System 9: `expected_system_type = "SYS-9"`
 
 
-- check if the building area type is Retail: `if building_area_type == "RETAIL":`
-	- check if there are fewer than 3 floors in the building: `if number_of_floors < 3:`
-		- set number_of_floors_string to " 1 or 2 floors": `number_of_floors_string = " 1 or 2 floors"`
-		- check if the climate zone is CZ_0_to_3a: `if is_CZ_0_to_3a():`
-			- the expected system is System 4: `expected_system_type = "SYS-4"`
-		- otherwise, it's CZ_3b_3c_or_4_to_8: `else:`
-			- the expected system is System 3: `expected_system_type = "SYS-3"`
-	- otherwise reclasify the building area type to OTHER_NON_RESIDENTIAL: `else: building_area_type = "OTHER_NON_RESIDENTIAL"`
-
-
 - check if the building area type is Hospital: `if building_area_type == "HOSPITAL":`
 	- Hospital BAT doesn't use the climate zone to determine system type, so set climate_zone_category to "": `climate_zone_category = ""`
 	- check if the space area is more than 150,000 ft2 OR the building is more than 5 floors: `if((building_area > 150000) || (number_of_floors > 5)):`
@@ -88,7 +90,7 @@
 				- the expected system is System 6: `expected_system_type = "SYS-6"`
 			- otherwise, it's CZ_3b_3c_or_4_to_8: `else:`
 				- the expected system is System 5: `expected_system_type = "SYS-5"
-		- else if the space area is between 25,000 and 150,000 ft2 AND in a building that is fewer than 6 floors: `if((building_area >= 25000) && (building_area < 150000) &&& (number_of_floors < 6)):`
+		- else if the space area is between 25,000 and 150,000 ft2 AND in a building that is fewer than 6 floors: `if((building_area >= 25000) && (building_area < 150000) && (number_of_floors <= 5)):`
 			- set building_area_string to " >=25,000 ft2 AND <=150,000 ft2": `building_area_string = " >=25,000 ft2 AND <=150,000 ft2"`
 			- set number_of_floors_string to " < 6 floors": `number_of_floors_string = " < 6 floors"`
 			- check if the climate zone is CZ_0_to_3a: `if is_CZ_0_to_3a():`
@@ -97,7 +99,6 @@
 				- the expected system is System 5: `expected_system_type = "SYS-5"`
 		- else if the building_area is greater than 150,000 ft2 OR the building has more than 5 floors: `if((building_area > 150000) || (number_of_floors > 5)):`
 			- set building_area_string to " >150,000 ft2 or > 5 floors": `building_area_string to " >150,000 ft2 or > 5 floors"`
-			- set number_of_floors_string to "" - this is because the building_area_string contains floor information, and we because we re-assigned "RETAIL" to "OTHER_NON_RESIDENTIAL" above, we need to overwriate any data currently in the number_of_floors_string: `number_of_floors_string = ""`
 			- check if the climate zone is CZ_0_to_3a: `if is_CZ_0_to_3a():`
 				- the expected system is System 8: `expected_system_type = "SYS-8"`
 			- otherwise, it's CZ_3b_3c_or_4_to_8: `else:`
