@@ -13,7 +13,7 @@ from rct229.rule_engine.rulesets import RuleSet
 __all__ = [RuleSet.ASHRAE9012019_RULESET]
 
 # Added to remove the sub-module that are not rules.
-MODULE_EXCEPTION_LIST = ["math"]
+MODULE_EXCEPTION_LIST = ["math", "itertools"]
 
 
 def __getrules__(ruleset_doc: str):
