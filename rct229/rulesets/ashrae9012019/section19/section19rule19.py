@@ -173,9 +173,7 @@ class Section19Rule19(RuleDefinitionListIndexedBase):
             zones_served_by_hvac_has_non_mech_cooling_bool_p = hvac_map[
                 "zones_served_by_hvac_has_non_mech_cooling_bool_p"
             ]
-            zone_hvac_in_has_non_mech_cooling_p = data[
-                "zone_hvac_in_has_non_mech_cooling_p"
-            ]
+            zone_hvac_has_non_mech_cooling_p = data["zone_hvac_has_non_mech_cooling_p"]
 
             fan_sys_b = hvac_b["fan_system"]
 
@@ -214,15 +212,15 @@ class Section19Rule19(RuleDefinitionListIndexedBase):
 
             return {
                 "zones_served_by_hvac_has_non_mech_cooling_bool_p": zones_served_by_hvac_has_non_mech_cooling_bool_p,
-                "zone_hvac_in_has_non_mech_cooling_p": zone_hvac_in_has_non_mech_cooling_p,
+                "zone_hvac_has_non_mech_cooling_p": zone_hvac_has_non_mech_cooling_p,
                 "more_than_one_supply_fan_b": more_than_one_supply_fan_b,
                 "fan_power_per_flow_b": fan_power_per_flow_b,
             }
 
         def manual_check_required(self, context, calc_vals=None, data=None):
             more_than_one_supply_fan_b = calc_vals["more_than_one_supply_fan_b"]
-            zone_hvac_in_has_non_mech_cooling_p = calc_vals[
-                "zone_hvac_in_has_non_mech_cooling_p"
+            zone_hvac_has_non_mech_cooling_p = calc_vals[
+                "zone_hvac_has_non_mech_cooling_p"
             ]
             zones_served_by_hvac_has_non_mech_cooling_bool_p = calc_vals[
                 "zones_served_by_hvac_has_non_mech_cooling_bool_p"
@@ -230,16 +228,16 @@ class Section19Rule19(RuleDefinitionListIndexedBase):
 
             return (
                 more_than_one_supply_fan_b
-                or zone_hvac_in_has_non_mech_cooling_p
+                or zone_hvac_has_non_mech_cooling_p
                 or zones_served_by_hvac_has_non_mech_cooling_bool_p
             )
 
         def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
             hvac_b = context.baseline
             hvac_id_b = hvac_b["id"]
-            more_than_one_supply_fan = data["more_than_one_supply_fan"]
+            more_than_one_supply_fan_b = data["more_than_one_supply_fan_b"]
 
-            if more_than_one_supply_fan:
+            if more_than_one_supply_fan_b:
                 UNDERMINED_MSG = f"{hvac_id_b} has more than one supply fan associated with the HVAC system in the baseline and therefore this check could not be conducted for this HVAC sytem. Conduct manual check for compliance with G3.1.2.9."
             else:
                 UNDERMINED_MSG = f"{hvac_id_b} has zone(s) with non-mechanical cooling in the proposed design, conduct a manual check that the baseline building design includes a fan power allowance of <insert IP or SI version as applicable Pfan = CFMnmc × 0.054, where, CFMnmc = the baseline non-mechanical cooling fan airflow, cfm for the non-mechanical cooling fan in additional to the 0.3 W/CFM allowance for the HVAC system>."
@@ -247,29 +245,32 @@ class Section19Rule19(RuleDefinitionListIndexedBase):
             return UNDERMINED_MSG
 
         def rule_check(self, context, calc_vals=None, data=None):
-            more_than_one_supply_fan_b = calc_vals["more_than_one_supply_fan_b"]
             zones_served_by_hvac_has_non_mech_cooling_bool_p = calc_vals[
                 "zones_served_by_hvac_has_non_mech_cooling_bool_p"
             ]
-            zone_hvac_in_has_non_mech_cooling_p = calc_vals[
-                "zone_hvac_in_has_non_mech_cooling_p"
+            zone_hvac_has_non_mech_cooling_p = calc_vals[
+                "zone_hvac_has_non_mech_cooling_p"
             ]
             fan_power_per_flow_b = calc_vals["fan_power_per_flow_b"]
 
             return (
-                more_than_one_supply_fan_b
-                and not zone_hvac_in_has_non_mech_cooling_p
+                not zone_hvac_has_non_mech_cooling_p
                 and not zones_served_by_hvac_has_non_mech_cooling_bool_p
                 and std_equal(REQ_FAN_POWER_FLOW_RATIO, fan_power_per_flow_b)
-            ) or (
-                not more_than_one_supply_fan_b,
-                fan_power_per_flow_b <= REQ_FAN_POWER_FLOW_RATIO,
-            )
+            ) or (fan_power_per_flow_b < REQ_FAN_POWER_FLOW_RATIO,)
 
         def get_fail_msg(self, context, calc_vals=None, data=None):
             hvac_b = context.baseline
             hvac_id_b = hvac_b["id"]
+            more_than_one_supply_fan_b = calc_vals["more_than_one_supply_fan_b"]
             fan_power_per_flow_b = calc_vals["fan_power_per_flow_b"]
             fan_power_per_flow_b = fan_power_per_flow_b.to(ureg("W/cfm"))
 
-            return f"The fan power airflow (W/cfm) for {hvac_id_b} is modeled as {fan_power_per_flow_b} W/cfm which is less than the expected W/cfm."
+            fail_msg = ""
+            if (
+                not more_than_one_supply_fan_b
+                and fan_power_per_flow_b < REQ_FAN_POWER_FLOW_RATIO
+            ):
+                fail_msg = f"ule evaluation fails with a conservative outcome. The fan power airflow (W/cfm) for {hvac_id_b} is modeled as {fan_power_per_flow_b} W/cfm which is less than the expected W/cfm."
+
+            return fail_msg
