@@ -19,7 +19,6 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.is_economizer_modeled_in_pr
 )
 from rct229.utils.jsonpath_utils import find_all, find_one
 
-
 ClimateZoneOption = schema_enums["ClimateZoneOptions2019ASHRAE901"]
 AIR_ECONOMIZER = schema_enums["AirEconomizerOptions"]
 LIGHTING_BUILDING_AREA = schema_enums[
