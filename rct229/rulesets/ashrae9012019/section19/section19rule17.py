@@ -126,7 +126,7 @@ class Section19Rule17(RuleDefinitionListIndexedBase):
             fan_power_airflow = (
                 total_fan_power / (supply_airflow_b.to(ureg("cfm")))
                 if supply_airflow_b != ZERO.FLOW
-                else 0 * ureg("W/cfm")
+                else ZERO.POWER_PER_FLOW
             )
 
             return {"fan_power_airflow": fan_power_airflow}

@@ -66,10 +66,7 @@
                                                     "supply_fans": [
                                                         {
                                                             "id": "Supply Fan 1",
-<<<<<<< HEAD
                                                             "design_airflow": 566.33694,
-=======
->>>>>>> a0705645772b5e327d3b539694c4f3b5b11a8d2c
                                                             "specification_method": "SIMPLE",
                                                             "design_electric_power": 60,
                                                             "design_airflow": 471.94744319999984
