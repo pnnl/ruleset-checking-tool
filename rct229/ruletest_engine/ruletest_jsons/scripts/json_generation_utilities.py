@@ -338,6 +338,11 @@ def create_schedule_list(schedule_str):
         schedule_list = [float(schedule_parameter)] * 8760
         return schedule_list
 
+    elif schedule_name == "CONSTANT_DAY":
+        # Return the schedule parameter 24 times
+        schedule_list = [float(schedule_parameter)] * 24
+        return schedule_list
+
     # If utilizing a predefined schedule from the schedule library, load it here
     elif schedule_name == "LIBRARY":
         # Load schedule JSON
