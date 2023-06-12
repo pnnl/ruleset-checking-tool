@@ -1,0 +1,3109 @@
+{
+    "rule-19-21-a": {
+        "Section": 19,
+        "Rule": 21,
+        "Test": "a",
+        "test_description": "Project is in climate zone 5A and contains baseline system 7 with 5000 cfm of supply air and 75% OA. Energy recovery is correctly modeled for the system.",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "19-21",
+            "ruleset_reference": "G3.1.2.10",
+            "rule_description": "Baseline systems with >= 5,000 CFM supply air and >= 70 %OA shall have energy recovery with 50% enthalpy recovery ratio.  Exceptions include:\n1. Systems serving spaces that are not cooled and that are heated to less than 60\u00b0F. \n2. Systems exhausting toxic, flammable, or corrosive fumes or paint or dust. This exception shall only be used if exhaust air energy recovery is not used in the proposed design. \n3. Commercial kitchen hoods (grease) classified as Type 1 by NFPA 96. This exception shall only be used if exhaust air energy recovery is not used in the proposed design. \n4. Heating systems in Climate Zones 0 through 3. \n5. Cooling systems in Climate Zones 3C, 4C, 5B, 5C, 6B, 7, and 8. \n6. Where the largest exhaust source is less than 75% of the design outdoor airflow. This excep-tion shall only be used if exhaust air energy recovery is not used in the proposed design. \n7. Systems requiring dehumidification that employ energy recovery in series with the cooling coil. This exception shall only be used if exhaust air energy recovery and series-style energy recovery coils are not used in the proposed design. ",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "primary_rule": "Yes",
+            "schema_version": "0.0.23"
+        },
+        "rmr_transformations": {
+            "proposed": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_instances": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_open_schedule": "Required Building Schedule 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                                "terminals": [
+                                                    {
+                                                        "id": "VAV Air Terminal 1",
+                                                        "is_supply_ducted": true,
+                                                        "type": "VARIABLE_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
+                                                        "heating_source": "HOT_WATER",
+                                                        "heating_from_loop": "Boiler Loop 1"
+                                                    }
+                                                ],
+                                                "design_thermostat_heating_setpoint": 70,
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "lighting_space_type": "OFFICE_OPEN_PLAN"
+                                                    },
+                                                    {
+                                                        "id": "Space 2",
+                                                        "lighting_space_type": "OFFICE_OPEN_PLAN"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "id": "Thermal Zone 2",
+                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                                "terminals": [
+                                                    {
+                                                        "id": "VAV Air Terminal 2",
+                                                        "is_supply_ducted": true,
+                                                        "type": "VARIABLE_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
+                                                        "heating_source": "HOT_WATER",
+                                                        "heating_from_loop": "Boiler Loop 1"
+                                                    }
+                                                ],
+                                                "design_thermostat_heating_setpoint": 70
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "System 7",
+                                                "cooling_system": {
+                                                    "id": "CHW Coil 1",
+                                                    "cooling_system_type": "FLUID_LOOP",
+                                                    "chilled_water_loop": "Secondary CHW Loop 1"
+                                                },
+                                                "preheat_system": {
+                                                    "id": "Preheat Coil 1",
+                                                    "heating_system_type": "FLUID_LOOP",
+                                                    "hot_water_loop": "Boiler Loop 1"
+                                                },
+                                                "fan_system": {
+                                                    "id": "VAV Fan System 1",
+                                                    "fan_control": "VARIABLE_SPEED_DRIVE",
+                                                    "supply_fans": [
+                                                        {
+                                                            "id": "Supply Fan 1",
+                                                            "design_airflow": 5000
+                                                        }
+                                                    ],
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "Return Fan 1"
+                                                        }
+                                                    ],
+                                                    "minimum_outdoor_airflow": 3750,
+                                                    "maximum_outdoor_airflow": 3750,
+                                                    "air_energy_recovery": {
+                                                        "id": "Air Energy Recovery 1",
+                                                        "energy_recovery_operation": "WHEN_MINIMUM_OUTSIDE_AIR"
+                                                    }
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "boilers": [
+                            {
+                                "id": "Boiler 1",
+                                "loop": "Boiler Loop 1",
+                                "energy_source_type": "NATURAL_GAS"
+                            }
+                        ],
+                        "chillers": [
+                            {
+                                "id": "Chiller 1",
+                                "cooling_loop": "Chiller Loop 1"
+                            }
+                        ],
+                        "pumps": [
+                            {
+                                "id": "Boiler Pump 1",
+                                "loop_or_piping": "Boiler Loop 1",
+                                "speed_control": "FIXED_SPEED"
+                            },
+                            {
+                                "id": "Chiller Pump 1",
+                                "loop_or_piping": "Chiller Loop 1",
+                                "speed_control": "FIXED_SPEED"
+                            },
+                            {
+                                "id": "Secondary CHW Pump",
+                                "loop_or_piping": "Secondary CHW Loop 1",
+                                "speed_control": "VARIABLE_SPEED"
+                            }
+                        ],
+                        "fluid_loops": [
+                            {
+                                "id": "Boiler Loop 1",
+                                "type": "HEATING"
+                            },
+                            {
+                                "id": "Chiller Loop 1",
+                                "type": "COOLING",
+                                "child_loops": [
+                                    {
+                                        "id": "Secondary CHW Loop 1"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                "weather": {
+                    "climate_zone": "CZ5A"
+                }
+            },
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_instances": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_open_schedule": "Required Building Schedule 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                                "terminals": [
+                                                    {
+                                                        "id": "VAV Air Terminal 1",
+                                                        "is_supply_ducted": true,
+                                                        "type": "VARIABLE_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
+                                                        "heating_source": "HOT_WATER",
+                                                        "heating_from_loop": "Boiler Loop 1"
+                                                    }
+                                                ],
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "lighting_space_type": "OFFICE_OPEN_PLAN"
+                                                    },
+                                                    {
+                                                        "id": "Space 2",
+                                                        "lighting_space_type": "OFFICE_OPEN_PLAN"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "id": "Thermal Zone 2",
+                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                                "terminals": [
+                                                    {
+                                                        "id": "VAV Air Terminal 2",
+                                                        "is_supply_ducted": true,
+                                                        "type": "VARIABLE_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
+                                                        "heating_source": "HOT_WATER",
+                                                        "heating_from_loop": "Boiler Loop 1"
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "System 7",
+                                                "cooling_system": {
+                                                    "id": "CHW Coil 1",
+                                                    "cooling_system_type": "FLUID_LOOP",
+                                                    "chilled_water_loop": "Secondary CHW Loop 1"
+                                                },
+                                                "preheat_system": {
+                                                    "id": "Preheat Coil 1",
+                                                    "heating_system_type": "FLUID_LOOP",
+                                                    "hot_water_loop": "Boiler Loop 1"
+                                                },
+                                                "fan_system": {
+                                                    "id": "VAV Fan System 1",
+                                                    "fan_control": "VARIABLE_SPEED_DRIVE",
+                                                    "supply_fans": [
+                                                        {
+                                                            "id": "Supply Fan 1",
+                                                            "design_airflow": 2359.737215999999
+                                                        }
+                                                    ],
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "Return Fan 1"
+                                                        }
+                                                    ],
+                                                    "minimum_outdoor_airflow": 1769.8029119999994,
+                                                    "maximum_outdoor_airflow": 3750,
+                                                    "air_energy_recovery": {
+                                                        "id": "Air Energy Recovery 1",
+                                                        "energy_recovery_operation": "WHEN_MINIMUM_OUTSIDE_AIR"
+                                                    }
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "boilers": [
+                            {
+                                "id": "Boiler 1",
+                                "loop": "Boiler Loop 1",
+                                "energy_source_type": "NATURAL_GAS"
+                            }
+                        ],
+                        "chillers": [
+                            {
+                                "id": "Chiller 1",
+                                "cooling_loop": "Chiller Loop 1"
+                            }
+                        ],
+                        "pumps": [
+                            {
+                                "id": "Boiler Pump 1",
+                                "loop_or_piping": "Boiler Loop 1",
+                                "speed_control": "FIXED_SPEED"
+                            },
+                            {
+                                "id": "Chiller Pump 1",
+                                "loop_or_piping": "Chiller Loop 1",
+                                "speed_control": "FIXED_SPEED"
+                            },
+                            {
+                                "id": "Secondary CHW Pump",
+                                "loop_or_piping": "Secondary CHW Loop 1",
+                                "speed_control": "VARIABLE_SPEED"
+                            }
+                        ],
+                        "fluid_loops": [
+                            {
+                                "id": "Boiler Loop 1",
+                                "type": "HEATING"
+                            },
+                            {
+                                "id": "Chiller Loop 1",
+                                "type": "COOLING",
+                                "child_loops": [
+                                    {
+                                        "id": "Secondary CHW Loop 1"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                "weather": {
+                    "climate_zone": "CZ5A"
+                }
+            }
+        }
+    },
+    "rule-19-21-b": {
+        "Section": 19,
+        "Rule": 21,
+        "Test": "b",
+        "test_description": "Project is in climate zone 6A and contains baseline system 7 with 5000 cfm of supply air and 75% OA. System serves spaces that are not cooled and that are heated to less than 60F. Energy recovery is not modeled for the system.",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "19-21",
+            "ruleset_reference": "G3.1.2.10",
+            "rule_description": "Baseline systems with >= 5,000 CFM supply air and >= 70 %OA shall have energy recovery with 50% enthalpy recovery ratio.  Exceptions include:\n1. Systems serving spaces that are not cooled and that are heated to less than 60\u00b0F. \n2. Systems exhausting toxic, flammable, or corrosive fumes or paint or dust. This exception shall only be used if exhaust air energy recovery is not used in the proposed design. \n3. Commercial kitchen hoods (grease) classified as Type 1 by NFPA 96. This exception shall only be used if exhaust air energy recovery is not used in the proposed design. \n4. Heating systems in Climate Zones 0 through 3. \n5. Cooling systems in Climate Zones 3C, 4C, 5B, 5C, 6B, 7, and 8. \n6. Where the largest exhaust source is less than 75% of the design outdoor airflow. This excep-tion shall only be used if exhaust air energy recovery is not used in the proposed design. \n7. Systems requiring dehumidification that employ energy recovery in series with the cooling coil. This exception shall only be used if exhaust air energy recovery and series-style energy recovery coils are not used in the proposed design. ",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "primary_rule": "Yes",
+            "schema_version": "0.0.23"
+        },
+        "rmr_transformations": {
+            "proposed": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_instances": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_open_schedule": "Required Building Schedule 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                                "terminals": [
+                                                    {
+                                                        "id": "VAV Air Terminal 1",
+                                                        "is_supply_ducted": true,
+                                                        "type": "VARIABLE_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
+                                                        "heating_source": "HOT_WATER",
+                                                        "heating_from_loop": "Boiler Loop 1"
+                                                    }
+                                                ],
+                                                "design_thermostat_heating_setpoint": 55,
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "lighting_space_type": "OFFICE_OPEN_PLAN"
+                                                    },
+                                                    {
+                                                        "id": "Space 2",
+                                                        "lighting_space_type": "OFFICE_OPEN_PLAN"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "id": "Thermal Zone 2",
+                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                                "terminals": [
+                                                    {
+                                                        "id": "VAV Air Terminal 2",
+                                                        "is_supply_ducted": true,
+                                                        "type": "VARIABLE_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
+                                                        "heating_source": "HOT_WATER",
+                                                        "heating_from_loop": "Boiler Loop 1"
+                                                    }
+                                                ],
+                                                "design_thermostat_heating_setpoint": 55
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "System 7",
+                                                "cooling_system": {
+                                                    "id": "CHW Coil 1",
+                                                    "cooling_system_type": "FLUID_LOOP",
+                                                    "chilled_water_loop": "Secondary CHW Loop 1"
+                                                },
+                                                "preheat_system": {
+                                                    "id": "Preheat Coil 1",
+                                                    "heating_system_type": "FLUID_LOOP",
+                                                    "hot_water_loop": "Boiler Loop 1"
+                                                },
+                                                "fan_system": {
+                                                    "id": "VAV Fan System 1",
+                                                    "fan_control": "VARIABLE_SPEED_DRIVE",
+                                                    "supply_fans": [
+                                                        {
+                                                            "id": "Supply Fan 1",
+                                                            "design_airflow": 5000
+                                                        }
+                                                    ],
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "Return Fan 1"
+                                                        }
+                                                    ],
+                                                    "minimum_outdoor_airflow": 3750,
+                                                    "maximum_outdoor_airflow": 3750
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "boilers": [
+                            {
+                                "id": "Boiler 1",
+                                "loop": "Boiler Loop 1",
+                                "energy_source_type": "NATURAL_GAS"
+                            }
+                        ],
+                        "chillers": [
+                            {
+                                "id": "Chiller 1",
+                                "cooling_loop": "Chiller Loop 1"
+                            }
+                        ],
+                        "pumps": [
+                            {
+                                "id": "Boiler Pump 1",
+                                "loop_or_piping": "Boiler Loop 1",
+                                "speed_control": "FIXED_SPEED"
+                            },
+                            {
+                                "id": "Chiller Pump 1",
+                                "loop_or_piping": "Chiller Loop 1",
+                                "speed_control": "FIXED_SPEED"
+                            },
+                            {
+                                "id": "Secondary CHW Pump",
+                                "loop_or_piping": "Secondary CHW Loop 1",
+                                "speed_control": "VARIABLE_SPEED"
+                            }
+                        ],
+                        "fluid_loops": [
+                            {
+                                "id": "Boiler Loop 1",
+                                "type": "HEATING"
+                            },
+                            {
+                                "id": "Chiller Loop 1",
+                                "type": "COOLING",
+                                "child_loops": [
+                                    {
+                                        "id": "Secondary CHW Loop 1"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                "weather": {
+                    "climate_zone": "CZ6A"
+                }
+            },
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_instances": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_open_schedule": "Required Building Schedule 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                                "terminals": [
+                                                    {
+                                                        "id": "VAV Air Terminal 1",
+                                                        "is_supply_ducted": true,
+                                                        "type": "VARIABLE_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
+                                                        "heating_source": "HOT_WATER",
+                                                        "heating_from_loop": "Boiler Loop 1"
+                                                    }
+                                                ],
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "lighting_space_type": "OFFICE_OPEN_PLAN"
+                                                    },
+                                                    {
+                                                        "id": "Space 2",
+                                                        "lighting_space_type": "OFFICE_OPEN_PLAN"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "id": "Thermal Zone 2",
+                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                                "terminals": [
+                                                    {
+                                                        "id": "VAV Air Terminal 2",
+                                                        "is_supply_ducted": true,
+                                                        "type": "VARIABLE_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
+                                                        "heating_source": "HOT_WATER",
+                                                        "heating_from_loop": "Boiler Loop 1"
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "System 7",
+                                                "cooling_system": {
+                                                    "id": "CHW Coil 1",
+                                                    "cooling_system_type": "FLUID_LOOP",
+                                                    "chilled_water_loop": "Secondary CHW Loop 1"
+                                                },
+                                                "preheat_system": {
+                                                    "id": "Preheat Coil 1",
+                                                    "heating_system_type": "FLUID_LOOP",
+                                                    "hot_water_loop": "Boiler Loop 1"
+                                                },
+                                                "fan_system": {
+                                                    "id": "VAV Fan System 1",
+                                                    "fan_control": "VARIABLE_SPEED_DRIVE",
+                                                    "supply_fans": [
+                                                        {
+                                                            "id": "Supply Fan 1",
+                                                            "design_airflow": 2359.737215999999
+                                                        }
+                                                    ],
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "Return Fan 1"
+                                                        }
+                                                    ],
+                                                    "minimum_outdoor_airflow": 1769.8029119999994,
+                                                    "maximum_outdoor_airflow": 3750
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "boilers": [
+                            {
+                                "id": "Boiler 1",
+                                "loop": "Boiler Loop 1",
+                                "energy_source_type": "NATURAL_GAS"
+                            }
+                        ],
+                        "chillers": [
+                            {
+                                "id": "Chiller 1",
+                                "cooling_loop": "Chiller Loop 1"
+                            }
+                        ],
+                        "pumps": [
+                            {
+                                "id": "Boiler Pump 1",
+                                "loop_or_piping": "Boiler Loop 1",
+                                "speed_control": "FIXED_SPEED"
+                            },
+                            {
+                                "id": "Chiller Pump 1",
+                                "loop_or_piping": "Chiller Loop 1",
+                                "speed_control": "FIXED_SPEED"
+                            },
+                            {
+                                "id": "Secondary CHW Pump",
+                                "loop_or_piping": "Secondary CHW Loop 1",
+                                "speed_control": "VARIABLE_SPEED"
+                            }
+                        ],
+                        "fluid_loops": [
+                            {
+                                "id": "Boiler Loop 1",
+                                "type": "HEATING"
+                            },
+                            {
+                                "id": "Chiller Loop 1",
+                                "type": "COOLING",
+                                "child_loops": [
+                                    {
+                                        "id": "Secondary CHW Loop 1"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                "weather": {
+                    "climate_zone": "CZ6A"
+                }
+            }
+        }
+    },
+    "rule-19-21-c": {
+        "Section": 19,
+        "Rule": 21,
+        "Test": "c",
+        "test_description": "Project is in climate zone 5A and contains baseline system 5 with 5000 cfm of supply air and 75% OA. System serves zones likely to be exhausting toxic, flammable, or corrosive fumes or paint or dust that do not have energy recovery for the proposed system.",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "19-21",
+            "ruleset_reference": "G3.1.2.10",
+            "rule_description": "Baseline systems with >= 5,000 CFM supply air and >= 70 %OA shall have energy recovery with 50% enthalpy recovery ratio.  Exceptions include:\n1. Systems serving spaces that are not cooled and that are heated to less than 60\u00b0F. \n2. Systems exhausting toxic, flammable, or corrosive fumes or paint or dust. This exception shall only be used if exhaust air energy recovery is not used in the proposed design. \n3. Commercial kitchen hoods (grease) classified as Type 1 by NFPA 96. This exception shall only be used if exhaust air energy recovery is not used in the proposed design. \n4. Heating systems in Climate Zones 0 through 3. \n5. Cooling systems in Climate Zones 3C, 4C, 5B, 5C, 6B, 7, and 8. \n6. Where the largest exhaust source is less than 75% of the design outdoor airflow. This excep-tion shall only be used if exhaust air energy recovery is not used in the proposed design. \n7. Systems requiring dehumidification that employ energy recovery in series with the cooling coil. This exception shall only be used if exhaust air energy recovery and series-style energy recovery coils are not used in the proposed design. ",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "primary_rule": "Yes",
+            "schema_version": "0.0.23"
+        },
+        "rmr_transformations": {
+            "proposed": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_instances": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_open_schedule": "Required Building Schedule 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                                "terminals": [
+                                                    {
+                                                        "id": "VAV Air Terminal 1",
+                                                        "is_supply_ducted": true,
+                                                        "type": "VARIABLE_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 5",
+                                                        "heating_source": "HOT_WATER",
+                                                        "heating_from_loop": "Boiler Loop 1"
+                                                    }
+                                                ],
+                                                "design_thermostat_heating_setpoint": 70,
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "ventilation_space_type": "MISCELLANEOUS_SPACES_MANUFACTURING_WHERE_HAZARDOUS_MATERIALS_ARE_USED_EXCLUDES_HEAVY_INDUSTRIAL_AND_CHEMICAL_PROCESSES"
+                                                    },
+                                                    {
+                                                        "id": "Space 2",
+                                                        "lighting_space_type": "OFFICE_OPEN_PLAN"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "id": "Thermal Zone 2",
+                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                                "terminals": [
+                                                    {
+                                                        "id": "VAV Air Terminal 2",
+                                                        "is_supply_ducted": true,
+                                                        "type": "VARIABLE_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 5",
+                                                        "heating_source": "HOT_WATER",
+                                                        "heating_from_loop": "Boiler Loop 1"
+                                                    }
+                                                ],
+                                                "design_thermostat_heating_setpoint": 70
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "System 5",
+                                                "cooling_system": {
+                                                    "id": "DX Coil 1",
+                                                    "cooling_system_type": "DIRECT_EXPANSION"
+                                                },
+                                                "preheat_system": {
+                                                    "id": "Preheat Coil 1",
+                                                    "heating_system_type": "FLUID_LOOP",
+                                                    "hot_water_loop": "Boiler Loop 1"
+                                                },
+                                                "fan_system": {
+                                                    "id": "VAV Fan System 1",
+                                                    "fan_control": "VARIABLE_SPEED_DRIVE",
+                                                    "supply_fans": [
+                                                        {
+                                                            "id": "Supply Fan 1",
+                                                            "design_airflow": 5000
+                                                        }
+                                                    ],
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "Return Fan 1"
+                                                        }
+                                                    ],
+                                                    "minimum_outdoor_airflow": 3750,
+                                                    "maximum_outdoor_airflow": 3750
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "boilers": [
+                            {
+                                "id": "Boiler 1",
+                                "loop": "Boiler Loop 1",
+                                "energy_source_type": "NATURAL_GAS"
+                            }
+                        ],
+                        "pumps": [
+                            {
+                                "id": "Boiler Pump 1",
+                                "loop_or_piping": "Boiler Loop 1",
+                                "speed_control": "FIXED_SPEED"
+                            }
+                        ],
+                        "fluid_loops": [
+                            {
+                                "id": "Boiler Loop 1",
+                                "type": "HEATING"
+                            }
+                        ]
+                    }
+                ],
+                "weather": {
+                    "climate_zone": "CZ5A"
+                }
+            },
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_instances": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_open_schedule": "Required Building Schedule 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                                "terminals": [
+                                                    {
+                                                        "id": "VAV Air Terminal 1",
+                                                        "is_supply_ducted": true,
+                                                        "type": "VARIABLE_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 5",
+                                                        "heating_source": "HOT_WATER",
+                                                        "heating_from_loop": "Boiler Loop 1"
+                                                    }
+                                                ],
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "lighting_space_type": "OFFICE_OPEN_PLAN"
+                                                    },
+                                                    {
+                                                        "id": "Space 2",
+                                                        "lighting_space_type": "OFFICE_OPEN_PLAN"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "id": "Thermal Zone 2",
+                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                                "terminals": [
+                                                    {
+                                                        "id": "VAV Air Terminal 2",
+                                                        "is_supply_ducted": true,
+                                                        "type": "VARIABLE_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 5",
+                                                        "heating_source": "HOT_WATER",
+                                                        "heating_from_loop": "Boiler Loop 1"
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "System 5",
+                                                "cooling_system": {
+                                                    "id": "DX Coil 1",
+                                                    "cooling_system_type": "DIRECT_EXPANSION"
+                                                },
+                                                "preheat_system": {
+                                                    "id": "Preheat Coil 1",
+                                                    "heating_system_type": "FLUID_LOOP",
+                                                    "hot_water_loop": "Boiler Loop 1"
+                                                },
+                                                "fan_system": {
+                                                    "id": "VAV Fan System 1",
+                                                    "fan_control": "VARIABLE_SPEED_DRIVE",
+                                                    "supply_fans": [
+                                                        {
+                                                            "id": "Supply Fan 1",
+                                                            "design_airflow": 2359.737215999999
+                                                        }
+                                                    ],
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "Return Fan 1"
+                                                        }
+                                                    ],
+                                                    "minimum_outdoor_airflow": 1769.8029119999994,
+                                                    "maximum_outdoor_airflow": 3750
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "boilers": [
+                            {
+                                "id": "Boiler 1",
+                                "loop": "Boiler Loop 1",
+                                "energy_source_type": "NATURAL_GAS"
+                            }
+                        ],
+                        "pumps": [
+                            {
+                                "id": "Boiler Pump 1",
+                                "loop_or_piping": "Boiler Loop 1",
+                                "speed_control": "FIXED_SPEED"
+                            }
+                        ],
+                        "fluid_loops": [
+                            {
+                                "id": "Boiler Loop 1",
+                                "type": "HEATING"
+                            }
+                        ]
+                    }
+                ],
+                "weather": {
+                    "climate_zone": "CZ5A"
+                }
+            }
+        }
+    },
+    "rule-19-21-d": {
+        "Section": 19,
+        "Rule": 21,
+        "Test": "d",
+        "test_description": "Project is in climate zone 3A and contains baseline system 10 with heating only, 5000 cfm of supply air, and 75% OA. System serves zones that do not have energy recovery for the proposed system.",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "19-21",
+            "ruleset_reference": "G3.1.2.10",
+            "rule_description": "Baseline systems with >= 5,000 CFM supply air and >= 70 %OA shall have energy recovery with 50% enthalpy recovery ratio.  Exceptions include:\n1. Systems serving spaces that are not cooled and that are heated to less than 60\u00b0F. \n2. Systems exhausting toxic, flammable, or corrosive fumes or paint or dust. This exception shall only be used if exhaust air energy recovery is not used in the proposed design. \n3. Commercial kitchen hoods (grease) classified as Type 1 by NFPA 96. This exception shall only be used if exhaust air energy recovery is not used in the proposed design. \n4. Heating systems in Climate Zones 0 through 3. \n5. Cooling systems in Climate Zones 3C, 4C, 5B, 5C, 6B, 7, and 8. \n6. Where the largest exhaust source is less than 75% of the design outdoor airflow. This excep-tion shall only be used if exhaust air energy recovery is not used in the proposed design. \n7. Systems requiring dehumidification that employ energy recovery in series with the cooling coil. This exception shall only be used if exhaust air energy recovery and series-style energy recovery coils are not used in the proposed design. ",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "primary_rule": "Yes",
+            "schema_version": "0.0.23"
+        },
+        "rmr_transformations": {
+            "proposed": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_instances": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_open_schedule": "Required Building Schedule 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                                "terminals": [
+                                                    {
+                                                        "id": "Air Terminal",
+                                                        "is_supply_ducted": true,
+                                                        "type": "CONSTANT_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 10",
+                                                        "heating_source": "ELECTRIC"
+                                                    }
+                                                ],
+                                                "design_thermostat_heating_setpoint": 70,
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "lighting_space_type": "OFFICE_OPEN_PLAN"
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "System 10",
+                                                "heating_system": {
+                                                    "id": "Heating Coil 1",
+                                                    "heating_system_type": "ELECTRIC_RESISTANCE",
+                                                    "energy_source_type": "ELECTRICITY"
+                                                },
+                                                "fan_system": {
+                                                    "id": "CAV Fan System 1",
+                                                    "fan_control": "CONSTANT",
+                                                    "supply_fans": [
+                                                        {
+                                                            "id": "Supply Fan 1",
+                                                            "design_airflow": 5000
+                                                        }
+                                                    ],
+                                                    "minimum_outdoor_airflow": 3750,
+                                                    "maximum_outdoor_airflow": 3750
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                "weather": {
+                    "climate_zone": "CZ3A"
+                }
+            },
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_instances": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_open_schedule": "Required Building Schedule 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                                "terminals": [
+                                                    {
+                                                        "id": "Air Terminal",
+                                                        "is_supply_ducted": true,
+                                                        "type": "CONSTANT_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 10",
+                                                        "heating_source": "ELECTRIC"
+                                                    }
+                                                ],
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "lighting_space_type": "OFFICE_OPEN_PLAN"
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "System 10",
+                                                "heating_system": {
+                                                    "id": "Heating Coil 1",
+                                                    "heating_system_type": "ELECTRIC_RESISTANCE",
+                                                    "energy_source_type": "ELECTRICITY"
+                                                },
+                                                "fan_system": {
+                                                    "id": "CAV Fan System 1",
+                                                    "fan_control": "CONSTANT",
+                                                    "supply_fans": [
+                                                        {
+                                                            "id": "Supply Fan 1",
+                                                            "design_airflow": 2359.737215999999
+                                                        }
+                                                    ],
+                                                    "minimum_outdoor_airflow": 1769.8029119999994,
+                                                    "maximum_outdoor_airflow": 3750
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                "weather": {
+                    "climate_zone": "CZ3A"
+                }
+            }
+        }
+    },
+    "rule-19-21-e": {
+        "Section": 19,
+        "Rule": 21,
+        "Test": "e",
+        "test_description": "Project is in climate zone 5A and contains baseline system 5 with 5000 cfm of supply air and 75% OA. The largest exhaust source is less than 75% of the design outdoor airflow.",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "19-21",
+            "ruleset_reference": "G3.1.2.10",
+            "rule_description": "Baseline systems with >= 5,000 CFM supply air and >= 70 %OA shall have energy recovery with 50% enthalpy recovery ratio.  Exceptions include:\n1. Systems serving spaces that are not cooled and that are heated to less than 60\u00b0F. \n2. Systems exhausting toxic, flammable, or corrosive fumes or paint or dust. This exception shall only be used if exhaust air energy recovery is not used in the proposed design. \n3. Commercial kitchen hoods (grease) classified as Type 1 by NFPA 96. This exception shall only be used if exhaust air energy recovery is not used in the proposed design. \n4. Heating systems in Climate Zones 0 through 3. \n5. Cooling systems in Climate Zones 3C, 4C, 5B, 5C, 6B, 7, and 8. \n6. Where the largest exhaust source is less than 75% of the design outdoor airflow. This excep-tion shall only be used if exhaust air energy recovery is not used in the proposed design. \n7. Systems requiring dehumidification that employ energy recovery in series with the cooling coil. This exception shall only be used if exhaust air energy recovery and series-style energy recovery coils are not used in the proposed design. ",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "primary_rule": "Yes",
+            "schema_version": "0.0.23"
+        },
+        "rmr_transformations": {
+            "proposed": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_instances": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_open_schedule": "Required Building Schedule 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                                "terminals": [
+                                                    {
+                                                        "id": "VAV Air Terminal 1",
+                                                        "is_supply_ducted": true,
+                                                        "type": "VARIABLE_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 5",
+                                                        "heating_source": "HOT_WATER",
+                                                        "heating_from_loop": "Boiler Loop 1"
+                                                    }
+                                                ],
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "lighting_space_type": "OFFICE_OPEN_PLAN"
+                                                    },
+                                                    {
+                                                        "id": "Space 2",
+                                                        "lighting_space_type": "OFFICE_OPEN_PLAN"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "id": "Thermal Zone 2",
+                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                                "terminals": [
+                                                    {
+                                                        "id": "VAV Air Terminal 2",
+                                                        "is_supply_ducted": true,
+                                                        "type": "VARIABLE_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 5",
+                                                        "heating_source": "HOT_WATER",
+                                                        "heating_from_loop": "Boiler Loop 1"
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "System 5",
+                                                "cooling_system": {
+                                                    "id": "DX Coil 1",
+                                                    "cooling_system_type": "DIRECT_EXPANSION"
+                                                },
+                                                "preheat_system": {
+                                                    "id": "Preheat Coil 1",
+                                                    "heating_system_type": "FLUID_LOOP",
+                                                    "hot_water_loop": "Boiler Loop 1"
+                                                },
+                                                "fan_system": {
+                                                    "id": "VAV Fan System 1",
+                                                    "fan_control": "VARIABLE_SPEED_DRIVE",
+                                                    "supply_fans": [
+                                                        {
+                                                            "id": "Supply Fan 1",
+                                                            "design_airflow": 5000
+                                                        }
+                                                    ],
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "Return Fan 1"
+                                                        }
+                                                    ],
+                                                    "minimum_outdoor_airflow": 3750,
+                                                    "maximum_outdoor_airflow": 3750,
+                                                    "exhaust_fans": [
+                                                        {
+                                                            "id": "Exhaust Fan 1",
+                                                            "specification_method": "SIMPLE",
+                                                            "design_airflow": 3000
+                                                        }
+                                                    ]
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "boilers": [
+                            {
+                                "id": "Boiler 1",
+                                "loop": "Boiler Loop 1",
+                                "energy_source_type": "NATURAL_GAS"
+                            }
+                        ],
+                        "pumps": [
+                            {
+                                "id": "Boiler Pump 1",
+                                "loop_or_piping": "Boiler Loop 1",
+                                "speed_control": "FIXED_SPEED"
+                            }
+                        ],
+                        "fluid_loops": [
+                            {
+                                "id": "Boiler Loop 1",
+                                "type": "HEATING"
+                            }
+                        ]
+                    }
+                ],
+                "weather": {
+                    "climate_zone": "CZ5A"
+                }
+            },
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_instances": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_open_schedule": "Required Building Schedule 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                                "terminals": [
+                                                    {
+                                                        "id": "VAV Air Terminal 1",
+                                                        "is_supply_ducted": true,
+                                                        "type": "VARIABLE_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 5",
+                                                        "heating_source": "HOT_WATER",
+                                                        "heating_from_loop": "Boiler Loop 1"
+                                                    }
+                                                ],
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "lighting_space_type": "OFFICE_OPEN_PLAN"
+                                                    },
+                                                    {
+                                                        "id": "Space 2",
+                                                        "lighting_space_type": "OFFICE_OPEN_PLAN"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "id": "Thermal Zone 2",
+                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                                "terminals": [
+                                                    {
+                                                        "id": "VAV Air Terminal 2",
+                                                        "is_supply_ducted": true,
+                                                        "type": "VARIABLE_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 5",
+                                                        "heating_source": "HOT_WATER",
+                                                        "heating_from_loop": "Boiler Loop 1"
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "System 5",
+                                                "cooling_system": {
+                                                    "id": "DX Coil 1",
+                                                    "cooling_system_type": "DIRECT_EXPANSION"
+                                                },
+                                                "preheat_system": {
+                                                    "id": "Preheat Coil 1",
+                                                    "heating_system_type": "FLUID_LOOP",
+                                                    "hot_water_loop": "Boiler Loop 1"
+                                                },
+                                                "fan_system": {
+                                                    "id": "VAV Fan System 1",
+                                                    "fan_control": "VARIABLE_SPEED_DRIVE",
+                                                    "supply_fans": [
+                                                        {
+                                                            "id": "Supply Fan 1",
+                                                            "design_airflow": 2359.737215999999
+                                                        }
+                                                    ],
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "Return Fan 1"
+                                                        }
+                                                    ],
+                                                    "minimum_outdoor_airflow": 1769.8029119999994,
+                                                    "maximum_outdoor_airflow": 3750
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "boilers": [
+                            {
+                                "id": "Boiler 1",
+                                "loop": "Boiler Loop 1",
+                                "energy_source_type": "NATURAL_GAS"
+                            }
+                        ],
+                        "pumps": [
+                            {
+                                "id": "Boiler Pump 1",
+                                "loop_or_piping": "Boiler Loop 1",
+                                "speed_control": "FIXED_SPEED"
+                            }
+                        ],
+                        "fluid_loops": [
+                            {
+                                "id": "Boiler Loop 1",
+                                "type": "HEATING"
+                            }
+                        ]
+                    }
+                ],
+                "weather": {
+                    "climate_zone": "CZ5A"
+                }
+            }
+        }
+    },
+    "rule-19-21-f": {
+        "Section": 19,
+        "Rule": 21,
+        "Test": "f",
+        "test_description": "Project is in climate zone 5A and contains baseline system 5 with 5000 cfm of supply air and 75% OA. The proposed system has dehumidification that employs energy recovery in series with the cooling coil.",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "19-21",
+            "ruleset_reference": "G3.1.2.10",
+            "rule_description": "Baseline systems with >= 5,000 CFM supply air and >= 70 %OA shall have energy recovery with 50% enthalpy recovery ratio.  Exceptions include:\n1. Systems serving spaces that are not cooled and that are heated to less than 60\u00b0F. \n2. Systems exhausting toxic, flammable, or corrosive fumes or paint or dust. This exception shall only be used if exhaust air energy recovery is not used in the proposed design. \n3. Commercial kitchen hoods (grease) classified as Type 1 by NFPA 96. This exception shall only be used if exhaust air energy recovery is not used in the proposed design. \n4. Heating systems in Climate Zones 0 through 3. \n5. Cooling systems in Climate Zones 3C, 4C, 5B, 5C, 6B, 7, and 8. \n6. Where the largest exhaust source is less than 75% of the design outdoor airflow. This excep-tion shall only be used if exhaust air energy recovery is not used in the proposed design. \n7. Systems requiring dehumidification that employ energy recovery in series with the cooling coil. This exception shall only be used if exhaust air energy recovery and series-style energy recovery coils are not used in the proposed design. ",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "primary_rule": "Yes",
+            "schema_version": "0.0.23"
+        },
+        "rmr_transformations": {
+            "proposed": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_instances": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_open_schedule": "Required Building Schedule 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                                "terminals": [
+                                                    {
+                                                        "id": "VAV Air Terminal 1",
+                                                        "is_supply_ducted": true,
+                                                        "type": "VARIABLE_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 5",
+                                                        "heating_source": "HOT_WATER",
+                                                        "heating_from_loop": "Boiler Loop 1"
+                                                    }
+                                                ],
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "lighting_space_type": "OFFICE_OPEN_PLAN"
+                                                    },
+                                                    {
+                                                        "id": "Space 2",
+                                                        "lighting_space_type": "OFFICE_OPEN_PLAN"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "id": "Thermal Zone 2",
+                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                                "terminals": [
+                                                    {
+                                                        "id": "VAV Air Terminal 2",
+                                                        "is_supply_ducted": true,
+                                                        "type": "VARIABLE_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 5",
+                                                        "heating_source": "HOT_WATER",
+                                                        "heating_from_loop": "Boiler Loop 1"
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "System 5",
+                                                "cooling_system": {
+                                                    "id": "DX Coil 1",
+                                                    "cooling_system_type": "DIRECT_EXPANSION",
+                                                    "dehumidification_type": "SERIES_HEAT_RECOVERY"
+                                                },
+                                                "preheat_system": {
+                                                    "id": "Preheat Coil 1",
+                                                    "heating_system_type": "FLUID_LOOP",
+                                                    "hot_water_loop": "Boiler Loop 1"
+                                                },
+                                                "fan_system": {
+                                                    "id": "VAV Fan System 1",
+                                                    "fan_control": "VARIABLE_SPEED_DRIVE",
+                                                    "supply_fans": [
+                                                        {
+                                                            "id": "Supply Fan 1",
+                                                            "design_airflow": 5000
+                                                        }
+                                                    ],
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "Return Fan 1"
+                                                        }
+                                                    ],
+                                                    "minimum_outdoor_airflow": 3750,
+                                                    "maximum_outdoor_airflow": 3750
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "boilers": [
+                            {
+                                "id": "Boiler 1",
+                                "loop": "Boiler Loop 1",
+                                "energy_source_type": "NATURAL_GAS"
+                            }
+                        ],
+                        "pumps": [
+                            {
+                                "id": "Boiler Pump 1",
+                                "loop_or_piping": "Boiler Loop 1",
+                                "speed_control": "FIXED_SPEED"
+                            }
+                        ],
+                        "fluid_loops": [
+                            {
+                                "id": "Boiler Loop 1",
+                                "type": "HEATING"
+                            }
+                        ]
+                    }
+                ],
+                "weather": {
+                    "climate_zone": "CZ5A"
+                }
+            },
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_instances": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_open_schedule": "Required Building Schedule 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                                "terminals": [
+                                                    {
+                                                        "id": "VAV Air Terminal 1",
+                                                        "is_supply_ducted": true,
+                                                        "type": "VARIABLE_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 5",
+                                                        "heating_source": "HOT_WATER",
+                                                        "heating_from_loop": "Boiler Loop 1"
+                                                    }
+                                                ],
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "lighting_space_type": "OFFICE_OPEN_PLAN"
+                                                    },
+                                                    {
+                                                        "id": "Space 2",
+                                                        "lighting_space_type": "OFFICE_OPEN_PLAN"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "id": "Thermal Zone 2",
+                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                                "terminals": [
+                                                    {
+                                                        "id": "VAV Air Terminal 2",
+                                                        "is_supply_ducted": true,
+                                                        "type": "VARIABLE_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 5",
+                                                        "heating_source": "HOT_WATER",
+                                                        "heating_from_loop": "Boiler Loop 1"
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "System 5",
+                                                "cooling_system": {
+                                                    "id": "DX Coil 1",
+                                                    "cooling_system_type": "DIRECT_EXPANSION"
+                                                },
+                                                "preheat_system": {
+                                                    "id": "Preheat Coil 1",
+                                                    "heating_system_type": "FLUID_LOOP",
+                                                    "hot_water_loop": "Boiler Loop 1"
+                                                },
+                                                "fan_system": {
+                                                    "id": "VAV Fan System 1",
+                                                    "fan_control": "VARIABLE_SPEED_DRIVE",
+                                                    "supply_fans": [
+                                                        {
+                                                            "id": "Supply Fan 1",
+                                                            "design_airflow": 2359.737215999999
+                                                        }
+                                                    ],
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "Return Fan 1"
+                                                        }
+                                                    ],
+                                                    "minimum_outdoor_airflow": 1769.8029119999994,
+                                                    "maximum_outdoor_airflow": 3750
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "boilers": [
+                            {
+                                "id": "Boiler 1",
+                                "loop": "Boiler Loop 1",
+                                "energy_source_type": "NATURAL_GAS"
+                            }
+                        ],
+                        "pumps": [
+                            {
+                                "id": "Boiler Pump 1",
+                                "loop_or_piping": "Boiler Loop 1",
+                                "speed_control": "FIXED_SPEED"
+                            }
+                        ],
+                        "fluid_loops": [
+                            {
+                                "id": "Boiler Loop 1",
+                                "type": "HEATING"
+                            }
+                        ]
+                    }
+                ],
+                "weather": {
+                    "climate_zone": "CZ5A"
+                }
+            }
+        }
+    },
+    "rule-19-21-g": {
+        "Section": 19,
+        "Rule": 21,
+        "Test": "g",
+        "test_description": "Project is in climate zone 3C and contains baseline system 5 with 5000 cfm of supply air and 75% OA.",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "19-21",
+            "ruleset_reference": "G3.1.2.10",
+            "rule_description": "Baseline systems with >= 5,000 CFM supply air and >= 70 %OA shall have energy recovery with 50% enthalpy recovery ratio.  Exceptions include:\n1. Systems serving spaces that are not cooled and that are heated to less than 60\u00b0F. \n2. Systems exhausting toxic, flammable, or corrosive fumes or paint or dust. This exception shall only be used if exhaust air energy recovery is not used in the proposed design. \n3. Commercial kitchen hoods (grease) classified as Type 1 by NFPA 96. This exception shall only be used if exhaust air energy recovery is not used in the proposed design. \n4. Heating systems in Climate Zones 0 through 3. \n5. Cooling systems in Climate Zones 3C, 4C, 5B, 5C, 6B, 7, and 8. \n6. Where the largest exhaust source is less than 75% of the design outdoor airflow. This excep-tion shall only be used if exhaust air energy recovery is not used in the proposed design. \n7. Systems requiring dehumidification that employ energy recovery in series with the cooling coil. This exception shall only be used if exhaust air energy recovery and series-style energy recovery coils are not used in the proposed design. ",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "primary_rule": "Yes",
+            "schema_version": "0.0.23"
+        },
+        "rmr_transformations": {
+            "proposed": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_instances": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_open_schedule": "Required Building Schedule 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                                "terminals": [
+                                                    {
+                                                        "id": "VAV Air Terminal 1",
+                                                        "is_supply_ducted": true,
+                                                        "type": "VARIABLE_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 5",
+                                                        "heating_source": "HOT_WATER",
+                                                        "heating_from_loop": "Boiler Loop 1"
+                                                    }
+                                                ],
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "lighting_space_type": "OFFICE_OPEN_PLAN"
+                                                    },
+                                                    {
+                                                        "id": "Space 2",
+                                                        "lighting_space_type": "OFFICE_OPEN_PLAN"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "id": "Thermal Zone 2",
+                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                                "terminals": [
+                                                    {
+                                                        "id": "VAV Air Terminal 2",
+                                                        "is_supply_ducted": true,
+                                                        "type": "VARIABLE_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 5",
+                                                        "heating_source": "HOT_WATER",
+                                                        "heating_from_loop": "Boiler Loop 1"
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "System 5",
+                                                "cooling_system": {
+                                                    "id": "DX Coil 1",
+                                                    "cooling_system_type": "DIRECT_EXPANSION"
+                                                },
+                                                "preheat_system": {
+                                                    "id": "Preheat Coil 1",
+                                                    "heating_system_type": "FLUID_LOOP",
+                                                    "hot_water_loop": "Boiler Loop 1"
+                                                },
+                                                "fan_system": {
+                                                    "id": "VAV Fan System 1",
+                                                    "fan_control": "VARIABLE_SPEED_DRIVE",
+                                                    "supply_fans": [
+                                                        {
+                                                            "id": "Supply Fan 1",
+                                                            "design_airflow": 5000
+                                                        }
+                                                    ],
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "Return Fan 1"
+                                                        }
+                                                    ],
+                                                    "minimum_outdoor_airflow": 3750,
+                                                    "maximum_outdoor_airflow": 3750
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "boilers": [
+                            {
+                                "id": "Boiler 1",
+                                "loop": "Boiler Loop 1",
+                                "energy_source_type": "NATURAL_GAS"
+                            }
+                        ],
+                        "pumps": [
+                            {
+                                "id": "Boiler Pump 1",
+                                "loop_or_piping": "Boiler Loop 1",
+                                "speed_control": "FIXED_SPEED"
+                            }
+                        ],
+                        "fluid_loops": [
+                            {
+                                "id": "Boiler Loop 1",
+                                "type": "HEATING"
+                            }
+                        ]
+                    }
+                ],
+                "weather": {
+                    "climate_zone": "CZ3C"
+                }
+            },
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_instances": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_open_schedule": "Required Building Schedule 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                                "terminals": [
+                                                    {
+                                                        "id": "VAV Air Terminal 1",
+                                                        "is_supply_ducted": true,
+                                                        "type": "VARIABLE_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 5",
+                                                        "heating_source": "HOT_WATER",
+                                                        "heating_from_loop": "Boiler Loop 1"
+                                                    }
+                                                ],
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "lighting_space_type": "OFFICE_OPEN_PLAN"
+                                                    },
+                                                    {
+                                                        "id": "Space 2",
+                                                        "lighting_space_type": "OFFICE_OPEN_PLAN"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "id": "Thermal Zone 2",
+                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                                "terminals": [
+                                                    {
+                                                        "id": "VAV Air Terminal 2",
+                                                        "is_supply_ducted": true,
+                                                        "type": "VARIABLE_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 5",
+                                                        "heating_source": "HOT_WATER",
+                                                        "heating_from_loop": "Boiler Loop 1"
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "System 5",
+                                                "cooling_system": {
+                                                    "id": "DX Coil 1",
+                                                    "cooling_system_type": "DIRECT_EXPANSION"
+                                                },
+                                                "preheat_system": {
+                                                    "id": "Preheat Coil 1",
+                                                    "heating_system_type": "FLUID_LOOP",
+                                                    "hot_water_loop": "Boiler Loop 1"
+                                                },
+                                                "fan_system": {
+                                                    "id": "VAV Fan System 1",
+                                                    "fan_control": "VARIABLE_SPEED_DRIVE",
+                                                    "supply_fans": [
+                                                        {
+                                                            "id": "Supply Fan 1",
+                                                            "design_airflow": 2359.737215999999
+                                                        }
+                                                    ],
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "Return Fan 1"
+                                                        }
+                                                    ],
+                                                    "minimum_outdoor_airflow": 1769.8029119999994,
+                                                    "maximum_outdoor_airflow": 3750
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "boilers": [
+                            {
+                                "id": "Boiler 1",
+                                "loop": "Boiler Loop 1",
+                                "energy_source_type": "NATURAL_GAS"
+                            }
+                        ],
+                        "pumps": [
+                            {
+                                "id": "Boiler Pump 1",
+                                "loop_or_piping": "Boiler Loop 1",
+                                "speed_control": "FIXED_SPEED"
+                            }
+                        ],
+                        "fluid_loops": [
+                            {
+                                "id": "Boiler Loop 1",
+                                "type": "HEATING"
+                            }
+                        ]
+                    }
+                ],
+                "weather": {
+                    "climate_zone": "CZ3C"
+                }
+            }
+        }
+    },
+    "rule-19-21-h": {
+        "Section": 19,
+        "Rule": 21,
+        "Test": "h",
+        "test_description": "Project is in climate zone 5A and contains baseline system 3 with 5000 cfm of supply air and 75% OA. System serves a kitchen type space indicating that exception 3 may be applicable.",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "19-21",
+            "ruleset_reference": "G3.1.2.10",
+            "rule_description": "Baseline systems with >= 5,000 CFM supply air and >= 70 %OA shall have energy recovery with 50% enthalpy recovery ratio.  Exceptions include:\n1. Systems serving spaces that are not cooled and that are heated to less than 60\u00b0F. \n2. Systems exhausting toxic, flammable, or corrosive fumes or paint or dust. This exception shall only be used if exhaust air energy recovery is not used in the proposed design. \n3. Commercial kitchen hoods (grease) classified as Type 1 by NFPA 96. This exception shall only be used if exhaust air energy recovery is not used in the proposed design. \n4. Heating systems in Climate Zones 0 through 3. \n5. Cooling systems in Climate Zones 3C, 4C, 5B, 5C, 6B, 7, and 8. \n6. Where the largest exhaust source is less than 75% of the design outdoor airflow. This excep-tion shall only be used if exhaust air energy recovery is not used in the proposed design. \n7. Systems requiring dehumidification that employ energy recovery in series with the cooling coil. This exception shall only be used if exhaust air energy recovery and series-style energy recovery coils are not used in the proposed design. ",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "primary_rule": "Yes",
+            "schema_version": "0.0.23"
+        },
+        "rmr_transformations": {
+            "proposed": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_instances": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_open_schedule": "Required Building Schedule 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                                "terminals": [
+                                                    {
+                                                        "id": "Air Terminal",
+                                                        "is_supply_ducted": true,
+                                                        "type": "CONSTANT_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System Type 3"
+                                                    }
+                                                ],
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "lighting_space_type": "FOOD_PREPARATION_AREA"
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "System Type 3",
+                                                "cooling_system": {
+                                                    "id": "DX Coil 1",
+                                                    "cooling_system_type": "DIRECT_EXPANSION"
+                                                },
+                                                "heating_system": {
+                                                    "id": "Furnace Coil 1",
+                                                    "heating_system_type": "FURNACE"
+                                                },
+                                                "fan_system": {
+                                                    "id": "CAV Fan System 1",
+                                                    "fan_control": "CONSTANT",
+                                                    "supply_fans": [
+                                                        {
+                                                            "id": "Supply Fan 1",
+                                                            "design_airflow": 5000
+                                                        }
+                                                    ],
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "Return Fan 1"
+                                                        }
+                                                    ],
+                                                    "minimum_outdoor_airflow": 3750,
+                                                    "maximum_outdoor_airflow": 3750
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                "weather": {
+                    "climate_zone": "CZ5A"
+                }
+            },
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_instances": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_open_schedule": "Required Building Schedule 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                                "terminals": [
+                                                    {
+                                                        "id": "Air Terminal",
+                                                        "is_supply_ducted": true,
+                                                        "type": "CONSTANT_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System Type 3"
+                                                    }
+                                                ],
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "lighting_space_type": "FOOD_PREPARATION_AREA"
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "System Type 3",
+                                                "cooling_system": {
+                                                    "id": "DX Coil 1",
+                                                    "cooling_system_type": "DIRECT_EXPANSION"
+                                                },
+                                                "heating_system": {
+                                                    "id": "Furnace Coil 1",
+                                                    "heating_system_type": "FURNACE"
+                                                },
+                                                "fan_system": {
+                                                    "id": "CAV Fan System 1",
+                                                    "fan_control": "CONSTANT",
+                                                    "supply_fans": [
+                                                        {
+                                                            "id": "Supply Fan 1",
+                                                            "design_airflow": 2359.737215999999
+                                                        }
+                                                    ],
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "Return Fan 1"
+                                                        }
+                                                    ],
+                                                    "minimum_outdoor_airflow": 1769.8029119999994,
+                                                    "maximum_outdoor_airflow": 3750
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                "weather": {
+                    "climate_zone": "CZ5A"
+                }
+            }
+        }
+    },
+    "rule-19-21-i": {
+        "Section": 19,
+        "Rule": 21,
+        "Test": "i",
+        "test_description": "Project is in climate zone 5A and contains baseline system 5 with 5000 cfm of supply air and 75% OA. The proposed HVAC system contains more than one exhaust fan, and the largest exhaust source could be less than 75% of the design outdoor airflow, but it cannot be determined if exception 6 is applicable.",
+        "expected_rule_outcome": "undetermined",
+        "standard": {
+            "rule_id": "19-21",
+            "ruleset_reference": "G3.1.2.10",
+            "rule_description": "Baseline systems with >= 5,000 CFM supply air and >= 70 %OA shall have energy recovery with 50% enthalpy recovery ratio.  Exceptions include:\n1. Systems serving spaces that are not cooled and that are heated to less than 60\u00b0F. \n2. Systems exhausting toxic, flammable, or corrosive fumes or paint or dust. This exception shall only be used if exhaust air energy recovery is not used in the proposed design. \n3. Commercial kitchen hoods (grease) classified as Type 1 by NFPA 96. This exception shall only be used if exhaust air energy recovery is not used in the proposed design. \n4. Heating systems in Climate Zones 0 through 3. \n5. Cooling systems in Climate Zones 3C, 4C, 5B, 5C, 6B, 7, and 8. \n6. Where the largest exhaust source is less than 75% of the design outdoor airflow. This excep-tion shall only be used if exhaust air energy recovery is not used in the proposed design. \n7. Systems requiring dehumidification that employ energy recovery in series with the cooling coil. This exception shall only be used if exhaust air energy recovery and series-style energy recovery coils are not used in the proposed design. ",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "primary_rule": "Yes",
+            "schema_version": "0.0.23"
+        },
+        "rmr_transformations": {
+            "proposed": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_instances": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_open_schedule": "Required Building Schedule 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                                "terminals": [
+                                                    {
+                                                        "id": "VAV Air Terminal 1",
+                                                        "is_supply_ducted": true,
+                                                        "type": "VARIABLE_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 5",
+                                                        "heating_source": "HOT_WATER",
+                                                        "heating_from_loop": "Boiler Loop 1"
+                                                    }
+                                                ],
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "lighting_space_type": "OFFICE_OPEN_PLAN"
+                                                    },
+                                                    {
+                                                        "id": "Space 2",
+                                                        "lighting_space_type": "OFFICE_OPEN_PLAN"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "id": "Thermal Zone 2",
+                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                                "terminals": [
+                                                    {
+                                                        "id": "VAV Air Terminal 2",
+                                                        "is_supply_ducted": true,
+                                                        "type": "VARIABLE_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 5",
+                                                        "heating_source": "HOT_WATER",
+                                                        "heating_from_loop": "Boiler Loop 1"
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "System 5",
+                                                "cooling_system": {
+                                                    "id": "DX Coil 1",
+                                                    "cooling_system_type": "DIRECT_EXPANSION"
+                                                },
+                                                "preheat_system": {
+                                                    "id": "Preheat Coil 1",
+                                                    "heating_system_type": "FLUID_LOOP",
+                                                    "hot_water_loop": "Boiler Loop 1"
+                                                },
+                                                "fan_system": {
+                                                    "id": "VAV Fan System 1",
+                                                    "fan_control": "VARIABLE_SPEED_DRIVE",
+                                                    "supply_fans": [
+                                                        {
+                                                            "id": "Supply Fan 1",
+                                                            "design_airflow": 5000
+                                                        }
+                                                    ],
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "Return Fan 1"
+                                                        }
+                                                    ],
+                                                    "minimum_outdoor_airflow": 3750,
+                                                    "maximum_outdoor_airflow": 3750
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "boilers": [
+                            {
+                                "id": "Boiler 1",
+                                "loop": "Boiler Loop 1",
+                                "energy_source_type": "NATURAL_GAS"
+                            }
+                        ],
+                        "pumps": [
+                            {
+                                "id": "Boiler Pump 1",
+                                "loop_or_piping": "Boiler Loop 1",
+                                "speed_control": "FIXED_SPEED"
+                            }
+                        ],
+                        "fluid_loops": [
+                            {
+                                "id": "Boiler Loop 1",
+                                "type": "HEATING"
+                            }
+                        ]
+                    }
+                ],
+                "weather": {
+                    "climate_zone": "CZ5A"
+                }
+            },
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_instances": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_open_schedule": "Required Building Schedule 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                                "terminals": [
+                                                    {
+                                                        "id": "VAV Air Terminal 1",
+                                                        "is_supply_ducted": true,
+                                                        "type": "VARIABLE_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 5",
+                                                        "heating_source": "HOT_WATER",
+                                                        "heating_from_loop": "Boiler Loop 1"
+                                                    }
+                                                ],
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "lighting_space_type": "OFFICE_OPEN_PLAN"
+                                                    },
+                                                    {
+                                                        "id": "Space 2",
+                                                        "lighting_space_type": "OFFICE_OPEN_PLAN"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "id": "Thermal Zone 2",
+                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                                "terminals": [
+                                                    {
+                                                        "id": "VAV Air Terminal 2",
+                                                        "is_supply_ducted": true,
+                                                        "type": "VARIABLE_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 5",
+                                                        "heating_source": "HOT_WATER",
+                                                        "heating_from_loop": "Boiler Loop 1"
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "System 5",
+                                                "cooling_system": {
+                                                    "id": "DX Coil 1",
+                                                    "cooling_system_type": "DIRECT_EXPANSION"
+                                                },
+                                                "preheat_system": {
+                                                    "id": "Preheat Coil 1",
+                                                    "heating_system_type": "FLUID_LOOP",
+                                                    "hot_water_loop": "Boiler Loop 1"
+                                                },
+                                                "fan_system": {
+                                                    "id": "VAV Fan System 1",
+                                                    "fan_control": "VARIABLE_SPEED_DRIVE",
+                                                    "supply_fans": [
+                                                        {
+                                                            "id": "Supply Fan 1",
+                                                            "design_airflow": 2359.737215999999
+                                                        }
+                                                    ],
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "Return Fan 1"
+                                                        }
+                                                    ],
+                                                    "minimum_outdoor_airflow": 1769.8029119999994,
+                                                    "maximum_outdoor_airflow": 3750,
+                                                    "exhaust_fans": [
+                                                        {
+                                                            "id": "Exhaust Fan 1",
+                                                            "specification_method": "SIMPLE",
+                                                            "design_airflow": 2500
+                                                        },
+                                                        {
+                                                            "id": "Exhaust Fan 2",
+                                                            "specification_method": "SIMPLE",
+                                                            "design_airflow": 2500
+                                                        }
+                                                    ]
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "boilers": [
+                            {
+                                "id": "Boiler 1",
+                                "loop": "Boiler Loop 1",
+                                "energy_source_type": "NATURAL_GAS"
+                            }
+                        ],
+                        "pumps": [
+                            {
+                                "id": "Boiler Pump 1",
+                                "loop_or_piping": "Boiler Loop 1",
+                                "speed_control": "FIXED_SPEED"
+                            }
+                        ],
+                        "fluid_loops": [
+                            {
+                                "id": "Boiler Loop 1",
+                                "type": "HEATING"
+                            }
+                        ]
+                    }
+                ],
+                "weather": {
+                    "climate_zone": "CZ5A"
+                }
+            }
+        }
+    },
+    "rule-19-21-j": {
+        "Section": 19,
+        "Rule": 21,
+        "Test": "j",
+        "test_description": "Project is in climate zone 5A and contains baseline system 7 with 5000 cfm of supply air and 69% OA. Energy recovery is correctly not modeled for the system.",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "19-21",
+            "ruleset_reference": "G3.1.2.10",
+            "rule_description": "Baseline systems with >= 5,000 CFM supply air and >= 70 %OA shall have energy recovery with 50% enthalpy recovery ratio.  Exceptions include:\n1. Systems serving spaces that are not cooled and that are heated to less than 60\u00b0F. \n2. Systems exhausting toxic, flammable, or corrosive fumes or paint or dust. This exception shall only be used if exhaust air energy recovery is not used in the proposed design. \n3. Commercial kitchen hoods (grease) classified as Type 1 by NFPA 96. This exception shall only be used if exhaust air energy recovery is not used in the proposed design. \n4. Heating systems in Climate Zones 0 through 3. \n5. Cooling systems in Climate Zones 3C, 4C, 5B, 5C, 6B, 7, and 8. \n6. Where the largest exhaust source is less than 75% of the design outdoor airflow. This excep-tion shall only be used if exhaust air energy recovery is not used in the proposed design. \n7. Systems requiring dehumidification that employ energy recovery in series with the cooling coil. This exception shall only be used if exhaust air energy recovery and series-style energy recovery coils are not used in the proposed design. ",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "primary_rule": "Yes",
+            "schema_version": "0.0.23"
+        },
+        "rmr_transformations": {
+            "proposed": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_instances": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_open_schedule": "Required Building Schedule 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                                "terminals": [
+                                                    {
+                                                        "id": "VAV Air Terminal 1",
+                                                        "is_supply_ducted": true,
+                                                        "type": "VARIABLE_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
+                                                        "heating_source": "HOT_WATER",
+                                                        "heating_from_loop": "Boiler Loop 1"
+                                                    }
+                                                ],
+                                                "design_thermostat_heating_setpoint": 70,
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "lighting_space_type": "OFFICE_OPEN_PLAN"
+                                                    },
+                                                    {
+                                                        "id": "Space 2",
+                                                        "lighting_space_type": "OFFICE_OPEN_PLAN"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "id": "Thermal Zone 2",
+                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                                "terminals": [
+                                                    {
+                                                        "id": "VAV Air Terminal 2",
+                                                        "is_supply_ducted": true,
+                                                        "type": "VARIABLE_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
+                                                        "heating_source": "HOT_WATER",
+                                                        "heating_from_loop": "Boiler Loop 1"
+                                                    }
+                                                ],
+                                                "design_thermostat_heating_setpoint": 70
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "System 7",
+                                                "cooling_system": {
+                                                    "id": "CHW Coil 1",
+                                                    "cooling_system_type": "FLUID_LOOP",
+                                                    "chilled_water_loop": "Secondary CHW Loop 1"
+                                                },
+                                                "preheat_system": {
+                                                    "id": "Preheat Coil 1",
+                                                    "heating_system_type": "FLUID_LOOP",
+                                                    "hot_water_loop": "Boiler Loop 1"
+                                                },
+                                                "fan_system": {
+                                                    "id": "VAV Fan System 1",
+                                                    "fan_control": "VARIABLE_SPEED_DRIVE",
+                                                    "supply_fans": [
+                                                        {
+                                                            "id": "Supply Fan 1",
+                                                            "design_airflow": 5000
+                                                        }
+                                                    ],
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "Return Fan 1"
+                                                        }
+                                                    ],
+                                                    "minimum_outdoor_airflow": 3450,
+                                                    "maximum_outdoor_airflow": 3450
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "boilers": [
+                            {
+                                "id": "Boiler 1",
+                                "loop": "Boiler Loop 1",
+                                "energy_source_type": "NATURAL_GAS"
+                            }
+                        ],
+                        "chillers": [
+                            {
+                                "id": "Chiller 1",
+                                "cooling_loop": "Chiller Loop 1"
+                            }
+                        ],
+                        "pumps": [
+                            {
+                                "id": "Boiler Pump 1",
+                                "loop_or_piping": "Boiler Loop 1",
+                                "speed_control": "FIXED_SPEED"
+                            },
+                            {
+                                "id": "Chiller Pump 1",
+                                "loop_or_piping": "Chiller Loop 1",
+                                "speed_control": "FIXED_SPEED"
+                            },
+                            {
+                                "id": "Secondary CHW Pump",
+                                "loop_or_piping": "Secondary CHW Loop 1",
+                                "speed_control": "VARIABLE_SPEED"
+                            }
+                        ],
+                        "fluid_loops": [
+                            {
+                                "id": "Boiler Loop 1",
+                                "type": "HEATING"
+                            },
+                            {
+                                "id": "Chiller Loop 1",
+                                "type": "COOLING",
+                                "child_loops": [
+                                    {
+                                        "id": "Secondary CHW Loop 1"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                "weather": {
+                    "climate_zone": "CZ5A"
+                }
+            },
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_instances": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_open_schedule": "Required Building Schedule 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                                "terminals": [
+                                                    {
+                                                        "id": "VAV Air Terminal 1",
+                                                        "is_supply_ducted": true,
+                                                        "type": "VARIABLE_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
+                                                        "heating_source": "HOT_WATER",
+                                                        "heating_from_loop": "Boiler Loop 1"
+                                                    }
+                                                ],
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "lighting_space_type": "OFFICE_OPEN_PLAN"
+                                                    },
+                                                    {
+                                                        "id": "Space 2",
+                                                        "lighting_space_type": "OFFICE_OPEN_PLAN"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "id": "Thermal Zone 2",
+                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                                "terminals": [
+                                                    {
+                                                        "id": "VAV Air Terminal 2",
+                                                        "is_supply_ducted": true,
+                                                        "type": "VARIABLE_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
+                                                        "heating_source": "HOT_WATER",
+                                                        "heating_from_loop": "Boiler Loop 1"
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "System 7",
+                                                "cooling_system": {
+                                                    "id": "CHW Coil 1",
+                                                    "cooling_system_type": "FLUID_LOOP",
+                                                    "chilled_water_loop": "Secondary CHW Loop 1"
+                                                },
+                                                "preheat_system": {
+                                                    "id": "Preheat Coil 1",
+                                                    "heating_system_type": "FLUID_LOOP",
+                                                    "hot_water_loop": "Boiler Loop 1"
+                                                },
+                                                "fan_system": {
+                                                    "id": "VAV Fan System 1",
+                                                    "fan_control": "VARIABLE_SPEED_DRIVE",
+                                                    "supply_fans": [
+                                                        {
+                                                            "id": "Supply Fan 1",
+                                                            "design_airflow": 2359.737215999999
+                                                        }
+                                                    ],
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "Return Fan 1"
+                                                        }
+                                                    ],
+                                                    "minimum_outdoor_airflow": 1628.2186790399994,
+                                                    "maximum_outdoor_airflow": 3450
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "boilers": [
+                            {
+                                "id": "Boiler 1",
+                                "loop": "Boiler Loop 1",
+                                "energy_source_type": "NATURAL_GAS"
+                            }
+                        ],
+                        "chillers": [
+                            {
+                                "id": "Chiller 1",
+                                "cooling_loop": "Chiller Loop 1"
+                            }
+                        ],
+                        "pumps": [
+                            {
+                                "id": "Boiler Pump 1",
+                                "loop_or_piping": "Boiler Loop 1",
+                                "speed_control": "FIXED_SPEED"
+                            },
+                            {
+                                "id": "Chiller Pump 1",
+                                "loop_or_piping": "Chiller Loop 1",
+                                "speed_control": "FIXED_SPEED"
+                            },
+                            {
+                                "id": "Secondary CHW Pump",
+                                "loop_or_piping": "Secondary CHW Loop 1",
+                                "speed_control": "VARIABLE_SPEED"
+                            }
+                        ],
+                        "fluid_loops": [
+                            {
+                                "id": "Boiler Loop 1",
+                                "type": "HEATING"
+                            },
+                            {
+                                "id": "Chiller Loop 1",
+                                "type": "COOLING",
+                                "child_loops": [
+                                    {
+                                        "id": "Secondary CHW Loop 1"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                "weather": {
+                    "climate_zone": "CZ5A"
+                }
+            }
+        }
+    },
+    "rule-19-21-k": {
+        "Section": 19,
+        "Rule": 21,
+        "Test": "k",
+        "test_description": "Project is in climate zone 5A and contains baseline system 7 with 5000 cfm of supply air and 75% OA. Energy recovery is incorrectly not modeled for the system and not all space types have been defined so applicability of exceptions 2 and 3 cannot be determined.",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "19-21",
+            "ruleset_reference": "G3.1.2.10",
+            "rule_description": "Baseline systems with >= 5,000 CFM supply air and >= 70 %OA shall have energy recovery with 50% enthalpy recovery ratio.  Exceptions include:\n1. Systems serving spaces that are not cooled and that are heated to less than 60\u00b0F. \n2. Systems exhausting toxic, flammable, or corrosive fumes or paint or dust. This exception shall only be used if exhaust air energy recovery is not used in the proposed design. \n3. Commercial kitchen hoods (grease) classified as Type 1 by NFPA 96. This exception shall only be used if exhaust air energy recovery is not used in the proposed design. \n4. Heating systems in Climate Zones 0 through 3. \n5. Cooling systems in Climate Zones 3C, 4C, 5B, 5C, 6B, 7, and 8. \n6. Where the largest exhaust source is less than 75% of the design outdoor airflow. This excep-tion shall only be used if exhaust air energy recovery is not used in the proposed design. \n7. Systems requiring dehumidification that employ energy recovery in series with the cooling coil. This exception shall only be used if exhaust air energy recovery and series-style energy recovery coils are not used in the proposed design. ",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "primary_rule": "Yes",
+            "schema_version": "0.0.23"
+        },
+        "rmr_transformations": {
+            "proposed": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_instances": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_open_schedule": "Required Building Schedule 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                                "terminals": [
+                                                    {
+                                                        "id": "VAV Air Terminal 1",
+                                                        "is_supply_ducted": true,
+                                                        "type": "VARIABLE_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
+                                                        "heating_source": "HOT_WATER",
+                                                        "heating_from_loop": "Boiler Loop 1"
+                                                    }
+                                                ],
+                                                "design_thermostat_heating_setpoint": 70,
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1"
+                                                    },
+                                                    {
+                                                        "id": "Space 2"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "id": "Thermal Zone 2",
+                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                                "terminals": [
+                                                    {
+                                                        "id": "VAV Air Terminal 2",
+                                                        "is_supply_ducted": true,
+                                                        "type": "VARIABLE_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
+                                                        "heating_source": "HOT_WATER",
+                                                        "heating_from_loop": "Boiler Loop 1"
+                                                    }
+                                                ],
+                                                "design_thermostat_heating_setpoint": 70
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "System 7",
+                                                "cooling_system": {
+                                                    "id": "CHW Coil 1",
+                                                    "cooling_system_type": "FLUID_LOOP",
+                                                    "chilled_water_loop": "Secondary CHW Loop 1"
+                                                },
+                                                "preheat_system": {
+                                                    "id": "Preheat Coil 1",
+                                                    "heating_system_type": "FLUID_LOOP",
+                                                    "hot_water_loop": "Boiler Loop 1"
+                                                },
+                                                "fan_system": {
+                                                    "id": "VAV Fan System 1",
+                                                    "fan_control": "VARIABLE_SPEED_DRIVE",
+                                                    "supply_fans": [
+                                                        {
+                                                            "id": "Supply Fan 1",
+                                                            "design_airflow": 5000
+                                                        }
+                                                    ],
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "Return Fan 1"
+                                                        }
+                                                    ],
+                                                    "minimum_outdoor_airflow": 3750,
+                                                    "maximum_outdoor_airflow": 3750
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "boilers": [
+                            {
+                                "id": "Boiler 1",
+                                "loop": "Boiler Loop 1",
+                                "energy_source_type": "NATURAL_GAS"
+                            }
+                        ],
+                        "chillers": [
+                            {
+                                "id": "Chiller 1",
+                                "cooling_loop": "Chiller Loop 1"
+                            }
+                        ],
+                        "pumps": [
+                            {
+                                "id": "Boiler Pump 1",
+                                "loop_or_piping": "Boiler Loop 1",
+                                "speed_control": "FIXED_SPEED"
+                            },
+                            {
+                                "id": "Chiller Pump 1",
+                                "loop_or_piping": "Chiller Loop 1",
+                                "speed_control": "FIXED_SPEED"
+                            },
+                            {
+                                "id": "Secondary CHW Pump",
+                                "loop_or_piping": "Secondary CHW Loop 1",
+                                "speed_control": "VARIABLE_SPEED"
+                            }
+                        ],
+                        "fluid_loops": [
+                            {
+                                "id": "Boiler Loop 1",
+                                "type": "HEATING"
+                            },
+                            {
+                                "id": "Chiller Loop 1",
+                                "type": "COOLING",
+                                "child_loops": [
+                                    {
+                                        "id": "Secondary CHW Loop 1"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                "weather": {
+                    "climate_zone": "CZ5A"
+                }
+            },
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_instances": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_open_schedule": "Required Building Schedule 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                                "terminals": [
+                                                    {
+                                                        "id": "VAV Air Terminal 1",
+                                                        "is_supply_ducted": true,
+                                                        "type": "VARIABLE_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
+                                                        "heating_source": "HOT_WATER",
+                                                        "heating_from_loop": "Boiler Loop 1"
+                                                    }
+                                                ],
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1"
+                                                    },
+                                                    {
+                                                        "id": "Space 2"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "id": "Thermal Zone 2",
+                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                                "terminals": [
+                                                    {
+                                                        "id": "VAV Air Terminal 2",
+                                                        "is_supply_ducted": true,
+                                                        "type": "VARIABLE_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
+                                                        "heating_source": "HOT_WATER",
+                                                        "heating_from_loop": "Boiler Loop 1"
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "System 7",
+                                                "cooling_system": {
+                                                    "id": "CHW Coil 1",
+                                                    "cooling_system_type": "FLUID_LOOP",
+                                                    "chilled_water_loop": "Secondary CHW Loop 1"
+                                                },
+                                                "preheat_system": {
+                                                    "id": "Preheat Coil 1",
+                                                    "heating_system_type": "FLUID_LOOP",
+                                                    "hot_water_loop": "Boiler Loop 1"
+                                                },
+                                                "fan_system": {
+                                                    "id": "VAV Fan System 1",
+                                                    "fan_control": "VARIABLE_SPEED_DRIVE",
+                                                    "supply_fans": [
+                                                        {
+                                                            "id": "Supply Fan 1",
+                                                            "design_airflow": 2359.737215999999
+                                                        }
+                                                    ],
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "Return Fan 1"
+                                                        }
+                                                    ],
+                                                    "minimum_outdoor_airflow": 1769.8029119999994,
+                                                    "maximum_outdoor_airflow": 3750
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "boilers": [
+                            {
+                                "id": "Boiler 1",
+                                "loop": "Boiler Loop 1",
+                                "energy_source_type": "NATURAL_GAS"
+                            }
+                        ],
+                        "chillers": [
+                            {
+                                "id": "Chiller 1",
+                                "cooling_loop": "Chiller Loop 1"
+                            }
+                        ],
+                        "pumps": [
+                            {
+                                "id": "Boiler Pump 1",
+                                "loop_or_piping": "Boiler Loop 1",
+                                "speed_control": "FIXED_SPEED"
+                            },
+                            {
+                                "id": "Chiller Pump 1",
+                                "loop_or_piping": "Chiller Loop 1",
+                                "speed_control": "FIXED_SPEED"
+                            },
+                            {
+                                "id": "Secondary CHW Pump",
+                                "loop_or_piping": "Secondary CHW Loop 1",
+                                "speed_control": "VARIABLE_SPEED"
+                            }
+                        ],
+                        "fluid_loops": [
+                            {
+                                "id": "Boiler Loop 1",
+                                "type": "HEATING"
+                            },
+                            {
+                                "id": "Chiller Loop 1",
+                                "type": "COOLING",
+                                "child_loops": [
+                                    {
+                                        "id": "Secondary CHW Loop 1"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                "weather": {
+                    "climate_zone": "CZ5A"
+                }
+            }
+        }
+    },
+    "rule-19-21-l": {
+        "Section": 19,
+        "Rule": 21,
+        "Test": "l",
+        "test_description": "Project is in climate zone 5A and contains baseline system 7 with 5000 cfm of supply air and 75% OA. Energy recovery is incorrectly not modeled for the system.",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "19-21",
+            "ruleset_reference": "G3.1.2.10",
+            "rule_description": "Baseline systems with >= 5,000 CFM supply air and >= 70 %OA shall have energy recovery with 50% enthalpy recovery ratio.  Exceptions include:\n1. Systems serving spaces that are not cooled and that are heated to less than 60\u00b0F. \n2. Systems exhausting toxic, flammable, or corrosive fumes or paint or dust. This exception shall only be used if exhaust air energy recovery is not used in the proposed design. \n3. Commercial kitchen hoods (grease) classified as Type 1 by NFPA 96. This exception shall only be used if exhaust air energy recovery is not used in the proposed design. \n4. Heating systems in Climate Zones 0 through 3. \n5. Cooling systems in Climate Zones 3C, 4C, 5B, 5C, 6B, 7, and 8. \n6. Where the largest exhaust source is less than 75% of the design outdoor airflow. This excep-tion shall only be used if exhaust air energy recovery is not used in the proposed design. \n7. Systems requiring dehumidification that employ energy recovery in series with the cooling coil. This exception shall only be used if exhaust air energy recovery and series-style energy recovery coils are not used in the proposed design. ",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "primary_rule": "Yes",
+            "schema_version": "0.0.23"
+        },
+        "rmr_transformations": {
+            "proposed": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_instances": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_open_schedule": "Required Building Schedule 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                                "terminals": [
+                                                    {
+                                                        "id": "VAV Air Terminal 1",
+                                                        "is_supply_ducted": true,
+                                                        "type": "VARIABLE_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
+                                                        "heating_source": "HOT_WATER",
+                                                        "heating_from_loop": "Boiler Loop 1"
+                                                    }
+                                                ],
+                                                "design_thermostat_heating_setpoint": 70,
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "lighting_space_type": "OFFICE_OPEN_PLAN"
+                                                    },
+                                                    {
+                                                        "id": "Space 2",
+                                                        "lighting_space_type": "OFFICE_OPEN_PLAN"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "id": "Thermal Zone 2",
+                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                                "terminals": [
+                                                    {
+                                                        "id": "VAV Air Terminal 2",
+                                                        "is_supply_ducted": true,
+                                                        "type": "VARIABLE_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
+                                                        "heating_source": "HOT_WATER",
+                                                        "heating_from_loop": "Boiler Loop 1"
+                                                    }
+                                                ],
+                                                "design_thermostat_heating_setpoint": 70
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "System 7",
+                                                "cooling_system": {
+                                                    "id": "CHW Coil 1",
+                                                    "cooling_system_type": "FLUID_LOOP",
+                                                    "chilled_water_loop": "Secondary CHW Loop 1"
+                                                },
+                                                "preheat_system": {
+                                                    "id": "Preheat Coil 1",
+                                                    "heating_system_type": "FLUID_LOOP",
+                                                    "hot_water_loop": "Boiler Loop 1"
+                                                },
+                                                "fan_system": {
+                                                    "id": "VAV Fan System 1",
+                                                    "fan_control": "VARIABLE_SPEED_DRIVE",
+                                                    "supply_fans": [
+                                                        {
+                                                            "id": "Supply Fan 1",
+                                                            "design_airflow": 5000
+                                                        }
+                                                    ],
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "Return Fan 1"
+                                                        }
+                                                    ],
+                                                    "minimum_outdoor_airflow": 3750,
+                                                    "maximum_outdoor_airflow": 3750
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "boilers": [
+                            {
+                                "id": "Boiler 1",
+                                "loop": "Boiler Loop 1",
+                                "energy_source_type": "NATURAL_GAS"
+                            }
+                        ],
+                        "chillers": [
+                            {
+                                "id": "Chiller 1",
+                                "cooling_loop": "Chiller Loop 1"
+                            }
+                        ],
+                        "pumps": [
+                            {
+                                "id": "Boiler Pump 1",
+                                "loop_or_piping": "Boiler Loop 1",
+                                "speed_control": "FIXED_SPEED"
+                            },
+                            {
+                                "id": "Chiller Pump 1",
+                                "loop_or_piping": "Chiller Loop 1",
+                                "speed_control": "FIXED_SPEED"
+                            },
+                            {
+                                "id": "Secondary CHW Pump",
+                                "loop_or_piping": "Secondary CHW Loop 1",
+                                "speed_control": "VARIABLE_SPEED"
+                            }
+                        ],
+                        "fluid_loops": [
+                            {
+                                "id": "Boiler Loop 1",
+                                "type": "HEATING"
+                            },
+                            {
+                                "id": "Chiller Loop 1",
+                                "type": "COOLING",
+                                "child_loops": [
+                                    {
+                                        "id": "Secondary CHW Loop 1"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                "weather": {
+                    "climate_zone": "CZ5A"
+                }
+            },
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_instances": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_open_schedule": "Required Building Schedule 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                                "terminals": [
+                                                    {
+                                                        "id": "VAV Air Terminal 1",
+                                                        "is_supply_ducted": true,
+                                                        "type": "VARIABLE_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
+                                                        "heating_source": "HOT_WATER",
+                                                        "heating_from_loop": "Boiler Loop 1"
+                                                    }
+                                                ],
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "lighting_space_type": "OFFICE_OPEN_PLAN"
+                                                    },
+                                                    {
+                                                        "id": "Space 2",
+                                                        "lighting_space_type": "OFFICE_OPEN_PLAN"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "id": "Thermal Zone 2",
+                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                                "terminals": [
+                                                    {
+                                                        "id": "VAV Air Terminal 2",
+                                                        "is_supply_ducted": true,
+                                                        "type": "VARIABLE_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
+                                                        "heating_source": "HOT_WATER",
+                                                        "heating_from_loop": "Boiler Loop 1"
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "System 7",
+                                                "cooling_system": {
+                                                    "id": "CHW Coil 1",
+                                                    "cooling_system_type": "FLUID_LOOP",
+                                                    "chilled_water_loop": "Secondary CHW Loop 1"
+                                                },
+                                                "preheat_system": {
+                                                    "id": "Preheat Coil 1",
+                                                    "heating_system_type": "FLUID_LOOP",
+                                                    "hot_water_loop": "Boiler Loop 1"
+                                                },
+                                                "fan_system": {
+                                                    "id": "VAV Fan System 1",
+                                                    "fan_control": "VARIABLE_SPEED_DRIVE",
+                                                    "supply_fans": [
+                                                        {
+                                                            "id": "Supply Fan 1",
+                                                            "design_airflow": 2359.737215999999
+                                                        }
+                                                    ],
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "Return Fan 1"
+                                                        }
+                                                    ],
+                                                    "minimum_outdoor_airflow": 1769.8029119999994,
+                                                    "maximum_outdoor_airflow": 3750,
+                                                    "air_energy_recovery": {
+                                                        "id": "Air Energy Recovery 1",
+                                                        "energy_recovery_operation": "WHEN_MINIMUM_OUTSIDE_AIR"
+                                                    }
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "boilers": [
+                            {
+                                "id": "Boiler 1",
+                                "loop": "Boiler Loop 1",
+                                "energy_source_type": "NATURAL_GAS"
+                            }
+                        ],
+                        "chillers": [
+                            {
+                                "id": "Chiller 1",
+                                "cooling_loop": "Chiller Loop 1"
+                            }
+                        ],
+                        "pumps": [
+                            {
+                                "id": "Boiler Pump 1",
+                                "loop_or_piping": "Boiler Loop 1",
+                                "speed_control": "FIXED_SPEED"
+                            },
+                            {
+                                "id": "Chiller Pump 1",
+                                "loop_or_piping": "Chiller Loop 1",
+                                "speed_control": "FIXED_SPEED"
+                            },
+                            {
+                                "id": "Secondary CHW Pump",
+                                "loop_or_piping": "Secondary CHW Loop 1",
+                                "speed_control": "VARIABLE_SPEED"
+                            }
+                        ],
+                        "fluid_loops": [
+                            {
+                                "id": "Boiler Loop 1",
+                                "type": "HEATING"
+                            },
+                            {
+                                "id": "Chiller Loop 1",
+                                "type": "COOLING",
+                                "child_loops": [
+                                    {
+                                        "id": "Secondary CHW Loop 1"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                "weather": {
+                    "climate_zone": "CZ5A"
+                }
+            }
+        }
+    }
+}
