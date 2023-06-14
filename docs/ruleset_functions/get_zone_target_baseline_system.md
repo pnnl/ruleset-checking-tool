@@ -20,16 +20,19 @@
 - **get_predominant_HVAC_building_area_type**
 - **get_number_of_floors**
 - **expected_system_type_from_Table_G3_1_1**
+- **get_zone_conditioning_category**
 
 **Data Lookup**
 - **Table G3.1.1**
 
 ## Logic:
+- use the function get_zone_conditioning_category to get a dictionary of zone id's and their conditioning category - we will only include conditioned zones in the building_area_types_with_total_area_and_zones_dict: `zone_conditioning_category_dict = get_zone_conditioning_category(RMI)`
 - create zones_and_systems list: `zones_and_systems = {}`
 - pre-fill the list with an empty string:
 	- `for building_segment in RMR.building.building_segments:`
 		- `for zone in building_segment.zones:`
-			- add all zones that are conditioned: `if zone.conditioning_type != UNCONDITIONED: zones_and_systems[zone] = {}`
+			- using zone_conditioning_category_dict, check if the zone is conditioned. `if zone_conditioning_category_dict[zone.id] == "CONDITIONED RESIDENTIAL" || zone_conditioning_category_dict[zone.id] == "CONDITIONED NON-RESIDENTIAL" || zone_conditioning_category_dict[zone.id] == "CONDITIONED MIXED"`:
+				- add all zones that are conditioned: `zones_and_systems[zone] = {}`
 - get the list of HVAC building area types and zones: `list_building_area_types_and_zones = get_HVAC_building_area_types_and_zones(B-RMR)`
 - get the predominant building area type: `predominant_building_area_type = get_predominant_HVAC_building_area_type(list_building_area_types_and_zones)`
 - get the total number of floors for the building: `num_floors = get_number_of_floors(B-RMI)`
