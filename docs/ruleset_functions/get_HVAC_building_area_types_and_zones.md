@@ -12,7 +12,8 @@
 **Returns:**  
 - **building_area_types_with_total_area_and_zones_dict**: A dict that saves all the HVAC building area types and includes a list of all the zone ids associated with area type as well as the total area of each building area type: {OTHER_NON_RESIDENTIAL: {"ZONE_IDS": ["zone_1","zone_5"], "AREA": 1234, "CLASSIFICATION_SOURCE": "BUILDING_SEGMENT_HVAC_BAT"}, PUBLIC_ASSEMBLY: {"ZONE_IDS": ["zone_2", "zone_3", "zone_4"], "AREA": 34567, "CLASSIFICATION_SOURCE": "BUILDING_SEGMENT_LIGHTING"}, RESIDENTIAL: {"ZONE_IDS": ["r1","r2","r3"], "AREA": 20381, "CLASSIFICATION_SOURCE": "SPACE_LIGHTING"}
  
-**Function Call:** None
+**Function Call:** 
+- **get_zone_conditioning_category**
 
 ## Logic:  
 - create lookup table for lighting space types: `lighting_space_lookup = {`  
@@ -154,6 +155,7 @@
 	
 	`}`  
 
+- use the function get_zone_conditioning_category to get a dictionary of zone id's and their conditioning category - we will only include conditioned zones in the building_area_types_with_total_area_and_zones_dict: `zone_conditioning_category_dict = get_zone_conditioning_category(RMI)`
 - create dict `building_area_types_with_total_area_and_zones_dict`: `building_area_types_with_total_area_and_zones_dict = {}`
 - For each building segment in RMR: `for building_segment in RMR.building.building_segments:`
 	- if the building segment has a HVAC_BAT assigned, assign all zones in that building segment to the HVAC_BAT: `if building_segment.area_type_heating_ventilating_air_conditioning_system != NULL:`
@@ -173,9 +175,10 @@
 		- assign "SPACE_LIGHTING" to classification_source: `classification_source = "SPACE_LIGHTING"`
 	- at this point, the building_segment_HVAC_BAT has been defined by one of the three approaches, add a list for this type of HVAC_BAT to the building_area_types_with_total_area_and_zones_dict if it doesn't exist already: `building_area_types_with_total_area_and_zones_dict[building_segment_HVAC_BAT] = building_area_types_with_total_area_and_zones_dict[building_segment_HVAC_BAT] or {"ZONE_IDS":[], "AREA":0, "CLASSIFICATION_SOURCE": classification_source}`
 	- loop through each zone: `for zone in building_segment.zones:`
-		- add the zone to the building_area_types_with_total_area_and_zones_dict: `building_area_types_with_total_area_and_zones_dict[building_segment_HVAC_BAT]["ZONE_IDS"].append(zone.id)`
-			- loop through each space: `for space in zone.spaces:`
-				- add the space area to the building_area_types_with_total_area_and_zones_dict: `building_area_types_with_total_area_and_zones_dict[building_segment_HVAC_BAT]["AREA"] += space.floor_area`
+		- using zone_conditioning_category_dict, check if the zone is conditioned. `if zone_conditioning_category_dict[zone.id] == "CONDITIONED RESIDENTIAL" || zone_conditioning_category_dict[zone.id] == "CONDITIONED NON-RESIDENTIAL" || zone_conditioning_category_dict[zone.id] == "CONDITIONED MIXED"`:
+			- add the zone to the building_area_types_with_total_area_and_zones_dict: `building_area_types_with_total_area_and_zones_dict[building_segment_HVAC_BAT]["ZONE_IDS"].append(zone.id)`
+				- loop through each space: `for space in zone.spaces:`
+					- add the space area to the building_area_types_with_total_area_and_zones_dict: `building_area_types_with_total_area_and_zones_dict[building_segment_HVAC_BAT]["AREA"] += space.floor_area`
 - we still need to deal with the possibility that there are spaces classified as OTHER_UNDETERMINED: `if OTHER_UNDETERMINED in building_area_types_with_total_area_and_zones_dict:`
 	- determine what the largest space type is: `predominate_HVAC_BAT = sorted(building_area_types_with_total_area_and_zones_dict.items(), key=lambda x: x[1]["AREA"], reverse = True)[0][0]`
 	- if RESIDENTIAL or OTHER_UNDETERMINED is the largest space area: `if predominate_HVAC_BAT == OTHER_UNDETERMINED or predominate_HVAC_BAT == RESIDENTIAL:`
