@@ -3,7 +3,7 @@
         "Section": 19,
         "Rule": 19,
         "Test": "a",
-        "test_description": "System 9 with `SIMPLE` specification method for supply/return/exhaust/relief fans and each of 5 fans have 60 W design electric power for a total of 300 W with 1000 cfm design supply airflow.",
+        "test_description": "System 9 with `SIMPLE` specification method for supply/return/exhaust/relief fans and each of 5 fans have 59 W design electric power for a total of 295 W with 1000 cfm design supply airflow.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "19-19",
@@ -44,7 +44,7 @@
                                                 "zonal_exhaust_fan": {
                                                     "id": "Zone exhaust fan 1",
                                                     "specification_method": "SIMPLE",
-                                                    "design_electric_power": 60
+                                                    "design_electric_power": 59
                                                 }
                                             }
                                         ],
@@ -63,7 +63,7 @@
                                                         {
                                                             "id": "Supply Fan 1",
                                                             "specification_method": "SIMPLE",
-                                                            "design_electric_power": 60,
+                                                            "design_electric_power": 59,
                                                             "design_airflow": 471.94744319999984
                                                         }
                                                     ],
@@ -71,21 +71,21 @@
                                                         {
                                                             "id": "Return fan 1",
                                                             "specification_method": "SIMPLE",
-                                                            "design_electric_power": 60
+                                                            "design_electric_power": 59
                                                         }
                                                     ],
                                                     "relief_fans": [
                                                         {
                                                             "id": "Relief fan 1",
                                                             "specification_method": "SIMPLE",
-                                                            "design_electric_power": 60
+                                                            "design_electric_power": 59
                                                         }
                                                     ],
                                                     "exhaust_fans": [
                                                         {
                                                             "id": "Exhaust fan 1",
                                                             "specification_method": "SIMPLE",
-                                                            "design_electric_power": 60
+                                                            "design_electric_power": 59
                                                         }
                                                     ]
                                                 }
