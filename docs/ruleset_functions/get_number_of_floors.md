@@ -10,17 +10,20 @@
 - **result**: an integer indicating the number of floors
  
 **Function Call:**
+- **get_zone_conditioning_category**
 
 ## Logic:
 - check to see if Building.number_of_floors_above_grade and Building.number_of_floors_below_grade exisits, if so, the sum of these two numbers will be returned. `if Building.number_of_floors_above_grade != null && Building.number_of_floors_below_grade != null:`
 	- set result equal to the number of floors above grade plus the number of floors below grade: `result = Building.number_of_floors_above_grade + null && Building.number_of_floors_below_grade`
 - otherwise, the number of floors is not explicitly stated, count the number of floors based on floor_name:
+	- use the function get_zone_conditioning_category to get a dictionary of zone id's and their conditioning category - we will only include conditioned zones in the building_area_types_with_total_area_and_zones_dict: `zone_conditioning_category_dict = get_zone_conditioning_category(RMI)`
 	- create a set of the floor names.  We use a set because only unique elements can be added to the set: `floor_names = set()`
 	- loop through the building segments: `for segment in RMI.building.building_segments:`
 		- loop through the zones: `for zone in segment.zones:`
-			- loop through the spaces in the zone: `for space in zone:`
-				- eligible zones are zones that are not parking garage zones if any of the spaces are not PARKING_GARAGE, then this zone is not exclusively a parking garage space: `if space.lighting_space_type != PARKING_GARAGE:`
-					- add the floor name to the set of floor names.  It doesn't matter if the floor name is already in the set, because a set, by definition can only have one of each item: `floor_names.add(zone.floor_name)`
+			- using zone_conditioning_category_dict, check if the zone is conditioned or semi-heated. `if zone_conditioning_category_dict[zone.id] == "CONDITIONED RESIDENTIAL" || zone_conditioning_category_dict[zone.id] == "CONDITIONED NON-RESIDENTIAL" || zone_conditioning_category_dict[zone.id] == "CONDITIONED MIXED" || zone_conditioning_category_dict[zone.id] == "SEMI-HEATED"`:
+				- loop through the spaces in the zone: `for space in zone:`
+					- eligible zones are zones that are not parking garage zones if any of the spaces are not PARKING_GARAGE, then this zone is not exclusively a parking garage space: `if space.lighting_space_type != PARKING_GARAGE:`
+						- add the floor name to the set of floor names.  It doesn't matter if the floor name is already in the set, because a set, by definition can only have one of each item: `floor_names.add(zone.floor_name)`
 	- the number of items in the set equals the number of floors in the building.  Set result equal to the length of the set: `result = len(floor_names)`
 
 **Returns** `result`
