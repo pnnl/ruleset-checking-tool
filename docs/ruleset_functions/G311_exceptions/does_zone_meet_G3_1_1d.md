@@ -8,7 +8,6 @@ exhaust rate greater than 15,000 cfm, use a single system of type 5 or 7 serving
 This function gets the system-wide exhaust airflow rate following the same logic as the function **get_zone_supply_return_exhaust_relief_terminal_fan_power_dict**
 
 **Inputs:** 
-- **B_RMI**
 - **P_RMI**
 - **zone**
 - **zones_and_systems** - this is a dict of the existing expected system types from the function `get_zone_target_baseline_system`
