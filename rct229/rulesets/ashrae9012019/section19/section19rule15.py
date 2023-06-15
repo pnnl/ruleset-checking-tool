@@ -92,13 +92,13 @@ class Section19Rule15(RuleDefinitionListIndexedBase):
             hvac_info_dict_b[hvac_id_b]["proposed_supply_flow"] = sum(
                 [
                     terminal_p.get("primary_airflow", ZERO.FLOW)
+                    for zone_id_b in zones_and_terminal_units_served_by_hvac_sys_dict[
+                        hvac_id_b
+                    ]["zone_list"]
                     for terminal_p in find_all(
                         f'$.buildings[*].building_segments[*].zones[*][?(@.id = "{zone_id_b}")].terminals[*]',
                         rmi_p,
                     )
-                    for zone_id_b in zones_and_terminal_units_served_by_hvac_sys_dict[
-                        hvac_id_b
-                    ]["zone_list"]
                 ],
                 ZERO.FLOW,
             )
@@ -174,12 +174,8 @@ class Section19Rule15(RuleDefinitionListIndexedBase):
             hvac_id_b = calc_vals["hvac_id_b"]
             supply_fan_qty_b = calc_vals["supply_fan_qty_b"]
             supply_fan_airflow_b = calc_vals["supply_fan_airflow_b"]
-            all_design_setpionts_105 = calc_vals["hvac_info_dict_b"][hvac_id_b][
-                "all_design_setpionts_105"
-            ]
-            proposed_supply_flow = calc_vals["hvac_info_dict_b"][hvac_id_b][
-                "proposed_supply_flow"
-            ]
+            all_design_setpionts_105 = calc_vals["all_design_setpionts_105"]
+            proposed_supply_flow = calc_vals["proposed_supply_flow"]
 
             return (
                 supply_fan_qty_b == 1
