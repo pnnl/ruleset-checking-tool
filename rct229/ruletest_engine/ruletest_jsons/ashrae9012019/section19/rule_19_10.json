@@ -1557,7 +1557,7 @@
                                         "lighting_building_area_type": "RETAIL"
                                     }
                                 ],
-                                "refrigerated_casess": [
+                                "refrigerated_cases": [
                                     {
                                         "id": "Refrigerated Case 1",
                                         "type": "COMMERCIAL_REFRIGERATION"
@@ -1809,7 +1809,7 @@
                                         "lighting_building_area_type": "RETAIL"
                                     }
                                 ],
-                                "refrigerated_casess": [
+                                "refrigerated_cases": [
                                     {
                                         "id": "Refrigerated Case 1",
                                         "type": "COMMERCIAL_REFRIGERATION"

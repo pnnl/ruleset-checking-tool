@@ -74,20 +74,6 @@ class Section19Rule10(RuleDefinitionListIndexedBase):
             data_items={"climate_zone": ("baseline", "weather/climate_zone")},
         )
 
-    def is_applicable(self, context, data=None):
-        rmr_b = context.baseline
-        rmi_b = rmr_b["ruleset_model_instances"][0]
-
-        baseline_system_types_dict_b = get_baseline_system_types(rmi_b)
-
-        return any(
-            [
-                baseline_system_type_compare(system_type, applicable_sys_type, False)
-                for system_type in baseline_system_types_dict_b
-                for applicable_sys_type in APPLICABLE_SYS_TYPES
-            ]
-        )
-
     class RulesetModelInstanceRule(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section19Rule10.RulesetModelInstanceRule, self,).__init__(
@@ -99,15 +85,26 @@ class Section19Rule10(RuleDefinitionListIndexedBase):
 
         def is_applicable(self, context, data=None):
             climate_zone = data["climate_zone"]
+            rmi_b = context.baseline
 
-            return climate_zone not in NOT_APPLICABLE_CLIMATE_ZONE
+            baseline_system_types_dict_b = get_baseline_system_types(rmi_b)
+
+            return climate_zone not in NOT_APPLICABLE_CLIMATE_ZONE and any(
+                [
+                    baseline_system_type_compare(
+                        system_type, applicable_sys_type, False
+                    )
+                    for system_type in baseline_system_types_dict_b
+                    for applicable_sys_type in APPLICABLE_SYS_TYPES
+                ]
+            )
 
         def create_data(self, context, data):
             rmi_b = context.baseline
             rmi_p = context.proposed
 
             hvac_system_exception_2_list = []
-            if find_all("$.refrigerated_casess", rmi_b):
+            if find_all("$.buildings[*].refrigerated_cases", rmi_b):
                 hvac_system_exception_2_list = [
                     hvac_id_b
                     for hvac_id_b in find_all(
@@ -226,7 +223,7 @@ class Section19Rule10(RuleDefinitionListIndexedBase):
                 HVAC_systems_primarily_serving_comp_rooms_list = calc_vals[
                     "HVAC_systems_primarily_serving_comp_rooms_list"
                 ]
-                stop = 1
+
                 return (
                     (
                         fan_air_economizer_b is None
