@@ -22,7 +22,7 @@
 		- loop through the zones: `for zone in segment.zones:`
 			- using zone_conditioning_category_dict, check if the zone is conditioned or semi-heated. `if zone_conditioning_category_dict[zone.id] == "CONDITIONED RESIDENTIAL" || zone_conditioning_category_dict[zone.id] == "CONDITIONED NON-RESIDENTIAL" || zone_conditioning_category_dict[zone.id] == "CONDITIONED MIXED" || zone_conditioning_category_dict[zone.id] == "SEMI-HEATED"`:
 				- loop through the spaces in the zone: `for space in zone:`
-					- eligible zones are zones that are not parking garage zones if any of the spaces are not PARKING_GARAGE, then this zone is not exclusively a parking garage space: `if space.lighting_space_type != PARKING_GARAGE:`
+					- eligible zones are zones that are not parking garage zones if any of the spaces are not PARKING_AREA_INTERIOR, then this zone is not exclusively a parking garage space: `if space.lighting_space_type != PARKING_AREA_INTERIOR:`
 						- add the floor name to the set of floor names.  It doesn't matter if the floor name is already in the set, because a set, by definition can only have one of each item: `floor_names.add(zone.floor_name)`
 	- the number of items in the set equals the number of floors in the building.  Set result equal to the length of the set: `result = len(floor_names)`
 
