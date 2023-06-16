@@ -100,55 +100,49 @@ class Section19Rule4(RuleDefinitionListIndexedBase):
                         list_path="$.spaces[*]",
                     )
 
-                def is_applicable(self, context, data=None):
-                    zone_b = context.baseline
-                    infiltration_b = zone_b.get("infiltration")
-                    if infiltration_b is not None:
-                        infil_multiplier_schedule_b = infiltration_b.get(
-                            "multiplier_schedule"
-                        )
-                    else:
-                        infil_multiplier_schedule_b = None
-
-                    return infil_multiplier_schedule_b
-
                 def create_data(self, context, data):
                     day_of_week_for_january_1 = data["day_of_week_for_january_1"]
                     schedule_b = data["schedule_b"]
                     zone_b = context.baseline
 
                     # check infiltration
-                    multiplier_sch_inf_b = zone_b["infiltration"]["multiplier_schedule"]
-                    multiplier_sch_hourly_value_b = getattr_(
-                        find_exactly_one_with_field_value(
-                            "$[*]",
-                            "id",
-                            multiplier_sch_inf_b,
-                            schedule_b,
-                        ),
-                        "schedule",
-                        "hourly_values",
-                    )
-                    design_cooling_multiplier_sch_b = getattr_(
-                        find_exactly_one_with_field_value(
-                            "$[*]",
-                            "id",
-                            multiplier_sch_inf_b,
-                            schedule_b,
-                        ),
-                        "schedule",
-                        "hourly_cooling_design_day",
-                    )
-
-                    most_used_weekday_hourly_schedule_b = (
-                        get_most_used_weekday_hourly_schedule(
-                            multiplier_sch_hourly_value_b, day_of_week_for_january_1
+                    inf_pass_cooling_b = True
+                    # TODO: need add log here if zone has no infiltration (add TODO lighting, occ, equip)
+                    if zone_b.get("infiltration"):
+                        multiplier_sch_inf_b = getattr_(
+                            zone_b, "Zone", "infiltration", "multiplier_schedule"
                         )
-                    )
-                    inf_pass_cooling_b = (
-                        design_cooling_multiplier_sch_b
-                        == most_used_weekday_hourly_schedule_b
-                    )
+                        multiplier_sch_hourly_value_b = getattr_(
+                            find_exactly_one_with_field_value(
+                                "$[*]",
+                                "id",
+                                multiplier_sch_inf_b,
+                                schedule_b,
+                            ),
+                            "schedule",
+                            "hourly_values",
+                        )
+
+                        design_cooling_multiplier_sch_b = getattr_(
+                            find_exactly_one_with_field_value(
+                                "$[*]",
+                                "id",
+                                multiplier_sch_inf_b,
+                                schedule_b,
+                            ),
+                            "schedule",
+                            "hourly_cooling_design_day",
+                        )
+
+                        most_used_weekday_hourly_schedule_b = (
+                            get_most_used_weekday_hourly_schedule(
+                                multiplier_sch_hourly_value_b, day_of_week_for_january_1
+                            )
+                        )
+                        inf_pass_cooling_b = (
+                            design_cooling_multiplier_sch_b
+                            == most_used_weekday_hourly_schedule_b
+                        )
 
                     return {"inf_pass_cooling_b": inf_pass_cooling_b}
 
@@ -165,7 +159,9 @@ class Section19Rule4(RuleDefinitionListIndexedBase):
                         space_b = context.baseline
                         lighting_space_type_b = space_b.get("lighting_space_type")
                         ventilation_space_type_b = space_b.get("ventilation_space_type")
-                        interior_lighting_b = space_b.get("interior_lighting")
+                        interior_lighting_b = space_b.get(
+                            "interior_lighting"
+                        )  # use the same logic as in infiltration
                         miscellaneous_equipment_b = space_b.get(
                             "miscellaneous_equipment"
                         )
