@@ -174,6 +174,7 @@ class Section19Rule4(RuleDefinitionListIndexedBase):
 
                         # check occupancy schedule
                         occ_pass_cooling_b = False
+                        # TODO: need add log here if zone has no infiltration (add TODO lighting, occ, equip)
                         if space_b.get("occupant_multiplier_schedule"):
                             multiplier_sch_occ_hourly_value_b = getattr_(
                                 find_exactly_one_with_field_value(
