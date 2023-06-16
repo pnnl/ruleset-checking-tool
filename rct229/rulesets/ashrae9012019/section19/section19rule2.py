@@ -28,7 +28,11 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_s
     find_exactly_one_hvac_system,
 )
 from rct229.utils.assertions import getattr_
-from rct229.utils.jsonpath_utils import find_all, find_all_with_field_value
+from rct229.utils.jsonpath_utils import (
+    find_all,
+    find_one,
+    find_one_with_field_value,
+)
 
 HEATING_SOURCE = schema_enums["HeatingSourceOptions"]
 FLUID_LOOP = schema_enums["FluidLoopOptions"]
@@ -53,10 +57,6 @@ class Section19Rule2(RuleDefinitionListIndexedBase):
 
     def create_data(self, context, data):
         rmi_b = context.baseline
-
-        chiller_cooling_loop_b = find_all(
-            "$.buildings[*].chillers[*].cooling_loop", rmi_b
-        )
 
         HW_fluid_loop_list = []
         CW_fluid_loop_list = []
@@ -100,20 +100,28 @@ class Section19Rule2(RuleDefinitionListIndexedBase):
                     "chilled_water_loop",
                 )
                 CHW_fluid_loop_list.append(chilled_water_loop_b)
-                if chilled_water_loop_b in chiller_cooling_loop_b:
-                    chiller_b = find_all_with_field_value(
-                        "$.chillers[*]",
-                        "cooling_loop",
-                        getattr_(
-                            hvac_b, "HVAC", "cooling_system", "chilled_water_loop"
-                        ),
-                        rmi_b,
-                    )
-                    if chiller_b.get("condensing_loop"):
-                        CW_fluid_loop_list.append(chiller_b["condensing_loop"])
-                else:
-                    primary_loop_b = find_exactly_one_child_loop(
+
+                chiller_b = find_one_with_field_value(
+                    "$.chillers[*]",
+                    "cooling_loop",
+                    getattr_(hvac_b, "HVAC", "cooling_system", "chilled_water_loop"),
+                    rmi_b,
+                )
+                if chiller_b.get("condensing_loop"):
+                    CW_fluid_loop_list.append(chiller_b["condensing_loop"])
+
+                # when the fluid loop is the secondary loop, find the primary loop and add its id to the CHW_fluid_loop_list
+                if chilled_water_loop_b not in find_all(
+                    f'$.fluid_loops[*][?(@.cooling_loop = "{FLUID_LOOP.COOLING})"]',
+                    rmi_b,
+                ):
+                    # find out the primary loop from the secondary loop
+                    child_loop_id_b = find_exactly_one_child_loop(
                         rmi_b, chilled_water_loop_b
+                    )["id"]
+                    primary_loop_b = find_one(
+                        f'$.fluid_loops[*].child_loops[*][?(@.id="{child_loop_id_b}")]',
+                        rmi_b,
                     )
                     CHW_fluid_loop_list.append(primary_loop_b["id"])
 

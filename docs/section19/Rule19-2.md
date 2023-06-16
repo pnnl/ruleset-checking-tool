@@ -42,6 +42,8 @@
                 - If chiller has condenser loop, add the loop to the CW list: `if chiller.condensing_loop: CW_list.append(chiller.condensing_loop)`    
             - Else, find out the primary loop from the secondary loop: `primary_loop = find_primary_loop_by_secondary_loop_id(secondary_loop_id, fluid_loops)`    
                 - Add the primary CHW fluid loop to chilled water loop list `CHW_fluid_loop_list =  CHW_fluid_loop_list.append(primary_loop.id)`  
+                - Get the chiller: `chiller = match_id(hvac.cooling_system.chilled_water_loop, chillers)`  
+                - If chiller has condenser loop, add the loop to the CW list: `if chiller.condensing_loop: CW_list.append(chiller.condensing_loop)`   
            
 - Cycle through each terminal unit in the B-RMR and create list of HW loops: `for terminal in B_RMR...Terminal:`  
     - Check if heating source is hot water: `if terminal.heating_source == "HOT_WATER":`   
