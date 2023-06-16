@@ -30,7 +30,6 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_s
 from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import (
     find_all,
-    find_one,
     find_one_with_field_value,
 )
 
@@ -101,27 +100,39 @@ class Section19Rule2(RuleDefinitionListIndexedBase):
                 )
                 CHW_fluid_loop_list.append(chilled_water_loop_b)
 
-                # when the fluid loop is the secondary loop, find the primary loop and add its id to the CHW_fluid_loop_list
-                if chilled_water_loop_b not in find_all(
-                    f'$.fluid_loops[*][?(@.cooling_loop = "{FLUID_LOOP.COOLING})"]',
+                if chilled_water_loop_b in find_all(
+                    f'$.fluid_loops[*][?(@.cooling_loop = "{FLUID_LOOP.COOLING}")]',
                     rmi_b,
                 ):
+                    chiller_b = find_one_with_field_value(
+                        "$.chillers[*]",
+                        "cooling_loop",
+                        getattr_(
+                            hvac_b, "HVAC", "cooling_system", "chilled_water_loop"
+                        ),
+                        rmi_b,
+                    )
+
+                else:
+                    # when the fluid loop is the secondary loop, find the primary loop and add its id to the CHW_fluid_loop_list
                     # find out the primary loop from the secondary loop
                     child_loop_id_b = find_exactly_one_child_loop(
                         rmi_b, chilled_water_loop_b
                     )["id"]
-                    primary_loop_b = find_one(
-                        f'$.fluid_loops[*].child_loops[*][?(@.id="{child_loop_id_b}")]',
+                    primary_loop_id_b = find_one_with_field_value(
+                        "$.fluid_loops[*]",
+                        "child_loops[*].id",
+                        child_loop_id_b,
+                        rmi_b,
+                    )["id"]
+                    CHW_fluid_loop_list.append(primary_loop_id_b)
+
+                    chiller_b = find_one_with_field_value(
+                        "$.chillers[*]",
+                        "cooling_loop",
+                        primary_loop_id_b,
                         rmi_b,
                     )
-                    CHW_fluid_loop_list.append(primary_loop_b["id"])
-
-                chiller_b = find_one_with_field_value(
-                    "$.chillers[*]",
-                    "cooling_loop",
-                    getattr_(hvac_b, "HVAC", "cooling_system", "chilled_water_loop"),
-                    rmi_b,
-                )
 
                 if chiller_b.get("condensing_loop"):
                     CW_fluid_loop_list.append(chiller_b["condensing_loop"])
