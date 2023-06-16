@@ -101,15 +101,6 @@ class Section19Rule2(RuleDefinitionListIndexedBase):
                 )
                 CHW_fluid_loop_list.append(chilled_water_loop_b)
 
-                chiller_b = find_one_with_field_value(
-                    "$.chillers[*]",
-                    "cooling_loop",
-                    getattr_(hvac_b, "HVAC", "cooling_system", "chilled_water_loop"),
-                    rmi_b,
-                )
-                if chiller_b.get("condensing_loop"):
-                    CW_fluid_loop_list.append(chiller_b["condensing_loop"])
-
                 # when the fluid loop is the secondary loop, find the primary loop and add its id to the CHW_fluid_loop_list
                 if chilled_water_loop_b not in find_all(
                     f'$.fluid_loops[*][?(@.cooling_loop = "{FLUID_LOOP.COOLING})"]',
@@ -124,6 +115,16 @@ class Section19Rule2(RuleDefinitionListIndexedBase):
                         rmi_b,
                     )
                     CHW_fluid_loop_list.append(primary_loop_b["id"])
+
+                chiller_b = find_one_with_field_value(
+                    "$.chillers[*]",
+                    "cooling_loop",
+                    getattr_(hvac_b, "HVAC", "cooling_system", "chilled_water_loop"),
+                    rmi_b,
+                )
+
+                if chiller_b.get("condensing_loop"):
+                    CW_fluid_loop_list.append(chiller_b["condensing_loop"])
 
         for CHW_child_loop in find_all(
             "$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*].cooling_system.chilled_water_loop",
