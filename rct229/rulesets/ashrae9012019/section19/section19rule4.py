@@ -159,27 +159,9 @@ class Section19Rule4(RuleDefinitionListIndexedBase):
                         space_b = context.baseline
                         lighting_space_type_b = space_b.get("lighting_space_type")
                         ventilation_space_type_b = space_b.get("ventilation_space_type")
-                        interior_lighting_b = space_b.get(
-                            "interior_lighting"
-                        )  # use the same logic as in infiltration
-                        miscellaneous_equipment_b = space_b.get(
-                            "miscellaneous_equipment"
-                        )
-                        occupant_multiplier_schedule_b = space_b.get(
-                            "occupant_multiplier_schedule"
-                        )
-                        lighting_multiplier_schedule_b = space_b.get(
-                            "lighting_multiplier_schedule"
-                        )
-                        multiplier_schedule_b = space_b.get("multiplier_schedule")
 
                         return (
-                            interior_lighting_b
-                            and miscellaneous_equipment_b
-                            and occupant_multiplier_schedule_b
-                            and lighting_multiplier_schedule_b
-                            and multiplier_schedule_b
-                            and lighting_space_type_b == LIGHTING_SPACE.DWELLING_UNIT
+                            lighting_space_type_b == LIGHTING_SPACE.DWELLING_UNIT
                             or ventilation_space_type_b
                             == VENTILATION_SPACE.TRANSIENT_RESIDENTIAL_DWELLING_UNIT
                         )
@@ -191,37 +173,39 @@ class Section19Rule4(RuleDefinitionListIndexedBase):
                         space_b = context.baseline
 
                         # check occupancy schedule
-                        multiplier_sch_occ_hourly_value_b = getattr_(
-                            find_exactly_one_with_field_value(
-                                "$[*]",
-                                "id",
-                                space_b["occupant_multiplier_schedule"],
-                                schedule_b,
-                            ),
-                            "schedule",
-                            "hourly_values",
-                        )
-                        design_cooling_multiplier_sch_b = getattr_(
-                            find_exactly_one_with_field_value(
-                                "$[*]",
-                                "id",
-                                space_b["occupant_multiplier_schedule"],
-                                schedule_b,
-                            ),
-                            "schedule",
-                            "hourly_cooling_design_day",
-                        )
-
-                        most_used_weekday_hourly_schedule_b = (
-                            get_most_used_weekday_hourly_schedule(
-                                multiplier_sch_occ_hourly_value_b,
-                                day_of_week_for_january_1,
+                        occ_pass_cooling_b = False
+                        if space_b.get("occupant_multiplier_schedule"):
+                            multiplier_sch_occ_hourly_value_b = getattr_(
+                                find_exactly_one_with_field_value(
+                                    "$[*]",
+                                    "id",
+                                    space_b["occupant_multiplier_schedule"],
+                                    schedule_b,
+                                ),
+                                "schedule",
+                                "hourly_values",
                             )
-                        )
-                        occ_pass_cooling_b = (
-                            most_used_weekday_hourly_schedule_b
-                            == design_cooling_multiplier_sch_b
-                        )
+                            design_cooling_multiplier_sch_b = getattr_(
+                                find_exactly_one_with_field_value(
+                                    "$[*]",
+                                    "id",
+                                    space_b["occupant_multiplier_schedule"],
+                                    schedule_b,
+                                ),
+                                "schedule",
+                                "hourly_cooling_design_day",
+                            )
+
+                            most_used_weekday_hourly_schedule_b = (
+                                get_most_used_weekday_hourly_schedule(
+                                    multiplier_sch_occ_hourly_value_b,
+                                    day_of_week_for_january_1,
+                                )
+                            )
+                            occ_pass_cooling_b = (
+                                most_used_weekday_hourly_schedule_b
+                                == design_cooling_multiplier_sch_b
+                            )
 
                         # check interior lighting
                         int_lgt_pass_cooling_b = False
@@ -229,9 +213,12 @@ class Section19Rule4(RuleDefinitionListIndexedBase):
                             "$.interior_lighting[*]", space_b
                         ):
                             if not int_lgt_pass_cooling_b:
-                                multiplier_sch_light_b = interior_lighting_b[
-                                    "lighting_multiplier_schedule"
-                                ]
+                                multiplier_sch_light_b = getattr_(
+                                    interior_lighting_b,
+                                    "Interior Lighting",
+                                    "lighting_multiplier_schedule",
+                                )
+
                                 multiplier_sch_hourly_value_b = getattr_(
                                     find_exactly_one_with_field_value(
                                         "$[*]",
@@ -271,9 +258,12 @@ class Section19Rule4(RuleDefinitionListIndexedBase):
                             "$.miscellaneous_equipment[*]", space_b
                         ):
                             if not misc_pass_cooling_b:
-                                multiplier_sch_light_b = misc_equip_b[
-                                    "multiplier_schedule"
-                                ]
+                                multiplier_sch_light_b = getattr_(
+                                    misc_equip_b,
+                                    "Mmiscellaneous Equipment",
+                                    "multiplier_schedule",
+                                )
+
                                 multiplier_sch_hourly_value_b = getattr_(
                                     find_exactly_one_with_field_value(
                                         "$[*]",
