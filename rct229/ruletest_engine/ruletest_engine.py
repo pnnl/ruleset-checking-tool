@@ -368,7 +368,7 @@ def generate_software_test_report(ruleset, section_list, output_json_path):
         report_dict = ASHRAE9012019SoftwareTestReport()
         report_dict.initialize_ruleset_report()
     else:
-        raise Exception(f"Ruleset '{ruleset}' has no default list of section tests.")
+        raise Exception(f"Ruleset '{ruleset}' has no default software test report.")
 
     if section_list is None:
 
@@ -446,7 +446,7 @@ def generate_rct_outcomes_list_from_section_list(section_list, ruleset):
     # required by the ASHRAE9012019SoftwareTestReport's generate function as a starting point
     for section in section_list:
 
-        # Create path to test JSON (e.g. 'transformer_tests.json')
+        # Create path to test JSON (e.g. 'section6_master.json')
         master_json_path = os.path.join(
             os.path.dirname(__file__),
             "ruletest_jsons",
@@ -687,13 +687,13 @@ def evaluate_outcome_object(outcome_dict, test_result_dict, test_dict, test_id):
         test_result_dict[f"{test_id}"].append(received_expected_outcome)
 
 
-def flatten_outcome_object(outcome_dict, flattened_outcome_list=[]):
+def flatten_outcome_object(outcome_object, flattened_outcome_list=[]):
     """Checks every element in an RCT outcome dictionary and unravels the nested structure to produce a list of outcome
     results to be read in by rule_unit_test_evaluation as part of the software testing report
 
     Parameters
     ----------
-    outcome_dict : list or dict
+    outcome_object : list or dict
 
        The evaluate_rule function returns a dictionary with an "outcome" key. This is an instance of the object
        contained in that dictionary.
@@ -742,17 +742,18 @@ def flatten_outcome_object(outcome_dict, flattened_outcome_list=[]):
 
     # If the result key is a list of results (i.e. many elements get tested), keep drilling down until you get single
     # dictionary
-    if isinstance(outcome_dict, list):
+    if isinstance(outcome_object, list):
 
         # Iterate through each outcome in outcome results recursively until you get down to individual results
-        for nested_outcome in outcome_dict:
+        for nested_outcome in outcome_object:
             # Check outcome of each in list recursively until "result" key is not a list, but a dictionary
             flatten_outcome_object(nested_outcome, flattened_outcome_list)
 
-    elif isinstance(outcome_dict["result"], list):
+    # If not a list, assumed to be a dictionary with key "result". Check if the value for "key" is a list.
+    elif isinstance(outcome_object["result"], list):
 
         # Iterate through each outcome in outcome results recursively until you get down to individual results
-        for nested_outcome in outcome_dict["result"]:
+        for nested_outcome in outcome_object["result"]:
 
             # Check outcome of each in list recursively until "result" key is not a list, but a dictionary
             flatten_outcome_object(nested_outcome, flattened_outcome_list)
@@ -764,13 +765,13 @@ def flatten_outcome_object(outcome_dict, flattened_outcome_list=[]):
         rule_unit_test_evaluation_dict = dict()
 
         # Extract relevant information
-        rule_unit_test_evaluation_dict["id"] = outcome_dict["id"]
-        rule_unit_test_evaluation_dict["result"] = outcome_dict["result"]
+        rule_unit_test_evaluation_dict["id"] = outcome_object["id"]
+        rule_unit_test_evaluation_dict["result"] = outcome_object["result"]
         rule_unit_test_evaluation_dict["message"] = (
-            outcome_dict["message"] if "message" in outcome_dict else None
+            outcome_object["message"] if "message" in outcome_object else None
         )
         rule_unit_test_evaluation_dict["calculated_values"] = (
-            deepcopy(outcome_dict["calc_vals"]) if "calc_vals" in outcome_dict else None
+            deepcopy(outcome_object["calc_vals"]) if "calc_vals" in outcome_object else None
         )
 
         # Convert any Quantity in calculated values to a str. This allows them to be serializable for a JSON
