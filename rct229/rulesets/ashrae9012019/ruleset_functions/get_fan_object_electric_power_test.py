@@ -1,3 +1,5 @@
+import pytest
+
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_fan_object_electric_power import (
     get_fan_object_electric_power,
 )
@@ -6,7 +8,6 @@ from rct229.schema.schema_utils import quantify_rmr
 from rct229.schema.validate import schema_validate_rmr
 from rct229.utils.assertions import RCTFailureException
 from rct229.utils.jsonpath_utils import find_exactly_one_with_field_value
-import pytest
 
 TEST_RMD = {
     "id": "ASHRAE229 1",

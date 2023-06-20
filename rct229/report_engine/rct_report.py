@@ -46,8 +46,10 @@ class RCTReport:
         elif "rule_id" in rct_outcome["outcomes"][0]:
             id_key = "rule_id"
         else:
-            raise Exception(f"rct_outcome['outcomes'] dictionary has neither a 'rule_id' or 'id' as a key. Cannot be "
-                            f"sorted")
+            raise Exception(
+                f"rct_outcome['outcomes'] dictionary has neither a 'rule_id' or 'id' as a key. Cannot be "
+                f"sorted"
+            )
 
         outcomes = sorted(
             # The key used below splits the id on "-" and ensures the outcomes are sorted by the first components of the ids, then the second components, and so on

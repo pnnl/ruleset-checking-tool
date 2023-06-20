@@ -1,6 +1,6 @@
 import json
-from datetime import datetime
 from copy import deepcopy
+from datetime import datetime
 
 from rct229.report_engine.rct_report import RCTReport
 from rct229.reports.utils import calc_vals_converter
@@ -47,19 +47,23 @@ class ASHRAE9012019SoftwareTestReport(RCTReport):
         expected_outcome = rule_test_dict["expected_rule_unit_test_evaluation_outcome"]
 
         # Record agreement between expected and actual outcome
-        rule_test_dict["rule_unit_test_outcome_agreement"] = expected_outcome == rule_outcome
+        rule_test_dict["rule_unit_test_outcome_agreement"] = (
+            expected_outcome == rule_outcome
+        )
 
         # Reorder keys to match intended order
-        key_order = ["rule_id",
-                     "test_id",
-                     "test_description",
-                     "ruleset_section",
-                     "ruleset_section_title",
-                     "evaluation_type",
-                     "rule_unit_test_outcome_agreement",
-                     "expected_rule_unit_test_evaluation_outcome",
-                     "actual_rule_unit_test_evaluation_outcome",
-                     "rule_unit_test_evaluation"]
+        key_order = [
+            "rule_id",
+            "test_id",
+            "test_description",
+            "ruleset_section",
+            "ruleset_section_title",
+            "evaluation_type",
+            "rule_unit_test_outcome_agreement",
+            "expected_rule_unit_test_evaluation_outcome",
+            "actual_rule_unit_test_evaluation_outcome",
+            "rule_unit_test_evaluation",
+        ]
 
         # Create new dictionary with proper order of keys
         ordered_rule_test_dict = {key: rule_test_dict[key] for key in key_order}

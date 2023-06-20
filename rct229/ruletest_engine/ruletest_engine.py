@@ -4,19 +4,23 @@ import json
 # from jsonpointer import JsonPointer
 import os
 import pprint
+from copy import deepcopy
 
+from pint import Quantity
+
+from rct229.reports.ashrae901_2019_software_test_report import (
+    ASHRAE9012019SoftwareTestReport,
+)
 from rct229.rule_engine.engine import evaluate_rule
 from rct229.rule_engine.rct_outcome_label import RCTOutcomeLabel
+from rct229.rule_engine.rulesets import RuleSet, RuleSetTest
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 from rct229.rulesets import rulesets
-from rct229.rule_engine.rulesets import RuleSet, RuleSetTest
-from pint import Quantity
 from rct229.ruletest_engine.ruletest_jsons.scripts.json_generation_utilities import (
     merge_nested_dictionary,
 )
 from rct229.schema.validate import validate_rmr
-from copy import deepcopy
-from rct229.reports.ashrae901_2019_software_test_report import ASHRAE9012019SoftwareTestReport
+
 
 # Generates the RMR triplet dictionaries from a test_dictionary's "rmr_transformation" element.
 # -test_dict = Dictionary with elements 'rmr_transformations' and 'rmr_transformations/user,baseline,proposed'
@@ -360,7 +364,7 @@ def generate_software_test_report(ruleset, section_list, output_json_path):
     """
 
     # Initialize report dictionary in which to
-    if ruleset == 'ashrae9012019':
+    if ruleset == "ashrae9012019":
         report_dict = ASHRAE9012019SoftwareTestReport()
         report_dict.initialize_ruleset_report()
     else:
@@ -368,10 +372,12 @@ def generate_software_test_report(ruleset, section_list, output_json_path):
 
     if section_list is None:
 
-        if ruleset == 'ashrae902019':
+        if ruleset == "ashrae902019":
             section_list = RuleSetTest.ASHRAE9012019_TEST_LIST
         else:
-            raise Exception(f"Ruleset '{ruleset}' has no default list of section tests.")
+            raise Exception(
+                f"Ruleset '{ruleset}' has no default list of section tests."
+            )
 
     # Master list of RCT engine outcomes, used to populate report.
     rct_outcomes = generate_rct_outcomes_list_from_section_list(section_list, ruleset)
@@ -380,29 +386,26 @@ def generate_software_test_report(ruleset, section_list, output_json_path):
     report_dict.generate(rct_outcomes, output_json_path)
 
 
-
-
-
 def generate_rct_outcomes_list_from_section_list(section_list, ruleset):
-    """ Runs all the ruletest JSONs for every section in section_list for a given ruleset. Returns the aggregated
-        results as a dictionary that can be used in the generate function for ashrae901_2019_software_test_report
+    """Runs all the ruletest JSONs for every section in section_list for a given ruleset. Returns the aggregated
+    results as a dictionary that can be used in the generate function for ashrae901_2019_software_test_report
 
-        Parameters
-        ----------
-        section_list : list
+    Parameters
+    ----------
+    section_list : list
 
-            List of test JSON directorys in 'test_jsons/[MY_STANDARD]' directory. (e.g., ['section5', 'section6'])
+        List of test JSON directorys in 'test_jsons/[MY_STANDARD]' directory. (e.g., ['section5', 'section6'])
 
-        ruleset: string
+    ruleset: string
 
-            Name of the ruleset (e.g., 'ashrae9012019')
+        Name of the ruleset (e.g., 'ashrae9012019')
 
-        Returns
-        ----------
-        rct_outcomes_dict: dict
+    Returns
+    ----------
+    rct_outcomes_dict: dict
 
-            The dictionary with aggregated results to used in the generate function for the
-            ashrae901_2019_software_test_report
+        The dictionary with aggregated results to used in the generate function for the
+        ashrae901_2019_software_test_report
 
     """
 
@@ -420,7 +423,7 @@ def generate_rct_outcomes_list_from_section_list(section_list, ruleset):
         "19": "HVAC-Airside",
         "21": "HVAC-WaterSide",
         "22": "HVAC-Chiller",
-        "23": "HVAC-Airside?"
+        "23": "HVAC-Airside?",
     }
 
     # Maps excel enumerations for pass/fail etc. to RCTOutcomeLabel. Unfortunately there's a disconnect.
@@ -429,7 +432,7 @@ def generate_rct_outcomes_list_from_section_list(section_list, ruleset):
         "fail": RCTOutcomeLabel.FAILED,
         "undetermined": RCTOutcomeLabel.UNDETERMINED,
         "not_applicable": RCTOutcomeLabel.NOT_APPLICABLE,
-        "manual_check": RCTOutcomeLabel.NOT_APPLICABLE
+        "manual_check": RCTOutcomeLabel.NOT_APPLICABLE,
     }
 
     # get all rules in the ruleset.
@@ -445,7 +448,11 @@ def generate_rct_outcomes_list_from_section_list(section_list, ruleset):
 
         # Create path to test JSON (e.g. 'transformer_tests.json')
         master_json_path = os.path.join(
-            os.path.dirname(__file__), "ruletest_jsons", ruleset, section, f"{section}_master.json"
+            os.path.dirname(__file__),
+            "ruletest_jsons",
+            ruleset,
+            section,
+            f"{section}_master.json",
         )
 
         # Open the master JSON for a given section that contains all the ruletests for a given section and perform
@@ -463,7 +470,9 @@ def generate_rct_outcomes_list_from_section_list(section_list, ruleset):
 
                 # Generate RMR dictionaries for testing
                 user_rmr, baseline_rmr, proposed_rmr = generate_test_rmrs(test_dict)
-                rmr_trio = UserBaselineProposedVals(user_rmr, baseline_rmr, proposed_rmr)
+                rmr_trio = UserBaselineProposedVals(
+                    user_rmr, baseline_rmr, proposed_rmr
+                )
 
                 # Identify Section and rule
                 section = test_dict["Section"]
@@ -492,7 +501,9 @@ def generate_rct_outcomes_list_from_section_list(section_list, ruleset):
                     # Find which RMRs were invalid
                     for invalid_rmr, invalid_rmr_message in invalid_rmrs_dict.items():
                         # Record message communicating that the schema is invalid
-                        invalid_rmr_messages.append(f"INVALID SCHEMA: Test {test_id}: {invalid_rmr} RMR: {invalid_rmr_message}")
+                        invalid_rmr_messages.append(
+                            f"INVALID SCHEMA: Test {test_id}: {invalid_rmr} RMR: {invalid_rmr_message}"
+                        )
 
                 # If RMRs are valid, check their outcomes
                 else:
@@ -502,18 +513,29 @@ def generate_rct_outcomes_list_from_section_list(section_list, ruleset):
 
                     rule_test_outcome_dict["rule_id"] = standard_dict["rule_id"]
                     rule_test_outcome_dict["test_id"] = test_dict["Test"]
-                    rule_test_outcome_dict["test_description"] = test_dict["test_description"]
-                    rule_test_outcome_dict["ruleset_section"] = standard_dict["ruleset_reference"]
-                    rule_test_outcome_dict["ruleset_section_title"] = section_dict[str(test_dict["Section"])]
-                    rule_test_outcome_dict["evaluation_type"] = "FULL" #TODO figure out what the heck this is
-                    rule_test_outcome_dict["expected_rule_unit_test_evaluation_outcome"] = ruletest_outcome_dict[test_dict["expected_rule_outcome"]]
+                    rule_test_outcome_dict["test_description"] = test_dict[
+                        "test_description"
+                    ]
+                    rule_test_outcome_dict["ruleset_section"] = standard_dict[
+                        "ruleset_reference"
+                    ]
+                    rule_test_outcome_dict["ruleset_section_title"] = section_dict[
+                        str(test_dict["Section"])
+                    ]
+                    rule_test_outcome_dict[
+                        "evaluation_type"
+                    ] = "FULL"  # TODO primary rule = FULL, else = APPLICABILITY
+                    rule_test_outcome_dict[
+                        "expected_rule_unit_test_evaluation_outcome"
+                    ] = ruletest_outcome_dict[test_dict["expected_rule_outcome"]]
 
                     # Outcomes come in nested dictionaries. Flatten these results and return them for this ruletest
-                    rule_test_outcome_dict["rule_unit_test_evaluation"] = flatten_outcome_object(evaluation_dict["outcomes"], [])
+                    rule_test_outcome_dict[
+                        "rule_unit_test_evaluation"
+                    ] = flatten_outcome_object(evaluation_dict["outcomes"], [])
 
                     # Append outcome from this test case to list of dictionaries
                     rct_outcomes_list.append(rule_test_outcome_dict)
-
 
     # Aggregate results from section tests for report
     rct_outcomes_dict = dict()
@@ -521,8 +543,6 @@ def generate_rct_outcomes_list_from_section_list(section_list, ruleset):
     rct_outcomes_dict["invalid_rmrs"] = invalid_rmr_messages
 
     return rct_outcomes_dict
-
-
 
 
 def validate_test_json_schema(test_json_path):
@@ -667,7 +687,7 @@ def evaluate_outcome_object(outcome_dict, test_result_dict, test_dict, test_id):
         test_result_dict[f"{test_id}"].append(received_expected_outcome)
 
 
-def flatten_outcome_object(outcome_dict, flattened_outcome_list = []):
+def flatten_outcome_object(outcome_dict, flattened_outcome_list=[]):
     """Checks every element in an RCT outcome dictionary and unravels the nested structure to produce a list of outcome
     results to be read in by rule_unit_test_evaluation as part of the software testing report
 
@@ -716,7 +736,9 @@ def flatten_outcome_object(outcome_dict, flattened_outcome_list = []):
                     calc_value_item[key] = str(value)
 
                 elif isinstance(value, dict):
-                    correct_types_in_calculated_vals(value)  # Recursively check nested dictionary
+                    correct_types_in_calculated_vals(
+                        value
+                    )  # Recursively check nested dictionary
 
     # If the result key is a list of results (i.e. many elements get tested), keep drilling down until you get single
     # dictionary
@@ -744,19 +766,22 @@ def flatten_outcome_object(outcome_dict, flattened_outcome_list = []):
         # Extract relevant information
         rule_unit_test_evaluation_dict["id"] = outcome_dict["id"]
         rule_unit_test_evaluation_dict["result"] = outcome_dict["result"]
-        rule_unit_test_evaluation_dict["message"] = outcome_dict["message"] if "message" in outcome_dict else None
-        rule_unit_test_evaluation_dict["calculated_values"] = deepcopy(outcome_dict["calc_vals"]) if "calc_vals" in outcome_dict else None
+        rule_unit_test_evaluation_dict["message"] = (
+            outcome_dict["message"] if "message" in outcome_dict else None
+        )
+        rule_unit_test_evaluation_dict["calculated_values"] = (
+            deepcopy(outcome_dict["calc_vals"]) if "calc_vals" in outcome_dict else None
+        )
 
         # Convert any Quantity in calculated values to a str. This allows them to be serializable for a JSON
-        correct_types_in_calculated_vals(rule_unit_test_evaluation_dict["calculated_values"])
+        correct_types_in_calculated_vals(
+            rule_unit_test_evaluation_dict["calculated_values"]
+        )
 
         # Append rule unit test evaluation to outcome list
         flattened_outcome_list.append(rule_unit_test_evaluation_dict)
 
-
     return deepcopy(flattened_outcome_list)
-
-
 
 
 def validate_229_rmd(rmd_name, rmd_path):

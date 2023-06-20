@@ -30,7 +30,9 @@ def run_ashrae9012019_tests(section=None):
     ]
 
 
-def generate_ashrae9012019_software_test_report(section_list = None, output_dir = os.path.dirname(__file__)):
+def generate_ashrae9012019_software_test_report(
+    section_list=None, output_dir=os.path.dirname(__file__)
+):
     """
     Generate a software test JSON for ASHRAE 90.1 RCT for a given set of sections If section is None, then this
     function runs all the rule sections
@@ -52,9 +54,7 @@ def generate_ashrae9012019_software_test_report(section_list = None, output_dir 
     if section_list is None:
         section_list = RuleSetTest.ASHRAE9012019_TEST_LIST
 
-    generate_software_test_report('ashrae9012019', section_list, output_dir)
-
-
+    generate_software_test_report("ashrae9012019", section_list, output_dir)
 
 
 def _helper_get_all_test_file_by_section(ruleset: str, path: str):
@@ -182,8 +182,8 @@ def run_test_one_jsontest(test_json):
     return run_section_tests(test_json, RuleSet.ASHRAE9012019_RULESET)
 
 
-if __name__ == "__main__":
-    outcome = run_ashrae9012019_tests(section="section19")
+# if __name__ == "__main__":
+#     outcome = run_ashrae9012019_tests(section="section19")
 
 # run_transformer_tests()
 # run_lighting_tests()
@@ -195,4 +195,7 @@ if __name__ == "__main__":
 # run_hvac_general_tests()
 
 # run_test_one_jsontest("ashrae9012019/section5/rule_5_3.json")
-#generate_ashrae9012019_software_test_report()
+# run_ashrae9012019_tests()
+# output_dir = os.path.dirname(__file__)
+# generate_ashrae9012019_software_test_report(['tester'])
+# generate_ashrae9012019_software_test_report()

@@ -1,8 +1,7 @@
 from rct229.rulesets.ashrae9012019.data.schema_enums import schema_enums
 from rct229.schema.config import ureg
-from rct229.utils.assertions import getattr_, assert_
+from rct229.utils.assertions import assert_, getattr_
 from rct229.utils.pint_utils import ZERO
-
 
 FAN_SPECIFICATION_METHOD = schema_enums["FanSpecificationMethodOptions"]
 
