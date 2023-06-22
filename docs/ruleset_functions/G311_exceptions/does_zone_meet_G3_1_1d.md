@@ -2,8 +2,7 @@
 
 **Schema Version:** 0.0.28
 
-**Description:** determines whether a given zone meets the G3_1_1d exception "For laboratory spaces in a building having a total laboratory 
-exhaust rate greater than 15,000 cfm, use a single system of type 5 or 7 serving only those spaces."
+**Description:** determines whether a given zone meets the G3_1_1d exception "For laboratory spaces in a building having a total laboratory exhaust rate greater than 15,000 cfm, use a single system of type 5 or 7 serving only those spaces."
 
 This function gets the system-wide exhaust airflow rate following the same logic as the function **get_zone_supply_return_exhaust_relief_terminal_fan_power_dict**
 
@@ -19,31 +18,24 @@ This function gets the system-wide exhaust airflow rate following the same logic
 - **get_baseline_system_types**
 - **get_list_hvac_systems_associated_with_zone**
 - **get_dict_of_zones_and_terminal_units_served_by_hvac_sys**   
-- **get_list_hvac_systems_associated_with_zone**   
+- **get_list_hvac_systems_associated_with_zone**
+- **get_building_total_lab_exhaust_from_zone_exhaust_fans**
+- **get_building_lab_zones**
 
 design_airflow
 ## Logic:
 - set the result variable to "No" - only a positive test can give it a different value: `result = NO`
-- create a boolean to determine if the zone has a laboratory space: `is_laboratory: false`
-- look through all spaces in the zone to see if at least one of them is a laboratory: `for space in zone.spaces:`
-  - look for LABORATORY space.function: `if space.function == LABORATORY:`
-    - set is_laboratory to true: `is_laboratory = true`
-- if there is a laboratory space, continue checking logic: `if is_laboratory == true:`
-    - now check whether building lab exhaust airflow is greater than 15,000 cfm - create a variable for the zone total exhaust: `building_total_lab_exhaust = 0`
-    - create a list of laboratory zones: `laboratory_zones = []`
-    - we want to do the exhaust air volume calculations based on the P_RMI, so find all laboratory zones in the P_RMI by looping through zones: `for z in P_RMI...zones:`
-      - set is_laboratory to false: `is_laboratory = false`
-      - look through all spaces in the z to see if at least one of them is a laboratory: `for space in z.spaces:`
-        - look for LABORATORY space.function: `if space.function == LABORATORY:`
-          - set is_laboratory to true: `is_laboratory = true`
-      - if is_laboratory is true, add the z to the laboratory_zones list: `if is_laboratory == true: laboratory_zones.append z`
-    - Now find the laboratory exhaust for each zone in the laboratory_zones list.  Loop through each zone: `for z in laboratory_zones:`
-       - create a variable to hold the total exhaust - we are counting all exhaust in a lab zone as "lab exhaust": `zone_total_exhaust = 0`
-       - Add zonal exhaust fan airflow to zone_total_exhaust: `if zone.zone_exhaust_fans ?:`
-           - look at each exhaust fan: `for exhaust_fan in zone.zone_exhaust_fans:`
+- use the function get_building_lab_zones to get a list of laboratory zones in the P_RMI: `laboratory_zones_list = get_building_lab_zones(P_RMI)`
+- check if the given zone is in the laboratory_zones_list, continue checking logic: `if zone.id in? laboratory_zones_list:`
+    - now check whether building lab exhaust airflow is greater than 15,000 cfm - create a variable for the building total lab exhaust: `building_total_lab_exhaust = 0`
+    - Now find the laboratory exhaust for each zone in the laboratory_zones list.  Loop through each zone: `for z_id in laboratory_zones_list:`
+       - get the zone: `z = get_object_by_id(P_RMI, z_id)`
+       - create a variable to hold the zone total exhaust - we are counting all exhaust in a lab zone as "lab exhaust": `zone_total_exhaust = 0`
+       - Add zonal exhaust fan airflow to zone_total_exhaust: `if z.zone_exhaust_fans ?:`
+           - look at each exhaust fan: `for exhaust_fan in z.zone_exhaust_fans:`
            -  add the airflow to the zone total exhaust: `zone_total_exhaust += exhaust_fan.design_airflow`
 
-       - Get a list of HVAC systems serving the zone: `hvac_sys_list_serving_zone_x =  get_list_hvac_systems_associated_with_zone(RMI,zone.id)`  
+       - Get a list of HVAC systems serving the zone: `hvac_sys_list_serving_zone_x =  get_list_hvac_systems_associated_with_zone(RMI,z_id)`  
        - For each hvac system serving the zone: `for hvac in hvac_sys_list_serving_zone_x:`  
            - Check if there is a fan system associated with the hvac system (if not, then there is no central HVAC system exhaust fan (terminal units don't have exhaust fans)): `if hvac.fan_system != Null:`  
                - Get list of zones served by the hvac system: `zone_list_hvac_sys_x = dict_of_zones_and_terminal_units_served_by_hvac_sys_x[hvac.id]["ZONE_LIST"]`  
@@ -57,7 +49,7 @@ design_airflow
                    - For each terminal unit served by the HVAC system: `for terminal in terminal_list_hvac_sys_x:`  
                        - Get the primary air flow: `primary_air_flow_terminal = terminal.primary_airflow`  
                        - Add to the total cfm across all terminals served by the HVAC system: `total_terminal_air_flow = total_terminal_air_flow + primary_air_flow_terminal`  
-                       - Check if the terminal unit is associated with this zone: `if terminal in zone.terminals:`   
+                       - Check if the terminal unit is associated with this zone: `if terminal in z.terminals:`   
                            - Add to the primary flow for the zone for this hvac system:  `zone_primary_air_flow = zone_primary_air_flow + primary_air_flow_terminal`  
                    - Get the HVAC system's FanSystem: `fan_system = hvac.fan_system`
                    - Apportion the exhaust airflow to the zone based on the terminal unit primary flow for the zone if hvac_system_total_exhaust_airflow > 0 and zone_primary_air_flow > 0: `if( zone_primary_air_flow > 0 && hvac_system_total_exhaust_airflow > 0 ): zone_total_exhaust += hvac_system_total_exhaust_airflow * (zone_primary_air_flow/total_terminal_air_flow)`
