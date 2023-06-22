@@ -3,10 +3,10 @@
 **Mandatory Rule:** True  
 **Rule ID:** 18-1  
 **Rule Description:** HVAC system type selection is based on ASHRAE 90.1 G3.1.1 (a-h)  
-**Rule Assertion:** Options are PASS/FAIL/NOT_APPLICABLE
-**Appendix G Section Reference:** Table G3.1.1
+**Rule Assertion:** Options are PASS/FAIL/NOT_APPLICABLE  
+**Appendix G Section Reference:** Table G3.1.1  
 
-**Evaluation Context:** Each Zone Data Group
+**Evaluation Context:** Each Zone Data Group  
 **Data Lookup:**   
 **Function Call:** 
 
