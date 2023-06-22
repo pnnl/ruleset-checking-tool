@@ -14,13 +14,13 @@ The following is an example of a JSON output file produced by the RCT software t
 			"test_description": "Building is located in climate zone 4A and includes a space that has residential occupancy type and is conditioned based on heating capacity of the HVAC system that servies the parent zone. The baseline roof U-factor for the space is established correctly.",
 			"ruleset_section": "Table G3.1(5) Baseline Building Performance (b)",
 			"ruleset_section_title": "Envelope",
-            "evaluation_type": "Full or Applicability",
+            "evaluation_type": "Full",
             "rule_unit_test_outcome_agreement": false,
             "expected_rule_unit_test_evaluation_outcome": "PASS",
             "actual_rule_unit_test_evaluation_outcome": "UNDETERMINED",
-			"rule_unit_test_evaluation": [
+			"rule_unit_test_evaluations": [
 				{
-					"id": "Surface 1",
+                    "evaluated_data_group_id": "surface 1",
 					"messages": "message",
                     "evaluation_outcome": "PASS",
 					"calculated_values": [
@@ -35,7 +35,7 @@ The following is an example of a JSON output file produced by the RCT software t
 					]
 				},
 				{
-					"id": "Surface 2",
+                    "evaluated_data_group_id": "surface 2",
 					"evaluation_outcome": "FAILED",
 					"messages": "message",
 					"calculated_values": [
@@ -50,14 +50,14 @@ The following is an example of a JSON output file produced by the RCT software t
 					]
 				},
 				{
-					"id": "Surface 3",
+                    "evaluated_data_group_id": "surface 3",
 					"expected_test_outcome": "NOT_APPLICABLE",
 					"test_outcome": "NOT_APPLICABLE",
 					"messages": "message",
                     "calculated_values": []
 				},
 				{
-					"id": "Surface 4",
+                    "evaluated_data_group_id": "surface 4",
 					"expected_test_outcome": "UNDETERMINED",
 					"test_outcome": "UNDETERMINED",
 					"messages": "message",
