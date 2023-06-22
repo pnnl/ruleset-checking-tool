@@ -40,13 +40,13 @@
 - set area equal to the area of the predominant building area type: `area = list_building_area_types_and_zones[predominant_building_area_type]["AREA"]`
 - loop through the building area types: `for bat in list_building_area_types_and_zones:`
 	- add this area to the area value for determining predominant HVAC system type: `area = area + list_building_area_types_and_zones[bat]["AREA"]`
-- expected_system_type_list = expected_system_type_from_Table_G3_1_1(predominant_building_area_type,num_floors,area)
+- create variable expected_system_type_dict, which is the dictionary returned by expected_system_type_from_Table_G3_1_1: `expected_system_type_dict = expected_system_type_from_Table_G3_1_1(predominant_building_area_type,num_floors,area)`
 - fill the zones_and_systems list with the expected system and description string for all zones (we'll overwrite the other zones in the next step): `for zone in zones_and_systems:`
-	- set the value to expected_system_type_list: `zones_and_systems[zone] = expected_system_type_list`
+	- set the value to expected_system_type_dict: `zones_and_systems[zone] = expected_system_type_dict`
 	
 - now we need to go through each 'exception' to Table_G3_1_1 in order.
 
-- G3.1.1b "Use additional system types for nonpredominant conditions (i.e., residential/nonresidential) if those conditions apply to more than 20,000 ft2 of conditioned floor area." uses the same logic that we just used for the expected_system_type_list, except that we select systems based on non-predominant building area types and the area of the entire building
+- G3.1.1b "Use additional system types for nonpredominant conditions (i.e., residential/nonresidential) if those conditions apply to more than 20,000 ft2 of conditioned floor area." uses the same logic that we just used for the expected_system_type_dict, except that we select systems based on non-predominant building area types and the area of the entire building
 - first check that the building is greater than or equal to 40,000 ft2, otherwise it's impossible to have non-predominant space types: `if area >= 40000:`
 	- check if it is the predominant bat (we have already done this case): `if bat == predominant_building_area_type:`
 		- skip this loop using continue: `continue`
