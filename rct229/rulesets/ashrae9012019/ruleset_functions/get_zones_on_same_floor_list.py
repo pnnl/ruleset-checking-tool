@@ -1,4 +1,6 @@
-from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_system_util import find_exactly_one_zone
+from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_system_util import (
+    find_exactly_one_zone,
+)
 from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all
 
@@ -20,6 +22,10 @@ def get_zones_on_same_floor_list(rmi, source_zone_id):
     a list of zone ids that are on the same floor as the starting zone.  The list will include the starting zone.
     """
 
-    source_zone_floor_name = getattr_(find_exactly_one_zone(rmi, source_zone_id), "Zone", "floor_name")
-    return find_all(f'$.buildings[*].building_segments[*].zones[*][?(@.floor_name="{source_zone_floor_name}")].id', rmi)
-
+    source_zone_floor_name = getattr_(
+        find_exactly_one_zone(rmi, source_zone_id), "Zone", "floor_name"
+    )
+    return find_all(
+        f'$.buildings[*].building_segments[*].zones[*][?(@.floor_name="{source_zone_floor_name}")].id',
+        rmi,
+    )

@@ -1,4 +1,6 @@
-from rct229.rulesets.ashrae9012019.ruleset_functions.get_zones_on_same_floor_list import get_zones_on_same_floor_list
+from rct229.rulesets.ashrae9012019.ruleset_functions.get_zones_on_same_floor_list import (
+    get_zones_on_same_floor_list,
+)
 from rct229.schema.validate import schema_validate_rmr
 
 TEST_RMI = {
@@ -10,29 +12,17 @@ TEST_RMI = {
                 {
                     "id": "building_segment_1",
                     "zones": [
-                        {
-                            "id": "zone 1",
-                            "floor_name": "floor 1"
-                        },
-                        {
-                            "id": "zone 2",
-                            "floor_name": "floor 2"
-                        },
+                        {"id": "zone 1", "floor_name": "floor 1"},
+                        {"id": "zone 2", "floor_name": "floor 2"},
                     ],
                 },
                 {
                     "id": "building_segment_2",
                     "zones": [
-                        {
-                            "id": "zone 2-1",
-                            "floor_name": "floor 1"
-                        },
-                        {
-                            "id": "zone 2-2",
-                            "floor_name": "floor 1"
-                        },
+                        {"id": "zone 2-1", "floor_name": "floor 1"},
+                        {"id": "zone 2-2", "floor_name": "floor 1"},
                     ],
-                }
+                },
             ],
         }
     ],
@@ -52,10 +42,9 @@ def test__get_zones_on_floor_1__success():
     assert get_zones_on_same_floor_list(TEST_RMI, "zone 1") == [
         "zone 1",
         "zone 2-1",
-        "zone 2-2"
+        "zone 2-2",
     ]
 
+
 def test__get_zones_on_floor_2__success():
-    assert get_zones_on_same_floor_list(TEST_RMI, "zone 2") == [
-        "zone 2"
-    ]
+    assert get_zones_on_same_floor_list(TEST_RMI, "zone 2") == ["zone 2"]
