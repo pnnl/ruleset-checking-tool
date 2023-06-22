@@ -21,6 +21,7 @@
 - **get_number_of_floors**
 - **expected_system_type_from_Table_G3_1_1**
 - **get_zone_conditioning_category**
+- **get_zone_HVAC_BAT**
 
 **Data Lookup**
 - **Table G3.1.1**
@@ -96,9 +97,7 @@
 	- check if it is SYS-9 or SYS-10: `if zones_and_systems[zone]["EXPECTED_SYSTEM_TYPE"] in [SYS_9, SYS_10]:`
 		- use the function does_zone_meet_G3_1_1f to see if the zone meets the requirements of G3_1_1f: `if does_zone_meet_G3_1_1f(P-RMI,B-RMI,zone.id) == YES:`
 			- change the system origin string: `zones_and_systems[zone]["SYSTEM_ORIGIN"] = "G3_1_1f"`
-			- now determine the baseline system type using the zone HVAC building area type, the total building area and the total building number of floors.  First by getting the bat by looping through the building area types: `for bat in list_building_area_types_and_zones:`
-				- check if the zone is in this bat, if so break out of the loop, we found the building area type: `if zone_id in list_building_area_types_and_zones[bat]["ZONES"]: break`
-			- set the system to the system type selected by the function expected_system_type_from_Table_G3_1_1: `zones_and_systems[zone]["EXPECTED_SYSTEM_TYPE"] = expected_system_type_from_Table_G3_1_1(bat,num_floors,area)`
+			- now determine the baseline system type using the zone HVAC building area type, the total building area and the total building number of floors.  First by get the bat by using the function get_zone_HVAC_BAT: `bat = get_zone_HVAC_BAT(B_RMI, zone.id)` 			- set the system to the system type selected by the function expected_system_type_from_Table_G3_1_1: `zones_and_systems[zone]["EXPECTED_SYSTEM_TYPE"] = expected_system_type_from_Table_G3_1_1(bat,num_floors,area)`
 
 - G3.1.1g is broken down into three parts:
 	- part 1: "If the baseline HVAC system serves HVAC zones that includes computer rooms,  baseline system 11 shall be used where the baseline HVAC system type is 7 or 8 and the total computer room peak cooling load is greater than 600,000 BTU/h (175 kW)."
