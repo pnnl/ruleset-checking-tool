@@ -3,7 +3,7 @@
 **Mandatory Rule:** True  
 **Rule ID:** 18-1  
 **Rule Description:** HVAC system type selection is based on ASHRAE 90.1 G3.1.1 (a-h)  
-**Rule Assertion:** Options are PASS/FAIL/NOT_APPLICABLE  
+**Rule Assertion:** Options are PASS/FAIL/NOT_APPLICABLE/UNDETERMINED  
 **Appendix G Section Reference:** Table G3.1.1  
 
 **Evaluation Context:** Each Zone Data Group  
@@ -50,7 +50,7 @@
 	 - complete logic to determine whether we can give a hard PASS / FAIL or simply undetermined
   	- use the function `is_zone_a_vestibule` to determine whether the zone is a vestibule: `if is_zone_a_vestibule(zone, B_RMI) == MAYBE:`
 		- if the zone is MAYBE a vestibule, we need to change the result to UNDETERMINED: `result = UNDETERMINED`
-   		- AND we need to change the advisory_note to let the user know that the system type selection was based on the zone being a vestibule: `advisory_note = "HVAC system type " + expected_system_type + " was selected for this zone based on ASHRAE 90.1 Appendix G.3.1.1.e which reads: `Thermal zones designed with heating-only systems in the proposed design serving storage rooms, stairwells, vestibules, electrical/mechanical rooms, and restrooms not exhausting or transferring air from mechanically cooled thermal zones in the proposed design shall use system type 9 or 10 in the baseline building design.` We expect that this space is a vestibule, but cannot make a determination with 100% accuracy.  If the zoen is one of the listed space types, then the system type should be " + expected_system_type
+   		- AND we need to change the advisory_note to let the user know that the system type selection was based on the zone being a vestibule: `advisory_note = "HVAC system type " + expected_system_type + " was selected for this zone based on ASHRAE 90.1 Appendix G.3.1.1.e which reads: `Thermal zones designed with heating-only systems in the proposed design serving storage rooms, stairwells, vestibules, electrical/mechanical rooms, and restrooms not exhausting or transferring air from mechanically cooled thermal zones in the proposed design shall use system type 9 or 10 in the baseline building design.` We expect that this space is a vestibule, but cannot make a determination with 100% accuracy.  If the zone is one of the listed space types, then the system type should be " + expected_system_type
 
 
   **Rule Assertion - Zone:**
