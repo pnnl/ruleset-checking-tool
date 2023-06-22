@@ -14,7 +14,6 @@
 
 design_airflow
 ## Logic:
-- set the building_total_lab_exhaust variable to 0: `building_total_lab_exhaust = 0`
 - create a list of laboratory zones: `laboratory_zones_list = []`
 - we want to do the exhaust air volume calculations based on the P_RMI, so find all laboratory zones in the P_RMI by looping through zones: `for z in P_RMI...zones:`
   - set is_laboratory to false: `is_laboratory = false`
