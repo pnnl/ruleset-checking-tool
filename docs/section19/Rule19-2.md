@@ -28,16 +28,23 @@
 
 ## Rule Logic:   
 - Cycle through each HVAC system in the B-RMR to create a list of HW loops for space heating served by boiler(s) and a list of CHW loop for space cooling served by chiller(s) and a list of condenser water loops: `for each hvac in B_RMR...HeatingVentilatingAirConditioningSystem:`  
-    - Check if the hvac system heating coil is a fluid loop: `if is_hvac_sys_heating_type_fluid_loop(B_RMR, hvac.id)  == TRUE:`  
+    - Get a list of chillers `chiller_list = B_RMR.chillers`  
+    - Get a list of cooling fluid_loops `cooling_fluid_loops = [B_RMR.fluid_loops if fluid_loop.type =="COOLING"]`      
+    - Check if the hvac system heating coil is a fluid loop: `if is_hvac_sys_heating_type_fluid_loop(B_RMR, hvac.id) == TRUE:`  
         - Check if the fluid loop is attached to a boiler, if yes then add to list of HW fluid loops: `if is_hvac_sys_fluid_loop_attached_to_boiler(B_RMR, hvac.id) ==  TRUE: HW_fluid_loop_list.append(hvac.heating_system.hot_water_loop)` 
-    - Check if the hvac system preheating coil is a fluid loop: `if is_hvac_sys_preheating_type_fluid_loop(B_RMR, hvac.id)  == TRUE:`  
-        - Check if the fluid loop is attached to a boiler, if yes then add to list of HW fluid loops: `if is_hvac_sys_preheat_fluid_loop_attached_to_boiler(B_RMR, hvac.id) ==  TRUE: HW_fluid_loop_list =  HW_fluid_loop_list.append(hvac.heating_system.hot_water_loop)` 
-    - Check if the hvac system cooling coil is a fluid loop: `if is_hvac_sys_cooling_type_fluid_loop(B_RMR, hvac.id)  == TRUE:`  
+    - Check if the hvac system preheating coil is a fluid loop: `if is_hvac_sys_preheating_type_fluid_loop(B_RMR, hvac.id) == TRUE:`  
+        - Check if the fluid loop is attached to a boiler, if yes then add to list of HW fluid loops: `if is_hvac_sys_preheat_fluid_loop_attached_to_boiler(B_RMR, hvac.id) ==  TRUE: HW_fluid_loop_list =  HW_fluid_loop_list.append(hvac.heating_system.hot_water_loop)`
+    - Check if the hvac system cooling coil is a fluid loop: `if is_hvac_sys_cooling_type_fluid_loop(B_RMR, hvac.id) == TRUE:`  
         - Check if the fluid loop is attached to a chiller, if yes then add to list of CHW fluid loops and CW loops: `if is_hvac_sys_fluid_loop_attached_to_chiller(B_RMR, hvac.id) ==  TRUE:`   
-            - Add CHW fluid loop to chilled water loop list: `CHW_fluid_loop_list =  CHW_fluid_loop_list.append(hvac.cooling_system.chilled_water_loop)`    
-            - Add condenser water fluid loop to condenser water loop list: `CW_fluid_loop_list =  CW_fluid_loop_list.append(hvac.cooling_system.condenser_water_loop)`  
-            - Add the child loops to the CHW loop list: `For CHW_child_loop in hvac.cooling_system.chilled_water_Loop.child_loops:`  
-                - Add to the list of chilled water loops: `CHW_fluid_loop_list =  CHW_fluid_loop_list.append(CHW_child_loop)`             
+            - Add CHW fluid loop to chilled water loop list: `CHW_fluid_loop_list =  CHW_fluid_loop_list.append(hvac.cooling_system.chilled_water_loop)`  
+            - Check if the fluid loop is a primary loop: `if hvac.cooling_system.chilled_water_loop in [chillers.cooling_loop]`  
+                - Get the chiller: `chiller = match_id(hvac.cooling_system.chilled_water_loop, chillers)`  
+                - If chiller has condenser loop, add the loop to the CW list: `if chiller.condensing_loop: CW_list.append(chiller.condensing_loop)`    
+            - Else, find out the primary loop from the secondary loop: `primary_loop = find_primary_loop_by_secondary_loop_id(secondary_loop_id, fluid_loops)`    
+                - Add the primary CHW fluid loop to chilled water loop list `CHW_fluid_loop_list =  CHW_fluid_loop_list.append(primary_loop.id)`  
+                - Get the chiller: `chiller = match_id(hvac.cooling_system.chilled_water_loop, chillers)`  
+                - If chiller has condenser loop, add the loop to the CW list: `if chiller.condensing_loop: CW_list.append(chiller.condensing_loop)`   
+           
 - Cycle through each terminal unit in the B-RMR and create list of HW loops: `for terminal in B_RMR...Terminal:`  
     - Check if heating source is hot water: `if terminal.heating_source == "HOT_WATER":`   
         - Check if the loop is attached to a boiler: `if are_all_terminal_heating_loops_attached_to_boiler(B_RMR,[terminal.id]) ==  TRUE:`  

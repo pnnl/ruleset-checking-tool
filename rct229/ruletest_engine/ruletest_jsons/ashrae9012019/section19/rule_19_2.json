@@ -66,7 +66,7 @@
                                                 "cooling_system": {
                                                     "id": "CHW Coil 1",
                                                     "cooling_system_type": "FLUID_LOOP",
-                                                    "chilled_water_loop": "Chilled Water Loop 1"
+                                                    "chilled_water_loop": "Secondary CHW Loop 1"
                                                 },
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 1",
@@ -100,11 +100,10 @@
                                 "energy_source_type": "NATURAL_GAS"
                             }
                         ],
-                        "external_fluid_source": [
+                        "chillers": [
                             {
-                                "id": "Purchased CW 1",
-                                "loop": "Chilled Water Loop 1",
-                                "type": "CHILLED_WATER"
+                                "id": "Chiller 1",
+                                "cooling_loop": "Chiller Loop 1"
                             }
                         ],
                         "pumps": [
@@ -114,9 +113,14 @@
                                 "speed_control": "FIXED_SPEED"
                             },
                             {
-                                "id": "CHW Pump 1",
-                                "loop_or_piping": "Chilled Water Loop 1",
+                                "id": "Chiller Pump 1",
+                                "loop_or_piping": "Chiller Loop 1",
                                 "speed_control": "FIXED_SPEED"
+                            },
+                            {
+                                "id": "Secondary CHW Pump",
+                                "loop_or_piping": "Secondary CHW Loop 1",
+                                "speed_control": "VARIABLE_SPEED"
                             }
                         ],
                         "fluid_loops": [
@@ -129,8 +133,14 @@
                                 }
                             },
                             {
-                                "id": "Chilled Water Loop 1",
+                                "id": "Chiller Loop 1",
                                 "type": "COOLING",
+                                "child_loops": [
+                                    {
+                                        "id": "Secondary CHW Loop 1",
+                                        "type": "COOLING"
+                                    }
+                                ],
                                 "cooling_or_condensing_design_and_control": {
                                     "id": "Chilled Water Loop HDC 1",
                                     "is_sized_using_coincident_load": true
@@ -209,7 +219,7 @@
                                                 "cooling_system": {
                                                     "id": "CHW Coil 1",
                                                     "cooling_system_type": "FLUID_LOOP",
-                                                    "chilled_water_loop": "Chilled Water Loop 1"
+                                                    "chilled_water_loop": "Secondary CHW Loop 1"
                                                 },
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 1",
@@ -243,11 +253,10 @@
                                 "energy_source_type": "NATURAL_GAS"
                             }
                         ],
-                        "external_fluid_source": [
+                        "chillers": [
                             {
-                                "id": "Purchased CW 1",
-                                "loop": "Chilled Water Loop 1",
-                                "type": "CHILLED_WATER"
+                                "id": "Chiller 1",
+                                "cooling_loop": "Chiller Loop 1"
                             }
                         ],
                         "pumps": [
@@ -257,9 +266,14 @@
                                 "speed_control": "FIXED_SPEED"
                             },
                             {
-                                "id": "CHW Pump 1",
-                                "loop_or_piping": "Chilled Water Loop 1",
+                                "id": "Chiller Pump 1",
+                                "loop_or_piping": "Chiller Loop 1",
                                 "speed_control": "FIXED_SPEED"
+                            },
+                            {
+                                "id": "Secondary CHW Pump",
+                                "loop_or_piping": "Secondary CHW Loop 1",
+                                "speed_control": "VARIABLE_SPEED"
                             }
                         ],
                         "fluid_loops": [
@@ -272,8 +286,14 @@
                                 }
                             },
                             {
-                                "id": "Chilled Water Loop 1",
+                                "id": "Chiller Loop 1",
                                 "type": "COOLING",
+                                "child_loops": [
+                                    {
+                                        "id": "Secondary CHW Loop 1",
+                                        "type": "COOLING"
+                                    }
+                                ],
                                 "cooling_or_condensing_design_and_control": {
                                     "id": "Chilled Water Loop HDC 1",
                                     "is_sized_using_coincident_load": false
