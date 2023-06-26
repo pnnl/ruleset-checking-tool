@@ -61,47 +61,45 @@ class Section19Rule15(RuleDefinitionListIndexedBase):
         )
 
         hvac_info_dict_b = {}
-        for hvac_b in find_all(
-            "$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*]",
+        for hvac_id_b in find_all(
+            "$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*].id",
             rmi_b,
         ):
-            hvac_id_b = hvac_b["id"]
-            hvac_info_dict_b[hvac_id_b] = {}
-            hvac_info_dict_b[hvac_id_b]["all_design_setpoints_105"] = True
-            hvac_info_dict_b[hvac_id_b]["proposed_supply_flow"] = ZERO.FLOW
-            hvac_info_dict_b[hvac_id_b][
-                "are_all_hvac_sys_fan_objs_autosized"
-            ] = are_all_hvac_sys_fan_objs_autosized(rmi_b, hvac_id_b)
-
-            hvac_info_dict_b[hvac_id_b]["all_design_setpoints_105"] = all(
-                [
-                    getattr_(
-                        find_exactly_one_terminal_unit(rmi_b, terminal_id_b),
-                        "Terminal",
-                        "supply_design_heating_setpoint_temperature",
-                    )
-                    == REQ_DESIGN_SUPPLY_AIR_TEMP_SETPOINT
-                    for terminal_id_b in zones_and_terminal_units_served_by_hvac_sys_dict[
-                        hvac_id_b
-                    ][
-                        "terminal_unit_list"
+            hvac_info_dict_b[hvac_id_b] = {
+                "are_all_hvac_sys_fan_objs_autosized": are_all_hvac_sys_fan_objs_autosized(
+                    rmi_b, hvac_id_b
+                ),
+                "all_design_setpoints_105": all(
+                    [
+                        getattr_(
+                            find_exactly_one_terminal_unit(rmi_b, terminal_id_b),
+                            "Terminal",
+                            "supply_design_heating_setpoint_temperature",
+                        )
+                        == REQ_DESIGN_SUPPLY_AIR_TEMP_SETPOINT
+                        for terminal_id_b in zones_and_terminal_units_served_by_hvac_sys_dict[
+                            hvac_id_b
+                        ][
+                            "terminal_unit_list"
+                        ]
                     ]
-                ]
-            )
-
-            hvac_info_dict_b[hvac_id_b]["proposed_supply_flow"] = sum(
-                [
-                    terminal_p.get("primary_airflow", ZERO.FLOW)
-                    for zone_id_b in zones_and_terminal_units_served_by_hvac_sys_dict[
-                        hvac_id_b
-                    ]["zone_list"]
-                    for terminal_p in find_all(
-                        f'$.buildings[*].building_segments[*].zones[*][?(@.id = "{zone_id_b}")].terminals[*]',
-                        rmi_p,
-                    )
-                ],
-                ZERO.FLOW,
-            )
+                ),
+                "proposed_supply_flow": sum(
+                    [
+                        terminal_p.get("primary_airflow", ZERO.FLOW)
+                        for zone_id_b in zones_and_terminal_units_served_by_hvac_sys_dict[
+                            hvac_id_b
+                        ][
+                            "zone_list"
+                        ]
+                        for terminal_p in find_all(
+                            f'$.buildings[*].building_segments[*].zones[*][?(@.id = "{zone_id_b}")].terminals[*]',
+                            rmi_p,
+                        )
+                    ],
+                    ZERO.FLOW,
+                ),
+            }
 
         return {
             "baseline_system_types_dict": baseline_system_types_dict,
@@ -115,7 +113,7 @@ class Section19Rule15(RuleDefinitionListIndexedBase):
         return any(
             [
                 baseline_system_type_compare(system_type, applicable_sys_type, False)
-                for system_type in baseline_system_types_dict.keys()
+                for system_type in baseline_system_types_dict
                 for applicable_sys_type in APPLICABLE_SYS_TYPES
             ]
         )
