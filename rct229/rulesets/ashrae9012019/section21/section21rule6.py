@@ -73,11 +73,8 @@ class Section21Rule6(RuleDefinitionListIndexedBase):
 
     def list_filter(self, context_item, data):
         fluid_loop_b = context_item.baseline
-        loop_boiler_dict = data["loop_boiler_dict"]
-        # Heating loop and have two boilers.
         return (
             getattr_(fluid_loop_b, "FluidLoop", "type") == FLUID_LOOP.HEATING
-            and len(loop_boiler_dict[fluid_loop_b["id"]]) == 2
         )
 
     class HeatingFluidLoopRule(RuleDefinitionBase):
@@ -85,6 +82,11 @@ class Section21Rule6(RuleDefinitionListIndexedBase):
             super(Section21Rule6.HeatingFluidLoopRule, self).__init__(
                 rmrs_used=UserBaselineProposedVals(False, True, False),
             )
+
+        def is_applicable(self, context, data=None):
+            fluid_loop_b = context.baseline
+            loop_boiler_dict = data["loop_boiler_dict"]
+            return len(loop_boiler_dict[fluid_loop_b["id"]]) == 2
 
         def get_calc_vals(self, context, data=None):
             fluid_loop_b = context.baseline

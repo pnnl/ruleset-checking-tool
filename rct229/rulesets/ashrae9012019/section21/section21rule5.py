@@ -35,7 +35,7 @@ APPLICABLE_SYS_TYPES = [
 ]
 
 FLUID_LOOP = schema_enums["FluidLoopOptions"]
-HEATING_LOOP_CONDITIONED_AREA_THRESHOLD = 15000 * ureg("ft2")
+HEATING_LOOP_CONDITIONED_AREA_THRESHOLD = 15_000 * ureg("ft2")
 
 
 class Section21Rule5(RuleDefinitionListIndexedBase):
@@ -161,7 +161,9 @@ class Section21Rule5(RuleDefinitionListIndexedBase):
                 <= HEATING_LOOP_CONDITIONED_AREA_THRESHOLD
                 and num_boilers == 1
             ) or (
-                num_boilers == 2
+                heating_loop_conditioned_zone_area
+                > HEATING_LOOP_CONDITIONED_AREA_THRESHOLD
+                and num_boilers == 2
                 and len(boiler_capacity_list) == 2
                 and boiler_capacity_list[0] == boiler_capacity_list[1]
             )
