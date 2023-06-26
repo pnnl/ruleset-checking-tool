@@ -91,7 +91,7 @@
                                                     "supply_fans": [
                                                         {
                                                             "id": "Supply Fan 1",
-                                                            "design_airflow": 5000
+                                                            "design_airflow": 2359.737215999999
                                                         }
                                                     ],
                                                     "return_fans": [
@@ -99,8 +99,8 @@
                                                             "id": "Return Fan 1"
                                                         }
                                                     ],
-                                                    "minimum_outdoor_airflow": 3750,
-                                                    "maximum_outdoor_airflow": 3750,
+                                                    "minimum_outdoor_airflow": 1769.8029119999994,
+                                                    "maximum_outdoor_airflow": 1769.8029119999994,
                                                     "air_energy_recovery": {
                                                         "id": "Air Energy Recovery 1",
                                                         "energy_recovery_operation": "WHEN_MINIMUM_OUTSIDE_AIR"
@@ -152,7 +152,8 @@
                                 "type": "COOLING",
                                 "child_loops": [
                                     {
-                                        "id": "Secondary CHW Loop 1"
+                                        "id": "Secondary CHW Loop 1",
+                                        "type": "COOLING"
                                     }
                                 ]
                             }
@@ -245,7 +246,7 @@
                                                         }
                                                     ],
                                                     "minimum_outdoor_airflow": 1769.8029119999994,
-                                                    "maximum_outdoor_airflow": 3750,
+                                                    "maximum_outdoor_airflow": 1769.8029119999994,
                                                     "air_energy_recovery": {
                                                         "id": "Air Energy Recovery 1",
                                                         "energy_recovery_operation": "WHEN_MINIMUM_OUTSIDE_AIR"
@@ -297,7 +298,8 @@
                                 "type": "COOLING",
                                 "child_loops": [
                                     {
-                                        "id": "Secondary CHW Loop 1"
+                                        "id": "Secondary CHW Loop 1",
+                                        "type": "COOLING"
                                     }
                                 ]
                             }
@@ -402,7 +404,7 @@
                                                     "supply_fans": [
                                                         {
                                                             "id": "Supply Fan 1",
-                                                            "design_airflow": 5000
+                                                            "design_airflow": 2359.737215999999
                                                         }
                                                     ],
                                                     "return_fans": [
@@ -410,8 +412,8 @@
                                                             "id": "Return Fan 1"
                                                         }
                                                     ],
-                                                    "minimum_outdoor_airflow": 3750,
-                                                    "maximum_outdoor_airflow": 3750
+                                                    "minimum_outdoor_airflow": 1769.8029119999994,
+                                                    "maximum_outdoor_airflow": 1769.8029119999994
                                                 }
                                             }
                                         ]
@@ -459,7 +461,8 @@
                                 "type": "COOLING",
                                 "child_loops": [
                                     {
-                                        "id": "Secondary CHW Loop 1"
+                                        "id": "Secondary CHW Loop 1",
+                                        "type": "COOLING"
                                     }
                                 ]
                             }
@@ -552,7 +555,7 @@
                                                         }
                                                     ],
                                                     "minimum_outdoor_airflow": 1769.8029119999994,
-                                                    "maximum_outdoor_airflow": 3750
+                                                    "maximum_outdoor_airflow": 1769.8029119999994
                                                 }
                                             }
                                         ]
@@ -600,7 +603,8 @@
                                 "type": "COOLING",
                                 "child_loops": [
                                     {
-                                        "id": "Secondary CHW Loop 1"
+                                        "id": "Secondary CHW Loop 1",
+                                        "type": "COOLING"
                                     }
                                 ]
                             }
@@ -704,7 +708,7 @@
                                                     "supply_fans": [
                                                         {
                                                             "id": "Supply Fan 1",
-                                                            "design_airflow": 5000
+                                                            "design_airflow": 2359.737215999999
                                                         }
                                                     ],
                                                     "return_fans": [
@@ -712,8 +716,8 @@
                                                             "id": "Return Fan 1"
                                                         }
                                                     ],
-                                                    "minimum_outdoor_airflow": 3750,
-                                                    "maximum_outdoor_airflow": 3750
+                                                    "minimum_outdoor_airflow": 1769.8029119999994,
+                                                    "maximum_outdoor_airflow": 1769.8029119999994
                                                 }
                                             }
                                         ]
@@ -828,7 +832,7 @@
                                                         }
                                                     ],
                                                     "minimum_outdoor_airflow": 1769.8029119999994,
-                                                    "maximum_outdoor_airflow": 3750
+                                                    "maximum_outdoor_airflow": 1769.8029119999994
                                                 }
                                             }
                                         ]
@@ -904,7 +908,12 @@
                                                         "is_supply_ducted": true,
                                                         "type": "CONSTANT_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 10",
-                                                        "heating_source": "ELECTRIC"
+                                                        "heating_source": "ELECTRIC",
+                                                        "fan": {
+                                                            "id": "Terminal Fan 1"
+                                                        },
+                                                        "primary_airflow": 2359.737215999999,
+                                                        "minimum_outdoor_airflow": 1769.8029119999994
                                                     }
                                                 ],
                                                 "design_thermostat_heating_setpoint": 70,
@@ -921,20 +930,8 @@
                                                 "id": "System 10",
                                                 "heating_system": {
                                                     "id": "Heating Coil 1",
-                                                    "heating_system_type": "ELECTRIC_RESISTANCE",
+                                                    "heating_system_type": "FURNACE",
                                                     "energy_source_type": "ELECTRICITY"
-                                                },
-                                                "fan_system": {
-                                                    "id": "CAV Fan System 1",
-                                                    "fan_control": "CONSTANT",
-                                                    "supply_fans": [
-                                                        {
-                                                            "id": "Supply Fan 1",
-                                                            "design_airflow": 5000
-                                                        }
-                                                    ],
-                                                    "minimum_outdoor_airflow": 3750,
-                                                    "maximum_outdoor_airflow": 3750
                                                 }
                                             }
                                         ]
@@ -971,7 +968,12 @@
                                                         "is_supply_ducted": true,
                                                         "type": "CONSTANT_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 10",
-                                                        "heating_source": "ELECTRIC"
+                                                        "heating_source": "ELECTRIC",
+                                                        "fan": {
+                                                            "id": "Terminal Fan 1"
+                                                        },
+                                                        "primary_airflow": 2359.737215999999,
+                                                        "minimum_outdoor_airflow": 1769.8029119999994
                                                     }
                                                 ],
                                                 "spaces": [
@@ -987,20 +989,8 @@
                                                 "id": "System 10",
                                                 "heating_system": {
                                                     "id": "Heating Coil 1",
-                                                    "heating_system_type": "ELECTRIC_RESISTANCE",
+                                                    "heating_system_type": "FURNACE",
                                                     "energy_source_type": "ELECTRICITY"
-                                                },
-                                                "fan_system": {
-                                                    "id": "CAV Fan System 1",
-                                                    "fan_control": "CONSTANT",
-                                                    "supply_fans": [
-                                                        {
-                                                            "id": "Supply Fan 1",
-                                                            "design_airflow": 2359.737215999999
-                                                        }
-                                                    ],
-                                                    "minimum_outdoor_airflow": 1769.8029119999994,
-                                                    "maximum_outdoor_airflow": 3750
                                                 }
                                             }
                                         ]
@@ -1105,7 +1095,7 @@
                                                     "supply_fans": [
                                                         {
                                                             "id": "Supply Fan 1",
-                                                            "design_airflow": 5000
+                                                            "design_airflow": 2359.737215999999
                                                         }
                                                     ],
                                                     "return_fans": [
@@ -1113,13 +1103,13 @@
                                                             "id": "Return Fan 1"
                                                         }
                                                     ],
-                                                    "minimum_outdoor_airflow": 3750,
-                                                    "maximum_outdoor_airflow": 3750,
+                                                    "minimum_outdoor_airflow": 1769.8029119999994,
+                                                    "maximum_outdoor_airflow": 1769.8029119999994,
                                                     "exhaust_fans": [
                                                         {
                                                             "id": "Exhaust Fan 1",
                                                             "specification_method": "SIMPLE",
-                                                            "design_airflow": 3000
+                                                            "design_airflow": 1415.8423295999994
                                                         }
                                                     ]
                                                 }
@@ -1236,7 +1226,7 @@
                                                         }
                                                     ],
                                                     "minimum_outdoor_airflow": 1769.8029119999994,
-                                                    "maximum_outdoor_airflow": 3750
+                                                    "maximum_outdoor_airflow": 1769.8029119999994
                                                 }
                                             }
                                         ]
@@ -1362,7 +1352,7 @@
                                                     "supply_fans": [
                                                         {
                                                             "id": "Supply Fan 1",
-                                                            "design_airflow": 5000
+                                                            "design_airflow": 2359.737215999999
                                                         }
                                                     ],
                                                     "return_fans": [
@@ -1370,8 +1360,8 @@
                                                             "id": "Return Fan 1"
                                                         }
                                                     ],
-                                                    "minimum_outdoor_airflow": 3750,
-                                                    "maximum_outdoor_airflow": 3750
+                                                    "minimum_outdoor_airflow": 1769.8029119999994,
+                                                    "maximum_outdoor_airflow": 1769.8029119999994
                                                 }
                                             }
                                         ]
@@ -1486,7 +1476,7 @@
                                                         }
                                                     ],
                                                     "minimum_outdoor_airflow": 1769.8029119999994,
-                                                    "maximum_outdoor_airflow": 3750
+                                                    "maximum_outdoor_airflow": 1769.8029119999994
                                                 }
                                             }
                                         ]
@@ -1611,7 +1601,7 @@
                                                     "supply_fans": [
                                                         {
                                                             "id": "Supply Fan 1",
-                                                            "design_airflow": 5000
+                                                            "design_airflow": 2359.737215999999
                                                         }
                                                     ],
                                                     "return_fans": [
@@ -1619,8 +1609,8 @@
                                                             "id": "Return Fan 1"
                                                         }
                                                     ],
-                                                    "minimum_outdoor_airflow": 3750,
-                                                    "maximum_outdoor_airflow": 3750
+                                                    "minimum_outdoor_airflow": 1769.8029119999994,
+                                                    "maximum_outdoor_airflow": 1769.8029119999994
                                                 }
                                             }
                                         ]
@@ -1735,7 +1725,7 @@
                                                         }
                                                     ],
                                                     "minimum_outdoor_airflow": 1769.8029119999994,
-                                                    "maximum_outdoor_airflow": 3750
+                                                    "maximum_outdoor_airflow": 1769.8029119999994
                                                 }
                                             }
                                         ]
@@ -1838,7 +1828,7 @@
                                                     "supply_fans": [
                                                         {
                                                             "id": "Supply Fan 1",
-                                                            "design_airflow": 5000
+                                                            "design_airflow": 2359.737215999999
                                                         }
                                                     ],
                                                     "return_fans": [
@@ -1846,8 +1836,8 @@
                                                             "id": "Return Fan 1"
                                                         }
                                                     ],
-                                                    "minimum_outdoor_airflow": 3750,
-                                                    "maximum_outdoor_airflow": 3750
+                                                    "minimum_outdoor_airflow": 1769.8029119999994,
+                                                    "maximum_outdoor_airflow": 1769.8029119999994
                                                 }
                                             }
                                         ]
@@ -1920,7 +1910,7 @@
                                                         }
                                                     ],
                                                     "minimum_outdoor_airflow": 1769.8029119999994,
-                                                    "maximum_outdoor_airflow": 3750
+                                                    "maximum_outdoor_airflow": 1769.8029119999994
                                                 }
                                             }
                                         ]
@@ -2025,7 +2015,7 @@
                                                     "supply_fans": [
                                                         {
                                                             "id": "Supply Fan 1",
-                                                            "design_airflow": 5000
+                                                            "design_airflow": 2359.737215999999
                                                         }
                                                     ],
                                                     "return_fans": [
@@ -2033,8 +2023,8 @@
                                                             "id": "Return Fan 1"
                                                         }
                                                     ],
-                                                    "minimum_outdoor_airflow": 3750,
-                                                    "maximum_outdoor_airflow": 3750
+                                                    "minimum_outdoor_airflow": 1769.8029119999994,
+                                                    "maximum_outdoor_airflow": 1769.8029119999994
                                                 }
                                             }
                                         ]
@@ -2149,17 +2139,17 @@
                                                         }
                                                     ],
                                                     "minimum_outdoor_airflow": 1769.8029119999994,
-                                                    "maximum_outdoor_airflow": 3750,
+                                                    "maximum_outdoor_airflow": 1769.8029119999994,
                                                     "exhaust_fans": [
                                                         {
                                                             "id": "Exhaust Fan 1",
                                                             "specification_method": "SIMPLE",
-                                                            "design_airflow": 2500
+                                                            "design_airflow": 1179.8686079999995
                                                         },
                                                         {
                                                             "id": "Exhaust Fan 2",
                                                             "specification_method": "SIMPLE",
-                                                            "design_airflow": 2500
+                                                            "design_airflow": 1179.8686079999995
                                                         }
                                                     ]
                                                 }
@@ -2289,7 +2279,7 @@
                                                     "supply_fans": [
                                                         {
                                                             "id": "Supply Fan 1",
-                                                            "design_airflow": 5000
+                                                            "design_airflow": 2359.737215999999
                                                         }
                                                     ],
                                                     "return_fans": [
@@ -2297,8 +2287,8 @@
                                                             "id": "Return Fan 1"
                                                         }
                                                     ],
-                                                    "minimum_outdoor_airflow": 3450,
-                                                    "maximum_outdoor_airflow": 3450
+                                                    "minimum_outdoor_airflow": 1628.2186790399994,
+                                                    "maximum_outdoor_airflow": 1628.2186790399994
                                                 }
                                             }
                                         ]
@@ -2346,7 +2336,8 @@
                                 "type": "COOLING",
                                 "child_loops": [
                                     {
-                                        "id": "Secondary CHW Loop 1"
+                                        "id": "Secondary CHW Loop 1",
+                                        "type": "COOLING"
                                     }
                                 ]
                             }
@@ -2439,7 +2430,7 @@
                                                         }
                                                     ],
                                                     "minimum_outdoor_airflow": 1628.2186790399994,
-                                                    "maximum_outdoor_airflow": 3450
+                                                    "maximum_outdoor_airflow": 1628.2186790399994
                                                 }
                                             }
                                         ]
@@ -2487,7 +2478,8 @@
                                 "type": "COOLING",
                                 "child_loops": [
                                     {
-                                        "id": "Secondary CHW Loop 1"
+                                        "id": "Secondary CHW Loop 1",
+                                        "type": "COOLING"
                                     }
                                 ]
                             }
@@ -2590,7 +2582,7 @@
                                                     "supply_fans": [
                                                         {
                                                             "id": "Supply Fan 1",
-                                                            "design_airflow": 5000
+                                                            "design_airflow": 2359.737215999999
                                                         }
                                                     ],
                                                     "return_fans": [
@@ -2598,8 +2590,8 @@
                                                             "id": "Return Fan 1"
                                                         }
                                                     ],
-                                                    "minimum_outdoor_airflow": 3750,
-                                                    "maximum_outdoor_airflow": 3750
+                                                    "minimum_outdoor_airflow": 1769.8029119999994,
+                                                    "maximum_outdoor_airflow": 1769.8029119999994
                                                 }
                                             }
                                         ]
@@ -2647,7 +2639,8 @@
                                 "type": "COOLING",
                                 "child_loops": [
                                     {
-                                        "id": "Secondary CHW Loop 1"
+                                        "id": "Secondary CHW Loop 1",
+                                        "type": "COOLING"
                                     }
                                 ]
                             }
@@ -2738,7 +2731,7 @@
                                                         }
                                                     ],
                                                     "minimum_outdoor_airflow": 1769.8029119999994,
-                                                    "maximum_outdoor_airflow": 3750
+                                                    "maximum_outdoor_airflow": 1769.8029119999994
                                                 }
                                             }
                                         ]
@@ -2786,7 +2779,8 @@
                                 "type": "COOLING",
                                 "child_loops": [
                                     {
-                                        "id": "Secondary CHW Loop 1"
+                                        "id": "Secondary CHW Loop 1",
+                                        "type": "COOLING"
                                     }
                                 ]
                             }
@@ -2891,7 +2885,7 @@
                                                     "supply_fans": [
                                                         {
                                                             "id": "Supply Fan 1",
-                                                            "design_airflow": 5000
+                                                            "design_airflow": 2359.737215999999
                                                         }
                                                     ],
                                                     "return_fans": [
@@ -2899,8 +2893,8 @@
                                                             "id": "Return Fan 1"
                                                         }
                                                     ],
-                                                    "minimum_outdoor_airflow": 3750,
-                                                    "maximum_outdoor_airflow": 3750
+                                                    "minimum_outdoor_airflow": 1769.8029119999994,
+                                                    "maximum_outdoor_airflow": 1769.8029119999994
                                                 }
                                             }
                                         ]
@@ -2948,7 +2942,8 @@
                                 "type": "COOLING",
                                 "child_loops": [
                                     {
-                                        "id": "Secondary CHW Loop 1"
+                                        "id": "Secondary CHW Loop 1",
+                                        "type": "COOLING"
                                     }
                                 ]
                             }
@@ -3041,7 +3036,7 @@
                                                         }
                                                     ],
                                                     "minimum_outdoor_airflow": 1769.8029119999994,
-                                                    "maximum_outdoor_airflow": 3750,
+                                                    "maximum_outdoor_airflow": 1769.8029119999994,
                                                     "air_energy_recovery": {
                                                         "id": "Air Energy Recovery 1",
                                                         "energy_recovery_operation": "WHEN_MINIMUM_OUTSIDE_AIR"
@@ -3093,7 +3088,8 @@
                                 "type": "COOLING",
                                 "child_loops": [
                                     {
-                                        "id": "Secondary CHW Loop 1"
+                                        "id": "Secondary CHW Loop 1",
+                                        "type": "COOLING"
                                     }
                                 ]
                             }
