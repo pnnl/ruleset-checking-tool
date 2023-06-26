@@ -2826,7 +2826,7 @@
                     "type": "number",
                     "units": "L/s"
                 },
-				"max_heating_airflow": {
+                "max_heating_airflow": {
                     "description": "Zone terminal maximum heating airflow",
                     "type": "number",
                     "units": "L/s",

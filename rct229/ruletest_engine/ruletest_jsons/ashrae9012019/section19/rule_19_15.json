@@ -59,7 +59,8 @@
                                                         {
                                                             "id": "Supply Fan 1"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "minimum_outdoor_airflow": 11.798686079999996
                                                 }
                                             }
                                         ]
@@ -94,7 +95,7 @@
                                                         "type": "CONSTANT_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 10",
                                                         "heating_source": "ELECTRIC",
-                                                        "primary_airflow": 1000,
+                                                        "primary_airflow": 471.94744319999984,
                                                         "supply_design_heating_setpoint_temperature": 105
                                                     }
                                                 ],
@@ -121,6 +122,8 @@
                                                     "supply_fans": [
                                                         {
                                                             "id": "Supply Fan 1",
+                                                            "specification_method": "SIMPLE",
+                                                            "design_electric_power": 75,
                                                             "design_airflow": 117.98686079999996,
                                                             "is_airflow_autosized": true
                                                         }
@@ -198,7 +201,8 @@
                                                         {
                                                             "id": "Supply Fan 1"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "minimum_outdoor_airflow": 11.798686079999996
                                                 }
                                             }
                                         ]
@@ -233,7 +237,7 @@
                                                         "type": "CONSTANT_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 10",
                                                         "heating_source": "ELECTRIC",
-                                                        "primary_airflow": 1000,
+                                                        "primary_airflow": 471.94744319999984,
                                                         "supply_design_heating_setpoint_temperature": 85
                                                     }
                                                 ],
@@ -260,6 +264,8 @@
                                                     "supply_fans": [
                                                         {
                                                             "id": "Supply Fan 1",
+                                                            "specification_method": "SIMPLE",
+                                                            "design_electric_power": 75,
                                                             "design_airflow": 117.98686079999996,
                                                             "is_airflow_autosized": true
                                                         }
@@ -336,7 +342,8 @@
                                                         {
                                                             "id": "Supply Fan 1"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "minimum_outdoor_airflow": 153.38291903999993
                                                 }
                                             }
                                         ]
@@ -370,7 +377,7 @@
                                                         "is_supply_ducted": true,
                                                         "type": "CONSTANT_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 9",
-                                                        "primary_airflow": 1000,
+                                                        "primary_airflow": 471.94744319999984,
                                                         "supply_design_heating_setpoint_temperature": 105
                                                     }
                                                 ],
@@ -397,6 +404,8 @@
                                                     "supply_fans": [
                                                         {
                                                             "id": "Supply Fan 1",
+                                                            "specification_method": "SIMPLE",
+                                                            "design_electric_power": 90,
                                                             "design_airflow": 141.58423295999995,
                                                             "is_airflow_autosized": true
                                                         }
@@ -473,7 +482,8 @@
                                                         {
                                                             "id": "Supply Fan 1"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "minimum_outdoor_airflow": 153.38291903999993
                                                 }
                                             }
                                         ]
@@ -507,7 +517,7 @@
                                                         "is_supply_ducted": true,
                                                         "type": "CONSTANT_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 9",
-                                                        "primary_airflow": 1000,
+                                                        "primary_airflow": 471.94744319999984,
                                                         "supply_design_heating_setpoint_temperature": 105
                                                     }
                                                 ],
@@ -534,6 +544,8 @@
                                                     "supply_fans": [
                                                         {
                                                             "id": "Supply Fan 1",
+                                                            "specification_method": "SIMPLE",
+                                                            "design_electric_power": 75,
                                                             "design_airflow": 117.98686079999996,
                                                             "is_airflow_autosized": true
                                                         }
