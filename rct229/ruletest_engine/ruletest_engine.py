@@ -771,7 +771,9 @@ def flatten_outcome_object(outcome_object, flattened_outcome_list=[]):
             outcome_object["message"] if "message" in outcome_object else None
         )
         rule_unit_test_evaluation_dict["calculated_values"] = (
-            deepcopy(outcome_object["calc_vals"]) if "calc_vals" in outcome_object else None
+            deepcopy(outcome_object["calc_vals"])
+            if "calc_vals" in outcome_object
+            else None
         )
 
         # Convert any Quantity in calculated values to a str. This allows them to be serializable for a JSON
