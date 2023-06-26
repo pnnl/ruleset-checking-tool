@@ -73,9 +73,7 @@ class Section21Rule6(RuleDefinitionListIndexedBase):
 
     def list_filter(self, context_item, data):
         fluid_loop_b = context_item.baseline
-        return (
-            getattr_(fluid_loop_b, "FluidLoop", "type") == FLUID_LOOP.HEATING
-        )
+        return getattr_(fluid_loop_b, "FluidLoop", "type") == FLUID_LOOP.HEATING
 
     class HeatingFluidLoopRule(RuleDefinitionBase):
         def __init__(self):
