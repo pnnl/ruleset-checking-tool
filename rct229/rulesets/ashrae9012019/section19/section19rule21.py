@@ -28,6 +28,7 @@ from rct229.utils.pint_utils import ZERO, CalcQ
 
 ENERGY_RECOVERY = schema_enums["EnergyRecoveryOptions"]
 LIGHTING_SPACE = schema_enums["LightingSpaceOptions2019ASHRAE901TG37"]
+VENTILATION_SPACE = schema_enums["VentilationSpaceOptions2019ASHRAE901"]
 DEHUMIDIFICATION = schema_enums["DehumidificationOptions"]
 ClimateZoneOption = schema_enums["ClimateZoneOptions2019ASHRAE901"]
 OA_FRACTION_70 = 0.7
@@ -101,21 +102,23 @@ class Section19Rule21(RuleDefinitionListIndexedBase):
                 hvac_id_b
             ]["zone_list"]:
                 space_p = find_one(
-                    f"$.buildings[*].building_segments[*].zones[*][?(@.id = {zone_id_b})].spaces[*]",
+                    f'$.buildings[*].building_segments[*].zones[*][?(@.id = "{zone_id_b}")].spaces[*]',
                     rmi_p,
                 )
                 zone_data[zone_id_b] = {}
-                zone_data[zone_id_b][
-                    "serves_zones_with_systems_likely_exhausting_toxic_etc"
-                ] = False
-                zone_data[zone_id_b]["serves_kitchen_space"] = False
-                zone_data[zone_id_b]["all_lighting_space_types_defined"] = True
-                zone_data[zone_id_b][
-                    "serves_zones_with_systems_likely_exhausting_toxic_etc"
-                ] = False
-                zone_data[zone_id_b]["serves_kitchen_space"] = False
-                zone_data[zone_id_b]["all_ventilation_space_types_defined"] = True
-                if space_p.get("lighting_space_type") is not None:
+                zone_data[zone_id_b].update(
+                    {
+                        "serves_zones_with_systems_likely_exhausting_toxic_etc": False,
+                        "serves_kitchen_space": False,
+                        "all_lighting_space_types_defined": True,
+                        "all_ventilation_space_types_defined": False,
+                    }
+                )
+
+                if (
+                    space_p is not None
+                    and space_p.get("lighting_space_type") is not None
+                ):
                     lighting_space_type_p = space_p["lighting_space_type"]
                     if (
                         lighting_space_type_p
@@ -131,11 +134,14 @@ class Section19Rule21(RuleDefinitionListIndexedBase):
                 else:
                     zone_data[zone_id_b]["all_lighting_space_types_defined"] = False
 
-                if space_p.get("ventilation_space_type") is not None:
+                if (
+                    space_p is not None
+                    and space_p.get("ventilation_space_type") is not None
+                ):
                     ventilation_space_type_p = space_p["ventilation_space_type"]
                     if (
                         ventilation_space_type_p
-                        == LIGHTING_SPACE.MISCELLANEOUS_SPACES_MANUFACTURING_WHERE_HAZARDOUS_MATERIALS_ARE_USED_EXCLUDES_HEAVY_INDUSTRIAL_AND_CHEMICAL_PROCESSES
+                        == VENTILATION_SPACE.MISCELLANEOUS_SPACES_MANUFACTURING_WHERE_HAZARDOUS_MATERIALS_ARE_USED_EXCLUDES_HEAVY_INDUSTRIAL_AND_CHEMICAL_PROCESSES
                     ):
                         zone_data[zone_id_b][
                             "serves_zones_with_systems_likely_exhausting_toxic_etc"
@@ -143,7 +149,7 @@ class Section19Rule21(RuleDefinitionListIndexedBase):
 
                     if (
                         ventilation_space_type_p
-                        == LIGHTING_SPACE.FOOD_AND_BEVERAGE_SERVICE_KITCHEN_COOKING
+                        == VENTILATION_SPACE.FOOD_AND_BEVERAGE_SERVICE_KITCHEN_COOKING
                     ):
                         zone_data[zone_id_b]["serves_kitchen_space"] = True
                 else:
@@ -153,7 +159,7 @@ class Section19Rule21(RuleDefinitionListIndexedBase):
                     rmi_p, zone_id_b
                 ):
                     hvac_p = find_one(
-                        f"$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*][?(@.id = {hvac_id_p})]",
+                        f'$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*][?(@.id = "{hvac_id_p}")]',
                         rmi_p,
                     )
                     ER_modeled_p = find_one(
@@ -181,7 +187,7 @@ class Section19Rule21(RuleDefinitionListIndexedBase):
         baseline_system_types = get_baseline_system_types(rmi_b)
         sys_type_heating_only = any(
             [
-                hvac_id_p in baseline_system_types
+                hvac_id_p in applicable_sys_type
                 for applicable_sys_type in APPLICABLE_SYS_TYPES
             ]
         )
@@ -194,18 +200,16 @@ class Section19Rule21(RuleDefinitionListIndexedBase):
                     rmi_p,
                 )
                 for thermostat_schedule in find_one(
-                    f"$.schedules[?(@.id == {thermostat_schedule_id})].hourly_values",
+                    f'$.schedules[?(@.id == "{thermostat_schedule_id}")].hourly_values',
                     rmi_p,
                 )
             ]
         )
 
         serves_zones_heated_to_60_or_higher_in_proposed = (
-            True
-            if max_thermostat_heating_setpoint_schedule_p > 60 * ureg("F")
-            else False
+            max_thermostat_heating_setpoint_schedule_p > 60 * ureg("F")
         )
-
+        stop = 1
         return {
             "zone_data": zone_data,
             "ER_modeled_p": ER_modeled_p,
@@ -229,19 +233,12 @@ class Section19Rule21(RuleDefinitionListIndexedBase):
                 },
             )
 
-        def is_applicable(self, context, data=None):
-            climate_zone = data["climate_zone"]
-
-            return climate_zone in APPLICABLE_CZ_ZONES
-
         def get_calc_vals(self, context, data=None):
             hvac_b = context.baseline
             hvac_id_b = hvac_b["id"]
 
             climate_zone = data["climate_zone"]
-            ER_not_req_for_heating_sys = (
-                True if climate_zone in APPLICABLE_CZ_ZONES else False
-            )
+            ER_not_req_for_heating_sys = climate_zone in APPLICABLE_CZ_ZONES
 
             serves_zones_with_systems_likely_exhausting_toxic_etc = data[
                 "serves_zones_with_systems_likely_exhausting_toxic_etc"
@@ -279,27 +276,21 @@ class Section19Rule21(RuleDefinitionListIndexedBase):
             )
 
             ER_modeled = (
-                True
-                if fan_sys_b.get("air_energy_recovery") is not None
+                fan_sys_b.get("air_energy_recovery") is not None
                 and fan_sys_b["air_energy_recovery"] != ENERGY_RECOVERY.NONE
-                else False
             )
 
             exception_1_applies = (
-                True
-                if sys_type_heating_only
+                sys_type_heating_only
                 and not serves_zones_heated_to_60_or_higher_in_proposed
-                else False
             )
             exception_2_applies = (
-                True
-                if not ER_modeled_p
+                not ER_modeled_p
                 and serves_zones_with_systems_likely_exhausting_toxic_etc
-                else False
             )
+
             exception_6_applies = (
-                True
-                if not ER_modeled_p
+                not ER_modeled_p
                 and max(
                     hvac_systems_and_assoc_zones_largest_exhaust_source[
                         "hvac_fan_sys_exhaust_sum"
@@ -309,12 +300,10 @@ class Section19Rule21(RuleDefinitionListIndexedBase):
                     ],
                 )
                 < 0.75 * max_outdoor_airflow_b
-                else False
             )
+
             exception_7_applies = (
-                True
-                if not ER_modeled_p and serves_zones_that_have_dehumid_heat_recovery
-                else False
+                not ER_modeled_p and serves_zones_that_have_dehumid_heat_recovery
             )
 
             return {
