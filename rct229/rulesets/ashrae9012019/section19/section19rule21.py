@@ -33,6 +33,7 @@ DEHUMIDIFICATION = schema_enums["DehumidificationOptions"]
 ClimateZoneOption = schema_enums["ClimateZoneOptions2019ASHRAE901"]
 OA_FRACTION_70 = 0.7
 SUPPLY_AIRFLOW_5000CFM = 5000 * ureg("cfm")
+REQ_HEATING_SETPOINT = 60 * ureg("F")
 CASE12_FAIL_MSG = "Not all lighting or ventilation space types were defined in the RMD and therefore the potential applicability of exceptions 2 and 3 could not be fully assessed. Fail unless exceptions 2 and 3 are applicable. Exception 2 is that systems exhausting toxic, flammable, or corrosive fumes or paint or dust shall not require exhaust air energy recovery to be modeled in the baseline if it is not included in the proposed design. Exception 3 is that commercial kitchen hoods (grease) classified as Type 1 by NFPA 96 shall not require exhaust air energy recovery to be modeled in the baseline if it is not included in the proposed design."
 
 
@@ -206,17 +207,17 @@ class Section19Rule21(RuleDefinitionListIndexedBase):
             ]
         )
 
-        serves_zones_heated_to_60_or_higher_in_proposed = (
-            max_thermostat_heating_setpoint_schedule_p > 60 * ureg("F")
+        serves_zones_heated_to_60_or_higher_p = (
+            max_thermostat_heating_setpoint_schedule_p > REQ_HEATING_SETPOINT
         )
-        stop = 1
+
         return {
             "zone_data": zone_data,
             "ER_modeled_p": ER_modeled_p,
             "serves_zones_that_have_dehumid_heat_recovery": serves_zones_that_have_dehumid_heat_recovery,
             "sys_type_heating_only": sys_type_heating_only,
             "hvac_systems_and_assoc_zones_largest_exhaust_source": hvac_systems_and_assoc_zones_largest_exhaust_source,
-            "serves_zones_heated_to_60_or_higher_in_proposed": serves_zones_heated_to_60_or_higher_in_proposed,
+            "serves_zones_heated_to_60_or_higher_p": serves_zones_heated_to_60_or_higher_p,
         }
 
     class HVACRule(RuleDefinitionBase):
@@ -256,8 +257,8 @@ class Section19Rule21(RuleDefinitionListIndexedBase):
             hvac_systems_and_assoc_zones_largest_exhaust_source = data[
                 "hvac_systems_and_assoc_zones_largest_exhaust_source"
             ][hvac_id_b]
-            serves_zones_heated_to_60_or_higher_in_proposed = data[
-                "serves_zones_heated_to_60_or_higher_in_proposed"
+            serves_zones_heated_to_60_or_higher_p = data[
+                "serves_zones_heated_to_60_or_higher_p"
             ]
 
             fan_sys_b = hvac_b["fan_system"]
@@ -281,8 +282,7 @@ class Section19Rule21(RuleDefinitionListIndexedBase):
             )
 
             exception_1_applies = (
-                sys_type_heating_only
-                and not serves_zones_heated_to_60_or_higher_in_proposed
+                sys_type_heating_only and not serves_zones_heated_to_60_or_higher_p
             )
             exception_2_applies = (
                 not ER_modeled_p
