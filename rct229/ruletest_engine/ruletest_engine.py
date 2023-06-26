@@ -363,7 +363,7 @@ def generate_software_test_report(ruleset, section_list, output_json_path):
 
     """
 
-    # Initialize report dictionary in which to
+    # Initialize report dictionary from which to continue testing. TODO- Future rulesets can be added here
     if ruleset == "ashrae9012019":
         report_dict = ASHRAE9012019SoftwareTestReport()
         report_dict.initialize_ruleset_report()
@@ -414,7 +414,7 @@ def generate_rct_outcomes_list_from_section_list(section_list, ruleset):
     rct_outcomes_list = []
     invalid_rmr_messages = []
 
-    # Maps section lists to their titles TODO: resolve 19 vs 23
+    # Maps section lists to their titles
     section_dict = {
         "5": "Envelope",
         "6": "Lighting",
@@ -423,7 +423,7 @@ def generate_rct_outcomes_list_from_section_list(section_list, ruleset):
         "19": "HVAC-Airside",
         "21": "HVAC-WaterSide",
         "22": "HVAC-Chiller",
-        "23": "HVAC-Airside?",
+        "23": "HVAC-SystemSpecificRequirements",
     }
 
     # Maps excel enumerations for pass/fail etc. to RCTOutcomeLabel. Unfortunately there's a disconnect.
