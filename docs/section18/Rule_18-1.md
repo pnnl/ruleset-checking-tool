@@ -39,7 +39,7 @@
 
 
  - for most zones, we can simply return the result at this point, but there are some special cases that require a check for whether an UNDETERMINED needs to be returned.  We need to do further work in the case of laboratories (G3_1_1d) and vestibules (G3_1_1e)
- - check if the system_type_origin is "G3_1_1d" we need to determine whether the laboratory exhaust meets the threshold based solely on zone exhaust or not: `if system_type_origin == "G3_1_1d:"
+ - check if the system_type_origin is "G3_1_1d" we need to determine whether the laboratory exhaust meets the threshold based solely on zone exhaust or not: `if system_type_origin == "G3_1_1d:"`
 	- complete logic to determine whether we can give a hard PASS / FAIL or simply UNDETERMINED
 
  - - Now find the laboratory exhaust for each zone in the laboratory_zones list.  Loop through each zone: `for z in laboratory_zones:`
