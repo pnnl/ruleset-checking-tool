@@ -15,6 +15,7 @@
 3. get_list_hvac_systems_associated_with_zone()
 4. get_baseline_system_types()
 5. is_zone_a_vestibule()
+6. get_building_lab_zones()
 
 
 **Applicability Checks:**
@@ -42,7 +43,8 @@
  - check if the system_type_origin is "G3_1_1d" we need to determine whether the laboratory exhaust meets the threshold based solely on zone exhaust or not: `if system_type_origin == "G3_1_1d:"`
 	- complete logic to determine whether we can give a hard PASS / FAIL or simply UNDETERMINED
 
- - - Now find the laboratory exhaust for each zone in the laboratory_zones list.  Loop through each zone: `for z in laboratory_zones:`
+ - get a list of laboratory zones by calling the function get_building_lab_zones(): `laboratory_zones = get_building_lab_zones(P_RMI)`
+ - Now find the laboratory exhaust for each zone in the laboratory_zones list.  Loop through each zone: `for z in laboratory_zones:`
    - Add zonal exhaust fan airflow to zone_total_exhaust: `if zone.zone_exhaust_fans ?:`
        - look at each exhaust fan: `for exhaust_fan in zone.zone_exhaust_fans:`
        -  add the airflow to the zone total exhaust: `building_total_lab_exhaust += exhaust_fan.design_airflow`
