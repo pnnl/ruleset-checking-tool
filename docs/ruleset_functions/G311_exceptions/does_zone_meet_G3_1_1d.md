@@ -22,42 +22,38 @@ This function gets the system-wide exhaust airflow rate following the same logic
 - **get_building_total_lab_exhaust_from_zone_exhaust_fans**
 - **get_building_lab_zones**
 
-design_airflow
 ## Logic:
 - set the result variable to "No" - only a positive test can give it a different value: `result = NO`
 - use the function get_building_lab_zones to get a list of laboratory zones in the P_RMI: `laboratory_zones_list = get_building_lab_zones(P_RMI)`
 - check if the given zone is in the laboratory_zones_list, continue checking logic: `if zone.id in? laboratory_zones_list:`
-    - now check whether building lab exhaust airflow is greater than 15,000 cfm - create a variable for the building total lab exhaust: `building_total_lab_exhaust = 0`
-    - Now find the laboratory exhaust for each zone in the laboratory_zones list.  Loop through each zone: `for z_id in laboratory_zones_list:`
-       - get the zone: `z = get_object_by_id(P_RMI, z_id)`
-       - create a variable to hold the zone total exhaust - we are counting all exhaust in a lab zone as "lab exhaust": `zone_total_exhaust = 0`
-       - Add zonal exhaust fan airflow to zone_total_exhaust: `if z.zone_exhaust_fans ?:`
-           - look at each exhaust fan: `for exhaust_fan in z.zone_exhaust_fans:`
-           -  add the airflow to the zone total exhaust: `zone_total_exhaust += exhaust_fan.design_airflow`
-
-       - Get a list of HVAC systems serving the zone: `hvac_sys_list_serving_zone_x =  get_list_hvac_systems_associated_with_zone(RMI,z_id)`  
-       - For each hvac system serving the zone: `for hvac in hvac_sys_list_serving_zone_x:`  
-           - Check if there is a fan system associated with the hvac system (if not, then there is no central HVAC system exhaust fan (terminal units don't have exhaust fans)): `if hvac.fan_system != Null:`  
-               - Get list of zones served by the hvac system: `zone_list_hvac_sys_x = dict_of_zones_and_terminal_units_served_by_hvac_sys_x[hvac.id]["ZONE_LIST"]`  
-               - create a variable to hold the total exhaust airflow rate of the HVAC system: `hvac_system_total_exhaust_airflow = 0`
-               - Look at each fan in the fan_system.exhaust_fans: `for exhaust_fan in fan_system.exhaust_fans:`
-                   - add the exhaust fan airflow to the hvac exhaust airflow total: `hvac_system_total_exhaust_airflow += exhaust_fan.design_airflow`
-               - Check if the hvac system serves more than one zone, if it does then carry on, if not then go to Else: `if len(zone_list_hvac_sys_x) >1:`  
-                   - Get list of terminal units served by the hvac system: `terminal_list_hvac_sys_x = dict_of_zones_and_terminal_units_served_by_hvac_sys_x[hvac.id]["Terminal_Unit_List"]`  
-                   - create a variable for the total terminal air flow for the hvac system - this total terminal airflow is used to divide exhaust proportionally across zones: `total_terminal_air_flow = 0`
-                   - create a variable to hold the terminal airflow for this zone: `zone_primary_air_flow = 0`
-                   - For each terminal unit served by the HVAC system: `for terminal in terminal_list_hvac_sys_x:`  
-                       - Get the primary air flow: `primary_air_flow_terminal = terminal.primary_airflow`  
-                       - Add to the total cfm across all terminals served by the HVAC system: `total_terminal_air_flow = total_terminal_air_flow + primary_air_flow_terminal`  
-                       - Check if the terminal unit is associated with this zone: `if terminal in z.terminals:`   
-                           - Add to the primary flow for the zone for this hvac system:  `zone_primary_air_flow = zone_primary_air_flow + primary_air_flow_terminal`  
-                   - Get the HVAC system's FanSystem: `fan_system = hvac.fan_system`
-                   - Apportion the exhaust airflow to the zone based on the terminal unit primary flow for the zone if hvac_system_total_exhaust_airflow > 0 and zone_primary_air_flow > 0: `if( zone_primary_air_flow > 0 && hvac_system_total_exhaust_airflow > 0 ): zone_total_exhaust += hvac_system_total_exhaust_airflow * (zone_primary_air_flow/total_terminal_air_flow)`
-               - Else, the HVAC system serves a single zone: `Else:`  
-                   - Add the hvac system exhaust flow to zone_total_exhaust: `zone_total_exhaust += hvac_system_total_exhaust_airflow`  
-       - add the zone_total_exhaust to building_total_lab_exhaust: `building_total_lab_exhaust = building_total_lab_exhaust + zone_total_exhaust`
-     - now check whether the building wide total lab exhaust is greater than 15,000 cfm: `if building_total_lab_exhaust > 15000:`
-       - set the result to YES: `result = YES`
+    - now check whether building lab exhaust airflow is greater than 15,000 cfm - create a variable for the building total lab exhaust and set it equal to the result of the function get_building_total_lab_exhaust_from_zone_exhaust_fans(): `building_total_lab_exhaust = get_building_total_lab_exhaust_from_zone_exhaust_fans(P_RMI)`
+    - check if the building_total_lab_exhaust is greater than 15,000cfm.  If it is, then the zone meets G3.1.1d.  If not, check the HVAC systems serving lab zones and add the exhaust to the building_total_lab_exhaust: `if building_total_lab_exhaust > 15,000:`
+     - set result to YES: `result = YES`
+    - otherwise, find the system exhaust rate allocated to labs: `else:`
+     - Now find the laboratory exhaust for each zone in the laboratory_zones list.  Loop through each zone: `for z_id in laboratory_zones_list:`
+        - Get a list of HVAC systems serving the zone: `hvac_sys_list_serving_zone_x =  get_list_hvac_systems_associated_with_zone(RMI,z_id)`  
+        - For each hvac system serving the zone: `for hvac in hvac_sys_list_serving_zone_x:`  
+            - Check if there is a fan system associated with the hvac system (if not, then there is no central HVAC system exhaust fan (terminal units don't have exhaust fans)): `if hvac.fan_system != Null:`  
+                - Get list of zones served by the hvac system: `zone_list_hvac_sys_x = dict_of_zones_and_terminal_units_served_by_hvac_sys_x[hvac.id]["ZONE_LIST"]`  
+                - create a variable to hold the total exhaust airflow rate of the HVAC system: `hvac_system_total_exhaust_airflow = 0`
+                - Look at each fan in the fan_system.exhaust_fans: `for exhaust_fan in fan_system.exhaust_fans:`
+                    - add the exhaust fan airflow to the hvac exhaust airflow total: `hvac_system_total_exhaust_airflow += exhaust_fan.design_airflow`
+                - Check if the hvac system serves more than one zone, if it does then carry on, if not then go to Else: `if len(zone_list_hvac_sys_x) >1:`  
+                    - Get list of terminal units served by the hvac system: `terminal_list_hvac_sys_x = dict_of_zones_and_terminal_units_served_by_hvac_sys_x[hvac.id]["Terminal_Unit_List"]`  
+                    - create a variable for the total terminal air flow for the hvac system - this total terminal airflow is used to divide exhaust proportionally across zones: `total_terminal_air_flow = 0`
+                    - create a variable to hold the terminal airflow for this zone: `zone_primary_air_flow = 0`
+                    - For each terminal unit served by the HVAC system: `for terminal in terminal_list_hvac_sys_x:`  
+                        - Get the primary air flow: `primary_air_flow_terminal = terminal.primary_airflow`  
+                        - Add to the total cfm across all terminals served by the HVAC system: `total_terminal_air_flow = total_terminal_air_flow + primary_air_flow_terminal`  
+                        - Check if the terminal unit is associated with this zone: `if terminal in z.terminals:`   
+                            - Add to the primary flow for the zone for this hvac system:  `zone_primary_air_flow = zone_primary_air_flow + primary_air_flow_terminal`  
+                    - Get the HVAC system's FanSystem: `fan_system = hvac.fan_system`
+                    - Apportion the exhaust airflow to the zone based on the terminal unit primary flow for the zone if hvac_system_total_exhaust_airflow > 0 and zone_primary_air_flow > 0: `if( zone_primary_air_flow > 0 && hvac_system_total_exhaust_airflow > 0 ): zone_total_exhaust += hvac_system_total_exhaust_airflow * (zone_primary_air_flow/total_terminal_air_flow)`
+                - Else, the HVAC system serves a single zone: `Else:`  
+                    - Add the hvac system exhaust flow to zone_total_exhaust: `zone_total_exhaust += hvac_system_total_exhaust_airflow`  
+        - add the zone_total_exhaust to building_total_lab_exhaust: `building_total_lab_exhaust = building_total_lab_exhaust + zone_total_exhaust`
+      - now check whether the building wide total lab exhaust is greater than 15,000 cfm: `if building_total_lab_exhaust > 15000:`
+        - set the result to YES: `result = YES`
 
 
 
