@@ -125,7 +125,5 @@
 
 
 **Notes/Questions:**  
-1.  Unresolved how to handle G3.1.1d
-2.  For G3.1.1f - which system type should be assigned when the zone meets the requirements?
 
 **[Back](../_toc.md)**
