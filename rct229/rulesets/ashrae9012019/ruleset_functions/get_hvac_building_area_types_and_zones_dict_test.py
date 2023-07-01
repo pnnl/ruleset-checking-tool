@@ -1,11 +1,18 @@
 from copy import deepcopy
 
+from rct229.rulesets.ashrae9012019.data_fns.table_3_2_fns import table_3_2_lookup
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_hvac_building_area_types_and_zones_dict import (
     get_hvac_building_area_types_and_zones_dict,
 )
 from rct229.schema.config import ureg
 from rct229.schema.schema_utils import quantify_rmr
 from rct229.schema.validate import schema_validate_rmr
+from rct229.rulesets.ashrae9012019.ruleset_functions.get_zone_conditioning_category_dict import (
+    CAPACITY_THRESHOLD as CAPACITY_THRESHOLD_QUANTITY,
+)
+
+POWER_DELTA = 1
+POWER_THRESHOLD_100 = (CAPACITY_THRESHOLD_QUANTITY * 100 * ureg("m2")).to("W").magnitude
 
 TEST_RMI = {
     "id": "test_rmd",
@@ -16,6 +23,17 @@ TEST_RMI = {
             "building_segments": [
                 {
                     "id": "Building Segment 1",
+                    "heating_ventilating_air_conditioning_systems": [
+                        # directly conditioned zone
+                        {
+                            "id": "hvac_1_1",
+                            "cooling_system": {
+                                "id": "csys_1_1_1",
+                                "design_sensible_cool_capacity": 2 * POWER_THRESHOLD_100
+                                + POWER_DELTA,
+                            }
+                        }
+                    ],
                     "zones": [
                         {
                             "id": "Thermal Zone 1",
@@ -26,11 +44,28 @@ TEST_RMI = {
                                     "lighting_space_type": "ATRIUM_LOW_MEDIUM",
                                 }
                             ],
+                            "terminals": [
+                                {
+                                    "id": "Terminal 1-1",
+                                    "served_by_heating_ventilating_air_conditioning_system": "hvac_1_1",
+                                }
+                            ]
                         },
                     ],
                 },
                 {
                     "id": "Building Segment 2",
+                    "heating_ventilating_air_conditioning_systems": [
+                        # directly conditioned zone
+                        {
+                            "id": "hvac_2_1",
+                            "cooling_system": {
+                                "id": "csys_2_1_1",
+                                "design_sensible_cool_capacity": 2 * POWER_THRESHOLD_100
+                                + POWER_DELTA,
+                            }
+                        }
+                    ],
                     "zones": [
                         {
                             "id": "Thermal Zone 2",
@@ -41,9 +76,45 @@ TEST_RMI = {
                                     "lighting_space_type": "ATRIUM_LOW_MEDIUM",
                                 }
                             ],
+                            "terminals": [
+                                {
+                                    "id": "Terminal 2-1",
+                                    "served_by_heating_ventilating_air_conditioning_system": "hvac_2_1",
+                                }
+                            ]
                         },
                     ],
                 },
+                {
+                    "id": "Building Segment 3",
+                    "zones": [
+                        {
+                            "id": "Thermal Zone 3",
+                            "volume": 100,
+                            "spaces": [
+                                {
+                                    "id": "Space 3",
+                                    "floor_area": 200,
+                                    "lighting_space_type": "LOBBY_HOTEL",
+                                }
+                            ],
+                            "surfaces": [
+                                # Adds to zone_other_ua
+                                {
+                                    "id": "surface_3_1_1",
+                                    "adjacent_to": "INTERIOR",
+                                    "adjacent_zone": "zone_1_2",  # semi-heated
+                                    "area": 10,  # m2
+                                    "tilt": 90,  # wall
+                                    "construction": {
+                                        "id": "construction_1",
+                                        "u_factor": 1.2
+                                    }
+                                }
+                            ],
+                        },
+                    ]
+                }
             ],
         },
     ],
@@ -63,7 +134,7 @@ def test__TEST_RMD__is_valid():
 
 
 def test__get_hvac_building_area_types_and_zones_dict__undetermined_predominante_success():
-    assert get_hvac_building_area_types_and_zones_dict(TEST_RMI_UNIT) == {
+    assert get_hvac_building_area_types_and_zones_dict("CZ4A", TEST_RMI_UNIT) == {
         "OTHER_NON_RESIDENTIAL": {
             "zone_ids": ["Thermal Zone 2", "Thermal Zone 1"],
             "floor_area": 300 * ureg("m2").to("ft2"),
@@ -76,7 +147,7 @@ def test__get_hvac_building_area_types_and_zones_dict__residential_predominate_s
     test_rmi_unit_residential["buildings"][0]["building_segments"][1][
         "lighting_building_area_type"
     ] = "MULTIFAMILY"
-    assert get_hvac_building_area_types_and_zones_dict(test_rmi_unit_residential) == {
+    assert get_hvac_building_area_types_and_zones_dict("CZ4A", test_rmi_unit_residential) == {
         "RESIDENTIAL": {
             "zone_ids": ["Thermal Zone 2"],
             "floor_area": 200 * ureg("m2").to("ft2"),

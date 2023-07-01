@@ -1,11 +1,14 @@
 import logging
 
-import pydash
-from pydash import flow
+from pydash import flow, drop_while, curry, filter_, map_, flatten_deep, reduce_
 
 from rct229.rulesets.ashrae9012019.data.schema_enums import schema_enums
 from rct229.rulesets.ashrae9012019.data_fns.table_lighting_to_hvac_bat_map_fns import (
     lighting_to_hvac_bat,
+)
+from rct229.rulesets.ashrae9012019.ruleset_functions.get_zone_conditioning_category_dict import (
+    get_zone_conditioning_category_rmi_dict,
+    ZoneConditioningCategory,
 )
 from rct229.utils.assertions import assert_
 from rct229.utils.jsonpath_utils import find_all
@@ -25,8 +28,9 @@ class ClassificationSource:
 
 
 logger = logging.getLogger(__name__)
+
 # create currier that merges two building area type values
-bat_val_merge_curry = pydash.curry(
+bat_val_merge_curry = curry(
     lambda a, b: {
         "zone_ids": [*a["zone_ids"], *b["zone_ids"]],
         "floor_area": a["floor_area"] + b["floor_area"],
@@ -34,12 +38,29 @@ bat_val_merge_curry = pydash.curry(
 )
 # create currier that retrieves a data form a dictionary with
 # default handling of non-existence errors.
-get_bat_val_func_curry = pydash.curry(
+get_bat_val_func_curry = curry(
     lambda bat_dict, key: bat_dict.get(key, {"zone_ids": [], "floor_area": ZERO.AREA})
 )
 
 
-def get_hvac_building_area_types_and_zones_dict(rmi):
+def get_hvac_building_area_types_and_zones_dict(climate_zone, rmi):
+    """
+
+    Parameters
+    ----------
+    climate_zone str
+        One of the ClimateZoneOptions2019ASHRAE901 enumerated values
+    rmi dict
+        A dictionary representing a ruleset model instance as defined by the ASHRAE229 schema
+
+    Returns
+    -------
+
+    """
+    zone_conditioning_category_dict = get_zone_conditioning_category_rmi_dict(
+        climate_zone, rmi
+    )
+
     building_area_types_with_total_area_and_zones_dict = {}
     # create a new currier to get building area type value from building_area_types_with_total_area_and_zones_dict
     bat_dict_currier = get_bat_val_func_curry(
@@ -91,6 +112,18 @@ def get_hvac_building_area_types_and_zones_dict(rmi):
             f"building segment {building_segment['id']} is determined as {building_segment_hvac_bat}. The classification source is {classification_source}"
         )
 
+        # filter zones
+        # only conditioned (mixed, residential & nonresidential) zones in this list.
+        filtered_zones_list = filter_(
+            find_all("$.zones[*]", building_segment),
+            lambda zone: zone_conditioning_category_dict[zone["id"]]
+            in [
+                ZoneConditioningCategory.CONDITIONED_MIXED,
+                ZoneConditioningCategory.CONDITIONED_NON_RESIDENTIAL,
+                ZoneConditioningCategory.CONDITIONED_RESIDENTIAL,
+            ],
+        )
+
         # add new hvac bat val to the existing/new hvac bat
         building_area_types_with_total_area_and_zones_dict[
             building_segment_hvac_bat
@@ -98,18 +131,24 @@ def get_hvac_building_area_types_and_zones_dict(rmi):
             bat_dict_currier,
             bat_val_merge_curry(
                 {
-                    "zone_ids": find_all("$.zones[*].id", building_segment),
-                    "floor_area": sum(
-                        find_all("$.zones[*].spaces[*].floor_area", building_segment),
-                        ZERO.AREA,
-                    ),
+                    "zone_ids": map_(filtered_zones_list, "id"),
+                    "floor_area": flow(
+                        # create a 2d list [[zone -> space floor area list]]
+                        lambda zones: map_(
+                            zones, lambda zone: find_all("$.spaces[*].floor_area", zone)
+                        ),
+                        flatten_deep,
+                        sum,
+                    )(filtered_zones_list),
                 }
             ),
         )(
             building_segment_hvac_bat
         )
 
+    # check other undetermined
     if OTHER_UNDETERMINED in building_area_types_with_total_area_and_zones_dict:
+        # find predominate hvac bat by the largest floor_area
         predominate_hvac_bat = sorted(
             building_area_types_with_total_area_and_zones_dict.items(),
             key=lambda x: x[1]["floor_area"],
@@ -123,7 +162,7 @@ def get_hvac_building_area_types_and_zones_dict(rmi):
         other_undetermined_bat_val_merge_currier = bat_val_merge_curry(
             other_undetermined_val
         )
-        # create a new flow to add/update building area types value
+        # create a new flow to add/update building area types value with the other undetermined data.
         assign_bat_val_flow = flow(
             bat_dict_currier, other_undetermined_bat_val_merge_currier
         )
@@ -132,12 +171,14 @@ def get_hvac_building_area_types_and_zones_dict(rmi):
             predominate_hvac_bat == OTHER_UNDETERMINED
             or predominate_hvac_bat == HVAC_BUILDING_AREA_TYPE_OPTIONS.RESIDENTIAL
         ):
+            # case to merge other undetermined to other non residential
             building_area_types_with_total_area_and_zones_dict[
                 HVAC_BUILDING_AREA_TYPE_OPTIONS.OTHER_NON_RESIDENTIAL
             ] = assign_bat_val_flow(
                 HVAC_BUILDING_AREA_TYPE_OPTIONS.OTHER_NON_RESIDENTIAL
             )
         else:
+            # case to merge other undetermined to predominate hvac bat
             building_area_types_with_total_area_and_zones_dict[
                 predominate_hvac_bat
             ] = assign_bat_val_flow(predominate_hvac_bat)
