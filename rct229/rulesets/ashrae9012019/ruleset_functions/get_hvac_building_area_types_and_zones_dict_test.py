@@ -31,7 +31,7 @@ TEST_RMI = {
                                 "id": "csys_1_1_1",
                                 "design_sensible_cool_capacity": 2 * POWER_THRESHOLD_100
                                 + POWER_DELTA,
-                            }
+                            },
                         }
                     ],
                     "zones": [
@@ -49,7 +49,7 @@ TEST_RMI = {
                                     "id": "Terminal 1-1",
                                     "served_by_heating_ventilating_air_conditioning_system": "hvac_1_1",
                                 }
-                            ]
+                            ],
                         },
                     ],
                 },
@@ -63,7 +63,7 @@ TEST_RMI = {
                                 "id": "csys_2_1_1",
                                 "design_sensible_cool_capacity": 2 * POWER_THRESHOLD_100
                                 + POWER_DELTA,
-                            }
+                            },
                         }
                     ],
                     "zones": [
@@ -81,7 +81,7 @@ TEST_RMI = {
                                     "id": "Terminal 2-1",
                                     "served_by_heating_ventilating_air_conditioning_system": "hvac_2_1",
                                 }
-                            ]
+                            ],
                         },
                     ],
                 },
@@ -108,13 +108,13 @@ TEST_RMI = {
                                     "tilt": 90,  # wall
                                     "construction": {
                                         "id": "construction_1",
-                                        "u_factor": 1.2
-                                    }
+                                        "u_factor": 1.2,
+                                    },
                                 }
                             ],
                         },
-                    ]
-                }
+                    ],
+                },
             ],
         },
     ],
@@ -147,7 +147,9 @@ def test__get_hvac_building_area_types_and_zones_dict__residential_predominate_s
     test_rmi_unit_residential["buildings"][0]["building_segments"][1][
         "lighting_building_area_type"
     ] = "MULTIFAMILY"
-    assert get_hvac_building_area_types_and_zones_dict("CZ4A", test_rmi_unit_residential) == {
+    assert get_hvac_building_area_types_and_zones_dict(
+        "CZ4A", test_rmi_unit_residential
+    ) == {
         "RESIDENTIAL": {
             "zone_ids": ["Thermal Zone 2"],
             "floor_area": 200 * ureg("m2").to("ft2"),
