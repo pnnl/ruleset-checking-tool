@@ -124,27 +124,30 @@ def get_hvac_building_area_types_and_zones_dict(climate_zone, rmi):
             ],
         )
 
-        # add new hvac bat val to the existing/new hvac bat
-        building_area_types_with_total_area_and_zones_dict[
-            building_segment_hvac_bat
-        ] = flow(
-            bat_dict_currier,
-            bat_val_merge_curry(
-                {
-                    "zone_ids": map_(filtered_zones_list, "id"),
-                    "floor_area": flow(
-                        # create a 2d list [[zone -> space floor area list]]
-                        lambda zones: map_(
-                            zones, lambda zone: find_all("$.spaces[*].floor_area", zone)
-                        ),
-                        flatten_deep,
-                        sum,
-                    )(filtered_zones_list),
-                }
-            ),
-        )(
-            building_segment_hvac_bat
-        )
+        if filtered_zones_list:
+            # if there are conditioned zones
+            # add new hvac bat val to the existing/new hvac bat
+            building_area_types_with_total_area_and_zones_dict[
+                building_segment_hvac_bat
+            ] = flow(
+                bat_dict_currier,
+                bat_val_merge_curry(
+                    {
+                        "zone_ids": map_(filtered_zones_list, "id"),
+                        "floor_area": flow(
+                            # create a 2d list [[zone -> space floor area list]]
+                            lambda zones: map_(
+                                zones,
+                                lambda zone: find_all("$.spaces[*].floor_area", zone),
+                            ),
+                            flatten_deep,
+                            sum,
+                        )(filtered_zones_list),
+                    }
+                ),
+            )(
+                building_segment_hvac_bat
+            )
 
     # check other undetermined
     if OTHER_UNDETERMINED in building_area_types_with_total_area_and_zones_dict:

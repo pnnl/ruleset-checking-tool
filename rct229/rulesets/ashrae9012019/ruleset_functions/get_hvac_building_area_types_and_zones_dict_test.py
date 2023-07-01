@@ -166,7 +166,9 @@ def test__get_hvac_building_area_types_and_zones_dict__public_assembly_predomina
     test_rmi_unit_residential["buildings"][0]["building_segments"][1][
         "lighting_building_area_type"
     ] = "RELIGIOUS_FACILITY"
-    assert get_hvac_building_area_types_and_zones_dict(test_rmi_unit_residential) == {
+    assert get_hvac_building_area_types_and_zones_dict(
+        "CZ4A", test_rmi_unit_residential
+    ) == {
         "PUBLIC_ASSEMBLY": {
             "zone_ids": ["Thermal Zone 1", "Thermal Zone 2"],
             "floor_area": 300 * ureg("m2").to("ft2"),
