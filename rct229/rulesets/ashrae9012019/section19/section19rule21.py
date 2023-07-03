@@ -80,8 +80,7 @@ class Section19Rule21(RuleDefinitionListIndexedBase):
             ruleset_section_title="HVAC - General",
             standard_section="Section G3.1.2.10 and exceptions 1-7",
             is_primary_rule=True,
-            rmr_context="ruleset_model_instances/0",
-            list_path="$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*]",
+            list_path="ruleset_model_instances[0].buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*]",
             data_items={"climate_zone": ("baseline", "weather/climate_zone")},
         )
 
@@ -185,13 +184,12 @@ class Section19Rule21(RuleDefinitionListIndexedBase):
                     rmi_b, hvac_id_b
                 )
 
-        baseline_system_types = get_baseline_system_types(rmi_b)
-        sys_type_heating_only = any(
-            [
-                hvac_id_p in applicable_sys_type
-                for applicable_sys_type in APPLICABLE_SYS_TYPES
-            ]
-        )
+            sys_type_heating_only = any(
+                [
+                    hvac_id_p in applicable_sys_type
+                    for applicable_sys_type in APPLICABLE_SYS_TYPES
+                ]
+            )
 
         max_thermostat_heating_setpoint_schedule_p = max(
             [
@@ -201,7 +199,7 @@ class Section19Rule21(RuleDefinitionListIndexedBase):
                     rmi_p,
                 )
                 for thermostat_schedule in find_one(
-                    f'$.schedules[?(@.id == "{thermostat_schedule_id}")].hourly_values',
+                    f'$.schedules[?(@.id = "{thermostat_schedule_id}")].hourly_values',
                     rmi_p,
                 )
             ]
@@ -228,7 +226,7 @@ class Section19Rule21(RuleDefinitionListIndexedBase):
                     "$": ["fan_system"],
                     "fan_system": [
                         "supply_fans",
-                        "minimum_min_outdoor_airflow_b",
+                        "minimum_outdoor_airflow",
                         "maximum_outdoor_airflow",
                     ],
                 },
