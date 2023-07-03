@@ -141,7 +141,8 @@
                                                     ],
                                                     "return_fans": [
                                                         {
-                                                            "id": "Return Fan 1"
+                                                            "id": "Return Fan 1",
+                                                            "specification_method": "SIMPLE"
                                                         }
                                                     ],
                                                     "minimum_outdoor_airflow": 0.0
@@ -299,7 +300,8 @@
                                                     ],
                                                     "return_fans": [
                                                         {
-                                                            "id": "Return Fan 1"
+                                                            "id": "Return Fan 1",
+                                                            "specification_method": "SIMPLE"
                                                         }
                                                     ],
                                                     "minimum_outdoor_airflow": 0.0
@@ -449,7 +451,8 @@
                                                     ],
                                                     "return_fans": [
                                                         {
-                                                            "id": "Return Fan 1"
+                                                            "id": "Return Fan 1",
+                                                            "specification_method": "SIMPLE"
                                                         }
                                                     ],
                                                     "minimum_outdoor_airflow": 141.58423295999995
@@ -599,7 +602,8 @@
                                                     ],
                                                     "return_fans": [
                                                         {
-                                                            "id": "Return Fan 1"
+                                                            "id": "Return Fan 1",
+                                                            "specification_method": "SIMPLE"
                                                         }
                                                     ],
                                                     "minimum_outdoor_airflow": 141.58423295999995
