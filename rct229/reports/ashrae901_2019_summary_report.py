@@ -133,7 +133,7 @@ Replace-Undetermined
     def save_ruleset_report(self, ruleset_report, report_dir):
         overall_rules_count = {name: 0 for name in self.section_list}
 
-        for key in self.ruleset_outcome.keys():
+        for key in self.ruleset_outcome:
             for outcome in [
                 RCTOutcomeLabel.PASS,
                 RCTOutcomeLabel.FAILED,

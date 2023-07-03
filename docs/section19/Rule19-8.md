@@ -19,7 +19,7 @@
 
 ## Rule Logic:  
 - Get dictionary with hvac systems and associated zones and areas: `hvac_zone_list_w_area_dict_b  = get_hvac_zone_list_w_area(B_RMR)`  
-- For each hvac_b system in B_RMI: `for hvac_b in hvac_zone_list_w_area_dict_b.keys():`  
+- For each hvac_b system in B_RMI: `for hvac_b in hvac_zone_list_w_area_dict_b:`  
     - Reset is_DCV_modeled to FALSE: `is_DCV_modeled = FALSE`  
     - Reset avg_occ_density to 0: `avg_occ_density = 0`  
     - Get the hvac system minimum OA flow: `hvac_min_OA_flow = hvac_b.fan_system.minimum_outdoor_airflow`  

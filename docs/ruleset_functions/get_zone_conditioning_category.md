@@ -23,7 +23,7 @@ Logic:
 
 - Get dictionary for the list of zones and their total floor area served by each HVAC system in RMR: `hvac_zone_list_w_area_dict = get_hvac_zone_list_w_area(RMR)`
 
-- For each HVAC system id in dictionary: `for hvac_sys_id in hvac_zone_list_w_area_dict.keys():` (Note XC, this only gets HVAC systems serving zones. Orphan HVAC systems are not looped)
+- For each HVAC system id in dictionary: `for hvac_sys_id in hvac_zone_list_w_area_dict:` (Note XC, this only gets HVAC systems serving zones. Orphan HVAC systems are not looped)
 
   - Get total central sensible cooling capacity for HVAC system:
   **[CH: The hvac system has at most one cooling_system, one heating_system, and one preheat_system. Also, I think we need to handle any of these systems missing.]**

@@ -16,7 +16,7 @@ class EngineRawOutput(RCTReport):
                 if any(
                     [
                         key.startswith("INVALID_") and key.endswith("_CONTEXT")
-                        for key in rule_outcomes.keys()
+                        for key in rule_outcomes
                     ]
                 ):
                     outcomes_dict[RCTOutcomeLabel.UNDETERMINED] += 1
@@ -28,7 +28,7 @@ class EngineRawOutput(RCTReport):
                         outcomes_dict[RCTOutcomeLabel.UNDETERMINED] += 1
                     else:
                         outcomes_dict[rule_outcome_str] += 1
-                    if "calc_vals" in rule_outcomes.keys():
+                    if "calc_vals" in rule_outcomes:
                         rule_outcomes["calc_vals"] = calc_vals_converter(
                             rule_outcomes["calc_vals"]
                         )

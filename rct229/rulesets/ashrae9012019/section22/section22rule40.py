@@ -70,7 +70,7 @@ class Section22Rule40(RuleDefinitionBase):
         baseline_system_types_dict = calc_vals["baseline_system_types_dict"]
         available_type_list = [
             hvac_type
-            for hvac_type in baseline_system_types_dict.keys()
+            for hvac_type in baseline_system_types_dict
             if len(baseline_system_types_dict[hvac_type]) > 0
         ]
         return not any(

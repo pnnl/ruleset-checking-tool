@@ -19,7 +19,7 @@
     - For each hvac_b in the building_segment_b: `for hvac_b in building_segment_b.heating_ventilating_air_conditioning_system:`
         - Reset the hvac_system_type_applicable boolean variable (indicates whether the hvac system type is relevant): `hvac_system_type_applicable = FALSE`
         - Reset zones served list: `zone_list_b = []`
-        - Get the hvac system type for hvac_b: `hvac_sys_type_b = baseline_hvac_sys_type_ids_dict_b.keys()[list(baseline_hvac_sys_type_ids_dict_b.values()).index(hvac_b.id)]`
+        - Get the hvac system type for hvac_b: `hvac_sys_type_b = baseline_hvac_sys_type_ids_dict_b[list(baseline_hvac_sys_type_ids_dict_b.values()).index(hvac_b.id)]`
         - Check if HVAC system is type 5, 5a, 5b, 6, 6a, 6b, if it is then carry on: `if get_baseline_system_types(hvac_b.id) in ["SYS-5", "SYS-5a", "SYS-5b", "SYS-6", "SYS-6a", "SYS-6b"]:`
             - Add to list of applicable HVAC systems: `applicable_hvac_list_b = applicable_hvac_list_b.Append(hvac_b)`  
     

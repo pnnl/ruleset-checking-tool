@@ -24,13 +24,13 @@
 
 - Get area type window wall areas dictionary for B_RMR: `window_wall_areas_dictionary_b = get_area_type_window_wall_areas(B_RMR)`
 
-  - For each area type in window wall areas dictionary: `for area_type_b in window_wall_areas_dictionary_b.keys():`
+  - For each area type in window wall areas dictionary: `for area_type_b in window_wall_areas_dictionary_b:`
   
     - Calculate total fenestration area for B_RMR: `total_fenestration_area_b += window_wall_areas_dictionary_b[area_type_b]["TOTAL_WINDOW_AREA"]`
 
 - Get area type window wall areas dictionary for P_RMR: `window_wall_areas_dictionary_p = get_area_type_window_wall_areas(P_RMR)`
 
-  - For each area type in window wall areas dictionary: `for area_type_p in window_wall_areas_dictionary_p.keys():`
+  - For each area type in window wall areas dictionary: `for area_type_p in window_wall_areas_dictionary_p:`
   
     - Calculate total fenestration area for B_RMR: `total_fenestration_area_p += window_wall_areas_dictionary_p[area_type_p]["TOTAL_WINDOW_AREA"]`
 

@@ -53,11 +53,11 @@ class ASHRAE9012019DetailReport(RCTReport):
             if any(
                 [
                     key.startswith("INVALID_") and key.endswith("_CONTEXT")
-                    for key in output_result.keys()
+                    for key in output_result
                 ]
             ):
                 evaluation_outcome["invalid_msg"] = "".join(
-                    [output_result[key] for key in output_result.keys()]
+                    [output_result[key] for key in output_result]
                 )
                 output_outcome_dict[RCTOutcomeLabel.UNDETERMINED] += 1
             else:
