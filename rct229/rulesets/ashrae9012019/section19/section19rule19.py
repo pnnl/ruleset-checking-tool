@@ -89,7 +89,7 @@ class Section19Rule19(RuleDefinitionListIndexedBase):
 
         zone_hvac_non_mech_cooling_map = {}
         for zone_id_p in find_all(
-            "$.buildings[*].building_segments[*].zones[*]", rmi_p
+            "$.buildings[*].building_segments[*].zones[*].id", rmi_p
         ):
             zone_hvac_non_mech_cooling_map[zone_id_p] = any(
                 [
@@ -117,7 +117,7 @@ class Section19Rule19(RuleDefinitionListIndexedBase):
             for zone_id_b in dict_of_zones_and_terminal_units_served_by_hvac_sys_b[
                 hvac_id_b
             ]["zone_list"]:
-                zone_p = find_exactly_one_zone(zone_id_b, rmi_p)
+                zone_p = find_exactly_one_zone(rmi_p, zone_id_b)
 
                 zonal_exhaust_fan_elec_power_b += get_fan_object_electric_power(
                     zone_p.get("zonal_exhaust_fan")
