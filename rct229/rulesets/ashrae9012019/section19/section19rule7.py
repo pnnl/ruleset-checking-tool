@@ -58,9 +58,10 @@ class Section19Rule7(RuleDefinitionListIndexedBase):
         ):
             if hvac_system_serves_only_labs:
                 lighting_space_type_b = space_b.get("lighting_space_type")
-                if lighting_space_type_b is not None:
+                if lighting_space_type_b is None:
+                    all_lighting_space_types_defined = False
+                else:
                     are_any_lighting_space_types_defined = True
-
                     if (
                         lighting_space_type_b
                         != LIGHTING_SPACE.LABORATORY_EXCEPT_IN_OR_AS_A_CLASSROOM
@@ -79,7 +80,7 @@ class Section19Rule7(RuleDefinitionListIndexedBase):
                 "zone_OA_CFM_list_of_schedules_p": [],
                 "was_DCV_modeled_baseline": False,
                 "was_DCV_modeled_proposed": False,
-                "air_distribution_effectiveness": False,
+                "zone_air_distribution_effectiveness_greater_than_1": False,
             }
             for zone_id_b in dict_of_zones_and_terminal_units_served_by_hvac_sys_b[
                 hvac_id_b
@@ -130,7 +131,9 @@ class Section19Rule7(RuleDefinitionListIndexedBase):
                         ]
                     )
 
-                zone_data[hvac_id_b]["air_distribution_effectiveness"] = (
+                zone_data[hvac_id_b][
+                    "zone_air_distribution_effectiveness_greater_than_1"
+                ] = (
                     getattr_(
                         zone_p,
                         "Zone",

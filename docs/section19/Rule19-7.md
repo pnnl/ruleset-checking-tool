@@ -41,7 +41,8 @@ Exceptions included in this RDS:
     - Get list of zones served by the hvac system: `zones_list_hvac_sys_b = dict_of_zones_and_terminal_units_served_by_hvac_sys_b[hvac.id]["ZONE_LIST"]`  
         - For each space associated with the zone, check if any spaces are NOT labs or if any lighting space types are not defined: `for space in zone.spaces:`
             - Check if hvac_system_serves_only_labs = true (no need to keep looping through space types if it equals false): `if hvac_system_serves_only_labs == true:`  
-                - Check if the lighting space type is defined: `if space.lighting_space_type != Null:`    
+                - Check if the lighting space type is defined: `if space.lighting_space_type == Null: all_lighting_space_types_defined = false`    
+                - if the lighting space type is not defined: `else:`   
                     - Set are_any_lighting_space_types_defined = true: `are_any_lighting_space_types_defined = true`  
                     - Check if the lighting space type is NOT a lab: `if space.lighting_space_type not in [LABORATORY_EXCEPT_IN_OR_AS_A_CLASSROOM]: hvac_system_serves_only_labs = false`    
                 - Else (i.e., space.lighting_space_type = Null), set all_lighting_space_types_defined = true: `all_lighting_space_types_defined = false`   
