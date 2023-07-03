@@ -15,14 +15,19 @@ from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all, find_one
 
 LIGHTING_SPACE = schema_enums["LightingSpaceOptions2019ASHRAE901TG37"]
+DEMAND_CONTROL_VENTILATION_CONTROL = schema_enums[
+    "DemandControlVentilationControlOptions"
+]
 
 
-class Section19Rule7(RuleDefinitionBase):
+class Section19Rule7(RuleDefinitionListIndexedBase):
     """Rule 7 of ASHRAE 90.1-2019 Appendix G Section 19 (HVAC - General)"""
 
     def __init__(self):
         super(Section19Rule7, self).__init__(
             rmrs_used=UserBaselineProposedVals(False, True, True),
+            each_rule=Section19Rule7.HVACRule(),
+            index_rmr="baseline",
             id="19-7",
             description="Minimum ventilation system outdoor air intake flow shall be the same for the proposed design and baseline building design except when any of the 4 exceptions defined in Section G3.1.2.5 are met."
             "Exceptions included in this RDS: 2. When designing systems in accordance with Standard 62.1, Section 6.2, `Ventilation Rate Procedure,`"
@@ -33,11 +38,16 @@ class Section19Rule7(RuleDefinitionBase):
             standard_section="Section G3.1.2.5 and Exception 2",
             is_primary_rule=True,
             rmr_context="ruleset_model_instances/0",
+            list_path="$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*]",
         )
 
     def create_data(self, context, data):
         rmi_b = context.baseline
         rmi_p = context.proposed
+
+        dict_of_zones_and_terminal_units_served_by_hvac_sys_b = (
+            get_dict_of_zones_and_terminal_units_served_by_hvac_sys(rmi_b)
+        )
 
         hvac_system_serves_only_labs = True
         are_any_lighting_space_types_defined = False
@@ -59,242 +69,287 @@ class Section19Rule7(RuleDefinitionBase):
             else:
                 all_lighting_space_types_defined = False
 
-        dict_of_zones_and_terminal_units_served_by_hvac_sys_b = (
-            get_dict_of_zones_and_terminal_units_served_by_hvac_sys(rmi_b)
-        )
-
-        zone_OA_CFM_list_of_schedules_b = []
-        zone_OA_CFM_list_of_schedules_p = []
+        zone_data = {}
         for hvac_id_b in find_all(
             "$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*].id",
             rmi_b,
         ):
+            zone_data[hvac_id_b] = {
+                "zone_OA_CFM_list_of_schedules_b": [],
+                "zone_OA_CFM_list_of_schedules_p": [],
+                "was_DCV_modeled_baseline": False,
+                "was_DCV_modeled_proposed": False,
+                "air_distribution_effectiveness": False,
+            }
             for zone_id_b in dict_of_zones_and_terminal_units_served_by_hvac_sys_b[
                 hvac_id_b
             ]["zone_list"]:
-                zone_OA_CFM_list_of_schedules_b.append(
+                zone_data[hvac_id_b]["zone_OA_CFM_list_of_schedules_b"].append(
                     get_min_oa_cfm_sch_zone(rmi_b, zone_id_b)
                 )
-                zone_OA_CFM_list_of_schedules_p.append(
+                zone_data[hvac_id_b]["zone_OA_CFM_list_of_schedules_p"].append(
                     get_min_oa_cfm_sch_zone(rmi_p, zone_id_b)
                 )
 
-        zone_air_distribution_effectiveness_greater_than_1 = any(
-            True
-            if getattr_(zone_p, "Zone", "air_distribution_effectiveness") > 1
-            else False
-            for zone_p in find_all(
-                "$.buildings[*].building_segments[*].zones[*]",
-                rmi_p,
-            )
-        )
+                zone_data[hvac_id_b]["was_DCV_modeled_baseline"] = any(
+                    [
+                        True
+                        if getattr_(
+                            terminal_b, "Terminal", "has_demand_control_ventilation"
+                        )
+                        else False
+                        for terminal_b in find_all(
+                            f'$.buildings[*].building_segments[*].zones[*][?(@.id = "{zone_id_b}")].terminals[*]',
+                            rmi_b,
+                        )
+                    ]
+                )
 
-        was_DCV_modeled_proposed = any(
-            [
-                True
-                if getattr_(terminal_p, "Terminal", "has_demand_control_ventilation")
-                else False
-                for terminal_p in find_all(
-                    "$.buildings[*].building_segments[*].zones[*].terminals[*]",
+                zone_p = find_one(
+                    f'$.buildings[*].building_segments[*].zones[*][?(@.id = "{zone_id_b}")]',
                     rmi_p,
                 )
-            ]
-        ) or any(
-            [
-                True
-                if find_one(
-                    f"$.buildings[*].heating_ventilating_air_conditioning_systems[*].fan_system[*][?(@.id = {hvac_id_p})].demand_control_ventilation_control",
-                    rmi_p,
+
+                zone_data[hvac_id_b]["was_DCV_modeled_proposed"] = (
+                    find_one(
+                        f'$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*][?(@.id = "{hvac_id_b}")].fan_system.demand_control_ventilation_control',
+                        rmi_p,
+                    )
+                    != DEMAND_CONTROL_VENTILATION_CONTROL.NONE
                 )
-                else False
-                for hvac_id_p in find_all(
-                    "$.buildings[*].building_segments[*].zones[*].terminals[*].served_by_heating_ventilating_air_conditioning_system",
-                    rmi_p,
+
+                if not zone_data[hvac_id_b]["was_DCV_modeled_proposed"]:
+                    zone_data[hvac_id_b]["was_DCV_modeled_proposed"] = any(
+                        [
+                            getattr_(
+                                terminal_p,
+                                "Terminal",
+                                "has_demand_control_ventilation",
+                            )
+                            for terminal_p in find_all(f"$.terminals[*]", zone_p)
+                        ]
+                    )
+
+                zone_data[hvac_id_b]["air_distribution_effectiveness"] = (
+                    getattr_(
+                        zone_p,
+                        "Zone",
+                        "air_distribution_effectiveness",
+                    )
+                    > 1
                 )
-            ]
-        )
+
+            zone_data[hvac_id_b][
+                "aggregated_min_OA_schedule_across_zones_b"
+            ] = aggregate_min_OA_schedule_across_zones(
+                zone_data[hvac_id_b]["zone_OA_CFM_list_of_schedules_b"]
+            )
+            zone_data[hvac_id_b][
+                "aggregated_min_OA_schedule_across_zones_p"
+            ] = aggregate_min_OA_schedule_across_zones(
+                zone_data[hvac_id_b]["zone_OA_CFM_list_of_schedules_p"]
+            )
 
         return {
             "hvac_system_serves_only_labs": hvac_system_serves_only_labs,
             "are_any_lighting_space_types_defined": are_any_lighting_space_types_defined,
             "all_lighting_space_types_defined": all_lighting_space_types_defined,
-            "was_DCV_modeled_proposed": was_DCV_modeled_proposed,
-            "zone_air_distribution_effectiveness_greater_than_1": zone_air_distribution_effectiveness_greater_than_1,
-            "aggregated_min_OA_schedule_across_zones_b": aggregate_min_OA_schedule_across_zones(
-                rmi_b, zone_OA_CFM_list_of_schedules_b
-            ),
-            "aggregated_min_OA_schedule_across_zones_p": aggregate_min_OA_schedule_across_zones(
-                rmi_p, zone_OA_CFM_list_of_schedules_p
-            ),
+            "zone_data": zone_data,
         }
 
-    def is_applicable(self, context, data=None):
-        hvac_system_serves_only_labs = data["hvac_system_serves_only_labs"]
-        all_lighting_space_types_defined = data["all_lighting_space_types_defined"]
-
-        return not hvac_system_serves_only_labs or (
-            hvac_system_serves_only_labs and not all_lighting_space_types_defined
-        )
-
-    def get_calc_vals(self, context, data=None):
-        hvac_system_serves_only_labs = data["hvac_system_serves_only_labs"]
-        aggregated_min_OA_schedule_across_zones_b = data[
-            "aggregated_min_OA_schedule_across_zones_b"
-        ]
-        aggregated_min_OA_schedule_across_zones_p = data[
-            "aggregated_min_OA_schedule_across_zones_p"
-        ]
-        zone_air_distribution_effectiveness_greater_than_1 = data[
-            "zone_air_distribution_effectiveness_greater_than_1"
-        ]
-
-        OA_CFM_schedule_match = (
-            aggregated_min_OA_schedule_across_zones_b
-            == aggregated_min_OA_schedule_across_zones_p
-        )
-
-        modeled_baseline_total_zone_min_OA_CFM = sum(
-            aggregated_min_OA_schedule_across_zones_b
-        )
-        modeled_proposed_total_zone_min_OA_CFM = sum(
-            aggregated_min_OA_schedule_across_zones_p
-        )
-
-        return {
-            "hvac_system_serves_only_labs": hvac_system_serves_only_labs,
-            "OA_CFM_schedule_match": OA_CFM_schedule_match,
-            "zone_air_distribution_effectiveness_greater_than_1": zone_air_distribution_effectiveness_greater_than_1,
-            "modeled_baseline_total_zone_min_OA_CFM": modeled_baseline_total_zone_min_OA_CFM,
-            "modeled_proposed_total_zone_min_OA_CFM": modeled_proposed_total_zone_min_OA_CFM,
-        }
-
-    def manual_check_required(self, context, calc_vals=None, data=None):
-        zone_air_distribution_effectiveness_greater_than_1 = calc_vals[
-            "zone_air_distribution_effectiveness_greater_than_1"
-        ]
-        modeled_baseline_total_zone_min_OA_CFM = calc_vals[
-            "modeled_baseline_total_zone_min_OA_CFM"
-        ]
-        modeled_proposed_total_zone_min_OA_CFM = calc_vals[
-            "modeled_proposed_total_zone_min_OA_CFM"
-        ]
-
-        return (
-            modeled_baseline_total_zone_min_OA_CFM
-            > modeled_proposed_total_zone_min_OA_CFM
-            and zone_air_distribution_effectiveness_greater_than_1
-        ) or (
-            modeled_baseline_total_zone_min_OA_CFM
-            < modeled_proposed_total_zone_min_OA_CFM
-        )
-
-    def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
-        hvac_id_b = calc_vals["hvac_id_b"]
-        modeled_baseline_total_zone_min_OA_CFM = data[
-            "modeled_baseline_total_zone_min_OA_CFM"
-        ]
-        modeled_proposed_total_zone_min_OA_CFM = data[
-            "modeled_proposed_total_zone_min_OA_CFM"
-        ]
-        zone_air_distribution_effectiveness_greater_than_1 = data[
-            "zone_air_distribution_effectiveness_greater_than_1"
-        ]
-        hvac_system_serves_only_labs = data["hvac_system_serves_only_labs"]
-
-        undetermined_msg = ""
-        if (
-            modeled_baseline_total_zone_min_OA_CFM
-            > modeled_proposed_total_zone_min_OA_CFM
-            and zone_air_distribution_effectiveness_greater_than_1
-        ):
-            if hvac_system_serves_only_labs:
-                # Case 7 msg
-                undetermined_msg = f"For {hvac_id_b} the modeled baseline minimum ventilation system outdoor air intake flow CFM is higher than the minimum ventilation system outdoor air intake flow CFM modeled in the proposed design. It appears as though G3.1.2.5 Exception 2 may be applicable because the air distribution effectiveness was modeled as greater than 1. Alternatively, the system may only serves lab spaces and G3.1.2.5 Exception 4 may be applicable. A manual check for these exceptions is recommended otherwise fail."
-            else:
-                # Case 6 msg
-                undetermined_msg = f"For {hvac_id_b} the modeled baseline minimum ventilation system outdoor air intake flow CFM is higher than the minimum ventilation system outdoor air intake flow CFM modeled in the proposed design. It appears as though G3.1.2.5 Exception 2 may be applicable. A manual check for this exception is recommended otherwise fail."
-        elif (
-            modeled_baseline_total_zone_min_OA_CFM
-            < modeled_proposed_total_zone_min_OA_CFM
-        ):
-            # Case 8 msg
-            undetermined_msg = f"For {hvac_id_b} the modeled minimum ventilation system outdoor air intake flow CFM is lower than the minimum ventilation system outdoor air intake flow CFM modeled in the proposed design. Check if G3.1.2.5 Exception 3 is applicable. This exception states that where the minimum outdoor air intake flow in the proposed design is provided in excess of the amount required by the building code or the rating authority, the baseline building design shall be modeled to reflect the greater of that required by either the rating authority or the building code and will be less than the proposed design."
-
-        return undetermined_msg
-
-    def rule_check(self, context, calc_vals=None, data=None):
-        OA_CFM_schedule_match = calc_vals["OA_CFM_schedule_match"]
-        hvac_system_serves_only_labs = calc_vals["hvac_system_serves_only_labs"]
-        are_any_lighting_space_types_defined = calc_vals[
-            "are_any_lighting_space_types_defined"
-        ]
-
-        return (
-            (OA_CFM_schedule_match and not hvac_system_serves_only_labs)
-            or (
-                OA_CFM_schedule_match
-                and hvac_system_serves_only_labs
-                and are_any_lighting_space_types_defined
+    class HVACRule(RuleDefinitionBase):
+        def __init__(self):
+            super(Section19Rule7.HVACRule, self).__init__(
+                rmrs_used=UserBaselineProposedVals(False, True, True),
             )
-            or (OA_CFM_schedule_match and not are_any_lighting_space_types_defined)
-        )
 
-    def get_pass_msg(self, context, calc_vals=None, data=None):
-        hvac_id_b = calc_vals["hvac_id_b"]
-        OA_CFM_schedule_match = calc_vals["OA_CFM_schedule_match"]
-        hvac_system_serves_only_labs = calc_vals["hvac_system_serves_only_labs"]
-        are_any_lighting_space_types_defined = calc_vals[
-            "are_any_lighting_space_types_defined"
-        ]
+        def is_applicable(self, context, data=None):
+            hvac_system_serves_only_labs = data["hvac_system_serves_only_labs"]
+            all_lighting_space_types_defined = data["all_lighting_space_types_defined"]
 
-        pass_msg = ""
-        if OA_CFM_schedule_match:
-            if hvac_system_serves_only_labs and are_any_lighting_space_types_defined:
-                # Case 2
-                pass_msg = f"{hvac_id_b} passes this check unless it only serves labs. This hvac system serves some labs but it could not be determined from the RMD if it only serves labs. Outcome is UNDETERMINED if the HVAC system only serves lab spaces due to G3.1.2.5 Exception 4."
+            return not hvac_system_serves_only_labs or (
+                hvac_system_serves_only_labs and not all_lighting_space_types_defined
+            )
 
-            elif not are_any_lighting_space_types_defined:
-                # Case 3
-                pass_msg = f"{hvac_id_b} passes this check unless it only serves lab spaces (no space types were defined in the RMD so this could not be determined). Outcome is UNDETERMINED if the HVAC system only serves lab spaces due to G3.1.2.5 Exception 4."
+        def get_calc_vals(self, context, data=None):
+            hvac_b = context.baseline
+            hvac_id_b = hvac_b["id"]
 
-        return pass_msg
+            hvac_system_serves_only_labs = data["hvac_system_serves_only_labs"]
+            are_any_lighting_space_types_defined = data[
+                "are_any_lighting_space_types_defined"
+            ]
+            all_lighting_space_types_defined = data["all_lighting_space_types_defined"]
 
-    def get_fail_msg(self, context, calc_vals=None, data=None):
-        hvac_id_b = calc_vals["hvac_id_b"]
-        modeled_baseline_total_zone_min_OA_CFM = data[
-            "modeled_baseline_total_zone_min_OA_CFM"
-        ]
-        modeled_proposed_total_zone_min_OA_CFM = data[
-            "modeled_proposed_total_zone_min_OA_CFM"
-        ]
-        was_DCV_modeled_baseline = data["was_DCV_modeled_baseline"]
-        was_DCV_modeled_proposed = data["was_DCV_modeled_proposed"]
-        zone_air_distribution_effectiveness_greater_than_1 = data[
-            "zone_air_distribution_effectiveness_greater_than_1"
-        ]
-        hvac_system_serves_only_labs = data["hvac_system_serves_only_labs"]
+            zone_data = data["zone_data"][hvac_id_b]
+            aggregated_min_OA_schedule_across_zones_b = zone_data[
+                "aggregated_min_OA_schedule_across_zones_b"
+            ]
+            aggregated_min_OA_schedule_across_zones_p = zone_data[
+                "aggregated_min_OA_schedule_across_zones_p"
+            ]
+            zone_air_distribution_effectiveness_greater_than_1 = zone_data[
+                "zone_air_distribution_effectiveness_greater_than_1"
+            ]
 
-        Fail_msg = ""
-        if (
-            modeled_baseline_total_zone_min_OA_CFM
-            > modeled_proposed_total_zone_min_OA_CFM
-            and not was_DCV_modeled_baseline
-            and was_DCV_modeled_proposed
-            and not zone_air_distribution_effectiveness_greater_than_1
-        ):
-            if hvac_system_serves_only_labs:
-                # Case 5
-                Fail_msg = f"For {hvac_id_b} the baseline modeled minimum ventilation system outdoor air intake flow CFM is higher than the minimum ventilation system outdoor air intake flow CFM modeled in the proposed design. Demand-controlled ventilation was modeled in the proposed and not the baseline model and demand-controlled ventilation may be double accounted for in the model (per the HVAC controls and via reduced OA CFM rates in the proposed). Alternatively, the hvac system may only serve labs in which case G3.1.2.5 Exception 4 may be applicable and leading to allowed higher modeled rates in the baseline."
+            OA_CFM_schedule_match = (
+                aggregated_min_OA_schedule_across_zones_b
+                == aggregated_min_OA_schedule_across_zones_p
+            )
+
+            modeled_baseline_total_zone_min_OA_CFM = sum(
+                aggregated_min_OA_schedule_across_zones_b
+            )
+            modeled_proposed_total_zone_min_OA_CFM = sum(
+                aggregated_min_OA_schedule_across_zones_p
+            )
+
+            was_DCV_modeled_baseline = zone_data["was_DCV_modeled_baseline"]
+            was_DCV_modeled_proposed = zone_data["was_DCV_modeled_proposed"]
+
+            return {
+                "hvac_id_b": hvac_id_b,
+                "hvac_system_serves_only_labs": hvac_system_serves_only_labs,
+                "are_any_lighting_space_types_defined": are_any_lighting_space_types_defined,
+                "all_lighting_space_types_defined": all_lighting_space_types_defined,
+                "OA_CFM_schedule_match": OA_CFM_schedule_match,
+                "zone_air_distribution_effectiveness_greater_than_1": zone_air_distribution_effectiveness_greater_than_1,
+                "modeled_baseline_total_zone_min_OA_CFM": modeled_baseline_total_zone_min_OA_CFM,
+                "modeled_proposed_total_zone_min_OA_CFM": modeled_proposed_total_zone_min_OA_CFM,
+                "was_DCV_modeled_baseline": was_DCV_modeled_baseline,
+                "was_DCV_modeled_proposed": was_DCV_modeled_proposed,
+            }
+
+        def manual_check_required(self, context, calc_vals=None, data=None):
+            zone_air_distribution_effectiveness_greater_than_1 = calc_vals[
+                "zone_air_distribution_effectiveness_greater_than_1"
+            ]
+            modeled_baseline_total_zone_min_OA_CFM = calc_vals[
+                "modeled_baseline_total_zone_min_OA_CFM"
+            ]
+            modeled_proposed_total_zone_min_OA_CFM = calc_vals[
+                "modeled_proposed_total_zone_min_OA_CFM"
+            ]
+
+            return (
+                modeled_baseline_total_zone_min_OA_CFM
+                > modeled_proposed_total_zone_min_OA_CFM
+                and zone_air_distribution_effectiveness_greater_than_1
+            ) or (
+                modeled_baseline_total_zone_min_OA_CFM
+                < modeled_proposed_total_zone_min_OA_CFM
+            )
+
+        def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
+            hvac_id_b = calc_vals["hvac_id_b"]
+            hvac_system_serves_only_labs = calc_vals["hvac_system_serves_only_labs"]
+            modeled_baseline_total_zone_min_OA_CFM = calc_vals[
+                "modeled_baseline_total_zone_min_OA_CFM"
+            ]
+            modeled_proposed_total_zone_min_OA_CFM = calc_vals[
+                "modeled_proposed_total_zone_min_OA_CFM"
+            ]
+            zone_air_distribution_effectiveness_greater_than_1 = calc_vals[
+                "zone_air_distribution_effectiveness_greater_than_1"
+            ]
+
+            undetermined_msg = ""
+            if (
+                modeled_baseline_total_zone_min_OA_CFM
+                > modeled_proposed_total_zone_min_OA_CFM
+                and zone_air_distribution_effectiveness_greater_than_1
+            ):
+                if hvac_system_serves_only_labs:
+                    # Case 7 msg
+                    undetermined_msg = f"For {hvac_id_b} the modeled baseline minimum ventilation system outdoor air intake flow CFM is higher than the minimum ventilation system outdoor air intake flow CFM modeled in the proposed design. It appears as though G3.1.2.5 Exception 2 may be applicable because the air distribution effectiveness was modeled as greater than 1. Alternatively, the system may only serves lab spaces and G3.1.2.5 Exception 4 may be applicable. A manual check for these exceptions is recommended otherwise fail."
+                else:
+                    # Case 6 msg
+                    undetermined_msg = f"For {hvac_id_b} the modeled baseline minimum ventilation system outdoor air intake flow CFM is higher than the minimum ventilation system outdoor air intake flow CFM modeled in the proposed design. It appears as though G3.1.2.5 Exception 2 may be applicable. A manual check for this exception is recommended otherwise fail."
+            elif (
+                modeled_baseline_total_zone_min_OA_CFM
+                < modeled_proposed_total_zone_min_OA_CFM
+            ):
+                # Case 8 msg
+                undetermined_msg = f"For {hvac_id_b} the modeled minimum ventilation system outdoor air intake flow CFM is lower than the minimum ventilation system outdoor air intake flow CFM modeled in the proposed design. Check if G3.1.2.5 Exception 3 is applicable. This exception states that where the minimum outdoor air intake flow in the proposed design is provided in excess of the amount required by the building code or the rating authority, the baseline building design shall be modeled to reflect the greater of that required by either the rating authority or the building code and will be less than the proposed design."
+
+            return undetermined_msg
+
+        def rule_check(self, context, calc_vals=None, data=None):
+            OA_CFM_schedule_match = calc_vals["OA_CFM_schedule_match"]
+            hvac_system_serves_only_labs = calc_vals["hvac_system_serves_only_labs"]
+            are_any_lighting_space_types_defined = calc_vals[
+                "are_any_lighting_space_types_defined"
+            ]
+
+            return (
+                (OA_CFM_schedule_match and not hvac_system_serves_only_labs)
+                or (
+                    OA_CFM_schedule_match
+                    and hvac_system_serves_only_labs
+                    and are_any_lighting_space_types_defined
+                )
+                or (OA_CFM_schedule_match and not are_any_lighting_space_types_defined)
+            )
+
+        def get_pass_msg(self, context, calc_vals=None, data=None):
+            hvac_id_b = calc_vals["hvac_id_b"]
+            hvac_system_serves_only_labs = calc_vals["hvac_system_serves_only_labs"]
+            OA_CFM_schedule_match = calc_vals["OA_CFM_schedule_match"]
+            are_any_lighting_space_types_defined = calc_vals[
+                "are_any_lighting_space_types_defined"
+            ]
+
+            pass_msg = ""
+            if OA_CFM_schedule_match:
+                if (
+                    hvac_system_serves_only_labs
+                    and are_any_lighting_space_types_defined
+                ):
+                    # Case 2
+                    pass_msg = f"{hvac_id_b} passes this check unless it only serves labs. This hvac system serves some labs but it could not be determined from the RMD if it only serves labs. Outcome is UNDETERMINED if the HVAC system only serves lab spaces due to G3.1.2.5 Exception 4."
+
+                elif not are_any_lighting_space_types_defined:
+                    # Case 3
+                    pass_msg = f"{hvac_id_b} passes this check unless it only serves lab spaces (no space types were defined in the RMD so this could not be determined). Outcome is UNDETERMINED if the HVAC system only serves lab spaces due to G3.1.2.5 Exception 4."
+
+            return pass_msg
+
+        def get_fail_msg(self, context, calc_vals=None, data=None):
+            hvac_id_b = calc_vals["hvac_id_b"]
+            hvac_system_serves_only_labs = calc_vals["hvac_system_serves_only_labs"]
+            zone_air_distribution_effectiveness_greater_than_1 = calc_vals[
+                "zone_air_distribution_effectiveness_greater_than_1"
+            ]
+            modeled_baseline_total_zone_min_OA_CFM = calc_vals[
+                "modeled_baseline_total_zone_min_OA_CFM"
+            ]
+            modeled_proposed_total_zone_min_OA_CFM = calc_vals[
+                "modeled_proposed_total_zone_min_OA_CFM"
+            ]
+            was_DCV_modeled_baseline = calc_vals["was_DCV_modeled_baseline"]
+            was_DCV_modeled_proposed = calc_vals["was_DCV_modeled_proposed"]
+
+            Fail_msg = ""
+            if (
+                modeled_baseline_total_zone_min_OA_CFM
+                > modeled_proposed_total_zone_min_OA_CFM
+                and not was_DCV_modeled_baseline
+                and was_DCV_modeled_proposed
+                and not zone_air_distribution_effectiveness_greater_than_1
+            ):
+                if hvac_system_serves_only_labs:
+                    # Case 5
+                    Fail_msg = f"For {hvac_id_b} the baseline modeled minimum ventilation system outdoor air intake flow CFM is higher than the minimum ventilation system outdoor air intake flow CFM modeled in the proposed design. Demand-controlled ventilation was modeled in the proposed and not the baseline model and demand-controlled ventilation may be double accounted for in the model (per the HVAC controls and via reduced OA CFM rates in the proposed). Alternatively, the hvac system may only serve labs in which case G3.1.2.5 Exception 4 may be applicable and leading to allowed higher modeled rates in the baseline."
+                else:
+                    # Case 4
+                    Fail_msg = f"For {hvac_id_b} the baseline modeled minimum ventilation system outdoor air intake flow CFM is higher than the minimum ventilation system outdoor air intake flow CFM modeled in the proposed design. Demand-controlled ventilation was modeled in the proposed and not the baseline model and demand-controlled ventilation may be double accounted for in the model (per the HVAC controls and via reduced OA CFM rates in the proposed)."
+
+            elif not hvac_system_serves_only_labs:
+                # Case 9
+                Fail_msg = f"For {hvac_id_b} the modeled baseline minimum ventilation system outdoor air intake flow CFM is higher than the minimum ventilation system outdoor air intake flow CFM modeled in the proposed design which does not meet the requirements of Section G3.1.2.5."
+
             else:
-                # Case 4
-                Fail_msg = f"For {hvac_id_b} the baseline modeled minimum ventilation system outdoor air intake flow CFM is higher than the minimum ventilation system outdoor air intake flow CFM modeled in the proposed design. Demand-controlled ventilation was modeled in the proposed and not the baseline model and demand-controlled ventilation may be double accounted for in the model (per the HVAC controls and via reduced OA CFM rates in the proposed)."
+                # Case 10
+                Fail_msg = f"For {hvac_id_b} the modeled baseline minimum ventilation system outdoor air intake flow CFM is higher than the minimum ventilation system outdoor air intake flow CFM modeled in the proposed design which does not meet the requirements of Section G3.1.2.5. Fail unless the hvac system only serves labs and G3.1.2.5 Exception 4 is applicable."
 
-        elif not hvac_system_serves_only_labs:
-            # Case 9
-            Fail_msg = f"For {hvac_id_b} the modeled baseline minimum ventilation system outdoor air intake flow CFM is higher than the minimum ventilation system outdoor air intake flow CFM modeled in the proposed design which does not meet the requirements of Section G3.1.2.5."
-
-        else:
-            # Case 10
-            Fail_msg = f"For {hvac_id_b} the modeled baseline minimum ventilation system outdoor air intake flow CFM is higher than the minimum ventilation system outdoor air intake flow CFM modeled in the proposed design which does not meet the requirements of Section G3.1.2.5. Fail unless the hvac system only serves labs and G3.1.2.5 Exception 4 is applicable."
-
-        return Fail_msg
+            return Fail_msg

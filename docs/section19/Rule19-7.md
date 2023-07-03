@@ -60,7 +60,7 @@ Exceptions included in this RDS:
 
             - For each terminal unit serving the zone in the proposed, check if DCV was modeled: `for terminal in zone_p.terminals:`  
                 - Check if DCV was modeled: `if terminal.has_demand_control_ventilation == true: was_DCV_modeled_proposed = true`  
-                - Check if the hvac system serving the terminal unit has dcv modeled (weili may have to include some logic to get the hvac object from the id): `if terminal.served_by_heating_ventilating_air_conditioning_system.fan_system.demand_control_ventilation_control == true: was_DCV_modeled_proposed`  
+                - Check if the hvac system serving the terminal unit has dcv modeled (weili may have to include some logic to get the hvac object from the id): `if terminal.served_by_heating_ventilating_air_conditioning_system.fan_system.demand_control_ventilation_control != "None": was_DCV_modeled_proposed`  
             
             - Add to counter: `counter = counter + 1`  
 
