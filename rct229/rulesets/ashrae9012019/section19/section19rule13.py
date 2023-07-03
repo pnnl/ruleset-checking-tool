@@ -87,8 +87,9 @@ class Section19Rule13(RuleDefinitionListIndexedBase):
         for hvac_id_b in dict_of_zones_and_terminal_units_served_by_hvac_sys_b:
             zone_info[hvac_id_b] = {}
             zone_info[hvac_id_b] = {
+                "are_all_hvac_sys_fan_objs_autosized": False,
                 "design_thermostat_cooling_setpoint": [],
-                "zone_design_thermostat_heating_setpoint": [],
+                "design_thermostat_heating_setpoint": [],
                 "zone_has_lab_space": False,
                 "all_design_setpoints_delta_Ts_are_per_reqs": False,
                 "supply_flow_p": ZERO.TEMPERATURE,
@@ -97,11 +98,9 @@ class Section19Rule13(RuleDefinitionListIndexedBase):
             for zone_id_b in dict_of_zones_and_terminal_units_served_by_hvac_sys_b[
                 hvac_id_b
             ]["zone_list"]:
-                zone_info[hvac_id_b] = {
-                    "are_all_hvac_sys_fan_objs_autosized": are_all_hvac_sys_fan_objs_autosized(
-                        rmi_b, hvac_id_b
-                    )
-                }
+                zone_info[hvac_id_b][
+                    "are_all_hvac_sys_fan_objs_autosized"
+                ] = are_all_hvac_sys_fan_objs_autosized(rmi_b, hvac_id_b)
                 zone_b = find_one(
                     f'$.buildings[*].building_segments[*].zones[*][?(@.id = "{zone_id_b}")]',
                     rmi_b,
@@ -120,43 +119,43 @@ class Section19Rule13(RuleDefinitionListIndexedBase):
                         == LIGHTING_SPACE.LABORATORY_EXCEPT_IN_OR_AS_A_CLASSROOM
                     )
 
-                    for terminal_b in space_b.get("terminals"):
-                        if (
-                            terminal_b["id"]
-                            in dict_of_zones_and_terminal_units_served_by_hvac_sys_b[
-                                hvac_id_b
-                            ]["terminal_unit_list"]
-                        ):
-                            if zone_info[hvac_id_b]["zone_has_lab_space"]:
-                                zone_info[hvac_id_b][
-                                    "all_design_setpoints_delta_Ts_are_per_reqs"
-                                ] = (
-                                    getattr_(
-                                        terminal_b,
-                                        "Terminal",
-                                        "supply_design_heating_setpoint_temperature",
-                                    )
-                                    - getattr_(
-                                        terminal_b,
-                                        "Terminal",
-                                        "supply_design_heating_setpoint_temperature",
-                                    )
-                                ) == LABORATORY_TEMP_DELTA
-                            else:
-                                zone_info[hvac_id_b][
-                                    "all_design_setpoints_delta_Ts_are_per_reqs"
-                                ] = (
-                                    getattr_(
-                                        terminal_b,
-                                        "Terminal",
-                                        "supply_design_cooling_setpoint_temperature",
-                                    )
-                                    - getattr_(
-                                        terminal_b,
-                                        "Terminal",
-                                        "supply_design_cooling_setpoint_temperature",
-                                    )
-                                ) == GENERAL_TEMP_DELTA
+                for terminal_b in zone_b.get("terminals"):
+                    if (
+                        terminal_b["id"]
+                        in dict_of_zones_and_terminal_units_served_by_hvac_sys_b[
+                            hvac_id_b
+                        ]["terminal_unit_list"]
+                    ):
+                        if zone_info[hvac_id_b]["zone_has_lab_space"]:
+                            zone_info[hvac_id_b][
+                                "all_design_setpoints_delta_Ts_are_per_reqs"
+                            ] = (
+                                getattr_(
+                                    terminal_b,
+                                    "Terminal",
+                                    "supply_design_heating_setpoint_temperature",
+                                )
+                                - getattr_(
+                                    terminal_b,
+                                    "Terminal",
+                                    "supply_design_heating_setpoint_temperature",
+                                )
+                            ) == LABORATORY_TEMP_DELTA
+                        else:
+                            zone_info[hvac_id_b][
+                                "all_design_setpoints_delta_Ts_are_per_reqs"
+                            ] = (
+                                getattr_(
+                                    terminal_b,
+                                    "Terminal",
+                                    "supply_design_cooling_setpoint_temperature",
+                                )
+                                - getattr_(
+                                    terminal_b,
+                                    "Terminal",
+                                    "supply_design_cooling_setpoint_temperature",
+                                )
+                            ) == GENERAL_TEMP_DELTA
 
             zone_info[hvac_id_b]["supply_flow_p"] = sum(
                 [
