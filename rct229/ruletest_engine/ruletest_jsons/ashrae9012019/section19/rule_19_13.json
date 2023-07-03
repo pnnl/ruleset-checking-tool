@@ -133,7 +133,8 @@
                                 "type": "COOLING",
                                 "child_loops": [
                                     {
-                                        "id": "Secondary CHW Loop 1"
+                                        "id": "Secondary CHW Loop 1",
+                                        "type": "COOLING"
                                     }
                                 ]
                             }
@@ -166,7 +167,7 @@
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1",
-                                                        "primary_airflow": 5000,
+                                                        "primary_airflow": 2359.737215999999,
                                                         "supply_design_cooling_setpoint_temperature": 55,
                                                         "supply_design_heating_setpoint_temperature": 90
                                                     }
@@ -272,7 +273,8 @@
                                 "type": "COOLING",
                                 "child_loops": [
                                     {
-                                        "id": "Secondary CHW Loop 1"
+                                        "id": "Secondary CHW Loop 1",
+                                        "type": "COOLING"
                                     }
                                 ]
                             }
@@ -414,7 +416,7 @@
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 11",
-                                                        "primary_airflow": 5000,
+                                                        "primary_airflow": 2359.737215999999,
                                                         "supply_design_cooling_setpoint_temperature": 55,
                                                         "supply_design_heating_setpoint_temperature": 85
                                                     }
@@ -631,7 +633,7 @@
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 11",
-                                                        "primary_airflow": 5000,
+                                                        "primary_airflow": 2359.737215999999,
                                                         "supply_design_cooling_setpoint_temperature": 55,
                                                         "supply_design_heating_setpoint_temperature": 90
                                                     }
@@ -848,7 +850,7 @@
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 11",
-                                                        "primary_airflow": 5000,
+                                                        "primary_airflow": 2359.737215999999,
                                                         "supply_design_cooling_setpoint_temperature": 52,
                                                         "supply_design_heating_setpoint_temperature": 88
                                                     }
