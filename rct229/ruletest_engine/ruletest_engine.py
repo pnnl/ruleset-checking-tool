@@ -1,4 +1,5 @@
 import copy
+import glob
 import json
 
 # from jsonpointer import JsonPointer
@@ -446,96 +447,97 @@ def generate_rct_outcomes_list_from_section_list(section_list, ruleset):
     # required by the ASHRAE9012019SoftwareTestReport's generate function as a starting point
     for section in section_list:
 
-        # Create path to test JSON (e.g. 'section6_master.json')
+        # Get list of rule JSONs in section
         master_json_path = os.path.join(
-            os.path.dirname(__file__),
-            "ruletest_jsons",
-            ruleset,
-            section,
-            f"{section}_master.json",
+            os.path.dirname(__file__), "ruletest_jsons", ruleset, section, "rule*.json"
         )
+        json_list = glob.glob(master_json_path)
 
-        # Open the master JSON for a given section that contains all the ruletests for a given section and perform
-        # rule evaluation for each
-        with open(master_json_path) as f:
-            test_list_dictionary = json.load(f)
+        for rule_test_json_path in json_list:
 
-            # Cycle through tests in test JSON and run each individually
-            for test_id in test_list_dictionary:
+            # Open the rule test JSON and perform rule evaluation for each test in JSON
+            with open(rule_test_json_path) as f:
+                test_list_dictionary = json.load(f)
 
-                rule_test_outcome_dict = dict()
+                # Cycle through tests in test JSON and run each individually
+                for test_id in test_list_dictionary:
 
-                # Load next test dictionary from test list
-                test_dict = test_list_dictionary[test_id]
+                    rule_test_outcome_dict = dict()
 
-                # Generate RMR dictionaries for testing
-                user_rmr, baseline_rmr, proposed_rmr = generate_test_rmrs(test_dict)
-                rmr_trio = UserBaselineProposedVals(
-                    user_rmr, baseline_rmr, proposed_rmr
-                )
+                    # Load next test dictionary from test list
+                    test_dict = test_list_dictionary[test_id]
 
-                # Identify Section and rule
-                section = test_dict["Section"]
-                rule = test_dict["Rule"]
+                    # Generate RMR dictionaries for testing
+                    user_rmr, baseline_rmr, proposed_rmr = generate_test_rmrs(test_dict)
+                    rmr_trio = UserBaselineProposedVals(
+                        user_rmr, baseline_rmr, proposed_rmr
+                    )
 
-                # Construction function name for Section and rule
-                function_name = f"Section{section}Rule{rule}"
+                    # Identify Section and rule
+                    section = test_dict["Section"]
+                    rule = test_dict["Rule"]
 
-                # Pull in rule, if written. If not found, relay RULE_NOT_FOUND message to console and continue testing
-                try:
-                    rule = available_rule_definitions_dict[function_name]()
-                except KeyError:
+                    # Construction function name for Section and rule
+                    function_name = f"Section{section}Rule{rule}"
 
-                    # Print message communicating that a rule cannot be found
-                    print(f"RULE NOT FOUND: {function_name}. Cannot test {test_id}")
-                    continue
+                    # Pull in rule, if written. If not found, relay RULE_NOT_FOUND message to console and continue testing
+                    try:
+                        rule = available_rule_definitions_dict[function_name]()
+                    except KeyError:
 
-                # Evaluate rule and check for invalid RMRs
-                evaluation_dict = evaluate_rule(rule, rmr_trio)
+                        # Print message communicating that a rule cannot be found
+                        print(f"RULE NOT FOUND: {function_name}. Cannot test {test_id}")
+                        continue
 
-                invalid_rmrs_dict = evaluation_dict["invalid_rmrs"]
+                    # Evaluate rule and check for invalid RMRs
+                    evaluation_dict = evaluate_rule(rule, rmr_trio)
 
-                # If invalid RMRs exist, append failed message
-                if len(invalid_rmrs_dict) != 0:
+                    invalid_rmrs_dict = evaluation_dict["invalid_rmrs"]
 
-                    # Find which RMRs were invalid
-                    for invalid_rmr, invalid_rmr_message in invalid_rmrs_dict.items():
-                        # Record message communicating that the schema is invalid
-                        invalid_rmr_messages.append(
-                            f"INVALID SCHEMA: Test {test_id}: {invalid_rmr} RMR: {invalid_rmr_message}"
-                        )
+                    # If invalid RMRs exist, append failed message
+                    if len(invalid_rmrs_dict) != 0:
 
-                # If RMRs are valid, check their outcomes
-                else:
+                        # Find which RMRs were invalid
+                        for (
+                            invalid_rmr,
+                            invalid_rmr_message,
+                        ) in invalid_rmrs_dict.items():
+                            # Record message communicating that the schema is invalid
+                            invalid_rmr_messages.append(
+                                f"INVALID SCHEMA: Test {test_id}: {invalid_rmr} RMR: {invalid_rmr_message}"
+                            )
 
-                    # Get standard information
-                    standard_dict = test_dict["standard"]
+                    # If RMRs are valid, check their outcomes
+                    else:
 
-                    rule_test_outcome_dict["rule_id"] = standard_dict["rule_id"]
-                    rule_test_outcome_dict["test_id"] = test_dict["Test"]
-                    rule_test_outcome_dict["test_description"] = test_dict[
-                        "test_description"
-                    ]
-                    rule_test_outcome_dict["ruleset_section"] = standard_dict[
-                        "ruleset_reference"
-                    ]
-                    rule_test_outcome_dict["ruleset_section_title"] = section_dict[
-                        str(test_dict["Section"])
-                    ]
-                    rule_test_outcome_dict[
-                        "evaluation_type"
-                    ] = "FULL"  # TODO primary rule = FULL, else = APPLICABILITY
-                    rule_test_outcome_dict[
-                        "expected_rule_unit_test_evaluation_outcome"
-                    ] = ruletest_outcome_dict[test_dict["expected_rule_outcome"]]
+                        # Get standard information
+                        standard_dict = test_dict["standard"]
 
-                    # Outcomes come in nested dictionaries. Flatten these results and return them for this ruletest
-                    rule_test_outcome_dict[
-                        "rule_unit_test_evaluation"
-                    ] = flatten_outcome_object(evaluation_dict["outcomes"], [])
+                        rule_test_outcome_dict["rule_id"] = standard_dict["rule_id"]
+                        rule_test_outcome_dict["test_id"] = test_dict["Test"]
+                        rule_test_outcome_dict["test_description"] = test_dict[
+                            "test_description"
+                        ]
+                        rule_test_outcome_dict["ruleset_section"] = standard_dict[
+                            "ruleset_reference"
+                        ]
+                        rule_test_outcome_dict["ruleset_section_title"] = section_dict[
+                            str(test_dict["Section"])
+                        ]
+                        rule_test_outcome_dict[
+                            "evaluation_type"
+                        ] = "FULL"  # TODO primary rule = FULL, else = APPLICABILITY
+                        rule_test_outcome_dict[
+                            "expected_rule_unit_test_evaluation_outcome"
+                        ] = ruletest_outcome_dict[test_dict["expected_rule_outcome"]]
 
-                    # Append outcome from this test case to list of dictionaries
-                    rct_outcomes_list.append(rule_test_outcome_dict)
+                        # Outcomes come in nested dictionaries. Flatten these results and return them for this ruletest
+                        rule_test_outcome_dict[
+                            "rule_unit_test_evaluation"
+                        ] = flatten_outcome_object(evaluation_dict["outcomes"], [])
+
+                        # Append outcome from this test case to list of dictionaries
+                        rct_outcomes_list.append(rule_test_outcome_dict)
 
     # Aggregate results from section tests for report
     rct_outcomes_dict = dict()
