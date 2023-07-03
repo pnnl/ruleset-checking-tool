@@ -24,8 +24,8 @@ class ASHRAE9012019SummaryReport(RCTReport):
             "Receptacles",
             "Transformers",
             "HVAC-General",
-            "HVAC-WaterSide",
-            "HVAC-Chiller",
+            "HVAC-HotWaterSide",
+            "HVAC-ChilledWaterSide",
             "HVAC-AirSide",
         ]
         self.section_dict = {
@@ -34,8 +34,8 @@ class ASHRAE9012019SummaryReport(RCTReport):
             "12": "Receptacles",
             "15": "Transformers",
             "19": "HVAC-General",
-            "21": "HVAC-WaterSide",
-            "22": "HVAC-Chiller",
+            "21": "HVAC-HotWaterSide",
+            "22": "HVAC-ChilledWaterSide",
             "23": "HVAC-AirSide",
         }
         self.ruleset_outcome = {
@@ -59,7 +59,7 @@ class ASHRAE9012019SummaryReport(RCTReport):
 - baseline: {self.baseline_rmd.split('/')[-1]}
 
 ### Summary: All Primary Rules
-|                              | All | Envelope | Lighting | Receptacles | Transformers | HVAC-WaterSide | HVAC - Chiller | HVAC-AirSide | HVAC-General|
+|                              | All | Envelope | Lighting | Receptacles | Transformers | HVAC-HotWaterSide | HVAC - ChilledWaterSide | HVAC-AirSide | HVAC-General|
 |:----------------------------:|:---:|:--------:|:--------:|:-----------:|:------------:|:--------------:|:--------------:|:--------------:|:--------------:|
 Replace-Rules
 Replace-Pass
