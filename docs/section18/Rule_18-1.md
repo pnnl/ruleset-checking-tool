@@ -30,12 +30,11 @@
 - get the baseline system types in the building: `baseline_hvac_system_dict = get_baseline_system_types(B-RMI)`
 - now check whether the system(s) serving this zone match the expected system.  Start by getting the list of HVAC systems that serve the zone: `hvac_systems_serving_zone = get_list_hvac_systems_associated_with_zone(B-RMI)`
 - get a list of all of the HVAC systems that are of the same type as the expected system type for the zone: `systems_of_expected_type_list = baseline_hvac_system_dict[expected_system_type]`
-- set enum do_systems_pass to NO_MATCH, this will be set to PASS or FAIL once we start looking at systems: `do_systems_pass = NO_MATCH`
+- set enum result to FAIL this will be set to PASS once we start looking at systems: `result = FAIL`
 - loop through the systems that serve the zone: `for system_b in hvac_systems_serving_zone:`
 	- check to see if system_b is in the systems_of_expected_type_list: `if system_b in systems_of_expected_type_list:`
-		 - check to see if there was previously NO_MATCh for the systems, if so, change do_systems_pass to PASS: `do_systems_pass = PASS`
-   	- otherwise, set do_systems_pass to FAIL: `else: do_systems_pass = FAIL`
- - set the result variable to PASS if do_systems_pass is equal to PASS (at this point in time, do_systems_pass could be equal to PASS, FAIL or NO_MATCH): `if do_systems_pass == PASS: result = PASS`
+		 - change result to PASS: `result = PASS`
+   	- otherwise, set result to FAIL and break out of the loop: `else: result = FAIL; break`
  - create a variable advisory_note, which will give the user some feedback about how the HVAC system type was selected: `advisory_note = "HVAC system type " + expected_system_type + " was selected based on " + system_type_origin
 
 
