@@ -80,7 +80,8 @@ class Section19Rule21(RuleDefinitionListIndexedBase):
             ruleset_section_title="HVAC - General",
             standard_section="Section G3.1.2.10 and exceptions 1-7",
             is_primary_rule=True,
-            list_path="ruleset_model_instances[0].buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*]",
+            rmr_context="ruleset_model_instances/0",
+            list_path="$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*]",
             data_items={"climate_zone": ("baseline", "weather/climate_zone")},
         )
 
@@ -198,8 +199,8 @@ class Section19Rule21(RuleDefinitionListIndexedBase):
                     "$.buildings[*].building_segments[*].zones[*].thermostat_heating_setpoint_schedule",
                     rmi_p,
                 )
-                for thermostat_schedule in find_one(
-                    f'$.schedules[?(@.id = "{thermostat_schedule_id}")].hourly_values',
+                for thermostat_schedule in find_all(
+                    f'$.schedules[*][?(@.id = "{thermostat_schedule_id}")].hourly_values',
                     rmi_p,
                 )
             ]
