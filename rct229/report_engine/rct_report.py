@@ -40,12 +40,23 @@ class RCTReport:
 
         """
         invalid_msg = rct_outcome["invalid_rmrs"]
-        # Sort the outcomes by id
+        # Sort the outcomes by id or rule_id
+        if "id" in rct_outcome["outcomes"][0]:
+            id_key = "id"
+        elif "rule_id" in rct_outcome["outcomes"][0]:
+            id_key = "rule_id"
+        else:
+            raise Exception(
+                f"rct_outcome['outcomes'] dictionary has neither a 'rule_id' or 'id' as a key. Cannot be "
+                f"sorted"
+            )
+
         outcomes = sorted(
             # The key used below splits the id on "-" and ensures the outcomes are sorted by the first components of the ids, then the second components, and so on
             rct_outcome["outcomes"],
-            key=lambda x: [int(y) for y in x["id"].split("-")],
+            key=lambda x: [int(y) for y in x[id_key].split("-")],
         )
+
         if invalid_msg:
             print(f"Invalid RMDs: {str(invalid_msg)}\n")
         else:
