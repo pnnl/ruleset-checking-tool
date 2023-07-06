@@ -295,7 +295,7 @@
                     },
                     "notes": "Contains a list of exterior lighting systems for the building."
                 },
-                "refrigerated_casess": {
+                "refrigerated_cases": {
                     "description": "Refrigerated cases",
                     "type": "array",
                     "items": {
