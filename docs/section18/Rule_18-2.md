@@ -8,13 +8,7 @@
 **Appendix G Section Reference:** Table G3.1.1.3  
 
 **Evaluation Context:** Each HVAC System  
-**Applicability Checks:**  
 
-1. the target string matches, which indicates:  
-	a. the space type is PUBLIC_ASSEMBLY  
-	b. climate zone CZ_0_to_3a  
-	c. area >= 120,000 ft2  
-	d. none of the G3.1.1 exceptions apply  
 
 **Manual Check:** Yes  
 **Evaluation Context:** Evaluate whether each system serves the correct zones  
@@ -45,8 +39,7 @@
 		- see if the hvac_system.id is in the list: `if hvac_system.id in? baseline_system_types_dict[hvac_system_type]:`
   			- Get the list of zones served by the system from zones_and_terminal_unit_list_dict: `zones_served_by_system = zones_and_terminal_unit_list_dict[hvac_system.id]["ZONE_LIST"]`
      			- check if the system is a single-zone system type: `if any(system_type == sys_type for sys_type in [SYS_1,SYS_2,SYS_3,SYS_4,SYS_9,SYS_10,SYS_11,SYS_12,SYS_13]):`
-     				- there should only be one zone served by the system.  Check the length of zones_served_by_system: `if len(zones_served_by_system) == 1: result = PASS`
-					- otherwise, FAIL: `else: result = FAIL`
+     				- only systems that serve single zones can be categorized as single zone systems, so set result to pass: `result = PASS`
      			- otherwise it is a multi-zone system:`else:`
 					- for a multi-zone system, in a building without lab zones, the system can pass if:
 						1. all zones are on the same floor
