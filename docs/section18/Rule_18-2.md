@@ -44,7 +44,7 @@
 					- for a multi-zone system, in a building without lab zones, the system can pass if:
 						1. all zones are on the same floor
 						2. there are no other systems of the same type that serve zones on the same floor
-					- - get the list of zones on the same floor by using the function get_zones_on_same_floor: `zones_on_floor = get_zones_on_same_floor(B_RMI,zones_served_by_system[0])`
+					- get the list of zones on the same floor by using the function get_zones_on_same_floor: `zones_on_floor = get_zones_on_same_floor(B_RMI,zones_served_by_system[0])`
 					- check if all the zones served by the system are on the same floor: `if all(zone in zones_on_floor for zone in zones_served_by_system):`
 						- now check if there are any other systems of the same system type that serve zones on this floor.  First loop through baseline_system_types_dict again: `for hvac_system_type2 in baseline_system_types_dict:`
 							- check if the hvac_system_type2 is the same type: `if baseline_system_type_compare(hvac_system_type2,system_type,FALSE):`
