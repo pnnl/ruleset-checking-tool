@@ -20,7 +20,7 @@
 
 **Applicability Checks:**
 - call the function get_zone_target_baseline_system(): `target_baseline_system_dict = get_zone_target_baseline_system(P_RMI, B_RMI)`
-- if the zone is conditioned and not dedicated to parking, the rule is applicable - the zone will only be in the dictionary provided by get_zone_target_baseline_system() if it is a zone which requires an HVAC system: `if zone in target_baseline_system_dict: continue to rule logic`
+- if the zone is conditioned or semiheated and not dedicated to parking, the rule is applicable - the zone will only be in the dictionary provided by get_zone_target_baseline_system() if it is a zone which requires an HVAC system: `if zone in target_baseline_system_dict: continue to rule logic`
 - otherwise: `else: result = NOT_APPLICABLE`
 
 ## Rule Logic:  
