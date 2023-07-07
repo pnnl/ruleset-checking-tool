@@ -252,68 +252,42 @@ class Section19Rule7(RuleDefinitionListIndexedBase):
             modeled_proposed_total_zone_min_OA_CFM = calc_vals[
                 "modeled_proposed_total_zone_min_OA_CFM"
             ]
-            zone_air_distribution_effectiveness_greater_than_1 = calc_vals[
-                "zone_air_distribution_effectiveness_greater_than_1"
-            ]
 
             undetermined_msg = ""
             if (
                 modeled_baseline_total_zone_min_OA_CFM
-                > modeled_proposed_total_zone_min_OA_CFM
-                and zone_air_distribution_effectiveness_greater_than_1
-            ):
-                if hvac_system_serves_only_labs:
-                    # Case 7 msg
-                    undetermined_msg = f"For {hvac_id_b} the modeled baseline minimum ventilation system outdoor air intake flow CFM is higher than the minimum ventilation system outdoor air intake flow CFM modeled in the proposed design. It appears as though G3.1.2.5 Exception 2 may be applicable because the air distribution effectiveness was modeled as greater than 1. Alternatively, the system may only serves lab spaces and G3.1.2.5 Exception 4 may be applicable. A manual check for these exceptions is recommended otherwise fail."
-                else:
-                    # Case 6 msg
-                    undetermined_msg = f"For {hvac_id_b} the modeled baseline minimum ventilation system outdoor air intake flow CFM is higher than the minimum ventilation system outdoor air intake flow CFM modeled in the proposed design. It appears as though G3.1.2.5 Exception 2 may be applicable. A manual check for this exception is recommended otherwise fail."
-            elif (
-                modeled_baseline_total_zone_min_OA_CFM
                 < modeled_proposed_total_zone_min_OA_CFM
             ):
-                # Case 8 msg
+                # Case 8
                 undetermined_msg = f"For {hvac_id_b} the modeled minimum ventilation system outdoor air intake flow CFM is lower than the minimum ventilation system outdoor air intake flow CFM modeled in the proposed design. Check if G3.1.2.5 Exception 3 is applicable. This exception states that where the minimum outdoor air intake flow in the proposed design is provided in excess of the amount required by the building code or the rating authority, the baseline building design shall be modeled to reflect the greater of that required by either the rating authority or the building code and will be less than the proposed design."
+            elif hvac_system_serves_only_labs:
+                # Case 7
+                undetermined_msg = f"For {hvac_id_b} the modeled baseline minimum ventilation system outdoor air intake flow CFM is higher than the minimum ventilation system outdoor air intake flow CFM modeled in the proposed design. It appears as though G3.1.2.5 Exception 2 may be applicable because the air distribution effectiveness was modeled as greater than 1. Alternatively, the system may only serves lab spaces and G3.1.2.5 Exception 4 may be applicable. A manual check for these exceptions is recommended otherwise fail."
+            else:
+                # Case 6
+                undetermined_msg = f"For {hvac_id_b} the modeled baseline minimum ventilation system outdoor air intake flow CFM is higher than the minimum ventilation system outdoor air intake flow CFM modeled in the proposed design. It appears as though G3.1.2.5 Exception 2 may be applicable. A manual check for this exception is recommended otherwise fail."
 
             return undetermined_msg
 
         def rule_check(self, context, calc_vals=None, data=None):
             OA_CFM_schedule_match = calc_vals["OA_CFM_schedule_match"]
-            hvac_system_serves_only_labs = calc_vals["hvac_system_serves_only_labs"]
-            are_any_lighting_space_types_defined = calc_vals[
-                "are_any_lighting_space_types_defined"
-            ]
 
-            return (
-                (OA_CFM_schedule_match and not hvac_system_serves_only_labs)
-                or (
-                    OA_CFM_schedule_match
-                    and hvac_system_serves_only_labs
-                    and are_any_lighting_space_types_defined
-                )
-                or (OA_CFM_schedule_match and not are_any_lighting_space_types_defined)
-            )
+            return OA_CFM_schedule_match
 
         def get_pass_msg(self, context, calc_vals=None, data=None):
             hvac_id_b = calc_vals["hvac_id_b"]
             hvac_system_serves_only_labs = calc_vals["hvac_system_serves_only_labs"]
-            OA_CFM_schedule_match = calc_vals["OA_CFM_schedule_match"]
             are_any_lighting_space_types_defined = calc_vals[
                 "are_any_lighting_space_types_defined"
             ]
 
             pass_msg = ""
-            if OA_CFM_schedule_match:
-                if (
-                    hvac_system_serves_only_labs
-                    and are_any_lighting_space_types_defined
-                ):
-                    # Case 2
-                    pass_msg = f"{hvac_id_b} passes this check unless it only serves labs. This hvac system serves some labs but it could not be determined from the RMD if it only serves labs. Outcome is UNDETERMINED if the HVAC system only serves lab spaces due to G3.1.2.5 Exception 4."
-
-                elif not are_any_lighting_space_types_defined:
-                    # Case 3
-                    pass_msg = f"{hvac_id_b} passes this check unless it only serves lab spaces (no space types were defined in the RMD so this could not be determined). Outcome is UNDETERMINED if the HVAC system only serves lab spaces due to G3.1.2.5 Exception 4."
+            if not are_any_lighting_space_types_defined:
+                # Case 3
+                pass_msg = f"{hvac_id_b} passes this check unless it only serves lab spaces (no space types were defined in the RMD so this could not be determined). Outcome is UNDETERMINED if the HVAC system only serves lab spaces due to G3.1.2.5 Exception 4."
+            elif hvac_system_serves_only_labs and are_any_lighting_space_types_defined:
+                # Case 2
+                pass_msg = f"{hvac_id_b} passes this check unless it only serves labs. This hvac system serves some labs but it could not be determined from the RMD if it only serves labs. Outcome is UNDETERMINED if the HVAC system only serves lab spaces due to G3.1.2.5 Exception 4."
 
             return pass_msg
 
