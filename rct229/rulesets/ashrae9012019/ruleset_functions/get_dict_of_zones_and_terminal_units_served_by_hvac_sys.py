@@ -26,7 +26,7 @@ def get_dict_of_zones_and_terminal_units_served_by_hvac_sys(rmi):
             if hvac_sys_id:
                 if (
                     hvac_sys_id
-                    not in dict_of_zones_and_terminal_units_served_by_hvac_sys
+                    not in dict_of_zones_and_terminal_units_served_by_hvac_sys.keys()
                 ):
                     dict_of_zones_and_terminal_units_served_by_hvac_sys[hvac_sys_id] = {
                         "terminal_unit_list": [],

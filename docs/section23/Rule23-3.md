@@ -24,7 +24,7 @@
 - create a list of the target system types: `target_system_types = [HVAC_SYS.SYS_5,HVAC_SYS.SYS_6,HVAC_SYS.SYS_7,HVAC_SYS.SYS_8]`
 - Get B-RMD system types: `baseline_hvac_system_dict = get_baseline_system_types(B-RMD)`
 
-  - Check if B-RMD is modeled with at least one air-side system that is Type-5, 7, 7a, 5b, 7b, 7c, continue to rule logic: `if any(baseline_system_type_compare(system_type, target_sys_type, false) for system_type in baseline_hvac_system_dict for target_system_type in target_system_types): CHECK RULE LOGIC`
+  - Check if B-RMD is modeled with at least one air-side system that is Type-5, 7, 7a, 5b, 7b, 7c, continue to rule logic: `if any(baseline_system_type_compare(system_type, target_sys_type, false) for system_type in baseline_hvac_system_dict.keys() for target_system_type in target_system_types): CHECK RULE LOGIC`
 
   - Else, rule is not applicable to B-RMD: `else: RULE_NOT_APPLICABLE`
 

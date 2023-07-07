@@ -23,7 +23,7 @@
 
 - Get B-RMR system types: `baseline_hvac_system_dict = get_baseline_system_types(B-RMR)`
 
-  - Check if B-RMR is modeled with at least one air-side system that is Type-11.1, 11.2, 11.1a, 11.2a, 11b or 11c: `if any(sys_type in baseline_hvac_system_dict for sys_type in ["SYS-11.1", "SYS-11.2", "SYS-11.1A", "SYS-11.2A", "SYS-11B", "SYS-11C"]): CHECK_RULE_LOGIC`
+  - Check if B-RMR is modeled with at least one air-side system that is Type-11.1, 11.2, 11.1a, 11.2a, 11b or 11c: `if any(sys_type in baseline_hvac_system_dict.keys() for sys_type in ["SYS-11.1", "SYS-11.2", "SYS-11.1A", "SYS-11.2A", "SYS-11B", "SYS-11C"]): CHECK_RULE_LOGIC`
 
   - Else, rule is not applicable to B-RMR: `else: RULE_NOT_APPLICABLE`
 
@@ -33,7 +33,7 @@
 
 - For each fluid loop in B_RMR: `for fluid_loop_b in B_RMR.RulesetModelInstance.fluid_loops:`
 
-  - Check if fluid loop is connected to chiller(s): `if fluid_loop_b in loop_chiller_dict`
+  - Check if fluid loop is connected to chiller(s): `if fluid_loop_b in loop_chiller_dict.keys()`
 
     **Rule Assertion - Component:**
 

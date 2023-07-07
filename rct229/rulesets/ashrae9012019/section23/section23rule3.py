@@ -45,7 +45,7 @@ class Section23Rule3(RuleDefinitionListIndexedBase):
         return any(
             [
                 baseline_system_type_compare(system_type, applicable_sys_type, False)
-                for system_type in baseline_system_types_dict
+                for system_type in baseline_system_types_dict.keys()
                 for applicable_sys_type in APPLICABLE_SYS_TYPES
             ]
         )
@@ -55,7 +55,7 @@ class Section23Rule3(RuleDefinitionListIndexedBase):
         baseline_system_types_dict = get_baseline_system_types(rmi_b)
         applicable_hvac_sys_ids = [
             hvac_id
-            for sys_type in baseline_system_types_dict
+            for sys_type in baseline_system_types_dict.keys()
             for target_sys_type in APPLICABLE_SYS_TYPES
             if baseline_system_type_compare(sys_type, target_sys_type, False)
             for hvac_id in baseline_system_types_dict[sys_type]

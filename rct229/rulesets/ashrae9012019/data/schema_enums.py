@@ -25,7 +25,7 @@ class _ListEnum:
             setattr(self, key, key)
 
     def get_list(self):
-        return list(self.__dict__)
+        return list(self.__dict__.keys())
 
 
 # Load the enumeration schema file

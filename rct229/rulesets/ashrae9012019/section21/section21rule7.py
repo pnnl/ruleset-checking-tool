@@ -50,7 +50,7 @@ class Section21Rule7(RuleDefinitionListIndexedBase):
         # create a list containing all HVAC systems that are modeled in the rmi_b
         available_type_list = [
             hvac_type
-            for hvac_type in baseline_system_types_dict
+            for hvac_type in baseline_system_types_dict.keys()
             if len(baseline_system_types_dict[hvac_type]) > 0
         ]
         return any(

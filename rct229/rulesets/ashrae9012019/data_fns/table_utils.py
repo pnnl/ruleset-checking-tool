@@ -26,7 +26,7 @@ def find_osstd_table_entry(match_field_name_value_pairs, osstd_table):
     """
     assert type(osstd_table) is dict
 
-    keys = list(osstd_table)
+    keys = list(osstd_table.keys())
     assert len(keys) is 1
 
     data_list = osstd_table[keys[0]]

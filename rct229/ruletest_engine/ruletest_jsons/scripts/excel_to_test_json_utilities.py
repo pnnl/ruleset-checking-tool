@@ -648,7 +648,7 @@ def get_rmr_triplet_dicts_from_ruletest_json_dict(ruletest_json_dict):
     rmr_triplet_dict_list = []
 
     # Get test ID to index the dictionary
-    test_id = list(ruletest_json_dict)[0]
+    test_id = list(ruletest_json_dict.keys())[0]
 
     # Check ruletest_json_dict for instances of triplets. Append any that are found to a list and return it
     for triplet in triplet_strs:

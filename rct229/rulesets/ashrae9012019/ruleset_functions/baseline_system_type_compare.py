@@ -24,10 +24,10 @@ def baseline_system_type_compare(system_type, target_system_type, exact_match=Tr
     """
 
     # A list of the available target system
-    available_target_system_list = HVAC_SYSTEM_TYPE_DICTIONARY
+    available_target_system_list = HVAC_SYSTEM_TYPE_DICTIONARY.keys()
     available_system_types = [
         system
-        for key in HVAC_SYSTEM_TYPE_DICTIONARY
+        for key in HVAC_SYSTEM_TYPE_DICTIONARY.keys()
         for system in HVAC_SYSTEM_TYPE_DICTIONARY[key]
     ]
     available_system_types.extend(available_target_system_list)

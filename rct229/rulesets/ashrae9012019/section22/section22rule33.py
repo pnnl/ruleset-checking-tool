@@ -44,7 +44,7 @@ class Section22Rule33(RuleDefinitionBase):
         # create a list containing all HVAC systems that are modeled in the rmi_b
         available_type_list = [
             hvac_type
-            for hvac_type in baseline_system_types_dict
+            for hvac_type in baseline_system_types_dict.keys()
             if len(baseline_system_types_dict[hvac_type]) > 0
         ]
         primary_secondary_loop_dict = get_primary_secondary_loops_dict(rmi_b)
@@ -66,7 +66,7 @@ class Section22Rule33(RuleDefinitionBase):
         num_secondary_loops = sum(
             [
                 len(primary_secondary_loop_dict[primary_loop])
-                for primary_loop in primary_secondary_loop_dict
+                for primary_loop in primary_secondary_loop_dict.keys()
             ]
         )
 

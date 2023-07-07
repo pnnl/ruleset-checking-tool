@@ -68,7 +68,7 @@ class Section21Rule10(RuleDefinitionListIndexedBase):
         # create a list containing all HVAC systems that are modeled in the rmi_b
         available_types_list = [
             hvac_type
-            for hvac_type in baseline_system_types_dict
+            for hvac_type in baseline_system_types_dict.keys()
             if len(baseline_system_types_dict[hvac_type]) > 0
         ]
         return any(
@@ -89,7 +89,7 @@ class Section21Rule10(RuleDefinitionListIndexedBase):
         pump = context_item.baseline
         loop_zone_list_w_area_dict = data["loop_zone_list_w_area_dict"]
         # filter and select pumps with heating loops (loop_zone_list_w_area_dict keys are heating loops)
-        return pump["loop_or_piping"] in loop_zone_list_w_area_dict
+        return pump["loop_or_piping"] in loop_zone_list_w_area_dict.keys()
 
     class PumpRule(RuleDefinitionBase):
         def __init__(self):

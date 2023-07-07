@@ -56,7 +56,7 @@ def exclude_sys_types(exclude_type: list) -> list:
 def available_type_lists(baseline_system_types_dict: dict) -> list:
     return [
         hvac_type
-        for hvac_type in baseline_system_types_dict
+        for hvac_type in baseline_system_types_dict.keys()
         if len(baseline_system_types_dict[hvac_type]) > 0
     ]
 

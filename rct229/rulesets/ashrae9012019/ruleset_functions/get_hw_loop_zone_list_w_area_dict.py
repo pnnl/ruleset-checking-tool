@@ -70,7 +70,7 @@ def get_hw_loop_zone_list_w_area(rmi_b):
 
             if (
                 hhw_loop_id is not None
-                and hhw_loop_id not in hw_loop_zone_list_w_area_dict
+                and hhw_loop_id not in hw_loop_zone_list_w_area_dict.keys()
             ):
                 hw_loop_zone_list_w_area_dict[hhw_loop_id] = {
                     "zone_list": [],

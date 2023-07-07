@@ -55,7 +55,7 @@ class Section22Rule9(RuleDefinitionListIndexedBase):
         # create a list containing all HVAC systems that are modeled in the rmi_b
         available_type_list = [
             hvac_type
-            for hvac_type in baseline_system_types_dict
+            for hvac_type in baseline_system_types_dict.keys()
             if len(baseline_system_types_dict[hvac_type]) > 0
         ]
 
@@ -76,7 +76,7 @@ class Section22Rule9(RuleDefinitionListIndexedBase):
 
         chw_loop_capacity_dict = {}
         for chiller in find_all("$.chillers[*]", rmi_b):
-            if chiller["cooling_loop"] not in chw_loop_capacity_dict:
+            if chiller["cooling_loop"] not in chw_loop_capacity_dict.keys():
                 chw_loop_capacity_dict[chiller["cooling_loop"]] = ZERO.POWER
             chw_loop_capacity_dict[chiller["cooling_loop"]] += getattr_(
                 chiller, "chiller", "rated_capacity"
@@ -95,7 +95,7 @@ class Section22Rule9(RuleDefinitionListIndexedBase):
         chw_loop_capacity_dict = data["chw_loop_capacity_dict"]
 
         return (
-            fluid_loop_b["id"] in primary_secondary_loop_dict
+            fluid_loop_b["id"] in primary_secondary_loop_dict.keys()
             and chw_loop_capacity_dict[fluid_loop_b["id"]]
             >= MIN_CHW_PRIMARY_LOOP_COOLING_CAPACITY
         )

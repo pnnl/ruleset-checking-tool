@@ -12,7 +12,7 @@ def calc_vals_converter(calc_vals):
 
     """
     calc_vals_dict = []
-    for key in calc_vals:
+    for key in calc_vals.keys():
         calc_val = dict()
         calc_val["variable"] = key
         calc_val["value"] = str(calc_vals[key])
@@ -42,7 +42,7 @@ def aggregate_outcomes(outcomes):
             elif type(result) is dict and any(
                 [
                     key.startswith("INVALID_") and key.endswith("_CONTEXT")
-                    for key in result
+                    for key in result.keys()
                 ]
             ):
                 summary_dict["number_invalid_context"] += 1

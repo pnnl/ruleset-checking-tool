@@ -50,7 +50,7 @@ class Section21Rule6(RuleDefinitionListIndexedBase):
         loop_boiler_dict = {}
         for boiler_b in boilers:
             loop_id = getattr_(boiler_b, "boiler", "loop")
-            if not loop_id in loop_boiler_dict:
+            if not loop_id in loop_boiler_dict.keys():
                 loop_boiler_dict[loop_id] = []
             loop_boiler_dict[loop_id].append(boiler_b)
         return {"loop_boiler_dict": loop_boiler_dict}
@@ -61,7 +61,7 @@ class Section21Rule6(RuleDefinitionListIndexedBase):
         # create a list containing all HVAC systems that are modeled in the rmi_b
         available_type_list = [
             hvac_type
-            for hvac_type in baseline_system_types_dict
+            for hvac_type in baseline_system_types_dict.keys()
             if len(baseline_system_types_dict[hvac_type]) > 0
         ]
         return any(
