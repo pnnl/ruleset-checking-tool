@@ -8,10 +8,10 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_opaque_surface_type imp
     get_opaque_surface_type,
 )
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_surface_conditioning_category_dict import (
-    get_surface_conditioning_category_dict,
+    SurfaceConditioningCategory as SCC,
 )
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_surface_conditioning_category_dict import (
-    SurfaceConditioningCategory as SCC,
+    get_surface_conditioning_category_dict,
 )
 
 

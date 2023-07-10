@@ -48,7 +48,7 @@ class Section22Rule34(RuleDefinitionListIndexedBase):
         # create a list containing all HVAC systems that are modeled in the rmi_b
         available_type_list = [
             hvac_type
-            for hvac_type in baseline_system_types_dict.keys()
+            for hvac_type in baseline_system_types_dict
             if len(baseline_system_types_dict[hvac_type]) > 0
         ]
         return any(
@@ -68,7 +68,7 @@ class Section22Rule34(RuleDefinitionListIndexedBase):
         fluid_loops_b = context_item.baseline
         primary_secondary_loop_dict = data["primary_secondary_loop_dict"]
 
-        return fluid_loops_b["id"] in primary_secondary_loop_dict.keys()
+        return fluid_loops_b["id"] in primary_secondary_loop_dict
 
     class CoolingFluidLoopRule(RuleDefinitionBase):
         def __init__(self):
