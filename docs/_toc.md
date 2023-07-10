@@ -53,6 +53,7 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   * [get_zone_peak_internal_load_floor_area](ruleset_functions/get_zone_peak_internal_load_floor_area.md): finds the peak coincident internal loads of a zone and returns the value in btu/h/ft2
   * [get_HVAC_building_area_types_and_zones](ruleset_functions/get_HVAC_building_area_types_and_zones.md): Get a dictionary of the zone_ids associated with each building area type associated with U_RMR, P_RMR, or B_RMR. Also returns the total floor area of each building area type and the source of the information (BUILDING_SEGMENT_HVAC_BAT, BUILDING_SEGMENT_LIGHTING or SPACE_LIGHTING)
   * [expected_system_type_from_table_g3_1_1a](ruleset_functions/expected_system_type_from_Table_G3_1_1a.md): returns the expected system type based on the BAT, the number of floors of the building and the area of the BAT, and climate zone.
+  * [get_zone_HVAC_BAT](ruleset_functions/get_zone_HVAC_BAT.md): Get a dictionary of the HVAC_BAT and areas for a given zone.
 
 ### HVAC type functions
   * [is_baseline_system_1](ruleset_functions/baseline_systems/is_baseline_system_1.md): Get either Sys-1, Sys-1a, Sys-1b, Sys-1c, or Not_Sys_1 string output which indicates whether the HVAC system is ASHRAE 90.1 2019 Appendix G system 1 (PTAC), system 1a (system 1 with purchased CHW), system 1b (system 1 with purchased heating), system 1c (system 1 with purchased CHW and purchased HW).
