@@ -1,9 +1,9 @@
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_hvac_sys_and_assoc_zones_largest_exhaust_source import (
     get_hvac_sys_and_assoc_zones_largest_exhaust_source,
 )
+from rct229.schema.config import ureg
 from rct229.schema.schema_utils import quantify_rmr
 from rct229.schema.validate import schema_validate_rmr
-from rct229.schema.config import ureg
 
 TEST_RMI = {
     "id": "test_rmd",

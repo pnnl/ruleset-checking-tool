@@ -35,7 +35,7 @@ APPLICABLE_SYS_TYPES = [
 ]
 
 FLUID_LOOP = schema_enums["FluidLoopOptions"]
-HEATING_LOOP_CONDITIONED_AREA_THRESHOLD = 15000 * ureg("ft2")
+HEATING_LOOP_CONDITIONED_AREA_THRESHOLD = 15_000 * ureg("ft2")
 
 
 class Section21Rule5(RuleDefinitionListIndexedBase):
@@ -67,7 +67,7 @@ class Section21Rule5(RuleDefinitionListIndexedBase):
             # create a list containing all HVAC systems that are modeled in the rmi_b
             available_types_list = [
                 hvac_type
-                for hvac_type in baseline_system_types_dict.keys()
+                for hvac_type in baseline_system_types_dict
                 if len(baseline_system_types_dict[hvac_type]) > 0
             ]
             return any(
@@ -118,7 +118,7 @@ class Section21Rule5(RuleDefinitionListIndexedBase):
                     ]["total_area"]
 
             # check indirectly conditioned zones, add them to the total area
-            for zone_id in zone_conditioning_category_dict.keys():
+            for zone_id in zone_conditioning_category_dict:
                 if (
                     zone_conditioning_category_dict[zone_id]
                     in [
@@ -161,7 +161,9 @@ class Section21Rule5(RuleDefinitionListIndexedBase):
                 <= HEATING_LOOP_CONDITIONED_AREA_THRESHOLD
                 and num_boilers == 1
             ) or (
-                num_boilers == 2
+                heating_loop_conditioned_zone_area
+                > HEATING_LOOP_CONDITIONED_AREA_THRESHOLD
+                and num_boilers == 2
                 and len(boiler_capacity_list) == 2
                 and boiler_capacity_list[0] == boiler_capacity_list[1]
             )

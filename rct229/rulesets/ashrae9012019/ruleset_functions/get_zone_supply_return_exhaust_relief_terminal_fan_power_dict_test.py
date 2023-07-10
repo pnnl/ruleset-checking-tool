@@ -1,9 +1,9 @@
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_zone_supply_return_exhaust_relief_terminal_fan_power_dict import (
     get_zone_supply_return_exhaust_relief_terminal_fan_power_dict,
 )
+from rct229.schema.config import ureg
 from rct229.schema.schema_utils import quantify_rmr
 from rct229.schema.validate import schema_validate_rmr
-from rct229.schema.config import ureg
 
 TEST_RMD = {
     "id": "test_rmd",
