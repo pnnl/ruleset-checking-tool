@@ -169,7 +169,6 @@ class Section19Rule15(RuleDefinitionListIndexedBase):
             }
 
         def manual_check_required(self, context, calc_vals=None, data=None):
-            hvac_id_b = calc_vals["hvac_id_b"]
             supply_fan_qty_b = calc_vals["supply_fan_qty_b"]
             supply_fan_airflow_b = calc_vals["supply_fan_airflow_b"]
             all_design_setpionts_105 = calc_vals["all_design_setpionts_105"]
@@ -203,8 +202,10 @@ class Section19Rule15(RuleDefinitionListIndexedBase):
                     supply_fan_airflow_b,
                 )
             ):
+                # Case 3
                 undetermined_msg = f"{hvac_id_b} was not modeled with a supply air temperature set point of 105°F. The baseline and proposed supply cfm was modeled identically at {proposed_supply_flow * ureg('cfm')} CFM. Manual review is required to determine if the airflow rate was modeled to comply with applicable codes or accreditation standards. If not, fail."
             else:
+                # Case 4
                 undetermined_msg = f"{hvac_id_b} doesn't have one supply fan associated with the HVAC system in the baseline and therefore this check could not be conducted for this HVAC sytem. Conduct manual check for compliance with G3.1.2.8.2."
 
             return undetermined_msg
