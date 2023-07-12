@@ -1015,7 +1015,8 @@
                                                             {
                                                                 "id": "misc_equip_1",
                                                                 "power": 0.75,
-                                                                "multiplier_schedule": "Required Schedule 1"
+                                                                "multiplier_schedule": "Required Schedule 1",
+                                                                "type": "PLUG"
                                                             }
                                                         ]
                                                     }
@@ -1055,7 +1056,8 @@
                                                             {
                                                                 "id": "misc_equip_1",
                                                                 "power": 0.75,
-                                                                "multiplier_schedule": "Required Schedule 1"
+                                                                "multiplier_schedule": "Required Schedule 1",
+                                                                "type": "PLUG"
                                                             }
                                                         ]
                                                     }
