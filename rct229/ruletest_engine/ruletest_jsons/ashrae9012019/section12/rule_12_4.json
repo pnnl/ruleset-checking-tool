@@ -1,15 +1,15 @@
 {
-    "rule-12-3-a": {
+    "rule-12-4-a": {
         "Section": 12,
-        "Rule": 3,
+        "Rule": 4,
         "Test": "a",
-        "test_description": "User RMR space name is in the Proposed RMR",
+        "test_description": "User RMR space name is in the Baseline RMR",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "12-3",
+            "rule_id": "12-4",
             "ruleset_reference": "-",
-            "rule_description": "User RMR Space Name in Proposed RMR? ",
-            "applicable_rmr": "Proposed RMR",
+            "rule_description": "User RMR Space Name in Baseline RMR? ",
+            "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "User RMR",
             "rule_dependency": "User RMR Space Count > 0",
@@ -54,7 +54,7 @@
                     }
                 ]
             },
-            "proposed": {
+            "baseline": {
                 "id": "ashrae_229_name",
                 "ruleset_model_descriptions": [
                     {
@@ -93,17 +93,17 @@
             }
         }
     },
-    "rule-12-3-b": {
+    "rule-12-4-b": {
         "Section": 12,
-        "Rule": 3,
+        "Rule": 4,
         "Test": "b",
-        "test_description": "User RMR space name is not in the Proposed RMR",
+        "test_description": "User RMR space name is not in the Baseline RMR",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "12-3",
+            "rule_id": "12-4",
             "ruleset_reference": "-",
-            "rule_description": "User RMR Space Name in Proposed RMR? ",
-            "applicable_rmr": "Proposed RMR",
+            "rule_description": "User RMR Space Name in Baseline RMR? ",
+            "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "User RMR",
             "rule_dependency": "User RMR Space Count > 0",
@@ -148,7 +148,7 @@
                     }
                 ]
             },
-            "proposed": {
+            "baseline": {
                 "id": "ashrae_229_name",
                 "ruleset_model_descriptions": [
                     {
