@@ -13,12 +13,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": 0,
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.29"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "buildings": [
@@ -44,8 +44,8 @@
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
-                                                        "floor_area": 92.90303999999999,
-                                                        "number_of_occupants": 150
+                                                        "number_of_occupants": 150,
+                                                        "floor_area": 1000
                                                     }
                                                 ]
                                             }
@@ -55,11 +55,11 @@
                                                 "id": "System Type 3",
                                                 "cooling_system": {
                                                     "id": "DX Coil 1",
-                                                    "cooling_system_type": "DIRECT_EXPANSION"
+                                                    "type": "DIRECT_EXPANSION"
                                                 },
                                                 "heating_system": {
                                                     "id": "Furnace Coil 1",
-                                                    "heating_system_type": "FURNACE"
+                                                    "type": "FURNACE"
                                                 },
                                                 "fan_system": {
                                                     "id": "CAV Fan System 1",
@@ -102,12 +102,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": 0,
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.29"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "buildings": [
@@ -133,8 +133,8 @@
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
-                                                        "floor_area": 92.90303999999999,
-                                                        "number_of_occupants": 20
+                                                        "number_of_occupants": 20,
+                                                        "floor_area": 1000
                                                     }
                                                 ]
                                             }
@@ -144,11 +144,11 @@
                                                 "id": "System Type 3",
                                                 "cooling_system": {
                                                     "id": "DX Coil 1",
-                                                    "cooling_system_type": "DIRECT_EXPANSION"
+                                                    "type": "DIRECT_EXPANSION"
                                                 },
                                                 "heating_system": {
                                                     "id": "Furnace Coil 1",
-                                                    "heating_system_type": "FURNACE"
+                                                    "type": "FURNACE"
                                                 },
                                                 "fan_system": {
                                                     "id": "CAV Fan System 1",
