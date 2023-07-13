@@ -3,17 +3,17 @@
         "Section": 5,
         "Rule": 19,
         "Test": "a",
-        "test_description": "Building area type = \"school (primary)\"; building includes a conditioned zone that has two exterior walls with windows. Baseline fenestration area is  established correctly.",
+        "test_description": " Project has one building segment and includes a space that has two exterior walls with windows. The building is a new construction, the space is conditioned based on the heating and cooling capacity of the HVAC system that serves the parent zone. and the building area type is not included in Table G3.1.1-1. Baseline fenestration area is established correctly.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-19",
             "ruleset_reference": "Table G3.1(5) Baseline Building Performance (c) ",
-            "rule_description": "For building areas not shown in Table Table G3.1.1-1, vertical fenestration areas for new buildings and additions shall equal that in the proposed design or 40% of gross above-grade wall area, whichever is smaller, ",
+            "rule_description": "For building areas not shown in Table G3.1.1-1, vertical fenestration areas for new buildings and additions shall equal that in the proposed design or 40% of gross above-grade wall area, whichever is smaller.",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Proposed RMR",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.29"
         },
         "rmr_transformations": {
             "proposed": {
@@ -22,7 +22,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMR 1",
                         "buildings": [
@@ -68,7 +68,7 @@
                                                             }
                                                         ],
                                                         "construction": {
-                                                            "id": "construction_1",
+                                                            "id": "Construction 1",
                                                             "u_factor": 3.2366105565544463
                                                         }
                                                     },
@@ -120,7 +120,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMR 1",
                         "buildings": [
@@ -166,7 +166,7 @@
                                                             }
                                                         ],
                                                         "construction": {
-                                                            "id": "construction_1",
+                                                            "id": "Construction 1",
                                                             "u_factor": 3.2366105565544463
                                                         }
                                                     },
@@ -218,17 +218,17 @@
         "Section": 5,
         "Rule": 19,
         "Test": "b",
-        "test_description": "Building area type = \"school (primary)\"; building includes a conditioned zone that has two exterior walls with windows. Baseline fenestration area is  established correctly.",
+        "test_description": "  Project has one building segment and includes a space that has two exterior walls with windows. The building is new construction, the space is conditioned based on the heating and cooling capacity of the HVAC system that serves the parent zone, and the building area type is not included in Table G3.1.1-1.  Baseline fenestration area is not established correctly.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-19",
             "ruleset_reference": "Table G3.1(5) Baseline Building Performance (c) ",
-            "rule_description": "For building areas not shown in Table Table G3.1.1-1, vertical fenestration areas for new buildings and additions shall equal that in the proposed design or 40% of gross above-grade wall area, whichever is smaller, ",
+            "rule_description": "For building areas not shown in Table G3.1.1-1, vertical fenestration areas for new buildings and additions shall equal that in the proposed design or 40% of gross above-grade wall area, whichever is smaller.",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Proposed RMR",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.29"
         },
         "rmr_transformations": {
             "proposed": {
@@ -237,7 +237,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMR 1",
                         "buildings": [
@@ -283,7 +283,7 @@
                                                             }
                                                         ],
                                                         "construction": {
-                                                            "id": "construction_1",
+                                                            "id": "Construction 1",
                                                             "u_factor": 3.2366105565544463
                                                         }
                                                     },
@@ -335,7 +335,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMR 1",
                         "buildings": [
@@ -381,7 +381,7 @@
                                                             }
                                                         ],
                                                         "construction": {
-                                                            "id": "construction_1",
+                                                            "id": "Construction 1",
                                                             "u_factor": 3.2366105565544463
                                                         }
                                                     },
@@ -433,17 +433,17 @@
         "Section": 5,
         "Rule": 19,
         "Test": "c",
-        "test_description": "Building area type = \"school (primary)\"; building includes a conditioned zone that has two exterior walls with windows. Baseline fenestration area is  established correctly.",
+        "test_description": "  Project has one building segment and includes a space that has two exterior walls with windows. The building segment includes existing components and the building area type is not included in Table G3.1.1-1. The outcome cannot be determined.",
         "expected_rule_outcome": "manual_check",
         "standard": {
             "rule_id": "5-19",
             "ruleset_reference": "Table G3.1(5) Baseline Building Performance (c) ",
-            "rule_description": "For building areas not shown in Table Table G3.1.1-1, vertical fenestration areas for new buildings and additions shall equal that in the proposed design or 40% of gross above-grade wall area, whichever is smaller, ",
+            "rule_description": "For building areas not shown in Table G3.1.1-1, vertical fenestration areas for new buildings and additions shall equal that in the proposed design or 40% of gross above-grade wall area, whichever is smaller.",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Proposed RMR",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.29"
         },
         "rmr_transformations": {
             "proposed": {
@@ -452,7 +452,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMR 1",
                         "buildings": [
@@ -498,7 +498,7 @@
                                                             }
                                                         ],
                                                         "construction": {
-                                                            "id": "construction_1",
+                                                            "id": "Construction 1",
                                                             "u_factor": 3.2366105565544463
                                                         }
                                                     },
@@ -550,7 +550,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMR 1",
                         "buildings": [
@@ -596,222 +596,7 @@
                                                             }
                                                         ],
                                                         "construction": {
-                                                            "id": "construction_1",
-                                                            "u_factor": 3.2366105565544463
-                                                        }
-                                                    },
-                                                    {
-                                                        "id": "Surface 2",
-                                                        "adjacent_to": "EXTERIOR",
-                                                        "tilt": 90,
-                                                        "area": 185.80607999999998,
-                                                        "subsurfaces": [
-                                                            {
-                                                                "id": "SubSurface 2",
-                                                                "classification": "WINDOW",
-                                                                "u_factor": 3.2366105565544463,
-                                                                "glazed_area": 1.8580607999999998,
-                                                                "opaque_area": 7.432243199999999
-                                                            }
-                                                        ],
-                                                        "construction": {
-                                                            "id": "construction_2",
-                                                            "u_factor": 3.2366105565544463
-                                                        }
-                                                    }
-                                                ]
-                                            }
-                                        ],
-                                        "heating_ventilating_air_conditioning_systems": [
-                                            {
-                                                "id": "HVAC 1",
-                                                "cooling_system": {
-                                                    "id": "Cooling System 1",
-                                                    "design_sensible_cool_capacity": 52755.0
-                                                },
-                                                "heating_system": {
-                                                    "id": "Heating System 1",
-                                                    "design_capacity": 699.8538133333334
-                                                }
-                                            }
-                                        ]
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                ]
-            }
-        }
-    },
-    "rule-5-19-d": {
-        "Section": 5,
-        "Rule": 19,
-        "Test": "d",
-        "test_description": "Building area type = \"school (primary)\"; building includes a conditioned zone that has two exterior walls with windows. Baseline fenestration area is  established correctly.",
-        "expected_rule_outcome": "manual_check",
-        "standard": {
-            "rule_id": "5-19",
-            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (c) ",
-            "rule_description": "For building areas not shown in Table Table G3.1.1-1, vertical fenestration areas for new buildings and additions shall equal that in the proposed design or 40% of gross above-grade wall area, whichever is smaller, ",
-            "applicable_rmr": "Baseline RMR",
-            "rule_assertion": "=",
-            "comparison_value": "Proposed RMR",
-            "primary_rule": "Y",
-            "schema_version": "0.0.23"
-        },
-        "rmr_transformations": {
-            "proposed": {
-                "id": "ASHRAE229",
-                "weather": {
-                    "climate_zone": "CZ4A",
-                    "data_source_type": "OTHER"
-                },
-                "ruleset_model_instances": [
-                    {
-                        "id": "RMR 1",
-                        "buildings": [
-                            {
-                                "id": "Building 1",
-                                "building_open_schedule": "Required Schedule 1",
-                                "building_segments": [
-                                    {
-                                        "is_all_new": false,
-                                        "id": "Building Segment 1",
-                                        "area_type_vertical_fenestration": "OTHER",
-                                        "zones": [
-                                            {
-                                                "id": "Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
-                                                "spaces": [
-                                                    {
-                                                        "id": "Space 1",
-                                                        "occupant_multiplier_schedule": "Required Occupancy Sched 1",
-                                                        "floor_area": 23.225759999999998
-                                                    }
-                                                ],
-                                                "terminals": [
-                                                    {
-                                                        "id": "Terminal 1",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
-                                                    }
-                                                ],
-                                                "surfaces": [
-                                                    {
-                                                        "id": "Surface 1",
-                                                        "adjacent_to": "EXTERIOR",
-                                                        "tilt": 82.5,
-                                                        "area": 92.90303999999999,
-                                                        "subsurfaces": [
-                                                            {
-                                                                "id": "SubSurface 1",
-                                                                "classification": "WINDOW",
-                                                                "u_factor": 3.2366105565544463,
-                                                                "glazed_area": 2.7870912,
-                                                                "opaque_area": 7.432243199999999
-                                                            }
-                                                        ],
-                                                        "construction": {
-                                                            "id": "construction_1",
-                                                            "u_factor": 3.2366105565544463
-                                                        }
-                                                    },
-                                                    {
-                                                        "id": "Surface 2",
-                                                        "adjacent_to": "EXTERIOR",
-                                                        "tilt": 90,
-                                                        "area": 185.80607999999998,
-                                                        "subsurfaces": [
-                                                            {
-                                                                "id": "SubSurface 2",
-                                                                "classification": "WINDOW",
-                                                                "u_factor": 3.2366105565544463,
-                                                                "glazed_area": 2.7870912,
-                                                                "opaque_area": 7.432243199999999
-                                                            }
-                                                        ],
-                                                        "construction": {
-                                                            "id": "construction_2",
-                                                            "u_factor": 3.2366105565544463
-                                                        }
-                                                    }
-                                                ]
-                                            }
-                                        ],
-                                        "heating_ventilating_air_conditioning_systems": [
-                                            {
-                                                "id": "HVAC 1",
-                                                "cooling_system": {
-                                                    "id": "Cooling System 1",
-                                                    "design_sensible_cool_capacity": 52755.0
-                                                },
-                                                "heating_system": {
-                                                    "id": "Heating System 1",
-                                                    "design_capacity": 699.8538133333334
-                                                }
-                                            }
-                                        ]
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                ]
-            },
-            "baseline": {
-                "id": "ASHRAE229",
-                "weather": {
-                    "climate_zone": "CZ4A",
-                    "data_source_type": "OTHER"
-                },
-                "ruleset_model_instances": [
-                    {
-                        "id": "RMR 1",
-                        "buildings": [
-                            {
-                                "id": "Building 1",
-                                "building_open_schedule": "Required Schedule 1",
-                                "building_segments": [
-                                    {
-                                        "is_all_new": false,
-                                        "id": "Building Segment 1",
-                                        "area_type_vertical_fenestration": "OTHER",
-                                        "zones": [
-                                            {
-                                                "id": "Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
-                                                "spaces": [
-                                                    {
-                                                        "id": "Space 1",
-                                                        "occupant_multiplier_schedule": "Required Occupancy Sched 1",
-                                                        "floor_area": 23.225759999999998
-                                                    }
-                                                ],
-                                                "terminals": [
-                                                    {
-                                                        "id": "Terminal 1",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
-                                                    }
-                                                ],
-                                                "surfaces": [
-                                                    {
-                                                        "id": "Surface 1",
-                                                        "adjacent_to": "EXTERIOR",
-                                                        "tilt": 82.5,
-                                                        "area": 92.90303999999999,
-                                                        "subsurfaces": [
-                                                            {
-                                                                "id": "SubSurface 1",
-                                                                "classification": "WINDOW",
-                                                                "u_factor": 3.2366105565544463,
-                                                                "glazed_area": 1.8580607999999998,
-                                                                "opaque_area": 7.432243199999999
-                                                            }
-                                                        ],
-                                                        "construction": {
-                                                            "id": "construction_1",
+                                                            "id": "Construction 1",
                                                             "u_factor": 3.2366105565544463
                                                         }
                                                     },

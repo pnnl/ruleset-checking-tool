@@ -3,7 +3,7 @@
         "Section": 5,
         "Rule": 49,
         "Test": "a",
-        "test_description": "Building is located in climate zone 4A and includes one conditioned zone which has two surfaces - one adjacent to exterior and another adjacent to ground. The proposed infiltration flow rate at wind pressure is established correctly based on default 0.6 cfm/ft2  @75PA.",
+        "test_description": "Project has one building segment with one space that includes two surfaces - one adjacent to exterior and another adjacent to ground. The space is conditioned based on the heating and cooling capacity of the HVAC system that serves the parent zone. The proposed infiltration flow rate at wind pressure is established correctly based on default 0.6 cfm/ft2  @75PA.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-49",
@@ -13,7 +13,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.29"
         },
         "rmr_transformations": {
             "proposed": {
@@ -22,7 +22,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMR 1",
                         "measured_infiltration_pressure_difference": 75,
@@ -50,7 +50,7 @@
                                                 "infiltration": {
                                                     "id": "Infiltration 1",
                                                     "multiplier_schedule": "Infiltration Schedule 1",
-                                                    "infiltration_flow_rate": 0.3171486818303999
+                                                    "flow_rate": 0.3171486818303999
                                                 },
                                                 "terminals": [
                                                     {
@@ -101,7 +101,7 @@
         "Section": 5,
         "Rule": 49,
         "Test": "b",
-        "test_description": "Building is located in climate zone 4A and includes one conditioned zone which has two surfaces - one adjacent to exterior and another adjacent to ground. The proposed infiltration flow rate at wind pressure is not based on default 0.6 cfm/ft2  @75PA. Manual check required to verify that site measurements were performed",
+        "test_description": "Project has one building segment with one space that includes two surfaces - one adjacent to exterior and another adjacent to ground. The space is conditioned based on the heating and cooling capacity of the HVAC system that serves the parent zone. The proposed infiltration flow rate at wind pressure is not based on default 0.6 cfm/ft2  @75PA. Manual check required to verify that site measurements were performed",
         "expected_rule_outcome": "manual_check",
         "standard": {
             "rule_id": "5-49",
@@ -111,7 +111,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.29"
         },
         "rmr_transformations": {
             "proposed": {
@@ -120,7 +120,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMR 1",
                         "measured_infiltration_pressure_difference": 75,
@@ -148,7 +148,7 @@
                                                 "infiltration": {
                                                     "id": "Infiltration 1",
                                                     "multiplier_schedule": "Infiltration Schedule 1",
-                                                    "infiltration_flow_rate": 0.5285811363839998
+                                                    "flow_rate": 0.5285811363839998
                                                 },
                                                 "terminals": [
                                                     {
@@ -199,7 +199,7 @@
         "Section": 5,
         "Rule": 49,
         "Test": "c",
-        "test_description": "Building is located in climate zone 4A and includes one semiheated zone which has two surfaces - one adjacent to exterior and another adjacent to ground. The proposed infiltration flow rate at wind pressure is established correctly based on default 0.6 cfm/ft2  @75PA.",
+        "test_description": "Project has one building segment with one space that includes two surfaces - one adjacent to exterior and another adjacent to ground. The space is semiheated based on the heating capacity of the HVAC system that serves the parent zone. The proposed infiltration flow rate at wind pressure is established correctly based on default 0.6 cfm/ft2  @75PA.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-49",
@@ -209,7 +209,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.29"
         },
         "rmr_transformations": {
             "proposed": {
@@ -218,7 +218,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMR 1",
                         "buildings": [
@@ -245,7 +245,7 @@
                                                 "infiltration": {
                                                     "id": "Infiltration 1",
                                                     "multiplier_schedule": "Infiltration Schedule 1",
-                                                    "infiltration_flow_rate": 0.3171486818303999,
+                                                    "flow_rate": 0.3171486818303999,
                                                     "measured_air_leakage_rate": 2.831684659199999
                                                 },
                                                 "terminals": [
@@ -297,7 +297,7 @@
         "Section": 5,
         "Rule": 49,
         "Test": "d",
-        "test_description": "Building is located in climate zone 4A and includes one semiheated zone which has two surfaces - one adjacent to exterior and another adjacent to ground. The proposed infiltration flow rate at wind pressure is not based on default 0.6 cfm/ft2  @75PA. Manual check required to verify that site measurements were performed",
+        "test_description": "Project has one building segment with one space that includes two surfaces - one adjacent to exterior and another adjacent to ground. The space is semiheated based on the heating capacity of the HVAC system that serves the parent zone. The proposed infiltration flow rate at wind pressure is not based on default 0.6 cfm/ft2  @75PA.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-49",
@@ -307,7 +307,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.29"
         },
         "rmr_transformations": {
             "proposed": {
@@ -316,7 +316,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMR 1",
                         "buildings": [
@@ -343,7 +343,7 @@
                                                 "infiltration": {
                                                     "id": "Infiltration 1",
                                                     "multiplier_schedule": "Infiltration Schedule 1",
-                                                    "infiltration_flow_rate": 0.5285811363839998,
+                                                    "flow_rate": 0.5285811363839998,
                                                     "measured_air_leakage_rate": 2.359737215999999
                                                 },
                                                 "terminals": [
