@@ -4,7 +4,7 @@ from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedV
 from rct229.rulesets.ashrae9012019.data.schema_enums import schema_enums
 from rct229.utils.jsonpath_utils import find_all
 
-SurfaceAdjacentTo = schema_enums["SurfaceAdjacentToOptions"]
+SurfaceAdjacentTo = schema_enums["SurfaceAdjacencyOptions"]
 
 # Json path for surfaces filtered to those with adjacent_to set to exterior
 EXTERIOR_SURFACES_JSONPATH = (
