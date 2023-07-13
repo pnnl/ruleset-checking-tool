@@ -3,7 +3,7 @@
         "Section": 6,
         "Rule": 3,
         "Test": "a",
-        "test_description": "Project has one building segment with one zone with two spaces. The lighting power density in the proposed RMR is the same as the lighting power density in the user RMR for all spaces in the building.",
+        "test_description": "Project has one building segment with one zone with two spaces. The lighting power density in the proposed RMR is the same as the lighting power density in the user RMR for all spaces in the building. Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "6-3",
@@ -19,7 +19,7 @@
         "rmr_transformations": {
             "user": {
                 "id": "ASHRAE229 1",
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "buildings": [
@@ -75,7 +75,7 @@
             },
             "proposed": {
                 "id": "ASHRAE229 1",
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "buildings": [
@@ -135,7 +135,7 @@
         "Section": 6,
         "Rule": 3,
         "Test": "b",
-        "test_description": "Project has one building segment with one zone with two spaces. The lighting power density in the proposed RMR is not the same as the lighting power density in the user RMR for all spaces in the building.",
+        "test_description": "Project has one building segment with one zone with two spaces. The lighting power density in the proposed RMR is not the same as the lighting power density in the user RMR for all spaces in the building. Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "6-3",
@@ -151,7 +151,7 @@
         "rmr_transformations": {
             "user": {
                 "id": "ASHRAE229 1",
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "buildings": [
@@ -207,7 +207,7 @@
             },
             "proposed": {
                 "id": "ASHRAE229 1",
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "buildings": [
@@ -267,7 +267,7 @@
         "Section": 6,
         "Rule": 3,
         "Test": "c",
-        "test_description": "Project has one building segment with one zone with two spaces. The lighting power density in the proposed RMR is not the same as the lighting power density in the user RMR for all spaces in the building. P RMR LPD matches Standard 90.1-2019 Table 9.5.1",
+        "test_description": "Project has one building segment with one zone with two spaces. The lighting power density in the proposed RMR is not the same as the lighting power density in the user RMR for all spaces in the building. P RMR LPD matches Standard 90.1-2019 Table 9.5.1. Expected result: undetermined",
         "expected_rule_outcome": "undetermined",
         "standard": {
             "rule_id": "6-3",
@@ -283,7 +283,7 @@
         "rmr_transformations": {
             "user": {
                 "id": "ASHRAE229 1",
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "buildings": [
@@ -339,7 +339,7 @@
             },
             "proposed": {
                 "id": "ASHRAE229 1",
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "buildings": [

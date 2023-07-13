@@ -3,7 +3,7 @@
         "Section": 6,
         "Rule": 1,
         "Test": "a",
-        "test_description": "Project has one building segment with two spaces. Both lighting_building_area_type and lighting space type have been specified. The proposed building segment design lighting wattage is less than or equal to the maximum value of the allowable lighting power density multiplies total building segment area and space-by-space allowable lighting wattage.",
+        "test_description": "Project has one building segment with two spaces. Both lighting_building_area_type and lighting space type have been specified. The proposed building segment design lighting wattage is less than or equal to the maximum value of the allowable lighting power density multiplies total building segment area and space-by-space allowable lighting wattage. Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "6-1",
@@ -19,7 +19,7 @@
         "rmr_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "buildings": [
@@ -79,7 +79,7 @@
         "Section": 6,
         "Rule": 1,
         "Test": "b",
-        "test_description": "Project has one building segment with two spaces. Both lighting_building_area_type and lighting space type have been specified. The proposed building segment design lighting wattage is greater than the maximum value of the allowable lighting power density multiplies total building segment area and space-by-space allowable lighting wattage.",
+        "test_description": "Project has one building segment with two spaces. Both lighting_building_area_type and lighting space type have been specified. The proposed building segment design lighting wattage is greater than the maximum value of the allowable lighting power density multiplies total building segment area and space-by-space allowable lighting wattage. Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "6-1",
@@ -95,7 +95,7 @@
         "rmr_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "buildings": [
@@ -155,7 +155,7 @@
         "Section": 6,
         "Rule": 1,
         "Test": "c",
-        "test_description": "Project has one building segment with two spaces. Lighting_building_area_type hasn't been specified, and lighting space type has been specified. The proposed building segment design lighting wattage is lees than or equal to space-by-space allowable lighting wattage.",
+        "test_description": "Project has one building segment with two spaces. Lighting_building_area_type hasn't been specified, and lighting space type has been specified. The proposed building segment design lighting wattage is less than or equal to space-by-space allowable lighting wattage. Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "6-1",
@@ -171,7 +171,7 @@
         "rmr_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "buildings": [
@@ -230,7 +230,7 @@
         "Section": 6,
         "Rule": 1,
         "Test": "d",
-        "test_description": "Project has one building segment with two spaces. Lighting_building_area_type hasn't been specified, and lighting space type has been specified. The proposed building segment design lighting wattage is greater than space-by-space allowable lighting wattage.",
+        "test_description": "Project has one building segment with two spaces. Lighting_building_area_type hasn't been specified, and lighting space type has been specified. The proposed building segment design lighting wattage is greater than space-by-space allowable lighting wattage. Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "6-1",
@@ -246,7 +246,7 @@
         "rmr_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "buildings": [
@@ -305,7 +305,7 @@
         "Section": 6,
         "Rule": 1,
         "Test": "e",
-        "test_description": "Project has one building segment with two spaces. Lighting_building_area_type has been specified and lighting space type hasn't been specified. The proposed building segment design lighting wattage is less than or equal to the allowable lighting power density multiplies total building segment area.",
+        "test_description": "Project has one building segment with two spaces. Lighting_building_area_type has been specified and lighting space type hasn't been specified. The proposed building segment design lighting wattage is less than or equal to the allowable lighting power density multiplies total building segment area. Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "6-1",
@@ -321,7 +321,7 @@
         "rmr_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "buildings": [
@@ -379,7 +379,7 @@
         "Section": 6,
         "Rule": 1,
         "Test": "f",
-        "test_description": "Project has one building segment with two spaces. Lighting_building_area_type has been specified and lighting space type hasn't been specified. The proposed building segment design lighting wattage is greater than the allowable lighting power density multiplies the total building segment area.",
+        "test_description": "Project has one building segment with two spaces. Lighting_building_area_type has been specified and lighting space type hasn't been specified. The proposed building segment design lighting wattage is greater than the allowable lighting power density multiplies the total building segment area. Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "6-1",
@@ -395,7 +395,7 @@
         "rmr_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "buildings": [
@@ -453,7 +453,7 @@
         "Section": 6,
         "Rule": 1,
         "Test": "g",
-        "test_description": "Project has one building segment with two spaces. Both Lighting_building_area_type and lighting space type haven't been specified.",
+        "test_description": "Project has one building segment with two spaces. Both Lighting_building_area_type and lighting space type haven't been specified. Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "6-1",
@@ -469,7 +469,7 @@
         "rmr_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "buildings": [

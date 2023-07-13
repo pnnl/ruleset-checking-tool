@@ -3,7 +3,7 @@
         "Section": 6,
         "Rule": 6,
         "Test": "a",
-        "test_description": "The proposed building has NONE daylighting control type",
+        "test_description": "The baseline building has NONE daylighting control type. Expected result: PASS",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "6-6",
@@ -19,7 +19,7 @@
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "buildings": [
@@ -63,7 +63,7 @@
         "Section": 6,
         "Rule": 6,
         "Test": "b",
-        "test_description": "The proposed building has STEPPED daylighting control type",
+        "test_description": "The baseline building has STEPPED daylighting control type.  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "6-6",
@@ -79,7 +79,7 @@
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "buildings": [
