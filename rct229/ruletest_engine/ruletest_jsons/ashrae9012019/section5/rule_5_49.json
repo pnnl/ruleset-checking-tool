@@ -102,7 +102,7 @@
         "Rule": 49,
         "Test": "b",
         "test_description": "Project has one building segment with one space that includes two surfaces - one adjacent to exterior and another adjacent to ground. The space is conditioned based on the heating and cooling capacity of the HVAC system that serves the parent zone. The proposed infiltration flow rate at wind pressure is not based on default 0.6 cfm/ft2  @75PA. Manual check required to verify that site measurements were performed",
-        "expected_rule_outcome": "manual_check",
+        "expected_rule_outcome": "undetermined",
         "standard": {
             "rule_id": "5-49",
             "ruleset_reference": "Table G3.1(5) Proposed Building Performance (b)",

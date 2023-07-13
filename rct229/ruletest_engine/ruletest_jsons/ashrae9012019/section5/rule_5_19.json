@@ -434,7 +434,7 @@
         "Rule": 19,
         "Test": "c",
         "test_description": "  Project has one building segment and includes a space that has two exterior walls with windows. The building segment includes existing components and the building area type is not included in Table G3.1.1-1. The outcome cannot be determined.",
-        "expected_rule_outcome": "manual_check",
+        "expected_rule_outcome": "undetermined",
         "standard": {
             "rule_id": "5-19",
             "ruleset_reference": "Table G3.1(5) Baseline Building Performance (c) ",

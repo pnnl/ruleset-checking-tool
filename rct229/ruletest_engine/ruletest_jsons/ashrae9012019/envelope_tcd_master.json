@@ -3836,7 +3836,7 @@
         "Rule": 15,
         "Test": "e",
         "test_description": "Project has one building segment with a slab-on-grade floor surface. Building is located in climate zone 4A and includes a space that has non-residential occupancy type and is conditioned based on heating capacity of the HVAC system that serves it. The baseline slab-on-grade floor F-factor for the space is not established correctly.",
-        "expected_rule_outcome": "manual_check",
+        "expected_rule_outcome": "undetermined",
         "standard": {
             "rule_id": "5-15",
             "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b)",
@@ -4012,7 +4012,7 @@
         "Rule": 15,
         "Test": "g",
         "test_description": "Project has one building segment with a slab-on-grade floor surface. Building is located in climate zone 4A and includes a space that has non-residential occupancy type and is semiheated based on heating and cooling capacity of the HVAC system that serves the parent zone. The baseline slab-on-grade floor F-factor for the zone is not established correctly.",
-        "expected_rule_outcome": "manual_check",
+        "expected_rule_outcome": "undetermined",
         "standard": {
             "rule_id": "5-15",
             "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b)",
@@ -6706,7 +6706,7 @@
         "Rule": 19,
         "Test": "c",
         "test_description": "  Project has one building segment and includes a space that has two exterior walls with windows. The building segment includes existing components and the building area type is not included in Table G3.1.1-1. The outcome cannot be determined.",
-        "expected_rule_outcome": "manual_check",
+        "expected_rule_outcome": "undetermined",
         "standard": {
             "rule_id": "5-19",
             "ruleset_reference": "Table G3.1(5) Baseline Building Performance (c) ",
@@ -48746,7 +48746,7 @@
         "Rule": 49,
         "Test": "b",
         "test_description": "Project has one building segment with one space that includes two surfaces - one adjacent to exterior and another adjacent to ground. The space is conditioned based on the heating and cooling capacity of the HVAC system that serves the parent zone. The proposed infiltration flow rate at wind pressure is not based on default 0.6 cfm/ft2  @75PA. Manual check required to verify that site measurements were performed",
-        "expected_rule_outcome": "manual_check",
+        "expected_rule_outcome": "undetermined",
         "standard": {
             "rule_id": "5-49",
             "ruleset_reference": "Table G3.1(5) Proposed Building Performance (b)",

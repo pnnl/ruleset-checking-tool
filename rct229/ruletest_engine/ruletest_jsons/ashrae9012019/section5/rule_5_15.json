@@ -356,7 +356,7 @@
         "Rule": 15,
         "Test": "e",
         "test_description": "Project has one building segment with a slab-on-grade floor surface. Building is located in climate zone 4A and includes a space that has non-residential occupancy type and is conditioned based on heating capacity of the HVAC system that serves it. The baseline slab-on-grade floor F-factor for the space is not established correctly.",
-        "expected_rule_outcome": "manual_check",
+        "expected_rule_outcome": "undetermined",
         "standard": {
             "rule_id": "5-15",
             "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b)",
@@ -532,7 +532,7 @@
         "Rule": 15,
         "Test": "g",
         "test_description": "Project has one building segment with a slab-on-grade floor surface. Building is located in climate zone 4A and includes a space that has non-residential occupancy type and is semiheated based on heating and cooling capacity of the HVAC system that serves the parent zone. The baseline slab-on-grade floor F-factor for the zone is not established correctly.",
-        "expected_rule_outcome": "manual_check",
+        "expected_rule_outcome": "undetermined",
         "standard": {
             "rule_id": "5-15",
             "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b)",
