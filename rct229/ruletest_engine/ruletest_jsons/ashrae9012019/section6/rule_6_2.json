@@ -14,7 +14,7 @@
             "comparison_value": "User RMR",
             "rule_dependency": "None",
             "mandatory_rule": "Yes",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.29"
         },
         "rmr_transformations": {
             "user": {
@@ -142,7 +142,7 @@
             "comparison_value": "User RMR",
             "rule_dependency": "None",
             "mandatory_rule": "Yes",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.29"
         },
         "rmr_transformations": {
             "user": {
@@ -270,7 +270,7 @@
             "comparison_value": "User RMR",
             "rule_dependency": "None",
             "mandatory_rule": "Yes",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.29"
         },
         "rmr_transformations": {
             "user": {
@@ -398,7 +398,7 @@
             "comparison_value": "User RMR",
             "rule_dependency": "None",
             "mandatory_rule": "Yes",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.29"
         },
         "rmr_transformations": {
             "user": {
