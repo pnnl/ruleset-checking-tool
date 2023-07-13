@@ -29,11 +29,11 @@ def get_fan_object_electric_power(fan):
         design_pressure_rise = fan.get("design_pressure_rise", 0.0)
         design_air_flow = fan.get("design_airflow", ZERO.FLOW)
         total_efficiency = fan.get("total_efficiency", 0.0)
-        input_power = fan.get("input_power", ZERO.POWER)
+        shaft_power = fan.get("shaft_power", ZERO.POWER)
         motor_efficiency = fan.get("motor_efficiency", 0.0)
 
-        if input_power > ZERO.POWER and motor_efficiency > 0.0:
-            fan_elec_power = input_power / motor_efficiency
+        if shaft_power > ZERO.POWER and motor_efficiency > 0.0:
+            fan_elec_power = shaft_power / motor_efficiency
         elif total_efficiency > 0.0 and design_pressure_rise > 0.0:
             fan_elec_power = (
                 design_pressure_rise * design_air_flow / total_efficiency
@@ -41,7 +41,7 @@ def get_fan_object_electric_power(fan):
         else:
             assert_(
                 False,
-                f"Check Fan: {fan['id']}, Data missing: input_power or motor_efficiency are missing or "
+                f"Check Fan: {fan['id']}, Data missing: shaft_power or motor_efficiency are missing or "
                 f"equal to 0.0, and total_efficiency or design_pressure_rise are missing or equal to 0.0.",
             )
 

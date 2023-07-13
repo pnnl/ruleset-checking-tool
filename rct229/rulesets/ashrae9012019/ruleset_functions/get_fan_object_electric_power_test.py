@@ -78,7 +78,7 @@ TEST_RMD = {
                                             {
                                                 "id": "Supply Fan 2",
                                                 "specification_method": "DETAILED",
-                                                "input_power": 100,
+                                                "shaft_power": 100,
                                                 "motor_efficiency": 0.5,
                                             },
                                             # 3.73 kilowatt -> 3734 watt
@@ -189,7 +189,7 @@ def test__FAN_DETAIL_total_efficiency__success():
 def test_FAN_MISSING_DATA_FAILED():
     with pytest.raises(
         RCTFailureException,
-        match="Check Fan: Supply Fan 4, Data missing: input_power or motor_efficiency are missing or equal to 0.0, "
+        match="Check Fan: Supply Fan 4, Data missing: shaft_power or motor_efficiency are missing or equal to 0.0, "
         "and total_efficiency or design_pressure_rise are missing or equal to 0.0",
     ):
         fan = find_exactly_one_with_field_value(
