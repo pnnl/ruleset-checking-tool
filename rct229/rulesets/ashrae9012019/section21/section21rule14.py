@@ -21,7 +21,7 @@ class Section21Rule14(RuleDefinitionListIndexedBase):
             standard_section="Section G3.1.1.3 Baseline HVAC System Requirements for Systems Utilizing Purchased "
             "Chilled Water and/or Purchased Heat",
             is_primary_rule=False,
-            list_path="ruleset_model_instances[0]",
+            list_path="ruleset_model_descriptions[0]",
             manual_check_required_msg="Manual Check Required - Baseline is modeled with purchased hot water or steam.  "
             "Make sure that a hot water supply reset temperature is not modeled.",
             not_applicable_msg="Rule 21-14 Not Applicable - the baseline is not modeled with Purchased Hot Water or "

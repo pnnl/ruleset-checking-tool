@@ -78,11 +78,11 @@ TEST_RMD_WRONG_LENGTH = create_flexible_schedule_length(8700)
 
 TEST_RMD_FULL_CORRECT_LENGTH = {
     "id": "229_01",
-    "ruleset_model_instances": [TEST_RMD_CORRECT_LENGTH],
+    "ruleset_model_descriptions": [TEST_RMD_CORRECT_LENGTH],
 }
 TEST_RMD_FULL_WRONG_LENGTH = {
     "id": "229_01",
-    "ruleset_model_instances": [TEST_RMD_WRONG_LENGTH],
+    "ruleset_model_descriptions": [TEST_RMD_WRONG_LENGTH],
 }
 
 

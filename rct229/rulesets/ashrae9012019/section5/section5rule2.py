@@ -18,7 +18,7 @@ class Section5Rule2(RuleDefinitionListIndexedBase):
             ruleset_section_title="Envelope",
             standard_section="Section G3.1-5(a) Building Envelope Modeling Requirements for the Proposed building",
             is_primary_rule=False,
-            rmr_context="ruleset_model_instances/0/buildings",
+            rmr_context="ruleset_model_descriptions/0/buildings",
         )
 
     class BuildingRule(RuleDefinitionBase):

@@ -7,7 +7,7 @@ from rct229.schema.validate import schema_validate_rmr
 
 GET_HW_LOOP_ZONE_LIST_W_AREA_RMD = {
     "id": "ASHRAE229 1",
-    "ruleset_model_instances": [
+    "ruleset_model_descriptions": [
         {
             "id": "RMD 1",
             "buildings": [
@@ -178,7 +178,7 @@ GET_HW_LOOP_ZONE_LIST_W_AREA_RMD = {
     ],
 }
 
-TEST_RMI = quantify_rmr(GET_HW_LOOP_ZONE_LIST_W_AREA_RMD)["ruleset_model_instances"][0]
+TEST_RMI = quantify_rmr(GET_HW_LOOP_ZONE_LIST_W_AREA_RMD)["ruleset_model_descriptions"][0]
 
 
 def test__TEST_RMD__is_valid():

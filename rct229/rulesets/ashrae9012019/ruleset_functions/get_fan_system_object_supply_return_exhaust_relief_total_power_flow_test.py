@@ -132,9 +132,9 @@ TEST_RMD = {
 }
 
 
-TEST_RMD_FULL = {"id": "229", "ruleset_model_instances": [TEST_RMD]}
+TEST_RMD_FULL = {"id": "229", "ruleset_model_descriptions": [TEST_RMD]}
 
-TEST_FAN_SYSTEM = quantify_rmr(TEST_RMD_FULL)["ruleset_model_instances"][0][
+TEST_FAN_SYSTEM = quantify_rmr(TEST_RMD_FULL)["ruleset_model_descriptions"][0][
     "buildings"
 ][0]["building_segments"][0]["heating_ventilating_air_conditioning_systems"][0][
     "fan_system"

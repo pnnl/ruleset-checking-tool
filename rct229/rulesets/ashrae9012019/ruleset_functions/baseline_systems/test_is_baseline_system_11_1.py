@@ -11,7 +11,7 @@ from rct229.schema.validate import schema_validate_rmr
 
 SYS_11_1_TEST_RMD = {
     "id": "ASHRAE229 1",
-    "ruleset_model_instances": [
+    "ruleset_model_descriptions": [
         {
             "id": "RMD 1",
             "buildings": [
@@ -204,7 +204,7 @@ SYS_11_1_TEST_RMD = {
 
 SYS_11_1_TEST_UNMATCHED_RMD = {
     "id": "ASHRAE229 1",
-    "ruleset_model_instances": [
+    "ruleset_model_descriptions": [
         {
             "id": "RMD 1",
             "buildings": [
@@ -345,7 +345,7 @@ def test__TEST_RMD_baseline_system_11_1__is_unmatched_valid():
 def test__is_baseline__system_11_1__true():
     assert (
         is_baseline_system_11_1(
-            SYS_11_1_TEST_RMD["ruleset_model_instances"][0],
+            SYS_11_1_TEST_RMD["ruleset_model_descriptions"][0],
             "System Type 11",
             ["VAV Air Terminal 1"],
             ["Thermal Zone 1"],
@@ -357,7 +357,7 @@ def test__is_baseline__system_11_1__true():
 def test__is_baseline_system_11_1__test_json_true():
     assert (
         is_baseline_system_11_1(
-            load_system_test_file("System_11.1_VAV_SZ.json")["ruleset_model_instances"][
+            load_system_test_file("System_11.1_VAV_SZ.json")["ruleset_model_descriptions"][
                 0
             ],
             "System 11",
@@ -371,7 +371,7 @@ def test__is_baseline_system_11_1__test_json_true():
 def test__is_baseline_system_11_1A__true():
     assert (
         is_baseline_system_11_1(
-            SYS_11_1_TEST_RMD["ruleset_model_instances"][0],
+            SYS_11_1_TEST_RMD["ruleset_model_descriptions"][0],
             "System Type 11A",
             ["VAV Air Terminal 1A"],
             ["Thermal Zone 1A"],
@@ -384,7 +384,7 @@ def test__is_baseline_system_11_1A__test_json_true():
     assert (
         is_baseline_system_11_1(
             load_system_test_file("System_11.1a_VAV_SZ.json")[
-                "ruleset_model_instances"
+                "ruleset_model_descriptions"
             ][0],
             "System 11",
             ["VAV Air Terminal 1"],
@@ -397,7 +397,7 @@ def test__is_baseline_system_11_1A__test_json_true():
 def test__is_baseline_system_11_1B__true():
     assert (
         is_baseline_system_11_1(
-            SYS_11_1_TEST_RMD["ruleset_model_instances"][0],
+            SYS_11_1_TEST_RMD["ruleset_model_descriptions"][0],
             "System Type 11B",
             ["VAV Air Terminal 1B"],
             ["Thermal Zone 1B"],
@@ -410,7 +410,7 @@ def test__is_baseline_system_11_1B__test_json_true():
     assert (
         is_baseline_system_11_1(
             load_system_test_file("System_11.1b_VAV_SZ.json")[
-                "ruleset_model_instances"
+                "ruleset_model_descriptions"
             ][0],
             "System 11",
             ["VAV Air Terminal 1"],
@@ -423,7 +423,7 @@ def test__is_baseline_system_11_1B__test_json_true():
 def test__is_baseline_system_11_1C__true():
     assert (
         is_baseline_system_11_1(
-            SYS_11_1_TEST_RMD["ruleset_model_instances"][0],
+            SYS_11_1_TEST_RMD["ruleset_model_descriptions"][0],
             "System Type 11C",
             ["VAV Air Terminal 1C"],
             ["Thermal Zone 1C"],
@@ -436,7 +436,7 @@ def test__is_baseline_system_11_1C__test_json_true():
     assert (
         is_baseline_system_11_1(
             load_system_test_file("System_11.1c_VAV_SZ.json")[
-                "ruleset_model_instances"
+                "ruleset_model_descriptions"
             ][0],
             "System 11",
             ["VAV Air Terminal 1"],
@@ -450,7 +450,7 @@ def test__is_baseline_system_11_1__no_ays_true():
     # `no_sys` means there is no matched system and this is for testing when there is no matching system (11.1, 11.1A, 11.1B, 11.1C)
     assert (
         is_baseline_system_11_1(
-            SYS_11_1_TEST_UNMATCHED_RMD["ruleset_model_instances"][0],
+            SYS_11_1_TEST_UNMATCHED_RMD["ruleset_model_descriptions"][0],
             "System Type Unmatched 1",
             ["Air Terminal 1"],
             ["Thermal Zone 1"],
@@ -463,7 +463,7 @@ def test__is_baseline_system_11_1__no_ays_true():
     # `no_sys` means there is no matched system and this is for testing when there is no matching system (11.1, 11.1A, 11.1B, 11.1C)
     assert (
         is_baseline_system_11_1(
-            SYS_11_1_TEST_UNMATCHED_RMD["ruleset_model_instances"][0],
+            SYS_11_1_TEST_UNMATCHED_RMD["ruleset_model_descriptions"][0],
             "System Type Unmatched 2",
             ["Air Terminal 2"],
             ["Thermal Zone 2"],

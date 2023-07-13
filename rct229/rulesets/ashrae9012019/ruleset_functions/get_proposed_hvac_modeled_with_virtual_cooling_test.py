@@ -6,7 +6,7 @@ from rct229.schema.validate import schema_validate_rmr
 
 TEST_RMD_P_COOLING_SYSTEM = {
     "id": "ashrae229",
-    "ruleset_model_instances": [
+    "ruleset_model_descriptions": [
         {
             "id": "test_rmi",
             "buildings": [
@@ -48,7 +48,7 @@ TEST_RMD_P_COOLING_SYSTEM = {
 
 TEST_RMD_U_COOLING_SYSTEM = {
     "id": "ashrae229",
-    "ruleset_model_instances": [
+    "ruleset_model_descriptions": [
         {
             "id": "test_rmi",
             "buildings": [
@@ -88,10 +88,10 @@ TEST_RMD_U_COOLING_SYSTEM = {
 }
 
 TEST_RMI_P_COOLING_SYSTEM = quantify_rmr(TEST_RMD_P_COOLING_SYSTEM)[
-    "ruleset_model_instances"
+    "ruleset_model_descriptions"
 ][0]
 TEST_RMI_U_COOLING_SYSTEM = quantify_rmr(TEST_RMD_U_COOLING_SYSTEM)[
-    "ruleset_model_instances"
+    "ruleset_model_descriptions"
 ][0]
 
 

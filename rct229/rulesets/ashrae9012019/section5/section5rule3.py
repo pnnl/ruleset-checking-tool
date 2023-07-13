@@ -4,11 +4,11 @@ from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedV
 from rct229.rulesets.ashrae9012019.data.schema_enums import schema_enums
 from rct229.utils.jsonpath_utils import find_all
 
-SurfaceAdjacentTo = schema_enums["SurfaceAdjacentToOptions"]
+SurfaceAdjacency = schema_enums["SurfaceAdjacencyOptions"]
 
 # Json path for surfaces filtered to those with adjacent_to set to exterior
 EXTERIOR_SURFACES_JSONPATH = (
-    f'$..surfaces[*][?(@.adjacent_to="{SurfaceAdjacentTo.EXTERIOR}")]'
+    f'$..surfaces[*][?(@.adjacent_to="{SurfaceAdjacency.EXTERIOR}")]'
 )
 
 
@@ -25,7 +25,7 @@ class Section5Rule3(RuleDefinitionListIndexedBase):
             ruleset_section_title="Envelope",
             standard_section="Section G3.1-5(b) Building Envelope Modeling Requirements for the Baseline building",
             is_primary_rule=False,
-            rmr_context="ruleset_model_instances/0/buildings",
+            rmr_context="ruleset_model_descriptions/0/buildings",
         )
 
     class BuildingRule(PartialRuleDefinition):

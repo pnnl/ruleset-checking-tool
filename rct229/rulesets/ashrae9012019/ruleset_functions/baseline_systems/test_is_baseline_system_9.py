@@ -11,7 +11,7 @@ from rct229.schema.validate import schema_validate_rmr
 
 SYS_9_TEST_RMD = {
     "id": "ASHRAE229 1",
-    "ruleset_model_instances": [
+    "ruleset_model_descriptions": [
         {
             "id": "RMD 1",
             "buildings": [
@@ -62,7 +62,7 @@ SYS_9_TEST_RMD = {
 
 SYS_9B_TEST_RMD = {
     "id": "ASHRAE229 1",
-    "ruleset_model_instances": [
+    "ruleset_model_descriptions": [
         {
             "id": "RMD 1",
             "buildings": [
@@ -136,7 +136,7 @@ def test__TEST_RMD_baseline_system_9B__is_valid():
 def test__is_baseline_system_9__true():
     assert (
         is_baseline_system_9(
-            SYS_9_TEST_RMD["ruleset_model_instances"][0],
+            SYS_9_TEST_RMD["ruleset_model_descriptions"][0],
             "System 9",
             ["Constant Air Terminal 9"],
             ["Thermal Zone 9"],
@@ -149,7 +149,7 @@ def test__is_baseline_system_9__test_json_true():
     assert (
         is_baseline_system_9(
             load_system_test_file("System_9_Warm_Air_Furnace_Gas.json")[
-                "ruleset_model_instances"
+                "ruleset_model_descriptions"
             ][0],
             "System 9",
             ["Air Terminal"],
@@ -162,7 +162,7 @@ def test__is_baseline_system_9__test_json_true():
 def test__is_baseline_system_9B_true():
     assert (
         is_baseline_system_9(
-            SYS_9B_TEST_RMD["ruleset_model_instances"][0],
+            SYS_9B_TEST_RMD["ruleset_model_descriptions"][0],
             "System 9B",
             ["Constant Air Terminal 9B"],
             ["Thermal Zone 9B"],
@@ -175,7 +175,7 @@ def test__is_baseline_system_9B__test_json_true():
     assert (
         is_baseline_system_9(
             load_system_test_file("System_9b_Warm_Air_Furnace_Gas.json")[
-                "ruleset_model_instances"
+                "ruleset_model_descriptions"
             ][0],
             "System 9B",
             ["Air Terminal"],

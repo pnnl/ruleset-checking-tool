@@ -33,7 +33,7 @@ class Section23Rule6(RuleDefinitionListIndexedBase):
             ruleset_section_title="HVAC - Airside",
             standard_section="Section G3.1.3.14 Fan Power and Control (Systems 6 and 8)",
             is_primary_rule=True,
-            rmr_context="ruleset_model_instances/0",
+            rmr_context="ruleset_model_descriptions/0",
             list_path="$..terminals[*]",
         )
 

@@ -15,7 +15,7 @@ from rct229.schema.validate import schema_validate_rmr
 
 SYS_1_TEST_RMD = {
     "id": "ASHRAE229 1",
-    "ruleset_model_instances": [
+    "ruleset_model_descriptions": [
         {
             "id": "RMD 1",
             "buildings": [
@@ -204,7 +204,7 @@ def test__TEST_RMD_baseline_system_1__is_valid():
 def test__is_baseline_system_1__true():
     assert (
         is_baseline_system_1(
-            SYS_1_TEST_RMD["ruleset_model_instances"][0],
+            SYS_1_TEST_RMD["ruleset_model_descriptions"][0],
             "PTAC 1",
             ["PTAC Terminal 1"],
             ["Thermal Zone 1"],
@@ -216,7 +216,7 @@ def test__is_baseline_system_1__true():
 def test__is_baseline_system_1A__true():
     assert (
         is_baseline_system_1(
-            SYS_1_TEST_RMD["ruleset_model_instances"][0],
+            SYS_1_TEST_RMD["ruleset_model_descriptions"][0],
             "PTAC 1a",
             ["PTAC Terminal 1a"],
             ["Thermal Zone 1a"],
@@ -228,7 +228,7 @@ def test__is_baseline_system_1A__true():
 def test__is_baseline_system_1A__test_json_true():
     assert (
         is_baseline_system_1(
-            load_system_test_file("System_1a_PTAC.json")["ruleset_model_instances"][0],
+            load_system_test_file("System_1a_PTAC.json")["ruleset_model_descriptions"][0],
             "PTAC 1",
             ["PTAC Terminal 1"],
             ["Thermal Zone 1"],
@@ -240,7 +240,7 @@ def test__is_baseline_system_1A__test_json_true():
 def test__is_baseline_system_1B__true():
     assert (
         is_baseline_system_1(
-            SYS_1_TEST_RMD["ruleset_model_instances"][0],
+            SYS_1_TEST_RMD["ruleset_model_descriptions"][0],
             "PTAC 1b",
             ["PTAC Terminal 1b"],
             ["Thermal Zone 1b"],
@@ -252,7 +252,7 @@ def test__is_baseline_system_1B__true():
 def test__is_baseline_system_1B__test_json_true():
     assert (
         is_baseline_system_1(
-            load_system_test_file("System_1b_PTAC.json")["ruleset_model_instances"][0],
+            load_system_test_file("System_1b_PTAC.json")["ruleset_model_descriptions"][0],
             "PTAC 1",
             ["PTAC Terminal 1"],
             ["Thermal Zone 1"],
@@ -264,7 +264,7 @@ def test__is_baseline_system_1B__test_json_true():
 def test__is_baseline_system_1C__true():
     assert (
         is_baseline_system_1(
-            SYS_1_TEST_RMD["ruleset_model_instances"][0],
+            SYS_1_TEST_RMD["ruleset_model_descriptions"][0],
             "PTAC 1c",
             ["PTAC Terminal 1c"],
             ["Thermal Zone 1c"],
@@ -276,7 +276,7 @@ def test__is_baseline_system_1C__true():
 def test__is_baseline_system_1__test_json_true():
     assert (
         is_baseline_system_1(
-            load_system_test_file("System_1_PTAC.json")["ruleset_model_instances"][0],
+            load_system_test_file("System_1_PTAC.json")["ruleset_model_descriptions"][0],
             "PTAC 1",
             ["PTAC Terminal 1"],
             ["Thermal Zone 1"],
@@ -288,7 +288,7 @@ def test__is_baseline_system_1__test_json_true():
 def test__is_baseline_system_1C__test_json_true():
     assert (
         is_baseline_system_1(
-            load_system_test_file("System_1c_PTAC.json")["ruleset_model_instances"][0],
+            load_system_test_file("System_1c_PTAC.json")["ruleset_model_descriptions"][0],
             "PTAC 1",
             ["PTAC Terminal 1"],
             ["Thermal Zone 1"],

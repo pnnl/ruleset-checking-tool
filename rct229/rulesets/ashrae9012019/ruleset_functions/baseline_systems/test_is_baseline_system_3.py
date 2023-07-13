@@ -11,7 +11,7 @@ from rct229.schema.validate import schema_validate_rmr
 
 SYS_3_TEST_RMD = {
     "id": "ASHRAE229 1",
-    "ruleset_model_instances": [
+    "ruleset_model_descriptions": [
         {
             "id": "RMD 1",
             "buildings": [
@@ -178,7 +178,7 @@ SYS_3_TEST_RMD = {
 
 SYS_3_TEST_UNMATCHED_RMD = {
     "id": "ASHRAE229 1",
-    "ruleset_model_instances": [
+    "ruleset_model_descriptions": [
         {
             "id": "RMD 1",
             "buildings": [
@@ -261,7 +261,7 @@ def test__TEST_RMD_baseline_system_3__is_unmatched_valid():
 def test__is_baseline_system_3__true():
     assert (
         is_baseline_system_3(
-            SYS_3_TEST_RMD["ruleset_model_instances"][0],
+            SYS_3_TEST_RMD["ruleset_model_descriptions"][0],
             "System Type 3",
             ["Air Terminal 3"],
             ["Thermal Zone 3"],
@@ -274,7 +274,7 @@ def test__is_baseline_system_3__test_json_true():
     assert (
         is_baseline_system_3(
             load_system_test_file("System_3_PSZ_AC_Gas_Furnace.json")[
-                "ruleset_model_instances"
+                "ruleset_model_descriptions"
             ][0],
             "System Type 3",
             ["Air Terminal"],
@@ -287,7 +287,7 @@ def test__is_baseline_system_3__test_json_true():
 def test__is_baseline_system_3A__true():
     assert (
         is_baseline_system_3(
-            SYS_3_TEST_RMD["ruleset_model_instances"][0],
+            SYS_3_TEST_RMD["ruleset_model_descriptions"][0],
             "System Type 3a",
             ["Air Terminal 3a"],
             ["Thermal Zone 3a"],
@@ -300,7 +300,7 @@ def test__is_baseline_system_3A__test_json_true():
     assert (
         is_baseline_system_3(
             load_system_test_file("System_3a_PSZ_AC_Gas_Furnace.json")[
-                "ruleset_model_instances"
+                "ruleset_model_descriptions"
             ][0],
             "System Type 3",
             ["Air Terminal"],
@@ -313,7 +313,7 @@ def test__is_baseline_system_3A__test_json_true():
 def test__is_baseline_system_3B__true():
     assert (
         is_baseline_system_3(
-            SYS_3_TEST_RMD["ruleset_model_instances"][0],
+            SYS_3_TEST_RMD["ruleset_model_descriptions"][0],
             "System Type 3b",
             ["Air Terminal 3b"],
             ["Thermal Zone 3b"],
@@ -326,7 +326,7 @@ def test__is_baseline_system_3B__test_json_true():
     assert (
         is_baseline_system_3(
             load_system_test_file("System_3b_PSZ_AC_Gas_Furnace.json")[
-                "ruleset_model_instances"
+                "ruleset_model_descriptions"
             ][0],
             "System Type 3",
             ["Air Terminal"],
@@ -339,7 +339,7 @@ def test__is_baseline_system_3B__test_json_true():
 def test__is_baseline_system_3C__true():
     assert (
         is_baseline_system_3(
-            SYS_3_TEST_RMD["ruleset_model_instances"][0],
+            SYS_3_TEST_RMD["ruleset_model_descriptions"][0],
             "System Type 3c",
             ["Air Terminal 3c"],
             ["Thermal Zone 3c"],
@@ -352,7 +352,7 @@ def test__is_baseline_system_3C_test__json_true():
     assert (
         is_baseline_system_3(
             load_system_test_file("System_3c_PSZ_AC_Gas_Furnace.json")[
-                "ruleset_model_instances"
+                "ruleset_model_descriptions"
             ][0],
             "System Type 3",
             ["Air Terminal"],
@@ -365,7 +365,7 @@ def test__is_baseline_system_3C_test__json_true():
 def test__is_baseline_system_unmatched__true():
     assert (
         is_baseline_system_3(
-            SYS_3_TEST_UNMATCHED_RMD["ruleset_model_instances"][0],
+            SYS_3_TEST_UNMATCHED_RMD["ruleset_model_descriptions"][0],
             "System Type Unmatched",
             ["Air Terminal 3"],
             ["Thermal Zone 3"],

@@ -11,7 +11,7 @@ from rct229.schema.validate import schema_validate_rmr
 
 SYS_7_TEST_RMD = {
     "id": "ASHRAE229 1",
-    "ruleset_model_instances": [
+    "ruleset_model_descriptions": [
         {
             "id": "RMD 1",
             "buildings": [
@@ -232,7 +232,7 @@ SYS_7_TEST_RMD = {
 
 SYS_7_TEST_UNMATCHED_RMD = {
     "id": "ASHRAE229 1",
-    "ruleset_model_instances": [
+    "ruleset_model_descriptions": [
         {
             "id": "RMD 1",
             "buildings": [
@@ -439,7 +439,7 @@ def test__TEST_RMD_baseline_system_7__is_unmatched_valid():
 def test__is_baseline_system_7__true():
     assert (
         is_baseline_system_7(
-            SYS_7_TEST_RMD["ruleset_model_instances"][0],
+            SYS_7_TEST_RMD["ruleset_model_descriptions"][0],
             "System 7",
             ["VAV Air Terminal 1"],
             ["Thermal Zone 1"],
@@ -452,7 +452,7 @@ def test__is_baseline_system_7__test_json_true():
     assert (
         is_baseline_system_7(
             load_system_test_file("System_7_VAV_HW_Reheat.json")[
-                "ruleset_model_instances"
+                "ruleset_model_descriptions"
             ][0],
             "System 7",
             ["VAV Air Terminal 1"],
@@ -465,7 +465,7 @@ def test__is_baseline_system_7__test_json_true():
 def test__is_baseline_system_7A__true():
     assert (
         is_baseline_system_7(
-            SYS_7_TEST_RMD["ruleset_model_instances"][0],
+            SYS_7_TEST_RMD["ruleset_model_descriptions"][0],
             "System 7a",
             ["VAV Air Terminal 2"],
             ["Thermal Zone 2"],
@@ -478,7 +478,7 @@ def test__is_baseline_system_7A__test_json_true():
     assert (
         is_baseline_system_7(
             load_system_test_file("System_7a_VAV_HW_Reheat.json")[
-                "ruleset_model_instances"
+                "ruleset_model_descriptions"
             ][0],
             "System 7",
             ["VAV Air Terminal 1"],
@@ -491,7 +491,7 @@ def test__is_baseline_system_7A__test_json_true():
 def test__is_baseline_system_7B__true():
     assert (
         is_baseline_system_7(
-            SYS_7_TEST_RMD["ruleset_model_instances"][0],
+            SYS_7_TEST_RMD["ruleset_model_descriptions"][0],
             "System 7b",
             ["VAV Air Terminal 3"],
             ["Thermal Zone 3"],
@@ -504,7 +504,7 @@ def test__is_baseline_system_7B__test_json_true():
     assert (
         is_baseline_system_7(
             load_system_test_file("System_7b_VAV_HW_Reheat.json")[
-                "ruleset_model_instances"
+                "ruleset_model_descriptions"
             ][0],
             "System 7",
             ["VAV Air Terminal 1"],
@@ -517,7 +517,7 @@ def test__is_baseline_system_7B__test_json_true():
 def test__is_baseline_system_7C_true():
     assert (
         is_baseline_system_7(
-            SYS_7_TEST_RMD["ruleset_model_instances"][0],
+            SYS_7_TEST_RMD["ruleset_model_descriptions"][0],
             "System 7c",
             ["VAV Air Terminal 4"],
             ["Thermal Zone 4"],
@@ -530,7 +530,7 @@ def test__is_baseline_system_7C__test_json_true():
     assert (
         is_baseline_system_7(
             load_system_test_file("System_7c_VAV_HW_Reheat.json")[
-                "ruleset_model_instances"
+                "ruleset_model_descriptions"
             ][0],
             "System 7",
             ["VAV Air Terminal 1"],
@@ -543,7 +543,7 @@ def test__is_baseline_system_7C__test_json_true():
 def test__is_baseline_system_unmatched1__true():
     assert (
         is_baseline_system_7(
-            SYS_7_TEST_UNMATCHED_RMD["ruleset_model_instances"][0],
+            SYS_7_TEST_UNMATCHED_RMD["ruleset_model_descriptions"][0],
             "System Type Unmatched 1",
             ["Air Terminal 1"],
             ["Thermal Zone 1"],
@@ -555,7 +555,7 @@ def test__is_baseline_system_unmatched1__true():
 def test__is_baseline_system_unmatched2__true():
     assert (
         is_baseline_system_7(
-            SYS_7_TEST_UNMATCHED_RMD["ruleset_model_instances"][0],
+            SYS_7_TEST_UNMATCHED_RMD["ruleset_model_descriptions"][0],
             "System Type Unmatched 2",
             ["Air Terminal 2"],
             ["Thermal Zone 2"],
@@ -567,7 +567,7 @@ def test__is_baseline_system_unmatched2__true():
 def test__is_baseline_system_unmatched3__true():
     assert (
         is_baseline_system_7(
-            SYS_7_TEST_UNMATCHED_RMD["ruleset_model_instances"][0],
+            SYS_7_TEST_UNMATCHED_RMD["ruleset_model_descriptions"][0],
             "System Type Unmatched 3",
             ["Air Terminal 3"],
             ["Thermal Zone 3"],

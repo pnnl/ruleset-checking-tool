@@ -65,14 +65,14 @@ TEST_RMR = {
     ],
 }
 
-TEST_SPACE_RMR = {"id": "229_01", "ruleset_model_instances": [TEST_RMR]}
+TEST_SPACE_RMR = {"id": "229_01", "ruleset_model_descriptions": [TEST_RMR]}
 
 TEST_SCHEDULES = {
     "schedules": [{"id": "light_multiplier_sched_1", "hourly_values": [0.8] * 8760}]
 }
 
 ZONE_HEIGHT = 10.0
-TEST_SPACES = quantify_rmr(TEST_SPACE_RMR)["ruleset_model_instances"][0]["buildings"][
+TEST_SPACES = quantify_rmr(TEST_SPACE_RMR)["ruleset_model_descriptions"][0]["buildings"][
     0
 ]["building_segments"][0]["zones"][0]["spaces"][0]
 

@@ -5,7 +5,7 @@ from rct229.schema.validate import schema_validate_rmr
 
 rmd_model = {
     "id": "ASHRAE229 1",
-    "ruleset_model_instances": [
+    "ruleset_model_descriptions": [
         {
             "id": "RMD 1",
             "buildings": [
@@ -233,7 +233,7 @@ def test__TEST_RMD__is_valid():
 
 def test_get_dict_with_terminal_units_and_zones():
     assert get_dict_with_terminal_units_and_zones(
-        rmd_model["ruleset_model_instances"][0]
+        rmd_model["ruleset_model_descriptions"][0]
     ) == {
         "VAV Air Terminal 1": ["Thermal Zone 1"],
         "VAV Air Terminal 2": ["Thermal Zone 2"],

@@ -37,7 +37,7 @@ class Section21Rule18(RuleDefinitionListIndexedBase):
             ruleset_section_title="HVAC - Water Side",
             standard_section="Section G3.1.2.1 General Baseline HVAC System Requirements - Equipment Efficiencies",
             is_primary_rule=True,
-            rmr_context="ruleset_model_instances/0",
+            rmr_context="ruleset_model_descriptions/0",
             list_path="boilers[*]",
         )
 

@@ -20,7 +20,7 @@ class Section22Rule38(RuleDefinitionListIndexedBase):
             ruleset_section_title="HVAC - Chiller",
             standard_section="Section G3.1.3.10 Chilled-Water Pumps (Systems 7, 8, 11, 12, and 13)",
             is_primary_rule=False,
-            list_path="ruleset_model_instances[0]",
+            list_path="ruleset_model_descriptions[0]",
             manual_check_required_msg="Manual Check Required - Baseline is modeled with purchased chilled water.  Make sure "
             "baseline systems served by purchased chilled water are modeled with the purchased chilled water loop having "
             "a minimum flow setpoint of 25%.",

@@ -6,7 +6,7 @@ from rct229.schema.validate import schema_validate_rmr
 
 TEST_RMD_P_HEATING_SYSTEM = {
     "id": "ashrae229",
-    "ruleset_model_instances": [
+    "ruleset_model_descriptions": [
         {
             "id": "test_rmi",
             "buildings": [
@@ -48,7 +48,7 @@ TEST_RMD_P_HEATING_SYSTEM = {
 
 TEST_RMD_U_HEATING_SYSTEM = {
     "id": "ashrae229",
-    "ruleset_model_instances": [
+    "ruleset_model_descriptions": [
         {
             "id": "test_rmi",
             "buildings": [
@@ -89,7 +89,7 @@ TEST_RMD_U_HEATING_SYSTEM = {
 
 TEST_RMD_P_PREHEAT_SYSTEM = {
     "id": "ashrae229",
-    "ruleset_model_instances": [
+    "ruleset_model_descriptions": [
         {
             "id": "test_rmi",
             "buildings": [
@@ -131,7 +131,7 @@ TEST_RMD_P_PREHEAT_SYSTEM = {
 
 TEST_RMD_U_PREHEAT_SYSTEM = {
     "id": "ashrae229",
-    "ruleset_model_instances": [
+    "ruleset_model_descriptions": [
         {
             "id": "test_rmi",
             "buildings": [
@@ -171,16 +171,16 @@ TEST_RMD_U_PREHEAT_SYSTEM = {
 }
 
 TEST_RMI_P_HEATING_SYSTEM = quantify_rmr(TEST_RMD_P_HEATING_SYSTEM)[
-    "ruleset_model_instances"
+    "ruleset_model_descriptions"
 ][0]
 TEST_RMI_U_HEATING_SYSTEM = quantify_rmr(TEST_RMD_U_HEATING_SYSTEM)[
-    "ruleset_model_instances"
+    "ruleset_model_descriptions"
 ][0]
 TEST_RMI_P_PREHEAT_SYSTEM = quantify_rmr(TEST_RMD_P_PREHEAT_SYSTEM)[
-    "ruleset_model_instances"
+    "ruleset_model_descriptions"
 ][0]
 TEST_RMI_U_PREHEAT_SYSTEM = quantify_rmr(TEST_RMD_U_PREHEAT_SYSTEM)[
-    "ruleset_model_instances"
+    "ruleset_model_descriptions"
 ][0]
 
 

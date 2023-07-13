@@ -35,7 +35,7 @@ class Section19Rule12(RuleDefinitionListIndexedBase):
             ruleset_section_title="HVAC - General",
             standard_section=" Section G3.1.2.7",
             is_primary_rule=True,
-            list_path="$.ruleset_model_instances[*].buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*]",
+            list_path="$.ruleset_model_descriptions[*].buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*]",
             required_fields={
                 "$": ["weather"],
                 "weather": ["climate_zone"],

@@ -30,7 +30,7 @@ class Section6Rule2(RuleDefinitionListIndexedBase):
             ruleset_section_title="Lighting",
             standard_section="Table G3.1 Part 6 Lighting under Proposed Building Performance paragraph (e)",
             is_primary_rule=True,
-            list_path="$.ruleset_model_instances[0].buildings[*].building_segments[*].zones[*].spaces[*]",
+            list_path="$.ruleset_model_descriptions[0].buildings[*].building_segments[*].zones[*].spaces[*]",
         )
 
     def list_filter(self, context_item, data=None):

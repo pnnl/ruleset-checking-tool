@@ -27,7 +27,7 @@ class Section6Rule1(RuleDefinitionListIndexedBase):
             ruleset_section_title="Lighting",
             standard_section="Section G1.2.1(b) Mandatory Provisions related to interior lighting power",
             is_primary_rule=True,
-            rmr_context="ruleset_model_instances/0/buildings/0/building_segments",
+            rmr_context="ruleset_model_descriptions/0/buildings/0/building_segments",
         )
 
     class BuildingSegmentRule(RuleDefinitionBase):

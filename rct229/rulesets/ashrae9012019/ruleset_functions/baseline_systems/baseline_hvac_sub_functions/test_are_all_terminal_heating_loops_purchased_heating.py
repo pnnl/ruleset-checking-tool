@@ -44,7 +44,7 @@ TEST_RMI = {
     ],
 }
 
-TEST_RMD = {"id": "229_01", "ruleset_model_instances": [TEST_RMI]}
+TEST_RMD = {"id": "229_01", "ruleset_model_descriptions": [TEST_RMI]}
 
 
 def test__TEST_RMD__is_valid():

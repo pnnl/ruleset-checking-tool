@@ -11,7 +11,7 @@ from rct229.schema.validate import schema_validate_rmr
 
 SYS_5_TEST_RMD = {
     "id": "ASHRAE229 1",
-    "ruleset_model_instances": [
+    "ruleset_model_descriptions": [
         {
             "id": "RMD 1",
             "buildings": [
@@ -126,7 +126,7 @@ SYS_5_TEST_RMD = {
 
 SYS_5_TEST_UNMATCHED_RMD = {
     "id": "ASHRAE229 1",
-    "ruleset_model_instances": [
+    "ruleset_model_descriptions": [
         {
             "id": "RMD 1",
             "buildings": [
@@ -218,7 +218,7 @@ def test__TEST_RMD_baseline_system_5__is_unmatched_valid():
 def test__is_baseline_system_5__true():
     assert (
         is_baseline_system_5(
-            SYS_5_TEST_RMD["ruleset_model_instances"][0],
+            SYS_5_TEST_RMD["ruleset_model_descriptions"][0],
             "System 5",
             ["VAV Air Terminal 1"],
             ["Thermal Zone 1"],
@@ -231,7 +231,7 @@ def test__is_baseline_system_5__test_json_true():
     assert (
         is_baseline_system_5(
             load_system_test_file("System_5_PVAV_HW_Reheat.json")[
-                "ruleset_model_instances"
+                "ruleset_model_descriptions"
             ][0],
             "System 5",
             ["VAV Air Terminal 1"],
@@ -244,7 +244,7 @@ def test__is_baseline_system_5__test_json_true():
 def test__is_baseline_system_5B__true():
     assert (
         is_baseline_system_5(
-            SYS_5_TEST_RMD["ruleset_model_instances"][0],
+            SYS_5_TEST_RMD["ruleset_model_descriptions"][0],
             "System 5B",
             ["VAV Air Terminal 2"],
             ["Thermal Zone 2"],
@@ -257,7 +257,7 @@ def test__is_baseline_system_5B_test__json_true():
     assert (
         is_baseline_system_5(
             load_system_test_file("System_5b_PVAV_HW_Reheat.json")[
-                "ruleset_model_instances"
+                "ruleset_model_descriptions"
             ][0],
             "System 5",
             ["VAV Air Terminal 1"],
@@ -270,7 +270,7 @@ def test__is_baseline_system_5B_test__json_true():
 def test__is_baseline_system_unmatched__true():
     assert (
         is_baseline_system_5(
-            SYS_5_TEST_UNMATCHED_RMD["ruleset_model_instances"][0],
+            SYS_5_TEST_UNMATCHED_RMD["ruleset_model_descriptions"][0],
             "System 5 Unmatched",
             ["VAV Air Terminal 1"],
             ["Thermal Zone 1"],

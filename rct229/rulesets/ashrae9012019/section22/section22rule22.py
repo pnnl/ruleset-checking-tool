@@ -38,7 +38,7 @@ class Section22Rule22(RuleDefinitionListIndexedBase):
             ruleset_section_title="HVAC - Chiller",
             standard_section="Section G3.1.2.1 Equipment Efficiencies",
             is_primary_rule=True,
-            rmr_context="ruleset_model_instances/0",
+            rmr_context="ruleset_model_descriptions/0",
             list_path="chillers[*]",
         )
 

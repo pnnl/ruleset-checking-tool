@@ -6,7 +6,7 @@ from rct229.schema.validate import schema_validate_rmr
 
 TEST_RMD = {
     "id": "ASHRAE229 1",
-    "ruleset_model_instances": [
+    "ruleset_model_descriptions": [
         {
             "id": "RMI 1",
             "buildings": [
@@ -142,7 +142,7 @@ TEST_RMD = {
 }
 
 
-TEST_RMI = quantify_rmr(TEST_RMD)["ruleset_model_instances"][0]
+TEST_RMI = quantify_rmr(TEST_RMD)["ruleset_model_descriptions"][0]
 
 
 def test__TEST_RMD__is_valid():

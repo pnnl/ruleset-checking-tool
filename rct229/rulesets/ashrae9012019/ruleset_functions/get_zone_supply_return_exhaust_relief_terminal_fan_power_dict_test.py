@@ -218,9 +218,9 @@ TEST_RMD = {
     "fluid_loops": [{"id": "Boiler Loop 1", "type": "HEATING"}],
 }
 
-TEST_RMD_FULL = {"id": "229", "ruleset_model_instances": [TEST_RMD]}
+TEST_RMD_FULL = {"id": "229", "ruleset_model_descriptions": [TEST_RMD]}
 
-TEST_RMI = quantify_rmr(TEST_RMD_FULL)["ruleset_model_instances"][0]
+TEST_RMI = quantify_rmr(TEST_RMD_FULL)["ruleset_model_descriptions"][0]
 
 
 def test__TEST_RMD__is_valid():

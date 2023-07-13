@@ -9,7 +9,7 @@ MSG_WARN_DAYLIGHT = "Some of the spaces in zone are modeled with window(s) and/o
 MSG_WARN_NO_DAYLIGHT = "Some of the spaces in zone are modeled with fenestration but no daylighting controls. The design must include mandatory daylighting controls unless any of the exceptions to 90.1 section 9.4.1.1 apply."
 
 DOOR = schema_enums["SubsurfaceClassificationOptions"].DOOR
-EXTERIOR = schema_enums["SurfaceAdjacentToOptions"].EXTERIOR
+EXTERIOR = schema_enums["SurfaceAdjacencyOptions"].EXTERIOR
 NONE = schema_enums["LightingDaylightingControlOptions"].NONE
 
 
@@ -26,7 +26,7 @@ class Section6Rule7(RuleDefinitionListIndexedBase):
             ruleset_section_title="Lighting",
             standard_section="Section G3.1-6(h) Lighting: Modeling Requirements for the Proposed design",
             is_primary_rule=True,
-            list_path="ruleset_model_instances[0].buildings[*].building_segments[*].zones[*]",
+            list_path="ruleset_model_descriptions[0].buildings[*].building_segments[*].zones[*]",
         )
 
     class ZoneRule(RuleDefinitionBase):

@@ -11,7 +11,7 @@ from rct229.schema.validate import schema_validate_rmr
 
 SYS_13_TEST_RMD = {
     "id": "ASHRAE229 1",
-    "ruleset_model_instances": [
+    "ruleset_model_descriptions": [
         {
             "id": "RMD 1",
             "buildings": [
@@ -125,7 +125,7 @@ SYS_13_TEST_RMD = {
 
 SYS_13_TEST_UNMATCHED_RMD = {
     "id": "ASHRAE229 1",
-    "ruleset_model_instances": [
+    "ruleset_model_descriptions": [
         {
             "id": "RMD 1",
             "buildings": [
@@ -224,7 +224,7 @@ def test__TEST_RMD_baseline_system_13__is_unmatched_valid():
 def test__is_baseline_system_13__true():
     assert (
         is_baseline_system_13(
-            SYS_13_TEST_RMD["ruleset_model_instances"][0],
+            SYS_13_TEST_RMD["ruleset_model_descriptions"][0],
             "System 13",
             ["CAV Air Terminal 1"],
             ["Thermal Zone 1"],
@@ -237,7 +237,7 @@ def test__is_baseline_system_13__test_json_true():
     assert (
         is_baseline_system_13(
             load_system_test_file("System 13_CAV_SZ_ER.json")[
-                "ruleset_model_instances"
+                "ruleset_model_descriptions"
             ][0],
             "System 13",
             ["CAV Air Terminal 1"],
@@ -250,7 +250,7 @@ def test__is_baseline_system_13__test_json_true():
 def test__is_baseline_system_13A__true():
     assert (
         is_baseline_system_13(
-            SYS_13_TEST_RMD["ruleset_model_instances"][0],
+            SYS_13_TEST_RMD["ruleset_model_descriptions"][0],
             "System 13a",
             ["CAV Air Terminal 2"],
             ["Thermal Zone 2"],
@@ -263,7 +263,7 @@ def test__is_baseline_system_13A__test_json_true():
     assert (
         is_baseline_system_13(
             load_system_test_file("System 13a_CAV_SZ_ER.json")[
-                "ruleset_model_instances"
+                "ruleset_model_descriptions"
             ][0],
             "System 13",
             ["CAV Air Terminal 1"],
@@ -276,7 +276,7 @@ def test__is_baseline_system_13A__test_json_true():
 def test__is_baseline_system_unmatched__true():
     assert (
         is_baseline_system_13(
-            SYS_13_TEST_UNMATCHED_RMD["ruleset_model_instances"][0],
+            SYS_13_TEST_UNMATCHED_RMD["ruleset_model_descriptions"][0],
             "System Type Unmatched",
             ["Air Terminal 2"],
             ["Thermal Zone 2"],

@@ -174,29 +174,29 @@ TEST_RMI_NO_ECONOMIZER_TYPE = {
 
 TEST_RMD_FIXED_TYPE = {
     "id": "229_01",
-    "ruleset_model_instances": [TEST_RMI_FIXED_TYPE],
+    "ruleset_model_descriptions": [TEST_RMI_FIXED_TYPE],
 }
 
 TEST_RMD_ENTHALPY_TYPE = {
     "id": "229_01",
-    "ruleset_model_instances": [TEST_RMI_ENTHALPY_TYPE],
+    "ruleset_model_descriptions": [TEST_RMI_ENTHALPY_TYPE],
 }
 
 TEST_RMD_NO_ECONOMIZER_TYPE = {
     "id": "229_01",
-    "ruleset_model_instances": [TEST_RMI_NO_ECONOMIZER_TYPE],
+    "ruleset_model_descriptions": [TEST_RMI_NO_ECONOMIZER_TYPE],
 }
 
-TEST_RMI_FIXED_TYPE_UNIT = quantify_rmr(TEST_RMD_FIXED_TYPE)["ruleset_model_instances"][
+TEST_RMI_FIXED_TYPE_UNIT = quantify_rmr(TEST_RMD_FIXED_TYPE)["ruleset_model_descriptions"][
     0
 ]
 
 TEST_RMI_ENTHALPY_TYPE_UNIT = quantify_rmr(TEST_RMD_ENTHALPY_TYPE)[
-    "ruleset_model_instances"
+    "ruleset_model_descriptions"
 ][0]
 
 TEST_RMI_NO_ECONOMIZER_TYPE_UNIT = quantify_rmr(TEST_RMD_NO_ECONOMIZER_TYPE)[
-    "ruleset_model_instances"
+    "ruleset_model_descriptions"
 ][0]
 
 

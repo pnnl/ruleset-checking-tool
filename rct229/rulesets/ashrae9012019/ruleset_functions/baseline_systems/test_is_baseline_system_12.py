@@ -11,7 +11,7 @@ from rct229.schema.validate import schema_validate_rmr
 
 SYS_12_TEST_RMD = {
     "id": "ASHRAE229 1",
-    "ruleset_model_instances": [
+    "ruleset_model_descriptions": [
         {
             "id": "RMD 1",
             "buildings": [
@@ -220,7 +220,7 @@ SYS_12_TEST_RMD = {
 
 SYS_12_TEST_UNMATCHED_RMD = {
     "id": "ASHRAE229 1",
-    "ruleset_model_instances": [
+    "ruleset_model_descriptions": [
         {
             "id": "RMD 1",
             "buildings": [
@@ -344,7 +344,7 @@ def test__TEST_RMD_baseline_system_12__is_unmatched_valid():
 def test__is_baseline_system_12__true():
     assert (
         is_baseline_system_12(
-            SYS_12_TEST_RMD["ruleset_model_instances"][0],
+            SYS_12_TEST_RMD["ruleset_model_descriptions"][0],
             "System 12",
             ["CAV Air Terminal 1"],
             ["Thermal Zone 1"],
@@ -357,7 +357,7 @@ def test__is_baseline_system_12__test_json_true():
     assert (
         is_baseline_system_12(
             load_system_test_file("System 12_CAV_SZ_HW.json")[
-                "ruleset_model_instances"
+                "ruleset_model_descriptions"
             ][0],
             "System 12",
             ["CAV Air Terminal 1"],
@@ -370,7 +370,7 @@ def test__is_baseline_system_12__test_json_true():
 def test__is_baseline_system_12A__true():
     assert (
         is_baseline_system_12(
-            SYS_12_TEST_RMD["ruleset_model_instances"][0],
+            SYS_12_TEST_RMD["ruleset_model_descriptions"][0],
             "System 12a",
             ["CAV Air Terminal 2"],
             ["Thermal Zone 2"],
@@ -383,7 +383,7 @@ def test__is_baseline_system_12A__test_json_true():
     assert (
         is_baseline_system_12(
             load_system_test_file("System 12a_CAV_SZ_HW.json")[
-                "ruleset_model_instances"
+                "ruleset_model_descriptions"
             ][0],
             "System 12",
             ["CAV Air Terminal 1"],
@@ -396,7 +396,7 @@ def test__is_baseline_system_12A__test_json_true():
 def test__is_baseline_system_12B__true():
     assert (
         is_baseline_system_12(
-            SYS_12_TEST_RMD["ruleset_model_instances"][0],
+            SYS_12_TEST_RMD["ruleset_model_descriptions"][0],
             "System 12b",
             ["CAV Air Terminal 3"],
             ["Thermal Zone 3"],
@@ -409,7 +409,7 @@ def test__is_baseline_system_12B__test_json_true():
     assert (
         is_baseline_system_12(
             load_system_test_file("System 12b_CAV_SZ_HW.json")[
-                "ruleset_model_instances"
+                "ruleset_model_descriptions"
             ][0],
             "System 12",
             ["CAV Air Terminal 1"],
@@ -422,7 +422,7 @@ def test__is_baseline_system_12B__test_json_true():
 def test__is_baseline_system_unmatched__true():
     assert (
         is_baseline_system_12(
-            SYS_12_TEST_UNMATCHED_RMD["ruleset_model_instances"][0],
+            SYS_12_TEST_UNMATCHED_RMD["ruleset_model_descriptions"][0],
             "System Type Unmatched",
             ["Air Terminal 12"],
             ["Thermal Zone 12"],

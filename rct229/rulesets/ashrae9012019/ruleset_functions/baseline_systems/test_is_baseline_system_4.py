@@ -11,7 +11,7 @@ from rct229.schema.validate import schema_validate_rmr
 
 SYS_4_TEST_RMD = {
     "id": "ASHRAE229 1",
-    "ruleset_model_instances": [
+    "ruleset_model_descriptions": [
         {
             "id": "RMD 1",
             "buildings": [
@@ -74,7 +74,7 @@ def test__TEST_RMD_baseline_system_4__is_valid():
 def test__is_baseline_system_4__true():
     assert (
         is_baseline_system_4(
-            SYS_4_TEST_RMD["ruleset_model_instances"][0],
+            SYS_4_TEST_RMD["ruleset_model_descriptions"][0],
             "System Type 4",
             ["Air Terminal"],
             ["Thermal Zone 1"],
@@ -86,7 +86,7 @@ def test__is_baseline_system_4__true():
 def test__is_baseline_system_4_testing_json__true():
     assert (
         is_baseline_system_4(
-            load_system_test_file("System_4_PSZ_HP.json")["ruleset_model_instances"][0],
+            load_system_test_file("System_4_PSZ_HP.json")["ruleset_model_descriptions"][0],
             "System Type 4",
             ["Air Terminal"],
             ["Thermal Zone 1"],

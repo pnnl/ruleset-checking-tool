@@ -36,7 +36,7 @@ class Section6Rule5(RuleDefinitionListIndexedBase):
             ruleset_section_title="Lighting",
             standard_section="Section G3.1-6 Modeling Requirements for the Baseline building",
             is_primary_rule=True,
-            list_path="ruleset_model_instances[0]",
+            list_path="ruleset_model_descriptions[0]",
             data_items={"is_leap_year_b": ("baseline", "calendar/is_leap_year")},
         )
 

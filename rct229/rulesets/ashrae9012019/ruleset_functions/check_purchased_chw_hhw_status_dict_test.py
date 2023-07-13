@@ -319,15 +319,15 @@ TEST_BUILDING_TERMINAL_SYS = {
 
 TEST_RMD_HEATING_SYS = {
     "id": "ASHRAE229",
-    "ruleset_model_instances": [TEST_BUILDING_HEATING_SYS],
+    "ruleset_model_descriptions": [TEST_BUILDING_HEATING_SYS],
 }
 TEST_RMD_TERMINAL_SYS = {
     "id": "ASHRAE229",
-    "ruleset_model_instances": [TEST_BUILDING_TERMINAL_SYS],
+    "ruleset_model_descriptions": [TEST_BUILDING_TERMINAL_SYS],
 }
 TEST_RMD_FALSE = {
     "id": "ASHRAE229",
-    "ruleset_model_instances": [TEST_BUILDING_NO_EXT_FLUID_SOURCE],
+    "ruleset_model_descriptions": [TEST_BUILDING_NO_EXT_FLUID_SOURCE],
 }
 
 
