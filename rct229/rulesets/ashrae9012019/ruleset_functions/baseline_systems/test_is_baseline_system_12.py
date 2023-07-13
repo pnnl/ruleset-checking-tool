@@ -80,12 +80,12 @@ SYS_12_TEST_RMD = {
                                     "id": "System 12",
                                     "cooling_system": {
                                         "id": "CHW Coil 1",
-                                        "cooling_system_type": "FLUID_LOOP",
+                                        "type": "FLUID_LOOP",
                                         "chilled_water_loop": "Secondary CHW Loop 1",
                                     },
                                     "heating_system": {
                                         "id": "Boiler Coil 1",
-                                        "heating_system_type": "FLUID_LOOP",
+                                        "type": "FLUID_LOOP",
                                         "hot_water_loop": "Boiler Loop 1",
                                     },
                                     "fan_system": {
@@ -99,12 +99,12 @@ SYS_12_TEST_RMD = {
                                     "id": "System 12a",
                                     "cooling_system": {
                                         "id": "CHW Coil 1",
-                                        "cooling_system_type": "FLUID_LOOP",
+                                        "type": "FLUID_LOOP",
                                         "chilled_water_loop": "Chilled Water Loop 1",
                                     },
                                     "heating_system": {
                                         "id": "Boiler Coil 1",
-                                        "heating_system_type": "FLUID_LOOP",
+                                        "type": "FLUID_LOOP",
                                         "hot_water_loop": "Boiler Loop 1",
                                     },
                                     "fan_system": {
@@ -118,12 +118,12 @@ SYS_12_TEST_RMD = {
                                     "id": "System 12b",
                                     "cooling_system": {
                                         "id": "CHW Coil 1",
-                                        "cooling_system_type": "FLUID_LOOP",
+                                        "type": "FLUID_LOOP",
                                         "chilled_water_loop": "Secondary CHW Loop 1",
                                     },
                                     "heating_system": {
                                         "id": "HHW Coil 1",
-                                        "heating_system_type": "FLUID_LOOP",
+                                        "type": "FLUID_LOOP",
                                         "hot_water_loop": "Purchased HW Loop 1",
                                     },
                                     "fan_system": {
@@ -137,12 +137,12 @@ SYS_12_TEST_RMD = {
                                     "id": "System 12c",
                                     "cooling_system": {
                                         "id": "CHW Coil 1",
-                                        "cooling_system_type": "FLUID_LOOP",
+                                        "type": "FLUID_LOOP",
                                         "chilled_water_loop": "Chilled Water Loop 1",
                                     },
                                     "heating_system": {
                                         "id": "HHW Coil 1",
-                                        "heating_system_type": "FLUID_LOOP",
+                                        "type": "FLUID_LOOP",
                                         "hot_water_loop": "Purchased HW Loop 1",
                                     },
                                     "fan_system": {
@@ -250,12 +250,12 @@ SYS_12_TEST_UNMATCHED_RMD = {
                                     "id": "System Type Unmatched",
                                     "cooling_system": {
                                         "id": "CHW Coil 1",
-                                        "cooling_system_type": "FLUID_LOOP",
+                                        "type": "FLUID_LOOP",
                                         "chilled_water_loop": "Secondary CHW Loop 1",
                                     },
                                     "heating_system": {
                                         "id": "HHW Coil 1",
-                                        "heating_system_type": "FLUID_LOOP",
+                                        "type": "FLUID_LOOP",
                                         "hot_water_loop": "HW Loop 1",
                                     },
                                     "fan_system": {

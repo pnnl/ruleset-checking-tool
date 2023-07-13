@@ -39,7 +39,7 @@ TEST_RMI_FIXED_TYPE = {
                             "id": "System 9",
                             "heating_system": {
                                 "id": "Furnace Coil 1",
-                                "heating_system_type": "FURNACE",
+                                "type": "FURNACE",
                                 "energy_source_type": "NATURAL_GAS",
                             },
                             "fan_system": {
@@ -95,7 +95,7 @@ TEST_RMI_ENTHALPY_TYPE = {
                             "id": "System 9",
                             "heating_system": {
                                 "id": "Furnace Coil 1",
-                                "heating_system_type": "FURNACE",
+                                "type": "FURNACE",
                                 "energy_source_type": "NATURAL_GAS",
                             },
                             "fan_system": {
@@ -151,7 +151,7 @@ TEST_RMI_NO_ECONOMIZER_TYPE = {
                             "id": "System 9",
                             "heating_system": {
                                 "id": "Furnace Coil 1",
-                                "heating_system_type": "FURNACE",
+                                "type": "FURNACE",
                                 "energy_source_type": "NATURAL_GAS",
                             },
                             "fan_system": {

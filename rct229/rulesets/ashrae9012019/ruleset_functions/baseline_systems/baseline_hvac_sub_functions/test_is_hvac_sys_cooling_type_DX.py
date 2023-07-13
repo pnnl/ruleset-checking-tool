@@ -16,14 +16,14 @@ TEST_RMD = {
                             "id": "hvac_1",
                             "cooling_system": {
                                 "id": "cooling_1",
-                                "cooling_system_type": "DIRECT_EXPANSION",
+                                "type": "DIRECT_EXPANSION",
                             },
                         },
                         {
                             "id": "hvac_2",
                             "cooling_system": {
                                 "id": "cooling_2",
-                                "cooling_system_type": "NON_MECHANICAL",
+                                "type": "NON_MECHANICAL",
                             },
                         },
                     ],

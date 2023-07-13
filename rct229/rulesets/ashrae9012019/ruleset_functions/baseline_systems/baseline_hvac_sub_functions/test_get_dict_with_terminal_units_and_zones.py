@@ -82,12 +82,12 @@ rmd_model = {
                                     "id": "System 7",
                                     "preheat_system": {
                                         "id": "Preheat Coil 1",
-                                        "heating_system_type": "FLUID_LOOP",
+                                        "type": "FLUID_LOOP",
                                         "hot_water_loop": "Boiler Loop 1",
                                     },
                                     "cooling_system": {
                                         "id": "Cooling Coil 1",
-                                        "cooling_system_type": "FLUID_LOOP",
+                                        "type": "FLUID_LOOP",
                                         "chilled_water_loop": "Chiller Loop 1",
                                     },
                                     "fan_system": {
@@ -101,12 +101,12 @@ rmd_model = {
                                     "id": "System 7a",
                                     "preheat_system": {
                                         "id": "Preheat Coil 2",
-                                        "heating_system_type": "FLUID_LOOP",
+                                        "type": "FLUID_LOOP",
                                         "hot_water_loop": "Boiler Loop 1",
                                     },
                                     "cooling_system": {
                                         "id": "Cooling Coil 2",
-                                        "cooling_system_type": "FLUID_LOOP",
+                                        "type": "FLUID_LOOP",
                                         "chilled_water_loop": "Purchased CHW Loop 1",
                                     },
                                     "fan_system": {
@@ -120,12 +120,12 @@ rmd_model = {
                                     "id": "System 7b",
                                     "preheat_system": {
                                         "id": "Preheat Coil 3",
-                                        "heating_system_type": "FLUID_LOOP",
+                                        "type": "FLUID_LOOP",
                                         "hot_water_loop": "Purchased HW Loop 1",
                                     },
                                     "cooling_system": {
                                         "id": "Cooling Coil 3",
-                                        "cooling_system_type": "FLUID_LOOP",
+                                        "type": "FLUID_LOOP",
                                         "chilled_water_loop": "Chiller Loop 1",
                                     },
                                     "fan_system": {
@@ -139,12 +139,12 @@ rmd_model = {
                                     "id": "System 7c",
                                     "preheat_system": {
                                         "id": "Preheat Coil 4",
-                                        "heating_system_type": "FLUID_LOOP",
+                                        "type": "FLUID_LOOP",
                                         "hot_water_loop": "Purchased HW Loop 1",
                                     },
                                     "cooling_system": {
                                         "id": "Cooling Coil 4",
-                                        "cooling_system_type": "FLUID_LOOP",
+                                        "type": "FLUID_LOOP",
                                         "chilled_water_loop": "Purchased CHW Loop 1",
                                     },
                                     "fan_system": {

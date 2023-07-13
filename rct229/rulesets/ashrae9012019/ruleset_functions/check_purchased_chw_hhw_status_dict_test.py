@@ -32,12 +32,12 @@ TEST_BUILDING_NO_EXT_FLUID_SOURCE = {
                             "id": "System 12",
                             "cooling_system": {
                                 "id": "CHW Coil 1",
-                                "cooling_system_type": "FLUID_LOOP",
+                                "type": "FLUID_LOOP",
                                 "chilled_water_loop": "Chilled Water Loop 1",
                             },
                             "heating_system": {
                                 "id": "Boiler Coil 1",
-                                "heating_system_type": "FLUID_LOOP",
+                                "type": "FLUID_LOOP",
                                 "hot_water_loop": "Boiler Loop 1",
                             },
                             "fan_system": {
@@ -115,12 +115,12 @@ TEST_BUILDING_HEATING_SYS = {
                             "id": "Testing system",
                             "cooling_system": {
                                 "id": "CHW Coil 1",
-                                "cooling_system_type": "FLUID_LOOP",
+                                "type": "FLUID_LOOP",
                                 "chilled_water_loop": "Chilled Water Loop 1",
                             },
                             "heating_system": {
                                 "id": "Boiler Coil 1",
-                                "heating_system_type": "FLUID_LOOP",
+                                "type": "FLUID_LOOP",
                                 "hot_water_loop": "Boiler Loop 1",
                             },
                             "fan_system": {
@@ -134,12 +134,12 @@ TEST_BUILDING_HEATING_SYS = {
                             "id": "Testing system2",
                             "cooling_system": {
                                 "id": "CHW Coil 1",
-                                "cooling_system_type": "FLUID_LOOP",
+                                "type": "FLUID_LOOP",
                                 "chilled_water_loop": "Chilled Water Loop 1",
                             },
                             "preheat_system": {
                                 "id": "Preheat Coil 1",
-                                "heating_system_type": "FLUID_LOOP",
+                                "type": "FLUID_LOOP",
                                 "hot_water_loop": "Preheat Loop 1",
                             },
                             "fan_system": {
@@ -251,12 +251,12 @@ TEST_BUILDING_TERMINAL_SYS = {
                             "id": "Testing system",
                             "cooling_system": {
                                 "id": "CHW Coil 1",
-                                "cooling_system_type": "FLUID_LOOP",
+                                "type": "FLUID_LOOP",
                                 "chilled_water_loop": "Chilled Water Loop TESTING",  # chilled water loop is NOT included in the 'external_fluid_source' and 'child_loops' intentionally
                             },
                             "preheat_system": {
                                 "id": "Preheat Coil 1",
-                                "heating_system_type": "FLUID_LOOP",
+                                "type": "FLUID_LOOP",
                                 "hot_water_loop": "Preheat Loop TESTING",  # hot water loop is NOT included in the 'external_fluid_source' and 'child_loops' intentionally
                             },
                             "fan_system": {

@@ -41,11 +41,11 @@ SYS_2_TEST_RMD = {
                                     "id": "PTHP 1",
                                     "cooling_system": {
                                         "id": "HP Cooling Coil 1",
-                                        "cooling_system_type": "DIRECT_EXPANSION",
+                                        "type": "DIRECT_EXPANSION",
                                     },
                                     "heating_system": {
                                         "id": "HP Heating Coil 1",
-                                        "heating_system_type": "HEAT_PUMP",
+                                        "type": "HEAT_PUMP",
                                     },
                                     "fan_system": {
                                         "id": "CAV Fan System 1",

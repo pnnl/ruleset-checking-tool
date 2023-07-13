@@ -58,11 +58,11 @@ SYS_5_TEST_RMD = {
                                     "id": "System 5",
                                     "cooling_system": {
                                         "id": "DX Coil 1",
-                                        "cooling_system_type": "DIRECT_EXPANSION",
+                                        "type": "DIRECT_EXPANSION",
                                     },
                                     "preheat_system": {
                                         "id": "Preheat Coil 1",
-                                        "heating_system_type": "FLUID_LOOP",
+                                        "type": "FLUID_LOOP",
                                         "hot_water_loop": "Boiler Loop 1",
                                     },
                                     "fan_system": {
@@ -76,11 +76,11 @@ SYS_5_TEST_RMD = {
                                     "id": "System 5B",
                                     "cooling_system": {
                                         "id": "DX Coil 2",
-                                        "cooling_system_type": "DIRECT_EXPANSION",
+                                        "type": "DIRECT_EXPANSION",
                                     },
                                     "preheat_system": {
                                         "id": "Preheat Coil 2",
-                                        "heating_system_type": "FLUID_LOOP",
+                                        "type": "FLUID_LOOP",
                                         "hot_water_loop": "Purchased HW Loop 1",
                                     },
                                     "fan_system": {
@@ -158,11 +158,11 @@ SYS_5_TEST_UNMATCHED_RMD = {
                                     "id": "System 5 Unmatched",
                                     "cooling_system": {
                                         "id": "DX Coil 1",
-                                        "cooling_system_type": "DIRECT_EXPANSION",
+                                        "type": "DIRECT_EXPANSION",
                                     },
                                     "preheat_system": {
                                         "id": "Preheat Coil 1",
-                                        "heating_system_type": "FLUID_LOOP",
+                                        "type": "FLUID_LOOP",
                                         "hot_water_loop": "Preheat Loop 1",
                                     },
                                     "fan_system": {

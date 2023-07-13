@@ -86,11 +86,11 @@ SYS_10_SECOND_LOGIC_TEST_RMD = {
                                     "id": "System 10",
                                     "cooling_system": {
                                         "id": "Cooling Coil 1",
-                                        "cooling_system_type": "NONE",
+                                        "type": "NONE",
                                     },
                                     "heating_system": {
                                         "id": "HHW Coil 1A",
-                                        "heating_system_type": "ELECTRIC_RESISTANCE",
+                                        "type": "ELECTRIC_RESISTANCE",
                                     },
                                     "fan_system": {
                                         "id": "VAV Fan System 1",

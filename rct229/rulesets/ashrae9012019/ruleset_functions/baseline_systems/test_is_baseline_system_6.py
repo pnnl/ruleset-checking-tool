@@ -65,11 +65,11 @@ SYS_6_TEST_RMD = {
                                     "id": "System 6",
                                     "cooling_system": {
                                         "id": "DX Coil 1",
-                                        "cooling_system_type": "DIRECT_EXPANSION",
+                                        "type": "DIRECT_EXPANSION",
                                     },
                                     "preheat_system": {
                                         "id": "Preheat Coil 1",
-                                        "heating_system_type": "ELECTRIC_RESISTANCE",
+                                        "type": "ELECTRIC_RESISTANCE",
                                     },
                                     "fan_system": {
                                         "id": "VAV Fan System 1",
@@ -82,11 +82,11 @@ SYS_6_TEST_RMD = {
                                     "id": "System 6B",
                                     "cooling_system": {
                                         "id": "DX Coil 2",
-                                        "cooling_system_type": "DIRECT_EXPANSION",
+                                        "type": "DIRECT_EXPANSION",
                                     },
                                     "preheat_system": {
                                         "id": "Preheat Coil 2",
-                                        "heating_system_type": "FLUID_LOOP",
+                                        "type": "FLUID_LOOP",
                                         "hot_water_loop": "Purchased HW Loop 1",
                                     },
                                     "fan_system": {
@@ -157,11 +157,11 @@ SYS_6_TEST_UNMATCHED_RMD = {
                                     "id": "System 6 Unmatched",
                                     "cooling_system": {
                                         "id": "DX Coil 2",
-                                        "cooling_system_type": "DIRECT_EXPANSION",
+                                        "type": "DIRECT_EXPANSION",
                                     },
                                     "preheat_system": {
                                         "id": "Preheat Coil 3",
-                                        "heating_system_type": "OTHER",
+                                        "type": "OTHER",
                                     },
                                     "fan_system": {
                                         "id": "VAV Fan System 3",

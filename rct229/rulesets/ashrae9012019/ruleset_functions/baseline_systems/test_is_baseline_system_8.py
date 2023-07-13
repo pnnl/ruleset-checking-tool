@@ -96,12 +96,12 @@ SYS_8_TEST_RMD = {
                                     "id": "System 8",
                                     "cooling_system": {
                                         "id": "CHW Coil 1",
-                                        "cooling_system_type": "FLUID_LOOP",
+                                        "type": "FLUID_LOOP",
                                         "chilled_water_loop": "Secondary CHW Loop 1",
                                     },
                                     "preheat_system": {
                                         "id": "Preheat Coil 1",
-                                        "heating_system_type": "ELECTRIC_RESISTANCE",
+                                        "type": "ELECTRIC_RESISTANCE",
                                     },
                                     "fan_system": {
                                         "id": "VAV Fan System 8",
@@ -114,12 +114,12 @@ SYS_8_TEST_RMD = {
                                     "id": "System 8a",
                                     "cooling_system": {
                                         "id": "CHW Coil 8a",
-                                        "cooling_system_type": "FLUID_LOOP",
+                                        "type": "FLUID_LOOP",
                                         "chilled_water_loop": "Purchased Chilled Water Loop 1",
                                     },
                                     "preheat_system": {
                                         "id": "Preheat Coil 8a",
-                                        "heating_system_type": "ELECTRIC_RESISTANCE",
+                                        "type": "ELECTRIC_RESISTANCE",
                                     },
                                     "fan_system": {
                                         "id": "VAV Fan System 8a",
@@ -132,12 +132,12 @@ SYS_8_TEST_RMD = {
                                     "id": "System 8b",
                                     "cooling_system": {
                                         "id": "CHW Coil 8b",
-                                        "cooling_system_type": "FLUID_LOOP",
+                                        "type": "FLUID_LOOP",
                                         "chilled_water_loop": "Secondary CHW Loop 1",
                                     },
                                     "preheat_system": {
                                         "id": "Preheat Coil 8b",
-                                        "heating_system_type": "FLUID_LOOP",
+                                        "type": "FLUID_LOOP",
                                         "hot_water_loop": "Purchased HW Loop 1",
                                     },
                                     "fan_system": {
@@ -151,12 +151,12 @@ SYS_8_TEST_RMD = {
                                     "id": "System 8c",
                                     "cooling_system": {
                                         "id": "CHW Coil 8C",
-                                        "cooling_system_type": "FLUID_LOOP",
+                                        "type": "FLUID_LOOP",
                                         "chilled_water_loop": "Purchased Chilled Water Loop 1",
                                     },
                                     "preheat_system": {
                                         "id": "Preheat Coil 8C",
-                                        "heating_system_type": "FLUID_LOOP",
+                                        "type": "FLUID_LOOP",
                                         "hot_water_loop": "Purchased HW Loop 1",
                                     },
                                     "fan_system": {
@@ -314,12 +314,12 @@ SYS_8_TEST_UNMATCHED_RMD = {
                                     "id": "System Type Unmatched 1",
                                     "cooling_system": {
                                         "id": "CHW Coil 1",
-                                        "cooling_system_type": "FLUID_LOOP",
+                                        "type": "FLUID_LOOP",
                                         "chilled_water_loop": "Chilled Water Loop 1",
                                     },
                                     "preheat_system": {
                                         "id": "Preheat Coil 1",
-                                        "heating_system_type": "ELECTRIC_RESISTANCE",
+                                        "type": "ELECTRIC_RESISTANCE",
                                     },
                                     "fan_system": {
                                         "id": "VAV Fan System 1",
@@ -332,12 +332,12 @@ SYS_8_TEST_UNMATCHED_RMD = {
                                     "id": "System Type Unmatched 2",
                                     "cooling_system": {
                                         "id": "CHW Coil 8b",
-                                        "cooling_system_type": "FLUID_LOOP",
+                                        "type": "FLUID_LOOP",
                                         "chilled_water_loop": "Secondary CHW Loop 1",
                                     },
                                     "preheat_system": {
                                         "id": "Preheat Coil 8b",
-                                        "heating_system_type": "OTHER",
+                                        "type": "OTHER",
                                     },
                                     "fan_system": {
                                         "id": "VAV Fan System 8b",
@@ -350,12 +350,12 @@ SYS_8_TEST_UNMATCHED_RMD = {
                                     "id": "System Type Unmatched 3",
                                     "cooling_system": {
                                         "id": "CHW Coil 8b",
-                                        "cooling_system_type": "FLUID_LOOP",
+                                        "type": "FLUID_LOOP",
                                         "chilled_water_loop": "Secondary CHW Loop 1",
                                     },
                                     "preheat_system": {
                                         "id": "Preheat Coil 3",
-                                        "heating_system_type": "FLUID_LOOP",
+                                        "type": "FLUID_LOOP",
                                         "hot_water_loop": "Purchased HW Loop 1",
                                     },
                                     "fan_system": {
@@ -369,12 +369,12 @@ SYS_8_TEST_UNMATCHED_RMD = {
                                     "id": "System Type Unmatched 4",
                                     "cooling_system": {
                                         "id": "CHW Coil 4",
-                                        "cooling_system_type": "FLUID_LOOP",
+                                        "type": "FLUID_LOOP",
                                         "chilled_water_loop": "Chilled Water Loop 1",
                                     },
                                     "preheat_system": {
                                         "id": "Preheat Coil 4",
-                                        "heating_system_type": "FLUID_LOOP",
+                                        "type": "FLUID_LOOP",
                                         "hot_water_loop": "Purchased HW Loop 1",
                                     },
                                     "fan_system": {

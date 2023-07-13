@@ -20,21 +20,21 @@ TEST_RMD_P_HEATING_SYSTEM = {
                                     "id": "hvac_1",
                                     "heating_system": {
                                         "id": "heating_system 1",
-                                        "heating_system_type": "HEAT_PUMP",
+                                        "type": "HEAT_PUMP",
                                     },
                                 },
                                 {
                                     "id": "hvac_2",
                                     "heating_system": {
                                         "id": "heating_system 2",
-                                        "heating_system_type": "HEAT_PUMP",
+                                        "type": "HEAT_PUMP",
                                     },
                                 },
                                 {
                                     "id": "hvac_3",
                                     "heating_system": {
                                         "id": "heating_system 3",
-                                        "heating_system_type": "HEAT_PUMP",
+                                        "type": "HEAT_PUMP",
                                     },
                                 },
                             ],
@@ -68,14 +68,14 @@ TEST_RMD_U_HEATING_SYSTEM = {
                                     "id": "hvac_2",
                                     "heating_system": {
                                         "id": "heating_system 2",
-                                        "heating_system_type": "NONE",
+                                        "type": "NONE",
                                     },
                                 },
                                 {
                                     "id": "hvac_3",
                                     "heating_system": {
                                         "id": "heating_system 3",
-                                        "heating_system_type": "HEAT_PUMP",
+                                        "type": "HEAT_PUMP",
                                     },
                                 },
                             ],
@@ -103,21 +103,21 @@ TEST_RMD_P_PREHEAT_SYSTEM = {
                                     "id": "hvac_1",
                                     "preheat_system": {
                                         "id": "preheat_system 1",
-                                        "heating_system_type": "HEAT_PUMP",
+                                        "type": "HEAT_PUMP",
                                     },
                                 },
                                 {
                                     "id": "hvac_2",
                                     "preheat_system": {
                                         "id": "preheat_system 2",
-                                        "heating_system_type": "HEAT_PUMP",
+                                        "type": "HEAT_PUMP",
                                     },
                                 },
                                 {
                                     "id": "hvac_3",
                                     "preheat_system": {
                                         "id": "preheat_system 3",
-                                        "heating_system_type": "HEAT_PUMP",
+                                        "type": "HEAT_PUMP",
                                     },
                                 },
                             ],
@@ -151,14 +151,14 @@ TEST_RMD_U_PREHEAT_SYSTEM = {
                                     "id": "hvac_2",
                                     "preheat_system": {
                                         "id": "preheat_system 2",
-                                        "heating_system_type": "NONE",
+                                        "type": "NONE",
                                     },
                                 },
                                 {
                                     "id": "hvac_3",
                                     "preheat_system": {
                                         "id": "preheat_system 3",
-                                        "heating_system_type": "HEAT_PUMP",
+                                        "type": "HEAT_PUMP",
                                     },
                                 },
                             ],

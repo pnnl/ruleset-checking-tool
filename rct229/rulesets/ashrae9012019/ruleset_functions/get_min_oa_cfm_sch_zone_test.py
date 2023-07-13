@@ -39,7 +39,7 @@ def create_flexible_schedule_length(schedule_length):
                                 "preheat_system": {
                                     "id": "preheat_system",
                                     "hot_water_loop": "HW_Loop_1",
-                                    "heating_system_type": "FLUID_LOOP",
+                                    "type": "FLUID_LOOP",
                                 },
                             }
                         ],

@@ -17,7 +17,7 @@ TEST_RMD = {
                             "preheat_system": {
                                 "id": "preheat_system",
                                 "hot_water_loop": "HW_Loop_1",
-                                "heating_system_type": "FLUID_LOOP",
+                                "type": "FLUID_LOOP",
                             },
                         },
                         {
@@ -25,7 +25,7 @@ TEST_RMD = {
                             "id": "hvac_2",
                             "preheat_system": {
                                 "id": "preheat_system",
-                                "heating_system_type": "ELECTRIC_RESISTANCE",
+                                "type": "ELECTRIC_RESISTANCE",
                             },
                         },
                         {

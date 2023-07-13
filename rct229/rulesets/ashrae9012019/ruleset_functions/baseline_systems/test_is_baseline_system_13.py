@@ -54,12 +54,12 @@ SYS_13_TEST_RMD = {
                                     "id": "System 13",
                                     "cooling_system": {
                                         "id": "CHW Coil 1",
-                                        "cooling_system_type": "FLUID_LOOP",
+                                        "type": "FLUID_LOOP",
                                         "chilled_water_loop": "Secondary CHW Loop 1",
                                     },
                                     "heating_system": {
                                         "id": "Heating Coil 1",
-                                        "heating_system_type": "ELECTRIC_RESISTANCE",
+                                        "type": "ELECTRIC_RESISTANCE",
                                     },
                                     "fan_system": {
                                         "id": "CAV Fan System 1",
@@ -72,12 +72,12 @@ SYS_13_TEST_RMD = {
                                     "id": "System 13a",
                                     "cooling_system": {
                                         "id": "CHW Coil 1",
-                                        "cooling_system_type": "FLUID_LOOP",
+                                        "type": "FLUID_LOOP",
                                         "chilled_water_loop": "Purchased CHW Loop 1",
                                     },
                                     "heating_system": {
                                         "id": "Heating Coil 1",
-                                        "heating_system_type": "ELECTRIC_RESISTANCE",
+                                        "type": "ELECTRIC_RESISTANCE",
                                     },
                                     "fan_system": {
                                         "id": "CAV Fan System 1",
@@ -155,12 +155,12 @@ SYS_13_TEST_UNMATCHED_RMD = {
                                     "id": "System Type Unmatched",
                                     "cooling_system": {
                                         "id": "CHW Coil 1",
-                                        "cooling_system_type": "FLUID_LOOP",
+                                        "type": "FLUID_LOOP",
                                         "chilled_water_loop": "CHW Loop 1",
                                     },
                                     "heating_system": {
                                         "id": "Heating Coil 1",
-                                        "heating_system_type": "ELECTRIC_RESISTANCE",
+                                        "type": "ELECTRIC_RESISTANCE",
                                     },
                                     "fan_system": {
                                         "id": "CAV Fan System 1",

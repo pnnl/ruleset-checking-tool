@@ -20,21 +20,21 @@ TEST_RMD_P_COOLING_SYSTEM = {
                                     "id": "hvac_1",
                                     "cooling_system": {
                                         "id": "cooling_system 1",
-                                        "cooling_system_type": "DIRECT_EXPANSION",
+                                        "type": "DIRECT_EXPANSION",
                                     },
                                 },
                                 {
                                     "id": "hvac_2",
                                     "cooling_system": {
                                         "id": "cooling_system 2",
-                                        "cooling_system_type": "DIRECT_EXPANSION",
+                                        "type": "DIRECT_EXPANSION",
                                     },
                                 },
                                 {
                                     "id": "hvac_3",
                                     "cooling_system": {
                                         "id": "cooling_system 3",
-                                        "cooling_system_type": "DIRECT_EXPANSION",
+                                        "type": "DIRECT_EXPANSION",
                                     },
                                 },
                             ],
@@ -68,14 +68,14 @@ TEST_RMD_U_COOLING_SYSTEM = {
                                     "id": "hvac_2",
                                     "cooling_system": {
                                         "id": "cooling_system 2",
-                                        "cooling_system_type": "NONE",
+                                        "type": "NONE",
                                     },
                                 },
                                 {
                                     "id": "hvac_3",
                                     "cooling_system": {
                                         "id": "cooling_system 3",
-                                        "cooling_system_type": "DIRECT_EXPANSION",
+                                        "type": "DIRECT_EXPANSION",
                                     },
                                 },
                             ],

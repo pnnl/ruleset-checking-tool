@@ -95,11 +95,11 @@ TEST_RMD = {
                             "id": "PTAC 1",
                             "cooling_system": {
                                 "id": "DX Coil 1",
-                                "cooling_system_type": "DIRECT_EXPANSION",
+                                "type": "DIRECT_EXPANSION",
                             },
                             "heating_system": {
                                 "id": "HHW Coil 1",
-                                "heating_system_type": "FLUID_LOOP",
+                                "type": "FLUID_LOOP",
                                 "hot_water_loop": "Boiler Loop 1",
                             },
                             "fan_system": {
@@ -147,11 +147,11 @@ TEST_RMD = {
                             "id": "PTAC 2",
                             "cooling_system": {
                                 "id": "DX Coil 2",
-                                "cooling_system_type": "DIRECT_EXPANSION",
+                                "type": "DIRECT_EXPANSION",
                             },
                             "heating_system": {
                                 "id": "HHW Coil 2",
-                                "heating_system_type": "FLUID_LOOP",
+                                "type": "FLUID_LOOP",
                                 "hot_water_loop": "Boiler Loop 1",
                             },
                             "fan_system": {
@@ -199,11 +199,11 @@ TEST_RMD = {
                             "id": "PTAC 3",
                             "cooling_system": {
                                 "id": "DX Coil 3",
-                                "cooling_system_type": "DIRECT_EXPANSION",
+                                "type": "DIRECT_EXPANSION",
                             },
                             "heating_system": {
                                 "id": "HHW Coil 3",
-                                "heating_system_type": "FLUID_LOOP",
+                                "type": "FLUID_LOOP",
                                 "hot_water_loop": "Boiler Loop 1",
                             },
                         },

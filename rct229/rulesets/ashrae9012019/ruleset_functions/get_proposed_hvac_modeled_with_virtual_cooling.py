@@ -39,13 +39,13 @@ def get_proposed_hvac_modeled_with_virtual_cooling(rmi_u, rmi_p):
         "$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*]",
         rmi_p,
     ):
-        cooling_system_type_p = find_one("$.cooling_system.cooling_system_type", hvac_p)
+        cooling_system_type_p = find_one("$.cooling_system.type", hvac_p)
         if cooling_system_type_p in APPLICABLE_COOLING_SYSTEM:
             # cooling system type is found, the hvac_p must have a cooling system
             cooling_system_id = hvac_p["cooling_system"]["id"]
             cooling_system_type_u = find_one(
                 f"$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*][?("
-                f'@.cooling_system.id="{cooling_system_id}")].cooling_system.cooling_system_type',
+                f'@.cooling_system.id="{cooling_system_id}")].cooling_system.type',
                 rmi_u,
             )
             if (

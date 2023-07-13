@@ -80,11 +80,11 @@ SYS_3_TEST_RMD = {
                                     "id": "System Type 3",
                                     "cooling_system": {
                                         "id": "DX Coil 3",
-                                        "cooling_system_type": "DIRECT_EXPANSION",
+                                        "type": "DIRECT_EXPANSION",
                                     },
                                     "heating_system": {
                                         "id": "Furnace Coil 3",
-                                        "heating_system_type": "FURNACE",
+                                        "type": "FURNACE",
                                     },
                                     "fan_system": {
                                         "id": "CAV Fan System 3",
@@ -96,12 +96,12 @@ SYS_3_TEST_RMD = {
                                     "id": "System Type 3a",
                                     "cooling_system": {
                                         "id": "Cooling Coil 3a",
-                                        "cooling_system_type": "FLUID_LOOP",
+                                        "type": "FLUID_LOOP",
                                         "chilled_water_loop": "Purchased CHW Loop 1",
                                     },
                                     "heating_system": {
                                         "id": "Furnace Coil 3a",
-                                        "heating_system_type": "FURNACE",
+                                        "type": "FURNACE",
                                     },
                                     "fan_system": {
                                         "id": "CAV Fan System 3a",
@@ -113,11 +113,11 @@ SYS_3_TEST_RMD = {
                                     "id": "System Type 3b",
                                     "cooling_system": {
                                         "id": "DX Coil 3b",
-                                        "cooling_system_type": "DIRECT_EXPANSION",
+                                        "type": "DIRECT_EXPANSION",
                                     },
                                     "heating_system": {
                                         "id": "Heating Coil 3b",
-                                        "heating_system_type": "FLUID_LOOP",
+                                        "type": "FLUID_LOOP",
                                         "hot_water_loop": "Purchased HW Loop 1",
                                     },
                                     "fan_system": {
@@ -130,12 +130,12 @@ SYS_3_TEST_RMD = {
                                     "id": "System Type 3c",
                                     "cooling_system": {
                                         "id": "Cooling Coil 3c",
-                                        "cooling_system_type": "FLUID_LOOP",
+                                        "type": "FLUID_LOOP",
                                         "chilled_water_loop": "Purchased CHW Loop 1",
                                     },
                                     "heating_system": {
                                         "id": "Heating Coil 3c",
-                                        "heating_system_type": "FLUID_LOOP",
+                                        "type": "FLUID_LOOP",
                                         "hot_water_loop": "Purchased HW Loop 1",
                                     },
                                     "fan_system": {
@@ -208,12 +208,12 @@ SYS_3_TEST_UNMATCHED_RMD = {
                                     "id": "System Type Unmatched",
                                     "cooling_system": {
                                         "id": "Cooling Coil",
-                                        "cooling_system_type": "FLUID_LOOP",
+                                        "type": "FLUID_LOOP",
                                         "chilled_water_loop": "Purchased CHW Loop 1",
                                     },
                                     "heating_system": {
                                         "id": "Heating Coil",
-                                        "heating_system_type": "OTHER",
+                                        "type": "OTHER",
                                     },
                                     "fan_system": {
                                         "id": "CAV Fan System",

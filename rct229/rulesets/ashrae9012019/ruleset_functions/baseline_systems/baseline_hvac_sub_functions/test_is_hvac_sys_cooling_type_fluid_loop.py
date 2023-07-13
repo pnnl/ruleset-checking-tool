@@ -16,7 +16,7 @@ TEST_RMD = {
                             "id": "hvac_1",
                             "cooling_system": {
                                 "id": "cooling_1",
-                                "cooling_system_type": "FLUID_LOOP",
+                                "type": "FLUID_LOOP",
                                 "chilled_water_loop": "CHW_Loop_1",
                             },
                         },
@@ -25,7 +25,7 @@ TEST_RMD = {
                             "id": "hvac_2",
                             "cooling_system": {
                                 "id": "cooling_2",
-                                "cooling_system_type": "DIRECT_EXPANSION",
+                                "type": "DIRECT_EXPANSION",
                             },
                         },
                         {

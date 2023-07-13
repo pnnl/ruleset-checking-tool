@@ -122,7 +122,7 @@ class Section23Rule16(RuleDefinitionListIndexedBase):
                 required_fields={
                     "$": ["id", "preheat_system"],
                     "preheat_system": [
-                        "heating_system_type",
+                        "type",
                         "hot_water_loop",
                         "heating_coil_setpoint",
                     ],
@@ -136,7 +136,7 @@ class Section23Rule16(RuleDefinitionListIndexedBase):
             preheat_system_b = heating_ventilating_air_conditioning_systems_b[
                 "preheat_system"
             ]
-            heating_system_type = preheat_system_b["heating_system_type"]
+            heating_system_type = preheat_system_b["type"]
             hot_water_loop_type = data["hot_water_loop_type_dict"][
                 preheat_system_b["hot_water_loop"]
             ]

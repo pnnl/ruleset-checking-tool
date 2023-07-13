@@ -16,7 +16,7 @@ TEST_RMD = {
                             "id": "hvac_1",
                             "heating_system": {
                                 "id": "heating_1",
-                                "heating_system_type": "ELECTRIC_RESISTANCE",
+                                "type": "ELECTRIC_RESISTANCE",
                             },
                         },
                         {
@@ -24,7 +24,7 @@ TEST_RMD = {
                             "id": "hvac_2",
                             "heating_system": {
                                 "id": "heating_2",
-                                "heating_system_type": "FLUID_LOOP",
+                                "type": "FLUID_LOOP",
                                 "hot_water_loop": "HW_Loop_2",
                             },
                         },
