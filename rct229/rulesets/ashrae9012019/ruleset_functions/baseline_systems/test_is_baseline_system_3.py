@@ -159,7 +159,7 @@ SYS_3_TEST_RMD = {
                     "type": "COOLING",
                 },
             ],
-            "external_fluid_source": [
+            "external_fluid_sources": [
                 {
                     "id": "Purchased HW",
                     "loop": "Purchased HW Loop 1",
@@ -232,7 +232,7 @@ SYS_3_TEST_UNMATCHED_RMD = {
                     "type": "COOLING",
                 },
             ],
-            "external_fluid_source": [
+            "external_fluid_sources": [
                 {
                     "id": "Purchased CHW",
                     "loop": "Purchased CHW Loop 1",

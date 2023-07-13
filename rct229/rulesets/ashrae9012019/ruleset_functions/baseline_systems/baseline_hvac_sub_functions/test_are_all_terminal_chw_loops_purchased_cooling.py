@@ -28,7 +28,7 @@ TEST_RMD = {
         {"id": "HW_Loop_1", "type": "HEATING"},
         {"id": "CHW_Loop_1", "type": "COOLING"},
     ],
-    "external_fluid_source": [
+    "external_fluid_sources": [
         {"id": "fluid_loop_1", "loop": "HW_Loop_1", "type": "HOT_WATER"},
         {"id": "fluid_loop_2", "loop": "ST_Loop_1", "type": "STEAM"},
         {"id": "fluid_loop_3", "loop": "CHW_Loop_1", "type": "CHILLED_WATER"},

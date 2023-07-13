@@ -101,7 +101,7 @@ SYS_6_TEST_RMD = {
                     ],
                 }
             ],
-            "external_fluid_source": [
+            "external_fluid_sources": [
                 {
                     "id": "Purchased HW 1",
                     "loop": "Purchased HW Loop 1",

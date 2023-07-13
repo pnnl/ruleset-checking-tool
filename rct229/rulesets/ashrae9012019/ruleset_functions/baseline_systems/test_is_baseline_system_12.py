@@ -164,7 +164,7 @@ SYS_12_TEST_RMD = {
                     "energy_source_type": "NATURAL_GAS",
                 }
             ],
-            "external_fluid_source": [
+            "external_fluid_sources": [
                 {
                     "id": "Purchased CW 1",
                     "loop": "Chilled Water Loop 1",
@@ -277,7 +277,7 @@ SYS_12_TEST_UNMATCHED_RMD = {
                     "energy_source_type": "NATURAL_GAS",
                 }
             ],
-            "external_fluid_source": [
+            "external_fluid_sources": [
                 {
                     "id": "Purchased CW 1",
                     "loop": "Chilled Water Loop 1",

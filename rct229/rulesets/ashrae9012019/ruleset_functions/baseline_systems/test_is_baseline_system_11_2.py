@@ -107,7 +107,7 @@ SYS_11_2_TEST_RMD = {
                     "energy_source_type": "ELECTRICITY",
                 }
             ],
-            "external_fluid_source": [
+            "external_fluid_sources": [
                 {
                     "id": "Purchased CHW 1",
                     "loop": "Purchased CHW Loop 1",

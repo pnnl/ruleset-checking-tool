@@ -162,7 +162,7 @@ SYS_11_1_TEST_RMD = {
                     "energy_source_type": "ELECTRICITY",
                 }
             ],
-            "external_fluid_source": [
+            "external_fluid_sources": [
                 {
                     "id": "Purchased HW 1",
                     "loop": "Purchased HW Loop 1",
@@ -292,7 +292,7 @@ SYS_11_1_TEST_UNMATCHED_RMD = {
                     "energy_source_type": "ELECTRICITY",
                 }
             ],
-            "external_fluid_source": [
+            "external_fluid_sources": [
                 {
                     "id": "Purchased HW 1",
                     "loop": "Purchased HW Loop 1",

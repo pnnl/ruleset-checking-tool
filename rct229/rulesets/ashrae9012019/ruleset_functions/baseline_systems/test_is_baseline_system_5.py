@@ -113,7 +113,7 @@ SYS_5_TEST_RMD = {
                 {"id": "Boiler Loop 1", "type": "HEATING"},
                 {"id": "Purchased HW Loop 1", "type": "HEATING"},
             ],
-            "external_fluid_source": [
+            "external_fluid_sources": [
                 {
                     "id": "Purchased HW 1",
                     "loop": "Purchased HW Loop 1",

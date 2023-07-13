@@ -207,7 +207,7 @@ rmd_model = {
                     "type": "COOLING",
                 },
             ],
-            "external_fluid_source": [
+            "external_fluid_sources": [
                 {
                     "id": "Purchased HW",
                     "loop": "Purchased HW Loop 1",

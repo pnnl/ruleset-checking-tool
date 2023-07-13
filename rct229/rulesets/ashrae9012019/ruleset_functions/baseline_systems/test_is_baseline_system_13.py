@@ -174,7 +174,7 @@ SYS_13_TEST_UNMATCHED_RMD = {
                     ],
                 }
             ],
-            # "external_fluid_source": [
+            # "external_fluid_sources": [
             #     {
             #         "id": "Purchased CW 1",
             #         "loop": "Purchased CHW Loop 1",

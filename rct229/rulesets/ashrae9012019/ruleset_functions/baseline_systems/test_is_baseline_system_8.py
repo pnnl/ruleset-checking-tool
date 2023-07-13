@@ -178,7 +178,7 @@ SYS_8_TEST_RMD = {
                     "energy_source_type": "NATURAL_GAS",
                 }
             ],
-            "external_fluid_source": [
+            "external_fluid_sources": [
                 {
                     "id": "Purchased CW 1",
                     "loop": "Purchased Chilled Water Loop 1",
@@ -396,7 +396,7 @@ SYS_8_TEST_UNMATCHED_RMD = {
                     "energy_source_type": "NATURAL_GAS",
                 }
             ],
-            "external_fluid_source": [
+            "external_fluid_sources": [
                 {
                     "id": "Purchased HW 1",
                     "loop": "Purchased HW Loop 1",

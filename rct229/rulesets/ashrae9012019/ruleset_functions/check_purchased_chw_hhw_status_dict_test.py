@@ -51,7 +51,7 @@ TEST_BUILDING_NO_EXT_FLUID_SOURCE = {
                 }
             ],
         }
-    ],  # omit 'external_fluid_source' intentionally to obtain 'purchased_cooling' and 'purchased_cooling's False result
+    ],  # omit 'external_fluid_sources' intentionally to obtain 'purchased_cooling' and 'purchased_cooling's False result
     "boilers": [
         {
             "id": "Boiler 1",
@@ -161,7 +161,7 @@ TEST_BUILDING_HEATING_SYS = {
             "energy_source_type": "NATURAL_GAS",
         }
     ],
-    "external_fluid_source": [
+    "external_fluid_sources": [
         {
             "id": "Chilled Water 1",
             "loop": "Chilled Water Loop 1",
@@ -278,7 +278,7 @@ TEST_BUILDING_TERMINAL_SYS = {
             "energy_source_type": "NATURAL_GAS",
         }
     ],
-    "external_fluid_source": [
+    "external_fluid_sources": [
         {
             "id": "Chilled Water 1",
             "loop": "Chilled Water Loop 1",
