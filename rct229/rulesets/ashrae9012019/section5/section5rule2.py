@@ -32,8 +32,12 @@ class Section5Rule2(RuleDefinitionListIndexedBase):
 
         def get_calc_vals(self, context, data=None):
             failing_surface_ids = []
-            proposed_surfaces = find_all("$.building_segments[*].zones[*].surfaces[*]", context.proposed)
-            user_surfaces = find_all("$.building_segments[*].zones[*].surfaces[*]", context.user)
+            proposed_surfaces = find_all(
+                "$.building_segments[*].zones[*].surfaces[*]", context.proposed
+            )
+            user_surfaces = find_all(
+                "$.building_segments[*].zones[*].surfaces[*]", context.user
+            )
 
             # This assumes that the surfaces all match
             matched_user_surfaces = match_lists_by_id(proposed_surfaces, user_surfaces)

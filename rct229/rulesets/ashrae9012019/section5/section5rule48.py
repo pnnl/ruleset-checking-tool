@@ -70,12 +70,8 @@ class Section5Rule48(RuleDefinitionListIndexedBase):
                 zone_b = context.baseline
                 zone_p = context.proposed
 
-                zone_infiltration_flow_rate_b = zone_b["infiltration"][
-                    "flow_rate"
-                ]
-                zone_infiltration_flow_rate_p = zone_p["infiltration"][
-                    "flow_rate"
-                ]
+                zone_infiltration_flow_rate_b = zone_b["infiltration"]["flow_rate"]
+                zone_infiltration_flow_rate_p = zone_p["infiltration"]["flow_rate"]
 
                 return {
                     "baseline_infiltration": CalcQ(

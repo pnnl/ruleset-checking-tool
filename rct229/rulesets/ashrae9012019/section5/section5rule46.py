@@ -27,14 +27,21 @@ class Section5Rule46(RuleDefinitionListIndexedBase):
                 rmrs_used=UserBaselineProposedVals(False, True, True),
                 required_fields={
                     "$.building_segments[*].zones[*]": ["infiltration"],
-                    "$.building_segments[*].zones[*].infiltration": ["algorithm_name", "modeling_method"],
+                    "$.building_segments[*].zones[*].infiltration": [
+                        "algorithm_name",
+                        "modeling_method",
+                    ],
                 },
             )
 
         def get_calc_vals(self, context, data=None):
             failing_infiltration_zone_ids = []
-            baseline_zones = find_all("$.building_segments[*].zones[*]", context.baseline)
-            proposed_zones = find_all("$.building_segments[*].zones[*]", context.proposed)
+            baseline_zones = find_all(
+                "$.building_segments[*].zones[*]", context.baseline
+            )
+            proposed_zones = find_all(
+                "$.building_segments[*].zones[*]", context.proposed
+            )
 
             # This assumes that the surfaces all match
             matched_baseline_zones = match_lists_by_id(proposed_zones, baseline_zones)

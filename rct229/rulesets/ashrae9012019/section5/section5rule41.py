@@ -83,12 +83,12 @@ class Section5Rule41(RuleDefinitionListIndexedBase):
                 roof_u = context.user
 
                 return {
-                    "absorptance_thermal_exterior_p": roof_p[
-                        "optical_properties"
-                    ]["absorptance_thermal_exterior"],
-                    "absorptance_thermal_exterior_u": roof_u[
-                        "optical_properties"
-                    ]["absorptance_thermal_exterior"],
+                    "absorptance_thermal_exterior_p": roof_p["optical_properties"][
+                        "absorptance_thermal_exterior"
+                    ],
+                    "absorptance_thermal_exterior_u": roof_u["optical_properties"][
+                        "absorptance_thermal_exterior"
+                    ],
                 }
 
             def manual_check_required(self, context, calc_vals=None, data=None):

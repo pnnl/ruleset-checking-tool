@@ -79,12 +79,12 @@ class Section5Rule43(RuleDefinitionListIndexedBase):
                 scc_dict_p = data["scc_dict_p"]
 
                 return {
-                    "absorptance_solar_exterior_p": roof_p[
-                        "optical_properties"
-                    ]["absorptance_solar_exterior"],
-                    "absorptance_solar_exterior_u": roof_u[
-                        "optical_properties"
-                    ]["absorptance_solar_exterior"],
+                    "absorptance_solar_exterior_p": roof_p["optical_properties"][
+                        "absorptance_solar_exterior"
+                    ],
+                    "absorptance_solar_exterior_u": roof_u["optical_properties"][
+                        "absorptance_solar_exterior"
+                    ],
                     "surface_conditioning_category_p": scc_dict_p[roof_p["id"]],
                 }
 

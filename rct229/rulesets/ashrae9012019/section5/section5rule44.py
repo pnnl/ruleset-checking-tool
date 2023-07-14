@@ -27,11 +27,17 @@ class Section5Rule44(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section5Rule44.BuildingRule, self).__init__(
                 rmrs_used=UserBaselineProposedVals(False, True, False),
-                required_fields={"$.building_segments[*].zones[*].spaces[*].infiltration": ["modeling_method"]},
+                required_fields={
+                    "$.building_segments[*].zones[*].spaces[*].infiltration": [
+                        "modeling_method"
+                    ]
+                },
             )
 
         def get_calc_vals(self, context, data=None):
-            baseline_infiltration = find_all("$.building_segments[*].zones[*].infiltration", context.baseline)
+            baseline_infiltration = find_all(
+                "$.building_segments[*].zones[*].infiltration", context.baseline
+            )
             failing_infiltration_ids = [
                 b_infiltration["id"]
                 for b_infiltration in baseline_infiltration

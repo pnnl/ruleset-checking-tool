@@ -66,7 +66,9 @@ class Section5Rule47(RuleDefinitionListIndexedBase):
             building_total_envelope_area = sum(
                 [
                     getattr_(surface, "surface", "area")
-                    for surface in find_all("$.building_segments[*].zones[*].surfaces[*]", building_b)
+                    for surface in find_all(
+                        "$.building_segments[*].zones[*].surfaces[*]", building_b
+                    )
                     if scc_dict_b[surface["id"]] != SCC.UNREGULATED
                 ],
                 ZERO.AREA,
