@@ -39,7 +39,7 @@ class Section5Rule38(RuleDefinitionListIndexedBase):
             ruleset_section_title="Envelope",
             standard_section="Section G3.1-5(e) Building Envelope Modeling Requirements for the Baseline building",
             is_primary_rule=True,
-            list_path="ruleset_model_instances[0].buildings[*]",
+            list_path="ruleset_model_descriptions[0].buildings[*]",
             data_items={"climate_zone": ("baseline", "weather/climate_zone")},
             required_fields={
                 "$": ["weather"],
@@ -51,7 +51,7 @@ class Section5Rule38(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section5Rule38.BuildingRule, self).__init__(
                 rmrs_used=UserBaselineProposedVals(False, True, False),
-                list_path="$..surfaces[*]",
+                list_path="$.building_segments[*].zones[*].surfaces[*]",
                 each_rule=Section5Rule38.BuildingRule.RoofRule(),
                 index_rmr="baseline",
                 manual_check_required_msg=MANUAL_CHECK_MSG,

@@ -20,18 +20,18 @@ class Section5Rule44(RuleDefinitionListIndexedBase):
             ruleset_section_title="Envelope",
             standard_section="Section G3.1-5(b) Building Envelope Modeling Requirements for the Proposed design and Baseline",
             is_primary_rule=True,
-            rmr_context="ruleset_model_instances/0/buildings",
+            rmr_context="ruleset_model_descriptions/0/buildings",
         )
 
     class BuildingRule(RuleDefinitionBase):
         def __init__(self):
             super(Section5Rule44.BuildingRule, self).__init__(
                 rmrs_used=UserBaselineProposedVals(False, True, False),
-                required_fields={"$..infiltration": ["modeling_method"]},
+                required_fields={"$.building_segments[*].zones[*].spaces[*].infiltration": ["modeling_method"]},
             )
 
         def get_calc_vals(self, context, data=None):
-            baseline_infiltration = find_all("$..infiltration", context.baseline)
+            baseline_infiltration = find_all("$.building_segments[*].zones[*].infiltration", context.baseline)
             failing_infiltration_ids = [
                 b_infiltration["id"]
                 for b_infiltration in baseline_infiltration

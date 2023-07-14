@@ -40,7 +40,7 @@ class Section5Rule47(RuleDefinitionListIndexedBase):
             ruleset_section_title="Envelope",
             standard_section="Section G3.1-5(h) Building Envelope Modeling Requirements for the Baseline building",
             is_primary_rule=True,
-            list_path="ruleset_model_instances[0].buildings[*]",
+            list_path="ruleset_model_descriptions[0].buildings[*]",
             data_items={"climate_zone": ("baseline", "weather/climate_zone")},
         )
 
@@ -48,7 +48,7 @@ class Section5Rule47(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section5Rule47.BuildingRule, self).__init__(
                 rmrs_used=UserBaselineProposedVals(False, True, False),
-                required_fields={"$..zones[*]": ["surfaces"]},
+                required_fields={"$.building_segments[*].zones[*]": ["surfaces"]},
             )
 
         def get_calc_vals(self, context, data=None):
@@ -66,7 +66,7 @@ class Section5Rule47(RuleDefinitionListIndexedBase):
             building_total_envelope_area = sum(
                 [
                     getattr_(surface, "surface", "area")
-                    for surface in find_all("$..surfaces[*]", building_b)
+                    for surface in find_all("$.building_segments[*].zones[*].surfaces[*]", building_b)
                     if scc_dict_b[surface["id"]] != SCC.UNREGULATED
                 ],
                 ZERO.AREA,
@@ -76,7 +76,7 @@ class Section5Rule47(RuleDefinitionListIndexedBase):
                 TARGET_AIR_LEAKAGE_COEFF
             ) * building_total_envelope_area
 
-            for zone in find_all("$..zones[*]", building_b):
+            for zone in find_all("$.building_segments[*].zones[*]", building_b):
                 if zcc_dict_b[zone["id"]] in [
                     ZCC.CONDITIONED_RESIDENTIAL,
                     ZCC.CONDITIONED_NON_RESIDENTIAL,
@@ -84,7 +84,7 @@ class Section5Rule47(RuleDefinitionListIndexedBase):
                     ZCC.SEMI_HEATED,
                 ]:
                     building_total_air_leakage_rate += getattr_(
-                        zone["infiltration"], "infiltration", "infiltration_flow_rate"
+                        zone["infiltration"], "infiltration", "flow_rate"
                     )
 
             return {

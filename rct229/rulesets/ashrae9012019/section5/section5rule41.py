@@ -39,7 +39,7 @@ class Section5Rule41(RuleDefinitionListIndexedBase):
             ruleset_section_title="Envelope",
             standard_section="Section G3.1-1(a) Building Envelope Modeling Requirements for the Proposed design",
             is_primary_rule=True,
-            list_path="ruleset_model_instances[0].buildings[*]",
+            list_path="ruleset_model_descriptions[0].buildings[*]",
             data_items={"climate_zone": ("proposed", "weather/climate_zone")},
         )
 
@@ -73,8 +73,8 @@ class Section5Rule41(RuleDefinitionListIndexedBase):
                 super(Section5Rule41.BuildingRule.RoofRule, self).__init__(
                     rmrs_used=UserBaselineProposedVals(True, False, True),
                     required_fields={
-                        "$": ["surface_optical_properties"],
-                        "surface_optical_properties": ["absorptance_thermal_exterior"],
+                        "$": ["optical_properties"],
+                        "optical_properties": ["absorptance_thermal_exterior"],
                     },
                 )
 
@@ -84,10 +84,10 @@ class Section5Rule41(RuleDefinitionListIndexedBase):
 
                 return {
                     "absorptance_thermal_exterior_p": roof_p[
-                        "surface_optical_properties"
+                        "optical_properties"
                     ]["absorptance_thermal_exterior"],
                     "absorptance_thermal_exterior_u": roof_u[
-                        "surface_optical_properties"
+                        "optical_properties"
                     ]["absorptance_thermal_exterior"],
                 }
 
