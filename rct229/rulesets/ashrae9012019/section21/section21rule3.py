@@ -37,7 +37,7 @@ class Section21Rule3(RuleDefinitionListIndexedBase):
             ruleset_section_title="HVAC - Water Side",
             standard_section="Section G3.1.2.2 Building System-Specific Modeling Requirements for the Baseline model",
             is_primary_rule=True,
-            rmr_context="ruleset_model_instances/0",
+            rmr_context="ruleset_model_descriptions/0",
             list_path="fluid_loops[*]",
         )
 

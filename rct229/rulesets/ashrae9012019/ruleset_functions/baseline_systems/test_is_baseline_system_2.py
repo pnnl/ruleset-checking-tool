@@ -11,7 +11,7 @@ from rct229.schema.validate import schema_validate_rmr
 
 SYS_2_TEST_RMD = {
     "id": "ASHRAE229 1",
-    "ruleset_model_instances": [
+    "ruleset_model_descriptions": [
         {
             "id": "RMD 1",
             "buildings": [
@@ -41,11 +41,11 @@ SYS_2_TEST_RMD = {
                                     "id": "PTHP 1",
                                     "cooling_system": {
                                         "id": "HP Cooling Coil 1",
-                                        "cooling_system_type": "DIRECT_EXPANSION",
+                                        "type": "DIRECT_EXPANSION",
                                     },
                                     "heating_system": {
                                         "id": "HP Heating Coil 1",
-                                        "heating_system_type": "HEAT_PUMP",
+                                        "type": "HEAT_PUMP",
                                     },
                                     "fan_system": {
                                         "id": "CAV Fan System 1",
@@ -73,7 +73,7 @@ def test__TEST_RMD_baseline_system_2__is_valid():
 def test__is_baseline_system_2__true():
     assert (
         is_baseline_system_2(
-            SYS_2_TEST_RMD["ruleset_model_instances"][0],
+            SYS_2_TEST_RMD["ruleset_model_descriptions"][0],
             "PTHP 1",
             ["PTHP Terminal 1"],
             ["Thermal Zone 1"],
@@ -85,7 +85,7 @@ def test__is_baseline_system_2__true():
 def test__is_baseline_system_2__test_json_true():
     assert (
         is_baseline_system_2(
-            load_system_test_file("System_2_PTHP.json")["ruleset_model_instances"][0],
+            load_system_test_file("System_2_PTHP.json")["ruleset_model_descriptions"][0],
             "PTHP 1",
             ["PTHP Terminal 1"],
             ["Thermal Zone 1"],

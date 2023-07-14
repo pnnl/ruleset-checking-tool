@@ -7,9 +7,7 @@ from rct229.utils.jsonpath_utils import find_all
 SurfaceAdjacency = schema_enums["SurfaceAdjacencyOptions"]
 
 # Json path for surfaces filtered to those with adjacent_to set to exterior
-EXTERIOR_SURFACES_JSONPATH = (
-    f'$.building_segments[*].zones[*].surfaces[*][?(@.adjacent_to="{SurfaceAdjacency.EXTERIOR}")]'
-)
+EXTERIOR_SURFACES_JSONPATH = f'$.building_segments[*].zones[*].surfaces[*][?(@.adjacent_to="{SurfaceAdjacency.EXTERIOR}")]'
 
 
 class Section5Rule3(RuleDefinitionListIndexedBase):

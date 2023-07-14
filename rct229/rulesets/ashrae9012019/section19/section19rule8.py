@@ -29,7 +29,7 @@ class Section19Rule8(RuleDefinitionListIndexedBase):
             ruleset_section_title="HVAC - General",
             standard_section=" Section G3.1.2.5 Exception #1",
             is_primary_rule=True,
-            list_path="ruleset_model_instances[0].buildings[*]",
+            list_path="ruleset_model_descriptions[0].buildings[*]",
         )
 
     class BuildingRule(RuleDefinitionListIndexedBase):

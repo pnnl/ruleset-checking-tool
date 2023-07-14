@@ -30,7 +30,7 @@ class Section19Rule1(RuleDefinitionListIndexedBase):
             ruleset_section_title="HVAC - General",
             standard_section=" Section G3.1.2.2",
             is_primary_rule=True,
-            rmr_context="ruleset_model_instances/0",
+            rmr_context="ruleset_model_descriptions/0",
             list_path="$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*]",
         )
 

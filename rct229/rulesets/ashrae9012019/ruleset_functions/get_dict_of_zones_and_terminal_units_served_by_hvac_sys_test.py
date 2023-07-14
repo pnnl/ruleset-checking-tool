@@ -63,7 +63,7 @@ TEST_BUILDING = {
 }
 
 
-TEST_RMD = {"id": "ASHRAE229", "ruleset_model_instances": [TEST_BUILDING]}
+TEST_RMD = {"id": "ASHRAE229", "ruleset_model_descriptions": [TEST_BUILDING]}
 
 
 def test__TEST_RMD__is_valid():

@@ -28,7 +28,7 @@ class Section19Rule4(RuleDefinitionListIndexedBase):
             ruleset_section_title="HVAC - General",
             standard_section="Section G3.1.2.2.1 Exception",
             is_primary_rule=True,
-            list_path="ruleset_model_instances[0]",
+            list_path="ruleset_model_descriptions[0]",
             required_fields={
                 "$": ["calendar"],
                 "calendar": ["day_of_week_for_january_1"],

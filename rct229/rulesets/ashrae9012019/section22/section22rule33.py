@@ -35,7 +35,7 @@ class Section22Rule33(RuleDefinitionBase):
             ruleset_section_title="HVAC - Chiller",
             standard_section="Section G3.1.3.2 Building System-Specific Modeling Requirements for the Baseline model",
             is_primary_rule=True,
-            rmr_context="ruleset_model_instances/0",
+            rmr_context="ruleset_model_descriptions/0",
         )
 
     def is_applicable(self, context, data=None):
