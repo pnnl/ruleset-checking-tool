@@ -35,7 +35,7 @@ class Section23Rule7(RuleDefinitionListIndexedBase):
             standard_section="Section G3.1.3.14 Fan Power and Control (Systems 6 and 8)",
             is_primary_rule=True,
             rmr_context="ruleset_model_descriptions/0",
-            list_path="$..heating_ventilating_air_conditioning_systems[*]",
+            list_path="$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*]",
         )
 
     def is_applicable(self, context, data=None):
