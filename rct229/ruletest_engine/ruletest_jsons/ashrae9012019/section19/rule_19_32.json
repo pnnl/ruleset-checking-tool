@@ -44,7 +44,7 @@
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
-                                                        "floor_area": 1000,
+                                                        "floor_area": 92.90303999999999,
                                                         "lighting_space_type": "COMPUTER_ROOM"
                                                     }
                                                 ]
@@ -128,7 +128,7 @@
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
-                                                        "floor_area": 1000,
+                                                        "floor_area": 92.90303999999999,
                                                         "lighting_space_type": "COMPUTER_ROOM"
                                                     }
                                                 ]
