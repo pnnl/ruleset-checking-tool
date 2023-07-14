@@ -19,6 +19,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_fan_object_electric_pow
 from rct229.schema.config import ureg
 from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all
+from rct229.utils.pint_utils import ZERO
 from rct229.utils.std_comparisons import std_equal
 
 APPLICABLE_SYS_TYPES = [
@@ -90,8 +91,8 @@ class Section19Rule17(RuleDefinitionListIndexedBase):
 
             fan_system_b = hvac_b["fan_system"]
 
-            supply_cfm_b = 0.0 * ureg("cfm")
-            total_fan_power = 0.0 * ureg("W")
+            supply_cfm_b = ZERO.FLOW
+            total_fan_power = ZERO.POWER
             for supply_fan_b in find_all("$.supply_fans[*]", fan_system_b):
                 supply_cfm_b += getattr_(supply_fan_b, "supply_fans", "design_airflow")
                 supply_fan_elec_power = get_fan_object_electric_power(supply_fan_b)
