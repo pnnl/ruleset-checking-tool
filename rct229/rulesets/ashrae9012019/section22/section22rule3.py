@@ -90,7 +90,7 @@ class Section22Rule3(RuleDefinitionListIndexedBase):
         def get_calc_vals(self, context, data=None):
             fluid_loop_b = context.baseline
             temperature_reset_type = find_one(
-                "$..cooling_or_condensing_design_and_control.temperature_reset_type",
+                "$.cooling_or_condensing_design_and_control.temperature_reset_type",
                 fluid_loop_b,
             )
             return {"temperature_reset_type": temperature_reset_type}

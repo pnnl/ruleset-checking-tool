@@ -63,7 +63,7 @@ class Section22Rule19(RuleDefinitionListIndexedBase):
         rmi_b = context.baseline
         heat_rejection_loop_dict = {
             heat_rejection_loop_id: find_exactly_one_with_field_value(
-                "$..fluid_loops[*]", "id", heat_rejection_loop_id, rmi_b
+                "$.fluid_loops[*]", "id", heat_rejection_loop_id, rmi_b
             )
             for heat_rejection_loop_id in find_all("heat_rejections[*].loop", rmi_b)
         }
