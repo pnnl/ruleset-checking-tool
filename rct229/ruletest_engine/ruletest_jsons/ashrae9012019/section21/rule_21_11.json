@@ -344,6 +344,7 @@
                                                 "id": "System 12",
                                                 "heating_system": {
                                                     "id": "Boiler Coil 1",
+                                                    "type": "FLUID_LOOP",
                                                     "hot_water_loop": "Boiler Loop 1"
                                                 },
                                                 "fan_system": {
@@ -362,6 +363,7 @@
                                                 },
                                                 "cooling_system": {
                                                     "id": "CHW Coil 1",
+                                                    "type": "FLUID_LOOP",
                                                     "chilled_water_loop": "Chilled Water Loop 1"
                                                 }
                                             }
@@ -375,6 +377,13 @@
                                 "id": "Boiler 1",
                                 "loop": "Boiler Loop 1",
                                 "energy_source_type": "NATURAL_GAS"
+                            }
+                        ],
+                        "external_fluid_sources": [
+                            {
+                                "id": "Purchased CW 1",
+                                "loop": "Chilled Water Loop 1",
+                                "type": "CHILLED_WATER"
                             }
                         ],
                         "pumps": [
@@ -453,6 +462,7 @@
                                                 "id": "System 12",
                                                 "heating_system": {
                                                     "id": "Boiler Coil 1",
+                                                    "type": "FLUID_LOOP",
                                                     "hot_water_loop": "Boiler Loop 1"
                                                 },
                                                 "fan_system": {
@@ -471,6 +481,7 @@
                                                 },
                                                 "cooling_system": {
                                                     "id": "CHW Coil 1",
+                                                    "type": "FLUID_LOOP",
                                                     "chilled_water_loop": "Chilled Water Loop 1"
                                                 }
                                             }
@@ -484,6 +495,13 @@
                                 "id": "Boiler 1",
                                 "loop": "Boiler Loop 1",
                                 "energy_source_type": "NATURAL_GAS"
+                            }
+                        ],
+                        "external_fluid_sources": [
+                            {
+                                "id": "Purchased CW 1",
+                                "loop": "Chilled Water Loop 1",
+                                "type": "CHILLED_WATER"
                             }
                         ],
                         "pumps": [
@@ -557,8 +575,12 @@
                                                     {
                                                         "id": "Air Terminal",
                                                         "is_supply_ducted": true,
+                                                        "heating_source": "ELECTRIC",
                                                         "type": "CONSTANT_AIR_VOLUME",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "System 10"
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 10",
+                                                        "fan": {
+                                                            "id": "Terminal Fan 1"
+                                                        }
                                                     }
                                                 ]
                                             }
@@ -568,6 +590,7 @@
                                                 "id": "System 10",
                                                 "heating_system": {
                                                     "id": "Furnace Coil 1",
+                                                    "type": "FURNACE",
                                                     "energy_source_type": "ELECTRICITY"
                                                 }
                                             }

@@ -340,6 +340,7 @@
                                                 "id": "System 11",
                                                 "heating_system": {
                                                     "id": "Boiler Coil 1",
+                                                    "type": "FLUID_LOOP",
                                                     "hot_water_loop": "Boiler Loop 1"
                                                 },
                                                 "fan_system": {
@@ -358,6 +359,7 @@
                                                 },
                                                 "cooling_system": {
                                                     "id": "CHW Coil 1",
+                                                    "type": "FLUID_LOOP",
                                                     "chilled_water_loop": "Secondary CHW Loop 1"
                                                 }
                                             }
@@ -467,6 +469,7 @@
                                                 "id": "System 11",
                                                 "heating_system": {
                                                     "id": "Boiler Coil 1",
+                                                    "type": "FLUID_LOOP",
                                                     "hot_water_loop": "Boiler Loop 1"
                                                 },
                                                 "fan_system": {
@@ -485,6 +488,7 @@
                                                 },
                                                 "cooling_system": {
                                                     "id": "CHW Coil 1",
+                                                    "type": "FLUID_LOOP",
                                                     "chilled_water_loop": "Secondary CHW Loop 1"
                                                 }
                                             }
@@ -593,7 +597,8 @@
                                             {
                                                 "id": "System Type 3",
                                                 "heating_system": {
-                                                    "id": "Furnace Coil 1"
+                                                    "id": "Furnace Coil 1",
+                                                    "type": "FURNACE"
                                                 },
                                                 "fan_system": {
                                                     "id": "CAV Fan System 1",
@@ -610,7 +615,8 @@
                                                     ]
                                                 },
                                                 "cooling_system": {
-                                                    "id": "DX Coil 1"
+                                                    "id": "DX Coil 1",
+                                                    "type": "DIRECT_EXPANSION"
                                                 }
                                             }
                                         ]

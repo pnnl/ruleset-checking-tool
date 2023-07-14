@@ -363,6 +363,7 @@
                                                 "id": "System 5",
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 1",
+                                                    "type": "FLUID_LOOP",
                                                     "hot_water_loop": "Boiler Loop 1"
                                                 },
                                                 "fan_system": {
@@ -380,7 +381,8 @@
                                                     ]
                                                 },
                                                 "cooling_system": {
-                                                    "id": "DX Coil 1"
+                                                    "id": "DX Coil 1",
+                                                    "type": "DIRECT_EXPANSION"
                                                 }
                                             }
                                         ]
@@ -483,6 +485,7 @@
                                                 "id": "System 5",
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 1",
+                                                    "type": "FLUID_LOOP",
                                                     "hot_water_loop": "Boiler Loop 1"
                                                 },
                                                 "fan_system": {
@@ -500,7 +503,8 @@
                                                     ]
                                                 },
                                                 "cooling_system": {
-                                                    "id": "DX Coil 1"
+                                                    "id": "DX Coil 1",
+                                                    "type": "DIRECT_EXPANSION"
                                                 }
                                             }
                                         ]
@@ -585,7 +589,8 @@
                                             {
                                                 "id": "PTHP 1",
                                                 "heating_system": {
-                                                    "id": "HP Heating Coil 1"
+                                                    "id": "HP Heating Coil 1",
+                                                    "type": "HEAT_PUMP"
                                                 },
                                                 "fan_system": {
                                                     "id": "CAV Fan System 1",
@@ -597,7 +602,8 @@
                                                     ]
                                                 },
                                                 "cooling_system": {
-                                                    "id": "HP Cooling Coil 1"
+                                                    "id": "HP Cooling Coil 1",
+                                                    "type": "DIRECT_EXPANSION"
                                                 }
                                             }
                                         ]
@@ -951,6 +957,7 @@
                                                 "id": "System 11",
                                                 "heating_system": {
                                                     "id": "Boiler Coil 1",
+                                                    "type": "FLUID_LOOP",
                                                     "hot_water_loop": "Boiler Loop 1"
                                                 },
                                                 "fan_system": {
@@ -969,6 +976,7 @@
                                                 },
                                                 "cooling_system": {
                                                     "id": "CHW Coil 1",
+                                                    "type": "FLUID_LOOP",
                                                     "chilled_water_loop": "Secondary CHW Loop 1"
                                                 }
                                             }
@@ -1078,6 +1086,7 @@
                                                 "id": "System 11",
                                                 "heating_system": {
                                                     "id": "Boiler Coil 1",
+                                                    "type": "FLUID_LOOP",
                                                     "hot_water_loop": "Boiler Loop 1"
                                                 },
                                                 "fan_system": {
@@ -1096,6 +1105,7 @@
                                                 },
                                                 "cooling_system": {
                                                     "id": "CHW Coil 1",
+                                                    "type": "FLUID_LOOP",
                                                     "chilled_water_loop": "Secondary CHW Loop 1"
                                                 }
                                             }
@@ -1204,7 +1214,8 @@
                                             {
                                                 "id": "System Type 3",
                                                 "heating_system": {
-                                                    "id": "Furnace Coil 1"
+                                                    "id": "Furnace Coil 1",
+                                                    "type": "FURNACE"
                                                 },
                                                 "fan_system": {
                                                     "id": "CAV Fan System 1",
@@ -1221,7 +1232,8 @@
                                                     ]
                                                 },
                                                 "cooling_system": {
-                                                    "id": "DX Coil 1"
+                                                    "id": "DX Coil 1",
+                                                    "type": "DIRECT_EXPANSION"
                                                 }
                                             }
                                         ]
@@ -1620,6 +1632,7 @@
                                                 "id": "System 12",
                                                 "heating_system": {
                                                     "id": "Boiler Coil 1",
+                                                    "type": "FLUID_LOOP",
                                                     "hot_water_loop": "Boiler Loop 1",
                                                     "design_capacity": 5000
                                                 },
@@ -1639,6 +1652,7 @@
                                                 },
                                                 "cooling_system": {
                                                     "id": "CHW Coil 1",
+                                                    "type": "FLUID_LOOP",
                                                     "chilled_water_loop": "Secondary CHW Loop 1",
                                                     "design_sensible_cool_capacity": 24619.0
                                                 }
@@ -1763,6 +1777,7 @@
                                                 "id": "System 12",
                                                 "heating_system": {
                                                     "id": "Boiler Coil 1",
+                                                    "type": "FLUID_LOOP",
                                                     "hot_water_loop": "Boiler Loop 1",
                                                     "design_capacity": 5000
                                                 },
@@ -1782,6 +1797,7 @@
                                                 },
                                                 "cooling_system": {
                                                     "id": "CHW Coil 1",
+                                                    "type": "FLUID_LOOP",
                                                     "chilled_water_loop": "Secondary CHW Loop 1",
                                                     "design_sensible_cool_capacity": 24619.0
                                                 }
@@ -1906,6 +1922,7 @@
                                                 "id": "System 12",
                                                 "heating_system": {
                                                     "id": "Boiler Coil 1",
+                                                    "type": "FLUID_LOOP",
                                                     "hot_water_loop": "Boiler Loop 1",
                                                     "design_capacity": 5000
                                                 },
@@ -1925,6 +1942,7 @@
                                                 },
                                                 "cooling_system": {
                                                     "id": "CHW Coil 1",
+                                                    "type": "FLUID_LOOP",
                                                     "chilled_water_loop": "Secondary CHW Loop 1",
                                                     "design_sensible_cool_capacity": 24619.0
                                                 }
@@ -2043,7 +2061,8 @@
                                             {
                                                 "id": "System Type 4",
                                                 "heating_system": {
-                                                    "id": "HP Coil 1"
+                                                    "id": "HP Coil 1",
+                                                    "type": "HEAT_PUMP"
                                                 },
                                                 "fan_system": {
                                                     "id": "CAV Fan System 1",
@@ -2060,7 +2079,8 @@
                                                     ]
                                                 },
                                                 "cooling_system": {
-                                                    "id": "DX Coil 1"
+                                                    "id": "DX Coil 1",
+                                                    "type": "DIRECT_EXPANSION"
                                                 }
                                             }
                                         ]
@@ -2629,6 +2649,7 @@
                                                 "id": "PTAC 1",
                                                 "heating_system": {
                                                     "id": "HHW Coil 1",
+                                                    "type": "FLUID_LOOP",
                                                     "hot_water_loop": "Boiler Loop 1"
                                                 },
                                                 "fan_system": {
@@ -2641,7 +2662,8 @@
                                                     ]
                                                 },
                                                 "cooling_system": {
-                                                    "id": "DX Coil 1"
+                                                    "id": "DX Coil 1",
+                                                    "type": "DIRECT_EXPANSION"
                                                 }
                                             }
                                         ]
@@ -2741,6 +2763,7 @@
                                                 "id": "PTAC 1",
                                                 "heating_system": {
                                                     "id": "HHW Coil 1",
+                                                    "type": "FLUID_LOOP",
                                                     "hot_water_loop": "Boiler Loop 1"
                                                 },
                                                 "fan_system": {
@@ -2753,7 +2776,8 @@
                                                     ]
                                                 },
                                                 "cooling_system": {
-                                                    "id": "DX Coil 1"
+                                                    "id": "DX Coil 1",
+                                                    "type": "DIRECT_EXPANSION"
                                                 }
                                             }
                                         ]
@@ -2838,6 +2862,7 @@
                                                 "id": "PTAC 1",
                                                 "heating_system": {
                                                     "id": "HHW Coil 1",
+                                                    "type": "FLUID_LOOP",
                                                     "hot_water_loop": "Boiler Loop 1"
                                                 },
                                                 "fan_system": {
@@ -2850,7 +2875,8 @@
                                                     ]
                                                 },
                                                 "cooling_system": {
-                                                    "id": "DX Coil 1"
+                                                    "id": "DX Coil 1",
+                                                    "type": "DIRECT_EXPANSION"
                                                 }
                                             }
                                         ]
@@ -2927,6 +2953,9 @@
                                                         "heating_source": "ELECTRIC",
                                                         "type": "VARIABLE_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 6",
+                                                        "fan": {
+                                                            "id": "Fan 1"
+                                                        },
                                                         "fan_configuration": "PARALLEL"
                                                     }
                                                 ]
@@ -2942,6 +2971,9 @@
                                                         "heating_source": "ELECTRIC",
                                                         "type": "VARIABLE_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 6",
+                                                        "fan": {
+                                                            "id": "Fan 2"
+                                                        },
                                                         "fan_configuration": "PARALLEL"
                                                     }
                                                 ]
@@ -2951,7 +2983,8 @@
                                             {
                                                 "id": "System 6",
                                                 "preheat_system": {
-                                                    "id": "Preheat Coil 1"
+                                                    "id": "Preheat Coil 1",
+                                                    "type": "ELECTRIC_RESISTANCE"
                                                 },
                                                 "fan_system": {
                                                     "id": "VAV Fan System 1",
@@ -2968,7 +3001,8 @@
                                                     ]
                                                 },
                                                 "cooling_system": {
-                                                    "id": "DX Coil 1"
+                                                    "id": "DX Coil 1",
+                                                    "type": "DIRECT_EXPANSION"
                                                 }
                                             }
                                         ]
@@ -3497,6 +3531,7 @@
                                                 "id": "System 5",
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 1",
+                                                    "type": "FLUID_LOOP",
                                                     "hot_water_loop": "Boiler Loop 1"
                                                 },
                                                 "fan_system": {
@@ -3514,7 +3549,8 @@
                                                     ]
                                                 },
                                                 "cooling_system": {
-                                                    "id": "DX Coil 1"
+                                                    "id": "DX Coil 1",
+                                                    "type": "DIRECT_EXPANSION"
                                                 }
                                             }
                                         ]
@@ -3618,6 +3654,7 @@
                                                 "id": "System 5",
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 1",
+                                                    "type": "FLUID_LOOP",
                                                     "hot_water_loop": "Boiler Loop 1"
                                                 },
                                                 "fan_system": {
@@ -3635,7 +3672,8 @@
                                                     ]
                                                 },
                                                 "cooling_system": {
-                                                    "id": "DX Coil 1"
+                                                    "id": "DX Coil 1",
+                                                    "type": "DIRECT_EXPANSION"
                                                 }
                                             }
                                         ]
@@ -3739,6 +3777,7 @@
                                                 "id": "System 5",
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 1",
+                                                    "type": "FLUID_LOOP",
                                                     "hot_water_loop": "Boiler Loop 1"
                                                 },
                                                 "fan_system": {
@@ -3756,7 +3795,8 @@
                                                     ]
                                                 },
                                                 "cooling_system": {
-                                                    "id": "DX Coil 1"
+                                                    "id": "DX Coil 1",
+                                                    "type": "DIRECT_EXPANSION"
                                                 }
                                             }
                                         ]
@@ -3860,6 +3900,7 @@
                                                 "id": "System 5",
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 1",
+                                                    "type": "FLUID_LOOP",
                                                     "hot_water_loop": "Purchased HW Loop 1"
                                                 },
                                                 "fan_system": {
@@ -3877,12 +3918,20 @@
                                                     ]
                                                 },
                                                 "cooling_system": {
-                                                    "id": "DX Coil 1"
+                                                    "id": "DX Coil 1",
+                                                    "type": "DIRECT_EXPANSION"
                                                 }
                                             }
                                         ]
                                     }
                                 ]
+                            }
+                        ],
+                        "external_fluid_sources": [
+                            {
+                                "id": "Purchased HW 1",
+                                "loop": "Purchased HW Loop 1",
+                                "type": "HOT_WATER"
                             }
                         ],
                         "pumps": [
@@ -4432,6 +4481,7 @@
                                                 "id": "PTAC 1",
                                                 "heating_system": {
                                                     "id": "HHW Coil 1",
+                                                    "type": "FLUID_LOOP",
                                                     "hot_water_loop": "Purchased HW Loop 1"
                                                 },
                                                 "fan_system": {
@@ -4444,12 +4494,20 @@
                                                     ]
                                                 },
                                                 "cooling_system": {
-                                                    "id": "DX Coil 1"
+                                                    "id": "DX Coil 1",
+                                                    "type": "DIRECT_EXPANSION"
                                                 }
                                             }
                                         ]
                                     }
                                 ]
+                            }
+                        ],
+                        "external_fluid_sources": [
+                            {
+                                "id": "Purchased HW 1",
+                                "loop": "Purchased HW Loop 1",
+                                "type": "HOT_WATER"
                             }
                         ],
                         "fluid_loops": [
@@ -4832,6 +4890,7 @@
                                                 "id": "System 11",
                                                 "heating_system": {
                                                     "id": "Boiler Coil 1",
+                                                    "type": "FLUID_LOOP",
                                                     "hot_water_loop": "Boiler Loop 1"
                                                 },
                                                 "fan_system": {
@@ -4850,6 +4909,7 @@
                                                 },
                                                 "cooling_system": {
                                                     "id": "CHW Coil 1",
+                                                    "type": "FLUID_LOOP",
                                                     "chilled_water_loop": "Chilled Water Loop 1"
                                                 }
                                             }
@@ -4863,6 +4923,13 @@
                                 "id": "Boiler 1",
                                 "loop": "Boiler Loop 1",
                                 "energy_source_type": "NATURAL_GAS"
+                            }
+                        ],
+                        "external_fluid_sources": [
+                            {
+                                "id": "Purchased CW 1",
+                                "loop": "Chilled Water Loop 1",
+                                "type": "CHILLED_WATER"
                             }
                         ],
                         "pumps": [
@@ -4947,6 +5014,7 @@
                                                 "id": "System 11",
                                                 "heating_system": {
                                                     "id": "Boiler Coil 1",
+                                                    "type": "FLUID_LOOP",
                                                     "hot_water_loop": "Boiler Loop 1"
                                                 },
                                                 "fan_system": {
@@ -4965,6 +5033,7 @@
                                                 },
                                                 "cooling_system": {
                                                     "id": "CHW Coil 1",
+                                                    "type": "FLUID_LOOP",
                                                     "chilled_water_loop": "Chilled Water Loop 1"
                                                 }
                                             }
@@ -4978,6 +5047,13 @@
                                 "id": "Boiler 1",
                                 "loop": "Boiler Loop 1",
                                 "energy_source_type": "NATURAL_GAS"
+                            }
+                        ],
+                        "external_fluid_sources": [
+                            {
+                                "id": "Purchased CW 1",
+                                "loop": "Chilled Water Loop 1",
+                                "type": "CHILLED_WATER"
                             }
                         ],
                         "pumps": [
@@ -5045,10 +5121,13 @@
                                                     {
                                                         "id": "VAV Air Terminal 1",
                                                         "is_supply_ducted": true,
-                                                        "heating_source": "HOT_WATER",
+                                                        "heating_source": "ELECTRIC",
                                                         "heating_from_loop": "Boiler Loop 1",
                                                         "type": "VARIABLE_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 8",
+                                                        "fan": {
+                                                            "id": "Fan 1"
+                                                        },
                                                         "fan_configuration": "PARALLEL"
                                                     }
                                                 ],
@@ -5067,10 +5146,13 @@
                                                     {
                                                         "id": "VAV Air Terminal 2",
                                                         "is_supply_ducted": true,
-                                                        "heating_source": "HOT_WATER",
+                                                        "heating_source": "ELECTRIC",
                                                         "type": "VARIABLE_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 8",
                                                         "heating_from_loop": "Boiler Loop 1",
+                                                        "fan": {
+                                                            "id": "Fan 2"
+                                                        },
                                                         "fan_configuration": "PARALLEL"
                                                     }
                                                 ]
@@ -5080,7 +5162,8 @@
                                             {
                                                 "id": "System 8",
                                                 "preheat_system": {
-                                                    "id": "Preheat Coil 1"
+                                                    "id": "Preheat Coil 1",
+                                                    "type": "ELECTRIC_RESISTANCE"
                                                 },
                                                 "fan_system": {
                                                     "id": "VAV Fan System 1",
@@ -5098,6 +5181,7 @@
                                                 },
                                                 "cooling_system": {
                                                     "id": "CHW Coil 1",
+                                                    "type": "FLUID_LOOP",
                                                     "chilled_water_loop": "Secondary CHW Loop 1"
                                                 }
                                             }
@@ -5502,6 +5586,7 @@
                                                 "id": "System 12",
                                                 "heating_system": {
                                                     "id": "Boiler Coil 1",
+                                                    "type": "FLUID_LOOP",
                                                     "hot_water_loop": "Boiler Loop 1"
                                                 },
                                                 "fan_system": {
@@ -5520,6 +5605,7 @@
                                                 },
                                                 "cooling_system": {
                                                     "id": "CHW Coil 1",
+                                                    "type": "FLUID_LOOP",
                                                     "chilled_water_loop": "Chilled Water Loop 1"
                                                 }
                                             }
@@ -5533,6 +5619,13 @@
                                 "id": "Boiler 1",
                                 "loop": "Boiler Loop 1",
                                 "energy_source_type": "NATURAL_GAS"
+                            }
+                        ],
+                        "external_fluid_sources": [
+                            {
+                                "id": "Purchased CW 1",
+                                "loop": "Chilled Water Loop 1",
+                                "type": "CHILLED_WATER"
                             }
                         ],
                         "pumps": [
@@ -5611,6 +5704,7 @@
                                                 "id": "System 12",
                                                 "heating_system": {
                                                     "id": "Boiler Coil 1",
+                                                    "type": "FLUID_LOOP",
                                                     "hot_water_loop": "Boiler Loop 1"
                                                 },
                                                 "fan_system": {
@@ -5629,6 +5723,7 @@
                                                 },
                                                 "cooling_system": {
                                                     "id": "CHW Coil 1",
+                                                    "type": "FLUID_LOOP",
                                                     "chilled_water_loop": "Chilled Water Loop 1"
                                                 }
                                             }
@@ -5642,6 +5737,13 @@
                                 "id": "Boiler 1",
                                 "loop": "Boiler Loop 1",
                                 "energy_source_type": "NATURAL_GAS"
+                            }
+                        ],
+                        "external_fluid_sources": [
+                            {
+                                "id": "Purchased CW 1",
+                                "loop": "Chilled Water Loop 1",
+                                "type": "CHILLED_WATER"
                             }
                         ],
                         "pumps": [
@@ -5715,8 +5817,12 @@
                                                     {
                                                         "id": "Air Terminal",
                                                         "is_supply_ducted": true,
+                                                        "heating_source": "ELECTRIC",
                                                         "type": "CONSTANT_AIR_VOLUME",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "System 10"
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 10",
+                                                        "fan": {
+                                                            "id": "Terminal Fan 1"
+                                                        }
                                                     }
                                                 ]
                                             }
@@ -5726,6 +5832,7 @@
                                                 "id": "System 10",
                                                 "heating_system": {
                                                     "id": "Furnace Coil 1",
+                                                    "type": "FURNACE",
                                                     "energy_source_type": "ELECTRICITY"
                                                 }
                                             }
@@ -6238,6 +6345,7 @@
                                                 "id": "PTAC 1",
                                                 "heating_system": {
                                                     "id": "HHW Coil 1",
+                                                    "type": "FLUID_LOOP",
                                                     "hot_water_loop": "Purchased HW Loop 1"
                                                 },
                                                 "fan_system": {
@@ -6250,12 +6358,20 @@
                                                     ]
                                                 },
                                                 "cooling_system": {
-                                                    "id": "DX Coil 1"
+                                                    "id": "DX Coil 1",
+                                                    "type": "DIRECT_EXPANSION"
                                                 }
                                             }
                                         ]
                                     }
                                 ]
+                            }
+                        ],
+                        "external_fluid_sources": [
+                            {
+                                "id": "Purchased HW 1",
+                                "loop": "Purchased HW Loop 1",
+                                "type": "HOT_WATER"
                             }
                         ],
                         "fluid_loops": [
@@ -6323,6 +6439,7 @@
                                                 "id": "PTAC 1",
                                                 "heating_system": {
                                                     "id": "HHW Coil 1",
+                                                    "type": "FLUID_LOOP",
                                                     "hot_water_loop": "Purchased HW Loop 1"
                                                 },
                                                 "fan_system": {
@@ -6335,12 +6452,20 @@
                                                     ]
                                                 },
                                                 "cooling_system": {
-                                                    "id": "DX Coil 1"
+                                                    "id": "DX Coil 1",
+                                                    "type": "DIRECT_EXPANSION"
                                                 }
                                             }
                                         ]
                                     }
                                 ]
+                            }
+                        ],
+                        "external_fluid_sources": [
+                            {
+                                "id": "Purchased HW 1",
+                                "loop": "Purchased HW Loop 1",
+                                "type": "HOT_WATER"
                             }
                         ],
                         "fluid_loops": [
@@ -6408,6 +6533,7 @@
                                                 "id": "PTAC 1",
                                                 "heating_system": {
                                                     "id": "HHW Coil 1",
+                                                    "type": "FLUID_LOOP",
                                                     "hot_water_loop": "Purchased HW Loop 1"
                                                 },
                                                 "fan_system": {
@@ -6420,12 +6546,20 @@
                                                     ]
                                                 },
                                                 "cooling_system": {
-                                                    "id": "DX Coil 1"
+                                                    "id": "DX Coil 1",
+                                                    "type": "DIRECT_EXPANSION"
                                                 }
                                             }
                                         ]
                                     }
                                 ]
+                            }
+                        ],
+                        "external_fluid_sources": [
+                            {
+                                "id": "Purchased HW 1",
+                                "loop": "Purchased HW Loop 1",
+                                "type": "HOT_WATER"
                             }
                         ],
                         "fluid_loops": [
@@ -6493,6 +6627,7 @@
                                                 "id": "System 9",
                                                 "heating_system": {
                                                     "id": "Furnace Coil 1",
+                                                    "type": "FURNACE",
                                                     "energy_source_type": "NATURAL_GAS"
                                                 },
                                                 "fan_system": {
@@ -6867,6 +7002,7 @@
                                                 "id": "System Type 3",
                                                 "heating_system": {
                                                     "id": "Furnace Coil 1",
+                                                    "type": "FLUID_LOOP",
                                                     "hot_water_loop": "Purchased HW Loop 1"
                                                 },
                                                 "fan_system": {
@@ -6884,12 +7020,20 @@
                                                     ]
                                                 },
                                                 "cooling_system": {
-                                                    "id": "DX Coil 1"
+                                                    "id": "DX Coil 1",
+                                                    "type": "DIRECT_EXPANSION"
                                                 }
                                             }
                                         ]
                                     }
                                 ]
+                            }
+                        ],
+                        "external_fluid_sources": [
+                            {
+                                "id": "Purchased HW",
+                                "loop": "Purchased HW Loop 1",
+                                "type": "HOT_WATER"
                             }
                         ],
                         "fluid_loops": [
@@ -6956,6 +7100,7 @@
                                                 "id": "System Type 3",
                                                 "heating_system": {
                                                     "id": "Furnace Coil 1",
+                                                    "type": "FLUID_LOOP",
                                                     "hot_water_loop": "Purchased HW Loop 1"
                                                 },
                                                 "fan_system": {
@@ -6973,12 +7118,20 @@
                                                     ]
                                                 },
                                                 "cooling_system": {
-                                                    "id": "DX Coil 1"
+                                                    "id": "DX Coil 1",
+                                                    "type": "DIRECT_EXPANSION"
                                                 }
                                             }
                                         ]
                                     }
                                 ]
+                            }
+                        ],
+                        "external_fluid_sources": [
+                            {
+                                "id": "Purchased HW",
+                                "loop": "Purchased HW Loop 1",
+                                "type": "HOT_WATER"
                             }
                         ],
                         "fluid_loops": [
@@ -7044,7 +7197,8 @@
                                             {
                                                 "id": "System 11",
                                                 "heating_system": {
-                                                    "id": "Heating Coil 1"
+                                                    "id": "Heating Coil 1",
+                                                    "type": "ELECTRIC_RESISTANCE"
                                                 },
                                                 "fan_system": {
                                                     "id": "VAV Fan System 1",
@@ -7062,12 +7216,20 @@
                                                 },
                                                 "cooling_system": {
                                                     "id": "CHW Coil 1",
-                                                    "chilled_water_loop": "Chiller Loop 1"
+                                                    "type": "FLUID_LOOP",
+                                                    "chilled_water_loop": "Chilled Water Loop 1"
                                                 }
                                             }
                                         ]
                                     }
                                 ]
+                            }
+                        ],
+                        "external_fluid_sources": [
+                            {
+                                "id": "Purchased CW 1",
+                                "loop": "Chilled Water Loop 1",
+                                "type": "CHILLED_WATER"
                             }
                         ],
                         "pumps": [
@@ -7448,6 +7610,7 @@
                                                 "id": "System 5",
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 1",
+                                                    "type": "FLUID_LOOP",
                                                     "hot_water_loop": "Purchased HW Loop 1"
                                                 },
                                                 "fan_system": {
@@ -7465,12 +7628,20 @@
                                                     ]
                                                 },
                                                 "cooling_system": {
-                                                    "id": "DX Coil 1"
+                                                    "id": "DX Coil 1",
+                                                    "type": "DIRECT_EXPANSION"
                                                 }
                                             }
                                         ]
                                     }
                                 ]
+                            }
+                        ],
+                        "external_fluid_sources": [
+                            {
+                                "id": "Purchased HW 1",
+                                "loop": "Purchased HW Loop 1",
+                                "type": "HOT_WATER"
                             }
                         ],
                         "pumps": [
@@ -7557,6 +7728,7 @@
                                                 "id": "System 5",
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 1",
+                                                    "type": "FLUID_LOOP",
                                                     "hot_water_loop": "Purchased HW Loop 1"
                                                 },
                                                 "fan_system": {
@@ -7574,12 +7746,20 @@
                                                     ]
                                                 },
                                                 "cooling_system": {
-                                                    "id": "DX Coil 1"
+                                                    "id": "DX Coil 1",
+                                                    "type": "DIRECT_EXPANSION"
                                                 }
                                             }
                                         ]
                                     }
                                 ]
+                            }
+                        ],
+                        "external_fluid_sources": [
+                            {
+                                "id": "Purchased HW 1",
+                                "loop": "Purchased HW Loop 1",
+                                "type": "HOT_WATER"
                             }
                         ],
                         "pumps": [
@@ -7652,7 +7832,8 @@
                                             {
                                                 "id": "System 11",
                                                 "heating_system": {
-                                                    "id": "Heating Coil 1"
+                                                    "id": "Heating Coil 1",
+                                                    "type": "ELECTRIC_RESISTANCE"
                                                 },
                                                 "fan_system": {
                                                     "id": "VAV Fan System 1",
@@ -7670,6 +7851,7 @@
                                                 },
                                                 "cooling_system": {
                                                     "id": "CHW Coil 1",
+                                                    "type": "FLUID_LOOP",
                                                     "chilled_water_loop": "Secondary CHW Loop 1"
                                                 }
                                             }
@@ -8650,6 +8832,7 @@
                                                 "id": "System 12",
                                                 "heating_system": {
                                                     "id": "Boiler Coil 1",
+                                                    "type": "FLUID_LOOP",
                                                     "hot_water_loop": "Boiler Loop 1"
                                                 },
                                                 "fan_system": {
@@ -8668,6 +8851,7 @@
                                                 },
                                                 "cooling_system": {
                                                     "id": "CHW Coil 1",
+                                                    "type": "FLUID_LOOP",
                                                     "chilled_water_loop": "Chilled Water Loop 1"
                                                 }
                                             }
@@ -8684,6 +8868,13 @@
                                 "rated_capacity": 879213.3333333334,
                                 "efficiency": 0.8,
                                 "efficiency_metric": "COMBUSTION"
+                            }
+                        ],
+                        "external_fluid_sources": [
+                            {
+                                "id": "Purchased CW 1",
+                                "loop": "Chilled Water Loop 1",
+                                "type": "CHILLED_WATER"
                             }
                         ],
                         "pumps": [
@@ -8762,6 +8953,7 @@
                                                 "id": "System 12",
                                                 "heating_system": {
                                                     "id": "Boiler Coil 1",
+                                                    "type": "FLUID_LOOP",
                                                     "hot_water_loop": "Boiler Loop 1"
                                                 },
                                                 "fan_system": {
@@ -8780,6 +8972,7 @@
                                                 },
                                                 "cooling_system": {
                                                     "id": "CHW Coil 1",
+                                                    "type": "FLUID_LOOP",
                                                     "chilled_water_loop": "Chilled Water Loop 1"
                                                 }
                                             }
@@ -8796,6 +8989,13 @@
                                 "rated_capacity": 879213.3333333334,
                                 "efficiency": 0.8,
                                 "efficiency_metric": "THERMAL"
+                            }
+                        ],
+                        "external_fluid_sources": [
+                            {
+                                "id": "Purchased CW 1",
+                                "loop": "Chilled Water Loop 1",
+                                "type": "CHILLED_WATER"
                             }
                         ],
                         "pumps": [
@@ -8874,6 +9074,7 @@
                                                 "id": "System 12",
                                                 "heating_system": {
                                                     "id": "Boiler Coil 1",
+                                                    "type": "FLUID_LOOP",
                                                     "hot_water_loop": "Boiler Loop 1"
                                                 },
                                                 "fan_system": {
@@ -8892,6 +9093,7 @@
                                                 },
                                                 "cooling_system": {
                                                     "id": "CHW Coil 1",
+                                                    "type": "FLUID_LOOP",
                                                     "chilled_water_loop": "Chilled Water Loop 1"
                                                 }
                                             }
@@ -8908,6 +9110,13 @@
                                 "rated_capacity": 879213.3333333334,
                                 "efficiency": 0.85,
                                 "efficiency_metric": "COMBUSTION"
+                            }
+                        ],
+                        "external_fluid_sources": [
+                            {
+                                "id": "Purchased CW 1",
+                                "loop": "Chilled Water Loop 1",
+                                "type": "CHILLED_WATER"
                             }
                         ],
                         "pumps": [
@@ -8986,6 +9195,7 @@
                                                 "id": "System 12",
                                                 "heating_system": {
                                                     "id": "Boiler Coil 1",
+                                                    "type": "FLUID_LOOP",
                                                     "hot_water_loop": "Boiler Loop 1"
                                                 },
                                                 "fan_system": {
@@ -9004,6 +9214,7 @@
                                                 },
                                                 "cooling_system": {
                                                     "id": "CHW Coil 1",
+                                                    "type": "FLUID_LOOP",
                                                     "chilled_water_loop": "Chilled Water Loop 1"
                                                 }
                                             }
@@ -9017,6 +9228,13 @@
                                 "id": "Boiler 1",
                                 "loop": "Boiler Loop 1",
                                 "energy_source_type": "NATURAL_GAS"
+                            }
+                        ],
+                        "external_fluid_sources": [
+                            {
+                                "id": "Purchased CW 1",
+                                "loop": "Chilled Water Loop 1",
+                                "type": "CHILLED_WATER"
                             }
                         ],
                         "pumps": [
@@ -9620,6 +9838,7 @@
                                                 "id": "PTAC 1",
                                                 "heating_system": {
                                                     "id": "HHW Coil 1",
+                                                    "type": "FLUID_LOOP",
                                                     "hot_water_loop": "Boiler Loop 1"
                                                 },
                                                 "fan_system": {
@@ -9632,7 +9851,8 @@
                                                     ]
                                                 },
                                                 "cooling_system": {
-                                                    "id": "DX Coil 1"
+                                                    "id": "DX Coil 1",
+                                                    "type": "DIRECT_EXPANSION"
                                                 }
                                             }
                                         ]
@@ -9707,6 +9927,7 @@
                                                 "id": "PTAC 1",
                                                 "heating_system": {
                                                     "id": "HHW Coil 1",
+                                                    "type": "FLUID_LOOP",
                                                     "hot_water_loop": "Boiler Loop 1"
                                                 },
                                                 "fan_system": {
@@ -9719,7 +9940,8 @@
                                                     ]
                                                 },
                                                 "cooling_system": {
-                                                    "id": "DX Coil 1"
+                                                    "id": "DX Coil 1",
+                                                    "type": "DIRECT_EXPANSION"
                                                 }
                                             }
                                         ]
@@ -9783,36 +10005,33 @@
                                                     {
                                                         "id": "PTAC Terminal 1",
                                                         "is_supply_ducted": false,
+                                                        "heating_source": "HOT_WATER",
+                                                        "heating_from_loop": "Purchased HW Loop 1",
                                                         "type": "CONSTANT_AIR_VOLUME",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "PTAC 1"
+                                                        "served_by_heating_ventilating_air_conditioning_system": "PTAC 1",
+                                                        "cooling_source": "CHILLED_WATER",
+                                                        "cooling_from_loop": "Purchased CHW Loop 1",
+                                                        "fan": {
+                                                            "id": "Fan 1"
+                                                        }
                                                     }
                                                 ]
                                             }
                                         ],
                                         "heating_ventilating_air_conditioning_systems": [
                                             {
-                                                "id": "PTAC 1",
-                                                "heating_system": {
-                                                    "id": "HHW Coil 1",
-                                                    "hot_water_loop": "Purchased HW Loop 1"
-                                                },
-                                                "fan_system": {
-                                                    "id": "CAV Fan System 1",
-                                                    "fan_control": "CONSTANT",
-                                                    "supply_fans": [
-                                                        {
-                                                            "id": "Supply Fan 1"
-                                                        }
-                                                    ]
-                                                },
-                                                "cooling_system": {
-                                                    "id": "CHW Coil 1",
-                                                    "chilled_water_loop": "Purchased CHW 1"
-                                                }
+                                                "id": "PTAC 1"
                                             }
                                         ]
                                     }
                                 ]
+                            }
+                        ],
+                        "external_fluid_sources": [
+                            {
+                                "id": "Purchased HW 1",
+                                "loop": "Purchased HW Loop 1",
+                                "type": "HOT_WATER"
                             }
                         ],
                         "fluid_loops": [
