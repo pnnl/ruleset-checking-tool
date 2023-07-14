@@ -515,6 +515,7 @@
                                                 "id": "System 5",
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 1",
+                                                    "type": "FLUID_LOOP",
                                                     "hot_water_loop": "Boiler Loop 1"
                                                 },
                                                 "fan_system": {
@@ -532,7 +533,8 @@
                                                     ]
                                                 },
                                                 "cooling_system": {
-                                                    "id": "DX Coil 1"
+                                                    "id": "DX Coil 1",
+                                                    "type": "DIRECT_EXPANSION"
                                                 }
                                             }
                                         ]
@@ -636,6 +638,7 @@
                                                 "id": "System 5",
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 1",
+                                                    "type": "FLUID_LOOP",
                                                     "hot_water_loop": "Boiler Loop 1"
                                                 },
                                                 "fan_system": {
@@ -653,7 +656,8 @@
                                                     ]
                                                 },
                                                 "cooling_system": {
-                                                    "id": "DX Coil 1"
+                                                    "id": "DX Coil 1",
+                                                    "type": "DIRECT_EXPANSION"
                                                 }
                                             }
                                         ]
@@ -757,6 +761,7 @@
                                                 "id": "System 5",
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 1",
+                                                    "type": "FLUID_LOOP",
                                                     "hot_water_loop": "Boiler Loop 1"
                                                 },
                                                 "fan_system": {
@@ -774,7 +779,8 @@
                                                     ]
                                                 },
                                                 "cooling_system": {
-                                                    "id": "DX Coil 1"
+                                                    "id": "DX Coil 1",
+                                                    "type": "DIRECT_EXPANSION"
                                                 }
                                             }
                                         ]
@@ -878,6 +884,7 @@
                                                 "id": "System 5",
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 1",
+                                                    "type": "FLUID_LOOP",
                                                     "hot_water_loop": "Purchased HW Loop 1"
                                                 },
                                                 "fan_system": {
@@ -895,12 +902,20 @@
                                                     ]
                                                 },
                                                 "cooling_system": {
-                                                    "id": "DX Coil 1"
+                                                    "id": "DX Coil 1",
+                                                    "type": "DIRECT_EXPANSION"
                                                 }
                                             }
                                         ]
                                     }
                                 ]
+                            }
+                        ],
+                        "external_fluid_sources": [
+                            {
+                                "id": "Purchased HW 1",
+                                "loop": "Purchased HW Loop 1",
+                                "type": "HOT_WATER"
                             }
                         ],
                         "pumps": [

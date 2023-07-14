@@ -3,7 +3,7 @@
         "Section": 19,
         "Rule": 17,
         "Test": "a",
-        "test_description": "System 1 with `SIMPLE` specification method for supply/return/exhaust/relief fans and each of 5 fans have 59 W design electric power for a total of 295 W with 1000 cfm design supply airflow.",
+        "test_description": "System 1 with `SIMPLE` specification method for supply/return/exhaust/relief fans and each fans have 35 W design electric power with 1400 cfm design supply airflow.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "19-17",
@@ -44,7 +44,7 @@
                                                 "zonal_exhaust_fan": {
                                                     "id": "Zone exhaust fan 1",
                                                     "specification_method": "SIMPLE",
-                                                    "design_electric_power": 59
+                                                    "design_electric_power": 200
                                                 }
                                             }
                                         ],
@@ -67,29 +67,29 @@
                                                         {
                                                             "id": "Supply Fan 1",
                                                             "specification_method": "SIMPLE",
-                                                            "design_electric_power": 59,
-                                                            "design_airflow": 471.94744319999984
+                                                            "design_electric_power": 35,
+                                                            "design_airflow": 660.7264204799998
                                                         }
                                                     ],
                                                     "return_fans": [
                                                         {
                                                             "id": "Return fan 1",
                                                             "specification_method": "SIMPLE",
-                                                            "design_electric_power": 59
+                                                            "design_electric_power": 35
                                                         }
                                                     ],
                                                     "relief_fans": [
                                                         {
                                                             "id": "Relief fan 1",
                                                             "specification_method": "SIMPLE",
-                                                            "design_electric_power": 59
+                                                            "design_electric_power": 35
                                                         }
                                                     ],
                                                     "exhaust_fans": [
                                                         {
                                                             "id": "Exhaust fan 1",
                                                             "specification_method": "SIMPLE",
-                                                            "design_electric_power": 59
+                                                            "design_electric_power": 35
                                                         }
                                                     ]
                                                 }
@@ -121,7 +121,7 @@
         "Section": 19,
         "Rule": 17,
         "Test": "b",
-        "test_description": "System 1 with `SIMPLE` specification method for supply/return/exhaust/relief fans and each fans have 80 W design electric power with 800 cfm design supply airflow.",
+        "test_description": "For baseline system 1 and 2, the total fan electrical power (Pfan) for supply, return, exhaust, and relief shall be = CFMs \u00d7 0.3, where, CFMs = the baseline system maximum design supply fan airflow rate, cfm",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "19-17",

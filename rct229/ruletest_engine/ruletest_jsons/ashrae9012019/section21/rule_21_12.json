@@ -498,6 +498,7 @@
                                                 "id": "PTAC 1",
                                                 "heating_system": {
                                                     "id": "HHW Coil 1",
+                                                    "type": "FLUID_LOOP",
                                                     "hot_water_loop": "Purchased HW Loop 1"
                                                 },
                                                 "fan_system": {
@@ -510,12 +511,20 @@
                                                     ]
                                                 },
                                                 "cooling_system": {
-                                                    "id": "DX Coil 1"
+                                                    "id": "DX Coil 1",
+                                                    "type": "DIRECT_EXPANSION"
                                                 }
                                             }
                                         ]
                                     }
                                 ]
+                            }
+                        ],
+                        "external_fluid_sources": [
+                            {
+                                "id": "Purchased HW 1",
+                                "loop": "Purchased HW Loop 1",
+                                "type": "HOT_WATER"
                             }
                         ],
                         "fluid_loops": [
@@ -583,6 +592,7 @@
                                                 "id": "PTAC 1",
                                                 "heating_system": {
                                                     "id": "HHW Coil 1",
+                                                    "type": "FLUID_LOOP",
                                                     "hot_water_loop": "Purchased HW Loop 1"
                                                 },
                                                 "fan_system": {
@@ -595,12 +605,20 @@
                                                     ]
                                                 },
                                                 "cooling_system": {
-                                                    "id": "DX Coil 1"
+                                                    "id": "DX Coil 1",
+                                                    "type": "DIRECT_EXPANSION"
                                                 }
                                             }
                                         ]
                                     }
                                 ]
+                            }
+                        ],
+                        "external_fluid_sources": [
+                            {
+                                "id": "Purchased HW 1",
+                                "loop": "Purchased HW Loop 1",
+                                "type": "HOT_WATER"
                             }
                         ],
                         "fluid_loops": [
@@ -668,6 +686,7 @@
                                                 "id": "PTAC 1",
                                                 "heating_system": {
                                                     "id": "HHW Coil 1",
+                                                    "type": "FLUID_LOOP",
                                                     "hot_water_loop": "Purchased HW Loop 1"
                                                 },
                                                 "fan_system": {
@@ -680,12 +699,20 @@
                                                     ]
                                                 },
                                                 "cooling_system": {
-                                                    "id": "DX Coil 1"
+                                                    "id": "DX Coil 1",
+                                                    "type": "DIRECT_EXPANSION"
                                                 }
                                             }
                                         ]
                                     }
                                 ]
+                            }
+                        ],
+                        "external_fluid_sources": [
+                            {
+                                "id": "Purchased HW 1",
+                                "loop": "Purchased HW Loop 1",
+                                "type": "HOT_WATER"
                             }
                         ],
                         "fluid_loops": [
@@ -753,6 +780,7 @@
                                                 "id": "System 9",
                                                 "heating_system": {
                                                     "id": "Furnace Coil 1",
+                                                    "type": "FURNACE",
                                                     "energy_source_type": "NATURAL_GAS"
                                                 },
                                                 "fan_system": {
