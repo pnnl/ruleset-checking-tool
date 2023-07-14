@@ -733,7 +733,7 @@
                                 ],
                                 "cooling_or_condensing_design_and_control": {
                                     "id": "CCDC 1",
-                                    "design_supply_temperature": 37.222222222222285
+                                    "design_supply_temperature": 35.00000000000006
                                 }
                             }
                         ],
