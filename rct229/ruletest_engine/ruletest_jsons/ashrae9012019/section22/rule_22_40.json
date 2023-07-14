@@ -574,7 +574,7 @@
                                                 "cooling_system": {
                                                     "id": "CHW Coil 1",
                                                     "type": "FLUID_LOOP",
-                                                    "chilled_water_loop": "Purchased CHW 1"
+                                                    "chilled_water_loop": "Purchased CHW Loop 1"
                                                 },
                                                 "heating_system": {
                                                     "id": "HHW Coil 1",
@@ -654,7 +654,7 @@
                                                 "cooling_system": {
                                                     "id": "CHW Coil 1",
                                                     "type": "FLUID_LOOP",
-                                                    "chilled_water_loop": "Purchased CHW 1"
+                                                    "chilled_water_loop": "Purchased CHW Loop 1"
                                                 },
                                                 "heating_system": {
                                                     "id": "HHW Coil 1",

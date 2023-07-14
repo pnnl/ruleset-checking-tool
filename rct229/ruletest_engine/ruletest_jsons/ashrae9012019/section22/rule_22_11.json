@@ -393,7 +393,7 @@
                                     {
                                         "id": "Secondary CHW Loop 1",
                                         "type": "COOLING",
-                                        "pump_power_per_flow_rate": 13
+                                        "pump_power_per_flow_rate": 206.0766182298547
                                     }
                                 ]
                             }
@@ -505,7 +505,7 @@
                                     {
                                         "id": "Secondary CHW Loop 1",
                                         "type": "COOLING",
-                                        "pump_power_per_flow_rate": 15
+                                        "pump_power_per_flow_rate": 237.78071334214002
                                     }
                                 ]
                             }
