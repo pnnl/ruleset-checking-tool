@@ -18,7 +18,7 @@ class Section19Rule22(RuleDefinitionListIndexedBase):
             id="19-22",
             description="Baseline systems modeled with exhaust air energy recovery shall allow bypass or control heat recovery system to permit air economizer operation.",
             ruleset_section_title="HVAC - General",
-            standard_section=" Section G3.1.2.2",
+            standard_section="Section G3.1.2.2",
             is_primary_rule=True,
             list_path="$.ruleset_model_descriptions[0].buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*]",
         )

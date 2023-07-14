@@ -27,7 +27,7 @@ class Section19Rule8(RuleDefinitionListIndexedBase):
             id="19-8",
             description="Demand control ventilation is modeled in the baseline design in systems with outdoor air capacity greater than 3000 cfm serving areas with an average occupant design capacity greater than 100 people per 1000 ft^2.",
             ruleset_section_title="HVAC - General",
-            standard_section=" Section G3.1.2.5 Exception #1",
+            standard_section="Section G3.1.2.5 Exception #1",
             is_primary_rule=True,
             list_path="ruleset_model_descriptions[0].buildings[*]",
         )

@@ -16,7 +16,7 @@ class Section19Rule5(RuleDefinitionBase):
             id="19-5",
             description="Unmet load hours for the proposed design shall not exceed 300 (of the 8760 hours simulated).",
             ruleset_section_title="HVAC - General",
-            standard_section=" Section G3.1.2.3",
+            standard_section="Section G3.1.2.3",
             is_primary_rule=True,
             rmr_context="ruleset_model_descriptions/0",
             required_fields={

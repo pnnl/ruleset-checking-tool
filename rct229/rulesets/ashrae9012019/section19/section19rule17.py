@@ -41,7 +41,7 @@ class Section19Rule17(RuleDefinitionListIndexedBase):
             id="19-17",
             description="For baseline system 1 and 2, the total fan electrical power (Pfan) for supply, return, exhaust, and relief shall be = CFMs × 0.3, where, CFMs = the baseline system maximum design supply fan airflow rate, cfm.",
             ruleset_section_title="HVAC - General",
-            standard_section=" Section G3.1.2.9",
+            standard_section="Section G3.1.2.9",
             is_primary_rule=True,
             rmr_context="ruleset_model_descriptions/0",
             list_path="$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*]",
