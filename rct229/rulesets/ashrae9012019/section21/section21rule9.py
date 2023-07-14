@@ -40,7 +40,7 @@ class Section21Rule9(RuleDefinitionListIndexedBase):
             standard_section="Section G3.1.3.5 Building System-Specific Modeling Requirements for the Baseline model",
             is_primary_rule=True,
             rmr_context="ruleset_model_descriptions/0",
-            list_path="fluid_loops[*]",
+            list_path="$.fluid_loops[*]",
         )
 
     def is_applicable(self, context, data=None):
