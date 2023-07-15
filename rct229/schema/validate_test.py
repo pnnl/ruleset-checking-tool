@@ -13,7 +13,7 @@ from rct229.schema.validate import (
     validate_rmr,
 )
 
-EXAMPLES_PATH = "examples"
+EXAMPLES_PATH = "..\\..\\examples"
 
 # Testing validate_rmr; intended to make sure the referenced schemas are connected
 # properly and that the example rmr files are schema valid
