@@ -482,8 +482,11 @@
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 8",
-                                                        "heating_source": "HOT_WATER",
+                                                        "heating_source": "ELECTRIC",
                                                         "heating_from_loop": "Boiler Loop 1",
+                                                        "fan": {
+                                                            "id": "Fan 1"
+                                                        },
                                                         "fan_configuration": "PARALLEL"
                                                     }
                                                 ]
@@ -498,8 +501,11 @@
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 8",
-                                                        "heating_source": "HOT_WATER",
+                                                        "heating_source": "ELECTRIC",
                                                         "heating_from_loop": "Boiler Loop 1",
+                                                        "fan": {
+                                                            "id": "Fan 2"
+                                                        },
                                                         "fan_configuration": "PARALLEL"
                                                     }
                                                 ]
@@ -629,8 +635,11 @@
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 8",
-                                                        "heating_source": "HOT_WATER",
+                                                        "heating_source": "ELECTRIC",
                                                         "heating_from_loop": "Boiler Loop 1",
+                                                        "fan": {
+                                                            "id": "Fan 1"
+                                                        },
                                                         "fan_configuration": "PARALLEL"
                                                     }
                                                 ]
@@ -645,8 +654,11 @@
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 8",
-                                                        "heating_source": "HOT_WATER",
+                                                        "heating_source": "ELECTRIC",
                                                         "heating_from_loop": "Boiler Loop 1",
+                                                        "fan": {
+                                                            "id": "Fan 2"
+                                                        },
                                                         "fan_configuration": "PARALLEL"
                                                     }
                                                 ]

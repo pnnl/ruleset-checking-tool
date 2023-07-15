@@ -1022,11 +1022,8 @@
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 8",
-                                                        "heating_source": "ELECTRIC",
+                                                        "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1",
-                                                        "fan": {
-                                                            "id": "Fan 1"
-                                                        },
                                                         "fan_configuration": "PARALLEL"
                                                     }
                                                 ]
@@ -1041,11 +1038,8 @@
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 8",
-                                                        "heating_source": "ELECTRIC",
+                                                        "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1",
-                                                        "fan": {
-                                                            "id": "Fan 2"
-                                                        },
                                                         "fan_configuration": "PARALLEL"
                                                     }
                                                 ]
@@ -1178,11 +1172,8 @@
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 8",
-                                                        "heating_source": "ELECTRIC",
+                                                        "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1",
-                                                        "fan": {
-                                                            "id": "Fan 1"
-                                                        },
                                                         "fan_configuration": "PARALLEL"
                                                     }
                                                 ]
@@ -1197,11 +1188,8 @@
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 8",
-                                                        "heating_source": "ELECTRIC",
+                                                        "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1",
-                                                        "fan": {
-                                                            "id": "Fan 2"
-                                                        },
                                                         "fan_configuration": "PARALLEL"
                                                     }
                                                 ]
@@ -3343,7 +3331,7 @@
                                                 "cooling_system": {
                                                     "id": "CHW Coil 1",
                                                     "type": "FLUID_LOOP",
-                                                    "chilled_water_loop": "Secondary CHW Loop 1"
+                                                    "chilled_water_loop": "Chilled Water Loop 1"
                                                 },
                                                 "heating_system": {
                                                     "id": "HHW Coil 1",
@@ -3370,17 +3358,16 @@
                                 ]
                             }
                         ],
-                        "chillers": [
-                            {
-                                "id": "Chiller 1",
-                                "cooling_loop": "Chiller Loop 1"
-                            }
-                        ],
                         "external_fluid_sources": [
                             {
                                 "id": "Purchased HW 1",
                                 "loop": "Purchased HW Loop 1",
                                 "type": "HOT_WATER"
+                            },
+                            {
+                                "id": "Purchased CW 1",
+                                "loop": "Chilled Water Loop 1",
+                                "type": "CHILLED_WATER"
                             }
                         ],
                         "pumps": [
@@ -3390,34 +3377,23 @@
                                 "speed_control": "FIXED_SPEED"
                             },
                             {
-                                "id": "Chiller Pump 1",
-                                "loop_or_piping": "Chiller Loop 1",
+                                "id": "CHW Pump 1",
+                                "loop_or_piping": "Chilled Water Loop 1",
                                 "speed_control": "FIXED_SPEED"
-                            },
-                            {
-                                "id": "Secondary CHW Pump",
-                                "loop_or_piping": "Secondary CHW Loop 1",
-                                "speed_control": "VARIABLE_SPEED"
                             }
                         ],
                         "fluid_loops": [
                             {
                                 "id": "Purchased HW Loop 1",
-                                "type": "HEATING"
-                            },
-                            {
-                                "id": "Chiller Loop 1",
-                                "type": "COOLING",
-                                "child_loops": [
-                                    {
-                                        "id": "Secondary CHW Loop 1",
-                                        "type": "COOLING"
-                                    }
-                                ],
+                                "type": "HEATING",
                                 "cooling_or_condensing_design_and_control": {
                                     "id": "CCDC 1",
                                     "temperature_reset_type": "LOAD_RESET"
                                 }
+                            },
+                            {
+                                "id": "Chilled Water Loop 1",
+                                "type": "COOLING"
                             }
                         ]
                     }
@@ -3475,7 +3451,7 @@
                                                 "cooling_system": {
                                                     "id": "CHW Coil 1",
                                                     "type": "FLUID_LOOP",
-                                                    "chilled_water_loop": "Secondary CHW Loop 1"
+                                                    "chilled_water_loop": "Chilled Water Loop 1"
                                                 },
                                                 "heating_system": {
                                                     "id": "HHW Coil 1",
@@ -3502,17 +3478,16 @@
                                 ]
                             }
                         ],
-                        "chillers": [
-                            {
-                                "id": "Chiller 1",
-                                "cooling_loop": "Chiller Loop 1"
-                            }
-                        ],
                         "external_fluid_sources": [
                             {
                                 "id": "Purchased HW 1",
                                 "loop": "Purchased HW Loop 1",
                                 "type": "HOT_WATER"
+                            },
+                            {
+                                "id": "Purchased CW 1",
+                                "loop": "Chilled Water Loop 1",
+                                "type": "CHILLED_WATER"
                             }
                         ],
                         "pumps": [
@@ -3522,34 +3497,23 @@
                                 "speed_control": "FIXED_SPEED"
                             },
                             {
-                                "id": "Chiller Pump 1",
-                                "loop_or_piping": "Chiller Loop 1",
+                                "id": "CHW Pump 1",
+                                "loop_or_piping": "Chilled Water Loop 1",
                                 "speed_control": "FIXED_SPEED"
-                            },
-                            {
-                                "id": "Secondary CHW Pump",
-                                "loop_or_piping": "Secondary CHW Loop 1",
-                                "speed_control": "VARIABLE_SPEED"
                             }
                         ],
                         "fluid_loops": [
                             {
                                 "id": "Purchased HW Loop 1",
-                                "type": "HEATING"
-                            },
-                            {
-                                "id": "Chiller Loop 1",
-                                "type": "COOLING",
-                                "child_loops": [
-                                    {
-                                        "id": "Secondary CHW Loop 1",
-                                        "type": "COOLING"
-                                    }
-                                ],
+                                "type": "HEATING",
                                 "cooling_or_condensing_design_and_control": {
                                     "id": "CCDC 1",
                                     "temperature_reset_type": "OUTSIDE_AIR_RESET"
                                 }
+                            },
+                            {
+                                "id": "Chilled Water Loop 1",
+                                "type": "COOLING"
                             }
                         ]
                     }
@@ -4091,11 +4055,8 @@
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 8",
-                                                        "heating_source": "ELECTRIC",
+                                                        "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1",
-                                                        "fan": {
-                                                            "id": "Fan 1"
-                                                        },
                                                         "fan_configuration": "PARALLEL"
                                                     }
                                                 ]
@@ -4110,11 +4071,8 @@
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 8",
-                                                        "heating_source": "ELECTRIC",
+                                                        "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1",
-                                                        "fan": {
-                                                            "id": "Fan 2"
-                                                        },
                                                         "fan_configuration": "PARALLEL"
                                                     }
                                                 ]
@@ -10306,11 +10264,8 @@
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 8",
-                                                        "heating_source": "ELECTRIC",
+                                                        "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1",
-                                                        "fan": {
-                                                            "id": "Fan 1"
-                                                        },
                                                         "fan_configuration": "PARALLEL"
                                                     }
                                                 ]
@@ -10325,11 +10280,8 @@
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 8",
-                                                        "heating_source": "ELECTRIC",
+                                                        "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1",
-                                                        "fan": {
-                                                            "id": "Fan 2"
-                                                        },
                                                         "fan_configuration": "PARALLEL"
                                                     }
                                                 ]
@@ -10468,11 +10420,8 @@
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 8",
-                                                        "heating_source": "ELECTRIC",
+                                                        "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1",
-                                                        "fan": {
-                                                            "id": "Fan 1"
-                                                        },
                                                         "fan_configuration": "PARALLEL"
                                                     }
                                                 ]
@@ -10487,11 +10436,8 @@
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 8",
-                                                        "heating_source": "ELECTRIC",
+                                                        "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1",
-                                                        "fan": {
-                                                            "id": "Fan 2"
-                                                        },
                                                         "fan_configuration": "PARALLEL"
                                                     }
                                                 ]
@@ -10863,7 +10809,6 @@
                             "id": "Output 1",
                             "output_instance": {
                                 "id": "Output Instance 1",
-                                "unmet_load_hours": 0,
                                 "unmet_load_hours_heating": 0,
                                 "unmet_occupied_load_hours_heating": 0,
                                 "unmet_load_hours_cooling": 0,
@@ -11021,7 +10966,6 @@
                             "id": "Output 1",
                             "output_instance": {
                                 "id": "Output Instance 1",
-                                "unmet_load_hours": 0,
                                 "unmet_load_hours_heating": 0,
                                 "unmet_occupied_load_hours_heating": 0,
                                 "unmet_load_hours_cooling": 0,
@@ -11181,7 +11125,6 @@
                             "id": "Output 1",
                             "output_instance": {
                                 "id": "Output Instance 1",
-                                "unmet_load_hours": 0,
                                 "unmet_load_hours_heating": 0,
                                 "unmet_occupied_load_hours_heating": 0,
                                 "unmet_load_hours_cooling": 0,
@@ -11341,7 +11284,6 @@
                             "id": "Output 1",
                             "output_instance": {
                                 "id": "Output Instance 1",
-                                "unmet_load_hours": 0,
                                 "unmet_load_hours_heating": 0,
                                 "unmet_occupied_load_hours_heating": 0,
                                 "unmet_load_hours_cooling": 0,
@@ -12525,11 +12467,8 @@
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 8",
-                                                        "heating_source": "ELECTRIC",
+                                                        "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1",
-                                                        "fan": {
-                                                            "id": "Fan 1"
-                                                        },
                                                         "fan_configuration": "PARALLEL"
                                                     }
                                                 ]
@@ -12544,11 +12483,8 @@
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 8",
-                                                        "heating_source": "ELECTRIC",
+                                                        "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1",
-                                                        "fan": {
-                                                            "id": "Fan 2"
-                                                        },
                                                         "fan_configuration": "PARALLEL"
                                                     }
                                                 ]
@@ -12678,11 +12614,8 @@
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 8",
-                                                        "heating_source": "ELECTRIC",
+                                                        "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1",
-                                                        "fan": {
-                                                            "id": "Fan 1"
-                                                        },
                                                         "fan_configuration": "PARALLEL"
                                                     }
                                                 ]
@@ -12697,11 +12630,8 @@
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 8",
-                                                        "heating_source": "ELECTRIC",
+                                                        "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1",
-                                                        "fan": {
-                                                            "id": "Fan 2"
-                                                        },
                                                         "fan_configuration": "PARALLEL"
                                                     }
                                                 ]
@@ -16974,7 +16904,6 @@
                             "id": "Output 1",
                             "output_instance": {
                                 "id": "Output Instance 1",
-                                "unmet_load_hours": 0,
                                 "unmet_load_hours_heating": 0,
                                 "unmet_occupied_load_hours_heating": 0,
                                 "unmet_load_hours_cooling": 0,
@@ -17135,7 +17064,6 @@
                             "id": "Output 1",
                             "output_instance": {
                                 "id": "Output Instance 1",
-                                "unmet_load_hours": 0,
                                 "unmet_load_hours_heating": 0,
                                 "unmet_occupied_load_hours_heating": 0,
                                 "unmet_load_hours_cooling": 0,
@@ -17296,7 +17224,6 @@
                             "id": "Output 1",
                             "output_instance": {
                                 "id": "Output Instance 1",
-                                "unmet_load_hours": 0,
                                 "unmet_load_hours_heating": 0,
                                 "unmet_occupied_load_hours_heating": 0,
                                 "unmet_load_hours_cooling": 0,
@@ -17453,7 +17380,6 @@
                             "id": "Output 1",
                             "output_instance": {
                                 "id": "Output Instance 1",
-                                "unmet_load_hours": 0,
                                 "unmet_load_hours_heating": 0,
                                 "unmet_occupied_load_hours_heating": 0,
                                 "unmet_load_hours_cooling": 0,
@@ -17618,7 +17544,6 @@
                             "id": "Output 1",
                             "output_instance": {
                                 "id": "Output Instance 1",
-                                "unmet_load_hours": 0,
                                 "unmet_load_hours_heating": 0,
                                 "unmet_occupied_load_hours_heating": 0,
                                 "unmet_load_hours_cooling": 0,
@@ -17779,7 +17704,6 @@
                             "id": "Output 1",
                             "output_instance": {
                                 "id": "Output Instance 1",
-                                "unmet_load_hours": 0,
                                 "unmet_load_hours_heating": 0,
                                 "unmet_occupied_load_hours_heating": 0,
                                 "unmet_load_hours_cooling": 0,
@@ -18397,11 +18321,8 @@
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 8",
-                                                        "heating_source": "ELECTRIC",
+                                                        "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1",
-                                                        "fan": {
-                                                            "id": "Fan 1"
-                                                        },
                                                         "fan_configuration": "PARALLEL"
                                                     }
                                                 ]
@@ -18416,11 +18337,8 @@
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 8",
-                                                        "heating_source": "ELECTRIC",
+                                                        "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1",
-                                                        "fan": {
-                                                            "id": "Fan 2"
-                                                        },
                                                         "fan_configuration": "PARALLEL"
                                                     }
                                                 ]
@@ -18553,11 +18471,8 @@
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 8",
-                                                        "heating_source": "ELECTRIC",
+                                                        "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1",
-                                                        "fan": {
-                                                            "id": "Fan 1"
-                                                        },
                                                         "fan_configuration": "PARALLEL"
                                                     }
                                                 ]
@@ -18572,11 +18487,8 @@
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 8",
-                                                        "heating_source": "ELECTRIC",
+                                                        "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1",
-                                                        "fan": {
-                                                            "id": "Fan 2"
-                                                        },
                                                         "fan_configuration": "PARALLEL"
                                                     }
                                                 ]
@@ -18709,11 +18621,8 @@
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 8",
-                                                        "heating_source": "ELECTRIC",
+                                                        "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1",
-                                                        "fan": {
-                                                            "id": "Fan 1"
-                                                        },
                                                         "fan_configuration": "PARALLEL"
                                                     }
                                                 ]
@@ -18728,11 +18637,8 @@
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 8",
-                                                        "heating_source": "ELECTRIC",
+                                                        "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1",
-                                                        "fan": {
-                                                            "id": "Fan 2"
-                                                        },
                                                         "fan_configuration": "PARALLEL"
                                                     }
                                                 ]
@@ -18962,11 +18868,8 @@
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 8",
-                                                        "heating_source": "ELECTRIC",
+                                                        "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1",
-                                                        "fan": {
-                                                            "id": "Fan 1"
-                                                        },
                                                         "fan_configuration": "PARALLEL"
                                                     }
                                                 ]
@@ -18981,11 +18884,8 @@
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 8",
-                                                        "heating_source": "ELECTRIC",
+                                                        "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1",
-                                                        "fan": {
-                                                            "id": "Fan 2"
-                                                        },
                                                         "fan_configuration": "PARALLEL"
                                                     }
                                                 ]
@@ -19114,11 +19014,8 @@
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 8",
-                                                        "heating_source": "ELECTRIC",
+                                                        "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1",
-                                                        "fan": {
-                                                            "id": "Fan 1"
-                                                        },
                                                         "fan_configuration": "PARALLEL"
                                                     }
                                                 ]
@@ -19133,11 +19030,8 @@
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 8",
-                                                        "heating_source": "ELECTRIC",
+                                                        "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1",
-                                                        "fan": {
-                                                            "id": "Fan 2"
-                                                        },
                                                         "fan_configuration": "PARALLEL"
                                                     }
                                                 ]
@@ -21611,6 +21505,185 @@
         "Section": 22,
         "Rule": 40,
         "Test": "c",
+        "test_description": "Building has one zone.  Purchased chilled water is modeled in both the proposed and baseline systems for building utilizing system 1c.  Expected result: PASS",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "22-40",
+            "ruleset_reference": "Section G3.1.1.1 & G3.1.1.3.1",
+            "rule_description": "For systems using purchased chilled water, the cooling source shall be modeled based on G3.1.1.3 as purchased chilled water in both the proposed design and baseline building design. On-site chillers and direct expansion equipment shall not be modeled in the baseline building design.",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "primary_rule": "Yes",
+            "schema_version": "0.0.29"
+        },
+        "rmr_transformations": {
+            "proposed": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_open_schedule": "Required Building Schedule 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                                "terminals": [
+                                                    {
+                                                        "id": "PTAC Terminal 1",
+                                                        "is_supply_ducted": false,
+                                                        "type": "CONSTANT_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "PTAC 1"
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "PTAC 1",
+                                                "cooling_system": {
+                                                    "id": "CHW Coil 1",
+                                                    "type": "FLUID_LOOP",
+                                                    "chilled_water_loop": "Purchased CHW Loop 1"
+                                                },
+                                                "heating_system": {
+                                                    "id": "HHW Coil 1",
+                                                    "type": "FLUID_LOOP",
+                                                    "hot_water_loop": "Purchased HW Loop 1"
+                                                },
+                                                "fan_system": {
+                                                    "id": "CAV Fan System 1",
+                                                    "fan_control": "CONSTANT",
+                                                    "supply_fans": [
+                                                        {
+                                                            "id": "Supply Fan 1"
+                                                        }
+                                                    ]
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "external_fluid_sources": [
+                            {
+                                "id": "Purchased HW 1",
+                                "loop": "Purchased HW Loop 1",
+                                "type": "HOT_WATER"
+                            },
+                            {
+                                "id": "Purchased CHW 1",
+                                "loop": "Purchased CHW Loop 1",
+                                "type": "CHILLED_WATER"
+                            }
+                        ],
+                        "fluid_loops": [
+                            {
+                                "id": "Purchased HW Loop 1",
+                                "type": "HEATING"
+                            },
+                            {
+                                "id": "Purchased CHW Loop 1",
+                                "type": "COOLING"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_open_schedule": "Required Building Schedule 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                                "terminals": [
+                                                    {
+                                                        "id": "PTAC Terminal 1",
+                                                        "is_supply_ducted": false,
+                                                        "type": "CONSTANT_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "PTAC 1"
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "PTAC 1",
+                                                "cooling_system": {
+                                                    "id": "CHW Coil 1",
+                                                    "type": "FLUID_LOOP",
+                                                    "chilled_water_loop": "Purchased CHW Loop 1"
+                                                },
+                                                "heating_system": {
+                                                    "id": "HHW Coil 1",
+                                                    "type": "FLUID_LOOP",
+                                                    "hot_water_loop": "Purchased HW Loop 1"
+                                                },
+                                                "fan_system": {
+                                                    "id": "CAV Fan System 1",
+                                                    "fan_control": "CONSTANT",
+                                                    "supply_fans": [
+                                                        {
+                                                            "id": "Supply Fan 1"
+                                                        }
+                                                    ]
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "external_fluid_sources": [
+                            {
+                                "id": "Purchased HW 1",
+                                "loop": "Purchased HW Loop 1",
+                                "type": "HOT_WATER"
+                            },
+                            {
+                                "id": "Purchased CHW 1",
+                                "loop": "Purchased CHW Loop 1",
+                                "type": "CHILLED_WATER"
+                            }
+                        ],
+                        "fluid_loops": [
+                            {
+                                "id": "Purchased HW Loop 1",
+                                "type": "HEATING"
+                            },
+                            {
+                                "id": "Purchased CHW Loop 1",
+                                "type": "COOLING"
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    },
+    "rule-22-40-d": {
+        "Section": 22,
+        "Rule": 40,
+        "Test": "d",
         "test_description": "Building has one zone.  Purchased chilled water is modeled in the proposed model, but baseline uses DX cooling (system 1).  Expected result: FAIL",
         "expected_rule_outcome": "fail",
         "standard": {
@@ -21778,10 +21851,10 @@
             }
         }
     },
-    "rule-22-40-d": {
+    "rule-22-40-e": {
         "Section": 22,
         "Rule": 40,
-        "Test": "d",
+        "Test": "e",
         "test_description": "Building has one zone.  Purchased chilled water is not modeled in the proposed model.  Both proposed and beaseline are modeled with system type 2.  Expected result: Not Applicable",
         "expected_rule_outcome": "not_applicable",
         "standard": {
