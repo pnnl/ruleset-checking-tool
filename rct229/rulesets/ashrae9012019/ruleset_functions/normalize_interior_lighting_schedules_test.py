@@ -72,9 +72,9 @@ TEST_SCHEDULES = {
 }
 
 ZONE_HEIGHT = 10.0
-TEST_SPACES = quantify_rmr(TEST_SPACE_RMR)["ruleset_model_descriptions"][0]["buildings"][
-    0
-]["building_segments"][0]["zones"][0]["spaces"][0]
+TEST_SPACES = quantify_rmr(TEST_SPACE_RMR)["ruleset_model_descriptions"][0][
+    "buildings"
+][0]["building_segments"][0]["zones"][0]["spaces"][0]
 
 
 def test__TEST_RMD__is_valid():

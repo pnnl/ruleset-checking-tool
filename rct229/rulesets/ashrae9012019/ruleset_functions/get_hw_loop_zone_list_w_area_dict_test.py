@@ -178,7 +178,9 @@ GET_HW_LOOP_ZONE_LIST_W_AREA_RMD = {
     ],
 }
 
-TEST_RMI = quantify_rmr(GET_HW_LOOP_ZONE_LIST_W_AREA_RMD)["ruleset_model_descriptions"][0]
+TEST_RMI = quantify_rmr(GET_HW_LOOP_ZONE_LIST_W_AREA_RMD)["ruleset_model_descriptions"][
+    0
+]
 
 
 def test__TEST_RMD__is_valid():

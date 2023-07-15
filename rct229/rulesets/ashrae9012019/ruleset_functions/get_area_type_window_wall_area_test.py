@@ -511,7 +511,9 @@ TEST_RMR = {
 
 TEST_RMR_12 = {"id": "229_01", "ruleset_model_descriptions": [TEST_RMR]}
 
-TEST_BUILDING = quantify_rmr(TEST_RMR_12)["ruleset_model_descriptions"][0]["buildings"][0]
+TEST_BUILDING = quantify_rmr(TEST_RMR_12)["ruleset_model_descriptions"][0]["buildings"][
+    0
+]
 
 
 def test__TEST_RMD__is_valid():
