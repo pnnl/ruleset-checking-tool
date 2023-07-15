@@ -27,14 +27,14 @@ class Section6Rule1(RuleDefinitionListIndexedBase):
             ruleset_section_title="Lighting",
             standard_section="Section G1.2.1(b) Mandatory Provisions related to interior lighting power",
             is_primary_rule=True,
-            rmr_context="ruleset_model_instances/0/buildings/0/building_segments",
+            rmr_context="ruleset_model_descriptions/0/buildings/0/building_segments",
         )
 
     class BuildingSegmentRule(RuleDefinitionBase):
         def __init__(self):
             super(Section6Rule1.BuildingSegmentRule, self).__init__(
                 rmrs_used=UserBaselineProposedVals(False, False, True),
-                required_fields={"$..zones[*]": ["volume"]},
+                required_fields={"$.zones[*]": ["volume"]},
             )
 
         def get_calc_vals(self, context, data=None):
@@ -52,15 +52,15 @@ class Section6Rule1(RuleDefinitionListIndexedBase):
             total_building_segment_area_p = ZERO.AREA
             check_BAM_flag = False
             allowable_lighting_wattage_SBS = ZERO.POWER
-            for zone_p in find_all("$..zones[*]", building_segment_p):
+            for zone_p in find_all("$.zones[*]", building_segment_p):
                 zone_avg_height = zone_p["volume"] / pint_sum(
-                    find_all("$..spaces[*].floor_area", zone_p)
+                    find_all("$.spaces[*].floor_area", zone_p)
                 )
 
-                for space_p in find_all("$..spaces[*]", zone_p):
+                for space_p in find_all("$.spaces[*]", zone_p):
                     building_segment_design_lighting_wattage += (
                         pint_sum(
-                            find_all("$..interior_lighting[*].power_per_area", space_p),
+                            find_all("$.interior_lighting[*].power_per_area", space_p),
                             ZERO.POWER_PER_AREA,
                         )
                         * space_p["floor_area"]

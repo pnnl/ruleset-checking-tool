@@ -13,12 +13,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Yes",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.29"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "buildings": [
@@ -71,12 +71,12 @@
                                                 "id": "System 7",
                                                 "cooling_system": {
                                                     "id": "CHW Coil 1",
-                                                    "cooling_system_type": "FLUID_LOOP",
+                                                    "type": "FLUID_LOOP",
                                                     "chilled_water_loop": "Secondary CHW Loop 1"
                                                 },
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 1",
-                                                    "heating_system_type": "FLUID_LOOP",
+                                                    "type": "FLUID_LOOP",
                                                     "hot_water_loop": "Boiler Loop 1"
                                                 },
                                                 "fan_system": {
@@ -141,7 +141,8 @@
                                 "type": "COOLING",
                                 "child_loops": [
                                     {
-                                        "id": "Secondary CHW Loop 1"
+                                        "id": "Secondary CHW Loop 1",
+                                        "type": "COOLING"
                                     }
                                 ]
                             }
@@ -165,12 +166,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Yes",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.29"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "buildings": [
@@ -206,12 +207,12 @@
                                                 "id": "System 11",
                                                 "cooling_system": {
                                                     "id": "CHW Coil 1",
-                                                    "cooling_system_type": "FLUID_LOOP",
+                                                    "type": "FLUID_LOOP",
                                                     "chilled_water_loop": "Secondary CHW Loop 1"
                                                 },
                                                 "heating_system": {
                                                     "id": "Boiler Coil 1",
-                                                    "heating_system_type": "FLUID_LOOP",
+                                                    "type": "FLUID_LOOP",
                                                     "hot_water_loop": "Boiler Loop 1"
                                                 },
                                                 "fan_system": {
@@ -276,7 +277,8 @@
                                 "type": "COOLING",
                                 "child_loops": [
                                     {
-                                        "id": "Secondary CHW Loop 1"
+                                        "id": "Secondary CHW Loop 1",
+                                        "type": "COOLING"
                                     }
                                 ]
                             }

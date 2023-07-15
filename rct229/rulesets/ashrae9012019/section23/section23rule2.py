@@ -41,7 +41,7 @@ class Section23Rule2(RuleDefinitionListIndexedBase):
             ruleset_section_title="HVAC - Airside",
             standard_section="Section G3.1.3.12 Supply Air Temperature Reset (Systems 5 through 8 and 11)",
             is_primary_rule=True,
-            rmr_context="ruleset_model_instances/0",
+            rmr_context="ruleset_model_descriptions/0",
             list_path="$..heating_ventilating_air_conditioning_systems[*]",
         )
 

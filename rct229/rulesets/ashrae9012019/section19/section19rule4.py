@@ -28,7 +28,7 @@ class Section19Rule4(RuleDefinitionListIndexedBase):
             ruleset_section_title="HVAC - General",
             standard_section="Section G3.1.2.2.1 Exception",
             is_primary_rule=True,
-            list_path="ruleset_model_instances[0]",
+            list_path="ruleset_model_descriptions[0]",
             required_fields={
                 "$": ["calendar"],
                 "calendar": ["day_of_week_for_january_1"],
@@ -47,7 +47,7 @@ class Section19Rule4(RuleDefinitionListIndexedBase):
                 rmrs_used=UserBaselineProposedVals(False, True, False),
                 each_rule=Section19Rule4.RuleSetModelInstanceRule.BuildingSegmentRule(),
                 index_rmr="baseline",
-                list_path="buildings[*].building_segments[*]",
+                list_path="$.buildings[*].building_segments[*]",
             )
 
         def create_data(self, context, data):
@@ -63,7 +63,7 @@ class Section19Rule4(RuleDefinitionListIndexedBase):
                     rmrs_used=UserBaselineProposedVals(False, True, False),
                     each_rule=Section19Rule4.RuleSetModelInstanceRule.BuildingSegmentRule.ZoneRule(),
                     index_rmr="baseline",
-                    list_path="zones[*]",
+                    list_path="$.zones[*]",
                 )
 
             def create_data(self, context, data):

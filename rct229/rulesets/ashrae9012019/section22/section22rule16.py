@@ -42,7 +42,7 @@ class Section22Rule16(RuleDefinitionListIndexedBase):
             ruleset_section_title="HVAC - Chiller",
             standard_section="Section G3.1.3.11 Heat Rejection (System 7, 8, 11, 12 and 13)",
             is_primary_rule=True,
-            rmr_context="ruleset_model_instances/0",
+            rmr_context="ruleset_model_descriptions/0",
             list_path="heat_rejections[*]",
         )
 
@@ -73,9 +73,9 @@ class Section22Rule16(RuleDefinitionListIndexedBase):
         rmi_b = context.baseline
         heat_rejection_loop_dict = {
             heat_rejection_loop: find_exactly_one_with_field_value(
-                "$..fluid_loops[*]", "id", heat_rejection_loop, rmi_b
+                "$.fluid_loops[*]", "id", heat_rejection_loop, rmi_b
             )
-            for heat_rejection_loop in find_all("heat_rejections[*].loop", rmi_b)
+            for heat_rejection_loop in find_all("$.heat_rejections[*].loop", rmi_b)
         }
         return {"heat_rejection_loop_dict": heat_rejection_loop_dict}
 

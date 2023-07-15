@@ -43,8 +43,8 @@ class Section23Rule16(RuleDefinitionListIndexedBase):
             ruleset_section_title="HVAC - Airside",
             standard_section="Section G3.1.3.19 Preheat Coils (Systems 5 through 8)",
             is_primary_rule=True,
-            rmr_context="ruleset_model_instances/0",
-            list_path="$..heating_ventilating_air_conditioning_systems[*]",
+            rmr_context="ruleset_model_descriptions/0",
+            list_path="$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*]",
         )
 
     def is_applicable(self, context, data=None):
@@ -64,11 +64,11 @@ class Section23Rule16(RuleDefinitionListIndexedBase):
 
         # set hvac_id with highest zone_design_heating_setpoint
         hvac_max_zone_setpoint_dict = {}
-        for zone in find_all("$..zones[*]", rmi_b):
+        for zone in find_all("$.buildings[*].building_segments[*].zones[*]", rmi_b):
             zone_design_heating_setpoint = getattr_(
                 zone, "zone", "design_thermostat_heating_setpoint"
             )
-            for terminal in find_all("$..terminals[*]", zone):
+            for terminal in find_all("$.terminals[*]", zone):
                 hvac_id = getattr_(
                     terminal,
                     "terminal",
@@ -80,7 +80,7 @@ class Section23Rule16(RuleDefinitionListIndexedBase):
                         hvac_max_zone_setpoint_dict.get(hvac_id, ZERO.TEMPERATURE),
                     )
                     for hvac_id in find_all(
-                        "$..terminals[*].served_by_heating_ventilating_air_conditioning_system",
+                        "$.terminals[*].served_by_heating_ventilating_air_conditioning_system",
                         zone,
                     )
                 }
@@ -90,7 +90,10 @@ class Section23Rule16(RuleDefinitionListIndexedBase):
             preheat_system["hot_water_loop"]: find_exactly_one_fluid_loop(
                 rmi_b, preheat_system["hot_water_loop"]
             )["type"]
-            for preheat_system in find_all("$..preheat_system", rmi_b)
+            for preheat_system in find_all(
+                "$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*].preheat_system",
+                rmi_b,
+            )
         }
 
         # find applicable hvac sys ids
@@ -122,7 +125,7 @@ class Section23Rule16(RuleDefinitionListIndexedBase):
                 required_fields={
                     "$": ["id", "preheat_system"],
                     "preheat_system": [
-                        "heating_system_type",
+                        "type",
                         "hot_water_loop",
                         "heating_coil_setpoint",
                     ],
@@ -136,7 +139,7 @@ class Section23Rule16(RuleDefinitionListIndexedBase):
             preheat_system_b = heating_ventilating_air_conditioning_systems_b[
                 "preheat_system"
             ]
-            heating_system_type = preheat_system_b["heating_system_type"]
+            heating_system_type = preheat_system_b["type"]
             hot_water_loop_type = data["hot_water_loop_type_dict"][
                 preheat_system_b["hot_water_loop"]
             ]

@@ -57,7 +57,7 @@ class Section19Rule10(RuleDefinitionListIndexedBase):
         super(Section19Rule10, self).__init__(
             rmrs_used=UserBaselineProposedVals(False, True, True),
             required_fields={
-                "$": ["weather", "ruleset_model_instances"],
+                "$": ["weather", "ruleset_model_descriptions"],
                 "weather": ["climate_zone"],
             },
             each_rule=Section19Rule10.RulesetModelInstanceRule(),
@@ -70,7 +70,7 @@ class Section19Rule10(RuleDefinitionListIndexedBase):
             ruleset_section_title="HVAC - General",
             standard_section="Section G3.1.2.6 including exceptions 1-3",
             is_primary_rule=True,
-            list_path="ruleset_model_instances[0]",
+            list_path="ruleset_model_descriptions[0]",
             data_items={"climate_zone": ("baseline", "weather/climate_zone")},
         )
 
