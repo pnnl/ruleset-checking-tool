@@ -274,9 +274,9 @@ def test__is_baseline_system_11_2__true():
 def test__is_baseline_system_11_2__test_json_true():
     assert (
         is_baseline_system_11_2(
-            load_system_test_file("System_11.2_VAV_SZ.json")["ruleset_model_descriptions"][
-                0
-            ],
+            load_system_test_file("System_11.2_VAV_SZ.json")[
+                "ruleset_model_descriptions"
+            ][0],
             "System 11",
             ["VAV Air Terminal 1"],
             ["Thermal Zone 1"],

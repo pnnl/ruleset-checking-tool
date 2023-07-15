@@ -176,10 +176,13 @@ def test_has_preheat_system_fail():
 
 
 def test_has_fan_system_true():
-    assert has_fan_system(TEST_RMD_PASS["ruleset_model_descriptions"][0], "PTHP 1") == True
+    assert (
+        has_fan_system(TEST_RMD_PASS["ruleset_model_descriptions"][0], "PTHP 1") == True
+    )
 
 
 def test_has_fan_system_fail():
     assert (
-        has_fan_system(TEST_RMD_FAIL["ruleset_model_descriptions"][0], "PTHP 1") == False
+        has_fan_system(TEST_RMD_FAIL["ruleset_model_descriptions"][0], "PTHP 1")
+        == False
     )
