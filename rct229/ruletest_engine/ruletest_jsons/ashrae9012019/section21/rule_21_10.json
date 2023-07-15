@@ -368,6 +368,7 @@
                                                 "id": "System 11",
                                                 "heating_system": {
                                                     "id": "Boiler Coil 1",
+                                                    "type": "FLUID_LOOP",
                                                     "hot_water_loop": "Boiler Loop 1"
                                                 },
                                                 "fan_system": {
@@ -386,6 +387,7 @@
                                                 },
                                                 "cooling_system": {
                                                     "id": "CHW Coil 1",
+                                                    "type": "FLUID_LOOP",
                                                     "chilled_water_loop": "Chilled Water Loop 1"
                                                 }
                                             }
@@ -399,6 +401,13 @@
                                 "id": "Boiler 1",
                                 "loop": "Boiler Loop 1",
                                 "energy_source_type": "NATURAL_GAS"
+                            }
+                        ],
+                        "external_fluid_sources": [
+                            {
+                                "id": "Purchased CW 1",
+                                "loop": "Chilled Water Loop 1",
+                                "type": "CHILLED_WATER"
                             }
                         ],
                         "pumps": [
@@ -483,6 +492,7 @@
                                                 "id": "System 11",
                                                 "heating_system": {
                                                     "id": "Boiler Coil 1",
+                                                    "type": "FLUID_LOOP",
                                                     "hot_water_loop": "Boiler Loop 1"
                                                 },
                                                 "fan_system": {
@@ -501,6 +511,7 @@
                                                 },
                                                 "cooling_system": {
                                                     "id": "CHW Coil 1",
+                                                    "type": "FLUID_LOOP",
                                                     "chilled_water_loop": "Chilled Water Loop 1"
                                                 }
                                             }
@@ -514,6 +525,13 @@
                                 "id": "Boiler 1",
                                 "loop": "Boiler Loop 1",
                                 "energy_source_type": "NATURAL_GAS"
+                            }
+                        ],
+                        "external_fluid_sources": [
+                            {
+                                "id": "Purchased CW 1",
+                                "loop": "Chilled Water Loop 1",
+                                "type": "CHILLED_WATER"
                             }
                         ],
                         "pumps": [
@@ -581,10 +599,13 @@
                                                     {
                                                         "id": "VAV Air Terminal 1",
                                                         "is_supply_ducted": true,
-                                                        "heating_source": "HOT_WATER",
+                                                        "heating_source": "ELECTRIC",
                                                         "heating_from_loop": "Boiler Loop 1",
                                                         "type": "VARIABLE_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 8",
+                                                        "fan": {
+                                                            "id": "Fan 1"
+                                                        },
                                                         "fan_configuration": "PARALLEL"
                                                     }
                                                 ],
@@ -603,10 +624,13 @@
                                                     {
                                                         "id": "VAV Air Terminal 2",
                                                         "is_supply_ducted": true,
-                                                        "heating_source": "HOT_WATER",
+                                                        "heating_source": "ELECTRIC",
                                                         "type": "VARIABLE_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 8",
                                                         "heating_from_loop": "Boiler Loop 1",
+                                                        "fan": {
+                                                            "id": "Fan 2"
+                                                        },
                                                         "fan_configuration": "PARALLEL"
                                                     }
                                                 ]
@@ -616,7 +640,8 @@
                                             {
                                                 "id": "System 8",
                                                 "preheat_system": {
-                                                    "id": "Preheat Coil 1"
+                                                    "id": "Preheat Coil 1",
+                                                    "type": "ELECTRIC_RESISTANCE"
                                                 },
                                                 "fan_system": {
                                                     "id": "VAV Fan System 1",
@@ -634,6 +659,7 @@
                                                 },
                                                 "cooling_system": {
                                                     "id": "CHW Coil 1",
+                                                    "type": "FLUID_LOOP",
                                                     "chilled_water_loop": "Secondary CHW Loop 1"
                                                 }
                                             }

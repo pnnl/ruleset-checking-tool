@@ -936,6 +936,7 @@
                                                 "id": "System 12",
                                                 "heating_system": {
                                                     "id": "Boiler Coil 1",
+                                                    "type": "FLUID_LOOP",
                                                     "hot_water_loop": "Boiler Loop 1"
                                                 },
                                                 "fan_system": {
@@ -954,6 +955,7 @@
                                                 },
                                                 "cooling_system": {
                                                     "id": "CHW Coil 1",
+                                                    "type": "FLUID_LOOP",
                                                     "chilled_water_loop": "Chilled Water Loop 1"
                                                 }
                                             }
@@ -970,6 +972,13 @@
                                 "rated_capacity": 879213.3333333334,
                                 "efficiency": 0.8,
                                 "efficiency_metric": "COMBUSTION"
+                            }
+                        ],
+                        "external_fluid_sources": [
+                            {
+                                "id": "Purchased CW 1",
+                                "loop": "Chilled Water Loop 1",
+                                "type": "CHILLED_WATER"
                             }
                         ],
                         "pumps": [
@@ -1048,6 +1057,7 @@
                                                 "id": "System 12",
                                                 "heating_system": {
                                                     "id": "Boiler Coil 1",
+                                                    "type": "FLUID_LOOP",
                                                     "hot_water_loop": "Boiler Loop 1"
                                                 },
                                                 "fan_system": {
@@ -1066,6 +1076,7 @@
                                                 },
                                                 "cooling_system": {
                                                     "id": "CHW Coil 1",
+                                                    "type": "FLUID_LOOP",
                                                     "chilled_water_loop": "Chilled Water Loop 1"
                                                 }
                                             }
@@ -1082,6 +1093,13 @@
                                 "rated_capacity": 879213.3333333334,
                                 "efficiency": 0.8,
                                 "efficiency_metric": "THERMAL"
+                            }
+                        ],
+                        "external_fluid_sources": [
+                            {
+                                "id": "Purchased CW 1",
+                                "loop": "Chilled Water Loop 1",
+                                "type": "CHILLED_WATER"
                             }
                         ],
                         "pumps": [
@@ -1160,6 +1178,7 @@
                                                 "id": "System 12",
                                                 "heating_system": {
                                                     "id": "Boiler Coil 1",
+                                                    "type": "FLUID_LOOP",
                                                     "hot_water_loop": "Boiler Loop 1"
                                                 },
                                                 "fan_system": {
@@ -1178,6 +1197,7 @@
                                                 },
                                                 "cooling_system": {
                                                     "id": "CHW Coil 1",
+                                                    "type": "FLUID_LOOP",
                                                     "chilled_water_loop": "Chilled Water Loop 1"
                                                 }
                                             }
@@ -1191,6 +1211,13 @@
                                 "id": "Boiler 1",
                                 "loop": "Boiler Loop 1",
                                 "energy_source_type": "NATURAL_GAS"
+                            }
+                        ],
+                        "external_fluid_sources": [
+                            {
+                                "id": "Purchased CW 1",
+                                "loop": "Chilled Water Loop 1",
+                                "type": "CHILLED_WATER"
                             }
                         ],
                         "pumps": [

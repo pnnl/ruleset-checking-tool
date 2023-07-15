@@ -363,6 +363,7 @@
                                                 "id": "System 5",
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 1",
+                                                    "type": "FLUID_LOOP",
                                                     "hot_water_loop": "Boiler Loop 1"
                                                 },
                                                 "fan_system": {
@@ -380,7 +381,8 @@
                                                     ]
                                                 },
                                                 "cooling_system": {
-                                                    "id": "DX Coil 1"
+                                                    "id": "DX Coil 1",
+                                                    "type": "DIRECT_EXPANSION"
                                                 }
                                             }
                                         ]
@@ -483,6 +485,7 @@
                                                 "id": "System 5",
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 1",
+                                                    "type": "FLUID_LOOP",
                                                     "hot_water_loop": "Boiler Loop 1"
                                                 },
                                                 "fan_system": {
@@ -500,7 +503,8 @@
                                                     ]
                                                 },
                                                 "cooling_system": {
-                                                    "id": "DX Coil 1"
+                                                    "id": "DX Coil 1",
+                                                    "type": "DIRECT_EXPANSION"
                                                 }
                                             }
                                         ]
@@ -585,7 +589,8 @@
                                             {
                                                 "id": "PTHP 1",
                                                 "heating_system": {
-                                                    "id": "HP Heating Coil 1"
+                                                    "id": "HP Heating Coil 1",
+                                                    "type": "HEAT_PUMP"
                                                 },
                                                 "fan_system": {
                                                     "id": "CAV Fan System 1",
@@ -597,7 +602,8 @@
                                                     ]
                                                 },
                                                 "cooling_system": {
-                                                    "id": "HP Cooling Coil 1"
+                                                    "id": "HP Cooling Coil 1",
+                                                    "type": "DIRECT_EXPANSION"
                                                 }
                                             }
                                         ]

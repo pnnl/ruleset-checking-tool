@@ -552,6 +552,7 @@
                                                 "id": "PTAC 1",
                                                 "heating_system": {
                                                     "id": "HHW Coil 1",
+                                                    "type": "FLUID_LOOP",
                                                     "hot_water_loop": "Boiler Loop 1"
                                                 },
                                                 "fan_system": {
@@ -564,7 +565,8 @@
                                                     ]
                                                 },
                                                 "cooling_system": {
-                                                    "id": "DX Coil 1"
+                                                    "id": "DX Coil 1",
+                                                    "type": "DIRECT_EXPANSION"
                                                 }
                                             }
                                         ]
@@ -664,6 +666,7 @@
                                                 "id": "PTAC 1",
                                                 "heating_system": {
                                                     "id": "HHW Coil 1",
+                                                    "type": "FLUID_LOOP",
                                                     "hot_water_loop": "Boiler Loop 1"
                                                 },
                                                 "fan_system": {
@@ -676,7 +679,8 @@
                                                     ]
                                                 },
                                                 "cooling_system": {
-                                                    "id": "DX Coil 1"
+                                                    "id": "DX Coil 1",
+                                                    "type": "DIRECT_EXPANSION"
                                                 }
                                             }
                                         ]
@@ -761,6 +765,7 @@
                                                 "id": "PTAC 1",
                                                 "heating_system": {
                                                     "id": "HHW Coil 1",
+                                                    "type": "FLUID_LOOP",
                                                     "hot_water_loop": "Boiler Loop 1"
                                                 },
                                                 "fan_system": {
@@ -773,7 +778,8 @@
                                                     ]
                                                 },
                                                 "cooling_system": {
-                                                    "id": "DX Coil 1"
+                                                    "id": "DX Coil 1",
+                                                    "type": "DIRECT_EXPANSION"
                                                 }
                                             }
                                         ]
@@ -850,6 +856,9 @@
                                                         "heating_source": "ELECTRIC",
                                                         "type": "VARIABLE_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 6",
+                                                        "fan": {
+                                                            "id": "Fan 1"
+                                                        },
                                                         "fan_configuration": "PARALLEL"
                                                     }
                                                 ]
@@ -865,6 +874,9 @@
                                                         "heating_source": "ELECTRIC",
                                                         "type": "VARIABLE_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 6",
+                                                        "fan": {
+                                                            "id": "Fan 2"
+                                                        },
                                                         "fan_configuration": "PARALLEL"
                                                     }
                                                 ]
@@ -874,7 +886,8 @@
                                             {
                                                 "id": "System 6",
                                                 "preheat_system": {
-                                                    "id": "Preheat Coil 1"
+                                                    "id": "Preheat Coil 1",
+                                                    "type": "ELECTRIC_RESISTANCE"
                                                 },
                                                 "fan_system": {
                                                     "id": "VAV Fan System 1",
@@ -891,7 +904,8 @@
                                                     ]
                                                 },
                                                 "cooling_system": {
-                                                    "id": "DX Coil 1"
+                                                    "id": "DX Coil 1",
+                                                    "type": "DIRECT_EXPANSION"
                                                 }
                                             }
                                         ]

@@ -14,7 +14,7 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "System 5,8,11 (Rule18-a, to be confirmed)",
             "mandatory_rule": "Yes",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.29"
         },
         "rmr_transformations": {
             "baseline": {
@@ -208,7 +208,7 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "System 5,8,11 (Rule18-a, to be confirmed)",
             "mandatory_rule": "Yes",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.29"
         },
         "rmr_transformations": {
             "baseline": {

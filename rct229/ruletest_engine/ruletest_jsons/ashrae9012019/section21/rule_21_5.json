@@ -385,6 +385,7 @@
                                                 "id": "System 12",
                                                 "heating_system": {
                                                     "id": "Boiler Coil 1",
+                                                    "type": "FLUID_LOOP",
                                                     "hot_water_loop": "Boiler Loop 1",
                                                     "design_capacity": 5000
                                                 },
@@ -404,6 +405,7 @@
                                                 },
                                                 "cooling_system": {
                                                     "id": "CHW Coil 1",
+                                                    "type": "FLUID_LOOP",
                                                     "chilled_water_loop": "Secondary CHW Loop 1",
                                                     "design_sensible_cool_capacity": 24619.0
                                                 }
@@ -528,6 +530,7 @@
                                                 "id": "System 12",
                                                 "heating_system": {
                                                     "id": "Boiler Coil 1",
+                                                    "type": "FLUID_LOOP",
                                                     "hot_water_loop": "Boiler Loop 1",
                                                     "design_capacity": 5000
                                                 },
@@ -547,6 +550,7 @@
                                                 },
                                                 "cooling_system": {
                                                     "id": "CHW Coil 1",
+                                                    "type": "FLUID_LOOP",
                                                     "chilled_water_loop": "Secondary CHW Loop 1",
                                                     "design_sensible_cool_capacity": 24619.0
                                                 }
@@ -671,6 +675,7 @@
                                                 "id": "System 12",
                                                 "heating_system": {
                                                     "id": "Boiler Coil 1",
+                                                    "type": "FLUID_LOOP",
                                                     "hot_water_loop": "Boiler Loop 1",
                                                     "design_capacity": 5000
                                                 },
@@ -690,6 +695,7 @@
                                                 },
                                                 "cooling_system": {
                                                     "id": "CHW Coil 1",
+                                                    "type": "FLUID_LOOP",
                                                     "chilled_water_loop": "Secondary CHW Loop 1",
                                                     "design_sensible_cool_capacity": 24619.0
                                                 }
@@ -808,7 +814,8 @@
                                             {
                                                 "id": "System Type 4",
                                                 "heating_system": {
-                                                    "id": "HP Coil 1"
+                                                    "id": "HP Coil 1",
+                                                    "type": "HEAT_PUMP"
                                                 },
                                                 "fan_system": {
                                                     "id": "CAV Fan System 1",
@@ -825,7 +832,8 @@
                                                     ]
                                                 },
                                                 "cooling_system": {
-                                                    "id": "DX Coil 1"
+                                                    "id": "DX Coil 1",
+                                                    "type": "DIRECT_EXPANSION"
                                                 }
                                             }
                                         ]
