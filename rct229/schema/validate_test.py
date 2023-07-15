@@ -65,9 +65,9 @@ TEST_IDS_RMD = {
 }
 
 TEST_UNIQUE_IDS_RMD = deepcopy(TEST_IDS_RMD)
-TEST_UNIQUE_IDS_RMD["ruleset_model_descriptions"][0]["buildings"][1]["building_segments"][
-    1
-]["id"] = "bs_1_2_2"
+TEST_UNIQUE_IDS_RMD["ruleset_model_descriptions"][0]["buildings"][1][
+    "building_segments"
+][1]["id"] = "bs_1_2_2"
 
 
 def test__json_paths_to_lists_from_dict():
