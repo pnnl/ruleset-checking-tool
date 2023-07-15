@@ -26,7 +26,4 @@ def is_hvac_sys_heating_type_heat_pump(rmi_b, hvac_b_id):
     """
     hvac_b = find_exactly_one_hvac_system(rmi_b, hvac_b_id)
 
-    return (
-        find_one("$.heating_system.type", hvac_b)
-        == HEATING_SYSTEM.HEAT_PUMP
-    )
+    return find_one("$.heating_system.type", hvac_b) == HEATING_SYSTEM.HEAT_PUMP

@@ -26,6 +26,5 @@ def is_hvac_sys_heating_type_elec_resistance(rmi_b, hvac_b_id):
     hvac_b = find_exactly_one_hvac_system(rmi_b, hvac_b_id)
 
     return (
-        find_one("$.heating_system.type", hvac_b)
-        == HEATING_SYSTEM.ELECTRIC_RESISTANCE
+        find_one("$.heating_system.type", hvac_b) == HEATING_SYSTEM.ELECTRIC_RESISTANCE
     )
