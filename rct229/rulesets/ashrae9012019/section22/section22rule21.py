@@ -43,7 +43,7 @@ class Section22Rule21(RuleDefinitionListIndexedBase):
             rmr_context="ruleset_model_descriptions/0",
             list_path="$.chillers[*]",
             required_fields={
-                "$": ["OutputInstance"],
+                "$": ["output"],
             },
         )
 
