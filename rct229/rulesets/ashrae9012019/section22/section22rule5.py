@@ -34,8 +34,8 @@ class Section22Rule5(RuleDefinitionListIndexedBase):
             ruleset_section_title="HVAC - Chiller",
             standard_section="Section G3.1.3.9 Chilled-water supply temperature reset (System 7, 8, 11, 12 and 13)",
             is_primary_rule=True,
-            rmr_context="ruleset_model_instances/0",
-            list_path="fluid_loops[*]",
+            rmr_context="ruleset_model_descriptions/0",
+            list_path="$.fluid_loops[*]",
         )
 
     def is_applicable(self, context, data=None):
@@ -56,7 +56,7 @@ class Section22Rule5(RuleDefinitionListIndexedBase):
 
     def create_data(self, context, data):
         rmi_b = context.baseline
-        chiller_loop_ids_list = find_all("chillers[*].cooling_loop", rmi_b)
+        chiller_loop_ids_list = find_all("$.chillers[*].cooling_loop", rmi_b)
         return {"chiller_loop_ids_list": chiller_loop_ids_list}
 
     def list_filter(self, context_item, data):

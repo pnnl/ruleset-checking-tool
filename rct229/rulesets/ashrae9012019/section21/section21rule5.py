@@ -51,7 +51,7 @@ class Section21Rule5(RuleDefinitionListIndexedBase):
             ruleset_section_title="HVAC - Water Side",
             standard_section="Section G3.1.3.2 Building System-Specific Modeling Requirements for the Baseline model",
             is_primary_rule=True,
-            list_path="ruleset_model_instances[0]",
+            list_path="ruleset_model_descriptions[0]",
             data_items={"climate_zone": ("baseline", "weather/climate_zone")},
         )
 

@@ -3,22 +3,22 @@
         "Section": 19,
         "Rule": 17,
         "Test": "a",
-        "test_description": "System 1 with `SIMPLE` specification method for supply/return/exhaust/relief fans and each of 5 fans have 59 W design electric power for a total of 295 W with 1000 cfm design supply airflow.",
+        "test_description": "System 1 with `SIMPLE` specification method for supply/return/exhaust/relief fans and each fans have 35 W design electric power with 1133.33 cfm design supply airflow.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "19-17",
             "ruleset_reference": "G3.1.2.9",
-            "rule_description": "For baseline system 1 and 2, the total fan electrical power (Pfan) for supply, return, exhaust, and relief shall be = CFMs \u00d7 0.3, where, CFMs = the baseline system maximum design supply fan airflow rate, cfm",
+            "rule_description": "For baseline system 1 and 2, the total fan electrical power (Pfan) for supply, return, exhaust, and relief shall be = CFMs x 0.3, where, CFMs = the baseline system maximum design supply fan airflow rate, cfm",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Yes",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.29"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "buildings": [
@@ -44,7 +44,7 @@
                                                 "zonal_exhaust_fan": {
                                                     "id": "Zone exhaust fan 1",
                                                     "specification_method": "SIMPLE",
-                                                    "design_electric_power": 59
+                                                    "design_electric_power": 200
                                                 }
                                             }
                                         ],
@@ -53,11 +53,11 @@
                                                 "id": "PTAC 1",
                                                 "cooling_system": {
                                                     "id": "DX Coil 1",
-                                                    "cooling_system_type": "DIRECT_EXPANSION"
+                                                    "type": "DIRECT_EXPANSION"
                                                 },
                                                 "heating_system": {
                                                     "id": "HHW Coil 1",
-                                                    "heating_system_type": "FLUID_LOOP",
+                                                    "type": "FLUID_LOOP",
                                                     "hot_water_loop": "Boiler Loop 1"
                                                 },
                                                 "fan_system": {
@@ -66,31 +66,30 @@
                                                     "supply_fans": [
                                                         {
                                                             "id": "Supply Fan 1",
-                                                            "design_airflow": 566.33694,
                                                             "specification_method": "SIMPLE",
-                                                            "design_electric_power": 59,
-                                                            "design_airflow": 471.94744319999984
+                                                            "design_electric_power": 35,
+                                                            "design_airflow": 534.8721958018558
                                                         }
                                                     ],
                                                     "return_fans": [
                                                         {
                                                             "id": "Return fan 1",
                                                             "specification_method": "SIMPLE",
-                                                            "design_electric_power": 59
+                                                            "design_electric_power": 35
                                                         }
                                                     ],
                                                     "relief_fans": [
                                                         {
                                                             "id": "Relief fan 1",
                                                             "specification_method": "SIMPLE",
-                                                            "design_electric_power": 59
+                                                            "design_electric_power": 35
                                                         }
                                                     ],
                                                     "exhaust_fans": [
                                                         {
                                                             "id": "Exhaust fan 1",
                                                             "specification_method": "SIMPLE",
-                                                            "design_electric_power": 59
+                                                            "design_electric_power": 35
                                                         }
                                                     ]
                                                 }
@@ -122,22 +121,22 @@
         "Section": 19,
         "Rule": 17,
         "Test": "b",
-        "test_description": "System 1 with `SIMPLE` specification method for supply/return/exhaust/relief fans and each fans have 80 W design electric power with 800 cfm design supply airflow.",
+        "test_description": "For baseline system 1 and 2, the total fan electrical power (Pfan) for supply, return, exhaust, and relief shall be = CFMs \u00d7 0.3, where, CFMs = the baseline system maximum design supply fan airflow rate, cfm",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "19-17",
             "ruleset_reference": "G3.1.2.9",
-            "rule_description": "For baseline system 1 and 2, the total fan electrical power (Pfan) for supply, return, exhaust, and relief shall be = CFMs \u00d7 0.3, where, CFMs = the baseline system maximum design supply fan airflow rate, cfm",
+            "rule_description": "For baseline system 1 and 2, the total fan electrical power (Pfan) for supply, return, exhaust, and relief shall be = CFMs x 0.3, where, CFMs = the baseline system maximum design supply fan airflow rate, cfm",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Yes",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.29"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "buildings": [
@@ -172,11 +171,11 @@
                                                 "id": "PTAC 1",
                                                 "cooling_system": {
                                                     "id": "DX Coil 1",
-                                                    "cooling_system_type": "DIRECT_EXPANSION"
+                                                    "type": "DIRECT_EXPANSION"
                                                 },
                                                 "heating_system": {
                                                     "id": "HHW Coil 1",
-                                                    "heating_system_type": "FLUID_LOOP",
+                                                    "type": "FLUID_LOOP",
                                                     "hot_water_loop": "Boiler Loop 1"
                                                 },
                                                 "fan_system": {

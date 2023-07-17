@@ -30,7 +30,7 @@ class Section6Rule3(RuleDefinitionListIndexedBase):
             ruleset_section_title="Lighting",
             standard_section="Section G3.1-6(a)(b)(c) Modeling Requirements for the Proposed Design",
             is_primary_rule=True,
-            list_path="ruleset_model_instances[0].buildings[*].building_segments[*]",
+            list_path="ruleset_model_descriptions[0].buildings[*].building_segments[*]",
         )
 
     class BuildingSegmentRule(RuleDefinitionListIndexedBase):
