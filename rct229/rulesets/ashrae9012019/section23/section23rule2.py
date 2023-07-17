@@ -41,7 +41,7 @@ class Section23Rule2(RuleDefinitionListIndexedBase):
             ruleset_section_title="HVAC - Airside",
             standard_section="Section G3.1.3.12 Supply Air Temperature Reset (Systems 5 through 8 and 11)",
             is_primary_rule=True,
-            rmr_context="ruleset_model_instances/0",
+            rmr_context="ruleset_model_descriptions/0",
             list_path="$..heating_ventilating_air_conditioning_systems[*]",
         )
 
@@ -52,7 +52,7 @@ class Section23Rule2(RuleDefinitionListIndexedBase):
         return any(
             [
                 baseline_system_type_compare(system_type, applicable_sys_type, False)
-                for system_type in baseline_system_types_dict.keys()
+                for system_type in baseline_system_types_dict
                 for applicable_sys_type in APPLICABLE_SYS_TYPES
             ]
         )
@@ -62,7 +62,7 @@ class Section23Rule2(RuleDefinitionListIndexedBase):
         baseline_system_types_dict = get_baseline_system_types(rmi_b)
         applicable_hvac_sys_ids = [
             hvac_id
-            for sys_type in baseline_system_types_dict.keys()
+            for sys_type in baseline_system_types_dict
             for target_sys_type in APPLICABLE_SYS_TYPES
             if baseline_system_type_compare(sys_type, target_sys_type, False)
             for hvac_id in baseline_system_types_dict[sys_type]

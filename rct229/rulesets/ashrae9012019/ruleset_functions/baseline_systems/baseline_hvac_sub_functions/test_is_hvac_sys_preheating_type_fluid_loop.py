@@ -17,7 +17,7 @@ TEST_RMD = {
                             "preheat_system": {
                                 "id": "preheat_system",
                                 "hot_water_loop": "HW_Loop_1",
-                                "heating_system_type": "FLUID_LOOP",
+                                "type": "FLUID_LOOP",
                             },
                         },
                         {
@@ -26,7 +26,7 @@ TEST_RMD = {
                             "preheat_system": {
                                 "id": "preheat_system",
                                 "hot_water_loop": "HW_Loop_2",
-                                "heating_system_type": "HEAT_PUMP",
+                                "type": "HEAT_PUMP",
                             },
                         },
                         {
@@ -52,7 +52,7 @@ TEST_RMD = {
     ],
 }
 
-TEST_RMD_FULL = {"id": "229_01", "ruleset_model_instances": [TEST_RMD]}
+TEST_RMD_FULL = {"id": "229_01", "ruleset_model_descriptions": [TEST_RMD]}
 
 
 def test__TEST_RMD__is_valid():

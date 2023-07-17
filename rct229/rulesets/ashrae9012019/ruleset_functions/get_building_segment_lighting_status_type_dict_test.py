@@ -13,7 +13,7 @@ FIRE_STATION_ALLOWED_LPD = (0.56 * ureg("W/(foot**2)")).to("W/(m**2)").magnitude
 
 TEST_RMR = {
     "id": "229_01",
-    "ruleset_model_instances": [
+    "ruleset_model_descriptions": [
         {
             "id": "test_rmr",
             "buildings": [
@@ -103,7 +103,7 @@ TEST_RMR = {
     ],
 }
 
-TEST_BUILDING = quantify_rmr(TEST_RMR)["ruleset_model_instances"][0]["buildings"][0]
+TEST_BUILDING = quantify_rmr(TEST_RMR)["ruleset_model_descriptions"][0]["buildings"][0]
 test_building_segments = TEST_BUILDING["building_segments"]
 
 

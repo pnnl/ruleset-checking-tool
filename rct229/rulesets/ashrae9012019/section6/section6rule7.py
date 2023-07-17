@@ -9,7 +9,7 @@ MSG_WARN_DAYLIGHT = "Some of the spaces in zone are modeled with window(s) and/o
 MSG_WARN_NO_DAYLIGHT = "Some of the spaces in zone are modeled with fenestration but no daylighting controls. The design must include mandatory daylighting controls unless any of the exceptions to 90.1 section 9.4.1.1 apply."
 
 DOOR = schema_enums["SubsurfaceClassificationOptions"].DOOR
-EXTERIOR = schema_enums["SurfaceAdjacentToOptions"].EXTERIOR
+EXTERIOR = schema_enums["SurfaceAdjacencyOptions"].EXTERIOR
 NONE = schema_enums["LightingDaylightingControlOptions"].NONE
 
 
@@ -26,7 +26,7 @@ class Section6Rule7(RuleDefinitionListIndexedBase):
             ruleset_section_title="Lighting",
             standard_section="Section G3.1-6(h) Lighting: Modeling Requirements for the Proposed design",
             is_primary_rule=True,
-            list_path="ruleset_model_instances[0].buildings[*].building_segments[*].zones[*]",
+            list_path="ruleset_model_descriptions[0].buildings[*].building_segments[*].zones[*]",
         )
 
     class ZoneRule(RuleDefinitionBase):
@@ -43,7 +43,7 @@ class Section6Rule7(RuleDefinitionListIndexedBase):
                 len(
                     find_all(
                         # Doors in a surface adjacent to exterior
-                        f'$..surfaces[*][?(@.adjacent_to = "{EXTERIOR}")].subsurfaces[*][?(@.classification != "{DOOR}")]',
+                        f'$.surfaces[*][?(@.adjacent_to = "{EXTERIOR}")].subsurfaces[*][?(@.classification != "{DOOR}")]',
                         zone_p,
                     )
                 )
@@ -54,7 +54,7 @@ class Section6Rule7(RuleDefinitionListIndexedBase):
                 len(
                     find_all(
                         # interior_lighting instances with daylighting_control_type set to NONE
-                        f'$..spaces[*].interior_lighting[*][?(@.daylighting_control_type!= "{NONE}")]',
+                        f'$.spaces[*].interior_lighting[*][?(@.daylighting_control_type!= "{NONE}")]',
                         zone_p,
                     )
                 )
@@ -64,7 +64,7 @@ class Section6Rule7(RuleDefinitionListIndexedBase):
             daylight_schedule_adjustment_flag = any(
                 find_all(
                     # insterior_lighting instances with are_schedules_used_for_modeling_daylighting_control set to True
-                    "$..spaces[*].interior_lighting[*][?(@.are_schedules_used_for_modeling_daylighting_control = true)]",
+                    "$.spaces[*].interior_lighting[*][?(@.are_schedules_used_for_modeling_daylighting_control = true)]",
                     zone_p,
                 )
             )
