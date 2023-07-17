@@ -39,8 +39,8 @@ class Section23Rule8(RuleDefinitionListIndexedBase):
             ruleset_section_title="HVAC - Airside",
             standard_section="Section G3.1.3.15 VAV Fan Part-Load Performance (Systems 5 through 8 and 11)",
             is_primary_rule=True,
-            rmr_context="ruleset_model_instances/0",
-            list_path="$..heating_ventilating_air_conditioning_systems[*]",
+            rmr_context="ruleset_model_descriptions/0",
+            list_path="$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*]",
         )
 
     def is_applicable(self, context, data=None):
@@ -50,7 +50,7 @@ class Section23Rule8(RuleDefinitionListIndexedBase):
         return any(
             [
                 baseline_system_type_compare(system_type, applicable_sys_type, False)
-                for system_type in baseline_system_types_dict.keys()
+                for system_type in baseline_system_types_dict
                 for applicable_sys_type in APPLICABLE_SYS_TYPES
             ]
         )
@@ -60,7 +60,7 @@ class Section23Rule8(RuleDefinitionListIndexedBase):
         baseline_system_types_dict = get_baseline_system_types(rmi_b)
         applicable_hvac_sys_ids = [
             hvac_id
-            for sys_type in baseline_system_types_dict.keys()
+            for sys_type in baseline_system_types_dict
             for target_sys_type in APPLICABLE_SYS_TYPES
             if baseline_system_type_compare(sys_type, target_sys_type, False)
             for hvac_id in baseline_system_types_dict[sys_type]
@@ -80,7 +80,7 @@ class Section23Rule8(RuleDefinitionListIndexedBase):
                 rmrs_used=UserBaselineProposedVals(False, True, False),
                 each_rule=Section23Rule8.HVACRule.SupplyFanRule(),
                 index_rmr="baseline",
-                list_path="$..supply_fans[*]",
+                list_path="$.fan_system.supply_fans[*]",
             )
 
         class SupplyFanRule(RuleDefinitionBase):

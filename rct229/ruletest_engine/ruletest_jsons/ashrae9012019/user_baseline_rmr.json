@@ -1,6 +1,6 @@
 {
 	"id": "Lighting Example",
-	"ruleset_model_type": "USER"
+	"ruleset_model_type": "USER",
 	"buildings": [
 		{
 			"id": "Building Name 1",

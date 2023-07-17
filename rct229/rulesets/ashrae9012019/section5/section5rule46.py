@@ -18,7 +18,7 @@ class Section5Rule46(RuleDefinitionListIndexedBase):
             ruleset_section_title="Envelope",
             standard_section="Section G3.1-5(b) Building Envelope Modeling Requirements for the Proposed design and Baseline",
             is_primary_rule=True,
-            rmr_context="ruleset_model_instances/0/buildings",
+            rmr_context="ruleset_model_descriptions/0/buildings",
         )
 
     class BuildingRule(RuleDefinitionBase):
@@ -26,15 +26,22 @@ class Section5Rule46(RuleDefinitionListIndexedBase):
             super(Section5Rule46.BuildingRule, self).__init__(
                 rmrs_used=UserBaselineProposedVals(False, True, True),
                 required_fields={
-                    "$..zones[*]": ["infiltration"],
-                    "$..infiltration": ["algorithm_name", "modeling_method"],
+                    "$.building_segments[*].zones[*]": ["infiltration"],
+                    "$.building_segments[*].zones[*].infiltration": [
+                        "algorithm_name",
+                        "modeling_method",
+                    ],
                 },
             )
 
         def get_calc_vals(self, context, data=None):
             failing_infiltration_zone_ids = []
-            baseline_zones = find_all("$..zones[*]", context.baseline)
-            proposed_zones = find_all("$..zones[*]", context.proposed)
+            baseline_zones = find_all(
+                "$.building_segments[*].zones[*]", context.baseline
+            )
+            proposed_zones = find_all(
+                "$.building_segments[*].zones[*]", context.proposed
+            )
 
             # This assumes that the surfaces all match
             matched_baseline_zones = match_lists_by_id(proposed_zones, baseline_zones)

@@ -79,9 +79,9 @@ TEST_RMI = {
         }
     ],
 }
-TEST_RMD = {"id": "229_01", "ruleset_model_instances": [TEST_RMI]}
+TEST_RMD = {"id": "229_01", "ruleset_model_descriptions": [TEST_RMI]}
 
-TEST_RMI_UNIT = quantify_rmr(TEST_RMD)["ruleset_model_instances"][0]
+TEST_RMI_UNIT = quantify_rmr(TEST_RMD)["ruleset_model_descriptions"][0]
 
 
 def test__TEST_RMD__is_valid():

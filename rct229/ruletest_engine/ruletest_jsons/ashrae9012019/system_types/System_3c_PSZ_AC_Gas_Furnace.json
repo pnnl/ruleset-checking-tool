@@ -1,6 +1,6 @@
 {
     "id": "ASHRAE229 1",
-    "ruleset_model_instances": [
+    "ruleset_model_descriptions": [
         {
             "id": "RMD 1",
             "buildings": [
@@ -30,12 +30,12 @@
                                     "id": "System Type 3",
                                     "cooling_system": {
                                         "id": "Cooling Coil 1",
-                                        "cooling_system_type": "FLUID_LOOP",
+                                        "type": "FLUID_LOOP",
                                         "chilled_water_loop": "Purchased CHW Loop 1"
                                     },
                                     "heating_system": {
                                         "id": "Furnace Coil 1",
-                                        "heating_system_type": "FLUID_LOOP",
+                                        "type": "FLUID_LOOP",
                                         "hot_water_loop": "Purchased HW Loop 1"
                                     },
                                     "fan_system": {
@@ -58,7 +58,7 @@
                     ]
                 }
             ],
-            "external_fluid_source": [
+            "external_fluid_sources": [
                 {
                     "id": "Purchased CHW",
                     "loop": "Purchased CHW Loop 1",

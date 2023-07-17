@@ -20,7 +20,7 @@ class Section5Rule39(RuleDefinitionListIndexedBase):
             ruleset_section_title="Envelope",
             standard_section="Section G3.1-5(a)5 Building Envelope Modeling Requirements for the Proposed design",
             is_primary_rule=False,
-            list_path="ruleset_model_instances[0].buildings[*].building_segments[*].zones[*].surfaces[*].subsurfaces[*]",
+            list_path="ruleset_model_descriptions[0].buildings[*].building_segments[*].zones[*].surfaces[*].subsurfaces[*]",
         )
 
     class SubsurfaceRule(PartialRuleDefinition):
