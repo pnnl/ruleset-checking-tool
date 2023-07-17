@@ -168,8 +168,8 @@
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1",
                                                         "primary_airflow": 1179.8686079999995,
-                                                        "supply_design_cooling_setpoint_temperature": 55,
-                                                        "supply_design_heating_setpoint_temperature": 90
+                                                        "supply_design_cooling_setpoint_temperature": 12.777777777777828,
+                                                        "supply_design_heating_setpoint_temperature": 32.222222222222285
                                                     }
                                                 ],
                                                 "design_thermostat_cooling_setpoint": 23.888888888888914,
@@ -678,8 +678,8 @@
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1",
                                                         "primary_airflow": 1179.8686079999995,
-                                                        "supply_design_cooling_setpoint_temperature": 55,
-                                                        "supply_design_heating_setpoint_temperature": 90
+                                                        "supply_design_cooling_setpoint_temperature": 12.777777777777828,
+                                                        "supply_design_heating_setpoint_temperature": 32.222222222222285
                                                     }
                                                 ],
                                                 "design_thermostat_cooling_setpoint": 23.888888888888914,
