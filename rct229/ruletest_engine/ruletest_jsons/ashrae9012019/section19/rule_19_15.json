@@ -60,12 +60,16 @@
                                                     "fan_control": "CONSTANT",
                                                     "supply_fans": [
                                                         {
-                                                            "id": "Supply Fan 1"
+                                                            "id": "Supply Fan 1",
+                                                            "specification_method": "SIMPLE",
+                                                            "design_electric_power": 100
                                                         }
                                                     ],
                                                     "return_fans": [
                                                         {
-                                                            "id": "Return Fan 1"
+                                                            "id": "Return Fan 1",
+                                                            "specification_method": "SIMPLE",
+                                                            "design_electric_power": 100
                                                         }
                                                     ],
                                                     "minimum_outdoor_airflow": 11.798686079999996
@@ -104,13 +108,15 @@
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 10",
                                                         "heating_source": "ELECTRIC",
                                                         "fan": {
-                                                            "id": "Terminal Fan 1"
+                                                            "id": "Terminal Fan 1",
+                                                            "specification_method": "SIMPLE",
+                                                            "design_electric_power": 25
                                                         },
                                                         "primary_airflow": 471.94744319999984,
-                                                        "supply_design_heating_setpoint_temperature": 105
+                                                        "supply_design_heating_setpoint_temperature": 40.5555555555556
                                                     }
                                                 ],
-                                                "design_thermostat_heating_setpoint": 65,
+                                                "design_thermostat_heating_setpoint": 18.33333333333337,
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
@@ -142,7 +148,8 @@
                                                     "return_fans": [
                                                         {
                                                             "id": "Return Fan 1",
-                                                            "specification_method": "SIMPLE"
+                                                            "specification_method": "SIMPLE",
+                                                            "design_electric_power": 25
                                                         }
                                                     ],
                                                     "minimum_outdoor_airflow": 0.0
@@ -219,12 +226,16 @@
                                                     "fan_control": "CONSTANT",
                                                     "supply_fans": [
                                                         {
-                                                            "id": "Supply Fan 1"
+                                                            "id": "Supply Fan 1",
+                                                            "specification_method": "SIMPLE",
+                                                            "design_electric_power": 100
                                                         }
                                                     ],
                                                     "return_fans": [
                                                         {
-                                                            "id": "Return Fan 1"
+                                                            "id": "Return Fan 1",
+                                                            "specification_method": "SIMPLE",
+                                                            "design_electric_power": 100
                                                         }
                                                     ],
                                                     "minimum_outdoor_airflow": 11.798686079999996
@@ -263,13 +274,15 @@
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 10",
                                                         "heating_source": "ELECTRIC",
                                                         "fan": {
-                                                            "id": "Terminal Fan 1"
+                                                            "id": "Terminal Fan 1",
+                                                            "specification_method": "SIMPLE",
+                                                            "design_electric_power": 25
                                                         },
                                                         "primary_airflow": 471.94744319999984,
-                                                        "supply_design_heating_setpoint_temperature": 85
+                                                        "supply_design_heating_setpoint_temperature": 29.444444444444457
                                                     }
                                                 ],
-                                                "design_thermostat_heating_setpoint": 65,
+                                                "design_thermostat_heating_setpoint": 18.33333333333337,
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
@@ -301,7 +314,8 @@
                                                     "return_fans": [
                                                         {
                                                             "id": "Return Fan 1",
-                                                            "specification_method": "SIMPLE"
+                                                            "specification_method": "SIMPLE",
+                                                            "design_electric_power": 25
                                                         }
                                                     ],
                                                     "minimum_outdoor_airflow": 0.0
@@ -374,12 +388,16 @@
                                                     "fan_control": "CONSTANT",
                                                     "supply_fans": [
                                                         {
-                                                            "id": "Supply Fan 1"
+                                                            "id": "Supply Fan 1",
+                                                            "specification_method": "SIMPLE",
+                                                            "design_electric_power": 100
                                                         }
                                                     ],
                                                     "return_fans": [
                                                         {
-                                                            "id": "Return Fan 1"
+                                                            "id": "Return Fan 1",
+                                                            "specification_method": "SIMPLE",
+                                                            "design_electric_power": 100
                                                         }
                                                     ],
                                                     "minimum_outdoor_airflow": 153.38291903999993
@@ -417,10 +435,10 @@
                                                         "type": "CONSTANT_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 9",
                                                         "primary_airflow": 471.94744319999984,
-                                                        "supply_design_heating_setpoint_temperature": 105
+                                                        "supply_design_heating_setpoint_temperature": 40.5555555555556
                                                     }
                                                 ],
-                                                "design_thermostat_heating_setpoint": 65,
+                                                "design_thermostat_heating_setpoint": 18.33333333333337,
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
@@ -452,7 +470,8 @@
                                                     "return_fans": [
                                                         {
                                                             "id": "Return Fan 1",
-                                                            "specification_method": "SIMPLE"
+                                                            "specification_method": "SIMPLE",
+                                                            "design_electric_power": 25
                                                         }
                                                     ],
                                                     "minimum_outdoor_airflow": 141.58423295999995
@@ -525,12 +544,16 @@
                                                     "fan_control": "CONSTANT",
                                                     "supply_fans": [
                                                         {
-                                                            "id": "Supply Fan 1"
+                                                            "id": "Supply Fan 1",
+                                                            "specification_method": "SIMPLE",
+                                                            "design_electric_power": 100
                                                         }
                                                     ],
                                                     "return_fans": [
                                                         {
-                                                            "id": "Return Fan 1"
+                                                            "id": "Return Fan 1",
+                                                            "specification_method": "SIMPLE",
+                                                            "design_electric_power": 100
                                                         }
                                                     ],
                                                     "minimum_outdoor_airflow": 153.38291903999993
@@ -568,10 +591,10 @@
                                                         "type": "CONSTANT_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 9",
                                                         "primary_airflow": 471.94744319999984,
-                                                        "supply_design_heating_setpoint_temperature": 105
+                                                        "supply_design_heating_setpoint_temperature": 40.5555555555556
                                                     }
                                                 ],
-                                                "design_thermostat_heating_setpoint": 65,
+                                                "design_thermostat_heating_setpoint": 18.33333333333337,
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
@@ -603,7 +626,8 @@
                                                     "return_fans": [
                                                         {
                                                             "id": "Return Fan 1",
-                                                            "specification_method": "SIMPLE"
+                                                            "specification_method": "SIMPLE",
+                                                            "design_electric_power": 25
                                                         }
                                                     ],
                                                     "minimum_outdoor_airflow": 141.58423295999995
