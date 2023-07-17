@@ -71,12 +71,14 @@ class Section19Rule15(RuleDefinitionListIndexedBase):
                 ),
                 "all_design_setpoints_105": all(
                     [
-                        getattr_(
-                            find_exactly_one_terminal_unit(rmi_b, terminal_id_b),
-                            "Terminal",
-                            "supply_design_heating_setpoint_temperature",
+                        std_equal(
+                            REQ_DESIGN_SUPPLY_AIR_TEMP_SETPOINT,
+                            getattr_(
+                                find_exactly_one_terminal_unit(rmi_b, terminal_id_b),
+                                "Terminal",
+                                "supply_design_heating_setpoint_temperature",
+                            ),
                         )
-                        == REQ_DESIGN_SUPPLY_AIR_TEMP_SETPOINT
                         for terminal_id_b in zones_and_terminal_units_served_by_hvac_sys_dict[
                             hvac_id_b
                         ][

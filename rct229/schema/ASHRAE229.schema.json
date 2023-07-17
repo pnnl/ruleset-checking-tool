@@ -2919,14 +2919,6 @@
                 },
                 "supply_design_cooling_setpoint_temperature": {
                     "description": "Zone terminal supply design cooling temperature setpoint",
-<<<<<<< HEAD
-                    "type": "number",
-                    "units": "C"
-                },
-                "supply_setpoint_temperature": {
-                    "description": "Zone terminal supply temperature setpoint",
-=======
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
                     "type": "number",
                     "units": "C"
                 },
