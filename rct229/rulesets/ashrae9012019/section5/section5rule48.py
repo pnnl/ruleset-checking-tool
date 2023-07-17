@@ -27,7 +27,7 @@ class Section5Rule48(RuleDefinitionListIndexedBase):
             ruleset_section_title="Envelope",
             standard_section="Section G3.1-1 Building Envelope Modeling Requirements for the Proposed design and Baseline building",
             is_primary_rule=True,
-            list_path="ruleset_model_instances[0].buildings[*]",
+            list_path="ruleset_model_descriptions[0].buildings[*]",
         )
 
     def create_data(self, context, data=None):  # put it under the "BuildingRule"
@@ -40,7 +40,7 @@ class Section5Rule48(RuleDefinitionListIndexedBase):
                 rmrs_used=UserBaselineProposedVals(False, True, True),
                 each_rule=Section5Rule48.BuildingRule.ZoneRule(),
                 index_rmr="baseline",
-                list_path="$..zones[*]",
+                list_path="$.building_segments[*].zones[*]",
             )
 
         def create_data(self, context, data=None):
@@ -62,7 +62,7 @@ class Section5Rule48(RuleDefinitionListIndexedBase):
                     rmrs_used=UserBaselineProposedVals(False, True, True),
                     required_fields={
                         "$": ["infiltration"],
-                        "infiltration": ["infiltration_flow_rate"],
+                        "infiltration": ["flow_rate"],
                     },
                 )
 
@@ -70,12 +70,8 @@ class Section5Rule48(RuleDefinitionListIndexedBase):
                 zone_b = context.baseline
                 zone_p = context.proposed
 
-                zone_infiltration_flow_rate_b = zone_b["infiltration"][
-                    "infiltration_flow_rate"
-                ]
-                zone_infiltration_flow_rate_p = zone_p["infiltration"][
-                    "infiltration_flow_rate"
-                ]
+                zone_infiltration_flow_rate_b = zone_b["infiltration"]["flow_rate"]
+                zone_infiltration_flow_rate_p = zone_p["infiltration"]["flow_rate"]
 
                 return {
                     "baseline_infiltration": CalcQ(

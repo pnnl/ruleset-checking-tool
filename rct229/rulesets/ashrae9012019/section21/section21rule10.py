@@ -58,7 +58,7 @@ class Section21Rule10(RuleDefinitionListIndexedBase):
             ruleset_section_title="HVAC - Water Side",
             standard_section="Section G3.1.3.5 Building System-Specific Modeling Requirements for the Baseline model",
             is_primary_rule=True,
-            rmr_context="ruleset_model_instances/0",
+            rmr_context="ruleset_model_descriptions/0",
             list_path="pumps[*]",
         )
 
@@ -68,7 +68,7 @@ class Section21Rule10(RuleDefinitionListIndexedBase):
         # create a list containing all HVAC systems that are modeled in the rmi_b
         available_types_list = [
             hvac_type
-            for hvac_type in baseline_system_types_dict.keys()
+            for hvac_type in baseline_system_types_dict
             if len(baseline_system_types_dict[hvac_type]) > 0
         ]
         return any(
@@ -89,7 +89,7 @@ class Section21Rule10(RuleDefinitionListIndexedBase):
         pump = context_item.baseline
         loop_zone_list_w_area_dict = data["loop_zone_list_w_area_dict"]
         # filter and select pumps with heating loops (loop_zone_list_w_area_dict keys are heating loops)
-        return pump["loop_or_piping"] in loop_zone_list_w_area_dict.keys()
+        return pump["loop_or_piping"] in loop_zone_list_w_area_dict
 
     class PumpRule(RuleDefinitionBase):
         def __init__(self):

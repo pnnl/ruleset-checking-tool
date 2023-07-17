@@ -14,12 +14,12 @@
             "comparison_value": "User RMR",
             "rule_dependency": "none",
             "mandatory_rule": "Yes",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.29"
         },
         "rmr_transformations": {
             "user": {
                 "id": "ashrae229",
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "transformers": [
@@ -38,7 +38,7 @@
             },
             "baseline": {
                 "id": "ashrae229",
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "transformers": [
@@ -72,12 +72,12 @@
             "comparison_value": "User RMR",
             "rule_dependency": "none",
             "mandatory_rule": "Yes",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.29"
         },
         "rmr_transformations": {
             "user": {
                 "id": "ashrae229",
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "transformers": [
@@ -96,7 +96,7 @@
             },
             "baseline": {
                 "id": "ashrae229",
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "transformers": [
@@ -127,12 +127,12 @@
             "comparison_value": "User RMR",
             "rule_dependency": "none",
             "mandatory_rule": "Yes",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.29"
         },
         "rmr_transformations": {
             "user": {
                 "id": "ashrae229",
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "transformers": [
@@ -148,7 +148,7 @@
             },
             "baseline": {
                 "id": "ashrae229",
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "transformers": [
