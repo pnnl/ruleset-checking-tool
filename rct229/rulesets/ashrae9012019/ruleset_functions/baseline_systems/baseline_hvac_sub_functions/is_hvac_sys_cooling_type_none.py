@@ -27,6 +27,6 @@ def is_hvac_sys_cooling_type_none(rmi_b, hvac_b_id):
     # Get the hvac system
     hvac_b = find_exactly_one_hvac_system(rmi_b, hvac_b_id)
     # Check if hvac_b has preheat system
-    cooling_system_type = find_one("$.cooling_system.cooling_system_type", hvac_b)
+    cooling_system_type = find_one("$.cooling_system.type", hvac_b)
 
     return cooling_system_type in [COOLING_SYSTEM_TYPE.NONE, None]

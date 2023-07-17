@@ -3,7 +3,7 @@
         "Section": 5,
         "Rule": 28,
         "Test": "a",
-        "test_description": "Fenestration that is not regulated based on the parameters of the baseline zone is modeled with a different area than in the propose design",
+        "test_description": "Project has one building segment and includes a space with an above-grade wall surface and window. The space is unconditioned based on the heating and cooling capacity of the HVAC system that serves the parent zone. Fenestration is correctly modeled with the same area, U-factor and SHGC as in the proposed design",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-28",
@@ -13,7 +13,7 @@
             "rule_assertion": "=",
             "comparison_value": "Proposed RMR",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.29"
         },
         "rmr_transformations": {
             "proposed": {
@@ -22,7 +22,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMR 1",
                         "buildings": [
@@ -68,7 +68,7 @@
                                                             }
                                                         ],
                                                         "construction": {
-                                                            "id": "construction_1",
+                                                            "id": "Construction 1",
                                                             "u_factor": 3.2366105565544463
                                                         }
                                                     }
@@ -101,7 +101,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMR 1",
                         "buildings": [
@@ -147,7 +147,7 @@
                                                             }
                                                         ],
                                                         "construction": {
-                                                            "id": "construction_1",
+                                                            "id": "Construction 1",
                                                             "u_factor": 3.2366105565544463
                                                         }
                                                     }
@@ -180,7 +180,7 @@
         "Section": 5,
         "Rule": 28,
         "Test": "b",
-        "test_description": "Fenestration that is not regulated based on the parameters of the baseline zone is modeled with a different area than in the propose design",
+        "test_description": "Project has one building segment and includes a space with an above-grade wall surface and window. The space is unconditioned based on the heating and cooling capacity of the HVAC system that serves the parent zone. Fenestration is incorrectly modeled with a different area than in the proposed design",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-28",
@@ -190,7 +190,7 @@
             "rule_assertion": "=",
             "comparison_value": "Proposed RMR",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.29"
         },
         "rmr_transformations": {
             "proposed": {
@@ -199,7 +199,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMR 1",
                         "buildings": [
@@ -245,7 +245,7 @@
                                                             }
                                                         ],
                                                         "construction": {
-                                                            "id": "construction_1",
+                                                            "id": "Construction 1",
                                                             "u_factor": 3.2366105565544463
                                                         }
                                                     }
@@ -278,7 +278,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMR 1",
                         "buildings": [
@@ -324,7 +324,7 @@
                                                             }
                                                         ],
                                                         "construction": {
-                                                            "id": "construction_1",
+                                                            "id": "Construction 1",
                                                             "u_factor": 3.2366105565544463
                                                         }
                                                     }
@@ -357,7 +357,7 @@
         "Section": 5,
         "Rule": 28,
         "Test": "c",
-        "test_description": "Fenestration that is not regulated based on the parameters of the baseline zone is modeled with a different u-factor than in the propose design",
+        "test_description": "Project has one building segment and includes a space with an above-grade wall surface and window. The space is unconditioned based on the heating and cooling capacity of the HVAC system that serves the parent zone. Fenestration is modeled with a different u-factor than in the proposed design",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-28",
@@ -367,7 +367,7 @@
             "rule_assertion": "=",
             "comparison_value": "Proposed RMR",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.29"
         },
         "rmr_transformations": {
             "proposed": {
@@ -376,7 +376,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMR 1",
                         "buildings": [
@@ -422,7 +422,7 @@
                                                             }
                                                         ],
                                                         "construction": {
-                                                            "id": "construction_1",
+                                                            "id": "Construction 1",
                                                             "u_factor": 3.2366105565544463
                                                         }
                                                     }
@@ -455,7 +455,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMR 1",
                         "buildings": [
@@ -501,7 +501,7 @@
                                                             }
                                                         ],
                                                         "construction": {
-                                                            "id": "construction_1",
+                                                            "id": "Construction 1",
                                                             "u_factor": 3.2366105565544463
                                                         }
                                                     }
@@ -534,7 +534,7 @@
         "Section": 5,
         "Rule": 28,
         "Test": "d",
-        "test_description": "Fenestration that is not regulated based on the parameters of the baseline zone is modeled with a different u-factor than in the propose design",
+        "test_description": "Project has one building segment and includes a space with an above-grade wall surface and window. The space is unconditioned based on the heating and cooling capacity of the HVAC system that serves the parent zone. Fenestration is modeled with a different SHGC than in the proposed design",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-28",
@@ -544,7 +544,7 @@
             "rule_assertion": "=",
             "comparison_value": "Proposed RMR",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.29"
         },
         "rmr_transformations": {
             "proposed": {
@@ -553,7 +553,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMR 1",
                         "buildings": [
@@ -599,7 +599,7 @@
                                                             }
                                                         ],
                                                         "construction": {
-                                                            "id": "construction_1",
+                                                            "id": "Construction 1",
                                                             "u_factor": 3.2366105565544463
                                                         }
                                                     }
@@ -632,7 +632,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMR 1",
                         "buildings": [
@@ -678,7 +678,7 @@
                                                             }
                                                         ],
                                                         "construction": {
-                                                            "id": "construction_1",
+                                                            "id": "Construction 1",
                                                             "u_factor": 3.2366105565544463
                                                         }
                                                     }

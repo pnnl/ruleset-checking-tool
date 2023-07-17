@@ -36,7 +36,7 @@ class Section6Rule8(RuleDefinitionListIndexedBase):
             ruleset_section_title="Lighting",
             standard_section="Section G3.1-6(i) Modeling Requirements for the Proposed design",
             is_primary_rule=True,
-            list_path="ruleset_model_instances[0]",
+            list_path="ruleset_model_descriptions[0]",
             required_fields={"$": ["calendar"], "calendar": ["is_leap_year"]},
             data_items={"is_leap_year": ("baseline", "calendar/is_leap_year")},
         )
