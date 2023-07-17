@@ -47,7 +47,7 @@ class Section19Rule15(RuleDefinitionListIndexedBase):
             ruleset_section_title="HVAC - General",
             standard_section="Section G3.1.2.8.2",
             is_primary_rule=True,
-            rmr_context="ruleset_model_instances/0",
+            rmr_context="ruleset_model_descriptions/0",
             list_path="$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*]",
         )
 
@@ -135,7 +135,7 @@ class Section19Rule15(RuleDefinitionListIndexedBase):
 
             return any(
                 hvac_id_b in baseline_system_types_dict[system_type]
-                for system_type in baseline_system_types_dict.keys()
+                for system_type in baseline_system_types_dict
             )
 
         def get_calc_vals(self, context, data=None):
