@@ -31,7 +31,7 @@ class Section5Rule19(RuleDefinitionListIndexedBase):
             ruleset_section_title="Envelope",
             standard_section="Section G3.1-5(c) Building Envelope Modeling Requirements for the Baseline building",
             is_primary_rule=True,
-            list_path="ruleset_model_instances[0].buildings[*]",
+            list_path="ruleset_model_descriptions[0].buildings[*]",
             data_items={"climate_zone": ("baseline", "weather/climate_zone")},
         )
 
@@ -76,7 +76,7 @@ class Section5Rule19(RuleDefinitionListIndexedBase):
             )
 
             manual_check_flag = False
-            for building_segment in find_all("$..building_segments[*]", building_b):
+            for building_segment in find_all("$.building_segments[*]", building_b):
                 if building_segment["area_type_vertical_fenestration"] == OTHER:
                     if not building_segment["is_all_new"]:
                         manual_check_flag = True

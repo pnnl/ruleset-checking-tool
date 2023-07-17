@@ -17,7 +17,7 @@ class Section12Rule3(RuleDefinitionListIndexedBase):
             ruleset_section_title="Receptacle",
             standard_section="Section Table G3.1-12 Receptacles: Modeling Requirements for the Proposed design",
             is_primary_rule=True,
-            rmr_context="ruleset_model_instances/0/buildings",
+            rmr_context="ruleset_model_descriptions/0/buildings",
         )
 
     class BuildingRule(RuleDefinitionListIndexedBase):

@@ -1,10 +1,11 @@
+from functools import reduce
+from operator import concat
+
 from rct229.rulesets.ashrae9012019.data.schema_enums import schema_enums
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_list_hvac_systems_associated_with_zone import (
     get_list_hvac_systems_associated_with_zone,
 )
 from rct229.utils.jsonpath_utils import find_all
-from functools import reduce
-from operator import concat
 
 LightingSpaceOptionsG37 = schema_enums["LightingSpaceOptions2019ASHRAE901TG37"]
 VentilationSpaceOptions = schema_enums["VentilationSpaceOptions2019ASHRAE901"]
