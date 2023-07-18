@@ -26,7 +26,7 @@ class Section5Rule8(RuleDefinitionListIndexedBase):
             rmrs_used=UserBaselineProposedVals(False, True, False),
             each_rule=Section5Rule8.BuildingRule(),
             index_rmr="baseline",
-            list_path="ruleset_model_instances[0].buildings[*]",
+            list_path="ruleset_model_descriptions[0].buildings[*]",
             id="5-8",
             description="Baseline below-grade walls shall match the appropriate assembly maximum C-factors in Table G3.4-1 through G3.4-8.",
             ruleset_section_title="Envelope",
@@ -46,7 +46,7 @@ class Section5Rule8(RuleDefinitionListIndexedBase):
                 required_fields={},
                 each_rule=Section5Rule8.BuildingRule.BelowGradeWallRule(),
                 index_rmr="baseline",
-                list_path="$..surfaces[*]",
+                list_path="$.building_segments[*].zones[*].surfaces[*]",
             )
 
         def create_data(self, context, data=None):

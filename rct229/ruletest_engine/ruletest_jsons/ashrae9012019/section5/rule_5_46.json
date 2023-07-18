@@ -3,22 +3,22 @@
         "Section": 5,
         "Rule": 46,
         "Test": "a",
-        "test_description": "The proposed infiltration modeling method is the same as the baseline infiltration modeling method",
+        "test_description": "Project has one building segment. The proposed infiltration modeling method is the same as the baseline infiltration modeling method",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-46",
             "ruleset_reference": "Table G3.1(5) Proposed Building Performance (b)",
-            "rule_description": "The Infiltration shall be modeled using the same methodology and adjustments for weather and building operation in both the proposed design and the baseline building design.",
+            "rule_description": "The infiltration shall be modeled using the same methodology and adjustments for weather and building operation in both the proposed design and the baseline building design.",
             "applicable_rmr": "Proposed RMR",
             "rule_assertion": "=",
             "comparison_value": "Baseline RMR",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.29"
         },
         "rmr_transformations": {
             "proposed": {
                 "id": "ASHRAE229",
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMR 1",
                         "buildings": [
@@ -49,7 +49,7 @@
             },
             "baseline": {
                 "id": "ASHRAE229",
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMR 1",
                         "buildings": [
@@ -84,22 +84,22 @@
         "Section": 5,
         "Rule": 46,
         "Test": "b",
-        "test_description": "The proposed infiltration modeling method is the same as the baseline infiltration modeling method",
+        "test_description": "Project has one building segment. The proposed infiltration modeling method is the same as the baseline infiltration modeling method",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-46",
             "ruleset_reference": "Table G3.1(5) Proposed Building Performance (b)",
-            "rule_description": "The Infiltration shall be modeled using the same methodology and adjustments for weather and building operation in both the proposed design and the baseline building design.",
+            "rule_description": "The infiltration shall be modeled using the same methodology and adjustments for weather and building operation in both the proposed design and the baseline building design.",
             "applicable_rmr": "Proposed RMR",
             "rule_assertion": "=",
             "comparison_value": "Baseline RMR",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.29"
         },
         "rmr_transformations": {
             "proposed": {
                 "id": "ASHRAE229",
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMR 1",
                         "buildings": [
@@ -130,7 +130,7 @@
             },
             "baseline": {
                 "id": "ASHRAE229",
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMR 1",
                         "buildings": [

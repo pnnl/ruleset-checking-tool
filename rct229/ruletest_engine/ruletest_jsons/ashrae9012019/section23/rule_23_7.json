@@ -14,12 +14,12 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "System 6, 8 (Rule18-a, to be confirmed)",
             "mandatory_rule": "Yes",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.29"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "buildings": [
@@ -72,11 +72,11 @@
                                                 "id": "System 6",
                                                 "cooling_system": {
                                                     "id": "DX Coil 1",
-                                                    "cooling_system_type": "DIRECT_EXPANSION"
+                                                    "type": "DIRECT_EXPANSION"
                                                 },
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 1",
-                                                    "heating_system_type": "ELECTRIC_RESISTANCE"
+                                                    "type": "ELECTRIC_RESISTANCE"
                                                 },
                                                 "fan_system": {
                                                     "id": "VAV Fan System 1",
@@ -119,12 +119,12 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "System 6, 8 (Rule18-a, to be confirmed)",
             "mandatory_rule": "Yes",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.29"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "buildings": [
@@ -177,11 +177,11 @@
                                                 "id": "System 6",
                                                 "cooling_system": {
                                                     "id": "DX Coil 1",
-                                                    "cooling_system_type": "DIRECT_EXPANSION"
+                                                    "type": "DIRECT_EXPANSION"
                                                 },
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 1",
-                                                    "heating_system_type": "ELECTRIC_RESISTANCE"
+                                                    "type": "ELECTRIC_RESISTANCE"
                                                 },
                                                 "fan_system": {
                                                     "id": "VAV Fan System 1",

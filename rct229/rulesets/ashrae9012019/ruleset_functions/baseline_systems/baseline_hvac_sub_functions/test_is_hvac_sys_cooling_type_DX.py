@@ -16,14 +16,14 @@ TEST_RMD = {
                             "id": "hvac_1",
                             "cooling_system": {
                                 "id": "cooling_1",
-                                "cooling_system_type": "DIRECT_EXPANSION",
+                                "type": "DIRECT_EXPANSION",
                             },
                         },
                         {
                             "id": "hvac_2",
                             "cooling_system": {
                                 "id": "cooling_2",
-                                "cooling_system_type": "NON_MECHANICAL",
+                                "type": "NON_MECHANICAL",
                             },
                         },
                     ],
@@ -34,7 +34,7 @@ TEST_RMD = {
 }
 
 
-TEST_RMD_FULL = {"id": "229_01", "ruleset_model_instances": [TEST_RMD]}
+TEST_RMD_FULL = {"id": "229_01", "ruleset_model_descriptions": [TEST_RMD]}
 
 
 def test__TEST_RMD__is_valid():

@@ -31,12 +31,12 @@ TEST_RMD = {
         {"id": "HW_Loop_2", "type": "HEATING"},
         {"id": "CHW_Loop_1", "type": "COOLING"},
     ],
-    "external_fluid_source": [
+    "external_fluid_sources": [
         {"id": "fluid_loop_1", "loop": "HW_Loop_2", "type": "HOT_WATER"},
     ],
 }
 
-TEST_RMD_FULL = {"id": "229_01", "ruleset_model_instances": [TEST_RMD]}
+TEST_RMD_FULL = {"id": "229_01", "ruleset_model_descriptions": [TEST_RMD]}
 
 
 def test__TEST_RMD__is_valid():
