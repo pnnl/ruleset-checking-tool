@@ -6,7 +6,7 @@ from rct229.schema.validate import schema_validate_rmr
 
 TEST_RMD_P_HEATING_SYSTEM = {
     "id": "ashrae229",
-    "ruleset_model_instances": [
+    "ruleset_model_descriptions": [
         {
             "id": "test_rmi",
             "buildings": [
@@ -20,21 +20,21 @@ TEST_RMD_P_HEATING_SYSTEM = {
                                     "id": "hvac_1",
                                     "heating_system": {
                                         "id": "heating_system 1",
-                                        "heating_system_type": "HEAT_PUMP",
+                                        "type": "HEAT_PUMP",
                                     },
                                 },
                                 {
                                     "id": "hvac_2",
                                     "heating_system": {
                                         "id": "heating_system 2",
-                                        "heating_system_type": "HEAT_PUMP",
+                                        "type": "HEAT_PUMP",
                                     },
                                 },
                                 {
                                     "id": "hvac_3",
                                     "heating_system": {
                                         "id": "heating_system 3",
-                                        "heating_system_type": "HEAT_PUMP",
+                                        "type": "HEAT_PUMP",
                                     },
                                 },
                             ],
@@ -48,7 +48,7 @@ TEST_RMD_P_HEATING_SYSTEM = {
 
 TEST_RMD_U_HEATING_SYSTEM = {
     "id": "ashrae229",
-    "ruleset_model_instances": [
+    "ruleset_model_descriptions": [
         {
             "id": "test_rmi",
             "buildings": [
@@ -68,14 +68,14 @@ TEST_RMD_U_HEATING_SYSTEM = {
                                     "id": "hvac_2",
                                     "heating_system": {
                                         "id": "heating_system 2",
-                                        "heating_system_type": "NONE",
+                                        "type": "NONE",
                                     },
                                 },
                                 {
                                     "id": "hvac_3",
                                     "heating_system": {
                                         "id": "heating_system 3",
-                                        "heating_system_type": "HEAT_PUMP",
+                                        "type": "HEAT_PUMP",
                                     },
                                 },
                             ],
@@ -89,7 +89,7 @@ TEST_RMD_U_HEATING_SYSTEM = {
 
 TEST_RMD_P_PREHEAT_SYSTEM = {
     "id": "ashrae229",
-    "ruleset_model_instances": [
+    "ruleset_model_descriptions": [
         {
             "id": "test_rmi",
             "buildings": [
@@ -103,21 +103,21 @@ TEST_RMD_P_PREHEAT_SYSTEM = {
                                     "id": "hvac_1",
                                     "preheat_system": {
                                         "id": "preheat_system 1",
-                                        "heating_system_type": "HEAT_PUMP",
+                                        "type": "HEAT_PUMP",
                                     },
                                 },
                                 {
                                     "id": "hvac_2",
                                     "preheat_system": {
                                         "id": "preheat_system 2",
-                                        "heating_system_type": "HEAT_PUMP",
+                                        "type": "HEAT_PUMP",
                                     },
                                 },
                                 {
                                     "id": "hvac_3",
                                     "preheat_system": {
                                         "id": "preheat_system 3",
-                                        "heating_system_type": "HEAT_PUMP",
+                                        "type": "HEAT_PUMP",
                                     },
                                 },
                             ],
@@ -131,7 +131,7 @@ TEST_RMD_P_PREHEAT_SYSTEM = {
 
 TEST_RMD_U_PREHEAT_SYSTEM = {
     "id": "ashrae229",
-    "ruleset_model_instances": [
+    "ruleset_model_descriptions": [
         {
             "id": "test_rmi",
             "buildings": [
@@ -151,14 +151,14 @@ TEST_RMD_U_PREHEAT_SYSTEM = {
                                     "id": "hvac_2",
                                     "preheat_system": {
                                         "id": "preheat_system 2",
-                                        "heating_system_type": "NONE",
+                                        "type": "NONE",
                                     },
                                 },
                                 {
                                     "id": "hvac_3",
                                     "preheat_system": {
                                         "id": "preheat_system 3",
-                                        "heating_system_type": "HEAT_PUMP",
+                                        "type": "HEAT_PUMP",
                                     },
                                 },
                             ],
@@ -171,16 +171,16 @@ TEST_RMD_U_PREHEAT_SYSTEM = {
 }
 
 TEST_RMI_P_HEATING_SYSTEM = quantify_rmr(TEST_RMD_P_HEATING_SYSTEM)[
-    "ruleset_model_instances"
+    "ruleset_model_descriptions"
 ][0]
 TEST_RMI_U_HEATING_SYSTEM = quantify_rmr(TEST_RMD_U_HEATING_SYSTEM)[
-    "ruleset_model_instances"
+    "ruleset_model_descriptions"
 ][0]
 TEST_RMI_P_PREHEAT_SYSTEM = quantify_rmr(TEST_RMD_P_PREHEAT_SYSTEM)[
-    "ruleset_model_instances"
+    "ruleset_model_descriptions"
 ][0]
 TEST_RMI_U_PREHEAT_SYSTEM = quantify_rmr(TEST_RMD_U_PREHEAT_SYSTEM)[
-    "ruleset_model_instances"
+    "ruleset_model_descriptions"
 ][0]
 
 

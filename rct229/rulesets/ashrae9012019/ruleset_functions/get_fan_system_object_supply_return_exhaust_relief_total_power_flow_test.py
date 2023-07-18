@@ -41,11 +41,11 @@ TEST_RMD = {
                             "id": "PTAC 1",
                             "cooling_system": {
                                 "id": "DX Coil 1",
-                                "cooling_system_type": "DIRECT_EXPANSION",
+                                "type": "DIRECT_EXPANSION",
                             },
                             "heating_system": {
                                 "id": "HHW Coil 1",
-                                "heating_system_type": "FLUID_LOOP",
+                                "type": "FLUID_LOOP",
                                 "hot_water_loop": "Boiler Loop 1",
                             },
                             "fan_system": {
@@ -132,9 +132,9 @@ TEST_RMD = {
 }
 
 
-TEST_RMD_FULL = {"id": "229", "ruleset_model_instances": [TEST_RMD]}
+TEST_RMD_FULL = {"id": "229", "ruleset_model_descriptions": [TEST_RMD]}
 
-TEST_FAN_SYSTEM = quantify_rmr(TEST_RMD_FULL)["ruleset_model_instances"][0][
+TEST_FAN_SYSTEM = quantify_rmr(TEST_RMD_FULL)["ruleset_model_descriptions"][0][
     "buildings"
 ][0]["building_segments"][0]["heating_ventilating_air_conditioning_systems"][0][
     "fan_system"

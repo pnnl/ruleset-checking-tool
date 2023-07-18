@@ -34,18 +34,31 @@ def normalize_interior_lighting_schedules(
     -------
     A list containing 8760/8784 hourly values of a noralized schedule of the space data element
     """
+
+    # Implementation note:
+    # Because performing arithmetic on 8760-length lists of Pint Quantities is costly,
+    # we will pull the units out of the lists. The easiest way to do that is to
+    # express each power_per_area value as a number in W/m2.
+    # Since the units
+    # cancel in the final result, an array of plain numbers can be returned, and the choice
+    # of units for power_per_area does not matter.
+
     assert_required_fields(
         GET_NORMALIZE_SPACE_SCHEDULE__REQUIRED_FIELDS["space"], space
     )
 
-    space_total_power_per_area = ZERO.POWER_PER_AREA
+    space_total_power_per_area = 0
     space_total_hourly_use_per_area_array = []
 
     for interior_lighting in space.get("interior_lighting", []):
-        power_per_area = interior_lighting.get("power_per_area", ZERO.POWER_PER_AREA)
+        power_per_area = (
+            interior_lighting.get("power_per_area", ZERO.POWER_PER_AREA)
+            .to("W/m2")
+            .magnitude
+        )
         # Ensure non-zero power
         assert_(
-            power_per_area > ZERO.POWER_PER_AREA,
+            power_per_area > 0,
             f'{interior_lighting["id"]} power_per_area is either missing or set to 0.0',
         )
         space_total_power_per_area += power_per_area

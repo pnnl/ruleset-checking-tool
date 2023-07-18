@@ -1,5 +1,5 @@
-from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.partial_rule_definition import PartialRuleDefinition
+from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 from rct229.rulesets.ashrae9012019.ruleset_functions.check_purchased_chw_hhw_status_dict import (
     check_purchased_chw_hhw_status_dict,
@@ -20,7 +20,7 @@ class Section22Rule37(RuleDefinitionListIndexedBase):
             ruleset_section_title="HVAC - Chiller",
             standard_section="Section G3.1.3.10 Chilled-Water Pumps (Systems 7, 8, 11, 12, and 13)",
             is_primary_rule=False,
-            list_path="ruleset_model_instances[0]",
+            list_path="ruleset_model_descriptions[0]",
             manual_check_required_msg="Manual Check Required - Baseline is modeled with purchased chilled water.  Make "
             "sure baseline systems served by purchased chilled water are modeled with a variable speed drive pump.",
             not_applicable_msg="Rule 22-37 Not Applicable - the baseline is not modeled with Purchased Chilled Water",

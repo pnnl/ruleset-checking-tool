@@ -48,7 +48,7 @@ def get_hvac_sys_and_assoc_zones_largest_exhaust_source(rmi, hvac_sys_id):
         get_dict_of_zones_and_terminal_units_served_by_hvac_sys(rmi)
     )
     assert_(
-        hvac_sys_id in zones_and_terminal_units_served_by_hvac_sys_dict.keys(),
+        hvac_sys_id in zones_and_terminal_units_served_by_hvac_sys_dict,
         f"HVAC {hvac_sys_id} does not "
         f"associated terminals and zones "
         f"connected with. Check inputs!",

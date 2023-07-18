@@ -54,7 +54,7 @@ def get_hw_loop_zone_list_w_area(rmi_b):
                     # by a hot water loop. The is_hvac_sys_preheating_type_fluid_loop returns true only
                     # 1. preheat_system exist and,
                     # 2. preheat_system.hot_water_loop exist and,
-                    # 3. preheat_system.heating_system_type is HEATING_SYSTEM.FLUID_LOOP
+                    # 3. preheat_system.type is HEATING_SYSTEM.FLUID_LOOP
                     hhw_loop_id = find_exactly_one_hvac_system(rmi_b, hvac_id)[
                         "preheat_system"
                     ]["hot_water_loop"]
@@ -63,14 +63,14 @@ def get_hw_loop_zone_list_w_area(rmi_b):
                     # a hot water loop. The is_hvac_sys_heating_type_fluid_loop returns true only
                     # 1. heating_system exist and,
                     # 2. heating_system.hot_water_loop exist and,
-                    # 3. heating_system.heating_system_type is HEATING_SYSTEM.FLUID_LOOP
+                    # 3. heating_system.type is HEATING_SYSTEM.FLUID_LOOP
                     hhw_loop_id = find_exactly_one_hvac_system(rmi_b, hvac_id)[
                         "heating_system"
                     ]["hot_water_loop"]
 
             if (
                 hhw_loop_id is not None
-                and hhw_loop_id not in hw_loop_zone_list_w_area_dict.keys()
+                and hhw_loop_id not in hw_loop_zone_list_w_area_dict
             ):
                 hw_loop_zone_list_w_area_dict[hhw_loop_id] = {
                     "zone_list": [],

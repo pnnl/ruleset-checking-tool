@@ -27,6 +27,6 @@ def is_hvac_sys_cooling_type_dx(rmi_b, hvac_b_id):
     hvac_b = find_exactly_one_hvac_system(rmi_b, hvac_b_id)
 
     return (
-        find_one("$.cooling_system.cooling_system_type", hvac_b)
+        find_one("$.cooling_system.type", hvac_b)
         == COOLING_SYSTEM_TYPE.DIRECT_EXPANSION
     )
