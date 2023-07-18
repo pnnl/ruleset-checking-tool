@@ -59,7 +59,7 @@ class Section19Rule13(RuleDefinitionListIndexedBase):
             ruleset_section_title="HVAC - General",
             standard_section="Section G3.1.2.8.1 and Exception 1",
             is_primary_rule=True,
-            rmr_context="ruleset_model_instances/0",
+            rmr_context="ruleset_model_descriptions/0",
             list_path="$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*]",
         )
 
@@ -129,7 +129,8 @@ class Section19Rule13(RuleDefinitionListIndexedBase):
                         if zone_info[hvac_id_b]["zone_has_lab_space"]:
                             zone_info[hvac_id_b][
                                 "all_design_setpoints_delta_Ts_are_per_reqs"
-                            ] = (
+                            ] = std_equal(
+                                LABORATORY_TEMP_DELTA,
                                 getattr_(
                                     terminal_b,
                                     "Terminal",
@@ -139,12 +140,13 @@ class Section19Rule13(RuleDefinitionListIndexedBase):
                                     terminal_b,
                                     "Terminal",
                                     "supply_design_heating_setpoint_temperature",
-                                )
-                            ) == LABORATORY_TEMP_DELTA
+                                ),
+                            )
                         else:
                             zone_info[hvac_id_b][
                                 "all_design_setpoints_delta_Ts_are_per_reqs"
-                            ] = (
+                            ] = std_equal(
+                                GENERAL_TEMP_DELTA,
                                 getattr_(
                                     terminal_b,
                                     "Terminal",
@@ -154,13 +156,13 @@ class Section19Rule13(RuleDefinitionListIndexedBase):
                                     terminal_b,
                                     "Terminal",
                                     "supply_design_cooling_setpoint_temperature",
-                                )
-                            ) == GENERAL_TEMP_DELTA
+                                ),
+                            )
 
             zone_info[hvac_id_b]["supply_flow_p"] = sum(
                 [
                     terminal_p.get("primary_air_flow", ZERO.FLOW)
-                    for terminal_p in find_one(
+                    for terminal_p in find_all(
                         f'$.buildings[*].building_segments[*].zones[*][?(@.id = "{zone_id_b}")].terminals[*]',
                         rmi_p,
                     )
