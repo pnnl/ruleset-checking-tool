@@ -12,7 +12,7 @@
 - **is_baseline_system_9**: The function returns either Sys-9, Sys-9b, or Not_Sys_9 string output which indicates whether the HVAC system is ASHRAE 90.1 2019 Appendix G system 9 (Heating and Ventilation) or system 9b (system 9 with purchased heating).   
 
 **Function Call:**
-1. is_hvac_sys_cooling_type_none()
+1. is_hvac_sys_cooling_type_none_or_non_mechanical()
 2. is_hvac_sys_fan_sys_CV()  
 3. is_hvac_sys_heating_type_furnace()
 4. are_all_terminal_heat_sources_none_or_null()  
@@ -33,7 +33,7 @@
         - Check if fansystem is constant volume, if yes then carry on: `if is_hvac_sys_fan_sys_CV(B_RMI, hvac_b.id) == TRUE:`  
             - Check if the hvac system serves a single zone and that the zone only has one terminal unit: `if does_hvac_system_serve_single_zone(B_RMI, zone_id_list) == TRUE AND does_each_zone_have_only_one_terminal(B_RMI, zone_id_list) == TRUE:`     
                 - Check that the data elements associated with the terminal unit align with system 9: `if are_all_terminal_heat_sources_none_or_null(B_RMI, terminal_unit_id_list) == TRUE AND are_all_terminal_cool_sources_none_or_null(B_RMI, terminal_unit_id_list) == TRUE And are_all_terminal_fans_null(B_RMI, terminal_unit_id_list) == TRUE AND are_all_terminal_types_CAV(B_RMI, terminal_unit_id_list) == TRUE:`        
-                    - if coolingsystem is None and the heating type is a furnace then Sys-9: `if is_hvac_sys_cooling_type_none(B_RMI, hvac_b.id) == TRUE AND is_hvac_sys_heating_type_furnace(B_RMI, terminal_unit_id_list) == TRUE: is_baseline_system_9 = "Sys-9"`   
+                    - if coolingsystem is None and the heating type is a furnace then Sys-9: `if is_hvac_sys_cooling_type_none_or_non_mechanical(B_RMI, hvac_b.id) == TRUE AND is_hvac_sys_heating_type_furnace(B_RMI, terminal_unit_id_list) == TRUE: is_baseline_system_9 = "Sys-9"`   
 
 **Returns** `is_baseline_system_9`  
 
