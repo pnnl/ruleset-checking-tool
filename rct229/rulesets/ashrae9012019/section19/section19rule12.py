@@ -70,14 +70,14 @@ class Section19Rule12(RuleDefinitionListIndexedBase):
 
             high_limit_temp_b = getattr_(
                 fan_system_b,
-                "high_limit_shutoff_temperature",
+                "fan_system",
                 "air_economizer",
                 "high_limit_shutoff_temperature",
             )
 
             air_economizer_type_b = getattr_(
                 fan_system_b,
-                "air economizer type",
+                "fan_system",
                 "air_economizer",
                 "type",
             )
