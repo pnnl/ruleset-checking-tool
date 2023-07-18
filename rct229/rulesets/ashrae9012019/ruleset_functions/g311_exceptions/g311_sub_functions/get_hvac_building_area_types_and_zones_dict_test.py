@@ -1,7 +1,6 @@
 from copy import deepcopy
 
-from rct229.rulesets.ashrae9012019.data_fns.table_3_2_fns import table_3_2_lookup
-from rct229.rulesets.ashrae9012019.ruleset_functions.get_hvac_building_area_types_and_zones_dict import (
+from rct229.rulesets.ashrae9012019.ruleset_functions.g311_exceptions.g311_sub_functions.get_hvac_building_area_types_and_zones_dict import (
     get_hvac_building_area_types_and_zones_dict,
 )
 from rct229.schema.config import ureg
@@ -121,9 +120,9 @@ TEST_RMI = {
 }
 
 
-TEST_RMD_FULL = {"id": "229", "ruleset_model_instances": [TEST_RMI]}
+TEST_RMD_FULL = {"id": "229", "ruleset_model_descriptions": [TEST_RMI]}
 
-TEST_RMI_UNIT = quantify_rmr(TEST_RMD_FULL)["ruleset_model_instances"][0]
+TEST_RMI_UNIT = quantify_rmr(TEST_RMD_FULL)["ruleset_model_descriptions"][0]
 
 
 def test__TEST_RMD__is_valid():

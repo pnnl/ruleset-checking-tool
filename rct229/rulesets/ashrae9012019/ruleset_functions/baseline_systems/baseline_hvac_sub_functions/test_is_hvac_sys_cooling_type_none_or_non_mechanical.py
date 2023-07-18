@@ -36,7 +36,10 @@ TEST_RMD = {
                         {
                             # Case where there is no cooling system
                             "id": "hvac_4",
-                            "cooling_system": {"id": "cooling_4", "type": "NON_MECHANICAL"},
+                            "cooling_system": {
+                                "id": "cooling_4",
+                                "type": "NON_MECHANICAL",
+                            },
                         },
                     ],
                 }
