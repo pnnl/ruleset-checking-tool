@@ -1,10 +1,11 @@
 import logging
 
-from pydash import flow, drop_while, curry, filter_, map_, flatten_deep, reduce_
+from pydash import flow, curry, filter_, map_, flatten_deep
 
 from rct229.rulesets.ashrae9012019.data.schema_enums import schema_enums
 from rct229.rulesets.ashrae9012019.data_fns.table_lighting_to_hvac_bat_map_fns import (
-    lighting_to_hvac_bat,
+    building_lighting_to_hvac_bat,
+    space_lighting_to_hvac_bat,
 )
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_zone_conditioning_category_dict import (
     get_zone_conditioning_category_rmi_dict,
@@ -76,7 +77,7 @@ def get_hvac_building_area_types_and_zones_dict(climate_zone, rmi):
             ]
             classification_source = ClassificationSource.BUILDING_SEGMENT_HVAC_BAT
         elif building_segment.get("lighting_building_area_type"):
-            building_segment_hvac_bat = lighting_to_hvac_bat(
+            building_segment_hvac_bat = building_lighting_to_hvac_bat(
                 building_segment["lighting_building_area_type"]
             )
             classification_source = ClassificationSource.BUILDING_SEGMENT_LIGHTING
@@ -99,7 +100,7 @@ def get_hvac_building_area_types_and_zones_dict(climate_zone, rmi):
                 f"Failed to determine hvac area type for building segment: {building_segment['id']}. Verify the model inputs and make sure it contains either of area_type_heating_ventilating_air_conditioning_system, lighting_building_area_type or space.lighting_space_type.",
             )
 
-            building_segment_hvac_bat = lighting_to_hvac_bat(
+            building_segment_hvac_bat = space_lighting_to_hvac_bat(
                 max(
                     building_segment_space_types_areas_dict,
                     key=building_segment_space_types_areas_dict.get,
