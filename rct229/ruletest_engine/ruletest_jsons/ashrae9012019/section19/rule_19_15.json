@@ -747,10 +747,6 @@
                                                         "type": "CONSTANT_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 9",
                                                         "primary_airflow": 117.98686079999996,
-                                                        "fan": {
-                                                            "specification_method": "SIMPLE",
-                                                            "design_electric_power": 25
-                                                        },
                                                         "supply_design_heating_setpoint_temperature": 40.5555555555556
                                                     }
                                                 ],
