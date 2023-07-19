@@ -52,6 +52,10 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   * [is_CZ_0_to_3a](ruleset_functions/is_CZ_0_to_3a.md): Determines whether the building is in climate zone 0 to 3a - used for Appendix G Table G3.1.1-3.
   * [get_zone_peak_internal_load_floor_area](ruleset_functions/get_zone_peak_internal_load_floor_area.md): finds the peak coincident internal loads of a zone and returns the value in btu/h/ft2
   * [get_HVAC_building_area_types_and_zones](ruleset_functions/get_HVAC_building_area_types_and_zones.md): Get a dictionary of the zone_ids associated with each building area type associated with U_RMR, P_RMR, or B_RMR. Also returns the total floor area of each building area type and the source of the information (BUILDING_SEGMENT_HVAC_BAT, BUILDING_SEGMENT_LIGHTING or SPACE_LIGHTING)
+  * [expected_system_type_from_table_g3_1_1a](ruleset_functions/expected_system_type_from_Table_G3_1_1a.md): returns the expected system type based on the BAT, the number of floors of the building and the area of the BAT, and climate zone.
+  * [get_zone_HVAC_BAT](ruleset_functions/get_zone_HVAC_BAT.md): Get a dictionary of the HVAC_BAT and areas for a given zone.
+  * [get_zones_on_same_floor](ruleset_functions/get_zones_on_same_floor.md): Provides a list of zones that are on the floor as the starting zone.
+  * [does_zone_meet_G3_1_1e](ruleset_functions/G311_exceptions/does_zone_meet_G3_1_1e.md): Determines whether a given zone meets the G3_1_1e exception "Thermal zones designed with heating-only systems in the proposed design serving storage rooms, stairwells, vestibules, electrical/mechanical rooms, and restrooms not exhausting or transferring air from mechanically cooled thermal zones in the proposed design shall use system type 9 or 10 in the baseline building design.
 
 ### HVAC type functions
   * [is_baseline_system_1](ruleset_functions/baseline_systems/is_baseline_system_1.md): Get either Sys-1, Sys-1a, Sys-1b, Sys-1c, or Not_Sys_1 string output which indicates whether the HVAC system is ASHRAE 90.1 2019 Appendix G system 1 (PTAC), system 1a (system 1 with purchased CHW), system 1b (system 1 with purchased heating), system 1c (system 1 with purchased CHW and purchased HW).
@@ -109,6 +113,7 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   * [are_all_terminal_types_CAV_With_None_Equal_to_Null](ruleset_functions/baseline_systems/baseline_hvac_sub_functions/are_all_terminal_types_CAV_With_None_Equal_to_Null.md): Returns TRUE if all of the terminal unit types input to this function are constant air volume (CAV). It returns FALSE if any of the terminal units are of a type other than constant air volume (CAV).
   * [get_dict_with_terminal_units_and_zones](ruleset_functions/baseline_systems/baseline_hvac_sub_functions/get_dict_with_terminal_units_and_zones.md): Returns a dictionary of zone IDs associated with each terminal unit in the RMD.
   * [are_all_terminal_CHW_loops_purchased_cooling](ruleset_functions/baseline_systems/baseline_hvac_sub_functions/are_all_terminal_CHW_loops_purchased_cooling.md): Returns TRUE if the fluid loop associated with the cooling_from_loop associated with each terminal unit is purchased CHW. Returns FALSE if this is not the case.
+  * [is_zone_mechanically_heated_and_not_cooled](ruleset_functions/is_zone_mechanically_heated_and_not_cooled.md): determines whether a zone is mechanically heated, but not cooled.  Checks for transfer air.
 
 ## Data Tables
   * [8.4.4](data_tables/Table8-4-4.md): Minimum Nominal Efficiency Levels for Low-Voltage Dry-Type Distribution Transformers  

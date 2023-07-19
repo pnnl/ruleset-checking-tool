@@ -2,12 +2,16 @@ from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_opaque_surface_type import (
-    get_opaque_surface_type,
     OpaqueSurfaceType as OST,
+)
+from rct229.rulesets.ashrae9012019.ruleset_functions.get_opaque_surface_type import (
+    get_opaque_surface_type,
+)
+from rct229.rulesets.ashrae9012019.ruleset_functions.get_surface_conditioning_category_dict import (
+    SurfaceConditioningCategory as SCC,
 )
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_surface_conditioning_category_dict import (
     get_surface_conditioning_category_dict,
-    SurfaceConditioningCategory as SCC,
 )
 
 ABSORPTION_THERMAL_EXTERIOR = 0.9
@@ -35,7 +39,7 @@ class Section5Rule41(RuleDefinitionListIndexedBase):
             ruleset_section_title="Envelope",
             standard_section="Section G3.1-1(a) Building Envelope Modeling Requirements for the Proposed design",
             is_primary_rule=True,
-            list_path="ruleset_model_instances[0].buildings[*]",
+            list_path="ruleset_model_descriptions[0].buildings[*]",
             data_items={"climate_zone": ("proposed", "weather/climate_zone")},
         )
 
@@ -69,8 +73,8 @@ class Section5Rule41(RuleDefinitionListIndexedBase):
                 super(Section5Rule41.BuildingRule.RoofRule, self).__init__(
                     rmrs_used=UserBaselineProposedVals(True, False, True),
                     required_fields={
-                        "$": ["surface_optical_properties"],
-                        "surface_optical_properties": ["absorptance_thermal_exterior"],
+                        "$": ["optical_properties"],
+                        "optical_properties": ["absorptance_thermal_exterior"],
                     },
                 )
 
@@ -79,12 +83,12 @@ class Section5Rule41(RuleDefinitionListIndexedBase):
                 roof_u = context.user
 
                 return {
-                    "absorptance_thermal_exterior_p": roof_p[
-                        "surface_optical_properties"
-                    ]["absorptance_thermal_exterior"],
-                    "absorptance_thermal_exterior_u": roof_u[
-                        "surface_optical_properties"
-                    ]["absorptance_thermal_exterior"],
+                    "absorptance_thermal_exterior_p": roof_p["optical_properties"][
+                        "absorptance_thermal_exterior"
+                    ],
+                    "absorptance_thermal_exterior_u": roof_u["optical_properties"][
+                        "absorptance_thermal_exterior"
+                    ],
                 }
 
             def manual_check_required(self, context, calc_vals=None, data=None):

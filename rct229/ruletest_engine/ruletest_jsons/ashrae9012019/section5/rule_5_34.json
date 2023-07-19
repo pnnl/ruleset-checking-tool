@@ -3,7 +3,7 @@
         "Section": 5,
         "Rule": 34,
         "Test": "a",
-        "test_description": "Building includes a conditioned zone that has two roof surfaces one of which has skylights. Skylight area in the proposed design is less than 3% of total roof area. Baseline skylight area is correctly modeled as equal to the skylight area in the proposed design.",
+        "test_description": " Project has one building segment and includes a conditioned zone that has two roof surfaces one of which has skylights. Skylight area in the proposed design is less than 3% of total roof area. Baseline skylight area is correctly modeled as equal to the skylight area in the proposed design.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-34",
@@ -13,7 +13,7 @@
             "rule_assertion": "=",
             "comparison_value": "Proposed RMR",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.29"
         },
         "rmr_transformations": {
             "proposed": {
@@ -22,7 +22,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMR 1",
                         "buildings": [
@@ -102,7 +102,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMR 1",
                         "buildings": [
@@ -182,7 +182,7 @@
         "Section": 5,
         "Rule": 34,
         "Test": "b",
-        "test_description": "Building includes a conditioned zone that has two roof surfaces one of which has skylights. Skylight area in the proposed design is less than 3% of the total roof area. Baseline skylight area is not equal to the  skylight area in the proposed desiging, which is incorrect.",
+        "test_description": " Project has one building segment and includes a conditioned zone that has two roof surfaces one of which has skylights. Skylight area in the proposed design is less than 3% of the total roof area. Baseline skylight area is not equal to the  skylight area in the proposed desiging, which is incorrect.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-34",
@@ -192,7 +192,7 @@
             "rule_assertion": "=",
             "comparison_value": "Proposed RMR",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.29"
         },
         "rmr_transformations": {
             "proposed": {
@@ -201,7 +201,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMR 1",
                         "buildings": [
@@ -281,7 +281,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMR 1",
                         "buildings": [
