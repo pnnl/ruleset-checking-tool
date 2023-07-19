@@ -338,6 +338,11 @@ def create_schedule_list(schedule_str):
         schedule_list = [float(schedule_parameter)] * 8760
         return schedule_list
 
+    elif schedule_name == "CONSTANT_DAY":
+        # Return the schedule parameter 24 times
+        schedule_list = [float(schedule_parameter)] * 24
+        return schedule_list
+
     # If utilizing a predefined schedule from the schedule library, load it here
     elif schedule_name == "LIBRARY":
         # Load schedule JSON
@@ -468,7 +473,7 @@ def disaggregate_master_ruletest_json(master_json_name, ruleset_doc):
     write_ruletest_json(prev_section, prev_rule, ruleset_doc)
 
 
-def disaggregate_master_rmd_json(master_json_name, output_dir):
+def disaggregate_master_rmd_json(master_json_name, output_dir, ruleset_doc):
     """Ingests a string representing a JSON file name from rct229/ruletest_engine/ruletest_jsons. JSONs in that
     directory contain either ALL ruletests for a particular grouping of rules (e.g., 'envelope_tests.json' has every
     test case for envelope based rules) or sometimes just RMDs. This scripts breaks out master JSONs without test
@@ -490,7 +495,7 @@ def disaggregate_master_rmd_json(master_json_name, output_dir):
     file_dir = os.path.dirname(__file__)
 
     # master JSON should be in the ruletest_jsons directory
-    master_json_path = os.path.join(file_dir, "..", master_json_name)
+    master_json_path = os.path.join(file_dir, "..", ruleset_doc, master_json_name)
 
     # Initialize master JSON dictionary
     with open(master_json_path) as f:
@@ -500,7 +505,7 @@ def disaggregate_master_rmd_json(master_json_name, output_dir):
     def write_ruletest_json(rmd_dict, json_name, output_dir):
         # Initialize json name and pathing
         json_name = os.path.join(f"{output_dir}", f"{json_name}")
-        json_file_path = os.path.join(file_dir, "..", json_name)
+        json_file_path = os.path.join(file_dir, "..", ruleset_doc, json_name)
 
         # Dump JSON to string for writing
         json_string = json.dumps(rmd_dict, indent=4)

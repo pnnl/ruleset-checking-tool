@@ -14,12 +14,12 @@
             "comparison_value": "User RMR",
             "rule_dependency": "none",
             "mandatory_rule": "Yes",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.29"
         },
         "rmr_transformations": {
             "user": {
                 "id": "ashrae_229_name",
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "buildings": [
@@ -60,7 +60,7 @@
             },
             "baseline": {
                 "id": "ashrae_229_name",
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "buildings": [
@@ -116,12 +116,12 @@
             "comparison_value": "User RMR",
             "rule_dependency": "none",
             "mandatory_rule": "Yes",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.29"
         },
         "rmr_transformations": {
             "user": {
                 "id": "ashrae_229_name",
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "buildings": [
@@ -158,7 +158,7 @@
             },
             "baseline": {
                 "id": "ashrae_229_name",
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "buildings": [
@@ -214,12 +214,12 @@
             "comparison_value": "User RMR",
             "rule_dependency": "none",
             "mandatory_rule": "Yes",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.29"
         },
         "rmr_transformations": {
             "user": {
                 "id": "ashrae_229_name",
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "buildings": [
@@ -260,7 +260,7 @@
             },
             "baseline": {
                 "id": "ashrae_229_name",
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "buildings": [

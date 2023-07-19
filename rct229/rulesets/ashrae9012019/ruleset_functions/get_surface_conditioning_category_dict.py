@@ -12,7 +12,7 @@ from rct229.utils.jsonpath_utils import find_all
 
 # Constants
 # TODO: These should directly from the enumerations
-SurfaceAdjacentTo = schema_enums["SurfaceAdjacentToOptions"]
+SurfaceAdjacency = schema_enums["SurfaceAdjacencyOptions"]
 
 
 # Intended for export and internal use
@@ -77,7 +77,7 @@ SCC_DATA_FRAME = pd.DataFrame(
             SurfaceConditioningCategory.UNREGULATED,
             SurfaceConditioningCategory.UNREGULATED,
         ],
-        SurfaceAdjacentTo.EXTERIOR: [
+        SurfaceAdjacency.EXTERIOR: [
             SurfaceConditioningCategory.EXTERIOR_RESIDENTIAL,
             SurfaceConditioningCategory.EXTERIOR_NON_RESIDENTIAL,
             SurfaceConditioningCategory.EXTERIOR_MIXED,
@@ -85,7 +85,7 @@ SCC_DATA_FRAME = pd.DataFrame(
             SurfaceConditioningCategory.UNREGULATED,
             SurfaceConditioningCategory.UNREGULATED,
         ],
-        SurfaceAdjacentTo.GROUND: [
+        SurfaceAdjacency.GROUND: [
             SurfaceConditioningCategory.EXTERIOR_RESIDENTIAL,
             SurfaceConditioningCategory.EXTERIOR_NON_RESIDENTIAL,
             SurfaceConditioningCategory.EXTERIOR_MIXED,
@@ -151,7 +151,7 @@ def get_surface_conditioning_category_dict(climate_zone, building):
                 zcc,
                 # column index
                 zcc_dict[getattr_(surface, "surface", "adjacent_zone")]
-                if surface_adjacent_to == SurfaceAdjacentTo.INTERIOR
+                if surface_adjacent_to == SurfaceAdjacency.INTERIOR
                 else surface_adjacent_to,
             ]
 

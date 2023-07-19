@@ -30,7 +30,7 @@ class Section5Rule28(RuleDefinitionListIndexedBase):
             ruleset_section_title="Envelope",
             standard_section="Section G3.1-5(a) Building Envelope Modeling Requirements for the Baseline building",
             is_primary_rule=True,
-            list_path="ruleset_model_instances[0].buildings[*]",
+            list_path="ruleset_model_descriptions[0].buildings[*]",
             data_items={"climate_zone": ("baseline", "weather/climate_zone")},
         )
 
@@ -40,7 +40,7 @@ class Section5Rule28(RuleDefinitionListIndexedBase):
                 rmrs_used=UserBaselineProposedVals(False, True, True),
                 each_rule=Section5Rule28.BuildingRule.UnregulatedSurfaceRule(),
                 index_rmr="baseline",
-                list_path="$..surfaces[*]",
+                list_path="$.building_segments[*].zones[*].surfaces[*]",
             )
 
         def create_data(self, context, data=None):
