@@ -18,13 +18,9 @@
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
-                "ruleset_model_instances": [
-                    {
-                        "id": "RMD 1"
-                    }
-                ],
                 "ruleset_model_descriptions": [
                     {
+                        "id": "RMD 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
@@ -52,7 +48,7 @@
                                                 "id": "System 9",
                                                 "heating_system": {
                                                     "id": "Furnace Coil 1",
-                                                    "heating_system_type": "FURNACE",
+                                                    "type": "FURNACE",
                                                     "energy_source_type": "NATURAL_GAS"
                                                 },
                                                 "fan_system": {
@@ -67,12 +63,7 @@
                                                         {
                                                             "id": "Return Fan 1"
                                                         }
-                                                    ],
-                                                    "air_economizer": {
-                                                        "id": "Air Economizer 1",
-                                                        "type": "TEMPERATURE",
-                                                        "high_limit_shutoff_temperature": 23.888888888888914
-                                                    }
+                                                    ]
                                                 }
                                             }
                                         ]
@@ -81,10 +72,7 @@
                             }
                         ]
                     }
-                ],
-                "weather": {
-                    "climate_zone": "CZ3C"
-                }
+                ]
             }
         }
     },
@@ -107,13 +95,9 @@
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
-                "ruleset_model_instances": [
-                    {
-                        "id": "RMD 1"
-                    }
-                ],
                 "ruleset_model_descriptions": [
                     {
+                        "id": "RMD 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
@@ -141,7 +125,7 @@
                                                 "id": "System 9",
                                                 "heating_system": {
                                                     "id": "Furnace Coil 1",
-                                                    "heating_system_type": "FURNACE",
+                                                    "type": "FURNACE",
                                                     "energy_source_type": "NATURAL_GAS"
                                                 },
                                                 "fan_system": {
@@ -156,12 +140,7 @@
                                                         {
                                                             "id": "Return Fan 1"
                                                         }
-                                                    ],
-                                                    "air_economizer": {
-                                                        "id": "Air Economizer 1",
-                                                        "type": "TEMPERATURE",
-                                                        "high_limit_shutoff_temperature": 37.77777777777783
-                                                    }
+                                                    ]
                                                 }
                                             }
                                         ]
@@ -170,10 +149,7 @@
                             }
                         ]
                     }
-                ],
-                "weather": {
-                    "climate_zone": "CZ3C"
-                }
+                ]
             }
         }
     },
@@ -196,13 +172,9 @@
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
-                "ruleset_model_instances": [
-                    {
-                        "id": "RMD 1"
-                    }
-                ],
                 "ruleset_model_descriptions": [
                     {
+                        "id": "RMD 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
@@ -230,7 +202,7 @@
                                                 "id": "System 9",
                                                 "heating_system": {
                                                     "id": "Furnace Coil 1",
-                                                    "heating_system_type": "FURNACE",
+                                                    "type": "FURNACE",
                                                     "energy_source_type": "NATURAL_GAS"
                                                 },
                                                 "fan_system": {
@@ -245,12 +217,7 @@
                                                         {
                                                             "id": "Return Fan 1"
                                                         }
-                                                    ],
-                                                    "air_economizer": {
-                                                        "id": "Air Economizer 1",
-                                                        "type": "ENTHALPY",
-                                                        "high_limit_shutoff_temperature": 23.888888888888914
-                                                    }
+                                                    ]
                                                 }
                                             }
                                         ]
@@ -259,10 +226,7 @@
                             }
                         ]
                     }
-                ],
-                "weather": {
-                    "climate_zone": "CZ3C"
-                }
+                ]
             }
         }
     },
@@ -285,13 +249,9 @@
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
-                "ruleset_model_instances": [
-                    {
-                        "id": "RMD 1"
-                    }
-                ],
                 "ruleset_model_descriptions": [
                     {
+                        "id": "RMD 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
@@ -319,7 +279,7 @@
                                                 "id": "System 9",
                                                 "heating_system": {
                                                     "id": "Furnace Coil 1",
-                                                    "heating_system_type": "FURNACE",
+                                                    "type": "FURNACE",
                                                     "energy_source_type": "NATURAL_GAS"
                                                 },
                                                 "fan_system": {
@@ -334,11 +294,7 @@
                                                         {
                                                             "id": "Return Fan 1"
                                                         }
-                                                    ],
-                                                    "air_economizer": {
-                                                        "id": "Air Economizer 1",
-                                                        "high_limit_shutoff_temperature": 23.888888888888914
-                                                    }
+                                                    ]
                                                 }
                                             }
                                         ]
@@ -347,10 +303,7 @@
                             }
                         ]
                     }
-                ],
-                "weather": {
-                    "climate_zone": "CZ3C"
-                }
+                ]
             }
         }
     },
@@ -373,13 +326,9 @@
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
-                "ruleset_model_instances": [
-                    {
-                        "id": "RMD 1"
-                    }
-                ],
                 "ruleset_model_descriptions": [
                     {
+                        "id": "RMD 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
@@ -407,7 +356,7 @@
                                                 "id": "System 9",
                                                 "heating_system": {
                                                     "id": "Furnace Coil 1",
-                                                    "heating_system_type": "FURNACE",
+                                                    "type": "FURNACE",
                                                     "energy_source_type": "NATURAL_GAS"
                                                 },
                                                 "fan_system": {
@@ -422,12 +371,7 @@
                                                         {
                                                             "id": "Return Fan 1"
                                                         }
-                                                    ],
-                                                    "air_economizer": {
-                                                        "id": "Air Economizer 1",
-                                                        "type": "TEMPERATURE",
-                                                        "high_limit_shutoff_temperature": 37.77777777777783
-                                                    }
+                                                    ]
                                                 }
                                             }
                                         ]
@@ -436,10 +380,7 @@
                             }
                         ]
                     }
-                ],
-                "weather": {
-                    "climate_zone": "CZ0A"
-                }
+                ]
             }
         }
     }
