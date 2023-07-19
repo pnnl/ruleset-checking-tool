@@ -199,7 +199,8 @@
                                                 ],
                                                 "spaces": [
                                                     {
-                                                        "id": "Space 2"
+                                                        "id": "Space 2",
+                                                        "lighting_space_type": "OFFICE_ENCLOSED"
                                                     }
                                                 ]
                                             }
@@ -709,7 +710,8 @@
                                                 ],
                                                 "spaces": [
                                                     {
-                                                        "id": "Space 2"
+                                                        "id": "Space 2",
+                                                        "lighting_space_type": "OFFICE_ENCLOSED"
                                                     }
                                                 ]
                                             }
