@@ -72,7 +72,10 @@
                             }
                         ]
                     }
-                ]
+                ],
+                "weather": {
+                    "climate_zone": "CZ3C"
+                }
             }
         }
     },
@@ -149,7 +152,10 @@
                             }
                         ]
                     }
-                ]
+                ],
+                "weather": {
+                    "climate_zone": "CZ3C"
+                }
             }
         }
     },
@@ -226,7 +232,10 @@
                             }
                         ]
                     }
-                ]
+                ],
+                "weather": {
+                    "climate_zone": "CZ3C"
+                }
             }
         }
     },
@@ -303,7 +312,10 @@
                             }
                         ]
                     }
-                ]
+                ],
+                "weather": {
+                    "climate_zone": "CZ3C"
+                }
             }
         }
     },
@@ -380,7 +392,10 @@
                             }
                         ]
                     }
-                ]
+                ],
+                "weather": {
+                    "climate_zone": "CZ0A"
+                }
             }
         }
     }
