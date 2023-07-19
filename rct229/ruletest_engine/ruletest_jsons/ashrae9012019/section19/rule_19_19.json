@@ -13,12 +13,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Yes",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.29"
         },
         "rmr_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "buildings": [
@@ -48,7 +48,7 @@
                                                 "id": "System 9",
                                                 "heating_system": {
                                                     "id": "Furnace Coil 1",
-                                                    "heating_system_type": "FURNACE",
+                                                    "type": "FURNACE",
                                                     "energy_source_type": "NATURAL_GAS"
                                                 },
                                                 "fan_system": {
@@ -57,6 +57,11 @@
                                                     "supply_fans": [
                                                         {
                                                             "id": "Supply Fan 1"
+                                                        }
+                                                    ],
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "Return Fan 1"
                                                         }
                                                     ]
                                                 }
@@ -71,7 +76,7 @@
             },
             "baseline": {
                 "id": "ASHRAE229 1",
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "buildings": [
@@ -106,7 +111,7 @@
                                                 "id": "System 9",
                                                 "heating_system": {
                                                     "id": "Furnace Coil 1",
-                                                    "heating_system_type": "FURNACE",
+                                                    "type": "FURNACE",
                                                     "energy_source_type": "NATURAL_GAS"
                                                 },
                                                 "fan_system": {
@@ -167,12 +172,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Yes",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.29"
         },
         "rmr_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "buildings": [
@@ -193,7 +198,10 @@
                                                         "is_supply_ducted": true,
                                                         "type": "CONSTANT_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 10",
-                                                        "heating_source": "ELECTRIC"
+                                                        "heating_source": "ELECTRIC",
+                                                        "fan": {
+                                                            "id": "Terminal Fan 1"
+                                                        }
                                                     }
                                                 ]
                                             }
@@ -203,7 +211,7 @@
                                                 "id": "System 10",
                                                 "heating_system": {
                                                     "id": "Heating Coil 1",
-                                                    "heating_system_type": "ELECTRIC_RESISTANCE",
+                                                    "type": "FURNACE",
                                                     "energy_source_type": "ELECTRICITY"
                                                 },
                                                 "fan_system": {
@@ -212,6 +220,11 @@
                                                     "supply_fans": [
                                                         {
                                                             "id": "Supply Fan 1"
+                                                        }
+                                                    ],
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "Return Fan 1"
                                                         }
                                                     ]
                                                 }
@@ -226,7 +239,7 @@
             },
             "baseline": {
                 "id": "ASHRAE229 1",
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "buildings": [
@@ -247,7 +260,10 @@
                                                         "is_supply_ducted": true,
                                                         "type": "CONSTANT_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 10",
-                                                        "heating_source": "ELECTRIC"
+                                                        "heating_source": "ELECTRIC",
+                                                        "fan": {
+                                                            "id": "Terminal Fan 1"
+                                                        }
                                                     }
                                                 ],
                                                 "zonal_exhaust_fan": {
@@ -262,7 +278,7 @@
                                                 "id": "System 10",
                                                 "heating_system": {
                                                     "id": "Heating Coil 1",
-                                                    "heating_system_type": "ELECTRIC_RESISTANCE",
+                                                    "type": "FURNACE",
                                                     "energy_source_type": "ELECTRICITY"
                                                 },
                                                 "fan_system": {
@@ -323,12 +339,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Yes",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.29"
         },
         "rmr_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "buildings": [
@@ -349,7 +365,10 @@
                                                         "is_supply_ducted": true,
                                                         "type": "CONSTANT_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 10",
-                                                        "heating_source": "ELECTRIC"
+                                                        "heating_source": "ELECTRIC",
+                                                        "fan": {
+                                                            "id": "Terminal Fan 1"
+                                                        }
                                                     }
                                                 ]
                                             }
@@ -359,7 +378,7 @@
                                                 "id": "System 10",
                                                 "heating_system": {
                                                     "id": "Heating Coil 1",
-                                                    "heating_system_type": "ELECTRIC_RESISTANCE",
+                                                    "type": "FURNACE",
                                                     "energy_source_type": "ELECTRICITY"
                                                 },
                                                 "fan_system": {
@@ -368,6 +387,11 @@
                                                     "supply_fans": [
                                                         {
                                                             "id": "Supply Fan 1"
+                                                        }
+                                                    ],
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "Return Fan 1"
                                                         }
                                                     ]
                                                 }
@@ -382,7 +406,7 @@
             },
             "baseline": {
                 "id": "ASHRAE229 1",
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "buildings": [
@@ -403,7 +427,10 @@
                                                         "is_supply_ducted": true,
                                                         "type": "CONSTANT_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 10",
-                                                        "heating_source": "ELECTRIC"
+                                                        "heating_source": "ELECTRIC",
+                                                        "fan": {
+                                                            "id": "Terminal Fan 1"
+                                                        }
                                                     }
                                                 ],
                                                 "zonal_exhaust_fan": {
@@ -418,7 +445,7 @@
                                                 "id": "System 10",
                                                 "heating_system": {
                                                     "id": "Heating Coil 1",
-                                                    "heating_system_type": "ELECTRIC_RESISTANCE",
+                                                    "type": "FURNACE",
                                                     "energy_source_type": "ELECTRICITY"
                                                 },
                                                 "fan_system": {
@@ -485,12 +512,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Yes",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.29"
         },
         "rmr_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "buildings": [
@@ -511,7 +538,10 @@
                                                         "is_supply_ducted": true,
                                                         "type": "CONSTANT_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 10",
-                                                        "heating_source": "ELECTRIC"
+                                                        "heating_source": "ELECTRIC",
+                                                        "fan": {
+                                                            "id": "Terminal Fan 1"
+                                                        }
                                                     }
                                                 ],
                                                 "non_mechanical_cooling_fan_airflow": 117.98686079999996
@@ -522,7 +552,7 @@
                                                 "id": "System 10",
                                                 "heating_system": {
                                                     "id": "Heating Coil 1",
-                                                    "heating_system_type": "ELECTRIC_RESISTANCE",
+                                                    "type": "FURNACE",
                                                     "energy_source_type": "ELECTRICITY"
                                                 },
                                                 "fan_system": {
@@ -531,6 +561,11 @@
                                                     "supply_fans": [
                                                         {
                                                             "id": "Supply Fan 1"
+                                                        }
+                                                    ],
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "Return Fan 1"
                                                         }
                                                     ]
                                                 }
@@ -545,7 +580,7 @@
             },
             "baseline": {
                 "id": "ASHRAE229 1",
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "buildings": [
@@ -566,7 +601,10 @@
                                                         "is_supply_ducted": true,
                                                         "type": "CONSTANT_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 10",
-                                                        "heating_source": "ELECTRIC"
+                                                        "heating_source": "ELECTRIC",
+                                                        "fan": {
+                                                            "id": "Terminal Fan 1"
+                                                        }
                                                     }
                                                 ],
                                                 "zonal_exhaust_fan": {
@@ -581,7 +619,7 @@
                                                 "id": "System 10",
                                                 "heating_system": {
                                                     "id": "Heating Coil 1",
-                                                    "heating_system_type": "ELECTRIC_RESISTANCE",
+                                                    "type": "FURNACE",
                                                     "energy_source_type": "ELECTRICITY"
                                                 },
                                                 "fan_system": {
