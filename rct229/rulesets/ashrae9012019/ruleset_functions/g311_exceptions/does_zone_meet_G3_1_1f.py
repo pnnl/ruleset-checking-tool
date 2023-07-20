@@ -1,4 +1,5 @@
-from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_system_util import find_exactly_one_zone
+from rct229.rulesets.ashrae9012019.ruleset_functions.g311_exceptions.g311_sub_functions.is_zone_mechanically_cooled import \
+    is_zone_mechanically_cooled
 
 
 def does_zone_meet_g_3_1_1f(rmi, zone_id):
@@ -18,5 +19,4 @@ def does_zone_meet_g_3_1_1f(rmi, zone_id):
     -------
     Boolean True meet False otherwise
     """
-    zone_p = find_exactly_one_zone(rmi, zone_id)
-    return False
+    return is_zone_mechanically_cooled(rmi, zone_id)
