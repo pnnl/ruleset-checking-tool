@@ -43,7 +43,7 @@ class Section5Rule21(RuleDefinitionListIndexedBase):
             ruleset_section_title="Envelope",
             standard_section="Section G3.1-5(c) Building Envelope Modeling Requirements for the Baseline building",
             is_primary_rule=True,
-            list_path="ruleset_model_instances[0].buildings[*]",
+            list_path="ruleset_model_descriptions[0].buildings[*]",
             data_items={"climate_zone": ("baseline", "weather/climate_zone")},
         )
 
@@ -56,7 +56,7 @@ class Section5Rule21(RuleDefinitionListIndexedBase):
                 index_rmr="baseline",
                 # list_path and list_filter together determine the list of
                 # above grade walls to be passed to AboveGradeWallRule
-                list_path="$..surfaces[*]",
+                list_path="$.building_segments[*].zones[*].surfaces[*]",
             )
 
         def create_data(self, context, data=None):

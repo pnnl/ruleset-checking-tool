@@ -23,7 +23,7 @@ def get_heat_rejection_loops_connected_to_baseline_systems(rmi):
     heat_rejection_loop_list = [
         chiller["condensing_loop"]
         for chiller in find_all("$.chillers[*]", rmi)
-        if find_one("$.cooling_loop", chiller) in primary_secondary_loops_dict.keys()
+        if find_one("$.cooling_loop", chiller) in primary_secondary_loops_dict
         and chiller.get("condensing_loop")
     ]
     return list(set(heat_rejection_loop_list))

@@ -1,4 +1,5 @@
 import pytest
+
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_min_oa_cfm_sch_zone import (
     get_min_oa_cfm_sch_zone,
 )
@@ -38,7 +39,7 @@ def create_flexible_schedule_length(schedule_length):
                                 "preheat_system": {
                                     "id": "preheat_system",
                                     "hot_water_loop": "HW_Loop_1",
-                                    "heating_system_type": "FLUID_LOOP",
+                                    "type": "FLUID_LOOP",
                                 },
                             }
                         ],
@@ -77,11 +78,11 @@ TEST_RMD_WRONG_LENGTH = create_flexible_schedule_length(8700)
 
 TEST_RMD_FULL_CORRECT_LENGTH = {
     "id": "229_01",
-    "ruleset_model_instances": [TEST_RMD_CORRECT_LENGTH],
+    "ruleset_model_descriptions": [TEST_RMD_CORRECT_LENGTH],
 }
 TEST_RMD_FULL_WRONG_LENGTH = {
     "id": "229_01",
-    "ruleset_model_instances": [TEST_RMD_WRONG_LENGTH],
+    "ruleset_model_descriptions": [TEST_RMD_WRONG_LENGTH],
 }
 
 

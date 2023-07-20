@@ -1,6 +1,6 @@
 {
     "id": "ASHRAE229 1",
-    "ruleset_model_instances": [
+    "ruleset_model_descriptions": [
         {
             "id": "RMD 1",
             "buildings": [
@@ -30,7 +30,7 @@
                                     "id": "System 9",
                                     "heating_system": {
                                         "id": "Furnace Coil 1",
-                                        "heating_system_type": "FURNACE",
+                                        "type": "FURNACE",
                                         "energy_source_type": "NATURAL_GAS"
                                     },
                                     "fan_system": {

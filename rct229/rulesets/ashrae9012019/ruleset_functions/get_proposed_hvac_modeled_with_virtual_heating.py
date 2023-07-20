@@ -41,13 +41,13 @@ def get_proposed_hvac_modeled_with_virtual_heating(rmi_u, rmi_p):
         rmi_p,
     ):
         has_virtual_heating_p = False
-        heating_system_type_p = find_one("$.heating_system.heating_system_type", hvac_p)
+        heating_system_type_p = find_one("$.heating_system.type", hvac_p)
         if heating_system_type_p in APPLICABLE_HEATING_SYSTEM:
             # heating system type is found, the hvac_p must have heating system
             heating_system_id = hvac_p["heating_system"]["id"]
             heating_system_type_u = find_one(
                 f"$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*][?("
-                f'@.heating_system.id="{heating_system_id}")].heating_system.heating_system_type',
+                f'@.heating_system.id="{heating_system_id}")].heating_system.type',
                 rmi_u,
             )
             has_virtual_heating_p = (
@@ -55,13 +55,13 @@ def get_proposed_hvac_modeled_with_virtual_heating(rmi_u, rmi_p):
                 or heating_system_type_u == HeatingSystemOptions.NONE
             )
 
-        preheat_system_type_p = find_one("$.preheat_system.heating_system_type", hvac_p)
+        preheat_system_type_p = find_one("$.preheat_system.type", hvac_p)
         if preheat_system_type_p in APPLICABLE_HEATING_SYSTEM:
             # preheat system type is found, the hvac_p must have preheat system
             preheat_system_id = hvac_p["preheat_system"]["id"]
             preheat_system_type_u = find_one(
                 f"$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*][?("
-                f'@.preheat_system.id="{preheat_system_id}")].preheat_system.heating_system_type',
+                f'@.preheat_system.id="{preheat_system_id}")].preheat_system.type',
                 rmi_u,
             )
             has_virtual_heating_p = (

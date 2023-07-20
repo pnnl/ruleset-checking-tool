@@ -25,7 +25,7 @@ def is_hvac_sys_fluid_loop_purchased_heating(rmi_b, hvac_b_id):
     """
     # Get a list of loop ids in external fluid sources whose type are either hot water or steam
     purchased_heating_loop_id_list_b = find_all(
-        f'$.external_fluid_source[*][?(@.type="{EXTERNAL_FLUID_SOURCE.HOT_WATER}"), ?(@.type="{EXTERNAL_FLUID_SOURCE.STEAM}")].loop',
+        f'$.external_fluid_sources[*][?(@.type="{EXTERNAL_FLUID_SOURCE.HOT_WATER}"), ?(@.type="{EXTERNAL_FLUID_SOURCE.STEAM}")].loop',
         rmi_b,
     )
 

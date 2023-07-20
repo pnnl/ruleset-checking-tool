@@ -36,7 +36,7 @@ class Section6Rule5(RuleDefinitionListIndexedBase):
             ruleset_section_title="Lighting",
             standard_section="Section G3.1-6 Modeling Requirements for the Baseline building",
             is_primary_rule=True,
-            list_path="ruleset_model_instances[0]",
+            list_path="ruleset_model_descriptions[0]",
             data_items={"is_leap_year_b": ("baseline", "calendar/is_leap_year")},
         )
 
@@ -62,7 +62,7 @@ class Section6Rule5(RuleDefinitionListIndexedBase):
                     rmrs_used=UserBaselineProposedVals(False, True, True),
                     each_rule=Section6Rule5.RulesetModelInstanceRule.BuildingRule.ZoneRule(),
                     index_rmr="baseline",
-                    list_path="$..zones[*]",
+                    list_path="$.building_segments[*].zones[*]",
                     required_fields={"$": ["building_open_schedule"]},
                     data_items={
                         "building_open_schedule_id_b": (
@@ -75,7 +75,11 @@ class Section6Rule5(RuleDefinitionListIndexedBase):
             def is_applicable(self, context, data):
                 building_b = context.baseline
                 building_total_area_b = pint_sum(
-                    find_all("$..spaces[*].floor_area", building_b), ZERO.AREA
+                    find_all(
+                        "$.building_segments[*].zones[*].spaces[*].floor_area",
+                        building_b,
+                    ),
+                    ZERO.AREA,
                 )
 
                 return building_total_area_b > BUILDING_AREA_CUTTOFF
