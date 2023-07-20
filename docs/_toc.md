@@ -52,6 +52,7 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   * [get_zone_peak_internal_load_floor_area](ruleset_functions/get_zone_peak_internal_load_floor_area.md): finds the peak coincident internal loads of a zone and returns the value in btu/h/ft2
 
 ### G3.1.1 Exception Check Functions
+  * [does_zone_meet_G3_1_1d](ruleset_functions/G311_exceptions/does_zone_meet_G3_1_1d.md): Determines whether a given zone meets the G3_1_1d exception "For laboratory spaces in a building having a total laboratory exhaust rate greater than 15,000 cfm, use a single system of type 5 or 7 serving only those spaces.
   * [does_zone_meet_G3_1_1e](ruleset_functions/G311_exceptions/does_zone_meet_G3_1_1e.md): Determines whether a given zone meets the G3_1_1e exception "Thermal zones designed with heating-only systems in the proposed design serving storage rooms, stairwells, vestibules, electrical/mechanical rooms, and restrooms not exhausting or transferring air from mechanically cooled thermal zones in the proposed design shall use system type 9 or 10 in the baseline building design.
   * [does_zone_meet_G3_1_1f](ruleset_functions/G311_exceptions/does_zone_meet_G3_1_1f.md): Determines whether a given zone meets the G3_1_1f exception "If the baseline HVAC system type is 9 or 10, use additional system types for all HVAC zones that are mechanically cooled in the proposed design." - this function is only called if the expected baseline system type has already been confirmed to be system type 9 or 10
 
