@@ -30,7 +30,6 @@
 - use the function get_baseline_system_types to get a dictionary of baseline system types and systems: `baseline_system_types_dict = get_baseline_system_types(B-RMI)`
 - use the function get_dict_of_zones_and_terminal_units_served_by_hvac_sys to determine which zones are served by each system system: `zones_and_terminal_unit_list_dict = get_dict_of_zones_and_terminal_units_served_by_hvac_sys(B_RMI)`
 - use the function get_zone_target_baseline_system to get the target baseline system types for each zone.  This will be used when checking for laboratory systems: `target_baseline_systems = get_zone_target_baseline_system(P_RMI, B_RMI)`
-- use the function get_building_total_lab_exhaust_from_zone_exhaust_fan to get the totat lab exhaust air flow from zone exhaust fans.  This will be used when checking for laboratory systems: `lab_zone_exhaust = get_building_total_lab_exhaust_from_zone_exhaust_fan(P_RMI)`
 - use the function get_lab_zone_hvac_systems to get the list of hvac_ids for the systems that serve only lab zones: `lab_zone_hvac_systems = get_lab_zone_hvac_systems(B_RMI,P_RMI)`
 - create a list of laboratory zones meeting G3_1_1d: `laboratory_zones_meeting_G3_1_1d = [x for x in target_baseline_systems if target_baseline_systems[x]["SYSTEM_ORIGIN"] == G3_1_1d`
 - evaluate the rule for each HVAC system in the B_RMI: `for hvac_system in B_RMI...heating_ventilating_air_conditioning_systems:`
@@ -48,9 +47,7 @@
              				2.  serves ALL the lab zones
              				3.  is in a building with > 15,000cfm lab exhaust
              			- the function get_lab_zone_hvac_systems gets the hvac systems serving the lab zones.  If this system is in the list, AND it is the only one in the list, then this is a lab zone system: `if hvac_system.id in? lab_zone_hvac_systems["LAB_ZONES_ONLY"] && len(lab_zone_hvac_systems["LAB_ZONES_ONLY"]) == 1:`
-                			- if we can tell with 100% certainty that the building has > 15,000 cfm lab exhaust AND the system type is 5 or 7 this system can pass: `if lab_zone_exhaust > 15000:`
-                   				- check if the system type is 5 or 7: `if any(system_type == sys_type for sys_type in [SYS_5,SYS_7]): result = PASS`
-                       				- else, set result to fail: `else: result = FAIL; note = "This system serves all of the lab zones in a building with >15,000 cfm lab exhaust, but it is not system type 5 or 7."
+                			- if we can tell with 100% certainty that the building has > 15,000 cfm lab exhaust this system can pass: `if lab_zone_exhaust > 15000: result = PASS`
                    			- otherwise, there *might* be > 15000 cfm exhaust, but we are not sure (the function get_lab_zone_hvac_systems relies on get_zone_target_baseline_system, which does the > 15000 cfm check, so we don't have to do it again): `else:`
                       				- set result to UNDETERMINED:  `result = UNDETERMINED`
        						- provide a note expaining the result: `note = "This system serves only lab zones, which is correct if the building has total lab exhaust greater than 15,000 cfm.  However, we could not determine with accuracy the total building exhuast."`
@@ -58,9 +55,13 @@
                 			- if we can tell with 100% certainty that the building has > 15,000 cfm lab exhaust, set result to FAIL: `if lab_zone_exhaust > 15000:`
 				                - set result to fail: `result = FAIL`
                       				- provide a note to explain the result: `note = "This HVAC system serves lab zones in a building with > 15,000 cfm of laboratory exhaust.  The baseline system should be type 5 or 7 and should serve ALL laboratory zones."`
+                          - ************REMOVE LINES*****************
                    			- otherwise, there *might* be > 15000 cfm exhaust, but we are not sure (the function get_lab_zone_hvac_systems relies on get_zone_target_baseline_system, which does the > 15000 cfm check, so we don't have to do it again): `else:`
                       				- set result to UNDETERMINED:  `result = UNDETERMINED`
        						- provide a note expaining the result: `note = "This system serves some of the lab zones in a building which may have more than 15,000 cfm.  In buildings with > 15,000 cfm of lab exhaust, ALL lab zones should be served by system type 5 or 7."`
+                          - - ************REMOVE LINES***************** - the system identified in the above logic will be checked as normal below (ie, are all the zones on the same floor) - the labs will be flagged in 18-1, so we won't worry about it too much here.
+                           
+                            - ********re-work logic for removing lines above********
                   		- otherwise, the hvac system might be a system that serves both lab zones and regular zones: `elif hvac_system.id in? lab_zone_havc_systems["LAB_AND_OTHER"]:`
                     			- if we can tell with 100% certainty that the building has > 15,000 cfm lab exhaust, set result to FAIL: `if lab_zone_exhaust > 15000:`
 				                - set result to fail: `result = FAIL`
@@ -79,7 +80,9 @@
 									- now check if hvac_system2 serves any of the zones on the same floor as hvac_system.  Get the zones served by hvac_system2: `zones_served_by_system2 = zones_and_terminal_unit_list_dict[hvac_system2_id]["ZONE_LIST"]`
 									- use set.intersection to see if any of these zones are on the same floor: `if(len(set(zones_served_by_system2).intersection(zones_on_floor))) > 0:`
 										- the system fails: `result = FAIL`
-          									- UNLESS system_type is SYS_5 or SYS_7 AND all of the zones in hvac_system2 are lab zones: `if hvac_system2_id in? lab_zone_hvac_systems["LAB_ZONES_ONLY"] && len(lab_zone_hvac_systems["LAB_ZONES_ONLY"]) == 1 && any(system_type == sys_type for sys_type in [SYS_5,SYS_7]): result = PASS`
+          									- UNLESS system_type is SYS_5 or SYS_7 AND all of the zones in hvac_system2 are lab zones: `if hvac_system2_id in? lab_zone_hvac_systems["LAB_ZONES_ONLY"] && len(lab_zone_hvac_systems["LAB_ZONES_ONLY"]) == 1 && lab_zone_exhaust > 15000: result = PASS`
+                   								- otherwise then if it's the only lab zone system, but we aren't sure about the exhaust air volume, result = UNDETERMINED: `if hvac_system2_id in? lab_zone_hvac_systems["LAB_ZONES_ONLY"] && len(lab_zone_hvac_systems["LAB_ZONES_ONLY"]) == 1: result = UNDETERMINED; note = "This HVAC system is on the same floor as " + hvac_system2_id + ", which servese lab zones in the building.  If the building has greater than 15,000 cfm of lab exhaust and " + hvac_system2_id + " is System type 5 or 7 serving only lab zones, this system passes, otherwise it fails"`
+                           							- otherwise the system isn't a lab system, set result to fail: `result = FAIL`
 
 					
   **Rule Assertion - Zone:**
