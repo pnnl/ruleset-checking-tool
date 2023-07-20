@@ -53,7 +53,7 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
 
 ### G3.1.1 Exception Check Functions
   * [does_zone_meet_G3_1_1e](ruleset_functions/G311_exceptions/does_zone_meet_G3_1_1e.md): Determines whether a given zone meets the G3_1_1e exception "Thermal zones designed with heating-only systems in the proposed design serving storage rooms, stairwells, vestibules, electrical/mechanical rooms, and restrooms not exhausting or transferring air from mechanically cooled thermal zones in the proposed design shall use system type 9 or 10 in the baseline building design.
-
+  * [does_zone_meet_G3_1_1f](ruleset_functions/G311_exceptions/does_zone_meet_G3_1_1f.md): Determines whether a given zone meets the G3_1_1f exception "If the baseline HVAC system type is 9 or 10, use additional system types for all HVAC zones that are mechanically cooled in the proposed design." - this function is only called if the expected baseline system type has already been confirmed to be system type 9 or 10
 
 ### G3.1.1 HVAC sub-functions
   * [is_CZ_0_to_3a](ruleset_functions/G311_exceptions/G311_sub_functions/is_CZ_0_to_3a.md): Determines whether the building is in climate zone 0 to 3a - used for Appendix G Table G3.1.1-3.
