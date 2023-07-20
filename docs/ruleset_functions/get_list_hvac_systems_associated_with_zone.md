@@ -1,5 +1,6 @@
 # get_list_hvac_systems_associated_with_zone
 
+**Schema Version:** 0.0.23
 **Description:** Get the list of the heating ventilaiton and cooling system ids associated with a zone in either the U_RMR, P_RMR, or B_RMR.    
 
 **Inputs:**  
@@ -14,7 +15,7 @@
 ## Logic:  
 - Set the zone object equal to the zone with zone.id for the RMR (P, B, or U) input to the function: `zone = RMR...zone.id `
 - For each terminal in zone: `for terminal in zone.terminals:`
-    - Get HVAC system serving terminal: `hvac = terminal.served_by_heating_ventilation_air_conditioning_system`
+    - Get HVAC system serving terminal: `hvac = terminal.served_by_heating_ventilating_air_conditioning_system`
     - Add to list of applicable_hvac_systems_list as the code loops through the terminal units: `list_hvac_systems_associated_with_zone = list_hvac_systems_associated_with_zone.append(list_hvac_systems_associated_with_zone)`                        
 - Convert the list of list_hvac_systems_associated_with_zone to a set and the back to a list to eliminate duplicates after looping through all zones: `list_hvac_systems_associated_with_zone = list(set(list_hvac_systems_associated_with_zone))`       
 
