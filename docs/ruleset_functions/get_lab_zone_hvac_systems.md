@@ -24,7 +24,7 @@
     - get the list of zones served by the HVAC system: `zones_served_by_hvac_system = dict_of_zones_and_havc_systems[hvac_id]["ZONE_LIST"]`
     - now we need to compare this list to the list of lab zones.  If only lab zones are in zones_served_by_hvac_system, then this is a lab-only HVAC system: `if all(hvac_zone in building_lab_zones for hvac_zone in zones_served_by_hvac_system):`
       - this hvac system serves only lab zones, add it to the list: `hvac_systems_serving_lab_zones["LAB_ZONES_ONLY"].append(hvac_id)`
-    - now we need to compare this list to the list of lab zones.  If any lab zones are in zones_served_by_hvac_system, then this a system that serves lab zones and other zones: `elif all(hvac_zone in building_lab_zones for hvac_zone in zones_served_by_hvac_system):`
+    - now we need to compare this list to the list of lab zones.  If any lab zones are in zones_served_by_hvac_system, then this a system that serves lab zones and other zones: `elif any(hvac_zone in building_lab_zones for hvac_zone in zones_served_by_hvac_system):`
       - this hvac system serves lab and other zones, add it to the list: `hvac_systems_serving_lab_zones["LAB_AND_OTHER"].append(hvac_id)`
 
 **Returns** `return hvac_systems_serving_lab_zones`
