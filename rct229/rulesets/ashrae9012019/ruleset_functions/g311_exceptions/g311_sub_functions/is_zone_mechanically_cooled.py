@@ -69,7 +69,7 @@ def is_zone_mechanically_cooled(rmi, zone_id):
 
     if not has_cooling_system:
         zone = find_exactly_one_zone(rmi, zone_id)
-        if find_one("$.transfer_airflow_rate", zone) > ZERO.FLOW:
+        if zone.get("transfer_airflow_rate", ZERO.FLOW) > ZERO.FLOW:
             # in this case, we are checking the source zone
             transfer_source_zone_id = getattr_(
                 zone, "Zone", "transfer_airflow_source_zone"
