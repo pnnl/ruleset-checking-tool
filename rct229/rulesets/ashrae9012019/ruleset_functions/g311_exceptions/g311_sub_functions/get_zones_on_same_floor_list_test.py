@@ -1,4 +1,4 @@
-from rct229.rulesets.ashrae9012019.ruleset_functions.get_zones_on_same_floor_list import (
+from rct229.rulesets.ashrae9012019.ruleset_functions.g311_exceptions.g311_sub_functions.get_zones_on_same_floor_list import (
     get_zones_on_same_floor_list,
 )
 from rct229.schema.validate import schema_validate_rmr
@@ -28,7 +28,7 @@ TEST_RMI = {
     ],
 }
 
-TEST_RMD = {"id": "229_01", "ruleset_model_instances": [TEST_RMI]}
+TEST_RMD = {"id": "229_01", "ruleset_model_descriptions": [TEST_RMI]}
 
 
 def test__TEST_RMD_FIXED_TYPE__is_valid():
