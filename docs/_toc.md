@@ -63,6 +63,7 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   * [is_zone_mechanically_cooled](ruleset_functions/G311_exceptions/G311_sub_functions/is_zone_mechanically_cooled.md): Determines whether a zone is cooled.  Checks for transfer air
   * [get_zones_computer_rooms](ruleset_functions/G311_exceptions/G311_sub_functions/get_zones_computer_rooms.md): Returns a dictionary with the zones that have at least one computer room space associated with them in the RMD as the keys. The values associated with each key are in a list form. The list associated with each key contains the computer room floor area as the first item in the list and the total zone floor area as the second item in the list.
   * [get_zone_peak_internal_load_floor_area](ruleset_functions/G311_exceptions/G311_sub_functions/get_zone_peak_internal_load_floor_area.md): finds the peak coincident internal loads of a zone and returns the value in btu/h/ft2
+  * [get_building_lab_zones](ruleset_functions/G311_exceptions/G311_sub_functions/get_building_lab_zones.md): returns a list of all of the zones in the building that include a laboratory space
 
 ### HVAC type functions
   * [is_baseline_system_1](ruleset_functions/baseline_systems/is_baseline_system_1.md): Get either Sys-1, Sys-1a, Sys-1b, Sys-1c, or Not_Sys_1 string output which indicates whether the HVAC system is ASHRAE 90.1 2019 Appendix G system 1 (PTAC), system 1a (system 1 with purchased CHW), system 1b (system 1 with purchased heating), system 1c (system 1 with purchased CHW and purchased HW).
