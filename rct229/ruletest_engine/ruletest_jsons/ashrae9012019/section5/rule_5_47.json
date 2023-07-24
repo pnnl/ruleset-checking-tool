@@ -3,7 +3,7 @@
         "Section": 5,
         "Rule": 47,
         "Test": "a",
-        "test_description": "Building is located in climate zone 4A and includes one conditioned zone which has two surfaces - one adjacent to exterior and another adjacent to ground. The baseline infiltration flow rate @75PA is established correctly.",
+        "test_description": "Project has one building segment with one space that includes two surfaces - one adjacent to exterior and another adjacent to ground. The space is conditioned based on the heating and cooling capacity of the HVAC system that serves the parent zone. The baseline infiltration flow rate @75PA is established correctly.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-47",
@@ -13,7 +13,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.29"
         },
         "rmr_transformations": {
             "baseline": {
@@ -22,7 +22,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMR 1",
                         "measured_infiltration_pressure_difference": 75,
@@ -50,7 +50,7 @@
                                                 "infiltration": {
                                                     "id": "Infiltration 1",
                                                     "multiplier_schedule": "Infiltration Schedule 1",
-                                                    "infiltration_flow_rate": 0.5285811363839998
+                                                    "flow_rate": 0.5285811363839998
                                                 },
                                                 "terminals": [
                                                     {
@@ -101,7 +101,7 @@
         "Section": 5,
         "Rule": 47,
         "Test": "b",
-        "test_description": "Building is located in climate zone 4A and includes one conditioned zone which has two surfaces - one adjacent to exterior and another adjacent to ground. The baseline infiltration flow rate @75PA is not established correctly.",
+        "test_description": "Project has one building segment with one space that includes two surfaces - one adjacent to exterior and another adjacent to ground. The space is conditioned based on the heating and cooling capacity of the HVAC system that serves the parent zone. The baseline infiltration flow rate @75PA is not established correctly.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-47",
@@ -111,7 +111,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.29"
         },
         "rmr_transformations": {
             "baseline": {
@@ -120,7 +120,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMR 1",
                         "measured_infiltration_pressure_difference": 75,
@@ -148,7 +148,7 @@
                                                 "infiltration": {
                                                     "id": "Infiltration 1",
                                                     "multiplier_schedule": "Infiltration Schedule 1",
-                                                    "infiltration_flow_rate": 2.359737215999999
+                                                    "flow_rate": 2.359737215999999
                                                 },
                                                 "terminals": [
                                                     {
@@ -199,7 +199,7 @@
         "Section": 5,
         "Rule": 47,
         "Test": "c",
-        "test_description": "Building is located in climate zone 4A and includes one conditioned zone which has two surfaces - one adjacent to exterior and another adjacent to ground. The baseline infiltration flow rate at wind pressure is established correctly.",
+        "test_description": "Project has one building segment with one space that includes two surfaces - one adjacent to exterior and another adjacent to ground. The space is conditioned based on the heating and cooling capacity of the HVAC system that serves the parent zone. The baseline infiltration flow rate at wind pressure is established correctly.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-47",
@@ -209,7 +209,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.29"
         },
         "rmr_transformations": {
             "baseline": {
@@ -218,7 +218,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMR 1",
                         "buildings": [
@@ -245,7 +245,7 @@
                                                 "infiltration": {
                                                     "id": "Infiltration 1",
                                                     "multiplier_schedule": "Infiltration Schedule 2",
-                                                    "infiltration_flow_rate": 0.5285811363839998
+                                                    "flow_rate": 0.5285811363839998
                                                 },
                                                 "terminals": [
                                                     {
@@ -295,7 +295,7 @@
         "Section": 5,
         "Rule": 47,
         "Test": "d",
-        "test_description": "Building is located in climate zone 4A and includes one conditioned zone which has two surfaces - one adjacent to exterior and another adjacent to ground. The baseline infiltration flow rate at wind pressure is not established correctly.",
+        "test_description": "Project has one building segment with one space that includes two surfaces - one adjacent to exterior and another adjacent to ground. The space is conditioned based on the heating and cooling capacity of the HVAC system that serves the parent zone. The baseline infiltration flow rate at wind pressure is not established correctly.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-47",
@@ -305,7 +305,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.29"
         },
         "rmr_transformations": {
             "baseline": {
@@ -314,7 +314,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMR 1",
                         "buildings": [
@@ -341,7 +341,7 @@
                                                 "infiltration": {
                                                     "id": "Infiltration 1",
                                                     "multiplier_schedule": "Infiltration Schedule 3",
-                                                    "infiltration_flow_rate": 1.0571622727679997
+                                                    "flow_rate": 1.0571622727679997
                                                 },
                                                 "terminals": [
                                                     {
@@ -391,7 +391,7 @@
         "Section": 5,
         "Rule": 47,
         "Test": "e",
-        "test_description": "Building is located in climate zone 4A and includes one semiheated zone which has two surfaces - one adjacent to exterior and another adjacent to ground. The baseline infiltration flow rate @75PA is established correctly.",
+        "test_description": "Project has one building segment with one space that includes two surfaces - one adjacent to exterior and another adjacent to ground. The space is semiheated based on the heating capacity of the HVAC system that serves the parent zone. The baseline infiltration flow rate @75PA is established correctly.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-47",
@@ -401,7 +401,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.29"
         },
         "rmr_transformations": {
             "baseline": {
@@ -410,7 +410,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMR 1",
                         "measured_infiltration_pressure_difference": 75,
@@ -438,7 +438,7 @@
                                                 "infiltration": {
                                                     "id": "Infiltration 1",
                                                     "multiplier_schedule": "Infiltration Schedule 1",
-                                                    "infiltration_flow_rate": 0.5285811363839998
+                                                    "flow_rate": 0.5285811363839998
                                                 },
                                                 "terminals": [
                                                     {
@@ -454,7 +454,7 @@
                                                         "tilt": 90,
                                                         "area": 464.51519999999994,
                                                         "construction": {
-                                                            "id": "construction_1",
+                                                            "id": "Construction 1",
                                                             "u_factor": 3.2366105565544463
                                                         }
                                                     },
@@ -464,7 +464,7 @@
                                                         "tilt": 90,
                                                         "area": 464.51519999999994,
                                                         "construction": {
-                                                            "id": "construction_1",
+                                                            "id": "Construction 1",
                                                             "u_factor": 3.2366105565544463
                                                         }
                                                     }
@@ -497,7 +497,7 @@
         "Section": 5,
         "Rule": 47,
         "Test": "f",
-        "test_description": "Building is located in climate zone 4A and includes one semiheated zone which has two surfaces - one adjacent to exterior and another adjacent to ground. The baseline infiltration flow rate @75PA is not established correctly.",
+        "test_description": "Project has one building segment with one space that includes two surfaces - one adjacent to exterior and another adjacent to ground. The space is semiheated based on the heating capacity of the HVAC system that serves the parent zone. The baseline infiltration flow rate @75PA is not established correctly.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-47",
@@ -507,7 +507,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.29"
         },
         "rmr_transformations": {
             "baseline": {
@@ -516,7 +516,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMR 1",
                         "measured_infiltration_pressure_difference": 75,
@@ -544,7 +544,7 @@
                                                 "infiltration": {
                                                     "id": "Infiltration 1",
                                                     "multiplier_schedule": "Infiltration Schedule 1",
-                                                    "infiltration_flow_rate": 2.359737215999999
+                                                    "flow_rate": 2.359737215999999
                                                 },
                                                 "terminals": [
                                                     {
@@ -560,7 +560,7 @@
                                                         "tilt": 90,
                                                         "area": 464.51519999999994,
                                                         "construction": {
-                                                            "id": "construction_1",
+                                                            "id": "Construction 1",
                                                             "u_factor": 3.2366105565544463
                                                         }
                                                     },
@@ -570,7 +570,7 @@
                                                         "tilt": 90,
                                                         "area": 464.51519999999994,
                                                         "construction": {
-                                                            "id": "construction_1",
+                                                            "id": "Construction 1",
                                                             "u_factor": 3.2366105565544463
                                                         }
                                                     }
@@ -603,7 +603,7 @@
         "Section": 5,
         "Rule": 47,
         "Test": "g",
-        "test_description": "Building is located in climate zone 4A and includes one semiheted zone which has two surfaces - one adjacent to exterior and another adjacent to ground. The baseline infiltration flow rate at wind pressure is established correctly.",
+        "test_description": "Project has one building segment with one space that includes two surfaces - one adjacent to exterior and another adjacent to ground. The space is semiheated based on the heating capacity of the HVAC system that serves the parent zone. The baseline infiltration flow rate at wind pressure is established correctly.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-47",
@@ -613,7 +613,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.29"
         },
         "rmr_transformations": {
             "baseline": {
@@ -622,7 +622,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMR 1",
                         "buildings": [
@@ -647,7 +647,7 @@
                                                 "infiltration": {
                                                     "id": "Infiltration 1",
                                                     "multiplier_schedule": "Infiltration Schedule 1",
-                                                    "infiltration_flow_rate": 0.5285811363839998
+                                                    "flow_rate": 0.5285811363839998
                                                 },
                                                 "terminals": [
                                                     {
@@ -662,7 +662,7 @@
                                                         "tilt": 90,
                                                         "area": 464.51519999999994,
                                                         "construction": {
-                                                            "id": "construction_1",
+                                                            "id": "Construction 1",
                                                             "u_factor": 3.2366105565544463
                                                         }
                                                     },
@@ -672,7 +672,7 @@
                                                         "tilt": 90,
                                                         "area": 464.51519999999994,
                                                         "construction": {
-                                                            "id": "construction_1",
+                                                            "id": "Construction 1",
                                                             "u_factor": 3.2366105565544463
                                                         }
                                                     }
@@ -705,7 +705,7 @@
         "Section": 5,
         "Rule": 47,
         "Test": "h",
-        "test_description": "Building is located in climate zone 4A and includes one semiheated zone which has two surfaces - one adjacent to exterior and another adjacent to ground. The baseline infiltration flow rate at wind pressure is not established correctly.",
+        "test_description": "Project has one building segment with one space that includes two surfaces - one adjacent to exterior and another adjacent to ground. The space is semiheated based on the heating capacity of the HVAC system that serves the parent zone. The baseline infiltration flow rate at wind pressure is not established correctly.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-47",
@@ -715,7 +715,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.29"
         },
         "rmr_transformations": {
             "baseline": {
@@ -724,7 +724,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMR 1",
                         "buildings": [
@@ -749,7 +749,7 @@
                                                 "infiltration": {
                                                     "id": "Infiltration 1",
                                                     "multiplier_schedule": "Infiltration Schedule 1",
-                                                    "infiltration_flow_rate": 1.0571622727679997
+                                                    "flow_rate": 1.0571622727679997
                                                 },
                                                 "terminals": [
                                                     {
@@ -764,7 +764,7 @@
                                                         "tilt": 90,
                                                         "area": 464.51519999999994,
                                                         "construction": {
-                                                            "id": "construction_1",
+                                                            "id": "Construction 1",
                                                             "u_factor": 3.2366105565544463
                                                         }
                                                     },
@@ -774,7 +774,7 @@
                                                         "tilt": 90,
                                                         "area": 464.51519999999994,
                                                         "construction": {
-                                                            "id": "construction_1",
+                                                            "id": "Construction 1",
                                                             "u_factor": 3.2366105565544463
                                                         }
                                                     }

@@ -28,7 +28,7 @@ def are_all_terminal_heating_loops_purchased_heating(rmi_b, terminal_unit_id_lis
     # get the list of loop ids if the external fluid source matches to either hot water or steam
     purchased_heating_loop_id_list_b = [
         *find_all(
-            f'external_fluid_source[*][?(@.type="{EXTERNAL_FLUID_SOURCE.HOT_WATER}"), ?(@.type="{EXTERNAL_FLUID_SOURCE.STEAM}")].loop',
+            f'external_fluid_sources[*][?(@.type="{EXTERNAL_FLUID_SOURCE.HOT_WATER}"), ?(@.type="{EXTERNAL_FLUID_SOURCE.STEAM}")].loop',
             rmi_b,
         )
     ]

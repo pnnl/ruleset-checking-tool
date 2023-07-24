@@ -1,6 +1,6 @@
 {
     "id": "ASHRAE229 1",
-    "ruleset_model_instances": [
+    "ruleset_model_descriptions": [
         {
             "id": "RMD 1",
             "buildings": [
@@ -48,7 +48,7 @@
                     "energy_source_type": "NATURAL_GAS"
                 }
             ],
-            "external_fluid_source": [
+            "external_fluid_sources": [
                 {
                     "id": "Purchased CHW 1",
                     "loop": "Purchased CHW Loop 1",

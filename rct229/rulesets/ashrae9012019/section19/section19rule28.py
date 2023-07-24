@@ -27,7 +27,7 @@ class Section19Rule28(RuleDefinitionListIndexedBase):
             ruleset_section_title="HVAC - General",
             standard_section="Table G3.1-4 Schedules for the proposed building excluding exceptions #s 2 and 3 and Section G3.1.2.4.",
             is_primary_rule=True,
-            rmr_context="ruleset_model_instances/0",
+            rmr_context="ruleset_model_descriptions/0",
             list_path="$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*]",
         )
 

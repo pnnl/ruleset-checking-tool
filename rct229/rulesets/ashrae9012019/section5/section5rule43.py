@@ -2,12 +2,16 @@ from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_opaque_surface_type import (
-    get_opaque_surface_type,
     OpaqueSurfaceType as OST,
+)
+from rct229.rulesets.ashrae9012019.ruleset_functions.get_opaque_surface_type import (
+    get_opaque_surface_type,
+)
+from rct229.rulesets.ashrae9012019.ruleset_functions.get_surface_conditioning_category_dict import (
+    SurfaceConditioningCategory as SCC,
 )
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_surface_conditioning_category_dict import (
     get_surface_conditioning_category_dict,
-    SurfaceConditioningCategory as SCC,
 )
 
 ABSORPTANCE_SOLAR_EXTERIOR = 0.7
@@ -30,7 +34,7 @@ class Section5Rule43(RuleDefinitionListIndexedBase):
             ruleset_section_title="Envelope",
             standard_section="Section G3.1-1(a) Building Envelope Modeling Requirements for the Proposed design",
             is_primary_rule=True,
-            list_path="ruleset_model_instances[0].buildings[*]",
+            list_path="ruleset_model_descriptions[0].buildings[*]",
             data_items={"climate_zone": ("proposed", "weather/climate_zone")},
         )
 
@@ -64,8 +68,8 @@ class Section5Rule43(RuleDefinitionListIndexedBase):
                 super(Section5Rule43.BuildingRule.RoofRule, self).__init__(
                     rmrs_used=UserBaselineProposedVals(True, False, True),
                     required_fields={
-                        "$": ["surface_optical_properties"],
-                        "surface_optical_properties": ["absorptance_solar_exterior"],
+                        "$": ["optical_properties"],
+                        "optical_properties": ["absorptance_solar_exterior"],
                     },
                 )
 
@@ -75,12 +79,12 @@ class Section5Rule43(RuleDefinitionListIndexedBase):
                 scc_dict_p = data["scc_dict_p"]
 
                 return {
-                    "absorptance_solar_exterior_p": roof_p[
-                        "surface_optical_properties"
-                    ]["absorptance_solar_exterior"],
-                    "absorptance_solar_exterior_u": roof_u[
-                        "surface_optical_properties"
-                    ]["absorptance_solar_exterior"],
+                    "absorptance_solar_exterior_p": roof_p["optical_properties"][
+                        "absorptance_solar_exterior"
+                    ],
+                    "absorptance_solar_exterior_u": roof_u["optical_properties"][
+                        "absorptance_solar_exterior"
+                    ],
                     "surface_conditioning_category_p": scc_dict_p[roof_p["id"]],
                 }
 

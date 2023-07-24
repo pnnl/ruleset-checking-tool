@@ -1,5 +1,5 @@
-from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.partial_rule_definition import PartialRuleDefinition
+from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 from rct229.rulesets.ashrae9012019.ruleset_functions.check_purchased_chw_hhw_status_dict import (
     check_purchased_chw_hhw_status_dict,
@@ -24,7 +24,7 @@ class Section21Rule1(RuleDefinitionListIndexedBase):
             standard_section="Section G3.1.1.3 Baseline HVAC System Requirements for Systems Utilizing Purchased "
             "Chilled Water and/or Purchased Heat",
             is_primary_rule=False,
-            list_path="ruleset_model_instances[0]",
+            list_path="ruleset_model_descriptions[0]",
             manual_check_required_msg="Manual Check Required - Proposed is modeled with purchased hot water or steam.  "
             "Make sure the heating source in the baseline building is also purchased hot water or steam.",
             not_applicable_msg="Rule 21-1 Not Applicable - the proposed is not modeled with Purchased Hot Water or "

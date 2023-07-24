@@ -51,7 +51,7 @@ class Section21Rule5(RuleDefinitionListIndexedBase):
             ruleset_section_title="HVAC - Water Side",
             standard_section="Section G3.1.3.2 Building System-Specific Modeling Requirements for the Baseline model",
             is_primary_rule=True,
-            list_path="ruleset_model_instances[0]",
+            list_path="ruleset_model_descriptions[0]",
             data_items={"climate_zone": ("baseline", "weather/climate_zone")},
         )
 
@@ -67,7 +67,7 @@ class Section21Rule5(RuleDefinitionListIndexedBase):
             # create a list containing all HVAC systems that are modeled in the rmi_b
             available_types_list = [
                 hvac_type
-                for hvac_type in baseline_system_types_dict.keys()
+                for hvac_type in baseline_system_types_dict
                 if len(baseline_system_types_dict[hvac_type]) > 0
             ]
             return any(
@@ -118,7 +118,7 @@ class Section21Rule5(RuleDefinitionListIndexedBase):
                     ]["total_area"]
 
             # check indirectly conditioned zones, add them to the total area
-            for zone_id in zone_conditioning_category_dict.keys():
+            for zone_id in zone_conditioning_category_dict:
                 if (
                     zone_conditioning_category_dict[zone_id]
                     in [

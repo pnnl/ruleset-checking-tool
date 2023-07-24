@@ -42,7 +42,7 @@ class Section5Rule49(RuleDefinitionListIndexedBase):
             ruleset_section_title="Envelope",
             standard_section="Section G3.1-5(b) Building Envelope Modeling Requirements for the Proposed design",
             is_primary_rule=True,
-            list_path="ruleset_model_instances[0].buildings[*]",
+            list_path="ruleset_model_descriptions[0].buildings[*]",
             data_items={"climate_zone": ("proposed", "weather/climate_zone")},
             manual_check_required_msg=MANUAL_CHECK_MSG,
         )
@@ -85,7 +85,7 @@ class Section5Rule49(RuleDefinitionListIndexedBase):
                     ZCC.SEMI_HEATED,
                 ]:
                     building_total_air_leakage_rate += getattr_(
-                        zone["infiltration"], "infiltration", "infiltration_flow_rate"
+                        zone["infiltration"], "infiltration", "flow_rate"
                     )
 
                 measured_air_leakage_rate = zone["infiltration"].get(
