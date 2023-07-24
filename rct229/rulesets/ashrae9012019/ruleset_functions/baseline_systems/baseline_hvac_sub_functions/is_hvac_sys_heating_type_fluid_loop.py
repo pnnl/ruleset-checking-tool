@@ -29,7 +29,7 @@ def is_hvac_sys_heating_type_fluid_loop(rmi_b, hvac_b_id):
     is_hvac_sys_heating_type_fluid_loop_flag = (
         heating_system is not None
         and heating_system.get("hot_water_loop") is not None
-        and find_one("heating_system_type", heating_system) == HEATING_SYSTEM.FLUID_LOOP
+        and find_one("type", heating_system) == HEATING_SYSTEM.FLUID_LOOP
     )
 
     return is_hvac_sys_heating_type_fluid_loop_flag

@@ -31,8 +31,7 @@ def is_hvac_sys_cooling_type_fluid_loop(rmi_b, hvac_b_id):
     is_hvac_sys_cooling_type_fluid_loop_flag = (
         cooling_system is not None
         and cooling_system.get("chilled_water_loop") is not None
-        and find_one("cooling_system_type", cooling_system)
-        == COOLING_SYSTEM_TYPE.FLUID_LOOP
+        and find_one("type", cooling_system) == COOLING_SYSTEM_TYPE.FLUID_LOOP
     )
 
     return is_hvac_sys_cooling_type_fluid_loop_flag

@@ -33,9 +33,9 @@ class Section19Rule12(RuleDefinitionListIndexedBase):
             id="19-12",
             description="The baseline system economizer high-limit shutoff shall be a dry-bulb fixed switch with set-point temperatures in accordance with the values in Table G3.1.2.7.",
             ruleset_section_title="HVAC - General",
-            standard_section=" Section G3.1.2.7",
+            standard_section="Section G3.1.2.7",
             is_primary_rule=True,
-            list_path="$.ruleset_model_instances[*].buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*]",
+            list_path="$.ruleset_model_descriptions[*].buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*]",
             required_fields={
                 "$": ["weather"],
                 "weather": ["climate_zone"],
@@ -70,14 +70,14 @@ class Section19Rule12(RuleDefinitionListIndexedBase):
 
             high_limit_temp_b = getattr_(
                 fan_system_b,
-                "high_limit_shutoff_temperature",
+                "fan_system",
                 "air_economizer",
                 "high_limit_shutoff_temperature",
             )
 
             air_economizer_type_b = getattr_(
                 fan_system_b,
-                "air economizer type",
+                "fan_system",
                 "air_economizer",
                 "type",
             )

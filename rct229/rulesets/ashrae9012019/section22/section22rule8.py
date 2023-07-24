@@ -46,12 +46,12 @@ class Section22Rule8(RuleDefinitionListIndexedBase):
             ruleset_section_title="HVAC - Chiller",
             standard_section="Section G3.1.3.10 Chilled-water pumps (System 7, 8, 11, 12 and 13)",
             is_primary_rule=True,
-            list_path="ruleset_model_instances[0].fluid_loops[*]",
+            list_path="ruleset_model_descriptions[0].fluid_loops[*]",
         )
 
     def is_applicable(self, context, data=None):
         rmr_baseline = context.baseline
-        rmi_b = rmr_baseline["ruleset_model_instances"][0]
+        rmi_b = rmr_baseline["ruleset_model_descriptions"][0]
         baseline_system_types_dict = get_baseline_system_types(rmi_b)
         # create a list containing all HVAC systems that are modeled in the rmi_b
         available_type_list = [
@@ -74,7 +74,7 @@ class Section22Rule8(RuleDefinitionListIndexedBase):
 
     def create_data(self, context, data):
         rmr_baseline = context.baseline
-        rmi_b = rmr_baseline["ruleset_model_instances"][0]
+        rmi_b = rmr_baseline["ruleset_model_descriptions"][0]
 
         loop_pump_dict = {}
         for pump in find_all("$.pumps[*]", rmi_b):

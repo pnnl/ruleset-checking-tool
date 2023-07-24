@@ -17,8 +17,8 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_h
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.does_hvac_system_serve_single_zone import (
     does_hvac_system_serve_single_zone,
 )
-from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.is_hvac_sys_cooling_type_none import (
-    is_hvac_sys_cooling_type_none,
+from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.is_hvac_sys_cooling_type_none_or_non_mechanical import (
+    is_hvac_sys_cooling_type_none_or_non_mechanical,
 )
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.is_hvac_sys_fan_sys_CV import (
     is_hvac_sys_fan_sys_cv,
@@ -76,7 +76,7 @@ def is_baseline_system_9(rmi_b, hvac_b_id, terminal_unit_id_list, zone_id_list):
             and are_all_terminal_cool_sources_none_or_null(rmi_b, terminal_unit_id_list)
             and are_all_terminal_fans_null(rmi_b, terminal_unit_id_list)
             and are_all_terminal_types_cav(rmi_b, terminal_unit_id_list)
-            and is_hvac_sys_cooling_type_none(rmi_b, hvac_b_id)
+            and is_hvac_sys_cooling_type_none_or_non_mechanical(rmi_b, hvac_b_id)
             and is_hvac_sys_heating_type_furnace(rmi_b, hvac_b_id)
         )
 

@@ -14,12 +14,12 @@
             "comparison_value": "User RMR",
             "rule_dependency": "User RMR Space Count > 0",
             "mandatory_rule": "-",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.29"
         },
         "rmr_transformations": {
             "user": {
                 "id": "ashrae_229_name",
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "buildings": [
@@ -56,7 +56,7 @@
             },
             "proposed": {
                 "id": "ashrae_229_name",
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "buildings": [
@@ -108,12 +108,12 @@
             "comparison_value": "User RMR",
             "rule_dependency": "User RMR Space Count > 0",
             "mandatory_rule": "-",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.29"
         },
         "rmr_transformations": {
             "user": {
                 "id": "ashrae_229_name",
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "buildings": [
@@ -150,7 +150,7 @@
             },
             "proposed": {
                 "id": "ashrae_229_name",
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "buildings": [
