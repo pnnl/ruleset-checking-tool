@@ -72,12 +72,12 @@ class Section19Rule15(RuleDefinitionListIndexedBase):
                 "all_design_setpoints_105": all(
                     [
                         std_equal(
-                            REQ_DESIGN_SUPPLY_AIR_TEMP_SETPOINT,
+                            REQ_DESIGN_SUPPLY_AIR_TEMP_SETPOINT.to(ureg.kelvin),
                             getattr_(
                                 find_exactly_one_terminal_unit(rmi_b, terminal_id_b),
                                 "Terminal",
                                 "supply_design_heating_setpoint_temperature",
-                            ),
+                            ).to(ureg.kelvin),
                         )
                         for terminal_id_b in zones_and_terminal_units_served_by_hvac_sys_dict[
                             hvac_id_b
@@ -162,7 +162,7 @@ class Section19Rule15(RuleDefinitionListIndexedBase):
                 "supply_fan_qty_b": supply_fan_qty_b,
                 "supply_fan_airflow_b": supply_fan_airflow_b,
                 "minimum_outdoor_airflow_b": minimum_outdoor_airflow_b,
-                "all_design_setpionts_105": data["hvac_info_dict_b"][hvac_id_b][
+                "all_design_setpoints_105": data["hvac_info_dict_b"][hvac_id_b][
                     "all_design_setpoints_105"
                 ],
                 "proposed_supply_flow": data["hvac_info_dict_b"][hvac_id_b][
@@ -173,12 +173,12 @@ class Section19Rule15(RuleDefinitionListIndexedBase):
         def manual_check_required(self, context, calc_vals=None, data=None):
             supply_fan_qty_b = calc_vals["supply_fan_qty_b"]
             supply_fan_airflow_b = calc_vals["supply_fan_airflow_b"]
-            all_design_setpionts_105 = calc_vals["all_design_setpionts_105"]
+            all_design_setpoints_105 = calc_vals["all_design_setpoints_105"]
             proposed_supply_flow = calc_vals["proposed_supply_flow"]
 
             return (
                 supply_fan_qty_b == 1
-                and not all_design_setpionts_105
+                and not all_design_setpoints_105
                 and std_equal(
                     proposed_supply_flow,
                     supply_fan_airflow_b,
@@ -189,8 +189,8 @@ class Section19Rule15(RuleDefinitionListIndexedBase):
             hvac_id_b = calc_vals["hvac_id_b"]
             supply_fan_qty_b = calc_vals["supply_fan_qty_b"]
             supply_fan_airflow_b = calc_vals["supply_fan_airflow_b"]
-            all_design_setpionts_105 = calc_vals["hvac_info_dict_b"][hvac_id_b][
-                "all_design_setpionts_105"
+            all_design_setpoints_105 = calc_vals["hvac_info_dict_b"][hvac_id_b][
+                "all_design_setpoints_105"
             ]
             proposed_supply_flow = calc_vals["hvac_info_dict_b"][hvac_id_b][
                 "proposed_supply_flow"
@@ -198,7 +198,7 @@ class Section19Rule15(RuleDefinitionListIndexedBase):
 
             if (
                 supply_fan_qty_b == 1
-                and not all_design_setpionts_105
+                and not all_design_setpoints_105
                 and std_equal(
                     proposed_supply_flow,
                     supply_fan_airflow_b,
@@ -217,17 +217,17 @@ class Section19Rule15(RuleDefinitionListIndexedBase):
             supply_fan_qty_b = calc_vals["supply_fan_qty_b"]
             supply_fan_airflow_b = calc_vals["supply_fan_airflow_b"]
             minimum_outdoor_airflow_b = calc_vals["minimum_outdoor_airflow_b"]
-            all_design_setpionts_105 = data["hvac_info_dict_b"][hvac_id_b][
+            all_design_setpoints_105 = data["hvac_info_dict_b"][hvac_id_b][
                 "all_design_setpoints_105"
             ]
 
             return supply_fan_qty_b == 1 and (
                 (
-                    all_design_setpionts_105
+                    all_design_setpoints_105
                     and supply_fan_airflow_b > minimum_outdoor_airflow_b
                 )
                 or (
-                    not all_design_setpionts_105
+                    not all_design_setpoints_105
                     and std_equal(minimum_outdoor_airflow_b, supply_fan_airflow_b)
                 )
             )
