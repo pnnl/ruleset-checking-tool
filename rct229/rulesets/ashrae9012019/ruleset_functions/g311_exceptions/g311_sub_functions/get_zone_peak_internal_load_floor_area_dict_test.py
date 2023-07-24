@@ -1,4 +1,4 @@
-from rct229.rulesets.ashrae9012019.ruleset_functions.get_zone_peak_internal_load_floor_area_dict import (
+from rct229.rulesets.ashrae9012019.ruleset_functions.g311_exceptions.g311_sub_functions.get_zone_peak_internal_load_floor_area_dict import (
     get_zone_peak_internal_load_floor_area_dict,
 )
 from rct229.schema.config import ureg
