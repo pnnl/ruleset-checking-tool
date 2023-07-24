@@ -117,6 +117,7 @@ TEST_RMD = {
     ],
 }
 
+
 TEST_RMD_FULL = {"id": "229", "ruleset_model_descriptions": [TEST_RMD]}
 
 TEST_RMI = quantify_rmr(TEST_RMD_FULL)["ruleset_model_descriptions"][0]
