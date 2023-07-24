@@ -218,8 +218,8 @@ def has_heating_system(rmi, hvac_id):
 
     return (
         heating_system is not None
-        and heating_system.get("heating_system_type") is not None
-        and heating_system["heating_system_type"] != HEATING_SYSTEM.NONE
+        and heating_system.get("type") is not None
+        and heating_system["type"] != HEATING_SYSTEM.NONE
     )
 
 
@@ -243,8 +243,8 @@ def has_cooling_system(rmi, hvac_id):
 
     return (
         cooling_system is not None
-        and cooling_system.get("cooling_system_type") is not None
-        and cooling_system["cooling_system_type"] != COOLING_SYSTEM.NONE
+        and cooling_system.get("type") is not None
+        and cooling_system["type"] != COOLING_SYSTEM.NONE
     )
 
 
@@ -268,8 +268,8 @@ def has_preheat_system(rmi, hvac_id):
 
     return (
         preheat_system is not None
-        and preheat_system.get("heating_system_type") is not None
-        and preheat_system["heating_system_type"] != HEATING_SYSTEM.NONE
+        and preheat_system.get("type") is not None
+        and preheat_system["type"] != HEATING_SYSTEM.NONE
     )
 
 

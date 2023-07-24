@@ -63,7 +63,7 @@ def find_schema_unit_for_json_path(key_list):
 
     """
 
-    root_key = "ASHRAE229"
+    root_key = "RulesetProjectDescription"
 
     secondary_schema_files = ["Output2019ASHRAE901.schema.json"]
     schema_dict = config.schema_dict

@@ -14,12 +14,12 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "Rule 15-3 = true and xfrm_type = drytype and xfrm_efficiency in User RMR is greater than Table 8.4.4",
             "mandatory_rule": 0,
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.29"
         },
         "rmr_transformations": {
             "user": {
                 "id": "ashrae229",
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "transformers": [
@@ -51,12 +51,12 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "Rule 15-3 = true and xfrm_type = drytype and xfrm_efficiency in User RMR is greater than Table 8.4.4",
             "mandatory_rule": 0,
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.29"
         },
         "rmr_transformations": {
             "user": {
                 "id": "ashrae229",
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "transformers": [
@@ -88,12 +88,12 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "Rule 15-3 = true and xfrm_type = drytype and xfrm_efficiency in User RMR is greater than Table 8.4.4",
             "mandatory_rule": 0,
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.29"
         },
         "rmr_transformations": {
             "user": {
                 "id": "ashrae229",
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "transformers": [
@@ -125,12 +125,12 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "Rule 15-3 = true and xfrm_type = drytype and xfrm_efficiency in User RMR is greater than Table 8.4.4",
             "mandatory_rule": 0,
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.29"
         },
         "rmr_transformations": {
             "user": {
                 "id": "ashrae229",
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "transformers": [

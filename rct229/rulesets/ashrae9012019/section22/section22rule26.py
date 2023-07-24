@@ -36,8 +36,8 @@ class Section22Rule26(RuleDefinitionListIndexedBase):
             ruleset_section_title="HVAC - Chiller",
             standard_section="Section G3.1.3.10 Chilled-water pumps (Systems 7, 8, 11, 12, and 13)",
             is_primary_rule=True,
-            rmr_context="ruleset_model_instances/0",
-            list_path="fluid_loops[*]",
+            rmr_context="ruleset_model_descriptions/0",
+            list_path="$.fluid_loops[*]",
         )
 
     def is_applicable(self, context, data=None):
@@ -46,7 +46,7 @@ class Section22Rule26(RuleDefinitionListIndexedBase):
         # create a list contains all HVAC systems that are modeled in the rmi_b
         available_sys_types = [
             hvac_type
-            for hvac_type in baseline_system_types_dict.keys()
+            for hvac_type in baseline_system_types_dict
             if len(baseline_system_types_dict[hvac_type]) > 0
         ]
         primary_secondary_loop_dict = get_primary_secondary_loops_dict(rmi_b)
@@ -68,7 +68,7 @@ class Section22Rule26(RuleDefinitionListIndexedBase):
 
     def list_filter(self, context_item, data):
         fluid_loop = context_item.baseline
-        primary_loop_ids = data["primary_secondary_loops_dict"].keys()
+        primary_loop_ids = data["primary_secondary_loops_dict"]
         return fluid_loop["id"] in primary_loop_ids
 
     class PrimaryCoolingFluidLoop(RuleDefinitionBase):

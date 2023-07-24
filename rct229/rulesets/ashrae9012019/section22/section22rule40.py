@@ -51,7 +51,7 @@ class Section22Rule40(RuleDefinitionBase):
             ruleset_section_title="HVAC - Chiller",
             standard_section="Section G3.1.1.1 & G3.1.1.3.1 Building System-Specific Modeling Requirements for the Baseline model",
             is_primary_rule=True,
-            rmr_context="ruleset_model_instances/0",
+            rmr_context="ruleset_model_descriptions/0",
         )
 
     def is_applicable(self, context, data=None):
@@ -70,7 +70,7 @@ class Section22Rule40(RuleDefinitionBase):
         baseline_system_types_dict = calc_vals["baseline_system_types_dict"]
         available_type_list = [
             hvac_type
-            for hvac_type in baseline_system_types_dict.keys()
+            for hvac_type in baseline_system_types_dict
             if len(baseline_system_types_dict[hvac_type]) > 0
         ]
         return not any(
