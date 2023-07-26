@@ -1,5 +1,6 @@
-from rct229.rulesets.ashrae9012019.ruleset_functions.g311_exceptions.g311_sub_functions.get_zones_computer_rooms import \
-    get_zone_computer_rooms
+from rct229.rulesets.ashrae9012019.ruleset_functions.g311_exceptions.g311_sub_functions.get_zones_computer_rooms import (
+    get_zone_computer_rooms,
+)
 from rct229.schema.config import ureg
 from rct229.schema.schema_utils import quantify_rmr
 from rct229.schema.validate import schema_validate_rmr
@@ -25,7 +26,7 @@ TEST_RMI = {
                                 {
                                     "id": "Space 2",
                                     "floor_area": 100,
-                                }
+                                },
                             ],
                         },
                     ],
@@ -49,11 +50,9 @@ def test__TEST_RMD__is_valid():
 
 
 def test__get_building_total_lab_exhaust_from_zone_exhaust_fan__success():
-    assert get_zone_computer_rooms(
-        TEST_RMD_UNIT
-    ) == {
+    assert get_zone_computer_rooms(TEST_RMD_UNIT) == {
         "Thermal Zone 1": {
             "zone_computer_room_floor_area": 100 * ureg("m2"),
-            "total_zone_floor_area": 200 * ureg("m2")
+            "total_zone_floor_area": 200 * ureg("m2"),
         }
     }
