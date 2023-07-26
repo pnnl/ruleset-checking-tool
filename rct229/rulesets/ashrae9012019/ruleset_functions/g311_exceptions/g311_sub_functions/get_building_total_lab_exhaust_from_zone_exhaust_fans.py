@@ -11,6 +11,7 @@ from rct229.utils.pint_utils import ZERO
 def get_building_total_lab_exhaust_from_zone_exhaust_fans(rmi):
     """
     Determines the total exhaust air flow rate for zone exhaust fans in zones that have laboratory spaces
+    The function returns either ZERO.FLOW or exhaust flow, which means it won't fail if data is missing or error.
 
     Parameters
     ----------
