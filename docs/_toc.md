@@ -65,6 +65,7 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   * [get_zone_peak_internal_load_floor_area](ruleset_functions/G311_exceptions/G311_sub_functions/get_zone_peak_internal_load_floor_area.md): finds the peak coincident internal loads of a zone and returns the value in btu/h/ft2
   * [get_building_lab_zones](ruleset_functions/G311_exceptions/G311_sub_functions/get_building_lab_zones.md): returns a list of all of the zones in the building that include a laboratory space
   * [get_building_total_lab_exhaust_from_zone_exhaust_fans](ruleset_functions/G311_exceptions/G311_sub_functions/get_building_total_lab_exhaust_from_zone_exhaust_fans.md): determines the total exhaust air flow rate for zone exhaust fans in zones that have laboratory spaces.
+  * [is_space_a_computer_room](ruleset_functions/G311_exceptions/G311_sub_functions/is_space_a_computer_room.md): Returns true or false as to whether space is a computer room. The criteria is such that it is considered a computer room if the lighting space type definition equals COMPUTER_ROOM, or, if the space type is not defined, if the total misc W/sf exceeds 20 W/sf per the definition of a computer room in 90.1 Section 3. 
 
 
 ### HVAC type functions
