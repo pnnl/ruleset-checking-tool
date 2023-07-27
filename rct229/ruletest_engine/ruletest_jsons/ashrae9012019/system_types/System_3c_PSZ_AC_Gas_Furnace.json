@@ -1,0 +1,85 @@
+{
+    "id": "ASHRAE229 1",
+    "ruleset_model_descriptions": [
+        {
+            "id": "RMD 1",
+            "buildings": [
+                {
+                    "id": "Building 1",
+                    "building_open_schedule": "Required Building Schedule 1",
+                    "building_segments": [
+                        {
+                            "id": "Building Segment 1",
+                            "zones": [
+                                {
+                                    "id": "Thermal Zone 1",
+                                    "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                    "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                    "terminals": [
+                                        {
+                                            "id": "Air Terminal",
+                                            "is_supply_ducted": true,
+                                            "type": "CONSTANT_AIR_VOLUME",
+                                            "served_by_heating_ventilating_air_conditioning_system": "System Type 3"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "heating_ventilating_air_conditioning_systems": [
+                                {
+                                    "id": "System Type 3",
+                                    "cooling_system": {
+                                        "id": "Cooling Coil 1",
+                                        "type": "FLUID_LOOP",
+                                        "chilled_water_loop": "Purchased CHW Loop 1"
+                                    },
+                                    "heating_system": {
+                                        "id": "Furnace Coil 1",
+                                        "type": "FLUID_LOOP",
+                                        "hot_water_loop": "Purchased HW Loop 1"
+                                    },
+                                    "fan_system": {
+                                        "id": "CAV Fan System 1",
+                                        "fan_control": "CONSTANT",
+                                        "supply_fans": [
+                                            {
+                                                "id": "Supply Fan 1"
+                                            }
+                                        ],
+                                        "return_fans": [
+                                            {
+                                                "id": "Return Fan 1"
+                                            }
+                                        ]
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "external_fluid_sources": [
+                {
+                    "id": "Purchased CHW",
+                    "loop": "Purchased CHW Loop 1",
+                    "type": "CHILLED_WATER"
+                },
+                {
+                    "id": "Purchased HW",
+                    "loop": "Purchased HW Loop 1",
+                    "type": "HOT_WATER"
+                }
+            ],
+            "fluid_loops": [
+                {
+                    "id": "Purchased CHW Loop 1",
+                    "type": "COOLING"
+                },
+                {
+                    "id": "Purchased HW Loop 1",
+                    "type": "HEATING"
+                }
+            ]
+        }
+    ]
+}

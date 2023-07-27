@@ -2,46 +2,52 @@
 # Lighting - Rule 6-8
 
 **Rule ID:** 6-8  
-**Rule Description:** User building is modeled with daylighting controls directly or through schedule adjustments.  
-**Appendix G Section:** Section 6 Lighting  
-**Appendix G Section Reference:** Section G3.1-6(h) Lighting: Modeling Requirements for the Proposed design  
+**Rule Description:** Additional occupancy sensor controls in the proposed building are modeled through schedule adjustments based on factors defined in Table G3.7.  
+**Rule Assertion:** Proposed RMR = expected value  
+**Appendix G Section:** Section G3.1-6(i) Modeling Requirements for the Proposed design  
+**Appendix G Section Reference:**  
 
-**Applicability:** All required data elements exist for U_RMR  
-**Applicability Checks:** None  
+- Table G3.7, Performance Rating Method Lighting Power Density Allowances and Occupancy Sensor Reductions Using the Space-by-Space Method  
+
+**Applicability:** All required data elements exist for P_RMR  
+**Applicability Checks:** None
+
 **Manual Check:** Yes  
 **Evaluation Context:** Each Data Element  
-**Data Lookup:** None  
-## Rule Logic: 
+**Data Lookup:** Table G3.7  
+**Function Call:**  
 
-- Check if each zone has window or skylight in the building segment in the User model: `For zone_u in U_RMR...zones:`
+  - compare_schedules()
+  - normalize_space_schedules()
 
-  - For each surfaces in zone: `surface_u in zone_u.surfaces`
+## Rule Logic:  
 
-    - Check if surface is exterior: `if surface_u.adjacent_to == "EXTERIOR":`
+- Get building open schedule in the proposed model: `building_open_schedule_p = P_RMR.building.building_open_schedule`  
 
-      - Check if surface has any subsurface that is not door, set daylight flag as TRUE: `if ( subsurface.classification != "DOOR" for subsurface in surface_u.subsurfaces ): daylight_flag_u == TRUE`
+- For each building segment in building: `for building_segment_p in P_RMR.building.building_segments:`  
 
-  - For each space in zone: `space_u in zone_u.spaces:`
+    - For each zone in building_segments: `zone_p in building_segment_p.zones:`
 
-    - Get interior_lighting in space: `interior_lighting_u = space_u.interior_lighting`
+      - For each space in zone: `space_p in zone_p.spaces:`  
 
-      - Check if any interior_lighting has daylight control: `if ( lighting.daylighting_control_type != "NONE" for lighting in interior_lighting_u ): has_daylight_control_flag == TRUE`
+        - Get matching space from B_RMR: `space_b = match_data_element(B_RMR, Spaces, space_p.id)`  
 
-    **Rule Assertion:** For each zone in the User model:
+          - Get normalized space lighting schedule for B_RMR: `normalized_schedule_b = normalize_space_schedules(space_b.interior_lighting)`  
 
-    - Case 1, if the zone has window or skylight and daylight control, and daylight control is not modeled using schedule: `if ( daylight_flag_u == TRUE ) AND ( has_daylight_control_flag == TRUE ) AND ( NOT interior_lighting_u.are_schedules_used_for_modeling_daylighting_control ): UNDETERMINED and raise_warning "SOME OF THE SPACES IN ZONE ARE MODELED WITH WINDOW OR SKYLIGHT AND SOME OF THE SPACES IN ZONE ARE MODELED WITH DAYLIGHTING CONTROL DIRECTLY THROUGH SIMULATION. VERIFY IF THE MANDATORY LIGHTING CONTROL REQUIREMENTS ARE MODELED CORRECTLY IN ZONE."`
+        - Get normalized space lighting schedule: `normalized_schedule_p = normalize_space_schedules(space_p.interior_lighting)`
 
-    - Case 2, else if the zone has window or skylight and daylight control, and daylight control is modeled using schedule: `if ( daylight_flag_u == TRUE ) AND ( has_daylight_control_flag == TRUE ) AND ( interior_lighting_u.are_schedules_used_for_modeling_daylighting_control ): UNDETERMINED and raise_warning "SOME OF THE SPACES IN ZONE ARE MODELED WITH WINDOW OR SKYLIGHT AND SOME OF THE SPACES IN ZONE ARE MODELED WITH DAYLIGHTING CONTROL WITH SCHEDULE. VERIFY IF SCHEDULE ADJUSTMENT IS MODELED CORRECTLY."`
+        - Compare lighting schedules in P_RMR and B_RMR: `schedule_comparison_result = compare_schedules(normalized_schedule_p, normalized_schedule_b, building_open_schedule_p)`  
 
-    - Case 3, else if the zone has window or skylight and daylight control is not modeled:  `else if ( daylight_flag_u == TRUE ) AND ( has_daylight_control_flag == FALSE ): FAIL and raise_warning "SOME OF THE SPACES IN ZONE ARE MODELED WITH FENESTRATION BUT NO DAYLIGHTING CONTROLS. THE DESIGN MUST INCLUDE MANDATORY DAYLIGHTING CONTROLS UNLESS ANY OF THE EXCEPTIONS TO 90.1 SECTION 9.4.1.1(E) APPLY."`
+          **Rule Assertion:**
 
-    - Case 4, else if the zone does not have window or skylight and daylight control is modeled: `else if ( daylight_flag_u == FALSE ) AND ( has_daylight_control_flag == TRUE ): FAIL`
+          - Case 1: For all hours, for each lighting, if lighting schedule in P_RMR is equal to lighting schedule in B_RMR times adjusted lighting occupancy sensor reduction factor: `if schedule_comparison_result == "MATCH": PASS`  
 
-    - Case 5, else, the zone does not have window or skylight and no daylight control is modeled: `else: PASS`
+          - Case 2: Else if lighting schedule in P_RMR is lower than or equal to lighting schedule in B_RMR times adjusted lighting occupancy sensor reduction factor: `if schedule_comparison_result == "EQUAL AND LESS": FAIL and raise_warning "SCHEDULE ADJUSTMENT MAY BE CORRECT IF SPACE INCLUDES DAYLIGHT CONTROL MODELED BY SCHEDULE ADJUSTMENT OR INDIVIDUAL WORKSTATIONS WITH LIGHTING CONTROLLED BY OCCUPANCY SENSORS (TABLE G3.7 FOOTNOTE C)."`  
+
+          - Case 3: Else, lighting schedule in P_RMR is higher than lighting schedule in B_RMR times adjusted lighting occupancy sensor reduction factor: `if schedule_comparison_result == "EQUAL AND MORE": UNDETERMINED and raise_message "LIGHTING SCHEDULE IN P-RMR INCLUDING ADJUSTED LIGHTING OCCUPANCY SENSOR REDUCTION FACTOR IS HIGHER THAN THAT IN B-RMR. VERIFY ADDITIONAL OCCUPANCY SENSOR CONTROL IS MODELED CORRECTLY IN P-RMR."`  
 
 **Notes:**
-  1. Updated the Rule ID from 6-12 to 6-8 on 6/3/2022
-  2. The rule has been written to apply to user RMR, it should instead be implemented to apply to P-RMR- should discuss
-
+  1. Updated the Rule ID from 6-13 to 6-9 on 6/3/2022
+  2. Updated the Rule ID from 6-9 to 6-8 on 6/8/2022
 
 **[Back](../_toc.md)**
