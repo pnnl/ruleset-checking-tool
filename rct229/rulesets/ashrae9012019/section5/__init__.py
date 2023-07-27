@@ -3,7 +3,7 @@ import importlib
 
 # TODO: Fix section5rule2 and section5rule49 - they currently cause exceptions
 __all__ = [
-    "section5rule2",
+    # "section5rule2",
     "section5rule3",
     "section5rule4",
     "section5rule5",
@@ -22,6 +22,7 @@ __all__ = [
     "section5rule24",
     "section5rule26",
     "section5rule28",
+    "section5rule29",
     "section5rule31",
     "section5rule34",
     "section5rule35",
@@ -30,7 +31,9 @@ __all__ = [
     "section5rule38",
     "section5rule39",
     "section5rule40",
+    "section5rule41",
     "section5rule42",
+    "section5rule43",
     "section5rule44",
     "section5rule45",
     "section5rule46",

@@ -139,6 +139,23 @@ def find_exactly_one_zone(rmi, zone_id):
     )
 
 
+def find_exactly_one_schedule(rmi, schedule_id):
+    """
+    Search for the schedule data group in a ruleset model instance by mathcing schedule_id
+    Raise exception if no matching schedule
+
+    Parameters
+    ----------
+    rmi: json
+    scheduel_id: str
+
+    Returns: json
+    -------
+
+    """
+    return find_exactly_one_with_field_value("$.schedules[*]", "id", schedule_id, rmi)
+
+
 def find_exactly_one_child_loop(rmi, child_loop_id):
     """
     Search for a child loop data group (secondary loop) in a ruleset model instance by matching child_loop_id
@@ -201,8 +218,8 @@ def has_heating_system(rmi, hvac_id):
 
     return (
         heating_system is not None
-        and heating_system.get("heating_system_type") is not None
-        and heating_system["heating_system_type"] != HEATING_SYSTEM.NONE
+        and heating_system.get("type") is not None
+        and heating_system["type"] != HEATING_SYSTEM.NONE
     )
 
 
@@ -226,8 +243,8 @@ def has_cooling_system(rmi, hvac_id):
 
     return (
         cooling_system is not None
-        and cooling_system.get("cooling_system_type") is not None
-        and cooling_system["cooling_system_type"] != COOLING_SYSTEM.NONE
+        and cooling_system.get("type") is not None
+        and cooling_system["type"] != COOLING_SYSTEM.NONE
     )
 
 
@@ -251,8 +268,8 @@ def has_preheat_system(rmi, hvac_id):
 
     return (
         preheat_system is not None
-        and preheat_system.get("heating_system_type") is not None
-        and preheat_system["heating_system_type"] != HEATING_SYSTEM.NONE
+        and preheat_system.get("type") is not None
+        and preheat_system["type"] != HEATING_SYSTEM.NONE
     )
 
 

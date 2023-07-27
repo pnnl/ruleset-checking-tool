@@ -32,12 +32,12 @@ TEST_BUILDING_NO_EXT_FLUID_SOURCE = {
                             "id": "System 12",
                             "cooling_system": {
                                 "id": "CHW Coil 1",
-                                "cooling_system_type": "FLUID_LOOP",
+                                "type": "FLUID_LOOP",
                                 "chilled_water_loop": "Chilled Water Loop 1",
                             },
                             "heating_system": {
                                 "id": "Boiler Coil 1",
-                                "heating_system_type": "FLUID_LOOP",
+                                "type": "FLUID_LOOP",
                                 "hot_water_loop": "Boiler Loop 1",
                             },
                             "fan_system": {
@@ -51,7 +51,7 @@ TEST_BUILDING_NO_EXT_FLUID_SOURCE = {
                 }
             ],
         }
-    ],  # omit 'external_fluid_source' intentionally to obtain 'purchased_cooling' and 'purchased_cooling's False result
+    ],  # omit 'external_fluid_sources' intentionally to obtain 'purchased_cooling' and 'purchased_cooling's False result
     "boilers": [
         {
             "id": "Boiler 1",
@@ -115,12 +115,12 @@ TEST_BUILDING_HEATING_SYS = {
                             "id": "Testing system",
                             "cooling_system": {
                                 "id": "CHW Coil 1",
-                                "cooling_system_type": "FLUID_LOOP",
+                                "type": "FLUID_LOOP",
                                 "chilled_water_loop": "Chilled Water Loop 1",
                             },
                             "heating_system": {
                                 "id": "Boiler Coil 1",
-                                "heating_system_type": "FLUID_LOOP",
+                                "type": "FLUID_LOOP",
                                 "hot_water_loop": "Boiler Loop 1",
                             },
                             "fan_system": {
@@ -134,12 +134,12 @@ TEST_BUILDING_HEATING_SYS = {
                             "id": "Testing system2",
                             "cooling_system": {
                                 "id": "CHW Coil 1",
-                                "cooling_system_type": "FLUID_LOOP",
+                                "type": "FLUID_LOOP",
                                 "chilled_water_loop": "Chilled Water Loop 1",
                             },
                             "preheat_system": {
                                 "id": "Preheat Coil 1",
-                                "heating_system_type": "FLUID_LOOP",
+                                "type": "FLUID_LOOP",
                                 "hot_water_loop": "Preheat Loop 1",
                             },
                             "fan_system": {
@@ -161,7 +161,7 @@ TEST_BUILDING_HEATING_SYS = {
             "energy_source_type": "NATURAL_GAS",
         }
     ],
-    "external_fluid_source": [
+    "external_fluid_sources": [
         {
             "id": "Chilled Water 1",
             "loop": "Chilled Water Loop 1",
@@ -251,12 +251,12 @@ TEST_BUILDING_TERMINAL_SYS = {
                             "id": "Testing system",
                             "cooling_system": {
                                 "id": "CHW Coil 1",
-                                "cooling_system_type": "FLUID_LOOP",
+                                "type": "FLUID_LOOP",
                                 "chilled_water_loop": "Chilled Water Loop TESTING",  # chilled water loop is NOT included in the 'external_fluid_source' and 'child_loops' intentionally
                             },
                             "preheat_system": {
                                 "id": "Preheat Coil 1",
-                                "heating_system_type": "FLUID_LOOP",
+                                "type": "FLUID_LOOP",
                                 "hot_water_loop": "Preheat Loop TESTING",  # hot water loop is NOT included in the 'external_fluid_source' and 'child_loops' intentionally
                             },
                             "fan_system": {
@@ -278,7 +278,7 @@ TEST_BUILDING_TERMINAL_SYS = {
             "energy_source_type": "NATURAL_GAS",
         }
     ],
-    "external_fluid_source": [
+    "external_fluid_sources": [
         {
             "id": "Chilled Water 1",
             "loop": "Chilled Water Loop 1",
@@ -319,15 +319,15 @@ TEST_BUILDING_TERMINAL_SYS = {
 
 TEST_RMD_HEATING_SYS = {
     "id": "ASHRAE229",
-    "ruleset_model_instances": [TEST_BUILDING_HEATING_SYS],
+    "ruleset_model_descriptions": [TEST_BUILDING_HEATING_SYS],
 }
 TEST_RMD_TERMINAL_SYS = {
     "id": "ASHRAE229",
-    "ruleset_model_instances": [TEST_BUILDING_TERMINAL_SYS],
+    "ruleset_model_descriptions": [TEST_BUILDING_TERMINAL_SYS],
 }
 TEST_RMD_FALSE = {
     "id": "ASHRAE229",
-    "ruleset_model_instances": [TEST_BUILDING_NO_EXT_FLUID_SOURCE],
+    "ruleset_model_descriptions": [TEST_BUILDING_NO_EXT_FLUID_SOURCE],
 }
 
 

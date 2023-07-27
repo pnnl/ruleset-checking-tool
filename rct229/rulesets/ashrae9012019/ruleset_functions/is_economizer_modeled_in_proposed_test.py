@@ -39,7 +39,7 @@ TEST_RMI_FIXED_TYPE = {
                             "id": "System 9",
                             "heating_system": {
                                 "id": "Furnace Coil 1",
-                                "heating_system_type": "FURNACE",
+                                "type": "FURNACE",
                                 "energy_source_type": "NATURAL_GAS",
                             },
                             "fan_system": {
@@ -95,7 +95,7 @@ TEST_RMI_ENTHALPY_TYPE = {
                             "id": "System 9",
                             "heating_system": {
                                 "id": "Furnace Coil 1",
-                                "heating_system_type": "FURNACE",
+                                "type": "FURNACE",
                                 "energy_source_type": "NATURAL_GAS",
                             },
                             "fan_system": {
@@ -151,7 +151,7 @@ TEST_RMI_NO_ECONOMIZER_TYPE = {
                             "id": "System 9",
                             "heating_system": {
                                 "id": "Furnace Coil 1",
-                                "heating_system_type": "FURNACE",
+                                "type": "FURNACE",
                                 "energy_source_type": "NATURAL_GAS",
                             },
                             "fan_system": {
@@ -174,29 +174,29 @@ TEST_RMI_NO_ECONOMIZER_TYPE = {
 
 TEST_RMD_FIXED_TYPE = {
     "id": "229_01",
-    "ruleset_model_instances": [TEST_RMI_FIXED_TYPE],
+    "ruleset_model_descriptions": [TEST_RMI_FIXED_TYPE],
 }
 
 TEST_RMD_ENTHALPY_TYPE = {
     "id": "229_01",
-    "ruleset_model_instances": [TEST_RMI_ENTHALPY_TYPE],
+    "ruleset_model_descriptions": [TEST_RMI_ENTHALPY_TYPE],
 }
 
 TEST_RMD_NO_ECONOMIZER_TYPE = {
     "id": "229_01",
-    "ruleset_model_instances": [TEST_RMI_NO_ECONOMIZER_TYPE],
+    "ruleset_model_descriptions": [TEST_RMI_NO_ECONOMIZER_TYPE],
 }
 
-TEST_RMI_FIXED_TYPE_UNIT = quantify_rmr(TEST_RMD_FIXED_TYPE)["ruleset_model_instances"][
-    0
-]
+TEST_RMI_FIXED_TYPE_UNIT = quantify_rmr(TEST_RMD_FIXED_TYPE)[
+    "ruleset_model_descriptions"
+][0]
 
 TEST_RMI_ENTHALPY_TYPE_UNIT = quantify_rmr(TEST_RMD_ENTHALPY_TYPE)[
-    "ruleset_model_instances"
+    "ruleset_model_descriptions"
 ][0]
 
 TEST_RMI_NO_ECONOMIZER_TYPE_UNIT = quantify_rmr(TEST_RMD_NO_ECONOMIZER_TYPE)[
-    "ruleset_model_instances"
+    "ruleset_model_descriptions"
 ][0]
 
 
@@ -223,17 +223,17 @@ def test__PROPOSED_TEST_RMD_NO_ECONOMIZER_TYPE__is_valid():
 
 def test__is_economizer_modeled_in_proposed_fixed_fraction_economizer_type():
     assert not is_economizer_modeled_in_proposed(
-        TEST_RMI_FIXED_TYPE_UNIT, TEST_RMI_FIXED_TYPE_UNIT
+        TEST_RMI_FIXED_TYPE_UNIT, TEST_RMI_FIXED_TYPE_UNIT, "System 9"
     )
 
 
 def test__is_economizer_modeled_in_proposed__enthalpy_economizer_type():
     assert is_economizer_modeled_in_proposed(
-        TEST_RMI_FIXED_TYPE_UNIT, TEST_RMI_ENTHALPY_TYPE_UNIT
+        TEST_RMI_FIXED_TYPE_UNIT, TEST_RMI_ENTHALPY_TYPE_UNIT, "System 9"
     )
 
 
 def test__is_economizer_modeled_in_proposed__no_economizer_type():
     assert not is_economizer_modeled_in_proposed(
-        TEST_RMI_FIXED_TYPE_UNIT, TEST_RMI_NO_ECONOMIZER_TYPE_UNIT
+        TEST_RMI_FIXED_TYPE_UNIT, TEST_RMI_NO_ECONOMIZER_TYPE_UNIT, "System 9"
     )

@@ -18,7 +18,7 @@ class Section5Rule2(RuleDefinitionListIndexedBase):
             ruleset_section_title="Envelope",
             standard_section="Section G3.1-5(a) Building Envelope Modeling Requirements for the Proposed building",
             is_primary_rule=False,
-            rmr_context="ruleset_model_instances/0/buildings",
+            rmr_context="ruleset_model_descriptions/0/buildings",
         )
 
     class BuildingRule(RuleDefinitionBase):
@@ -26,14 +26,18 @@ class Section5Rule2(RuleDefinitionListIndexedBase):
             super(Section5Rule2.BuildingRule, self).__init__(
                 rmrs_used=UserBaselineProposedVals(True, False, True),
                 required_fields={
-                    "$..surfaces[*]": ["azimuth"],
+                    "$.building_segments[*].zones[*].surfaces[*]": ["azimuth"],
                 },
             )
 
         def get_calc_vals(self, context, data=None):
             failing_surface_ids = []
-            proposed_surfaces = find_all("$..surfaces[*]", context.proposed)
-            user_surfaces = find_all("$..surfaces[*]", context.user)
+            proposed_surfaces = find_all(
+                "$.building_segments[*].zones[*].surfaces[*]", context.proposed
+            )
+            user_surfaces = find_all(
+                "$.building_segments[*].zones[*].surfaces[*]", context.user
+            )
 
             # This assumes that the surfaces all match
             matched_user_surfaces = match_lists_by_id(proposed_surfaces, user_surfaces)
