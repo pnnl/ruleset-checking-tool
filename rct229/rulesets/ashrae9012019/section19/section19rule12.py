@@ -99,6 +99,8 @@ class Section19Rule12(RuleDefinitionListIndexedBase):
             air_economizer_type_b = calc_vals["air_economizer_type_b"]
 
             return (
-                std_equal(req_high_limit_temp.to(ureg.degK), high_limit_temp_b.to(ureg.degK))
+                std_equal(
+                    req_high_limit_temp.to(ureg.degK), high_limit_temp_b.to(ureg.degK)
+                )
                 and air_economizer_type_b == AIR_ECONOMIZER.TEMPERATURE
             )
