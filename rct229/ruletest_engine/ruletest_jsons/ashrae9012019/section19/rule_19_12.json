@@ -63,7 +63,12 @@
                                                         {
                                                             "id": "Return Fan 1"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "air_economizer": {
+                                                        "id": "Air Economizer 1",
+                                                        "type": "TEMPERATURE",
+                                                        "high_limit_shutoff_temperature": 23.888888888888914
+                                                    }
                                                 }
                                             }
                                         ]
@@ -143,7 +148,12 @@
                                                         {
                                                             "id": "Return Fan 1"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "air_economizer": {
+                                                        "id": "Air Economizer 1",
+                                                        "type": "TEMPERATURE",
+                                                        "high_limit_shutoff_temperature": 37.77777777777783
+                                                    }
                                                 }
                                             }
                                         ]
@@ -223,7 +233,12 @@
                                                         {
                                                             "id": "Return Fan 1"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "air_economizer": {
+                                                        "id": "Air Econimizer 1",
+                                                        "type": "ENTHALPY",
+                                                        "high_limit_shutoff_temperature": 23.888888888888914
+                                                    }
                                                 }
                                             }
                                         ]
@@ -383,7 +398,12 @@
                                                         {
                                                             "id": "Return Fan 1"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "air_economizer": {
+                                                        "id": "Air Economizer 1",
+                                                        "type": "TEMPERATURE",
+                                                        "high_limit_shutoff_temperature": 23.888888888888914
+                                                    }
                                                 }
                                             }
                                         ]
