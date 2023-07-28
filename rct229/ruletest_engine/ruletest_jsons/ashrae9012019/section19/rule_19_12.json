@@ -235,7 +235,7 @@
                                                         }
                                                     ],
                                                     "air_economizer": {
-                                                        "id": "Air Econimizer 1",
+                                                        "id": "Air Economizer 1",
                                                         "type": "ENTHALPY",
                                                         "high_limit_shutoff_temperature": 23.888888888888914
                                                     }
