@@ -83,9 +83,9 @@ class Section19Rule12(RuleDefinitionListIndexedBase):
             )
 
             if climate_zone_b in CLIMATE_ZONE_70F:
-                req_high_limit_temp = 70 * ureg("degR")
+                req_high_limit_temp = 70 * ureg("degF")
             elif climate_zone_b in CLIMATE_ZONE_75F:
-                req_high_limit_temp = 75 * ureg("degR")
+                req_high_limit_temp = 75 * ureg("degF")
 
             return {
                 "high_limit_temp_b": high_limit_temp_b,
@@ -99,6 +99,6 @@ class Section19Rule12(RuleDefinitionListIndexedBase):
             air_economizer_type_b = calc_vals["air_economizer_type_b"]
 
             return (
-                std_equal(req_high_limit_temp, high_limit_temp_b)
+                std_equal(req_high_limit_temp.to(ureg.degK), high_limit_temp_b.to(ureg.degK))
                 and air_economizer_type_b == AIR_ECONOMIZER.TEMPERATURE
             )
