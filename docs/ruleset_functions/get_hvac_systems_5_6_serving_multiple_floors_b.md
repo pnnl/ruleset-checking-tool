@@ -16,7 +16,7 @@
 ## Logic:  
 - For each building_segment in the B_RMR: `for building_segment_b in B_RMR...BuildingSegment:`
     - Reset list of applicable HVAC (HVAC systems that are of type 5, 5a, 5b, 6, 6a, 6b): `applicable_hvac_list_b = ""`
-    - For each hvac_b in the building_segment_b: `for hvac_b in building_segment_b.heating_ventilation_air_conditioning_system:`
+    - For each hvac_b in the building_segment_b: `for hvac_b in building_segment_b.heating_ventilating_air_conditioning_system:`
         - Reset the hvac_system_type_applicable boolean variable (indicates whether the hvac system type is relevant): `hvac_system_type_applicable = FALSE`
         - Reset zones served list: `zone_list_b = []`
         - Get the hvac system type for hvac_b: `hvac_sys_type_b = baseline_hvac_sys_type_ids_dict_b.keys()[list(baseline_hvac_sys_type_ids_dict_b.values()).index(hvac_b.id)]`
