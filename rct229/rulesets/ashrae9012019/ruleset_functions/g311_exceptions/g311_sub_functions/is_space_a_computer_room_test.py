@@ -6,12 +6,7 @@ from rct229.schema.validate import schema_validate_rmr
 
 TEST_RMI = {
     "id": "test_rmd",
-    "schedules": [
-        {
-            "id": "schedule_1",
-            "hourly_values": [1.2] * 8670
-        }
-    ],
+    "schedules": [{"id": "schedule_1", "hourly_values": [1.2] * 8670}],
     "buildings": [
         {
             "id": "Building 1",
@@ -32,8 +27,16 @@ TEST_RMI = {
                                     "id": "Space 2",
                                     "floor_area": 10,
                                     "miscellaneous_equipment": [
-                                        {"id": "misc_equipment 1", "energy_type": "ELECTRICITY", "power": 1000},
-                                        {"id": "misc_equipment 2", "energy_type": "ELECTRICITY", "power": 2000},
+                                        {
+                                            "id": "misc_equipment 1",
+                                            "energy_type": "ELECTRICITY",
+                                            "power": 1000,
+                                        },
+                                        {
+                                            "id": "misc_equipment 2",
+                                            "energy_type": "ELECTRICITY",
+                                            "power": 2000,
+                                        },
                                     ],
                                 },
                                 {
@@ -41,8 +44,18 @@ TEST_RMI = {
                                     "id": "Space 3",
                                     "floor_area": 10,
                                     "miscellaneous_equipment": [
-                                        {"id": "misc_equipment 1", "power": 600, "energy_type": "ELECTRICITY", "multiplier_schedule": "schedule_1"},
-                                        {"id": "misc_equipment 2", "power": 1000, "energy_type": "ELECTRICITY", "multiplier_schedule": "schedule_1"},
+                                        {
+                                            "id": "misc_equipment 1",
+                                            "power": 600,
+                                            "energy_type": "ELECTRICITY",
+                                            "multiplier_schedule": "schedule_1",
+                                        },
+                                        {
+                                            "id": "misc_equipment 2",
+                                            "power": 1000,
+                                            "energy_type": "ELECTRICITY",
+                                            "multiplier_schedule": "schedule_1",
+                                        },
                                     ],
                                 },
                             ],

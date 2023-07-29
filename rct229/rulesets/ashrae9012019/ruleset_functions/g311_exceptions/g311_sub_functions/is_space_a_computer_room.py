@@ -36,13 +36,14 @@ def is_space_a_computer_room(rmi, space_id):
 
         total_space_misc_wattage_including_multiplier = pint_sum(
             [
-                misc_equip.get("power", ZERO.POWER) * max(
+                misc_equip.get("power", ZERO.POWER)
+                * max(
                     1.0,
                     get_max_schedule_multiplier_value(
                         misc_equip.get("multiplier_schedule")
                     )
                     if misc_equip.get("multiplier_schedule")
-                    else 1.0
+                    else 1.0,
                 )
                 for misc_equip in find_all("$.miscellaneous_equipment[*]", space)
                 if misc_equip.get("energy_type") == EnergySourceOptions.ELECTRICITY

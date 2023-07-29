@@ -7,12 +7,7 @@ from rct229.schema.validate import schema_validate_rmr
 
 TEST_RMI = {
     "id": "test_rmd",
-    "schedules": [
-        {
-            "id": "schedule_1",
-            "hourly_values": [1.2] * 8670
-        }
-    ],
+    "schedules": [{"id": "schedule_1", "hourly_values": [1.2] * 8670}],
     "buildings": [
         {
             "id": "Building 1",
@@ -41,8 +36,18 @@ TEST_RMI = {
                                     "id": "Space 3",
                                     "floor_area": 10,
                                     "miscellaneous_equipment": [
-                                        {"id": "misc_equipment 1", "power": 800, "energy_type": "ELECTRICITY", "multiplier_schedule": "schedule_1"},
-                                        {"id": "misc_equipment 2", "power": 1500, "energy_type": "ELECTRICITY", "multiplier_schedule": "schedule_1"},
+                                        {
+                                            "id": "misc_equipment 1",
+                                            "power": 800,
+                                            "energy_type": "ELECTRICITY",
+                                            "multiplier_schedule": "schedule_1",
+                                        },
+                                        {
+                                            "id": "misc_equipment 2",
+                                            "power": 1500,
+                                            "energy_type": "ELECTRICITY",
+                                            "multiplier_schedule": "schedule_1",
+                                        },
                                     ],
                                 },
                                 {
@@ -80,6 +85,5 @@ def test__get_zones_computer_rooms__success():
         "Thermal Zone 2": {
             "zone_computer_room_floor_area": 10 * ureg("m2"),
             "total_zone_floor_area": 20 * ureg("m2"),
-        }
+        },
     }
-
