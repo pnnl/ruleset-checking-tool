@@ -8,7 +8,10 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_s
 from rct229.schema.config import ureg
 from rct229.utils.assertions import getattr_, assert_
 from rct229.utils.jsonpath_utils import find_all
-from rct229.utils.pint_utils import ZERO, pint_sum
+from rct229.utils.pint_utils import ZERO
+from rct229.utils.utility_functions import (
+    get_max_schedule_multiplier_hourly_value_or_default,
+)
 
 COMPUTER_ROOM_MISC_POWER_DENSITY_THRESHOLD = 20 * ureg("watt/ft2")
 
@@ -27,23 +30,16 @@ def is_space_a_computer_room(rmi, space_id):
     )
 
     if not is_space_a_computer_room_flag:
-        # define a function that extracts the max value from an hourly_value schedule.
-        get_max_schedule_multiplier_value = flow(
-            lambda schedule_id: find_exactly_one_schedule(rmi, schedule_id),
-            lambda schedule_obj: schedule_obj.get("hourly_values", [1.0]),
-            max,
-        )
-
-        total_space_misc_wattage_including_multiplier = pint_sum(
+        total_space_misc_wattage_including_multiplier = sum(
             [
                 misc_equip.get("power", ZERO.POWER)
                 * max(
                     1.0,
-                    get_max_schedule_multiplier_value(
-                        misc_equip.get("multiplier_schedule")
-                    )
-                    if misc_equip.get("multiplier_schedule")
-                    else 1.0,
+                    max(
+                        get_max_schedule_multiplier_hourly_value_or_default(
+                            rmi, misc_equip.get("multiplier_schedule"), [1.0]
+                        )
+                    ),
                 )
                 for misc_equip in find_all("$.miscellaneous_equipment[*]", space)
                 if misc_equip.get("energy_type") == EnergySourceOptions.ELECTRICITY
