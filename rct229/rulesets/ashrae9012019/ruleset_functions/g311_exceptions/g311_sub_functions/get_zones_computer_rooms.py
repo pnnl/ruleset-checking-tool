@@ -15,8 +15,8 @@ LightingSpaceOptions2019ASHRAE901TG37 = schema_enums[
 def get_zone_computer_rooms(rmi):
     """
     Returns a dictionary with the zones that have at least one computer room space associated with them in the RMR as the keys.
-    The values associated with each key are in a list form. The list associated with each key contains the computer room
-    floor area as the first item in the list and the total zone floor area as the second item in the list.
+    The values associated with each key are in a dict form. The dict associated with each key contains the computer room
+    floor area as the first item and the total zone floor area as the second item.
 
     Parameters
     ----------
@@ -27,8 +27,8 @@ def get_zone_computer_rooms(rmi):
     -------
     zones_with_computer_room_dict
         A dictionary with the zones that have at least one computer room space associated with them in the RMR as the keys.
-        The values associated with each key are in a list form. The list associated with each key contains the computer
-        room floor area as the first item in the list and the total zone floor area as the second item in the list.
+        The values associated with each key are in a dict form. The dict associated with each key contains the computer room
+        floor area as the first item and the total zone floor area as the second item.
     """
     zone_with_computer_room_dict = {}
 
