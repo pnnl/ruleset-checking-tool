@@ -139,6 +139,25 @@ def find_exactly_one_zone(rmi, zone_id):
     )
 
 
+def find_exactly_one_space(rmi, space_id):
+    """
+    Search for the space data group in a ruleset model instance by matching zone_id
+    Raise exception if no matching zone
+
+    Parameters
+    ----------
+    rmi: json
+    zone_id: str
+
+    Returns: json
+    -------
+
+    """
+    return find_exactly_one_with_field_value(
+        "$.buildings[*].building_segments[*].zones[*].spaces[*]", "id", space_id, rmi
+    )
+
+
 def find_exactly_one_schedule(rmi, schedule_id):
     """
     Search for the schedule data group in a ruleset model instance by mathcing schedule_id
