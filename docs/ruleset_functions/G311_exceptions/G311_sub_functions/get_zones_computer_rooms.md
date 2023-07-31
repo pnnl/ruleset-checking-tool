@@ -25,9 +25,7 @@
             - Add floor area to zone_computer_room_floor_area: `zone_computer_room_floor_area = zone_computer_room_floor_area + space_floor_area`
         - Add floor area to total_zone_floor_area: `total_zone_floor_area = total_zone_floor_area + space_floor_area`  
     - Check if the zone has computer room boolean variable equals TRUE, if true then add to list of zones: `if zone_has_computer_room_check == TRUE:`
-        - Reset list with computer room floor area and zone total floor area:`floor_areas_list = []`
-        - Create list with computer room floor area and zone total floor area: `floor_areas_list = [zone_computer_room_floor_area,total_zone_floor_area]`
-        - Add to zone as dictionary key and list of floor areas as the associated value: `zones_with_computer_room_dict_x[zone_x.id] = floor_areas_list`  
+        - Add to zone as dictionary key and list of floor areas as the associated value: `zones_with_computer_room_dict_x[zone_x.id] = {zone_computer_room_floor_area: zone_computer_room_floor_area, total_zone_floor_area: total_zone_floor_area}`  
 
 **Returns** `return zones_with_computer_room_dict_x`
 
