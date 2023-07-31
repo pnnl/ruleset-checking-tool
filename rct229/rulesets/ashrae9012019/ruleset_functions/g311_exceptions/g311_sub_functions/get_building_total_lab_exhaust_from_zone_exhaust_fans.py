@@ -1,11 +1,9 @@
-from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_system_util import (
-    find_exactly_one_zone,
-)
 from rct229.rulesets.ashrae9012019.ruleset_functions.g311_exceptions.g311_sub_functions.get_building_lab_zones_list import (
     get_building_lab_zones_list,
 )
 from rct229.utils.jsonpath_utils import find_one
 from rct229.utils.pint_utils import ZERO
+from rct229.utils.utility_functions import find_exactly_one_zone
 
 
 def get_building_total_lab_exhaust_from_zone_exhaust_fans(rmi):
