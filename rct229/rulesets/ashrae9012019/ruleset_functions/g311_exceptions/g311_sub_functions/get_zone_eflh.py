@@ -1,15 +1,18 @@
-from pydash import flow, flat_map, for_each, chain, reduce_, map_
-
+from pydash import flow, map_
 from rct229.rule_engine.rulesets import LeapYear
-from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_system_util import (
-    find_exactly_one_hvac_system,
-    find_exactly_one_zone,
-)
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_list_hvac_systems_associated_with_zone import (
     get_list_hvac_systems_associated_with_zone,
 )
 from rct229.utils.assertions import assert_
 from rct229.utils.jsonpath_utils import find_one, find_all
+from rct229.utils.utility_functions import (
+    find_exactly_one_hvac_system,
+    find_exactly_one_zone,
+    get_max_schedule_multiplier_hourly_value_or_default,
+    get_max_schedule_multiplier_heating_design_hourly_value_or_default,
+    get_max_schedule_multiplier_cooling_design_hourly_value_or_default,
+    get_schedule_multiplier_hourly_value_or_default,
+)
 
 ZONE_OCCUPANTS_RATIO_THRESHOLD = 0.05
 
@@ -43,41 +46,15 @@ def get_zone_eflh(rmi: dict, zone_id: str, is_leap_year: bool):
     hvac_systems_list = get_list_hvac_systems_associated_with_zone(rmi, zone_id)
 
     # 2. functions
-    # function to get the maximum schedule value in an hourly schedule or 1.0
-    multiplier_annual_hourly_values_func = flow(
-        lambda schedule_id: find_one(
-            f'$.schedules[*][?(@.id="{schedule_id}")].hourly_values', rmi
-        ),
-        lambda hourly_values: hourly_values if hourly_values else [1.0] * num_hours,
-    )
-    # function get hourly_values list from heating_design_day, it is either the
-    # hourly_values from schedule or [1.0]
-    multiplier_heating_design_hourly_values_func = flow(
-        lambda schedule_id: find_one(
-            f'$.schedules[*][?(@.id="{schedule_id}")].hourly_heating_design_day', rmi
-        ),
-        lambda hourly_values: hourly_values if hourly_values else [1.0],
-    )
-    # function get hourly_values list from cooling_design_day, it is either the
-    # hourly_values from schedule or [1.0]
-    multiplier_cooling_design_hourly_values_func = flow(
-        lambda schedule_id: find_one(
-            f'$.schedules[*][?(@.id="{schedule_id}")].hourly_cooling_design_day', rmi
-        ),
-        lambda hourly_values: hourly_values if hourly_values else [1.0],
-    )
-
     # get fan operation schedule from an HVAC,
-    # missing data (fan) is handled and return as [0.0] * num_hours
+    # missing data (fan) is handled and return as [1.0] * num_hours
     get_fan_operation_schedule_func = flow(
         lambda hvac_id: find_exactly_one_hvac_system(rmi, hvac_id),
-        lambda hvac: find_one("$.fan_system", hvac),
-        # fan could be None
-        lambda fan: fan.get("operating_schedule", None) if fan else None,
+        lambda hvac: find_one("$.fan_system.operating_schedule", hvac),
         lambda operation_schedule_id: find_one(
             f'$.schedules[*][?(@.id="{operation_schedule_id}")].hourly_values', rmi
         ),
-        lambda hourly_values: hourly_values if hourly_values else [0.0] * num_hours,
+        lambda hourly_values: hourly_values if hourly_values else [1.0] * num_hours,
     )
 
     # 3. Calculating values
@@ -90,7 +67,7 @@ def get_zone_eflh(rmi: dict, zone_id: str, is_leap_year: bool):
     # make sure all operation schedule has the same hours and they are equal to num_hours
     assert_(
         all(
-            flat_map(
+            map_(
                 hvac_operation_schedule_list,
                 lambda schedule: len(schedule) == num_hours,
             )
@@ -100,28 +77,23 @@ def get_zone_eflh(rmi: dict, zone_id: str, is_leap_year: bool):
 
     # list of integers that contains the maximum number of occupants per space.
     # [10,12,22...]
-    num_of_occupant_per_space_list = flat_map(
+    num_of_occupant_per_space_list = map_(
         find_all("$.spaces[*]", thermal_zone),
         lambda space: max(
-            max(
-                multiplier_annual_hourly_values_func(
-                    find_one("$.occupant_multiplier_schedule", space)
-                )
+            get_max_schedule_multiplier_hourly_value_or_default(
+                rmi, find_one("$.occupant_multiplier_schedule", space), 1.0
             ),
-            max(
-                multiplier_heating_design_hourly_values_func(
-                    find_one("$.occupant_multiplier_schedule", space)
-                )
+            get_max_schedule_multiplier_heating_design_hourly_value_or_default(
+                rmi, find_one("$.occupant_multiplier_schedule", space), 1.0
             ),
-            max(
-                multiplier_cooling_design_hourly_values_func(
-                    find_one("$.occupant_multiplier_schedule", space)
-                )
+            get_max_schedule_multiplier_cooling_design_hourly_value_or_default(
+                rmi, find_one("$.occupant_multiplier_schedule", space), 1.0
             ),
             1.0,
         )
         * find_one("$.number_of_occupants", space, 0.0),
     )
+
     # sum of the maximum number of occupants
     total_zone_occupants = sum(num_of_occupant_per_space_list)
 
@@ -129,16 +101,16 @@ def get_zone_eflh(rmi: dict, zone_id: str, is_leap_year: bool):
     # this shall guarantee the num_hours length per hourly_values list.
     # [[0,0,0.2,0.2...], [0,0,0.2,0.2...]...]
     occupant_annual_hourly_value_per_space_list = map_(
-        find_all("$.spaces[*].occupant_multiplier_schedule", thermal_zone),
-        lambda occupant_multiplier_schedule_id: multiplier_annual_hourly_values_func(
-            occupant_multiplier_schedule_id
+        find_all("$.spaces[*]", thermal_zone),
+        lambda space: get_schedule_multiplier_hourly_value_or_default(
+            rmi, space.get("occupant_multiplier_schedule"), [1.0] * num_hours
         ),
     )
 
     # make sure all operation schedule has the same hours and they are equal to num_hours
     assert_(
         all(
-            flat_map(
+            map_(
                 occupant_annual_hourly_value_per_space_list,
                 lambda schedule: len(schedule) == num_hours,
             )
@@ -161,7 +133,7 @@ def get_zone_eflh(rmi: dict, zone_id: str, is_leap_year: bool):
 
         # 0.0 is falsy, 1.0 is truthy
         hvac_systems_operational_this_hour = any(
-            flat_map(hvac_operation_schedule_list, lambda schedule: schedule[hour])
+            map_(hvac_operation_schedule_list, lambda schedule: schedule[hour])
         )
 
         if (

@@ -1,5 +1,3 @@
-
-
 class HVAC_SYS:
     """Class holding HVAC system type value"""
 
@@ -70,4 +68,3 @@ HVAC_SYSTEM_TYPE_DICTIONARY = {
     ],
     HVAC_SYS.SYS_13: [HVAC_SYS.SYS_13, HVAC_SYS.SYS_13A],
 }
-

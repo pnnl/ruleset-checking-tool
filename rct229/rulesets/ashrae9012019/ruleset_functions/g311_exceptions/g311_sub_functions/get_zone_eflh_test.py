@@ -1,5 +1,6 @@
-from rct229.rulesets.ashrae9012019.ruleset_functions.g311_exceptions.g311_sub_functions.get_zone_eflh import \
-    get_zone_eflh
+from rct229.rulesets.ashrae9012019.ruleset_functions.g311_exceptions.g311_sub_functions.get_zone_eflh import (
+    get_zone_eflh,
+)
 from rct229.schema.schema_utils import quantify_rmr
 from rct229.schema.validate import schema_validate_rmr
 
@@ -10,12 +11,12 @@ TEST_RMI = {
             "id": "Operation Schedule 1",
             "hourly_values": [1.0] * 8760,
             "hourly_heating_design_day": [1.0] * 24,
-            "hourly_cooling_design_day": [1.0] * 24
+            "hourly_cooling_design_day": [1.0] * 24,
         },
         {
             "id": "Operation Schedule 2",
             "hourly_values": [0.0] * 8760,
-        }
+        },
     ],
     "buildings": [
         {
@@ -28,16 +29,22 @@ TEST_RMI = {
                             "id": "System 1",
                             "fan_system": {
                                 "id": "Fan System 1",
-                                "operating_schedule": "Operation Schedule 1"
-                            }
+                                "operating_schedule": "Operation Schedule 1",
+                            },
                         },
                         {
                             "id": "System 2",
                             "fan_system": {
                                 "id": "Fan System 2",
-                                "operating_schedule": "Operation Schedule 2"
-                            }
-                        }
+                                "operating_schedule": "Operation Schedule 2",
+                            },
+                        },
+                        {
+                            "id": "System 3",
+                            "fan_system": {
+                                "id": "Fan System 3",
+                            },
+                        },
                     ],
                     "zones": [
                         {
@@ -50,20 +57,58 @@ TEST_RMI = {
                                 {
                                     "id": "terminal_2",
                                     "served_by_heating_ventilating_air_conditioning_system": "System 2",
-                                }
+                                },
                             ],
                             "spaces": [
                                 {
                                     "id": "Space 1",
                                     "occupant_multiplier_schedule": "Operation Schedule 1",
-                                    "number_of_occupants": 5
+                                    "number_of_occupants": 5,
                                 },
                                 {
                                     "id": "Space 2",
                                     "occupant_multiplier_schedule": "Operation Schedule 1",
-                                    "number_of_occupants": 5
-                                }
-                            ]
+                                    "number_of_occupants": 5,
+                                },
+                                {
+                                    "id": "Space 3",
+                                    "number_of_occupants": 5,
+                                },
+                            ],
+                        },
+                        {
+                            # this case, we miss the operation schedule in spaces
+                            # so the occupants are 1.0 constant
+                            "id": "Zone 2",
+                            "terminals": [
+                                {
+                                    "id": "terminal_3",
+                                    "served_by_heating_ventilating_air_conditioning_system": "System 2",
+                                },
+                            ],
+                            "spaces": [
+                                {
+                                    "id": "Space 4",
+                                    "number_of_occupants": 5,
+                                },
+                            ],
+                        },
+                        {
+                            # this case, we miss the operation schedule in HVAC
+                            # so the HVAC is running constant 1.0
+                            "id": "Zone 3",
+                            "terminals": [
+                                {
+                                    "id": "terminal_4",
+                                    "served_by_heating_ventilating_air_conditioning_system": "System 3",
+                                },
+                            ],
+                            "spaces": [
+                                {
+                                    "id": "Space 5",
+                                    "number_of_occupants": 5,
+                                },
+                            ],
                         },
                     ],
                 }
@@ -88,3 +133,10 @@ def test__TEST_RMD_FIXED_TYPE__is_valid():
 def test__get_zone_eflh_thermal_zone_1__success():
     assert get_zone_eflh(TEST_RMD_UNIT, "Zone 1", False) == 8760
 
+
+def test__get_zone_eflh_thermal_zone_2__success():
+    assert get_zone_eflh(TEST_RMD_UNIT, "Zone 2", False) == 0
+
+
+def test__get_zone_eflh_thermal_zone_3__success():
+    assert get_zone_eflh(TEST_RMD_UNIT, "Zone 3", False) == 8760
