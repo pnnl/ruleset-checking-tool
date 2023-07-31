@@ -1,12 +1,9 @@
 from rct229.rulesets.ashrae9012019.data_fns.table_lighting_to_hvac_bat_map_fns import (
     space_lighting_to_hvac_bat,
 )
-from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_system_util import (
-    find_exactly_one_zone,
-)
-from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.pint_utils import ZERO
+from rct229.utils.utility_functions import find_exactly_one_zone
 
 
 def get_zone_hvac_bat_dict(rmi, zone_id):

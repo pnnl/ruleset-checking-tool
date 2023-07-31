@@ -1,5 +1,3 @@
-from pydash import reduce_, curry
-
 from rct229.rulesets.ashrae9012019.data.schema_enums import schema_enums
 from rct229.rulesets.ashrae9012019.ruleset_functions.g311_exceptions.g311_sub_functions.is_space_a_computer_room import (
     is_space_a_computer_room,
