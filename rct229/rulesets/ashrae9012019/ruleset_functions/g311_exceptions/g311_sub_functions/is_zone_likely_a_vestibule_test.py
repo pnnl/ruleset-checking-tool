@@ -55,14 +55,14 @@ TEST_RMI = {
                                             "classification": "WINDOW",
                                             "glazed_area": 10,
                                             "opaque_area": 2,
-                                        }
-                                    ]
+                                        },
+                                    ],
                                 },
                                 {
                                     "id": "surface 1",
                                     "adjacent_to": "INTERIOR",
-                                }
-                            ]
+                                },
+                            ],
                         },
                         {
                             # case has door but the space area is greater than 50 or 2% of the floor area
@@ -85,9 +85,9 @@ TEST_RMI = {
                                             "glazed_area": 10,
                                             "opaque_area": 2,
                                         },
-                                    ]
+                                    ],
                                 },
-                            ]
+                            ],
                         },
                     ],
                 },
