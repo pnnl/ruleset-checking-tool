@@ -1,16 +1,14 @@
-
 # Envelope - Rule 5-53  
-
+**Schema Version** 0.0.23
+**Primary Rule** True
 **Rule ID:** 5-53  
-**Rule Description:** U-factor of the baseline door is based on Tables G3.4-1 through G3.4-8 for the applicable door type (swinging or non-swinging) and envelope conditioning category.  
-**Rule Assertion:** B-RMR subsurfaces with subsurface.classification = door have expected subsurface.U_Factor  
+**Rule Description:** U-factor of the baseline door is based on Tables G3.4-1 through G3.4-8 for the applicable door type (swinging or non-swinging) and envelope conditioning category.
 **Appendix G Section:** Section 5 Envelope  
 **Appendix G Section Reference:** Section G3.1-5(b) Building Envelope Modeling Requirements for the Baseline model  
 
 **Applicability:** All required data elements exist for B_RMR  
-**Applicability Checks:** Yes  
+**Applicability Checks:** Yes
 
-**Manual Check:** Yes  
 **Evaluation Context:** Each Data Element  
 **Data Lookup:** Tables G3.4-1 to G3.4-8  
 **Function Call:**  
@@ -19,40 +17,50 @@
 
 ## Rule Logic:  
 
-- Get building climate zone: `climate_zone = B_RMR.weather.climate_zone`
+- Get building climate zone: ```climate_zone = B_RMR.weather.climate_zone```
 
-- Get surface conditioning category dictionary for B_RMR: `scc_dictionary_b = get_surface_conditioning_category(B_RMR)`
+- Get surface conditioning category dictionary for B_RMR: ```scc_dictionary_b = get_surface_conditioning_category_dict(climate_zone, B_RMR.building)```
 
-- For each zone in B_RMR: `for zone_b in B_RMR...zones:`
+- For each building segment in the Proposed model: ```for building_segment_b in B_RMR.building.building_segments:```
 
-  - For each surface in zone: `for surface_b in zone_b.surfaces:`
+  - For each zone in building_segment: ```for zone_b in building_segment_b.zones:```
 
-    - Get surface conditioning category: `scc_b = scc_dictionary_b[surface_b.id]`
+    - For each surface in zone: ```for surface_b in zone_b.surfaces:```
 
-    - For each subsurface in surface: `for subsurface_b in surface_b.subsurfaces:`
+      - Get surface conditioning category: ```scc_b = scc_dictionary_b[surface_b.id]```
 
-      - Check if subsurface is opaque door: `if ( subsurface_b.subclassification == "DOOR" ) AND ( subsurface_b.glazed_area >= subsurface.opaque_area )`
+      - Skip over unregulated surfaces: ```if (scc_b == "UNREGULATED"): continue```
 
-        - Set rule applicability check to True: `rule_applicability_check = TRUE`
+      - For each subsurface in surface: ```for subsurface_b in surface_b.subsurfaces:```
 
-        - Get subsurface subclassification: `subclassification_b = subsurface_b.subclassification`
+        - Check if subsurface is opaque door: ```if ( subsurface_b.classification == "DOOR" ) AND ( subsurface_b.glazed_area <= subsurface.opaque_area )```
 
-        - If surface is exterior residential, exterior non-residential, or semi-exterior, get baseline construction from Table G3.4-1 to G3.4-8 based on climate zone, surface conditioning category and door type: `if ( ( scc_b == "EXTERIOR RESIDENTIAL" ) OR ( scc_b == "EXTERIOR NON-RESIDENTIAL" ) OR ( scc_b == "SEMI-EXTERIOR" ) ): target_u_factor = data_lookup(table_G3_4, climate_zone, scc_b, "DOOR", subclassification_b)`
+          - Get subsurface subclassification: ```subclassification_b = subsurface_b.subclassification```
 
-        - Else if surface is exterior mixed, get baseline construction for both residential and non-residential type door: `else if ( scc_b == "EXTERIOR MIXED" ): target_u_factor_res = data_lookup(table_G3_4, climate_zone, "EXTERIOR RESIDENTIAL", "DOOR", subclassification_b), target_u_factor_nonres = data_lookup(table_G3_4, climate_zone, "EXTERIOR NON-RESIDENTIAL", "DOOR", subclassification_b)`
+          - If surface is exterior residential, exterior non-residential, or semi-exterior, and the subsurface classification is swinging or nonswinging, get baseline construction U-factor requirement from Table G3.4-1 to G3.4-8 based on climate zone, surface conditioning category, and door type: `if (scc_b in ["EXTERIOR RESIDENTIAL", "EXTERIOR NON-RESIDENTIAL", "SEMI-EXTERIOR"]) and (subclassification_b in ["SWINGING_DOOR", "NONSWINGING_DOOR"]): target_u_factor = data_lookup(table_G3_4, climate_zone, scc_b, "DOOR", subclassification_b)`
 
-          - If residential and non-residential type door construction requirements are the same, save as baseline construction: `if target_u_factor_res == target_u_factor_nonres: target_u_factor = target_u_factor_res`
+          - Else, (surface is exterior mixed, or subclassification is not swinging or nonswinging) create a list for all possible U-factor requirements: ```else: target_u_factor_options = []```
 
-          - Else: `manual_review_flag = TRUE`
+            - If subclassification is swinging or nonswinging (surface must be exterior mixed): append the residential and nonresidential U-factor requirements for the subclassification to the list of U-factor options: ```if (subclassification_b in ["SWINGING_DOOR", "NONSWINGING_DOOR"]): target_u_factor_options.extend([data_lookup(table_G3_4, climate_zone, "EXTERIOR RESIDENTIAL", "DOOR", subclassification_b), data_lookup(table_G3_4, climate_zone, "EXTERIOR NON-RESIDENTIAL", "DOOR", subclassification_b)])```
 
-          **Rule Assertion:**  
+            - Else if surface is exterior residential, exterior non-residential, or semi-exterior: append the swinging and nonswinging U-factor requirements for the surface conditioning category to the list of U-factor options: ```else if (scc_b in ["EXTERIOR RESIDENTIAL", "EXTERIOR NON-RESIDENTIAL", "SEMI-EXTERIOR"]): target_u_factor_options.extend([data_lookup(table_G3_4, climate_zone, scc_b, "DOOR", "SWINGING_DOOR"), data_lookup(table_G3_4, climate_zone, scc_b, "DOOR", "NONSWINGING_DOOR")])```
 
-          - Case 1: For each opaque door, if the door's parent zone has both residential and non-residential spaces and the construction requirements for door are different, request manual review: `if manual_review_flag == TRUE: UNDETERMINED and raise_message "ZONE HAS BOTH RESIDENTIAL AND NON-RESIDENTIAL TYPE SPACES AND THE REQUIREMENT FOR U-FACTOR FOR DOORS ARE DIFFERENT. VERIFY DOOR U-FACTOR IS MODELED CORRECTLY."`
+            - Else, (surface is exterior mixed AND subclassification is not swinging or nonswinging): append the residential swinging, residential nonswinging, nonresidential swinging, and nonresidential nonswinging U-factor requirements to the list of U-factor options: ```else: target_u_factor_options.extend([data_lookup(table_G3_4, climate_zone, "EXTERIOR RESIDENTIAL", "DOOR", "SWINGING_DOOR"), data_lookup(table_G3_4, climate_zone, "EXTERIOR RESIDENTIAL", "DOOR", "NONSWINGING_DOOR"), data_lookup(table_G3_4, climate_zone, "EXTERIOR NON-RESIDENTIAL", "DOOR", "SWINGING_DOOR"), data_lookup(table_G3_4, climate_zone, "EXTERIOR NON-RESIDENTIAL", "DOOR", "NONSWINGING_DOOR")]```
+            
+            - If the options for door construction U-factor requirements are the same, save as the target U-factor: ```if (len(set(target_u_factor_options)) == 1): target_u_factor = target_u_factor_options[0]```
+            
+            - Else, flag for manual review, outcome will be UNDETERMINED or FAIL: ```manual_review_flag = TRUE```
+            
+            **Rule Assertion:**  
+            
+            - Case 1: If the door was flagged for manual review, and the baseline U-factor equals one of the target U-factor options; outcome is UNDETERMINED: ```if (manual_review_flag == TRUE) and (subsurface_b.u_factor in target_u_factor_options): outcome = UNDETERMINED and raise_message "PRESCRIBED U-FACTOR REQUIREMENT COULD NOT BE DETERMINED. VERIFY THE BASELINE DOOR U-FACTOR (${subsurface_b.u_factor}) IS MODELED CORRECTLY."```
+            
+            - Case 2: If the door was flagged for manual review, and the baseline U-factor does not equal any of the target U-factor options; outcome is FAIL: ```if (manual_review_flag == TRUE) and (subsurface_b.u_factor not in target_u_factor_options): outcome = FAIL```
 
-          - Case 2: Else if door U-factor matches Table G3.4: `else if subsurface_b.u_factor == target_u_factor: PASS`
+            - Case 3: Else (door's parent zone consists entirely of residential or non-residential spaces, the subclassification is swinging or nonswinging, or the target U-factor options are all the same) if door U-factor matches Table G3.4, outcome is PASS: ```else if subsurface_b.u_factor == target_u_factor: outcome = PASS```
 
-          - Case 3: Else: `else: FAIL`
-
-**Applicability Check:** For each building, if building has no opaque door, rule is not applicable: `if NOT rule_applicability_check: is_applicable = FALSE`
+            - Case 4: Else, outcome is FAIL: ```else: outcome = FAIL```
+              
+              - If the baseline U-factor is lower than the expected value, raise message "RULE EVALUATION FAILS WITH A CONSERVATIVE OUTCOME": ```if (subsurface_b.u_factor < target_u_factor): raise_message: "RULE EVALUATION FAILS WITH A CONSERVATIVE OUTCOME"```
 
 **[Back](../_toc.md)**
