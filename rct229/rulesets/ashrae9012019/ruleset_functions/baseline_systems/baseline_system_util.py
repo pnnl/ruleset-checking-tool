@@ -1,5 +1,3 @@
-
-
 class HVAC_SYS:
     """Class holding HVAC system type value"""
 

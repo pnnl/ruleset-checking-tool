@@ -6,7 +6,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_system_type_compar
     baseline_system_type_compare,
 )
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_system_util import (
-    HVAC_SYS
+    HVAC_SYS,
 )
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_baseline_system_types import (
     get_baseline_system_types,
