@@ -1,8 +1,4 @@
-from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_system_util import (
-    find_exactly_one_hvac_system,
-    find_exactly_one_terminal_unit,
-    find_exactly_one_zone,
-)
+
 from rct229.rulesets.ashrae9012019.ruleset_functions.g311_exceptions.g311_sub_functions.get_building_lab_zones_list import (
     get_building_lab_zones_list,
 )
@@ -17,9 +13,11 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_list_hvac_systems_assoc
 )
 from rct229.schema.config import ureg
 from rct229.utils.jsonpath_utils import find_all, find_one
-from rct229.utils.pint_utils import ZERO, pint_sum
+from rct229.utils.pint_utils import ZERO
+from rct229.utils.utility_functions import find_exactly_one_terminal_unit, find_exactly_one_hvac_system, \
+    find_exactly_one_zone
 
-BUILDING_TOTAL_LAB_EXHAUST_CFM = 15_000 * ureg("ft^3 / min")
+BUILDING_TOTAL_LAB_EXHAUST_CFM_THRESHOLD = 15_000 * ureg("ft^3 / min")
 
 
 def does_zone_meet_g3_1_1d(rmi: dict, zone_id: str):
@@ -46,7 +44,7 @@ def does_zone_meet_g3_1_1d(rmi: dict, zone_id: str):
         Return sum of the primary airflow from all terminals in the terminal list
         Return ZERO.FLOW if none is found.
         """
-        return pint_sum(
+        return sum(
             [
                 find_exactly_one_terminal_unit(rmi, terminal_id).get(
                     "primary_airflow", ZERO.FLOW
@@ -61,7 +59,7 @@ def does_zone_meet_g3_1_1d(rmi: dict, zone_id: str):
         Return sum of the primary airflow from all terminals exist both in the terminal_list and zone
         Return ZERO.FLOW if none is found.
         """
-        return pint_sum(
+        return sum(
             [
                 find_exactly_one_terminal_unit(rmi, terminal_id).get(
                     "primary_airflow", ZERO.FLOW
@@ -74,7 +72,7 @@ def does_zone_meet_g3_1_1d(rmi: dict, zone_id: str):
 
     def sum_hvac_total_exhaust_air_func(hvac_id: str):
         """Return sum of the design airflow from all exhaust fans in the HVAC."""
-        return pint_sum(
+        return sum(
             find_all(
                 "$.fan_system.exhaust_fans[*].design_airflow",
                 find_exactly_one_hvac_system(rmi, hvac_id),
@@ -91,7 +89,7 @@ def does_zone_meet_g3_1_1d(rmi: dict, zone_id: str):
         get_dict_of_zones_and_terminal_units_served_by_hvac_sys(rmi)
     )
 
-    if building_total_lab_exhaust <= BUILDING_TOTAL_LAB_EXHAUST_CFM:
+    if building_total_lab_exhaust <= BUILDING_TOTAL_LAB_EXHAUST_CFM_THRESHOLD:
         for lab_zone_id in laboratory_zones_list:
             lab_zone = find_exactly_one_zone(rmi, lab_zone_id)
             hvac_sys_list_serving_zone = get_list_hvac_systems_associated_with_zone(
@@ -139,5 +137,5 @@ def does_zone_meet_g3_1_1d(rmi: dict, zone_id: str):
 
     return (
         zone_id in laboratory_zones_list
-        and building_total_lab_exhaust > BUILDING_TOTAL_LAB_EXHAUST_CFM
+        and building_total_lab_exhaust > BUILDING_TOTAL_LAB_EXHAUST_CFM_THRESHOLD
     )
