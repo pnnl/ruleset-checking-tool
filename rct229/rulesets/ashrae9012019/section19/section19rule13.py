@@ -213,11 +213,9 @@ class Section19Rule13(RuleDefinitionListIndexedBase):
                     "air_flow_rate",
                     get_fan_system_object_supply_return_exhaust_relief_total_power_flow(
                         fan_sys_b
-                    )["supply_airflow"],
+                    )["supply_fans_airflow"],
                 ),
-                "supply_airflow_p": CalcQ(
-                    "air_flow_rate", zone_info["supply_airflow_p"]
-                ),
+                "supply_airflow_p": CalcQ("air_flow_rate", zone_info["supply_flow_p"]),
             }
 
         def manual_check_required(self, context, calc_vals=None, data=None):
@@ -231,7 +229,7 @@ class Section19Rule13(RuleDefinitionListIndexedBase):
             ]
 
             return not all_design_setpoints_delta_Ts_are_per_reqs_b and std_equal(
-                zone_info["supply_airflow_p"], supply_fans_airflow_b
+                zone_info["supply_flow_p"], supply_fans_airflow_b
             )
 
         def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
