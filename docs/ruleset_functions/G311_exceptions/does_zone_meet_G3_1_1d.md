@@ -12,7 +12,7 @@ This function gets the system-wide exhaust airflow rate following the same logic
 - **zones_and_systems** - this is a dict of the existing expected system types from the function `get_zone_target_baseline_system`
 
 **Returns:**  
-- **result**: an enum - either YES or NO
+- **result**: boolean true if meet, false otherwise.
  
 **Function Call:**
 - **get_baseline_system_types**
