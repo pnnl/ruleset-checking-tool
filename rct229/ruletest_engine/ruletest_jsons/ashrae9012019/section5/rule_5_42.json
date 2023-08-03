@@ -3,17 +3,17 @@
         "Section": 5,
         "Rule": 42,
         "Test": "a",
-        "test_description": "The baseline roof emittance is correctly set to 0.9",
+        "test_description": "Project has one building segment and includes a space with a roof surface. The baseline roof emittance is correctly set to 0.9",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-42",
             "ruleset_reference": "Table G3.1(5) Baseline Building Performance",
-            "rule_description": "The  baseline roof surfaces shall be modeled using a solar reflectance of 0.30.",
+            "rule_description": "The baseline roof surfaces shall be modeled using a solar reflectance of 0.30.",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.29"
         },
         "rmr_transformations": {
             "baseline": {
@@ -22,7 +22,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMR 1",
                         "buildings": [
@@ -57,12 +57,12 @@
                                                         "adjacent_to": "EXTERIOR",
                                                         "tilt": 50,
                                                         "area": 929.0303999999999,
-                                                        "surface_optical_properties": {
+                                                        "optical_properties": {
                                                             "id": "Surface Optical Properties 1",
                                                             "absorptance_solar_exterior": 0.7
                                                         },
                                                         "construction": {
-                                                            "id": "construction_1",
+                                                            "id": "Construction 1",
                                                             "u_factor": 3.2366105565544463
                                                         }
                                                     }
@@ -95,17 +95,17 @@
         "Section": 5,
         "Rule": 42,
         "Test": "b",
-        "test_description": "The baseline roof emittance is incorrectly set to 0.5 ",
+        "test_description": "Project has one building segment and includes a space with a roof surface. The baseline roof emittance is incorrectly set to 0.5 ",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-42",
             "ruleset_reference": "Table G3.1(5) Baseline Building Performance",
-            "rule_description": "The  baseline roof surfaces shall be modeled using a solar reflectance of 0.30.",
+            "rule_description": "The baseline roof surfaces shall be modeled using a solar reflectance of 0.30.",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.29"
         },
         "rmr_transformations": {
             "baseline": {
@@ -114,7 +114,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMR 1",
                         "buildings": [
@@ -149,12 +149,12 @@
                                                         "adjacent_to": "EXTERIOR",
                                                         "tilt": 50,
                                                         "area": 929.0303999999999,
-                                                        "surface_optical_properties": {
+                                                        "optical_properties": {
                                                             "id": "Surface Optical Properties 1",
                                                             "absorptance_solar_exterior": 0.5
                                                         },
                                                         "construction": {
-                                                            "id": "construction_1",
+                                                            "id": "Construction 1",
                                                             "u_factor": 3.2366105565544463
                                                         }
                                                     }

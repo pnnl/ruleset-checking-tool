@@ -11,7 +11,7 @@ from rct229.schema.validate import schema_validate_rmr
 
 SYS_12_TEST_RMD = {
     "id": "ASHRAE229 1",
-    "ruleset_model_instances": [
+    "ruleset_model_descriptions": [
         {
             "id": "RMD 1",
             "buildings": [
@@ -80,12 +80,12 @@ SYS_12_TEST_RMD = {
                                     "id": "System 12",
                                     "cooling_system": {
                                         "id": "CHW Coil 1",
-                                        "cooling_system_type": "FLUID_LOOP",
+                                        "type": "FLUID_LOOP",
                                         "chilled_water_loop": "Secondary CHW Loop 1",
                                     },
                                     "heating_system": {
                                         "id": "Boiler Coil 1",
-                                        "heating_system_type": "FLUID_LOOP",
+                                        "type": "FLUID_LOOP",
                                         "hot_water_loop": "Boiler Loop 1",
                                     },
                                     "fan_system": {
@@ -99,12 +99,12 @@ SYS_12_TEST_RMD = {
                                     "id": "System 12a",
                                     "cooling_system": {
                                         "id": "CHW Coil 1",
-                                        "cooling_system_type": "FLUID_LOOP",
+                                        "type": "FLUID_LOOP",
                                         "chilled_water_loop": "Chilled Water Loop 1",
                                     },
                                     "heating_system": {
                                         "id": "Boiler Coil 1",
-                                        "heating_system_type": "FLUID_LOOP",
+                                        "type": "FLUID_LOOP",
                                         "hot_water_loop": "Boiler Loop 1",
                                     },
                                     "fan_system": {
@@ -118,12 +118,12 @@ SYS_12_TEST_RMD = {
                                     "id": "System 12b",
                                     "cooling_system": {
                                         "id": "CHW Coil 1",
-                                        "cooling_system_type": "FLUID_LOOP",
+                                        "type": "FLUID_LOOP",
                                         "chilled_water_loop": "Secondary CHW Loop 1",
                                     },
                                     "heating_system": {
                                         "id": "HHW Coil 1",
-                                        "heating_system_type": "FLUID_LOOP",
+                                        "type": "FLUID_LOOP",
                                         "hot_water_loop": "Purchased HW Loop 1",
                                     },
                                     "fan_system": {
@@ -137,12 +137,12 @@ SYS_12_TEST_RMD = {
                                     "id": "System 12c",
                                     "cooling_system": {
                                         "id": "CHW Coil 1",
-                                        "cooling_system_type": "FLUID_LOOP",
+                                        "type": "FLUID_LOOP",
                                         "chilled_water_loop": "Chilled Water Loop 1",
                                     },
                                     "heating_system": {
                                         "id": "HHW Coil 1",
-                                        "heating_system_type": "FLUID_LOOP",
+                                        "type": "FLUID_LOOP",
                                         "hot_water_loop": "Purchased HW Loop 1",
                                     },
                                     "fan_system": {
@@ -164,7 +164,7 @@ SYS_12_TEST_RMD = {
                     "energy_source_type": "NATURAL_GAS",
                 }
             ],
-            "external_fluid_source": [
+            "external_fluid_sources": [
                 {
                     "id": "Purchased CW 1",
                     "loop": "Chilled Water Loop 1",
@@ -220,7 +220,7 @@ SYS_12_TEST_RMD = {
 
 SYS_12_TEST_UNMATCHED_RMD = {
     "id": "ASHRAE229 1",
-    "ruleset_model_instances": [
+    "ruleset_model_descriptions": [
         {
             "id": "RMD 1",
             "buildings": [
@@ -250,12 +250,12 @@ SYS_12_TEST_UNMATCHED_RMD = {
                                     "id": "System Type Unmatched",
                                     "cooling_system": {
                                         "id": "CHW Coil 1",
-                                        "cooling_system_type": "FLUID_LOOP",
+                                        "type": "FLUID_LOOP",
                                         "chilled_water_loop": "Secondary CHW Loop 1",
                                     },
                                     "heating_system": {
                                         "id": "HHW Coil 1",
-                                        "heating_system_type": "FLUID_LOOP",
+                                        "type": "FLUID_LOOP",
                                         "hot_water_loop": "HW Loop 1",
                                     },
                                     "fan_system": {
@@ -277,7 +277,7 @@ SYS_12_TEST_UNMATCHED_RMD = {
                     "energy_source_type": "NATURAL_GAS",
                 }
             ],
-            "external_fluid_source": [
+            "external_fluid_sources": [
                 {
                     "id": "Purchased CW 1",
                     "loop": "Chilled Water Loop 1",
@@ -344,7 +344,7 @@ def test__TEST_RMD_baseline_system_12__is_unmatched_valid():
 def test__is_baseline_system_12__true():
     assert (
         is_baseline_system_12(
-            SYS_12_TEST_RMD["ruleset_model_instances"][0],
+            SYS_12_TEST_RMD["ruleset_model_descriptions"][0],
             "System 12",
             ["CAV Air Terminal 1"],
             ["Thermal Zone 1"],
@@ -357,7 +357,7 @@ def test__is_baseline_system_12__test_json_true():
     assert (
         is_baseline_system_12(
             load_system_test_file("System 12_CAV_SZ_HW.json")[
-                "ruleset_model_instances"
+                "ruleset_model_descriptions"
             ][0],
             "System 12",
             ["CAV Air Terminal 1"],
@@ -370,7 +370,7 @@ def test__is_baseline_system_12__test_json_true():
 def test__is_baseline_system_12A__true():
     assert (
         is_baseline_system_12(
-            SYS_12_TEST_RMD["ruleset_model_instances"][0],
+            SYS_12_TEST_RMD["ruleset_model_descriptions"][0],
             "System 12a",
             ["CAV Air Terminal 2"],
             ["Thermal Zone 2"],
@@ -383,7 +383,7 @@ def test__is_baseline_system_12A__test_json_true():
     assert (
         is_baseline_system_12(
             load_system_test_file("System 12a_CAV_SZ_HW.json")[
-                "ruleset_model_instances"
+                "ruleset_model_descriptions"
             ][0],
             "System 12",
             ["CAV Air Terminal 1"],
@@ -396,7 +396,7 @@ def test__is_baseline_system_12A__test_json_true():
 def test__is_baseline_system_12B__true():
     assert (
         is_baseline_system_12(
-            SYS_12_TEST_RMD["ruleset_model_instances"][0],
+            SYS_12_TEST_RMD["ruleset_model_descriptions"][0],
             "System 12b",
             ["CAV Air Terminal 3"],
             ["Thermal Zone 3"],
@@ -409,7 +409,7 @@ def test__is_baseline_system_12B__test_json_true():
     assert (
         is_baseline_system_12(
             load_system_test_file("System 12b_CAV_SZ_HW.json")[
-                "ruleset_model_instances"
+                "ruleset_model_descriptions"
             ][0],
             "System 12",
             ["CAV Air Terminal 1"],
@@ -422,7 +422,7 @@ def test__is_baseline_system_12B__test_json_true():
 def test__is_baseline_system_unmatched__true():
     assert (
         is_baseline_system_12(
-            SYS_12_TEST_UNMATCHED_RMD["ruleset_model_instances"][0],
+            SYS_12_TEST_UNMATCHED_RMD["ruleset_model_descriptions"][0],
             "System Type Unmatched",
             ["Air Terminal 12"],
             ["Thermal Zone 12"],

@@ -42,9 +42,9 @@ class Section22Rule20(RuleDefinitionListIndexedBase):
             ruleset_section_title="HVAC - Chiller",
             standard_section="Section G3.1.3.11 Heat Rejection (System 7, 8, 11, 12 and 13)",
             is_primary_rule=True,
-            list_path="ruleset_model_instances[0].heat_rejections[*]",
+            list_path="ruleset_model_descriptions[0].heat_rejections[*]",
             required_fields={
-                "$": ["ruleset_model_instances", "weather"],
+                "$": ["ruleset_model_descriptions", "weather"],
             },
             data_items={"climate_zone": ("baseline", "weather/climate_zone")},
         )
@@ -55,7 +55,7 @@ class Section22Rule20(RuleDefinitionListIndexedBase):
             rmd_b,
             "ruleset_model_instance list is empty",
         )
-        rmi_b = rmd_b["ruleset_model_instances"][0]
+        rmi_b = rmd_b["ruleset_model_descriptions"][0]
         baseline_system_types_dict = get_baseline_system_types(rmi_b)
         # create a list containing all HVAC systems that are modeled in the rmi_b
         available_type_list = [

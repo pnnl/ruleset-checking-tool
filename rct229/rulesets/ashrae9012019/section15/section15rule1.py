@@ -13,7 +13,7 @@ class Section15Rule1(RuleDefinitionBase):
             ruleset_section_title="Transformer",
             standard_section="Transformers",
             is_primary_rule=False,
-            rmr_context="ruleset_model_instances/0/transformers",
+            rmr_context="ruleset_model_descriptions/0/transformers",
         )
 
     def is_applicable(self, context, data=None):

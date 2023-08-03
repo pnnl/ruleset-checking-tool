@@ -12,7 +12,7 @@
 - **is_baseline_system_10**: The function returns either Sys-10 or Not_Sys_10 string output which indicates whether the HVAC system is ASHRAE 90.1 2019 Appendix G system 10 (Heating and Ventilation with electric heating).  
 
 **Function Call:**
-1. is_hvac_sys_cooling_type_none()
+1. is_hvac_sys_cooling_type_none_or_non_mechanical()
 2. are_all_terminal_heat_sources_electric()  
 3. are_all_terminal_cool_sources_none_or_null()
 4. do_all_terminals_have_one_fan()    
@@ -34,7 +34,7 @@
 - Set is_baseline_system_10 = Not_Sys_10: `is_baseline_system_10 = "Not_Sys_10"`    
 - Check that there is no preheat system, if there is none then carry on: `if hvac_b.preheat_system == "NONE" or hvac_b.preheat_system.heating_system_type == "NONE" :`    
     - Check that there is no heating system, if there is none then carry on: `if hvac_b.heating_system == "NONE" or hvac_b.heating_system.heating_system_type == "NONE":`     
-        - Check that there is no cooling system if there is none then carry on: `is_hvac_sys_cooling_type_none(B_RMI, hvac_b.id) == TRUE`  
+        - Check that there is no cooling system if there is none then carry on: `is_hvac_sys_cooling_type_none_or_non_mechanical(B_RMI, hvac_b.id) == TRUE`  
             - Check that there is no fan system, if there is none then carry on: `if len(hvac_b.fan_system) == Null:`     
                 - Check if the zone only has one terminal unit: `if does_each_zone_have_only_one_terminal(B_RMI,zone_id_list) == TRUE:`   
                     - Check that the data elements associated with the terminal unit align with system 10: `if are_all_terminal_heat_sources_electric(B_RMI,terminal_unit_id_list) == TRUE AND are_all_terminal_cool_sources_none_or_null(B_RMI,terminal_unit_id_list) == TRUE And do_all_terminals_have_one_fan(B_RMI,terminal_unit_id_list) == TRUE AND are_all_terminal_types_cav_with_none_equal_to_null(B_RMI,terminal_unit_id_list) == TRUE: is_baseline_system_10 = "Sys-10"`      
@@ -44,7 +44,7 @@
             - Check if fansystem is constant volume, if yes then carry on: `if is_hvac_sys_fan_sys_CV(B_RMI, hvac_b.id) == TRUE:`  
                 - Check if the hvac system serves a single zone and that the zone only has one terminal unit: `if does_hvac_system_serve_single_zone(B_RMI, zone_id_list) == TRUE AND does_each_zone_have_only_one_terminal(B_RMI,zone_id_list) == TRUE:`     
                     - Check that the data elements associated with the terminal unit align with system 10: `if are_all_terminal_heat_sources_none_or_null(B_RMI,terminal_unit_id_list) == TRUE AND are_all_terminal_cool_sources_none_or_null(B_RMI,terminal_unit_id_list) == TRUE And are_all_terminal_fans_null(B_RMI,terminal_unit_id_list) == TRUE AND are_all_terminal_types_CAV(B_RMI,terminal_unit_id_list) == TRUE:`        
-                        - if coolingsystem is None and the heating type is a electric then Sys-10: `if is_hvac_sys_cooling_type_none(B_RMI, hvac_b.id) == TRUE AND is_hvac_sys_heating_type_elec_resistance(B_RMI, hvac_b.id) == TRUE: is_baseline_system_10 = "Sys-10"`  
+                        - if coolingsystem is None and the heating type is a electric then Sys-10: `if is_hvac_sys_cooling_type_none_or_non_mechanical(B_RMI, hvac_b.id) == TRUE AND is_hvac_sys_heating_type_elec_resistance(B_RMI, hvac_b.id) == TRUE: is_baseline_system_10 = "Sys-10"`  
 
 
 **Returns** `is_baseline_system_10`  
