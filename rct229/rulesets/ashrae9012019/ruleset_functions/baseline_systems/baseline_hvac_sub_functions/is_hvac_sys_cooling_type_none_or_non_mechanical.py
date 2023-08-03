@@ -1,8 +1,6 @@
 from rct229.rulesets.ashrae9012019.data.schema_enums import schema_enums
-from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_system_util import (
-    find_exactly_one_hvac_system,
-)
 from rct229.utils.jsonpath_utils import find_one
+from rct229.utils.utility_functions import find_exactly_one_hvac_system
 
 COOLING_SYSTEM_TYPE = schema_enums["CoolingSystemOptions"]
 
