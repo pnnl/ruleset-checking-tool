@@ -1,7 +1,7 @@
 
 # get_baseline_system_types
 
-
+**Schema Version:** 0.0.23
 **Description:**  Identify all the baseline system types modeled in a B-RMR.
 
 **Inputs:**
@@ -73,13 +73,13 @@ Declare empty lists of the hvac_b.id associated with each system type in the B_R
 - Declare a list for SYS-13a, PCHW with and Electric Heat: `SYS-13a = []`  
 
 
-- For each HVAC system in the B_RMR: `hvac_b in B_RMR..HeatingVentilationAirConditioningSystem:`   
+- For each HVAC system in the B_RMR: `hvac_b in B_RMR..HeatingVentilatingAirConditioningSystem:`   
     - Get list of terminal units associated with the hvac system from the dictionary input to the function: `terminal_unit_id_list = dict_of_zones_and_terminal_units_served_by_hvac_sys[hvac_b.id]["Terminal_Unit_List"]`  
     - Get list of zone ids associated with the hvac system from the dictionary input to the function: `zone_id_list = dict_of_zones_and_terminal_units_served_by_hvac_sys[hvac_b.id]["Zone_List"]` 
     - Reset HVAC system type found boolean variable to FALSE: `hvac_sys_type_found = FALSE`  
     - Reset terminal_units_serve_one_zone boolean variable to TRUE: `terminal_units_serve_one_zone = TRUE` 
     - Loop through each terminal to ensure each terminal serves one zone: `for terminal in terminal_unit_id_list:` 
-        - Check if the termimal unit serves 1 zone: `if len(list(dict_with_terminal_units_and_zones[terminal]["Zone_List"])) != 1`  
+        - Check if the terminal unit serves 1 zone: `if len(list(dict_with_terminal_units_and_zones[terminal]["Zone_List"])) != 1`  
         - Set boolean variable to false: `terminal_units_serve_one_zone = FALSE`   
     - Check if all the terminal units serve one zone via the boolean variable: `if terminal_units_serve_one_zone == TRUE:`  
         - Call system type 1 function which will return a string of either SYS-1, SYS-1a, SYS-1b, SYS-1c, or Not_Sys_1: `sys_1_type = is_baseline_system_1(B_RMR, hvac_b.id,terminal_unit_id_list,zone_id_list)`  
