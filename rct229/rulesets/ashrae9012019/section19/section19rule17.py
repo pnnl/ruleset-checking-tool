@@ -124,7 +124,7 @@ class Section19Rule17(RuleDefinitionListIndexedBase):
                 total_fan_power += zone_exhaust_fan_power_dict_b[zone_id_b]
 
             fan_power_airflow = (
-                total_fan_power / (supply_airflow_b.to(ureg("cfm")))
+                total_fan_power / supply_airflow_b
                 if supply_airflow_b != ZERO.FLOW
                 else ZERO.POWER_PER_FLOW
             )
