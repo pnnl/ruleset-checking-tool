@@ -28,10 +28,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_s
     find_exactly_one_hvac_system,
 )
 from rct229.utils.assertions import getattr_
-from rct229.utils.jsonpath_utils import (
-    find_all,
-    find_one_with_field_value,
-)
+from rct229.utils.jsonpath_utils import find_all, find_one_with_field_value
 
 HEATING_SOURCE = schema_enums["HeatingSourceOptions"]
 FLUID_LOOP = schema_enums["FluidLoopOptions"]
