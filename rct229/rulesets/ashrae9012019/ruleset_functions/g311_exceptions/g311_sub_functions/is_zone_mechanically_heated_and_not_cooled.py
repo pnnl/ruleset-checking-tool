@@ -9,7 +9,10 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_list_hvac_systems_assoc
     get_list_hvac_systems_associated_with_zone,
 )
 from rct229.utils.jsonpath_utils import find_one, find_all
-from rct229.utils.utility_functions import find_exactly_one_zone, find_exactly_one_hvac_system
+from rct229.utils.utility_functions import (
+    find_exactly_one_zone,
+    find_exactly_one_hvac_system,
+)
 
 HeatingSystemOptions = schema_enums["HeatingSystemOptions"]
 HeatingSourceOptions = schema_enums["HeatingSourceOptions"]
@@ -38,8 +41,8 @@ def is_zone_mechanically_heated_and_not_cooled(rmi, zone_id):
         return heating_type not in [None, HeatingSourceOptions.NONE]
 
     def does_zone_terminals_have_heating_type(thermal_zone_id):
-        zone = find_exactly_one_zone(rmi, thermal_zone_id)
-        terminal_list = find_all("$.terminals[*]", zone)
+        thermal_zone = find_exactly_one_zone(rmi, thermal_zone_id)
+        terminal_list = find_all("$.terminals[*]", thermal_zone)
         return any(
             [
                 find_one("$.heating_source", terminal)

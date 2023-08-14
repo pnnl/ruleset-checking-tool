@@ -1,5 +1,4 @@
-import pydash
-from pydash import flat_map, chain, flow, is_equal
+from pydash import flat_map
 
 from rct229.rulesets.ashrae9012019.data.schema_enums import schema_enums
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_list_hvac_systems_associated_with_zone import (
@@ -8,21 +7,13 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_list_hvac_systems_assoc
 from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_one, find_all
 from rct229.utils.pint_utils import ZERO
-from rct229.utils.utility_functions import find_exactly_one_hvac_system, find_exactly_one_zone
+from rct229.utils.utility_functions import (
+    find_exactly_one_hvac_system,
+    find_exactly_one_zone,
+)
 
 CoolingSystemOptions = schema_enums["CoolingSystemOptions"]
 CoolingSourceOptions = schema_enums["CoolingSourceOptions"]
-
-
-def is_hvac_system_non_cooling(cooling_type: str):
-    return cooling_type not in [None, CoolingSystemOptions.NONE]
-
-
-def is_terminal_non_cooling(terminal):
-    return find_one("$.cooling_source", terminal) not in [
-        None,
-        CoolingSourceOptions.NONE,
-    ]
 
 
 def is_zone_mechanically_cooled(rmi, zone_id):
@@ -42,27 +33,28 @@ def is_zone_mechanically_cooled(rmi, zone_id):
     """
     list_hvac_system_ids = get_list_hvac_systems_associated_with_zone(rmi, zone_id)
 
-    # function to check if hvac cooling system type is not None
-    hvac_cooling_sys_func = flow(
-        lambda hvac_id: find_exactly_one_hvac_system(rmi, hvac_id),
-        lambda hvac: find_one("$.cooling_system.type", hvac),
-        is_hvac_system_non_cooling,
-    )
+    def does_hvac_has_cooling_sys(hvac_system_id):
+        hvac = find_exactly_one_hvac_system(rmi, hvac_system_id)
+        cooling_type = find_one("$.cooling_system.type", hvac)
+        return cooling_type not in [None, CoolingSourceOptions.NONE]
 
-    # function to check all terminals to check at least one terminal has a cooling source
-    hvac_cooling_terminal_func = flow(
-        lambda z_id: find_exactly_one_zone(rmi, z_id),
-        lambda z: find_all("$.terminals[*]", z),
-        lambda terminal_list: flat_map(terminal_list, is_terminal_non_cooling),
-        any,
-    )
+    def does_zone_terminals_have_cooling_type(thermal_zone_id):
+        thermal_zone = find_exactly_one_zone(rmi, thermal_zone_id)
+        terminal_list = find_all("$.terminals[*]", thermal_zone)
+        return any(
+            [
+                find_one("$.cooling_source", terminal)
+                not in [None, CoolingSourceOptions.NONE]
+                for terminal in terminal_list
+            ]
+        )
 
     has_cooling_system = any(
         flat_map(
             list_hvac_system_ids,
-            lambda hvac_system_id: hvac_cooling_sys_func(hvac_system_id),
+            lambda hvac_system_id: does_hvac_has_cooling_sys(hvac_system_id),
         )
-    ) or hvac_cooling_terminal_func(zone_id)
+    ) or does_zone_terminals_have_cooling_type(zone_id)
 
     if not has_cooling_system:
         zone = find_exactly_one_zone(rmi, zone_id)
@@ -78,8 +70,8 @@ def is_zone_mechanically_cooled(rmi, zone_id):
             has_cooling_system = any(
                 flat_map(
                     list_hvac_system_ids,
-                    lambda hvac_system_id: hvac_cooling_sys_func(hvac_system_id),
+                    lambda hvac_system_id: does_hvac_has_cooling_sys(hvac_system_id),
                 )
-            ) or hvac_cooling_terminal_func(transfer_source_zone_id)
+            ) or does_zone_terminals_have_cooling_type(transfer_source_zone_id)
 
     return has_cooling_system
