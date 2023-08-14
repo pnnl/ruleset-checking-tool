@@ -1,6 +1,4 @@
-from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_system_util import (
-    find_exactly_one_zone,
-)
+from rct229.utils.utility_functions import find_exactly_one_zone
 
 
 def does_each_zone_have_only_one_terminal(rmi_b, zone_id_list):
