@@ -18,7 +18,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_zone_conditioning_categ
 )
 from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all
-from rct229.utils.pint_utils import ZERO, pint_sum
+from rct229.utils.pint_utils import ZERO
 
 # NOTE: There are no required fields at this function's level, but the ruleset_functions
 # called do have required fields
@@ -78,9 +78,9 @@ def get_building_segment_skylight_roof_areas_dict(climate_zone, building):
                             "total_envelope_roof_area"
                         ] += getattr_(surface, "surface", "area")
 
-                        building_segment_roof_areas["total_skylight_area"] += pint_sum(
+                        building_segment_roof_areas["total_skylight_area"] += sum(
                             find_all("subsurfaces[*].glazed_area", surface), ZERO.AREA
-                        ) + pint_sum(
+                        ) + sum(
                             find_all("subsurfaces[*].opaque_area", surface), ZERO.AREA
                         )
 

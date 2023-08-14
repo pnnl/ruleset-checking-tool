@@ -20,7 +20,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_zone_conditioning_categ
 from rct229.schema.config import ureg
 from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all, find_exactly_one_with_field_value
-from rct229.utils.pint_utils import ZERO, CalcQ, pint_sum
+from rct229.utils.pint_utils import ZERO, CalcQ
 
 APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_1,
@@ -57,7 +57,10 @@ class Section21Rule5(RuleDefinitionListIndexedBase):
 
     class RulesetModelInstanceRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section21Rule5.RulesetModelInstanceRule, self,).__init__(
+            super(
+                Section21Rule5.RulesetModelInstanceRule,
+                self,
+            ).__init__(
                 rmrs_used=UserBaselineProposedVals(False, True, False),
             )
 
@@ -128,7 +131,7 @@ class Section21Rule5(RuleDefinitionListIndexedBase):
                     ]
                     and zone_id not in loop_zone_list
                 ):
-                    heating_loop_conditioned_zone_area += pint_sum(
+                    heating_loop_conditioned_zone_area += sum(
                         find_all(
                             "$..floor_area",
                             find_exactly_one_with_field_value(

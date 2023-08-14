@@ -30,7 +30,10 @@ class Section21Rule15(RuleDefinitionListIndexedBase):
 
     class RulesetModelInstanceRule(PartialRuleDefinition):
         def __init__(self):
-            super(Section21Rule15.RulesetModelInstanceRule, self,).__init__(
+            super(
+                Section21Rule15.RulesetModelInstanceRule,
+                self,
+            ).__init__(
                 rmrs_used=UserBaselineProposedVals(False, True, False),
             )
 

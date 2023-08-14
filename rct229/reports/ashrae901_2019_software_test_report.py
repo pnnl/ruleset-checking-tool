@@ -27,7 +27,6 @@ class ASHRAE9012019SoftwareTestReport(RCTReport):
         return report_json
 
     def generate_rule_report(self, rule_test_dict, outcome_dict):
-
         # Sum up the outcomes for every rule unit test evaluation in this rule test. The outcome of this is used by
         # the calculate_rule_outcome function to determine the overall actual_rule_unit_test_evaluation_outcome
         for test_evaluation in rule_test_dict["rule_unit_test_evaluation"]:
@@ -37,7 +36,6 @@ class ASHRAE9012019SoftwareTestReport(RCTReport):
         return rule_test_dict
 
     def add_rule_to_ruleset_report(self, ruleset_report, rule_test_dict, rule_outcome):
-
         # Record outcome of aggregated pass/fails as determined by calculate_rule_outcome
         rule_test_dict["actual_rule_unit_test_evaluation_outcome"] = rule_outcome
 

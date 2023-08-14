@@ -76,7 +76,10 @@ class Section19Rule10(RuleDefinitionListIndexedBase):
 
     class RulesetModelInstanceRule(RuleDefinitionListIndexedBase):
         def __init__(self):
-            super(Section19Rule10.RulesetModelInstanceRule, self,).__init__(
+            super(
+                Section19Rule10.RulesetModelInstanceRule,
+                self,
+            ).__init__(
                 rmrs_used=UserBaselineProposedVals(False, True, True),
                 each_rule=Section19Rule10.RulesetModelInstanceRule.HVACRule(),
                 index_rmr="baseline",

@@ -52,7 +52,10 @@ class Section6Rule3(RuleDefinitionListIndexedBase):
 
         class SpaceRule(RuleDefinitionBase):
             def __init__(self):
-                super(Section6Rule3.BuildingSegmentRule.SpaceRule, self,).__init__(
+                super(
+                    Section6Rule3.BuildingSegmentRule.SpaceRule,
+                    self,
+                ).__init__(
                     fail_msg=FAIL_MSG,
                     manual_check_required_msg=MANUAL_CHECK_REQUIRED_MSG,
                     rmrs_used=UserBaselineProposedVals(True, False, True),
