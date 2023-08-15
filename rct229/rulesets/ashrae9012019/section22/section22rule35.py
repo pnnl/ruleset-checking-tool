@@ -28,10 +28,7 @@ class Section22Rule35(RuleDefinitionListIndexedBase):
 
     class RulesetModelInstanceRule(PartialRuleDefinition):
         def __init__(self):
-            super(
-                Section22Rule35.RulesetModelInstanceRule,
-                self,
-            ).__init__(
+            super(Section22Rule35.RulesetModelInstanceRule, self,).__init__(
                 rmrs_used=UserBaselineProposedVals(False, True, False),
             )
 

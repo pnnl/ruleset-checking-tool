@@ -30,10 +30,7 @@ class Section6Rule1(RuleDefinitionListIndexedBase):
 
         class SpaceRule(RuleDefinitionBase):
             def __init__(self):
-                super(
-                    Section6Rule1.BuildingRule.SpaceRule,
-                    self,
-                ).__init__(
+                super(Section6Rule1.BuildingRule.SpaceRule, self,).__init__(
                     required_fields={
                         "$": ["interior_lighting", "floor_area"],
                         "interior_lighting[*]": ["power_per_area"],

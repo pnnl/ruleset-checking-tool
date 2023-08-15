@@ -57,10 +57,7 @@ class Section6Rule4(RuleDefinitionListIndexedBase):
 
         class ZoneRule(RuleDefinitionListIndexedBase):
             def __init__(self):
-                super(
-                    Section6Rule4.BuildingSegmentRule.ZoneRule,
-                    self,
-                ).__init__(
+                super(Section6Rule4.BuildingSegmentRule.ZoneRule, self,).__init__(
                     rmrs_used=UserBaselineProposedVals(False, True, True),
                     each_rule=Section6Rule4.BuildingSegmentRule.ZoneRule.SpaceRule(),
                     index_rmr="baseline",

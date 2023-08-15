@@ -31,10 +31,7 @@ class Section6Rule7(RuleDefinitionListIndexedBase):
 
     class ZoneRule(RuleDefinitionBase):
         def __init__(self):
-            super(
-                Section6Rule7.ZoneRule,
-                self,
-            ).__init__(
+            super(Section6Rule7.ZoneRule, self,).__init__(
                 required_fields={"$": ["spaces", "surfaces"]},
                 rmrs_used=UserBaselineProposedVals(False, False, True),
             )

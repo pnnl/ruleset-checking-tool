@@ -57,10 +57,7 @@ class Section21Rule5(RuleDefinitionListIndexedBase):
 
     class RulesetModelInstanceRule(RuleDefinitionBase):
         def __init__(self):
-            super(
-                Section21Rule5.RulesetModelInstanceRule,
-                self,
-            ).__init__(
+            super(Section21Rule5.RulesetModelInstanceRule, self,).__init__(
                 rmrs_used=UserBaselineProposedVals(False, True, False),
             )
 

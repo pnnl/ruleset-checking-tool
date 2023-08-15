@@ -120,10 +120,7 @@ class Section23Rule16(RuleDefinitionListIndexedBase):
 
     class HVACRule(RuleDefinitionBase):
         def __init__(self):
-            super(
-                Section23Rule16.HVACRule,
-                self,
-            ).__init__(
+            super(Section23Rule16.HVACRule, self,).__init__(
                 rmrs_used=UserBaselineProposedVals(False, True, False),
                 required_fields={
                     "$": ["id", "preheat_system"],
