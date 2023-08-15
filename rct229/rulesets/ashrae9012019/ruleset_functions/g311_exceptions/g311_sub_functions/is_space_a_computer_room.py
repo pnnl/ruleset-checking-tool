@@ -3,8 +3,10 @@ from rct229.schema.config import ureg
 from rct229.utils.assertions import getattr_, assert_
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.pint_utils import ZERO
-from rct229.utils.utility_functions import (
+from rct229.utils.schedule_utils import (
     get_max_schedule_multiplier_hourly_value_or_default,
+)
+from rct229.utils.utility_functions import (
     find_exactly_one_space,
 )
 
