@@ -14,7 +14,7 @@ for the peak W/sf calculation I've assumed:
 - **zones_and_systems** - this is a dict of the existing expected system types from the function `get_zone_target_baseline_system`
 
 **Returns:**  
-- **result**: an enum - either YES or NO
+- **result**: boolean, True or False
  
 **Function Call:**
 - **get_zone_peak_internal_load**
