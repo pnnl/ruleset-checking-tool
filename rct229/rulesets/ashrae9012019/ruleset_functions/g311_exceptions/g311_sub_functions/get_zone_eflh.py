@@ -5,13 +5,15 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_list_hvac_systems_assoc
 )
 from rct229.utils.assertions import assert_
 from rct229.utils.jsonpath_utils import find_one, find_all
-from rct229.utils.utility_functions import (
-    find_exactly_one_hvac_system,
-    find_exactly_one_zone,
+from rct229.utils.schedule_utils import (
+    get_schedule_multiplier_hourly_value_or_default,
     get_max_schedule_multiplier_hourly_value_or_default,
     get_max_schedule_multiplier_heating_design_hourly_value_or_default,
     get_max_schedule_multiplier_cooling_design_hourly_value_or_default,
-    get_schedule_multiplier_hourly_value_or_default,
+)
+from rct229.utils.utility_functions import (
+    find_exactly_one_hvac_system,
+    find_exactly_one_zone,
 )
 
 ZONE_OCCUPANTS_RATIO_THRESHOLD = 0.05
