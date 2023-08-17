@@ -84,12 +84,12 @@
 
 - G3.1.1e "Thermal zones designed with heating-only systems in the proposed design serving storage rooms, stairwells, vestibules, electrical/mechanical rooms, and restrooms not exhausting or transferring air from mechanically cooled thermal zones in the proposed design shall use system type 9 or 10 in the baseline building design."
 - loop through the zones_and_systems to see if any of the zones meets this requirement: `for zone in zones_and_systems:`
-	- use the function does_zone_meet_G3_1_1e to determine whether to change the system type (we are using != NO instead of YES, because the function can return MAYBE.  Here we will assign any "maybe's to the new system type.  The rule itself will deal with the uncertainty of vestibules using the function is_zone_a_vestibule): `if does_zone_meet_G3_1_1e(P-RMI,B-RMI,zone) != NO:`
-		- - change the system origin string: `zones_and_systems[zone]["SYSTEM_ORIGIN"] = "G3_1_1e"`
-		- choose system 9 or 10 based on climate zone: `if is_CZ_0_to_3a():`
-			- set the system to SYS_10: `zones_and_systems[zone]["EXPECTED_SYSTEM_TYPE"] = SYS_10`
-		- else (the climate zone is_CZ_3b_3c_and_4_to_8): `else:`
-			- set the system to SYS_9: `zones_and_systems[zone]["EXPECTED_SYSTEM_TYPE"] = SYS_9`
+	- use the function does_zone_meet_G3_1_1e to determine whether to change the system type (we are using != NO instead of YES, because the function can return True that represents yes or (maybe for vestibule).): `if does_zone_meet_G3_1_1e(P-RMI,B-RMI,zone) != NO:`
+        - change the system origin string: `zones_and_systems[zone]["SYSTEM_ORIGIN"] = "G3_1_1e"`
+        - choose system 9 or 10 based on climate zone: `if is_CZ_0_to_3a():`
+            - set the system to SYS_10: `zones_and_systems[zone]["EXPECTED_SYSTEM_TYPE"] = SYS_10`
+        - else (the climate zone is_CZ_3b_3c_and_4_to_8): `else:`
+            - set the system to SYS_9: `zones_and_systems[zone]["EXPECTED_SYSTEM_TYPE"] = SYS_9`
 
 
 - G3.1.1f "If the baseline HVAC system type is 9 or 10, use additional system types for all HVAC zones that are mechanically cooled in the proposed design."
@@ -97,27 +97,31 @@
 	- check if it is SYS-9 or SYS-10: `if zones_and_systems[zone]["EXPECTED_SYSTEM_TYPE"] in [SYS_9, SYS_10]:`
 		- use the function does_zone_meet_G3_1_1f to see if the zone meets the requirements of G3_1_1f: `if does_zone_meet_G3_1_1f(P-RMI,B-RMI,zone.id) == YES:`
 			- change the system origin string: `zones_and_systems[zone]["SYSTEM_ORIGIN"] = "G3_1_1f"`
-			- now determine the baseline system type using the zone HVAC building area type, the total building area and the total building number of floors.  First by get the bat by using the function get_zone_HVAC_BAT: `bat = get_zone_HVAC_BAT(B_RMI, zone.id)` 			- set the system to the system type selected by the function expected_system_type_from_Table_G3_1_1: `zones_and_systems[zone]["EXPECTED_SYSTEM_TYPE"] = expected_system_type_from_Table_G3_1_1(bat,num_floors,area)`
+			- now determine the baseline system type using the zone HVAC building area type, the total building area and the total building number of floors.  First by get the bat by using the function get_zone_HVAC_BAT: `bat = get_zone_HVAC_BAT(B_RMI, zone.id)` 			
+            - set the system to the system type selected by the function expected_system_type_from_Table_G3_1_1: `zones_and_systems[zone]["EXPECTED_SYSTEM_TYPE"] = expected_system_type_from_Table_G3_1_1(bat,num_floors,area)`
 
 - G3.1.1g is broken down into three parts:
 	- part 1: "If the baseline HVAC system serves HVAC zones that includes computer rooms,  baseline system 11 shall be used where the baseline HVAC system type is 7 or 8 and the total computer room peak cooling load is greater than 600,000 BTU/h (175 kW)."
 	- part 2: "If the baseline HVAC system serves HVAC zones that includes computer rooms,  Baseline System 11 shall be used for such HVAC zones in buildings with a total computer room peak cooling load >greater than 3,000,000 Btu/h."
 	- part 3: "If the baseline HVAC system serves HVAC zones that includes computer rooms,  baseline system 3 or 4 shall be used for all other conditions where the HVAC system serves computer room zones"
-	- the function `does_zone_meet_G3_1_1g` will return enum G1, G2, G3, or FALSE
+	- the function `does_zone_meet_G3_1_1g` will return true or false.
 - loop through the zones and systems: `for zone in zones_and_systems:`
 	- use the function does_zone_meet_G3_1_1g to determine which (if any) of the requirements the zone meets: `does_zone_meet_G =  does_zone_meet_G3_1_1g(B-RMI,zone.id,zones_and_systems[zone]["EXPECTED_SYSTEM_TYPE"])`
-		- if the zone meets G1: `if does_zone_meet_G == G1:`
-			- set the system to SYS_11 and source to "G3_1_1g_part1": `zones_and_systems[zone]["EXPECTED_SYSTEM_TYPE"] = SYS_11`
-			- change the system origin string: `zones_and_systems[zone]["SYSTEM_ORIGIN"] = "G3_1_1g_part1"`
-		- else if the zone meets G2: `elsif does_zone_meet_G == G2:
-			- set the system to SYS_11 and source to "G3_1_1g_part2": `zones_and_systems[zone]["EXPECTED_SYSTEM_TYPE"] = SYS_11`
-			- change the system origin string: `zones_and_systems[zone]["SYSTEM_ORIGIN"] = "G3_1_1g_part2"`
-		- else if the zone meets G3: `elsif does_zone_meet_G == G3:`
-			- - change the system origin string: `zones_and_systems[zone]["SYSTEM_ORIGIN"] = "G3_1_1g_part3"`
-			- the zone meets the G3_1_1g_part3 requirements, choose system 3 or 4 based on climate zone: `if is_CZ_0_to_3a():`
-				- set the system to SYS_4: `zones_and_systems[zone]["EXPECTED_SYSTEM_TYPE"] = SYS_4`
-			- else (the climate zone is_CZ_3b_3c_and_4_to_8): `else:`
-				- set the system to SYS_3: `zones_and_systems[zone]["EXPECTED_SYSTEM_TYPE"] = SYS_3`
+        - if the zone meets g3_1_1g: `if does_zone_meet_G:`
+        - calculate the total_computer_zones_peak_cooling_load: `total_computer_zones_peak_cooling_load = get_computer_zones_peak_cooling_load(rmi, zone)`
+        - if total_computer_zones_peak_cooling_load is greater than 3,000,000 btu/hr: `if total_computer_zones_peak_cooling_load > 3000000`
+            - set the system to SYS_11 and source to "G3_1_1g_part2": `zones_and_systems[zone]["EXPECTED_SYSTEM_TYPE"] = SYS_11`
+            - change the system origin string: `zones_and_systems[zone]["SYSTEM_ORIGIN"] = "G3_1_1g_part2"`
+        - else if zone's original expected system type is SYS-7 or SYS-8: `elsif zones_and_systems[zone]["EXPECTED_SYSTEM_TYPE"] in [HVAC.SYS_7, HVAC.SYS_8]:`
+            - if total_computer_zones_peak_cooling_load is greater than 600,000 but/hr: `if total_computer_zones_peak_cooling_load > 600000`
+              - set the system to SYS_11 and source to "G3_1_1g_part1": `zones_and_systems[zone]["EXPECTED_SYSTEM_TYPE"] = SYS_11`
+              - change the system origin string: `zones_and_systems[zone]["SYSTEM_ORIGIN"] = "G3_1_1g_part1"`
+            - else: `else:`
+              - change the system origin string: `zones_and_systems[zone]["SYSTEM_ORIGIN"] = "G3_1_1g_part3"`
+                - the zone meets the G3_1_1g_part3 requirements, choose system 3 or 4 based on climate zone: `if is_CZ_0_to_3a():`
+                    - set the system to SYS_4: `zones_and_systems[zone]["EXPECTED_SYSTEM_TYPE"] = SYS_4`
+                - else (the climate zone is_CZ_3b_3c_and_4_to_8): `else:`
+                    - set the system to SYS_3: `zones_and_systems[zone]["EXPECTED_SYSTEM_TYPE"] = SYS_3`
 
 
 
