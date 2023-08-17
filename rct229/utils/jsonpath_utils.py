@@ -22,10 +22,10 @@ def find_all_with_field_value(jpath, field, value, obj):
     ]
 
 
-def find_one(jpath, obj):
+def find_one(jpath, obj, default=None):
     matches = find_all(jpath, obj)
 
-    return matches[0] if len(matches) > 0 else None
+    return matches[0] if len(matches) > 0 else default
 
 
 def find_one_with_field_value(jpath, field, value, obj):
