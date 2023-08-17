@@ -95,7 +95,8 @@
                                                         {
                                                             "id": "Return Fan 1"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "minimum_outdoor_airflow": 1887.7897727999994
                                                 }
                                             }
                                         ]
@@ -8997,7 +8998,8 @@
                                                     "fan_control": "VARIABLE_SPEED_DRIVE",
                                                     "supply_fans": [
                                                         {
-                                                            "id": "Supply Fan 1"
+                                                            "id": "Supply Fan 1",
+                                                            "design_airflow": 2359.737215999999
                                                         }
                                                     ],
                                                     "return_fans": [
@@ -17926,7 +17928,8 @@
                                                         {
                                                             "id": "Return Fan 1"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "minimum_outdoor_airflow": 1887.7897727999994
                                                 }
                                             }
                                         ]
@@ -26827,7 +26830,8 @@
                                                     "fan_control": "VARIABLE_SPEED_DRIVE",
                                                     "supply_fans": [
                                                         {
-                                                            "id": "Supply Fan 1"
+                                                            "id": "Supply Fan 1",
+                                                            "design_airflow": 2359.737215999999
                                                         }
                                                     ],
                                                     "return_fans": [
@@ -35754,7 +35758,8 @@
                                                         {
                                                             "id": "Return Fan 1"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "minimum_outdoor_airflow": 1887.7897727999994
                                                 }
                                             }
                                         ]
@@ -44627,7 +44632,8 @@
                                                     "fan_control": "VARIABLE_SPEED_DRIVE",
                                                     "supply_fans": [
                                                         {
-                                                            "id": "Supply Fan 1"
+                                                            "id": "Supply Fan 1",
+                                                            "design_airflow": 2359.737215999999
                                                         }
                                                     ],
                                                     "return_fans": [
@@ -53533,7 +53539,8 @@
                                                         {
                                                             "id": "Return Fan 1"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "minimum_outdoor_airflow": 1887.7897727999994
                                                 }
                                             }
                                         ]
@@ -62408,7 +62415,8 @@
                                                     "fan_control": "VARIABLE_SPEED_DRIVE",
                                                     "supply_fans": [
                                                         {
-                                                            "id": "Supply Fan 1"
+                                                            "id": "Supply Fan 1",
+                                                            "design_airflow": 2359.737215999999
                                                         }
                                                     ],
                                                     "return_fans": [
