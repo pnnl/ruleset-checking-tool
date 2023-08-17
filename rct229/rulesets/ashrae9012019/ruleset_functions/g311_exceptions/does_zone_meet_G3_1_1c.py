@@ -88,18 +88,22 @@ def does_zone_meet_g3_1_1c(rmi, zone_id, is_leap_year, zones_and_systems):
         # drop zone_id in the list
         zones_on_same_floor_ids.remove(zone_id)
         # keep only matched system type
-        zones_same_floor_same_system_type = list(filter(
-            lambda other_zone_id: zones_and_systems[other_zone_id][
-                "expected_system_type"
-            ]
-            == expected_system_type,
-            zones_on_same_floor_ids,
-        ))
-        # In here, the function assumes zone in the zones_and_systems keys are
-        # conditioned or semi-conditioned
+        zones_same_floor_same_system_type = list(
+            filter(
+                lambda other_zone_id: zones_and_systems[other_zone_id][
+                    "expected_system_type"
+                ]
+                == expected_system_type,
+                zones_on_same_floor_ids,
+            )
+        )
+        # In here, the function assumes the zones_and_systems keys are
+        # a list of conditioned or semi-conditioned zones only
         zone_load_and_eflh_list = [
-            (get_zone_peak_internal_load_floor_area_dict(rmi, other_match_zone_id),
-             get_zone_weekly_eflh(other_match_zone_id))
+            (
+                get_zone_peak_internal_load_floor_area_dict(rmi, other_match_zone_id),
+                get_zone_weekly_eflh(other_match_zone_id),
+            )
             for other_match_zone_id in zones_same_floor_same_system_type
             if other_match_zone_id in zones_and_systems.keys()
         ]
@@ -107,7 +111,10 @@ def does_zone_meet_g3_1_1c(rmi, zone_id, is_leap_year, zones_and_systems):
         system_total_area = sum(map_(zone_load_and_eflh_list, "0.area"), ZERO.AREA)
         system_total_load = sum(map_(zone_load_and_eflh_list, "0.peak"), ZERO.POWER)
         avg_eflh = (
-            np.dot(map_(zone_load_and_eflh_list, lambda zl: zl[1]), map_(zone_load_and_eflh_list, lambda zl: zl[0]["area"].magnitude))
+            np.dot(
+                map_(zone_load_and_eflh_list, lambda zl: zl[1]),
+                map_(zone_load_and_eflh_list, lambda zl: zl[0]["area"].magnitude),
+            )
             / system_total_area.magnitude
         )
 

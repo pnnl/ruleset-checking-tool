@@ -1,6 +1,9 @@
-from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_system_util import HVAC_SYS
-from rct229.rulesets.ashrae9012019.ruleset_functions.g311_exceptions.does_zone_meet_G3_1_1c import \
-    does_zone_meet_g3_1_1c
+from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_system_util import (
+    HVAC_SYS,
+)
+from rct229.rulesets.ashrae9012019.ruleset_functions.g311_exceptions.does_zone_meet_G3_1_1c import (
+    does_zone_meet_g3_1_1c,
+)
 from rct229.schema.schema_utils import quantify_rmr
 from rct229.schema.validate import schema_validate_rmr
 
@@ -54,9 +57,9 @@ TEST_RPD_FULL = {
                                             "type": "VARIABLE_AIR_VOLUME",
                                             "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                             "heating_source": "HOT_WATER",
-                                            "heating_from_loop": "Boiler Loop 1"
+                                            "heating_from_loop": "Boiler Loop 1",
                                         }
-                                    ]
+                                    ],
                                 },
                                 # Case it is high internal load
                                 {
@@ -95,9 +98,9 @@ TEST_RPD_FULL = {
                                             "type": "VARIABLE_AIR_VOLUME",
                                             "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                             "heating_source": "HOT_WATER",
-                                            "heating_from_loop": "Boiler Loop 1"
+                                            "heating_from_loop": "Boiler Loop 1",
                                         }
-                                    ]
+                                    ],
                                 },
                                 # Case EFLH is higher
                                 {
@@ -136,9 +139,9 @@ TEST_RPD_FULL = {
                                             "type": "VARIABLE_AIR_VOLUME",
                                             "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                             "heating_source": "HOT_WATER",
-                                            "heating_from_loop": "Boiler Loop 1"
+                                            "heating_from_loop": "Boiler Loop 1",
                                         }
-                                    ]
+                                    ],
                                 },
                                 # Dummy thermal zone for thermal zone 3 test
                                 {
@@ -177,9 +180,9 @@ TEST_RPD_FULL = {
                                             "type": "VARIABLE_AIR_VOLUME",
                                             "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                             "heating_source": "HOT_WATER",
-                                            "heating_from_loop": "Boiler Loop 1"
+                                            "heating_from_loop": "Boiler Loop 1",
                                         }
-                                    ]
+                                    ],
                                 },
                                 # Dummy zone for thermal zone 1 test
                                 {
@@ -218,9 +221,9 @@ TEST_RPD_FULL = {
                                             "type": "VARIABLE_AIR_VOLUME",
                                             "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                             "heating_source": "HOT_WATER",
-                                            "heating_from_loop": "Boiler Loop 1"
+                                            "heating_from_loop": "Boiler Loop 1",
                                         }
-                                    ]
+                                    ],
                                 },
                             ],
                             "heating_ventilating_air_conditioning_systems": [
@@ -229,79 +232,58 @@ TEST_RPD_FULL = {
                                     "cooling_system": {
                                         "id": "CHW Coil 1",
                                         "type": "FLUID_LOOP",
-                                        "chilled_water_loop": "Secondary CHW Loop 1"
+                                        "chilled_water_loop": "Secondary CHW Loop 1",
                                     },
                                     "preheat_system": {
                                         "id": "Preheat Coil 1",
                                         "type": "FLUID_LOOP",
-                                        "hot_water_loop": "Boiler Loop 1"
+                                        "hot_water_loop": "Boiler Loop 1",
                                     },
                                     "fan_system": {
                                         "id": "VAV Fan System 1",
                                         "fan_control": "VARIABLE_SPEED_DRIVE",
                                         "operating_schedule": "Operation Schedule 1",
-                                        "supply_fans": [
-                                            {
-                                                "id": "Supply Fan 1"
-                                            }
-                                        ],
-                                        "return_fans": [
-                                            {
-                                                "id": "Return Fan 1"
-                                            }
-                                        ]
-                                    }
+                                        "supply_fans": [{"id": "Supply Fan 1"}],
+                                        "return_fans": [{"id": "Return Fan 1"}],
+                                    },
                                 }
-                            ]
+                            ],
                         }
-                    ]
+                    ],
                 }
             ],
             "boilers": [
                 {
                     "id": "Boiler 1",
                     "loop": "Boiler Loop 1",
-                    "energy_source_type": "NATURAL_GAS"
+                    "energy_source_type": "NATURAL_GAS",
                 }
             ],
-            "chillers": [
-                {
-                    "id": "Chiller 1",
-                    "cooling_loop": "Chiller Loop 1"
-                }
-            ],
+            "chillers": [{"id": "Chiller 1", "cooling_loop": "Chiller Loop 1"}],
             "pumps": [
                 {
                     "id": "Boiler Pump 1",
                     "loop_or_piping": "Boiler Loop 1",
-                    "speed_control": "FIXED_SPEED"
+                    "speed_control": "FIXED_SPEED",
                 },
                 {
                     "id": "Chiller Pump 1",
                     "loop_or_piping": "Chiller Loop 1",
-                    "speed_control": "FIXED_SPEED"
+                    "speed_control": "FIXED_SPEED",
                 },
                 {
                     "id": "Secondary CHW Pump",
                     "loop_or_piping": "Secondary CHW Loop 1",
-                    "speed_control": "VARIABLE_SPEED"
-                }
+                    "speed_control": "VARIABLE_SPEED",
+                },
             ],
             "fluid_loops": [
-                {
-                    "id": "Boiler Loop 1",
-                    "type": "HEATING"
-                },
+                {"id": "Boiler Loop 1", "type": "HEATING"},
                 {
                     "id": "Chiller Loop 1",
                     "type": "COOLING",
-                    "child_loops": [
-                        {
-                            "id": "Secondary CHW Loop 1",
-                            "type": "COOLING"
-                        }
-                    ]
-                }
+                    "child_loops": [{"id": "Secondary CHW Loop 1", "type": "COOLING"}],
+                },
             ],
             "schedules": [
                 {
@@ -348,7 +330,7 @@ TEST_RPD_FULL = {
                 },
             ],
         }
-    ]
+    ],
 }
 
 
@@ -363,63 +345,54 @@ def test__TEST_RMD__is_valid():
 
 
 def test__does_zone_meet_g_3_1_1c_thermal_zone_1__false():
-    assert does_zone_meet_g3_1_1c(TEST_RMD_UNIT, "Thermal Zone 1", False, {
-        "Thermal Zone 1": {
-            "expected_system_type": HVAC_SYS.SYS_7
-        },
-        "Thermal Zone 2": {
-            "expected_system_type": HVAC_SYS.SYS_7
-        },
-        "Thermal Zone 3": {
-            "expected_system_type": HVAC_SYS.SYS_7
-        },
-        "Thermal Zone 4": {
-            "expected_system_type": HVAC_SYS.SYS_7
-        },
-        "Thermal Zone 5": {
-            "expected_system_type": HVAC_SYS.SYS_7
-        }
-    }) == False
+    assert (
+        does_zone_meet_g3_1_1c(
+            TEST_RMD_UNIT,
+            "Thermal Zone 1",
+            False,
+            {
+                "Thermal Zone 1": {"expected_system_type": HVAC_SYS.SYS_7},
+                "Thermal Zone 2": {"expected_system_type": HVAC_SYS.SYS_7},
+                "Thermal Zone 3": {"expected_system_type": HVAC_SYS.SYS_7},
+                "Thermal Zone 4": {"expected_system_type": HVAC_SYS.SYS_7},
+                "Thermal Zone 5": {"expected_system_type": HVAC_SYS.SYS_7},
+            },
+        )
+        == False
+    )
 
 
 def test__does_zone_meet_g_3_1_1c_thermal_zone_2__true():
-    assert does_zone_meet_g3_1_1c(TEST_RMD_UNIT, "Thermal Zone 2", False, {
-        "Thermal Zone 1": {
-            "expected_system_type": HVAC_SYS.SYS_7
-        },
-        "Thermal Zone 2": {
-            "expected_system_type": HVAC_SYS.SYS_7
-        },
-        "Thermal Zone 3": {
-            "expected_system_type": HVAC_SYS.SYS_7
-        },
-        "Thermal Zone 4": {
-            "expected_system_type": HVAC_SYS.SYS_7
-        },
-        "Thermal Zone 5": {
-            "expected_system_type": HVAC_SYS.SYS_7
-        }
-    }) == True
+    assert (
+        does_zone_meet_g3_1_1c(
+            TEST_RMD_UNIT,
+            "Thermal Zone 2",
+            False,
+            {
+                "Thermal Zone 1": {"expected_system_type": HVAC_SYS.SYS_7},
+                "Thermal Zone 2": {"expected_system_type": HVAC_SYS.SYS_7},
+                "Thermal Zone 3": {"expected_system_type": HVAC_SYS.SYS_7},
+                "Thermal Zone 4": {"expected_system_type": HVAC_SYS.SYS_7},
+                "Thermal Zone 5": {"expected_system_type": HVAC_SYS.SYS_7},
+            },
+        )
+        == True
+    )
 
 
 def test__does_zone_meet_g_3_1_1c_thermal_zone_3__true():
-    assert does_zone_meet_g3_1_1c(TEST_RMD_UNIT, "Thermal Zone 3", False, {
-        "Thermal Zone 1": {
-            "expected_system_type": HVAC_SYS.SYS_7
-        },
-        "Thermal Zone 2": {
-            "expected_system_type": HVAC_SYS.SYS_7
-        },
-        "Thermal Zone 3": {
-            "expected_system_type": HVAC_SYS.SYS_7
-        },
-        "Thermal Zone 4": {
-            "expected_system_type": HVAC_SYS.SYS_7
-        },
-        "Thermal Zone 5": {
-            "expected_system_type": HVAC_SYS.SYS_7
-        }
-    }) == True
-
-
-
+    assert (
+        does_zone_meet_g3_1_1c(
+            TEST_RMD_UNIT,
+            "Thermal Zone 3",
+            False,
+            {
+                "Thermal Zone 1": {"expected_system_type": HVAC_SYS.SYS_7},
+                "Thermal Zone 2": {"expected_system_type": HVAC_SYS.SYS_7},
+                "Thermal Zone 3": {"expected_system_type": HVAC_SYS.SYS_7},
+                "Thermal Zone 4": {"expected_system_type": HVAC_SYS.SYS_7},
+                "Thermal Zone 5": {"expected_system_type": HVAC_SYS.SYS_7},
+            },
+        )
+        == True
+    )
