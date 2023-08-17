@@ -99,6 +99,8 @@ def get_zone_eflh(rmi: dict, zone_id: str, is_leap_year: bool):
     # sum of the maximum number of occupants
     total_zone_occupants = sum(num_of_occupant_per_space_list)
 
+    assert_(total_zone_occupants > 0, f"The calculated total zone occupants is 0.0 in thermal zone {zone_id}, Check the model inputs")
+
     # list of list of annual hourly_values per space.
     # this shall guarantee the num_hours length per hourly_values list.
     # [[0,0,0.2,0.2...], [0,0,0.2,0.2...]...]
@@ -117,7 +119,7 @@ def get_zone_eflh(rmi: dict, zone_id: str, is_leap_year: bool):
                 lambda schedule: len(schedule) == num_hours,
             )
         ),
-        f"Not all occupant schedules have ${num_hours} hours",
+        f"Not all occupant schedules have {num_hours} hours",
     )
 
     flh = 0
