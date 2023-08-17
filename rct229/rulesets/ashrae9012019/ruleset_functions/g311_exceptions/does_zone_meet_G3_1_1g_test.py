@@ -1,5 +1,6 @@
-from rct229.rulesets.ashrae9012019.ruleset_functions.g311_exceptions.does_zone_meet_G3_1_1g import \
-    does_zone_meet_g3_1_1g
+from rct229.rulesets.ashrae9012019.ruleset_functions.g311_exceptions.does_zone_meet_G3_1_1g import (
+    does_zone_meet_g3_1_1g,
+)
 from rct229.schema.schema_utils import quantify_rmr
 from rct229.schema.validate import schema_validate_rmr
 
@@ -100,4 +101,3 @@ def test__does_zone_meet_g3_1_1g__thermal_zone_1_true():
 
 def test__does_zone_meet_g3_1_1g__thermal_zone_2_false():
     assert does_zone_meet_g3_1_1g(TEST_RMD_UNIT, "Thermal Zone 2") == False
-

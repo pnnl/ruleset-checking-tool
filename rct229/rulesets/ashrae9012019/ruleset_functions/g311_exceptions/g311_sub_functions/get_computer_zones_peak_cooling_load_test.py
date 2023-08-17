@@ -1,5 +1,6 @@
-from rct229.rulesets.ashrae9012019.ruleset_functions.g311_exceptions.g311_sub_functions.get_computer_zones_peak_cooling_load import \
-    get_computer_zones_peak_cooling_load
+from rct229.rulesets.ashrae9012019.ruleset_functions.g311_exceptions.g311_sub_functions.get_computer_zones_peak_cooling_load import (
+    get_computer_zones_peak_cooling_load,
+)
 from rct229.schema.config import ureg
 from rct229.schema.schema_utils import quantify_rmr
 from rct229.schema.validate import schema_validate_rmr
@@ -70,5 +71,6 @@ def test__TEST_RMD__is_valid():
 
 
 def test__get_computer_zones_peak_cooling_load__success():
-    assert get_computer_zones_peak_cooling_load(TEST_RMD_UNIT) == 1500 * ureg("watt").to("Btu/hr")
-    
+    assert get_computer_zones_peak_cooling_load(TEST_RMD_UNIT) == 1500 * ureg(
+        "watt"
+    ).to("Btu/hr")
