@@ -1,4 +1,7 @@
 from rct229.rulesets.ashrae9012019.data.schema_enums import schema_enums
+from rct229.rulesets.ashrae9012019.ruleset_functions.g311_exceptions.g311_sub_functions.is_zone_likely_a_vestibule import (
+    is_zone_likely_a_vestibule,
+)
 from rct229.rulesets.ashrae9012019.ruleset_functions.g311_exceptions.g311_sub_functions.is_zone_mechanically_heated_and_not_cooled import (
     is_zone_mechanically_heated_and_not_cooled,
 )
@@ -47,12 +50,12 @@ def does_zone_meet_g3_1_1e(rmi_b, rmi_p, zone_id):
     zone_meet_g_3_1_1e = all(
         [
             space_b.get("lighting_space_type") in ELIGIBLE_SPACE_TYPES
-            for space_b in find_all("$.spaces", zone_b)
+            for space_b in find_all("$.spaces[*]", zone_b)
         ]
     )
 
     if not zone_meet_g_3_1_1e:
-        zone_meet_g_3_1_1e = is_zone_likely_vestibule(rmi_b, zone_id)
+        zone_meet_g_3_1_1e = is_zone_likely_a_vestibule(rmi_b, zone_id)
 
     if zone_meet_g_3_1_1e:
         zone_meet_g_3_1_1e = is_zone_mechanically_heated_and_not_cooled(rmi_p, zone_id)
