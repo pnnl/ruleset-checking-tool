@@ -1,16 +1,16 @@
 import inspect
 
 import rct229.rule_engine.rule_base as base_classes
-import rct229.rules as rules
+import rct229.rulesets as rulesets
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 from rct229.schema.schema_utils import quantify_rmr
 from rct229.schema.validate import validate_rmr
 from rct229.utils.pint_utils import UNIT_SYSTEM, calcq_to_str
 
 
-def get_available_rules():
+def get_available_rules(ruleset_doc):
     modules = [
-        f for f in inspect.getmembers(rules, inspect.ismodule) if f in rules.__all__
+        f for f in inspect.getmembers(rulesets, inspect.ismodule) if f in rules.__all__
     ]
 
     available_rules = []
@@ -22,20 +22,11 @@ def get_available_rules():
     return available_rules
 
 
-# def get_base_class(rule_def_class):
-#     rule_def_base = rule_def_class.__bases__[0]
-#     base_class_name = [f[0] for f in inspect.getmembers(base_classes, inspect.isclass) if f[1] == rule_def_base][0]
-#
-#     return base_class_name
-#
-# def check_rule_definition_format():
-#     pass
-
 # Functions for evaluating rules
-def evaluate_all_rules(user_rmr, baseline_rmr, proposed_rmr):
+def evaluate_all_rules(user_rmr, baseline_rmr, proposed_rmr, ruleset_doc):
 
     # Get reference to rule functions in rules model
-    AvailableRuleDefinitions = rules.__getrules__()
+    AvailableRuleDefinitions = rulesets.__getrules__(ruleset_doc)
 
     rules_list = [RuleDef[1]() for RuleDef in AvailableRuleDefinitions]
     rmrs = UserBaselineProposedVals(user_rmr, baseline_rmr, proposed_rmr)
@@ -44,7 +35,7 @@ def evaluate_all_rules(user_rmr, baseline_rmr, proposed_rmr):
     return report
 
 
-def evaluate_rule(rule, rmrs, unit_system=UNIT_SYSTEM.IP):
+def evaluate_rule(rule, rmrs):
     """Evaluates a single rule against an RMR trio
 
     Parameters
