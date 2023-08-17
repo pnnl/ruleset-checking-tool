@@ -26,7 +26,7 @@ TEST_RPD_FULL = {
                                     "spaces": [
                                         {
                                             "id": "space 1",
-                                            "floor_area": 200,
+                                            "floor_area": 100,
                                             "number_of_occupants": 5,
                                             "interior_lighting": [
                                                 {
@@ -173,6 +173,47 @@ TEST_RPD_FULL = {
                                     "terminals": [
                                         {
                                             "id": "VAV Air Terminal 4",
+                                            "is_supply_ducted": True,
+                                            "type": "VARIABLE_AIR_VOLUME",
+                                            "served_by_heating_ventilating_air_conditioning_system": "System 7",
+                                            "heating_source": "HOT_WATER",
+                                            "heating_from_loop": "Boiler Loop 1"
+                                        }
+                                    ]
+                                },
+                                # Dummy zone for thermal zone 1 test
+                                {
+                                    "id": "Thermal Zone 5",
+                                    "floor_name": "floor_1",
+                                    "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                    "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                    "spaces": [
+                                        {
+                                            "id": "space 5",
+                                            "floor_area": 200,
+                                            "number_of_occupants": 5,
+                                            "interior_lighting": [
+                                                {
+                                                    "id": "interior_lighting_5",
+                                                    "lighting_multiplier_schedule": "lighting_schedule_1",
+                                                    "power_per_area": 1.0,
+                                                }
+                                            ],
+                                            "miscellaneous_equipment": [
+                                                {
+                                                    "id": "miscellaneous_equipment_5",
+                                                    "multiplier_schedule": "miscellaneous_equipment_schedule_1",
+                                                    "power": 5000,
+                                                }
+                                            ],
+                                            "occupant_multiplier_schedule": "occupant_schedule_1",
+                                            "occupant_sensible_heat_gain": 125,
+                                            "occupant_latent_heat_gain": 125,
+                                        }
+                                    ],
+                                    "terminals": [
+                                        {
+                                            "id": "VAV Air Terminal 5",
                                             "is_supply_ducted": True,
                                             "type": "VARIABLE_AIR_VOLUME",
                                             "served_by_heating_ventilating_air_conditioning_system": "System 7",
@@ -334,6 +375,9 @@ def test__does_zone_meet_g_3_1_1c_thermal_zone_1__false():
         },
         "Thermal Zone 4": {
             "expected_system_type": HVAC_SYS.SYS_7
+        },
+        "Thermal Zone 5": {
+            "expected_system_type": HVAC_SYS.SYS_7
         }
     }) == False
 
@@ -351,6 +395,9 @@ def test__does_zone_meet_g_3_1_1c_thermal_zone_2__true():
         },
         "Thermal Zone 4": {
             "expected_system_type": HVAC_SYS.SYS_7
+        },
+        "Thermal Zone 5": {
+            "expected_system_type": HVAC_SYS.SYS_7
         }
     }) == True
 
@@ -367,6 +414,9 @@ def test__does_zone_meet_g_3_1_1c_thermal_zone_3__true():
             "expected_system_type": HVAC_SYS.SYS_7
         },
         "Thermal Zone 4": {
+            "expected_system_type": HVAC_SYS.SYS_7
+        },
+        "Thermal Zone 5": {
             "expected_system_type": HVAC_SYS.SYS_7
         }
     }) == True

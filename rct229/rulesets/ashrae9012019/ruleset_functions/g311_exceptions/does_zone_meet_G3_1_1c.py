@@ -97,24 +97,20 @@ def does_zone_meet_g3_1_1c(rmi, zone_id, is_leap_year, zones_and_systems):
         ))
         # In here, the function assumes zone in the zones_and_systems keys are
         # conditioned or semi-conditioned
-        zones_internal_load_list = [
-            get_zone_peak_internal_load_floor_area_dict(rmi, other_match_zone_id)
+        zone_load_and_eflh_list = [
+            (get_zone_peak_internal_load_floor_area_dict(rmi, other_match_zone_id),
+             get_zone_weekly_eflh(other_match_zone_id))
             for other_match_zone_id in zones_same_floor_same_system_type
             if other_match_zone_id in zones_and_systems.keys()
         ]
 
-        zones_eflh_per_week_list = [
-            get_zone_weekly_eflh(other_match_zone_id)
-            for other_match_zone_id in zones_same_floor_same_system_type
-            if other_match_zone_id in zones_and_systems.keys()
-        ]
-
-        system_total_area = sum(map_(zones_internal_load_list, "area"), ZERO.AREA)
-        system_total_load = sum(map_(zones_internal_load_list, "peak"), ZERO.POWER)
+        system_total_area = sum(map_(zone_load_and_eflh_list, "0.area"), ZERO.AREA)
+        system_total_load = sum(map_(zone_load_and_eflh_list, "0.peak"), ZERO.POWER)
         avg_eflh = (
-            np.dot(zones_eflh_per_week_list, map_(zones_internal_load_list, lambda zl: zl["area"].magnitude))
+            np.dot(map_(zone_load_and_eflh_list, lambda zl: zl[1]), map_(zone_load_and_eflh_list, lambda zl: zl[0]["area"].magnitude))
             / system_total_area.magnitude
         )
+
         avg_internal_load = system_total_load / system_total_area
 
         zone_internal_loads = get_zone_peak_internal_load_floor_area_dict(rmi, zone_id)
