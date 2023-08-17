@@ -20,7 +20,7 @@ def get_zone_peak_internal_load_floor_area_dict(rmi, zone_id):
     rmi: dict
     A dictionary representing a RuleModelInstance object as defined by the ASHRAE229 schema
     zone_id: string
-    zone id
+        zone id
 
     Returns
     -------
