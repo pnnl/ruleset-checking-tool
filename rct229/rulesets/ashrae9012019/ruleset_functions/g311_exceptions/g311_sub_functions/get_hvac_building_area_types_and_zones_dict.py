@@ -187,4 +187,10 @@ def get_hvac_building_area_types_and_zones_dict(climate_zone, rmi):
                 predominate_hvac_bat
             ] = assign_bat_val_flow(predominate_hvac_bat)
 
+    assert_(
+        building_area_types_with_total_area_and_zones_dict,
+        "No building area is found in the model. Please make "
+        "sure there are building_segments data group in the "
+        "model",
+    )
     return building_area_types_with_total_area_and_zones_dict
