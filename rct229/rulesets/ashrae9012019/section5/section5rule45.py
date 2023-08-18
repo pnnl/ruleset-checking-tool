@@ -1,9 +1,8 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
+from rct229.rule_engine.rulesets import LeapYear
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 from rct229.rulesets.ashrae9012019.ruleset_functions.compare_schedules import (
-    LEAP_YEAR_HOURS,
-    REGULAR_YEAR_HOURS,
     compare_schedules,
 )
 from rct229.utils.assertions import getattr_
@@ -23,7 +22,7 @@ class Section5Rule45(RuleDefinitionListIndexedBase):
             ruleset_section_title="Envelope",
             standard_section="Section G3.1-5(b) Building Envelope Modeling Requirements for the Proposed design and Baseline",
             is_primary_rule=True,
-            list_path="ruleset_model_instances[0]",
+            list_path="ruleset_model_descriptions[0]",
             required_fields={"$": ["calendar"], "$.calendar": ["is_leap_year"]},
             data_items={"is_leap_year": ("baseline", "calendar/is_leap_year")},
         )
@@ -66,7 +65,9 @@ class Section5Rule45(RuleDefinitionListIndexedBase):
                 schedules_p = data["schedules_p"]
 
                 mask_schedule = [1] * (
-                    LEAP_YEAR_HOURS if data["is_leap_year"] else REGULAR_YEAR_HOURS
+                    LeapYear.LEAP_YEAR_HOURS
+                    if data["is_leap_year"]
+                    else LeapYear.REGULAR_YEAR_HOURS
                 )
 
                 infiltration_b = zone_b["infiltration"]

@@ -40,8 +40,8 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_h
 )
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_system_util import (
     HVAC_SYS,
-    has_preheat_system,
 )
+from rct229.utils.utility_functions import has_preheat_system
 
 HEATING_SYSTEM = schema_enums["HeatingSystemOptions"]
 
@@ -70,7 +70,7 @@ def is_baseline_system_11_1(rmi_b, hvac_b_id, terminal_unit_id_list, zone_id_lis
     Electric Resistance Heating), system 11.1a (system 11.1 with purchased CHW), system 11b (system 11.1 with
     purchased heating), or system 11c (system 11.1 with purchased CHW and purchased heating).
     """
-    is_baseline_system_11_1_str = HVAC_SYS.UNMATCHED
+    is_baseline_system_11_1 = HVAC_SYS.UNMATCHED
 
     # check if the hvac system has the required sub systems for system type 11.1
     # if preheat system DOESN'T exist, has_required_sys=True, else, False
@@ -93,15 +93,15 @@ def is_baseline_system_11_1(rmi_b, hvac_b_id, terminal_unit_id_list, zone_id_lis
     if are_sys_data_matched:
         if is_hvac_sys_heating_type_elec_resistance(rmi_b, hvac_b_id):
             if is_hvac_sys_fluid_loop_attached_to_chiller(rmi_b, hvac_b_id):
-                is_baseline_system_11_1_str = HVAC_SYS.SYS_11_1
+                is_baseline_system_11_1 = HVAC_SYS.SYS_11_1
             elif is_hvac_sys_fluid_loop_purchased_chw(rmi_b, hvac_b_id):
-                is_baseline_system_11_1_str = HVAC_SYS.SYS_11_1A
+                is_baseline_system_11_1 = HVAC_SYS.SYS_11_1A
         elif is_hvac_sys_heating_type_fluid_loop(
             rmi_b, hvac_b_id
         ) and is_hvac_sys_fluid_loop_purchased_heating(rmi_b, hvac_b_id):
             if is_hvac_sys_fluid_loop_attached_to_chiller(rmi_b, hvac_b_id):
-                is_baseline_system_11_1_str = HVAC_SYS.SYS_11_1B
+                is_baseline_system_11_1 = HVAC_SYS.SYS_11_1B
             elif is_hvac_sys_fluid_loop_purchased_chw(rmi_b, hvac_b_id):
-                is_baseline_system_11_1_str = HVAC_SYS.SYS_11_1C
+                is_baseline_system_11_1 = HVAC_SYS.SYS_11_1C
 
-    return is_baseline_system_11_1_str
+    return is_baseline_system_11_1

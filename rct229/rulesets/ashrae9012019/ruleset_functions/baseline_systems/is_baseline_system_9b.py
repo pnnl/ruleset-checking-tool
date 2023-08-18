@@ -20,14 +20,13 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_h
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.does_each_zone_have_only_one_terminal import (
     does_each_zone_have_only_one_terminal,
 )
-from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.is_hvac_sys_cooling_type_none import (
-    is_hvac_sys_cooling_type_none,
+from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.is_hvac_sys_cooling_type_none_or_non_mechanical import (
+    is_hvac_sys_cooling_type_none_or_non_mechanical,
 )
-from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_system_util import (
-    HVAC_SYS,
-    has_fan_system,
-    has_heating_system,
+from rct229.utils.utility_functions import (
     has_preheat_system,
+    has_heating_system,
+    has_fan_system,
 )
 
 HEATING_SYSTEM = schema_enums["HeatingSystemOptions"]
@@ -64,7 +63,7 @@ def is_baseline_system_9b(rmi_b, hvac_b_id, terminal_unit_id_list, zone_id_list)
         # short-circuit the logic if no required data is found.
         has_required_sys
         # sub functions handles missing required sys, and return False.
-        and is_hvac_sys_cooling_type_none(rmi_b, hvac_b_id)
+        and is_hvac_sys_cooling_type_none_or_non_mechanical(rmi_b, hvac_b_id)
         and does_each_zone_have_only_one_terminal(rmi_b, zone_id_list)
         and are_all_terminal_heat_sources_hot_water(rmi_b, terminal_unit_id_list)
         and do_all_terminals_have_one_fan(rmi_b, terminal_unit_id_list)

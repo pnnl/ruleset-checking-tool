@@ -35,7 +35,7 @@ class Section5Rule40(RuleDefinitionListIndexedBase):
             ruleset_section_title="Envelope",
             standard_section="Section G3.1-5(f) Building Envelope Modeling Requirements for the Baseline building",
             is_primary_rule=True,
-            list_path="ruleset_model_instances[0].buildings[*]",
+            list_path="ruleset_model_descriptions[0].buildings[*]",
             data_items={"climate_zone": ("baseline", "weather/climate_zone")},
         )
 
@@ -45,7 +45,7 @@ class Section5Rule40(RuleDefinitionListIndexedBase):
                 rmrs_used=UserBaselineProposedVals(False, True, False),
                 each_rule=Section5Rule40.BuildingRule.RoofRule(),
                 index_rmr="baseline",
-                list_path="$..surfaces[*]",
+                list_path="$.building_segments[*].zones[*].surfaces[*]",
             )
 
         def create_data(self, context, data=None):
@@ -68,21 +68,21 @@ class Section5Rule40(RuleDefinitionListIndexedBase):
                 super(Section5Rule40.BuildingRule.RoofRule, self).__init__(
                     rmrs_used=UserBaselineProposedVals(False, True, False),
                     required_fields={
-                        "$": ["surface_optical_properties"],
-                        "surface_optical_properties": ["absorptance_thermal_exterior"],
+                        "$": ["optical_properties"],
+                        "optical_properties": ["absorptance_thermal_exterior"],
                     },
                 )
 
             def get_calc_vals(self, context, data=None):
                 roof_b = context.baseline
                 return {
-                    "obsorptance_thermal_exterior": roof_b[
-                        "surface_optical_properties"
-                    ]["absorptance_thermal_exterior"]
+                    "absorptance_thermal_exterior": roof_b["optical_properties"][
+                        "absorptance_thermal_exterior"
+                    ]
                 }
 
             def rule_check(self, context, calc_vals=None, data=None):
                 return std_equal(
                     TARGET_ABSORPTANCE_THERMAL_EXTERIOR,
-                    calc_vals["obsorptance_thermal_exterior"],
+                    calc_vals["absorptance_thermal_exterior"],
                 )

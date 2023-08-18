@@ -1,9 +1,7 @@
 from rct229.rulesets.ashrae9012019.data.schema_enums import schema_enums
-from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_system_util import (
-    find_exactly_one_fluid_loop,
-)
 from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all, find_one
+from rct229.utils.utility_functions import find_exactly_one_fluid_loop
 
 EXTERNAL_FLUID_SOURCE = schema_enums["ExternalFluidSourceOptions"]
 
@@ -30,7 +28,7 @@ def check_purchased_chw_hhw_status_dict(rmi_b):
         "purchased_heating": False,
     }
 
-    external_fluid_sources = find_all("$.external_fluid_source[*]", rmi_b)
+    external_fluid_sources = find_all("$.external_fluid_sources[*]", rmi_b)
     if not external_fluid_sources:
         return purchased_chw_hhw_status_dict
 
@@ -43,7 +41,7 @@ def check_purchased_chw_hhw_status_dict(rmi_b):
     )
     for external_fluid_source in external_fluid_sources:
         if (
-            getattr_(external_fluid_source, "external_fluid_source", "type")
+            getattr_(external_fluid_source, "external_fluid_sources", "type")
             == EXTERNAL_FLUID_SOURCE.CHILLED_WATER
         ):
             cooling_loop = find_exactly_one_fluid_loop(

@@ -250,6 +250,16 @@ TEST_RMR = {
                                         }
                                     ],
                                 },
+                                # Omits `u_factor`, `f_factor`, `c_factor` to test if `except Exception as e:` works as expected (for branch coverage)
+                                {
+                                    "id": "surface_1_4_3",
+                                    "adjacent_to": "INTERIOR",
+                                    "adjacent_zone": "zone_1_1",  # directly conditioned
+                                    "area": 10,  # m2
+                                    "construction": {
+                                        "id": "const_1_4_3",
+                                    },
+                                },
                             ],
                             "terminals": [
                                 {
@@ -595,15 +605,14 @@ TEST_RMR = {
                     ],
                     "zones": [
                         # hvac_2_1 => directly_conditioned_zone
-                        # zone only has residential spaces
-                        #   => zone_conditioning_category is "CONDITIONED RESIDENTIAL"
+                        # zone only has non-residential spaces
+                        #   => zone_conditioning_category is "CONDITIONED NON-RESIDENTIAL"
                         {
                             "id": "zone_2_1",
                             "spaces": [
                                 {
                                     "id": "space_2_1_1",
                                     "floor_area": 100,  # m2
-                                    "lighting_space_type": "HEALTHCARE_FACILITY_PATIENT_ROOM",
                                     "occupant_multiplier_schedule": "om_sched_1",
                                 }
                             ],
@@ -657,15 +666,14 @@ TEST_RMR = {
                     ],
                     "zones": [
                         # hvac_3_1 => directly_conditioned_zone
-                        # zone only has residential spaces
-                        #   => zone_conditioning_category is "CONDITIONED RESIDENTIAL"
+                        # zone only has non-residential spaces
+                        #   => zone_conditioning_category is "CONDITIONED NON-RESIDENTIAL"
                         {
                             "id": "zone_3_1",
                             "spaces": [
                                 {
                                     "id": "space_3_1_1",
                                     "floor_area": 100,  # m2
-                                    "lighting_space_type": "GUEST_ROOM",
                                     "occupant_multiplier_schedule": "om_sched_1",
                                 }
                             ],
@@ -703,8 +711,10 @@ TEST_RMR = {
     ],
 }
 
-TEST_RMR_12 = {"id": "229_01", "ruleset_model_instances": [TEST_RMR]}
-TEST_BUILDING = quantify_rmr(TEST_RMR_12)["ruleset_model_instances"][0]["buildings"][0]
+TEST_RMR_12 = {"id": "229_01", "ruleset_model_descriptions": [TEST_RMR]}
+TEST_BUILDING = quantify_rmr(TEST_RMR_12)["ruleset_model_descriptions"][0]["buildings"][
+    0
+]
 
 
 def test__TEST_RMD__is_valid():
@@ -725,6 +735,6 @@ def test__get_zone_conditioning_category_dict():
         "zone_1_7": "UNENCLOSED",
         "zone_1_8": "UNENCLOSED",
         "zone_1_9": "UNCONDITIONED",
-        "zone_2_1": "CONDITIONED RESIDENTIAL",
-        "zone_3_1": "CONDITIONED RESIDENTIAL",
+        "zone_2_1": "CONDITIONED NON-RESIDENTIAL",
+        "zone_3_1": "CONDITIONED NON-RESIDENTIAL",
     }

@@ -65,7 +65,7 @@ def run_test(ruleset, section=None):
 # Evaluate RMR Triplet
 short_help_text = """
     Test RMD triplet. arguments are user_rmd, baseline_rmd, proposed_rmd,
-    --ruleset or -s: ruleset name. Default is ashrae9012019, available options include: ashrae9012019
+    --ruleset or -rs: ruleset name. Default is ashrae9012019, available options include: ashrae9012019
     --reports or -r: reports. Default is RAW_OUTPUT, available options include: RAW_OUTPUT, RAW_SUMMARY, ASHRAE9012019_DETAIL, ASHRAE9012019_SUMMARY, multiple allowed.
     """
 help_text = short_help_text

@@ -11,9 +11,12 @@ def calc_vals_converter(calc_vals):
     -------
 
     """
-    calc_vals_dict = dict()
+    calc_vals_dict = []
     for key in calc_vals.keys():
-        calc_vals_dict[key] = str(calc_vals[key])
+        calc_val = dict()
+        calc_val["variable"] = key
+        calc_val["value"] = str(calc_vals[key])
+        calc_vals_dict.append(calc_val)
     return calc_vals_dict
 
 
