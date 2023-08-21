@@ -39,9 +39,9 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_s
     HVAC_SYS,
 )
 from rct229.utils.utility_functions import (
-    has_preheat_system,
-    has_heating_system,
     has_fan_system,
+    has_heating_system,
+    has_preheat_system,
 )
 
 HEATING_SYSTEM = schema_enums["HeatingSystemOptions"]

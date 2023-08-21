@@ -81,7 +81,6 @@ def get_nested_dict(dic, keys):
 
 
 def get_nested_dic_from_key_list(dic, keys):
-
     nested_dict = get_nested_dict(dic, keys)
 
     # Parse final key to see if it's a list or dictionary/key value
@@ -207,7 +206,6 @@ def inject_json_path_from_enumeration(key_list, json_path_ref_string):
 
 
 def get_json_path_key_list_from_enumeration(json_path_enumeration):
-
     # JSON path enumerations. Used to simplify JSON path references in test spreadsheets
     file_dir = os.path.dirname(__file__)
     json_path_enums_file_path = os.path.join(
