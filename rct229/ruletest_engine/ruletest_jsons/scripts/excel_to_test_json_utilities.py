@@ -980,13 +980,13 @@ def add_plant_loop_equipment(template_rmd, system_rmd):
         "heat_rejections",
     ]
 
-    sys_ruleset_model_instance = system_rmd["ruleset_model_instances"][0]
+    sys_ruleset_model_instance = system_rmd["ruleset_model_descriptions"][0]
 
     rmr_triplet_dict_list = get_rmr_triplet_dicts_from_ruletest_json_dict(template_rmd)
 
     # Iterate through each RMR triplet dictionary
     for rmr_instance_dict in rmr_triplet_dict_list:
-        template_ruleset_model_instance = rmr_instance_dict["ruleset_model_instances"][
+        template_ruleset_model_instance = rmr_instance_dict["ruleset_model_descriptions"][
             0
         ]
 
@@ -1045,7 +1045,7 @@ def determine_system_classification(system_rmd):
 
     """
 
-    zones = system_rmd["ruleset_model_instances"][0]["buildings"][0][
+    zones = system_rmd["ruleset_model_descriptions"][0]["buildings"][0][
         "building_segments"
     ][0]["zones"]
 
