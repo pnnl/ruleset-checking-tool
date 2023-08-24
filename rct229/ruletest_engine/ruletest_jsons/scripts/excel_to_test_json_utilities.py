@@ -986,9 +986,9 @@ def add_plant_loop_equipment(template_rmd, system_rmd):
 
     # Iterate through each RMR triplet dictionary
     for rmr_instance_dict in rmr_triplet_dict_list:
-        template_ruleset_model_instance = rmr_instance_dict["ruleset_model_descriptions"][
-            0
-        ]
+        template_ruleset_model_instance = rmr_instance_dict[
+            "ruleset_model_descriptions"
+        ][0]
 
         # Iterate through piece of plant loop equipment and check if any exist. Add any that are missing.
         for equipment in equipment_str_list:
