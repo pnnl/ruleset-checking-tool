@@ -605,16 +605,17 @@ def set_systems_to_zones(json_dict, system_to_zone_dict, rule_set):
         add_plant_loop_equipment(json_dict, system_rmd)
 
 
-def get_rmr_triplet_dicts_from_ruletest_json_dict(ruletest_json_dict):
-    """Reads in a ruletest JSON dictionary and returns list of RMRs for any triplet flagged in the ruletest JSON
-    structure
+def get_rmr_triplet_from_ruletest_json_dict(ruletest_json_test_dict):
+    """Reads in a ruletest JSON dictionary and returns list of RMRs for any triplet flagged in the ruletest JSON 
 
             Parameters
             ----------
 
-            ruletest_json_dict : dict
+            ruletest_json_test_dict : dict
 
-                Dictionary corresponding to the JSON structure dictated by a ruletest spreadsheet
+                Dictionary corresponding to the JSON structure dictated by a ruletest spreadsheet test instance. This
+                is currently the top level instance and has keys such as Section, Rule, Test, standard (a dictionary)
+                and rmr transformations (the most relevant element for this function)
 
             Returns
             -------
@@ -629,30 +630,28 @@ def get_rmr_triplet_dicts_from_ruletest_json_dict(ruletest_json_dict):
     # List of RMR instances that live in the ruletest JSON dictionary
     rmr_triplet_dict_list = []
 
-    # Get test ID to index the dictionary
-    test_id = list(ruletest_json_dict)[0]
-
     # Check ruletest_json_dict for instances of triplets. Append any that are found to a list and return it
     for triplet in triplet_strs:
-        if triplet in ruletest_json_dict[test_id]["rmr_transformations"]:
+        if triplet in ruletest_json_test_dict["rmr_transformations"]:
             rmr_triplet_dict_list.append(
-                ruletest_json_dict[test_id]["rmr_transformations"][triplet]
+                ruletest_json_test_dict["rmr_transformations"][triplet]
             )
 
     return rmr_triplet_dict_list
 
 
 def add_baseline_terminals(
-    template_rmd, system_rmd, system_classification, system_name, zone_list
+    json_dict, system_rmd, system_classification, system_name, zone_list
 ):
     """Takes a template RMD and injects terminals found in an HVAC system example RMD for a list of zones
 
     Parameters
     ----------
 
-    template_rmd : dict
+    json_dict : dict
 
-        The dictionary RMD with the thermal zones that require terminal assignment
+        The ruletest json dictionary with the last test ID containing an RMD with the thermal zones that require
+        terminal assignment
 
     system_rmd : dict
 
@@ -680,8 +679,11 @@ def add_baseline_terminals(
     )  # append a [0] to final terminals key to reference first terminal
     terminal_copy = deepcopy(get_nested_dic_from_key_list(system_rmd, terminal_keys))
 
-    # Get zones for each RMR that exist in the template (e.g., user, baseline, proposed)
-    rmr_triplet_dict_list = get_rmr_triplet_dicts_from_ruletest_json_dict(template_rmd)
+    # Get latest test ID to which we're adding terminals
+    test_id = list(json_dict)[-1]
+
+    # Get this test_id's zones for each RMR that exist in the template (e.g., user, baseline, proposed)
+    rmr_triplet_dict_list = get_rmr_triplet_from_ruletest_json_dict(json_dict[test_id])
 
     for rmr_instance_dict in rmr_triplet_dict_list:
         zone_keys = get_json_path_key_list_from_enumeration(
@@ -742,17 +744,21 @@ def clean_system_name_for_multizone_airloop(rmr_dict, system_name):
     hvac_keys = get_json_path_key_list_from_enumeration(
         json_path_enumeration="heating_ventilating_air_conditioning_systems"
     )
-    hvac_systems = get_nested_dic_from_key_list(rmr_dict, hvac_keys)
 
-    for hvac_system in hvac_systems:
-        if system_name == hvac_system["id"]:
-            # Check if last character is a numeric. If so, return that system name iterated by 1
-            if system_name[-1].isdigit():
-                final_index = int(system_name[-1])
-                return system_name[:-1] + str(final_index + 1)
+    # If rmr_dict has HVAC systems added, check if this system name is already taken. If so, update it.
+    if element_exists_at_key_address_in_dictionary(rmr_dict, hvac_keys):
 
-            else:
-                return system_name + " 1"
+        hvac_systems = get_nested_dic_from_key_list(rmr_dict, hvac_keys)
+
+        for hvac_system in hvac_systems:
+            if system_name == hvac_system["id"]:
+                # Check if last character is a numeric. If so, return that system name iterated by 1
+                if system_name[-1].isdigit():
+                    final_index = int(system_name[-1])
+                    return system_name[:-1] + str(final_index + 1)
+
+                else:
+                    return system_name + " 1"
 
     # No change needed
     return system_name
@@ -806,16 +812,16 @@ def iterate_ids_in_dict(iterable_object):
 
 
 def add_hvac_systems(
-    template_rmd, system_rmd, system_classification, system_name, zone_list
+    json_dict, system_rmd, system_classification, system_name, zone_list
 ):
     """Adds HVAC system from system_rmd to template RMD for zones in zone list
 
     Parameters
     ----------
 
-    template_rmd : dict
+    json_dict : dict
 
-        The dictionary RMD with the thermal zones that require HVAC assignment
+        The ruletest json dictionary with the last test ID containing an RMD requiring HVAC assignment
 
     system_rmd : dict
 
@@ -844,8 +850,11 @@ def add_hvac_systems(
     )  # append a [0] to final terminals key to reference first terminal
     hvac_copy = deepcopy(get_nested_dic_from_key_list(system_rmd, hvac_keys))
 
-    # Get zones for each RMR that exist in the template (e.g., user, baseline, proposed)
-    rmr_triplet_dict_list = get_rmr_triplet_dicts_from_ruletest_json_dict(template_rmd)
+    # Get latest test ID to which we're adding an HVAC system
+    test_id = list(json_dict)[-1]
+
+    # Get this test_id's zones for each RMR that exist in the template (e.g., user, baseline, proposed)
+    rmr_triplet_dict_list = get_rmr_triplet_from_ruletest_json_dict(json_dict[test_id])
 
     for rmr_instance_dict in rmr_triplet_dict_list:
         # Get building segments in the RMR instance
@@ -955,15 +964,15 @@ def add_hvac_systems(
 
 
 # Adds plant equipment at ruleset model instance level
-def add_plant_loop_equipment(template_rmd, system_rmd):
+def add_plant_loop_equipment(json_dict, system_rmd):
     """Adds HVAC system plant equipment from system_rmd to template RMD
 
     Parameters
     ----------
 
-    template_rmd : dict
+    json_dict : dict
 
-        The dictionary RMD which require plant loop equipment injection
+        The ruletest dictionary with the test RMD which require plant loop equipment injection
 
     system_rmd : dict
 
@@ -982,7 +991,11 @@ def add_plant_loop_equipment(template_rmd, system_rmd):
 
     sys_ruleset_model_instance = system_rmd["ruleset_model_descriptions"][0]
 
-    rmr_triplet_dict_list = get_rmr_triplet_dicts_from_ruletest_json_dict(template_rmd)
+    # Get latest test ID to which we're adding plant loops
+    test_id = list(json_dict)[-1]
+
+    # Get this test_id's zones for each RMR that exist in the template (e.g., user, baseline, proposed)
+    rmr_triplet_dict_list = get_rmr_triplet_from_ruletest_json_dict(json_dict[test_id])
 
     # Iterate through each RMR triplet dictionary
     for rmr_instance_dict in rmr_triplet_dict_list:
