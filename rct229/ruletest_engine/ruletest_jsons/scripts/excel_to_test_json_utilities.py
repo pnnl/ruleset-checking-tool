@@ -606,21 +606,21 @@ def set_systems_to_zones(json_dict, system_to_zone_dict, rule_set):
 
 
 def get_rmr_triplet_from_ruletest_json_dict(ruletest_json_test_dict):
-    """Reads in a ruletest JSON dictionary and returns list of RMRs for any triplet flagged in the ruletest JSON 
+    """Reads in a ruletest JSON dictionary and returns list of RMRs for any triplet flagged in the ruletest JSON
 
-            Parameters
-            ----------
+    Parameters
+    ----------
 
-            ruletest_json_test_dict : dict
+    ruletest_json_test_dict : dict
 
-                Dictionary corresponding to the JSON structure dictated by a ruletest spreadsheet test instance. This
-                is currently the top level instance and has keys such as Section, Rule, Test, standard (a dictionary)
-                and rmr transformations (the most relevant element for this function)
+        Dictionary corresponding to the JSON structure dictated by a ruletest spreadsheet test instance. This
+        is currently the top level instance and has keys such as Section, Rule, Test, standard (a dictionary)
+        and rmr transformations (the most relevant element for this function)
 
-            Returns
-            -------
-            rmr_triplet_dict_list: list
-                Returns a list of dictionaries, each representing an instance of an RMD
+    Returns
+    -------
+    rmr_triplet_dict_list: list
+        Returns a list of dictionaries, each representing an instance of an RMD
 
     """
 
