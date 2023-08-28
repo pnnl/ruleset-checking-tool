@@ -24,7 +24,6 @@ def get_available_rules(ruleset_doc):
 
 # Functions for evaluating rules
 def evaluate_all_rules(user_rmr, baseline_rmr, proposed_rmr, ruleset_doc):
-
     # Get reference to rule functions in rules model
     AvailableRuleDefinitions = rulesets.__getrules__(ruleset_doc)
 

@@ -1,12 +1,12 @@
 from rct229.rulesets.ashrae9012019.data.schema_enums import schema_enums
 from rct229.schema.config import ureg
-from rct229.utils.assertions import getattr_, assert_
+from rct229.utils.assertions import assert_, getattr_
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.pint_utils import ZERO
-from rct229.utils.utility_functions import (
+from rct229.utils.schedule_utils import (
     get_max_schedule_multiplier_hourly_value_or_default,
-    find_exactly_one_space,
 )
+from rct229.utils.utility_functions import find_exactly_one_space
 
 COMPUTER_ROOM_MISC_POWER_DENSITY_THRESHOLD = 20 * ureg("watt/ft2")
 
@@ -30,10 +30,8 @@ def is_space_a_computer_room(rmi, space_id):
                 misc_equip.get("power", ZERO.POWER)
                 * max(
                     1.0,
-                    max(
-                        get_max_schedule_multiplier_hourly_value_or_default(
-                            rmi, misc_equip.get("multiplier_schedule"), [1.0]
-                        )
+                    get_max_schedule_multiplier_hourly_value_or_default(
+                        rmi, misc_equip.get("multiplier_schedule"), 1.0
                     ),
                 )
                 for misc_equip in find_all("$.miscellaneous_equipment[*]", space)

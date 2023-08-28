@@ -1,6 +1,6 @@
 import logging
 
-from pydash import flow, curry, filter_, map_, flatten_deep
+from pydash import curry, filter_, flatten_deep, flow, map_
 
 from rct229.rulesets.ashrae9012019.data.schema_enums import schema_enums
 from rct229.rulesets.ashrae9012019.data_fns.table_lighting_to_hvac_bat_map_fns import (
@@ -8,13 +8,12 @@ from rct229.rulesets.ashrae9012019.data_fns.table_lighting_to_hvac_bat_map_fns i
     space_lighting_to_hvac_bat,
 )
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_zone_conditioning_category_dict import (
-    get_zone_conditioning_category_rmi_dict,
     ZoneConditioningCategory,
+    get_zone_conditioning_category_rmi_dict,
 )
 from rct229.utils.assertions import assert_
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.pint_utils import ZERO
-
 
 OTHER_UNDETERMINED = "OTHER_UNDETERMINED"
 HVAC_BUILDING_AREA_TYPE_OPTIONS = schema_enums[
@@ -187,4 +186,10 @@ def get_hvac_building_area_types_and_zones_dict(climate_zone, rmi):
                 predominate_hvac_bat
             ] = assign_bat_val_flow(predominate_hvac_bat)
 
+    assert_(
+        building_area_types_with_total_area_and_zones_dict,
+        "No building area is found in the model. Please make "
+        "sure there are building_segments data group in the "
+        "model",
+    )
     return building_area_types_with_total_area_and_zones_dict

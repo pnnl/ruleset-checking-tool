@@ -13,7 +13,7 @@ from rct229.utils.assertions import (
     getattr_,
 )
 from rct229.utils.jsonpath_utils import find_all
-from rct229.utils.pint_utils import ZERO, pint_sum
+from rct229.utils.pint_utils import ZERO
 
 CAPACITY_THRESHOLD = 3.4 * ureg("Btu/(hr * ft2)")
 CRAWLSPACE_HEIGHT_THRESHOLD = 7 * ureg("ft")
@@ -163,7 +163,7 @@ def get_zone_conditioning_category_dict(climate_zone, building):
     zone_capacity_dict = {}
     for zone in find_all("$..zones[*]", building):
         zone_id = zone["id"]
-        zone_area = pint_sum(find_all("$..floor_area", zone), ZERO.AREA)
+        zone_area = sum(find_all("$..floor_area", zone), ZERO.AREA)
         assert_(zone_area > ZERO.AREA, f"zone:{zone_id} has no floor area")
 
         zone_capacity_dict[zone_id] = zone_capacity = {
@@ -227,7 +227,7 @@ def get_zone_conditioning_category_dict(climate_zone, building):
                 for surface in zone["surfaces"]:
                     subsurfaces = find_all("subsurfaces[*]", surface)
                     # Calculate the total area of all subsurfaces
-                    subsurfaces_area = pint_sum(
+                    subsurfaces_area = sum(
                         [
                             subsurface.get("glazed_area", ZERO.AREA)
                             + subsurface.get("opaque_area", ZERO.AREA)
@@ -236,7 +236,7 @@ def get_zone_conditioning_category_dict(climate_zone, building):
                         ZERO.AREA,  # value used if there are no subsurfaces
                     )
                     # Calculate the total UA for all subsurfaces
-                    subsurfaces_ua = pint_sum(
+                    subsurfaces_ua = sum(
                         [
                             subsurface["u_factor"]
                             * (
@@ -377,9 +377,7 @@ def get_zone_conditioning_category_dict(climate_zone, building):
                     zone_volume > ZERO.VOLUME,
                     f"zone:{zone_id} has no volume",
                 )
-                zone_floor_area = pint_sum(
-                    find_all("spaces[*].floor_area", zone), ZERO.AREA
-                )
+                zone_floor_area = sum(find_all("spaces[*].floor_area", zone), ZERO.AREA)
                 assert_(
                     zone_floor_area > ZERO.AREA,
                     f"zone:{zone_id} has no floor area",

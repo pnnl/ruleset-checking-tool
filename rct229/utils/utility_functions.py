@@ -1,6 +1,5 @@
 from rct229.rulesets.ashrae9012019.data.schema_enums import schema_enums
-from rct229.utils.jsonpath_utils import find_one, find_exactly_one_with_field_value
-
+from rct229.utils.jsonpath_utils import find_exactly_one_with_field_value, find_one
 
 HEATING_SYSTEM = schema_enums["HeatingSystemOptions"]
 COOLING_SYSTEM = schema_enums["CoolingSystemOptions"]
@@ -239,10 +238,3 @@ def has_fan_system(rmi, hvac_id):
     """
 
     return find_exactly_one_hvac_system(rmi, hvac_id).get("fan_system") is not None
-
-
-def get_max_schedule_multiplier_hourly_value_or_default(rmi, schedule_id, default=None):
-    hourly_values = find_one(
-        f'$.schedules[*][?(@.id="{schedule_id}")].hourly_values', rmi
-    )
-    return hourly_values if hourly_values else default

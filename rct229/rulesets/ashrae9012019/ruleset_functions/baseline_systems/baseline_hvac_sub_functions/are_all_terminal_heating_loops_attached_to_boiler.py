@@ -1,10 +1,9 @@
 from rct229.rulesets.ashrae9012019.data.schema_enums import schema_enums
-
 from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all, find_one
 from rct229.utils.utility_functions import (
-    find_exactly_one_terminal_unit,
     find_exactly_one_fluid_loop,
+    find_exactly_one_terminal_unit,
 )
 
 FLUID_LOOP_TYPE = schema_enums["FluidLoopOptions"]
