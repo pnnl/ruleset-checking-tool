@@ -40,7 +40,8 @@
                                                         "type": "VARIABLE_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
-                                                        "heating_from_loop": "Boiler Loop 1"
+                                                        "heating_from_loop": "Boiler Loop 1",
+                                                        "primary_airflow": 943.8948863999997
                                                     }
                                                 ]
                                             },
@@ -55,7 +56,8 @@
                                                         "type": "VARIABLE_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
-                                                        "heating_from_loop": "Boiler Loop 1"
+                                                        "heating_from_loop": "Boiler Loop 1",
+                                                        "primary_airflow": 943.8948863999997
                                                     }
                                                 ]
                                             }
@@ -226,13 +228,19 @@
                                                     "supply_fans": [
                                                         {
                                                             "id": "Supply Fan 1",
+                                                            "specification_method": "SIMPLE",
+                                                            "design_electric_power": 3000,
                                                             "design_airflow": 2359.737215999999,
                                                             "is_airflow_autosized": true
                                                         }
                                                     ],
                                                     "return_fans": [
                                                         {
-                                                            "id": "Return Fan 1"
+                                                            "id": "Return Fan 1",
+                                                            "specification_method": "SIMPLE",
+                                                            "design_electric_power": 2250,
+                                                            "design_airflow": 2123.763494399999,
+                                                            "is_airflow_autosized": true
                                                         }
                                                     ],
                                                     "minimum_outdoor_airflow": 471.94744319999984
@@ -333,7 +341,8 @@
                                                         "id": "VAV Air Terminal 1",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "System 11"
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 11",
+                                                        "primary_airflow": 943.8948863999997
                                                     }
                                                 ]
                                             }
@@ -460,13 +469,19 @@
                                                     "supply_fans": [
                                                         {
                                                             "id": "Supply Fan 1",
+                                                            "specification_method": "SIMPLE",
+                                                            "design_electric_power": 3000,
                                                             "design_airflow": 2359.737215999999,
                                                             "is_airflow_autosized": true
                                                         }
                                                     ],
                                                     "return_fans": [
                                                         {
-                                                            "id": "Return Fan 1"
+                                                            "id": "Return Fan 1",
+                                                            "specification_method": "SIMPLE",
+                                                            "design_electric_power": 2250,
+                                                            "design_airflow": 2123.763494399999,
+                                                            "is_airflow_autosized": true
                                                         }
                                                     ],
                                                     "minimum_outdoor_airflow": 471.94744319999984
@@ -553,7 +568,8 @@
                                                         "type": "VARIABLE_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
-                                                        "heating_from_loop": "Boiler Loop 1"
+                                                        "heating_from_loop": "Boiler Loop 1",
+                                                        "primary_airflow": 943.8948863999997
                                                     }
                                                 ]
                                             },
@@ -568,7 +584,8 @@
                                                         "type": "VARIABLE_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 7",
                                                         "heating_source": "HOT_WATER",
-                                                        "heating_from_loop": "Boiler Loop 1"
+                                                        "heating_from_loop": "Boiler Loop 1",
+                                                        "primary_airflow": 943.8948863999997
                                                     }
                                                 ]
                                             }
@@ -739,13 +756,19 @@
                                                     "supply_fans": [
                                                         {
                                                             "id": "Supply Fan 1",
+                                                            "specification_method": "SIMPLE",
+                                                            "design_electric_power": 3000,
                                                             "design_airflow": 2359.737215999999,
                                                             "is_airflow_autosized": true
                                                         }
                                                     ],
                                                     "return_fans": [
                                                         {
-                                                            "id": "Return Fan 1"
+                                                            "id": "Return Fan 1",
+                                                            "specification_method": "SIMPLE",
+                                                            "design_electric_power": 2250,
+                                                            "design_airflow": 2123.763494399999,
+                                                            "is_airflow_autosized": true
                                                         }
                                                     ],
                                                     "minimum_outdoor_airflow": 4719.474431999998
@@ -846,7 +869,8 @@
                                                         "id": "VAV Air Terminal 1",
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "System 11"
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 11",
+                                                        "primary_airflow": 943.8948863999997
                                                     }
                                                 ]
                                             }
@@ -973,13 +997,19 @@
                                                     "supply_fans": [
                                                         {
                                                             "id": "Supply Fan 1",
+                                                            "specification_method": "SIMPLE",
+                                                            "design_electric_power": 3000,
                                                             "design_airflow": 2359.737215999999,
                                                             "is_airflow_autosized": true
                                                         }
                                                     ],
                                                     "return_fans": [
                                                         {
-                                                            "id": "Return Fan 1"
+                                                            "id": "Return Fan 1",
+                                                            "specification_method": "SIMPLE",
+                                                            "design_electric_power": 2250,
+                                                            "design_airflow": 2123.763494399999,
+                                                            "is_airflow_autosized": true
                                                         }
                                                     ],
                                                     "minimum_outdoor_airflow": 471.94744319999984
@@ -1029,7 +1059,7 @@
         "Section": 19,
         "Rule": 13,
         "Test": "e",
-        "test_description": "Baseline system type 7, supply-air-to-room temperature set-point difference of 15F. The sum of zone terminal unit airflow rates of the zones served by the system is identical to the corresponding zones in the proposed model.",
+        "test_description": "Baseline system type 7, supply-air-to-room temperature set-point difference of 15F. The sum of zone terminal primary airflow from zones served by the system is identical to the corresponding sum of terminal primary flow in the proposed model.",
         "expected_rule_outcome": "undetermined",
         "standard": {
             "rule_id": "19-13",
@@ -1254,13 +1284,19 @@
                                                     "supply_fans": [
                                                         {
                                                             "id": "Supply Fan 1",
+                                                            "specification_method": "SIMPLE",
+                                                            "design_electric_power": 600,
                                                             "design_airflow": 471.94744319999984,
                                                             "is_airflow_autosized": true
                                                         }
                                                     ],
                                                     "return_fans": [
                                                         {
-                                                            "id": "Return Fan 1"
+                                                            "id": "Return Fan 1",
+                                                            "specification_method": "SIMPLE",
+                                                            "design_electric_power": 450,
+                                                            "design_airflow": 424.75269887999985,
+                                                            "is_airflow_autosized": true
                                                         }
                                                     ],
                                                     "minimum_outdoor_airflow": 212.37634943999993
