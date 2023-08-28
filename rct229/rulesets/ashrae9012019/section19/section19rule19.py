@@ -1,30 +1,37 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
-from rct229.rule_engine.rule_list_indexed_base import \
-    RuleDefinitionListIndexedBase
-from rct229.rule_engine.user_baseline_proposed_vals import \
-    UserBaselineProposedVals
+from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
+from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 from rct229.rulesets.ashrae9012019.data.schema_enums import schema_enums
-from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_system_type_compare import \
-    baseline_system_type_compare
-from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_system_util import \
-    HVAC_SYS
-from rct229.rulesets.ashrae9012019.ruleset_functions.get_baseline_system_types import \
-    get_baseline_system_types
-from rct229.rulesets.ashrae9012019.ruleset_functions.get_dict_of_zones_and_terminal_units_served_by_hvac_sys import \
-    get_dict_of_zones_and_terminal_units_served_by_hvac_sys
-from rct229.rulesets.ashrae9012019.ruleset_functions.get_fan_object_electric_power import \
-    get_fan_object_electric_power
-from rct229.rulesets.ashrae9012019.ruleset_functions.get_fan_system_object_supply_return_exhaust_relief_total_power_flow import \
-    get_fan_system_object_supply_return_exhaust_relief_total_power_flow
-from rct229.rulesets.ashrae9012019.ruleset_functions.get_list_hvac_systems_associated_with_zone import \
-    get_list_hvac_systems_associated_with_zone
+from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_system_type_compare import (
+    baseline_system_type_compare,
+)
+from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_system_util import (
+    HVAC_SYS,
+)
+from rct229.rulesets.ashrae9012019.ruleset_functions.get_baseline_system_types import (
+    get_baseline_system_types,
+)
+from rct229.rulesets.ashrae9012019.ruleset_functions.get_dict_of_zones_and_terminal_units_served_by_hvac_sys import (
+    get_dict_of_zones_and_terminal_units_served_by_hvac_sys,
+)
+from rct229.rulesets.ashrae9012019.ruleset_functions.get_fan_object_electric_power import (
+    get_fan_object_electric_power,
+)
+from rct229.rulesets.ashrae9012019.ruleset_functions.get_fan_system_object_supply_return_exhaust_relief_total_power_flow import (
+    get_fan_system_object_supply_return_exhaust_relief_total_power_flow,
+)
+from rct229.rulesets.ashrae9012019.ruleset_functions.get_list_hvac_systems_associated_with_zone import (
+    get_list_hvac_systems_associated_with_zone,
+)
 from rct229.schema.config import ureg
 from rct229.utils.assertions import assert_, getattr_
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.pint_utils import ZERO
 from rct229.utils.std_comparisons import std_equal
-from rct229.utils.utility_functions import (find_exactly_one_hvac_system,
-                                            find_exactly_one_zone)
+from rct229.utils.utility_functions import (
+    find_exactly_one_hvac_system,
+    find_exactly_one_zone,
+)
 
 APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_9,
@@ -92,7 +99,7 @@ class Section19Rule19(RuleDefinitionListIndexedBase):
                         find_exactly_one_hvac_system(rmi_p, hvac_id_p),
                         "HVAC",
                         "cooling_system",
-                        "cooling_system_type",
+                        "type",
                     )
                     == COOLING_SYSTEM.NON_MECHANICAL
                     for hvac_id_p in get_list_hvac_systems_associated_with_zone(
