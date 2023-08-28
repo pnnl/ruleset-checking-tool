@@ -13,6 +13,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_min_oa_cfm_sch_zone imp
 )
 from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all, find_one
+from rct229.utils.std_comparisons import std_equal
 
 LIGHTING_SPACE = schema_enums["LightingSpaceOptions2019ASHRAE901TG37"]
 DEMAND_CONTROL_VENTILATION_CONTROL = schema_enums[
@@ -256,16 +257,18 @@ class Section19Rule7(RuleDefinitionListIndexedBase):
             undetermined_msg = ""
             if (
                 modeled_baseline_total_zone_min_OA_CFM
-                < modeled_proposed_total_zone_min_OA_CFM
+                > modeled_proposed_total_zone_min_OA_CFM
             ):
+                if not hvac_system_serves_only_labs:
+                    # Case 6
+                    undetermined_msg = f"For {hvac_id_b} the modeled baseline minimum ventilation system outdoor air intake flow CFM is higher than the minimum ventilation system outdoor air intake flow CFM modeled in the proposed design. It appears as though G3.1.2.5 Exception 2 may be applicable. A manual check for this exception is recommended otherwise fail."
+                else:
+                    # Case 7
+                    undetermined_msg = f"For {hvac_id_b} the modeled baseline minimum ventilation system outdoor air intake flow CFM is higher than the minimum ventilation system outdoor air intake flow CFM modeled in the proposed design. It appears as though G3.1.2.5 Exception 2 may be applicable because the air distribution effectiveness was modeled as greater than 1. Alternatively, the system may only serves lab spaces and G3.1.2.5 Exception 4 may be applicable. A manual check for these exceptions is recommended otherwise fail."
+
+            else:
                 # Case 8
                 undetermined_msg = f"For {hvac_id_b} the modeled minimum ventilation system outdoor air intake flow CFM is lower than the minimum ventilation system outdoor air intake flow CFM modeled in the proposed design. Check if G3.1.2.5 Exception 3 is applicable. This exception states that where the minimum outdoor air intake flow in the proposed design is provided in excess of the amount required by the building code or the rating authority, the baseline building design shall be modeled to reflect the greater of that required by either the rating authority or the building code and will be less than the proposed design."
-            elif hvac_system_serves_only_labs:
-                # Case 7
-                undetermined_msg = f"For {hvac_id_b} the modeled baseline minimum ventilation system outdoor air intake flow CFM is higher than the minimum ventilation system outdoor air intake flow CFM modeled in the proposed design. It appears as though G3.1.2.5 Exception 2 may be applicable because the air distribution effectiveness was modeled as greater than 1. Alternatively, the system may only serves lab spaces and G3.1.2.5 Exception 4 may be applicable. A manual check for these exceptions is recommended otherwise fail."
-            else:
-                # Case 6
-                undetermined_msg = f"For {hvac_id_b} the modeled baseline minimum ventilation system outdoor air intake flow CFM is higher than the minimum ventilation system outdoor air intake flow CFM modeled in the proposed design. It appears as though G3.1.2.5 Exception 2 may be applicable. A manual check for this exception is recommended otherwise fail."
 
             return undetermined_msg
 
@@ -325,8 +328,15 @@ class Section19Rule7(RuleDefinitionListIndexedBase):
                 # Case 9
                 Fail_msg = f"For {hvac_id_b} the modeled baseline minimum ventilation system outdoor air intake flow CFM is higher than the minimum ventilation system outdoor air intake flow CFM modeled in the proposed design which does not meet the requirements of Section G3.1.2.5."
 
-            else:
+            elif std_equal(
+                modeled_baseline_total_zone_min_OA_CFM,
+                modeled_proposed_total_zone_min_OA_CFM,
+            ):
                 # Case 10
+                Fail_msg = f"Fail because the outdoor air schedules do not appear to match between the baseline and proposed."
+
+            else:
+                # Case 11
                 Fail_msg = f"For {hvac_id_b} the modeled baseline minimum ventilation system outdoor air intake flow CFM is higher than the minimum ventilation system outdoor air intake flow CFM modeled in the proposed design which does not meet the requirements of Section G3.1.2.5. Fail unless the hvac system only serves labs and G3.1.2.5 Exception 4 is applicable."
 
             return Fail_msg
