@@ -93,16 +93,24 @@ class Section19Rule7(RuleDefinitionListIndexedBase):
                     get_min_oa_cfm_sch_zone(rmi_p, zone_id_b)
                 )
 
+                zone_p = find_one(
+                    f'$.buildings[*].building_segments[*].zones[*][?(@.id = "{zone_id_b}")]',
+                    rmi_p,
+                )
+
                 zone_data[hvac_id_b]["was_DCV_modeled_baseline"] = any(
                     [
-                        True
-                        if getattr_(
-                            terminal_b, "Terminal", "has_demand_control_ventilation"
+                        getattr_(
+                            terminal_p, "terminals", "has_demand_control_ventilation"
                         )
-                        else False
-                        for terminal_b in find_all(
-                            f'$.buildings[*].building_segments[*].zones[*][?(@.id = "{zone_id_b}")].terminals[*]',
-                            rmi_b,
+                        or find_one(
+                            f'$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*][?(@.id = "{getattr_(terminal_p, "Terminal", "served_by_heating_ventilating_air_conditioning_system")}")].fan_system.demand_control_ventilation_control',
+                            rmi_p,
+                        )
+                        not in [None, DEMAND_CONTROL_VENTILATION_CONTROL.NONE]
+                        for terminal_p in find_all(
+                            f"$.terminals[*]",
+                            zone_p,
                         )
                     ]
                 )
@@ -112,13 +120,10 @@ class Section19Rule7(RuleDefinitionListIndexedBase):
                     rmi_p,
                 )
 
-                zone_data[hvac_id_b]["was_DCV_modeled_proposed"] = (
-                    find_one(
-                        f'$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*][?(@.id = "{hvac_id_b}")].fan_system.demand_control_ventilation_control',
-                        rmi_p,
-                    )
-                    != DEMAND_CONTROL_VENTILATION_CONTROL.NONE
-                )
+                zone_data[hvac_id_b]["was_DCV_modeled_proposed"] = find_one(
+                    f'$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*][?(@.id = "{hvac_id_b}")].fan_system.demand_control_ventilation_control',
+                    rmi_p,
+                ) != [None, DEMAND_CONTROL_VENTILATION_CONTROL.NONE]
 
                 if not zone_data[hvac_id_b]["was_DCV_modeled_proposed"]:
                     zone_data[hvac_id_b]["was_DCV_modeled_proposed"] = any(
