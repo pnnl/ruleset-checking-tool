@@ -38,7 +38,7 @@ class Section5Rule18(RuleDefinitionListIndexedBase):
             ruleset_section_title="Envelope",
             standard_section="Section G3.1-5(c) Building Envelope Modeling Requirements for the Baseline building",
             is_primary_rule=True,
-            list_path="ruleset_model_instances[0].buildings[*]",
+            list_path="ruleset_model_descriptions[0].buildings[*]",
             data_items={"climate_zone": ("baseline", "weather/climate_zone")},
         )
 
@@ -63,7 +63,7 @@ class Section5Rule18(RuleDefinitionListIndexedBase):
                 data["climate_zone"], building
             )
             is_area_type_all_new_dict = {}
-            for building_segment in find_all("$..building_segments[*]", building):
+            for building_segment in find_all("$.building_segments[*]", building):
                 area_type = building_segment["area_type_vertical_fenestration"]
                 # add key-value pair or override the existing value
                 is_area_type_all_new_dict[area_type] = building_segment["is_all_new"]
@@ -78,7 +78,7 @@ class Section5Rule18(RuleDefinitionListIndexedBase):
             building = context.baseline
             area_type_to_building_segment_dict = {}
             # dict map area_type with list of building_segment
-            for building_segment in find_all("$..building_segments[*]", building):
+            for building_segment in find_all("$.building_segments[*]", building):
                 area_type = building_segment["area_type_vertical_fenestration"]
                 if area_type not in area_type_to_building_segment_dict:
                     area_type_to_building_segment_dict[area_type] = {

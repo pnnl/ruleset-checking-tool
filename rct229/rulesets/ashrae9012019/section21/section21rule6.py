@@ -40,8 +40,8 @@ class Section21Rule6(RuleDefinitionListIndexedBase):
             ruleset_section_title="HVAC - Water Side",
             standard_section="Section G3.1.3.2 Building System-Specific Modeling Requirements for the Baseline model",
             is_primary_rule=True,
-            rmr_context="ruleset_model_instances/0",
-            list_path="fluid_loops[*]",
+            rmr_context="ruleset_model_descriptions/0",
+            list_path="$.fluid_loops[*]",
         )
 
     def create_data(self, context, data):
@@ -50,7 +50,7 @@ class Section21Rule6(RuleDefinitionListIndexedBase):
         loop_boiler_dict = {}
         for boiler_b in boilers:
             loop_id = getattr_(boiler_b, "boiler", "loop")
-            if not loop_id in loop_boiler_dict.keys():
+            if not loop_id in loop_boiler_dict:
                 loop_boiler_dict[loop_id] = []
             loop_boiler_dict[loop_id].append(boiler_b)
         return {"loop_boiler_dict": loop_boiler_dict}
@@ -61,7 +61,7 @@ class Section21Rule6(RuleDefinitionListIndexedBase):
         # create a list containing all HVAC systems that are modeled in the rmi_b
         available_type_list = [
             hvac_type
-            for hvac_type in baseline_system_types_dict.keys()
+            for hvac_type in baseline_system_types_dict
             if len(baseline_system_types_dict[hvac_type]) > 0
         ]
         return any(
