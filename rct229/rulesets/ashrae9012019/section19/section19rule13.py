@@ -42,8 +42,8 @@ APPLICABLE_SYS_TYPES = [
 ]
 
 LIGHTING_SPACE = schema_enums["LightingSpaceOptions2019ASHRAE901TG37"]
-LABORATORY_TEMP_DELTA = 17.0 * ureg("R")
-GENERAL_TEMP_DELTA = 20.0 * ureg("R")
+LABORATORY_TEMP_DELTA = 17.0 * ureg("degF")
+GENERAL_TEMP_DELTA = 20.0 * ureg("degF")
 
 
 class Section19Rule13(RuleDefinitionListIndexedBase):
@@ -119,7 +119,7 @@ class Section19Rule13(RuleDefinitionListIndexedBase):
                         == LIGHTING_SPACE.LABORATORY_EXCEPT_IN_OR_AS_A_CLASSROOM
                     )
 
-                for terminal_b in zone_b.get("terminals"):
+                for terminal_b in getattr_(zone_b, "zones", "terminals"):
                     if (
                         terminal_b["id"]
                         in dict_of_zones_and_terminal_units_served_by_hvac_sys_b[
@@ -133,12 +133,12 @@ class Section19Rule13(RuleDefinitionListIndexedBase):
                                 LABORATORY_TEMP_DELTA,
                                 getattr_(
                                     terminal_b,
-                                    "Terminal",
+                                    "terminals",
                                     "supply_design_heating_setpoint_temperature",
                                 )
                                 - getattr_(
                                     terminal_b,
-                                    "Terminal",
+                                    "terminals",
                                     "supply_design_heating_setpoint_temperature",
                                 ),
                             )
@@ -149,19 +149,19 @@ class Section19Rule13(RuleDefinitionListIndexedBase):
                                 GENERAL_TEMP_DELTA,
                                 getattr_(
                                     terminal_b,
-                                    "Terminal",
-                                    "supply_design_cooling_setpoint_temperature",
+                                    "terminals",
+                                    "supply_design_heating_setpoint_temperature",
                                 )
                                 - getattr_(
                                     terminal_b,
-                                    "Terminal",
+                                    "terminals",
                                     "supply_design_cooling_setpoint_temperature",
                                 ),
                             )
 
             zone_info[hvac_id_b]["supply_flow_p"] = sum(
                 [
-                    terminal_p.get("primary_air_flow", ZERO.FLOW)
+                    terminal_p.get("primary_airflow", ZERO.FLOW)
                     for terminal_p in find_all(
                         f'$.buildings[*].building_segments[*].zones[*][?(@.id = "{zone_id_b}")].terminals[*]',
                         rmi_p,
@@ -223,7 +223,6 @@ class Section19Rule13(RuleDefinitionListIndexedBase):
             hvac_id_b = hvac_b["id"]
             zone_info = data["zone_info"][hvac_id_b]
             supply_fans_airflow_b = calc_vals["supply_fans_airflow_b"]
-
             all_design_setpoints_delta_Ts_are_per_reqs_b = calc_vals[
                 "all_design_setpoints_delta_Ts_are_per_reqs_b"
             ]
