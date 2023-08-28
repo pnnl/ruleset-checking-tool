@@ -13,12 +13,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Yes",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.29"
         },
         "rmr_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "buildings": [
@@ -55,11 +55,11 @@
                                                 "id": "PTHP 1",
                                                 "cooling_system": {
                                                     "id": "HP Cooling Coil 1",
-                                                    "cooling_system_type": "DIRECT_EXPANSION"
+                                                    "type": "DIRECT_EXPANSION"
                                                 },
                                                 "heating_system": {
                                                     "id": "HP Heating Coil 1",
-                                                    "heating_system_type": "HEAT_PUMP"
+                                                    "type": "HEAT_PUMP"
                                                 },
                                                 "fan_system": {
                                                     "id": "CAV Fan System 1",
@@ -70,7 +70,7 @@
                                                         }
                                                     ],
                                                     "operation_during_unoccupied": "CONTINUOUS",
-                                                    "minimum_outdoor_airflow": 100
+                                                    "minimum_outdoor_airflow": 47.194744319999984
                                                 }
                                             }
                                         ]
@@ -97,12 +97,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Yes",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.29"
         },
         "rmr_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "buildings": [
@@ -139,11 +139,11 @@
                                                 "id": "PTHP 1",
                                                 "cooling_system": {
                                                     "id": "HP Cooling Coil 1",
-                                                    "cooling_system_type": "DIRECT_EXPANSION"
+                                                    "type": "DIRECT_EXPANSION"
                                                 },
                                                 "heating_system": {
                                                     "id": "HP Heating Coil 1",
-                                                    "heating_system_type": "HEAT_PUMP"
+                                                    "type": "HEAT_PUMP"
                                                 },
                                                 "fan_system": {
                                                     "id": "CAV Fan System 1",
@@ -154,7 +154,7 @@
                                                         }
                                                     ],
                                                     "operation_during_unoccupied": "CYCLING",
-                                                    "minimum_outdoor_airflow": 100
+                                                    "minimum_outdoor_airflow": 47.194744319999984
                                                 }
                                             }
                                         ]

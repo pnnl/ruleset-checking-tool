@@ -7,7 +7,6 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_hvac_zone_list_w_area_d
 )
 from rct229.schema.config import ureg
 from rct229.utils.jsonpath_utils import find_all
-from rct229.utils.pint_utils import pint_sum
 
 MIN_OA_CFM = 3000 * ureg("cfm")
 OCCUPANT_DENSITY_LIMIT = 0.1 / ureg("ft2")
@@ -27,9 +26,9 @@ class Section19Rule8(RuleDefinitionListIndexedBase):
             id="19-8",
             description="Demand control ventilation is modeled in the baseline design in systems with outdoor air capacity greater than 3000 cfm serving areas with an average occupant design capacity greater than 100 people per 1000 ft^2.",
             ruleset_section_title="HVAC - General",
-            standard_section=" Section G3.1.2.5 Exception #1",
+            standard_section="Section G3.1.2.5 Exception #1",
             is_primary_rule=True,
-            list_path="ruleset_model_instances[0].buildings[*]",
+            list_path="ruleset_model_descriptions[0].buildings[*]",
         )
 
     class BuildingRule(RuleDefinitionListIndexedBase):
@@ -46,7 +45,7 @@ class Section19Rule8(RuleDefinitionListIndexedBase):
             hvac_zone_list_w_area_dict_b = get_hvac_zone_list_w_area_dict(building_b)
 
             zone_total_occupant_dict_b = {
-                zone_b["id"]: pint_sum(
+                zone_b["id"]: sum(
                     find_all("$.spaces[*].number_of_occupants", zone_b),
                     0,
                 )

@@ -3,22 +3,22 @@
         "Section": 5,
         "Rule": 44,
         "Test": "a",
-        "test_description": "weather_driven infiltration modeling method is used",
+        "test_description": "Project has one building segment. \"weather_driven\" infiltration modeling method is used",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-44",
             "ruleset_reference": "Table G3.1(5) Proposed Building Performance (b)",
-            "rule_description": "The  infiltration modeling method in the baseline includes adjustment for weather and building operation. ",
+            "rule_description": "The infiltration modeling method in the baseline includes adjustment for weather and building operation. ",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.29"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229",
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMR 1",
                         "buildings": [
@@ -52,22 +52,22 @@
         "Section": 5,
         "Rule": 44,
         "Test": "b",
-        "test_description": "pressure_based infiltration modeling method is used",
+        "test_description": "Project has one building segment. \"pressure_based\" infiltration modeling method is used",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-44",
             "ruleset_reference": "Table G3.1(5) Proposed Building Performance (b)",
-            "rule_description": "The  infiltration modeling method in the baseline includes adjustment for weather and building operation. ",
+            "rule_description": "The infiltration modeling method in the baseline includes adjustment for weather and building operation. ",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.29"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229",
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMR 1",
                         "buildings": [
@@ -101,22 +101,22 @@
         "Section": 5,
         "Rule": 44,
         "Test": "c",
-        "test_description": "constant infiltration modeling method is used",
+        "test_description": "Project has one building segment. \"constant\" infiltration modeling method is used",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-44",
             "ruleset_reference": "Table G3.1(5) Proposed Building Performance (b)",
-            "rule_description": "The  infiltration modeling method in the baseline includes adjustment for weather and building operation. ",
+            "rule_description": "The infiltration modeling method in the baseline includes adjustment for weather and building operation. ",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.29"
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229",
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMR 1",
                         "buildings": [

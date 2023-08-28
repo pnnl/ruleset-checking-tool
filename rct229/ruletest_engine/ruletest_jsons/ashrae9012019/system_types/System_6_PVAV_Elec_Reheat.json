@@ -1,6 +1,6 @@
 {
     "id": "ASHRAE229 1",
-    "ruleset_model_instances": [
+    "ruleset_model_descriptions": [
         {
             "id": "RMD 1",
             "buildings": [
@@ -53,11 +53,11 @@
                                     "id": "System 6",
                                     "cooling_system": {
                                         "id": "DX Coil 1",
-                                        "cooling_system_type": "DIRECT_EXPANSION"
+                                        "type": "DIRECT_EXPANSION"
                                     },
                                     "preheat_system": {
                                         "id": "Preheat Coil 1",
-                                        "heating_system_type": "ELECTRIC_RESISTANCE"
+                                        "type": "ELECTRIC_RESISTANCE"
                                     },
                                     "fan_system": {
                                         "id": "VAV Fan System 1",

@@ -45,7 +45,7 @@ class Section22Rule10(RuleDefinitionListIndexedBase):
             ruleset_section_title="HVAC - Chiller",
             standard_section="Section G3.1.3.10 Chilled-water pumps (System 7, 8, 11, 12 and 13)",
             is_primary_rule=True,
-            rmr_context="ruleset_model_instances/0",
+            rmr_context="ruleset_model_descriptions/0",
             list_path="$.fluid_loops[*]",
         )
 
@@ -55,7 +55,7 @@ class Section22Rule10(RuleDefinitionListIndexedBase):
         # create a list containing all HVAC systems that are modeled in the rmi_b
         available_type_list = [
             hvac_type
-            for hvac_type in baseline_system_types_dict.keys()
+            for hvac_type in baseline_system_types_dict
             if len(baseline_system_types_dict[hvac_type]) > 0
         ]
 
@@ -76,13 +76,13 @@ class Section22Rule10(RuleDefinitionListIndexedBase):
 
         loop_pump_dict = {}
         for pump in find_all("$.pumps[*]", rmi_b):
-            if pump["loop_or_piping"] not in loop_pump_dict.keys():
+            if pump["loop_or_piping"] not in loop_pump_dict:
                 loop_pump_dict[pump["loop_or_piping"]] = []
             loop_pump_dict[pump["loop_or_piping"]].append(pump)
 
         chw_loop_capacity_dict = {}
         for chiller in find_all("$.chillers[*]", rmi_b):
-            if chiller["cooling_loop"] not in chw_loop_capacity_dict.keys():
+            if chiller["cooling_loop"] not in chw_loop_capacity_dict:
                 chw_loop_capacity_dict[chiller["cooling_loop"]] = ZERO.POWER
             chw_loop_capacity_dict[chiller["cooling_loop"]] += getattr_(
                 chiller, "chiller", "rated_capacity"
@@ -100,7 +100,7 @@ class Section22Rule10(RuleDefinitionListIndexedBase):
         fluid_loop_b = context_item.baseline
         primary_secondary_loop_dict = data["primary_secondary_loop_dict"]
 
-        return fluid_loop_b["id"] in primary_secondary_loop_dict.keys()
+        return fluid_loop_b["id"] in primary_secondary_loop_dict
 
     class PrimaryFluidLoopRule(RuleDefinitionListIndexedBase):
         def __init__(self):
@@ -129,7 +129,7 @@ class Section22Rule10(RuleDefinitionListIndexedBase):
             child_loop_b = context_item.baseline
             loop_pump_dict = data["loop_pump_dict"]
 
-            return child_loop_b["id"] in loop_pump_dict.keys()
+            return child_loop_b["id"] in loop_pump_dict
 
         class SecondaryChildLoopRule(RuleDefinitionListIndexedBase):
             def __init__(self):

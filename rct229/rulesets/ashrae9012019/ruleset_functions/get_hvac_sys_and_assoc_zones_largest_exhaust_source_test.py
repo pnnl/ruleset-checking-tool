@@ -1,9 +1,9 @@
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_hvac_sys_and_assoc_zones_largest_exhaust_source import (
     get_hvac_sys_and_assoc_zones_largest_exhaust_source,
 )
+from rct229.schema.config import ureg
 from rct229.schema.schema_utils import quantify_rmr
 from rct229.schema.validate import schema_validate_rmr
-from rct229.schema.config import ureg
 
 TEST_RMI = {
     "id": "test_rmd",
@@ -72,11 +72,11 @@ TEST_RMI = {
                             "id": "PTAC 1",
                             "cooling_system": {
                                 "id": "DX Coil 1",
-                                "cooling_system_type": "DIRECT_EXPANSION",
+                                "type": "DIRECT_EXPANSION",
                             },
                             "heating_system": {
                                 "id": "HHW Coil 1",
-                                "heating_system_type": "FLUID_LOOP",
+                                "type": "FLUID_LOOP",
                                 "hot_water_loop": "Boiler Loop 1",
                             },
                             "fan_system": {
@@ -102,11 +102,11 @@ TEST_RMI = {
                             "id": "PTAC 2",
                             "cooling_system": {
                                 "id": "DX Coil 2",
-                                "cooling_system_type": "DIRECT_EXPANSION",
+                                "type": "DIRECT_EXPANSION",
                             },
                             "heating_system": {
                                 "id": "HHW Coil 2",
-                                "heating_system_type": "FLUID_LOOP",
+                                "type": "FLUID_LOOP",
                                 "hot_water_loop": "Boiler Loop 1",
                             },
                             "fan_system": {
@@ -132,11 +132,11 @@ TEST_RMI = {
                             "id": "PTAC 3",
                             "cooling_system": {
                                 "id": "DX Coil 3",
-                                "cooling_system_type": "DIRECT_EXPANSION",
+                                "type": "DIRECT_EXPANSION",
                             },
                             "heating_system": {
                                 "id": "HHW Coil 3",
-                                "heating_system_type": "FLUID_LOOP",
+                                "type": "FLUID_LOOP",
                                 "hot_water_loop": "Boiler Loop 1",
                             },
                         },
@@ -152,9 +152,9 @@ TEST_RMI = {
 }
 
 
-TEST_RMD_FULL = {"id": "229", "ruleset_model_instances": [TEST_RMI]}
+TEST_RMD_FULL = {"id": "229", "ruleset_model_descriptions": [TEST_RMI]}
 
-TEST_RMI_UNIT = quantify_rmr(TEST_RMD_FULL)["ruleset_model_instances"][0]
+TEST_RMI_UNIT = quantify_rmr(TEST_RMD_FULL)["ruleset_model_descriptions"][0]
 
 
 def test__TEST_RMD__is_valid():

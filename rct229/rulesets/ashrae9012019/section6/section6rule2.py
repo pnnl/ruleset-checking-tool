@@ -4,9 +4,8 @@ from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedV
 from rct229.rulesets.ashrae9012019.data.schema_enums import schema_enums
 from rct229.rulesets.ashrae9012019.data_fns.table_9_6_1_fns import table_9_6_1_lookup
 from rct229.schema.config import ureg
-from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all
-from rct229.utils.pint_utils import ZERO, CalcQ, pint_sum
+from rct229.utils.pint_utils import ZERO, CalcQ
 
 GUEST_ROOM = schema_enums["LightingSpaceOptions2019ASHRAE901TG37"].GUEST_ROOM
 DORMITORY_LIVING_QUARTERS = schema_enums[
@@ -30,7 +29,7 @@ class Section6Rule2(RuleDefinitionListIndexedBase):
             ruleset_section_title="Lighting",
             standard_section="Table G3.1 Part 6 Lighting under Proposed Building Performance paragraph (e)",
             is_primary_rule=True,
-            list_path="$.ruleset_model_instances[0].buildings[*].building_segments[*].zones[*].spaces[*]",
+            list_path="$.ruleset_model_descriptions[0].buildings[*].building_segments[*].zones[*].spaces[*]",
         )
 
     def list_filter(self, context_item, data=None):
@@ -75,11 +74,11 @@ class Section6Rule2(RuleDefinitionListIndexedBase):
             else:
                 lighting_power_allowance_p = DWELLING_UNIT_MIN_LIGHTING_POWER_PER_AREA
 
-            space_lighting_power_per_area_p = pint_sum(
+            space_lighting_power_per_area_p = sum(
                 find_all("interior_lighting[*].power_per_area", space_p),
                 ZERO.POWER_PER_AREA,
             )
-            space_lighting_power_per_area_u = pint_sum(
+            space_lighting_power_per_area_u = sum(
                 find_all("interior_lighting[*].power_per_area", space_u),
                 ZERO.POWER_PER_AREA,
             )
