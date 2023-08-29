@@ -84,40 +84,39 @@ class Section19Rule13(RuleDefinitionListIndexedBase):
         )
 
         zone_info = {}
+        design_thermostat_cooling_setpoint = []
+        design_thermostat_heating_setpoint = []
         for hvac_id_b in dict_of_zones_and_terminal_units_served_by_hvac_sys_b:
-            zone_info[hvac_id_b] = {}
             zone_info[hvac_id_b] = {
-                "are_all_hvac_sys_fan_objs_autosized": False,
-                "design_thermostat_cooling_setpoint": [],
-                "design_thermostat_heating_setpoint": [],
+                "are_all_hvac_sys_fan_objs_autosized": are_all_hvac_sys_fan_objs_autosized(
+                    rmi_b, hvac_id_b
+                ),
                 "zone_has_lab_space": False,
                 "all_design_setpoints_delta_Ts_are_per_reqs": False,
-                "supply_flow_p": ZERO.TEMPERATURE,
+                "supply_flow_p": ZERO.FLOW,
             }
 
             for zone_id_b in dict_of_zones_and_terminal_units_served_by_hvac_sys_b[
                 hvac_id_b
             ]["zone_list"]:
-                zone_info[hvac_id_b][
-                    "are_all_hvac_sys_fan_objs_autosized"
-                ] = are_all_hvac_sys_fan_objs_autosized(rmi_b, hvac_id_b)
                 zone_b = find_one(
                     f'$.buildings[*].building_segments[*].zones[*][?(@.id = "{zone_id_b}")]',
                     rmi_b,
                 )
-
-                zone_info[hvac_id_b]["design_thermostat_cooling_setpoint"].append(
-                    zone_b.get("design_thermostat_cooling_setpoint", ZERO.TEMPERATURE)
+                design_thermostat_cooling_setpoint.append(
+                    getattr_(zone_b, "zones", "design_thermostat_cooling_setpoint")
                 )
-                zone_info[hvac_id_b]["design_thermostat_heating_setpoint"].append(
-                    zone_b.get("design_thermostat_heating_setpoint", ZERO.TEMPERATURE)
+                design_thermostat_heating_setpoint.append(
+                    getattr_(zone_b, "zones", "design_thermostat_heating_setpoint")
                 )
 
-                for space_b in find_all("$.spaces[*]", zone_b):
-                    zone_info[hvac_id_b]["zone_has_lab_space"] = (
-                        getattr_(space_b, "Space", "lighting_space_type")
+                zone_info[hvac_id_b]["zone_has_lab_space"] = any(
+                    [
+                        space_b.get("lighting_space_type")
                         == LIGHTING_SPACE.LABORATORY_EXCEPT_IN_OR_AS_A_CLASSROOM
-                    )
+                        for space_b in find_all("$.spaces[*]", zone_b)
+                    ]
+                )
 
                 for terminal_b in getattr_(zone_b, "zones", "terminals"):
                     if (
@@ -126,37 +125,52 @@ class Section19Rule13(RuleDefinitionListIndexedBase):
                             hvac_id_b
                         ]["terminal_unit_list"]
                     ):
+                        delta_supply_and_design_heating_temp = (
+                            getattr_(
+                                terminal_b,
+                                "terminals",
+                                "supply_design_heating_setpoint_temperature",
+                            )
+                            - design_thermostat_heating_setpoint[-1]
+                        )
+                        delta_supply_and_design_cooling_temp = (
+                            design_thermostat_cooling_setpoint[-1]
+                            - getattr_(
+                                terminal_b,
+                                "terminals",
+                                "supply_design_cooling_setpoint_temperature",
+                            )
+                        )
+
                         if zone_info[hvac_id_b]["zone_has_lab_space"]:
                             zone_info[hvac_id_b][
                                 "all_design_setpoints_delta_Ts_are_per_reqs"
-                            ] = std_equal(
-                                LABORATORY_TEMP_DELTA,
-                                getattr_(
-                                    terminal_b,
-                                    "terminals",
-                                    "supply_design_heating_setpoint_temperature",
-                                )
-                                - getattr_(
-                                    terminal_b,
-                                    "terminals",
-                                    "supply_design_heating_setpoint_temperature",
-                                ),
+                            ] = all(
+                                [
+                                    std_equal(
+                                        LABORATORY_TEMP_DELTA,
+                                        delta_supply_and_design_heating_temp,
+                                    ),
+                                    std_equal(
+                                        LABORATORY_TEMP_DELTA,
+                                        delta_supply_and_design_cooling_temp,
+                                    ),
+                                ]
                             )
                         else:
                             zone_info[hvac_id_b][
                                 "all_design_setpoints_delta_Ts_are_per_reqs"
-                            ] = std_equal(
-                                GENERAL_TEMP_DELTA,
-                                getattr_(
-                                    terminal_b,
-                                    "terminals",
-                                    "supply_design_heating_setpoint_temperature",
-                                )
-                                - getattr_(
-                                    terminal_b,
-                                    "terminals",
-                                    "supply_design_cooling_setpoint_temperature",
-                                ),
+                            ] = all(
+                                [
+                                    std_equal(
+                                        GENERAL_TEMP_DELTA,
+                                        delta_supply_and_design_heating_temp,
+                                    ),
+                                    std_equal(
+                                        GENERAL_TEMP_DELTA,
+                                        delta_supply_and_design_cooling_temp,
+                                    ),
+                                ]
                             )
 
             zone_info[hvac_id_b]["supply_flow_p"] = sum(
@@ -170,10 +184,10 @@ class Section19Rule13(RuleDefinitionListIndexedBase):
             )
 
             zone_info[hvac_id_b]["design_thermostat_cooling_setpoint"] = min(
-                zone_info[hvac_id_b]["design_thermostat_cooling_setpoint"]
+                design_thermostat_cooling_setpoint
             )
             zone_info[hvac_id_b]["design_thermostat_heating_setpoint"] = max(
-                zone_info[hvac_id_b]["design_thermostat_heating_setpoint"]
+                design_thermostat_heating_setpoint
             )
 
         return {
