@@ -93,24 +93,19 @@ class Section19Rule7(RuleDefinitionListIndexedBase):
                     get_min_oa_cfm_sch_zone(rmi_p, zone_id_b)
                 )
 
-                zone_p = find_one(
-                    f'$.buildings[*].building_segments[*].zones[*][?(@.id = "{zone_id_b}")]',
-                    rmi_p,
-                )
-
                 zone_data[hvac_id_b]["was_DCV_modeled_baseline"] = any(
                     [
                         getattr_(
-                            terminal_p, "terminals", "has_demand_control_ventilation"
+                            terminal_b, "terminals", "has_demand_control_ventilation"
                         )
                         or find_one(
-                            f'$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*][?(@.id = "{getattr_(terminal_p, "Terminal", "served_by_heating_ventilating_air_conditioning_system")}")].fan_system.demand_control_ventilation_control',
+                            f'$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*][?(@.id = "{getattr_(terminal_b, "terminals", "served_by_heating_ventilating_air_conditioning_system")}")].fan_system.demand_control_ventilation_control',
                             rmi_p,
                         )
                         not in [None, DEMAND_CONTROL_VENTILATION_CONTROL.NONE]
-                        for terminal_p in find_all(
-                            f"$.terminals[*]",
-                            zone_p,
+                        for terminal_b in find_all(
+                            f"$.buildings[*].building_segments[*].terminals[*]",
+                            rmi_b,
                         )
                     ]
                 )
@@ -130,7 +125,7 @@ class Section19Rule7(RuleDefinitionListIndexedBase):
                         [
                             getattr_(
                                 terminal_p,
-                                "Terminal",
+                                "terminals",
                                 "has_demand_control_ventilation",
                             )
                             for terminal_p in find_all(f"$.terminals[*]", zone_p)
