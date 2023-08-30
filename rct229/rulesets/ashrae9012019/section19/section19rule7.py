@@ -148,7 +148,7 @@ class Section19Rule7(RuleDefinitionListIndexedBase):
                 ] = (
                     getattr_(
                         zone_p,
-                        "Zone",
+                        "zones",
                         "air_distribution_effectiveness",
                     )
                     > 1
