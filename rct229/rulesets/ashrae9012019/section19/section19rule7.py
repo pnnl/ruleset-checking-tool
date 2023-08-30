@@ -128,7 +128,7 @@ class Section19Rule7(RuleDefinitionListIndexedBase):
                                 )
                             ),
                         )
-                        != [None, DEMAND_CONTROL_VENTILATION_CONTROL.NONE]
+                        not in [None, DEMAND_CONTROL_VENTILATION_CONTROL.NONE]
                         for terminal_p in find_all("$.terminals[*]", zone_p)
                     ]
                 )
