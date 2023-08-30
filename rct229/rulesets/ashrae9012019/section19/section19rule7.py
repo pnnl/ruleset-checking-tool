@@ -12,8 +12,12 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_min_oa_cfm_sch_zone imp
     get_min_oa_cfm_sch_zone,
 )
 from rct229.utils.assertions import getattr_
-from rct229.utils.jsonpath_utils import find_all, find_one
+from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.std_comparisons import std_equal
+from rct229.utils.utility_functions import (
+    find_exactly_one_hvac_system,
+    find_exactly_one_zone,
+)
 
 LIGHTING_SPACE = schema_enums["LightingSpaceOptions2019ASHRAE901TG37"]
 DEMAND_CONTROL_VENTILATION_CONTROL = schema_enums[
@@ -93,45 +97,52 @@ class Section19Rule7(RuleDefinitionListIndexedBase):
                     get_min_oa_cfm_sch_zone(rmi_p, zone_id_b)
                 )
 
+                # find if DCV was modeled in baseline
                 zone_data[hvac_id_b]["was_DCV_modeled_baseline"] = any(
                     [
                         getattr_(
                             terminal_b, "terminals", "has_demand_control_ventilation"
                         )
-                        or find_one(
-                            f'$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*][?(@.id = "{getattr_(terminal_b, "terminals", "served_by_heating_ventilating_air_conditioning_system")}")].fan_system.demand_control_ventilation_control',
-                            rmi_p,
-                        )
                         not in [None, DEMAND_CONTROL_VENTILATION_CONTROL.NONE]
                         for terminal_b in find_all(
-                            f"$.buildings[*].building_segments[*].terminals[*]",
-                            rmi_b,
+                            f"$.terminals[*]",
+                            find_exactly_one_zone(rmi_b, zone_id_b),
                         )
                     ]
                 )
 
-                zone_p = find_one(
-                    f'$.buildings[*].building_segments[*].zones[*][?(@.id = "{zone_id_b}")]',
-                    rmi_p,
+                # find proposed zone
+                zone_p = find_exactly_one_zone(rmi_p, zone_id_b)
+
+                # find if DCV was modeled in proposed
+                zone_data[hvac_id_b]["was_DCV_modeled_proposed"] = any(
+                    [
+                        getattr_(
+                            terminal_p,
+                            "terminals",
+                            "has_demand_control_ventilation",
+                        )
+                        or (
+                            getattr_(
+                                find_exactly_one_hvac_system(
+                                    rmi_p,
+                                    getattr_(
+                                        terminal_p,
+                                        "terminals",
+                                        "served_by_heating_ventilating_air_conditioning_system",
+                                    ),
+                                ),
+                                "HVAC",
+                                "fan_system",
+                                "demand_control_ventilation_control",
+                            ),
+                        )
+                        != [None, DEMAND_CONTROL_VENTILATION_CONTROL.NONE]
+                        for terminal_p in find_all(f"$.terminals[*]", zone_p)
+                    ]
                 )
 
-                zone_data[hvac_id_b]["was_DCV_modeled_proposed"] = find_one(
-                    f'$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*][?(@.id = "{hvac_id_b}")].fan_system.demand_control_ventilation_control',
-                    rmi_p,
-                ) != [None, DEMAND_CONTROL_VENTILATION_CONTROL.NONE]
-
-                if not zone_data[hvac_id_b]["was_DCV_modeled_proposed"]:
-                    zone_data[hvac_id_b]["was_DCV_modeled_proposed"] = any(
-                        [
-                            getattr_(
-                                terminal_p,
-                                "terminals",
-                                "has_demand_control_ventilation",
-                            )
-                            for terminal_p in find_all(f"$.terminals[*]", zone_p)
-                        ]
-                    )
-
+                # find if zone_air_distribution_effectiveness_greater_than_1 or not
                 zone_data[hvac_id_b][
                     "zone_air_distribution_effectiveness_greater_than_1"
                 ] = (
