@@ -12,7 +12,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_min_oa_cfm_sch_zone imp
     get_min_oa_cfm_sch_zone,
 )
 from rct229.utils.assertions import getattr_
-from rct229.utils.jsonpath_utils import find_all
+from rct229.utils.jsonpath_utils import find_all, find_one
 from rct229.utils.std_comparisons import std_equal
 from rct229.utils.utility_functions import (
     find_exactly_one_hvac_system,
@@ -100,10 +100,7 @@ class Section19Rule7(RuleDefinitionListIndexedBase):
                 # find if DCV was modeled in baseline
                 zone_data[hvac_id_b]["was_DCV_modeled_baseline"] = any(
                     [
-                        getattr_(
-                            terminal_b, "terminals", "has_demand_control_ventilation"
-                        )
-                        not in [None, DEMAND_CONTROL_VENTILATION_CONTROL.NONE]
+                        terminal_b.get("has_demand_control_ventilation", False)
                         for terminal_b in find_all(
                             "$.terminals[*]",
                             find_exactly_one_zone(rmi_b, zone_id_b),
@@ -117,13 +114,10 @@ class Section19Rule7(RuleDefinitionListIndexedBase):
                 # find if DCV was modeled in proposed
                 zone_data[hvac_id_b]["was_DCV_modeled_proposed"] = any(
                     [
-                        getattr_(
-                            terminal_p,
-                            "terminals",
-                            "has_demand_control_ventilation",
-                        )
-                        or (
-                            getattr_(
+                        terminal_p.get("has_demand_control_ventilation", False)
+                        or find_one(
+                            "$.fan_system.demand_control_ventilation_control",
+                            (
                                 find_exactly_one_hvac_system(
                                     rmi_p,
                                     getattr_(
@@ -131,10 +125,7 @@ class Section19Rule7(RuleDefinitionListIndexedBase):
                                         "terminals",
                                         "served_by_heating_ventilating_air_conditioning_system",
                                     ),
-                                ),
-                                "HVAC",
-                                "fan_system",
-                                "demand_control_ventilation_control",
+                                )
                             ),
                         )
                         != [None, DEMAND_CONTROL_VENTILATION_CONTROL.NONE]
