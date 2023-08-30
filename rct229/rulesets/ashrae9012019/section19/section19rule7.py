@@ -105,7 +105,7 @@ class Section19Rule7(RuleDefinitionListIndexedBase):
                         )
                         not in [None, DEMAND_CONTROL_VENTILATION_CONTROL.NONE]
                         for terminal_b in find_all(
-                            f"$.terminals[*]",
+                            "$.terminals[*]",
                             find_exactly_one_zone(rmi_b, zone_id_b),
                         )
                     ]
@@ -138,7 +138,7 @@ class Section19Rule7(RuleDefinitionListIndexedBase):
                             ),
                         )
                         != [None, DEMAND_CONTROL_VENTILATION_CONTROL.NONE]
-                        for terminal_p in find_all(f"$.terminals[*]", zone_p)
+                        for terminal_p in find_all("$.terminals[*]", zone_p)
                     ]
                 )
 
