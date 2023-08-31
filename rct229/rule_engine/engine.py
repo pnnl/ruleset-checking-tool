@@ -126,7 +126,10 @@ def evaluate_rules(rules_list, rmrs, unit_system=UNIT_SYSTEM.IP):
             invalid_rmrs["Proposed"] = proposed_validation["error"]
             print(invalid_rmrs["Proposed"])
 
-    assert_(len(invalid_rmrs) == 0, f"RPDs provided are invalid. See error messages in terminal.")
+    assert_(
+        len(invalid_rmrs) == 0,
+        f"RPDs provided are invalid. See error messages in terminal.",
+    )
 
     # Evaluate the rules if all the used rmrs are valid
     # Replace the numbers that have schema units in the RMRs with the
