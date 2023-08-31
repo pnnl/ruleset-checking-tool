@@ -5,6 +5,7 @@ import rct229.rulesets as rulesets
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 from rct229.schema.schema_utils import quantify_rmr
 from rct229.schema.validate import validate_rmr
+from rct229.utils.assertions import assert_
 from rct229.utils.pint_utils import UNIT_SYSTEM, calcq_to_str
 
 
@@ -111,34 +112,38 @@ def evaluate_rules(rules_list, rmrs, unit_system=UNIT_SYSTEM.IP):
         user_validation = validate_rmr(rmrs.user)
         if user_validation["passed"] is not True:
             invalid_rmrs["User"] = user_validation["error"]
+            print(invalid_rmrs["User"])
 
     if rmrs_used.baseline:
         baseline_validation = validate_rmr(rmrs.baseline)
         if baseline_validation["passed"] is not True:
             invalid_rmrs["Baseline"] = baseline_validation["error"]
+            print(invalid_rmrs["Baseline"])
 
     if rmrs_used.proposed:
         proposed_validation = validate_rmr(rmrs.proposed)
         if proposed_validation["passed"] is not True:
             invalid_rmrs["Proposed"] = proposed_validation["error"]
+            print(invalid_rmrs["Proposed"])
+
+    assert_(len(invalid_rmrs) == 0, f"RPDs provided are invalid. See error messages in terminal.")
 
     # Evaluate the rules if all the used rmrs are valid
-    if len(invalid_rmrs) == 0:
-        # Replace the numbers that have schema units in the RMRs with the
-        # appropriate pint quantities
-        # TODO: quantitization should happen right after schema validation and
-        # before other validations
-        rmrs = UserBaselineProposedVals(
-            user=quantify_rmr(rmrs.user),
-            baseline=quantify_rmr(rmrs.baseline),
-            proposed=quantify_rmr(rmrs.proposed),
-        )
+    # Replace the numbers that have schema units in the RMRs with the
+    # appropriate pint quantities
+    # TODO: quantitization should happen right after schema validation and
+    # before other validations
+    rmrs = UserBaselineProposedVals(
+        user=quantify_rmr(rmrs.user),
+        baseline=quantify_rmr(rmrs.baseline),
+        proposed=quantify_rmr(rmrs.proposed),
+    )
 
-        # Evaluate the rules
-        for rule in rules_list:
-            print(f"Processing Rule {rule.id}")
-            outcome = rule.evaluate(rmrs)
-            outcomes.append(outcome)
+    # Evaluate the rules
+    for rule in rules_list:
+        print(f"Processing Rule {rule.id}")
+        outcome = rule.evaluate(rmrs)
+        outcomes.append(outcome)
 
     return {
         "invalid_rmrs": invalid_rmrs,
