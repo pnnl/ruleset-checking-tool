@@ -111,14 +111,22 @@ def does_zone_meet_g3_1_1c(rmi, zone_id, is_leap_year, zones_and_systems):
         system_total_area = sum(map_(zone_load_and_eflh_list, "0.area"), ZERO.AREA)
         system_total_load = sum(map_(zone_load_and_eflh_list, "0.peak"), ZERO.POWER)
         avg_eflh = (
-            np.dot(
-                map_(zone_load_and_eflh_list, lambda zl: zl[1]),
-                map_(zone_load_and_eflh_list, lambda zl: zl[0]["area"].magnitude),
+            (
+                np.dot(
+                    map_(zone_load_and_eflh_list, lambda zl: zl[1]),
+                    map_(zone_load_and_eflh_list, lambda zl: zl[0]["area"].magnitude),
+                )
+                / system_total_area.magnitude
             )
-            / system_total_area.magnitude
-        ) if system_total_area != ZERO.AREA else 0.0
+            if system_total_area != ZERO.AREA
+            else 0.0
+        )
 
-        avg_internal_load = system_total_load / system_total_area if system_total_area != ZERO.AREA else 0.0
+        avg_internal_load = (
+            system_total_load / system_total_area
+            if system_total_area != ZERO.AREA
+            else 0.0
+        )
 
         zone_internal_loads = get_zone_peak_internal_load_floor_area_dict(rmi, zone_id)
         zone_eflh = get_zone_weekly_eflh(zone_id)
