@@ -15,7 +15,7 @@ from rct229.schema.validate import schema_validate_rmr
 POWER_DELTA = 1
 POWER_THRESHOLD_100 = (CAPACITY_THRESHOLD_QUANTITY * 100 * ureg("m2")).to("W").magnitude
 
-TEST_RMD = {
+TEST_RMD_B_G311B = {
     "id": "test_rmd",
     "buildings": [
         {
@@ -60,7 +60,6 @@ TEST_RMD = {
                     "id": "Building Segment 2",
                     "lighting_building_area_type": "MULTIFAMILY",
                     "heating_ventilating_air_conditioning_systems": [
-                        # directly conditioned zone
                         {
                             "id": "hvac_2_1",
                             "cooling_system": {
@@ -105,13 +104,12 @@ TEST_RMD = {
                                 }
                             ],
                             "surfaces": [
-                                # Adds to zone_other_ua
                                 {
                                     "id": "surface_3_1_1",
                                     "adjacent_to": "INTERIOR",
-                                    "adjacent_zone": "zone_1_2",  # semi-heated
-                                    "area": 10,  # m2
-                                    "tilt": 90,  # wall
+                                    "adjacent_zone": "zone_1_2",
+                                    "area": 10,
+                                    "tilt": 90,
                                     "construction": {
                                         "id": "construction_1",
                                         "u_factor": 1.2,
@@ -126,108 +124,7 @@ TEST_RMD = {
     ],
 }
 
-
-TEST_PROPOSED_RMD = {
-    "id": "ASHRAE229 1",
-    "ruleset_model_descriptions": [
-        {
-            "id": "RMI 1",
-            "buildings": [
-                {
-                    "id": "Building 1",
-                    "building_open_schedule": "Required Building Schedule 1",
-                    "building_segments": [
-                        {
-                            "id": "Building Segment 1",
-                            "zones": [
-                                {
-                                    "id": "Thermal Zone 1",
-                                    "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                    "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
-                                    "volume": 2000,
-                                    "floor_name": "FL 1",
-                                    "spaces": [{"id": "Space 1", "floor_area": 50}],
-                                    "terminals": [
-                                        {
-                                            "id": "VAV Air Terminal 1",
-                                            "is_supply_ducted": True,
-                                            "heating_source": "HOT_WATER",
-                                            "type": "VARIABLE_AIR_VOLUME",
-                                            "served_by_heating_ventilating_air_conditioning_system": "System 7",
-                                            "heating_from_loop": "Boiler Loop 1",
-                                        }
-                                    ],
-                                },
-                                {
-                                    "id": "Thermal Zone 2",
-                                    "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                    "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
-                                    "volume": 2000,
-                                    "floor_name": "FL 1",
-                                    "spaces": [
-                                        {
-                                            "id": "Space 2",
-                                            "floor_area": 500,
-                                        }
-                                    ],
-                                    "terminals": [
-                                        {
-                                            "id": "VAV Air Terminal 2",
-                                            "served_by_heating_ventilating_air_conditioning_system": "Testing Sys",
-                                        }
-                                    ],
-                                },
-                            ],
-                            "heating_ventilating_air_conditioning_systems": [
-                                {
-                                    "id": "Testing Sys",
-                                    "heating_system": {
-                                        "id": "Preheat Coil 1",
-                                        "type": "FURNACE",
-                                    },
-                                    "cooling_system": {
-                                        "id": "CHW Coil 1",
-                                        "type": "NONE",
-                                    },
-                                }
-                            ],
-                        }
-                    ],
-                }
-            ],
-        }
-    ],
-}
-
-
-TEST_RMD_FULL = {"id": "229", "ruleset_model_descriptions": [TEST_RMD]}
-TEST_RMD_B_G311B = quantify_rmr(TEST_RMD_FULL)["ruleset_model_descriptions"][0]
-
-
-TEST_RMD_P = quantify_rmr(TEST_PROPOSED_RMD)["ruleset_model_descriptions"][0]
-
-
-# def test__TEST_RMD__is_valid():
-#     schema_validation_result = schema_validate_rmr(TEST_RMD)
-#     assert schema_validation_result[
-#         "passed"
-#     ], f"Schema error: {schema_validation_result['error']}"
-
-
-def test__get_zone_target_baseline_system_G3_1_1_b__true():
-    assert get_zone_target_baseline_system(TEST_RMD_B_G311B, TEST_RMD_P, "CZ4A") == {
-        "Thermal Zone 1": {
-            "expected_system_type": HVAC_SYS.SYS_5,
-            "system_origin": SYSTEMORIGIN.G311B,
-        },
-        "Thermal Zone 2": {
-            "expected_system_type": HVAC_SYS.SYS_1,
-            "system_origin": "RESIDENTIAL CZ_3b_3c_or_4_to_8",
-        },
-    }
-
-
-TEST_RPD_FULL = {
+TEST_RMD_B_G311C = {
     "id": "RMD 1",
     "buildings": [
         {
@@ -296,27 +193,27 @@ TEST_RPD_FULL = {
                                         {
                                             "id": "subsurface_3_1",
                                             "glazed_area": 0,
-                                            "opaque_area": 10,  # m2
-                                            "u_factor": 0.5,  # W/(m2 * K)
+                                            "opaque_area": 10,
+                                            "u_factor": 0.5,
                                         }
                                     ],
                                 },
                                 {
                                     "id": "Surface 3_2",
                                     "adjacent_to": "INTERIOR",
-                                    "adjacent_zone": "Thermal Zone 1",  # directly conditioned
-                                    "area": 10,  # m2
+                                    "adjacent_zone": "Thermal Zone 1",
+                                    "area": 10,
                                     "tilt": 90,
                                     "construction": {
                                         "id": "const_1_4_2",
-                                        "u_factor": 0.1,  # W/(m2 * K)
+                                        "u_factor": 0.1,
                                     },
                                     "subsurfaces": [
                                         {
                                             "id": "subsurface_1_4_2_1",
-                                            "glazed_area": 10,  # m2
+                                            "glazed_area": 10,
                                             "opaque_area": 0,
-                                            "u_factor": 3,  # W/(m2 * K)
+                                            "u_factor": 3,
                                         }
                                     ],
                                 },
@@ -404,24 +301,6 @@ TEST_RPD_FULL = {
             "hourly_cooling_design_day": [1.0] * 24,
         },
         {
-            "id": "lighting_schedule_2",
-            "hourly_values": [1.0] * 8760,
-            "hourly_heating_design_day": [0.0] * 24,
-            "hourly_cooling_design_day": [1.0] * 24,
-        },
-        {
-            "id": "miscellaneous_equipment_schedule_2",
-            "hourly_values": [1.0] * 8760,
-            "hourly_heating_design_day": [0.0] * 24,
-            "hourly_cooling_design_day": [1.0] * 24,
-        },
-        {
-            "id": "occupant_schedule_2",
-            "hourly_values": [1.0] * 8760,
-            "hourly_heating_design_day": [0.0] * 24,
-            "hourly_cooling_design_day": [1.0] * 24,
-        },
-        {
             "id": "Operation Schedule 1",
             "hourly_values": [1.0] * 8760,
             "hourly_heating_design_day": [0.0] * 24,
@@ -430,20 +309,79 @@ TEST_RPD_FULL = {
     ],
 }
 
-TEST_RMD = {"id": "229", "ruleset_model_descriptions": [TEST_RPD_FULL]}
-RMD_B = quantify_rmr(TEST_RMD)["ruleset_model_descriptions"][0]
-
-
-def test__get_zone_target_baseline_system_G3_1_1_c__true():
-    assert get_zone_target_baseline_system(RMD_B, TEST_RMD_P, "CZ5A") == {
-        "Thermal Zone 1": {
-            "expected_system_type": HVAC_SYS.SYS_3,
-            "system_origin": SYSTEMORIGIN.G311C,
+TEST_RMD_P = {
+    "id": "ASHRAE229 1",
+    "ruleset_model_descriptions": [
+        {
+            "id": "RMI 1",
+            "buildings": [
+                {
+                    "id": "Building 1",
+                    "building_open_schedule": "Required Building Schedule 1",
+                    "building_segments": [
+                        {
+                            "id": "Building Segment 1",
+                            "zones": [
+                                {
+                                    "id": "Thermal Zone 1",
+                                    "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                    "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                    "volume": 2000,
+                                    "floor_name": "FL 1",
+                                    "spaces": [{"id": "Space 1", "floor_area": 50}],
+                                    "terminals": [
+                                        {
+                                            "id": "VAV Air Terminal 1",
+                                            "is_supply_ducted": True,
+                                            "heating_source": "HOT_WATER",
+                                            "type": "VARIABLE_AIR_VOLUME",
+                                            "served_by_heating_ventilating_air_conditioning_system": "System 7",
+                                            "heating_from_loop": "Boiler Loop 1",
+                                        }
+                                    ],
+                                },
+                                {
+                                    "id": "Thermal Zone 2",
+                                    "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                    "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                    "volume": 2000,
+                                    "floor_name": "FL 1",
+                                    "spaces": [
+                                        {
+                                            "id": "Space 2",
+                                            "floor_area": 500,
+                                        }
+                                    ],
+                                    "terminals": [
+                                        {
+                                            "id": "VAV Air Terminal 2",
+                                            "served_by_heating_ventilating_air_conditioning_system": "Testing Sys",
+                                        }
+                                    ],
+                                },
+                            ],
+                            "heating_ventilating_air_conditioning_systems": [
+                                {
+                                    "id": "Testing Sys",
+                                    "heating_system": {
+                                        "id": "Preheat Coil 1",
+                                        "type": "FURNACE",
+                                    },
+                                    "cooling_system": {
+                                        "id": "CHW Coil 1",
+                                        "type": "NONE",
+                                    },
+                                }
+                            ],
+                        }
+                    ],
+                }
+            ],
         }
-    }
+    ],
+}
 
-
-TEST_RMI = {
+TEST_RMD_B_G311D = {
     "id": "test_rmd",
     "buildings": [
         {
@@ -507,27 +445,27 @@ TEST_RMI = {
                                         {
                                             "id": "subsurface_3_1",
                                             "glazed_area": 0,
-                                            "opaque_area": 10,  # m2
-                                            "u_factor": 0.5,  # W/(m2 * K)
+                                            "opaque_area": 10,
+                                            "u_factor": 0.5,
                                         }
                                     ],
                                 },
                                 {
                                     "id": "Surface 3_2",
                                     "adjacent_to": "INTERIOR",
-                                    "adjacent_zone": "Thermal Zone 1",  # directly conditioned
-                                    "area": 10,  # m2
+                                    "adjacent_zone": "Thermal Zone 1",
+                                    "area": 10,
                                     "tilt": 90,
                                     "construction": {
                                         "id": "const_1_4_2",
-                                        "u_factor": 0.1,  # W/(m2 * K)
+                                        "u_factor": 0.1,
                                     },
                                     "subsurfaces": [
                                         {
                                             "id": "subsurface_1_4_2_1",
-                                            "glazed_area": 10,  # m2
+                                            "glazed_area": 10,
                                             "opaque_area": 0,
-                                            "u_factor": 3,  # W/(m2 * K)
+                                            "u_factor": 3,
                                         }
                                     ],
                                 },
@@ -544,21 +482,7 @@ TEST_RMI = {
     ],
 }
 
-
-TEST_RMD_B = {"id": "229", "ruleset_model_descriptions": [TEST_RMI]}
-TEST_RMD_UNIT_d = quantify_rmr(TEST_RMD_B)["ruleset_model_descriptions"][0]
-
-
-def test__get_zone_target_baseline_system_G3_1_1_d__true():
-    assert get_zone_target_baseline_system(TEST_RMD_UNIT_d, TEST_RMD_P, "CZ4A") == {
-        "Thermal Zone 1": {
-            "expected_system_type": HVAC_SYS.SYS_5,
-            "system_origin": SYSTEMORIGIN.G311D,
-        }
-    }
-
-
-TEST_RMI = {
+TEST_RMD_B_G311E = {
     "id": "test_rmd",
     "schedules": [{"id": "schedule_1", "hourly_values": [1.2] * 8670}],
     "buildings": [
@@ -584,7 +508,6 @@ TEST_RMI = {
                     ],
                     "zones": [
                         {
-                            # case has door but the space area is greater than 50 or 2% of the floor area
                             "id": "Thermal Zone 2",
                             "floor_name": "FLOOR 1",
                             "volume": 1000,
@@ -625,20 +548,7 @@ TEST_RMI = {
     ],
 }
 
-TEST_RPD_FULL = {"id": "229", "ruleset_model_descriptions": [TEST_RMI]}
-TEST_RMD_UNIT_e = quantify_rmr(TEST_RPD_FULL)["ruleset_model_descriptions"][0]
-
-
-def test__get_zone_target_baseline_system_G3_1_1_e__true():
-    assert get_zone_target_baseline_system(TEST_RMD_UNIT_e, TEST_RMD_P, "CZ3A") == {
-        "Thermal Zone 2": {
-            "expected_system_type": HVAC_SYS.SYS_10,
-            "system_origin": SYSTEMORIGIN.G311E,
-        }
-    }
-
-
-TEST_RMI = {
+TEST_RMD_B_G311F = {
     "id": "test_rmd",
     "schedules": [{"id": "schedule_1", "hourly_values": [1.2] * 8670}],
     "buildings": [
@@ -664,7 +574,6 @@ TEST_RMI = {
                     ],
                     "zones": [
                         {
-                            # case has door but the space area is greater than 50 or 2% of the floor area
                             "id": "Thermal Zone 2",
                             "floor_name": "FLOOR 1",
                             "volume": 1000,
@@ -705,20 +614,7 @@ TEST_RMI = {
     ],
 }
 
-TEST_RPD_FULL = {"id": "229", "ruleset_model_descriptions": [TEST_RMI]}
-TEST_RMD_UNIT_f = quantify_rmr(TEST_RPD_FULL)["ruleset_model_descriptions"][0]
-
-
-def test__get_zone_target_baseline_system_G3_1_1_f__true():
-    assert get_zone_target_baseline_system(TEST_RMD_UNIT_f, TEST_RMD_P, "CZ4A") == {
-        "Thermal Zone 2": {
-            "expected_system_type": "",
-            "system_origin": SYSTEMORIGIN.G311F,
-        }
-    }
-
-
-TEST_RMI = {
+TEST_RMD_B_G311G = {
     "id": "test_rmd",
     "buildings": [
         {
@@ -804,7 +700,6 @@ TEST_RMI = {
         },
     ],
     "schedules": [
-        {"id": "schedule_1", "hourly_values": [1.2] * 8670},
         {"id": "lighting_schedule_1", "hourly_cooling_design_day": [1] * 24},
         {
             "id": "miscellaneous_equipment_schedule_1",
@@ -815,12 +710,152 @@ TEST_RMI = {
 }
 
 
-TEST_RPD_FULL = {"id": "229", "ruleset_model_descriptions": [TEST_RMI]}
-TEST_RMD_UNIT_g = quantify_rmr(TEST_RPD_FULL)["ruleset_model_descriptions"][0]
+TEST_RMD_B_FULL_G311B = {"id": "229", "ruleset_model_descriptions": [TEST_RMD_B_G311B]}
+TEST_RMD_B_UNIT_G311B = quantify_rmr(TEST_RMD_B_FULL_G311B)[
+    "ruleset_model_descriptions"
+][0]
+
+TEST_RMD_B_FULL_G311C = {"id": "229", "ruleset_model_descriptions": [TEST_RMD_B_G311C]}
+TEST_RMD_B_UNIT_G311C = quantify_rmr(TEST_RMD_B_FULL_G311C)[
+    "ruleset_model_descriptions"
+][0]
+
+TEST_RMD_B_FULL_G311D = {"id": "229", "ruleset_model_descriptions": [TEST_RMD_B_G311D]}
+TEST_RMD_B_UNIT_G311D = quantify_rmr(TEST_RMD_B_FULL_G311D)[
+    "ruleset_model_descriptions"
+][0]
+
+TEST_RMD_B_FULL_G311E = {"id": "229", "ruleset_model_descriptions": [TEST_RMD_B_G311E]}
+TEST_RMD_B_UNIT_G311E = quantify_rmr(TEST_RMD_B_FULL_G311E)[
+    "ruleset_model_descriptions"
+][0]
+
+TEST_RMD_B_FULL_G311F = {"id": "229", "ruleset_model_descriptions": [TEST_RMD_B_G311F]}
+TEST_RMD_B_UNIT_G311F = quantify_rmr(TEST_RMD_B_FULL_G311F)[
+    "ruleset_model_descriptions"
+][0]
+
+TEST_RMD_B_FULL_G311G = {"id": "229", "ruleset_model_descriptions": [TEST_RMD_B_G311G]}
+TEST_RMD_B_UNIT_G311G = quantify_rmr(TEST_RMD_B_FULL_G311G)[
+    "ruleset_model_descriptions"
+][0]
+
+
+TEST_RMD_UNIT_P = quantify_rmr(TEST_RMD_P)["ruleset_model_descriptions"][0]
+
+
+def test__TEST_RMD_G311B_is_valid():
+    schema_validation_result = schema_validate_rmr(TEST_RMD_B_FULL_G311B)
+    assert schema_validation_result[
+        "passed"
+    ], f"Schema error: {schema_validation_result['error']}"
+
+
+def test__TEST_RMD_G311C_is_valid():
+    schema_validation_result = schema_validate_rmr(TEST_RMD_B_FULL_G311C)
+    assert schema_validation_result[
+        "passed"
+    ], f"Schema error: {schema_validation_result['error']}"
+
+
+def test__TEST_RMD_G311D_is_valid():
+    schema_validation_result = schema_validate_rmr(TEST_RMD_B_FULL_G311D)
+    assert schema_validation_result[
+        "passed"
+    ], f"Schema error: {schema_validation_result['error']}"
+
+
+def test__TEST_RMD_G311E_is_valid():
+    schema_validation_result = schema_validate_rmr(TEST_RMD_B_FULL_G311E)
+    assert schema_validation_result[
+        "passed"
+    ], f"Schema error: {schema_validation_result['error']}"
+
+
+def test__TEST_RMD_G311F_is_valid():
+    schema_validation_result = schema_validate_rmr(TEST_RMD_B_FULL_G311F)
+    assert schema_validation_result[
+        "passed"
+    ], f"Schema error: {schema_validation_result['error']}"
+
+
+def test__TEST_RMD_G311G_is_valid():
+    schema_validation_result = schema_validate_rmr(TEST_RMD_B_FULL_G311G)
+    assert schema_validation_result[
+        "passed"
+    ], f"Schema error: {schema_validation_result['error']}"
+
+
+def test__TEST_RMD_P_is_valid():
+    schema_validation_result = schema_validate_rmr(TEST_RMD_P)
+    assert schema_validation_result[
+        "passed"
+    ], f"Schema error: {schema_validation_result['error']}"
+
+
+def test__get_zone_target_baseline_system_G3_1_1_b__true():
+    assert get_zone_target_baseline_system(
+        TEST_RMD_B_UNIT_G311B, TEST_RMD_UNIT_P, "CZ4A"
+    ) == {
+        "Thermal Zone 1": {
+            "expected_system_type": HVAC_SYS.SYS_5,
+            "system_origin": SYSTEMORIGIN.G311B,
+        },
+        "Thermal Zone 2": {
+            "expected_system_type": HVAC_SYS.SYS_1,
+            "system_origin": "RESIDENTIAL CZ_3b_3c_or_4_to_8",
+        },
+    }
+
+
+def test__get_zone_target_baseline_system_G3_1_1_c__true():
+    assert get_zone_target_baseline_system(
+        TEST_RMD_B_UNIT_G311C, TEST_RMD_UNIT_P, "CZ5A"
+    ) == {
+        "Thermal Zone 1": {
+            "expected_system_type": HVAC_SYS.SYS_3,
+            "system_origin": SYSTEMORIGIN.G311C,
+        }
+    }
+
+
+def test__get_zone_target_baseline_system_G3_1_1_d__true():
+    assert get_zone_target_baseline_system(
+        TEST_RMD_B_UNIT_G311D, TEST_RMD_UNIT_P, "CZ4A"
+    ) == {
+        "Thermal Zone 1": {
+            "expected_system_type": HVAC_SYS.SYS_5,
+            "system_origin": SYSTEMORIGIN.G311D,
+        }
+    }
+
+
+def test__get_zone_target_baseline_system_G3_1_1_e__true():
+    assert get_zone_target_baseline_system(
+        TEST_RMD_B_UNIT_G311E, TEST_RMD_UNIT_P, "CZ3A"
+    ) == {
+        "Thermal Zone 2": {
+            "expected_system_type": HVAC_SYS.SYS_10,
+            "system_origin": SYSTEMORIGIN.G311E,
+        }
+    }
+
+
+def test__get_zone_target_baseline_system_G3_1_1_f__true():
+    assert get_zone_target_baseline_system(
+        TEST_RMD_B_UNIT_G311F, TEST_RMD_UNIT_P, "CZ4A"
+    ) == {
+        "Thermal Zone 2": {
+            "expected_system_type": "",
+            "system_origin": SYSTEMORIGIN.G311F,
+        }
+    }
 
 
 def test__get_zone_target_baseline_system_G3_1_1_g__true():
-    assert get_zone_target_baseline_system(TEST_RMD_UNIT_g, TEST_RMD_P, "CZ4A") == {
+    assert get_zone_target_baseline_system(
+        TEST_RMD_B_UNIT_G311G, TEST_RMD_UNIT_P, "CZ4A"
+    ) == {
         "Thermal Zone 1": {
             "expected_system_type": HVAC_SYS.SYS_11_1,
             "system_origin": "G3_1_1g_part2",

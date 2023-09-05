@@ -62,7 +62,7 @@
 - G3.1.1c "If the baseline HVAC system type is 5, 6, 7 or 8 use separate single-zone systems conforming with the requirements of system 3 or system 4 for any HVAC zones that have occupancy, internal gains, or schedules that differ significantly from the rest of the HVAC zones served by the system. The total peak internal gains that differ by 10 Btu/h·ft2 or more from the average of other HVAC zones served by the system, or schedules that differ by more than 40 equivalent full-load hours per week from other spaces served by the system, are considered to differ significantly. Examples where this exception may be applicable include but are not limited to natatoriums and continually occupied security areas. This exception does not apply to computer rooms."
 - create a list of zones that meet G3.1.1c - we can't change the system type assignment as we go, otherwise we'll be calculating the peak load average with a diminishing list of zones: `zones_that_meetG3_1_1c_list = []`
 - loop through the zones_and_systems to see if any of the zones meets G3.1.1.c: `for zone in zones_and_systems:`
-	- use the function does_zone_meet_G3_1_1c to determine if this zone meets this requirement: `if does_zone_meet_G3_1_1c(B_RMD,zone,leap_year, zones_and_systems):`
+	- use the function does_zone_meet_G3_1_1c to determine if this zone meets this requirement: `if does_zone_meet_G3_1_1c(B_RMD,zone.id,leap_year, zones_and_systems):`
 		- append the zone_id to the zones_that_meetG3_1_1c_list: `zones_that_meetG3_1_1c_list.append(zone)`
 - loop through zones_that_meetG3_1_1c_list and change the expected system type and origin for the zones that meet G3.1.1c: `for zone in zones_that_meetG3_1_1c_list:`
 	- change the system origin string: `zones_and_systems[zone]["SYSTEM_ORIGIN"] = "G3_1_1c"` 
@@ -78,13 +78,13 @@
 - all other cases: `else:`
 	- the system type is SYS-7: `G3_1_1d_expected_system_type = SYS_7`
 - loop through the zones_and_systems to see if any of the zones meets G3.1.1.d: `for zone in zones_and_systems:`
-	- use the function does_zone_meet_G3_1_1d to determine if this zone meets this requirement: `if does_zone_meet_G3_1_1d(B_RMD,zone):`
+	- use the function does_zone_meet_G3_1_1d to determine if this zone meets this requirement: `if does_zone_meet_G3_1_1d(B_RMD,zone.id):`
 		- change the system origin string: `zones_and_systems[zone]["SYSTEM_ORIGIN"] = "G3_1_1d"` 
 		- set the system to SYS_5 or SYS_7: `zones_and_systems[zone]["EXPECTED_SYSTEM_TYPE"] = G3_1_1d_expected_system_type`
 
 - G3.1.1e "Thermal zones designed with heating-only systems in the proposed design serving storage rooms, stairwells, vestibules, electrical/mechanical rooms, and restrooms not exhausting or transferring air from mechanically cooled thermal zones in the proposed design shall use system type 9 or 10 in the baseline building design."
 - loop through the zones_and_systems to see if any of the zones meets this requirement: `for zone in zones_and_systems:`
-	- use the function does_zone_meet_G3_1_1e to determine whether to change the system type: `if does_zone_meet_G3_1_1e(P-RMD,B-RMD,zone):`
+	- use the function does_zone_meet_G3_1_1e to determine whether to change the system type: `if does_zone_meet_G3_1_1e(P-RMD,B-RMD,zone.id):`
         - change the system origin string: `zones_and_systems[zone]["SYSTEM_ORIGIN"] = "G3_1_1e"`
         - choose system 9 or 10 based on climate zone: `if is_CZ_0_to_3a(B-CLIMATEZONE):`
             - set the system to SYS_10: `zones_and_systems[zone]["EXPECTED_SYSTEM_TYPE"] = SYS_10`
