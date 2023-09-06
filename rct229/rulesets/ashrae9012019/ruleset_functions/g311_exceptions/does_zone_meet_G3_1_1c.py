@@ -90,9 +90,8 @@ def does_zone_meet_g3_1_1c(rmi, zone_id, is_leap_year, zones_and_systems):
         # keep only matched system type
         zones_same_floor_same_system_type = list(
             filter(
-                lambda other_zone_id: zones_and_systems[other_zone_id][
-                    "expected_system_type"
-                ]
+                lambda other_zone_id: zones_and_systems.get(other_zone_id)
+                and zones_and_systems[other_zone_id]["expected_system_type"]
                 == expected_system_type,
                 zones_on_same_floor_ids,
             )
@@ -101,15 +100,16 @@ def does_zone_meet_g3_1_1c(rmi, zone_id, is_leap_year, zones_and_systems):
         # a list of conditioned or semi-conditioned zones only
         zone_load_and_eflh_list = [
             (
+                # tuple, 0 is peak load dict, 1 is weekly eflh
                 get_zone_peak_internal_load_floor_area_dict(rmi, other_match_zone_id),
                 get_zone_weekly_eflh(other_match_zone_id),
             )
             for other_match_zone_id in zones_same_floor_same_system_type
-            if other_match_zone_id in zones_and_systems.keys()
         ]
 
         system_total_area = sum(map_(zone_load_and_eflh_list, "0.area"), ZERO.AREA)
         system_total_load = sum(map_(zone_load_and_eflh_list, "0.peak"), ZERO.POWER)
+
         avg_eflh = (
             (
                 np.dot(
@@ -125,7 +125,7 @@ def does_zone_meet_g3_1_1c(rmi, zone_id, is_leap_year, zones_and_systems):
         avg_internal_load = (
             system_total_load / system_total_area
             if system_total_area != ZERO.AREA
-            else 0.0
+            else ZERO.POWER_PER_AREA
         )
 
         zone_internal_loads = get_zone_peak_internal_load_floor_area_dict(rmi, zone_id)

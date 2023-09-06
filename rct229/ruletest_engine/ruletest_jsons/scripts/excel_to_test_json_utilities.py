@@ -876,6 +876,7 @@ def add_hvac_systems(
             for zone in zones:
                 if zone["id"] in zone_list:
                     segment_contains_relevant_zone = True
+                    break
 
             if segment_contains_relevant_zone:
                 # Intialize HVAC systems if not found in this building segment yet
@@ -889,28 +890,42 @@ def add_hvac_systems(
 
                 # If MZ, only require one HVAC system and assign total capacities
                 if system_classification == "MultiZoneAirLoop":
-                    hvac_system_id_set = False
+                    mz_hvac_ids_standardized = False
 
-                    # Check for duplicate multizone air loop. If it already exists, create a duplicae of it and
+                    # Check for duplicate multizone air loop. If it already exists, create a duplicate of it and
                     # update IDs to avoid duplicates.
                     for hvac_system in building_segment[
                         "heating_ventilating_air_conditioning_systems"
                     ]:
-                        if system_name == hvac_system["id"]:
+
+                        # Iterate IDs to avoid duplicate IDs if this system type already exists in the building
+                        if system_name in hvac_system["id"]:
                             hvac_copy = deepcopy(hvac_system)
                             iterate_ids_in_dict(hvac_copy)
-                            hvac_system_id_set = True
+                            mz_hvac_ids_standardized = True
 
                     building_segment[
                         "heating_ventilating_air_conditioning_systems"
                     ].append(hvac_copy)
 
-                    if not hvac_system_id_set:
-                        # Adjust system name
+                    # This ensures the system ID is unique and matches the system type name for first copy. This ensures
+                    # consistency that HVAC system names are fully described and helps avoid duplicates
+                    if not mz_hvac_ids_standardized:
+                        # Adjust HVAC system ID to match system type
                         hvac_system = building_segment[
                             "heating_ventilating_air_conditioning_systems"
                         ][-1]
                         hvac_system["id"] = f"{system_name}"
+
+                        # Ensure unique fan names based on system type
+                        if "fan_system" in hvac_system:
+                            fan_system = hvac_system["fan_system"]
+                            if "supply_fans" in fan_system:
+                                for supply_fan in fan_system["supply_fans"]:
+                                    supply_fan["id"] = f"{system_name} Supply Fan"
+                            if "return_fans" in fan_system:
+                                for return_fan in fan_system["return_fans"]:
+                                    return_fan["id"] = f"{system_name} Return Fan"
 
                 # If SZ, add an HVAC system for each zone
                 else:
