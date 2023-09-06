@@ -83,7 +83,7 @@ def does_zone_meet_g3_1_1c(rmi, zone_id, is_leap_year, zones_and_systems):
         ]
     )
     meet_g3_1_1c_flag = False
-    
+
     if system_matched:
         zones_on_same_floor_ids = get_zones_on_same_floor_list(rmi, zone_id)
         # drop zone_id in the list
