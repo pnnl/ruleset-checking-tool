@@ -14,7 +14,7 @@ from rct229.schema.config import ureg
 from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all, find_exactly_one_with_field_value
 from rct229.utils.masks import invert_mask
-from rct229.utils.pint_utils import ZERO, pint_sum
+from rct229.utils.pint_utils import ZERO
 
 BUILDING_AREA_CUTTOFF = ureg("5000 ft2")
 
@@ -74,7 +74,7 @@ class Section6Rule5(RuleDefinitionListIndexedBase):
 
             def is_applicable(self, context, data):
                 building_b = context.baseline
-                building_total_area_b = pint_sum(
+                building_total_area_b = sum(
                     find_all(
                         "$.building_segments[*].zones[*].spaces[*].floor_area",
                         building_b,

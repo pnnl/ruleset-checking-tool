@@ -1,7 +1,7 @@
 """
 Global tolerance for equality comparison. Default allows 0.5% variations of generated baseline/proposed from the standard specify value.
 """
-DEFAULT_PERCENT_TOLERANCE = 0.5  #%
+DEFAULT_PERCENT_TOLERANCE = 0.5  # %
 """
 Conservative comparison flag. Set to true will allow more conservative design values (based on RDS definition for each rule) compare to standard value.
 e.g. baseline_u_factor = 0.045, standard_u_factor = 0.065

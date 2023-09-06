@@ -75,7 +75,6 @@ class Section15Rule5(RuleDefinitionListIndexedBase):
             }
 
         def rule_check(self, context, calc_vals=None, data=None):
-
             # TODO: Allow tolerance?
             return (
                 calc_vals["baseline_transformer_efficiency"]

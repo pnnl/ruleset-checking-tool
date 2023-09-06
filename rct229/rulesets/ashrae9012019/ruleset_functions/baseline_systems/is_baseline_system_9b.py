@@ -24,9 +24,9 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_h
     is_hvac_sys_cooling_type_none_or_non_mechanical,
 )
 from rct229.utils.utility_functions import (
-    has_preheat_system,
-    has_heating_system,
     has_fan_system,
+    has_heating_system,
+    has_preheat_system,
 )
 
 HEATING_SYSTEM = schema_enums["HeatingSystemOptions"]

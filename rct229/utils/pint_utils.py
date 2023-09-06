@@ -62,6 +62,7 @@ class ZERO:
     POWER = 0 * ureg("Btu/hr")
     THERMAL_CAPACITY = POWER / ureg("ft2")
     POWER_PER_AREA = THERMAL_CAPACITY
+    POWER_PER_FLOW = 0 * ureg("Btu/hr/cfm")
 
     U_FACTOR = ureg("Btu/(hr*ft2*degR)")
     UA = U_FACTOR * AREA
@@ -145,10 +146,3 @@ def calcq_to_str(unit_system, obj) -> str:
         retval = obj
 
     return retval
-
-
-def pint_sum(qty_list, default=None):
-    if len(qty_list) == 0:
-        assert default is not None
-
-    return functools.reduce(operator.add, qty_list) if len(qty_list) > 0 else default

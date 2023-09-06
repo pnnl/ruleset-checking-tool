@@ -2,14 +2,13 @@ import json
 import os
 from pathlib import Path
 
-
 from rct229.schema.schema_utils import quantify_rmr
 from rct229.schema.validate import schema_validate_rmr
 from rct229.utils.utility_functions import (
-    has_heating_system,
     has_cooling_system,
-    has_preheat_system,
     has_fan_system,
+    has_heating_system,
+    has_preheat_system,
 )
 
 SYSTEM_TYPE_TEST_FILE_PATH = os.path.join(

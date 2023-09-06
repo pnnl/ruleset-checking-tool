@@ -10,6 +10,7 @@ from rct229.schema.config import ureg
 
 watts_per_ft2 = ureg("watt / foot**2")
 
+
 # Testing table_9_5_1------------------------------------------
 def test__table_9_5_1__gymnasium():
     assert table_9_5_1_lookup("GYMNASIUM") == {"lpd": 0.76 * watts_per_ft2}

@@ -61,15 +61,12 @@ def generate_test_rmrs(test_dict):
     # If user/baseline/proposed RMR transformations exist, either update their existing template or set them directly
     # from RMR transformations
     if "user" in rmr_transformations_dict:
-
         user_rmr = rmr_transformations_dict["user"]
 
     if "baseline" in rmr_transformations_dict:
-
         baseline_rmr = rmr_transformations_dict["baseline"]
 
     if "proposed" in rmr_transformations_dict:
-
         proposed_rmr = rmr_transformations_dict["proposed"]
 
     return user_rmr, baseline_rmr, proposed_rmr
@@ -152,7 +149,6 @@ def process_test_result(test_result, test_dict, test_id):
 
     # Check if the test results agree with the expected outcome. Write an appropriate response based on their agreement
     if received_expected_outcome:
-
         if test_result == "pass":
             # f"SUCCESS: Test {test_id} passed as expected. The following condition was identified: {description}"
             outcome_text = "PASS"
@@ -165,7 +161,6 @@ def process_test_result(test_result, test_dict, test_id):
             outcome_text = "NOT_APPLICABLE"
 
     else:
-
         if test_result == "pass":
             outcome_text = f"FAILURE: Test {test_id} passed unexpectedly. The following condition was not identified: {description}"
         elif test_result == "fail":
@@ -239,7 +234,6 @@ def run_section_tests(test_json_name: str, ruleset_doc: str):
 
     # Cycle through tests in test JSON and run each individually
     for test_id in test_list_dictionary:
-
         # Load next test dictionary from test list
         test_dict = test_list_dictionary[test_id]
 
@@ -264,7 +258,6 @@ def run_section_tests(test_json_name: str, ruleset_doc: str):
         try:
             rule = available_rule_definitions_dict[function_name]()
         except KeyError:
-
             # Print message communicating that a rule cannot be found
             print(f"RULE NOT FOUND: {function_name}. Cannot test {test_id}")
 
@@ -280,10 +273,8 @@ def run_section_tests(test_json_name: str, ruleset_doc: str):
 
         # If invalid RMRs exist, fail this rule and append failed message
         if len(invalid_rmrs_dict) != 0:
-
             # Find which RMRs were invalid
             for invalid_rmr, invalid_rmr_message in invalid_rmrs_dict.items():
-
                 # Print message communicating that the schema is invalid
                 print(
                     f"INVALID SCHEMA: Test {test_id}: {invalid_rmr} RMR: {invalid_rmr_message}"
@@ -295,7 +286,6 @@ def run_section_tests(test_json_name: str, ruleset_doc: str):
 
         # If RMRs are valid, check their outcomes
         else:
-
             # Check the evaluation dictionary "outcomes" element
             # NOTE: The outcome structure can either be a string for a single result or a list of dictionaries with
             # multiple results based on the Rule being tested.
@@ -311,21 +301,17 @@ def run_section_tests(test_json_name: str, ruleset_doc: str):
 
             # Check set of results for this test ID against expected outcome
             if test_dict["expected_rule_outcome"] == "pass":
-
                 # For an expected pass, ALL tested elements in the RMR triplet must pass
                 if not all(test_result_dict[f"{test_id}"]):
-
                     print_errors = True
 
             elif test_dict["expected_rule_outcome"] == "fail":
-
                 # If all elements don't meet the expected outcome, flag this as an error
                 if not any(test_result_dict[f"{test_id}"]):
                     print_errors = True
 
             # If errors were found, communicate the error logs
             if print_errors:
-
                 all_tests_pass = False
 
                 # Print log of all errors
@@ -372,7 +358,6 @@ def generate_software_test_report(ruleset, section_list, output_json_path):
         raise Exception(f"Ruleset '{ruleset}' has no default software test report.")
 
     if section_list is None:
-
         if ruleset == "ashrae902019":
             section_list = RuleSetTest.ASHRAE9012019_TEST_LIST
         else:
@@ -446,7 +431,6 @@ def generate_rct_outcomes_list_from_section_list(section_list, ruleset):
     # outcome for every rule in the section and the resulting lists of results for each of them. This list is what's
     # required by the ASHRAE9012019SoftwareTestReport's generate function as a starting point
     for section in section_list:
-
         # Get list of rule JSONs in section
         master_json_path = os.path.join(
             os.path.dirname(__file__), "ruletest_jsons", ruleset, section, "rule*.json"
@@ -454,14 +438,12 @@ def generate_rct_outcomes_list_from_section_list(section_list, ruleset):
         json_list = glob.glob(master_json_path)
 
         for rule_test_json_path in json_list:
-
             # Open the rule test JSON and perform rule evaluation for each test in JSON
             with open(rule_test_json_path) as f:
                 test_list_dictionary = json.load(f)
 
                 # Cycle through tests in test JSON and run each individually
                 for test_id in test_list_dictionary:
-
                     rule_test_outcome_dict = dict()
 
                     # Load next test dictionary from test list
@@ -484,7 +466,6 @@ def generate_rct_outcomes_list_from_section_list(section_list, ruleset):
                     try:
                         rule = available_rule_definitions_dict[function_name]()
                     except KeyError:
-
                         # Print message communicating that a rule cannot be found
                         print(f"RULE NOT FOUND: {function_name}. Cannot test {test_id}")
                         continue
@@ -496,7 +477,6 @@ def generate_rct_outcomes_list_from_section_list(section_list, ruleset):
 
                     # If invalid RMRs exist, append failed message
                     if len(invalid_rmrs_dict) != 0:
-
                         # Find which RMRs were invalid
                         for (
                             invalid_rmr,
@@ -509,7 +489,6 @@ def generate_rct_outcomes_list_from_section_list(section_list, ruleset):
 
                     # If RMRs are valid, check their outcomes
                     else:
-
                         # Get standard information
                         standard_dict = test_dict["standard"]
 
@@ -583,25 +562,20 @@ def validate_test_json_schema(test_json_path):
         rmr_type_list = ["User", "Baseline", "Proposed"]
 
         for result, rmr_type in zip(results_list, rmr_type_list):
-
             # If result contains a dictionary with failure information, append failure to failure list
             if isinstance(result, dict):
-
                 if result["passed"] is not True:
-
                     error_message = result["error"]
                     failure_message = f"Schema validation in {test_id} for the {rmr_type} RMR: {error_message}"
                     failure_list.append(failure_message)
 
     if len(failure_list) == 0:
-
         base_name = os.path.basename(test_json_path)
         print(f"No schema errors found in {base_name}")
         return True
 
     else:
         for failure in failure_list:
-
             print(failure)
 
         return False
@@ -640,17 +614,14 @@ def evaluate_outcome_object(outcome_dict, test_result_dict, test_dict, test_id):
     # If the result key is a list of results (i.e. many elements get tested), keep drilling down until you get single
     # dictionary
     if isinstance(outcome_dict["result"], list):
-
         # Iterate through each outcome in outcome results recursively until you get down to individual results
         for nested_outcome in outcome_dict["result"]:
-
             # Check outcome of each in list recursively until "result" key is not a list, but a dictionary
             evaluate_outcome_object(
                 nested_outcome, test_result_dict, test_dict, test_id
             )  # , outcome_result_list)
 
     else:
-
         # Process this tests results
         outcome_enumeration_str = outcome_dict[
             "result"
@@ -667,7 +638,6 @@ def evaluate_outcome_object(outcome_dict, test_result_dict, test_dict, test_id):
 
         # Append results if expected outcome not received
         if not received_expected_outcome:
-
             # Describe failure if not yet included in log
             if outcome_text not in test_result_dict["log"]:
                 test_result_dict["log"].append(outcome_text)
@@ -710,7 +680,6 @@ def flatten_outcome_object(outcome_object, flattened_outcome_list=[]):
 
     # Recursively looks in calculated values for any Quantity types and rewriting them as str
     def correct_types_in_calculated_vals(calc_value_item):
-
         # Skip if any dictionary comes up as None
         if calc_value_item is None:
             return
@@ -729,7 +698,6 @@ def flatten_outcome_object(outcome_object, flattened_outcome_list=[]):
         # If dictionary, recursively check each element and correct when appropriate
         elif isinstance(calc_value_item, dict):
             for key, value in calc_value_item.items():
-
                 if isinstance(value, list):
                     correct_types_in_calculated_vals(value)
 
@@ -745,7 +713,6 @@ def flatten_outcome_object(outcome_object, flattened_outcome_list=[]):
     # If the result key is a list of results (i.e. many elements get tested), keep drilling down until you get single
     # dictionary
     if isinstance(outcome_object, list):
-
         # Iterate through each outcome in outcome results recursively until you get down to individual results
         for nested_outcome in outcome_object:
             # Check outcome of each in list recursively until "result" key is not a list, but a dictionary
@@ -753,16 +720,13 @@ def flatten_outcome_object(outcome_object, flattened_outcome_list=[]):
 
     # If not a list, assumed to be a dictionary with key "result". Check if the value for "key" is a list.
     elif isinstance(outcome_object["result"], list):
-
         # Iterate through each outcome in outcome results recursively until you get down to individual results
         for nested_outcome in outcome_object["result"]:
-
             # Check outcome of each in list recursively until "result" key is not a list, but a dictionary
             flatten_outcome_object(nested_outcome, flattened_outcome_list)
 
     # Else, process result as you've dug down to final dictionary
     else:
-
         # Extract relevant data and append it to unraveled_outcome_list
         rule_unit_test_evaluation_dict = dict()
 
@@ -790,7 +754,6 @@ def flatten_outcome_object(outcome_object, flattened_outcome_list=[]):
 
 
 def validate_229_rmd(rmd_name, rmd_path):
-
     # Open
     with open(rmd_path) as f:
         rmd = json.load(f)
@@ -799,7 +762,6 @@ def validate_229_rmd(rmd_name, rmd_path):
 
     # If result contains a dictionary with failure information, append failure to failure list
     if isinstance(result, dict):
-
         if result["passed"] is not True:
             error_message = result["error"]
             print(f"Schema validation failed for {rmd_name} - {error_message}")
@@ -808,5 +770,4 @@ def validate_229_rmd(rmd_name, rmd_path):
             print(f"{rmd_name} is valid ASHRAE 229 schema")
 
     else:
-
         print(f"Error validating RMD: {rmd_name}")

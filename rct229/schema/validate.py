@@ -111,7 +111,7 @@ def json_paths_to_lists_from_dict(rmd_dict, path):
         A set of unique generic json paths to lists inside rmd_dict
     """
     paths = set()
-    for (key, val) in rmd_dict.items():
+    for key, val in rmd_dict.items():
         new_path = f"{path}.{key}"
         new_paths = json_paths_to_lists(val, new_path)
         paths = paths.union(new_paths)
