@@ -30,13 +30,13 @@ def get_number_of_floors(climate_zone, rmi):
 
     number_of_floors = sum(
         [
-            building.get("number_of_floors_above_grade", 0.0)
-            + building.get("number_of_floors_below_grade", 0.0)
+            building.get("number_of_floors_above_grade", 0)
+            + building.get("number_of_floors_below_grade", 0)
             for building in find_all("$.buildings[*]", rmi)
         ]
     )
 
-    if number_of_floors <= 0.0:
+    if number_of_floors <= 0:
         zone_conditioning_category_dict = get_zone_conditioning_category_rmi_dict(
             climate_zone, rmi
         )
@@ -75,6 +75,6 @@ def get_number_of_floors(climate_zone, rmi):
             for zone in no_parking_conditioned_zone_list
             if zone.get("floor_name")
         ]
-        number_of_floors = len(floor_names)
+        number_of_floors = len(list(set(floor_names)))
 
     return number_of_floors
