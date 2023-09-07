@@ -39,13 +39,8 @@
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 11",
-<<<<<<< HEAD
-                                                        "primary_airflow": 1000,
-                                                        "minimum_outdoor_airflow": 200
-=======
                                                         "primary_airflow": 471.94744319999984,
                                                         "minimum_outdoor_airflow": 94.38948863999997
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
                                                     }
                                                 ]
                                             }
@@ -55,20 +50,12 @@
                                                 "id": "System 11",
                                                 "cooling_system": {
                                                     "id": "CHW Coil 1",
-<<<<<<< HEAD
-                                                    "cooling_system_type": "FLUID_LOOP",
-=======
                                                     "type": "FLUID_LOOP",
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
                                                     "chilled_water_loop": "Chilled Water Loop 1"
                                                 },
                                                 "heating_system": {
                                                     "id": "Heating Coil 1",
-<<<<<<< HEAD
-                                                    "heating_system_type": "ELECTRIC_RESISTANCE"
-=======
                                                     "type": "ELECTRIC_RESISTANCE"
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
                                                 },
                                                 "fan_system": {
                                                     "id": "VAV Fan System 1",
@@ -78,11 +65,7 @@
                                                             "id": "Supply Fan 1",
                                                             "specification_method": "SIMPLE",
                                                             "design_electric_power": 100,
-<<<<<<< HEAD
-                                                            "design_airflow": 1000
-=======
                                                             "design_airflow": 471.94744319999984
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
                                                         }
                                                     ],
                                                     "return_fans": [
@@ -90,17 +73,10 @@
                                                             "id": "Return Fan 1",
                                                             "specification_method": "SIMPLE",
                                                             "design_electric_power": 0,
-<<<<<<< HEAD
-                                                            "design_airflow": 0
-                                                        }
-                                                    ],
-                                                    "minimum_outdoor_airflow": 200
-=======
                                                             "design_airflow": 0.0
                                                         }
                                                     ],
                                                     "minimum_outdoor_airflow": 94.38948863999997
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
                                                 }
                                             }
                                         ]
@@ -108,11 +84,7 @@
                                 ]
                             }
                         ],
-<<<<<<< HEAD
-                        "external_fluid_source": [
-=======
                         "external_fluid_sources": [
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
                             {
                                 "id": "Purchased CW 1",
                                 "loop": "Chilled Water Loop 1",
@@ -137,11 +109,7 @@
             },
             "baseline": {
                 "id": "ASHRAE229 1",
-<<<<<<< HEAD
-                "ruleset_model_instances": [
-=======
                 "ruleset_model_descriptions": [
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
                     {
                         "id": "RMD 1",
                         "buildings": [
@@ -162,13 +130,8 @@
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 11",
-<<<<<<< HEAD
-                                                        "primary_airflow": 1000,
-                                                        "minimum_outdoor_airflow": 200
-=======
                                                         "primary_airflow": 471.94744319999984,
                                                         "minimum_outdoor_airflow": 94.38948863999997
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
                                                     }
                                                 ]
                                             }
@@ -178,20 +141,12 @@
                                                 "id": "System 11",
                                                 "cooling_system": {
                                                     "id": "CHW Coil 1",
-<<<<<<< HEAD
-                                                    "cooling_system_type": "FLUID_LOOP",
-=======
                                                     "type": "FLUID_LOOP",
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
                                                     "chilled_water_loop": "Chilled Water Loop 1"
                                                 },
                                                 "heating_system": {
                                                     "id": "Heating Coil 1",
-<<<<<<< HEAD
-                                                    "heating_system_type": "ELECTRIC_RESISTANCE"
-=======
                                                     "type": "ELECTRIC_RESISTANCE"
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
                                                 },
                                                 "fan_system": {
                                                     "id": "VAV Fan System 1",
@@ -209,11 +164,7 @@
                                                             "id": "Return Fan 1",
                                                             "specification_method": "SIMPLE",
                                                             "design_electric_power": 0,
-<<<<<<< HEAD
-                                                            "design_airflow": 0
-=======
                                                             "design_airflow": 0.0
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
                                                         }
                                                     ],
                                                     "minimum_outdoor_airflow": 94.38948863999997
@@ -224,11 +175,7 @@
                                 ]
                             }
                         ],
-<<<<<<< HEAD
-                        "external_fluid_source": [
-=======
                         "external_fluid_sources": [
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
                             {
                                 "id": "Purchased CW 1",
                                 "loop": "Chilled Water Loop 1",
@@ -267,20 +214,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Yes",
-<<<<<<< HEAD
-            "schema_version": "0.0.23"
-=======
             "schema_version": "0.0.29"
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
         },
         "rmr_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
-<<<<<<< HEAD
-                "ruleset_model_instances": [
-=======
                 "ruleset_model_descriptions": [
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
                     {
                         "id": "RMD 1",
                         "buildings": [
@@ -301,13 +240,8 @@
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 11",
-<<<<<<< HEAD
-                                                        "primary_airflow": 1000,
-                                                        "minimum_outdoor_airflow": 200
-=======
                                                         "primary_airflow": 471.94744319999984,
                                                         "minimum_outdoor_airflow": 94.38948863999997
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
                                                     }
                                                 ]
                                             }
@@ -317,20 +251,12 @@
                                                 "id": "System 11",
                                                 "cooling_system": {
                                                     "id": "CHW Coil 1",
-<<<<<<< HEAD
-                                                    "cooling_system_type": "FLUID_LOOP",
-=======
                                                     "type": "FLUID_LOOP",
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
                                                     "chilled_water_loop": "Chilled Water Loop 1"
                                                 },
                                                 "heating_system": {
                                                     "id": "Heating Coil 1",
-<<<<<<< HEAD
-                                                    "heating_system_type": "ELECTRIC_RESISTANCE"
-=======
                                                     "type": "ELECTRIC_RESISTANCE"
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
                                                 },
                                                 "fan_system": {
                                                     "id": "VAV Fan System 1",
@@ -340,11 +266,7 @@
                                                             "id": "Supply Fan 1",
                                                             "specification_method": "SIMPLE",
                                                             "design_electric_power": 100,
-<<<<<<< HEAD
-                                                            "design_airflow": 1000
-=======
                                                             "design_airflow": 471.94744319999984
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
                                                         }
                                                     ],
                                                     "return_fans": [
@@ -352,17 +274,10 @@
                                                             "id": "Return Fan 1",
                                                             "specification_method": "SIMPLE",
                                                             "design_electric_power": 0,
-<<<<<<< HEAD
-                                                            "design_airflow": 0
-                                                        }
-                                                    ],
-                                                    "minimum_outdoor_airflow": 200
-=======
                                                             "design_airflow": 0.0
                                                         }
                                                     ],
                                                     "minimum_outdoor_airflow": 94.38948863999997
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
                                                 }
                                             }
                                         ]
@@ -370,11 +285,7 @@
                                 ]
                             }
                         ],
-<<<<<<< HEAD
-                        "external_fluid_source": [
-=======
                         "external_fluid_sources": [
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
                             {
                                 "id": "Purchased CW 1",
                                 "loop": "Chilled Water Loop 1",
@@ -399,11 +310,7 @@
             },
             "baseline": {
                 "id": "ASHRAE229 1",
-<<<<<<< HEAD
-                "ruleset_model_instances": [
-=======
                 "ruleset_model_descriptions": [
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
                     {
                         "id": "RMD 1",
                         "buildings": [
@@ -424,13 +331,8 @@
                                                         "is_supply_ducted": true,
                                                         "type": "VARIABLE_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 11",
-<<<<<<< HEAD
-                                                        "primary_airflow": 1000,
-                                                        "minimum_outdoor_airflow": 200
-=======
                                                         "primary_airflow": 471.94744319999984,
                                                         "minimum_outdoor_airflow": 94.38948863999997
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
                                                     }
                                                 ]
                                             }
@@ -440,20 +342,12 @@
                                                 "id": "System 11",
                                                 "cooling_system": {
                                                     "id": "CHW Coil 1",
-<<<<<<< HEAD
-                                                    "cooling_system_type": "FLUID_LOOP",
-=======
                                                     "type": "FLUID_LOOP",
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
                                                     "chilled_water_loop": "Chilled Water Loop 1"
                                                 },
                                                 "heating_system": {
                                                     "id": "Heating Coil 1",
-<<<<<<< HEAD
-                                                    "heating_system_type": "ELECTRIC_RESISTANCE"
-=======
                                                     "type": "ELECTRIC_RESISTANCE"
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
                                                 },
                                                 "fan_system": {
                                                     "id": "VAV Fan System 1",
@@ -471,11 +365,7 @@
                                                             "id": "Return Fan 1",
                                                             "specification_method": "SIMPLE",
                                                             "design_electric_power": 90,
-<<<<<<< HEAD
-                                                            "design_airflow": 900
-=======
                                                             "design_airflow": 424.75269887999985
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
                                                         }
                                                     ],
                                                     "minimum_outdoor_airflow": 94.38948863999997
@@ -486,11 +376,7 @@
                                 ]
                             }
                         ],
-<<<<<<< HEAD
-                        "external_fluid_source": [
-=======
                         "external_fluid_sources": [
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
                             {
                                 "id": "Purchased CW 1",
                                 "loop": "Chilled Water Loop 1",
@@ -529,20 +415,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Yes",
-<<<<<<< HEAD
-            "schema_version": "0.0.23"
-=======
             "schema_version": "0.0.29"
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
         },
         "rmr_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
-<<<<<<< HEAD
-                "ruleset_model_instances": [
-=======
                 "ruleset_model_descriptions": [
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
                     {
                         "id": "RMD 1",
                         "buildings": [
@@ -565,13 +443,8 @@
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 5",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1",
-<<<<<<< HEAD
-                                                        "primary_airflow": 1000,
-                                                        "minimum_outdoor_airflow": 200
-=======
                                                         "primary_airflow": 235.97372159999992,
                                                         "minimum_outdoor_airflow": 47.194744319999984
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
                                                     }
                                                 ]
                                             },
@@ -586,13 +459,9 @@
                                                         "type": "VARIABLE_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 5",
                                                         "heating_source": "HOT_WATER",
-<<<<<<< HEAD
-                                                        "heating_from_loop": "Boiler Loop 1"
-=======
                                                         "heating_from_loop": "Boiler Loop 1",
                                                         "primary_airflow": 235.97372159999992,
                                                         "minimum_outdoor_airflow": 47.194744319999984
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
                                                     }
                                                 ]
                                             }
@@ -602,19 +471,11 @@
                                                 "id": "System 5",
                                                 "cooling_system": {
                                                     "id": "DX Coil 1",
-<<<<<<< HEAD
-                                                    "cooling_system_type": "DIRECT_EXPANSION"
-                                                },
-                                                "preheat_system": {
-                                                    "id": "Preheat Coil 1",
-                                                    "heating_system_type": "FLUID_LOOP",
-=======
                                                     "type": "DIRECT_EXPANSION"
                                                 },
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 1",
                                                     "type": "FLUID_LOOP",
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
                                                     "hot_water_loop": "Boiler Loop 1"
                                                 },
                                                 "fan_system": {
@@ -625,11 +486,7 @@
                                                             "id": "Supply Fan 1",
                                                             "specification_method": "SIMPLE",
                                                             "design_electric_power": 100,
-<<<<<<< HEAD
-                                                            "design_airflow": 1000
-=======
                                                             "design_airflow": 471.94744319999984
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
                                                         }
                                                     ],
                                                     "return_fans": [
@@ -637,17 +494,10 @@
                                                             "id": "Return Fan 1",
                                                             "specification_method": "SIMPLE",
                                                             "design_electric_power": 90,
-<<<<<<< HEAD
-                                                            "design_airflow": 900
-                                                        }
-                                                    ],
-                                                    "minimum_outdoor_airflow": 200
-=======
                                                             "design_airflow": 424.75269887999985
                                                         }
                                                     ],
                                                     "minimum_outdoor_airflow": 94.38948863999997
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
                                                 }
                                             }
                                         ]
@@ -680,11 +530,7 @@
             },
             "baseline": {
                 "id": "ASHRAE229 1",
-<<<<<<< HEAD
-                "ruleset_model_instances": [
-=======
                 "ruleset_model_descriptions": [
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
                     {
                         "id": "RMD 1",
                         "buildings": [
@@ -707,13 +553,8 @@
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 5",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1",
-<<<<<<< HEAD
-                                                        "primary_airflow": 1000,
-                                                        "minimum_outdoor_airflow": 200
-=======
                                                         "primary_airflow": 471.94744319999984,
                                                         "minimum_outdoor_airflow": 94.38948863999997
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
                                                     }
                                                 ]
                                             },
@@ -738,19 +579,11 @@
                                                 "id": "System 5",
                                                 "cooling_system": {
                                                     "id": "DX Coil 1",
-<<<<<<< HEAD
-                                                    "cooling_system_type": "DIRECT_EXPANSION"
-                                                },
-                                                "preheat_system": {
-                                                    "id": "Preheat Coil 1",
-                                                    "heating_system_type": "FLUID_LOOP",
-=======
                                                     "type": "DIRECT_EXPANSION"
                                                 },
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 1",
                                                     "type": "FLUID_LOOP",
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
                                                     "hot_water_loop": "Boiler Loop 1"
                                                 },
                                                 "fan_system": {
@@ -769,11 +602,7 @@
                                                             "id": "Return Fan 1",
                                                             "specification_method": "SIMPLE",
                                                             "design_electric_power": 90,
-<<<<<<< HEAD
-                                                            "design_airflow": 900
-=======
                                                             "design_airflow": 424.75269887999985
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
                                                         }
                                                     ],
                                                     "minimum_outdoor_airflow": 94.38948863999997
@@ -823,20 +652,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Yes",
-<<<<<<< HEAD
-            "schema_version": "0.0.23"
-=======
             "schema_version": "0.0.29"
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
         },
         "rmr_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
-<<<<<<< HEAD
-                "ruleset_model_instances": [
-=======
                 "ruleset_model_descriptions": [
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
                     {
                         "id": "RMD 1",
                         "buildings": [
@@ -859,13 +680,8 @@
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 5",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1",
-<<<<<<< HEAD
-                                                        "primary_airflow": 1000,
-                                                        "minimum_outdoor_airflow": 50
-=======
                                                         "primary_airflow": 235.97372159999992,
                                                         "minimum_outdoor_airflow": 11.798686079999996
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
                                                     }
                                                 ]
                                             },
@@ -880,13 +696,9 @@
                                                         "type": "VARIABLE_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 5",
                                                         "heating_source": "HOT_WATER",
-<<<<<<< HEAD
-                                                        "heating_from_loop": "Boiler Loop 1"
-=======
                                                         "heating_from_loop": "Boiler Loop 1",
                                                         "primary_airflow": 235.97372159999992,
                                                         "minimum_outdoor_airflow": 11.798686079999996
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
                                                     }
                                                 ]
                                             }
@@ -896,19 +708,11 @@
                                                 "id": "System 5",
                                                 "cooling_system": {
                                                     "id": "DX Coil 1",
-<<<<<<< HEAD
-                                                    "cooling_system_type": "DIRECT_EXPANSION"
-                                                },
-                                                "preheat_system": {
-                                                    "id": "Preheat Coil 1",
-                                                    "heating_system_type": "FLUID_LOOP",
-=======
                                                     "type": "DIRECT_EXPANSION"
                                                 },
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 1",
                                                     "type": "FLUID_LOOP",
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
                                                     "hot_water_loop": "Boiler Loop 1"
                                                 },
                                                 "fan_system": {
@@ -919,11 +723,7 @@
                                                             "id": "Supply Fan 1",
                                                             "specification_method": "SIMPLE",
                                                             "design_electric_power": 100,
-<<<<<<< HEAD
-                                                            "design_airflow": 1000
-=======
                                                             "design_airflow": 471.94744319999984
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
                                                         }
                                                     ],
                                                     "return_fans": [
@@ -931,17 +731,10 @@
                                                             "id": "Return Fan 1",
                                                             "specification_method": "SIMPLE",
                                                             "design_electric_power": 95,
-<<<<<<< HEAD
-                                                            "design_airflow": 950
-                                                        }
-                                                    ],
-                                                    "minimum_outdoor_airflow": 50
-=======
                                                             "design_airflow": 448.3500710399998
                                                         }
                                                     ],
                                                     "minimum_outdoor_airflow": 23.597372159999992
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
                                                 }
                                             }
                                         ]
@@ -974,11 +767,7 @@
             },
             "baseline": {
                 "id": "ASHRAE229 1",
-<<<<<<< HEAD
-                "ruleset_model_instances": [
-=======
                 "ruleset_model_descriptions": [
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
                     {
                         "id": "RMD 1",
                         "buildings": [
@@ -1001,13 +790,8 @@
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 5",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1",
-<<<<<<< HEAD
-                                                        "primary_airflow": 1000,
-                                                        "minimum_outdoor_airflow": 50
-=======
                                                         "primary_airflow": 471.94744319999984,
                                                         "minimum_outdoor_airflow": 23.597372159999992
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
                                                     }
                                                 ]
                                             },
@@ -1032,19 +816,11 @@
                                                 "id": "System 5",
                                                 "cooling_system": {
                                                     "id": "DX Coil 1",
-<<<<<<< HEAD
-                                                    "cooling_system_type": "DIRECT_EXPANSION"
-                                                },
-                                                "preheat_system": {
-                                                    "id": "Preheat Coil 1",
-                                                    "heating_system_type": "FLUID_LOOP",
-=======
                                                     "type": "DIRECT_EXPANSION"
                                                 },
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 1",
                                                     "type": "FLUID_LOOP",
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
                                                     "hot_water_loop": "Boiler Loop 1"
                                                 },
                                                 "fan_system": {
@@ -1063,11 +839,7 @@
                                                             "id": "Return Fan 1",
                                                             "specification_method": "SIMPLE",
                                                             "design_electric_power": 92,
-<<<<<<< HEAD
-                                                            "design_airflow": 950
-=======
                                                             "design_airflow": 448.3500710399998
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
                                                         }
                                                     ],
                                                     "minimum_outdoor_airflow": 23.597372159999992
@@ -1117,20 +889,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Yes",
-<<<<<<< HEAD
-            "schema_version": "0.0.23"
-=======
             "schema_version": "0.0.29"
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
         },
         "rmr_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
-<<<<<<< HEAD
-                "ruleset_model_instances": [
-=======
                 "ruleset_model_descriptions": [
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
                     {
                         "id": "RMD 1",
                         "buildings": [
@@ -1153,13 +917,8 @@
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 5",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1",
-<<<<<<< HEAD
-                                                        "primary_airflow": 1000,
-                                                        "minimum_outdoor_airflow": 200
-=======
                                                         "primary_airflow": 235.97372159999992,
                                                         "minimum_outdoor_airflow": 47.194744319999984
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
                                                     }
                                                 ]
                                             },
@@ -1174,13 +933,9 @@
                                                         "type": "VARIABLE_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 5",
                                                         "heating_source": "HOT_WATER",
-<<<<<<< HEAD
-                                                        "heating_from_loop": "Boiler Loop 1"
-=======
                                                         "heating_from_loop": "Boiler Loop 1",
                                                         "primary_airflow": 235.97372159999992,
                                                         "minimum_outdoor_airflow": 47.194744319999984
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
                                                     }
                                                 ]
                                             }
@@ -1190,19 +945,11 @@
                                                 "id": "System 5",
                                                 "cooling_system": {
                                                     "id": "DX Coil 1",
-<<<<<<< HEAD
-                                                    "cooling_system_type": "DIRECT_EXPANSION"
-                                                },
-                                                "preheat_system": {
-                                                    "id": "Preheat Coil 1",
-                                                    "heating_system_type": "FLUID_LOOP",
-=======
                                                     "type": "DIRECT_EXPANSION"
                                                 },
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 1",
                                                     "type": "FLUID_LOOP",
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
                                                     "hot_water_loop": "Boiler Loop 1"
                                                 },
                                                 "fan_system": {
@@ -1213,11 +960,7 @@
                                                             "id": "Supply Fan 1",
                                                             "specification_method": "SIMPLE",
                                                             "design_electric_power": 100,
-<<<<<<< HEAD
-                                                            "design_airflow": 1000
-=======
                                                             "design_airflow": 471.94744319999984
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
                                                         }
                                                     ],
                                                     "return_fans": [
@@ -1225,17 +968,10 @@
                                                             "id": "Return Fan 1",
                                                             "specification_method": "SIMPLE",
                                                             "design_electric_power": 80,
-<<<<<<< HEAD
-                                                            "design_airflow": 800
-                                                        }
-                                                    ],
-                                                    "minimum_outdoor_airflow": 200
-=======
                                                             "design_airflow": 377.55795455999987
                                                         }
                                                     ],
                                                     "minimum_outdoor_airflow": 94.38948863999997
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
                                                 }
                                             }
                                         ]
@@ -1268,11 +1004,7 @@
             },
             "baseline": {
                 "id": "ASHRAE229 1",
-<<<<<<< HEAD
-                "ruleset_model_instances": [
-=======
                 "ruleset_model_descriptions": [
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
                     {
                         "id": "RMD 1",
                         "buildings": [
@@ -1295,13 +1027,8 @@
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 5",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1",
-<<<<<<< HEAD
-                                                        "primary_airflow": 1000,
-                                                        "minimum_outdoor_airflow": 200
-=======
                                                         "primary_airflow": 471.94744319999984,
                                                         "minimum_outdoor_airflow": 94.38948863999997
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
                                                     }
                                                 ]
                                             },
@@ -1326,19 +1053,11 @@
                                                 "id": "System 5",
                                                 "cooling_system": {
                                                     "id": "DX Coil 1",
-<<<<<<< HEAD
-                                                    "cooling_system_type": "DIRECT_EXPANSION"
-                                                },
-                                                "preheat_system": {
-                                                    "id": "Preheat Coil 1",
-                                                    "heating_system_type": "FLUID_LOOP",
-=======
                                                     "type": "DIRECT_EXPANSION"
                                                 },
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 1",
                                                     "type": "FLUID_LOOP",
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
                                                     "hot_water_loop": "Boiler Loop 1"
                                                 },
                                                 "fan_system": {
@@ -1357,11 +1076,7 @@
                                                             "id": "Return Fan 1",
                                                             "specification_method": "SIMPLE",
                                                             "design_electric_power": 85,
-<<<<<<< HEAD
-                                                            "design_airflow": 800
-=======
                                                             "design_airflow": 377.55795455999987
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
                                                         }
                                                     ],
                                                     "minimum_outdoor_airflow": 94.38948863999997
@@ -1411,20 +1126,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Yes",
-<<<<<<< HEAD
-            "schema_version": "0.0.23"
-=======
             "schema_version": "0.0.29"
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
         },
         "rmr_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
-<<<<<<< HEAD
-                "ruleset_model_instances": [
-=======
                 "ruleset_model_descriptions": [
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
                     {
                         "id": "RMD 1",
                         "buildings": [
@@ -1447,13 +1154,8 @@
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 5",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1",
-<<<<<<< HEAD
-                                                        "primary_airflow": 1000,
-                                                        "minimum_outdoor_airflow": 200
-=======
                                                         "primary_airflow": 235.97372159999992,
                                                         "minimum_outdoor_airflow": 47.194744319999984
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
                                                     }
                                                 ]
                                             },
@@ -1468,13 +1170,9 @@
                                                         "type": "VARIABLE_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 5",
                                                         "heating_source": "HOT_WATER",
-<<<<<<< HEAD
-                                                        "heating_from_loop": "Boiler Loop 1"
-=======
                                                         "heating_from_loop": "Boiler Loop 1",
                                                         "primary_airflow": 235.97372159999992,
                                                         "minimum_outdoor_airflow": 47.194744319999984
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
                                                     }
                                                 ]
                                             }
@@ -1484,19 +1182,11 @@
                                                 "id": "System 5",
                                                 "cooling_system": {
                                                     "id": "DX Coil 1",
-<<<<<<< HEAD
-                                                    "cooling_system_type": "DIRECT_EXPANSION"
-                                                },
-                                                "preheat_system": {
-                                                    "id": "Preheat Coil 1",
-                                                    "heating_system_type": "FLUID_LOOP",
-=======
                                                     "type": "DIRECT_EXPANSION"
                                                 },
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 1",
                                                     "type": "FLUID_LOOP",
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
                                                     "hot_water_loop": "Boiler Loop 1"
                                                 },
                                                 "fan_system": {
@@ -1512,11 +1202,7 @@
                                                             "id": "Return Fan 1"
                                                         }
                                                     ],
-<<<<<<< HEAD
-                                                    "minimum_outdoor_airflow": 200
-=======
                                                     "minimum_outdoor_airflow": 94.38948863999997
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
                                                 }
                                             }
                                         ]
@@ -1549,11 +1235,7 @@
             },
             "baseline": {
                 "id": "ASHRAE229 1",
-<<<<<<< HEAD
-                "ruleset_model_instances": [
-=======
                 "ruleset_model_descriptions": [
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
                     {
                         "id": "RMD 1",
                         "buildings": [
@@ -1576,13 +1258,8 @@
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 5",
                                                         "heating_source": "HOT_WATER",
                                                         "heating_from_loop": "Boiler Loop 1",
-<<<<<<< HEAD
-                                                        "primary_airflow": 1000,
-                                                        "minimum_outdoor_airflow": 200
-=======
                                                         "primary_airflow": 471.94744319999984,
                                                         "minimum_outdoor_airflow": 94.38948863999997
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
                                                     }
                                                 ]
                                             },
@@ -1607,19 +1284,11 @@
                                                 "id": "System 5",
                                                 "cooling_system": {
                                                     "id": "DX Coil 1",
-<<<<<<< HEAD
-                                                    "cooling_system_type": "DIRECT_EXPANSION"
-                                                },
-                                                "preheat_system": {
-                                                    "id": "Preheat Coil 1",
-                                                    "heating_system_type": "FLUID_LOOP",
-=======
                                                     "type": "DIRECT_EXPANSION"
                                                 },
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 1",
                                                     "type": "FLUID_LOOP",
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
                                                     "hot_water_loop": "Boiler Loop 1"
                                                 },
                                                 "fan_system": {
@@ -1638,21 +1307,13 @@
                                                             "id": "Return Fan 1",
                                                             "specification_method": "SIMPLE",
                                                             "design_electric_power": 30,
-<<<<<<< HEAD
-                                                            "design_airflow": 100
-=======
                                                             "design_airflow": 47.194744319999984
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
                                                         },
                                                         {
                                                             "id": "Return Fan 2",
                                                             "specification_method": "SIMPLE",
                                                             "design_electric_power": 30,
-<<<<<<< HEAD
-                                                            "design_airflow": 100
-=======
                                                             "design_airflow": 47.194744319999984
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
                                                         }
                                                     ],
                                                     "minimum_outdoor_airflow": 94.38948863999997

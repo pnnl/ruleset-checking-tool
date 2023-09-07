@@ -54,20 +54,12 @@
                                                 "id": "System 11",
                                                 "cooling_system": {
                                                     "id": "CHW Coil 1",
-<<<<<<< HEAD
-                                                    "cooling_system_type": "FLUID_LOOP",
-=======
                                                     "type": "FLUID_LOOP",
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
                                                     "chilled_water_loop": "Secondary CHW Loop 1"
                                                 },
                                                 "heating_system": {
                                                     "id": "Heating Coil 1",
-<<<<<<< HEAD
-                                                    "heating_system_type": "ELECTRIC_RESISTANCE"
-=======
                                                     "type": "ELECTRIC_RESISTANCE"
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
                                                 },
                                                 "fan_system": {
                                                     "id": "VAV Fan System 1",
@@ -131,11 +123,7 @@
             },
             "baseline": {
                 "id": "ASHRAE229 1",
-<<<<<<< HEAD
-                "ruleset_model_instances": [
-=======
                 "ruleset_model_descriptions": [
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
                     {
                         "id": "RMD 1",
                         "buildings": [
@@ -161,11 +149,7 @@
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
-<<<<<<< HEAD
-                                                        "floor_area": 1000,
-=======
                                                         "floor_area": 92.90303999999999,
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
                                                         "lighting_space_type": "OFFICE_ENCLOSED"
                                                     }
                                                 ]
@@ -176,20 +160,12 @@
                                                 "id": "System 11",
                                                 "cooling_system": {
                                                     "id": "CHW Coil 1",
-<<<<<<< HEAD
-                                                    "cooling_system_type": "FLUID_LOOP",
-=======
                                                     "type": "FLUID_LOOP",
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
                                                     "chilled_water_loop": "Secondary CHW Loop 1"
                                                 },
                                                 "heating_system": {
                                                     "id": "Heating Coil 1",
-<<<<<<< HEAD
-                                                    "heating_system_type": "ELECTRIC_RESISTANCE"
-=======
                                                     "type": "ELECTRIC_RESISTANCE"
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
                                                 },
                                                 "fan_system": {
                                                     "id": "VAV Fan System 1",
@@ -267,20 +243,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Yes",
-<<<<<<< HEAD
-            "schema_version": "0.0.23"
-=======
             "schema_version": "0.0.29"
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
         },
         "rmr_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
-<<<<<<< HEAD
-                "ruleset_model_instances": [
-=======
                 "ruleset_model_descriptions": [
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
                     {
                         "id": "RMD 1",
                         "buildings": [
@@ -339,19 +307,11 @@
                                                 "id": "System 5",
                                                 "cooling_system": {
                                                     "id": "DX Coil 1",
-<<<<<<< HEAD
-                                                    "cooling_system_type": "DIRECT_EXPANSION"
-                                                },
-                                                "preheat_system": {
-                                                    "id": "Preheat Coil 1",
-                                                    "heating_system_type": "FLUID_LOOP",
-=======
                                                     "type": "DIRECT_EXPANSION"
                                                 },
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 1",
                                                     "type": "FLUID_LOOP",
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
                                                     "hot_water_loop": "Boiler Loop 1"
                                                 },
                                                 "fan_system": {
@@ -406,11 +366,7 @@
             },
             "baseline": {
                 "id": "ASHRAE229 1",
-<<<<<<< HEAD
-                "ruleset_model_instances": [
-=======
                 "ruleset_model_descriptions": [
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
                     {
                         "id": "RMD 1",
                         "buildings": [
@@ -438,11 +394,7 @@
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
-<<<<<<< HEAD
-                                                        "floor_area": 1000,
-=======
                                                         "floor_area": 92.90303999999999,
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
                                                         "lighting_space_type": "OFFICE_ENCLOSED"
                                                     }
                                                 ]
@@ -468,19 +420,11 @@
                                                 "id": "System 5",
                                                 "cooling_system": {
                                                     "id": "DX Coil 1",
-<<<<<<< HEAD
-                                                    "cooling_system_type": "DIRECT_EXPANSION"
-                                                },
-                                                "preheat_system": {
-                                                    "id": "Preheat Coil 1",
-                                                    "heating_system_type": "FLUID_LOOP",
-=======
                                                     "type": "DIRECT_EXPANSION"
                                                 },
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 1",
                                                     "type": "FLUID_LOOP",
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
                                                     "hot_water_loop": "Boiler Loop 1"
                                                 },
                                                 "fan_system": {
@@ -545,20 +489,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Yes",
-<<<<<<< HEAD
-            "schema_version": "0.0.23"
-=======
             "schema_version": "0.0.29"
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
         },
         "rmr_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
-<<<<<<< HEAD
-                "ruleset_model_instances": [
-=======
                 "ruleset_model_descriptions": [
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
                     {
                         "id": "RMD 1",
                         "buildings": [
@@ -594,19 +530,11 @@
                                                 "id": "System Type 3",
                                                 "cooling_system": {
                                                     "id": "DX Coil 1",
-<<<<<<< HEAD
-                                                    "cooling_system_type": "DIRECT_EXPANSION"
-                                                },
-                                                "heating_system": {
-                                                    "id": "Furnace Coil 1",
-                                                    "heating_system_type": "FURNACE"
-=======
                                                     "type": "DIRECT_EXPANSION"
                                                 },
                                                 "heating_system": {
                                                     "id": "Furnace Coil 1",
                                                     "type": "FURNACE"
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
                                                 },
                                                 "fan_system": {
                                                     "id": "CAV Fan System 1",
@@ -636,11 +564,7 @@
             },
             "baseline": {
                 "id": "ASHRAE229 1",
-<<<<<<< HEAD
-                "ruleset_model_instances": [
-=======
                 "ruleset_model_descriptions": [
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
                     {
                         "id": "RMD 1",
                         "buildings": [
@@ -666,11 +590,7 @@
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
-<<<<<<< HEAD
-                                                        "floor_area": 1000,
-=======
                                                         "floor_area": 92.90303999999999,
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
                                                         "lighting_space_type": "COMPUTER_ROOM"
                                                     }
                                                 ]
@@ -681,19 +601,11 @@
                                                 "id": "System Type 3",
                                                 "cooling_system": {
                                                     "id": "DX Coil 1",
-<<<<<<< HEAD
-                                                    "cooling_system_type": "DIRECT_EXPANSION"
-                                                },
-                                                "heating_system": {
-                                                    "id": "Furnace Coil 1",
-                                                    "heating_system_type": "FURNACE"
-=======
                                                     "type": "DIRECT_EXPANSION"
                                                 },
                                                 "heating_system": {
                                                     "id": "Furnace Coil 1",
                                                     "type": "FURNACE"
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
                                                 },
                                                 "fan_system": {
                                                     "id": "CAV Fan System 1",
@@ -737,20 +649,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Yes",
-<<<<<<< HEAD
-            "schema_version": "0.0.23"
-=======
             "schema_version": "0.0.29"
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
         },
         "rmr_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
-<<<<<<< HEAD
-                "ruleset_model_instances": [
-=======
                 "ruleset_model_descriptions": [
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
                     {
                         "id": "RMD 1",
                         "buildings": [
@@ -786,19 +690,11 @@
                                                 "id": "System Type 3",
                                                 "cooling_system": {
                                                     "id": "DX Coil 1",
-<<<<<<< HEAD
-                                                    "cooling_system_type": "DIRECT_EXPANSION"
-                                                },
-                                                "heating_system": {
-                                                    "id": "Furnace Coil 1",
-                                                    "heating_system_type": "FURNACE"
-=======
                                                     "type": "DIRECT_EXPANSION"
                                                 },
                                                 "heating_system": {
                                                     "id": "Furnace Coil 1",
                                                     "type": "FURNACE"
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
                                                 },
                                                 "fan_system": {
                                                     "id": "CAV Fan System 1",
@@ -828,11 +724,7 @@
             },
             "baseline": {
                 "id": "ASHRAE229 1",
-<<<<<<< HEAD
-                "ruleset_model_instances": [
-=======
                 "ruleset_model_descriptions": [
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
                     {
                         "id": "RMD 1",
                         "buildings": [
@@ -858,11 +750,7 @@
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
-<<<<<<< HEAD
-                                                        "floor_area": 1000,
-=======
                                                         "floor_area": 92.90303999999999,
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
                                                         "lighting_space_type": "COMPUTER_ROOM"
                                                     }
                                                 ]
@@ -873,19 +761,11 @@
                                                 "id": "System Type 3",
                                                 "cooling_system": {
                                                     "id": "DX Coil 1",
-<<<<<<< HEAD
-                                                    "cooling_system_type": "DIRECT_EXPANSION"
-                                                },
-                                                "heating_system": {
-                                                    "id": "Furnace Coil 1",
-                                                    "heating_system_type": "FURNACE"
-=======
                                                     "type": "DIRECT_EXPANSION"
                                                 },
                                                 "heating_system": {
                                                     "id": "Furnace Coil 1",
                                                     "type": "FURNACE"
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
                                                 },
                                                 "fan_system": {
                                                     "id": "CAV Fan System 1",
@@ -933,20 +813,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Yes",
-<<<<<<< HEAD
-            "schema_version": "0.0.23"
-=======
             "schema_version": "0.0.29"
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
         },
         "rmr_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
-<<<<<<< HEAD
-                "ruleset_model_instances": [
-=======
                 "ruleset_model_descriptions": [
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
                     {
                         "id": "RMD 1",
                         "buildings": [
@@ -982,19 +854,11 @@
                                                 "id": "System Type 3",
                                                 "cooling_system": {
                                                     "id": "DX Coil 1",
-<<<<<<< HEAD
-                                                    "cooling_system_type": "DIRECT_EXPANSION"
-                                                },
-                                                "heating_system": {
-                                                    "id": "Furnace Coil 1",
-                                                    "heating_system_type": "FURNACE"
-=======
                                                     "type": "DIRECT_EXPANSION"
                                                 },
                                                 "heating_system": {
                                                     "id": "Furnace Coil 1",
                                                     "type": "FURNACE"
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
                                                 },
                                                 "fan_system": {
                                                     "id": "CAV Fan System 1",
@@ -1024,11 +888,7 @@
             },
             "baseline": {
                 "id": "ASHRAE229 1",
-<<<<<<< HEAD
-                "ruleset_model_instances": [
-=======
                 "ruleset_model_descriptions": [
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
                     {
                         "id": "RMD 1",
                         "buildings": [
@@ -1054,11 +914,7 @@
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
-<<<<<<< HEAD
-                                                        "floor_area": 1000,
-=======
                                                         "floor_area": 92.90303999999999,
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
                                                         "lighting_space_type": "OFFICE_ENCLOSED"
                                                     }
                                                 ]
@@ -1069,19 +925,11 @@
                                                 "id": "System Type 3",
                                                 "cooling_system": {
                                                     "id": "DX Coil 1",
-<<<<<<< HEAD
-                                                    "cooling_system_type": "DIRECT_EXPANSION"
-                                                },
-                                                "heating_system": {
-                                                    "id": "Furnace Coil 1",
-                                                    "heating_system_type": "FURNACE"
-=======
                                                     "type": "DIRECT_EXPANSION"
                                                 },
                                                 "heating_system": {
                                                     "id": "Furnace Coil 1",
                                                     "type": "FURNACE"
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
                                                 },
                                                 "fan_system": {
                                                     "id": "CAV Fan System 1",
@@ -1125,20 +973,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Yes",
-<<<<<<< HEAD
-            "schema_version": "0.0.23"
-=======
             "schema_version": "0.0.29"
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
         },
         "rmr_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
-<<<<<<< HEAD
-                "ruleset_model_instances": [
-=======
                 "ruleset_model_descriptions": [
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
                     {
                         "id": "RMD 1",
                         "buildings": [
@@ -1197,19 +1037,11 @@
                                                 "id": "System 5",
                                                 "cooling_system": {
                                                     "id": "DX Coil 1",
-<<<<<<< HEAD
-                                                    "cooling_system_type": "DIRECT_EXPANSION"
-                                                },
-                                                "preheat_system": {
-                                                    "id": "Preheat Coil 1",
-                                                    "heating_system_type": "FLUID_LOOP",
-=======
                                                     "type": "DIRECT_EXPANSION"
                                                 },
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 1",
                                                     "type": "FLUID_LOOP",
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
                                                     "hot_water_loop": "Boiler Loop 1"
                                                 },
                                                 "fan_system": {
@@ -1260,11 +1092,7 @@
             },
             "baseline": {
                 "id": "ASHRAE229 1",
-<<<<<<< HEAD
-                "ruleset_model_instances": [
-=======
                 "ruleset_model_descriptions": [
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
                     {
                         "id": "RMD 1",
                         "buildings": [
@@ -1292,11 +1120,7 @@
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
-<<<<<<< HEAD
-                                                        "floor_area": 1000,
-=======
                                                         "floor_area": 92.90303999999999,
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
                                                         "lighting_space_type": "OFFICE_ENCLOSED"
                                                     }
                                                 ]
@@ -1322,19 +1146,11 @@
                                                 "id": "System 5",
                                                 "cooling_system": {
                                                     "id": "DX Coil 1",
-<<<<<<< HEAD
-                                                    "cooling_system_type": "DIRECT_EXPANSION"
-                                                },
-                                                "preheat_system": {
-                                                    "id": "Preheat Coil 1",
-                                                    "heating_system_type": "FLUID_LOOP",
-=======
                                                     "type": "DIRECT_EXPANSION"
                                                 },
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 1",
                                                     "type": "FLUID_LOOP",
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
                                                     "hot_water_loop": "Boiler Loop 1"
                                                 },
                                                 "fan_system": {
@@ -1399,20 +1215,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Yes",
-<<<<<<< HEAD
-            "schema_version": "0.0.23"
-=======
             "schema_version": "0.0.29"
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
         },
         "rmr_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
-<<<<<<< HEAD
-                "ruleset_model_instances": [
-=======
                 "ruleset_model_descriptions": [
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
                     {
                         "id": "RMD 1",
                         "buildings": [
@@ -1448,11 +1256,7 @@
                                                 "id": "System 9",
                                                 "heating_system": {
                                                     "id": "Furnace Coil 1",
-<<<<<<< HEAD
-                                                    "heating_system_type": "FURNACE",
-=======
                                                     "type": "FURNACE",
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
                                                     "energy_source_type": "NATURAL_GAS"
                                                 },
                                                 "fan_system": {
@@ -1462,14 +1266,11 @@
                                                         {
                                                             "id": "Supply Fan 1"
                                                         }
-<<<<<<< HEAD
-=======
                                                     ],
                                                     "return_fans": [
                                                         {
                                                             "id": "Return Fan 1"
                                                         }
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
                                                     ]
                                                 }
                                             }
@@ -1486,11 +1287,7 @@
             },
             "baseline": {
                 "id": "ASHRAE229 1",
-<<<<<<< HEAD
-                "ruleset_model_instances": [
-=======
                 "ruleset_model_descriptions": [
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
                     {
                         "id": "RMD 1",
                         "buildings": [
@@ -1516,11 +1313,7 @@
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
-<<<<<<< HEAD
-                                                        "floor_area": 1000,
-=======
                                                         "floor_area": 92.90303999999999,
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
                                                         "lighting_space_type": "OFFICE_ENCLOSED"
                                                     }
                                                 ]
@@ -1531,11 +1324,7 @@
                                                 "id": "System 9",
                                                 "heating_system": {
                                                     "id": "Furnace Coil 1",
-<<<<<<< HEAD
-                                                    "heating_system_type": "FURNACE",
-=======
                                                     "type": "FURNACE",
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
                                                     "energy_source_type": "NATURAL_GAS"
                                                 },
                                                 "fan_system": {
@@ -1545,14 +1334,11 @@
                                                         {
                                                             "id": "Supply Fan 1"
                                                         }
-<<<<<<< HEAD
-=======
                                                     ],
                                                     "return_fans": [
                                                         {
                                                             "id": "Return Fan 1"
                                                         }
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
                                                     ]
                                                 }
                                             }
@@ -1583,20 +1369,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Yes",
-<<<<<<< HEAD
-            "schema_version": "0.0.23"
-=======
             "schema_version": "0.0.29"
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
         },
         "rmr_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
-<<<<<<< HEAD
-                "ruleset_model_instances": [
-=======
                 "ruleset_model_descriptions": [
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
                     {
                         "id": "RMD 1",
                         "buildings": [
@@ -1655,19 +1433,11 @@
                                                 "id": "System 5",
                                                 "cooling_system": {
                                                     "id": "DX Coil 1",
-<<<<<<< HEAD
-                                                    "cooling_system_type": "DIRECT_EXPANSION"
-                                                },
-                                                "preheat_system": {
-                                                    "id": "Preheat Coil 1",
-                                                    "heating_system_type": "FLUID_LOOP",
-=======
                                                     "type": "DIRECT_EXPANSION"
                                                 },
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 1",
                                                     "type": "FLUID_LOOP",
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
                                                     "hot_water_loop": "Boiler Loop 1"
                                                 },
                                                 "fan_system": {
@@ -1718,11 +1488,7 @@
             },
             "baseline": {
                 "id": "ASHRAE229 1",
-<<<<<<< HEAD
-                "ruleset_model_instances": [
-=======
                 "ruleset_model_descriptions": [
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
                     {
                         "id": "RMD 1",
                         "buildings": [
@@ -1750,11 +1516,7 @@
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
-<<<<<<< HEAD
-                                                        "floor_area": 1000
-=======
                                                         "floor_area": 92.90303999999999
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
                                                     }
                                                 ]
                                             },
@@ -1779,19 +1541,11 @@
                                                 "id": "System 5",
                                                 "cooling_system": {
                                                     "id": "DX Coil 1",
-<<<<<<< HEAD
-                                                    "cooling_system_type": "DIRECT_EXPANSION"
-                                                },
-                                                "preheat_system": {
-                                                    "id": "Preheat Coil 1",
-                                                    "heating_system_type": "FLUID_LOOP",
-=======
                                                     "type": "DIRECT_EXPANSION"
                                                 },
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 1",
                                                     "type": "FLUID_LOOP",
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
                                                     "hot_water_loop": "Boiler Loop 1"
                                                 },
                                                 "fan_system": {
@@ -1863,20 +1617,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Yes",
-<<<<<<< HEAD
-            "schema_version": "0.0.23"
-=======
             "schema_version": "0.0.29"
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
         },
         "rmr_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
-<<<<<<< HEAD
-                "ruleset_model_instances": [
-=======
                 "ruleset_model_descriptions": [
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
                     {
                         "id": "RMD 1",
                         "buildings": [
@@ -1935,19 +1681,11 @@
                                                 "id": "System 5",
                                                 "cooling_system": {
                                                     "id": "DX Coil 1",
-<<<<<<< HEAD
-                                                    "cooling_system_type": "DIRECT_EXPANSION"
-                                                },
-                                                "preheat_system": {
-                                                    "id": "Preheat Coil 1",
-                                                    "heating_system_type": "FLUID_LOOP",
-=======
                                                     "type": "DIRECT_EXPANSION"
                                                 },
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 1",
                                                     "type": "FLUID_LOOP",
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
                                                     "hot_water_loop": "Boiler Loop 1"
                                                 },
                                                 "fan_system": {
@@ -1998,11 +1736,7 @@
             },
             "baseline": {
                 "id": "ASHRAE229 1",
-<<<<<<< HEAD
-                "ruleset_model_instances": [
-=======
                 "ruleset_model_descriptions": [
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
                     {
                         "id": "RMD 1",
                         "buildings": [
@@ -2030,11 +1764,7 @@
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
-<<<<<<< HEAD
-                                                        "floor_area": 1000
-=======
                                                         "floor_area": 92.90303999999999
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
                                                     }
                                                 ]
                                             },
@@ -2059,19 +1789,11 @@
                                                 "id": "System 5",
                                                 "cooling_system": {
                                                     "id": "DX Coil 1",
-<<<<<<< HEAD
-                                                    "cooling_system_type": "DIRECT_EXPANSION"
-                                                },
-                                                "preheat_system": {
-                                                    "id": "Preheat Coil 1",
-                                                    "heating_system_type": "FLUID_LOOP",
-=======
                                                     "type": "DIRECT_EXPANSION"
                                                 },
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 1",
                                                     "type": "FLUID_LOOP",
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
                                                     "hot_water_loop": "Boiler Loop 1"
                                                 },
                                                 "fan_system": {
