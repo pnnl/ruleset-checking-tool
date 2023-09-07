@@ -1,4 +1,4 @@
-from rct229.rulesets.ashrae9012019.data.schema_enums import schema_enums
+from rct229.schema.schema_enums import schema_enums
 from rct229.utils.utility_functions import find_exactly_one_terminal_unit
 
 TERMINAL_TYPE = schema_enums["TerminalOptions"]

@@ -1,6 +1,6 @@
 from pydash import filter_, flat_map
 
-from rct229.rulesets.ashrae9012019.data.schema_enums import schema_enums
+from rct229.schema.schema_enums import schema_enums
 from rct229.rulesets.ashrae9012019.ruleset_functions.g311_exceptions.g311_sub_functions.get_zones_on_same_floor_list import (
     get_zones_on_same_floor_list,
 )

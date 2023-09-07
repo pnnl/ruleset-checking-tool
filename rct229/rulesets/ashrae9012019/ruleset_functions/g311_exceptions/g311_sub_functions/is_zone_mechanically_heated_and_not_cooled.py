@@ -1,6 +1,6 @@
 from pydash import flat_map
 
-from rct229.rulesets.ashrae9012019.data.schema_enums import schema_enums
+from rct229.schema.schema_enums import schema_enums
 from rct229.rulesets.ashrae9012019.ruleset_functions.g311_exceptions.g311_sub_functions.is_zone_mechanically_cooled import (
     is_zone_mechanically_cooled,
 )

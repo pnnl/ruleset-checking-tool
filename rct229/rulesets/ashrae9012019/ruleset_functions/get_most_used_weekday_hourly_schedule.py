@@ -1,6 +1,6 @@
 import pydash
 
-from rct229.rulesets.ashrae9012019.data.schema_enums import schema_enums
+from rct229.schema.schema_enums import schema_enums
 
 HOURS_IN_DAY = 24
 DAYS_IN_WEEK = 7

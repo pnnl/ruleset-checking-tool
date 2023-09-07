@@ -1,4 +1,4 @@
-from rct229.rulesets.ashrae9012019.data.schema_enums import schema_enums
+from rct229.schema.schema_enums import schema_enums
 
 
 def find_osstd_table_entry(match_field_name_value_pairs, osstd_table):
