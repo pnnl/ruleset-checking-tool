@@ -5,12 +5,10 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_h
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.is_hvac_sys_preheating_type_fluid_loop import (
     is_hvac_sys_preheating_type_fluid_loop,
 )
-from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_system_util import (
-    find_exactly_one_hvac_system,
-)
 from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all
-from rct229.utils.pint_utils import ZERO, pint_sum
+from rct229.utils.pint_utils import ZERO
+from rct229.utils.utility_functions import find_exactly_one_hvac_system
 
 HEATING_SOURCE = schema_enums["HeatingSourceOptions"]
 
@@ -31,7 +29,7 @@ def get_hw_loop_zone_list_w_area(rmi_b):
     """
     hw_loop_zone_list_w_area_dict = dict()
     for zone in find_all("$.buildings[*].building_segments[*].zones[*]", rmi_b):
-        zone_area = pint_sum(
+        zone_area = sum(
             [
                 space.get("floor_area", ZERO.AREA)
                 for space in find_all("$.spaces[*]", zone)

@@ -3,7 +3,11 @@
         "Section": 19,
         "Rule": 15,
         "Test": "a",
+<<<<<<< HEAD
         "test_description": "Baseline system type 10, minimum ventilation does not exceed auto-sized airflow rates. Suppy airflow rates are correctly based on the temperature difference between 105F and the design space-heating temperature set point.",
+=======
+        "test_description": "Baseline system type 10, minimum ventilation does not exceed auto-sized airflow rates. Supply airflow rates are correctly based on the temperature difference between 105F and the design space-heating temperature set point.",
+>>>>>>> 77c75648da08e9468c46cd3cc50bf10d88824895
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "19-15",
@@ -13,11 +17,16 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Yes",
+<<<<<<< HEAD
             "schema_version": "0.0.23"
+=======
+            "schema_version": "0.0.29"
+>>>>>>> 77c75648da08e9468c46cd3cc50bf10d88824895
         },
         "rmr_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
+<<<<<<< HEAD
                 "ruleset_model_instances": [
                     {
                         "id": "RMD 1",
@@ -73,6 +82,9 @@
             "baseline": {
                 "id": "ASHRAE229 1",
                 "ruleset_model_instances": [
+=======
+                "ruleset_model_descriptions": [
+>>>>>>> 77c75648da08e9468c46cd3cc50bf10d88824895
                     {
                         "id": "RMD 1",
                         "buildings": [
@@ -94,11 +106,91 @@
                                                         "type": "CONSTANT_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 10",
                                                         "heating_source": "ELECTRIC",
+<<<<<<< HEAD
                                                         "primary_airflow": 1000,
                                                         "supply_design_heating_setpoint_temperature": 105
                                                     }
                                                 ],
                                                 "design_thermostat_heating_setpoint": 65,
+=======
+                                                        "fan": {
+                                                            "id": "Terminal Fan 1"
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "System 10",
+                                                "heating_system": {
+                                                    "id": "Heating Coil 1",
+                                                    "type": "FURNACE",
+                                                    "energy_source_type": "ELECTRICITY"
+                                                },
+                                                "fan_system": {
+                                                    "id": "CAV Fan System 1",
+                                                    "fan_control": "CONSTANT",
+                                                    "supply_fans": [
+                                                        {
+                                                            "id": "Supply Fan 1",
+                                                            "specification_method": "SIMPLE",
+                                                            "design_electric_power": 100
+                                                        }
+                                                    ],
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "Return Fan 1",
+                                                            "specification_method": "SIMPLE",
+                                                            "design_electric_power": 100
+                                                        }
+                                                    ],
+                                                    "minimum_outdoor_airflow": 11.798686079999996
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_open_schedule": "Required Building Schedule 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                                "terminals": [
+                                                    {
+                                                        "id": "Air Terminal",
+                                                        "is_supply_ducted": true,
+                                                        "type": "CONSTANT_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 10",
+                                                        "heating_source": "ELECTRIC",
+                                                        "fan": {
+                                                            "id": "Terminal Fan 1",
+                                                            "specification_method": "SIMPLE",
+                                                            "design_electric_power": 25
+                                                        },
+                                                        "primary_airflow": 117.98686079999996,
+                                                        "supply_design_heating_setpoint_temperature": 40.5555555555556
+                                                    }
+                                                ],
+                                                "design_thermostat_heating_setpoint": 18.33333333333337,
+>>>>>>> 77c75648da08e9468c46cd3cc50bf10d88824895
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
@@ -112,7 +204,11 @@
                                                 "id": "System 10",
                                                 "heating_system": {
                                                     "id": "Heating Coil 1",
+<<<<<<< HEAD
                                                     "heating_system_type": "ELECTRIC_RESISTANCE",
+=======
+                                                    "type": "FURNACE",
+>>>>>>> 77c75648da08e9468c46cd3cc50bf10d88824895
                                                     "energy_source_type": "ELECTRICITY"
                                                 },
                                                 "fan_system": {
@@ -121,10 +217,25 @@
                                                     "supply_fans": [
                                                         {
                                                             "id": "Supply Fan 1",
+<<<<<<< HEAD
+=======
+                                                            "specification_method": "SIMPLE",
+                                                            "design_electric_power": 75,
+>>>>>>> 77c75648da08e9468c46cd3cc50bf10d88824895
                                                             "design_airflow": 117.98686079999996,
                                                             "is_airflow_autosized": true
                                                         }
                                                     ],
+<<<<<<< HEAD
+=======
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "Return Fan 1",
+                                                            "specification_method": "SIMPLE",
+                                                            "design_electric_power": 25
+                                                        }
+                                                    ],
+>>>>>>> 77c75648da08e9468c46cd3cc50bf10d88824895
                                                     "minimum_outdoor_airflow": 0.0
                                                 }
                                             }
@@ -142,7 +253,11 @@
         "Section": 19,
         "Rule": 15,
         "Test": "b",
+<<<<<<< HEAD
         "test_description": "Baseline system type 10, minimum ventilation does not exceed auto-sized airflow rates. Suppy airflow rates are incorrectly based on a supply-air-to-room temperature set-point difference of 20F.",
+=======
+        "test_description": "Baseline system type 10, minimum ventilation does not exceed auto-sized airflow rates. Supply airflow rates are incorrectly based on a supply-air-to-room temperature set-point difference of 20F.",
+>>>>>>> 77c75648da08e9468c46cd3cc50bf10d88824895
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "19-15",
@@ -152,11 +267,16 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Yes",
+<<<<<<< HEAD
             "schema_version": "0.0.23"
+=======
+            "schema_version": "0.0.29"
+>>>>>>> 77c75648da08e9468c46cd3cc50bf10d88824895
         },
         "rmr_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
+<<<<<<< HEAD
                 "ruleset_model_instances": [
                     {
                         "id": "RMD 1",
@@ -212,6 +332,9 @@
             "baseline": {
                 "id": "ASHRAE229 1",
                 "ruleset_model_instances": [
+=======
+                "ruleset_model_descriptions": [
+>>>>>>> 77c75648da08e9468c46cd3cc50bf10d88824895
                     {
                         "id": "RMD 1",
                         "buildings": [
@@ -233,11 +356,91 @@
                                                         "type": "CONSTANT_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 10",
                                                         "heating_source": "ELECTRIC",
+<<<<<<< HEAD
                                                         "primary_airflow": 1000,
                                                         "supply_design_heating_setpoint_temperature": 85
                                                     }
                                                 ],
                                                 "design_thermostat_heating_setpoint": 65,
+=======
+                                                        "fan": {
+                                                            "id": "Terminal Fan 1"
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "System 10",
+                                                "heating_system": {
+                                                    "id": "Heating Coil 1",
+                                                    "type": "FURNACE",
+                                                    "energy_source_type": "ELECTRICITY"
+                                                },
+                                                "fan_system": {
+                                                    "id": "CAV Fan System 1",
+                                                    "fan_control": "CONSTANT",
+                                                    "supply_fans": [
+                                                        {
+                                                            "id": "Supply Fan 1",
+                                                            "specification_method": "SIMPLE",
+                                                            "design_electric_power": 100
+                                                        }
+                                                    ],
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "Return Fan 1",
+                                                            "specification_method": "SIMPLE",
+                                                            "design_electric_power": 100
+                                                        }
+                                                    ],
+                                                    "minimum_outdoor_airflow": 11.798686079999996
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_open_schedule": "Required Building Schedule 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                                "terminals": [
+                                                    {
+                                                        "id": "Air Terminal",
+                                                        "is_supply_ducted": true,
+                                                        "type": "CONSTANT_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 10",
+                                                        "heating_source": "ELECTRIC",
+                                                        "fan": {
+                                                            "id": "Terminal Fan 1",
+                                                            "specification_method": "SIMPLE",
+                                                            "design_electric_power": 25
+                                                        },
+                                                        "primary_airflow": 117.98686079999996,
+                                                        "supply_design_heating_setpoint_temperature": 29.444444444444457
+                                                    }
+                                                ],
+                                                "design_thermostat_heating_setpoint": 18.33333333333337,
+>>>>>>> 77c75648da08e9468c46cd3cc50bf10d88824895
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
@@ -251,7 +454,11 @@
                                                 "id": "System 10",
                                                 "heating_system": {
                                                     "id": "Heating Coil 1",
+<<<<<<< HEAD
                                                     "heating_system_type": "ELECTRIC_RESISTANCE",
+=======
+                                                    "type": "FURNACE",
+>>>>>>> 77c75648da08e9468c46cd3cc50bf10d88824895
                                                     "energy_source_type": "ELECTRICITY"
                                                 },
                                                 "fan_system": {
@@ -260,10 +467,25 @@
                                                     "supply_fans": [
                                                         {
                                                             "id": "Supply Fan 1",
+<<<<<<< HEAD
+=======
+                                                            "specification_method": "SIMPLE",
+                                                            "design_electric_power": 75,
+>>>>>>> 77c75648da08e9468c46cd3cc50bf10d88824895
                                                             "design_airflow": 117.98686079999996,
                                                             "is_airflow_autosized": true
                                                         }
                                                     ],
+<<<<<<< HEAD
+=======
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "Return Fan 1",
+                                                            "specification_method": "SIMPLE",
+                                                            "design_electric_power": 25
+                                                        }
+                                                    ],
+>>>>>>> 77c75648da08e9468c46cd3cc50bf10d88824895
                                                     "minimum_outdoor_airflow": 0.0
                                                 }
                                             }
@@ -281,7 +503,11 @@
         "Section": 19,
         "Rule": 15,
         "Test": "c",
+<<<<<<< HEAD
         "test_description": "Baseline system type 9, minimum ventilation exceeds the auto-sized airflow rates. Suppy airflow rates are correctly based on the minimum ventilation airflow rates.",
+=======
+        "test_description": "Baseline system type 9, minimum ventilation exceeds the auto-sized airflow rates. Supply airflow rates are correctly based on the minimum ventilation airflow rates.",
+>>>>>>> 77c75648da08e9468c46cd3cc50bf10d88824895
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "19-15",
@@ -291,12 +517,20 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Yes",
+<<<<<<< HEAD
             "schema_version": "0.0.23"
+=======
+            "schema_version": "0.0.29"
+>>>>>>> 77c75648da08e9468c46cd3cc50bf10d88824895
         },
         "rmr_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
+<<<<<<< HEAD
                 "ruleset_model_instances": [
+=======
+                "ruleset_model_descriptions": [
+>>>>>>> 77c75648da08e9468c46cd3cc50bf10d88824895
                     {
                         "id": "RMD 1",
                         "buildings": [
@@ -326,7 +560,11 @@
                                                 "id": "System 9",
                                                 "heating_system": {
                                                     "id": "Furnace Coil 1",
+<<<<<<< HEAD
                                                     "heating_system_type": "FURNACE",
+=======
+                                                    "type": "FURNACE",
+>>>>>>> 77c75648da08e9468c46cd3cc50bf10d88824895
                                                     "energy_source_type": "NATURAL_GAS"
                                                 },
                                                 "fan_system": {
@@ -334,9 +572,25 @@
                                                     "fan_control": "CONSTANT",
                                                     "supply_fans": [
                                                         {
+<<<<<<< HEAD
                                                             "id": "Supply Fan 1"
                                                         }
                                                     ]
+=======
+                                                            "id": "Supply Fan 1",
+                                                            "specification_method": "SIMPLE",
+                                                            "design_electric_power": 100
+                                                        }
+                                                    ],
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "Return Fan 1",
+                                                            "specification_method": "SIMPLE",
+                                                            "design_electric_power": 100
+                                                        }
+                                                    ],
+                                                    "minimum_outdoor_airflow": 153.38291903999993
+>>>>>>> 77c75648da08e9468c46cd3cc50bf10d88824895
                                                 }
                                             }
                                         ]
@@ -349,7 +603,11 @@
             },
             "baseline": {
                 "id": "ASHRAE229 1",
+<<<<<<< HEAD
                 "ruleset_model_instances": [
+=======
+                "ruleset_model_descriptions": [
+>>>>>>> 77c75648da08e9468c46cd3cc50bf10d88824895
                     {
                         "id": "RMD 1",
                         "buildings": [
@@ -370,11 +628,19 @@
                                                         "is_supply_ducted": true,
                                                         "type": "CONSTANT_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 9",
+<<<<<<< HEAD
                                                         "primary_airflow": 1000,
                                                         "supply_design_heating_setpoint_temperature": 105
                                                     }
                                                 ],
                                                 "design_thermostat_heating_setpoint": 65,
+=======
+                                                        "primary_airflow": 141.58423295999995,
+                                                        "supply_design_heating_setpoint_temperature": 35.00000000000006
+                                                    }
+                                                ],
+                                                "design_thermostat_heating_setpoint": 18.33333333333337,
+>>>>>>> 77c75648da08e9468c46cd3cc50bf10d88824895
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
@@ -388,7 +654,11 @@
                                                 "id": "System 9",
                                                 "heating_system": {
                                                     "id": "Furnace Coil 1",
+<<<<<<< HEAD
                                                     "heating_system_type": "FURNACE",
+=======
+                                                    "type": "FURNACE",
+>>>>>>> 77c75648da08e9468c46cd3cc50bf10d88824895
                                                     "energy_source_type": "NATURAL_GAS"
                                                 },
                                                 "fan_system": {
@@ -397,10 +667,25 @@
                                                     "supply_fans": [
                                                         {
                                                             "id": "Supply Fan 1",
+<<<<<<< HEAD
+=======
+                                                            "specification_method": "SIMPLE",
+                                                            "design_electric_power": 90,
+>>>>>>> 77c75648da08e9468c46cd3cc50bf10d88824895
                                                             "design_airflow": 141.58423295999995,
                                                             "is_airflow_autosized": true
                                                         }
                                                     ],
+<<<<<<< HEAD
+=======
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "Return Fan 1",
+                                                            "specification_method": "SIMPLE",
+                                                            "design_electric_power": 25
+                                                        }
+                                                    ],
+>>>>>>> 77c75648da08e9468c46cd3cc50bf10d88824895
                                                     "minimum_outdoor_airflow": 141.58423295999995
                                                 }
                                             }
@@ -418,7 +703,11 @@
         "Section": 19,
         "Rule": 15,
         "Test": "d",
+<<<<<<< HEAD
         "test_description": "Baseline system type 9, minimum ventilation exceeds the auto-sized airflow rates. Suppy airflow rates are incorrectly based on the temperature difference between 105F and the design space-heating temperature set point.",
+=======
+        "test_description": "Baseline system type 9, minimum ventilation exceeds the auto-sized airflow rates. Supply airflow rates are incorrectly based on the temperature difference between 105F and the design space-heating temperature set point.",
+>>>>>>> 77c75648da08e9468c46cd3cc50bf10d88824895
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "19-15",
@@ -428,12 +717,20 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Yes",
+<<<<<<< HEAD
             "schema_version": "0.0.23"
+=======
+            "schema_version": "0.0.29"
+>>>>>>> 77c75648da08e9468c46cd3cc50bf10d88824895
         },
         "rmr_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
+<<<<<<< HEAD
                 "ruleset_model_instances": [
+=======
+                "ruleset_model_descriptions": [
+>>>>>>> 77c75648da08e9468c46cd3cc50bf10d88824895
                     {
                         "id": "RMD 1",
                         "buildings": [
@@ -463,7 +760,11 @@
                                                 "id": "System 9",
                                                 "heating_system": {
                                                     "id": "Furnace Coil 1",
+<<<<<<< HEAD
                                                     "heating_system_type": "FURNACE",
+=======
+                                                    "type": "FURNACE",
+>>>>>>> 77c75648da08e9468c46cd3cc50bf10d88824895
                                                     "energy_source_type": "NATURAL_GAS"
                                                 },
                                                 "fan_system": {
@@ -471,9 +772,25 @@
                                                     "fan_control": "CONSTANT",
                                                     "supply_fans": [
                                                         {
+<<<<<<< HEAD
                                                             "id": "Supply Fan 1"
                                                         }
                                                     ]
+=======
+                                                            "id": "Supply Fan 1",
+                                                            "specification_method": "SIMPLE",
+                                                            "design_electric_power": 100
+                                                        }
+                                                    ],
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "Return Fan 1",
+                                                            "specification_method": "SIMPLE",
+                                                            "design_electric_power": 100
+                                                        }
+                                                    ],
+                                                    "minimum_outdoor_airflow": 153.38291903999993
+>>>>>>> 77c75648da08e9468c46cd3cc50bf10d88824895
                                                 }
                                             }
                                         ]
@@ -486,7 +803,11 @@
             },
             "baseline": {
                 "id": "ASHRAE229 1",
+<<<<<<< HEAD
                 "ruleset_model_instances": [
+=======
+                "ruleset_model_descriptions": [
+>>>>>>> 77c75648da08e9468c46cd3cc50bf10d88824895
                     {
                         "id": "RMD 1",
                         "buildings": [
@@ -507,11 +828,19 @@
                                                         "is_supply_ducted": true,
                                                         "type": "CONSTANT_AIR_VOLUME",
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 9",
+<<<<<<< HEAD
                                                         "primary_airflow": 1000,
                                                         "supply_design_heating_setpoint_temperature": 105
                                                     }
                                                 ],
                                                 "design_thermostat_heating_setpoint": 65,
+=======
+                                                        "primary_airflow": 117.98686079999996,
+                                                        "supply_design_heating_setpoint_temperature": 40.5555555555556
+                                                    }
+                                                ],
+                                                "design_thermostat_heating_setpoint": 18.33333333333337,
+>>>>>>> 77c75648da08e9468c46cd3cc50bf10d88824895
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
@@ -525,7 +854,11 @@
                                                 "id": "System 9",
                                                 "heating_system": {
                                                     "id": "Furnace Coil 1",
+<<<<<<< HEAD
                                                     "heating_system_type": "FURNACE",
+=======
+                                                    "type": "FURNACE",
+>>>>>>> 77c75648da08e9468c46cd3cc50bf10d88824895
                                                     "energy_source_type": "NATURAL_GAS"
                                                 },
                                                 "fan_system": {
@@ -534,10 +867,25 @@
                                                     "supply_fans": [
                                                         {
                                                             "id": "Supply Fan 1",
+<<<<<<< HEAD
+=======
+                                                            "specification_method": "SIMPLE",
+                                                            "design_electric_power": 75,
+>>>>>>> 77c75648da08e9468c46cd3cc50bf10d88824895
                                                             "design_airflow": 117.98686079999996,
                                                             "is_airflow_autosized": true
                                                         }
                                                     ],
+<<<<<<< HEAD
+=======
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "Return Fan 1",
+                                                            "specification_method": "SIMPLE",
+                                                            "design_electric_power": 25
+                                                        }
+                                                    ],
+>>>>>>> 77c75648da08e9468c46cd3cc50bf10d88824895
                                                     "minimum_outdoor_airflow": 141.58423295999995
                                                 }
                                             }
@@ -550,5 +898,170 @@
                 ]
             }
         }
+<<<<<<< HEAD
+=======
+    },
+    "rule-19-15-e": {
+        "Section": 19,
+        "Rule": 15,
+        "Test": "e",
+        "test_description": "Baseline system type 9 with more than one supply fan.",
+        "expected_rule_outcome": "undetermined",
+        "standard": {
+            "rule_id": "19-15",
+            "ruleset_reference": "G3.1.2.8.2",
+            "rule_description": "For baseline system types 9 & 10, the system design supply airflow rates  shall be based on the temperature difference between a supply air temperature set point of 105\u00b0F and the design space-heating temperature set point, the minimum outdoor airflow rate, or the airflow rate required to comply with applicable codes or accreditation standards, whichever is greater.",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "primary_rule": "Yes",
+            "schema_version": "0.0.29"
+        },
+        "rmr_transformations": {
+            "proposed": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_open_schedule": "Required Building Schedule 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                                "terminals": [
+                                                    {
+                                                        "id": "Air Terminal",
+                                                        "is_supply_ducted": true,
+                                                        "type": "CONSTANT_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 9"
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "System 9",
+                                                "heating_system": {
+                                                    "id": "Furnace Coil 1",
+                                                    "type": "FURNACE",
+                                                    "energy_source_type": "NATURAL_GAS"
+                                                },
+                                                "fan_system": {
+                                                    "id": "CAV Fan System 1",
+                                                    "fan_control": "CONSTANT",
+                                                    "supply_fans": [
+                                                        {
+                                                            "id": "Supply Fan 1",
+                                                            "specification_method": "SIMPLE",
+                                                            "design_electric_power": 100
+                                                        }
+                                                    ],
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "Return Fan 1",
+                                                            "specification_method": "SIMPLE",
+                                                            "design_electric_power": 100
+                                                        }
+                                                    ],
+                                                    "minimum_outdoor_airflow": 11.798686079999996
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_open_schedule": "Required Building Schedule 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
+                                                "terminals": [
+                                                    {
+                                                        "id": "Air Terminal",
+                                                        "is_supply_ducted": true,
+                                                        "type": "CONSTANT_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 9",
+                                                        "primary_airflow": 117.98686079999996,
+                                                        "supply_design_heating_setpoint_temperature": 40.5555555555556
+                                                    }
+                                                ],
+                                                "design_thermostat_heating_setpoint": 18.33333333333337,
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "lighting_space_type": "STAIRWELL"
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "System 9",
+                                                "heating_system": {
+                                                    "id": "Furnace Coil 1",
+                                                    "type": "FURNACE",
+                                                    "energy_source_type": "NATURAL_GAS"
+                                                },
+                                                "fan_system": {
+                                                    "id": "CAV Fan System 1",
+                                                    "fan_control": "CONSTANT",
+                                                    "supply_fans": [
+                                                        {
+                                                            "id": "Supply Fan 1",
+                                                            "specification_method": "SIMPLE",
+                                                            "design_electric_power": 75,
+                                                            "design_airflow": 117.98686079999996,
+                                                            "is_airflow_autosized": true
+                                                        },
+                                                        {
+                                                            "id": "Supply Fan 2",
+                                                            "specification_method": "SIMPLE",
+                                                            "design_electric_power": 75,
+                                                            "design_airflow": 117.98686079999996
+                                                        }
+                                                    ],
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "Return Fan 1",
+                                                            "specification_method": "SIMPLE",
+                                                            "design_electric_power": 25
+                                                        }
+                                                    ],
+                                                    "minimum_outdoor_airflow": 0.0
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+>>>>>>> 77c75648da08e9468c46cd3cc50bf10d88824895
     }
 }

@@ -7,7 +7,6 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_system_type_compar
 )
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_system_util import (
     HVAC_SYS,
-    find_exactly_one_fluid_loop,
 )
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_baseline_system_types import (
     get_baseline_system_types,
@@ -17,6 +16,7 @@ from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.pint_utils import ZERO, CalcQ
 from rct229.utils.std_comparisons import std_equal
+from rct229.utils.utility_functions import find_exactly_one_fluid_loop
 
 APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_5,
