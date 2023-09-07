@@ -795,7 +795,7 @@ def test__TEST_RMD_P_is_valid():
 
 def test__get_zone_target_baseline_system_G3_1_1_b__true():
     assert get_zone_target_baseline_system(
-        TEST_RMD_B_UNIT_G311B, TEST_RMD_UNIT_P, "CZ4A"
+        TEST_RMD_B_UNIT_G311B, TEST_RMD_UNIT_P, "CZ4A", False
     ) == {
         "Thermal Zone 1": {
             "expected_system_type": HVAC_SYS.SYS_5,
@@ -810,7 +810,7 @@ def test__get_zone_target_baseline_system_G3_1_1_b__true():
 
 def test__get_zone_target_baseline_system_G3_1_1_c__true():
     assert get_zone_target_baseline_system(
-        TEST_RMD_B_UNIT_G311C, TEST_RMD_UNIT_P, "CZ5A"
+        TEST_RMD_B_UNIT_G311C, TEST_RMD_UNIT_P, "CZ5A", False
     ) == {
         "Thermal Zone 1": {
             "expected_system_type": HVAC_SYS.SYS_3,
@@ -821,7 +821,7 @@ def test__get_zone_target_baseline_system_G3_1_1_c__true():
 
 def test__get_zone_target_baseline_system_G3_1_1_d__true():
     assert get_zone_target_baseline_system(
-        TEST_RMD_B_UNIT_G311D, TEST_RMD_UNIT_P, "CZ4A"
+        TEST_RMD_B_UNIT_G311D, TEST_RMD_UNIT_P, "CZ4A", False
     ) == {
         "Thermal Zone 1": {
             "expected_system_type": HVAC_SYS.SYS_5,
@@ -832,7 +832,7 @@ def test__get_zone_target_baseline_system_G3_1_1_d__true():
 
 def test__get_zone_target_baseline_system_G3_1_1_e__true():
     assert get_zone_target_baseline_system(
-        TEST_RMD_B_UNIT_G311E, TEST_RMD_UNIT_P, "CZ3A"
+        TEST_RMD_B_UNIT_G311E, TEST_RMD_UNIT_P, "CZ3A", False
     ) == {
         "Thermal Zone 2": {
             "expected_system_type": HVAC_SYS.SYS_10,
@@ -843,7 +843,7 @@ def test__get_zone_target_baseline_system_G3_1_1_e__true():
 
 def test__get_zone_target_baseline_system_G3_1_1_f__true():
     assert get_zone_target_baseline_system(
-        TEST_RMD_B_UNIT_G311F, TEST_RMD_UNIT_P, "CZ4A"
+        TEST_RMD_B_UNIT_G311F, TEST_RMD_UNIT_P, "CZ4A", False
     ) == {
         "Thermal Zone 2": {
             "expected_system_type": "",
@@ -854,7 +854,7 @@ def test__get_zone_target_baseline_system_G3_1_1_f__true():
 
 def test__get_zone_target_baseline_system_G3_1_1_g__true():
     assert get_zone_target_baseline_system(
-        TEST_RMD_B_UNIT_G311G, TEST_RMD_UNIT_P, "CZ4A"
+        TEST_RMD_B_UNIT_G311G, TEST_RMD_UNIT_P, "CZ4A", False
     ) == {
         "Thermal Zone 1": {
             "expected_system_type": HVAC_SYS.SYS_11_1,
