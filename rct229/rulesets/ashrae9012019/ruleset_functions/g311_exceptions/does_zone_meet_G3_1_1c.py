@@ -23,10 +23,10 @@ from rct229.schema.config import ureg
 from rct229.utils.pint_utils import ZERO
 
 ELIGIBLE_PRIMARY_SYSTEM_TYPES = [
-    HVAC_SYS.SYS_5,
-    HVAC_SYS.SYS_6,
+    # HVAC_SYS.SYS_5,
+    # HVAC_SYS.SYS_6,
     HVAC_SYS.SYS_7,
-    HVAC_SYS.SYS_8,
+    # HVAC_SYS.SYS_8,
 ]
 
 NUMBER_OF_WEEKS_IN_YEAR = 52.1429
@@ -83,7 +83,6 @@ def does_zone_meet_g3_1_1c(rmi, zone_id, is_leap_year, zones_and_systems):
         ]
     )
     meet_g3_1_1c_flag = False
-
     if system_matched:
         zones_on_same_floor_ids = get_zones_on_same_floor_list(rmi, zone_id)
         # drop zone_id in the list
@@ -112,14 +111,22 @@ def does_zone_meet_g3_1_1c(rmi, zone_id, is_leap_year, zones_and_systems):
         system_total_load = sum(map_(zone_load_and_eflh_list, "0.peak"), ZERO.POWER)
 
         avg_eflh = (
-            # product sum
-            np.dot(
-                map_(zone_load_and_eflh_list, lambda zl: zl[1]),
-                map_(zone_load_and_eflh_list, lambda zl: zl[0]["area"].magnitude),
+            (
+                np.dot(
+                    map_(zone_load_and_eflh_list, lambda zl: zl[1]),
+                    map_(zone_load_and_eflh_list, lambda zl: zl[0]["area"].magnitude),
+                )
+                / system_total_area.magnitude
             )
-            / system_total_area.magnitude
+            if system_total_area != ZERO.AREA
+            else 0.0
         )
-        avg_internal_load = system_total_load / system_total_area
+
+        avg_internal_load = (
+            system_total_load / system_total_area
+            if system_total_area != ZERO.AREA
+            else ZERO.POWER_PER_AREA
+        )
 
         zone_internal_loads = get_zone_peak_internal_load_floor_area_dict(rmi, zone_id)
         zone_eflh = get_zone_weekly_eflh(zone_id)
