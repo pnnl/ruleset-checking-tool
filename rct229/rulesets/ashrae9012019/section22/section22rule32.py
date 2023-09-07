@@ -1,7 +1,7 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
-from rct229.schema.schema_enums import schema_enums
+from rct229.schema.schema_enums import SchemaEnums
 from rct229.rulesets.ashrae9012019.data_fns.table_G3_5_3_fns import table_G3_5_3_lookup
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_system_util import (
     HVAC_SYS,
@@ -12,7 +12,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_baseline_system_types i
 from rct229.utils.assertions import getattr_
 from rct229.utils.std_comparisons import std_equal
 
-CHILLER_PART_LOAD_EFFICIENCY_METRIC = schema_enums[
+CHILLER_PART_LOAD_EFFICIENCY_METRIC = SchemaEnums.schema_enums[
     "ChillerPartLoadEfficiencyMetricOptions"
 ]
 

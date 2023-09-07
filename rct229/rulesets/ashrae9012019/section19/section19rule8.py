@@ -1,7 +1,7 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
-from rct229.schema.schema_enums import schema_enums
+from rct229.schema.schema_enums import SchemaEnums
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_hvac_zone_list_w_area_dict import (
     get_hvac_zone_list_w_area_dict,
 )
@@ -10,7 +10,7 @@ from rct229.utils.jsonpath_utils import find_all
 
 MIN_OA_CFM = 3000 * ureg("cfm")
 OCCUPANT_DENSITY_LIMIT = 0.1 / ureg("ft2")
-DEMAND_CONTROL_VENTILATION_CONTROL = schema_enums[
+DEMAND_CONTROL_VENTILATION_CONTROL = SchemaEnums.schema_enums[
     "DemandControlVentilationControlOptions"
 ]
 

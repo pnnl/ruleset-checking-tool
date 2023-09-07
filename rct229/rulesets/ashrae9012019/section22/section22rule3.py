@@ -1,7 +1,7 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
-from rct229.schema.schema_enums import schema_enums
+from rct229.schema.schema_enums import SchemaEnums
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_system_util import (
     HVAC_SYS,
 )
@@ -27,7 +27,7 @@ NOT_APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_11_1B,
     HVAC_SYS.SYS_11_1C,
 ]
-TEMP_RESET_TYPE = schema_enums["TemperatureResetOptions"]
+TEMP_RESET_TYPE = SchemaEnums.schema_enums["TemperatureResetOptions"]
 
 
 class Section22Rule3(RuleDefinitionListIndexedBase):

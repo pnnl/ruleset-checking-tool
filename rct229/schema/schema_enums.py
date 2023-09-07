@@ -2,6 +2,8 @@ import json
 from enum import Enum
 from os.path import dirname, join
 
+from rct229.rule_engine.rulesets import RuleSet
+from rct229.schema import SchemaStore
 from rct229.utils.jsonpath_utils import create_jsonpath_value_dict
 
 """This module exports the dictionary schema_enums that provides access to the
@@ -28,52 +30,58 @@ class _ListEnum:
         return list(self.__dict__)
 
 
-# Load the enumeration schema file
-_enum_schema_path = join(
-    dirname(__file__), "..", "schema", "Enumerations2019ASHRAE901.schema.json"
-)
-with open(_enum_schema_path) as json_file:
-    _enum_schema_obj = json.load(json_file)
+class SchemaEnums:
+    schema_enums = {}
 
-# Load the schema file
-_schema_path = join(dirname(__file__), "..", "schema", "ASHRAE229.schema.json")
-with open(_schema_path) as json_file:
-    _schema_obj = json.load(json_file)
+    @staticmethod
+    def update_schema_enum():
+        # Load the enumeration schema file
+        _enum_schema_path = join(
+            dirname(__file__), "..", "schema", SchemaStore.get_enum_schema_by_ruleset()
+        )
+        with open(_enum_schema_path) as json_file:
+            _enum_schema_obj = json.load(json_file)
 
-# Query for all objects having an enum field
-# See jsonpath2 docs for parse syntax: https://jsonpath2.readthedocs.io/en/latest/exampleusage.html
-_enum_schema_enum_jsonpath_value_dict = create_jsonpath_value_dict(
-    "$..*[?(@.enum)]", _enum_schema_obj
-)
-_schema_enum_jsonpath_value_dict = create_jsonpath_value_dict(
-    "$..*[?(@.enum)]", _schema_obj
-)
-# Merge the two dictionaries
-enum_jsonpath_value_dict = {
-    **_enum_schema_enum_jsonpath_value_dict,
-    **_schema_enum_jsonpath_value_dict,
-}
+        # Load the schema file
+        _schema_path = join(dirname(__file__), "..", "schema", "ASHRAE229.schema.json")
+        with open(_schema_path) as json_file:
+            _schema_obj = json.load(json_file)
 
-# Create a dictionary of all the enumerations as dictionaries
-_enums_dict = {
-    # NOTE: The jsonpath() has the form '$["a"]...["b"]' so
-    # .split('"')[-2] will pick out the 'b' from the path in this example
-    enum_jsonpath.split('"')[-2]: value["enum"]
-    for (enum_jsonpath, value) in enum_jsonpath_value_dict.items()
-}
+        # Query for all objects having an enum field
+        # See jsonpath2 docs for parse syntax: https://jsonpath2.readthedocs.io/en/latest/exampleusage.html
+        _enum_schema_enum_jsonpath_value_dict = create_jsonpath_value_dict(
+            "$..*[?(@.enum)]", _enum_schema_obj
+        )
+        _schema_enum_jsonpath_value_dict = create_jsonpath_value_dict(
+            "$..*[?(@.enum)]", _schema_obj
+        )
+        # Merge the two dictionaries
+        enum_jsonpath_value_dict = {
+            **_enum_schema_enum_jsonpath_value_dict,
+            **_schema_enum_jsonpath_value_dict,
+        }
+
+        # Create a dictionary of all the enumerations as dictionaries
+        _enums_dict = {
+            # NOTE: The jsonpath() has the form '$["a"]...["b"]' so
+            # .split('"')[-2] will pick out the 'b' from the path in this example
+            enum_jsonpath.split('"')[-2]: value["enum"]
+            for (enum_jsonpath, value) in enum_jsonpath_value_dict.items()
+        }
+        SchemaEnums.schema_enums = {key: _ListEnum(enum_list) for key, enum_list in _enums_dict.items()}
 
 # Convert the enumerations as dictionaries to classess for easier access
-schema_enums = {key: _ListEnum(enum_list) for key, enum_list in _enums_dict.items()}
-
 
 def print_schema_enums():
     """Print all the schema enumerations with their names and values
 
     This is primarily useful for debugging purposes
     """
-    for key in schema_enums:
+    SchemaStore.set_ruleset(RuleSet.ASHRAE9012019_RULESET)
+    SchemaEnums.update_schema_enum()
+    for key in SchemaEnums.schema_enums:
         print(f"{key}:")
-        for e in schema_enums[key].get_list():
+        for e in SchemaEnums.schema_enums[key].get_list():
             print(f"    {e}")
         print()
 

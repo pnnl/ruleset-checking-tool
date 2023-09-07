@@ -1,4 +1,4 @@
-from rct229.schema.schema_enums import schema_enums
+from rct229.schema.schema_enums import SchemaEnums
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.is_hvac_sys_heating_type_fluid_loop import (
     is_hvac_sys_heating_type_fluid_loop,
 )
@@ -10,7 +10,7 @@ from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.pint_utils import ZERO
 from rct229.utils.utility_functions import find_exactly_one_hvac_system
 
-HEATING_SOURCE = schema_enums["HeatingSourceOptions"]
+HEATING_SOURCE = SchemaEnums.schema_enums["HeatingSourceOptions"]
 
 
 def get_hw_loop_zone_list_w_area(rmi_b):

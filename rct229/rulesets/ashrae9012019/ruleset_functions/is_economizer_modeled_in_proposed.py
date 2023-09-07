@@ -1,4 +1,4 @@
-from rct229.schema.schema_enums import schema_enums
+from rct229.schema.schema_enums import SchemaEnums
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_hvac_zone_list_w_area_dict import (
     get_hvac_zone_list_w_area_by_rmi_dict,
 )
@@ -8,7 +8,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_list_hvac_systems_assoc
 from rct229.utils.jsonpath_utils import find_one
 from rct229.utils.utility_functions import find_exactly_one_hvac_system
 
-Air_Economizer = schema_enums["AirEconomizerOptions"]
+Air_Economizer = SchemaEnums.schema_enums["AirEconomizerOptions"]
 
 
 def is_economizer_modeled_in_proposed(rmi_b, rmi_p, hvac_id_b):

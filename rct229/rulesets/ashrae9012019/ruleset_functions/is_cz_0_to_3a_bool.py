@@ -1,6 +1,6 @@
-from rct229.schema.schema_enums import schema_enums
+from rct229.schema.schema_enums import SchemaEnums
 
-CLIMATE_ZONE_ASHRAE901_2019 = schema_enums["ClimateZoneOptions2019ASHRAE901"]
+CLIMATE_ZONE_ASHRAE901_2019 = SchemaEnums.schema_enums["ClimateZoneOptions2019ASHRAE901"]
 
 APPLICABLE_LIST = [
     CLIMATE_ZONE_ASHRAE901_2019.CZ0A,

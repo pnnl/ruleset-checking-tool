@@ -1,4 +1,4 @@
-from rct229.schema.schema_enums import schema_enums
+from rct229.schema.schema_enums import SchemaEnums
 
 
 def find_osstd_table_entry(match_field_name_value_pairs, osstd_table):
@@ -94,7 +94,7 @@ def check_enumeration_to_osstd_match_field_value_map(
     dict
         The matching table entry
     """
-    for e in schema_enums[enum_type].get_list():
+    for e in SchemaEnums.schema_enums[enum_type].get_list():
         if e in exclude_enum_names:
             continue
 

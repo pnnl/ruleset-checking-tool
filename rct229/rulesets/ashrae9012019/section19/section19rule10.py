@@ -1,7 +1,7 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
-from rct229.schema.schema_enums import schema_enums
+from rct229.schema.schema_enums import SchemaEnums
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_system_type_compare import (
     baseline_system_type_compare,
 )
@@ -19,9 +19,9 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.is_economizer_modeled_in_pr
 )
 from rct229.utils.jsonpath_utils import find_all, find_one
 
-ClimateZoneOption = schema_enums["ClimateZoneOptions2019ASHRAE901"]
-AIR_ECONOMIZER = schema_enums["AirEconomizerOptions"]
-LIGHTING_BUILDING_AREA = schema_enums[
+ClimateZoneOption = SchemaEnums.schema_enums["ClimateZoneOptions2019ASHRAE901"]
+AIR_ECONOMIZER = SchemaEnums.schema_enums["AirEconomizerOptions"]
+LIGHTING_BUILDING_AREA = SchemaEnums.schema_enums[
     "LightingBuildingAreaOptions2019ASHRAE901T951TG38"
 ]
 

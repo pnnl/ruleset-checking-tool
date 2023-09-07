@@ -1,7 +1,7 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
-from rct229.schema.schema_enums import schema_enums
+from rct229.schema.schema_enums import SchemaEnums
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_area_type_window_wall_area_dict import (
     get_area_type_window_wall_area_dict,
 )
@@ -22,7 +22,7 @@ from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.pint_utils import ZERO, CalcQ
 from rct229.utils.std_comparisons import std_equal
 
-DOOR = schema_enums["SubsurfaceClassificationOptions"].DOOR
+DOOR = SchemaEnums.schema_enums["SubsurfaceClassificationOptions"].DOOR
 FAIL_MSG = "The vertical fenestration is not distributed across baseline opaque surfaces in the same proportion as in the proposed design. Verify if envelope is existing or altered and can be excluded from this check."
 
 

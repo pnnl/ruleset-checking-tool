@@ -1,7 +1,7 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
-from rct229.schema.schema_enums import schema_enums
+from rct229.schema.schema_enums import SchemaEnums
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_system_util import (
     HVAC_SYS,
 )
@@ -26,7 +26,7 @@ APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_12B,
 ]
 
-FluidLoopFlowControl = schema_enums["FluidLoopFlowControlOptions"]
+FluidLoopFlowControl = SchemaEnums.schema_enums["FluidLoopFlowControlOptions"]
 
 
 class Section22Rule36(RuleDefinitionListIndexedBase):

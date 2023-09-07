@@ -1,7 +1,7 @@
-from rct229.schema.schema_enums import schema_enums
+from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.utility_functions import find_exactly_one_terminal_unit
 
-COOLING_SOURCE = schema_enums["CoolingSourceOptions"]
+COOLING_SOURCE = SchemaEnums.schema_enums["CoolingSourceOptions"]
 
 
 def are_all_terminal_cool_sources_none_or_null(rmi_b, terminal_unit_id_list):

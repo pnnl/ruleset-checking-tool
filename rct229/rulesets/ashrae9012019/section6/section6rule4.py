@@ -1,7 +1,7 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
-from rct229.schema.schema_enums import schema_enums
+from rct229.schema.schema_enums import SchemaEnums
 from rct229.rulesets.ashrae9012019.data_fns.table_G3_7_fns import table_G3_7_lookup
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_avg_zone_height import (
     get_avg_zone_height,
@@ -15,7 +15,7 @@ from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.pint_utils import CalcQ
 from rct229.utils.std_comparisons import std_equal
 
-OFFICE_OPEN_PLAN = schema_enums[
+OFFICE_OPEN_PLAN = SchemaEnums.schema_enums[
     "LightingSpaceOptions2019ASHRAE901TG37"
 ].OFFICE_OPEN_PLAN
 FAIL_MSG = "P_RMR lighting status type is as-designed or as-existing. But lighting space type in B_RMR is not specified."

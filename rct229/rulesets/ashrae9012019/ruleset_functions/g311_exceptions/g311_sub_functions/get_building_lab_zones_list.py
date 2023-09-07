@@ -1,7 +1,7 @@
-from rct229.schema.schema_enums import schema_enums
+from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.jsonpath_utils import find_all
 
-SpaceFunctionOptions = schema_enums["SpaceFunctionOptions"]
+SpaceFunctionOptions = SchemaEnums.schema_enums["SpaceFunctionOptions"]
 
 
 def get_building_lab_zones_list(rmi):

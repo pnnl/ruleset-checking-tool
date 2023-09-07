@@ -1,12 +1,12 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
-from rct229.schema.schema_enums import schema_enums
+from rct229.schema.schema_enums import SchemaEnums
 from rct229.schema.config import ureg
 from rct229.utils.assertions import getattr_
 from rct229.utils.std_comparisons import std_equal
 
-AIR_ECONOMIZER = schema_enums["AirEconomizerOptions"]
+AIR_ECONOMIZER = SchemaEnums.schema_enums["AirEconomizerOptions"]
 CLIMATE_ZONE_70F = ["CZ5A", "CZ6A"]
 CLIMATE_ZONE_75F = [
     "CZ2B",

@@ -1,9 +1,9 @@
-from rct229.schema.schema_enums import schema_enums
+from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all, find_one
 from rct229.utils.utility_functions import find_exactly_one_fluid_loop
 
-EXTERNAL_FLUID_SOURCE = schema_enums["ExternalFluidSourceOptions"]
+EXTERNAL_FLUID_SOURCE = SchemaEnums.schema_enums["ExternalFluidSourceOptions"]
 
 
 def check_purchased_chw_hhw_status_dict(rmi_b):

@@ -1,10 +1,10 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
-from rct229.schema.schema_enums import schema_enums
+from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.assertions import getattr_
 
-ENERGY_RECOVERY_OPERATION = schema_enums["EnergyRecoveryOperationOptions"]
+ENERGY_RECOVERY_OPERATION = SchemaEnums.schema_enums["EnergyRecoveryOperationOptions"]
 
 
 class Section19Rule22(RuleDefinitionListIndexedBase):

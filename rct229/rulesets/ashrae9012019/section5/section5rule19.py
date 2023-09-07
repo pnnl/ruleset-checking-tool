@@ -1,7 +1,7 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
-from rct229.schema.schema_enums import schema_enums
+from rct229.schema.schema_enums import SchemaEnums
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_area_type_window_wall_area_dict import (
     get_area_type_window_wall_area_dict,
 )
@@ -11,7 +11,7 @@ from rct229.utils.std_comparisons import std_equal
 MSG_WARN_MATCHED = "Building is not all new and baseline WWR matches values prescribed in Table G3.1.1-1. However, the fenestration area prescribed in Table G3.1.1-1 does not apply to the existing envelope per TABLE G3.1 baseline column #5 (c). For existing Envelope, the baseline fenestration area must equal the existing fenestration area prior to the proposed work. A manual check is required to verify compliance."
 MSG_WARN_MISMATCHED = "Building is not all new and baseline WWR does not match values prescribed in TABLE G3.1.1-1. However, the fenestration area prescribed in TABLE G3.1.1-1 does not apply to the existing envelope per TABLE G3.1 baseline column #5(c). For existing envelope, the baseline fenestration area must equal the existing fenestration area prior to the proposed work. A manual check is required to verify compliance."
 WWR_THRESHOLD = 0.4
-OTHER = schema_enums["VerticalFenestrationBuildingAreaOptions2019ASHRAE901"].OTHER
+OTHER = SchemaEnums.schema_enums["VerticalFenestrationBuildingAreaOptions2019ASHRAE901"].OTHER
 
 
 class Section5Rule19(RuleDefinitionListIndexedBase):

@@ -1,16 +1,16 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
-from rct229.schema.schema_enums import schema_enums
+from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.jsonpath_utils import find_all
 
 MSG_WARN_DAYLIGHT_NO_SCHEDULE = "Some of the spaces in zone are modeled with window(s) and/or skylight(s) and have daylighting controls modeled explicitly in the simulation tool. Verify that the mandatory lighting control requirements are met."
 MSG_WARN_DAYLIGHT = "Some of the spaces in zone are modeled with window(s) and/or skylight(s) and have daylighting controls modeled via schedule adjustment. Verify that the mandatory lighting control requirements are met, and that the supporting documentation is provided for the schedule adjustment."
 MSG_WARN_NO_DAYLIGHT = "Some of the spaces in zone are modeled with fenestration but no daylighting controls. The design must include mandatory daylighting controls unless any of the exceptions to 90.1 section 9.4.1.1 apply."
 
-DOOR = schema_enums["SubsurfaceClassificationOptions"].DOOR
-EXTERIOR = schema_enums["SurfaceAdjacencyOptions"].EXTERIOR
-NONE = schema_enums["LightingDaylightingControlOptions"].NONE
+DOOR = SchemaEnums.schema_enums["SubsurfaceClassificationOptions"].DOOR
+EXTERIOR = SchemaEnums.schema_enums["SurfaceAdjacencyOptions"].EXTERIOR
+NONE = SchemaEnums.schema_enums["LightingDaylightingControlOptions"].NONE
 
 
 class Section6Rule7(RuleDefinitionListIndexedBase):

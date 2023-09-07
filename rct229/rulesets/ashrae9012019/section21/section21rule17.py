@@ -1,7 +1,7 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
-from rct229.schema.schema_enums import schema_enums
+from rct229.schema.schema_enums import SchemaEnums
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_system_util import (
     HVAC_SYS,
 )
@@ -27,7 +27,7 @@ BOILER_RATED_CAPACITY_LOW_LIMIT = 300000 * ureg("Btu/hr")
 BOILER_RATED_CAPACITY_HIGH_LIMIT = 2500000 * ureg("Btu/hr")
 BOILER_EFFICIENCY_80 = 0.8
 BOILER_EFFICIENCY_75 = 0.75
-BOILER_EFFICIENCY_METRIC = schema_enums["BoilerEfficiencyMetricOptions"]
+BOILER_EFFICIENCY_METRIC = SchemaEnums.schema_enums["BoilerEfficiencyMetricOptions"]
 
 
 class Section21Rule17(RuleDefinitionListIndexedBase):

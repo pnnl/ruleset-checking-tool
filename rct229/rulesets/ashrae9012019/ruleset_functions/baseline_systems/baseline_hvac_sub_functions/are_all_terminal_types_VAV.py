@@ -1,7 +1,7 @@
-from rct229.schema.schema_enums import schema_enums
+from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.utility_functions import find_exactly_one_terminal_unit
 
-TERMINAL_TYPE = schema_enums["TerminalOptions"]
+TERMINAL_TYPE = SchemaEnums.schema_enums["TerminalOptions"]
 
 
 def are_all_terminal_types_VAV(rmi_b, terminal_unit_id_list):

@@ -1,16 +1,16 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
-from rct229.schema.schema_enums import schema_enums
+from rct229.schema.schema_enums import SchemaEnums
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_most_used_weekday_hourly_schedule import (
     get_most_used_weekday_hourly_schedule,
 )
 from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all, find_exactly_one_with_field_value
 
-LIGHTING_SPACE = schema_enums["LightingSpaceOptions2019ASHRAE901TG37"]
-VENTILATION_SPACE = schema_enums["VentilationSpaceOptions2019ASHRAE901"]
-LIGHTING_BUILDING_AREA = schema_enums[
+LIGHTING_SPACE = SchemaEnums.schema_enums["LightingSpaceOptions2019ASHRAE901TG37"]
+VENTILATION_SPACE = SchemaEnums.schema_enums["VentilationSpaceOptions2019ASHRAE901"]
+LIGHTING_BUILDING_AREA = SchemaEnums.schema_enums[
     "LightingBuildingAreaOptions2019ASHRAE901T951TG38"
 ]
 

@@ -1,7 +1,7 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
-from rct229.schema.schema_enums import schema_enums
+from rct229.schema.schema_enums import SchemaEnums
 from rct229.rulesets.ashrae9012019.ruleset_functions.are_all_hvac_sys_fan_objects_autosized import (
     are_all_hvac_sys_fan_objs_autosized,
 )
@@ -41,7 +41,7 @@ APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_13,
 ]
 
-LIGHTING_SPACE = schema_enums["LightingSpaceOptions2019ASHRAE901TG37"]
+LIGHTING_SPACE = SchemaEnums.schema_enums["LightingSpaceOptions2019ASHRAE901TG37"]
 LABORATORY_TEMP_DELTA = 17.0 * ureg("degF")
 GENERAL_TEMP_DELTA = 20.0 * ureg("degF")
 

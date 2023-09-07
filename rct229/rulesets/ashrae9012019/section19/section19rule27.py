@@ -1,13 +1,13 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
-from rct229.schema.schema_enums import schema_enums
+from rct229.schema.schema_enums import SchemaEnums
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_hvac_systems_serving_zone_health_safety_vent_reqs import (
     get_hvac_systems_serving_zone_health_safety_vent_reqs,
 )
 from rct229.utils.pint_utils import ZERO
 
-FAN_SYSTEM_OPERATION = schema_enums["FanSystemOperationOptions"]
+FAN_SYSTEM_OPERATION = SchemaEnums.schema_enums["FanSystemOperationOptions"]
 
 
 class Section19Rule27(RuleDefinitionListIndexedBase):
