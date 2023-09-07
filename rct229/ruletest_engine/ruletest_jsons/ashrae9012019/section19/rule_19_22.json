@@ -48,20 +48,12 @@
                                                 "id": "System 11",
                                                 "cooling_system": {
                                                     "id": "CHW Coil 1",
-<<<<<<< HEAD
-                                                    "cooling_system_type": "FLUID_LOOP",
-=======
                                                     "type": "FLUID_LOOP",
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
                                                     "chilled_water_loop": "Secondary CHW Loop 1"
                                                 },
                                                 "heating_system": {
                                                     "id": "Heating Coil 1",
-<<<<<<< HEAD
-                                                    "heating_system_type": "ELECTRIC_RESISTANCE"
-=======
                                                     "type": "ELECTRIC_RESISTANCE"
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
                                                 },
                                                 "fan_system": {
                                                     "id": "VAV Fan System 1",
@@ -136,20 +128,12 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Yes",
-<<<<<<< HEAD
-            "schema_version": "0.0.23"
-=======
             "schema_version": "0.0.29"
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
         },
         "rmr_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
-<<<<<<< HEAD
-                "ruleset_model_instances": [
-=======
                 "ruleset_model_descriptions": [
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
                     {
                         "id": "RMD 1",
                         "buildings": [
@@ -179,20 +163,12 @@
                                                 "id": "System 11",
                                                 "cooling_system": {
                                                     "id": "CHW Coil 1",
-<<<<<<< HEAD
-                                                    "cooling_system_type": "FLUID_LOOP",
-=======
                                                     "type": "FLUID_LOOP",
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
                                                     "chilled_water_loop": "Secondary CHW Loop 1"
                                                 },
                                                 "heating_system": {
                                                     "id": "Heating Coil 1",
-<<<<<<< HEAD
-                                                    "heating_system_type": "ELECTRIC_RESISTANCE"
-=======
                                                     "type": "ELECTRIC_RESISTANCE"
->>>>>>> bee97744bbf2212a885af239e027e65a1cbc974b
                                                 },
                                                 "fan_system": {
                                                     "id": "VAV Fan System 1",
