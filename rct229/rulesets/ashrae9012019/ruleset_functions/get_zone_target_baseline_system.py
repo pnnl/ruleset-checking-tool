@@ -63,7 +63,9 @@ class SYSTEMORIGIN:
     G311F = "G3_1_1f"
 
 
-def get_zone_target_baseline_system(rmd_b: dict, rmd_p: dict, climate_zone_b: str):
+def get_zone_target_baseline_system(
+    rmd_b: dict, rmd_p: dict, climate_zone_b: str, is_leap_year: bool
+):
     """
     Following G3.1.1, determines the baseline system type for each zone in a building
 
@@ -73,9 +75,11 @@ def get_zone_target_baseline_system(rmd_b: dict, rmd_p: dict, climate_zone_b: st
         RMD at RuleSetModelDescription level
     rmd_p: json
         RMD at RuleSetModelDescription level
-
     climate_zone_b: str
         baseline climate zone
+    is_leap_year: bool
+        Whether leap year or not
+
 
     Returns
     -------
@@ -152,7 +156,7 @@ def get_zone_target_baseline_system(rmd_b: dict, rmd_p: dict, climate_zone_b: st
 
     for zone_id_b in zones_and_systems_b:
         # G3.1.1c
-        if does_zone_meet_g3_1_1c(rmd_b, zone_id_b, False, zones_and_systems_b):
+        if does_zone_meet_g3_1_1c(rmd_b, zone_id_b, is_leap_year, zones_and_systems_b):
             zones_and_systems_b[zone_id_b] = {
                 "system_origin": SYSTEMORIGIN.G311C,
                 "expected_system_type": HVAC_SYS.SYS_4
