@@ -63,7 +63,7 @@ def test__TEST_RMD__is_valid():
 
 def test__zone_hvac_bat__success():
     assert get_zone_hvac_bat_dict(TEST_RMD_UNIT, "Thermal Zone 1") == {
-        "OTHER_UNDETERMINED": 100 * ureg("m2").to("ft2"),
-        "OTHER_NON_RESIDENTIAL": 200 * ureg("m2").to("ft2"),
-        "PUBLIC_ASSEMBLY": 0.0 * ureg("ft2"),
+        "OTHER_UNDETERMINED": 100 * ureg("m2").to("ft**2"),
+        "OTHER_NON_RESIDENTIAL": 200 * ureg("m2").to("ft**2"),
+        "PUBLIC_ASSEMBLY": 0.0 * ureg("ft**2"),
     }
