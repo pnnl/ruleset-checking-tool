@@ -93,46 +93,43 @@ class Section19Rule21(RuleDefinitionListIndexedBase):
             )
 
         def create_data(self, context, data):
-            rmi_b = context.baseline
-            rmi_p = context.proposed
+            rmd_b = context.baseline
+            rmd_p = context.proposed
 
             dict_of_zones_and_terminal_units_served_by_hvac_sys_b = (
-                get_dict_of_zones_and_terminal_units_served_by_hvac_sys(rmi_b)
+                get_dict_of_zones_and_terminal_units_served_by_hvac_sys(rmd_b)
             )
 
             zone_data = {}
             hvac_systems_and_assoc_zones_largest_exhaust_source = {}
             for hvac_id_b in find_all(
                 "$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*].id",
-                rmi_b,
+                rmd_b,
             ):
+                zone_data[hvac_id_b] = {
+                    "serves_zones_with_systems_likely_exhausting_toxic_etc": False,
+                    "serves_kitchen_space": False,
+                    "all_lighting_space_types_defined": True,
+                    "all_ventilation_space_types_defined": False,
+                }
+
                 for zone_id_b in dict_of_zones_and_terminal_units_served_by_hvac_sys_b[
                     hvac_id_b
                 ]["zone_list"]:
                     space_p = find_one(
                         f'$.buildings[*].building_segments[*].zones[*][?(@.id = "{zone_id_b}")].spaces[*]',
-                        rmi_p,
-                    )
-                    zone_data[zone_id_b] = {}
-                    zone_data[zone_id_b].update(
-                        {
-                            "serves_zones_with_systems_likely_exhausting_toxic_etc": False,
-                            "serves_kitchen_space": False,
-                            "all_lighting_space_types_defined": True,
-                            "all_ventilation_space_types_defined": False,
-                        }
+                        rmd_p,
                     )
 
-                    if (
-                        space_p is not None
-                        and space_p.get("lighting_space_type") is not None
+                    if space_p is not None and space_p.get(
+                        "lighting_space_type", False
                     ):
                         lighting_space_type_p = space_p["lighting_space_type"]
                         if (
                             lighting_space_type_p
                             == LIGHTING_SPACE.LABORATORY_EXCEPT_IN_OR_AS_A_CLASSROOM
                         ):
-                            zone_data[zone_id_b][
+                            zone_data[hvac_id_b][
                                 "serves_zones_with_systems_likely_exhausting_toxic_etc"
                             ] = True
 
@@ -140,21 +137,20 @@ class Section19Rule21(RuleDefinitionListIndexedBase):
                             lighting_space_type_p
                             == LIGHTING_SPACE.FOOD_PREPARATION_AREA
                         ):
-                            zone_data[zone_id_b]["serves_kitchen_space"] = True
+                            zone_data[hvac_id_b]["serves_kitchen_space"] = True
 
                     else:
-                        zone_data[zone_id_b]["all_lighting_space_types_defined"] = False
+                        zone_data[hvac_id_b]["all_lighting_space_types_defined"] = False
 
-                    if (
-                        space_p is not None
-                        and space_p.get("ventilation_space_type") is not None
+                    if space_p is not None and space_p.get(
+                        "ventilation_space_type", False
                     ):
                         ventilation_space_type_p = space_p["ventilation_space_type"]
                         if (
                             ventilation_space_type_p
                             == VENTILATION_SPACE.MISCELLANEOUS_SPACES_MANUFACTURING_WHERE_HAZARDOUS_MATERIALS_ARE_USED_EXCLUDES_HEAVY_INDUSTRIAL_AND_CHEMICAL_PROCESSES
                         ):
-                            zone_data[zone_id_b][
+                            zone_data[hvac_id_b][
                                 "serves_zones_with_systems_likely_exhausting_toxic_etc"
                             ] = True
 
@@ -162,18 +158,18 @@ class Section19Rule21(RuleDefinitionListIndexedBase):
                             ventilation_space_type_p
                             == VENTILATION_SPACE.FOOD_AND_BEVERAGE_SERVICE_KITCHEN_COOKING
                         ):
-                            zone_data[zone_id_b]["serves_kitchen_space"] = True
+                            zone_data[hvac_id_b]["serves_kitchen_space"] = True
                     else:
-                        zone_data[zone_id_b][
+                        zone_data[hvac_id_b][
                             "all_ventilation_space_types_defined"
                         ] = False
 
                     for hvac_id_p in get_list_hvac_systems_associated_with_zone(
-                        rmi_p, zone_id_b
+                        rmd_p, zone_id_b
                     ):
                         hvac_p = find_one(
                             f'$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*][?(@.id = "{hvac_id_p}")]',
-                            rmi_p,
+                            rmd_p,
                         )
                         ER_modeled_p = find_one(
                             "$.fan_system.air_energy_recovery.energy_recovery_type",
@@ -195,7 +191,7 @@ class Section19Rule21(RuleDefinitionListIndexedBase):
                     hvac_systems_and_assoc_zones_largest_exhaust_source[
                         hvac_id_b
                     ] = get_hvac_sys_and_assoc_zones_largest_exhaust_source(
-                        rmi_b, hvac_id_b
+                        rmd_b, hvac_id_b
                     )
 
                 sys_type_heating_only = any(
@@ -213,11 +209,11 @@ class Section19Rule21(RuleDefinitionListIndexedBase):
                     )  # TODO: make sure this unit is degC. The current schema (v 0.0.29) doesn't specify the unit
                     for thermostat_schedule_id in find_all(
                         "$.buildings[*].building_segments[*].zones[*].thermostat_heating_setpoint_schedule",
-                        rmi_p,
+                        rmd_p,
                     )
                     for thermostat_schedule in find_all(
                         f'$.schedules[*][?(@.id = "{thermostat_schedule_id}")].hourly_values',
-                        rmi_p,
+                        rmd_p,
                     )
                 ]
             )
@@ -256,14 +252,15 @@ class Section19Rule21(RuleDefinitionListIndexedBase):
                 climate_zone = data["climate_zone"]
                 ER_not_req_for_heating_sys = climate_zone in APPLICABLE_CZ_ZONES
 
-                serves_zones_with_systems_likely_exhausting_toxic_etc = data[
+                zone_data = data["zone_data"][hvac_id_b]
+                serves_zones_with_systems_likely_exhausting_toxic_etc = zone_data[
                     "serves_zones_with_systems_likely_exhausting_toxic_etc"
                 ]
-                serves_kitchen_space = data["serves_kitchen_space"]
-                all_lighting_space_types_defined = data[
+                serves_kitchen_space = zone_data["serves_kitchen_space"]
+                all_lighting_space_types_defined = zone_data[
                     "all_lighting_space_types_defined"
                 ]
-                all_ventilation_space_types_defined = data[
+                all_ventilation_space_types_defined = zone_data[
                     "all_ventilation_space_types_defined"
                 ]
                 ER_modeled_p = data["ER_modeled_p"]
@@ -279,10 +276,12 @@ class Section19Rule21(RuleDefinitionListIndexedBase):
                 ]
 
                 fan_sys_b = hvac_b["fan_system"]
-
-                supply_airflow_b = ZERO.FLOW
-                for supply_fan_b in fan_sys_b["fan_sys_b"]:
-                    supply_airflow_b += supply_fan_b.get("design_airflow", ZERO.FLOW)
+                supply_airflow_b = sum(
+                    [
+                        supply_fan_b.get("design_airflow", ZERO.FLOW)
+                        for supply_fan_b in fan_sys_b["supply_fans"]
+                    ]
+                )
 
                 min_outdoor_airflow_b = fan_sys_b["minimum_outdoor_airflow"]
                 max_outdoor_airflow_b = fan_sys_b["maximum_outdoor_airflow"]
@@ -293,9 +292,9 @@ class Section19Rule21(RuleDefinitionListIndexedBase):
                     else 0.0
                 )
 
-                ER_modeled = (
-                    fan_sys_b.get("air_energy_recovery") is not None
-                    and fan_sys_b["air_energy_recovery"] != ENERGY_RECOVERY.NONE
+                ER_modeled_b = fan_sys_b.get("air_energy_recovery") not in (
+                    None,
+                    ENERGY_RECOVERY.NONE,
                 )
 
                 exception_1_applies = (
@@ -337,8 +336,8 @@ class Section19Rule21(RuleDefinitionListIndexedBase):
                     "min_outdoor_airflow_b": CalcQ(
                         "air_flow_rate", min_outdoor_airflow_b
                     ),
-                    "OA_fraction ": OA_fraction,
-                    "ER_modeled": ER_modeled,
+                    "OA_fraction": OA_fraction,
+                    "ER_modeled_b": ER_modeled_b,
                     "max_outdoor_airflow_b": max_outdoor_airflow_b,
                     "hvac_systems_and_assoc_zones_largest_exhaust_source": hvac_systems_and_assoc_zones_largest_exhaust_source,
                     "exception_1_applies": exception_1_applies,
@@ -350,7 +349,7 @@ class Section19Rule21(RuleDefinitionListIndexedBase):
             def manual_check_required(self, context, calc_vals=None, data=None):
                 OA_fraction = calc_vals["OA_fraction"]
                 supply_airflow_b = calc_vals["supply_airflow_b"]
-                ER_modeled = calc_vals["ER_modeled"]
+                ER_modeled_b = calc_vals["ER_modeled_b"]
                 ER_modeled_p = calc_vals["ER_modeled_p"]
                 serves_kitchen_space = calc_vals["serves_kitchen_space"]
                 max_outdoor_airflow_b = calc_vals["max_outdoor_airflow_b"]
@@ -361,13 +360,13 @@ class Section19Rule21(RuleDefinitionListIndexedBase):
                 return (
                     OA_fraction >= OA_FRACTION_70
                     and supply_airflow_b >= SUPPLY_AIRFLOW_5000CFM
-                    and not ER_modeled
+                    and not ER_modeled_b
                     and not ER_modeled_p
                     and serves_kitchen_space
                 ) or (
                     OA_fraction >= OA_FRACTION_70
                     and supply_airflow_b >= SUPPLY_AIRFLOW_5000CFM
-                    and not ER_modeled
+                    and not ER_modeled_b
                     and hvac_systems_and_assoc_zones_largest_exhaust_source[
                         "num_hvac_exhaust_fans"
                     ]
@@ -389,14 +388,14 @@ class Section19Rule21(RuleDefinitionListIndexedBase):
 
                 OA_fraction = calc_vals["OA_fraction"]
                 supply_airflow_b = calc_vals["supply_airflow_b"]
-                ER_modeled = calc_vals["ER_modeled"]
+                ER_modeled_b = calc_vals["ER_modeled_b"]
                 ER_modeled_p = calc_vals["ER_modeled_p"]
                 serves_kitchen_space = calc_vals["serves_kitchen_space"]
-
+                stop = 1
                 if (
                     OA_fraction >= OA_FRACTION_70
                     and supply_airflow_b >= SUPPLY_AIRFLOW_5000CFM
-                    and not ER_modeled
+                    and not ER_modeled_b
                     and not ER_modeled_p
                     and serves_kitchen_space
                 ):
@@ -410,7 +409,7 @@ class Section19Rule21(RuleDefinitionListIndexedBase):
                 climate_zone = calc_vals["climate_zone"]
                 OA_fraction = calc_vals["OA_fraction"]
                 supply_airflow_b = calc_vals["supply_airflow_b"]
-                ER_modeled = calc_vals["ER_modeled"]
+                ER_modeled_b = calc_vals["ER_modeled_b"]
                 exception_1_applies = calc_vals["exception_1_applies"]
                 exception_2_applies = calc_vals["exception_2_applies"]
                 exception_6_applies = calc_vals["exception_6_applies"]
@@ -423,30 +422,30 @@ class Section19Rule21(RuleDefinitionListIndexedBase):
                     and supply_airflow_b >= SUPPLY_AIRFLOW_5000CFM
                     and (
                         # CASE 1
-                        (ER_modeled)
+                        (ER_modeled_b)
                         or
                         # CASE 2
-                        (not ER_modeled and exception_1_applies)
+                        (not ER_modeled_b and exception_1_applies)
                         or
                         # CASE 3
-                        (not ER_modeled and exception_2_applies)
+                        (not ER_modeled_b and exception_2_applies)
                         or
                         # CASE 4
                         (
-                            not ER_modeled
+                            not ER_modeled_b
                             and ER_not_req_for_heating_sys
                             and sys_type_heating_only
                         )
                         or
                         # CASE 5
-                        (not ER_modeled and exception_6_applies)
+                        (not ER_modeled_b and exception_6_applies)
                         or
                         # CASE 6
-                        (not ER_modeled and exception_7_applies)
+                        (not ER_modeled_b and exception_7_applies)
                         or
                         # CASE 7
                         (
-                            not ER_modeled
+                            not ER_modeled_b
                             and climate_zone in APPLICABLE_CZ_ZONES
                             and sys_type_heating_only
                         )
@@ -458,10 +457,10 @@ class Section19Rule21(RuleDefinitionListIndexedBase):
                     )
                     and
                     # CASE 10
-                    (not ER_modeled)
+                    (not ER_modeled_b)
                     or
                     # CASE 11
-                    (ER_modeled)
+                    (ER_modeled_b)
                 )
 
             def get_fail_msg(self, context, calc_vals=None, data=None):
