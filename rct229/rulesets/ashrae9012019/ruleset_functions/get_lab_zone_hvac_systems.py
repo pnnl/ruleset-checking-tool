@@ -51,14 +51,14 @@ def get_lab_zone_hvac_systems(
         )
 
         for hvac_id_b in dict_of_zones_and_hvac_systems:
-            get_all_zone_ids = dict_of_zones_and_hvac_systems[hvac_id_b]["zone_list"]
+            get_zone_ids = dict_of_zones_and_hvac_systems[hvac_id_b]["zone_list"]
 
             # determine zone ids are included in building_lab_zones
             zone_included_in_building_lab_zones = filter_(
-                get_all_zone_ids, lambda zone_id: zone_id in building_lab_zones
+                get_zone_ids, lambda zone_id: zone_id in building_lab_zones
             )
             zone_included_in_building_lab_zones_bool = map_(
-                get_all_zone_ids, lambda zone_id: zone_id in building_lab_zones
+                get_zone_ids, lambda zone_id: zone_id in building_lab_zones
             )
 
             # assign the zone ids
