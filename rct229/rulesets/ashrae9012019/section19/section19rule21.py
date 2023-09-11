@@ -2,9 +2,6 @@ from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 from rct229.rulesets.ashrae9012019.data.schema_enums import schema_enums
-from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_system_type_compare import (
-    baseline_system_type_compare,
-)
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_system_util import (
     HVAC_SYS,
 )
@@ -21,7 +18,6 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_list_hvac_systems_assoc
     get_list_hvac_systems_associated_with_zone,
 )
 from rct229.schema.config import ureg
-from rct229.utils.assertions import assert_, getattr_
 from rct229.utils.jsonpath_utils import find_all, find_one
 from rct229.utils.pint_utils import ZERO, CalcQ
 
@@ -30,10 +26,10 @@ LIGHTING_SPACE = schema_enums["LightingSpaceOptions2019ASHRAE901TG37"]
 VENTILATION_SPACE = schema_enums["VentilationSpaceOptions2019ASHRAE901"]
 DEHUMIDIFICATION = schema_enums["DehumidificationOptions"]
 ClimateZoneOption = schema_enums["ClimateZoneOptions2019ASHRAE901"]
-OA_FRACTION_70 = 0.7
+OA_fraction_b_70 = 0.7
 SUPPLY_AIRFLOW_5000CFM = 5000 * ureg("cfm")
 REQ_HEATING_SETPOINT = 60 * ureg("degF")
-CASE12_FAIL_MSG = "Not all lighting or ventilation space types were defined in the RMD and therefore the potential applicability of exceptions 2 and 3 could not be fully assessed. Fail unless exceptions 2 and 3 are applicable. Exception 2 is that systems exhausting toxic, flammable, or corrosive fumes or paint or dust shall not require exhaust air energy recovery to be modeled in the baseline if it is not included in the proposed design. Exception 3 is that commercial kitchen hoods (grease) classified as Type 1 by NFPA 96 shall not require exhaust air energy recovery to be modeled in the baseline if it is not included in the proposed design."
+CASE11_FAIL_MSG = "Not all lighting or ventilation space types were defined in the RMD and therefore the potential applicability of exceptions 2 and 3 could not be fully assessed. Fail unless exceptions 2 and 3 are applicable. Exception 2 is that systems exhausting toxic, flammable, or corrosive fumes or paint or dust shall not require exhaust air energy recovery to be modeled in the baseline if it is not included in the proposed design. Exception 3 is that commercial kitchen hoods (grease) classified as Type 1 by NFPA 96 shall not require exhaust air energy recovery to be modeled in the baseline if it is not included in the proposed design."
 
 
 APPLICABLE_SYS_TYPES = [
@@ -99,6 +95,8 @@ class Section19Rule21(RuleDefinitionListIndexedBase):
             dict_of_zones_and_terminal_units_served_by_hvac_sys_b = (
                 get_dict_of_zones_and_terminal_units_served_by_hvac_sys(rmd_b)
             )
+
+            baseline_hvac_system_dict = get_baseline_system_types(rmd_b)
 
             zone_data = {}
             hvac_systems_and_assoc_zones_largest_exhaust_source = {}
@@ -196,7 +194,7 @@ class Section19Rule21(RuleDefinitionListIndexedBase):
 
                 sys_type_heating_only = any(
                     [
-                        hvac_id_b in applicable_sys_type
+                        hvac_id_b in baseline_hvac_system_dict[applicable_sys_type]
                         for applicable_sys_type in APPLICABLE_SYS_TYPES
                     ]
                 )
@@ -286,7 +284,7 @@ class Section19Rule21(RuleDefinitionListIndexedBase):
                 min_outdoor_airflow_b = fan_sys_b["minimum_outdoor_airflow"]
                 max_outdoor_airflow_b = fan_sys_b["maximum_outdoor_airflow"]
 
-                OA_fraction = (
+                OA_fraction_b = (
                     min_outdoor_airflow_b / supply_airflow_b
                     if supply_airflow_b != ZERO.FLOW
                     else 0.0
@@ -304,7 +302,6 @@ class Section19Rule21(RuleDefinitionListIndexedBase):
                     not ER_modeled_p
                     and serves_zones_with_systems_likely_exhausting_toxic_etc
                 )
-
                 exception_6_applies = (
                     not ER_modeled_p
                     and max(
@@ -329,15 +326,15 @@ class Section19Rule21(RuleDefinitionListIndexedBase):
                     "serves_kitchen_space": serves_kitchen_space,
                     "all_lighting_space_types_defined": all_lighting_space_types_defined,
                     "all_ventilation_space_types_defined": all_ventilation_space_types_defined,
-                    "ER_modeled_p": ER_modeled_p,
                     "serves_zones_that_have_dehumid_heat_recovery": serves_zones_that_have_dehumid_heat_recovery,
                     "sys_type_heating_only": sys_type_heating_only,
                     "supply_airflow_b": CalcQ("air_flow_rate", supply_airflow_b),
                     "min_outdoor_airflow_b": CalcQ(
                         "air_flow_rate", min_outdoor_airflow_b
                     ),
-                    "OA_fraction": OA_fraction,
+                    "OA_fraction_b": OA_fraction_b,
                     "ER_modeled_b": ER_modeled_b,
+                    "ER_modeled_p": ER_modeled_p,
                     "max_outdoor_airflow_b": max_outdoor_airflow_b,
                     "hvac_systems_and_assoc_zones_largest_exhaust_source": hvac_systems_and_assoc_zones_largest_exhaust_source,
                     "exception_1_applies": exception_1_applies,
@@ -347,7 +344,7 @@ class Section19Rule21(RuleDefinitionListIndexedBase):
                 }
 
             def manual_check_required(self, context, calc_vals=None, data=None):
-                OA_fraction = calc_vals["OA_fraction"]
+                OA_fraction_b = calc_vals["OA_fraction_b"]
                 supply_airflow_b = calc_vals["supply_airflow_b"]
                 ER_modeled_b = calc_vals["ER_modeled_b"]
                 ER_modeled_p = calc_vals["ER_modeled_p"]
@@ -356,46 +353,46 @@ class Section19Rule21(RuleDefinitionListIndexedBase):
                 hvac_systems_and_assoc_zones_largest_exhaust_source = calc_vals[
                     "hvac_systems_and_assoc_zones_largest_exhaust_source"
                 ]
-                stop = 1
+
                 return (
-                    OA_fraction >= OA_FRACTION_70
-                    and supply_airflow_b >= SUPPLY_AIRFLOW_5000CFM
-                    and not ER_modeled_b
-                    and not ER_modeled_p
-                    and serves_kitchen_space
-                ) or (
-                    OA_fraction >= OA_FRACTION_70
-                    and supply_airflow_b >= SUPPLY_AIRFLOW_5000CFM
-                    and not ER_modeled_b
-                    and hvac_systems_and_assoc_zones_largest_exhaust_source[
-                        "num_hvac_exhaust_fans"
-                    ]
-                    > 1
-                    and max(
-                        hvac_systems_and_assoc_zones_largest_exhaust_source[
-                            "hvac_fan_sys_exhaust_sum"
-                        ],
-                        hvac_systems_and_assoc_zones_largest_exhaust_source[
-                            "maximum_hvac_exhaust"
-                        ],
+                    # Case 7
+                    (
+                        OA_fraction_b >= OA_fraction_b_70
+                        and supply_airflow_b >= SUPPLY_AIRFLOW_5000CFM
                     )
-                    < 0.75 * max_outdoor_airflow_b
+                    and (not ER_modeled_p and serves_kitchen_space)
+                    or
+                    # Case 8
+                    (
+                        not ER_modeled_b
+                        and hvac_systems_and_assoc_zones_largest_exhaust_source[
+                            "num_hvac_exhaust_fans"
+                        ]
+                        > 1
+                        and max(
+                            hvac_systems_and_assoc_zones_largest_exhaust_source[
+                                "hvac_fan_sys_exhaust_sum"
+                            ],
+                            hvac_systems_and_assoc_zones_largest_exhaust_source[
+                                "maximum_hvac_exhaust"
+                            ],
+                        )
+                        < 0.75 * max_outdoor_airflow_b
+                    )
                 )
 
             def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
                 hvac_b = context.baseline
                 hvac_id_b = hvac_b["id"]
 
-                OA_fraction = calc_vals["OA_fraction"]
+                OA_fraction_b = calc_vals["OA_fraction_b"]
                 supply_airflow_b = calc_vals["supply_airflow_b"]
-                ER_modeled_b = calc_vals["ER_modeled_b"]
                 ER_modeled_p = calc_vals["ER_modeled_p"]
                 serves_kitchen_space = calc_vals["serves_kitchen_space"]
-                stop = 1
+
                 if (
-                    OA_fraction >= OA_FRACTION_70
+                    OA_fraction_b >= OA_fraction_b_70
                     and supply_airflow_b >= SUPPLY_AIRFLOW_5000CFM
-                    and not ER_modeled_b
                     and not ER_modeled_p
                     and serves_kitchen_space
                 ):
@@ -407,7 +404,7 @@ class Section19Rule21(RuleDefinitionListIndexedBase):
 
             def rule_check(self, context, calc_vals=None, data=None):
                 climate_zone = calc_vals["climate_zone"]
-                OA_fraction = calc_vals["OA_fraction"]
+                OA_fraction_b = calc_vals["OA_fraction_b"]
                 supply_airflow_b = calc_vals["supply_airflow_b"]
                 ER_modeled_b = calc_vals["ER_modeled_b"]
                 exception_1_applies = calc_vals["exception_1_applies"]
@@ -416,51 +413,63 @@ class Section19Rule21(RuleDefinitionListIndexedBase):
                 exception_7_applies = calc_vals["exception_7_applies"]
                 ER_not_req_for_heating_sys = calc_vals["ER_not_req_for_heating_sys"]
                 sys_type_heating_only = calc_vals["sys_type_heating_only"]
-                stop = 1
+                all_lighting_space_types_defined = calc_vals[
+                    "all_lighting_space_types_defined"
+                ]
+                all_ventilation_space_types_defined = calc_vals[
+                    "all_ventilation_space_types_defined"
+                ]
+                ER_modeled_p = calc_vals["ER_modeled_p"]
+
                 return (
-                    OA_fraction >= OA_FRACTION_70
-                    and supply_airflow_b >= SUPPLY_AIRFLOW_5000CFM
-                    and (
-                        # CASE 1
-                        (ER_modeled_b)
-                        or
-                        # CASE 2
-                        (not ER_modeled_b and exception_1_applies)
-                        or
-                        # CASE 3
-                        (not ER_modeled_b and exception_2_applies)
-                        or
-                        # CASE 4
-                        (
-                            not ER_modeled_b
-                            and ER_not_req_for_heating_sys
-                            and sys_type_heating_only
-                        )
-                        or
-                        # CASE 5
-                        (not ER_modeled_b and exception_6_applies)
-                        or
-                        # CASE 6
-                        (not ER_modeled_b and exception_7_applies)
-                        or
-                        # CASE 7
-                        (
-                            not ER_modeled_b
-                            and climate_zone in APPLICABLE_CZ_ZONES
-                            and sys_type_heating_only
-                        )
-                    )
-                ) or (
                     (
-                        OA_fraction < OA_FRACTION_70
-                        or supply_airflow_b < SUPPLY_AIRFLOW_5000CFM
+                        OA_fraction_b >= OA_fraction_b_70
+                        and supply_airflow_b >= SUPPLY_AIRFLOW_5000CFM
+                        and (
+                            # CASE 1
+                            (ER_modeled_b)
+                            or
+                            # CASE 2
+                            (not ER_modeled_b and exception_1_applies)
+                            or
+                            # CASE 3
+                            (not ER_modeled_b and exception_2_applies)
+                            or
+                            # CASE 4
+                            (
+                                not ER_modeled_b
+                                and ER_not_req_for_heating_sys
+                                and sys_type_heating_only
+                            )
+                            or
+                            # CASE 5
+                            (not ER_modeled_b and exception_6_applies)
+                            or
+                            # CASE 6
+                            (not ER_modeled_b and exception_7_applies)
+                        )
                     )
-                    and
-                    # CASE 10
-                    (not ER_modeled_b)
+                    or (
+                        (
+                            OA_fraction_b < OA_fraction_b_70
+                            or supply_airflow_b < SUPPLY_AIRFLOW_5000CFM
+                        )
+                        and
+                        # CASE 9
+                        (not ER_modeled_b)
+                        or
+                        # CASE 10
+                        (ER_modeled_b)
+                    )
                     or
-                    # CASE 11
-                    (ER_modeled_b)
+                    # Case 11
+                    not (
+                        (
+                            not all_lighting_space_types_defined
+                            or not all_ventilation_space_types_defined
+                        )
+                        and not ER_modeled_p
+                    )
                 )
 
             def get_fail_msg(self, context, calc_vals=None, data=None):
@@ -473,11 +482,13 @@ class Section19Rule21(RuleDefinitionListIndexedBase):
                 ER_modeled_p = calc_vals["ER_modeled_p"]
 
                 return (
-                    CASE12_FAIL_MSG
-                    if (
-                        not all_lighting_space_types_defined
-                        or not all_ventilation_space_types_defined
+                    CASE11_FAIL_MSG
+                    if not (
+                        (
+                            not all_lighting_space_types_defined
+                            or not all_ventilation_space_types_defined
+                        )
+                        and not ER_modeled_p
                     )
-                    and not ER_modeled_p
                     else ""
                 )
