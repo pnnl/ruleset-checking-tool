@@ -18,6 +18,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_list_hvac_systems_assoc
     get_list_hvac_systems_associated_with_zone,
 )
 from rct229.schema.config import ureg
+from rct229.utils.assertions import assert_
 from rct229.utils.jsonpath_utils import find_all, find_one
 from rct229.utils.pint_utils import ZERO, CalcQ
 
@@ -199,22 +200,25 @@ class Section19Rule21(RuleDefinitionListIndexedBase):
                     ]
                 )
 
-            max_thermostat_heating_setpoint_schedule_p = max(
-                [
-                    max(thermostat_schedule)
-                    * ureg(
-                        "degC"
-                    )  # TODO: make sure this unit is degC. The current schema (v 0.0.29) doesn't specify the unit
-                    for thermostat_schedule_id in find_all(
-                        "$.buildings[*].building_segments[*].zones[*].thermostat_heating_setpoint_schedule",
-                        rmd_p,
-                    )
-                    for thermostat_schedule in find_all(
-                        f'$.schedules[*][?(@.id = "{thermostat_schedule_id}")].hourly_values',
-                        rmd_p,
-                    )
-                ]
-            )
+            try:
+                max_thermostat_heating_setpoint_schedule_p = max(
+                    [
+                        max(thermostat_schedule)
+                        * ureg(
+                            "degC"
+                        )  # TODO: make sure this unit is degC. The current schema (v 0.0.29) doesn't specify the unit specifically
+                        for thermostat_schedule_id in find_all(
+                            "$.buildings[*].building_segments[*].zones[*].thermostat_heating_setpoint_schedule",
+                            rmd_p,
+                        )
+                        for thermostat_schedule in find_all(
+                            f'$.schedules[*][?(@.id = "{thermostat_schedule_id}")].hourly_values',
+                            rmd_p,
+                        )
+                    ]
+                )
+            except ValueError:
+                max_thermostat_heating_setpoint_schedule_p = ZERO.TEMPERATURE
 
             serves_zones_heated_to_60_or_higher_p = (
                 max_thermostat_heating_setpoint_schedule_p > REQ_HEATING_SETPOINT
