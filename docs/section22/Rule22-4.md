@@ -2,6 +2,7 @@
 # CHW&CW - Rule 22-4  
 
 **Rule ID:** 22-4  
+**Schema Version:** 0.0.23
 **Rule Description:** For Baseline chilled water loop that is not purchased chilled water and does not serve any computer room HVAC systems, chilled-water supply temperature shall be reset using the following schedule: 44F at outdoor dry-bulb temperature of 80F and above, 54F at 60F and below, and ramped linearly between 44F and 54F at temperature between 80F and 60F.  
 **Rule Assertion:** B-RMR = expected value  
 **Appendix G Section:** Section 22 CHW&CW Loop  
@@ -42,7 +43,7 @@
 
     **Rule Assertion - Component:**
 
-    - Case 1: For Baseline chilled water loop that is not purchased cooling and does not serve any Baseline System Type-11, if chilled-water supply temperature is reset to 44F at outdoor dry-bulb temperature of 80F and above, 54F at 60F and below, and ramped linearly between 44F and 54F at temperature between 80F and 60F: `if ( fluid_loop_b.cooling_or_condensing_design_and_control.outdoor_high_for_loop_supply_temperature_reset == 80 ) AND ( fluid_loop_b.cooling_or_condensing_design_and_control.outdoor_low_for_loop_supply_temperature_reset == 60 ) AND ( fluid_loop_b.cooling_or_condensing_design_and_control.loop_supply_temperature_at_outdoor_high == 44 ) AND ( fluid_loop_b.cooling_or_condensing_design_and_control.loop_supply_temperature_at_outdoor_low == 54 ): PASS`
+    - Case 1: For Baseline chilled water loop that is not purchased cooling and does not serve any Baseline System Type-11, if chilled-water supply temperature is reset to 44F at outdoor dry-bulb temperature of 80F and above, 54F at 60F and below, and ramped linearly between 44F and 54F at temperature between 80F and 60F: `if ( fluid_loop_b.cooling_or_condensing_design_and_control.outdoor_high_for_loop_supply_reset_temperature == 80 ) AND ( fluid_loop_b.cooling_or_condensing_design_and_control.outdoor_low_for_loop_supply_reset_temperature == 60 ) AND ( fluid_loop_b.cooling_or_condensing_design_and_control.loop_supply_temperature_at_outdoor_high == 44 ) AND ( fluid_loop_b.cooling_or_condensing_design_and_control.loop_supply_temperature_at_outdoor_low == 54 ): PASS`
 
     - Case 2: Else: `else: FAIL`
 
