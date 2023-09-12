@@ -4,7 +4,7 @@
         "climate_zone": "CZ4A",
         "data_source_type": "HISTORIC_AGGREGATION"
     },
-    "ruleset_model_instances": [
+    "ruleset_model_descriptions": [
         {"id": "987",
         "buildings": [
             {
@@ -52,12 +52,12 @@
                                 "terminals": [
                                     {
                                         "id": "Terminal 1",
-                                        "served_by_heating_ventilation_air_conditioning_system": "HVAC 1"
+                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
                                     }
                                 ],
                                 "infiltration": {
                                     "id": "Infiltration 1",
-                                    "infiltration_flow_rate": 4.009193529983999,
+                                    "flow_rate": 4.009193529983999,
                                     "modeling_method": "WEATHER_DRIVEN",
                                     "algorithm_name": "AIR-CHANGE"
                                 },
@@ -104,7 +104,7 @@
                                 "volume": 11000
                             }
                         ],
-                        "heating_ventilation_air_conditioning_systems": [
+                        "heating_ventilating_air_conditioning_systems": [
                             {
                                 "id": "HVAC 1",
                                 "cooling_system": {

@@ -104,7 +104,8 @@ DERIVED_RULE_outcome_base = {**BASE_RULE_1_OUTCOME_BASE, "calc_vals": [{"a": 0},
 def test__rule_definition_base__evaluate__with_missing_baseline():
     assert BASE_RULE_1.evaluate(DERIVED_RULE_OUTCOME_BASE) == {
         **BASE_RULE_1_OUTCOME_BASE,
-        "result": "MISSING_BASELINE",
+        "result": "UNDETERMINED",
+        "message": "MISSING_BASELINE",
     }
 
 
