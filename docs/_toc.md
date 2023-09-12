@@ -278,6 +278,7 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
 ## Section 17 - Refrigeration
 
 ## Section 18 - Air Side
+  * [18-2](section18/Rule18-2.md): Does the modeled system serve the appropriate zones (one system per zone for system types 1, 2, 3, 4, 9, 10, 11, 12, and 13 and one system per floor for system types 5, 6, 7, and 8, with the exception of system types 5 or 7 serving laboratory spaces - these systems should serve ALL laboratory zones in the buidling).
 
 ## Section 19 - Air Side Baseline HVAC System
   * [19-1](section19/Rule19-1.md): HVAC system coil capacities for the baseline building design shall be oversized by 15% for cooling and 25% for heating.
