@@ -1,6 +1,6 @@
 from rct229.utils.assertions import assert_, assert_required_fields
 from rct229.utils.jsonpath_utils import find_all
-from rct229.utils.pint_utils import ZERO, pint_sum
+from rct229.utils.pint_utils import ZERO
 
 # Intended for export and internal use
 GET_HVAC_ZONE_LIST_W_AREA_DICT__REQUIRED_FIELDS = {
@@ -71,7 +71,7 @@ def get_hvac_zone_list_w_area_dict(building):
         terminals = zone.get("terminals")
         # Note: None and [] are falsey; zone.terminals is optional
         if terminals:
-            zone_area = pint_sum(find_all("spaces[*].floor_area", zone), ZERO.AREA)
+            zone_area = sum(find_all("spaces[*].floor_area", zone), ZERO.AREA)
             assert_(zone_area > ZERO.AREA, f"zone:{zone['id']} has zero floor area")
             for terminal in terminals:
                 hvac_sys_id = terminal[

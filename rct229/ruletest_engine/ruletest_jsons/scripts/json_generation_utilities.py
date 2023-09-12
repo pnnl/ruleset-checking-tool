@@ -81,7 +81,6 @@ def get_nested_dict(dic, keys):
 
 
 def get_nested_dic_from_key_list(dic, keys):
-
     nested_dict = get_nested_dict(dic, keys)
 
     # Parse final key to see if it's a list or dictionary/key value
@@ -94,6 +93,58 @@ def get_nested_dic_from_key_list(dic, keys):
     # If list_index is not None, return element, not list
     else:
         return nested_dict[key][list_index]
+
+
+# Determines if a dictionary has an element after at a particular key list address
+def element_exists_at_key_address_in_dictionary(dic, keys):
+
+    last_key, last_index = parse_key_string(keys[-1])
+    first_key, first_index = parse_key_string(keys[0])
+
+    # Determine if a nested dictionary exists, slowly building on a reference nested dictionary each iteration through the loop.
+    for key in keys:
+        # Parse key and determine if this key references a list or a value. If list_index returns an integer (i.e., a
+        # reference index in a list) this key represents a list in the dictionary and needs to be set differently
+        # EXAMPLE: The key "buildings[0]" implies the "buildings" key represents a list. We set the value at
+        # element 0 in the this list
+
+        key, list_index = parse_key_string(key)
+        is_list = isinstance(list_index, int)
+
+        # If this is the first key, set the reference dictionary to the highest level dictionary and work down from
+        # there.
+        if key == first_key:
+            # If first key isn't initialized, return False
+            if key not in dic:
+                return False
+
+            if is_list:
+                reference_dict = dic[key][first_index]
+            else:
+                reference_dict = dic[key]
+
+        # If the final key and something is found, return True
+        elif key == last_key:
+            if key not in reference_dict:
+                return False
+
+            return True
+
+        # If neither the first nor final key in list, continue drilling down through nested dictionaries.
+        else:
+            if key not in reference_dict:
+                return False
+
+            # If this element in the key_list references a list, index the value defined in 'list_index', else reference
+            # the single value specified by the key.
+            if is_list:
+                # If list isn't long enough, append a new dictionary to it to avoid index out of bounds
+                # print(reference_dict[key])
+                while len(reference_dict[key]) < list_index + 1:
+                    reference_dict[key].append({})
+                reference_dict = reference_dict[key][list_index]
+            else:
+                reference_dict = reference_dict[key]
 
 
 def parse_key_string(key_string):
@@ -207,7 +258,6 @@ def inject_json_path_from_enumeration(key_list, json_path_ref_string):
 
 
 def get_json_path_key_list_from_enumeration(json_path_enumeration):
-
     # JSON path enumerations. Used to simplify JSON path references in test spreadsheets
     file_dir = os.path.dirname(__file__)
     json_path_enums_file_path = os.path.join(
