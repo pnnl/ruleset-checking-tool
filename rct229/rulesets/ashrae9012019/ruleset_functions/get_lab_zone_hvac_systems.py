@@ -38,20 +38,19 @@ def get_lab_zone_hvac_systems(
 
     # find zone ids whose `system_origin` is `SYSTEMORIGIN.G311D`
     building_lab_zones = [
-        zone_id
-        for zone_id in target_baseline_systems
-        if target_baseline_systems[zone_id]["system_origin"] == SYSTEMORIGIN.G311D
+        zone_id_b
+        for zone_id_b in target_baseline_systems
+        if target_baseline_systems[zone_id_b]["system_origin"] == SYSTEMORIGIN.G311D
     ]
 
     hvac_systems_serving_lab_zones = {"lab_zones_only": [], "lab_and_other": []}
-
     if building_lab_zones:
-        dict_of_zones_and_hvac_systems = (
+        dict_of_zones_and_hvac_systems_b = (
             get_dict_of_zones_and_terminal_units_served_by_hvac_sys(rmd_b)
         )
 
-        for hvac_id_b in dict_of_zones_and_hvac_systems:
-            zones_served_by_hvac_system_b = dict_of_zones_and_hvac_systems[hvac_id_b][
+        for hvac_id_b in dict_of_zones_and_hvac_systems_b:
+            zones_served_by_hvac_system_b = dict_of_zones_and_hvac_systems_b[hvac_id_b][
                 "zone_list"
             ]
 
