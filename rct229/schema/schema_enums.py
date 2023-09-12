@@ -1,5 +1,4 @@
 import json
-from enum import Enum
 from os.path import dirname, join
 
 from rct229.rule_engine.rulesets import RuleSet

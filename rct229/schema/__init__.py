@@ -21,5 +21,7 @@ class SchemaStore:
 
     @staticmethod
     def set_ruleset(ruleset: RuleSet):
-        SchemaStore.SELECTED_RULESET = ruleset
+        # prevent overriding the ruleset if multi-processing.
+        if not SchemaStore.SELECTED_RULESET:
+            SchemaStore.SELECTED_RULESET = ruleset
 
