@@ -51,24 +51,19 @@ def get_lab_zone_hvac_systems(
         )
 
         for hvac_id_b in dict_of_zones_and_hvac_systems:
-            get_zone_ids = dict_of_zones_and_hvac_systems[hvac_id_b]["zone_list"]
+            zones_served_by_hvac_system_b = dict_of_zones_and_hvac_systems[hvac_id_b][
+                "zone_list"
+            ]
 
-            # determine zone ids are included in building_lab_zones
-            zone_included_in_building_lab_zones = filter_(
-                get_zone_ids, lambda zone_id: zone_id in building_lab_zones
-            )
-            zone_included_in_building_lab_zones_bool = map_(
-                get_zone_ids, lambda zone_id: zone_id in building_lab_zones
+            is_zone_in_building_lab_zones_b = map_(
+                zones_served_by_hvac_system_b,
+                lambda zone_id_b: zone_id_b in building_lab_zones,
             )
 
-            # assign the zone ids
-            if all(zone_included_in_building_lab_zones_bool):
-                hvac_systems_serving_lab_zones[
-                    "lab_zones_only"
-                ] += zone_included_in_building_lab_zones
-            elif any(zone_included_in_building_lab_zones_bool):
-                hvac_systems_serving_lab_zones[
-                    "lab_and_other"
-                ] += zone_included_in_building_lab_zones
+            if all(is_zone_in_building_lab_zones_b):
+                hvac_systems_serving_lab_zones["lab_zones_only"].append(hvac_id_b)
+
+            elif any(is_zone_in_building_lab_zones_b):
+                hvac_systems_serving_lab_zones["lab_and_other"].append(hvac_id_b)
 
     return hvac_systems_serving_lab_zones
