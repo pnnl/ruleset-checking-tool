@@ -75,6 +75,7 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   * [get_predominant_hvac_building_area_type](ruleset_functions/G311_exceptions/G311_sub_functions/get_predominant_HVAC_building_area_type.md): returns a String `predominant_HVAC_building_area_type` which is one of the HVAC building area types
   * [is_zone_likely_a_vestibule](ruleset_functions/G311_exceptions/G311_sub_functions/is_zone_likely_a_vestibule.md): following the guidelines in ASHRAE that a vestibule is defined as a space with at least one exterior door and with a surface area of no more than the greater of 50ft2 or 2% of the total area of the floor.
   * [get_computer_zones_peak_cooling_load](ruleset_functions/G311_exceptions/G311_sub_functions/get_computer_zones_peak_cooling_load.md): return peak load of computer zones in the building
+  * [get_number_of_floors](ruleset_functions/G311_exceptions/G311_sub_functions/get_number_of_floors.md): gets the number of floors in the building.  Parking Garages are not counted.
 
 ### HVAC type functions
   * [is_baseline_system_1](ruleset_functions/baseline_systems/is_baseline_system_1.md): Get either Sys-1, Sys-1a, Sys-1b, Sys-1c, or Not_Sys_1 string output which indicates whether the HVAC system is ASHRAE 90.1 2019 Appendix G system 1 (PTAC), system 1a (system 1 with purchased CHW), system 1b (system 1 with purchased heating), system 1c (system 1 with purchased CHW and purchased HW).
