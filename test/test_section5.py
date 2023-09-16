@@ -1,7 +1,7 @@
 import pytest
 import rct_test_helper as helper
 
-import rct229.rules as rules
+import rct229.rulesets.ashrae9012019 as rules
 
 
 def test_rule5_8_success():
