@@ -969,7 +969,6 @@ def add_hvac_systems(
                                     "id"
                                 ] = f"Cooling Sys - {zone_id}"
 
-
                             if "heating_system" in hvac_system:
                                 hvac_system["heating_system"][
                                     "id"
