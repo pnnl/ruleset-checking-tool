@@ -1,5 +1,5 @@
 from rct229.utils.assertions import getattr_
-from rct229.utils.jsonpath_utils import find_all
+from rct229.utils.jsonpath_utils import find_all, find_one
 from rct229.utils.utility_functions import find_exactly_one_zone
 
 
@@ -19,9 +19,10 @@ def get_zones_on_same_floor_list(rmi, source_zone_id):
     -------
     a list of zone ids that are on the same floor as the starting zone.  The list will include the starting zone.
     """
-
-    source_zone_floor_name = getattr_(
-        find_exactly_one_zone(rmi, source_zone_id), "Zone", "floor_name"
+    # not to raise exception if the zone is missing a floor_name
+    # This will still result an empty list if no floor_name is found.
+    source_zone_floor_name = find_one(
+        "$.floor_name", find_exactly_one_zone(rmi, source_zone_id)
     )
     return find_all(
         f'$.buildings[*].building_segments[*].zones[*][?(@.floor_name="{source_zone_floor_name}")].id',
