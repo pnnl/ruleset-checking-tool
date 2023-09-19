@@ -9,7 +9,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.normalize_interior_lighting
 )
 from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all, find_exactly_one_with_field_value
-from rct229.utils.pint_utils import ZERO, pint_sum
+from rct229.utils.pint_utils import ZERO
 
 MANUAL_CHECK_MSG = (
     "Lighting schedule in P-RMD including adjusted lighting occupancy sensor reduction factor is "
@@ -36,7 +36,7 @@ class Section6Rule8(RuleDefinitionListIndexedBase):
             ruleset_section_title="Lighting",
             standard_section="Section G3.1-6(i) Modeling Requirements for the Proposed design",
             is_primary_rule=True,
-            list_path="ruleset_model_instances[0]",
+            list_path="ruleset_model_descriptions[0]",
             required_fields={"$": ["calendar"], "calendar": ["is_leap_year"]},
             data_items={"is_leap_year": ("baseline", "calendar/is_leap_year")},
         )
@@ -99,7 +99,7 @@ class Section6Rule8(RuleDefinitionListIndexedBase):
                     zone_p = context.proposed
                     return {
                         "avg_space_height": zone_p.get("volume", ZERO.VOLUME)
-                        / pint_sum(find_all("spaces[*].floor_area", zone_p), ZERO.AREA),
+                        / sum(find_all("spaces[*].floor_area", zone_p), ZERO.AREA),
                     }
 
                 class SpaceRule(RuleDefinitionBase):

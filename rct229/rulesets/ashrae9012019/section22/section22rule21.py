@@ -40,8 +40,8 @@ class Section22Rule21(RuleDefinitionListIndexedBase):
             ruleset_section_title="HVAC - Chiller",
             standard_section="Section G3.1.3.1 Type and Number of Chillers (System 7, 8, 11, 12 and 13)",
             is_primary_rule=True,
-            rmr_context="ruleset_model_instances/0",
-            list_path="chillers[*]",
+            rmr_context="ruleset_model_descriptions/0",
+            list_path="$.chillers[*]",
             required_fields={
                 "$": ["output"],
             },

@@ -23,14 +23,11 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_h
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.is_hvac_sys_preheating_type_fluid_loop import (
     is_hvac_sys_preheating_type_fluid_loop,
 )
-from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_system_util import (
+from rct229.utils.assertions import getattr_
+from rct229.utils.jsonpath_utils import find_all, find_one_with_field_value
+from rct229.utils.utility_functions import (
     find_exactly_one_child_loop,
     find_exactly_one_hvac_system,
-)
-from rct229.utils.assertions import getattr_
-from rct229.utils.jsonpath_utils import (
-    find_all,
-    find_one_with_field_value,
 )
 
 HEATING_SOURCE = schema_enums["HeatingSourceOptions"]
@@ -50,7 +47,7 @@ class Section19Rule2(RuleDefinitionListIndexedBase):
             ruleset_section_title="HVAC - General",
             standard_section="Section G3.1.2.2",
             is_primary_rule=True,
-            rmr_context="ruleset_model_instances/0",
+            rmr_context="ruleset_model_descriptions/0",
             list_path="$.fluid_loops[*]",
         )
 

@@ -34,8 +34,8 @@ class Section23Rule3(RuleDefinitionListIndexedBase):
             ruleset_section_title="HVAC - Airside",
             standard_section="Section G3.1.3.13 VAV Minimum Flow Set Points (Systems 5 and 7) and Section G3.1.3.14 Fan Power and Control (Systems 6 and 8)",
             is_primary_rule=True,
-            rmr_context="ruleset_model_instances/0",
-            list_path="$..terminals[*]",
+            rmr_context="ruleset_model_descriptions/0",
+            list_path="$.buildings[*].building_segments[*].zones[*].terminals[*]",
         )
 
     def is_applicable(self, context, data=None):

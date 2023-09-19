@@ -95,11 +95,11 @@ TEST_RMD = {
                             "id": "PTAC 1",
                             "cooling_system": {
                                 "id": "DX Coil 1",
-                                "cooling_system_type": "DIRECT_EXPANSION",
+                                "type": "DIRECT_EXPANSION",
                             },
                             "heating_system": {
                                 "id": "HHW Coil 1",
-                                "heating_system_type": "FLUID_LOOP",
+                                "type": "FLUID_LOOP",
                                 "hot_water_loop": "Boiler Loop 1",
                             },
                             "fan_system": {
@@ -147,11 +147,11 @@ TEST_RMD = {
                             "id": "PTAC 2",
                             "cooling_system": {
                                 "id": "DX Coil 2",
-                                "cooling_system_type": "DIRECT_EXPANSION",
+                                "type": "DIRECT_EXPANSION",
                             },
                             "heating_system": {
                                 "id": "HHW Coil 2",
-                                "heating_system_type": "FLUID_LOOP",
+                                "type": "FLUID_LOOP",
                                 "hot_water_loop": "Boiler Loop 1",
                             },
                             "fan_system": {
@@ -199,11 +199,11 @@ TEST_RMD = {
                             "id": "PTAC 3",
                             "cooling_system": {
                                 "id": "DX Coil 3",
-                                "cooling_system_type": "DIRECT_EXPANSION",
+                                "type": "DIRECT_EXPANSION",
                             },
                             "heating_system": {
                                 "id": "HHW Coil 3",
-                                "heating_system_type": "FLUID_LOOP",
+                                "type": "FLUID_LOOP",
                                 "hot_water_loop": "Boiler Loop 1",
                             },
                         },
@@ -218,9 +218,9 @@ TEST_RMD = {
     "fluid_loops": [{"id": "Boiler Loop 1", "type": "HEATING"}],
 }
 
-TEST_RMD_FULL = {"id": "229", "ruleset_model_instances": [TEST_RMD]}
+TEST_RMD_FULL = {"id": "229", "ruleset_model_descriptions": [TEST_RMD]}
 
-TEST_RMI = quantify_rmr(TEST_RMD_FULL)["ruleset_model_instances"][0]
+TEST_RMI = quantify_rmr(TEST_RMD_FULL)["ruleset_model_descriptions"][0]
 
 
 def test__TEST_RMD__is_valid():

@@ -3,17 +3,17 @@
         "Section": 5,
         "Rule": 35,
         "Test": "a",
-        "test_description": "Building includes a conditioned zone that has two roof surfaces one of which has skylights. Skylight area in the proposed design is greater than 3% of the total roof area. Baseline skylight area ratio reduced to 3%.",
+        "test_description": " Project has one building segment and includes a conditioned zone that has two roof surfaces one of which has skylights. Skylight area in the proposed design is greater than 3% of the total roof area. Baseline skylight area ratio reduced to 3%.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-35",
             "ruleset_reference": "Table G3.1(5) Baseline Building Performance (e)",
-            "rule_description": " If the skylight area of the proposed design is greater than 3%, baseline skylight area shall be decreased by an identical percentage in all roof components in which skylights are located to reach 3%.",
+            "rule_description": "If the skylight area of the proposed design is greater than 3%, baseline skylight area shall be decreased by an identical percentage in all roof components in which skylights are located to reach 3%.",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Proposed RMR",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.29"
         },
         "rmr_transformations": {
             "proposed": {
@@ -22,7 +22,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMR 1",
                         "buildings": [
@@ -102,7 +102,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMR 1",
                         "buildings": [
@@ -182,17 +182,17 @@
         "Section": 5,
         "Rule": 35,
         "Test": "b",
-        "test_description": "Building includes a conditioned zone that has two roof surfaces one of which has skylights. Skylight area in the proposed design is greater than 3% of the total roof area. Baseline skylight area ratio is higher than 3%.",
+        "test_description": " Project has one building segment and includes a conditioned zone that has two roof surfaces one of which has skylights. Skylight area in the proposed design is greater than 3% of the total roof area. Baseline skylight area ratio is higher than 3%.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-35",
             "ruleset_reference": "Table G3.1(5) Baseline Building Performance (e)",
-            "rule_description": " If the skylight area of the proposed design is greater than 3%, baseline skylight area shall be decreased by an identical percentage in all roof components in which skylights are located to reach 3%.",
+            "rule_description": "If the skylight area of the proposed design is greater than 3%, baseline skylight area shall be decreased by an identical percentage in all roof components in which skylights are located to reach 3%.",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Proposed RMR",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.29"
         },
         "rmr_transformations": {
             "proposed": {
@@ -201,7 +201,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMR 1",
                         "buildings": [
@@ -281,7 +281,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMR 1",
                         "buildings": [

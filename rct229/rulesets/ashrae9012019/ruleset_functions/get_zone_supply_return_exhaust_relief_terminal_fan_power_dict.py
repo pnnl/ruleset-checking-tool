@@ -1,7 +1,3 @@
-from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_system_util import (
-    find_exactly_one_hvac_system,
-    find_exactly_one_terminal_unit,
-)
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_dict_of_zones_and_terminal_units_served_by_hvac_sys import (
     get_dict_of_zones_and_terminal_units_served_by_hvac_sys,
 )
@@ -16,7 +12,11 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_list_hvac_systems_assoc
 )
 from rct229.utils.assertions import assert_
 from rct229.utils.jsonpath_utils import find_all
-from rct229.utils.pint_utils import ZERO, pint_sum
+from rct229.utils.pint_utils import ZERO
+from rct229.utils.utility_functions import (
+    find_exactly_one_hvac_system,
+    find_exactly_one_terminal_unit,
+)
 
 
 def get_zone_supply_return_exhaust_relief_terminal_fan_power_dict(rmi):
@@ -127,7 +127,7 @@ def get_zone_supply_return_exhaust_relief_terminal_fan_power_dict(rmi):
                     f"Terminals connected with HVAC {hvac['id']} have 0.0 total air flow. Check inputs!",
                 )
 
-                zone_primary_air_flow = pint_sum(
+                zone_primary_air_flow = sum(
                     [
                         terminal.get("primary_airflow", ZERO.FLOW)
                         for terminal in zone_hvac_intersection_terminals

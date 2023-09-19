@@ -4,7 +4,6 @@ from rct229.rule_engine.rule_base import (
 )
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 from rct229.utils.jsonpath_utils import find_all
-from rct229.utils.pint_utils import pint_sum
 
 
 class Section6Rule1(RuleDefinitionListIndexedBase):
@@ -17,7 +16,7 @@ class Section6Rule1(RuleDefinitionListIndexedBase):
             index_rmr="proposed",
             id="6-1",
             description="For the proposed building, each space has the same lighting power as the corresponding space in the U-RMR",
-            rmr_context="ruleset_model_instances/0/buildings",
+            rmr_context="ruleset_model_descriptions/0/buildings",
         )
 
     class BuildingRule(RuleDefinitionListIndexedBase):
@@ -40,10 +39,10 @@ class Section6Rule1(RuleDefinitionListIndexedBase):
                 )
 
             def get_calc_vals(self, context, data=None):
-                space_lighting_power_per_area_user = pint_sum(
+                space_lighting_power_per_area_user = sum(
                     find_all("interior_lighting[*].power_per_area", context.user)
                 )
-                space_lighting_power_per_area_proposed = pint_sum(
+                space_lighting_power_per_area_proposed = sum(
                     find_all("interior_lighting[*].power_per_area", context.proposed)
                 )
                 space_lighting_power_user = (
