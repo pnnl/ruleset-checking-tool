@@ -964,15 +964,16 @@ def add_hvac_systems(
                                     ] = f"Return Fan - {zone_id}"
 
                             # Set capacities and update heating/cooling system Ids
-                            hvac_system["cooling_system"][
-                                "id"
-                            ] = f"Cooling Sys - {zone_id}"
+                            if "cooling_system" in hvac_system:
+                                hvac_system["cooling_system"][
+                                    "id"
+                                ] = f"Cooling Sys - {zone_id}"
 
                             if "heating_system" in hvac_system:
                                 hvac_system["heating_system"][
                                     "id"
                                 ] = f"Heating Sys - {zone_id}"
-                            else:
+                            elif "preheat_system" in hvac_system:
                                 hvac_system["preheat_system"][
                                     "id"
                                 ] = f"Preheat Sys - {zone_id}"
