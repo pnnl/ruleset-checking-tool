@@ -90,21 +90,22 @@ class Section19Rule19(RuleDefinitionListIndexedBase):
             get_dict_of_zones_and_terminal_units_served_by_hvac_sys(rmd_b)
         )
 
-        zone_hvac_has_non_mech_cooling_p = any(
-            [
-                find_one(
-                    "$.cooling_system.cooling_system",
-                    find_exactly_one_hvac_system(rmd_p, hvac_id_p),
-                )
-                == COOLING_SYSTEM.NON_MECHANICAL
-                for zone_id_p in find_all(
-                    "$.buildings[*].building_segments[*].zones[*].id", rmd_p
-                )
-                for hvac_id_p in get_list_hvac_systems_associated_with_zone(
-                    rmd_p, zone_id_p
-                )
-            ]
-        )
+        zone_map = {}
+        for zone_id_p in find_all(
+            "$.buildings[*].building_segments[*].zones[*].id", rmd_p
+        ):
+            zone_map[zone_id_p] = any(
+                [
+                    find_one(
+                        "$.cooling_system.cooling_system",
+                        find_exactly_one_hvac_system(rmd_p, hvac_id_p),
+                    )
+                    == COOLING_SYSTEM.NON_MECHANICAL
+                    for hvac_id_p in get_list_hvac_systems_associated_with_zone(
+                        rmd_p, zone_id_p
+                    )
+                ]
+            )
 
         hvac_map = {}
         for hvac_id_b in find_all(
@@ -137,7 +138,8 @@ class Section19Rule19(RuleDefinitionListIndexedBase):
 
         return {
             "applicable_hvac_sys_ids": applicable_hvac_sys_ids,
-            "zone_hvac_has_non_mech_cooling_p": zone_hvac_has_non_mech_cooling_p,
+            "dict_of_zones_and_terminal_units_served_by_hvac_sys_b": dict_of_zones_and_terminal_units_served_by_hvac_sys_b,
+            "zone_map": zone_map,
             "hvac_map": hvac_map,
         }
 
@@ -166,11 +168,27 @@ class Section19Rule19(RuleDefinitionListIndexedBase):
             hvac_b = context.baseline
             hvac_id_b = hvac_b["id"]
 
-            zone_hvac_has_non_mech_cooling_p = data["zone_hvac_has_non_mech_cooling_p"]
+            dict_of_zones_and_terminal_units_served_by_hvac_sys_b = data[
+                "dict_of_zones_and_terminal_units_served_by_hvac_sys_b"
+            ]
 
-            hvac_map = data["hvac_map"][hvac_id_b]
-            zonal_exhaust_fan_elec_power_b = hvac_map["zonal_exhaust_fan_elec_power_b"]
-            zones_served_by_hvac_has_non_mech_cooling_bool_p = hvac_map[
+            zone_dict_b = data["zone_map"]
+            zone_hvac_has_non_mech_cooling_p = any(
+                [
+                    zone_dict_b[zone_id_p]
+                    for zone_id_p in dict_of_zones_and_terminal_units_served_by_hvac_sys_b[
+                        hvac_id_b
+                    ][
+                        "zone_list"
+                    ]
+                ]
+            )
+
+            hvac_dict_b = data["hvac_map"][hvac_id_b]
+            zonal_exhaust_fan_elec_power_b = hvac_dict_b[
+                "zonal_exhaust_fan_elec_power_b"
+            ]
+            zones_served_by_hvac_has_non_mech_cooling_bool_p = hvac_dict_b[
                 "zones_served_by_hvac_has_non_mech_cooling_bool_p"
             ]
 
