@@ -1,4 +1,4 @@
-from pydash import map_, filter_
+from pydash import map_
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_dict_of_zones_and_terminal_units_served_by_hvac_sys import (
     get_dict_of_zones_and_terminal_units_served_by_hvac_sys,
 )
@@ -38,37 +38,31 @@ def get_lab_zone_hvac_systems(
 
     # find zone ids whose `system_origin` is `SYSTEMORIGIN.G311D`
     building_lab_zones = [
-        zone_id
-        for zone_id in target_baseline_systems
-        if target_baseline_systems[zone_id]["system_origin"] == SYSTEMORIGIN.G311D
+        zone_id_b
+        for zone_id_b in target_baseline_systems
+        if target_baseline_systems[zone_id_b]["system_origin"] == SYSTEMORIGIN.G311D
     ]
 
     hvac_systems_serving_lab_zones = {"lab_zones_only": [], "lab_and_other": []}
-
     if building_lab_zones:
-        dict_of_zones_and_hvac_systems = (
+        dict_of_zones_and_hvac_systems_b = (
             get_dict_of_zones_and_terminal_units_served_by_hvac_sys(rmd_b)
         )
 
-        for hvac_id_b in dict_of_zones_and_hvac_systems:
-            get_zone_ids = dict_of_zones_and_hvac_systems[hvac_id_b]["zone_list"]
+        for hvac_id_b in dict_of_zones_and_hvac_systems_b:
+            zones_served_by_hvac_system_b = dict_of_zones_and_hvac_systems_b[hvac_id_b][
+                "zone_list"
+            ]
 
-            # determine zone ids are included in building_lab_zones
-            zone_included_in_building_lab_zones = filter_(
-                get_zone_ids, lambda zone_id: zone_id in building_lab_zones
-            )
-            zone_included_in_building_lab_zones_bool = map_(
-                get_zone_ids, lambda zone_id: zone_id in building_lab_zones
+            is_zone_in_building_lab_zones_b = map_(
+                zones_served_by_hvac_system_b,
+                lambda zone_id_b: zone_id_b in building_lab_zones,
             )
 
-            # assign the zone ids
-            if all(zone_included_in_building_lab_zones_bool):
-                hvac_systems_serving_lab_zones[
-                    "lab_zones_only"
-                ] += zone_included_in_building_lab_zones
-            elif any(zone_included_in_building_lab_zones_bool):
-                hvac_systems_serving_lab_zones[
-                    "lab_and_other"
-                ] += zone_included_in_building_lab_zones
+            if all(is_zone_in_building_lab_zones_b):
+                hvac_systems_serving_lab_zones["lab_zones_only"].append(hvac_id_b)
+
+            elif any(is_zone_in_building_lab_zones_b):
+                hvac_systems_serving_lab_zones["lab_and_other"].append(hvac_id_b)
 
     return hvac_systems_serving_lab_zones

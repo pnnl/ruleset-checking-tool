@@ -531,7 +531,7 @@ def test__get_lab_zone_hvac_systems_all_zones_g311d_one_system__true():
     assert get_lab_zone_hvac_systems(
         TEST_RMD_B_UNIT_G311D_ONE_SYS, TEST_RMD_UNIT_P, "CZ4A", False
     ) == {
-        "lab_zones_only": ["Thermal Zone 1", "Thermal Zone 2"],
+        "lab_zones_only": ["hvac 1"],
         "lab_and_other": [],
     }
 
@@ -540,15 +540,15 @@ def test__get_lab_zone_hvac_systems_all_zones_g311d_two_systems__true():
     assert get_lab_zone_hvac_systems(
         TEST_RMD_B_UNIT_G311D_TWO_SYS, TEST_RMD_UNIT_P, "CZ4A", False
     ) == {
-        "lab_zones_only": ["Thermal Zone 1", "Thermal Zone 2"],
+        "lab_zones_only": ["hvac 1", "hvac 2"],
         "lab_and_other": [],
     }
 
 
-def test__get_lab_zone_hvac_systems_all_zones_g311d_g311f__true():
+def test__get_lab_zone_hvac_systems__zones_g311d_g311f_two_systems__true():
     assert get_lab_zone_hvac_systems(
         TEST_RMD_B_UNIT_G311D_G311F, TEST_RMD_UNIT_P, "CZ4A", False
     ) == {
-        "lab_zones_only": ["Thermal Zone 1"],
+        "lab_zones_only": ["hvac 1"],
         "lab_and_other": [],
     }
