@@ -8,7 +8,7 @@ The following is an example of a JSON output file produced by the RCT software t
     "tool_version": "0.1.0",
 	"ruleset": "ASHRAE 90.1-2019 Performance Rating Method (Appendix G)",
 	"date_run": "2023-03-16T14:45:33-05:00",
-	"schema_version": "0.0.23",
+	"schema_version": "0.0.29",
 	"rule_tests":[
 		{
 			"rule_id": "5-5",
