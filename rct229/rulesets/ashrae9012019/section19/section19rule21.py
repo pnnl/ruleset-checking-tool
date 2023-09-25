@@ -463,7 +463,7 @@ class Section19Rule21(RuleDefinitionListIndexedBase):
                 return (
                     "Not all lighting or ventilation space types were defined in the RMD and therefore the potential applicability of exceptions 2 and 3 could not be fully assessed. Fail unless exceptions 2 and 3 are applicable. "
                     "Exception 2 is that systems exhausting toxic, flammable, or corrosive fumes or paint or dust shall not require exhaust air energy recovery to be modeled in the baseline if it is not included in the proposed design. Exception 3 is that commercial kitchen hoods (grease) classified as Type 1 by NFPA 96 shall not require exhaust air energy recovery to be modeled in the baseline if it is not included in the proposed design."
-                    if (
+                    if not (
                         (
                             all_lighting_space_types_defined_p
                             and all_ventilation_space_types_defined_p
