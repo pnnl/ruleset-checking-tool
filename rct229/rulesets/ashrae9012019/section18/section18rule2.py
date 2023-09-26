@@ -107,16 +107,20 @@ class Section18Rule2(RuleDefinitionListIndexedBase):
             # create a hvac data dict
             hvac_data_b = {}
             for hvac_id_b in find_all(
-                "$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*]",
+                "$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*].id",
                 rmd_b,
             ):
                 if hvac_id_b in applicable_hvac_sys_ids_b:
                     lab_zones_only_b = lab_zone_hvac_systems["lab_zones_only"]
                     hvac_data_b[hvac_id_b] = {
-                        "is_zone_single_zone_sys_b": baseline_system_types_dict_b[
-                            hvac_id_b
-                        ]
-                        in APPLICABLE_SYS_TYPES,
+                        "is_zone_single_zone_sys_b": any(
+                            [
+                                [
+                                    hvac_id_b in baseline_system_types_dict_b[sys_type]
+                                    for sys_type in baseline_system_types_dict_b
+                                ]
+                            ]
+                        ),
                         "does_sys_only_serve_lab_b": (
                             hvac_id_b in lab_zones_only_b
                             and building_total_lab_zone_exhaust_b > AIRFLOW_15000_CFM
@@ -130,6 +134,8 @@ class Section18Rule2(RuleDefinitionListIndexedBase):
                             hvac_id_b in lab_zones_only_b
                             and building_total_lab_zone_exhaust_b <= AIRFLOW_15000_CFM
                         ),
+                        "does_two_sys_exist_on_same_fl_b": False,
+                        "hvac_sys2_id_b": None,
                     }
 
                     hvac_data_by_id_b = hvac_data_b[hvac_id_b]
@@ -242,9 +248,9 @@ class Section18Rule2(RuleDefinitionListIndexedBase):
                 }
 
             def manual_check_required(self, context, calc_vals=None, data=None):
-                does_sys_only_serve_lab_b = context["does_sys_only_serve_lab_b"]
-                does_sys_serve_lab_b = context["does_sys_serve_lab_b"]
-                does_sys_serve_lab_and_other_b = context[
+                does_sys_only_serve_lab_b = calc_vals["does_sys_only_serve_lab_b"]
+                does_sys_serve_lab_b = calc_vals["does_sys_serve_lab_b"]
+                does_sys_serve_lab_and_other_b = calc_vals[
                     "does_sys_serve_lab_and_other_b"
                 ]
 
@@ -255,14 +261,14 @@ class Section18Rule2(RuleDefinitionListIndexedBase):
                 )
 
             def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
-                does_sys_only_serve_lab_b = context["does_sys_only_serve_lab_b"]
-                does_sys_serve_lab_and_other_b = context[
+                does_sys_only_serve_lab_b = calc_vals["does_sys_only_serve_lab_b"]
+                does_sys_serve_lab_and_other_b = calc_vals[
                     "does_sys_serve_lab_and_other_b"
                 ]
-                does_two_sys_exist_on_same_fl_b = context[
+                does_two_sys_exist_on_same_fl_b = calc_vals[
                     "does_two_sys_exist_on_same_fl_b"
                 ]
-                hvac_sys2_id_b = context["hvac_sys2_id_b"]
+                hvac_sys2_id_b = calc_vals["hvac_sys2_id_b"]
 
                 undetermined_msg = ""
                 if not does_sys_only_serve_lab_b:
