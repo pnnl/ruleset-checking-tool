@@ -37,7 +37,7 @@ def assert_nonempty_lists(req_nonempty_lists, obj):
 
 
 def assert_required_fields(req_fields, obj):
-    for (jpath, fields) in req_fields.items():
+    for jpath, fields in req_fields.items():
         for element in find_all(jpath, obj):
             for field in fields:
                 if field not in element:
@@ -69,6 +69,11 @@ def getattr_(obj, obj_name: str, first_key, *remaining_keys):
     AssertionError if the key path does not exist. The error message indicates what
     field was missing.
     """
+    assert_(
+        obj is not None,
+        f"Object: {obj_name} provided is None, failed to search for key: {first_key}",
+    )
+
     if first_key not in obj:
         raise MissingKeyException(obj_name, obj["id"], first_key)
     val = obj[first_key]

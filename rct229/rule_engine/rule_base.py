@@ -1,10 +1,11 @@
 from jsonpointer import resolve_pointer
 
+from rct229.rule_engine.rct_outcome_label import RCTOutcomeLabel
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 from rct229.utils.assertions import MissingKeyException, RCTFailureException
 from rct229.utils.json_utils import slash_prefix_guarantee
 from rct229.utils.jsonpath_utils import find_all
-from rct229.utils.match_lists import match_lists
+from rct229.utils.pint_utils import calcq_to_q
 
 
 class RuleDefinitionBase:
@@ -15,11 +16,15 @@ class RuleDefinitionBase:
         rmrs_used,
         id=None,
         description=None,
+        ruleset_section_title=None,
+        standard_section=None,
+        is_primary_rule=None,
         rmr_context="",
         required_fields=None,
-        must_match_by_ids=[],
-        manual_check_required_msg=None,
-        not_applicable_msg=None,
+        manual_check_required_msg="",
+        fail_msg="",
+        pass_msg="",
+        not_applicable_msg="",
     ):
         """Base class for all Rule definitions
 
@@ -34,6 +39,14 @@ class RuleDefinitionBase:
         description : string
             Rule description
             Usually unspecified for nested rules
+        ruleset_section_title : string
+            Ruleset section title
+            e.g., Envelope
+        standard_section: string
+            The section id in the standard (ruleset)
+            e.g., Section G3.1-5(b) Building Envelope Modeling Requirements for the Baseline building
+        is_primary_rule: boolean
+            Indicate whether this rule is primary rule (True) or secondary rule (False)
         rmr_context : string
             A json pointer into each RMR, or RMR fragment, provided to the rule.
             For better human readability, the leading "/" may be ommitted.
@@ -44,11 +57,21 @@ class RuleDefinitionBase:
                 ...
             },
             where the json path should resolve to a list of dectionaries.
-
+        manual_check_required_msg: string
+            default message for UNDETERMINED outcome
+        fail_msg: string
+            default message for FAILED outcome
+        pass_msg: string
+            default message for PASS outcome
+        not_applicable_msg: string
+            default message for NOT_APPLICABLE outcome
         """
         self.rmrs_used = rmrs_used
         self.id = id
         self.description = description
+        self.ruleset_section_title = ruleset_section_title
+        self.standard_section = standard_section
+        self.is_primary_rule = is_primary_rule
         # rmr_context is a jsonpointer string
         # As a convenience, any leading '/' should not be included and will
         # be inserted when the pointer is used in _get_context().
@@ -57,8 +80,10 @@ class RuleDefinitionBase:
         self.required_fields = required_fields
         self.manual_check_required_msg = manual_check_required_msg
         self.not_applicable_msg = not_applicable_msg
+        self.fail_msg = fail_msg
+        self.pass_msg = pass_msg
 
-    def evaluate(self, rmrs, data=None):
+    def evaluate(self, rmrs, data={}):
         """Generates the outcome dictionary for the rule
 
         This method also orchestrates the high-level workflow for any rule.
@@ -99,10 +124,16 @@ class RuleDefinitionBase:
             outcome["id"] = self.id
         if self.description:
             outcome["description"] = self.description
+        if self.ruleset_section_title:
+            outcome["ruleset_section_title"] = self.ruleset_section_title
+        if self.standard_section:
+            outcome["standard_section"] = self.standard_section
+        if self.is_primary_rule is not None:
+            outcome["primary_rule"] = True if self.is_primary_rule else False
         if self.rmr_context:
             outcome["rmr_context"] = self.rmr_context
 
-        # context will be a string if the context does not exist for any of the RMR used
+        # context will be a string if the context does not exist for any of the RMD used
         context_or_string = self.get_context(rmrs, data)
         if isinstance(context_or_string, UserBaselineProposedVals):
             context = context_or_string
@@ -117,42 +148,77 @@ class RuleDefinitionBase:
                         # Get calculated values; these can be used by
                         # manual_check_required() or rule_check() and will
                         # be included in the output
-                        calc_vals = self.get_calc_vals(context, data)
+                        raw_calc_vals = self.get_calc_vals(context, data)
+                        # Convert all CalcQ values to its q value for use in the
+                        # remaining methods
+                        calc_vals = calcq_to_q(raw_calc_vals)
                         if calc_vals is not None:
-                            outcome["calc_vals"] = calc_vals
+                            outcome["calc_vals"] = raw_calc_vals
 
                         # Determine if manual check is required
                         if self.manual_check_required(context, calc_vals, data):
-                            outcome["result"] = "UNDETERMINED"
-                            if self.manual_check_required_msg:
-                                outcome["message"] = self.manual_check_required_msg
+                            outcome["result"] = RCTOutcomeLabel.UNDETERMINED
+                            manual_check_required_msg = (
+                                self.get_manual_check_required_msg(
+                                    context, calc_vals, data
+                                )
+                            )
+                            if manual_check_required_msg:
+                                outcome["message"] = manual_check_required_msg
                         else:
                             # Evaluate the actual rule check
                             result = self.rule_check(context, calc_vals, data)
                             if isinstance(result, list):
                                 # The result is a list of outcomes
                                 outcome["result"] = result
-                            # Assume result type is bool
+                            # using is False to include the None case.
+                            elif self.is_primary_rule is False:
+                                # secondary rule applicability check true-> undetermined, false -> not_applicable
+                                if result:
+                                    outcome["result"] = RCTOutcomeLabel.UNDETERMINED
+                                    undetermined_msg = (
+                                        self.get_manual_check_required_msg(
+                                            context, calc_vals, data
+                                        )
+                                    )
+                                    if undetermined_msg:
+                                        outcome["message"] = undetermined_msg
+                                else:
+                                    outcome["result"] = RCTOutcomeLabel.NOT_APPLICABLE
+                                    undetermined_msg = self.get_not_applicable_msg(
+                                        context, data
+                                    )
+                                    if undetermined_msg:
+                                        outcome["message"] = undetermined_msg
                             elif result:
-                                outcome["result"] = "PASSED"
+                                outcome["result"] = RCTOutcomeLabel.PASS
+                                pass_msg = self.get_pass_msg(context, calc_vals, data)
+                                if pass_msg:
+                                    outcome["message"] = pass_msg
                             else:
-                                outcome["result"] = "FAILED"
+                                outcome["result"] = RCTOutcomeLabel.FAILED
+                                fail_msg = self.get_fail_msg(context, calc_vals, data)
+                                if fail_msg:
+                                    outcome["message"] = fail_msg
                     else:
-                        outcome["result"] = "NOT_APPLICABLE"
-                        if self.not_applicable_msg:
-                            outcome["message"] = self.not_applicable_msg
+                        outcome["result"] = RCTOutcomeLabel.NOT_APPLICABLE
+                        not_applicable_msg = self.get_not_applicable_msg(context, data)
+                        if not_applicable_msg:
+                            outcome["message"] = not_applicable_msg
                 except MissingKeyException as ke:
-                    outcome["result"] = "UNDETERMINED"
+                    outcome["result"] = RCTOutcomeLabel.UNDETERMINED
                     outcome["message"] = str(ke)
                 except RCTFailureException as fe:
-                    outcome["result"] = "FAILED"
+                    outcome["result"] = RCTOutcomeLabel.FAILED
                     outcome["message"] = str(fe)
             else:
-                outcome["result"] = context_validity_dict
+                outcome["result"] = "UNDETERMINED"
+                outcome["message"] = context_validity_dict
         else:
-            # context should be a string indicating the RMRs that are missing
+            # context should be a string indicating the RMDs that are missing
             # such as "MISSING_BASELINE"
-            outcome["result"] = context_or_string
+            outcome["result"] = "UNDETERMINED"
+            outcome["message"] = context_or_string
 
         return outcome
 
@@ -452,6 +518,32 @@ class RuleDefinitionBase:
 
         return True
 
+    def get_not_applicable_msg(self, context, data=None):
+        """Gets the message to include in the outcome for the NOT_APPLICABLE case.
+
+        This base implementation simply returns the value of
+        self.not_applicable_msg, which defaults to the empty string.
+
+        This method should only be overridden if there is more than one string
+        used for the NOT_APPLICABLE case. A fixed string can be given in the
+        `not_applicable_msg` field passed to the initializer.
+
+        Parameters
+        ----------
+        context : UserBaselineProposedVals
+            Object containing the contexts for the user, baseline, and proposed RMRs
+        calc_vals : dict | None
+        data : dict | None
+            An optional data dictionary
+
+        Returns
+        -------
+        str
+            The message associated with the NOT_APPLICABLE case
+        """
+
+        return self.not_applicable_msg
+
     def get_calc_vals(self, context, data=None):
         """Calculates values for the rule and returns them in a dict.
 
@@ -498,6 +590,32 @@ class RuleDefinitionBase:
 
         return False
 
+    def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
+        """Gets the message to include in the outcome for the MANUAL_CHECK_REQUIRED case.
+
+        This base implementation simply returns the value of
+        self.manual_check_required_msg, which defaults to the empty string.
+
+        This method should only be overridden if there is more than one string
+        used for the MANUAL_CHECK_REQUIRED case. A fixed string can be given in the
+        `manual_check_required_msg` field passed to the initializer.
+
+        Parameters
+        ----------
+        context : UserBaselineProposedVals
+            Object containing the contexts for the user, baseline, and proposed RMRs
+        calc_vals : dict or None
+
+        data : An optional data object. It is ignored by this base implementation.
+
+        Returns
+        -------
+        str
+            The message associated with the MANUAL_CHECK_REQUIRED case
+        """
+
+        return self.manual_check_required_msg
+
     def rule_check(self, context, calc_vals=None, data=None):
         """This actually checks the rule for the given context
 
@@ -508,6 +626,8 @@ class RuleDefinitionBase:
         ----------
         context : UserBaselineProposedVals
             Object containing the contexts for the user, baseline, and proposed RMRs
+        calc_vals: dictionary
+            Dictionary contains calculated values for rule check and reporting.
         data : An optional data object. It is ignored by this base implementation.
 
         Returns
@@ -518,325 +638,54 @@ class RuleDefinitionBase:
 
         raise NotImplementedError
 
+    def get_fail_msg(self, context, calc_vals=None, data=None):
+        """Gets the message to include in the outcome for the FAIL case.
 
-class RuleDefinitionListBase(RuleDefinitionBase):
-    """
-    Baseclass for Rule Definitions that apply to each element in a list context.
-    """
+        This base implementation simply returns the value of
+        self.fail_msg, which defaults to the empty string.
 
-    def __init__(
-        self,
-        rmrs_used,
-        each_rule,
-        id=None,
-        description=None,
-        rmr_context="",
-        required_fields=None,
-        manual_check_required_msg="Manual Check Required",
-        not_applicable_msg="Not Applicable",
-    ):
-        self.each_rule = each_rule
-        super(RuleDefinitionListBase, self).__init__(
-            rmrs_used=rmrs_used,
-            id=id,
-            description=description,
-            rmr_context=rmr_context,
-            required_fields=required_fields,
-            manual_check_required_msg=manual_check_required_msg,
-            not_applicable_msg=not_applicable_msg,
-        )
-
-    def create_context_list(self, context, data=None):
-        """Generates a list of context trios
-
-        For a list-type rule, we need to create a list of contexts to pass on
-        to the sub-rule. Often, we need to match up the entries in the
-        RMR lists by name or id and then apply the sub-rule to each trio of entries.
-        This method is responsible for creating the list of trios.
-
-        This method must be overridden.
+        This method should only be overridden if there is more than one string
+        used for the PASS or FAIL case. A fixed string can be given in the
+        `fail_msg` field passed to the initializer.
 
         Parameters
         ----------
         context : UserBaselineProposedVals
             Object containing the contexts for the user, baseline, and proposed RMRs
-        data : An optional data object.
+        calc_vals : dict or None
+
+        data : An optional data object. It is ignored by this base implementation.
 
         Returns
         -------
-        list of UserBaselineProposedVals
-            A list of context trios
+        str
+            The message associated with the Pass or Fail case
         """
-        raise NotImplementedError
 
-    def create_data(self, context, data=None):
-        """Create the data object to be passed to each_rule
+        return self.fail_msg
 
-        This is typically overridden to collect data available at this rule's
-        level that is needed by each_rule.
+    def get_pass_msg(self, context, calc_vals=None, data=None):
+        """Gets the message to include in the outcome for the PASS case.
 
-        This default implementation simply returns the data that was passed in.
+        This base implementation simply returns the value of
+        self.pass_msg, which defaults to the empty string.
 
-        Parameters
-        ----------
-        context : UserBaselineProposedVals
-            Object containing the user, baseline, and proposed contexts
-        data : any
-            The data object that was passed into the rule.
-
-        Returns
-        -------
-        UserBaselineProposedVals
-            Object containing the contexts for the user, baseline, and proposed
-            RMRs; an RMR's context is set to None if the corresponding flag
-            in self.rmrs_used is not set
-        """
-        return data
-
-    def list_filter(self, context_item, data=None):
-        """Function used to filter the context_list
-
-        The default implementation simply passes each list_item through (no filtering)
-
-        An inheriting rule can override this function to reduce the context list that
-        is returned from create_context_list.
-
-        Parameters
-        ----------
-        context_item : dict
-            An item from the context_list
-        data : object
-            The data object for the rule. Note: list_filter will be used after
-            create_data is called, so this function will have access to any data
-            this rule added to the data object.
-            This implementation ignores the data argument, but overriding functions
-            are free to make use of it.
-
-        Returns
-        -------
-        list of UserBaselineProposedVals
-            A filtered list of context trios
-        """
-        return context_item
-
-    def rule_check(self, context, calc_vals=None, data=None):
-        """Overrides the base implementation to apply a rule to each entry in
-        a list
-
-        This should not be overridden. Override create_context_list() instead.
+        This method should only be overridden if there is more than one string
+        used for the PASS or PASS case. A fixed string can be given in the
+        `pass_msg` field passed to the initializer.
 
         Parameters
         ----------
         context : UserBaselineProposedVals
             Object containing the contexts for the user, baseline, and proposed RMRs
+        calc_vals : dict or None
+
         data : An optional data object. It is ignored by this base implementation.
 
         Returns
         -------
-        list
-            A list of rule outcomes. The each outcome in the list is augmented
-            with a name field that is the name of the entry in the context list.
+        str
+            The message associated with the Pass case
         """
-        # Create the data to be passed to each_rule
-        data = self.create_data(context, data)
-        context_list = self.create_context_list(context, data)
-        filtered_context_list = [
-            context_item
-            for context_item in context_list
-            if self.list_filter(context_item, data)
-        ]
-        outcomes = []
 
-        for ubp in filtered_context_list:
-            item_outcome = self.each_rule.evaluate(ubp, data)
-
-            # Set the id for item_outcome
-            if ubp.user and ubp.user["id"]:
-                item_outcome["id"] = ubp.user["id"]
-            elif ubp.baseline and ubp.baseline["id"]:
-                item_outcome["id"] = ubp.baseline["id"]
-            elif ubp.proposed and ubp.proposed["id"]:
-                item_outcome["id"] = ubp.proposed["id"]
-
-            outcomes.append(item_outcome)
-        return outcomes
-
-
-class RuleDefinitionListIndexedBase(RuleDefinitionListBase):
-    """
-    Baseclass for List-type Rule Definitions that use one of the RMR lists as an index list
-
-    Applicable rules typically have the form "for each ___ in the ??? RMR, ...".
-
-    Parameters
-    ----------
-    rmrs_used : UserBaselineProposedVals
-        A trio of boolen values indicating which RMRs are required by the
-        rule
-    each_rule : RuleDefinitionBase | RuleDefinitionListBase
-        The rule to be applied to each element in the list
-    index_rmr : "user" | "baseline" | "proposed"
-        Indicates the RMR to be indexed over
-    id : string
-        Unique id for the rule
-        Usually unspecified for nested rules
-    description : string
-        Rule description
-        Usually unspecified for nested rules
-    rmr_context : string
-        A json pointer into each RMR, or RMR fragment, provided to the rule.
-        For better human readability, the leading "/" may be ommitted.
-    list_path : string
-        A json path string into each RMR fragment that was produced by applying
-        rmr_context. The resulting sub-RMR fragments should be the lists to be
-        looped over. The default is "[*]" which assumes that the rmr_context is
-        the list to be looped over.
-        Note: the create_context_list() method can be overridden and
-        ignore list_context.
-        For better human readability, the leading "/" may be ommitted.
-        function (preceding _) inside the enclosing rule definition.
-    match_by : string
-        A json pointer into each element of the list, generally to a field
-        of the list element. The default is "/id" since the id is assumed to
-        be unique to the entire RMR.
-    """
-
-    def __init__(
-        self,
-        rmrs_used,
-        each_rule,
-        index_rmr,
-        id=None,
-        description=None,
-        rmr_context="",
-        list_path="[*]",
-        match_by="id",
-        required_fields=None,
-        manual_check_required_msg="Manual Check Required",
-        not_applicable_msg="Not Applicable",
-    ):
-        self.index_rmr = index_rmr
-        self.list_path = list_path
-        self.match_by = slash_prefix_guarantee(match_by)
-        super(RuleDefinitionListIndexedBase, self).__init__(
-            rmrs_used=rmrs_used,
-            each_rule=each_rule,
-            id=id,
-            description=description,
-            rmr_context=rmr_context,
-            required_fields=required_fields,
-            manual_check_required_msg=manual_check_required_msg,
-            not_applicable_msg=not_applicable_msg,
-        )
-
-    def create_context_list(self, context, data=None):
-        """Generates a list of context trios
-
-        Overrides the base implementation to create a list that has an entry
-        for each item in the index_rmr RMR, the other RMR entries are padded with
-        None for non-matches.
-
-        The resulting list can also be filtered using the list_filter field.
-
-        This may be overridden to produce lists that do not directly appear in
-        the RMR.
-
-        Parameters
-        ----------
-        context : UserBaselineProposedVals
-            Object containing the contexts for the user, baseline, and proposed RMRs.
-            The base implementation here takes the list context from the rmr context
-            and assumes each part is a list.
-        data : An optional data object. It is ignored by this base implementation.
-
-        Returns
-        -------
-        list of UserBaselineProposedVals
-            A list of context trios
-        """
-        UNKNOWN_INDEX_RMR = "Unknown index_rmr"
-        UNUSED_INDEX_RMR_MSG = "index_rmr is not being used"
-        CONTEXT_NOT_LIST = "The list contexts must be lists"
-
-        index_rmr = self.index_rmr
-        rmrs_used = self.rmrs_used
-        match_by = self.match_by
-
-        # The index RMR must be either user, baseline, or proposed
-        if index_rmr not in ["user", "baseline", "proposed"]:
-            raise ValueError(UNKNOWN_INDEX_RMR)
-
-        # The index RMR must be used
-        if (
-            (index_rmr == "user" and not self.rmrs_used.user)
-            or (index_rmr == "baseline" and not self.rmrs_used.baseline)
-            or (index_rmr == "proposed" and not self.rmrs_used.proposed)
-        ):
-            raise ValueError(CONTEXT_NOT_LIST)
-
-        # Get the list contexts
-        list_trio = UserBaselineProposedVals(
-            find_all(self.list_path, context.user) if rmrs_used.user else None,
-            find_all(self.list_path, context.baseline) if rmrs_used.baseline else None,
-            find_all(self.list_path, context.proposed) if rmrs_used.proposed else None,
-        )
-
-        # # This implementation assumes the used lists contexts are in fact lists
-        # if (
-        #     (rmrs_used.user and not isinstance(list_context_trio.user, list))
-        #     or (rmrs_used.baseline and not isinstance(list_context_trio.baseline, list))
-        #     or (rmrs_used.proposed and not isinstance(list_context_trio.proposed, list))
-        # ):
-        #     raise ValueError(CONTEXT_NOT_LIST)
-
-        user_list = None
-        baseline_list = None
-        proposed_list = None
-
-        # User indexed
-        if index_rmr == "user":
-            user_list = list_trio.user
-            context_list_len = len(user_list)
-            if rmrs_used.baseline:
-                baseline_list = match_lists(
-                    list_trio.user, list_trio.baseline, match_by
-                )
-            if rmrs_used.proposed:
-                proposed_list = match_lists(
-                    list_trio.user, list_trio.proposed, match_by
-                )
-
-        # Baseline indexed
-        elif index_rmr == "baseline":
-            baseline_list = list_trio.baseline
-            context_list_len = len(baseline_list)
-            if rmrs_used.user:
-                user_list = match_lists(list_trio.baseline, list_trio.user, match_by)
-            if rmrs_used.proposed:
-                proposed_list = match_lists(
-                    list_trio.baseline, list_trio.proposed, match_by
-                )
-
-        # Proposed indexed
-        elif index_rmr == "proposed":
-            proposed_list = list_trio.proposed
-            context_list_len = len(proposed_list)
-            if rmrs_used.user:
-                user_list = match_lists(list_trio.proposed, list_trio.user, match_by)
-            if rmrs_used.baseline:
-                baseline_list = match_lists(
-                    list_trio.proposed, list_trio.baseline, match_by
-                )
-
-        # Generate the context list
-        context_list = []
-        for index in range(context_list_len):
-            user_entry = None if user_list is None else user_list[index]
-            baseline_entry = None if baseline_list is None else baseline_list[index]
-            proposed_entry = None if proposed_list is None else proposed_list[index]
-
-            context_list.append(
-                UserBaselineProposedVals(user_entry, baseline_entry, proposed_entry)
-            )
-
-        return context_list
+        return self.pass_msg

@@ -41,9 +41,9 @@ def print_summary_report(report):
         )
         print(f"{summary_dict['number_passed']} evaluations passed")
         print(f"{summary_dict['number_failed']} evaluations failed")
-        print(f"{summary_dict['number_missing_context']} evaluations missing context")
         print(f"{summary_dict['number_not_applicable']} evaluations not applicable")
+        print(f"{summary_dict['number_invalid_context']} rmd has invalid context")
         print(
-            f"{summary_dict['number_manual_check_required']} evaluations requiring manual check"
+            f"{summary_dict['number_undetermined']} evaluations requiring manual check"
         )
         print("----------------------------------")

@@ -29,7 +29,7 @@
 
 ## Rule Logic:  
 
-- For each chiller in B_RMR, save chiller to loop-chiller dictionary: `for chiller_b in B_RMR.ASHRAE229.chillers: loop_chiller_dict[chiller_b.cooling_loop].append(chiller_b)`
+- For each chiller in B_RMR, save chiller to loop-chiller-ids-list: `for chiller_b in B_RMR.ASHRAE229.chillers: chiller_loop_ids_list.append(chiller_b)`
 
 - For each fluid loop in B_RMR: `for fluid_loop_b in B_RMR.ASHRAE229.fluid_loops:`
 

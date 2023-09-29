@@ -28,12 +28,12 @@
 
     - Get zone infiltration in P_RMR: `infiltration_p = zone_p.infiltration`
 
-      - Compare infiltration schedules in B_RMR and P_RMR: `compare_schedules_result_dictionary = compare_schedules(infiltration_b.multiplier_schedule, infiltration_p.multiplier_schedule, always_1_schedule, 1)`
+      - Compare infiltration schedules in B_RMR and P_RMR: `compare_schedules_result_dictionary = compare_schedules(infiltration_b.multiplier_schedule, infiltration_p.multiplier_schedule, always_1_schedule, 1, is_leap_year)`
 
       **Rule Assertion:**  
 
       - Case 1: For each zone, if each hourly zone infiltration schedule in P_RMR matches that in B_RMR: `if compare_schedules_result_dictionary[TOTAL_HOURS_COMPARED] == compare_schedules_result_dictionary[TOTAL_HOURS_MATCH]: PASS`
 
-      - Case 2: Else: `Else: FAIL and raise_warning "BASELINE AND PROPOSED INFILTRATION SCHEDULES ARE NOT THE SAME. THE RATIO OF BASELINE EFLH TO PROPOSED EFLH IS EQUAL TO {COMPARE_SCHEDULES_RESULT_DICTIONARY[EFLH_DIFFERENCE]}"`
+      - Case 2: Else: `Else: FAIL and raise_warning "BASELINE AND PROPOSED INFILTRATION SCHEDULES ARE NOT THE SAME. THE DIFFERENCE BETWEEN BASELINE EFLH AND PROPOSED EFLH IS EQUAL TO {COMPARE_SCHEDULES_RESULT_DICTIONARY[EFLH_DIFFERENCE]}"`
 
 **[Back](../_toc.md)**
