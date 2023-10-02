@@ -4,9 +4,9 @@ from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedV
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_heat_rejection_loops_connected_to_baseline_systems import (
     get_heat_rejection_loops_connected_to_baseline_systems,
 )
+from rct229.schema.config import ureg
 from rct229.utils.assertions import getattr_
 from rct229.utils.std_comparisons import std_equal
-from rct229.schema.config import ureg
 
 TEMP_LOW_LIMIT_55F = 55 * ureg("degF")
 TEMP_HIGH_LIMIT_90F = 90 * ureg("degF")
