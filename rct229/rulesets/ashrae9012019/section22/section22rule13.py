@@ -1,11 +1,11 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
+from rct229.rulesets.ashrae9012019.data.schema_enums import schema_enums
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_heat_rejection_loops_connected_to_baseline_systems import (
     get_heat_rejection_loops_connected_to_baseline_systems,
 )
 from rct229.utils.assertions import getattr_
-from rct229.rulesets.ashrae9012019.data.schema_enums import schema_enums
 
 HEATREJECTIONFAN = schema_enums["HeatRejectionFanOptions"]
 HEATREJECTION = schema_enums["HeatRejectionOptions"]
