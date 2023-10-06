@@ -47,7 +47,7 @@ class Section22Rule13(RuleDefinitionListIndexedBase):
     def list_filter(self, context_item, data):
         heat_rejection_b = context_item.baseline
         heat_rejection_loop_ids_b = data["heat_rejection_loop_ids_b"]
-        heat_rejection_loop_b = getattr_("$.loop", "loop", heat_rejection_b)
+        heat_rejection_loop_b = getattr_(heat_rejection_b, "heat_rejections", "loop")
 
         return heat_rejection_loop_b in heat_rejection_loop_ids_b
 
@@ -63,7 +63,7 @@ class Section22Rule13(RuleDefinitionListIndexedBase):
         def get_calc_vals(self, context, data=None):
             heat_rejection_b = context.baseline
             fan_type_b = heat_rejection_b["fan_type"]
-            heat_rejection_type_b = heat_rejection_b["heat_rejection_type "]
+            heat_rejection_type_b = heat_rejection_b["type"]
 
             return {
                 "fan_type_b": fan_type_b,
