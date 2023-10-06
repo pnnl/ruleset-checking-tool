@@ -42,10 +42,8 @@ class Section22Rule12(RuleDefinitionListIndexedBase):
         number_of_baseline_heat_rejections_b = sum(
             [
                 1
-                for heat_rejection_b in find_all(
-                    "$.buildings[*.].heat_rejections[*]", rmd_b
-                )
-                if getattr_("$.loop", "loop", heat_rejection_b)
+                for heat_rejection_b in find_all("$.heat_rejections[*]", rmd_b)
+                if getattr_(heat_rejection_b, "heat_rejections", "loop")
                 in heat_rejection_loop_ids_b
             ]
         )
@@ -62,11 +60,13 @@ class Section22Rule12(RuleDefinitionListIndexedBase):
             )
 
         def get_calc_vals(self, context, data=None):
+            heat_rejection_loop_ids_b = data["heat_rejection_loop_ids_b"]
             number_of_baseline_heat_rejections_b = data[
                 "number_of_baseline_heat_rejections_b"
             ]
             return {
-                "number_of_baseline_heat_rejections_b": number_of_baseline_heat_rejections_b
+                "heat_rejection_loop_ids_b": heat_rejection_loop_ids_b,
+                "number_of_baseline_heat_rejections_b": number_of_baseline_heat_rejections_b,
             }
 
         def rule_check(self, context, calc_vals=None, data=None):
