@@ -1,7 +1,7 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
-from rct229.rulesets.ashrae9012019.data.schema_enums import schema_enums
+from rct229.schema.schema_enums import SchemaEnums
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_system_type_compare import (
     baseline_system_type_compare,
 )
@@ -39,7 +39,7 @@ APPLICABLE_SYS_TYPES = [
 ]
 
 
-COOLING_SYSTEM = schema_enums["CoolingSystemOptions"]
+COOLING_SYSTEM = SchemaEnums.schema_enums["CoolingSystemOptions"]
 REQ_FAN_POWER_FLOW_RATIO = 0.3 * ureg("W/cfm")
 
 

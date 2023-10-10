@@ -1,7 +1,13 @@
 import importlib
 
 # Add all available rule modules in __all__
-__all__ = ["section5", "section6", "section19", "section21", "section22", "section23"]
+# __all__ = ["section5", "section6", "section19", "section21", "section22", "section23"]
+__all__ = ["section5", "section6"]
+from rct229.schema.schema_enums import SchemaEnums
+
+RulesetModelOptions2019ASHRAE901 = SchemaEnums.schema_enums[
+    "RulesetModelOptions2019ASHRAE901"
+]
 
 
 def __getattr__(name):

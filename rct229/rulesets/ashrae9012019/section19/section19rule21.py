@@ -2,7 +2,7 @@ from pydash import flat_map, map_
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
-from rct229.rulesets.ashrae9012019.data.schema_enums import schema_enums
+from rct229.schema.schema_enums import SchemaEnums
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_system_util import (
     HVAC_SYS,
 )
@@ -24,11 +24,11 @@ from rct229.utils.jsonpath_utils import find_all, find_one
 from rct229.utils.pint_utils import ZERO, CalcQ
 from rct229.utils.utility_functions import find_exactly_one_schedule
 
-ENERGY_RECOVERY = schema_enums["EnergyRecoveryOptions"]
-LIGHTING_SPACE = schema_enums["LightingSpaceOptions2019ASHRAE901TG37"]
-VENTILATION_SPACE = schema_enums["VentilationSpaceOptions2019ASHRAE901"]
-DEHUMIDIFICATION = schema_enums["DehumidificationOptions"]
-ClimateZoneOption = schema_enums["ClimateZoneOptions2019ASHRAE901"]
+ENERGY_RECOVERY = SchemaEnums.schema_enums["EnergyRecoveryOptions"]
+LIGHTING_SPACE = SchemaEnums.schema_enums["LightingSpaceOptions2019ASHRAE901TG37"]
+VENTILATION_SPACE = SchemaEnums.schema_enums["VentilationSpaceOptions2019ASHRAE901"]
+DEHUMIDIFICATION = SchemaEnums.schema_enums["DehumidificationOptions"]
+ClimateZoneOption = SchemaEnums.schema_enums["ClimateZoneOptions2019ASHRAE901"]
 OA_fraction_b_70 = 0.7
 SUPPLY_AIRFLOW_5000CFM = 5000 * ureg("cfm")
 REQ_HEATING_SETPOINT = 60 * ureg("degF")

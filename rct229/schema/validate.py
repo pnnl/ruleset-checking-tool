@@ -3,7 +3,7 @@ import os
 
 import jsonschema
 
-from rct229.schema import SchemaStore
+from rct229.schema.schema_store import SchemaStore
 from rct229.utils.jsonpath_utils import find_all
 
 file_dir = os.path.dirname(__file__)

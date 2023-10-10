@@ -1,7 +1,9 @@
 from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.utility_functions import find_exactly_one_hvac_system
 
-FAN_SYSTEM_SUPPLY_FAN_CONTROL = SchemaEnums.schema_enums["FanSystemSupplyFanControlOptions"]
+FAN_SYSTEM_SUPPLY_FAN_CONTROL = SchemaEnums.schema_enums[
+    "FanSystemSupplyFanControlOptions"
+]
 
 
 def is_hvac_sys_fan_sys_vsd(rmi_b, hvac_b_id):

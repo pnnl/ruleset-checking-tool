@@ -7,7 +7,7 @@ from rct229.reports.engine_raw_summary import EngineRawSummary
 from rct229.rule_engine.engine import evaluate_all_rules
 from rct229.rule_engine.rulesets import RuleSet, RuleSetTest
 from rct229.ruletest_engine.run_ruletests import run_ashrae9012019_tests
-from rct229.schema import SchemaStore
+from rct229.schema.schema_store import SchemaStore
 from rct229.schema.validate import validate_rmr
 from rct229.utils.file import deserialize_rmr_file
 
@@ -132,9 +132,7 @@ def evaluate_rmr_triplet(user_rmr, baseline_rmr, proposed_rmr):
         print("Processing rules...")
         print("")
 
-        return evaluate_all_rules(
-            user_rmr_obj, baseline_rmr_obj, proposed_rmr_obj
-        )
+        return evaluate_all_rules(user_rmr_obj, baseline_rmr_obj, proposed_rmr_obj)
 
 
 if __name__ == "__main__":

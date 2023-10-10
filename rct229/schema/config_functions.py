@@ -3,15 +3,6 @@ import os
 
 import pint
 
-from rct229.rule_engine.rulesets import RuleSet
-from rct229.schema import SchemaStore
-
-
-def get_ruleset_model_type_list():
-    SchemaStore.set_ruleset(RuleSet.ASHRAE9012019_RULESET)
-    return get_schema_definitions_dictionary()
-
-
 # Initialize pint ureg
 def get_pint_unit_registry():
     # Import unit definitions from text file

@@ -1,4 +1,5 @@
 from rct229.rule_engine.rule_list_base import RuleDefinitionListBase
+from rct229.rule_engine.ruleset_model_factory import RuleSetModels, get_rmd_instance
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 from rct229.utils.json_utils import slash_prefix_guarantee
 from rct229.utils.jsonpath_utils import find_all
@@ -13,8 +14,8 @@ class RuleDefinitionListIndexedBase(RuleDefinitionListBase):
 
     Parameters
     ----------
-    rmrs_used : UserBaselineProposedVals
-        A trio of boolen values indicating which RMRs are required by the
+    rmrs_used : RuleSetModels
+        A list of boolean values indicating which RMRs are required by the
         rule
     each_rule : RuleDefinitionBase | RuleDefinitionListBase
         The rule to be applied to each element in the list
@@ -101,8 +102,8 @@ class RuleDefinitionListIndexedBase(RuleDefinitionListBase):
 
         Parameters
         ----------
-        context : UserBaselineProposedVals
-            Object containing the contexts for the user, baseline, and proposed RMRs.
+        context : RuleSetModels
+            Object containing the contexts for RMRs required by the ruleset.
             The base implementation here takes the list context from the rmr context
             and assumes each part is a list.
         data : An optional data object. It is ignored by this base implementation.
@@ -113,31 +114,34 @@ class RuleDefinitionListIndexedBase(RuleDefinitionListBase):
             A list of context trios
         """
         UNKNOWN_INDEX_RMR = "Unknown index_rmr"
-        UNUSED_INDEX_RMR_MSG = "index_rmr is not being used"
         CONTEXT_NOT_LIST = "The list contexts must be lists"
 
-        index_rmr = self.index_rmr
         rmrs_used = self.rmrs_used
         match_by = self.match_by
 
         # The index RMR must be either user, baseline, or proposed
-        if index_rmr not in ["user", "baseline", "proposed"]:
+        if self.index_rmr not in context.get_ruleset_model_types():
             raise ValueError(UNKNOWN_INDEX_RMR)
 
         # The index RMR must be used
-        if (
-            (index_rmr == "user" and not self.rmrs_used.user)
-            or (index_rmr == "baseline" and not self.rmrs_used.baseline)
-            or (index_rmr == "proposed" and not self.rmrs_used.proposed)
-        ):
+        context_on_list = any(
+            map(
+                lambda ruleset_model: context[ruleset_model],
+                context.get_ruleset_model_types(),
+            )
+        )
+        if not context_on_list:
             raise ValueError(CONTEXT_NOT_LIST)
 
         # Get the list contexts
-        list_trio = UserBaselineProposedVals(
-            find_all(self.list_path, context.user) if rmrs_used.user else None,
-            find_all(self.list_path, context.baseline) if rmrs_used.baseline else None,
-            find_all(self.list_path, context.proposed) if rmrs_used.proposed else None,
-        )
+        list_context = get_rmd_instance()
+        for ruleset_model in list_context.get_ruleset_model_types():
+            if self.rmrs_used[ruleset_model]:
+                list_context.__setitem__(
+                    ruleset_model, find_all(self.list_path, context[ruleset_model])
+                )
+            else:
+                list_context.__setitem__(ruleset_model, None)
 
         # # This implementation assumes the used lists contexts are in fact lists
         # if (
@@ -147,54 +151,26 @@ class RuleDefinitionListIndexedBase(RuleDefinitionListBase):
         # ):
         #     raise ValueError(CONTEXT_NOT_LIST)
 
-        user_list = None
-        baseline_list = None
-        proposed_list = None
-
-        # User indexed
-        if index_rmr == "user":
-            user_list = list_trio.user
-            context_list_len = len(user_list)
-            if rmrs_used.baseline:
-                baseline_list = match_lists(
-                    list_trio.user, list_trio.baseline, match_by
+        index_rmd_list = list_context[self.index_rmr]
+        context_list_len = len(index_rmd_list)
+        for ruleset_model in list_context.get_ruleset_model_types():
+            if self.rmrs_used[ruleset_model] and ruleset_model != self.index_rmr:
+                rmd_list = match_lists(
+                    index_rmd_list, list_context[ruleset_model], match_by
                 )
-            if rmrs_used.proposed:
-                proposed_list = match_lists(
-                    list_trio.user, list_trio.proposed, match_by
-                )
-
-        # Baseline indexed
-        elif index_rmr == "baseline":
-            baseline_list = list_trio.baseline
-            context_list_len = len(baseline_list)
-            if rmrs_used.user:
-                user_list = match_lists(list_trio.baseline, list_trio.user, match_by)
-            if rmrs_used.proposed:
-                proposed_list = match_lists(
-                    list_trio.baseline, list_trio.proposed, match_by
-                )
-
-        # Proposed indexed
-        elif index_rmr == "proposed":
-            proposed_list = list_trio.proposed
-            context_list_len = len(proposed_list)
-            if rmrs_used.user:
-                user_list = match_lists(list_trio.proposed, list_trio.user, match_by)
-            if rmrs_used.baseline:
-                baseline_list = match_lists(
-                    list_trio.proposed, list_trio.baseline, match_by
-                )
+                list_context.__setitem__(ruleset_model, rmd_list)
 
         # Generate the context list
         context_list = []
         for index in range(context_list_len):
-            user_entry = None if user_list is None else user_list[index]
-            baseline_entry = None if baseline_list is None else baseline_list[index]
-            proposed_entry = None if proposed_list is None else proposed_list[index]
-
-            context_list.append(
-                UserBaselineProposedVals(user_entry, baseline_entry, proposed_entry)
-            )
+            context = get_rmd_instance()
+            for ruleset_model in context.get_ruleset_model_types():
+                context.__setitem__(
+                    ruleset_model,
+                    None
+                    if list_context[ruleset_model] is None
+                    else list_context[ruleset_model][index],
+                )
+            context_list.append(context)
 
         return context_list

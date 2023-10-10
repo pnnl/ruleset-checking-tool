@@ -2,7 +2,7 @@ import json
 from os.path import dirname, join
 
 from rct229.rule_engine.rulesets import RuleSet
-from rct229.schema import SchemaStore
+from rct229.schema.schema_store import SchemaStore
 from rct229.utils.jsonpath_utils import create_jsonpath_value_dict
 
 """This module exports the dictionary schema_enums that provides access to the
@@ -67,9 +67,13 @@ class SchemaEnums:
             enum_jsonpath.split('"')[-2]: value["enum"]
             for (enum_jsonpath, value) in enum_jsonpath_value_dict.items()
         }
-        SchemaEnums.schema_enums = {key: _ListEnum(enum_list) for key, enum_list in _enums_dict.items()}
+        SchemaEnums.schema_enums = {
+            key: _ListEnum(enum_list) for key, enum_list in _enums_dict.items()
+        }
+
 
 # Convert the enumerations as dictionaries to classess for easier access
+
 
 def print_schema_enums():
     """Print all the schema enumerations with their names and values

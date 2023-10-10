@@ -24,7 +24,9 @@ APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_11_2,
 ]
 
-FanSystemTemperatureControl = SchemaEnums.schema_enums["FanSystemTemperatureControlOptions"]
+FanSystemTemperatureControl = SchemaEnums.schema_enums[
+    "FanSystemTemperatureControlOptions"
+]
 REQUIRED_RESET_DIFF_TEMP = 5.0 * ureg("degR")
 
 

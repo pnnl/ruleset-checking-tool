@@ -115,7 +115,9 @@ lighting_space_enumeration_to_lpd_space_type_map = {
 }
 
 FULL_AUTO_ON = SchemaEnums.schema_enums["LightingOccupancyControlOptions"].FULL_AUTO_ON
-PARTIAL_AUTO_ON = SchemaEnums.schema_enums["LightingOccupancyControlOptions"].PARTIAL_AUTO_ON
+PARTIAL_AUTO_ON = SchemaEnums.schema_enums[
+    "LightingOccupancyControlOptions"
+].PARTIAL_AUTO_ON
 MANUAL_ON = SchemaEnums.schema_enums["LightingOccupancyControlOptions"].MANUAL_ON
 OTHER = SchemaEnums.schema_enums["LightingOccupancyControlOptions"].OTHER
 NONE = SchemaEnums.schema_enums["LightingOccupancyControlOptions"].NONE

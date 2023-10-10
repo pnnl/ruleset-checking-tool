@@ -18,7 +18,9 @@ APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_8,
 ]
 
-TERMINAL_TEMPERATURE_CONTROL = SchemaEnums.schema_enums["TerminalTemperatureControlOptions"]
+TERMINAL_TEMPERATURE_CONTROL = SchemaEnums.schema_enums[
+    "TerminalTemperatureControlOptions"
+]
 
 
 class Section23Rule7(RuleDefinitionListIndexedBase):

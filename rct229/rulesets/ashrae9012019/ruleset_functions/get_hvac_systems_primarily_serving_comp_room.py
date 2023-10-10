@@ -7,7 +7,9 @@ from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.pint_utils import ZERO
 from rct229.utils.utility_functions import find_exactly_one_zone
 
-LightingSpaceOptionsG37 = SchemaEnums.schema_enums["LightingSpaceOptions2019ASHRAE901TG37"]
+LightingSpaceOptionsG37 = SchemaEnums.schema_enums[
+    "LightingSpaceOptions2019ASHRAE901TG37"
+]
 
 
 def get_hvac_systems_primarily_serving_comp_room(rmi):

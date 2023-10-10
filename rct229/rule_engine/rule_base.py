@@ -6,6 +6,7 @@ from rct229.utils.assertions import MissingKeyException, RCTFailureException
 from rct229.utils.json_utils import slash_prefix_guarantee
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.pint_utils import calcq_to_q
+from rct229.rule_engine.ruleset_model_factory import RuleSetModels, get_rmd_instance
 
 
 class RuleDefinitionBase:
@@ -30,8 +31,8 @@ class RuleDefinitionBase:
 
         Parameters
         ----------
-        rmrs_used : UserBaselineProposedVals
-            A trio of boolen values indicating which RMRs are required by the
+        rmrs_used : RulesetModels
+            A boolean values indicating which RMDs are required by the
             rule
         id : string
             Unique id for the rule
@@ -83,7 +84,7 @@ class RuleDefinitionBase:
         self.fail_msg = fail_msg
         self.pass_msg = pass_msg
 
-    def evaluate(self, rmrs, data={}):
+    def evaluate(self, rmds, data={}):
         """Generates the outcome dictionary for the rule
 
         This method also orchestrates the high-level workflow for any rule.
@@ -99,7 +100,7 @@ class RuleDefinitionBase:
 
         Parameters
         ----------
-        rmrs : RMR trio or a context trio
+        rmds : RuleSetModels RMD models or a context list
         data : Any data object (optional). This is designed as a way to pass in data
             to nested rules. This data passed on to the workflow methods
             get_context(), is_applicable(), manual_check_required(), and
@@ -134,8 +135,8 @@ class RuleDefinitionBase:
             outcome["rmr_context"] = self.rmr_context
 
         # context will be a string if the context does not exist for any of the RMD used
-        context_or_string = self.get_context(rmrs, data)
-        if isinstance(context_or_string, UserBaselineProposedVals):
+        context_or_string = self.get_context(rmds, data)
+        if isinstance(context_or_string, RuleSetModels):
             context = context_or_string
 
             # Check the context for general validity
@@ -222,15 +223,15 @@ class RuleDefinitionBase:
 
         return outcome
 
-    def _get_context(self, rmrs, rmr_context=None):
+    def _get_context(self, rmds, rmr_context=None):
         """Get the context for each RMR
 
         Private method, not to be overridden
 
         Parameters
         ----------
-        rmrs : UserBaselineProposedVals
-            Object containing the user, baseline, and proposed RMRs
+        rmds : RuleSetModels
+            Object containing the RMDs for each required ruleset model type
         rmr_context : string|None
             Optional jsonpointer for rmr_context to override self.rmr_context.
             If None, then self.rmr_context is used.
@@ -247,49 +248,45 @@ class RuleDefinitionBase:
         # improved readability
         pointer = rmr_context
 
-        # Note: if there is no match for pointer, resolve_pointer returns None
-        return UserBaselineProposedVals(
-            user=resolve_pointer(rmrs.user, pointer, None)
-            if self.rmrs_used.user
-            else None,
-            baseline=resolve_pointer(rmrs.baseline, pointer, None)
-            if self.rmrs_used.baseline
-            else None,
-            proposed=resolve_pointer(rmrs.proposed, pointer, None)
-            if self.rmrs_used.proposed
-            else None,
-        )
+        ruleset_models = get_rmd_instance()
+        for ruleset_model_type in ruleset_models.get_ruleset_model_types():
+            if self.rmrs_used[ruleset_model_type]:
+                ruleset_models.__setitem__(
+                    ruleset_model_type,
+                    resolve_pointer(rmds[ruleset_model_type], pointer, None),
+                )
 
-    def get_context(self, rmrs, data=None):
+        # Note: if there is no match for pointer, resolve_pointer returns None
+        return ruleset_models
+
+    def get_context(self, rmds, data=None):
         """Gets the context for each RMR
 
         May be be overridden for different behavior
 
         Parameters
         ----------
-        rmrs : UserBaselineProposedVals
-            Object containing the user, baseline, and proposed RMRs
+        rmds : RuleSetModels
+            Object containing the RMDs for each required ruleset model types
             A return value of None indicates that the context
             does not exist in one or more of the RMRs used.
         data : An optional data object. It is ignored by this base implementation.
 
         Returns
         -------
-        UserBaselineProposedVals or str
+        RulesetModelTypes or str
             The return value from self._get_context() when the context exists
             in each RMR for which the correponding self.rmrs_used flag is set;
             otherwise retrns a string such as "MISSING_BASELINE" that indicates all
             the RMRs that are missing.
         """
 
-        context = self._get_context(rmrs)
+        context = self._get_context(rmds)
         missing_contexts = []
-        if self.rmrs_used.user and context.user is None:
-            missing_contexts.append("USER")
-        if self.rmrs_used.baseline and context.baseline is None:
-            missing_contexts.append("BASELINE")
-        if self.rmrs_used.proposed and context.proposed is None:
-            missing_contexts.append("PROPOSED")
+        ruleset_model_types = rmds.get_ruleset_model_types()
+        for ruleset_model in ruleset_model_types:
+            if self.rmrs_used[ruleset_model] and rmds[ruleset_model] is None:
+                missing_contexts.append(ruleset_model)
 
         if len(missing_contexts) > 0:
             retval = "MISSING_" + "_".join(missing_contexts)
@@ -310,8 +307,8 @@ class RuleDefinitionBase:
 
         Parameters
         ----------
-        context : UserBaselineProposedVals
-            Object containing the contexts for the user, baseline, and proposed RMRs
+        context : RuleSetModels
+            Object containing the contexts for RMDs of required ruleset model type
         data : An optional data object of any form.
 
         Returns
@@ -328,30 +325,15 @@ class RuleDefinitionBase:
             the empty dict, {}, is returned.
         """
         retval = {}
-
-        user_invalid_str = (
-            self.check_user_context_validity(context.user, data)
-            if self.rmrs_used.user
-            else ""
-        )
-        if user_invalid_str:
-            retval["INVALID_USER_CONTEXT"] = user_invalid_str
-
-        baseline_invalid_str = (
-            self.check_baseline_context_validity(context.baseline, data)
-            if self.rmrs_used.baseline
-            else ""
-        )
-        if baseline_invalid_str:
-            retval["INVALID_BASELINE_CONTEXT"] = baseline_invalid_str
-
-        proposed_invalid_str = (
-            self.check_proposed_context_validity(context.proposed, data)
-            if self.rmrs_used.proposed
-            else ""
-        )
-        if proposed_invalid_str:
-            retval["INVALID_PROPOSED_CONTEXT"] = proposed_invalid_str
+        ruleset_models = context.get_ruleset_model_types()
+        for ruleset_model in ruleset_models:
+            invalid_str = (
+                self.check_single_context_validity(context[ruleset_model], data)
+                if context[ruleset_model]
+                else ""
+            )
+            if invalid_str:
+                retval[f"INVALID_{ruleset_model}_CONTEXT"] = invalid_str
 
         return retval
 
@@ -385,78 +367,6 @@ class RuleDefinitionBase:
                     invalid_list.append(invalid_str)
 
         return "; ".join(invalid_list) if len(invalid_list) > 0 else ""
-
-    def check_user_context_validity(self, user_context, data=None):
-        """Check the validity of the USER part of the context trio
-
-        This may be overridden to provide alternate validation for the USER part
-        of the context trio.
-
-        This implementation simply calls the check_single_context_validity
-        method with the user_context.
-
-        Parameters
-        ----------
-        user_context : object
-            The USER part of the context trio
-        data : object
-            An optional data object of any form
-
-        Returns
-        -------
-        string
-            A validation error message. The empty string indicates a valid
-            user_context.
-        """
-        return self.check_single_context_validity(user_context, data)
-
-    def check_baseline_context_validity(self, baseline_context, data=None):
-        """Check the validity of the BASELINE part of the context trio
-
-        This may be overridden to provide alternate validation for the BASELINE
-        part of the context trio.
-
-        This implementation simply calls the check_single_context_validity
-        method with the baseline_context.
-
-        Parameters
-        ----------
-        baseline_context : object
-            The BASELINE part of the context trio
-        data : object
-            An optional data object of any form
-
-        Returns
-        -------
-        string
-            A validation error message. The empty string indicates a valid
-            baseline_context.
-        """
-        return self.check_single_context_validity(baseline_context, data)
-
-    def check_proposed_context_validity(self, proposed_context, data=None):
-        """Check the validity of the PROPOSED part of the context trio
-
-        This may be overridden to provide alternate validation for the PROPOSED
-        part of the context trio.
-
-        This implementation simply calls the check_single_context_validity
-        method with the proposed_context.
-
-        Parameters
-        ----------
-        proposed_context : object
-            The PROPOSED part of the context trio
-        data : object
-            An optional data object of any form
-
-        Returns
-        -------
-        string
-            A validation error message. The empty string indicates a valid
-            proposed_context.
-        """
-        return self.check_single_context_validity(proposed_context, data)
 
     def _missing_fields_str(self, jpath, required_fields, single_context):
         """Untility method for listing missing required fields in a single

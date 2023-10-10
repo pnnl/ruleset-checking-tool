@@ -7,11 +7,15 @@ from rct229.schema.config import ureg
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.pint_utils import ZERO, CalcQ
 
-GUEST_ROOM = SchemaEnums.schema_enums["LightingSpaceOptions2019ASHRAE901TG37"].GUEST_ROOM
+GUEST_ROOM = SchemaEnums.schema_enums[
+    "LightingSpaceOptions2019ASHRAE901TG37"
+].GUEST_ROOM
 DORMITORY_LIVING_QUARTERS = SchemaEnums.schema_enums[
     "LightingSpaceOptions2019ASHRAE901TG37"
 ].DORMITORY_LIVING_QUARTERS
-DWELLING_UNIT = SchemaEnums.schema_enums["LightingSpaceOptions2019ASHRAE901TG37"].DWELLING_UNIT
+DWELLING_UNIT = SchemaEnums.schema_enums[
+    "LightingSpaceOptions2019ASHRAE901TG37"
+].DWELLING_UNIT
 
 DWELLING_UNIT_MIN_LIGHTING_POWER_PER_AREA = 0.6 * ureg("W/ft2")
 

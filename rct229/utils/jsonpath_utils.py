@@ -48,3 +48,18 @@ def find_exactly_one(jpath, obj):
         len(matches) == 1
     ), f"Search data referenced in {jpath} returned multiple or None results"
     return matches[0]
+
+
+def find_ruleset_model_type(rmd):
+    """
+    Search for the ruleset model type from an RMD
+
+    Parameters
+    ----------
+    rmd: json
+
+    Returns: str
+    -------
+
+    """
+    return find_exactly_one("$.type", rmd)

@@ -7,7 +7,7 @@ from jsonpath_ng.ext import parse as parse_jsonpath
 from pydash.objects import set_
 
 import rct229.schema.config as config
-from rct229.schema import SchemaStore
+from rct229.schema.schema_store import SchemaStore
 
 
 def clean_schema_units(schema_unit_str):

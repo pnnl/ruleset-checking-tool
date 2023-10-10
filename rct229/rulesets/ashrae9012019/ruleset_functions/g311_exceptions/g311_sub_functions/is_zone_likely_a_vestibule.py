@@ -9,10 +9,14 @@ from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.pint_utils import ZERO
 from rct229.utils.utility_functions import find_exactly_one_zone
 
-LIGHTING_SPACE_OPTIONS = SchemaEnums.schema_enums["LightingSpaceOptions2019ASHRAE901TG37"]
+LIGHTING_SPACE_OPTIONS = SchemaEnums.schema_enums[
+    "LightingSpaceOptions2019ASHRAE901TG37"
+]
 SURFACE_ADJACENT_TO_OPTIONS = SchemaEnums.schema_enums["SurfaceAdjacencyOptions"]
 
-SUBSURFACE_CLASSIFICATION_OPTIONS = SchemaEnums.schema_enums["SubsurfaceClassificationOptions"]
+SUBSURFACE_CLASSIFICATION_OPTIONS = SchemaEnums.schema_enums[
+    "SubsurfaceClassificationOptions"
+]
 
 
 ALLOWABLE_SPACE_LIGHTING_TYPES = [
