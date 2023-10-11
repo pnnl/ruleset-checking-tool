@@ -7,7 +7,6 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_heat_rejection_loops_co
 from rct229.schema.config import ureg
 from rct229.utils.assertions import getattr_
 from rct229.utils.pint_utils import ZERO, CalcQ
-from rct229.utils.std_comparisons import std_equal
 
 FAN_SHAFT_POWER_FACTOR = 0.9
 HEAT_REJ_EFF_LIMIT = 38.2 * ureg("gpm/hp")
@@ -102,27 +101,27 @@ class Section22Rule17(RuleDefinitionListIndexedBase):
                 heat_rejection_efficiency_b.to(ureg("gpm/hp")).magnitude, 1
             )
 
-            if std_equal(HEAT_REJ_EFF_LIMIT, heat_rejection_efficiency_b):
-                UNDETERMINED_MSG = (
+            if HEAT_REJ_EFF_LIMIT == heat_rejection_efficiency_b:
+                undetermined_msg = (
                     f"The project includes a cooling tower. We calculated the cooling tower efficiency to be correct at 38.2 gpm/hp. "
                     f"However, it was not possible to verify that the modeling inputs correspond to the rating conditions in Table 6.8.1-7. "
                     f"{additional_note_for_no_shaft_power_b}"
                 )
             elif heat_rejection_efficiency_b > HEAT_REJ_EFF_LIMIT:
-                UNDETERMINED_MSG = (
+                undetermined_msg = (
                     f"The project includes a cooling tower. We calculated the cooling tower efficiency to be {heat_rejection_efficiency_in_gpm_per_hp_b}, "
                     f"which is greater than the required efficiency of 38.2 gpm/hp, "
                     f"resulting in a more stringent baseline. However, it was not possible to verify that the modeling inputs correspond to the rating conditions in Table 6.8.1-7. "
                     f"{additional_note_for_no_shaft_power_b}"
                 )
             else:
-                UNDETERMINED_MSG = (
+                undetermined_msg = (
                     f"The project includes a cooling tower. We calculated the cooling tower efficiency to be {heat_rejection_efficiency_in_gpm_per_hp_b}, "
                     f"which is less than the required efficiency of 38.2 gpm / hp.  However, it was not possible to verify that the modeling inputs correspond to the rating conditions in Table 6.8.1-7. "
                     f"Please review the efficiency and ensure that it is correct at the rating conditions as specified in the Table 6.8.1-7. {additional_note_for_no_shaft_power_b}"
                 )
 
-            return UNDETERMINED_MSG
+            return undetermined_msg
 
         def rule_check(self, context, calc_vals=None, data=None):
             return True
