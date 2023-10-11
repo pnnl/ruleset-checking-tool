@@ -43,14 +43,14 @@ class Section22Rule17(RuleDefinitionListIndexedBase):
             super(Section22Rule17.HeatRejectionRule, self).__init__(
                 rmrs_used=UserBaselineProposedVals(False, True, False),
                 required_fields={
-                    "$": ["rated_water_flowrate"],
+                    "$": ["loop", "rated_water_flowrate"],
                 },
             )
 
         def is_applicable(self, context, data=None):
             heat_rejection_b = context.baseline
             heat_rejection_loop_ids_b = data["heat_rejection_loop_ids_b"]
-            heat_rejection_loop_b = getattr_(heat_rejection_b, "loop", "loop")
+            heat_rejection_loop_b = heat_rejection_b["loop"]
 
             return heat_rejection_loop_b in heat_rejection_loop_ids_b
 
@@ -62,11 +62,11 @@ class Section22Rule17(RuleDefinitionListIndexedBase):
                 if heat_rejection_b.get("fan_shaft_power")
                 else (
                     getattr_(
-                        heat_rejection_b, "heat_rejection", "fan_motor_nameplate_power"
+                        heat_rejection_b, "heat_rejections", "fan_motor_nameplate_power"
                     )
                     * FAN_SHAFT_POWER_FACTOR
                     * getattr_(
-                        heat_rejection_b, "heat_rejection", "fan_motor_efficiency"
+                        heat_rejection_b, "heat_rejections", "fan_motor_efficiency"
                     )
                 )
             )
@@ -102,17 +102,17 @@ class Section22Rule17(RuleDefinitionListIndexedBase):
                 heat_rejection_efficiency_b.to(ureg("gpm/hp")).magnitude, 1
             )
 
-            if heat_rejection_efficiency_b > HEAT_REJ_EFF_LIMIT:
+            if std_equal(HEAT_REJ_EFF_LIMIT, heat_rejection_efficiency_b):
+                UNDETERMINED_MSG = (
+                    f"The project includes a cooling tower. We calculated the cooling tower efficiency to be correct at 38.2 gpm/hp. "
+                    f"However, it was not possible to verify that the modeling inputs correspond to the rating conditions in Table 6.8.1-7. "
+                    f"{additional_note_for_no_shaft_power_b}"
+                )
+            elif heat_rejection_efficiency_b > HEAT_REJ_EFF_LIMIT:
                 UNDETERMINED_MSG = (
                     f"The project includes a cooling tower. We calculated the cooling tower efficiency to be {heat_rejection_efficiency_in_gpm_per_hp_b}, "
                     f"which is greater than the required efficiency of 38.2 gpm/hp, "
                     f"resulting in a more stringent baseline. However, it was not possible to verify that the modeling inputs correspond to the rating conditions in Table 6.8.1-7. "
-                    f"{additional_note_for_no_shaft_power_b}"
-                )
-            elif std_equal(HEAT_REJ_EFF_LIMIT, heat_rejection_efficiency_b):
-                UNDETERMINED_MSG = (
-                    f"The project includes a cooling tower. We calculated the cooling tower efficiency to be correct at 38.2 gpm/hp. "
-                    f"However, it was not possible to verify that the modeling inputs correspond to the rating conditions in Table 6.8.1-7. "
                     f"{additional_note_for_no_shaft_power_b}"
                 )
             else:
