@@ -5,7 +5,6 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_heat_rejection_loops_co
     get_heat_rejection_loops_connected_to_baseline_systems,
 )
 from rct229.schema.config import ureg
-from rct229.utils.assertions import getattr_
 from rct229.utils.pint_utils import CalcQ
 from rct229.utils.std_comparisons import std_equal
 
@@ -43,19 +42,15 @@ class Section22Rule15(RuleDefinitionListIndexedBase):
             super(Section22Rule15.HeatRejectionRule, self).__init__(
                 rmrs_used=UserBaselineProposedVals(False, True, False),
                 required_fields={
-                    "$": ["approach"],
+                    "$": ["approach", "loop", "design_wetbulb_temperature"],
                 },
             )
 
         def is_applicable(self, context, data=None):
             heat_rejection_b = context.baseline
             heat_rejection_loop_ids_b = data["heat_rejection_loop_ids_b"]
-            heat_rejection_loop_b = getattr_(heat_rejection_b, "loop", "loop")
-            design_wetbulb_temp_b = getattr_(
-                heat_rejection_b,
-                "design_wetbulb_temperature",
-                "design_wetbulb_temperature",
-            )
+            heat_rejection_loop_b = heat_rejection_b["loop"]
+            design_wetbulb_temp_b = heat_rejection_b["design_wetbulb_temperature"]
 
             return (
                 heat_rejection_loop_b in heat_rejection_loop_ids_b
@@ -65,7 +60,9 @@ class Section22Rule15(RuleDefinitionListIndexedBase):
         def get_calc_vals(self, context, data=None):
             heat_rejection_b = context.baseline
             approach_b = heat_rejection_b["approach"]
-            target_approach_b = heat_rejection_b["design_wetbulb_temperature"]
+            target_approach_b = 25.72 * ureg("degF") - (
+                0.24 * heat_rejection_b["design_wetbulb_temperature"].to(ureg.F)
+            )
 
             return {
                 "approach_b": CalcQ("temperature", approach_b),
@@ -76,6 +73,4 @@ class Section22Rule15(RuleDefinitionListIndexedBase):
             approach_b = calc_vals["approach_b"]
             target_approach_b = calc_vals["target_approach_b"]
 
-            return std_equal(
-                target_approach_b.to(ureg.kelvin), approach_b.to(ureg.kelvin)
-            )
+            return std_equal(target_approach_b.to(ureg.kelvin), approach_b)
