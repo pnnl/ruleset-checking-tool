@@ -28,14 +28,6 @@ class Section22Rule13(RuleDefinitionListIndexedBase):
             list_path="$.heat_rejections[*]",
         )
 
-    def is_applicable(self, context, data=None):
-        rmd_b = context.baseline
-        heat_rejection_loop_ids_b = (
-            get_heat_rejection_loops_connected_to_baseline_systems(rmd_b)
-        )
-
-        return heat_rejection_loop_ids_b
-
     def create_data(self, context, data=None):
         rmd_b = context.baseline
         heat_rejection_loop_ids_b = (
@@ -59,6 +51,15 @@ class Section22Rule13(RuleDefinitionListIndexedBase):
                     "$": ["fan_type", "type"],
                 },
             )
+
+        def is_applicable(self, context, data=None):
+            heat_rejection_b = context.baseline
+            heat_rejection_loop_b = getattr_(
+                heat_rejection_b, "heat_rejections", "loop"
+            )
+            heat_rejection_loop_ids_b = data["heat_rejection_loop_ids_b"]
+
+            return heat_rejection_loop_b in heat_rejection_loop_ids_b
 
         def get_calc_vals(self, context, data=None):
             heat_rejection_b = context.baseline
