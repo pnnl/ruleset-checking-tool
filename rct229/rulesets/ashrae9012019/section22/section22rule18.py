@@ -5,7 +5,6 @@ from rct229.rulesets.ashrae9012019.data.schema_enums import schema_enums
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_heat_rejection_loops_connected_to_baseline_systems import (
     get_heat_rejection_loops_connected_to_baseline_systems,
 )
-from rct229.utils.assertions import getattr_
 
 HEATREJECTIONFANSPEEDCONTROL = schema_enums["HeatRejectionFanSpeedControlOptions"]
 
@@ -41,18 +40,14 @@ class Section22Rule18(RuleDefinitionListIndexedBase):
             super(Section22Rule18.HeatRejectionRule, self).__init__(
                 rmrs_used=UserBaselineProposedVals(False, True, False),
                 required_fields={
-                    "$": ["fan_speed_control"],
+                    "$": ["fan_speed_control", "loop"],
                 },
             )
 
         def is_applicable(self, context, data=None):
             heat_rejection_b = context.baseline
             heat_rejection_loop_ids_b = data["heat_rejection_loop_ids_b"]
-            heat_rejection_loop_b = getattr_(
-                heat_rejection_b,
-                "heat_rejections",
-                "loop",
-            )
+            heat_rejection_loop_b = heat_rejection_b["loop"]
 
             return heat_rejection_loop_b in heat_rejection_loop_ids_b
 
