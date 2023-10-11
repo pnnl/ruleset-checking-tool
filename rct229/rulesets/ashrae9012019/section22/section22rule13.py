@@ -36,13 +36,6 @@ class Section22Rule13(RuleDefinitionListIndexedBase):
 
         return {"heat_rejection_loop_ids_b": heat_rejection_loop_ids_b}
 
-    def list_filter(self, context_item, data):
-        heat_rejection_b = context_item.baseline
-        heat_rejection_loop_ids_b = data["heat_rejection_loop_ids_b"]
-        heat_rejection_loop_b = getattr_(heat_rejection_b, "heat_rejections", "loop")
-
-        return heat_rejection_loop_b in heat_rejection_loop_ids_b
-
     class HeatRejectionRule(RuleDefinitionBase):
         def __init__(self):
             super(Section22Rule13.HeatRejectionRule, self).__init__(
