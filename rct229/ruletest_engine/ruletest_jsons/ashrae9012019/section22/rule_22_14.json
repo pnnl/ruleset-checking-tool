@@ -145,7 +145,7 @@
                         "heat_rejections": [
                             {
                                 "id": "Heat Rejection 1",
-                                "loop": "Chiller Loop 1",
+                                "loop": "Condenser Loop 1",
                                 "range": 5.555555555555555
                             }
                         ]
@@ -300,7 +300,7 @@
                         "heat_rejections": [
                             {
                                 "id": "Heat Rejection 1",
-                                "loop": "Chiller Loop 1",
+                                "loop": "Condenser Loop 1",
                                 "range": 8.333333333333334
                             }
                         ]
@@ -455,7 +455,7 @@
                         "heat_rejections": [
                             {
                                 "id": "Heat Rejection 1",
-                                "loop": "Chiller Loop 1",
+                                "loop": "Condenser Loop 1",
                                 "range": 5.555555555555555
                             }
                         ]
@@ -610,7 +610,7 @@
                         "heat_rejections": [
                             {
                                 "id": "Heat Rejection 1",
-                                "loop": "Chiller Loop 1",
+                                "loop": "Condenser Loop 1",
                                 "range": 8.333333333333334
                             }
                         ]

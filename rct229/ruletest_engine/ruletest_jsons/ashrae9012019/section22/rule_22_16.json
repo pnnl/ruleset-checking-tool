@@ -103,7 +103,8 @@
                         "chillers": [
                             {
                                 "id": "Chiller 1",
-                                "cooling_loop": "Chiller Loop 1"
+                                "cooling_loop": "Chiller Loop 1",
+                                "condensing_loop": "Condenser Loop 1"
                             }
                         ],
                         "pumps": [
@@ -146,7 +147,7 @@
                         "heat_rejections": [
                             {
                                 "id": "Heat Rejection 1",
-                                "loop": "Chiller Loop 1",
+                                "loop": "Condenser Loop 1",
                                 "design_wetbulb_temperature": 12.777777777777828,
                                 "approach": 2.7777777777777777
                             }
@@ -260,7 +261,8 @@
                         "chillers": [
                             {
                                 "id": "Chiller 1",
-                                "cooling_loop": "Chiller Loop 1"
+                                "cooling_loop": "Chiller Loop 1",
+                                "condensing_loop": "Condenser Loop 1"
                             }
                         ],
                         "pumps": [
@@ -303,7 +305,7 @@
                         "heat_rejections": [
                             {
                                 "id": "Heat Rejection 1",
-                                "loop": "Chiller Loop 1",
+                                "loop": "Condenser Loop 1",
                                 "design_wetbulb_temperature": 12.777777777777828,
                                 "approach": 5.555555555555555
                             }
@@ -417,7 +419,8 @@
                         "chillers": [
                             {
                                 "id": "Chiller 1",
-                                "cooling_loop": "Chiller Loop 1"
+                                "cooling_loop": "Chiller Loop 1",
+                                "condensing_loop": "Condenser Loop 1"
                             }
                         ],
                         "pumps": [
@@ -460,7 +463,7 @@
                         "heat_rejections": [
                             {
                                 "id": "Heat Rejection 1",
-                                "loop": "Chiller Loop 1",
+                                "loop": "Condenser Loop 1",
                                 "design_wetbulb_temperature": 12.222222222222285,
                                 "approach": 5.555555555555555
                             }
@@ -557,7 +560,8 @@
                         "chillers": [
                             {
                                 "id": "Chiller 1",
-                                "cooling_loop": "Chiller Loop 1"
+                                "cooling_loop": "Chiller Loop 1",
+                                "condensing_loop": "Condenser Loop 1"
                             }
                         ],
                         "pumps": [
@@ -600,7 +604,7 @@
                         "heat_rejections": [
                             {
                                 "id": "Heat Rejection 1",
-                                "loop": "Chiller Loop 1",
+                                "loop": "Condenser Loop 1",
                                 "design_wetbulb_temperature": 32.222222222222285,
                                 "approach": 2.7777777777777777
                             }
@@ -697,7 +701,8 @@
                         "chillers": [
                             {
                                 "id": "Chiller 1",
-                                "cooling_loop": "Chiller Loop 1"
+                                "cooling_loop": "Chiller Loop 1",
+                                "condensing_loop": "Condenser Loop 1"
                             }
                         ],
                         "pumps": [
@@ -740,7 +745,7 @@
                         "heat_rejections": [
                             {
                                 "id": "Heat Rejection 1",
-                                "loop": "Chiller Loop 1",
+                                "loop": "Condenser Loop 1",
                                 "design_wetbulb_temperature": 32.222222222222285,
                                 "approach": 5.555555555555555
                             }
@@ -837,7 +842,8 @@
                         "chillers": [
                             {
                                 "id": "Chiller 1",
-                                "cooling_loop": "Chiller Loop 1"
+                                "cooling_loop": "Chiller Loop 1",
+                                "condensing_loop": "Condenser Loop 1"
                             }
                         ],
                         "pumps": [
@@ -880,7 +886,7 @@
                         "heat_rejections": [
                             {
                                 "id": "Heat Rejection 1",
-                                "loop": "Chiller Loop 1",
+                                "loop": "Condenser Loop 1",
                                 "design_wetbulb_temperature": 35.5555555555556,
                                 "approach": 5.555555555555555
                             }
