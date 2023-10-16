@@ -43,7 +43,7 @@ class Section6Rule3(RuleDefinitionListIndexedBase):
             )
 
         def create_data(self, context, data=None):
-            building_segment_p = context.proposed
+            building_segment_p = context.PROPOSED
             return {
                 "building_segment_lighting_status_type_dict_p": get_building_segment_lighting_status_type_dict(
                     building_segment_p
@@ -59,8 +59,8 @@ class Section6Rule3(RuleDefinitionListIndexedBase):
                 )
 
             def get_calc_vals(self, context, data=None):
-                space_u = context.user
-                space_p = context.proposed
+                space_u = context.USER
+                space_p = context.PROPOSED
                 total_space_lpd_u = sum(
                     find_all("interior_lighting[*].power_per_area", space_u)
                 )

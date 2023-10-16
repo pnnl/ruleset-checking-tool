@@ -55,7 +55,7 @@ class Section5Rule49(RuleDefinitionListIndexedBase):
             )
 
         def get_calc_vals(self, context, data=None):
-            building_p = context.proposed
+            building_p = context.PROPOSED
 
             scc_dict_p = get_surface_conditioning_category_dict(
                 data["climate_zone"], building_p

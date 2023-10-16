@@ -29,7 +29,7 @@ class Section5Rule42(RuleDefinitionListIndexedBase):
                 "weather": ["climate_zone"],
             },
             each_rule=Section5Rule42.BuildingRule(),
-            index_rmr="baseline",
+            index_rmr=RMT.BASELINE_0,
             id="5-42",
             description=" The baseline roof surfaces shall be modeled using a solar reflectance of 0.30",
             ruleset_section_title="Envelope",
@@ -44,12 +44,12 @@ class Section5Rule42(RuleDefinitionListIndexedBase):
             super(Section5Rule42.BuildingRule, self).__init__(
                 rmrs_used=UserBaselineProposedVals(False, True, False),
                 each_rule=Section5Rule42.BuildingRule.RoofRule(),
-                index_rmr="baseline",
+                index_rmr=RMT.BASELINE_0,
                 list_path="$.building_segments[*].zones[*].surfaces[*]",
             )
 
         def create_data(self, context, data=None):
-            building_b = context.baseline
+            building_b = context.BASELINE_0
             return {
                 "scc_dict_b": get_surface_conditioning_category_dict(
                     data["climate_zone"], building_b
@@ -57,7 +57,7 @@ class Section5Rule42(RuleDefinitionListIndexedBase):
             }
 
         def list_filter(self, context_item, data=None):
-            surface_b = context_item.baseline
+            surface_b = context_item.BASELINE_0
             return (
                 get_opaque_surface_type(surface_b) == OST.ROOF
                 and data["scc_dict_b"][surface_b["id"]] != SCC.UNREGULATED
@@ -74,7 +74,7 @@ class Section5Rule42(RuleDefinitionListIndexedBase):
                 )
 
             def get_calc_vals(self, context, data=None):
-                roof_b = context.baseline
+                roof_b = context.BASELINE_0
                 return {
                     "absorptance_solar_exterior": roof_b["optical_properties"][
                         "absorptance_solar_exterior"

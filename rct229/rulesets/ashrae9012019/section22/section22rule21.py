@@ -34,7 +34,7 @@ class Section22Rule21(RuleDefinitionListIndexedBase):
         super(Section22Rule21, self).__init__(
             rmrs_used=UserBaselineProposedVals(False, True, False),
             each_rule=Section22Rule21.ChillerRule(),
-            index_rmr="baseline",
+            index_rmr=RMT.BASELINE_0,
             id="22-21",
             description="The baseline building design’s chiller plant shall be modeled with chillers having the type as indicated in Table G3.1.3.7 as a function of building peak cooling load.",
             ruleset_section_title="HVAC - Chiller",
@@ -48,7 +48,7 @@ class Section22Rule21(RuleDefinitionListIndexedBase):
         )
 
     def is_applicable(self, context, data=None):
-        rmi_b = context.baseline
+        rmi_b = context.BASELINE_0
         baseline_system_types_dict = get_baseline_system_types(rmi_b)
         # create a list containing all HVAC systems that are modeled in the rmi_b
         available_type_list = [
@@ -64,7 +64,7 @@ class Section22Rule21(RuleDefinitionListIndexedBase):
         )
 
     def create_data(self, context, data):
-        rmi_b = context.baseline
+        rmi_b = context.BASELINE_0
 
         output_b = rmi_b["output"]
         building_cooling_peak_load = getattr_(
@@ -86,7 +86,7 @@ class Section22Rule21(RuleDefinitionListIndexedBase):
             )
 
         def get_calc_vals(self, context, data=None):
-            chiller_b = context.baseline
+            chiller_b = context.BASELINE_0
             compressor_type = chiller_b["compressor_type"]
 
             building_cooling_peak_load = data["building_cooling_peak_load"]

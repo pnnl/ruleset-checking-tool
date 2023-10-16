@@ -24,7 +24,7 @@ class Section19Rule1(RuleDefinitionListIndexedBase):
         super(Section19Rule1, self).__init__(
             rmrs_used=UserBaselineProposedVals(False, True, False),
             each_rule=Section19Rule1.HVACRule(),
-            index_rmr="baseline",
+            index_rmr=RMT.BASELINE_0,
             id="19-1",
             description="HVAC system coil capacities for the baseline building design shall be oversized by 15% for cooling and 25% for heating.",
             ruleset_section_title="HVAC - General",
@@ -35,7 +35,7 @@ class Section19Rule1(RuleDefinitionListIndexedBase):
         )
 
     def create_data(self, context, data):
-        rmi_b = context.baseline
+        rmi_b = context.BASELINE_0
 
         hvac_id_to_flags = {
             hvac_id: {
@@ -64,7 +64,7 @@ class Section19Rule1(RuleDefinitionListIndexedBase):
             )
 
         def is_applicable(self, context, data=None):
-            hvac_b = context.baseline
+            hvac_b = context.BASELINE_0
             hvac_id_b = hvac_b["id"]
             hvac_id_to_flags = data["hvac_id_to_flags"]
 
@@ -77,7 +77,7 @@ class Section19Rule1(RuleDefinitionListIndexedBase):
             )
 
         def get_calc_vals(self, context, data=None):
-            hvac_b = context.baseline
+            hvac_b = context.BASELINE_0
             hvac_id_b = hvac_b["id"]
 
             is_hvac_sys_heating_type_furnace_flag = data["hvac_id_to_flags"][hvac_id_b][

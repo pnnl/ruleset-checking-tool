@@ -37,10 +37,10 @@ class Section5Rule46(RuleDefinitionListIndexedBase):
         def get_calc_vals(self, context, data=None):
             failing_infiltration_zone_ids = []
             baseline_zones = find_all(
-                "$.building_segments[*].zones[*]", context.baseline
+                "$.building_segments[*].zones[*]", context.BASELINE_0
             )
             proposed_zones = find_all(
-                "$.building_segments[*].zones[*]", context.proposed
+                "$.building_segments[*].zones[*]", context.PROPOSED
             )
 
             # This assumes that the surfaces all match

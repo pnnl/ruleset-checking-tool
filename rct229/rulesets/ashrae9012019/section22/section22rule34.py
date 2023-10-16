@@ -32,7 +32,7 @@ class Section22Rule34(RuleDefinitionListIndexedBase):
         super(Section22Rule34, self).__init__(
             rmrs_used=UserBaselineProposedVals(False, True, False),
             each_rule=Section22Rule34.CoolingFluidLoopRule(),
-            index_rmr="baseline",
+            index_rmr=RMT.BASELINE_0,
             id="22-34",
             description="For baseline cooling chilled water plant that is served by chiller(s), the capacity shall be based on coincident loads.",
             ruleset_section_title="HVAC - Chiller",
@@ -43,7 +43,7 @@ class Section22Rule34(RuleDefinitionListIndexedBase):
         )
 
     def is_applicable(self, context, data=None):
-        rmi_b = context.baseline
+        rmi_b = context.BASELINE_0
         baseline_system_types_dict = get_baseline_system_types(rmi_b)
         # create a list containing all HVAC systems that are modeled in the rmi_b
         available_type_list = [
@@ -59,13 +59,13 @@ class Section22Rule34(RuleDefinitionListIndexedBase):
         )
 
     def create_data(self, context, data):
-        rmi_b = context.baseline
+        rmi_b = context.BASELINE_0
         primary_secondary_loop_dict = get_primary_secondary_loops_dict(rmi_b)
 
         return {"primary_secondary_loop_dict": primary_secondary_loop_dict}
 
     def list_filter(self, context_item, data):
-        fluid_loops_b = context_item.baseline
+        fluid_loops_b = context_item.BASELINE_0
         primary_secondary_loop_dict = data["primary_secondary_loop_dict"]
 
         return fluid_loops_b["id"] in primary_secondary_loop_dict
@@ -83,7 +83,7 @@ class Section22Rule34(RuleDefinitionListIndexedBase):
             )
 
         def get_calc_vals(self, context, data=None):
-            fluid_loop_b = context.baseline
+            fluid_loop_b = context.BASELINE_0
             is_sized_using_coincident_load = fluid_loop_b[
                 "cooling_or_condensing_design_and_control"
             ]["is_sized_using_coincident_load"]

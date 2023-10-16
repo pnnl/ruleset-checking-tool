@@ -29,8 +29,8 @@ class Section12Rule1(RuleDefinitionListIndexedBase):
             )
 
         def get_calc_vals(self, context, data=None):
-            user_spaces = find_all("$..spaces[*]", context.user)
-            baseline_spaces = find_all("$..spaces[*]", context.baseline)
+            user_spaces = find_all("$..spaces[*]", context.USER)
+            baseline_spaces = find_all("$..spaces[*]", context.BASELINE_0)
             return {
                 "num_user_spaces": len(user_spaces),
                 "num_baseline_spaces": len(baseline_spaces),

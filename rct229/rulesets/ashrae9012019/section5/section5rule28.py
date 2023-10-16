@@ -24,7 +24,7 @@ class Section5Rule28(RuleDefinitionListIndexedBase):
                 "weather": ["climate_zone"],
             },
             each_rule=Section5Rule28.BuildingRule(),
-            index_rmr="baseline",
+            index_rmr=RMT.BASELINE_0,
             id="5-28",
             description="Subsurface that is not regulated (not part of building envelope) must be modeled with the same area, U-factor and SHGC in the baseline as in the proposed design.",
             ruleset_section_title="Envelope",
@@ -39,12 +39,12 @@ class Section5Rule28(RuleDefinitionListIndexedBase):
             super(Section5Rule28.BuildingRule, self).__init__(
                 rmrs_used=UserBaselineProposedVals(False, True, True),
                 each_rule=Section5Rule28.BuildingRule.UnregulatedSurfaceRule(),
-                index_rmr="baseline",
+                index_rmr=RMT.BASELINE_0,
                 list_path="$.building_segments[*].zones[*].surfaces[*]",
             )
 
         def create_data(self, context, data=None):
-            building = context.baseline
+            building = context.BASELINE_0
             return {
                 "scc_dict_b": get_surface_conditioning_category_dict(
                     data["climate_zone"], building
@@ -52,7 +52,7 @@ class Section5Rule28(RuleDefinitionListIndexedBase):
             }
 
         def list_filter(self, context_item, data=None):
-            surface_b = context_item.baseline
+            surface_b = context_item.BASELINE_0
 
             return data["scc_dict_b"][surface_b["id"]] == SCC.UNREGULATED
 
@@ -64,7 +64,7 @@ class Section5Rule28(RuleDefinitionListIndexedBase):
                     rmrs_used=UserBaselineProposedVals(False, True, True),
                     list_path="subsurfaces[*]",
                     each_rule=Section5Rule28.BuildingRule.UnregulatedSurfaceRule.UnregulatedSubsurfaceRule(),
-                    index_rmr="baseline",
+                    index_rmr=RMT.BASELINE_0,
                 )
 
             class UnregulatedSubsurfaceRule(RuleDefinitionBase):
@@ -78,8 +78,8 @@ class Section5Rule28(RuleDefinitionListIndexedBase):
                     )
 
                 def get_calc_vals(self, context, data=None):
-                    subsurface_b = context.baseline
-                    subsurface_p = context.proposed
+                    subsurface_b = context.BASELINE_0
+                    subsurface_p = context.PROPOSED
 
                     return {
                         "subsurface_u_factor_b": CalcQ(

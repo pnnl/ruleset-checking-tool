@@ -31,7 +31,7 @@ class Section21Rule18(RuleDefinitionListIndexedBase):
         super(Section21Rule18, self).__init__(
             rmrs_used=UserBaselineProposedVals(False, True, False),
             each_rule=Section21Rule18.BoilerRule(),
-            index_rmr="baseline",
+            index_rmr=RMT.BASELINE_0,
             id="21-18",
             description="For baseline building, fossil fuel systems shall be modeled using natural gas as their fuel source. Exception: For fossil fuel systems where natural gas is not available for the proposed building site as determined by the rating authority, the baseline HVAC systems shall be modeled using propane as their fuel.",
             ruleset_section_title="HVAC - Water Side",
@@ -42,7 +42,7 @@ class Section21Rule18(RuleDefinitionListIndexedBase):
         )
 
     def is_applicable(self, context, data=None):
-        rmi_b = context.baseline
+        rmi_b = context.BASELINE_0
         baseline_system_types_dict = get_baseline_system_types(rmi_b)
         # create a list containing all HVAC systems that are modeled in the rmi_b
         available_type_list = [
@@ -68,7 +68,7 @@ class Section21Rule18(RuleDefinitionListIndexedBase):
             )
 
         def get_calc_vals(self, context, data=None):
-            boiler_b = context.baseline
+            boiler_b = context.BASELINE_0
             boiler_energy_source_type_b = boiler_b["energy_source_type"]
             return {"boiler_energy_source_type_b": boiler_energy_source_type_b}
 

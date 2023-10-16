@@ -17,7 +17,7 @@ class Section19Rule27(RuleDefinitionListIndexedBase):
         super(Section19Rule27, self).__init__(
             rmrs_used=UserBaselineProposedVals(False, True, False),
             each_rule=Section19Rule27.HVACRule(),
-            index_rmr="baseline",
+            index_rmr=RMT.BASELINE_0,
             id="19-27",
             description="HVAC fans shall remain on during unoccupied hours in spaces that have health and safety mandated minimum ventilation requirements during unoccupied hours in the baseline design.",
             ruleset_section_title="HVAC - General",
@@ -28,7 +28,7 @@ class Section19Rule27(RuleDefinitionListIndexedBase):
         )
 
     def create_data(self, context, data):
-        rmi_b = context.baseline
+        rmi_b = context.BASELINE_0
         applicable_hvac_systems_list_b = (
             get_hvac_systems_serving_zone_health_safety_vent_reqs(rmi_b)
         )
@@ -49,14 +49,14 @@ class Section19Rule27(RuleDefinitionListIndexedBase):
             )
 
         def is_applicable(self, context, data=None):
-            hvac_b = context.baseline
+            hvac_b = context.BASELINE_0
             hvac_id_b = hvac_b["id"]
             applicable_hvac_systems_list_b = data["applicable_hvac_systems_list_b"]
 
             return hvac_id_b in applicable_hvac_systems_list_b
 
         def get_calc_vals(self, context, data=None):
-            hvac_b = context.baseline
+            hvac_b = context.BASELINE_0
 
             operation_during_unoccupied_b = hvac_b["fan_system"][
                 "operation_during_unoccupied"
@@ -78,7 +78,7 @@ class Section19Rule27(RuleDefinitionListIndexedBase):
             )
 
         def get_fail_msg(self, context, calc_vals=None, data=None):
-            hvac_b = context.baseline
+            hvac_b = context.BASELINE_0
             hvac_id_b = hvac_b["id"]
 
             return f"{hvac_id_b} ERVES ZONE(S) THAT APPEAR LIKELY TO HAVE HEALTH AND SAFETY MANDATED MINIMUM VENTILATION REQUIREMENTS DURING UNOCCUPIED HOURS AND THEREFORE (IF THE HVAC SYSTEM SUPPLIES OA CFM) MAY WARRANT CONTINUOUS OPERATION DURING UNOCCUPIED HOURS PER SECTION G3.1-4 SCHEDULES EXCEPTION #2 FOR THE BASELINE BUILDING AND PER SECTION G3.1.2.4."

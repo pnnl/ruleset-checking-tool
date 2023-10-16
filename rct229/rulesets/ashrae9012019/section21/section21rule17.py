@@ -37,7 +37,7 @@ class Section21Rule17(RuleDefinitionListIndexedBase):
         super(Section21Rule17, self).__init__(
             rmrs_used=UserBaselineProposedVals(False, True, False),
             each_rule=Section21Rule17.BoilerRule(),
-            index_rmr="baseline",
+            index_rmr=RMT.BASELINE_0,
             id="21-17",
             description="All boilers in the baseline building design shall be modeled at the minimum efficiency levels, both part load and full load, in accordance with Tables G3.5.6.",
             ruleset_section_title="HVAC - Water Side",
@@ -48,7 +48,7 @@ class Section21Rule17(RuleDefinitionListIndexedBase):
         )
 
     def is_applicable(self, context, data=None):
-        rmi_b = context.baseline
+        rmi_b = context.BASELINE_0
         baseline_system_types_dict = get_baseline_system_types(rmi_b)
         # create a list containing all HVAC systems that are modeled in the rmi_b
         available_type_list = [
@@ -73,7 +73,7 @@ class Section21Rule17(RuleDefinitionListIndexedBase):
             )
 
         def get_calc_vals(self, context, data=None):
-            boiler_b = context.baseline
+            boiler_b = context.BASELINE_0
             boiler_rated_capacity_b = boiler_b["rated_capacity"]
             boiler_efficiency_metric_b = boiler_b["efficiency_metric"]
             boiler_efficiency_b = boiler_b["efficiency"]

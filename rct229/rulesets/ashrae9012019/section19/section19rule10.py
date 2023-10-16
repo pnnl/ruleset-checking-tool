@@ -61,7 +61,7 @@ class Section19Rule10(RuleDefinitionListIndexedBase):
                 "weather": ["climate_zone"],
             },
             each_rule=Section19Rule10.RulesetModelInstanceRule(),
-            index_rmr="baseline",
+            index_rmr=RMT.BASELINE_0,
             id="19-10",
             description="Air economizers shall be included in baseline HVAC Systems 3 through 8, and 11, 12, and 13 based on climate as specified in Section G3.1.2.6 with exceptions."
             "1. Systems that include gas-phase air cleaning to meet the requirements of Standard 62.1, Section 6.1.2. This exception shall be used only if the system in the proposed design does not match the building design."
@@ -79,13 +79,13 @@ class Section19Rule10(RuleDefinitionListIndexedBase):
             super(Section19Rule10.RulesetModelInstanceRule, self,).__init__(
                 rmrs_used=UserBaselineProposedVals(False, True, True),
                 each_rule=Section19Rule10.RulesetModelInstanceRule.HVACRule(),
-                index_rmr="baseline",
+                index_rmr=RMT.BASELINE_0,
                 list_path="$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*]",
             )
 
         def is_applicable(self, context, data=None):
             climate_zone = data["climate_zone"]
-            rmi_b = context.baseline
+            rmi_b = context.BASELINE_0
 
             baseline_system_types_dict_b = get_baseline_system_types(rmi_b)
 
@@ -100,8 +100,8 @@ class Section19Rule10(RuleDefinitionListIndexedBase):
             )
 
         def create_data(self, context, data):
-            rmi_b = context.baseline
-            rmi_p = context.proposed
+            rmi_b = context.BASELINE_0
+            rmi_p = context.PROPOSED
 
             hvac_system_exception_2_list = []
             if find_all("$.buildings[*].refrigerated_cases", rmi_b):
@@ -132,7 +132,7 @@ class Section19Rule10(RuleDefinitionListIndexedBase):
                 )
 
             def is_applicable(self, context, data=None):
-                hvac_b = context.baseline
+                hvac_b = context.BASELINE_0
                 hvac_id_b = hvac_b["id"]
                 baseline_system_types_dict = data["baseline_system_types_dict"]
                 baseline_system_types_dict_b = {
@@ -147,7 +147,7 @@ class Section19Rule10(RuleDefinitionListIndexedBase):
                 )
 
             def get_calc_vals(self, context, data=None):
-                hvac_b = context.baseline
+                hvac_b = context.BASELINE_0
                 hvac_id_b = hvac_b["id"]
 
                 baseline_system_types_dict = data["baseline_system_types_dict"]

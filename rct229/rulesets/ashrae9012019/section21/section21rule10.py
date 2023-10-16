@@ -50,7 +50,7 @@ class Section21Rule10(RuleDefinitionListIndexedBase):
         super(Section21Rule10, self).__init__(
             rmrs_used=UserBaselineProposedVals(False, True, False),
             each_rule=Section21Rule10.PumpRule(),
-            index_rmr="baseline",
+            index_rmr=RMT.BASELINE_0,
             id="21-10",
             description="When the building is modeled with HHW plant (served by either boiler(s) or purchased hot "
             "water/steam), the hot water pump shall be modeled as riding the pump curve if the hot water "
@@ -63,7 +63,7 @@ class Section21Rule10(RuleDefinitionListIndexedBase):
         )
 
     def is_applicable(self, context, data=None):
-        rmi_b = context.baseline
+        rmi_b = context.BASELINE_0
         baseline_system_types_dict = get_baseline_system_types(rmi_b)
         # create a list containing all HVAC systems that are modeled in the rmi_b
         available_types_list = [
@@ -79,14 +79,14 @@ class Section21Rule10(RuleDefinitionListIndexedBase):
         )
 
     def create_data(self, context, data):
-        rmi_b = context.baseline
+        rmi_b = context.BASELINE_0
         # to avoid pumps in service water heating system
         loop_zone_list_w_area_dict = get_hw_loop_zone_list_w_area(rmi_b)
 
         return {"loop_zone_list_w_area_dict": loop_zone_list_w_area_dict}
 
     def list_filter(self, context_item, data):
-        pump = context_item.baseline
+        pump = context_item.BASELINE_0
         loop_zone_list_w_area_dict = data["loop_zone_list_w_area_dict"]
         # filter and select pumps with heating loops (loop_zone_list_w_area_dict keys are heating loops)
         return pump["loop_or_piping"] in loop_zone_list_w_area_dict
@@ -98,7 +98,7 @@ class Section21Rule10(RuleDefinitionListIndexedBase):
             )
 
         def get_calc_vals(self, context, data=None):
-            pump_b = context.baseline
+            pump_b = context.BASELINE_0
             pump_loop_or_piping_id = pump_b["loop_or_piping"]
             loop_zone_list_w_area_dict = data["loop_zone_list_w_area_dict"]
             total_area = loop_zone_list_w_area_dict[pump_loop_or_piping_id][

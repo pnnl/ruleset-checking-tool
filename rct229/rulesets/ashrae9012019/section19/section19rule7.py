@@ -32,7 +32,7 @@ class Section19Rule7(RuleDefinitionListIndexedBase):
         super(Section19Rule7, self).__init__(
             rmrs_used=UserBaselineProposedVals(False, True, True),
             each_rule=Section19Rule7.HVACRule(),
-            index_rmr="baseline",
+            index_rmr=RMT.BASELINE_0,
             id="19-7",
             description="Minimum ventilation system outdoor air intake flow shall be the same for the proposed design and baseline building design except when any of the 4 exceptions defined in Section G3.1.2.5 are met."
             "Exceptions included in this RDS: 2. When designing systems in accordance with Standard 62.1, Section 6.2, `Ventilation Rate Procedure,`"
@@ -47,8 +47,8 @@ class Section19Rule7(RuleDefinitionListIndexedBase):
         )
 
     def create_data(self, context, data):
-        rmi_b = context.baseline
-        rmi_p = context.proposed
+        rmi_b = context.BASELINE_0
+        rmi_p = context.PROPOSED
 
         dict_of_zones_and_terminal_units_served_by_hvac_sys_b = (
             get_dict_of_zones_and_terminal_units_served_by_hvac_sys(rmi_b)
@@ -178,7 +178,7 @@ class Section19Rule7(RuleDefinitionListIndexedBase):
             )
 
         def get_calc_vals(self, context, data=None):
-            hvac_b = context.baseline
+            hvac_b = context.BASELINE_0
             hvac_id_b = hvac_b["id"]
 
             hvac_system_serves_only_labs = data["hvac_system_serves_only_labs"]

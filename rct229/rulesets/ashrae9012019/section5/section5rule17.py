@@ -1,6 +1,7 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
+from rct229.rulesets.ashrae9012019 import BASELINE_0
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_opaque_surface_type import (
     OpaqueSurfaceType as OST,
 )
@@ -23,34 +24,34 @@ class Section5Rule17(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section5Rule17, self).__init__(
-            rmrs_used=UserBaselineProposedVals(False, True, True),
+            rmrs_used=produce_ruleset_model_instance(USER=False, BASELINE_0=True, PROPOSED=True),
             required_fields={
                 "$": ["weather"],
                 "weather": ["climate_zone"],
             },
             each_rule=Section5Rule17.BuildingRule(),
-            index_rmr="baseline",
+            index_rmr=BASELINE_0,
             id="5-17",
             description="Opaque surfaces that are not regulated (not part of opaque building envelope) must be modeled the same in the baseline as in the proposed design. ",
             ruleset_section_title="Envelope",
             standard_section="Section G3.1-5 Building Envelope Modeling Requirements for the Baseline building",
             is_primary_rule=True,
             list_path="ruleset_model_descriptions[0].buildings[*]",
-            data_items={"climate_zone": ("baseline", "weather/climate_zone")},
+            data_items={"climate_zone": (BASELINE_0, "weather/climate_zone")},
         )
 
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section5Rule17.BuildingRule, self).__init__(
-                rmrs_used=UserBaselineProposedVals(False, True, True),
+                rmrs_used=produce_ruleset_model_instance(USER=False, BASELINE_0=True, PROPOSED=True),
                 required_fields={},
                 each_rule=Section5Rule17.BuildingRule.UnregulatedSurfaceRule(),
-                index_rmr="baseline",
+                index_rmr=BASELINE_0,
                 list_path="$.building_segments[*].zones[*].surfaces[*]",
             )
 
         def create_data(self, context, data=None):
-            building = context.baseline
+            building = context.BASELINE_0
             return {
                 "surface_conditioning_category_dict": get_surface_conditioning_category_dict(
                     data["climate_zone"], building
@@ -59,7 +60,7 @@ class Section5Rule17(RuleDefinitionListIndexedBase):
 
         def list_filter(self, context_item, data=None):
             scc = data["surface_conditioning_category_dict"]
-            surface_b = context_item.baseline
+            surface_b = context_item.BASELINE_0
             return scc[surface_b["id"]] == SCC.UNREGULATED
 
         class UnregulatedSurfaceRule(RuleDefinitionBase):
@@ -67,13 +68,13 @@ class Section5Rule17(RuleDefinitionListIndexedBase):
                 super(
                     Section5Rule17.BuildingRule.UnregulatedSurfaceRule, self
                 ).__init__(
-                    rmrs_used=UserBaselineProposedVals(False, True, True),
+                    rmrs_used=produce_ruleset_model_instance(USER=False, BASELINE_0=True, PROPOSED=True),
                     required_fields={"$": ["construction"]},
                 )
 
             def get_calc_vals(self, context, data=None):
-                surface_b = context.baseline
-                surface_p = context.proposed
+                surface_b = context.BASELINE_0
+                surface_p = context.PROPOSED
 
                 surface_b_type = get_opaque_surface_type(surface_b)
                 surface_b_construction = surface_b["construction"]

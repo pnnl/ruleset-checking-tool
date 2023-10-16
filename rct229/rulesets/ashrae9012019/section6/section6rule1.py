@@ -6,7 +6,7 @@ from rct229.rulesets.ashrae9012019.data_fns.table_G3_7_fns import table_G3_7_loo
 from rct229.rulesets.ashrae9012019.data_fns.table_G3_8_fns import table_G3_8_lookup
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.pint_utils import ZERO, CalcQ
-from rct229.rulesets.ashrae9012019 import RulesetModelOptions2019ASHRAE901
+from rct229.rulesets.ashrae9012019 import RMT
 
 
 CASE3_WARNING = "Project passes based on space-by-space method. Verify if project sues space-by-space method."
@@ -25,7 +25,7 @@ class Section6Rule1(RuleDefinitionListIndexedBase):
                 USER=False, BASELINE_0=False, PROPOSED=True
             ),
             each_rule=Section6Rule1.BuildingSegmentRule(),
-            index_rmr=RulesetModelOptions2019ASHRAE901.PROPOSED,
+            index_rmr=RMT.PROPOSED,
             id="6-1",
             description="The total building interior lighting power shall not exceed the interior lighting power "
             "allowance determined using either Table G3.7 or G3.8",

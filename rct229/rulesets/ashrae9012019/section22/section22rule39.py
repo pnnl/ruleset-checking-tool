@@ -13,7 +13,7 @@ class Section22Rule39(RuleDefinitionListIndexedBase):
         super(Section22Rule39, self).__init__(
             rmrs_used=UserBaselineProposedVals(False, True, False),
             each_rule=Section22Rule39.RulesetModelInstanceRule(),
-            index_rmr="baseline",
+            index_rmr=RMT.BASELINE_0,
             id="22-39",
             description="Baseline systems served by purchased chilled water loop shall be modeled "
             "with a distribution pump whose pump power is 16W/gpm",
@@ -33,6 +33,6 @@ class Section22Rule39(RuleDefinitionListIndexedBase):
             )
 
         def applicability_check(self, context, calc_vals, data):
-            rmi_b = context.baseline
+            rmi_b = context.BASELINE_0
             purchased_chw_hhw_status_dict_p = check_purchased_chw_hhw_status_dict(rmi_b)
             return purchased_chw_hhw_status_dict_p["purchased_cooling"]

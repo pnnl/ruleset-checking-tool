@@ -21,10 +21,10 @@ class Section15Rule4(RuleDefinitionListIndexedBase):
         )
 
     def create_data(self, context, data):
-        transformers_b = context.baseline
+        transformers_b = context.BASELINE_0
         return {"transformer_ids_b": find_all("$[*].id", transformers_b)}
         # Get the Baseline transformer ids
-        return find_all("[*].id", context.baseline)
+        return find_all("[*].id", context.BASELINE_0)
 
     class TransformerRule(RuleDefinitionBase):
         def __init__(self):
@@ -34,7 +34,7 @@ class Section15Rule4(RuleDefinitionListIndexedBase):
 
         def get_calc_vals(self, context, data=None):
             return {
-                "user_transformer_id": context.user["id"],
+                "user_transformer_id": context.USER["id"],
                 "transformer_ids_b": data["transformer_ids_b"],
             }
 

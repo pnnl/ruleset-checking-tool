@@ -29,7 +29,7 @@ class Section22Rule27(RuleDefinitionListIndexedBase):
         super(Section22Rule27, self).__init__(
             rmrs_used=UserBaselineProposedVals(False, True, False),
             each_rule=Section22Rule27.ChillerRule(),
-            index_rmr="baseline",
+            index_rmr=RMT.BASELINE_0,
             id="22-27",
             description="Each baseline chiller shall be modeled with separate condenser-water pump interlocked to operate with the associated chiller.",
             ruleset_section_title="HVAC - Chiller",
@@ -40,7 +40,7 @@ class Section22Rule27(RuleDefinitionListIndexedBase):
         )
 
     def is_applicable(self, context, data=None):
-        rmi_b = context.baseline
+        rmi_b = context.BASELINE_0
         baseline_system_types_dict = get_baseline_system_types(rmi_b)
         # create a list containing all HVAC systems that are modeled in the rmi_b
         available_type_list = [
@@ -65,7 +65,7 @@ class Section22Rule27(RuleDefinitionListIndexedBase):
             )
 
         def get_calc_vals(self, context, data=None):
-            chiller_b = context.baseline
+            chiller_b = context.BASELINE_0
             is_condenser_water_pump_interlocked = chiller_b[
                 "is_condenser_water_pump_interlocked"
             ]

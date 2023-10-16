@@ -31,7 +31,7 @@ class Section12Rule3(RuleDefinitionListIndexedBase):
 
         def create_data(self, context, data):
             # Get the Proposed space id values
-            return {"proposed_space_ids": find_all("$..spaces[*].id", context.proposed)}
+            return {"proposed_space_ids": find_all("$..spaces[*].id", context.PROPOSED)}
 
         class SpaceRule(RuleDefinitionBase):
             def __init__(self):
@@ -42,7 +42,7 @@ class Section12Rule3(RuleDefinitionListIndexedBase):
 
             def get_calc_vals(self, context, data=None):
                 return {
-                    "user_space_id": context.user["id"],
+                    "user_space_id": context.USER["id"],
                 }
 
             def rule_check(self, context, calc_vals, data):

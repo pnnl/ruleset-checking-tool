@@ -1,6 +1,7 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
+from rct229.rulesets.ashrae9012019 import PROPOSED
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.match_lists import match_lists_by_id
 
@@ -10,9 +11,9 @@ class Section5Rule2(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section5Rule2, self).__init__(
-            rmrs_used=UserBaselineProposedVals(True, False, True),
+            rmrs_used=produce_ruleset_model_instance(USER=True, BASELINE_0=False, PROPOSED=True),
             each_rule=Section5Rule2.BuildingRule(),
-            index_rmr="proposed",
+            index_rmr=PROPOSED,
             id="5-2",
             description="Orientation is the same in user model and proposed model",
             ruleset_section_title="Envelope",
@@ -24,7 +25,7 @@ class Section5Rule2(RuleDefinitionListIndexedBase):
     class BuildingRule(RuleDefinitionBase):
         def __init__(self):
             super(Section5Rule2.BuildingRule, self).__init__(
-                rmrs_used=UserBaselineProposedVals(True, False, True),
+                rmrs_used=produce_ruleset_model_instance(USER=True, BASELINE_0=False, PROPOSED=True),
                 required_fields={
                     "$.building_segments[*].zones[*].surfaces[*]": ["azimuth"],
                 },
@@ -33,10 +34,10 @@ class Section5Rule2(RuleDefinitionListIndexedBase):
         def get_calc_vals(self, context, data=None):
             failing_surface_ids = []
             proposed_surfaces = find_all(
-                "$.building_segments[*].zones[*].surfaces[*]", context.proposed
+                "$.building_segments[*].zones[*].surfaces[*]", context.PROPOSED
             )
             user_surfaces = find_all(
-                "$.building_segments[*].zones[*].surfaces[*]", context.user
+                "$.building_segments[*].zones[*].surfaces[*]", context.USER
             )
 
             # This assumes that the surfaces all match

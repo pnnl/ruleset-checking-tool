@@ -29,7 +29,7 @@ class Section19Rule12(RuleDefinitionListIndexedBase):
         super(Section19Rule12, self).__init__(
             rmrs_used=UserBaselineProposedVals(False, True, False),
             each_rule=Section19Rule12.HVACRule(),
-            index_rmr="baseline",
+            index_rmr=RMT.BASELINE_0,
             id="19-12",
             description="The baseline system economizer high-limit shutoff shall be a dry-bulb fixed switch with set-point temperatures in accordance with the values in Table G3.1.2.7.",
             ruleset_section_title="HVAC - General",
@@ -53,7 +53,7 @@ class Section19Rule12(RuleDefinitionListIndexedBase):
             )
 
         def is_applicable(self, context, data=None):
-            hvac_b = context.baseline
+            hvac_b = context.BASELINE_0
             climate_zone_b = data["climate_zone"]
             fan_system_b = hvac_b["fan_system"]
 
@@ -64,7 +64,7 @@ class Section19Rule12(RuleDefinitionListIndexedBase):
             )
 
         def get_calc_vals(self, context, data=None):
-            hvac_b = context.baseline
+            hvac_b = context.BASELINE_0
             climate_zone_b = data["climate_zone"]
             fan_system_b = hvac_b["fan_system"]
 

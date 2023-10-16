@@ -33,7 +33,7 @@ class Section22Rule14(RuleDefinitionListIndexedBase):
         super(Section22Rule14, self).__init__(
             rmrs_used=UserBaselineProposedVals(False, True, False),
             each_rule=Section22Rule14.HeatRejectionRule(),
-            index_rmr="baseline",
+            index_rmr=RMT.BASELINE_0,
             id="22-14",
             description="The baseline heat-rejection device shall have a design temperature rise of 10°F.",
             ruleset_section_title="HVAC - Chiller",
@@ -44,7 +44,7 @@ class Section22Rule14(RuleDefinitionListIndexedBase):
         )
 
     def is_applicable(self, context, data=None):
-        rmi_b = context.baseline
+        rmi_b = context.BASELINE_0
         baseline_system_types_dict = get_baseline_system_types(rmi_b)
         # create a list containing all HVAC systems that are modeled in the rmi_b
         available_type_list = [
@@ -69,7 +69,7 @@ class Section22Rule14(RuleDefinitionListIndexedBase):
             )
 
         def get_calc_vals(self, context, data=None):
-            heat_rejection_b = context.baseline
+            heat_rejection_b = context.BASELINE_0
             heat_rejection_range = heat_rejection_b["range"]
             return {
                 "heat_rejection_range": CalcQ("temperature", heat_rejection_range),

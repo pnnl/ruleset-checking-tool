@@ -36,7 +36,7 @@ class Section22Rule16(RuleDefinitionListIndexedBase):
         super(Section22Rule16, self).__init__(
             rmrs_used=UserBaselineProposedVals(False, True, False),
             each_rule=Section22Rule16.HeatRejectionRule(),
-            index_rmr="baseline",
+            index_rmr=RMT.BASELINE_0,
             id="22-16",
             description="The baseline condenser-water design supply temperature shall be calculated using the cooling tower approach to the 0.4% evaporation design wet-bulb temperature, valid for wet-bulbs from 55°F to 90°F.",
             ruleset_section_title="HVAC - Chiller",
@@ -47,7 +47,7 @@ class Section22Rule16(RuleDefinitionListIndexedBase):
         )
 
     def is_applicable(self, context, data=None):
-        rmi_b = context.baseline
+        rmi_b = context.BASELINE_0
         baseline_system_types_dict = get_baseline_system_types(rmi_b)
         # create a list containing all HVAC systems that are modeled in the rmi_b
         available_type_list = [
@@ -70,7 +70,7 @@ class Section22Rule16(RuleDefinitionListIndexedBase):
         )
 
     def create_data(self, context, data):
-        rmi_b = context.baseline
+        rmi_b = context.BASELINE_0
         heat_rejection_loop_dict = {
             heat_rejection_loop: find_exactly_one_with_field_value(
                 "$.fluid_loops[*]", "id", heat_rejection_loop, rmi_b
@@ -86,7 +86,7 @@ class Section22Rule16(RuleDefinitionListIndexedBase):
             )
 
         def get_calc_vals(self, context, data=None):
-            heat_rejection_b = context.baseline
+            heat_rejection_b = context.BASELINE_0
             loop_b = heat_rejection_b["loop"]
             design_wetbulb_temperature_b = heat_rejection_b[
                 "design_wetbulb_temperature"

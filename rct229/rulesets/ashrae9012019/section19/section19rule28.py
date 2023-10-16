@@ -32,7 +32,7 @@ class Section19Rule28(RuleDefinitionListIndexedBase):
         )
 
     def create_data(self, context, data):
-        rmi_p = context.proposed
+        rmi_p = context.PROPOSED
 
         inapplicable_hvac_sys_list_p = list(
             set(
@@ -56,14 +56,14 @@ class Section19Rule28(RuleDefinitionListIndexedBase):
             )
 
         def is_applicable(self, context, data=None):
-            hvac_p = context.proposed
+            hvac_p = context.PROPOSED
             hvac_id_p = hvac_p["id"]
             inapplicable_hvac_sys_list_p = data["inapplicable_hvac_sys_list_p"]
 
             return hvac_id_p not in inapplicable_hvac_sys_list_p
 
         def get_calc_vals(self, context, data=None):
-            hvac_p = context.proposed
+            hvac_p = context.PROPOSED
 
             operation_during_unoccupied_p = hvac_p["fan_system"][
                 "operation_during_unoccupied"

@@ -37,7 +37,7 @@ class Section23Rule16(RuleDefinitionListIndexedBase):
         super(Section23Rule16, self).__init__(
             rmrs_used=UserBaselineProposedVals(False, True, False),
             each_rule=Section23Rule16.HVACRule(),
-            index_rmr="baseline",
+            index_rmr=RMT.BASELINE_0,
             id="23-16",
             description="Systems 5 - 8, the baseline system shall be modeled with preheat coils controlled to a fixed set point 20F less than the design room heating temperature setpoint.",
             ruleset_section_title="HVAC - Airside",
@@ -48,7 +48,7 @@ class Section23Rule16(RuleDefinitionListIndexedBase):
         )
 
     def is_applicable(self, context, data=None):
-        rmi_b = context.baseline
+        rmi_b = context.BASELINE_0
         baseline_system_types_dict = get_baseline_system_types(rmi_b)
 
         return any(
@@ -60,7 +60,7 @@ class Section23Rule16(RuleDefinitionListIndexedBase):
         )
 
     def create_data(self, context, data):
-        rmi_b = context.baseline
+        rmi_b = context.BASELINE_0
 
         # set hvac_id with highest zone_design_heating_setpoint
         hvac_max_zone_setpoint_dict = {}
@@ -113,7 +113,7 @@ class Section23Rule16(RuleDefinitionListIndexedBase):
         }
 
     def list_filter(self, context_item, data):
-        hvac_sys_b = context_item.baseline
+        hvac_sys_b = context_item.BASELINE_0
         applicable_hvac_sys_ids = data["applicable_hvac_sys_ids"]
 
         return hvac_sys_b["id"] in applicable_hvac_sys_ids
@@ -133,7 +133,7 @@ class Section23Rule16(RuleDefinitionListIndexedBase):
             )
 
         def get_calc_vals(self, context, data=None):
-            heating_ventilating_air_conditioning_systems_b = context.baseline
+            heating_ventilating_air_conditioning_systems_b = context.BASELINE_0
 
             hvac_id = heating_ventilating_air_conditioning_systems_b["id"]
             preheat_system_b = heating_ventilating_air_conditioning_systems_b[

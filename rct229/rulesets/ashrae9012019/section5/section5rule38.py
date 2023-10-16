@@ -33,7 +33,7 @@ class Section5Rule38(RuleDefinitionListIndexedBase):
         super(Section5Rule38, self).__init__(
             rmrs_used=UserBaselineProposedVals(False, True, False),
             each_rule=Section5Rule38.BuildingRule(),
-            index_rmr="baseline",
+            index_rmr=RMT.BASELINE_0,
             id="5-38",
             description="Skylight SHGC properties shall match the appropriate requirements in Tables G3.4-1 through G3.4-8 using the value and the applicable skylight percentage.",
             ruleset_section_title="Envelope",
@@ -53,12 +53,12 @@ class Section5Rule38(RuleDefinitionListIndexedBase):
                 rmrs_used=UserBaselineProposedVals(False, True, False),
                 list_path="$.building_segments[*].zones[*].surfaces[*]",
                 each_rule=Section5Rule38.BuildingRule.RoofRule(),
-                index_rmr="baseline",
+                index_rmr=RMT.BASELINE_0,
                 manual_check_required_msg=MANUAL_CHECK_MSG,
             )
 
         def manual_check_required(self, context, calc_vals=None, data=None):
-            building_b = context.baseline
+            building_b = context.BASELINE_0
             climate_zone = data["climate_zone"]
 
             building_scc_skylight_roof_ratios_dict_b = (
@@ -104,7 +104,7 @@ class Section5Rule38(RuleDefinitionListIndexedBase):
             )
 
         def create_data(self, context, data=None):
-            building_b = context.baseline
+            building_b = context.BASELINE_0
             climate_zone = data["climate_zone"]
             scc_skylight_roof_ratios_dict_b = (
                 get_building_scc_skylight_roof_ratios_dict(climate_zone, building_b)
@@ -165,7 +165,7 @@ class Section5Rule38(RuleDefinitionListIndexedBase):
             }
 
         def list_filter(self, context_item, data=None):
-            surface_b = context_item.baseline
+            surface_b = context_item.BASELINE_0
             scc = data["surface_conditioning_category_dict"][surface_b["id"]]
 
             return (
@@ -179,13 +179,13 @@ class Section5Rule38(RuleDefinitionListIndexedBase):
                 super(Section5Rule38.BuildingRule.RoofRule, self).__init__(
                     rmrs_used=UserBaselineProposedVals(False, True, False),
                     each_rule=Section5Rule38.BuildingRule.RoofRule.SubsurfaceRule(),
-                    index_rmr="baseline",
+                    index_rmr=RMT.BASELINE_0,
                     list_path="subsurfaces[*]",
                     manual_check_required_msg=MANUAL_CHECK_MSG,
                 )
 
             def create_data(self, context, data=None):
-                surface_b = context.baseline
+                surface_b = context.BASELINE_0
                 surface_id_b = surface_b["id"]
 
                 return {"surface_id_b": surface_id_b}
@@ -202,7 +202,7 @@ class Section5Rule38(RuleDefinitionListIndexedBase):
                     )
 
                 def is_applicable(self, context, data=None):
-                    subsurface_b = context.baseline
+                    subsurface_b = context.BASELINE_0
 
                     return (
                         subsurface_b["classification"] == SURFACE_CLASSIFICATION.DOOR
@@ -210,7 +210,7 @@ class Section5Rule38(RuleDefinitionListIndexedBase):
                     ) or subsurface_b["classification"] != SURFACE_CLASSIFICATION.DOOR
 
                 def get_calc_vals(self, context, data=None):
-                    subsurface_b = context.baseline
+                    subsurface_b = context.BASELINE_0
                     subsurface_shgc_b = subsurface_b["solar_heat_gain_coefficient"]
 
                     subsuface_type_b = data["surface_conditioning_category_dict"][

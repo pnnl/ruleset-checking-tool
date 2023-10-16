@@ -37,7 +37,7 @@ class Section6Rule7(RuleDefinitionListIndexedBase):
             )
 
         def get_calc_vals(self, context, data=None):
-            zone_p = context.proposed
+            zone_p = context.PROPOSED
 
             daylight_flag_p = (
                 len(

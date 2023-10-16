@@ -34,7 +34,7 @@ class Section21Rule6(RuleDefinitionListIndexedBase):
         super(Section21Rule6, self).__init__(
             rmrs_used=UserBaselineProposedVals(False, True, False),
             each_rule=Section21Rule6.HeatingFluidLoopRule(),
-            index_rmr="baseline",
+            index_rmr=RMT.BASELINE_0,
             id="21-6",
             description="When baseline building includes two boilers each shall stage as required by load.",
             ruleset_section_title="HVAC - Water Side",
@@ -45,7 +45,7 @@ class Section21Rule6(RuleDefinitionListIndexedBase):
         )
 
     def create_data(self, context, data):
-        rmi_b = context.baseline
+        rmi_b = context.BASELINE_0
         boilers = find_all("$.boilers[*]", rmi_b)
         loop_boiler_dict = {}
         for boiler_b in boilers:
@@ -56,7 +56,7 @@ class Section21Rule6(RuleDefinitionListIndexedBase):
         return {"loop_boiler_dict": loop_boiler_dict}
 
     def is_applicable(self, context, data=None):
-        rmi_b = context.baseline
+        rmi_b = context.BASELINE_0
         baseline_system_types_dict = get_baseline_system_types(rmi_b)
         # create a list containing all HVAC systems that are modeled in the rmi_b
         available_type_list = [
@@ -72,7 +72,7 @@ class Section21Rule6(RuleDefinitionListIndexedBase):
         )
 
     def list_filter(self, context_item, data):
-        fluid_loop_b = context_item.baseline
+        fluid_loop_b = context_item.BASELINE_0
         return getattr_(fluid_loop_b, "FluidLoop", "type") == FLUID_LOOP.HEATING
 
     class HeatingFluidLoopRule(RuleDefinitionBase):
@@ -82,12 +82,12 @@ class Section21Rule6(RuleDefinitionListIndexedBase):
             )
 
         def is_applicable(self, context, data=None):
-            fluid_loop_b = context.baseline
+            fluid_loop_b = context.BASELINE_0
             loop_boiler_dict = data["loop_boiler_dict"]
             return len(loop_boiler_dict[fluid_loop_b["id"]]) == 2
 
         def get_calc_vals(self, context, data=None):
-            fluid_loop_b = context.baseline
+            fluid_loop_b = context.BASELINE_0
             boiler_list = data["loop_boiler_dict"][fluid_loop_b["id"]]
             # Guarantee two boilers in this list.
             boiler_1 = boiler_list[0]

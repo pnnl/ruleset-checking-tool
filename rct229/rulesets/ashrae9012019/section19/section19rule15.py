@@ -41,7 +41,7 @@ class Section19Rule15(RuleDefinitionListIndexedBase):
         super(Section19Rule15, self).__init__(
             rmrs_used=UserBaselineProposedVals(False, True, True),
             each_rule=Section19Rule15.HVACRule(),
-            index_rmr="baseline",
+            index_rmr=RMT.BASELINE_0,
             id="19-15",
             description="For baseline system types 9 & 10, the system design supply airflow rates shall be based on the temperature difference between a supply air temperature set point of 105°F and the design space-heating temperature set point, the minimum outdoor airflow rate, or the airflow rate required to comply with applicable codes or accreditation standards, whichever is greater.",
             ruleset_section_title="HVAC - General",
@@ -52,8 +52,8 @@ class Section19Rule15(RuleDefinitionListIndexedBase):
         )
 
     def create_data(self, context, data):
-        rmi_b = context.baseline
-        rmi_p = context.proposed
+        rmi_b = context.BASELINE_0
+        rmi_p = context.PROPOSED
         baseline_system_types_dict = get_baseline_system_types(rmi_b)
 
         zones_and_terminal_units_served_by_hvac_sys_dict = (
@@ -109,7 +109,7 @@ class Section19Rule15(RuleDefinitionListIndexedBase):
         }
 
     def is_applicable(self, context, data=None):
-        rmi_b = context.baseline
+        rmi_b = context.BASELINE_0
         baseline_system_types_dict = get_baseline_system_types(rmi_b)
 
         return any(
@@ -131,7 +131,7 @@ class Section19Rule15(RuleDefinitionListIndexedBase):
             )
 
         def is_applicable(self, context, data=None):
-            hvac_b = context.baseline
+            hvac_b = context.BASELINE_0
             hvac_id_b = hvac_b["id"]
             baseline_system_types_dict = data["baseline_system_types_dict"]
 
@@ -141,7 +141,7 @@ class Section19Rule15(RuleDefinitionListIndexedBase):
             )
 
         def get_calc_vals(self, context, data=None):
-            hvac_b = context.baseline
+            hvac_b = context.BASELINE_0
             hvac_id_b = hvac_b["id"]
 
             fan_system_b = hvac_b["fan_system"]

@@ -21,7 +21,7 @@ class Section5Rule48(RuleDefinitionListIndexedBase):
                 "weather": ["climate_zone"],
             },
             each_rule=Section5Rule48.BuildingRule(),
-            index_rmr="baseline",
+            index_rmr=RMT.BASELINE_0,
             id="5-48",
             description="The air leakage rate in unconditioned and unenclosed spaces must be the same the baseline and proposed design.",
             ruleset_section_title="Envelope",
@@ -31,7 +31,7 @@ class Section5Rule48(RuleDefinitionListIndexedBase):
         )
 
     def create_data(self, context, data=None):  # put it under the "BuildingRule"
-        rmr_baseline = context.baseline
+        rmr_baseline = context.BASELINE_0
         return {"climate_zone": rmr_baseline["weather"]["climate_zone"]}
 
     class BuildingRule(RuleDefinitionListIndexedBase):
@@ -39,12 +39,12 @@ class Section5Rule48(RuleDefinitionListIndexedBase):
             super(Section5Rule48.BuildingRule, self).__init__(
                 rmrs_used=UserBaselineProposedVals(False, True, True),
                 each_rule=Section5Rule48.BuildingRule.ZoneRule(),
-                index_rmr="baseline",
+                index_rmr=RMT.BASELINE_0,
                 list_path="$.building_segments[*].zones[*]",
             )
 
         def create_data(self, context, data=None):
-            building_b = context.baseline
+            building_b = context.BASELINE_0
             return {
                 "zcc_dict_b": get_zone_conditioning_category_dict(
                     data["climate_zone"], building_b
@@ -53,7 +53,7 @@ class Section5Rule48(RuleDefinitionListIndexedBase):
 
         def list_filter(self, context_item, data=None):
             zcc_dict_b = data["zcc_dict_b"]
-            zone_b = context_item.baseline
+            zone_b = context_item.BASELINE_0
             return zcc_dict_b[zone_b["id"]] in [ZCC.UNCONDITIONED, ZCC.UNENCLOSED]
 
         class ZoneRule(RuleDefinitionBase):
@@ -67,8 +67,8 @@ class Section5Rule48(RuleDefinitionListIndexedBase):
                 )
 
             def get_calc_vals(self, context, data=None):
-                zone_b = context.baseline
-                zone_p = context.proposed
+                zone_b = context.BASELINE_0
+                zone_p = context.PROPOSED
 
                 zone_infiltration_flow_rate_b = zone_b["infiltration"]["flow_rate"]
                 zone_infiltration_flow_rate_p = zone_p["infiltration"]["flow_rate"]

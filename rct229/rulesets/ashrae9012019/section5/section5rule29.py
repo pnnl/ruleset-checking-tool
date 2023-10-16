@@ -28,7 +28,7 @@ class Section5Rule29(RuleDefinitionListIndexedBase):
                 "weather": ["climate_zone"],
             },
             each_rule=Section5Rule29.BuildingRule(),
-            index_rmr="baseline",
+            index_rmr=RMT.BASELINE_0,
             id="5-29",
             description="Baseline fenestration shall be assumed to be flush with the exterior wall, and no shading "
             "projections shall be modeled.",
@@ -44,12 +44,12 @@ class Section5Rule29(RuleDefinitionListIndexedBase):
             super(Section5Rule29.BuildingRule, self).__init__(
                 rmrs_used=UserBaselineProposedVals(False, True, False),
                 each_rule=Section5Rule29.BuildingRule.AboveGradeWallRule(),
-                index_rmr="baseline",
+                index_rmr=RMT.BASELINE_0,
                 list_path="$.building_segments[*].zones[*].surfaces[*]",
             )
 
         def create_data(self, context, data):
-            building_b = context.baseline
+            building_b = context.BASELINE_0
             return {
                 "scc_dict_b": get_surface_conditioning_category_dict(
                     data["climate_zone"], building_b
@@ -57,7 +57,7 @@ class Section5Rule29(RuleDefinitionListIndexedBase):
             }
 
         def list_filter(self, context_item, data):
-            surface_b = context_item.baseline
+            surface_b = context_item.BASELINE_0
             return (
                 get_opaque_surface_type(surface_b) == OST.ABOVE_GRADE_WALL
                 and data["scc_dict_b"][surface_b["id"]] != SCC.UNREGULATED
@@ -69,7 +69,7 @@ class Section5Rule29(RuleDefinitionListIndexedBase):
                     rmrs_used=UserBaselineProposedVals(False, True, False),
                     list_path="subsurfaces[*]",
                     each_rule=Section5Rule29.BuildingRule.AboveGradeWallRule.SubsurfaceRule(),
-                    index_rmr="baseline",
+                    index_rmr=RMT.BASELINE_0,
                 )
 
             class SubsurfaceRule(RuleDefinitionBase):
@@ -86,7 +86,7 @@ class Section5Rule29(RuleDefinitionListIndexedBase):
                     )
 
                 def get_calc_vals(self, context, data=None):
-                    subsurface_b = context.baseline
+                    subsurface_b = context.BASELINE_0
                     return {
                         "has_shading_overhang": subsurface_b["has_shading_overhang"],
                         "has_shading_sidefins": subsurface_b["has_shading_sidefins"],

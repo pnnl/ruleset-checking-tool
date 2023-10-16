@@ -34,7 +34,7 @@ class Section5Rule47(RuleDefinitionListIndexedBase):
                 "weather": ["climate_zone"],
             },
             each_rule=Section5Rule47.BuildingRule(),
-            index_rmr="baseline",
+            index_rmr=RMT.BASELINE_0,
             id="5-47",
             description="The baseline air leakage rate of the building envelope (I_75Pa) at a fixed building pressure differential of 0.3 in. of water shall be 1 cfm/ft2. The air leakage rate of the building envelope shall be converted to appropriate units for the simulation program using one of the methods in Section G3.1.1.4.",
             ruleset_section_title="Envelope",
@@ -52,7 +52,7 @@ class Section5Rule47(RuleDefinitionListIndexedBase):
             )
 
         def get_calc_vals(self, context, data=None):
-            building_b = context.baseline
+            building_b = context.BASELINE_0
 
             scc_dict_b = get_surface_conditioning_category_dict(
                 data["climate_zone"], building_b

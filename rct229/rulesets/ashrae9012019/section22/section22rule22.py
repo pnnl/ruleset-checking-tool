@@ -32,7 +32,7 @@ class Section22Rule22(RuleDefinitionListIndexedBase):
         super(Section22Rule22, self).__init__(
             rmrs_used=UserBaselineProposedVals(False, True, False),
             each_rule=Section22Rule22.ChillerRule(),
-            index_rmr="baseline",
+            index_rmr=RMT.BASELINE_0,
             id="22-22",
             description="The baseline chiller efficiencies shall be modeled at the minimum efficiency levels for full load, in accordance with Tables G3.5.3.",
             ruleset_section_title="HVAC - Chiller",
@@ -43,7 +43,7 @@ class Section22Rule22(RuleDefinitionListIndexedBase):
         )
 
     def is_applicable(self, context, data=None):
-        rmi_b = context.baseline
+        rmi_b = context.BASELINE_0
         baseline_system_types_dict = get_baseline_system_types(rmi_b)
         # create a list containing all HVAC systems that are modeled in the rmi_b
         available_type_list = [
@@ -68,7 +68,7 @@ class Section22Rule22(RuleDefinitionListIndexedBase):
             )
 
         def get_calc_vals(self, context, data=None):
-            chiller_b = context.baseline
+            chiller_b = context.BASELINE_0
             full_load_efficiency_b = chiller_b["full_load_efficiency"]
 
             compressor_type_b = chiller_b["compressor_type"]

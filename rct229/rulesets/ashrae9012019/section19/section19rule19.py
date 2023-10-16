@@ -50,7 +50,7 @@ class Section19Rule19(RuleDefinitionListIndexedBase):
         super(Section19Rule19, self).__init__(
             rmrs_used=UserBaselineProposedVals(False, True, True),
             each_rule=Section19Rule19.HVACRule(),
-            index_rmr="baseline",
+            index_rmr=RMT.BASELINE_0,
             id="19-19",
             description="For baseline systems 9 and 10 the system fan electrical power (Pfan) for supply, return, exhaust, and relief shall be CFMs × 0.3, where, CFMs = the baseline system maximum design supply fan airflow rate, cfm. "
             "If modeling a non-mechanical cooling fan is required by Section G3.1.2.8.2, there is a fan power allowance of Pfan = CFMnmc × 0.054, where, CFMnmc = the baseline non-mechanical cooling fan airflow, cfm for the non-mechanical cooling.",
@@ -62,7 +62,7 @@ class Section19Rule19(RuleDefinitionListIndexedBase):
         )
 
     def is_applicable(self, context, data=None):
-        rmd_b = context.baseline
+        rmd_b = context.BASELINE_0
         baseline_system_types_dict = get_baseline_system_types(rmd_b)
 
         return any(
@@ -74,8 +74,8 @@ class Section19Rule19(RuleDefinitionListIndexedBase):
         )
 
     def create_data(self, context, data):
-        rmd_b = context.baseline
-        rmd_p = context.proposed
+        rmd_b = context.BASELINE_0
+        rmd_p = context.PROPOSED
 
         baseline_system_types_dict = get_baseline_system_types(rmd_b)
         applicable_hvac_sys_ids = [
@@ -146,7 +146,7 @@ class Section19Rule19(RuleDefinitionListIndexedBase):
     def list_filter(self, context_item, data):
         applicable_hvac_sys_ids = data["applicable_hvac_sys_ids"]
 
-        return context_item.baseline["id"] in applicable_hvac_sys_ids
+        return context_item.BASELINE_0["id"] in applicable_hvac_sys_ids
 
     class HVACRule(RuleDefinitionBase):
         def __init__(self):
@@ -158,14 +158,14 @@ class Section19Rule19(RuleDefinitionListIndexedBase):
             )
 
         def is_applicable(self, context, data=None):
-            hvac_b = context.baseline
+            hvac_b = context.BASELINE_0
             hvac_id_b = hvac_b["id"]
             applicable_hvac_sys_ids = data["applicable_hvac_sys_ids"]
 
             return hvac_id_b in applicable_hvac_sys_ids
 
         def get_calc_vals(self, context, data=None):
-            hvac_b = context.baseline
+            hvac_b = context.BASELINE_0
             hvac_id_b = hvac_b["id"]
 
             dict_of_zones_and_terminal_units_served_by_hvac_sys_b = data[
@@ -250,7 +250,7 @@ class Section19Rule19(RuleDefinitionListIndexedBase):
             )
 
         def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
-            hvac_b = context.baseline
+            hvac_b = context.BASELINE_0
             hvac_id_b = hvac_b["id"]
             more_than_one_supply_fan_b = calc_vals["more_than_one_supply_fan_b"]
 
@@ -277,7 +277,7 @@ class Section19Rule19(RuleDefinitionListIndexedBase):
             ) or (fan_power_per_flow_b < REQ_FAN_POWER_FLOW_RATIO)
 
         def get_fail_msg(self, context, calc_vals=None, data=None):
-            hvac_b = context.baseline
+            hvac_b = context.BASELINE_0
             hvac_id_b = hvac_b["id"]
             more_than_one_supply_fan_b = calc_vals["more_than_one_supply_fan_b"]
             fan_power_per_flow_b = calc_vals["fan_power_per_flow_b"]

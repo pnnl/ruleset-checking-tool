@@ -35,7 +35,7 @@ class Section22Rule24(RuleDefinitionListIndexedBase):
         super(Section22Rule24, self).__init__(
             rmrs_used=UserBaselineProposedVals(False, True, False),
             each_rule=Section22Rule24.PrimaryPumpRule(),
-            index_rmr="baseline",
+            index_rmr=RMT.BASELINE_0,
             id="22-24",
             description="For baseline chilled-water systems served by chiller(s), the primary pump shall be modeled as constant volume.",
             ruleset_section_title="HVAC - Chiller",
@@ -46,7 +46,7 @@ class Section22Rule24(RuleDefinitionListIndexedBase):
         )
 
     def is_applicable(self, context, data=None):
-        rmi_b = context.baseline
+        rmi_b = context.BASELINE_0
         baseline_system_types_dict = get_baseline_system_types(rmi_b)
         # create a list contains all HVAC systems that are modeled in the rmi_b
         available_type_list = [
@@ -67,13 +67,13 @@ class Section22Rule24(RuleDefinitionListIndexedBase):
         )
 
     def create_data(self, context, data):
-        rmi_b = context.baseline
+        rmi_b = context.BASELINE_0
         primary_secondary_loops_dict = get_primary_secondary_loops_dict(rmi_b)
         return {"primary_secondary_loops_dict": primary_secondary_loops_dict}
 
     # filter to only keep loops that have secondary loop(s)
     def list_filter(self, context_item, data):
-        pump_b = context_item.baseline
+        pump_b = context_item.BASELINE_0
         primary_loop_ids = data["primary_secondary_loops_dict"]
         return pump_b["loop_or_piping"] in primary_loop_ids
 
@@ -87,7 +87,7 @@ class Section22Rule24(RuleDefinitionListIndexedBase):
             )
 
         def get_calc_vals(self, context, data=None):
-            primary_pump_b = context.baseline
+            primary_pump_b = context.BASELINE_0
             primary_pump_speed_control = primary_pump_b["speed_control"]
             return {"primary_pump_speed_control": primary_pump_speed_control}
 

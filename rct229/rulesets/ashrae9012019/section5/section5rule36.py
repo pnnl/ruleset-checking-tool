@@ -32,7 +32,7 @@ class Section5Rule36(RuleDefinitionListIndexedBase):
                 "weather": ["climate_zone"],
             },
             each_rule=Section5Rule36.BuildingRule(),
-            index_rmr="baseline",
+            index_rmr=RMT.BASELINE_0,
             id="5-36",
             description="Skylight area must be allocated to surfaces in the same proportion in the baseline as in the proposed design.",
             ruleset_section_title="Envelope",
@@ -47,13 +47,13 @@ class Section5Rule36(RuleDefinitionListIndexedBase):
             super(Section5Rule36.BuildingRule, self).__init__(
                 rmrs_used=UserBaselineProposedVals(False, True, True),
                 each_rule=Section5Rule36.BuildingRule.BuildingSegmentRule(),
-                index_rmr="baseline",
+                index_rmr=RMT.BASELINE_0,
                 list_path="building_segments[*]",
             )
 
         def create_data(self, context, data=None):
-            building_b = context.baseline
-            building_p = context.proposed
+            building_b = context.BASELINE_0
+            building_p = context.PROPOSED
             return {
                 "scc_dict_b": get_surface_conditioning_category_dict(
                     data["climate_zone"], building_b
@@ -71,12 +71,12 @@ class Section5Rule36(RuleDefinitionListIndexedBase):
                 super(Section5Rule36.BuildingRule.BuildingSegmentRule, self).__init__(
                     rmrs_used=UserBaselineProposedVals(False, True, True),
                     each_rule=Section5Rule36.BuildingRule.BuildingSegmentRule.RoofRule(),
-                    index_rmr="baseline",
+                    index_rmr=RMT.BASELINE_0,
                     list_path="$.zones[*].surfaces[*]",
                 )
 
             def is_applicable(self, context, data=None):
-                building_segment_p = context.proposed
+                building_segment_p = context.PROPOSED
                 skylight_roof_areas_dictionary_p = data[
                     "skylight_roof_areas_dictionary_p"
                 ]
@@ -95,8 +95,8 @@ class Section5Rule36(RuleDefinitionListIndexedBase):
                 )
 
             def create_data(self, context, data=None):
-                building_segment_b = context.baseline
-                building_segment_p = context.proposed
+                building_segment_b = context.BASELINE_0
+                building_segment_p = context.PROPOSED
                 return {
                     "scc_dict_b": data["scc_dict_b"],
                     "total_skylight_area_b": data["skylight_roof_areas_dictionary_b"][
@@ -109,7 +109,7 @@ class Section5Rule36(RuleDefinitionListIndexedBase):
 
             def list_filter(self, context_item, data=None):
                 scc = data["scc_dict_b"]
-                surface_b = context_item.baseline
+                surface_b = context_item.BASELINE_0
                 return (
                     get_opaque_surface_type(surface_b) == OST.ROOF
                     and scc[surface_b["id"]] != SCC.UNREGULATED
@@ -128,8 +128,8 @@ class Section5Rule36(RuleDefinitionListIndexedBase):
                     total_skylight_area_b = data["total_skylight_area_b"]
                     total_skylight_area_p = data["total_skylight_area_p"]
 
-                    roof_b = context.baseline
-                    roof_p = context.proposed
+                    roof_b = context.BASELINE_0
+                    roof_p = context.PROPOSED
 
                     total_skylight_area_surface_b = sum(
                         [

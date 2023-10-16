@@ -60,14 +60,14 @@ class Section6Rule9(RuleDefinitionListIndexedBase):
                 )
 
             def is_applicable(self, context, data=None):
-                building_p = context.proposed
+                building_p = context.PROPOSED
                 return (
                     sum(find_all("spaces[*].floor_area", building_p), ZERO.AREA)
                     <= FLOOR_AREA_LIMIT
                 )
 
             def create_data(self, context, data=None):
-                building_p = context.proposed
+                building_p = context.PROPOSED
                 schedules_p = data["schedules_p"]
                 return {
                     "building_open_schedule_p": getattr_(
@@ -95,7 +95,7 @@ class Section6Rule9(RuleDefinitionListIndexedBase):
                     )
 
                 def create_data(self, context, data=None):
-                    zone_p = context.proposed
+                    zone_p = context.PROPOSED
                     return {
                         "avg_space_height": zone_p.get("volume", ZERO.VOLUME)
                         / sum(find_all("spaces[*].floor_area", zone_p), ZERO.AREA),
@@ -111,8 +111,8 @@ class Section6Rule9(RuleDefinitionListIndexedBase):
                         )
 
                     def get_calc_vals(self, context, data=None):
-                        space_p = context.proposed
-                        space_b = context.baseline
+                        space_p = context.PROPOSED
+                        space_b = context.BASELINE_0
                         avg_space_height = data["avg_space_height"]
                         schedules_b = data["schedules_b"]
                         schedules_p = data["schedules_p"]

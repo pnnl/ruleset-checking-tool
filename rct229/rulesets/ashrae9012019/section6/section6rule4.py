@@ -28,7 +28,7 @@ class Section6Rule4(RuleDefinitionListIndexedBase):
         super(Section6Rule4, self).__init__(
             rmrs_used=UserBaselineProposedVals(False, True, True),
             each_rule=Section6Rule4.BuildingSegmentRule(),
-            index_rmr="baseline",
+            index_rmr=RMT.BASELINE_0,
             id="6-4",
             description='Where a complete lighting system exists and where a lighting system has been designed and submitted with design documents, the baseline LPD is equal to expected value in Table G3.7. Where lighting neither exists nor is submitted with design documents, baseline LPD shall be determined in accordance with Table G3-7 for "Office-Open Plan" space type.',
             ruleset_section_title="Lighting",
@@ -42,12 +42,12 @@ class Section6Rule4(RuleDefinitionListIndexedBase):
             super(Section6Rule4.BuildingSegmentRule, self).__init__(
                 rmrs_used=UserBaselineProposedVals(False, True, True),
                 each_rule=Section6Rule4.BuildingSegmentRule.ZoneRule(),
-                index_rmr="baseline",
+                index_rmr=RMT.BASELINE_0,
                 list_path="zones[*]",
             )
 
         def create_data(self, context, data=None):
-            building_segment_p = context.proposed
+            building_segment_p = context.PROPOSED
 
             return {
                 "building_segment_lighting_status_type_dict_p": get_building_segment_lighting_status_type_dict(
@@ -60,12 +60,12 @@ class Section6Rule4(RuleDefinitionListIndexedBase):
                 super(Section6Rule4.BuildingSegmentRule.ZoneRule, self,).__init__(
                     rmrs_used=UserBaselineProposedVals(False, True, True),
                     each_rule=Section6Rule4.BuildingSegmentRule.ZoneRule.SpaceRule(),
-                    index_rmr="baseline",
+                    index_rmr=RMT.BASELINE_0,
                     list_path="spaces[*]",
                 )
 
             def create_data(self, context, data=None):
-                zone_b = context.baseline
+                zone_b = context.BASELINE_0
 
                 # We will need this after Weili's update to table_G3_7_lookup()
                 return {"avg_zone_ht_b": get_avg_zone_height(zone_b)}
@@ -81,8 +81,8 @@ class Section6Rule4(RuleDefinitionListIndexedBase):
                     )
 
                 def get_calc_vals(self, context, data=None):
-                    space_b = context.baseline
-                    space_p = context.proposed
+                    space_b = context.BASELINE_0
+                    space_p = context.PROPOSED
                     total_space_lpd_b = sum(
                         find_all("interior_lighting[*].power_per_area", space_b)
                     )
@@ -110,7 +110,7 @@ class Section6Rule4(RuleDefinitionListIndexedBase):
                     }
 
                 def rule_check(self, context, calc_vals=None, data=None):
-                    space_b = context.baseline
+                    space_b = context.BASELINE_0
                     lighting_space_type_b = space_b.get("lighting_space_type")
 
                     space_lighting_status_type_p = calc_vals[
@@ -138,7 +138,7 @@ class Section6Rule4(RuleDefinitionListIndexedBase):
                     )
 
                 def get_fail_msg(self, context, calc_vals=None, data=None):
-                    space_b = context.baseline
+                    space_b = context.BASELINE_0
                     lighting_space_type_b = space_b.get("lighting_space_type")
 
                     space_lighting_status_type_p = calc_vals[

@@ -33,7 +33,7 @@ class Section22Rule19(RuleDefinitionListIndexedBase):
         super(Section22Rule19, self).__init__(
             rmrs_used=UserBaselineProposedVals(False, True, False),
             each_rule=Section22Rule19.HeatRejectionRule(),
-            index_rmr="baseline",
+            index_rmr=RMT.BASELINE_0,
             id="22-19",
             description="The tower shall be controlled to maintain a leaving water temperature, where weather permits.",
             ruleset_section_title="HVAC - Chiller",
@@ -44,7 +44,7 @@ class Section22Rule19(RuleDefinitionListIndexedBase):
         )
 
     def is_applicable(self, context, data=None):
-        rmi_b = context.baseline
+        rmi_b = context.BASELINE_0
         baseline_system_types_dict = get_baseline_system_types(rmi_b)
         # create a list containing all HVAC systems that are modeled in the rmi_b
         available_type_list = [
@@ -60,7 +60,7 @@ class Section22Rule19(RuleDefinitionListIndexedBase):
         )
 
     def create_data(self, context, data):
-        rmi_b = context.baseline
+        rmi_b = context.BASELINE_0
         heat_rejection_loop_dict = {
             heat_rejection_loop_id: find_exactly_one_with_field_value(
                 "$.fluid_loops[*]", "id", heat_rejection_loop_id, rmi_b
@@ -76,7 +76,7 @@ class Section22Rule19(RuleDefinitionListIndexedBase):
             )
 
         def get_calc_vals(self, context, data=None):
-            heat_rejection_b = context.baseline
+            heat_rejection_b = context.BASELINE_0
             loop_b = heat_rejection_b["loop"]
             temperature_reset_type = getattr_(
                 data["heat_rejection_loop_dict"][loop_b],

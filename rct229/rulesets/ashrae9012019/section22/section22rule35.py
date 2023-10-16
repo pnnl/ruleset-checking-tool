@@ -13,7 +13,7 @@ class Section22Rule35(RuleDefinitionListIndexedBase):
         super(Section22Rule35, self).__init__(
             rmrs_used=UserBaselineProposedVals(False, True, False),
             each_rule=Section22Rule35.RulesetModelInstanceRule(),
-            index_rmr="baseline",
+            index_rmr=RMT.BASELINE_0,
             id="22-35",
             description="Baseline systems served by purchased chilled water shall not be modeled with"
             " chilled water reset",
@@ -33,6 +33,6 @@ class Section22Rule35(RuleDefinitionListIndexedBase):
             )
 
         def applicability_check(self, context, calc_vals, data):
-            rmi_b = context.baseline
+            rmi_b = context.BASELINE_0
             purchased_chw_hhw_status_dict_p = check_purchased_chw_hhw_status_dict(rmi_b)
             return purchased_chw_hhw_status_dict_p["purchased_cooling"]

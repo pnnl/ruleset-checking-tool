@@ -46,7 +46,7 @@ class Section22Rule31(RuleDefinitionBase):
         )
 
     def is_applicable(self, context, data=None):
-        rmi_b = context.baseline
+        rmi_b = context.BASELINE_0
         baseline_system_types_dict = get_baseline_system_types(rmi_b)
         # create a list containing all HVAC systems that are modeled in the rmi_b
         available_type_list = [
@@ -62,7 +62,7 @@ class Section22Rule31(RuleDefinitionBase):
         )
 
     def get_calc_vals(self, context, data=None):
-        rmi_b = context.baseline
+        rmi_b = context.BASELINE_0
         chiller_number = len(rmi_b["chillers"])
 
         output_b = rmi_b["output"]

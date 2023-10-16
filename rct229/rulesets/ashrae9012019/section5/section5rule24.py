@@ -37,7 +37,7 @@ class Section5Rule24(RuleDefinitionListIndexedBase):
                 "weather": ["climate_zone"],
             },
             each_rule=Section5Rule24.BuildingRule(),
-            index_rmr="baseline",
+            index_rmr=RMT.BASELINE_0,
             id="5-24",
             description="Vertical fenestration U-factors for residential, non-residential and semi-heated spaces in the baseline model must match the appropriate requirements in Table G3.4-1 through G3.4-8 for the appropriate WWR in the baseline RMD.",
             ruleset_section_title="Envelope",
@@ -47,7 +47,7 @@ class Section5Rule24(RuleDefinitionListIndexedBase):
         )
 
     def create_data(self, context, data=None):
-        rmr_baseline = context.baseline
+        rmr_baseline = context.BASELINE_0
         climate_zone = rmr_baseline["weather"]["climate_zone"]
 
         # TODO It is determined later we will modify this function to RMD level -
@@ -68,12 +68,12 @@ class Section5Rule24(RuleDefinitionListIndexedBase):
             super(Section5Rule24.BuildingRule, self).__init__(
                 rmrs_used=UserBaselineProposedVals(False, True, False),
                 each_rule=Section5Rule24.BuildingRule.AboveGradeWallRule(),
-                index_rmr="baseline",
+                index_rmr=RMT.BASELINE_0,
                 list_path="$.building_segments[*].zones[*].surfaces[*]",
             )
 
         def create_data(self, context, data=None):
-            building_b = context.baseline
+            building_b = context.BASELINE_0
             climate_zone = data["climate_zone"]
             bldg_scc_wwr_ratio = data["bldg_scc_wwr_ratio_dict"][building_b["id"]]
             # manual flag required?
@@ -202,7 +202,7 @@ class Section5Rule24(RuleDefinitionListIndexedBase):
             }
 
         def list_filter(self, context_item, data=None):
-            surface_b = context_item.baseline
+            surface_b = context_item.BASELINE_0
             scc_dict_b = data["scc_dict_b"]
             return (get_opaque_surface_type(surface_b) == OST.ABOVE_GRADE_WALL) and (
                 scc_dict_b[surface_b["id"]] != SCC.UNREGULATED
@@ -213,7 +213,7 @@ class Section5Rule24(RuleDefinitionListIndexedBase):
                 super(Section5Rule24.BuildingRule.AboveGradeWallRule, self).__init__(
                     rmrs_used=UserBaselineProposedVals(False, True, False),
                     each_rule=Section5Rule24.BuildingRule.AboveGradeWallRule.SubsurfaceRule(),
-                    index_rmr="baseline",
+                    index_rmr=RMT.BASELINE_0,
                     list_path="subsurfaces[*]",
                     required_fields={
                         "$.subsurfaces[*]": [
@@ -229,7 +229,7 @@ class Section5Rule24(RuleDefinitionListIndexedBase):
             def manual_check_required(self, context, calc_vals=None, data=None):
                 scc_dict_b = data["scc_dict_b"]
                 manual_check_required_flag = data["manual_check_required_flag"]
-                surface_b = context.baseline
+                surface_b = context.BASELINE_0
                 # if exterior mixed and required manual check
                 return (
                     scc_dict_b[surface_b["id"]] == SCC.EXTERIOR_MIXED
@@ -237,12 +237,12 @@ class Section5Rule24(RuleDefinitionListIndexedBase):
                 )
 
             def create_data(self, context, data=None):
-                surface_b = context.baseline
+                surface_b = context.BASELINE_0
                 scc_dict_b = data["scc_dict_b"]
                 return {"scc": scc_dict_b[surface_b["id"]]}
 
             def list_filter(self, context_item, data=None):
-                subsurface_b = context_item.baseline
+                subsurface_b = context_item.BASELINE_0
                 return (
                     subsurface_b["classification"] != DOOR
                     or subsurface_b["glazed_area"] > subsurface_b["opaque_area"]
@@ -258,7 +258,7 @@ class Section5Rule24(RuleDefinitionListIndexedBase):
                     )
 
                 def get_calc_vals(self, context, data=None):
-                    subsurface_b = context.baseline
+                    subsurface_b = context.BASELINE_0
                     scc = data["scc"]
                     target_u_factor = None
                     if scc == SCC.EXTERIOR_MIXED:

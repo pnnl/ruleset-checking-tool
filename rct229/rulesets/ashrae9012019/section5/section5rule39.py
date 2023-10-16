@@ -32,7 +32,7 @@ class Section5Rule39(RuleDefinitionListIndexedBase):
             )
 
         def get_calc_vals(self, context, data=None):
-            subsurface_p = context.proposed
+            subsurface_p = context.PROPOSED
             subsurface_dynamic_glazing_type_p = subsurface_p["dynamic_glazing_type"]
             return {
                 "subsurface_dynamic_glazing_type_p": subsurface_dynamic_glazing_type_p

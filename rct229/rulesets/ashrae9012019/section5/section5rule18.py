@@ -34,7 +34,7 @@ class Section5Rule18(RuleDefinitionListIndexedBase):
                 "weather": ["climate_zone"],
             },
             each_rule=Section5Rule18.BuildingRule(),
-            index_rmr="baseline",
+            index_rmr=RMT.BASELINE_0,
             id="5-18",
             description="For building area types included in Table G3.1.1-1, vertical fenestration areas for new buildings and additions shall equal that in Table G3.1.1-1 based on the area of gross above-grade walls that separate conditioned spaces and semi-heated spaces from the exterior.",
             ruleset_section_title="Envelope",
@@ -55,12 +55,12 @@ class Section5Rule18(RuleDefinitionListIndexedBase):
                         "area_type_vertical_fenestration",
                     ],
                 },
-                index_rmr="baseline",
+                index_rmr=RMT.BASELINE_0,
                 each_rule=Section5Rule18.BuildingRule.AreaTypeRule(),
             )
 
         def create_data(self, context, data=None):
-            building = context.baseline
+            building = context.BASELINE_0
             area_type_window_wall_area_dict_b = get_area_type_window_wall_area_dict(
                 data["climate_zone"], building
             )
@@ -77,7 +77,7 @@ class Section5Rule18(RuleDefinitionListIndexedBase):
 
         def create_context_list(self, context, data=None):
             # EXAMPLE of reorganizing the context.
-            building = context.baseline
+            building = context.BASELINE_0
             area_type_to_building_segment_dict = {}
             # dict map area_type with list of building_segment
             for building_segment in find_all("$.building_segments[*]", building):
@@ -104,7 +104,7 @@ class Section5Rule18(RuleDefinitionListIndexedBase):
                 )
 
             def get_calc_vals(self, context, data=None):
-                building_segments_b = context.baseline["building_segments"]
+                building_segments_b = context.BASELINE_0["building_segments"]
                 is_area_type_all_new_dict = data["is_area_type_all_new_dict"]
                 area_type_window_wall_ratio_b = data["area_type_window_wall_ratio_dict"]
 

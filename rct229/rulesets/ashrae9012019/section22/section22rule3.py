@@ -37,7 +37,7 @@ class Section22Rule3(RuleDefinitionListIndexedBase):
         super(Section22Rule3, self).__init__(
             rmrs_used=UserBaselineProposedVals(False, True, False),
             each_rule=Section22Rule3.ChillerFluidLoopRule(),
-            index_rmr="baseline",
+            index_rmr=RMT.BASELINE_0,
             id="22-3",
             description="For Baseline chilled water loop that is not purchased cooling, chilled-water supply temperature shall be reset based on outdoor dry-bulb temperature if loop does not serve any Baseline System Type-11.",
             ruleset_section_title="HVAC - Chiller",
@@ -48,7 +48,7 @@ class Section22Rule3(RuleDefinitionListIndexedBase):
         )
 
     def is_applicable(self, context, data=None):
-        rmi_b = context.baseline
+        rmi_b = context.BASELINE_0
         baseline_system_types_dict = get_baseline_system_types(rmi_b)
         # create a list containing all HVAC systems that are modeled in the rmi_b
         available_type_list = [
@@ -69,12 +69,12 @@ class Section22Rule3(RuleDefinitionListIndexedBase):
         )
 
     def create_data(self, context, data):
-        rmi_b = context.baseline
+        rmi_b = context.BASELINE_0
         chiller_loop_ids_list = find_all("chillers[*].cooling_loop", rmi_b)
         return {"chiller_loop_ids": chiller_loop_ids_list}
 
     def list_filter(self, context_item, data):
-        fluid_loop_b = context_item.baseline
+        fluid_loop_b = context_item.BASELINE_0
         loop_chiller_ids_list = data["chiller_loop_ids"]
         return fluid_loop_b["id"] in loop_chiller_ids_list
 
@@ -88,7 +88,7 @@ class Section22Rule3(RuleDefinitionListIndexedBase):
             )
 
         def get_calc_vals(self, context, data=None):
-            fluid_loop_b = context.baseline
+            fluid_loop_b = context.BASELINE_0
             temperature_reset_type = find_one(
                 "$.cooling_or_condensing_design_and_control.temperature_reset_type",
                 fluid_loop_b,

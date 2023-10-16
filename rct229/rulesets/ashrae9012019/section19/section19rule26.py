@@ -28,7 +28,7 @@ class Section19Rule26(RuleDefinitionListIndexedBase):
         )
 
     def create_data(self, context, data):
-        rmi_p = context.proposed
+        rmi_p = context.PROPOSED
         applicable_hvac_systems_list_p = (
             get_hvac_systems_serving_zone_health_safety_vent_reqs(rmi_p)
         )
@@ -49,14 +49,14 @@ class Section19Rule26(RuleDefinitionListIndexedBase):
             )
 
         def is_applicable(self, context, data=None):
-            hvac_p = context.proposed
+            hvac_p = context.PROPOSED
             hvac_id_p = hvac_p["id"]
             applicable_hvac_systems_list_p = data["applicable_hvac_systems_list_p"]
 
             return hvac_id_p in applicable_hvac_systems_list_p
 
         def get_calc_vals(self, context, data=None):
-            hvac_p = context.proposed
+            hvac_p = context.PROPOSED
 
             operation_during_unoccupied_p = hvac_p["fan_system"][
                 "operation_during_unoccupied"
@@ -78,7 +78,7 @@ class Section19Rule26(RuleDefinitionListIndexedBase):
             )
 
         def get_fail_msg(self, context, calc_vals=None, data=None):
-            hvac_p = context.proposed
+            hvac_p = context.PROPOSED
             hvac_id_p = hvac_p["id"]
 
             return f"{hvac_id_p} SERVES ZONE(S) THAT APPEAR LIKELY TO HAVE HEALTH AND SAFETY MANDATED MINIMUM VENTILATION REQUIREMENTS DURING UNOCCUPIED HOURS AND THEREFORE (IF THE HVAC SYSTEM SUPPLIES OA CFM) MAY WARRANT CONTINUOUS OPERATION DURING UNOCCUPIED HOURS PER SECTION G3.1-4 SCHEDULES EXCEPTION #2 FOR THE PROPOSED BUILDING AND PER SECTION G3.1.2.4."

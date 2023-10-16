@@ -33,7 +33,7 @@ class Section23Rule8(RuleDefinitionListIndexedBase):
         super(Section23Rule8, self).__init__(
             rmrs_used=UserBaselineProposedVals(False, True, False),
             each_rule=Section23Rule8.HVACRule(),
-            index_rmr="baseline",
+            index_rmr=RMT.BASELINE_0,
             id="23-8",
             description="System 5-8 and 11 - part load VAV fan power shall be modeled using either method 1 or 2 in Table G3.1.3.15. This rule will only validate data points from Method-1 Part-load Fan Power Data. However, both methods are equivalent. When modeling inputs are based on Method 2, values should be converted to Method 1 when writing to RMD.",
             ruleset_section_title="HVAC - Airside",
@@ -44,7 +44,7 @@ class Section23Rule8(RuleDefinitionListIndexedBase):
         )
 
     def is_applicable(self, context, data=None):
-        rmi_b = context.baseline
+        rmi_b = context.BASELINE_0
         baseline_system_types_dict = get_baseline_system_types(rmi_b)
 
         return any(
@@ -56,7 +56,7 @@ class Section23Rule8(RuleDefinitionListIndexedBase):
         )
 
     def create_data(self, context, data):
-        rmi_b = context.baseline
+        rmi_b = context.BASELINE_0
         baseline_system_types_dict = get_baseline_system_types(rmi_b)
         applicable_hvac_sys_ids = [
             hvac_id
@@ -69,7 +69,7 @@ class Section23Rule8(RuleDefinitionListIndexedBase):
         return {"applicable_hvac_sys_ids": applicable_hvac_sys_ids}
 
     def list_filter(self, context_item, data):
-        hvac_sys_b = context_item.baseline
+        hvac_sys_b = context_item.BASELINE_0
         applicable_hvac_sys_ids = data["applicable_hvac_sys_ids"]
 
         return hvac_sys_b["id"] in applicable_hvac_sys_ids
@@ -79,7 +79,7 @@ class Section23Rule8(RuleDefinitionListIndexedBase):
             super(Section23Rule8.HVACRule, self).__init__(
                 rmrs_used=UserBaselineProposedVals(False, True, False),
                 each_rule=Section23Rule8.HVACRule.SupplyFanRule(),
-                index_rmr="baseline",
+                index_rmr=RMT.BASELINE_0,
                 list_path="$.fan_system.supply_fans[*]",
             )
 
@@ -97,7 +97,7 @@ class Section23Rule8(RuleDefinitionListIndexedBase):
                 )
 
             def get_calc_vals(self, context, data=None):
-                supply_fan_b = context.baseline
+                supply_fan_b = context.BASELINE_0
 
                 design_airflow_b = supply_fan_b["design_airflow"]
                 design_electric_power_b = supply_fan_b["design_electric_power"]

@@ -53,7 +53,7 @@ class Section5Rule41(RuleDefinitionListIndexedBase):
             )
 
         def create_data(self, context, data=None):
-            building_p = context.proposed
+            building_p = context.PROPOSED
             return {
                 "scc_dict_p": get_surface_conditioning_category_dict(
                     data["climate_zone"], building_p
@@ -61,7 +61,7 @@ class Section5Rule41(RuleDefinitionListIndexedBase):
             }
 
         def list_filter(self, context_item, data=None):
-            surface_p = context_item.proposed
+            surface_p = context_item.PROPOSED
             scc = data["scc_dict_p"][surface_p["id"]]
             return (
                 get_opaque_surface_type(surface_p) == OST.ROOF
@@ -79,8 +79,8 @@ class Section5Rule41(RuleDefinitionListIndexedBase):
                 )
 
             def get_calc_vals(self, context, data=None):
-                roof_p = context.proposed
-                roof_u = context.user
+                roof_p = context.PROPOSED
+                roof_u = context.USER
 
                 return {
                     "absorptance_thermal_exterior_p": roof_p["optical_properties"][

@@ -28,7 +28,7 @@ class Section19Rule31(RuleDefinitionListIndexedBase):
         )
 
     def create_data(self, context, data):
-        rmi_p = context.proposed
+        rmi_p = context.PROPOSED
 
         hvac_systems_primarily_serving_comp_room_p = (
             get_hvac_systems_primarily_serving_comp_room(rmi_p)
@@ -52,7 +52,7 @@ class Section19Rule31(RuleDefinitionListIndexedBase):
             )
 
         def is_applicable(self, context, data=None):
-            hvac_p = context.proposed
+            hvac_p = context.PROPOSED
             hvac_id_p = hvac_p["id"]
             hvac_systems_primarily_serving_comp_room_p = data[
                 "hvac_systems_primarily_serving_comp_room_p"
@@ -61,7 +61,7 @@ class Section19Rule31(RuleDefinitionListIndexedBase):
             return hvac_id_p in hvac_systems_primarily_serving_comp_room_p
 
         def get_calc_vals(self, context, data=None):
-            hvac_p = context.proposed
+            hvac_p = context.PROPOSED
 
             operation_during_unoccupied_p = hvac_p["fan_system"][
                 "operation_during_unoccupied"

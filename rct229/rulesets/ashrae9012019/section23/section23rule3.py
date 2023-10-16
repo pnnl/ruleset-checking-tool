@@ -28,7 +28,7 @@ class Section23Rule3(RuleDefinitionListIndexedBase):
         super(Section23Rule3, self).__init__(
             rmrs_used=UserBaselineProposedVals(False, True, False),
             each_rule=Section23Rule3.TerminalRule(),
-            index_rmr="baseline",
+            index_rmr=RMT.BASELINE_0,
             id="23-3",
             description="System 5, 6, 7 and 8 minimum volume setpoint shall be 30% of zone peak airflow, minimum outdoor airflow, or rate required to comply with minium accreditation standards whichever is larger.",
             ruleset_section_title="HVAC - Airside",
@@ -39,7 +39,7 @@ class Section23Rule3(RuleDefinitionListIndexedBase):
         )
 
     def is_applicable(self, context, data=None):
-        rmi_b = context.baseline
+        rmi_b = context.BASELINE_0
         baseline_system_types_dict = get_baseline_system_types(rmi_b)
 
         return any(
@@ -51,7 +51,7 @@ class Section23Rule3(RuleDefinitionListIndexedBase):
         )
 
     def create_data(self, context, data):
-        rmi_b = context.baseline
+        rmi_b = context.BASELINE_0
         baseline_system_types_dict = get_baseline_system_types(rmi_b)
         applicable_hvac_sys_ids = [
             hvac_id
@@ -67,7 +67,7 @@ class Section23Rule3(RuleDefinitionListIndexedBase):
         applicable_hvac_sys_ids = data["applicable_hvac_sys_ids"]
 
         return (
-            context_item.baseline[
+            context_item.BASELINE_0[
                 "served_by_heating_ventilating_air_conditioning_system"
             ]
             in applicable_hvac_sys_ids
@@ -87,7 +87,7 @@ class Section23Rule3(RuleDefinitionListIndexedBase):
             )
 
         def get_calc_vals(self, context, data=None):
-            terminal_b = context.baseline
+            terminal_b = context.BASELINE_0
             minimum_airflow_b = terminal_b["minimum_airflow"]
             primary_airflow_b = terminal_b["primary_airflow"]
             minimum_outdoor_airflow_b = terminal_b["minimum_outdoor_airflow"]

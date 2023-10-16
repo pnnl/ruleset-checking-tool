@@ -36,7 +36,7 @@ class Section22Rule20(RuleDefinitionListIndexedBase):
         super(Section22Rule20, self).__init__(
             rmrs_used=UserBaselineProposedVals(False, True, False),
             each_rule=Section22Rule20.HeatRejectionRule(),
-            index_rmr="baseline",
+            index_rmr=RMT.BASELINE_0,
             id="22-20",
             description="The baseline minimum condenser water reset temperature is per Table G3.1.3.11.",
             ruleset_section_title="HVAC - Chiller",
@@ -50,7 +50,7 @@ class Section22Rule20(RuleDefinitionListIndexedBase):
         )
 
     def is_applicable(self, context, data=None):
-        rmd_b = context.baseline
+        rmd_b = context.BASELINE_0
         assert_(
             rmd_b,
             "ruleset_model_instance list is empty",
@@ -80,7 +80,7 @@ class Section22Rule20(RuleDefinitionListIndexedBase):
             )
 
         def get_calc_vals(self, context, data=None):
-            heat_rejection_b = context.baseline
+            heat_rejection_b = context.BASELINE_0
 
             tower_leaving_temperature_b = table_3_1_3_11_lookup(data["climate_zone"])[
                 "leaving_water_temperature"

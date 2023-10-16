@@ -21,7 +21,7 @@ class Section15Rule3(RuleDefinitionListIndexedBase):
         )
 
     def create_data(self, context, data):
-        transformers_p = context.proposed
+        transformers_p = context.PROPOSED
         return {"transformer_ids_p": find_all("$[*].id", transformers_p)}
 
     class TransformerRule(RuleDefinitionBase):
@@ -32,7 +32,7 @@ class Section15Rule3(RuleDefinitionListIndexedBase):
 
         def get_calc_vals(self, context, data=None):
             return {
-                "user_transformer_id": context.user["id"],
+                "user_transformer_id": context.USER["id"],
                 "transformer_ids_p": data["transformer_ids_p"],
             }
 

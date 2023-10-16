@@ -27,7 +27,7 @@ class Section23Rule6(RuleDefinitionListIndexedBase):
         super(Section23Rule6, self).__init__(
             rmrs_used=UserBaselineProposedVals(False, True, False),
             each_rule=Section23Rule6.TerminalRule(),
-            index_rmr="baseline",
+            index_rmr=RMT.BASELINE_0,
             id="23-6",
             description="For baseline systems 6 and 8, Fans in parallel VAV fan-powered boxes shall be sized for 50% of the peak design primary air (from the VAV air-handling unit) flow rate and shall be modeled with 0.35 W/cfm fan power.",
             ruleset_section_title="HVAC - Airside",
@@ -38,7 +38,7 @@ class Section23Rule6(RuleDefinitionListIndexedBase):
         )
 
     def is_applicable(self, context, data=None):
-        rmi_b = context.baseline
+        rmi_b = context.BASELINE_0
         baseline_system_types_dict = get_baseline_system_types(rmi_b)
 
         return any(
@@ -50,7 +50,7 @@ class Section23Rule6(RuleDefinitionListIndexedBase):
         )
 
     def create_data(self, context, data):
-        rmi_b = context.baseline
+        rmi_b = context.BASELINE_0
         baseline_system_types_dict = get_baseline_system_types(rmi_b)
         applicable_hvac_sys_ids = [
             hvac_id
@@ -66,7 +66,7 @@ class Section23Rule6(RuleDefinitionListIndexedBase):
         applicable_hvac_sys_ids = data["applicable_hvac_sys_ids"]
 
         return (
-            context_item.baseline[
+            context_item.BASELINE_0[
                 "served_by_heating_ventilating_air_conditioning_system"
             ]
             in applicable_hvac_sys_ids
@@ -86,7 +86,7 @@ class Section23Rule6(RuleDefinitionListIndexedBase):
             )
 
         def get_calc_vals(self, context, data=None):
-            terminal_b = context.baseline
+            terminal_b = context.BASELINE_0
             design_airflow_b = terminal_b["fan"]["design_airflow"]
             primary_airflow_b = terminal_b["primary_airflow"]
             design_electric_power_b = terminal_b["fan"]["design_electric_power"]

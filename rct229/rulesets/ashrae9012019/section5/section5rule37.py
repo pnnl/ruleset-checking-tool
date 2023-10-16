@@ -39,7 +39,7 @@ class Section5Rule37(RuleDefinitionListIndexedBase):
                 "weather": ["climate_zone"],
             },
             each_rule=Section5Rule37.BuildingRule(),
-            index_rmr="baseline",
+            index_rmr=RMT.BASELINE_0,
             id="5-37",
             description="Skylight U-factors for residential, non-residential and semi-heated spaces in the baseline model must match the appropriate requirements in Table G3.4-1 through G3.4-8.",
             ruleset_section_title="Envelope",
@@ -54,7 +54,7 @@ class Section5Rule37(RuleDefinitionListIndexedBase):
             super(Section5Rule37.BuildingRule, self).__init__(
                 rmrs_used=UserBaselineProposedVals(False, True, False),
                 each_rule=Section5Rule37.BuildingRule.RoofRule(),
-                index_rmr="baseline",
+                index_rmr=RMT.BASELINE_0,
                 list_path="$.building_segments[*].zones[*].surfaces[*]",
                 manual_check_required_msg=MANUAL_CHECK_MSG,
             )
@@ -63,7 +63,7 @@ class Section5Rule37(RuleDefinitionListIndexedBase):
             # If building segment exterior mixed skylight to roof ratio is greater than 0
             # and residential, nonresidential and <=2% and > 2% u_factors are identical
             # then set the manual check required and stop execution.
-            building_b = context.baseline
+            building_b = context.BASELINE_0
             climate_zone = data["climate_zone"]
             building_scc_skylight_roof_ratios_dict_b = (
                 get_building_scc_skylight_roof_ratios_dict(climate_zone, building_b)
@@ -104,7 +104,7 @@ class Section5Rule37(RuleDefinitionListIndexedBase):
             )
 
         def create_data(self, context, data=None):
-            building_b = context.baseline
+            building_b = context.BASELINE_0
             climate_zone = data["climate_zone"]
             building_scc_skylight_roof_ratios_dict_b = (
                 get_building_scc_skylight_roof_ratios_dict(climate_zone, building_b)
@@ -179,7 +179,7 @@ class Section5Rule37(RuleDefinitionListIndexedBase):
 
         def list_filter(self, context_item, data=None):
             # context_item shall be the list of the list_path element
-            surface_b = context_item.baseline
+            surface_b = context_item.BASELINE_0
             # roof with subsurfaces, and the roof is not unregulated
             return (
                 get_opaque_surface_type(surface_b) == OST.ROOF
@@ -193,12 +193,12 @@ class Section5Rule37(RuleDefinitionListIndexedBase):
                 super(Section5Rule37.BuildingRule.RoofRule, self).__init__(
                     rmrs_used=UserBaselineProposedVals(False, True, False),
                     each_rule=Section5Rule37.BuildingRule.RoofRule.SubsurfaceRule(),
-                    index_rmr="baseline",
+                    index_rmr=RMT.BASELINE_0,
                     list_path="subsurfaces[*]",
                 )
 
             def create_data(self, context, data=None):
-                surface_b = context.baseline
+                surface_b = context.BASELINE_0
                 scc_type = data["surface_conditioning_category_dict_b"][surface_b["id"]]
                 return {"scc_type": scc_type}
 
@@ -221,14 +221,14 @@ class Section5Rule37(RuleDefinitionListIndexedBase):
                     )
 
                 def is_applicable(self, context, data=None):
-                    subsurface_b = context.baseline
+                    subsurface_b = context.BASELINE_0
                     return (
                         subsurface_b["classification"] != DOOR
                         or subsurface_b["glazed_area"] <= subsurface_b["opaque_area"]
                     )
 
                 def get_calc_vals(self, context, data=None):
-                    subsurface_b = context.baseline
+                    subsurface_b = context.BASELINE_0
                     subsurface_b_u_factor = subsurface_b["u_factor"]
 
                     scc_type = data["scc_type"]

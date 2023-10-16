@@ -19,7 +19,7 @@ class Section19Rule29(RuleDefinitionListIndexedBase):
         super(Section19Rule29, self).__init__(
             rmrs_used=UserBaselineProposedVals(False, True, False),
             each_rule=Section19Rule29.HVACRule(),
-            index_rmr="baseline",
+            index_rmr=RMT.BASELINE_0,
             id="19-29",
             description="Schedules for HVAC fans in the baseline design model that provide outdoor air for ventilation shall be cycled ON and OFF "
             "to meet heating and cooling loads during unoccupied hours excluding HVAC systems that meet Table G3.1-4 Schedules per the proposed column exceptions #s 2 and 3."
@@ -33,7 +33,7 @@ class Section19Rule29(RuleDefinitionListIndexedBase):
         )
 
     def create_data(self, context, data):
-        rmi_b = context.baseline
+        rmi_b = context.BASELINE_0
 
         inapplicable_hvac_sys_list_b = list(
             set(
@@ -57,14 +57,14 @@ class Section19Rule29(RuleDefinitionListIndexedBase):
             )
 
         def is_applicable(self, context, data=None):
-            hvac_b = context.baseline
+            hvac_b = context.BASELINE_0
             hvac_id_b = hvac_b["id"]
             inapplicable_hvac_sys_list_b = data["inapplicable_hvac_sys_list_b"]
 
             return hvac_id_b not in inapplicable_hvac_sys_list_b
 
         def get_calc_vals(self, context, data=None):
-            hvac_b = context.baseline
+            hvac_b = context.BASELINE_0
 
             operation_during_unoccupied_b = hvac_b["fan_system"][
                 "operation_during_unoccupied"

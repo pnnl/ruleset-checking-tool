@@ -24,7 +24,7 @@ class Section22Rule30(RuleDefinitionListIndexedBase):
         super(Section22Rule30, self).__init__(
             rmrs_used=UserBaselineProposedVals(False, True, False),
             each_rule=Section22Rule30.CondensingFluidLoopRule(),
-            index_rmr="baseline",
+            index_rmr=RMT.BASELINE_0,
             id="22-30",
             description="For chilled-water systems served by chiller(s) and serves baseline System-11, condenser-water pump power shall be 22 W/gpm.",
             ruleset_section_title="HVAC - Chiller",
@@ -35,7 +35,7 @@ class Section22Rule30(RuleDefinitionListIndexedBase):
         )
 
     def is_applicable(self, context, data=None):
-        rmi_b = context.baseline
+        rmi_b = context.BASELINE_0
         baseline_system_types_dict = get_baseline_system_types(rmi_b)
         # create a list containing all HVAC systems that are modeled in the rmi_b
         available_type_list = [
@@ -51,7 +51,7 @@ class Section22Rule30(RuleDefinitionListIndexedBase):
         )
 
     def create_data(self, context, data):
-        rmi_b = context.baseline
+        rmi_b = context.BASELINE_0
         condenser_loop_pump_power_dict = {
             chiller["condensing_loop"]: find_exactly_one_fluid_loop(
                 rmi_b, chiller["condensing_loop"]
@@ -61,7 +61,7 @@ class Section22Rule30(RuleDefinitionListIndexedBase):
         return {"condenser_loop_pump_power_dict": condenser_loop_pump_power_dict}
 
     def list_filter(self, context_item, data):
-        fluid_loops_b = context_item.baseline
+        fluid_loops_b = context_item.BASELINE_0
         return fluid_loops_b.get("pump_power_per_flow_rate")
 
     class CondensingFluidLoopRule(RuleDefinitionBase):
@@ -71,7 +71,7 @@ class Section22Rule30(RuleDefinitionListIndexedBase):
             )
 
         def get_calc_vals(self, context, data=None):
-            fluid_loop_b = context.baseline
+            fluid_loop_b = context.BASELINE_0
             pump_power_per_flow_rate = fluid_loop_b["pump_power_per_flow_rate"]
             required_pump_power = REQUIRED_PUMP_POWER
 

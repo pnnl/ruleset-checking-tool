@@ -25,7 +25,7 @@ class Section19Rule9(RuleDefinitionListIndexedBase):
         super(Section19Rule9, self).__init__(
             rmrs_used=UserBaselineProposedVals(False, True, False),
             each_rule=Section19Rule9.HVACRule(),
-            index_rmr="baseline",
+            index_rmr=RMT.BASELINE_0,
             id="19-9",
             description="Air economizers shall not be included in baseline HVAC Systems 1, 2, 9, and 10.",
             ruleset_section_title="HVAC - General",
@@ -36,7 +36,7 @@ class Section19Rule9(RuleDefinitionListIndexedBase):
         )
 
     def is_applicable(self, context, data=None):
-        rmi_b = context.baseline
+        rmi_b = context.BASELINE_0
         baseline_system_types_dict = get_baseline_system_types(rmi_b)
 
         return any(
@@ -48,7 +48,7 @@ class Section19Rule9(RuleDefinitionListIndexedBase):
         )
 
     def create_data(self, context, data):
-        rmi_b = context.baseline
+        rmi_b = context.BASELINE_0
         baseline_system_types_dict = get_baseline_system_types(rmi_b)
 
         return {
@@ -71,7 +71,7 @@ class Section19Rule9(RuleDefinitionListIndexedBase):
             )
 
         def is_applicable(self, context, data=None):
-            hvac_b = context.baseline
+            hvac_b = context.BASELINE_0
             hvac_id_b = hvac_b["id"]
             baseline_system_types_dict = data["baseline_system_types_dict"]
 
@@ -81,7 +81,7 @@ class Section19Rule9(RuleDefinitionListIndexedBase):
             )
 
         def get_calc_vals(self, context, data=None):
-            hvac_b = context.baseline
+            hvac_b = context.BASELINE_0
             fan_system_b = hvac_b["fan_system"]
 
             air_economizer_type_b = find_one("$.air_economizer.type", fan_system_b)

@@ -64,7 +64,7 @@ class Section19Rule21(RuleDefinitionListIndexedBase):
                 "weather": ["climate_zone"],
             },
             each_rule=Section19Rule21.RMDRule(),
-            index_rmr="baseline",
+            index_rmr=RMT.BASELINE_0,
             id="19-21",
             description="Baseline systems with >= 5,000 CFM supply air and >= 70 %OA shall have energy recovery modeled in the baseline design model. The following exceptions apply:"
             "1. Systems serving spaces that are not cooled and that are heated to less than 60°F."
@@ -86,13 +86,13 @@ class Section19Rule21(RuleDefinitionListIndexedBase):
             super(Section19Rule21.RMDRule, self).__init__(
                 rmrs_used=UserBaselineProposedVals(False, True, True),
                 each_rule=Section19Rule21.RMDRule.HVACRule(),
-                index_rmr="baseline",
+                index_rmr=RMT.BASELINE_0,
                 list_path="$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*]",
             )
 
         def create_data(self, context, data):
-            rmd_b = context.baseline
-            rmd_p = context.proposed
+            rmd_b = context.BASELINE_0
+            rmd_p = context.PROPOSED
 
             dict_of_zones_and_terminal_units_served_by_hvac_sys_b = (
                 get_dict_of_zones_and_terminal_units_served_by_hvac_sys(rmd_b)
@@ -242,8 +242,8 @@ class Section19Rule21(RuleDefinitionListIndexedBase):
                 )
 
             def get_calc_vals(self, context, data=None):
-                hvac_b = context.baseline
-                hvac_p = context.proposed
+                hvac_b = context.BASELINE_0
+                hvac_p = context.PROPOSED
                 hvac_id_b = hvac_b["id"]
 
                 climate_zone_b = data["climate_zone"]
@@ -378,7 +378,7 @@ class Section19Rule21(RuleDefinitionListIndexedBase):
                 )
 
             def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
-                hvac_b = context.baseline
+                hvac_b = context.BASELINE_0
                 hvac_id_b = hvac_b["id"]
 
                 ER_modeled_p = calc_vals["ER_modeled_p"]

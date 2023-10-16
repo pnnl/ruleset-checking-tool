@@ -37,7 +37,7 @@ class Section6Rule2(RuleDefinitionListIndexedBase):
         )
 
     def list_filter(self, context_item, data=None):
-        space_p = context_item.proposed
+        space_p = context_item.PROPOSED
         # skip spaces has no lighting_space_type
         lighting_space_type_p = space_p.get("lighting_space_type")
 
@@ -60,12 +60,12 @@ class Section6Rule2(RuleDefinitionListIndexedBase):
 
         def is_applicable(self, context, data=None):
             # Set space not applicable if no lighting space type
-            space_p = context.proposed
+            space_p = context.PROPOSED
             return space_p.get("lighting_space_type") is not None
 
         def get_calc_vals(self, context, data=None):
-            space_p = context.proposed
-            space_u = context.user
+            space_p = context.PROPOSED
+            space_u = context.USER
 
             # get allowance
             if space_p["lighting_space_type"] in [

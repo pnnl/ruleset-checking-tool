@@ -16,7 +16,7 @@ class Section5Rule45(RuleDefinitionListIndexedBase):
         super(Section5Rule45, self).__init__(
             rmrs_used=UserBaselineProposedVals(False, True, True),
             each_rule=Section5Rule45.RuleSetModelInstanceRule(),
-            index_rmr="baseline",
+            index_rmr=RMT.BASELINE_0,
             id="5-45",
             description="The infiltration schedules are the same in the proposed RMR as in the baseline RMR.",
             ruleset_section_title="Envelope",
@@ -32,14 +32,14 @@ class Section5Rule45(RuleDefinitionListIndexedBase):
             super(Section5Rule45.RuleSetModelInstanceRule, self).__init__(
                 rmrs_used=UserBaselineProposedVals(False, True, True),
                 each_rule=Section5Rule45.RuleSetModelInstanceRule.ZoneRule(),
-                index_rmr="baseline",
+                index_rmr=RMT.BASELINE_0,
                 list_path="buildings[*].building_segments[*].zones[*]",
                 required_fields={"$": ["schedules"]},
             )
 
         def create_data(self, context, data=None):
-            rmd_b = context.baseline
-            rmd_p = context.proposed
+            rmd_b = context.BASELINE_0
+            rmd_p = context.PROPOSED
             return {
                 "schedules_b": rmd_b["schedules"],
                 "schedules_p": rmd_p["schedules"],
@@ -58,8 +58,8 @@ class Section5Rule45(RuleDefinitionListIndexedBase):
                 )
 
             def get_calc_vals(self, context, data=None):
-                zone_b = context.baseline
-                zone_p = context.proposed
+                zone_b = context.BASELINE_0
+                zone_p = context.PROPOSED
 
                 schedules_b = data["schedules_b"]
                 schedules_p = data["schedules_p"]

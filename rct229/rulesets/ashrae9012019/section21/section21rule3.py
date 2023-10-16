@@ -31,7 +31,7 @@ class Section21Rule3(RuleDefinitionListIndexedBase):
         super(Section21Rule3, self).__init__(
             rmrs_used=UserBaselineProposedVals(False, True, False),
             each_rule=Section21Rule3.HeatingFluidLoopRule(),
-            index_rmr="baseline",
+            index_rmr=RMT.BASELINE_0,
             id="21-3",
             description="Heating hot water plant capacity shall be based on coincident loads.",
             ruleset_section_title="HVAC - Water Side",
@@ -42,7 +42,7 @@ class Section21Rule3(RuleDefinitionListIndexedBase):
         )
 
     def is_applicable(self, context, data=None):
-        rmi_b = context.baseline
+        rmi_b = context.BASELINE_0
         baseline_system_types_dict = get_baseline_system_types(rmi_b)
         # create a list containing all HVAC systems that are modeled in the rmi_b
         available_type_list = [
@@ -58,7 +58,7 @@ class Section21Rule3(RuleDefinitionListIndexedBase):
         )
 
     def list_filter(self, context_item, data):
-        fluid_loop_b = context_item.baseline
+        fluid_loop_b = context_item.BASELINE_0
         return getattr_(fluid_loop_b, "FluidLoop", "type") == FLUID_LOOP.HEATING
 
     class HeatingFluidLoopRule(RuleDefinitionBase):
@@ -72,7 +72,7 @@ class Section21Rule3(RuleDefinitionListIndexedBase):
             )
 
         def get_calc_vals(self, context, data=None):
-            heating_fluid_loop_b = context.baseline
+            heating_fluid_loop_b = context.BASELINE_0
             is_sized_using_coincident_load = heating_fluid_loop_b[
                 "heating_design_and_control"
             ]["is_sized_using_coincident_load"]

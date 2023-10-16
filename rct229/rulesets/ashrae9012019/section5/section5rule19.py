@@ -27,7 +27,7 @@ class Section5Rule19(RuleDefinitionListIndexedBase):
                 "weather": ["climate_zone"],
             },
             each_rule=Section5Rule19.BuildingRule(),
-            index_rmr="baseline",
+            index_rmr=RMT.BASELINE_0,
             id="5-19",
             description="For building areas not shown in Table G3.1.1-1, vertical fenestration areas for new buildings and additions shall equal that in the proposed design or 40% of gross above-grade wall area, whichever is smaller.",
             ruleset_section_title="Envelope",
@@ -51,15 +51,15 @@ class Section5Rule19(RuleDefinitionListIndexedBase):
             )
 
         def is_applicable(self, context, data=None):
-            building_b = context.baseline
+            building_b = context.BASELINE_0
             area_type_window_wall_area_dict_b = get_area_type_window_wall_area_dict(
                 data["climate_zone"], building_b
             )
             return OTHER in area_type_window_wall_area_dict_b
 
         def get_calc_vals(self, context, data=None):
-            building_b = context.baseline
-            building_p = context.proposed
+            building_b = context.BASELINE_0
+            building_p = context.PROPOSED
 
             area_type_window_wall_area_dict_b = get_area_type_window_wall_area_dict(
                 data["climate_zone"], building_b

@@ -161,7 +161,7 @@ def test__rule_definition_base__get_context__with_rmrs_present():
     context = BASE_RULE_1.get_context(UserBaselineProposedVals(RMR_1, RMR_2, RMR_EMPTY))
     assert (
         context.user == RMR_1["transformers"]
-        and context.baseline == RMR_2["transformers"]
+        and context.BASELINE_0 == RMR_2["transformers"]
         and context.proposed == None
     )
 

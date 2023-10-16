@@ -30,7 +30,7 @@ class Section22Rule26(RuleDefinitionListIndexedBase):
         super(Section22Rule26, self).__init__(
             rmrs_used=UserBaselineProposedVals(False, True, False),
             each_rule=Section22Rule26.PrimaryCoolingFluidLoop(),
-            index_rmr="baseline",
+            index_rmr=RMT.BASELINE_0,
             id="22-26",
             description="For chilled-water systems served by chiller(s) and serves baseline System-11, the baseline building constant-volume primary pump power shall be modeled as 12 W/gpm.",
             ruleset_section_title="HVAC - Chiller",
@@ -41,7 +41,7 @@ class Section22Rule26(RuleDefinitionListIndexedBase):
         )
 
     def is_applicable(self, context, data=None):
-        rmi_b = context.baseline
+        rmi_b = context.BASELINE_0
         baseline_system_types_dict = get_baseline_system_types(rmi_b)
         # create a list contains all HVAC systems that are modeled in the rmi_b
         available_sys_types = [
@@ -62,12 +62,12 @@ class Section22Rule26(RuleDefinitionListIndexedBase):
         )
 
     def create_data(self, context, data):
-        rmi_b = context.baseline
+        rmi_b = context.BASELINE_0
         primary_secondary_loops_dict = get_primary_secondary_loops_dict(rmi_b)
         return {"primary_secondary_loops_dict": primary_secondary_loops_dict}
 
     def list_filter(self, context_item, data):
-        fluid_loop = context_item.baseline
+        fluid_loop = context_item.BASELINE_0
         primary_loop_ids = data["primary_secondary_loops_dict"]
         return fluid_loop["id"] in primary_loop_ids
 
@@ -81,7 +81,7 @@ class Section22Rule26(RuleDefinitionListIndexedBase):
             )
 
         def get_calc_vals(self, context, data=None):
-            primary_pump_b = context.baseline
+            primary_pump_b = context.BASELINE_0
             primary_pump_power_per_flow_rate = primary_pump_b[
                 "pump_power_per_flow_rate"
             ]

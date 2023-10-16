@@ -33,7 +33,7 @@ class Section21Rule9(RuleDefinitionListIndexedBase):
         super(Section21Rule9, self).__init__(
             rmrs_used=UserBaselineProposedVals(False, True, False),
             each_rule=Section21Rule9.HeatingFluidLoopRule(),
-            index_rmr="baseline",
+            index_rmr=RMT.BASELINE_0,
             id="21-9",
             description="When baseline building includes boilers, Hot Water Pump Power = 19W/gpm.",
             ruleset_section_title="HVAC - Water Side",
@@ -44,7 +44,7 @@ class Section21Rule9(RuleDefinitionListIndexedBase):
         )
 
     def is_applicable(self, context, data=None):
-        rmi_b = context.baseline
+        rmi_b = context.BASELINE_0
         baseline_system_types_dict = get_baseline_system_types(rmi_b)
         # create a list containing all HVAC systems that are modeled in the rmi_b
         available_type_list = [
@@ -60,12 +60,12 @@ class Section21Rule9(RuleDefinitionListIndexedBase):
         )
 
     def create_data(self, context, data):
-        rmi_b = context.baseline
+        rmi_b = context.BASELINE_0
         boiler_loop_ids = find_all("boilers[*].loop", rmi_b)
         return {"loop_boiler_dict": boiler_loop_ids}
 
     def list_filter(self, context_item, data):
-        fluid_loop_b = context_item.baseline
+        fluid_loop_b = context_item.BASELINE_0
         loop_boiler_dict = data["loop_boiler_dict"]
         return fluid_loop_b["id"] in loop_boiler_dict
 
@@ -79,7 +79,7 @@ class Section21Rule9(RuleDefinitionListIndexedBase):
             )
 
         def get_calc_vals(self, context, data=None):
-            fluid_loop_b = context.baseline
+            fluid_loop_b = context.BASELINE_0
             pump_power_per_flow_rate = fluid_loop_b["pump_power_per_flow_rate"]
             return {
                 "pump_power_per_flow_rate": CalcQ(

@@ -14,7 +14,7 @@ class Section19Rule22(RuleDefinitionListIndexedBase):
         super(Section19Rule22, self).__init__(
             rmrs_used=UserBaselineProposedVals(False, True, False),
             each_rule=Section19Rule22.HVACRule(),
-            index_rmr="baseline",
+            index_rmr=RMT.BASELINE_0,
             id="19-22",
             description="Baseline systems modeled with exhaust air energy recovery shall allow bypass or control heat recovery system to permit air economizer operation.",
             ruleset_section_title="HVAC - General",
@@ -33,13 +33,13 @@ class Section19Rule22(RuleDefinitionListIndexedBase):
             )
 
         def is_applicable(self, context, data=None):
-            hvac_b = context.baseline
+            hvac_b = context.BASELINE_0
             fan_sys_b = hvac_b["fan_system"]
 
             return fan_sys_b.get("air_energy_recovery") is not None
 
         def get_calc_vals(self, context, data=None):
-            hvac_b = context.baseline
+            hvac_b = context.BASELINE_0
             fan_sys_b = hvac_b["fan_system"]
 
             ER_operation = getattr_(

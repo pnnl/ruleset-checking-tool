@@ -36,10 +36,10 @@ class Section15Rule6(RuleDefinitionListIndexedBase):
             )
 
         def is_applicable(self, context, data=None):
-            user_transformer_capacity = context.user["capacity"]
+            user_transformer_capacity = context.USER["capacity"]
 
-            user_transformer_type = context.user["type"]
-            user_transformer_phase = context.user["phase"]
+            user_transformer_type = context.USER["type"]
+            user_transformer_phase = context.USER["phase"]
             user_transformer_capacity_in_range = table_8_4_4_in_range(
                 phase=user_transformer_phase, capacity=user_transformer_capacity
             )
@@ -50,11 +50,11 @@ class Section15Rule6(RuleDefinitionListIndexedBase):
             )
 
         def get_calc_vals(self, context, data=None):
-            user_transformer_phase = context.user["phase"]
-            user_transformer_capacity = context.user["capacity"]
+            user_transformer_phase = context.USER["phase"]
+            user_transformer_capacity = context.USER["capacity"]
 
             return {
-                "user_transformer_efficiency": context.user["efficiency"],
+                "user_transformer_efficiency": context.USER["efficiency"],
                 "required_user_transformer_min_efficiency": table_8_4_4_lookup(
                     phase=user_transformer_phase, capacity=user_transformer_capacity
                 )["efficiency"],

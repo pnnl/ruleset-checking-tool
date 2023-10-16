@@ -13,7 +13,7 @@ class Section21Rule15(RuleDefinitionListIndexedBase):
         super(Section21Rule15, self).__init__(
             rmrs_used=UserBaselineProposedVals(False, True, False),
             each_rule=Section21Rule15.RulesetModelInstanceRule(),
-            index_rmr="baseline",
+            index_rmr=RMT.BASELINE_0,
             id="21-15",
             description="When the baseline building is modeled with a hot water plant, served by purchased HW "
             "system, the hot water pump power shall be 14 W/gpm.",
@@ -35,6 +35,6 @@ class Section21Rule15(RuleDefinitionListIndexedBase):
             )
 
         def applicability_check(self, context, calc_vals, data):
-            rmi_b = context.baseline
+            rmi_b = context.BASELINE_0
             purchased_chw_hhw_status_dict_p = check_purchased_chw_hhw_status_dict(rmi_b)
             return purchased_chw_hhw_status_dict_p["purchased_heating"]

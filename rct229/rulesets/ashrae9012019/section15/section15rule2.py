@@ -17,12 +17,12 @@ class Section15Rule2(RuleDefinitionBase):
         )
 
     def is_applicable(self, context, data=None):
-        return len(context.user) > 0
+        return len(context.USER) > 0
 
     def get_calc_vals(self, context, data=None):
         return {
-            "num_user_transformers": len(context.user),
-            "num_proposed_transformers": len(context.proposed),
+            "num_user_transformers": len(context.USER),
+            "num_proposed_transformers": len(context.PROPOSED),
         }
 
     def rule_check(self, context, calc_vals=None, data=None):

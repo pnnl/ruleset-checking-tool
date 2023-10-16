@@ -44,7 +44,7 @@ class Section21Rule11(RuleDefinitionListIndexedBase):
         super(Section21Rule11, self).__init__(
             rmrs_used=UserBaselineProposedVals(False, True, False),
             each_rule=Section21Rule11.HeatingFluidLoopRule(),
-            index_rmr="baseline",
+            index_rmr=RMT.BASELINE_0,
             id="21-11",
             description="The baseline building design uses boilers or purchased hot water, the hot water pumping system shall be modeled as primary-only.",
             ruleset_section_title="HVAC - Water Side",
@@ -55,7 +55,7 @@ class Section21Rule11(RuleDefinitionListIndexedBase):
         )
 
     def is_applicable(self, context, data=None):
-        rmi_b = context.baseline
+        rmi_b = context.BASELINE_0
         baseline_system_types_dict = get_baseline_system_types(rmi_b)
         # create a list containing all HVAC systems that are modeled in the rmi_b
         available_type_list = [
@@ -71,7 +71,7 @@ class Section21Rule11(RuleDefinitionListIndexedBase):
         )
 
     def list_filter(self, context_item, data):
-        fluid_loop_b = context_item.baseline
+        fluid_loop_b = context_item.BASELINE_0
         return getattr_(fluid_loop_b, "FluidLoop", "type") == FLUID_LOOP.HEATING
 
     class HeatingFluidLoopRule(RuleDefinitionBase):
@@ -81,7 +81,7 @@ class Section21Rule11(RuleDefinitionListIndexedBase):
             )
 
         def get_calc_vals(self, context, data=None):
-            heating_fluid_loop_b = context.baseline
+            heating_fluid_loop_b = context.BASELINE_0
             return {"has_child_loops": bool(heating_fluid_loop_b.get("child_loops"))}
 
         def rule_check(self, context, calc_vals=None, data=None):

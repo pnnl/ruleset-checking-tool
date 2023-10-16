@@ -38,7 +38,7 @@ class Section22Rule9(RuleDefinitionListIndexedBase):
         super(Section22Rule9, self).__init__(
             rmrs_used=UserBaselineProposedVals(False, True, False),
             each_rule=Section22Rule9.ChillerFluidLoopRule(),
-            index_rmr="baseline",
+            index_rmr=RMT.BASELINE_0,
             id="22-9",
             description="For Baseline chilled water system with cooling capacity of 300 tons or more, the secondary loop shall be modeled with a minimum flow of 25% of the design flow rate.",
             ruleset_section_title="HVAC - Chiller",
@@ -49,7 +49,7 @@ class Section22Rule9(RuleDefinitionListIndexedBase):
         )
 
     def is_applicable(self, context, data=None):
-        rmi_b = context.baseline
+        rmi_b = context.BASELINE_0
 
         baseline_system_types_dict = get_baseline_system_types(rmi_b)
         # create a list containing all HVAC systems that are modeled in the rmi_b
@@ -72,7 +72,7 @@ class Section22Rule9(RuleDefinitionListIndexedBase):
         )
 
     def create_data(self, context, data):
-        rmi_b = context.baseline
+        rmi_b = context.BASELINE_0
 
         chw_loop_capacity_dict = {}
         for chiller in find_all("$.chillers[*]", rmi_b):
@@ -90,7 +90,7 @@ class Section22Rule9(RuleDefinitionListIndexedBase):
         }
 
     def list_filter(self, context_item, data):
-        fluid_loop_b = context_item.baseline
+        fluid_loop_b = context_item.BASELINE_0
         primary_secondary_loop_dict = data["primary_secondary_loop_dict"]
         chw_loop_capacity_dict = data["chw_loop_capacity_dict"]
 
@@ -105,7 +105,7 @@ class Section22Rule9(RuleDefinitionListIndexedBase):
             super(Section22Rule9.ChillerFluidLoopRule, self).__init__(
                 rmrs_used=UserBaselineProposedVals(False, True, False),
                 each_rule=Section22Rule9.ChillerFluidLoopRule.SecondaryChildLoopRule(),
-                index_rmr="baseline",
+                index_rmr=RMT.BASELINE_0,
                 list_path="$.child_loops[*]",
             )
 
@@ -124,7 +124,7 @@ class Section22Rule9(RuleDefinitionListIndexedBase):
                 )
 
             def get_calc_vals(self, context, data=None):
-                child_loop_b = context.baseline
+                child_loop_b = context.BASELINE_0
                 min_flow_fraction = child_loop_b[
                     "cooling_or_condensing_design_and_control"
                 ]["minimum_flow_fraction"]

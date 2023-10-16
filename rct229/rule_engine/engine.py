@@ -130,14 +130,15 @@ def evaluate_rules(rules_list: list, rmds: RuleSetModels, unit_system=UNIT_SYSTE
     # appropriate pint quantities
     # TODO: quantitization should happen right after schema validation and
     # before other validations
-    for rule_model in rmds.get_ruleset_model_types():
+    copied_rmds = get_rmd_instance()
+    for rule_model in copied_rmds.get_ruleset_model_types():
         if rmds[rule_model]:
-            rmds[rule_model] = quantify_rmr(rmds.__getitem__(rule_model))
+            copied_rmds[rule_model] = quantify_rmr(rmds.__getitem__(rule_model))
 
     # Evaluate the rules
     for rule in rules_list:
         print(f"Processing Rule {rule.id}")
-        outcome = rule.evaluate(rmds)
+        outcome = rule.evaluate(copied_rmds)
         outcomes.append(outcome)
 
     return {

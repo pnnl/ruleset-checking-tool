@@ -14,7 +14,7 @@ class Section5Rule44(RuleDefinitionListIndexedBase):
         super(Section5Rule44, self).__init__(
             rmrs_used=UserBaselineProposedVals(False, True, False),
             each_rule=Section5Rule44.BuildingRule(),
-            index_rmr="baseline",
+            index_rmr=RMT.BASELINE_0,
             id="5-44",
             description="The infiltration modeling method in the baseline includes adjustment for weather and building operation.",
             ruleset_section_title="Envelope",
@@ -36,7 +36,7 @@ class Section5Rule44(RuleDefinitionListIndexedBase):
 
         def get_calc_vals(self, context, data=None):
             baseline_infiltration = find_all(
-                "$.building_segments[*].zones[*].infiltration", context.baseline
+                "$.building_segments[*].zones[*].infiltration", context.BASELINE_0
             )
             failing_infiltration_ids = [
                 b_infiltration["id"]

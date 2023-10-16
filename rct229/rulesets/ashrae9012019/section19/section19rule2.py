@@ -41,7 +41,7 @@ class Section19Rule2(RuleDefinitionListIndexedBase):
         super(Section19Rule2, self).__init__(
             rmrs_used=UserBaselineProposedVals(False, True, False),
             each_rule=Section19Rule2.FluidLoopRule(),
-            index_rmr="baseline",
+            index_rmr=RMT.BASELINE_0,
             id="19-2",
             description="Baseline building plant capacities shall be based on coincident loads.",
             ruleset_section_title="HVAC - General",
@@ -52,7 +52,7 @@ class Section19Rule2(RuleDefinitionListIndexedBase):
         )
 
     def create_data(self, context, data):
-        rmi_b = context.baseline
+        rmi_b = context.BASELINE_0
 
         HW_fluid_loop_list = []
         CW_fluid_loop_list = []
@@ -172,7 +172,7 @@ class Section19Rule2(RuleDefinitionListIndexedBase):
             )
 
         def is_applicable(self, context, data=None):
-            fluid_loop_b = context.baseline
+            fluid_loop_b = context.BASELINE_0
             fluid_loop_id_b = fluid_loop_b["id"]
 
             HW_fluid_loop_list = data["HW_fluid_loop_list"]
@@ -184,7 +184,7 @@ class Section19Rule2(RuleDefinitionListIndexedBase):
             )
 
         def get_calc_vals(self, context, data=None):
-            fluid_loop_b = context.baseline
+            fluid_loop_b = context.BASELINE_0
             HW_fluid_loop_list = data["HW_fluid_loop_list"]
             CHW_fluid_loop_list = data["CHW_fluid_loop_list"]
             CW_fluid_loop_list = data["CW_fluid_loop_list"]

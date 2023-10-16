@@ -116,7 +116,6 @@ class RuleDefinitionListIndexedBase(RuleDefinitionListBase):
         UNKNOWN_INDEX_RMR = "Unknown index_rmr"
         CONTEXT_NOT_LIST = "The list contexts must be lists"
 
-        rmrs_used = self.rmrs_used
         match_by = self.match_by
 
         # The index RMR must be either user, baseline, or proposed
@@ -126,7 +125,7 @@ class RuleDefinitionListIndexedBase(RuleDefinitionListBase):
         # The index RMR must be used
         context_on_list = any(
             map(
-                lambda ruleset_model: context[ruleset_model],
+                lambda ruleset_model: self.index_rmr == ruleset_model and context[ruleset_model],
                 context.get_ruleset_model_types(),
             )
         )

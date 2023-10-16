@@ -21,7 +21,7 @@ class Section5Rule35(RuleDefinitionListIndexedBase):
                 "weather": ["climate_zone"],
             },
             each_rule=Section5Rule35.BuildingRule(),
-            index_rmr="baseline",
+            index_rmr=RMT.BASELINE_0,
             id="5-35",
             description="If the skylight area of the proposed design is greater than 3%, baseline skylight area shall be decreased in all roof components in which skylights are located to reach 3%.",
             ruleset_section_title="Envelope",
@@ -36,13 +36,13 @@ class Section5Rule35(RuleDefinitionListIndexedBase):
             super(Section5Rule35.BuildingRule, self).__init__(
                 rmrs_used=UserBaselineProposedVals(False, True, True),
                 each_rule=Section5Rule35.BuildingRule.BuildingSegmentRule(),
-                index_rmr="baseline",
+                index_rmr=RMT.BASELINE_0,
                 list_path="building_segments[*]",
             )
 
         def create_data(self, context, data=None):
-            building_b = context.baseline
-            building_p = context.proposed
+            building_b = context.BASELINE_0
+            building_p = context.PROPOSED
             return {
                 "skylight_roof_areas_dictionary_b": get_building_segment_skylight_roof_areas_dict(
                     data["climate_zone"], building_b
@@ -59,7 +59,7 @@ class Section5Rule35(RuleDefinitionListIndexedBase):
                 )
 
             def is_applicable(self, context, data=None):
-                building_p = context.proposed
+                building_p = context.PROPOSED
                 skylight_roof_areas_dictionary_p = data[
                     "skylight_roof_areas_dictionary_p"
                 ]
@@ -77,7 +77,7 @@ class Section5Rule35(RuleDefinitionListIndexedBase):
                 )
 
             def get_calc_vals(self, context, data=None):
-                building_segment_b = context.baseline
+                building_segment_b = context.BASELINE_0
                 skylight_roof_areas_dictionary_b = data[
                     "skylight_roof_areas_dictionary_b"
                 ]

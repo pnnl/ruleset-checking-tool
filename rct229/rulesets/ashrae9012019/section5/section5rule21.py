@@ -37,7 +37,7 @@ class Section5Rule21(RuleDefinitionListIndexedBase):
                 "weather": ["climate_zone"],
             },
             each_rule=Section5Rule21.BuildingRule(),
-            index_rmr="baseline",
+            index_rmr=RMT.BASELINE_0,
             id="5-21",
             description="The vertical fenestration shall be distributed on each face of the building in the same proportion as in the proposed design.",
             ruleset_section_title="Envelope",
@@ -53,15 +53,15 @@ class Section5Rule21(RuleDefinitionListIndexedBase):
                 rmrs_used=UserBaselineProposedVals(False, True, True),
                 required_fields={},
                 each_rule=Section5Rule21.BuildingRule.AboveGradeWallRule(),
-                index_rmr="baseline",
+                index_rmr=RMT.BASELINE_0,
                 # list_path and list_filter together determine the list of
                 # above grade walls to be passed to AboveGradeWallRule
                 list_path="$.building_segments[*].zones[*].surfaces[*]",
             )
 
         def create_data(self, context, data=None):
-            building_b = context.baseline
-            building_p = context.proposed
+            building_b = context.BASELINE_0
+            building_p = context.PROPOSED
             climate_zone = data["climate_zone"]
 
             window_wall_areas_dictionary_b = get_area_type_window_wall_area_dict(
@@ -86,7 +86,7 @@ class Section5Rule21(RuleDefinitionListIndexedBase):
             }
 
         def list_filter(self, context_item, data=None):
-            surface_b = context_item.baseline
+            surface_b = context_item.BASELINE_0
 
             return (
                 get_opaque_surface_type(surface_b) == OST.ABOVE_GRADE_WALL
@@ -106,8 +106,8 @@ class Section5Rule21(RuleDefinitionListIndexedBase):
                 )
 
             def get_calc_vals(self, context, data=None):
-                above_grade_wall_b = context.baseline
-                above_grade_wall_p = context.proposed
+                above_grade_wall_b = context.BASELINE_0
+                above_grade_wall_p = context.PROPOSED
 
                 def _helper_calc_val(above_grade_wall):
                     """Helper function for calculating the total fenestration area for an above grade wall"""

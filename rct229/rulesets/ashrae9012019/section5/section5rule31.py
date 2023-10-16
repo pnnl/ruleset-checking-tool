@@ -18,7 +18,7 @@ class Section5Rule31(RuleDefinitionListIndexedBase):
         super(Section5Rule31, self).__init__(
             rmrs_used=UserBaselineProposedVals(False, True, True),
             each_rule=Section5Rule31.BuildingRule(),
-            index_rmr="baseline",
+            index_rmr=RMT.BASELINE_0,
             id="5-31",
             description="Manual fenestration shading devices, such as blinds or shades, shall be modeled or not modeled the same as in the baseline building design.",
             ruleset_section_title="Envelope",
@@ -34,7 +34,7 @@ class Section5Rule31(RuleDefinitionListIndexedBase):
                 # Make sure surfaces are matched in SurfaceRule
                 list_path="$.building_segments[*].zones[*].surfaces[*]",
                 each_rule=Section5Rule31.BuildingRule.SurfaceRule(),
-                index_rmr="baseline",
+                index_rmr=RMT.BASELINE_0,
             )
 
         class SurfaceRule(RuleDefinitionListIndexedBase):
@@ -42,7 +42,7 @@ class Section5Rule31(RuleDefinitionListIndexedBase):
                 super(Section5Rule31.BuildingRule.SurfaceRule, self).__init__(
                     rmrs_used=UserBaselineProposedVals(False, True, True),
                     each_rule=Section5Rule31.BuildingRule.SurfaceRule.SubsurfaceRule(),
-                    index_rmr="baseline",
+                    index_rmr=RMT.BASELINE_0,
                     # Make sure subsurfaces are matched
                     # List_path will be evaluated after manual check
                     list_path="subsurfaces[*]",
@@ -50,7 +50,7 @@ class Section5Rule31(RuleDefinitionListIndexedBase):
                 )
 
             def manual_check_required(self, context, calc_vals=None, data=None):
-                surface_p = context.proposed
+                surface_p = context.PROPOSED
                 subsurfaces_p = find_all("$.subsurfaces[*]", surface_p)
                 subsurfaces_with_manual_interior_shades_p = find_all(
                     MANUALLY_SHADED_SUBSURFACES_JSON, surface_p
@@ -61,7 +61,7 @@ class Section5Rule31(RuleDefinitionListIndexedBase):
                 ) != len(subsurfaces_p)
 
             def create_data(self, context, data=None):
-                surface_p = context.proposed
+                surface_p = context.PROPOSED
                 subsurfaces_with_manual_interior_shades_p = find_all(
                     MANUALLY_SHADED_SUBSURFACES_JSON, surface_p
                 )
@@ -86,7 +86,7 @@ class Section5Rule31(RuleDefinitionListIndexedBase):
                     )
 
                 def get_calc_vals(self, context, data=None):
-                    subsurface_b = context.baseline
+                    subsurface_b = context.BASELINE_0
                     return {
                         "subsurface_p_manual_shade": data[
                             "proposed_subsurface_manual_shade"

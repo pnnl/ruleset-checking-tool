@@ -22,7 +22,7 @@ class Section19Rule8(RuleDefinitionListIndexedBase):
         super(Section19Rule8, self).__init__(
             rmrs_used=UserBaselineProposedVals(False, True, False),
             each_rule=Section19Rule8.BuildingRule(),
-            index_rmr="baseline",
+            index_rmr=RMT.BASELINE_0,
             id="19-8",
             description="Demand control ventilation is modeled in the baseline design in systems with outdoor air capacity greater than 3000 cfm serving areas with an average occupant design capacity greater than 100 people per 1000 ft^2.",
             ruleset_section_title="HVAC - General",
@@ -36,12 +36,12 @@ class Section19Rule8(RuleDefinitionListIndexedBase):
             super(Section19Rule8.BuildingRule, self).__init__(
                 rmrs_used=UserBaselineProposedVals(False, True, False),
                 each_rule=Section19Rule8.BuildingRule.HVACRule(),
-                index_rmr="baseline",
+                index_rmr=RMT.BASELINE_0,
                 list_path="$.building_segments[*].heating_ventilating_air_conditioning_systems[*]",
             )
 
         def create_data(self, context, data=None):
-            building_b = context.baseline
+            building_b = context.BASELINE_0
             hvac_zone_list_w_area_dict_b = get_hvac_zone_list_w_area_dict(building_b)
 
             zone_total_occupant_dict_b = {
@@ -58,7 +58,7 @@ class Section19Rule8(RuleDefinitionListIndexedBase):
             }
 
         def list_filter(self, context_item, data=None):
-            hvac_b = context_item.baseline
+            hvac_b = context_item.BASELINE_0
             hvac_id_b = hvac_b["id"]
             hvac_zone_list_w_area_dict_b = data["hvac_zone_list_w_area_dict_b"]
 
@@ -75,7 +75,7 @@ class Section19Rule8(RuleDefinitionListIndexedBase):
                 )
 
             def get_calc_vals(self, context, data=None):
-                hvac_b = context.baseline
+                hvac_b = context.BASELINE_0
                 hvac_zone_list_w_area_dict_b = data["hvac_zone_list_w_area_dict_b"]
                 zone_total_occupant_dict_b = data["zone_total_occupant_dict_b"]
 

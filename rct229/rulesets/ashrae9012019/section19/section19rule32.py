@@ -17,7 +17,7 @@ class Section19Rule32(RuleDefinitionListIndexedBase):
         super(Section19Rule32, self).__init__(
             rmrs_used=UserBaselineProposedVals(False, True, False),
             each_rule=Section19Rule32.HVACRule(),
-            index_rmr="baseline",
+            index_rmr=RMT.BASELINE_0,
             id="19-32",
             description="HVAC fans in the baseline design model shall remain on during unoccupied hours in systems primarily serving computer rooms in the B_RMR.",
             ruleset_section_title="HVAC - General",
@@ -28,7 +28,7 @@ class Section19Rule32(RuleDefinitionListIndexedBase):
         )
 
     def create_data(self, context, data):
-        rmi_b = context.baseline
+        rmi_b = context.BASELINE_0
 
         hvac_systems_primarily_serving_comp_room_b = (
             get_hvac_systems_primarily_serving_comp_room(rmi_b)
@@ -45,7 +45,7 @@ class Section19Rule32(RuleDefinitionListIndexedBase):
             )
 
         def is_applicable(self, context, data=None):
-            hvac_b = context.baseline
+            hvac_b = context.BASELINE_0
             hvac_id_b = hvac_b["id"]
             hvac_systems_primarily_serving_comp_room_b = data[
                 "hvac_systems_primarily_serving_comp_room_b"
@@ -54,7 +54,7 @@ class Section19Rule32(RuleDefinitionListIndexedBase):
             return hvac_id_b in hvac_systems_primarily_serving_comp_room_b
 
         def get_calc_vals(self, context, data=None):
-            hvac_b = context.baseline
+            hvac_b = context.BASELINE_0
 
             operation_during_unoccupied_b = hvac_b["fan_system"][
                 "operation_during_unoccupied"

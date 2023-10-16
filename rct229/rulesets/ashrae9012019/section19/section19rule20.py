@@ -21,7 +21,7 @@ class Section19Rule20(RuleDefinitionListIndexedBase):
         super(Section19Rule20, self).__init__(
             rmrs_used=UserBaselineProposedVals(False, True, True),
             each_rule=Section19Rule20.HVACRule(),
-            index_rmr="baseline",
+            index_rmr=RMT.BASELINE_0,
             id="19-20",
             description="The calculated system fan power shall be distributed to supply, return, exhaust, and relief fans in the same proportion as the proposed design.",
             ruleset_section_title="HVAC - General",
@@ -32,8 +32,8 @@ class Section19Rule20(RuleDefinitionListIndexedBase):
         )
 
     def create_data(self, context, data):
-        rmi_b = context.baseline
-        rmi_p = context.proposed
+        rmi_b = context.BASELINE_0
+        rmi_p = context.PROPOSED
 
         return {
             "zone_supply_return_exhaust_relief_terminal_fan_power_dict_p": get_zone_supply_return_exhaust_relief_terminal_fan_power_dict(
@@ -54,7 +54,7 @@ class Section19Rule20(RuleDefinitionListIndexedBase):
             )
 
         def get_calc_vals(self, context, data=None):
-            hvac_b = context.baseline
+            hvac_b = context.BASELINE_0
             hvac_id_b = hvac_b["id"]
             zone_supply_return_exhaust_relief_terminal_fan_power_dict_p = data[
                 "zone_supply_return_exhaust_relief_terminal_fan_power_dict_p"
@@ -195,7 +195,7 @@ class Section19Rule20(RuleDefinitionListIndexedBase):
             )
 
         def get_fail_msg(self, context, calc_vals=None, data=None):
-            hvac_b = context.baseline
+            hvac_b = context.BASELINE_0
             hvac_id_b = hvac_b["id"]
             expected_baseline_fan_power_supply = calc_vals[
                 "expected_baseline_fan_power_supply"

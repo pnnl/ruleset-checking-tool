@@ -27,7 +27,7 @@ class Section6Rule5(RuleDefinitionListIndexedBase):
             id="6-5",
             rmrs_used=UserBaselineProposedVals(False, True, True),
             each_rule=Section6Rule5.RulesetModelInstanceRule(),
-            index_rmr="baseline",
+            index_rmr=RMT.BASELINE_0,
             description="Baseline building is modeled with automatic shutoff controls in buildings >5000 sq.ft.",
             required_fields={
                 "$": ["calendar"],
@@ -45,7 +45,7 @@ class Section6Rule5(RuleDefinitionListIndexedBase):
             super(Section6Rule5.RulesetModelInstanceRule, self).__init__(
                 rmrs_used=UserBaselineProposedVals(False, True, True),
                 each_rule=Section6Rule5.RulesetModelInstanceRule.BuildingRule(),
-                index_rmr="baseline",
+                index_rmr=RMT.BASELINE_0,
                 list_path="buildings[*]",
                 required_fields={"$": ["schedules"]},
                 data_items={
@@ -61,7 +61,7 @@ class Section6Rule5(RuleDefinitionListIndexedBase):
                 ).__init__(
                     rmrs_used=UserBaselineProposedVals(False, True, True),
                     each_rule=Section6Rule5.RulesetModelInstanceRule.BuildingRule.ZoneRule(),
-                    index_rmr="baseline",
+                    index_rmr=RMT.BASELINE_0,
                     list_path="$.building_segments[*].zones[*]",
                     required_fields={"$": ["building_open_schedule"]},
                     data_items={
@@ -73,7 +73,7 @@ class Section6Rule5(RuleDefinitionListIndexedBase):
                 )
 
             def is_applicable(self, context, data):
-                building_b = context.baseline
+                building_b = context.BASELINE_0
                 building_total_area_b = sum(
                     find_all(
                         "$.building_segments[*].zones[*].spaces[*].floor_area",
@@ -92,13 +92,13 @@ class Section6Rule5(RuleDefinitionListIndexedBase):
                     ).__init__(
                         rmrs_used=UserBaselineProposedVals(False, True, True),
                         each_rule=Section6Rule5.RulesetModelInstanceRule.BuildingRule.ZoneRule.SpaceRule(),
-                        index_rmr="baseline",
+                        index_rmr=RMT.BASELINE_0,
                         list_path="spaces[*]",
                     )
 
                 def create_data(self, context, data=None):
-                    zone_b = context.baseline
-                    zone_p = context.proposed
+                    zone_b = context.BASELINE_0
+                    zone_p = context.PROPOSED
                     return {
                         "avg_zone_height_b": get_avg_zone_height(zone_b),
                         "avg_zone_height_p": get_avg_zone_height(zone_p),
@@ -115,13 +115,13 @@ class Section6Rule5(RuleDefinitionListIndexedBase):
 
                     def is_applicable(self, context, data=None):
                         # set space has no lighting space type to not applicable
-                        space_b = context.baseline
+                        space_b = context.BASELINE_0
                         return space_b.get("lighting_space_type") is not None
 
                     def get_calc_vals(self, context, data=None):
                         schedules_b = data["schedules_b"]
-                        space_b = context.baseline
-                        space_p = context.proposed
+                        space_b = context.BASELINE_0
+                        space_p = context.PROPOSED
                         building_open_schedule_id_b = data[
                             "building_open_schedule_id_b"
                         ]
