@@ -4,7 +4,7 @@
 **Rule ID:** 5-1  
 **Rule Description:** There are four baseline rotations (i.e., four baseline models differing in azimuth by 90 degrees and four sets of baseline model results) if vertical fenestration area per each orientation differ by more than 5%.
 **Rule Assertion:** Options are PASS/FAIL     
-**Appendix G Section:** Table G3.1#5a baseline column          
+**Appendix G Section:** Table G3.1#5a baseline column   
 **90.1 Section Reference:** None  
 
 **Data Lookup:** None    
@@ -51,9 +51,9 @@ Check if the area differs by 5 percent or more.
     - Check if there is an output_instance associated with the RMI: `if RMI.output.Output2019ASHRAE901.output_instance != Null: counter += 1 `
     
     - **Rule Assertion:** 
-    - Case 1: If the fenestration area differs by 5% or more by orientation and there are 6 RMIs (for  user,proposed, baseline at 0 degrees, baseline at 90 degrees, baseline at 180 degrees, and baseline at 270 degrees) and 5 output files (excludes an output for the user model) then Pass: `if rotation_expected == TRUE and and number_of_RMIs == 6 and counter == 5: outcome = "PASS" `  
-    - Case 2: Else if the fenestration area differs by less than 5% and there are 3 RMIs (for  user, proposed, baseline at 0 degrees) and 2 output files (excludes an output for the user model) then Pass: `if rotation_expected == FALSE and and number_of_RMIs == 3 and counter == 2: outcome = "PASS" `  
-    - Case 43: Else: `Else: outcome = "FAIL"`  
+    - Case 1: If the fenestration area differs by 5% or more by orientation and there are 6 RMIs (for user, proposed, baseline at 0 degrees, baseline at 90 degrees, baseline at 180 degrees, and baseline at 270 degrees) and 5 output files (excludes an output for the user model) then Pass: `if rotation_expected == TRUE and and number_of_RMIs == 6 and counter == 5: outcome = "PASS" `  
+    - Case 2: Else if the fenestration area differs by less than 5% and there are 3 RMIs (for user, proposed, baseline at 0 degrees) and 2 output files (excludes an output for the user model) then Pass: `if rotation_expected == FALSE and and number_of_RMIs == 3 and counter == 2: outcome = "PASS" `  
+    - Case 43: Else: `Else: outcome = "FAIL" and raise_message "Fail unless Table G3.1#5a exception #2 is applicable and it can be demonstrated that the building orientation is dictated bysite considerations.`  
 
 
 
