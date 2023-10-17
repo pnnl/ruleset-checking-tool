@@ -15,8 +15,7 @@
 None
    
 **Function Calls:**  
-1. get_surface_conditioning_category()
-2. get_opaque_surface_type()  
+1. get_opaque_surface_type()  
 
 
 ## Rule Logic:   
