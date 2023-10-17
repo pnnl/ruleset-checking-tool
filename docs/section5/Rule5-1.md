@@ -35,7 +35,7 @@ Get the fenestration area for each unique orientation (i.e., azimuth) and then c
                     - For each subsurface associated with the surface: `for sub_surface in surface.subsurfaces:`   
                         - Check if subsurface is door: `if sub_surface.classification == "DOOR":`
                             - If glazed area in door is more than 50% of the total door area, add door area to total_surface_fenestration_area: `if sub_surface.glazed_area > subsurface.opaque_area: total_surface_fenestration_area += sub_surface.glazed_area + sub_surface.opaque_area`
-                        - Else, subsurface is not door, add total area to total_surface_fenestration_area (because we checked that the surface is an above grade wall we are assuming the subsurface classification is not and could not be a skylight): `total_surface_fenestration_area += subsurface.glazed_area + subsurface.opaque_area`      
+                        - Else, subsurface is not door, add total area to total_surface_fenestration_area (because we checked that the surface is an above grade wall we can assume that the subsurface classification is not and could not be a skylight so no need to check this): `total_surface_fenestration_area += subsurface.glazed_area + subsurface.opaque_area`      
                     - Add the total_surface_fenestration_area summed for the surface to the total fen area associated with the azimuth: `azimuth_fen_area_dict[surface_azimuth] += total_surface_fenestration_area`    
 
 Check if the area differs by 5 percent or more.
