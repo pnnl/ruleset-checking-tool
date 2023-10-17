@@ -1,6 +1,8 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
+from rct229.rulesets.ashrae9012019 import BASELINE_0
 from rct229.schema.schema_enums import SchemaEnums
 from rct229.rulesets.ashrae9012019.data_fns.table_G3_4_fns import table_G34_lookup
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_building_scc_skylight_roof_ratios_dict import (
@@ -31,16 +33,16 @@ class Section5Rule38(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section5Rule38, self).__init__(
-            rmrs_used=UserBaselineProposedVals(False, True, False),
+            rmrs_used=produce_ruleset_model_instance(USER=False, BASELINE_0=True, PROPOSED=False),
             each_rule=Section5Rule38.BuildingRule(),
-            index_rmr=RMT.BASELINE_0,
+            index_rmr=BASELINE_0,
             id="5-38",
             description="Skylight SHGC properties shall match the appropriate requirements in Tables G3.4-1 through G3.4-8 using the value and the applicable skylight percentage.",
             ruleset_section_title="Envelope",
             standard_section="Section G3.1-5(e) Building Envelope Modeling Requirements for the Baseline building",
             is_primary_rule=True,
             list_path="ruleset_model_descriptions[0].buildings[*]",
-            data_items={"climate_zone": ("baseline", "weather/climate_zone")},
+            data_items={"climate_zone": (BASELINE_0, "weather/climate_zone")},
             required_fields={
                 "$": ["weather"],
                 "weather": ["climate_zone"],
@@ -50,10 +52,10 @@ class Section5Rule38(RuleDefinitionListIndexedBase):
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section5Rule38.BuildingRule, self).__init__(
-                rmrs_used=UserBaselineProposedVals(False, True, False),
+                rmrs_used=produce_ruleset_model_instance(USER=False, BASELINE_0=True, PROPOSED=False),
                 list_path="$.building_segments[*].zones[*].surfaces[*]",
                 each_rule=Section5Rule38.BuildingRule.RoofRule(),
-                index_rmr=RMT.BASELINE_0,
+                index_rmr=BASELINE_0,
                 manual_check_required_msg=MANUAL_CHECK_MSG,
             )
 
@@ -177,9 +179,9 @@ class Section5Rule38(RuleDefinitionListIndexedBase):
         class RoofRule(RuleDefinitionListIndexedBase):
             def __init__(self):
                 super(Section5Rule38.BuildingRule.RoofRule, self).__init__(
-                    rmrs_used=UserBaselineProposedVals(False, True, False),
+                    rmrs_used=produce_ruleset_model_instance(USER=False, BASELINE_0=True, PROPOSED=False),
                     each_rule=Section5Rule38.BuildingRule.RoofRule.SubsurfaceRule(),
-                    index_rmr=RMT.BASELINE_0,
+                    index_rmr=BASELINE_0,
                     list_path="subsurfaces[*]",
                     manual_check_required_msg=MANUAL_CHECK_MSG,
                 )
@@ -195,7 +197,7 @@ class Section5Rule38(RuleDefinitionListIndexedBase):
                     super(
                         Section5Rule38.BuildingRule.RoofRule.SubsurfaceRule, self
                     ).__init__(
-                        rmrs_used=UserBaselineProposedVals(False, True, False),
+                        rmrs_used=produce_ruleset_model_instance(USER=False, BASELINE_0=True, PROPOSED=False),
                         required_fields={
                             "$": ["classification", "glazed_area", "opaque_area"]
                         },

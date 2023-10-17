@@ -1,6 +1,7 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
+from rct229.rulesets.ashrae9012019 import PROPOSED
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_opaque_surface_type import (
     OpaqueSurfaceType as OST,
 )
@@ -31,22 +32,22 @@ class Section5Rule41(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section5Rule41, self).__init__(
-            rmrs_used=UserBaselineProposedVals(True, False, True),
+            rmrs_used=produce_ruleset_model_instance(USER=True, BASELINE_0=False, PROPOSED=True),
             each_rule=Section5Rule41.BuildingRule(),
-            index_rmr="proposed",
+            index_rmr=PROPOSED,
             id="5-41",
             description="The proposed roof surfaces shall be modeled using the same thermal emittance as in the user model.",
             ruleset_section_title="Envelope",
             standard_section="Section G3.1-1(a) Building Envelope Modeling Requirements for the Proposed design",
             is_primary_rule=True,
             list_path="ruleset_model_descriptions[0].buildings[*]",
-            data_items={"climate_zone": ("proposed", "weather/climate_zone")},
+            data_items={"climate_zone": (PROPOSED, "weather/climate_zone")},
         )
 
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section5Rule41.BuildingRule, self).__init__(
-                rmrs_used=UserBaselineProposedVals(True, False, True),
+                rmrs_used=produce_ruleset_model_instance(USER=True, BASELINE_0=False, PROPOSED=True),
                 each_rule=Section5Rule41.BuildingRule.RoofRule(),
                 index_rmr="proposed",
                 list_path="$.building_segments[*].zones[*].surfaces[*]",
@@ -71,7 +72,7 @@ class Section5Rule41(RuleDefinitionListIndexedBase):
         class RoofRule(RuleDefinitionBase):
             def __init__(self):
                 super(Section5Rule41.BuildingRule.RoofRule, self).__init__(
-                    rmrs_used=UserBaselineProposedVals(True, False, True),
+                    rmrs_used=produce_ruleset_model_instance(USER=True, BASELINE_0=False, PROPOSED=True),
                     required_fields={
                         "$": ["optical_properties"],
                         "optical_properties": ["absorptance_thermal_exterior"],

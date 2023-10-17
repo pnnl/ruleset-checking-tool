@@ -1,6 +1,7 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
+from rct229.rulesets.ashrae9012019 import BASELINE_0
 from rct229.schema.schema_enums import SchemaEnums
 from rct229.rulesets.ashrae9012019.data_fns.table_G3_111_fns import (
     table_G3_1_1_1_lookup,
@@ -28,26 +29,26 @@ class Section5Rule18(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section5Rule18, self).__init__(
-            rmrs_used=UserBaselineProposedVals(False, True, False),
+            rmrs_used=produce_ruleset_model_instance(USER=False, BASELINE_0=True, PROPOSED=False),
             required_fields={
                 "$": ["weather"],
                 "weather": ["climate_zone"],
             },
             each_rule=Section5Rule18.BuildingRule(),
-            index_rmr=RMT.BASELINE_0,
+            index_rmr=BASELINE_0,
             id="5-18",
             description="For building area types included in Table G3.1.1-1, vertical fenestration areas for new buildings and additions shall equal that in Table G3.1.1-1 based on the area of gross above-grade walls that separate conditioned spaces and semi-heated spaces from the exterior.",
             ruleset_section_title="Envelope",
             standard_section="Section G3.1-5(c) Building Envelope Modeling Requirements for the Baseline building",
             is_primary_rule=True,
             list_path="ruleset_model_descriptions[0].buildings[*]",
-            data_items={"climate_zone": ("baseline", "weather/climate_zone")},
+            data_items={"climate_zone": (BASELINE_0, "weather/climate_zone")},
         )
 
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section5Rule18.BuildingRule, self).__init__(
-                rmrs_used=UserBaselineProposedVals(False, True, False),
+                rmrs_used=produce_ruleset_model_instance(USER=False, BASELINE_0=True, PROPOSED=False),
                 required_fields={
                     "$": ["building_segments"],
                     "building_segments[*]": [
@@ -55,7 +56,7 @@ class Section5Rule18(RuleDefinitionListIndexedBase):
                         "area_type_vertical_fenestration",
                     ],
                 },
-                index_rmr=RMT.BASELINE_0,
+                index_rmr=BASELINE_0,
                 each_rule=Section5Rule18.BuildingRule.AreaTypeRule(),
             )
 
@@ -92,7 +93,7 @@ class Section5Rule18(RuleDefinitionListIndexedBase):
                 ].append(building_segment)
             # create list based on area_type
             return [
-                UserBaselineProposedVals(None, building_segments, None)
+                produce_ruleset_model_instance(USER=None, BASELINE_0=building_segments, PROPOSED=None)
                 for area_type, building_segments in area_type_to_building_segment_dict.items()
                 if area_type != OTHER
             ]
@@ -100,7 +101,7 @@ class Section5Rule18(RuleDefinitionListIndexedBase):
         class AreaTypeRule(RuleDefinitionBase):
             def __init__(self):
                 super(Section5Rule18.BuildingRule.AreaTypeRule, self).__init__(
-                    rmrs_used=UserBaselineProposedVals(False, True, False),
+                    rmrs_used=produce_ruleset_model_instance(USER=False, BASELINE_0=True, PROPOSED=False),
                 )
 
             def get_calc_vals(self, context, data=None):

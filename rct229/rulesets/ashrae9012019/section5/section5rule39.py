@@ -1,6 +1,7 @@
 from rct229.rule_engine.partial_rule_definition import PartialRuleDefinition
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
+from rct229.rulesets.ashrae9012019 import PROPOSED
 from rct229.schema.schema_enums import SchemaEnums
 
 SUBSURFACE_DYNAMIC_GLAZING = SchemaEnums.schema_enums["SubsurfaceDynamicGlazingOptions"]
@@ -12,9 +13,9 @@ class Section5Rule39(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section5Rule39, self).__init__(
-            rmrs_used=UserBaselineProposedVals(False, False, True),
+            rmrs_used=produce_ruleset_model_instance(USER=False, BASELINE_0=False, PROPOSED=True),
             each_rule=Section5Rule39.SubsurfaceRule(),
-            index_rmr="proposed",
+            index_rmr=PROPOSED,
             id="5-39",
             description="Manually controlled dynamic glazing shall use the average of the minimum and maximum SHGC and VT.",
             ruleset_section_title="Envelope",
@@ -26,7 +27,7 @@ class Section5Rule39(RuleDefinitionListIndexedBase):
     class SubsurfaceRule(PartialRuleDefinition):
         def __init__(self):
             super(Section5Rule39.SubsurfaceRule, self).__init__(
-                rmrs_used=UserBaselineProposedVals(False, False, True),
+                rmrs_used=produce_ruleset_model_instance(USER=False, BASELINE_0=False, PROPOSED=True),
                 required_fields={"$": ["dynamic_glazing_type"]},
                 manual_check_required_msg=UNDETERMINED_MSG,
             )

@@ -1,6 +1,7 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
+from rct229.rulesets.ashrae9012019 import BASELINE_0
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_building_segment_skylight_roof_areas_dict import (
     get_building_segment_skylight_roof_areas_dict,
 )
@@ -15,28 +16,28 @@ class Section5Rule34(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section5Rule34, self).__init__(
-            rmrs_used=UserBaselineProposedVals(False, True, True),
+            rmrs_used=produce_ruleset_model_instance(USER=False, BASELINE_0=True, PROPOSED=True),
             required_fields={
                 "$": ["weather"],
                 "weather": ["climate_zone"],
             },
             each_rule=Section5Rule34.BuildingRule(),
-            index_rmr=RMT.BASELINE_0,
+            index_rmr=BASELINE_0,
             id="5-34",
             description="If skylight area in the proposed design is 3% or less of the roof surface, the skylight area in baseline shall be equal to that in the proposed design.",
             ruleset_section_title="Envelope",
             standard_section="Section G3.1-5(e) Building Envelope Modeling Requirements for the Baseline building",
             is_primary_rule=True,
             list_path="ruleset_model_descriptions[0].buildings[*]",
-            data_items={"climate_zone": ("baseline", "weather/climate_zone")},
+            data_items={"climate_zone": (BASELINE_0, "weather/climate_zone")},
         )
 
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section5Rule34.BuildingRule, self).__init__(
-                rmrs_used=UserBaselineProposedVals(False, True, True),
+                rmrs_used=produce_ruleset_model_instance(USER=False, BASELINE_0=True, PROPOSED=True),
                 each_rule=Section5Rule34.BuildingRule.BuildingSegmentRule(),
-                index_rmr=RMT.BASELINE_0,
+                index_rmr=BASELINE_0,
                 list_path="building_segments[*]",
             )
 
@@ -55,7 +56,7 @@ class Section5Rule34(RuleDefinitionListIndexedBase):
         class BuildingSegmentRule(RuleDefinitionBase):
             def __init__(self):
                 super(Section5Rule34.BuildingRule.BuildingSegmentRule, self).__init__(
-                    rmrs_used=UserBaselineProposedVals(False, True, True),
+                    rmrs_used=produce_ruleset_model_instance(USER=False, BASELINE_0=True, PROPOSED=True),
                 )
 
             def is_applicable(self, context, data=None):

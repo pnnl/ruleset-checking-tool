@@ -1,6 +1,7 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
+from rct229.rulesets.ashrae9012019 import BASELINE_0
 from rct229.schema.schema_enums import SchemaEnums
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_area_type_window_wall_area_dict import (
     get_area_type_window_wall_area_dict,
@@ -31,29 +32,29 @@ class Section5Rule21(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section5Rule21, self).__init__(
-            rmrs_used=UserBaselineProposedVals(False, True, True),
+            rmrs_used=produce_ruleset_model_instance(USER=False, BASELINE_0=True, PROPOSED=True),
             required_fields={
                 "$": ["weather"],
                 "weather": ["climate_zone"],
             },
             each_rule=Section5Rule21.BuildingRule(),
-            index_rmr=RMT.BASELINE_0,
+            index_rmr=BASELINE_0,
             id="5-21",
             description="The vertical fenestration shall be distributed on each face of the building in the same proportion as in the proposed design.",
             ruleset_section_title="Envelope",
             standard_section="Section G3.1-5(c) Building Envelope Modeling Requirements for the Baseline building",
             is_primary_rule=True,
             list_path="ruleset_model_descriptions[0].buildings[*]",
-            data_items={"climate_zone": ("baseline", "weather/climate_zone")},
+            data_items={"climate_zone": (BASELINE_0, "weather/climate_zone")},
         )
 
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section5Rule21.BuildingRule, self).__init__(
-                rmrs_used=UserBaselineProposedVals(False, True, True),
+                rmrs_used=produce_ruleset_model_instance(USER=False, BASELINE_0=True, PROPOSED=True),
                 required_fields={},
                 each_rule=Section5Rule21.BuildingRule.AboveGradeWallRule(),
-                index_rmr=RMT.BASELINE_0,
+                index_rmr=BASELINE_0,
                 # list_path and list_filter together determine the list of
                 # above grade walls to be passed to AboveGradeWallRule
                 list_path="$.building_segments[*].zones[*].surfaces[*]",
@@ -97,7 +98,7 @@ class Section5Rule21(RuleDefinitionListIndexedBase):
         class AboveGradeWallRule(RuleDefinitionBase):
             def __init__(self):
                 super(Section5Rule21.BuildingRule.AboveGradeWallRule, self).__init__(
-                    rmrs_used=UserBaselineProposedVals(False, True, True),
+                    rmrs_used=produce_ruleset_model_instance(USER=False, BASELINE_0=True, PROPOSED=True),
                     required_fields={
                         "$": ["construction"],
                         "construction": ["u_factor"],

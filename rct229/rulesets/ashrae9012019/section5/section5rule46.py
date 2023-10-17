@@ -1,6 +1,7 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
+from rct229.rulesets.ashrae9012019 import PROPOSED
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.match_lists import match_lists_by_id
 
@@ -10,9 +11,9 @@ class Section5Rule46(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section5Rule46, self).__init__(
-            rmrs_used=UserBaselineProposedVals(False, True, True),
+            rmrs_used=produce_ruleset_model_instance(USER=False, BASELINE_0=True, PROPOSED=True),
             each_rule=Section5Rule46.BuildingRule(),
-            index_rmr="proposed",
+            index_rmr=PROPOSED,
             id="5-46",
             description="The infiltration shall be modeled using the same methodology and adjustments for weather and building operation in both the proposed design and the baseline building design.",
             ruleset_section_title="Envelope",
@@ -24,7 +25,7 @@ class Section5Rule46(RuleDefinitionListIndexedBase):
     class BuildingRule(RuleDefinitionBase):
         def __init__(self):
             super(Section5Rule46.BuildingRule, self).__init__(
-                rmrs_used=UserBaselineProposedVals(False, True, True),
+                rmrs_used=produce_ruleset_model_instance(USER=False, BASELINE_0=True, PROPOSED=True),
                 required_fields={
                     "$.building_segments[*].zones[*]": ["infiltration"],
                     "$.building_segments[*].zones[*].infiltration": [

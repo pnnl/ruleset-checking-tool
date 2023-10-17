@@ -1,6 +1,7 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
+from rct229.rulesets.ashrae9012019 import BASELINE_0
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_opaque_surface_type import (
     OpaqueSurfaceType as OST,
 )
@@ -22,13 +23,13 @@ class Section5Rule29(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section5Rule29, self).__init__(
-            rmrs_used=UserBaselineProposedVals(False, True, False),
+            rmrs_used=produce_ruleset_model_instance(USER=False, BASELINE_0=True, PROPOSED=False),
             required_fields={
                 "$": ["weather"],
                 "weather": ["climate_zone"],
             },
             each_rule=Section5Rule29.BuildingRule(),
-            index_rmr=RMT.BASELINE_0,
+            index_rmr=BASELINE_0,
             id="5-29",
             description="Baseline fenestration shall be assumed to be flush with the exterior wall, and no shading "
             "projections shall be modeled.",
@@ -36,15 +37,15 @@ class Section5Rule29(RuleDefinitionListIndexedBase):
             standard_section="Section G3.1-5(d) Building Modeling Requirements for the Baseline building",
             is_primary_rule=True,
             list_path="ruleset_model_descriptions[0].buildings[*]",
-            data_items={"climate_zone": ("baseline", "weather/climate_zone")},
+            data_items={"climate_zone": (BASELINE_0, "weather/climate_zone")},
         )
 
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section5Rule29.BuildingRule, self).__init__(
-                rmrs_used=UserBaselineProposedVals(False, True, False),
+                rmrs_used=produce_ruleset_model_instance(USER=False, BASELINE_0=True, PROPOSED=False),
                 each_rule=Section5Rule29.BuildingRule.AboveGradeWallRule(),
-                index_rmr=RMT.BASELINE_0,
+                index_rmr=BASELINE_0,
                 list_path="$.building_segments[*].zones[*].surfaces[*]",
             )
 
@@ -66,10 +67,10 @@ class Section5Rule29(RuleDefinitionListIndexedBase):
         class AboveGradeWallRule(RuleDefinitionListIndexedBase):
             def __init__(self):
                 super(Section5Rule29.BuildingRule.AboveGradeWallRule, self).__init__(
-                    rmrs_used=UserBaselineProposedVals(False, True, False),
+                    rmrs_used=produce_ruleset_model_instance(USER=False, BASELINE_0=True, PROPOSED=False),
                     list_path="subsurfaces[*]",
                     each_rule=Section5Rule29.BuildingRule.AboveGradeWallRule.SubsurfaceRule(),
-                    index_rmr=RMT.BASELINE_0,
+                    index_rmr=BASELINE_0,
                 )
 
             class SubsurfaceRule(RuleDefinitionBase):
@@ -78,7 +79,7 @@ class Section5Rule29(RuleDefinitionListIndexedBase):
                         Section5Rule29.BuildingRule.AboveGradeWallRule.SubsurfaceRule,
                         self,
                     ).__init__(
-                        rmrs_used=UserBaselineProposedVals(False, True, False),
+                        rmrs_used=produce_ruleset_model_instance(USER=False, BASELINE_0=True, PROPOSED=False),
                         fail_msg=FAIL_MSG,
                         required_fields={
                             "$": ["has_shading_overhang", "has_shading_sidefins"]

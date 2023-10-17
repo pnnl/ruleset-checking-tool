@@ -1,6 +1,7 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
+from rct229.rulesets.ashrae9012019 import BASELINE_0
 from rct229.schema.schema_enums import SchemaEnums
 from rct229.rulesets.ashrae9012019.data_fns.table_G3_4_fns import table_G34_lookup
 from rct229.rulesets.ashrae9012019.ruleset_functions.compare_standard_val import std_le
@@ -31,13 +32,13 @@ class Section5Rule24(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section5Rule24, self).__init__(
-            rmrs_used=UserBaselineProposedVals(False, True, False),
+            rmrs_used=produce_ruleset_model_instance(USER=False, BASELINE_0=True, PROPOSED=False),
             required_fields={
                 "$": ["weather"],
                 "weather": ["climate_zone"],
             },
             each_rule=Section5Rule24.BuildingRule(),
-            index_rmr=RMT.BASELINE_0,
+            index_rmr=BASELINE_0,
             id="5-24",
             description="Vertical fenestration U-factors for residential, non-residential and semi-heated spaces in the baseline model must match the appropriate requirements in Table G3.4-1 through G3.4-8 for the appropriate WWR in the baseline RMD.",
             ruleset_section_title="Envelope",
@@ -66,9 +67,9 @@ class Section5Rule24(RuleDefinitionListIndexedBase):
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section5Rule24.BuildingRule, self).__init__(
-                rmrs_used=UserBaselineProposedVals(False, True, False),
+                rmrs_used=produce_ruleset_model_instance(USER=False, BASELINE_0=True, PROPOSED=False),
                 each_rule=Section5Rule24.BuildingRule.AboveGradeWallRule(),
-                index_rmr=RMT.BASELINE_0,
+                index_rmr=BASELINE_0,
                 list_path="$.building_segments[*].zones[*].surfaces[*]",
             )
 
@@ -211,9 +212,9 @@ class Section5Rule24(RuleDefinitionListIndexedBase):
         class AboveGradeWallRule(RuleDefinitionListIndexedBase):
             def __init__(self):
                 super(Section5Rule24.BuildingRule.AboveGradeWallRule, self).__init__(
-                    rmrs_used=UserBaselineProposedVals(False, True, False),
+                    rmrs_used=produce_ruleset_model_instance(USER=False, BASELINE_0=True, PROPOSED=False),
                     each_rule=Section5Rule24.BuildingRule.AboveGradeWallRule.SubsurfaceRule(),
-                    index_rmr=RMT.BASELINE_0,
+                    index_rmr=BASELINE_0,
                     list_path="subsurfaces[*]",
                     required_fields={
                         "$.subsurfaces[*]": [
@@ -254,7 +255,7 @@ class Section5Rule24(RuleDefinitionListIndexedBase):
                         Section5Rule24.BuildingRule.AboveGradeWallRule.SubsurfaceRule,
                         self,
                     ).__init__(
-                        rmrs_used=UserBaselineProposedVals(False, True, False),
+                        rmrs_used=produce_ruleset_model_instance(USER=False, BASELINE_0=True, PROPOSED=False),
                     )
 
                 def get_calc_vals(self, context, data=None):
