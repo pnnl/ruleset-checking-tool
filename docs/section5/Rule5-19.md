@@ -38,6 +38,8 @@
 
 - Case 1: If all building segments with building areas not shown in Table G3.1.1-1 are new, and the total window-wall-ratio is equal to that in P_RMR or 40%, whichever is smaller: `if ( NOT manual_check_flag ) AND ( window_wall_areas_dictionary_b["OTHER"]["total_window_area"] == min(window_wall_areas_dictionary_p["OTHER"]["total_window_area"], 0.4) ): PASS`
 
+    - Conservative comparison less equal: `if ( NOT manual_check_flag ) AND ( window_wall_areas_dictionary_b["OTHER"]["total_window_area"] <= min(window_wall_areas_dictionary_p["OTHER"]["total_window_area"], 0.4) ): PASS`
+
 - Case 2: Else if all building segments with building areas not shown in Table G3.1.1-1 are new, and the total window-wall-ratio is not equal to that in P_RMR or 40%, whichever is smaller: `if ( NOT manual_check_flag ) AND ( window_wall_areas_dictionary_b["OTHER"]["total_window_area"] != min(window_wall_areas_dictionary_p["OTHER"]["total_window_area"], 0.4) ): FAIL`
 
 - Case 3: Else if any building segments with building areas not shown in Table G3.1.1-1 is not new, and the total window-wall-ratio is equal to that in P_RMR or 40%, whichever is smaller: `if ( manual_check_flag ) AND ( window_wall_areas_dictionary_b["OTHER"]["total_window_area"] == min(window_wall_areas_dictionary_p["OTHER"]["total_window_area"], 0.4) ): UNDETERMINED and raise_message "BUILDING IS NOT ALL NEW AND BASELINE WWR MATCHES THE SMALLER OF PROPOSED DESIGN WWR OR 40%. HOWEVER, THIS RULE DOES NOT APPLY TO THE EXISTING ENVELOPE PER TABLE G3.1 BASELINE COLUMN #5 (C). FOR EXISTING ENVELOPE, THE BASELINE FENESTRATION AREA MUST EQUAL THE EXISTING FENESTRATION AREA PRIOR TO THE PROPOSED WORK. A MANUAL CHECK IS REQUIRED TO VERIFY COMPLIANCE."`
