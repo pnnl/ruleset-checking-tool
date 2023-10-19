@@ -11,7 +11,9 @@ class Section5Rule46(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section5Rule46, self).__init__(
-            rmrs_used=produce_ruleset_model_instance(USER=False, BASELINE_0=True, PROPOSED=True),
+            rmrs_used=produce_ruleset_model_instance(
+                USER=False, BASELINE_0=True, PROPOSED=True
+            ),
             each_rule=Section5Rule46.BuildingRule(),
             index_rmr=PROPOSED,
             id="5-46",
@@ -25,7 +27,9 @@ class Section5Rule46(RuleDefinitionListIndexedBase):
     class BuildingRule(RuleDefinitionBase):
         def __init__(self):
             super(Section5Rule46.BuildingRule, self).__init__(
-                rmrs_used=produce_ruleset_model_instance(USER=False, BASELINE_0=True, PROPOSED=True),
+                rmrs_used=produce_ruleset_model_instance(
+                    USER=False, BASELINE_0=True, PROPOSED=True
+                ),
                 required_fields={
                     "$.building_segments[*].zones[*]": ["infiltration"],
                     "$.building_segments[*].zones[*].infiltration": [

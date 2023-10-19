@@ -27,7 +27,9 @@ class Section5Rule36(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section5Rule36, self).__init__(
-            rmrs_used=produce_ruleset_model_instance(USER=False, BASELINE_0=True, PROPOSED=True),
+            rmrs_used=produce_ruleset_model_instance(
+                USER=False, BASELINE_0=True, PROPOSED=True
+            ),
             required_fields={
                 "$": ["weather"],
                 "weather": ["climate_zone"],
@@ -46,7 +48,9 @@ class Section5Rule36(RuleDefinitionListIndexedBase):
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section5Rule36.BuildingRule, self).__init__(
-                rmrs_used=produce_ruleset_model_instance(USER=False, BASELINE_0=True, PROPOSED=True),
+                rmrs_used=produce_ruleset_model_instance(
+                    USER=False, BASELINE_0=True, PROPOSED=True
+                ),
                 each_rule=Section5Rule36.BuildingRule.BuildingSegmentRule(),
                 index_rmr=BASELINE_0,
                 list_path="building_segments[*]",
@@ -70,7 +74,9 @@ class Section5Rule36(RuleDefinitionListIndexedBase):
         class BuildingSegmentRule(RuleDefinitionListIndexedBase):
             def __init__(self):
                 super(Section5Rule36.BuildingRule.BuildingSegmentRule, self).__init__(
-                    rmrs_used=produce_ruleset_model_instance(USER=False, BASELINE_0=True, PROPOSED=True),
+                    rmrs_used=produce_ruleset_model_instance(
+                        USER=False, BASELINE_0=True, PROPOSED=True
+                    ),
                     each_rule=Section5Rule36.BuildingRule.BuildingSegmentRule.RoofRule(),
                     index_rmr=BASELINE_0,
                     list_path="$.zones[*].surfaces[*]",
@@ -122,7 +128,9 @@ class Section5Rule36(RuleDefinitionListIndexedBase):
                         Section5Rule36.BuildingRule.BuildingSegmentRule.RoofRule,
                         self,
                     ).__init__(
-                        rmrs_used=produce_ruleset_model_instance(USER=False, BASELINE_0=True, PROPOSED=True),
+                        rmrs_used=produce_ruleset_model_instance(
+                            USER=False, BASELINE_0=True, PROPOSED=True
+                        ),
                     )
 
                 def get_calc_vals(self, context, data=None):

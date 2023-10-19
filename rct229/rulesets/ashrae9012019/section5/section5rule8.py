@@ -24,7 +24,9 @@ class Section5Rule8(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section5Rule8, self).__init__(
-            rmrs_used=produce_ruleset_model_instance(USER=False, BASELINE_0=True, PROPOSED=False),
+            rmrs_used=produce_ruleset_model_instance(
+                USER=False, BASELINE_0=True, PROPOSED=False
+            ),
             each_rule=Section5Rule8.BuildingRule(),
             index_rmr=BASELINE_0,
             list_path="ruleset_model_descriptions[0].buildings[*]",
@@ -43,7 +45,9 @@ class Section5Rule8(RuleDefinitionListIndexedBase):
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section5Rule8.BuildingRule, self).__init__(
-                rmrs_used=produce_ruleset_model_instance(USER=False, BASELINE_0=True, PROPOSED=False),
+                rmrs_used=produce_ruleset_model_instance(
+                    USER=False, BASELINE_0=True, PROPOSED=False
+                ),
                 required_fields={},
                 each_rule=Section5Rule8.BuildingRule.BelowGradeWallRule(),
                 index_rmr=BASELINE_0,
@@ -69,7 +73,9 @@ class Section5Rule8(RuleDefinitionListIndexedBase):
         class BelowGradeWallRule(RuleDefinitionBase):
             def __init__(self):
                 super(Section5Rule8.BuildingRule.BelowGradeWallRule, self).__init__(
-                    rmrs_used=produce_ruleset_model_instance(USER=False, BASELINE_0=True, PROPOSED=False),
+                    rmrs_used=produce_ruleset_model_instance(
+                        USER=False, BASELINE_0=True, PROPOSED=False
+                    ),
                     required_fields={
                         "$": ["construction"],
                         "construction": ["c_factor"],

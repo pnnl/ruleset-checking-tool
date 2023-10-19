@@ -32,7 +32,9 @@ class Section5Rule21(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section5Rule21, self).__init__(
-            rmrs_used=produce_ruleset_model_instance(USER=False, BASELINE_0=True, PROPOSED=True),
+            rmrs_used=produce_ruleset_model_instance(
+                USER=False, BASELINE_0=True, PROPOSED=True
+            ),
             required_fields={
                 "$": ["weather"],
                 "weather": ["climate_zone"],
@@ -51,7 +53,9 @@ class Section5Rule21(RuleDefinitionListIndexedBase):
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section5Rule21.BuildingRule, self).__init__(
-                rmrs_used=produce_ruleset_model_instance(USER=False, BASELINE_0=True, PROPOSED=True),
+                rmrs_used=produce_ruleset_model_instance(
+                    USER=False, BASELINE_0=True, PROPOSED=True
+                ),
                 required_fields={},
                 each_rule=Section5Rule21.BuildingRule.AboveGradeWallRule(),
                 index_rmr=BASELINE_0,
@@ -98,7 +102,9 @@ class Section5Rule21(RuleDefinitionListIndexedBase):
         class AboveGradeWallRule(RuleDefinitionBase):
             def __init__(self):
                 super(Section5Rule21.BuildingRule.AboveGradeWallRule, self).__init__(
-                    rmrs_used=produce_ruleset_model_instance(USER=False, BASELINE_0=True, PROPOSED=True),
+                    rmrs_used=produce_ruleset_model_instance(
+                        USER=False, BASELINE_0=True, PROPOSED=True
+                    ),
                     required_fields={
                         "$": ["construction"],
                         "construction": ["u_factor"],

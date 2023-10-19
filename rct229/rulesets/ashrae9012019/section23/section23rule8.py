@@ -1,6 +1,7 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
+from rct229.rulesets.ashrae9012019 import BASELINE_0
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_system_type_compare import (
     baseline_system_type_compare,
 )
@@ -31,9 +32,11 @@ class Section23Rule8(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section23Rule8, self).__init__(
-            rmrs_used=UserBaselineProposedVals(False, True, False),
+            rmrs_used=produce_ruleset_model_instance(
+                USER=False, BASELINE_0=True, PROPOSED=False
+            ),
             each_rule=Section23Rule8.HVACRule(),
-            index_rmr=RMT.BASELINE_0,
+            index_rmr=BASELINE_0,
             id="23-8",
             description="System 5-8 and 11 - part load VAV fan power shall be modeled using either method 1 or 2 in Table G3.1.3.15. This rule will only validate data points from Method-1 Part-load Fan Power Data. However, both methods are equivalent. When modeling inputs are based on Method 2, values should be converted to Method 1 when writing to RMD.",
             ruleset_section_title="HVAC - Airside",
@@ -77,16 +80,20 @@ class Section23Rule8(RuleDefinitionListIndexedBase):
     class HVACRule(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section23Rule8.HVACRule, self).__init__(
-                rmrs_used=UserBaselineProposedVals(False, True, False),
+                rmrs_used=produce_ruleset_model_instance(
+                    USER=False, BASELINE_0=True, PROPOSED=False
+                ),
                 each_rule=Section23Rule8.HVACRule.SupplyFanRule(),
-                index_rmr=RMT.BASELINE_0,
+                index_rmr=BASELINE_0,
                 list_path="$.fan_system.supply_fans[*]",
             )
 
         class SupplyFanRule(RuleDefinitionBase):
             def __init__(self):
                 super(Section23Rule8.HVACRule.SupplyFanRule, self).__init__(
-                    rmrs_used=UserBaselineProposedVals(False, True, False),
+                    rmrs_used=produce_ruleset_model_instance(
+                        USER=False, BASELINE_0=True, PROPOSED=False
+                    ),
                     required_fields={
                         "$": [
                             "design_airflow",

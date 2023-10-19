@@ -23,7 +23,9 @@ class Section5Rule29(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section5Rule29, self).__init__(
-            rmrs_used=produce_ruleset_model_instance(USER=False, BASELINE_0=True, PROPOSED=False),
+            rmrs_used=produce_ruleset_model_instance(
+                USER=False, BASELINE_0=True, PROPOSED=False
+            ),
             required_fields={
                 "$": ["weather"],
                 "weather": ["climate_zone"],
@@ -43,7 +45,9 @@ class Section5Rule29(RuleDefinitionListIndexedBase):
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section5Rule29.BuildingRule, self).__init__(
-                rmrs_used=produce_ruleset_model_instance(USER=False, BASELINE_0=True, PROPOSED=False),
+                rmrs_used=produce_ruleset_model_instance(
+                    USER=False, BASELINE_0=True, PROPOSED=False
+                ),
                 each_rule=Section5Rule29.BuildingRule.AboveGradeWallRule(),
                 index_rmr=BASELINE_0,
                 list_path="$.building_segments[*].zones[*].surfaces[*]",
@@ -67,7 +71,9 @@ class Section5Rule29(RuleDefinitionListIndexedBase):
         class AboveGradeWallRule(RuleDefinitionListIndexedBase):
             def __init__(self):
                 super(Section5Rule29.BuildingRule.AboveGradeWallRule, self).__init__(
-                    rmrs_used=produce_ruleset_model_instance(USER=False, BASELINE_0=True, PROPOSED=False),
+                    rmrs_used=produce_ruleset_model_instance(
+                        USER=False, BASELINE_0=True, PROPOSED=False
+                    ),
                     list_path="subsurfaces[*]",
                     each_rule=Section5Rule29.BuildingRule.AboveGradeWallRule.SubsurfaceRule(),
                     index_rmr=BASELINE_0,
@@ -79,7 +85,9 @@ class Section5Rule29(RuleDefinitionListIndexedBase):
                         Section5Rule29.BuildingRule.AboveGradeWallRule.SubsurfaceRule,
                         self,
                     ).__init__(
-                        rmrs_used=produce_ruleset_model_instance(USER=False, BASELINE_0=True, PROPOSED=False),
+                        rmrs_used=produce_ruleset_model_instance(
+                            USER=False, BASELINE_0=True, PROPOSED=False
+                        ),
                         fail_msg=FAIL_MSG,
                         required_fields={
                             "$": ["has_shading_overhang", "has_shading_sidefins"]

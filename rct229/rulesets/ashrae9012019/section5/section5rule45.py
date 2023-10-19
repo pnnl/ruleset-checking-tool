@@ -15,7 +15,9 @@ class Section5Rule45(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section5Rule45, self).__init__(
-            rmrs_used=produce_ruleset_model_instance(USER=False, BASELINE_0=True, PROPOSED=True),
+            rmrs_used=produce_ruleset_model_instance(
+                USER=False, BASELINE_0=True, PROPOSED=True
+            ),
             each_rule=Section5Rule45.RuleSetModelInstanceRule(),
             index_rmr=BASELINE_0,
             id="5-45",
@@ -31,7 +33,9 @@ class Section5Rule45(RuleDefinitionListIndexedBase):
     class RuleSetModelInstanceRule(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section5Rule45.RuleSetModelInstanceRule, self).__init__(
-                rmrs_used=produce_ruleset_model_instance(USER=False, BASELINE_0=True, PROPOSED=True),
+                rmrs_used=produce_ruleset_model_instance(
+                    USER=False, BASELINE_0=True, PROPOSED=True
+                ),
                 each_rule=Section5Rule45.RuleSetModelInstanceRule.ZoneRule(),
                 index_rmr=BASELINE_0,
                 list_path="buildings[*].building_segments[*].zones[*]",
@@ -51,7 +55,9 @@ class Section5Rule45(RuleDefinitionListIndexedBase):
         class ZoneRule(RuleDefinitionBase):
             def __init__(self):
                 super(Section5Rule45.RuleSetModelInstanceRule.ZoneRule, self).__init__(
-                    rmrs_used=produce_ruleset_model_instance(USER=False, BASELINE_0=True, PROPOSED=True),
+                    rmrs_used=produce_ruleset_model_instance(
+                        USER=False, BASELINE_0=True, PROPOSED=True
+                    ),
                     required_fields={
                         "$": ["infiltration"],
                         "$.infiltration": ["multiplier_schedule"],

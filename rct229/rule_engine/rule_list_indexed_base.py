@@ -125,7 +125,8 @@ class RuleDefinitionListIndexedBase(RuleDefinitionListBase):
         # The index RMR must be used
         context_on_list = any(
             map(
-                lambda ruleset_model: self.index_rmr == ruleset_model and context[ruleset_model],
+                lambda ruleset_model: self.index_rmr == ruleset_model
+                and context[ruleset_model],
                 context.get_ruleset_model_types(),
             )
         )

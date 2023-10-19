@@ -16,7 +16,9 @@ class Section5Rule48(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section5Rule48, self).__init__(
-            rmrs_used=produce_ruleset_model_instance(USER=False, BASELINE_0=True, PROPOSED=True),
+            rmrs_used=produce_ruleset_model_instance(
+                USER=False, BASELINE_0=True, PROPOSED=True
+            ),
             required_fields={
                 "$": ["weather"],
                 "weather": ["climate_zone"],
@@ -38,7 +40,9 @@ class Section5Rule48(RuleDefinitionListIndexedBase):
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section5Rule48.BuildingRule, self).__init__(
-                rmrs_used=produce_ruleset_model_instance(USER=False, BASELINE_0=True, PROPOSED=True),
+                rmrs_used=produce_ruleset_model_instance(
+                    USER=False, BASELINE_0=True, PROPOSED=True
+                ),
                 each_rule=Section5Rule48.BuildingRule.ZoneRule(),
                 index_rmr=BASELINE_0,
                 list_path="$.building_segments[*].zones[*]",
@@ -60,7 +64,9 @@ class Section5Rule48(RuleDefinitionListIndexedBase):
         class ZoneRule(RuleDefinitionBase):
             def __init__(self):
                 super(Section5Rule48.BuildingRule.ZoneRule, self).__init__(
-                    rmrs_used=produce_ruleset_model_instance(USER=False, BASELINE_0=True, PROPOSED=True),
+                    rmrs_used=produce_ruleset_model_instance(
+                        USER=False, BASELINE_0=True, PROPOSED=True
+                    ),
                     required_fields={
                         "$": ["infiltration"],
                         "infiltration": ["flow_rate"],

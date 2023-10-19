@@ -1,6 +1,7 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
+from rct229.rulesets.ashrae9012019 import USER
 from rct229.utils.jsonpath_utils import find_all
 
 
@@ -9,9 +10,11 @@ class Section15Rule4(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section15Rule4, self).__init__(
-            rmrs_used=UserBaselineProposedVals(True, True, False),
+            rmrs_used=produce_ruleset_model_instance(
+                USER=True, BASELINE_0=True, PROPOSED=False
+            ),
             each_rule=Section15Rule4.TransformerRule(),
-            index_rmr="user",
+            index_rmr=USER,
             id="15-4",
             description="User RMR transformer id in Baseline RMR",
             ruleset_section_title="Transformer",
@@ -29,7 +32,9 @@ class Section15Rule4(RuleDefinitionListIndexedBase):
     class TransformerRule(RuleDefinitionBase):
         def __init__(self):
             super(Section15Rule4.TransformerRule, self).__init__(
-                rmrs_used=UserBaselineProposedVals(True, False, False),
+                rmrs_used=produce_ruleset_model_instance(
+                    USER=True, BASELINE_0=False, PROPOSED=False
+                ),
             )
 
         def get_calc_vals(self, context, data=None):

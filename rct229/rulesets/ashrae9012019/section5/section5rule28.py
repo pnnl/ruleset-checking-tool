@@ -19,7 +19,9 @@ class Section5Rule28(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section5Rule28, self).__init__(
-            rmrs_used=produce_ruleset_model_instance(USER=False, BASELINE_0=True, PROPOSED=True),
+            rmrs_used=produce_ruleset_model_instance(
+                USER=False, BASELINE_0=True, PROPOSED=True
+            ),
             required_fields={
                 "$": ["weather"],
                 "weather": ["climate_zone"],
@@ -38,7 +40,9 @@ class Section5Rule28(RuleDefinitionListIndexedBase):
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section5Rule28.BuildingRule, self).__init__(
-                rmrs_used=produce_ruleset_model_instance(USER=False, BASELINE_0=True, PROPOSED=True),
+                rmrs_used=produce_ruleset_model_instance(
+                    USER=False, BASELINE_0=True, PROPOSED=True
+                ),
                 each_rule=Section5Rule28.BuildingRule.UnregulatedSurfaceRule(),
                 index_rmr=BASELINE_0,
                 list_path="$.building_segments[*].zones[*].surfaces[*]",
@@ -62,7 +66,9 @@ class Section5Rule28(RuleDefinitionListIndexedBase):
                 super(
                     Section5Rule28.BuildingRule.UnregulatedSurfaceRule, self
                 ).__init__(
-                    rmrs_used=produce_ruleset_model_instance(USER=False, BASELINE_0=True, PROPOSED=True),
+                    rmrs_used=produce_ruleset_model_instance(
+                        USER=False, BASELINE_0=True, PROPOSED=True
+                    ),
                     list_path="subsurfaces[*]",
                     each_rule=Section5Rule28.BuildingRule.UnregulatedSurfaceRule.UnregulatedSubsurfaceRule(),
                     index_rmr=BASELINE_0,
@@ -74,7 +80,9 @@ class Section5Rule28(RuleDefinitionListIndexedBase):
                         Section5Rule28.BuildingRule.UnregulatedSurfaceRule.UnregulatedSubsurfaceRule,
                         self,
                     ).__init__(
-                        rmrs_used=produce_ruleset_model_instance(USER=False, BASELINE_0=True, PROPOSED=True),
+                        rmrs_used=produce_ruleset_model_instance(
+                            USER=False, BASELINE_0=True, PROPOSED=True
+                        ),
                         fail_msg=FAIL_MSG,
                     )
 

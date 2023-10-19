@@ -31,7 +31,9 @@ class Section5Rule49(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section5Rule49, self).__init__(
-            rmrs_used=produce_ruleset_model_instance(USER=False, BASELINE_0=False, PROPOSED=True),
+            rmrs_used=produce_ruleset_model_instance(
+                USER=False, BASELINE_0=False, PROPOSED=True
+            ),
             required_fields={
                 "$": ["weather"],
                 "weather": ["climate_zone"],
@@ -51,7 +53,9 @@ class Section5Rule49(RuleDefinitionListIndexedBase):
     class BuildingRule(RuleDefinitionBase):
         def __init__(self):
             super(Section5Rule49.BuildingRule, self).__init__(
-                rmrs_used=produce_ruleset_model_instance(USER=False, BASELINE_0=False, PROPOSED=True),
+                rmrs_used=produce_ruleset_model_instance(
+                    USER=False, BASELINE_0=False, PROPOSED=True
+                ),
                 required_fields={"$..zones[*]": ["surfaces"]},
             )
 

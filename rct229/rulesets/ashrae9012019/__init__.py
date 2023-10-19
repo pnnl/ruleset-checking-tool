@@ -5,9 +5,7 @@ import importlib
 __all__ = ["section5", "section6"]
 from rct229.schema.schema_enums import SchemaEnums
 
-RMT = SchemaEnums.schema_enums[
-    "RulesetModelOptions2019ASHRAE901"
-]
+RMT = SchemaEnums.schema_enums["RulesetModelOptions2019ASHRAE901"]
 BASELINE_0 = RMT.BASELINE_0
 BASELINE_90 = RMT.BASELINE_90
 BASELINE_180 = RMT.BASELINE_180

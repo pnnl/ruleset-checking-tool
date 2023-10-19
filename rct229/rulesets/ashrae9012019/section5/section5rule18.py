@@ -29,7 +29,9 @@ class Section5Rule18(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section5Rule18, self).__init__(
-            rmrs_used=produce_ruleset_model_instance(USER=False, BASELINE_0=True, PROPOSED=False),
+            rmrs_used=produce_ruleset_model_instance(
+                USER=False, BASELINE_0=True, PROPOSED=False
+            ),
             required_fields={
                 "$": ["weather"],
                 "weather": ["climate_zone"],
@@ -48,7 +50,9 @@ class Section5Rule18(RuleDefinitionListIndexedBase):
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section5Rule18.BuildingRule, self).__init__(
-                rmrs_used=produce_ruleset_model_instance(USER=False, BASELINE_0=True, PROPOSED=False),
+                rmrs_used=produce_ruleset_model_instance(
+                    USER=False, BASELINE_0=True, PROPOSED=False
+                ),
                 required_fields={
                     "$": ["building_segments"],
                     "building_segments[*]": [
@@ -93,7 +97,9 @@ class Section5Rule18(RuleDefinitionListIndexedBase):
                 ].append(building_segment)
             # create list based on area_type
             return [
-                produce_ruleset_model_instance(USER=None, BASELINE_0=building_segments, PROPOSED=None)
+                produce_ruleset_model_instance(
+                    USER=None, BASELINE_0=building_segments, PROPOSED=None
+                )
                 for area_type, building_segments in area_type_to_building_segment_dict.items()
                 if area_type != OTHER
             ]
@@ -101,7 +107,9 @@ class Section5Rule18(RuleDefinitionListIndexedBase):
         class AreaTypeRule(RuleDefinitionBase):
             def __init__(self):
                 super(Section5Rule18.BuildingRule.AreaTypeRule, self).__init__(
-                    rmrs_used=produce_ruleset_model_instance(USER=False, BASELINE_0=True, PROPOSED=False),
+                    rmrs_used=produce_ruleset_model_instance(
+                        USER=False, BASELINE_0=True, PROPOSED=False
+                    ),
                 )
 
             def get_calc_vals(self, context, data=None):

@@ -17,7 +17,9 @@ class Section5Rule31(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section5Rule31, self).__init__(
-            rmrs_used=produce_ruleset_model_instance(USER=False, BASELINE_0=True, PROPOSED=True),
+            rmrs_used=produce_ruleset_model_instance(
+                USER=False, BASELINE_0=True, PROPOSED=True
+            ),
             each_rule=Section5Rule31.BuildingRule(),
             index_rmr=BASELINE_0,
             id="5-31",
@@ -31,7 +33,9 @@ class Section5Rule31(RuleDefinitionListIndexedBase):
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section5Rule31.BuildingRule, self).__init__(
-                rmrs_used=produce_ruleset_model_instance(USER=False, BASELINE_0=True, PROPOSED=True),
+                rmrs_used=produce_ruleset_model_instance(
+                    USER=False, BASELINE_0=True, PROPOSED=True
+                ),
                 # Make sure surfaces are matched in SurfaceRule
                 list_path="$.building_segments[*].zones[*].surfaces[*]",
                 each_rule=Section5Rule31.BuildingRule.SurfaceRule(),
@@ -41,7 +45,9 @@ class Section5Rule31(RuleDefinitionListIndexedBase):
         class SurfaceRule(RuleDefinitionListIndexedBase):
             def __init__(self):
                 super(Section5Rule31.BuildingRule.SurfaceRule, self).__init__(
-                    rmrs_used=produce_ruleset_model_instance(USER=False, BASELINE_0=True, PROPOSED=True),
+                    rmrs_used=produce_ruleset_model_instance(
+                        USER=False, BASELINE_0=True, PROPOSED=True
+                    ),
                     each_rule=Section5Rule31.BuildingRule.SurfaceRule.SubsurfaceRule(),
                     index_rmr=BASELINE_0,
                     # Make sure subsurfaces are matched
@@ -82,7 +88,9 @@ class Section5Rule31(RuleDefinitionListIndexedBase):
                     super(
                         Section5Rule31.BuildingRule.SurfaceRule.SubsurfaceRule, self
                     ).__init__(
-                        rmrs_used=produce_ruleset_model_instance(USER=False, BASELINE_0=True, PROPOSED=True),
+                        rmrs_used=produce_ruleset_model_instance(
+                            USER=False, BASELINE_0=True, PROPOSED=True
+                        ),
                         required_fields={"$": ["has_manual_interior_shades"]},
                     )
 

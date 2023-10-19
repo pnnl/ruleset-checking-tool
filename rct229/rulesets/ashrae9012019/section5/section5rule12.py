@@ -22,7 +22,9 @@ class Section5Rule12(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section5Rule12, self).__init__(
-            rmrs_used=produce_ruleset_model_instance(USER=False, BASELINE_0=True, PROPOSED=False),
+            rmrs_used=produce_ruleset_model_instance(
+                USER=False, BASELINE_0=True, PROPOSED=False
+            ),
             required_fields={
                 "$": ["weather"],
                 "weather": ["climate_zone"],
@@ -41,7 +43,9 @@ class Section5Rule12(RuleDefinitionListIndexedBase):
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section5Rule12.BuildingRule, self).__init__(
-                rmrs_used=produce_ruleset_model_instance(USER=False, BASELINE_0=True, PROPOSED=False),
+                rmrs_used=produce_ruleset_model_instance(
+                    USER=False, BASELINE_0=True, PROPOSED=False
+                ),
                 each_rule=Section5Rule12.BuildingRule.SurfaceRule(),
                 index_rmr=BASELINE_0,
                 list_path="$.building_segments[*].zones[*].surfaces[*]",
@@ -62,7 +66,9 @@ class Section5Rule12(RuleDefinitionListIndexedBase):
         class SurfaceRule(PartialRuleDefinition):
             def __init__(self):
                 super(Section5Rule12.BuildingRule.SurfaceRule, self).__init__(
-                    rmrs_used=produce_ruleset_model_instance(USER=False, BASELINE_0=True, PROPOSED=False),
+                    rmrs_used=produce_ruleset_model_instance(
+                        USER=False, BASELINE_0=True, PROPOSED=False
+                    ),
                 )
 
             def get_calc_vals(self, context, data=None):

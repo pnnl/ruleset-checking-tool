@@ -13,7 +13,9 @@ class Section5Rule39(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section5Rule39, self).__init__(
-            rmrs_used=produce_ruleset_model_instance(USER=False, BASELINE_0=False, PROPOSED=True),
+            rmrs_used=produce_ruleset_model_instance(
+                USER=False, BASELINE_0=False, PROPOSED=True
+            ),
             each_rule=Section5Rule39.SubsurfaceRule(),
             index_rmr=PROPOSED,
             id="5-39",
@@ -27,7 +29,9 @@ class Section5Rule39(RuleDefinitionListIndexedBase):
     class SubsurfaceRule(PartialRuleDefinition):
         def __init__(self):
             super(Section5Rule39.SubsurfaceRule, self).__init__(
-                rmrs_used=produce_ruleset_model_instance(USER=False, BASELINE_0=False, PROPOSED=True),
+                rmrs_used=produce_ruleset_model_instance(
+                    USER=False, BASELINE_0=False, PROPOSED=True
+                ),
                 required_fields={"$": ["dynamic_glazing_type"]},
                 manual_check_required_msg=UNDETERMINED_MSG,
             )

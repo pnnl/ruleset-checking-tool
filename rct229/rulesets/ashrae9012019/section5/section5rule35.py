@@ -16,7 +16,9 @@ class Section5Rule35(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section5Rule35, self).__init__(
-            rmrs_used=produce_ruleset_model_instance(USER=False, BASELINE_0=True, PROPOSED=True),
+            rmrs_used=produce_ruleset_model_instance(
+                USER=False, BASELINE_0=True, PROPOSED=True
+            ),
             required_fields={
                 "$": ["weather"],
                 "weather": ["climate_zone"],
@@ -35,7 +37,9 @@ class Section5Rule35(RuleDefinitionListIndexedBase):
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section5Rule35.BuildingRule, self).__init__(
-                rmrs_used=produce_ruleset_model_instance(USER=False, BASELINE_0=True, PROPOSED=True),
+                rmrs_used=produce_ruleset_model_instance(
+                    USER=False, BASELINE_0=True, PROPOSED=True
+                ),
                 each_rule=Section5Rule35.BuildingRule.BuildingSegmentRule(),
                 index_rmr=BASELINE_0,
                 list_path="building_segments[*]",
@@ -56,7 +60,9 @@ class Section5Rule35(RuleDefinitionListIndexedBase):
         class BuildingSegmentRule(RuleDefinitionBase):
             def __init__(self):
                 super(Section5Rule35.BuildingRule.BuildingSegmentRule, self).__init__(
-                    rmrs_used=produce_ruleset_model_instance(USER=False, BASELINE_0=True, PROPOSED=True),
+                    rmrs_used=produce_ruleset_model_instance(
+                        USER=False, BASELINE_0=True, PROPOSED=True
+                    ),
                 )
 
             def is_applicable(self, context, data=None):

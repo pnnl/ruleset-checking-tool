@@ -24,7 +24,9 @@ class Section5Rule17(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section5Rule17, self).__init__(
-            rmrs_used=produce_ruleset_model_instance(USER=False, BASELINE_0=True, PROPOSED=True),
+            rmrs_used=produce_ruleset_model_instance(
+                USER=False, BASELINE_0=True, PROPOSED=True
+            ),
             required_fields={
                 "$": ["weather"],
                 "weather": ["climate_zone"],
@@ -43,7 +45,9 @@ class Section5Rule17(RuleDefinitionListIndexedBase):
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section5Rule17.BuildingRule, self).__init__(
-                rmrs_used=produce_ruleset_model_instance(USER=False, BASELINE_0=True, PROPOSED=True),
+                rmrs_used=produce_ruleset_model_instance(
+                    USER=False, BASELINE_0=True, PROPOSED=True
+                ),
                 required_fields={},
                 each_rule=Section5Rule17.BuildingRule.UnregulatedSurfaceRule(),
                 index_rmr=BASELINE_0,
@@ -68,7 +72,9 @@ class Section5Rule17(RuleDefinitionListIndexedBase):
                 super(
                     Section5Rule17.BuildingRule.UnregulatedSurfaceRule, self
                 ).__init__(
-                    rmrs_used=produce_ruleset_model_instance(USER=False, BASELINE_0=True, PROPOSED=True),
+                    rmrs_used=produce_ruleset_model_instance(
+                        USER=False, BASELINE_0=True, PROPOSED=True
+                    ),
                     required_fields={"$": ["construction"]},
                 )
 

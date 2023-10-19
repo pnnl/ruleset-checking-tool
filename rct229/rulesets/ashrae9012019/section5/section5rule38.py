@@ -33,7 +33,9 @@ class Section5Rule38(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section5Rule38, self).__init__(
-            rmrs_used=produce_ruleset_model_instance(USER=False, BASELINE_0=True, PROPOSED=False),
+            rmrs_used=produce_ruleset_model_instance(
+                USER=False, BASELINE_0=True, PROPOSED=False
+            ),
             each_rule=Section5Rule38.BuildingRule(),
             index_rmr=BASELINE_0,
             id="5-38",
@@ -52,7 +54,9 @@ class Section5Rule38(RuleDefinitionListIndexedBase):
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section5Rule38.BuildingRule, self).__init__(
-                rmrs_used=produce_ruleset_model_instance(USER=False, BASELINE_0=True, PROPOSED=False),
+                rmrs_used=produce_ruleset_model_instance(
+                    USER=False, BASELINE_0=True, PROPOSED=False
+                ),
                 list_path="$.building_segments[*].zones[*].surfaces[*]",
                 each_rule=Section5Rule38.BuildingRule.RoofRule(),
                 index_rmr=BASELINE_0,
@@ -179,7 +183,9 @@ class Section5Rule38(RuleDefinitionListIndexedBase):
         class RoofRule(RuleDefinitionListIndexedBase):
             def __init__(self):
                 super(Section5Rule38.BuildingRule.RoofRule, self).__init__(
-                    rmrs_used=produce_ruleset_model_instance(USER=False, BASELINE_0=True, PROPOSED=False),
+                    rmrs_used=produce_ruleset_model_instance(
+                        USER=False, BASELINE_0=True, PROPOSED=False
+                    ),
                     each_rule=Section5Rule38.BuildingRule.RoofRule.SubsurfaceRule(),
                     index_rmr=BASELINE_0,
                     list_path="subsurfaces[*]",
@@ -197,7 +203,9 @@ class Section5Rule38(RuleDefinitionListIndexedBase):
                     super(
                         Section5Rule38.BuildingRule.RoofRule.SubsurfaceRule, self
                     ).__init__(
-                        rmrs_used=produce_ruleset_model_instance(USER=False, BASELINE_0=True, PROPOSED=False),
+                        rmrs_used=produce_ruleset_model_instance(
+                            USER=False, BASELINE_0=True, PROPOSED=False
+                        ),
                         required_fields={
                             "$": ["classification", "glazed_area", "opaque_area"]
                         },

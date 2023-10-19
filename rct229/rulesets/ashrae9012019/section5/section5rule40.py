@@ -24,7 +24,9 @@ class Section5Rule40(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section5Rule40, self).__init__(
-            rmrs_used=produce_ruleset_model_instance(USER=False, BASELINE_0=True, PROPOSED=False),
+            rmrs_used=produce_ruleset_model_instance(
+                USER=False, BASELINE_0=True, PROPOSED=False
+            ),
             required_fields={
                 "$": ["weather"],
                 "weather": ["climate_zone"],
@@ -43,7 +45,9 @@ class Section5Rule40(RuleDefinitionListIndexedBase):
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section5Rule40.BuildingRule, self).__init__(
-                rmrs_used=produce_ruleset_model_instance(USER=False, BASELINE_0=True, PROPOSED=False),
+                rmrs_used=produce_ruleset_model_instance(
+                    USER=False, BASELINE_0=True, PROPOSED=False
+                ),
                 each_rule=Section5Rule40.BuildingRule.RoofRule(),
                 index_rmr=BASELINE_0,
                 list_path="$.building_segments[*].zones[*].surfaces[*]",
@@ -67,7 +71,9 @@ class Section5Rule40(RuleDefinitionListIndexedBase):
         class RoofRule(RuleDefinitionBase):
             def __init__(self):
                 super(Section5Rule40.BuildingRule.RoofRule, self).__init__(
-                    rmrs_used=produce_ruleset_model_instance(USER=False, BASELINE_0=True, PROPOSED=False),
+                    rmrs_used=produce_ruleset_model_instance(
+                        USER=False, BASELINE_0=True, PROPOSED=False
+                    ),
                     required_fields={
                         "$": ["optical_properties"],
                         "optical_properties": ["absorptance_thermal_exterior"],

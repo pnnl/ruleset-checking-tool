@@ -11,7 +11,9 @@ class Section5Rule2(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section5Rule2, self).__init__(
-            rmrs_used=produce_ruleset_model_instance(USER=True, BASELINE_0=False, PROPOSED=True),
+            rmrs_used=produce_ruleset_model_instance(
+                USER=True, BASELINE_0=False, PROPOSED=True
+            ),
             each_rule=Section5Rule2.BuildingRule(),
             index_rmr=PROPOSED,
             id="5-2",
@@ -25,7 +27,9 @@ class Section5Rule2(RuleDefinitionListIndexedBase):
     class BuildingRule(RuleDefinitionBase):
         def __init__(self):
             super(Section5Rule2.BuildingRule, self).__init__(
-                rmrs_used=produce_ruleset_model_instance(USER=True, BASELINE_0=False, PROPOSED=True),
+                rmrs_used=produce_ruleset_model_instance(
+                    USER=True, BASELINE_0=False, PROPOSED=True
+                ),
                 required_fields={
                     "$.building_segments[*].zones[*].surfaces[*]": ["azimuth"],
                 },
