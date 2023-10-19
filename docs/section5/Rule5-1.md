@@ -45,13 +45,22 @@ Check if the area differs by 5 percent or more.
 - Else, set rotation_expected to FALSE: `else: rotation_expected = FALSE`  
 
 - Set counter variable to 0 (counts the number of output instances): `counter =0`
-- Get the number of ruleset_model_descriptions: `number_of_RMIs = len(ASHRAE229.ruleset_model_descriptions)`  
+Determine which RMDs have been created/provided
+- Create variable for list of RMDs: `rmds = ASHRAE229.ruleset_model_descriptions`
+- Check for user RMD: `has_user = any[rmd.type == USER for rmd in rmds]`  
+- Check for proposed RMD: `has_proposed = any[rmd.type == PROPOSED for rmd in rmds]`
+- Check for baseline 0 degree RMD: `has_baseline_0 = any[rmd.type == BASELINE_0 for rmd in rmds]`
+- Check for baseline 90 degree RMD: `has_baseline_90 = any[rmd.type == BASELINE_90 for rmd in rmds]`
+- Check for baseline 180 degree RMD: `has_baseline_180 = any[rmd.type == BASELINE_180 for rmd in rmds]`
+- Check for baseline 270 degree RMD: `has_baseline_270 = any[rmd.type == BASELINE_270 for rmd in rmds]`    
+- Get the number of ruleset_model_descriptions: `number_of_rmds = len(rmds)`  
+
 - Check that there is an output_instance associated with each RMI and add to the counter variable for each one `For RMI in ASHRAE229.ruleset_model_descriptions:`  
     - Check if there is an output_instance associated with the RMI: `if RMI.output.Output2019ASHRAE901.output_instance != Null: counter += 1 `
     
     - **Rule Assertion:** 
-    - Case 1: If the fenestration area differs by 5% or more by orientation and there are 6 RMIs (for user, proposed, baseline at 0 degrees, baseline at 90 degrees, baseline at 180 degrees, and baseline at 270 degrees) and 5 output files (excludes an output for the user model) then Pass: `if rotation_expected == TRUE and and number_of_RMIs == 6 and counter == 5: outcome = "PASS" `  
-    - Case 2: Else if the fenestration area differs by less than 5% and there are 3 RMIs (for user, proposed, baseline at 0 degrees) and 2 output files (excludes an output for the user model) then Pass: `if rotation_expected == FALSE and and number_of_RMIs == 3 and counter == 2: outcome = "PASS" `  
+    - Case 1: If the fenestration area differs by 5% or more by orientation and there are 6 RMIs (for user, proposed, baseline at 0 degrees, baseline at 90 degrees, baseline at 180 degrees, and baseline at 270 degrees) and 5 output files (excludes an output for the user model) then Pass: `if rotation_expected == TRUE and has_user == TRUE and has_proposed == TRUE and has_baseline_0 == TRUE and and has_baseline_90 == TRUE and and has_baseline_180 == TRUE and and has_baseline_270 == TRUE and number_of_rmds == 6 and counter == 5: outcome = "PASS" `  
+    - Case 2: Else if the fenestration area differs by less than 5% and there are 3 RMIs (for user, proposed, baseline at 0 degrees) and 2 output files (excludes an output for the user model) then Pass: `if rotation_expected == FALSE and has_user == TRUE and has_proposed == TRUE and has_baseline_0 == TRUE and number_of_rmds == 3 and counter == 2: outcome = "PASS" `  
     - Case 43: Else: `Else: outcome = "FAIL" and raise_message "Fail unless Table G3.1#5a exception #2 is applicable and it can be demonstrated that the building orientation is dictated bysite considerations.`  
 
 
