@@ -1,6 +1,7 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
+from rct229.rulesets.ashrae9012019 import BASELINE_0
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_system_util import (
     HVAC_SYS,
 )
@@ -36,9 +37,11 @@ class Section22Rule9(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section22Rule9, self).__init__(
-            rmrs_used=UserBaselineProposedVals(False, True, False),
+            rmrs_used=produce_ruleset_model_instance(
+                USER=False, BASELINE_0=True, PROPOSED=False
+            ),
             each_rule=Section22Rule9.ChillerFluidLoopRule(),
-            index_rmr=RMT.BASELINE_0,
+            index_rmr=BASELINE_0,
             id="22-9",
             description="For Baseline chilled water system with cooling capacity of 300 tons or more, the secondary loop shall be modeled with a minimum flow of 25% of the design flow rate.",
             ruleset_section_title="HVAC - Chiller",
@@ -103,9 +106,11 @@ class Section22Rule9(RuleDefinitionListIndexedBase):
     class ChillerFluidLoopRule(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section22Rule9.ChillerFluidLoopRule, self).__init__(
-                rmrs_used=UserBaselineProposedVals(False, True, False),
+                rmrs_used=produce_ruleset_model_instance(
+                    USER=False, BASELINE_0=True, PROPOSED=False
+                ),
                 each_rule=Section22Rule9.ChillerFluidLoopRule.SecondaryChildLoopRule(),
-                index_rmr=RMT.BASELINE_0,
+                index_rmr=BASELINE_0,
                 list_path="$.child_loops[*]",
             )
 
@@ -114,7 +119,9 @@ class Section22Rule9(RuleDefinitionListIndexedBase):
                 super(
                     Section22Rule9.ChillerFluidLoopRule.SecondaryChildLoopRule, self
                 ).__init__(
-                    rmrs_used=UserBaselineProposedVals(False, True, False),
+                    rmrs_used=produce_ruleset_model_instance(
+                        USER=False, BASELINE_0=True, PROPOSED=False
+                    ),
                     required_fields={
                         "$": ["cooling_or_condensing_design_and_control"],
                         "cooling_or_condensing_design_and_control": [

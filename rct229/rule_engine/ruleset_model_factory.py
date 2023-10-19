@@ -2,7 +2,6 @@ from rct229.rule_engine.rulesets import RuleSet
 from rct229.schema.schema_store import SchemaStore
 from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.assertions import assert_
-from rct229.utils.jsonpath_utils import find_ruleset_model_type
 
 ruleset_model_dict = {RuleSet.ASHRAE9012019_RULESET: "RulesetModelOptions2019ASHRAE901"}
 

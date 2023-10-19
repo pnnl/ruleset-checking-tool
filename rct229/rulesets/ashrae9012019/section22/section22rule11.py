@@ -1,6 +1,7 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
+from rct229.rulesets.ashrae9012019 import BASELINE_0
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_system_util import (
     HVAC_SYS,
 )
@@ -31,9 +32,11 @@ class Section22Rule11(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section22Rule11, self).__init__(
-            rmrs_used=UserBaselineProposedVals(False, True, False),
+            rmrs_used=produce_ruleset_model_instance(
+                USER=False, BASELINE_0=True, PROPOSED=False
+            ),
             each_rule=Section22Rule11.ChillerFluidLoopRule(),
-            index_rmr=RMT.BASELINE_0,
+            index_rmr=BASELINE_0,
             id="22-11",
             description="For Baseline chilled-water system that does not use purchased chilled water, variable-flow secondary pump shall be modeled as 13W/gpm at design conditions.",
             ruleset_section_title="HVAC - Chiller",
@@ -82,9 +85,11 @@ class Section22Rule11(RuleDefinitionListIndexedBase):
     class ChillerFluidLoopRule(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section22Rule11.ChillerFluidLoopRule, self).__init__(
-                rmrs_used=UserBaselineProposedVals(False, True, False),
+                rmrs_used=produce_ruleset_model_instance(
+                    USER=False, BASELINE_0=True, PROPOSED=False
+                ),
                 each_rule=Section22Rule11.ChillerFluidLoopRule.SecondaryChildLoopRule(),
-                index_rmr=RMT.BASELINE_0,
+                index_rmr=BASELINE_0,
                 list_path="$.child_loops[*]",
             )
 
@@ -93,7 +98,9 @@ class Section22Rule11(RuleDefinitionListIndexedBase):
                 super(
                     Section22Rule11.ChillerFluidLoopRule.SecondaryChildLoopRule, self
                 ).__init__(
-                    rmrs_used=UserBaselineProposedVals(False, True, False),
+                    rmrs_used=produce_ruleset_model_instance(
+                        USER=False, BASELINE_0=True, PROPOSED=False
+                    ),
                     required_fields={
                         "$": ["pump_power_per_flow_rate"],
                     },

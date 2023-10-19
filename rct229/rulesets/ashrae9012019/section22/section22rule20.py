@@ -1,6 +1,7 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
+from rct229.rulesets.ashrae9012019 import BASELINE_0
 from rct229.rulesets.ashrae9012019.data_fns.table_3_1_3_11_fns import (
     table_3_1_3_11_lookup,
 )
@@ -34,9 +35,11 @@ class Section22Rule20(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section22Rule20, self).__init__(
-            rmrs_used=UserBaselineProposedVals(False, True, False),
+            rmrs_used=produce_ruleset_model_instance(
+                USER=False, BASELINE_0=True, PROPOSED=False
+            ),
             each_rule=Section22Rule20.HeatRejectionRule(),
-            index_rmr=RMT.BASELINE_0,
+            index_rmr=BASELINE_0,
             id="22-20",
             description="The baseline minimum condenser water reset temperature is per Table G3.1.3.11.",
             ruleset_section_title="HVAC - Chiller",
@@ -46,7 +49,7 @@ class Section22Rule20(RuleDefinitionListIndexedBase):
             required_fields={
                 "$": ["ruleset_model_descriptions", "weather"],
             },
-            data_items={"climate_zone": ("baseline", "weather/climate_zone")},
+            data_items={"climate_zone": (BASELINE_0, "weather/climate_zone")},
         )
 
     def is_applicable(self, context, data=None):
@@ -73,7 +76,9 @@ class Section22Rule20(RuleDefinitionListIndexedBase):
     class HeatRejectionRule(RuleDefinitionBase):
         def __init__(self):
             super(Section22Rule20.HeatRejectionRule, self).__init__(
-                rmrs_used=UserBaselineProposedVals(False, True, False),
+                rmrs_used=produce_ruleset_model_instance(
+                    USER=False, BASELINE_0=True, PROPOSED=False
+                ),
                 required_fields={
                     "$": ["leaving_water_setpoint_temperature"],
                 },

@@ -2,7 +2,9 @@ from rct229.rule_engine.rule_base import (
     RuleDefinitionBase,
     RuleDefinitionListIndexedBase,
 )
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
+from rct229.rulesets.ashrae9012019 import PROPOSED
 from rct229.utils.jsonpath_utils import find_all
 
 
@@ -11,9 +13,11 @@ class Section6Rule1(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section6Rule1, self).__init__(
-            rmrs_used=UserBaselineProposedVals(True, False, True),
+            rmrs_used=produce_ruleset_model_instance(
+                USER=True, BASELINE_0=False, PROPOSED=True
+            ),
             each_rule=Section6Rule1.BuildingRule(),
-            index_rmr="proposed",
+            index_rmr=PROPOSED,
             id="6-1",
             description="For the proposed building, each space has the same lighting power as the corresponding space in the U-RMR",
             rmr_context="ruleset_model_descriptions/0/buildings",
@@ -22,9 +26,11 @@ class Section6Rule1(RuleDefinitionListIndexedBase):
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section6Rule1.BuildingRule, self).__init__(
-                rmrs_used=UserBaselineProposedVals(True, False, True),
+                rmrs_used=produce_ruleset_model_instance(
+                    USER=True, BASELINE_0=False, PROPOSED=True
+                ),
                 each_rule=Section6Rule1.BuildingRule.SpaceRule(),
-                index_rmr="proposed",
+                index_rmr=PROPOSED,
                 list_path="$..spaces[*]",  # All spaces inside the building
             )
 
@@ -35,7 +41,9 @@ class Section6Rule1(RuleDefinitionListIndexedBase):
                         "$": ["interior_lighting", "floor_area"],
                         "interior_lighting[*]": ["power_per_area"],
                     },
-                    rmrs_used=UserBaselineProposedVals(True, False, True),
+                    rmrs_used=produce_ruleset_model_instance(
+                        USER=True, BASELINE_0=False, PROPOSED=True
+                    ),
                 )
 
             def get_calc_vals(self, context, data=None):

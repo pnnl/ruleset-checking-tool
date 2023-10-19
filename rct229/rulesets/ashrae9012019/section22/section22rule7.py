@@ -1,5 +1,5 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
-from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_system_util import (
     HVAC_SYS,
 )
@@ -29,7 +29,9 @@ class Section22Rule7(RuleDefinitionBase):
 
     def __init__(self):
         super(Section22Rule7, self).__init__(
-            rmrs_used=UserBaselineProposedVals(False, True, False),
+            rmrs_used=produce_ruleset_model_instance(
+                USER=False, BASELINE_0=True, PROPOSED=False
+            ),
             id="22-7",
             description="Baseline chilled water system that does not use purchased chilled water shall be modeled as primary/secondary systems.",
             ruleset_section_title="HVAC - Chiller",

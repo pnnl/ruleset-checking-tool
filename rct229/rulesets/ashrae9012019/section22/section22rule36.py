@@ -1,6 +1,7 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
+from rct229.rulesets.ashrae9012019 import BASELINE_0
 from rct229.schema.schema_enums import SchemaEnums
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_system_util import (
     HVAC_SYS,
@@ -34,9 +35,11 @@ class Section22Rule36(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section22Rule36, self).__init__(
-            rmrs_used=UserBaselineProposedVals(False, True, False),
+            rmrs_used=produce_ruleset_model_instance(
+                USER=False, BASELINE_0=True, PROPOSED=False
+            ),
             each_rule=Section22Rule36.PrimaryFluidlLoop(),
-            index_rmr=RMT.BASELINE_0,
+            index_rmr=BASELINE_0,
             id="22-36",
             description="Baseline chilled water system that does not use purchased chilled water shall be modeled with constant flow primary loop and variable flow secondary loop.",
             ruleset_section_title="HVAC - Chiller",
@@ -83,7 +86,9 @@ class Section22Rule36(RuleDefinitionListIndexedBase):
     class PrimaryFluidlLoop(RuleDefinitionBase):
         def __init__(self):
             super(Section22Rule36.PrimaryFluidlLoop, self).__init__(
-                rmrs_used=UserBaselineProposedVals(False, True, False),
+                rmrs_used=produce_ruleset_model_instance(
+                    USER=False, BASELINE_0=True, PROPOSED=False
+                ),
                 required_fields={
                     "$": ["cooling_or_condensing_design_and_control"],
                     "$.cooling_or_condensing_design_and_control": ["flow_control"],

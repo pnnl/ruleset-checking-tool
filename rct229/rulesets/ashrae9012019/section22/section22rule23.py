@@ -1,5 +1,5 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
-from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_system_util import (
     HVAC_SYS,
 )
@@ -27,7 +27,9 @@ class Section22Rule23(RuleDefinitionBase):
 
     def __init__(self):
         super(Section22Rule23, self).__init__(
-            rmrs_used=UserBaselineProposedVals(False, True, False),
+            rmrs_used=produce_ruleset_model_instance(
+                USER=False, BASELINE_0=True, PROPOSED=False
+            ),
             id="22-23",
             description="Each baseline chiller shall be modeled with separate chilled water pump interlocked to operate with the associated chiller.",
             ruleset_section_title="HVAC - Chiller",
