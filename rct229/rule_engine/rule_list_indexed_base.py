@@ -1,6 +1,5 @@
 from rct229.rule_engine.rule_list_base import RuleDefinitionListBase
-from rct229.rule_engine.ruleset_model_factory import RuleSetModels, get_rmd_instance
-from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
+from rct229.rule_engine.ruleset_model_factory import get_rmd_instance
 from rct229.utils.json_utils import slash_prefix_guarantee
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.match_lists import match_lists
@@ -110,8 +109,8 @@ class RuleDefinitionListIndexedBase(RuleDefinitionListBase):
 
         Returns
         -------
-        list of UserBaselineProposedVals
-            A list of context trios
+        list of RuleSetModels
+            A list of context
         """
         UNKNOWN_INDEX_RMR = "Unknown index_rmr"
         CONTEXT_NOT_LIST = "The list contexts must be lists"

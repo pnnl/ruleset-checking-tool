@@ -1,7 +1,6 @@
 from jsonpointer import resolve_pointer
 
 from rct229.rule_engine.rct_outcome_label import RCTOutcomeLabel
-from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 from rct229.utils.assertions import MissingKeyException, RCTFailureException
 from rct229.utils.json_utils import slash_prefix_guarantee
 from rct229.utils.jsonpath_utils import find_all
@@ -238,9 +237,8 @@ class RuleDefinitionBase:
 
         Returns
         -------
-        UserBaselineProposedVals
-            Object containing the contexts for the user, baseline, and proposed
-            RMRs; an RMR's context is set to None if the corresponding flag
+        RuleSetModels
+            Object containing the contexts for RMRs; an RMR's context is set to None if the corresponding flag
             in self.rmrs_used is not set
         """
         rmr_context = self.rmr_context if rmr_context is None else rmr_context
@@ -285,7 +283,9 @@ class RuleDefinitionBase:
         missing_contexts = []
         ruleset_model_types = rmds.get_ruleset_model_types()
         for ruleset_model in ruleset_model_types:
-            if self.rmrs_used[ruleset_model] and rmds[ruleset_model] is None:
+            if self.rmrs_used[ruleset_model] and (
+                rmds[ruleset_model] is None or not rmds[ruleset_model]
+            ):
                 missing_contexts.append(ruleset_model)
 
         if len(missing_contexts) > 0:
@@ -416,8 +416,8 @@ class RuleDefinitionBase:
 
         Parameters
         ----------
-        context : UserBaselineProposedVals
-            Object containing the contexts for the user, baseline, and proposed RMRs
+        context : RuleSetModels
+            Object containing the contexts for RMRs
         data : An optional data object. It is ignored by this base implementation.
 
         Returns
@@ -440,8 +440,8 @@ class RuleDefinitionBase:
 
         Parameters
         ----------
-        context : UserBaselineProposedVals
-            Object containing the contexts for the user, baseline, and proposed RMRs
+        context : RuleSetModels
+            Object containing the contexts for RMRs
         calc_vals : dict | None
         data : dict | None
             An optional data dictionary
@@ -463,8 +463,8 @@ class RuleDefinitionBase:
 
         Parameters
         ----------
-        context : UserBaselineProposedVals
-            Object containing the contexts for the user, baseline, and proposed RMRs
+        context : RuleSetModels
+            Object containing the contexts for RMRs
         data : An optional data object. It is ignored by this base implementation.
 
         Returns
@@ -486,8 +486,8 @@ class RuleDefinitionBase:
 
         Parameters
         ----------
-        context : UserBaselineProposedVals
-            Object containing the contexts for the user, baseline, and proposed RMRs
+        context : RuleSetModels
+            Object containing the contexts for RMRs
         calc_vals : dict or None
 
         data : An optional data object. It is ignored by this base implementation.
@@ -512,8 +512,8 @@ class RuleDefinitionBase:
 
         Parameters
         ----------
-        context : UserBaselineProposedVals
-            Object containing the contexts for the user, baseline, and proposed RMRs
+        context : RuleSetModels
+            Object containing the contexts for RMRs
         calc_vals : dict or None
 
         data : An optional data object. It is ignored by this base implementation.
@@ -534,8 +534,8 @@ class RuleDefinitionBase:
 
         Parameters
         ----------
-        context : UserBaselineProposedVals
-            Object containing the contexts for the user, baseline, and proposed RMRs
+        context : RuleSetModels
+            Object containing the contexts for RMRs
         calc_vals: dictionary
             Dictionary contains calculated values for rule check and reporting.
         data : An optional data object. It is ignored by this base implementation.
@@ -560,8 +560,8 @@ class RuleDefinitionBase:
 
         Parameters
         ----------
-        context : UserBaselineProposedVals
-            Object containing the contexts for the user, baseline, and proposed RMRs
+        context : RuleSetModels
+            Object containing the contexts for RMRs
         calc_vals : dict or None
 
         data : An optional data object. It is ignored by this base implementation.
@@ -586,8 +586,8 @@ class RuleDefinitionBase:
 
         Parameters
         ----------
-        context : UserBaselineProposedVals
-            Object containing the contexts for the user, baseline, and proposed RMRs
+        context : RuleSetModels
+            Object containing the contexts for RMRs
         calc_vals : dict or None
 
         data : An optional data object. It is ignored by this base implementation.

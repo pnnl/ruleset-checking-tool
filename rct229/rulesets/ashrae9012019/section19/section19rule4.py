@@ -1,6 +1,7 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
+from rct229.rulesets.ashrae9012019 import BASELINE_0
 from rct229.schema.schema_enums import SchemaEnums
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_most_used_weekday_hourly_schedule import (
     get_most_used_weekday_hourly_schedule,
@@ -20,9 +21,11 @@ class Section19Rule4(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section19Rule4, self).__init__(
-            rmrs_used=UserBaselineProposedVals(False, True, False),
+            rmrs_used=produce_ruleset_model_instance(
+                USER=False, BASELINE_0=True, PROPOSED=False
+            ),
             each_rule=Section19Rule4.RuleSetModelInstanceRule(),
-            index_rmr=RMT.BASELINE_0,
+            index_rmr=BASELINE_0,
             id="19-4",
             description="For baseline cooling sizing runs in residential dwelling units, the infiltration, occupants, lighting, gas and electricity using equipment hourly schedule shall be the same as the most used hourly weekday schedule from the annual simulation.",
             ruleset_section_title="HVAC - General",
@@ -35,7 +38,7 @@ class Section19Rule4(RuleDefinitionListIndexedBase):
             },
             data_items={
                 "day_of_week_for_january_1": (
-                    "baseline",
+                    BASELINE_0,
                     "calendar/day_of_week_for_january_1",
                 ),
             },
@@ -44,9 +47,11 @@ class Section19Rule4(RuleDefinitionListIndexedBase):
     class RuleSetModelInstanceRule(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section19Rule4.RuleSetModelInstanceRule, self).__init__(
-                rmrs_used=UserBaselineProposedVals(False, True, False),
+                rmrs_used=produce_ruleset_model_instance(
+                    USER=False, BASELINE_0=True, PROPOSED=False
+                ),
                 each_rule=Section19Rule4.RuleSetModelInstanceRule.BuildingSegmentRule(),
-                index_rmr=RMT.BASELINE_0,
+                index_rmr=BASELINE_0,
                 list_path="$.buildings[*].building_segments[*]",
             )
 
@@ -60,9 +65,11 @@ class Section19Rule4(RuleDefinitionListIndexedBase):
                 super(
                     Section19Rule4.RuleSetModelInstanceRule.BuildingSegmentRule, self
                 ).__init__(
-                    rmrs_used=UserBaselineProposedVals(False, True, False),
+                    rmrs_used=produce_ruleset_model_instance(
+                        USER=False, BASELINE_0=True, PROPOSED=False
+                    ),
                     each_rule=Section19Rule4.RuleSetModelInstanceRule.BuildingSegmentRule.ZoneRule(),
-                    index_rmr=RMT.BASELINE_0,
+                    index_rmr=BASELINE_0,
                     list_path="$.zones[*]",
                 )
 
@@ -94,9 +101,11 @@ class Section19Rule4(RuleDefinitionListIndexedBase):
                         Section19Rule4.RuleSetModelInstanceRule.BuildingSegmentRule.ZoneRule,
                         self,
                     ).__init__(
-                        rmrs_used=UserBaselineProposedVals(False, True, False),
+                        rmrs_used=produce_ruleset_model_instance(
+                            USER=False, BASELINE_0=True, PROPOSED=False
+                        ),
                         each_rule=Section19Rule4.RuleSetModelInstanceRule.BuildingSegmentRule.ZoneRule.SpaceRule(),
-                        index_rmr=RMT.BASELINE_0,
+                        index_rmr=BASELINE_0,
                         list_path="$.spaces[*]",
                     )
 
@@ -152,7 +161,9 @@ class Section19Rule4(RuleDefinitionListIndexedBase):
                             Section19Rule4.RuleSetModelInstanceRule.BuildingSegmentRule.ZoneRule.SpaceRule,
                             self,
                         ).__init__(
-                            rmrs_used=UserBaselineProposedVals(False, True, False),
+                            rmrs_used=produce_ruleset_model_instance(
+                                USER=False, BASELINE_0=True, PROPOSED=False
+                            ),
                         )
 
                     def is_applicable(self, context, data=None):

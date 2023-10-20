@@ -15,7 +15,6 @@ from rct229.reports.ashrae901_2019_software_test_report import (
 from rct229.rule_engine.engine import evaluate_rule
 from rct229.rule_engine.rct_outcome_label import RCTOutcomeLabel
 from rct229.rule_engine.rulesets import RuleSet, RuleSetTest
-from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 from rct229.rulesets import rulesets
 from rct229.ruletest_engine.ruletest_jsons.scripts.json_generation_utilities import (
     merge_nested_dictionary,

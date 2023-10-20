@@ -1,7 +1,6 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
-from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 from rct229.schema.schema_enums import SchemaEnums
 from rct229.rulesets.ashrae9012019.data_fns.table_9_6_1_fns import table_9_6_1_lookup
 from rct229.schema.config import ureg
@@ -54,7 +53,9 @@ class Section6Rule2(RuleDefinitionListIndexedBase):
     class SpaceRule(RuleDefinitionBase):
         def __init__(self):
             super(Section6Rule2.SpaceRule, self).__init__(
-                rmrs_used=UserBaselineProposedVals(True, False, True),
+                rmrs_used=produce_ruleset_model_instance(
+                USER=True, BASELINE_0=False, PROPOSED=True
+            ),
                 required_fields={
                     "$": ["interior_lighting"],
                     "interior_lighting[*]": ["power_per_area"],

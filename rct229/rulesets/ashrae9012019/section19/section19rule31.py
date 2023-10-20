@@ -1,6 +1,7 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
+from rct229.rulesets.ashrae9012019 import PROPOSED
 from rct229.schema.schema_enums import SchemaEnums
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_hvac_systems_primarily_serving_comp_room import (
     get_hvac_systems_primarily_serving_comp_room,
@@ -15,9 +16,11 @@ class Section19Rule31(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section19Rule31, self).__init__(
-            rmrs_used=UserBaselineProposedVals(False, False, True),
+            rmrs_used=produce_ruleset_model_instance(
+                USER=False, BASELINE_0=False, PROPOSED=True
+            ),
             each_rule=Section19Rule31.HVACRule(),
-            index_rmr="proposed",
+            index_rmr=PROPOSED,
             id="19-31",
             description="HVAC fans in the proposed design model shall remain on during unoccupied hours in systems primarily serving computer rooms.",
             ruleset_section_title="HVAC - General",
@@ -41,7 +44,9 @@ class Section19Rule31(RuleDefinitionListIndexedBase):
     class HVACRule(RuleDefinitionBase):
         def __init__(self):
             super(Section19Rule31.HVACRule, self).__init__(
-                rmrs_used=UserBaselineProposedVals(False, False, True),
+                rmrs_used=produce_ruleset_model_instance(
+                    USER=False, BASELINE_0=False, PROPOSED=True
+                ),
                 required_fields={
                     "$": ["fan_system"],
                     "fan_system": [

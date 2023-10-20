@@ -1,6 +1,7 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
+from rct229.rulesets.ashrae9012019 import PROPOSED
 from rct229.schema.schema_enums import SchemaEnums
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_proposed_hvac_modeled_with_virtual_cooling import (
     get_proposed_hvac_modeled_with_virtual_cooling,
@@ -18,9 +19,11 @@ class Section19Rule24(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section19Rule24, self).__init__(
-            rmrs_used=UserBaselineProposedVals(True, False, True),
+            rmrs_used=produce_ruleset_model_instance(
+                USER=True, BASELINE_0=False, PROPOSED=True
+            ),
             each_rule=Section19Rule24.HVACRule(),
-            index_rmr="proposed",
+            index_rmr=PROPOSED,
             id="19-24",
             description="Schedules for HVAC fans that provide outdoor air for ventilation shall run continuously whenever spaces are occupied in the proposed design.",
             ruleset_section_title="HVAC - General",
@@ -46,7 +49,9 @@ class Section19Rule24(RuleDefinitionListIndexedBase):
     class HVACRule(RuleDefinitionBase):
         def __init__(self):
             super(Section19Rule24.HVACRule, self).__init__(
-                rmrs_used=UserBaselineProposedVals(True, False, True),
+                rmrs_used=produce_ruleset_model_instance(
+                    USER=True, BASELINE_0=False, PROPOSED=True
+                ),
                 required_fields={
                     "$": ["fan_system"],
                     "fan_system": [

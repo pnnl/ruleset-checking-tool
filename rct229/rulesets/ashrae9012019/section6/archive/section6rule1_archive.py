@@ -1,9 +1,8 @@
 from rct229.rule_engine.rule_base import (
     RuleDefinitionBase,
-    RuleDefinitionListIndexedBase,
 )
+from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
-from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 from rct229.rulesets.ashrae9012019 import PROPOSED
 from rct229.utils.jsonpath_utils import find_all
 
