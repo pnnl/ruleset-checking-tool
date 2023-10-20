@@ -25,7 +25,7 @@ def find_exactly_one_hvac_system(rmi, hvac_id):
     return find_exactly_one_with_field_value(
         "$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*]",
         "id",
-        hvac_id.upper(),
+        hvac_id,
         rmi,
     )
 
@@ -46,7 +46,7 @@ def find_exactly_one_terminal_unit(rmi, terminal_unit_id):
     return find_exactly_one_with_field_value(
         "$.buildings[*].building_segments[*].zones[*].terminals[*]",
         "id",
-        terminal_unit_id.upper(),
+        terminal_unit_id,
         rmi,
     )
 
@@ -66,7 +66,7 @@ def find_exactly_one_zone(rmi, zone_id):
 
     """
     return find_exactly_one_with_field_value(
-        "$.buildings[*].building_segments[*].zones[*]", "id", zone_id.upper(), rmi
+        "$.buildings[*].building_segments[*].zones[*]", "id", zone_id, rmi
     )
 
 
@@ -87,7 +87,7 @@ def find_exactly_one_space(rmi, space_id):
     return find_exactly_one_with_field_value(
         "$.buildings[*].building_segments[*].zones[*].spaces[*]",
         "id",
-        space_id.upper(),
+        space_id,
         rmi,
     )
 
@@ -107,7 +107,7 @@ def find_exactly_one_schedule(rmi, schedule_id):
 
     """
     return find_exactly_one_with_field_value(
-        "$.schedules[*]", "id", schedule_id.upper(), rmi
+        "$.schedules[*]", "id", schedule_id, rmi
     )
 
 
@@ -127,7 +127,7 @@ def find_exactly_one_child_loop(rmi, child_loop_id):
     return find_exactly_one_with_field_value(
         "$.fluid_loops[*].child_loops[*]",
         "id",
-        child_loop_id.upper(),
+        child_loop_id,
         rmi,
     )
 
@@ -148,7 +148,7 @@ def find_exactly_one_fluid_loop(rmi, loop_id):
     return find_exactly_one_with_field_value(
         "$.fluid_loops[*]",
         "id",
-        loop_id.upper(),
+        loop_id,
         rmi,
     )
 
@@ -169,7 +169,7 @@ def has_heating_system(rmi, hvac_id):
     -------
     If heating system exists, it returns true. Otherwise, it returns false.
     """
-    heating_system = find_exactly_one_hvac_system(rmi, hvac_id.upper()).get(
+    heating_system = find_exactly_one_hvac_system(rmi, hvac_id).get(
         "heating_system"
     )
 
@@ -196,7 +196,7 @@ def has_cooling_system(rmi, hvac_id):
     -------
     If cooling system exists, it returns true. Otherwise, it returns false.
     """
-    cooling_system = find_exactly_one_hvac_system(rmi, hvac_id.upper()).get(
+    cooling_system = find_exactly_one_hvac_system(rmi, hvac_id).get(
         "cooling_system"
     )
 
@@ -223,7 +223,7 @@ def has_preheat_system(rmi, hvac_id):
     -------
     If preheat system exists, it returns true. Otherwise, it returns false.
     """
-    preheat_system = find_exactly_one_hvac_system(rmi, hvac_id.upper()).get(
+    preheat_system = find_exactly_one_hvac_system(rmi, hvac_id).get(
         "preheat_system"
     )
 
@@ -252,5 +252,5 @@ def has_fan_system(rmi, hvac_id):
     """
 
     return (
-        find_exactly_one_hvac_system(rmi, hvac_id.upper()).get("fan_system") is not None
+        find_exactly_one_hvac_system(rmi, hvac_id).get("fan_system") is not None
     )

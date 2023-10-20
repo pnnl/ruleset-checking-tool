@@ -36,6 +36,10 @@ def find_one_with_field_value(jpath, field, value, obj):
 
 def find_exactly_one_with_field_value(jpath, field, value, obj):
     matches = find_all_with_field_value(jpath, field, value, obj)
+    # do another search using upper case if no matches
+    if not matches:
+        matches = find_all_with_field_value(jpath, field, value.upper(), obj)
+
     assert (
         len(matches) == 1
     ), f"Search data referenced in {jpath} with key:value {field}:{value} returned {len(matches)} results instead of one"
