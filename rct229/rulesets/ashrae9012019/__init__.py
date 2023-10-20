@@ -1,10 +1,15 @@
 import importlib
 
-# Add all available rule modules in __all__
-# __all__ = ["section5", "section6", "section19", "section21", "section22", "section23"]
-__all__ = ["section5", "section6"]
+from rct229.rule_engine.rulesets import RuleSet
 from rct229.schema.schema_enums import SchemaEnums
 
+# Add all available rule modules in __all__
+__all__ = ["section5", "section6", "section19", "section21", "section22", "section23"]
+
+from rct229.schema.schema_store import SchemaStore
+
+SchemaStore.set_ruleset(RuleSet.ASHRAE9012019_RULESET)
+SchemaEnums.update_schema_enum()
 RMT = SchemaEnums.schema_enums["RulesetModelOptions2019ASHRAE901"]
 BASELINE_0 = RMT.BASELINE_0
 BASELINE_90 = RMT.BASELINE_90

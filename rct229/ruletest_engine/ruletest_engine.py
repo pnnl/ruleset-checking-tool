@@ -19,6 +19,8 @@ from rct229.rulesets import rulesets
 from rct229.ruletest_engine.ruletest_jsons.scripts.json_generation_utilities import (
     merge_nested_dictionary,
 )
+from rct229.schema.schema_enums import SchemaEnums
+from rct229.schema.schema_store import SchemaStore
 from rct229.schema.validate import validate_rmr
 
 
@@ -176,7 +178,7 @@ def process_test_result(test_result, test_dict, test_id):
     return outcome_text, received_expected_outcome
 
 
-def run_section_tests(test_json_name: str, ruleset_doc: str):
+def run_section_tests(test_json_name: str, ruleset_doc: RuleSet):
     """Runs all tests found in a given test JSON and prints results to console. Returns true/false describing whether
     or not all tests in the JSON result in the expected outcome.
 
@@ -226,6 +228,8 @@ def run_section_tests(test_json_name: str, ruleset_doc: str):
         test_list_dictionary = json.load(f)
 
     # get all rules in the ruleset.
+    SchemaStore.set_ruleset(ruleset_doc)
+    SchemaEnums.update_schema_enum()
     available_rule_definitions = rulesets.__getrules__(ruleset_doc)
     available_rule_definitions_dict = {
         rule_class[0]: rule_class[1] for rule_class in available_rule_definitions
