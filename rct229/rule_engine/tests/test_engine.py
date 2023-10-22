@@ -9,11 +9,9 @@ from rct229.schema.schema_store import SchemaStore
 SchemaStore.set_ruleset(RuleSet.ASHRAE9012019_RULESET)
 SchemaEnums.update_schema_enum()
 
+
 def test___get_rules___returns_rules():
-    available_rules = [
-        rule_tuple[1]
-        for rule_tuple in ruleset.__getrules__()
-    ]
+    available_rules = [rule_tuple[1] for rule_tuple in ruleset.__getrules__()]
     assert all(
         [
             issubclass(available_rule, RuleDefinitionBase)

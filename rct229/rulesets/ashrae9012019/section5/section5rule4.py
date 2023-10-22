@@ -67,8 +67,8 @@ class Section5Rule4(RuleDefinitionListIndexedBase):
             def __init__(self):
                 super(Section5Rule4.BuildingRule.SurfaceRule, self).__init__(
                     rmrs_used=produce_ruleset_model_instance(
-                    USER=False, BASELINE_0=True, PROPOSED=False
-                ),
+                        USER=False, BASELINE_0=True, PROPOSED=False
+                    ),
                     required_fields={},
                 )
 

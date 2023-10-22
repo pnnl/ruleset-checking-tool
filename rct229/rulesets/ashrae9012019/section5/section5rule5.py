@@ -75,8 +75,8 @@ class Section5Rule5(RuleDefinitionListIndexedBase):
             def __init__(self):
                 super(Section5Rule5.BuildingRule.RoofRule, self).__init__(
                     rmrs_used=produce_ruleset_model_instance(
-                USER=False, BASELINE_0=True, PROPOSED=False
-            ),
+                        USER=False, BASELINE_0=True, PROPOSED=False
+                    ),
                     required_fields={
                         "$": ["construction"],
                         "construction": ["u_factor"],
