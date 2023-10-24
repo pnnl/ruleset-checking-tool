@@ -1,0 +1,122 @@
+{
+    "rule-6-6-a": {
+        "Section": 6,
+        "Rule": 6,
+        "Test": "a",
+        "test_description": "The baseline building has NONE daylighting control type. Expected result: PASS",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "6-6",
+            "ruleset_reference": "(Previously 6-11, then 6-8) Table G3.1(6) Baseline Building Performance",
+            "rule_description": "Baseline building shall not be modeled with daylighting control",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": "None",
+            "mandatory_rule": "Yes",
+            "schema_version": "0.0.29"
+        },
+        "rmr_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_open_schedule": "Building Open Schedule 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "thermostat_cooling_setpoint_schedule": "Cooling Setpoint Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Heating Setpoint Schedule 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 92.90303999999999,
+                                                        "occupant_multiplier_schedule": "Occupancy Schedule 1",
+                                                        "interior_lighting": [
+                                                            {
+                                                                "id": "Lighting 1",
+                                                                "daylighting_control_type": "NONE",
+                                                                "lighting_multiplier_schedule": "Lighting Schedule"
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    },
+    "rule-6-6-b": {
+        "Section": 6,
+        "Rule": 6,
+        "Test": "b",
+        "test_description": "The baseline building has STEPPED daylighting control type.  Expected result: FAIL",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "6-6",
+            "ruleset_reference": "(Previously 6-11, then 6-8) Table G3.1(6) Baseline Building Performance",
+            "rule_description": "Baseline building shall not be modeled with daylighting control",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": "None",
+            "mandatory_rule": "Yes",
+            "schema_version": "0.0.29"
+        },
+        "rmr_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_open_schedule": "Building Open Schedule 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "thermostat_cooling_setpoint_schedule": "Cooling Setpoint Schedule 1",
+                                                "thermostat_heating_setpoint_schedule": "Heating Setpoint Schedule 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 92.90303999999999,
+                                                        "occupant_multiplier_schedule": "Occupancy Schedule 1",
+                                                        "interior_lighting": [
+                                                            {
+                                                                "id": "Lighting 1",
+                                                                "daylighting_control_type": "STEPPED",
+                                                                "lighting_multiplier_schedule": "Lighting Schedule"
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    }
+}

@@ -4,6 +4,7 @@ import re
 from copy import deepcopy
 
 from jsonpath_ng.ext import parse as parse_jsonpath
+from pydash.objects import set_
 
 import rct229.schema.config as config
 
@@ -33,7 +34,6 @@ def clean_schema_units(schema_unit_str):
         substring_list = schema_unit_str.split("/")
 
         for i, substring in enumerate(substring_list):
-
             # Wrap element in parentheses and replace - with *
             if "-" in substring:
                 substring_list[i] = "(" + re.sub("-", "*", substring) + ")"
@@ -45,7 +45,7 @@ def clean_schema_units(schema_unit_str):
 
 
 def find_schema_unit_for_json_path(key_list):
-    """Ingests a JSON path that has associated units the ASHRAE229 schema. This function returns the units for that
+    """Ingests a JSON path that has associated units int the ASHRAE229 schema. This function returns the units for that
     JSON path as defined by the ASHRAE229 schema.
     For example: ['transformers','capacity'] => 'V-A'
 
@@ -62,7 +62,7 @@ def find_schema_unit_for_json_path(key_list):
 
     """
 
-    root_key = "ASHRAE229"
+    root_key = "RulesetProjectDescription"
 
     secondary_schema_files = ["Output2019ASHRAE901.schema.json"]
     schema_dict = config.schema_dict
@@ -179,16 +179,15 @@ def quantify_rmr(rmr):
             pint_qty = number_rmr_item_match.value * config.ureg(pint_unit_str)
 
             # Replace the number with the appropriate pint quantity
-            jsonpath_expr = parse_jsonpath(str(number_rmr_item_match.full_path))
-            jsonpath_expr.update(rmr, pint_qty)
+            set_(rmr, full_path, pint_qty)
 
     return rmr
 
 
 def return_json_schema_reference(object_dict, key):
-    """This function takes an schema object's dictionary, passes it a key, and returns it's respective reference
+    """This function takes a schema object's dictionary, passes it a key, and returns it's respective reference
     definition dictionary. For example, the Building object in ASHRAE229.schema.json dictionary has a
-    "building_segments" key. Passing in the Building dictionary with the "building_segments" key would return a
+    "building_segments" key. Passing in the Building dictionary with the "building_segments" key would return
     the definition for the BuildingSegment element in the ASHRAE229 schema.
 
     Parameters
@@ -213,20 +212,16 @@ def return_json_schema_reference(object_dict, key):
 
     # $ref elements are either at the top level or buried inside "items"
     if "items" in properties_dict:
-
         # Return the reference string (the last element separated by the '/'s)
         return properties_dict["items"]["$ref"].split("/")[-1]
 
     elif "$ref" in properties_dict:
-
         # Return the reference string (the last element separated by the '/'s)
         return properties_dict["$ref"].split("/")[-1]
 
     # Check 'oneOf' key for secondary json schema references
     elif "oneOf" in properties_dict:
-
         if "$ref" in properties_dict["oneOf"][0]:
-
             secondary_json = properties_dict["oneOf"][0]["$ref"].split("#")[0]
 
             if secondary_json in secondary_schema_files:
@@ -242,5 +237,4 @@ def return_json_schema_reference(object_dict, key):
         )
 
     else:
-
         raise ValueError(f"OUTCOME: Could not find a $ref key for {properties_dict} ")

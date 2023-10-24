@@ -19,7 +19,9 @@
         "temperature_difference": "K",
         "infiltration_pressure_difference": "Pa",
         "design_sensible_cool_capacity": "W",
-        "design_capacity": "W"
+        "design_capacity": "W",
+        "air_flow_rate": "L/s",
+        "motor_power": "W"
     },
     "ip": {
         "transformer_capacity": "V-A",
@@ -41,6 +43,8 @@
         "temperature_difference": "R",
         "infiltration_pressure_difference": "Pa",
         "design_sensible_cool_capacity": "ton",
-        "design_capacity": "Btu/hr"
+        "design_capacity": "Btu/hr",
+        "air_flow_rate": "cfm",
+        "motor_power": "hp"
     }
 }

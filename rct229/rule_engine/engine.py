@@ -1,16 +1,17 @@
 import inspect
 
 import rct229.rule_engine.rule_base as base_classes
-import rct229.rules as rules
+import rct229.rulesets as rulesets
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 from rct229.schema.schema_utils import quantify_rmr
 from rct229.schema.validate import validate_rmr
+from rct229.utils.assertions import assert_
 from rct229.utils.pint_utils import UNIT_SYSTEM, calcq_to_str
 
 
-def get_available_rules():
+def get_available_rules(ruleset_doc):
     modules = [
-        f for f in inspect.getmembers(rules, inspect.ismodule) if f in rules.__all__
+        f for f in inspect.getmembers(rulesets, inspect.ismodule) if f in rules.__all__
     ]
 
     available_rules = []
@@ -22,20 +23,10 @@ def get_available_rules():
     return available_rules
 
 
-# def get_base_class(rule_def_class):
-#     rule_def_base = rule_def_class.__bases__[0]
-#     base_class_name = [f[0] for f in inspect.getmembers(base_classes, inspect.isclass) if f[1] == rule_def_base][0]
-#
-#     return base_class_name
-#
-# def check_rule_definition_format():
-#     pass
-
 # Functions for evaluating rules
-def evaluate_all_rules(user_rmr, baseline_rmr, proposed_rmr):
-
+def evaluate_all_rules(user_rmr, baseline_rmr, proposed_rmr, ruleset_doc):
     # Get reference to rule functions in rules model
-    AvailableRuleDefinitions = rules.__getrules__()
+    AvailableRuleDefinitions = rulesets.__getrules__(ruleset_doc)
 
     rules_list = [RuleDef[1]() for RuleDef in AvailableRuleDefinitions]
     rmrs = UserBaselineProposedVals(user_rmr, baseline_rmr, proposed_rmr)
@@ -44,7 +35,7 @@ def evaluate_all_rules(user_rmr, baseline_rmr, proposed_rmr):
     return report
 
 
-def evaluate_rule(rule, rmrs, unit_system=UNIT_SYSTEM.IP):
+def evaluate_rule(rule, rmrs):
     """Evaluates a single rule against an RMR trio
 
     Parameters
@@ -121,34 +112,41 @@ def evaluate_rules(rules_list, rmrs, unit_system=UNIT_SYSTEM.IP):
         user_validation = validate_rmr(rmrs.user)
         if user_validation["passed"] is not True:
             invalid_rmrs["User"] = user_validation["error"]
+            print(invalid_rmrs["User"])
 
     if rmrs_used.baseline:
         baseline_validation = validate_rmr(rmrs.baseline)
         if baseline_validation["passed"] is not True:
             invalid_rmrs["Baseline"] = baseline_validation["error"]
+            print(invalid_rmrs["Baseline"])
 
     if rmrs_used.proposed:
         proposed_validation = validate_rmr(rmrs.proposed)
         if proposed_validation["passed"] is not True:
             invalid_rmrs["Proposed"] = proposed_validation["error"]
+            print(invalid_rmrs["Proposed"])
+
+    assert_(
+        len(invalid_rmrs) == 0,
+        f"RPDs provided are invalid. See error messages in terminal.",
+    )
 
     # Evaluate the rules if all the used rmrs are valid
-    if len(invalid_rmrs) == 0:
-        # Replace the numbers that have schema units in the RMRs with the
-        # appropriate pint quantities
-        # TODO: quantitization should happen right after schema validation and
-        # before other validations
-        rmrs = UserBaselineProposedVals(
-            user=quantify_rmr(rmrs.user),
-            baseline=quantify_rmr(rmrs.baseline),
-            proposed=quantify_rmr(rmrs.proposed),
-        )
+    # Replace the numbers that have schema units in the RMRs with the
+    # appropriate pint quantities
+    # TODO: quantitization should happen right after schema validation and
+    # before other validations
+    rmrs = UserBaselineProposedVals(
+        user=quantify_rmr(rmrs.user),
+        baseline=quantify_rmr(rmrs.baseline),
+        proposed=quantify_rmr(rmrs.proposed),
+    )
 
-        # Evaluate the rules
-        for rule in rules_list:
-            print(f"Processing Rule {rule.id}")
-            outcome = rule.evaluate(rmrs)
-            outcomes.append(outcome)
+    # Evaluate the rules
+    for rule in rules_list:
+        print(f"Processing Rule {rule.id}")
+        outcome = rule.evaluate(rmrs)
+        outcomes.append(outcome)
 
     return {
         "invalid_rmrs": invalid_rmrs,

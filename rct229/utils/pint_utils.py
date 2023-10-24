@@ -30,6 +30,7 @@ _UNIT_CONVENTIONS = {
         "cooling_efficiency": "W/W",
         "power_per_volumetric_flow_rate": "W-s/L",
         "power_per_flow_rate": "W-s/L",
+        "air_flow_rate": "L/s",
     },
     UNIT_SYSTEM.IP: {
         "transformer_capacity": "V*A",
@@ -46,6 +47,7 @@ _UNIT_CONVENTIONS = {
         "cooling_efficiency": "kW/ton",
         "power_per_volumetric_flow_rate": "W/gpm",
         "power_per_flow_rate": "W/gpm",
+        "air_flow_rate": "cfm",
     },
 }
 
@@ -60,10 +62,13 @@ class ZERO:
     POWER = 0 * ureg("Btu/hr")
     THERMAL_CAPACITY = POWER / ureg("ft2")
     POWER_PER_AREA = THERMAL_CAPACITY
+    POWER_PER_FLOW = 0 * ureg("Btu/hr/cfm")
 
     U_FACTOR = ureg("Btu/(hr*ft2*degR)")
     UA = U_FACTOR * AREA
     FLOW = VOLUME / ureg("minute")
+
+    TEMPERATURE = 0 * ureg("K")
 
 
 @dataclass(frozen=True)
@@ -75,7 +80,11 @@ class CalcQ:
 
     def to_str(self, unit_system=UNIT_SYSTEM.IP) -> str:
         units = _UNIT_CONVENTIONS[unit_system][self.q_type]
-        return f"{self.q.to(units).magnitude} {units}"
+        return (
+            f"{self.q.to(units).magnitude} {units}"
+            if isinstance(self.q, Quantity)
+            else str(self.q)
+        )
 
 
 def calcq_to_q(obj):
@@ -137,10 +146,3 @@ def calcq_to_str(unit_system, obj) -> str:
         retval = obj
 
     return retval
-
-
-def pint_sum(qty_list, default=None):
-    if len(qty_list) == 0:
-        assert default is not None
-
-    return functools.reduce(operator.add, qty_list) if len(qty_list) > 0 else default
