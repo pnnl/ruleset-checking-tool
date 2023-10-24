@@ -1,6 +1,4 @@
-from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_system_util import (
-    find_exactly_one_terminal_unit,
-)
+from rct229.utils.utility_functions import find_exactly_one_terminal_unit
 
 
 def are_all_terminal_fans_null(rmi_b, terminal_unit_id_list):

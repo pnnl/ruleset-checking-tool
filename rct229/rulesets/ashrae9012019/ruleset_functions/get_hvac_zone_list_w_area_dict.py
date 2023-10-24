@@ -1,6 +1,6 @@
 from rct229.utils.assertions import assert_, assert_required_fields
 from rct229.utils.jsonpath_utils import find_all
-from rct229.utils.pint_utils import ZERO, pint_sum
+from rct229.utils.pint_utils import ZERO
 
 # Intended for export and internal use
 GET_HVAC_ZONE_LIST_W_AREA_DICT__REQUIRED_FIELDS = {
@@ -13,6 +13,32 @@ GET_HVAC_ZONE_LIST_W_AREA_DICT__REQUIRED_FIELDS = {
         ],
     }
 }
+
+
+def get_hvac_zone_list_w_area_by_rmi_dict(rmi):
+    """
+    RMI version of the get_hvac_zone_list_w_area_dict function
+
+    Parameters
+    ----------
+    rmi dict
+        A dictionary representing a ruleset model instance as defined by the ASHRAE229 schema
+
+    Returns
+    -------
+    dict
+        A dictionary of the form
+        {
+            <hvac_system id>: {
+                "zone_list": [<zones served by the hvac system>],
+                "total_area": <total area served by the hvac system>
+            }
+        }
+    """
+    hvac_zone_list_w_area_dict = {}
+    for building in find_all("$.buildings[*]", rmi):
+        hvac_zone_list_w_area_dict.update(get_hvac_zone_list_w_area_dict(building))
+    return hvac_zone_list_w_area_dict
 
 
 def get_hvac_zone_list_w_area_dict(building):
@@ -45,7 +71,7 @@ def get_hvac_zone_list_w_area_dict(building):
         terminals = zone.get("terminals")
         # Note: None and [] are falsey; zone.terminals is optional
         if terminals:
-            zone_area = pint_sum(find_all("spaces[*].floor_area", zone), ZERO.AREA)
+            zone_area = sum(find_all("spaces[*].floor_area", zone), ZERO.AREA)
             assert_(zone_area > ZERO.AREA, f"zone:{zone['id']} has zero floor area")
             for terminal in terminals:
                 hvac_sys_id = terminal[

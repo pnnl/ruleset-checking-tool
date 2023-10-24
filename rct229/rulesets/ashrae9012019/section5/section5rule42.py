@@ -35,7 +35,7 @@ class Section5Rule42(RuleDefinitionListIndexedBase):
             ruleset_section_title="Envelope",
             standard_section="Section G3.1-5(g) Building Envelope Modeling Requirements for the Baseline building",
             is_primary_rule=True,
-            list_path="ruleset_model_instances[0].buildings[*]",
+            list_path="ruleset_model_descriptions[0].buildings[*]",
             data_items={"climate_zone": ("baseline", "weather/climate_zone")},
         )
 
@@ -45,7 +45,7 @@ class Section5Rule42(RuleDefinitionListIndexedBase):
                 rmrs_used=UserBaselineProposedVals(False, True, False),
                 each_rule=Section5Rule42.BuildingRule.RoofRule(),
                 index_rmr="baseline",
-                list_path="$..surfaces[*]",
+                list_path="$.building_segments[*].zones[*].surfaces[*]",
             )
 
         def create_data(self, context, data=None):
@@ -68,15 +68,15 @@ class Section5Rule42(RuleDefinitionListIndexedBase):
                 super(Section5Rule42.BuildingRule.RoofRule, self).__init__(
                     rmrs_used=UserBaselineProposedVals(False, True, False),
                     required_fields={
-                        "$": ["surface_optical_properties"],
-                        "surface_optical_properties": ["absorptance_solar_exterior"],
+                        "$": ["optical_properties"],
+                        "optical_properties": ["absorptance_solar_exterior"],
                     },
                 )
 
             def get_calc_vals(self, context, data=None):
                 roof_b = context.baseline
                 return {
-                    "absorptance_solar_exterior": roof_b["surface_optical_properties"][
+                    "absorptance_solar_exterior": roof_b["optical_properties"][
                         "absorptance_solar_exterior"
                     ]
                 }

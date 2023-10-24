@@ -3,15 +3,16 @@ from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedB
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_system_util import (
     HVAC_SYS,
-    find_exactly_one_fluid_loop,
 )
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_baseline_system_types import (
     get_baseline_system_types,
 )
 from rct229.schema.config import ureg
+from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.pint_utils import CalcQ
 from rct229.utils.std_comparisons import std_equal
+from rct229.utils.utility_functions import find_exactly_one_fluid_loop
 
 APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_7,
@@ -39,8 +40,8 @@ class Section22Rule29(RuleDefinitionListIndexedBase):
             ruleset_section_title="HVAC - Chiller",
             standard_section="Section G3.1.3.11 Heat Rejection (Systems 7, 8, 11, 12, and 13)",
             is_primary_rule=True,
-            rmr_context="ruleset_model_instances/0",
-            list_path="fluid_loops[*]",
+            rmr_context="ruleset_model_descriptions/0",
+            list_path="$.fluid_loops[*]",
         )
 
     def is_applicable(self, context, data=None):
@@ -49,7 +50,7 @@ class Section22Rule29(RuleDefinitionListIndexedBase):
         # create a list containing all HVAC systems that are modeled in the rmi_b
         available_type_list = [
             hvac_type
-            for hvac_type in baseline_system_types_dict.keys()
+            for hvac_type in baseline_system_types_dict
             if len(baseline_system_types_dict[hvac_type]) > 0
         ]
         return any(
@@ -68,7 +69,7 @@ class Section22Rule29(RuleDefinitionListIndexedBase):
         rmi_b = context.baseline
         condenser_loop_pump_power_dict = {
             chiller["condensing_loop"]: find_exactly_one_fluid_loop(
-                rmi_b, chiller["condensing_loop"]
+                rmi_b, getattr_(chiller, "Chiller", "condensing_loop")
             ).get("pump_power_per_flow_rate")
             for chiller in find_all("chillers[*]", rmi_b)
         }

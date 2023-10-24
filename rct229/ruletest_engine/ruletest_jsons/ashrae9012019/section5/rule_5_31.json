@@ -3,7 +3,7 @@
         "Section": 5,
         "Rule": 31,
         "Test": "a",
-        "test_description": "A space has vertical fenestration that is correctly modeled with the same manual interior shades in the baseline and proposed models.",
+        "test_description": "Project has one building segment and includes a space with an above-grade wall surface and window. The space has vertical fenestration with manual interior shading.  Manual interior shades are correctly modeled the same in the baseline and proposed models.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-31",
@@ -13,12 +13,12 @@
             "rule_assertion": "=",
             "comparison_value": "Proposed RMR",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.29"
         },
         "rmr_transformations": {
             "proposed": {
                 "id": "ASHRAE229",
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMR 1",
                         "buildings": [
@@ -55,7 +55,7 @@
             },
             "baseline": {
                 "id": "ASHRAE229",
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMR 1",
                         "buildings": [
@@ -96,7 +96,7 @@
         "Section": 5,
         "Rule": 31,
         "Test": "b",
-        "test_description": "A space has vertical fenestration that is incorrectly modeled with the same manual interior shades in the baseline and proposed models.",
+        "test_description": "Project has one building segment and includes a space with an above-grade wall surface and window. The space has vertical fenestration with manual interior shading.  Manual interior shades are not correctly modeled the same in the baseline and proposed models.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-31",
@@ -106,12 +106,12 @@
             "rule_assertion": "=",
             "comparison_value": "Proposed RMR",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.29"
         },
         "rmr_transformations": {
             "proposed": {
                 "id": "ASHRAE229",
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMR 1",
                         "buildings": [
@@ -148,7 +148,7 @@
             },
             "baseline": {
                 "id": "ASHRAE229",
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMR 1",
                         "buildings": [

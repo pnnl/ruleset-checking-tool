@@ -7,7 +7,8 @@ def get_dict_of_zones_and_terminal_units_served_by_hvac_sys(rmi):
 
     Parameters
     ----------
-    rmi: json
+    rmi: dict
+    A dictionary representing a RuleModelInstance object as defined by the ASHRAE229 schema
 
     Returns ------- dict: a dictionary of zones and terminal unit IDs associated with each HVAC system in the RMR,
     {hvac_system_1.id: {"zone_list": [zone_1.id, zone_2.id, zone_3.id], "terminal_unit_list": [terminal_1.id,
@@ -25,7 +26,7 @@ def get_dict_of_zones_and_terminal_units_served_by_hvac_sys(rmi):
             if hvac_sys_id:
                 if (
                     hvac_sys_id
-                    not in dict_of_zones_and_terminal_units_served_by_hvac_sys.keys()
+                    not in dict_of_zones_and_terminal_units_served_by_hvac_sys
                 ):
                     dict_of_zones_and_terminal_units_served_by_hvac_sys[hvac_sys_id] = {
                         "terminal_unit_list": [],

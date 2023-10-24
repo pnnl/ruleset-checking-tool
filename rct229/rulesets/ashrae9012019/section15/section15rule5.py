@@ -23,7 +23,7 @@ class Section15Rule5(RuleDefinitionListIndexedBase):
             ruleset_section_title="Transformer",
             standard_section="Transformers",
             is_primary_rule=False,
-            rmr_context="ruleset_model_instances/0/transformers",
+            rmr_context="ruleset_model_descriptions/0/transformers",
         )
 
     class TransformerRule(RuleDefinitionBase):
@@ -75,7 +75,6 @@ class Section15Rule5(RuleDefinitionListIndexedBase):
             }
 
         def rule_check(self, context, calc_vals=None, data=None):
-
             # TODO: Allow tolerance?
             return (
                 calc_vals["baseline_transformer_efficiency"]

@@ -120,6 +120,7 @@ MANUAL_ON = schema_enums["LightingOccupancyControlOptions"].MANUAL_ON
 OTHER = schema_enums["LightingOccupancyControlOptions"].OTHER
 NONE = schema_enums["LightingOccupancyControlOptions"].NONE
 
+
 # ATRIUM_LOW_MEDIUM
 def table_G3_7_lookup(lighting_space_type, space_height, space_area):
     """Returns the lighting power density for a space as

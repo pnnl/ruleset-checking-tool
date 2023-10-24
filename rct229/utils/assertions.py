@@ -37,7 +37,7 @@ def assert_nonempty_lists(req_nonempty_lists, obj):
 
 
 def assert_required_fields(req_fields, obj):
-    for (jpath, fields) in req_fields.items():
+    for jpath, fields in req_fields.items():
         for element in find_all(jpath, obj):
             for field in fields:
                 if field not in element:

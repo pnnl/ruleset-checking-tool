@@ -12,7 +12,6 @@ from rct229.schema.schema_utils import *
 
 
 def get_rmr_key_list_from_tcd_key_list(tcd_key_list):
-
     """Ingests a python list of 'keys' from the test JSON spreadsheet and returns the relevant ASHRAE229 key list
     Without the extra specifications used in TCD spreadsheet.
     For example ['rmr_transformations', 'user', 'schedules[0]', 'hourly_values'] -> ['schedules', 'hourly_values'].
@@ -53,7 +52,6 @@ def get_rmr_key_list_from_tcd_key_list(tcd_key_list):
 
 
 def convert_units_from_tcd_to_rmr_schema(tcd_value, tcd_units, key_list):
-
     """Converts a quantity defined in the test case description's (TCD) to units compatible with the ASHRAE229 value.
 
     Parameters
@@ -224,13 +222,22 @@ def create_dictionary_from_excel(spreadsheet_name, sheet_name, rule_set):
     invalid_first_keys = ["Notes", "template_lookup"]
 
     # Iterate column by column through values_df
-    for (test_id, columnData) in tests_df.iteritems():
-
+    for test_id, columnData in tests_df.iteritems():
         # List of this rule's column data
         rule_value_list = columnData.values
 
         # Initialize a dictionary to flag whether or not an RMR triplet uses a JSON template
         rmr_template_dict = {}
+
+        # Initialize a dictionary that maps system types to a list of zones. Utilized when using the
+        # rmr_template/system_zone_assignment/system[0]/baseline_system type system
+        # FORMAT:
+        # -system_to_zone_dict["systems"][N]["baseline_system"] = [SYSTEM_NAME]
+        # -system_to_zone_dict["systems"][N]["zones"] = [ZONE_1, ZONE_2,...ZONE_N]
+        system_to_zone_dict = {}
+
+        # Flag used to determine if systems have been added to
+        zones_have_been_mapped = False
 
         # Catch if a test_id is repeated in this tab. We wouldn't want to override an old one
         if test_id in json_dict:
@@ -240,10 +247,8 @@ def create_dictionary_from_excel(spreadsheet_name, sheet_name, rule_set):
 
         # If test_id has not yet been added, add it's content to json_dict
         else:
-
             # Iterate through both keys and rule values
             for row_i in range(rule_value_list.size):
-
                 # row_value = what will be set to the dictionary's key/value pair
                 row_value = rule_value_list[row_i]
 
@@ -258,7 +263,6 @@ def create_dictionary_from_excel(spreadsheet_name, sheet_name, rule_set):
                 for key in keys:
                     key_value = keys_df[key][row_i]
                     if isinstance(key_value, str):
-
                         # If the key includes a JSON_PATH, parse for the short hand enumeration name and adjust the key list
                         if "JSON_PATH" in key_value:
                             # Inject elements to key_list based on shorthand JSON_PATH enumeration
@@ -280,19 +284,15 @@ def create_dictionary_from_excel(spreadsheet_name, sheet_name, rule_set):
 
                 # If this is a template definition, store the template for the RMR transformations
                 if "rmr_template" in key_list:
-
                     # If a JSON template, set the values for flagged RMR triplets
                     if "json_template" in key_list:
-
                         # Iterate through triplets and set values from template if flagged for it
                         for rmr_triplet in triplet_strs:
-
                             # Only copy the template for RMR triplets flagged as being included
                             if (
                                 rmr_triplet
                                 in rmr_template_dict[test_id]["rmr_template"]
                             ):
-
                                 # If anything other than True used to flag the triplet (e.g., False), skip it
                                 if (
                                     rmr_template_dict[test_id]["rmr_template"][
@@ -310,11 +310,27 @@ def create_dictionary_from_excel(spreadsheet_name, sheet_name, rule_set):
                                 ] + key_list[3:]
                                 set_nested_dict(json_dict, triplet_key_list, row_value)
 
-                    # If not a JSON template, this implies it's setting a true/false flag for triplets
+                    elif "system_zone_assignment" in key_list:
+                        # Remove irrelevant keys and set the rest of the keys into system_to_zone_dict
+                        keys_to_ignore = [test_id, "rmr_template"]
+                        key_list = [
+                            item for item in key_list if item not in keys_to_ignore
+                        ]
+                        set_nested_dict(system_to_zone_dict, key_list, row_value)
+
+                    # If not a JSON template or system to zone assignment, this implies it's setting a true/false
+                    # flag for triplets
                     else:
                         set_nested_dict(rmr_template_dict, key_list, row_value)
 
                 else:
+                    # Once you've worked down to the final rmr_transformation sections of the spreadsheet, check
+                    # to see if zones have been mapped to systems
+                    if not zones_have_been_mapped and system_to_zone_dict:
+                        zones_have_been_mapped = (
+                            True  # Set to true to avoid setting them again
+                        )
+                        set_systems_to_zones(json_dict, system_to_zone_dict, rule_set)
 
                     # Skip irrelevant rows (e.g., "Notes")
                     if key_list[1] in invalid_first_keys:
@@ -441,7 +457,6 @@ def update_unit_convention_record(
 
     # Iterate row by row through units DF (not ideal by Pandas standards but these are small data frames)
     for index, row in units_df.iterrows():
-
         # Grab row values
         unit_type = row["unit_type"]
         tcd_unit = row["units"]
@@ -460,7 +475,6 @@ def update_unit_convention_record(
         for key in keys:
             key_value = keys_df[key][index]
             if isinstance(key_value, str):
-
                 # If the key includes a JSON_PATH, parse for the short hand enumeration name and adjust the key list
                 if "JSON_PATH" in key_value:
                     # Inject elements to key_list based on shorthand JSON_PATH enumeration
@@ -487,7 +501,6 @@ def update_unit_convention_record(
         # this TCD spreadsheet. Update the unit conventions if not, raise warning if there's a conflict with an existing
         # unit convention type
         if unit_type in unit_def_dict[tcd_key]:
-
             # Get existing definition
             existing_unit = unit_def_dict[tcd_key][unit_type]
 
@@ -506,7 +519,6 @@ def update_unit_convention_record(
 
         # Update RMR units too
         if unit_type in unit_def_dict[rmr_key]:
-
             # Get existing definition
             existing_unit = unit_def_dict[rmr_key][unit_type]
 
@@ -524,7 +536,6 @@ def update_unit_convention_record(
             requires_update = True
 
     if requires_update:
-
         # Dump JSON to string for writing
         json_string = json.dumps(unit_def_dict, indent=4)
 
@@ -534,3 +545,545 @@ def update_unit_convention_record(
             print("JSON complete and written to file: " + json_name)
     else:
         print("No changes necessary for: " + json_name)
+
+
+def set_systems_to_zones(json_dict, system_to_zone_dict, rule_set):
+    """Takes the JSON structure generated by the system_zone_assignment section of the ruletest JSON spreadsheet
+    and assigns the pre-set HVAC system type RMD examples to those zones
+
+    Parameters
+    ----------
+
+    json_dict : dict
+
+        The dictionary RMD with the thermal zones that require assignment
+
+    system_to_zone_dict : dict
+
+        The dictionary described in the ruletest JSON spreadsheet. Keys are:
+         -system_zone_assignment
+         --systems[N]
+         ---baseline_system = string that matches names in
+                              .rct229\ruletest_engine\ruletest_jsons\<rule_set>\system_types
+         ---zones[N]
+
+
+    rule_set : str
+
+        The rule set being evaluated (e.g., 'ashrae902019'). Should correspond to a directory name in ruletests_jsons
+
+    """
+
+    file_dir = os.path.dirname(__file__)
+
+    for system in system_to_zone_dict["system_zone_assignment"]["systems"]:
+        system_name = system["baseline_system"]
+        zone_list = system["zones"]
+
+        system_type_path = os.path.join(
+            file_dir, "..", rule_set, "system_types", f"{system_name}.json"
+        )
+
+        # Get system RMD
+        with open(system_type_path) as f:
+            system_rmd = json.load(f)
+
+        # Get system classification (e.g., MultiZoneAirLoop, SingleZoneAirLoop, ZoneEquipment)
+        system_classification = determine_system_classification(system_rmd)
+
+        # Add relevant terminals to zones in zone_list
+        add_baseline_terminals(
+            json_dict, system_rmd, system_classification, system_name, zone_list
+        )
+
+        # Adjust building segment HVACs
+        add_hvac_systems(
+            json_dict, system_rmd, system_classification, system_name, zone_list
+        )
+
+        # Add plant loop equipment
+        add_plant_loop_equipment(json_dict, system_rmd)
+
+
+def get_rmr_triplet_from_ruletest_json_dict(ruletest_json_test_dict):
+    """Reads in a ruletest JSON dictionary and returns list of RMRs for any triplet flagged in the ruletest JSON
+
+    Parameters
+    ----------
+
+    ruletest_json_test_dict : dict
+
+        Dictionary corresponding to the JSON structure dictated by a ruletest spreadsheet test instance. This
+        is currently the top level instance and has keys such as Section, Rule, Test, standard (a dictionary)
+        and rmr transformations (the most relevant element for this function)
+
+    Returns
+    -------
+    rmr_triplet_dict_list: list
+        Returns a list of dictionaries, each representing an instance of an RMD
+
+    """
+
+    # Strings used by triplets
+    triplet_strs = ["user", "proposed", "baseline"]
+
+    # List of RMR instances that live in the ruletest JSON dictionary
+    rmr_triplet_dict_list = []
+
+    # Check ruletest_json_dict for instances of triplets. Append any that are found to a list and return it
+    for triplet in triplet_strs:
+        if triplet in ruletest_json_test_dict["rmr_transformations"]:
+            rmr_triplet_dict_list.append(
+                ruletest_json_test_dict["rmr_transformations"][triplet]
+            )
+
+    return rmr_triplet_dict_list
+
+
+def add_baseline_terminals(
+    json_dict, system_rmd, system_classification, system_name, zone_list
+):
+    """Takes a template RMD and injects terminals found in an HVAC system example RMD for a list of zones
+
+    Parameters
+    ----------
+
+    json_dict : dict
+
+        The ruletest json dictionary with the last test ID containing an RMD with the thermal zones that require
+        terminal assignment
+
+    system_rmd : dict
+
+        The bare bone dictionary example of an HVAC system type. Terminals are pulled from this dictionary
+
+    system_classification: str
+        A string representing the system type classification. Options are MultiZoneAirLoop,
+        SingleZoneAirLoop, ZoneEquipment
+
+
+    system_name : str
+        The name of the RMD json referenced by system_rmd. Should match a file name from
+                          .rct229\ruletest_engine\ruletest_jsons\<rule_set>\system_types
+
+    zone_list: list
+        List of strings representing zones found in template_rmd
+
+    """
+
+    terminal_keys = get_json_path_key_list_from_enumeration(
+        json_path_enumeration="terminals"
+    )
+    terminal_keys[-1] = (
+        terminal_keys[-1] + "[0]"
+    )  # append a [0] to final terminals key to reference first terminal
+    terminal_copy = deepcopy(get_nested_dic_from_key_list(system_rmd, terminal_keys))
+
+    # Get latest test ID to which we're adding terminals
+    test_id = list(json_dict)[-1]
+
+    # Get this test_id's zones for each RMR that exist in the template (e.g., user, baseline, proposed)
+    rmr_triplet_dict_list = get_rmr_triplet_from_ruletest_json_dict(json_dict[test_id])
+
+    for rmr_instance_dict in rmr_triplet_dict_list:
+        zone_keys = get_json_path_key_list_from_enumeration(
+            json_path_enumeration="zones"
+        )
+
+        zones = get_nested_dic_from_key_list(rmr_instance_dict, zone_keys)
+
+        for zone in zones:
+            # Only add terminals for zones assigned to this system
+            if zone["id"] in zone_list:
+                zone_id = zone["id"]
+
+                # Inject new terminals
+                zone["terminals"] = []
+                zone["terminals"].append(deepcopy(terminal_copy))
+                zone["terminals"][0]["id"] = f"{system_name} - Terminal for {zone_id}"
+
+                if system_classification != "MultiZoneAirLoop":
+                    zone["terminals"][0][
+                        "served_by_heating_ventilating_air_conditioning_system"
+                    ] = f"{system_name} {zone_id}"
+
+                else:
+                    system_name = clean_system_name_for_multizone_airloop(
+                        rmr_instance_dict, system_name
+                    )
+                    zone["terminals"][0][
+                        "served_by_heating_ventilating_air_conditioning_system"
+                    ] = f"{system_name}"
+
+
+def clean_system_name_for_multizone_airloop(rmr_dict, system_name):
+    """Checks the RMR dictionary for a particularly system name in the list of HVAC systems. Iterates the name of this
+    system to ensure IDs arent duplicated.
+
+         Parameters
+         ----------
+
+         rmr_dict : dict
+
+             Dictionary with all HVAC systems
+
+         system_name: str
+             String representing the system name to check for in the HVAC systems in rmr_dict
+
+         Returns
+         -------
+
+         system_name: str
+
+             The updated system name, if necessary. If no iteration is necessary, this will return the same
+             system name
+
+    """
+
+    # Check if the system name already exists in the model. If so, update name to allow for multiple multizone systems
+    hvac_keys = get_json_path_key_list_from_enumeration(
+        json_path_enumeration="heating_ventilating_air_conditioning_systems"
+    )
+
+    # If rmr_dict has HVAC systems added, check if this system name is already taken. If so, update it.
+    if element_exists_at_key_address_in_dictionary(rmr_dict, hvac_keys):
+
+        hvac_systems = get_nested_dic_from_key_list(rmr_dict, hvac_keys)
+
+        for hvac_system in hvac_systems:
+            if system_name == hvac_system["id"]:
+                # Check if last character is a numeric. If so, return that system name iterated by 1
+                if system_name[-1].isdigit():
+                    final_index = int(system_name[-1])
+                    return system_name[:-1] + str(final_index + 1)
+
+                else:
+                    return system_name + " 1"
+
+    # No change needed
+    return system_name
+
+
+def iterate_ids_in_dict(iterable_object):
+    """Takes an RMR dictionary (at any level) and checks every element for an ID. If an ID is found, the ID is
+    updated to ensure no duplicates. This happens recursively to ensure every element is drilled down.
+
+         Parameters
+         ----------
+
+         iterable_object : dict|list
+
+             Dictionary or list being checked for ID elements to update
+
+
+    """
+
+    # Check if the iterable object is a list
+    if isinstance(iterable_object, list):
+        # Recursively check elements for ID and update them
+        for item in iterable_object:
+            if isinstance(item, list):
+                iterate_ids_in_dict(item)
+
+            elif isinstance(item, dict):
+                iterate_ids_in_dict(item)
+
+    # If not a list, it should be a dict, but check. Check dictionary for IDs and iterate their value by 1
+    elif isinstance(iterable_object, dict):
+        if "id" in iterable_object:
+            # If already numbered, iterate by 1
+            if iterable_object["id"][-1].isdigit():
+                final_index = int(iterable_object["id"][-1])
+                iterable_object["id"] = iterable_object["id"][:-1] + str(
+                    final_index + 1
+                )
+
+            # If this ID has no number, add a 1 to it
+            else:
+                iterable_object["id"] = iterable_object["id"] + " 1"
+
+        # Recursively check elements for ID and update them
+        for value in iterable_object.values():
+            if isinstance(value, list):
+                iterate_ids_in_dict(value)
+
+            elif isinstance(value, dict):
+                iterate_ids_in_dict(value)
+
+
+def add_hvac_systems(
+    json_dict, system_rmd, system_classification, system_name, zone_list
+):
+    """Adds HVAC system from system_rmd to template RMD for zones in zone list
+
+    Parameters
+    ----------
+
+    json_dict : dict
+
+        The ruletest json dictionary with the last test ID containing an RMD requiring HVAC assignment
+
+    system_rmd : dict
+
+        The bare bone dictionary example of an HVAC system type. HVAC systems are pulled from this dictionary
+
+    system_classification: str
+        A string representing the system type classification. Options are MultiZoneAirLoop,
+        SingleZoneAirLoop, ZoneEquipment
+
+
+    system_name : str
+        The name of the RMD json referenced by system_rmd. Should match a file name from
+                          .rct229\ruletest_engine\ruletest_jsons\<rule_set>\system_types
+
+    zone_list: list
+        List of strings representing zones found in template_rmd
+
+    """
+
+    # Copy of baseline system HVAC system
+    hvac_keys = get_json_path_key_list_from_enumeration(
+        json_path_enumeration="heating_ventilating_air_conditioning_systems"
+    )
+    hvac_keys[-1] = (
+        hvac_keys[-1] + "[0]"
+    )  # append a [0] to final terminals key to reference first terminal
+    hvac_copy = deepcopy(get_nested_dic_from_key_list(system_rmd, hvac_keys))
+
+    # Get latest test ID to which we're adding an HVAC system
+    test_id = list(json_dict)[-1]
+
+    # Get this test_id's zones for each RMR that exist in the template (e.g., user, baseline, proposed)
+    rmr_triplet_dict_list = get_rmr_triplet_from_ruletest_json_dict(json_dict[test_id])
+
+    for rmr_instance_dict in rmr_triplet_dict_list:
+        # Get building segments in the RMR instance
+        building_segment_keys = get_json_path_key_list_from_enumeration(
+            json_path_enumeration="building_segments"
+        )
+        building_segments = get_nested_dic_from_key_list(
+            rmr_instance_dict, building_segment_keys
+        )
+
+        # Iterate through building segments and add HVAC systems
+        for building_segment in building_segments:
+            # Check if this building segment has any relevant zones
+            zones = building_segment["zones"]
+
+            segment_contains_relevant_zone = False
+
+            # Ensure that this segment contains a relevant zone
+            for zone in zones:
+                if zone["id"] in zone_list:
+                    segment_contains_relevant_zone = True
+                    break
+
+            if segment_contains_relevant_zone:
+                # Intialize HVAC systems if not found in this building segment yet
+                if (
+                    "heating_ventilating_air_conditioning_systems"
+                    not in building_segment
+                ):
+                    building_segment[
+                        "heating_ventilating_air_conditioning_systems"
+                    ] = []
+
+                # If MZ, only require one HVAC system and assign total capacities
+                if system_classification == "MultiZoneAirLoop":
+                    mz_hvac_ids_standardized = False
+
+                    # Check for duplicate multizone air loop. If it already exists, create a duplicate of it and
+                    # update IDs to avoid duplicates.
+                    for hvac_system in building_segment[
+                        "heating_ventilating_air_conditioning_systems"
+                    ]:
+
+                        # Iterate IDs to avoid duplicate IDs if this system type already exists in the building
+                        if system_name in hvac_system["id"]:
+                            hvac_copy = deepcopy(hvac_system)
+                            iterate_ids_in_dict(hvac_copy)
+                            mz_hvac_ids_standardized = True
+
+                    building_segment[
+                        "heating_ventilating_air_conditioning_systems"
+                    ].append(hvac_copy)
+
+                    # This ensures the system ID is unique and matches the system type name for first copy. This ensures
+                    # consistency that HVAC system names are fully described and helps avoid duplicates
+                    if not mz_hvac_ids_standardized:
+                        # Adjust HVAC system ID to match system type
+                        hvac_system = building_segment[
+                            "heating_ventilating_air_conditioning_systems"
+                        ][-1]
+                        hvac_system["id"] = f"{system_name}"
+
+                        # Ensure unique fan names based on system type
+                        if "fan_system" in hvac_system:
+                            fan_system = hvac_system["fan_system"]
+                            if "supply_fans" in fan_system:
+                                for supply_fan in fan_system["supply_fans"]:
+                                    supply_fan["id"] = f"{system_name} Supply Fan"
+                            if "return_fans" in fan_system:
+                                for return_fan in fan_system["return_fans"]:
+                                    return_fan["id"] = f"{system_name} Return Fan"
+
+                # If SZ, add an HVAC system for each zone
+                else:
+                    for zone in zones:
+                        zone_id = zone["id"]
+
+                        # Get zone ID
+                        if zone_id in zone_list:
+                            # Append another HVAC system to building segment for this zone
+                            building_segment[
+                                "heating_ventilating_air_conditioning_systems"
+                            ].append(deepcopy(hvac_copy))
+
+                            # Update HVAC ID
+                            hvac_system = building_segment[
+                                "heating_ventilating_air_conditioning_systems"
+                            ][-1]
+                            hvac_system["id"] = f"{system_name} {zone_id}"
+
+                            # Update fan system names
+                            if "fan_system" in hvac_system:
+                                hvac_system["fan_system"][
+                                    "id"
+                                ] = f"Fan System - {zone_id}"
+
+                                # Assumes only one supply fan
+                                if "supply_fans" in hvac_system["fan_system"]:
+                                    hvac_system["fan_system"]["supply_fans"][0][
+                                        "id"
+                                    ] = f"Supply Fan - {zone_id}"
+
+                                # Assumes only one supply fan
+                                if "return_fans" in hvac_system["fan_system"]:
+                                    hvac_system["fan_system"]["return_fans"][0][
+                                        "id"
+                                    ] = f"Return Fan - {zone_id}"
+
+                            # Set capacities and update heating/cooling system Ids
+                            if "cooling_system" in hvac_system:
+                                hvac_system["cooling_system"][
+                                    "id"
+                                ] = f"Cooling Sys - {zone_id}"
+
+                            if "heating_system" in hvac_system:
+                                hvac_system["heating_system"][
+                                    "id"
+                                ] = f"Heating Sys - {zone_id}"
+                            elif "preheat_system" in hvac_system:
+                                hvac_system["preheat_system"][
+                                    "id"
+                                ] = f"Preheat Sys - {zone_id}"
+
+
+# Adds plant equipment at ruleset model instance level
+def add_plant_loop_equipment(json_dict, system_rmd):
+    """Adds HVAC system plant equipment from system_rmd to template RMD
+
+    Parameters
+    ----------
+
+    json_dict : dict
+
+        The ruletest dictionary with the test RMD which require plant loop equipment injection
+
+    system_rmd : dict
+
+        The bare bone dictionary example of an HVAC system type. Plant equipment is pulled from this
+        dictionary
+
+    """
+
+    equipment_str_list = [
+        "boilers",
+        "chillers",
+        "pumps",
+        "fluid_loops",
+        "heat_rejections",
+    ]
+
+    sys_ruleset_model_instance = system_rmd["ruleset_model_descriptions"][0]
+
+    # Get latest test ID to which we're adding plant loops
+    test_id = list(json_dict)[-1]
+
+    # Get this test_id's zones for each RMR that exist in the template (e.g., user, baseline, proposed)
+    rmr_triplet_dict_list = get_rmr_triplet_from_ruletest_json_dict(json_dict[test_id])
+
+    # Iterate through each RMR triplet dictionary
+    for rmr_instance_dict in rmr_triplet_dict_list:
+        template_ruleset_model_instance = rmr_instance_dict[
+            "ruleset_model_descriptions"
+        ][0]
+
+        # Iterate through piece of plant loop equipment and check if any exist. Add any that are missing.
+        for equipment in equipment_str_list:
+            if equipment in sys_ruleset_model_instance:
+                # If this equipment type is already listed, check id of each component and see if it matches ID of
+                # element in the system RMD. Add missing ones.
+                if equipment in template_ruleset_model_instance:
+                    template_equipment_id_list = []
+
+                    # Create list of equipment from template ID
+                    for template_equipment_instance in template_ruleset_model_instance[
+                        equipment
+                    ]:
+                        template_equipment_id_list.append(
+                            template_equipment_instance["id"]
+                        )
+
+                    # Add any missing pieces of equipment from system RMD (i.e., if an ID doesn't
+                    # already exist in template's list of plant equipment)
+                    for system_equipment_instance in sys_ruleset_model_instance[
+                        equipment
+                    ]:
+                        if (
+                            system_equipment_instance["id"]
+                            not in template_equipment_id_list
+                        ):
+                            template_ruleset_model_instance[equipment].append(
+                                system_equipment_instance
+                            )
+
+                # If this equipment type didn't exist in the template, simply copy from system RMD
+                else:
+                    template_ruleset_model_instance[
+                        equipment
+                    ] = sys_ruleset_model_instance[equipment]
+
+
+# Returns if a baseline system type is zone equipment, single zone air loop, or multizone air loop
+def determine_system_classification(system_rmd):
+    """Determines if a baseline system RMD reperesents a zone equipment, single zone air loop, or multizone air loop
+
+    Parameters
+    ----------
+
+    system_rmd : dict
+
+        RMD with HVAC system you're interesteed in exploring. A dictionary
+
+    Returns
+    -------
+    system_classification: str
+        Returns a string representing the system type classifications. Options are MultiZoneAirLoop,
+        SingleZoneAirLoop, ZoneEquipment
+
+    """
+
+    zones = system_rmd["ruleset_model_descriptions"][0]["buildings"][0][
+        "building_segments"
+    ][0]["zones"]
+
+    if zones[0]["terminals"][0]["is_supply_ducted"]:
+        if len(zones) > 1:
+            return "MultiZoneAirLoop"
+        else:
+            return "SingleZoneAirLoop"
+
+    # If not air loop, it's zone equipment
+    else:
+        return "ZoneEquipment"

@@ -13,7 +13,7 @@ from rct229.schema.validate import schema_validate_rmr
 # The second logic means the second half of the `is_baseline_system_10'. The second logic is used when there is NO preheat system and there is heating/fan systems.
 SYS_10_FIRST_LOGIC_TEST_RMD = {
     "id": "ASHRAE229 1",
-    "ruleset_model_instances": [
+    "ruleset_model_descriptions": [
         {
             "id": "RMD 1",
             "buildings": [
@@ -56,7 +56,7 @@ SYS_10_FIRST_LOGIC_TEST_RMD = {
 
 SYS_10_SECOND_LOGIC_TEST_RMD = {
     "id": "ASHRAE229 1",
-    "ruleset_model_instances": [
+    "ruleset_model_descriptions": [
         {
             "id": "RMD 1",
             "buildings": [
@@ -86,11 +86,11 @@ SYS_10_SECOND_LOGIC_TEST_RMD = {
                                     "id": "System 10",
                                     "cooling_system": {
                                         "id": "Cooling Coil 1",
-                                        "cooling_system_type": "NONE",
+                                        "type": "NONE",
                                     },
                                     "heating_system": {
                                         "id": "HHW Coil 1A",
-                                        "heating_system_type": "ELECTRIC_RESISTANCE",
+                                        "type": "ELECTRIC_RESISTANCE",
                                     },
                                     "fan_system": {
                                         "id": "VAV Fan System 1",
@@ -126,7 +126,7 @@ def test__TEST_RMD_baseline_system_10__is_second_logic_valid():
 def test__is_baseline_system_10__first_logic_true():
     assert (
         is_baseline_system_10(
-            SYS_10_FIRST_LOGIC_TEST_RMD["ruleset_model_instances"][0],
+            SYS_10_FIRST_LOGIC_TEST_RMD["ruleset_model_descriptions"][0],
             "System 10",
             ["Air Terminal 1"],
             ["Thermal Zone 1"],
@@ -138,7 +138,7 @@ def test__is_baseline_system_10__first_logic_true():
 def test__is_baseline_system_10__second_logic_true():
     assert (
         is_baseline_system_10(
-            SYS_10_SECOND_LOGIC_TEST_RMD["ruleset_model_instances"][0],
+            SYS_10_SECOND_LOGIC_TEST_RMD["ruleset_model_descriptions"][0],
             "System 10",
             ["Air Terminal 2"],
             ["Thermal Zone 2"],
@@ -151,7 +151,7 @@ def test__is_baseline_system_10__test_json_true():
     assert (
         is_baseline_system_10(
             load_system_test_file("System_10_Warm_Air_Furnace_Elec.json")[
-                "ruleset_model_instances"
+                "ruleset_model_descriptions"
             ][0],
             "System 10",
             ["Air Terminal"],

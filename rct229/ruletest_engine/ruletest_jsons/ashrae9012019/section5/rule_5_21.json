@@ -3,7 +3,7 @@
         "Section": 5,
         "Rule": 21,
         "Test": "a",
-        "test_description": "Building includes a zone that has two exterior walls with windows. Vertical fenestration area in the baseline model is distributed on each face in the same proportion as in the proposed design. ",
+        "test_description": " Project has one building segment and includes a zone that has two exterior walls with windows. Vertical fenestration area in the baseline model is distributed on each face in the same proportion as in the proposed design. ",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-21",
@@ -13,7 +13,7 @@
             "rule_assertion": "=",
             "comparison_value": "Proposed RMR",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.29"
         },
         "rmr_transformations": {
             "proposed": {
@@ -22,7 +22,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMR 1",
                         "buildings": [
@@ -73,7 +73,7 @@
                                                             }
                                                         ],
                                                         "construction": {
-                                                            "id": "construction_1",
+                                                            "id": "Construction 1",
                                                             "u_factor": 3.2366105565544463
                                                         }
                                                     },
@@ -125,7 +125,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMR 1",
                         "buildings": [
@@ -176,7 +176,7 @@
                                                             }
                                                         ],
                                                         "construction": {
-                                                            "id": "construction_1",
+                                                            "id": "Construction 1",
                                                             "u_factor": 3.2366105565544463
                                                         }
                                                     },
@@ -228,7 +228,7 @@
         "Section": 5,
         "Rule": 21,
         "Test": "b",
-        "test_description": "Building includes a zone that has two exterior walls with windows. Vertical fenestration area in the baseline model is not distributed on each face in the same proportion as in the proposed design. ",
+        "test_description": " Project has one building segment and includes a zone that has two exterior walls with windows. Vertical fenestration area in the baseline model is not distributed on each face in the same proportion as in the proposed design. ",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-21",
@@ -238,7 +238,7 @@
             "rule_assertion": "=",
             "comparison_value": "Proposed RMR",
             "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "schema_version": "0.0.29"
         },
         "rmr_transformations": {
             "proposed": {
@@ -247,7 +247,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMR 1",
                         "buildings": [
@@ -282,7 +282,7 @@
                                                         "tilt": 90,
                                                         "area": 92.90303999999999,
                                                         "construction": {
-                                                            "id": "construction_1",
+                                                            "id": "Construction 1",
                                                             "u_factor": 3.2366105565544463
                                                         },
                                                         "subsurfaces": [
@@ -350,7 +350,7 @@
                     "climate_zone": "CZ4A",
                     "data_source_type": "OTHER"
                 },
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMR 1",
                         "buildings": [
@@ -385,7 +385,7 @@
                                                         "tilt": 90,
                                                         "area": 92.90303999999999,
                                                         "construction": {
-                                                            "id": "construction_1",
+                                                            "id": "Construction 1",
                                                             "u_factor": 3.2366105565544463
                                                         },
                                                         "subsurfaces": [
