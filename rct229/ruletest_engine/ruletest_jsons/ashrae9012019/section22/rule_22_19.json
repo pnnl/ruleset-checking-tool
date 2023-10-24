@@ -136,15 +136,15 @@
                                         "id": "Secondary CHW Loop 1",
                                         "type": "COOLING"
                                     }
-                                ],
+                                ]
+                            },
+                            {
+                                "id": "Condenser Loop 1",
+                                "type": "CONDENSER",
                                 "cooling_or_condensing_design_and_control": {
                                     "id": "CCDC 1",
                                     "temperature_reset_type": "CONSTANT"
                                 }
-                            },
-                            {
-                                "id": "Condenser Loop 1",
-                                "type": "CONDENSER"
                             }
                         ],
                         "heat_rejections": [
@@ -295,15 +295,15 @@
                                         "id": "Secondary CHW Loop 1",
                                         "type": "COOLING"
                                     }
-                                ],
+                                ]
+                            },
+                            {
+                                "id": "Condenser Loop 1",
+                                "type": "CONDENSER",
                                 "cooling_or_condensing_design_and_control": {
                                     "id": "CCDC 1",
                                     "temperature_reset_type": "OUTSIDE_AIR_RESET"
                                 }
-                            },
-                            {
-                                "id": "Condenser Loop 1",
-                                "type": "CONDENSER"
                             }
                         ],
                         "heat_rejections": [
@@ -437,15 +437,15 @@
                                         "id": "Secondary CHW Loop 1",
                                         "type": "COOLING"
                                     }
-                                ],
+                                ]
+                            },
+                            {
+                                "id": "Condenser Loop 1",
+                                "type": "CONDENSER",
                                 "cooling_or_condensing_design_and_control": {
                                     "id": "CCDC 1",
                                     "temperature_reset_type": "CONSTANT"
                                 }
-                            },
-                            {
-                                "id": "Condenser Loop 1",
-                                "type": "CONDENSER"
                             }
                         ],
                         "heat_rejections": [
@@ -579,15 +579,15 @@
                                         "id": "Secondary CHW Loop 1",
                                         "type": "COOLING"
                                     }
-                                ],
+                                ]
+                            },
+                            {
+                                "id": "Condenser Loop 1",
+                                "type": "CONDENSER",
                                 "cooling_or_condensing_design_and_control": {
                                     "id": "CCDC 1",
                                     "temperature_reset_type": "OUTSIDE_AIR_RESET"
                                 }
-                            },
-                            {
-                                "id": "Condenser Loop 1",
-                                "type": "CONDENSER"
                             }
                         ],
                         "heat_rejections": [
@@ -711,15 +711,15 @@
                             },
                             {
                                 "id": "Chilled Water Loop 1",
-                                "type": "COOLING",
+                                "type": "COOLING"
+                            },
+                            {
+                                "id": "Condenser Loop 1",
+                                "type": "CONDENSER",
                                 "cooling_or_condensing_design_and_control": {
                                     "id": "CCDC 1",
                                     "temperature_reset_type": "OUTSIDE_AIR_RESET"
                                 }
-                            },
-                            {
-                                "id": "Condenser Loop 1",
-                                "type": "CONDENSER"
                             }
                         ],
                         "heat_rejections": [

@@ -137,15 +137,15 @@
                                         "id": "Secondary CHW Loop 1",
                                         "type": "COOLING"
                                     }
-                                ],
+                                ]
+                            },
+                            {
+                                "id": "Condenser Loop 1",
+                                "type": "CONDENSER",
                                 "cooling_or_condensing_design_and_control": {
                                     "id": "CCDC 1",
                                     "design_supply_temperature": 15.5555555555556
                                 }
-                            },
-                            {
-                                "id": "Condenser Loop 1",
-                                "type": "CONDENSER"
                             }
                         ],
                         "heat_rejections": [
@@ -299,15 +299,15 @@
                                         "id": "Secondary CHW Loop 1",
                                         "type": "COOLING"
                                     }
-                                ],
+                                ]
+                            },
+                            {
+                                "id": "Condenser Loop 1",
+                                "type": "CONDENSER",
                                 "cooling_or_condensing_design_and_control": {
                                     "id": "CCDC 1",
                                     "design_supply_temperature": 15.5555555555556
                                 }
-                            },
-                            {
-                                "id": "Condenser Loop 1",
-                                "type": "CONDENSER"
                             }
                         ],
                         "heat_rejections": [
@@ -461,15 +461,15 @@
                                         "id": "Secondary CHW Loop 1",
                                         "type": "COOLING"
                                     }
-                                ],
+                                ]
+                            },
+                            {
+                                "id": "Condenser Loop 1",
+                                "type": "CONDENSER",
                                 "cooling_or_condensing_design_and_control": {
                                     "id": "CCDC 1",
                                     "design_supply_temperature": 15.5555555555556
                                 }
-                            },
-                            {
-                                "id": "Condenser Loop 1",
-                                "type": "CONDENSER"
                             }
                         ],
                         "heat_rejections": [
@@ -606,15 +606,15 @@
                                         "id": "Secondary CHW Loop 1",
                                         "type": "COOLING"
                                     }
-                                ],
+                                ]
+                            },
+                            {
+                                "id": "Condenser Loop 1",
+                                "type": "CONDENSER",
                                 "cooling_or_condensing_design_and_control": {
                                     "id": "CCDC 1",
                                     "design_supply_temperature": 35.00000000000006
                                 }
-                            },
-                            {
-                                "id": "Condenser Loop 1",
-                                "type": "CONDENSER"
                             }
                         ],
                         "heat_rejections": [
@@ -751,15 +751,15 @@
                                         "id": "Secondary CHW Loop 1",
                                         "type": "COOLING"
                                     }
-                                ],
+                                ]
+                            },
+                            {
+                                "id": "Condenser Loop 1",
+                                "type": "CONDENSER",
                                 "cooling_or_condensing_design_and_control": {
                                     "id": "CCDC 1",
                                     "design_supply_temperature": 35.00000000000006
                                 }
-                            },
-                            {
-                                "id": "Condenser Loop 1",
-                                "type": "CONDENSER"
                             }
                         ],
                         "heat_rejections": [
@@ -896,15 +896,15 @@
                                         "id": "Secondary CHW Loop 1",
                                         "type": "COOLING"
                                     }
-                                ],
+                                ]
+                            },
+                            {
+                                "id": "Condenser Loop 1",
+                                "type": "CONDENSER",
                                 "cooling_or_condensing_design_and_control": {
                                     "id": "CCDC 1",
                                     "design_supply_temperature": 15.5555555555556
                                 }
-                            },
-                            {
-                                "id": "Condenser Loop 1",
-                                "type": "CONDENSER"
                             }
                         ],
                         "heat_rejections": [
