@@ -138,6 +138,10 @@
                                         "type": "COOLING"
                                     }
                                 ]
+                            },
+                            {
+                                "id": "Condenser Loop 1",
+                                "type": "CONDENSER"
                             }
                         ],
                         "heat_rejections": [
@@ -291,6 +295,10 @@
                                         "type": "COOLING"
                                     }
                                 ]
+                            },
+                            {
+                                "id": "Condenser Loop 1",
+                                "type": "CONDENSER"
                             }
                         ],
                         "heat_rejections": [

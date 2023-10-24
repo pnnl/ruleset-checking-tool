@@ -9040,6 +9040,10 @@
                                 "cooling_or_condensing_design_and_control": {
                                     "id": "CCDC 1"
                                 }
+                            },
+                            {
+                                "id": "Condenser Loop 1",
+                                "type": "CONDENSER"
                             }
                         ],
                         "heat_rejections": [
@@ -9195,6 +9199,10 @@
                                 "cooling_or_condensing_design_and_control": {
                                     "id": "CCDC 1"
                                 }
+                            },
+                            {
+                                "id": "Condenser Loop 1",
+                                "type": "CONDENSER"
                             }
                         ],
                         "heat_rejections": [
@@ -9350,6 +9358,10 @@
                                 "cooling_or_condensing_design_and_control": {
                                     "id": "CCDC 1"
                                 }
+                            },
+                            {
+                                "id": "Condenser Loop 1",
+                                "type": "CONDENSER"
                             }
                         ],
                         "heat_rejections": [
@@ -9505,6 +9517,10 @@
                                 "cooling_or_condensing_design_and_control": {
                                     "id": "CCDC 1"
                                 }
+                            },
+                            {
+                                "id": "Condenser Loop 1",
+                                "type": "CONDENSER"
                             }
                         ],
                         "heat_rejections": [
@@ -9759,6 +9775,10 @@
                                         "type": "COOLING"
                                     }
                                 ]
+                            },
+                            {
+                                "id": "Condenser Loop 1",
+                                "type": "CONDENSER"
                             }
                         ],
                         "heat_rejections": [
@@ -9913,6 +9933,10 @@
                                         "type": "COOLING"
                                     }
                                 ]
+                            },
+                            {
+                                "id": "Condenser Loop 1",
+                                "type": "CONDENSER"
                             }
                         ],
                         "heat_rejections": [
@@ -10067,6 +10091,10 @@
                                         "type": "COOLING"
                                     }
                                 ]
+                            },
+                            {
+                                "id": "Condenser Loop 1",
+                                "type": "CONDENSER"
                             }
                         ],
                         "heat_rejections": [
@@ -10225,6 +10253,10 @@
                                     "id": "CCDC 1",
                                     "design_supply_temperature": 15.5555555555556
                                 }
+                            },
+                            {
+                                "id": "Condenser Loop 1",
+                                "type": "CONDENSER"
                             }
                         ],
                         "heat_rejections": [
@@ -10383,6 +10415,10 @@
                                     "id": "CCDC 1",
                                     "design_supply_temperature": 15.5555555555556
                                 }
+                            },
+                            {
+                                "id": "Condenser Loop 1",
+                                "type": "CONDENSER"
                             }
                         ],
                         "heat_rejections": [
@@ -10541,6 +10577,10 @@
                                     "id": "CCDC 1",
                                     "design_supply_temperature": 15.5555555555556
                                 }
+                            },
+                            {
+                                "id": "Condenser Loop 1",
+                                "type": "CONDENSER"
                             }
                         ],
                         "heat_rejections": [
@@ -10682,6 +10722,10 @@
                                     "id": "CCDC 1",
                                     "design_supply_temperature": 35.00000000000006
                                 }
+                            },
+                            {
+                                "id": "Condenser Loop 1",
+                                "type": "CONDENSER"
                             }
                         ],
                         "heat_rejections": [
@@ -10823,6 +10867,10 @@
                                     "id": "CCDC 1",
                                     "design_supply_temperature": 35.00000000000006
                                 }
+                            },
+                            {
+                                "id": "Condenser Loop 1",
+                                "type": "CONDENSER"
                             }
                         ],
                         "heat_rejections": [
@@ -10964,6 +11012,10 @@
                                     "id": "CCDC 1",
                                     "design_supply_temperature": 15.5555555555556
                                 }
+                            },
+                            {
+                                "id": "Condenser Loop 1",
+                                "type": "CONDENSER"
                             }
                         ],
                         "heat_rejections": [
@@ -11118,6 +11170,10 @@
                                         "type": "COOLING"
                                     }
                                 ]
+                            },
+                            {
+                                "id": "Condenser Loop 1",
+                                "type": "CONDENSER"
                             }
                         ],
                         "heat_rejections": [
@@ -11272,6 +11328,10 @@
                                         "type": "COOLING"
                                     }
                                 ]
+                            },
+                            {
+                                "id": "Condenser Loop 1",
+                                "type": "CONDENSER"
                             }
                         ],
                         "heat_rejections": [
@@ -11426,6 +11486,10 @@
                                         "type": "COOLING"
                                     }
                                 ]
+                            },
+                            {
+                                "id": "Condenser Loop 1",
+                                "type": "CONDENSER"
                             }
                         ],
                         "heat_rejections": [
@@ -11434,81 +11498,6 @@
                                 "loop": "Condenser Loop 1",
                                 "fan_shaft_power": 14914.0,
                                 "rated_water_flowrate": 25.23333333333334
-                            }
-                        ]
-                    }
-                ]
-            }
-        }
-    },
-    "rule-22-17-d": {
-        "Section": 22,
-        "Rule": 17,
-        "Test": "d",
-        "test_description": "Building does not include a cooling tower and is therefore not applicable",
-        "expected_rule_outcome": "not_applicable",
-        "standard": {
-            "rule_id": "22-17",
-            "ruleset_reference": "G3.1.3.11",
-            "rule_description": "The baseline heat rejection device shall have an efficiency of 38.2 gpm/hp",
-            "applicable_rmr": "Baseline RMR",
-            "rule_assertion": "=",
-            "comparison_value": "Expected Value",
-            "primary_rule": "No",
-            "schema_version": "0.0.29"
-        },
-        "rmr_transformations": {
-            "baseline": {
-                "id": "ASHRAE229 1",
-                "ruleset_model_descriptions": [
-                    {
-                        "id": "RMD 1",
-                        "buildings": [
-                            {
-                                "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
-                                "building_segments": [
-                                    {
-                                        "id": "Building Segment 1",
-                                        "zones": [
-                                            {
-                                                "id": "Thermal Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
-                                                "terminals": [
-                                                    {
-                                                        "id": "PTHP Terminal 1",
-                                                        "is_supply_ducted": false,
-                                                        "type": "CONSTANT_AIR_VOLUME",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "PTHP 1"
-                                                    }
-                                                ]
-                                            }
-                                        ],
-                                        "heating_ventilating_air_conditioning_systems": [
-                                            {
-                                                "id": "PTHP 1",
-                                                "cooling_system": {
-                                                    "id": "HP Cooling Coil 1",
-                                                    "type": "DIRECT_EXPANSION"
-                                                },
-                                                "heating_system": {
-                                                    "id": "HP Heating Coil 1",
-                                                    "type": "HEAT_PUMP"
-                                                },
-                                                "fan_system": {
-                                                    "id": "CAV Fan System 1",
-                                                    "fan_control": "CONSTANT",
-                                                    "supply_fans": [
-                                                        {
-                                                            "id": "Supply Fan 1"
-                                                        }
-                                                    ]
-                                                }
-                                            }
-                                        ]
-                                    }
-                                ]
                             }
                         ]
                     }
@@ -11655,6 +11644,10 @@
                                         "type": "COOLING"
                                     }
                                 ]
+                            },
+                            {
+                                "id": "Condenser Loop 1",
+                                "type": "CONDENSER"
                             }
                         ],
                         "heat_rejections": [
@@ -11808,6 +11801,10 @@
                                         "type": "COOLING"
                                     }
                                 ]
+                            },
+                            {
+                                "id": "Condenser Loop 1",
+                                "type": "CONDENSER"
                             }
                         ],
                         "heat_rejections": [
@@ -12109,12 +12106,16 @@
                                     "id": "CCDC 1",
                                     "temperature_reset_type": "CONSTANT"
                                 }
+                            },
+                            {
+                                "id": "Condenser Loop 1",
+                                "type": "CONDENSER"
                             }
                         ],
                         "heat_rejections": [
                             {
                                 "id": "Heat Rejection 1",
-                                "loop": "Chiller Loop 1"
+                                "loop": "Condenser Loop 1"
                             }
                         ]
                     }
@@ -12264,12 +12265,16 @@
                                     "id": "CCDC 1",
                                     "temperature_reset_type": "OUTSIDE_AIR_RESET"
                                 }
+                            },
+                            {
+                                "id": "Condenser Loop 1",
+                                "type": "CONDENSER"
                             }
                         ],
                         "heat_rejections": [
                             {
                                 "id": "Heat Rejection 1",
-                                "loop": "Chiller Loop 1"
+                                "loop": "Condenser Loop 1"
                             }
                         ]
                     }
@@ -12402,12 +12407,16 @@
                                     "id": "CCDC 1",
                                     "temperature_reset_type": "CONSTANT"
                                 }
+                            },
+                            {
+                                "id": "Condenser Loop 1",
+                                "type": "CONDENSER"
                             }
                         ],
                         "heat_rejections": [
                             {
                                 "id": "Heat Rejection 1",
-                                "loop": "Chiller Loop 1"
+                                "loop": "Condenser Loop 1"
                             }
                         ]
                     }
@@ -12540,12 +12549,16 @@
                                     "id": "CCDC 1",
                                     "temperature_reset_type": "OUTSIDE_AIR_RESET"
                                 }
+                            },
+                            {
+                                "id": "Condenser Loop 1",
+                                "type": "CONDENSER"
                             }
                         ],
                         "heat_rejections": [
                             {
                                 "id": "Heat Rejection 1",
-                                "loop": "Chiller Loop 1"
+                                "loop": "Condenser Loop 1"
                             }
                         ]
                     }
@@ -12668,12 +12681,16 @@
                                     "id": "CCDC 1",
                                     "temperature_reset_type": "OUTSIDE_AIR_RESET"
                                 }
+                            },
+                            {
+                                "id": "Condenser Loop 1",
+                                "type": "CONDENSER"
                             }
                         ],
                         "heat_rejections": [
                             {
                                 "id": "Heat Rejection 1",
-                                "loop": "Chiller Loop 1"
+                                "loop": "Condenser Loop 1"
                             }
                         ]
                     }
@@ -12819,12 +12836,16 @@
                                         "type": "COOLING"
                                     }
                                 ]
+                            },
+                            {
+                                "id": "Condenser Loop 1",
+                                "type": "CONDENSER"
                             }
                         ],
                         "heat_rejections": [
                             {
                                 "id": "Heat Rejection 1",
-                                "loop": "Chiller Loop 1",
+                                "loop": "Condenser Loop 1",
                                 "leaving_water_setpoint_temperature": 23.888888888888914
                             }
                         ]
@@ -12974,12 +12995,16 @@
                                         "type": "COOLING"
                                     }
                                 ]
+                            },
+                            {
+                                "id": "Condenser Loop 1",
+                                "type": "CONDENSER"
                             }
                         ],
                         "heat_rejections": [
                             {
                                 "id": "Heat Rejection 1",
-                                "loop": "Chiller Loop 1",
+                                "loop": "Condenser Loop 1",
                                 "leaving_water_setpoint_temperature": 26.666666666666686
                             }
                         ]
@@ -13136,12 +13161,16 @@
                                         "type": "COOLING"
                                     }
                                 ]
+                            },
+                            {
+                                "id": "Condenser Loop 1",
+                                "type": "CONDENSER"
                             }
                         ],
                         "heat_rejections": [
                             {
                                 "id": "Heat Rejection 1",
-                                "loop": "Chiller Loop 1",
+                                "loop": "Condenser Loop 1",
                                 "leaving_water_setpoint_temperature": 18.33333333333337
                             }
                         ]
@@ -13298,12 +13327,16 @@
                                         "type": "COOLING"
                                     }
                                 ]
+                            },
+                            {
+                                "id": "Condenser Loop 1",
+                                "type": "CONDENSER"
                             }
                         ],
                         "heat_rejections": [
                             {
                                 "id": "Heat Rejection 1",
-                                "loop": "Chiller Loop 1",
+                                "loop": "Condenser Loop 1",
                                 "leaving_water_setpoint_temperature": 21.111111111111143
                             }
                         ]
@@ -13426,12 +13459,16 @@
                             {
                                 "id": "Chilled Water Loop 1",
                                 "type": "COOLING"
+                            },
+                            {
+                                "id": "Condenser Loop 1",
+                                "type": "CONDENSER"
                             }
                         ],
                         "heat_rejections": [
                             {
                                 "id": "Heat Rejection 1",
-                                "loop": "Chiller Loop 1",
+                                "loop": "Condenser Loop 1",
                                 "leaving_water_setpoint_temperature": 21.111111111111143
                             }
                         ]
@@ -26299,426 +26336,6 @@
                                                 }
                                             }
                                         ]
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                ]
-            }
-        }
-    },
-    "rule-22-41-a": {
-        "Section": 22,
-        "Rule": 41,
-        "Test": "a",
-        "test_description": "Purchased CHW systems modeled with only one external fluid loop in the baseline design. Returns undetermined  ",
-        "expected_rule_outcome": "undetermined",
-        "standard": {
-            "rule_id": "22-41",
-            "ruleset_reference": "Section G3.1.3 System-Specific Baseline HVAC System Requirements",
-            "rule_description": "Purchased CHW systems must be modeled with only one external fluid loop in the baseline design.  ",
-            "applicable_rmr": "Baseline RMR",
-            "rule_assertion": "=",
-            "comparison_value": "Expected Value",
-            "primary_rule": "No",
-            "schema_version": "0.0.29"
-        },
-        "rmr_transformations": {
-            "baseline": {
-                "id": "ASHRAE229 1",
-                "ruleset_model_descriptions": [
-                    {
-                        "id": "RMD 1",
-                        "buildings": [
-                            {
-                                "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
-                                "building_segments": [
-                                    {
-                                        "id": "Building Segment 1",
-                                        "zones": [
-                                            {
-                                                "id": "Thermal Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
-                                                "terminals": [
-                                                    {
-                                                        "id": "VAV Air Terminal 1",
-                                                        "is_supply_ducted": true,
-                                                        "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
-                                                        "heating_source": "HOT_WATER",
-                                                        "heating_from_loop": "Boiler Loop 1"
-                                                    }
-                                                ]
-                                            },
-                                            {
-                                                "id": "Thermal Zone 2",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
-                                                "terminals": [
-                                                    {
-                                                        "id": "VAV Air Terminal 2",
-                                                        "is_supply_ducted": true,
-                                                        "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
-                                                        "heating_source": "HOT_WATER",
-                                                        "heating_from_loop": "Boiler Loop 1"
-                                                    }
-                                                ]
-                                            }
-                                        ],
-                                        "heating_ventilating_air_conditioning_systems": [
-                                            {
-                                                "id": "System 7",
-                                                "cooling_system": {
-                                                    "id": "CHW Coil 1",
-                                                    "type": "FLUID_LOOP",
-                                                    "chilled_water_loop": "Chilled Water Loop 1"
-                                                },
-                                                "preheat_system": {
-                                                    "id": "Preheat Coil 1",
-                                                    "type": "FLUID_LOOP",
-                                                    "hot_water_loop": "Boiler Loop 1"
-                                                },
-                                                "fan_system": {
-                                                    "id": "VAV Fan System 1",
-                                                    "fan_control": "VARIABLE_SPEED_DRIVE",
-                                                    "supply_fans": [
-                                                        {
-                                                            "id": "Supply Fan 1"
-                                                        }
-                                                    ],
-                                                    "return_fans": [
-                                                        {
-                                                            "id": "Return Fan 1"
-                                                        }
-                                                    ]
-                                                }
-                                            }
-                                        ]
-                                    }
-                                ]
-                            }
-                        ],
-                        "boilers": [
-                            {
-                                "id": "Boiler 1",
-                                "loop": "Boiler Loop 1",
-                                "energy_source_type": "NATURAL_GAS"
-                            }
-                        ],
-                        "external_fluid_sources": [
-                            {
-                                "id": "Purchased CW 1",
-                                "loop": "Chilled Water Loop 1",
-                                "type": "CHILLED_WATER"
-                            }
-                        ],
-                        "pumps": [
-                            {
-                                "id": "Boiler Pump 1",
-                                "loop_or_piping": "Boiler Loop 1",
-                                "speed_control": "FIXED_SPEED"
-                            },
-                            {
-                                "id": "CHW Pump 1",
-                                "loop_or_piping": "Chilled Water Loop 1",
-                                "speed_control": "FIXED_SPEED"
-                            }
-                        ],
-                        "fluid_loops": [
-                            {
-                                "id": "Boiler Loop 1",
-                                "type": "HEATING"
-                            },
-                            {
-                                "id": "Chilled Water Loop 1",
-                                "type": "COOLING"
-                            }
-                        ]
-                    }
-                ]
-            }
-        }
-    },
-    "rule-22-41-b": {
-        "Section": 22,
-        "Rule": 41,
-        "Test": "b",
-        "test_description": "Purchased CHW systems modeled with two external fluid loops in the baseline design. Returns undetermined  ",
-        "expected_rule_outcome": "undetermined",
-        "standard": {
-            "rule_id": "22-41",
-            "ruleset_reference": "Section G3.1.3 System-Specific Baseline HVAC System Requirements",
-            "rule_description": "Purchased CHW systems must be modeled with only one external fluid loop in the baseline design.  ",
-            "applicable_rmr": "Baseline RMR",
-            "rule_assertion": "=",
-            "comparison_value": "Expected Value",
-            "primary_rule": "No",
-            "schema_version": "0.0.29"
-        },
-        "rmr_transformations": {
-            "baseline": {
-                "id": "ASHRAE229 1",
-                "ruleset_model_descriptions": [
-                    {
-                        "id": "RMD 1",
-                        "buildings": [
-                            {
-                                "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
-                                "building_segments": [
-                                    {
-                                        "id": "Building Segment 1",
-                                        "zones": [
-                                            {
-                                                "id": "Thermal Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
-                                                "terminals": [
-                                                    {
-                                                        "id": "VAV Air Terminal 1",
-                                                        "is_supply_ducted": true,
-                                                        "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
-                                                        "heating_source": "HOT_WATER",
-                                                        "heating_from_loop": "Boiler Loop 1"
-                                                    }
-                                                ]
-                                            },
-                                            {
-                                                "id": "Thermal Zone 2",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
-                                                "terminals": [
-                                                    {
-                                                        "id": "VAV Air Terminal 2",
-                                                        "is_supply_ducted": true,
-                                                        "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
-                                                        "heating_source": "HOT_WATER",
-                                                        "heating_from_loop": "Boiler Loop 1"
-                                                    }
-                                                ]
-                                            }
-                                        ],
-                                        "heating_ventilating_air_conditioning_systems": [
-                                            {
-                                                "id": "System 7",
-                                                "cooling_system": {
-                                                    "id": "CHW Coil 1",
-                                                    "type": "FLUID_LOOP",
-                                                    "chilled_water_loop": "Chilled Water Loop 1"
-                                                },
-                                                "preheat_system": {
-                                                    "id": "Preheat Coil 1",
-                                                    "type": "FLUID_LOOP",
-                                                    "hot_water_loop": "Boiler Loop 1"
-                                                },
-                                                "fan_system": {
-                                                    "id": "VAV Fan System 1",
-                                                    "fan_control": "VARIABLE_SPEED_DRIVE",
-                                                    "supply_fans": [
-                                                        {
-                                                            "id": "Supply Fan 1"
-                                                        }
-                                                    ],
-                                                    "return_fans": [
-                                                        {
-                                                            "id": "Return Fan 1"
-                                                        }
-                                                    ]
-                                                }
-                                            }
-                                        ]
-                                    }
-                                ]
-                            }
-                        ],
-                        "boilers": [
-                            {
-                                "id": "Boiler 1",
-                                "loop": "Boiler Loop 1",
-                                "energy_source_type": "NATURAL_GAS"
-                            }
-                        ],
-                        "external_fluid_sources": [
-                            {
-                                "id": "Purchased CW 1",
-                                "loop": "Chilled Water Loop 1",
-                                "type": "CHILLED_WATER"
-                            },
-                            {
-                                "id": "Purchased CW 2",
-                                "loop": "Chilled Water Loop 1",
-                                "type": "CHILLED_WATER"
-                            }
-                        ],
-                        "pumps": [
-                            {
-                                "id": "Boiler Pump 1",
-                                "loop_or_piping": "Boiler Loop 1",
-                                "speed_control": "FIXED_SPEED"
-                            },
-                            {
-                                "id": "CHW Pump 1",
-                                "loop_or_piping": "Chilled Water Loop 1",
-                                "speed_control": "FIXED_SPEED"
-                            }
-                        ],
-                        "fluid_loops": [
-                            {
-                                "id": "Boiler Loop 1",
-                                "type": "HEATING"
-                            },
-                            {
-                                "id": "Chilled Water Loop 1",
-                                "type": "COOLING"
-                            }
-                        ]
-                    }
-                ]
-            }
-        }
-    },
-    "rule-22-41-c": {
-        "Section": 22,
-        "Rule": 41,
-        "Test": "c",
-        "test_description": "Baseline building does not utilize purchased chilled water and does not apply to rule 22-41",
-        "expected_rule_outcome": "not_applicable",
-        "standard": {
-            "rule_id": "22-41",
-            "ruleset_reference": "Section G3.1.3 System-Specific Baseline HVAC System Requirements",
-            "rule_description": "Purchased CHW systems must be modeled with only one external fluid loop in the baseline design.  ",
-            "applicable_rmr": "Baseline RMR",
-            "rule_assertion": "=",
-            "comparison_value": "Expected Value",
-            "primary_rule": "No",
-            "schema_version": "0.0.29"
-        },
-        "rmr_transformations": {
-            "baseline": {
-                "id": "ASHRAE229 1",
-                "ruleset_model_descriptions": [
-                    {
-                        "id": "RMD 1",
-                        "buildings": [
-                            {
-                                "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
-                                "building_segments": [
-                                    {
-                                        "id": "Building Segment 1",
-                                        "zones": [
-                                            {
-                                                "id": "Thermal Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
-                                                "terminals": [
-                                                    {
-                                                        "id": "VAV Air Terminal 1",
-                                                        "is_supply_ducted": true,
-                                                        "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
-                                                        "heating_source": "HOT_WATER",
-                                                        "heating_from_loop": "Boiler Loop 1"
-                                                    }
-                                                ]
-                                            },
-                                            {
-                                                "id": "Thermal Zone 2",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
-                                                "terminals": [
-                                                    {
-                                                        "id": "VAV Air Terminal 2",
-                                                        "is_supply_ducted": true,
-                                                        "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
-                                                        "heating_source": "HOT_WATER",
-                                                        "heating_from_loop": "Boiler Loop 1"
-                                                    }
-                                                ]
-                                            }
-                                        ],
-                                        "heating_ventilating_air_conditioning_systems": [
-                                            {
-                                                "id": "System 7",
-                                                "cooling_system": {
-                                                    "id": "CHW Coil 1",
-                                                    "type": "FLUID_LOOP",
-                                                    "chilled_water_loop": "Secondary CHW Loop 1"
-                                                },
-                                                "preheat_system": {
-                                                    "id": "Preheat Coil 1",
-                                                    "type": "FLUID_LOOP",
-                                                    "hot_water_loop": "Boiler Loop 1"
-                                                },
-                                                "fan_system": {
-                                                    "id": "VAV Fan System 1",
-                                                    "fan_control": "VARIABLE_SPEED_DRIVE",
-                                                    "supply_fans": [
-                                                        {
-                                                            "id": "Supply Fan 1"
-                                                        }
-                                                    ],
-                                                    "return_fans": [
-                                                        {
-                                                            "id": "Return Fan 1"
-                                                        }
-                                                    ]
-                                                }
-                                            }
-                                        ]
-                                    }
-                                ]
-                            }
-                        ],
-                        "boilers": [
-                            {
-                                "id": "Boiler 1",
-                                "loop": "Boiler Loop 1",
-                                "energy_source_type": "NATURAL_GAS"
-                            }
-                        ],
-                        "chillers": [
-                            {
-                                "id": "Chiller 1",
-                                "cooling_loop": "Chiller Loop 1"
-                            }
-                        ],
-                        "pumps": [
-                            {
-                                "id": "Boiler Pump 1",
-                                "loop_or_piping": "Boiler Loop 1",
-                                "speed_control": "FIXED_SPEED"
-                            },
-                            {
-                                "id": "Chiller Pump 1",
-                                "loop_or_piping": "Chiller Loop 1",
-                                "speed_control": "FIXED_SPEED"
-                            },
-                            {
-                                "id": "Secondary CHW Pump",
-                                "loop_or_piping": "Secondary CHW Loop 1",
-                                "speed_control": "VARIABLE_SPEED"
-                            }
-                        ],
-                        "fluid_loops": [
-                            {
-                                "id": "Boiler Loop 1",
-                                "type": "HEATING"
-                            },
-                            {
-                                "id": "Chiller Loop 1",
-                                "type": "COOLING",
-                                "child_loops": [
-                                    {
-                                        "id": "Secondary CHW Loop 1",
-                                        "type": "COOLING"
                                     }
                                 ]
                             }

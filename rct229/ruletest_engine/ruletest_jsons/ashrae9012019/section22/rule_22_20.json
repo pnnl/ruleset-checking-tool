@@ -137,12 +137,16 @@
                                         "type": "COOLING"
                                     }
                                 ]
+                            },
+                            {
+                                "id": "Condenser Loop 1",
+                                "type": "CONDENSER"
                             }
                         ],
                         "heat_rejections": [
                             {
                                 "id": "Heat Rejection 1",
-                                "loop": "Chiller Loop 1",
+                                "loop": "Condenser Loop 1",
                                 "leaving_water_setpoint_temperature": 23.888888888888914
                             }
                         ]
@@ -292,12 +296,16 @@
                                         "type": "COOLING"
                                     }
                                 ]
+                            },
+                            {
+                                "id": "Condenser Loop 1",
+                                "type": "CONDENSER"
                             }
                         ],
                         "heat_rejections": [
                             {
                                 "id": "Heat Rejection 1",
-                                "loop": "Chiller Loop 1",
+                                "loop": "Condenser Loop 1",
                                 "leaving_water_setpoint_temperature": 26.666666666666686
                             }
                         ]
@@ -454,12 +462,16 @@
                                         "type": "COOLING"
                                     }
                                 ]
+                            },
+                            {
+                                "id": "Condenser Loop 1",
+                                "type": "CONDENSER"
                             }
                         ],
                         "heat_rejections": [
                             {
                                 "id": "Heat Rejection 1",
-                                "loop": "Chiller Loop 1",
+                                "loop": "Condenser Loop 1",
                                 "leaving_water_setpoint_temperature": 18.33333333333337
                             }
                         ]
@@ -616,12 +628,16 @@
                                         "type": "COOLING"
                                     }
                                 ]
+                            },
+                            {
+                                "id": "Condenser Loop 1",
+                                "type": "CONDENSER"
                             }
                         ],
                         "heat_rejections": [
                             {
                                 "id": "Heat Rejection 1",
-                                "loop": "Chiller Loop 1",
+                                "loop": "Condenser Loop 1",
                                 "leaving_water_setpoint_temperature": 21.111111111111143
                             }
                         ]
@@ -744,12 +760,16 @@
                             {
                                 "id": "Chilled Water Loop 1",
                                 "type": "COOLING"
+                            },
+                            {
+                                "id": "Condenser Loop 1",
+                                "type": "CONDENSER"
                             }
                         ],
                         "heat_rejections": [
                             {
                                 "id": "Heat Rejection 1",
-                                "loop": "Chiller Loop 1",
+                                "loop": "Condenser Loop 1",
                                 "leaving_water_setpoint_temperature": 21.111111111111143
                             }
                         ]

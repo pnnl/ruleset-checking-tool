@@ -140,6 +140,10 @@
                                 "cooling_or_condensing_design_and_control": {
                                     "id": "CCDC 1"
                                 }
+                            },
+                            {
+                                "id": "Condenser Loop 1",
+                                "type": "CONDENSER"
                             }
                         ],
                         "heat_rejections": [
@@ -295,6 +299,10 @@
                                 "cooling_or_condensing_design_and_control": {
                                     "id": "CCDC 1"
                                 }
+                            },
+                            {
+                                "id": "Condenser Loop 1",
+                                "type": "CONDENSER"
                             }
                         ],
                         "heat_rejections": [
@@ -450,6 +458,10 @@
                                 "cooling_or_condensing_design_and_control": {
                                     "id": "CCDC 1"
                                 }
+                            },
+                            {
+                                "id": "Condenser Loop 1",
+                                "type": "CONDENSER"
                             }
                         ],
                         "heat_rejections": [
@@ -605,6 +617,10 @@
                                 "cooling_or_condensing_design_and_control": {
                                     "id": "CCDC 1"
                                 }
+                            },
+                            {
+                                "id": "Condenser Loop 1",
+                                "type": "CONDENSER"
                             }
                         ],
                         "heat_rejections": [

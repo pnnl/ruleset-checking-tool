@@ -141,12 +141,16 @@
                                     "id": "CCDC 1",
                                     "temperature_reset_type": "CONSTANT"
                                 }
+                            },
+                            {
+                                "id": "Condenser Loop 1",
+                                "type": "CONDENSER"
                             }
                         ],
                         "heat_rejections": [
                             {
                                 "id": "Heat Rejection 1",
-                                "loop": "Chiller Loop 1"
+                                "loop": "Condenser Loop 1"
                             }
                         ]
                     }
@@ -296,12 +300,16 @@
                                     "id": "CCDC 1",
                                     "temperature_reset_type": "OUTSIDE_AIR_RESET"
                                 }
+                            },
+                            {
+                                "id": "Condenser Loop 1",
+                                "type": "CONDENSER"
                             }
                         ],
                         "heat_rejections": [
                             {
                                 "id": "Heat Rejection 1",
-                                "loop": "Chiller Loop 1"
+                                "loop": "Condenser Loop 1"
                             }
                         ]
                     }
@@ -434,12 +442,16 @@
                                     "id": "CCDC 1",
                                     "temperature_reset_type": "CONSTANT"
                                 }
+                            },
+                            {
+                                "id": "Condenser Loop 1",
+                                "type": "CONDENSER"
                             }
                         ],
                         "heat_rejections": [
                             {
                                 "id": "Heat Rejection 1",
-                                "loop": "Chiller Loop 1"
+                                "loop": "Condenser Loop 1"
                             }
                         ]
                     }
@@ -572,12 +584,16 @@
                                     "id": "CCDC 1",
                                     "temperature_reset_type": "OUTSIDE_AIR_RESET"
                                 }
+                            },
+                            {
+                                "id": "Condenser Loop 1",
+                                "type": "CONDENSER"
                             }
                         ],
                         "heat_rejections": [
                             {
                                 "id": "Heat Rejection 1",
-                                "loop": "Chiller Loop 1"
+                                "loop": "Condenser Loop 1"
                             }
                         ]
                     }
@@ -700,12 +716,16 @@
                                     "id": "CCDC 1",
                                     "temperature_reset_type": "OUTSIDE_AIR_RESET"
                                 }
+                            },
+                            {
+                                "id": "Condenser Loop 1",
+                                "type": "CONDENSER"
                             }
                         ],
                         "heat_rejections": [
                             {
                                 "id": "Heat Rejection 1",
-                                "loop": "Chiller Loop 1"
+                                "loop": "Condenser Loop 1"
                             }
                         ]
                     }
