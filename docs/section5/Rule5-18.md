@@ -39,6 +39,8 @@
     **Rule Assertion:**
   
     - Case 1: For each area type that is in Table G3.1.1-1, if all related building segments are new and area type window-wall-ratio matches Table G3.1.1-1 allowance: `if ( NOT manual_check_flag) AND ( area_type_wwr == data_lookup(table_G3_1_1_1, area_type_b) ): PASS`
+     
+        - Conservative comparison less equal: `if AHJ_RA_compare AND ( NOT manual_check_flag) AND ( area_type_wwr <= data_lookup(table_G3_1_1_1, area_type_b) ): PASS`
 
     - Case 2: Else if all building segments in building are new and building segment window-wall-ratio does not match Table G3.1.1-1 allowance: `else if ( NOT manual_check_flag ) AND ( area_type_wwr != data_lookup(table_G3_1_1_1, area_type_b) ): FAIL`
 
