@@ -20,7 +20,7 @@ class Section22Rule41(PartialRuleDefinition):
             manual_check_required_msg="B-RMD IS MODELED WITH PURCHASED CHILLED WATER. VERIFY THAT THERE IS ONLY ONE PURCHASED CHILLED WATER LOOP IN THE BASELINE MODEL.",
         )
 
-    def rule_check(self, context, calc_vals=None, data=None):
+    def applicability_check(self, context, calc_vals, data):
         rmd_b = context.baseline
         purchased_chw_hhw_status_dict_b = check_purchased_chw_hhw_status_dict(rmd_b)
 
