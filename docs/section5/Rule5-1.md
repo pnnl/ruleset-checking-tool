@@ -65,8 +65,8 @@ Determine which RMDs have been created/provided
     
 - **Rule Assertion:** 
 - Case 1: If the fenestration area differs by 5% or more by orientation and there are 6 RMIs (for user, proposed, baseline at 0 degrees, baseline at 90 degrees, baseline at 180 degrees, and baseline at 270 degrees) and 5 output files (excludes an output for the user model) then Pass: `if rotation_expected == TRUE and has_user == TRUE and has_proposed == TRUE and has_baseline_0 == TRUE and and has_baseline_90 == TRUE and and has_baseline_180 == TRUE and and has_baseline_270 == TRUE and has_proposed_output == TRUE and has_baseline_0_output == TRUE and and has_baseline_90_output == TRUE and and has_baseline_180_output == TRUE and and has_baseline_270_output == TRUE and number_of_rmds == 6 and counter == 5: outcome = "PASS" `  
-- Case 2: Else if the fenestration area differs by less than 5% and there are 3 RMIs (for user, proposed, baseline at 0 degrees) and 2 output files (excludes an output for the user model) then Pass: `if rotation_expected == FALSE and has_user == TRUE and has_proposed == TRUE and has_baseline_0 == TRUE and has_proposed_output == TRUE and has_baseline_0_output == TRUE and number_of_rmds == 3 and counter == 2: outcome = "PASS" `  
-- Case 43: Else: `Else: outcome = "FAIL" and raise_message "Fail unless Table G3.1#5a exception #2 is applicable and it can be demonstrated that the building orientation is dictated bysite considerations.`  
+- Case 2: Else if rotation is not expected then pass as long as they have the minimally required RMDs and outputs: `if rotation_expected == FALSE and has_user == TRUE and has_proposed == TRUE and has_baseline_0 == TRUE and has_proposed_output == TRUE and has_baseline_0_output == TRUE: outcome = "PASS" `  
+- Case 43: Else: `Else: outcome = "FAIL" and raise_message "Fail unless Table G3.1#5a exception #2 is applicable and it can be demonstrated that the building orientation is dictated by site considerations.`  
 
 
 
