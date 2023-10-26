@@ -60,7 +60,7 @@ class Section19Rule36(RuleDefinitionListIndexedBase):
                 "hvac_min_oa_flow_b": CalcQ("air_flow_rate", hvac_min_oa_flow_b),
             }
 
-        def rule_check(self, context, calc_vals, data):
+        def applicability_check(self, context, calc_vals, data):
             fan_sys_b = context.baseline
 
             sensible_eff_b = calc_vals["sensible_eff_b"]
