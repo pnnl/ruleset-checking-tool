@@ -1,7 +1,7 @@
 
-# Envelope - Rule 5-42  
+# Envelope - Rule 5-32  
 
-**Rule ID:** 5-42  
+**Rule ID:** 5-32  
 **Rule Description:** The baseline roof surfaces shall be modeled using a solar reflectance of 0.30.  
 **Rule Assertion:** B-RMR SurfaceOpticalProperties:absorptance_solar_exterior = 0.7  
 **Appendix G Section:** Section G3.1-5(g) Building Envelope Modeling Requirements for the Baseline building  
@@ -37,5 +37,9 @@
           - Case 1: If roof surface solar reflectance is equal to 0.3: `if surface_optical_property_b.absorptance_solar_exterior == 0.7: PASS`  
 
           - Case 2: Else: `Else: FAIL`
+
+**Notes:**
+
+1. Update Rule ID from 5-42 to 5-32 on 10/26/2023
 
 **[Back](../_toc.md)**
