@@ -14,6 +14,7 @@ from rct229.reports.ashrae901_2019_software_test_report import (
 )
 from rct229.rule_engine.engine import evaluate_rule
 from rct229.rule_engine.rct_outcome_label import RCTOutcomeLabel
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
 from rct229.rule_engine.rulesets import RuleSet, RuleSetTest
 from rct229.rulesets import rulesets
 from rct229.ruletest_engine.ruletest_jsons.scripts.json_generation_utilities import (
@@ -242,6 +243,8 @@ def run_section_tests(test_json_name: str, ruleset_doc: RuleSet):
 
         # Generate RMR dictionaries for testing
         user_rmr, baseline_rmr, proposed_rmr = generate_test_rmrs(test_dict)
+        rmds = produce_ruleset_model_instance()
+
         rmr_trio = UserBaselineProposedVals(user_rmr, baseline_rmr, proposed_rmr)
 
         # Identify Section and rule
