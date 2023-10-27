@@ -55,7 +55,7 @@ class Section19Rule11((RuleDefinitionListIndexedBase)):
 
             return {"does_baseline_sys_match_list": does_baseline_sys_match_list}
 
-        def rule_check(self, context, calc_vals=None, data=None):
+        def applicability_check(self, context, calc_vals, data):
             does_baseline_sys_match_list = calc_vals["does_baseline_sys_match_list"]
 
             return any(does_baseline_sys_match_list)
