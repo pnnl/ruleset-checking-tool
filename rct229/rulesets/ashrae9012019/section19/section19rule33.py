@@ -50,6 +50,13 @@ class Section19Rule33(RuleDefinitionListIndexedBase):
                 rmrs_used=UserBaselineProposedVals(True, False, True),
             )
 
+        def applicability_check(self, context, calc_vals, data):
+            hvac_p = context.proposed
+            hvac_id_p = hvac_p["id"]
+            applicable_HVAC_systems_list_p = data["applicable_HVAC_systems_list_p"]
+
+            return hvac_id_p in applicable_HVAC_systems_list_p
+
         def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
             hvac_b = context.baseline
             hvac_id_b = hvac_b["id"]
@@ -67,9 +74,3 @@ class Section19Rule33(RuleDefinitionListIndexedBase):
                 f"Note that per the RMD the fan associated with {hvac_id_b} is operating as {operation_during_occupied_p} during occupied hours. "
                 f"This may require further investigation if only heating or cooling is being simulated to meet Section G3.1-10 HVAC Systems proposed column c or d because different fan operation will be required depending on whether the system is operating in heating or cooling mode. "
             )
-
-        def applicability_check(self, context, calc_vals, data):
-            hvac_p = context.proposed
-            applicable_HVAC_systems_list_p = data["applicable_HVAC_systems_list_p"]
-
-            return hvac_p in applicable_HVAC_systems_list_p
