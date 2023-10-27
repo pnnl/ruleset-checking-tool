@@ -56,10 +56,9 @@ class Section19Rule33(RuleDefinitionListIndexedBase):
 
             hvac_p = context.proposed
             hvac_id_p = hvac_p["id"]
-            fan_system_p = hvac_p
 
             operation_during_occupied_p = getattr_(
-                fan_system_p, "fan_system", "operation_during_occupied"
+                hvac_p, "HVAC", "fan_system", "operation_during_occupied"
             )
 
             return (
