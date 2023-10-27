@@ -123,5 +123,5 @@ class Section22Rule17(RuleDefinitionListIndexedBase):
 
             return undetermined_msg
 
-        def rule_check(self, context, calc_vals=None, data=None):
+        def applicability_check(self, context, calc_vals, data):
             return True
