@@ -47,18 +47,18 @@ class Section19Rule11((RuleDefinitionListIndexedBase)):
         def get_calc_vals(self, context, data=None):
             baseline_system_types_dict = data["baseline_system_types_dict"]
 
-            does_baseline_sys_match_list = [
+            does_baseline_sys_match_list_b = [
                 baseline_system_type_compare(system_type, applicable_sys_type, False)
                 for system_type in baseline_system_types_dict
                 for applicable_sys_type in APPLICABLE_SYS_TYPES
             ]
 
-            return {"does_baseline_sys_match_list": does_baseline_sys_match_list}
+            return {"does_baseline_sys_match_list_b": does_baseline_sys_match_list_b}
 
         def applicability_check(self, context, calc_vals, data):
-            does_baseline_sys_match_list = calc_vals["does_baseline_sys_match_list"]
+            does_baseline_sys_match_list_b = calc_vals["does_baseline_sys_match_list_b"]
 
-            return any(does_baseline_sys_match_list)
+            return any(does_baseline_sys_match_list_b)
 
         def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
             hvac_b = context.baseline
