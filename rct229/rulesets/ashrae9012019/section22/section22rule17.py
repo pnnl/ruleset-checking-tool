@@ -91,7 +91,7 @@ class Section22Rule17(RuleDefinitionListIndexedBase):
             }
 
         def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
-            heat_rejection_b = context.baseline
+            heat_rejection_b = context.BASELINE_0
 
             additional_note_for_no_shaft_power_b = (
                 ""

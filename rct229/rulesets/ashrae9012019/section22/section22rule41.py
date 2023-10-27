@@ -23,7 +23,7 @@ class Section22Rule41(PartialRuleDefinition):
         )
 
     def applicability_check(self, context, calc_vals, data):
-        rmd_b = context.baseline
+        rmd_b = context.BASELINE_0
         purchased_chw_hhw_status_dict_b = check_purchased_chw_hhw_status_dict(rmd_b)
 
         return not purchased_chw_hhw_status_dict_b["purchased_cooling"]

@@ -24,7 +24,7 @@ class Section22Rule12(RuleDefinitionBase):
         )
 
     def is_applicable(self, context, data=None):
-        rmd_b = context.baseline
+        rmd_b = context.BASELINE_0
         heat_rejection_loop_ids_b = (
             get_heat_rejection_loops_connected_to_baseline_systems(rmd_b)
         )
@@ -32,7 +32,7 @@ class Section22Rule12(RuleDefinitionBase):
         return heat_rejection_loop_ids_b
 
     def get_calc_vals(self, context, data=None):
-        rmd_b = context.baseline
+        rmd_b = context.BASELINE_0
         heat_rejection_loop_ids_b = (
             get_heat_rejection_loops_connected_to_baseline_systems(rmd_b)
         )
