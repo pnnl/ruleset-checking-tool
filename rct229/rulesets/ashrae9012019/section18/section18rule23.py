@@ -50,7 +50,7 @@ class Section18Rule23(RuleDefinitionListIndexedBase):
 
             return {"target_baseline_systems_b": target_baseline_systems_b}
 
-        def rule_check(self, context, calc_vals, data=None):
+        def applicability_check(self, context, calc_vals, data):
             target_baseline_systems_b = calc_vals["target_baseline_systems_b"]
 
             return any(
