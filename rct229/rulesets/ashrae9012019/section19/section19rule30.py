@@ -42,13 +42,7 @@ class Section19Rule30(RuleDefinitionListIndexedBase):
                 rmrs_used=UserBaselineProposedVals(False, True, False),
             )
 
-        def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
-            hvac_b = context.baseline
-            hvac_id_b = hvac_b["id"]
-
-            return f"FOR {hvac_id_b} perform manual check that only the terminal-unit fan and reheat coil are being energized to meet the heating set point during unoccupied hours."
-
-        def rule_check(self, context, calc_vals, data):
+        def applicability_check(self, context, calc_vals, data):
             rmd_b = context.baseline
             baseline_system_types_dict_b = get_baseline_system_types(rmd_b)
 
@@ -61,3 +55,9 @@ class Section19Rule30(RuleDefinitionListIndexedBase):
                     for applicable_sys_type in APPLICABLE_SYS_TYPES
                 ]
             )
+
+        def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
+            hvac_b = context.baseline
+            hvac_id_b = hvac_b["id"]
+
+            return f"FOR {hvac_id_b} perform manual check that only the terminal-unit fan and reheat coil are being energized to meet the heating set point during unoccupied hours."
