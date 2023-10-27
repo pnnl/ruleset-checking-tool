@@ -150,7 +150,8 @@
                                 "unmet_occupied_load_hours_cooling": 0,
                                 "building_peak_cooling_load": 703400.0
                             }
-                        }
+                        },
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -311,7 +312,8 @@
                                 "unmet_occupied_load_hours_cooling": 0,
                                 "building_peak_cooling_load": 703400.0
                             }
-                        }
+                        },
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -472,7 +474,8 @@
                                 "unmet_occupied_load_hours_cooling": 0,
                                 "building_peak_cooling_load": 1582650.0
                             }
-                        }
+                        },
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -629,7 +632,8 @@
                                 "unmet_occupied_load_hours_cooling": 0,
                                 "building_peak_cooling_load": 1582650.0
                             }
-                        }
+                        },
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -794,7 +798,8 @@
                                 "unmet_occupied_load_hours_cooling": 0,
                                 "building_peak_cooling_load": 8440800.0
                             }
-                        }
+                        },
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -955,7 +960,8 @@
                                 "unmet_occupied_load_hours_cooling": 0,
                                 "building_peak_cooling_load": 8440800.0
                             }
-                        }
+                        },
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -1073,7 +1079,8 @@
                                 "id": "Boiler Loop 1",
                                 "type": "HEATING"
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }

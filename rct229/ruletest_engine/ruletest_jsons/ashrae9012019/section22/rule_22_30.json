@@ -109,7 +109,8 @@
                                 "id": "Condensing Loop 1",
                                 "pump_power_per_flow_rate": 348.7450462351387
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -225,7 +226,8 @@
                                 "id": "Condensing Loop 1",
                                 "pump_power_per_flow_rate": 396.3011889035667
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -358,7 +360,8 @@
                                 "id": "Condensing Loop 1",
                                 "pump_power_per_flow_rate": 348.7450462351387
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -491,7 +494,8 @@
                                 "id": "Condensing Loop 1",
                                 "pump_power_per_flow_rate": 396.3011889035667
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -636,7 +640,8 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }

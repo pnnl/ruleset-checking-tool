@@ -151,7 +151,8 @@
                                 "type": "OPEN_CIRCUIT_COOLING_TOWER",
                                 "fan_type": "AXIAL"
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -309,7 +310,8 @@
                                 "type": "OPEN_CIRCUIT_COOLING_TOWER",
                                 "fan_type": "CENTRIFUGAL"
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -467,7 +469,8 @@
                                 "type": "OPEN_CIRCUIT_COOLING_TOWER",
                                 "fan_type": "AXIAL"
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }

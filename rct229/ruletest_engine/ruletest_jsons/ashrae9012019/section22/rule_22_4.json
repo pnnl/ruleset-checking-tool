@@ -145,7 +145,8 @@
                                     "loop_supply_temperature_at_outdoor_low": 12.222222222222285
                                 }
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -297,7 +298,8 @@
                                     "loop_supply_temperature_at_outdoor_low": 12.222222222222285
                                 }
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -449,7 +451,8 @@
                                     "loop_supply_temperature_at_outdoor_low": 12.222222222222285
                                 }
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -584,7 +587,8 @@
                                     "loop_supply_temperature_at_outdoor_low": 12.222222222222285
                                 }
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -719,7 +723,8 @@
                                     "loop_supply_temperature_at_outdoor_low": 12.222222222222285
                                 }
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -854,7 +859,8 @@
                                     "loop_supply_temperature_at_outdoor_low": 13.888888888888914
                                 }
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -955,7 +961,8 @@
                                 "id": "Chilled Water Loop 1",
                                 "type": "COOLING"
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }

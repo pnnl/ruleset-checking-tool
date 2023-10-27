@@ -151,7 +151,8 @@
                                 "unmet_occupied_load_hours_cooling": 0,
                                 "building_peak_cooling_load": 703400.0
                             }
-                        }
+                        },
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -309,7 +310,8 @@
                                 "unmet_occupied_load_hours_cooling": 0,
                                 "building_peak_cooling_load": 703400.0
                             }
-                        }
+                        },
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -469,7 +471,8 @@
                                 "unmet_occupied_load_hours_cooling": 0,
                                 "building_peak_cooling_load": 2813600.0
                             }
-                        }
+                        },
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -629,7 +632,8 @@
                                 "unmet_occupied_load_hours_cooling": 0,
                                 "building_peak_cooling_load": 2813600.0
                             }
-                        }
+                        },
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -718,7 +722,8 @@
                                 "id": "Boiler Loop 1",
                                 "type": "HEATING"
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }

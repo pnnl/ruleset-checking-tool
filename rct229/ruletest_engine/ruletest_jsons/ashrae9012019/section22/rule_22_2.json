@@ -142,7 +142,8 @@
                                     "design_return_temperature": 13.333333333333371
                                 }
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -291,7 +292,8 @@
                                     "design_return_temperature": 15.5555555555556
                                 }
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -447,7 +449,8 @@
                                     "design_return_temperature": 13.333333333333371
                                 }
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -603,7 +606,8 @@
                                     "design_return_temperature": 15.5555555555556
                                 }
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -678,7 +682,8 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }

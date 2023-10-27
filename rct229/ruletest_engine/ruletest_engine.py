@@ -14,12 +14,12 @@ from rct229.reports.ashrae901_2019_software_test_report import (
 )
 from rct229.rule_engine.engine import evaluate_rule
 from rct229.rule_engine.rct_outcome_label import RCTOutcomeLabel
-from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_instance
 from rct229.rule_engine.rulesets import RuleSet, RuleSetTest
 from rct229.rulesets import rulesets
 from rct229.ruletest_engine.ruletest_jsons.scripts.json_generation_utilities import (
     merge_nested_dictionary,
 )
+from rct229.ruletest_engine.ruletest_rmd_factory import get_ruletest_rmd_models
 from rct229.schema.schema_enums import SchemaEnums
 from rct229.schema.schema_store import SchemaStore
 from rct229.schema.validate import validate_rmr
@@ -231,7 +231,7 @@ def run_section_tests(test_json_name: str, ruleset_doc: RuleSet):
     # get all rules in the ruleset.
     SchemaStore.set_ruleset(ruleset_doc)
     SchemaEnums.update_schema_enum()
-    available_rule_definitions = rulesets.__getrules__(ruleset_doc)
+    available_rule_definitions = rulesets.__getrules__()
     available_rule_definitions_dict = {
         rule_class[0]: rule_class[1] for rule_class in available_rule_definitions
     }
@@ -242,10 +242,7 @@ def run_section_tests(test_json_name: str, ruleset_doc: RuleSet):
         test_dict = test_list_dictionary[test_id]
 
         # Generate RMR dictionaries for testing
-        user_rmr, baseline_rmr, proposed_rmr = generate_test_rmrs(test_dict)
-        rmds = produce_ruleset_model_instance()
-
-        rmr_trio = UserBaselineProposedVals(user_rmr, baseline_rmr, proposed_rmr)
+        rmr_trio = get_ruletest_rmd_models(test_dict)
 
         # Identify Section and rule
         section = test_dict["Section"]
@@ -455,11 +452,7 @@ def generate_rct_outcomes_list_from_section_list(section_list, ruleset):
                     # Load next test dictionary from test list
                     test_dict = test_list_dictionary[test_id]
 
-                    # Generate RMR dictionaries for testing
-                    user_rmr, baseline_rmr, proposed_rmr = generate_test_rmrs(test_dict)
-                    rmr_trio = UserBaselineProposedVals(
-                        user_rmr, baseline_rmr, proposed_rmr
-                    )
+                    rmr_trio = get_ruletest_rmd_models(test_dict)
 
                     # Identify Section and rule
                     section = test_dict["Section"]

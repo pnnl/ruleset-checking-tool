@@ -149,7 +149,8 @@
                                 "loop": "Condenser Loop 1",
                                 "leaving_water_setpoint_temperature": 23.888888888888914
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ],
                 "weather": {
@@ -308,7 +309,8 @@
                                 "loop": "Condenser Loop 1",
                                 "leaving_water_setpoint_temperature": 26.666666666666686
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ],
                 "weather": {
@@ -474,7 +476,8 @@
                                 "loop": "Condenser Loop 1",
                                 "leaving_water_setpoint_temperature": 18.33333333333337
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ],
                 "weather": {
@@ -640,7 +643,8 @@
                                 "loop": "Condenser Loop 1",
                                 "leaving_water_setpoint_temperature": 21.111111111111143
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ],
                 "weather": {
@@ -772,7 +776,8 @@
                                 "loop": "Condenser Loop 1",
                                 "leaving_water_setpoint_temperature": 21.111111111111143
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ],
                 "weather": {

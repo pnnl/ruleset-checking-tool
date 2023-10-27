@@ -151,7 +151,8 @@
                                 "design_wetbulb_temperature": 15.5555555555556,
                                 "approach": 6.28888888888889
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -309,7 +310,8 @@
                                 "design_wetbulb_temperature": 15.5555555555556,
                                 "approach": 8.333333333333334
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -467,7 +469,8 @@
                                 "design_wetbulb_temperature": 10.000000000000057,
                                 "approach": 7.622222222222222
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }

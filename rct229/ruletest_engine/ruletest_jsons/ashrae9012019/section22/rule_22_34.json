@@ -142,7 +142,8 @@
                                     "is_sized_using_coincident_load": true
                                 }
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -291,7 +292,8 @@
                                     "is_sized_using_coincident_load": false
                                 }
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -442,7 +444,8 @@
                                     "is_sized_using_coincident_load": true
                                 }
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -593,7 +596,8 @@
                                     "is_sized_using_coincident_load": false
                                 }
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -670,7 +674,8 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }

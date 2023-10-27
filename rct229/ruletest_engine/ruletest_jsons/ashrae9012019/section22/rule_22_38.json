@@ -138,7 +138,8 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -277,7 +278,8 @@
                                     "minimum_flow_fraction": 0.25
                                 }
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -416,7 +418,8 @@
                                     "minimum_flow_fraction": 0.4
                                 }
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }

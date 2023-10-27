@@ -108,7 +108,8 @@
                                     "loop_supply_temperature_at_low_load": 12.222222222222285
                                 }
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -223,7 +224,8 @@
                                     "loop_supply_temperature_at_low_load": 17.77777777777783
                                 }
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -355,7 +357,8 @@
                                     "loop_supply_temperature_at_low_load": 12.222222222222285
                                 }
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -487,7 +490,8 @@
                                     "loop_supply_temperature_at_low_load": 17.77777777777783
                                 }
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -643,7 +647,8 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }

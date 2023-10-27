@@ -142,7 +142,8 @@
                                     "design_supply_temperature": 6.666666666666686
                                 }
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -291,7 +292,8 @@
                                     "design_supply_temperature": 10.000000000000057
                                 }
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -440,7 +442,8 @@
                                     "design_supply_temperature": 6.666666666666686
                                 }
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -589,7 +592,8 @@
                                     "design_supply_temperature": 10.000000000000057
                                 }
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -678,7 +682,8 @@
                                 "id": "Boiler Loop 1",
                                 "type": "HEATING"
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }

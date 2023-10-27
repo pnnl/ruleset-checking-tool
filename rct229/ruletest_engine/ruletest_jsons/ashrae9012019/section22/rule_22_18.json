@@ -150,7 +150,8 @@
                                 "loop": "Condenser Loop 1",
                                 "fan_speed_control": "VARIABLE_SPEED"
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -307,7 +308,8 @@
                                 "loop": "Condenser Loop 1",
                                 "fan_speed_control": "CONSTANT"
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -452,7 +454,8 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }

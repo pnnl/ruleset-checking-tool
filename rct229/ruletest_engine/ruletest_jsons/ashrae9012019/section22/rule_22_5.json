@@ -108,7 +108,8 @@
                                     "temperature_reset_type": "LOAD_RESET"
                                 }
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -223,7 +224,8 @@
                                     "temperature_reset_type": "OUTSIDE_AIR_RESET"
                                 }
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -355,7 +357,8 @@
                                     "temperature_reset_type": "LOAD_RESET"
                                 }
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -487,7 +490,8 @@
                                     "temperature_reset_type": "OUTSIDE_AIR_RESET"
                                 }
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }

@@ -149,7 +149,8 @@
                                 "id": "Heat Rejection 1",
                                 "loop": "Condenser Loop 1"
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -314,7 +315,8 @@
                                 "id": "Heat Rejection 1",
                                 "loop": "Condenser Loop 1"
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -474,7 +476,8 @@
                                 "id": "Heat Rejection 2",
                                 "loop": "Condenser Loop 1"
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -643,7 +646,8 @@
                                 "id": "Heat Rejection 2",
                                 "loop": "Condenser Loop 1"
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -788,7 +792,8 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }

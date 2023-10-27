@@ -155,7 +155,8 @@
                                 "design_wetbulb_temperature": 12.777777777777828,
                                 "approach": 2.7777777777777777
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -317,7 +318,8 @@
                                 "design_wetbulb_temperature": 12.777777777777828,
                                 "approach": 5.555555555555555
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -479,7 +481,8 @@
                                 "design_wetbulb_temperature": 12.222222222222285,
                                 "approach": 5.555555555555555
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -624,7 +627,8 @@
                                 "design_wetbulb_temperature": 32.222222222222285,
                                 "approach": 2.7777777777777777
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -769,7 +773,8 @@
                                 "design_wetbulb_temperature": 32.222222222222285,
                                 "approach": 5.555555555555555
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -914,7 +919,8 @@
                                 "design_wetbulb_temperature": 35.5555555555556,
                                 "approach": 5.555555555555555
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }

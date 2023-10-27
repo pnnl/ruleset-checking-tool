@@ -105,7 +105,8 @@
                                 ],
                                 "pump_power_per_flow_rate": 190.22457067371204
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -217,7 +218,8 @@
                                 ],
                                 "pump_power_per_flow_rate": 237.78071334214002
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -346,7 +348,8 @@
                                 ],
                                 "pump_power_per_flow_rate": 190.22457067371204
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -475,7 +478,8 @@
                                 ],
                                 "pump_power_per_flow_rate": 237.78071334214002
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -603,7 +607,8 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
