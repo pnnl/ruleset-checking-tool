@@ -11,7 +11,7 @@ from rct229.utils.assertions import getattr_
 
 
 class Section19Rule33(RuleDefinitionListIndexedBase):
-    """Rule 11 of ASHRAE 90.1-2019 Appendix G Section 19 (Envelope)"""
+    """Rule 33 of ASHRAE 90.1-2019 Appendix G Section 19 (Envelope)"""
 
     def __init__(self):
         super(Section19Rule33, self).__init__(
@@ -69,7 +69,7 @@ class Section19Rule33(RuleDefinitionListIndexedBase):
                 f"This may require further investigation if only heating or cooling is being simulated to meet Section G3.1-10 HVAC Systems proposed column c or d because different fan operation will be required depending on whether the system is operating in heating or cooling mode. "
             )
 
-        def rule_check(self, context, calc_vals, data):
+        def applicability_check(self, context, calc_vals, data):
             hvac_p = context.proposed
             applicable_HVAC_systems_list_p = data["applicable_HVAC_systems_list_p"]
 
