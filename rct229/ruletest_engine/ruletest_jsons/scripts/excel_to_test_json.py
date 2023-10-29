@@ -9,12 +9,12 @@ from rct229.ruletest_engine.ruletest_jsons.scripts.excel_to_test_json_utilities 
 # ---------------------------------------USER INPUTS---------------------------------------
 
 # Excel to master test JSON inputs
-spreadsheet_name = "chiller_tcd_master_temp.xlsx"
-test_json_name = "chiller_tcd_master_temp.json"
+spreadsheet_name = "envelope_tcd_master.xlsx"
+test_json_name = "envelope_tcd_master.json"
 sheet_name = "TCDs"
 
 # Flag to determine if you should check the test JSON
-check_schema = False
+check_schema = True
 
 # The rule set being evaluated (e.g., 'ashrae902019'). Should correspond to a directory name in ruletests_jsons
 rule_set = "ashrae9012019"
