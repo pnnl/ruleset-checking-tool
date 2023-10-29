@@ -3,6 +3,7 @@
         "Section": 5,
         "Rule": 1,
         "Test": "a",
+        "test_description": "Project has one building segment with two above-grade wall surfaces at different azimuth angles. Each wall has a window and the windows differ in area by more than 5%. Four sets of baseline model results are appropriately provided.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-1",
@@ -328,6 +329,7 @@
         "Section": 5,
         "Rule": 1,
         "Test": "b",
+        "test_description": "Project has one building segment with two above-grade wall surfaces at different azimuth angles. Each wall has a window and the windows differ in area by less than 5%. One set of baseline model results is appropriately provided.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-1",
@@ -506,6 +508,7 @@
         "Section": 5,
         "Rule": 1,
         "Test": "c",
+        "test_description": "Project has one building segment with two above-grade wall surfaces at different azimuth angles. Each wall has a window and the windows differ in area by more than 5%. One set of baseline model results is provided, when four sets are expected.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-1",
