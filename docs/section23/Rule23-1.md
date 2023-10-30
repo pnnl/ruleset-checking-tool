@@ -7,13 +7,13 @@
 **Rule Description:** System 2 and 4 - Electric air-source heat pumps shall be modeled with electric auxiliary heat and an outdoor air thermostat. The systems shall be controlled to energize auxiliary heat only when the outdoor air temperature is less than 40°F. The air-source heat pump shall be modeled to continue to operate while auxiliary heat is energized.  
 **Rule Assertion:** B-RMR = expected value  
 **Appendix G Section:** Section 23 Air-side  
-**90.1 Section Reference:** Section G3.1.3.19 Preheat Coils (Systems 5 through 8)  
+**90.1 Section Reference:** G3.1.3.1 Heat Pumps (Systems 2 and 4)  
 **Data Lookup:** None  
 **Evaluation Context:** Building  
 
 **Applicability Checks:**  
 
-1. B-RMR is modeled with at least one air-side system that is Type-5, 6, 7, 8, 7a, 8a, 5b, 6b, 7b, 8b, 7c.  
+1. B-RMR is modeled with at least one air-side system that is Type-2, or 4  
 
 **Function Calls:**  
 
