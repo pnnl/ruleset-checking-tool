@@ -5,7 +5,7 @@
 **Rule Description:** When the baseline building requires boilers, (for baseline system type = 1,5,7,11 and 12),  HWST for the baseline building shall be reset using an outdoor air dry-bulb reset schedule. 180F at 20F OAT, 150Fat 50F OAT, ramped linerarly between 150F and 180F.  
 **Rule Assertion:** B-RMR = expected value  
 **Appendix G Section:** Section 21 Boiler  
-**Schema Version:** 0.0.025  
+**Schema Version:** 0.0.34  
 
 **Applicability:** All required data elements exist for B_RMR  
 **Applicability Checks:**  
