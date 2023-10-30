@@ -30,7 +30,7 @@ create_test_json_from_excel(spreadsheet_name, sheet_name, test_json_name)
 update_unit_convention_record(spreadsheet_name, sheet_name)
 
 # Check generated master JSON against latest schema
-json_dir = os.path.join(os.path.dirname(__file__), "../../../../../../..", rule_set)
+json_dir = os.path.join(os.path.dirname(__file__), "..", rule_set)
 test_json_path = os.path.join(json_dir, test_json_name)
 
 if check_schema:
