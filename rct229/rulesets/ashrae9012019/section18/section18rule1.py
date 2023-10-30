@@ -139,8 +139,10 @@ class Section18Rule1(RuleDefinitionListIndexedBase):
 
                 # any HVAC system serving this zone is in the `systems_of_expected_type_list_b`
                 is_system_part_of_expected_sys_type_b = any(
-                    sys_b in systems_of_expected_type_list_b
-                    for sys_b in hvac_systems_serving_zone_b
+                    [
+                        sys_b in systems_of_expected_type_list_b
+                        for sys_b in hvac_systems_serving_zone_b
+                    ]
                 )
 
                 return {
@@ -215,7 +217,7 @@ class Section18Rule1(RuleDefinitionListIndexedBase):
                     "system_origin"
                 ]
                 expected_system_type_b = zone_target_baseline_system_dict_b[
-                    "expected_system_type_b"
+                    "expected_system_type"
                 ]
 
                 return f"HVAC system type {expected_system_type_b} was selected based on {system_type_origin_b}."
