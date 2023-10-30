@@ -74,8 +74,8 @@ class Section19Rule36(RuleDefinitionListIndexedBase):
                 and fan_sys_b["air_energy_recovery"] != ENERGY_RECOVERY.NONE
                 and std_equal(REQ_SENSIBLE_EFFECTIVENESS, sensible_eff_b)
                 and std_equal(REQ_LATENT_EFFECTIVENESS, latent_eff_b)
-                and std_equal(hvac_min_oa_flow_b, ERV_OA_airflow_b)
-                and std_equal(hvac_min_oa_flow_b, ERV_EA_airflow_b)
+                and std_equal(ERV_OA_airflow_b, hvac_min_oa_flow_b)
+                and std_equal(ERV_OA_airflow_b, ERV_EA_airflow_b)
             )
 
         def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
