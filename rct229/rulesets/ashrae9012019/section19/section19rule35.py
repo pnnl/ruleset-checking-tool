@@ -53,8 +53,8 @@ class Section19Rule35(RuleDefinitionListIndexedBase):
         def create_data(self, context, data):
             rmd_b = context.baseline
             rmd_p = context.proposed
-            leap_year_b = False  # data["is_leap_year_b"]
-            leap_year_p = False  # data["is_leap_year_p"]
+            leap_year_b = data["is_leap_year_b"]
+            leap_year_p = data["is_leap_year_p"]
 
             dict_of_zones_and_terminal_units_served_by_hvac_sys_b = (
                 get_dict_of_zones_and_terminal_units_served_by_hvac_sys(rmd_b)
