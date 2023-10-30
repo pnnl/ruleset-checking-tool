@@ -20,7 +20,7 @@ class Section18Rule23(RuleDefinitionListIndexedBase):
             ruleset_section_title="HVAC",
             standard_section="Section G3.1-10 HVAC Systems for the baseline building",
             is_primary_rule=False,
-            list_path="ruleset_model_descriptions/0",
+            list_path="ruleset_model_descriptions[0]",
             required_fields={
                 "$": ["calendar", "weather"],
                 "$.weather": ["climate_zone"],
