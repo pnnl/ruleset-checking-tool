@@ -7,13 +7,13 @@
 **Rule Description:** Baseline systems 5 & 7 serving lab spaces per G3.1.1c shall reduce lab exhaust and makeup air during unoccupied periods to 50% of zone peak airflow, the minimum outdoor airflow, or rate required to comply with minimum accreditation standards whichever is larger.
 **Rule Assertion:** B-RMR = expected value  
 **Appendix G Section:** Section 23 Air-side  
-**90.1 Section Reference:** Section G3.1.3.19 Preheat Coils (Systems 5 through 8)  
+**90.1 Section Reference:** G3.1.3.13 VAV Minimum Flow Set Points (Systems 5 and 7)  
 **Data Lookup:** None  
 **Evaluation Context:** Building  
 
 **Applicability Checks:**  
 
-1. B-RMR is modeled with at least one air-side system that is Type-11.  
+1. B-RMR is modeled with at least one air-side system that is Type-5 or 7.  
 
 **Function Calls:**  
 
