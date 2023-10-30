@@ -25,4 +25,8 @@
 
 - Case 3: Else, site shading is modeled differently in B-RMR and P-RMR: `else: FAIL`
 
+**Notes:**
+
+1. BASELINE=PROPOSED match, archived on 10/26/2023
+
 **[Back](../_toc.md)**

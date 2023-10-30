@@ -36,3 +36,7 @@
             - Case 1: Surface construction F-factor in P_RMR matches U_RMR: `if surface_p.construction.f_factor == surface_u.construction.f_factor: PASS`  
 
             - Case 2: Else: `else: FAIL`  
+
+**Notes:**
+
+1. USER=PROPOSED match archived on 10/26/2023
