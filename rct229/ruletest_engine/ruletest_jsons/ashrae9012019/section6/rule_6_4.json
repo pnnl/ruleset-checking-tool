@@ -7,13 +7,13 @@
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "6-4",
-            "ruleset_reference": "(Previously 6-7, then 6-5) Table G3.1(6) Baseline Building Performance",
+            "ruleset_reference": "Table G3.1(6) Baseline Building Performance",
             "rule_description": "Where a complete lighting system exists and where a lighting system has been designed and submitted with design documents, the baseline LPD is equal to expected value in Standard 90.1-2019 Table G3.7. Where lighting neither exists nor is submitted with design documents, baseline LPD shall be determined in accordance with Table G3-7 for \"Office-Open Plan\" space type.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Design",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "rule_dependency": "None",
-            "mandatory_rule": "Yes",
+            "rule_dependency": "-",
+            "mandatory_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -114,13 +114,13 @@
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "6-4",
-            "ruleset_reference": "(Previously 6-7, then 6-5) Table G3.1(6) Baseline Building Performance",
+            "ruleset_reference": "Table G3.1(6) Baseline Building Performance",
             "rule_description": "Where a complete lighting system exists and where a lighting system has been designed and submitted with design documents, the baseline LPD is equal to expected value in Standard 90.1-2019 Table G3.7. Where lighting neither exists nor is submitted with design documents, baseline LPD shall be determined in accordance with Table G3-7 for \"Office-Open Plan\" space type.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Design",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "rule_dependency": "None",
-            "mandatory_rule": "Yes",
+            "rule_dependency": "-",
+            "mandatory_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -222,13 +222,13 @@
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "6-4",
-            "ruleset_reference": "(Previously 6-7, then 6-5) Table G3.1(6) Baseline Building Performance",
+            "ruleset_reference": "Table G3.1(6) Baseline Building Performance",
             "rule_description": "Where a complete lighting system exists and where a lighting system has been designed and submitted with design documents, the baseline LPD is equal to expected value in Standard 90.1-2019 Table G3.7. Where lighting neither exists nor is submitted with design documents, baseline LPD shall be determined in accordance with Table G3-7 for \"Office-Open Plan\" space type.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Design",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "rule_dependency": "None",
-            "mandatory_rule": "Yes",
+            "rule_dependency": "-",
+            "mandatory_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -330,13 +330,13 @@
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "6-4",
-            "ruleset_reference": "(Previously 6-7, then 6-5) Table G3.1(6) Baseline Building Performance",
+            "ruleset_reference": "Table G3.1(6) Baseline Building Performance",
             "rule_description": "Where a complete lighting system exists and where a lighting system has been designed and submitted with design documents, the baseline LPD is equal to expected value in Standard 90.1-2019 Table G3.7. Where lighting neither exists nor is submitted with design documents, baseline LPD shall be determined in accordance with Table G3-7 for \"Office-Open Plan\" space type.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Design",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "rule_dependency": "None",
-            "mandatory_rule": "Yes",
+            "rule_dependency": "-",
+            "mandatory_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -436,13 +436,13 @@
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "6-4",
-            "ruleset_reference": "(Previously 6-7, then 6-5) Table G3.1(6) Baseline Building Performance",
+            "ruleset_reference": "Table G3.1(6) Baseline Building Performance",
             "rule_description": "Where a complete lighting system exists and where a lighting system has been designed and submitted with design documents, the baseline LPD is equal to expected value in Standard 90.1-2019 Table G3.7. Where lighting neither exists nor is submitted with design documents, baseline LPD shall be determined in accordance with Table G3-7 for \"Office-Open Plan\" space type.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Design",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "rule_dependency": "None",
-            "mandatory_rule": "Yes",
+            "rule_dependency": "-",
+            "mandatory_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {

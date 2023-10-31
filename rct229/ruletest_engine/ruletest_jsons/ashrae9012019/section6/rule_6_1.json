@@ -7,13 +7,13 @@
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "6-1",
-            "ruleset_reference": "(previously 6-2) Section G1.2.1(b)",
+            "ruleset_reference": "Section G1.2.1(b)",
             "rule_description": "The total proposed building  interior lighting power shall not exceed the interior lighting power allowance determined using either Standard 90.1-2019 Table G3.7 or Standard 90.1-2019 Table G3.8.",
-            "applicable_rmr": "Proposed RMR",
+            "applicable_rmr": "Proposed Design",
             "rule_assertion": "<=",
             "comparison_value": "Expected Value",
-            "rule_dependency": "None",
-            "mandatory_rule": "Yes",
+            "rule_dependency": "-",
+            "mandatory_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -83,13 +83,13 @@
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "6-1",
-            "ruleset_reference": "(previously 6-2) Section G1.2.1(b)",
+            "ruleset_reference": "Section G1.2.1(b)",
             "rule_description": "The total proposed building  interior lighting power shall not exceed the interior lighting power allowance determined using either Standard 90.1-2019 Table G3.7 or Standard 90.1-2019 Table G3.8.",
-            "applicable_rmr": "Proposed RMR",
+            "applicable_rmr": "Proposed Design",
             "rule_assertion": "<=",
             "comparison_value": "Expected Value",
-            "rule_dependency": "None",
-            "mandatory_rule": "Yes",
+            "rule_dependency": "-",
+            "mandatory_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -159,13 +159,13 @@
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "6-1",
-            "ruleset_reference": "(previously 6-2) Section G1.2.1(b)",
+            "ruleset_reference": "Section G1.2.1(b)",
             "rule_description": "The total proposed building  interior lighting power shall not exceed the interior lighting power allowance determined using either Standard 90.1-2019 Table G3.7 or Standard 90.1-2019 Table G3.8.",
-            "applicable_rmr": "Proposed RMR",
+            "applicable_rmr": "Proposed Design",
             "rule_assertion": "<=",
             "comparison_value": "Expected Value",
-            "rule_dependency": "None",
-            "mandatory_rule": "Yes",
+            "rule_dependency": "-",
+            "mandatory_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -234,13 +234,13 @@
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "6-1",
-            "ruleset_reference": "(previously 6-2) Section G1.2.1(b)",
+            "ruleset_reference": "Section G1.2.1(b)",
             "rule_description": "The total proposed building  interior lighting power shall not exceed the interior lighting power allowance determined using either Standard 90.1-2019 Table G3.7 or Standard 90.1-2019 Table G3.8.",
-            "applicable_rmr": "Proposed RMR",
+            "applicable_rmr": "Proposed Design",
             "rule_assertion": "<=",
             "comparison_value": "Expected Value",
-            "rule_dependency": "None",
-            "mandatory_rule": "Yes",
+            "rule_dependency": "-",
+            "mandatory_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -309,13 +309,13 @@
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "6-1",
-            "ruleset_reference": "(previously 6-2) Section G1.2.1(b)",
+            "ruleset_reference": "Section G1.2.1(b)",
             "rule_description": "The total proposed building  interior lighting power shall not exceed the interior lighting power allowance determined using either Standard 90.1-2019 Table G3.7 or Standard 90.1-2019 Table G3.8.",
-            "applicable_rmr": "Proposed RMR",
+            "applicable_rmr": "Proposed Design",
             "rule_assertion": "<=",
             "comparison_value": "Expected Value",
-            "rule_dependency": "None",
-            "mandatory_rule": "Yes",
+            "rule_dependency": "-",
+            "mandatory_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -383,13 +383,13 @@
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "6-1",
-            "ruleset_reference": "(previously 6-2) Section G1.2.1(b)",
+            "ruleset_reference": "Section G1.2.1(b)",
             "rule_description": "The total proposed building  interior lighting power shall not exceed the interior lighting power allowance determined using either Standard 90.1-2019 Table G3.7 or Standard 90.1-2019 Table G3.8.",
-            "applicable_rmr": "Proposed RMR",
+            "applicable_rmr": "Proposed Design",
             "rule_assertion": "<=",
             "comparison_value": "Expected Value",
-            "rule_dependency": "None",
-            "mandatory_rule": "Yes",
+            "rule_dependency": "-",
+            "mandatory_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -457,13 +457,13 @@
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "6-1",
-            "ruleset_reference": "(previously 6-2) Section G1.2.1(b)",
+            "ruleset_reference": "Section G1.2.1(b)",
             "rule_description": "The total proposed building  interior lighting power shall not exceed the interior lighting power allowance determined using either Standard 90.1-2019 Table G3.7 or Standard 90.1-2019 Table G3.8.",
-            "applicable_rmr": "Proposed RMR",
+            "applicable_rmr": "Proposed Design",
             "rule_assertion": "<=",
             "comparison_value": "Expected Value",
-            "rule_dependency": "None",
-            "mandatory_rule": "Yes",
+            "rule_dependency": "-",
+            "mandatory_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
