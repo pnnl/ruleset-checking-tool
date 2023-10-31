@@ -1745,8 +1745,9 @@
                                             {
                                                 "id": "System_5_PVAV_HW_Reheat",
                                                 "cooling_system": {
-                                                    "id": "DX Coil 1",
-                                                    "type": "DIRECT_EXPANSION"
+                                                    "id": "CS1",
+                                                    "type": "DIRECT_EXPANSION",
+                                                    "design_sensible_cool_capacity": 43960.666666666664
                                                 },
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 1",
@@ -1775,8 +1776,9 @@
                                             {
                                                 "id": "System_5_PVAV_HW_Reheat 1",
                                                 "cooling_system": {
-                                                    "id": "DX Coil 2",
-                                                    "type": "DIRECT_EXPANSION"
+                                                    "id": "CS2",
+                                                    "type": "DIRECT_EXPANSION",
+                                                    "design_sensible_cool_capacity": 29307.111111111113
                                                 },
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 2",
@@ -1935,8 +1937,9 @@
                                             {
                                                 "id": "System_5_PVAV_HW_Reheat",
                                                 "cooling_system": {
-                                                    "id": "DX Coil 1",
-                                                    "type": "DIRECT_EXPANSION"
+                                                    "id": "CS1",
+                                                    "type": "DIRECT_EXPANSION",
+                                                    "design_sensible_cool_capacity": 43960.666666666664
                                                 },
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 1",
@@ -1965,8 +1968,9 @@
                                             {
                                                 "id": "System_5_PVAV_HW_Reheat 1",
                                                 "cooling_system": {
-                                                    "id": "DX Coil 2",
-                                                    "type": "DIRECT_EXPANSION"
+                                                    "id": "CS2",
+                                                    "type": "DIRECT_EXPANSION",
+                                                    "design_sensible_cool_capacity": 29307.111111111113
                                                 },
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 2",
@@ -2137,8 +2141,9 @@
                                             {
                                                 "id": "System_5_PVAV_HW_Reheat",
                                                 "cooling_system": {
-                                                    "id": "DX Coil 1",
-                                                    "type": "DIRECT_EXPANSION"
+                                                    "id": "CS1",
+                                                    "type": "DIRECT_EXPANSION",
+                                                    "design_sensible_cool_capacity": 73267.77777777778
                                                 },
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 1",
@@ -2297,8 +2302,9 @@
                                             {
                                                 "id": "System_5_PVAV_HW_Reheat",
                                                 "cooling_system": {
-                                                    "id": "DX Coil 1",
-                                                    "type": "DIRECT_EXPANSION"
+                                                    "id": "CS1",
+                                                    "type": "DIRECT_EXPANSION",
+                                                    "design_sensible_cool_capacity": 73267.77777777778
                                                 },
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 1",
@@ -2469,8 +2475,9 @@
                                             {
                                                 "id": "System_5_PVAV_HW_Reheat",
                                                 "cooling_system": {
-                                                    "id": "DX Coil 1",
-                                                    "type": "DIRECT_EXPANSION"
+                                                    "id": "CS1",
+                                                    "type": "DIRECT_EXPANSION",
+                                                    "design_sensible_cool_capacity": 43960.666666666664
                                                 },
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 1",
@@ -2499,8 +2506,9 @@
                                             {
                                                 "id": "System_5_PVAV_HW_Reheat 1",
                                                 "cooling_system": {
-                                                    "id": "DX Coil 2",
-                                                    "type": "DIRECT_EXPANSION"
+                                                    "id": "CS2",
+                                                    "type": "DIRECT_EXPANSION",
+                                                    "design_sensible_cool_capacity": 14653.555555555557
                                                 },
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 2",
@@ -2529,8 +2537,9 @@
                                             {
                                                 "id": "System_5_PVAV_HW_Reheat 2",
                                                 "cooling_system": {
-                                                    "id": "DX Coil 3",
-                                                    "type": "DIRECT_EXPANSION"
+                                                    "id": "CS3",
+                                                    "type": "DIRECT_EXPANSION",
+                                                    "design_sensible_cool_capacity": 0.0
                                                 },
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 3",
@@ -2695,8 +2704,9 @@
                                             {
                                                 "id": "System_5_PVAV_HW_Reheat",
                                                 "cooling_system": {
-                                                    "id": "DX Coil 1",
-                                                    "type": "DIRECT_EXPANSION"
+                                                    "id": "CS1",
+                                                    "type": "DIRECT_EXPANSION",
+                                                    "design_sensible_cool_capacity": 43960.666666666664
                                                 },
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 1",
@@ -2725,8 +2735,9 @@
                                             {
                                                 "id": "System_5_PVAV_HW_Reheat 1",
                                                 "cooling_system": {
-                                                    "id": "DX Coil 2",
-                                                    "type": "DIRECT_EXPANSION"
+                                                    "id": "CS2",
+                                                    "type": "DIRECT_EXPANSION",
+                                                    "design_sensible_cool_capacity": 14653.555555555557
                                                 },
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 2",
@@ -2755,8 +2766,9 @@
                                             {
                                                 "id": "System_5_PVAV_HW_Reheat 2",
                                                 "cooling_system": {
-                                                    "id": "DX Coil 3",
-                                                    "type": "DIRECT_EXPANSION"
+                                                    "id": "CS3",
+                                                    "type": "DIRECT_EXPANSION",
+                                                    "design_sensible_cool_capacity": 0.0
                                                 },
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 3",
@@ -2927,8 +2939,9 @@
                                             {
                                                 "id": "System_5_PVAV_HW_Reheat",
                                                 "cooling_system": {
-                                                    "id": "DX Coil 1",
-                                                    "type": "DIRECT_EXPANSION"
+                                                    "id": "CS1",
+                                                    "type": "DIRECT_EXPANSION",
+                                                    "design_sensible_cool_capacity": 43960.666666666664
                                                 },
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 1",
@@ -2957,8 +2970,9 @@
                                             {
                                                 "id": "System_5_PVAV_HW_Reheat 1",
                                                 "cooling_system": {
-                                                    "id": "DX Coil 2",
-                                                    "type": "DIRECT_EXPANSION"
+                                                    "id": "CS2",
+                                                    "type": "DIRECT_EXPANSION",
+                                                    "design_sensible_cool_capacity": 14653.555555555557
                                                 },
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 2",
@@ -2987,8 +3001,9 @@
                                             {
                                                 "id": "System_5_PVAV_HW_Reheat 2",
                                                 "cooling_system": {
-                                                    "id": "DX Coil 3",
-                                                    "type": "DIRECT_EXPANSION"
+                                                    "id": "CS3",
+                                                    "type": "DIRECT_EXPANSION",
+                                                    "design_sensible_cool_capacity": 0.0
                                                 },
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 3",
@@ -3153,8 +3168,9 @@
                                             {
                                                 "id": "System_5_PVAV_HW_Reheat",
                                                 "cooling_system": {
-                                                    "id": "DX Coil 1",
-                                                    "type": "DIRECT_EXPANSION"
+                                                    "id": "CS1",
+                                                    "type": "DIRECT_EXPANSION",
+                                                    "design_sensible_cool_capacity": 43960.666666666664
                                                 },
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 1",
@@ -3183,8 +3199,9 @@
                                             {
                                                 "id": "System_5_PVAV_HW_Reheat 1",
                                                 "cooling_system": {
-                                                    "id": "DX Coil 2",
-                                                    "type": "DIRECT_EXPANSION"
+                                                    "id": "CS2",
+                                                    "type": "DIRECT_EXPANSION",
+                                                    "design_sensible_cool_capacity": 14653.555555555557
                                                 },
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 2",
@@ -3219,8 +3236,9 @@
                                             {
                                                 "id": "System_5_PVAV_HW_Reheat 2",
                                                 "cooling_system": {
-                                                    "id": "DX Coil 3",
-                                                    "type": "DIRECT_EXPANSION"
+                                                    "id": "CS3",
+                                                    "type": "DIRECT_EXPANSION",
+                                                    "design_sensible_cool_capacity": 0.0
                                                 },
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 3",
@@ -3391,9 +3409,10 @@
                                             {
                                                 "id": "System_7_VAV_HW_Reheat",
                                                 "cooling_system": {
-                                                    "id": "CHW Coil 1",
+                                                    "id": "CS1",
                                                     "type": "FLUID_LOOP",
-                                                    "chilled_water_loop": "Secondary CHW Loop 1"
+                                                    "chilled_water_loop": "Secondary CHW Loop 1",
+                                                    "design_sensible_cool_capacity": 117228.44444444445
                                                 },
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 1",
@@ -3422,9 +3441,10 @@
                                             {
                                                 "id": "System_7_VAV_HW_Reheat 1",
                                                 "cooling_system": {
-                                                    "id": "CHW Coil 2",
+                                                    "id": "CS2",
                                                     "type": "FLUID_LOOP",
-                                                    "chilled_water_loop": "Secondary CHW Loop 1"
+                                                    "chilled_water_loop": "Secondary CHW Loop 1",
+                                                    "design_sensible_cool_capacity": 58614.222222222226
                                                 },
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 2",
@@ -3453,9 +3473,10 @@
                                             {
                                                 "id": "System_7_VAV_HW_Reheat 2",
                                                 "cooling_system": {
-                                                    "id": "CHW Coil 3",
+                                                    "id": "CS3",
                                                     "type": "FLUID_LOOP",
-                                                    "chilled_water_loop": "Secondary CHW Loop 1"
+                                                    "chilled_water_loop": "Secondary CHW Loop 1",
+                                                    "design_sensible_cool_capacity": 0.0
                                                 },
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 3",
@@ -3646,9 +3667,10 @@
                                             {
                                                 "id": "System_7_VAV_HW_Reheat",
                                                 "cooling_system": {
-                                                    "id": "CHW Coil 1",
+                                                    "id": "CS1",
                                                     "type": "FLUID_LOOP",
-                                                    "chilled_water_loop": "Secondary CHW Loop 1"
+                                                    "chilled_water_loop": "Secondary CHW Loop 1",
+                                                    "design_sensible_cool_capacity": 117228.44444444445
                                                 },
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 1",
@@ -3677,9 +3699,10 @@
                                             {
                                                 "id": "System_7_VAV_HW_Reheat 1",
                                                 "cooling_system": {
-                                                    "id": "CHW Coil 2",
+                                                    "id": "CS2",
                                                     "type": "FLUID_LOOP",
-                                                    "chilled_water_loop": "Secondary CHW Loop 1"
+                                                    "chilled_water_loop": "Secondary CHW Loop 1",
+                                                    "design_sensible_cool_capacity": 58614.222222222226
                                                 },
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 2",
@@ -3708,9 +3731,10 @@
                                             {
                                                 "id": "System_7_VAV_HW_Reheat 2",
                                                 "cooling_system": {
-                                                    "id": "CHW Coil 3",
+                                                    "id": "CS3",
                                                     "type": "FLUID_LOOP",
-                                                    "chilled_water_loop": "Secondary CHW Loop 1"
+                                                    "chilled_water_loop": "Secondary CHW Loop 1",
+                                                    "design_sensible_cool_capacity": 0.0
                                                 },
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 3",
