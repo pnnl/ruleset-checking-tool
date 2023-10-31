@@ -11,10 +11,6 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_baseline_system_types i
     get_baseline_system_types,
 )
 
-APPLICABLE_SYS_TYPES = [
-    HVAC_SYS.SYS_11_1,
-]
-
 
 class Section19Rule11((RuleDefinitionListIndexedBase)):
     """Rule 11 of ASHRAE 90.1-2019 Appendix G Section 19 (HVAC - General)"""
@@ -45,20 +41,23 @@ class Section19Rule11((RuleDefinitionListIndexedBase)):
             )
 
         def get_calc_vals(self, context, data=None):
+            hvac_b = context.baseline
+            hvac_b_id = hvac_b["id"]
+
             baseline_system_types_dict = data["baseline_system_types_dict"]
-
-            does_baseline_sys_match_list_b = [
-                baseline_system_type_compare(system_type, applicable_sys_type, False)
-                for system_type in baseline_system_types_dict
-                for applicable_sys_type in APPLICABLE_SYS_TYPES
+            system_type_b = list(baseline_system_types_dict.keys())[
+                list(baseline_system_types_dict.values()).index(hvac_b_id)
             ]
+            does_hvac_system_match_b = baseline_system_type_compare(
+                system_type_b, HVAC_SYS.SYS_11, False
+            )
 
-            return {"does_baseline_sys_match_list_b": does_baseline_sys_match_list_b}
+            return {"does_hvac_system_match_b": does_hvac_system_match_b}
 
         def applicability_check(self, context, calc_vals, data):
-            does_baseline_sys_match_list_b = calc_vals["does_baseline_sys_match_list_b"]
+            does_hvac_system_match_b = calc_vals["does_hvac_system_match_b"]
 
-            return any(does_baseline_sys_match_list_b)
+            return does_hvac_system_match_b
 
         def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
             hvac_b = context.baseline
