@@ -9,10 +9,10 @@
             "rule_id": "5-26",
             "ruleset_reference": "Table G3.1(5) Baseline Building Performance (d)",
             "rule_description": "Vertical fenestration SHGC shall match the appropriate requirements in Tables G3.4-1 through G3.4-8",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Y",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -108,10 +108,10 @@
             "rule_id": "5-26",
             "ruleset_reference": "Table G3.1(5) Baseline Building Performance (d)",
             "rule_description": "Vertical fenestration SHGC shall match the appropriate requirements in Tables G3.4-1 through G3.4-8",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Y",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -207,10 +207,10 @@
             "rule_id": "5-26",
             "ruleset_reference": "Table G3.1(5) Baseline Building Performance (d)",
             "rule_description": "Vertical fenestration SHGC shall match the appropriate requirements in Tables G3.4-1 through G3.4-8",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Y",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -306,10 +306,10 @@
             "rule_id": "5-26",
             "ruleset_reference": "Table G3.1(5) Baseline Building Performance (d)",
             "rule_description": "Vertical fenestration SHGC shall match the appropriate requirements in Tables G3.4-1 through G3.4-8",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Y",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -405,10 +405,10 @@
             "rule_id": "5-26",
             "ruleset_reference": "Table G3.1(5) Baseline Building Performance (d)",
             "rule_description": "Vertical fenestration SHGC shall match the appropriate requirements in Tables G3.4-1 through G3.4-8",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Y",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -504,10 +504,10 @@
             "rule_id": "5-26",
             "ruleset_reference": "Table G3.1(5) Baseline Building Performance (d)",
             "rule_description": "Vertical fenestration SHGC shall match the appropriate requirements in Tables G3.4-1 through G3.4-8",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Y",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -603,10 +603,10 @@
             "rule_id": "5-26",
             "ruleset_reference": "Table G3.1(5) Baseline Building Performance (d)",
             "rule_description": "Vertical fenestration SHGC shall match the appropriate requirements in Tables G3.4-1 through G3.4-8",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Y",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -702,10 +702,10 @@
             "rule_id": "5-26",
             "ruleset_reference": "Table G3.1(5) Baseline Building Performance (d)",
             "rule_description": "Vertical fenestration SHGC shall match the appropriate requirements in Tables G3.4-1 through G3.4-8",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Y",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {

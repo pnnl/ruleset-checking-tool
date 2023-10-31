@@ -9,10 +9,10 @@
             "rule_id": "5-46",
             "ruleset_reference": "Table G3.1(5) Proposed Building Performance (b)",
             "rule_description": "The infiltration shall be modeled using the same methodology and adjustments for weather and building operation in both the proposed design and the baseline building design.",
-            "applicable_rmr": "Proposed RMR",
+            "applicable_rmr": "Proposed Model",
             "rule_assertion": "=",
-            "comparison_value": "Baseline RMR",
-            "primary_rule": "Y",
+            "comparison_value": "Baseline Model",
+            "primary_rule": "Remove",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -90,10 +90,10 @@
             "rule_id": "5-46",
             "ruleset_reference": "Table G3.1(5) Proposed Building Performance (b)",
             "rule_description": "The infiltration shall be modeled using the same methodology and adjustments for weather and building operation in both the proposed design and the baseline building design.",
-            "applicable_rmr": "Proposed RMR",
+            "applicable_rmr": "Proposed Model",
             "rule_assertion": "=",
-            "comparison_value": "Baseline RMR",
-            "primary_rule": "Y",
+            "comparison_value": "Baseline Model",
+            "primary_rule": "Remove",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {

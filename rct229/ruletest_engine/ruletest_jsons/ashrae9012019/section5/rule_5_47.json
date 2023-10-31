@@ -9,10 +9,10 @@
             "rule_id": "5-47",
             "ruleset_reference": "Table G3.1(5) Baseline Building Performance (h)",
             "rule_description": "The baseline air leakage rate of the building envelope (I75Pa) at a fixed building pressure differential of 0.3 in. of water shall be 1 cfm/ft2.  The air leakage rate of the building envelope shall be converted to appropriate units for the simulation program using one of the methods in Section Table G3.1.1.4.  ",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Y",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -107,10 +107,10 @@
             "rule_id": "5-47",
             "ruleset_reference": "Table G3.1(5) Baseline Building Performance (h)",
             "rule_description": "The baseline air leakage rate of the building envelope (I75Pa) at a fixed building pressure differential of 0.3 in. of water shall be 1 cfm/ft2.  The air leakage rate of the building envelope shall be converted to appropriate units for the simulation program using one of the methods in Section Table G3.1.1.4.  ",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Y",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -205,10 +205,10 @@
             "rule_id": "5-47",
             "ruleset_reference": "Table G3.1(5) Baseline Building Performance (h)",
             "rule_description": "The baseline air leakage rate of the building envelope (I75Pa) at a fixed building pressure differential of 0.3 in. of water shall be 1 cfm/ft2.  The air leakage rate of the building envelope shall be converted to appropriate units for the simulation program using one of the methods in Section Table G3.1.1.4.  ",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Y",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -301,10 +301,10 @@
             "rule_id": "5-47",
             "ruleset_reference": "Table G3.1(5) Baseline Building Performance (h)",
             "rule_description": "The baseline air leakage rate of the building envelope (I75Pa) at a fixed building pressure differential of 0.3 in. of water shall be 1 cfm/ft2.  The air leakage rate of the building envelope shall be converted to appropriate units for the simulation program using one of the methods in Section Table G3.1.1.4.  ",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Y",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -397,10 +397,10 @@
             "rule_id": "5-47",
             "ruleset_reference": "Table G3.1(5) Baseline Building Performance (h)",
             "rule_description": "The baseline air leakage rate of the building envelope (I75Pa) at a fixed building pressure differential of 0.3 in. of water shall be 1 cfm/ft2.  The air leakage rate of the building envelope shall be converted to appropriate units for the simulation program using one of the methods in Section Table G3.1.1.4.  ",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Y",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -503,10 +503,10 @@
             "rule_id": "5-47",
             "ruleset_reference": "Table G3.1(5) Baseline Building Performance (h)",
             "rule_description": "The baseline air leakage rate of the building envelope (I75Pa) at a fixed building pressure differential of 0.3 in. of water shall be 1 cfm/ft2.  The air leakage rate of the building envelope shall be converted to appropriate units for the simulation program using one of the methods in Section Table G3.1.1.4.  ",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Y",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -609,10 +609,10 @@
             "rule_id": "5-47",
             "ruleset_reference": "Table G3.1(5) Baseline Building Performance (h)",
             "rule_description": "The baseline air leakage rate of the building envelope (I75Pa) at a fixed building pressure differential of 0.3 in. of water shall be 1 cfm/ft2.  The air leakage rate of the building envelope shall be converted to appropriate units for the simulation program using one of the methods in Section Table G3.1.1.4.  ",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Y",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -711,10 +711,10 @@
             "rule_id": "5-47",
             "ruleset_reference": "Table G3.1(5) Baseline Building Performance (h)",
             "rule_description": "The baseline air leakage rate of the building envelope (I75Pa) at a fixed building pressure differential of 0.3 in. of water shall be 1 cfm/ft2.  The air leakage rate of the building envelope shall be converted to appropriate units for the simulation program using one of the methods in Section Table G3.1.1.4.  ",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Y",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {

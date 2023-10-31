@@ -9,10 +9,10 @@
             "rule_id": "5-44",
             "ruleset_reference": "Table G3.1(5) Proposed Building Performance (b)",
             "rule_description": "The infiltration modeling method in the baseline includes adjustment for weather and building operation. ",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Y",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -58,10 +58,10 @@
             "rule_id": "5-44",
             "ruleset_reference": "Table G3.1(5) Proposed Building Performance (b)",
             "rule_description": "The infiltration modeling method in the baseline includes adjustment for weather and building operation. ",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Y",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -107,10 +107,10 @@
             "rule_id": "5-44",
             "ruleset_reference": "Table G3.1(5) Proposed Building Performance (b)",
             "rule_description": "The infiltration modeling method in the baseline includes adjustment for weather and building operation. ",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Y",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {

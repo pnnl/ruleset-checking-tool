@@ -9,10 +9,10 @@
             "rule_id": "5-18",
             "ruleset_reference": "Table G3.1(5) Baseline Building Performance (c) ",
             "rule_description": "For building area types included in Table G3.1.1-1, vertical fenestration areas for new buildings and additions shall equal that in Table G3.1.1-1 based on the area of gross above-grade walls that separate conditioned spaces and semiheated spaces from the exterior. \n",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Y",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -119,10 +119,10 @@
             "rule_id": "5-18",
             "ruleset_reference": "Table G3.1(5) Baseline Building Performance (c) ",
             "rule_description": "For building area types included in Table G3.1.1-1, vertical fenestration areas for new buildings and additions shall equal that in Table G3.1.1-1 based on the area of gross above-grade walls that separate conditioned spaces and semiheated spaces from the exterior. \n",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Y",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -229,10 +229,10 @@
             "rule_id": "5-18",
             "ruleset_reference": "Table G3.1(5) Baseline Building Performance (c) ",
             "rule_description": "For building area types included in Table G3.1.1-1, vertical fenestration areas for new buildings and additions shall equal that in Table G3.1.1-1 based on the area of gross above-grade walls that separate conditioned spaces and semiheated spaces from the exterior. \n",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Y",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -347,10 +347,10 @@
             "rule_id": "5-18",
             "ruleset_reference": "Table G3.1(5) Baseline Building Performance (c) ",
             "rule_description": "For building area types included in Table G3.1.1-1, vertical fenestration areas for new buildings and additions shall equal that in Table G3.1.1-1 based on the area of gross above-grade walls that separate conditioned spaces and semiheated spaces from the exterior. \n",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Y",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {

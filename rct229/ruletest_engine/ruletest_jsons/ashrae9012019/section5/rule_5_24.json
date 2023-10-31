@@ -9,10 +9,10 @@
             "rule_id": "5-24",
             "ruleset_reference": "Table G3.1(5) Baseline Building Performance (d)",
             "rule_description": "Vertical fenestration U-factors for residential, non-residential and semiheated spaces in the baseline model must match the appropriate requirements in Table G3.4-1 through G3.4-8 for the appropriate WWR in the baseline RMR.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Y",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -103,10 +103,10 @@
             "rule_id": "5-24",
             "ruleset_reference": "Table G3.1(5) Baseline Building Performance (d)",
             "rule_description": "Vertical fenestration U-factors for residential, non-residential and semiheated spaces in the baseline model must match the appropriate requirements in Table G3.4-1 through G3.4-8 for the appropriate WWR in the baseline RMR.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Y",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -197,10 +197,10 @@
             "rule_id": "5-24",
             "ruleset_reference": "Table G3.1(5) Baseline Building Performance (d)",
             "rule_description": "Vertical fenestration U-factors for residential, non-residential and semiheated spaces in the baseline model must match the appropriate requirements in Table G3.4-1 through G3.4-8 for the appropriate WWR in the baseline RMR.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Y",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -291,10 +291,10 @@
             "rule_id": "5-24",
             "ruleset_reference": "Table G3.1(5) Baseline Building Performance (d)",
             "rule_description": "Vertical fenestration U-factors for residential, non-residential and semiheated spaces in the baseline model must match the appropriate requirements in Table G3.4-1 through G3.4-8 for the appropriate WWR in the baseline RMR.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Y",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -385,10 +385,10 @@
             "rule_id": "5-24",
             "ruleset_reference": "Table G3.1(5) Baseline Building Performance (d)",
             "rule_description": "Vertical fenestration U-factors for residential, non-residential and semiheated spaces in the baseline model must match the appropriate requirements in Table G3.4-1 through G3.4-8 for the appropriate WWR in the baseline RMR.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Y",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -483,10 +483,10 @@
             "rule_id": "5-24",
             "ruleset_reference": "Table G3.1(5) Baseline Building Performance (d)",
             "rule_description": "Vertical fenestration U-factors for residential, non-residential and semiheated spaces in the baseline model must match the appropriate requirements in Table G3.4-1 through G3.4-8 for the appropriate WWR in the baseline RMR.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Y",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -581,10 +581,10 @@
             "rule_id": "5-24",
             "ruleset_reference": "Table G3.1(5) Baseline Building Performance (d)",
             "rule_description": "Vertical fenestration U-factors for residential, non-residential and semiheated spaces in the baseline model must match the appropriate requirements in Table G3.4-1 through G3.4-8 for the appropriate WWR in the baseline RMR.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Y",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -675,10 +675,10 @@
             "rule_id": "5-24",
             "ruleset_reference": "Table G3.1(5) Baseline Building Performance (d)",
             "rule_description": "Vertical fenestration U-factors for residential, non-residential and semiheated spaces in the baseline model must match the appropriate requirements in Table G3.4-1 through G3.4-8 for the appropriate WWR in the baseline RMR.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Y",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {

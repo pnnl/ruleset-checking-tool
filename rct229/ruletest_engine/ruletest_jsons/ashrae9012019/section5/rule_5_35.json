@@ -9,10 +9,10 @@
             "rule_id": "5-35",
             "ruleset_reference": "Table G3.1(5) Baseline Building Performance (e)",
             "rule_description": "If the skylight area of the proposed design is greater than 3%, baseline skylight area shall be decreased by an identical percentage in all roof components in which skylights are located to reach 3%.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
-            "comparison_value": "Proposed RMR",
-            "primary_rule": "Y",
+            "comparison_value": "Proposed Model",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -188,10 +188,10 @@
             "rule_id": "5-35",
             "ruleset_reference": "Table G3.1(5) Baseline Building Performance (e)",
             "rule_description": "If the skylight area of the proposed design is greater than 3%, baseline skylight area shall be decreased by an identical percentage in all roof components in which skylights are located to reach 3%.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
-            "comparison_value": "Proposed RMR",
-            "primary_rule": "Y",
+            "comparison_value": "Proposed Model",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {

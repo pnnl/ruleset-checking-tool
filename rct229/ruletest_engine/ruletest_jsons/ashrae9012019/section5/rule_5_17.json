@@ -9,10 +9,10 @@
             "rule_id": "5-17",
             "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b)",
             "rule_description": "Opaque surfaces that are not regulated (not part of opaque building envelope) must be modeled the same U/C/F-factor in the baseline as in the proposed design",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
-            "comparison_value": "Proposed RMR",
-            "primary_rule": "Y",
+            "comparison_value": "Proposed Model",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -128,10 +128,10 @@
             "rule_id": "5-17",
             "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b)",
             "rule_description": "Opaque surfaces that are not regulated (not part of opaque building envelope) must be modeled the same U/C/F-factor in the baseline as in the proposed design",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
-            "comparison_value": "Proposed RMR",
-            "primary_rule": "Y",
+            "comparison_value": "Proposed Model",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -247,10 +247,10 @@
             "rule_id": "5-17",
             "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b)",
             "rule_description": "Opaque surfaces that are not regulated (not part of opaque building envelope) must be modeled the same U/C/F-factor in the baseline as in the proposed design",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
-            "comparison_value": "Proposed RMR",
-            "primary_rule": "Y",
+            "comparison_value": "Proposed Model",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -394,10 +394,10 @@
             "rule_id": "5-17",
             "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b)",
             "rule_description": "Opaque surfaces that are not regulated (not part of opaque building envelope) must be modeled the same U/C/F-factor in the baseline as in the proposed design",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
-            "comparison_value": "Proposed RMR",
-            "primary_rule": "Y",
+            "comparison_value": "Proposed Model",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -541,10 +541,10 @@
             "rule_id": "5-17",
             "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b)",
             "rule_description": "Opaque surfaces that are not regulated (not part of opaque building envelope) must be modeled the same U/C/F-factor in the baseline as in the proposed design",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
-            "comparison_value": "Proposed RMR",
-            "primary_rule": "Y",
+            "comparison_value": "Proposed Model",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -660,10 +660,10 @@
             "rule_id": "5-17",
             "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b)",
             "rule_description": "Opaque surfaces that are not regulated (not part of opaque building envelope) must be modeled the same U/C/F-factor in the baseline as in the proposed design",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
-            "comparison_value": "Proposed RMR",
-            "primary_rule": "Y",
+            "comparison_value": "Proposed Model",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -779,10 +779,10 @@
             "rule_id": "5-17",
             "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b)",
             "rule_description": "Opaque surfaces that are not regulated (not part of opaque building envelope) must be modeled the same U/C/F-factor in the baseline as in the proposed design",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
-            "comparison_value": "Proposed RMR",
-            "primary_rule": "Y",
+            "comparison_value": "Proposed Model",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -926,10 +926,10 @@
             "rule_id": "5-17",
             "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b)",
             "rule_description": "Opaque surfaces that are not regulated (not part of opaque building envelope) must be modeled the same U/C/F-factor in the baseline as in the proposed design",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
-            "comparison_value": "Proposed RMR",
-            "primary_rule": "Y",
+            "comparison_value": "Proposed Model",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -1073,10 +1073,10 @@
             "rule_id": "5-17",
             "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b)",
             "rule_description": "Opaque surfaces that are not regulated (not part of opaque building envelope) must be modeled the same U/C/F-factor in the baseline as in the proposed design",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
-            "comparison_value": "Proposed RMR",
-            "primary_rule": "Y",
+            "comparison_value": "Proposed Model",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -1192,10 +1192,10 @@
             "rule_id": "5-17",
             "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b)",
             "rule_description": "Opaque surfaces that are not regulated (not part of opaque building envelope) must be modeled the same U/C/F-factor in the baseline as in the proposed design",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
-            "comparison_value": "Proposed RMR",
-            "primary_rule": "Y",
+            "comparison_value": "Proposed Model",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -1311,10 +1311,10 @@
             "rule_id": "5-17",
             "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b)",
             "rule_description": "Opaque surfaces that are not regulated (not part of opaque building envelope) must be modeled the same U/C/F-factor in the baseline as in the proposed design",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
-            "comparison_value": "Proposed RMR",
-            "primary_rule": "Y",
+            "comparison_value": "Proposed Model",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -1432,10 +1432,10 @@
             "rule_id": "5-17",
             "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b)",
             "rule_description": "Opaque surfaces that are not regulated (not part of opaque building envelope) must be modeled the same U/C/F-factor in the baseline as in the proposed design",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
-            "comparison_value": "Proposed RMR",
-            "primary_rule": "Y",
+            "comparison_value": "Proposed Model",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {

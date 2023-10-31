@@ -9,10 +9,10 @@
             "rule_id": "5-28",
             "ruleset_reference": "Table G3.1(1), Baseline Building Performance",
             "rule_description": "Fenestration that is not regulated (not part of building envelope) must be modeled with the same area, U-factor and SHGC in the baseline as in the proposed design",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
-            "comparison_value": "Proposed RMR",
-            "primary_rule": "Y",
+            "comparison_value": "Proposed Model",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -186,10 +186,10 @@
             "rule_id": "5-28",
             "ruleset_reference": "Table G3.1(1), Baseline Building Performance",
             "rule_description": "Fenestration that is not regulated (not part of building envelope) must be modeled with the same area, U-factor and SHGC in the baseline as in the proposed design",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
-            "comparison_value": "Proposed RMR",
-            "primary_rule": "Y",
+            "comparison_value": "Proposed Model",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -363,10 +363,10 @@
             "rule_id": "5-28",
             "ruleset_reference": "Table G3.1(1), Baseline Building Performance",
             "rule_description": "Fenestration that is not regulated (not part of building envelope) must be modeled with the same area, U-factor and SHGC in the baseline as in the proposed design",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
-            "comparison_value": "Proposed RMR",
-            "primary_rule": "Y",
+            "comparison_value": "Proposed Model",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
@@ -540,10 +540,10 @@
             "rule_id": "5-28",
             "ruleset_reference": "Table G3.1(1), Baseline Building Performance",
             "rule_description": "Fenestration that is not regulated (not part of building envelope) must be modeled with the same area, U-factor and SHGC in the baseline as in the proposed design",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
-            "comparison_value": "Proposed RMR",
-            "primary_rule": "Y",
+            "comparison_value": "Proposed Model",
+            "primary_rule": "Full",
             "schema_version": "0.0.29"
         },
         "rmr_transformations": {
