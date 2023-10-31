@@ -37,9 +37,13 @@ Get the fenestration area for each unique orientation (i.e., azimuth) and then c
                         - Else, subsurface is not door, add total area to total_surface_fenestration_area (because we checked that the surface is an above grade wall we can assume that the subsurface classification is not and could not be a skylight so no need to check this): `total_surface_fenestration_area += subsurface.glazed_area + subsurface.opaque_area`      
                     - Add the total_surface_fenestration_area summed for the surface to the total fen area associated with the azimuth: `azimuth_fen_area_dict[surface_azimuth] += total_surface_fenestration_area`    
 
+- Loop through the dictionary keys and put the area in bins depending on the azimuth (bins will be in 3 degree increments). Use this logic: if azimuth >= 0 and < 3  then put area in the 0-3 bin, if azimuth >=3 and < 6 then put the area in the the 3-6 bin, etc. `for azi in azimuth_fen_area_dict.keys():`  
+    - Lookup the bin that the azimuth falls into based on the value of the azimuth using this logic. Bin lookup table based on this logic: if azimuth >= 0 and < 3  then put the fen area in the 0-3 bin, if azimuth >=3 and < 6 then put the area in the the 3-6 bin, etc. (this assumes the RCT team will create a lookup table to make it easy to lookup the bin that the azimuth (azi) falls into): `bin = lookup(azi, lookuptable)`  
+    - Add the area to the bin in a revised binned dictionary (bin is key, area is value in dictionary): `azimuth_fen_area__binned_dict[bin] += azimuth_fen_area_dict[azi]`    
+
 Check if the area differs by 5 percent or more.
-- Get the max fen area: `max_fen_area = azimuth_fen_area_dict[max(azimuth_fen_area_dict, key=azimuth_fen_area_dict.get)]`  
-- Get the min fen area: `min_fen_area = azimuth_fen_area_dict[min(azimuth_fen_area_dict, key=azimuth_fen_area_dict.get)]`  
+- Get the max fen area: `max_fen_area = azimuth_fen_area__binned_dict[max(azimuth_fen_area__binned_dict, key=azimuth_fen_area__binned_dict.get)]`  
+- Get the min fen area: `min_fen_area = azimuth_fen_area__binned_dict[min(azimuth_fen_area__binned_dict, key=azimuth_fen_area__binned_dict.get)]`  
 - Calculate the % difference, take the maximum calculated: `percent_difference = max(abs(max_fen_area- min_fen_area)/max_fen_area,abs(min_fen_area- max_fen_area)/min_fen_area)` 
 - Check if the % difference is 5% or more, if it is then set rotation_expected boolean to TRUE: `if percent_difference >= 5%: rotation_expected = TRUE`  
 - Else, set rotation_expected to FALSE: `else: rotation_expected = FALSE`  
