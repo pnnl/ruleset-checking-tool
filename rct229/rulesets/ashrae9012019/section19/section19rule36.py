@@ -3,6 +3,7 @@ from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedB
 from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 from rct229.rulesets.ashrae9012019.data.schema_enums import schema_enums
 from rct229.schema.config import ureg
+from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_one
 from rct229.utils.pint_utils import CalcQ
 from rct229.utils.std_comparisons import std_equal
@@ -35,22 +36,37 @@ class Section19Rule36(RuleDefinitionListIndexedBase):
                 required_fields={"$": ["fan_system"]},
             )
 
-        def get_calc_vals(self, context, data=None):
-            fan_sys_b = context.baseline
+        def is_applicable(self, context, data=None):
+            hvac_b = context.baseline
 
-            sensible_eff_b = find_one(
-                "$.air_energy_recovery.design_sensible_effectiveness", fan_sys_b
+            return (
+                hvac_b.get("fan_system")
+                and find_one("$.fan_system.air_energy_recovery", hvac_b)
+                and find_one("$.fan_system.air_energy_recovery", hvac_b)
+                != ENERGY_RECOVERY.NONE
             )
-            latent_eff_b = find_one(
-                "$.air_energy_recovery.design_latent_effectiveness", fan_sys_b
+
+        def get_calc_vals(self, context, data=None):
+            hvac_b = context.baseline
+            energy_recovery_b = find_one("$.fan_system.air_energy_recovery", hvac_b)
+
+            sensible_eff_b = getattr_(
+                energy_recovery_b,
+                "air_energy_recovery",
+                "design_sensible_effectiveness",
             )
-            ERV_OA_airflow_b = find_one(
-                "$.air_energy_recovery.outside_air_flow", fan_sys_b
+            latent_eff_b = getattr_(
+                energy_recovery_b, "air_energy_recovery", "design_latent_effectiveness"
             )
-            ERV_EA_airflow_b = find_one(
-                "$.air_energy_recovery.exhaust_air_flow", fan_sys_b
+            ERV_OA_airflow_b = getattr_(
+                energy_recovery_b, "air_energy_recovery", "outside_air_flow"
             )
-            hvac_min_oa_flow_b = find_one("$.minimum_outdoor_airflow", fan_sys_b)
+            ERV_EA_airflow_b = getattr_(
+                energy_recovery_b, "air_energy_recovery", "exhaust_air_flow"
+            )
+            hvac_min_oa_flow_b = getattr_(
+                hvac_b, "HVAC", "fan_system", "minimum_outdoor_airflow"
+            )
 
             return {
                 "sensible_eff_b": sensible_eff_b,
@@ -61,8 +77,6 @@ class Section19Rule36(RuleDefinitionListIndexedBase):
             }
 
         def applicability_check(self, context, calc_vals, data):
-            fan_sys_b = context.baseline
-
             sensible_eff_b = calc_vals["sensible_eff_b"]
             latent_eff_b = calc_vals["latent_eff_b"]
             ERV_OA_airflow_b = calc_vals["ERV_OA_airflow_b"]
@@ -70,12 +84,10 @@ class Section19Rule36(RuleDefinitionListIndexedBase):
             hvac_min_oa_flow_b = calc_vals["hvac_min_oa_flow_b"]
 
             return (
-                fan_sys_b.get("air_energy_recovery") is not None
-                and fan_sys_b["air_energy_recovery"] != ENERGY_RECOVERY.NONE
-                and std_equal(REQ_SENSIBLE_EFFECTIVENESS, sensible_eff_b)
+                std_equal(REQ_SENSIBLE_EFFECTIVENESS, sensible_eff_b)
                 and std_equal(REQ_LATENT_EFFECTIVENESS, latent_eff_b)
-                and std_equal(ERV_OA_airflow_b, hvac_min_oa_flow_b)
-                and std_equal(ERV_OA_airflow_b, ERV_EA_airflow_b)
+                and ERV_OA_airflow_b == hvac_min_oa_flow_b
+                and ERV_OA_airflow_b == ERV_EA_airflow_b
             )
 
         def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
