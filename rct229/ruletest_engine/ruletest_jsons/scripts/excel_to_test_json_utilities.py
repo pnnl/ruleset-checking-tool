@@ -49,7 +49,7 @@ def get_rmr_key_list_from_tcd_key_list(tcd_key_list):
         rmr_schema_key_list[index] = remove_index_references_from_key(unclean_key)
 
     # Remove /xa0 ASCII character from key lists that are sometimes introduced unexpectedly from spreadsheets
-    rmr_schema_key_list = [item for item in rmr_schema_key_list if item != '\xa0']
+    rmr_schema_key_list = [item for item in rmr_schema_key_list if item != "\xa0"]
 
     return rmr_schema_key_list
 
@@ -256,7 +256,7 @@ def create_dictionary_from_excel(spreadsheet_name, sheet_name, rule_set):
                 row_value = rule_value_list[row_i]
 
                 # Ignore values that somehow return a blank ASCII string = '\xa0'
-                if row_value == '\xa0':
+                if row_value == "\xa0":
                     continue
 
                 # Skip empty rows
@@ -271,7 +271,7 @@ def create_dictionary_from_excel(spreadsheet_name, sheet_name, rule_set):
                     key_value = keys_df[key][row_i]
 
                     # Ignore values that somehow return a blank ASCII string = '\xa0'
-                    if key_value == '\xa0':
+                    if key_value == "\xa0":
                         continue
 
                     if isinstance(key_value, str):
